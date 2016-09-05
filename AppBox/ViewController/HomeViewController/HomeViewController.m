@@ -10,6 +10,7 @@
 
 
 @implementation HomeViewController{
+    NSString *uuid;
     FileType fileType;
     NSString *ipaFileDBURL;
     NSString *manifestFileDBURL;
@@ -63,10 +64,9 @@
     if(result == NSModalResponseOK){
          ipaFileURL = [[panel URLs] firstObject];
     }
-    
     //check url
     if (ipaFileURL.isFileURL) {
-        
+        uuid = [self generateUUID];
         //Set progress started view state
         [self progressStartedViewState];
         self.labelIPAName.stringValue = ipaFileURL.lastPathComponent;
@@ -192,11 +192,11 @@
 }
 
 -(NSString *)getDBDirForThisVersion{
-    NSString *toPath = [NSString stringWithFormat:@"/%@-ver%@(%@)-%@",[ipaInfoPlist valueForKey:@"CFBundleName"],[ipaInfoPlist valueForKey:@"CFBundleShortVersionString"],[ipaInfoPlist valueForKey:@"CFBundleVersion"],[self generateSecureUUID]];
+    NSString *toPath = [NSString stringWithFormat:@"/%@-ver%@(%@)-%@",[ipaInfoPlist valueForKey:@"CFBundleName"],[ipaInfoPlist valueForKey:@"CFBundleShortVersionString"],[ipaInfoPlist valueForKey:@"CFBundleVersion"],uuid];
     return toPath;
 }
 
-- (NSString*)generateSecureUUID {
+- (NSString*)generateUUID {
     NSMutableData *data = [NSMutableData dataWithLength:32];
     int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
     NSAssert(result == 0, @"Error generating random bytes: %d", errno);
