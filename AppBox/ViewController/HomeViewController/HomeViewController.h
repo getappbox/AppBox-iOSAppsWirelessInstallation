@@ -28,6 +28,9 @@ typedef enum : NSUInteger {
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 @property (weak) IBOutlet NSTextField *labelStatus;
 @property (weak) IBOutlet NSView *viewProgressStatus;
+@property (weak) IBOutlet NSTextField *textFieldEmail;
+@property (unsafe_unretained) IBOutlet NSTextView *textViewEmailContent;
+
 
 - (DBRestClient *)restClient;
 - (IBAction)buttonLinkWithDropboxTapped:(NSButton *)sender;

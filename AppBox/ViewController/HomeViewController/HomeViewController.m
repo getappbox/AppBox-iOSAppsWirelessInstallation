@@ -21,8 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *appKey = @"86tfx5bu3356fqo";
-    NSString *appSecret = @"mq4l1damoz8hwrr";
+//    NSString *appKey = @"86tfx5bu3356fqo";
+//    NSString *appSecret = @"mq4l1damoz8hwrr";
+    NSString *appKey = @"mzwu8mq9xdtilpr";
+    NSString *appSecret = @"le27tu0m54mjlc0";
     NSString *root = kDBRootAppFolder;
     
     DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
@@ -128,6 +130,7 @@
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
         [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.developerinsider.in/assets/pages/iOSDistribution.html?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
             NSLog(@"Short URL - %@", shortURL);
+            [self.textViewEmailContent setString:shortURL.absoluteString];
             [self progressCompletedViewState];
         }];
     }
@@ -210,7 +213,7 @@
     self.progressIndicator.hidden = YES;
     self.viewProgressStatus.hidden = YES;
     self.buttonSelectIPAFile.enabled = YES;
-    self.buttonSelectIPAFile.enabled = YES;
+    self.buttonLinkWithDropbox.enabled = YES;
 }
 
 -(void)progressStartedViewState{

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -651,7 +652,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="AppBox - Powered by Dropbox" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -670,11 +671,11 @@
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="291"/>
+                        <rect key="frame" x="0.0" y="0.0" width="532" height="291"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mBL-zn-6BU">
-                                <rect key="frame" x="4" y="3" width="442" height="32"/>
+                                <rect key="frame" x="4" y="3" width="524" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="mc5-dO-lij"/>
                                 </constraints>
@@ -687,7 +688,7 @@
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="41" width="450" height="250"/>
+                                <rect key="frame" x="0.0" y="41" width="532" height="250"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sO6-co-IOQ">
                                         <rect key="frame" x="4" y="212" width="131" height="32"/>
@@ -711,7 +712,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-et-sSs">
-                                        <rect key="frame" x="0.0" y="0.0" width="450" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="532" height="40"/>
                                         <subviews>
                                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ha-Sj1">
                                                 <rect key="frame" x="10" y="10" width="20" height="20"/>
@@ -721,7 +722,7 @@
                                                 </constraints>
                                             </progressIndicator>
                                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IgI-OA-XP9">
-                                                <rect key="frame" x="38" y="10" width="404" height="21"/>
+                                                <rect key="frame" x="38" y="10" width="486" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Checking IPA..." id="gjX-y7-LlX">
                                                     <font key="font" metaFont="systemLight" size="17"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -738,14 +739,81 @@
                                             <constraint firstItem="Iw6-ha-Sj1" firstAttribute="centerY" secondItem="IgI-OA-XP9" secondAttribute="centerY" id="cmP-vs-V6o"/>
                                         </constraints>
                                     </customView>
+                                    <box title="Receive an email with the link to the installation page." boxType="oldStyle" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="N1w-01-T7f">
+                                        <rect key="frame" x="10" y="50" width="512" height="159"/>
+                                        <view key="contentView" id="Pwa-Rb-vUU">
+                                            <rect key="frame" x="1" y="1" width="510" height="143"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RKc-Si-2CZ">
+                                                    <rect key="frame" x="5" y="113" width="500" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="L4T-9e-81l"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Email (Use a semicolon to separate email addresses)" drawsBackground="YES" id="1CV-KM-paZ">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMS-On-FOR">
+                                                    <rect key="frame" x="5" y="5" width="500" height="103"/>
+                                                    <clipView key="contentView" id="hY9-OG-ynO">
+                                                        <rect key="frame" x="1" y="1" width="498" height="101"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="0ub-Kl-QAp">
+                                                                <rect key="frame" x="0.0" y="0.0" width="498" height="101"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <size key="minSize" width="498" height="101"/>
+                                                                <size key="maxSize" width="500" height="10000000"/>
+                                                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <size key="minSize" width="498" height="101"/>
+                                                                <size key="maxSize" width="500" height="10000000"/>
+                                                            </textView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </clipView>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="I3y-DK-duu"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="IUR-Ue-KGr"/>
+                                                    </constraints>
+                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="wr5-aJ-sy3">
+                                                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="FeR-XT-QRV">
+                                                        <rect key="frame" x="483" y="1" width="16" height="101"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                </scrollView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="RKc-Si-2CZ" secondAttribute="trailing" constant="5" id="2sW-Ax-uZ1"/>
+                                                <constraint firstItem="RKc-Si-2CZ" firstAttribute="leading" secondItem="Pwa-Rb-vUU" secondAttribute="leading" constant="5" id="2tC-jH-6S8"/>
+                                                <constraint firstItem="RKc-Si-2CZ" firstAttribute="top" secondItem="Pwa-Rb-vUU" secondAttribute="top" constant="5" id="6u6-5U-New"/>
+                                                <constraint firstItem="WMS-On-FOR" firstAttribute="leading" secondItem="Pwa-Rb-vUU" secondAttribute="leading" constant="5" id="MVl-pw-HAX"/>
+                                                <constraint firstAttribute="trailing" secondItem="WMS-On-FOR" secondAttribute="trailing" constant="5" id="SgZ-Vr-KAn"/>
+                                                <constraint firstItem="WMS-On-FOR" firstAttribute="top" secondItem="RKc-Si-2CZ" secondAttribute="bottom" constant="5" id="hr4-qX-xcV"/>
+                                                <constraint firstAttribute="bottom" secondItem="WMS-On-FOR" secondAttribute="bottom" constant="5" id="sIv-fj-EcX"/>
+                                            </constraints>
+                                        </view>
+                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </box>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="HNZ-et-sSs" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" id="1hd-8r-yGb"/>
                                     <constraint firstItem="sO6-co-IOQ" firstAttribute="top" secondItem="RTB-1n-lrJ" secondAttribute="top" constant="10" id="I6x-ES-Dhq"/>
                                     <constraint firstItem="WWc-0h-aFY" firstAttribute="leading" secondItem="sO6-co-IOQ" secondAttribute="trailing" constant="10" id="Pan-Nl-CBO"/>
+                                    <constraint firstItem="HNZ-et-sSs" firstAttribute="top" secondItem="N1w-01-T7f" secondAttribute="bottom" constant="10" id="Qg2-vX-mrG"/>
+                                    <constraint firstItem="N1w-01-T7f" firstAttribute="top" secondItem="WWc-0h-aFY" secondAttribute="bottom" constant="10" id="Rw5-DN-qYP"/>
                                     <constraint firstItem="sO6-co-IOQ" firstAttribute="centerY" secondItem="WWc-0h-aFY" secondAttribute="centerY" id="S7t-nh-F41"/>
                                     <constraint firstAttribute="trailing" secondItem="HNZ-et-sSs" secondAttribute="trailing" id="ezl-M6-gAz"/>
+                                    <constraint firstAttribute="trailing" secondItem="N1w-01-T7f" secondAttribute="trailing" constant="10" id="gdM-QT-UCA"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WWc-0h-aFY" secondAttribute="trailing" constant="10" id="hpW-Gx-iHu"/>
+                                    <constraint firstItem="N1w-01-T7f" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="10" id="rDA-on-vDP"/>
                                     <constraint firstAttribute="bottom" secondItem="HNZ-et-sSs" secondAttribute="bottom" id="ya8-a4-whg"/>
                                     <constraint firstItem="sO6-co-IOQ" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="10" id="yda-0r-7Xh"/>
                                 </constraints>
@@ -767,6 +835,8 @@
                         <outlet property="labelIPAName" destination="WWc-0h-aFY" id="wgg-IS-zaw"/>
                         <outlet property="labelStatus" destination="IgI-OA-XP9" id="7dV-Z3-UEa"/>
                         <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
+                        <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
+                        <outlet property="textViewEmailContent" destination="0ub-Kl-QAp" id="IwI-9h-KcA"/>
                         <outlet property="viewProgressStatus" destination="HNZ-et-sSs" id="xiM-U2-QxA"/>
                     </connections>
                 </viewController>
