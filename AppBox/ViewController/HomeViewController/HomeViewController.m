@@ -21,10 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSString *appKey = @"86tfx5bu3356fqo";
-//    NSString *appSecret = @"mq4l1damoz8hwrr";
-    NSString *appKey = @"mzwu8mq9xdtilpr";
-    NSString *appSecret = @"le27tu0m54mjlc0";
+    //Please add app key, secret and URL Schemes for your dropbox box app
+    //Dont forget to add URL Schemes in Project Target > Info > URL Types
+    
+    NSString *appKey = @"";
+    NSString *appSecret = @"";
     NSString *root = kDBRootAppFolder;
     
     DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
