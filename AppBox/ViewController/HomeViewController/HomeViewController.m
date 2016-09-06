@@ -67,7 +67,7 @@
     }
     //check url
     if (ipaFileURL.isFileURL) {
-        uuid = [self generateUUID];
+        uuid = [Common generateUUID];
         //Set progress started view state
         [self progressStartedViewState];
         self.labelIPAName.stringValue = ipaFileURL.lastPathComponent;
@@ -94,11 +94,13 @@
 
 //Upload File
 -(void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error{
+    [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
     [self progressCompletedViewState];
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
     [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
+    [Common showLocalNotificationWithTitle:(fileType == FileTypeIPA)?@"IPA file uploaded.":@"Manifest file uploaded."  andMessage:@""];
 }
 
 -(void)restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath{
@@ -115,6 +117,7 @@
 
 //Shareable Link
 -(void)restClient:(DBRestClient *)restClient loadSharableLinkFailedWithError:(NSError *)error{
+    [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
     [self progressCompletedViewState];
 }
 
@@ -198,13 +201,6 @@
     return toPath;
 }
 
-- (NSString*)generateUUID {
-    NSMutableData *data = [NSMutableData dataWithLength:32];
-    int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
-    NSAssert(result == 0, @"Error generating random bytes: %d", errno);
-    NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
-    return base64EncodedData;
-}
 
 -(void)progressCompletedViewState{
     self.labelStatus.hidden = YES;
@@ -222,6 +218,37 @@
     self.viewProgressStatus.hidden = NO;
     self.buttonSelectIPAFile.enabled = NO;
     self.buttonLinkWithDropbox.enabled = NO;
+}
+
+#pragma mark - Email Helper
+
+- (void)sendEmailWithMail:(NSString *) toAddress withSubject:(NSString *) subject Attachments:(NSArray *) attachments {
+    NSString *bodyText = @"Your body text \n\r";
+    NSString *emailString = [NSString stringWithFormat:@"\
+                             tell application \"Mail\"\n\
+                             set newMessage to make new outgoing message with properties {subject:\"%@\", content:\"%@\" & return} \n\
+                             tell newMessage\n\
+                             set visible to false\n\
+                             set sender to \"%@\"\n\
+                             make new to recipient at end of to recipients with properties {name:\"%@\", address:\"%@\"}\n\
+                             tell content\n\
+                             ",subject, bodyText, @"McAlarm alert", @"McAlarm User", toAddress ];
+    
+    //add attachments to script
+    for (NSString *alarmPhoto in attachments) {
+        emailString = [emailString stringByAppendingFormat:@"make new attachment with properties {file name:\"%@\"} at after the last paragraph\n\
+                       ",alarmPhoto];
+        
+    }
+    //finish script
+    emailString = [emailString stringByAppendingFormat:@"\
+                   end tell\n\
+                   send\n\
+                   end tell\n\
+                   end tell"];
+    NSAppleScript *emailScript = [[NSAppleScript alloc] initWithSource:emailString];
+    [emailScript executeAndReturnError:nil];
+    NSLog(@"Message passed to Mail");
 }
 
 @end

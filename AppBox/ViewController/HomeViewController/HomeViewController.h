@@ -10,6 +10,7 @@
 #import <DropboxOSX/DropboxOSX.h>
 #import <ZipArchive/ZipArchive.h>
 
+#import "Common.h"
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"
 
@@ -29,6 +30,7 @@ typedef enum : NSUInteger {
 @property (weak) IBOutlet NSTextField *labelStatus;
 @property (weak) IBOutlet NSView *viewProgressStatus;
 @property (weak) IBOutlet NSTextField *textFieldEmail;
+@property (weak) IBOutlet NSTextField *textFieldEmailSubject;
 @property (unsafe_unretained) IBOutlet NSTextView *textViewEmailContent;
 
 
