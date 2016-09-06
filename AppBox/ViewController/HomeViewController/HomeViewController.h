@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
     FileTypeManifest
 } FileType;
 
-@interface HomeViewController : NSViewController <DBRestClientDelegate>{
+@interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
     DBRestClient *restClient;
 }
 

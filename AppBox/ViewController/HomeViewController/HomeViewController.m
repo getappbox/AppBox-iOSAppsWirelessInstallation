@@ -27,6 +27,7 @@
     NSString *root = kDBRootAppFolder;
     
     DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
+    session.delegate = self;
     [DBSession setSharedSession:session];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
@@ -90,8 +91,12 @@
     }
 }
 
-#pragma mark - RestClient Delegate
+#pragma mark - DBSession Delegate
+- (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
+    [Common showAlertWithTitle:@"Authorization Failed" andMessage:@""];
+}
 
+#pragma mark - RestClient Delegate
 //Upload File
 -(void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
@@ -100,8 +105,8 @@
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
     [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
-    NSString *title = (fileType == FileTypeIPA)?@"IPA file uploaded.":@"Manifest file uploaded.";
-    [Common showLocalNotificationWithTitle:@"AppBox"  andMessage:title];
+    self.labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
+    [Common showLocalNotificationWithTitle:@"AppBox" andMessage:[NSString stringWithFormat:@"%@ file uploaded.",(fileType == FileTypeIPA)?@"IPA":@"Manifest"]];
 }
 
 -(void)restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath{
@@ -167,10 +172,11 @@
 #pragma mark - Controller Helper
 - (void)updateDropBoxLinkButton{
     if ([[DBSession sharedSession] isLinked]) {
-        self.buttonLinkWithDropbox.title = @"Unlink Dropbox";
         self.buttonSelectIPAFile.enabled = YES;
+        self.buttonLinkWithDropbox.title = @"Unlink Dropbox";
         [self restClient];
     } else {
+        self.buttonSelectIPAFile.enabled = NO;
         self.buttonLinkWithDropbox.title = @"Link Dropbox";
         self.buttonLinkWithDropbox.state = [[DBAuthHelperOSX sharedHelper] isLoading] ? NSOffState : NSOnState;
     }
