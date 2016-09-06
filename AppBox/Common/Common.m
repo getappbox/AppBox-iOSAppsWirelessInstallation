@@ -19,6 +19,7 @@
     return base64EncodedData;
 }
 
+#pragma mark - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
     NSError *error;
     NSAlert *alert = [NSAlert alertWithError:error];
@@ -38,4 +39,25 @@
     [center scheduleNotification:notification];
 }
 
+
+#pragma mark - Send Email
++ (void)sendEmailToAddress:(NSString *)address withSubject:(NSString *)subject andBody:(NSString *)body{
+    NSString *emailString = [NSString stringWithFormat:@"\
+                             tell application \"Mail\"\n\
+                             set newMessage to make new outgoing message with properties {subject:\"%@\", content:\"%@\" & return} \n\
+                             tell newMessage\n\
+                             set visible to false\n\
+                             set sender to \"%@\"\n\
+                             make new to recipient at end of to recipients with properties {name:\"%@\", address:\"%@\"}\n\
+                             tell content\n\
+                             ",subject, body, @"AppBox User", address, address ];
+    emailString = [emailString stringByAppendingFormat:@"\
+                   end tell\n\
+                   send\n\
+                   end tell\n\
+                   end tell"];
+    NSAppleScript *emailScript = [[NSAppleScript alloc] initWithSource:emailString];
+    [emailScript executeAndReturnError:nil];
+    NSLog(@"Message passed to Mail");
+}
 @end

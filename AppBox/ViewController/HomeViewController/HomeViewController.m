@@ -100,7 +100,8 @@
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
     [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
-    [Common showLocalNotificationWithTitle:(fileType == FileTypeIPA)?@"IPA file uploaded.":@"Manifest file uploaded."  andMessage:@""];
+    NSString *title = (fileType == FileTypeIPA)?@"IPA file uploaded.":@"Manifest file uploaded.";
+    [Common showLocalNotificationWithTitle:@"AppBox"  andMessage:title];
 }
 
 -(void)restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath{
@@ -132,7 +133,12 @@
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
         [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.developerinsider.in/assets/pages/iOSDistribution.html?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
             NSLog(@"Short URL - %@", shortURL);
-            [self.textViewEmailContent setString:shortURL.absoluteString];
+            [[NSPasteboard generalPasteboard] clearContents];
+            [[NSPasteboard generalPasteboard] setString:shortURL.absoluteString  forType:NSStringPboardType];
+            [Common showLocalNotificationWithTitle:@"AppBox"  andMessage:@"We've copy distribution link to your clipboard."];
+            if (self.textFieldEmail.stringValue.length > 0) {
+                [Common sendEmailToAddress:self.textFieldEmail.stringValue withSubject:self.textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",self.textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
+            }
             [self progressCompletedViewState];
         }];
     }
@@ -220,35 +226,5 @@
     self.buttonLinkWithDropbox.enabled = NO;
 }
 
-#pragma mark - Email Helper
-
-- (void)sendEmailWithMail:(NSString *) toAddress withSubject:(NSString *) subject Attachments:(NSArray *) attachments {
-    NSString *bodyText = @"Your body text \n\r";
-    NSString *emailString = [NSString stringWithFormat:@"\
-                             tell application \"Mail\"\n\
-                             set newMessage to make new outgoing message with properties {subject:\"%@\", content:\"%@\" & return} \n\
-                             tell newMessage\n\
-                             set visible to false\n\
-                             set sender to \"%@\"\n\
-                             make new to recipient at end of to recipients with properties {name:\"%@\", address:\"%@\"}\n\
-                             tell content\n\
-                             ",subject, bodyText, @"McAlarm alert", @"McAlarm User", toAddress ];
-    
-    //add attachments to script
-    for (NSString *alarmPhoto in attachments) {
-        emailString = [emailString stringByAppendingFormat:@"make new attachment with properties {file name:\"%@\"} at after the last paragraph\n\
-                       ",alarmPhoto];
-        
-    }
-    //finish script
-    emailString = [emailString stringByAppendingFormat:@"\
-                   end tell\n\
-                   send\n\
-                   end tell\n\
-                   end tell"];
-    NSAppleScript *emailScript = [[NSAppleScript alloc] initWithSource:emailString];
-    [emailScript executeAndReturnError:nil];
-    NSLog(@"Message passed to Mail");
-}
 
 @end

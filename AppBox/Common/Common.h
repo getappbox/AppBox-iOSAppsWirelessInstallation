@@ -14,4 +14,6 @@
 + (NSString*)generateUUID;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
++ (void)sendEmailToAddress:(NSString *)address withSubject:(NSString *)subject andBody:(NSString *)body;
+
 @end
