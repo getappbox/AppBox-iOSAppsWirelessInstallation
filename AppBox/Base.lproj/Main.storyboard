@@ -177,7 +177,7 @@
                                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-et-sSs">
                                         <rect key="frame" x="0.0" y="0.0" width="545" height="40"/>
                                         <subviews>
-                                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ha-Sj1">
+                                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" displayedWhenStopped="NO" bezeled="NO" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ha-Sj1">
                                                 <rect key="frame" x="10" y="10" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="0aa-KC-yb8"/>
@@ -324,6 +324,7 @@
                     <connections>
                         <outlet property="buttonLinkWithDropbox" destination="mBL-zn-6BU" id="BGF-LN-pQc"/>
                         <outlet property="buttonSelectIPAFile" destination="sO6-co-IOQ" id="ehv-OI-wrH"/>
+                        <outlet property="buttonShutdownMac" destination="MlA-j9-hh1" id="i1R-WZ-8SM"/>
                         <outlet property="labelIPAName" destination="WWc-0h-aFY" id="wgg-IS-zaw"/>
                         <outlet property="labelStatus" destination="IgI-OA-XP9" id="7dV-Z3-UEa"/>
                         <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
@@ -331,11 +332,92 @@
                         <outlet property="textFieldEmailSubject" destination="3S8-5j-4ZM" id="VW0-om-xeT"/>
                         <outlet property="textViewEmailContent" destination="0ub-Kl-QAp" id="IwI-9h-KcA"/>
                         <outlet property="viewProgressStatus" destination="HNZ-et-sSs" id="xiM-U2-QxA"/>
+                        <segue destination="dq2-4K-v2z" kind="sheet" identifier="ShowLink" id="is8-1E-ZPa"/>
                     </connections>
                 </viewController>
                 <customObject id="Axn-BG-zzu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80.5" y="713.5"/>
+        </scene>
+        <!--ShowLink-->
+        <scene sceneID="Wfl-7U-Izx">
+            <objects>
+                <customObject id="ND1-nP-4X2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController title="ShowLink" id="dq2-4K-v2z" customClass="ShowLinkViewController" sceneMemberID="viewController">
+                    <view key="view" id="6cG-sr-Ub0">
+                        <rect key="frame" x="0.0" y="0.0" width="420" height="119"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ui-cf-b7U">
+                                <rect key="frame" x="4" y="3" width="148" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="gAi-u0-YKY"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Copy to clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="phf-yf-lsh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonCopyToClipboardTapped:" target="dq2-4K-v2z" id="3Hn-c6-QKR"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IRS-6c-DTS">
+                                <rect key="frame" x="341" y="3" width="75" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="F94-lw-CMj"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iOf-2L-VzI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonCloseTapped:" target="dq2-4K-v2z" id="MFE-u4-ph6"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ou-Ey-jkC">
+                                <rect key="frame" x="24" y="90" width="372" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="0Hv-Mv-xhw"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Your app is ready. Copy this link and send it to anyone." id="CUt-fW-c2L">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n7a-6Z-Rsw">
+                                <rect key="frame" x="8" y="45" width="404" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="WFe-iy-WuT"/>
+                                    <constraint firstAttribute="height" constant="35" id="gUG-rO-ZxM"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" usesSingleLineMode="YES" id="2jf-AI-4Wx">
+                                    <font key="font" metaFont="systemThin" size="26"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="7Ou-Ey-jkC" firstAttribute="centerX" secondItem="6cG-sr-Ub0" secondAttribute="centerX" id="5Oo-9k-zRN"/>
+                            <constraint firstItem="IRS-6c-DTS" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="5yp-y6-Lwx"/>
+                            <constraint firstItem="n7a-6Z-Rsw" firstAttribute="top" secondItem="7Ou-Ey-jkC" secondAttribute="bottom" constant="10" id="Bx8-jU-i7e"/>
+                            <constraint firstItem="n7a-6Z-Rsw" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="CRC-NK-qVo"/>
+                            <constraint firstAttribute="bottom" secondItem="4Ui-cf-b7U" secondAttribute="bottom" constant="10" id="DxC-hv-HOr"/>
+                            <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Kgm-9b-oHh"/>
+                            <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="SSZ-cE-eOL"/>
+                            <constraint firstAttribute="trailing" secondItem="IRS-6c-DTS" secondAttribute="trailing" constant="10" id="U37-G7-Ws4"/>
+                            <constraint firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" constant="10" id="whj-HD-7sC"/>
+                            <constraint firstItem="7Ou-Ey-jkC" firstAttribute="top" secondItem="6cG-sr-Ub0" secondAttribute="top" constant="10" id="xAb-wu-E9f"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonCopyToClipboard" destination="4Ui-cf-b7U" id="d5S-bq-sJE"/>
+                        <outlet property="textFieldAppLink" destination="n7a-6Z-Rsw" id="nQS-jq-mHq"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="80" y="1065.5"/>
         </scene>
     </scenes>
 </document>
