@@ -13,6 +13,7 @@
 #import "Common.h"
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"
+#import "ShowLinkViewController.h"
 
 typedef enum : NSUInteger {
     FileTypeIPA,
@@ -21,17 +22,21 @@ typedef enum : NSUInteger {
 
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
     DBRestClient *restClient;
+    IBOutlet NSTextField *labelIPAName;
+    IBOutlet NSButton *buttonSelectIPAFile;
+    IBOutlet NSButton *buttonLinkWithDropbox;
+    
+    IBOutlet NSButton *buttonShutdownMac;
+    IBOutlet NSTextField *textFieldEmail;
+    IBOutlet NSTextField *textFieldEmailSubject;
+    IBOutlet NSTextView *textViewEmailContent;
+    
+    
+    IBOutlet NSTextField *labelStatus;
+    IBOutlet NSView *viewProgressStatus;
+    IBOutlet NSProgressIndicator *progressIndicator;    
 }
 
-@property (weak) IBOutlet NSButton *buttonLinkWithDropbox;
-@property (weak) IBOutlet NSButton *buttonSelectIPAFile;
-@property (weak) IBOutlet NSTextField *labelIPAName;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
-@property (weak) IBOutlet NSTextField *labelStatus;
-@property (weak) IBOutlet NSView *viewProgressStatus;
-@property (weak) IBOutlet NSTextField *textFieldEmail;
-@property (weak) IBOutlet NSTextField *textFieldEmailSubject;
-@property (unsafe_unretained) IBOutlet NSTextView *textViewEmailContent;
 
 
 - (DBRestClient *)restClient;

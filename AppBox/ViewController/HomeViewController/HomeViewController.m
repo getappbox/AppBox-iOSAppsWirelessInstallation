@@ -15,6 +15,7 @@
     NSString *ipaFileDBURL;
     NSString *manifestFileDBURL;
     NSDictionary *manifestData;
+    NSURL *appShortSharedURL;
     
     __block NSDictionary *ipaInfoPlist;
 }
@@ -71,17 +72,32 @@
         uuid = [Common generateUUID];
         //Set progress started view state
         [self progressStartedViewState];
-        self.labelIPAName.stringValue = ipaFileURL.lastPathComponent;
+        labelIPAName.stringValue = ipaFileURL.lastPathComponent;
         NSString *fromPath = [[ipaFileURL.absoluteString substringFromIndex:7] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
         
         //Unzip ipa
+        __block NSString *payloadEntry;
+        __block NSString *infoPlistPath;
         [SSZipArchive unzipFileAtPath:fromPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+            if ([[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
+                payloadEntry = entry;
+            }
+            if ([[entry lastPathComponent].lowercaseString isEqualToString:@"info.plist"]) {
+                infoPlistPath = entry;
+            }
             NSLog(@"Extracting file %@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]);
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
-            NSString *payloadPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"payload/%@app/Info.plist",[ipaFileURL.lastPathComponent substringToIndex:ipaFileURL.lastPathComponent.length-3]]];
+            if (error) {
+                [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                return;
+            }
             
             //get info.plist
-            ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:payloadPath];
+            ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
+            if (ipaInfoPlist == nil) {
+                [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
+                return;
+            }
             NSLog(@"ipaInfo - %@", ipaInfoPlist);
             
             //upload ipa
@@ -105,18 +121,18 @@
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
     [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
-    self.labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
+    labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
     [Common showLocalNotificationWithTitle:@"AppBox" andMessage:[NSString stringWithFormat:@"%@ file uploaded.",(fileType == FileTypeIPA)?@"IPA":@"Manifest"]];
 }
 
 -(void)restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath{
     if (fileType == FileTypeIPA) {
-        self.progressIndicator.doubleValue = progress;
-        self.labelStatus.stringValue = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        progressIndicator.doubleValue = progress;
+        labelStatus.stringValue = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
         NSLog(@"ipa upload progress %@",[NSNumber numberWithFloat:progress]);
     }else if (fileType == FileTypeManifest){
-        self.progressIndicator.doubleValue = progress;
-        self.labelStatus.stringValue = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        progressIndicator.doubleValue = progress;
+        labelStatus.stringValue = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
         NSLog(@"manifest upload progress %@",[NSNumber numberWithFloat:progress]);
     }
 }
@@ -135,15 +151,18 @@
         NSString *shareableLink = [link substringToIndex:link.length-5];
         NSLog(@"manifest link - %@",shareableLink);
         NSString *requiredLink = [shareableLink componentsSeparatedByString:@"dropbox.com"][1];
+        
+        //create short url
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
         [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.developerinsider.in/assets/pages/iOSDistribution.html?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
             NSLog(@"Short URL - %@", shortURL);
-            [[NSPasteboard generalPasteboard] clearContents];
-            [[NSPasteboard generalPasteboard] setString:shortURL.absoluteString  forType:NSStringPboardType];
-            [Common showLocalNotificationWithTitle:@"AppBox"  andMessage:@"We've copy distribution link to your clipboard."];
-            if (self.textFieldEmail.stringValue.length > 0) {
-                [Common sendEmailToAddress:self.textFieldEmail.stringValue withSubject:self.textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",self.textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
+            appShortSharedURL = shortURL;
+            if (textFieldEmail.stringValue.length > 0) {
+                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self performSegueWithIdentifier:@"ShowLink" sender:self];
+            });
             [self progressCompletedViewState];
         }];
     }
@@ -172,13 +191,13 @@
 #pragma mark - Controller Helper
 - (void)updateDropBoxLinkButton{
     if ([[DBSession sharedSession] isLinked]) {
-        self.buttonSelectIPAFile.enabled = YES;
-        self.buttonLinkWithDropbox.title = @"Unlink Dropbox";
+        buttonSelectIPAFile.enabled = YES;
+        buttonLinkWithDropbox.title = @"Unlink Dropbox";
         [self restClient];
     } else {
-        self.buttonSelectIPAFile.enabled = NO;
-        self.buttonLinkWithDropbox.title = @"Link Dropbox";
-        self.buttonLinkWithDropbox.state = [[DBAuthHelperOSX sharedHelper] isLoading] ? NSOffState : NSOnState;
+        buttonSelectIPAFile.enabled = NO;
+        buttonLinkWithDropbox.title = @"Link Dropbox";
+        buttonLinkWithDropbox.state = [[DBAuthHelperOSX sharedHelper] isLoading] ? NSOffState : NSOnState;
     }
 }
 
@@ -215,21 +234,45 @@
 
 
 -(void)progressCompletedViewState{
-    self.labelStatus.hidden = YES;
-    self.labelIPAName.hidden = YES;
-    self.progressIndicator.hidden = YES;
-    self.viewProgressStatus.hidden = YES;
-    self.buttonSelectIPAFile.enabled = YES;
-    self.buttonLinkWithDropbox.enabled = YES;
+    labelStatus.hidden = YES;
+    labelIPAName.hidden = YES;
+    progressIndicator.hidden = YES;
+    viewProgressStatus.hidden = YES;
+    
+    //button
+    buttonSelectIPAFile.enabled = YES;
+    buttonLinkWithDropbox.enabled = YES;
+    buttonShutdownMac.enabled = YES;
+    
+    //email
+    textFieldEmail.enabled = YES;
+    textFieldEmailSubject.enabled = YES;
+    textViewEmailContent.editable = YES;
 }
 
 -(void)progressStartedViewState{
-    self.labelStatus.hidden = NO;
-    self.labelIPAName.hidden = NO;
-    self.progressIndicator.hidden = NO;
-    self.viewProgressStatus.hidden = NO;
-    self.buttonSelectIPAFile.enabled = NO;
-    self.buttonLinkWithDropbox.enabled = NO;
+    //label
+    labelStatus.hidden = NO;
+    labelIPAName.hidden = NO;
+    progressIndicator.hidden = NO;
+    viewProgressStatus.hidden = NO;
+    
+    //button
+    buttonSelectIPAFile.enabled = NO;
+    buttonLinkWithDropbox.enabled = NO;
+    buttonShutdownMac.enabled = NO;
+    
+    //email
+    textFieldEmail.enabled = NO;
+    textFieldEmailSubject.enabled = NO;
+    textViewEmailContent.editable = NO;
+}
+
+#pragma mark - Navigation
+-(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
+        ((ShowLinkViewController *)segue.destinationController).appLink = appShortSharedURL.absoluteString;
+    }
 }
 
 

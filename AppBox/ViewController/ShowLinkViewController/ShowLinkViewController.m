@@ -16,13 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
-}
-
--(void) viewWillAppear{
-    [super viewWillAppear];
     textFieldAppLink.stringValue = self.appLink;
 }
+
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
     [[NSPasteboard generalPasteboard] clearContents];
