@@ -12,11 +12,13 @@
 
 + (NSString*)generateUUID {
     NSMutableData *data = [NSMutableData dataWithLength:32];
-    int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
-    NSAssert(result == 0, @"Error generating random bytes: %d", errno);
-    NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
-    base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    return base64EncodedData;
+    if (((NSInteger *)SecRandomCopyBytes(NULL, 32, data.mutableBytes)) == 0){
+        return @"";
+    }else{
+        NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
+        base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
+        return base64EncodedData;
+    }
 }
 
 #pragma mark - Notifications
@@ -59,5 +61,16 @@
     NSAppleScript *emailScript = [[NSAppleScript alloc] initWithSource:emailString];
     [emailScript executeAndReturnError:nil];
     NSLog(@"Message passed to Mail");
+}
+
+#pragma mark - Handle System
++ (void)shutdownSystem{
+    NSString *scriptAction = @"shut down"; // @"restart"/@"shut down"/@"sleep"/@"log out"
+    NSString *scriptSource = [NSString stringWithFormat:@"tell application \"Finder\" to %@", scriptAction];
+    NSAppleScript *appleScript = [[NSAppleScript alloc] initWithSource:scriptSource];
+    NSDictionary *errDict = nil;
+    if (![appleScript executeAndReturnError:&errDict]) {
+        NSLog(@"%@", errDict);
+    }
 }
 @end

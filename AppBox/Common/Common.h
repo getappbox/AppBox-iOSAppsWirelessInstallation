@@ -11,6 +11,7 @@
 
 @interface Common : NSObject
 
++ (void)shutdownSystem;
 + (NSString*)generateUUID;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;

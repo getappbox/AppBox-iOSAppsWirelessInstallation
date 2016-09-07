@@ -160,9 +160,15 @@
             if (textFieldEmail.stringValue.length > 0) {
                 [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self performSegueWithIdentifier:@"ShowLink" sender:self];
-            });
+            if (buttonShutdownMac.state == NSOffState){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                });
+            }else{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(600 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [Common shutdownSystem];
+                });
+            }
             [self progressCompletedViewState];
         }];
     }
