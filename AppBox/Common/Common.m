@@ -12,9 +12,12 @@
 
 + (NSString*)generateUUID {
     NSMutableData *data = [NSMutableData dataWithLength:32];
+    int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
+    NSAssert(result == 0, @"Error generating random bytes: %d", errno);
     NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
     base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
     return base64EncodedData;
+
 }
 
 #pragma mark - Notifications
