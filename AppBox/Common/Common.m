@@ -12,13 +12,9 @@
 
 + (NSString*)generateUUID {
     NSMutableData *data = [NSMutableData dataWithLength:32];
-    if (((NSInteger *)SecRandomCopyBytes(NULL, 32, data.mutableBytes)) == 0){
-        return @"";
-    }else{
-        NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
-        base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
-        return base64EncodedData;
-    }
+    NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
+    base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    return base64EncodedData;
 }
 
 #pragma mark - Notifications
