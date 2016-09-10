@@ -22,4 +22,4 @@ AppBox is a tool for developers to deploy Development and In-house applications 
 ![](https://www.codeplex.com/Download?ProjectName=iosappswirelessinstallation&DownloadId=1605456)
 
 # Contributions
-Any contribution is more than welcome! You can contribute through pull requests and issues on [GitHub](https://iosappswirelessinstallation.codeplex.com/) or [Codeplex](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation).
+Any contribution is more than welcome! You can contribute through pull requests and issues on [GitHub](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation) or [Codeplex](https://iosappswirelessinstallation.codeplex.com/).
