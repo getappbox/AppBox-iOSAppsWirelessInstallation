@@ -1,9 +1,9 @@
 # AppBox - iOS Apps Wireless Installation
 AppBox is a tool for developers to deploy Development and In-house applications directly to the devices from your Dropbox account.
-
+# Download
+### [Click here to download AppBox.app for your Mac](https://iosappswirelessinstallation.codeplex.com/)
 
 # Feature
-
 1. Auto E-Mail App Distribution Link
 2. Auto Shutdown Mac after Distribution
 3. Maximum Upload Size => Equal to your Dropbox account storage
