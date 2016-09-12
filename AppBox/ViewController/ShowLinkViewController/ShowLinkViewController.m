@@ -23,7 +23,10 @@
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:self.appLink  forType:NSStringPboardType];
-    [Common showLocalNotificationWithTitle:@"AppBox"  andMessage:@"We've copy distribution link to your clipboard."];
+    [sender setTitle:@"Copied!!"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [sender setTitle:@"Copy to clipboard"];
+    });
 }
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender {

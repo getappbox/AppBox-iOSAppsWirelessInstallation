@@ -17,7 +17,6 @@
     NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
     base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
     return base64EncodedData;
-
 }
 
 #pragma mark - Notifications

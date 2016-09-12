@@ -34,12 +34,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
     
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
-    [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:)
-          forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     if ([[DBSession sharedSession] isLinked]) {
         [self updateDropBoxLinkButton];
     }
+    
+    textViewEmailContent.font = textFieldEmail.font;
 }
 
 #pragma mark - Controllers Actions

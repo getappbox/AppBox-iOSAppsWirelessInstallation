@@ -120,11 +120,11 @@
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="545" height="315"/>
+                        <rect key="frame" x="0.0" y="0.0" width="546" height="315"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="545" height="315"/>
+                                <rect key="frame" x="0.0" y="0.0" width="546" height="315"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sO6-co-IOQ">
                                         <rect key="frame" x="139" y="277" width="131" height="32"/>
@@ -178,7 +178,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-et-sSs">
-                                        <rect key="frame" x="0.0" y="0.0" width="545" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="546" height="40"/>
                                         <subviews>
                                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" displayedWhenStopped="NO" bezeled="NO" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ha-Sj1">
                                                 <rect key="frame" x="10" y="10" width="20" height="20"/>
@@ -188,7 +188,7 @@
                                                 </constraints>
                                             </progressIndicator>
                                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IgI-OA-XP9">
-                                                <rect key="frame" x="38" y="10" width="499" height="21"/>
+                                                <rect key="frame" x="38" y="10" width="500" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Checking IPA..." id="gjX-y7-LlX">
                                                     <font key="font" metaFont="systemLight" size="17"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -206,12 +206,9 @@
                                         </constraints>
                                     </customView>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3S8-5j-4ZM">
-                                        <rect key="frame" x="96" y="209" width="439" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="NUe-vM-3ME"/>
-                                        </constraints>
+                                        <rect key="frame" x="96" y="209" width="440" height="25"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="2bb-kY-5FC">
-                                            <font key="font" metaFont="systemLight" size="15"/>
+                                            <font key="font" metaFont="systemLight" size="17"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -224,19 +221,19 @@
                                         </buttonCell>
                                     </button>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMS-On-FOR">
-                                        <rect key="frame" x="95" y="75" width="441" height="124"/>
+                                        <rect key="frame" x="95" y="75" width="440" height="124"/>
                                         <clipView key="contentView" id="hY9-OG-ynO">
-                                            <rect key="frame" x="1" y="1" width="439" height="122"/>
+                                            <rect key="frame" x="1" y="1" width="438" height="122"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="0ub-Kl-QAp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="439" height="122"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="438" height="122"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="439" height="122"/>
+                                                    <size key="minSize" width="438" height="122"/>
                                                     <size key="maxSize" width="502" height="10000000"/>
                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="minSize" width="439" height="122"/>
+                                                    <size key="minSize" width="438" height="122"/>
                                                     <size key="maxSize" width="502" height="10000000"/>
                                                 </textView>
                                             </subviews>
@@ -251,17 +248,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="FeR-XT-QRV">
-                                            <rect key="frame" x="424" y="1" width="16" height="122"/>
+                                            <rect key="frame" x="423" y="1" width="16" height="122"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RKc-Si-2CZ">
-                                        <rect key="frame" x="96" y="246" width="439" height="25"/>
+                                        <rect key="frame" x="96" y="246" width="440" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="L4T-9e-81l"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="1CV-KM-paZ">
-                                            <font key="font" metaFont="systemLight" size="15"/>
+                                            <font key="font" metaFont="systemLight" size="17"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -288,6 +285,7 @@
                                     <constraint firstItem="HUs-4Y-Rn1" firstAttribute="top" secondItem="0ub-Kl-QAp" secondAttribute="top" id="4mH-sm-WaT"/>
                                     <constraint firstItem="3S8-5j-4ZM" firstAttribute="leading" secondItem="0ub-Kl-QAp" secondAttribute="leading" id="8Ms-3R-Xv0"/>
                                     <constraint firstItem="HUs-4Y-Rn1" firstAttribute="width" secondItem="nf3-Kn-VIh" secondAttribute="width" id="8YE-9O-lyt"/>
+                                    <constraint firstItem="RKc-Si-2CZ" firstAttribute="height" secondItem="3S8-5j-4ZM" secondAttribute="height" id="BwI-rg-OBi"/>
                                     <constraint firstItem="Yg6-zw-qpP" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="10" id="CX3-qx-rJa"/>
                                     <constraint firstItem="nf3-Kn-VIh" firstAttribute="centerY" secondItem="RKc-Si-2CZ" secondAttribute="centerY" id="DUc-1L-bKX"/>
                                     <constraint firstItem="WMS-On-FOR" firstAttribute="leading" secondItem="MlA-j9-hh1" secondAttribute="leading" id="Gxg-tv-Mlk"/>
@@ -301,6 +299,7 @@
                                     <constraint firstItem="HUs-4Y-Rn1" firstAttribute="top" secondItem="Yg6-zw-qpP" secondAttribute="bottom" constant="15" id="Tpo-Ar-QLw"/>
                                     <constraint firstItem="sO6-co-IOQ" firstAttribute="leading" secondItem="mBL-zn-6BU" secondAttribute="trailing" constant="10" id="Uy1-IL-Qqn"/>
                                     <constraint firstItem="WMS-On-FOR" firstAttribute="top" secondItem="3S8-5j-4ZM" secondAttribute="bottom" constant="10" id="Yi0-Du-ssf"/>
+                                    <constraint firstItem="WMS-On-FOR" firstAttribute="width" secondItem="RKc-Si-2CZ" secondAttribute="width" id="Yps-G0-eEf"/>
                                     <constraint firstItem="HUs-4Y-Rn1" firstAttribute="width" secondItem="Yg6-zw-qpP" secondAttribute="width" id="bvB-mr-NRw"/>
                                     <constraint firstItem="nf3-Kn-VIh" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="10" id="d6u-bC-AGz"/>
                                     <constraint firstAttribute="trailing" secondItem="HNZ-et-sSs" secondAttribute="trailing" id="ezl-M6-gAz"/>
@@ -308,6 +307,7 @@
                                     <constraint firstItem="RKc-Si-2CZ" firstAttribute="leading" secondItem="3S8-5j-4ZM" secondAttribute="leading" id="iZ7-3o-XYQ"/>
                                     <constraint firstAttribute="trailing" secondItem="RKc-Si-2CZ" secondAttribute="trailing" constant="10" id="m4a-BU-0Ec"/>
                                     <constraint firstItem="RKc-Si-2CZ" firstAttribute="leading" secondItem="nf3-Kn-VIh" secondAttribute="trailing" constant="15" id="muE-br-9BS"/>
+                                    <constraint firstItem="WMS-On-FOR" firstAttribute="width" secondItem="3S8-5j-4ZM" secondAttribute="width" id="o6a-ES-5IX"/>
                                     <constraint firstItem="mBL-zn-6BU" firstAttribute="top" secondItem="RTB-1n-lrJ" secondAttribute="top" constant="10" id="qQp-2Z-8PF"/>
                                     <constraint firstItem="MlA-j9-hh1" firstAttribute="top" secondItem="WMS-On-FOR" secondAttribute="bottom" constant="10" id="qqm-VL-R8r"/>
                                     <constraint firstItem="nf3-Kn-VIh" firstAttribute="height" secondItem="Yg6-zw-qpP" secondAttribute="height" id="suk-SQ-oP4"/>
