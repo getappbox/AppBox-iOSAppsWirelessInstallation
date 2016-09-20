@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.m */; };
 		E16437D71D743A4E00CE8B7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D61D743A4E00CE8B7E /* main.m */; };
@@ -51,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
+		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
 		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLinkViewController.m; sourceTree = "<group>"; };
 		E16437CF1D743A4E00CE8B7E /* AppBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E12E6D061D8FC6E20054814D /* DashboardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E12E6D071D8FC77D0054814D /* DashboardViewController.h */,
+				E12E6D081D8FC77D0054814D /* DashboardViewController.m */,
+			);
+			path = DashboardViewController;
+			sourceTree = "<group>";
+		};
 		E15C26671D7FD5A9004243B9 /* ShowLinkViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +171,7 @@
 				E16437ED1D743ABE00CE8B7E /* Storyboard */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
+				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -318,6 +331,7 @@
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
+				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,

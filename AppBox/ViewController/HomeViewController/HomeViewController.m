@@ -47,8 +47,9 @@
 - (IBAction)buttonLinkWithDropboxTapped:(NSButton *)sender {
     if ([[DBSession sharedSession] isLinked]) {
         // The link button turns into an unlink button when you're linked
-        [[DBSession sharedSession] unlinkAll];
-        restClient = nil;
+//        [[DBSession sharedSession] unlinkAll];
+//        restClient = nil;
+        [self performSegueWithIdentifier:@"ShowDashboard" sender:sender];
         [self updateDropBoxLinkButton];
     } else {
         [[DBAuthHelperOSX sharedHelper] authenticate];
@@ -199,7 +200,7 @@
 - (void)updateDropBoxLinkButton{
     if ([[DBSession sharedSession] isLinked]) {
         buttonSelectIPAFile.enabled = YES;
-        buttonLinkWithDropbox.title = @"Unlink Dropbox";
+        buttonLinkWithDropbox.title = @"Dashboard";
         [self restClient];
     } else {
         buttonSelectIPAFile.enabled = NO;
