@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
@@ -63,6 +63,39 @@
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Edit" id="Mvr-7F-0uu">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Edit" id="Rql-8B-KZH">
+                                    <items>
+                                        <menuItem title="Cut" keyEquivalent="x" id="J68-8x-H5I">
+                                            <connections>
+                                                <action selector="cut:" target="Ady-hI-5gd" id="IX5-Or-efJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Copy" keyEquivalent="c" id="LVh-Nh-2EN">
+                                            <connections>
+                                                <action selector="copy:" target="Ady-hI-5gd" id="c3r-gc-Sfb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste" keyEquivalent="v" id="ff7-mg-GnG">
+                                            <connections>
+                                                <action selector="paste:" target="Ady-hI-5gd" id="tPi-Xj-cZg"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete" id="xX9-62-S9e">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="delete:" target="Ady-hI-5gd" id="uGZ-sJ-Ydk"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Select All" keyEquivalent="a" id="H9y-kh-7LU">
+                                            <connections>
+                                                <action selector="selectAll:" target="Ady-hI-5gd" id="gtz-Hf-XQB"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -467,7 +500,7 @@
                 </viewController>
                 <customObject id="XGA-DM-bZH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="315" y="1195"/>
+            <point key="canvasLocation" x="324" y="1228"/>
         </scene>
         <!--ShowLink-->
         <scene sceneID="Wfl-7U-Izx">
@@ -547,7 +580,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-221" y="1116.5"/>
+            <point key="canvasLocation" x="-219" y="1122.5"/>
         </scene>
     </scenes>
 </document>

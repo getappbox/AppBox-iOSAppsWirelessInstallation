@@ -122,6 +122,9 @@
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
+    if (fileType == FileTypeIPA){
+        [self disableEmailFields];
+    }
     [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
     labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
     [Common showLocalNotificationWithTitle:@"AppBox" andMessage:[NSString stringWithFormat:@"%@ file uploaded.",(fileType == FileTypeIPA)?@"IPA":@"Manifest"]];
@@ -268,10 +271,11 @@
     //button
     buttonSelectIPAFile.enabled = NO;
     buttonLinkWithDropbox.enabled = NO;
-    buttonShutdownMac.enabled = NO;
-    
-    //email
+}
+
+-(void)disableEmailFields{
     textFieldEmail.enabled = NO;
+    buttonShutdownMac.enabled = NO;
     textFieldEmailSubject.enabled = NO;
     textViewEmailContent.editable = NO;
 }
