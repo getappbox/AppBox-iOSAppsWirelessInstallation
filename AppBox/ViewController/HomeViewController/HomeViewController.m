@@ -159,7 +159,7 @@
         
         //create short url
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
-        [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.developerinsider.in/assets/pages/iOSDistribution.html?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
+        [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
             NSLog(@"Short URL - %@", shortURL);
             appShortSharedURL = shortURL;
             if (textFieldEmail.stringValue.length > 0) {
