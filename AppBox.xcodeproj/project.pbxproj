@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
+		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
 		E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.m */; };
 		E16437D71D743A4E00CE8B7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D61D743A4E00CE8B7E /* main.m */; };
 		E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */; };
@@ -56,6 +57,9 @@
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
 		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLinkViewController.m; sourceTree = "<group>"; };
+		E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxViewController.h; sourceTree = "<group>"; };
+		E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxViewController.m; sourceTree = "<group>"; };
+		E16018F11DEC0EB700E3A377 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E16437CF1D743A4E00CE8B7E /* AppBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E16437D21D743A4E00CE8B7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E16437D31D743A4E00CE8B7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 			path = ShowLinkViewController;
 			sourceTree = "<group>";
 		};
+		E16018ED1DEC0BA600E3A377 /* DropboxViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */,
+				E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */,
+			);
+			path = DropboxViewController;
+			sourceTree = "<group>";
+		};
 		E16437C61D743A4E00CE8B7E = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437ED1D743ABE00CE8B7E /* Storyboard */,
+				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
@@ -252,6 +266,7 @@
 			children = (
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
+				E16018F11DEC0EB700E3A377 /* Constants.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -329,6 +344,7 @@
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
+				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,

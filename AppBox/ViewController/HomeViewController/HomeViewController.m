@@ -22,39 +22,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //dev
-    NSString *appKey = @"86tfx5bu3356fqo";
-    NSString *appSecret = @"mq4l1damoz8hwrr";
-    NSString *root = kDBRootAppFolder;
     
-    DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
-    session.delegate = self;
+    DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
+    [session setDelegate:self];
     [DBSession setSharedSession:session];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
     
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
-    
-    if ([[DBSession sharedSession] isLinked]) {
-        [self updateDropBoxLinkButton];
+}
+
+- (void)viewWillAppear{
+    [super viewWillAppear];
+    if (![[DBSession sharedSession] isLinked]) {
+        [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
+    }else{
+        [self progressCompletedViewState];
     }
-    
-    textViewEmailContent.font = textFieldEmail.font;
 }
 
 #pragma mark - Controllers Actions
-- (IBAction)buttonLinkWithDropboxTapped:(NSButton *)sender {
-    if ([[DBSession sharedSession] isLinked]) {
-        // The link button turns into an unlink button when you're linked
-//        [[DBSession sharedSession] unlinkAll];
-//        restClient = nil;
-        [self performSegueWithIdentifier:@"ShowDashboard" sender:sender];
-        [self updateDropBoxLinkButton];
-    } else {
-        [[DBAuthHelperOSX sharedHelper] authenticate];
-    }
-}
 
 - (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender {
     //select ipa file
@@ -90,6 +78,7 @@
             NSLog(@"Extracting file %@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]);
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
+                [self progressCompletedViewState];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                 return;
             }
@@ -97,6 +86,7 @@
             //get info.plist
             ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
             if (ipaInfoPlist == nil) {
+                [self progressCompletedViewState];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
@@ -104,14 +94,13 @@
             
             //upload ipa
             fileType = FileTypeIPA;
-            [restClient uploadFile:ipaFileURL.lastPathComponent toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:fromPath];
+            [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:fromPath];
         }];
     }
 }
 
-#pragma mark - DBSession Delegate
+#pragma mark - DB Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
-    [Common showAlertWithTitle:@"Authorization Failed" andMessage:@""];
 }
 
 #pragma mark - RestClient Delegate
@@ -163,7 +152,7 @@
             NSLog(@"Short URL - %@", shortURL);
             appShortSharedURL = shortURL;
             if (textFieldEmail.stringValue.length > 0) {
-                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
+//                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
             }
             if (buttonShutdownMac.state == NSOffState){
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -181,9 +170,8 @@
 
 #pragma mark - Dropbox Helper
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    [self updateDropBoxLinkButton];
     if ([[DBSession sharedSession] isLinked]) {
-        // You can now start using the API!
+        [self progressCompletedViewState];
     }
 }
 
@@ -200,17 +188,6 @@
 }
 
 #pragma mark - Controller Helper
-- (void)updateDropBoxLinkButton{
-    if ([[DBSession sharedSession] isLinked]) {
-        buttonSelectIPAFile.enabled = YES;
-        buttonLinkWithDropbox.title = @"Dashboard";
-        [self restClient];
-    } else {
-        buttonSelectIPAFile.enabled = NO;
-        buttonLinkWithDropbox.title = @"Link Dropbox";
-        buttonLinkWithDropbox.state = [[DBAuthHelperOSX sharedHelper] isLoading] ? NSOffState : NSOnState;
-    }
-}
 
 -(void)createAndUploadManifestWithInfo:(NSDictionary *)infoPlist andIPAURL:(NSString *)ipaURL{
     NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
@@ -252,13 +229,10 @@
     
     //button
     buttonSelectIPAFile.enabled = YES;
-    buttonLinkWithDropbox.enabled = YES;
     buttonShutdownMac.enabled = YES;
     
     //email
     textFieldEmail.enabled = YES;
-    textFieldEmailSubject.enabled = YES;
-    textViewEmailContent.editable = YES;
 }
 
 -(void)progressStartedViewState{
@@ -270,14 +244,11 @@
     
     //button
     buttonSelectIPAFile.enabled = NO;
-    buttonLinkWithDropbox.enabled = NO;
 }
 
 -(void)disableEmailFields{
     textFieldEmail.enabled = NO;
     buttonShutdownMac.enabled = NO;
-    textFieldEmailSubject.enabled = NO;
-    textViewEmailContent.editable = NO;
 }
 
 #pragma mark - Navigation

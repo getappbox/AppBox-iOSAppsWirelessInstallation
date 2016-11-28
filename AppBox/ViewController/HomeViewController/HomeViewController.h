@@ -11,9 +11,11 @@
 #import <ZipArchive/ZipArchive.h>
 
 #import "Common.h"
+#import "Constants.h"
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"
 #import "ShowLinkViewController.h"
+#import "DropboxViewController.h"
 
 typedef enum : NSUInteger {
     FileTypeIPA,
@@ -24,12 +26,9 @@ typedef enum : NSUInteger {
     DBRestClient *restClient;
     IBOutlet NSTextField *labelIPAName;
     IBOutlet NSButton *buttonSelectIPAFile;
-    IBOutlet NSButton *buttonLinkWithDropbox;
     
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
-    IBOutlet NSTextField *textFieldEmailSubject;
-    IBOutlet NSTextView *textViewEmailContent;
     
     
     IBOutlet NSTextField *labelStatus;
@@ -37,10 +36,7 @@ typedef enum : NSUInteger {
     IBOutlet NSProgressIndicator *progressIndicator;    
 }
 
-
-
 - (DBRestClient *)restClient;
-- (IBAction)buttonLinkWithDropboxTapped:(NSButton *)sender;
 - (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender;
 
 @end
