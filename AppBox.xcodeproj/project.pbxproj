@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
@@ -76,6 +77,7 @@
 		E164389F1D7469CD00CE8B7E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E16438A11D7469D200CE8B7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E16438A31D7469D900CE8B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
 		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
 		E188EA0B1D78485900EBCA52 /* GooglURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglURLShortenerService.h; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				E1CFC65B1D7E7FD9005872BE /* Common */,
 				E16437EC1D743AA100CE8B7E /* Assets */,
 				E16437EB1D743A9300CE8B7E /* Model */,
+				E172E13A1DEEB34D00405EF2 /* Commands */,
 				E16437EA1D743A8800CE8B7E /* ViewController */,
 				E16437D51D743A4E00CE8B7E /* Supporting Files */,
 				E16437D21D743A4E00CE8B7E /* AppDelegate.h */,
@@ -237,6 +240,14 @@
 				E16438961D743EA300CE8B7E /* WebKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E172E13A1DEEB34D00405EF2 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 		E188EA071D78485900EBCA52 /* Tiny */ = {
@@ -329,6 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
 				E16437E21D743A4E00CE8B7E /* Main.storyboard in Resources */,
 			);

@@ -23,20 +23,38 @@ typedef enum : NSUInteger {
 } FileType;
 
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
+    //Dropbox
     DBRestClient *restClient;
+    
+    //Build
+    IBOutlet NSPathControl *pathProject;
+    IBOutlet NSPathControl *pathBuild;
+    IBOutlet NSComboBox *comboBuildScheme;
+    IBOutlet NSComboBox *comboTeamId;
+    IBOutlet NSComboBox *comboBuildType;
+    IBOutlet NSButton *buttonBuild;
+    IBOutlet NSButton *buttonBuildAndUpload;
+    
+    //Upload IPA
     IBOutlet NSTextField *labelIPAName;
     IBOutlet NSButton *buttonSelectIPAFile;
     
+    //Mail and Shutdown
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
     
-    
+    //Status
     IBOutlet NSTextField *labelStatus;
     IBOutlet NSView *viewProgressStatus;
     IBOutlet NSProgressIndicator *progressIndicator;    
 }
 
 - (DBRestClient *)restClient;
+    
+- (IBAction)buttonBuildTapped:(NSButton *)sender;
+- (IBAction)buildPathHandler:(NSPathControl *)sender;
+- (IBAction)projectPathHandler:(NSPathControl *)sender;
 - (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender;
+- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender;
 
 @end

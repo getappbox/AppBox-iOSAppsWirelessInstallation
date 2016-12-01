@@ -280,6 +280,9 @@
                                                 <string>xcworkspace</string>
                                             </allowedTypes>
                                         </pathCell>
+                                        <connections>
+                                            <action selector="projectPathHandler:" target="lct-wo-jYo" id="mhc-dr-Zu5"/>
+                                        </connections>
                                     </pathControl>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-i0-JWD">
                                         <rect key="frame" x="13" y="389" width="140" height="19"/>
@@ -314,6 +317,9 @@
                                                 <string>public.folder</string>
                                             </allowedTypes>
                                         </pathCell>
+                                        <connections>
+                                            <action selector="buildPathHandler:" target="lct-wo-jYo" id="BTM-LX-Ssy"/>
+                                        </connections>
                                     </pathControl>
                                     <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJn-2P-Wer">
                                         <rect key="frame" x="158" y="350" width="437" height="28"/>
@@ -372,7 +378,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="buttonSelectIPAFileTapped:" target="lct-wo-jYo" id="0oR-HK-cdx"/>
+                                            <action selector="buttonBuildTapped:" target="lct-wo-jYo" id="bR9-RN-gFj"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50W-HR-ues">
@@ -385,7 +391,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="buttonSelectIPAFileTapped:" target="lct-wo-jYo" id="Qjl-of-Zk0"/>
+                                            <action selector="buttonBuildAndUploadTapped:" target="lct-wo-jYo" id="CWM-NV-zU4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -460,10 +466,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonBuild" destination="Ozf-Q6-RXW" id="aj3-zA-b5t"/>
+                        <outlet property="buttonBuildAndUpload" destination="50W-HR-ues" id="Obq-ba-O7x"/>
                         <outlet property="buttonSelectIPAFile" destination="sO6-co-IOQ" id="ehv-OI-wrH"/>
                         <outlet property="buttonShutdownMac" destination="MlA-j9-hh1" id="i1R-WZ-8SM"/>
+                        <outlet property="comboBuildScheme" destination="vJn-2P-Wer" id="QZp-O0-0rh"/>
+                        <outlet property="comboBuildType" destination="XTv-oc-mvs" id="sEq-gy-KKY"/>
+                        <outlet property="comboTeamId" destination="Dsk-nI-Owd" id="suO-nJ-2cE"/>
                         <outlet property="labelIPAName" destination="WWc-0h-aFY" id="wgg-IS-zaw"/>
                         <outlet property="labelStatus" destination="IgI-OA-XP9" id="7dV-Z3-UEa"/>
+                        <outlet property="pathBuild" destination="o1I-JX-iG3" id="9OV-rj-dHN"/>
+                        <outlet property="pathProject" destination="sWE-nW-t4X" id="5es-lc-EuA"/>
                         <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
                         <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
                         <outlet property="viewProgressStatus" destination="HNZ-et-sSs" id="xiM-U2-QxA"/>

@@ -10,6 +10,10 @@
 
 
 @implementation HomeViewController{
+    NSString *buildLocation;
+    NSString *projectLocation;
+    
+    //IPA upload
     NSString *uuid;
     FileType fileType;
     NSString *ipaFileDBURL;
@@ -98,6 +102,44 @@
         }];
     }
 }
+    
+- (IBAction)buttonBuildTapped:(NSButton *)sender {
+    
+}
+    
+- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
+    
+}
+    
+- (IBAction)projectPathHandler:(NSPathControl *)sender {
+    projectLocation = [Common getFileDirectoryForFilePath:sender.URL.relativePath];
+    NSTask *taskGetScheme = [[NSTask alloc] init];
+    taskGetScheme.launchPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
+    taskGetScheme.arguments = @[projectLocation];
+    [self captureStandardOutputWithTask:taskGetScheme];
+    [taskGetScheme launch];
+    [taskGetScheme waitUntilExit];
+}
+    
+- (IBAction)buildPathHandler:(NSPathControl *)sender {
+    buildLocation = sender.URL.relativePath;
+}
+
+#pragma mark - Capture data
+
+- (void)captureStandardOutputWithTask:(NSTask *)task{
+    NSPipe *pipe = [[NSPipe alloc] init];
+    [task setStandardOutput:pipe];
+    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSData *outputData =  pipe.fileHandleForReading.availableData;
+        NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"%@", outputString);
+        });
+    }];
+}
+
 
 #pragma mark - DB Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{

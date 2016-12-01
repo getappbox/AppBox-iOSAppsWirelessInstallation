@@ -18,6 +18,12 @@
     base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
     return base64EncodedData;
 }
+    
++ (NSString *)getFileDirectoryForFilePath:(NSString *)filePath{
+    NSArray *pathComponents = [filePath pathComponents];
+    NSString *fileDirectory = [NSString pathWithComponents:[pathComponents subarrayWithRange:NSMakeRange(0, pathComponents.count - 1)]];
+    return fileDirectory;
+}
 
 #pragma mark - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
