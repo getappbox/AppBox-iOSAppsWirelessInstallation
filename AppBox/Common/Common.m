@@ -19,10 +19,10 @@
     return base64EncodedData;
 }
     
-+ (NSString *)getFileDirectoryForFilePath:(NSString *)filePath{
-    NSArray *pathComponents = [filePath pathComponents];
++ (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath{
+    NSArray *pathComponents = [filePath.relativePath pathComponents];
     NSString *fileDirectory = [NSString pathWithComponents:[pathComponents subarrayWithRange:NSMakeRange(0, pathComponents.count - 1)]];
-    return fileDirectory;
+    return [NSURL URLWithString:fileDirectory];
 }
 
 #pragma mark - Notifications

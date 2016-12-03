@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
-		E10B82201DF0496E00BBE0CD /* BuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B821F1DF0496E00BBE0CD /* BuildScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
+		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
+		E13946171DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
 		E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.m */; };
@@ -57,13 +58,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E10B821F1DF0496E00BBE0CD /* BuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = BuildScript.sh; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
 		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
 		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
+		E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ProjectBuildScript.sh; sourceTree = "<group>"; };
+		E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = WorkspaceBuildScript.sh; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
 		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLinkViewController.m; sourceTree = "<group>"; };
 		E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxViewController.h; sourceTree = "<group>"; };
@@ -264,9 +266,10 @@
 		E172E13A1DEEB34D00405EF2 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */,
+				E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */,
 				E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */,
 				E10B82211DF0498600BBE0CD /* TeamIDScript.sh */,
-				E10B821F1DF0496E00BBE0CD /* BuildScript.sh */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -361,9 +364,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E10B82201DF0496E00BBE0CD /* BuildScript.sh in Resources */,
+				E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
 				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
+				E13946171DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
 				E16437E21D743A4E00CE8B7E /* Main.storyboard in Resources */,
 			);

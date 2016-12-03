@@ -10,17 +10,6 @@
 #import "ShowLinkViewController.h"
 #import "DropboxViewController.h"
 
-typedef enum : NSUInteger {
-    FileTypeIPA,
-    FileTypeManifest
-} FileType;
-
-typedef enum : NSUInteger {
-    ScriptTypeGetScheme,
-    ScriptTypeTeamId,
-    ScriptTypeBuild,
-} ScriptType;
-
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
     //Dropbox
     DBRestClient *restClient;

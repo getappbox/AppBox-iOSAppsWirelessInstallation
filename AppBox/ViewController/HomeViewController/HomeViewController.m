@@ -10,24 +10,15 @@
 
 
 @implementation HomeViewController{
-    NSString *projectName;
-    NSString *buildLocation;
-    NSString *projectLocation;
+    XCProject *project;
     ScriptType scriptType;
-    
-    //IPA upload
-    NSString *uuid;
     FileType fileType;
-    NSString *ipaFileDBURL;
-    NSString *manifestFileDBURL;
-    NSDictionary *manifestData;
-    NSURL *appShortSharedURL;
-    
-    __block NSDictionary *ipaInfoPlist;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    project = [[XCProject alloc] init];
     
     DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
     [session setDelegate:self];
@@ -39,6 +30,7 @@
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
+    [project setBuildDirectory: pathBuild.URL];
 }
 
 - (void)viewWillAppear{
@@ -53,7 +45,7 @@
 #pragma mark - Controllers Actions
     
 - (IBAction)buttonBuildTapped:(NSButton *)sender {
-    [self runGetSchemeScript];
+    [self runBuildScript];
 }
     
 - (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
@@ -61,7 +53,7 @@
 }
     
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
-    projectLocation = [Common getFileDirectoryForFilePath:sender.URL.relativePath];
+    project.fullPath = sender.URL;
     labelStatus.stringValue = @"Getting project info";
     [self progressStartedViewState];
     [self runGetSchemeScript];
@@ -72,7 +64,7 @@
 }
     
 - (IBAction)buildPathHandler:(NSPathControl *)sender {
-    buildLocation = sender.URL.relativePath;
+    [project setBuildDirectory: sender.URL];
 }
 
 #pragma mark - Task
@@ -80,37 +72,47 @@
 - (void)runGetSchemeScript{
     scriptType = ScriptTypeGetScheme;
     NSString *schemeScriptPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
-    [self runTaskWithLaunchPath:schemeScriptPath andArgument:@[projectLocation]];
+    [self runTaskWithLaunchPath:schemeScriptPath andArgument:@[project.rootDirectory]];
 }
 
 - (void)runTeamIDScript{
     scriptType = ScriptTypeTeamId;
     NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"TeamIDScript" ofType:@"sh"];
-    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[projectLocation]];
+    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[project.rootDirectory]];
 }
 
 - (void)runBuildScript{
     scriptType = ScriptTypeBuild;
-    NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"BuildScript" ofType:@"sh"];
+    NSString *buildScriptName;
+    if ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]){
+        buildScriptName = @"WorkspaceBuildScript";
+    }else{
+        buildScriptName = @"ProjectBuildScript";
+    }
+    NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
     //${1} Project Location
-    [buildArgument addObject:projectLocation];
+    [buildArgument addObject:project.rootDirectory];
     
     //${2} Project type workspace/scheme
-    if ([pathProject.URL.pathExtension.lowercaseString  isEqual: @"xcworkspace"]){
-        [buildArgument addObject:[NSString stringWithFormat:@"-workspace %@",pathProject.URL.lastPathComponent]];
-    }else{
-        [buildArgument addObject:[NSString stringWithFormat:@"-project %@",pathProject.URL.lastPathComponent]];
-    }
+    [buildArgument addObject:pathProject.URL.lastPathComponent];
     
     //${3} Build Scheme
     [buildArgument addObject:comboBuildScheme.stringValue];
     
     //${4} Archive Location
-//    [pathBuild.URL URLByAppendingPathComponent:<#(nonnull NSString *)#>]
-//    [buildArgument addObject:[b]]
+    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
     
-    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[projectLocation]];
+//    //${5} Archive Location
+//    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
+//    
+//    //${6} ipa Location
+//    [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
+//    
+    
+    
+    
+    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:buildArgument];
 }
 
 #pragma mark - Capture task data
@@ -136,14 +138,16 @@
             //Handle Project Scheme Response
             if (scriptType == ScriptTypeGetScheme){
                 NSError *error;
-                NSDictionary *project = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
-                if (project != nil && [[project valueForKey:@"project"] valueForKey:@"schemes"] !=nil ){
-                    projectName = [[project valueForKey:@"poject"] valueForKey:@"name"];
+                NSDictionary *buildList = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
+                if (buildList != nil){
+                    [project setBuildListInfo:buildList];
                     [progressIndicator setDoubleValue:50];
                     [comboBuildScheme removeAllItems];
-                    [comboBuildScheme addItemsWithObjectValues:[[project valueForKey:@"project"] valueForKey:@"schemes"]];
+                    [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     [comboBuildScheme selectItemAtIndex:0];
                     //TODO: Run Team Id Script Here
+                    [buttonBuild setEnabled:YES];
+                    [buttonBuildAndUpload setEnabled:YES];
                 }else{
                     NSLog(@"Failed to load scheme information.");
                 }
@@ -164,7 +168,7 @@
 
 - (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
     if (ipaFileURL.isFileURL) {
-        uuid = [Common generateUUID];
+        [project createUDIDAnsIsNew:YES];
         //Set progress started view state
         [self progressStartedViewState];
         NSString *fromPath = [[ipaFileURL.absoluteString substringFromIndex:7] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
@@ -189,17 +193,17 @@
             }
             
             //get info.plist
-            ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
-            if (ipaInfoPlist == nil) {
+            project.ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
+            if (project.ipaInfoPlist == nil) {
                 [self progressCompletedViewState];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
-            NSLog(@"ipaInfo - %@", ipaInfoPlist);
+            NSLog(@"ipaInfo - %@", project.ipaInfoPlist);
             
             //upload ipa
             fileType = FileTypeIPA;
-            [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:fromPath];
+            [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
         }];
     }
 }
@@ -220,7 +224,7 @@
     if (fileType == FileTypeIPA){
         [self disableEmailFields];
     }
-    [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
+    [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",project.dbDirectory.absoluteString ,metadata.filename] shortUrl:NO];
     labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
     [Common showLocalNotificationWithTitle:@"AppBox" andMessage:[NSString stringWithFormat:@"%@ file uploaded.",(fileType == FileTypeIPA)?@"IPA":@"Manifest"]];
 }
@@ -243,20 +247,26 @@
     [self progressCompletedViewState];
 }
 
--(void)restClient:(DBRestClient *)restClient loadedSharableLink:(NSString *)link forFile:(NSString *)path{
+-(void)restClient:(DBRestClient *)restClientLocal loadedSharableLink:(NSString *)link forFile:(NSString *)path{
     if (fileType == FileTypeIPA) {
         NSString *shareableLink = [link stringByReplacingCharactersInRange:NSMakeRange(link.length-1, 1) withString:@"1"];
-        [self createAndUploadManifestWithInfo:ipaInfoPlist andIPAURL:shareableLink];
+        project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
+        [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSString *manifestPath) {
+            fileType = FileTypeManifest;
+            [restClientLocal uploadFile:@"manifest.plist" toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:manifestPath];
+        }];
+
     }else if (fileType == FileTypeManifest){
         NSString *shareableLink = [link substringToIndex:link.length-5];
         NSLog(@"manifest link - %@",shareableLink);
+        project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         NSString *requiredLink = [shareableLink componentsSeparatedByString:@"dropbox.com"][1];
         
         //create short url
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
         [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
             NSLog(@"Short URL - %@", shortURL);
-            appShortSharedURL = shortURL;
+            project.appShortShareableURL = shortURL;
             if (textFieldEmail.stringValue.length > 0) {
 //                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
             }
@@ -295,38 +305,6 @@
 
 #pragma mark - Controller Helper
 
--(void)createAndUploadManifestWithInfo:(NSDictionary *)infoPlist andIPAURL:(NSString *)ipaURL{
-    NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
-    [assetsDict setValue:ipaURL forKey:@"url"];
-    [assetsDict setValue:@"software-package" forKey:@"kind"];
-    
-    NSMutableDictionary *metadataDict = [[NSMutableDictionary alloc] init];
-    [metadataDict setValue:@"software" forKey:@"kind"];
-    [metadataDict setValue:[ipaInfoPlist valueForKey:@"CFBundleName"] forKey:@"title"];
-    [metadataDict setValue:[ipaInfoPlist valueForKey:@"CFBundleIdentifier"] forKey:@"bundle-identifier"];
-    [metadataDict setValue:[ipaInfoPlist valueForKey:@"CFBundleShortVersionString"] forKey:@"bundle-version"];
-    
-    NSMutableDictionary *mainItemDict = [[NSMutableDictionary alloc] init];
-    [mainItemDict setValue:[NSArray arrayWithObjects:assetsDict, nil] forKey:@"assets"];
-    [mainItemDict setValue:metadataDict forKey:@"metadata"];
-    
-    NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
-    [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
-    
-    NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
-    [manifestDict writeToFile:manifestPath atomically:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        fileType = FileTypeManifest;
-        [restClient uploadFile:@"manifest.plist" toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:manifestPath];
-    });
-}
-
--(NSString *)getDBDirForThisVersion{
-    NSString *toPath = [NSString stringWithFormat:@"/%@-ver%@(%@)-%@",[ipaInfoPlist valueForKey:@"CFBundleName"],[ipaInfoPlist valueForKey:@"CFBundleShortVersionString"],[ipaInfoPlist valueForKey:@"CFBundleVersion"],uuid];
-    return toPath;
-}
-
-
 -(void)progressCompletedViewState{
     labelStatus.hidden = YES;
     progressIndicator.hidden = YES;
@@ -354,7 +332,7 @@
 #pragma mark - Navigation
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
-        ((ShowLinkViewController *)segue.destinationController).appLink = appShortSharedURL.absoluteString;
+        ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
     }
 }
 @end

@@ -14,4 +14,15 @@
 #define DbAppkey @"86tfx5bu3356fqo"
 #define DbScreatkey @"mq4l1damoz8hwrr"
 
+typedef enum : NSUInteger {
+    FileTypeIPA,
+    FileTypeManifest
+} FileType;
+
+typedef enum : NSUInteger {
+    ScriptTypeGetScheme,
+    ScriptTypeTeamId,
+    ScriptTypeBuild,
+} ScriptType;
+
 #endif /* Constants_h */
