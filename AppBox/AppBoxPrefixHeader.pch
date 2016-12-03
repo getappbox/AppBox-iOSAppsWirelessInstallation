@@ -1,0 +1,24 @@
+//
+//  AppBoxPrefixHeader.pch
+//  AppBox
+//
+//  Created by Vineet Choudhary on 03/12/16.
+//  Copyright © 2016 Developer Insider. All rights reserved.
+//
+
+#ifndef AppBoxPrefixHeader_pch
+#define AppBoxPrefixHeader_pch
+
+
+#import <DropboxOSX/DropboxOSX.h>
+#import <ZipArchive/ZipArchive.h>
+
+#import "Tiny.h"
+#import "GooglURLShortenerService.h"
+
+#import "Common.h"
+#import "Constants.h"
+#import "XCProject.h"
+
+
+#endif /* AppBoxPrefixHeader_pch */

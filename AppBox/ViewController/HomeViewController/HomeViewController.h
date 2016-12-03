@@ -7,13 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <DropboxOSX/DropboxOSX.h>
-#import <ZipArchive/ZipArchive.h>
-
-#import "Common.h"
-#import "Constants.h"
-#import "Tiny.h"
-#import "GooglURLShortenerService.h"
 #import "ShowLinkViewController.h"
 #import "DropboxViewController.h"
 
@@ -21,6 +14,12 @@ typedef enum : NSUInteger {
     FileTypeIPA,
     FileTypeManifest
 } FileType;
+
+typedef enum : NSUInteger {
+    ScriptTypeGetScheme,
+    ScriptTypeTeamId,
+    ScriptTypeBuild,
+} ScriptType;
 
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
     //Dropbox
@@ -36,8 +35,7 @@ typedef enum : NSUInteger {
     IBOutlet NSButton *buttonBuildAndUpload;
     
     //Upload IPA
-    IBOutlet NSTextField *labelIPAName;
-    IBOutlet NSButton *buttonSelectIPAFile;
+    IBOutlet NSPathControl *pathIPAFile;
     
     //Mail and Shutdown
     IBOutlet NSButton *buttonShutdownMac;
@@ -54,7 +52,7 @@ typedef enum : NSUInteger {
 - (IBAction)buttonBuildTapped:(NSButton *)sender;
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
-- (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender;
+- (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
 - (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender;
 
 @end

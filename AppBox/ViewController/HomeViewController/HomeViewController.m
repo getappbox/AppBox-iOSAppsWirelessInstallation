@@ -10,8 +10,10 @@
 
 
 @implementation HomeViewController{
+    NSString *projectName;
     NSString *buildLocation;
     NSString *projectLocation;
+    ScriptType scriptType;
     
     //IPA upload
     NSString *uuid;
@@ -35,6 +37,8 @@
     
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
+    [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
 }
 
 - (void)viewWillAppear{
@@ -47,26 +51,122 @@
 }
 
 #pragma mark - Controllers Actions
+    
+- (IBAction)buttonBuildTapped:(NSButton *)sender {
+    [self runGetSchemeScript];
+}
+    
+- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
+    [self runGetSchemeScript];
+}
+    
+- (IBAction)projectPathHandler:(NSPathControl *)sender {
+    projectLocation = [Common getFileDirectoryForFilePath:sender.URL.relativePath];
+    labelStatus.stringValue = @"Getting project info";
+    [self progressStartedViewState];
+    [self runGetSchemeScript];
+}
 
-- (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender {
-    //select ipa file
-    NSOpenPanel * panel = [NSOpenPanel openPanel];
-    [panel setAllowsMultipleSelection:NO];
-    [panel setCanChooseDirectories:NO];
-    [panel setCanChooseFiles:YES];
-    [panel setFloatingPanel:YES];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"ipa",nil]];
-    NSInteger result = [panel runModal];
-    NSURL *ipaFileURL;
-    if(result == NSModalResponseOK){
-         ipaFileURL = [[panel URLs] firstObject];
+- (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
+    [self uploadBuildWithIPAFileURL:sender.URL];
+}
+    
+- (IBAction)buildPathHandler:(NSPathControl *)sender {
+    buildLocation = sender.URL.relativePath;
+}
+
+#pragma mark - Task
+
+- (void)runGetSchemeScript{
+    scriptType = ScriptTypeGetScheme;
+    NSString *schemeScriptPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
+    [self runTaskWithLaunchPath:schemeScriptPath andArgument:@[projectLocation]];
+}
+
+- (void)runTeamIDScript{
+    scriptType = ScriptTypeTeamId;
+    NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"TeamIDScript" ofType:@"sh"];
+    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[projectLocation]];
+}
+
+- (void)runBuildScript{
+    scriptType = ScriptTypeBuild;
+    NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"BuildScript" ofType:@"sh"];
+    NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
+    //${1} Project Location
+    [buildArgument addObject:projectLocation];
+    
+    //${2} Project type workspace/scheme
+    if ([pathProject.URL.pathExtension.lowercaseString  isEqual: @"xcworkspace"]){
+        [buildArgument addObject:[NSString stringWithFormat:@"-workspace %@",pathProject.URL.lastPathComponent]];
+    }else{
+        [buildArgument addObject:[NSString stringWithFormat:@"-project %@",pathProject.URL.lastPathComponent]];
     }
-    //check url
+    
+    //${3} Build Scheme
+    [buildArgument addObject:comboBuildScheme.stringValue];
+    
+    //${4} Archive Location
+//    [pathBuild.URL URLByAppendingPathComponent:<#(nonnull NSString *)#>]
+//    [buildArgument addObject:[b]]
+    
+    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[projectLocation]];
+}
+
+#pragma mark - Capture task data
+
+- (void)runTaskWithLaunchPath:(NSString *)launchPath andArgument:(NSArray *)arguments{
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = launchPath;
+    task.arguments = arguments;
+    [self captureStandardOutputWithTask:task];
+    [task launch];
+    [task waitUntilExit];
+}
+
+- (void)captureStandardOutputWithTask:(NSTask *)task{
+    NSPipe *pipe = [[NSPipe alloc] init];
+    [task setStandardOutput:pipe];
+    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSData *outputData =  pipe.fileHandleForReading.availableData;
+        NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", outputString);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Handle Project Scheme Response
+            if (scriptType == ScriptTypeGetScheme){
+                NSError *error;
+                NSDictionary *project = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
+                if (project != nil && [[project valueForKey:@"project"] valueForKey:@"schemes"] !=nil ){
+                    projectName = [[project valueForKey:@"poject"] valueForKey:@"name"];
+                    [progressIndicator setDoubleValue:50];
+                    [comboBuildScheme removeAllItems];
+                    [comboBuildScheme addItemsWithObjectValues:[[project valueForKey:@"project"] valueForKey:@"schemes"]];
+                    [comboBuildScheme selectItemAtIndex:0];
+                    //TODO: Run Team Id Script Here
+                }else{
+                    NSLog(@"Failed to load scheme information.");
+                }
+            }
+            //Handle Team Id Response
+            else if (scriptType == ScriptTypeTeamId){
+                
+            }
+            //Handle Build Response
+            else if (scriptType == ScriptTypeBuild){
+                
+            }
+        });
+    }];
+}
+
+#pragma mark - Upload Build
+
+- (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
     if (ipaFileURL.isFileURL) {
         uuid = [Common generateUUID];
         //Set progress started view state
         [self progressStartedViewState];
-        labelIPAName.stringValue = ipaFileURL.lastPathComponent;
         NSString *fromPath = [[ipaFileURL.absoluteString substringFromIndex:7] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
         
         //Unzip ipa
@@ -76,7 +176,8 @@
             if ([[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
                 payloadEntry = entry;
             }
-            if ([[entry lastPathComponent].lowercaseString isEqualToString:@"info.plist"]) {
+            NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
+            if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
                 infoPlistPath = entry;
             }
             NSLog(@"Extracting file %@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]);
@@ -101,43 +202,6 @@
             [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:fromPath];
         }];
     }
-}
-    
-- (IBAction)buttonBuildTapped:(NSButton *)sender {
-    
-}
-    
-- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
-    
-}
-    
-- (IBAction)projectPathHandler:(NSPathControl *)sender {
-    projectLocation = [Common getFileDirectoryForFilePath:sender.URL.relativePath];
-    NSTask *taskGetScheme = [[NSTask alloc] init];
-    taskGetScheme.launchPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
-    taskGetScheme.arguments = @[projectLocation];
-    [self captureStandardOutputWithTask:taskGetScheme];
-    [taskGetScheme launch];
-    [taskGetScheme waitUntilExit];
-}
-    
-- (IBAction)buildPathHandler:(NSPathControl *)sender {
-    buildLocation = sender.URL.relativePath;
-}
-
-#pragma mark - Capture data
-
-- (void)captureStandardOutputWithTask:(NSTask *)task{
-    NSPipe *pipe = [[NSPipe alloc] init];
-    [task setStandardOutput:pipe];
-    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSData *outputData =  pipe.fileHandleForReading.availableData;
-        NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"%@", outputString);
-        });
-    }];
 }
 
 
@@ -265,12 +329,10 @@
 
 -(void)progressCompletedViewState{
     labelStatus.hidden = YES;
-    labelIPAName.hidden = YES;
     progressIndicator.hidden = YES;
     viewProgressStatus.hidden = YES;
     
     //button
-    buttonSelectIPAFile.enabled = YES;
     buttonShutdownMac.enabled = YES;
     
     //email
@@ -280,12 +342,8 @@
 -(void)progressStartedViewState{
     //label
     labelStatus.hidden = NO;
-    labelIPAName.hidden = NO;
     progressIndicator.hidden = NO;
     viewProgressStatus.hidden = NO;
-    
-    //button
-    buttonSelectIPAFile.enabled = NO;
 }
 
 -(void)disableEmailFields{
@@ -299,6 +357,4 @@
         ((ShowLinkViewController *)segue.destinationController).appLink = appShortSharedURL.absoluteString;
     }
 }
-
-
 @end

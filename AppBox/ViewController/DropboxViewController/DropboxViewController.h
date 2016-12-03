@@ -7,10 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <DropboxOSX/DropboxOSX.h>
-
-#import "Common.h"
-#import "Constants.h"
 
 @interface DropboxViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
     __weak IBOutlet NSButton *buttonConnectDropbox;

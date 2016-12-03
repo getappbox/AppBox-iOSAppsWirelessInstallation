@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Common.h"
 
 @interface ShowLinkViewController : NSViewController{
     IBOutlet NSTextField *textFieldAppLink;
