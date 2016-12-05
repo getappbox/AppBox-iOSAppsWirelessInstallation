@@ -19,6 +19,7 @@
 #import "Common.h"
 #import "Constants.h"
 #import "XCProject.h"
+#import "AppDelegate.h"
 
 
 #endif /* AppBoxPrefixHeader_pch */

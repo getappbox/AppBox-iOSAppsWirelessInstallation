@@ -103,6 +103,38 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Window" id="4eX-h0-ncF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="QBC-m6-GiV">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="mg2-dN-xbY">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="ger-iM-sPs"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="wlh-eO-HnL">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="Dl4-zm-pgu"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="BPG-IT-FEB"/>
+                                        <menuItem title="View Log" id="wFj-c5-AyQ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="6aM-eF-B0k" kind="show" id="8fD-5i-iaO"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="SeP-p1-Yui"/>
+                                        <menuItem title="Bring All to Front" id="Jl8-B2-zoN">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="TNe-S1-9Xq"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="GUL-TC-iqt">
@@ -130,7 +162,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="75" y="-56"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -477,6 +509,56 @@
                 <customObject id="Axn-BG-zzu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="784"/>
+        </scene>
+        <!--Log View Controller-->
+        <scene sceneID="Ukv-dV-EPt">
+            <objects>
+                <viewController id="6aM-eF-B0k" customClass="LogViewController" sceneMemberID="viewController">
+                    <view key="view" id="4JE-m3-V2s">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" id="EQ4-Ej-Nlf">
+                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hek-dT-Drn">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="448" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="1gl-4E-pHR">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5af-Y7-Vzh">
+                                    <rect key="frame" x="433" y="1" width="16" height="298"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="kbJ-uL-Hq6" firstAttribute="leading" secondItem="4JE-m3-V2s" secondAttribute="leading" id="ew8-Cs-8j0"/>
+                            <constraint firstAttribute="trailing" secondItem="kbJ-uL-Hq6" secondAttribute="trailing" id="kkp-Zl-WVP"/>
+                            <constraint firstAttribute="bottom" secondItem="kbJ-uL-Hq6" secondAttribute="bottom" id="o4g-Tt-vPq"/>
+                            <constraint firstItem="kbJ-uL-Hq6" firstAttribute="top" secondItem="4JE-m3-V2s" secondAttribute="top" id="r2p-55-I9h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="hek-dT-Drn" id="c5X-bx-cvf"/>
+                    </connections>
+                </viewController>
+                <customObject id="Sep-aN-CO8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660" y="288"/>
         </scene>
         <!--ShowDashboard-->
         <scene sceneID="Nhl-bU-R4s">

@@ -166,6 +166,7 @@
         NSData *outputData =  pipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
         NSLog(@"%@", outputString);
+        [[AppDelegate appDelegate].sessionLog appendString:outputString];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Handle Project Scheme Response
@@ -403,6 +404,7 @@
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
+    [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\n%@\n======\n\n",status];
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
     [progressIndicator setHidden:!showProgressBar];
