@@ -56,24 +56,29 @@
 
 //Scheme Value Changed
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender {
-
+    [self updateBuildButtonState];
 }
 
 //Team Value Changed
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender {
     [project setTeamId: sender.stringValue];
+    [self updateBuildButtonState];
 }
 
 //Build Type Changed
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
-    [project setBuildType: sender.stringValue];
+    if (![project.buildType isEqualToString:sender.stringValue]){
+        [project setBuildType: sender.stringValue];
+        [self updateBuildButtonState];
+    }
 }
 
 //Project Path Handler
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
-    [project setFullPath: sender.URL];
-    [self progressStartedViewState];
-    [self runGetSchemeScript];
+    if (![project.fullPath isEqualTo:sender.URL]){
+        [project setFullPath: sender.URL];
+        [self runGetSchemeScript];
+    }
 }
 
 //IPA File Path Handler
@@ -83,36 +88,33 @@
 
 //Build PathHandler
 - (IBAction)buildPathHandler:(NSPathControl *)sender {
-    [project setBuildDirectory: sender.URL];
+    if (![project.buildDirectory isEqualTo:sender.URL]){
+        [project setBuildDirectory: sender.URL];
+    }
 }
 
 #pragma mark - Task
 
 - (void)runGetSchemeScript{
-    labelStatus.stringValue = @"Getting project scheme...";
+    [self showStatus:@"Getting project scheme..." andShowProgressBar:YES withProgress:-1];
     scriptType = ScriptTypeGetScheme;
     NSString *schemeScriptPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
     [self runTaskWithLaunchPath:schemeScriptPath andArgument:@[project.rootDirectory]];
 }
 
 - (void)runTeamIDScript{
-    labelStatus.stringValue = @"Getting project team id...";
+    [self showStatus:@"Getting project team id..." andShowProgressBar:YES withProgress:-1];
     scriptType = ScriptTypeTeamId;
     NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"TeamIDScript" ofType:@"sh"];
     [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[project.rootDirectory]];
 }
 
 - (void)runBuildScript{
-    labelStatus.stringValue = @"Cleaning...";
+    [self showStatus:@"Cleaning..." andShowProgressBar:YES withProgress:-1];
     scriptType = ScriptTypeBuild;
     
     //Build Script Name
-    NSString *buildScriptName;
-    if ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]){
-        buildScriptName = @"WorkspaceBuildScript";
-    }else{
-        buildScriptName = @"ProjectBuildScript";
-    }
+    NSString *buildScriptName = ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]) ? @"WorkspaceBuildScript" : @"ProjectBuildScript";
     
     //Create Export Option Plist
     [project createExportOpetionPlist];
@@ -165,6 +167,7 @@
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
         NSLog(@"%@", outputString);
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             //Handle Project Scheme Response
             if (scriptType == ScriptTypeGetScheme){
                 NSError *error;
@@ -175,14 +178,14 @@
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     [comboBuildScheme selectItemAtIndex:0];
-                    //TODO: Run Team Id Script Here
+                    
+                    //Run Team Id Script
                     [self runTeamIDScript];
-                    [buttonBuild setEnabled:YES];
-                    [buttonBuildAndUpload setEnabled:YES];
                 }else{
-                    NSLog(@"Failed to load scheme information.");
+                    [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
                 }
             }
+            
             //Handle Team Id Response
             else if (scriptType == ScriptTypeTeamId){
                 if ([outputString.lowercaseString containsString:@"development_team"]){
@@ -194,26 +197,31 @@
                             [comboTeamId removeAllItems];
                             [comboTeamId addItemWithObjectValue:project.teamId];
                             [comboTeamId selectItemAtIndex:0];
-                            labelStatus.stringValue = @"All Done!! Lets build the Rocket!!";
+                            [self showStatus:@"All Done!! Lets build the Rocket!!" andShowProgressBar:NO withProgress:-1];
                         }
+                    }
+                } else if ([outputString.lowercaseString containsString:@"endofteamidscript"]) {
+                    if (project.teamId != nil){
+                        [self showStatus:@"Can't able to find Team ID! Please enter manually!" andShowProgressBar:NO withProgress:-1];
                     }
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
             }
+            
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
-                    labelStatus.stringValue = @"Creating IPA...";
+                    [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
-                    labelStatus.stringValue = @"Archiving...";
+                    [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
-                    labelStatus.stringValue = @"Export Succeeded";
+                    [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
                     [self checkIPACreated];
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
-                    labelStatus.stringValue = @"Export Failed";
+                    [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -236,8 +244,6 @@
 
 - (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaFileURL.resourceSpecifier]) {
-        //Set progress started view state
-        [self progressStartedViewState];
         NSString *fromPath = ipaFileURL.resourceSpecifier;
         
         //Unzip ipa
@@ -251,6 +257,7 @@
             if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
                 infoPlistPath = entry;
             }
+            [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
             NSLog(@"Extracting file %@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]);
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
@@ -292,18 +299,19 @@
         [self disableEmailFields];
     }
     [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",project.dbDirectory.absoluteString ,metadata.filename] shortUrl:NO];
-    labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
+    NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
+    [self showStatus:status andShowProgressBar:YES withProgress:-1];
     [Common showLocalNotificationWithTitle:@"AppBox" andMessage:[NSString stringWithFormat:@"%@ file uploaded.",(fileType == FileTypeIPA)?@"IPA":@"Manifest"]];
 }
 
 -(void)restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath{
     if (fileType == FileTypeIPA) {
-        progressIndicator.doubleValue = progress;
-        labelStatus.stringValue = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        [self showStatus:status andShowProgressBar:YES withProgress:progress];
         NSLog(@"ipa upload progress %@",[NSNumber numberWithFloat:progress]);
     }else if (fileType == FileTypeManifest){
-        progressIndicator.doubleValue = progress;
-        labelStatus.stringValue = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        [self showStatus:status andShowProgressBar:YES withProgress:progress];
         NSLog(@"manifest upload progress %@",[NSNumber numberWithFloat:progress]);
     }
 }
@@ -339,7 +347,8 @@
             }
             if (buttonShutdownMac.state == NSOffState){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    labelStatus.stringValue = project.appShortShareableURL.absoluteString;
+                    NSString *status = [NSString stringWithFormat:@"Last Build URL - %@",project.appShortShareableURL.absoluteString];
+                    [self showStatus:status andShowProgressBar:NO withProgress:0];
                     [self performSegueWithIdentifier:@"ShowLink" sender:self];
                 });
             }else{
@@ -374,10 +383,6 @@
 #pragma mark - Controller Helper
 
 -(void)progressCompletedViewState{
-    labelStatus.hidden = YES;
-    progressIndicator.hidden = YES;
-    viewProgressStatus.hidden = YES;
-    
     //button
     buttonShutdownMac.enabled = YES;
     
@@ -385,16 +390,42 @@
     textFieldEmail.enabled = YES;
 }
 
--(void)progressStartedViewState{
-    //label
-    labelStatus.hidden = NO;
-    progressIndicator.hidden = NO;
-    viewProgressStatus.hidden = NO;
-}
-
 -(void)disableEmailFields{
     textFieldEmail.enabled = NO;
     buttonShutdownMac.enabled = NO;
+}
+
+-(void)resetBuildOptions{
+    [comboTeamId removeAllItems];
+    [comboBuildScheme removeAllItems];
+}
+
+-(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
+    [labelStatus setStringValue:status];
+    [labelStatus setHidden:!(status != nil && status.length > 0)];
+    [progressIndicator setHidden:!showProgressBar];
+    [progressIndicator setIndeterminate:(progress == -1)];
+    [viewProgressStatus setHidden: (labelStatus.hidden && progressIndicator.hidden)];
+    if (progress == -1){
+        if (showProgressBar){
+            [progressIndicator startAnimation:self];
+        }else{
+            [progressIndicator stopAnimation:self];
+        }
+    }else{
+        if (!showProgressBar){
+            [progressIndicator stopAnimation:self];
+        }else{
+            [progressIndicator setDoubleValue:progress];
+        }
+    }
+}
+
+-(void)updateBuildButtonState{
+    BOOL enable = (comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 &&
+                   comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0);
+    [buttonBuild setEnabled:enable];
+    [buttonBuildAndUpload setEnabled:enable];
 }
 
 #pragma mark - Navigation
