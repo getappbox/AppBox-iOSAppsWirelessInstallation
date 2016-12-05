@@ -43,5 +43,9 @@
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
 - (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender;
+- (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender;
+- (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
+- (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender;
+
 
 @end

@@ -11,3 +11,5 @@ cd "${1}"
 
 #Get Build Settings
 xcodebuild -showBuildSettings
+
+echo "endofteamidscript"

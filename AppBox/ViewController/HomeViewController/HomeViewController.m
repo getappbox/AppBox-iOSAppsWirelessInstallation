@@ -43,26 +43,45 @@
 }
 
 #pragma mark - Controllers Actions
-    
+
+//Build Button Action
 - (IBAction)buttonBuildTapped:(NSButton *)sender {
     [self runBuildScript];
 }
-    
+
+//Build and Upload Button Action
 - (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
-    [self runGetSchemeScript];
+    [self runBuildScript];
 }
-    
+
+//Scheme Value Changed
+- (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender {
+
+}
+
+//Team Value Changed
+- (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender {
+    [project setTeamId: sender.stringValue];
+}
+
+//Build Type Changed
+- (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
+    [project setBuildType: sender.stringValue];
+}
+
+//Project Path Handler
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
-    project.fullPath = sender.URL;
-    labelStatus.stringValue = @"Getting project info";
+    [project setFullPath: sender.URL];
     [self progressStartedViewState];
     [self runGetSchemeScript];
 }
 
+//IPA File Path Handler
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
     [self uploadBuildWithIPAFileURL:sender.URL];
 }
-    
+
+//Build PathHandler
 - (IBAction)buildPathHandler:(NSPathControl *)sender {
     [project setBuildDirectory: sender.URL];
 }
@@ -70,27 +89,38 @@
 #pragma mark - Task
 
 - (void)runGetSchemeScript{
+    labelStatus.stringValue = @"Getting project scheme...";
     scriptType = ScriptTypeGetScheme;
     NSString *schemeScriptPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
     [self runTaskWithLaunchPath:schemeScriptPath andArgument:@[project.rootDirectory]];
 }
 
 - (void)runTeamIDScript{
+    labelStatus.stringValue = @"Getting project team id...";
     scriptType = ScriptTypeTeamId;
     NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"TeamIDScript" ofType:@"sh"];
     [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[project.rootDirectory]];
 }
 
 - (void)runBuildScript{
+    labelStatus.stringValue = @"Cleaning...";
     scriptType = ScriptTypeBuild;
+    
+    //Build Script Name
     NSString *buildScriptName;
     if ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]){
         buildScriptName = @"WorkspaceBuildScript";
     }else{
         buildScriptName = @"ProjectBuildScript";
     }
-    NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
+    
+    //Create Export Option Plist
+    [project createExportOpetionPlist];
+    
+    //Build Script
+    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
+    
     //${1} Project Location
     [buildArgument addObject:project.rootDirectory];
     
@@ -103,16 +133,17 @@
     //${4} Archive Location
     [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
     
-//    //${5} Archive Location
-//    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
-//    
-//    //${6} ipa Location
-//    [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
-//    
-    
-    
-    
-    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:buildArgument];
+    //${5} Archive Location
+    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
+
+    //${6} ipa Location
+    [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
+
+    //${7} ipa Location
+    [buildArgument addObject:project.exportOptionsPlistPath.resourceSpecifier];
+
+    //Run Task
+    [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
 }
 
 #pragma mark - Capture task data
@@ -123,7 +154,6 @@
     task.arguments = arguments;
     [self captureStandardOutputWithTask:task];
     [task launch];
-    [task waitUntilExit];
 }
 
 - (void)captureStandardOutputWithTask:(NSTask *)task{
@@ -146,6 +176,7 @@
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     [comboBuildScheme selectItemAtIndex:0];
                     //TODO: Run Team Id Script Here
+                    [self runTeamIDScript];
                     [buttonBuild setEnabled:YES];
                     [buttonBuildAndUpload setEnabled:YES];
                 }else{
@@ -154,11 +185,37 @@
             }
             //Handle Team Id Response
             else if (scriptType == ScriptTypeTeamId){
-                
+                if ([outputString.lowercaseString containsString:@"development_team"]){
+                    NSArray *outputComponent = [outputString componentsSeparatedByString:@"\n"];
+                    NSString *devTeam = [[outputComponent filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS 'DEVELOPMENT_TEAM'"]] firstObject];
+                    if (devTeam != nil) {
+                        project.teamId = [[devTeam componentsSeparatedByString:@" = "] lastObject];
+                        if (project.teamId != nil){
+                            [comboTeamId removeAllItems];
+                            [comboTeamId addItemWithObjectValue:project.teamId];
+                            [comboTeamId selectItemAtIndex:0];
+                            labelStatus.stringValue = @"All Done!! Lets build the Rocket!!";
+                        }
+                    }
+                } else {
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                }
             }
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
-                
+                if ([outputString.lowercaseString containsString:@"archive succeeded"]){
+                    labelStatus.stringValue = @"Creating IPA...";
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
+                    labelStatus.stringValue = @"Archiving...";
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                }else if ([outputString.lowercaseString containsString:@"export succeeded"]){
+                    labelStatus.stringValue = @"Export Succeeded";
+                }else if ([outputString.lowercaseString containsString:@"endofbuildscript"]) {
+                    labelStatus.stringValue = @"";
+                } else {
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                }
             }
         });
     }];
@@ -168,7 +225,6 @@
 
 - (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
     if (ipaFileURL.isFileURL) {
-        [project createUDIDAnsIsNew:YES];
         //Set progress started view state
         [self progressStartedViewState];
         NSString *fromPath = [[ipaFileURL.absoluteString substringFromIndex:7] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
