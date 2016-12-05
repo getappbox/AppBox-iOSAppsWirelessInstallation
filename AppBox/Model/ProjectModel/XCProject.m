@@ -43,10 +43,8 @@
 }
 
 - (void)createExportOpetionPlist{
-    if (self.exportOptionsPlistPath == nil){
-        [self createUDIDAndIsNew:YES];
-        [self createBuildRelatedPathsAndIsNew:YES];
-    }
+    [self createUDIDAndIsNew:YES];
+    [self createBuildRelatedPathsAndIsNew:YES];
     NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
     [exportOption setValue:self.teamId forKey:@"teamID"];
     [exportOption setValue:self.buildType forKey:@"method"];
@@ -61,7 +59,7 @@
     NSString *currentTime = [dateFormat stringFromDate:[[NSDate alloc] init]];
     
     //Build UUID Path
-    NSString *buildUUIDPath = [_buildDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",self.name,self.version, self.build, currentTime]];
+    NSString *buildUUIDPath = [_buildDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@",self.name, currentTime]];
     _buildUUIDDirectory = [NSURL URLWithString:buildUUIDPath];
     [[NSFileManager defaultManager] createDirectoryAtPath:buildUUIDPath withIntermediateDirectories:NO attributes:nil error:nil];
     

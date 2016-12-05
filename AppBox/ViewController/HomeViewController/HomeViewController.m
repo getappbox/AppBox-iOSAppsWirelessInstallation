@@ -209,10 +209,11 @@
                 } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
                     labelStatus.stringValue = @"Archiving...";
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
-                }else if ([outputString.lowercaseString containsString:@"export succeeded"]){
+                } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
                     labelStatus.stringValue = @"Export Succeeded";
-                }else if ([outputString.lowercaseString containsString:@"endofbuildscript"]) {
-                    labelStatus.stringValue = @"";
+                    [self checkIPACreated];
+                } else if ([outputString.lowercaseString containsString:@"export failed"]){
+                    labelStatus.stringValue = @"Export Failed";
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -221,13 +222,23 @@
     }];
 }
 
+-(void)checkIPACreated{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
+            [self uploadBuildWithIPAFileURL:project.ipaFullPath];
+        }else{
+            [self checkIPACreated];
+        }
+    });
+}
+
 #pragma mark - Upload Build
 
 - (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
-    if (ipaFileURL.isFileURL) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaFileURL.resourceSpecifier]) {
         //Set progress started view state
         [self progressStartedViewState];
-        NSString *fromPath = [[ipaFileURL.absoluteString substringFromIndex:7] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
+        NSString *fromPath = ipaFileURL.resourceSpecifier;
         
         //Unzip ipa
         __block NSString *payloadEntry;
@@ -328,6 +339,7 @@
             }
             if (buttonShutdownMac.state == NSOffState){
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    labelStatus.stringValue = project.appShortShareableURL.absoluteString;
                     [self performSegueWithIdentifier:@"ShowLink" sender:self];
                 });
             }else{

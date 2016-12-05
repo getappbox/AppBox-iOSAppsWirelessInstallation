@@ -24,5 +24,3 @@ xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
 #{7} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/exportoption.plist
 
 xcodebuild -exportArchive -archivePath "${5}" -exportPath "${6}" -exportOptionsPlist "${7}"
-
-echo "endofbuildscript"
