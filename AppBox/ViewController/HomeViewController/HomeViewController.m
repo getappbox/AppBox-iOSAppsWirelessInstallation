@@ -222,6 +222,8 @@
                     [self checkIPACreated];
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                } else if ([outputString.lowercaseString containsString:@"archive failed"]){
+                    [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
