@@ -17,6 +17,7 @@ AppBox is a tool for developers to deploy Development and In-house applications 
 ### [Click here to download AppBox.app for your Mac](https://iosappswirelessinstallation.codeplex.com/)
 
 # Upcoming Version Screenshot
+I'm building new version with auto archive, build, test and distribute. You can find the latest code inside development branch.
 ![](http://download-codeplex.sec.s-msft.com/Download?ProjectName=iosappswirelessinstallation&DownloadId=1622305)
 
 # Current Version Screenshot
