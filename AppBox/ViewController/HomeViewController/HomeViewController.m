@@ -13,12 +13,14 @@
     XCProject *project;
     ScriptType scriptType;
     FileType fileType;
+    NSArray *allTeamIds;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     project = [[XCProject alloc] init];
+    allTeamIds = [Common getAllTeamId];
     
     DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
     [session setDelegate:self];
@@ -61,7 +63,14 @@
 
 //Team Value Changed
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender {
-    [project setTeamId: sender.stringValue];
+    NSString *teamId;
+    if (sender.stringValue.length != 10 || [sender.stringValue containsString:@" "]){
+         NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.fullName LIKE %@",sender.stringValue]] firstObject];
+        teamId = [team valueForKey:@"teamId"];
+        [project setTeamId: teamId];
+    }else{
+        [project setTeamId: sender.stringValue];
+    }
     [self updateBuildButtonState];
 }
 
@@ -83,7 +92,8 @@
 
 //IPA File Path Handler
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
-    [self uploadBuildWithIPAFileURL:sender.URL];
+    project.ipaFullPath = sender.URL;
+    [self uploadBuildWithIPAFileURL:project.ipaFullPath];
 }
 
 //Build PathHandler
@@ -156,6 +166,12 @@
     task.arguments = arguments;
     [self captureStandardOutputWithTask:task];
     [task launch];
+    if (scriptType == ScriptTypeTeamId){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [task terminate];
+            NSLog(@"Task teeminating!!");
+        });
+    }
 }
 
 - (void)captureStandardOutputWithTask:(NSTask *)task{
@@ -201,10 +217,12 @@
                             [self showStatus:@"All Done!! Lets build the Rocket!!" andShowProgressBar:NO withProgress:-1];
                         }
                     }
-                } else if ([outputString.lowercaseString containsString:@"endofteamidscript"]) {
-                    if (project.teamId != nil){
-                        [self showStatus:@"Can't able to find Team ID! Please enter manually!" andShowProgressBar:NO withProgress:-1];
-                    }
+                } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
+                    [comboTeamId removeAllItems];
+                    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [comboTeamId addItemWithObjectValue:[obj valueForKey:@"fullName"]];
+                    }];
+                    [self showStatus:@"Can't able to find Team ID! Please enter manually!" andShowProgressBar:NO withProgress:-1];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -246,9 +264,9 @@
 #pragma mark - Upload Build
 
 - (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
-    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaFileURL.resourceSpecifier]) {
-        NSString *fromPath = ipaFileURL.resourceSpecifier;
-        
+    NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fromPath]) {
+        [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
@@ -261,7 +279,7 @@
                 infoPlistPath = entry;
             }
             [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
-            NSLog(@"Extracting file %@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]);
+            [[AppDelegate appDelegate].sessionLog appendFormat:@"\n%@-%@\n",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
                 [self progressCompletedViewState];
@@ -276,12 +294,14 @@
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
-            NSLog(@"ipaInfo - %@", project.ipaInfoPlist);
+            [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist];
             
             //upload ipa
             fileType = FileTypeIPA;
             [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
         }];
+    }else{
+        [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath];
     }
 }
 
@@ -404,7 +424,7 @@
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
-    [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\n%@\n======\n\n",status];
+    [[AppDelegate appDelegate].sessionLog appendFormat:@"\n%@",status];
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
     [progressIndicator setHidden:!showProgressBar];

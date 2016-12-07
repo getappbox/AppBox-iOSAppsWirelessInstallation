@@ -37,13 +37,15 @@
     
     NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
     [manifestDict writeToFile:manifestPath atomically:YES];
+    
+    [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nManifest\n======\n\n %@",manifestDict];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(manifestPath);
     });
 }
 
 - (void)createExportOpetionPlist{
-    [self createUDIDAndIsNew:YES];
     [self createBuildRelatedPathsAndIsNew:YES];
     NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
     [exportOption setValue:self.teamId forKey:@"teamID"];
@@ -98,8 +100,10 @@
     [self setRootDirectory: [Common getFileDirectoryForFilePath:fullPath]];
 }
 
+
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
     _ipaInfoPlist = ipaInfoPlist;
+    [self createUDIDAndIsNew:YES];
     if (self.name == nil){
         [self setName: [ipaInfoPlist valueForKey:@"CFBundleName"]];
     }
@@ -117,6 +121,7 @@
         [self setName: [projectInfo valueForKey:@"name"]];
         [self setSchemes: [projectInfo valueForKey:@"schemes"]];
         [self setTargets: [projectInfo valueForKey:@"targets"]];
+        [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nBuild List Info\n======\n\n %@",buildListInfo];
     }
 }
 
