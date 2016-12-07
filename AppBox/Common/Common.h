@@ -13,6 +13,7 @@
 
 + (void)shutdownSystem;
 + (NSString*)generateUUID;
++ (NSArray *)getAllTeamId;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
