@@ -30,6 +30,11 @@
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
 }
 
+-(void)addSessionLog:(NSString *)sessionLog{
+    [_sessionLog appendFormat: @"\n%@", sessionLog];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SessionLogUpdated object:nil];
+}
+
 #pragma mark - Notification Center Delegate
 -(void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
     [center removeDeliveredNotification:notification];

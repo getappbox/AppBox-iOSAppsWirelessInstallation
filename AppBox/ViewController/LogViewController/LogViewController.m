@@ -17,9 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    [self refreshButtonTapped:nil];
+    [self refreshLog];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLog) name:SessionLogUpdated object:nil];
 }
-- (IBAction)refreshButtonTapped:(NSButton *)sender {
+
+-(void)refreshLog{
     textView.string = [[AppDelegate appDelegate] sessionLog];
     [textView scrollRangeToVisible:NSMakeRange(textView.string.length-1, 1)];
 }

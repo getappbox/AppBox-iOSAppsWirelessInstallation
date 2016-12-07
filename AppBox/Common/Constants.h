@@ -9,11 +9,15 @@
 #ifndef Constants_h
 #define Constants_h
 
-//dev
+//dropbox
 #define DbRoot kDBRootAppFolder
 #define DbAppkey @"86tfx5bu3356fqo"
 #define DbScreatkey @"mq4l1damoz8hwrr"
 
+//notification
+#define SessionLogUpdated @"SessionLogUpdated"
+
+//enums
 typedef enum : NSUInteger {
     FileTypeIPA,
     FileTypeManifest

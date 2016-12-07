@@ -16,6 +16,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 +(AppDelegate *)appDelegate;
+-(void)addSessionLog:(NSString *)sessionLog;
 
 @end
 

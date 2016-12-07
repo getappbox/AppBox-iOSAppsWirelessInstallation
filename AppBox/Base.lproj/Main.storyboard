@@ -544,20 +544,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o0X-vC-NFH">
-                                <rect key="frame" x="-6" y="272" width="87" height="32"/>
-                                <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gKp-c2-YP7">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="refreshButtonTapped:" target="6aM-eF-B0k" id="ziF-VB-E4L"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="o0X-vC-NFH" firstAttribute="top" secondItem="4JE-m3-V2s" secondAttribute="top" id="1SD-RO-XEt"/>
-                            <constraint firstItem="o0X-vC-NFH" firstAttribute="leading" secondItem="4JE-m3-V2s" secondAttribute="leading" id="Si0-IC-vFm"/>
                             <constraint firstItem="kbJ-uL-Hq6" firstAttribute="leading" secondItem="4JE-m3-V2s" secondAttribute="leading" id="ew8-Cs-8j0"/>
                             <constraint firstAttribute="trailing" secondItem="kbJ-uL-Hq6" secondAttribute="trailing" id="kkp-Zl-WVP"/>
                             <constraint firstAttribute="bottom" secondItem="kbJ-uL-Hq6" secondAttribute="bottom" id="o4g-Tt-vPq"/>

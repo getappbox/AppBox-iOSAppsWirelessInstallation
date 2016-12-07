@@ -38,7 +38,7 @@
     NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
     [manifestDict writeToFile:manifestPath atomically:YES];
     
-    [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nManifest\n======\n\n %@",manifestDict];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nManifest\n======\n\n %@",manifestDict]];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(manifestPath);
@@ -121,7 +121,7 @@
         [self setName: [projectInfo valueForKey:@"name"]];
         [self setSchemes: [projectInfo valueForKey:@"schemes"]];
         [self setTargets: [projectInfo valueForKey:@"targets"]];
-        [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nBuild List Info\n======\n\n %@",buildListInfo];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nBuild List Info\n======\n\n %@",buildListInfo]];
     }
 }
 

@@ -182,7 +182,7 @@
         NSData *outputData =  pipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
         NSLog(@"%@", outputString);
-        [[AppDelegate appDelegate].sessionLog appendString:outputString];
+        [[AppDelegate appDelegate] addSessionLog:outputString];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Handle Project Scheme Response
@@ -266,7 +266,7 @@
 - (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
     NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:fromPath]) {
-        [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath]];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
@@ -279,7 +279,7 @@
                 infoPlistPath = entry;
             }
             [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
-            [[AppDelegate appDelegate].sessionLog appendFormat:@"\n%@-%@\n",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]];
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
                 [self progressCompletedViewState];
@@ -294,14 +294,14 @@
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
-            [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist];
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
             
             //upload ipa
             fileType = FileTypeIPA;
             [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
         }];
     }else{
-        [[AppDelegate appDelegate].sessionLog appendFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
     }
 }
 
@@ -424,7 +424,7 @@
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
-    [[AppDelegate appDelegate].sessionLog appendFormat:@"\n%@",status];
+    [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
     [progressIndicator setHidden:!showProgressBar];
