@@ -10,6 +10,6 @@
 cd "${1}"
 
 #Get Build Settings
-xcodebuild -showBuildSettings
+xcodebuild -showBuildSettings | grep DEVELOPMENT_TEAM
 
 echo "endofteamidscript"
