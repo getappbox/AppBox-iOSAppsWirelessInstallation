@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
+		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
+		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
+		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
+		E13946171DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */; };
+		E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E143637A1DF59AFD00FB10CA /* LogViewController.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
+		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
 		E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.m */; };
 		E16437D71D743A4E00CE8B7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D61D743A4E00CE8B7E /* main.m */; };
 		E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */; };
@@ -52,10 +59,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
+		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
+		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
+		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
+		E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ProjectBuildScript.sh; sourceTree = "<group>"; };
+		E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = WorkspaceBuildScript.sh; sourceTree = "<group>"; };
+		E14363791DF59AFD00FB10CA /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		E143637A1DF59AFD00FB10CA /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
 		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLinkViewController.m; sourceTree = "<group>"; };
+		E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxViewController.h; sourceTree = "<group>"; };
+		E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxViewController.m; sourceTree = "<group>"; };
+		E16018F11DEC0EB700E3A377 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E16437CF1D743A4E00CE8B7E /* AppBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E16437D21D743A4E00CE8B7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E16437D31D743A4E00CE8B7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -72,6 +90,7 @@
 		E164389F1D7469CD00CE8B7E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E16438A11D7469D200CE8B7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E16438A31D7469D900CE8B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
 		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
 		E188EA0B1D78485900EBCA52 /* GooglURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglURLShortenerService.h; sourceTree = "<group>"; };
@@ -115,6 +134,24 @@
 			path = DashboardViewController;
 			sourceTree = "<group>";
 		};
+		E139460F1DF2AFC200B3FAD0 /* ProjectModel */ = {
+			isa = PBXGroup;
+			children = (
+				E13946101DF2AFCF00B3FAD0 /* XCProject.h */,
+				E13946111DF2AFCF00B3FAD0 /* XCProject.m */,
+			);
+			path = ProjectModel;
+			sourceTree = "<group>";
+		};
+		E14363781DF59AC700FB10CA /* LogViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E14363791DF59AFD00FB10CA /* LogViewController.h */,
+				E143637A1DF59AFD00FB10CA /* LogViewController.m */,
+			);
+			path = LogViewController;
+			sourceTree = "<group>";
+		};
 		E15C26671D7FD5A9004243B9 /* ShowLinkViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +159,15 @@
 				E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */,
 			);
 			path = ShowLinkViewController;
+			sourceTree = "<group>";
+		};
+		E16018ED1DEC0BA600E3A377 /* DropboxViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */,
+				E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */,
+			);
+			path = DropboxViewController;
 			sourceTree = "<group>";
 		};
 		E16437C61D743A4E00CE8B7E = {
@@ -147,6 +193,7 @@
 				E1CFC65B1D7E7FD9005872BE /* Common */,
 				E16437EC1D743AA100CE8B7E /* Assets */,
 				E16437EB1D743A9300CE8B7E /* Model */,
+				E172E13A1DEEB34D00405EF2 /* Commands */,
 				E16437EA1D743A8800CE8B7E /* ViewController */,
 				E16437D51D743A4E00CE8B7E /* Supporting Files */,
 				E16437D21D743A4E00CE8B7E /* AppDelegate.h */,
@@ -161,6 +208,7 @@
 				E16437D61D743A4E00CE8B7E /* main.m */,
 				E16437E31D743A4E00CE8B7E /* Info.plist */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
+				E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -169,8 +217,10 @@
 			isa = PBXGroup;
 			children = (
 				E16437ED1D743ABE00CE8B7E /* Storyboard */,
+				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
+				E14363781DF59AC700FB10CA /* LogViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 			);
 			path = ViewController;
@@ -179,6 +229,7 @@
 		E16437EB1D743A9300CE8B7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,6 +276,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E172E13A1DEEB34D00405EF2 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */,
+				E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */,
+				E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */,
+				E10B82211DF0498600BBE0CD /* TeamIDScript.sh */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
 		E188EA071D78485900EBCA52 /* Tiny */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +314,7 @@
 			children = (
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
+				E16018F11DEC0EB700E3A377 /* Constants.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -314,6 +377,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */,
+				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
+				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
+				E13946171DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
 				E16437E21D743A4E00CE8B7E /* Main.storyboard in Resources */,
 			);
@@ -329,12 +396,15 @@
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
+				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
+				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
+				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +517,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Tiny",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
 				INFOPLIST_FILE = AppBox/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -468,6 +540,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Tiny",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
 				INFOPLIST_FILE = AppBox/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

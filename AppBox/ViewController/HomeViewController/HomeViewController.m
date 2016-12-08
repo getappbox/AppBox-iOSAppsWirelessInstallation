@@ -10,25 +10,20 @@
 
 
 @implementation HomeViewController{
-    NSString *uuid;
+    XCProject *project;
+    ScriptType scriptType;
     FileType fileType;
-    NSString *ipaFileDBURL;
-    NSString *manifestFileDBURL;
-    NSDictionary *manifestData;
-    NSURL *appShortSharedURL;
-    
-    __block NSDictionary *ipaInfoPlist;
+    NSArray *allTeamIds;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //dev
-    NSString *appKey = @"86tfx5bu3356fqo";
-    NSString *appSecret = @"mq4l1damoz8hwrr";
-    NSString *root = kDBRootAppFolder;
     
-    DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
-    session.delegate = self;
+    project = [[XCProject alloc] init];
+    allTeamIds = [Common getAllTeamId];
+    
+    DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
+    [session setDelegate:self];
     [DBSession setSharedSession:session];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
@@ -36,47 +31,242 @@
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
-    if ([[DBSession sharedSession] isLinked]) {
-        [self updateDropBoxLinkButton];
+    [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
+    [project setBuildDirectory: pathBuild.URL];
+}
+
+- (void)viewWillAppear{
+    [super viewWillAppear];
+    if (![[DBSession sharedSession] isLinked]) {
+        [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
+    }else{
+        [self progressCompletedViewState];
     }
-    
-    textViewEmailContent.font = textFieldEmail.font;
 }
 
 #pragma mark - Controllers Actions
-- (IBAction)buttonLinkWithDropboxTapped:(NSButton *)sender {
-    if ([[DBSession sharedSession] isLinked]) {
-        // The link button turns into an unlink button when you're linked
-        [[DBSession sharedSession] unlinkAll];
-        restClient = nil;
-//        [self performSegueWithIdentifier:@"ShowDashboard" sender:sender];
-        [self updateDropBoxLinkButton];
-    } else {
-        [[DBAuthHelperOSX sharedHelper] authenticate];
+
+//Build Button Action
+- (IBAction)buttonBuildTapped:(NSButton *)sender {
+    [self runBuildScript];
+}
+
+//Build and Upload Button Action
+- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
+    [self runBuildScript];
+}
+
+//Scheme Value Changed
+- (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender {
+    [self updateBuildButtonState];
+}
+
+//Team Value Changed
+- (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender {
+    NSString *teamId;
+    if (sender.stringValue.length != 10 || [sender.stringValue containsString:@" "]){
+         NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.fullName LIKE %@",sender.stringValue]] firstObject];
+        teamId = [team valueForKey:@"teamId"];
+        [project setTeamId: teamId];
+    }else{
+        [project setTeamId: sender.stringValue];
+    }
+    [self updateBuildButtonState];
+}
+
+//Build Type Changed
+- (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
+    if (![project.buildType isEqualToString:sender.stringValue]){
+        [project setBuildType: sender.stringValue];
+        [self updateBuildButtonState];
     }
 }
 
-- (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender {
-    //select ipa file
-    NSOpenPanel * panel = [NSOpenPanel openPanel];
-    [panel setAllowsMultipleSelection:NO];
-    [panel setCanChooseDirectories:NO];
-    [panel setCanChooseFiles:YES];
-    [panel setFloatingPanel:YES];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"ipa",nil]];
-    NSInteger result = [panel runModal];
-    NSURL *ipaFileURL;
-    if(result == NSModalResponseOK){
-         ipaFileURL = [[panel URLs] firstObject];
+//Project Path Handler
+- (IBAction)projectPathHandler:(NSPathControl *)sender {
+    if (![project.fullPath isEqualTo:sender.URL]){
+        [project setFullPath: sender.URL];
+        [self runGetSchemeScript];
     }
-    //check url
-    if (ipaFileURL.isFileURL) {
-        uuid = [Common generateUUID];
-        //Set progress started view state
-        [self progressStartedViewState];
-        labelIPAName.stringValue = ipaFileURL.lastPathComponent;
-        NSString *fromPath = [[ipaFileURL.absoluteString substringFromIndex:7] stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
-        
+}
+
+//IPA File Path Handler
+- (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
+    project.ipaFullPath = sender.URL;
+    [self uploadBuildWithIPAFileURL:project.ipaFullPath];
+}
+
+//Build PathHandler
+- (IBAction)buildPathHandler:(NSPathControl *)sender {
+    if (![project.buildDirectory isEqualTo:sender.URL]){
+        [project setBuildDirectory: sender.URL];
+    }
+}
+
+#pragma mark - Task
+
+- (void)runGetSchemeScript{
+    [self showStatus:@"Getting project scheme..." andShowProgressBar:YES withProgress:-1];
+    scriptType = ScriptTypeGetScheme;
+    NSString *schemeScriptPath = [[NSBundle mainBundle] pathForResource:@"GetSchemeScript" ofType:@"sh"];
+    [self runTaskWithLaunchPath:schemeScriptPath andArgument:@[project.rootDirectory]];
+}
+
+- (void)runTeamIDScript{
+    [self showStatus:@"Getting project team id..." andShowProgressBar:YES withProgress:-1];
+    scriptType = ScriptTypeTeamId;
+    NSString *teamIdScriptPath = [[NSBundle mainBundle] pathForResource:@"TeamIDScript" ofType:@"sh"];
+    [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[project.rootDirectory]];
+}
+
+- (void)runBuildScript{
+    [self showStatus:@"Cleaning..." andShowProgressBar:YES withProgress:-1];
+    scriptType = ScriptTypeBuild;
+    
+    //Build Script Name
+    NSString *buildScriptName = ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]) ? @"WorkspaceBuildScript" : @"ProjectBuildScript";
+    
+    //Create Export Option Plist
+    [project createExportOpetionPlist];
+    
+    //Build Script
+    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
+    NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
+    
+    //${1} Project Location
+    [buildArgument addObject:project.rootDirectory];
+    
+    //${2} Project type workspace/scheme
+    [buildArgument addObject:pathProject.URL.lastPathComponent];
+    
+    //${3} Build Scheme
+    [buildArgument addObject:comboBuildScheme.stringValue];
+    
+    //${4} Archive Location
+    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
+    
+    //${5} Archive Location
+    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
+
+    //${6} ipa Location
+    [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
+
+    //${7} ipa Location
+    [buildArgument addObject:project.exportOptionsPlistPath.resourceSpecifier];
+
+    //Run Task
+    [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
+}
+
+#pragma mark - Capture task data
+
+- (void)runTaskWithLaunchPath:(NSString *)launchPath andArgument:(NSArray *)arguments{
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = launchPath;
+    task.arguments = arguments;
+    [self captureStandardOutputWithTask:task];
+    [task launch];
+    if (scriptType == ScriptTypeTeamId){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [task terminate];
+            NSLog(@"Task teeminating!!");
+        });
+    }
+}
+
+- (void)captureStandardOutputWithTask:(NSTask *)task{
+    NSPipe *pipe = [[NSPipe alloc] init];
+    [task setStandardOutput:pipe];
+    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSData *outputData =  pipe.fileHandleForReading.availableData;
+        NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", outputString);
+        [[AppDelegate appDelegate] addSessionLog:outputString];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            //Handle Project Scheme Response
+            if (scriptType == ScriptTypeGetScheme){
+                NSError *error;
+                NSDictionary *buildList = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
+                if (buildList != nil){
+                    [project setBuildListInfo:buildList];
+                    [progressIndicator setDoubleValue:50];
+                    [comboBuildScheme removeAllItems];
+                    [comboBuildScheme addItemsWithObjectValues:project.schemes];
+                    [comboBuildScheme selectItemAtIndex:0];
+                    
+                    //Run Team Id Script
+                    [self runTeamIDScript];
+                }else{
+                    [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
+                }
+            }
+            
+            //Handle Team Id Response
+            else if (scriptType == ScriptTypeTeamId){
+                if ([outputString.lowercaseString containsString:@"development_team"]){
+                    NSArray *outputComponent = [outputString componentsSeparatedByString:@"\n"];
+                    NSString *devTeam = [[outputComponent filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS 'DEVELOPMENT_TEAM'"]] firstObject];
+                    if (devTeam != nil) {
+                        project.teamId = [[devTeam componentsSeparatedByString:@" = "] lastObject];
+                        if (project.teamId != nil){
+                            [comboTeamId removeAllItems];
+                            [comboTeamId addItemWithObjectValue:project.teamId];
+                            [comboTeamId selectItemAtIndex:0];
+                            [self showStatus:@"All Done!! Lets build the Rocket!!" andShowProgressBar:NO withProgress:-1];
+                        }
+                    }
+                } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
+                    [comboTeamId removeAllItems];
+                    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [comboTeamId addItemWithObjectValue:[obj valueForKey:@"fullName"]];
+                    }];
+                    [self showStatus:@"Can't able to find Team ID! Please enter manually!" andShowProgressBar:NO withProgress:-1];
+                } else {
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                }
+            }
+            
+            //Handle Build Response
+            else if (scriptType == ScriptTypeBuild){
+                if ([outputString.lowercaseString containsString:@"archive succeeded"]){
+                    [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
+                    [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
+                    [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
+                    [self checkIPACreated];
+                } else if ([outputString.lowercaseString containsString:@"export failed"]){
+                    [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                } else if ([outputString.lowercaseString containsString:@"archive failed"]){
+                    [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
+                } else {
+                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                }
+            }
+        });
+    }];
+}
+
+-(void)checkIPACreated{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
+            [self uploadBuildWithIPAFileURL:project.ipaFullPath];
+        }else{
+            [self checkIPACreated];
+        }
+    });
+}
+
+#pragma mark - Upload Build
+
+- (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
+    NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:fromPath]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath]];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
@@ -84,34 +274,40 @@
             if ([[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
                 payloadEntry = entry;
             }
-            if ([[entry lastPathComponent].lowercaseString isEqualToString:@"info.plist"]) {
+            NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
+            if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
                 infoPlistPath = entry;
             }
-            NSLog(@"Extracting file %@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]);
+            [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
+                [self progressCompletedViewState];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                 return;
             }
             
             //get info.plist
-            ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
-            if (ipaInfoPlist == nil) {
+            project.ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
+            if (project.ipaInfoPlist == nil) {
+                [self progressCompletedViewState];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
-            NSLog(@"ipaInfo - %@", ipaInfoPlist);
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
             
             //upload ipa
             fileType = FileTypeIPA;
-            [restClient uploadFile:ipaFileURL.lastPathComponent toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:fromPath];
+            [self.restClient uploadFile:ipaFileURL.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
         }];
+    }else{
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
     }
 }
 
-#pragma mark - DBSession Delegate
+
+#pragma mark - DB Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
-    [Common showAlertWithTitle:@"Authorization Failed" andMessage:@""];
 }
 
 #pragma mark - RestClient Delegate
@@ -125,19 +321,20 @@
     if (fileType == FileTypeIPA){
         [self disableEmailFields];
     }
-    [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",[self getDBDirForThisVersion],metadata.filename] shortUrl:NO];
-    labelStatus.stringValue = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
+    [restClient loadSharableLinkForFile:[NSString stringWithFormat:@"%@/%@",project.dbDirectory.absoluteString ,metadata.filename] shortUrl:NO];
+    NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
+    [self showStatus:status andShowProgressBar:YES withProgress:-1];
     [Common showLocalNotificationWithTitle:@"AppBox" andMessage:[NSString stringWithFormat:@"%@ file uploaded.",(fileType == FileTypeIPA)?@"IPA":@"Manifest"]];
 }
 
 -(void)restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath{
     if (fileType == FileTypeIPA) {
-        progressIndicator.doubleValue = progress;
-        labelStatus.stringValue = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        [self showStatus:status andShowProgressBar:YES withProgress:progress];
         NSLog(@"ipa upload progress %@",[NSNumber numberWithFloat:progress]);
     }else if (fileType == FileTypeManifest){
-        progressIndicator.doubleValue = progress;
-        labelStatus.stringValue = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        [self showStatus:status andShowProgressBar:YES withProgress:progress];
         NSLog(@"manifest upload progress %@",[NSNumber numberWithFloat:progress]);
     }
 }
@@ -148,25 +345,33 @@
     [self progressCompletedViewState];
 }
 
--(void)restClient:(DBRestClient *)restClient loadedSharableLink:(NSString *)link forFile:(NSString *)path{
+-(void)restClient:(DBRestClient *)restClientLocal loadedSharableLink:(NSString *)link forFile:(NSString *)path{
     if (fileType == FileTypeIPA) {
         NSString *shareableLink = [link stringByReplacingCharactersInRange:NSMakeRange(link.length-1, 1) withString:@"1"];
-        [self createAndUploadManifestWithInfo:ipaInfoPlist andIPAURL:shareableLink];
+        project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
+        [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSString *manifestPath) {
+            fileType = FileTypeManifest;
+            [restClientLocal uploadFile:@"manifest.plist" toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:manifestPath];
+        }];
+
     }else if (fileType == FileTypeManifest){
         NSString *shareableLink = [link substringToIndex:link.length-5];
         NSLog(@"manifest link - %@",shareableLink);
+        project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         NSString *requiredLink = [shareableLink componentsSeparatedByString:@"dropbox.com"][1];
         
         //create short url
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
         [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
             NSLog(@"Short URL - %@", shortURL);
-            appShortSharedURL = shortURL;
+            project.appShortShareableURL = shortURL;
             if (textFieldEmail.stringValue.length > 0) {
-                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
+//                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
             }
             if (buttonShutdownMac.state == NSOffState){
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *status = [NSString stringWithFormat:@"Last Build URL - %@",project.appShortShareableURL.absoluteString];
+                    [self showStatus:status andShowProgressBar:NO withProgress:0];
                     [self performSegueWithIdentifier:@"ShowLink" sender:self];
                 });
             }else{
@@ -181,9 +386,8 @@
 
 #pragma mark - Dropbox Helper
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    [self updateDropBoxLinkButton];
     if ([[DBSession sharedSession] isLinked]) {
-        // You can now start using the API!
+        [self progressCompletedViewState];
     }
 }
 
@@ -200,92 +404,58 @@
 }
 
 #pragma mark - Controller Helper
-- (void)updateDropBoxLinkButton{
-    if ([[DBSession sharedSession] isLinked]) {
-        buttonSelectIPAFile.enabled = YES;
-        buttonLinkWithDropbox.title = @"Unlink Dropbox";
-        [self restClient];
-    } else {
-        buttonSelectIPAFile.enabled = NO;
-        buttonLinkWithDropbox.title = @"Link Dropbox";
-        buttonLinkWithDropbox.state = [[DBAuthHelperOSX sharedHelper] isLoading] ? NSOffState : NSOnState;
-    }
-}
-
--(void)createAndUploadManifestWithInfo:(NSDictionary *)infoPlist andIPAURL:(NSString *)ipaURL{
-    NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
-    [assetsDict setValue:ipaURL forKey:@"url"];
-    [assetsDict setValue:@"software-package" forKey:@"kind"];
-    
-    NSMutableDictionary *metadataDict = [[NSMutableDictionary alloc] init];
-    [metadataDict setValue:@"software" forKey:@"kind"];
-    [metadataDict setValue:[ipaInfoPlist valueForKey:@"CFBundleName"] forKey:@"title"];
-    [metadataDict setValue:[ipaInfoPlist valueForKey:@"CFBundleIdentifier"] forKey:@"bundle-identifier"];
-    [metadataDict setValue:[ipaInfoPlist valueForKey:@"CFBundleShortVersionString"] forKey:@"bundle-version"];
-    
-    NSMutableDictionary *mainItemDict = [[NSMutableDictionary alloc] init];
-    [mainItemDict setValue:[NSArray arrayWithObjects:assetsDict, nil] forKey:@"assets"];
-    [mainItemDict setValue:metadataDict forKey:@"metadata"];
-    
-    NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
-    [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
-    
-    NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
-    [manifestDict writeToFile:manifestPath atomically:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        fileType = FileTypeManifest;
-        [restClient uploadFile:@"manifest.plist" toPath:[self getDBDirForThisVersion] withParentRev:nil fromPath:manifestPath];
-    });
-}
-
--(NSString *)getDBDirForThisVersion{
-    NSString *toPath = [NSString stringWithFormat:@"/%@-ver%@(%@)-%@",[ipaInfoPlist valueForKey:@"CFBundleName"],[ipaInfoPlist valueForKey:@"CFBundleShortVersionString"],[ipaInfoPlist valueForKey:@"CFBundleVersion"],uuid];
-    return toPath;
-}
-
 
 -(void)progressCompletedViewState{
-    labelStatus.hidden = YES;
-    labelIPAName.hidden = YES;
-    progressIndicator.hidden = YES;
-    viewProgressStatus.hidden = YES;
-    
     //button
-    buttonSelectIPAFile.enabled = YES;
-    buttonLinkWithDropbox.enabled = YES;
     buttonShutdownMac.enabled = YES;
     
     //email
     textFieldEmail.enabled = YES;
-    textFieldEmailSubject.enabled = YES;
-    textViewEmailContent.editable = YES;
-}
-
--(void)progressStartedViewState{
-    //label
-    labelStatus.hidden = NO;
-    labelIPAName.hidden = NO;
-    progressIndicator.hidden = NO;
-    viewProgressStatus.hidden = NO;
-    
-    //button
-    buttonSelectIPAFile.enabled = NO;
-    buttonLinkWithDropbox.enabled = NO;
 }
 
 -(void)disableEmailFields{
     textFieldEmail.enabled = NO;
     buttonShutdownMac.enabled = NO;
-    textFieldEmailSubject.enabled = NO;
-    textViewEmailContent.editable = NO;
+}
+
+-(void)resetBuildOptions{
+    [comboTeamId removeAllItems];
+    [comboBuildScheme removeAllItems];
+}
+
+-(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
+    [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
+    [labelStatus setStringValue:status];
+    [labelStatus setHidden:!(status != nil && status.length > 0)];
+    [progressIndicator setHidden:!showProgressBar];
+    [progressIndicator setIndeterminate:(progress == -1)];
+    [viewProgressStatus setHidden: (labelStatus.hidden && progressIndicator.hidden)];
+    if (progress == -1){
+        if (showProgressBar){
+            [progressIndicator startAnimation:self];
+        }else{
+            [progressIndicator stopAnimation:self];
+        }
+    }else{
+        if (!showProgressBar){
+            [progressIndicator stopAnimation:self];
+        }else{
+            [progressIndicator setDoubleValue:progress];
+        }
+    }
+}
+
+-(void)updateBuildButtonState{
+    BOOL enable = (comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 &&
+                   comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0);
+    [buttonBuild setEnabled:enable];
+    [buttonBuildAndUpload setEnabled:enable];
 }
 
 #pragma mark - Navigation
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
-        ((ShowLinkViewController *)segue.destinationController).appLink = appShortSharedURL.absoluteString;
+        ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
     }
 }
-
-
 @end

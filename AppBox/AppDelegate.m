@@ -19,10 +19,20 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     [center setDelegate:self];
+    self.sessionLog = [[NSMutableString alloc] init];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
++(AppDelegate *)appDelegate{
+    return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
+}
+
+-(void)addSessionLog:(NSString *)sessionLog{
+    [_sessionLog appendFormat: @"\n%@", sessionLog];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SessionLogUpdated object:nil];
 }
 
 #pragma mark - Notification Center Delegate

@@ -7,40 +7,45 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <DropboxOSX/DropboxOSX.h>
-#import <ZipArchive/ZipArchive.h>
-
-#import "Common.h"
-#import "Tiny.h"
-#import "GooglURLShortenerService.h"
 #import "ShowLinkViewController.h"
-
-typedef enum : NSUInteger {
-    FileTypeIPA,
-    FileTypeManifest
-} FileType;
+#import "DropboxViewController.h"
 
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
+    //Dropbox
     DBRestClient *restClient;
-    IBOutlet NSTextField *labelIPAName;
-    IBOutlet NSButton *buttonSelectIPAFile;
-    IBOutlet NSButton *buttonLinkWithDropbox;
     
+    //Build
+    IBOutlet NSPathControl *pathProject;
+    IBOutlet NSPathControl *pathBuild;
+    IBOutlet NSComboBox *comboBuildScheme;
+    IBOutlet NSComboBox *comboTeamId;
+    IBOutlet NSComboBox *comboBuildType;
+    IBOutlet NSButton *buttonBuild;
+    IBOutlet NSButton *buttonBuildAndUpload;
+    
+    //Upload IPA
+    IBOutlet NSPathControl *pathIPAFile;
+    
+    //Mail and Shutdown
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
-    IBOutlet NSTextField *textFieldEmailSubject;
-    IBOutlet NSTextView *textViewEmailContent;
     
-    
+    //Status
     IBOutlet NSTextField *labelStatus;
     IBOutlet NSView *viewProgressStatus;
     IBOutlet NSProgressIndicator *progressIndicator;    
 }
 
-
-
 - (DBRestClient *)restClient;
-- (IBAction)buttonLinkWithDropboxTapped:(NSButton *)sender;
-- (IBAction)buttonSelectIPAFileTapped:(NSButton *)sender;
+    
+- (IBAction)buttonBuildTapped:(NSButton *)sender;
+- (IBAction)buildPathHandler:(NSPathControl *)sender;
+- (IBAction)projectPathHandler:(NSPathControl *)sender;
+- (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
+- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender;
+- (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender;
+- (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
+- (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender;
+
 
 @end
