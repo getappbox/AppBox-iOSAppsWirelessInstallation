@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?branch=master)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
+[![Build Status](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?branch=development)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
+
 # AppBox - iOS Apps Wireless Installation
 AppBox is a tool for developers to deploy Development and In-house applications directly to the devices from your Dropbox account.
 
