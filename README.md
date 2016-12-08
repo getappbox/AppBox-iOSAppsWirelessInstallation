@@ -1,3 +1,4 @@
+[![Gratipay](https://img.shields.io/gratipay/vineetchoudhary.svg)](https://gratipay.com/~vineetchoudhary)
 [![Build Status](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?branch=master)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 ![MIT Lincense](https://img.shields.io/badge/license-MIT-blue.svg)
