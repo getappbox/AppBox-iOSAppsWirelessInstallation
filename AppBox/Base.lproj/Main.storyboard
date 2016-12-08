@@ -194,11 +194,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="604" height="482"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yWS-VV-dkg">
-                                        <rect key="frame" x="8" y="182" width="176" height="21"/>
+                                        <rect key="frame" x="8" y="182" width="244" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Shg-8h-5DW"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="&quot;OR&quot; Upload IPA Only" placeholderString="" id="8Nv-5P-LUi">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="&quot;OR&quot; Upload IPA Only (Stable)" placeholderString="" id="8Nv-5P-LUi">
                                             <font key="font" metaFont="systemSemibold" size="17"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -263,11 +263,11 @@
                                         <rect key="frame" x="0.0" y="129" width="604" height="5"/>
                                     </box>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lbq-OO-sRU">
-                                        <rect key="frame" x="8" y="451" width="170" height="21"/>
+                                        <rect key="frame" x="8" y="451" width="446" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="nld-pk-Cgs"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build and Upload IPA" placeholderString="" id="vjW-hx-Zky">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build and Upload IPA (Alpha, Req- Xcode 8+ as Default)" placeholderString="" id="vjW-hx-Zky">
                                             <font key="font" metaFont="systemSemibold" size="17"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
