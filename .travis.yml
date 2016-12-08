@@ -1,0 +1,3 @@
+language: objective-c
+xcode_project: AppBox-iOSAppsWirelessInstallation/AppBox.xcodeproj # path to your xcodeproj folder
+osx_image: xcode8.1
