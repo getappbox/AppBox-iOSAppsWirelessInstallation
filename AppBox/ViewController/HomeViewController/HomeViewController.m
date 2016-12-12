@@ -74,10 +74,23 @@
     [self updateBuildButtonState];
 }
 - (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender {
-    [self performSegueWithIdentifier:@"MailView" sender:self];
+    
 }
 
 - (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
+    if (sender.state == NSOnState){
+        [sender setState:NSOffState];
+        [self performSegueWithIdentifier:@"MailView" sender:self];
+    }else{
+        [self enableMailField:NO];
+    }
+}
+
+- (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
+    [buttonShutdownMac setEnabled:[Common isValidEmail:sender.stringValue]];
+}
+
+- (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
 }
 
 //Build Type Changed
@@ -369,23 +382,17 @@
         //create short url
         GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
         [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",requiredLink]] withService:service completion:^(NSURL *shortURL, NSError *error) {
-            NSLog(@"Short URL - %@", shortURL);
             project.appShortShareableURL = shortURL;
-            if (textFieldEmail.stringValue.length > 0) {
-//                [Common sendEmailToAddress:textFieldEmail.stringValue withSubject:textFieldEmailSubject.stringValue andBody:[NSString stringWithFormat:@"%@\n\n%@\n\n---\n%@",textViewEmailContent.string,shortURL.absoluteString,@"Build generated and distributed by AppBox - http://bit.ly/GetAppBox"]];
-            }
-            if (buttonShutdownMac.state == NSOffState){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSString *status = [NSString stringWithFormat:@"Last Build URL - %@",project.appShortShareableURL.absoluteString];
-                    [self showStatus:status andShowProgressBar:NO withProgress:0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *status = [NSString stringWithFormat:@"Last Build URL - %@",project.appShortShareableURL.absoluteString];
+                [self showStatus:status andShowProgressBar:NO withProgress:0];
+                if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
+                    [self performSegueWithIdentifier:@"MailView" sender:self];
+                }else{
                     [self performSegueWithIdentifier:@"ShowLink" sender:self];
-                });
-            }else{
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(600 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [Common shutdownSystem];
-                });
-            }
-            [self progressCompletedViewState];
+                }
+                [self progressCompletedViewState];
+            });
         }];
     }
 }
@@ -412,16 +419,11 @@
 #pragma mark - Controller Helper
 
 -(void)progressCompletedViewState{
-    //button
-    buttonShutdownMac.enabled = YES;
-    
-    //email
-    textFieldEmail.enabled = YES;
+
 }
 
 -(void)disableEmailFields{
-    textFieldEmail.enabled = NO;
-    buttonShutdownMac.enabled = NO;
+    
 }
 
 -(void)resetBuildOptions{
@@ -464,7 +466,11 @@
 }
 
 -(void)mailSentWithWebView:(WebView *)webView{
-    
+    if (buttonShutdownMac.state == NSOnState){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [Common shutdownSystem];
+        });
+    }
 }
 
 -(void)invalidPerametersWithWebView:(WebView *)webView{
@@ -472,7 +478,13 @@
 }
 
 -(void)loginSuccessWithWebView:(WebView *)webView{
-    
+    [buttonSendMail setState:NSOnState];
+    [self enableMailField:YES];
+}
+
+-(void)enableMailField:(BOOL)enable{
+    [textFieldEmail setEnabled:enable];
+    [textFieldMessage setEnabled:enable];
 }
 
 #pragma mark - Navigation
@@ -482,7 +494,12 @@
     }else if([segue.destinationController isKindOfClass:[MailViewController class]]){
         MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
         [mailViewController setDelegate:self];
-        [mailViewController setUrl: @"https://tryapp.github.io/mail"];
+        if (project.appShortShareableURL == nil){
+            [mailViewController setUrl: @"https://tryapp.github.io/mail"];
+        }else{
+            NSString *mailURL = [project buildMailURLStringForEmailId:textFieldEmail.stringValue andMessage:textFieldMessage.stringValue];
+            [mailViewController setUrl: mailURL];
+        }
     }
 }
 @end

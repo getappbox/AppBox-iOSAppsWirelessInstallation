@@ -9,6 +9,9 @@
 #ifndef Constants_h
 #define Constants_h
 
+//Base URL's
+#define MailerBaseURL @"https://tryapp.github.io/mail"
+
 //dropbox
 #define DbRoot kDBRootAppFolder
 #define DbAppkey @"86tfx5bu3356fqo"

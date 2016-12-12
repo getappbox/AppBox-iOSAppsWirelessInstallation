@@ -31,6 +31,7 @@
     IBOutlet NSButton *buttonSendMail;
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
+    IBOutlet NSTextField *textFieldMessage;
     
     //Status
     IBOutlet NSTextField *labelStatus;
@@ -50,6 +51,8 @@
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender;
 - (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender;
 - (IBAction)sendMailOptionValueChanged:(NSButton *)sender;
+- (IBAction)textFieldMailValueChanged:(NSTextField *)sender;
+- (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender;
 
 
 @end

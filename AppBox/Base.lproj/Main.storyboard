@@ -251,7 +251,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="bRI-kN-qUq"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="check" title="Send mail and Shutdown mac" bezelStyle="regularSquare" imagePosition="right" inset="2" id="pJ3-Ut-ZP2">
+                                        <buttonCell key="cell" type="check" title="Send mail and Shutdown mac" bezelStyle="regularSquare" imagePosition="right" enabled="NO" inset="2" id="pJ3-Ut-ZP2">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="systemSemibold" size="17"/>
                                         </buttonCell>
@@ -264,11 +264,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="6aQ-Mu-xKb"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="username@example.com" drawsBackground="YES" id="1CV-KM-paZ">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="username@example.com" drawsBackground="YES" id="1CV-KM-paZ">
                                             <font key="font" metaFont="systemLight" size="16"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="textFieldMailValueChanged:" target="lct-wo-jYo" id="7UD-SM-bBp"/>
+                                        </connections>
                                     </textField>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0YM-Jf-F5s">
                                         <rect key="frame" x="0.0" y="256" width="604" height="5"/>
@@ -439,11 +442,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="RCk-ui-gGv"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="3kO-iB-a5g">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="3kO-iB-a5g">
                                             <font key="font" metaFont="systemLight" size="16"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="textFieldDevMessageValueChanged:" target="lct-wo-jYo" id="0sl-xk-HWS"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -534,6 +540,7 @@
                         <outlet property="pathProject" destination="sWE-nW-t4X" id="5es-lc-EuA"/>
                         <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
                         <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
+                        <outlet property="textFieldMessage" destination="BAA-rE-fh4" id="ACK-7P-3CG"/>
                         <outlet property="viewProgressStatus" destination="HNZ-et-sSs" id="xiM-U2-QxA"/>
                         <segue destination="dq2-4K-v2z" kind="sheet" identifier="ShowLink" id="is8-1E-ZPa"/>
                         <segue destination="xJf-6e-3AH" kind="sheet" identifier="ShowDashboard" id="gPq-Jz-5LR"/>
