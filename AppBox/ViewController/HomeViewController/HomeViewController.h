@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "ShowLinkViewController.h"
+#import "MailViewController.h"
 #import "DropboxViewController.h"
+#import "ShowLinkViewController.h"
 
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
     //Dropbox
@@ -46,6 +47,7 @@
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender;
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender;
+- (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender;
 
 
 @end

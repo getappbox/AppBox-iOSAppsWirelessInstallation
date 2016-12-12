@@ -73,6 +73,9 @@
     }
     [self updateBuildButtonState];
 }
+- (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender {
+    [self performSegueWithIdentifier:@"MailView" sender:self];
+}
 
 //Build Type Changed
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
@@ -456,6 +459,8 @@
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
+    }else if([segue.destinationController isKindOfClass:[MailViewController class]]){
+        ((MailViewController *)segue.destinationController).url = @"https://tryapp.github.io/mail";
     }
 }
 @end
