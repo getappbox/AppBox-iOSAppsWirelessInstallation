@@ -17,6 +17,17 @@
     }
 }
 
+-(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message{
+    NSMutableString *mailString = [NSMutableString stringWithString:MailerBaseURL];
+    [mailString appendFormat:@"?to=%@",mailId];
+    [mailString appendFormat:@"&app=%@",self.name];
+    [mailString appendFormat:@"&ver=%@",self.version];
+    [mailString appendFormat:@"&build=%@",self.build];
+    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.absoluteString];
+    [mailString appendFormat:@"&devmsg=%@",message];
+    return mailString;
+}
+
 -(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *manifestPath))completion{
     NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
     [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
@@ -110,6 +121,8 @@
     [self setBuild: [ipaInfoPlist valueForKey:@"CFBundleVersion"]];
     [self setIdentifer:[self.ipaInfoPlist valueForKey:@"CFBundleIdentifier"]];
     [self setVersion: [ipaInfoPlist valueForKey:@"CFBundleShortVersionString"]];
+
+    //Build URL for DropBox
     NSString *toPath = [NSString stringWithFormat:@"/%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid];
     [self setDbDirectory:[NSURL URLWithString:toPath]];
 }

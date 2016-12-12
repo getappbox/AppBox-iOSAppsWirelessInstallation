@@ -14,6 +14,7 @@
 + (void)shutdownSystem;
 + (NSString*)generateUUID;
 + (NSArray *)getAllTeamId;
++(BOOL) isValidEmail:(NSString *)checkString;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;

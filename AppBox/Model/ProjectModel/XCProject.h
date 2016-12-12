@@ -11,6 +11,7 @@
 @interface XCProject : NSObject
 
 //Project Basic Properties
+@property(nonatomic) BOOL isBuildOnly;
 @property(nonatomic, retain) NSString *uuid;
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *version;
@@ -44,7 +45,9 @@
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
 
-- (void)createExportOpetionPlist;
+-(void)createExportOpetionPlist;
 -(void)createUDIDAndIsNew:(BOOL)isNew;
 -(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *mainfestPath))completion;
+
+-(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
 @end
