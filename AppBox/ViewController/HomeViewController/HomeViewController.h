@@ -11,7 +11,7 @@
 #import "DropboxViewController.h"
 #import "ShowLinkViewController.h"
 
-@interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate>{
+@interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate, MailDelegate>{
     //Dropbox
     DBRestClient *restClient;
     
@@ -28,6 +28,7 @@
     IBOutlet NSPathControl *pathIPAFile;
     
     //Mail and Shutdown
+    IBOutlet NSButton *buttonSendMail;
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
     
@@ -48,6 +49,7 @@
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender;
 - (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender;
+- (IBAction)sendMailOptionValueChanged:(NSButton *)sender;
 
 
 @end

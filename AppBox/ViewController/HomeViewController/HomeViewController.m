@@ -77,6 +77,9 @@
     [self performSegueWithIdentifier:@"MailView" sender:self];
 }
 
+- (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
+}
+
 //Build Type Changed
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
     if (![project.buildType isEqualToString:sender.stringValue]){
@@ -455,12 +458,31 @@
     [buttonBuildAndUpload setEnabled:enable];
 }
 
+#pragma mark - MailDelegate
+-(void)mailViewLoadedWithWebView:(WebView *)webView{
+    
+}
+
+-(void)mailSentWithWebView:(WebView *)webView{
+    
+}
+
+-(void)invalidPerametersWithWebView:(WebView *)webView{
+    
+}
+
+-(void)loginSuccessWithWebView:(WebView *)webView{
+    
+}
+
 #pragma mark - Navigation
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
     }else if([segue.destinationController isKindOfClass:[MailViewController class]]){
-        ((MailViewController *)segue.destinationController).url = @"https://tryapp.github.io/mail";
+        MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
+        [mailViewController setDelegate:self];
+        [mailViewController setUrl: @"https://tryapp.github.io/mail"];
     }
 }
 @end
