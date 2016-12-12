@@ -37,6 +37,7 @@
 		E188EA171D78570300EBCA52 /* CMDQueryStringSerialization.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E188EA181D78570800EBCA52 /* ISO8601.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA151D7856D200EBCA52 /* ISO8601.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
+		E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB1C1DFED95000BD7F11 /* UserData.m */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
 		E1FB91D91D78055200F8DF46 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; };
 		E1FB91DA1D78087A00F8DF46 /* ZipArchive.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -103,6 +104,8 @@
 		E188EA151D7856D200EBCA52 /* ISO8601.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISO8601.framework; sourceTree = "<group>"; };
 		E18DCB151DFE729300BD7F11 /* MailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailViewController.h; sourceTree = "<group>"; };
 		E18DCB161DFE729300BD7F11 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
+		E18DCB1B1DFED95000BD7F11 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		E18DCB1C1DFED95000BD7F11 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		E1FB91D81D78055200F8DF46 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
@@ -328,6 +331,8 @@
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
+				E18DCB1B1DFED95000BD7F11 /* UserData.h */,
+				E18DCB1C1DFED95000BD7F11 /* UserData.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
+				E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

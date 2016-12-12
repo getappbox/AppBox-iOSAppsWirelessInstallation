@@ -171,9 +171,10 @@
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="538" y="299" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="800" height="500"/>
+                        <value key="minFullScreenContentSize" type="size" width="800" height="500"/>
                     </window>
                     <connections>
                         <segue destination="lct-wo-jYo" kind="relationship" relationship="window.shadowedContentViewController" id="l3O-zi-UzH"/>
@@ -188,11 +189,11 @@
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="604" height="517"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="517"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="604" height="517"/>
+                                <rect key="frame" x="0.0" y="0.0" width="800" height="517"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yWS-VV-dkg">
                                         <rect key="frame" x="8" y="217" width="244" height="21"/>
@@ -206,7 +207,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView hidden="YES" appearanceType="aqua" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-et-sSs">
-                                        <rect key="frame" x="0.0" y="0.0" width="604" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="800" height="40"/>
                                         <subviews>
                                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" displayedWhenStopped="NO" bezeled="NO" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ha-Sj1">
                                                 <rect key="frame" x="10" y="10" width="20" height="20"/>
@@ -216,7 +217,7 @@
                                                 </constraints>
                                             </progressIndicator>
                                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IgI-OA-XP9">
-                                                <rect key="frame" x="38" y="10" width="553" height="21"/>
+                                                <rect key="frame" x="38" y="10" width="749" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Checking IPA..." id="gjX-y7-LlX">
                                                     <font key="font" metaFont="systemLight" size="17"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -260,7 +261,7 @@
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RKc-Si-2CZ">
-                                        <rect key="frame" x="15" y="96" width="574" height="25"/>
+                                        <rect key="frame" x="15" y="96" width="770" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="6aQ-Mu-xKb"/>
                                         </constraints>
@@ -274,13 +275,13 @@
                                         </connections>
                                     </textField>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0YM-Jf-F5s">
-                                        <rect key="frame" x="0.0" y="256" width="604" height="5"/>
+                                        <rect key="frame" x="0.0" y="256" width="800" height="5"/>
                                     </box>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="52J-8G-TcO">
-                                        <rect key="frame" x="0.0" y="38" width="604" height="5"/>
+                                        <rect key="frame" x="0.0" y="38" width="800" height="5"/>
                                     </box>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="3gF-GO-Agw">
-                                        <rect key="frame" x="0.0" y="164" width="604" height="5"/>
+                                        <rect key="frame" x="0.0" y="164" width="800" height="5"/>
                                     </box>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lbq-OO-sRU">
                                         <rect key="frame" x="8" y="486" width="446" height="21"/>
@@ -302,7 +303,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sWE-nW-t4X">
-                                        <rect key="frame" x="158" y="453" width="434" height="26"/>
+                                        <rect key="frame" x="158" y="453" width="630" height="26"/>
                                         <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select Project/Workspace to Build" pathStyle="popUp" id="CKg-i9-cmw">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -340,7 +341,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o1I-JX-iG3">
-                                        <rect key="frame" x="158" y="419" width="434" height="26"/>
+                                        <rect key="frame" x="158" y="419" width="630" height="26"/>
                                         <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Specifies the destination for the build" pathStyle="popUp" id="YUx-Sr-oRL">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -353,7 +354,7 @@
                                         </connections>
                                     </pathControl>
                                     <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJn-2P-Wer">
-                                        <rect key="frame" x="158" y="384" width="437" height="28"/>
+                                        <rect key="frame" x="158" y="384" width="633" height="28"/>
                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="bwD-TP-3YL">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -364,7 +365,7 @@
                                         </connections>
                                     </comboBox>
                                     <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dsk-nI-Owd">
-                                        <rect key="frame" x="158" y="350" width="437" height="28"/>
+                                        <rect key="frame" x="158" y="350" width="633" height="28"/>
                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="14l-XR-BJi">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -383,7 +384,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XTv-oc-mvs">
-                                        <rect key="frame" x="158" y="316" width="437" height="28"/>
+                                        <rect key="frame" x="158" y="316" width="633" height="28"/>
                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="Iff-uQ-638">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -402,7 +403,7 @@
                                         </connections>
                                     </comboBox>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ozf-Q6-RXW">
-                                        <rect key="frame" x="372" y="272" width="71" height="32"/>
+                                        <rect key="frame" x="568" y="272" width="71" height="32"/>
                                         <buttonCell key="cell" type="push" title="Build" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nce-fQ-4zb">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -412,7 +413,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50W-HR-ues">
-                                        <rect key="frame" x="451" y="272" width="144" height="32"/>
+                                        <rect key="frame" x="647" y="272" width="144" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="QqR-7u-kRm"/>
                                         </constraints>
@@ -425,7 +426,7 @@
                                         </connections>
                                     </button>
                                     <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-NT-rjH">
-                                        <rect key="frame" x="17" y="183" width="575" height="26"/>
+                                        <rect key="frame" x="17" y="183" width="771" height="26"/>
                                         <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select IPA File" pathStyle="popUp" id="lLP-Oo-lHE">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -438,7 +439,7 @@
                                         </connections>
                                     </pathControl>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BAA-rE-fh4">
-                                        <rect key="frame" x="15" y="61" width="574" height="25"/>
+                                        <rect key="frame" x="15" y="61" width="770" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="RCk-ui-gGv"/>
                                         </constraints>
@@ -550,7 +551,7 @@
                 </viewController>
                 <customObject id="Axn-BG-zzu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="784"/>
+            <point key="canvasLocation" x="75" y="783.5"/>
         </scene>
         <!--AppBox Log-->
         <scene sceneID="Ukv-dV-EPt">
@@ -670,7 +671,7 @@ Gw
                 </viewController>
                 <customObject id="sXS-OA-9xd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="739" y="784.5"/>
+            <point key="canvasLocation" x="843" y="784"/>
         </scene>
         <!--ShowDashboard-->
         <scene sceneID="Nhl-bU-R4s">

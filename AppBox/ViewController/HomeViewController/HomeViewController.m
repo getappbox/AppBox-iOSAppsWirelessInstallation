@@ -48,11 +48,13 @@
 
 //Build Button Action
 - (IBAction)buttonBuildTapped:(NSButton *)sender {
+    [project setIsBuildOnly:YES];
     [self runBuildScript];
 }
 
 //Build and Upload Button Action
 - (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
+    [project setIsBuildOnly:NO];
     [self runBuildScript];
 }
 
@@ -78,19 +80,22 @@
 }
 
 - (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
-    if (sender.state == NSOnState){
+    if (sender.state == NSOnState && ![UserData isGmailLoggedIn]){
         [sender setState:NSOffState];
         [self performSegueWithIdentifier:@"MailView" sender:self];
-    }else{
-        [self enableMailField:NO];
     }
+    [self enableMailField:(sender.state == NSOnState)];
 }
 
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
     [buttonShutdownMac setEnabled:[Common isValidEmail:sender.stringValue]];
+    if ([Common isValidEmail:sender.stringValue]){
+        [UserData setUserEmail:sender.stringValue];
+    }
 }
 
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
+    [UserData setUserMessage:sender.stringValue];
 }
 
 //Build Type Changed
@@ -256,8 +261,14 @@
                     [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
-                    [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
-                    [self checkIPACreated];
+                    //Check and Upload IPA File
+                    if (project.isBuildOnly){
+                        [self showStatus:[NSString stringWithFormat:@"Export Succeeded - %@",project.buildUUIDDirectory] andShowProgressBar:NO withProgress:-1];
+                    }else{
+                        [self checkIPACreated];
+                        [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
+                    }
+                    
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
@@ -478,13 +489,23 @@
 }
 
 -(void)loginSuccessWithWebView:(WebView *)webView{
+    [UserData setIsGmailLoggedIn:YES];
     [buttonSendMail setState:NSOnState];
     [self enableMailField:YES];
 }
 
 -(void)enableMailField:(BOOL)enable{
+    //Enable text fields
     [textFieldEmail setEnabled:enable];
     [textFieldMessage setEnabled:enable];
+    
+    //Get last time valid data
+    [textFieldEmail setStringValue:[UserData userEmail]];
+    [textFieldMessage setStringValue:[UserData userMessage]];
+    
+    //Just for confirm changes
+    [self textFieldMailValueChanged:textFieldEmail];
+    [self textFieldDevMessageValueChanged:textFieldMessage];
 }
 
 #pragma mark - Navigation

@@ -23,7 +23,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    [UserData setIsGmailLoggedIn:NO];
 }
 
 +(AppDelegate *)appDelegate{
