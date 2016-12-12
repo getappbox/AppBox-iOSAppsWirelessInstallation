@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     //Load Request
-    [webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    [webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]]];
 }
 
 #pragma mark - WebFrameLoadDelegate
