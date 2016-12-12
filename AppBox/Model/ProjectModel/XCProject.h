@@ -44,7 +44,9 @@
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
 
-- (void)createExportOpetionPlist;
+-(void)createExportOpetionPlist;
 -(void)createUDIDAndIsNew:(BOOL)isNew;
 -(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *mainfestPath))completion;
+
+-(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
 @end
