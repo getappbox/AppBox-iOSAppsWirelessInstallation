@@ -26,6 +26,12 @@
     [UserData setIsGmailLoggedIn:NO];
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
+    return YES;
+}
+
+#pragma mark - AppDelegate Helper
+
 +(AppDelegate *)appDelegate{
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
 }
