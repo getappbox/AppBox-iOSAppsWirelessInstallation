@@ -23,7 +23,8 @@
 //enums
 typedef enum : NSUInteger {
     FileTypeIPA,
-    FileTypeManifest
+    FileTypeManifest,
+    FileTypeJson,
 } FileType;
 
 typedef enum : NSUInteger {

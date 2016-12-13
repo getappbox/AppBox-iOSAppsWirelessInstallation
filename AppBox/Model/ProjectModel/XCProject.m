@@ -122,8 +122,18 @@
     [self setIdentifer:[self.ipaInfoPlist valueForKey:@"CFBundleIdentifier"]];
     [self setVersion: [ipaInfoPlist valueForKey:@"CFBundleShortVersionString"]];
 
+//    self.uuid = @"test";
+    //Bundle directory path
+    
+    NSString *bundlePath = [NSString stringWithFormat:@"/%@",self.identifer];
+    [self setBundleDirectory:[NSURL URLWithString:bundlePath]];
+    [self upadteDbDirectoryByBundleDirectory];
+}
+
+- (void)upadteDbDirectoryByBundleDirectory
+{
     //Build URL for DropBox
-    NSString *toPath = [NSString stringWithFormat:@"/%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid];
+    NSString *toPath = [self.bundleDirectory.absoluteString stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid]];
     [self setDbDirectory:[NSURL URLWithString:toPath]];
 }
 
