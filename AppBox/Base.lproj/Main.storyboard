@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
@@ -426,7 +426,7 @@
                                         </connections>
                                     </button>
                                     <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-NT-rjH">
-                                        <rect key="frame" x="17" y="183" width="771" height="26"/>
+                                        <rect key="frame" x="17" y="183" width="134" height="26"/>
                                         <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select IPA File" pathStyle="popUp" id="lLP-Oo-lHE">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -452,13 +452,51 @@
                                             <action selector="textFieldDevMessageValueChanged:" target="lct-wo-jYo" id="0sl-xk-HWS"/>
                                         </connections>
                                     </textField>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="7vC-wN-Vuz">
+                                        <rect key="frame" x="595" y="188" width="102" height="19"/>
+                                        <buttonCell key="cell" type="check" title="Unique Link" bezelStyle="regularSquare" imagePosition="left" inset="2" id="8kG-jS-Crv">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="systemLight" size="15"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="buttonUniqueLinkTapped:" target="lct-wo-jYo" id="Fit-cd-HK3"/>
+                                        </connections>
+                                    </button>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8m1-af-Iwh">
+                                        <rect key="frame" x="273" y="186" width="309" height="24"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Default: Bundle Identifier " drawsBackground="YES" id="di6-9v-uDZ">
+                                            <font key="font" metaFont="system" size="15"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="67H-HX-Ftz">
+                                        <rect key="frame" x="704" y="180" width="87" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Upload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="byN-se-XZM">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system" size="14"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="buttonUploadTapped:" target="lct-wo-jYo" id="7h0-x6-Ax4"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Cf-Xv-IKb">
+                                        <rect key="frame" x="161" y="188" width="109" height="19"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DB-APP-Folder" id="6YQ-Nb-PU8">
+                                            <font key="font" metaFont="systemLight" size="15"/>
+                                            <color key="textColor" white="0.0" alpha="0.7166098151408451" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Dsk-nI-Owd" firstAttribute="leading" secondItem="XTv-oc-mvs" secondAttribute="leading" id="1Rz-C7-Pli"/>
                                     <constraint firstItem="HNZ-et-sSs" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" id="1hd-8r-yGb"/>
+                                    <constraint firstItem="8Cf-Xv-IKb" firstAttribute="leading" secondItem="dVX-NT-rjH" secondAttribute="trailing" constant="15" id="1kb-ww-sGb"/>
                                     <constraint firstItem="888-HS-ADa" firstAttribute="centerY" secondItem="XTv-oc-mvs" secondAttribute="centerY" id="38H-pU-bN7"/>
                                     <constraint firstItem="Lbq-OO-sRU" firstAttribute="top" secondItem="RTB-1n-lrJ" secondAttribute="top" constant="10" id="3bs-yY-Fm1"/>
                                     <constraint firstAttribute="trailing" secondItem="sWE-nW-t4X" secondAttribute="trailing" constant="15" id="4UV-5Q-41X"/>
+                                    <constraint firstItem="7vC-wN-Vuz" firstAttribute="leading" secondItem="8m1-af-Iwh" secondAttribute="trailing" constant="15" id="4eJ-QO-xKF"/>
                                     <constraint firstItem="52J-8G-TcO" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" id="548-SH-R5b"/>
                                     <constraint firstItem="sWE-nW-t4X" firstAttribute="leading" secondItem="hPp-ER-Eab" secondAttribute="trailing" constant="10" id="5Ue-sq-JTs"/>
                                     <constraint firstItem="NRl-Cb-doh" firstAttribute="top" secondItem="Tej-i0-JWD" secondAttribute="bottom" constant="15" id="5w1-EL-kzh"/>
@@ -466,6 +504,7 @@
                                     <constraint firstAttribute="trailing" secondItem="BAA-rE-fh4" secondAttribute="trailing" constant="15" id="6rn-Ry-1SS"/>
                                     <constraint firstAttribute="trailing" secondItem="3gF-GO-Agw" secondAttribute="trailing" id="7Qh-kD-4mf"/>
                                     <constraint firstItem="hPp-ER-Eab" firstAttribute="top" secondItem="Lbq-OO-sRU" secondAttribute="bottom" constant="10" id="7sH-GE-zOd"/>
+                                    <constraint firstItem="67H-HX-Ftz" firstAttribute="leading" secondItem="7vC-wN-Vuz" secondAttribute="trailing" constant="15" id="7xw-ej-JHp"/>
                                     <constraint firstItem="o1I-JX-iG3" firstAttribute="leading" secondItem="Tej-i0-JWD" secondAttribute="trailing" constant="10" id="9aN-My-WnN"/>
                                     <constraint firstItem="sWE-nW-t4X" firstAttribute="centerY" secondItem="hPp-ER-Eab" secondAttribute="centerY" id="9gX-os-ZQS"/>
                                     <constraint firstItem="Tej-i0-JWD" firstAttribute="trailing" secondItem="NRl-Cb-doh" secondAttribute="trailing" id="Btu-Vc-l5f"/>
@@ -478,9 +517,10 @@
                                     <constraint firstItem="hPp-ER-Eab" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="15" id="I0y-Lz-fIX"/>
                                     <constraint firstItem="RKc-Si-2CZ" firstAttribute="top" secondItem="MlA-j9-hh1" secondAttribute="bottom" constant="10" id="I86-Pn-lND"/>
                                     <constraint firstItem="yWS-VV-dkg" firstAttribute="top" secondItem="0YM-Jf-F5s" secondAttribute="bottom" constant="20" id="MNU-6B-eGi"/>
+                                    <constraint firstItem="8Cf-Xv-IKb" firstAttribute="centerY" secondItem="dVX-NT-rjH" secondAttribute="centerY" id="Ndi-7A-40k"/>
                                     <constraint firstItem="dVX-NT-rjH" firstAttribute="top" secondItem="yWS-VV-dkg" secondAttribute="bottom" constant="10" id="NiW-eZ-Wmd"/>
-                                    <constraint firstAttribute="trailing" secondItem="dVX-NT-rjH" secondAttribute="trailing" constant="15" id="NuT-As-nvM"/>
                                     <constraint firstAttribute="trailing" secondItem="RKc-Si-2CZ" secondAttribute="trailing" constant="15" id="Oqx-R6-h3K"/>
+                                    <constraint firstAttribute="trailing" secondItem="67H-HX-Ftz" secondAttribute="trailing" constant="15" id="Q6t-iF-phw"/>
                                     <constraint firstItem="888-HS-ADa" firstAttribute="trailing" secondItem="hqa-Ms-QwW" secondAttribute="trailing" id="RSh-jR-Kv3"/>
                                     <constraint firstItem="Lbq-OO-sRU" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="10" id="Rbr-4E-oSc"/>
                                     <constraint firstAttribute="trailing" secondItem="0YM-Jf-F5s" secondAttribute="trailing" id="Rgb-4u-4SA"/>
@@ -503,16 +543,20 @@
                                     <constraint firstAttribute="trailing" secondItem="HNZ-et-sSs" secondAttribute="trailing" id="ezl-M6-gAz"/>
                                     <constraint firstItem="3gF-GO-Agw" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" id="fxl-ww-4Lw"/>
                                     <constraint firstItem="hqa-Ms-QwW" firstAttribute="centerY" secondItem="Dsk-nI-Owd" secondAttribute="centerY" id="h3k-0j-ZgJ"/>
+                                    <constraint firstItem="7vC-wN-Vuz" firstAttribute="centerY" secondItem="8m1-af-Iwh" secondAttribute="centerY" id="iCk-8q-pjZ"/>
                                     <constraint firstItem="3gF-GO-Agw" firstAttribute="top" secondItem="dVX-NT-rjH" secondAttribute="bottom" constant="20" id="j3z-JD-B5f"/>
                                     <constraint firstItem="Ozf-Q6-RXW" firstAttribute="centerY" secondItem="50W-HR-ues" secondAttribute="centerY" id="lqW-4m-453"/>
                                     <constraint firstItem="Dsk-nI-Owd" firstAttribute="trailing" secondItem="XTv-oc-mvs" secondAttribute="trailing" id="mad-Fm-t2q"/>
                                     <constraint firstItem="yWS-VV-dkg" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="10" id="n9V-Id-qu7"/>
+                                    <constraint firstItem="8m1-af-Iwh" firstAttribute="centerY" secondItem="8Cf-Xv-IKb" secondAttribute="centerY" id="o3n-m6-jul"/>
                                     <constraint firstItem="Isq-ZS-STM" firstAttribute="leading" secondItem="MlA-j9-hh1" secondAttribute="trailing" constant="20" id="otL-kW-kX3"/>
                                     <constraint firstItem="888-HS-ADa" firstAttribute="top" secondItem="hqa-Ms-QwW" secondAttribute="bottom" constant="15" id="tth-Pr-gOL"/>
                                     <constraint firstItem="MlA-j9-hh1" firstAttribute="top" secondItem="3gF-GO-Agw" secondAttribute="bottom" constant="20" id="tvm-4h-Hxd"/>
                                     <constraint firstItem="hqa-Ms-QwW" firstAttribute="top" secondItem="NRl-Cb-doh" secondAttribute="bottom" constant="15" id="uIs-wE-Pmd"/>
                                     <constraint firstItem="0YM-Jf-F5s" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" id="uY6-OF-zWa"/>
+                                    <constraint firstItem="67H-HX-Ftz" firstAttribute="centerY" secondItem="7vC-wN-Vuz" secondAttribute="centerY" id="utL-qG-dsg"/>
                                     <constraint firstItem="Tej-i0-JWD" firstAttribute="trailing" secondItem="hPp-ER-Eab" secondAttribute="trailing" id="v1q-9m-oeL"/>
+                                    <constraint firstItem="8m1-af-Iwh" firstAttribute="leading" secondItem="8Cf-Xv-IKb" secondAttribute="trailing" constant="5" id="vml-jQ-Jn5"/>
                                     <constraint firstItem="hqa-Ms-QwW" firstAttribute="trailing" secondItem="NRl-Cb-doh" secondAttribute="trailing" id="y4p-sE-vOz"/>
                                     <constraint firstItem="NRl-Cb-doh" firstAttribute="centerY" secondItem="vJn-2P-Wer" secondAttribute="centerY" id="yHX-dM-u55"/>
                                     <constraint firstAttribute="bottom" secondItem="HNZ-et-sSs" secondAttribute="bottom" id="ya8-a4-whg"/>
@@ -532,6 +576,8 @@
                         <outlet property="buttonBuildAndUpload" destination="50W-HR-ues" id="Obq-ba-O7x"/>
                         <outlet property="buttonSendMail" destination="MlA-j9-hh1" id="XxV-Xd-ya5"/>
                         <outlet property="buttonShutdownMac" destination="Isq-ZS-STM" id="Nlv-hD-Aiy"/>
+                        <outlet property="buttonUniqueLink" destination="7vC-wN-Vuz" id="ras-bp-ATp"/>
+                        <outlet property="buttonUpload" destination="67H-HX-Ftz" id="Epx-bb-AS8"/>
                         <outlet property="comboBuildScheme" destination="vJn-2P-Wer" id="QZp-O0-0rh"/>
                         <outlet property="comboBuildType" destination="XTv-oc-mvs" id="sEq-gy-KKY"/>
                         <outlet property="comboTeamId" destination="Dsk-nI-Owd" id="suO-nJ-2cE"/>
@@ -540,6 +586,7 @@
                         <outlet property="pathIPAFile" destination="dVX-NT-rjH" id="1fw-fx-eph"/>
                         <outlet property="pathProject" destination="sWE-nW-t4X" id="5es-lc-EuA"/>
                         <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
+                        <outlet property="textFieldBundleIdentifier" destination="8m1-af-Iwh" id="lIi-e1-oco"/>
                         <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
                         <outlet property="textFieldMessage" destination="BAA-rE-fh4" id="ACK-7P-3CG"/>
                         <outlet property="viewProgressStatus" destination="HNZ-et-sSs" id="xiM-U2-QxA"/>

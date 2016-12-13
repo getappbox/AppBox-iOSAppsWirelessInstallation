@@ -26,6 +26,9 @@
     
     //Upload IPA
     IBOutlet NSPathControl *pathIPAFile;
+    IBOutlet NSButton *buttonUpload;
+    IBOutlet NSTextField *textFieldBundleIdentifier;
+    IBOutlet NSButton *buttonUniqueLink;
     
     //Mail and Shutdown
     IBOutlet NSButton *buttonSendMail;
@@ -36,7 +39,8 @@
     //Status
     IBOutlet NSTextField *labelStatus;
     IBOutlet NSView *viewProgressStatus;
-    IBOutlet NSProgressIndicator *progressIndicator;    
+    IBOutlet NSProgressIndicator *progressIndicator;
+
 }
 
 - (DBRestClient *)restClient;
@@ -45,6 +49,9 @@
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
+- (IBAction)buttonUniqueLinkTapped:(NSButton *)sender;
+- (IBAction)buttonUploadTapped:(NSButton *)sender;
+
 - (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender;
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender;
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
