@@ -130,8 +130,7 @@
     [self upadteDbDirectoryByBundleDirectory];
 }
 
-- (void)upadteDbDirectoryByBundleDirectory
-{
+- (void)upadteDbDirectoryByBundleDirectory{
     //Build URL for DropBox
     NSString *toPath = [self.bundleDirectory.absoluteString stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid]];
     [self setDbDirectory:[NSURL URLWithString:toPath]];
