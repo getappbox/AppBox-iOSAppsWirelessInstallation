@@ -368,10 +368,10 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 #pragma mark - Updating Unique Link
 -(void)updateUniquLinkDictinory:(NSMutableDictionary *)dictUniqueLink
 {
-//    if(![dictUniqueLink isKindOfClass:[NSDictionary class]])
+    if(![dictUniqueLink isKindOfClass:[NSDictionary class]])
         dictUniqueLink = [NSMutableDictionary new];
     [dictUniqueLink setObject:project.manifestFileSharableURL.absoluteString forKey:@"ManifestLink"];
-    NSMutableArray *versionHistory = [dictUniqueLink objectForKey:@"versions"];
+    NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
     if(!versionHistory)
     {
         versionHistory = [NSMutableArray new];
@@ -403,7 +403,21 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 }
 -(void)uploadUniqueLinkJsonFile
 {
-    [self.restClient uploadFile:FILE_NAME_UNIQUE_JSON toPath:project.uniqueLinkJsonMetaData.path withParentRev:nil fromPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+    fileType = FileTypeJson;
+    [self.restClient uploadFile:FILE_NAME_UNIQUE_JSON toPath:project.bundleDirectory.absoluteString withParentRev:project.uniqueLinkJsonMetaData.rev fromPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+}
+-(void)handleAfterUniqueJsonMetaDataLoaded
+{
+    if(project.uniqueLinkJsonMetaData)
+    {
+        NSString *tempUniqueJsonPath = [NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON];
+        
+        [self.restClient loadFile:project.uniqueLinkJsonMetaData.path intoPath:tempUniqueJsonPath];
+    }
+    else
+    {
+        [self updateUniquLinkDictinory:[NSMutableDictionary new]];
+    }
 }
 #pragma mark - DB Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
@@ -422,16 +436,7 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
                 break;
             }
         }
-        if(project.uniqueLinkJsonMetaData)
-        {
-            NSString *tempUniqueJsonPath = [NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON];
-            
-            [self.restClient loadFile:project.uniqueLinkJsonMetaData.path intoPath:tempUniqueJsonPath];
-        }
-        else
-        {
-            [self updateUniquLinkDictinory:[NSMutableDictionary new]];
-        }
+        [self handleAfterUniqueJsonMetaDataLoaded];
     }
 }
 - (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path
@@ -441,6 +446,7 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
 {
     NSLog(@"Error while loading metadata %@",error);
+    [self handleAfterUniqueJsonMetaDataLoaded];
 }
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath
 {
@@ -461,9 +467,14 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
-    if(fileType == FileTypeJson && project.uniqueApplinkShortShareableURL)
+    if(fileType == FileTypeJson)
     {
+        project.uniqueLinkJsonMetaData = metadata;
+        if(project.uniqueApplinkShortShareableURL)
+        {
+        [self showURL];
         return;
+        }
     }
     else if (fileType == FileTypeIPA){
         [self disableEmailFields];
@@ -538,7 +549,7 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.uniqueApplinkShortShareableURL = shortURL;
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-        [dictUniqueFile setObject:shortURL forKey:UNIQUE_LINK_SHORT];
+        [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
         [self writeUniqueJsonWithDict:dictUniqueFile];
         [self uploadUniqueLinkJsonFile];
     }];
