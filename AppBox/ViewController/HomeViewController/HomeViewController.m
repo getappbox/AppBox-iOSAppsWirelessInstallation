@@ -8,9 +8,10 @@
 
 #import "HomeViewController.h"
 
-static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 static NSString *const UNIQUE_LINK = @"UniqueLink";
 static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
+static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
+
 @implementation HomeViewController{
     XCProject *project;
     ScriptType scriptType;
@@ -46,18 +47,22 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     }
 }
 
-#pragma mark - Controllers Actions
 
-//Build Button Action
-- (IBAction)buttonBuildTapped:(NSButton *)sender {
-    [project setIsBuildOnly:YES];
-    [self runBuildScript];
+#pragma mark - Project / IPA Controls Action
+//Project Path Handler
+- (IBAction)projectPathHandler:(NSPathControl *)sender {
+    if (![project.fullPath isEqualTo:sender.URL]){
+        [project setFullPath: sender.URL];
+        [buttonAction setTitle:@"Build Project and Upload IPA"];
+        [self runGetSchemeScript];
+    }
 }
 
-//Build and Upload Button Action
-- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender {
-    [project setIsBuildOnly:NO];
-    [self runBuildScript];
+//Build Path Handler
+- (IBAction)buildPathHandler:(NSPathControl *)sender {
+    if (![project.buildDirectory isEqualTo:sender.URL]){
+        [project setBuildDirectory: sender.URL];
+    }
 }
 
 //Scheme Value Changed
@@ -78,29 +83,6 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     [self updateBuildButtonState];
 }
 
-- (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender {
-    
-}
-
-- (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
-    if (sender.state == NSOnState && ![UserData isGmailLoggedIn]){
-        [sender setState:NSOffState];
-        [self performSegueWithIdentifier:@"MailView" sender:self];
-    }
-    [self enableMailField:(sender.state == NSOnState)];
-}
-
-- (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
-    [buttonShutdownMac setEnabled:[Common isValidEmail:sender.stringValue]];
-    if ([Common isValidEmail:sender.stringValue]){
-        [UserData setUserEmail:sender.stringValue];
-    }
-}
-
-- (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
-    [UserData setUserMessage:sender.stringValue];
-}
-
 //Build Type Changed
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
     if (![project.buildType isEqualToString:sender.stringValue]){
@@ -109,19 +91,14 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     }
 }
 
-//Project Path Handler
-- (IBAction)projectPathHandler:(NSPathControl *)sender {
-    if (![project.fullPath isEqualTo:sender.URL]){
-        [project setFullPath: sender.URL];
-        [self runGetSchemeScript];
-    }
-}
-
+#pragma mark - IPA File Controlles Actions
 //IPA File Path Handler
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
-    project.ipaFullPath = sender.URL ;
+    project.ipaFullPath = sender.URL;
+    [buttonAction setTitle:@"Upload IPA"];
+    [self updateBuildButtonState];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self uploadBuildWithIPAFileURL:project.ipaFullPath];
+        [self getIPAInfoFromLocalURL:project.ipaFullPath];
     });
 }
 
@@ -129,16 +106,49 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     //NOT required
 }
 
-- (IBAction)buttonUploadTapped:(NSButton *)sender{
-    [self uploadIPAFile];
+
+#pragma mark - Mail and Shutdown controls action
+//Send mail option
+- (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
+    if (sender.state == NSOnState && ![UserData isGmailLoggedIn]){
+        [sender setState:NSOffState];
+        [self performSegueWithIdentifier:@"MailView" sender:self];
+    }
+    [self enableMailField:(sender.state == NSOnState)];
 }
 
-//Build PathHandler
-- (IBAction)buildPathHandler:(NSPathControl *)sender {
-    if (![project.buildDirectory isEqualTo:sender.URL]){
-        [project setBuildDirectory: sender.URL];
+//Shutdown mac option
+- (IBAction)sendMailMacOptionValueChanged:(NSButton *)sender {
+    //No action required
+}
+
+//email id text field
+- (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
+    [buttonShutdownMac setEnabled:[Common isValidEmail:sender.stringValue]];
+    if ([Common isValidEmail:sender.stringValue]){
+        [UserData setUserEmail:sender.stringValue];
+    }else{
+        [buttonShutdownMac setState:NSOffState];
     }
 }
+
+//developer message text field
+- (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
+    [UserData setUserMessage:sender.stringValue];
+}
+
+
+#pragma mark - Final Action Button (Build/IPA)
+//Build Button Action
+- (IBAction)actionButtonTapped:(NSButton *)sender {
+    if (project.fullPath){
+        [project setIsBuildOnly:NO];
+        [self runBuildScript];
+    }else if (project.ipaFullPath){
+        [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+    }
+}
+
 
 #pragma mark - Task
 
@@ -297,16 +307,16 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 -(void)checkIPACreated{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
-            [self uploadBuildWithIPAFileURL:project.ipaFullPath];
+            [self getIPAInfoFromLocalURL:project.ipaFullPath];
         }else{
             [self checkIPACreated];
         }
     });
 }
 
-#pragma mark - Upload Build
+#pragma mark - Get IPA Info
 
-- (void)uploadBuildWithIPAFileURL:(NSURL *)ipaFileURL{
+- (void)getIPAInfoFromLocalURL:(NSURL *)ipaFileURL{
     NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:fromPath]) {
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath]];
@@ -344,9 +354,9 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     }
 }
 
--(void)uploadIPAFile{
-    if(!project.ipaFullPath){
-        [Common showAlertWithTitle:@"iPA File Missing" andMessage:@"Please select the iPA file and try again."];
+-(void)uploadIPAFileWithLocalURL:(NSURL *)ipaURL{
+    if(ipaURL == nil){
+        [Common showAlertWithTitle:@"IPA File Missing" andMessage:@"Please select the IPA file and try again."];
         return;
     }
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
@@ -455,11 +465,9 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
-    if(fileType == FileTypeJson)
-    {
+    if(fileType == FileTypeJson){
         project.uniqueLinkJsonMetaData = metadata;
-        if(project.appShortShareableURL)
-        {
+        if(project.appShortShareableURL){
             [self showURL];
             return;
         }
@@ -477,11 +485,12 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     if (fileType == FileTypeIPA) {
         NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress * 100]];
         [self showStatus:status andShowProgressBar:YES withProgress:progress];
-        NSLog(@"ipa upload progress %@",[NSNumber numberWithFloat:progress]);
     }else if (fileType == FileTypeManifest){
         NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress * 100]];
         [self showStatus:status andShowProgressBar:YES withProgress:progress];
-        NSLog(@"manifest upload progress %@",[NSNumber numberWithFloat:progress]);
+    }else if (fileType == FileTypeJson){
+        NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress * 100]];
+        [self showStatus:status andShowProgressBar:YES withProgress:progress];
     }
 }
 
@@ -504,10 +513,11 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
         NSString *shareableLink = [link substringToIndex:link.length-5];
         NSLog(@"manifest link - %@",shareableLink);
         project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
-        if(buttonUniqueLink.state)
+        if(buttonUniqueLink.state){
             [self.restClient loadMetadata:project.bundleDirectory.absoluteString];
-        else
+        }else{
             [self createManifestShortSharableUrl];
+        }
     }else if (fileType == FileTypeJson){
         NSString *shareableLink = [link substringToIndex:link.length-5];
         NSLog(@"Json Sharable link - %@",shareableLink);
@@ -525,8 +535,7 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 }
 
 #pragma mark - Create ShortSharable URL
--(void)createUniqueShortSharableUrl
-{
+-(void)createUniqueShortSharableUrl{
     NSString *originalURL = [project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
     GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
@@ -539,18 +548,6 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     }];
 }
 
-#pragma mark - Completion Process
--(void)showURL{
-    NSString *status = [NSString stringWithFormat:@"Unique URL - %@",project.appShortShareableURL.absoluteString];
-    [self showStatus:status andShowProgressBar:NO withProgress:0];
-    if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
-        [self performSegueWithIdentifier:@"MailView" sender:self];
-    }else{
-        [self performSegueWithIdentifier:@"ShowLink" sender:self];
-    }
-    [self progressCompletedViewState];
-}
-
 -(void)createManifestShortSharableUrl{
     NSString *originalURL = [project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
@@ -558,17 +555,21 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
     [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *status = [NSString stringWithFormat:@"Last Build URL - %@",project.appShortShareableURL.absoluteString];
-            [self showStatus:status andShowProgressBar:NO withProgress:0];
-            if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
-                [self performSegueWithIdentifier:@"MailView" sender:self];
-            }else{
-                [self performSegueWithIdentifier:@"ShowLink" sender:self];
-            }
-            [self progressCompletedViewState];
+            [self showURL];
         });
     }];
+}
 
+#pragma mark - Completion Process
+-(void)showURL{
+    NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
+    [self showStatus:status andShowProgressBar:NO withProgress:0];
+    if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
+        [self performSegueWithIdentifier:@"MailView" sender:self];
+    }else{
+        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+    }
+    [self progressCompletedViewState];
 }
 
 #pragma mark - Dropbox Helper
@@ -606,6 +607,7 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
+    NSLog(@"%@",status);
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
     [progressIndicator setHidden:!showProgressBar];
@@ -627,10 +629,9 @@ static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
 }
 
 -(void)updateBuildButtonState{
-    BOOL enable = (comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 &&
-                   comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0);
-    [buttonBuild setEnabled:enable];
-    [buttonBuildAndUpload setEnabled:enable];
+    BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 &&
+                   comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0) || project.ipaFullPath != nil);
+    [buttonAction setEnabled:enable];
 }
 
 #pragma mark - MailDelegate
