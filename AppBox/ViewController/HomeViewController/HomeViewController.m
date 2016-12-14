@@ -8,8 +8,8 @@
 
 #import "HomeViewController.h"
 
-static NSString *const UNIQUE_LINK = @"UniqueLink";
-static NSString *const UNIQUE_LINK_SHORT = @"UniqueLinkShort";
+static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
+static NSString *const UNIQUE_LINK_SHORT = @"uniqueLinkShort";
 static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 
 @implementation HomeViewController{
@@ -74,7 +74,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender {
     NSString *teamId;
     if (sender.stringValue.length != 10 || [sender.stringValue containsString:@" "]){
-         NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.fullName LIKE %@",sender.stringValue]] firstObject];
+        NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.fullName LIKE %@",sender.stringValue]] firstObject];
         teamId = [team valueForKey:@"teamId"];
         [project setTeamId: teamId];
     }else{
@@ -194,13 +194,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     
     //${5} Archive Location
     [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
-
+    
     //${6} ipa Location
     [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
-
+    
     //${7} ipa Location
     [buildArgument addObject:project.exportOptionsPlistPath.resourceSpecifier];
-
+    
     //Run Task
     [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
 }
@@ -367,7 +367,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }
     NSString *fromPath = [project.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
-
+    
     //upload ipa
     fileType = FileTypeIPA;
     [self.restClient uploadFile:project.ipaFullPath.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
@@ -378,15 +378,22 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 -(void)updateUniquLinkDictinory:(NSMutableDictionary *)dictUniqueLink{
     if(![dictUniqueLink isKindOfClass:[NSDictionary class]])
         dictUniqueLink = [NSMutableDictionary new];
-    [dictUniqueLink setObject:project.manifestFileSharableURL.absoluteString forKey:@"ManifestLink"];
+    NSDictionary *latestVersion = @{
+                                    @"name" : project.name,
+                                    @"version" : project.version,
+                                    @"build" : project.build,
+                                    @"identifier" : project.identifer,
+                                    @"manifestLink" : project.manifestFileSharableURL.absoluteString
+                                    };
     NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
     if(!versionHistory){
         versionHistory = [NSMutableArray new];
-        [dictUniqueLink setObject:versionHistory forKey:@"versions"];
     }
-    [versionHistory addObject:@{@"name":project.name, @"version":project.version, @"build":project.build, @"identifier":project.identifer}];
+    [versionHistory addObject:latestVersion];
+    [dictUniqueLink setObject:versionHistory forKey:@"versions"];
+    [dictUniqueLink setObject:latestVersion forKey:@"latestVersion"];
     [self writeUniqueJsonWithDict:dictUniqueLink];
-    project.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK]];
+    project.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHARED]];
     project.appShortShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHORT]];
     [self uploadUniqueLinkJsonFile];
 }
@@ -508,7 +515,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
             fileType = FileTypeManifest;
             [restClientLocal uploadFile:@"manifest.plist" toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:manifestPath];
         }];
-
+        
     }else if (fileType == FileTypeManifest){
         NSString *shareableLink = [link substringToIndex:link.length-5];
         NSLog(@"manifest link - %@",shareableLink);
@@ -523,7 +530,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         NSLog(@"Json Sharable link - %@",shareableLink);
         project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-        [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK];
+        [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
         [self writeUniqueJsonWithDict:dictUniqueFile];
         if(project.appShortShareableURL){
             [self showURL];
@@ -544,7 +551,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
         [self writeUniqueJsonWithDict:dictUniqueFile];
-        [self uploadUniqueLinkJsonFile];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self uploadUniqueLinkJsonFile];
+        });
     }];
 }
 
@@ -593,7 +602,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 
 #pragma mark - Controller Helper
 -(void)progressCompletedViewState{
-
+    
 }
 
 -(void)disableEmailFields{
@@ -630,7 +639,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 
 -(void)updateBuildButtonState{
     BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 &&
-                   comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0) || project.ipaFullPath != nil);
+                    comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0) || project.ipaFullPath != nil);
     [buttonAction setEnabled:enable];
 }
 
