@@ -122,9 +122,7 @@
     [self setIdentifer:[self.ipaInfoPlist valueForKey:@"CFBundleIdentifier"]];
     [self setVersion: [ipaInfoPlist valueForKey:@"CFBundleShortVersionString"]];
 
-//    self.uuid = @"test";
     //Bundle directory path
-    
     NSString *bundlePath = [NSString stringWithFormat:@"/%@",self.identifer];
     [self setBundleDirectory:[NSURL URLWithString:bundlePath]];
     [self upadteDbDirectoryByBundleDirectory];

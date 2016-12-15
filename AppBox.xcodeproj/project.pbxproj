@@ -38,6 +38,7 @@
 		E188EA181D78570800EBCA52 /* ISO8601.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA151D7856D200EBCA52 /* ISO8601.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
 		E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB1C1DFED95000BD7F11 /* UserData.m */; };
+		E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
 		E1FB91D91D78055200F8DF46 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; };
 		E1FB91DA1D78087A00F8DF46 /* ZipArchive.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -106,6 +107,7 @@
 		E18DCB161DFE729300BD7F11 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
 		E18DCB1B1DFED95000BD7F11 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		E18DCB1C1DFED95000BD7F11 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		E1C148731E027A6100EE637F /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		E1FB91D81D78055200F8DF46 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E188EA141D784ADF00EBCA52 /* CMDQueryStringSerialization.framework in Frameworks */,
+				E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */,
 				E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */,
 				E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */,
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
@@ -270,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				E188EA071D78485900EBCA52 /* Tiny */,
+				E1C148731E027A6100EE637F /* AFNetworking.framework */,
 				E188EA151D7856D200EBCA52 /* ISO8601.framework */,
 				E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */,
 				E1FB91D81D78055200F8DF46 /* ZipArchive.framework */,
