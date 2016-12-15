@@ -340,13 +340,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
                 return;
             }
             //get info.plist
-            project.ipaInfoPlist = [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]];
+            [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
             if (project.ipaInfoPlist == nil) {
                 [self progressCompletedViewState];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
-            textFieldBundleIdentifier.stringValue = project.identifer;
+            [textFieldBundleIdentifier setStringValue: project.identifer];
             [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
         }];
     }else{
