@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9740CD411E005DB100224D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9740CD3F1E005DB100224D9F /* Main.storyboard */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
@@ -20,7 +21,6 @@
 		E16437D71D743A4E00CE8B7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D61D743A4E00CE8B7E /* main.m */; };
 		E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */; };
 		E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16437DE1D743A4E00CE8B7E /* Assets.xcassets */; };
-		E16437E21D743A4E00CE8B7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16437E01D743A4E00CE8B7E /* Main.storyboard */; };
 		E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437F21D743B6800CE8B7E /* HomeViewController.m */; };
 		E16437F91D743D4500CE8B7E /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16437F81D743D4500CE8B7E /* DropboxOSX.framework */; };
 		E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438961D743EA300CE8B7E /* WebKit.framework */; };
@@ -38,6 +38,7 @@
 		E188EA181D78570800EBCA52 /* ISO8601.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA151D7856D200EBCA52 /* ISO8601.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
 		E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB1C1DFED95000BD7F11 /* UserData.m */; };
+		E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
 		E1FB91D91D78055200F8DF46 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; };
 		E1FB91DA1D78087A00F8DF46 /* ZipArchive.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9740CD401E005DB100224D9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = AppBox/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
@@ -82,7 +84,6 @@
 		E16437D61D743A4E00CE8B7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox.xcdatamodel; sourceTree = "<group>"; };
 		E16437DE1D743A4E00CE8B7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = AppBox/Assets.xcassets; sourceTree = SOURCE_ROOT; };
-		E16437E11D743A4E00CE8B7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E16437E31D743A4E00CE8B7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E16437F11D743B6800CE8B7E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E16437F21D743B6800CE8B7E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 		E18DCB161DFE729300BD7F11 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
 		E18DCB1B1DFED95000BD7F11 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		E18DCB1C1DFED95000BD7F11 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		E1C148731E027A6100EE637F /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		E1FB91D81D78055200F8DF46 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E188EA141D784ADF00EBCA52 /* CMDQueryStringSerialization.framework in Frameworks */,
+				E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */,
 				E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */,
 				E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */,
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
@@ -252,7 +255,7 @@
 		E16437ED1D743ABE00CE8B7E /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				E16437E01D743A4E00CE8B7E /* Main.storyboard */,
+				9740CD3F1E005DB100224D9F /* Main.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				E188EA071D78485900EBCA52 /* Tiny */,
+				E1C148731E027A6100EE637F /* AFNetworking.framework */,
 				E188EA151D7856D200EBCA52 /* ISO8601.framework */,
 				E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */,
 				E1FB91D81D78055200F8DF46 /* ZipArchive.framework */,
@@ -398,9 +402,9 @@
 				E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
 				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
+				9740CD411E005DB100224D9F /* Main.storyboard in Resources */,
 				E13946171DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
-				E16437E21D743A4E00CE8B7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,13 +436,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E16437E01D743A4E00CE8B7E /* Main.storyboard */ = {
+		9740CD3F1E005DB100224D9F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E16437E11D743A4E00CE8B7E /* Base */,
+				9740CD401E005DB100224D9F /* Base */,
 			);
 			name = Main.storyboard;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

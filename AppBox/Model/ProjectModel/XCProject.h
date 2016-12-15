@@ -39,11 +39,18 @@
 @property(nonatomic, retain) NSDictionary *buildListInfo;
 @property(nonatomic, retain) NSDictionary *exportOptionsPlist;
 
+//UniqueLink.json
+@property(nonatomic, retain) DBMetadata *uniqueLinkJsonMetaData;
+@property(nonatomic, retain) NSURL *uniquelinkShareableURL;
+
 //Shareable URL DropBox or Google Shortern
 @property(nonatomic, retain) NSURL *dbDirectory;
+@property(nonatomic, retain) NSURL *bundleDirectory;
 @property(nonatomic, retain) NSURL *ipaFileDBShareableURL;
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
+
+- (void)upadteDbDirectoryByBundleDirectory;
 
 -(void)createExportOpetionPlist;
 -(void)createUDIDAndIsNew:(BOOL)isNew;

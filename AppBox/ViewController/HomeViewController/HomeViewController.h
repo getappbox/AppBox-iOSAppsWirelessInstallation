@@ -21,11 +21,12 @@
     IBOutlet NSComboBox *comboBuildScheme;
     IBOutlet NSComboBox *comboTeamId;
     IBOutlet NSComboBox *comboBuildType;
-    IBOutlet NSButton *buttonBuild;
-    IBOutlet NSButton *buttonBuildAndUpload;
+    IBOutlet NSButton *buttonAction;
     
     //Upload IPA
     IBOutlet NSPathControl *pathIPAFile;
+    IBOutlet NSTextField *textFieldBundleIdentifier;
+    IBOutlet NSButton *buttonUniqueLink;
     
     //Mail and Shutdown
     IBOutlet NSButton *buttonSendMail;
@@ -36,16 +37,19 @@
     //Status
     IBOutlet NSTextField *labelStatus;
     IBOutlet NSView *viewProgressStatus;
-    IBOutlet NSProgressIndicator *progressIndicator;    
+    IBOutlet NSProgressIndicator *progressIndicator;
+
 }
 
 - (DBRestClient *)restClient;
     
-- (IBAction)buttonBuildTapped:(NSButton *)sender;
+
+- (IBAction)actionButtonTapped:(NSButton *)sender;
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
-- (IBAction)buttonBuildAndUploadTapped:(NSButton *)sender;
+- (IBAction)buttonUniqueLinkTapped:(NSButton *)sender;
+
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender;
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender;

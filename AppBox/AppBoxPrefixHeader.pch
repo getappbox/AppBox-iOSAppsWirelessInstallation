@@ -12,6 +12,7 @@
 
 #import <DropboxOSX/DropboxOSX.h>
 #import <ZipArchive/ZipArchive.h>
+#import <AFNetworking/AFNetworking.h>
 
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"
