@@ -41,8 +41,10 @@
         [self.delegate mailViewLoadedWithWebView:sender];
         
     }else if ([title isEqualToString:@"MailSent"]){
-        [self.delegate mailSentWithWebView:sender];
-        [self dismissViewController:self];
+        if (self.presentingViewController != nil){
+            [self.delegate mailSentWithWebView:sender];
+            [self dismissViewController:self];            
+        }
         
     }else if ([title isEqualToString:@"InvalidPerameter"]){
         [self.delegate invalidPerametersWithWebView:sender];
