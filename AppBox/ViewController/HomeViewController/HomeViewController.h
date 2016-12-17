@@ -11,9 +11,12 @@
 #import "DropboxViewController.h"
 #import "ShowLinkViewController.h"
 
-@interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate, MailDelegate>{
+@interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate, MailDelegate, NSTabViewDelegate>{
     //Dropbox
     DBRestClient *restClient;
+    
+    //Tab
+    IBOutlet NSTabView *tabView;
     
     //Build
     IBOutlet NSPathControl *pathProject;
@@ -38,7 +41,6 @@
     IBOutlet NSTextField *labelStatus;
     IBOutlet NSView *viewProgressStatus;
     IBOutlet NSProgressIndicator *progressIndicator;
-
 }
 
 - (DBRestClient *)restClient;

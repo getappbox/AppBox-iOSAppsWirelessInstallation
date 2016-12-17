@@ -417,6 +417,9 @@
                                                 </view>
                                             </tabViewItem>
                                         </tabViewItems>
+                                        <connections>
+                                            <outlet property="delegate" destination="lct-wo-jYo" id="GsN-fY-tSl"/>
+                                        </connections>
                                     </tabView>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="sgg-Iy-WMT">
                                         <rect key="frame" x="0.0" y="263" width="800" height="5"/>
@@ -634,6 +637,7 @@
                         <outlet property="pathIPAFile" destination="dVX-NT-rjH" id="1fw-fx-eph"/>
                         <outlet property="pathProject" destination="sWE-nW-t4X" id="5es-lc-EuA"/>
                         <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
+                        <outlet property="tabView" destination="ay9-ED-rIF" id="eI7-2C-0MP"/>
                         <outlet property="textFieldBundleIdentifier" destination="8m1-af-Iwh" id="lIi-e1-oco"/>
                         <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
                         <outlet property="textFieldMessage" destination="BAA-rE-fh4" id="ACK-7P-3CG"/>
