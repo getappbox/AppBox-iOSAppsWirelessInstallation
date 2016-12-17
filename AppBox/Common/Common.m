@@ -67,6 +67,7 @@
 #pragma mark - Check for update
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
+        [[AppDelegate appDelegate] addSessionLog:@"Checking for new version..."];
         [NetworkHandler requestWithURL:GitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
             if (error == nil &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&

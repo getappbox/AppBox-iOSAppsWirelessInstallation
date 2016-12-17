@@ -57,9 +57,10 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="Select ipa file" keyEquivalent="o" id="IAo-SY-fd9">
+                                        <menuItem title="View Log" id="Rk6-gK-cUU">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="openDocument:" target="Ady-hI-5gd" id="bVn-NM-KNZ"/>
+                                                <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -113,12 +114,6 @@
                                                 <action selector="performMiniaturize:" target="Ady-hI-5gd" id="ger-iM-sPs"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Zoom" id="wlh-eO-HnL">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performZoom:" target="Ady-hI-5gd" id="Dl4-zm-pgu"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="BPG-IT-FEB"/>
                                         <menuItem title="View Log" id="wFj-c5-AyQ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -163,7 +158,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="-77"/>
+            <point key="canvasLocation" x="830" y="-113"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -363,7 +358,7 @@
                                                     </constraints>
                                                 </view>
                                             </tabViewItem>
-                                            <tabViewItem label="Upload IPA Only" identifier="2" id="Q1W-fI-E8i">
+                                            <tabViewItem label="Upload IPA" identifier="2" id="Q1W-fI-E8i">
                                                 <view key="view" id="taZ-IM-RE0">
                                                     <rect key="frame" x="10" y="33" width="774" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -657,21 +652,21 @@
             <objects>
                 <viewController title="AppBox Log" showSeguePresentationStyle="single" id="6aM-eF-B0k" customClass="LogViewController" sceneMemberID="viewController">
                     <view key="view" id="4JE-m3-V2s">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
                                 <clipView key="contentView" id="EQ4-Ej-Nlf">
-                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                    <rect key="frame" x="1" y="1" width="778" height="367"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hek-dT-Drn">
-                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="778" height="367"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="448" height="298"/>
-                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <size key="minSize" width="778" height="367"/>
+                                            <size key="maxSize" width="778" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
@@ -682,7 +677,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5af-Y7-Vzh">
-                                    <rect key="frame" x="433" y="1" width="16" height="298"/>
+                                    <rect key="frame" x="763" y="1" width="16" height="367"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -700,7 +695,7 @@
                 </viewController>
                 <customObject id="Sep-aN-CO8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="255"/>
+            <point key="canvasLocation" x="830" y="289.5"/>
         </scene>
         <!--Mail View Controller-->
         <scene sceneID="hWk-PV-Lb4">
@@ -1022,4 +1017,7 @@ Gw
             <point key="canvasLocation" x="-226" y="1612"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="jTU-hR-7QO"/>
+    </inferredMetricsTieBreakers>
 </document>

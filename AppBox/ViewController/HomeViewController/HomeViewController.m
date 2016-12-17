@@ -36,6 +36,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
     [project setBuildDirectory: pathBuild.URL];
     
+    [self updateViewState];
 }
 
 - (void)viewWillAppear{
@@ -648,7 +649,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [Common shutdownSystem];
         });
-    }else{
+    }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
 }
@@ -677,7 +678,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [self textFieldDevMessageValueChanged:textFieldMessage];
 }
 
-#pragma mark - Navigation
+#pragma mark - TabView Delegate
+-(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+    [self updateViewState];
+}
+
+#pragma mark - Navigation -
 -(void)showURL{
     NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
     [self showStatus:status andShowProgressBar:NO withProgress:0];
