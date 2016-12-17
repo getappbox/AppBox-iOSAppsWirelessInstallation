@@ -18,5 +18,6 @@
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
++ (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion;
 
 @end

@@ -20,6 +20,30 @@
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
+    
+    //Start monitoring internet connection
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (status == AFNetworkReachabilityStatusNotReachable){
+            [Common showAlertWithTitle:@"Error" andMessage:AFStringFromNetworkReachabilityStatus(status)];
+        }
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    //Check for update
+    [Common isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
+        if (available){
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText: @"New Version Available - AppBox"];
+            [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
+            [alert setAlertStyle:NSInformationalAlertStyle];
+            [alert setDelegate:self];
+            [alert addButtonWithTitle:@"YES"];
+            [alert addButtonWithTitle:@"NO"];
+            if ([alert runModal] == NSAlertFirstButtonReturn){
+                [[NSWorkspace sharedWorkspace] openURL:url];
+            }
+        }
+    }];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
