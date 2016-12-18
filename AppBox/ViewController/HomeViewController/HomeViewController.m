@@ -36,6 +36,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
     [project setBuildDirectory: pathBuild.URL];
     
+    [self updateViewState];
 }
 
 - (void)viewWillAppear{
@@ -43,17 +44,17 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }else{
-        [self progressCompletedViewState];
+        [self viewStateForProgress:YES];
     }
 }
 
 
-#pragma mark - Project / IPA Controls Action
+#pragma mark - Controls Action Handler -
+#pragma mark → Project / Workspace Controls Action
 //Project Path Handler
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
     if (![project.fullPath isEqualTo:sender.URL]){
         [project setFullPath: sender.URL];
-        [buttonAction setTitle:@"Build Project and Upload IPA"];
         [self runGetSchemeScript];
     }
 }
@@ -67,7 +68,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 
 //Scheme Value Changed
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender {
-    [self updateBuildButtonState];
+    [self updateViewState];
 }
 
 //Team Value Changed
@@ -80,26 +81,24 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }else{
         [project setTeamId: sender.stringValue];
     }
-    [self updateBuildButtonState];
+    [self updateViewState];
 }
 
 //Build Type Changed
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
     if (![project.buildType isEqualToString:sender.stringValue]){
         [project setBuildType: sender.stringValue];
-        [self updateBuildButtonState];
+        [self updateViewState];
     }
 }
 
-#pragma mark - IPA File Controlles Actions
+#pragma mark → IPA File Controlles Actions
 //IPA File Path Handler
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
-    project.ipaFullPath = sender.URL;
-    [buttonAction setTitle:@"Upload IPA"];
-    [self updateBuildButtonState];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self getIPAInfoFromLocalURL:project.ipaFullPath];
-    });
+    if (![project.fullPath isEqual:sender.URL]){
+        project.ipaFullPath = sender.URL;
+        [self updateViewState];
+    }
 }
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
@@ -107,7 +106,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 }
 
 
-#pragma mark - Mail and Shutdown controls action
+#pragma mark → Mail Controls Action
 //Send mail option
 - (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
     if (sender.state == NSOnState && ![UserData isGmailLoggedIn]){
@@ -137,20 +136,24 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [UserData setUserMessage:sender.stringValue];
 }
 
-
-#pragma mark - Final Action Button (Build/IPA)
+#pragma mark → Final Action Button (Build/IPA)
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
-    if (project.fullPath){
-        [project setIsBuildOnly:NO];
-        [self runBuildScript];
-    }else if (project.ipaFullPath){
-        [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+    if (![sender.title.lowercaseString isEqualToString:@"stop"]){
+        if (project.fullPath){
+            [project setIsBuildOnly:NO];
+            [self runBuildScript];
+        }else if (project.ipaFullPath){
+            [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+        }
+        [self viewStateForProgress:NO];
+    }else{
+        [Common showAlertWithTitle:@"AppBox" andMessage:@"Comming Soon... You can quit and start again :D !!"];
     }
 }
 
-
-#pragma mark - Task
+#pragma mark - NSTask (Scheme, TeamId and Archive) -
+#pragma mark → Task
 
 - (void)runGetSchemeScript{
     [self showStatus:@"Getting project scheme..." andShowProgressBar:YES withProgress:-1];
@@ -205,7 +208,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
 }
 
-#pragma mark - Capture task data
+#pragma mark → Run and Capture task data
 
 - (void)runTaskWithLaunchPath:(NSString *)launchPath andArgument:(NSArray *)arguments{
     NSTask *task = [[NSTask alloc] init];
@@ -273,6 +276,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
+                [self viewStateForProgress:YES];
             }
             
             //Handle Build Response
@@ -304,6 +308,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }];
 }
 
+#pragma mark - Get IPA Info -
+
 -(void)checkIPACreated{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
@@ -313,8 +319,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         }
     });
 }
-
-#pragma mark - Get IPA Info
 
 - (void)getIPAInfoFromLocalURL:(NSURL *)ipaFileURL{
     NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
@@ -335,19 +339,29 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
-                [self progressCompletedViewState];
+                [self viewStateForProgress:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                 return;
             }
+            
             //get info.plist
             [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
             if (project.ipaInfoPlist == nil) {
-                [self progressCompletedViewState];
+                [self viewStateForProgress:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
-            [textFieldBundleIdentifier setStringValue: project.identifer];
+            
+            //set dropbox folder name
+            if (textFieldBundleIdentifier.stringValue.length == 0){
+                [textFieldBundleIdentifier setStringValue: project.identifer];
+            }
             [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
+            
+            //upload ipa file directly if archive and ipa selected
+            if (tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
+                [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+            }
         }];
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
@@ -359,6 +373,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         [Common showAlertWithTitle:@"IPA File Missing" andMessage:@"Please select the IPA file and try again."];
         return;
     }
+    [self getIPAInfoFromLocalURL:project.ipaFullPath];
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
         NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
         bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -374,7 +389,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     NSLog(@"Temporaray folder %@",NSTemporaryDirectory());
 }
 
-#pragma mark - Updating Unique Link
+#pragma mark - Updating Unique Link -
 -(void)updateUniquLinkDictinory:(NSMutableDictionary *)dictUniqueLink{
     if(![dictUniqueLink isKindOfClass:[NSDictionary class]])
         dictUniqueLink = [NSMutableDictionary new];
@@ -428,11 +443,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }
 }
 
-#pragma mark - DB Delegate
+#pragma mark - DB and RestClient Delegate -
+#pragma mark → DB Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
+    
 }
 
-#pragma mark - RestClient Delegate
+#pragma mark →RestClient Delegate
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata{
     NSLog(@"Loaded Meta Data %@",metadata);
     if([metadata.path isEqualToString:project.bundleDirectory.absoluteString]){
@@ -468,7 +485,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 //Upload File
 -(void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
-    [self progressCompletedViewState];
+    [self viewStateForProgress:YES];;
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
@@ -480,7 +497,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         }
     }
     else if (fileType == FileTypeIPA){
-        [self disableEmailFields];
+        
     }
     [restClient loadSharableLinkForFile:metadata.path shortUrl:NO];
     NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for %@",(fileType == FileTypeIPA)?@"IPA":@"Manifest"];
@@ -504,7 +521,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 //Shareable Link
 -(void)restClient:(DBRestClient *)restClient loadSharableLinkFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
-    [self progressCompletedViewState];
+    [self viewStateForProgress:YES];
 }
 
 -(void)restClient:(DBRestClient *)restClientLocal loadedSharableLink:(NSString *)link forFile:(NSString *)path{
@@ -541,7 +558,26 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }
 }
 
-#pragma mark - Create ShortSharable URL
+#pragma mark → Dropbox Helper
+- (void)authHelperStateChangedNotification:(NSNotification *)notification {
+    if ([[DBSession sharedSession] isLinked]) {
+        [self viewStateForProgress:YES];
+    }
+}
+
+- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
+    // This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
+}
+
+- (DBRestClient *)restClient {
+    if (!restClient) {
+        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        restClient.delegate = self;
+    }
+    return restClient;
+}
+
+#pragma mark - Create ShortSharable URL -
 -(void)createUniqueShortSharableUrl{
     NSString *originalURL = [project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
@@ -569,44 +605,26 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }];
 }
 
-#pragma mark - Completion Process
--(void)showURL{
-    NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
-    [self showStatus:status andShowProgressBar:NO withProgress:0];
-    if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
-        [self performSegueWithIdentifier:@"MailView" sender:self];
-    }else{
-        [self performSegueWithIdentifier:@"ShowLink" sender:self];
-    }
-    [self progressCompletedViewState];
-}
 
-#pragma mark - Dropbox Helper
-- (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    if ([[DBSession sharedSession] isLinked]) {
-        [self progressCompletedViewState];
-    }
-}
+#pragma mark - Controller Helpers -
 
-- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-    // This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
-}
-
-- (DBRestClient *)restClient {
-    if (!restClient) {
-        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        restClient.delegate = self;
-    }
-    return restClient;
-}
-
-#pragma mark - Controller Helper
--(void)progressCompletedViewState{
-
-}
-
--(void)disableEmailFields{
-    
+-(void)viewStateForProgress:(BOOL)finish{
+//    [pathBuild setEnabled:finish];
+//    [pathIPAFile setEnabled:finish];
+//    [pathProject setEnabled:finish];
+//    [comboTeamId setEnabled:finish];
+//    [comboBuildType setEnabled:finish];
+//    [comboBuildScheme setEnabled:finish];
+//    [buttonSendMail setEnabled:finish];
+//    [buttonUniqueLink setEnabled:finish];
+//    [textFieldBundleIdentifier setEnabled:finish];
+//    [textFieldEmail setEnabled:finish];
+//    [textFieldMessage setEnabled:finish];
+//    if (finish){
+//        [self updateViewState];
+//    }else{
+//        [buttonAction setTitle:@"Stop"];
+//    }
 }
 
 -(void)resetBuildOptions{
@@ -637,13 +655,21 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     }
 }
 
--(void)updateBuildButtonState{
-    BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 &&
-                    comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0) || project.ipaFullPath != nil);
+-(void)updateViewState{
+    //update action button
+    BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 && //build scheme
+                    comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0 && //build type
+                    comboTeamId.stringValue != nil && comboTeamId.stringValue.length > 0 && //team id
+                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab) ||
+                   
+                   //if ipa selected
+                   (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
     [buttonAction setEnabled:enable];
+    [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
+    
 }
 
-#pragma mark - MailDelegate
+#pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
     
 }
@@ -653,6 +679,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [Common shutdownSystem];
         });
+    }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
+        [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
 }
 
@@ -680,7 +708,23 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [self textFieldDevMessageValueChanged:textFieldMessage];
 }
 
-#pragma mark - Navigation
+#pragma mark - TabView Delegate
+-(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+    [self updateViewState];
+}
+
+#pragma mark - Navigation -
+-(void)showURL{
+    NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
+    [self showStatus:status andShowProgressBar:NO withProgress:0];
+    if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
+        [self performSegueWithIdentifier:@"MailView" sender:self];
+    }else{
+        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+    }
+    [self viewStateForProgress:YES];
+}
+
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
@@ -695,4 +739,5 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
         }
     }
 }
+
 @end

@@ -22,6 +22,7 @@
 #import "Constants.h"
 #import "XCProject.h"
 #import "AppDelegate.h"
+#import "NetworkHandler.h"
 
 
 #endif /* AppBoxPrefixHeader_pch */

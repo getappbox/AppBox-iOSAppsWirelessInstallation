@@ -11,6 +11,7 @@
 
 //Base URL's
 #define MailerBaseURL @"https://tryapp.github.io/mail"
+#define GitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 
 //dropbox
 #define DbRoot kDBRootAppFolder
@@ -19,6 +20,7 @@
 
 //notification
 #define SessionLogUpdated @"SessionLogUpdated"
+
 
 //enums
 typedef enum : NSUInteger {
