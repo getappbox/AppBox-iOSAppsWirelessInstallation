@@ -339,9 +339,9 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
-				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E18DCB1B1DFED95000BD7F11 /* UserData.h */,
 				E18DCB1C1DFED95000BD7F11 /* UserData.m */,
 				E1A3965B1E040C9E0065FC7F /* NetworkHandler.h */,

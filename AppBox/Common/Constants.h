@@ -21,6 +21,10 @@
 //notification
 #define SessionLogUpdated @"SessionLogUpdated"
 
+//messages
+#define KeepSameLinkHelpTitle @"What is keep same link for all future upload?"
+#define KeepSameLinkHelpMessage  @"This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below. \n\nWe are working on this feature, Once we fineshed this you will be able to install previous build/ipa also."
+
 
 //enums
 typedef enum : NSUInteger {

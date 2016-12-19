@@ -10,7 +10,7 @@
 
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
 static NSString *const UNIQUE_LINK_SHORT = @"uniqueLinkShort";
-static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
+static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 @implementation HomeViewController{
     XCProject *project;
@@ -102,7 +102,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 }
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-    //NOT required
+    [textFieldBundleIdentifier setEnabled:(sender.state == NSOnState)];
+}
+
+- (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
+    [Common showAlertWithTitle:KeepSameLinkHelpTitle andMessage:KeepSameLinkHelpMessage];
 }
 
 
@@ -133,7 +137,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
 
 //developer message text field
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
-    [UserData setUserMessage:sender.stringValue];
+    if (sender.stringValue.length > 0){
+        [UserData setUserMessage:sender.stringValue];
+    }
 }
 
 #pragma mark → Final Action Button (Build/IPA)
@@ -700,12 +706,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"UniqueLink.json";
     [textFieldMessage setEnabled:enable];
     
     //Get last time valid data
-    [textFieldEmail setStringValue:[UserData userEmail]];
-    [textFieldMessage setStringValue:[UserData userMessage]];
+    [textFieldEmail setStringValue: enable ? [UserData userEmail] : @""];
+    [textFieldMessage setStringValue: enable ? [UserData userMessage] : @""];
     
     //Just for confirm changes
     [self textFieldMailValueChanged:textFieldEmail];
     [self textFieldDevMessageValueChanged:textFieldMessage];
+    
 }
 
 #pragma mark - TabView Delegate
