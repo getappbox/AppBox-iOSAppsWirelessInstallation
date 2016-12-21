@@ -18,7 +18,7 @@
 }
 
 -(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message{
-    NSMutableString *mailString = [NSMutableString stringWithString:MailerBaseURL];
+    NSMutableString *mailString = [NSMutableString stringWithString:abMailerBaseURL];
     [mailString appendFormat:@"?to=%@",mailId];
     [mailString appendFormat:@"&app=%@",self.name];
     [mailString appendFormat:@"&ver=%@",self.version];

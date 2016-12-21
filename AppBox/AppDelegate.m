@@ -33,10 +33,9 @@
     [Common isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
             NSAlert *alert = [[NSAlert alloc] init];
-            [alert setMessageText: @"New Version Available - AppBox"];
+            [alert setMessageText: @"New Version Available"];
             [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
             [alert setAlertStyle:NSInformationalAlertStyle];
-            [alert setDelegate:self];
             [alert addButtonWithTitle:@"YES"];
             [alert addButtonWithTitle:@"NO"];
             if ([alert runModal] == NSAlertFirstButtonReturn){
@@ -62,7 +61,7 @@
 
 -(void)addSessionLog:(NSString *)sessionLog{
     [_sessionLog appendFormat: @"\n\n%@ - %@",[NSDate date],sessionLog];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SessionLogUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
 }
 
 #pragma mark - Notification Center Delegate
