@@ -19,17 +19,17 @@ AppBox is a tool for developers to deploy Development and In-house applications 
  `*` Will be available in future version
  
 # Download latest release
-### [Click here to download AppBox.app for your Mac](https://iosappswirelessinstallation.codeplex.com/)
-
-# Upcoming Version Screenshot
-I'm building new version with auto archive, build, test and distribute. You can find the latest code inside development branch. You can download alpha release build from here https://iosappswirelessinstallation.codeplex.com/downloads/get/1622425
-
-![](http://download-codeplex.sec.s-msft.com/Download?ProjectName=iosappswirelessinstallation&DownloadId=1622305)
+### [Click here to download AppBox.app for your Mac](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/0.9.5/AppBox.app.zip)
 
 # Current Version Screenshot
-![](https://www.codeplex.com/Download?ProjectName=iosappswirelessinstallation&DownloadId=1605454)
-![](https://www.codeplex.com/Download?ProjectName=iosappswirelessinstallation&DownloadId=1605459)
-![](https://www.codeplex.com/Download?ProjectName=iosappswirelessinstallation&DownloadId=1605456)
+### Upload IPA
+![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/blob/Screenshot/Screenshot/uploadipa.png?raw=true)
+
+### Archive and Upload IPA
+![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/blob/Screenshot/Screenshot/archiveandipa.png?raw=trye)
+
+### Uploading IPA
+![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/blob/Screenshot/Screenshot/uploadingipa.png?raw=true)
 
 # Contributions
 Any contribution is more than welcome! You can contribute through pull requests and issues on [GitHub](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation) or [Codeplex](https://iosappswirelessinstallation.codeplex.com/).
