@@ -106,6 +106,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
     if (![project.fullPath isEqual:sender.URL]){
         project.ipaFullPath = sender.URL;
+        [textFieldBundleIdentifier setStringValue:abEmptyString];
         [self updateViewState];
     }
 }
@@ -390,7 +391,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [self getIPAInfoFromLocalURL:project.ipaFullPath];
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
         NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
-        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:@""];
+        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
         [project setBundleDirectory:[NSURL URLWithString:bundlePath]];
         [project upadteDbDirectoryByBundleDirectory];
     }
@@ -412,7 +413,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                                     @"version" : project.version,
                                     @"build" : project.build,
                                     @"identifier" : project.identifer,
-                                    @"manifestLink" : project.manifestFileSharableURL.absoluteString
+                                    @"manifestLink" : project.manifestFileSharableURL.absoluteString,
+                                    @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
                                     };
     NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
     if(!versionHistory){
@@ -648,7 +650,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
-    NSLog(@"%@",status);
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
     [progressIndicator setHidden:!showProgressBar];
@@ -714,8 +715,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [textFieldMessage setEnabled:enable];
     
     //Get last time valid data
-    [textFieldEmail setStringValue: enable ? [UserData userEmail] : @""];
-    [textFieldMessage setStringValue: enable ? [UserData userMessage] : @""];
+    [textFieldEmail setStringValue: enable ? [UserData userEmail] : abEmptyString];
+    [textFieldMessage setStringValue: enable ? [UserData userMessage] : abEmptyString];
     
     //Just for confirm changes
     [self textFieldMailValueChanged:textFieldEmail];
