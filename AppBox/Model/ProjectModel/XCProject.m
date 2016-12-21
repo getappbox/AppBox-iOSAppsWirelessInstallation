@@ -115,7 +115,7 @@
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
     _ipaInfoPlist = ipaInfoPlist;
     [self createUDIDAndIsNew:YES];
-    if (self.name == nil){
+    if ([ipaInfoPlist valueForKey:@"CFBundleName"] != nil){
         [self setName: [ipaInfoPlist valueForKey:@"CFBundleName"]];
     }
     [self setBuild: [ipaInfoPlist valueForKey:@"CFBundleVersion"]];
