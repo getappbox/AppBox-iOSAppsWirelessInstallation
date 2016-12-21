@@ -24,7 +24,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     project = [[XCProject alloc] init];
     allTeamIds = [Common getAllTeamId];
-    DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
+    
+    //Init DBSession
+    DBSession *session = [[DBSession alloc] initWithAppKey:abDbAppkey appSecret:abDbScreatkey root:abDbRoot];
     [session setDelegate:self];
     [DBSession setSharedSession:session];
     
@@ -33,8 +35,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
+    //setup initial value
     [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
     [project setBuildDirectory: pathBuild.URL];
+    
+    //setup team id
+    [comboTeamId removeAllItems];
+    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [comboTeamId addItemWithObjectValue:[obj valueForKey:abFullName]];
+    }];
     
     [self updateViewState];
 }
@@ -76,7 +85,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     NSString *teamId;
     if (sender.stringValue.length != 10 || [sender.stringValue containsString:@" "]){
         NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.fullName LIKE %@",sender.stringValue]] firstObject];
-        teamId = [team valueForKey:@"teamId"];
+        teamId = [team valueForKey:abTeamId];
         [project setTeamId: teamId];
     }else{
         [project setTeamId: sender.stringValue];
@@ -106,7 +115,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
-    [Common showAlertWithTitle:KeepSameLinkHelpTitle andMessage:KeepSameLinkHelpMessage];
+    [Common showAlertWithTitle:abKeepSameLinkHelpTitle andMessage:abKeepSameLinkHelpMessage];
 }
 
 
@@ -225,7 +234,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (scriptType == ScriptTypeTeamId){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [task terminate];
-            NSLog(@"Task teeminating!!");
+            [[AppDelegate appDelegate] addSessionLog:@"terminating task!!"];
         });
     }
 }
@@ -237,8 +246,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSData *outputData =  pipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", outputString);
-        [[AppDelegate appDelegate] addSessionLog:outputString];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Task Output - %@\n",outputString]];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Handle Project Scheme Response
@@ -267,18 +275,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     if (devTeam != nil) {
                         project.teamId = [[devTeam componentsSeparatedByString:@" = "] lastObject];
                         if (project.teamId != nil){
-                            [comboTeamId removeAllItems];
-                            [comboTeamId addItemWithObjectValue:project.teamId];
-                            [comboTeamId selectItemAtIndex:0];
+                            NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.teamId LIKE %@",project.teamId]] firstObject];
+                            if (team != nil){
+                                [comboTeamId selectItemAtIndex:[allTeamIds indexOfObject:team]];
+                            }else{
+                                [comboTeamId addItemWithObjectValue:project.teamId];
+                                [comboTeamId selectItemWithObjectValue:project.teamId];
+                            }
                             [self showStatus:@"All Done!! Lets build the Rocket!!" andShowProgressBar:NO withProgress:-1];
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
-                    [comboTeamId removeAllItems];
-                    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        [comboTeamId addItemWithObjectValue:[obj valueForKey:@"fullName"]];
-                    }];
-                    [self showStatus:@"Can't able to find Team ID! Please enter manually!" andShowProgressBar:NO withProgress:-1];
+                    [self showStatus:@"Can't able to find Team ID! Please select/enter manually!" andShowProgressBar:NO withProgress:-1];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -392,7 +400,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //upload ipa
     fileType = FileTypeIPA;
     [self.restClient uploadFile:project.ipaFullPath.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
-    NSLog(@"Temporaray folder %@",NSTemporaryDirectory());
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
 #pragma mark - Updating Unique Link -
@@ -422,7 +430,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (NSDictionary *)getUniqueJsonDict{
     NSError *error;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
-    NSLog(@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary]];
     return dictionary;
 }
 
@@ -457,7 +465,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark →RestClient Delegate
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata{
-    NSLog(@"Loaded Meta Data %@",metadata);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",metadata]];
     if([metadata.path isEqualToString:project.bundleDirectory.absoluteString]){
         for (DBMetadata *contentMetaData in [metadata contents]) {
             if([contentMetaData.filename isEqualToString:FILE_NAME_UNIQUE_JSON]){
@@ -470,11 +478,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path{
-    NSLog(@"Meta unchanged path %@",path);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Meta unchanged path %@",path]];
 }
 
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error{
-    NSLog(@"Error while loading metadata %@",error);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error while loading metadata %@",error]];
     [self handleAfterUniqueJsonMetaDataLoaded];
 }
 
@@ -541,7 +549,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
     }else if (fileType == FileTypeManifest){
         NSString *shareableLink = [link substringToIndex:link.length-5];
-        NSLog(@"manifest link - %@",shareableLink);
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
         project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         if(buttonUniqueLink.state){
             [self.restClient loadMetadata:project.bundleDirectory.absoluteString];
@@ -550,7 +558,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }
     }else if (fileType == FileTypeJson){
         NSString *shareableLink = [link substringToIndex:link.length-5];
-        NSLog(@"Json Sharable link - %@",shareableLink);
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
         project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
