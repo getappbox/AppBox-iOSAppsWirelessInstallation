@@ -53,7 +53,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }else{
-        [self viewStateForProgress:YES];
+        [self viewStateForProgressFinish:YES];
     }
 }
 
@@ -106,7 +106,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
     if (![project.fullPath isEqual:sender.URL]){
         project.ipaFullPath = sender.URL;
-        [textFieldBundleIdentifier setStringValue:abEmptyString];
         [self updateViewState];
     }
 }
@@ -162,7 +161,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (project.ipaFullPath){
             [self uploadIPAFileWithLocalURL:project.ipaFullPath];
         }
-        [self viewStateForProgress:NO];
+        [self viewStateForProgressFinish:NO];
     }else{
         [Common showAlertWithTitle:@"AppBox" andMessage:@"Comming Soon... You can quit and start again :D !!"];
     }
@@ -283,7 +282,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                                 [comboTeamId addItemWithObjectValue:project.teamId];
                                 [comboTeamId selectItemWithObjectValue:project.teamId];
                             }
-                            [self showStatus:@"All Done!! Lets build the Rocket!!" andShowProgressBar:NO withProgress:-1];
+                            [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
@@ -291,7 +290,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
-                [self viewStateForProgress:YES];
             }
             
             //Handle Build Response
@@ -313,8 +311,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                    [self viewStateForProgressFinish:YES];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
+                    [self viewStateForProgressFinish:YES];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -354,7 +354,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
-                [self viewStateForProgress:YES];
+                [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                 return;
             }
@@ -362,7 +362,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             //get info.plist
             [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
             if (project.ipaInfoPlist == nil) {
-                [self viewStateForProgress:YES];
+                [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
@@ -388,7 +388,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [Common showAlertWithTitle:@"IPA File Missing" andMessage:@"Please select the IPA file and try again."];
         return;
     }
-    [self getIPAInfoFromLocalURL:project.ipaFullPath];
+    if (tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+        [self getIPAInfoFromLocalURL:project.ipaFullPath];
+    }
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
         NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
         bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
@@ -501,7 +503,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Upload File
 -(void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
-    [self viewStateForProgress:YES];;
+    [self viewStateForProgressFinish:YES];;
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
@@ -537,7 +539,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Shareable Link
 -(void)restClient:(DBRestClient *)restClient loadSharableLinkFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
-    [self viewStateForProgress:YES];
+    [self viewStateForProgressFinish:YES];
 }
 
 -(void)restClient:(DBRestClient *)restClientLocal loadedSharableLink:(NSString *)link forFile:(NSString *)path{
@@ -577,7 +579,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Dropbox Helper
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
     if ([[DBSession sharedSession] isLinked]) {
-        [self viewStateForProgress:YES];
+        [self viewStateForProgressFinish:YES];
     }
 }
 
@@ -624,23 +626,58 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - Controller Helpers -
 
--(void)viewStateForProgress:(BOOL)finish{
-//    [pathBuild setEnabled:finish];
-//    [pathIPAFile setEnabled:finish];
-//    [pathProject setEnabled:finish];
-//    [comboTeamId setEnabled:finish];
-//    [comboBuildType setEnabled:finish];
-//    [comboBuildScheme setEnabled:finish];
-//    [buttonSendMail setEnabled:finish];
-//    [buttonUniqueLink setEnabled:finish];
-//    [textFieldBundleIdentifier setEnabled:finish];
-//    [textFieldEmail setEnabled:finish];
-//    [textFieldMessage setEnabled:finish];
-//    if (finish){
-//        [self updateViewState];
-//    }else{
-//        [buttonAction setTitle:@"Stop"];
-//    }
+-(void)viewStateForProgressFinish:(BOOL)finish{
+    //reset project
+    if (finish){
+        project = [[XCProject alloc] init];
+        [project setBuildDirectory:pathBuild.URL];
+        [progressIndicator setHidden:YES];
+        [labelStatus setStringValue:abEmptyString];
+    }
+    
+    //unique link
+    [buttonUniqueLink setEnabled:finish];
+    [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
+    [textFieldBundleIdentifier setEnabled:(finish && buttonUniqueLink.state == NSOnState)];
+    [textFieldBundleIdentifier setStringValue: finish ? abEmptyString : textFieldBundleIdentifier.stringValue];
+    
+    //build path
+    [pathBuild setEnabled:finish];
+    
+    //ipa path
+    [pathIPAFile setEnabled:finish];
+    [pathIPAFile setURL: finish ? nil : pathIPAFile.URL];
+    
+    //project path
+    [pathProject setEnabled:finish];
+    [pathProject setURL: finish ? nil : pathProject.URL];
+    
+    //team id combo
+    [comboTeamId setEnabled:finish];
+    if (finish && comboTeamId.indexOfSelectedItem >= 0) [comboTeamId deselectItemAtIndex:comboTeamId.indexOfSelectedItem];
+    
+    //build type combo
+    [comboBuildType setEnabled:finish];
+    if (finish && comboBuildType.indexOfSelectedItem >= 0) [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+    
+    //build scheme
+    [comboBuildScheme setEnabled:finish];
+    if (finish){
+        if (comboBuildScheme.indexOfSelectedItem >= 0){
+            [comboBuildScheme deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+        }
+        [comboBuildScheme removeAllItems];
+    }
+    
+    
+    //send mail
+    [buttonSendMail setEnabled:finish];
+    [buttonShutdownMac setEnabled:(finish && buttonSendMail.state == NSOnState)];
+    [textFieldEmail setEnabled:(finish && buttonSendMail.state == NSOnState)];
+    [textFieldMessage setEnabled:(finish && buttonSendMail.state == NSOnState)];
+    
+    //action button
+    [buttonAction setEnabled:finish];
 }
 
 -(void)resetBuildOptions{
@@ -679,18 +716,20 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                    
                    //if ipa selected
                    (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
-    [buttonAction setEnabled:enable];
+    [buttonAction setEnabled:(enable && pathProject.enabled && pathIPAFile.enabled)];
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
     
 }
 
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
-    
+    [self showStatus:@"Sending Mail..." andShowProgressBar:yearMask withProgress:-1];
 }
 
 -(void)mailSentWithWebView:(WebView *)webView{
+    [self showStatus:@"Mail Sent." andShowProgressBar:yearMask withProgress:-1];
     if (buttonShutdownMac.state == NSOnState){
+        [self viewStateForProgressFinish:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [Common shutdownSystem];
         });
@@ -700,10 +739,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)invalidPerametersWithWebView:(WebView *)webView{
-    
+    [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Can't able to send email right now!!"];
+    [self showStatus:@"Can't able to send email." andShowProgressBar:yearMask withProgress:-1];
+    [self viewStateForProgressFinish:YES];
 }
 
 -(void)loginSuccessWithWebView:(WebView *)webView{
+    [self showStatus:@"Logged in with your gmail account." andShowProgressBar:yearMask withProgress:-1];
     [UserData setIsGmailLoggedIn:YES];
     [buttonSendMail setState:NSOnState];
     [self enableMailField:YES];
@@ -731,19 +773,19 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - Navigation -
 -(void)showURL{
-    NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
-    [self showStatus:status andShowProgressBar:NO withProgress:0];
     if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
         [self performSegueWithIdentifier:@"MailView" sender:self];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
-    [self viewStateForProgress:YES];
 }
 
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
+        NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
+        [self showStatus:status andShowProgressBar:NO withProgress:0];
+        [self viewStateForProgressFinish:YES];
     }else if([segue.destinationController isKindOfClass:[MailViewController class]]){
         MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
         [mailViewController setDelegate:self];
