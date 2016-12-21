@@ -61,6 +61,7 @@
 
 -(void)addSessionLog:(NSString *)sessionLog{
     [_sessionLog appendFormat: @"\n\n%@ - %@",[NSDate date],sessionLog];
+    NSLog(@"%@",sessionLog);
     [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
 }
 

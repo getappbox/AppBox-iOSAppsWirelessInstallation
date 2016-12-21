@@ -15,7 +15,7 @@
     int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
     NSAssert(result == 0, @"Error generating random bytes: %d", errno);
     NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
-    base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:abEmptyString];
     return base64EncodedData;
 }
     
@@ -73,9 +73,9 @@
                 [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
                 NSString *tag = [responseObj valueForKey:@"tag_name"];
-                NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
                 NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-                NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
                 completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
             }else{
                 completion(false, nil);
@@ -109,7 +109,7 @@
              [[[certComponent firstObject] lowercaseString] isEqualToString:abiPhoneDeveloper])){
             NSArray *certDetailsComponent = [[certComponent lastObject] componentsSeparatedByString:@" ("];
             if (certDetailsComponent.count == 2){
-                NSString *teamId = [[certDetailsComponent lastObject] stringByReplacingOccurrencesOfString:@")" withString:@""];
+                NSString *teamId = [[certDetailsComponent lastObject] stringByReplacingOccurrencesOfString:@")" withString:abEmptyString];
                 [certProperties setValue:certLabel forKey:abFullName];
                 [certProperties setValue:[certComponent lastObject] forKey:abTeamName];
                 [certProperties setObject:teamId forKey:abTeamId];

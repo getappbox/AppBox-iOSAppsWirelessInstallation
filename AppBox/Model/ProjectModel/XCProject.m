@@ -103,7 +103,7 @@
 #pragma mark - Setter
 
 - (void)setName:(NSString *)name{
-    _name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 }
 
 - (void)setFullPath:(NSURL *)fullPath{

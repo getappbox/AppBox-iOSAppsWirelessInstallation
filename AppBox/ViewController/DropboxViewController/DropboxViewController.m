@@ -29,7 +29,7 @@
 
 #pragma mark - DBSession Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
-    [Common showAlertWithTitle:@"Authorization Failed" andMessage:@""];
+    [Common showAlertWithTitle:@"Authorization Failed" andMessage:abEmptyString];
 }
 
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {

@@ -32,6 +32,9 @@
 #define abTeamName @"teamName"
 #define abTeamId @"teamId"
 
+//others
+#define abEmptyString @""
+
 
 //enums
 typedef enum : NSUInteger {
