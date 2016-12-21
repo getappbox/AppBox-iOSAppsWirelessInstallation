@@ -7,14 +7,19 @@
 AppBox is a tool for developers to deploy Development and In-house applications directly to the devices from your Dropbox account.
 
 # Feature
-1. Auto E-Mail App Distribution Link
-2. Auto Shutdown Mac after Distribution
-3. Maximum Upload Size => Equal to your Dropbox account storage
-4. Uploaded App Expiration => Until you delete from your Dropbox
-5. Installations Per App => Unlimited
-6. Auto App Signing`*`
-7. Auto Upload after Archive`*`
-8. Dashboard`*`
+- Just Select Project/Workspace to archive -> make ipa -> upload ipa -> send mail -> and shutdown mac
+- Keep Same Link
+ - This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below.
+ - If this option is enable, you can also download the previous build with same url.
+ - Read more here - https://iosappswirelessinstallation.codeplex.com/wikipage?title=KeepSameLink
+- Auto E-Mail App Distribution Link
+- Auto Shutdown Mac after Distribution
+ - After 1 min when mail sent notification come
+ - You can only shutdown if mail option is enable
+- Maximum Upload Size => Equal to your Dropbox account storage
+- Uploaded App Expiration => Until you delete from your Dropbox
+- Installations Per App => Unlimited
+-. Dashboard`*`
 
  `*` Will be available in future version
  
