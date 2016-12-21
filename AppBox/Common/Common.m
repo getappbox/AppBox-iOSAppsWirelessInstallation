@@ -68,7 +68,7 @@
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
         [[AppDelegate appDelegate] addSessionLog:@"Checking for new version..."];
-        [NetworkHandler requestWithURL:GitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
+        [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
             if (error == nil &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
@@ -104,13 +104,15 @@
         NSMutableDictionary *certProperties = [[NSMutableDictionary alloc] init];
         NSString *certLabel = [obj valueForKey:(NSString *)kSecAttrLabel];
         NSArray *certComponent = [certLabel componentsSeparatedByString:@": "];
-        if (certComponent.count == 2 && [[certComponent firstObject] containsString:@"Distribution"]){
+        if (certComponent.count == 2 &&
+            ([[[certComponent firstObject] lowercaseString] isEqualToString:abiPhoneDistribution] ||
+             [[[certComponent firstObject] lowercaseString] isEqualToString:abiPhoneDeveloper])){
             NSArray *certDetailsComponent = [[certComponent lastObject] componentsSeparatedByString:@" ("];
             if (certDetailsComponent.count == 2){
                 NSString *teamId = [[certDetailsComponent lastObject] stringByReplacingOccurrencesOfString:@")" withString:@""];
-                [certProperties setValue:certLabel forKey:@"fullName"];
-                [certProperties setValue:[certComponent lastObject] forKey:@"teamName"];
-                [certProperties setObject:teamId forKey:@"teamId"];
+                [certProperties setValue:certLabel forKey:abFullName];
+                [certProperties setValue:[certComponent lastObject] forKey:abTeamName];
+                [certProperties setObject:teamId forKey:abTeamId];
                 if ([teamId containsString:@" "]){
                     
                 }
@@ -120,6 +122,9 @@
                 }
             }
         }
+    }];
+    [plainCertifcates sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [obj1 valueForKey:abTeamId] > [obj2 valueForKey:abTeamId];
     }];
     return plainCertifcates;
 }
