@@ -11,7 +11,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 - Keep Same Link
  - This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below.
  - If this option is enable, you can also download the previous build with same url.
- - Read more here - https://iosappswirelessinstallation.codeplex.com/wikipage?title=KeepSameLink
+ - [Read more here](https://iosappswirelessinstallation.codeplex.com/wikipage?title=KeepSameLink)
 - Auto E-Mail App Distribution Link
 - Auto Shutdown Mac after Distribution
  - After 1 min when mail sent notification come
