@@ -26,7 +26,7 @@
 
 +(NSString *)userEmail{
     NSString *userEmail = [[NSUserDefaults standardUserDefaults] stringForKey:UserEmail];
-    return userEmail == nil ? @"" : userEmail;
+    return userEmail == nil ? abEmptyString : userEmail;
 }
 
 +(void)setUserEmail:(NSString *)userEmail{
@@ -36,7 +36,7 @@
 
 +(NSString *)userMessage{
     NSString *userMessage = [[NSUserDefaults standardUserDefaults] stringForKey:UserMessage];
-    return userMessage == nil ? @"" : userMessage;
+    return userMessage == nil ? abEmptyString : userMessage;
 }
 
 +(void)setUserMessage:(NSString *)userMessage{

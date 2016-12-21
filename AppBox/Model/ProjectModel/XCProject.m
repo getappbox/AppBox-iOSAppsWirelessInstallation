@@ -18,7 +18,7 @@
 }
 
 -(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message{
-    NSMutableString *mailString = [NSMutableString stringWithString:MailerBaseURL];
+    NSMutableString *mailString = [NSMutableString stringWithString:abMailerBaseURL];
     [mailString appendFormat:@"?to=%@",mailId];
     [mailString appendFormat:@"&app=%@",self.name];
     [mailString appendFormat:@"&ver=%@",self.version];
@@ -103,7 +103,7 @@
 #pragma mark - Setter
 
 - (void)setName:(NSString *)name{
-    _name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 }
 
 - (void)setFullPath:(NSURL *)fullPath{
@@ -115,7 +115,7 @@
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
     _ipaInfoPlist = ipaInfoPlist;
     [self createUDIDAndIsNew:YES];
-    if (self.name == nil){
+    if ([ipaInfoPlist valueForKey:@"CFBundleName"] != nil){
         [self setName: [ipaInfoPlist valueForKey:@"CFBundleName"]];
     }
     [self setBuild: [ipaInfoPlist valueForKey:@"CFBundleVersion"]];

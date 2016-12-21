@@ -15,7 +15,7 @@
     int result = SecRandomCopyBytes(NULL, 32, data.mutableBytes);
     NSAssert(result == 0, @"Error generating random bytes: %d", errno);
     NSString *base64EncodedData = [data base64EncodedStringWithOptions:0];
-    base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    base64EncodedData = [base64EncodedData stringByReplacingOccurrencesOfString:@"/" withString:abEmptyString];
     return base64EncodedData;
 }
     
@@ -68,14 +68,14 @@
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
         [[AppDelegate appDelegate] addSessionLog:@"Checking for new version..."];
-        [NetworkHandler requestWithURL:GitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
+        [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
             if (error == nil &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
                 NSString *tag = [responseObj valueForKey:@"tag_name"];
-                NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
                 NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-                NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
                 completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
             }else{
                 completion(false, nil);
@@ -104,13 +104,15 @@
         NSMutableDictionary *certProperties = [[NSMutableDictionary alloc] init];
         NSString *certLabel = [obj valueForKey:(NSString *)kSecAttrLabel];
         NSArray *certComponent = [certLabel componentsSeparatedByString:@": "];
-        if (certComponent.count == 2 && [[certComponent firstObject] containsString:@"Distribution"]){
+        if (certComponent.count == 2 &&
+            ([[[certComponent firstObject] lowercaseString] isEqualToString:abiPhoneDistribution] ||
+             [[[certComponent firstObject] lowercaseString] isEqualToString:abiPhoneDeveloper])){
             NSArray *certDetailsComponent = [[certComponent lastObject] componentsSeparatedByString:@" ("];
             if (certDetailsComponent.count == 2){
-                NSString *teamId = [[certDetailsComponent lastObject] stringByReplacingOccurrencesOfString:@")" withString:@""];
-                [certProperties setValue:certLabel forKey:@"fullName"];
-                [certProperties setValue:[certComponent lastObject] forKey:@"teamName"];
-                [certProperties setObject:teamId forKey:@"teamId"];
+                NSString *teamId = [[certDetailsComponent lastObject] stringByReplacingOccurrencesOfString:@")" withString:abEmptyString];
+                [certProperties setValue:certLabel forKey:abFullName];
+                [certProperties setValue:[certComponent lastObject] forKey:abTeamName];
+                [certProperties setObject:teamId forKey:abTeamId];
                 if ([teamId containsString:@" "]){
                     
                 }
@@ -120,6 +122,9 @@
                 }
             }
         }
+    }];
+    [plainCertifcates sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [obj1 valueForKey:abTeamId] > [obj2 valueForKey:abTeamId];
     }];
     return plainCertifcates;
 }

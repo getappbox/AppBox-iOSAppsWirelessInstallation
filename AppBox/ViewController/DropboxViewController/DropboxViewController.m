@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
+    DBSession *session = [[DBSession alloc] initWithAppKey:abDbAppkey appSecret:abDbScreatkey root:abDbRoot];
     [session setDelegate:self];
     [DBSession setSharedSession:session];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
@@ -29,7 +29,7 @@
 
 #pragma mark - DBSession Delegate
 - (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
-    [Common showAlertWithTitle:@"Authorization Failed" andMessage:@""];
+    [Common showAlertWithTitle:@"Authorization Failed" andMessage:abEmptyString];
 }
 
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {

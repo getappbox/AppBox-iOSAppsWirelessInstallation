@@ -24,7 +24,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     project = [[XCProject alloc] init];
     allTeamIds = [Common getAllTeamId];
-    DBSession *session = [[DBSession alloc] initWithAppKey:DbAppkey appSecret:DbScreatkey root:DbRoot];
+    
+    //Init DBSession
+    DBSession *session = [[DBSession alloc] initWithAppKey:abDbAppkey appSecret:abDbScreatkey root:abDbRoot];
     [session setDelegate:self];
     [DBSession setSharedSession:session];
     
@@ -33,8 +35,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
+    //setup initial value
     [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
     [project setBuildDirectory: pathBuild.URL];
+    
+    //setup team id
+    [comboTeamId removeAllItems];
+    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [comboTeamId addItemWithObjectValue:[obj valueForKey:abFullName]];
+    }];
     
     [self updateViewState];
 }
@@ -44,7 +53,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }else{
-        [self viewStateForProgress:YES];
+        [self viewStateForProgressFinish:YES];
     }
 }
 
@@ -76,7 +85,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     NSString *teamId;
     if (sender.stringValue.length != 10 || [sender.stringValue containsString:@" "]){
         NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.fullName LIKE %@",sender.stringValue]] firstObject];
-        teamId = [team valueForKey:@"teamId"];
+        teamId = [team valueForKey:abTeamId];
         [project setTeamId: teamId];
     }else{
         [project setTeamId: sender.stringValue];
@@ -106,7 +115,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
-    [Common showAlertWithTitle:KeepSameLinkHelpTitle andMessage:KeepSameLinkHelpMessage];
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText: abKeepSameLinkHelpTitle];
+    [alert setInformativeText:abKeepSameLinkHelpMessage];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert addButtonWithTitle:@"Know More"];
+    [alert addButtonWithTitle:@"Ok"];
+    if ([alert runModal] == NSAlertFirstButtonReturn){
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
+    }
 }
 
 
@@ -152,7 +169,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (project.ipaFullPath){
             [self uploadIPAFileWithLocalURL:project.ipaFullPath];
         }
-        [self viewStateForProgress:NO];
+        [self viewStateForProgressFinish:NO];
     }else{
         [Common showAlertWithTitle:@"AppBox" andMessage:@"Comming Soon... You can quit and start again :D !!"];
     }
@@ -225,7 +242,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (scriptType == ScriptTypeTeamId){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [task terminate];
-            NSLog(@"Task teeminating!!");
+            [[AppDelegate appDelegate] addSessionLog:@"terminating task!!"];
         });
     }
 }
@@ -237,8 +254,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSData *outputData =  pipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", outputString);
-        [[AppDelegate appDelegate] addSessionLog:outputString];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Task Output - %@\n",outputString]];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Handle Project Scheme Response
@@ -267,22 +283,21 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     if (devTeam != nil) {
                         project.teamId = [[devTeam componentsSeparatedByString:@" = "] lastObject];
                         if (project.teamId != nil){
-                            [comboTeamId removeAllItems];
-                            [comboTeamId addItemWithObjectValue:project.teamId];
-                            [comboTeamId selectItemAtIndex:0];
-                            [self showStatus:@"All Done!! Lets build the Rocket!!" andShowProgressBar:NO withProgress:-1];
+                            NSDictionary *team = [[allTeamIds filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.teamId LIKE %@",project.teamId]] firstObject];
+                            if (team != nil){
+                                [comboTeamId selectItemAtIndex:[allTeamIds indexOfObject:team]];
+                            }else{
+                                [comboTeamId addItemWithObjectValue:project.teamId];
+                                [comboTeamId selectItemWithObjectValue:project.teamId];
+                            }
+                            [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
-                    [comboTeamId removeAllItems];
-                    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        [comboTeamId addItemWithObjectValue:[obj valueForKey:@"fullName"]];
-                    }];
-                    [self showStatus:@"Can't able to find Team ID! Please enter manually!" andShowProgressBar:NO withProgress:-1];
+                    [self showStatus:@"Can't able to find Team ID! Please select/enter manually!" andShowProgressBar:NO withProgress:-1];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
-                [self viewStateForProgress:YES];
             }
             
             //Handle Build Response
@@ -304,8 +319,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                    [self viewStateForProgressFinish:YES];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
+                    [self viewStateForProgressFinish:YES];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -345,7 +362,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
-                [self viewStateForProgress:YES];
+                [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                 return;
             }
@@ -353,7 +370,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             //get info.plist
             [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
             if (project.ipaInfoPlist == nil) {
-                [self viewStateForProgress:YES];
+                [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
             }
@@ -379,10 +396,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [Common showAlertWithTitle:@"IPA File Missing" andMessage:@"Please select the IPA file and try again."];
         return;
     }
-    [self getIPAInfoFromLocalURL:project.ipaFullPath];
+    if (tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+        [self getIPAInfoFromLocalURL:project.ipaFullPath];
+    }
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
         NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
-        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:@""];
+        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
         [project setBundleDirectory:[NSURL URLWithString:bundlePath]];
         [project upadteDbDirectoryByBundleDirectory];
     }
@@ -392,7 +411,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //upload ipa
     fileType = FileTypeIPA;
     [self.restClient uploadFile:project.ipaFullPath.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
-    NSLog(@"Temporaray folder %@",NSTemporaryDirectory());
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
 #pragma mark - Updating Unique Link -
@@ -404,7 +423,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                                     @"version" : project.version,
                                     @"build" : project.build,
                                     @"identifier" : project.identifer,
-                                    @"manifestLink" : project.manifestFileSharableURL.absoluteString
+                                    @"manifestLink" : project.manifestFileSharableURL.absoluteString,
+                                    @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
                                     };
     NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
     if(!versionHistory){
@@ -422,7 +442,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (NSDictionary *)getUniqueJsonDict{
     NSError *error;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
-    NSLog(@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary]];
     return dictionary;
 }
 
@@ -457,7 +477,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark →RestClient Delegate
 - (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata{
-    NSLog(@"Loaded Meta Data %@",metadata);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",metadata]];
     if([metadata.path isEqualToString:project.bundleDirectory.absoluteString]){
         for (DBMetadata *contentMetaData in [metadata contents]) {
             if([contentMetaData.filename isEqualToString:FILE_NAME_UNIQUE_JSON]){
@@ -470,11 +490,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path{
-    NSLog(@"Meta unchanged path %@",path);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Meta unchanged path %@",path]];
 }
 
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error{
-    NSLog(@"Error while loading metadata %@",error);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error while loading metadata %@",error]];
     [self handleAfterUniqueJsonMetaDataLoaded];
 }
 
@@ -491,7 +511,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Upload File
 -(void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
-    [self viewStateForProgress:YES];;
+    [self viewStateForProgressFinish:YES];;
 }
 
 -(void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata{
@@ -527,7 +547,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Shareable Link
 -(void)restClient:(DBRestClient *)restClient loadSharableLinkFailedWithError:(NSError *)error{
     [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
-    [self viewStateForProgress:YES];
+    [self viewStateForProgressFinish:YES];
 }
 
 -(void)restClient:(DBRestClient *)restClientLocal loadedSharableLink:(NSString *)link forFile:(NSString *)path{
@@ -541,7 +561,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
     }else if (fileType == FileTypeManifest){
         NSString *shareableLink = [link substringToIndex:link.length-5];
-        NSLog(@"manifest link - %@",shareableLink);
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
         project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         if(buttonUniqueLink.state){
             [self.restClient loadMetadata:project.bundleDirectory.absoluteString];
@@ -550,7 +570,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }
     }else if (fileType == FileTypeJson){
         NSString *shareableLink = [link substringToIndex:link.length-5];
-        NSLog(@"Json Sharable link - %@",shareableLink);
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
         project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
@@ -567,7 +587,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Dropbox Helper
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
     if ([[DBSession sharedSession] isLinked]) {
-        [self viewStateForProgress:YES];
+        [self viewStateForProgressFinish:YES];
     }
 }
 
@@ -614,23 +634,58 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - Controller Helpers -
 
--(void)viewStateForProgress:(BOOL)finish{
-//    [pathBuild setEnabled:finish];
-//    [pathIPAFile setEnabled:finish];
-//    [pathProject setEnabled:finish];
-//    [comboTeamId setEnabled:finish];
-//    [comboBuildType setEnabled:finish];
-//    [comboBuildScheme setEnabled:finish];
-//    [buttonSendMail setEnabled:finish];
-//    [buttonUniqueLink setEnabled:finish];
-//    [textFieldBundleIdentifier setEnabled:finish];
-//    [textFieldEmail setEnabled:finish];
-//    [textFieldMessage setEnabled:finish];
-//    if (finish){
-//        [self updateViewState];
-//    }else{
-//        [buttonAction setTitle:@"Stop"];
-//    }
+-(void)viewStateForProgressFinish:(BOOL)finish{
+    //reset project
+    if (finish){
+        project = [[XCProject alloc] init];
+        [project setBuildDirectory:pathBuild.URL];
+        [progressIndicator setHidden:YES];
+        [labelStatus setStringValue:abEmptyString];
+    }
+    
+    //unique link
+    [buttonUniqueLink setEnabled:finish];
+    [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
+    [textFieldBundleIdentifier setEnabled:(finish && buttonUniqueLink.state == NSOnState)];
+    [textFieldBundleIdentifier setStringValue: finish ? abEmptyString : textFieldBundleIdentifier.stringValue];
+    
+    //build path
+    [pathBuild setEnabled:finish];
+    
+    //ipa path
+    [pathIPAFile setEnabled:finish];
+    [pathIPAFile setURL: finish ? nil : pathIPAFile.URL];
+    
+    //project path
+    [pathProject setEnabled:finish];
+    [pathProject setURL: finish ? nil : pathProject.URL];
+    
+    //team id combo
+    [comboTeamId setEnabled:finish];
+    if (finish && comboTeamId.indexOfSelectedItem >= 0) [comboTeamId deselectItemAtIndex:comboTeamId.indexOfSelectedItem];
+    
+    //build type combo
+    [comboBuildType setEnabled:finish];
+    if (finish && comboBuildType.indexOfSelectedItem >= 0) [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+    
+    //build scheme
+    [comboBuildScheme setEnabled:finish];
+    if (finish){
+        if (comboBuildScheme.indexOfSelectedItem >= 0){
+            [comboBuildScheme deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+        }
+        [comboBuildScheme removeAllItems];
+    }
+    
+    
+    //send mail
+    [buttonSendMail setEnabled:finish];
+    [buttonShutdownMac setEnabled:(finish && buttonSendMail.state == NSOnState)];
+    [textFieldEmail setEnabled:(finish && buttonSendMail.state == NSOnState)];
+    [textFieldMessage setEnabled:(finish && buttonSendMail.state == NSOnState)];
+    
+    //action button
+    [buttonAction setEnabled:finish];
 }
 
 -(void)resetBuildOptions{
@@ -640,7 +695,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
-    NSLog(@"%@",status);
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
     [progressIndicator setHidden:!showProgressBar];
@@ -670,18 +724,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                    
                    //if ipa selected
                    (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
-    [buttonAction setEnabled:enable];
+    [buttonAction setEnabled:(enable && pathProject.enabled && pathIPAFile.enabled)];
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
     
 }
 
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
-    
 }
 
 -(void)mailSentWithWebView:(WebView *)webView{
     if (buttonShutdownMac.state == NSOnState){
+        [self viewStateForProgressFinish:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [Common shutdownSystem];
         });
@@ -691,7 +745,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)invalidPerametersWithWebView:(WebView *)webView{
-    
+    [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Can't able to send email right now!!"];
+    [self viewStateForProgressFinish:YES];
 }
 
 -(void)loginSuccessWithWebView:(WebView *)webView{
@@ -706,8 +761,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [textFieldMessage setEnabled:enable];
     
     //Get last time valid data
-    [textFieldEmail setStringValue: enable ? [UserData userEmail] : @""];
-    [textFieldMessage setStringValue: enable ? [UserData userMessage] : @""];
+    [textFieldEmail setStringValue: enable ? [UserData userEmail] : abEmptyString];
+    [textFieldMessage setStringValue: enable ? [UserData userMessage] : abEmptyString];
     
     //Just for confirm changes
     [self textFieldMailValueChanged:textFieldEmail];
@@ -722,19 +777,19 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - Navigation -
 -(void)showURL{
-    NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
-    [self showStatus:status andShowProgressBar:NO withProgress:0];
     if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
         [self performSegueWithIdentifier:@"MailView" sender:self];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
-    [self viewStateForProgress:YES];
 }
 
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
+        NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
+        [self showStatus:status andShowProgressBar:NO withProgress:0];
+        [self viewStateForProgressFinish:YES];
     }else if([segue.destinationController isKindOfClass:[MailViewController class]]){
         MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
         [mailViewController setDelegate:self];

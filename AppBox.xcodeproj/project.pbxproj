@@ -39,7 +39,6 @@
 		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
 		E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB1C1DFED95000BD7F11 /* UserData.m */; };
 		E1A3965D1E040C9E0065FC7F /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A3965C1E040C9E0065FC7F /* NetworkHandler.m */; };
-		E1A3965E1E04123E0065FC7F /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; };
 		E1A3965F1E04123E0065FC7F /* AFNetworking.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
@@ -134,7 +133,6 @@
 				E16437F91D743D4500CE8B7E /* DropboxOSX.framework in Frameworks */,
 				E1FB91D91D78055200F8DF46 /* ZipArchive.framework in Frameworks */,
 				E188EA161D7856D200EBCA52 /* ISO8601.framework in Frameworks */,
-				E1A3965E1E04123E0065FC7F /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +375,7 @@
 		E16437C71D743A4E00CE8B7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Developer Insider";
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
@@ -471,8 +469,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -515,8 +515,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";

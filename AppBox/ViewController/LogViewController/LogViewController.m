@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do view setup here.
     [self refreshLog];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLog) name:SessionLogUpdated object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLog) name:abSessionLogUpdated object:nil];
 }
 
 -(void)refreshLog{
