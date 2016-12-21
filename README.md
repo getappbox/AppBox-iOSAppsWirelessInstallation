@@ -4,7 +4,7 @@
 ![MIT Lincense](https://img.shields.io/badge/license-MIT-blue.svg)
 
 # AppBox - iOS Apps Wireless Installation
-AppBox is a tool for developers to deploy Development and In-house applications directly to the devices from your Dropbox account.
+AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
 
 # Feature
 - Just Select Project/Workspace to archive -> make ipa -> upload ipa -> send mail -> and shutdown mac
