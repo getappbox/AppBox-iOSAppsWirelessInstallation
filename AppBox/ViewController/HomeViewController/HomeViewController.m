@@ -115,7 +115,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
-    [Common showAlertWithTitle:abKeepSameLinkHelpTitle andMessage:abKeepSameLinkHelpMessage];
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText: abKeepSameLinkHelpTitle];
+    [alert setInformativeText:abKeepSameLinkHelpMessage];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert addButtonWithTitle:@"Know More"];
+    [alert addButtonWithTitle:@"Ok"];
+    if ([alert runModal] == NSAlertFirstButtonReturn){
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
+    }
 }
 
 
@@ -723,11 +731,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
-    [self showStatus:@"Sending Mail..." andShowProgressBar:yearMask withProgress:-1];
 }
 
 -(void)mailSentWithWebView:(WebView *)webView{
-    [self showStatus:@"Mail Sent." andShowProgressBar:yearMask withProgress:-1];
     if (buttonShutdownMac.state == NSOnState){
         [self viewStateForProgressFinish:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -740,12 +746,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)invalidPerametersWithWebView:(WebView *)webView{
     [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Can't able to send email right now!!"];
-    [self showStatus:@"Can't able to send email." andShowProgressBar:yearMask withProgress:-1];
     [self viewStateForProgressFinish:YES];
 }
 
 -(void)loginSuccessWithWebView:(WebView *)webView{
-    [self showStatus:@"Logged in with your gmail account." andShowProgressBar:yearMask withProgress:-1];
     [UserData setIsGmailLoggedIn:YES];
     [buttonSendMail setState:NSOnState];
     [self enableMailField:YES];
