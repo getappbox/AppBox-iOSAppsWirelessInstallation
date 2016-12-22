@@ -36,5 +36,8 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 ### Uploading IPA
 ![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/blob/Screenshot/Screenshot/uploadingipa.png?raw=true)
 
+### Installation and All Builds WebPage
+![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/raw/Screenshot/Screenshot/webpage1.png?raw=true)        ![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/raw/Screenshot/Screenshot/webpage2.png?raw=true)
+
 # Contributions
-Any contribution is more than welcome! You can contribute through pull requests and issues on [GitHub](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation) or [Codeplex](https://iosappswirelessinstallation.codeplex.com/).
+Any contribution is more than welcome! You can contribute through pull requests and issues on [GitHub](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
