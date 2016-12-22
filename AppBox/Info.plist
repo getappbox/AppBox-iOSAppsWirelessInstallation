@@ -30,15 +30,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-86tfx5bu3356fqo</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>Dropbox-Live</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>db-mzwu8mq9xdtilpr</string>
 			</array>
 		</dict>
