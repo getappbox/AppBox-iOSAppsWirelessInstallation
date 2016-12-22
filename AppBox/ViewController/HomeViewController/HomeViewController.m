@@ -38,14 +38,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //setup initial value
     [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
     [project setBuildDirectory: pathBuild.URL];
-    
-    //setup team id
-    [comboTeamId removeAllItems];
-    [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [comboTeamId addItemWithObjectValue:[obj valueForKey:abFullName]];
-    }];
-    
-    [self updateViewState];
 }
 
 - (void)viewWillAppear{
@@ -662,7 +654,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //team id combo
     [comboTeamId setEnabled:finish];
-    if (finish && comboTeamId.indexOfSelectedItem >= 0) [comboTeamId deselectItemAtIndex:comboTeamId.indexOfSelectedItem];
+    if (finish){
+        //setup team id
+        [comboTeamId removeAllItems];
+        [comboTeamId setStringValue:abEmptyString];
+        [allTeamIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [comboTeamId addItemWithObjectValue:[obj valueForKey:abFullName]];
+        }];
+    }
     
     //build type combo
     [comboBuildType setEnabled:finish];
@@ -672,6 +671,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [comboBuildScheme setEnabled:finish];
     if (finish){
         if (comboBuildScheme.indexOfSelectedItem >= 0){
+            [comboBuildScheme setStringValue:abEmptyString];
             [comboBuildScheme deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
         }
         [comboBuildScheme removeAllItems];
