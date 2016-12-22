@@ -97,7 +97,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //IPA File Path Handler
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
     if (![project.fullPath isEqual:sender.URL]){
-        project.ipaFullPath = sender.URL;
+        project.ipaFullPath = sender.URL.filePathURL;
         [self updateViewState];
     }
 }
@@ -380,6 +380,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }];
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
+        [self viewStateForProgressFinish:YES];
     }
 }
 
