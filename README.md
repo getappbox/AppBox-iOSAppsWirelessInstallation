@@ -24,7 +24,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
  `*` Will be available in future version
  
 # Download latest release
-### [Click here to download AppBox.app for your Mac](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/0.9.5/AppBox.app.zip)
+### [Click here to download AppBox.app for your Mac](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/0.9.6/AppBox.app.zip)
 
 # Current Version Screenshot
 ### Upload IPA
