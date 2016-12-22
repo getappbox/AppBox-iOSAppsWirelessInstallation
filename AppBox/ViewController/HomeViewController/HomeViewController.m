@@ -685,7 +685,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [textFieldMessage setEnabled:(finish && buttonSendMail.state == NSOnState)];
     
     //action button
-    [buttonAction setEnabled:finish];
+    [self updateViewState];
 }
 
 -(void)resetBuildOptions{
