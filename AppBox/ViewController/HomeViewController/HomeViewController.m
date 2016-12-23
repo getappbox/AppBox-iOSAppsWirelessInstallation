@@ -343,7 +343,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
         [SSZipArchive unzipFileAtPath:fromPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-            if ([[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
+            if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
                 payloadEntry = entry;
             }
             NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
@@ -732,6 +732,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
+    
 }
 
 -(void)mailSentWithWebView:(WebView *)webView{
@@ -768,7 +769,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Just for confirm changes
     [self textFieldMailValueChanged:textFieldEmail];
     [self textFieldDevMessageValueChanged:textFieldMessage];
-    
 }
 
 #pragma mark - TabView Delegate
