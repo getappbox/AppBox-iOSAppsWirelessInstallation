@@ -66,6 +66,12 @@
     return sender;
 }
 
+- (void)webViewClose:(WebView *)sender{
+    [[sender mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:abMailerBaseURL]]];
+    sender.shouldCloseWithWindow = NO;
+}
+
+
 #pragma mark - Actions
 - (IBAction)reloadButtonTapped:(NSButton *)sender {
     [[AppDelegate appDelegate] addSessionLog:@"User Reloaded Current Request!!!"];
