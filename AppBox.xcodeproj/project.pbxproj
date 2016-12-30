@@ -37,8 +37,14 @@
 		E188EA171D78570300EBCA52 /* CMDQueryStringSerialization.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E188EA181D78570800EBCA52 /* ISO8601.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA151D7856D200EBCA52 /* ISO8601.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
-		E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB1C1DFED95000BD7F11 /* UserData.m */; };
-		E1A3965D1E040C9E0065FC7F /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A3965C1E040C9E0065FC7F /* NetworkHandler.m */; };
+		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
+		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
+		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
+		E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B561E16619800C3E0F6 /* GitHandler.m */; };
+		E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B591E1661A300C3E0F6 /* MacHandler.m */; };
+		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
+		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
+		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
 		E1A3965F1E04123E0065FC7F /* AFNetworking.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
@@ -108,10 +114,22 @@
 		E188EA151D7856D200EBCA52 /* ISO8601.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISO8601.framework; sourceTree = "<group>"; };
 		E18DCB151DFE729300BD7F11 /* MailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailViewController.h; sourceTree = "<group>"; };
 		E18DCB161DFE729300BD7F11 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
-		E18DCB1B1DFED95000BD7F11 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
-		E18DCB1C1DFED95000BD7F11 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
-		E1A3965B1E040C9E0065FC7F /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
-		E1A3965C1E040C9E0065FC7F /* NetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHandler.m; sourceTree = "<group>"; };
+		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
+		E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectAdvancedViewController.m; sourceTree = "<group>"; };
+		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
+		E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHandler.m; sourceTree = "<group>"; };
+		E1902B511E16617B00C3E0F6 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		E1902B521E16617B00C3E0F6 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		E1902B551E16619800C3E0F6 /* GitHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitHandler.h; sourceTree = "<group>"; };
+		E1902B561E16619800C3E0F6 /* GitHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitHandler.m; sourceTree = "<group>"; };
+		E1902B581E1661A300C3E0F6 /* MacHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacHandler.h; sourceTree = "<group>"; };
+		E1902B591E1661A300C3E0F6 /* MacHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacHandler.m; sourceTree = "<group>"; };
+		E1902B5B1E1661B300C3E0F6 /* MailHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHandler.h; sourceTree = "<group>"; };
+		E1902B5C1E1661B300C3E0F6 /* MailHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHandler.m; sourceTree = "<group>"; };
+		E1902B5E1E1661BE00C3E0F6 /* UpdateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateHandler.h; sourceTree = "<group>"; };
+		E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateHandler.m; sourceTree = "<group>"; };
+		E1902B621E16633A00C3E0F6 /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainHandler.h; sourceTree = "<group>"; };
+		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E1C148731E027A6100EE637F /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
@@ -236,6 +254,7 @@
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
 				E14363781DF59AC700FB10CA /* LogViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
+				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
 				E18DCB141DFE727100BD7F11 /* MailViewController */,
 			);
 			path = ViewController;
@@ -334,16 +353,91 @@
 			path = MailViewController;
 			sourceTree = "<group>";
 		};
+		E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */,
+				E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */,
+			);
+			path = ProjectAdvancedViewController;
+			sourceTree = "<group>";
+		};
+		E1902B491E16617B00C3E0F6 /* GitHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B551E16619800C3E0F6 /* GitHandler.h */,
+				E1902B561E16619800C3E0F6 /* GitHandler.m */,
+			);
+			path = GitHandler;
+			sourceTree = "<group>";
+		};
+		E1902B4A1E16617B00C3E0F6 /* MacHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B581E1661A300C3E0F6 /* MacHandler.h */,
+				E1902B591E1661A300C3E0F6 /* MacHandler.m */,
+			);
+			path = MacHandler;
+			sourceTree = "<group>";
+		};
+		E1902B4B1E16617B00C3E0F6 /* MailHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B5B1E1661B300C3E0F6 /* MailHandler.h */,
+				E1902B5C1E1661B300C3E0F6 /* MailHandler.m */,
+			);
+			path = MailHandler;
+			sourceTree = "<group>";
+		};
+		E1902B4C1E16617B00C3E0F6 /* NetworkHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */,
+				E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */,
+			);
+			path = NetworkHandler;
+			sourceTree = "<group>";
+		};
+		E1902B4F1E16617B00C3E0F6 /* UpdateHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B5E1E1661BE00C3E0F6 /* UpdateHandler.h */,
+				E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */,
+			);
+			path = UpdateHandler;
+			sourceTree = "<group>";
+		};
+		E1902B501E16617B00C3E0F6 /* UserData */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B511E16617B00C3E0F6 /* UserData.h */,
+				E1902B521E16617B00C3E0F6 /* UserData.m */,
+			);
+			path = UserData;
+			sourceTree = "<group>";
+		};
+		E1902B611E1662E300C3E0F6 /* KeychainHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1902B621E16633A00C3E0F6 /* KeychainHandler.h */,
+				E1902B631E16633A00C3E0F6 /* KeychainHandler.m */,
+			);
+			path = KeychainHandler;
+			sourceTree = "<group>";
+		};
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E1902B501E16617B00C3E0F6 /* UserData */,
+				E1902B491E16617B00C3E0F6 /* GitHandler */,
+				E1902B4A1E16617B00C3E0F6 /* MacHandler */,
+				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
+				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
+				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
+				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
-				E18DCB1B1DFED95000BD7F11 /* UserData.h */,
-				E18DCB1C1DFED95000BD7F11 /* UserData.m */,
-				E1A3965B1E040C9E0065FC7F /* NetworkHandler.h */,
-				E1A3965C1E040C9E0065FC7F /* NetworkHandler.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -422,21 +516,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
-				E1A3965D1E040C9E0065FC7F /* NetworkHandler.m in Sources */,
+				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
+				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
+				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */,
+				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
+				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
+				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
+				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
-				E18DCB1D1DFED95000BD7F11 /* UserData.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
