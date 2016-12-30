@@ -29,6 +29,9 @@
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
+    //Handle URL Scheme
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
     //Check for update
     [Common isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
@@ -63,6 +66,15 @@
     [_sessionLog appendFormat: @"\n\n%@ - %@",[NSDate date],sessionLog];
     NSLog(@"%@",sessionLog);
     [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
+}
+
+//URISchem URL Handler
+-(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
+    NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",urlString]];
+    if (urlString != nil){
+        NSURL *url = [NSURL URLWithString:urlString];
+    }
 }
 
 #pragma mark - Notification Center Delegate
