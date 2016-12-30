@@ -33,6 +33,16 @@
 				<string>db-mzwu8mq9xdtilpr</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>AppBox</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appbox</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
