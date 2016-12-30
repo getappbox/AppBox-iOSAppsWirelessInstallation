@@ -19,4 +19,7 @@
 +(NSString *)userMessage;
 +(void)setUserMessage:(NSString *)userMessage;
 
++(NSURL *)buildLocation;
++(void)setBuildLocation:(NSURL *)buildLocation;
+
 @end
