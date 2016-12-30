@@ -10,6 +10,11 @@
 #import "MailViewController.h"
 #import "DropboxViewController.h"
 #import "ShowLinkViewController.h"
+#import "ProjectAdvancedViewController.h"
+
+#import "MacHandler.h"
+#import "MailHandler.h"
+#import "KeychainHandler.h"
 
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate, MailDelegate, NSTabViewDelegate>{
     //Dropbox
@@ -20,11 +25,11 @@
     
     //Build
     IBOutlet NSPathControl *pathProject;
-    IBOutlet NSPathControl *pathBuild;
     IBOutlet NSComboBox *comboBuildScheme;
     IBOutlet NSComboBox *comboTeamId;
     IBOutlet NSComboBox *comboBuildType;
     IBOutlet NSButton *buttonAction;
+    IBOutlet NSButton *buttonAdcanced;
     
     //Upload IPA
     IBOutlet NSPathControl *pathIPAFile;
@@ -47,7 +52,6 @@
     
 
 - (IBAction)actionButtonTapped:(NSButton *)sender;
-- (IBAction)buildPathHandler:(NSPathControl *)sender;
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender;

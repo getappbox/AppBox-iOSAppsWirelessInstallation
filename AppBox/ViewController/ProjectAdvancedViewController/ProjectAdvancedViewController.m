@@ -16,7 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    [pathBuild setURL:self.project.buildDirectory];
 }
 
+- (IBAction)buttonCancelTapped:(NSButton *)sender {
+    [self dismissController:self];
+}
+
+- (IBAction)buttonSaveTapped:(NSButton *)sender {
+    [UserData setBuildLocation:self.project.buildDirectory];
+    [self dismissController:self];
+}
+
+
+//Build Path Handler
+- (IBAction)buildPathHandler:(NSPathControl *)sender {
+    if (![self.project.buildDirectory isEqualTo:sender.URL]){
+        [self.project setBuildDirectory: sender.URL];
+    }
+}
 @end

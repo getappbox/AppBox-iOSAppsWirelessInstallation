@@ -23,7 +23,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [super viewDidLoad];
     
     project = [[XCProject alloc] init];
-    allTeamIds = [Common getAllTeamId];
+    allTeamIds = [KeychainHandler getAllTeamId];
     
     //Init DBSession
     DBSession *session = [[DBSession alloc] initWithAppKey:abDbAppkey appSecret:abDbScreatkey root:abDbRoot];
@@ -36,8 +36,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     //setup initial value
-    [pathBuild setURL:[NSURL URLWithString:[@"~/Desktop" stringByExpandingTildeInPath]]];
-    [project setBuildDirectory: pathBuild.URL];
+    [project setBuildDirectory: [UserData buildLocation]];
 }
 
 - (void)viewWillAppear{
@@ -57,13 +56,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![project.fullPath isEqualTo:sender.URL]){
         [project setFullPath: sender.URL];
         [self runGetSchemeScript];
-    }
-}
-
-//Build Path Handler
-- (IBAction)buildPathHandler:(NSPathControl *)sender {
-    if (![project.buildDirectory isEqualTo:sender.URL]){
-        [project setBuildDirectory: sender.URL];
     }
 }
 
@@ -136,8 +128,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 //email id text field
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
-    [buttonShutdownMac setEnabled:[Common isValidEmail:sender.stringValue]];
-    if ([Common isValidEmail:sender.stringValue]){
+    [buttonShutdownMac setEnabled:[MailHandler isValidEmail:sender.stringValue]];
+    if ([MailHandler isValidEmail:sender.stringValue]){
         [UserData setUserEmail:sender.stringValue];
     }else{
         [buttonShutdownMac setState:NSOffState];
@@ -631,7 +623,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //reset project
     if (finish){
         project = [[XCProject alloc] init];
-        [project setBuildDirectory:pathBuild.URL];
+        [project setBuildDirectory:[UserData buildLocation]];
         [progressIndicator setHidden:YES];
         [labelStatus setStringValue:abEmptyString];
     }
@@ -641,9 +633,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
     [textFieldBundleIdentifier setEnabled:(finish && buttonUniqueLink.state == NSOnState)];
     [textFieldBundleIdentifier setStringValue: finish ? abEmptyString : textFieldBundleIdentifier.stringValue];
-    
-    //build path
-    [pathBuild setEnabled:finish];
     
     //ipa path
     [pathIPAFile setEnabled:finish];
@@ -725,8 +714,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                    
                    //if ipa selected
                    (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
-    [buttonAction setEnabled:(enable && pathProject.enabled && pathIPAFile.enabled)];
+    [buttonAction setEnabled:(enable && (pathProject.enabled || pathIPAFile.enabled))];
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
+    
+    //update advanced button
+    [buttonAdcanced setEnabled:buttonAction.enabled];
     
 }
 
@@ -739,7 +731,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (buttonShutdownMac.state == NSOnState){
         [self viewStateForProgressFinish:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [Common shutdownSystem];
+            [MacHandler shutdownSystem];
         });
     }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
@@ -778,7 +770,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - Navigation -
 -(void)showURL{
-    if (textFieldEmail.stringValue.length > 0 && [Common isValidEmail:textFieldEmail.stringValue]) {
+    if (textFieldEmail.stringValue.length > 0 && [MailHandler isValidEmail:textFieldEmail.stringValue]) {
         [self performSegueWithIdentifier:@"MailView" sender:self];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
@@ -800,6 +792,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             NSString *mailURL = [project buildMailURLStringForEmailId:textFieldEmail.stringValue andMessage:textFieldMessage.stringValue];
             [mailViewController setUrl: mailURL];
         }
+    }else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
+        ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
+        [projectAdvancedViewController setProject:project];
     }
 }
 

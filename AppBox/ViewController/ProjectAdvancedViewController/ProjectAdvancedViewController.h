@@ -8,6 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ProjectAdvancedViewController : NSViewController
+@interface ProjectAdvancedViewController : NSViewController{
+    IBOutlet NSComboBox *comboBranch;
+    IBOutlet NSPathControl *pathBuild;
+}
+
+@property(nonatomic, strong) XCProject *project;
+
+- (IBAction)buttonSaveTapped:(NSButton *)sender;
+- (IBAction)buttonCancelTapped:(NSButton *)sender;
+- (IBAction)buildPathHandler:(NSPathControl *)sender;
+
 
 @end
