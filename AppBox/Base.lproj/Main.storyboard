@@ -1008,11 +1008,11 @@ Gw
                 <customObject id="LJU-Ru-PwF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="Connect to Dropbox" id="9dR-R1-8zT" customClass="DropboxViewController" sceneMemberID="viewController">
                     <view key="view" id="fEa-Vc-Khq">
-                        <rect key="frame" x="0.0" y="0.0" width="420" height="103"/>
+                        <rect key="frame" x="0.0" y="0.0" width="420" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KAh-it-ITG">
-                                <rect key="frame" x="4" y="13" width="412" height="36"/>
+                                <rect key="frame" x="4" y="3" width="162" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="ClM-vQ-2GE"/>
                                 </constraints>
@@ -1025,22 +1025,37 @@ Gw
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lSb-aY-5bc">
-                                <rect key="frame" x="8" y="55" width="404" height="38"/>
+                                <rect key="frame" x="8" y="45" width="404" height="38"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Please connect AppBox to you Dropbox account. AppBox will only access its own folder inside your Dropbox." id="MhM-iP-ocR">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ilt-Kx-xz4">
+                                <rect key="frame" x="350" y="3" width="66" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="tt0-Ab-Gmv"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jtZ-Gw-bg4">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonQuitTapped:" target="9dR-R1-8zT" id="VbC-EK-OUh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="KAh-it-ITG" firstAttribute="top" secondItem="lSb-aY-5bc" secondAttribute="bottom" constant="10" id="5PE-4u-uWp"/>
+                            <constraint firstAttribute="bottom" secondItem="Ilt-Kx-xz4" secondAttribute="bottom" constant="10" id="C7B-K7-oeg"/>
+                            <constraint firstAttribute="trailing" secondItem="Ilt-Kx-xz4" secondAttribute="trailing" constant="10" id="SGH-Kg-LDg"/>
                             <constraint firstItem="lSb-aY-5bc" firstAttribute="leading" secondItem="fEa-Vc-Khq" secondAttribute="leading" constant="10" id="c2D-YS-y5o"/>
                             <constraint firstItem="KAh-it-ITG" firstAttribute="leading" secondItem="fEa-Vc-Khq" secondAttribute="leading" constant="10" id="fA3-pu-Adn"/>
                             <constraint firstItem="lSb-aY-5bc" firstAttribute="top" secondItem="fEa-Vc-Khq" secondAttribute="top" constant="10" id="jI8-Av-gqO"/>
                             <constraint firstAttribute="trailing" secondItem="lSb-aY-5bc" secondAttribute="trailing" constant="10" id="mdn-2k-CfW"/>
-                            <constraint firstAttribute="trailing" secondItem="KAh-it-ITG" secondAttribute="trailing" constant="10" id="mmx-x8-nqr"/>
-                            <constraint firstItem="KAh-it-ITG" firstAttribute="leading" secondItem="fEa-Vc-Khq" secondAttribute="leading" constant="10" id="u1V-Zj-dMx"/>
+                            <constraint firstItem="Ilt-Kx-xz4" firstAttribute="top" secondItem="lSb-aY-5bc" secondAttribute="bottom" constant="10" id="oLe-nv-N5c"/>
+                            <constraint firstAttribute="bottom" secondItem="KAh-it-ITG" secondAttribute="bottom" constant="10" id="uuU-9u-Cup"/>
                         </constraints>
                     </view>
                     <connections>
