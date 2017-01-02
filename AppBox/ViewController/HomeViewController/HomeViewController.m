@@ -160,6 +160,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (![sender.title.lowercaseString isEqualToString:@"stop"]){
+        [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
             [project setIsBuildOnly:NO];
             [self runBuildScript];
@@ -644,6 +645,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
+    [[AppDelegate appDelegate] setProcessing:!finish];
+    
     //reset project
     if (finish){
         project = [[XCProject alloc] init];
@@ -703,6 +706,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //action button
     [self updateViewState];
+    
+    //logout buttons
+    [self updateMenuButtons];
 }
 
 -(void)resetBuildOptions{
@@ -748,8 +754,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)updateMenuButtons{
     //Menu Buttons
-    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:([UserData isGmailLoggedIn] && [[DBSession sharedSession] isLinked])];
-    [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:[[DBSession sharedSession] isLinked]];
+    BOOL enable = ([[DBSession sharedSession] isLinked] && pathProject.enabled && pathIPAFile.enabled);
+    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:([UserData isGmailLoggedIn] && enable)];
+    [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
 #pragma mark - MailDelegate -
