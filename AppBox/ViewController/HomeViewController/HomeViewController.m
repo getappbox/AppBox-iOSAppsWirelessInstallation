@@ -45,10 +45,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 - (void)viewWillAppear{
     [super viewWillAppear];
-    //Menu Buttons
-    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:[UserData isGmailLoggedIn]];
-    [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:[[DBSession sharedSession] isLinked]];
-    
+    [self updateMenuButtons];
     //Handle Dropbox Login
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
@@ -588,7 +585,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark → Dropbox Helper
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:[[DBSession sharedSession] isLinked]];
+    [self updateMenuButtons];
     if ([[DBSession sharedSession] isLinked]) {
         [self viewStateForProgressFinish:YES];
     }
@@ -749,6 +746,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
 }
 
+-(void)updateMenuButtons{
+    //Menu Buttons
+    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:([UserData isGmailLoggedIn] && [[DBSession sharedSession] isLinked])];
+    [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:[[DBSession sharedSession] isLinked]];
+}
+
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
     
@@ -778,7 +781,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)enableMailField:(BOOL)enable{
     //Gmail Logout Button
-    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:[UserData isGmailLoggedIn]];
+    [self updateMenuButtons];
     
     //Enable text fields
     [textFieldEmail setEnabled:enable];
