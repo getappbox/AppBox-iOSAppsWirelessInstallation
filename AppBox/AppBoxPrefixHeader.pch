@@ -23,6 +23,7 @@
 #import "XCProject.h"
 #import "AppDelegate.h"
 #import "NetworkHandler.h"
+#import "NSApplication+MenuHandler.h"
 
 
 #endif /* AppBoxPrefixHeader_pch */

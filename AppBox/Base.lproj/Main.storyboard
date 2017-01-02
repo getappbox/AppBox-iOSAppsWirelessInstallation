@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -55,12 +55,26 @@
                             </menuItem>
                             <menuItem title="File" id="dMs-cI-mzQ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="File" id="bib-Uj-vzu">
+                                <menu key="submenu" title="File" autoenablesItems="NO" id="bib-Uj-vzu">
                                     <items>
                                         <menuItem title="View Log" id="Rk6-gK-cUU">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="sqY-cu-265"/>
+                                        <menuItem title="Logout Gmail" id="K8O-EO-3yr" userLabel="Logout Gmail">
+                                            <attributedString key="attributedTitle"/>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="logoutGmailTapped:" target="hnw-xV-0zn" id="ALm-bb-htk"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Logout Dropbox" id="JOb-fc-01Z" userLabel="Logout Dropbox">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="logoutDropBoxTapped:" target="hnw-xV-0zn" id="PTN-tn-E2A"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -152,11 +166,19 @@
                         </items>
                     </menu>
                     <connections>
+                        <outlet property="buttonLogoutDropdox" destination="JOb-fc-01Z" id="bIQ-qt-sZY"/>
+                        <outlet property="buttonLogoutGmail" destination="K8O-EO-3yr" id="UfI-wg-yCn"/>
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+                    <connections>
+                        <outlet property="dropboxLogoutButton" destination="JOb-fc-01Z" id="8aA-3e-Rg0"/>
+                        <outlet property="gmailLogoutButton" destination="K8O-EO-3yr" id="9xt-xT-w9T"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
             <point key="canvasLocation" x="830" y="-113"/>
         </scene>
