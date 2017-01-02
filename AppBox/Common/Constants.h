@@ -12,6 +12,7 @@
 //Base URL's
 #define abMailerBaseURL @"https://appboxapi.github.io/mail"
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
+#define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 
 //Serives Key
