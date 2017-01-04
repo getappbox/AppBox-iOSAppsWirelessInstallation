@@ -38,6 +38,9 @@
 #define abTeamName @"teamName"
 #define abTeamId @"teamId"
 
+//default setting
+#define abBuildLocation @"~/Desktop"
+
 //others
 #define abEmptyString @""
 

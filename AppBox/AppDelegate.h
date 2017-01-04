@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
+#import "UpdateHandler.h"
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) NSMutableString *sessionLog;

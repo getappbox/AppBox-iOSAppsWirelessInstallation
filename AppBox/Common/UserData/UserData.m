@@ -11,6 +11,7 @@
 #define GmailLoggedIn @"GmailLoggedIn"
 #define UserEmail @"UserEmail"
 #define UserMessage @"UserMessage"
+#define BuildLocation @"BuildLocation"
 
 @implementation UserData
 
@@ -24,6 +25,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+//Email Releated
 +(NSString *)userEmail{
     NSString *userEmail = [[NSUserDefaults standardUserDefaults] stringForKey:UserEmail];
     return userEmail == nil ? abEmptyString : userEmail;
@@ -41,6 +43,20 @@
 
 +(void)setUserMessage:(NSString *)userMessage{
     [[NSUserDefaults standardUserDefaults] setValue:userMessage forKey:UserMessage];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//Default Setting
++(NSURL *)buildLocation{
+    NSURL *buildLocation = [[NSUserDefaults standardUserDefaults] URLForKey:BuildLocation];
+    if (buildLocation == nil){
+        buildLocation = [NSURL URLWithString:[abBuildLocation stringByExpandingTildeInPath]];
+    }
+    return buildLocation;
+}
+
++(void)setBuildLocation:(NSURL *)buildLocation{
+    [[NSUserDefaults standardUserDefaults] setURL:buildLocation forKey:BuildLocation];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
