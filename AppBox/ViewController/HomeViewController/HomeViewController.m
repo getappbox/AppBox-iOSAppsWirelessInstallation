@@ -30,7 +30,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [session setDelegate:self];
     [DBSession setSharedSession:session];
     
+    //Notification Handler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gmailLogoutHandler:) name:abGmailLoggedOutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
@@ -41,6 +44,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 - (void)viewWillAppear{
     [super viewWillAppear];
+    [self updateMenuButtons];
+    //Handle Dropbox Login
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }else{
@@ -147,6 +152,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (![sender.title.lowercaseString isEqualToString:@"stop"]){
+        [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
             [project setIsBuildOnly:NO];
             [self runBuildScript];
@@ -569,10 +575,21 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
 }
 
+
 #pragma mark → Dropbox Helper
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
+    [self updateMenuButtons];
     if ([[DBSession sharedSession] isLinked]) {
         [self viewStateForProgressFinish:YES];
+    }
+}
+
+- (void)dropboxLogoutHandler:(id)sender{
+    if ([[DBSession sharedSession] isLinked]){
+        [[DBSession sharedSession] unlinkAll];
+        restClient = nil;
+        [self viewStateForProgressFinish:YES];
+        [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
 }
 
@@ -592,8 +609,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)createUniqueShortSharableUrl{
     NSString *originalURL = [project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
-    [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
+    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
+    [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.appShortShareableURL = shortURL;
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
@@ -607,8 +624,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)createManifestShortSharableUrl{
     NSString *originalURL = [project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey:@"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"];
-    [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://tryapp.github.io?url=%@",originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
+    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
+    [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self showURL];
@@ -620,6 +637,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
+    [[AppDelegate appDelegate] setProcessing:!finish];
+    
     //reset project
     if (finish){
         project = [[XCProject alloc] init];
@@ -676,6 +695,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //action button
     [self updateViewState];
+    
+    //logout buttons
+    [self updateMenuButtons];
 }
 
 -(void)resetBuildOptions{
@@ -722,6 +744,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
 }
 
+-(void)updateMenuButtons{
+    //Menu Buttons
+    BOOL enable = ([[DBSession sharedSession] isLinked] && pathProject.enabled && pathIPAFile.enabled);
+    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:([UserData isGmailLoggedIn] && enable)];
+    [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
+}
+
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
     
@@ -750,6 +779,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)enableMailField:(BOOL)enable{
+    //Gmail Logout Button
+    [self updateMenuButtons];
+    
     //Enable text fields
     [textFieldEmail setEnabled:enable];
     [textFieldMessage setEnabled:enable];
@@ -761,6 +793,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Just for confirm changes
     [self textFieldMailValueChanged:textFieldEmail];
     [self textFieldDevMessageValueChanged:textFieldMessage];
+}
+
+- (void)gmailLogoutHandler:(id)sender{
+    [buttonSendMail setState:NSOffState];
 }
 
 #pragma mark - TabView Delegate
@@ -787,7 +823,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
         [mailViewController setDelegate:self];
         if (project.appShortShareableURL == nil){
-            [mailViewController setUrl: @"https://tryapp.github.io/mail"];
+            [mailViewController setUrl: abMailerBaseURL];
         }else{
             NSString *mailURL = [project buildMailURLStringForEmailId:textFieldEmail.stringValue andMessage:textFieldMessage.stringValue];
             [mailViewController setUrl: mailURL];

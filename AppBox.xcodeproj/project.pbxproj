@@ -15,6 +15,7 @@
 		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
 		E13946171DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */; };
 		E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E143637A1DF59AFD00FB10CA /* LogViewController.m */; };
+		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
 		E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437D31D743A4E00CE8B7E /* AppDelegate.m */; };
@@ -82,6 +83,8 @@
 		E13946151DF2FBAD00B3FAD0 /* WorkspaceBuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = WorkspaceBuildScript.sh; sourceTree = "<group>"; };
 		E14363791DF59AFD00FB10CA /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		E143637A1DF59AFD00FB10CA /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MenuHandler.h"; sourceTree = "<group>"; };
+		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MenuHandler.m"; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
 		E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLinkViewController.m; sourceTree = "<group>"; };
 		E16018EE1DEC0BC200E3A377 /* DropboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxViewController.h; sourceTree = "<group>"; };
@@ -184,6 +187,15 @@
 			path = LogViewController;
 			sourceTree = "<group>";
 		};
+		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */,
+				E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */,
+			);
+			path = MenuHandler;
+			sourceTree = "<group>";
+		};
 		E15C26671D7FD5A9004243B9 /* ShowLinkViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437ED1D743ABE00CE8B7E /* Storyboard */,
+				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
 				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
@@ -531,6 +544,7 @@
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
+				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,

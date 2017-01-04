@@ -10,16 +10,21 @@
 #define Constants_h
 
 //Base URL's
-#define abMailerBaseURL @"https://tryapp.github.io/mail"
+#define abMailerBaseURL @"https://appboxapi.github.io/mail"
+#define abInstallWebAppBaseURL @"https://tryapp.github.io"
+#define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 
-//dropbox
+//Serives Key
 #define abDbRoot kDBRootAppFolder
 #define abDbAppkey @"mzwu8mq9xdtilpr"
 #define abDbScreatkey @"le27tu0m54mjlc0"
+#define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
 
 //notification
 #define abSessionLogUpdated @"SessionLogUpdated"
+#define abGmailLoggedOutNotification @"GmailLoggedOutNotification"
+#define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"

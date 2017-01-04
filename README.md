@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?branch=master)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/0.9.6/AppBox.app.zip)
-![MIT Lincense](https://img.shields.io/badge/license-MIT-blue.svg)
-[![Gratipay](https://img.shields.io/gratipay/vineetchoudhary.svg)](https://gratipay.com/~vineetchoudhary)
+[![Downloads](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg)](http://tryappbox.com/download)
+[![Twitter](https://img.shields.io/twitter/follow/tryappbox.svg?style=social&label=Follow)](https://twitter.com/tryappbox)
 
 # AppBox - iOS Apps Wireless Installation 🥇 
 AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
@@ -25,7 +24,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
  `*` Will be available in future version
  
 # Download latest release 📦
-[![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/0.9.7/AppBox.app.zip)  [Click here to download AppBox.app for your Mac](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/download/0.9.7/AppBox.app.zip)
+[![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](http://tryappbox.com/download)
 
 
 # Current Version Screenshot 🎨

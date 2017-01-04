@@ -42,7 +42,7 @@
             [alert addButtonWithTitle:@"YES"];
             [alert addButtonWithTitle:@"NO"];
             if ([alert runModal] == NSAlertFirstButtonReturn){
-                [[NSWorkspace sharedWorkspace] openURL:url];
+                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDefaultLatestDownloadURL]];
             }
         }
     }];
@@ -55,6 +55,7 @@
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return YES;
 }
+
 
 #pragma mark - AppDelegate Helper
 

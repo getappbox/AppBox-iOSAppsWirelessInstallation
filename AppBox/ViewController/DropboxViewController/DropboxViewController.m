@@ -10,6 +10,8 @@
 
 @interface DropboxViewController ()
 
+- (IBAction)buttonQuitTapped:(NSButton *)sender;
+
 @end
 
 @implementation DropboxViewController
@@ -25,6 +27,11 @@
 
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
     [[DBAuthHelperOSX sharedHelper] authenticate];
+}
+
+- (IBAction)buttonQuitTapped:(NSButton *)sender {
+    [self dismissController:self];
+    [NSApp terminate:self];
 }
 
 #pragma mark - DBSession Delegate
