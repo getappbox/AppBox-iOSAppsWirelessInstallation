@@ -30,6 +30,7 @@
 		E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A11D7469D200CE8B7E /* CoreData.framework */; };
 		E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A31D7469D900CE8B7E /* Foundation.framework */; };
 		E16438A61D746A2F00CE8B7E /* DropboxOSX.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E16437F81D743D4500CE8B7E /* DropboxOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E16724601E1D2AE000346502 /* CIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E167245F1E1D2AE000346502 /* CIViewController.m */; };
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
 		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
@@ -105,6 +106,8 @@
 		E164389F1D7469CD00CE8B7E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E16438A11D7469D200CE8B7E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E16438A31D7469D900CE8B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E167245E1E1D2AE000346502 /* CIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIViewController.h; sourceTree = "<group>"; };
+		E167245F1E1D2AE000346502 /* CIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIViewController.m; sourceTree = "<group>"; };
 		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
 		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
@@ -251,7 +254,6 @@
 			children = (
 				E16437D61D743A4E00CE8B7E /* main.m */,
 				E16437E31D743A4E00CE8B7E /* Info.plist */,
-				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
 				E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */,
 			);
 			name = "Supporting Files";
@@ -262,6 +264,7 @@
 			children = (
 				E16437ED1D743ABE00CE8B7E /* Storyboard */,
 				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
+				E167245D1E1D2ABF00346502 /* CIViewController */,
 				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
@@ -277,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
+				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +326,15 @@
 				E16438961D743EA300CE8B7E /* WebKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E167245D1E1D2ABF00346502 /* CIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E167245E1E1D2AE000346502 /* CIViewController.h */,
+				E167245F1E1D2AE000346502 /* CIViewController.m */,
+			);
+			path = CIViewController;
 			sourceTree = "<group>";
 		};
 		E172E13A1DEEB34D00405EF2 /* Commands */ = {
@@ -537,6 +550,7 @@
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
+				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
@@ -730,7 +744,8 @@
 				E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */,
 			);
 			currentVersion = E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */;
-			path = AppBox.xcdatamodeld;
+			name = AppBox.xcdatamodeld;
+			path = ../AppBox.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
