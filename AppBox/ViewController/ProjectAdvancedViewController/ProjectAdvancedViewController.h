@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ProjectAdvancedViewController : NSViewController{
-    IBOutlet NSComboBox *comboBranch;
     IBOutlet NSPathControl *pathBuild;
+    IBOutlet NSComboBox *comboAppStoreTool;
 }
 
 @property(nonatomic, strong) XCProject *project;
