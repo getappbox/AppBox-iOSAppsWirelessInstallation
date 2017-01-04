@@ -12,10 +12,6 @@
 #import "ShowLinkViewController.h"
 #import "ProjectAdvancedViewController.h"
 
-#import "MacHandler.h"
-#import "MailHandler.h"
-#import "KeychainHandler.h"
-
 @interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate, MailDelegate, NSTabViewDelegate>{
     //Dropbox
     DBRestClient *restClient;
