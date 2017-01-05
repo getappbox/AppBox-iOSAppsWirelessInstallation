@@ -1,3 +1,4 @@
 language: objective-c
-xcode_project: AppBox-iOSAppsWirelessInstallation/AppBox.xcodeproj # path to your xcodeproj folder
+xcode_project: AppBox-iOSAppsWirelessInstallation/AppBox.xcodeproj
 osx_image: xcode8.1
+after_success: bash <(curl -s https://codecov.io/bash)
