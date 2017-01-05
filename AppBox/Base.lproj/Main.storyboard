@@ -915,11 +915,11 @@ Gw
             <objects>
                 <viewController title="Advanced" id="n1u-76-r4M" customClass="ProjectAdvancedViewController" sceneMemberID="viewController">
                     <view key="view" id="OXY-Ua-ZSc">
-                        <rect key="frame" x="0.0" y="0.0" width="626" height="272"/>
+                        <rect key="frame" x="0.0" y="0.0" width="626" height="273"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bm-kF-uPj">
-                                <rect key="frame" x="13" y="212" width="182" height="19"/>
+                                <rect key="frame" x="13" y="213" width="182" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="178" id="gH5-rb-Lmd"/>
                                 </constraints>
@@ -930,7 +930,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eDk-p6-ajY">
-                                <rect key="frame" x="205" y="208" width="409" height="26"/>
+                                <rect key="frame" x="205" y="209" width="409" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="fSP-gO-BEv"/>
                                 </constraints>
@@ -946,7 +946,7 @@ Gw
                                 </connections>
                             </pathControl>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zOp-hf-PCA">
-                                <rect key="frame" x="208" y="121" width="406" height="26"/>
+                                <rect key="frame" x="208" y="122" width="406" height="26"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Select default tool for AppStore build upload" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="6Nt-C5-vAr">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -981,7 +981,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FCa-LA-otm">
-                                <rect key="frame" x="13" y="126" width="182" height="19"/>
+                                <rect key="frame" x="13" y="127" width="182" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AppStore Upload Tool" id="Wr1-pi-w5B">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -989,7 +989,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="haB-7R-3Q7">
-                                <rect key="frame" x="8" y="241" width="121" height="21"/>
+                                <rect key="frame" x="8" y="242" width="121" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Other Settings" placeholderString="" id="XTF-c4-JRS">
                                     <font key="font" metaFont="systemSemibold" size="17"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -997,7 +997,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0fz-Iv-tzW">
-                                <rect key="frame" x="13" y="160" width="151" height="21"/>
+                                <rect key="frame" x="13" y="161" width="151" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AppStore Settings" placeholderString="" id="IXK-Ft-xCe">
                                     <font key="font" metaFont="systemSemibold" size="17"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1005,10 +1005,10 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-Qe-3nK">
-                                <rect key="frame" x="0.0" y="194" width="626" height="5"/>
+                                <rect key="frame" x="0.0" y="195" width="626" height="5"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GjG-Yi-591">
-                                <rect key="frame" x="13" y="92" width="182" height="19"/>
+                                <rect key="frame" x="13" y="93" width="182" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="178" id="MRH-M0-QWs"/>
                                 </constraints>
@@ -1019,15 +1019,15 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FV2-Md-2U9">
-                                <rect key="frame" x="208" y="91" width="403" height="22"/>
+                                <rect key="frame" x="208" y="91" width="403" height="24"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Username/Email" drawsBackground="YES" id="aSd-wZ-Zad">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ftd-i3-TBC">
-                                <rect key="frame" x="13" y="58" width="182" height="19"/>
+                                <rect key="frame" x="13" y="59" width="182" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="178" id="gJv-z4-dRP"/>
                                 </constraints>
@@ -1038,9 +1038,9 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <secureTextField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kj-T4-5Dy">
-                                <rect key="frame" x="208" y="56" width="403" height="22"/>
+                                <rect key="frame" x="208" y="56" width="403" height="24"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password" drawsBackground="YES" usesSingleLineMode="YES" id="VPy-Q8-TPx">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <allowedInputSourceLocales>

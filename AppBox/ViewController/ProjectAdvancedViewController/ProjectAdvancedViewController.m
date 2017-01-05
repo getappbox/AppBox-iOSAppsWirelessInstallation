@@ -16,6 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([self.project.buildType isEqualToString:BuildTypeAppStore]){
+        [comboAppStoreTool selectItemAtIndex:0];
+    }else{
+        [comboAppStoreTool setEnabled:NO];
+        [textFieldUserName setEnabled:NO];
+        [textFieldPassword setEnabled:NO];
+    }
     [pathBuild setURL:self.project.buildDirectory];
 }
 
@@ -25,6 +32,9 @@
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
     [UserData setBuildLocation:self.project.buildDirectory];
+    [self.project setItcPasswod:textFieldPassword.stringValue];
+    [self.project setItcUserName:textFieldUserName.stringValue];
+    [self.project setAppStoreUploadTool: comboAppStoreTool.stringValue];
     [self dismissController:self];
 }
 
