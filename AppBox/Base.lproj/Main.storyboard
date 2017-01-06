@@ -178,7 +178,7 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
-            <point key="canvasLocation" x="850" y="-118"/>
+            <point key="canvasLocation" x="904" y="-307"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -186,7 +186,7 @@
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <rect key="contentRect" x="538" y="299" width="480" height="270"/>
+                        <rect key="contentRect" x="538" y="299" width="800" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="800" height="500"/>
                         <value key="minFullScreenContentSize" type="size" width="800" height="500"/>
@@ -197,21 +197,21 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="75" y="-40"/>
         </scene>
         <!--AppBox-->
         <scene sceneID="irr-iO-vGD">
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="530"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="536"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="800" height="525"/>
+                                <rect key="frame" x="0.0" y="0.0" width="800" height="531"/>
                                 <subviews>
                                     <tabView initialItem="Q1W-fI-E8i" translatesAutoresizingMaskIntoConstraints="NO" id="ay9-ED-rIF">
-                                        <rect key="frame" x="3" y="266" width="794" height="255"/>
+                                        <rect key="frame" x="3" y="272" width="794" height="255"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Archive and Upload IPA" identifier="1" id="h9M-To-5mB">
@@ -425,13 +425,13 @@
                                         </connections>
                                     </tabView>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="sgg-Iy-WMT">
-                                        <rect key="frame" x="0.0" y="263" width="800" height="5"/>
+                                        <rect key="frame" x="0.0" y="269" width="800" height="5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="vGS-9y-LWH"/>
                                         </constraints>
                                     </box>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="7vC-wN-Vuz">
-                                        <rect key="frame" x="8" y="222" width="402" height="25"/>
+                                        <rect key="frame" x="8" y="228" width="402" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="ckO-EF-Bjd"/>
                                         </constraints>
@@ -444,7 +444,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Cf-Xv-IKb">
-                                        <rect key="frame" x="13" y="190" width="185" height="19"/>
+                                        <rect key="frame" x="13" y="196" width="185" height="19"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DropBox APP Folder Name" id="6YQ-Nb-PU8">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" white="0.0" alpha="0.7166098151408451" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -452,7 +452,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8m1-af-Iwh">
-                                        <rect key="frame" x="206" y="188" width="579" height="24"/>
+                                        <rect key="frame" x="206" y="194" width="579" height="24"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Default: Bundle Identifier " drawsBackground="YES" id="di6-9v-uDZ">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -460,12 +460,12 @@
                                         </textFieldCell>
                                     </textField>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="3gF-GO-Agw">
-                                        <rect key="frame" x="0.0" y="165" width="800" height="5"/>
+                                        <rect key="frame" x="0.0" y="171" width="800" height="5"/>
                                     </box>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="MlA-j9-hh1">
-                                        <rect key="frame" x="10" y="130" width="101" height="19"/>
+                                        <rect key="frame" x="10" y="130" width="101" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="ZGO-Yj-wb9"/>
+                                            <constraint firstAttribute="height" constant="21" id="J50-RA-tjl"/>
                                         </constraints>
                                         <buttonCell key="cell" type="check" title="Send mail" bezelStyle="regularSquare" imagePosition="right" inset="2" id="wXP-vx-y96">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -476,9 +476,9 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Isq-ZS-STM">
-                                        <rect key="frame" x="127" y="130" width="258" height="19"/>
+                                        <rect key="frame" x="127" y="130" width="258" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="bRI-kN-qUq"/>
+                                            <constraint firstAttribute="height" constant="21" id="49s-Wv-xfi"/>
                                         </constraints>
                                         <buttonCell key="cell" type="check" title="Send mail and Shutdown mac" bezelStyle="regularSquare" imagePosition="right" enabled="NO" inset="2" id="pJ3-Ut-ZP2">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -574,7 +574,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VAU-Tg-Nmj">
-                                        <rect key="frame" x="421" y="221" width="25" height="25"/>
+                                        <rect key="frame" x="421" y="227" width="25" height="25"/>
                                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wr3-Z9-aCa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -715,7 +715,7 @@
                 </viewController>
                 <customObject id="Sep-aN-CO8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904" y="288"/>
+            <point key="canvasLocation" x="904" y="26"/>
         </scene>
         <!--Mail View Controller-->
         <scene sceneID="hWk-PV-Lb4">
@@ -883,7 +883,7 @@ Gw
                                     <constraint firstAttribute="height" constant="330" id="b6f-Cy-HJ8"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="dcc-SS-dUh">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="1" y="313" width="528" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="dyG-DJ-qrz">
@@ -1199,7 +1199,7 @@ Gw
                                     <action selector="buttonConnectDropboxTapped:" target="9dR-R1-8zT" id="XfH-B8-bQO"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lSb-aY-5bc">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lSb-aY-5bc">
                                 <rect key="frame" x="8" y="45" width="404" height="38"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Please connect AppBox to you Dropbox account. AppBox will only access its own folder inside your Dropbox." id="MhM-iP-ocR">
                                     <font key="font" metaFont="systemLight" size="15"/>
