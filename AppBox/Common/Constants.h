@@ -43,6 +43,7 @@
 #define abBuildLocation @"~/Desktop"
 
 //others
+#define abTeamIdLength 10
 #define abEmptyString @""
 
 
