@@ -166,8 +166,6 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="buttonLogoutDropdox" destination="JOb-fc-01Z" id="bIQ-qt-sZY"/>
-                        <outlet property="buttonLogoutGmail" destination="K8O-EO-3yr" id="UfI-wg-yCn"/>
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
@@ -194,7 +192,7 @@
                         <value key="minFullScreenContentSize" type="size" width="800" height="500"/>
                     </window>
                     <connections>
-                        <segue destination="lct-wo-jYo" kind="relationship" relationship="window.shadowedContentViewController" id="l3O-zi-UzH"/>
+                        <segue destination="lct-wo-jYo" kind="relationship" relationship="window.shadowedContentViewController" id="Nga-je-HB2"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
