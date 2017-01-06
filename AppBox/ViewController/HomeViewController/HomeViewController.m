@@ -58,8 +58,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Project / Workspace Controls Action
 //Project Path Handler
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
-    if (![project.fullPath isEqualTo:sender.URL]){
-        [project setFullPath: sender.URL];
+    NSURL *senderURL = [sender.URL copy];
+    if (![project.fullPath isEqualTo:senderURL]){
+        [self viewStateForProgressFinish:YES];
+        [project setFullPath: senderURL];
+        [sender setURL:senderURL];
         [self runGetSchemeScript];
     }
 }
