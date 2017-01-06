@@ -20,23 +20,36 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
 
     [certficates enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary *certProperties = [self getPlainCertificate:obj];
+        
+        //Get cert values
         NSString *teamId = [certProperties objectForKey:abTeamId];
         NSString *teamName = [certProperties objectForKey:abTeamName];
         NSString *fullName = [certProperties objectForKey:abFullName];
         
-        NSPredicate *existingTeam = [NSPredicate predicateWithFormat:@"SELF.teamId = %@ AND SELF.teamName = %@ AND SELF.fullName = %@",teamId, teamName, fullName];
-        NSLog(@"filter - %@",[plainCertifcates filteredArrayUsingPredicate:existingTeam]);
-        if (![teamId containsString:@" "] && teamId.length == abTeamIdLength //filter team id
-            && ([fullName.lowercaseString containsString:abiPhoneDeveloper]
-            || [fullName.lowercaseString containsString:abiPhoneDistribution]) //filter certifcates
-            && [plainCertifcates filteredArrayUsingPredicate:existingTeam].count == 0 //filter existing team
-            ){
-            [plainCertifcates addObject:certProperties];
+        //filter developer, distribution cert and valid team id
+        if (![teamId containsString:@" "] && teamId.length == abTeamIdLength &&
+            ([fullName.lowercaseString containsString:abiPhoneDistribution])){
+            
+            //better name
+            fullName = [NSString stringWithFormat:@"%@ (%@)",teamName, teamId];
+            [certProperties setValue:fullName forKey:abFullName];
+            
+            
+            //Check existing team id
+            NSPredicate *existingTeam = [NSPredicate predicateWithFormat:@"SELF.teamId = %@ AND SELF.teamName = %@ AND SELF.fullName = %@",teamId, teamName, fullName];
+            NSLog(@"filter - %@",[plainCertifcates filteredArrayUsingPredicate:existingTeam]);
+            
+            //Filter invalid cert
+            if ([plainCertifcates filteredArrayUsingPredicate:existingTeam].count == 0){
+                
+                //add certificates
+                [plainCertifcates addObject:certProperties];
+            }
         }
     }];
     
     [plainCertifcates sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [obj1 valueForKey:abTeamId] > [obj2 valueForKey:abTeamId];
+        return ([[obj1 valueForKey:abFullName] isLessThan: [obj2 valueForKey:abFullName]]) ? NSOrderedAscending : NSOrderedDescending;
     }];
     return plainCertifcates;
 }
