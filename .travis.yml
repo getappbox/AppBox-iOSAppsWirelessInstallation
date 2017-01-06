@@ -1,7 +1,3 @@
 language: objective-c
 xcode_project: AppBox-iOSAppsWirelessInstallation/AppBox.xcodeproj
 osx_image: xcode8.1
-script: 
-  - xctool -project AppBox.xcodeproj -scheme AppBox build test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
