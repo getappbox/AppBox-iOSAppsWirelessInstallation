@@ -373,9 +373,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 return;
             }
             
-            //set dropbox folder name
+            //set dropbox folder name & log if user changing folder name or not
             if (textFieldBundleIdentifier.stringValue.length == 0){
                 [textFieldBundleIdentifier setStringValue: project.identifer];
+                [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0}];
+            }else{
+                [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
             }
             [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
             

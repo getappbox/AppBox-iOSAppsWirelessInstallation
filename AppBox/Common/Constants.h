@@ -44,6 +44,7 @@
 
 //others
 #define abTeamIdLength 10
+#define abEndOfSessionLog @"abEndOfSessionLog"
 #define abEmptyString @""
 
 

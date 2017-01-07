@@ -46,7 +46,7 @@
             [alert addButtonWithTitle:@"YES"];
             [alert addButtonWithTitle:@"NO"];
             if ([alert runModal] == NSAlertFirstButtonReturn){
-                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDefaultLatestDownloadURL]];
+                [[NSWorkspace sharedWorkspace] openURL:url];
             }
         }
     }];
