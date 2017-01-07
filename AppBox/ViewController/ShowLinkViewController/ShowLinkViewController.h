@@ -9,11 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ShowLinkViewController : NSViewController{
+    IBOutlet NSTextField *textFieldHint;
     IBOutlet NSTextField *textFieldAppLink;
     IBOutlet NSButton *buttonCopyToClipboard;
 }
 
-@property(nonatomic, strong) NSString *appLink;
+@property(nonatomic, strong) XCProject *project;
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender;
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender;

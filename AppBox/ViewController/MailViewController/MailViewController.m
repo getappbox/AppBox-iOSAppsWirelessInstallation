@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [Common logScreen:@"Mail WebView"];
+    
     //Load Request
     [webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]]];
 }
@@ -42,6 +44,7 @@
         
     }else if ([title isEqualToString:@"MailSent"]){
         if (self.presentingViewController != nil){
+            [Answers logCustomEventWithName:@"Mail Sent" customAttributes:@{}];
             [self.delegate mailSentWithWebView:sender];
             [self dismissViewController:self];            
         }
@@ -51,6 +54,7 @@
         [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Invalid Perameter in Email Request!!"];
         
     }else if ([title isEqualToString:@"LoginSuccess"]){
+        [Answers logLoginWithMethod:@"Gmail" success:@YES customAttributes:@{}];
         [self.delegate loginSuccessWithWebView:sender];
         [self dismissController:self];
     }
@@ -58,7 +62,9 @@
 
 - (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Localized Description\n%@ \n\nReason\n%@",error.localizedDescription,error.localizedFailureReason]];
-    [Common showAlertWithTitle:@"AppBox Mail Error" andMessage:error.localizedDescription];
+    if (error.localizedFailureReason){
+        [Common showAlertWithTitle:@"AppBox Mail Error" andMessage:error.localizedDescription];
+    }
 }
 
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request{
@@ -82,5 +88,11 @@
     [[AppDelegate appDelegate] addSessionLog:@"User Canceled Current Request!!!"];
     [webView stopLoading:self];
     [self dismissController:self];
+}
+
+- (IBAction)clearCacheButtonTapped:(NSButton *)sender {
+    [[AppDelegate appDelegate] addSessionLog:@"User Cleared Cache Request!!!"];
+    [KeychainHandler removeAllStoredCredentials];
+    [webView reload:self];
 }
 @end

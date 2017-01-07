@@ -21,6 +21,10 @@
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
     
+    //Init Crashlytics
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
+    [Fabric with:@[[Crashlytics class], [Answers class]]];
+    
     //Start monitoring internet connection
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (status == AFNetworkReachabilityStatusNotReachable){
@@ -29,8 +33,11 @@
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
+    //Handle URL Scheme
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
     //Check for update
-    [Common isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
+    [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setMessageText: @"New Version Available"];
@@ -39,7 +46,7 @@
             [alert addButtonWithTitle:@"YES"];
             [alert addButtonWithTitle:@"NO"];
             if ([alert runModal] == NSAlertFirstButtonReturn){
-                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDefaultLatestDownloadURL]];
+                [[NSWorkspace sharedWorkspace] openURL:url];
             }
         }
     }];
@@ -64,6 +71,15 @@
     [_sessionLog appendFormat: @"\n\n%@ - %@",[NSDate date],sessionLog];
     NSLog(@"%@",sessionLog);
     [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
+}
+
+//URISchem URL Handler
+-(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
+    NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",urlString]];
+    if (urlString != nil){
+        NSURL *url = [NSURL URLWithString:urlString];
+    }
 }
 
 #pragma mark - Notification Center Delegate

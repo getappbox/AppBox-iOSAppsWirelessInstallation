@@ -18,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    
+    //Log Screen
+    [Common logScreen:@"Dropbox Login"];
+    
+    //BDSession
     DBSession *session = [[DBSession alloc] initWithAppKey:abDbAppkey appSecret:abDbScreatkey root:abDbRoot];
     [session setDelegate:self];
     [DBSession setSharedSession:session];
@@ -26,10 +30,12 @@
 }
 
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
+    [Answers logCustomEventWithName:@"Authenticating Dropbox " customAttributes:nil];
     [[DBAuthHelperOSX sharedHelper] authenticate];
 }
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender {
+    [Answers logCustomEventWithName:@"AppBox terminated before Dropbox LoggedIN :( " customAttributes:nil];
     [self dismissController:self];
     [NSApp terminate:self];
 }
@@ -41,6 +47,7 @@
 
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
     if ([[DBSession sharedSession] isLinked]) {
+        [Answers logLoginWithMethod:@"Dropbox" success:@YES customAttributes:@{}];
         [self dismissController:self];
     }
 }

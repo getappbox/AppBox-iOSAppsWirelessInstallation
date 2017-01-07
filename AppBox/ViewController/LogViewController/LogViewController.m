@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do view setup here.
     [self refreshLog];
+    [Common logScreen:@"AppBox Log"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLog) name:abSessionLogUpdated object:nil];
 }
 

@@ -11,14 +11,10 @@
 
 @interface Common : NSObject
 
-+ (void)shutdownSystem;
 + (NSString*)generateUUID;
-+ (NSArray *)getAllTeamId;
-+ (void)removeAllStoredCredentials;
-+ (BOOL) isValidEmail:(NSString *)checkString;
++ (void)logScreen:(NSString *)name;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
-+ (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion;
 
 @end

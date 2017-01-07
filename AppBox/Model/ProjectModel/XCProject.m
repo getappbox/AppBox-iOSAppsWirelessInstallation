@@ -65,28 +65,29 @@
 }
 
 - (void)createBuildRelatedPathsAndIsNew:(BOOL)isNew{
-    
-    //Current Time as UUID
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy-HH-mm-ss"];
-    NSString *currentTime = [dateFormat stringFromDate:[[NSDate alloc] init]];
-    
-    //Build UUID Path
-    NSString *buildUUIDPath = [_buildDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@",self.name, currentTime]];
-    _buildUUIDDirectory = [NSURL URLWithString:buildUUIDPath];
-    [[NSFileManager defaultManager] createDirectoryAtPath:buildUUIDPath withIntermediateDirectories:NO attributes:nil error:nil];
-    
-    //Archive Path
-    NSString *archivePath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.xcarchive",self.name]];
-    _buildArchivePath =  [NSURL URLWithString:archivePath];
-    
-    //IPA Path
-    NSString *ipaPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.ipa", self.name]];
-    _ipaFullPath = [NSURL URLWithString:ipaPath];
-    
-    //Export Option Plist
-    NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", [[self.targets firstObject] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    _exportOptionsPlistPath = [NSURL URLWithString:exportOptionPlistPath];
+    if(isNew || _buildUUIDDirectory == nil){
+        //Current Time as UUID
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd-MM-yyyy-HH-mm-ss"];
+        NSString *currentTime = [dateFormat stringFromDate:[[NSDate alloc] init]];
+        
+        //Build UUID Path
+        NSString *buildUUIDPath = [_buildDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@",self.name, currentTime]];
+        _buildUUIDDirectory = [NSURL URLWithString:buildUUIDPath];
+        [[NSFileManager defaultManager] createDirectoryAtPath:buildUUIDPath withIntermediateDirectories:NO attributes:nil error:nil];
+        
+        //Archive Path
+        NSString *archivePath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.xcarchive",self.name]];
+        _buildArchivePath =  [NSURL URLWithString:archivePath];
+        
+        //IPA Path
+        NSString *ipaPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.ipa", self.name]];
+        _ipaFullPath = [NSURL URLWithString:ipaPath];
+        
+        //Export Option Plist
+        NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", [[self.targets firstObject] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        _exportOptionsPlistPath = [NSURL URLWithString:exportOptionPlistPath];
+    }
 }
 
 #pragma mark - Getter

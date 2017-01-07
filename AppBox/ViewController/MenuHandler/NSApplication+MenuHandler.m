@@ -18,10 +18,10 @@
     [alert addButtonWithTitle:@"Yes"];
     [alert addButtonWithTitle:@"No"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
-        [[NSNotificationCenter defaultCenter] postNotificationName:abGmailLoggedOutNotification object:sender];
-        [UserData setIsGmailLoggedIn:NO];
-        [Common removeAllStoredCredentials];
         [sender setEnabled:NO];
+        [UserData setIsGmailLoggedIn:NO];
+        [KeychainHandler removeAllStoredCredentials];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abGmailLoggedOutNotification object:sender];
     }
 }
 

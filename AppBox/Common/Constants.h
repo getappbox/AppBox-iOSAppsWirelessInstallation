@@ -37,8 +37,14 @@
 #define abFullName @"fullName"
 #define abTeamName @"teamName"
 #define abTeamId @"teamId"
+#define abExpiryDate @"expiryDate"
+
+//default setting
+#define abBuildLocation @"~/Desktop"
 
 //others
+#define abTeamIdLength 10
+#define abEndOfSessionLog @"abEndOfSessionLog"
 #define abEmptyString @""
 
 

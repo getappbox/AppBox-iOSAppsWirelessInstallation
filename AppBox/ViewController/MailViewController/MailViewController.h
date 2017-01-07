@@ -22,6 +22,7 @@
     IBOutlet WebView *webView;
     IBOutlet NSButton *buttonReload;
     IBOutlet NSButton *buttonCancel;
+    IBOutlet NSButton *buttonClearCache;
     IBOutlet NSProgressIndicator *progressIndicator;
 }
 
@@ -30,5 +31,6 @@
 
 - (IBAction)reloadButtonTapped:(NSButton *)sender;
 - (IBAction)cancelButtonTapped:(NSButton *)sender;
+- (IBAction)clearCacheButtonTapped:(NSButton *)sender;
 
 @end
