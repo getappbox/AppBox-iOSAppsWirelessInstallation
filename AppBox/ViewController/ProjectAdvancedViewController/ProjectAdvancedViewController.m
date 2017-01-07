@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [Common logScreen:@"Project Advanced Settings"];
     if ([self.project.buildType isEqualToString:BuildTypeAppStore]){
         [comboAppStoreTool selectItemAtIndex:0];
     }else{

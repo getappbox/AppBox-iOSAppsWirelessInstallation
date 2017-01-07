@@ -16,11 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    textFieldAppLink.stringValue = self.appLink;
+    [Common logScreen:@"AppBox ShareLink"];
+    [textFieldAppLink setStringValue: self.appLink];
 }
 
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
+    [Answers logCustomEventWithName:@"Copy to Clipboard" customAttributes:@{}];
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:self.appLink  forType:NSStringPboardType];
     [sender setTitle:@"Copied!!"];

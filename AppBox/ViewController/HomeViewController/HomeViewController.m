@@ -45,6 +45,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (void)viewWillAppear{
     [super viewWillAppear];
     [self updateMenuButtons];
+    
     //Handle Dropbox Login
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
@@ -157,13 +158,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![sender.title.lowercaseString isEqualToString:@"stop"]){
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
-            [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:@{
+            [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{
                 @"Build Type" : comboBuildType.stringValue,
-            }];
+            }]];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
         }else if (project.ipaFullPath){
-            [Answers logCustomEventWithName:@"Upload IPA" customAttributes:@{}];
+            [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
             [self uploadIPAFileWithLocalURL:project.ipaFullPath];
         }
         [self viewStateForProgressFinish:NO];
@@ -758,6 +759,17 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
+-(NSDictionary *)getBasicViewStateWithOthersSettings:(NSDictionary *)otherSettings{
+    if (otherSettings == nil){
+        otherSettings = @{};
+    }
+    NSMutableDictionary *viewState = [[NSMutableDictionary alloc] initWithDictionary:otherSettings];
+    [viewState setValue:[NSNumber numberWithInteger: buttonUniqueLink.state] forKey:@"Same Link"];
+    [viewState setValue:[NSNumber numberWithInteger: buttonSendMail.state] forKey:@"Sent Mail"];
+    [viewState setValue:[NSNumber numberWithInteger: buttonShutdownMac.state] forKey:@"Shudown Mac"];
+    return viewState;
+}
+
 #pragma mark - MailDelegate -
 -(void)mailViewLoadedWithWebView:(WebView *)webView{
     
@@ -814,11 +826,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Navigation -
 -(void)showURL{
     //Log IPA Upload Success Rate with Other Options
-    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:@{
-        @"Same Link":[NSNumber numberWithInteger: buttonUniqueLink.state],
-        @"Sent Mail":[NSNumber numberWithInteger: buttonSendMail.state],
-        @"Shudown Mac":[NSNumber numberWithInteger: buttonShutdownMac.state]
-    }];
+    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
     
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isValidEmail:textFieldEmail.stringValue]) {
