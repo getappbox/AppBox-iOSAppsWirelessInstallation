@@ -13,7 +13,7 @@
     IBOutlet NSButton *buttonCopyToClipboard;
 }
 
-@property(nonatomic, strong) NSString *appLink;
+@property(nonatomic, strong) XCProject *project;
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender;
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender;

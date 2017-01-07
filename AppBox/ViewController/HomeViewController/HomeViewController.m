@@ -617,8 +617,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)createUniqueShortSharableUrl{
     NSString *originalURL = [project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
+    project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
     GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
+    [Tiny shortenURL:project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.appShortShareableURL = shortURL;
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
@@ -632,8 +633,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)createManifestShortSharableUrl{
     NSString *originalURL = [project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
+    project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]];
     GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]] withService:service completion:^(NSURL *shortURL, NSError *error) {
+    [Tiny shortenURL:project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self showURL];
@@ -840,7 +842,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //prepare to show link
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
-        ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
+        //set project to destination
+        [((ShowLinkViewController *)segue.destinationController) setProject:project];
+        
+        //set status
         NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
         [self showStatus:status andShowProgressBar:NO withProgress:0];
         [self viewStateForProgressFinish:YES];

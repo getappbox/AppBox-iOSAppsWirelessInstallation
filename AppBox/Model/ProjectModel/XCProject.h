@@ -63,6 +63,7 @@
 @property(nonatomic, retain) NSURL *bundleDirectory;
 @property(nonatomic, retain) NSURL *ipaFileDBShareableURL;
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
+@property(nonatomic, retain) NSURL *appLongShareableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
 
 - (void)upadteDbDirectoryByBundleDirectory;

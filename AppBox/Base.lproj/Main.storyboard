@@ -737,7 +737,7 @@
                                 <rect key="frame" x="217" y="138" width="16" height="16"/>
                             </progressIndicator>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sOd-pg-fcf">
-                                <rect key="frame" x="14" y="3" width="82" height="32"/>
+                                <rect key="frame" x="-1" y="3" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dUx-Cy-2lK">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -750,7 +750,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1im-Mr-w6j">
-                                <rect key="frame" x="354" y="3" width="82" height="32"/>
+                                <rect key="frame" x="262" y="3" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7o8-Ru-CMA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -759,23 +759,36 @@ Gw
                                     <action selector="reloadButtonTapped:" target="Jo2-cI-h8E" id="eUF-jK-474"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ojO-rB-gML">
+                                <rect key="frame" x="337" y="3" width="114" height="32"/>
+                                <buttonCell key="cell" type="push" title="Clear Cache" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cCO-8f-7oJ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clearCacheButtonTapped:" target="Jo2-cI-h8E" id="vl3-3k-8NK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="ojO-rB-gML" firstAttribute="leading" secondItem="1im-Mr-w6j" secondAttribute="trailing" constant="5" id="1uf-wc-Mnk"/>
                             <constraint firstAttribute="trailing" secondItem="EdM-8h-Igo" secondAttribute="trailing" id="47a-Zz-VEl"/>
                             <constraint firstAttribute="bottom" secondItem="1im-Mr-w6j" secondAttribute="bottom" constant="10" id="Kvx-mZ-ypq"/>
                             <constraint firstItem="EdM-8h-Igo" firstAttribute="leading" secondItem="hsR-9v-A49" secondAttribute="leading" id="XcX-m4-pZ0"/>
                             <constraint firstItem="EdM-8h-Igo" firstAttribute="top" secondItem="hsR-9v-A49" secondAttribute="top" id="Z60-6X-Vyq"/>
                             <constraint firstItem="ozI-WA-8db" firstAttribute="centerX" secondItem="EdM-8h-Igo" secondAttribute="centerX" id="ecr-H0-1mh"/>
-                            <constraint firstItem="sOd-pg-fcf" firstAttribute="leading" secondItem="hsR-9v-A49" secondAttribute="leading" constant="20" id="kkQ-2J-f1d"/>
+                            <constraint firstItem="1im-Mr-w6j" firstAttribute="centerY" secondItem="ojO-rB-gML" secondAttribute="centerY" id="fgT-yL-jfs"/>
+                            <constraint firstItem="sOd-pg-fcf" firstAttribute="leading" secondItem="hsR-9v-A49" secondAttribute="leading" constant="5" id="kkQ-2J-f1d"/>
                             <constraint firstItem="sOd-pg-fcf" firstAttribute="top" secondItem="EdM-8h-Igo" secondAttribute="bottom" constant="10" id="nk7-VV-e7Q"/>
                             <constraint firstAttribute="bottom" secondItem="sOd-pg-fcf" secondAttribute="bottom" constant="10" id="pO4-EC-tjg"/>
                             <constraint firstItem="ozI-WA-8db" firstAttribute="centerY" secondItem="EdM-8h-Igo" secondAttribute="centerY" id="sdI-7S-n6h"/>
-                            <constraint firstAttribute="trailing" secondItem="1im-Mr-w6j" secondAttribute="trailing" constant="20" id="waN-ez-dgG"/>
                             <constraint firstItem="1im-Mr-w6j" firstAttribute="top" secondItem="EdM-8h-Igo" secondAttribute="bottom" constant="10" id="xiR-39-DqH"/>
+                            <constraint firstAttribute="trailing" secondItem="ojO-rB-gML" secondAttribute="trailing" constant="5" id="yhK-y3-2LU"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonCancel" destination="sOd-pg-fcf" id="ZOi-ZW-XC4"/>
+                        <outlet property="buttonClearCache" destination="ojO-rB-gML" id="jGi-Be-tDp"/>
                         <outlet property="buttonReload" destination="1im-Mr-w6j" id="m4f-5N-7Mi"/>
                         <outlet property="progressIndicator" destination="ozI-WA-8db" id="ohj-df-kuB"/>
                         <outlet property="webView" destination="EdM-8h-Igo" id="KEQ-xb-eFB"/>
@@ -783,7 +796,7 @@ Gw
                 </viewController>
                 <customObject id="sXS-OA-9xd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866" y="811"/>
+            <point key="canvasLocation" x="866" y="810.5"/>
         </scene>
         <!--ShowDashboard-->
         <scene sceneID="Nhl-bU-R4s">

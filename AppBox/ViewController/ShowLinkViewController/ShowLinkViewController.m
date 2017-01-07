@@ -17,14 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"AppBox ShareLink"];
-    [textFieldAppLink setStringValue: self.appLink];
+    [textFieldAppLink setStringValue: self.project.appShortShareableURL.absoluteString];
 }
 
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
     [Answers logCustomEventWithName:@"Copy to Clipboard" customAttributes:@{}];
     [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] setString:self.appLink  forType:NSStringPboardType];
+    [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.absoluteString  forType:NSStringPboardType];
     [sender setTitle:@"Copied!!"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [sender setTitle:@"Copy to clipboard"];
