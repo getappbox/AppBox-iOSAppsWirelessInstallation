@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		9740CD411E005DB100224D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9740CD3F1E005DB100224D9F /* Main.storyboard */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
@@ -34,10 +35,6 @@
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
 		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
-		E188EA141D784ADF00EBCA52 /* CMDQueryStringSerialization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */; };
-		E188EA161D7856D200EBCA52 /* ISO8601.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E188EA151D7856D200EBCA52 /* ISO8601.framework */; };
-		E188EA171D78570300EBCA52 /* CMDQueryStringSerialization.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E188EA181D78570800EBCA52 /* ISO8601.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E188EA151D7856D200EBCA52 /* ISO8601.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
 		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
 		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
@@ -47,11 +44,7 @@
 		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
-		E1A3965F1E04123E0065FC7F /* AFNetworking.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C148731E027A6100EE637F /* AFNetworking.framework */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
-		E1FB91D91D78055200F8DF46 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; };
-		E1FB91DA1D78087A00F8DF46 /* ZipArchive.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E1FB91D81D78055200F8DF46 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,10 +54,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E188EA181D78570800EBCA52 /* ISO8601.framework in Copy Files (1 item) */,
-				E1A3965F1E04123E0065FC7F /* AFNetworking.framework in Copy Files (1 item) */,
-				E188EA171D78570300EBCA52 /* CMDQueryStringSerialization.framework in Copy Files (1 item) */,
-				E1FB91DA1D78087A00F8DF46 /* ZipArchive.framework in Copy Files (1 item) */,
 				E16438A61D746A2F00CE8B7E /* DropboxOSX.framework in Copy Files (1 item) */,
 			);
 			name = "Copy Files (1 item)";
@@ -73,7 +62,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.release.xcconfig"; sourceTree = "<group>"; };
 		9740CD401E005DB100224D9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = AppBox/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
@@ -116,8 +108,6 @@
 		E188EA0D1D78485900EBCA52 /* NTAURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTAURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0E1D78485900EBCA52 /* Tiny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tiny.h; sourceTree = "<group>"; };
 		E188EA0F1D78485900EBCA52 /* Tiny.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tiny.m; sourceTree = "<group>"; };
-		E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CMDQueryStringSerialization.framework; path = Tiny/CMDQueryStringSerialization.framework; sourceTree = "<group>"; };
-		E188EA151D7856D200EBCA52 /* ISO8601.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISO8601.framework; sourceTree = "<group>"; };
 		E18DCB151DFE729300BD7F11 /* MailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailViewController.h; sourceTree = "<group>"; };
 		E18DCB161DFE729300BD7F11 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
 		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
@@ -138,10 +128,8 @@
 		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E191F7C21E1E7B2A00D2A590 /* ALAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ALAppStoreUpload.sh; sourceTree = "<group>"; };
 		E191F7C31E1E7B3B00D2A590 /* XcodeAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeAppStoreUpload.sh; sourceTree = "<group>"; };
-		E1C148731E027A6100EE637F /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
-		E1FB91D81D78055200F8DF46 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,22 +137,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E188EA141D784ADF00EBCA52 /* CMDQueryStringSerialization.framework in Frameworks */,
-				E1C148741E027A6100EE637F /* AFNetworking.framework in Frameworks */,
 				E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */,
 				E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */,
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
 				E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */,
 				E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */,
 				E16437F91D743D4500CE8B7E /* DropboxOSX.framework in Frameworks */,
-				E1FB91D91D78055200F8DF46 /* ZipArchive.framework in Frameworks */,
-				E188EA161D7856D200EBCA52 /* ISO8601.framework in Frameworks */,
+				84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63BFBD3370FA9F1D2661A6F5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */,
+				179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E12E6D061D8FC6E20054814D /* DashboardViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +219,7 @@
 				E16437D11D743A4E00CE8B7E /* AppBox */,
 				E164389A1D743ECA00CE8B7E /* Frameworks */,
 				E16437D01D743A4E00CE8B7E /* Products */,
+				63BFBD3370FA9F1D2661A6F5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -316,16 +311,13 @@
 			isa = PBXGroup;
 			children = (
 				E188EA071D78485900EBCA52 /* Tiny */,
-				E1C148731E027A6100EE637F /* AFNetworking.framework */,
-				E188EA151D7856D200EBCA52 /* ISO8601.framework */,
-				E188EA131D784ADF00EBCA52 /* CMDQueryStringSerialization.framework */,
-				E1FB91D81D78055200F8DF46 /* ZipArchive.framework */,
 				E16438A31D7469D900CE8B7E /* Foundation.framework */,
 				E16438A11D7469D200CE8B7E /* CoreData.framework */,
 				E164389F1D7469CD00CE8B7E /* AppKit.framework */,
 				E16437F81D743D4500CE8B7E /* DropboxOSX.framework */,
 				E16438981D743EAA00CE8B7E /* Cocoa.framework */,
 				E16438961D743EA300CE8B7E /* WebKit.framework */,
+				ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -479,10 +471,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E16437E61D743A4E00CE8B7E /* Build configuration list for PBXNativeTarget "AppBox" */;
 			buildPhases = (
+				C3566842BD53E8411EB6A412 /* [CP] Check Pods Manifest.lock */,
 				E16437CB1D743A4E00CE8B7E /* Sources */,
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
 				E16438A51D746A1800CE8B7E /* Copy Files (1 item) */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
+				1E3F482E629E66DAF83B929E /* [CP] Embed Pods Frameworks */,
+				7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */,
+				E1974F331E20CA770060F03F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -540,6 +536,67 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E3F482E629E66DAF83B929E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppBox/Pods-AppBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppBox/Pods-AppBox-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3566842BD53E8411EB6A412 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1974F331E20CA770060F03F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2e512bc0f9b6d5e750ea1d115e84d2b7d65afff8 7c07c913d152ec370644ff4c70b83c8f562f6e0cdbcbb3ea42737410e0f89cf6";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E16437CB1D743A4E00CE8B7E /* Sources */ = {
@@ -674,6 +731,7 @@
 		};
 		E16437E71D743A4E00CE8B7E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -697,6 +755,7 @@
 		};
 		E16437E81D743A4E00CE8B7E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;

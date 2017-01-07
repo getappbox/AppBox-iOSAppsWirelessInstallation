@@ -21,6 +21,10 @@
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
     
+    //Init Crashlytics
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
+    [Fabric with:@[[Crashlytics class]]];
+
     //Start monitoring internet connection
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (status == AFNetworkReachabilityStatusNotReachable){

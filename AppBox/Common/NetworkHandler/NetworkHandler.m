@@ -16,11 +16,9 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (requestType == RequestGET){
-        [manager GET:url parameters:parmeters progress:^(NSProgress * _Nonnull downloadProgress) {
-            [[AppDelegate appDelegate] addSessionLog:downloadProgress.localizedDescription];
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            completion(responseObject, nil);
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [manager GET:url parameters:parmeters success:^(NSURLSessionDataTask *task, id responseObject) {
+             completion(responseObject, nil);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
             completion(nil, error);
         }];
     }else if (requestType == RequestPOST){

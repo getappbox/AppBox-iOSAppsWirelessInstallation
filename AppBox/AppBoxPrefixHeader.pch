@@ -10,9 +10,11 @@
 #define AppBoxPrefixHeader_pch
 
 
+#import <ZipArchive.h>
 #import <DropboxOSX/DropboxOSX.h>
-#import <ZipArchive/ZipArchive.h>
 #import <AFNetworking/AFNetworking.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"

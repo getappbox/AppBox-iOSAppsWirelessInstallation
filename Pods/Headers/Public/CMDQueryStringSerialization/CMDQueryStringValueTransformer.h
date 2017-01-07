@@ -1,0 +1,1 @@
+../../../CMDQueryStringSerialization/Pod/CMDQueryStringValueTransformer.h

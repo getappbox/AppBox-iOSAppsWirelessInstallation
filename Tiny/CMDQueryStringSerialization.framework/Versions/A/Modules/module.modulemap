@@ -1,6 +1,0 @@
-framework module CMDQueryStringSerialization {
-  umbrella header "CMDQueryStringSerialization.h"
-
-  export *
-  module * { export * }
-}
