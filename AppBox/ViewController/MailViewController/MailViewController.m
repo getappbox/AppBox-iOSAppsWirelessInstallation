@@ -62,7 +62,9 @@
 
 - (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Localized Description\n%@ \n\nReason\n%@",error.localizedDescription,error.localizedFailureReason]];
-    [Common showAlertWithTitle:@"AppBox Mail Error" andMessage:error.localizedDescription];
+    if (error.localizedFailureReason){
+        [Common showAlertWithTitle:@"AppBox Mail Error" andMessage:error.localizedDescription];
+    }
 }
 
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request{
@@ -86,5 +88,11 @@
     [[AppDelegate appDelegate] addSessionLog:@"User Canceled Current Request!!!"];
     [webView stopLoading:self];
     [self dismissController:self];
+}
+
+- (IBAction)clearCacheButtonTapped:(NSButton *)sender {
+    [[AppDelegate appDelegate] addSessionLog:@"User Cleared Cache Request!!!"];
+    [KeychainHandler removeAllStoredCredentials];
+    [webView reload:self];
 }
 @end
