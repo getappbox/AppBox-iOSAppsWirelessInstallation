@@ -1114,7 +1114,7 @@ Gw
                 <customObject id="ND1-nP-4X2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="ShowLink" id="dq2-4K-v2z" customClass="ShowLinkViewController" sceneMemberID="viewController">
                     <view key="view" id="6cG-sr-Ub0">
-                        <rect key="frame" x="0.0" y="0.0" width="420" height="119"/>
+                        <rect key="frame" x="0.0" y="0.0" width="420" height="115"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ui-cf-b7U">
@@ -1144,23 +1144,19 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Ou-Ey-jkC">
-                                <rect key="frame" x="24" y="90" width="372" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="19" id="0Hv-Mv-xhw"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Your app is ready. Copy this link and send it to anyone." id="CUt-fW-c2L">
+                                <rect key="frame" x="8" y="86" width="404" height="19"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your app is ready. Copy this link and send it to anyone." id="CUt-fW-c2L">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n7a-6Z-Rsw">
-                                <rect key="frame" x="8" y="45" width="404" height="35"/>
+                                <rect key="frame" x="8" y="45" width="404" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="WFe-iy-WuT"/>
-                                    <constraint firstAttribute="height" constant="35" id="gUG-rO-ZxM"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" usesSingleLineMode="YES" id="2jf-AI-4Wx">
+                                <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" id="2jf-AI-4Wx">
                                     <font key="font" metaFont="systemThin" size="26"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1168,7 +1164,7 @@ Gw
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7Ou-Ey-jkC" firstAttribute="centerX" secondItem="6cG-sr-Ub0" secondAttribute="centerX" id="5Oo-9k-zRN"/>
+                            <constraint firstItem="7Ou-Ey-jkC" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="AfO-by-l0M"/>
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="top" secondItem="7Ou-Ey-jkC" secondAttribute="bottom" constant="10" id="Bx8-jU-i7e"/>
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="CRC-NK-qVo"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="centerY" secondItem="IRS-6c-DTS" secondAttribute="centerY" id="CTG-vm-7Im"/>
@@ -1176,6 +1172,7 @@ Gw
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Kgm-9b-oHh"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="SSZ-cE-eOL"/>
                             <constraint firstAttribute="trailing" secondItem="IRS-6c-DTS" secondAttribute="trailing" constant="10" id="U37-G7-Ws4"/>
+                            <constraint firstAttribute="trailing" secondItem="7Ou-Ey-jkC" secondAttribute="trailing" constant="10" id="gqg-In-9mB"/>
                             <constraint firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" constant="10" id="whj-HD-7sC"/>
                             <constraint firstItem="7Ou-Ey-jkC" firstAttribute="top" secondItem="6cG-sr-Ub0" secondAttribute="top" constant="10" id="xAb-wu-E9f"/>
                         </constraints>
@@ -1183,6 +1180,7 @@ Gw
                     <connections>
                         <outlet property="buttonCopyToClipboard" destination="4Ui-cf-b7U" id="d5S-bq-sJE"/>
                         <outlet property="textFieldAppLink" destination="n7a-6Z-Rsw" id="nQS-jq-mHq"/>
+                        <outlet property="textFieldHint" destination="7Ou-Ey-jkC" id="mhf-c2-CAf"/>
                     </connections>
                 </viewController>
             </objects>

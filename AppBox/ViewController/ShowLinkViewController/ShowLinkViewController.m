@@ -8,6 +8,9 @@
 
 #import "ShowLinkViewController.h"
 
+#define ShortURLUserHint @"Your app is ready. Copy this link and send it to anyone."
+#define LongURLUserHint @"Your app is ready. Copy this link and send it to anyone, sorry for long url, google shortener API getting failed currently."
+
 @interface ShowLinkViewController ()
 
 @end
@@ -18,6 +21,7 @@
     [super viewDidLoad];
     [Common logScreen:@"AppBox ShareLink"];
     [textFieldAppLink setStringValue: self.project.appShortShareableURL.absoluteString];
+    [textFieldHint setStringValue: ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) ? LongURLUserHint : ShortURLUserHint];
 }
 
 
@@ -27,7 +31,7 @@
     [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.absoluteString  forType:NSStringPboardType];
     [sender setTitle:@"Copied!!"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [sender setTitle:@"Copy to clipboard"];
+        [sender setTitle:@"Copy to Clipboard"];
     });
 }
 

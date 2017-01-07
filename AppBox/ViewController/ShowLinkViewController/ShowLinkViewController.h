@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ShowLinkViewController : NSViewController{
+    IBOutlet NSTextField *textFieldHint;
     IBOutlet NSTextField *textFieldAppLink;
     IBOutlet NSButton *buttonCopyToClipboard;
 }

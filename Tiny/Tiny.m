@@ -19,11 +19,17 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error){
+            
+            //Log failed rate
+            [Answers logCustomEventWithName:@"Short URL Failed" customAttributes:@{@"Request No. - ":@1}];
             //Give it another try
             NSURLRequest *URLRequest = [service URLRequestToShortenURL:longURL];
             NSURLSession *session = [NSURLSession sharedSession];
             NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 if (error){
+                    
+                    //Log failed rate
+                    [Answers logCustomEventWithName:@"Short URL Failed" customAttributes:@{@"Request No. - ":@2}];
                     if (completionBlock){
                         completionBlock(longURL, error);
                     }
@@ -35,6 +41,9 @@
                     NSString *keyPath = [service keyPathForShortenedURL];
                     NSString *shortenedURLString = [JSON valueForKeyPath:keyPath];
                     NSURL *URL = [NSURL URLWithString:shortenedURLString];
+                    
+                    //Log success rate
+                    [Answers logCustomEventWithName:@"Short URL Success" customAttributes:@{@"Request No. - ":@2}];
                     if (completionBlock){
                         completionBlock(URL, nil);
                     }
@@ -48,6 +57,8 @@
             NSString *keyPath = [service keyPathForShortenedURL];
             NSString *shortenedURLString = [JSON valueForKeyPath:keyPath];
             NSURL *URL = [NSURL URLWithString:shortenedURLString];
+            //Log success rate
+            [Answers logCustomEventWithName:@"Short URL Success" customAttributes:@{@"Request No. - ":@1}];
             if (completionBlock){
                 completionBlock(URL, nil);
             }
