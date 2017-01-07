@@ -157,9 +157,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![sender.title.lowercaseString isEqualToString:@"stop"]){
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
+            [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:@{
+                @"Build Type" : comboBuildType.stringValue,
+            }];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
         }else if (project.ipaFullPath){
+            [Answers logCustomEventWithName:@"Upload IPA" customAttributes:@{}];
             [self uploadIPAFileWithLocalURL:project.ipaFullPath];
         }
         [self viewStateForProgressFinish:NO];
@@ -809,6 +813,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - Navigation -
 -(void)showURL{
+    //Log IPA Upload Success Rate with Other Options
+    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:@{
+        @"Same Link":[NSNumber numberWithInteger: buttonUniqueLink.state],
+        @"Sent Mail":[NSNumber numberWithInteger: buttonSendMail.state],
+        @"Shudown Mac":[NSNumber numberWithInteger: buttonShutdownMac.state]
+    }];
+    
+    //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isValidEmail:textFieldEmail.stringValue]) {
         [self performSegueWithIdentifier:@"MailView" sender:self];
     }else{
@@ -817,12 +829,17 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
+    
+    //prepare to show link
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         ((ShowLinkViewController *)segue.destinationController).appLink = project.appShortShareableURL.absoluteString;
         NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
         [self showStatus:status andShowProgressBar:NO withProgress:0];
         [self viewStateForProgressFinish:YES];
-    }else if([segue.destinationController isKindOfClass:[MailViewController class]]){
+    }
+    
+    //prepare to send mail
+    else if([segue.destinationController isKindOfClass:[MailViewController class]]){
         MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
         [mailViewController setDelegate:self];
         if (project.appShortShareableURL == nil){
@@ -831,7 +848,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             NSString *mailURL = [project buildMailURLStringForEmailId:textFieldEmail.stringValue andMessage:textFieldMessage.stringValue];
             [mailViewController setUrl: mailURL];
         }
-    }else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
+    }
+    
+    //prepare to show advanced project settings
+    else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
         ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
         [projectAdvancedViewController setProject:project];
     }

@@ -41,6 +41,7 @@
 
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
     if ([[DBSession sharedSession] isLinked]) {
+        [Answers logLoginWithMethod:@"Dropbox" success:@YES customAttributes:@{}];
         [self dismissController:self];
     }
 }

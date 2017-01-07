@@ -42,6 +42,7 @@
         
     }else if ([title isEqualToString:@"MailSent"]){
         if (self.presentingViewController != nil){
+            [Answers logCustomEventWithName:@"Mail Sent" customAttributes:@{}];
             [self.delegate mailSentWithWebView:sender];
             [self dismissViewController:self];            
         }
@@ -51,6 +52,7 @@
         [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Invalid Perameter in Email Request!!"];
         
     }else if ([title isEqualToString:@"LoginSuccess"]){
+        [Answers logLoginWithMethod:@"Gmail" success:@YES customAttributes:@{}];
         [self.delegate loginSuccessWithWebView:sender];
         [self dismissController:self];
     }
