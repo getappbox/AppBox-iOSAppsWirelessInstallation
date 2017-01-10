@@ -45,7 +45,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 | Uploaded App Expiration |	Until you delete from your Dropbox |	3days |
 | Installations Per App |	Unlimited |	10 | 
 | Dashboard |	Yes`*` |	Yes (login required) |
-`*` Will be available in future version
+`*` Will be available in future version 😜
 
 
 
