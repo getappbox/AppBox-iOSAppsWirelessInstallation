@@ -19,9 +19,6 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 - Maximum Upload Size => Equal to your Dropbox account storage
 - Uploaded App Expiration => Until you delete from your Dropbox
 - Installations Per App => Unlimited
-- Dashboard`*`
-
- `*` Will be available in future version
  
 # Download latest release 📦
 [![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](http://tryappbox.com/download)
@@ -47,8 +44,8 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 | Maximum Upload Size |	Equal to your Dropbox account storage |	100MB |
 | Uploaded App Expiration |	Until you delete from your Dropbox |	3days |
 | Installations Per App |	Unlimited |	10 | 
-| Dashboard |	Yes* |	Yes (login required) |
- * Will be available in future version
+| Dashboard |	Yes`*` |	Yes (login required) |
+`*` Will be available in future version
 
 
 
