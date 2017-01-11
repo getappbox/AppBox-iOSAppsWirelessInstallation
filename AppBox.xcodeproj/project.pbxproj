@@ -128,6 +128,7 @@
 		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E191F7C21E1E7B2A00D2A590 /* ALAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ALAppStoreUpload.sh; sourceTree = "<group>"; };
 		E191F7C31E1E7B3B00D2A590 /* XcodeAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeAppStoreUpload.sh; sourceTree = "<group>"; };
+		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -457,6 +458,7 @@
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
+				E1AF8FD71E266CC000A57633 /* DropboxKeys.h */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
