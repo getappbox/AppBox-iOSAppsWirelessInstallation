@@ -16,9 +16,6 @@
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 
 //Serives Key
-#define abDbRoot kDBRootAppFolder
-#define abDbAppkey @"" // Dropbox app key
-#define abDbScreatkey @"" //Dropbox secret key
 #define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
 
 //notification
