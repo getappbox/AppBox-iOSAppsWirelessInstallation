@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?branch=master)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
-[![Downloads](https://img.shields.io/badge/downloads-12.6k-brightgreen.svg)](http://tryappbox.com/download)
+[![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg)](http://tryappbox.com/download)
 [![Twitter](https://img.shields.io/twitter/follow/tryappbox.svg?style=social&label=Follow)](https://twitter.com/tryappbox)
 
 # AppBox - iOS Apps Wireless Installation 🥇 
