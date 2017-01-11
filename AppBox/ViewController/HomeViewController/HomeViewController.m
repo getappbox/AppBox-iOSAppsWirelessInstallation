@@ -557,8 +557,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         NSString *shareableLink = [link stringByReplacingCharactersInRange:NSMakeRange(link.length-1, 1) withString:@"1"];
         project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSString *manifestPath) {
-            fileType = FileTypeManifest;
-            [restClientLocal uploadFile:@"manifest.plist" toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:manifestPath];
+            if (manifestPath == nil){
+                
+            }else{
+                fileType = FileTypeManifest;
+                [restClientLocal uploadFile:@"manifest.plist" toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:manifestPath];
+            }
         }];
 
     }else if (fileType == FileTypeManifest){

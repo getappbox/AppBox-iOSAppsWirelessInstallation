@@ -46,14 +46,20 @@
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
     [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
     
-    NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
-    [manifestDict writeToFile:manifestPath atomically:YES];
-    
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nManifest\n======\n\n %@",manifestDict]];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completion(manifestPath);
-    });
+    NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
+    if ([manifestDict writeToFile:manifestPath atomically:YES]){
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Menifest File Created and Saved at %@", manifestPath]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(manifestPath);
+        });
+    }else{
+        completion(nil);
+        [[AppDelegate appDelegate] addSessionLog:@"Can't able to save menifest file"];
+    }
+    
+    
 }
 
 - (void)createExportOpetionPlist{
