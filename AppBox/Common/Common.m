@@ -49,4 +49,33 @@
     [center scheduleNotification:notification];
 }
 
+#pragma mark - Alert and Checks
+
++ (void)checkDropboxKeys{
+    //Check Dropbox Keys
+    if ([abDbAppkey isEqualToString: abEmptyString] && [abDbScreatkey isEqualToString: abEmptyString]){
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText: @"Dropbox app key and screat not found."];
+        [alert setInformativeText:@"Please input your dropbox app key and screat in \"AppBox>Common>DropboxKeys.h\" header file.\n\nAlso, please comply with the license."];
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert addButtonWithTitle:@"Read License"];
+        [alert addButtonWithTitle:@"OK"];
+        if ([alert runModal] == NSAlertFirstButtonReturn){
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
+        }
+    }
+}
+
++ (void)showUpdateAlertWithUpdateURL:(NSURL *)url{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText: @"New Version Available"];
+    [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert addButtonWithTitle:@"YES"];
+    [alert addButtonWithTitle:@"NO"];
+    if ([alert runModal] == NSAlertFirstButtonReturn){
+        [[NSWorkspace sharedWorkspace] openURL:url];
+    }
+}
+
 @end
