@@ -21,6 +21,10 @@
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
     
+    //Check Dropbox Keys
+    [Common checkDropboxKeys];
+    
+    
     //Init Crashlytics
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
     [Fabric with:@[[Crashlytics class], [Answers class]]];
@@ -39,15 +43,7 @@
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
-            NSAlert *alert = [[NSAlert alloc] init];
-            [alert setMessageText: @"New Version Available"];
-            [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
-            [alert setAlertStyle:NSInformationalAlertStyle];
-            [alert addButtonWithTitle:@"YES"];
-            [alert addButtonWithTitle:@"NO"];
-            if ([alert runModal] == NSAlertFirstButtonReturn){
-                [[NSWorkspace sharedWorkspace] openURL:url];
-            }
+            [Common showUpdateAlertWithUpdateURL:url];
         }
     }];
 }
