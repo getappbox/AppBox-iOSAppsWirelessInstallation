@@ -14,6 +14,7 @@
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
+#define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
 
 //Serives Key
 #define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
