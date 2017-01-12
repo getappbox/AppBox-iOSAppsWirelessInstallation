@@ -43,7 +43,7 @@
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
-            [Common showUpdateAlertWithUpdateURL:url];
+            [UpdateHandler showUpdateAlertWithUpdateURL:url];
         }
     }];
 }
