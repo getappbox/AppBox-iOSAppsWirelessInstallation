@@ -49,8 +49,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Handle Dropbox Login
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
-    }else{
-        [self viewStateForProgressFinish:YES];
     }
 }
 
@@ -156,6 +154,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (![sender.title.lowercaseString isEqualToString:@"stop"]){
+        [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
             [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{
@@ -666,6 +665,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]]];
     [[AppDelegate appDelegate] setProcessing:!finish];
     
     //reset project
