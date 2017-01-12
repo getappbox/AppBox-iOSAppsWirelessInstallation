@@ -49,8 +49,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Handle Dropbox Login
     if (![[DBSession sharedSession] isLinked]) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
-    }else{
-        [self viewStateForProgressFinish:YES];
     }
 }
 
@@ -156,6 +154,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (![sender.title.lowercaseString isEqualToString:@"stop"]){
+        [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
             [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{
@@ -198,7 +197,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     NSString *buildScriptName = ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]) ? @"WorkspaceBuildScript" : @"ProjectBuildScript";
     
     //Create Export Option Plist
-    [project createExportOpetionPlist];
+    [project createExportOptionPlist];
     
     //Build Script
     NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
@@ -349,25 +348,37 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
         [SSZipArchive unzipFileAtPath:fromPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+            
+            //Get payload entry
             if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found payload at path = %@",entry]];
                 payloadEntry = entry;
             }
+            
+            //Get Info.plist entry
             NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
             if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found Info.plist at path = %@",mainInfoPlistPath]];
                 infoPlistPath = entry;
             }
+            
+            //show status and log files entry
             [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total]]];
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
+                //show error and return
                 [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
                 return;
             }
             
             //get info.plist
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Final Info.plist path = %@",infoPlistPath]];
             [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
-            if (project.ipaInfoPlist == nil) {
+            
+            //show error if info.plist is nil or invalid
+            if (![project isValidProjectInfoPlist]) {
                 [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
                 return;
@@ -654,6 +665,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]]];
     [[AppDelegate appDelegate] setProcessing:!finish];
     
     //reset project

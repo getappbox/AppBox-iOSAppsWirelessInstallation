@@ -11,17 +11,40 @@
 @implementation UpdateHandler
 
 #pragma mark - Check for update
+
++ (void)showUpdateAlertWithUpdateURL:(NSURL *)url{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText: @"New Version Available"];
+    [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert addButtonWithTitle:@"YES"];
+    [alert addButtonWithTitle:@"NO"];
+    if ([alert runModal] == NSAlertFirstButtonReturn){
+        [[NSWorkspace sharedWorkspace] openURL:url];
+    }
+}
+
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
         [[AppDelegate appDelegate] addSessionLog:@"Checking for new version..."];
         [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
+            //handle error and check for all required keys
             if (error == nil &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
+                
+                //get tag name, because it's always be latest version
                 NSString *tag = [responseObj valueForKey:@"tag_name"];
                 NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
+                
+                //get version string from bundle info.plist
                 NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
                 NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
+                
+                //log current and latest version
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Current Version - %@ <=> Latest Version - %@", versionString, tag]];
+                
+                //return result based on version strings
                 completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
             }else{
                 completion(false, nil);

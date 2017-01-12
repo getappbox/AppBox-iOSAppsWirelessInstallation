@@ -10,6 +10,7 @@
 
 @interface UpdateHandler : NSObject
 
++ (void)showUpdateAlertWithUpdateURL:(NSURL *)url;
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion;
 
 @end

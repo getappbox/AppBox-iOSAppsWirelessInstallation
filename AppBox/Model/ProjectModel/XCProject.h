@@ -66,11 +66,11 @@
 @property(nonatomic, retain) NSURL *appLongShareableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
 
+- (BOOL)isValidProjectInfoPlist;
 - (void)upadteDbDirectoryByBundleDirectory;
+- (void)createExportOptionPlist;
+- (void)createUDIDAndIsNew:(BOOL)isNew;
+- (void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *mainfestPath))completion;
 
--(void)createExportOpetionPlist;
--(void)createUDIDAndIsNew:(BOOL)isNew;
--(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *mainfestPath))completion;
-
--(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
+- (NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
 @end
