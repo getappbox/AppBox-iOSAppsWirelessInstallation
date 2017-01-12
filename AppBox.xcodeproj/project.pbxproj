@@ -502,6 +502,8 @@
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = M8HBL5W4VV;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -736,7 +738,9 @@
 			baseConfigurationReference = BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M8HBL5W4VV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppBox/Framworks",
@@ -760,7 +764,9 @@
 			baseConfigurationReference = 179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M8HBL5W4VV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppBox/Framworks",
