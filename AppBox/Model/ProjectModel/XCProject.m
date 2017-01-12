@@ -58,11 +58,10 @@
         completion(nil);
         [[AppDelegate appDelegate] addSessionLog:@"Can't able to save menifest file"];
     }
-    
-    
 }
 
-- (void)createExportOpetionPlist{
+//Create export options plist for archive and upload
+- (void)createExportOptionPlist{
     [self createBuildRelatedPathsAndIsNew:YES];
     NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
     [exportOption setValue:self.teamId forKey:@"teamID"];
@@ -70,6 +69,7 @@
     [exportOption writeToFile:self.exportOptionsPlistPath.resourceSpecifier atomically:YES];
 }
 
+//Create all path required during archive and upload
 - (void)createBuildRelatedPathsAndIsNew:(BOOL)isNew{
     if(isNew || _buildUUIDDirectory == nil){
         //Current Time as UUID
@@ -94,6 +94,19 @@
         NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", [[self.targets firstObject] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         _exportOptionsPlistPath = [NSURL URLWithString:exportOptionPlistPath];
     }
+}
+
+//validate info plist for current project
+- (BOOL)isValidProjectInfoPlist{
+    if (self.ipaInfoPlist == nil){
+        return false;
+    }
+    
+    //check required value for manifest file
+    if (self.name != nil && self.build != nil && self.identifer != nil && self.version != nil){
+        return true;
+    }
+    return false;
 }
 
 #pragma mark - Getter
