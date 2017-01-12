@@ -66,16 +66,4 @@
     }
 }
 
-+ (void)showUpdateAlertWithUpdateURL:(NSURL *)url{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText: @"New Version Available"];
-    [alert setInformativeText:@"A newer version of the \"AppBox\" is available. Do you want to update it? \n\n\n"];
-    [alert setAlertStyle:NSInformationalAlertStyle];
-    [alert addButtonWithTitle:@"YES"];
-    [alert addButtonWithTitle:@"NO"];
-    if ([alert runModal] == NSAlertFirstButtonReturn){
-        [[NSWorkspace sharedWorkspace] openURL:url];
-    }
-}
-
 @end
