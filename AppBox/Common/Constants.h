@@ -22,6 +22,7 @@
 //notification
 #define abSessionLogUpdated @"SessionLogUpdated"
 #define abGmailLoggedOutNotification @"GmailLoggedOutNotification"
+#define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 
 //messages
@@ -44,6 +45,7 @@
 #define abTeamIdLength 10
 #define abEndOfSessionLog @"abEndOfSessionLog"
 #define abEmptyString @""
+#define abAppInfoFileName @"appinfo.json"
 
 
 //enums
