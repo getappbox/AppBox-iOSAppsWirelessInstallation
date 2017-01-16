@@ -28,7 +28,7 @@
     return mailString;
 }
 
--(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *manifestPath))completion{
+-(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion{
     NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
     [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
     [assetsDict setValue:@"software-package" forKey:@"kind"];
@@ -52,11 +52,11 @@
     if ([manifestDict writeToFile:manifestPath atomically:YES]){
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Menifest File Created and Saved at %@", manifestPath]];
         dispatch_async(dispatch_get_main_queue(), ^{
-            completion(manifestPath);
+            completion([NSURL fileURLWithPath:manifestPath]);
         });
     }else{
-        completion(nil);
         [[AppDelegate appDelegate] addSessionLog:@"Can't able to save menifest file"];
+        completion(nil);
     }
 }
 
@@ -152,6 +152,9 @@
     //Build URL for DropBox
     NSString *toPath = [self.bundleDirectory.absoluteString stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid]];
     [self setDbDirectory:[NSURL URLWithString:toPath]];
+    [self setDbIPAFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@.ipa",toPath,self.name]]];
+    [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
+    [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",toPath,abAppInfoFileName]]];
 }
 
 - (void)setBuildListInfo:(NSDictionary *)buildListInfo{

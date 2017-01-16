@@ -12,10 +12,7 @@
 #import "ShowLinkViewController.h"
 #import "ProjectAdvancedViewController.h"
 
-@interface HomeViewController : NSViewController <DBRestClientDelegate, DBSessionDelegate, MailDelegate, NSTabViewDelegate>{
-    //Dropbox
-    DBRestClient *restClient;
-    
+@interface HomeViewController : NSViewController < MailDelegate, NSTabViewDelegate>{
     //Tab
     IBOutlet NSTabView *tabView;
     
@@ -43,9 +40,6 @@
     IBOutlet NSView *viewProgressStatus;
     IBOutlet NSProgressIndicator *progressIndicator;
 }
-
-- (DBRestClient *)restClient;
-    
 
 - (IBAction)actionButtonTapped:(NSButton *)sender;
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
