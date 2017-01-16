@@ -1,0 +1,1 @@
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial_macOS/DropboxClientsManager+DesktopAuth-macOS.h
