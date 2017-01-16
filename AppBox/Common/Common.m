@@ -56,11 +56,15 @@
     if ([abDbAppkey isEqualToString: abEmptyString] && [abDbScreatkey isEqualToString: abEmptyString]){
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText: @"Dropbox app key and screat not found."];
-        [alert setInformativeText:@"Please input your dropbox app key and screat in \"AppBox>Common>DropboxKeys.h\" header file.\n\nAlso, please comply with the license."];
+        [alert setInformativeText:@"Please input your dropbox app key and screat in \"AppBox>Common>DropboxKeys.h\" header file. Or you can download the executable file of appbox by clicking button Download Appbox. \n\nAlso, please comply with the license."];
         [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert addButtonWithTitle:@"Download Appbox"];
         [alert addButtonWithTitle:@"Read License"];
         [alert addButtonWithTitle:@"OK"];
         if ([alert runModal] == NSAlertFirstButtonReturn){
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDefaultLatestDownloadURL]];
+        }
+        if ([alert runModal] == NSAlertSecondButtonReturn){
             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
         }
     }
