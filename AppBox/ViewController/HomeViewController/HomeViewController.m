@@ -135,11 +135,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 //email id text field
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
+    [sender setStringValue: [sender.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     [buttonShutdownMac setEnabled:[MailHandler isValidEmail:sender.stringValue]];
     if ([MailHandler isValidEmail:sender.stringValue]){
         [UserData setUserEmail:sender.stringValue];
-    }else{
-        [buttonShutdownMac setState:NSOffState];
+    }else if (sender.stringValue.length > 0){
+        [Common showAlertWithTitle:@"Invalid email address" andMessage:@"The email address entered was invalid. Please reenter it (Example: username@example.com)."];
     }
 }
 
