@@ -61,10 +61,11 @@
         [alert addButtonWithTitle:@"Download Appbox"];
         [alert addButtonWithTitle:@"Read License"];
         [alert addButtonWithTitle:@"OK"];
-        if ([alert runModal] == NSAlertFirstButtonReturn){
+        NSModalResponse response = [alert runModal];
+        if (response == NSAlertFirstButtonReturn){
             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDefaultLatestDownloadURL]];
         }
-        if ([alert runModal] == NSAlertSecondButtonReturn){
+        if (response == NSAlertSecondButtonReturn){
             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
         }
     }
