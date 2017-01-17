@@ -8,4 +8,5 @@ target :AppBox do
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'ObjectiveDropboxOfficial'
+    pod 'ZXingObjC'
 end

@@ -150,14 +150,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
-            [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{
-                                                                                                                                   @"Build Type" : comboBuildType.stringValue,
-                                                                                                                                   }]];
+            [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}]];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
         }else if (project.ipaFullPath){
             [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
-            [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+            [self getIPAInfoFromLocalURL:project.ipaFullPath];
         }
         [self viewStateForProgressFinish:NO];
     }else{
@@ -214,7 +212,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //${6} ipa Location
     [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
     
-    //${7} ipa Location
+    //${7} export options plist Location
     [buildArgument addObject:project.exportOptionsPlistPath.resourceSpecifier];
     
     //Run Task
@@ -386,25 +384,19 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             }
             [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
             
-            //upload ipa file directly if archive and ipa selected
-            if (tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
-                [self uploadIPAFileWithLocalURL:project.ipaFullPath];
-            }
+            //prepare for upload
+            NSURL *ipaFile = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:project.ipaFullPath.absoluteString];
+            [self uploadIPAFileWithLocalURL: ipaFile];
         }];
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
+        [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
         [self viewStateForProgressFinish:YES];
     }
 }
 
 -(void)uploadIPAFileWithLocalURL:(NSURL *)ipaURL{
-    if(ipaURL == nil){
-        [Common showAlertWithTitle:@"IPA File Missing" andMessage:@"Please select the IPA file and try again."];
-        return;
-    }
-    if (tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
-        [self getIPAInfoFromLocalURL:project.ipaFullPath];
-    }
+    //check unique link settings for Dropbox folder name
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
         NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
         bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
@@ -415,7 +407,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:project.ipaFullPath to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    [self dbUploadFile:ipaURL to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
@@ -471,13 +463,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
          CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
          if (fileType == FileTypeIPA) {
              NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress];
+             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
          }else if (fileType == FileTypeManifest){
              NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress];
+             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
          }else if (fileType == FileTypeJson){
              NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress];
+             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
          }
      }];
 }
