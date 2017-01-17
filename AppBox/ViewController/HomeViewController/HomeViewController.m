@@ -25,8 +25,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     project = [[XCProject alloc] init];
     allTeamIds = [KeychainHandler getAllTeamId];
     
-    //Init DBSession
-    
     //Notification Handler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gmailLogoutHandler:) name:abGmailLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
@@ -153,8 +151,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
             [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{
-                @"Build Type" : comboBuildType.stringValue,
-            }]];
+                                                                                                                                   @"Build Type" : comboBuildType.stringValue,
+                                                                                                                                   }]];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
         }else if (project.ipaFullPath){
@@ -212,13 +210,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //${5} Archive Location
     [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
-
+    
     //${6} ipa Location
     [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
-
+    
     //${7} ipa Location
     [buildArgument addObject:project.exportOptionsPlistPath.resourceSpecifier];
-
+    
     //Run Task
     [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
 }
@@ -413,58 +411,63 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [project setBundleDirectory:[NSURL URLWithString:bundlePath]];
         [project upadteDbDirectoryByBundleDirectory];
     }
-    NSString *fromPath = [project.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:project.ipaFullPath to:project.dbIPAFullPath.absoluteString withCompletion:^(BOOL success) {
-        if (true){
-            
-        }
-    }];
-//    [self.restClient uploadFile:project.ipaFullPath.lastPathComponent toPath:project.dbDirectory.absoluteString withParentRev:nil fromPath:fromPath];
+    [self dbUploadFile:project.ipaFullPath to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
--(void)dbUploadFile:(NSURL *)file to:(NSString *)path withCompletion:(void (^)(BOOL success))completion{
-    [[[[DropboxClientsManager authorizedClient].filesRoutes uploadUrl:path inputUrl:file] response:^(DBFILESFileMetadata *result, DBFILESUploadError *routeError, DBRequestError *error) {
-         if (result) {
-             NSLog(@"%@\n", result);
-             
-             //AppInfo.json file uploaded and creating shared url
-             if(fileType == FileTypeJson){
-                 project.uniqueLinkJsonMetaData = result;
-                 if(project.appShortShareableURL){
-                     [self showURL];
-                     return;
-                 }
-             }
-             //IPA file uploaded and creating shared url
-             else if (fileType == FileTypeIPA){
-                 [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
-                 NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
-                 [self showStatus:status andShowProgressBar:YES withProgress:-1];
-                 [self dbSharedURLForFile:result.pathDisplay withCompltion:^(BOOL success) {
-                 }];
-             }
-             //Manifest file uploaded and creating shared url
-             else if (fileType == FileTypeManifest){
-                 [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"Manifest file uploaded."];
-                 NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
-                 [self showStatus:status andShowProgressBar:YES withProgress:-1];
-                 [self dbSharedURLForFile:result.pathDisplay withCompltion:^(BOOL success) {
-                 }];
-             }
-             completion(YES);
-         } else {
-             completion(NO);
-             NSLog(@"%@\n%@\n", routeError, error);
-             [Common showAlertWithTitle:@"Error" andMessage:error.errorContent];
-             [self viewStateForProgressFinish:YES];
-         }
-     }] progress:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-         NSLog(@"\n%lld\n%lld\n%lld\n", bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+-(void)dbUploadFile:(NSURL *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+    //uploadUrl:path inputUrl:file
+    [[[[DropboxClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
+      //Track response with result and error
+      response:^(DBFILESFileMetadata *result, DBFILESUploadError *routeError, DBRequestError *error) {
+          if (result) {
+              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploaded file metadata = %@", result]];
+              
+              //AppInfo.json file uploaded and creating shared url
+              if(fileType == FileTypeJson){
+                  project.uniqueLinkJsonMetaData = result;
+                  if(project.appShortShareableURL){
+                      [self showURL];
+                      return;
+                  }else{
+                      //create shared url for appinfo.json
+                      [self dbSharedURLForFile:result.pathDisplay];
+                  }
+              }
+              //IPA file uploaded and creating shared url
+              else if (fileType == FileTypeIPA){
+                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
+                  NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
+                  [self showStatus:status andShowProgressBar:YES withProgress:-1];
+                  
+                  //create shared url for ipa
+                  [self dbSharedURLForFile:result.pathDisplay];
+              }
+              //Manifest file uploaded and creating shared url
+              else if (fileType == FileTypeManifest){
+                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"Manifest file uploaded."];
+                  NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
+                  [self showStatus:status andShowProgressBar:YES withProgress:-1];
+                  
+                  //create shared url for manifest
+                  [self dbSharedURLForFile:result.pathDisplay];
+              }
+          }
+          //unable to upload file, show error
+          else {
+              NSLog(@"%@\n%@\n", routeError, error);
+              [Common showAlertWithTitle:@"Error" andMessage:error.errorContent];
+              [self viewStateForProgressFinish:YES];
+          }
+      }]
+     
+     //Track and show upload progress
+     progress:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+         //Calculate and show progress based on file type
          CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
          if (fileType == FileTypeIPA) {
              NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
@@ -479,53 +482,73 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
      }];
 }
 
--(void)dbSharedURLForFile:(NSString *)file withCompltion:(void(^)(BOOL success))compltion{
-    [[[DropboxClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file] response:^(DBSHARINGSharedLinkMetadata * _Nullable result, DBSHARINGCreateSharedLinkWithSettingsError * _Nullable settingError, DBRequestError * _Nullable error) {
-        if (result){
-            if (fileType == FileTypeIPA) {
-                NSString *shareableLink = [result.url stringByReplacingCharactersInRange:NSMakeRange(result.url.length-1, 1) withString:@"1"];
-                project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
-                [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
-                    if (manifestURL == nil){
-                        
-                    }else{
-                        fileType = FileTypeManifest;
-                        [self dbUploadFile:manifestURL to:project.dbManifestFullPath.absoluteString withCompletion:^(BOOL success) {
-                            
-                        }];
-                    }
-                }];
-                
-            }else if (fileType == FileTypeManifest){
-                NSString *shareableLink = [result.url substringToIndex:result.url.length-5];
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
-                project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
-                if(buttonUniqueLink.state){
-//                    [self.restClient loadMetadata:project.bundleDirectory.absoluteString];
-                }else{
-                    [self createManifestShortSharableUrl];
-                }
-            }else if (fileType == FileTypeJson){
-                NSString *shareableLink = [result.url substringToIndex:result.url.length-5];
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
-                project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
-                NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-                [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
-                [self writeUniqueJsonWithDict:dictUniqueFile];
-                if(project.appShortShareableURL){
-                    [self showURL];
-                }else{
-                    [self createUniqueShortSharableUrl];
-                }
-                
-            }
-            compltion(true);
-        }else{
-            [Common showAlertWithTitle:@"Error" andMessage:error.errorContent];
-            [self viewStateForProgressFinish:YES];
-            compltion(false);
-        }
-    }];
+-(void)dbSharedURLForFile:(NSString *)file{
+    [[[DropboxClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
+     //Track response with result and error
+     response:^(DBSHARINGSharedLinkMetadata * _Nullable result, DBSHARINGCreateSharedLinkWithSettingsError * _Nullable settingError, DBRequestError * _Nullable error) {
+         if (result){
+             
+             //Create manifest file with share IPA url and upload manifest file
+             if (fileType == FileTypeIPA) {
+                 NSString *shareableLink = [result.url stringByReplacingCharactersInRange:NSMakeRange(result.url.length-1, 1) withString:@"1"];
+                 project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
+                 [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
+                     if (manifestURL == nil){
+                         //show error if manifest file url is nil
+                         [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
+                         [self viewStateForProgressFinish:YES];
+                     }else{
+                         //change file type and upload manifest
+                         fileType = FileTypeManifest;
+                         [self dbUploadFile:manifestURL to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+                     }
+                 }];
+                 
+             }
+             //if same link enable load appinfo.json otherwise Create short shareable url of manifest
+             else if (fileType == FileTypeManifest){
+                 NSString *shareableLink = [result.url substringToIndex:result.url.length-5];
+                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
+                 project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
+                 if(buttonUniqueLink.state){
+                     //Download previously uploaded appinfo
+                     [[[DropboxClientsManager authorizedClient].filesRoutes listRevisions:project.dbAppInfoJSONFullPath.absoluteString limit:@1]
+                      response:^(DBFILESListRevisionsResult * _Nullable result, DBFILESListRevisionsError * _Nullable revError, DBRequestError * _Nullable error) {
+                          
+                          //check there is any rev available
+                          if (result && result.isDeleted.boolValue == NO && result.entries.count > 0){
+                              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",result]];
+                              project.uniqueLinkJsonMetaData = [result.entries firstObject];
+                          }
+                          
+                          //handle meta data
+                          [self handleAfterUniqueJsonMetaDataLoaded];
+                      }];
+                 }else{
+                     [self createManifestShortSharableUrl];
+                 }
+             }
+             
+             //create app info file short sharable url
+             else if (fileType == FileTypeJson){
+                 NSString *shareableLink = [result.url substringToIndex:result.url.length-5];
+                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
+                 project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
+                 NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
+                 [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
+                 [self writeUniqueJsonWithDict:dictUniqueFile];
+                 if(project.appShortShareableURL){
+                     [self showURL];
+                 }else{
+                     [self createUniqueShortSharableUrl];
+                 }
+                 
+             }
+         }else{
+             [Common showAlertWithTitle:@"Error" andMessage:error.errorContent];
+             [self viewStateForProgressFinish:YES];
+         }
+     }];
 }
 
 #pragma mark - Updating Unique Link -
@@ -550,7 +573,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [self writeUniqueJsonWithDict:dictUniqueLink];
     project.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHARED]];
     project.appShortShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHORT]];
-//    [self uploadUniqueLinkJsonFile];
+    [self uploadUniqueLinkJsonFile];
 }
 
 - (NSDictionary *)getUniqueJsonDict{
@@ -569,58 +592,33 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [jsonData writeToFile:path atomically:YES];
 }
 
-//-(void)uploadUniqueLinkJsonFile{
-//    fileType = FileTypeJson;
-//    [self.restClient uploadFile:FILE_NAME_UNIQUE_JSON toPath:project.bundleDirectory.absoluteString withParentRev:project.uniqueLinkJsonMetaData.rev fromPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
-//}
-//
-//-(void)handleAfterUniqueJsonMetaDataLoaded{
-//    if(project.uniqueLinkJsonMetaData){
-//        NSString *tempUniqueJsonPath = [NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON];
-//        [self.restClient loadFile:project.uniqueLinkJsonMetaData.path intoPath:tempUniqueJsonPath];
-//    }else{
-//        [self updateUniquLinkDictinory:[NSMutableDictionary new]];
-//    }
-//}
+-(void)uploadUniqueLinkJsonFile{
+    fileType = FileTypeJson;
+    NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+    DBFILESWriteMode *mode = (project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
+    [self dbUploadFile:path to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
+}
 
-#pragma mark - DB and RestClient Delegate -
-#pragma mark → DB Delegate
-
-#pragma mark →RestClient Delegate
-//- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata{
-//    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",metadata]];
-//    if([metadata.path isEqualToString:project.bundleDirectory.absoluteString]){
-//        for (DBMetadata *contentMetaData in [metadata contents]) {
-//            if([contentMetaData.filename isEqualToString:FILE_NAME_UNIQUE_JSON]){
-//                project.uniqueLinkJsonMetaData = contentMetaData;
-//                break;
-//            }
-//        }
-//        [self handleAfterUniqueJsonMetaDataLoaded];
-//    }
-//}
-//
-//- (void)restClient:(DBRestClient*)client metadataUnchangedAtPath:(NSString*)path{
-//    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Meta unchanged path %@",path]];
-//}
-//
-//- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error{
-//    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error while loading metadata %@",error]];
-//    [self handleAfterUniqueJsonMetaDataLoaded];
-//}
-//
-//- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)destPath{
-//    if([destPath hasSuffix:FILE_NAME_UNIQUE_JSON]){
-//        [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
-//    }
-//}
-//
-//-(void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error{
-//    
-//}
-
-//Shareable Link
-
+-(void)handleAfterUniqueJsonMetaDataLoaded{
+    if(project.uniqueLinkJsonMetaData){
+        NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+        [[[DropboxClientsManager authorizedClient].filesRoutes downloadUrl:project.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
+         response:^(DBFILESFileMetadata * _Nullable result, DBFILESDownloadError * _Nullable downloadError, DBRequestError * _Nullable error, NSURL * _Nonnull url) {
+             if (result){
+                 if([result.name hasSuffix:FILE_NAME_UNIQUE_JSON]){
+                     [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
+                 }
+             }
+             else if (downloadError || error){
+                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error while loading metadata %@",error]];
+                 [self handleAfterUniqueJsonMetaDataLoaded];
+             }
+         }];
+        //        [self.restClient loadFile:project.uniqueLinkJsonMetaData.path intoPath:tempUniqueJsonPath];
+    }else{
+        [self updateUniquLinkDictinory:[NSMutableDictionary new]];
+    }
+}
 
 
 #pragma mark → Dropbox Helper
@@ -649,7 +647,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
         [self writeUniqueJsonWithDict:dictUniqueFile];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self uploadUniqueLinkJsonFile];
+            [self uploadUniqueLinkJsonFile];
         });
     }];
 }

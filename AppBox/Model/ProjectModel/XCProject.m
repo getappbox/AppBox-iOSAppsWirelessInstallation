@@ -154,7 +154,7 @@
     [self setDbDirectory:[NSURL URLWithString:toPath]];
     [self setDbIPAFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@.ipa",toPath,self.name]]];
     [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
-    [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",toPath,abAppInfoFileName]]];
+    [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",self.bundleDirectory,abAppInfoFileName]]];
 }
 
 - (void)setBuildListInfo:(NSDictionary *)buildListInfo{
