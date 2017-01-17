@@ -385,7 +385,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
             
             //prepare for upload
-            [self uploadIPAFileWithLocalURL:[NSURL fileURLWithPath:project.ipaFullPath.absoluteString]];
+            NSURL *ipaFile = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:project.ipaFullPath.absoluteString];
+            [self uploadIPAFileWithLocalURL: ipaFile];
         }];
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
