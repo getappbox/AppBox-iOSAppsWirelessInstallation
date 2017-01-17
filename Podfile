@@ -1,4 +1,4 @@
-platform :osx, '10.8'
+platform :osx, '10.10'
 
 target :AppBox do
     pod 'ISO8601'
@@ -7,4 +7,5 @@ target :AppBox do
     pod 'CMDQueryStringSerialization'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'ObjectiveDropboxOfficial'
 end

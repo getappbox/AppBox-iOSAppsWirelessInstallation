@@ -21,8 +21,9 @@
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
     
-    //Check Dropbox Keys
+    //Check Dropbox Keys and Setup Dropbox
     [Common checkDropboxKeys];
+    [DropboxClientsManager setupWithAppKeyDesktop:abDbAppkey];
     
     
     //Init Crashlytics
@@ -71,10 +72,28 @@
 
 //URISchem URL Handler
 -(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
-    NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",urlString]];
-    if (urlString != nil){
-        NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
+    [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",url]];
+    
+    //Check for Dropbox auth
+    DBOAuthResult *authResult = [DropboxClientsManager handleRedirectURL:url];
+    if (authResult != nil) {
+        if ([authResult isSuccess]) {
+            [[AppDelegate appDelegate] addSessionLog:@"Success! User is logged into Dropbox."];
+            [Answers logLoginWithMethod:@"Dropbox" success:@YES customAttributes:@{}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
+        } else if ([authResult isCancel]) {
+            [[AppDelegate appDelegate] addSessionLog:@"Authorization flow was manually canceled by user."];
+            [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : @"Canceled by User"}];
+            [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
+        } else if ([authResult isError]) {
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error: %@", authResult.errorDescription]];
+            [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : authResult.errorDescription}];
+            [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
+        }
+    }
+    if (url != nil){
+        
     }
 }
 

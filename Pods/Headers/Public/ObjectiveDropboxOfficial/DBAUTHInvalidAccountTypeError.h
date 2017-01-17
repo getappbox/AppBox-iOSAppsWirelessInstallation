@@ -1,0 +1,1 @@
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Auth/DBAUTHInvalidAccountTypeError.h

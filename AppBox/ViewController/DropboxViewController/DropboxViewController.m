@@ -22,16 +22,14 @@
     //Log Screen
     [Common logScreen:@"Dropbox Login"];
     
-    //BDSession
-    DBSession *session = [[DBSession alloc] initWithAppKey:abDbAppkey appSecret:abDbScreatkey root:abDbRoot];
-    [session setDelegate:self];
-    [DBSession setSharedSession:session];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
+    //DB Authentication Notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
 }
 
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
     [Answers logCustomEventWithName:@"Authenticating Dropbox " customAttributes:nil];
-    [[DBAuthHelperOSX sharedHelper] authenticate];
+    //Authenticate user
+    [DropboxClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace] controller:self openURL:^(NSURL *url){ [[NSWorkspace sharedWorkspace] openURL:url];} browserAuth:YES];
 }
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender {
@@ -40,17 +38,11 @@
     [NSApp terminate:self];
 }
 
-#pragma mark - DBSession Delegate
-- (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId{
-    [Common showAlertWithTitle:@"Authorization Failed" andMessage:abEmptyString];
+#pragma mark - Event Handler
+- (void)handleLoggedInNotification:(NSNotification *)notification{
+    [self dismissController:self];
 }
 
-- (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    if ([[DBSession sharedSession] isLinked]) {
-        [Answers logLoginWithMethod:@"Dropbox" success:@YES customAttributes:@{}];
-        [self dismissController:self];
-    }
-}
 
 
 @end

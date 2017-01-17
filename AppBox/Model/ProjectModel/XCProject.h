@@ -56,10 +56,14 @@
 
 //UniqueLink.json
 @property(nonatomic, retain) NSURL *uniquelinkShareableURL;
-@property(nonatomic, retain) DBMetadata *uniqueLinkJsonMetaData;
+@property(nonatomic, retain) DBFILESFileMetadata *uniqueLinkJsonMetaData;
 
 //Shareable URL DropBox or Google Shortern
 @property(nonatomic, retain) NSURL *dbDirectory;
+@property(nonatomic, retain) NSURL *dbIPAFullPath;
+@property(nonatomic, retain) NSURL *dbManifestFullPath;
+@property(nonatomic, retain) NSURL *dbAppInfoJSONFullPath;
+
 @property(nonatomic, retain) NSURL *bundleDirectory;
 @property(nonatomic, retain) NSURL *ipaFileDBShareableURL;
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
@@ -70,7 +74,7 @@
 - (void)upadteDbDirectoryByBundleDirectory;
 - (void)createExportOptionPlist;
 - (void)createUDIDAndIsNew:(BOOL)isNew;
-- (void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSString *mainfestPath))completion;
+-(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion;
 
 - (NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
 @end

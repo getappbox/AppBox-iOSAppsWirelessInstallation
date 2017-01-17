@@ -24,13 +24,11 @@
 		E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */; };
 		E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16437DE1D743A4E00CE8B7E /* Assets.xcassets */; };
 		E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16437F21D743B6800CE8B7E /* HomeViewController.m */; };
-		E16437F91D743D4500CE8B7E /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16437F81D743D4500CE8B7E /* DropboxOSX.framework */; };
 		E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438961D743EA300CE8B7E /* WebKit.framework */; };
 		E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438981D743EAA00CE8B7E /* Cocoa.framework */; };
 		E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E164389F1D7469CD00CE8B7E /* AppKit.framework */; };
 		E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A11D7469D200CE8B7E /* CoreData.framework */; };
 		E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A31D7469D900CE8B7E /* Foundation.framework */; };
-		E16438A61D746A2F00CE8B7E /* DropboxOSX.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = E16437F81D743D4500CE8B7E /* DropboxOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E16724601E1D2AE000346502 /* CIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E167245F1E1D2AE000346502 /* CIViewController.m */; };
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
@@ -54,7 +52,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E16438A61D746A2F00CE8B7E /* DropboxOSX.framework in Copy Files (1 item) */,
 			);
 			name = "Copy Files (1 item)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,7 +89,6 @@
 		E16437E31D743A4E00CE8B7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E16437F11D743B6800CE8B7E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E16437F21D743B6800CE8B7E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		E16437F81D743D4500CE8B7E /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxOSX.framework; path = AppBox/DropboxOSX.framework; sourceTree = "<group>"; };
 		E16438961D743EA300CE8B7E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E16438981D743EAA00CE8B7E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E164389F1D7469CD00CE8B7E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -143,7 +139,6 @@
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
 				E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */,
 				E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */,
-				E16437F91D743D4500CE8B7E /* DropboxOSX.framework in Frameworks */,
 				84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,7 +310,6 @@
 				E16438A31D7469D900CE8B7E /* Foundation.framework */,
 				E16438A11D7469D200CE8B7E /* CoreData.framework */,
 				E164389F1D7469CD00CE8B7E /* AppKit.framework */,
-				E16437F81D743D4500CE8B7E /* DropboxOSX.framework */,
 				E16438981D743EAA00CE8B7E /* Cocoa.framework */,
 				E16438961D743EA300CE8B7E /* WebKit.framework */,
 				ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */,
@@ -502,7 +496,8 @@
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = M8HBL5W4VV;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -583,7 +578,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E1974F331E20CA770060F03F /* ShellScript */ = {
@@ -739,7 +734,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M8HBL5W4VV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppBox/Framworks",
@@ -752,7 +747,7 @@
 				INFOPLIST_FILE = AppBox/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -765,7 +760,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M8HBL5W4VV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppBox/Framworks",
@@ -778,7 +773,7 @@
 				INFOPLIST_FILE = AppBox/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
