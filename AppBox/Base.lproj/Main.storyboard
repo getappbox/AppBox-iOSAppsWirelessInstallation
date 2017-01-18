@@ -177,7 +177,7 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
-            <point key="canvasLocation" x="904" y="-152"/>
+            <point key="canvasLocation" x="904" y="-169"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -675,9 +675,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
                                 <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
-                                <clipView key="contentView" id="EQ4-Ej-Nlf">
+                                <clipView key="contentView" copiesOnScroll="NO" id="EQ4-Ej-Nlf">
                                     <rect key="frame" x="1" y="1" width="778" height="367"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
