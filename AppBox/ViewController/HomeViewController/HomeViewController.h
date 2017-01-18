@@ -12,7 +12,7 @@
 #import "ShowLinkViewController.h"
 #import "ProjectAdvancedViewController.h"
 
-@interface HomeViewController : NSViewController < MailDelegate, NSTabViewDelegate>{
+@interface HomeViewController : NSViewController <MailDelegate, NSTabViewDelegate>{
     //Tab
     IBOutlet NSTabView *tabView;
     

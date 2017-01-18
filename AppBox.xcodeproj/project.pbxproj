@@ -43,6 +43,7 @@
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
+		E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F471E2F94F700BA81A1 /* WindowController.m */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,8 @@
 		E191F7C31E1E7B3B00D2A590 /* XcodeAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeAppStoreUpload.sh; sourceTree = "<group>"; };
 		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+		E1AA0F461E2F94F700BA81A1 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
+		E1AA0F471E2F94F700BA81A1 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
@@ -260,6 +263,7 @@
 			children = (
 				E16437ED1D743ABE00CE8B7E /* Storyboard */,
 				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
+				E1AA0F451E2F94C500BA81A1 /* WindowController */,
 				E167245D1E1D2ABF00346502 /* CIViewController */,
 				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
@@ -455,6 +459,15 @@
 			path = QRCodeViewController;
 			sourceTree = "<group>";
 		};
+		E1AA0F451E2F94C500BA81A1 /* WindowController */ = {
+			isa = PBXGroup;
+			children = (
+				E1AA0F461E2F94F700BA81A1 /* WindowController.h */,
+				E1AA0F471E2F94F700BA81A1 /* WindowController.m */,
+			);
+			path = WindowController;
+			sourceTree = "<group>";
+		};
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,6 +630,7 @@
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
+				E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,

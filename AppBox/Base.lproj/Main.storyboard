@@ -182,13 +182,16 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="538" y="299" width="800" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="800" height="500"/>
                         <value key="minFullScreenContentSize" type="size" width="800" height="500"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="1ep-9C-Hpp"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="lct-wo-jYo" kind="relationship" relationship="window.shadowedContentViewController" id="Nga-je-HB2"/>
