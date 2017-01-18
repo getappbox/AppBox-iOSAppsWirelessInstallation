@@ -42,6 +42,7 @@
 		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
+		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,8 @@
 		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E191F7C21E1E7B2A00D2A590 /* ALAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ALAppStoreUpload.sh; sourceTree = "<group>"; };
 		E191F7C31E1E7B3B00D2A590 /* XcodeAppStoreUpload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeAppStoreUpload.sh; sourceTree = "<group>"; };
+		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
+		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
+				E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */,
 				E14363781DF59AC700FB10CA /* LogViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
@@ -442,6 +446,15 @@
 			path = KeychainHandler;
 			sourceTree = "<group>";
 		};
+		E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */,
+				E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */,
+			);
+			path = QRCodeViewController;
+			sourceTree = "<group>";
+		};
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +634,7 @@
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
+				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
