@@ -10,11 +10,21 @@
 
 @implementation MailHandler
 
-#pragma mark - Send Email
-+(BOOL) isValidEmail:(NSString *)checkString{
+#pragma mark - Check Valid Email
++ (BOOL) isValidEmail:(NSString *)checkString{
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
     return [emailTest evaluateWithObject:checkString];
+}
+
++ (BOOL) isAllValidEmail:(NSString *)checkString{
+    NSString *stricterFilterString = @"(([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)(\\s*,\\s*|\\s*$))*";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
+    return [emailTest evaluateWithObject:checkString];
+}
+
++ (void) showInvalidEmailAddressAlert{
+    [Common showAlertWithTitle:@"Invalid email address" andMessage:@"The email address entered was invalid. Please reenter it (Example: username@example.com).\n\nFor multiple email please enter like (username@example.com,username2@example.com,username@example2.com)."];
 }
 
 @end

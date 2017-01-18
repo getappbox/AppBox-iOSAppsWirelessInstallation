@@ -498,7 +498,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="6aQ-Mu-xKb"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="username@example.com" drawsBackground="YES" id="1CV-KM-paZ">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="user@example.com,user2@example.com,..." drawsBackground="YES" id="1CV-KM-paZ">
                                             <font key="font" metaFont="systemLight" size="16"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
