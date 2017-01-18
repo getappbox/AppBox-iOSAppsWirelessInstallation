@@ -10,6 +10,8 @@
 
 @interface MailHandler : NSObject
 
++ (void) showInvalidEmailAddressAlert;
 + (BOOL) isValidEmail:(NSString *)checkString;
++ (BOOL) isAllValidEmail:(NSString *)checkString;
 
 @end

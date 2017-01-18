@@ -39,4 +39,11 @@
     [self dismissController:self];
 }
 
+#pragma mark - Navigation
+-(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.destinationController isKindOfClass:[QRCodeViewController class]]){
+        ((QRCodeViewController *) segue.destinationController).project = self.project;
+    }
+}
+
 @end

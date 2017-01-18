@@ -127,12 +127,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 //email id text field
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
-    [sender setStringValue: [sender.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-    [buttonShutdownMac setEnabled:[MailHandler isValidEmail:sender.stringValue]];
-    if ([MailHandler isValidEmail:sender.stringValue]){
+    [sender setStringValue: [sender.stringValue stringByReplacingOccurrencesOfString:@" " withString:abEmptyString]];
+    [buttonShutdownMac setEnabled:[MailHandler isAllValidEmail:sender.stringValue]];
+    if ([MailHandler isAllValidEmail:sender.stringValue]){
         [UserData setUserEmail:sender.stringValue];
     }else if (sender.stringValue.length > 0){
-        [Common showAlertWithTitle:@"Invalid email address" andMessage:@"The email address entered was invalid. Please reenter it (Example: username@example.com)."];
+        [MailHandler showInvalidEmailAddressAlert];
     }
 }
 
@@ -146,7 +146,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Final Action Button (Build/IPA)
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
-    if (![sender.title.lowercaseString isEqualToString:@"stop"]){
+    if (buttonSendMail.state == NSOffState || (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue])){
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         if (project.fullPath){
@@ -159,7 +159,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }
         [self viewStateForProgressFinish:NO];
     }else{
-        [Common showAlertWithTitle:@"AppBox" andMessage:@"Comming Soon... You can quit and start again :D !!"];
+        [MailHandler showInvalidEmailAddressAlert];
     }
 }
 
@@ -846,7 +846,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
     
     //Send mail if valid email address othervise show link
-    if (textFieldEmail.stringValue.length > 0 && [MailHandler isValidEmail:textFieldEmail.stringValue]) {
+    if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
         [self performSegueWithIdentifier:@"MailView" sender:self];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
