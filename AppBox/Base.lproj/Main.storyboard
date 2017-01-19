@@ -72,7 +72,7 @@
                                                 <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
@@ -130,6 +130,10 @@
                                             <connections>
                                                 <action selector="logoutDropBoxTapped:" target="hnw-xV-0zn" id="pVf-rO-G1A"/>
                                             </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem title="Dropbox Space" enabled="NO" id="Ug8-0u-jHy" userLabel="Dropbox Space">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -200,6 +204,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
                     <connections>
                         <outlet property="dropboxLogoutButton" destination="sBp-fs-Uyn" id="afh-vo-oE7"/>
+                        <outlet property="dropboxSpaceButton" destination="Ug8-0u-jHy" id="n5f-5O-Xw1"/>
                         <outlet property="gmailLogoutButton" destination="Ki8-ab-eaa" id="xPA-We-vFM"/>
                     </connections>
                 </customObject>

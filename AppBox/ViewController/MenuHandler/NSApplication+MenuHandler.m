@@ -26,6 +26,44 @@
 - (IBAction)preferencesTapped:(NSMenuItem *)sender {
 }
 
+#pragma mark - File
+- (void)updateDropboxUsage{
+    [self updateDropboxUsageFileButton];
+    
+    //get spaces usage
+    [[[DropboxClientsManager authorizedClient].usersRoutes getSpaceUsage]
+     response:^(DBUSERSSpaceUsage * _Nullable spaceUsage, DBNilObject * _Nullable nilObject, DBRequestError * _Nullable error) {
+         if (spaceUsage){
+             @try {
+                 NSNumber *usage = @(spaceUsage.used.longValue / abBytesToMB);
+                 NSNumber *allocated = @(spaceUsage.allocation.individual.allocated.longValue / abBytesToMB);
+                 
+                 //save space usage in user default
+                 [UserData setDropboxUsedSpace:usage];
+                 [UserData setDropboxAvailableSpace:allocated];
+                 [self updateDropboxUsageFileButton];
+                 
+                 //log space usage
+                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Used Space : %@MB", usage]];
+                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Available Space : %@MB", allocated]];
+                 
+                 //check if dopbox running out of space
+                 if ((allocated.integerValue - usage.integerValue) < abDropboxOutOfSpaceWarningSize){
+                     [Common showAlertWithTitle:@"Warning" andMessage:[NSString stringWithFormat:@"You're running out of Dropbox space\n\n %@MB of %@MB used.", usage, allocated]];
+                 }
+             } @catch (NSException *exception) {
+                 [Answers logCustomEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription}];
+             }
+         }
+     }];
+}
+
+- (void)updateDropboxUsageFileButton{
+    NSNumber *used = [UserData dropboxUsedSpace];
+    NSNumber *availabel = [UserData dropboxAvailableSpace];
+    [[[AppDelegate appDelegate] dropboxSpaceButton] setTitle:[NSString stringWithFormat:@"Dropbox Usage : %@MB of %@MB used", used, availabel]];
+}
+
 #pragma mark - Accounts
 - (IBAction)logoutGmailTapped:(NSMenuItem *)sender {
     NSAlert *alert = [[NSAlert alloc] init];

@@ -50,6 +50,8 @@
 //others
 #define abEmptyString @""
 #define abTeamIdLength 10
+#define abBytesToMB (1024 * 1024)
+#define abDropboxOutOfSpaceWarningSize 150 
 #define abAppInfoFileName @"appinfo.json"
 #define abEndOfSessionLog @"abEndOfSessionLog"
 
