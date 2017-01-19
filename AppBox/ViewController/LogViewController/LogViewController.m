@@ -36,7 +36,7 @@
     //if auto scroll enabled replace content and scroll to bottom
     if (isAutoScrollEnabled){
         textView.string = [[AppDelegate appDelegate] sessionLog];
-        [textView scrollRangeToVisible:NSMakeRange(textView.string.length-1, 1)];
+        [textView scrollToEndOfDocument:self];
     }
 }
 
@@ -52,6 +52,9 @@
         //enable auto scroll if user scrolled to bottom
         if (NSMaxY(visRect) - NSMaxY(boundsRect) == 0.0){
             isAutoScrollEnabled = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshLog];
+            });
         }
     }
 }
