@@ -130,9 +130,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 //email id text field
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
+    //removed spaces
     [sender setStringValue: [sender.stringValue stringByReplacingOccurrencesOfString:@" " withString:abEmptyString]];
-    [buttonShutdownMac setEnabled:[MailHandler isAllValidEmail:sender.stringValue]];
-    if ([MailHandler isAllValidEmail:sender.stringValue]){
+    
+    //check all mails vaild or not and setup mailed option based on this
+    BOOL isAllMailVaild = sender.stringValue.length > 0 && [MailHandler isAllValidEmail:sender.stringValue];
+    [buttonShutdownMac setEnabled:isAllMailVaild];
+    if (isAllMailVaild){
         [UserData setUserEmail:sender.stringValue];
     }else if (sender.stringValue.length > 0){
         [MailHandler showInvalidEmailAddressAlert];
