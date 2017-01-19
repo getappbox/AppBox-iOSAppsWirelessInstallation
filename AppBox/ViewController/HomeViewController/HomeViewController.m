@@ -32,6 +32,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //setup initial value
     [project setBuildDirectory: [UserData buildLocation]];
+    
+    //setup dropbox
+    [DropboxClientsManager setupWithAppKeyDesktop:abDbAppkey];
 }
 
 - (void)viewWillAppear{
