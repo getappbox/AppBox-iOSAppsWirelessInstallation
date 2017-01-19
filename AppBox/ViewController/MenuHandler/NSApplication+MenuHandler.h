@@ -10,7 +10,18 @@
 
 @interface NSApplication (MenuHandler)
 
+//AppBox
+- (IBAction)preferencesTapped:(NSMenuItem *)sender;
+- (IBAction)checkForUpdateTapped:(NSMenuItem *)sender;
+
+//Accounts
 - (IBAction)logoutGmailTapped:(NSMenuItem *)sender;
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender;
+
+//Help
+- (IBAction)licenseTapped:(NSMenuItem *)sender;
+- (IBAction)latestNewsTapped:(NSMenuItem *)sender;
+- (IBAction)helpButtonTapped:(NSMenuItem *)sender;
+- (IBAction)releaseNotesTapped:(NSMenuItem *)sender;
 
 @end

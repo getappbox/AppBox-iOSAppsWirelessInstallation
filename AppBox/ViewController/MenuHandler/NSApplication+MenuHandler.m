@@ -10,6 +10,23 @@
 
 @implementation NSApplication (MenuHandler)
 
+
+#pragma mark - AppBox
+- (IBAction)checkForUpdateTapped:(NSMenuItem *)sender {
+    [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
+        if (available){
+            [UpdateHandler showUpdateAlertWithUpdateURL:url];
+        }else{
+            [UpdateHandler showAlreadyUptoDateAlert];
+        }
+    }];
+}
+
+
+- (IBAction)preferencesTapped:(NSMenuItem *)sender {
+}
+
+#pragma mark - Accounts
 - (IBAction)logoutGmailTapped:(NSMenuItem *)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Are you sure?"];
@@ -36,5 +53,23 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:sender];
         [sender setEnabled:NO];
     }
+}
+
+#pragma mark - Help
+- (IBAction)helpButtonTapped:(NSMenuItem *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
+}
+
+- (IBAction)latestNewsTapped:(NSMenuItem *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abTwitterURL]];
+}
+
+- (IBAction)releaseNotesTapped:(NSMenuItem *)sender {
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",abGitHubReleaseBaseURL,versionString]]];
+}
+
+- (IBAction)licenseTapped:(NSMenuItem *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
 }
 @end

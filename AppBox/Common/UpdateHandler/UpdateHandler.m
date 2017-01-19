@@ -24,6 +24,11 @@
     }
 }
 
++ (void)showAlreadyUptoDateAlert{
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    [Common showAlertWithTitle:@"You’re up-to-date!" andMessage:[NSString stringWithFormat:@"AppBox %@ is currently the newest version available.", versionString]];
+}
+
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
         [[AppDelegate appDelegate] addSessionLog:@"Checking for new version..."];
