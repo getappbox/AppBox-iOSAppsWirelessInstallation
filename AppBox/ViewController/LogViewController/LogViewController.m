@@ -18,15 +18,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
-    [self refreshLog];
-    isAutoScrollEnabled = YES;
+    //log view
     [Common logScreen:@"AppBox Log"];
+    
+    //enable auto scroll
+    isAutoScrollEnabled = YES;
+    
+    //refresh log
+    [self refreshLog];
+    
+    //add observer for log and scroll
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLog) name:abSessionLogUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleScroll:) name:NSScrollViewDidLiveScrollNotification object:nil];
 }
 
 -(void)refreshLog{
+    //if auto scroll enabled replace content and scroll to bottom
     if (isAutoScrollEnabled){
         textView.string = [[AppDelegate appDelegate] sessionLog];
         [textView scrollRangeToVisible:NSMakeRange(textView.string.length-1, 1)];
