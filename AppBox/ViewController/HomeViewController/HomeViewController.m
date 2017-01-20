@@ -110,6 +110,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [alert addButtonWithTitle:@"Ok"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
+        [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Keep Same Link"}];
     }
 }
 

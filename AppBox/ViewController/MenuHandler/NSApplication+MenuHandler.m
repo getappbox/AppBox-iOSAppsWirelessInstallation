@@ -96,18 +96,23 @@
 #pragma mark - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
+    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Help"}];
 }
 
 - (IBAction)latestNewsTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abTwitterURL]];
+    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Twitter"}];
+
 }
 
 - (IBAction)releaseNotesTapped:(NSMenuItem *)sender {
+    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Release Notes"}];
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",abGitHubReleaseBaseURL,versionString]]];
 }
 
 - (IBAction)licenseTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
+    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"License"}];
 }
 @end

@@ -12,7 +12,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    //log screen
+    [Common logScreen:@"QR Code View"];
+    
+    //create qr code and show in imageview
     NSError *error = nil;
     ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
     ZXBitMatrix *result = [writer encode:self.project.appShortShareableURL.absoluteString format:kBarcodeFormatQRCode width:250 height:250 error:&error];
