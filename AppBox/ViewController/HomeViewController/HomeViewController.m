@@ -265,7 +265,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [progressIndicator setDoubleValue:50];
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
-                    [comboBuildScheme selectItemAtIndex:0];
+                    if (comboBuildScheme.numberOfItems > 0){
+                        [comboBuildScheme selectItemAtIndex:0];                        
+                    }
                     
                     //Run Team Id Script
                     [self runTeamIDScript];
