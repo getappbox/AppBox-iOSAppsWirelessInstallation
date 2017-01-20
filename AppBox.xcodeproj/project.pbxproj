@@ -522,7 +522,7 @@
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = M8HBL5W4VV;
+						DevelopmentTeam = 4F7SW76LL6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -762,7 +762,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = M8HBL5W4VV;
+				DEVELOPMENT_TEAM = 4F7SW76LL6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppBox/Framworks",
@@ -788,7 +788,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = M8HBL5W4VV;
+				DEVELOPMENT_TEAM = 4F7SW76LL6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AppBox/Framworks",
