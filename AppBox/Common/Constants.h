@@ -12,9 +12,14 @@
 //Base URL's
 #define abMailerBaseURL @"https://appboxapi.github.io/mail"
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
+#define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
+
+//Other URL's
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
-#define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
+#define abDocumentationURL @"https://iosappswirelessinstallation.codeplex.com/documentation"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
+#define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
+#define abTwitterURL @"https://twitter.com/tryappbox"
 
 //Serives Key
 #define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
@@ -33,19 +38,22 @@
 //team id constants
 #define abiPhoneDeveloper @"iphone developer"
 #define abiPhoneDistribution @"iphone distribution"
+
+#define abTeamId @"teamId"
 #define abFullName @"fullName"
 #define abTeamName @"teamName"
-#define abTeamId @"teamId"
 #define abExpiryDate @"expiryDate"
 
 //default setting
 #define abBuildLocation @"~/Desktop"
 
 //others
-#define abTeamIdLength 10
-#define abEndOfSessionLog @"abEndOfSessionLog"
 #define abEmptyString @""
+#define abTeamIdLength 10
+#define abBytesToMB (1024 * 1024)
+#define abDropboxOutOfSpaceWarningSize 150 
 #define abAppInfoFileName @"appinfo.json"
+#define abEndOfSessionLog @"abEndOfSessionLog"
 
 
 //enums

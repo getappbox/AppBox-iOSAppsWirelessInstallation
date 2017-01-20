@@ -32,6 +32,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //setup initial value
     [project setBuildDirectory: [UserData buildLocation]];
+    
+    //setup dropbox
+    [DropboxClientsManager setupWithAppKeyDesktop:abDbAppkey];
+    
+    //update available memory
+    [[NSApplication sharedApplication] updateDropboxUsage];
 }
 
 - (void)viewWillAppear{
@@ -106,6 +112,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [alert addButtonWithTitle:@"Ok"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
+        [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Keep Same Link"}];
     }
 }
 
@@ -127,9 +134,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 //email id text field
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender {
+    //removed spaces
     [sender setStringValue: [sender.stringValue stringByReplacingOccurrencesOfString:@" " withString:abEmptyString]];
-    [buttonShutdownMac setEnabled:[MailHandler isAllValidEmail:sender.stringValue]];
-    if ([MailHandler isAllValidEmail:sender.stringValue]){
+    
+    //check all mails vaild or not and setup mailed option based on this
+    BOOL isAllMailVaild = sender.stringValue.length > 0 && [MailHandler isAllValidEmail:sender.stringValue];
+    [buttonShutdownMac setEnabled:isAllMailVaild];
+    if (isAllMailVaild){
         [UserData setUserEmail:sender.stringValue];
     }else if (sender.stringValue.length > 0){
         [MailHandler showInvalidEmailAddressAlert];
@@ -254,7 +265,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [progressIndicator setDoubleValue:50];
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
-                    [comboBuildScheme selectItemAtIndex:0];
+                    if (comboBuildScheme.numberOfItems > 0){
+                        [comboBuildScheme selectItemAtIndex:0];                        
+                    }
                     
                     //Run Team Id Script
                     [self runTeamIDScript];
@@ -319,7 +332,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }];
 }
 
-#pragma mark - Get IPA Info -
+#pragma mark - Get IPA Info and Upload -
 
 -(void)checkIPACreated{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -546,7 +559,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Updating Unique Link -
 -(void)updateUniquLinkDictinory:(NSMutableDictionary *)dictUniqueLink{
     if(![dictUniqueLink isKindOfClass:[NSDictionary class]])
-        dictUniqueLink = [NSMutableDictionary new];
+    dictUniqueLink = [NSMutableDictionary new];
     NSDictionary *latestVersion = @{
                                     @"name" : project.name,
                                     @"version" : project.version,
@@ -587,6 +600,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)uploadUniqueLinkJsonFile{
     fileType = FileTypeJson;
     NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+    
+    //set mode for appinfo.json file to upload/update
     DBFILESWriteMode *mode = (project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
     [self dbUploadFile:path to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
@@ -594,19 +609,22 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)handleAfterUniqueJsonMetaDataLoaded{
     if(project.uniqueLinkJsonMetaData){
         NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+        
+        //download appinfo.json file
         [[[DropboxClientsManager authorizedClient].filesRoutes downloadUrl:project.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
          response:^(DBFILESFileMetadata * _Nullable result, DBFILESDownloadError * _Nullable downloadError, DBRequestError * _Nullable error, NSURL * _Nonnull url) {
              if (result){
                  if([result.name hasSuffix:FILE_NAME_UNIQUE_JSON]){
+                     //append new version
                      [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
                  }
              }
              else if (downloadError || error){
                  [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error while loading metadata %@",error]];
+                 //create new appinfo.json
                  [self handleAfterUniqueJsonMetaDataLoaded];
              }
          }];
-        //        [self.restClient loadFile:project.uniqueLinkJsonMetaData.path intoPath:tempUniqueJsonPath];
     }else{
         [self updateUniquLinkDictinory:[NSMutableDictionary new]];
     }
@@ -620,6 +638,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (void)dropboxLogoutHandler:(id)sender{
+    //handle dropbox logout for authorized users
     if ([DropboxClientsManager authorizedClient]){
         [DropboxClientsManager unlinkClients];
         [self viewStateForProgressFinish:YES];
@@ -639,6 +658,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
         [self writeUniqueJsonWithDict:dictUniqueFile];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //upload file unique short url
             [self uploadUniqueLinkJsonFile];
         });
     }];
@@ -652,6 +672,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [Tiny shortenURL:project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
         project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
+            //show url
             [self showURL];
         });
     }];
@@ -731,12 +752,19 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
+    //log status in session log
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
+    
+    //show status in status label
     [labelStatus setStringValue:status];
     [labelStatus setHidden:!(status != nil && status.length > 0)];
+    
+    //show progress indicator based on progress value (if -1 then show indeterminate)
     [progressIndicator setHidden:!showProgressBar];
     [progressIndicator setIndeterminate:(progress == -1)];
     [viewProgressStatus setHidden: (labelStatus.hidden && progressIndicator.hidden)];
+    
+    //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
         if (showProgressBar){
             [progressIndicator startAnimation:self];
@@ -776,6 +804,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
+//get optional feature enable/disable dictionary
 -(NSDictionary *)getBasicViewStateWithOthersSettings:(NSDictionary *)otherSettings{
     if (otherSettings == nil){
         otherSettings = @{};
@@ -794,11 +823,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)mailSentWithWebView:(WebView *)webView{
     if (buttonShutdownMac.state == NSOnState){
+        //if mac shutdown is checked then shutdown mac after 60 sec
         [self viewStateForProgressFinish:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MacHandler shutdownSystem];
         });
     }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
+        //if mac shutdown isn't checked then show link
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
 }
@@ -809,6 +840,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)loginSuccessWithWebView:(WebView *)webView{
+    //enable sendmail button if user LoggedIn Success
     [UserData setIsGmailLoggedIn:YES];
     [buttonSendMail setState:NSOnState];
     [self enableMailField:YES];
@@ -837,6 +869,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - TabView Delegate
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+    //update view state based on selected tap
     [self updateViewState];
 }
 

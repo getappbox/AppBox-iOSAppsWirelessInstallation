@@ -40,6 +40,7 @@
 
 #pragma mark - Event Handler
 - (void)handleLoggedInNotification:(NSNotification *)notification{
+    [[NSApplication sharedApplication] updateDropboxUsage];
     [self dismissController:self];
 }
 

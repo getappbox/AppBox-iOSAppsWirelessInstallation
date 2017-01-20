@@ -21,9 +21,8 @@
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
     
-    //Check Dropbox Keys and Setup Dropbox
+    //Check Dropbox Keys
     [Common checkDropboxKeys];
-    [DropboxClientsManager setupWithAppKeyDesktop:abDbAppkey];
     
     
     //Init Crashlytics

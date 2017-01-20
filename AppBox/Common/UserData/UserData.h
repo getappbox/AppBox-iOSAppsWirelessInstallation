@@ -22,4 +22,9 @@
 +(NSURL *)buildLocation;
 +(void)setBuildLocation:(NSURL *)buildLocation;
 
++(NSNumber *)dropboxUsedSpace;
++(NSNumber *)dropboxAvailableSpace;
++(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
++(void)setDropboxAvailableSpace:(NSNumber *)availableSpace;
+
 @end

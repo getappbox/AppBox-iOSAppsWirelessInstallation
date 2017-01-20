@@ -22,6 +22,7 @@
 @property (nonatomic) BOOL processing;
 @property (nonatomic, weak) IBOutlet NSMenuItem *gmailLogoutButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxLogoutButton;
+@property (nonatomic, weak) IBOutlet NSMenuItem *dropboxSpaceButton;
 
 @end
 

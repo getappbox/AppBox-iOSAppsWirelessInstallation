@@ -14,7 +14,7 @@ cd "${1}"
 #{3} - VisualStudioMobileCenterDemo
 #{4} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/VSMCD.xcarchive
 
-xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
 
 
 

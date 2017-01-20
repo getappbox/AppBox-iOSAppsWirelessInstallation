@@ -23,8 +23,18 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Check for Update" id="g39-wl-Zom">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="checkForUpdateTapped:" target="hnw-xV-0zn" id="4xk-T8-ukX"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="preferencesTapped:" target="hnw-xV-0zn" id="HsC-MP-RVP"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Hide AppBox" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
@@ -62,21 +72,7 @@
                                                 <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="sqY-cu-265"/>
-                                        <menuItem title="Logout Gmail" id="K8O-EO-3yr" userLabel="Logout Gmail">
-                                            <attributedString key="attributedTitle"/>
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="logoutGmailTapped:" target="hnw-xV-0zn" id="ALm-bb-htk"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Logout Dropbox" id="JOb-fc-01Z" userLabel="Logout Dropbox">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="logoutDropBoxTapped:" target="hnw-xV-0zn" id="PTN-tn-E2A"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
@@ -118,6 +114,30 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Accounts" id="yI9-UO-Ljk">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Accounts" autoenablesItems="NO" id="hsO-Yp-DDN">
+                                    <items>
+                                        <menuItem title="Logout Gmail" id="Ki8-ab-eaa" userLabel="Logout Gmail">
+                                            <attributedString key="attributedTitle"/>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="logoutGmailTapped:" target="hnw-xV-0zn" id="T7V-V1-sxI"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Logout Dropbox" id="sBp-fs-Uyn" userLabel="Logout Dropbox">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="logoutDropBoxTapped:" target="hnw-xV-0zn" id="pVf-rO-G1A"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem title="Dropbox Space" enabled="NO" id="Ug8-0u-jHy" userLabel="Dropbox Space">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="4eX-h0-ncF">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="QBC-m6-GiV">
@@ -150,13 +170,26 @@
                                     <items>
                                         <menuItem title="Help" keyEquivalent="?" id="szq-4P-EAe">
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="UAk-rJ-xgB"/>
+                                                <action selector="helpButtonTapped:" target="hnw-xV-0zn" id="zVs-9o-ymg"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Check for Update" id="g39-wl-Zom">
+                                        <menuItem title="Latest News" id="Ihi-lf-Us8" userLabel="Twitter">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="Bga-c2-gZa"/>
+                                                <action selector="latestNewsTapped:" target="hnw-xV-0zn" id="JyJ-JJ-mF0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="06t-UF-iUY"/>
+                                        <menuItem title="License" id="PlJ-Qd-CU4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="licenseTapped:" target="hnw-xV-0zn" id="eEz-ck-IqW"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Release Notes" id="0SD-c8-F3Y">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="releaseNotesTapped:" target="hnw-xV-0zn" id="a7A-K3-sX0"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -170,25 +203,29 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
                     <connections>
-                        <outlet property="dropboxLogoutButton" destination="JOb-fc-01Z" id="8aA-3e-Rg0"/>
-                        <outlet property="gmailLogoutButton" destination="K8O-EO-3yr" id="9xt-xT-w9T"/>
+                        <outlet property="dropboxLogoutButton" destination="sBp-fs-Uyn" id="afh-vo-oE7"/>
+                        <outlet property="dropboxSpaceButton" destination="Ug8-0u-jHy" id="n5f-5O-Xw1"/>
+                        <outlet property="gmailLogoutButton" destination="Ki8-ab-eaa" id="xPA-We-vFM"/>
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
-            <point key="canvasLocation" x="904" y="-152"/>
+            <point key="canvasLocation" x="904" y="-169"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="538" y="299" width="800" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="800" height="500"/>
                         <value key="minFullScreenContentSize" type="size" width="800" height="500"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="1ep-9C-Hpp"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="lct-wo-jYo" kind="relationship" relationship="window.shadowedContentViewController" id="Nga-je-HB2"/>
@@ -672,9 +709,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
                                 <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
-                                <clipView key="contentView" id="EQ4-Ej-Nlf">
+                                <clipView key="contentView" copiesOnScroll="NO" id="EQ4-Ej-Nlf">
                                     <rect key="frame" x="1" y="1" width="778" height="367"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>

@@ -91,7 +91,7 @@
         _ipaFullPath = [NSURL URLWithString:ipaPath];
         
         //Export Option Plist
-        NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", [[self.targets firstObject] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", self.name]];
         _exportOptionsPlistPath = [NSURL URLWithString:exportOptionPlistPath];
     }
 }

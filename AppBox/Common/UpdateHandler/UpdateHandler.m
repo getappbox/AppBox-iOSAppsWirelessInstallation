@@ -21,7 +21,13 @@
     [alert addButtonWithTitle:@"NO"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:url];
+        [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Update"}];
     }
+}
+
++ (void)showAlreadyUptoDateAlert{
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    [Common showAlertWithTitle:@"You’re up-to-date!" andMessage:[NSString stringWithFormat:@"AppBox %@ is currently the newest version available.", versionString]];
 }
 
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
