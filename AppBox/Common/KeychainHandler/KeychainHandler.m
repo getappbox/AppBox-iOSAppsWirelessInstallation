@@ -28,7 +28,7 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
         
         //filter developer, distribution cert and valid team id
         if (![teamId containsString:@" "] && teamId.length == abTeamIdLength &&
-            ([fullName.lowercaseString containsString:abiPhoneDistribution])){
+            ([fullName.lowercaseString containsString:abiPhoneDistribution] || [fullName.lowercaseString containsString:abiPhoneDeveloper])){
             
             //better name
             fullName = [NSString stringWithFormat:@"%@ (%@)",teamName, teamId];
