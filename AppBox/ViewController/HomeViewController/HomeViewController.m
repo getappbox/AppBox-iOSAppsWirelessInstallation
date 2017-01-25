@@ -389,9 +389,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 }];
                 if (alOutput.isError){
                     [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+                }else if (alOutput.isValid){
+                    [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+                    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
                 }
                 [self viewStateForProgressFinish:YES];
-                [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
             }
         });
     }];
@@ -947,7 +949,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Navigation -
 -(void)showURL{
     //Log IPA Upload Success Rate with Other Options
-    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
+    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
     
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
