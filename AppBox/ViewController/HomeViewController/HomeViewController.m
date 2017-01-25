@@ -200,14 +200,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [self showStatus:@"Cleaning..." andShowProgressBar:YES withProgress:-1];
     scriptType = ScriptTypeBuild;
     
-    //Build Script Name
-    NSString *buildScriptName = ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]) ? @"WorkspaceBuildScript" : @"ProjectBuildScript";
-    
     //Create Export Option Plist
     [project createExportOptionPlist];
     
     //Build Script
-    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
+    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:@"ProjectBuildScript" ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
     
     //${1} Project Location
@@ -244,16 +241,24 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (void)runALAppStoreScriptForValidation:(BOOL)isValidation{
     scriptType = isValidation ? ScriptTypeAppStoreValidation : ScriptTypeAppStoreUpload;
     [self showStatus:isValidation ? @"Validating IPA..." : @"Uploading IPA..." andShowProgressBar:YES withProgress:-1];
-    NSString *alSriptPath = [[NSBundle mainBundle] pathForResource: (isValidation) ? @"ALAppStoreValidation" : @"ALAppStoreUpload" ofType:@"sh"];
+    NSString *alSriptPath = [[NSBundle mainBundle] pathForResource: @"ALAppStore" ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
+    alPath = @"/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool";
     
-    //${1} Project Location
+    //${1} Purpose
+    NSString *purpose = isValidation ? abALValidateApp : abALUploadApp;
+    [buildArgument addObject:purpose];
+    
+    //${2} AL Path
+    [buildArgument addObject:alPath];
+    
+    //${3} Project Location
     [buildArgument addObject: [project.ipaFullPath resourceSpecifier]];
     
-    //${2} Project type workspace/scheme
+    //${4} Project type workspace/scheme
     [buildArgument addObject:project.itcUserName];
     
-    //${3} Build Scheme
+    //${5} Build Scheme
     [buildArgument addObject:project.itcPasswod];
     
     [self runTaskWithLaunchPath:alSriptPath andArgument:buildArgument];

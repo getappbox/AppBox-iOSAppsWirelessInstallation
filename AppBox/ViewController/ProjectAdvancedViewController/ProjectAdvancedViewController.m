@@ -8,11 +8,9 @@
 
 #import "ProjectAdvancedViewController.h"
 
-@interface ProjectAdvancedViewController ()
-
-@end
-
-@implementation ProjectAdvancedViewController
+@implementation ProjectAdvancedViewController{
+    NSDictionary *keyChainAccount;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +23,12 @@
         [textFieldPassword setEnabled:NO];
     }
     [pathBuild setURL:self.project.buildDirectory];
+    NSArray *accounts = [SAMKeychain accountsForService:abiTunesConnectService];
+    if (accounts.count > 0){
+        keyChainAccount = [NSDictionary dictionaryWithDictionary:[accounts firstObject]];
+        [textFieldUserName setStringValue: [keyChainAccount valueForKey:kSAMKeychainAccountKey]];
+        [textFieldPassword setPlaceholderString:@"Taken from keychain. Type here to change."];
+    }
 }
 
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
@@ -32,10 +36,21 @@
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
+    [[textFieldPassword window] makeFirstResponder:self.view];
     [UserData setBuildLocation:self.project.buildDirectory];
-    [self.project setItcPasswod:textFieldPassword.stringValue];
+    
+    //set username and password
     [self.project setItcUserName:textFieldUserName.stringValue];
     [self.project setAppStoreUploadTool: comboAppStoreTool.stringValue];
+    if (textFieldPassword.stringValue.length > 0){
+        [self.project setItcPasswod:textFieldPassword.stringValue];
+        //save username and password in keychain
+        [SAMKeychain setPassword:textFieldPassword.stringValue forService:abiTunesConnectService account:textFieldUserName.stringValue];
+    }else{
+        [self.project setItcPasswod:[NSString stringWithFormat:abiTunesConnectService]];
+    }
+    
+    
     [self dismissController:self];
 }
 

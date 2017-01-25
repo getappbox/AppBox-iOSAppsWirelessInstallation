@@ -34,7 +34,7 @@
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: title];
-    [alert setInformativeText:message];
+    [alert setInformativeText:message == nil ? @"" : message];
     [alert setAlertStyle:NSWarningAlertStyle];
     return [alert runModal];
 }
