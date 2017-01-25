@@ -389,8 +389,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 }];
                 if (alOutput.isError){
                     [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                    [self viewStateForProgressFinish:YES];
                 }
+                [self viewStateForProgressFinish:YES];
+                [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
             }
         });
     }];
