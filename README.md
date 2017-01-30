@@ -64,7 +64,10 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 ![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/raw/Screenshot/Screenshot/webpage1.png?raw=true)        ![](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/raw/Screenshot/Screenshot/webpage2.png?raw=true)
 
 # Contributions ❤️
-Any contribution is more than welcome! You can contribute through pull requests and issues on [GitHub](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
+Any contribution is more than welcome! You can contribute through pull requests and [issues](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues) on [GitHub](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
+
+# Bugs 💔 
+Please post any bugs to the [issue tracker](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues) found on the project's GitHub page. Please include a description of what is not working right with your issue.
 
 # License
 [![](https://licensebuttons.net/l/by-nd/3.0/88x31.png)](https://creativecommons.org/licenses/by-nd/4.0/)
@@ -85,3 +88,5 @@ Any contribution is more than welcome! You can contribute through pull requests 
 
 - You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
 - No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+Thank you!
