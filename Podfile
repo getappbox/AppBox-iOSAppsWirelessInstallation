@@ -9,4 +9,5 @@ target :AppBox do
     pod 'Crashlytics'
     pod 'ObjectiveDropboxOfficial'
     pod 'ZXingObjC'
+    pod 'SAMKeychain'
 end

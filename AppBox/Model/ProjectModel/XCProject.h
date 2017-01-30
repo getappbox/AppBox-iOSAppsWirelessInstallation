@@ -44,9 +44,10 @@
 @property(nonatomic, retain) NSArray *targets;
 
 //AppStore Details
+@property(nonatomic, retain) NSString *alPath;
+@property(nonatomic, retain) NSString *xcodePath;
 @property(nonatomic, retain) NSString *itcPasswod;
 @property(nonatomic, retain) NSString *itcUserName;
-@property(nonatomic, retain) NSString *appStoreUploadTool;
 
 //Info.plist, manifest.plist and buildlist information
 @property(nonatomic, retain) NSDictionary *ipaInfoPlist;

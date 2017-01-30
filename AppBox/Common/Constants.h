@@ -21,6 +21,12 @@
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/tryappbox"
 
+//AppBox AppStore service. Note: these constanst also need to change in ALAppStore.sh file
+#define abALUploadApp @"upload-app"
+#define abALValidateApp @"validate-app"
+#define abALValidateUser @"validate-user"
+#define abiTunesConnectService @"AppBox - iTunesConnect"
+
 //Serives Key
 #define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
 
@@ -46,6 +52,8 @@
 
 //default setting
 #define abBuildLocation @"~/Desktop"
+#define abXcodeLocation @"/Applications/Xcode.app"
+#define abApplicationLoaderLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
 
 //others
 #define abEmptyString @""
@@ -67,6 +75,9 @@ typedef enum : NSUInteger {
     ScriptTypeGetScheme,
     ScriptTypeTeamId,
     ScriptTypeBuild,
+    ScriptTypeXcodePath,
+    ScriptTypeAppStoreValidation,
+    ScriptTypeAppStoreUpload,
 } ScriptType;
 
 #endif /* Constants_h */

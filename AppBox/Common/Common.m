@@ -33,16 +33,16 @@
 #pragma mark - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText: title];
-    [alert setInformativeText:message];
+    [alert setMessageText: title == nil ? @"Error" : title];
+    [alert setInformativeText:message == nil ? @"" : message];
     [alert setAlertStyle:NSWarningAlertStyle];
     return [alert runModal];
 }
 
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message{
     NSUserNotification *notification = [[NSUserNotification alloc] init];
-    [notification setTitle:title];
-    [notification setInformativeText:message];
+    [notification setTitle:title == nil ? @"Error" : title];
+    [notification setInformativeText:message == nil ? @"" : message];
     [notification setDeliveryDate:[NSDate dateWithTimeInterval:1 sinceDate:[NSDate date]]];
     [notification setSoundName:NSUserNotificationDefaultSoundName];
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];

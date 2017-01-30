@@ -8,23 +8,29 @@
 
 #import "ProjectAdvancedViewController.h"
 
-@interface ProjectAdvancedViewController ()
-
-@end
-
-@implementation ProjectAdvancedViewController
+@implementation ProjectAdvancedViewController{
+    NSDictionary *keyChainAccount;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Project Advanced Settings"];
     if ([self.project.buildType isEqualToString:BuildTypeAppStore]){
-        [comboAppStoreTool selectItemAtIndex:0];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:abXcodeLocation]){
+            [pathXCode setURL: [NSURL URLWithString:abXcodeLocation]];
+        }
     }else{
-        [comboAppStoreTool setEnabled:NO];
+        [pathXCode setEnabled:NO];
         [textFieldUserName setEnabled:NO];
         [textFieldPassword setEnabled:NO];
     }
     [pathBuild setURL:self.project.buildDirectory];
+    NSArray *accounts = [SAMKeychain accountsForService:abiTunesConnectService];
+    if (accounts.count > 0){
+        keyChainAccount = [NSDictionary dictionaryWithDictionary:[accounts firstObject]];
+        [textFieldUserName setStringValue: [keyChainAccount valueForKey:kSAMKeychainAccountKey]];
+        [textFieldPassword setPlaceholderString:@"Taken from keychain. Type here to change."];
+    }
 }
 
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
@@ -32,10 +38,26 @@
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
+    [[textFieldPassword window] makeFirstResponder:self.view];
     [UserData setBuildLocation:self.project.buildDirectory];
-    [self.project setItcPasswod:textFieldPassword.stringValue];
+    
+    //set username and password
     [self.project setItcUserName:textFieldUserName.stringValue];
-    [self.project setAppStoreUploadTool: comboAppStoreTool.stringValue];
+    if (pathXCode.URL.isFileURL){
+        [self.project setXcodePath:[pathXCode.URL.filePathURL resourceSpecifier]];
+    }else{
+        [self.project setXcodePath: pathXCode.URL.absoluteString];
+    }
+    [self.project setAlPath: [[self.project.xcodePath stringByAppendingPathComponent:abApplicationLoaderLocation] stringByRemovingPercentEncoding]];
+    if (textFieldPassword.stringValue.length > 0){
+        [self.project setItcPasswod:textFieldPassword.stringValue];
+        //save username and password in keychain
+        [SAMKeychain setPassword:textFieldPassword.stringValue forService:abiTunesConnectService account:textFieldUserName.stringValue];
+    }else{
+        [self.project setItcPasswod:[NSString stringWithFormat:abiTunesConnectService]];
+    }
+    
+    
     [self dismissController:self];
 }
 
@@ -45,5 +67,9 @@
     if (![self.project.buildDirectory isEqualTo:sender.URL]){
         [self.project setBuildDirectory: sender.URL];
     }
+}
+
+- (IBAction)xcodePathHandler:(NSPathControl *)sender {
+    
 }
 @end

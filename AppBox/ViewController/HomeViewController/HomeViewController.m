@@ -86,6 +86,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (IBAction)comboBuildTypeValueChanged:(NSComboBox *)sender {
     if (![project.buildType isEqualToString:sender.stringValue]){
         [project setBuildType: sender.stringValue];
+        if ([project.buildType isEqualToString:BuildTypeAppStore]){
+            [self performSegueWithIdentifier:@"ProjectAdvanceSettings" sender:self];
+        }
         [self updateViewState];
     }
 }
@@ -167,6 +170,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (project.ipaFullPath){
             [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
             [self getIPAInfoFromLocalURL:project.ipaFullPath];
+//            [self runALAppStoreScriptForValidation:YES];
         }
         [self viewStateForProgressFinish:NO];
     }else{
@@ -195,14 +199,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [self showStatus:@"Cleaning..." andShowProgressBar:YES withProgress:-1];
     scriptType = ScriptTypeBuild;
     
-    //Build Script Name
-    NSString *buildScriptName = ([project.fullPath.pathExtension  isEqual: @"xcworkspace"]) ? @"WorkspaceBuildScript" : @"ProjectBuildScript";
-    
     //Create Export Option Plist
     [project createExportOptionPlist];
     
     //Build Script
-    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:buildScriptName ofType:@"sh"];
+    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:@"ProjectBuildScript" ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
     
     //${1} Project Location
@@ -229,6 +230,39 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Run Task
     [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
 }
+
+- (void)runXcodePathScript{
+    scriptType = ScriptTypeXcodePath;
+    NSString *xcodePathSriptPath = [[NSBundle mainBundle] pathForResource:@"XCodePath" ofType:@"sh"];
+    [self runTaskWithLaunchPath:xcodePathSriptPath andArgument:nil];
+}
+
+- (void)runALAppStoreScriptForValidation:(BOOL)isValidation{
+    scriptType = isValidation ? ScriptTypeAppStoreValidation : ScriptTypeAppStoreUpload;
+    [self showStatus:isValidation ? @"Validating IPA..." : @"Uploading IPA..." andShowProgressBar:YES withProgress:-1];
+    NSString *alSriptPath = [[NSBundle mainBundle] pathForResource: @"ALAppStore" ofType:@"sh"];
+    NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
+
+    
+    //${1} Purpose
+    NSString *purpose = isValidation ? abALValidateApp : abALUploadApp;
+    [buildArgument addObject:purpose];
+    
+    //${2} AL Path
+    [buildArgument addObject:project.alPath];
+    
+    //${3} Project Location
+    [buildArgument addObject: [project.ipaFullPath resourceSpecifier]];
+    
+    //${4} Project type workspace/scheme
+    [buildArgument addObject:project.itcUserName];
+    
+    //${5} Build Scheme
+    [buildArgument addObject:project.itcPasswod];
+    
+    [self runTaskWithLaunchPath:alSriptPath andArgument:buildArgument];
+}
+
 
 #pragma mark → Run and Capture task data
 
@@ -320,13 +354,49 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                    [Common showAlertWithTitle:@"Export Failed" andMessage:nil];
                     [self viewStateForProgressFinish:YES];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
+                    [Common showAlertWithTitle:@"Archive Failed" andMessage:nil];
                     [self viewStateForProgressFinish:YES];
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
+            }
+            
+            //Handle Xcode Path Response
+            else if (scriptType == ScriptTypeXcodePath){
+                
+            }
+            
+            //Handle AppStore Validation Response
+            else if (scriptType == ScriptTypeAppStoreValidation){
+                ALOutput *alOutput = [ALOutputParser messageFromXMLString:outputString];
+                [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+                }];
+                if (alOutput.isValid){
+                    [self runALAppStoreScriptForValidation:NO];
+                }else{
+                    [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+                    [self viewStateForProgressFinish:YES];
+                }
+            }
+            
+            //Handle AppStore Upload Response
+            else if (scriptType == ScriptTypeAppStoreUpload){
+                ALOutput *alOutput = [ALOutputParser messageFromXMLString:outputString];
+                [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+                }];
+                if (alOutput.isError){
+                    [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+                }else if (alOutput.isValid){
+                    [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+                    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
+                }
+                [self viewStateForProgressFinish:YES];
             }
         });
     }];
@@ -337,7 +407,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)checkIPACreated{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
-            [self getIPAInfoFromLocalURL:project.ipaFullPath];
+            if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
+                //get required info and upload to appstore
+                [self runALAppStoreScriptForValidation:YES];
+            }else{
+                //get ipa details and upload to dropbox
+                [self getIPAInfoFromLocalURL:project.ipaFullPath];
+            }
         }else{
             [self checkIPACreated];
         }
@@ -372,8 +448,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
             if (error) {
                 //show error and return
-                [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                [self viewStateForProgressFinish:YES];
                 return;
             }
             
@@ -383,8 +459,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             
             //show error if info.plist is nil or invalid
             if (![project isValidProjectInfoPlist]) {
-                [self viewStateForProgressFinish:YES];
                 [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
+                [self viewStateForProgressFinish:YES];
                 return;
             }
             
@@ -701,11 +777,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //ipa path
     [pathIPAFile setEnabled:finish];
-    [pathIPAFile setURL: finish ? nil : pathIPAFile.URL];
+    [pathIPAFile setURL: finish ? nil : pathIPAFile.URL.filePathURL];
     
     //project path
     [pathProject setEnabled:finish];
-    [pathProject setURL: finish ? nil : pathProject.URL];
+    [pathProject setURL: finish ? nil : pathProject.URL.filePathURL];
     
     //team id combo
     [comboTeamId setEnabled:finish];
@@ -876,7 +952,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Navigation -
 -(void)showURL{
     //Log IPA Upload Success Rate with Other Options
-    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
+    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
     
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
@@ -892,10 +968,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if ([segue.destinationController isKindOfClass:[ShowLinkViewController class]]) {
         //set project to destination
         [((ShowLinkViewController *)segue.destinationController) setProject:project];
-        
-        //set status
-        NSString *status = [NSString stringWithFormat:@"App URL - %@",project.appShortShareableURL.absoluteString];
-        [self showStatus:status andShowProgressBar:NO withProgress:0];
         [self viewStateForProgressFinish:YES];
     }
     

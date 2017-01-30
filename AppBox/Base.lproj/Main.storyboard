@@ -990,18 +990,6 @@ Gw
                                     <action selector="buildPathHandler:" target="n1u-76-r4M" id="6JN-pJ-cuc"/>
                                 </connections>
                             </pathControl>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zOp-hf-PCA">
-                                <rect key="frame" x="208" y="122" width="406" height="26"/>
-                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Select default tool for AppStore build upload" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="6Nt-C5-vAr">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <objectValues>
-                                        <string>Application Loader</string>
-                                        <string>Xcode</string>
-                                    </objectValues>
-                                </comboBoxCell>
-                            </comboBox>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pae-a2-qHY">
                                 <rect key="frame" x="547" y="13" width="70" height="32"/>
                                 <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U3I-vl-IWy">
@@ -1027,7 +1015,7 @@ Gw
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FCa-LA-otm">
                                 <rect key="frame" x="13" y="127" width="182" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AppStore Upload Tool" id="Wr1-pi-w5B">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Xcode Path" id="Wr1-pi-w5B">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1042,8 +1030,8 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0fz-Iv-tzW">
-                                <rect key="frame" x="13" y="161" width="409" height="21"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AppStore Settings (Not Available - Comming Soon)" placeholderString="" id="IXK-Ft-xCe">
+                                <rect key="frame" x="13" y="161" width="151" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AppStore Settings" placeholderString="" id="IXK-Ft-xCe">
                                     <font key="font" metaFont="systemSemibold" size="17"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1093,6 +1081,22 @@ Gw
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                             </secureTextField>
+                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPL-Fg-1Kt">
+                                <rect key="frame" x="208" y="122" width="406" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="DyH-Sb-wal"/>
+                                </constraints>
+                                <pathCell key="cell" lineBreakMode="truncatingHead" selectable="YES" editable="YES" alignment="left" placeholderString="Select Xcode" pathStyle="popUp" id="NOP-fb-eTS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <allowedTypes>
+                                        <string>app</string>
+                                    </allowedTypes>
+                                </pathCell>
+                                <connections>
+                                    <action selector="xcodePathHandler:" target="n1u-76-r4M" id="w7P-au-lq3"/>
+                                </connections>
+                            </pathControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7bm-kF-uPj" firstAttribute="top" secondItem="haB-7R-3Q7" secondAttribute="bottom" constant="10" id="1mq-0t-KZi"/>
@@ -1107,14 +1111,14 @@ Gw
                             <constraint firstItem="FCa-LA-otm" firstAttribute="trailing" secondItem="GjG-Yi-591" secondAttribute="trailing" id="IZW-FL-tda"/>
                             <constraint firstItem="7bm-kF-uPj" firstAttribute="trailing" secondItem="FCa-LA-otm" secondAttribute="trailing" id="JAu-Bp-9UZ"/>
                             <constraint firstAttribute="trailing" secondItem="eDk-p6-ajY" secondAttribute="trailing" constant="15" id="Kcu-xy-Q0e"/>
-                            <constraint firstAttribute="trailing" secondItem="zOp-hf-PCA" secondAttribute="trailing" constant="15" id="LPF-IG-Kcr"/>
+                            <constraint firstItem="FCa-LA-otm" firstAttribute="centerY" secondItem="fPL-Fg-1Kt" secondAttribute="centerY" id="NRS-sP-hGi"/>
                             <constraint firstAttribute="trailing" secondItem="Mfb-Qe-3nK" secondAttribute="trailing" id="NcM-tG-a5r"/>
                             <constraint firstItem="Mfb-Qe-3nK" firstAttribute="top" secondItem="7bm-kF-uPj" secondAttribute="bottom" constant="15" id="OUQ-7O-nwt"/>
                             <constraint firstItem="FV2-Md-2U9" firstAttribute="leading" secondItem="GjG-Yi-591" secondAttribute="trailing" constant="15" id="PJ4-ED-xmF"/>
+                            <constraint firstAttribute="trailing" secondItem="fPL-Fg-1Kt" secondAttribute="trailing" constant="15" id="Pou-g0-QuV"/>
                             <constraint firstItem="GjG-Yi-591" firstAttribute="trailing" secondItem="ftd-i3-TBC" secondAttribute="trailing" id="Sgj-OY-0cM"/>
                             <constraint firstItem="0fz-Iv-tzW" firstAttribute="top" secondItem="Mfb-Qe-3nK" secondAttribute="bottom" constant="15" id="Vxb-25-g77"/>
                             <constraint firstItem="FCa-LA-otm" firstAttribute="leading" secondItem="GjG-Yi-591" secondAttribute="leading" id="Znz-HB-JLl"/>
-                            <constraint firstItem="FCa-LA-otm" firstAttribute="centerY" secondItem="zOp-hf-PCA" secondAttribute="centerY" id="ZyL-do-biw"/>
                             <constraint firstAttribute="bottom" secondItem="Pae-a2-qHY" secondAttribute="bottom" constant="20" id="acY-Xu-LDg"/>
                             <constraint firstItem="7bm-kF-uPj" firstAttribute="leading" secondItem="FCa-LA-otm" secondAttribute="leading" id="ca8-mq-YV8"/>
                             <constraint firstItem="Pae-a2-qHY" firstAttribute="top" secondItem="0kj-T4-5Dy" secondAttribute="bottom" constant="15" id="el0-iV-pa2"/>
@@ -1124,18 +1128,18 @@ Gw
                             <constraint firstItem="FCa-LA-otm" firstAttribute="top" secondItem="0fz-Iv-tzW" secondAttribute="bottom" constant="15" id="kbR-08-hJw"/>
                             <constraint firstItem="Pae-a2-qHY" firstAttribute="leading" secondItem="JEl-Gx-e8o" secondAttribute="trailing" constant="10" id="nRo-HT-HDO"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="top" secondItem="OXY-Ua-ZSc" secondAttribute="top" constant="10" id="qUN-m0-bsS"/>
-                            <constraint firstItem="zOp-hf-PCA" firstAttribute="leading" secondItem="FCa-LA-otm" secondAttribute="trailing" constant="15" id="sjC-xW-ZJg"/>
                             <constraint firstAttribute="trailing" secondItem="Pae-a2-qHY" secondAttribute="trailing" constant="15" id="uRb-GC-VJJ"/>
                             <constraint firstItem="ftd-i3-TBC" firstAttribute="centerY" secondItem="0kj-T4-5Dy" secondAttribute="centerY" id="vhu-pR-bVw"/>
                             <constraint firstItem="eDk-p6-ajY" firstAttribute="leading" secondItem="7bm-kF-uPj" secondAttribute="trailing" constant="15" id="y5o-9T-EMn"/>
                             <constraint firstItem="7bm-kF-uPj" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" constant="15" id="yLH-S1-3UD"/>
+                            <constraint firstItem="fPL-Fg-1Kt" firstAttribute="leading" secondItem="FCa-LA-otm" secondAttribute="trailing" constant="18" id="ye7-El-yjt"/>
                             <constraint firstItem="7bm-kF-uPj" firstAttribute="centerY" secondItem="eDk-p6-ajY" secondAttribute="centerY" id="ysU-RP-Zow"/>
                             <constraint firstItem="Mfb-Qe-3nK" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" id="zyP-7o-Vyd"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="comboAppStoreTool" destination="zOp-hf-PCA" id="kjd-dx-wUd"/>
                         <outlet property="pathBuild" destination="eDk-p6-ajY" id="tGZ-XV-fD3"/>
+                        <outlet property="pathXCode" destination="fPL-Fg-1Kt" id="0qs-dJ-R94"/>
                         <outlet property="textFieldPassword" destination="0kj-T4-5Dy" id="e0b-AH-Zyi"/>
                         <outlet property="textFieldUserName" destination="FV2-Md-2U9" id="KNe-Vr-bwk"/>
                     </connections>
