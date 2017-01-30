@@ -52,6 +52,8 @@
 
 //default setting
 #define abBuildLocation @"~/Desktop"
+#define abXcodeLocation @"/Applications/Xcode.app"
+#define abApplicationLoaderLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
 
 //others
 #define abEmptyString @""

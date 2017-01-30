@@ -10,7 +10,7 @@
 
 @interface ProjectAdvancedViewController : NSViewController{
     IBOutlet NSPathControl *pathBuild;
-    IBOutlet NSComboBox *comboAppStoreTool;
+    IBOutlet NSPathControl *pathXCode;
     IBOutlet NSTextField *textFieldUserName;
     IBOutlet NSSecureTextField *textFieldPassword;
 }
@@ -20,6 +20,7 @@
 - (IBAction)buttonSaveTapped:(NSButton *)sender;
 - (IBAction)buttonCancelTapped:(NSButton *)sender;
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
+- (IBAction)xcodePathHandler:(NSPathControl *)sender;
 
 
 @end

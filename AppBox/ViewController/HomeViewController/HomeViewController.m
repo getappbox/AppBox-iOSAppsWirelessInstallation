@@ -17,7 +17,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     ScriptType scriptType;
     FileType fileType;
     NSArray *allTeamIds;
-    NSString *alPath;
 }
 
 - (void)viewDidLoad {
@@ -243,14 +242,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [self showStatus:isValidation ? @"Validating IPA..." : @"Uploading IPA..." andShowProgressBar:YES withProgress:-1];
     NSString *alSriptPath = [[NSBundle mainBundle] pathForResource: @"ALAppStore" ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
-    alPath = @"/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool";
+
     
     //${1} Purpose
     NSString *purpose = isValidation ? abALValidateApp : abALUploadApp;
     [buildArgument addObject:purpose];
     
     //${2} AL Path
-    [buildArgument addObject:alPath];
+    [buildArgument addObject:project.alPath];
     
     //${3} Project Location
     [buildArgument addObject: [project.ipaFullPath resourceSpecifier]];
@@ -368,7 +367,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             
             //Handle Xcode Path Response
             else if (scriptType == ScriptTypeXcodePath){
-                alPath = outputString;
                 
             }
             
