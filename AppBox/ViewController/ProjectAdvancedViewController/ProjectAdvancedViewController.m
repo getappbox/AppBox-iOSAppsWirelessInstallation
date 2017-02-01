@@ -16,8 +16,9 @@
     [super viewDidLoad];
     [Common logScreen:@"Project Advanced Settings"];
     if ([self.project.buildType isEqualToString:BuildTypeAppStore]){
-        if ([[NSFileManager defaultManager] fileExistsAtPath:abXcodeLocation]){
-            [pathXCode setURL: [NSURL URLWithString:abXcodeLocation]];
+        NSString *xcodePath = [UserData xCodeLocation];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:xcodePath]){
+            [pathXCode setURL: [NSURL URLWithString:xcodePath]];
         }
     }else{
         [pathXCode setEnabled:NO];
@@ -33,6 +34,7 @@
     }
 }
 
+//MARK: - Action Button Tapped
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
     [self dismissController:self];
 }
@@ -41,14 +43,19 @@
     [[textFieldPassword window] makeFirstResponder:self.view];
     [UserData setBuildLocation:self.project.buildDirectory];
     
-    //set username and password
-    [self.project setItcUserName:textFieldUserName.stringValue];
+    //set xcode and application loader path
     if (pathXCode.URL.isFileURL){
         [self.project setXcodePath:[pathXCode.URL.filePathURL resourceSpecifier]];
     }else{
         [self.project setXcodePath: pathXCode.URL.absoluteString];
     }
     [self.project setAlPath: [[self.project.xcodePath stringByAppendingPathComponent:abApplicationLoaderLocation] stringByRemovingPercentEncoding]];
+    
+    //set xcode location
+    [UserData setXCodeLocation:self.project.xcodePath];
+    
+    //set username and password
+    [self.project setItcUserName:textFieldUserName.stringValue];
     if (textFieldPassword.stringValue.length > 0){
         [self.project setItcPasswod:textFieldPassword.stringValue];
         //save username and password in keychain
@@ -69,7 +76,8 @@
     }
 }
 
+//Xcode Path Handler
 - (IBAction)xcodePathHandler:(NSPathControl *)sender {
-    
+
 }
 @end

@@ -63,6 +63,21 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define XCodeLocation @"XCodeLocation"
+
++(NSString *)xCodeLocation{
+    NSString *xCodeLocation = [[NSUserDefaults standardUserDefaults] stringForKey:XCodeLocation];
+    if (xCodeLocation == nil){
+        xCodeLocation = abXcodeLocation;
+    }
+    return xCodeLocation;
+}
+
++(void)setXCodeLocation:(NSString *)xCodeLocation{
+    [[NSUserDefaults standardUserDefaults] setValue:xCodeLocation forKey:XCodeLocation];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Dropbox
 #define DropboxUsedSpace @"DropboxUsedSpace"
 #define DropboxAvailableSpace @"DropboxAvailableSpace"
