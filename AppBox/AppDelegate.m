@@ -29,14 +29,6 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
     [Fabric with:@[[Crashlytics class], [Answers class]]];
     
-    //Start monitoring internet connection
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        if (status == AFNetworkReachabilityStatusNotReachable){
-            [Common showAlertWithTitle:@"Error" andMessage:AFStringFromNetworkReachabilityStatus(status)];
-        }
-    }];
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
     //Handle URL Scheme
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
