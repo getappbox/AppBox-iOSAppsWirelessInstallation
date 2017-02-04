@@ -50,6 +50,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 //restart last failed operation
                 if (lastfailedOperation){
                     [lastfailedOperation start];
+                    lastfailedOperation = nil;
                 }
             }
         }
@@ -517,6 +518,23 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
+#pragma mark - Dropbox Helper -
+#pragma mark → Dropbox Notification Handler
+- (void)handleLoggedInNotification:(NSNotification *)notification{
+    [self updateMenuButtons];
+    [self viewStateForProgressFinish:YES];
+}
+
+- (void)dropboxLogoutHandler:(id)sender{
+    //handle dropbox logout for authorized users
+    if ([DropboxClientsManager authorizedClient]){
+        [DropboxClientsManager unlinkClients];
+        [self viewStateForProgressFinish:YES];
+        [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
+    }
+}
+
+#pragma mark → Dropbox Upload Files
 -(void)dbUploadFile:(NSURL *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     //uploadUrl:path inputUrl:file
     [[[[DropboxClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
@@ -580,6 +598,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
      }];
 }
 
+
+#pragma mark → Dropbox Create/Get Shared Link
 -(void)dbCreateSharedURLForFile:(NSString *)file{
     [[[DropboxClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
      //Track response with result and error
@@ -594,7 +614,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)dbGetSharedURLForFile:(NSString *)file{
     [[[DropboxClientsManager authorizedClient].sharingRoutes listSharedLinks:file cursor:nil directOnly:nil] response:^(DBSHARINGListSharedLinksResult * _Nullable results, DBSHARINGListSharedLinksError * _Nullable linksError, DBRequestError * _Nullable error) {
-        if (results && results.links.count > 0){
+        if (results && results.links && results.links.count > 0){
             [self handleSharedURLResult:[[results.links firstObject] url]];
         }else{
             [self handleSharedURLError:error forFile:file];
@@ -745,22 +765,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
          }];
     }else{
         [self updateUniquLinkDictinory:[NSMutableDictionary new]];
-    }
-}
-
-
-#pragma mark → Dropbox Helper
-- (void)handleLoggedInNotification:(NSNotification *)notification{
-    [self updateMenuButtons];
-    [self viewStateForProgressFinish:YES];
-}
-
-- (void)dropboxLogoutHandler:(id)sender{
-    //handle dropbox logout for authorized users
-    if ([DropboxClientsManager authorizedClient]){
-        [DropboxClientsManager unlinkClients];
-        [self viewStateForProgressFinish:YES];
-        [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
 }
 
