@@ -22,6 +22,9 @@
 +(NSURL *)buildLocation;
 +(void)setBuildLocation:(NSURL *)buildLocation;
 
++(NSString *)xCodeLocation;
++(void)setXCodeLocation:(NSString *)xCodeLocation;
+
 +(NSNumber *)dropboxUsedSpace;
 +(NSNumber *)dropboxAvailableSpace;
 +(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
