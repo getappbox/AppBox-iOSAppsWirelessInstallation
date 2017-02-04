@@ -915,7 +915,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
     
     //update keepsame link
-    [buttonUniqueLink setEnabled:(project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore])];
+    [buttonUniqueLink setEnabled:(project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
+                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
     
     //update advanced button
     [buttonAdcanced setEnabled:buttonAction.enabled];
