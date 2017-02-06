@@ -44,8 +44,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if ([AppDelegate appDelegate].processing){
             if (status == AFNetworkReachabilityStatusNotReachable){
+                [[AppDelegate appDelegate] setIsInternetConnected:NO];
                 [self showStatus:@"Waiting for the Internet Connection." andShowProgressBar:YES withProgress:-1];
             }else{
+                [[AppDelegate appDelegate] setIsInternetConnected:YES];
                 [self showStatus:@"Connected to the Internet." andShowProgressBar:NO withProgress:-1];
                 //restart last failed operation
                 if (lastfailedOperation){
@@ -376,8 +378,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [self viewStateForProgressFinish:YES];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
-                    [Common showAlertWithTitle:@"Archive Failed" andMessage:nil];
-                    [self viewStateForProgressFinish:YES];
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [Common showAlertWithTitle:@"Archive Failed" andMessage:nil];
+                        [self viewStateForProgressFinish:YES];
+                    }else{
+                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                            [self runBuildScript];
+                        }];
+                    }
                 } else {
                     [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
@@ -397,8 +405,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 if (alOutput.isValid){
                     [self runALAppStoreScriptForValidation:NO];
                 }else{
-                    [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                    [self viewStateForProgressFinish:YES];
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+                        [self viewStateForProgressFinish:YES];
+                    }else{
+                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                            [self runALAppStoreScriptForValidation:YES];
+                        }];
+                    }
                 }
             }
             
@@ -408,13 +422,20 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [self showStatus:obj andShowProgressBar:NO withProgress:-1];
                 }];
-                if (alOutput.isError){
-                    [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                }else if (alOutput.isValid){
+                if (alOutput.isValid){
                     [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
                     [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
+                    [self viewStateForProgressFinish:YES];
+                }else{
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+                        [self viewStateForProgressFinish:YES];
+                    }else{
+                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                            [self runALAppStoreScriptForValidation:NO];
+                        }];
+                    }
                 }
-                [self viewStateForProgressFinish:YES];
             }
         });
     }];
