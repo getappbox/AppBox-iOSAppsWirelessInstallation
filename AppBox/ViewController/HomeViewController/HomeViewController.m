@@ -42,13 +42,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //Start monitoring internet connection
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        [[AppDelegate appDelegate] setIsInternetConnected:!(status == AFNetworkReachabilityStatusNotReachable)];
         if ([AppDelegate appDelegate].processing){
             if (status == AFNetworkReachabilityStatusNotReachable){
-                [[AppDelegate appDelegate] setIsInternetConnected:NO];
-                [self showStatus:@"Waiting for the Internet Connection." andShowProgressBar:YES withProgress:-1];
+                [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             }else{
-                [[AppDelegate appDelegate] setIsInternetConnected:YES];
-                [self showStatus:@"Connected to the Internet." andShowProgressBar:NO withProgress:-1];
+                [self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
                 //restart last failed operation
                 if (lastfailedOperation){
                     [lastfailedOperation start];
@@ -396,49 +395,50 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 
             }
             
-            //Handle AppStore Validation Response
-            else if (scriptType == ScriptTypeAppStoreValidation){
-                ALOutput *alOutput = [ALOutputParser messageFromXMLString:outputString];
-                [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [self showStatus:obj andShowProgressBar:NO withProgress:-1];
-                }];
-                if (alOutput.isValid){
-                    [self runALAppStoreScriptForValidation:NO];
-                }else{
-                    if ([AppDelegate appDelegate].isInternetConnected){
-                        [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                        [self viewStateForProgressFinish:YES];
-                    }else{
-                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                            [self runALAppStoreScriptForValidation:YES];
-                        }];
-                    }
-                }
-            }
-            
-            //Handle AppStore Upload Response
-            else if (scriptType == ScriptTypeAppStoreUpload){
-                ALOutput *alOutput = [ALOutputParser messageFromXMLString:outputString];
-                [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [self showStatus:obj andShowProgressBar:NO withProgress:-1];
-                }];
-                if (alOutput.isValid){
-                    [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
-                    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
-                    [self viewStateForProgressFinish:YES];
-                }else{
-                    if ([AppDelegate appDelegate].isInternetConnected){
-                        [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                        [self viewStateForProgressFinish:YES];
-                    }else{
-                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                            [self runALAppStoreScriptForValidation:NO];
-                        }];
-                    }
-                }
+            //Handle AppStore Validation and Upload Response
+            else if (scriptType == ScriptTypeAppStoreValidation || scriptType == ScriptTypeAppStoreUpload){
+                [self appStoreScriptOutputHandlerWithOutput:outputString];
             }
         });
     }];
+}
+
+-(void)appStoreScriptOutputHandlerWithOutput:(NSString *)output{
+    //parse application loader response
+    ALOutput *alOutput = [ALOutputParser messageFromXMLString:output];
+    [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+    }];
+    
+    //check if response is valid or error
+    if (alOutput.isValid){
+        if (scriptType == ScriptTypeAppStoreValidation){
+            //run appstore upload script
+            [self runALAppStoreScriptForValidation:NO];
+        }else if (scriptType == ScriptTypeAppStoreUpload){
+            //show upload succeess message
+            [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+            [self viewStateForProgressFinish:YES];
+            [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
+        }
+    }else{
+        //if internet is connected, show direct error
+        if ([AppDelegate appDelegate].isInternetConnected){
+            [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+            [self viewStateForProgressFinish:YES];
+        }else{
+            
+            //if internet connection is lost, show watting message and start process again when connected
+            [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+            lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                if (scriptType == ScriptTypeAppStoreValidation){
+                    [self runALAppStoreScriptForValidation:YES];
+                }else if (scriptType == ScriptTypeAppStoreUpload){
+                    [self runALAppStoreScriptForValidation:NO];
+                }
+            }];
+        }
+    }
 }
 
 #pragma mark - Get IPA Info and Upload -
