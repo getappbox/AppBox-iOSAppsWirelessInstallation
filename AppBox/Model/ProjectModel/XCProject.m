@@ -37,7 +37,7 @@
     [metadataDict setValue:@"software" forKey:@"kind"];
     [metadataDict setValue:self.name forKey:@"title"];
     [metadataDict setValue:self.identifer forKey:@"bundle-identifier"];
-    [metadataDict setValue:self.version forKey:@"bundle-version"];
+    [metadataDict setValue:[self.version stringByAppendingFormat:@" (%@)", self.build] forKey:@"bundle-version"];
     
     NSMutableDictionary *mainItemDict = [[NSMutableDictionary alloc] init];
     [mainItemDict setValue:[NSArray arrayWithObjects:assetsDict, nil] forKey:@"assets"];
