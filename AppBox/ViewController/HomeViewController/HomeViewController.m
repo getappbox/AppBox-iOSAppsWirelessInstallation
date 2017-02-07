@@ -176,17 +176,17 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
 }
 
-#pragma mark → Final Action Button (Build/IPA)
+#pragma mark → Final Action Button (Build/IPA/CI)
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (buttonSendMail.state == NSOffState || (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue])){
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
-        if (project.fullPath){
+        if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
             [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}]];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
-        }else if (project.ipaFullPath){
+        }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
             [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
             [self getIPAInfoFromLocalURL:project.ipaFullPath];
 //            [self runALAppStoreScriptForValidation:YES];
@@ -195,6 +195,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }else{
         [MailHandler showInvalidEmailAddressAlert];
     }
+}
+
+//Config CI
+- (IBAction)buttonConfigCITapped:(NSButton *)sender {
+    
 }
 
 #pragma mark - NSTask (Scheme, TeamId and Archive) -
@@ -934,6 +939,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                    (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
     [buttonAction setEnabled:(enable && (pathProject.enabled || pathIPAFile.enabled))];
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
+    [buttonConfigCI setEnabled:buttonAction.enabled];
     
     //update keepsame link
     [buttonUniqueLink setEnabled:(project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||

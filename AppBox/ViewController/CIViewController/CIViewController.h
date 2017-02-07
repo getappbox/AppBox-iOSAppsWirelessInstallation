@@ -8,6 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CIViewController : NSViewController
+@interface CIViewController : NSViewController{
+    IBOutlet NSButton *buttonCancel;
+    IBOutlet NSButton *buttonEnableCI;
+    IBOutlet NSComboBox *comboBranch;
+}
 
+@property (nonatomic, strong) XCProject *project;
+
+- (IBAction)buttonCancelTapped:(NSButton *)sender;
+- (IBAction)buttonEnableCITapped:(NSButton *)sender;
 @end

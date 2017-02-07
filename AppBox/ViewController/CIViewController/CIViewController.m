@@ -16,7 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    
 }
 
+- (IBAction)buttonEnableCITapped:(NSButton *)sender {
+    
+}
+
+- (IBAction)buttonCancelTapped:(NSButton *)sender {
+    [self dismissController:self];
+}
 @end

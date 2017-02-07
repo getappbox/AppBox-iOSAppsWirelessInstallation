@@ -24,6 +24,7 @@
     IBOutlet NSComboBox *comboBuildType;
     IBOutlet NSButton *buttonAction;
     IBOutlet NSButton *buttonAdcanced;
+    IBOutlet NSButton *buttonConfigCI;
     
     //Upload IPA
     IBOutlet NSPathControl *pathIPAFile;
@@ -46,6 +47,7 @@
 - (IBAction)projectPathHandler:(NSPathControl *)sender;
 - (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender;
+- (IBAction)buttonConfigCITapped:(NSButton *)sender;
 
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender;
 - (IBAction)comboTeamIdValueChanged:(NSComboBox *)sender;
