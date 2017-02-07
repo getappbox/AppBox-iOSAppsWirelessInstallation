@@ -10,4 +10,6 @@
 
 @interface GitHandler : NSObject
 
++(NSArray *)getGitBranchesForProjectPath:(NSString *)projectPath;
+
 @end
