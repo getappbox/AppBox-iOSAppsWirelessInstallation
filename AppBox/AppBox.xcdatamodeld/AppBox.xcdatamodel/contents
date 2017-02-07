@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
-    <entity name="App" syncable="YES">
-        <attribute name="build" optional="YES" attributeType="String" syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="CISetting" representedClassName="CISetting" syncable="YES">
+        <attribute name="branchName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buildScheme" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buildType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="keepSameLink" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="personalMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shutdownMac" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="teamId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="bundleIdentifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dropboxDirectory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectPath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="ciSettings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CISetting" syncable="YES"/>
+        <relationship name="uploadRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="UploadRecord" syncable="YES"/>
+    </entity>
+    <entity name="UploadRecord" representedClassName="UploadRecord" syncable="YES">
+        <attribute name="build" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buildScheme" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="buildType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbAppInfoFullPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbDirectroy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbFolderName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbIPAFullPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbManifestFullPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbSharedAppInfoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbSharedIPAURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbSharedManifestURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="keepSameLink" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="localBuildPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="App" positionX="-63" positionY="-27" width="128" height="118"/>
+        <element name="Project" positionX="-11927" positionY="-2592" width="128" height="118"/>
+        <element name="CISetting" positionX="-11729" positionY="-2647" width="128" height="163"/>
+        <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="298"/>
     </elements>
 </model>

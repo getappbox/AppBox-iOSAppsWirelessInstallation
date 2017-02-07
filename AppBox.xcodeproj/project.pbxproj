@@ -14,6 +14,12 @@
 		E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */ = {isa = PBXBuildFile; fileRef = E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */; };
 		E119EF641E3763A000A7798E /* ALOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E119EF631E3763A000A7798E /* ALOutputParser.m */; };
 		E119EF671E3764C600A7798E /* ALOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = E119EF661E3764C600A7798E /* ALOutput.m */; };
+		E12A9AC91E49F4EF002DDA3C /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A9ABE1E49F4EF002DDA3C /* UploadRecord+CoreDataClass.m */; };
+		E12A9ACA1E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A9AC01E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.m */; };
+		E12A9ACB1E49F4EF002DDA3C /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A9AC21E49F4EF002DDA3C /* Project+CoreDataClass.m */; };
+		E12A9ACC1E49F4EF002DDA3C /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A9AC41E49F4EF002DDA3C /* Project+CoreDataProperties.m */; };
+		E12A9ACD1E49F4EF002DDA3C /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A9AC61E49F4EF002DDA3C /* CISetting+CoreDataClass.m */; };
+		E12A9ACE1E49F4EF002DDA3C /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E12A9AC81E49F4EF002DDA3C /* CISetting+CoreDataProperties.m */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
 		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
@@ -73,6 +79,18 @@
 		E119EF631E3763A000A7798E /* ALOutputParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALOutputParser.m; sourceTree = "<group>"; };
 		E119EF651E3764C600A7798E /* ALOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALOutput.h; sourceTree = "<group>"; };
 		E119EF661E3764C600A7798E /* ALOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALOutput.m; sourceTree = "<group>"; };
+		E12A9ABD1E49F4EF002DDA3C /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
+		E12A9ABE1E49F4EF002DDA3C /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
+		E12A9ABF1E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E12A9AC01E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E12A9AC11E49F4EF002DDA3C /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
+		E12A9AC21E49F4EF002DDA3C /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
+		E12A9AC31E49F4EF002DDA3C /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E12A9AC41E49F4EF002DDA3C /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E12A9AC51E49F4EF002DDA3C /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
+		E12A9AC61E49F4EF002DDA3C /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
+		E12A9AC71E49F4EF002DDA3C /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E12A9AC81E49F4EF002DDA3C /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
@@ -175,6 +193,25 @@
 				E119EF631E3763A000A7798E /* ALOutputParser.m */,
 			);
 			path = ALOutputParser;
+			sourceTree = "<group>";
+		};
+		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				E12A9ABD1E49F4EF002DDA3C /* UploadRecord+CoreDataClass.h */,
+				E12A9ABE1E49F4EF002DDA3C /* UploadRecord+CoreDataClass.m */,
+				E12A9ABF1E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.h */,
+				E12A9AC01E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.m */,
+				E12A9AC11E49F4EF002DDA3C /* Project+CoreDataClass.h */,
+				E12A9AC21E49F4EF002DDA3C /* Project+CoreDataClass.m */,
+				E12A9AC31E49F4EF002DDA3C /* Project+CoreDataProperties.h */,
+				E12A9AC41E49F4EF002DDA3C /* Project+CoreDataProperties.m */,
+				E12A9AC51E49F4EF002DDA3C /* CISetting+CoreDataClass.h */,
+				E12A9AC61E49F4EF002DDA3C /* CISetting+CoreDataClass.m */,
+				E12A9AC71E49F4EF002DDA3C /* CISetting+CoreDataProperties.h */,
+				E12A9AC81E49F4EF002DDA3C /* CISetting+CoreDataProperties.m */,
+			);
+			path = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		E12E6D061D8FC6E20054814D /* DashboardViewController */ = {
@@ -297,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
+				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
 			);
 			path = Model;
@@ -652,25 +690,31 @@
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				E119EF671E3764C600A7798E /* ALOutput.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
+				E12A9ACC1E49F4EF002DDA3C /* Project+CoreDataProperties.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
+				E12A9ACD1E49F4EF002DDA3C /* CISetting+CoreDataClass.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
+				E12A9AC91E49F4EF002DDA3C /* UploadRecord+CoreDataClass.m in Sources */,
+				E12A9ACA1E49F4EF002DDA3C /* UploadRecord+CoreDataProperties.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
+				E12A9ACE1E49F4EF002DDA3C /* CISetting+CoreDataProperties.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
+				E12A9ACB1E49F4EF002DDA3C /* Project+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
