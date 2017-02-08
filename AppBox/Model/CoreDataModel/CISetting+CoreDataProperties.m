@@ -2,7 +2,7 @@
 //  CISetting+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 07/02/17.
+//  Created by Vineet Choudhary on 08/02/17.
 //
 //
 
@@ -15,12 +15,12 @@
 }
 
 @dynamic branchName;
+@dynamic buildScheme;
 @dynamic buildType;
-@dynamic keepSameLink;
 @dynamic emailAddress;
+@dynamic keepSameLink;
 @dynamic personalMessage;
 @dynamic shutdownMac;
-@dynamic buildScheme;
 @dynamic teamId;
 
 @end

@@ -2,7 +2,7 @@
 //  UploadRecord+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 07/02/17.
+//  Created by Vineet Choudhary on 08/02/17.
 //
 //
 
@@ -14,22 +14,23 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"UploadRecord"];
 }
 
-@dynamic version;
 @dynamic build;
-@dynamic shortURL;
-@dynamic dbSharedIPAURL;
-@dynamic dbSharedManifestURL;
-@dynamic dbSharedAppInfoURL;
-@dynamic buildType;
 @dynamic buildScheme;
-@dynamic teamId;
-@dynamic keepSameLink;
+@dynamic buildType;
+@dynamic dbAppInfoFullPath;
 @dynamic dbDirectroy;
+@dynamic dbFolderName;
 @dynamic dbIPAFullPath;
 @dynamic dbManifestFullPath;
-@dynamic dbAppInfoFullPath;
-@dynamic dbFolderName;
-@dynamic mailURL;
+@dynamic dbSharedAppInfoURL;
+@dynamic dbSharedIPAURL;
+@dynamic dbSharedManifestURL;
+@dynamic keepSameLink;
 @dynamic localBuildPath;
+@dynamic mailURL;
+@dynamic shortURL;
+@dynamic teamId;
+@dynamic version;
+@dynamic datetime;
 
 @end
