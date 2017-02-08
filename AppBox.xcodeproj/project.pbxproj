@@ -53,6 +53,7 @@
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F471E2F94F700BA81A1 /* WindowController.m */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
+		E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -156,6 +157,8 @@
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitRepoDetails.h; sourceTree = "<group>"; };
+		E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitRepoDetails.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -445,6 +448,8 @@
 			children = (
 				E1902B551E16619800C3E0F6 /* GitHandler.h */,
 				E1902B561E16619800C3E0F6 /* GitHandler.m */,
+				E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */,
+				E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */,
 			);
 			path = GitHandler;
 			sourceTree = "<group>";
@@ -692,6 +697,7 @@
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E12A9ACC1E49F4EF002DDA3C /* Project+CoreDataProperties.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
+				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,

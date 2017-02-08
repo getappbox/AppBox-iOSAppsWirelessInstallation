@@ -1065,6 +1065,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
         [projectAdvancedViewController setProject:project];
     }
+    
+    //prepare to show CI controller
+    else if([segue.destinationController isKindOfClass:[CIViewController class]]){
+        CIViewController *ciViewController = ((CIViewController *)segue.destinationController);
+        [ciViewController setProject:project];
+    }
 }
 
 @end

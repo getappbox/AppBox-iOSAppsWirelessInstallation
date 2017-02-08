@@ -625,7 +625,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="buttonConfigCITapped:" target="lct-wo-jYo" id="DID-fA-URl"/>
-                                            <segue destination="upV-9k-J48" kind="sheet" id="Cbg-9z-aXt"/>
+                                            <segue destination="upV-9k-J48" kind="sheet" identifier="showCIController" id="Cbg-9z-aXt"/>
                                         </connections>
                                     </button>
                                 </subviews>

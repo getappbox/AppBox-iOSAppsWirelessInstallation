@@ -8,15 +8,22 @@
 
 #import "CIViewController.h"
 
-@interface CIViewController ()
-
-@end
-
 @implementation CIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+}
+
+-(void)viewWillAppear{
+    [super viewWillAppear];
+    GitRepoDetails *repoDetails = [GitHandler getGitBranchesForProjectURL:[self.project.fullPath filePathURL]];
+    if (repoDetails == nil){
+        [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find vaild git repository."];
+    }else if (repoDetails.branchs.count > 0){
+        [comboBranch addItemsWithObjectValues:repoDetails.branchs];
+    }else if (repoDetails.branchs.count == 0){
+        [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find any branch in this git repository."];
+    }
 }
 
 - (IBAction)buttonEnableCITapped:(NSButton *)sender {

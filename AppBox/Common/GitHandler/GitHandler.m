@@ -10,22 +10,28 @@
 
 @implementation GitHandler
 
-+(NSArray *)getGitBranchesForProjectPath:(NSString *)projectPath{
-    NSString *configPath = [[projectPath stringByAppendingPathComponent:@".git"] stringByAppendingPathComponent:@"config"];
-    NSURL *gitConfigURL = [NSURL URLWithString:configPath];
++(GitRepoDetails *)getGitBranchesForProjectURL:(NSURL *)projectURL{
+    projectURL = [projectURL URLByDeletingLastPathComponent];
+    if (projectURL.pathComponents.count == 1){
+        return nil;
+    }
+    NSURL *gitConfigURL = [[projectURL URLByAppendingPathComponent:@".git"] URLByAppendingPathComponent:@"config"];
     NSString *contentofConfig = [NSString stringWithContentsOfURL:gitConfigURL encoding:NSASCIIStringEncoding error:nil];
     if (contentofConfig.length > 0){
-        __block NSMutableArray *branchesList = [[NSMutableArray alloc] init];
-        __block NSString *gitURL;
+        GitRepoDetails *gitRepoDetails = [[GitRepoDetails alloc] init];
+        [gitRepoDetails setPath:[projectURL resourceSpecifier]];
         [contentofConfig enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
             NSLog(@"%@",line);
             if ([line containsString:@"[branch \""]) {
                 NSString *branch = [[line componentsSeparatedByString:@"\""] objectAtIndex:1];
-                [branchesList addObject:branch];
+                [gitRepoDetails.branchs addObject:branch];
             }else if ([line containsString:@"url = "]){
-                gitURL = [[line componentsSeparatedByString:@"url = "] lastObject];
+                [gitRepoDetails setOrigin: [[line componentsSeparatedByString:@"url = "] lastObject]];
             }
         }];
+        return gitRepoDetails;
+    }else{
+        return [GitHandler getGitBranchesForProjectURL:projectURL];
     }
     return nil;
 }

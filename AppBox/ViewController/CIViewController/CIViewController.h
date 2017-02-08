@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GitHandler.h"
 
 @interface CIViewController : NSViewController{
     IBOutlet NSButton *buttonCancel;

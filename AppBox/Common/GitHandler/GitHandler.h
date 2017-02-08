@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GitRepoDetails.h"
 
 @interface GitHandler : NSObject
 
-+(NSArray *)getGitBranchesForProjectPath:(NSString *)projectPath;
++(GitRepoDetails *)getGitBranchesForProjectURL:(NSURL *)projectURL;
 
 @end
