@@ -24,10 +24,17 @@
     }else if (repoDetails.branchs.count == 0){
         [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find any branch in this git repository."];
     }
+    
+    [labelRepoPath setStringValue:repoDetails.path];
 }
 
 - (IBAction)buttonEnableCITapped:(NSButton *)sender {
     
+}
+
+- (IBAction)comboBranchValueChanged:(NSComboBox *)sender {
+    [labelBranch setStringValue:sender.stringValue];
+    [buttonEnableCI setEnabled:(sender.stringValue > 0)];
 }
 
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
