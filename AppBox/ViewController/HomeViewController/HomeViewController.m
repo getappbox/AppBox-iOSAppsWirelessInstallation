@@ -352,6 +352,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                                 [comboTeamId addItemWithObjectValue:project.teamId];
                                 [comboTeamId selectItemWithObjectValue:project.teamId];
                             }
+                            [self updateViewState];
                             [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }
