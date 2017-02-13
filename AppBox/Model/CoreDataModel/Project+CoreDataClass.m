@@ -11,4 +11,8 @@
 #import "UploadRecord+CoreDataClass.h"
 @implementation Project
 
+//- (Project *)addProjectWithXCProject:(XCProject *)xcProject{
+////    Project *project = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([Project class]) inManagedObjectContext:[AppDelegate appDelegate]];
+//}
+
 @end
