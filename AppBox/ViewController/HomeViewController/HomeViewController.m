@@ -86,6 +86,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Scheme Value Changed
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender {
     [self updateViewState];
+    [project setSelectedSchemes:sender.stringValue];
 }
 
 //Team Value Changed
@@ -324,7 +325,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     if (comboBuildScheme.numberOfItems > 0){
-                        [comboBuildScheme selectItemAtIndex:0];                        
+                        [comboBuildScheme selectItemAtIndex:0];
+                        [self comboBuildSchemeValueChanged:comboBuildScheme];
                     }
                     
                     //Run Team Id Script
@@ -372,8 +374,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     if (project.isBuildOnly){
                         [self showStatus:[NSString stringWithFormat:@"Export Succeeded - %@",project.buildUUIDDirectory] andShowProgressBar:NO withProgress:-1];
                     }else{
-                        [self checkIPACreated];
                         [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
+                        [self checkIPACreated];
                     }
                     
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
@@ -449,29 +451,30 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Get IPA Info and Upload -
 
 -(void)checkIPACreated{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
-            if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
-                //get required info and upload to appstore
-                [self runALAppStoreScriptForValidation:YES];
-            }else{
-                //get ipa details and upload to dropbox
-                [self getIPAInfoFromLocalURL:project.ipaFullPath];
-            }
+    NSString *ipaPath = [project.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]){
+        if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
+            //get required info and upload to appstore
+            [self runALAppStoreScriptForValidation:YES];
         }else{
-            [self checkIPACreated];
+            //get ipa details and upload to dropbox
+            [self getIPAInfoFromLocalURL:project.ipaFullPath];
         }
-    });
+    }else{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self checkIPACreated];
+        });
+    }
 }
 
 - (void)getIPAInfoFromLocalURL:(NSURL *)ipaFileURL{
-    NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:fromPath]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath]];
+    NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",ipaPath]];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
-        [SSZipArchive unzipFileAtPath:fromPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
             
             //Get payload entry
             if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
@@ -515,14 +518,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             }else{
                 [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
             }
-            [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
+            if ([AppDelegate appDelegate].isInternetConnected){
+                [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
+            }else{
+                [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+            }
             
             //prepare for upload
-            NSURL *ipaFile = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:project.ipaFullPath.absoluteString];
-            [self uploadIPAFileWithLocalURL: ipaFile];
+            NSURL *ipaFileURL = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
+            [self uploadIPAFileWithLocalURL: ipaFileURL];
         }];
     }else{
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
         [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
         [self viewStateForProgressFinish:YES];
     }
@@ -945,8 +952,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buttonConfigCI setEnabled:(buttonAction.enabled && !buttonConfigCI.hidden)];
     
     //update keepsame link
-    [buttonUniqueLink setEnabled:(project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
-                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
+    [buttonUniqueLink setEnabled:((project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
+                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab) && ![[AppDelegate appDelegate] processing])];
     
     //update advanced button
     [buttonAdcanced setEnabled:buttonAction.enabled];
