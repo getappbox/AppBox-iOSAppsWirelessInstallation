@@ -306,11 +306,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (void)captureStandardOutputWithTask:(NSTask *)task{
-    NSPipe *pipe = [[NSPipe alloc] init];
-    [task setStandardOutput:pipe];
-    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSData *outputData =  pipe.fileHandleForReading.availableData;
+    NSPipe *outputPipe = [[NSPipe alloc] init];
+    [task setStandardOutput:outputPipe];
+    [task setStandardError:outputPipe];
+    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:outputPipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSData *outputData =  outputPipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Task Output - %@\n",outputString]];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -357,7 +358,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
                     [self showStatus:@"Can't able to find Team ID! Please select/enter manually!" andShowProgressBar:NO withProgress:-1];
                 } else {
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
             }
             
@@ -365,10 +366,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             else if (scriptType == ScriptTypeBuild){
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
                     [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
                     [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
                     //Check and Upload IPA File
                     if (project.isBuildOnly){
@@ -393,7 +394,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         }];
                     }
                 } else {
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
             }
             
