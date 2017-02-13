@@ -42,6 +42,7 @@
 //Project Schemes and Targets
 @property(nonatomic, retain) NSArray *schemes;
 @property(nonatomic, retain) NSArray *targets;
+@property(nonatomic, retain) NSString *selectedSchemes;
 
 //AppStore Details
 @property(nonatomic, retain) NSString *alPath;

@@ -47,6 +47,13 @@
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F471E2F94F700BA81A1 /* WindowController.m */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
+		E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */; };
+		E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */; };
+		E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */; };
+		E1D479D31E4B04A500BBC838 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CA1E4B04A500BBC838 /* UploadRecord+CoreDataClass.m */; };
+		E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */; };
+		E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */; };
+		E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -138,6 +145,20 @@
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitRepoDetails.h; sourceTree = "<group>"; };
+		E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitRepoDetails.m; sourceTree = "<group>"; };
+		E1D479C51E4B04A500BBC838 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
+		E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
+		E1D479C71E4B04A500BBC838 /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1D479C91E4B04A500BBC838 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
+		E1D479CA1E4B04A500BBC838 /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
+		E1D479CB1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1D479CD1E4B04A500BBC838 /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
+		E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
+		E1D479CF1E4B04A500BBC838 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +196,25 @@
 				E119EF631E3763A000A7798E /* ALOutputParser.m */,
 			);
 			path = ALOutputParser;
+			sourceTree = "<group>";
+		};
+		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				E1D479C51E4B04A500BBC838 /* Project+CoreDataClass.h */,
+				E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */,
+				E1D479C71E4B04A500BBC838 /* Project+CoreDataProperties.h */,
+				E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */,
+				E1D479C91E4B04A500BBC838 /* UploadRecord+CoreDataClass.h */,
+				E1D479CA1E4B04A500BBC838 /* UploadRecord+CoreDataClass.m */,
+				E1D479CB1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.h */,
+				E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */,
+				E1D479CD1E4B04A500BBC838 /* CISetting+CoreDataClass.h */,
+				E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */,
+				E1D479CF1E4B04A500BBC838 /* CISetting+CoreDataProperties.h */,
+				E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */,
+			);
+			path = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		E12E6D061D8FC6E20054814D /* DashboardViewController */ = {
@@ -297,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
+				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
 			);
 			path = Model;
@@ -407,6 +448,8 @@
 			children = (
 				E1902B551E16619800C3E0F6 /* GitHandler.h */,
 				E1902B561E16619800C3E0F6 /* GitHandler.m */,
+				E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */,
+				E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */,
 			);
 			path = GitHandler;
 			sourceTree = "<group>";
@@ -653,24 +696,31 @@
 				E119EF671E3764C600A7798E /* ALOutput.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
+				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
+				E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */,
 				E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
+				E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
+				E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
+				E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */,
+				E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
+				E1D479D31E4B04A500BBC838 /* UploadRecord+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

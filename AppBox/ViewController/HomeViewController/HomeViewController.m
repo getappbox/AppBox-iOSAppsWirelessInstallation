@@ -42,11 +42,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //Start monitoring internet connection
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        [[AppDelegate appDelegate] setIsInternetConnected:!(status == AFNetworkReachabilityStatusNotReachable)];
         if ([AppDelegate appDelegate].processing){
             if (status == AFNetworkReachabilityStatusNotReachable){
-                [self showStatus:@"Waiting for the Internet Connection." andShowProgressBar:YES withProgress:-1];
+                [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             }else{
-                [self showStatus:@"Connected to the Internet." andShowProgressBar:NO withProgress:-1];
+                [self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
                 //restart last failed operation
                 if (lastfailedOperation){
                     [lastfailedOperation start];
@@ -85,6 +86,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Scheme Value Changed
 - (IBAction)comboBuildSchemeValueChanged:(NSComboBox *)sender {
     [self updateViewState];
+    [project setSelectedSchemes:sender.stringValue];
 }
 
 //Team Value Changed
@@ -175,17 +177,17 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
 }
 
-#pragma mark → Final Action Button (Build/IPA)
+#pragma mark → Final Action Button (Build/IPA/CI)
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (buttonSendMail.state == NSOffState || (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue])){
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
-        if (project.fullPath){
+        if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
             [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}]];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
-        }else if (project.ipaFullPath){
+        }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
             [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
             [self getIPAInfoFromLocalURL:project.ipaFullPath];
 //            [self runALAppStoreScriptForValidation:YES];
@@ -194,6 +196,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }else{
         [MailHandler showInvalidEmailAddressAlert];
     }
+}
+
+//Config CI
+- (IBAction)buttonConfigCITapped:(NSButton *)sender {
+    
 }
 
 #pragma mark - NSTask (Scheme, TeamId and Archive) -
@@ -299,11 +306,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (void)captureStandardOutputWithTask:(NSTask *)task{
-    NSPipe *pipe = [[NSPipe alloc] init];
-    [task setStandardOutput:pipe];
-    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:pipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSData *outputData =  pipe.fileHandleForReading.availableData;
+    NSPipe *outputPipe = [[NSPipe alloc] init];
+    [task setStandardOutput:outputPipe];
+    [task setStandardError:outputPipe];
+    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:outputPipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSData *outputData =  outputPipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Task Output - %@\n",outputString]];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -318,7 +326,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     if (comboBuildScheme.numberOfItems > 0){
-                        [comboBuildScheme selectItemAtIndex:0];                        
+                        [comboBuildScheme selectItemAtIndex:0];
+                        [self comboBuildSchemeValueChanged:comboBuildScheme];
                     }
                     
                     //Run Team Id Script
@@ -343,13 +352,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                                 [comboTeamId addItemWithObjectValue:project.teamId];
                                 [comboTeamId selectItemWithObjectValue:project.teamId];
                             }
+                            [self updateViewState];
                             [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
                     [self showStatus:@"Can't able to find Team ID! Please select/enter manually!" andShowProgressBar:NO withProgress:-1];
                 } else {
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
             }
             
@@ -357,29 +367,35 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             else if (scriptType == ScriptTypeBuild){
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
                     [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
                     [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
                     //Check and Upload IPA File
                     if (project.isBuildOnly){
                         [self showStatus:[NSString stringWithFormat:@"Export Succeeded - %@",project.buildUUIDDirectory] andShowProgressBar:NO withProgress:-1];
                     }else{
-                        [self checkIPACreated];
                         [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
+                        [self checkIPACreated];
                     }
                     
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
-                    [Common showAlertWithTitle:@"Export Failed" andMessage:nil];
+                    [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
                     [self viewStateForProgressFinish:YES];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
-                    [Common showAlertWithTitle:@"Archive Failed" andMessage:nil];
-                    [self viewStateForProgressFinish:YES];
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
+                        [self viewStateForProgressFinish:YES];
+                    }else{
+                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                            [self runBuildScript];
+                        }];
+                    }
                 } else {
-                    [pipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
             }
             
@@ -388,64 +404,79 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 
             }
             
-            //Handle AppStore Validation Response
-            else if (scriptType == ScriptTypeAppStoreValidation){
-                ALOutput *alOutput = [ALOutputParser messageFromXMLString:outputString];
-                [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [self showStatus:obj andShowProgressBar:NO withProgress:-1];
-                }];
-                if (alOutput.isValid){
-                    [self runALAppStoreScriptForValidation:NO];
-                }else{
-                    [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                    [self viewStateForProgressFinish:YES];
-                }
-            }
-            
-            //Handle AppStore Upload Response
-            else if (scriptType == ScriptTypeAppStoreUpload){
-                ALOutput *alOutput = [ALOutputParser messageFromXMLString:outputString];
-                [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [self showStatus:obj andShowProgressBar:NO withProgress:-1];
-                }];
-                if (alOutput.isError){
-                    [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
-                }else if (alOutput.isValid){
-                    [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
-                    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
-                }
-                [self viewStateForProgressFinish:YES];
+            //Handle AppStore Validation and Upload Response
+            else if (scriptType == ScriptTypeAppStoreValidation || scriptType == ScriptTypeAppStoreUpload){
+                [self appStoreScriptOutputHandlerWithOutput:outputString];
             }
         });
     }];
 }
 
+-(void)appStoreScriptOutputHandlerWithOutput:(NSString *)output{
+    //parse application loader response
+    ALOutput *alOutput = [ALOutputParser messageFromXMLString:output];
+    [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+    }];
+    
+    //check if response is valid or error
+    if (alOutput.isValid){
+        if (scriptType == ScriptTypeAppStoreValidation){
+            //run appstore upload script
+            [self runALAppStoreScriptForValidation:NO];
+        }else if (scriptType == ScriptTypeAppStoreUpload){
+            //show upload succeess message
+            [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+            [self viewStateForProgressFinish:YES];
+            [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
+        }
+    }else{
+        //if internet is connected, show direct error
+        if ([AppDelegate appDelegate].isInternetConnected){
+            [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
+            [self viewStateForProgressFinish:YES];
+        }else{
+            
+            //if internet connection is lost, show watting message and start process again when connected
+            [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+            lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                if (scriptType == ScriptTypeAppStoreValidation){
+                    [self runALAppStoreScriptForValidation:YES];
+                }else if (scriptType == ScriptTypeAppStoreUpload){
+                    [self runALAppStoreScriptForValidation:NO];
+                }
+            }];
+        }
+    }
+}
+
 #pragma mark - Get IPA Info and Upload -
 
 -(void)checkIPACreated{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if ([[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier]){
-            if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
-                //get required info and upload to appstore
-                [self runALAppStoreScriptForValidation:YES];
-            }else{
-                //get ipa details and upload to dropbox
-                [self getIPAInfoFromLocalURL:project.ipaFullPath];
-            }
+    NSString *ipaPath = [project.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]){
+        if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
+            //get required info and upload to appstore
+            [self runALAppStoreScriptForValidation:YES];
         }else{
-            [self checkIPACreated];
+            //get ipa details and upload to dropbox
+            [self getIPAInfoFromLocalURL:project.ipaFullPath];
         }
-    });
+    }else{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self checkIPACreated];
+        });
+    }
 }
 
 - (void)getIPAInfoFromLocalURL:(NSURL *)ipaFileURL{
-    NSString *fromPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:fromPath]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",fromPath]];
+    NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",ipaPath]];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
-        [SSZipArchive unzipFileAtPath:fromPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
             
             //Get payload entry
             if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
@@ -489,14 +520,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             }else{
                 [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
             }
-            [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
+            if ([AppDelegate appDelegate].isInternetConnected){
+                [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
+            }else{
+                [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+            }
             
             //prepare for upload
-            NSURL *ipaFile = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:project.ipaFullPath.absoluteString];
-            [self uploadIPAFileWithLocalURL: ipaFile];
+            NSURL *ipaFileURL = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
+            [self uploadIPAFileWithLocalURL: ipaFileURL];
         }];
     }else{
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",fromPath]];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
         [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
         [self viewStateForProgressFinish:YES];
     }
@@ -914,9 +949,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buttonAction setEnabled:(enable && (pathProject.enabled || pathIPAFile.enabled))];
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
     
+    //update CI button
+//    [buttonConfigCI setHidden:(tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
+    [buttonConfigCI setEnabled:(buttonAction.enabled && !buttonConfigCI.hidden)];
+    
     //update keepsame link
-    [buttonUniqueLink setEnabled:(project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
-                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
+    [buttonUniqueLink setEnabled:((project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
+                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab) && ![[AppDelegate appDelegate] processing])];
     
     //update advanced button
     [buttonAdcanced setEnabled:buttonAction.enabled];
@@ -1037,6 +1076,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
         ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
         [projectAdvancedViewController setProject:project];
+    }
+    
+    //prepare to show CI controller
+    else if([segue.destinationController isKindOfClass:[CIViewController class]]){
+        CIViewController *ciViewController = ((CIViewController *)segue.destinationController);
+        [ciViewController setProject:project];
     }
 }
 
