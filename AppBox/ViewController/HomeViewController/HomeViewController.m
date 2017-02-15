@@ -610,7 +610,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
           }
           //unable to upload file, show error
           else {
-              NSLog(@"%@\n%@\n", routeError, error);
+              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
               [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
               [self viewStateForProgressFinish:YES];
           }
@@ -658,11 +658,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)handleSharedURLError:(DBRequestError *)error forFile:(NSString *)file{
-    NSLog(@"%@\n", error);
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Create Share Link Error - %@",error]];
     if ([error isClientError]){
-        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+        if ([[AppDelegate appDelegate] isInternetConnected]){
             [self dbCreateSharedURLForFile:file];
-        }];
+        }else{
+            lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                [self dbCreateSharedURLForFile:file];
+            }];
+        }
     }else if([error isHttpError] && error.statusCode.integerValue == 409){
         [self dbGetSharedURLForFile:file];
     }else{
