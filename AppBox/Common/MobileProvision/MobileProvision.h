@@ -10,6 +10,6 @@
 
 @interface MobileProvision : NSObject
 
--(NSString *) buildTypeForProvisioning:(NSString *)provisioningPath;
++(NSString *) buildTypeForProvisioning:(NSString *)provisioningPath;
 
 @end

@@ -11,7 +11,7 @@
 @implementation MobileProvision
 
 
--(NSString *) buildTypeForProvisioning:(NSString *)provisioningPath {
++(NSString *) buildTypeForProvisioning:(NSString *)provisioningPath {
     NSDictionary *mobileProvision;
     NSString *binaryString = [NSString stringWithContentsOfFile:provisioningPath encoding:NSISOLatin1StringEncoding error:NULL];
     if (!binaryString) {
