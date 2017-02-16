@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ALOutputParser.h"
+#import "MobileProvision.h"
 #import "CIViewController.h"
 #import "MailViewController.h"
 #import "DropboxViewController.h"
 #import "ShowLinkViewController.h"
 #import "ProjectAdvancedViewController.h"
 
-@interface HomeViewController : NSViewController <MailDelegate, NSTabViewDelegate>{
+@interface HomeViewController : NSViewController <NSTabViewDelegate, MailDelegate, ProjectAdvancedViewDelegate>{
     //Tab
     IBOutlet NSTabView *tabView;
     

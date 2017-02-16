@@ -37,6 +37,7 @@
 //MARK: - Action Button Tapped
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
     [self dismissController:self];
+    [self.delegate projectAdvancedCancelButtonTapped:sender];
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
@@ -64,6 +65,9 @@
         [self.project setItcPasswod:[NSString stringWithFormat:abiTunesConnectService]];
     }
     
+    if (self.delegate != nil){
+        [self.delegate projectAdvancedSaveButtonTapped:sender];
+    }
     
     [self dismissController:self];
 }

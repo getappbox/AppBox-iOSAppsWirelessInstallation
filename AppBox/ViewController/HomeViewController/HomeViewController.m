@@ -190,7 +190,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
             [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
             [self getIPAInfoFromLocalURL:project.ipaFullPath];
-//            [self runALAppStoreScriptForValidation:YES];
         }
         [self viewStateForProgressFinish:NO];
     }else{
@@ -264,7 +263,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 - (void)runALAppStoreScriptForValidation:(BOOL)isValidation{
     scriptType = isValidation ? ScriptTypeAppStoreValidation : ScriptTypeAppStoreUpload;
-    [self showStatus:isValidation ? @"Validating IPA..." : @"Uploading IPA..." andShowProgressBar:YES withProgress:-1];
+    [self showStatus:isValidation ? @"Validating IPA with AppStore..." : @"Uploading IPA on AppStore..." andShowProgressBar:YES withProgress:-1];
     NSString *alSriptPath = [[NSBundle mainBundle] pathForResource: @"ALAppStore" ofType:@"sh"];
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
 
@@ -277,7 +276,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buildArgument addObject:project.alPath];
     
     //${3} Project Location
-    [buildArgument addObject: [project.ipaFullPath resourceSpecifier]];
+    [buildArgument addObject: [project.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
     
     //${4} Project type workspace/scheme
     [buildArgument addObject:project.itcUserName];
@@ -491,6 +490,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 infoPlistPath = entry;
             }
             
+            //Get embedded mobile provision
+            if (project.buildType == nil){
+                NSString *mobileProvisionPath = [NSString stringWithFormat:@"%@embedded.mobileprovision",payloadEntry].lowercaseString;
+                if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
+                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found mobileprovision at path = %@",mobileProvisionPath]];
+                    [project setBuildType:[MobileProvision buildTypeForProvisioning:[NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath]]];
+                }
+            }
+            
             //show status and log files entry
             [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
@@ -526,9 +534,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             }
             
-            //prepare for upload
+            //prepare for upload and check ipa type
             NSURL *ipaFileURL = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
-            [self uploadIPAFileWithLocalURL: ipaFileURL];
+            [project setIpaFullPath:ipaFileURL];
+            [self uploadIPAFileWithLocalURL:ipaFileURL];
         }];
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
@@ -538,6 +547,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)uploadIPAFileWithLocalURL:(NSURL *)ipaURL{
+    if ([project.buildType isEqualToString: BuildTypeAppStore] && project.fullPath == nil){
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText: @"Please confirm"];
+        [alert setInformativeText:@"AppBox found an AppStore provisioning profile in this IPA file. Do you want to upload this on AppStore?"];
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert addButtonWithTitle:@"YES! Upload on AppStore."];
+        [alert addButtonWithTitle:@"NO! Upload on Dropbox"];
+        if ([alert runModal] == NSAlertFirstButtonReturn){
+            [self performSegueWithIdentifier:@"ProjectAdvanceSettings" sender:self];
+            return;
+        }
+    }
     //check unique link settings for Dropbox folder name
     if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
         NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
@@ -1036,11 +1057,25 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buttonSendMail setState:NSOffState];
 }
 
-#pragma mark - TabView Delegate
+#pragma mark - TabView Delegate -
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
     //update view state based on selected tap
     [self updateViewState];
 }
+
+#pragma mark - ProjectAdvancedViewDelegate - 
+- (void)projectAdvancedSaveButtonTapped:(NSButton *)sender{
+    if (project.fullPath == nil){
+        [self runALAppStoreScriptForValidation:YES];
+    }
+}
+
+- (void)projectAdvancedCancelButtonTapped:(NSButton *)sender{
+    if (project.fullPath == nil){
+        [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+    }
+}
+
 
 #pragma mark - Navigation -
 -(void)showURL{
@@ -1080,6 +1115,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
         ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
         [projectAdvancedViewController setProject:project];
+        [projectAdvancedViewController setDelegate:self];
     }
     
     //prepare to show CI controller

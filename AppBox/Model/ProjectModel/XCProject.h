@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define BuildTypeUnknown @"unknown"
 #define BuildTypeAdHoc @"ad-hoc"
 #define BuildTypePackage @"package"
 #define BuildTypeAppStore @"app-store"
@@ -71,6 +72,13 @@
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
 @property(nonatomic, retain) NSURL *appLongShareableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
+
+//CI Settings
+@property(nonatomic, retain) NSString *branch;
+@property(nonatomic, retain) NSString *emails;
+@property(nonatomic, retain) NSNumber *shutdownMac;
+@property(nonatomic, retain) NSNumber *keepSameLink;
+@property(nonatomic, retain) NSString *personalMessage;
 
 - (BOOL)isValidProjectInfoPlist;
 - (void)upadteDbDirectoryByBundleDirectory;
