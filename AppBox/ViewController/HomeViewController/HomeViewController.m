@@ -224,7 +224,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     scriptType = ScriptTypeBuild;
     
     //Create Export Option Plist
-    [project createExportOptionPlist];
+    if (![project createExportOptionPlist]){
+        [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create file in this directory."];
+        return;
+    }
     
     //Build Script
     NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:@"ProjectBuildScript" ofType:@"sh"];
@@ -240,16 +243,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buildArgument addObject:comboBuildScheme.stringValue];
     
     //${4} Archive Location
-    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
+    [buildArgument addObject:[project.buildArchivePath.resourceSpecifier stringByRemovingPercentEncoding]];
     
-    //${5} Archive Location
-    [buildArgument addObject:project.buildArchivePath.resourceSpecifier];
+    //${5} ipa Location
+    [buildArgument addObject:[project.buildUUIDDirectory.resourceSpecifier stringByRemovingPercentEncoding]];
     
-    //${6} ipa Location
-    [buildArgument addObject:project.buildUUIDDirectory.resourceSpecifier];
-    
-    //${7} export options plist Location
-    [buildArgument addObject:project.exportOptionsPlistPath.resourceSpecifier];
+    //${6} export options plist Location
+    [buildArgument addObject:[project.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding]];
     
     //Run Task
     [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];

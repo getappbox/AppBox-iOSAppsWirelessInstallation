@@ -81,10 +81,10 @@
 @property(nonatomic, retain) NSString *personalMessage;
 
 - (BOOL)isValidProjectInfoPlist;
-- (void)upadteDbDirectoryByBundleDirectory;
-- (void)createExportOptionPlist;
+- (BOOL)createExportOptionPlist;
 - (void)createUDIDAndIsNew:(BOOL)isNew;
--(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion;
+- (void)upadteDbDirectoryByBundleDirectory;
+- (void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion;
 
 - (NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
 @end
