@@ -4,16 +4,17 @@
         <attribute name="branchName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="buildScheme" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="buildType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbFolderName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="keepSameLink" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="personalMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shutdownMac" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="teamId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="bundleIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="projectPath" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="ciSettings" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CISetting" syncable="YES"/>
         <relationship name="uploadRecords" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="UploadRecord" syncable="YES"/>
     </entity>
@@ -33,13 +34,14 @@
         <attribute name="keepSameLink" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="localBuildPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teamId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CISetting" positionX="-11729" positionY="-2647" width="128" height="165"/>
-        <element name="Project" positionX="-11927" positionY="-2592" width="128" height="120"/>
-        <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="315"/>
+        <element name="CISetting" positionX="-11729" positionY="-2647" width="128" height="195"/>
+        <element name="Project" positionX="-11927" positionY="-2592" width="128" height="105"/>
+        <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="330"/>
     </elements>
 </model>
