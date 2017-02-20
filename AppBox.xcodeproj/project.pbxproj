@@ -265,6 +265,13 @@
 			path = MenuHandler;
 			sourceTree = "<group>";
 		};
+		E15BC7101E5ABEE800D3E411 /* AutoUpdateViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AutoUpdateViewController;
+			sourceTree = "<group>";
+		};
 		E15C26671D7FD5A9004243B9 /* ShowLinkViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +348,7 @@
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
 				E18DCB141DFE727100BD7F11 /* MailViewController */,
+				E15BC7101E5ABEE800D3E411 /* AutoUpdateViewController */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

@@ -10,4 +10,5 @@ target :AppBox do
     pod 'ObjectiveDropboxOfficial'
     pod 'ZXingObjC'
     pod 'SAMKeychain'
+    pod 'Sparkle'
 end
