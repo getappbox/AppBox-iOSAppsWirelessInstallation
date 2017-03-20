@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/DBFILESRelocationBatchLaunch.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESRelocationBatchLaunch.h

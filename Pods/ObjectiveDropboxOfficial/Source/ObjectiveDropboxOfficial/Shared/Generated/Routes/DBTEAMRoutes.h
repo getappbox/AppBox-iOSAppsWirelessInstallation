@@ -134,103 +134,6 @@
 - (nonnull instancetype)init:(id<DBTransportClient> _Nonnull)client;
 
 ///
-/// Creates a new, empty group, with a requested name. Permission : Team member management
-///
-/// @param groupName Group name.
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupFullInfo` object on success or a
-/// `DBTEAMGroupCreateError` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupCreateError *> * _Nonnull)alphaGroupsCreate:(NSString * _Nonnull)groupName;
-
-///
-/// Creates a new, empty group, with a requested name. Permission : Team member management
-///
-/// @param groupName Group name.
-/// @param groupExternalId The creator of a team can associate an arbitrary external ID to the group.
-/// @param groupManagementType Whether the team can be managed by selected users, or only by team admins
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupFullInfo` object on success or a
-/// `DBTEAMGroupCreateError` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupCreateError *> * _Nonnull)
-  alphaGroupsCreate:(NSString * _Nonnull)groupName
-    groupExternalId:(NSString * _Nullable)groupExternalId
-groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagementType;
-
-///
-/// Retrieves information about one or more groups. Permission : Team Information
-///
-/// @param groupsSelector Argument for selecting a list of groups, either by group_ids, or external group IDs.
-///
-/// @return Through the response callback, the caller will receive a `NSArray<DBTEAMGroupsGetInfoItem *>` object on
-/// success or a `DBTEAMGroupsGetInfoError` object on failure.
-///
-- (DBRpcTask<NSArray<DBTEAMGroupsGetInfoItem *> *, DBTEAMGroupsGetInfoError *> * _Nonnull)alphaGroupsGetInfo:
-    (DBTEAMGroupsSelector * _Nonnull)groupsSelector;
-
-///
-/// Lists groups on a team. Permission : Team Information
-///
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupsListResult` object on success or a
-/// `void` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupsListResult *, DBNilObject *> * _Nonnull)alphaGroupsList;
-
-///
-/// Lists groups on a team. Permission : Team Information
-///
-/// @param limit Number of results to return per call.
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupsListResult` object on success or a
-/// `void` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupsListResult *, DBNilObject *> * _Nonnull)alphaGroupsList:(NSNumber * _Nullable)limit;
-
-///
-/// Once a cursor has been retrieved from `alphaGroupsList`, use this to paginate through all groups. Permission : Team
-/// information
-///
-/// @param cursor Indicates from what point to get the next set of groups.
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupsListResult` object on success or a
-/// `DBTEAMGroupsListContinueError` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupsListResult *, DBTEAMGroupsListContinueError *> * _Nonnull)alphaGroupsListContinue:
-    (NSString * _Nonnull)cursor;
-
-///
-/// Updates a group's name, external ID or management type. Permission : Team member management
-///
-/// @param group Specify a group.
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupFullInfo` object on success or a
-/// `DBTEAMGroupUpdateError` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupUpdateError *> * _Nonnull)alphaGroupsUpdate:
-    (DBTEAMGroupSelector * _Nonnull)group;
-
-///
-/// Updates a group's name, external ID or management type. Permission : Team member management
-///
-/// @param group Specify a group.
-/// @param dNewGroupName Optional argument. Set group name to this if provided.
-/// @param dNewGroupExternalId Optional argument. New group external ID. If the argument is None, the group's
-/// external_id won't be updated. If the argument is empty string, the group's external id will be cleared.
-/// @param dNewGroupManagementType Set new group management type, if provided.
-///
-/// @return Through the response callback, the caller will receive a `DBTEAMGroupFullInfo` object on success or a
-/// `DBTEAMGroupUpdateError` object on failure.
-///
-- (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupUpdateError *> * _Nonnull)
-      alphaGroupsUpdate:(DBTEAMGroupSelector * _Nonnull)group
-          returnMembers:(NSNumber * _Nullable)returnMembers
-          dNewGroupName:(NSString * _Nullable)dNewGroupName
-    dNewGroupExternalId:(NSString * _Nullable)dNewGroupExternalId
-dNewGroupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)dNewGroupManagementType;
-
-///
 /// List all device sessions of a team's member.
 ///
 /// @param teamMemberId The team's member id
@@ -347,7 +250,7 @@ devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> * _Nonn
 - (DBRpcTask<DBTEAMTeamGetInfoResult *, DBNilObject *> * _Nonnull)getInfo;
 
 ///
-/// Creates a new, empty group, with a requested name. Permission : Team member management
+/// Creates a new, empty group, with a requested name. Permission : Team member management.
 ///
 /// @param groupName Group name.
 ///
@@ -357,11 +260,11 @@ devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> * _Nonn
 - (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupCreateError *> * _Nonnull)groupsCreate:(NSString * _Nonnull)groupName;
 
 ///
-/// Creates a new, empty group, with a requested name. Permission : Team member management
+/// Creates a new, empty group, with a requested name. Permission : Team member management.
 ///
 /// @param groupName Group name.
 /// @param groupExternalId The creator of a team can associate an arbitrary external ID to the group.
-/// @param groupManagementType Whether the team can be managed by selected users, or only by team admins
+/// @param groupManagementType Whether the team can be managed by selected users, or only by team admins.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGroupFullInfo` object on success or a
 /// `DBTEAMGroupCreateError` object on failure.
@@ -374,7 +277,7 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
 ///
 /// Deletes a group. The group is deleted immediately. However the revoking of group-owned resources may take additional
 /// time. Use the `groupsJobStatusGet` to determine whether this process has completed. Permission : Team member
-/// management
+/// management.
 ///
 /// @param groupSelector Argument for selecting a single group, either by group_id or by external group ID.
 ///
@@ -385,7 +288,8 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
     (DBTEAMGroupSelector * _Nonnull)groupSelector;
 
 ///
-/// Retrieves information about one or more groups. Permission : Team Information
+/// Retrieves information about one or more groups. Note that the optional field  `members` in `DBTEAMGroupFullInfo` is
+/// not returned for system-managed groups. Permission : Team Information.
 ///
 /// @param groupsSelector Argument for selecting a list of groups, either by group_ids, or external group IDs.
 ///
@@ -398,7 +302,7 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
 ///
 /// Once an async_job_id is returned from `groupsDelete`, `groupsMembersAdd` , or `groupsMembersRemove` use this method
 /// to poll the status of granting/revoking group members' access to group-owned resources. Permission : Team member
-/// management
+/// management.
 ///
 /// @param asyncJobId Id of the asynchronous job. This is the value of a response returned from the method that launched
 /// the job.
@@ -410,7 +314,7 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
     (NSString * _Nonnull)asyncJobId;
 
 ///
-/// Lists groups on a team. Permission : Team Information
+/// Lists groups on a team. Permission : Team Information.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGroupsListResult` object on success or a
@@ -419,7 +323,7 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
 - (DBRpcTask<DBTEAMGroupsListResult *, DBNilObject *> * _Nonnull)groupsList;
 
 ///
-/// Lists groups on a team. Permission : Team Information
+/// Lists groups on a team. Permission : Team Information.
 ///
 /// @param limit Number of results to return per call.
 ///
@@ -430,7 +334,7 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
 
 ///
 /// Once a cursor has been retrieved from `groupsList`, use this to paginate through all groups. Permission : Team
-/// information
+/// Information.
 ///
 /// @param cursor Indicates from what point to get the next set of groups.
 ///
@@ -443,7 +347,7 @@ groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagement
 ///
 /// Adds members to a group. The members are added immediately. However the granting of group-owned resources may take
 /// additional time. Use the `groupsJobStatusGet` to determine whether this process has completed. Permission : Team
-/// member management
+/// member management.
 ///
 /// @param group Group to which users will be added.
 /// @param members List of users to be added to the group.
@@ -458,7 +362,7 @@ groupsMembersAdd:(DBTEAMGroupSelector * _Nonnull)group
 ///
 /// Adds members to a group. The members are added immediately. However the granting of group-owned resources may take
 /// additional time. Use the `groupsJobStatusGet` to determine whether this process has completed. Permission : Team
-/// member management
+/// member management.
 ///
 /// @param group Group to which users will be added.
 /// @param members List of users to be added to the group.
@@ -472,7 +376,7 @@ groupsMembersAdd:(DBTEAMGroupSelector * _Nonnull)group
    returnMembers:(NSNumber * _Nullable)returnMembers;
 
 ///
-/// Lists members of a group. Permission : Team Information
+/// Lists members of a group. Permission : Team Information.
 ///
 /// @param group The group whose members are to be listed.
 ///
@@ -483,7 +387,7 @@ groupsMembersAdd:(DBTEAMGroupSelector * _Nonnull)group
     (DBTEAMGroupSelector * _Nonnull)group;
 
 ///
-/// Lists members of a group. Permission : Team Information
+/// Lists members of a group. Permission : Team Information.
 ///
 /// @param group The group whose members are to be listed.
 /// @param limit Number of results to return per call.
@@ -497,7 +401,7 @@ groupsMembersList:(DBTEAMGroupSelector * _Nonnull)group
 
 ///
 /// Once a cursor has been retrieved from `groupsMembersList`, use this to paginate through all members of the group.
-/// Permission : Team information
+/// Permission : Team information.
 ///
 /// @param cursor Indicates from what point to get the next set of groups.
 ///
@@ -511,7 +415,7 @@ groupsMembersListContinue:(NSString * _Nonnull)cursor;
 /// Removes members from a group. The members are removed immediately. However the revoking of group-owned resources may
 /// take additional time. Use the `groupsJobStatusGet` to determine whether this process has completed. This method
 /// permits removing the only owner of a group, even in cases where this is not possible via the web client. Permission
-/// : Team member management
+/// : Team member management.
 ///
 /// @param group Group from which users will be removed.
 /// @param users List of users to be removed from the group.
@@ -527,7 +431,7 @@ groupsMembersRemove:(DBTEAMGroupSelector * _Nonnull)group
 /// Removes members from a group. The members are removed immediately. However the revoking of group-owned resources may
 /// take additional time. Use the `groupsJobStatusGet` to determine whether this process has completed. This method
 /// permits removing the only owner of a group, even in cases where this is not possible via the web client. Permission
-/// : Team member management
+/// : Team member management.
 ///
 /// @param group Group from which users will be removed.
 /// @param users List of users to be removed from the group.
@@ -541,7 +445,7 @@ groupsMembersRemove:(DBTEAMGroupSelector * _Nonnull)group
       returnMembers:(NSNumber * _Nullable)returnMembers;
 
 ///
-/// Sets a member's access type in a group. Permission : Team member management
+/// Sets a member's access type in a group. Permission : Team member management.
 ///
 /// @param accessType New group access type the user will have.
 ///
@@ -554,7 +458,7 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector * _Nonnull)group
                 accessType:(DBTEAMGroupAccessType * _Nonnull)accessType;
 
 ///
-/// Sets a member's access type in a group. Permission : Team member management
+/// Sets a member's access type in a group. Permission : Team member management.
 ///
 /// @param accessType New group access type the user will have.
 /// @param returnMembers Whether to return the list of members in the group.  Note that the default value will cause all
@@ -570,7 +474,7 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector * _Nonnull)group
              returnMembers:(NSNumber * _Nullable)returnMembers;
 
 ///
-/// Updates a group's name and/or external ID. Permission : Team member management
+/// Updates a group's name and/or external ID. Permission : Team member management.
 ///
 /// @param group Specify a group.
 ///
@@ -581,7 +485,7 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector * _Nonnull)group
     (DBTEAMGroupSelector * _Nonnull)group;
 
 ///
-/// Updates a group's name and/or external ID. Permission : Team member management
+/// Updates a group's name and/or external ID. Permission : Team member management.
 ///
 /// @param group Specify a group.
 /// @param dNewGroupName Optional argument. Set group name to this if provided.
@@ -806,11 +710,11 @@ linkedAppsRevokeLinkedAppBatch:(NSArray<DBTEAMRevokeLinkedApiAppArg *> * _Nonnul
 
 ///
 /// Removes a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
-/// external_id must be provided to identify the user account. This is not a deactivation where the account can be
-/// re-activated again. Calling `membersAdd` with the removed user's email address will create a new account with a new
-/// team_member_id that will not have access to any content that was shared with the initial account. This endpoint may
-/// initiate an asynchronous job. To obtain the final result of the job, the client should periodically poll
-/// `membersRemoveJobStatusGet`.
+/// external_id must be provided to identify the user account. Accounts can be recovered via `membersRecover` for a 7
+/// day period or until the account has been permanently deleted or transferred to another account (whichever comes
+/// first). Calling `membersAdd` while a user is still recoverable on your team will return with `userAlreadyOnTeam` in
+/// `DBTEAMMemberAddResult`. This endpoint may initiate an asynchronous job. To obtain the final result of the job, the
+/// client should periodically poll `membersRemoveJobStatusGet`.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBASYNCLaunchEmptyResult` object on success or a
@@ -821,11 +725,11 @@ linkedAppsRevokeLinkedAppBatch:(NSArray<DBTEAMRevokeLinkedApiAppArg *> * _Nonnul
 
 ///
 /// Removes a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
-/// external_id must be provided to identify the user account. This is not a deactivation where the account can be
-/// re-activated again. Calling `membersAdd` with the removed user's email address will create a new account with a new
-/// team_member_id that will not have access to any content that was shared with the initial account. This endpoint may
-/// initiate an asynchronous job. To obtain the final result of the job, the client should periodically poll
-/// `membersRemoveJobStatusGet`.
+/// external_id must be provided to identify the user account. Accounts can be recovered via `membersRecover` for a 7
+/// day period or until the account has been permanently deleted or transferred to another account (whichever comes
+/// first). Calling `membersAdd` while a user is still recoverable on your team will return with `userAlreadyOnTeam` in
+/// `DBTEAMMemberAddResult`. This endpoint may initiate an asynchronous job. To obtain the final result of the job, the
+/// client should periodically poll `membersRemoveJobStatusGet`.
 ///
 /// @param transferDestId If provided, files from the deleted member account will be transferred to this user.
 /// @param transferAdminId If provided, errors during the transfer process will be sent via email to this user. If the
@@ -901,6 +805,8 @@ membersSetAdminPermissions:(DBTEAMUserSelectorArg * _Nonnull)user
 /// @param dNewExternalId New external ID for member.
 /// @param dNewGivenName New given name for member.
 /// @param dNewSurname New surname for member.
+/// @param dNewPersistentId New persistent ID. This field only available to teams using persistent ID SAML
+/// configuration.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfo` object on success or a
 /// `DBTEAMMembersSetProfileError` object on failure.
@@ -910,7 +816,8 @@ membersSetProfile:(DBTEAMUserSelectorArg * _Nonnull)user
         dNewEmail:(NSString * _Nullable)dNewEmail
    dNewExternalId:(NSString * _Nullable)dNewExternalId
     dNewGivenName:(NSString * _Nullable)dNewGivenName
-      dNewSurname:(NSString * _Nullable)dNewSurname;
+      dNewSurname:(NSString * _Nullable)dNewSurname
+ dNewPersistentId:(NSString * _Nullable)dNewPersistentId;
 
 ///
 /// Suspend a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
@@ -1099,8 +1006,7 @@ reportsGetMembership:(NSDate * _Nullable)startDate
                                                                                    endDate:(NSDate * _Nullable)endDate;
 
 ///
-/// Sets an archived team folder's status to active. This endpoint is only available to teams with improved team folders
-/// /help/986. Permission : Team member file access.
+/// Sets an archived team folder's status to active. Permission : Team member file access.
 ///
 /// @param teamFolderId The ID of the team folder.
 ///
@@ -1111,8 +1017,8 @@ reportsGetMembership:(NSDate * _Nullable)startDate
     (NSString * _Nonnull)teamFolderId;
 
 ///
-/// Sets an active team folder's status to archived and removes all folder and file members. This endpoint is only
-/// available to teams with improved team folders /help/986. Permission : Team member file access.
+/// Sets an active team folder's status to archived and removes all folder and file members. Permission : Team member
+/// file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamFolderArchiveLaunch` object on success
@@ -1122,8 +1028,8 @@ reportsGetMembership:(NSDate * _Nullable)startDate
     (NSString * _Nonnull)teamFolderId;
 
 ///
-/// Sets an active team folder's status to archived and removes all folder and file members. This endpoint is only
-/// available to teams with improved team folders /help/986. Permission : Team member file access.
+/// Sets an active team folder's status to archived and removes all folder and file members. Permission : Team member
+/// file access.
 ///
 /// @param forceAsyncOff Whether to force the archive to happen synchronously.
 ///
@@ -1135,8 +1041,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
     forceAsyncOff:(NSNumber * _Nullable)forceAsyncOff;
 
 ///
-/// Returns the status of an asynchronous job for archiving a team folder. This endpoint is only available to teams with
-/// improved team folders /help/986. Permission : Team member file access.
+/// Returns the status of an asynchronous job for archiving a team folder. Permission : Team member file access.
 ///
 /// @param asyncJobId Id of the asynchronous job. This is the value of a response returned from the method that launched
 /// the job.
@@ -1148,8 +1053,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
     (NSString * _Nonnull)asyncJobId;
 
 ///
-/// Creates a new, active, team folder. This endpoint is only available to teams with improved team folders /help/986.
-/// Permission : Team member file access.
+/// Creates a new, active, team folder. Permission : Team member file access.
 ///
 /// @param name Name for the new team folder.
 ///
@@ -1160,8 +1064,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
     (NSString * _Nonnull)name;
 
 ///
-/// Retrieves metadata for team folders. This endpoint is only available to teams with improved team folders /help/986.
-/// Permission : Team member file access.
+/// Retrieves metadata for team folders. Permission : Team member file access.
 ///
 /// @param teamFolderIds The list of team folder IDs.
 ///
@@ -1172,8 +1075,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
     (NSArray<NSString *> * _Nonnull)teamFolderIds;
 
 ///
-/// Lists all team folders. This endpoint is only available to teams with improved team folders /help/986. Permission :
-/// Team member file access.
+/// Lists all team folders. Permission : Team member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamFolderListResult` object on success or a
@@ -1182,8 +1084,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
 - (DBRpcTask<DBTEAMTeamFolderListResult *, DBTEAMTeamFolderListError *> * _Nonnull)teamFolderList;
 
 ///
-/// Lists all team folders. This endpoint is only available to teams with improved team folders /help/986. Permission :
-/// Team member file access.
+/// Lists all team folders. Permission : Team member file access.
 ///
 /// @param limit The maximum number of results to return per request.
 ///
@@ -1194,8 +1095,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
     (NSNumber * _Nullable)limit;
 
 ///
-/// Permanently deletes an archived team folder. This endpoint is only available to teams with improved team folders
-/// /help/986. Permission : Team member file access.
+/// Permanently deletes an archived team folder. Permission : Team member file access.
 ///
 /// @param teamFolderId The ID of the team folder.
 ///
@@ -1206,8 +1106,7 @@ teamFolderArchive:(NSString * _Nonnull)teamFolderId
     (NSString * _Nonnull)teamFolderId;
 
 ///
-/// Changes an active team folder's name. This endpoint is only available to teams with improved team folders /help/986.
-/// Permission : Team member file access.
+/// Changes an active team folder's name. Permission : Team member file access.
 ///
 /// @param name New team folder name.
 ///

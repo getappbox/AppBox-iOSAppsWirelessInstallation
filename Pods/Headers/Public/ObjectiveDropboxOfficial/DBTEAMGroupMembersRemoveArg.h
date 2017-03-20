@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/DBTEAMGroupMembersRemoveArg.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMGroupMembersRemoveArg.h

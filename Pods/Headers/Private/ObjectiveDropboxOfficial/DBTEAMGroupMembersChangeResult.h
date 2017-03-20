@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/DBTEAMGroupMembersChangeResult.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMGroupMembersChangeResult.h

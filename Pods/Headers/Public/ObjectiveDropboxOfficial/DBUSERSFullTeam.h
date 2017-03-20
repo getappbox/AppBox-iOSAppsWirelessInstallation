@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Users/DBUSERSFullTeam.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Users/Headers/DBUSERSFullTeam.h

@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/DBSHARINGListFileMembersArg.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGListFileMembersArg.h

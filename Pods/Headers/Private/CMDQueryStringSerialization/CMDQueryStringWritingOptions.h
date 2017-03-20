@@ -1,1 +1,1 @@
-../../../CMDQueryStringSerialization/Pod/CMDQueryStringWritingOptions.h
+../../../CMDQueryStringSerialization/CMDQueryStringSerialization/CMDQueryStringWritingOptions.h

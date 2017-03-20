@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/DBSHARINGGetFileMetadataBatchResult.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGGetFileMetadataBatchResult.h

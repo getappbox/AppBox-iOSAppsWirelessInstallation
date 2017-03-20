@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamCommon/DBTEAMCOMMONGroupManagementType.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamCommon/Headers/DBTEAMCOMMONGroupManagementType.h

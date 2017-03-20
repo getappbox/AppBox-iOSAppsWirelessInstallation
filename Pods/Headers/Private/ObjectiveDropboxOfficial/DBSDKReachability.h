@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Handwritten/Networking/DBSDKReachability.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Headers/Internal/Networking/DBSDKReachability.h

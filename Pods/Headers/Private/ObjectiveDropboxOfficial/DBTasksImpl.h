@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Handwritten/Networking/DBTasksImpl.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Headers/Internal/Networking/DBTasksImpl.h

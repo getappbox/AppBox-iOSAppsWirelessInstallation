@@ -25,6 +25,7 @@
 #import "DBTEAMAdminTier.h"
 #import "DBTEAMApiApp.h"
 #import "DBTEAMBaseDfbReport.h"
+#import "DBTEAMBaseTeamFolderError.h"
 #import "DBTEAMCOMMONGroupManagementType.h"
 #import "DBTEAMCOMMONGroupSummary.h"
 #import "DBTEAMDateRange.h"
@@ -54,6 +55,7 @@
 #import "DBTEAMGroupMembersSetAccessTypeArg.h"
 #import "DBTEAMGroupSelector.h"
 #import "DBTEAMGroupSelectorError.h"
+#import "DBTEAMGroupSelectorWithTeamGroupError.h"
 #import "DBTEAMGroupUpdateArgs.h"
 #import "DBTEAMGroupUpdateError.h"
 #import "DBTEAMGroupsGetInfoError.h"
@@ -174,66 +176,6 @@
     _client = client;
   }
   return self;
-}
-
-- (DBRpcTask *)alphaGroupsCreate:(NSString *)groupName {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsCreate;
-  DBTEAMGroupCreateArg *arg = [[DBTEAMGroupCreateArg alloc] initWithGroupName:groupName];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsCreate:(NSString *)groupName
-                 groupExternalId:(NSString *)groupExternalId
-             groupManagementType:(DBTEAMCOMMONGroupManagementType *)groupManagementType {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsCreate;
-  DBTEAMGroupCreateArg *arg = [[DBTEAMGroupCreateArg alloc] initWithGroupName:groupName
-                                                              groupExternalId:groupExternalId
-                                                          groupManagementType:groupManagementType];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsGetInfo:(DBTEAMGroupsSelector *)groupsSelector {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsGetInfo;
-  DBTEAMGroupsSelector *arg = groupsSelector;
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsList {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsList;
-  DBTEAMGroupsListArg *arg = [[DBTEAMGroupsListArg alloc] init];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsList:(NSNumber *)limit {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsList;
-  DBTEAMGroupsListArg *arg = [[DBTEAMGroupsListArg alloc] initWithLimit:limit];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsListContinue:(NSString *)cursor {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsListContinue;
-  DBTEAMGroupsListContinueArg *arg = [[DBTEAMGroupsListContinueArg alloc] initWithCursor:cursor];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsUpdate:(DBTEAMGroupSelector *)group {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsUpdate;
-  DBTEAMGroupUpdateArgs *arg = [[DBTEAMGroupUpdateArgs alloc] initWithGroup:group];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)alphaGroupsUpdate:(DBTEAMGroupSelector *)group
-                   returnMembers:(NSNumber *)returnMembers
-                   dNewGroupName:(NSString *)dNewGroupName
-             dNewGroupExternalId:(NSString *)dNewGroupExternalId
-         dNewGroupManagementType:(DBTEAMCOMMONGroupManagementType *)dNewGroupManagementType {
-  DBRoute *route = DBTEAMRouteObjects.DBTEAMAlphaGroupsUpdate;
-  DBTEAMGroupUpdateArgs *arg = [[DBTEAMGroupUpdateArgs alloc] initWithGroup:group
-                                                              returnMembers:returnMembers
-                                                              dNewGroupName:dNewGroupName
-                                                        dNewGroupExternalId:dNewGroupExternalId
-                                                    dNewGroupManagementType:dNewGroupManagementType];
-  return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)devicesListMemberDevices:(NSString *)teamMemberId {
@@ -598,13 +540,15 @@
                        dNewEmail:(NSString *)dNewEmail
                   dNewExternalId:(NSString *)dNewExternalId
                    dNewGivenName:(NSString *)dNewGivenName
-                     dNewSurname:(NSString *)dNewSurname {
+                     dNewSurname:(NSString *)dNewSurname
+                dNewPersistentId:(NSString *)dNewPersistentId {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersSetProfile;
   DBTEAMMembersSetProfileArg *arg = [[DBTEAMMembersSetProfileArg alloc] initWithUser:user
                                                                            dNewEmail:dNewEmail
                                                                       dNewExternalId:dNewExternalId
                                                                        dNewGivenName:dNewGivenName
-                                                                         dNewSurname:dNewSurname];
+                                                                         dNewSurname:dNewSurname
+                                                                    dNewPersistentId:dNewPersistentId];
   return [self.client requestRpc:route arg:arg];
 }
 

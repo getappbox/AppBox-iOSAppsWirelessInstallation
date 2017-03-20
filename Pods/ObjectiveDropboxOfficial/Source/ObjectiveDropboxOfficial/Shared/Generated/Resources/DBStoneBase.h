@@ -27,7 +27,8 @@
 
 /// Class of the route's error object type (must implement `DBSerializable`
 /// protocol). Note: this class is only for route-specific errors, as opposed
-/// to more generic Dropbox API errors, as represented by the `DBError` class.
+/// to more generic Dropbox API errors, as represented by the `DBRequestError`
+/// class.
 @property (nonatomic, readonly) Class<DBSerializable> _Nullable errorType;
 
 /// Custom attributes associated with each route (can pertain to authentication

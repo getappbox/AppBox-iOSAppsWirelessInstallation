@@ -10,7 +10,6 @@
 #import "DBAUTHTokenFromOAuth1Result.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
-#import "DBTransportClient.h"
 
 @implementation DBAUTHRouteObjects
 

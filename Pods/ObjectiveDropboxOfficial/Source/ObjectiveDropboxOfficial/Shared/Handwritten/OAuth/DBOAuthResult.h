@@ -13,8 +13,7 @@
 
 #pragma mark - Tag type definition
 
-/// The `DBAuthResultTag` enum type represents the possible tag
-/// states that the DBOAuthResult union can exist in.
+/// The `DBAuthResultTag` enum type represents the possible tag states that the DBOAuthResult union can exist in.
 typedef NS_ENUM(NSInteger, DBOAuthResultTag) {
   /// The authorization succeeded. Includes a `DBAccessToken`.
   DBAuthSuccess,
@@ -41,12 +40,11 @@ typedef NS_ENUM(NSInteger, DBOAuthErrorType) {
   /// The requested scope is invalid, unknown, or malformed.
   DBAuthInvalidScope,
 
-  /// The authorization server encountered an unexpected condition that prevented
-  /// it from fulfilling the request.
+  /// The authorization server encountered an unexpected condition that prevented it from fulfilling the request.
   DBAuthServerError,
 
-  /// The authorization server is currently unable to handle the request due to a
-  /// temporary overloading or maintenance of the server.
+  /// The authorization server is currently unable to handle the request due to a temporary overloading or maintenance
+  /// of the server.
   DBAuthTemporarilyUnavailable,
 
   /// Some other error (outside of the OAuth2 specification)
@@ -59,18 +57,16 @@ typedef NS_ENUM(NSInteger, DBOAuthErrorType) {
 @property (nonatomic, readonly) DBOAuthResultTag tag;
 
 /// The access token that is retrieved in the event of a successful OAuth authorization.
-/// @note Ensure the `isSuccess` method returns true before accessing, otherwise a runtime
-/// exception will be raised.
+/// @note Ensure the `isSuccess` method returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBAccessToken * _Nonnull accessToken;
 
-/// The type of OAuth error that is returned in the event of an unsuccessful OAuth
-/// authorization. @note Ensure the `isError` method returns true before accessing, otherwise
-/// a runtime exception will be raised.
+/// The type of OAuth error that is returned in the event of an unsuccessful OAuth authorization.
+/// @note Ensure the `isError` method returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBOAuthErrorType errorType;
 
-/// The error description string associated with the `DBAuthErrorType` that is returned
-/// in the event of an unsuccessful OAuth authorization. @note Ensure the `isError` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
+/// The error description string associated with the `DBAuthErrorType` that is returned in the event of an unsuccessful
+/// OAuth authorization.
+/// @note Ensure the `isError` method returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString * _Nonnull errorDescription;
 
 #pragma mark - Constructors
@@ -78,8 +74,8 @@ typedef NS_ENUM(NSInteger, DBOAuthErrorType) {
 ///
 /// Initializes union class with tag state of "success".
 ///
-/// @param accessToken The `DBAccessToken` (`account_id` / `team_id` and OAuth token pair)
-/// retrieved from the authorization flow.
+/// @param accessToken The `DBAccessToken` (`account_id` / `team_id` and OAuth token pair) retrieved from the
+/// authorization flow.
 ///
 /// @return An initialized `DBOAuthResult` instance.
 ///
@@ -88,10 +84,8 @@ typedef NS_ENUM(NSInteger, DBOAuthErrorType) {
 ///
 /// Initializes union class with tag state of "error".
 ///
-/// @param errorType The string identifier of the OAuth error type
-/// (lookup performed in errorTypeLookup dict).
-/// @param errorDescription A short description of the error that
-/// occured during the authorization flow.
+/// @param errorType The string identifier of the OAuth error type (lookup performed in errorTypeLookup dict).
+/// @param errorDescription A short description of the error that occured during the authorization flow.
 ///
 /// @return An initialized `DBOAuthResult` instance.
 ///

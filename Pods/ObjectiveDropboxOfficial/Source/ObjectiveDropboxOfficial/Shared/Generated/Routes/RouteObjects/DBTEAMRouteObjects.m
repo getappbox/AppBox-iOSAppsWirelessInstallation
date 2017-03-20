@@ -22,6 +22,7 @@
 #import "DBTEAMAdminTier.h"
 #import "DBTEAMApiApp.h"
 #import "DBTEAMBaseDfbReport.h"
+#import "DBTEAMBaseTeamFolderError.h"
 #import "DBTEAMCOMMONGroupManagementType.h"
 #import "DBTEAMCOMMONGroupSummary.h"
 #import "DBTEAMDateRangeError.h"
@@ -42,6 +43,7 @@
 #import "DBTEAMGroupMembersRemoveError.h"
 #import "DBTEAMGroupMembersSelectorError.h"
 #import "DBTEAMGroupSelectorError.h"
+#import "DBTEAMGroupSelectorWithTeamGroupError.h"
 #import "DBTEAMGroupUpdateError.h"
 #import "DBTEAMGroupsGetInfoError.h"
 #import "DBTEAMGroupsGetInfoItem.h"
@@ -114,15 +116,9 @@
 #import "DBTEAMTeamMemberProfile.h"
 #import "DBTEAMUpdatePropertyTemplateResult.h"
 #import "DBTEAMUserSelectorError.h"
-#import "DBTransportClient.h"
 
 @implementation DBTEAMRouteObjects
 
-static DBRoute *DBTEAMAlphaGroupsCreate;
-static DBRoute *DBTEAMAlphaGroupsGetInfo;
-static DBRoute *DBTEAMAlphaGroupsList;
-static DBRoute *DBTEAMAlphaGroupsListContinue;
-static DBRoute *DBTEAMAlphaGroupsUpdate;
 static DBRoute *DBTEAMDevicesListMemberDevices;
 static DBRoute *DBTEAMDevicesListMembersDevices;
 static DBRoute *DBTEAMDevicesListTeamDevices;
@@ -175,101 +171,6 @@ static DBRoute *DBTEAMTeamFolderGetInfo;
 static DBRoute *DBTEAMTeamFolderList;
 static DBRoute *DBTEAMTeamFolderPermanentlyDelete;
 static DBRoute *DBTEAMTeamFolderRename;
-
-+ (DBRoute *)DBTEAMAlphaGroupsCreate {
-  if (!DBTEAMAlphaGroupsCreate) {
-    DBTEAMAlphaGroupsCreate = [[DBRoute alloc] init:@"alpha/groups/create"
-                                         namespace_:@"team"
-                                         deprecated:@NO
-                                         resultType:[DBTEAMGroupFullInfo class]
-                                          errorType:[DBTEAMGroupCreateError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
-  }
-  return DBTEAMAlphaGroupsCreate;
-}
-
-+ (DBRoute *)DBTEAMAlphaGroupsGetInfo {
-  if (!DBTEAMAlphaGroupsGetInfo) {
-    DBTEAMAlphaGroupsGetInfo = [[DBRoute alloc] init:@"alpha/groups/get_info"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
-        errorType:[DBTEAMGroupsGetInfoError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        arraySerialBlock:nil
-        arrayDeserialBlock:^id(id array) {
-          return [DBArraySerializer deserialize:array
-                                      withBlock:^id(id elem) {
-                                        return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem];
-                                      }];
-        }];
-  }
-  return DBTEAMAlphaGroupsGetInfo;
-}
-
-+ (DBRoute *)DBTEAMAlphaGroupsList {
-  if (!DBTEAMAlphaGroupsList) {
-    DBTEAMAlphaGroupsList = [[DBRoute alloc] init:@"alpha/groups/list"
-                                       namespace_:@"team"
-                                       deprecated:@NO
-                                       resultType:[DBTEAMGroupsListResult class]
-                                        errorType:nil
-                                            attrs:@{
-                                              @"auth" : @"team",
-                                              @"host" : @"api",
-                                              @"style" : @"rpc"
-                                            }
-                                 arraySerialBlock:nil
-                               arrayDeserialBlock:nil];
-  }
-  return DBTEAMAlphaGroupsList;
-}
-
-+ (DBRoute *)DBTEAMAlphaGroupsListContinue {
-  if (!DBTEAMAlphaGroupsListContinue) {
-    DBTEAMAlphaGroupsListContinue = [[DBRoute alloc] init:@"alpha/groups/list/continue"
-                                               namespace_:@"team"
-                                               deprecated:@NO
-                                               resultType:[DBTEAMGroupsListResult class]
-                                                errorType:[DBTEAMGroupsListContinueError class]
-                                                    attrs:@{
-                                                      @"auth" : @"team",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
-                                         arraySerialBlock:nil
-                                       arrayDeserialBlock:nil];
-  }
-  return DBTEAMAlphaGroupsListContinue;
-}
-
-+ (DBRoute *)DBTEAMAlphaGroupsUpdate {
-  if (!DBTEAMAlphaGroupsUpdate) {
-    DBTEAMAlphaGroupsUpdate = [[DBRoute alloc] init:@"alpha/groups/update"
-                                         namespace_:@"team"
-                                         deprecated:@NO
-                                         resultType:[DBTEAMGroupFullInfo class]
-                                          errorType:[DBTEAMGroupUpdateError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
-  }
-  return DBTEAMAlphaGroupsUpdate;
-}
 
 + (DBRoute *)DBTEAMDevicesListMemberDevices {
   if (!DBTEAMDevicesListMemberDevices) {

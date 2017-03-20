@@ -14,21 +14,6 @@
 ///
 @interface DBTEAMRouteObjects : NSObject
 
-/// Accessor method for the alphaGroupsCreate route object.
-+ (DBRoute * _Nonnull)DBTEAMAlphaGroupsCreate;
-
-/// Accessor method for the alphaGroupsGetInfo route object.
-+ (DBRoute * _Nonnull)DBTEAMAlphaGroupsGetInfo;
-
-/// Accessor method for the alphaGroupsList route object.
-+ (DBRoute * _Nonnull)DBTEAMAlphaGroupsList;
-
-/// Accessor method for the alphaGroupsListContinue route object.
-+ (DBRoute * _Nonnull)DBTEAMAlphaGroupsListContinue;
-
-/// Accessor method for the alphaGroupsUpdate route object.
-+ (DBRoute * _Nonnull)DBTEAMAlphaGroupsUpdate;
-
 /// Accessor method for the devicesListMemberDevices route object.
 + (DBRoute * _Nonnull)DBTEAMDevicesListMemberDevices;
 

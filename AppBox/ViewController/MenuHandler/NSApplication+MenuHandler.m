@@ -31,12 +31,12 @@
     [self updateDropboxUsageFileButton];
     
     //get spaces usage
-    [[[DropboxClientsManager authorizedClient].usersRoutes getSpaceUsage]
-     response:^(DBUSERSSpaceUsage * _Nullable spaceUsage, DBNilObject * _Nullable nilObject, DBRequestError * _Nullable error) {
-         if (spaceUsage){
+    [[[DBClientsManager authorizedClient].usersRoutes getSpaceUsage]
+     setResponseBlock:^(DBUSERSSpaceUsage * _Nullable response, DBNilObject * _Nullable routeError, DBRequestError * _Nullable error) {
+         if (response){
              @try {
-                 NSNumber *usage = @(spaceUsage.used.longValue / abBytesToMB);
-                 NSNumber *allocated = @(spaceUsage.allocation.individual.allocated.longValue / abBytesToMB);
+                 NSNumber *usage = @(response.used.longValue / abBytesToMB);
+                 NSNumber *allocated = @(response.allocation.individual.allocated.longValue / abBytesToMB);
                  
                  //save space usage in user default
                  [UserData setDropboxUsedSpace:usage];

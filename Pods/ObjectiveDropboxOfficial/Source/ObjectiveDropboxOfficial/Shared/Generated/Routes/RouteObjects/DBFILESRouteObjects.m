@@ -79,7 +79,6 @@
 #import "DBPROPERTIESPropertyTemplateError.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
-#import "DBTransportClient.h"
 
 @implementation DBFILESRouteObjects
 

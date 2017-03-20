@@ -20,7 +20,7 @@ Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/la
 * [Configure your project](#configure-your-project)
   * [Application `.plist` file](#application-plist-file)
   * [Handling the authorization flow](#handling-the-authorization-flow)
-    * [Initialize a `DropboxClient` instance](#initialize-a-dropboxclient-instance)
+    * [Initialize a `DBUserClient` instance](#initialize-a-dbuserclient-instance)
     * [Begin the authorization flow](#begin-the-authorization-flow)
     * [Handle redirect back into SDK](#handle-redirect-back-into-sdk)
 * [Try some API requests](#try-some-api-requests)
@@ -30,6 +30,7 @@ Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/la
     * [RPC-style request](#rpc-style-request)
     * [Upload-style request](#upload-style-request)
     * [Download-style request](#download-style-request)
+    * [Note about background sessions](#note-about-background-sessions)
   * [Handling responses and errors](#handling-responses-and-errors)
     * [Route-specific errors](#route-specific-errors)
     * [Generic network request errors](#generic-network-request-errors)
@@ -37,10 +38,12 @@ Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/la
   * [Customizing network calls](#customizing-network-calls)
     * [Configure network client](#configure-network-client)
     * [Specify API call response queue](#specify-api-call-response-queue)
-  * [`DropboxClientsManager` class](#dropboxclientsmanager-class)
+  * [`DBClientsManager` class](#dbclientsmanager-class)
     * [Single Dropbox user case](#single-dropbox-user-case)
     * [Multiple Dropbox user case](#multiple-dropbox-user-case)
 * [Examples](#examples)
+* [Migrating from API v1](#migrating-from-api-v1)
+    * [Migrating OAuth tokens from earlier SDKs](#migrating-oauth-tokens-from-earlier-sdks)
 * [Documentation](#documentation)
 * [Stone](#stone)
 * [Modifications](#modifications)
@@ -56,13 +59,21 @@ Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/la
 
 ---
 
-### Xcode 8 and iOS 10 bug
+### Xcode 8 and iOS 10 bugs
 
-> The Dropbox Objective-C SDK currently supports Xcode 8 and iOS 10. However, there appears to be a bug with the Keychain in the iOS simulator environment where data is not persistently saved to the Keychain.
->
-> As a temporary workaround, in the Project Navigator, select **your project** > **Capabilities** > **Keychain Sharing** > **ON**.
->
-> You can read more about the bug [here](https://forums.developer.apple.com/message/170381#170381).
+#### Keychain bug
+The Dropbox Objective-C SDK currently supports Xcode 8 and iOS 10. However, there appears to be a bug with the Keychain in the iOS simulator environment where data is not persistently saved to the Keychain.
+
+As a temporary workaround, in the Project Navigator, select **your project** > **Capabilities** > **Keychain Sharing** > **ON**.
+
+You can read more about the bug [here](https://forums.developer.apple.com/message/170381#170381).
+
+#### Longpoll session timeout bug
+Currently, there is a bug with iOS 10 where our longpoll requests timeout after ~6 minutes (instead of our max supported timeframe of 8 minutes (480 seconds)).
+
+For this reason, we recommend that all longpoll calls be made using [`-listFolderLongpoll:timeout:`](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/latest/Classes/DBFILESRoutes.html#/c:objc(cs)DBFILESRoutes(im)listFolderLongpoll:timeout:), with a specified `timeout` values of <= 300 seconds (5 minutes), until this issue is resolved by Apple.
+
+Read more about the issue [here](https://forums.developer.apple.com/thread/67606).
 
 ## Get started
 
@@ -95,22 +106,29 @@ $ gem install cocoapods
 Then navigate to the directory that contains your project and create a new file called `Podfile`. You can do this either with `pod init`, or open an existing Podfile, and then add `pod 'ObjectiveDropboxOfficial'` to the main loop. Your Podfile should look something like this:
 
 ```ruby
+platform :ios, '8.0'
+use_frameworks!
+
 target '<YOUR_PROJECT_NAME>' do
     pod 'ObjectiveDropboxOfficial'
 end
 ```
 
-Then, run the following command to install the dependency:
+Then, after ensuring that your project window in Xcode is **closed**, run the following command to install the dependency:
 
 ```bash
 $ pod install
 ```
 
-Once your project is integrated with the Dropbox Objective-C SDK, you can pull SDK updates using the following command:
+Once this command completes, open the newly create `.xcworkspace` file. Your project should now be successfully integrated with the the SDK.
+
+From here, you can pull SDK updates using the following command:
 
 ```bash
 $ pod update
 ```
+
+If Xcode errors with a message about `Undefined symbols for architecture...`, try adding `$(inherited)` to your project's **Other Linker Flags** in **Build Settings**, and ensure that the `-ObjC` flag is included in **Other Linker Flags**.
 
 ---
 
@@ -127,7 +145,7 @@ brew install carthage
 
 ```
 # ObjectiveDropboxOfficial
-github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 2.0.6
+github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.0.4
 ```
 
 Then, run the following command to checkout and build the Dropbox Objective-C SDK repository:
@@ -248,7 +266,7 @@ To facilitate the above authorization flows, you should take the following steps
 
 ---
 
-#### Initialize a `DropboxClient` instance
+#### Initialize a `DBUserClient` instance
 
 ##### iOS
 
@@ -256,8 +274,8 @@ To facilitate the above authorization flows, you should take the following steps
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [DropboxClientsManager setupWithAppKey:@"<APP_KEY>"];
-    return YES;
+  [DBClientsManager setupWithAppKey:@"<APP_KEY>"];
+  return YES;
 }
 
 ```
@@ -268,7 +286,7 @@ To facilitate the above authorization flows, you should take the following steps
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [DropboxClientsManager setupWithAppKeyDesktop:@"<APP_KEY>"];
+  [DBClientsManager setupWithAppKeyDesktop:@"<APP_KEY>"];
 }
 ```
 
@@ -285,12 +303,12 @@ view controller. If you wish to authenticate via the in-app webview, then set `b
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 - (void)myButtonInControllerPressed {
-    [DropboxClientsManager authorizeFromController:[UIApplication sharedApplication]
-                                        controller:self
-                                           openURL:^(NSURL *url) {
-                                                [[UIApplication sharedApplication] openURL:url];
-                                           }
-                                        browserAuth:YES];
+  [DBClientsManager authorizeFromController:[UIApplication sharedApplication]
+                                 controller:self
+                                    openURL:^(NSURL *url) {
+                                      [[UIApplication sharedApplication] openURL:url];
+                                    }
+                                browserAuth:YES];
 }
 
 ```
@@ -301,7 +319,7 @@ view controller. If you wish to authenticate via the in-app webview, then set `b
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 - (void)myButtonInControllerPressed {
-    [DropboxClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace]
+  [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace]
                                         controller:self
                                            openURL:^(NSURL *url){ [[NSWorkspace sharedWorkspace] openURL:url]; }
                                        browserAuth:YES];
@@ -326,31 +344,32 @@ To handle the redirection back into the Objective-C SDK once the authentication 
 ```objective-c
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    DBOAuthResult *authResult = [DropboxClientsManager handleRedirectURL:url];
-    if (authResult != nil) {
-        if ([authResult isSuccess]) {
-            NSLog(@"Success! User is logged into Dropbox.");
-        } else if ([authResult isCancel]) {
-            NSLog(@"Authorization flow was manually canceled by user!");
-        } else if ([authResult isError]) {
-            NSLog(@"Error: %@", authResult);
-        }
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+  if (authResult != nil) {
+    if ([authResult isSuccess]) {
+      NSLog(@"Success! User is logged into Dropbox.");
+    } else if ([authResult isCancel]) {
+      NSLog(@"Authorization flow was manually canceled by user!");
+    } else if ([authResult isError]) {
+      NSLog(@"Error: %@", authResult);
     }
-    return NO;
+  }
+  return NO;
 }
 ```
 
-For iOS targets >= 9, use:
+For iOS targets < 9, use:
 
 ```objective-c
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    DBOAuthResult *authResult = [DropboxClientsManager handleRedirectURL:url];
-    ....
-    ....
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+  DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+    ...
+    ...
+    ...
 }
 ```
 
@@ -369,17 +388,17 @@ For iOS targets >= 9, use:
 
 // custom handler
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-    NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
-    DBOAuthResult *authResult = [DropboxClientsManager handleRedirectURL:url];
-    if (authResult != nil) {
-        if ([authResult isSuccess]) {
-            NSLog(@"Success! User is logged into Dropbox.");
-        } else if ([authResult isCancel]) {
-            NSLog(@"Authorization flow was manually canceled by user!");
-        } else if ([authResult isError]) {
-            NSLog(@"Error: %@", authResult);
-        }
+  NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
+  DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+  if (authResult != nil) {
+    if ([authResult isSuccess]) {
+      NSLog(@"Success! User is logged into Dropbox.");
+    } else if ([authResult isCancel]) {
+      NSLog(@"Authorization flow was manually canceled by user!");
+    } else if ([authResult isError]) {
+      NSLog(@"Error: %@", authResult);
     }
+  }
 }
 ```
 
@@ -403,13 +422,13 @@ Once you have obtained an OAuth 2.0 token, you can try some API v2 calls using t
 
 ### Dropbox client instance
 
-Start by creating a reference to the `DropboxClient` or `DropboxTeamClient` instance that you will use to make your API calls.
+Start by creating a reference to the `DBUserClient` or `DBTeamClient` instance that you will use to make your API calls.
 
 ```objective-c
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 // Reference after programmatic auth flow
-DropboxClient *client = [DropboxClientsManager authorizedClient];
+DBUserClient *client = [DBClientsManager authorizedClient];
 ```
 
 or
@@ -418,7 +437,7 @@ or
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 // Initialize with manually retrieved auth token
-DropboxClient *client = [[DropboxClient alloc] initWithAccessToken:@"<MY_ACCESS_TOKEN>"];
+DBUserClient *client = [[DBUserClient alloc] initWithAccessToken:@"<MY_ACCESS_TOKEN>"];
 ```
 
 ---
@@ -443,14 +462,80 @@ Response handlers are required for all endpoints. Progress handlers, on the othe
 
 #### RPC-style request
 ```objective-c
-[[client.filesRoutes createFolder:@"/test/path"]
-    response:^(DBFILESFolderMetadata *result, DBFILESCreateFolderError *routeError, DBRequestError *error) {
-        if (result) {
-            NSLog(@"%@\n", result);
-        } else {
-            NSLog(@"%@\n%@\n", routeError, error);
-        }
+[[client.filesRoutes createFolder:@"/test/path/in/Dropbox/account"]
+    setResponseBlock:^(DBFILESFolderMetadata *result, DBFILESCreateFolderError *routeError, DBRequestError *error) {
+      if (result) {
+        NSLog(@"%@\n", result);
+      } else {
+        NSLog(@"%@\n%@\n", routeError, error);
+      }
     }];
+```
+
+Here's an example for listing a folder's contents. In the response handler, we repeatedly call `listFolderContinue:` (for large folders) until we've listed the entire folder:
+
+```objective-c
+[[client.filesRoutes listFolder:@"/test/path/in/Dropbox/account"]
+    setResponseBlock:^(DBFILESListFolderResult *response, DBFILESListFolderError *routeError, DBRequestError *error) {
+      if (response) {
+        NSArray<DBFILESMetadata *> *entries = response.entries;
+        NSString *cursor = response.cursor;
+        BOOL hasMore = [response.hasMore boolValue];
+
+        [self printEntries:entries];
+
+        if (hasMore) {
+          NSLog(@"Folder is large enough where we need to call `listFolderContinue:`");
+
+          [self listFolderContinueWithClient:client cursor:cursor];
+        } else {
+          NSLog(@"List folder complete.");
+        }
+      } else {
+        NSLog(@"%@\n%@\n", routeError, error);
+      }
+    }];
+
+...
+...
+...
+
+- (void)listFolderContinueWithClient:(DBUserClient *)client cursor:(NSString *)cursor {
+  [[client.filesRoutes listFolderContinue:cursor]
+      setResponseBlock:^(DBFILESListFolderResult *response, DBFILESListFolderContinueError *routeError,
+                         DBRequestError *error) {
+        if (response) {
+          NSArray<DBFILESMetadata *> *entries = response.entries;
+          NSString *cursor = response.cursor;
+          BOOL hasMore = [response.hasMore boolValue];
+
+          [self printEntries:entries];
+
+          if (hasMore) {
+            [self listFolderContinueWithClient:client cursor:cursor];
+          } else {
+            NSLog(@"List folder complete.");
+          }
+        } else {
+          NSLog(@"%@\n%@\n", routeError, error);
+        }
+      }];
+}
+
+- (void)printEntries:(NSArray<DBFILESMetadata *> *)entries {
+  for (DBFILESMetadata *entry in entries) {
+    if ([entry isKindOfClass:[DBFILESFileMetadata class]]) {
+      DBFILESFileMetadata *fileMetadata = (DBFILESFileMetadata *)entry;
+      NSLog(@"File data: %@\n", fileMetadata);
+    } else if ([entry isKindOfClass:[DBFILESFolderMetadata class]]) {
+      DBFILESFolderMetadata *folderMetadata = (DBFILESFolderMetadata *)entry;
+      NSLog(@"Folder data: %@\n", folderMetadata);
+    } else if ([entry isKindOfClass:[DBFILESDeletedMetadata class]]) {
+      DBFILESDeletedMetadata *deletedMetadata = (DBFILESDeletedMetadata *)entry;
+      NSLog(@"Deleted data: %@\n", deletedMetadata);
+    }
+  }
+}
 ```
 
 ---
@@ -458,79 +543,127 @@ Response handlers are required for all endpoints. Progress handlers, on the othe
 #### Upload-style request
 ```objective-c
 NSData *fileData = [@"file data example" dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
+
 [[[client.filesRoutes uploadData:@"/test/path/in/Dropbox/account" inputData:fileData]
-    response:^(DBFILESFileMetadata *result, DBFILESUploadError *routeError, DBRequestError *error) {
-        if (result) {
-            NSLog(@"%@\n", result);
-        } else {
-            NSLog(@"%@\n%@\n", routeError, error);
-        }
+    setResponseBlock:^(DBFILESFileMetadata *result, DBFILESUploadError *routeError, DBRequestError *error) {
+      if (result) {
+        NSLog(@"%@\n", result);
+      } else {
+        NSLog(@"%@\n%@\n", routeError, error);
+      }
     }] progress:^(int64_t bytesUploaded, int64_t totalBytesUploaded, int64_t totalBytesExpectedToUploaded) {
-        NSLog(@"\n%lld\n%lld\n%lld\n", bytesUploaded, totalBytesUploaded, totalBytesExpectedToUploaded);
+  NSLog(@"\n%lld\n%lld\n%lld\n", bytesUploaded, totalBytesUploaded, totalBytesExpectedToUploaded);
+}];
+```
+
+Here's an example of an advanced upload case for "batch" uploading a large number of files (NOTE: the `batchUploadFiles:` route method that is used below automatically chunk-uploads large files, something other upload methods in the SDK do **not** do):
+
+```objective-c
+NSMutableDictionary<NSURL *, DBFILESCommitInfo *> *uploadFilesUrlsToCommitInfo = [NSMutableDictionary new];
+DBFILESCommitInfo *commitInfo = [[DBFILESCommitInfo alloc] initWithPath:@"/output/path/in/Dropbox"];
+[uploadFilesUrlsToCommitInfo setObject:commitInfo forKey:[NSURL URLWithString:@"/local/path/to/my/file"]];
+
+[client.filesRoutes batchUploadFiles:uploadFilesUrlsToCommitInfo
+    queue:nil
+    progressBlock:^(int64_t uploaded, int64_t uploadedTotal, int64_t expectedToUploadTotal) {
+      NSLog(@"Uploaded: %lld  UploadedTotal: %lld  ExpectedToUploadTotal: %lld", uploaded, uploadedTotal,
+            expectedToUploadTotal);
+    }
+    responseBlock:^(NSDictionary<NSURL *, DBFILESUploadSessionFinishBatchResultEntry *> *fileUrlsToBatchResultEntries,
+                    DBASYNCPollError *finishBatchRouteError, DBRequestError *finishBatchRequestError,
+                    NSDictionary<NSURL *, DBRequestError *> *fileUrlsToRequestErrors) {
+      if (fileUrlsToBatchResultEntries) {
+        NSLog(@"Call to `/upload_session/finish_batch/check` succeeded");
+        for (NSURL *clientSideFileUrl in fileUrlsToBatchResultEntries) {
+          DBFILESUploadSessionFinishBatchResultEntry *resultEntry = fileUrlsToBatchResultEntries[clientSideFileUrl];
+          if ([resultEntry isSuccess]) {
+            NSString *dropboxFilePath = resultEntry.success.pathDisplay;
+            NSLog(@"File successfully uploaded from %@ on local machine to %@ in Dropbox.",
+                  [clientSideFileUrl absoluteString], dropboxFilePath);
+          } else if ([resultEntry isFailure]) {
+            // This particular file was not uploaded successfully, although the other
+            // files may have been uploaded successfully. Perhaps implement some retry
+            // logic here based on `uploadNetworkError` or `uploadSessionFinishError`
+            DBRequestError *uploadNetworkError = fileUrlsToRequestErrors[clientSideFileUrl];
+            DBFILESUploadSessionFinishError *uploadSessionFinishError = resultEntry.failure;
+
+            // implement appropriate retry logic
+          }
+        }
+      } else if (finishBatchRouteError) {
+        NSLog(@"Either bug in SDK code, or transient error on Dropbox server");
+        NSLog(@"%@", finishBatchRouteError);
+      } else if (finishBatchRequestError) {
+        NSLog(@"Request error from calling `/upload_session/finish_batch/check`");
+        NSLog(@"%@", finishBatchRequestError);
+      } else if (else if ([fileUrlsToRequestErrors count] > 0) {) {
+        NSLog(@"Other additional errors (e.g. file doesn't exist client-side, etc.).");
+        NSLog(@"%@", fileUrlsToRequestErrors);
+      }
     }];
 
-// ADVANCED UPLOAD USE CASES
-// To batch upload files or to chunk upload large files, use the custom `batchUploadFiles` route
-
-NSMutableDictionary<NSURL *, DBFILESCommitInfo *> *uploadFilesUrlsToCommitInfo = [NSMutableDictionary new];
-DBFILESCommitInfo *commitInfo =
-    [[DBFILESCommitInfo alloc] initWithPath:@"/output/path/in/Dropbox"];
-[uploadFilesUrlsToCommitInfo setObject:commitInfo forKey:@"/local/path/to/my/file"];
-
-[_tester.files batchUploadFiles:uploadFilesUrlsToCommitInfo
-                            queue:nil
-                    progressBlock:^(int64_t uploaded, int64_t total, int64_t expectedTotal) {
-    NSLog(@"Uploaded: %lld  UploadedTotal: %lld  ExpectedToUploadTotal: %lld", uploaded, total, expectedTotal);
-} responseBlock:^(DBFILESUploadSessionFinishBatchJobStatus *result, DBASYNCPollError *routeError, DBRequestError *error) {
-    if (result) {
-      NSLog(@"%@\n", result);
-    } else {
-      NSLog(@"%@  %@\n", routeError, error);
-    }
-}];
-
-// note: with this method, response and progress handlers are passed directly into the route as arguments
+// note: with this method, response and progress handlers are passed directly into the route as arguments,
+// and not via the `setResponseBlock` or `setProgressBlock` methods.
 ```
 
 ---
 
 #### Download-style request
+
+Here's an example for downloading to a file (`NSURL`):
+
 ```objective-c
-// Download to NSURL
 NSFileManager *fileManager = [NSFileManager defaultManager];
 NSURL *outputDirectory = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
 NSURL *outputUrl = [outputDirectory URLByAppendingPathComponent:@"test_file_output.txt"];
+
 [[[client.filesRoutes downloadUrl:@"/test/path/in/Dropbox/account" overwrite:YES destination:outputUrl]
-    response:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBRequestError *error, NSURL *destination) {
-        if (result) {
-            NSLog(@"%@\n", result);
-            NSData *data = [[NSFileManager defaultManager] contentsAtPath:[destination path]];
-            NSString *dataStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"%@\n", dataStr);
-        } else {
-            NSLog(@"%@\n%@\n", routeError, error);
-        }
+    setResponseBlock:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBRequestError *error,
+                       NSURL *destination) {
+      if (result) {
+        NSLog(@"%@\n", result);
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:[destination path]];
+        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@\n", dataStr);
+      } else {
+        NSLog(@"%@\n%@\n", routeError, error);
+      }
     }] progress:^(int64_t bytesDownloaded, int64_t totalBytesDownloaded, int64_t totalBytesExpectedToDownload) {
-        NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
-    }];
+  NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
+}];
+```
 
+Here's an example for downloading straight to memory (`NSData`):
 
-// Download to NSData
-[[[client.filesRoutes downloadData:@"/test/path"]
-    response:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBRequestError *error, NSData *fileContents) {
-        if (result) {
-            NSLog(@"%@\n", result);
-            NSString *dataStr = [[NSString alloc]initWithData:fileContents encoding:NSUTF8StringEncoding];
-            NSLog(@"%@\n", dataStr);
-        } else {
-            NSLog(@"%@\n%@\n", routeError, error);
-        }
+```objective-c
+[[[client.filesRoutes downloadData:@"/test/path/in/Dropbox/account"]
+    setResponseBlock:^(DBFILESFileMetadata *result, DBFILESDownloadError *routeError, DBRequestError *error,
+                       NSData *fileContents) {
+      if (result) {
+        NSLog(@"%@\n", result);
+        NSString *dataStr = [[NSString alloc] initWithData:fileContents encoding:NSUTF8StringEncoding];
+        NSLog(@"%@\n", dataStr);
+      } else {
+        NSLog(@"%@\n%@\n", routeError, error);
+      }
     }] progress:^(int64_t bytesDownloaded, int64_t totalBytesDownloaded, int64_t totalBytesExpectedToDownload) {
-        NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
-    }];
+  NSLog(@"%lld\n%lld\n%lld\n", bytesDownloaded, totalBytesDownloaded, totalBytesExpectedToDownload);
+}];
 ```
 
 ---
+
+#### Note about background sessions
+
+Currently, the SDK uses a background `NSURLSession` to perform all download tasks and some upload tasks (including upload from a file, but not from memory or from a stream). Background sessions use a separate process to handle all data transfers. This is conveneient because when your app enters the background, the download / upload will continue.
+
+However, the timeout periods for a background `NSURLSession` are virtually unlimited, so if you lose your network connection, the error handler will never be executed. Instead, the process will wait for a restored connection, and then resume from there.
+
+If you're looking for more responsive error feedback in the event of a lost connection, you will want to force all requests onto a foreground `NSURLSession`. See the example in the [network configuration](#configure-network-client) section of the README for how to do this.
+
+To read more, please consult Apple's [documentation](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html).
+
+**NOTE:** You should test all background session behavior on **an actual test device** and **not** the Xcode simulator, which has a lot of buggy behavior when it comes to handling background session behavior.
 
 ### Handling responses and errors
 
@@ -554,27 +687,27 @@ If at run time you attempt to access a union instance field that is not associat
 
 #### Route-specific errors
 ```objective-c
-[[client.filesRoutes delete_:@"/test/path"]
-    response:^(DBFILESMetadata *result, DBFILESDeleteError *routeError, DBRequestError *error) {
-        if (result) {
-            NSLog(@"%@\n", result);
-        } else {
-            // Error is with the route specifically (status code 409)
-            if (routeError) {
-                if ([routeError isPathLookup]) {
-                    // Can safely access this field
-                    DBFILESLookupError *pathLookup = routeError.pathLookup;
-                    NSLog(@"%@\n", pathLookup);
-                } else if ([routeError isPathWrite]) {
-                    DBFILESWriteError *pathWrite = routeError.pathWrite;
-                    NSLog(@"%@\n", pathWrite);
+[[client.filesRoutes delete_:@"/test/path/in/Dropbox/account"]
+    setResponseBlock:^(DBFILESMetadata *result, DBFILESDeleteError *routeError, DBRequestError *error) {
+      if (result) {
+        NSLog(@"%@\n", result);
+      } else {
+        // Error is with the route specifically (status code 409)
+        if (routeError) {
+          if ([routeError isPathLookup]) {
+            // Can safely access this field
+            DBFILESLookupError *pathLookup = routeError.pathLookup;
+            NSLog(@"%@\n", pathLookup);
+          } else if ([routeError isPathWrite]) {
+            DBFILESWriteError *pathWrite = routeError.pathWrite;
+            NSLog(@"%@\n", pathWrite);
 
-                    // This would cause a runtime error
-                    // DBFILESLookupError *pathLookup = routeError.pathLookup;
-                }
-            }
-            NSLog(@"%@\n%@\n", routeError, error);
+            // This would cause a runtime error
+            // DBFILESLookupError *pathLookup = routeError.pathLookup;
+          }
         }
+        NSLog(@"%@\n%@\n", routeError, error);
+      }
     }];
 ```
 
@@ -588,40 +721,40 @@ The `DBRequestError` type is a special union type which is similar to the standa
 As with accessing associated values in regular unions, the `as<TAG_STATE>` should only be called after the corresponding `is<TAG_STATE>` method returns true. See below:
 
 ```objective-c
-[[client.filesRoutes delete_:@"/test/path"]
-    response:^(DBFILESMetadata *result, DBFILESDeleteError *routeError, DBRequestError *error) {
-        if (result) {
-            NSLog(@"%@\n", result);
-        } else {
-            if (routeError) {
-                // see handling above
-            }
-            // Error not specific to the route (status codes 500, 400, 401, 403, 404, 429)
-            else {
-                if ([error isInternalServerError]) {
-                    DBRequestInternalServerError *internalServerError = [error asInternalServerError];
-                    NSLog(@"%@\n", internalServerError);
-                } else if ([error isBadInputError]) {
-                    DBRequestBadInputError *badInputError = [error asBadInputError];
-                    NSLog(@"%@\n", badInputError);
-                } else if ([error isAuthError]) {
-                    DBRequestAuthError *authError = [error asAuthError];
-                    NSLog(@"%@\n", authError);
-                } else if ([error isAccessError]) {
-                    DBRequestAccessError *accessError = [error asAccessError];
-                    NSLog(@"%@\n", accessError);
-                } else if ([error isRateLimitError]) {
-                    DBRequestRateLimitError *rateLimitError = [error asRateLimitError];
-                    NSLog(@"%@\n", rateLimitError);
-                } else if ([error isHttpError]) {
-                    DBRequestHttpError *genericHttpError = [error asHttpError];
-                    NSLog(@"%@\n", genericHttpError);
-                } else if ([error isClientError]) {
-                    DBRequestClientError *genericLocalError = [error asClientError];
-                    NSLog(@"%@\n", genericLocalError);
-                }
-            }
+[[client.filesRoutes delete_:@"/test/path/in/Dropbox/account"]
+    setResponseBlock:^(DBFILESMetadata *result, DBFILESDeleteError *routeError, DBRequestError *error) {
+      if (result) {
+        NSLog(@"%@\n", result);
+      } else {
+        if (routeError) {
+          // see handling above
         }
+        // Error not specific to the route (status codes 500, 400, 401, 403, 404, 429)
+        else {
+          if ([error isInternalServerError]) {
+            DBRequestInternalServerError *internalServerError = [error asInternalServerError];
+            NSLog(@"%@\n", internalServerError);
+          } else if ([error isBadInputError]) {
+            DBRequestBadInputError *badInputError = [error asBadInputError];
+            NSLog(@"%@\n", badInputError);
+          } else if ([error isAuthError]) {
+            DBRequestAuthError *authError = [error asAuthError];
+            NSLog(@"%@\n", authError);
+          } else if ([error isAccessError]) {
+            DBRequestAccessError *accessError = [error asAccessError];
+            NSLog(@"%@\n", accessError);
+          } else if ([error isRateLimitError]) {
+            DBRequestRateLimitError *rateLimitError = [error asRateLimitError];
+            NSLog(@"%@\n", rateLimitError);
+          } else if ([error isHttpError]) {
+            DBRequestHttpError *genericHttpError = [error asHttpError];
+            NSLog(@"%@\n", genericHttpError);
+          } else if ([error isClientError]) {
+            DBRequestClientError *genericLocalError = [error asClientError];
+            NSLog(@"%@\n", genericLocalError);
+          }
+        }
+      }
     }];
 ```
 
@@ -638,26 +771,26 @@ For example, the [/delete](https://www.dropbox.com/developers/documentation/http
 To determine at runtime which subtype the `Metadata` type exists as, perform an `isKindOfClass` check for each possible class, and then cast the result accordingly. See below:
 
 ```objective-c
-[[client.filesRoutes delete_:@"/test/path"]
-    response:^(DBFILESMetadata *result, DBFILESDeleteError *routeError, DBRequestError *error) {
-        if (result) {
-            if ([result isKindOfClass:[DBFILESFileMetadata class]]) {
-                DBFILESFileMetadata *fileMetadata = (DBFILESFileMetadata *)result;
-                NSLog(@"%@\n", fileMetadata);
-            } else if ([result isKindOfClass:[DBFILESFolderMetadata class]]) {
-                DBFILESFolderMetadata *folderMetadata = (DBFILESFolderMetadata *)result;
-                NSLog(@"%@\n", folderMetadata);
-            } else if ([result isKindOfClass:[DBFILESDeletedMetadata class]]) {
-                DBFILESDeletedMetadata *deletedMetadata = (DBFILESDeletedMetadata *)result;
-                NSLog(@"%@\n", deletedMetadata);
-            }
-        } else {
-            if (routeError) {
-                // see handling above
-            } else {
-                // see handling above
-            }
+[[client.filesRoutes delete_:@"/test/path/in/Dropbox/account"]
+    setResponseBlock:^(DBFILESMetadata *result, DBFILESDeleteError *routeError, DBRequestError *error) {
+      if (result) {
+        if ([result isKindOfClass:[DBFILESFileMetadata class]]) {
+          DBFILESFileMetadata *fileMetadata = (DBFILESFileMetadata *)result;
+          NSLog(@"File data: %@\n", fileMetadata);
+        } else if ([result isKindOfClass:[DBFILESFolderMetadata class]]) {
+          DBFILESFolderMetadata *folderMetadata = (DBFILESFolderMetadata *)result;
+          NSLog(@"Folder data: %@\n", folderMetadata);
+        } else if ([result isKindOfClass:[DBFILESDeletedMetadata class]]) {
+          DBFILESDeletedMetadata *deletedMetadata = (DBFILESDeletedMetadata *)result;
+          NSLog(@"Deleted data: %@\n", deletedMetadata);
         }
+      } else {
+        if (routeError) {
+          // see handling above
+        } else {
+          // see handling above
+        }
+      }
     }];
 ```
 
@@ -675,89 +808,79 @@ In this way, datatypes with subtypes are a hybrid of structs and unions. Only a 
 
 #### Configure network client
 
-It is possible to configure the networking client used by the SDK to make API requests. You can supply custom fields like a custom user agent or custom delegate queue to manage response handler code. See below:
+It is possible to configure the networking client used by the SDK to make API requests. You can supply custom fields like a custom user agent or custom delegate queue to manage response handler code.
+
+For instance, you can force the SDK to make all network requests on a foreground session:
 
 ##### iOS
 ```objective-c
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
-DBTransportClient *transportClient = [[DBTransportClient alloc] initWithAccessToken:nil
-                                                                         selectUser:nil
-                                                                          baseHosts:nil
-                                                                          userAgent:@"CustomUserAgent"
-                                                                backgroundSessionId:@"com.custom.background.session.id"
-                                                                             appKey:(NSString *)@"<APP_KEY>"
-                                                                          appSecret:(NSString *)@"<APP_SECRET>"
-                                                                      delegateQueue:[NSOperationQueue new]];
-[DropboxClientsManager setupWithAppKey:@"<APP_KEY>" transportClient:transportClient];
+DBTransportDefaultConfig *transportConfig =
+    [[DBTransportDefaultConfig alloc] initWithAppKey:@"<APP_KEY>" forceForegroundSession:YES];
+[DBClientsManager setupWithTransportConfig:transportConfig];
 ```
 
 ##### macOS
 ```objective-c
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
-DBTransportClient *transportClient = [[DBTransportClient alloc] initWithAccessToken:nil
-                                                                         selectUser:nil
-                                                                          baseHosts:nil
-                                                                          userAgent:@"CustomUserAgent"
-                                                                backgroundSessionId:@"com.custom.background.session.id"
-                                                                             appKey:(NSString *)@"<APP_KEY>"
-                                                                          appSecret:(NSString *)@"<APP_SECRET>"
-                                                                      delegateQueue:[NSOperationQueue new]];
-[DropboxClientsManager setupWithAppKeyDesktop:@"<APP_KEY>" transportClient:transportClient];
+DBTransportDefaultConfig *transportConfig =
+    [[DBTransportDefaultConfig alloc] initWithAppKey:@"<APP_KEY>" forceForegroundSession:YES];
+[DBClientsManager setupWithTransportConfigDesktop:transportConfig];
 ```
+
+See the `DBTransportDefaultConfig` class for all of the different customizable networking parameters.
 
 #### Specify API call response queue
 
-By default, response/progress handler code runs on the main thread. You can set a custom response queue for each API call that you make via the `response` method, in the event want your response/progress handler code to run on a different thread:
+By default, response/progress handler code runs on the main thread. You can set a custom response queue for each API call that you make via the `setResponseBlock` method, in the event want your response/progress handler code to run on a different thread:
 
 ```objective-c
 [[client.filesRoutes listFolder:@""]
-    response:[NSOperationQueue new] response:^(DBFILESListFolderResult *result, DBFILESListFolderError *routeError, DBRequestError *error) {
-        if (result) {
-          NSLog(@"%@", [NSThread currentThread]);  // Output: <NSThread: 0x600000261480>{number = 5, name = (null)}
-          NSLog(@"%@", [NSThread mainThread]);     // Output: <NSThread: 0x618000062bc0>{number = 1, name = (null)}
-          NSLog(@"%@\n", result);
-        }
-    }];
+    setResponseBlock:^(DBFILESListFolderResult *result, DBFILESListFolderError *routeError, DBRequestError *error) {
+      if (result) {
+        NSLog(@"%@", [NSThread currentThread]); // Output: <NSThread: 0x600000261480>{number = 5, name = (null)}
+        NSLog(@"%@", [NSThread mainThread]);    // Output: <NSThread: 0x618000062bc0>{number = 1, name = (null)}
+        NSLog(@"%@\n", result);
+      }
+    } queue:[NSOperationQueue new]]
 ```
 
 ---
 
-### `DropboxClientsManager` class
+### `DBClientsManager` class
 
-The Objective-C SDK includes a convenience class, `DropboxClientsManager`, for integrating the different functions of the SDK into one class.
+The Objective-C SDK includes a convenience class, `DBClientsManager`, for integrating the different functions of the SDK into one class.
 
 #### Single Dropbox user case
 
-For most apps, it is reasonable to assume that only one Dropbox account (and access token) needs to be managed at a time. In this case, the `DropboxClientsManager` flow looks like this: 
+For most apps, it is reasonable to assume that only one Dropbox account (and access token) needs to be managed at a time. In this case, the `DBClientsManager` flow looks like this: 
 
 * call `setupWithAppKey`/`setupWithAppKeyDesktop` (or `setupWithTeamAppKey`/`setupWithTeamAppKeyDesktop`) in integrating app's app delegate
-* client manager determines whether any access tokens are stored -- if any exist, one token is arbitrarily chosen to use
-* if no token is found, call `authorizeFromController`/`authorizeFromControllerDesktop` to initiate the OAuth flow
-* if auth flow is initiated, call `handleRedirectURL` (or `handleRedirectURLTeam`) in integrating app's app delegate to handle auth redirect back into the app and store the retrieved access token (using a `DBOAuthManager` instance)
-* client manager instantiates a `DBTransportClient` (if not supplied by the user)
-* client manager instantiates a `DropboxClient` (or `DropboxTeamClient`) with the transport client as a field
+* `DBClientsManager` class determines whether any access tokens are stored -- if any exist, one token is arbitrarily chosen to use
+* if no token is found, client of the SDK should call `authorizeFromController`/`authorizeFromControllerDesktop` to initiate the OAuth flow
+* if auth flow is initiated, client of the SDK should call `handleRedirectURL` (or `handleRedirectURLTeam`) in integrating app's app delegate to handle auth redirect back into the app and store the retrieved access token
+* `DBClientsManager` class sets up a `DBUserClient` (or `DBTeamClient`) with the particular network configuration as defined by the `DBTransportDefaultConfig` instance passed in (or a standard configuration, if no config instance was passed when the `setupWith...` method was called)
 
-The `DropboxClient` (or `DropboxTeamClient`) is then used to make all of the desired API calls.
+The `DBUserClient` (or `DBTeamClient`) is then used to make all of the desired API calls.
 
-* call `unlinkClients` to logout Dropbox user and clear all access tokens
+* call `unlinkAndResetClients` to logout Dropbox user and clear all access tokens
 
 #### Multiple Dropbox user case
 
-For some apps, it is necessary to manage more than one Dropbox account (and access token) at a time. In this case, the `DropboxClientsManager` flow looks like this: 
+For some apps, it is necessary to manage more than one Dropbox account (and access token) at a time. In this case, the `DBClientsManager` flow looks like this: 
 
 * access token uids are managed by the app that is integrating with the SDK for later lookup
 * call `setupWithAppKeyMultiUser`/`setupWithAppKeyMultiUserDesktop` (or `setupWithTeamAppKeyMultiUser`/`setupWithTeamAppKeyMultiUserDesktop`) in integrating app's app delegate
 * client manager determines whether an access token is stored with the`tokenUid` as a key -- if one exists, this token is chosen to use
-* if no token is found, call `authorizeFromController`/`authorizeFromControllerDesktop` to initiate the OAuth flow
-* if auth flow is initiated, call `handleRedirectURL` (or `handleRedirectURLTeam`) in integrating app's app delegate to handle auth redirect back into the app and store the retrieved access token (using a `DBOAuthManager` instance)
+* if no token is found, client of the SDK should call `authorizeFromController`/`authorizeFromControllerDesktop` to initiate the OAuth flow
+* if auth flow is initiated, call `handleRedirectURL` (or `handleRedirectURLTeam`) in integrating app's app delegate to handle auth redirect back into the app and store the retrieved access token
 * at this point, the app that is integrating with the SDK should persistently save the `tokenUid` from the `DBAccessToken` field of the `DBOAuthResult` object returned from the `handleRedirectURL` (or `handleRedirectURLTeam`) method
 * `tokenUid` can be reused either to authorize a new user mid-way through an app's lifecycle via `reauthorizeClient` (or `reauthorizeTeamClient`) or when the app initially launches via `setupWithAppKeyMultiUser`/`setupWithAppKeyMultiUserDesktop` (or `setupWithTeamAppKeyMultiUser`/`setupWithTeamAppKeyMultiUserDesktop`)
-* client manager instantiates a `DBTransportClient` (if not supplied by the user)
-* client manager instantiates a `DropboxClient` (or `DropboxTeamClient`) with the transport client as a field
+* `DBClientsManager` class sets up a `DBUserClient` (or `DBTeamClient`) with the particular network configuration as defined by the `DBTransportDefaultConfig` instance passed in (or a standard configuration, if no config instance was passed when the `setupWith...` method was called)
 
-The `DropboxClient` (or `DropboxTeamClient`) is then used to make all of the desired API calls.
+The `DBUserClient` (or `DBTeamClient`) is then used to make all of the desired API calls.
 
 * call `resetClients` to logout Dropbox user but not clear any access tokens
 * if specific access tokens need to be removed, use the `clearStoredAccessToken` method in `DBOAuthManager`
@@ -769,6 +892,47 @@ The `DropboxClient` (or `DropboxTeamClient`) is then used to make all of the des
 Example projects that demonstrate how to integrate your app with the SDK can be found in the `Examples/` folder.
 
 * [DBRoulette](https://github.com/dropbox/dropbox-sdk-obj-c/tree/master/Examples/DBRoulette/) - Play a fun game of photo roulette with the image files in your Dropbox!
+
+---
+
+## Migrating from API v1
+
+This section contains relevant info for migrating your app from API v1 to API v2 (which should be finished by June 28, 2017, when API v1 will be retired).
+
+For a general API v1 migration guide, please see [here](https://www.dropbox.com/developers/reference/migration-guide).
+
+### Migrating OAuth tokens from earlier SDKs
+
+If your app was originally using an earlier API v1 SDK, including the [iOS Core SDK](https://www.dropbox.com/developers-v1/core/sdks/ios), the [OS X Core SDK](https://www.dropbox.com/developers-v1/core/sdks/osx), the [iOS Sync SDK](https://www.dropbox.com/developers-v1/sync/sdks/ios), or the [OS X Sync SDK](https://www.dropbox.com/developers-v1/sync/sdks/osx), then you can use the v2 SDK to perform a one-time migration of OAuth 1 tokens to OAuth 2.0 tokens, which are used by API v2. That way, when you migrate your app from the earlier SDK to the new API v2 SDK, users will not need to reauthenticate with Dropbox after you perform this update.
+
+To perform this auth token migration, in your app delegate, you should call the following method:
+
+```objective-c
+[DBClientsManager checkAndPerformV1TokenMigration:^(BOOL shouldRetry, BOOL invalidAppKeyOrSecret,
+                                                    NSArray<NSArray<NSString *> *> *unsuccessfullyMigratedTokenData) {
+  if (invalidAppKeyOrSecret) {
+    // Developers should ensure that the appropriate app key and secret are being supplied.
+    // If your app has multiple app keys / secrets, then run this migration method for
+    // each app key / secret combination, and ignore this boolean.
+  }
+
+  if (shouldRetry) {
+    // Store this BOOL somewhere to retry when network connection has returned
+  }
+
+  if ([unsuccessfullyMigratedTokenData count] != 0) {
+    NSLog(@"The following tokens were unsucessfully migrated:");
+    for (NSArray<NSString *> *tokenData in unsuccessfullyMigratedTokenData) {
+      NSLog(@"%@DropboxUserID: %@, AccessToken: %@, AccessTokenSecret: %@, StoredAppKey: %@", tokenData[0],
+            tokenData[1], tokenData[2], tokenData[3]);
+    }
+  }
+} queue:nil appKey:@"<APP_KEY>" appSecret:@"<APP_SECRET>"];
+```
+
+This method should successfully migrate all access tokens stored by the official Dropbox API SDKs from approximately 2012 until present, for both iOS and OS X. It will make one call to our OAuth 1 conversion endpoint for each OAuth 1 token that has been stored in your application's keychain by the v1 SDK. The method will execute all network requests off the main thread.
+
+Here, token migration is treated as an atomic operation. Either all tokens that are possible to migrate are migrated at once, or none of them are. If all token conversion requests complete successfully, then the `shouldRetry` argument in `responseBlock` will be `NO`. If some token conversion requests succeed and some fail, and if the failures are for any reason other than network connectivity issues (e.g. token has been invalidated), then the migration will continue normally, and those tokens that were unsuccessfully migrated will be skipped, and `shouldRetry` will be `NO`. If any of the failures were because of network connectivity issues, none of the tokens will be migrated, and `shouldRetry` will be `YES`.
 
 ---
 

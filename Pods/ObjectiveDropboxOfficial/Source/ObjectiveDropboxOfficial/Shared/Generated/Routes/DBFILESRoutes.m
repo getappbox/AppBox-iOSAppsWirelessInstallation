@@ -316,6 +316,37 @@
   return [self.client requestDownload:route arg:arg overwrite:overwrite destination:destination];
 }
 
+- (DBDownloadUrlTask *)downloadUrl:(NSString *)path
+                         overwrite:(BOOL)overwrite
+                       destination:(NSURL *)destination
+                   byteOffsetStart:(NSNumber *)byteOffsetStart
+                     byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownload;
+  DBFILESDownloadArg *arg = [[DBFILESDownloadArg alloc] initWithPath:path];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadUrlTask *)downloadUrl:(NSString *)path
+                               rev:(NSString *)rev
+                         overwrite:(BOOL)overwrite
+                       destination:(NSURL *)destination
+                   byteOffsetStart:(NSNumber *)byteOffsetStart
+                     byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownload;
+  DBFILESDownloadArg *arg = [[DBFILESDownloadArg alloc] initWithPath:path rev:rev];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
 - (DBDownloadDataTask *)downloadData:(NSString *)path {
   DBRoute *route = DBFILESRouteObjects.DBFILESDownload;
   DBFILESDownloadArg *arg = [[DBFILESDownloadArg alloc] initWithPath:path];
@@ -326,6 +357,23 @@
   DBRoute *route = DBFILESRouteObjects.DBFILESDownload;
   DBFILESDownloadArg *arg = [[DBFILESDownloadArg alloc] initWithPath:path rev:rev];
   return [self.client requestDownload:route arg:arg];
+}
+
+- (DBDownloadDataTask *)downloadData:(NSString *)path
+                     byteOffsetStart:(NSNumber *)byteOffsetStart
+                       byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownload;
+  DBFILESDownloadArg *arg = [[DBFILESDownloadArg alloc] initWithPath:path];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadDataTask *)downloadData:(NSString *)path
+                                 rev:(NSString *)rev
+                     byteOffsetStart:(NSNumber *)byteOffsetStart
+                       byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownload;
+  DBFILESDownloadArg *arg = [[DBFILESDownloadArg alloc] initWithPath:path rev:rev];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
 }
 
 - (DBRpcTask *)getMetadata:(NSString *)path {
@@ -361,6 +409,37 @@
   return [self.client requestDownload:route arg:arg overwrite:overwrite destination:destination];
 }
 
+- (DBDownloadUrlTask *)getPreviewUrl:(NSString *)path
+                           overwrite:(BOOL)overwrite
+                         destination:(NSURL *)destination
+                     byteOffsetStart:(NSNumber *)byteOffsetStart
+                       byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetPreview;
+  DBFILESPreviewArg *arg = [[DBFILESPreviewArg alloc] initWithPath:path];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadUrlTask *)getPreviewUrl:(NSString *)path
+                                 rev:(NSString *)rev
+                           overwrite:(BOOL)overwrite
+                         destination:(NSURL *)destination
+                     byteOffsetStart:(NSNumber *)byteOffsetStart
+                       byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetPreview;
+  DBFILESPreviewArg *arg = [[DBFILESPreviewArg alloc] initWithPath:path rev:rev];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
 - (DBDownloadDataTask *)getPreviewData:(NSString *)path {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetPreview;
   DBFILESPreviewArg *arg = [[DBFILESPreviewArg alloc] initWithPath:path];
@@ -371,6 +450,23 @@
   DBRoute *route = DBFILESRouteObjects.DBFILESGetPreview;
   DBFILESPreviewArg *arg = [[DBFILESPreviewArg alloc] initWithPath:path rev:rev];
   return [self.client requestDownload:route arg:arg];
+}
+
+- (DBDownloadDataTask *)getPreviewData:(NSString *)path
+                       byteOffsetStart:(NSNumber *)byteOffsetStart
+                         byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetPreview;
+  DBFILESPreviewArg *arg = [[DBFILESPreviewArg alloc] initWithPath:path];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadDataTask *)getPreviewData:(NSString *)path
+                                   rev:(NSString *)rev
+                       byteOffsetStart:(NSNumber *)byteOffsetStart
+                         byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetPreview;
+  DBFILESPreviewArg *arg = [[DBFILESPreviewArg alloc] initWithPath:path rev:rev];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
 }
 
 - (DBRpcTask *)getTemporaryLink:(NSString *)path {
@@ -395,6 +491,38 @@
   return [self.client requestDownload:route arg:arg overwrite:overwrite destination:destination];
 }
 
+- (DBDownloadUrlTask *)getThumbnailUrl:(NSString *)path
+                             overwrite:(BOOL)overwrite
+                           destination:(NSURL *)destination
+                       byteOffsetStart:(NSNumber *)byteOffsetStart
+                         byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadUrlTask *)getThumbnailUrl:(NSString *)path
+                                format:(DBFILESThumbnailFormat *)format
+                                  size:(DBFILESThumbnailSize *)size
+                             overwrite:(BOOL)overwrite
+                           destination:(NSURL *)destination
+                       byteOffsetStart:(NSNumber *)byteOffsetStart
+                         byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
 - (DBDownloadDataTask *)getThumbnailData:(NSString *)path {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
   DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path];
@@ -407,6 +535,24 @@
   DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
   DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
   return [self.client requestDownload:route arg:arg];
+}
+
+- (DBDownloadDataTask *)getThumbnailData:(NSString *)path
+                         byteOffsetStart:(NSNumber *)byteOffsetStart
+                           byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadDataTask *)getThumbnailData:(NSString *)path
+                                  format:(DBFILESThumbnailFormat *)format
+                                    size:(DBFILESThumbnailSize *)size
+                         byteOffsetStart:(NSNumber *)byteOffsetStart
+                           byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
 }
 
 - (DBRpcTask *)listFolder:(NSString *)path {
