@@ -1,1 +1,1 @@
-../../../CMDQueryStringSerialization/Pod/CMDQueryStringReader.h
+../../../CMDQueryStringSerialization/CMDQueryStringSerialization/CMDQueryStringReader.h

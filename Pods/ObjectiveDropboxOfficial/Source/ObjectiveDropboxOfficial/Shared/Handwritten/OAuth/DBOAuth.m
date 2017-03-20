@@ -10,7 +10,6 @@
 
 /// A shared instance of a `DBOAuthManager` for convenience
 static DBOAuthManager *sharedOAuthManager;
-static DBSDKReachability *internetReachableFoo;
 
 #pragma mark - OAuth manager base
 
@@ -18,6 +17,7 @@ static DBSDKReachability *internetReachableFoo;
 
 @property (nonatomic, copy) NSString * _Nullable appKey;
 @property (nonatomic, copy) NSURL * _Nullable redirectURL;
+@property (nonatomic, copy) NSURL * _Nullable cancelURL;
 @property (nonatomic, copy) NSString * _Nullable host;
 @property (nonatomic, copy) NSMutableArray<NSURL *> * _Nullable urls;
 
@@ -31,7 +31,7 @@ static DBSDKReachability *internetReachableFoo;
   return sharedOAuthManager;
 }
 
-+ (void)sharedOAuthManager:(DBOAuthManager *)sharedManager {
++ (void)setSharedOAuthManager:(DBOAuthManager *)sharedManager {
   sharedOAuthManager = sharedManager;
 }
 
@@ -46,8 +46,10 @@ static DBSDKReachability *internetReachableFoo;
   if (self) {
     _appKey = appKey;
     _redirectURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"db-%@://2/token", _appKey]];
+    _cancelURL = [NSURL URLWithString:[NSString stringWithFormat:@"db-%@://2/cancel", _appKey]];
     _host = host;
     _urls = [NSMutableArray arrayWithObjects:_redirectURL, nil];
+    _disableSignup = YES;
   }
   return self;
 }
@@ -68,67 +70,72 @@ static DBSDKReachability *internetReachableFoo;
   DBOAuthResult *result = [self extractFromUrl:url];
 
   if ([result isSuccess]) {
-    [DBSDKKeychain set:result.accessToken.uid value:result.accessToken.accessToken];
+    [DBSDKKeychain storeValueWithKey:result.accessToken.uid value:result.accessToken.accessToken];
   }
 
   return result;
 }
 
 - (void)authorizeFromSharedApplication:(id<DBSharedApplication>)sharedApplication browserAuth:(BOOL)browserAuth {
+  void (^cancelHandler)() = ^{
+    [sharedApplication presentExternalApp:_cancelURL];
+  };
+
   if ([[DBSDKReachability reachabilityForInternetConnection] currentReachabilityStatus] == DBNotReachable) {
     NSString *message = @"Try again once you have an internet connection.";
     NSString *title = @"No internet connection";
 
-    NSDictionary<NSString *, void (^)()> *buttonHandlers =
-        @{ @"Retry" : ^void(){
-               [self authorizeFromSharedApplication:sharedApplication browserAuth:browserAuth];
+    NSDictionary<NSString *, void (^)()> *buttonHandlers = @{
+      @"Cancel" : ^{
+        cancelHandler();
+      },
+      @"Retry" : ^{
+        [self authorizeFromSharedApplication:sharedApplication browserAuth:browserAuth];
+      }
+    };
+
+    [sharedApplication presentErrorMessageWithHandlers:message title:title buttonHandlers:buttonHandlers];
+
+    return;
   }
-};
 
-[sharedApplication presentErrorMessageWithHandlers:message title:title buttonHandlers:buttonHandlers];
+  if (![self conformsToAppScheme]) {
+    NSString *message = [NSString stringWithFormat:@"DropboxSDK: unable to link; app isn't registered for correct URL "
+                                                   @"scheme (db-%@). Add this scheme to your project Info.plist file, "
+                                                   @"associated with following key: \"Information Property List\" > "
+                                                   @"\"URL types\" > \"Item 0\" > \"URL Schemes\" > \"Item <N>\".",
+                                                   _appKey];
+    NSString *title = @"DropboxSDK Error";
 
-return;
-}
+    [sharedApplication presentErrorMessage:message title:title];
 
-if (![self conformsToAppScheme]) {
-  NSString *message = [NSString stringWithFormat:@"DropboxSDK: unable to link; app isn't registered for correct URL "
-                                                 @"scheme (db-%@). Add this scheme to your project Info.plist file, "
-                                                 @"associated with following key: \"Information Property List\" > "
-                                                 @"\"URL types\" > \"Item 0\" > \"URL Schemes\" > \"Item <N>\".",
-                                                 _appKey];
-  NSString *title = @"SwiftyDropbox Error";
+    return;
+  }
 
-  [sharedApplication presentErrorMessage:message title:title];
+  NSURL *url = [self authURL];
 
-  return;
-}
+  if ([self checkAndPresentPlatformSpecificAuth:sharedApplication]) {
+    return;
+  }
 
-NSURL *url = [self authURL];
+  if (browserAuth) {
+    [sharedApplication presentBrowserAuth:url];
+  } else {
+    BOOL (^tryInterceptHandler)
+    (NSURL *, BOOL) = ^BOOL(NSURL *url, BOOL openExternalBrowser) {
+      if (openExternalBrowser && [url.scheme isEqualToString:@"https"]) {
+        [sharedApplication presentExternalApp:url];
+        return YES;
+      } else if ([url.scheme isEqualToString:@"itms-apps"] || [self canHandleURL:url]) {
+        [sharedApplication presentExternalApp:url];
+        return YES;
+      } else {
+        return NO;
+      }
+    };
 
-if ([self checkAndPresentPlatformSpecificAuth:sharedApplication]) {
-  return;
-}
-
-if (browserAuth) {
-  [sharedApplication presentBrowserAuth:url];
-} else {
-  BOOL (^tryInterceptHandler)
-  (NSURL *) = ^BOOL(NSURL *url) {
-    if ([self canHandleURL:url]) {
-      [sharedApplication presentExternalApp:url];
-      return YES;
-    } else {
-      return NO;
-    }
-  };
-
-  void (^cancelHandler)() = ^void() {
-    NSURL *cancelUrl = [NSURL URLWithString:[NSString stringWithFormat:@"db-%@://2/cancel", _appKey]];
-    [sharedApplication presentExternalApp:cancelUrl];
-  };
-
-  [sharedApplication presentWebViewAuth:url tryInterceptHandler:tryInterceptHandler cancelHandler:cancelHandler];
-}
+    [sharedApplication presentWebViewAuth:url tryInterceptHandler:tryInterceptHandler cancelHandler:cancelHandler];
+  }
 }
 
 - (BOOL)conformsToAppScheme {
@@ -157,7 +164,9 @@ if (browserAuth) {
     [NSURLQueryItem queryItemWithName:@"response_type" value:@"token"],
     [NSURLQueryItem queryItemWithName:@"client_id" value:_appKey],
     [NSURLQueryItem queryItemWithName:@"redirect_uri" value:[_redirectURL absoluteString]],
-    [NSURLQueryItem queryItemWithName:@"disable_signup" value:@"true"],
+    [NSURLQueryItem queryItemWithName:@"disable_signup" value:self.disableSignup ? @"true" : @"false"],
+    [NSURLQueryItem queryItemWithName:@"locale"
+                                value:[self.locale localeIdentifier] ?: [[NSLocale currentLocale] localeIdentifier]],
   ];
   return components.URL;
 }
@@ -209,7 +218,7 @@ if (browserAuth) {
 #pragma mark - Keychain methods
 
 - (BOOL)storeAccessToken:(DBAccessToken *)accessToken {
-  return [DBSDKKeychain set:accessToken.uid value:accessToken.accessToken];
+  return [DBSDKKeychain storeValueWithKey:accessToken.uid value:accessToken.accessToken];
 }
 
 - (DBAccessToken *)getFirstAccessToken {
@@ -222,7 +231,7 @@ if (browserAuth) {
 }
 
 - (DBAccessToken *)getAccessToken:(NSString *)owner {
-  NSString *accessToken = [DBSDKKeychain get:owner];
+  NSString *accessToken = [DBSDKKeychain retrieveTokenWithKey:owner];
   if (accessToken != nil) {
     return [[DBAccessToken alloc] initWithAccessToken:accessToken uid:owner];
   } else {
@@ -231,10 +240,10 @@ if (browserAuth) {
 }
 
 - (NSDictionary<NSString *, DBAccessToken *> *)getAllAccessTokens {
-  NSArray<NSString *> *users = [DBSDKKeychain getAll];
+  NSArray<NSString *> *users = [DBSDKKeychain retrieveAllTokens];
   NSMutableDictionary<NSString *, DBAccessToken *> *result = [[NSMutableDictionary alloc] init];
   for (NSString *user in users) {
-    NSString *accessToken = [DBSDKKeychain get:user];
+    NSString *accessToken = [DBSDKKeychain retrieveTokenWithKey:user];
     if (accessToken != nil) {
       result[user] = [[DBAccessToken alloc] initWithAccessToken:accessToken uid:user];
     }
@@ -247,11 +256,11 @@ if (browserAuth) {
 }
 
 - (BOOL)clearStoredAccessToken:(DBAccessToken *)token {
-  return [DBSDKKeychain delete:token.uid];
+  return [DBSDKKeychain deleteTokenWithKey:token.uid];
 }
 
 - (BOOL)clearStoredAccessTokens {
-  return [DBSDKKeychain clear];
+  return [DBSDKKeychain clearAllTokens];
 }
 
 @end

@@ -61,12 +61,12 @@
 }
 
 //Create export options plist for archive and upload
-- (void)createExportOptionPlist{
+- (BOOL)createExportOptionPlist{
     [self createBuildRelatedPathsAndIsNew:YES];
     NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
     [exportOption setValue:self.teamId forKey:@"teamID"];
     [exportOption setValue:self.buildType forKey:@"method"];
-    [exportOption writeToFile:self.exportOptionsPlistPath.resourceSpecifier atomically:YES];
+    return [exportOption writeToFile:[self.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding] atomically:YES];
 }
 
 //Create all path required during archive and upload

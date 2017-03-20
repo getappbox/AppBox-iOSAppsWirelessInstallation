@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Handwritten/Networking/DBDelegate.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Headers/Internal/Networking/DBDelegate.h

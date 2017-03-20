@@ -27,18 +27,18 @@
 + (NSString *)formatDateToken:(NSString *)token {
   NSString *result = @"";
 
-  if ([token isEqualToString:@"%a"]) { // Weekday as locale’s abbreviated name.
+  if ([token isEqualToString:@"%a"]) { // Weekday as locale's abbreviated name.
     result = @"EEE";
-  } else if ([token isEqualToString:@"%A"]) { // Weekday as locale’s full name.
+  } else if ([token isEqualToString:@"%A"]) { // Weekday as locale's full name.
     result = @"EEE";
   } else if ([token isEqualToString:@"%w"]) { // Weekday as a decimal number, where 0 is Sunday and 6 is Saturday. 0, 1,
                                               // ..., 6
     result = @"ccccc";
   } else if ([token isEqualToString:@"%d"]) { // Day of the month as a zero-padded decimal number. 01, 02, ..., 31
     result = @"dd";
-  } else if ([token isEqualToString:@"%b"]) { // Month as locale’s abbreviated name.
+  } else if ([token isEqualToString:@"%b"]) { // Month as locale's abbreviated name.
     result = @"MMM";
-  } else if ([token isEqualToString:@"%B"]) { // Month as locale’s full name.
+  } else if ([token isEqualToString:@"%B"]) { // Month as locale's full name.
     result = @"MMMM";
   } else if ([token isEqualToString:@"%m"]) { // Month as a zero-padded decimal number. 01, 02, ..., 12
     result = @"MM";
@@ -50,7 +50,7 @@
     result = @"HH";
   } else if ([token isEqualToString:@"%I"]) { // Hour (12-hour clock) as a zero-padded decimal number. 01, 02, ..., 12
     result = @"hh";
-  } else if ([token isEqualToString:@"%p"]) { // Locale’s equivalent of either AM or PM.
+  } else if ([token isEqualToString:@"%p"]) { // Locale's equivalent of either AM or PM.
     result = @"a";
   } else if ([token isEqualToString:@"%M"]) { // Minute as a zero-padded decimal number. 00, 01, ..., 59
     result = @"mm";
@@ -75,11 +75,11 @@
                                               // decimal number. All days in a new year preceding the first Monday are
                                               // considered to be in week 0. 00, 01, ..., 53 (6)
     result = @"ww";
-  } else if ([token isEqualToString:@"%c"]) { // Locale’s appropriate date and time representation.
+  } else if ([token isEqualToString:@"%c"]) { // Locale's appropriate date and time representation.
     result = @"";                            // unsupported
-  } else if ([token isEqualToString:@"%x"]) { // Locale’s appropriate date representation.
+  } else if ([token isEqualToString:@"%x"]) { // Locale's appropriate date representation.
     result = @"";                            // unsupported
-  } else if ([token isEqualToString:@"%X"]) { // Locale’s appropriate time representation.
+  } else if ([token isEqualToString:@"%X"]) { // Locale's appropriate time representation.
     result = @"";                            // unsupported
   } else if ([token isEqualToString:@"%%"]) { // A literal '%' character.
     result = @"";

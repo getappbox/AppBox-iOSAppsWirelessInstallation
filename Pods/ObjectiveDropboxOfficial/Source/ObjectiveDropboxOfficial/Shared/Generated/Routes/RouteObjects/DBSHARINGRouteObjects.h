@@ -132,6 +132,9 @@
 /// Accessor method for the unshareFolder route object.
 + (DBRoute * _Nonnull)DBSHARINGUnshareFolder;
 
+/// Accessor method for the updateFileMember route object.
++ (DBRoute * _Nonnull)DBSHARINGUpdateFileMember;
+
 /// Accessor method for the updateFolderMember route object.
 + (DBRoute * _Nonnull)DBSHARINGUpdateFolderMember;
 

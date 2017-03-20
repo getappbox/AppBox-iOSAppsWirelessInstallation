@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Handwritten/Resources/DBChunkInputStream.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Headers/Internal/Resources/DBChunkInputStream.h

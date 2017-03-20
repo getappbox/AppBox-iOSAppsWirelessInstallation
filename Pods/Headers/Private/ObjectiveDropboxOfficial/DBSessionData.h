@@ -1,1 +1,1 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Handwritten/Networking/DBSessionData.h
+../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Headers/Internal/Networking/DBSessionData.h

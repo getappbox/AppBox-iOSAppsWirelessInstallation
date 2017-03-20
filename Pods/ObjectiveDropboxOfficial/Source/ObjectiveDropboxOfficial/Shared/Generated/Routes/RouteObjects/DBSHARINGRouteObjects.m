@@ -68,6 +68,7 @@
 #import "DBSHARINGShareFolderJobStatus.h"
 #import "DBSHARINGShareFolderLaunch.h"
 #import "DBSHARINGSharePathError.h"
+#import "DBSHARINGSharedContentLinkMetadata.h"
 #import "DBSHARINGSharedFileMembers.h"
 #import "DBSHARINGSharedFileMetadata.h"
 #import "DBSHARINGSharedFolderAccessError.h"
@@ -90,7 +91,6 @@
 #import "DBSHARINGUserMembershipInfo.h"
 #import "DBSHARINGVisibility.h"
 #import "DBStoneBase.h"
-#import "DBTransportClient.h"
 #import "DBUSERSTeam.h"
 
 @implementation DBSHARINGRouteObjects
@@ -134,6 +134,7 @@ static DBRoute *DBSHARINGTransferFolder;
 static DBRoute *DBSHARINGUnmountFolder;
 static DBRoute *DBSHARINGUnshareFile;
 static DBRoute *DBSHARINGUnshareFolder;
+static DBRoute *DBSHARINGUpdateFileMember;
 static DBRoute *DBSHARINGUpdateFolderMember;
 static DBRoute *DBSHARINGUpdateFolderPolicy;
 
@@ -182,7 +183,7 @@ static DBRoute *DBSHARINGUpdateFolderPolicy;
   if (!DBSHARINGChangeFileMemberAccess) {
     DBSHARINGChangeFileMemberAccess = [[DBRoute alloc] init:@"change_file_member_access"
                                                  namespace_:@"sharing"
-                                                 deprecated:@NO
+                                                 deprecated:@YES
                                                  resultType:[DBSHARINGFileMemberActionResult class]
                                                   errorType:[DBSHARINGFileMemberActionError class]
                                                       attrs:@{
@@ -852,6 +853,24 @@ static DBRoute *DBSHARINGUpdateFolderPolicy;
                                 arrayDeserialBlock:nil];
   }
   return DBSHARINGUnshareFolder;
+}
+
++ (DBRoute *)DBSHARINGUpdateFileMember {
+  if (!DBSHARINGUpdateFileMember) {
+    DBSHARINGUpdateFileMember = [[DBRoute alloc] init:@"update_file_member"
+                                           namespace_:@"sharing"
+                                           deprecated:@NO
+                                           resultType:[DBSHARINGMemberAccessLevelResult class]
+                                            errorType:[DBSHARINGFileMemberActionError class]
+                                                attrs:@{
+                                                  @"auth" : @"user",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                     arraySerialBlock:nil
+                                   arrayDeserialBlock:nil];
+  }
+  return DBSHARINGUpdateFileMember;
 }
 
 + (DBRoute *)DBSHARINGUpdateFolderMember {

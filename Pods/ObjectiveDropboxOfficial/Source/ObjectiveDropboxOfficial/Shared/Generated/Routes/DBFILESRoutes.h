@@ -428,6 +428,54 @@ dCopyReferenceSave:(NSString * _Nonnull)dCopyReference
 /// Download a file from a user's Dropbox.
 ///
 /// @param path The path of the file to download.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESDownloadError` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESDownloadError *> * _Nonnull)
+    downloadUrl:(NSString * _Nonnull)path
+      overwrite:(BOOL)overwrite
+    destination:(NSURL * _Nonnull)destination
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Download a file from a user's Dropbox.
+///
+/// @param path The path of the file to download.
+/// @param rev Deprecated. Please specify revision in path instead.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESDownloadError` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESDownloadError *> * _Nonnull)
+    downloadUrl:(NSString * _Nonnull)path
+            rev:(NSString * _Nullable)rev
+      overwrite:(BOOL)overwrite
+    destination:(NSURL * _Nonnull)destination
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Download a file from a user's Dropbox.
+///
+/// @param path The path of the file to download.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
 /// `DBFILESDownloadError` object on failure.
@@ -445,6 +493,42 @@ dCopyReferenceSave:(NSString * _Nonnull)dCopyReference
 ///
 - (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESDownloadError *> * _Nonnull)downloadData:(NSString * _Nonnull)path
                                                                                         rev:(NSString * _Nullable)rev;
+
+///
+/// Download a file from a user's Dropbox.
+///
+/// @param path The path of the file to download.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESDownloadError` object on failure.
+///
+- (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESDownloadError *> * _Nonnull)
+   downloadData:(NSString * _Nonnull)path
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Download a file from a user's Dropbox.
+///
+/// @param path The path of the file to download.
+/// @param rev Deprecated. Please specify revision in path instead.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESDownloadError` object on failure.
+///
+- (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESDownloadError *> * _Nonnull)
+   downloadData:(NSString * _Nonnull)path
+            rev:(NSString * _Nullable)rev
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
 
 ///
 /// Returns the metadata for a file or folder. Note: Metadata for the root folder is unsupported.
@@ -516,6 +600,56 @@ dCopyReferenceSave:(NSString * _Nonnull)dCopyReference
 /// .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, .pptm,  .xls, .xlsx, .xlsm, .rtf.
 ///
 /// @param path The path of the file to preview.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESPreviewError` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESPreviewError *> * _Nonnull)
+  getPreviewUrl:(NSString * _Nonnull)path
+      overwrite:(BOOL)overwrite
+    destination:(NSURL * _Nonnull)destination
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Get a preview for a file. Currently previews are only generated for the files with  the following extensions: .doc,
+/// .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, .pptm,  .xls, .xlsx, .xlsm, .rtf.
+///
+/// @param path The path of the file to preview.
+/// @param rev Deprecated. Please specify revision in path instead.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESPreviewError` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESPreviewError *> * _Nonnull)
+  getPreviewUrl:(NSString * _Nonnull)path
+            rev:(NSString * _Nullable)rev
+      overwrite:(BOOL)overwrite
+    destination:(NSURL * _Nonnull)destination
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Get a preview for a file. Currently previews are only generated for the files with  the following extensions: .doc,
+/// .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, .pptm,  .xls, .xlsx, .xlsm, .rtf.
+///
+/// @param path The path of the file to preview.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
 /// `DBFILESPreviewError` object on failure.
@@ -534,6 +668,44 @@ dCopyReferenceSave:(NSString * _Nonnull)dCopyReference
 ///
 - (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESPreviewError *> * _Nonnull)getPreviewData:(NSString * _Nonnull)path
                                                                                          rev:(NSString * _Nullable)rev;
+
+///
+/// Get a preview for a file. Currently previews are only generated for the files with  the following extensions: .doc,
+/// .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, .pptm,  .xls, .xlsx, .xlsm, .rtf.
+///
+/// @param path The path of the file to preview.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESPreviewError` object on failure.
+///
+- (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESPreviewError *> * _Nonnull)
+ getPreviewData:(NSString * _Nonnull)path
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Get a preview for a file. Currently previews are only generated for the files with  the following extensions: .doc,
+/// .docx, .docm, .ppt, .pps, .ppsx, .ppsm, .pptx, .pptm,  .xls, .xlsx, .xlsm, .rtf.
+///
+/// @param path The path of the file to preview.
+/// @param rev Deprecated. Please specify revision in path instead.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESPreviewError` object on failure.
+///
+- (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESPreviewError *> * _Nonnull)
+ getPreviewData:(NSString * _Nonnull)path
+            rev:(NSString * _Nullable)rev
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
 
 ///
 /// Get a temporary link to stream content of a file. This link will expire in four hours and afterwards you will get
@@ -593,6 +765,59 @@ getThumbnailUrl:(NSString * _Nonnull)path
 /// png, tiff, tif, gif and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param path The path to the image file you want to thumbnail.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESThumbnailError` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESThumbnailError *> * _Nonnull)
+getThumbnailUrl:(NSString * _Nonnull)path
+      overwrite:(BOOL)overwrite
+    destination:(NSURL * _Nonnull)destination
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
+///
+/// @param path The path to the image file you want to thumbnail.
+/// @param format The format for the thumbnail image, jpeg (default) or png. For  images that are photos, jpeg should be
+/// preferred, while png is  better for screenshots and digital arts.
+/// @param size The size for the thumbnail image.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESThumbnailError` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESFileMetadata *, DBFILESThumbnailError *> * _Nonnull)
+getThumbnailUrl:(NSString * _Nonnull)path
+         format:(DBFILESThumbnailFormat * _Nullable)format
+           size:(DBFILESThumbnailSize * _Nullable)size
+      overwrite:(BOOL)overwrite
+    destination:(NSURL * _Nonnull)destination
+byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+  byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
+///
+/// @param path The path to the image file you want to thumbnail.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
 /// `DBFILESThumbnailError` object on failure.
@@ -616,6 +841,47 @@ getThumbnailUrl:(NSString * _Nonnull)path
 getThumbnailData:(NSString * _Nonnull)path
           format:(DBFILESThumbnailFormat * _Nullable)format
             size:(DBFILESThumbnailSize * _Nullable)size;
+
+///
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
+///
+/// @param path The path to the image file you want to thumbnail.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESThumbnailError` object on failure.
+///
+- (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESThumbnailError *> * _Nonnull)
+getThumbnailData:(NSString * _Nonnull)path
+ byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+   byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
+///
+/// @param path The path to the image file you want to thumbnail.
+/// @param format The format for the thumbnail image, jpeg (default) or png. For  images that are photos, jpeg should be
+/// preferred, while png is  better for screenshots and digital arts.
+/// @param size The size for the thumbnail image.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
+/// `DBFILESThumbnailError` object on failure.
+///
+- (DBDownloadDataTask<DBFILESFileMetadata *, DBFILESThumbnailError *> * _Nonnull)
+getThumbnailData:(NSString * _Nonnull)path
+          format:(DBFILESThumbnailFormat * _Nullable)format
+            size:(DBFILESThumbnailSize * _Nullable)size
+ byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+   byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
 
 ///
 /// Starts returning the contents of a folder. If the result's `hasMore` in `DBFILESListFolderResult` field is true,

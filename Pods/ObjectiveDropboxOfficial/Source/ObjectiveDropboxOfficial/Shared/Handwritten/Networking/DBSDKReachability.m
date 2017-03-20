@@ -127,13 +127,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   }
 }
 
-- (void)dealloc {
-  [self stopNotifier];
-  if (_reachabilityRef != NULL) {
-    CFRelease(_reachabilityRef);
-  }
-}
-
 #pragma mark - Network Flag Handling
 
 - (DBNetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags {

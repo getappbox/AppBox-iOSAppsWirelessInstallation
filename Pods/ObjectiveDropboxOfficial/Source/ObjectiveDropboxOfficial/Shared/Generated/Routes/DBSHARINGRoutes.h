@@ -41,8 +41,12 @@
 @class DBSHARINGInviteeMembershipInfo;
 @class DBSHARINGJobError;
 @class DBSHARINGJobStatus;
+@class DBSHARINGLinkAudience;
+@class DBSHARINGLinkExpiry;
 @class DBSHARINGLinkMetadata;
+@class DBSHARINGLinkPassword;
 @class DBSHARINGLinkPermissions;
+@class DBSHARINGLinkSettings;
 @class DBSHARINGListFileMembersBatchResult;
 @class DBSHARINGListFileMembersContinueError;
 @class DBSHARINGListFileMembersError;
@@ -74,6 +78,7 @@
 @class DBSHARINGShareFolderJobStatus;
 @class DBSHARINGShareFolderLaunch;
 @class DBSHARINGSharePathError;
+@class DBSHARINGSharedContentLinkMetadata;
 @class DBSHARINGSharedFileMembers;
 @class DBSHARINGSharedFileMetadata;
 @class DBSHARINGSharedFolderAccessError;
@@ -95,6 +100,7 @@
 @class DBSHARINGUpdateFolderMemberError;
 @class DBSHARINGUpdateFolderPolicyError;
 @class DBSHARINGUserMembershipInfo;
+@class DBSHARINGViewerInfoPolicy;
 @class DBSHARINGVisibility;
 @class DBUSERSTeam;
 
@@ -184,7 +190,7 @@ addFolderMember:(NSString * _Nonnull)sharedFolderId
   customMessage:(NSString * _Nullable)customMessage;
 
 ///
-/// Changes a member's access on a shared file.
+/// DEPRECATED: Identical to update_file_member but with less information returned.
 ///
 /// @param file File for which we are changing a member's access.
 /// @param member The member whose access we are changing.
@@ -196,7 +202,8 @@ addFolderMember:(NSString * _Nonnull)sharedFolderId
 - (DBRpcTask<DBSHARINGFileMemberActionResult *, DBSHARINGFileMemberActionError *> * _Nonnull)
 changeFileMemberAccess:(NSString * _Nonnull)file
                 member:(DBSHARINGMemberSelector * _Nonnull)member
-           accessLevel:(DBSHARINGAccessLevel * _Nonnull)accessLevel;
+           accessLevel:(DBSHARINGAccessLevel * _Nonnull)accessLevel
+    __deprecated_msg("change_file_member_access is deprecated. Use update_file_member.");
 
 ///
 /// Returns the status of an asynchronous job. Apps must have full Dropbox access to use this endpoint.
@@ -419,6 +426,57 @@ getSharedLinkFileUrl:(NSString * _Nonnull)url
 /// Download the shared link's file from a user's Dropbox.
 ///
 /// @param url URL of the shared link.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGSharedLinkMetadata` object on success or
+/// a `DBSHARINGGetSharedLinkFileError` object on failure.
+///
+- (DBDownloadUrlTask<DBSHARINGSharedLinkMetadata *, DBSHARINGGetSharedLinkFileError *> * _Nonnull)
+getSharedLinkFileUrl:(NSString * _Nonnull)url
+           overwrite:(BOOL)overwrite
+         destination:(NSURL * _Nonnull)destination
+     byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+       byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Download the shared link's file from a user's Dropbox.
+///
+/// @param url URL of the shared link.
+/// @param path If the shared link is to a folder, this parameter can be used to retrieve the metadata for a specific
+/// file or sub-folder in this folder. A relative path should be used.
+/// @param linkPassword If the shared link has a password, this parameter can be used.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGSharedLinkMetadata` object on success or
+/// a `DBSHARINGGetSharedLinkFileError` object on failure.
+///
+- (DBDownloadUrlTask<DBSHARINGSharedLinkMetadata *, DBSHARINGGetSharedLinkFileError *> * _Nonnull)
+getSharedLinkFileUrl:(NSString * _Nonnull)url
+                path:(NSString * _Nullable)path
+        linkPassword:(NSString * _Nullable)linkPassword
+           overwrite:(BOOL)overwrite
+         destination:(NSURL * _Nonnull)destination
+     byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+       byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Download the shared link's file from a user's Dropbox.
+///
+/// @param url URL of the shared link.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGSharedLinkMetadata` object on success or
 /// a `DBSHARINGGetSharedLinkFileError` object on failure.
@@ -441,6 +499,45 @@ getSharedLinkFileUrl:(NSString * _Nonnull)url
 getSharedLinkFileData:(NSString * _Nonnull)url
                  path:(NSString * _Nullable)path
          linkPassword:(NSString * _Nullable)linkPassword;
+
+///
+/// Download the shared link's file from a user's Dropbox.
+///
+/// @param url URL of the shared link.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGSharedLinkMetadata` object on success or
+/// a `DBSHARINGGetSharedLinkFileError` object on failure.
+///
+- (DBDownloadDataTask<DBSHARINGSharedLinkMetadata *, DBSHARINGGetSharedLinkFileError *> * _Nonnull)
+getSharedLinkFileData:(NSString * _Nonnull)url
+      byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+        byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
+
+///
+/// Download the shared link's file from a user's Dropbox.
+///
+/// @param url URL of the shared link.
+/// @param path If the shared link is to a folder, this parameter can be used to retrieve the metadata for a specific
+/// file or sub-folder in this folder. A relative path should be used.
+/// @param linkPassword If the shared link has a password, this parameter can be used.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGSharedLinkMetadata` object on success or
+/// a `DBSHARINGGetSharedLinkFileError` object on failure.
+///
+- (DBDownloadDataTask<DBSHARINGSharedLinkMetadata *, DBSHARINGGetSharedLinkFileError *> * _Nonnull)
+getSharedLinkFileData:(NSString * _Nonnull)url
+                 path:(NSString * _Nullable)path
+         linkPassword:(NSString * _Nullable)linkPassword
+      byteOffsetStart:(NSNumber * _Nonnull)byteOffsetStart
+        byteOffsetEnd:(NSNumber * _Nonnull)byteOffsetEnd;
 
 ///
 /// Get the shared link's metadata.
@@ -511,7 +608,7 @@ getSharedLinkMetadata:(NSString * _Nonnull)url
 /// Use to obtain the members who have been invited to a file, both inherited and uninherited members.
 ///
 /// @param file The file for which you want to see members.
-/// @param actions The actions for which to return permissions on a member
+/// @param actions The actions for which to return permissions on a member.
 /// @param includeInherited Whether to include members who only have access from a parent shared folder.
 /// @param limit Number of members to return max per query. Defaults to 100 if no limit is specified.
 ///
@@ -706,7 +803,7 @@ listReceivedFiles:(NSNumber * _Nullable)limit
 ///
 /// Get more results with a cursor from `listReceivedFiles`.
 ///
-/// @param cursor Cursor in `cursor` in `DBSHARINGListFilesResult`
+/// @param cursor Cursor in `cursor` in `DBSHARINGListFilesResult`.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGListFilesResult` object on success or a
 /// `DBSHARINGListFilesContinueError` object on failure.
@@ -916,6 +1013,11 @@ removeFolderMember:(NSString * _Nonnull)sharedFolderId
 /// @param sharedLinkPolicy The policy to apply to shared links created for content inside this shared folder.  The
 /// current user must be on a team to set this policy to `members` in `DBSHARINGSharedLinkPolicy`.
 /// @param forceAsync Whether to force the share to happen asynchronously.
+/// @param actions This is a list indicating whether each returned folder data entry will include a boolean field
+/// `allow` in `DBSHARINGFolderPermission` that describes whether the current user can perform the `FolderAction` on the
+/// folder.
+/// @param linkSettings Settings on the link for this folder.
+/// @param viewerInfoPolicy Who can enable/disable viewer info for this shared folder.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGShareFolderLaunch` object on success or a
 /// `DBSHARINGShareFolderError` object on failure.
@@ -925,7 +1027,10 @@ removeFolderMember:(NSString * _Nonnull)sharedFolderId
     memberPolicy:(DBSHARINGMemberPolicy * _Nullable)memberPolicy
  aclUpdatePolicy:(DBSHARINGAclUpdatePolicy * _Nullable)aclUpdatePolicy
 sharedLinkPolicy:(DBSHARINGSharedLinkPolicy * _Nullable)sharedLinkPolicy
-      forceAsync:(NSNumber * _Nullable)forceAsync;
+      forceAsync:(NSNumber * _Nullable)forceAsync
+         actions:(NSArray<DBSHARINGFolderAction *> * _Nullable)actions
+    linkSettings:(DBSHARINGLinkSettings * _Nullable)linkSettings
+viewerInfoPolicy:(DBSHARINGViewerInfoPolicy * _Nullable)viewerInfoPolicy;
 
 ///
 /// Transfer ownership of a shared folder to a member of the shared folder. User must have `owner` in
@@ -990,6 +1095,18 @@ unshareFolder:(NSString * _Nonnull)sharedFolderId
    leaveACopy:(NSNumber * _Nullable)leaveACopy;
 
 ///
+/// Changes a member's access on a shared file.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGMemberAccessLevelResult` object on
+/// success or a `DBSHARINGFileMemberActionError` object on failure.
+///
+- (DBRpcTask<DBSHARINGMemberAccessLevelResult *, DBSHARINGFileMemberActionError *> * _Nonnull)
+updateFileMember:(NSString * _Nonnull)file
+          member:(DBSHARINGMemberSelector * _Nonnull)member
+     accessLevel:(DBSHARINGAccessLevel * _Nonnull)accessLevel;
+
+///
 /// Allows an owner or editor of a shared folder to update another member's permissions. Apps must have full Dropbox
 /// access to use this endpoint.
 ///
@@ -1025,8 +1142,10 @@ updateFolderMember:(NSString * _Nonnull)sharedFolderId
 /// @param sharedFolderId The ID for the shared folder.
 /// @param memberPolicy Who can be a member of this shared folder. Only applicable if the current user is on a team.
 /// @param aclUpdatePolicy Who can add and remove members of this shared folder.
+/// @param viewerInfoPolicy Who can enable/disable viewer info for this shared folder.
 /// @param sharedLinkPolicy The policy to apply to shared links created for content inside this shared folder. The
 /// current user must be on a team to set this policy to `members` in `DBSHARINGSharedLinkPolicy`.
+/// @param linkSettings Settings on the link for this folder.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGSharedFolderMetadata` object on success
 /// or a `DBSHARINGUpdateFolderPolicyError` object on failure.
@@ -1035,6 +1154,8 @@ updateFolderMember:(NSString * _Nonnull)sharedFolderId
 updateFolderPolicy:(NSString * _Nonnull)sharedFolderId
       memberPolicy:(DBSHARINGMemberPolicy * _Nullable)memberPolicy
    aclUpdatePolicy:(DBSHARINGAclUpdatePolicy * _Nullable)aclUpdatePolicy
-  sharedLinkPolicy:(DBSHARINGSharedLinkPolicy * _Nullable)sharedLinkPolicy;
+  viewerInfoPolicy:(DBSHARINGViewerInfoPolicy * _Nullable)viewerInfoPolicy
+  sharedLinkPolicy:(DBSHARINGSharedLinkPolicy * _Nullable)sharedLinkPolicy
+      linkSettings:(DBSHARINGLinkSettings * _Nullable)linkSettings;
 
 @end

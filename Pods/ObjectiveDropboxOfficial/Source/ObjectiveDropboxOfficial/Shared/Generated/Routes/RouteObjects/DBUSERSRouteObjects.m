@@ -6,7 +6,6 @@
 
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
-#import "DBTransportClient.h"
 #import "DBUSERSAccount.h"
 #import "DBUSERSAccountType.h"
 #import "DBUSERSBasicAccount.h"

@@ -13,7 +13,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    SaveCIDetails,
+    SaveUploadDetails,
+} SaveDetails;
+
 @interface Project : NSManagedObject
+
+- (Project *)addProjectWithXCProject:(XCProject *)xcProject andSaveDetails:(SaveDetails)saveDetails;
 
 @end
 

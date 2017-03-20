@@ -2,8 +2,8 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
-#import "DBConstants.h"
 #import "DBDelegate.h"
+#import "DBSDKConstants.h"
 #import "DBSessionData.h"
 
 @interface DBDelegate ()
@@ -49,7 +49,7 @@
   NSNumber *taskId = @(task.taskIdentifier);
 
   if (error && [task isKindOfClass:[NSURLSessionDownloadTask class]]) {
-    DBDownloadResponseBlock responseHandler = sessionData.downloadHandlers[taskId];
+    DBDownloadResponseBlockStorage responseHandler = sessionData.downloadHandlers[taskId];
     if (responseHandler) {
       NSOperationQueue *handlerQueue = sessionData.responseHandlerQueues[taskId];
       if (handlerQueue) {
@@ -73,7 +73,7 @@
     }
   } else if ([task isKindOfClass:[NSURLSessionUploadTask class]]) {
     NSMutableData *responseData = sessionData.responsesData[taskId];
-    DBUploadResponseBlock responseHandler = sessionData.uploadHandlers[taskId];
+    DBUploadResponseBlockStorage responseHandler = sessionData.uploadHandlers[taskId];
     if (responseHandler) {
       NSOperationQueue *handlerQueue = sessionData.responseHandlerQueues[taskId];
       if (handlerQueue) {
@@ -98,7 +98,7 @@
     }
   } else if ([task isKindOfClass:[NSURLSessionDataTask class]]) {
     NSMutableData *responseData = sessionData.responsesData[taskId];
-    DBRpcResponseBlock responseHandler = sessionData.rpcHandlers[taskId];
+    DBRpcResponseBlockStorage responseHandler = sessionData.rpcHandlers[taskId];
     if (responseHandler) {
       NSOperationQueue *handlerQueue = sessionData.responseHandlerQueues[taskId];
       if (handlerQueue) {
@@ -182,7 +182,7 @@
   DBSessionData *sessionData = [self sessionDataWithSession:session];
   NSNumber *taskId = @(downloadTask.taskIdentifier);
 
-  DBDownloadResponseBlock responseHandler = sessionData.downloadHandlers[taskId];
+  DBDownloadResponseBlockStorage responseHandler = sessionData.downloadHandlers[taskId];
   if (responseHandler) {
     NSOperationQueue *handlerQueue = sessionData.responseHandlerQueues[taskId];
     if (handlerQueue) {
@@ -255,7 +255,7 @@
 
 - (void)addRpcResponseHandler:(NSURLSessionTask *)task
                       session:(NSURLSession *)session
-              responseHandler:(DBRpcResponseBlock)handler
+              responseHandler:(DBRpcResponseBlockStorage)handler
          responseHandlerQueue:(NSOperationQueue *)handlerQueue {
   NSNumber *taskId = @(task.taskIdentifier);
   DBSessionData *sessionData = [self sessionDataWithSession:session];
@@ -290,7 +290,7 @@
 
 - (void)addUploadResponseHandler:(NSURLSessionTask *)task
                          session:(NSURLSession *)session
-                 responseHandler:(void (^)(NSData *, NSURLResponse *, NSError *))handler
+                 responseHandler:(DBUploadResponseBlockStorage)handler
             responseHandlerQueue:(NSOperationQueue *)handlerQueue {
   NSNumber *taskId = @(task.taskIdentifier);
   DBSessionData *sessionData = [self sessionDataWithSession:session];
@@ -325,7 +325,7 @@
 
 - (void)addDownloadResponseHandler:(NSURLSessionTask *)task
                            session:(NSURLSession *)session
-                   responseHandler:(void (^)(NSURL *, NSURLResponse *, NSError *))handler
+                   responseHandler:(DBDownloadResponseBlockStorage)handler
               responseHandlerQueue:(NSOperationQueue *)handlerQueue {
   NSNumber *taskId = @(task.taskIdentifier);
   DBSessionData *sessionData = [self sessionDataWithSession:session];
@@ -357,7 +357,7 @@
 }
 
 - (NSString *)sessionIdWithSession:(NSURLSession *)session {
-  return session.configuration.identifier ?: kForegroundId;
+  return session.configuration.identifier ?: kForegroundSessionId;
 }
 
 - (DBSessionData *)sessionDataWithSession:(NSURLSession *)session {

@@ -67,7 +67,7 @@
     [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",url]];
     
     //Check for Dropbox auth
-    DBOAuthResult *authResult = [DropboxClientsManager handleRedirectURL:url];
+    DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
     if (authResult != nil) {
         if ([authResult isSuccess]) {
             [[AppDelegate appDelegate] addSessionLog:@"Success! User is logged into Dropbox."];

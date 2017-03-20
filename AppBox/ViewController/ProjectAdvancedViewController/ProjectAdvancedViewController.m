@@ -37,6 +37,7 @@
 //MARK: - Action Button Tapped
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
     [self dismissController:self];
+    [self.delegate projectAdvancedCancelButtonTapped:sender];
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
@@ -64,6 +65,9 @@
         [self.project setItcPasswod:[NSString stringWithFormat:abiTunesConnectService]];
     }
     
+    if (self.delegate != nil){
+        [self.delegate projectAdvancedSaveButtonTapped:sender];
+    }
     
     [self dismissController:self];
 }
@@ -72,7 +76,12 @@
 //Build Path Handler
 - (IBAction)buildPathHandler:(NSPathControl *)sender {
     if (![self.project.buildDirectory isEqualTo:sender.URL]){
-        [self.project setBuildDirectory: sender.URL];
+        if ([[sender.URL.resourceSpecifier stringByRemovingPercentEncoding] containsString:@" "]){
+            [Common showAlertWithTitle:@"Error" andMessage:[NSString stringWithFormat:@"Please select directory without any spaces.\n\n%@",[sender.URL.resourceSpecifier stringByRemovingPercentEncoding]]];
+            [sender setURL:self.project.buildDirectory];
+        }else{
+            [self.project setBuildDirectory: sender.URL];
+        }
     }
 }
 

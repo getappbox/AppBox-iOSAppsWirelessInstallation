@@ -11,7 +11,7 @@
 
 @property (nonatomic, readonly) NSInputStream * _Nonnull parentStream;
 @property (nonatomic) NSStreamStatus parentStreamStatus;
-@property (nonatomic, readonly, weak) id<NSStreamDelegate> streamDelegate;
+@property (nonatomic, readonly) id<NSStreamDelegate> streamDelegate;
 
 @property (nonatomic) CFReadStreamClientCallBack copiedCallback;
 @property (nonatomic) CFStreamClientContext copiedContext;
