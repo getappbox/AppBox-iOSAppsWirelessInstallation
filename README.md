@@ -45,6 +45,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 | Maximum Upload Size |	Equal to your Dropbox account storage |	100MB |
 | Uploaded App Expiration |	Until you delete from your Dropbox |	3days |
 | Installations Per App |	Unlimited |	10 | 
+| Auto Restart Upload After Network Change or Failure | Yes | No | 
 | Dashboard |	Yes`*` |	Yes (login required) |
 `*` Will be available in future version 😜
 
