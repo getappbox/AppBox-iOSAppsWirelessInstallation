@@ -107,7 +107,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![project.buildType isEqualToString:sender.stringValue]){
         [project setBuildType: sender.stringValue];
         if ([project.buildType isEqualToString:BuildTypeAppStore]){
-            [self performSegueWithIdentifier:@"ProjectAdvanceSettings" sender:self];
+            [self performSegueWithIdentifier:@"AppleDeveloperLogin" sender:self];
         }
         [self updateViewState];
     }
@@ -1064,9 +1064,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - ProjectAdvancedViewDelegate - 
 - (void)projectAdvancedSaveButtonTapped:(NSButton *)sender{
-    if (project.fullPath == nil){
-        [self runALAppStoreScriptForValidation:YES];
-    }
+
 }
 
 - (void)projectAdvancedCancelButtonTapped:(NSButton *)sender{
@@ -1075,6 +1073,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
 }
 
+#pragma mark - AppleDeveloperLogin Delegate -
+- (void)itcLoginResult:(BOOL)success{
+    if (success) {
+        if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+            [self runALAppStoreScriptForValidation:YES];
+        }
+    }
+}
 
 #pragma mark - Navigation -
 -(void)showURL{
@@ -1121,6 +1127,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     else if([segue.destinationController isKindOfClass:[CIViewController class]]){
         CIViewController *ciViewController = ((CIViewController *)segue.destinationController);
         [ciViewController setProject:project];
+    }
+    
+    //prepare to show AppleDeveloperLogin
+    else if ([segue.destinationController isKindOfClass:[ITCLoginViewController class]]){
+        ITCLoginViewController *itcLoginViewController = ((ITCLoginViewController *)segue.destinationController);
+        [itcLoginViewController setProject:project];
+        [itcLoginViewController setDelegate:self];
     }
 }
 

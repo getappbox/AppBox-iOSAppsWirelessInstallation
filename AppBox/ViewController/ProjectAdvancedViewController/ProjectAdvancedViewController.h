@@ -19,8 +19,6 @@
 @interface ProjectAdvancedViewController : NSViewController{
     IBOutlet NSPathControl *pathBuild;
     IBOutlet NSPathControl *pathXCode;
-    IBOutlet NSTextField *textFieldUserName;
-    IBOutlet NSSecureTextField *textFieldPassword;
 }
 
 @property(nonatomic, strong) XCProject *project;

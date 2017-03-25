@@ -1,5 +1,5 @@
 //
-//  ADCLogin.h
+//  ITCLogin.h
 //  AppBox
 //
 //  Created by Vineet Choudhary on 23/03/17.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ADCLogin : NSObject
+@interface ITCLogin : NSObject
 
 +(void)loginWithUserName:(NSString *)username andPassword:(NSString *)password completion:(void (^) (bool success, NSString *message))completion;
 

@@ -13,9 +13,10 @@
 #import "MailViewController.h"
 #import "DropboxViewController.h"
 #import "ShowLinkViewController.h"
+#import "ITCLoginViewController.h"
 #import "ProjectAdvancedViewController.h"
 
-@interface HomeViewController : NSViewController <NSTabViewDelegate, MailDelegate, ProjectAdvancedViewDelegate>{
+@interface HomeViewController : NSViewController <NSTabViewDelegate, MailDelegate, ProjectAdvancedViewDelegate, ITCLoginDelegate>{
     //Tab
     IBOutlet NSTabView *tabView;
     
