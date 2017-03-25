@@ -26,6 +26,7 @@
 
 #import "Constants.h"
 #import "DropboxKeys.h"
+#import "HTTPStatusCode.h"
 
 #import "Common.h"
 #import "MacHandler.h"
