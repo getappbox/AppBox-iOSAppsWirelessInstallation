@@ -1106,7 +1106,7 @@ Gw
                                     <action selector="buttonCancelTapped:" target="PbW-uV-2L2" id="j97-cQ-pmo"/>
                                 </connections>
                             </button>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="d4L-SC-RTJ">
+                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="d4L-SC-RTJ">
                                 <rect key="frame" x="20" y="23" width="16" height="16"/>
                             </progressIndicator>
                         </subviews>
@@ -1131,6 +1131,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonCancel" destination="f90-He-X67" id="x0l-Mi-1si"/>
+                        <outlet property="buttonLogin" destination="sjt-vM-8hr" id="IeO-kl-W4E"/>
                         <outlet property="progressIndicator" destination="d4L-SC-RTJ" id="Bsq-yA-261"/>
                         <outlet property="textFieldPassword" destination="gDv-1Z-wd2" id="vSE-c4-irU"/>
                         <outlet property="textFieldUserName" destination="Vkc-JU-DbO" id="ybq-fc-6UB"/>

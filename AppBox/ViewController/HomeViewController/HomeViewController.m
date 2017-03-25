@@ -107,7 +107,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![project.buildType isEqualToString:sender.stringValue]){
         [project setBuildType: sender.stringValue];
         if ([project.buildType isEqualToString:BuildTypeAppStore]){
-            [self performSegueWithIdentifier:@"AppleDeveloperLogin" sender:self];
+            [self performSegueWithIdentifier:@"ITCLogin" sender:self];
         }
         [self updateViewState];
     }
@@ -555,7 +555,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [alert addButtonWithTitle:@"YES! Upload on AppStore."];
         [alert addButtonWithTitle:@"NO! Upload on Dropbox"];
         if ([alert runModal] == NSAlertFirstButtonReturn){
-            [self performSegueWithIdentifier:@"ProjectAdvanceSettings" sender:self];
+            [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
             return;
         }
     }

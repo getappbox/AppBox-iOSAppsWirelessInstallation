@@ -16,6 +16,8 @@
 @end
 
 @interface ITCLoginViewController : NSViewController{
+    IBOutlet NSButton *buttonLogin;
+    IBOutlet NSButton *buttonCancel;
     IBOutlet NSTextField *textFieldUserName;
     IBOutlet NSSecureTextField *textFieldPassword;
     IBOutlet NSProgressIndicator *progressIndicator;

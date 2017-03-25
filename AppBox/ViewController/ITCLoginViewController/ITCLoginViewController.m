@@ -19,7 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Apple Developer Login"];
-    [progressIndicator setHidden:YES];
     NSArray *accounts = [SAMKeychain accountsForService:abiTunesConnectService];
     if (accounts.count > 0){
         keyChainAccount = [NSDictionary dictionaryWithDictionary:[accounts firstObject]];
@@ -32,9 +31,9 @@
 
 - (IBAction)buttonLoginTapped:(NSButton *)sender{
     [[textFieldPassword window] makeFirstResponder:self.view];
-    [progressIndicator setHidden:NO];
+    [self showProgress:YES];
     [ITCLogin loginWithUserName:textFieldUserName.stringValue andPassword:textFieldPassword.stringValue completion:^(bool success, NSString *message) {
-        [progressIndicator setHidden:YES];
+        [self showProgress:NO];
         if (success) {
             //set username and password
             [self.project setItcUserName:textFieldUserName.stringValue];
@@ -55,6 +54,17 @@
 
 - (IBAction)buttonCancelTapped:(NSButton *)sender{
     [self dismissController:self];
+}
+
+- (void)showProgress:(BOOL)progress{
+    [progressIndicator setHidden:!progress];
+    [buttonLogin setEnabled:!progress];
+    [buttonCancel setEnabled:!progress];
+    if (progress){
+        [progressIndicator startAnimation:nil];
+    }else{
+        [progressIndicator stopAnimation:nil];
+    }
 }
 
 @end
