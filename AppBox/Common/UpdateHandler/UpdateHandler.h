@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Sparkle/Sparkle.h>
 
 @interface UpdateHandler : NSObject
 

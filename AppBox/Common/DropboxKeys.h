@@ -10,7 +10,7 @@
 #define DropboxKeys_h
 
 #define abDbRoot kDBRootAppFolder
-#define abDbAppkey @"mzwu8mq9xdtilpr"
-#define abDbScreatkey @"le27tu0m54mjlc0"
+#define abDbAppkey @"" //enter your dropbox app key here
+#define abDbScreatkey @"" //enter your dropbox screat key here
 
 #endif /* DropboxKeys_h */
