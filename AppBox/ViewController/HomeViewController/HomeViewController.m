@@ -555,7 +555,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [alert addButtonWithTitle:@"YES! Upload on AppStore."];
         [alert addButtonWithTitle:@"NO! Upload on Dropbox"];
         if ([alert runModal] == NSAlertFirstButtonReturn){
-            [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
+            [self performSegueWithIdentifier:@"ITCLogin" sender:self];
             return;
         }
     }
