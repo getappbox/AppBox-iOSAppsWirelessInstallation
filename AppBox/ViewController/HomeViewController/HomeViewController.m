@@ -1077,11 +1077,26 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - AppleDeveloperLogin Delegate -
 - (void)itcLoginResult:(BOOL)success{
     if (success) {
-        if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
-            [self runALAppStoreScriptForValidation:YES];
-        }else{
-            [self updateViewState];
-        }
+        //check xcode and application loader path
+        [XCHandler getXCodePathWithCompletion:^(NSString *xcodePath, NSString *applicationLoaderPath) {
+            if (xcodePath != nil){
+                [project setXcodePath: xcodePath];
+                if (applicationLoaderPath != nil){
+                    [project setAlPath: applicationLoaderPath];
+                    
+                    //check for ipa, if ipa start upload
+                    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+                        [self runALAppStoreScriptForValidation:YES];
+                    }else{
+                        [self updateViewState];
+                    }
+                }else{
+                    [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
+                }
+            }else{
+                [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
+            }
+        }];
     }
 }
 

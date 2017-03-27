@@ -21,21 +21,6 @@
     [super viewDidLoad];
     [Common logScreen:@"Apple Developer Login"];
     
-    
-    //check xcode and application loader path
-    [XCHandler getXCodePathWithCompletion:^(NSString *xcodePath, NSString *applicationLoaderPath) {
-        if (xcodePath != nil){
-            self.project.xcodePath = xcodePath;
-            if (applicationLoaderPath != nil){
-                self.project.alPath = applicationLoaderPath;
-            }else{
-                [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
-            }
-        }else{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
-        }
-    }];
-    
     //Load iTunes UserName and password
     itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
     if (itcAccounts.count > 0){
