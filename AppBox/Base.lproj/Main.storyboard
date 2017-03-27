@@ -221,6 +221,7 @@
                     <tabViewItems>
                         <tabViewItem label="General" identifier="" image="BlueSetting" id="CUt-eL-nZD"/>
                         <tabViewItem label="Accounts" identifier="" image="BlueAccount" id="ybD-YP-w1V"/>
+                        <tabViewItem label="Help" identifier="" image="BlueHelp" id="sTe-Rx-Uh7"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="5j0-xc-hYx">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -231,11 +232,25 @@
                     <connections>
                         <segue destination="GEc-df-dsQ" kind="relationship" relationship="tabItems" id="sk1-Qk-cEh"/>
                         <segue destination="8HQ-Nd-oRN" kind="relationship" relationship="tabItems" id="oMn-HT-J4Y"/>
+                        <segue destination="51l-XY-be0" kind="relationship" relationship="tabItems" id="BTw-Rb-vki"/>
                     </connections>
                 </tabViewController>
                 <customObject id="moO-wH-yVd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1670" y="142"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="SSL-pr-kGE">
+            <objects>
+                <viewController id="51l-XY-be0" sceneMemberID="viewController">
+                    <view key="view" id="exm-p1-efi">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="126"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="MOp-8L-Lfj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2331" y="167"/>
         </scene>
         <!--Preferences View Controller-->
         <scene sceneID="g4x-WP-vEQ">
@@ -353,20 +368,20 @@
                 </viewController>
                 <customObject id="dfe-sH-LCu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2465.5" y="-164"/>
+            <point key="canvasLocation" x="2454" y="-297"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ben-tT-P4v">
             <objects>
                 <viewController id="8HQ-Nd-oRN" sceneMemberID="viewController">
                     <view key="view" id="BO9-Rs-OZ0">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="705" height="187"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
                 <customObject id="LdQ-39-FHP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2347" y="257"/>
+            <point key="canvasLocation" x="2459" y="-46"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -1714,6 +1729,7 @@ Gw
     </scenes>
     <resources>
         <image name="BlueAccount" width="72.5" height="72.5"/>
+        <image name="BlueHelp" width="72.5" height="72.5"/>
         <image name="BlueSetting" width="72.5" height="72.5"/>
     </resources>
     <inferredMetricsTieBreakers>
