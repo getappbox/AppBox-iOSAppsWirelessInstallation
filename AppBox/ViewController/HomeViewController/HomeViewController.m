@@ -1070,9 +1070,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (void)projectAdvancedCancelButtonTapped:(NSButton *)sender{
-    if (project.fullPath == nil){
-        [self uploadIPAFileWithLocalURL:project.ipaFullPath];
-    }
+    
 }
 
 #pragma mark - AppleDeveloperLogin Delegate -
@@ -1102,9 +1100,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)itcLoginCanceled{
-    [project setBuildType:abEmptyString];
-    [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
-    [self updateViewState];
+    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+        [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+    } else {
+        [project setBuildType:abEmptyString];
+        [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+        [self updateViewState];
+    }
 }
 
 #pragma mark - Navigation -
