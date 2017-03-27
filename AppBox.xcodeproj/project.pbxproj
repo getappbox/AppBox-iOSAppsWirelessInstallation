@@ -36,6 +36,8 @@
 		E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72DB1E88FA230031FB7C /* XCHandler.m */; };
 		E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72E31E88FB660031FB7C /* TaskHandler.m */; };
 		E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */ = {isa = PBXBuildFile; fileRef = E119EF5F1E3735EA00A7798E /* XCodePath.sh */; };
+		E16D72E91E8935260031FB7C /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72E81E8935260031FB7C /* PreferencesViewController.m */; };
+		E16D72EB1E893DD70031FB7C /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */; };
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
 		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
@@ -123,6 +125,9 @@
 		E16D72DB1E88FA230031FB7C /* XCHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCHandler.m; sourceTree = "<group>"; };
 		E16D72E21E88FB660031FB7C /* TaskHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHandler.h; sourceTree = "<group>"; };
 		E16D72E31E88FB660031FB7C /* TaskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHandler.m; sourceTree = "<group>"; };
+		E16D72E71E8935260031FB7C /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
+		E16D72E81E8935260031FB7C /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
+		E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
 		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
 		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
@@ -268,13 +273,6 @@
 			path = MenuHandler;
 			sourceTree = "<group>";
 		};
-		E15BC7101E5ABEE800D3E411 /* AutoUpdateViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AutoUpdateViewController;
-			sourceTree = "<group>";
-		};
 		E15C26671D7FD5A9004243B9 /* ShowLinkViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,7 +350,7 @@
 				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
 				E18DCB141DFE727100BD7F11 /* MailViewController */,
 				E1E215B41E869BDF0091565D /* ITCLoginViewController */,
-				E15BC7101E5ABEE800D3E411 /* AutoUpdateViewController */,
+				E16D72E61E8935060031FB7C /* PreferencesViewController */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -371,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437DE1D743A4E00CE8B7E /* Assets.xcassets */,
+				E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -450,6 +449,15 @@
 				E16D72E31E88FB660031FB7C /* TaskHandler.m */,
 			);
 			path = TaskHandler;
+			sourceTree = "<group>";
+		};
+		E16D72E61E8935060031FB7C /* PreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E16D72E71E8935260031FB7C /* PreferencesViewController.h */,
+				E16D72E81E8935260031FB7C /* PreferencesViewController.m */,
+			);
+			path = PreferencesViewController;
 			sourceTree = "<group>";
 		};
 		E172E13A1DEEB34D00405EF2 /* Commands */ = {
@@ -699,6 +707,7 @@
 				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
 				9740CD411E005DB100224D9F /* Main.storyboard in Resources */,
 				E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */,
+				E16D72EB1E893DD70031FB7C /* AppBoxIcons.xcassets in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -781,6 +790,7 @@
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
+				E16D72E91E8935260031FB7C /* PreferencesViewController.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,

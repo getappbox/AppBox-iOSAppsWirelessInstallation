@@ -2,15 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "public-domain-images-free-stock-photos-002-1000x667.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "BlueAccount@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "BlueAccount@3x.png",
       "scale" : "3x"
     }
   ],

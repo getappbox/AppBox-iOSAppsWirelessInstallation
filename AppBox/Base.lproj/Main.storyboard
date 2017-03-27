@@ -33,6 +33,7 @@
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <action selector="preferencesTapped:" target="hnw-xV-0zn" id="HsC-MP-RVP"/>
+                                                <segue destination="Nqm-M9-J5R" kind="show" id="yPR-gq-1U5"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -211,7 +212,161 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
-            <point key="canvasLocation" x="905" y="-145"/>
+            <point key="canvasLocation" x="1297" y="-197"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="GD2-b8-F0e">
+            <objects>
+                <tabViewController title="Preferences" selectedTabViewItemIndex="0" tabStyle="toolbar" id="Nqm-M9-J5R" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem label="General" identifier="" image="BlueSetting" id="CUt-eL-nZD"/>
+                        <tabViewItem label="Accounts" identifier="" image="BlueAccount" id="ybD-YP-w1V"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="5j0-xc-hYx">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                    </tabView>
+                    <connections>
+                        <segue destination="GEc-df-dsQ" kind="relationship" relationship="tabItems" id="sk1-Qk-cEh"/>
+                        <segue destination="8HQ-Nd-oRN" kind="relationship" relationship="tabItems" id="oMn-HT-J4Y"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="moO-wH-yVd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1670" y="142"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="g4x-WP-vEQ">
+            <objects>
+                <viewController id="GEc-df-dsQ" customClass="PreferencesViewController" sceneMemberID="viewController">
+                    <view key="view" id="e55-Bg-8bB">
+                        <rect key="frame" x="0.0" y="0.0" width="695" height="152"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TeP-i7-lEs">
+                                <rect key="frame" x="13" y="118" width="204" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="NT1-x1-kN6"/>
+                                    <constraint firstAttribute="width" constant="200" id="wsd-6m-zC7"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Build Location:" id="eyK-4W-4Xy">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCt-Yl-rQx">
+                                <rect key="frame" x="227" y="114" width="306" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="IFR-zF-zRU"/>
+                                </constraints>
+                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Specifies the destination for the build" pathStyle="popUp" id="Oz9-pI-yNp">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <allowedTypes>
+                                        <string>public.folder</string>
+                                    </allowedTypes>
+                                </pathCell>
+                                <connections>
+                                    <action selector="buildPathHandler:" target="GEc-df-dsQ" id="dwW-w5-0Lu"/>
+                                </connections>
+                            </pathControl>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mQN-Es-Pxa">
+                                <rect key="frame" x="13" y="79" width="204" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="2ca-eT-ynK"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Xcode Path:" id="Xsg-8E-Tgr">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gah-mh-m2D">
+                                <rect key="frame" x="13" y="40" width="204" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="abq-T6-cGq"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Application Loader Path:" id="riw-bA-hd6">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rE7-2i-rsT">
+                                <rect key="frame" x="227" y="75" width="306" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="1ta-92-vGQ"/>
+                                </constraints>
+                                <pathCell key="cell" lineBreakMode="truncatingHead" selectable="YES" editable="YES" alignment="left" placeholderString="Select Xcode" pathStyle="popUp" id="FzV-cO-JRT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <allowedTypes>
+                                        <string>app</string>
+                                    </allowedTypes>
+                                </pathCell>
+                                <connections>
+                                    <action selector="xcodePathHandler:" target="GEc-df-dsQ" id="p3H-rP-DSX"/>
+                                </connections>
+                            </pathControl>
+                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wI-8w-caF">
+                                <rect key="frame" x="227" y="36" width="306" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="OvF-XA-rWn"/>
+                                </constraints>
+                                <pathCell key="cell" lineBreakMode="truncatingHead" selectable="YES" editable="YES" alignment="left" placeholderString="Select Application Loader" pathStyle="popUp" id="92Y-Hf-K5d">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <allowedTypes>
+                                        <string>app</string>
+                                    </allowedTypes>
+                                </pathCell>
+                            </pathControl>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="VCt-Yl-rQx" firstAttribute="leading" secondItem="rE7-2i-rsT" secondAttribute="leading" id="3NP-FL-V3I"/>
+                            <constraint firstItem="gah-mh-m2D" firstAttribute="centerY" secondItem="5wI-8w-caF" secondAttribute="centerY" id="3YH-0r-oxR"/>
+                            <constraint firstItem="TeP-i7-lEs" firstAttribute="leading" secondItem="e55-Bg-8bB" secondAttribute="leading" constant="15" id="4Np-k7-385"/>
+                            <constraint firstItem="rE7-2i-rsT" firstAttribute="leading" secondItem="5wI-8w-caF" secondAttribute="leading" id="4pt-Zn-3HF"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VCt-Yl-rQx" secondAttribute="trailing" constant="35" id="7ak-Ah-NWB"/>
+                            <constraint firstItem="TeP-i7-lEs" firstAttribute="leading" secondItem="mQN-Es-Pxa" secondAttribute="leading" id="9PT-DP-yeW"/>
+                            <constraint firstItem="VCt-Yl-rQx" firstAttribute="leading" secondItem="TeP-i7-lEs" secondAttribute="trailing" constant="15" id="DFQ-0G-FBT"/>
+                            <constraint firstItem="mQN-Es-Pxa" firstAttribute="leading" secondItem="gah-mh-m2D" secondAttribute="leading" id="GPB-H6-LEC"/>
+                            <constraint firstItem="mQN-Es-Pxa" firstAttribute="top" secondItem="TeP-i7-lEs" secondAttribute="bottom" constant="20" id="LOc-kk-pHE"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5wI-8w-caF" secondAttribute="trailing" constant="35" id="PVS-kv-VrG"/>
+                            <constraint firstItem="mQN-Es-Pxa" firstAttribute="trailing" secondItem="gah-mh-m2D" secondAttribute="trailing" id="Sph-vR-svZ"/>
+                            <constraint firstItem="TeP-i7-lEs" firstAttribute="centerY" secondItem="VCt-Yl-rQx" secondAttribute="centerY" id="W5L-W9-EfS"/>
+                            <constraint firstItem="TeP-i7-lEs" firstAttribute="top" secondItem="e55-Bg-8bB" secondAttribute="top" constant="15" id="fnc-b5-T55"/>
+                            <constraint firstItem="TeP-i7-lEs" firstAttribute="trailing" secondItem="mQN-Es-Pxa" secondAttribute="trailing" id="he7-Y5-9Wi"/>
+                            <constraint firstItem="gah-mh-m2D" firstAttribute="top" secondItem="mQN-Es-Pxa" secondAttribute="bottom" constant="20" id="qHN-bs-HvV"/>
+                            <constraint firstItem="mQN-Es-Pxa" firstAttribute="centerY" secondItem="rE7-2i-rsT" secondAttribute="centerY" id="t2Q-bR-Qd7"/>
+                            <constraint firstAttribute="bottom" secondItem="gah-mh-m2D" secondAttribute="bottom" constant="40" id="tAt-xK-Pdg"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rE7-2i-rsT" secondAttribute="trailing" constant="35" id="wMf-VV-kdj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pathBuild" destination="VCt-Yl-rQx" id="FOX-IU-GMD"/>
+                        <outlet property="pathXCode" destination="rE7-2i-rsT" id="Gfm-hA-0MO"/>
+                    </connections>
+                </viewController>
+                <customObject id="dfe-sH-LCu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2465.5" y="-164"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ben-tT-P4v">
+            <objects>
+                <viewController id="8HQ-Nd-oRN" sceneMemberID="viewController">
+                    <view key="view" id="BO9-Rs-OZ0">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="LdQ-39-FHP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2347" y="257"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -1292,33 +1447,6 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="626" height="273"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bm-kF-uPj">
-                                <rect key="frame" x="13" y="213" width="182" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="178" id="gH5-rb-Lmd"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Location" id="jIa-3k-eIf">
-                                    <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eDk-p6-ajY">
-                                <rect key="frame" x="205" y="209" width="409" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="fSP-gO-BEv"/>
-                                </constraints>
-                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Specifies the destination for the build" pathStyle="popUp" id="Ay2-yl-CQl">
-                                    <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <allowedTypes>
-                                        <string>public.folder</string>
-                                    </allowedTypes>
-                                </pathCell>
-                                <connections>
-                                    <action selector="buildPathHandler:" target="n1u-76-r4M" id="6JN-pJ-cuc"/>
-                                </connections>
-                            </pathControl>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pae-a2-qHY">
                                 <rect key="frame" x="547" y="13" width="70" height="32"/>
                                 <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U3I-vl-IWy">
@@ -1342,14 +1470,6 @@ Gw
                                     <action selector="buttonCancelTapped:" target="n1u-76-r4M" id="Lai-On-vcf"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FCa-LA-otm">
-                                <rect key="frame" x="13" y="127" width="182" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Xcode Path" id="Wr1-pi-w5B">
-                                    <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="haB-7R-3Q7">
                                 <rect key="frame" x="8" y="242" width="121" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Other Settings" placeholderString="" id="XTF-c4-JRS">
@@ -1358,64 +1478,16 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0fz-Iv-tzW">
-                                <rect key="frame" x="13" y="161" width="204" height="21"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AppStore Settings (Beta)" placeholderString="" id="IXK-Ft-xCe">
-                                    <font key="font" metaFont="systemSemibold" size="17"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-Qe-3nK">
-                                <rect key="frame" x="0.0" y="195" width="626" height="5"/>
-                            </box>
-                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPL-Fg-1Kt">
-                                <rect key="frame" x="208" y="122" width="406" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="DyH-Sb-wal"/>
-                                </constraints>
-                                <pathCell key="cell" lineBreakMode="truncatingHead" selectable="YES" editable="YES" alignment="left" placeholderString="Select Xcode" pathStyle="popUp" id="NOP-fb-eTS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <allowedTypes>
-                                        <string>app</string>
-                                    </allowedTypes>
-                                </pathCell>
-                                <connections>
-                                    <action selector="xcodePathHandler:" target="n1u-76-r4M" id="w7P-au-lq3"/>
-                                </connections>
-                            </pathControl>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7bm-kF-uPj" firstAttribute="top" secondItem="haB-7R-3Q7" secondAttribute="bottom" constant="10" id="1mq-0t-KZi"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" constant="10" id="4fR-Qe-DaY"/>
                             <constraint firstItem="JEl-Gx-e8o" firstAttribute="centerY" secondItem="Pae-a2-qHY" secondAttribute="centerY" id="B8w-Z9-BTA"/>
-                            <constraint firstItem="0fz-Iv-tzW" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" constant="15" id="DfX-Vk-C5t"/>
-                            <constraint firstItem="7bm-kF-uPj" firstAttribute="trailing" secondItem="FCa-LA-otm" secondAttribute="trailing" id="JAu-Bp-9UZ"/>
-                            <constraint firstAttribute="trailing" secondItem="eDk-p6-ajY" secondAttribute="trailing" constant="15" id="Kcu-xy-Q0e"/>
-                            <constraint firstItem="FCa-LA-otm" firstAttribute="centerY" secondItem="fPL-Fg-1Kt" secondAttribute="centerY" id="NRS-sP-hGi"/>
-                            <constraint firstAttribute="trailing" secondItem="Mfb-Qe-3nK" secondAttribute="trailing" id="NcM-tG-a5r"/>
-                            <constraint firstItem="Mfb-Qe-3nK" firstAttribute="top" secondItem="7bm-kF-uPj" secondAttribute="bottom" constant="15" id="OUQ-7O-nwt"/>
-                            <constraint firstAttribute="trailing" secondItem="fPL-Fg-1Kt" secondAttribute="trailing" constant="15" id="Pou-g0-QuV"/>
-                            <constraint firstItem="0fz-Iv-tzW" firstAttribute="top" secondItem="Mfb-Qe-3nK" secondAttribute="bottom" constant="15" id="Vxb-25-g77"/>
                             <constraint firstAttribute="bottom" secondItem="Pae-a2-qHY" secondAttribute="bottom" constant="20" id="acY-Xu-LDg"/>
-                            <constraint firstItem="7bm-kF-uPj" firstAttribute="leading" secondItem="FCa-LA-otm" secondAttribute="leading" id="ca8-mq-YV8"/>
-                            <constraint firstItem="eDk-p6-ajY" firstAttribute="leading" secondItem="7bm-kF-uPj" secondAttribute="trailing" constant="15" id="gZH-4v-Agx"/>
-                            <constraint firstItem="FCa-LA-otm" firstAttribute="top" secondItem="0fz-Iv-tzW" secondAttribute="bottom" constant="15" id="kbR-08-hJw"/>
                             <constraint firstItem="Pae-a2-qHY" firstAttribute="leading" secondItem="JEl-Gx-e8o" secondAttribute="trailing" constant="10" id="nRo-HT-HDO"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="top" secondItem="OXY-Ua-ZSc" secondAttribute="top" constant="10" id="qUN-m0-bsS"/>
                             <constraint firstAttribute="trailing" secondItem="Pae-a2-qHY" secondAttribute="trailing" constant="15" id="uRb-GC-VJJ"/>
-                            <constraint firstItem="eDk-p6-ajY" firstAttribute="leading" secondItem="7bm-kF-uPj" secondAttribute="trailing" constant="15" id="y5o-9T-EMn"/>
-                            <constraint firstItem="7bm-kF-uPj" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" constant="15" id="yLH-S1-3UD"/>
-                            <constraint firstItem="fPL-Fg-1Kt" firstAttribute="leading" secondItem="FCa-LA-otm" secondAttribute="trailing" constant="18" id="ye7-El-yjt"/>
-                            <constraint firstItem="7bm-kF-uPj" firstAttribute="centerY" secondItem="eDk-p6-ajY" secondAttribute="centerY" id="ysU-RP-Zow"/>
-                            <constraint firstItem="Mfb-Qe-3nK" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" id="zyP-7o-Vyd"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="pathBuild" destination="eDk-p6-ajY" id="tGZ-XV-fD3"/>
-                        <outlet property="pathXCode" destination="fPL-Fg-1Kt" id="0qs-dJ-R94"/>
-                    </connections>
                 </viewController>
                 <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1640,7 +1712,11 @@ Gw
             <point key="canvasLocation" x="-238" y="1316"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BlueAccount" width="72.5" height="72.5"/>
+        <image name="BlueSetting" width="72.5" height="72.5"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jTU-hR-7QO"/>
+        <segue reference="8fD-5i-iaO"/>
     </inferredMetricsTieBreakers>
 </document>

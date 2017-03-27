@@ -11,7 +11,8 @@
 
 @implementation UserData
 
-#pragma mark - Gmail Logged In
+#pragma mark - Gmail Logged In -
+
 #define GmailLoggedIn @"GmailLoggedIn"
 
 +(BOOL)isGmailLoggedIn{
@@ -23,9 +24,9 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - Email Releated
+#pragma mark - Email Releated -
+
 #define UserEmail @"UserEmail"
-#define UserMessage @"UserMessage"
 
 +(NSString *)userEmail{
     NSString *userEmail = [[NSUserDefaults standardUserDefaults] stringForKey:UserEmail];
@@ -37,6 +38,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define UserMessage @"UserMessage"
+
 +(NSString *)userMessage{
     NSString *userMessage = [[NSUserDefaults standardUserDefaults] stringForKey:UserMessage];
     return userMessage == nil ? abEmptyString : userMessage;
@@ -47,7 +50,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - Default Setting
+#pragma mark - Default Setting -
+
 #define BuildLocation @"BuildLocation"
 
 +(NSURL *)buildLocation{
@@ -78,9 +82,24 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - Dropbox
+#define ApplicationLoaderLocation @"ApplicationLoaderLocation"
+
++(NSString *)applicationLoaderLocation{
+    NSString *alLocation = [[NSUserDefaults standardUserDefaults] stringForKey:ApplicationLoaderLocation];
+    if (alLocation == nil) {
+        alLocation = abApplicationLoaderAppLocation;
+    }
+    return alLocation;
+}
+
++(void)setApplicationLoaderLocation:(NSString *)alLocation{
+    [[NSUserDefaults standardUserDefaults] setValue:alLocation forKey:ApplicationLoaderLocation];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - Dropbox -
+
 #define DropboxUsedSpace @"DropboxUsedSpace"
-#define DropboxAvailableSpace @"DropboxAvailableSpace"
 
 +(NSNumber *)dropboxUsedSpace{
     return @([[NSUserDefaults standardUserDefaults] doubleForKey:DropboxUsedSpace]);
@@ -90,6 +109,8 @@
     [[NSUserDefaults standardUserDefaults] setInteger:usedSpace.integerValue forKey:DropboxUsedSpace];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+#define DropboxAvailableSpace @"DropboxAvailableSpace"
 
 +(NSNumber *)dropboxAvailableSpace{
     return @([[NSUserDefaults standardUserDefaults] doubleForKey:DropboxAvailableSpace]);

@@ -15,7 +15,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Project Advanced Settings"];
-    [pathBuild setURL:self.project.buildDirectory];
 }
 
 //MARK: - Action Button Tapped
@@ -25,8 +24,6 @@
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
-    [UserData setBuildLocation:self.project.buildDirectory];
-    
     if (self.delegate != nil){
         [self.delegate projectAdvancedSaveButtonTapped:sender];
     }
@@ -35,20 +32,5 @@
 }
 
 
-//Build Path Handler
-- (IBAction)buildPathHandler:(NSPathControl *)sender {
-    if (![self.project.buildDirectory isEqualTo:sender.URL]){
-        if ([[sender.URL.resourceSpecifier stringByRemovingPercentEncoding] containsString:@" "]){
-            [Common showAlertWithTitle:@"Error" andMessage:[NSString stringWithFormat:@"Please select directory without any spaces.\n\n%@",[sender.URL.resourceSpecifier stringByRemovingPercentEncoding]]];
-            [sender setURL:self.project.buildDirectory];
-        }else{
-            [self.project setBuildDirectory: sender.URL];
-        }
-    }
-}
 
-//Xcode Path Handler
-- (IBAction)xcodePathHandler:(NSPathControl *)sender {
-
-}
 @end

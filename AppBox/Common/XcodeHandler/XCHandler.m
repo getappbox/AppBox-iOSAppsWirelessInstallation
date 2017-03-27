@@ -20,7 +20,7 @@
                 
                 //set xcode location
                 [UserData setXCodeLocation:xcodePath];
-                NSString *alPath = [[xcodePath stringByAppendingPathComponent:abApplicationLoaderLocation] stringByRemovingPercentEncoding];
+                NSString *alPath = [[xcodePath stringByAppendingPathComponent:abApplicationLoaderALToolLocation] stringByRemovingPercentEncoding];
                 if ([[NSFileManager defaultManager] fileExistsAtPath:alPath]){
                     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Application Loader = %@", alPath]];
                     completion(xcodePath, alPath);
