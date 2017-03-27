@@ -62,4 +62,9 @@
     }
 }
 
++(void)a{
+    SUUpdater *updater;
+    [updater checkForUpdates:nil];
+}
+
 @end
