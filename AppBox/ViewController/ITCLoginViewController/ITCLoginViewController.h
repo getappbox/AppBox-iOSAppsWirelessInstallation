@@ -18,6 +18,7 @@
 @interface ITCLoginViewController : NSViewController{
     IBOutlet NSButton *buttonLogin;
     IBOutlet NSButton *buttonCancel;
+    IBOutlet NSComboBox *comboUserName;
     IBOutlet NSTextField *textFieldUserName;
     IBOutlet NSSecureTextField *textFieldPassword;
     IBOutlet NSProgressIndicator *progressIndicator;
@@ -28,5 +29,8 @@
 
 - (IBAction)buttonLoginTapped:(NSButton *)sender;
 - (IBAction)buttonCancelTapped:(NSButton *)sender;
+- (IBAction)comboUserNameValueChanged:(NSComboBox *)sender;
+- (IBAction)textFieldUserNameValueChanged:(NSTextField *)sender;
+- (IBAction)textFieldPasswordValueChanged:(NSSecureTextField *)sender;
 
 @end

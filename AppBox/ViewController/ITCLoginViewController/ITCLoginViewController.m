@@ -13,22 +13,31 @@
 @end
 
 @implementation ITCLoginViewController{
+    NSArray *itcAccounts;
     NSDictionary *keyChainAccount;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Apple Developer Login"];
-    NSArray *accounts = [SAMKeychain accountsForService:abiTunesConnectService];
-    if (accounts.count > 0){
-        keyChainAccount = [NSDictionary dictionaryWithDictionary:[accounts firstObject]];
-        NSString *username = [keyChainAccount valueForKey:kSAMKeychainAccountKey];
-        NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:username];
-        [textFieldUserName setStringValue: username];
-        [textFieldPassword setStringValue: password];
+    
+    //Load iTunes UserName and password
+    itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
+    if (itcAccounts.count > 0){
+        [self selectITCAccountAtIndex:0];
+    }
+    BOOL isMultipleAccounts = itcAccounts.count > 1;
+    [comboUserName setHidden:!isMultipleAccounts];
+    [textFieldUserName setHidden:isMultipleAccounts];
+    if (isMultipleAccounts) {
+        for (NSDictionary *itcAccount in itcAccounts) {
+            [comboUserName addItemWithObjectValue:[itcAccount valueForKey:kSAMKeychainAccountKey]];
+        }
+        [comboUserName selectItemAtIndex:0];
     }
 }
 
+#pragma mark - Controls actions
 - (IBAction)buttonLoginTapped:(NSButton *)sender{
     [[textFieldPassword window] makeFirstResponder:self.view];
     [self showProgress:YES];
@@ -54,6 +63,36 @@
 
 - (IBAction)buttonCancelTapped:(NSButton *)sender{
     [self dismissController:self];
+}
+
+- (IBAction)comboUserNameValueChanged:(NSComboBox *)sender {
+    if ([sender.objectValues containsObject:sender.stringValue]){
+        [self selectITCAccountAtIndex:sender.indexOfSelectedItem];
+    }else{
+        [textFieldUserName setStringValue:sender.stringValue];
+        [self textFieldUserNameValueChanged:textFieldUserName];
+    }
+}
+
+- (IBAction)textFieldUserNameValueChanged:(NSTextField *)sender {
+    [comboUserName setHidden:YES];
+    [textFieldUserName setHidden:NO];
+    [textFieldPassword setStringValue:@""];
+}
+
+- (IBAction)textFieldPasswordValueChanged:(NSSecureTextField *)sender {
+//    [self buttonLoginTapped:buttonLogin];
+}
+
+
+#pragma mark - Helper Methods
+
+- (void)selectITCAccountAtIndex:(NSInteger)index{
+    keyChainAccount = [NSDictionary dictionaryWithDictionary:[itcAccounts objectAtIndex:index]];
+    NSString *username = [keyChainAccount valueForKey:kSAMKeychainAccountKey];
+    NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:username];
+    [textFieldUserName setStringValue: username];
+    [textFieldPassword setStringValue: password];
 }
 
 - (void)showProgress:(BOOL)progress{
