@@ -29,7 +29,9 @@
 #import "HTTPStatusCode.h"
 
 #import "Common.h"
+#import "XCHandler.h"
 #import "MacHandler.h"
+#import "TaskHandler.h"
 #import "MailHandler.h"
 #import "UpdateHandler.h"
 #import "NetworkHandler.h"
