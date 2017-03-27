@@ -966,7 +966,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 && //build scheme
                     comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0 && //build type
                     comboTeamId.stringValue != nil && comboTeamId.stringValue.length > 0 && //team id
-                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab) ||
+                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab &&
+                    (![comboBuildType.stringValue isEqualToString: BuildTypeAppStore] || project.itcPasswod.length > 0)) ||
                    
                    //if ipa selected
                    (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
@@ -1078,8 +1079,16 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (success) {
         if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
             [self runALAppStoreScriptForValidation:YES];
+        }else{
+            [self updateViewState];
         }
     }
+}
+
+-(void)itcLoginCanceled{
+    [project setBuildType:abEmptyString];
+    [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+    [self updateViewState];
 }
 
 #pragma mark - Navigation -

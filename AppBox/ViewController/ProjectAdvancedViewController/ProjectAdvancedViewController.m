@@ -15,11 +15,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Project Advanced Settings"];
-    NSString *xcodePath = [UserData xCodeLocation];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:xcodePath]){
-        [pathXCode setURL: [NSURL URLWithString:xcodePath]];
-    }
-    [pathXCode setEnabled:NO];
     [pathBuild setURL:self.project.buildDirectory];
 }
 
@@ -31,17 +26,6 @@
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
     [UserData setBuildLocation:self.project.buildDirectory];
-    
-    //set xcode and application loader path
-    if (pathXCode.URL.isFileURL){
-        [self.project setXcodePath:[pathXCode.URL.filePathURL resourceSpecifier]];
-    }else{
-        [self.project setXcodePath: pathXCode.URL.absoluteString];
-    }
-    [self.project setAlPath: [[self.project.xcodePath stringByAppendingPathComponent:abApplicationLoaderLocation] stringByRemovingPercentEncoding]];
-    
-    //set xcode location
-    [UserData setXCodeLocation:self.project.xcodePath];
     
     if (self.delegate != nil){
         [self.delegate projectAdvancedSaveButtonTapped:sender];

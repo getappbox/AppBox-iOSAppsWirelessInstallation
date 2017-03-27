@@ -11,6 +11,7 @@
 
 @protocol ITCLoginDelegate <NSObject>
 
+- (void)itcLoginCanceled;
 - (void)itcLoginResult:(BOOL)success;
 
 @end
