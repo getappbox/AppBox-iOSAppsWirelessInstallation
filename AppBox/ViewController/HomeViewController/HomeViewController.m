@@ -426,6 +426,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (scriptType == ScriptTypeAppStoreUpload){
             //show upload succeess message
             [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+            [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
             [self viewStateForProgressFinish:YES];
             [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
         }
