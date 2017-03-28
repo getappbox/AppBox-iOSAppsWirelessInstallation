@@ -36,8 +36,12 @@
 		E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72DB1E88FA230031FB7C /* XCHandler.m */; };
 		E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72E31E88FB660031FB7C /* TaskHandler.m */; };
 		E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */ = {isa = PBXBuildFile; fileRef = E119EF5F1E3735EA00A7798E /* XCodePath.sh */; };
-		E16D72E91E8935260031FB7C /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72E81E8935260031FB7C /* PreferencesViewController.m */; };
 		E16D72EB1E893DD70031FB7C /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */; };
+		E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */; };
+		E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186D51E8A45C30002509F /* PreferencesViewController.m */; };
+		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
+		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */; };
+		E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */; };
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
 		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
@@ -125,10 +129,18 @@
 		E16D72DB1E88FA230031FB7C /* XCHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCHandler.m; sourceTree = "<group>"; };
 		E16D72E21E88FB660031FB7C /* TaskHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHandler.h; sourceTree = "<group>"; };
 		E16D72E31E88FB660031FB7C /* TaskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHandler.m; sourceTree = "<group>"; };
-		E16D72E71E8935260031FB7C /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
-		E16D72E81E8935260031FB7C /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
 		E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
 		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
+		E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesTabViewController.h; sourceTree = "<group>"; };
+		E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesTabViewController.m; sourceTree = "<group>"; };
+		E18186D41E8A45C30002509F /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
+		E18186D51E8A45C30002509F /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
+		E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferencesViewController.h; sourceTree = "<group>"; };
+		E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPreferencesViewController.m; sourceTree = "<group>"; };
+		E18186DD1E8A47CD0002509F /* EmailPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailPreferencesViewController.h; sourceTree = "<group>"; };
+		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailPreferencesViewController.m; sourceTree = "<group>"; };
+		E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPreferencesViewController.h; sourceTree = "<group>"; };
+		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
 		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
 		E188EA0B1D78485900EBCA52 /* GooglURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglURLShortenerService.h; sourceTree = "<group>"; };
@@ -454,8 +466,12 @@
 		E16D72E61E8935060031FB7C /* PreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E16D72E71E8935260031FB7C /* PreferencesViewController.h */,
-				E16D72E81E8935260031FB7C /* PreferencesViewController.m */,
+				E18186D31E8A45C30002509F /* GeneralPreferencesViewController */,
+				E18186D71E8A479E0002509F /* AccountPreferencesViewController */,
+				E18186D81E8A479E0002509F /* EmailPreferencesViewController */,
+				E18186D91E8A479E0002509F /* HelpPreferencesViewController */,
+				E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */,
+				E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */,
 			);
 			path = PreferencesViewController;
 			sourceTree = "<group>";
@@ -470,6 +486,42 @@
 				E119EF5F1E3735EA00A7798E /* XCodePath.sh */,
 			);
 			path = Commands;
+			sourceTree = "<group>";
+		};
+		E18186D31E8A45C30002509F /* GeneralPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E18186D41E8A45C30002509F /* PreferencesViewController.h */,
+				E18186D51E8A45C30002509F /* PreferencesViewController.m */,
+			);
+			path = GeneralPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		E18186D71E8A479E0002509F /* AccountPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */,
+				E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */,
+			);
+			path = AccountPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		E18186D81E8A479E0002509F /* EmailPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E18186DD1E8A47CD0002509F /* EmailPreferencesViewController.h */,
+				E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */,
+			);
+			path = EmailPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		E18186D91E8A479E0002509F /* HelpPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */,
+				E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */,
+			);
+			path = HelpPreferencesViewController;
 			sourceTree = "<group>";
 		};
 		E188EA071D78485900EBCA52 /* Tiny */ = {
@@ -790,7 +842,6 @@
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
-				E16D72E91E8935260031FB7C /* PreferencesViewController.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
@@ -799,6 +850,7 @@
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */,
+				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
@@ -815,8 +867,12 @@
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
+				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
+				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
+				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */,
+				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
 				E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 				E1D479D31E4B04A500BBC838 /* UploadRecord+CoreDataClass.m in Sources */,

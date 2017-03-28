@@ -217,11 +217,12 @@
         <!--Preferences-->
         <scene sceneID="GD2-b8-F0e">
             <objects>
-                <tabViewController title="Preferences" selectedTabViewItemIndex="0" tabStyle="toolbar" id="Nqm-M9-J5R" sceneMemberID="viewController">
+                <tabViewController title="Preferences" selectedTabViewItemIndex="0" tabStyle="toolbar" id="Nqm-M9-J5R" customClass="PreferencesTabViewController" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="General" identifier="" image="BlueSetting" id="CUt-eL-nZD"/>
                         <tabViewItem label="Accounts" identifier="" image="BlueAccount" id="ybD-YP-w1V"/>
-                        <tabViewItem label="Help" identifier="" image="BlueHelp" id="sTe-Rx-Uh7"/>
+                        <tabViewItem label="Email" image="BlueEmail" id="5qy-v6-vmv"/>
+                        <tabViewItem label="Help" image="BlueHelp" id="zyG-mN-8tT"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="5j0-xc-hYx">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -232,17 +233,18 @@
                     <connections>
                         <segue destination="GEc-df-dsQ" kind="relationship" relationship="tabItems" id="sk1-Qk-cEh"/>
                         <segue destination="8HQ-Nd-oRN" kind="relationship" relationship="tabItems" id="oMn-HT-J4Y"/>
-                        <segue destination="51l-XY-be0" kind="relationship" relationship="tabItems" id="BTw-Rb-vki"/>
+                        <segue destination="WPs-bP-74P" kind="relationship" relationship="tabItems" id="IdI-Ws-aNa"/>
+                        <segue destination="51l-XY-be0" kind="relationship" relationship="tabItems" id="xCK-BT-o7J"/>
                     </connections>
                 </tabViewController>
                 <customObject id="moO-wH-yVd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1670" y="142"/>
         </scene>
-        <!--View Controller-->
+        <!--Help-->
         <scene sceneID="SSL-pr-kGE">
             <objects>
-                <viewController id="51l-XY-be0" sceneMemberID="viewController">
+                <viewController title="Help" id="51l-XY-be0" customClass="HelpPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="exm-p1-efi">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="126"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -250,18 +252,31 @@
                 </viewController>
                 <customObject id="MOp-8L-Lfj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2331" y="167"/>
+            <point key="canvasLocation" x="2331" y="298"/>
         </scene>
-        <!--Preferences View Controller-->
+        <!--Email-->
+        <scene sceneID="dZh-tb-CeL">
+            <objects>
+                <viewController title="Email" id="WPs-bP-74P" customClass="EmailPreferencesViewController" sceneMemberID="viewController">
+                    <view key="view" id="ljf-fe-xqh">
+                        <rect key="frame" x="0.0" y="0.0" width="572" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="xJw-P1-I09" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1670" y="581"/>
+        </scene>
+        <!--General-->
         <scene sceneID="g4x-WP-vEQ">
             <objects>
-                <viewController id="GEc-df-dsQ" customClass="PreferencesViewController" sceneMemberID="viewController">
+                <viewController title="General" id="GEc-df-dsQ" customClass="PreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="e55-Bg-8bB">
-                        <rect key="frame" x="0.0" y="0.0" width="695" height="152"/>
+                        <rect key="frame" x="0.0" y="0.0" width="695" height="269"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TeP-i7-lEs">
-                                <rect key="frame" x="13" y="118" width="204" height="19"/>
+                                <rect key="frame" x="13" y="235" width="204" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="NT1-x1-kN6"/>
                                     <constraint firstAttribute="width" constant="200" id="wsd-6m-zC7"/>
@@ -273,7 +288,7 @@
                                 </textFieldCell>
                             </textField>
                             <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCt-Yl-rQx">
-                                <rect key="frame" x="227" y="114" width="306" height="26"/>
+                                <rect key="frame" x="227" y="231" width="306" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="IFR-zF-zRU"/>
                                 </constraints>
@@ -289,7 +304,7 @@
                                 </connections>
                             </pathControl>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mQN-Es-Pxa">
-                                <rect key="frame" x="13" y="79" width="204" height="19"/>
+                                <rect key="frame" x="13" y="196" width="204" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="2ca-eT-ynK"/>
                                 </constraints>
@@ -300,7 +315,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gah-mh-m2D">
-                                <rect key="frame" x="13" y="40" width="204" height="19"/>
+                                <rect key="frame" x="13" y="157" width="204" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="abq-T6-cGq"/>
                                 </constraints>
@@ -310,8 +325,41 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jqJ-Rh-bGZ">
+                                <rect key="frame" x="13" y="118" width="204" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="g7i-26-tYk"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Upload Symbols:" id="sTn-Dl-wrG">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="etS-T9-1xU">
+                                <rect key="frame" x="13" y="79" width="204" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="DCS-0z-A5f"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Upload Bitcode:" id="kkk-SZ-4In">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HTV-Vh-IDp">
+                                <rect key="frame" x="13" y="40" width="204" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="PKL-Zs-GOI"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Compile Bitcode:" id="MJF-MG-xLs">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rE7-2i-rsT">
-                                <rect key="frame" x="227" y="75" width="306" height="26"/>
+                                <rect key="frame" x="227" y="192" width="306" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="1ta-92-vGQ"/>
                                 </constraints>
@@ -327,7 +375,7 @@
                                 </connections>
                             </pathControl>
                             <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wI-8w-caF">
-                                <rect key="frame" x="227" y="36" width="306" height="26"/>
+                                <rect key="frame" x="227" y="153" width="306" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="OvF-XA-rWn"/>
                                 </constraints>
@@ -339,6 +387,27 @@
                                     </allowedTypes>
                                 </pathCell>
                             </pathControl>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="mbA-2f-zen">
+                                <rect key="frame" x="228" y="119" width="250" height="18"/>
+                                <buttonCell key="cell" type="check" title="Upload symbols for AppStore exports" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="nGY-7Y-BPE">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="K6r-Rs-6wp">
+                                <rect key="frame" x="228" y="80" width="245" height="18"/>
+                                <buttonCell key="cell" type="check" title="Upload bitcode for AppStore exports" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="b2k-sv-6zR">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="MA5-cI-035">
+                                <rect key="frame" x="228" y="41" width="282" height="18"/>
+                                <buttonCell key="cell" type="check" title="Compile bitcode for Non-AppStore exports" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ZED-9d-FGq">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VCt-Yl-rQx" firstAttribute="leading" secondItem="rE7-2i-rsT" secondAttribute="leading" id="3NP-FL-V3I"/>
@@ -347,17 +416,32 @@
                             <constraint firstItem="rE7-2i-rsT" firstAttribute="leading" secondItem="5wI-8w-caF" secondAttribute="leading" id="4pt-Zn-3HF"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VCt-Yl-rQx" secondAttribute="trailing" constant="35" id="7ak-Ah-NWB"/>
                             <constraint firstItem="TeP-i7-lEs" firstAttribute="leading" secondItem="mQN-Es-Pxa" secondAttribute="leading" id="9PT-DP-yeW"/>
+                            <constraint firstItem="etS-T9-1xU" firstAttribute="top" secondItem="jqJ-Rh-bGZ" secondAttribute="bottom" constant="20" id="Cw0-wv-K0V"/>
                             <constraint firstItem="VCt-Yl-rQx" firstAttribute="leading" secondItem="TeP-i7-lEs" secondAttribute="trailing" constant="15" id="DFQ-0G-FBT"/>
+                            <constraint firstItem="gah-mh-m2D" firstAttribute="trailing" secondItem="jqJ-Rh-bGZ" secondAttribute="trailing" id="Ey9-89-yYc"/>
+                            <constraint firstAttribute="bottom" secondItem="HTV-Vh-IDp" secondAttribute="bottom" constant="40" id="FiK-8Z-dXH"/>
                             <constraint firstItem="mQN-Es-Pxa" firstAttribute="leading" secondItem="gah-mh-m2D" secondAttribute="leading" id="GPB-H6-LEC"/>
+                            <constraint firstItem="etS-T9-1xU" firstAttribute="trailing" secondItem="HTV-Vh-IDp" secondAttribute="trailing" id="Jr8-wo-fSe"/>
+                            <constraint firstItem="5wI-8w-caF" firstAttribute="leading" secondItem="mbA-2f-zen" secondAttribute="leading" id="L8J-8h-whv"/>
                             <constraint firstItem="mQN-Es-Pxa" firstAttribute="top" secondItem="TeP-i7-lEs" secondAttribute="bottom" constant="20" id="LOc-kk-pHE"/>
+                            <constraint firstItem="HTV-Vh-IDp" firstAttribute="centerY" secondItem="MA5-cI-035" secondAttribute="centerY" id="PI9-Q6-V7g"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5wI-8w-caF" secondAttribute="trailing" constant="35" id="PVS-kv-VrG"/>
                             <constraint firstItem="mQN-Es-Pxa" firstAttribute="trailing" secondItem="gah-mh-m2D" secondAttribute="trailing" id="Sph-vR-svZ"/>
+                            <constraint firstItem="jqJ-Rh-bGZ" firstAttribute="top" secondItem="gah-mh-m2D" secondAttribute="bottom" constant="20" id="Ssb-gV-97Z"/>
                             <constraint firstItem="TeP-i7-lEs" firstAttribute="centerY" secondItem="VCt-Yl-rQx" secondAttribute="centerY" id="W5L-W9-EfS"/>
+                            <constraint firstItem="HTV-Vh-IDp" firstAttribute="top" secondItem="etS-T9-1xU" secondAttribute="bottom" constant="20" id="ZDw-Xh-LMW"/>
+                            <constraint firstItem="etS-T9-1xU" firstAttribute="leading" secondItem="HTV-Vh-IDp" secondAttribute="leading" id="a3x-eT-HTX"/>
+                            <constraint firstItem="etS-T9-1xU" firstAttribute="centerY" secondItem="K6r-Rs-6wp" secondAttribute="centerY" id="a5X-iw-WzT"/>
+                            <constraint firstItem="jqJ-Rh-bGZ" firstAttribute="leading" secondItem="etS-T9-1xU" secondAttribute="leading" id="dDx-ZI-oLM"/>
+                            <constraint firstItem="K6r-Rs-6wp" firstAttribute="leading" secondItem="MA5-cI-035" secondAttribute="leading" id="eUM-el-AHu"/>
                             <constraint firstItem="TeP-i7-lEs" firstAttribute="top" secondItem="e55-Bg-8bB" secondAttribute="top" constant="15" id="fnc-b5-T55"/>
+                            <constraint firstItem="jqJ-Rh-bGZ" firstAttribute="trailing" secondItem="etS-T9-1xU" secondAttribute="trailing" id="fv2-n0-Els"/>
                             <constraint firstItem="TeP-i7-lEs" firstAttribute="trailing" secondItem="mQN-Es-Pxa" secondAttribute="trailing" id="he7-Y5-9Wi"/>
+                            <constraint firstItem="jqJ-Rh-bGZ" firstAttribute="centerY" secondItem="mbA-2f-zen" secondAttribute="centerY" id="ibQ-aT-cJ1"/>
+                            <constraint firstItem="mbA-2f-zen" firstAttribute="leading" secondItem="K6r-Rs-6wp" secondAttribute="leading" id="ocW-VB-TZ8"/>
                             <constraint firstItem="gah-mh-m2D" firstAttribute="top" secondItem="mQN-Es-Pxa" secondAttribute="bottom" constant="20" id="qHN-bs-HvV"/>
                             <constraint firstItem="mQN-Es-Pxa" firstAttribute="centerY" secondItem="rE7-2i-rsT" secondAttribute="centerY" id="t2Q-bR-Qd7"/>
-                            <constraint firstAttribute="bottom" secondItem="gah-mh-m2D" secondAttribute="bottom" constant="40" id="tAt-xK-Pdg"/>
+                            <constraint firstItem="gah-mh-m2D" firstAttribute="leading" secondItem="jqJ-Rh-bGZ" secondAttribute="leading" id="t6s-Ok-RGH"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rE7-2i-rsT" secondAttribute="trailing" constant="35" id="wMf-VV-kdj"/>
                         </constraints>
                     </view>
@@ -368,12 +452,12 @@
                 </viewController>
                 <customObject id="dfe-sH-LCu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2454" y="-297"/>
+            <point key="canvasLocation" x="2453.5" y="-221"/>
         </scene>
-        <!--View Controller-->
+        <!--Accounts-->
         <scene sceneID="ben-tT-P4v">
             <objects>
-                <viewController id="8HQ-Nd-oRN" sceneMemberID="viewController">
+                <viewController title="Accounts" id="8HQ-Nd-oRN" customClass="AccountPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="BO9-Rs-OZ0">
                         <rect key="frame" x="0.0" y="0.0" width="705" height="187"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -381,7 +465,7 @@
                 </viewController>
                 <customObject id="LdQ-39-FHP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2459" y="-46"/>
+            <point key="canvasLocation" x="2459" y="85"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -1729,6 +1813,7 @@ Gw
     </scenes>
     <resources>
         <image name="BlueAccount" width="72.5" height="72.5"/>
+        <image name="BlueEmail" width="72.5" height="72.5"/>
         <image name="BlueHelp" width="72.5" height="72.5"/>
         <image name="BlueSetting" width="72.5" height="72.5"/>
     </resources>
