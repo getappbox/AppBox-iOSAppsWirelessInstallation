@@ -259,13 +259,94 @@
             <objects>
                 <viewController title="Email" id="WPs-bP-74P" customClass="EmailPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="ljf-fe-xqh">
-                        <rect key="frame" x="0.0" y="0.0" width="572" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="724" height="188"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fNL-SL-52N">
+                                <rect key="frame" x="13" y="154" width="234" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="pUs-hq-dpi"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Email Address:" id="s9k-xz-j0b">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y3t-8U-ZZM">
+                                <rect key="frame" x="260" y="152" width="400" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="dG1-RB-j4X"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="user@example.com,user2@example.com,..." drawsBackground="YES" id="Z1X-5r-0Cf">
+                                    <font key="font" metaFont="systemLight" size="16"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A9u-KS-ARB">
+                                <rect key="frame" x="13" y="115" width="234" height="19"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Personal Message:" id="zgF-Ru-Bbd">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4dI-lZ-ig7">
+                                <rect key="frame" x="260" y="113" width="400" height="24"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="gsr-92-69d">
+                                    <font key="font" metaFont="systemLight" size="16"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="KJW-Px-cm8">
+                                <rect key="frame" x="258" y="56" width="404" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="b4R-mr-OOC"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" id="9Ea-cB-M8F">
+                                    <font key="font" metaFont="system" size="10"/>
+                                    <string key="title">Supported Keywords: The
+{PROJECT_NAME} - For Project Name
+{BUILD_VERSION} - For Build Version
+{BUILD_NUMBER} - For Build Number </string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZtG-e3-QDw">
+                                <rect key="frame" x="596" y="13" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TCZ-uv-ULj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="y3t-8U-ZZM" firstAttribute="trailing" secondItem="4dI-lZ-ig7" secondAttribute="trailing" id="AMy-z4-VjJ"/>
+                            <constraint firstItem="KJW-Px-cm8" firstAttribute="top" secondItem="4dI-lZ-ig7" secondAttribute="bottom" constant="5" id="D9p-QK-IGz"/>
+                            <constraint firstItem="y3t-8U-ZZM" firstAttribute="leading" secondItem="fNL-SL-52N" secondAttribute="trailing" constant="15" id="HVu-db-aiy"/>
+                            <constraint firstItem="KJW-Px-cm8" firstAttribute="trailing" secondItem="ZtG-e3-QDw" secondAttribute="trailing" id="KCa-UC-NQg"/>
+                            <constraint firstItem="y3t-8U-ZZM" firstAttribute="leading" secondItem="4dI-lZ-ig7" secondAttribute="leading" id="KNO-3r-Zb8"/>
+                            <constraint firstItem="A9u-KS-ARB" firstAttribute="top" secondItem="fNL-SL-52N" secondAttribute="bottom" constant="20" id="Ona-ec-aCK"/>
+                            <constraint firstItem="ZtG-e3-QDw" firstAttribute="top" secondItem="KJW-Px-cm8" secondAttribute="bottom" constant="15" id="SYM-tn-aTF"/>
+                            <constraint firstItem="A9u-KS-ARB" firstAttribute="leading" secondItem="fNL-SL-52N" secondAttribute="leading" id="Snv-M2-oVR"/>
+                            <constraint firstItem="fNL-SL-52N" firstAttribute="leading" secondItem="ljf-fe-xqh" secondAttribute="leading" constant="15" id="V5o-yN-eHm"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y3t-8U-ZZM" secondAttribute="trailing" constant="35" id="WPl-at-Rzn"/>
+                            <constraint firstItem="4dI-lZ-ig7" firstAttribute="leading" secondItem="KJW-Px-cm8" secondAttribute="leading" id="dc9-jF-bnx"/>
+                            <constraint firstItem="A9u-KS-ARB" firstAttribute="centerY" secondItem="4dI-lZ-ig7" secondAttribute="centerY" id="gp9-pk-eYP"/>
+                            <constraint firstItem="fNL-SL-52N" firstAttribute="top" secondItem="ljf-fe-xqh" secondAttribute="top" constant="15" id="kfR-19-VSf"/>
+                            <constraint firstAttribute="bottom" secondItem="ZtG-e3-QDw" secondAttribute="bottom" constant="20" id="m7d-XP-MQn"/>
+                            <constraint firstItem="fNL-SL-52N" firstAttribute="centerY" secondItem="y3t-8U-ZZM" secondAttribute="centerY" id="svS-bj-S5g"/>
+                            <constraint firstItem="4dI-lZ-ig7" firstAttribute="trailing" secondItem="KJW-Px-cm8" secondAttribute="trailing" id="wdq-T5-eau"/>
+                            <constraint firstItem="A9u-KS-ARB" firstAttribute="trailing" secondItem="fNL-SL-52N" secondAttribute="trailing" id="yGW-nY-EnC"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="xJw-P1-I09" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="581"/>
+            <point key="canvasLocation" x="1753" y="506.5"/>
         </scene>
         <!--General-->
         <scene sceneID="g4x-WP-vEQ">
