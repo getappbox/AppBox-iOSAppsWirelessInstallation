@@ -14,6 +14,7 @@
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */ = {isa = PBXBuildFile; fileRef = E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
+		E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* RepoBuilder.m */; };
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
 		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
 		E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E143637A1DF59AFD00FB10CA /* LogViewController.m */; };
@@ -92,6 +93,8 @@
 		E119EF5F1E3735EA00A7798E /* XCodePath.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XCodePath.sh; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
+		E13161F01E9777DF00586052 /* RepoBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoBuilder.h; sourceTree = "<group>"; };
+		E13161F11E9777DF00586052 /* RepoBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoBuilder.m; sourceTree = "<group>"; };
 		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
 		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
 		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		E16D72E31E88FB660031FB7C /* TaskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHandler.m; sourceTree = "<group>"; };
 		E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
 		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
+		E178C9891E95067F008D2CAF /* appbox.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appbox.plist; sourceTree = "<group>"; };
 		E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesTabViewController.h; sourceTree = "<group>"; };
 		E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesTabViewController.m; sourceTree = "<group>"; };
 		E18186D41E8A45C30002509F /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
@@ -258,6 +262,15 @@
 			path = DashboardViewController;
 			sourceTree = "<group>";
 		};
+		E13161EF1E97775100586052 /* RepoBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				E13161F01E9777DF00586052 /* RepoBuilder.h */,
+				E13161F11E9777DF00586052 /* RepoBuilder.m */,
+			);
+			path = RepoBuilder;
+			sourceTree = "<group>";
+		};
 		E139460F1DF2AFC200B3FAD0 /* ProjectModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +355,7 @@
 				E16437D61D743A4E00CE8B7E /* main.m */,
 				E16437E31D743A4E00CE8B7E /* Info.plist */,
 				E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */,
+				E178C9891E95067F008D2CAF /* appbox.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -653,6 +667,7 @@
 			children = (
 				E1902B501E16617B00C3E0F6 /* UserData */,
 				E1902B491E16617B00C3E0F6 /* GitHandler */,
+				E13161EF1E97775100586052 /* RepoBuilder */,
 				E1902B4A1E16617B00C3E0F6 /* MacHandler */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
@@ -869,6 +884,7 @@
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
+				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */,

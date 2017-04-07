@@ -14,6 +14,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 @implementation HomeViewController{
     XCProject *project;
+    XCProject *repoProject;
     ScriptType scriptType;
     FileType fileType;
     NSArray *allTeamIds;
@@ -27,6 +28,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     allTeamIds = [KeychainHandler getAllTeamId];
     
     //Notification Handler
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gmailLogoutHandler:) name:abGmailLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
@@ -69,16 +71,28 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
 }
 
+#pragma mark - Build Repo
+- (void)initBuildRepoProcess:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[XCProject class]]) {
+        repoProject = notification.object;
+        [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
+        [self initProjectBuildProcessForURL: repoProject.fullPath];
+    }
+}
 
 #pragma mark - Controls Action Handler -
 #pragma mark → Project / Workspace Controls Action
 //Project Path Handler
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
-    NSURL *senderURL = [sender.URL copy];
-    if (![project.fullPath isEqualTo:senderURL]){
+    NSURL *projectURL = [sender.URL filePathURL];
+    [self initProjectBuildProcessForURL: projectURL];
+}
+
+- (void)initProjectBuildProcessForURL:(NSURL *)projectURL {
+    if (![project.fullPath isEqualTo:projectURL]){
         [self viewStateForProgressFinish:YES];
-        [project setFullPath: senderURL];
-        [sender setURL:senderURL];
+        [project setFullPath: projectURL];
+        [pathProject setURL:projectURL];
         [self runGetSchemeScript];
     }
 }
@@ -326,11 +340,22 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     if (comboBuildScheme.numberOfItems > 0){
                         [comboBuildScheme selectItemAtIndex:0];
-                        [self comboBuildSchemeValueChanged:comboBuildScheme];
+                        if (repoProject == nil) {
+                            [self comboBuildSchemeValueChanged:comboBuildScheme];
+                            
+                            //Run Team Id Script
+                            [self runTeamIDScript];
+                        } else {
+                            [RepoBuilder setProjectSettingFromProject:repoProject toProject:project];
+                            [comboTeamId removeAllItems];
+                            [comboTeamId addItemWithObjectValue:project.teamId];
+                            [comboTeamId selectItemWithObjectValue:project.teamId];
+                            [comboBuildType selectItemWithObjectValue:project.buildType];
+                            [textFieldEmail setStringValue:project.emails];
+                            [textFieldMessage setStringValue:project.personalMessage];
+                            [self actionButtonTapped:buttonAction];
+                        }
                     }
-                    
-                    //Run Team Id Script
-                    [self runTeamIDScript];
                 }else{
                     [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
                 }

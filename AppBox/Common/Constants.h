@@ -35,6 +35,7 @@
 #define abGmailLoggedOutNotification @"GmailLoggedOutNotification"
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
+#define abBuildRepoNotification @"BuildRepoNotification"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
@@ -58,6 +59,7 @@
 #define abXcodeLocation @"/Applications/Xcode.app"
 #define abApplicationLoaderAppLocation @"/Contents/Applications/Application Loader.app"
 #define abApplicationLoaderALToolLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
+
 
 //others
 #define abEmptyString @""

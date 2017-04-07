@@ -82,9 +82,16 @@
             [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : authResult.errorDescription}];
             [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
         }
-    }
-    if (url != nil){
-        
+    } else if (url != nil) {
+        NSLog(@"parh = %@", url.query);
+        if (url.query != nil && url.query.length > 0) {
+            NSString *settingPath = [RepoBuilder isValidRepoForSetingFileAtPath:url.query Index:@0];
+            XCProject *project = [RepoBuilder xcProjectWithRepoPath:url.query andSettingFilePath:settingPath];
+            if (project == nil) {
+                return;
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+        }
     }
 }
 
