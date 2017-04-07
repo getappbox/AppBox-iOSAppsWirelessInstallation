@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   appbox.plist
-   AppBox
-
-   Created by Vineet Choudhary on 05/04/17.
-   Copyright (c) 2017 Developer Insider. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    
-    </dict>
+<dict>
+	<key>project</key>
+	<string></string>
+	<key>scheme</key>
+	<string></string>
+	<key>buildtype</key>
+	<string></string>
+	<key>teamid</key>
+	<string></string>
+	<key>keepsamelink</key>
+	<false/>
+	<key>dropboxfoldername</key>
+	<string></string>
+	<key>email</key>
+	<string></string>
+	<key>personalmessage</key>
+	<string></string>
+</dict>
 </plist>
