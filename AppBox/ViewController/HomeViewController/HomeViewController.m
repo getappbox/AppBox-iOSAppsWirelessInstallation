@@ -353,6 +353,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                             [comboBuildType selectItemWithObjectValue:project.buildType];
                             [textFieldEmail setStringValue:project.emails];
                             [textFieldMessage setStringValue:project.personalMessage];
+                            if (project.emails.length > 0){
+                                [buttonSendMail setState:NSOnState];
+                            }
                             [self actionButtonTapped:buttonAction];
                         }
                     }
@@ -1046,7 +1049,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         });
     }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
         //if mac shutdown isn't checked then show link
-        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+        if (repoProject == nil){
+            [self performSegueWithIdentifier:@"ShowLink" sender:self];
+        }else{
+            NSString *message = [NSString stringWithFormat:@"App Link - %@", project.appShortShareableURL];
+            [self viewStateForProgressFinish:YES];
+            exit(0);
+        }
     }
 }
 
