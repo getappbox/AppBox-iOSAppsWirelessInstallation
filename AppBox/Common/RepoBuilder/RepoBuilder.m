@@ -25,6 +25,7 @@ NSString * const PersonalMessageKey = @"personalmessage";
     NSString *file = [NSString stringWithFormat:@"appbox%@.plist", (number.integerValue == 0) ? @"" : number];
     NSString *repoSettingPlist = [path stringByAppendingPathComponent:file];
     if ([[NSFileManager defaultManager] fileExistsAtPath:repoSettingPlist]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"path = %@",repoSettingPlist]];
         return repoSettingPlist;
     }
     return nil;

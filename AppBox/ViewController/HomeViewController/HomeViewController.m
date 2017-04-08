@@ -26,7 +26,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     project = [[XCProject alloc] init];
     allTeamIds = [KeychainHandler getAllTeamId];
-    
     //Notification Handler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gmailLogoutHandler:) name:abGmailLoggedOutNotification object:nil];
@@ -69,6 +68,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if ([DBClientsManager authorizedClient] == nil) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
+    [[AppDelegate appDelegate] setIsReadyToBuild:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
 }
 
 #pragma mark - Build Repo
@@ -894,6 +895,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)viewStateForProgressFinish:(BOOL)finish{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]]];
     [[AppDelegate appDelegate] setProcessing:!finish];
+    [[AppDelegate appDelegate] setIsReadyToBuild:!finish];
     
     //reset project
     if (finish){
@@ -1052,7 +1054,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         if (repoProject == nil){
             [self performSegueWithIdentifier:@"ShowLink" sender:self];
         }else{
-            NSString *message = [NSString stringWithFormat:@"App Link - %@", project.appShortShareableURL];
+            //NSString *message = [NSString stringWithFormat:@"App Link - %@", project.appShortShareableURL];
             [self viewStateForProgressFinish:YES];
             exit(0);
         }

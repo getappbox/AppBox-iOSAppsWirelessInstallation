@@ -20,6 +20,7 @@
 -(void)addSessionLog:(NSString *)sessionLog;
 
 @property (nonatomic) BOOL processing;
+@property (nonatomic) BOOL isReadyToBuild;
 @property (nonatomic) BOOL isInternetConnected;
 @property (nonatomic, weak) IBOutlet NSMenuItem *gmailLogoutButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxLogoutButton;

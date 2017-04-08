@@ -36,6 +36,7 @@
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 #define abBuildRepoNotification @"BuildRepoNotification"
+#define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
