@@ -633,7 +633,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
               if(fileType == FileTypeJson){
                   project.uniqueLinkJsonMetaData = response;
                   if(project.appShortShareableURL){
-                      [self showURL];
+                      [self logAppUploadEventAndShareURLOnSlackChannel];
                       return;
                   }else{
                       //create shared url for appinfo.json
@@ -776,7 +776,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
         [self writeUniqueJsonWithDict:dictUniqueFile];
         if(project.appShortShareableURL){
-            [self showURL];
+            [self logAppUploadEventAndShareURLOnSlackChannel];
         }else{
             [self createUniqueShortSharableUrl];
         }
@@ -884,7 +884,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             //show url
-            [self showURL];
+            [self logAppUploadEventAndShareURLOnSlackChannel];
         });
     }];
 }
@@ -1054,7 +1054,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         if (repoProject == nil){
             [self performSegueWithIdentifier:@"ShowLink" sender:self];
         }else{
-            //NSString *message = [NSString stringWithFormat:@"App Link - %@", project.appShortShareableURL];
             [self viewStateForProgressFinish:YES];
             exit(0);
         }
@@ -1146,10 +1145,23 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 #pragma mark - Navigation -
--(void)showURL{
+-(void)logAppUploadEventAndShareURLOnSlackChannel{
     //Log IPA Upload Success Rate with Other Options
     [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
     
+    if (true) {
+        NSString *message = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Sharing URL Slack Channel - %@ - %@", @"url", message]];
+        [SlackClient sendMessage:message completion:^(BOOL success) {
+            [self handleAppURLAfterSlack];
+        }];
+    } else {
+        [self handleAppURLAfterSlack];
+    }
+}
+
+
+-(void) handleAppURLAfterSlack {
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
         [self performSegueWithIdentifier:@"MailView" sender:self];

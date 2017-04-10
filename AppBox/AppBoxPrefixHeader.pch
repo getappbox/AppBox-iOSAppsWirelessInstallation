@@ -32,6 +32,7 @@
 #import "XCHandler.h"
 #import "MacHandler.h"
 #import "MailHandler.h"
+#import "SlackClient.h"
 #import "TaskHandler.h"
 #import "RepoBuilder.h"
 #import "UpdateHandler.h"

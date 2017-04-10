@@ -21,7 +21,11 @@
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             completion(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            completion(nil, error);
+            if (((NSHTTPURLResponse *)task.response).statusCode == HTTP_OK) {
+                completion(@"ok", nil);
+            }else{
+                completion(nil, error);
+            }
         }];
     }else if (requestType == RequestPOST){
         [manager POST:url parameters:parmeters progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -29,7 +33,11 @@
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             completion(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            completion(nil, error);
+            if (((NSHTTPURLResponse *)task.response).statusCode == HTTP_OK) {
+                completion(@"ok", nil);
+            }else{
+                completion(nil, error);
+            }
         }];
     }
 }
