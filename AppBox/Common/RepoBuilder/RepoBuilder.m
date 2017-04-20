@@ -15,17 +15,24 @@ NSString * const RepoTeamIdKey = @"teamid";
 NSString * const RepoKeepSameLinkKey = @"keepsamelink";
 NSString * const RepoDropboxFolderNameKey = @"dropboxfoldername";
 NSString * const RepoEmailKey = @"email";
-NSString * const PersonalMessageKey = @"personalmessage";
+NSString * const RepoPersonalMessageKey = @"personalmessage";
+
+NSString * const RepoCertificateNameKey = @"name";
+NSString * const RepoCertificatePasswordKey = @"password";
+
+NSString * const RepoCertificateDirectoryName = @"cert";
+
 
 @implementation RepoBuilder{
     
 }
 
-+ (NSString *)isValidRepoForSetingFileAtPath:(NSString *)path Index:(NSNumber *)number {
+#pragma mark - Settings
++ (NSString *)isValidRepoForSettingFileAtPath:(NSString *)path Index:(NSNumber *)number {
     NSString *file = [NSString stringWithFormat:@"appbox%@.plist", (number.integerValue == 0) ? @"" : number];
     NSString *repoSettingPlist = [path stringByAppendingPathComponent:file];
     if ([[NSFileManager defaultManager] fileExistsAtPath:repoSettingPlist]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"path = %@",repoSettingPlist]];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Setting path = %@",repoSettingPlist]];
         return repoSettingPlist;
     }
     return nil;
@@ -64,15 +71,15 @@ NSString * const PersonalMessageKey = @"personalmessage";
     }
     
     if ([projectRawSetting.allKeys containsObject:RepoDropboxFolderNameKey]) {
-//        project.keepSameLink = [projectRawSetting valueForKey:RepoDropboxFolderNameKey];
+        project.keepSameLink = [projectRawSetting valueForKey:RepoKeepSameLinkKey];
     }
     
     if ([projectRawSetting.allKeys containsObject:RepoEmailKey]) {
         project.emails = [projectRawSetting valueForKey:RepoEmailKey];
     }
     
-    if ([projectRawSetting.allKeys containsObject:PersonalMessageKey]) {
-        project.personalMessage = [projectRawSetting valueForKey:PersonalMessageKey];
+    if ([projectRawSetting.allKeys containsObject:RepoPersonalMessageKey]) {
+        project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
     }
     
     return project;
@@ -94,6 +101,28 @@ NSString * const PersonalMessageKey = @"personalmessage";
     [project setPersonalMessage:repoProject.personalMessage];
 }
 
-
+#pragma mark - Certificates 
+    
++ (NSString *)isValidRepoForCertificateFileAtPath:(NSString *)path {
+    NSString *repoCertificatePlist = [path stringByAppendingPathComponent:RepoCertificateDirectoryName];
+    repoCertificatePlist = [repoCertificatePlist stringByAppendingPathComponent:@"appbox.plist"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:repoCertificatePlist]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Cert path = %@",repoCertificatePlist]];
+        return repoCertificatePlist;
+    }
+    return nil;
+}
+    
++ (void)installCertificateWithDetailsInFile:(NSString *)detailsFilePath andRepoPath:(NSString *)repoPath {
+    NSArray *certificateDetails = [NSArray arrayWithContentsOfFile:detailsFilePath];
+    for (NSDictionary *details in certificateDetails) {
+        NSString *certificate = [details valueForKey:RepoCertificateNameKey];
+        NSString *password = [details valueForKey:RepoCertificatePasswordKey];
+        NSString *certificatePath = [repoPath stringByAppendingPathComponent:RepoCertificateDirectoryName];
+        certificatePath = [certificatePath stringByAppendingPathComponent:certificate];
+        [KeychainHandler installPrivateKeyFromPath:certificatePath withPassword:password];
+    }
+}
+    
 
 @end

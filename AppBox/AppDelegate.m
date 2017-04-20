@@ -19,6 +19,7 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     //Handle URL Scheme
+    
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 }
 
@@ -40,6 +41,18 @@
             [UpdateHandler showUpdateAlertWithUpdateURL:url];
         }
     }];
+    
+    //Check for arguments
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    for (NSString *argument in arguments) {
+        if ([argument containsString:@"build="]) {
+            NSArray *components = [argument componentsSeparatedByString:@"build="];
+            if (components.count == 2) {
+                [self handleProjectAtPath:[components lastObject]];
+            }
+            break;
+        }
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -49,6 +62,7 @@
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return YES;
 }
+
 
 
 #pragma mark - AppDelegate Helper
@@ -87,19 +101,26 @@
     } else if (url != nil) {
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"query = %@", url.query]];
         if (url.query != nil && url.query.length > 0) {
-            NSString *settingPath = [RepoBuilder isValidRepoForSetingFileAtPath:url.query Index:@0];
-            XCProject *project = [RepoBuilder xcProjectWithRepoPath:url.query andSettingFilePath:settingPath];
-            if (project == nil) {
-                return;
-            }
-            if (self.isReadyToBuild) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
-            } else {
-                [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToBuildNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
-                }];
-            }
+            [self handleProjectAtPath:url.query];
         }
+    }
+}
+
+-(void)handleProjectAtPath:(NSString *)projectPath {
+    NSString *certInfoPath = [RepoBuilder isValidRepoForCertificateFileAtPath:projectPath];
+    [RepoBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
+    
+    NSString *settingPath = [RepoBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
+    XCProject *project = [RepoBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
+    if (project == nil) {
+        return;
+    }
+    if (self.isReadyToBuild) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToBuildNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+        }];
     }
 }
 

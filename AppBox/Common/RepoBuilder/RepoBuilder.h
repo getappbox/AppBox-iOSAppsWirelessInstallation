@@ -14,9 +14,11 @@
     
 }
 
-+ (NSString *)isValidRepoForSetingFileAtPath:(NSString *)path Index:(NSNumber *)number;
++ (NSString *)isValidRepoForSettingFileAtPath:(NSString *)path Index:(NSNumber *)number;
 + (XCProject *)xcProjectWithRepoPath:(NSString *)repoPath andSettingFilePath:(NSString *)settingPath;
-
 + (void)setProjectSettingFromProject:(XCProject *)repoProject toProject:(XCProject *)project;
+    
++ (NSString *)isValidRepoForCertificateFileAtPath:(NSString *)path;
++ (void)installCertificateWithDetailsInFile:(NSString *)detailsFilePath andRepoPath:(NSString *)repoPath;
 
 @end
