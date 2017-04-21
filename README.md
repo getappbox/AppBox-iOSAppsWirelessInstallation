@@ -21,8 +21,10 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 - Uploaded App Expiration => Until you delete from your Dropbox
 - Installations Per App => Unlimited
  
-# Download latest release 📦
+# Download latest stable release 📦
 [![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](http://tryappbox.com/download)
+
+**FLUX WARNING** - Major release in progress, expect things in master to be broken while we brain. So, download only stable release.
 
 # How to use AppBox 
 | Step | Description |
