@@ -24,6 +24,7 @@
 
 
 - (IBAction)preferencesTapped:(NSMenuItem *)sender {
+    [PreferencesTabViewController presentPreferences];
 }
 
 #pragma mark - File

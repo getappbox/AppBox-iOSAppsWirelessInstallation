@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "PreferencesTabViewController.h"
+
 @interface NSApplication (MenuHandler)
 
 //AppBox

@@ -19,4 +19,66 @@
     // Do view setup here.
 }
 
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    [self setTabStyle:NSTabViewControllerTabStyleToolbar];
+    [self.tabView setControlSize:NSControlSizeRegular];
+    
+    //General Preferences
+    PreferencesViewController *preferencesViewController = [[PreferencesViewController alloc] initWithNibName:NSStringFromClass([PreferencesViewController class]) bundle:nil];
+    
+    NSTabViewItem *generalPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"general"];
+    [generalPreferencesTabViewItem setLabel:@"General"];
+    [generalPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueSetting"]];
+    [generalPreferencesTabViewItem setViewController:preferencesViewController];
+    [generalPreferencesTabViewItem drawLabel:NO inRect:NSMakeRect(0, 0, 100, 30)];
+    [self addTabViewItem:generalPreferencesTabViewItem];
+    
+    //Accounts Preferences
+    AccountPreferencesViewController *accountPreferencesViewController = [[AccountPreferencesViewController alloc] initWithNibName:NSStringFromClass([AccountPreferencesViewController class]) bundle:nil];
+    
+    NSTabViewItem *accountPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"accounts"];
+    [accountPreferencesTabViewItem setLabel:@"Accounts"];
+    [accountPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueAccount"]];
+    [accountPreferencesTabViewItem setViewController:accountPreferencesViewController];
+    
+    [self addTabViewItem:accountPreferencesTabViewItem];
+    
+    //Mail Preferences
+    EmailPreferencesViewController *emailPreferencesViewController = [[EmailPreferencesViewController alloc] initWithNibName:NSStringFromClass([EmailPreferencesViewController class]) bundle:nil];
+    
+    NSTabViewItem *emailPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"email"];
+    [emailPreferencesTabViewItem setLabel:@"Email"];
+    [emailPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueEmail"]];
+    [emailPreferencesTabViewItem setViewController:emailPreferencesViewController];
+    
+    [self addTabViewItem:emailPreferencesTabViewItem];
+    
+    //Slack Preferences
+    SlackPreferencesViewController *slackPreferencesViewController = [[SlackPreferencesViewController alloc] initWithNibName:NSStringFromClass([SlackPreferencesViewController class]) bundle:nil];
+    
+    NSTabViewItem *slackPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"slack"];
+    [slackPreferencesTabViewItem setLabel:@"Slack"];
+    [slackPreferencesTabViewItem setImage:[NSImage imageNamed:@"SlackLogo"]];
+    [slackPreferencesTabViewItem setViewController:slackPreferencesViewController];
+    
+    [self addTabViewItem:slackPreferencesTabViewItem];
+    
+    //Help Preferences
+    HelpPreferencesViewController *helpPreferencesViewController = [[HelpPreferencesViewController alloc] initWithNibName:NSStringFromClass([HelpPreferencesViewController class]) bundle:nil];
+    
+    NSTabViewItem *helpPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"help"];
+    [helpPreferencesTabViewItem setLabel:@"Help"];
+    [helpPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueHelp"]];
+    [helpPreferencesTabViewItem setViewController:helpPreferencesViewController];
+    
+    [self addTabViewItem:helpPreferencesTabViewItem];
+    
+}
+
++ (void)presentPreferences {
+    PreferencesTabViewController *pref = [[PreferencesTabViewController alloc] initWithNibName:NSStringFromClass([PreferencesTabViewController class]) bundle:nil];
+    [[NSApplication sharedApplication].keyWindow.contentViewController presentViewControllerAsModalWindow:pref];
+}
+
 @end

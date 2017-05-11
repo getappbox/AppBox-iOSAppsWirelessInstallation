@@ -60,6 +60,13 @@
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
 		E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
+		E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D12EE11EC2F17B0065E59A /* SlackPreferencesViewController.m */; };
+		E1D12EE41EC2F17B0065E59A /* SlackPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE21EC2F17B0065E59A /* SlackPreferencesViewController.xib */; };
+		E1D12EE61EC2F3E70065E59A /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE51EC2F3E70065E59A /* PreferencesViewController.xib */; };
+		E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE71EC2F4360065E59A /* PreferencesTabViewController.xib */; };
+		E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EE91EC2F5230065E59A /* EmailPreferencesViewController.xib */; };
+		E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */; };
+		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
 		E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */; };
 		E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */; };
 		E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */; };
@@ -183,6 +190,14 @@
 		E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = InstallPrivateKey.sh; sourceTree = "<group>"; };
 		E1CFC65C1D7E7FEA005872BE /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		E1CFC65D1D7E7FEA005872BE /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		E1D12EE01EC2F17B0065E59A /* SlackPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackPreferencesViewController.h; sourceTree = "<group>"; };
+		E1D12EE11EC2F17B0065E59A /* SlackPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlackPreferencesViewController.m; sourceTree = "<group>"; };
+		E1D12EE21EC2F17B0065E59A /* SlackPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlackPreferencesViewController.xib; sourceTree = "<group>"; };
+		E1D12EE51EC2F3E70065E59A /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
+		E1D12EE71EC2F4360065E59A /* PreferencesTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesTabViewController.xib; sourceTree = "<group>"; };
+		E1D12EE91EC2F5230065E59A /* EmailPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailPreferencesViewController.xib; sourceTree = "<group>"; };
+		E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountPreferencesViewController.xib; sourceTree = "<group>"; };
+		E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpPreferencesViewController.xib; sourceTree = "<group>"; };
 		E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitRepoDetails.h; sourceTree = "<group>"; };
 		E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitRepoDetails.m; sourceTree = "<group>"; };
 		E1D479C51E4B04A500BBC838 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -485,12 +500,14 @@
 		E16D72E61E8935060031FB7C /* PreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E1D12EDF1EC2F1420065E59A /* SlackPreferencesViewController */,
 				E18186D31E8A45C30002509F /* GeneralPreferencesViewController */,
 				E18186D71E8A479E0002509F /* AccountPreferencesViewController */,
 				E18186D81E8A479E0002509F /* EmailPreferencesViewController */,
 				E18186D91E8A479E0002509F /* HelpPreferencesViewController */,
 				E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */,
 				E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */,
+				E1D12EE71EC2F4360065E59A /* PreferencesTabViewController.xib */,
 			);
 			path = PreferencesViewController;
 			sourceTree = "<group>";
@@ -513,6 +530,7 @@
 			children = (
 				E18186D41E8A45C30002509F /* PreferencesViewController.h */,
 				E18186D51E8A45C30002509F /* PreferencesViewController.m */,
+				E1D12EE51EC2F3E70065E59A /* PreferencesViewController.xib */,
 			);
 			path = GeneralPreferencesViewController;
 			sourceTree = "<group>";
@@ -522,6 +540,7 @@
 			children = (
 				E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */,
 				E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */,
+				E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */,
 			);
 			path = AccountPreferencesViewController;
 			sourceTree = "<group>";
@@ -531,6 +550,7 @@
 			children = (
 				E18186DD1E8A47CD0002509F /* EmailPreferencesViewController.h */,
 				E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */,
+				E1D12EE91EC2F5230065E59A /* EmailPreferencesViewController.xib */,
 			);
 			path = EmailPreferencesViewController;
 			sourceTree = "<group>";
@@ -540,6 +560,7 @@
 			children = (
 				E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */,
 				E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */,
+				E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */,
 			);
 			path = HelpPreferencesViewController;
 			sourceTree = "<group>";
@@ -702,6 +723,16 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		E1D12EDF1EC2F1420065E59A /* SlackPreferencesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1D12EE01EC2F17B0065E59A /* SlackPreferencesViewController.h */,
+				E1D12EE11EC2F17B0065E59A /* SlackPreferencesViewController.m */,
+				E1D12EE21EC2F17B0065E59A /* SlackPreferencesViewController.xib */,
+			);
+			path = SlackPreferencesViewController;
+			sourceTree = "<group>";
+		};
 		E1E215B41E869BDF0091565D /* ITCLoginViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,13 +817,19 @@
 			files = (
 				E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
+				E1D12EE41EC2F17B0065E59A /* SlackPreferencesViewController.xib in Resources */,
 				E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */,
+				E1D12EE61EC2F3E70065E59A /* PreferencesViewController.xib in Resources */,
 				E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */,
+				E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */,
 				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
 				9740CD411E005DB100224D9F /* Main.storyboard in Resources */,
 				E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */,
 				E16D72EB1E893DD70031FB7C /* AppBoxIcons.xcassets in Resources */,
+				E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
+				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
+				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,6 +921,7 @@
 				E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
+				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
