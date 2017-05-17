@@ -31,7 +31,6 @@
     [generalPreferencesTabViewItem setLabel:@"General"];
     [generalPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueSetting"]];
     [generalPreferencesTabViewItem setViewController:preferencesViewController];
-    [generalPreferencesTabViewItem drawLabel:NO inRect:NSMakeRect(0, 0, 100, 30)];
     [self addTabViewItem:generalPreferencesTabViewItem];
     
     //Accounts Preferences

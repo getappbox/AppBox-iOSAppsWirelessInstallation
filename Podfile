@@ -11,4 +11,5 @@ target :AppBox do
     pod 'ZXingObjC'
     pod 'SAMKeychain'
     pod 'Sparkle'
+    pod 'DJProgressHUD_OSX'
 end

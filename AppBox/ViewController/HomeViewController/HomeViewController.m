@@ -138,7 +138,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-    [textFieldBundleIdentifier setEnabled:(sender.state == NSOnState)];
+    
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
@@ -551,13 +551,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 return;
             }
             
-            //set dropbox folder name & log if user changing folder name or not
-            if (textFieldBundleIdentifier.stringValue.length == 0){
-                [textFieldBundleIdentifier setStringValue: project.identifer];
-                [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0}];
-            }else{
-                [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
-            }
             if ([AppDelegate appDelegate].isInternetConnected){
                 [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
             }else{
@@ -589,13 +582,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             return;
         }
     }
-    //check unique link settings for Dropbox folder name
-    if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
-        NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
-        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
-        [project setBundleDirectory:[NSURL URLWithString:bundlePath]];
-        [project upadteDbDirectoryByBundleDirectory];
-    }
+
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
     
     //upload ipa
@@ -908,8 +895,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //unique link
     [buttonUniqueLink setEnabled:finish];
     [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
-    [textFieldBundleIdentifier setEnabled:(finish && buttonUniqueLink.state == NSOnState)];
-    [textFieldBundleIdentifier setStringValue: finish ? abEmptyString : textFieldBundleIdentifier.stringValue];
     
     //ipa path
     [pathIPAFile setEnabled:finish];

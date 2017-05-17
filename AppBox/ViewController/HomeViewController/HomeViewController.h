@@ -31,7 +31,6 @@
     
     //Upload IPA
     IBOutlet NSPathControl *pathIPAFile;
-    IBOutlet NSTextField *textFieldBundleIdentifier;
     IBOutlet NSButton *buttonUniqueLink;
     
     //Mail and Shutdown
@@ -44,6 +43,7 @@
     IBOutlet NSTextField *labelStatus;
     IBOutlet NSView *viewProgressStatus;
     IBOutlet NSProgressIndicator *progressIndicator;
+    IBOutlet NSLayoutConstraint *progressViewHeightConstraint;
 }
 
 - (IBAction)actionButtonTapped:(NSButton *)sender;
