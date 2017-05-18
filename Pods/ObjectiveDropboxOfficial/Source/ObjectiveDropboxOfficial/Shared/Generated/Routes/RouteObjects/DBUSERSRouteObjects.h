@@ -8,6 +8,8 @@
 
 @class DBRoute;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Stone route objects for the Users namespace. Each route in the Users
 /// namespace has its own static object, which contains information about the
@@ -16,15 +18,17 @@
 @interface DBUSERSRouteObjects : NSObject
 
 /// Accessor method for the getAccount route object.
-+ (DBRoute * _Nonnull)DBUSERSGetAccount;
++ (DBRoute *)DBUSERSGetAccount;
 
 /// Accessor method for the getAccountBatch route object.
-+ (DBRoute * _Nonnull)DBUSERSGetAccountBatch;
++ (DBRoute *)DBUSERSGetAccountBatch;
 
 /// Accessor method for the getCurrentAccount route object.
-+ (DBRoute * _Nonnull)DBUSERSGetCurrentAccount;
++ (DBRoute *)DBUSERSGetCurrentAccount;
 
 /// Accessor method for the getSpaceUsage route object.
-+ (DBRoute * _Nonnull)DBUSERSGetSpaceUsage;
++ (DBRoute *)DBUSERSGetSpaceUsage;
 
 @end
+
+NS_ASSUME_NONNULL_END

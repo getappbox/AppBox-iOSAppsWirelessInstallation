@@ -10,6 +10,8 @@
 
 @class DBTEAMCOMMONTimeRange;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,15 +23,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMCOMMONTimeRange : NSObject <DBSerializable>
+@interface DBTEAMCOMMONTimeRange : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Optional starting time (inclusive).
-@property (nonatomic, readonly) NSDate * _Nullable startTime;
+@property (nonatomic, readonly, nullable) NSDate *startTime;
 
 /// Optional ending time (exclusive).
-@property (nonatomic, readonly) NSDate * _Nullable endTime;
+@property (nonatomic, readonly, nullable) NSDate *endTime;
 
 #pragma mark - Constructors
 
@@ -41,7 +43,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStartTime:(NSDate * _Nullable)startTime endTime:(NSDate * _Nullable)endTime;
+- (instancetype)initWithStartTime:(nullable NSDate *)startTime endTime:(nullable NSDate *)endTime;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -50,7 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,7 +73,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONTimeRange` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMCOMMONTimeRange * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMCOMMONTimeRange *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONTimeRange` instances.
@@ -79,6 +83,8 @@
 ///
 /// @return An instantiation of the `DBTEAMCOMMONTimeRange` object.
 ///
-+ (DBTEAMCOMMONTimeRange * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMCOMMONTimeRange *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

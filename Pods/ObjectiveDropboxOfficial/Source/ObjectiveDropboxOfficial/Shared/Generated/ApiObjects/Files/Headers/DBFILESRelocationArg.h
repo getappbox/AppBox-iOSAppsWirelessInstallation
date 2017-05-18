@@ -11,6 +11,8 @@
 
 @class DBFILESRelocationArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,18 +22,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationArg : DBFILESRelocationPath <DBSerializable>
+@interface DBFILESRelocationArg : DBFILESRelocationPath <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// If true, `dCopy` will copy contents in shared folder, otherwise
 /// `cantCopySharedFolder` in `DBFILESRelocationError` will be returned if
 /// fromPath contains shared folder. This field is always true for `move`.
-@property (nonatomic, readonly) NSNumber * _Nonnull allowSharedFolder;
+@property (nonatomic, readonly) NSNumber *allowSharedFolder;
 
 /// If there's a conflict, have the Dropbox server try to autorename the file to
 /// avoid the conflict.
-@property (nonatomic, readonly) NSNumber * _Nonnull autorename;
+@property (nonatomic, readonly) NSNumber *autorename;
 
 #pragma mark - Constructors
 
@@ -49,10 +51,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFromPath:(NSString * _Nonnull)fromPath
-                                  toPath:(NSString * _Nonnull)toPath
-                       allowSharedFolder:(NSNumber * _Nullable)allowSharedFolder
-                              autorename:(NSNumber * _Nullable)autorename;
+- (instancetype)initWithFromPath:(NSString *)fromPath
+                          toPath:(NSString *)toPath
+               allowSharedFolder:(nullable NSNumber *)allowSharedFolder
+                      autorename:(nullable NSNumber *)autorename;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -63,7 +65,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFromPath:(NSString * _Nonnull)fromPath toPath:(NSString * _Nonnull)toPath;
+- (instancetype)initWithFromPath:(NSString *)fromPath toPath:(NSString *)toPath;
 
 @end
 
@@ -82,7 +84,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRelocationArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRelocationArg *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationArg` instances.
@@ -92,6 +94,8 @@
 ///
 /// @return An instantiation of the `DBFILESRelocationArg` object.
 ///
-+ (DBFILESRelocationArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRelocationArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

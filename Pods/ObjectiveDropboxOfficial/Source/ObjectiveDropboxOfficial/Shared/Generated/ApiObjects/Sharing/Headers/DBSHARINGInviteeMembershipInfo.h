@@ -15,6 +15,8 @@
 @class DBSHARINGMemberPermission;
 @class DBSHARINGUserInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -26,15 +28,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGInviteeMembershipInfo : DBSHARINGMembershipInfo <DBSerializable>
+@interface DBSHARINGInviteeMembershipInfo : DBSHARINGMembershipInfo <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Recipient of the invitation.
-@property (nonatomic, readonly) DBSHARINGInviteeInfo * _Nonnull invitee;
+@property (nonatomic, readonly) DBSHARINGInviteeInfo *invitee;
 
 /// The user this invitation is tied to, if available.
-@property (nonatomic, readonly) DBSHARINGUserInfo * _Nullable user;
+@property (nonatomic, readonly, nullable) DBSHARINGUserInfo *user;
 
 #pragma mark - Constructors
 
@@ -51,12 +53,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                                   invitee:(DBSHARINGInviteeInfo * _Nonnull)invitee
-                               permissions:(NSArray<DBSHARINGMemberPermission *> * _Nullable)permissions
-                                  initials:(NSString * _Nullable)initials
-                               isInherited:(NSNumber * _Nullable)isInherited
-                                      user:(DBSHARINGUserInfo * _Nullable)user;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType
+                           invitee:(DBSHARINGInviteeInfo *)invitee
+                       permissions:(nullable NSArray<DBSHARINGMemberPermission *> *)permissions
+                          initials:(nullable NSString *)initials
+                       isInherited:(nullable NSNumber *)isInherited
+                              user:(nullable DBSHARINGUserInfo *)user;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -67,8 +69,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                                   invitee:(DBSHARINGInviteeInfo * _Nonnull)invitee;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType invitee:(DBSHARINGInviteeInfo *)invitee;
 
 @end
 
@@ -88,7 +89,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGInviteeMembershipInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGInviteeMembershipInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGInviteeMembershipInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGInviteeMembershipInfo` instances.
@@ -98,6 +99,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGInviteeMembershipInfo` object.
 ///
-+ (DBSHARINGInviteeMembershipInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGInviteeMembershipInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

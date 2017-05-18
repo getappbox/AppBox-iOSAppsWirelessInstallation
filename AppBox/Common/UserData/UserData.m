@@ -11,19 +11,6 @@
 
 @implementation UserData
 
-#pragma mark - Gmail Logged In -
-
-#define GmailLoggedIn @"GmailLoggedIn"
-
-+(BOOL)isGmailLoggedIn{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:GmailLoggedIn];
-}
-
-+(void)setIsGmailLoggedIn:(BOOL)isGmailLoggedIn{
-    [[NSUserDefaults standardUserDefaults] setBool:isGmailLoggedIn forKey:GmailLoggedIn];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #pragma mark - Email Releated -
 
 #define UserEmail @"UserEmail"

@@ -10,6 +10,8 @@
 
 @class DBSHARINGUserInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,19 +24,19 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUserInfo : NSObject <DBSerializable>
+@interface DBSHARINGUserInfo : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The account ID of the user.
-@property (nonatomic, readonly, copy) NSString * _Nonnull accountId;
+@property (nonatomic, readonly, copy) NSString *accountId;
 
 /// If the user is in the same team as current user.
-@property (nonatomic, readonly) NSNumber * _Nonnull sameTeam;
+@property (nonatomic, readonly) NSNumber *sameTeam;
 
 /// The team member ID of the shared folder member. Only present if sameTeam is
 /// true.
-@property (nonatomic, readonly) NSString * _Nullable teamMemberId;
+@property (nonatomic, readonly, copy, nullable) NSString *teamMemberId;
 
 #pragma mark - Constructors
 
@@ -48,9 +50,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                 sameTeam:(NSNumber * _Nonnull)sameTeam
-                             teamMemberId:(NSString * _Nullable)teamMemberId;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                         sameTeam:(NSNumber *)sameTeam
+                     teamMemberId:(nullable NSString *)teamMemberId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -61,7 +63,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId sameTeam:(NSNumber * _Nonnull)sameTeam;
+- (instancetype)initWithAccountId:(NSString *)accountId sameTeam:(NSNumber *)sameTeam;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,7 +84,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUserInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUserInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUserInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGUserInfo` instances.
@@ -90,6 +94,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGUserInfo` object.
 ///
-+ (DBSHARINGUserInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUserInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

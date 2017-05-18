@@ -8,6 +8,8 @@
 
 @class DBRoute;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Stone route objects for the Files namespace. Each route in the Files
 /// namespace has its own static object, which contains information about the
@@ -16,129 +18,131 @@
 @interface DBFILESRouteObjects : NSObject
 
 /// Accessor method for the alphaGetMetadata route object.
-+ (DBRoute * _Nonnull)DBFILESAlphaGetMetadata;
++ (DBRoute *)DBFILESAlphaGetMetadata;
 
 /// Accessor method for the alphaUpload route object.
-+ (DBRoute * _Nonnull)DBFILESAlphaUpload;
++ (DBRoute *)DBFILESAlphaUpload;
 
 /// Accessor method for the dCopy route object.
-+ (DBRoute * _Nonnull)DBFILESDCopy;
++ (DBRoute *)DBFILESDCopy;
 
 /// Accessor method for the dCopyBatch route object.
-+ (DBRoute * _Nonnull)DBFILESDCopyBatch;
++ (DBRoute *)DBFILESDCopyBatch;
 
 /// Accessor method for the dCopyBatchCheck route object.
-+ (DBRoute * _Nonnull)DBFILESDCopyBatchCheck;
++ (DBRoute *)DBFILESDCopyBatchCheck;
 
 /// Accessor method for the dCopyReferenceGet route object.
-+ (DBRoute * _Nonnull)DBFILESDCopyReferenceGet;
++ (DBRoute *)DBFILESDCopyReferenceGet;
 
 /// Accessor method for the dCopyReferenceSave route object.
-+ (DBRoute * _Nonnull)DBFILESDCopyReferenceSave;
++ (DBRoute *)DBFILESDCopyReferenceSave;
 
 /// Accessor method for the createFolder route object.
-+ (DBRoute * _Nonnull)DBFILESCreateFolder;
++ (DBRoute *)DBFILESCreateFolder;
 
 /// Accessor method for the delete_ route object.
-+ (DBRoute * _Nonnull)DBFILESDelete_;
++ (DBRoute *)DBFILESDelete_;
 
 /// Accessor method for the deleteBatch route object.
-+ (DBRoute * _Nonnull)DBFILESDeleteBatch;
++ (DBRoute *)DBFILESDeleteBatch;
 
 /// Accessor method for the deleteBatchCheck route object.
-+ (DBRoute * _Nonnull)DBFILESDeleteBatchCheck;
++ (DBRoute *)DBFILESDeleteBatchCheck;
 
 /// Accessor method for the download route object.
-+ (DBRoute * _Nonnull)DBFILESDownload;
++ (DBRoute *)DBFILESDownload;
 
 /// Accessor method for the getMetadata route object.
-+ (DBRoute * _Nonnull)DBFILESGetMetadata;
++ (DBRoute *)DBFILESGetMetadata;
 
 /// Accessor method for the getPreview route object.
-+ (DBRoute * _Nonnull)DBFILESGetPreview;
++ (DBRoute *)DBFILESGetPreview;
 
 /// Accessor method for the getTemporaryLink route object.
-+ (DBRoute * _Nonnull)DBFILESGetTemporaryLink;
++ (DBRoute *)DBFILESGetTemporaryLink;
 
 /// Accessor method for the getThumbnail route object.
-+ (DBRoute * _Nonnull)DBFILESGetThumbnail;
++ (DBRoute *)DBFILESGetThumbnail;
 
 /// Accessor method for the listFolder route object.
-+ (DBRoute * _Nonnull)DBFILESListFolder;
++ (DBRoute *)DBFILESListFolder;
 
 /// Accessor method for the listFolderContinue route object.
-+ (DBRoute * _Nonnull)DBFILESListFolderContinue;
++ (DBRoute *)DBFILESListFolderContinue;
 
 /// Accessor method for the listFolderGetLatestCursor route object.
-+ (DBRoute * _Nonnull)DBFILESListFolderGetLatestCursor;
++ (DBRoute *)DBFILESListFolderGetLatestCursor;
 
 /// Accessor method for the listFolderLongpoll route object.
-+ (DBRoute * _Nonnull)DBFILESListFolderLongpoll;
++ (DBRoute *)DBFILESListFolderLongpoll;
 
 /// Accessor method for the listRevisions route object.
-+ (DBRoute * _Nonnull)DBFILESListRevisions;
++ (DBRoute *)DBFILESListRevisions;
 
 /// Accessor method for the move route object.
-+ (DBRoute * _Nonnull)DBFILESMove;
++ (DBRoute *)DBFILESMove;
 
 /// Accessor method for the moveBatch route object.
-+ (DBRoute * _Nonnull)DBFILESMoveBatch;
++ (DBRoute *)DBFILESMoveBatch;
 
 /// Accessor method for the moveBatchCheck route object.
-+ (DBRoute * _Nonnull)DBFILESMoveBatchCheck;
++ (DBRoute *)DBFILESMoveBatchCheck;
 
 /// Accessor method for the permanentlyDelete route object.
-+ (DBRoute * _Nonnull)DBFILESPermanentlyDelete;
++ (DBRoute *)DBFILESPermanentlyDelete;
 
 /// Accessor method for the propertiesAdd route object.
-+ (DBRoute * _Nonnull)DBFILESPropertiesAdd;
++ (DBRoute *)DBFILESPropertiesAdd;
 
 /// Accessor method for the propertiesOverwrite route object.
-+ (DBRoute * _Nonnull)DBFILESPropertiesOverwrite;
++ (DBRoute *)DBFILESPropertiesOverwrite;
 
 /// Accessor method for the propertiesRemove route object.
-+ (DBRoute * _Nonnull)DBFILESPropertiesRemove;
++ (DBRoute *)DBFILESPropertiesRemove;
 
 /// Accessor method for the propertiesTemplateGet route object.
-+ (DBRoute * _Nonnull)DBFILESPropertiesTemplateGet;
++ (DBRoute *)DBFILESPropertiesTemplateGet;
 
 /// Accessor method for the propertiesTemplateList route object.
-+ (DBRoute * _Nonnull)DBFILESPropertiesTemplateList;
++ (DBRoute *)DBFILESPropertiesTemplateList;
 
 /// Accessor method for the propertiesUpdate route object.
-+ (DBRoute * _Nonnull)DBFILESPropertiesUpdate;
++ (DBRoute *)DBFILESPropertiesUpdate;
 
 /// Accessor method for the restore route object.
-+ (DBRoute * _Nonnull)DBFILESRestore;
++ (DBRoute *)DBFILESRestore;
 
 /// Accessor method for the saveUrl route object.
-+ (DBRoute * _Nonnull)DBFILESSaveUrl;
++ (DBRoute *)DBFILESSaveUrl;
 
 /// Accessor method for the saveUrlCheckJobStatus route object.
-+ (DBRoute * _Nonnull)DBFILESSaveUrlCheckJobStatus;
++ (DBRoute *)DBFILESSaveUrlCheckJobStatus;
 
 /// Accessor method for the search route object.
-+ (DBRoute * _Nonnull)DBFILESSearch;
++ (DBRoute *)DBFILESSearch;
 
 /// Accessor method for the upload route object.
-+ (DBRoute * _Nonnull)DBFILESUpload;
++ (DBRoute *)DBFILESUpload;
 
 /// Accessor method for the uploadSessionAppend route object.
-+ (DBRoute * _Nonnull)DBFILESUploadSessionAppend;
++ (DBRoute *)DBFILESUploadSessionAppend;
 
 /// Accessor method for the uploadSessionAppendV2 route object.
-+ (DBRoute * _Nonnull)DBFILESUploadSessionAppendV2;
++ (DBRoute *)DBFILESUploadSessionAppendV2;
 
 /// Accessor method for the uploadSessionFinish route object.
-+ (DBRoute * _Nonnull)DBFILESUploadSessionFinish;
++ (DBRoute *)DBFILESUploadSessionFinish;
 
 /// Accessor method for the uploadSessionFinishBatch route object.
-+ (DBRoute * _Nonnull)DBFILESUploadSessionFinishBatch;
++ (DBRoute *)DBFILESUploadSessionFinishBatch;
 
 /// Accessor method for the uploadSessionFinishBatchCheck route object.
-+ (DBRoute * _Nonnull)DBFILESUploadSessionFinishBatchCheck;
++ (DBRoute *)DBFILESUploadSessionFinishBatchCheck;
 
 /// Accessor method for the uploadSessionStart route object.
-+ (DBRoute * _Nonnull)DBFILESUploadSessionStart;
++ (DBRoute *)DBFILESUploadSessionStart;
 
 @end
+
+NS_ASSUME_NONNULL_END

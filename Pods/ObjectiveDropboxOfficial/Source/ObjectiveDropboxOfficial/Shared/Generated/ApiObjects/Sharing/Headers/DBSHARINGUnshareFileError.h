@@ -12,6 +12,8 @@
 @class DBSHARINGSharingUserError;
 @class DBSHARINGUnshareFileError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUnshareFileError : NSObject <DBSerializable>
+@interface DBSHARINGUnshareFileError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -46,11 +48,11 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 
 /// (no description). @note Ensure the `isUserError` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingUserError * _Nonnull userError;
+@property (nonatomic, readonly) DBSHARINGSharingUserError *userError;
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingFileAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharingFileAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserError:(DBSHARINGSharingUserError * _Nonnull)userError;
+- (instancetype)initWithUserError:(DBSHARINGSharingUserError *)userError;
 
 ///
 /// Initializes union class with tag state of "access_error".
@@ -70,14 +72,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -113,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -132,7 +136,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnshareFileError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUnshareFileError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUnshareFileError *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnshareFileError` instances.
@@ -142,6 +146,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGUnshareFileError` object.
 ///
-+ (DBSHARINGUnshareFileError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUnshareFileError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

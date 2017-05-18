@@ -12,6 +12,8 @@
 @class DBPAPERListUsersOnPaperDocArgs;
 @class DBPAPERUserOnPaperDocFilter;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,24 +23,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListUsersOnPaperDocArgs : DBPAPERRefPaperDoc <DBSerializable>
+@interface DBPAPERListUsersOnPaperDocArgs : DBPAPERRefPaperDoc <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Size limit per batch. The maximum number of users that can be retrieved per
 /// batch is 1000. Higher value results in invalid arguments error.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 /// Specify this attribute if you want to obtain users that have already
 /// accessed the Paper doc.
-@property (nonatomic, readonly) DBPAPERUserOnPaperDocFilter * _Nonnull filterBy;
+@property (nonatomic, readonly) DBPAPERUserOnPaperDocFilter *filterBy;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 /// @param limit Size limit per batch. The maximum number of users that can be
 /// retrieved per batch is 1000. Higher value results in invalid arguments
 /// error.
@@ -47,19 +49,19 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId
-                                limit:(NSNumber * _Nullable)limit
-                             filterBy:(DBPAPERUserOnPaperDocFilter * _Nullable)filterBy;
+- (instancetype)initWithDocId:(NSString *)docId
+                        limit:(nullable NSNumber *)limit
+                     filterBy:(nullable DBPAPERUserOnPaperDocFilter *)filterBy;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId;
+- (instancetype)initWithDocId:(NSString *)docId;
 
 @end
 
@@ -79,7 +81,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListUsersOnPaperDocArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListUsersOnPaperDocArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListUsersOnPaperDocArgs *)instance;
 
 ///
 /// Deserializes `DBPAPERListUsersOnPaperDocArgs` instances.
@@ -89,6 +91,8 @@
 ///
 /// @return An instantiation of the `DBPAPERListUsersOnPaperDocArgs` object.
 ///
-+ (DBPAPERListUsersOnPaperDocArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListUsersOnPaperDocArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

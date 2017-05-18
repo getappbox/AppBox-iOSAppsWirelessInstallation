@@ -13,6 +13,8 @@
 @class DBFILESGpsCoordinates;
 @class DBFILESPhotoMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,7 +26,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESPhotoMetadata : DBFILESMediaMetadata <DBSerializable>
+@interface DBFILESPhotoMetadata : DBFILESMediaMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -39,9 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDimensions:(DBFILESDimensions * _Nullable)dimensions
-                                  location:(DBFILESGpsCoordinates * _Nullable)location
-                                 timeTaken:(NSDate * _Nullable)timeTaken;
+- (instancetype)initWithDimensions:(nullable DBFILESDimensions *)dimensions
+                          location:(nullable DBFILESGpsCoordinates *)location
+                         timeTaken:(nullable NSDate *)timeTaken;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -50,7 +52,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
 
 @end
 
@@ -69,7 +71,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESPhotoMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESPhotoMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESPhotoMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESPhotoMetadata` instances.
@@ -79,6 +81,8 @@
 ///
 /// @return An instantiation of the `DBFILESPhotoMetadata` object.
 ///
-+ (DBFILESPhotoMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESPhotoMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

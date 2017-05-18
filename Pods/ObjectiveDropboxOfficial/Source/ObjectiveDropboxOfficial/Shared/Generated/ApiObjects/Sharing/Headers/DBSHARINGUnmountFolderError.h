@@ -11,6 +11,8 @@
 @class DBSHARINGSharedFolderAccessError;
 @class DBSHARINGUnmountFolderError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUnmountFolderError : NSObject <DBSerializable>
+@interface DBSHARINGUnmountFolderError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,7 +50,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -69,7 +71,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "not_unmountable".
@@ -81,14 +83,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotUnmountable;
+- (instancetype)initWithNotUnmountable;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -128,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -147,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnmountFolderError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUnmountFolderError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUnmountFolderError *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnmountFolderError` instances.
@@ -157,6 +161,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGUnmountFolderError` object.
 ///
-+ (DBSHARINGUnmountFolderError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUnmountFolderError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -14,6 +14,8 @@
 @class DBSHARINGTeamMemberInfo;
 @class DBUSERSTeam;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,7 +27,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGFileLinkMetadata : DBSHARINGSharedLinkMetadata <DBSerializable>
+@interface DBSHARINGFileLinkMetadata : DBSHARINGSharedLinkMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -34,18 +36,18 @@
 /// the desktop client sends up), this should only be used for display purposes
 /// (such as sorting) and not, for example, to determine if a file has changed
 /// or not.
-@property (nonatomic, readonly) NSDate * _Nonnull clientModified;
+@property (nonatomic, readonly) NSDate *clientModified;
 
 /// The last time the file was modified on Dropbox.
-@property (nonatomic, readonly) NSDate * _Nonnull serverModified;
+@property (nonatomic, readonly) NSDate *serverModified;
 
 /// A unique identifier for the current revision of a file. This field is the
 /// same rev as elsewhere in the API and can be used to detect changes and avoid
 /// conflicts.
-@property (nonatomic, readonly, copy) NSString * _Nonnull rev;
+@property (nonatomic, readonly, copy) NSString *rev;
 
 /// The file size in bytes.
-@property (nonatomic, readonly) NSNumber * _Nonnull size;
+@property (nonatomic, readonly) NSNumber *size;
 
 #pragma mark - Constructors
 
@@ -79,18 +81,18 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                               name:(NSString * _Nonnull)name
-                    linkPermissions:(DBSHARINGLinkPermissions * _Nonnull)linkPermissions
-                     clientModified:(NSDate * _Nonnull)clientModified
-                     serverModified:(NSDate * _Nonnull)serverModified
-                                rev:(NSString * _Nonnull)rev
-                               size:(NSNumber * _Nonnull)size
-                                id_:(NSString * _Nullable)id_
-                            expires:(NSDate * _Nullable)expires
-                          pathLower:(NSString * _Nullable)pathLower
-                     teamMemberInfo:(DBSHARINGTeamMemberInfo * _Nullable)teamMemberInfo
-               contentOwnerTeamInfo:(DBUSERSTeam * _Nullable)contentOwnerTeamInfo;
+- (instancetype)initWithUrl:(NSString *)url
+                       name:(NSString *)name
+            linkPermissions:(DBSHARINGLinkPermissions *)linkPermissions
+             clientModified:(NSDate *)clientModified
+             serverModified:(NSDate *)serverModified
+                        rev:(NSString *)rev
+                       size:(NSNumber *)size
+                        id_:(nullable NSString *)id_
+                    expires:(nullable NSDate *)expires
+                  pathLower:(nullable NSString *)pathLower
+             teamMemberInfo:(nullable DBSHARINGTeamMemberInfo *)teamMemberInfo
+       contentOwnerTeamInfo:(nullable DBUSERSTeam *)contentOwnerTeamInfo;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -113,13 +115,13 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                               name:(NSString * _Nonnull)name
-                    linkPermissions:(DBSHARINGLinkPermissions * _Nonnull)linkPermissions
-                     clientModified:(NSDate * _Nonnull)clientModified
-                     serverModified:(NSDate * _Nonnull)serverModified
-                                rev:(NSString * _Nonnull)rev
-                               size:(NSNumber * _Nonnull)size;
+- (instancetype)initWithUrl:(NSString *)url
+                       name:(NSString *)name
+            linkPermissions:(DBSHARINGLinkPermissions *)linkPermissions
+             clientModified:(NSDate *)clientModified
+             serverModified:(NSDate *)serverModified
+                        rev:(NSString *)rev
+                       size:(NSNumber *)size;
 
 @end
 
@@ -138,7 +140,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileLinkMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGFileLinkMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGFileLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileLinkMetadata` instances.
@@ -148,6 +150,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGFileLinkMetadata` object.
 ///
-+ (DBSHARINGFileLinkMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGFileLinkMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-#import <WebKit/WebKit.h>
 
 #if TARGET_OS_IPHONE
+#import <SafariServices/SafariServices.h>
 #import <UIKit/UIKit.h>
 #elif TARGET_OS_MAC
 #import <AppKit/AppKit.h>

@@ -11,6 +11,8 @@
 
 @class DBTEAMActiveWebSession;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,18 +24,21 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMActiveWebSession : DBTEAMDeviceSession <DBSerializable>
+@interface DBTEAMActiveWebSession : DBTEAMDeviceSession <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Information on the hosting device
-@property (nonatomic, readonly, copy) NSString * _Nonnull userAgent;
+@property (nonatomic, readonly, copy) NSString *userAgent;
 
 /// Information on the hosting operating system
-@property (nonatomic, readonly, copy) NSString * _Nonnull os;
+@property (nonatomic, readonly, copy) NSString *os;
 
 /// Information on the browser used for this web session
-@property (nonatomic, readonly, copy) NSString * _Nonnull browser;
+@property (nonatomic, readonly, copy) NSString *browser;
+
+/// The time this session expires
+@property (nonatomic, readonly, nullable) NSDate *expires;
 
 #pragma mark - Constructors
 
@@ -49,17 +54,19 @@
 /// was made
 /// @param created The time this session was created
 /// @param updated The time of the last activity from this session
+/// @param expires The time this session expires
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId
-                                userAgent:(NSString * _Nonnull)userAgent
-                                       os:(NSString * _Nonnull)os
-                                  browser:(NSString * _Nonnull)browser
-                                ipAddress:(NSString * _Nullable)ipAddress
-                                  country:(NSString * _Nullable)country
-                                  created:(NSDate * _Nullable)created
-                                  updated:(NSDate * _Nullable)updated;
+- (instancetype)initWithSessionId:(NSString *)sessionId
+                        userAgent:(NSString *)userAgent
+                               os:(NSString *)os
+                          browser:(NSString *)browser
+                        ipAddress:(nullable NSString *)ipAddress
+                          country:(nullable NSString *)country
+                          created:(nullable NSDate *)created
+                          updated:(nullable NSDate *)updated
+                          expires:(nullable NSDate *)expires;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -72,10 +79,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId
-                                userAgent:(NSString * _Nonnull)userAgent
-                                       os:(NSString * _Nonnull)os
-                                  browser:(NSString * _Nonnull)browser;
+- (instancetype)initWithSessionId:(NSString *)sessionId
+                        userAgent:(NSString *)userAgent
+                               os:(NSString *)os
+                          browser:(NSString *)browser;
 
 @end
 
@@ -94,7 +101,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMActiveWebSession` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMActiveWebSession * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMActiveWebSession *)instance;
 
 ///
 /// Deserializes `DBTEAMActiveWebSession` instances.
@@ -104,6 +111,8 @@
 ///
 /// @return An instantiation of the `DBTEAMActiveWebSession` object.
 ///
-+ (DBTEAMActiveWebSession * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMActiveWebSession *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

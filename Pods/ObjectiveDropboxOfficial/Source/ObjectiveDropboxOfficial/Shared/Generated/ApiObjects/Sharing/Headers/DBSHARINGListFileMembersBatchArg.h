@@ -10,6 +10,8 @@
 
 @class DBSHARINGListFileMembersBatchArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,16 +23,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFileMembersBatchArg : NSObject <DBSerializable>
+@interface DBSHARINGListFileMembersBatchArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Files for which to return members.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull files;
+@property (nonatomic, readonly) NSArray<NSString *> *files;
 
 /// Number of members to return max per query. Defaults to 10 if no limit is
 /// specified.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
 
@@ -43,7 +45,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFiles:(NSArray<NSString *> * _Nonnull)files limit:(NSNumber * _Nullable)limit;
+- (instancetype)initWithFiles:(NSArray<NSString *> *)files limit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -53,7 +55,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFiles:(NSArray<NSString *> * _Nonnull)files;
+- (instancetype)initWithFiles:(NSArray<NSString *> *)files;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -73,7 +77,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersBatchArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFileMembersBatchArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFileMembersBatchArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersBatchArg` instances.
@@ -83,6 +87,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGListFileMembersBatchArg` object.
 ///
-+ (DBSHARINGListFileMembersBatchArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFileMembersBatchArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

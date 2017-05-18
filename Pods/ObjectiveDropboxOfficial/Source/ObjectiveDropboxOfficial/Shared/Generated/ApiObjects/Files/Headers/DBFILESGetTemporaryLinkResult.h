@@ -11,6 +11,8 @@
 @class DBFILESFileMetadata;
 @class DBFILESGetTemporaryLinkResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESGetTemporaryLinkResult : NSObject <DBSerializable>
+@interface DBFILESGetTemporaryLinkResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Metadata of the file.
-@property (nonatomic, readonly) DBFILESFileMetadata * _Nonnull metadata;
+@property (nonatomic, readonly) DBFILESFileMetadata *metadata;
 
 /// The temporary link which can be used to stream content the file.
-@property (nonatomic, readonly, copy) NSString * _Nonnull link;
+@property (nonatomic, readonly, copy) NSString *link;
 
 #pragma mark - Constructors
 
@@ -40,7 +42,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMetadata:(DBFILESFileMetadata * _Nonnull)metadata link:(NSString * _Nonnull)link;
+- (instancetype)initWithMetadata:(DBFILESFileMetadata *)metadata link:(NSString *)link;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,7 +64,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetTemporaryLinkResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESGetTemporaryLinkResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESGetTemporaryLinkResult *)instance;
 
 ///
 /// Deserializes `DBFILESGetTemporaryLinkResult` instances.
@@ -70,6 +74,8 @@
 ///
 /// @return An instantiation of the `DBFILESGetTemporaryLinkResult` object.
 ///
-+ (DBFILESGetTemporaryLinkResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESGetTemporaryLinkResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

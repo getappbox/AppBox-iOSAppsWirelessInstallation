@@ -11,6 +11,8 @@
 @class DBFILESSearchArg;
 @class DBFILESSearchMode;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,27 +22,27 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSearchArg : NSObject <DBSerializable>
+@interface DBFILESSearchArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path in the user's Dropbox to search. Should probably be a folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// The string to search for. The search string is split on spaces into multiple
 /// tokens. For file name searching, the last token is used for prefix matching
 /// (i.e. "bat c" matches "bat cave" but not "batman car").
-@property (nonatomic, readonly, copy) NSString * _Nonnull query;
+@property (nonatomic, readonly, copy) NSString *query;
 
 /// The starting index within the search results (used for paging).
-@property (nonatomic, readonly) NSNumber * _Nonnull start;
+@property (nonatomic, readonly) NSNumber *start;
 
 /// The maximum number of search results to return.
-@property (nonatomic, readonly) NSNumber * _Nonnull maxResults;
+@property (nonatomic, readonly) NSNumber *maxResults;
 
 /// The search mode (filename, filename_and_content, or deleted_filename). Note
 /// that searching file content is only available for Dropbox Business accounts.
-@property (nonatomic, readonly) DBFILESSearchMode * _Nonnull mode;
+@property (nonatomic, readonly) DBFILESSearchMode *mode;
 
 #pragma mark - Constructors
 
@@ -60,11 +62,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path
-                               query:(NSString * _Nonnull)query
-                               start:(NSNumber * _Nullable)start
-                          maxResults:(NSNumber * _Nullable)maxResults
-                                mode:(DBFILESSearchMode * _Nullable)mode;
+- (instancetype)initWithPath:(NSString *)path
+                       query:(NSString *)query
+                       start:(nullable NSNumber *)start
+                  maxResults:(nullable NSNumber *)maxResults
+                        mode:(nullable DBFILESSearchMode *)mode;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -78,7 +80,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path query:(NSString * _Nonnull)query;
+- (instancetype)initWithPath:(NSString *)path query:(NSString *)query;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -97,7 +101,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSearchArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSearchArg *)instance;
 
 ///
 /// Deserializes `DBFILESSearchArg` instances.
@@ -107,6 +111,8 @@
 ///
 /// @return An instantiation of the `DBFILESSearchArg` object.
 ///
-+ (DBFILESSearchArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSearchArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

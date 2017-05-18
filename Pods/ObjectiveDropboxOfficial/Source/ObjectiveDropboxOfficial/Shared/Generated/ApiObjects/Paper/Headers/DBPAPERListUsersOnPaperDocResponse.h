@@ -14,6 +14,8 @@
 @class DBPAPERUserInfoWithPermissionLevel;
 @class DBSHARINGUserInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,31 +25,31 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListUsersOnPaperDocResponse : NSObject <DBSerializable>
+@interface DBPAPERListUsersOnPaperDocResponse : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// List of email addresses with their respective permission levels that are
 /// invited on the Paper doc.
-@property (nonatomic, readonly) NSArray<DBPAPERInviteeInfoWithPermissionLevel *> * _Nonnull invitees;
+@property (nonatomic, readonly) NSArray<DBPAPERInviteeInfoWithPermissionLevel *> *invitees;
 
 /// List of users with their respective permission levels that are invited on
 /// the Paper folder.
-@property (nonatomic, readonly) NSArray<DBPAPERUserInfoWithPermissionLevel *> * _Nonnull users;
+@property (nonatomic, readonly) NSArray<DBPAPERUserInfoWithPermissionLevel *> *users;
 
 /// The Paper doc owner. This field is populated on every single response.
-@property (nonatomic, readonly) DBSHARINGUserInfo * _Nonnull docOwner;
+@property (nonatomic, readonly) DBSHARINGUserInfo *docOwner;
 
 /// Pass the cursor into `docsUsersListContinue` to paginate through all users.
 /// The cursor preserves all properties as specified in the original call to
 /// `docsUsersList`.
-@property (nonatomic, readonly) DBPAPERCursor * _Nonnull cursor;
+@property (nonatomic, readonly) DBPAPERCursor *cursor;
 
 /// Will be set to True if a subsequent call with the provided cursor to
 /// `docsUsersListContinue` returns immediately with some results. If set to
 /// False please allow some delay before making another call to
 /// `docsUsersListContinue`.
-@property (nonatomic, readonly) NSNumber * _Nonnull hasMore;
+@property (nonatomic, readonly) NSNumber *hasMore;
 
 #pragma mark - Constructors
 
@@ -70,11 +72,13 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvitees:(NSArray<DBPAPERInviteeInfoWithPermissionLevel *> * _Nonnull)invitees
-                                   users:(NSArray<DBPAPERUserInfoWithPermissionLevel *> * _Nonnull)users
-                                docOwner:(DBSHARINGUserInfo * _Nonnull)docOwner
-                                  cursor:(DBPAPERCursor * _Nonnull)cursor
-                                 hasMore:(NSNumber * _Nonnull)hasMore;
+- (instancetype)initWithInvitees:(NSArray<DBPAPERInviteeInfoWithPermissionLevel *> *)invitees
+                           users:(NSArray<DBPAPERUserInfoWithPermissionLevel *> *)users
+                        docOwner:(DBSHARINGUserInfo *)docOwner
+                          cursor:(DBPAPERCursor *)cursor
+                         hasMore:(NSNumber *)hasMore;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -94,7 +98,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListUsersOnPaperDocResponse` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListUsersOnPaperDocResponse * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListUsersOnPaperDocResponse *)instance;
 
 ///
 /// Deserializes `DBPAPERListUsersOnPaperDocResponse` instances.
@@ -104,6 +108,8 @@
 ///
 /// @return An instantiation of the `DBPAPERListUsersOnPaperDocResponse` object.
 ///
-+ (DBPAPERListUsersOnPaperDocResponse * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListUsersOnPaperDocResponse *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

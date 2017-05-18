@@ -2,11 +2,12 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBTasks.h"
 #import "DBDelegate.h"
+#import "DBGlobalErrorResponseHandler+Internal.h"
 #import "DBHandlerTypes.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
-#import "DBTasks.h"
 #import "DBTransportBaseClient+Internal.h"
 #import "DBTransportBaseClient.h"
 
@@ -14,29 +15,50 @@
 
 @implementation DBTask : NSObject
 
-- (instancetype)initWithRoute:(DBRoute *)route task:(NSURLSessionTask *)task {
+- (instancetype)initWithRoute:(DBRoute *)route tokenUid:(NSString *)tokenUid {
   self = [super init];
   if (self) {
-    _task = task;
     _route = route;
+    _queue = nil;
+    _tokenUid = [tokenUid copy];
   }
   return self;
 }
 
 - (void)cancel {
-  [_task cancel];
+  @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+                 reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+               userInfo:nil];
 }
 
 - (void)suspend {
-  [_task suspend];
+  @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+                 reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+               userInfo:nil];
+  ;
 }
 
 - (void)resume {
-  [_task resume];
+  @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+                 reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+               userInfo:nil];
 }
 
 - (void)start {
-  [_task resume];
+  @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+                 reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+               userInfo:nil];
+}
+
+- (DBTask *)restart {
+  @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+                 reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+               userInfo:nil];
 }
 
 @end
@@ -79,34 +101,48 @@
                userInfo:nil];
 }
 
-- (DBRpcResponseBlockStorage)storageBlockWithResponseBlock:(DBRpcResponseBlockImpl)responseBlock {
+- (DBRpcResponseBlockStorage)storageBlockWithResponseBlock:(DBRpcResponseBlockImpl)responseBlock
+                                              cleanupBlock:(DBCleanupBlock)cleanupBlock {
+  __weak DBRpcTask *weakSelf = self;
   DBRpcResponseBlockStorage storageBlock = ^BOOL(NSData *data, NSURLResponse *response, NSError *clientError) {
+    DBRpcTask *strongSelf = weakSelf;
+
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     int statusCode = (int)httpResponse.statusCode;
     NSDictionary *httpHeaders = httpResponse.allHeaderFields;
 
-    DBRequestError *dbxError = [DBTransportBaseClient dBRequestErrorWithErrorData:data
-                                                                      clientError:clientError
-                                                                       statusCode:statusCode
-                                                                      httpHeaders:httpHeaders];
-    if (dbxError) {
-      id routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
-                          ? [DBTransportBaseClient routeErrorWithRoute:_route data:data statusCode:statusCode]
-                          : nil;
-      responseBlock(nil, routeError, dbxError);
-      return NO;
+    DBRoute *route = strongSelf->_route;
+
+    BOOL successful = NO;
+
+    id result = nil;
+    id routeError = nil;
+    DBRequestError *networkError = [DBTransportBaseClient dBRequestErrorWithErrorData:data
+                                                                          clientError:clientError
+                                                                           statusCode:statusCode
+                                                                          httpHeaders:httpHeaders];
+    if (networkError) {
+      routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
+                       ? [DBTransportBaseClient routeErrorWithRoute:route data:data statusCode:statusCode]
+                       : nil;
+      [DBGlobalErrorResponseHandler executeRegisteredResponseBlocksWithRouteError:routeError
+                                                                     networkError:networkError
+                                                                      restartTask:strongSelf];
+    } else {
+      NSError *serializationError;
+      result = [DBTransportBaseClient routeResultWithRoute:route data:data serializationError:&serializationError];
+      if (serializationError) {
+        networkError = [[DBRequestError alloc] initAsClientError:serializationError];
+      } else {
+        result = !route.resultType ? [DBNilObject new] : result;
+        successful = YES;
+      }
     }
 
-    NSError *serializationError;
-    id result = [DBTransportBaseClient routeResultWithRoute:_route data:data serializationError:&serializationError];
-    if (serializationError) {
-      responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:serializationError]);
-      return NO;
-    }
-    result = !_route.resultType ? [DBNilObject new] : result;
-    responseBlock(result, nil, nil);
+    responseBlock(result, routeError, networkError);
+    cleanupBlock();
 
-    return YES;
+    return successful;
   };
 
   return storageBlock;
@@ -152,34 +188,48 @@
                userInfo:nil];
 }
 
-- (DBUploadResponseBlockStorage)storageBlockWithResponseBlock:(DBUploadResponseBlockImpl)responseBlock {
+- (DBUploadResponseBlockStorage)storageBlockWithResponseBlock:(DBUploadResponseBlockImpl)responseBlock
+                                                 cleanupBlock:(DBCleanupBlock)cleanupBlock {
+  __weak DBUploadTask *weakSelf = self;
   DBUploadResponseBlockStorage storageBlock = ^BOOL(NSData *data, NSURLResponse *response, NSError *clientError) {
+    DBUploadTask *strongSelf = weakSelf;
+
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     int statusCode = (int)httpResponse.statusCode;
     NSDictionary *httpHeaders = httpResponse.allHeaderFields;
 
-    DBRequestError *dbxError = [DBTransportBaseClient dBRequestErrorWithErrorData:data
-                                                                      clientError:clientError
-                                                                       statusCode:statusCode
-                                                                      httpHeaders:httpHeaders];
-    if (dbxError) {
-      id routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
-                          ? [DBTransportBaseClient routeErrorWithRoute:_route data:data statusCode:statusCode]
-                          : nil;
-      responseBlock(nil, routeError, dbxError);
-      return NO;
+    DBRoute *route = strongSelf->_route;
+
+    BOOL successful = NO;
+
+    id result = nil;
+    id routeError = nil;
+    DBRequestError *networkError = [DBTransportBaseClient dBRequestErrorWithErrorData:data
+                                                                          clientError:clientError
+                                                                           statusCode:statusCode
+                                                                          httpHeaders:httpHeaders];
+    if (networkError) {
+      routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
+                       ? [DBTransportBaseClient routeErrorWithRoute:route data:data statusCode:statusCode]
+                       : nil;
+      [DBGlobalErrorResponseHandler executeRegisteredResponseBlocksWithRouteError:routeError
+                                                                     networkError:networkError
+                                                                      restartTask:strongSelf];
+    } else {
+      NSError *serializationError;
+      result = [DBTransportBaseClient routeResultWithRoute:route data:data serializationError:&serializationError];
+      if (serializationError) {
+        networkError = [[DBRequestError alloc] initAsClientError:serializationError];
+      } else {
+        result = !route.resultType ? [DBNilObject new] : result;
+        successful = YES;
+      }
     }
 
-    NSError *serializationError;
-    id result = [DBTransportBaseClient routeResultWithRoute:_route data:data serializationError:&serializationError];
-    if (serializationError) {
-      responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:serializationError]);
-      return NO;
-    }
-    result = !_route.resultType ? [DBNilObject new] : result;
-    responseBlock(result, nil, nil);
+    responseBlock(result, routeError, networkError);
+    cleanupBlock();
 
-    return YES;
+    return successful;
   };
 
   return storageBlock;
@@ -225,8 +275,12 @@
                userInfo:nil];
 }
 
-- (DBDownloadResponseBlockStorage)storageBlockWithResponseBlock:(DBDownloadUrlResponseBlockImpl)responseBlock {
+- (DBDownloadResponseBlockStorage)storageBlockWithResponseBlock:(DBDownloadUrlResponseBlockImpl)responseBlock
+                                                   cleanupBlock:(DBCleanupBlock)cleanupBlock {
+  __weak DBDownloadUrlTask *weakSelf = self;
   DBDownloadResponseBlockStorage storageBlock = ^BOOL(NSURL *location, NSURLResponse *response, NSError *clientError) {
+    DBDownloadUrlTask *strongSelf = weakSelf;
+
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     int statusCode = (int)httpResponse.statusCode;
     NSDictionary *httpHeaders = httpResponse.allHeaderFields;
@@ -234,57 +288,65 @@
         [DBTransportBaseClient caseInsensitiveLookupWithKey:@"Dropbox-API-Result" dictionary:httpHeaders];
     NSData *resultData = headerString ? [headerString dataUsingEncoding:NSUTF8StringEncoding] : nil;
 
-    if (clientError || !resultData) {
+    DBRoute *route = strongSelf->_route;
+
+    BOOL successful = NO;
+
+    id result = nil;
+    id routeError = nil;
+    DBRequestError *networkError = nil;
+    NSURL *destination = strongSelf->_destination;
+
+    if (clientError || !resultData || !location) {
       // error data is in response body (downloaded to output tmp file)
       NSData *errorData = location ? [NSData dataWithContentsOfFile:[location path]] : nil;
-      DBRequestError *dbxError = [DBTransportBaseClient dBRequestErrorWithErrorData:errorData
-                                                                        clientError:clientError
-                                                                         statusCode:statusCode
-                                                                        httpHeaders:httpHeaders];
-      id routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
-                          ? [DBTransportBaseClient routeErrorWithRoute:_route data:errorData statusCode:statusCode]
-                          : nil;
-      responseBlock(nil, routeError, dbxError, _destination);
-      return NO;
-    }
+      networkError = [DBTransportBaseClient dBRequestErrorWithErrorData:errorData
+                                                            clientError:clientError
+                                                             statusCode:statusCode
+                                                            httpHeaders:httpHeaders];
+      routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
+                       ? [DBTransportBaseClient routeErrorWithRoute:route data:errorData statusCode:statusCode]
+                       : nil;
+      [DBGlobalErrorResponseHandler executeRegisteredResponseBlocksWithRouteError:routeError
+                                                                     networkError:networkError
+                                                                      restartTask:strongSelf];
+    } else {
+      NSFileManager *fileManager = [NSFileManager defaultManager];
+      NSString *destinationPath = [destination path];
 
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *destinationPath = [_destination path];
+      NSError *fileMoveErrorOverwrite;
 
-    if ([fileManager fileExistsAtPath:destinationPath]) {
-      NSError *fileMoveError;
-      if (_overwrite) {
-        [fileManager removeItemAtPath:destinationPath error:&fileMoveError];
-        if (fileMoveError) {
-          responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:fileMoveError], _destination);
-          return NO;
+      if (strongSelf->_overwrite && [fileManager fileExistsAtPath:destinationPath]) {
+        [fileManager removeItemAtPath:destinationPath error:&fileMoveErrorOverwrite];
+      }
+
+      if (fileMoveErrorOverwrite) {
+        networkError = [[DBRequestError alloc] initAsClientError:fileMoveErrorOverwrite];
+      } else {
+        NSError *fileMoveErrorToDestination;
+
+        [fileManager moveItemAtPath:[location path] toPath:destinationPath error:&fileMoveErrorToDestination];
+
+        if (fileMoveErrorToDestination) {
+          networkError = [[DBRequestError alloc] initAsClientError:fileMoveErrorToDestination];
+        } else {
+          NSError *serializationError;
+          result =
+              [DBTransportBaseClient routeResultWithRoute:route data:resultData serializationError:&serializationError];
+          if (serializationError) {
+            networkError = [[DBRequestError alloc] initAsClientError:serializationError];
+          } else {
+            result = !route.resultType ? [DBNilObject new] : result;
+            successful = YES;
+          }
         }
       }
-      [fileManager moveItemAtPath:[location path] toPath:destinationPath error:&fileMoveError];
-      if (fileMoveError) {
-        responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:fileMoveError], _destination);
-        return NO;
-      }
-    } else {
-      NSError *fileMoveError;
-      [fileManager moveItemAtPath:[location path] toPath:destinationPath error:&fileMoveError];
-      if (fileMoveError) {
-        responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:fileMoveError], _destination);
-        return NO;
-      }
     }
 
-    NSError *serializationError;
-    id result =
-        [DBTransportBaseClient routeResultWithRoute:_route data:resultData serializationError:&serializationError];
-    if (serializationError) {
-      responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:serializationError], _destination);
-      return NO;
-    }
-    result = !_route.resultType ? [DBNilObject new] : result;
-    responseBlock(result, nil, nil, _destination);
+    responseBlock(result, routeError, networkError, destination);
+    cleanupBlock();
 
-    return YES;
+    return successful;
   };
 
   return storageBlock;
@@ -331,8 +393,12 @@
                userInfo:nil];
 }
 
-- (DBDownloadResponseBlockStorage)storageBlockWithResponseBlock:(DBDownloadDataResponseBlockImpl)responseBlock {
+- (DBDownloadResponseBlockStorage)storageBlockWithResponseBlock:(DBDownloadDataResponseBlockImpl)responseBlock
+                                                   cleanupBlock:(DBCleanupBlock)cleanupBlock {
+  __weak DBDownloadDataTask *weakSelf = self;
   DBDownloadResponseBlockStorage storageBlock = ^BOOL(NSURL *location, NSURLResponse *response, NSError *clientError) {
+    DBDownloadDataTask *strongSelf = weakSelf;
+
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     int statusCode = (int)httpResponse.statusCode;
     NSDictionary *httpHeaders = httpResponse.allHeaderFields;
@@ -340,30 +406,45 @@
         [DBTransportBaseClient caseInsensitiveLookupWithKey:@"Dropbox-API-Result" dictionary:httpHeaders];
     NSData *resultData = headerString ? [headerString dataUsingEncoding:NSUTF8StringEncoding] : nil;
 
+    DBRoute *route = strongSelf->_route;
+
+    BOOL successful = NO;
+
+    id result = nil;
+    id routeError = nil;
+    DBRequestError *networkError = nil;
+    NSData *downloadContent = nil;
+
     if (clientError || !resultData) {
       // error data is in response body (downloaded to output tmp file)
       NSData *errorData = location ? [NSData dataWithContentsOfFile:[location path]] : nil;
-      DBRequestError *dbxError = [DBTransportBaseClient dBRequestErrorWithErrorData:errorData
-                                                                        clientError:clientError
-                                                                         statusCode:statusCode
-                                                                        httpHeaders:httpHeaders];
-      id routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
-                          ? [DBTransportBaseClient routeErrorWithRoute:_route data:errorData statusCode:statusCode]
-                          : nil;
-      responseBlock(nil, routeError, dbxError, nil);
-      return NO;
+      networkError = [DBTransportBaseClient dBRequestErrorWithErrorData:errorData
+                                                            clientError:clientError
+                                                             statusCode:statusCode
+                                                            httpHeaders:httpHeaders];
+      routeError = [DBTransportBaseClient statusCodeIsRouteError:statusCode]
+                       ? [DBTransportBaseClient routeErrorWithRoute:route data:errorData statusCode:statusCode]
+                       : nil;
+      [DBGlobalErrorResponseHandler executeRegisteredResponseBlocksWithRouteError:routeError
+                                                                     networkError:networkError
+                                                                      restartTask:strongSelf];
+    } else {
+      NSError *serializationError;
+      result =
+          [DBTransportBaseClient routeResultWithRoute:route data:resultData serializationError:&serializationError];
+      if (serializationError) {
+        networkError = [[DBRequestError alloc] initAsClientError:serializationError];
+      } else {
+        result = !route.resultType ? [DBNilObject new] : result;
+        downloadContent = [NSData dataWithContentsOfFile:[location path]];
+        successful = YES;
+      }
     }
 
-    NSError *serializationError;
-    id result =
-        [DBTransportBaseClient routeResultWithRoute:_route data:resultData serializationError:&serializationError];
-    if (serializationError) {
-      responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:serializationError], nil);
-      return NO;
-    }
-    result = !_route.resultType ? [DBNilObject new] : result;
-    responseBlock(result, nil, nil, [NSData dataWithContentsOfFile:[location path]]);
-    return YES;
+    responseBlock(result, routeError, networkError, downloadContent);
+    cleanupBlock();
+
+    return successful;
   };
 
   return storageBlock;

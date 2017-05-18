@@ -19,6 +19,7 @@
 
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"
+#import "MBProgressHUD+ProgressHud.h"
 
 #import "UserData.h"
 #import "XCProject.h"

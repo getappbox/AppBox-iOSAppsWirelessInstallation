@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupsSelector;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,7 +24,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupsSelector : NSObject <DBSerializable>
+@interface DBTEAMGroupsSelector : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -42,11 +44,11 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 
 /// List of group IDs. @note Ensure the `isGroupIds` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull groupIds;
+@property (nonatomic, readonly) NSArray<NSString *> *groupIds;
 
 /// List of external IDs of groups. @note Ensure the `isGroupExternalIds` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull groupExternalIds;
+@property (nonatomic, readonly) NSArray<NSString *> *groupExternalIds;
 
 #pragma mark - Constructors
 
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupIds:(NSArray<NSString *> * _Nonnull)groupIds;
+- (instancetype)initWithGroupIds:(NSArray<NSString *> *)groupIds;
 
 ///
 /// Initializes union class with tag state of "group_external_ids".
@@ -71,7 +73,9 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupExternalIds:(NSArray<NSString *> * _Nonnull)groupExternalIds;
+- (instancetype)initWithGroupExternalIds:(NSArray<NSString *> *)groupExternalIds;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -102,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -121,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsSelector` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupsSelector * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupsSelector *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsSelector` instances.
@@ -131,6 +135,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupsSelector` object.
 ///
-+ (DBTEAMGroupsSelector * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupsSelector *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

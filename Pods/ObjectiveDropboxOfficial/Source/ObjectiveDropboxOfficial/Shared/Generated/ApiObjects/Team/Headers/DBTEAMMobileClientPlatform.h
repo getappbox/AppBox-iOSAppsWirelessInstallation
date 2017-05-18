@@ -10,6 +10,8 @@
 
 @class DBTEAMMobileClientPlatform;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMobileClientPlatform : NSObject <DBSerializable>
+@interface DBTEAMMobileClientPlatform : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -58,7 +60,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithIphone;
+- (instancetype)initWithIphone;
 
 ///
 /// Initializes union class with tag state of "ipad".
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithIpad;
+- (instancetype)initWithIpad;
 
 ///
 /// Initializes union class with tag state of "android".
@@ -76,7 +78,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAndroid;
+- (instancetype)initWithAndroid;
 
 ///
 /// Initializes union class with tag state of "windows_phone".
@@ -86,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithWindowsPhone;
+- (instancetype)initWithWindowsPhone;
 
 ///
 /// Initializes union class with tag state of "blackberry".
@@ -96,14 +98,16 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithBlackberry;
+- (instancetype)initWithBlackberry;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -154,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -173,7 +177,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMobileClientPlatform` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMobileClientPlatform * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMobileClientPlatform *)instance;
 
 ///
 /// Deserializes `DBTEAMMobileClientPlatform` instances.
@@ -183,6 +187,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// @return An instantiation of the `DBTEAMMobileClientPlatform` object.
 ///
-+ (DBTEAMMobileClientPlatform * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMobileClientPlatform *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

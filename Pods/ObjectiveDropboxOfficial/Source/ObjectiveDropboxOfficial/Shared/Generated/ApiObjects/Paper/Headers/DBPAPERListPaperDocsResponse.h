@@ -11,6 +11,8 @@
 @class DBPAPERCursor;
 @class DBPAPERListPaperDocsResponse;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,31 +22,31 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListPaperDocsResponse : NSObject <DBSerializable>
+@interface DBPAPERListPaperDocsResponse : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
-/// The list of Paper doc ids that can be used to access the given Paper docs or
+/// The list of Paper doc IDs that can be used to access the given Paper docs or
 /// supplied to other API methods. The list is sorted in the order specified by
 /// the initial call to `docsList`.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull docIds;
+@property (nonatomic, readonly) NSArray<NSString *> *docIds;
 
 /// Pass the cursor into `docsListContinue` to paginate through all files. The
 /// cursor preserves all properties as specified in the original call to
 /// `docsList`.
-@property (nonatomic, readonly) DBPAPERCursor * _Nonnull cursor;
+@property (nonatomic, readonly) DBPAPERCursor *cursor;
 
 /// Will be set to True if a subsequent call with the provided cursor to
 /// `docsListContinue` returns immediately with some results. If set to False
 /// please allow some delay before making another call to `docsListContinue`.
-@property (nonatomic, readonly) NSNumber * _Nonnull hasMore;
+@property (nonatomic, readonly) NSNumber *hasMore;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docIds The list of Paper doc ids that can be used to access the given
+/// @param docIds The list of Paper doc IDs that can be used to access the given
 /// Paper docs or supplied to other API methods. The list is sorted in the order
 /// specified by the initial call to `docsList`.
 /// @param cursor Pass the cursor into `docsListContinue` to paginate through
@@ -57,9 +59,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocIds:(NSArray<NSString *> * _Nonnull)docIds
-                                cursor:(DBPAPERCursor * _Nonnull)cursor
-                               hasMore:(NSNumber * _Nonnull)hasMore;
+- (instancetype)initWithDocIds:(NSArray<NSString *> *)docIds cursor:(DBPAPERCursor *)cursor hasMore:(NSNumber *)hasMore;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -79,7 +81,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListPaperDocsResponse` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListPaperDocsResponse * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListPaperDocsResponse *)instance;
 
 ///
 /// Deserializes `DBPAPERListPaperDocsResponse` instances.
@@ -89,6 +91,8 @@
 ///
 /// @return An instantiation of the `DBPAPERListPaperDocsResponse` object.
 ///
-+ (DBPAPERListPaperDocsResponse * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListPaperDocsResponse *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -78,8 +78,8 @@
                     </buttonCell>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N6m-ow-2SF">
-                    <rect key="frame" x="424" y="13" width="169" height="32"/>
-                    <buttonCell key="cell" type="push" title="Send a Test Message" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Dj-Lx-t11">
+                    <rect key="frame" x="426" y="13" width="167" height="32"/>
+                    <buttonCell key="cell" type="push" title="Send a test Message" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Dj-Lx-t11">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

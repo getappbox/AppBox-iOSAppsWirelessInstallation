@@ -68,6 +68,54 @@
   return [[DBASYNCLaunchResultBaseSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBASYNCLaunchResultBaseAsyncJobId:
+    result = prime * result + [self.asyncJobId hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToLaunchResultBase:other];
+}
+
+- (BOOL)isEqualToLaunchResultBase:(DBASYNCLaunchResultBase *)aLaunchResultBase {
+  if (self == aLaunchResultBase) {
+    return YES;
+  }
+  if (self.tag != aLaunchResultBase.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBASYNCLaunchResultBaseAsyncJobId:
+    return [self.asyncJobId isEqual:aLaunchResultBase.asyncJobId];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -102,6 +150,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCLaunchEmptyResult.h"
@@ -181,6 +230,58 @@
   return [[DBASYNCLaunchEmptyResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBASYNCLaunchEmptyResultAsyncJobId:
+    result = prime * result + [self.asyncJobId hash];
+  case DBASYNCLaunchEmptyResultComplete:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToLaunchEmptyResult:other];
+}
+
+- (BOOL)isEqualToLaunchEmptyResult:(DBASYNCLaunchEmptyResult *)aLaunchEmptyResult {
+  if (self == aLaunchEmptyResult) {
+    return YES;
+  }
+  if (self.tag != aLaunchEmptyResult.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBASYNCLaunchEmptyResultAsyncJobId:
+    return [self.asyncJobId isEqual:aLaunchEmptyResult.asyncJobId];
+  case DBASYNCLaunchEmptyResultComplete:
+    return [[self tagName] isEqual:[aLaunchEmptyResult tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -219,6 +320,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCPollArg.h"
@@ -255,6 +357,47 @@
 
 - (NSString *)description {
   return [[DBASYNCPollArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.asyncJobId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPollArg:other];
+}
+
+- (BOOL)isEqualToPollArg:(DBASYNCPollArg *)aPollArg {
+  if (self == aPollArg) {
+    return YES;
+  }
+  if (![self.asyncJobId isEqual:aPollArg.asyncJobId]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -330,6 +473,54 @@
   return [[DBASYNCPollResultBaseSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBASYNCPollResultBaseInProgress:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPollResultBase:other];
+}
+
+- (BOOL)isEqualToPollResultBase:(DBASYNCPollResultBase *)aPollResultBase {
+  if (self == aPollResultBase) {
+    return YES;
+  }
+  if (self.tag != aPollResultBase.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBASYNCPollResultBaseInProgress:
+    return [[self tagName] isEqual:[aPollResultBase tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -362,6 +553,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCPollEmptyResult.h"
@@ -430,6 +622,58 @@
   return [[DBASYNCPollEmptyResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBASYNCPollEmptyResultInProgress:
+    result = prime * result + [[self tagName] hash];
+  case DBASYNCPollEmptyResultComplete:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPollEmptyResult:other];
+}
+
+- (BOOL)isEqualToPollEmptyResult:(DBASYNCPollEmptyResult *)aPollEmptyResult {
+  if (self == aPollEmptyResult) {
+    return YES;
+  }
+  if (self.tag != aPollEmptyResult.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBASYNCPollEmptyResultInProgress:
+    return [[self tagName] isEqual:[aPollEmptyResult tagName]];
+  case DBASYNCPollEmptyResultComplete:
+    return [[self tagName] isEqual:[aPollEmptyResult tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -466,6 +710,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCPollError.h"
@@ -547,6 +792,62 @@
   return [[DBASYNCPollErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBASYNCPollErrorInvalidAsyncJobId:
+    result = prime * result + [[self tagName] hash];
+  case DBASYNCPollErrorInternalError:
+    result = prime * result + [[self tagName] hash];
+  case DBASYNCPollErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPollError:other];
+}
+
+- (BOOL)isEqualToPollError:(DBASYNCPollError *)aPollError {
+  if (self == aPollError) {
+    return YES;
+  }
+  if (self.tag != aPollError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBASYNCPollErrorInvalidAsyncJobId:
+    return [[self tagName] isEqual:[aPollError tagName]];
+  case DBASYNCPollErrorInternalError:
+    return [[self tagName] isEqual:[aPollError tagName]];
+  case DBASYNCPollErrorOther:
+    return [[self tagName] isEqual:[aPollError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -582,4 +883,5 @@
     return [[DBASYNCPollError alloc] initWithOther];
   }
 }
+
 @end

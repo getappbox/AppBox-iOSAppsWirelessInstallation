@@ -12,6 +12,8 @@
 @class DBSHARINGMemberPermission;
 @class DBSHARINGPermissionDeniedReason;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,19 +25,19 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGMemberPermission : NSObject <DBSerializable>
+@interface DBSHARINGMemberPermission : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The action that the user may wish to take on the member.
-@property (nonatomic, readonly) DBSHARINGMemberAction * _Nonnull action;
+@property (nonatomic, readonly) DBSHARINGMemberAction *action;
 
 /// True if the user is allowed to take the action.
-@property (nonatomic, readonly) NSNumber * _Nonnull allow;
+@property (nonatomic, readonly) NSNumber *allow;
 
 /// The reason why the user is denied the permission. Not present if the action
 /// is allowed.
-@property (nonatomic, readonly) DBSHARINGPermissionDeniedReason * _Nullable reason;
+@property (nonatomic, readonly, nullable) DBSHARINGPermissionDeniedReason *reason;
 
 #pragma mark - Constructors
 
@@ -49,9 +51,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAction:(DBSHARINGMemberAction * _Nonnull)action
-                                 allow:(NSNumber * _Nonnull)allow
-                                reason:(DBSHARINGPermissionDeniedReason * _Nullable)reason;
+- (instancetype)initWithAction:(DBSHARINGMemberAction *)action
+                         allow:(NSNumber *)allow
+                        reason:(nullable DBSHARINGPermissionDeniedReason *)reason;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -62,7 +64,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAction:(DBSHARINGMemberAction * _Nonnull)action allow:(NSNumber * _Nonnull)allow;
+- (instancetype)initWithAction:(DBSHARINGMemberAction *)action allow:(NSNumber *)allow;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -81,7 +85,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberPermission` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGMemberPermission * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGMemberPermission *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberPermission` instances.
@@ -91,6 +95,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGMemberPermission` object.
 ///
-+ (DBSHARINGMemberPermission * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGMemberPermission *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

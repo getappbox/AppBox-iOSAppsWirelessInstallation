@@ -10,6 +10,8 @@
 
 @class DBFILESRelocationPath;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,15 +21,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationPath : NSObject <DBSerializable>
+@interface DBFILESRelocationPath : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Path in the user's Dropbox to be copied or moved.
-@property (nonatomic, readonly, copy) NSString * _Nonnull fromPath;
+@property (nonatomic, readonly, copy) NSString *fromPath;
 
 /// Path in the user's Dropbox that is the destination.
-@property (nonatomic, readonly, copy) NSString * _Nonnull toPath;
+@property (nonatomic, readonly, copy) NSString *toPath;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFromPath:(NSString * _Nonnull)fromPath toPath:(NSString * _Nonnull)toPath;
+- (instancetype)initWithFromPath:(NSString *)fromPath toPath:(NSString *)toPath;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,7 +62,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationPath` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRelocationPath * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRelocationPath *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationPath` instances.
@@ -68,6 +72,8 @@
 ///
 /// @return An instantiation of the `DBFILESRelocationPath` object.
 ///
-+ (DBFILESRelocationPath * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRelocationPath *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

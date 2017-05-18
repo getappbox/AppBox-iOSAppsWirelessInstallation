@@ -12,6 +12,8 @@
 @class DBTEAMMemberAccess;
 @class DBTEAMUserSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,15 +25,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMemberAccess : NSObject <DBSerializable>
+@interface DBTEAMMemberAccess : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Identity of a user.
-@property (nonatomic, readonly) DBTEAMUserSelectorArg * _Nonnull user;
+@property (nonatomic, readonly) DBTEAMUserSelectorArg *user;
 
 /// Access type.
-@property (nonatomic, readonly) DBTEAMGroupAccessType * _Nonnull accessType;
+@property (nonatomic, readonly) DBTEAMGroupAccessType *accessType;
 
 #pragma mark - Constructors
 
@@ -43,8 +45,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUser:(DBTEAMUserSelectorArg * _Nonnull)user
-                          accessType:(DBTEAMGroupAccessType * _Nonnull)accessType;
+- (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user accessType:(DBTEAMGroupAccessType *)accessType;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +66,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberAccess` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMemberAccess * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMemberAccess *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberAccess` instances.
@@ -73,6 +76,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMemberAccess` object.
 ///
-+ (DBTEAMMemberAccess * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMemberAccess *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

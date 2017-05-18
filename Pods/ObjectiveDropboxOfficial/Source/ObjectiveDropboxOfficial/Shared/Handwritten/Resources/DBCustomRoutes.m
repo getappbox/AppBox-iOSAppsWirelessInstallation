@@ -2,10 +2,10 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBCustomRoutes.h"
 #import "DBASYNCLaunchEmptyResult.h"
 #import "DBChunkInputStream.h"
 #import "DBCustomDatatypes.h"
-#import "DBCustomRoutes.h"
 #import "DBCustomTasks.h"
 #import "DBFILESCommitInfo.h"
 #import "DBFILESUploadSessionCursor.h"
@@ -26,7 +26,7 @@
 static const NSUInteger fileChunkSize = 10 * 1024 * 1024;
 static const int timeoutInSec = 200;
 
-@implementation DBFILESRoutes (DBCustomRoutes)
+@implementation DBFILESUserAuthRoutes (DBCustomRoutes)
 
 - (DBBatchUploadTask *)batchUploadFiles:(NSDictionary<NSURL *, DBFILESCommitInfo *> *)fileUrlsToCommitInfo
                                   queue:(NSOperationQueue *)queue
@@ -64,18 +64,28 @@ static const int timeoutInSec = 200;
 
   uploadData.totalUploadSize = totalUploadSize;
 
+  NSOperationQueue *limitRequestsQueue = [NSOperationQueue new];
+  limitRequestsQueue.maxConcurrentOperationCount = 5;
+
   for (NSURL *fileUrl in fileUrls) {
     NSUInteger fileSize = [fileUrlsToFileSize[fileUrl] unsignedIntegerValue];
 
     if (!uploadData.cancel) {
-      if (fileSize < fileChunkSize) {
-        // file is small, so we won't chunk upload it.
-        [self startUploadSmallFile:uploadData fileUrl:fileUrl fileSize:fileSize];
-      } else {
-        // file is somewhat large, so we will chunk upload it, repeatedly querying
-        // `/upload_session/append_v2` until the file is uploaded
-        [self startUploadLargeFile:uploadData fileUrl:fileUrl fileSize:fileSize];
-      }
+      dispatch_group_enter(uploadData.uploadGroup);
+
+      // queue to `limitRequestsQueue` then back to main queue to make request
+      [limitRequestsQueue addOperationWithBlock:^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        if (fileSize < fileChunkSize) {
+          // file is small, so we won't chunk upload it.
+          [self startUploadSmallFile:uploadData fileUrl:fileUrl fileSize:fileSize blockingSemaphore:semaphore];
+        } else {
+          // file is somewhat large, so we will chunk upload it, repeatedly querying
+          // `/upload_session/append_v2` until the file is uploaded
+          [self startUploadLargeFile:uploadData fileUrl:fileUrl fileSize:fileSize blockingSemaphore:semaphore];
+        }
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+      }];
     } else {
       break;
     }
@@ -88,44 +98,48 @@ static const int timeoutInSec = 200;
   return uploadTask;
 }
 
-- (void)startUploadSmallFile:(DBBatchUploadData *)uploadData fileUrl:(NSURL *)fileUrl fileSize:(NSUInteger)fileSize {
-  dispatch_group_enter(uploadData.uploadGroup);
-
+- (void)startUploadSmallFile:(DBBatchUploadData *)uploadData
+                     fileUrl:(NSURL *)fileUrl
+                    fileSize:(NSUInteger)fileSize
+           blockingSemaphore:(dispatch_semaphore_t)blockingSemaphore {
   // immediately close session after first API call
   // because file can be uploaded in one request
-  __block DBUploadTask *task = [[[self uploadSessionStartUrl:@(YES) inputUrl:fileUrl]
-      setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBNilObject *routeError, DBRequestError *error) {
-        if (result && !routeError) {
-          NSString *sessionId = result.sessionId;
-          NSNumber *offset = @(fileSize);
-          DBFILESUploadSessionCursor *cursor =
-              [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:offset];
-          DBFILESCommitInfo *commitInfo = uploadData.fileUrlsToCommitInfo[fileUrl];
-          DBFILESUploadSessionFinishArg *finishArg =
-              [[DBFILESUploadSessionFinishArg alloc] initWithCursor:cursor commit:commitInfo];
+  __block DBUploadTask *task =
+      [[[self uploadSessionStartStream:@(YES) inputStream:[NSInputStream inputStreamWithURL:fileUrl]]
+          setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBNilObject *routeError, DBRequestError *error) {
+            if (result && !routeError) {
+              NSString *sessionId = result.sessionId;
+              NSNumber *offset = @(fileSize);
+              DBFILESUploadSessionCursor *cursor =
+                  [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:offset];
+              DBFILESCommitInfo *commitInfo = uploadData.fileUrlsToCommitInfo[fileUrl];
+              DBFILESUploadSessionFinishArg *finishArg =
+                  [[DBFILESUploadSessionFinishArg alloc] initWithCursor:cursor commit:commitInfo];
 
-          // store commit info for this file
-          [uploadData.finishArgs addObject:finishArg];
-        } else {
-          uploadData.fileUrlsToRequestErrors[fileUrl] = error;
-        }
+              // store commit info for this file
+              [uploadData.finishArgs addObject:finishArg];
+            } else {
+              uploadData.fileUrlsToRequestErrors[fileUrl] = error;
+            }
 
-        [uploadData.taskStorage removeUploadTask:task];
-        dispatch_group_leave(uploadData.uploadGroup);
-      }
-                 queue:uploadData.queue]
-      setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+            [uploadData.taskStorage removeUploadTask:task];
+            dispatch_semaphore_signal(blockingSemaphore);
+            dispatch_group_leave(uploadData.uploadGroup);
+          }
+                     queue:uploadData.queue]
+          setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 #pragma unused(totalBytesWritten)
 #pragma unused(totalBytesExpectedToWrite)
-        [self executeProgressHandler:uploadData amountUploaded:bytesWritten];
-      }];
+            [self executeProgressHandler:uploadData amountUploaded:bytesWritten];
+          }];
 
   [uploadData.taskStorage addUploadTask:task];
 }
 
-- (void)startUploadLargeFile:(DBBatchUploadData *)uploadData fileUrl:(NSURL *)fileUrl fileSize:(NSUInteger)fileSize {
-  dispatch_group_enter(uploadData.uploadGroup);
-
+- (void)startUploadLargeFile:(DBBatchUploadData *)uploadData
+                     fileUrl:(NSURL *)fileUrl
+                    fileSize:(NSUInteger)fileSize
+           blockingSemaphore:(dispatch_semaphore_t)blockingSemaphore {
   NSUInteger startBytes = 0;
   NSUInteger endBytes = fileChunkSize;
   DBChunkInputStream *fileChunkInputStream =
@@ -140,7 +154,11 @@ static const int timeoutInSec = 200;
       setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBNilObject *routeError, DBRequestError *error) {
         if (result && !routeError) {
           NSString *sessionId = result.sessionId;
-          [self appendRemainingFileChunks:uploadData fileUrl:fileUrl fileSize:fileSize sessionId:sessionId];
+          [self appendRemainingFileChunks:uploadData
+                                  fileUrl:fileUrl
+                                 fileSize:fileSize
+                                sessionId:sessionId
+                        blockingSemaphore:blockingSemaphore];
 
           DBFILESUploadSessionCursor *cursor =
               [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:@(fileSize)];
@@ -152,6 +170,7 @@ static const int timeoutInSec = 200;
           [uploadData.finishArgs addObject:finishArg];
         } else {
           uploadData.fileUrlsToRequestErrors[fileUrl] = error;
+          dispatch_semaphore_signal(blockingSemaphore);
           dispatch_group_leave(uploadData.uploadGroup);
         }
 
@@ -170,7 +189,8 @@ static const int timeoutInSec = 200;
 - (void)appendRemainingFileChunks:(DBBatchUploadData *)uploadData
                           fileUrl:(NSURL *)fileUrl
                          fileSize:(NSUInteger)fileSize
-                        sessionId:(NSString *)sessionId {
+                        sessionId:(NSString *)sessionId
+                blockingSemaphore:(dispatch_semaphore_t)blockingSemaphore {
   // use seperate response queue so we don't block response thread
   // with dispatch_semaphore_t
   NSOperationQueue *chunkUploadResponseQueue = [NSOperationQueue new];
@@ -194,7 +214,8 @@ static const int timeoutInSec = 200;
             fileChunkInputStream:fileChunkInputStream
                           cursor:cursor
                       startBytes:startBytes
-                     shouldClose:shouldClose];
+                     shouldClose:shouldClose
+               blockingSemaphore:blockingSemaphore];
   }];
 }
 
@@ -207,7 +228,8 @@ static const int timeoutInSec = 200;
         fileChunkInputStream:(NSInputStream *)fileChunkInputStream
                       cursor:(DBFILESUploadSessionCursor *)cursor
                   startBytes:(NSUInteger)startBytes
-                 shouldClose:(BOOL)shouldClose {
+                 shouldClose:(BOOL)shouldClose
+           blockingSemaphore:(dispatch_semaphore_t)blockingSemaphore {
   // close session on final append call
   __block DBUploadTask *task =
       [[[self uploadSessionAppendV2Stream:cursor close:@(shouldClose) inputStream:fileChunkInputStream]
@@ -231,22 +253,27 @@ static const int timeoutInSec = 200;
                             fileChunkInputStream:fileChunkInputStream
                                           cursor:cursor
                                       startBytes:startBytes
-                                     shouldClose:shouldClose];
+                                     shouldClose:shouldClose
+                               blockingSemaphore:blockingSemaphore];
                   } else {
                     uploadData.fileUrlsToRequestErrors[fileUrl] = error;
+                    dispatch_semaphore_signal(blockingSemaphore);
                     dispatch_group_leave(uploadData.uploadGroup);
                   }
                 });
               } else {
                 uploadData.fileUrlsToRequestErrors[fileUrl] = error;
+                dispatch_semaphore_signal(blockingSemaphore);
                 dispatch_group_leave(uploadData.uploadGroup);
               }
             } else if (!result) {
               // if we error here, there's almost certainly a bug with the SDK
               uploadData.fileUrlsToRequestErrors[fileUrl] = error;
+              dispatch_semaphore_signal(blockingSemaphore);
               dispatch_group_leave(uploadData.uploadGroup);
             } else {
               if (shouldClose || uploadData.cancel) {
+                dispatch_semaphore_signal(blockingSemaphore);
                 dispatch_group_leave(uploadData.uploadGroup);
                 return;
               }
@@ -271,7 +298,8 @@ static const int timeoutInSec = 200;
                       fileChunkInputStream:fileChunkInputStreamContinue
                                     cursor:cursorContinue
                                 startBytes:startBytesContinue
-                               shouldClose:shouldCloseContinue];
+                               shouldClose:shouldCloseContinue
+                         blockingSemaphore:blockingSemaphore];
             }
             [uploadData.taskStorage removeUploadTask:task];
           }

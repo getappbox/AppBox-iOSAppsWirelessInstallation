@@ -13,6 +13,8 @@
 @class DBSHARINGTeamMemberInfo;
 @class DBUSERSTeam;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,38 +26,38 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGSharedLinkMetadata : NSObject <DBSerializable>
+@interface DBSHARINGSharedLinkMetadata : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// URL of the shared link.
-@property (nonatomic, readonly, copy) NSString * _Nonnull url;
+@property (nonatomic, readonly, copy) NSString *url;
 
 /// A unique identifier for the linked file.
-@property (nonatomic, readonly) NSString * _Nullable id_;
+@property (nonatomic, readonly, copy, nullable) NSString *id_;
 
 /// The linked file name (including extension). This never contains a slash.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /// Expiration time, if set. By default the link won't expire.
-@property (nonatomic, readonly) NSDate * _Nullable expires;
+@property (nonatomic, readonly, nullable) NSDate *expires;
 
 /// The lowercased full path in the user's Dropbox. This always starts with a
 /// slash. This field will only be present only if the linked file is in the
 /// authenticated user's  dropbox.
-@property (nonatomic, readonly) NSString * _Nullable pathLower;
+@property (nonatomic, readonly, copy, nullable) NSString *pathLower;
 
 /// The link's access permissions.
-@property (nonatomic, readonly) DBSHARINGLinkPermissions * _Nonnull linkPermissions;
+@property (nonatomic, readonly) DBSHARINGLinkPermissions *linkPermissions;
 
 /// The team membership information of the link's owner.  This field will only
 /// be present  if the link's owner is a team member.
-@property (nonatomic, readonly) DBSHARINGTeamMemberInfo * _Nullable teamMemberInfo;
+@property (nonatomic, readonly, nullable) DBSHARINGTeamMemberInfo *teamMemberInfo;
 
 /// The team information of the content's owner. This field will only be present
 /// if the content's owner is a team member and the content's owner team is
 /// different from the link's owner team.
-@property (nonatomic, readonly) DBUSERSTeam * _Nullable contentOwnerTeamInfo;
+@property (nonatomic, readonly, nullable) DBUSERSTeam *contentOwnerTeamInfo;
 
 #pragma mark - Constructors
 
@@ -79,14 +81,14 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                               name:(NSString * _Nonnull)name
-                    linkPermissions:(DBSHARINGLinkPermissions * _Nonnull)linkPermissions
-                                id_:(NSString * _Nullable)id_
-                            expires:(NSDate * _Nullable)expires
-                          pathLower:(NSString * _Nullable)pathLower
-                     teamMemberInfo:(DBSHARINGTeamMemberInfo * _Nullable)teamMemberInfo
-               contentOwnerTeamInfo:(DBUSERSTeam * _Nullable)contentOwnerTeamInfo;
+- (instancetype)initWithUrl:(NSString *)url
+                       name:(NSString *)name
+            linkPermissions:(DBSHARINGLinkPermissions *)linkPermissions
+                        id_:(nullable NSString *)id_
+                    expires:(nullable NSDate *)expires
+                  pathLower:(nullable NSString *)pathLower
+             teamMemberInfo:(nullable DBSHARINGTeamMemberInfo *)teamMemberInfo
+       contentOwnerTeamInfo:(nullable DBUSERSTeam *)contentOwnerTeamInfo;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -99,9 +101,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                               name:(NSString * _Nonnull)name
-                    linkPermissions:(DBSHARINGLinkPermissions * _Nonnull)linkPermissions;
+- (instancetype)initWithUrl:(NSString *)url
+                       name:(NSString *)name
+            linkPermissions:(DBSHARINGLinkPermissions *)linkPermissions;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -120,7 +124,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGSharedLinkMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGSharedLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkMetadata` instances.
@@ -130,6 +134,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGSharedLinkMetadata` object.
 ///
-+ (DBSHARINGSharedLinkMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGSharedLinkMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

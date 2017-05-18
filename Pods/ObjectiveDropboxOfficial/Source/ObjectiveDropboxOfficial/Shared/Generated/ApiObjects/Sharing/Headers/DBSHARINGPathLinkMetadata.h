@@ -12,6 +12,8 @@
 @class DBSHARINGPathLinkMetadata;
 @class DBSHARINGVisibility;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,12 +25,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGPathLinkMetadata : DBSHARINGLinkMetadata <DBSerializable>
+@interface DBSHARINGPathLinkMetadata : DBSHARINGLinkMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Path in user's Dropbox.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 #pragma mark - Constructors
 
@@ -42,10 +44,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                         visibility:(DBSHARINGVisibility * _Nonnull)visibility
-                               path:(NSString * _Nonnull)path
-                            expires:(NSDate * _Nullable)expires;
+- (instancetype)initWithUrl:(NSString *)url
+                 visibility:(DBSHARINGVisibility *)visibility
+                       path:(NSString *)path
+                    expires:(nullable NSDate *)expires;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,9 +59,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                         visibility:(DBSHARINGVisibility * _Nonnull)visibility
-                               path:(NSString * _Nonnull)path;
+- (instancetype)initWithUrl:(NSString *)url visibility:(DBSHARINGVisibility *)visibility path:(NSString *)path;
 
 @end
 
@@ -78,7 +78,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGPathLinkMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGPathLinkMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGPathLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGPathLinkMetadata` instances.
@@ -88,6 +88,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGPathLinkMetadata` object.
 ///
-+ (DBSHARINGPathLinkMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGPathLinkMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

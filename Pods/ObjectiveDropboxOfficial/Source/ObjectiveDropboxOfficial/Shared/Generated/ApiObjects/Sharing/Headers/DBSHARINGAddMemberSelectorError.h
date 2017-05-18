@@ -10,6 +10,8 @@
 
 @class DBSHARINGAddMemberSelectorError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGAddMemberSelectorError : NSObject <DBSerializable>
+@interface DBSHARINGAddMemberSelectorError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -58,18 +60,18 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 /// The value is the ID that could not be identified. @note Ensure the
 /// `isInvalidDropboxId` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull invalidDropboxId;
+@property (nonatomic, readonly, copy) NSString *invalidDropboxId;
 
 /// The value is the e-email address that is malformed. @note Ensure the
 /// `isInvalidEmail` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull invalidEmail;
+@property (nonatomic, readonly, copy) NSString *invalidEmail;
 
 /// The value is the ID of the Dropbox user with an unverified e-mail address.
 /// Invite unverified users by e-mail address instead of by their Dropbox ID.
 /// @note Ensure the `isUnverifiedDropboxId` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull unverifiedDropboxId;
+@property (nonatomic, readonly, copy) NSString *unverifiedDropboxId;
 
 #pragma mark - Constructors
 
@@ -81,7 +83,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAutomaticGroup;
+- (instancetype)initWithAutomaticGroup;
 
 ///
 /// Initializes union class with tag state of "invalid_dropbox_id".
@@ -93,7 +95,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidDropboxId:(NSString * _Nonnull)invalidDropboxId;
+- (instancetype)initWithInvalidDropboxId:(NSString *)invalidDropboxId;
 
 ///
 /// Initializes union class with tag state of "invalid_email".
@@ -105,7 +107,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidEmail:(NSString * _Nonnull)invalidEmail;
+- (instancetype)initWithInvalidEmail:(NSString *)invalidEmail;
 
 ///
 /// Initializes union class with tag state of "unverified_dropbox_id".
@@ -120,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnverifiedDropboxId:(NSString * _Nonnull)unverifiedDropboxId;
+- (instancetype)initWithUnverifiedDropboxId:(NSString *)unverifiedDropboxId;
 
 ///
 /// Initializes union class with tag state of "group_deleted".
@@ -130,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupDeleted;
+- (instancetype)initWithGroupDeleted;
 
 ///
 /// Initializes union class with tag state of "group_not_on_team".
@@ -140,14 +142,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNotOnTeam;
+- (instancetype)initWithGroupNotOnTeam;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -220,7 +224,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -240,7 +244,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddMemberSelectorError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGAddMemberSelectorError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGAddMemberSelectorError *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddMemberSelectorError` instances.
@@ -250,6 +254,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGAddMemberSelectorError` object.
 ///
-+ (DBSHARINGAddMemberSelectorError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGAddMemberSelectorError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

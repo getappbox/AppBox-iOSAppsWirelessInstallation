@@ -108,6 +108,62 @@
   return [[DBAUTHAccessErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBAUTHAccessErrorInvalidAccountType:
+    result = prime * result + [self.invalidAccountType hash];
+  case DBAUTHAccessErrorPaperAccessDenied:
+    result = prime * result + [self.paperAccessDenied hash];
+  case DBAUTHAccessErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAccessError:other];
+}
+
+- (BOOL)isEqualToAccessError:(DBAUTHAccessError *)anAccessError {
+  if (self == anAccessError) {
+    return YES;
+  }
+  if (self.tag != anAccessError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBAUTHAccessErrorInvalidAccountType:
+    return [self.invalidAccountType isEqual:anAccessError.invalidAccountType];
+  case DBAUTHAccessErrorPaperAccessDenied:
+    return [self.paperAccessDenied isEqual:anAccessError.paperAccessDenied];
+  case DBAUTHAccessErrorOther:
+    return [[self tagName] isEqual:[anAccessError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -151,6 +207,7 @@
     return [[DBAUTHAccessError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBAUTHAuthError.h"
@@ -260,6 +317,70 @@
   return [[DBAUTHAuthErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBAUTHAuthErrorInvalidAccessToken:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHAuthErrorInvalidSelectUser:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHAuthErrorInvalidSelectAdmin:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHAuthErrorUserSuspended:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHAuthErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAuthError:other];
+}
+
+- (BOOL)isEqualToAuthError:(DBAUTHAuthError *)anAuthError {
+  if (self == anAuthError) {
+    return YES;
+  }
+  if (self.tag != anAuthError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBAUTHAuthErrorInvalidAccessToken:
+    return [[self tagName] isEqual:[anAuthError tagName]];
+  case DBAUTHAuthErrorInvalidSelectUser:
+    return [[self tagName] isEqual:[anAuthError tagName]];
+  case DBAUTHAuthErrorInvalidSelectAdmin:
+    return [[self tagName] isEqual:[anAuthError tagName]];
+  case DBAUTHAuthErrorUserSuspended:
+    return [[self tagName] isEqual:[anAuthError tagName]];
+  case DBAUTHAuthErrorOther:
+    return [[self tagName] isEqual:[anAuthError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -303,6 +424,7 @@
     return [[DBAUTHAuthError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBAUTHInvalidAccountTypeError.h"
@@ -384,6 +506,62 @@
   return [[DBAUTHInvalidAccountTypeErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBAUTHInvalidAccountTypeErrorEndpoint:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHInvalidAccountTypeErrorFeature:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHInvalidAccountTypeErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToInvalidAccountTypeError:other];
+}
+
+- (BOOL)isEqualToInvalidAccountTypeError:(DBAUTHInvalidAccountTypeError *)anInvalidAccountTypeError {
+  if (self == anInvalidAccountTypeError) {
+    return YES;
+  }
+  if (self.tag != anInvalidAccountTypeError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBAUTHInvalidAccountTypeErrorEndpoint:
+    return [[self tagName] isEqual:[anInvalidAccountTypeError tagName]];
+  case DBAUTHInvalidAccountTypeErrorFeature:
+    return [[self tagName] isEqual:[anInvalidAccountTypeError tagName]];
+  case DBAUTHInvalidAccountTypeErrorOther:
+    return [[self tagName] isEqual:[anInvalidAccountTypeError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -419,6 +597,7 @@
     return [[DBAUTHInvalidAccountTypeError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBAUTHPaperAccessError.h"
@@ -500,6 +679,62 @@
   return [[DBAUTHPaperAccessErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBAUTHPaperAccessErrorPaperDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHPaperAccessErrorNotPaperUser:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHPaperAccessErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperAccessError:other];
+}
+
+- (BOOL)isEqualToPaperAccessError:(DBAUTHPaperAccessError *)aPaperAccessError {
+  if (self == aPaperAccessError) {
+    return YES;
+  }
+  if (self.tag != aPaperAccessError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBAUTHPaperAccessErrorPaperDisabled:
+    return [[self tagName] isEqual:[aPaperAccessError tagName]];
+  case DBAUTHPaperAccessErrorNotPaperUser:
+    return [[self tagName] isEqual:[aPaperAccessError tagName]];
+  case DBAUTHPaperAccessErrorOther:
+    return [[self tagName] isEqual:[aPaperAccessError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -535,6 +770,7 @@
     return [[DBAUTHPaperAccessError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBAUTHRateLimitError.h"
@@ -576,6 +812,51 @@
 
 - (NSString *)description {
   return [[DBAUTHRateLimitErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.reason hash];
+  result = prime * result + [self.retryAfter hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRateLimitError:other];
+}
+
+- (BOOL)isEqualToRateLimitError:(DBAUTHRateLimitError *)aRateLimitError {
+  if (self == aRateLimitError) {
+    return YES;
+  }
+  if (![self.reason isEqual:aRateLimitError.reason]) {
+    return NO;
+  }
+  if (![self.retryAfter isEqual:aRateLimitError.retryAfter]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -681,6 +962,62 @@
   return [[DBAUTHRateLimitReasonSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBAUTHRateLimitReasonTooManyRequests:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHRateLimitReasonTooManyWriteOperations:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHRateLimitReasonOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRateLimitReason:other];
+}
+
+- (BOOL)isEqualToRateLimitReason:(DBAUTHRateLimitReason *)aRateLimitReason {
+  if (self == aRateLimitReason) {
+    return YES;
+  }
+  if (self.tag != aRateLimitReason.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBAUTHRateLimitReasonTooManyRequests:
+    return [[self tagName] isEqual:[aRateLimitReason tagName]];
+  case DBAUTHRateLimitReasonTooManyWriteOperations:
+    return [[self tagName] isEqual:[aRateLimitReason tagName]];
+  case DBAUTHRateLimitReasonOther:
+    return [[self tagName] isEqual:[aRateLimitReason tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -716,6 +1053,7 @@
     return [[DBAUTHRateLimitReason alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBAUTHTokenFromOAuth1Arg.h"
@@ -754,6 +1092,51 @@
 
 - (NSString *)description {
   return [[DBAUTHTokenFromOAuth1ArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.oauth1Token hash];
+  result = prime * result + [self.oauth1TokenSecret hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTokenFromOAuth1Arg:other];
+}
+
+- (BOOL)isEqualToTokenFromOAuth1Arg:(DBAUTHTokenFromOAuth1Arg *)aTokenFromOAuth1Arg {
+  if (self == aTokenFromOAuth1Arg) {
+    return YES;
+  }
+  if (![self.oauth1Token isEqual:aTokenFromOAuth1Arg.oauth1Token]) {
+    return NO;
+  }
+  if (![self.oauth1TokenSecret isEqual:aTokenFromOAuth1Arg.oauth1TokenSecret]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -859,6 +1242,62 @@
   return [[DBAUTHTokenFromOAuth1ErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBAUTHTokenFromOAuth1ErrorInvalidOauth1TokenInfo:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHTokenFromOAuth1ErrorAppIdMismatch:
+    result = prime * result + [[self tagName] hash];
+  case DBAUTHTokenFromOAuth1ErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTokenFromOAuth1Error:other];
+}
+
+- (BOOL)isEqualToTokenFromOAuth1Error:(DBAUTHTokenFromOAuth1Error *)aTokenFromOAuth1Error {
+  if (self == aTokenFromOAuth1Error) {
+    return YES;
+  }
+  if (self.tag != aTokenFromOAuth1Error.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBAUTHTokenFromOAuth1ErrorInvalidOauth1TokenInfo:
+    return [[self tagName] isEqual:[aTokenFromOAuth1Error tagName]];
+  case DBAUTHTokenFromOAuth1ErrorAppIdMismatch:
+    return [[self tagName] isEqual:[aTokenFromOAuth1Error tagName]];
+  case DBAUTHTokenFromOAuth1ErrorOther:
+    return [[self tagName] isEqual:[aTokenFromOAuth1Error tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -894,6 +1333,7 @@
     return [[DBAUTHTokenFromOAuth1Error alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBAUTHTokenFromOAuth1Result.h"
@@ -930,6 +1370,47 @@
 
 - (NSString *)description {
   return [[DBAUTHTokenFromOAuth1ResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.oauth2Token hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTokenFromOAuth1Result:other];
+}
+
+- (BOOL)isEqualToTokenFromOAuth1Result:(DBAUTHTokenFromOAuth1Result *)aTokenFromOAuth1Result {
+  if (self == aTokenFromOAuth1Result) {
+    return YES;
+  }
+  if (![self.oauth2Token isEqual:aTokenFromOAuth1Result.oauth2Token]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end

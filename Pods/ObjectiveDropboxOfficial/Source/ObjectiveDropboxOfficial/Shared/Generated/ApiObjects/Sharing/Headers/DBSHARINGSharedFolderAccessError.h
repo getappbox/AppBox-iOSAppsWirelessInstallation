@@ -10,6 +10,8 @@
 
 @class DBSHARINGSharedFolderAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGSharedFolderAccessError : NSObject <DBSerializable>
+@interface DBSHARINGSharedFolderAccessError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -58,7 +60,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidId;
+- (instancetype)initWithInvalidId;
 
 ///
 /// Initializes union class with tag state of "not_a_member".
@@ -68,7 +70,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotAMember;
+- (instancetype)initWithNotAMember;
 
 ///
 /// Initializes union class with tag state of "email_unverified".
@@ -78,7 +80,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmailUnverified;
+- (instancetype)initWithEmailUnverified;
 
 ///
 /// Initializes union class with tag state of "unmounted".
@@ -87,14 +89,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnmounted;
+- (instancetype)initWithUnmounted;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -139,7 +143,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -159,7 +163,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedFolderAccessError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGSharedFolderAccessError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGSharedFolderAccessError *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedFolderAccessError` instances.
@@ -169,6 +173,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderAccessErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGSharedFolderAccessError` object.
 ///
-+ (DBSHARINGSharedFolderAccessError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGSharedFolderAccessError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

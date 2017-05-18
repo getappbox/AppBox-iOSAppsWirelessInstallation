@@ -10,6 +10,8 @@
 
 @class DBAUTHInvalidAccountTypeError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBAUTHInvalidAccountTypeError : NSObject <DBSerializable>
+@interface DBAUTHInvalidAccountTypeError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEndpoint;
+- (instancetype)initWithEndpoint;
 
 ///
 /// Initializes union class with tag state of "feature".
@@ -61,14 +63,16 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFeature;
+- (instancetype)initWithFeature;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -98,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -118,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHInvalidAccountTypeError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBAUTHInvalidAccountTypeError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBAUTHInvalidAccountTypeError *)instance;
 
 ///
 /// Deserializes `DBAUTHInvalidAccountTypeError` instances.
@@ -128,6 +132,8 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 ///
 /// @return An instantiation of the `DBAUTHInvalidAccountTypeError` object.
 ///
-+ (DBAUTHInvalidAccountTypeError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBAUTHInvalidAccountTypeError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

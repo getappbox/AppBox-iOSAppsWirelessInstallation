@@ -10,6 +10,8 @@
 
 @class DBFILESUploadSessionStartArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,13 +21,13 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionStartArg : NSObject <DBSerializable>
+@interface DBFILESUploadSessionStartArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// If true, the current session will be closed, at which point you won't be
 /// able to call `uploadSessionAppendV2` anymore with the current session.
-@property (nonatomic, readonly) NSNumber * _Nonnull close;
+@property (nonatomic, readonly) NSNumber *close;
 
 #pragma mark - Constructors
 
@@ -38,7 +40,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithClose:(NSNumber * _Nullable)close;
+- (instancetype)initWithClose:(nullable NSNumber *)close;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -47,7 +49,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -67,7 +71,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionStartArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionStartArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionStartArg *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionStartArg` instances.
@@ -77,6 +81,8 @@
 ///
 /// @return An instantiation of the `DBFILESUploadSessionStartArg` object.
 ///
-+ (DBFILESUploadSessionStartArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionStartArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

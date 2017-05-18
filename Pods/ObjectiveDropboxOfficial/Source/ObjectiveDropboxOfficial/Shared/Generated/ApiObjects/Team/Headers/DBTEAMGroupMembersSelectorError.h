@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupMembersSelectorError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,7 +24,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMembersSelectorError : NSObject <DBSerializable>
+@interface DBTEAMGroupMembersSelectorError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -56,14 +58,14 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNotFound;
+- (instancetype)initWithGroupNotFound;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "system_managed_group_disallowed".
@@ -73,7 +75,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSystemManagedGroupDisallowed;
+- (instancetype)initWithSystemManagedGroupDisallowed;
 
 ///
 /// Initializes union class with tag state of "member_not_in_group".
@@ -83,7 +85,9 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMemberNotInGroup;
+- (instancetype)initWithMemberNotInGroup;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -124,7 +128,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -144,7 +148,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersSelectorError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMembersSelectorError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMembersSelectorError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersSelectorError` instances.
@@ -154,6 +158,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersSelectorError` object.
 ///
-+ (DBTEAMGroupMembersSelectorError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMembersSelectorError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

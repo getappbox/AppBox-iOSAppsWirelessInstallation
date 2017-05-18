@@ -11,6 +11,8 @@
 @class DBFILESRelocationBatchLaunch;
 @class DBFILESRelocationBatchResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationBatchLaunch : NSObject <DBSerializable>
+@interface DBFILESRelocationBatchLaunch : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -49,11 +51,11 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 /// an id that can be used to obtain the status of the asynchronous job. @note
 /// Ensure the `isAsyncJobId` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull asyncJobId;
+@property (nonatomic, readonly, copy) NSString *asyncJobId;
 
 /// (no description). @note Ensure the `isComplete` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESRelocationBatchResult * _Nonnull complete;
+@property (nonatomic, readonly) DBFILESRelocationBatchResult *complete;
 
 #pragma mark - Constructors
 
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAsyncJobId:(NSString * _Nonnull)asyncJobId;
+- (instancetype)initWithAsyncJobId:(NSString *)asyncJobId;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -79,14 +81,16 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete:(DBFILESRelocationBatchResult * _Nonnull)complete;
+- (instancetype)initWithComplete:(DBFILESRelocationBatchResult *)complete;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -122,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -142,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationBatchLaunch` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRelocationBatchLaunch * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRelocationBatchLaunch *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationBatchLaunch` instances.
@@ -152,6 +156,8 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 ///
 /// @return An instantiation of the `DBFILESRelocationBatchLaunch` object.
 ///
-+ (DBFILESRelocationBatchLaunch * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRelocationBatchLaunch *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

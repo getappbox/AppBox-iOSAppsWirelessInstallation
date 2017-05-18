@@ -11,6 +11,8 @@
 @class DBUploadData;
 @class DBDownloadData;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Delegate class used to manage the execution of handler code for RPC, Upload and Download style requests.
 ///
@@ -40,7 +42,7 @@
 ///
 /// @return An initialized `DBDelegate` instance.
 ///
-- (nonnull instancetype)initWithQueue:(NSOperationQueue * _Nullable)delegateQueue;
+- (instancetype)initWithQueue:(nullable NSOperationQueue *)delegateQueue;
 
 ///
 /// Enqueues a handler to be executed periodically to retrieve information on the progress of the supplied
@@ -54,10 +56,10 @@
 /// @param handlerQueue The operation queue on which to execute progress handler code. If nil, then the progress queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addProgressHandler:(NSURLSessionTask * _Nonnull)task
-                   session:(NSURLSession * _Nonnull)session
-           progressHandler:(DBProgressBlock _Nonnull)handler
-      progressHandlerQueue:(NSOperationQueue * _Nullable)handlerQueue;
+- (void)addProgressHandler:(NSURLSessionTask *)task
+                   session:(NSURLSession *)session
+           progressHandler:(DBProgressBlock)handler
+      progressHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 #pragma mark - Add RPC-style handlers
 
@@ -71,10 +73,10 @@
 /// @param handlerQueue The operation queue on which to execute response handler code. If nil, then the response queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addRpcResponseHandler:(NSURLSessionTask * _Nonnull)task
-                      session:(NSURLSession * _Nonnull)session
-              responseHandler:(DBRpcResponseBlockStorage _Nonnull)handler
-         responseHandlerQueue:(NSOperationQueue * _Nullable)handlerQueue;
+- (void)addRpcResponseHandler:(NSURLSessionTask *)task
+                      session:(NSURLSession *)session
+              responseHandler:(DBRpcResponseBlockStorage)handler
+         responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 #pragma mark - Add Upload-style handlers
 
@@ -88,10 +90,10 @@
 /// @param handlerQueue The operation queue on which to execute response handler code. If nil, then the response queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addUploadResponseHandler:(NSURLSessionTask * _Nonnull)task
-                         session:(NSURLSession * _Nonnull)session
-                 responseHandler:(DBUploadResponseBlockStorage _Nonnull)handler
-            responseHandlerQueue:(NSOperationQueue * _Nullable)handlerQueue;
+- (void)addUploadResponseHandler:(NSURLSessionTask *)task
+                         session:(NSURLSession *)session
+                 responseHandler:(DBUploadResponseBlockStorage)handler
+            responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 #pragma mark - Add Download-style handlers
 
@@ -105,9 +107,11 @@
 /// @param handlerQueue The operation queue on which to execute response handler code. If nil, then the response queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addDownloadResponseHandler:(NSURLSessionTask * _Nonnull)task
-                           session:(NSURLSession * _Nonnull)session
-                   responseHandler:(DBDownloadResponseBlockStorage _Nonnull)handler
-              responseHandlerQueue:(NSOperationQueue * _Nullable)handlerQueue;
+- (void)addDownloadResponseHandler:(NSURLSessionTask *)task
+                           session:(NSURLSession *)session
+                   responseHandler:(DBDownloadResponseBlockStorage)handler
+              responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,7 +8,10 @@
 
 @class DBUserClient;
 @class DBTeamClient;
+@class DBTransportDefaultConfig;
 @class DBOAuthResult;
+
+NS_ASSUME_NONNULL_BEGIN
 
 ///
 /// Dropbox Clients Manager.
@@ -25,45 +28,39 @@
 ///
 /// @return The app key of the current Dropbox API app.
 ///
-+ (NSString * _Nullable)appKey;
++ (nullable NSString *)appKey;
 
 ///
 /// Accessor method for the authorized `DBUserClient` shared instance.
 ///
 /// @return The authorized `DBUserClient` shared instance.
 ///
-+ (DBUserClient * _Nullable)authorizedClient;
++ (nullable DBUserClient *)authorizedClient;
 
 ///
-/// Mutator method for the authorized `DBUserClient` shared instance.
+/// Multi-Dropbox account use case. Returns all current Dropbox user clients.
 ///
-/// @param client The updated reference to the `DBUserClient` shared
-/// instance.
+/// @return Mapping of `tokenUid` (account ID) to authorized `DBUserClient` instance.
 ///
-+ (void)setAuthorizedClient:(DBUserClient * _Nullable)client;
++ (NSDictionary<NSString *, DBUserClient *> *)authorizedClients;
 
 ///
 /// Accessor method for the authorized `DBTeamClient` shared instance.
 ///
 /// @return The the authorized `DBTeamClient` shared instance.
 ///
-+ (DBTeamClient * _Nullable)authorizedTeamClient;
++ (nullable DBTeamClient *)authorizedTeamClient;
 
 ///
-/// Mutator method for the authorized `DBTeamClient` shared instance.
+/// Multi-Dropbox account use case. Returns all current Dropbox team clients.
 ///
-/// @param client The updated reference to the `DBTeamClient` shared
-/// instance.
+/// @return Mapping of `tokenUid` (account ID) to authorized `DBTeamClient` instance.
 ///
-+ (void)setAuthorizedTeamClient:(DBTeamClient * _Nullable)client;
++ (NSDictionary<NSString *, DBTeamClient *> *)authorizedTeamClients;
 
 ///
-/// Reauthorizes the shared authorized user client instance with the access token retrieved from storage via the
-/// supplied `tokenUid` key.
-///
-/// In the multi Dropbox user case, this method should be called when authorizing a new user after application has
-/// initially launched. For example, if an initially authorized user is logged out and the app is not shutdown, and a
-/// new user is to be authorized via a pre-existing access token, this method should be called.
+/// Multi-Dropbox account use case. Creates and stores a new shared authorized user client instance with the access
+/// token retrieved from storage via the supplied `tokenUid` key.
 ///
 /// @param tokenUid The uid of the stored access token to use to reauthorize. This uid is returned after a successful
 /// progression through the OAuth flow (via `handleRedirectURL:`) in the `DBAccessToken` field of the `DBOAuthResult`
@@ -71,15 +68,11 @@
 ///
 /// @returns Whether a valid token exists in storage for the supplied `tokenUid`.
 ///
-+ (BOOL)reauthorizeClient:(NSString * _Nullable)tokenUid;
++ (BOOL)authorizeClientFromKeychain:(nullable NSString *)tokenUid;
 
 ///
-/// Reauthorizes the shared authorized team client instance with the access token retrieved from storage via the
-/// supplied `tokenUid` key.
-///
-/// In the multi Dropbox user case, this method should be called when authorizing a new user after application has
-/// initially launched. For example, if an initially authorized user is logged out and the app is not shutdown, and a
-/// new user is to be authorized via a pre-existing access token, this method should be called.
+/// Multi-Dropbox account use case. Creates and stores a new shared authorized team client instance with the access
+/// token retrieved from storage via the supplied `tokenUid` key.
 ///
 /// @param tokenUid The uid of the stored access token to use to reauthorize. This uid is returned after a successful
 /// progression through the OAuth flow (via `handleRedirectURLTeam:`) in the `DBAccessToken` field of the
@@ -87,7 +80,7 @@
 ///
 /// @returns Whether a valid token exists in storage for the supplied `tokenUid`.
 ///
-+ (BOOL)reauthorizeTeamClient:(NSString * _Nullable)tokenUid;
++ (BOOL)authorizeTeamClientFromKeychain:(nullable NSString *)tokenUid;
 
 ///
 /// Handles launching the SDK with a redirect url from an external source to authorize a user API client.
@@ -99,7 +92,7 @@
 ///
 /// @return The `DBOAuthResult` result from the authorization attempt.
 ///
-+ (DBOAuthResult * _Nullable)handleRedirectURL:(NSURL * _Nonnull)url;
++ (nullable DBOAuthResult *)handleRedirectURL:(NSURL *)url;
 
 ///
 /// Handles launching the SDK with a redirect url from an external source to authorize a team API client.
@@ -111,18 +104,21 @@
 ///
 /// @return The `DBOAuthResult` result from the authorization attempt.
 ///
-+ (DBOAuthResult * _Nullable)handleRedirectURLTeam:(NSURL * _Nonnull)url;
++ (nullable DBOAuthResult *)handleRedirectURLTeam:(NSURL *)url;
+
+///
+/// Multi-Dropbox account use case. Sets to `nil` the active user / team shared authorized client, clears the stored
+/// access token associated with the supplied `tokenUid`, and removes the assocaited client from the shared clients
+/// list.
+///
+/// @param tokenUid The uid of the token to clear.
+///
++ (void)unlinkAndResetClient:(NSString *)tokenUid;
 
 ///
 /// Sets to `nil` the active user / team shared authorized client and clears all stored access tokens in `DBKeychain`.
 ///
 + (void)unlinkAndResetClients;
-
-///
-/// Sets to `nil` the active user / team shared authorized client but does not clear any stored access tokens in
-/// `DBKeychain`.
-///
-+ (void)resetClients;
 
 ///
 /// Checks if performing an API v1 OAuth 1 token migration is necessary, and if so, performs it.
@@ -145,9 +141,13 @@
 /// @param appSecret The consumer app secret associated with the app that is integrating with the Dropbox API. Here, app
 /// key is used for querying endpoints that have "app auth" authentication type.
 ///
-+ (void)checkAndPerformV1TokenMigration:(DBTokenMigrationResponseBlock _Nonnull)responseBlock
-                                  queue:(NSOperationQueue * _Nullable)queue
-                                 appKey:(NSString * _Nonnull)appKey
-                              appSecret:(NSString * _Nonnull)appSecret;
+/// @return Whether a token migration will be performed.
+///
++ (BOOL)checkAndPerformV1TokenMigration:(DBTokenMigrationResponseBlock)responseBlock
+                                  queue:(nullable NSOperationQueue *)queue
+                                 appKey:(NSString *)appKey
+                              appSecret:(NSString *)appSecret;
 
 @end
+
+NS_ASSUME_NONNULL_END

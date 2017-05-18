@@ -11,6 +11,8 @@
 @class DBSHARINGListFilesResult;
 @class DBSHARINGSharedFileMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,15 +24,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFilesResult : NSObject <DBSerializable>
+@interface DBSHARINGListFilesResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Information about the files shared with current user.
-@property (nonatomic, readonly) NSArray<DBSHARINGSharedFileMetadata *> * _Nonnull entries;
+@property (nonatomic, readonly) NSArray<DBSHARINGSharedFileMetadata *> *entries;
 
 /// Cursor used to obtain additional shared files.
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -42,8 +44,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEntries:(NSArray<DBSHARINGSharedFileMetadata *> * _Nonnull)entries
-                                 cursor:(NSString * _Nullable)cursor;
+- (instancetype)initWithEntries:(NSArray<DBSHARINGSharedFileMetadata *> *)entries cursor:(nullable NSString *)cursor;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -53,7 +54,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEntries:(NSArray<DBSHARINGSharedFileMetadata *> * _Nonnull)entries;
+- (instancetype)initWithEntries:(NSArray<DBSHARINGSharedFileMetadata *> *)entries;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,7 +75,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFilesResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFilesResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFilesResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFilesResult` instances.
@@ -82,6 +85,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGListFilesResult` object.
 ///
-+ (DBSHARINGListFilesResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFilesResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

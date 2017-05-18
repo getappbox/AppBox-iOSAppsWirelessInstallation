@@ -11,6 +11,8 @@
 @class DBSHARINGGetFileMetadataBatchResult;
 @class DBSHARINGGetFileMetadataIndividualResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,16 +24,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGGetFileMetadataBatchResult : NSObject <DBSerializable>
+@interface DBSHARINGGetFileMetadataBatchResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// This is the input file identifier corresponding to one of `files` in
 /// `DBSHARINGGetFileMetadataBatchArg`.
-@property (nonatomic, readonly, copy) NSString * _Nonnull file;
+@property (nonatomic, readonly, copy) NSString *file;
 
 /// The result for this particular file.
-@property (nonatomic, readonly) DBSHARINGGetFileMetadataIndividualResult * _Nonnull result;
+@property (nonatomic, readonly) DBSHARINGGetFileMetadataIndividualResult *result;
 
 #pragma mark - Constructors
 
@@ -44,8 +46,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file
-                              result:(DBSHARINGGetFileMetadataIndividualResult * _Nonnull)result;
+- (instancetype)initWithFile:(NSString *)file result:(DBSHARINGGetFileMetadataIndividualResult *)result;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -65,7 +68,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetFileMetadataBatchResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGGetFileMetadataBatchResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGGetFileMetadataBatchResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetFileMetadataBatchResult` instances.
@@ -76,6 +79,8 @@
 /// @return An instantiation of the `DBSHARINGGetFileMetadataBatchResult`
 /// object.
 ///
-+ (DBSHARINGGetFileMetadataBatchResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGGetFileMetadataBatchResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

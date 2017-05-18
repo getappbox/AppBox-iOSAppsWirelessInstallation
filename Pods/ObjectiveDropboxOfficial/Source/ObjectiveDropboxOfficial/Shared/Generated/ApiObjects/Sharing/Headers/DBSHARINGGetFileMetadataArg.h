@@ -11,6 +11,8 @@
 @class DBSHARINGFileAction;
 @class DBSHARINGGetFileMetadataArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,15 +24,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGGetFileMetadataArg : NSObject <DBSerializable>
+@interface DBSHARINGGetFileMetadataArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The file to query.
-@property (nonatomic, readonly, copy) NSString * _Nonnull file;
+@property (nonatomic, readonly, copy) NSString *file;
 
-/// File actions to query.
-@property (nonatomic, readonly) NSArray<DBSHARINGFileAction *> * _Nullable actions;
+/// A list of `FileAction`s corresponding to `FilePermission`s that should
+/// appear in the  response's `permissions` in `DBSHARINGSharedFileMetadata`
+/// field describing the actions the  authenticated user can perform on the
+/// file.
+@property (nonatomic, readonly, nullable) NSArray<DBSHARINGFileAction *> *actions;
 
 #pragma mark - Constructors
 
@@ -38,12 +43,14 @@
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param file The file to query.
-/// @param actions File actions to query.
+/// @param actions A list of `FileAction`s corresponding to `FilePermission`s
+/// that should appear in the  response's `permissions` in
+/// `DBSHARINGSharedFileMetadata` field describing the actions the
+/// authenticated user can perform on the file.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file
-                             actions:(NSArray<DBSHARINGFileAction *> * _Nullable)actions;
+- (instancetype)initWithFile:(NSString *)file actions:(nullable NSArray<DBSHARINGFileAction *> *)actions;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -53,7 +60,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file;
+- (instancetype)initWithFile:(NSString *)file;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -72,7 +81,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetFileMetadataArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGGetFileMetadataArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGGetFileMetadataArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetFileMetadataArg` instances.
@@ -82,6 +91,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGGetFileMetadataArg` object.
 ///
-+ (DBSHARINGGetFileMetadataArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGGetFileMetadataArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

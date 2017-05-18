@@ -10,6 +10,8 @@
 
 @class DBSHARINGListFoldersContinueArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,13 +21,13 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFoldersContinueArg : NSObject <DBSerializable>
+@interface DBSHARINGListFoldersContinueArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The cursor returned by the previous API call specified in the endpoint
 /// description.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -37,7 +39,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nonnull)cursor;
+- (instancetype)initWithCursor:(NSString *)cursor;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,7 +61,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFoldersContinueArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFoldersContinueArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFoldersContinueArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFoldersContinueArg` instances.
@@ -67,6 +71,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGListFoldersContinueArg` object.
 ///
-+ (DBSHARINGListFoldersContinueArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFoldersContinueArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

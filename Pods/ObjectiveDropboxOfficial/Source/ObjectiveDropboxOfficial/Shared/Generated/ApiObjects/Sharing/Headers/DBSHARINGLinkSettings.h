@@ -8,10 +8,13 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBSHARINGAccessLevel;
 @class DBSHARINGLinkAudience;
 @class DBSHARINGLinkExpiry;
 @class DBSHARINGLinkPassword;
 @class DBSHARINGLinkSettings;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - API Object
 
@@ -24,33 +27,40 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGLinkSettings : NSObject <DBSerializable>
+@interface DBSHARINGLinkSettings : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
+/// The access level on the link for this file. Currently, it only accepts
+/// 'viewer' and 'viewer_no_comment'.
+@property (nonatomic, readonly, nullable) DBSHARINGAccessLevel *accessLevel;
+
 /// The type of audience on the link for this file.
-@property (nonatomic, readonly) DBSHARINGLinkAudience * _Nullable audience;
+@property (nonatomic, readonly, nullable) DBSHARINGLinkAudience *audience;
 
 /// An expiry timestamp to set on a link.
-@property (nonatomic, readonly) DBSHARINGLinkExpiry * _Nullable expiry;
+@property (nonatomic, readonly, nullable) DBSHARINGLinkExpiry *expiry;
 
 /// The password for the link.
-@property (nonatomic, readonly) DBSHARINGLinkPassword * _Nullable password;
+@property (nonatomic, readonly, nullable) DBSHARINGLinkPassword *password;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
+/// @param accessLevel The access level on the link for this file. Currently, it
+/// only accepts 'viewer' and 'viewer_no_comment'.
 /// @param audience The type of audience on the link for this file.
 /// @param expiry An expiry timestamp to set on a link.
 /// @param password The password for the link.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAudience:(DBSHARINGLinkAudience * _Nullable)audience
-                                  expiry:(DBSHARINGLinkExpiry * _Nullable)expiry
-                                password:(DBSHARINGLinkPassword * _Nullable)password;
+- (instancetype)initWithAccessLevel:(nullable DBSHARINGAccessLevel *)accessLevel
+                           audience:(nullable DBSHARINGLinkAudience *)audience
+                             expiry:(nullable DBSHARINGLinkExpiry *)expiry
+                           password:(nullable DBSHARINGLinkPassword *)password;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -59,7 +69,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,7 +90,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkSettings` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGLinkSettings * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGLinkSettings *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkSettings` instances.
@@ -88,6 +100,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGLinkSettings` object.
 ///
-+ (DBSHARINGLinkSettings * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGLinkSettings *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

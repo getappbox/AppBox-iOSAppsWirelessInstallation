@@ -12,6 +12,8 @@
 @class DBTEAMRevokeDesktopClientArg;
 @class DBTEAMRevokeDeviceSessionArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMRevokeDeviceSessionArg : NSObject <DBSerializable>
+@interface DBTEAMRevokeDeviceSessionArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -44,15 +46,15 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 
 /// End an active session @note Ensure the `isWebSession` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMDeviceSessionArg * _Nonnull webSession;
+@property (nonatomic, readonly) DBTEAMDeviceSessionArg *webSession;
 
 /// Unlink a linked desktop device @note Ensure the `isDesktopClient` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMRevokeDesktopClientArg * _Nonnull desktopClient;
+@property (nonatomic, readonly) DBTEAMRevokeDesktopClientArg *desktopClient;
 
 /// Unlink a linked mobile device @note Ensure the `isMobileClient` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMDeviceSessionArg * _Nonnull mobileClient;
+@property (nonatomic, readonly) DBTEAMDeviceSessionArg *mobileClient;
 
 #pragma mark - Constructors
 
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithWebSession:(DBTEAMDeviceSessionArg * _Nonnull)webSession;
+- (instancetype)initWithWebSession:(DBTEAMDeviceSessionArg *)webSession;
 
 ///
 /// Initializes union class with tag state of "desktop_client".
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDesktopClient:(DBTEAMRevokeDesktopClientArg * _Nonnull)desktopClient;
+- (instancetype)initWithDesktopClient:(DBTEAMRevokeDesktopClientArg *)desktopClient;
 
 ///
 /// Initializes union class with tag state of "mobile_client".
@@ -88,7 +90,9 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMobileClient:(DBTEAMDeviceSessionArg * _Nonnull)mobileClient;
+- (instancetype)initWithMobileClient:(DBTEAMDeviceSessionArg *)mobileClient;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -127,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -147,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMRevokeDeviceSessionArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionArg *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionArg` instances.
@@ -157,6 +161,8 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// @return An instantiation of the `DBTEAMRevokeDeviceSessionArg` object.
 ///
-+ (DBTEAMRevokeDeviceSessionArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMRevokeDeviceSessionArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

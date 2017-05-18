@@ -11,6 +11,8 @@
 @class DBPAPERListDocsCursorError;
 @class DBPAPERPaperApiCursorError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListDocsCursorError : NSObject <DBSerializable>
+@interface DBPAPERListDocsCursorError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -40,7 +42,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag) {
 
 /// (no description). @note Ensure the `isCursorError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBPAPERPaperApiCursorError * _Nonnull cursorError;
+@property (nonatomic, readonly) DBPAPERPaperApiCursorError *cursorError;
 
 #pragma mark - Constructors
 
@@ -51,14 +53,16 @@ typedef NS_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursorError:(DBPAPERPaperApiCursorError * _Nonnull)cursorError;
+- (instancetype)initWithCursorError:(DBPAPERPaperApiCursorError *)cursorError;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -84,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -103,7 +107,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListDocsCursorError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListDocsCursorError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListDocsCursorError *)instance;
 
 ///
 /// Deserializes `DBPAPERListDocsCursorError` instances.
@@ -113,6 +117,8 @@ typedef NS_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag) {
 ///
 /// @return An instantiation of the `DBPAPERListDocsCursorError` object.
 ///
-+ (DBPAPERListDocsCursorError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListDocsCursorError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

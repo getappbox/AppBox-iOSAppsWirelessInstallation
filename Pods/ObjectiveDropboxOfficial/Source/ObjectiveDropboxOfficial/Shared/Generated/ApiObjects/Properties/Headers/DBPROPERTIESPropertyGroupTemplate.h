@@ -11,6 +11,8 @@
 @class DBPROPERTIESPropertyFieldTemplate;
 @class DBPROPERTIESPropertyGroupTemplate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,21 +24,21 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPROPERTIESPropertyGroupTemplate : NSObject <DBSerializable>
+@interface DBPROPERTIESPropertyGroupTemplate : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A display name for the property template. Property template names can be up
 /// to 256 bytes.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /// Description for new property template. Property template descriptions can be
 /// up to 1024 bytes.
-@property (nonatomic, readonly, copy) NSString * _Nonnull description_;
+@property (nonatomic, readonly, copy) NSString *description_;
 
 /// This is a list of custom properties associated with a property template.
 /// There can be up to 64 properties in a single property template.
-@property (nonatomic, readonly) NSArray<DBPROPERTIESPropertyFieldTemplate *> * _Nonnull fields;
+@property (nonatomic, readonly) NSArray<DBPROPERTIESPropertyFieldTemplate *> *fields;
 
 #pragma mark - Constructors
 
@@ -52,9 +54,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                        description_:(NSString * _Nonnull)description_
-                              fields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> * _Nonnull)fields;
+- (instancetype)initWithName:(NSString *)name
+                description_:(NSString *)description_
+                      fields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> *)fields;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -74,7 +78,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPROPERTIESPropertyGroupTemplate` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPROPERTIESPropertyGroupTemplate * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPROPERTIESPropertyGroupTemplate *)instance;
 
 ///
 /// Deserializes `DBPROPERTIESPropertyGroupTemplate` instances.
@@ -84,6 +88,8 @@
 ///
 /// @return An instantiation of the `DBPROPERTIESPropertyGroupTemplate` object.
 ///
-+ (DBPROPERTIESPropertyGroupTemplate * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPROPERTIESPropertyGroupTemplate *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

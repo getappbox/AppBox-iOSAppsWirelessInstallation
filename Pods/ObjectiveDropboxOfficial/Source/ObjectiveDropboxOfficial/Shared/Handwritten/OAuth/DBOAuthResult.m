@@ -2,8 +2,8 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
-#import "DBOAuth.h"
 #import "DBOAuthResult.h"
+#import "DBOAuthManager.h"
 
 @implementation DBOAuthResult
 
@@ -27,7 +27,7 @@ static NSDictionary<NSString *, NSNumber *> *errorTypeLookup;
       @"" : [NSNumber numberWithInt:DBAuthUnknown],
     };
   }
-  return (DBOAuthErrorType)errorTypeLookup[errorDescription] ?: DBAuthUnknown;
+  return (DBOAuthErrorType)[errorTypeLookup[errorDescription] intValue] ?: DBAuthUnknown;
 }
 
 - (instancetype)initWithSuccess:(DBAccessToken *)accessToken {

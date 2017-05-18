@@ -10,6 +10,8 @@
 
 @class DBSHARINGRelinquishFolderMembershipArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,15 +21,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRelinquishFolderMembershipArg : NSObject <DBSerializable>
+@interface DBSHARINGRelinquishFolderMembershipArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID for the shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 /// Keep a copy of the folder's contents upon relinquishing membership.
-@property (nonatomic, readonly) NSNumber * _Nonnull leaveACopy;
+@property (nonatomic, readonly) NSNumber *leaveACopy;
 
 #pragma mark - Constructors
 
@@ -40,8 +42,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId
-                                    leaveACopy:(NSNumber * _Nullable)leaveACopy;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId leaveACopy:(nullable NSNumber *)leaveACopy;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -51,7 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -71,7 +74,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRelinquishFolderMembershipArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRelinquishFolderMembershipArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRelinquishFolderMembershipArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRelinquishFolderMembershipArg` instances.
@@ -82,6 +85,8 @@
 /// @return An instantiation of the `DBSHARINGRelinquishFolderMembershipArg`
 /// object.
 ///
-+ (DBSHARINGRelinquishFolderMembershipArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRelinquishFolderMembershipArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

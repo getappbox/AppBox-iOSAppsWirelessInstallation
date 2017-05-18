@@ -12,6 +12,8 @@
 @class DBSHARINGCollectionLinkMetadata;
 @class DBSHARINGVisibility;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGCollectionLinkMetadata : DBSHARINGLinkMetadata <DBSerializable>
+@interface DBSHARINGCollectionLinkMetadata : DBSHARINGLinkMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -38,9 +40,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                         visibility:(DBSHARINGVisibility * _Nonnull)visibility
-                            expires:(NSDate * _Nullable)expires;
+- (instancetype)initWithUrl:(NSString *)url
+                 visibility:(DBSHARINGVisibility *)visibility
+                    expires:(nullable NSDate *)expires;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -51,7 +53,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url visibility:(DBSHARINGVisibility * _Nonnull)visibility;
+- (instancetype)initWithUrl:(NSString *)url visibility:(DBSHARINGVisibility *)visibility;
 
 @end
 
@@ -71,7 +73,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCollectionLinkMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGCollectionLinkMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGCollectionLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGCollectionLinkMetadata` instances.
@@ -81,6 +83,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGCollectionLinkMetadata` object.
 ///
-+ (DBSHARINGCollectionLinkMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGCollectionLinkMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBUSERSSpaceAllocation;
 @class DBUSERSSpaceUsage;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,15 +24,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSSpaceUsage : NSObject <DBSerializable>
+@interface DBUSERSSpaceUsage : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The user's total space usage (bytes).
-@property (nonatomic, readonly) NSNumber * _Nonnull used;
+@property (nonatomic, readonly) NSNumber *used;
 
 /// The user's space allocation.
-@property (nonatomic, readonly) DBUSERSSpaceAllocation * _Nonnull allocation;
+@property (nonatomic, readonly) DBUSERSSpaceAllocation *allocation;
 
 #pragma mark - Constructors
 
@@ -42,7 +44,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUsed:(NSNumber * _Nonnull)used allocation:(DBUSERSSpaceAllocation * _Nonnull)allocation;
+- (instancetype)initWithUsed:(NSNumber *)used allocation:(DBUSERSSpaceAllocation *)allocation;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -61,7 +65,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSSpaceUsage` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSSpaceUsage * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSSpaceUsage *)instance;
 
 ///
 /// Deserializes `DBUSERSSpaceUsage` instances.
@@ -71,6 +75,8 @@
 ///
 /// @return An instantiation of the `DBUSERSSpaceUsage` object.
 ///
-+ (DBUSERSSpaceUsage * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSSpaceUsage *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

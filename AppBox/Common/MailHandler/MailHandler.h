@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MailGunKeys.h"
 
 @interface MailHandler : NSObject
 
-+ (void) showInvalidEmailAddressAlert;
-+ (BOOL) isValidEmail:(NSString *)checkString;
-+ (BOOL) isAllValidEmail:(NSString *)checkString;
++ (void)showInvalidEmailAddressAlert;
++ (BOOL)isValidEmail:(NSString *)checkString;
++ (BOOL)isAllValidEmail:(NSString *)checkString;
++ (void)sendMailForProject:(XCProject *)project complition:(void (^) (BOOL success))complition;
 
 @end

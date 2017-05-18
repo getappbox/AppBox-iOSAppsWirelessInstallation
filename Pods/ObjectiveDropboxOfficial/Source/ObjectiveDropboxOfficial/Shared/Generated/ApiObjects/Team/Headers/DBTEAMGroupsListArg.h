@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupsListArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupsListArg : NSObject <DBSerializable>
+@interface DBTEAMGroupsListArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Number of results to return per call.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLimit:(NSNumber * _Nullable)limit;
+- (instancetype)initWithLimit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -44,7 +46,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +67,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsListArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupsListArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupsListArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsListArg` instances.
@@ -73,6 +77,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupsListArg` object.
 ///
-+ (DBTEAMGroupsListArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupsListArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBFILESSaveUrlError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSaveUrlError : NSObject <DBSerializable>
+@interface DBFILESSaveUrlError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -49,7 +51,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESWriteError *path;
 
 #pragma mark - Constructors
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESWriteError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESWriteError *)path;
 
 ///
 /// Initializes union class with tag state of "download_failed".
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDownloadFailed;
+- (instancetype)initWithDownloadFailed;
 
 ///
 /// Initializes union class with tag state of "invalid_url".
@@ -79,7 +81,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidUrl;
+- (instancetype)initWithInvalidUrl;
 
 ///
 /// Initializes union class with tag state of "not_found".
@@ -89,14 +91,16 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotFound;
+- (instancetype)initWithNotFound;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -143,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -162,7 +166,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveUrlError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSaveUrlError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSaveUrlError *)instance;
 
 ///
 /// Deserializes `DBFILESSaveUrlError` instances.
@@ -172,6 +176,8 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESSaveUrlError` object.
 ///
-+ (DBFILESSaveUrlError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSaveUrlError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -13,6 +13,8 @@
 @class DBTEAMGroupFullInfo;
 @class DBTEAMGroupMemberInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,16 +26,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupFullInfo : DBTEAMCOMMONGroupSummary <DBSerializable>
+@interface DBTEAMGroupFullInfo : DBTEAMCOMMONGroupSummary <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// List of group members.
-@property (nonatomic, readonly) NSArray<DBTEAMGroupMemberInfo *> * _Nullable members;
+@property (nonatomic, readonly, nullable) NSArray<DBTEAMGroupMemberInfo *> *members;
 
 /// The group creation time as a UTC timestamp in milliseconds since the Unix
 /// epoch.
-@property (nonatomic, readonly) NSNumber * _Nonnull created;
+@property (nonatomic, readonly) NSNumber *created;
 
 #pragma mark - Constructors
 
@@ -52,13 +54,13 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupName:(NSString * _Nonnull)groupName
-                                  groupId:(NSString * _Nonnull)groupId
-                      groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nonnull)groupManagementType
-                                  created:(NSNumber * _Nonnull)created
-                          groupExternalId:(NSString * _Nullable)groupExternalId
-                              memberCount:(NSNumber * _Nullable)memberCount
-                                  members:(NSArray<DBTEAMGroupMemberInfo *> * _Nullable)members;
+- (instancetype)initWithGroupName:(NSString *)groupName
+                          groupId:(NSString *)groupId
+              groupManagementType:(DBTEAMCOMMONGroupManagementType *)groupManagementType
+                          created:(NSNumber *)created
+                  groupExternalId:(nullable NSString *)groupExternalId
+                      memberCount:(nullable NSNumber *)memberCount
+                          members:(nullable NSArray<DBTEAMGroupMemberInfo *> *)members;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -72,10 +74,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupName:(NSString * _Nonnull)groupName
-                                  groupId:(NSString * _Nonnull)groupId
-                      groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nonnull)groupManagementType
-                                  created:(NSNumber * _Nonnull)created;
+- (instancetype)initWithGroupName:(NSString *)groupName
+                          groupId:(NSString *)groupId
+              groupManagementType:(DBTEAMCOMMONGroupManagementType *)groupManagementType
+                          created:(NSNumber *)created;
 
 @end
 
@@ -94,7 +96,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupFullInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupFullInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupFullInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupFullInfo` instances.
@@ -104,6 +106,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupFullInfo` object.
 ///
-+ (DBTEAMGroupFullInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupFullInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

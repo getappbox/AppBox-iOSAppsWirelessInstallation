@@ -10,6 +10,8 @@
 
 @class DBFILESListFolderContinueArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,13 +21,13 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESListFolderContinueArg : NSObject <DBSerializable>
+@interface DBFILESListFolderContinueArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The cursor returned by your last call to `listFolder` or
 /// `listFolderContinue`.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -37,7 +39,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nonnull)cursor;
+- (instancetype)initWithCursor:(NSString *)cursor;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,7 +61,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderContinueArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESListFolderContinueArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESListFolderContinueArg *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderContinueArg` instances.
@@ -67,6 +71,8 @@
 ///
 /// @return An instantiation of the `DBFILESListFolderContinueArg` object.
 ///
-+ (DBFILESListFolderContinueArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESListFolderContinueArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

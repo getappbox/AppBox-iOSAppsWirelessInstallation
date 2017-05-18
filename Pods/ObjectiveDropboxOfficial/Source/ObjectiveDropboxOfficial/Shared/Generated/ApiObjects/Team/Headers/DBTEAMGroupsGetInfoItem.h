@@ -11,6 +11,8 @@
 @class DBTEAMGroupFullInfo;
 @class DBTEAMGroupsGetInfoItem;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupsGetInfoItem : NSObject <DBSerializable>
+@interface DBTEAMGroupsGetInfoItem : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -45,11 +47,11 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoItemTag) {
 /// depending on how the method was called. @note Ensure the `isIdNotFound`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull idNotFound;
+@property (nonatomic, readonly, copy) NSString *idNotFound;
 
 /// Info about a group. @note Ensure the `isGroupInfo` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMGroupFullInfo * _Nonnull groupInfo;
+@property (nonatomic, readonly) DBTEAMGroupFullInfo *groupInfo;
 
 #pragma mark - Constructors
 
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoItemTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithIdNotFound:(NSString * _Nonnull)idNotFound;
+- (instancetype)initWithIdNotFound:(NSString *)idNotFound;
 
 ///
 /// Initializes union class with tag state of "group_info".
@@ -78,7 +80,9 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoItemTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupInfo:(DBTEAMGroupFullInfo * _Nonnull)groupInfo;
+- (instancetype)initWithGroupInfo:(DBTEAMGroupFullInfo *)groupInfo;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -107,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoItemTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -126,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoItemTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsGetInfoItem` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupsGetInfoItem * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupsGetInfoItem *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsGetInfoItem` instances.
@@ -136,6 +140,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoItemTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupsGetInfoItem` object.
 ///
-+ (DBTEAMGroupsGetInfoItem * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupsGetInfoItem *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

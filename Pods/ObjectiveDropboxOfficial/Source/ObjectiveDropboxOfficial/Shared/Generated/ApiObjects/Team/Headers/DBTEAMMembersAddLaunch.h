@@ -11,6 +11,8 @@
 @class DBTEAMMemberAddResult;
 @class DBTEAMMembersAddLaunch;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersAddLaunch : NSObject <DBSerializable>
+@interface DBTEAMMembersAddLaunch : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -43,11 +45,11 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 /// an id that can be used to obtain the status of the asynchronous job. @note
 /// Ensure the `isAsyncJobId` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull asyncJobId;
+@property (nonatomic, readonly, copy) NSString *asyncJobId;
 
 /// (no description). @note Ensure the `isComplete` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSArray<DBTEAMMemberAddResult *> * _Nonnull complete;
+@property (nonatomic, readonly) NSArray<DBTEAMMemberAddResult *> *complete;
 
 #pragma mark - Constructors
 
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAsyncJobId:(NSString * _Nonnull)asyncJobId;
+- (instancetype)initWithAsyncJobId:(NSString *)asyncJobId;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -73,7 +75,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete:(NSArray<DBTEAMMemberAddResult *> * _Nonnull)complete;
+- (instancetype)initWithComplete:(NSArray<DBTEAMMemberAddResult *> *)complete;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -102,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -121,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersAddLaunch` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersAddLaunch * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersAddLaunch *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersAddLaunch` instances.
@@ -131,6 +135,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersAddLaunch` object.
 ///
-+ (DBTEAMMembersAddLaunch * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersAddLaunch *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

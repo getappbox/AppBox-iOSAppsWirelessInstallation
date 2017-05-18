@@ -13,6 +13,8 @@
 @class DBSHARINGSharingFileAccessError;
 @class DBSHARINGSharingUserError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,7 +26,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRemoveFileMemberError : NSObject <DBSerializable>
+@interface DBSHARINGRemoveFileMemberError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -52,17 +54,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 
 /// (no description). @note Ensure the `isUserError` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingUserError * _Nonnull userError;
+@property (nonatomic, readonly) DBSHARINGSharingUserError *userError;
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingFileAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharingFileAccessError *accessError;
 
 /// This member does not have explicit access to the file and therefore cannot
 /// be removed. The return value is the access that a user might have to the
 /// file from a parent folder. @note Ensure the `isNoExplicitAccess` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGMemberAccessLevelResult * _Nonnull noExplicitAccess;
+@property (nonatomic, readonly) DBSHARINGMemberAccessLevelResult *noExplicitAccess;
 
 #pragma mark - Constructors
 
@@ -73,7 +75,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserError:(DBSHARINGSharingUserError * _Nonnull)userError;
+- (instancetype)initWithUserError:(DBSHARINGSharingUserError *)userError;
 
 ///
 /// Initializes union class with tag state of "access_error".
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "no_explicit_access".
@@ -97,14 +99,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoExplicitAccess:(DBSHARINGMemberAccessLevelResult * _Nonnull)noExplicitAccess;
+- (instancetype)initWithNoExplicitAccess:(DBSHARINGMemberAccessLevelResult *)noExplicitAccess;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -152,7 +156,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -172,7 +176,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRemoveFileMemberError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRemoveFileMemberError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRemoveFileMemberError *)instance;
 
 ///
 /// Deserializes `DBSHARINGRemoveFileMemberError` instances.
@@ -182,6 +186,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGRemoveFileMemberError` object.
 ///
-+ (DBSHARINGRemoveFileMemberError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRemoveFileMemberError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

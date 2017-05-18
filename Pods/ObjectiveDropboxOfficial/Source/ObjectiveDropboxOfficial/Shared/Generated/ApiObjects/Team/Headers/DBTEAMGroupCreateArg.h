@@ -11,6 +11,8 @@
 @class DBTEAMCOMMONGroupManagementType;
 @class DBTEAMGroupCreateArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,18 +22,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupCreateArg : NSObject <DBSerializable>
+@interface DBTEAMGroupCreateArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Group name.
-@property (nonatomic, readonly, copy) NSString * _Nonnull groupName;
+@property (nonatomic, readonly, copy) NSString *groupName;
 
 /// The creator of a team can associate an arbitrary external ID to the group.
-@property (nonatomic, readonly) NSString * _Nullable groupExternalId;
+@property (nonatomic, readonly, copy, nullable) NSString *groupExternalId;
 
 /// Whether the team can be managed by selected users, or only by team admins.
-@property (nonatomic, readonly) DBTEAMCOMMONGroupManagementType * _Nullable groupManagementType;
+@property (nonatomic, readonly, nullable) DBTEAMCOMMONGroupManagementType *groupManagementType;
 
 #pragma mark - Constructors
 
@@ -46,9 +48,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupName:(NSString * _Nonnull)groupName
-                          groupExternalId:(NSString * _Nullable)groupExternalId
-                      groupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)groupManagementType;
+- (instancetype)initWithGroupName:(NSString *)groupName
+                  groupExternalId:(nullable NSString *)groupExternalId
+              groupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)groupManagementType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +60,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupName:(NSString * _Nonnull)groupName;
+- (instancetype)initWithGroupName:(NSString *)groupName;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,7 +81,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupCreateArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupCreateArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupCreateArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupCreateArg` instances.
@@ -87,6 +91,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupCreateArg` object.
 ///
-+ (DBTEAMGroupCreateArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupCreateArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

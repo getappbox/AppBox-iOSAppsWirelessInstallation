@@ -10,6 +10,8 @@
 
 @class DBFILESUploadSessionStartResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,13 +21,13 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionStartResult : NSObject <DBSerializable>
+@interface DBFILESUploadSessionStartResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A unique identifier for the upload session. Pass this to
 /// `uploadSessionAppendV2` and `uploadSessionFinish`.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sessionId;
+@property (nonatomic, readonly, copy) NSString *sessionId;
 
 #pragma mark - Constructors
 
@@ -37,7 +39,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId;
+- (instancetype)initWithSessionId:(NSString *)sessionId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -57,7 +61,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionStartResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionStartResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionStartResult *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionStartResult` instances.
@@ -67,6 +71,8 @@
 ///
 /// @return An instantiation of the `DBFILESUploadSessionStartResult` object.
 ///
-+ (DBFILESUploadSessionStartResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionStartResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

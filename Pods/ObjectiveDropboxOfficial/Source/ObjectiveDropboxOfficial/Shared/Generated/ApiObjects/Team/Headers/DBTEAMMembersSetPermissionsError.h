@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersSetPermissionsError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersSetPermissionsError : NSObject <DBSerializable>
+@interface DBTEAMMembersSetPermissionsError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "last_admin".
@@ -71,7 +73,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLastAdmin;
+- (instancetype)initWithLastAdmin;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -81,7 +83,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "cannot_set_permissions".
@@ -91,7 +93,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCannotSetPermissions;
+- (instancetype)initWithCannotSetPermissions;
 
 ///
 /// Initializes union class with tag state of "team_license_limit".
@@ -101,14 +103,16 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamLicenseLimit;
+- (instancetype)initWithTeamLicenseLimit;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -164,7 +168,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -184,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetPermissionsError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersSetPermissionsError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersSetPermissionsError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetPermissionsError` instances.
@@ -194,6 +198,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersSetPermissionsError` object.
 ///
-+ (DBTEAMMembersSetPermissionsError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersSetPermissionsError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

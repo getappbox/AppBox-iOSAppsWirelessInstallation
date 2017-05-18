@@ -11,6 +11,8 @@
 @class DBTEAMMemberAddResult;
 @class DBTEAMTeamMemberInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,7 +27,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMemberAddResult : NSObject <DBSerializable>
+@interface DBTEAMMemberAddResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -80,58 +82,58 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 /// Describes a user that was successfully added to the team. @note Ensure the
 /// `isSuccess` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBTEAMTeamMemberInfo * _Nonnull success;
+@property (nonatomic, readonly) DBTEAMTeamMemberInfo *success;
 
 /// Team is already full. The organization has no available licenses. @note
 /// Ensure the `isTeamLicenseLimit` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull teamLicenseLimit;
+@property (nonatomic, readonly, copy) NSString *teamLicenseLimit;
 
 /// Team is already full. The free team member limit has been reached. @note
 /// Ensure the `isFreeTeamMemberLimitReached` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull freeTeamMemberLimitReached;
+@property (nonatomic, readonly, copy) NSString *freeTeamMemberLimitReached;
 
 /// User is already on this team. The provided email address is associated with
 /// a user who is already a member of (including in recoverable state) or
 /// invited to the team. @note Ensure the `isUserAlreadyOnTeam` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull userAlreadyOnTeam;
+@property (nonatomic, readonly, copy) NSString *userAlreadyOnTeam;
 
 /// User is already on another team. The provided email address is associated
 /// with a user that is already a member or invited to another team. @note
 /// Ensure the `isUserOnAnotherTeam` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull userOnAnotherTeam;
+@property (nonatomic, readonly, copy) NSString *userOnAnotherTeam;
 
 /// User is already paired. @note Ensure the `isUserAlreadyPaired` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull userAlreadyPaired;
+@property (nonatomic, readonly, copy) NSString *userAlreadyPaired;
 
 /// User migration has failed. @note Ensure the `isUserMigrationFailed` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull userMigrationFailed;
+@property (nonatomic, readonly, copy) NSString *userMigrationFailed;
 
 /// A user with the given external member ID already exists on the team
 /// (including in recoverable state). @note Ensure the
 /// `isDuplicateExternalMemberId` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull duplicateExternalMemberId;
+@property (nonatomic, readonly, copy) NSString *duplicateExternalMemberId;
 
 /// A user with the given persistent ID already exists on the team (including in
 /// recoverable state). @note Ensure the `isDuplicateMemberPersistentId` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull duplicateMemberPersistentId;
+@property (nonatomic, readonly, copy) NSString *duplicateMemberPersistentId;
 
 /// Persistent ID is only available to teams with persistent ID SAML
 /// configuration. Please contact Dropbox for more information. @note Ensure the
 /// `isPersistentIdDisabled` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull persistentIdDisabled;
+@property (nonatomic, readonly, copy) NSString *persistentIdDisabled;
 
 /// User creation has failed. @note Ensure the `isUserCreationFailed` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull userCreationFailed;
+@property (nonatomic, readonly, copy) NSString *userCreationFailed;
 
 #pragma mark - Constructors
 
@@ -145,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(DBTEAMTeamMemberInfo * _Nonnull)success;
+- (instancetype)initWithSuccess:(DBTEAMTeamMemberInfo *)success;
 
 ///
 /// Initializes union class with tag state of "team_license_limit".
@@ -158,7 +160,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamLicenseLimit:(NSString * _Nonnull)teamLicenseLimit;
+- (instancetype)initWithTeamLicenseLimit:(NSString *)teamLicenseLimit;
 
 ///
 /// Initializes union class with tag state of "free_team_member_limit_reached".
@@ -171,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFreeTeamMemberLimitReached:(NSString * _Nonnull)freeTeamMemberLimitReached;
+- (instancetype)initWithFreeTeamMemberLimitReached:(NSString *)freeTeamMemberLimitReached;
 
 ///
 /// Initializes union class with tag state of "user_already_on_team".
@@ -186,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserAlreadyOnTeam:(NSString * _Nonnull)userAlreadyOnTeam;
+- (instancetype)initWithUserAlreadyOnTeam:(NSString *)userAlreadyOnTeam;
 
 ///
 /// Initializes union class with tag state of "user_on_another_team".
@@ -201,7 +203,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserOnAnotherTeam:(NSString * _Nonnull)userOnAnotherTeam;
+- (instancetype)initWithUserOnAnotherTeam:(NSString *)userOnAnotherTeam;
 
 ///
 /// Initializes union class with tag state of "user_already_paired".
@@ -212,7 +214,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserAlreadyPaired:(NSString * _Nonnull)userAlreadyPaired;
+- (instancetype)initWithUserAlreadyPaired:(NSString *)userAlreadyPaired;
 
 ///
 /// Initializes union class with tag state of "user_migration_failed".
@@ -224,7 +226,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserMigrationFailed:(NSString * _Nonnull)userMigrationFailed;
+- (instancetype)initWithUserMigrationFailed:(NSString *)userMigrationFailed;
 
 ///
 /// Initializes union class with tag state of "duplicate_external_member_id".
@@ -238,7 +240,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDuplicateExternalMemberId:(NSString * _Nonnull)duplicateExternalMemberId;
+- (instancetype)initWithDuplicateExternalMemberId:(NSString *)duplicateExternalMemberId;
 
 ///
 /// Initializes union class with tag state of "duplicate_member_persistent_id".
@@ -252,7 +254,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDuplicateMemberPersistentId:(NSString * _Nonnull)duplicateMemberPersistentId;
+- (instancetype)initWithDuplicateMemberPersistentId:(NSString *)duplicateMemberPersistentId;
 
 ///
 /// Initializes union class with tag state of "persistent_id_disabled".
@@ -267,7 +269,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPersistentIdDisabled:(NSString * _Nonnull)persistentIdDisabled;
+- (instancetype)initWithPersistentIdDisabled:(NSString *)persistentIdDisabled;
 
 ///
 /// Initializes union class with tag state of "user_creation_failed".
@@ -279,7 +281,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserCreationFailed:(NSString * _Nonnull)userCreationFailed;
+- (instancetype)initWithUserCreationFailed:(NSString *)userCreationFailed;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -423,7 +427,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -442,7 +446,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberAddResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMemberAddResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMemberAddResult *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberAddResult` instances.
@@ -452,6 +456,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An instantiation of the `DBTEAMMemberAddResult` object.
 ///
-+ (DBTEAMMemberAddResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMemberAddResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

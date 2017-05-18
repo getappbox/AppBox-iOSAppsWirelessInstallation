@@ -1,1 +1,0 @@
-../../../DJProgressHUD_OSX/DJProgressHUD/DJProgressIndicator.h

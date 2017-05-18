@@ -11,6 +11,8 @@
 
 @class DBTEAMGetActivityReport;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,56 +26,56 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGetActivityReport : DBTEAMBaseDfbReport <DBSerializable>
+@interface DBTEAMGetActivityReport : DBTEAMBaseDfbReport <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Array of total number of adds by team members.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull adds;
+@property (nonatomic, readonly) NSArray<NSNumber *> *adds;
 
 /// Array of number of edits by team members. If the same user edits the same
 /// file multiple times this is counted as a single edit.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull edits;
+@property (nonatomic, readonly) NSArray<NSNumber *> *edits;
 
 /// Array of total number of deletes by team members.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull deletes;
+@property (nonatomic, readonly) NSArray<NSNumber *> *deletes;
 
 /// Array of the number of users who have been active in the last 28 days.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull activeUsers28Day;
+@property (nonatomic, readonly) NSArray<NSNumber *> *activeUsers28Day;
 
 /// Array of the number of users who have been active in the last week.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull activeUsers7Day;
+@property (nonatomic, readonly) NSArray<NSNumber *> *activeUsers7Day;
 
 /// Array of the number of users who have been active in the last day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull activeUsers1Day;
+@property (nonatomic, readonly) NSArray<NSNumber *> *activeUsers1Day;
 
 /// Array of the number of shared folders with some activity in the last 28
 /// days.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull activeSharedFolders28Day;
+@property (nonatomic, readonly) NSArray<NSNumber *> *activeSharedFolders28Day;
 
 /// Array of the number of shared folders with some activity in the last week.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull activeSharedFolders7Day;
+@property (nonatomic, readonly) NSArray<NSNumber *> *activeSharedFolders7Day;
 
 /// Array of the number of shared folders with some activity in the last day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull activeSharedFolders1Day;
+@property (nonatomic, readonly) NSArray<NSNumber *> *activeSharedFolders1Day;
 
 /// Array of the number of shared links created.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedLinksCreated;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedLinksCreated;
 
 /// Array of the number of views by team users to shared links created by the
 /// team.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedLinksViewedByTeam;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedLinksViewedByTeam;
 
 /// Array of the number of views by users outside of the team to shared links
 /// created by the team.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedLinksViewedByOutsideUser;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedLinksViewedByOutsideUser;
 
 /// Array of the number of views by non-logged-in users to shared links created
 /// by the team.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedLinksViewedByNotLoggedIn;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedLinksViewedByNotLoggedIn;
 
 /// Array of the total number of views to shared links created by the team.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedLinksViewedTotal;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedLinksViewedTotal;
 
 #pragma mark - Constructors
 
@@ -109,21 +111,21 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStartDate:(NSString * _Nonnull)startDate
-                                     adds:(NSArray<NSNumber *> * _Nonnull)adds
-                                    edits:(NSArray<NSNumber *> * _Nonnull)edits
-                                  deletes:(NSArray<NSNumber *> * _Nonnull)deletes
-                         activeUsers28Day:(NSArray<NSNumber *> * _Nonnull)activeUsers28Day
-                          activeUsers7Day:(NSArray<NSNumber *> * _Nonnull)activeUsers7Day
-                          activeUsers1Day:(NSArray<NSNumber *> * _Nonnull)activeUsers1Day
-                 activeSharedFolders28Day:(NSArray<NSNumber *> * _Nonnull)activeSharedFolders28Day
-                  activeSharedFolders7Day:(NSArray<NSNumber *> * _Nonnull)activeSharedFolders7Day
-                  activeSharedFolders1Day:(NSArray<NSNumber *> * _Nonnull)activeSharedFolders1Day
-                       sharedLinksCreated:(NSArray<NSNumber *> * _Nonnull)sharedLinksCreated
-                  sharedLinksViewedByTeam:(NSArray<NSNumber *> * _Nonnull)sharedLinksViewedByTeam
-           sharedLinksViewedByOutsideUser:(NSArray<NSNumber *> * _Nonnull)sharedLinksViewedByOutsideUser
-           sharedLinksViewedByNotLoggedIn:(NSArray<NSNumber *> * _Nonnull)sharedLinksViewedByNotLoggedIn
-                   sharedLinksViewedTotal:(NSArray<NSNumber *> * _Nonnull)sharedLinksViewedTotal;
+- (instancetype)initWithStartDate:(NSString *)startDate
+                              adds:(NSArray<NSNumber *> *)adds
+                             edits:(NSArray<NSNumber *> *)edits
+                           deletes:(NSArray<NSNumber *> *)deletes
+                  activeUsers28Day:(NSArray<NSNumber *> *)activeUsers28Day
+                   activeUsers7Day:(NSArray<NSNumber *> *)activeUsers7Day
+                   activeUsers1Day:(NSArray<NSNumber *> *)activeUsers1Day
+          activeSharedFolders28Day:(NSArray<NSNumber *> *)activeSharedFolders28Day
+           activeSharedFolders7Day:(NSArray<NSNumber *> *)activeSharedFolders7Day
+           activeSharedFolders1Day:(NSArray<NSNumber *> *)activeSharedFolders1Day
+                sharedLinksCreated:(NSArray<NSNumber *> *)sharedLinksCreated
+           sharedLinksViewedByTeam:(NSArray<NSNumber *> *)sharedLinksViewedByTeam
+    sharedLinksViewedByOutsideUser:(NSArray<NSNumber *> *)sharedLinksViewedByOutsideUser
+    sharedLinksViewedByNotLoggedIn:(NSArray<NSNumber *> *)sharedLinksViewedByNotLoggedIn
+            sharedLinksViewedTotal:(NSArray<NSNumber *> *)sharedLinksViewedTotal;
 
 @end
 
@@ -142,7 +144,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGetActivityReport` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGetActivityReport * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGetActivityReport *)instance;
 
 ///
 /// Deserializes `DBTEAMGetActivityReport` instances.
@@ -152,6 +154,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGetActivityReport` object.
 ///
-+ (DBTEAMGetActivityReport * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGetActivityReport *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

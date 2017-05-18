@@ -12,7 +12,11 @@
 //Base URL's
 #define abMailerBaseURL @"https://appboxapi.github.io/mail"
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
+#define abMailGunBaseURL @"https://api.mailgun.net/v3/tryappbox.com/messages"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
+
+//MailGun
+#define abMailGunFromEmail @"AppBox Build <mailgun@tryappbox.com>"
 
 //Other URL's
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"

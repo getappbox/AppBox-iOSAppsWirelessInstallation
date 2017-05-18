@@ -11,6 +11,8 @@
 @class DBTEAMRevokeDeviceSessionError;
 @class DBTEAMRevokeDeviceSessionStatus;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMRevokeDeviceSessionStatus : NSObject <DBSerializable>
+@interface DBTEAMRevokeDeviceSessionStatus : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Result of the revoking request
-@property (nonatomic, readonly) NSNumber * _Nonnull success;
+@property (nonatomic, readonly) NSNumber *success;
 
 /// The error cause in case of a failure
-@property (nonatomic, readonly) DBTEAMRevokeDeviceSessionError * _Nullable errorType;
+@property (nonatomic, readonly, nullable) DBTEAMRevokeDeviceSessionError *errorType;
 
 #pragma mark - Constructors
 
@@ -40,8 +42,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(NSNumber * _Nonnull)success
-                              errorType:(DBTEAMRevokeDeviceSessionError * _Nullable)errorType;
+- (instancetype)initWithSuccess:(NSNumber *)success errorType:(nullable DBTEAMRevokeDeviceSessionError *)errorType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -51,7 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(NSNumber * _Nonnull)success;
+- (instancetype)initWithSuccess:(NSNumber *)success;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -71,7 +74,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionStatus` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMRevokeDeviceSessionStatus * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionStatus` instances.
@@ -81,6 +84,8 @@
 ///
 /// @return An instantiation of the `DBTEAMRevokeDeviceSessionStatus` object.
 ///
-+ (DBTEAMRevokeDeviceSessionStatus * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMRevokeDeviceSessionStatus *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

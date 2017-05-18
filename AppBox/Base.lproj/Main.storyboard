@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
@@ -118,13 +117,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Accounts" autoenablesItems="NO" id="hsO-Yp-DDN">
                                     <items>
-                                        <menuItem title="Logout Gmail" id="Ki8-ab-eaa" userLabel="Logout Gmail">
-                                            <attributedString key="attributedTitle"/>
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="logoutGmailTapped:" target="hnw-xV-0zn" id="T7V-V1-sxI"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="Logout Dropbox" id="sBp-fs-Uyn" userLabel="Logout Dropbox">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -205,13 +197,12 @@
                     <connections>
                         <outlet property="dropboxLogoutButton" destination="sBp-fs-Uyn" id="afh-vo-oE7"/>
                         <outlet property="dropboxSpaceButton" destination="Ug8-0u-jHy" id="n5f-5O-Xw1"/>
-                        <outlet property="gmailLogoutButton" destination="Ki8-ab-eaa" id="xPA-We-vFM"/>
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
-            <point key="canvasLocation" x="1297" y="-197"/>
+            <point key="canvasLocation" x="905" y="-192"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -239,20 +230,20 @@
         <scene sceneID="irr-iO-vGD">
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
-                    <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="776" height="392"/>
+                    <view key="view" misplaced="YES" id="eYA-Pb-PSo">
+                        <rect key="frame" x="0.0" y="108" width="737" height="284"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="776" height="387"/>
+                                <rect key="frame" x="0.0" y="0.0" width="737" height="279"/>
                                 <subviews>
                                     <tabView initialItem="Q1W-fI-E8i" translatesAutoresizingMaskIntoConstraints="NO" id="ay9-ED-rIF">
-                                        <rect key="frame" x="3" y="175" width="770" height="208"/>
+                                        <rect key="frame" x="3" y="175" width="731" height="100"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Archive and Upload IPA" identifier="1" id="h9M-To-5mB">
                                                 <view key="view" id="jIW-ou-xBO">
-                                                    <rect key="frame" x="10" y="33" width="750" height="162"/>
+                                                    <rect key="frame" x="10" y="33" width="711" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPp-ER-Eab">
@@ -267,7 +258,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sWE-nW-t4X">
-                                                            <rect key="frame" x="162" y="118" width="581" height="26"/>
+                                                            <rect key="frame" x="162" y="118" width="542" height="26"/>
                                                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select Project/Workspace to Build" pathStyle="popUp" id="CKg-i9-cmw">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -289,7 +280,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJn-2P-Wer">
-                                                            <rect key="frame" x="163" y="84" width="582" height="28"/>
+                                                            <rect key="frame" x="163" y="84" width="543" height="28"/>
                                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="bwD-TP-3YL">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -308,7 +299,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTv-oc-mvs">
-                                                            <rect key="frame" x="163" y="50" width="582" height="28"/>
+                                                            <rect key="frame" x="163" y="50" width="543" height="28"/>
                                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="" drawsBackground="YES" completes="NO" numberOfVisibleItems="4" id="Iff-uQ-638">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -333,7 +324,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dsk-nI-Owd">
-                                                            <rect key="frame" x="163" y="16" width="582" height="28"/>
+                                                            <rect key="frame" x="163" y="16" width="543" height="28"/>
                                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="14l-XR-BJi">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -374,7 +365,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Upload IPA" identifier="2" id="Q1W-fI-E8i">
                                                 <view key="view" id="taZ-IM-RE0">
-                                                    <rect key="frame" x="10" y="33" width="750" height="54"/>
+                                                    <rect key="frame" x="10" y="33" width="711" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yor-Mk-o9E">
@@ -389,7 +380,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dVX-NT-rjH">
-                                                            <rect key="frame" x="162" y="11" width="581" height="26"/>
+                                                            <rect key="frame" x="162" y="11" width="542" height="26"/>
                                                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select IPA File" pathStyle="popUp" id="lLP-Oo-lHE">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -418,7 +409,7 @@
                                         </connections>
                                     </tabView>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="sgg-Iy-WMT">
-                                        <rect key="frame" x="0.0" y="172" width="776" height="5"/>
+                                        <rect key="frame" x="0.0" y="172" width="737" height="5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="vGS-9y-LWH"/>
                                         </constraints>
@@ -461,7 +452,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RKc-Si-2CZ">
-                                        <rect key="frame" x="172" y="96" width="589" height="25"/>
+                                        <rect key="frame" x="172" y="96" width="550" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="6aQ-Mu-xKb"/>
                                         </constraints>
@@ -483,9 +474,10 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BAA-rE-fh4">
-                                        <rect key="frame" x="172" y="62" width="589" height="25"/>
+                                        <rect key="frame" x="172" y="62" width="550" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="RCk-ui-gGv"/>
+                                            <constraint firstAttribute="width" constant="550" id="Wo5-ud-uOF"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="3kO-iB-a5g">
                                             <font key="font" metaFont="systemLight" size="16"/>
@@ -497,10 +489,10 @@
                                         </connections>
                                     </textField>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="52J-8G-TcO">
-                                        <rect key="frame" x="0.0" y="39" width="776" height="5"/>
+                                        <rect key="frame" x="0.0" y="39" width="737" height="5"/>
                                     </box>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cfm-Bd-TVp">
-                                        <rect key="frame" x="683" y="3" width="84" height="32"/>
+                                        <rect key="frame" x="644" y="3" width="84" height="32"/>
                                         <buttonCell key="cell" type="push" title="Action" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EI8-jG-NBh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
@@ -510,7 +502,7 @@
                                         </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qRD-nm-pGY">
-                                        <rect key="frame" x="476" y="3" width="103" height="32"/>
+                                        <rect key="frame" x="437" y="3" width="103" height="32"/>
                                         <buttonCell key="cell" type="push" title="Config CI" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HbN-yq-sbf">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
@@ -521,7 +513,7 @@
                                         </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zka-0X-0Ih">
-                                        <rect key="frame" x="577" y="3" width="108" height="32"/>
+                                        <rect key="frame" x="538" y="3" width="108" height="32"/>
                                         <buttonCell key="cell" type="push" title="Advanced" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9yL-qR-ycX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
@@ -590,42 +582,12 @@
                                     <constraint firstItem="VAU-Tg-Nmj" firstAttribute="leading" secondItem="1d7-Kr-ZaS" secondAttribute="trailing" constant="5" id="zua-2a-m7u"/>
                                 </constraints>
                             </customView>
-                            <customView hidden="YES" appearanceType="aqua" translatesAutoresizingMaskIntoConstraints="NO" id="HNZ-et-sSs">
-                                <rect key="frame" x="0.0" y="0.0" width="776" height="0.0"/>
-                                <subviews>
-                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IgI-OA-XP9">
-                                        <rect key="frame" x="44" y="-10" width="724" height="19"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Checking IPA..." id="gjX-y7-LlX">
-                                            <font key="font" metaFont="systemLight" size="15"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" displayedWhenStopped="NO" bezeled="NO" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ha-Sj1">
-                                        <rect key="frame" x="20" y="-8" width="16" height="16"/>
-                                    </progressIndicator>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="IgI-OA-XP9" firstAttribute="leading" secondItem="Iw6-ha-Sj1" secondAttribute="trailing" constant="10" id="2hW-yL-cbU"/>
-                                    <constraint firstAttribute="trailing" secondItem="IgI-OA-XP9" secondAttribute="trailing" constant="10" id="Ewf-gX-rRg"/>
-                                    <constraint firstItem="Iw6-ha-Sj1" firstAttribute="leading" secondItem="HNZ-et-sSs" secondAttribute="leading" constant="20" id="MAl-np-uJR"/>
-                                    <constraint firstAttribute="height" id="OiI-8K-Ucy"/>
-                                    <constraint firstItem="Iw6-ha-Sj1" firstAttribute="centerY" secondItem="HNZ-et-sSs" secondAttribute="centerY" id="s8n-Pe-oTn"/>
-                                    <constraint firstItem="Iw6-ha-Sj1" firstAttribute="centerY" secondItem="IgI-OA-XP9" secondAttribute="centerY" id="sUk-zB-Tan"/>
-                                </constraints>
-                                <shadow key="shadow">
-                                    <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </shadow>
-                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="RTB-1n-lrJ" firstAttribute="top" secondItem="eYA-Pb-PSo" secondAttribute="top" constant="5" id="0sH-HL-g0g"/>
                             <constraint firstAttribute="trailing" secondItem="RTB-1n-lrJ" secondAttribute="trailing" id="42f-ja-GaE"/>
-                            <constraint firstItem="HNZ-et-sSs" firstAttribute="top" secondItem="RTB-1n-lrJ" secondAttribute="bottom" id="Ncr-Xo-7pk"/>
+                            <constraint firstAttribute="bottom" secondItem="RTB-1n-lrJ" secondAttribute="bottom" id="Tqf-bf-Zfl"/>
                             <constraint firstItem="RTB-1n-lrJ" firstAttribute="leading" secondItem="eYA-Pb-PSo" secondAttribute="leading" id="Txv-VM-zmw"/>
-                            <constraint firstAttribute="trailing" secondItem="HNZ-et-sSs" secondAttribute="trailing" id="UNV-Eu-oRT"/>
-                            <constraint firstAttribute="bottom" secondItem="HNZ-et-sSs" secondAttribute="bottom" id="af9-s9-CsH"/>
-                            <constraint firstItem="HNZ-et-sSs" firstAttribute="leading" secondItem="eYA-Pb-PSo" secondAttribute="leading" id="p8n-eR-M9d"/>
                         </constraints>
                     </view>
                     <connections>
@@ -638,19 +600,14 @@
                         <outlet property="comboBuildScheme" destination="vJn-2P-Wer" id="QZp-O0-0rh"/>
                         <outlet property="comboBuildType" destination="XTv-oc-mvs" id="sEq-gy-KKY"/>
                         <outlet property="comboTeamId" destination="Dsk-nI-Owd" id="suO-nJ-2cE"/>
-                        <outlet property="labelStatus" destination="IgI-OA-XP9" id="7dV-Z3-UEa"/>
                         <outlet property="pathIPAFile" destination="dVX-NT-rjH" id="1fw-fx-eph"/>
                         <outlet property="pathProject" destination="sWE-nW-t4X" id="5es-lc-EuA"/>
-                        <outlet property="progressIndicator" destination="Iw6-ha-Sj1" id="N0m-Ok-NsH"/>
-                        <outlet property="progressViewHeightConstraint" destination="OiI-8K-Ucy" id="mXI-ra-qm0"/>
                         <outlet property="tabView" destination="ay9-ED-rIF" id="eI7-2C-0MP"/>
                         <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
                         <outlet property="textFieldMessage" destination="BAA-rE-fh4" id="ACK-7P-3CG"/>
-                        <outlet property="viewProgressStatus" destination="HNZ-et-sSs" id="xiM-U2-QxA"/>
                         <segue destination="dq2-4K-v2z" kind="sheet" identifier="ShowLink" id="is8-1E-ZPa"/>
                         <segue destination="xJf-6e-3AH" kind="sheet" identifier="ShowDashboard" id="gPq-Jz-5LR"/>
                         <segue destination="9dR-R1-8zT" kind="sheet" identifier="DropBoxLogin" id="tn2-tx-AtO"/>
-                        <segue destination="Jo2-cI-h8E" kind="sheet" identifier="MailView" id="ZfD-eP-cke"/>
                         <segue destination="PbW-uV-2L2" kind="sheet" identifier="ITCLogin" id="nT8-I3-Ite"/>
                     </connections>
                 </viewController>
@@ -707,89 +664,6 @@
                 <customObject id="Sep-aN-CO8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="904" y="177"/>
-        </scene>
-        <!--Mail View Controller-->
-        <scene sceneID="hWk-PV-Lb4">
-            <objects>
-                <viewController id="Jo2-cI-h8E" customClass="MailViewController" sceneMemberID="viewController">
-                    <view key="view" id="hsR-9v-A49">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="251"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <webView translatesAutoresizingMaskIntoConstraints="NO" id="EdM-8h-Igo">
-                                <rect key="frame" x="0.0" y="41" width="450" height="210"/>
-                                <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
-                                    <nil key="identifier"/>
-                                </webPreferences>
-                                <connections>
-                                    <outlet property="UIDelegate" destination="Jo2-cI-h8E" id="WNN-LM-F06"/>
-                                    <outlet property="frameLoadDelegate" destination="Jo2-cI-h8E" id="u0g-gg-coe"/>
-                                </connections>
-                            </webView>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="ozI-WA-8db">
-                                <rect key="frame" x="217" y="138" width="16" height="16"/>
-                            </progressIndicator>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sOd-pg-fcf">
-                                <rect key="frame" x="-1" y="3" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dUx-Cy-2lK">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cancelButtonTapped:" target="Jo2-cI-h8E" id="vtR-ge-yLn"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1im-Mr-w6j">
-                                <rect key="frame" x="262" y="3" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7o8-Ru-CMA">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="reloadButtonTapped:" target="Jo2-cI-h8E" id="eUF-jK-474"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ojO-rB-gML">
-                                <rect key="frame" x="337" y="3" width="114" height="32"/>
-                                <buttonCell key="cell" type="push" title="Clear Cache" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cCO-8f-7oJ">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="clearCacheButtonTapped:" target="Jo2-cI-h8E" id="vl3-3k-8NK"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="ojO-rB-gML" firstAttribute="leading" secondItem="1im-Mr-w6j" secondAttribute="trailing" constant="5" id="1uf-wc-Mnk"/>
-                            <constraint firstAttribute="trailing" secondItem="EdM-8h-Igo" secondAttribute="trailing" id="47a-Zz-VEl"/>
-                            <constraint firstAttribute="bottom" secondItem="1im-Mr-w6j" secondAttribute="bottom" constant="10" id="Kvx-mZ-ypq"/>
-                            <constraint firstItem="EdM-8h-Igo" firstAttribute="leading" secondItem="hsR-9v-A49" secondAttribute="leading" id="XcX-m4-pZ0"/>
-                            <constraint firstItem="EdM-8h-Igo" firstAttribute="top" secondItem="hsR-9v-A49" secondAttribute="top" id="Z60-6X-Vyq"/>
-                            <constraint firstItem="ozI-WA-8db" firstAttribute="centerX" secondItem="EdM-8h-Igo" secondAttribute="centerX" id="ecr-H0-1mh"/>
-                            <constraint firstItem="1im-Mr-w6j" firstAttribute="centerY" secondItem="ojO-rB-gML" secondAttribute="centerY" id="fgT-yL-jfs"/>
-                            <constraint firstItem="sOd-pg-fcf" firstAttribute="leading" secondItem="hsR-9v-A49" secondAttribute="leading" constant="5" id="kkQ-2J-f1d"/>
-                            <constraint firstItem="sOd-pg-fcf" firstAttribute="top" secondItem="EdM-8h-Igo" secondAttribute="bottom" constant="10" id="nk7-VV-e7Q"/>
-                            <constraint firstAttribute="bottom" secondItem="sOd-pg-fcf" secondAttribute="bottom" constant="10" id="pO4-EC-tjg"/>
-                            <constraint firstItem="ozI-WA-8db" firstAttribute="centerY" secondItem="EdM-8h-Igo" secondAttribute="centerY" id="sdI-7S-n6h"/>
-                            <constraint firstItem="1im-Mr-w6j" firstAttribute="top" secondItem="EdM-8h-Igo" secondAttribute="bottom" constant="10" id="xiR-39-DqH"/>
-                            <constraint firstAttribute="trailing" secondItem="ojO-rB-gML" secondAttribute="trailing" constant="5" id="yhK-y3-2LU"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="buttonCancel" destination="sOd-pg-fcf" id="ZOi-ZW-XC4"/>
-                        <outlet property="buttonClearCache" destination="ojO-rB-gML" id="jGi-Be-tDp"/>
-                        <outlet property="buttonReload" destination="1im-Mr-w6j" id="m4f-5N-7Mi"/>
-                        <outlet property="progressIndicator" destination="ozI-WA-8db" id="ohj-df-kuB"/>
-                        <outlet property="webView" destination="EdM-8h-Igo" id="KEQ-xb-eFB"/>
-                    </connections>
-                </viewController>
-                <customObject id="sXS-OA-9xd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="813" y="668"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rwx-Q7-rOS">
@@ -974,7 +848,7 @@ Gw
                 </viewController>
                 <customObject id="dXx-op-3yP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="913" y="959"/>
+            <point key="canvasLocation" x="872" y="861"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="zTD-qn-WeB">

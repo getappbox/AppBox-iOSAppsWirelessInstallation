@@ -12,6 +12,8 @@
 @class DBSHARINGAddFileMemberArgs;
 @class DBSHARINGMemberSelector;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,31 +25,31 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGAddFileMemberArgs : NSObject <DBSerializable>
+@interface DBSHARINGAddFileMemberArgs : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// File to which to add members.
-@property (nonatomic, readonly, copy) NSString * _Nonnull file;
+@property (nonatomic, readonly, copy) NSString *file;
 
 /// Members to add. Note that even an email address is given, this may result in
 /// a user being directy added to the membership if that email is the user's
 /// main account email.
-@property (nonatomic, readonly) NSArray<DBSHARINGMemberSelector *> * _Nonnull members;
+@property (nonatomic, readonly) NSArray<DBSHARINGMemberSelector *> *members;
 
 /// Message to send to added members in their invitation.
-@property (nonatomic, readonly) NSString * _Nullable customMessage;
+@property (nonatomic, readonly, copy, nullable) NSString *customMessage;
 
 /// Whether added members should be notified via device notifications of their
 /// invitation.
-@property (nonatomic, readonly) NSNumber * _Nonnull quiet;
+@property (nonatomic, readonly) NSNumber *quiet;
 
 /// AccessLevel union object, describing what access level we want to give new
 /// members.
-@property (nonatomic, readonly) DBSHARINGAccessLevel * _Nonnull accessLevel;
+@property (nonatomic, readonly) DBSHARINGAccessLevel *accessLevel;
 
 /// If the custom message should be added as a comment on the file.
-@property (nonatomic, readonly) NSNumber * _Nonnull addMessageAsComment;
+@property (nonatomic, readonly) NSNumber *addMessageAsComment;
 
 #pragma mark - Constructors
 
@@ -68,12 +70,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file
-                             members:(NSArray<DBSHARINGMemberSelector *> * _Nonnull)members
-                       customMessage:(NSString * _Nullable)customMessage
-                               quiet:(NSNumber * _Nullable)quiet
-                         accessLevel:(DBSHARINGAccessLevel * _Nullable)accessLevel
-                 addMessageAsComment:(NSNumber * _Nullable)addMessageAsComment;
+- (instancetype)initWithFile:(NSString *)file
+                     members:(NSArray<DBSHARINGMemberSelector *> *)members
+               customMessage:(nullable NSString *)customMessage
+                       quiet:(nullable NSNumber *)quiet
+                 accessLevel:(nullable DBSHARINGAccessLevel *)accessLevel
+         addMessageAsComment:(nullable NSNumber *)addMessageAsComment;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -86,8 +88,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file
-                             members:(NSArray<DBSHARINGMemberSelector *> * _Nonnull)members;
+- (instancetype)initWithFile:(NSString *)file members:(NSArray<DBSHARINGMemberSelector *> *)members;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -106,7 +109,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddFileMemberArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGAddFileMemberArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGAddFileMemberArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddFileMemberArgs` instances.
@@ -116,6 +119,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGAddFileMemberArgs` object.
 ///
-+ (DBSHARINGAddFileMemberArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGAddFileMemberArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

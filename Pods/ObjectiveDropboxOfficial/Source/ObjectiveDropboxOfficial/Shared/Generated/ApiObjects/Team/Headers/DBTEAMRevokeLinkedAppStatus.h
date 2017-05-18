@@ -11,6 +11,8 @@
 @class DBTEAMRevokeLinkedAppError;
 @class DBTEAMRevokeLinkedAppStatus;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMRevokeLinkedAppStatus : NSObject <DBSerializable>
+@interface DBTEAMRevokeLinkedAppStatus : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Result of the revoking request
-@property (nonatomic, readonly) NSNumber * _Nonnull success;
+@property (nonatomic, readonly) NSNumber *success;
 
 /// The error cause in case of a failure
-@property (nonatomic, readonly) DBTEAMRevokeLinkedAppError * _Nullable errorType;
+@property (nonatomic, readonly, nullable) DBTEAMRevokeLinkedAppError *errorType;
 
 #pragma mark - Constructors
 
@@ -40,8 +42,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(NSNumber * _Nonnull)success
-                              errorType:(DBTEAMRevokeLinkedAppError * _Nullable)errorType;
+- (instancetype)initWithSuccess:(NSNumber *)success errorType:(nullable DBTEAMRevokeLinkedAppError *)errorType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -51,7 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(NSNumber * _Nonnull)success;
+- (instancetype)initWithSuccess:(NSNumber *)success;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -70,7 +73,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeLinkedAppStatus` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMRevokeLinkedAppStatus * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMRevokeLinkedAppStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeLinkedAppStatus` instances.
@@ -80,6 +83,8 @@
 ///
 /// @return An instantiation of the `DBTEAMRevokeLinkedAppStatus` object.
 ///
-+ (DBTEAMRevokeLinkedAppStatus * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMRevokeLinkedAppStatus *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

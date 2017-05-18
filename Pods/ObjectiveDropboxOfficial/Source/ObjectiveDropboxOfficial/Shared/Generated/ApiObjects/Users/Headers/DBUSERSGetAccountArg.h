@@ -10,6 +10,8 @@
 
 @class DBUSERSGetAccountArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSGetAccountArg : NSObject <DBSerializable>
+@interface DBUSERSGetAccountArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A user's account identifier.
-@property (nonatomic, readonly, copy) NSString * _Nonnull accountId;
+@property (nonatomic, readonly, copy) NSString *accountId;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId;
+- (instancetype)initWithAccountId:(NSString *)accountId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -54,7 +58,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSGetAccountArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSGetAccountArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSGetAccountArg *)instance;
 
 ///
 /// Deserializes `DBUSERSGetAccountArg` instances.
@@ -64,6 +68,8 @@
 ///
 /// @return An instantiation of the `DBUSERSGetAccountArg` object.
 ///
-+ (DBUSERSGetAccountArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSGetAccountArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

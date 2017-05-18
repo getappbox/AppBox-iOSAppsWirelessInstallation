@@ -10,6 +10,8 @@
 
 @class DBTEAMBaseDfbReport;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,12 +23,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMBaseDfbReport : NSObject <DBSerializable>
+@interface DBTEAMBaseDfbReport : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// First date present in the results as 'YYYY-MM-DD' or None.
-@property (nonatomic, readonly, copy) NSString * _Nonnull startDate;
+@property (nonatomic, readonly, copy) NSString *startDate;
 
 #pragma mark - Constructors
 
@@ -37,7 +39,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStartDate:(NSString * _Nonnull)startDate;
+- (instancetype)initWithStartDate:(NSString *)startDate;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -56,7 +60,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMBaseDfbReport` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMBaseDfbReport * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMBaseDfbReport *)instance;
 
 ///
 /// Deserializes `DBTEAMBaseDfbReport` instances.
@@ -66,6 +70,8 @@
 ///
 /// @return An instantiation of the `DBTEAMBaseDfbReport` object.
 ///
-+ (DBTEAMBaseDfbReport * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMBaseDfbReport *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

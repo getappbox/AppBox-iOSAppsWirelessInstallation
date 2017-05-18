@@ -12,6 +12,8 @@
 @class DBSHARINGSharingFileAccessError;
 @class DBSHARINGSharingUserError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFileMembersContinueError : NSObject <DBSerializable>
+@interface DBSHARINGListFileMembersContinueError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -50,11 +52,11 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 
 /// (no description). @note Ensure the `isUserError` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingUserError * _Nonnull userError;
+@property (nonatomic, readonly) DBSHARINGSharingUserError *userError;
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingFileAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharingFileAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserError:(DBSHARINGSharingUserError * _Nonnull)userError;
+- (instancetype)initWithUserError:(DBSHARINGSharingUserError *)userError;
 
 ///
 /// Initializes union class with tag state of "access_error".
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "invalid_cursor".
@@ -84,14 +86,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidCursor;
+- (instancetype)initWithInvalidCursor;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -134,7 +138,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -155,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersContinueError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFileMembersContinueError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFileMembersContinueError *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersContinueError` instances.
@@ -166,6 +170,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersContinueErrorTag) {
 /// @return An instantiation of the `DBSHARINGListFileMembersContinueError`
 /// object.
 ///
-+ (DBSHARINGListFileMembersContinueError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFileMembersContinueError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

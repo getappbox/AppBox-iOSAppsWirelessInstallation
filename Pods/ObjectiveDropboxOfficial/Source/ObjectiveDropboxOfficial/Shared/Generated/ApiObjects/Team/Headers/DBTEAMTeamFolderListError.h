@@ -11,6 +11,8 @@
 @class DBTEAMTeamFolderAccessError;
 @class DBTEAMTeamFolderListError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,12 +22,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamFolderListError : NSObject <DBSerializable>
+@interface DBTEAMTeamFolderListError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// (no description).
-@property (nonatomic, readonly) DBTEAMTeamFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBTEAMTeamFolderAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -36,7 +38,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBTEAMTeamFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBTEAMTeamFolderAccessError *)accessError;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderListError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamFolderListError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamFolderListError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderListError` instances.
@@ -65,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderListError` object.
 ///
-+ (DBTEAMTeamFolderListError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamFolderListError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

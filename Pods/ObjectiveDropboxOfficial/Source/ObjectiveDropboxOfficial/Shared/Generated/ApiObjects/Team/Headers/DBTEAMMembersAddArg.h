@@ -11,6 +11,8 @@
 @class DBTEAMMemberAddArg;
 @class DBTEAMMembersAddArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersAddArg : NSObject <DBSerializable>
+@interface DBTEAMMembersAddArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Details of new members to be added to the team.
-@property (nonatomic, readonly) NSArray<DBTEAMMemberAddArg *> * _Nonnull dNewMembers;
+@property (nonatomic, readonly) NSArray<DBTEAMMemberAddArg *> *dNewMembers;
 
 /// Whether to force the add to happen asynchronously.
-@property (nonatomic, readonly) NSNumber * _Nonnull forceAsync;
+@property (nonatomic, readonly) NSNumber *forceAsync;
 
 #pragma mark - Constructors
 
@@ -40,8 +42,8 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDNewMembers:(NSArray<DBTEAMMemberAddArg *> * _Nonnull)dNewMembers
-                                 forceAsync:(NSNumber * _Nullable)forceAsync;
+- (instancetype)initWithDNewMembers:(NSArray<DBTEAMMemberAddArg *> *)dNewMembers
+                         forceAsync:(nullable NSNumber *)forceAsync;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -51,7 +53,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDNewMembers:(NSArray<DBTEAMMemberAddArg *> * _Nonnull)dNewMembers;
+- (instancetype)initWithDNewMembers:(NSArray<DBTEAMMemberAddArg *> *)dNewMembers;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -70,7 +74,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersAddArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersAddArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersAddArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersAddArg` instances.
@@ -80,6 +84,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMembersAddArg` object.
 ///
-+ (DBTEAMMembersAddArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersAddArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

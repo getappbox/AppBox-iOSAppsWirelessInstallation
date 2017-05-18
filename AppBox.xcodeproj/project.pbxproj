@@ -46,7 +46,6 @@
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
 		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
-		E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18DCB161DFE729300BD7F11 /* MailViewController.m */; };
 		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
 		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
 		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
@@ -74,6 +73,8 @@
 		E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */; };
 		E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */; };
 		E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */; };
+		E1DC25FD1ECDBC16001EF106 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */; };
+		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
 		E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E215B61E869BDF0091565D /* ITCLoginViewController.m */; };
 		E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E215BA1E869BF70091565D /* ITCLogin.m */; };
 /* End PBXBuildFile section */
@@ -161,8 +162,6 @@
 		E188EA0D1D78485900EBCA52 /* NTAURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTAURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0E1D78485900EBCA52 /* Tiny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tiny.h; sourceTree = "<group>"; };
 		E188EA0F1D78485900EBCA52 /* Tiny.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tiny.m; sourceTree = "<group>"; };
-		E18DCB151DFE729300BD7F11 /* MailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailViewController.h; sourceTree = "<group>"; };
-		E18DCB161DFE729300BD7F11 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
 		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
 		E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectAdvancedViewController.m; sourceTree = "<group>"; };
 		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
@@ -212,6 +211,11 @@
 		E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
 		E1D479CF1E4B04A500BBC838 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1DC25F91ECD826C001EF106 /* MailGunKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MailGunKeys.h; sourceTree = "<group>"; };
+		E1DC25FB1ECDBC16001EF106 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ProgressHud.h"; sourceTree = "<group>"; };
+		E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ProgressHud.m"; sourceTree = "<group>"; };
 		E1E215B51E869BDF0091565D /* ITCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITCLoginViewController.h; sourceTree = "<group>"; };
 		E1E215B61E869BDF0091565D /* ITCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITCLoginViewController.m; sourceTree = "<group>"; };
 		E1E215B91E869BF70091565D /* ITCLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITCLogin.h; sourceTree = "<group>"; };
@@ -394,7 +398,6 @@
 				E14363781DF59AC700FB10CA /* LogViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
-				E18DCB141DFE727100BD7F11 /* MailViewController */,
 				E1E215B41E869BDF0091565D /* ITCLoginViewController */,
 				E16D72E61E8935060031FB7C /* PreferencesViewController */,
 			);
@@ -587,15 +590,6 @@
 			path = NTAURLShortenerService;
 			sourceTree = "<group>";
 		};
-		E18DCB141DFE727100BD7F11 /* MailViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E18DCB151DFE729300BD7F11 /* MailViewController.h */,
-				E18DCB161DFE729300BD7F11 /* MailViewController.m */,
-			);
-			path = MailViewController;
-			sourceTree = "<group>";
-		};
 		E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,12 +704,14 @@
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
 				E16D72D91E88F9EE0031FB7C /* XcodeHandler */,
 				E16D72D11E88F99A0031FB7C /* OutputParsers */,
+				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E1AF8FD71E266CC000A57633 /* DropboxKeys.h */,
+				E1DC25F91ECD826C001EF106 /* MailGunKeys.h */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
@@ -731,6 +727,17 @@
 				E1D12EE21EC2F17B0065E59A /* SlackPreferencesViewController.xib */,
 			);
 			path = SlackPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		E1DC25FA1ECDBC16001EF106 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E1DC25FB1ECDBC16001EF106 /* MBProgressHUD.h */,
+				E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */,
+				E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */,
+				E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */,
+			);
+			path = ProgressHUD;
 			sourceTree = "<group>";
 		};
 		E1E215B41E869BDF0091565D /* ITCLoginViewController */ = {
@@ -915,7 +922,6 @@
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */,
-				E18DCB171DFE729300BD7F11 /* MailViewController.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */,
@@ -933,9 +939,11 @@
 				E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
+				E1DC25FD1ECDBC16001EF106 /* MBProgressHUD.m in Sources */,
 				E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
+				E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */,
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,

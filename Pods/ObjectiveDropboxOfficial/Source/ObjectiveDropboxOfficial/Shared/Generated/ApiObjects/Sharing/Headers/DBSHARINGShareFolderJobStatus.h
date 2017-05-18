@@ -12,6 +12,8 @@
 @class DBSHARINGShareFolderJobStatus;
 @class DBSHARINGSharedFolderMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGShareFolderJobStatus : NSObject <DBSerializable>
+@interface DBSHARINGShareFolderJobStatus : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -45,11 +47,11 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 /// The share job has finished. The value is the metadata for the folder. @note
 /// Ensure the `isComplete` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderMetadata * _Nonnull complete;
+@property (nonatomic, readonly) DBSHARINGSharedFolderMetadata *complete;
 
 /// (no description). @note Ensure the `isFailed` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGShareFolderError * _Nonnull failed;
+@property (nonatomic, readonly) DBSHARINGShareFolderError *failed;
 
 #pragma mark - Constructors
 
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInProgress;
+- (instancetype)initWithInProgress;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete:(DBSHARINGSharedFolderMetadata * _Nonnull)complete;
+- (instancetype)initWithComplete:(DBSHARINGSharedFolderMetadata *)complete;
 
 ///
 /// Initializes union class with tag state of "failed".
@@ -83,7 +85,9 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailed:(DBSHARINGShareFolderError * _Nonnull)failed;
+- (instancetype)initWithFailed:(DBSHARINGShareFolderError *)failed;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -119,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -139,7 +143,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGShareFolderJobStatus` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGShareFolderJobStatus * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGShareFolderJobStatus *)instance;
 
 ///
 /// Deserializes `DBSHARINGShareFolderJobStatus` instances.
@@ -149,6 +153,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
 ///
 /// @return An instantiation of the `DBSHARINGShareFolderJobStatus` object.
 ///
-+ (DBSHARINGShareFolderJobStatus * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGShareFolderJobStatus *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

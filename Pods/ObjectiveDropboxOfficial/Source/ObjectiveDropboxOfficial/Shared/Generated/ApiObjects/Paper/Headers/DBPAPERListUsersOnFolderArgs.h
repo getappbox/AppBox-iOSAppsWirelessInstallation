@@ -11,6 +11,8 @@
 
 @class DBPAPERListUsersOnFolderArgs;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,37 +22,37 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListUsersOnFolderArgs : DBPAPERRefPaperDoc <DBSerializable>
+@interface DBPAPERListUsersOnFolderArgs : DBPAPERRefPaperDoc <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Size limit per batch. The maximum number of users that can be retrieved per
 /// batch is 1000. Higher value results in invalid arguments error.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 /// @param limit Size limit per batch. The maximum number of users that can be
 /// retrieved per batch is 1000. Higher value results in invalid arguments
 /// error.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId limit:(NSNumber * _Nullable)limit;
+- (instancetype)initWithDocId:(NSString *)docId limit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId;
+- (instancetype)initWithDocId:(NSString *)docId;
 
 @end
 
@@ -70,7 +72,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListUsersOnFolderArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListUsersOnFolderArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListUsersOnFolderArgs *)instance;
 
 ///
 /// Deserializes `DBPAPERListUsersOnFolderArgs` instances.
@@ -80,6 +82,8 @@
 ///
 /// @return An instantiation of the `DBPAPERListUsersOnFolderArgs` object.
 ///
-+ (DBPAPERListUsersOnFolderArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListUsersOnFolderArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

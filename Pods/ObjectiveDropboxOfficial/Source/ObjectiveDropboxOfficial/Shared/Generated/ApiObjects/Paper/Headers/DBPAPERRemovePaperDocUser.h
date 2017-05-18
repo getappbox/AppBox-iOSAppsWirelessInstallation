@@ -12,6 +12,8 @@
 @class DBPAPERRemovePaperDocUser;
 @class DBSHARINGMemberSelector;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,26 +23,26 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERRemovePaperDocUser : DBPAPERRefPaperDoc <DBSerializable>
+@interface DBPAPERRemovePaperDocUser : DBPAPERRefPaperDoc <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
-/// User which should be removed from the Paper doc. Specify only email or
-/// Dropbox account id.
-@property (nonatomic, readonly) DBSHARINGMemberSelector * _Nonnull member;
+/// User which should be removed from the Paper doc. Specify only email address
+/// or Dropbox account ID.
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 /// @param member User which should be removed from the Paper doc. Specify only
-/// email or Dropbox account id.
+/// email address or Dropbox account ID.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId member:(DBSHARINGMemberSelector * _Nonnull)member;
+- (instancetype)initWithDocId:(NSString *)docId member:(DBSHARINGMemberSelector *)member;
 
 @end
 
@@ -59,7 +61,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERRemovePaperDocUser` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERRemovePaperDocUser * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERRemovePaperDocUser *)instance;
 
 ///
 /// Deserializes `DBPAPERRemovePaperDocUser` instances.
@@ -69,6 +71,8 @@
 ///
 /// @return An instantiation of the `DBPAPERRemovePaperDocUser` object.
 ///
-+ (DBPAPERRemovePaperDocUser * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERRemovePaperDocUser *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

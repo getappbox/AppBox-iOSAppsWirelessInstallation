@@ -22,7 +22,6 @@
 @property (nonatomic) BOOL processing;
 @property (nonatomic) BOOL isReadyToBuild;
 @property (nonatomic) BOOL isInternetConnected;
-@property (nonatomic, weak) IBOutlet NSMenuItem *gmailLogoutButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxLogoutButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxSpaceButton;
 

@@ -6,31 +6,36 @@
 #import "DBTasks.h"
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class DBRoute;
 
 @interface DBRpcTask (Protected)
 
-- (DBRpcResponseBlockStorage _Nonnull)storageBlockWithResponseBlock:(DBRpcResponseBlockImpl _Nonnull)responseBlock;
+- (DBRpcResponseBlockStorage)storageBlockWithResponseBlock:(DBRpcResponseBlockImpl)responseBlock
+                                              cleanupBlock:(DBCleanupBlock)cleanupBlock;
 
 @end
 
 @interface DBUploadTask (Protected)
 
-- (DBUploadResponseBlockStorage _Nonnull)storageBlockWithResponseBlock:
-    (DBUploadResponseBlockImpl _Nonnull)responseBlock;
+- (DBUploadResponseBlockStorage)storageBlockWithResponseBlock:(DBUploadResponseBlockImpl)responseBlock
+                                                 cleanupBlock:(DBCleanupBlock)cleanupBlock;
 
 @end
 
 @interface DBDownloadUrlTask (Protected)
 
-- (DBDownloadResponseBlockStorage _Nonnull)storageBlockWithResponseBlock:
-    (DBDownloadUrlResponseBlockImpl _Nonnull)responseBlock;
+- (DBDownloadResponseBlockStorage)storageBlockWithResponseBlock:(DBDownloadUrlResponseBlockImpl)responseBlock
+                                                   cleanupBlock:(DBCleanupBlock)cleanupBlock;
 
 @end
 
 @interface DBDownloadDataTask (Protected)
 
-- (DBDownloadResponseBlockStorage _Nonnull)storageBlockWithResponseBlock:
-    (DBDownloadDataResponseBlockImpl _Nonnull)responseBlock;
+- (DBDownloadResponseBlockStorage)storageBlockWithResponseBlock:(DBDownloadDataResponseBlockImpl)responseBlock
+                                                   cleanupBlock:(DBCleanupBlock)cleanupBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

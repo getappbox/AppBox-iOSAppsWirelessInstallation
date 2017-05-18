@@ -11,6 +11,8 @@
 @class DBSHARINGCreateSharedLinkWithSettingsArg;
 @class DBSHARINGSharedLinkSettings;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGCreateSharedLinkWithSettingsArg : NSObject <DBSerializable>
+@interface DBSHARINGCreateSharedLinkWithSettingsArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path to be shared by the shared link
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// The requested settings for the newly created shared link
-@property (nonatomic, readonly) DBSHARINGSharedLinkSettings * _Nullable settings;
+@property (nonatomic, readonly, nullable) DBSHARINGSharedLinkSettings *settings;
 
 #pragma mark - Constructors
 
@@ -40,7 +42,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path settings:(DBSHARINGSharedLinkSettings * _Nullable)settings;
+- (instancetype)initWithPath:(NSString *)path settings:(nullable DBSHARINGSharedLinkSettings *)settings;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -50,7 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -70,7 +74,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCreateSharedLinkWithSettingsArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGCreateSharedLinkWithSettingsArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGCreateSharedLinkWithSettingsArg` instances.
@@ -81,6 +85,8 @@
 /// @return An instantiation of the `DBSHARINGCreateSharedLinkWithSettingsArg`
 /// object.
 ///
-+ (DBSHARINGCreateSharedLinkWithSettingsArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGCreateSharedLinkWithSettingsArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBFILESAddPropertiesError;
 @class DBFILESLookupError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESAddPropertiesError : NSObject <DBSerializable>
+@interface DBFILESAddPropertiesError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -56,11 +58,11 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 /// Property template does not exist for given identifier. @note Ensure the
 /// `isTemplateNotFound` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull templateNotFound;
+@property (nonatomic, readonly, copy) NSString *templateNotFound;
 
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESLookupError *path;
 
 #pragma mark - Constructors
 
@@ -75,7 +77,7 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateNotFound:(NSString * _Nonnull)templateNotFound;
+- (instancetype)initWithTemplateNotFound:(NSString *)templateNotFound;
 
 ///
 /// Initializes union class with tag state of "restricted_content".
@@ -85,14 +87,14 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRestrictedContent;
+- (instancetype)initWithRestrictedContent;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "path".
@@ -101,7 +103,7 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESLookupError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
 /// Initializes union class with tag state of "property_field_too_large".
@@ -111,7 +113,7 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPropertyFieldTooLarge;
+- (instancetype)initWithPropertyFieldTooLarge;
 
 ///
 /// Initializes union class with tag state of "does_not_fit_template".
@@ -121,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDoesNotFitTemplate;
+- (instancetype)initWithDoesNotFitTemplate;
 
 ///
 /// Initializes union class with tag state of "property_group_already_exists".
@@ -131,7 +133,9 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPropertyGroupAlreadyExists;
+- (instancetype)initWithPropertyGroupAlreadyExists;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -205,7 +209,7 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -224,7 +228,7 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESAddPropertiesError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESAddPropertiesError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESAddPropertiesError *)instance;
 
 ///
 /// Deserializes `DBFILESAddPropertiesError` instances.
@@ -234,6 +238,8 @@ typedef NS_ENUM(NSInteger, DBFILESAddPropertiesErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESAddPropertiesError` object.
 ///
-+ (DBFILESAddPropertiesError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESAddPropertiesError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

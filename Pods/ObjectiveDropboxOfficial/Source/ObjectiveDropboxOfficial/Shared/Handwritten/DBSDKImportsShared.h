@@ -8,11 +8,13 @@
 
 /// Import handwritten shared files
 
+#import "DBAppClient.h"
 #import "DBClientsManager.h"
 #import "DBTeamClient.h"
 #import "DBUserClient.h"
 
 /// Networking
+#import "DBGlobalErrorResponseHandler.h"
 #import "DBHandlerTypes.h"
 #import "DBRequestErrors.h"
 #import "DBTasks.h"
@@ -24,7 +26,7 @@
 #import "DBTransportDefaultConfig.h"
 
 /// OAuth
-#import "DBOAuth.h"
+#import "DBOAuthManager.h"
 #import "DBOAuthResult.h"
 #import "DBSDKKeychain.h"
 #import "DBSharedApplicationProtocol.h"

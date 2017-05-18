@@ -11,6 +11,8 @@
 @class DBTEAMTeamFolderMetadata;
 @class DBTEAMTeamFolderStatus;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,18 +24,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamFolderMetadata : NSObject <DBSerializable>
+@interface DBTEAMTeamFolderMetadata : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID of the team folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull teamFolderId;
+@property (nonatomic, readonly, copy) NSString *teamFolderId;
 
 /// The name of the team folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /// The status of the team folder.
-@property (nonatomic, readonly) DBTEAMTeamFolderStatus * _Nonnull status;
+@property (nonatomic, readonly) DBTEAMTeamFolderStatus *status;
 
 #pragma mark - Constructors
 
@@ -46,9 +48,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolderId:(NSString * _Nonnull)teamFolderId
-                                        name:(NSString * _Nonnull)name
-                                      status:(DBTEAMTeamFolderStatus * _Nonnull)status;
+- (instancetype)initWithTeamFolderId:(NSString *)teamFolderId
+                                name:(NSString *)name
+                              status:(DBTEAMTeamFolderStatus *)status;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -67,7 +71,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamFolderMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamFolderMetadata *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderMetadata` instances.
@@ -77,6 +81,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderMetadata` object.
 ///
-+ (DBTEAMTeamFolderMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamFolderMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

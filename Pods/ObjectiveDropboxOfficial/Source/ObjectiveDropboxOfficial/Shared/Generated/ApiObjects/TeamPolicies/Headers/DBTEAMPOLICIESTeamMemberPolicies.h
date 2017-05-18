@@ -12,6 +12,8 @@
 @class DBTEAMPOLICIESTeamMemberPolicies;
 @class DBTEAMPOLICIESTeamSharingPolicies;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,19 +25,19 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMPOLICIESTeamMemberPolicies : NSObject <DBSerializable>
+@interface DBTEAMPOLICIESTeamMemberPolicies : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Policies governing sharing.
-@property (nonatomic, readonly) DBTEAMPOLICIESTeamSharingPolicies * _Nonnull sharing;
+@property (nonatomic, readonly) DBTEAMPOLICIESTeamSharingPolicies *sharing;
 
 /// This describes the Enterprise Mobility Management (EMM) state for this team.
 /// This information can be used to understand if an organization is integrating
 /// with a third-party EMM vendor to further manage and apply restrictions upon
 /// the team's Dropbox usage on mobile devices. This is a new feature and in the
 /// future we'll be adding more new fields and additional documentation.
-@property (nonatomic, readonly) DBTEAMPOLICIESEmmState * _Nonnull emmState;
+@property (nonatomic, readonly) DBTEAMPOLICIESEmmState *emmState;
 
 #pragma mark - Constructors
 
@@ -52,8 +54,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharing:(DBTEAMPOLICIESTeamSharingPolicies * _Nonnull)sharing
-                               emmState:(DBTEAMPOLICIESEmmState * _Nonnull)emmState;
+- (instancetype)initWithSharing:(DBTEAMPOLICIESTeamSharingPolicies *)sharing
+                       emmState:(DBTEAMPOLICIESEmmState *)emmState;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -73,7 +77,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESTeamMemberPolicies` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMPOLICIESTeamMemberPolicies * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMPOLICIESTeamMemberPolicies *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESTeamMemberPolicies` instances.
@@ -83,6 +87,8 @@
 ///
 /// @return An instantiation of the `DBTEAMPOLICIESTeamMemberPolicies` object.
 ///
-+ (DBTEAMPOLICIESTeamMemberPolicies * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMPOLICIESTeamMemberPolicies *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

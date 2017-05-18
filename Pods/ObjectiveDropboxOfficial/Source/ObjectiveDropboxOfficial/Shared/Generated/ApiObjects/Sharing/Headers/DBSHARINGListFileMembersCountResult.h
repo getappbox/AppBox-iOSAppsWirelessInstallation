@@ -11,6 +11,8 @@
 @class DBSHARINGListFileMembersCountResult;
 @class DBSHARINGSharedFileMembers;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFileMembersCountResult : NSObject <DBSerializable>
+@interface DBSHARINGListFileMembersCountResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A list of members on this file.
-@property (nonatomic, readonly) DBSHARINGSharedFileMembers * _Nonnull members;
+@property (nonatomic, readonly) DBSHARINGSharedFileMembers *members;
 
 /// The number of members on this file. This does not include inherited members.
-@property (nonatomic, readonly) NSNumber * _Nonnull memberCount;
+@property (nonatomic, readonly) NSNumber *memberCount;
 
 #pragma mark - Constructors
 
@@ -41,8 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMembers:(DBSHARINGSharedFileMembers * _Nonnull)members
-                            memberCount:(NSNumber * _Nonnull)memberCount;
+- (instancetype)initWithMembers:(DBSHARINGSharedFileMembers *)members memberCount:(NSNumber *)memberCount;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -62,7 +65,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersCountResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFileMembersCountResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFileMembersCountResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersCountResult` instances.
@@ -73,6 +76,8 @@
 /// @return An instantiation of the `DBSHARINGListFileMembersCountResult`
 /// object.
 ///
-+ (DBSHARINGListFileMembersCountResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFileMembersCountResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

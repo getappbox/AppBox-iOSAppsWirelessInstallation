@@ -14,6 +14,8 @@
 @class DBSHARINGGroupMembershipInfo;
 @class DBSHARINGMemberPermission;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,12 +27,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGGroupMembershipInfo : DBSHARINGMembershipInfo <DBSerializable>
+@interface DBSHARINGGroupMembershipInfo : DBSHARINGMembershipInfo <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The information about the membership group.
-@property (nonatomic, readonly) DBSHARINGGroupInfo * _Nonnull group;
+@property (nonatomic, readonly) DBSHARINGGroupInfo *group;
 
 #pragma mark - Constructors
 
@@ -46,11 +48,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                                     group:(DBSHARINGGroupInfo * _Nonnull)group
-                               permissions:(NSArray<DBSHARINGMemberPermission *> * _Nullable)permissions
-                                  initials:(NSString * _Nullable)initials
-                               isInherited:(NSNumber * _Nullable)isInherited;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType
+                             group:(DBSHARINGGroupInfo *)group
+                       permissions:(nullable NSArray<DBSHARINGMemberPermission *> *)permissions
+                          initials:(nullable NSString *)initials
+                       isInherited:(nullable NSNumber *)isInherited;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -61,8 +63,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                                     group:(DBSHARINGGroupInfo * _Nonnull)group;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType group:(DBSHARINGGroupInfo *)group;
 
 @end
 
@@ -82,7 +83,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGroupMembershipInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGGroupMembershipInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGGroupMembershipInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGGroupMembershipInfo` instances.
@@ -92,6 +93,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGGroupMembershipInfo` object.
 ///
-+ (DBSHARINGGroupMembershipInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGGroupMembershipInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

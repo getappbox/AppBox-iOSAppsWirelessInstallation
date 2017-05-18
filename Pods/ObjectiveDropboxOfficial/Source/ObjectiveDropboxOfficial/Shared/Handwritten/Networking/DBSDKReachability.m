@@ -63,6 +63,10 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
   SCNetworkReachabilityRef _reachabilityRef;
 }
 
+- (void)dealloc {
+  CFRelease(_reachabilityRef);
+}
+
 + (instancetype)reachabilityWithHostName:(NSString *)hostName {
   DBSDKReachability *returnValue = NULL;
   SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);

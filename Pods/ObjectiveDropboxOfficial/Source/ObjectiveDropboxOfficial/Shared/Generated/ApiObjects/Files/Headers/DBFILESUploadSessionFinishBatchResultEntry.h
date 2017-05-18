@@ -12,6 +12,8 @@
 @class DBFILESUploadSessionFinishBatchResultEntry;
 @class DBFILESUploadSessionFinishError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionFinishBatchResultEntry : NSObject <DBSerializable>
+@interface DBFILESUploadSessionFinishBatchResultEntry : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -42,11 +44,11 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
 
 /// (no description). @note Ensure the `isSuccess` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESFileMetadata * _Nonnull success;
+@property (nonatomic, readonly) DBFILESFileMetadata *success;
 
 /// (no description). @note Ensure the `isFailure` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESUploadSessionFinishError * _Nonnull failure;
+@property (nonatomic, readonly) DBFILESUploadSessionFinishError *failure;
 
 #pragma mark - Constructors
 
@@ -57,7 +59,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(DBFILESFileMetadata * _Nonnull)success;
+- (instancetype)initWithSuccess:(DBFILESFileMetadata *)success;
 
 ///
 /// Initializes union class with tag state of "failure".
@@ -66,7 +68,9 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailure:(DBFILESUploadSessionFinishError * _Nonnull)failure;
+- (instancetype)initWithFailure:(DBFILESUploadSessionFinishError *)failure;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -95,7 +99,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -116,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishBatchResultEntry` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionFinishBatchResultEntry * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionFinishBatchResultEntry *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishBatchResultEntry` instances.
@@ -127,6 +131,8 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
 /// @return An instantiation of the `DBFILESUploadSessionFinishBatchResultEntry`
 /// object.
 ///
-+ (DBFILESUploadSessionFinishBatchResultEntry * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionFinishBatchResultEntry *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

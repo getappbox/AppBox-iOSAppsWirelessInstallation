@@ -8,6 +8,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="EmailPreferencesViewController">
             <connections>
+                <outlet property="emailTextField" destination="SqH-2c-6DE" id="me5-9B-4CQ"/>
+                <outlet property="personalMessageTextField" destination="Zmp-Qj-gfW" id="ikY-bw-woi"/>
+                <outlet property="saveButton" destination="A4O-b5-E8c" id="ZHL-UK-Ew4"/>
+                <outlet property="testMailButton" destination="Ojl-kH-0fE" id="rJC-LS-wG0"/>
                 <outlet property="view" destination="c22-O7-iKe" id="dwb-j9-cyL"/>
             </connections>
         </customObject>
@@ -76,11 +80,26 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="saveButtonTapped:" target="-2" id="JEu-V2-Y7y"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-kH-0fE">
+                    <rect key="frame" x="412" y="13" width="151" height="32"/>
+                    <buttonCell key="cell" type="push" title="Send a test E-mail" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Uhy-pm-c2L">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="sendTestMailButtonTapped:" target="-2" id="SG2-fA-h1g"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
                 <constraint firstItem="PXi-3w-TV5" firstAttribute="leading" secondItem="vov-Bt-7Xg" secondAttribute="leading" id="5T0-vs-Kep"/>
                 <constraint firstItem="BWz-cx-cD3" firstAttribute="top" secondItem="Zmp-Qj-gfW" secondAttribute="bottom" constant="5" id="BDC-JG-oOO"/>
+                <constraint firstItem="A4O-b5-E8c" firstAttribute="leading" secondItem="Ojl-kH-0fE" secondAttribute="trailing" constant="20" id="DRQ-om-ITc"/>
+                <constraint firstItem="A4O-b5-E8c" firstAttribute="centerY" secondItem="Ojl-kH-0fE" secondAttribute="centerY" id="Ffm-0P-NWi"/>
                 <constraint firstItem="A4O-b5-E8c" firstAttribute="top" secondItem="BWz-cx-cD3" secondAttribute="bottom" constant="15" id="IM7-ez-jFc"/>
                 <constraint firstAttribute="trailing" secondItem="SqH-2c-6DE" secondAttribute="trailing" constant="20" id="PQp-js-ooH"/>
                 <constraint firstAttribute="bottom" secondItem="A4O-b5-E8c" secondAttribute="bottom" constant="20" id="Pcz-56-ptf"/>

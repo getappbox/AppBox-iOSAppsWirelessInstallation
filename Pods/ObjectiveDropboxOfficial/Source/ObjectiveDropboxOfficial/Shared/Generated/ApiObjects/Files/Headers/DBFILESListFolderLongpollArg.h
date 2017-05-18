@@ -10,6 +10,8 @@
 
 @class DBFILESListFolderLongpollArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,20 +21,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESListFolderLongpollArg : NSObject <DBSerializable>
+@interface DBFILESListFolderLongpollArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A cursor as returned by `listFolder` or `listFolderContinue`. Cursors
 /// retrieved by setting `includeMediaInfo` in `DBFILESListFolderArg` to true
 /// are not supported.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 /// A timeout in seconds. The request will block for at most this length of
 /// time, plus up to 90 seconds of random jitter added to avoid the thundering
 /// herd problem. Care should be taken when using this parameter, as some
 /// network infrastructure does not support long timeouts.
-@property (nonatomic, readonly) NSNumber * _Nonnull timeout;
+@property (nonatomic, readonly) NSNumber *timeout;
 
 #pragma mark - Constructors
 
@@ -49,7 +51,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nonnull)cursor timeout:(NSNumber * _Nullable)timeout;
+- (instancetype)initWithCursor:(NSString *)cursor timeout:(nullable NSNumber *)timeout;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -61,7 +63,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nonnull)cursor;
+- (instancetype)initWithCursor:(NSString *)cursor;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -81,7 +85,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderLongpollArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESListFolderLongpollArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESListFolderLongpollArg *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderLongpollArg` instances.
@@ -91,6 +95,8 @@
 ///
 /// @return An instantiation of the `DBFILESListFolderLongpollArg` object.
 ///
-+ (DBFILESListFolderLongpollArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESListFolderLongpollArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

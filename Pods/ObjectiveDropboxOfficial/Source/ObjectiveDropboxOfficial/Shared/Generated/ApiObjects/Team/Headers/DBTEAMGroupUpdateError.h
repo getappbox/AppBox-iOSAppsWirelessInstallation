@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupUpdateError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupUpdateError : NSObject <DBSerializable>
+@interface DBTEAMGroupUpdateError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -59,14 +61,14 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNotFound;
+- (instancetype)initWithGroupNotFound;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "system_managed_group_disallowed".
@@ -76,7 +78,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSystemManagedGroupDisallowed;
+- (instancetype)initWithSystemManagedGroupDisallowed;
 
 ///
 /// Initializes union class with tag state of "group_name_already_used".
@@ -86,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNameAlreadyUsed;
+- (instancetype)initWithGroupNameAlreadyUsed;
 
 ///
 /// Initializes union class with tag state of "group_name_invalid".
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNameInvalid;
+- (instancetype)initWithGroupNameInvalid;
 
 ///
 /// Initializes union class with tag state of "external_id_already_in_use".
@@ -106,7 +108,9 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithExternalIdAlreadyInUse;
+- (instancetype)initWithExternalIdAlreadyInUse;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -165,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -184,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupUpdateError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupUpdateError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupUpdateError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupUpdateError` instances.
@@ -194,6 +198,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupUpdateError` object.
 ///
-+ (DBTEAMGroupUpdateError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupUpdateError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

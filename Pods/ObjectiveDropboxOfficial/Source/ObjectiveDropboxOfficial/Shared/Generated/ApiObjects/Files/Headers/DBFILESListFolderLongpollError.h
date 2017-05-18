@@ -10,6 +10,8 @@
 
 @class DBFILESListFolderLongpollError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESListFolderLongpollError : NSObject <DBSerializable>
+@interface DBFILESListFolderLongpollError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,14 +50,16 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithReset;
+- (instancetype)initWithReset;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -78,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -98,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderLongpollError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESListFolderLongpollError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESListFolderLongpollError *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderLongpollError` instances.
@@ -108,6 +112,8 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESListFolderLongpollError` object.
 ///
-+ (DBFILESListFolderLongpollError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESListFolderLongpollError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

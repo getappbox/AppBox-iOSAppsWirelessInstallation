@@ -10,6 +10,8 @@
 
 @class DBFILESThumbnailSize;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESThumbnailSize : NSObject <DBSerializable>
+@interface DBFILESThumbnailSize : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -55,7 +57,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithW32h32;
+- (instancetype)initWithW32h32;
 
 ///
 /// Initializes union class with tag state of "w64h64".
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithW64h64;
+- (instancetype)initWithW64h64;
 
 ///
 /// Initializes union class with tag state of "w128h128".
@@ -73,7 +75,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithW128h128;
+- (instancetype)initWithW128h128;
 
 ///
 /// Initializes union class with tag state of "w640h480".
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithW640h480;
+- (instancetype)initWithW640h480;
 
 ///
 /// Initializes union class with tag state of "w1024h768".
@@ -91,7 +93,9 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithW1024h768;
+- (instancetype)initWithW1024h768;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -135,7 +139,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -154,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESThumbnailSize` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESThumbnailSize * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESThumbnailSize *)instance;
 
 ///
 /// Deserializes `DBFILESThumbnailSize` instances.
@@ -164,6 +168,8 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 ///
 /// @return An instantiation of the `DBFILESThumbnailSize` object.
 ///
-+ (DBFILESThumbnailSize * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESThumbnailSize *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

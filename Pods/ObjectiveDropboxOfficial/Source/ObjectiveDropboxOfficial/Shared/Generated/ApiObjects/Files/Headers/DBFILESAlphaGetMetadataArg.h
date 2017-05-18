@@ -11,6 +11,8 @@
 
 @class DBFILESAlphaGetMetadataArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,13 +22,13 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESAlphaGetMetadataArg : DBFILESGetMetadataArg <DBSerializable>
+@interface DBFILESAlphaGetMetadataArg : DBFILESGetMetadataArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// If set to a valid list of template IDs, `propertyGroups` in
 /// `DBFILESFileMetadata` is set for files with custom properties.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nullable includePropertyTemplates;
+@property (nonatomic, readonly, nullable) NSArray<NSString *> *includePropertyTemplates;
 
 #pragma mark - Constructors
 
@@ -48,11 +50,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path
-                    includeMediaInfo:(NSNumber * _Nullable)includeMediaInfo
-                      includeDeleted:(NSNumber * _Nullable)includeDeleted
-     includeHasExplicitSharedMembers:(NSNumber * _Nullable)includeHasExplicitSharedMembers
-            includePropertyTemplates:(NSArray<NSString *> * _Nullable)includePropertyTemplates;
+- (instancetype)initWithPath:(NSString *)path
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+           includePropertyTemplates:(nullable NSArray<NSString *> *)includePropertyTemplates;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -62,7 +64,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
 
 @end
 
@@ -81,7 +83,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESAlphaGetMetadataArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESAlphaGetMetadataArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESAlphaGetMetadataArg *)instance;
 
 ///
 /// Deserializes `DBFILESAlphaGetMetadataArg` instances.
@@ -91,6 +93,8 @@
 ///
 /// @return An instantiation of the `DBFILESAlphaGetMetadataArg` object.
 ///
-+ (DBFILESAlphaGetMetadataArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESAlphaGetMetadataArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

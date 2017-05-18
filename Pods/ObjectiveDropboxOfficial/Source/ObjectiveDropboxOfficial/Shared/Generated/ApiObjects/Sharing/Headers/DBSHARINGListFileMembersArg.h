@@ -11,6 +11,8 @@
 @class DBSHARINGListFileMembersArg;
 @class DBSHARINGMemberAction;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,22 +24,22 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFileMembersArg : NSObject <DBSerializable>
+@interface DBSHARINGListFileMembersArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The file for which you want to see members.
-@property (nonatomic, readonly, copy) NSString * _Nonnull file;
+@property (nonatomic, readonly, copy) NSString *file;
 
 /// The actions for which to return permissions on a member.
-@property (nonatomic, readonly) NSArray<DBSHARINGMemberAction *> * _Nullable actions;
+@property (nonatomic, readonly, nullable) NSArray<DBSHARINGMemberAction *> *actions;
 
 /// Whether to include members who only have access from a parent shared folder.
-@property (nonatomic, readonly) NSNumber * _Nonnull includeInherited;
+@property (nonatomic, readonly) NSNumber *includeInherited;
 
 /// Number of members to return max per query. Defaults to 100 if no limit is
 /// specified.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
 
@@ -53,10 +55,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file
-                             actions:(NSArray<DBSHARINGMemberAction *> * _Nullable)actions
-                    includeInherited:(NSNumber * _Nullable)includeInherited
-                               limit:(NSNumber * _Nullable)limit;
+- (instancetype)initWithFile:(NSString *)file
+                     actions:(nullable NSArray<DBSHARINGMemberAction *> *)actions
+            includeInherited:(nullable NSNumber *)includeInherited
+                       limit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -66,7 +68,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file;
+- (instancetype)initWithFile:(NSString *)file;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -85,7 +89,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFileMembersArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFileMembersArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersArg` instances.
@@ -95,6 +99,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGListFileMembersArg` object.
 ///
-+ (DBSHARINGListFileMembersArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFileMembersArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

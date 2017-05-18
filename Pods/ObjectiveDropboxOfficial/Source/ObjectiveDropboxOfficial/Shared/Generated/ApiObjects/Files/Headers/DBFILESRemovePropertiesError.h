@@ -12,6 +12,8 @@
 @class DBFILESLookupError;
 @class DBFILESRemovePropertiesError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRemovePropertiesError : NSObject <DBSerializable>
+@interface DBFILESRemovePropertiesError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -51,15 +53,15 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 /// Property template does not exist for given identifier. @note Ensure the
 /// `isTemplateNotFound` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull templateNotFound;
+@property (nonatomic, readonly, copy) NSString *templateNotFound;
 
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESLookupError *path;
 
 /// (no description). @note Ensure the `isPropertyGroupLookup` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookUpPropertiesError * _Nonnull propertyGroupLookup;
+@property (nonatomic, readonly) DBFILESLookUpPropertiesError *propertyGroupLookup;
 
 #pragma mark - Constructors
 
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateNotFound:(NSString * _Nonnull)templateNotFound;
+- (instancetype)initWithTemplateNotFound:(NSString *)templateNotFound;
 
 ///
 /// Initializes union class with tag state of "restricted_content".
@@ -84,14 +86,14 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRestrictedContent;
+- (instancetype)initWithRestrictedContent;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "path".
@@ -100,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESLookupError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
 /// Initializes union class with tag state of "property_group_lookup".
@@ -109,7 +111,9 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPropertyGroupLookup:(DBFILESLookUpPropertiesError * _Nonnull)propertyGroupLookup;
+- (instancetype)initWithPropertyGroupLookup:(DBFILESLookUpPropertiesError *)propertyGroupLookup;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -169,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -189,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRemovePropertiesError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRemovePropertiesError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRemovePropertiesError *)instance;
 
 ///
 /// Deserializes `DBFILESRemovePropertiesError` instances.
@@ -199,6 +203,8 @@ typedef NS_ENUM(NSInteger, DBFILESRemovePropertiesErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESRemovePropertiesError` object.
 ///
-+ (DBFILESRemovePropertiesError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRemovePropertiesError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

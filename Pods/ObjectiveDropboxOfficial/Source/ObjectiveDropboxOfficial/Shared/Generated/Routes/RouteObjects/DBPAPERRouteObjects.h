@@ -8,6 +8,8 @@
 
 @class DBRoute;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Stone route objects for the Paper namespace. Each route in the Paper
 /// namespace has its own static object, which contains information about the
@@ -16,45 +18,47 @@
 @interface DBPAPERRouteObjects : NSObject
 
 /// Accessor method for the docsArchive route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsArchive;
++ (DBRoute *)DBPAPERDocsArchive;
 
 /// Accessor method for the docsDownload route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsDownload;
++ (DBRoute *)DBPAPERDocsDownload;
 
 /// Accessor method for the docsFolderUsersList route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsFolderUsersList;
++ (DBRoute *)DBPAPERDocsFolderUsersList;
 
 /// Accessor method for the docsFolderUsersListContinue route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsFolderUsersListContinue;
++ (DBRoute *)DBPAPERDocsFolderUsersListContinue;
 
 /// Accessor method for the docsGetFolderInfo route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsGetFolderInfo;
++ (DBRoute *)DBPAPERDocsGetFolderInfo;
 
 /// Accessor method for the docsList route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsList;
++ (DBRoute *)DBPAPERDocsList;
 
 /// Accessor method for the docsListContinue route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsListContinue;
++ (DBRoute *)DBPAPERDocsListContinue;
 
 /// Accessor method for the docsPermanentlyDelete route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsPermanentlyDelete;
++ (DBRoute *)DBPAPERDocsPermanentlyDelete;
 
 /// Accessor method for the docsSharingPolicyGet route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsSharingPolicyGet;
++ (DBRoute *)DBPAPERDocsSharingPolicyGet;
 
 /// Accessor method for the docsSharingPolicySet route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsSharingPolicySet;
++ (DBRoute *)DBPAPERDocsSharingPolicySet;
 
 /// Accessor method for the docsUsersAdd route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsUsersAdd;
++ (DBRoute *)DBPAPERDocsUsersAdd;
 
 /// Accessor method for the docsUsersList route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsUsersList;
++ (DBRoute *)DBPAPERDocsUsersList;
 
 /// Accessor method for the docsUsersListContinue route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsUsersListContinue;
++ (DBRoute *)DBPAPERDocsUsersListContinue;
 
 /// Accessor method for the docsUsersRemove route object.
-+ (DBRoute * _Nonnull)DBPAPERDocsUsersRemove;
++ (DBRoute *)DBPAPERDocsUsersRemove;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 @class DBUSERSTeamSpaceAllocation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,15 +21,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSTeamSpaceAllocation : NSObject <DBSerializable>
+@interface DBUSERSTeamSpaceAllocation : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The total space currently used by the user's team (bytes).
-@property (nonatomic, readonly) NSNumber * _Nonnull used;
+@property (nonatomic, readonly) NSNumber *used;
 
 /// The total space allocated to the user's team (bytes).
-@property (nonatomic, readonly) NSNumber * _Nonnull allocated;
+@property (nonatomic, readonly) NSNumber *allocated;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUsed:(NSNumber * _Nonnull)used allocated:(NSNumber * _Nonnull)allocated;
+- (instancetype)initWithUsed:(NSNumber *)used allocated:(NSNumber *)allocated;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,7 +62,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSTeamSpaceAllocation` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSTeamSpaceAllocation * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSTeamSpaceAllocation *)instance;
 
 ///
 /// Deserializes `DBUSERSTeamSpaceAllocation` instances.
@@ -68,6 +72,8 @@
 ///
 /// @return An instantiation of the `DBUSERSTeamSpaceAllocation` object.
 ///
-+ (DBUSERSTeamSpaceAllocation * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSTeamSpaceAllocation *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

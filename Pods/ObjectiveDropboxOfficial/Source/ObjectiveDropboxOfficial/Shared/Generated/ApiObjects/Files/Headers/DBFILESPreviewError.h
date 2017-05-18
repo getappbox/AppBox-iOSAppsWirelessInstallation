@@ -11,6 +11,8 @@
 @class DBFILESLookupError;
 @class DBFILESPreviewError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESPreviewError : NSObject <DBSerializable>
+@interface DBFILESPreviewError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,7 +50,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 /// An error occurs when downloading metadata for the file. @note Ensure the
 /// `isPath` method returns true before accessing, otherwise a runtime exception
 /// will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESLookupError *path;
 
 #pragma mark - Constructors
 
@@ -62,7 +64,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESLookupError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
 /// Initializes union class with tag state of "in_progress".
@@ -72,7 +74,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInProgress;
+- (instancetype)initWithInProgress;
 
 ///
 /// Initializes union class with tag state of "unsupported_extension".
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnsupportedExtension;
+- (instancetype)initWithUnsupportedExtension;
 
 ///
 /// Initializes union class with tag state of "unsupported_content".
@@ -92,7 +94,9 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnsupportedContent;
+- (instancetype)initWithUnsupportedContent;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -136,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -155,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESPreviewError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESPreviewError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESPreviewError *)instance;
 
 ///
 /// Deserializes `DBFILESPreviewError` instances.
@@ -165,6 +169,8 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESPreviewError` object.
 ///
-+ (DBFILESPreviewError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESPreviewError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBFILESListFolderResult;
 @class DBFILESMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,20 +22,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESListFolderResult : NSObject <DBSerializable>
+@interface DBFILESListFolderResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The files and (direct) subfolders in the folder.
-@property (nonatomic, readonly) NSArray<DBFILESMetadata *> * _Nonnull entries;
+@property (nonatomic, readonly) NSArray<DBFILESMetadata *> *entries;
 
 /// Pass the cursor into `listFolderContinue` to see what's changed in the
 /// folder since your previous query.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 /// If true, then there are more entries available. Pass the cursor to
 /// `listFolderContinue` to retrieve the rest.
-@property (nonatomic, readonly) NSNumber * _Nonnull hasMore;
+@property (nonatomic, readonly) NSNumber *hasMore;
 
 #pragma mark - Constructors
 
@@ -48,9 +50,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEntries:(NSArray<DBFILESMetadata *> * _Nonnull)entries
-                                 cursor:(NSString * _Nonnull)cursor
-                                hasMore:(NSNumber * _Nonnull)hasMore;
+- (instancetype)initWithEntries:(NSArray<DBFILESMetadata *> *)entries
+                         cursor:(NSString *)cursor
+                        hasMore:(NSNumber *)hasMore;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,7 +73,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESListFolderResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESListFolderResult *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderResult` instances.
@@ -79,6 +83,8 @@
 ///
 /// @return An instantiation of the `DBFILESListFolderResult` object.
 ///
-+ (DBFILESListFolderResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESListFolderResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

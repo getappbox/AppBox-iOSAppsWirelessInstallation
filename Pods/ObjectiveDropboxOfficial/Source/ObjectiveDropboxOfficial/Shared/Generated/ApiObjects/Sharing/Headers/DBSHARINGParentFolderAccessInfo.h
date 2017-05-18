@@ -11,6 +11,8 @@
 @class DBSHARINGMemberPermission;
 @class DBSHARINGParentFolderAccessInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,18 +24,22 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGParentFolderAccessInfo : NSObject <DBSerializable>
+@interface DBSHARINGParentFolderAccessInfo : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Display name for the folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull folderName;
+@property (nonatomic, readonly, copy) NSString *folderName;
 
 /// The identifier of the parent shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 /// The user's permissions for the parent shared folder.
-@property (nonatomic, readonly) NSArray<DBSHARINGMemberPermission *> * _Nonnull permissions;
+@property (nonatomic, readonly) NSArray<DBSHARINGMemberPermission *> *permissions;
+
+/// The full path to the parent shared folder relative to the acting user's
+/// root.
+@property (nonatomic, readonly, copy) NSString *path;
 
 #pragma mark - Constructors
 
@@ -43,12 +49,17 @@
 /// @param folderName Display name for the folder.
 /// @param sharedFolderId The identifier of the parent shared folder.
 /// @param permissions The user's permissions for the parent shared folder.
+/// @param path The full path to the parent shared folder relative to the acting
+/// user's root.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFolderName:(NSString * _Nonnull)folderName
-                            sharedFolderId:(NSString * _Nonnull)sharedFolderId
-                               permissions:(NSArray<DBSHARINGMemberPermission *> * _Nonnull)permissions;
+- (instancetype)initWithFolderName:(NSString *)folderName
+                    sharedFolderId:(NSString *)sharedFolderId
+                       permissions:(NSArray<DBSHARINGMemberPermission *> *)permissions
+                              path:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -68,7 +79,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGParentFolderAccessInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGParentFolderAccessInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGParentFolderAccessInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGParentFolderAccessInfo` instances.
@@ -78,6 +89,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGParentFolderAccessInfo` object.
 ///
-+ (DBSHARINGParentFolderAccessInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGParentFolderAccessInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

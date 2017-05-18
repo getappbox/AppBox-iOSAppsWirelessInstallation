@@ -14,6 +14,8 @@
 @class DBSHARINGTeamMemberInfo;
 @class DBUSERSTeam;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,7 +27,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGFolderLinkMetadata : DBSHARINGSharedLinkMetadata <DBSerializable>
+@interface DBSHARINGFolderLinkMetadata : DBSHARINGSharedLinkMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -51,14 +53,14 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                               name:(NSString * _Nonnull)name
-                    linkPermissions:(DBSHARINGLinkPermissions * _Nonnull)linkPermissions
-                                id_:(NSString * _Nullable)id_
-                            expires:(NSDate * _Nullable)expires
-                          pathLower:(NSString * _Nullable)pathLower
-                     teamMemberInfo:(DBSHARINGTeamMemberInfo * _Nullable)teamMemberInfo
-               contentOwnerTeamInfo:(DBUSERSTeam * _Nullable)contentOwnerTeamInfo;
+- (instancetype)initWithUrl:(NSString *)url
+                       name:(NSString *)name
+            linkPermissions:(DBSHARINGLinkPermissions *)linkPermissions
+                        id_:(nullable NSString *)id_
+                    expires:(nullable NSDate *)expires
+                  pathLower:(nullable NSString *)pathLower
+             teamMemberInfo:(nullable DBSHARINGTeamMemberInfo *)teamMemberInfo
+       contentOwnerTeamInfo:(nullable DBUSERSTeam *)contentOwnerTeamInfo;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -71,9 +73,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url
-                               name:(NSString * _Nonnull)name
-                    linkPermissions:(DBSHARINGLinkPermissions * _Nonnull)linkPermissions;
+- (instancetype)initWithUrl:(NSString *)url
+                       name:(NSString *)name
+            linkPermissions:(DBSHARINGLinkPermissions *)linkPermissions;
 
 @end
 
@@ -92,7 +94,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFolderLinkMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGFolderLinkMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGFolderLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGFolderLinkMetadata` instances.
@@ -102,6 +104,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGFolderLinkMetadata` object.
 ///
-+ (DBSHARINGFolderLinkMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGFolderLinkMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

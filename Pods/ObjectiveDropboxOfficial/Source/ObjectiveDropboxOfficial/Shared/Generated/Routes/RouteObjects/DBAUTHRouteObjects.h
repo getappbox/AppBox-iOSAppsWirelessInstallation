@@ -8,6 +8,8 @@
 
 @class DBRoute;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Stone route objects for the Auth namespace. Each route in the Auth namespace
 /// has its own static object, which contains information about the route.
@@ -15,9 +17,11 @@
 @interface DBAUTHRouteObjects : NSObject
 
 /// Accessor method for the tokenFromOauth1 route object.
-+ (DBRoute * _Nonnull)DBAUTHTokenFromOauth1;
++ (DBRoute *)DBAUTHTokenFromOauth1;
 
 /// Accessor method for the tokenRevoke route object.
-+ (DBRoute * _Nonnull)DBAUTHTokenRevoke;
++ (DBRoute *)DBAUTHTokenRevoke;
 
 @end
+
+NS_ASSUME_NONNULL_END

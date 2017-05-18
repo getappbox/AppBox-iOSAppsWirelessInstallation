@@ -10,6 +10,8 @@
 
 @class DBTEAMTeamFolderCreateArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamFolderCreateArg : NSObject <DBSerializable>
+@interface DBTEAMTeamFolderCreateArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Name for the new team folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name;
+- (instancetype)initWithName:(NSString *)name;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -54,7 +58,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderCreateArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamFolderCreateArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamFolderCreateArg *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderCreateArg` instances.
@@ -64,6 +68,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderCreateArg` object.
 ///
-+ (DBTEAMTeamFolderCreateArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamFolderCreateArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -66,4 +66,11 @@
 ///
 - (void)removeDownloadDataTask:(DBDownloadDataTask *)task;
 
+///
+/// Determine whether there are tasks in progress.
+///
+/// @return Whether there are tasks in progress.
+///
+- (BOOL)tasksInProgress;
+
 @end

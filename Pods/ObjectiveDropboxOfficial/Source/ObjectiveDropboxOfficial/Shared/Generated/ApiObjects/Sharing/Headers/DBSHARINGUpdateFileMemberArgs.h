@@ -13,6 +13,8 @@
 @class DBSHARINGMemberSelector;
 @class DBSHARINGUpdateFileMemberArgs;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,7 +26,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUpdateFileMemberArgs : DBSHARINGChangeFileMemberAccessArgs <DBSerializable>
+@interface DBSHARINGUpdateFileMemberArgs : DBSHARINGChangeFileMemberAccessArgs <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -39,9 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file
-                              member:(DBSHARINGMemberSelector * _Nonnull)member
-                         accessLevel:(DBSHARINGAccessLevel * _Nonnull)accessLevel;
+- (instancetype)initWithFile:(NSString *)file
+                      member:(DBSHARINGMemberSelector *)member
+                 accessLevel:(DBSHARINGAccessLevel *)accessLevel;
 
 @end
 
@@ -61,7 +63,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUpdateFileMemberArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUpdateFileMemberArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUpdateFileMemberArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGUpdateFileMemberArgs` instances.
@@ -71,6 +73,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGUpdateFileMemberArgs` object.
 ///
-+ (DBSHARINGUpdateFileMemberArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUpdateFileMemberArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

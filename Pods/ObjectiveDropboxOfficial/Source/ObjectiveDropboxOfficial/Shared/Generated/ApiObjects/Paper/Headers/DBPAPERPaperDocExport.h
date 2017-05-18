@@ -12,6 +12,8 @@
 @class DBPAPERExportFormat;
 @class DBPAPERPaperDocExport;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,25 +23,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERPaperDocExport : DBPAPERRefPaperDoc <DBSerializable>
+@interface DBPAPERPaperDocExport : DBPAPERRefPaperDoc <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// (no description).
-@property (nonatomic, readonly) DBPAPERExportFormat * _Nonnull exportFormat;
+@property (nonatomic, readonly) DBPAPERExportFormat *exportFormat;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 /// @param exportFormat (no description).
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId
-                         exportFormat:(DBPAPERExportFormat * _Nonnull)exportFormat;
+- (instancetype)initWithDocId:(NSString *)docId exportFormat:(DBPAPERExportFormat *)exportFormat;
 
 @end
 
@@ -58,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperDocExport` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERPaperDocExport * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERPaperDocExport *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperDocExport` instances.
@@ -68,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBPAPERPaperDocExport` object.
 ///
-+ (DBPAPERPaperDocExport * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERPaperDocExport *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

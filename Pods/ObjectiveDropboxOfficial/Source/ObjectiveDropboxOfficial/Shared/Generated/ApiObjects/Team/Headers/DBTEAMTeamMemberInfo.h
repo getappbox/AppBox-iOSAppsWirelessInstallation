@@ -12,6 +12,8 @@
 @class DBTEAMTeamMemberInfo;
 @class DBTEAMTeamMemberProfile;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,15 +25,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamMemberInfo : NSObject <DBSerializable>
+@interface DBTEAMTeamMemberInfo : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Profile of a user as a member of a team.
-@property (nonatomic, readonly) DBTEAMTeamMemberProfile * _Nonnull profile;
+@property (nonatomic, readonly) DBTEAMTeamMemberProfile *profile;
 
 /// The user's role in the team.
-@property (nonatomic, readonly) DBTEAMAdminTier * _Nonnull role;
+@property (nonatomic, readonly) DBTEAMAdminTier *role;
 
 #pragma mark - Constructors
 
@@ -43,7 +45,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithProfile:(DBTEAMTeamMemberProfile * _Nonnull)profile role:(DBTEAMAdminTier * _Nonnull)role;
+- (instancetype)initWithProfile:(DBTEAMTeamMemberProfile *)profile role:(DBTEAMAdminTier *)role;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -62,7 +66,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamMemberInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamMemberInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamMemberInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamMemberInfo` instances.
@@ -72,6 +76,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamMemberInfo` object.
 ///
-+ (DBTEAMTeamMemberInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamMemberInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

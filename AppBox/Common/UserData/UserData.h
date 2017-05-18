@@ -10,9 +10,6 @@
 
 @interface UserData : NSObject
 
-+(BOOL)isGmailLoggedIn;
-+(void)setIsGmailLoggedIn:(BOOL)isGmailLoggedIn;
-
 +(NSString *)userEmail;
 +(void)setUserEmail:(NSString *)userEmail;
 

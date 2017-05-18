@@ -12,6 +12,8 @@
 @class DBTEAMPOLICIESTeamSharingPolicies;
 @class DBUSERSFullTeam;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,12 +25,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSFullTeam : DBUSERSTeam <DBSerializable>
+@interface DBUSERSFullTeam : DBUSERSTeam <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Team policies governing sharing.
-@property (nonatomic, readonly) DBTEAMPOLICIESTeamSharingPolicies * _Nonnull sharingPolicies;
+@property (nonatomic, readonly) DBTEAMPOLICIESTeamSharingPolicies *sharingPolicies;
 
 #pragma mark - Constructors
 
@@ -41,9 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithId_:(NSString * _Nonnull)id_
-                               name:(NSString * _Nonnull)name
-                    sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies * _Nonnull)sharingPolicies;
+- (instancetype)initWithId_:(NSString *)id_
+                       name:(NSString *)name
+            sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies *)sharingPolicies;
 
 @end
 
@@ -62,7 +64,7 @@
 /// @return A json-compatible dictionary representation of the `DBUSERSFullTeam`
 /// API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSFullTeam * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSFullTeam *)instance;
 
 ///
 /// Deserializes `DBUSERSFullTeam` instances.
@@ -72,6 +74,8 @@
 ///
 /// @return An instantiation of the `DBUSERSFullTeam` object.
 ///
-+ (DBUSERSFullTeam * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSFullTeam *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

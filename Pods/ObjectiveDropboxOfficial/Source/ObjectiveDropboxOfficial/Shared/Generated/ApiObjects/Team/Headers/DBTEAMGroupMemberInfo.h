@@ -12,6 +12,8 @@
 @class DBTEAMGroupMemberInfo;
 @class DBTEAMMemberProfile;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,15 +25,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMemberInfo : NSObject <DBSerializable>
+@interface DBTEAMGroupMemberInfo : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Profile of group member.
-@property (nonatomic, readonly) DBTEAMMemberProfile * _Nonnull profile;
+@property (nonatomic, readonly) DBTEAMMemberProfile *profile;
 
 /// The role that the user has in the group.
-@property (nonatomic, readonly) DBTEAMGroupAccessType * _Nonnull accessType;
+@property (nonatomic, readonly) DBTEAMGroupAccessType *accessType;
 
 #pragma mark - Constructors
 
@@ -43,8 +45,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithProfile:(DBTEAMMemberProfile * _Nonnull)profile
-                             accessType:(DBTEAMGroupAccessType * _Nonnull)accessType;
+- (instancetype)initWithProfile:(DBTEAMMemberProfile *)profile accessType:(DBTEAMGroupAccessType *)accessType;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +66,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMemberInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMemberInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMemberInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMemberInfo` instances.
@@ -73,6 +76,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupMemberInfo` object.
 ///
-+ (DBTEAMGroupMemberInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMemberInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

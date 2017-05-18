@@ -14,6 +14,8 @@
 @class DBSHARINGSharedLinkPolicy;
 @class DBSHARINGViewerInfoPolicy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,29 +27,29 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGFolderPolicy : NSObject <DBSerializable>
+@interface DBSHARINGFolderPolicy : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Who can be a member of this shared folder, as set on the folder itself. The
 /// effective policy may differ from this value if the team-wide policy is more
 /// restrictive. Present only if the folder is owned by a team.
-@property (nonatomic, readonly) DBSHARINGMemberPolicy * _Nullable memberPolicy;
+@property (nonatomic, readonly, nullable) DBSHARINGMemberPolicy *memberPolicy;
 
 /// Who can be a member of this shared folder, taking into account both the
 /// folder and the team-wide policy. This value may differ from that of
 /// member_policy if the team-wide policy is more restrictive than the folder
 /// policy. Present only if the folder is owned by a team.
-@property (nonatomic, readonly) DBSHARINGMemberPolicy * _Nullable resolvedMemberPolicy;
+@property (nonatomic, readonly, nullable) DBSHARINGMemberPolicy *resolvedMemberPolicy;
 
 /// Who can add and remove members from this shared folder.
-@property (nonatomic, readonly) DBSHARINGAclUpdatePolicy * _Nonnull aclUpdatePolicy;
+@property (nonatomic, readonly) DBSHARINGAclUpdatePolicy *aclUpdatePolicy;
 
 /// Who links can be shared with.
-@property (nonatomic, readonly) DBSHARINGSharedLinkPolicy * _Nonnull sharedLinkPolicy;
+@property (nonatomic, readonly) DBSHARINGSharedLinkPolicy *sharedLinkPolicy;
 
 /// Who can enable/disable viewer info for this shared folder.
-@property (nonatomic, readonly) DBSHARINGViewerInfoPolicy * _Nullable viewerInfoPolicy;
+@property (nonatomic, readonly, nullable) DBSHARINGViewerInfoPolicy *viewerInfoPolicy;
 
 #pragma mark - Constructors
 
@@ -71,11 +73,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAclUpdatePolicy:(DBSHARINGAclUpdatePolicy * _Nonnull)aclUpdatePolicy
-                               sharedLinkPolicy:(DBSHARINGSharedLinkPolicy * _Nonnull)sharedLinkPolicy
-                                   memberPolicy:(DBSHARINGMemberPolicy * _Nullable)memberPolicy
-                           resolvedMemberPolicy:(DBSHARINGMemberPolicy * _Nullable)resolvedMemberPolicy
-                               viewerInfoPolicy:(DBSHARINGViewerInfoPolicy * _Nullable)viewerInfoPolicy;
+- (instancetype)initWithAclUpdatePolicy:(DBSHARINGAclUpdatePolicy *)aclUpdatePolicy
+                       sharedLinkPolicy:(DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
+                           memberPolicy:(nullable DBSHARINGMemberPolicy *)memberPolicy
+                   resolvedMemberPolicy:(nullable DBSHARINGMemberPolicy *)resolvedMemberPolicy
+                       viewerInfoPolicy:(nullable DBSHARINGViewerInfoPolicy *)viewerInfoPolicy;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -87,8 +89,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAclUpdatePolicy:(DBSHARINGAclUpdatePolicy * _Nonnull)aclUpdatePolicy
-                               sharedLinkPolicy:(DBSHARINGSharedLinkPolicy * _Nonnull)sharedLinkPolicy;
+- (instancetype)initWithAclUpdatePolicy:(DBSHARINGAclUpdatePolicy *)aclUpdatePolicy
+                       sharedLinkPolicy:(DBSHARINGSharedLinkPolicy *)sharedLinkPolicy;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -107,7 +111,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFolderPolicy` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGFolderPolicy * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGFolderPolicy *)instance;
 
 ///
 /// Deserializes `DBSHARINGFolderPolicy` instances.
@@ -117,6 +121,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGFolderPolicy` object.
 ///
-+ (DBSHARINGFolderPolicy * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGFolderPolicy *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

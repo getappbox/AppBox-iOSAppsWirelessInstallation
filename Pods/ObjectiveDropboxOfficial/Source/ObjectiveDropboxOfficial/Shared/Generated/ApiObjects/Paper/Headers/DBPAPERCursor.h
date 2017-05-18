@@ -10,6 +10,8 @@
 
 @class DBPAPERCursor;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERCursor : NSObject <DBSerializable>
+@interface DBPAPERCursor : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The actual cursor value.
-@property (nonatomic, readonly, copy) NSString * _Nonnull value;
+@property (nonatomic, readonly, copy) NSString *value;
 
 /// Expiration time of value. Some cursors might have expiration time assigned.
 /// This is a UTC value after which the cursor is no longer valid and the API
@@ -38,7 +40,7 @@
 /// the last modified time will have a very short expiration as docs do get
 /// modified very often and the modified time can be changed while the iteration
 /// is happening thus altering the results.
-@property (nonatomic, readonly) NSDate * _Nullable expiration;
+@property (nonatomic, readonly, nullable) NSDate *expiration;
 
 #pragma mark - Constructors
 
@@ -61,7 +63,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithValue:(NSString * _Nonnull)value expiration:(NSDate * _Nullable)expiration;
+- (instancetype)initWithValue:(NSString *)value expiration:(nullable NSDate *)expiration;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -71,7 +73,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithValue:(NSString * _Nonnull)value;
+- (instancetype)initWithValue:(NSString *)value;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -90,7 +94,7 @@
 /// @return A json-compatible dictionary representation of the `DBPAPERCursor`
 /// API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERCursor * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERCursor *)instance;
 
 ///
 /// Deserializes `DBPAPERCursor` instances.
@@ -100,6 +104,8 @@
 ///
 /// @return An instantiation of the `DBPAPERCursor` object.
 ///
-+ (DBPAPERCursor * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERCursor *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

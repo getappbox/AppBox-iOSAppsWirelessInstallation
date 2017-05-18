@@ -10,6 +10,8 @@
 
 @class DBSHARINGRevokeSharedLinkArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRevokeSharedLinkArg : NSObject <DBSerializable>
+@interface DBSHARINGRevokeSharedLinkArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// URL of the shared link.
-@property (nonatomic, readonly, copy) NSString * _Nonnull url;
+@property (nonatomic, readonly, copy) NSString *url;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUrl:(NSString * _Nonnull)url;
+- (instancetype)initWithUrl:(NSString *)url;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRevokeSharedLinkArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRevokeSharedLinkArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRevokeSharedLinkArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRevokeSharedLinkArg` instances.
@@ -65,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGRevokeSharedLinkArg` object.
 ///
-+ (DBSHARINGRevokeSharedLinkArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRevokeSharedLinkArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

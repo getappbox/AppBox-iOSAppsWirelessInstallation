@@ -12,6 +12,8 @@
 @class DBTEAMDevicesActive;
 @class DBTEAMGetDevicesReport;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -26,18 +28,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGetDevicesReport : DBTEAMBaseDfbReport <DBSerializable>
+@interface DBTEAMGetDevicesReport : DBTEAMBaseDfbReport <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Report of the number of devices active in the last day.
-@property (nonatomic, readonly) DBTEAMDevicesActive * _Nonnull active1Day;
+@property (nonatomic, readonly) DBTEAMDevicesActive *active1Day;
 
 /// Report of the number of devices active in the last 7 days.
-@property (nonatomic, readonly) DBTEAMDevicesActive * _Nonnull active7Day;
+@property (nonatomic, readonly) DBTEAMDevicesActive *active7Day;
 
 /// Report of the number of devices active in the last 28 days.
-@property (nonatomic, readonly) DBTEAMDevicesActive * _Nonnull active28Day;
+@property (nonatomic, readonly) DBTEAMDevicesActive *active28Day;
 
 #pragma mark - Constructors
 
@@ -52,10 +54,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStartDate:(NSString * _Nonnull)startDate
-                               active1Day:(DBTEAMDevicesActive * _Nonnull)active1Day
-                               active7Day:(DBTEAMDevicesActive * _Nonnull)active7Day
-                              active28Day:(DBTEAMDevicesActive * _Nonnull)active28Day;
+- (instancetype)initWithStartDate:(NSString *)startDate
+                       active1Day:(DBTEAMDevicesActive *)active1Day
+                       active7Day:(DBTEAMDevicesActive *)active7Day
+                      active28Day:(DBTEAMDevicesActive *)active28Day;
 
 @end
 
@@ -74,7 +76,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGetDevicesReport` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGetDevicesReport * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGetDevicesReport *)instance;
 
 ///
 /// Deserializes `DBTEAMGetDevicesReport` instances.
@@ -84,6 +86,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGetDevicesReport` object.
 ///
-+ (DBTEAMGetDevicesReport * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGetDevicesReport *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBFILESFileMetadata;
 @class DBFILESListRevisionsResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESListRevisionsResult : NSObject <DBSerializable>
+@interface DBFILESListRevisionsResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// If the file is deleted.
-@property (nonatomic, readonly) NSNumber * _Nonnull isDeleted;
+@property (nonatomic, readonly) NSNumber *isDeleted;
 
 /// The revisions for the file. Only non-delete revisions will show up here.
-@property (nonatomic, readonly) NSArray<DBFILESFileMetadata *> * _Nonnull entries;
+@property (nonatomic, readonly) NSArray<DBFILESFileMetadata *> *entries;
 
 #pragma mark - Constructors
 
@@ -41,8 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithIsDeleted:(NSNumber * _Nonnull)isDeleted
-                                  entries:(NSArray<DBFILESFileMetadata *> * _Nonnull)entries;
+- (instancetype)initWithIsDeleted:(NSNumber *)isDeleted entries:(NSArray<DBFILESFileMetadata *> *)entries;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -61,7 +64,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListRevisionsResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESListRevisionsResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESListRevisionsResult *)instance;
 
 ///
 /// Deserializes `DBFILESListRevisionsResult` instances.
@@ -71,6 +74,8 @@
 ///
 /// @return An instantiation of the `DBFILESListRevisionsResult` object.
 ///
-+ (DBFILESListRevisionsResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESListRevisionsResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

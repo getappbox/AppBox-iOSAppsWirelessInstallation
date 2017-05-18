@@ -10,6 +10,8 @@
 
 @class DBTEAMStorageBucket;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,16 +23,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMStorageBucket : NSObject <DBSerializable>
+@interface DBTEAMStorageBucket : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The name of the storage bucket. For example, '1G' is a bucket of users with
 /// storage size up to 1 Giga.
-@property (nonatomic, readonly, copy) NSString * _Nonnull bucket;
+@property (nonatomic, readonly, copy) NSString *bucket;
 
 /// The number of people whose storage is in the range of this storage bucket.
-@property (nonatomic, readonly) NSNumber * _Nonnull users;
+@property (nonatomic, readonly) NSNumber *users;
 
 #pragma mark - Constructors
 
@@ -44,7 +46,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithBucket:(NSString * _Nonnull)bucket users:(NSNumber * _Nonnull)users;
+- (instancetype)initWithBucket:(NSString *)bucket users:(NSNumber *)users;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +67,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMStorageBucket` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMStorageBucket * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMStorageBucket *)instance;
 
 ///
 /// Deserializes `DBTEAMStorageBucket` instances.
@@ -73,6 +77,8 @@
 ///
 /// @return An instantiation of the `DBTEAMStorageBucket` object.
 ///
-+ (DBTEAMStorageBucket * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMStorageBucket *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

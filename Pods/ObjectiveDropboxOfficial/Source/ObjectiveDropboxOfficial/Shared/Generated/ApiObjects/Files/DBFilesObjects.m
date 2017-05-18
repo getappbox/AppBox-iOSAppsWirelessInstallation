@@ -122,6 +122,66 @@
   return [[DBFILESPropertiesErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESPropertiesErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBFILESPropertiesErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESPropertiesErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESPropertiesErrorPath:
+    result = prime * result + [self.path hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertiesError:other];
+}
+
+- (BOOL)isEqualToPropertiesError:(DBFILESPropertiesError *)aPropertiesError {
+  if (self == aPropertiesError) {
+    return YES;
+  }
+  if (self.tag != aPropertiesError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESPropertiesErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:aPropertiesError.templateNotFound];
+  case DBFILESPropertiesErrorRestrictedContent:
+    return [[self tagName] isEqual:[aPropertiesError tagName]];
+  case DBFILESPropertiesErrorOther:
+    return [[self tagName] isEqual:[aPropertiesError tagName]];
+  case DBFILESPropertiesErrorPath:
+    return [self.path isEqual:aPropertiesError.path];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -165,6 +225,7 @@
     return [[DBFILESPropertiesError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESInvalidPropertyGroupError.h"
@@ -312,6 +373,74 @@
   return [[DBFILESInvalidPropertyGroupErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESInvalidPropertyGroupErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBFILESInvalidPropertyGroupErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESInvalidPropertyGroupErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESInvalidPropertyGroupErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESInvalidPropertyGroupErrorPropertyFieldTooLarge:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESInvalidPropertyGroupErrorDoesNotFitTemplate:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToInvalidPropertyGroupError:other];
+}
+
+- (BOOL)isEqualToInvalidPropertyGroupError:(DBFILESInvalidPropertyGroupError *)anInvalidPropertyGroupError {
+  if (self == anInvalidPropertyGroupError) {
+    return YES;
+  }
+  if (self.tag != anInvalidPropertyGroupError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESInvalidPropertyGroupErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:anInvalidPropertyGroupError.templateNotFound];
+  case DBFILESInvalidPropertyGroupErrorRestrictedContent:
+    return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
+  case DBFILESInvalidPropertyGroupErrorOther:
+    return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
+  case DBFILESInvalidPropertyGroupErrorPath:
+    return [self.path isEqual:anInvalidPropertyGroupError.path];
+  case DBFILESInvalidPropertyGroupErrorPropertyFieldTooLarge:
+    return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
+  case DBFILESInvalidPropertyGroupErrorDoesNotFitTemplate:
+    return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -363,6 +492,7 @@
     return [[DBFILESInvalidPropertyGroupError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESAddPropertiesError.h"
@@ -523,6 +653,78 @@
   return [[DBFILESAddPropertiesErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESAddPropertiesErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBFILESAddPropertiesErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESAddPropertiesErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESAddPropertiesErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESAddPropertiesErrorPropertyFieldTooLarge:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESAddPropertiesErrorDoesNotFitTemplate:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESAddPropertiesErrorPropertyGroupAlreadyExists:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAddPropertiesError:other];
+}
+
+- (BOOL)isEqualToAddPropertiesError:(DBFILESAddPropertiesError *)anAddPropertiesError {
+  if (self == anAddPropertiesError) {
+    return YES;
+  }
+  if (self.tag != anAddPropertiesError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESAddPropertiesErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:anAddPropertiesError.templateNotFound];
+  case DBFILESAddPropertiesErrorRestrictedContent:
+    return [[self tagName] isEqual:[anAddPropertiesError tagName]];
+  case DBFILESAddPropertiesErrorOther:
+    return [[self tagName] isEqual:[anAddPropertiesError tagName]];
+  case DBFILESAddPropertiesErrorPath:
+    return [self.path isEqual:anAddPropertiesError.path];
+  case DBFILESAddPropertiesErrorPropertyFieldTooLarge:
+    return [[self tagName] isEqual:[anAddPropertiesError tagName]];
+  case DBFILESAddPropertiesErrorDoesNotFitTemplate:
+    return [[self tagName] isEqual:[anAddPropertiesError tagName]];
+  case DBFILESAddPropertiesErrorPropertyGroupAlreadyExists:
+    return [[self tagName] isEqual:[anAddPropertiesError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -578,6 +780,7 @@
     return [[DBFILESAddPropertiesError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESGetMetadataArg.h"
@@ -625,6 +828,59 @@
 
 - (NSString *)description {
   return [[DBFILESGetMetadataArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.includeMediaInfo hash];
+  result = prime * result + [self.includeDeleted hash];
+  result = prime * result + [self.includeHasExplicitSharedMembers hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetMetadataArg:other];
+}
+
+- (BOOL)isEqualToGetMetadataArg:(DBFILESGetMetadataArg *)aGetMetadataArg {
+  if (self == aGetMetadataArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aGetMetadataArg.path]) {
+    return NO;
+  }
+  if (![self.includeMediaInfo isEqual:aGetMetadataArg.includeMediaInfo]) {
+    return NO;
+  }
+  if (![self.includeDeleted isEqual:aGetMetadataArg.includeDeleted]) {
+    return NO;
+  }
+  if (![self.includeHasExplicitSharedMembers isEqual:aGetMetadataArg.includeHasExplicitSharedMembers]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -717,6 +973,67 @@
   return [[DBFILESAlphaGetMetadataArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.includeMediaInfo hash];
+  result = prime * result + [self.includeDeleted hash];
+  result = prime * result + [self.includeHasExplicitSharedMembers hash];
+  if (self.includePropertyTemplates) {
+    result = prime * result + [self.includePropertyTemplates hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAlphaGetMetadataArg:other];
+}
+
+- (BOOL)isEqualToAlphaGetMetadataArg:(DBFILESAlphaGetMetadataArg *)anAlphaGetMetadataArg {
+  if (self == anAlphaGetMetadataArg) {
+    return YES;
+  }
+  if (![self.path isEqual:anAlphaGetMetadataArg.path]) {
+    return NO;
+  }
+  if (![self.includeMediaInfo isEqual:anAlphaGetMetadataArg.includeMediaInfo]) {
+    return NO;
+  }
+  if (![self.includeDeleted isEqual:anAlphaGetMetadataArg.includeDeleted]) {
+    return NO;
+  }
+  if (![self.includeHasExplicitSharedMembers isEqual:anAlphaGetMetadataArg.includeHasExplicitSharedMembers]) {
+    return NO;
+  }
+  if (self.includePropertyTemplates) {
+    if (![self.includePropertyTemplates isEqual:anAlphaGetMetadataArg.includePropertyTemplates]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -732,8 +1049,8 @@
   jsonDict[@"include_has_explicit_shared_members"] = valueObj.includeHasExplicitSharedMembers;
   if (valueObj.includePropertyTemplates) {
     jsonDict[@"include_property_templates"] = [DBArraySerializer serialize:valueObj.includePropertyTemplates
-                                                                 withBlock:^id(id elem) {
-                                                                   return elem;
+                                                                 withBlock:^id(id elem0) {
+                                                                   return elem0;
                                                                  }];
   }
 
@@ -747,8 +1064,8 @@
   NSNumber *includeHasExplicitSharedMembers = valueDict[@"include_has_explicit_shared_members"] ?: @NO;
   NSArray<NSString *> *includePropertyTemplates =
       valueDict[@"include_property_templates"] ? [DBArraySerializer deserialize:valueDict[@"include_property_templates"]
-                                                                      withBlock:^id(id elem) {
-                                                                        return elem;
+                                                                      withBlock:^id(id elem0) {
+                                                                        return elem0;
                                                                       }]
                                                : nil;
 
@@ -824,6 +1141,54 @@
   return [[DBFILESGetMetadataErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESGetMetadataErrorPath:
+    result = prime * result + [self.path hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetMetadataError:other];
+}
+
+- (BOOL)isEqualToGetMetadataError:(DBFILESGetMetadataError *)aGetMetadataError {
+  if (self == aGetMetadataError) {
+    return YES;
+  }
+  if (self.tag != aGetMetadataError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESGetMetadataErrorPath:
+    return [self.path isEqual:aGetMetadataError.path];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -858,6 +1223,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESAlphaGetMetadataError.h"
@@ -950,6 +1316,58 @@
   return [[DBFILESAlphaGetMetadataErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESAlphaGetMetadataErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESAlphaGetMetadataErrorPropertiesError:
+    result = prime * result + [self.propertiesError hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAlphaGetMetadataError:other];
+}
+
+- (BOOL)isEqualToAlphaGetMetadataError:(DBFILESAlphaGetMetadataError *)anAlphaGetMetadataError {
+  if (self == anAlphaGetMetadataError) {
+    return YES;
+  }
+  if (self.tag != anAlphaGetMetadataError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESAlphaGetMetadataErrorPath:
+    return [self.path isEqual:anAlphaGetMetadataError.path];
+  case DBFILESAlphaGetMetadataErrorPropertiesError:
+    return [self.propertiesError isEqual:anAlphaGetMetadataError.propertiesError];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -992,6 +1410,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESCommitInfo.h"
@@ -1041,6 +1460,67 @@
 
 - (NSString *)description {
   return [[DBFILESCommitInfoSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.mode hash];
+  result = prime * result + [self.autorename hash];
+  if (self.clientModified) {
+    result = prime * result + [self.clientModified hash];
+  }
+  result = prime * result + [self.mute hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToCommitInfo:other];
+}
+
+- (BOOL)isEqualToCommitInfo:(DBFILESCommitInfo *)aCommitInfo {
+  if (self == aCommitInfo) {
+    return YES;
+  }
+  if (![self.path isEqual:aCommitInfo.path]) {
+    return NO;
+  }
+  if (![self.mode isEqual:aCommitInfo.mode]) {
+    return NO;
+  }
+  if (![self.autorename isEqual:aCommitInfo.autorename]) {
+    return NO;
+  }
+  if (self.clientModified) {
+    if (![self.clientModified isEqual:aCommitInfo.clientModified]) {
+      return NO;
+    }
+  }
+  if (![self.mute isEqual:aCommitInfo.mute]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1133,6 +1613,75 @@
   return [[DBFILESCommitInfoWithPropertiesSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.mode hash];
+  result = prime * result + [self.autorename hash];
+  if (self.clientModified) {
+    result = prime * result + [self.clientModified hash];
+  }
+  result = prime * result + [self.mute hash];
+  if (self.propertyGroups) {
+    result = prime * result + [self.propertyGroups hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToCommitInfoWithProperties:other];
+}
+
+- (BOOL)isEqualToCommitInfoWithProperties:(DBFILESCommitInfoWithProperties *)aCommitInfoWithProperties {
+  if (self == aCommitInfoWithProperties) {
+    return YES;
+  }
+  if (![self.path isEqual:aCommitInfoWithProperties.path]) {
+    return NO;
+  }
+  if (![self.mode isEqual:aCommitInfoWithProperties.mode]) {
+    return NO;
+  }
+  if (![self.autorename isEqual:aCommitInfoWithProperties.autorename]) {
+    return NO;
+  }
+  if (self.clientModified) {
+    if (![self.clientModified isEqual:aCommitInfoWithProperties.clientModified]) {
+      return NO;
+    }
+  }
+  if (![self.mute isEqual:aCommitInfoWithProperties.mute]) {
+    return NO;
+  }
+  if (self.propertyGroups) {
+    if (![self.propertyGroups isEqual:aCommitInfoWithProperties.propertyGroups]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1152,8 +1701,8 @@
   jsonDict[@"mute"] = valueObj.mute;
   if (valueObj.propertyGroups) {
     jsonDict[@"property_groups"] = [DBArraySerializer serialize:valueObj.propertyGroups
-                                                      withBlock:^id(id elem) {
-                                                        return [DBPROPERTIESPropertyGroupSerializer serialize:elem];
+                                                      withBlock:^id(id elem0) {
+                                                        return [DBPROPERTIESPropertyGroupSerializer serialize:elem0];
                                                       }];
   }
 
@@ -1172,8 +1721,8 @@
   NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups =
       valueDict[@"property_groups"]
           ? [DBArraySerializer deserialize:valueDict[@"property_groups"]
-                                 withBlock:^id(id elem) {
-                                   return [DBPROPERTIESPropertyGroupSerializer deserialize:elem];
+                                 withBlock:^id(id elem0) {
+                                   return [DBPROPERTIESPropertyGroupSerializer deserialize:elem0];
                                  }]
           : nil;
 
@@ -1226,6 +1775,51 @@
 
 - (NSString *)description {
   return [[DBFILESCreateFolderArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.autorename hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToCreateFolderArg:other];
+}
+
+- (BOOL)isEqualToCreateFolderArg:(DBFILESCreateFolderArg *)aCreateFolderArg {
+  if (self == aCreateFolderArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aCreateFolderArg.path]) {
+    return NO;
+  }
+  if (![self.autorename isEqual:aCreateFolderArg.autorename]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1315,6 +1909,54 @@
   return [[DBFILESCreateFolderErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESCreateFolderErrorPath:
+    result = prime * result + [self.path hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToCreateFolderError:other];
+}
+
+- (BOOL)isEqualToCreateFolderError:(DBFILESCreateFolderError *)aCreateFolderError {
+  if (self == aCreateFolderError) {
+    return YES;
+  }
+  if (self.tag != aCreateFolderError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESCreateFolderErrorPath:
+    return [self.path isEqual:aCreateFolderError.path];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1349,6 +1991,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESDeleteArg.h"
@@ -1385,6 +2028,47 @@
 
 - (NSString *)description {
   return [[DBFILESDeleteArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteArg:other];
+}
+
+- (BOOL)isEqualToDeleteArg:(DBFILESDeleteArg *)aDeleteArg {
+  if (self == aDeleteArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aDeleteArg.path]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1446,6 +2130,47 @@
   return [[DBFILESDeleteBatchArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteBatchArg:other];
+}
+
+- (BOOL)isEqualToDeleteBatchArg:(DBFILESDeleteBatchArg *)aDeleteBatchArg {
+  if (self == aDeleteBatchArg) {
+    return YES;
+  }
+  if (![self.entries isEqual:aDeleteBatchArg.entries]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1456,8 +2181,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESDeleteArgSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESDeleteArgSerializer serialize:elem0];
                                             }];
 
   return jsonDict;
@@ -1465,8 +2190,8 @@
 
 + (DBFILESDeleteBatchArg *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESDeleteArg *> *entries = [DBArraySerializer deserialize:valueDict[@"entries"]
-                                                              withBlock:^id(id elem) {
-                                                                return [DBFILESDeleteArgSerializer deserialize:elem];
+                                                              withBlock:^id(id elem0) {
+                                                                return [DBFILESDeleteArgSerializer deserialize:elem0];
                                                               }];
 
   return [[DBFILESDeleteBatchArg alloc] initWithEntries:entries];
@@ -1539,6 +2264,58 @@
   return [[DBFILESDeleteBatchErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESDeleteBatchErrorTooManyWriteOperations:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESDeleteBatchErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteBatchError:other];
+}
+
+- (BOOL)isEqualToDeleteBatchError:(DBFILESDeleteBatchError *)aDeleteBatchError {
+  if (self == aDeleteBatchError) {
+    return YES;
+  }
+  if (self.tag != aDeleteBatchError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESDeleteBatchErrorTooManyWriteOperations:
+    return [[self tagName] isEqual:[aDeleteBatchError tagName]];
+  case DBFILESDeleteBatchErrorOther:
+    return [[self tagName] isEqual:[aDeleteBatchError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1570,6 +2347,7 @@
     return [[DBFILESDeleteBatchError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBASYNCPollResultBase.h"
@@ -1689,6 +2467,66 @@
   return [[DBFILESDeleteBatchJobStatusSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESDeleteBatchJobStatusInProgress:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESDeleteBatchJobStatusComplete:
+    result = prime * result + [self.complete hash];
+  case DBFILESDeleteBatchJobStatusFailed:
+    result = prime * result + [self.failed hash];
+  case DBFILESDeleteBatchJobStatusOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteBatchJobStatus:other];
+}
+
+- (BOOL)isEqualToDeleteBatchJobStatus:(DBFILESDeleteBatchJobStatus *)aDeleteBatchJobStatus {
+  if (self == aDeleteBatchJobStatus) {
+    return YES;
+  }
+  if (self.tag != aDeleteBatchJobStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESDeleteBatchJobStatusInProgress:
+    return [[self tagName] isEqual:[aDeleteBatchJobStatus tagName]];
+  case DBFILESDeleteBatchJobStatusComplete:
+    return [self.complete isEqual:aDeleteBatchJobStatus.complete];
+  case DBFILESDeleteBatchJobStatusFailed:
+    return [self.failed isEqual:aDeleteBatchJobStatus.failed];
+  case DBFILESDeleteBatchJobStatusOther:
+    return [[self tagName] isEqual:[aDeleteBatchJobStatus tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1732,6 +2570,7 @@
     return [[DBFILESDeleteBatchJobStatus alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBASYNCLaunchResultBase.h"
@@ -1836,6 +2675,62 @@
   return [[DBFILESDeleteBatchLaunchSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESDeleteBatchLaunchAsyncJobId:
+    result = prime * result + [self.asyncJobId hash];
+  case DBFILESDeleteBatchLaunchComplete:
+    result = prime * result + [self.complete hash];
+  case DBFILESDeleteBatchLaunchOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteBatchLaunch:other];
+}
+
+- (BOOL)isEqualToDeleteBatchLaunch:(DBFILESDeleteBatchLaunch *)aDeleteBatchLaunch {
+  if (self == aDeleteBatchLaunch) {
+    return YES;
+  }
+  if (self.tag != aDeleteBatchLaunch.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESDeleteBatchLaunchAsyncJobId:
+    return [self.asyncJobId isEqual:aDeleteBatchLaunch.asyncJobId];
+  case DBFILESDeleteBatchLaunchComplete:
+    return [self.complete isEqual:aDeleteBatchLaunch.complete];
+  case DBFILESDeleteBatchLaunchOther:
+    return [[self tagName] isEqual:[aDeleteBatchLaunch tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1875,6 +2770,7 @@
     return [[DBFILESDeleteBatchLaunch alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESDeleteBatchResult.h"
@@ -1914,6 +2810,47 @@
   return [[DBFILESDeleteBatchResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteBatchResult:other];
+}
+
+- (BOOL)isEqualToDeleteBatchResult:(DBFILESDeleteBatchResult *)aDeleteBatchResult {
+  if (self == aDeleteBatchResult) {
+    return YES;
+  }
+  if (![self.entries isEqual:aDeleteBatchResult.entries]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1924,8 +2861,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESDeleteBatchResultEntrySerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESDeleteBatchResultEntrySerializer serialize:elem0];
                                             }];
 
   return jsonDict;
@@ -1934,8 +2871,8 @@
 + (DBFILESDeleteBatchResult *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESDeleteBatchResultEntry *> *entries =
       [DBArraySerializer deserialize:valueDict[@"entries"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESDeleteBatchResultEntrySerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESDeleteBatchResultEntrySerializer deserialize:elem0];
                            }];
 
   return [[DBFILESDeleteBatchResult alloc] initWithEntries:entries];
@@ -2031,6 +2968,58 @@
   return [[DBFILESDeleteBatchResultEntrySerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESDeleteBatchResultEntrySuccess:
+    result = prime * result + [self.success hash];
+  case DBFILESDeleteBatchResultEntryFailure:
+    result = prime * result + [self.failure hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteBatchResultEntry:other];
+}
+
+- (BOOL)isEqualToDeleteBatchResultEntry:(DBFILESDeleteBatchResultEntry *)aDeleteBatchResultEntry {
+  if (self == aDeleteBatchResultEntry) {
+    return YES;
+  }
+  if (self.tag != aDeleteBatchResultEntry.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESDeleteBatchResultEntrySuccess:
+    return [self.success isEqual:aDeleteBatchResultEntry.success];
+  case DBFILESDeleteBatchResultEntryFailure:
+    return [self.failure isEqual:aDeleteBatchResultEntry.failure];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2071,6 +3060,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESDeleteError.h"
@@ -2175,6 +3165,62 @@
   return [[DBFILESDeleteErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESDeleteErrorPathLookup:
+    result = prime * result + [self.pathLookup hash];
+  case DBFILESDeleteErrorPathWrite:
+    result = prime * result + [self.pathWrite hash];
+  case DBFILESDeleteErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteError:other];
+}
+
+- (BOOL)isEqualToDeleteError:(DBFILESDeleteError *)aDeleteError {
+  if (self == aDeleteError) {
+    return YES;
+  }
+  if (self.tag != aDeleteError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESDeleteErrorPathLookup:
+    return [self.pathLookup isEqual:aDeleteError.pathLookup];
+  case DBFILESDeleteErrorPathWrite:
+    return [self.pathWrite isEqual:aDeleteError.pathWrite];
+  case DBFILESDeleteErrorOther:
+    return [[self tagName] isEqual:[aDeleteError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2214,6 +3260,7 @@
     return [[DBFILESDeleteError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESDeleteResult.h"
@@ -2250,6 +3297,47 @@
 
 - (NSString *)description {
   return [[DBFILESDeleteResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.metadata hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeleteResult:other];
+}
+
+- (BOOL)isEqualToDeleteResult:(DBFILESDeleteResult *)aDeleteResult {
+  if (self == aDeleteResult) {
+    return YES;
+  }
+  if (![self.metadata isEqual:aDeleteResult.metadata]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -2323,6 +3411,71 @@
 
 - (NSString *)description {
   return [[DBFILESMetadataSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  if (self.pathLower) {
+    result = prime * result + [self.pathLower hash];
+  }
+  if (self.pathDisplay) {
+    result = prime * result + [self.pathDisplay hash];
+  }
+  if (self.parentSharedFolderId) {
+    result = prime * result + [self.parentSharedFolderId hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToMetadata:other];
+}
+
+- (BOOL)isEqualToMetadata:(DBFILESMetadata *)aMetadata {
+  if (self == aMetadata) {
+    return YES;
+  }
+  if (![self.name isEqual:aMetadata.name]) {
+    return NO;
+  }
+  if (self.pathLower) {
+    if (![self.pathLower isEqual:aMetadata.pathLower]) {
+      return NO;
+    }
+  }
+  if (self.pathDisplay) {
+    if (![self.pathDisplay isEqual:aMetadata.pathDisplay]) {
+      return NO;
+    }
+  }
+  if (self.parentSharedFolderId) {
+    if (![self.parentSharedFolderId isEqual:aMetadata.parentSharedFolderId]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -2433,6 +3586,71 @@
   return [[DBFILESDeletedMetadataSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  if (self.pathLower) {
+    result = prime * result + [self.pathLower hash];
+  }
+  if (self.pathDisplay) {
+    result = prime * result + [self.pathDisplay hash];
+  }
+  if (self.parentSharedFolderId) {
+    result = prime * result + [self.parentSharedFolderId hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeletedMetadata:other];
+}
+
+- (BOOL)isEqualToDeletedMetadata:(DBFILESDeletedMetadata *)aDeletedMetadata {
+  if (self == aDeletedMetadata) {
+    return YES;
+  }
+  if (![self.name isEqual:aDeletedMetadata.name]) {
+    return NO;
+  }
+  if (self.pathLower) {
+    if (![self.pathLower isEqual:aDeletedMetadata.pathLower]) {
+      return NO;
+    }
+  }
+  if (self.pathDisplay) {
+    if (![self.pathDisplay isEqual:aDeletedMetadata.pathDisplay]) {
+      return NO;
+    }
+  }
+  if (self.parentSharedFolderId) {
+    if (![self.parentSharedFolderId isEqual:aDeletedMetadata.parentSharedFolderId]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2506,6 +3724,51 @@
   return [[DBFILESDimensionsSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.height hash];
+  result = prime * result + [self.width hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDimensions:other];
+}
+
+- (BOOL)isEqualToDimensions:(DBFILESDimensions *)aDimensions {
+  if (self == aDimensions) {
+    return YES;
+  }
+  if (![self.height isEqual:aDimensions.height]) {
+    return NO;
+  }
+  if (![self.width isEqual:aDimensions.width]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2572,6 +3835,55 @@
 
 - (NSString *)description {
   return [[DBFILESDownloadArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  if (self.rev) {
+    result = prime * result + [self.rev hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDownloadArg:other];
+}
+
+- (BOOL)isEqualToDownloadArg:(DBFILESDownloadArg *)aDownloadArg {
+  if (self == aDownloadArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aDownloadArg.path]) {
+    return NO;
+  }
+  if (self.rev) {
+    if (![self.rev isEqual:aDownloadArg.rev]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -2677,6 +3989,58 @@
   return [[DBFILESDownloadErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESDownloadErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESDownloadErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDownloadError:other];
+}
+
+- (BOOL)isEqualToDownloadError:(DBFILESDownloadError *)aDownloadError {
+  if (self == aDownloadError) {
+    return YES;
+  }
+  if (self.tag != aDownloadError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESDownloadErrorPath:
+    return [self.path isEqual:aDownloadError.path];
+  case DBFILESDownloadErrorOther:
+    return [[self tagName] isEqual:[aDownloadError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2710,6 +4074,7 @@
     return [[DBFILESDownloadError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESFileMetadata.h"
@@ -2805,6 +4170,131 @@
   return [[DBFILESFileMetadataSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.id_ hash];
+  result = prime * result + [self.clientModified hash];
+  result = prime * result + [self.serverModified hash];
+  result = prime * result + [self.rev hash];
+  result = prime * result + [self.size hash];
+  if (self.pathLower) {
+    result = prime * result + [self.pathLower hash];
+  }
+  if (self.pathDisplay) {
+    result = prime * result + [self.pathDisplay hash];
+  }
+  if (self.parentSharedFolderId) {
+    result = prime * result + [self.parentSharedFolderId hash];
+  }
+  if (self.mediaInfo) {
+    result = prime * result + [self.mediaInfo hash];
+  }
+  if (self.sharingInfo) {
+    result = prime * result + [self.sharingInfo hash];
+  }
+  if (self.propertyGroups) {
+    result = prime * result + [self.propertyGroups hash];
+  }
+  if (self.hasExplicitSharedMembers) {
+    result = prime * result + [self.hasExplicitSharedMembers hash];
+  }
+  if (self.contentHash) {
+    result = prime * result + [self.contentHash hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileMetadata:other];
+}
+
+- (BOOL)isEqualToFileMetadata:(DBFILESFileMetadata *)aFileMetadata {
+  if (self == aFileMetadata) {
+    return YES;
+  }
+  if (![self.name isEqual:aFileMetadata.name]) {
+    return NO;
+  }
+  if (![self.id_ isEqual:aFileMetadata.id_]) {
+    return NO;
+  }
+  if (![self.clientModified isEqual:aFileMetadata.clientModified]) {
+    return NO;
+  }
+  if (![self.serverModified isEqual:aFileMetadata.serverModified]) {
+    return NO;
+  }
+  if (![self.rev isEqual:aFileMetadata.rev]) {
+    return NO;
+  }
+  if (![self.size isEqual:aFileMetadata.size]) {
+    return NO;
+  }
+  if (self.pathLower) {
+    if (![self.pathLower isEqual:aFileMetadata.pathLower]) {
+      return NO;
+    }
+  }
+  if (self.pathDisplay) {
+    if (![self.pathDisplay isEqual:aFileMetadata.pathDisplay]) {
+      return NO;
+    }
+  }
+  if (self.parentSharedFolderId) {
+    if (![self.parentSharedFolderId isEqual:aFileMetadata.parentSharedFolderId]) {
+      return NO;
+    }
+  }
+  if (self.mediaInfo) {
+    if (![self.mediaInfo isEqual:aFileMetadata.mediaInfo]) {
+      return NO;
+    }
+  }
+  if (self.sharingInfo) {
+    if (![self.sharingInfo isEqual:aFileMetadata.sharingInfo]) {
+      return NO;
+    }
+  }
+  if (self.propertyGroups) {
+    if (![self.propertyGroups isEqual:aFileMetadata.propertyGroups]) {
+      return NO;
+    }
+  }
+  if (self.hasExplicitSharedMembers) {
+    if (![self.hasExplicitSharedMembers isEqual:aFileMetadata.hasExplicitSharedMembers]) {
+      return NO;
+    }
+  }
+  if (self.contentHash) {
+    if (![self.contentHash isEqual:aFileMetadata.contentHash]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2839,8 +4329,8 @@
   }
   if (valueObj.propertyGroups) {
     jsonDict[@"property_groups"] = [DBArraySerializer serialize:valueObj.propertyGroups
-                                                      withBlock:^id(id elem) {
-                                                        return [DBPROPERTIESPropertyGroupSerializer serialize:elem];
+                                                      withBlock:^id(id elem0) {
+                                                        return [DBPROPERTIESPropertyGroupSerializer serialize:elem0];
                                                       }];
   }
   if (valueObj.hasExplicitSharedMembers) {
@@ -2872,8 +4362,8 @@
   NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups =
       valueDict[@"property_groups"]
           ? [DBArraySerializer deserialize:valueDict[@"property_groups"]
-                                 withBlock:^id(id elem) {
-                                   return [DBPROPERTIESPropertyGroupSerializer deserialize:elem];
+                                 withBlock:^id(id elem0) {
+                                   return [DBPROPERTIESPropertyGroupSerializer deserialize:elem0];
                                  }]
           : nil;
   NSNumber *hasExplicitSharedMembers = valueDict[@"has_explicit_shared_members"] ?: nil;
@@ -2930,6 +4420,47 @@
 
 - (NSString *)description {
   return [[DBFILESSharingInfoSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.readOnly hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSharingInfo:other];
+}
+
+- (BOOL)isEqualToSharingInfo:(DBFILESSharingInfo *)aSharingInfo {
+  if (self == aSharingInfo) {
+    return YES;
+  }
+  if (![self.readOnly isEqual:aSharingInfo.readOnly]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -2998,6 +4529,59 @@
 
 - (NSString *)description {
   return [[DBFILESFileSharingInfoSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.readOnly hash];
+  result = prime * result + [self.parentSharedFolderId hash];
+  if (self.modifiedBy) {
+    result = prime * result + [self.modifiedBy hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileSharingInfo:other];
+}
+
+- (BOOL)isEqualToFileSharingInfo:(DBFILESFileSharingInfo *)aFileSharingInfo {
+  if (self == aFileSharingInfo) {
+    return YES;
+  }
+  if (![self.readOnly isEqual:aFileSharingInfo.readOnly]) {
+    return NO;
+  }
+  if (![self.parentSharedFolderId isEqual:aFileSharingInfo.parentSharedFolderId]) {
+    return NO;
+  }
+  if (self.modifiedBy) {
+    if (![self.modifiedBy isEqual:aFileSharingInfo.modifiedBy]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -3098,6 +4682,99 @@
   return [[DBFILESFolderMetadataSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.id_ hash];
+  if (self.pathLower) {
+    result = prime * result + [self.pathLower hash];
+  }
+  if (self.pathDisplay) {
+    result = prime * result + [self.pathDisplay hash];
+  }
+  if (self.parentSharedFolderId) {
+    result = prime * result + [self.parentSharedFolderId hash];
+  }
+  if (self.sharedFolderId) {
+    result = prime * result + [self.sharedFolderId hash];
+  }
+  if (self.sharingInfo) {
+    result = prime * result + [self.sharingInfo hash];
+  }
+  if (self.propertyGroups) {
+    result = prime * result + [self.propertyGroups hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderMetadata:other];
+}
+
+- (BOOL)isEqualToFolderMetadata:(DBFILESFolderMetadata *)aFolderMetadata {
+  if (self == aFolderMetadata) {
+    return YES;
+  }
+  if (![self.name isEqual:aFolderMetadata.name]) {
+    return NO;
+  }
+  if (![self.id_ isEqual:aFolderMetadata.id_]) {
+    return NO;
+  }
+  if (self.pathLower) {
+    if (![self.pathLower isEqual:aFolderMetadata.pathLower]) {
+      return NO;
+    }
+  }
+  if (self.pathDisplay) {
+    if (![self.pathDisplay isEqual:aFolderMetadata.pathDisplay]) {
+      return NO;
+    }
+  }
+  if (self.parentSharedFolderId) {
+    if (![self.parentSharedFolderId isEqual:aFolderMetadata.parentSharedFolderId]) {
+      return NO;
+    }
+  }
+  if (self.sharedFolderId) {
+    if (![self.sharedFolderId isEqual:aFolderMetadata.sharedFolderId]) {
+      return NO;
+    }
+  }
+  if (self.sharingInfo) {
+    if (![self.sharingInfo isEqual:aFolderMetadata.sharingInfo]) {
+      return NO;
+    }
+  }
+  if (self.propertyGroups) {
+    if (![self.propertyGroups isEqual:aFolderMetadata.propertyGroups]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3126,8 +4803,8 @@
   }
   if (valueObj.propertyGroups) {
     jsonDict[@"property_groups"] = [DBArraySerializer serialize:valueObj.propertyGroups
-                                                      withBlock:^id(id elem) {
-                                                        return [DBPROPERTIESPropertyGroupSerializer serialize:elem];
+                                                      withBlock:^id(id elem0) {
+                                                        return [DBPROPERTIESPropertyGroupSerializer serialize:elem0];
                                                       }];
   }
 
@@ -3146,8 +4823,8 @@
   NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups =
       valueDict[@"property_groups"]
           ? [DBArraySerializer deserialize:valueDict[@"property_groups"]
-                                 withBlock:^id(id elem) {
-                                   return [DBPROPERTIESPropertyGroupSerializer deserialize:elem];
+                                 withBlock:^id(id elem0) {
+                                   return [DBPROPERTIESPropertyGroupSerializer deserialize:elem0];
                                  }]
           : nil;
 
@@ -3213,6 +4890,71 @@
 
 - (NSString *)description {
   return [[DBFILESFolderSharingInfoSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.readOnly hash];
+  if (self.parentSharedFolderId) {
+    result = prime * result + [self.parentSharedFolderId hash];
+  }
+  if (self.sharedFolderId) {
+    result = prime * result + [self.sharedFolderId hash];
+  }
+  result = prime * result + [self.traverseOnly hash];
+  result = prime * result + [self.noAccess hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderSharingInfo:other];
+}
+
+- (BOOL)isEqualToFolderSharingInfo:(DBFILESFolderSharingInfo *)aFolderSharingInfo {
+  if (self == aFolderSharingInfo) {
+    return YES;
+  }
+  if (![self.readOnly isEqual:aFolderSharingInfo.readOnly]) {
+    return NO;
+  }
+  if (self.parentSharedFolderId) {
+    if (![self.parentSharedFolderId isEqual:aFolderSharingInfo.parentSharedFolderId]) {
+      return NO;
+    }
+  }
+  if (self.sharedFolderId) {
+    if (![self.sharedFolderId isEqual:aFolderSharingInfo.sharedFolderId]) {
+      return NO;
+    }
+  }
+  if (![self.traverseOnly isEqual:aFolderSharingInfo.traverseOnly]) {
+    return NO;
+  }
+  if (![self.noAccess isEqual:aFolderSharingInfo.noAccess]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3288,6 +5030,47 @@
 
 - (NSString *)description {
   return [[DBFILESGetCopyReferenceArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetCopyReferenceArg:other];
+}
+
+- (BOOL)isEqualToGetCopyReferenceArg:(DBFILESGetCopyReferenceArg *)aGetCopyReferenceArg {
+  if (self == aGetCopyReferenceArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aGetCopyReferenceArg.path]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3389,6 +5172,58 @@
   return [[DBFILESGetCopyReferenceErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESGetCopyReferenceErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESGetCopyReferenceErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetCopyReferenceError:other];
+}
+
+- (BOOL)isEqualToGetCopyReferenceError:(DBFILESGetCopyReferenceError *)aGetCopyReferenceError {
+  if (self == aGetCopyReferenceError) {
+    return YES;
+  }
+  if (self.tag != aGetCopyReferenceError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESGetCopyReferenceErrorPath:
+    return [self.path isEqual:aGetCopyReferenceError.path];
+  case DBFILESGetCopyReferenceErrorOther:
+    return [[self tagName] isEqual:[aGetCopyReferenceError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3422,6 +5257,7 @@
     return [[DBFILESGetCopyReferenceError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESGetCopyReferenceResult.h"
@@ -3462,6 +5298,55 @@
 
 - (NSString *)description {
   return [[DBFILESGetCopyReferenceResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.metadata hash];
+  result = prime * result + [self.dCopyReference hash];
+  result = prime * result + [self.expires hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetCopyReferenceResult:other];
+}
+
+- (BOOL)isEqualToGetCopyReferenceResult:(DBFILESGetCopyReferenceResult *)aGetCopyReferenceResult {
+  if (self == aGetCopyReferenceResult) {
+    return YES;
+  }
+  if (![self.metadata isEqual:aGetCopyReferenceResult.metadata]) {
+    return NO;
+  }
+  if (![self.dCopyReference isEqual:aGetCopyReferenceResult.dCopyReference]) {
+    return NO;
+  }
+  if (![self.expires isEqual:aGetCopyReferenceResult.expires]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3526,6 +5411,47 @@
 
 - (NSString *)description {
   return [[DBFILESGetTemporaryLinkArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetTemporaryLinkArg:other];
+}
+
+- (BOOL)isEqualToGetTemporaryLinkArg:(DBFILESGetTemporaryLinkArg *)aGetTemporaryLinkArg {
+  if (self == aGetTemporaryLinkArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aGetTemporaryLinkArg.path]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3627,6 +5553,58 @@
   return [[DBFILESGetTemporaryLinkErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESGetTemporaryLinkErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESGetTemporaryLinkErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetTemporaryLinkError:other];
+}
+
+- (BOOL)isEqualToGetTemporaryLinkError:(DBFILESGetTemporaryLinkError *)aGetTemporaryLinkError {
+  if (self == aGetTemporaryLinkError) {
+    return YES;
+  }
+  if (self.tag != aGetTemporaryLinkError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESGetTemporaryLinkErrorPath:
+    return [self.path isEqual:aGetTemporaryLinkError.path];
+  case DBFILESGetTemporaryLinkErrorOther:
+    return [[self tagName] isEqual:[aGetTemporaryLinkError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3660,6 +5638,7 @@
     return [[DBFILESGetTemporaryLinkError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESFileMetadata.h"
@@ -3697,6 +5676,51 @@
 
 - (NSString *)description {
   return [[DBFILESGetTemporaryLinkResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.metadata hash];
+  result = prime * result + [self.link hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetTemporaryLinkResult:other];
+}
+
+- (BOOL)isEqualToGetTemporaryLinkResult:(DBFILESGetTemporaryLinkResult *)aGetTemporaryLinkResult {
+  if (self == aGetTemporaryLinkResult) {
+    return YES;
+  }
+  if (![self.metadata isEqual:aGetTemporaryLinkResult.metadata]) {
+    return NO;
+  }
+  if (![self.link isEqual:aGetTemporaryLinkResult.link]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3757,6 +5781,51 @@
 
 - (NSString *)description {
   return [[DBFILESGpsCoordinatesSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.latitude hash];
+  result = prime * result + [self.longitude hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGpsCoordinates:other];
+}
+
+- (BOOL)isEqualToGpsCoordinates:(DBFILESGpsCoordinates *)aGpsCoordinates {
+  if (self == aGpsCoordinates) {
+    return YES;
+  }
+  if (![self.latitude isEqual:aGpsCoordinates.latitude]) {
+    return NO;
+  }
+  if (![self.longitude isEqual:aGpsCoordinates.longitude]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3835,6 +5904,63 @@
   return [[DBFILESListFolderArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.recursive hash];
+  result = prime * result + [self.includeMediaInfo hash];
+  result = prime * result + [self.includeDeleted hash];
+  result = prime * result + [self.includeHasExplicitSharedMembers hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderArg:other];
+}
+
+- (BOOL)isEqualToListFolderArg:(DBFILESListFolderArg *)aListFolderArg {
+  if (self == aListFolderArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aListFolderArg.path]) {
+    return NO;
+  }
+  if (![self.recursive isEqual:aListFolderArg.recursive]) {
+    return NO;
+  }
+  if (![self.includeMediaInfo isEqual:aListFolderArg.includeMediaInfo]) {
+    return NO;
+  }
+  if (![self.includeDeleted isEqual:aListFolderArg.includeDeleted]) {
+    return NO;
+  }
+  if (![self.includeHasExplicitSharedMembers isEqual:aListFolderArg.includeHasExplicitSharedMembers]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3903,6 +6029,47 @@
 
 - (NSString *)description {
   return [[DBFILESListFolderContinueArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderContinueArg:other];
+}
+
+- (BOOL)isEqualToListFolderContinueArg:(DBFILESListFolderContinueArg *)aListFolderContinueArg {
+  if (self == aListFolderContinueArg) {
+    return YES;
+  }
+  if (![self.cursor isEqual:aListFolderContinueArg.cursor]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -4018,6 +6185,62 @@
   return [[DBFILESListFolderContinueErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESListFolderContinueErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESListFolderContinueErrorReset:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESListFolderContinueErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderContinueError:other];
+}
+
+- (BOOL)isEqualToListFolderContinueError:(DBFILESListFolderContinueError *)aListFolderContinueError {
+  if (self == aListFolderContinueError) {
+    return YES;
+  }
+  if (self.tag != aListFolderContinueError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESListFolderContinueErrorPath:
+    return [self.path isEqual:aListFolderContinueError.path];
+  case DBFILESListFolderContinueErrorReset:
+    return [[self tagName] isEqual:[aListFolderContinueError tagName]];
+  case DBFILESListFolderContinueErrorOther:
+    return [[self tagName] isEqual:[aListFolderContinueError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4055,6 +6278,7 @@
     return [[DBFILESListFolderContinueError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESListFolderError.h"
@@ -4134,6 +6358,58 @@
   return [[DBFILESListFolderErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESListFolderErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESListFolderErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderError:other];
+}
+
+- (BOOL)isEqualToListFolderError:(DBFILESListFolderError *)aListFolderError {
+  if (self == aListFolderError) {
+    return YES;
+  }
+  if (self.tag != aListFolderError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESListFolderErrorPath:
+    return [self.path isEqual:aListFolderError.path];
+  case DBFILESListFolderErrorOther:
+    return [[self tagName] isEqual:[aListFolderError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4167,6 +6443,7 @@
     return [[DBFILESListFolderError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESListFolderGetLatestCursorResult.h"
@@ -4203,6 +6480,48 @@
 
 - (NSString *)description {
   return [[DBFILESListFolderGetLatestCursorResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderGetLatestCursorResult:other];
+}
+
+- (BOOL)isEqualToListFolderGetLatestCursorResult:
+    (DBFILESListFolderGetLatestCursorResult *)aListFolderGetLatestCursorResult {
+  if (self == aListFolderGetLatestCursorResult) {
+    return YES;
+  }
+  if (![self.cursor isEqual:aListFolderGetLatestCursorResult.cursor]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -4267,6 +6586,51 @@
 
 - (NSString *)description {
   return [[DBFILESListFolderLongpollArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.timeout hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderLongpollArg:other];
+}
+
+- (BOOL)isEqualToListFolderLongpollArg:(DBFILESListFolderLongpollArg *)aListFolderLongpollArg {
+  if (self == aListFolderLongpollArg) {
+    return YES;
+  }
+  if (![self.cursor isEqual:aListFolderLongpollArg.cursor]) {
+    return NO;
+  }
+  if (![self.timeout isEqual:aListFolderLongpollArg.timeout]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -4358,6 +6722,58 @@
   return [[DBFILESListFolderLongpollErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESListFolderLongpollErrorReset:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESListFolderLongpollErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderLongpollError:other];
+}
+
+- (BOOL)isEqualToListFolderLongpollError:(DBFILESListFolderLongpollError *)aListFolderLongpollError {
+  if (self == aListFolderLongpollError) {
+    return YES;
+  }
+  if (self.tag != aListFolderLongpollError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESListFolderLongpollErrorReset:
+    return [[self tagName] isEqual:[aListFolderLongpollError tagName]];
+  case DBFILESListFolderLongpollErrorOther:
+    return [[self tagName] isEqual:[aListFolderLongpollError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4389,6 +6805,7 @@
     return [[DBFILESListFolderLongpollError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESListFolderLongpollResult.h"
@@ -4429,6 +6846,55 @@
 
 - (NSString *)description {
   return [[DBFILESListFolderLongpollResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.changes hash];
+  if (self.backoff) {
+    result = prime * result + [self.backoff hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderLongpollResult:other];
+}
+
+- (BOOL)isEqualToListFolderLongpollResult:(DBFILESListFolderLongpollResult *)aListFolderLongpollResult {
+  if (self == aListFolderLongpollResult) {
+    return YES;
+  }
+  if (![self.changes isEqual:aListFolderLongpollResult.changes]) {
+    return NO;
+  }
+  if (self.backoff) {
+    if (![self.backoff isEqual:aListFolderLongpollResult.backoff]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -4499,6 +6965,55 @@
   return [[DBFILESListFolderResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.hasMore hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListFolderResult:other];
+}
+
+- (BOOL)isEqualToListFolderResult:(DBFILESListFolderResult *)aListFolderResult {
+  if (self == aListFolderResult) {
+    return YES;
+  }
+  if (![self.entries isEqual:aListFolderResult.entries]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aListFolderResult.cursor]) {
+    return NO;
+  }
+  if (![self.hasMore isEqual:aListFolderResult.hasMore]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4509,8 +7024,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESMetadataSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESMetadataSerializer serialize:elem0];
                                             }];
   jsonDict[@"cursor"] = valueObj.cursor;
   jsonDict[@"has_more"] = valueObj.hasMore;
@@ -4520,8 +7035,8 @@
 
 + (DBFILESListFolderResult *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESMetadata *> *entries = [DBArraySerializer deserialize:valueDict[@"entries"]
-                                                             withBlock:^id(id elem) {
-                                                               return [DBFILESMetadataSerializer deserialize:elem];
+                                                             withBlock:^id(id elem0) {
+                                                               return [DBFILESMetadataSerializer deserialize:elem0];
                                                              }];
   NSString *cursor = valueDict[@"cursor"];
   NSNumber *hasMore = valueDict[@"has_more"];
@@ -4571,6 +7086,51 @@
 
 - (NSString *)description {
   return [[DBFILESListRevisionsArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.limit hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListRevisionsArg:other];
+}
+
+- (BOOL)isEqualToListRevisionsArg:(DBFILESListRevisionsArg *)aListRevisionsArg {
+  if (self == aListRevisionsArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aListRevisionsArg.path]) {
+    return NO;
+  }
+  if (![self.limit isEqual:aListRevisionsArg.limit]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -4674,6 +7234,58 @@
   return [[DBFILESListRevisionsErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESListRevisionsErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESListRevisionsErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListRevisionsError:other];
+}
+
+- (BOOL)isEqualToListRevisionsError:(DBFILESListRevisionsError *)aListRevisionsError {
+  if (self == aListRevisionsError) {
+    return YES;
+  }
+  if (self.tag != aListRevisionsError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESListRevisionsErrorPath:
+    return [self.path isEqual:aListRevisionsError.path];
+  case DBFILESListRevisionsErrorOther:
+    return [[self tagName] isEqual:[aListRevisionsError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4707,6 +7319,7 @@
     return [[DBFILESListRevisionsError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESFileMetadata.h"
@@ -4747,6 +7360,51 @@
   return [[DBFILESListRevisionsResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.isDeleted hash];
+  result = prime * result + [self.entries hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListRevisionsResult:other];
+}
+
+- (BOOL)isEqualToListRevisionsResult:(DBFILESListRevisionsResult *)aListRevisionsResult {
+  if (self == aListRevisionsResult) {
+    return YES;
+  }
+  if (![self.isDeleted isEqual:aListRevisionsResult.isDeleted]) {
+    return NO;
+  }
+  if (![self.entries isEqual:aListRevisionsResult.entries]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4758,8 +7416,8 @@
 
   jsonDict[@"is_deleted"] = valueObj.isDeleted;
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESFileMetadataSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESFileMetadataSerializer serialize:elem0];
                                             }];
 
   return jsonDict;
@@ -4769,8 +7427,8 @@
   NSNumber *isDeleted = valueDict[@"is_deleted"];
   NSArray<DBFILESFileMetadata *> *entries =
       [DBArraySerializer deserialize:valueDict[@"entries"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESFileMetadataSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESFileMetadataSerializer deserialize:elem0];
                            }];
 
   return [[DBFILESListRevisionsResult alloc] initWithIsDeleted:isDeleted entries:entries];
@@ -4829,6 +7487,54 @@
   return [[DBFILESLookUpPropertiesErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESLookUpPropertiesErrorPropertyGroupNotFound:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToLookUpPropertiesError:other];
+}
+
+- (BOOL)isEqualToLookUpPropertiesError:(DBFILESLookUpPropertiesError *)aLookUpPropertiesError {
+  if (self == aLookUpPropertiesError) {
+    return YES;
+  }
+  if (self.tag != aLookUpPropertiesError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESLookUpPropertiesErrorPropertyGroupNotFound:
+    return [[self tagName] isEqual:[aLookUpPropertiesError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -4861,10 +7567,10 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESLookupError.h"
-#import "DBFILESPathRootError.h"
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 
@@ -4873,7 +7579,6 @@
 @implementation DBFILESLookupError
 
 @synthesize malformedPath = _malformedPath;
-@synthesize invalidPathRoot = _invalidPathRoot;
 
 #pragma mark - Constructors
 
@@ -4918,15 +7623,6 @@
   return self;
 }
 
-- (instancetype)initWithInvalidPathRoot:(DBFILESPathRootError *)invalidPathRoot {
-  self = [super init];
-  if (self) {
-    _tag = DBFILESLookupErrorInvalidPathRoot;
-    _invalidPathRoot = invalidPathRoot;
-  }
-  return self;
-}
-
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -4943,14 +7639,6 @@
                 format:@"Invalid tag: required DBFILESLookupErrorMalformedPath, but was %@.", [self tagName]];
   }
   return _malformedPath;
-}
-
-- (DBFILESPathRootError *)invalidPathRoot {
-  if (![self isInvalidPathRoot]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBFILESLookupErrorInvalidPathRoot, but was %@.", [self tagName]];
-  }
-  return _invalidPathRoot;
 }
 
 #pragma mark - Tag state methods
@@ -4975,10 +7663,6 @@
   return _tag == DBFILESLookupErrorRestrictedContent;
 }
 
-- (BOOL)isInvalidPathRoot {
-  return _tag == DBFILESLookupErrorInvalidPathRoot;
-}
-
 - (BOOL)isOther {
   return _tag == DBFILESLookupErrorOther;
 }
@@ -4995,8 +7679,6 @@
     return @"DBFILESLookupErrorNotFolder";
   case DBFILESLookupErrorRestrictedContent:
     return @"DBFILESLookupErrorRestrictedContent";
-  case DBFILESLookupErrorInvalidPathRoot:
-    return @"DBFILESLookupErrorInvalidPathRoot";
   case DBFILESLookupErrorOther:
     return @"DBFILESLookupErrorOther";
   }
@@ -5018,6 +7700,78 @@
 
 - (NSString *)description {
   return [[DBFILESLookupErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESLookupErrorMalformedPath:
+    if (self.malformedPath) {
+      result = prime * result + [self.malformedPath hash];
+    }
+  case DBFILESLookupErrorNotFound:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESLookupErrorNotFile:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESLookupErrorNotFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESLookupErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESLookupErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToLookupError:other];
+}
+
+- (BOOL)isEqualToLookupError:(DBFILESLookupError *)aLookupError {
+  if (self == aLookupError) {
+    return YES;
+  }
+  if (self.tag != aLookupError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESLookupErrorMalformedPath:
+    if (self.malformedPath) {
+      return [self.malformedPath isEqual:aLookupError.malformedPath];
+    }
+  case DBFILESLookupErrorNotFound:
+    return [[self tagName] isEqual:[aLookupError tagName]];
+  case DBFILESLookupErrorNotFile:
+    return [[self tagName] isEqual:[aLookupError tagName]];
+  case DBFILESLookupErrorNotFolder:
+    return [[self tagName] isEqual:[aLookupError tagName]];
+  case DBFILESLookupErrorRestrictedContent:
+    return [[self tagName] isEqual:[aLookupError tagName]];
+  case DBFILESLookupErrorOther:
+    return [[self tagName] isEqual:[aLookupError tagName]];
+  }
+  return YES;
 }
 
 @end
@@ -5042,9 +7796,6 @@
     jsonDict[@".tag"] = @"not_folder";
   } else if ([valueObj isRestrictedContent]) {
     jsonDict[@".tag"] = @"restricted_content";
-  } else if ([valueObj isInvalidPathRoot]) {
-    jsonDict[@"invalid_path_root"] = [[DBFILESPathRootErrorSerializer serialize:valueObj.invalidPathRoot] mutableCopy];
-    jsonDict[@".tag"] = @"invalid_path_root";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -5068,15 +7819,13 @@
     return [[DBFILESLookupError alloc] initWithNotFolder];
   } else if ([tag isEqualToString:@"restricted_content"]) {
     return [[DBFILESLookupError alloc] initWithRestrictedContent];
-  } else if ([tag isEqualToString:@"invalid_path_root"]) {
-    DBFILESPathRootError *invalidPathRoot = [DBFILESPathRootErrorSerializer deserialize:valueDict];
-    return [[DBFILESLookupError alloc] initWithInvalidPathRoot:invalidPathRoot];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBFILESLookupError alloc] initWithOther];
   } else {
     return [[DBFILESLookupError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESMediaInfo.h"
@@ -5156,6 +7905,58 @@
   return [[DBFILESMediaInfoSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESMediaInfoPending:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESMediaInfoMetadata:
+    result = prime * result + [self.metadata hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToMediaInfo:other];
+}
+
+- (BOOL)isEqualToMediaInfo:(DBFILESMediaInfo *)aMediaInfo {
+  if (self == aMediaInfo) {
+    return YES;
+  }
+  if (self.tag != aMediaInfo.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESMediaInfoPending:
+    return [[self tagName] isEqual:[aMediaInfo tagName]];
+  case DBFILESMediaInfoMetadata:
+    return [self.metadata isEqual:aMediaInfo.metadata];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -5194,6 +7995,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESDimensions.h"
@@ -5223,7 +8025,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithDimensions:nil location:nil timeTaken:nil];
 }
 
@@ -5241,6 +8043,67 @@
 
 - (NSString *)description {
   return [[DBFILESMediaMetadataSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.dimensions) {
+    result = prime * result + [self.dimensions hash];
+  }
+  if (self.location) {
+    result = prime * result + [self.location hash];
+  }
+  if (self.timeTaken) {
+    result = prime * result + [self.timeTaken hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToMediaMetadata:other];
+}
+
+- (BOOL)isEqualToMediaMetadata:(DBFILESMediaMetadata *)aMediaMetadata {
+  if (self == aMediaMetadata) {
+    return YES;
+  }
+  if (self.dimensions) {
+    if (![self.dimensions isEqual:aMediaMetadata.dimensions]) {
+      return NO;
+    }
+  }
+  if (self.location) {
+    if (![self.location isEqual:aMediaMetadata.location]) {
+      return NO;
+    }
+  }
+  if (self.timeTaken) {
+    if (![self.timeTaken isEqual:aMediaMetadata.timeTaken]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -5295,69 +8158,6 @@
 
 @end
 
-#import "DBFILESPathRootError.h"
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-
-#pragma mark - API Object
-
-@implementation DBFILESPathRootError
-
-#pragma mark - Constructors
-
-- (instancetype)initWithPathRoot:(NSString *)pathRoot {
-
-  self = [super init];
-  if (self) {
-    _pathRoot = pathRoot;
-  }
-  return self;
-}
-
-- (instancetype)init {
-  return [self initWithPathRoot:nil];
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBFILESPathRootErrorSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBFILESPathRootErrorSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBFILESPathRootErrorSerializer serialize:self] description];
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBFILESPathRootErrorSerializer
-
-+ (NSDictionary *)serialize:(DBFILESPathRootError *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if (valueObj.pathRoot) {
-    jsonDict[@"path_root"] = valueObj.pathRoot;
-  }
-
-  return jsonDict;
-}
-
-+ (DBFILESPathRootError *)deserialize:(NSDictionary *)valueDict {
-  NSString *pathRoot = valueDict[@"path_root"] ?: nil;
-
-  return [[DBFILESPathRootError alloc] initWithPathRoot:pathRoot];
-}
-
-@end
-
 #import "DBFILESDimensions.h"
 #import "DBFILESGpsCoordinates.h"
 #import "DBFILESMediaMetadata.h"
@@ -5381,7 +8181,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithDimensions:nil location:nil timeTaken:nil];
 }
 
@@ -5399,6 +8199,67 @@
 
 - (NSString *)description {
   return [[DBFILESPhotoMetadataSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.dimensions) {
+    result = prime * result + [self.dimensions hash];
+  }
+  if (self.location) {
+    result = prime * result + [self.location hash];
+  }
+  if (self.timeTaken) {
+    result = prime * result + [self.timeTaken hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPhotoMetadata:other];
+}
+
+- (BOOL)isEqualToPhotoMetadata:(DBFILESPhotoMetadata *)aPhotoMetadata {
+  if (self == aPhotoMetadata) {
+    return YES;
+  }
+  if (self.dimensions) {
+    if (![self.dimensions isEqual:aPhotoMetadata.dimensions]) {
+      return NO;
+    }
+  }
+  if (self.location) {
+    if (![self.location isEqual:aPhotoMetadata.location]) {
+      return NO;
+    }
+  }
+  if (self.timeTaken) {
+    if (![self.timeTaken isEqual:aPhotoMetadata.timeTaken]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -5479,6 +8340,55 @@
 
 - (NSString *)description {
   return [[DBFILESPreviewArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  if (self.rev) {
+    result = prime * result + [self.rev hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPreviewArg:other];
+}
+
+- (BOOL)isEqualToPreviewArg:(DBFILESPreviewArg *)aPreviewArg {
+  if (self == aPreviewArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aPreviewArg.path]) {
+    return NO;
+  }
+  if (self.rev) {
+    if (![self.rev isEqual:aPreviewArg.rev]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -5612,6 +8522,66 @@
   return [[DBFILESPreviewErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESPreviewErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESPreviewErrorInProgress:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESPreviewErrorUnsupportedExtension:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESPreviewErrorUnsupportedContent:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPreviewError:other];
+}
+
+- (BOOL)isEqualToPreviewError:(DBFILESPreviewError *)aPreviewError {
+  if (self == aPreviewError) {
+    return YES;
+  }
+  if (self.tag != aPreviewError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESPreviewErrorPath:
+    return [self.path isEqual:aPreviewError.path];
+  case DBFILESPreviewErrorInProgress:
+    return [[self tagName] isEqual:[aPreviewError tagName]];
+  case DBFILESPreviewErrorUnsupportedExtension:
+    return [[self tagName] isEqual:[aPreviewError tagName]];
+  case DBFILESPreviewErrorUnsupportedContent:
+    return [[self tagName] isEqual:[aPreviewError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -5658,6 +8628,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESPropertyGroupUpdate.h"
@@ -5709,6 +8680,63 @@
   return [[DBFILESPropertyGroupUpdateSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.templateId hash];
+  if (self.addOrUpdateFields) {
+    result = prime * result + [self.addOrUpdateFields hash];
+  }
+  if (self.removeFields) {
+    result = prime * result + [self.removeFields hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyGroupUpdate:other];
+}
+
+- (BOOL)isEqualToPropertyGroupUpdate:(DBFILESPropertyGroupUpdate *)aPropertyGroupUpdate {
+  if (self == aPropertyGroupUpdate) {
+    return YES;
+  }
+  if (![self.templateId isEqual:aPropertyGroupUpdate.templateId]) {
+    return NO;
+  }
+  if (self.addOrUpdateFields) {
+    if (![self.addOrUpdateFields isEqual:aPropertyGroupUpdate.addOrUpdateFields]) {
+      return NO;
+    }
+  }
+  if (self.removeFields) {
+    if (![self.removeFields isEqual:aPropertyGroupUpdate.removeFields]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -5722,14 +8750,14 @@
   if (valueObj.addOrUpdateFields) {
     jsonDict[@"add_or_update_fields"] =
         [DBArraySerializer serialize:valueObj.addOrUpdateFields
-                           withBlock:^id(id elem) {
-                             return [DBPROPERTIESPropertyFieldSerializer serialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPROPERTIESPropertyFieldSerializer serialize:elem0];
                            }];
   }
   if (valueObj.removeFields) {
     jsonDict[@"remove_fields"] = [DBArraySerializer serialize:valueObj.removeFields
-                                                    withBlock:^id(id elem) {
-                                                      return elem;
+                                                    withBlock:^id(id elem0) {
+                                                      return elem0;
                                                     }];
   }
 
@@ -5741,14 +8769,14 @@
   NSArray<DBPROPERTIESPropertyField *> *addOrUpdateFields =
       valueDict[@"add_or_update_fields"]
           ? [DBArraySerializer deserialize:valueDict[@"add_or_update_fields"]
-                                 withBlock:^id(id elem) {
-                                   return [DBPROPERTIESPropertyFieldSerializer deserialize:elem];
+                                 withBlock:^id(id elem0) {
+                                   return [DBPROPERTIESPropertyFieldSerializer deserialize:elem0];
                                  }]
           : nil;
   NSArray<NSString *> *removeFields = valueDict[@"remove_fields"]
                                           ? [DBArraySerializer deserialize:valueDict[@"remove_fields"]
-                                                                 withBlock:^id(id elem) {
-                                                                   return elem;
+                                                                 withBlock:^id(id elem0) {
+                                                                   return elem0;
                                                                  }]
                                           : nil;
 
@@ -5798,6 +8826,51 @@
   return [[DBFILESPropertyGroupWithPathSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.propertyGroups hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyGroupWithPath:other];
+}
+
+- (BOOL)isEqualToPropertyGroupWithPath:(DBFILESPropertyGroupWithPath *)aPropertyGroupWithPath {
+  if (self == aPropertyGroupWithPath) {
+    return YES;
+  }
+  if (![self.path isEqual:aPropertyGroupWithPath.path]) {
+    return NO;
+  }
+  if (![self.propertyGroups isEqual:aPropertyGroupWithPath.propertyGroups]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -5809,8 +8882,8 @@
 
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"property_groups"] = [DBArraySerializer serialize:valueObj.propertyGroups
-                                                    withBlock:^id(id elem) {
-                                                      return [DBPROPERTIESPropertyGroupSerializer serialize:elem];
+                                                    withBlock:^id(id elem0) {
+                                                      return [DBPROPERTIESPropertyGroupSerializer serialize:elem0];
                                                     }];
 
   return jsonDict;
@@ -5820,8 +8893,8 @@
   NSString *path = valueDict[@"path"];
   NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups =
       [DBArraySerializer deserialize:valueDict[@"property_groups"]
-                           withBlock:^id(id elem) {
-                             return [DBPROPERTIESPropertyGroupSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPROPERTIESPropertyGroupSerializer deserialize:elem0];
                            }];
 
   return [[DBFILESPropertyGroupWithPath alloc] initWithPath:path propertyGroups:propertyGroups];
@@ -5865,6 +8938,51 @@
 
 - (NSString *)description {
   return [[DBFILESRelocationPathSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.fromPath hash];
+  result = prime * result + [self.toPath hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationPath:other];
+}
+
+- (BOOL)isEqualToRelocationPath:(DBFILESRelocationPath *)aRelocationPath {
+  if (self == aRelocationPath) {
+    return YES;
+  }
+  if (![self.fromPath isEqual:aRelocationPath.fromPath]) {
+    return NO;
+  }
+  if (![self.toPath isEqual:aRelocationPath.toPath]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -5935,6 +9053,59 @@
 
 - (NSString *)description {
   return [[DBFILESRelocationArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.fromPath hash];
+  result = prime * result + [self.toPath hash];
+  result = prime * result + [self.allowSharedFolder hash];
+  result = prime * result + [self.autorename hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationArg:other];
+}
+
+- (BOOL)isEqualToRelocationArg:(DBFILESRelocationArg *)aRelocationArg {
+  if (self == aRelocationArg) {
+    return YES;
+  }
+  if (![self.fromPath isEqual:aRelocationArg.fromPath]) {
+    return NO;
+  }
+  if (![self.toPath isEqual:aRelocationArg.toPath]) {
+    return NO;
+  }
+  if (![self.allowSharedFolder isEqual:aRelocationArg.allowSharedFolder]) {
+    return NO;
+  }
+  if (![self.autorename isEqual:aRelocationArg.autorename]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -6013,6 +9184,55 @@
   return [[DBFILESRelocationBatchArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+  result = prime * result + [self.allowSharedFolder hash];
+  result = prime * result + [self.autorename hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationBatchArg:other];
+}
+
+- (BOOL)isEqualToRelocationBatchArg:(DBFILESRelocationBatchArg *)aRelocationBatchArg {
+  if (self == aRelocationBatchArg) {
+    return YES;
+  }
+  if (![self.entries isEqual:aRelocationBatchArg.entries]) {
+    return NO;
+  }
+  if (![self.allowSharedFolder isEqual:aRelocationBatchArg.allowSharedFolder]) {
+    return NO;
+  }
+  if (![self.autorename isEqual:aRelocationBatchArg.autorename]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -6023,8 +9243,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESRelocationPathSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESRelocationPathSerializer serialize:elem0];
                                             }];
   jsonDict[@"allow_shared_folder"] = valueObj.allowSharedFolder;
   jsonDict[@"autorename"] = valueObj.autorename;
@@ -6035,8 +9255,8 @@
 + (DBFILESRelocationBatchArg *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESRelocationPath *> *entries =
       [DBArraySerializer deserialize:valueDict[@"entries"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESRelocationPathSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESRelocationPathSerializer deserialize:elem0];
                            }];
   NSNumber *allowSharedFolder = valueDict[@"allow_shared_folder"] ?: @NO;
   NSNumber *autorename = valueDict[@"autorename"] ?: @NO;
@@ -6244,6 +9464,86 @@
   return [[DBFILESRelocationErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESRelocationErrorFromLookup:
+    result = prime * result + [self.fromLookup hash];
+  case DBFILESRelocationErrorFromWrite:
+    result = prime * result + [self.fromWrite hash];
+  case DBFILESRelocationErrorTo:
+    result = prime * result + [self.to hash];
+  case DBFILESRelocationErrorCantCopySharedFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationErrorCantNestSharedFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationErrorCantMoveFolderIntoItself:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationErrorTooManyFiles:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationErrorDuplicatedOrNestedPaths:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationError:other];
+}
+
+- (BOOL)isEqualToRelocationError:(DBFILESRelocationError *)aRelocationError {
+  if (self == aRelocationError) {
+    return YES;
+  }
+  if (self.tag != aRelocationError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESRelocationErrorFromLookup:
+    return [self.fromLookup isEqual:aRelocationError.fromLookup];
+  case DBFILESRelocationErrorFromWrite:
+    return [self.fromWrite isEqual:aRelocationError.fromWrite];
+  case DBFILESRelocationErrorTo:
+    return [self.to isEqual:aRelocationError.to];
+  case DBFILESRelocationErrorCantCopySharedFolder:
+    return [[self tagName] isEqual:[aRelocationError tagName]];
+  case DBFILESRelocationErrorCantNestSharedFolder:
+    return [[self tagName] isEqual:[aRelocationError tagName]];
+  case DBFILESRelocationErrorCantMoveFolderIntoItself:
+    return [[self tagName] isEqual:[aRelocationError tagName]];
+  case DBFILESRelocationErrorTooManyFiles:
+    return [[self tagName] isEqual:[aRelocationError tagName]];
+  case DBFILESRelocationErrorDuplicatedOrNestedPaths:
+    return [[self tagName] isEqual:[aRelocationError tagName]];
+  case DBFILESRelocationErrorOther:
+    return [[self tagName] isEqual:[aRelocationError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -6309,6 +9609,7 @@
     return [[DBFILESRelocationError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESLookupError.h"
@@ -6522,6 +9823,90 @@
   return [[DBFILESRelocationBatchErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESRelocationBatchErrorFromLookup:
+    result = prime * result + [self.fromLookup hash];
+  case DBFILESRelocationBatchErrorFromWrite:
+    result = prime * result + [self.fromWrite hash];
+  case DBFILESRelocationBatchErrorTo:
+    result = prime * result + [self.to hash];
+  case DBFILESRelocationBatchErrorCantCopySharedFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchErrorCantNestSharedFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchErrorCantMoveFolderIntoItself:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchErrorTooManyFiles:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchErrorDuplicatedOrNestedPaths:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchErrorTooManyWriteOperations:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationBatchError:other];
+}
+
+- (BOOL)isEqualToRelocationBatchError:(DBFILESRelocationBatchError *)aRelocationBatchError {
+  if (self == aRelocationBatchError) {
+    return YES;
+  }
+  if (self.tag != aRelocationBatchError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESRelocationBatchErrorFromLookup:
+    return [self.fromLookup isEqual:aRelocationBatchError.fromLookup];
+  case DBFILESRelocationBatchErrorFromWrite:
+    return [self.fromWrite isEqual:aRelocationBatchError.fromWrite];
+  case DBFILESRelocationBatchErrorTo:
+    return [self.to isEqual:aRelocationBatchError.to];
+  case DBFILESRelocationBatchErrorCantCopySharedFolder:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  case DBFILESRelocationBatchErrorCantNestSharedFolder:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  case DBFILESRelocationBatchErrorCantMoveFolderIntoItself:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  case DBFILESRelocationBatchErrorTooManyFiles:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  case DBFILESRelocationBatchErrorDuplicatedOrNestedPaths:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  case DBFILESRelocationBatchErrorOther:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  case DBFILESRelocationBatchErrorTooManyWriteOperations:
+    return [[self tagName] isEqual:[aRelocationBatchError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -6591,6 +9976,7 @@
     return [[DBFILESRelocationBatchError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBASYNCPollResultBase.h"
@@ -6696,6 +10082,62 @@
   return [[DBFILESRelocationBatchJobStatusSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESRelocationBatchJobStatusInProgress:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRelocationBatchJobStatusComplete:
+    result = prime * result + [self.complete hash];
+  case DBFILESRelocationBatchJobStatusFailed:
+    result = prime * result + [self.failed hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationBatchJobStatus:other];
+}
+
+- (BOOL)isEqualToRelocationBatchJobStatus:(DBFILESRelocationBatchJobStatus *)aRelocationBatchJobStatus {
+  if (self == aRelocationBatchJobStatus) {
+    return YES;
+  }
+  if (self.tag != aRelocationBatchJobStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESRelocationBatchJobStatusInProgress:
+    return [[self tagName] isEqual:[aRelocationBatchJobStatus tagName]];
+  case DBFILESRelocationBatchJobStatusComplete:
+    return [self.complete isEqual:aRelocationBatchJobStatus.complete];
+  case DBFILESRelocationBatchJobStatusFailed:
+    return [self.failed isEqual:aRelocationBatchJobStatus.failed];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -6740,6 +10182,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCLaunchResultBase.h"
@@ -6844,6 +10287,62 @@
   return [[DBFILESRelocationBatchLaunchSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESRelocationBatchLaunchAsyncJobId:
+    result = prime * result + [self.asyncJobId hash];
+  case DBFILESRelocationBatchLaunchComplete:
+    result = prime * result + [self.complete hash];
+  case DBFILESRelocationBatchLaunchOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationBatchLaunch:other];
+}
+
+- (BOOL)isEqualToRelocationBatchLaunch:(DBFILESRelocationBatchLaunch *)aRelocationBatchLaunch {
+  if (self == aRelocationBatchLaunch) {
+    return YES;
+  }
+  if (self.tag != aRelocationBatchLaunch.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESRelocationBatchLaunchAsyncJobId:
+    return [self.asyncJobId isEqual:aRelocationBatchLaunch.asyncJobId];
+  case DBFILESRelocationBatchLaunchComplete:
+    return [self.complete isEqual:aRelocationBatchLaunch.complete];
+  case DBFILESRelocationBatchLaunchOther:
+    return [[self tagName] isEqual:[aRelocationBatchLaunch tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -6883,6 +10382,7 @@
     return [[DBFILESRelocationBatchLaunch alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESRelocationBatchResult.h"
@@ -6922,6 +10422,47 @@
   return [[DBFILESRelocationBatchResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationBatchResult:other];
+}
+
+- (BOOL)isEqualToRelocationBatchResult:(DBFILESRelocationBatchResult *)aRelocationBatchResult {
+  if (self == aRelocationBatchResult) {
+    return YES;
+  }
+  if (![self.entries isEqual:aRelocationBatchResult.entries]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -6932,8 +10473,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESRelocationResultSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESRelocationResultSerializer serialize:elem0];
                                             }];
 
   return jsonDict;
@@ -6942,8 +10483,8 @@
 + (DBFILESRelocationBatchResult *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESRelocationResult *> *entries =
       [DBArraySerializer deserialize:valueDict[@"entries"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESRelocationResultSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESRelocationResultSerializer deserialize:elem0];
                            }];
 
   return [[DBFILESRelocationBatchResult alloc] initWithEntries:entries];
@@ -6985,6 +10526,47 @@
 
 - (NSString *)description {
   return [[DBFILESRelocationResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.metadata hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRelocationResult:other];
+}
+
+- (BOOL)isEqualToRelocationResult:(DBFILESRelocationResult *)aRelocationResult {
+  if (self == aRelocationResult) {
+    return YES;
+  }
+  if (![self.metadata isEqual:aRelocationResult.metadata]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -7049,6 +10631,51 @@
   return [[DBFILESRemovePropertiesArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.propertyTemplateIds hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRemovePropertiesArg:other];
+}
+
+- (BOOL)isEqualToRemovePropertiesArg:(DBFILESRemovePropertiesArg *)aRemovePropertiesArg {
+  if (self == aRemovePropertiesArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aRemovePropertiesArg.path]) {
+    return NO;
+  }
+  if (![self.propertyTemplateIds isEqual:aRemovePropertiesArg.propertyTemplateIds]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -7060,8 +10687,8 @@
 
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"property_template_ids"] = [DBArraySerializer serialize:valueObj.propertyTemplateIds
-                                                          withBlock:^id(id elem) {
-                                                            return elem;
+                                                          withBlock:^id(id elem0) {
+                                                            return elem0;
                                                           }];
 
   return jsonDict;
@@ -7070,8 +10697,8 @@
 + (DBFILESRemovePropertiesArg *)deserialize:(NSDictionary *)valueDict {
   NSString *path = valueDict[@"path"];
   NSArray<NSString *> *propertyTemplateIds = [DBArraySerializer deserialize:valueDict[@"property_template_ids"]
-                                                                  withBlock:^id(id elem) {
-                                                                    return elem;
+                                                                  withBlock:^id(id elem0) {
+                                                                    return elem0;
                                                                   }];
 
   return [[DBFILESRemovePropertiesArg alloc] initWithPath:path propertyTemplateIds:propertyTemplateIds];
@@ -7222,6 +10849,70 @@
   return [[DBFILESRemovePropertiesErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESRemovePropertiesErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBFILESRemovePropertiesErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRemovePropertiesErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRemovePropertiesErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESRemovePropertiesErrorPropertyGroupLookup:
+    result = prime * result + [self.propertyGroupLookup hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRemovePropertiesError:other];
+}
+
+- (BOOL)isEqualToRemovePropertiesError:(DBFILESRemovePropertiesError *)aRemovePropertiesError {
+  if (self == aRemovePropertiesError) {
+    return YES;
+  }
+  if (self.tag != aRemovePropertiesError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESRemovePropertiesErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:aRemovePropertiesError.templateNotFound];
+  case DBFILESRemovePropertiesErrorRestrictedContent:
+    return [[self tagName] isEqual:[aRemovePropertiesError tagName]];
+  case DBFILESRemovePropertiesErrorOther:
+    return [[self tagName] isEqual:[aRemovePropertiesError tagName]];
+  case DBFILESRemovePropertiesErrorPath:
+    return [self.path isEqual:aRemovePropertiesError.path];
+  case DBFILESRemovePropertiesErrorPropertyGroupLookup:
+    return [self.propertyGroupLookup isEqual:aRemovePropertiesError.propertyGroupLookup];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -7273,6 +10964,7 @@
     return [[DBFILESRemovePropertiesError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESRestoreArg.h"
@@ -7311,6 +11003,51 @@
 
 - (NSString *)description {
   return [[DBFILESRestoreArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.rev hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRestoreArg:other];
+}
+
+- (BOOL)isEqualToRestoreArg:(DBFILESRestoreArg *)aRestoreArg {
+  if (self == aRestoreArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aRestoreArg.path]) {
+    return NO;
+  }
+  if (![self.rev isEqual:aRestoreArg.rev]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -7453,6 +11190,66 @@
   return [[DBFILESRestoreErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESRestoreErrorPathLookup:
+    result = prime * result + [self.pathLookup hash];
+  case DBFILESRestoreErrorPathWrite:
+    result = prime * result + [self.pathWrite hash];
+  case DBFILESRestoreErrorInvalidRevision:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESRestoreErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRestoreError:other];
+}
+
+- (BOOL)isEqualToRestoreError:(DBFILESRestoreError *)aRestoreError {
+  if (self == aRestoreError) {
+    return YES;
+  }
+  if (self.tag != aRestoreError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESRestoreErrorPathLookup:
+    return [self.pathLookup isEqual:aRestoreError.pathLookup];
+  case DBFILESRestoreErrorPathWrite:
+    return [self.pathWrite isEqual:aRestoreError.pathWrite];
+  case DBFILESRestoreErrorInvalidRevision:
+    return [[self tagName] isEqual:[aRestoreError tagName]];
+  case DBFILESRestoreErrorOther:
+    return [[self tagName] isEqual:[aRestoreError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -7496,6 +11293,7 @@
     return [[DBFILESRestoreError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESSaveCopyReferenceArg.h"
@@ -7533,6 +11331,51 @@
 
 - (NSString *)description {
   return [[DBFILESSaveCopyReferenceArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dCopyReference hash];
+  result = prime * result + [self.path hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveCopyReferenceArg:other];
+}
+
+- (BOOL)isEqualToSaveCopyReferenceArg:(DBFILESSaveCopyReferenceArg *)aSaveCopyReferenceArg {
+  if (self == aSaveCopyReferenceArg) {
+    return YES;
+  }
+  if (![self.dCopyReference isEqual:aSaveCopyReferenceArg.dCopyReference]) {
+    return NO;
+  }
+  if (![self.path isEqual:aSaveCopyReferenceArg.path]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -7692,6 +11535,74 @@
   return [[DBFILESSaveCopyReferenceErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSaveCopyReferenceErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESSaveCopyReferenceErrorInvalidCopyReference:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveCopyReferenceErrorNoPermission:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveCopyReferenceErrorNotFound:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveCopyReferenceErrorTooManyFiles:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveCopyReferenceErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveCopyReferenceError:other];
+}
+
+- (BOOL)isEqualToSaveCopyReferenceError:(DBFILESSaveCopyReferenceError *)aSaveCopyReferenceError {
+  if (self == aSaveCopyReferenceError) {
+    return YES;
+  }
+  if (self.tag != aSaveCopyReferenceError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSaveCopyReferenceErrorPath:
+    return [self.path isEqual:aSaveCopyReferenceError.path];
+  case DBFILESSaveCopyReferenceErrorInvalidCopyReference:
+    return [[self tagName] isEqual:[aSaveCopyReferenceError tagName]];
+  case DBFILESSaveCopyReferenceErrorNoPermission:
+    return [[self tagName] isEqual:[aSaveCopyReferenceError tagName]];
+  case DBFILESSaveCopyReferenceErrorNotFound:
+    return [[self tagName] isEqual:[aSaveCopyReferenceError tagName]];
+  case DBFILESSaveCopyReferenceErrorTooManyFiles:
+    return [[self tagName] isEqual:[aSaveCopyReferenceError tagName]];
+  case DBFILESSaveCopyReferenceErrorOther:
+    return [[self tagName] isEqual:[aSaveCopyReferenceError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -7741,6 +11652,7 @@
     return [[DBFILESSaveCopyReferenceError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESMetadata.h"
@@ -7777,6 +11689,47 @@
 
 - (NSString *)description {
   return [[DBFILESSaveCopyReferenceResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.metadata hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveCopyReferenceResult:other];
+}
+
+- (BOOL)isEqualToSaveCopyReferenceResult:(DBFILESSaveCopyReferenceResult *)aSaveCopyReferenceResult {
+  if (self == aSaveCopyReferenceResult) {
+    return YES;
+  }
+  if (![self.metadata isEqual:aSaveCopyReferenceResult.metadata]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -7836,6 +11789,51 @@
 
 - (NSString *)description {
   return [[DBFILESSaveUrlArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.url hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveUrlArg:other];
+}
+
+- (BOOL)isEqualToSaveUrlArg:(DBFILESSaveUrlArg *)aSaveUrlArg {
+  if (self == aSaveUrlArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aSaveUrlArg.path]) {
+    return NO;
+  }
+  if (![self.url isEqual:aSaveUrlArg.url]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -7981,6 +11979,70 @@
   return [[DBFILESSaveUrlErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSaveUrlErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESSaveUrlErrorDownloadFailed:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveUrlErrorInvalidUrl:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveUrlErrorNotFound:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveUrlErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveUrlError:other];
+}
+
+- (BOOL)isEqualToSaveUrlError:(DBFILESSaveUrlError *)aSaveUrlError {
+  if (self == aSaveUrlError) {
+    return YES;
+  }
+  if (self.tag != aSaveUrlError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSaveUrlErrorPath:
+    return [self.path isEqual:aSaveUrlError.path];
+  case DBFILESSaveUrlErrorDownloadFailed:
+    return [[self tagName] isEqual:[aSaveUrlError tagName]];
+  case DBFILESSaveUrlErrorInvalidUrl:
+    return [[self tagName] isEqual:[aSaveUrlError tagName]];
+  case DBFILESSaveUrlErrorNotFound:
+    return [[self tagName] isEqual:[aSaveUrlError tagName]];
+  case DBFILESSaveUrlErrorOther:
+    return [[self tagName] isEqual:[aSaveUrlError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8026,6 +12088,7 @@
     return [[DBFILESSaveUrlError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBASYNCPollResultBase.h"
@@ -8131,6 +12194,62 @@
   return [[DBFILESSaveUrlJobStatusSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSaveUrlJobStatusInProgress:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSaveUrlJobStatusComplete:
+    result = prime * result + [self.complete hash];
+  case DBFILESSaveUrlJobStatusFailed:
+    result = prime * result + [self.failed hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveUrlJobStatus:other];
+}
+
+- (BOOL)isEqualToSaveUrlJobStatus:(DBFILESSaveUrlJobStatus *)aSaveUrlJobStatus {
+  if (self == aSaveUrlJobStatus) {
+    return YES;
+  }
+  if (self.tag != aSaveUrlJobStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSaveUrlJobStatusInProgress:
+    return [[self tagName] isEqual:[aSaveUrlJobStatus tagName]];
+  case DBFILESSaveUrlJobStatusComplete:
+    return [self.complete isEqual:aSaveUrlJobStatus.complete];
+  case DBFILESSaveUrlJobStatusFailed:
+    return [self.failed isEqual:aSaveUrlJobStatus.failed];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8175,6 +12294,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCLaunchResultBase.h"
@@ -8265,6 +12385,58 @@
   return [[DBFILESSaveUrlResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSaveUrlResultAsyncJobId:
+    result = prime * result + [self.asyncJobId hash];
+  case DBFILESSaveUrlResultComplete:
+    result = prime * result + [self.complete hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSaveUrlResult:other];
+}
+
+- (BOOL)isEqualToSaveUrlResult:(DBFILESSaveUrlResult *)aSaveUrlResult {
+  if (self == aSaveUrlResult) {
+    return YES;
+  }
+  if (self.tag != aSaveUrlResult.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSaveUrlResultAsyncJobId:
+    return [self.asyncJobId isEqual:aSaveUrlResult.asyncJobId];
+  case DBFILESSaveUrlResultComplete:
+    return [self.complete isEqual:aSaveUrlResult.complete];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8305,6 +12477,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESSearchArg.h"
@@ -8355,6 +12528,63 @@
 
 - (NSString *)description {
   return [[DBFILESSearchArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.query hash];
+  result = prime * result + [self.start hash];
+  result = prime * result + [self.maxResults hash];
+  result = prime * result + [self.mode hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSearchArg:other];
+}
+
+- (BOOL)isEqualToSearchArg:(DBFILESSearchArg *)aSearchArg {
+  if (self == aSearchArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aSearchArg.path]) {
+    return NO;
+  }
+  if (![self.query isEqual:aSearchArg.query]) {
+    return NO;
+  }
+  if (![self.start isEqual:aSearchArg.start]) {
+    return NO;
+  }
+  if (![self.maxResults isEqual:aSearchArg.maxResults]) {
+    return NO;
+  }
+  if (![self.mode isEqual:aSearchArg.mode]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -8465,6 +12695,58 @@
   return [[DBFILESSearchErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSearchErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESSearchErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSearchError:other];
+}
+
+- (BOOL)isEqualToSearchError:(DBFILESSearchError *)aSearchError {
+  if (self == aSearchError) {
+    return YES;
+  }
+  if (self.tag != aSearchError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSearchErrorPath:
+    return [self.path isEqual:aSearchError.path];
+  case DBFILESSearchErrorOther:
+    return [[self tagName] isEqual:[aSearchError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8498,6 +12780,7 @@
     return [[DBFILESSearchError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESMetadata.h"
@@ -8536,6 +12819,51 @@
 
 - (NSString *)description {
   return [[DBFILESSearchMatchSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.matchType hash];
+  result = prime * result + [self.metadata hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSearchMatch:other];
+}
+
+- (BOOL)isEqualToSearchMatch:(DBFILESSearchMatch *)aSearchMatch {
+  if (self == aSearchMatch) {
+    return YES;
+  }
+  if (![self.matchType isEqual:aSearchMatch.matchType]) {
+    return NO;
+  }
+  if (![self.metadata isEqual:aSearchMatch.metadata]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -8641,6 +12969,62 @@
   return [[DBFILESSearchMatchTypeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSearchMatchTypeFilename:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSearchMatchTypeContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSearchMatchTypeBoth:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSearchMatchType:other];
+}
+
+- (BOOL)isEqualToSearchMatchType:(DBFILESSearchMatchType *)aSearchMatchType {
+  if (self == aSearchMatchType) {
+    return YES;
+  }
+  if (self.tag != aSearchMatchType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSearchMatchTypeFilename:
+    return [[self tagName] isEqual:[aSearchMatchType tagName]];
+  case DBFILESSearchMatchTypeContent:
+    return [[self tagName] isEqual:[aSearchMatchType tagName]];
+  case DBFILESSearchMatchTypeBoth:
+    return [[self tagName] isEqual:[aSearchMatchType tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8681,6 +13065,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESSearchMode.h"
@@ -8762,6 +13147,62 @@
   return [[DBFILESSearchModeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESSearchModeFilename:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSearchModeFilenameAndContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESSearchModeDeletedFilename:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSearchMode:other];
+}
+
+- (BOOL)isEqualToSearchMode:(DBFILESSearchMode *)aSearchMode {
+  if (self == aSearchMode) {
+    return YES;
+  }
+  if (self.tag != aSearchMode.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESSearchModeFilename:
+    return [[self tagName] isEqual:[aSearchMode tagName]];
+  case DBFILESSearchModeFilenameAndContent:
+    return [[self tagName] isEqual:[aSearchMode tagName]];
+  case DBFILESSearchModeDeletedFilename:
+    return [[self tagName] isEqual:[aSearchMode tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8802,6 +13243,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESSearchMatch.h"
@@ -8843,6 +13285,55 @@
   return [[DBFILESSearchResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.matches hash];
+  result = prime * result + [self.more hash];
+  result = prime * result + [self.start hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSearchResult:other];
+}
+
+- (BOOL)isEqualToSearchResult:(DBFILESSearchResult *)aSearchResult {
+  if (self == aSearchResult) {
+    return YES;
+  }
+  if (![self.matches isEqual:aSearchResult.matches]) {
+    return NO;
+  }
+  if (![self.more isEqual:aSearchResult.more]) {
+    return NO;
+  }
+  if (![self.start isEqual:aSearchResult.start]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -8853,8 +13344,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"matches"] = [DBArraySerializer serialize:valueObj.matches
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESSearchMatchSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESSearchMatchSerializer serialize:elem0];
                                             }];
   jsonDict[@"more"] = valueObj.more;
   jsonDict[@"start"] = valueObj.start;
@@ -8865,8 +13356,8 @@
 + (DBFILESSearchResult *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESSearchMatch *> *matches =
       [DBArraySerializer deserialize:valueDict[@"matches"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESSearchMatchSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESSearchMatchSerializer deserialize:elem0];
                            }];
   NSNumber *more = valueDict[@"more"];
   NSNumber *start = valueDict[@"start"];
@@ -8921,6 +13412,55 @@
 
 - (NSString *)description {
   return [[DBFILESThumbnailArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.format hash];
+  result = prime * result + [self.size hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToThumbnailArg:other];
+}
+
+- (BOOL)isEqualToThumbnailArg:(DBFILESThumbnailArg *)aThumbnailArg {
+  if (self == aThumbnailArg) {
+    return YES;
+  }
+  if (![self.path isEqual:aThumbnailArg.path]) {
+    return NO;
+  }
+  if (![self.format isEqual:aThumbnailArg.format]) {
+    return NO;
+  }
+  if (![self.size isEqual:aThumbnailArg.size]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -9057,6 +13597,66 @@
   return [[DBFILESThumbnailErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESThumbnailErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESThumbnailErrorUnsupportedExtension:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailErrorUnsupportedImage:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailErrorConversionError:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToThumbnailError:other];
+}
+
+- (BOOL)isEqualToThumbnailError:(DBFILESThumbnailError *)aThumbnailError {
+  if (self == aThumbnailError) {
+    return YES;
+  }
+  if (self.tag != aThumbnailError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESThumbnailErrorPath:
+    return [self.path isEqual:aThumbnailError.path];
+  case DBFILESThumbnailErrorUnsupportedExtension:
+    return [[self tagName] isEqual:[aThumbnailError tagName]];
+  case DBFILESThumbnailErrorUnsupportedImage:
+    return [[self tagName] isEqual:[aThumbnailError tagName]];
+  case DBFILESThumbnailErrorConversionError:
+    return [[self tagName] isEqual:[aThumbnailError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9103,6 +13703,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESThumbnailFormat.h"
@@ -9170,6 +13771,58 @@
   return [[DBFILESThumbnailFormatSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESThumbnailFormatJpeg:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailFormatPng:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToThumbnailFormat:other];
+}
+
+- (BOOL)isEqualToThumbnailFormat:(DBFILESThumbnailFormat *)aThumbnailFormat {
+  if (self == aThumbnailFormat) {
+    return YES;
+  }
+  if (self.tag != aThumbnailFormat.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESThumbnailFormatJpeg:
+    return [[self tagName] isEqual:[aThumbnailFormat tagName]];
+  case DBFILESThumbnailFormatPng:
+    return [[self tagName] isEqual:[aThumbnailFormat tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9206,6 +13859,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESThumbnailSize.h"
@@ -9315,6 +13969,70 @@
   return [[DBFILESThumbnailSizeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESThumbnailSizeW32h32:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailSizeW64h64:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailSizeW128h128:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailSizeW640h480:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESThumbnailSizeW1024h768:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToThumbnailSize:other];
+}
+
+- (BOOL)isEqualToThumbnailSize:(DBFILESThumbnailSize *)aThumbnailSize {
+  if (self == aThumbnailSize) {
+    return YES;
+  }
+  if (self.tag != aThumbnailSize.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESThumbnailSizeW32h32:
+    return [[self tagName] isEqual:[aThumbnailSize tagName]];
+  case DBFILESThumbnailSizeW64h64:
+    return [[self tagName] isEqual:[aThumbnailSize tagName]];
+  case DBFILESThumbnailSizeW128h128:
+    return [[self tagName] isEqual:[aThumbnailSize tagName]];
+  case DBFILESThumbnailSizeW640h480:
+    return [[self tagName] isEqual:[aThumbnailSize tagName]];
+  case DBFILESThumbnailSizeW1024h768:
+    return [[self tagName] isEqual:[aThumbnailSize tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9363,6 +14081,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESInvalidPropertyGroupError.h"
@@ -9536,6 +14255,78 @@
   return [[DBFILESUpdatePropertiesErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUpdatePropertiesErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBFILESUpdatePropertiesErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUpdatePropertiesErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUpdatePropertiesErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESUpdatePropertiesErrorPropertyFieldTooLarge:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUpdatePropertiesErrorDoesNotFitTemplate:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUpdatePropertiesErrorPropertyGroupLookup:
+    result = prime * result + [self.propertyGroupLookup hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUpdatePropertiesError:other];
+}
+
+- (BOOL)isEqualToUpdatePropertiesError:(DBFILESUpdatePropertiesError *)anUpdatePropertiesError {
+  if (self == anUpdatePropertiesError) {
+    return YES;
+  }
+  if (self.tag != anUpdatePropertiesError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUpdatePropertiesErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:anUpdatePropertiesError.templateNotFound];
+  case DBFILESUpdatePropertiesErrorRestrictedContent:
+    return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
+  case DBFILESUpdatePropertiesErrorOther:
+    return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
+  case DBFILESUpdatePropertiesErrorPath:
+    return [self.path isEqual:anUpdatePropertiesError.path];
+  case DBFILESUpdatePropertiesErrorPropertyFieldTooLarge:
+    return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
+  case DBFILESUpdatePropertiesErrorDoesNotFitTemplate:
+    return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
+  case DBFILESUpdatePropertiesErrorPropertyGroupLookup:
+    return [self.propertyGroupLookup isEqual:anUpdatePropertiesError.propertyGroupLookup];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9595,6 +14386,7 @@
     return [[DBFILESUpdatePropertiesError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESPropertyGroupUpdate.h"
@@ -9637,6 +14429,51 @@
   return [[DBFILESUpdatePropertyGroupArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  result = prime * result + [self.updatePropertyGroups hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUpdatePropertyGroupArg:other];
+}
+
+- (BOOL)isEqualToUpdatePropertyGroupArg:(DBFILESUpdatePropertyGroupArg *)anUpdatePropertyGroupArg {
+  if (self == anUpdatePropertyGroupArg) {
+    return YES;
+  }
+  if (![self.path isEqual:anUpdatePropertyGroupArg.path]) {
+    return NO;
+  }
+  if (![self.updatePropertyGroups isEqual:anUpdatePropertyGroupArg.updatePropertyGroups]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9649,8 +14486,8 @@
   jsonDict[@"path"] = valueObj.path;
   jsonDict[@"update_property_groups"] =
       [DBArraySerializer serialize:valueObj.updatePropertyGroups
-                         withBlock:^id(id elem) {
-                           return [DBFILESPropertyGroupUpdateSerializer serialize:elem];
+                         withBlock:^id(id elem0) {
+                           return [DBFILESPropertyGroupUpdateSerializer serialize:elem0];
                          }];
 
   return jsonDict;
@@ -9660,8 +14497,8 @@
   NSString *path = valueDict[@"path"];
   NSArray<DBFILESPropertyGroupUpdate *> *updatePropertyGroups =
       [DBArraySerializer deserialize:valueDict[@"update_property_groups"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESPropertyGroupUpdateSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESPropertyGroupUpdateSerializer deserialize:elem0];
                            }];
 
   return [[DBFILESUpdatePropertyGroupArg alloc] initWithPath:path updatePropertyGroups:updatePropertyGroups];
@@ -9746,6 +14583,58 @@
   return [[DBFILESUploadErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESUploadErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadError:other];
+}
+
+- (BOOL)isEqualToUploadError:(DBFILESUploadError *)anUploadError {
+  if (self == anUploadError) {
+    return YES;
+  }
+  if (self.tag != anUploadError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadErrorPath:
+    return [self.path isEqual:anUploadError.path];
+  case DBFILESUploadErrorOther:
+    return [[self tagName] isEqual:[anUploadError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9779,6 +14668,7 @@
     return [[DBFILESUploadError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESInvalidPropertyGroupError.h"
@@ -9885,6 +14775,62 @@
   return [[DBFILESUploadErrorWithPropertiesSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadErrorWithPropertiesPath:
+    result = prime * result + [self.path hash];
+  case DBFILESUploadErrorWithPropertiesOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadErrorWithPropertiesPropertiesError:
+    result = prime * result + [self.propertiesError hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadErrorWithProperties:other];
+}
+
+- (BOOL)isEqualToUploadErrorWithProperties:(DBFILESUploadErrorWithProperties *)anUploadErrorWithProperties {
+  if (self == anUploadErrorWithProperties) {
+    return YES;
+  }
+  if (self.tag != anUploadErrorWithProperties.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadErrorWithPropertiesPath:
+    return [self.path isEqual:anUploadErrorWithProperties.path];
+  case DBFILESUploadErrorWithPropertiesOther:
+    return [[self tagName] isEqual:[anUploadErrorWithProperties tagName]];
+  case DBFILESUploadErrorWithPropertiesPropertiesError:
+    return [self.propertiesError isEqual:anUploadErrorWithProperties.propertiesError];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -9926,6 +14872,7 @@
     return [[DBFILESUploadErrorWithProperties alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESUploadSessionAppendArg.h"
@@ -9967,6 +14914,51 @@
 
 - (NSString *)description {
   return [[DBFILESUploadSessionAppendArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.close hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionAppendArg:other];
+}
+
+- (BOOL)isEqualToUploadSessionAppendArg:(DBFILESUploadSessionAppendArg *)anUploadSessionAppendArg {
+  if (self == anUploadSessionAppendArg) {
+    return YES;
+  }
+  if (![self.cursor isEqual:anUploadSessionAppendArg.cursor]) {
+    return NO;
+  }
+  if (![self.close isEqual:anUploadSessionAppendArg.close]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -10027,6 +15019,51 @@
 
 - (NSString *)description {
   return [[DBFILESUploadSessionCursorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.sessionId hash];
+  result = prime * result + [self.offset hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionCursor:other];
+}
+
+- (BOOL)isEqualToUploadSessionCursor:(DBFILESUploadSessionCursor *)anUploadSessionCursor {
+  if (self == anUploadSessionCursor) {
+    return YES;
+  }
+  if (![self.sessionId isEqual:anUploadSessionCursor.sessionId]) {
+    return NO;
+  }
+  if (![self.offset isEqual:anUploadSessionCursor.offset]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -10091,6 +15128,51 @@
   return [[DBFILESUploadSessionFinishArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.commit hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishArg:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishArg:(DBFILESUploadSessionFinishArg *)anUploadSessionFinishArg {
+  if (self == anUploadSessionFinishArg) {
+    return YES;
+  }
+  if (![self.cursor isEqual:anUploadSessionFinishArg.cursor]) {
+    return NO;
+  }
+  if (![self.commit isEqual:anUploadSessionFinishArg.commit]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10152,6 +15234,47 @@
   return [[DBFILESUploadSessionFinishBatchArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishBatchArg:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishBatchArg:(DBFILESUploadSessionFinishBatchArg *)anUploadSessionFinishBatchArg {
+  if (self == anUploadSessionFinishBatchArg) {
+    return YES;
+  }
+  if (![self.entries isEqual:anUploadSessionFinishBatchArg.entries]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10162,8 +15285,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"entries"] = [DBArraySerializer serialize:valueObj.entries
-                                            withBlock:^id(id elem) {
-                                              return [DBFILESUploadSessionFinishArgSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBFILESUploadSessionFinishArgSerializer serialize:elem0];
                                             }];
 
   return jsonDict;
@@ -10172,8 +15295,8 @@
 + (DBFILESUploadSessionFinishBatchArg *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESUploadSessionFinishArg *> *entries =
       [DBArraySerializer deserialize:valueDict[@"entries"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESUploadSessionFinishArgSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESUploadSessionFinishArgSerializer deserialize:elem0];
                            }];
 
   return [[DBFILESUploadSessionFinishBatchArg alloc] initWithEntries:entries];
@@ -10260,6 +15383,59 @@
   return [[DBFILESUploadSessionFinishBatchJobStatusSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadSessionFinishBatchJobStatusInProgress:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionFinishBatchJobStatusComplete:
+    result = prime * result + [self.complete hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishBatchJobStatus:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishBatchJobStatus:
+    (DBFILESUploadSessionFinishBatchJobStatus *)anUploadSessionFinishBatchJobStatus {
+  if (self == anUploadSessionFinishBatchJobStatus) {
+    return YES;
+  }
+  if (self.tag != anUploadSessionFinishBatchJobStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadSessionFinishBatchJobStatusInProgress:
+    return [[self tagName] isEqual:[anUploadSessionFinishBatchJobStatus tagName]];
+  case DBFILESUploadSessionFinishBatchJobStatusComplete:
+    return [self.complete isEqual:anUploadSessionFinishBatchJobStatus.complete];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10299,6 +15475,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBASYNCLaunchResultBase.h"
@@ -10405,6 +15582,63 @@
   return [[DBFILESUploadSessionFinishBatchLaunchSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadSessionFinishBatchLaunchAsyncJobId:
+    result = prime * result + [self.asyncJobId hash];
+  case DBFILESUploadSessionFinishBatchLaunchComplete:
+    result = prime * result + [self.complete hash];
+  case DBFILESUploadSessionFinishBatchLaunchOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishBatchLaunch:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishBatchLaunch:
+    (DBFILESUploadSessionFinishBatchLaunch *)anUploadSessionFinishBatchLaunch {
+  if (self == anUploadSessionFinishBatchLaunch) {
+    return YES;
+  }
+  if (self.tag != anUploadSessionFinishBatchLaunch.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadSessionFinishBatchLaunchAsyncJobId:
+    return [self.asyncJobId isEqual:anUploadSessionFinishBatchLaunch.asyncJobId];
+  case DBFILESUploadSessionFinishBatchLaunchComplete:
+    return [self.complete isEqual:anUploadSessionFinishBatchLaunch.complete];
+  case DBFILESUploadSessionFinishBatchLaunchOther:
+    return [[self tagName] isEqual:[anUploadSessionFinishBatchLaunch tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10445,6 +15679,7 @@
     return [[DBFILESUploadSessionFinishBatchLaunch alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESUploadSessionFinishBatchResult.h"
@@ -10484,6 +15719,48 @@
   return [[DBFILESUploadSessionFinishBatchResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.entries hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishBatchResult:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishBatchResult:
+    (DBFILESUploadSessionFinishBatchResult *)anUploadSessionFinishBatchResult {
+  if (self == anUploadSessionFinishBatchResult) {
+    return YES;
+  }
+  if (![self.entries isEqual:anUploadSessionFinishBatchResult.entries]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10495,8 +15772,8 @@
 
   jsonDict[@"entries"] =
       [DBArraySerializer serialize:valueObj.entries
-                         withBlock:^id(id elem) {
-                           return [DBFILESUploadSessionFinishBatchResultEntrySerializer serialize:elem];
+                         withBlock:^id(id elem0) {
+                           return [DBFILESUploadSessionFinishBatchResultEntrySerializer serialize:elem0];
                          }];
 
   return jsonDict;
@@ -10505,8 +15782,8 @@
 + (DBFILESUploadSessionFinishBatchResult *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBFILESUploadSessionFinishBatchResultEntry *> *entries =
       [DBArraySerializer deserialize:valueDict[@"entries"]
-                           withBlock:^id(id elem) {
-                             return [DBFILESUploadSessionFinishBatchResultEntrySerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBFILESUploadSessionFinishBatchResultEntrySerializer deserialize:elem0];
                            }];
 
   return [[DBFILESUploadSessionFinishBatchResult alloc] initWithEntries:entries];
@@ -10604,6 +15881,59 @@
   return [[DBFILESUploadSessionFinishBatchResultEntrySerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadSessionFinishBatchResultEntrySuccess:
+    result = prime * result + [self.success hash];
+  case DBFILESUploadSessionFinishBatchResultEntryFailure:
+    result = prime * result + [self.failure hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishBatchResultEntry:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishBatchResultEntry:
+    (DBFILESUploadSessionFinishBatchResultEntry *)anUploadSessionFinishBatchResultEntry {
+  if (self == anUploadSessionFinishBatchResultEntry) {
+    return YES;
+  }
+  if (self.tag != anUploadSessionFinishBatchResultEntry.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadSessionFinishBatchResultEntrySuccess:
+    return [self.success isEqual:anUploadSessionFinishBatchResultEntry.success];
+  case DBFILESUploadSessionFinishBatchResultEntryFailure:
+    return [self.failure isEqual:anUploadSessionFinishBatchResultEntry.failure];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10645,6 +15975,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBFILESUploadSessionFinishError.h"
@@ -10684,6 +16015,14 @@
   self = [super init];
   if (self) {
     _tag = DBFILESUploadSessionFinishErrorTooManySharedFolderTargets;
+  }
+  return self;
+}
+
+- (instancetype)initWithTooManyWriteOperations {
+  self = [super init];
+  if (self) {
+    _tag = DBFILESUploadSessionFinishErrorTooManyWriteOperations;
   }
   return self;
 }
@@ -10729,6 +16068,10 @@
   return _tag == DBFILESUploadSessionFinishErrorTooManySharedFolderTargets;
 }
 
+- (BOOL)isTooManyWriteOperations {
+  return _tag == DBFILESUploadSessionFinishErrorTooManyWriteOperations;
+}
+
 - (BOOL)isOther {
   return _tag == DBFILESUploadSessionFinishErrorOther;
 }
@@ -10741,6 +16084,8 @@
     return @"DBFILESUploadSessionFinishErrorPath";
   case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:
     return @"DBFILESUploadSessionFinishErrorTooManySharedFolderTargets";
+  case DBFILESUploadSessionFinishErrorTooManyWriteOperations:
+    return @"DBFILESUploadSessionFinishErrorTooManyWriteOperations";
   case DBFILESUploadSessionFinishErrorOther:
     return @"DBFILESUploadSessionFinishErrorOther";
   }
@@ -10764,6 +16109,70 @@
   return [[DBFILESUploadSessionFinishErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadSessionFinishErrorLookupFailed:
+    result = prime * result + [self.lookupFailed hash];
+  case DBFILESUploadSessionFinishErrorPath:
+    result = prime * result + [self.path hash];
+  case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionFinishErrorTooManyWriteOperations:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionFinishErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionFinishError:other];
+}
+
+- (BOOL)isEqualToUploadSessionFinishError:(DBFILESUploadSessionFinishError *)anUploadSessionFinishError {
+  if (self == anUploadSessionFinishError) {
+    return YES;
+  }
+  if (self.tag != anUploadSessionFinishError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadSessionFinishErrorLookupFailed:
+    return [self.lookupFailed isEqual:anUploadSessionFinishError.lookupFailed];
+  case DBFILESUploadSessionFinishErrorPath:
+    return [self.path isEqual:anUploadSessionFinishError.path];
+  case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:
+    return [[self tagName] isEqual:[anUploadSessionFinishError tagName]];
+  case DBFILESUploadSessionFinishErrorTooManyWriteOperations:
+    return [[self tagName] isEqual:[anUploadSessionFinishError tagName]];
+  case DBFILESUploadSessionFinishErrorOther:
+    return [[self tagName] isEqual:[anUploadSessionFinishError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10782,6 +16191,8 @@
     jsonDict[@".tag"] = @"path";
   } else if ([valueObj isTooManySharedFolderTargets]) {
     jsonDict[@".tag"] = @"too_many_shared_folder_targets";
+  } else if ([valueObj isTooManyWriteOperations]) {
+    jsonDict[@".tag"] = @"too_many_write_operations";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -10803,12 +16214,15 @@
     return [[DBFILESUploadSessionFinishError alloc] initWithPath:path];
   } else if ([tag isEqualToString:@"too_many_shared_folder_targets"]) {
     return [[DBFILESUploadSessionFinishError alloc] initWithTooManySharedFolderTargets];
+  } else if ([tag isEqualToString:@"too_many_write_operations"]) {
+    return [[DBFILESUploadSessionFinishError alloc] initWithTooManyWriteOperations];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBFILESUploadSessionFinishError alloc] initWithOther];
   } else {
     return [[DBFILESUploadSessionFinishError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESUploadSessionLookupError.h"
@@ -10931,6 +16345,70 @@
   return [[DBFILESUploadSessionLookupErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESUploadSessionLookupErrorNotFound:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionLookupErrorIncorrectOffset:
+    result = prime * result + [self.incorrectOffset hash];
+  case DBFILESUploadSessionLookupErrorClosed:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionLookupErrorNotClosed:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionLookupErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionLookupError:other];
+}
+
+- (BOOL)isEqualToUploadSessionLookupError:(DBFILESUploadSessionLookupError *)anUploadSessionLookupError {
+  if (self == anUploadSessionLookupError) {
+    return YES;
+  }
+  if (self.tag != anUploadSessionLookupError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESUploadSessionLookupErrorNotFound:
+    return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
+  case DBFILESUploadSessionLookupErrorIncorrectOffset:
+    return [self.incorrectOffset isEqual:anUploadSessionLookupError.incorrectOffset];
+  case DBFILESUploadSessionLookupErrorClosed:
+    return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
+  case DBFILESUploadSessionLookupErrorNotClosed:
+    return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
+  case DBFILESUploadSessionLookupErrorOther:
+    return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -10978,6 +16456,7 @@
     return [[DBFILESUploadSessionLookupError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESUploadSessionOffsetError.h"
@@ -11013,6 +16492,47 @@
 
 - (NSString *)description {
   return [[DBFILESUploadSessionOffsetErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.correctOffset hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionOffsetError:other];
+}
+
+- (BOOL)isEqualToUploadSessionOffsetError:(DBFILESUploadSessionOffsetError *)anUploadSessionOffsetError {
+  if (self == anUploadSessionOffsetError) {
+    return YES;
+  }
+  if (![self.correctOffset isEqual:anUploadSessionOffsetError.correctOffset]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -11056,7 +16576,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithClose:nil];
 }
 
@@ -11074,6 +16594,47 @@
 
 - (NSString *)description {
   return [[DBFILESUploadSessionStartArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.close hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionStartArg:other];
+}
+
+- (BOOL)isEqualToUploadSessionStartArg:(DBFILESUploadSessionStartArg *)anUploadSessionStartArg {
+  if (self == anUploadSessionStartArg) {
+    return YES;
+  }
+  if (![self.close isEqual:anUploadSessionStartArg.close]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -11131,6 +16692,47 @@
 
 - (NSString *)description {
   return [[DBFILESUploadSessionStartResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.sessionId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionStartResult:other];
+}
+
+- (BOOL)isEqualToUploadSessionStartResult:(DBFILESUploadSessionStartResult *)anUploadSessionStartResult {
+  if (self == anUploadSessionStartResult) {
+    return YES;
+  }
+  if (![self.sessionId isEqual:anUploadSessionStartResult.sessionId]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -11192,6 +16794,51 @@
   return [[DBFILESUploadWriteFailedSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.reason hash];
+  result = prime * result + [self.uploadSessionId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadWriteFailed:other];
+}
+
+- (BOOL)isEqualToUploadWriteFailed:(DBFILESUploadWriteFailed *)anUploadWriteFailed {
+  if (self == anUploadWriteFailed) {
+    return YES;
+  }
+  if (![self.reason isEqual:anUploadWriteFailed.reason]) {
+    return NO;
+  }
+  if (![self.uploadSessionId isEqual:anUploadWriteFailed.uploadSessionId]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -11241,7 +16888,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithDimensions:nil location:nil timeTaken:nil duration:nil];
 }
 
@@ -11259,6 +16906,75 @@
 
 - (NSString *)description {
   return [[DBFILESVideoMetadataSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.dimensions) {
+    result = prime * result + [self.dimensions hash];
+  }
+  if (self.location) {
+    result = prime * result + [self.location hash];
+  }
+  if (self.timeTaken) {
+    result = prime * result + [self.timeTaken hash];
+  }
+  if (self.duration) {
+    result = prime * result + [self.duration hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToVideoMetadata:other];
+}
+
+- (BOOL)isEqualToVideoMetadata:(DBFILESVideoMetadata *)aVideoMetadata {
+  if (self == aVideoMetadata) {
+    return YES;
+  }
+  if (self.dimensions) {
+    if (![self.dimensions isEqual:aVideoMetadata.dimensions]) {
+      return NO;
+    }
+  }
+  if (self.location) {
+    if (![self.location isEqual:aVideoMetadata.location]) {
+      return NO;
+    }
+  }
+  if (self.timeTaken) {
+    if (![self.timeTaken isEqual:aVideoMetadata.timeTaken]) {
+      return NO;
+    }
+  }
+  if (self.duration) {
+    if (![self.duration isEqual:aVideoMetadata.duration]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -11397,6 +17113,66 @@
   return [[DBFILESWriteConflictErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESWriteConflictErrorFile:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteConflictErrorFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteConflictErrorFileAncestor:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteConflictErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToWriteConflictError:other];
+}
+
+- (BOOL)isEqualToWriteConflictError:(DBFILESWriteConflictError *)aWriteConflictError {
+  if (self == aWriteConflictError) {
+    return YES;
+  }
+  if (self.tag != aWriteConflictError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESWriteConflictErrorFile:
+    return [[self tagName] isEqual:[aWriteConflictError tagName]];
+  case DBFILESWriteConflictErrorFolder:
+    return [[self tagName] isEqual:[aWriteConflictError tagName]];
+  case DBFILESWriteConflictErrorFileAncestor:
+    return [[self tagName] isEqual:[aWriteConflictError tagName]];
+  case DBFILESWriteConflictErrorOther:
+    return [[self tagName] isEqual:[aWriteConflictError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -11436,6 +17212,7 @@
     return [[DBFILESWriteConflictError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESWriteConflictError.h"
@@ -11494,6 +17271,14 @@
   return self;
 }
 
+- (instancetype)initWithTeamFolder {
+  self = [super init];
+  if (self) {
+    _tag = DBFILESWriteErrorTeamFolder;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -11542,6 +17327,10 @@
   return _tag == DBFILESWriteErrorDisallowedName;
 }
 
+- (BOOL)isTeamFolder {
+  return _tag == DBFILESWriteErrorTeamFolder;
+}
+
 - (BOOL)isOther {
   return _tag == DBFILESWriteErrorOther;
 }
@@ -11558,6 +17347,8 @@
     return @"DBFILESWriteErrorInsufficientSpace";
   case DBFILESWriteErrorDisallowedName:
     return @"DBFILESWriteErrorDisallowedName";
+  case DBFILESWriteErrorTeamFolder:
+    return @"DBFILESWriteErrorTeamFolder";
   case DBFILESWriteErrorOther:
     return @"DBFILESWriteErrorOther";
   }
@@ -11579,6 +17370,82 @@
 
 - (NSString *)description {
   return [[DBFILESWriteErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESWriteErrorMalformedPath:
+    if (self.malformedPath) {
+      result = prime * result + [self.malformedPath hash];
+    }
+  case DBFILESWriteErrorConflict:
+    result = prime * result + [self.conflict hash];
+  case DBFILESWriteErrorNoWritePermission:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteErrorInsufficientSpace:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteErrorDisallowedName:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteErrorTeamFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToWriteError:other];
+}
+
+- (BOOL)isEqualToWriteError:(DBFILESWriteError *)aWriteError {
+  if (self == aWriteError) {
+    return YES;
+  }
+  if (self.tag != aWriteError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESWriteErrorMalformedPath:
+    if (self.malformedPath) {
+      return [self.malformedPath isEqual:aWriteError.malformedPath];
+    }
+  case DBFILESWriteErrorConflict:
+    return [self.conflict isEqual:aWriteError.conflict];
+  case DBFILESWriteErrorNoWritePermission:
+    return [[self tagName] isEqual:[aWriteError tagName]];
+  case DBFILESWriteErrorInsufficientSpace:
+    return [[self tagName] isEqual:[aWriteError tagName]];
+  case DBFILESWriteErrorDisallowedName:
+    return [[self tagName] isEqual:[aWriteError tagName]];
+  case DBFILESWriteErrorTeamFolder:
+    return [[self tagName] isEqual:[aWriteError tagName]];
+  case DBFILESWriteErrorOther:
+    return [[self tagName] isEqual:[aWriteError tagName]];
+  }
+  return YES;
 }
 
 @end
@@ -11604,6 +17471,8 @@
     jsonDict[@".tag"] = @"insufficient_space";
   } else if ([valueObj isDisallowedName]) {
     jsonDict[@".tag"] = @"disallowed_name";
+  } else if ([valueObj isTeamFolder]) {
+    jsonDict[@".tag"] = @"team_folder";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -11628,12 +17497,15 @@
     return [[DBFILESWriteError alloc] initWithInsufficientSpace];
   } else if ([tag isEqualToString:@"disallowed_name"]) {
     return [[DBFILESWriteError alloc] initWithDisallowedName];
+  } else if ([tag isEqualToString:@"team_folder"]) {
+    return [[DBFILESWriteError alloc] initWithTeamFolder];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBFILESWriteError alloc] initWithOther];
   } else {
     return [[DBFILESWriteError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBFILESWriteMode.h"
@@ -11726,6 +17598,62 @@
   return [[DBFILESWriteModeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILESWriteModeAdd:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteModeOverwrite:
+    result = prime * result + [[self tagName] hash];
+  case DBFILESWriteModeUpdate:
+    result = prime * result + [self.update hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToWriteMode:other];
+}
+
+- (BOOL)isEqualToWriteMode:(DBFILESWriteMode *)aWriteMode {
+  if (self == aWriteMode) {
+    return YES;
+  }
+  if (self.tag != aWriteMode.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILESWriteModeAdd:
+    return [[self tagName] isEqual:[aWriteMode tagName]];
+  case DBFILESWriteModeOverwrite:
+    return [[self tagName] isEqual:[aWriteMode tagName]];
+  case DBFILESWriteModeUpdate:
+    return [self.update isEqual:aWriteMode.update];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -11768,4 +17696,5 @@
                  userInfo:nil]);
   }
 }
+
 @end

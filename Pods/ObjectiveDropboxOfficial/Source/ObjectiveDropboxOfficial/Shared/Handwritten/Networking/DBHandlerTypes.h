@@ -11,6 +11,8 @@
 @class DBFILESUploadSessionFinishBatchResultEntry;
 @class DBRequestError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// The progress block to be executed in the event of a request update. The first argument is the number of bytes
 /// downloaded. The second argument is the number of total bytes downloaded. And the third argument is the number of
 /// total bytes expected to be downloaded.
@@ -26,9 +28,9 @@ typedef void (^DBProgressBlock)(int64_t bytesWritten, int64_t totalBytesWritten,
 /// `/upload_session/finish_batch/check`. The fourth argument is a mapping of client-side NSURLs to general request
 /// errors, which occured during the upload of the corresponding file.
 typedef void (^DBBatchUploadResponseBlock)(
-    NSDictionary<NSURL *, DBFILESUploadSessionFinishBatchResultEntry *> * _Nullable fileUrlsToBatchResultEntries,
-    DBASYNCPollError * _Nullable finishBatchRouteError, DBRequestError * _Nullable finishBatchRequestError,
-    NSDictionary<NSURL *, DBRequestError *> * _Nonnull fileUrlsToRequestErrors);
+    NSDictionary<NSURL *, DBFILESUploadSessionFinishBatchResultEntry *> *_Nullable fileUrlsToBatchResultEntries,
+    DBASYNCPollError *_Nullable finishBatchRouteError, DBRequestError *_Nullable finishBatchRequestError,
+    NSDictionary<NSURL *, DBRequestError *> *fileUrlsToRequestErrors);
 
 /// Special custom response block for performing SDK token migration between API v1 tokens and API v2 tokens. First
 /// argument indicates whether the migration should be attempted again (primarily when there was no active network
@@ -38,4 +40,6 @@ typedef void (^DBBatchUploadResponseBlock)(
 /// is the OAuth 1 access token, the third element is the OAuth 1 access token secret, and the fourth element
 /// is the consumer app key that was stored with the token.
 typedef void (^DBTokenMigrationResponseBlock)(BOOL shouldRetry, BOOL invalidAppKeyOrSecret,
-                                              NSArray<NSArray<NSString *> *> * _Nonnull unsuccessfullyMigratedTokenData);
+                                              NSArray<NSArray<NSString *> *> *unsuccessfullyMigratedTokenData);
+
+NS_ASSUME_NONNULL_END

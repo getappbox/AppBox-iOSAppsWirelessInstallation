@@ -11,6 +11,8 @@
 @class DBFILESUploadWriteFailed;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadWriteFailed : NSObject <DBSerializable>
+@interface DBFILESUploadWriteFailed : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The reason why the file couldn't be saved.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull reason;
+@property (nonatomic, readonly) DBFILESWriteError *reason;
 
 /// The upload session ID; this may be used to retry the commit.
-@property (nonatomic, readonly, copy) NSString * _Nonnull uploadSessionId;
+@property (nonatomic, readonly, copy) NSString *uploadSessionId;
 
 #pragma mark - Constructors
 
@@ -41,8 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithReason:(DBFILESWriteError * _Nonnull)reason
-                       uploadSessionId:(NSString * _Nonnull)uploadSessionId;
+- (instancetype)initWithReason:(DBFILESWriteError *)reason uploadSessionId:(NSString *)uploadSessionId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -61,7 +64,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadWriteFailed` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadWriteFailed * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadWriteFailed *)instance;
 
 ///
 /// Deserializes `DBFILESUploadWriteFailed` instances.
@@ -71,6 +74,8 @@
 ///
 /// @return An instantiation of the `DBFILESUploadWriteFailed` object.
 ///
-+ (DBFILESUploadWriteFailed * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadWriteFailed *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupsPollError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupsPollError : NSObject <DBSerializable>
+@interface DBTEAMGroupsPollError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -54,7 +56,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidAsyncJobId;
+- (instancetype)initWithInvalidAsyncJobId;
 
 ///
 /// Initializes union class with tag state of "internal_error".
@@ -65,14 +67,14 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInternalError;
+- (instancetype)initWithInternalError;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "access_denied".
@@ -82,7 +84,9 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessDenied;
+- (instancetype)initWithAccessDenied;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -121,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -140,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsPollError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupsPollError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupsPollError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsPollError` instances.
@@ -150,6 +154,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupsPollError` object.
 ///
-+ (DBTEAMGroupsPollError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupsPollError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

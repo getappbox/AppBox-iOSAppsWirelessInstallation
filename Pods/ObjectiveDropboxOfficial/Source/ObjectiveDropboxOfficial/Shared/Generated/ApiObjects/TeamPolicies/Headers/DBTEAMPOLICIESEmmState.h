@@ -10,6 +10,8 @@
 
 @class DBTEAMPOLICIESEmmState;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMPOLICIESEmmState : NSObject <DBSerializable>
+@interface DBTEAMPOLICIESEmmState : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -52,7 +54,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDisabled;
+- (instancetype)initWithDisabled;
 
 ///
 /// Initializes union class with tag state of "optional".
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOptional;
+- (instancetype)initWithOptional;
 
 ///
 /// Initializes union class with tag state of "required".
@@ -70,14 +72,16 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRequired;
+- (instancetype)initWithRequired;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -114,7 +118,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -133,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESEmmState` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMPOLICIESEmmState * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMPOLICIESEmmState *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESEmmState` instances.
@@ -143,6 +147,8 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 ///
 /// @return An instantiation of the `DBTEAMPOLICIESEmmState` object.
 ///
-+ (DBTEAMPOLICIESEmmState * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMPOLICIESEmmState *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

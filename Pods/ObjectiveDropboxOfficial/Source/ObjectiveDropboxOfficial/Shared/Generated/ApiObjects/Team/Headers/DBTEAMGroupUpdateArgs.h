@@ -13,6 +13,8 @@
 @class DBTEAMGroupSelector;
 @class DBTEAMGroupUpdateArgs;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,23 +24,23 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupUpdateArgs : DBTEAMIncludeMembersArg <DBSerializable>
+@interface DBTEAMGroupUpdateArgs : DBTEAMIncludeMembersArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Specify a group.
-@property (nonatomic, readonly) DBTEAMGroupSelector * _Nonnull group;
+@property (nonatomic, readonly) DBTEAMGroupSelector *group;
 
 /// Optional argument. Set group name to this if provided.
-@property (nonatomic, readonly) NSString * _Nullable dNewGroupName;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewGroupName;
 
 /// Optional argument. New group external ID. If the argument is None, the
 /// group's external_id won't be updated. If the argument is empty string, the
 /// group's external id will be cleared.
-@property (nonatomic, readonly) NSString * _Nullable dNewGroupExternalId;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewGroupExternalId;
 
 /// Set new group management type, if provided.
-@property (nonatomic, readonly) DBTEAMCOMMONGroupManagementType * _Nullable dNewGroupManagementType;
+@property (nonatomic, readonly, nullable) DBTEAMCOMMONGroupManagementType *dNewGroupManagementType;
 
 #pragma mark - Constructors
 
@@ -57,11 +59,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                        returnMembers:(NSNumber * _Nullable)returnMembers
-                        dNewGroupName:(NSString * _Nullable)dNewGroupName
-                  dNewGroupExternalId:(NSString * _Nullable)dNewGroupExternalId
-              dNewGroupManagementType:(DBTEAMCOMMONGroupManagementType * _Nullable)dNewGroupManagementType;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group
+                returnMembers:(nullable NSNumber *)returnMembers
+                dNewGroupName:(nullable NSString *)dNewGroupName
+          dNewGroupExternalId:(nullable NSString *)dNewGroupExternalId
+      dNewGroupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)dNewGroupManagementType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -71,7 +73,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group;
 
 @end
 
@@ -90,7 +92,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupUpdateArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupUpdateArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupUpdateArgs *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupUpdateArgs` instances.
@@ -100,6 +102,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupUpdateArgs` object.
 ///
-+ (DBTEAMGroupUpdateArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupUpdateArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

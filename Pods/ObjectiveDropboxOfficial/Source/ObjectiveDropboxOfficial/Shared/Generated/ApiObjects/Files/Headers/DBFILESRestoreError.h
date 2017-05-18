@@ -12,6 +12,8 @@
 @class DBFILESRestoreError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRestoreError : NSObject <DBSerializable>
+@interface DBFILESRestoreError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,12 +50,12 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 /// An error occurs when downloading metadata for the file. @note Ensure the
 /// `isPathLookup` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull pathLookup;
+@property (nonatomic, readonly) DBFILESLookupError *pathLookup;
 
 /// An error occurs when trying to restore the file to that path. @note Ensure
 /// the `isPathWrite` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull pathWrite;
+@property (nonatomic, readonly) DBFILESWriteError *pathWrite;
 
 #pragma mark - Constructors
 
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPathLookup:(DBFILESLookupError * _Nonnull)pathLookup;
+- (instancetype)initWithPathLookup:(DBFILESLookupError *)pathLookup;
 
 ///
 /// Initializes union class with tag state of "path_write".
@@ -80,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPathWrite:(DBFILESWriteError * _Nonnull)pathWrite;
+- (instancetype)initWithPathWrite:(DBFILESWriteError *)pathWrite;
 
 ///
 /// Initializes union class with tag state of "invalid_revision".
@@ -90,14 +92,16 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidRevision;
+- (instancetype)initWithInvalidRevision;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -141,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -160,7 +164,7 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRestoreError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRestoreError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRestoreError *)instance;
 
 ///
 /// Deserializes `DBFILESRestoreError` instances.
@@ -170,6 +174,8 @@ typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESRestoreError` object.
 ///
-+ (DBFILESRestoreError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRestoreError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

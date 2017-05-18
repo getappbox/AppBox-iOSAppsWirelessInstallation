@@ -11,6 +11,8 @@
 @class DBFILESSearchMatch;
 @class DBFILESSearchResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,20 +22,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSearchResult : NSObject <DBSerializable>
+@interface DBFILESSearchResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A list (possibly empty) of matches for the query.
-@property (nonatomic, readonly) NSArray<DBFILESSearchMatch *> * _Nonnull matches;
+@property (nonatomic, readonly) NSArray<DBFILESSearchMatch *> *matches;
 
 /// Used for paging. If true, indicates there is another page of results
 /// available that can be fetched by calling `search` again.
-@property (nonatomic, readonly) NSNumber * _Nonnull more;
+@property (nonatomic, readonly) NSNumber *more;
 
 /// Used for paging. Value to set the start argument to when calling `search` to
 /// fetch the next page of results.
-@property (nonatomic, readonly) NSNumber * _Nonnull start;
+@property (nonatomic, readonly) NSNumber *start;
 
 #pragma mark - Constructors
 
@@ -48,9 +50,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMatches:(NSArray<DBFILESSearchMatch *> * _Nonnull)matches
-                                   more:(NSNumber * _Nonnull)more
-                                  start:(NSNumber * _Nonnull)start;
+- (instancetype)initWithMatches:(NSArray<DBFILESSearchMatch *> *)matches more:(NSNumber *)more start:(NSNumber *)start;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,7 +71,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSearchResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSearchResult *)instance;
 
 ///
 /// Deserializes `DBFILESSearchResult` instances.
@@ -79,6 +81,8 @@
 ///
 /// @return An instantiation of the `DBFILESSearchResult` object.
 ///
-+ (DBFILESSearchResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSearchResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

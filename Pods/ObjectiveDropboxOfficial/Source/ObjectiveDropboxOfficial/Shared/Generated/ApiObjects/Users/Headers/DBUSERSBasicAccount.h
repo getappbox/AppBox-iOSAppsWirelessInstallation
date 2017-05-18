@@ -12,6 +12,8 @@
 @class DBUSERSBasicAccount;
 @class DBUSERSName;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,17 +25,17 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSBasicAccount : DBUSERSAccount <DBSerializable>
+@interface DBUSERSBasicAccount : DBUSERSAccount <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Whether this user is a teammate of the current user. If this account is the
 /// current user's account, then this will be true.
-@property (nonatomic, readonly) NSNumber * _Nonnull isTeammate;
+@property (nonatomic, readonly) NSNumber *isTeammate;
 
 /// The user's unique team member id. This field will only be present if the
 /// user is part of a team and isTeammate is true.
-@property (nonatomic, readonly) NSString * _Nullable teamMemberId;
+@property (nonatomic, readonly, copy, nullable) NSString *teamMemberId;
 
 #pragma mark - Constructors
 
@@ -56,14 +58,14 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                     name:(DBUSERSName * _Nonnull)name
-                                    email:(NSString * _Nonnull)email
-                            emailVerified:(NSNumber * _Nonnull)emailVerified
-                                 disabled:(NSNumber * _Nonnull)disabled
-                               isTeammate:(NSNumber * _Nonnull)isTeammate
-                          profilePhotoUrl:(NSString * _Nullable)profilePhotoUrl
-                             teamMemberId:(NSString * _Nullable)teamMemberId;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                             name:(DBUSERSName *)name
+                            email:(NSString *)email
+                    emailVerified:(NSNumber *)emailVerified
+                         disabled:(NSNumber *)disabled
+                       isTeammate:(NSNumber *)isTeammate
+                  profilePhotoUrl:(nullable NSString *)profilePhotoUrl
+                     teamMemberId:(nullable NSString *)teamMemberId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -81,12 +83,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                     name:(DBUSERSName * _Nonnull)name
-                                    email:(NSString * _Nonnull)email
-                            emailVerified:(NSNumber * _Nonnull)emailVerified
-                                 disabled:(NSNumber * _Nonnull)disabled
-                               isTeammate:(NSNumber * _Nonnull)isTeammate;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                             name:(DBUSERSName *)name
+                            email:(NSString *)email
+                    emailVerified:(NSNumber *)emailVerified
+                         disabled:(NSNumber *)disabled
+                       isTeammate:(NSNumber *)isTeammate;
 
 @end
 
@@ -105,7 +107,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSBasicAccount` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSBasicAccount * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSBasicAccount *)instance;
 
 ///
 /// Deserializes `DBUSERSBasicAccount` instances.
@@ -115,6 +117,8 @@
 ///
 /// @return An instantiation of the `DBUSERSBasicAccount` object.
 ///
-+ (DBUSERSBasicAccount * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSBasicAccount *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

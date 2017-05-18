@@ -56,7 +56,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    [UserData setIsGmailLoggedIn:NO];
+    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{

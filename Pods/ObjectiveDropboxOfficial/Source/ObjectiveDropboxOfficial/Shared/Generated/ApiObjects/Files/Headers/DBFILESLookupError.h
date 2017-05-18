@@ -9,7 +9,8 @@
 #import "DBSerializableProtocol.h"
 
 @class DBFILESLookupError;
-@class DBFILESPathRootError;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - API Object
 
@@ -20,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESLookupError : NSObject <DBSerializable>
+@interface DBFILESLookupError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -45,9 +46,6 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
   /// example, sometimes there are legal restrictions due to copyright claims.
   DBFILESLookupErrorRestrictedContent,
 
-  /// The path root parameter provided is invalid.
-  DBFILESLookupErrorInvalidPathRoot,
-
   /// (no description).
   DBFILESLookupErrorOther,
 
@@ -58,12 +56,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 
 /// (no description). @note Ensure the `isMalformedPath` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSString * _Nullable malformedPath;
-
-/// The path root parameter provided is invalid. @note Ensure the
-/// `isInvalidPathRoot` method returns true before accessing, otherwise a
-/// runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESPathRootError * _Nonnull invalidPathRoot;
+@property (nonatomic, readonly, copy, nullable) NSString *malformedPath;
 
 #pragma mark - Constructors
 
@@ -74,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMalformedPath:(NSString * _Nullable)malformedPath;
+- (instancetype)initWithMalformedPath:(nullable NSString *)malformedPath;
 
 ///
 /// Initializes union class with tag state of "not_found".
@@ -84,7 +77,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotFound;
+- (instancetype)initWithNotFound;
 
 ///
 /// Initializes union class with tag state of "not_file".
@@ -94,7 +87,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotFile;
+- (instancetype)initWithNotFile;
 
 ///
 /// Initializes union class with tag state of "not_folder".
@@ -104,7 +97,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotFolder;
+- (instancetype)initWithNotFolder;
 
 ///
 /// Initializes union class with tag state of "restricted_content".
@@ -115,26 +108,16 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRestrictedContent;
-
-///
-/// Initializes union class with tag state of "invalid_path_root".
-///
-/// Description of the "invalid_path_root" tag state: The path root parameter
-/// provided is invalid.
-///
-/// @param invalidPathRoot The path root parameter provided is invalid.
-///
-/// @return An initialized instance.
-///
-- (nonnull instancetype)initWithInvalidPathRoot:(DBFILESPathRootError * _Nonnull)invalidPathRoot;
+- (instancetype)initWithRestrictedContent;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -179,17 +162,6 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 - (BOOL)isRestrictedContent;
 
 ///
-/// Retrieves whether the union's current tag state has value
-/// "invalid_path_root".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `invalidPathRoot` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value "invalid_path_root".
-///
-- (BOOL)isInvalidPathRoot;
-
-///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -201,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -220,7 +192,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESLookupError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESLookupError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESLookupError *)instance;
 
 ///
 /// Deserializes `DBFILESLookupError` instances.
@@ -230,6 +202,8 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESLookupError` object.
 ///
-+ (DBFILESLookupError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESLookupError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

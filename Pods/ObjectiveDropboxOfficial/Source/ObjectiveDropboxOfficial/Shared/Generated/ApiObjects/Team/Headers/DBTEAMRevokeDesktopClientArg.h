@@ -11,6 +11,8 @@
 
 @class DBTEAMRevokeDesktopClientArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,14 +22,14 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMRevokeDesktopClientArg : DBTEAMDeviceSessionArg <DBSerializable>
+@interface DBTEAMRevokeDesktopClientArg : DBTEAMDeviceSessionArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Whether to delete all files of the account (this is possible only if
 /// supported by the desktop client and  will be made the next time the client
 /// access the account)
-@property (nonatomic, readonly) NSNumber * _Nonnull deleteOnUnlink;
+@property (nonatomic, readonly) NSNumber *deleteOnUnlink;
 
 #pragma mark - Constructors
 
@@ -42,9 +44,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId
-                             teamMemberId:(NSString * _Nonnull)teamMemberId
-                           deleteOnUnlink:(NSNumber * _Nullable)deleteOnUnlink;
+- (instancetype)initWithSessionId:(NSString *)sessionId
+                     teamMemberId:(NSString *)teamMemberId
+                   deleteOnUnlink:(nullable NSNumber *)deleteOnUnlink;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -55,7 +57,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId teamMemberId:(NSString * _Nonnull)teamMemberId;
+- (instancetype)initWithSessionId:(NSString *)sessionId teamMemberId:(NSString *)teamMemberId;
 
 @end
 
@@ -75,7 +77,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDesktopClientArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMRevokeDesktopClientArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMRevokeDesktopClientArg *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDesktopClientArg` instances.
@@ -85,6 +87,8 @@
 ///
 /// @return An instantiation of the `DBTEAMRevokeDesktopClientArg` object.
 ///
-+ (DBTEAMRevokeDesktopClientArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMRevokeDesktopClientArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

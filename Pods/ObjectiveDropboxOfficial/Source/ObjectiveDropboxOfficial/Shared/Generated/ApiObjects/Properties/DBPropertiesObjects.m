@@ -42,6 +42,47 @@
   return [[DBPROPERTIESGetPropertyTemplateArgSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.templateId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetPropertyTemplateArg:other];
+}
+
+- (BOOL)isEqualToGetPropertyTemplateArg:(DBPROPERTIESGetPropertyTemplateArg *)aGetPropertyTemplateArg {
+  if (self == aGetPropertyTemplateArg) {
+    return YES;
+  }
+  if (![self.templateId isEqual:aGetPropertyTemplateArg.templateId]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -105,6 +146,55 @@
   return [[DBPROPERTIESPropertyGroupTemplateSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.description_ hash];
+  result = prime * result + [self.fields hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyGroupTemplate:other];
+}
+
+- (BOOL)isEqualToPropertyGroupTemplate:(DBPROPERTIESPropertyGroupTemplate *)aPropertyGroupTemplate {
+  if (self == aPropertyGroupTemplate) {
+    return YES;
+  }
+  if (![self.name isEqual:aPropertyGroupTemplate.name]) {
+    return NO;
+  }
+  if (![self.description_ isEqual:aPropertyGroupTemplate.description_]) {
+    return NO;
+  }
+  if (![self.fields isEqual:aPropertyGroupTemplate.fields]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -117,8 +207,8 @@
   jsonDict[@"name"] = valueObj.name;
   jsonDict[@"description"] = valueObj.description_;
   jsonDict[@"fields"] = [DBArraySerializer serialize:valueObj.fields
-                                           withBlock:^id(id elem) {
-                                             return [DBPROPERTIESPropertyFieldTemplateSerializer serialize:elem];
+                                           withBlock:^id(id elem0) {
+                                             return [DBPROPERTIESPropertyFieldTemplateSerializer serialize:elem0];
                                            }];
 
   return jsonDict;
@@ -129,8 +219,8 @@
   NSString *description_ = valueDict[@"description"];
   NSArray<DBPROPERTIESPropertyFieldTemplate *> *fields =
       [DBArraySerializer deserialize:valueDict[@"fields"]
-                           withBlock:^id(id elem) {
-                             return [DBPROPERTIESPropertyFieldTemplateSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPROPERTIESPropertyFieldTemplateSerializer deserialize:elem0];
                            }];
 
   return [[DBPROPERTIESPropertyGroupTemplate alloc] initWithName:name description_:description_ fields:fields];
@@ -177,6 +267,55 @@
   return [[DBPROPERTIESGetPropertyTemplateResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.description_ hash];
+  result = prime * result + [self.fields hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGetPropertyTemplateResult:other];
+}
+
+- (BOOL)isEqualToGetPropertyTemplateResult:(DBPROPERTIESGetPropertyTemplateResult *)aGetPropertyTemplateResult {
+  if (self == aGetPropertyTemplateResult) {
+    return YES;
+  }
+  if (![self.name isEqual:aGetPropertyTemplateResult.name]) {
+    return NO;
+  }
+  if (![self.description_ isEqual:aGetPropertyTemplateResult.description_]) {
+    return NO;
+  }
+  if (![self.fields isEqual:aGetPropertyTemplateResult.fields]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -189,8 +328,8 @@
   jsonDict[@"name"] = valueObj.name;
   jsonDict[@"description"] = valueObj.description_;
   jsonDict[@"fields"] = [DBArraySerializer serialize:valueObj.fields
-                                           withBlock:^id(id elem) {
-                                             return [DBPROPERTIESPropertyFieldTemplateSerializer serialize:elem];
+                                           withBlock:^id(id elem0) {
+                                             return [DBPROPERTIESPropertyFieldTemplateSerializer serialize:elem0];
                                            }];
 
   return jsonDict;
@@ -201,8 +340,8 @@
   NSString *description_ = valueDict[@"description"];
   NSArray<DBPROPERTIESPropertyFieldTemplate *> *fields =
       [DBArraySerializer deserialize:valueDict[@"fields"]
-                           withBlock:^id(id elem) {
-                             return [DBPROPERTIESPropertyFieldTemplateSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPROPERTIESPropertyFieldTemplateSerializer deserialize:elem0];
                            }];
 
   return [[DBPROPERTIESGetPropertyTemplateResult alloc] initWithName:name description_:description_ fields:fields];
@@ -248,6 +387,47 @@
   return [[DBPROPERTIESListPropertyTemplateIdsSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.templateIds hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPropertyTemplateIds:other];
+}
+
+- (BOOL)isEqualToListPropertyTemplateIds:(DBPROPERTIESListPropertyTemplateIds *)aListPropertyTemplateIds {
+  if (self == aListPropertyTemplateIds) {
+    return YES;
+  }
+  if (![self.templateIds isEqual:aListPropertyTemplateIds.templateIds]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -258,8 +438,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"template_ids"] = [DBArraySerializer serialize:valueObj.templateIds
-                                                 withBlock:^id(id elem) {
-                                                   return elem;
+                                                 withBlock:^id(id elem0) {
+                                                   return elem0;
                                                  }];
 
   return jsonDict;
@@ -267,8 +447,8 @@
 
 + (DBPROPERTIESListPropertyTemplateIds *)deserialize:(NSDictionary *)valueDict {
   NSArray<NSString *> *templateIds = [DBArraySerializer deserialize:valueDict[@"template_ids"]
-                                                          withBlock:^id(id elem) {
-                                                            return elem;
+                                                          withBlock:^id(id elem0) {
+                                                            return elem0;
                                                           }];
 
   return [[DBPROPERTIESListPropertyTemplateIds alloc] initWithTemplateIds:templateIds];
@@ -367,6 +547,62 @@
   return [[DBPROPERTIESPropertyTemplateErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPROPERTIESPropertyTemplateErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBPROPERTIESPropertyTemplateErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESPropertyTemplateErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyTemplateError:other];
+}
+
+- (BOOL)isEqualToPropertyTemplateError:(DBPROPERTIESPropertyTemplateError *)aPropertyTemplateError {
+  if (self == aPropertyTemplateError) {
+    return YES;
+  }
+  if (self.tag != aPropertyTemplateError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPROPERTIESPropertyTemplateErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:aPropertyTemplateError.templateNotFound];
+  case DBPROPERTIESPropertyTemplateErrorRestrictedContent:
+    return [[self tagName] isEqual:[aPropertyTemplateError tagName]];
+  case DBPROPERTIESPropertyTemplateErrorOther:
+    return [[self tagName] isEqual:[aPropertyTemplateError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -404,6 +640,7 @@
     return [[DBPROPERTIESPropertyTemplateError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPROPERTIESModifyPropertyTemplateError.h"
@@ -554,6 +791,78 @@
   return [[DBPROPERTIESModifyPropertyTemplateErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPROPERTIESModifyPropertyTemplateErrorTemplateNotFound:
+    result = prime * result + [self.templateNotFound hash];
+  case DBPROPERTIESModifyPropertyTemplateErrorRestrictedContent:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESModifyPropertyTemplateErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESModifyPropertyTemplateErrorConflictingPropertyNames:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESModifyPropertyTemplateErrorTooManyProperties:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESModifyPropertyTemplateErrorTooManyTemplates:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESModifyPropertyTemplateErrorTemplateAttributeTooLarge:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToModifyPropertyTemplateError:other];
+}
+
+- (BOOL)isEqualToModifyPropertyTemplateError:(DBPROPERTIESModifyPropertyTemplateError *)aModifyPropertyTemplateError {
+  if (self == aModifyPropertyTemplateError) {
+    return YES;
+  }
+  if (self.tag != aModifyPropertyTemplateError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPROPERTIESModifyPropertyTemplateErrorTemplateNotFound:
+    return [self.templateNotFound isEqual:aModifyPropertyTemplateError.templateNotFound];
+  case DBPROPERTIESModifyPropertyTemplateErrorRestrictedContent:
+    return [[self tagName] isEqual:[aModifyPropertyTemplateError tagName]];
+  case DBPROPERTIESModifyPropertyTemplateErrorOther:
+    return [[self tagName] isEqual:[aModifyPropertyTemplateError tagName]];
+  case DBPROPERTIESModifyPropertyTemplateErrorConflictingPropertyNames:
+    return [[self tagName] isEqual:[aModifyPropertyTemplateError tagName]];
+  case DBPROPERTIESModifyPropertyTemplateErrorTooManyProperties:
+    return [[self tagName] isEqual:[aModifyPropertyTemplateError tagName]];
+  case DBPROPERTIESModifyPropertyTemplateErrorTooManyTemplates:
+    return [[self tagName] isEqual:[aModifyPropertyTemplateError tagName]];
+  case DBPROPERTIESModifyPropertyTemplateErrorTemplateAttributeTooLarge:
+    return [[self tagName] isEqual:[aModifyPropertyTemplateError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -607,6 +916,7 @@
     return [[DBPROPERTIESModifyPropertyTemplateError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPROPERTIESPropertyField.h"
@@ -643,6 +953,51 @@
 
 - (NSString *)description {
   return [[DBPROPERTIESPropertyFieldSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.value hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyField:other];
+}
+
+- (BOOL)isEqualToPropertyField:(DBPROPERTIESPropertyField *)aPropertyField {
+  if (self == aPropertyField) {
+    return YES;
+  }
+  if (![self.name isEqual:aPropertyField.name]) {
+    return NO;
+  }
+  if (![self.value isEqual:aPropertyField.value]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -707,6 +1062,55 @@
 
 - (NSString *)description {
   return [[DBPROPERTIESPropertyFieldTemplateSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.description_ hash];
+  result = prime * result + [self.type hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyFieldTemplate:other];
+}
+
+- (BOOL)isEqualToPropertyFieldTemplate:(DBPROPERTIESPropertyFieldTemplate *)aPropertyFieldTemplate {
+  if (self == aPropertyFieldTemplate) {
+    return YES;
+  }
+  if (![self.name isEqual:aPropertyFieldTemplate.name]) {
+    return NO;
+  }
+  if (![self.description_ isEqual:aPropertyFieldTemplate.description_]) {
+    return NO;
+  }
+  if (![self.type isEqual:aPropertyFieldTemplate.type]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -774,6 +1178,51 @@
   return [[DBPROPERTIESPropertyGroupSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.templateId hash];
+  result = prime * result + [self.fields hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyGroup:other];
+}
+
+- (BOOL)isEqualToPropertyGroup:(DBPROPERTIESPropertyGroup *)aPropertyGroup {
+  if (self == aPropertyGroup) {
+    return YES;
+  }
+  if (![self.templateId isEqual:aPropertyGroup.templateId]) {
+    return NO;
+  }
+  if (![self.fields isEqual:aPropertyGroup.fields]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -785,8 +1234,8 @@
 
   jsonDict[@"template_id"] = valueObj.templateId;
   jsonDict[@"fields"] = [DBArraySerializer serialize:valueObj.fields
-                                           withBlock:^id(id elem) {
-                                             return [DBPROPERTIESPropertyFieldSerializer serialize:elem];
+                                           withBlock:^id(id elem0) {
+                                             return [DBPROPERTIESPropertyFieldSerializer serialize:elem0];
                                            }];
 
   return jsonDict;
@@ -796,8 +1245,8 @@
   NSString *templateId = valueDict[@"template_id"];
   NSArray<DBPROPERTIESPropertyField *> *fields =
       [DBArraySerializer deserialize:valueDict[@"fields"]
-                           withBlock:^id(id elem) {
-                             return [DBPROPERTIESPropertyFieldSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPROPERTIESPropertyFieldSerializer deserialize:elem0];
                            }];
 
   return [[DBPROPERTIESPropertyGroup alloc] initWithTemplateId:templateId fields:fields];
@@ -870,6 +1319,58 @@
   return [[DBPROPERTIESPropertyTypeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPROPERTIESPropertyTypeString:
+    result = prime * result + [[self tagName] hash];
+  case DBPROPERTIESPropertyTypeOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertyType:other];
+}
+
+- (BOOL)isEqualToPropertyType:(DBPROPERTIESPropertyType *)aPropertyType {
+  if (self == aPropertyType) {
+    return YES;
+  }
+  if (self.tag != aPropertyType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPROPERTIESPropertyTypeString:
+    return [[self tagName] isEqual:[aPropertyType tagName]];
+  case DBPROPERTIESPropertyTypeOther:
+    return [[self tagName] isEqual:[aPropertyType tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -901,4 +1402,5 @@
     return [[DBPROPERTIESPropertyType alloc] initWithOther];
   }
 }
+
 @end

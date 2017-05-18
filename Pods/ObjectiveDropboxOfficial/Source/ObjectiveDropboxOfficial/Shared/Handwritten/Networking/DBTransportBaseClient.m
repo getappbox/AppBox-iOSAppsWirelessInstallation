@@ -7,6 +7,7 @@
 #import "DBAUTHAccessError.h"
 #import "DBAUTHAuthError.h"
 #import "DBAUTHRateLimitError.h"
+#import "DBCOMMONPathRootError.h"
 #import "DBRequestErrors.h"
 #import "DBSDKConstants.h"
 #import "DBStoneBase.h"
@@ -22,18 +23,29 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
 + (void)initialize {
   static dispatch_once_t once;
   dispatch_once(&once, ^{
-    kV2SDKBaseHosts = @{
-      @"api" : @"https://api.dropbox.com/2",
-      @"content" : @"https://api-content.dropbox.com/2",
-      @"notify" : @"https://notify.dropboxapi.com/2",
-    };
+    if (!kSDKDebug) {
+      kV2SDKBaseHosts = @{
+        @"api" : @"https://api.dropbox.com/2",
+        @"content" : @"https://api-content.dropbox.com/2",
+        @"notify" : @"https://notify.dropboxapi.com/2",
+      };
+    } else {
+      kV2SDKBaseHosts = @{
+        @"api" : @"https://api-dbdev.dev.corp.dropbox.com/2",
+        @"content" : @"https://api-content-dbdev.dev.corp.dropbox.com/2",
+        @"notify" : @"https://notify-dbdev.dev.corp.dropboxapi.com/2",
+      };
+    }
+
   });
 }
 
-- (nonnull instancetype)initWithAccessToken:(NSString *)accessToken
-                            transportConfig:(DBTransportBaseConfig *)transportConfig {
+- (instancetype)initWithAccessToken:(NSString *)accessToken
+                           tokenUid:(NSString *)tokenUid
+                    transportConfig:(DBTransportBaseConfig *)transportConfig {
   if (self = [super init]) {
     _accessToken = accessToken;
+    _tokenUid = [tokenUid copy];
     _appKey = transportConfig.appKey;
     _appSecret = transportConfig.appSecret;
     NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@", kV2SDKDefaultUserAgentPrefix, kV2SDKVersion];
@@ -76,7 +88,7 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
 
     if (routeAuth && [routeAuth isEqualToString:@"app"]) {
       if (!_appKey || !_appSecret) {
-        NSLog(@"App key and/or secret not properly configured. Use custom `DBTransportClient` instance to set.");
+        NSLog(@"App key and/or secret not properly configured. Use custom `DBTransportDefaultConfig` instance to set.");
       }
       NSString *authString = [NSString stringWithFormat:@"%@:%@", _appKey, _appSecret];
       NSData *authData = [authString dataUsingEncoding:NSUTF8StringEncoding];
@@ -201,7 +213,7 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
                                     httpHeaders:(NSDictionary *)httpHeaders {
   DBRequestError *dbxError;
 
-  if (clientError) {
+  if (clientError && errorData == nil) {
     return [[DBRequestError alloc] initAsClientError:clientError];
   }
 
@@ -250,6 +262,13 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
                                             errorContent:errorContent
                                              userMessage:userMessage
                                    structuredAccessError:accessError];
+  } else if (statusCode == 422) {
+    DBCOMMONPathRootError *pathRootError = [DBCOMMONPathRootErrorSerializer deserialize:deserializedData[@"error"]];
+    dbxError = [[DBRequestError alloc] initAsPathRootError:requestId
+                                                statusCode:@(statusCode)
+                                              errorContent:errorContent
+                                               userMessage:userMessage
+                                   structuredPathRootError:pathRootError];
   } else if (statusCode == 429) {
     DBAUTHRateLimitError *rateLimitError = [DBAUTHRateLimitErrorSerializer deserialize:deserializedData[@"error"]];
     NSString *retryAfter = httpHeaders[@"Retry-After"];
@@ -296,6 +315,10 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
 }
 
 + (id)routeResultWithRoute:(DBRoute *)route data:(NSData *)data serializationError:(NSError **)serializationError {
+  if (!data) {
+    return nil;
+  }
+
   if (!route.resultType) {
     return nil;
   }

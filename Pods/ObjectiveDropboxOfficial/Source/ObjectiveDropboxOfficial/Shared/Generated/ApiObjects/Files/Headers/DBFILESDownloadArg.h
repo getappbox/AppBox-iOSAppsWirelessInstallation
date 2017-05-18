@@ -10,6 +10,8 @@
 
 @class DBFILESDownloadArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,15 +21,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESDownloadArg : NSObject <DBSerializable>
+@interface DBFILESDownloadArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path of the file to download.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// Deprecated. Please specify revision in path instead.
-@property (nonatomic, readonly) NSString * _Nullable rev;
+@property (nonatomic, readonly, copy, nullable) NSString *rev;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path rev:(NSString * _Nullable)rev;
+- (instancetype)initWithPath:(NSString *)path rev:(nullable NSString *)rev;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -49,7 +51,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -68,7 +72,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDownloadArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESDownloadArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESDownloadArg *)instance;
 
 ///
 /// Deserializes `DBFILESDownloadArg` instances.
@@ -78,6 +82,8 @@
 ///
 /// @return An instantiation of the `DBFILESDownloadArg` object.
 ///
-+ (DBFILESDownloadArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESDownloadArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

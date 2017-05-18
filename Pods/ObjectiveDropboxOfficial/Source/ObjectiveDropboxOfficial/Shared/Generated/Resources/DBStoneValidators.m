@@ -10,7 +10,7 @@
                               maxLength:(NSNumber *)maxLength
                                 pattern:(NSString *)pattern {
 
-  void (^validator)(NSString * _Nonnull) = ^(NSString * _Nonnull value) {
+  void (^validator)(NSString *) = ^(NSString *value) {
     __unused NSUInteger length = [value length];
 
     if (minLength) {
@@ -38,7 +38,7 @@
 }
 
 + (void (^)(NSNumber *))numericValidator:(NSNumber *)minValue maxValue:(NSNumber *)maxValue {
-  void (^validator)(NSNumber * _Nonnull) = ^(NSNumber * _Nonnull value) {
+  void (^validator)(NSNumber *) = ^(NSNumber *value) {
     if (minValue) {
       __unused NSString *message =
           [NSString stringWithFormat:@"\"%@\" must be at least %@", value, [minValue stringValue]];
@@ -58,7 +58,7 @@
 + (void (^)(NSArray<id> *))arrayValidator:(NSNumber *)minItems
                                  maxItems:(NSNumber *)maxItems
                             itemValidator:(void (^)(id))itemValidator {
-  void (^validator)(NSArray<id> * _Nonnull) = ^(NSArray<id> * _Nonnull value) {
+  void (^validator)(NSArray<id> *) = ^(NSArray<id> *value) {
     __unused NSUInteger count = [value count];
 
     if (minItems) {
@@ -83,8 +83,8 @@
   return validator;
 }
 
-+ (void (^_Nonnull)(id))nullableValidator:(void (^_Nonnull)(id _Nonnull))internalValidator {
-  void (^validator)(NSNumber * _Nonnull) = ^(NSNumber * _Nonnull value) {
++ (void (^_Nonnull)(id))nullableValidator:(void (^_Nonnull)(id))internalValidator {
+  void (^validator)(NSNumber *) = ^(NSNumber *value) {
     if (value) {
       internalValidator(value);
     }

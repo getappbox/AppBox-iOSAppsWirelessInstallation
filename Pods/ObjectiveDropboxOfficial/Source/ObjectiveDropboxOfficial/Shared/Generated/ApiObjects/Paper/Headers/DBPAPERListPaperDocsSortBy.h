@@ -10,6 +10,8 @@
 
 @class DBPAPERListPaperDocsSortBy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListPaperDocsSortBy : NSObject <DBSerializable>
+@interface DBPAPERListPaperDocsSortBy : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -53,7 +55,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessed;
+- (instancetype)initWithAccessed;
 
 ///
 /// Initializes union class with tag state of "modified".
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithModified;
+- (instancetype)initWithModified;
 
 ///
 /// Initializes union class with tag state of "created".
@@ -73,14 +75,16 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCreated;
+- (instancetype)initWithCreated;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -117,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -136,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListPaperDocsSortBy` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListPaperDocsSortBy * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListPaperDocsSortBy *)instance;
 
 ///
 /// Deserializes `DBPAPERListPaperDocsSortBy` instances.
@@ -146,6 +150,8 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 ///
 /// @return An instantiation of the `DBPAPERListPaperDocsSortBy` object.
 ///
-+ (DBPAPERListPaperDocsSortBy * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListPaperDocsSortBy *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

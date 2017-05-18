@@ -12,6 +12,8 @@
 @class DBSHARINGFileMemberActionResult;
 @class DBSHARINGMemberSelector;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,15 +25,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGFileMemberActionResult : NSObject <DBSerializable>
+@interface DBSHARINGFileMemberActionResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// One of specified input members.
-@property (nonatomic, readonly) DBSHARINGMemberSelector * _Nonnull member;
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
 
 /// The outcome of the action on this member.
-@property (nonatomic, readonly) DBSHARINGFileMemberActionIndividualResult * _Nonnull result;
+@property (nonatomic, readonly) DBSHARINGFileMemberActionIndividualResult *result;
 
 #pragma mark - Constructors
 
@@ -43,8 +45,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMember:(DBSHARINGMemberSelector * _Nonnull)member
-                                result:(DBSHARINGFileMemberActionIndividualResult * _Nonnull)result;
+- (instancetype)initWithMember:(DBSHARINGMemberSelector *)member
+                        result:(DBSHARINGFileMemberActionIndividualResult *)result;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -64,7 +68,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileMemberActionResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGFileMemberActionResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGFileMemberActionResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileMemberActionResult` instances.
@@ -74,6 +78,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGFileMemberActionResult` object.
 ///
-+ (DBSHARINGFileMemberActionResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGFileMemberActionResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

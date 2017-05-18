@@ -12,6 +12,8 @@
 @class DBTEAMGetStorageReport;
 @class DBTEAMStorageBucket;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,30 +27,30 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGetStorageReport : DBTEAMBaseDfbReport <DBSerializable>
+@interface DBTEAMGetStorageReport : DBTEAMBaseDfbReport <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Sum of the shared, unshared, and datastore usages, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull totalUsage;
+@property (nonatomic, readonly) NSArray<NSNumber *> *totalUsage;
 
 /// Array of the combined size (bytes) of team members' shared folders, for each
 /// day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedUsage;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedUsage;
 
 /// Array of the combined size (bytes) of team members' root namespaces, for
 /// each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull unsharedUsage;
+@property (nonatomic, readonly) NSArray<NSNumber *> *unsharedUsage;
 
 /// Array of the number of shared folders owned by team members, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull sharedFolders;
+@property (nonatomic, readonly) NSArray<NSNumber *> *sharedFolders;
 
 /// Array of storage summaries of team members' account sizes. Each storage
 /// summary is an array of key, value pairs, where each pair describes a storage
 /// bucket. The key indicates the upper bound of the bucket and the value is the
 /// number of users in that bucket. There is one such summary per day. If there
 /// is no data for a day, the storage summary will be empty.
-@property (nonatomic, readonly) NSArray<NSArray<DBTEAMStorageBucket *> *> * _Nonnull memberStorageMap;
+@property (nonatomic, readonly) NSArray<NSArray<DBTEAMStorageBucket *> *> *memberStorageMap;
 
 #pragma mark - Constructors
 
@@ -73,12 +75,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStartDate:(NSString * _Nonnull)startDate
-                               totalUsage:(NSArray<NSNumber *> * _Nonnull)totalUsage
-                              sharedUsage:(NSArray<NSNumber *> * _Nonnull)sharedUsage
-                            unsharedUsage:(NSArray<NSNumber *> * _Nonnull)unsharedUsage
-                            sharedFolders:(NSArray<NSNumber *> * _Nonnull)sharedFolders
-                         memberStorageMap:(NSArray<NSArray<DBTEAMStorageBucket *> *> * _Nonnull)memberStorageMap;
+- (instancetype)initWithStartDate:(NSString *)startDate
+                       totalUsage:(NSArray<NSNumber *> *)totalUsage
+                      sharedUsage:(NSArray<NSNumber *> *)sharedUsage
+                    unsharedUsage:(NSArray<NSNumber *> *)unsharedUsage
+                    sharedFolders:(NSArray<NSNumber *> *)sharedFolders
+                 memberStorageMap:(NSArray<NSArray<DBTEAMStorageBucket *> *> *)memberStorageMap;
 
 @end
 
@@ -97,7 +99,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGetStorageReport` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGetStorageReport * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGetStorageReport *)instance;
 
 ///
 /// Deserializes `DBTEAMGetStorageReport` instances.
@@ -107,6 +109,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGetStorageReport` object.
 ///
-+ (DBTEAMGetStorageReport * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGetStorageReport *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

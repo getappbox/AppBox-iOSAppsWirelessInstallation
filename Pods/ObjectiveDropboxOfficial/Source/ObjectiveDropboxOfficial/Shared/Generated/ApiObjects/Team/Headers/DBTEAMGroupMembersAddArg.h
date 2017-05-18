@@ -13,6 +13,8 @@
 @class DBTEAMGroupSelector;
 @class DBTEAMMemberAccess;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,15 +24,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMembersAddArg : DBTEAMIncludeMembersArg <DBSerializable>
+@interface DBTEAMGroupMembersAddArg : DBTEAMIncludeMembersArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Group to which users will be added.
-@property (nonatomic, readonly) DBTEAMGroupSelector * _Nonnull group;
+@property (nonatomic, readonly) DBTEAMGroupSelector *group;
 
 /// List of users to be added to the group.
-@property (nonatomic, readonly) NSArray<DBTEAMMemberAccess *> * _Nonnull members;
+@property (nonatomic, readonly) NSArray<DBTEAMMemberAccess *> *members;
 
 #pragma mark - Constructors
 
@@ -45,9 +47,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                              members:(NSArray<DBTEAMMemberAccess *> * _Nonnull)members
-                        returnMembers:(NSNumber * _Nullable)returnMembers;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group
+                      members:(NSArray<DBTEAMMemberAccess *> *)members
+                returnMembers:(nullable NSNumber *)returnMembers;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,8 +60,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                              members:(NSArray<DBTEAMMemberAccess *> * _Nonnull)members;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group members:(NSArray<DBTEAMMemberAccess *> *)members;
 
 @end
 
@@ -78,7 +79,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersAddArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMembersAddArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMembersAddArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersAddArg` instances.
@@ -88,6 +89,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersAddArg` object.
 ///
-+ (DBTEAMGroupMembersAddArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMembersAddArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

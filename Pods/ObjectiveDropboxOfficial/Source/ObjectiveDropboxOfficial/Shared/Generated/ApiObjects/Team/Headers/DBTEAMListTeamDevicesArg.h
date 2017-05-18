@@ -10,6 +10,8 @@
 
 @class DBTEAMListTeamDevicesArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMListTeamDevicesArg : NSObject <DBSerializable>
+@interface DBTEAMListTeamDevicesArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -27,16 +29,16 @@
 /// passed. Then, if the result of the call includes a cursor, the following
 /// requests should include the received cursors in order to receive the next
 /// sub list of team devices
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 /// Whether to list web sessions of the team members
-@property (nonatomic, readonly) NSNumber * _Nonnull includeWebSessions;
+@property (nonatomic, readonly) NSNumber *includeWebSessions;
 
 /// Whether to list desktop clients of the team members
-@property (nonatomic, readonly) NSNumber * _Nonnull includeDesktopClients;
+@property (nonatomic, readonly) NSNumber *includeDesktopClients;
 
 /// Whether to list mobile clients of the team members
-@property (nonatomic, readonly) NSNumber * _Nonnull includeMobileClients;
+@property (nonatomic, readonly) NSNumber *includeMobileClients;
 
 #pragma mark - Constructors
 
@@ -55,10 +57,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nullable)cursor
-                    includeWebSessions:(NSNumber * _Nullable)includeWebSessions
-                 includeDesktopClients:(NSNumber * _Nullable)includeDesktopClients
-                  includeMobileClients:(NSNumber * _Nullable)includeMobileClients;
+- (instancetype)initWithCursor:(nullable NSString *)cursor
+            includeWebSessions:(nullable NSNumber *)includeWebSessions
+         includeDesktopClients:(nullable NSNumber *)includeDesktopClients
+          includeMobileClients:(nullable NSNumber *)includeMobileClients;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -67,7 +69,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -86,7 +90,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListTeamDevicesArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMListTeamDevicesArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMListTeamDevicesArg *)instance;
 
 ///
 /// Deserializes `DBTEAMListTeamDevicesArg` instances.
@@ -96,6 +100,8 @@
 ///
 /// @return An instantiation of the `DBTEAMListTeamDevicesArg` object.
 ///
-+ (DBTEAMListTeamDevicesArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMListTeamDevicesArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

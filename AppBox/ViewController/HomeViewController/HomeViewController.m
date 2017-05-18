@@ -58,6 +58,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    [self.view registerForDraggedTypes:@[@"xcodeproj", @"xcworkspace", @"ipa"]];
 }
 
 - (void)viewWillAppear{
@@ -70,6 +72,26 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
     [[AppDelegate appDelegate] setIsReadyToBuild:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
+}
+
+#pragma mark - Drag
+- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
+    NSPasteboard *pboard = [sender draggingPasteboard];
+    NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
+    
+    if ( [[pboard types] containsObject:NSColorPboardType] ) {
+        if (sourceDragMask & NSDragOperationGeneric) {
+            return NSDragOperationGeneric;
+        }
+    }
+    if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
+        if (sourceDragMask & NSDragOperationLink) {
+            return NSDragOperationLink;
+        } else if (sourceDragMask & NSDragOperationCopy) {
+            return NSDragOperationCopy;
+        }
+    }
+    return NSDragOperationNone;
 }
 
 #pragma mark - Build Repo
@@ -158,10 +180,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Mail Controls Action
 //Send mail option
 - (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
-    if (sender.state == NSOnState && ![UserData isGmailLoggedIn]){
-        [sender setState:NSOffState];
-        [self performSegueWithIdentifier:@"MailView" sender:self];
-    }
     [self enableMailField:(sender.state == NSOnState)];
 }
 
@@ -179,6 +197,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     BOOL isAllMailVaild = sender.stringValue.length > 0 && [MailHandler isAllValidEmail:sender.stringValue];
     [buttonShutdownMac setEnabled:isAllMailVaild];
     if (isAllMailVaild){
+        [project setEmails:sender.stringValue];
         [UserData setUserEmail:sender.stringValue];
     }else if (sender.stringValue.length > 0){
         [MailHandler showInvalidEmailAddressAlert];
@@ -189,6 +208,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
     if (sender.stringValue.length > 0){
         [UserData setUserMessage:sender.stringValue];
+        [project setPersonalMessage:sender.stringValue];
     }
 }
 
@@ -336,7 +356,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 NSDictionary *buildList = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
                 if (buildList != nil){
                     [project setBuildListInfo:buildList];
-                    [progressIndicator setDoubleValue:50];
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     if (comboBuildScheme.numberOfItems > 0){
@@ -610,7 +629,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Dropbox Upload Files
 -(void)dbUploadFile:(NSURL *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     //uploadUrl:path inputUrl:file
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file.absoluteString]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {
@@ -888,8 +907,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (finish){
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
-        [progressIndicator setHidden:YES];
-        [labelStatus setStringValue:abEmptyString];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:true];
     }
     
     //unique link
@@ -952,27 +970,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //log status in session log
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
     
-    //show status in status label
-    [labelStatus setStringValue:status];
-    [labelStatus setHidden:!(status != nil && status.length > 0)];
-    
-    //show progress indicator based on progress value (if -1 then show indeterminate)
-    [progressIndicator setHidden:!showProgressBar];
-    [progressIndicator setIndeterminate:(progress == -1)];
-    [viewProgressStatus setHidden: (labelStatus.hidden && progressIndicator.hidden)];
-    
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
         if (showProgressBar){
-            [progressIndicator startAnimation:self];
+            [MBProgressHUD showStatus:status onView:self.view];
         }else{
-            [progressIndicator stopAnimation:self];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     }else{
-        if (!showProgressBar){
-            [progressIndicator stopAnimation:self];
+        if (showProgressBar){
+            [MBProgressHUD showStatus:status witProgress:progress onView:self.view];
         }else{
-            [progressIndicator setDoubleValue:progress];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     }
 }
@@ -1006,7 +1015,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)updateMenuButtons{
     //Menu Buttons
     BOOL enable = ([DBClientsManager authorizedClient] && pathProject.enabled && pathIPAFile.enabled);
-    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:([UserData isGmailLoggedIn] && enable)];
     [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
@@ -1023,40 +1031,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 #pragma mark - MailDelegate -
--(void)mailViewLoadedWithWebView:(WebView *)webView{
-    
-}
-
--(void)mailSentWithWebView:(WebView *)webView{
-    if (buttonShutdownMac.state == NSOnState){
-        //if mac shutdown is checked then shutdown mac after 60 sec
-        [self viewStateForProgressFinish:YES];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MacHandler shutdownSystem];
-        });
-    }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
-        //if mac shutdown isn't checked then show link
-        if (repoProject == nil){
-            [self performSegueWithIdentifier:@"ShowLink" sender:self];
-        }else{
-            [self viewStateForProgressFinish:YES];
-            exit(0);
-        }
-    }
-}
-
--(void)invalidPerametersWithWebView:(WebView *)webView{
-    [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Can't able to send email right now!!"];
-    [self viewStateForProgressFinish:YES];
-}
-
--(void)loginSuccessWithWebView:(WebView *)webView{
-    //enable sendmail button if user LoggedIn Success
-    [UserData setIsGmailLoggedIn:YES];
-    [buttonSendMail setState:NSOnState];
-    [self enableMailField:YES];
-}
-
 -(void)enableMailField:(BOOL)enable{
     //Gmail Logout Button
     [self updateMenuButtons];
@@ -1149,7 +1123,25 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void) handleAppURLAfterSlack {
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
-        [self performSegueWithIdentifier:@"MailView" sender:self];
+        [MailHandler sendMailForProject:project complition:^(BOOL success) {
+            if (success) {
+                if (buttonShutdownMac.state == NSOnState){
+                    //if mac shutdown is checked then shutdown mac after 60 sec
+                    [self viewStateForProgressFinish:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [MacHandler shutdownSystem];
+                    });
+                }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
+                    //if mac shutdown isn't checked then show link
+                    if (repoProject == nil){
+                        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                    }else{
+                        [self viewStateForProgressFinish:YES];
+                        exit(0);
+                    }
+                }
+            }
+        }];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
@@ -1162,18 +1154,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         //set project to destination
         [((ShowLinkViewController *)segue.destinationController) setProject:project];
         [self viewStateForProgressFinish:YES];
-    }
-    
-    //prepare to send mail
-    else if([segue.destinationController isKindOfClass:[MailViewController class]]){
-        MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
-        [mailViewController setDelegate:self];
-        if (project.appShortShareableURL == nil){
-            [mailViewController setUrl: abMailerBaseURL];
-        }else{
-            NSString *mailURL = [project buildMailURLStringForEmailId:textFieldEmail.stringValue andMessage:textFieldMessage.stringValue];
-            [mailViewController setUrl: mailURL];
-        }
     }
     
     //prepare to show advanced project settings

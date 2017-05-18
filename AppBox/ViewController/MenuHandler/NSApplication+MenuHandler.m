@@ -66,21 +66,6 @@
 }
 
 #pragma mark - Accounts
-- (IBAction)logoutGmailTapped:(NSMenuItem *)sender {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText: @"Are you sure?"];
-    [alert setInformativeText:@"Do you want to logout current gmail account?"];
-    [alert setAlertStyle:NSInformationalAlertStyle];
-    [alert addButtonWithTitle:@"Yes"];
-    [alert addButtonWithTitle:@"No"];
-    if ([alert runModal] == NSAlertFirstButtonReturn){
-        [sender setEnabled:NO];
-        [UserData setIsGmailLoggedIn:NO];
-        [KeychainHandler removeAllStoredCredentials];
-        [[NSNotificationCenter defaultCenter] postNotificationName:abGmailLoggedOutNotification object:sender];
-    }
-}
-
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Are you sure?"];

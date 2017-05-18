@@ -10,6 +10,8 @@
 
 @class DBSHARINGSharingFileAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGSharingFileAccessError : NSObject <DBSerializable>
+@interface DBSHARINGSharingFileAccessError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "invalid_file".
@@ -73,7 +75,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidFile;
+- (instancetype)initWithInvalidFile;
 
 ///
 /// Initializes union class with tag state of "is_folder".
@@ -83,7 +85,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithIsFolder;
+- (instancetype)initWithIsFolder;
 
 ///
 /// Initializes union class with tag state of "inside_public_folder".
@@ -93,7 +95,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsidePublicFolder;
+- (instancetype)initWithInsidePublicFolder;
 
 ///
 /// Initializes union class with tag state of "inside_osx_package".
@@ -103,14 +105,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsideOsxPackage;
+- (instancetype)initWithInsideOsxPackage;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -165,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -185,7 +189,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharingFileAccessError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGSharingFileAccessError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGSharingFileAccessError *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharingFileAccessError` instances.
@@ -195,6 +199,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGSharingFileAccessError` object.
 ///
-+ (DBSHARINGSharingFileAccessError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGSharingFileAccessError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

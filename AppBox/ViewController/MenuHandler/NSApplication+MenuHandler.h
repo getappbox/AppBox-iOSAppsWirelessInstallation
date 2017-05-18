@@ -20,7 +20,6 @@
 - (void)updateDropboxUsage;
 
 //Accounts
-- (IBAction)logoutGmailTapped:(NSMenuItem *)sender;
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender;
 
 //Help

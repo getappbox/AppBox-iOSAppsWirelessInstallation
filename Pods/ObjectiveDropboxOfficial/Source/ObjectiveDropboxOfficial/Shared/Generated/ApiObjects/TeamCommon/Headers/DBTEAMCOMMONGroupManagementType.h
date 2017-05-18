@@ -10,6 +10,8 @@
 
 @class DBTEAMCOMMONGroupManagementType;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMCOMMONGroupManagementType : NSObject <DBSerializable>
+@interface DBTEAMCOMMONGroupManagementType : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -55,7 +57,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserManaged;
+- (instancetype)initWithUserManaged;
 
 ///
 /// Initializes union class with tag state of "company_managed".
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCompanyManaged;
+- (instancetype)initWithCompanyManaged;
 
 ///
 /// Initializes union class with tag state of "system_managed".
@@ -75,14 +77,16 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSystemManaged;
+- (instancetype)initWithSystemManaged;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -119,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -139,7 +143,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONGroupManagementType` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMCOMMONGroupManagementType * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMCOMMONGroupManagementType *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONGroupManagementType` instances.
@@ -149,6 +153,8 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMCOMMONGroupManagementType` object.
 ///
-+ (DBTEAMCOMMONGroupManagementType * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMCOMMONGroupManagementType *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

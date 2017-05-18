@@ -11,6 +11,8 @@
 @class DBFILESUploadError;
 @class DBFILESUploadWriteFailed;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadError : NSObject <DBSerializable>
+@interface DBFILESUploadError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -41,7 +43,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 /// Unable to save the uploaded contents to a file. @note Ensure the `isPath`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBFILESUploadWriteFailed * _Nonnull path;
+@property (nonatomic, readonly) DBFILESUploadWriteFailed *path;
 
 #pragma mark - Constructors
 
@@ -55,14 +57,16 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESUploadWriteFailed * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESUploadWriteFailed *)path;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -88,7 +92,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -107,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadError *)instance;
 
 ///
 /// Deserializes `DBFILESUploadError` instances.
@@ -117,6 +121,8 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESUploadError` object.
 ///
-+ (DBFILESUploadError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

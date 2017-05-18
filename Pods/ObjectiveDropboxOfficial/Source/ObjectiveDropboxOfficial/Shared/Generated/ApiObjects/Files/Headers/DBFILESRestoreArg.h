@@ -10,6 +10,8 @@
 
 @class DBFILESRestoreArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,15 +21,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRestoreArg : NSObject <DBSerializable>
+@interface DBFILESRestoreArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path to the file you want to restore.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// The revision to restore for the file.
-@property (nonatomic, readonly, copy) NSString * _Nonnull rev;
+@property (nonatomic, readonly, copy) NSString *rev;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path rev:(NSString * _Nonnull)rev;
+- (instancetype)initWithPath:(NSString *)path rev:(NSString *)rev;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,7 +62,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRestoreArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRestoreArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRestoreArg *)instance;
 
 ///
 /// Deserializes `DBFILESRestoreArg` instances.
@@ -68,6 +72,8 @@
 ///
 /// @return An instantiation of the `DBFILESRestoreArg` object.
 ///
-+ (DBFILESRestoreArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRestoreArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

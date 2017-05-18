@@ -8,6 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface EmailPreferencesViewController : NSViewController
+@interface EmailPreferencesViewController : NSViewController {
+    IBOutlet NSButton *saveButton;
+    IBOutlet NSButton *testMailButton;
+    
+    IBOutlet NSTextField *emailTextField;
+    IBOutlet NSTextField *personalMessageTextField;
+}
+
+- (IBAction)saveButtonTapped:(NSButton *)sender;
+- (IBAction)sendTestMailButtonTapped:(NSButton *)sender;
+
 
 @end

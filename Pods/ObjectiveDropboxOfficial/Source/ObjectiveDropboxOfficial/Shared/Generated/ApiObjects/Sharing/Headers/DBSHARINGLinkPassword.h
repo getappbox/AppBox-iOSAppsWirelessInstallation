@@ -10,6 +10,8 @@
 
 @class DBSHARINGLinkPassword;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGLinkPassword : NSObject <DBSerializable>
+@interface DBSHARINGLinkPassword : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -43,7 +45,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 /// Set a new password or change an existing password. @note Ensure the
 /// `isSetPassword` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull setPassword;
+@property (nonatomic, readonly, copy) NSString *setPassword;
 
 #pragma mark - Constructors
 
@@ -55,7 +57,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemovePassword;
+- (instancetype)initWithRemovePassword;
 
 ///
 /// Initializes union class with tag state of "set_password".
@@ -67,14 +69,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSetPassword:(NSString * _Nonnull)setPassword;
+- (instancetype)initWithSetPassword:(NSString *)setPassword;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -107,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -126,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkPassword` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGLinkPassword * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGLinkPassword *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkPassword` instances.
@@ -136,6 +140,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 ///
 /// @return An instantiation of the `DBSHARINGLinkPassword` object.
 ///
-+ (DBSHARINGLinkPassword * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGLinkPassword *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

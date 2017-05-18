@@ -10,6 +10,8 @@
 
 @class DBFILESUploadSessionOffsetError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionOffsetError : NSObject <DBSerializable>
+@interface DBFILESUploadSessionOffsetError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The offset up to which data has been collected.
-@property (nonatomic, readonly) NSNumber * _Nonnull correctOffset;
+@property (nonatomic, readonly) NSNumber *correctOffset;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCorrectOffset:(NSNumber * _Nonnull)correctOffset;
+- (instancetype)initWithCorrectOffset:(NSNumber *)correctOffset;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionOffsetError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionOffsetError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionOffsetError *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionOffsetError` instances.
@@ -65,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBFILESUploadSessionOffsetError` object.
 ///
-+ (DBFILESUploadSessionOffsetError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionOffsetError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END
