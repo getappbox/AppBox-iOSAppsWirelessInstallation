@@ -1094,10 +1094,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Log IPA Upload Success Rate with Other Options
     [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
     
-    if (true) {
-        NSString *message = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Sharing URL Slack Channel - %@ - %@", @"url", message]];
-        [SlackClient sendMessage:message completion:^(BOOL success) {
+    if ([UserData userSlackMessage].length > 0) {
+        [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
+        [SlackClient sendMessageForProject:project completion:^(BOOL success) {
             [self handleAppURLAfterSlack];
         }];
     } else {

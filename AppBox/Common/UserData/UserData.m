@@ -37,6 +37,30 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define UserSlackChannel @"UserSlackChannel"
+
++(NSString *)userSlackChannel {
+    NSString *userSlackChannel = [[NSUserDefaults standardUserDefaults] stringForKey:UserSlackChannel];
+    return userSlackChannel == nil ? abEmptyString : userSlackChannel;
+}
+
++(void)setUserSlackChannel:(NSString *)slackChannel {
+    [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserSlackChannel];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define UserSlackMessage @"UserSlackMessage"
+
++(NSString *)userSlackMessage {
+    NSString *userSlackMessage = [[NSUserDefaults standardUserDefaults] stringForKey:UserSlackMessage];
+    return userSlackMessage == nil ? abEmptyString : userSlackMessage;
+}
+
++(void)setUserSlackMessage:(NSString *)slackMessage {
+    [[NSUserDefaults standardUserDefaults] setValue:slackMessage forKey:UserSlackMessage];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Default Setting -
 
 #define BuildLocation @"BuildLocation"

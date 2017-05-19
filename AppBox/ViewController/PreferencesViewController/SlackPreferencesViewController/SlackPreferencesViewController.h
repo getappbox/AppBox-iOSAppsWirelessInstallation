@@ -8,6 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SlackPreferencesViewController : NSViewController
+@interface SlackPreferencesViewController : NSViewController {
+    IBOutlet NSTextField *slackChannelTextField;
+    IBOutlet NSTextField *slackMessageTextField;
+}
+
+- (IBAction)saveButtonTapped:(NSButton *)sender;
+- (IBAction)sendTextMessageButtonTapped:(NSButton *)sender;
+
 
 @end

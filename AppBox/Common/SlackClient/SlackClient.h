@@ -10,6 +10,6 @@
 
 @interface SlackClient : NSObject
 
-+ (void)sendMessage:(NSString *)message completion:(void (^) (BOOL success))completion;
++ (void)sendMessageForProject:(XCProject *)project completion:(void (^) (BOOL success))completion;
 
 @end
