@@ -79,11 +79,9 @@
             if (((NSHTTPURLResponse *)task.response).statusCode == HTTP_OK) {
                 complition(YES);
             }else if (error){
-                [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Mail Sent Error - %@", error.localizedDescription]];
                 complition(NO);
             } else {
-                [Common showAlertWithTitle:@"Error" andMessage:@"Unknown Error!!"];
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Mail Sent Error - Unknown Error"]];
                 complition(NO);
             }
