@@ -14,6 +14,7 @@
 + (void)showInvalidEmailAddressAlert;
 + (BOOL)isValidEmail:(NSString *)checkString;
 + (BOOL)isAllValidEmail:(NSString *)checkString;
++ (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project;
 + (void)sendMailForProject:(XCProject *)project complition:(void (^) (BOOL success))complition;
 
 @end

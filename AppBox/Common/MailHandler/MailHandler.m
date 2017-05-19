@@ -27,6 +27,16 @@
     [Common showAlertWithTitle:@"Invalid email address" andMessage:@"The email address entered was invalid. Please reenter it (Example: username@example.com).\n\nFor multiple email please enter like (username@example.com,username2@example.com,username@example2.com)."];
 }
 
+#pragma mark - Parse customised message with project details
++ (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project {
+    NSString *messageCopy = message.copy;
+    messageCopy = [message stringByReplacingOccurrencesOfString:@"{PROJECT_NAME}" withString:project.name];
+    messageCopy = [message stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
+    messageCopy = [message stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
+    return messageCopy;
+}
+
+#pragma mark - Send Mail
 + (void)sendMailForProject:(XCProject *)project complition:(void (^) (BOOL success))complition{
     NSString *subject;
     NSMutableString *body;
@@ -41,7 +51,8 @@
         
         //add developer personal message into body
         if (project.personalMessage != nil && project.personalMessage.length > 0) {
-            [body appendFormat:@"<hr/><blockquote style=\"background:#FFF8DC; color: #333; font-size: 15px; padding : 12px\">Message from Developer : <br>%@</blockquote><hr/>", project.personalMessage];
+            NSString *developerMessage = [MailHandler parseMessage:project.personalMessage forProject:project];
+            [body appendFormat:@"<hr/><blockquote style=\"background:#FFF8DC; color: #333; font-size: 15px; padding : 12px\">Message from Developer : <br>%@</blockquote><hr/>", developerMessage];
             
         }
         
@@ -53,6 +64,8 @@
         [parameters setValue:project.emails forKey:@"to"];
         [parameters setValue:subject forKey:@"subject"];
         [parameters setValue:body forKey:@"html"];
+        
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Mail Parameters - %@", parameters]];
         
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         [manager setRequestSerializer: [AFHTTPRequestSerializer serializer]];
