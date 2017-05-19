@@ -36,7 +36,6 @@
 
 //notification
 #define abSessionLogUpdated @"SessionLogUpdated"
-#define abGmailLoggedOutNotification @"GmailLoggedOutNotification"
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 #define abBuildRepoNotification @"BuildRepoNotification"
