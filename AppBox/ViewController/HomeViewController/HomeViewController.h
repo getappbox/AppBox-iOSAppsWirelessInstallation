@@ -15,7 +15,7 @@
 #import "ITCLoginViewController.h"
 #import "ProjectAdvancedViewController.h"
 
-@interface HomeViewController : NSViewController <NSTabViewDelegate, NSDraggingDestination, ProjectAdvancedViewDelegate, ITCLoginDelegate>{
+@interface HomeViewController : NSViewController <NSTabViewDelegate, ProjectAdvancedViewDelegate, ITCLoginDelegate>{
     //Tab
     IBOutlet NSTabView *tabView;
     

@@ -38,7 +38,7 @@
         return;
     }
     XCProject *project = [[XCProject alloc] init];
-    [project setName:@"Test"];
+    [project setName:@"TestApp"];
     [project setVersion:@"1.0"];
     [project setBuild:@"1"];
     [project setEmails: emailTextField.stringValue];
@@ -52,9 +52,7 @@
         } else {
             [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        });
+        [MBProgressHUD hideAllHudFromView:self.view after:2];
     }];
 }
 

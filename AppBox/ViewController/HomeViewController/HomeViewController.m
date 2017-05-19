@@ -58,8 +58,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
-    [self.view registerForDraggedTypes:@[@"xcodeproj", @"xcworkspace", @"ipa"]];
 }
 
 - (void)viewWillAppear{
@@ -74,25 +72,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
 }
 
-#pragma mark - Drag
-- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
-    NSPasteboard *pboard = [sender draggingPasteboard];
-    NSDragOperation sourceDragMask = [sender draggingSourceOperationMask];
-    
-    if ( [[pboard types] containsObject:NSColorPboardType] ) {
-        if (sourceDragMask & NSDragOperationGeneric) {
-            return NSDragOperationGeneric;
-        }
-    }
-    if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
-        if (sourceDragMask & NSDragOperationLink) {
-            return NSDragOperationLink;
-        } else if (sourceDragMask & NSDragOperationCopy) {
-            return NSDragOperationCopy;
-        }
-    }
-    return NSDragOperationNone;
-}
 
 #pragma mark - Build Repo
 - (void)initBuildRepoProcess:(NSNotification *)notification {
@@ -606,7 +585,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:ipaURL to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    [self dbUploadFile:ipaURL.resourceSpecifier to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
@@ -627,9 +606,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 #pragma mark → Dropbox Upload Files
--(void)dbUploadFile:(NSURL *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+-(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     //uploadUrl:path inputUrl:file
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file.absoluteString]
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {
@@ -745,7 +724,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             }else{
                 //change file type and upload manifest
                 fileType = FileTypeManifest;
-                [self dbUploadFile:manifestURL to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+                [self dbUploadFile:manifestURL.resourceSpecifier to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
             }
         }];
         
@@ -836,7 +815,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //set mode for appinfo.json file to upload/update
     DBFILESWriteMode *mode = (project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
-    [self dbUploadFile:path to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
+    [self dbUploadFile:path.resourceSpecifier to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
 
 -(void)handleAfterUniqueJsonMetaDataLoaded{
@@ -967,6 +946,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     //log status in session log
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
     
@@ -975,13 +955,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         if (showProgressBar){
             [MBProgressHUD showStatus:status onView:self.view];
         }else{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD showOnlyStatus:status onView:self.view];
         }
     }else{
         if (showProgressBar){
             [MBProgressHUD showStatus:status witProgress:progress onView:self.view];
         }else{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD showOnlyStatus:status onView:self.view];
         }
     }
 }
@@ -1030,7 +1010,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     return viewState;
 }
 
-#pragma mark - MailDelegate -
+#pragma mark - E-Mail -
 -(void)enableMailField:(BOOL)enable{
     //Gmail Logout Button
     [self updateMenuButtons];
@@ -1046,10 +1026,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     //Just for confirm changes
     [self textFieldMailValueChanged:textFieldEmail];
     [self textFieldDevMessageValueChanged:textFieldMessage];
-}
-
-- (void)gmailLogoutHandler:(id)sender{
-    [buttonSendMail setState:NSOffState];
 }
 
 #pragma mark - TabView Delegate -
@@ -1123,8 +1099,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void) handleAppURLAfterSlack {
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
+        [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
         [MailHandler sendMailForProject:project complition:^(BOOL success) {
             if (success) {
+                [MBProgressHUD showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
                 if (buttonShutdownMac.state == NSOnState){
                     //if mac shutdown is checked then shutdown mac after 60 sec
                     [self viewStateForProgressFinish:YES];
@@ -1140,7 +1118,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         exit(0);
                     }
                 }
+            } else {
+                [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+                [self performSegueWithIdentifier:@"ShowLink" sender:self];
             }
+            [MBProgressHUD hideAllHudFromView:self.view after:2];
         }];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
