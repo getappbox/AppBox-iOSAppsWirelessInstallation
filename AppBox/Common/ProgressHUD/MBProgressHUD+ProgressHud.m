@@ -35,4 +35,20 @@
     [hud show:YES];
 }
 
++(void)showOnlyStatus:(NSString *)status onView:(NSView *)view{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = status;
+    hud.margin = 10.f;
+    hud.yOffset = 150.f;
+    hud.removeFromSuperViewOnHide = YES;
+    [MBProgressHUD hideAllHudFromView:view after:3];
+}
+
++(void)hideAllHudFromView:(NSView *)view after:(NSTimeInterval)sec{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(sec * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    });
+}
+
 @end
