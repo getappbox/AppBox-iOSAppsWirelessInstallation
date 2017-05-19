@@ -43,6 +43,8 @@
 }
 
 - (IBAction)sendTestMailButtonTapped:(NSButton *)sender {
+    [self.view.window makeFirstResponder:self.view];
+    
     if (![self isValidEmailDetails]) {
         return;
     }

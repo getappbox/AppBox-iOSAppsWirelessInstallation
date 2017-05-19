@@ -17,14 +17,14 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="655" height="193"/>
+        <customView misplaced="YES" id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="685" height="193"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vov-Bt-7Xg">
-                    <rect key="frame" x="18" y="154" width="204" height="19"/>
+                    <rect key="frame" x="18" y="154" width="184" height="19"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="mAC-6B-2uN"/>
+                        <constraint firstAttribute="width" constant="180" id="mAC-6B-2uN"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Email Address:" id="o8o-w8-o0n">
                         <font key="font" metaFont="systemLight" size="15"/>
@@ -33,9 +33,9 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SqH-2c-6DE">
-                    <rect key="frame" x="235" y="152" width="400" height="24"/>
+                    <rect key="frame" x="215" y="152" width="450" height="24"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="400" id="mxi-F3-Jsk"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="mxi-F3-Jsk"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="user@example.com,user2@example.com,..." drawsBackground="YES" id="Zfb-fi-Cv9">
                         <font key="font" metaFont="systemLight" size="16"/>
@@ -44,7 +44,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXi-3w-TV5">
-                    <rect key="frame" x="18" y="115" width="204" height="19"/>
+                    <rect key="frame" x="18" y="115" width="184" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Personal Message:" id="55j-3M-YfW">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,7 +52,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zmp-Qj-gfW">
-                    <rect key="frame" x="235" y="113" width="400" height="24"/>
+                    <rect key="frame" x="215" y="113" width="450" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="q15-4J-C2C">
                         <font key="font" metaFont="systemLight" size="16"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -60,7 +60,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BWz-cx-cD3">
-                    <rect key="frame" x="233" y="56" width="404" height="52"/>
+                    <rect key="frame" x="213" y="56" width="454" height="52"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="3Gp-fd-ycm"/>
                     </constraints>
@@ -75,7 +75,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A4O-b5-E8c">
-                    <rect key="frame" x="571" y="13" width="70" height="32"/>
+                    <rect key="frame" x="601" y="13" width="70" height="32"/>
                     <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bo0-wp-eBW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -85,7 +85,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-kH-0fE">
-                    <rect key="frame" x="412" y="13" width="151" height="32"/>
+                    <rect key="frame" x="442" y="13" width="151" height="32"/>
                     <buttonCell key="cell" type="push" title="Send a test E-mail" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Uhy-pm-c2L">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
