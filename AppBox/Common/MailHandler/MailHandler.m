@@ -30,9 +30,9 @@
 #pragma mark - Parse customised message with project details
 + (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project {
     NSString *messageCopy = message.copy;
-    messageCopy = [message stringByReplacingOccurrencesOfString:@"{PROJECT_NAME}" withString:project.name];
-    messageCopy = [message stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
-    messageCopy = [message stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_NAME}" withString:project.name];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
     return messageCopy;
 }
 
@@ -53,7 +53,6 @@
         if (project.personalMessage != nil && project.personalMessage.length > 0) {
             NSString *developerMessage = [MailHandler parseMessage:project.personalMessage forProject:project];
             [body appendFormat:@"<hr/><blockquote style=\"background:#FFF8DC; color: #333; font-size: 15px; padding : 12px\">Message from Developer : <br>%@</blockquote><hr/>", developerMessage];
-            
         }
         
         //add email footer in body
