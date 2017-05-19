@@ -33,6 +33,7 @@
 
     [hud setMode: MBProgressHUDModeCustomView];
     [hud show:YES];
+    [MBProgressHUD hideAllHudFromView:view after:2];
 }
 
 +(void)showOnlyStatus:(NSString *)status onView:(NSView *)view{

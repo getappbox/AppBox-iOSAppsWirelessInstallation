@@ -23,6 +23,7 @@
     [super viewWillAppear];
     [self setTabStyle:NSTabViewControllerTabStyleToolbar];
     [self.tabView setControlSize:NSControlSizeRegular];
+    [self setTitle:@"AppBox Preferences"];
     
     //General Preferences
     PreferencesViewController *preferencesViewController = [[PreferencesViewController alloc] initWithNibName:NSStringFromClass([PreferencesViewController class]) bundle:nil];
@@ -41,7 +42,7 @@
     [accountPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueAccount"]];
     [accountPreferencesTabViewItem setViewController:accountPreferencesViewController];
     
-    [self addTabViewItem:accountPreferencesTabViewItem];
+    //[self addTabViewItem:accountPreferencesTabViewItem];
     
     //Mail Preferences
     EmailPreferencesViewController *emailPreferencesViewController = [[EmailPreferencesViewController alloc] initWithNibName:NSStringFromClass([EmailPreferencesViewController class]) bundle:nil];
@@ -71,7 +72,7 @@
     [helpPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueHelp"]];
     [helpPreferencesTabViewItem setViewController:helpPreferencesViewController];
     
-    [self addTabViewItem:helpPreferencesTabViewItem];
+    //[self addTabViewItem:helpPreferencesTabViewItem];
     
 }
 

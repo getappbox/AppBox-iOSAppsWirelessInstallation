@@ -176,7 +176,11 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [buttonShutdownMac setEnabled:isAllMailVaild];
     if (isAllMailVaild){
         [project setEmails:sender.stringValue];
-        [UserData setUserEmail:sender.stringValue];
+        
+        //save user emails, if they doesn't have any
+        if ([[UserData userEmail] isEqualToString:abEmptyString]){
+            [UserData setUserEmail:sender.stringValue];
+        }
     }else if (sender.stringValue.length > 0){
         [MailHandler showInvalidEmailAddressAlert];
     }
@@ -185,7 +189,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //developer message text field
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
     if (sender.stringValue.length > 0){
-        [UserData setUserMessage:sender.stringValue];
+        if ([[UserData userMessage] isEqualToString:abEmptyString]) {
+            [UserData setUserMessage:sender.stringValue];
+        }
         [project setPersonalMessage:sender.stringValue];
     }
 }
@@ -1126,7 +1132,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
                 [self performSegueWithIdentifier:@"ShowLink" sender:self];
             }
-            [MBProgressHUD hideAllHudFromView:self.view after:2];
         }];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
