@@ -12,6 +12,8 @@
 @class DBSHARINGMemberSelector;
 @class DBSHARINGUpdateFolderMemberArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,20 +23,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUpdateFolderMemberArg : NSObject <DBSerializable>
+@interface DBSHARINGUpdateFolderMemberArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID for the shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 /// The member of the shared folder to update.  Only the `dropboxId` in
 /// `DBSHARINGMemberSelector` may be set at this time.
-@property (nonatomic, readonly) DBSHARINGMemberSelector * _Nonnull member;
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
 
 /// The new access level for member. `owner` in `DBSHARINGAccessLevel` is
 /// disallowed.
-@property (nonatomic, readonly) DBSHARINGAccessLevel * _Nonnull accessLevel;
+@property (nonatomic, readonly) DBSHARINGAccessLevel *accessLevel;
 
 #pragma mark - Constructors
 
@@ -49,9 +51,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId
-                                        member:(DBSHARINGMemberSelector * _Nonnull)member
-                                   accessLevel:(DBSHARINGAccessLevel * _Nonnull)accessLevel;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId
+                                member:(DBSHARINGMemberSelector *)member
+                           accessLevel:(DBSHARINGAccessLevel *)accessLevel;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -71,7 +75,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUpdateFolderMemberArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUpdateFolderMemberArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUpdateFolderMemberArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGUpdateFolderMemberArg` instances.
@@ -81,6 +85,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGUpdateFolderMemberArg` object.
 ///
-+ (DBSHARINGUpdateFolderMemberArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUpdateFolderMemberArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

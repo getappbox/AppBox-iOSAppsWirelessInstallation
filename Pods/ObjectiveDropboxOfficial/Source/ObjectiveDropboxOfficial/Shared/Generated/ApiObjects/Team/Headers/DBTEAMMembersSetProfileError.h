@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersSetProfileError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersSetProfileError : NSObject <DBSerializable>
+@interface DBTEAMMembersSetProfileError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of
@@ -98,7 +100,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithExternalIdAndNewExternalIdUnsafe;
+- (instancetype)initWithExternalIdAndNewExternalIdUnsafe;
 
 ///
 /// Initializes union class with tag state of "no_new_data_specified".
@@ -108,7 +110,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoNewDataSpecified;
+- (instancetype)initWithNoNewDataSpecified;
 
 ///
 /// Initializes union class with tag state of "email_reserved_for_other_user".
@@ -118,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmailReservedForOtherUser;
+- (instancetype)initWithEmailReservedForOtherUser;
 
 ///
 /// Initializes union class with tag state of "external_id_used_by_other_user".
@@ -128,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithExternalIdUsedByOtherUser;
+- (instancetype)initWithExternalIdUsedByOtherUser;
 
 ///
 /// Initializes union class with tag state of "set_profile_disallowed".
@@ -138,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSetProfileDisallowed;
+- (instancetype)initWithSetProfileDisallowed;
 
 ///
 /// Initializes union class with tag state of "param_cannot_be_empty".
@@ -148,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithParamCannotBeEmpty;
+- (instancetype)initWithParamCannotBeEmpty;
 
 ///
 /// Initializes union class with tag state of "persistent_id_disabled".
@@ -159,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPersistentIdDisabled;
+- (instancetype)initWithPersistentIdDisabled;
 
 ///
 /// Initializes union class with tag state of
@@ -170,14 +172,16 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPersistentIdUsedByOtherUser;
+- (instancetype)initWithPersistentIdUsedByOtherUser;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -280,7 +284,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -300,7 +304,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetProfileError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersSetProfileError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersSetProfileError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetProfileError` instances.
@@ -310,6 +314,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersSetProfileError` object.
 ///
-+ (DBTEAMMembersSetProfileError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersSetProfileError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

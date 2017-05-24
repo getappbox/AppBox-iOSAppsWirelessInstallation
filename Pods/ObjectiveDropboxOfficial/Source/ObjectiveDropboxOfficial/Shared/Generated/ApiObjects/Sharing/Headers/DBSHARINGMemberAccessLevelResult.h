@@ -12,6 +12,8 @@
 @class DBSHARINGMemberAccessLevelResult;
 @class DBSHARINGParentFolderAccessInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,21 +26,21 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGMemberAccessLevelResult : NSObject <DBSerializable>
+@interface DBSHARINGMemberAccessLevelResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The member still has this level of access to the content through a parent
 /// folder.
-@property (nonatomic, readonly) DBSHARINGAccessLevel * _Nullable accessLevel;
+@property (nonatomic, readonly, nullable) DBSHARINGAccessLevel *accessLevel;
 
 /// A localized string with additional information about why the user has this
 /// access level to the content.
-@property (nonatomic, readonly) NSString * _Nullable warning;
+@property (nonatomic, readonly, copy, nullable) NSString *warning;
 
 /// The parent folders that a member has access to. The field is present if the
 /// user has access to the first parent folder where the member gains access.
-@property (nonatomic, readonly) NSArray<DBSHARINGParentFolderAccessInfo *> * _Nullable accessDetails;
+@property (nonatomic, readonly, nullable) NSArray<DBSHARINGParentFolderAccessInfo *> *accessDetails;
 
 #pragma mark - Constructors
 
@@ -55,9 +57,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessLevel:(DBSHARINGAccessLevel * _Nullable)accessLevel
-                                    warning:(NSString * _Nullable)warning
-                              accessDetails:(NSArray<DBSHARINGParentFolderAccessInfo *> * _Nullable)accessDetails;
+- (instancetype)initWithAccessLevel:(nullable DBSHARINGAccessLevel *)accessLevel
+                            warning:(nullable NSString *)warning
+                      accessDetails:(nullable NSArray<DBSHARINGParentFolderAccessInfo *> *)accessDetails;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -66,7 +68,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -86,7 +90,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberAccessLevelResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGMemberAccessLevelResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGMemberAccessLevelResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberAccessLevelResult` instances.
@@ -96,6 +100,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGMemberAccessLevelResult` object.
 ///
-+ (DBSHARINGMemberAccessLevelResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGMemberAccessLevelResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

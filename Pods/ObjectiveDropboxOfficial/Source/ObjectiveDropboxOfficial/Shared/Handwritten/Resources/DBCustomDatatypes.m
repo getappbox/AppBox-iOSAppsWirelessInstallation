@@ -31,6 +31,8 @@
     _progressBlock = progressBlock;
     _responseBlock = responseBlock;
 
+    _cancel = NO;
+
     _taskStorage = [DBTasksStorage new];
   }
   return self;

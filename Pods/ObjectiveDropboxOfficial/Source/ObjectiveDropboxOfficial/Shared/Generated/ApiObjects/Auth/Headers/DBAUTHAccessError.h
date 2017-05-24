@@ -12,6 +12,8 @@
 @class DBAUTHInvalidAccountTypeError;
 @class DBAUTHPaperAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,7 +26,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBAUTHAccessError : NSObject <DBSerializable>
+@interface DBAUTHAccessError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,12 +50,12 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 /// Current account type cannot access the resource. @note Ensure the
 /// `isInvalidAccountType` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly) DBAUTHInvalidAccountTypeError * _Nonnull invalidAccountType;
+@property (nonatomic, readonly) DBAUTHInvalidAccountTypeError *invalidAccountType;
 
 /// Current account cannot access Paper. @note Ensure the `isPaperAccessDenied`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBAUTHPaperAccessError * _Nonnull paperAccessDenied;
+@property (nonatomic, readonly) DBAUTHPaperAccessError *paperAccessDenied;
 
 #pragma mark - Constructors
 
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidAccountType:(DBAUTHInvalidAccountTypeError * _Nonnull)invalidAccountType;
+- (instancetype)initWithInvalidAccountType:(DBAUTHInvalidAccountTypeError *)invalidAccountType;
 
 ///
 /// Initializes union class with tag state of "paper_access_denied".
@@ -79,14 +81,16 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPaperAccessDenied:(DBAUTHPaperAccessError * _Nonnull)paperAccessDenied;
+- (instancetype)initWithPaperAccessDenied:(DBAUTHPaperAccessError *)paperAccessDenied;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -126,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -145,7 +149,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHAccessError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBAUTHAccessError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBAUTHAccessError *)instance;
 
 ///
 /// Deserializes `DBAUTHAccessError` instances.
@@ -155,6 +159,8 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 ///
 /// @return An instantiation of the `DBAUTHAccessError` object.
 ///
-+ (DBAUTHAccessError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBAUTHAccessError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

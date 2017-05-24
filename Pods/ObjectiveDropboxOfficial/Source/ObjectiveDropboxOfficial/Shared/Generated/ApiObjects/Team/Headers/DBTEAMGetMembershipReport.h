@@ -11,6 +11,8 @@
 
 @class DBTEAMGetMembershipReport;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,24 +26,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGetMembershipReport : DBTEAMBaseDfbReport <DBSerializable>
+@interface DBTEAMGetMembershipReport : DBTEAMBaseDfbReport <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Team size, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull teamSize;
+@property (nonatomic, readonly) NSArray<NSNumber *> *teamSize;
 
 /// The number of pending invites to the team, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull pendingInvites;
+@property (nonatomic, readonly) NSArray<NSNumber *> *pendingInvites;
 
 /// The number of members that joined the team, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull membersJoined;
+@property (nonatomic, readonly) NSArray<NSNumber *> *membersJoined;
 
 /// The number of suspended team members, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull suspendedMembers;
+@property (nonatomic, readonly) NSArray<NSNumber *> *suspendedMembers;
 
 /// The total number of licenses the team has, for each day.
-@property (nonatomic, readonly) NSArray<NSNumber *> * _Nonnull licenses;
+@property (nonatomic, readonly) NSArray<NSNumber *> *licenses;
 
 #pragma mark - Constructors
 
@@ -59,12 +61,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStartDate:(NSString * _Nonnull)startDate
-                                 teamSize:(NSArray<NSNumber *> * _Nonnull)teamSize
-                           pendingInvites:(NSArray<NSNumber *> * _Nonnull)pendingInvites
-                            membersJoined:(NSArray<NSNumber *> * _Nonnull)membersJoined
-                         suspendedMembers:(NSArray<NSNumber *> * _Nonnull)suspendedMembers
-                                 licenses:(NSArray<NSNumber *> * _Nonnull)licenses;
+- (instancetype)initWithStartDate:(NSString *)startDate
+                         teamSize:(NSArray<NSNumber *> *)teamSize
+                   pendingInvites:(NSArray<NSNumber *> *)pendingInvites
+                    membersJoined:(NSArray<NSNumber *> *)membersJoined
+                 suspendedMembers:(NSArray<NSNumber *> *)suspendedMembers
+                         licenses:(NSArray<NSNumber *> *)licenses;
 
 @end
 
@@ -83,7 +85,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGetMembershipReport` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGetMembershipReport * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGetMembershipReport *)instance;
 
 ///
 /// Deserializes `DBTEAMGetMembershipReport` instances.
@@ -93,6 +95,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGetMembershipReport` object.
 ///
-+ (DBTEAMGetMembershipReport * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGetMembershipReport *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

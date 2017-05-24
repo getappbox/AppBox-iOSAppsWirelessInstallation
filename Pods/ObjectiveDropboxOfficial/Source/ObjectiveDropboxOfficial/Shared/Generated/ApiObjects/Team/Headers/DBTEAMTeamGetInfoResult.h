@@ -11,6 +11,8 @@
 @class DBTEAMPOLICIESTeamMemberPolicies;
 @class DBTEAMTeamGetInfoResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,25 +22,25 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamGetInfoResult : NSObject <DBSerializable>
+@interface DBTEAMTeamGetInfoResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The name of the team.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /// The ID of the team.
-@property (nonatomic, readonly, copy) NSString * _Nonnull teamId;
+@property (nonatomic, readonly, copy) NSString *teamId;
 
 /// The number of licenses available to the team.
-@property (nonatomic, readonly) NSNumber * _Nonnull numLicensedUsers;
+@property (nonatomic, readonly) NSNumber *numLicensedUsers;
 
 /// The number of accounts that have been invited or are already active members
 /// of the team.
-@property (nonatomic, readonly) NSNumber * _Nonnull numProvisionedUsers;
+@property (nonatomic, readonly) NSNumber *numProvisionedUsers;
 
 /// (no description).
-@property (nonatomic, readonly) DBTEAMPOLICIESTeamMemberPolicies * _Nonnull policies;
+@property (nonatomic, readonly) DBTEAMPOLICIESTeamMemberPolicies *policies;
 
 #pragma mark - Constructors
 
@@ -54,11 +56,13 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                              teamId:(NSString * _Nonnull)teamId
-                    numLicensedUsers:(NSNumber * _Nonnull)numLicensedUsers
-                 numProvisionedUsers:(NSNumber * _Nonnull)numProvisionedUsers
-                            policies:(DBTEAMPOLICIESTeamMemberPolicies * _Nonnull)policies;
+- (instancetype)initWithName:(NSString *)name
+                      teamId:(NSString *)teamId
+            numLicensedUsers:(NSNumber *)numLicensedUsers
+         numProvisionedUsers:(NSNumber *)numProvisionedUsers
+                    policies:(DBTEAMPOLICIESTeamMemberPolicies *)policies;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,7 +81,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamGetInfoResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamGetInfoResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamGetInfoResult *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamGetInfoResult` instances.
@@ -87,6 +91,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamGetInfoResult` object.
 ///
-+ (DBTEAMTeamGetInfoResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamGetInfoResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

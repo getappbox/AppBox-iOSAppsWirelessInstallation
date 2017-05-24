@@ -14,6 +14,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 @implementation HomeViewController{
     XCProject *project;
+    XCProject *repoProject;
     ScriptType scriptType;
     FileType fileType;
     NSArray *allTeamIds;
@@ -25,9 +26,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     project = [[XCProject alloc] init];
     allTeamIds = [KeychainHandler getAllTeamId];
-    
     //Notification Handler
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gmailLogoutHandler:) name:abGmailLoggedOutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
     
@@ -67,18 +67,33 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if ([DBClientsManager authorizedClient] == nil) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
+    [[AppDelegate appDelegate] setIsReadyToBuild:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
 }
 
+
+#pragma mark - Build Repo
+- (void)initBuildRepoProcess:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[XCProject class]]) {
+        repoProject = notification.object;
+        [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
+        [self initProjectBuildProcessForURL: repoProject.fullPath];
+    }
+}
 
 #pragma mark - Controls Action Handler -
 #pragma mark → Project / Workspace Controls Action
 //Project Path Handler
 - (IBAction)projectPathHandler:(NSPathControl *)sender {
-    NSURL *senderURL = [sender.URL copy];
-    if (![project.fullPath isEqualTo:senderURL]){
+    NSURL *projectURL = [sender.URL filePathURL];
+    [self initProjectBuildProcessForURL: projectURL];
+}
+
+- (void)initProjectBuildProcessForURL:(NSURL *)projectURL {
+    if (![project.fullPath isEqualTo:projectURL]){
         [self viewStateForProgressFinish:YES];
-        [project setFullPath: senderURL];
-        [sender setURL:senderURL];
+        [project setFullPath: projectURL];
+        [pathProject setURL:projectURL];
         [self runGetSchemeScript];
     }
 }
@@ -107,7 +122,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (![project.buildType isEqualToString:sender.stringValue]){
         [project setBuildType: sender.stringValue];
         if ([project.buildType isEqualToString:BuildTypeAppStore]){
-            [self performSegueWithIdentifier:@"ProjectAdvanceSettings" sender:self];
+            [self performSegueWithIdentifier:@"ITCLogin" sender:self];
         }
         [self updateViewState];
     }
@@ -123,7 +138,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-    [textFieldBundleIdentifier setEnabled:(sender.state == NSOnState)];
+    
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
@@ -143,10 +158,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark → Mail Controls Action
 //Send mail option
 - (IBAction)sendMailOptionValueChanged:(NSButton *)sender {
-    if (sender.state == NSOnState && ![UserData isGmailLoggedIn]){
-        [sender setState:NSOffState];
-        [self performSegueWithIdentifier:@"MailView" sender:self];
-    }
     [self enableMailField:(sender.state == NSOnState)];
 }
 
@@ -164,7 +175,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     BOOL isAllMailVaild = sender.stringValue.length > 0 && [MailHandler isAllValidEmail:sender.stringValue];
     [buttonShutdownMac setEnabled:isAllMailVaild];
     if (isAllMailVaild){
-        [UserData setUserEmail:sender.stringValue];
+        [project setEmails:sender.stringValue];
+        
+        //save user emails, if they doesn't have any
+        if ([[UserData userEmail] isEqualToString:abEmptyString]){
+            [UserData setUserEmail:sender.stringValue];
+        }
     }else if (sender.stringValue.length > 0){
         [MailHandler showInvalidEmailAddressAlert];
     }
@@ -173,7 +189,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //developer message text field
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
     if (sender.stringValue.length > 0){
-        [UserData setUserMessage:sender.stringValue];
+        if ([[UserData userMessage] isEqualToString:abEmptyString]) {
+            [UserData setUserMessage:sender.stringValue];
+        }
+        [project setPersonalMessage:sender.stringValue];
     }
 }
 
@@ -181,8 +200,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //Build Button Action
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (buttonSendMail.state == NSOffState || (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue])){
+        //set email
+        [self enableMailField:buttonSendMail.state == NSOnState];
+        
+        //set processing flg
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
+        
         if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
             [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}]];
             [project setIsBuildOnly:NO];
@@ -321,16 +345,29 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 NSDictionary *buildList = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
                 if (buildList != nil){
                     [project setBuildListInfo:buildList];
-                    [progressIndicator setDoubleValue:50];
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
                     if (comboBuildScheme.numberOfItems > 0){
                         [comboBuildScheme selectItemAtIndex:0];
-                        [self comboBuildSchemeValueChanged:comboBuildScheme];
+                        if (repoProject == nil) {
+                            [self comboBuildSchemeValueChanged:comboBuildScheme];
+                            
+                            //Run Team Id Script
+                            [self runTeamIDScript];
+                        } else {
+                            [RepoBuilder setProjectSettingFromProject:repoProject toProject:project];
+                            [comboTeamId removeAllItems];
+                            [comboTeamId addItemWithObjectValue:project.teamId];
+                            [comboTeamId selectItemWithObjectValue:project.teamId];
+                            [comboBuildType selectItemWithObjectValue:project.buildType];
+                            [textFieldEmail setStringValue:project.emails];
+                            [textFieldMessage setStringValue:project.personalMessage];
+                            if (project.emails.length > 0){
+                                [buttonSendMail setState:NSOnState];
+                            }
+                            [self actionButtonTapped:buttonAction];
+                        }
                     }
-                    
-                    //Run Team Id Script
-                    [self runTeamIDScript];
                 }else{
                     [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
                 }
@@ -426,6 +463,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (scriptType == ScriptTypeAppStoreUpload){
             //show upload succeess message
             [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+            [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
             [self viewStateForProgressFinish:YES];
             [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
         }
@@ -521,13 +559,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 return;
             }
             
-            //set dropbox folder name & log if user changing folder name or not
-            if (textFieldBundleIdentifier.stringValue.length == 0){
-                [textFieldBundleIdentifier setStringValue: project.identifer];
-                [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0}];
-            }else{
-                [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
-            }
             if ([AppDelegate appDelegate].isInternetConnected){
                 [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
             }else{
@@ -555,22 +586,16 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [alert addButtonWithTitle:@"YES! Upload on AppStore."];
         [alert addButtonWithTitle:@"NO! Upload on Dropbox"];
         if ([alert runModal] == NSAlertFirstButtonReturn){
-            [self performSegueWithIdentifier:@"ProjectAdvanceSettings" sender:self];
+            [self performSegueWithIdentifier:@"ITCLogin" sender:self];
             return;
         }
     }
-    //check unique link settings for Dropbox folder name
-    if(![textFieldBundleIdentifier.stringValue isEqualToString:project.identifer] && textFieldBundleIdentifier.stringValue.length>0){
-        NSString *bundlePath = [NSString stringWithFormat:@"/%@",textFieldBundleIdentifier.stringValue];
-        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
-        [project setBundleDirectory:[NSURL URLWithString:bundlePath]];
-        [project upadteDbDirectoryByBundleDirectory];
-    }
+
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:ipaURL to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    [self dbUploadFile:ipaURL.resourceSpecifier to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
@@ -591,7 +616,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 #pragma mark → Dropbox Upload Files
--(void)dbUploadFile:(NSURL *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+-(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     //uploadUrl:path inputUrl:file
     [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
       //Track response with result and error
@@ -603,7 +628,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
               if(fileType == FileTypeJson){
                   project.uniqueLinkJsonMetaData = response;
                   if(project.appShortShareableURL){
-                      [self showURL];
+                      [self logAppUploadEventAndShareURLOnSlackChannel];
                       return;
                   }else{
                       //create shared url for appinfo.json
@@ -709,7 +734,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             }else{
                 //change file type and upload manifest
                 fileType = FileTypeManifest;
-                [self dbUploadFile:manifestURL to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+                [self dbUploadFile:manifestURL.resourceSpecifier to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
             }
         }];
         
@@ -746,7 +771,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
         [self writeUniqueJsonWithDict:dictUniqueFile];
         if(project.appShortShareableURL){
-            [self showURL];
+            [self logAppUploadEventAndShareURLOnSlackChannel];
         }else{
             [self createUniqueShortSharableUrl];
         }
@@ -800,7 +825,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //set mode for appinfo.json file to upload/update
     DBFILESWriteMode *mode = (project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
-    [self dbUploadFile:path to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
+    [self dbUploadFile:path.resourceSpecifier to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
 
 -(void)handleAfterUniqueJsonMetaDataLoaded{
@@ -854,7 +879,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             //show url
-            [self showURL];
+            [self logAppUploadEventAndShareURLOnSlackChannel];
         });
     }];
 }
@@ -865,20 +890,18 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)viewStateForProgressFinish:(BOOL)finish{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]]];
     [[AppDelegate appDelegate] setProcessing:!finish];
+    [[AppDelegate appDelegate] setIsReadyToBuild:!finish];
     
     //reset project
     if (finish){
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
-        [progressIndicator setHidden:YES];
-        [labelStatus setStringValue:abEmptyString];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:true];
     }
     
     //unique link
     [buttonUniqueLink setEnabled:finish];
     [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
-    [textFieldBundleIdentifier setEnabled:(finish && buttonUniqueLink.state == NSOnState)];
-    [textFieldBundleIdentifier setStringValue: finish ? abEmptyString : textFieldBundleIdentifier.stringValue];
     
     //ipa path
     [pathIPAFile setEnabled:finish];
@@ -933,30 +956,22 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     //log status in session log
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
-    
-    //show status in status label
-    [labelStatus setStringValue:status];
-    [labelStatus setHidden:!(status != nil && status.length > 0)];
-    
-    //show progress indicator based on progress value (if -1 then show indeterminate)
-    [progressIndicator setHidden:!showProgressBar];
-    [progressIndicator setIndeterminate:(progress == -1)];
-    [viewProgressStatus setHidden: (labelStatus.hidden && progressIndicator.hidden)];
     
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
         if (showProgressBar){
-            [progressIndicator startAnimation:self];
+            [MBProgressHUD showStatus:status onView:self.view];
         }else{
-            [progressIndicator stopAnimation:self];
+            [MBProgressHUD showOnlyStatus:status onView:self.view];
         }
     }else{
-        if (!showProgressBar){
-            [progressIndicator stopAnimation:self];
+        if (showProgressBar){
+            [MBProgressHUD showStatus:status witProgress:progress onView:self.view];
         }else{
-            [progressIndicator setDoubleValue:progress];
+            [MBProgressHUD showOnlyStatus:status onView:self.view];
         }
     }
 }
@@ -966,7 +981,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 && //build scheme
                     comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0 && //build type
                     comboTeamId.stringValue != nil && comboTeamId.stringValue.length > 0 && //team id
-                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab) ||
+                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab &&
+                    (![comboBuildType.stringValue isEqualToString: BuildTypeAppStore] || project.itcPasswod.length > 0)) ||
                    
                    //if ipa selected
                    (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
@@ -989,7 +1005,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)updateMenuButtons{
     //Menu Buttons
     BOOL enable = ([DBClientsManager authorizedClient] && pathProject.enabled && pathIPAFile.enabled);
-    [[[AppDelegate appDelegate] gmailLogoutButton] setEnabled:([UserData isGmailLoggedIn] && enable)];
     [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
@@ -1005,36 +1020,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     return viewState;
 }
 
-#pragma mark - MailDelegate -
--(void)mailViewLoadedWithWebView:(WebView *)webView{
-    
-}
-
--(void)mailSentWithWebView:(WebView *)webView{
-    if (buttonShutdownMac.state == NSOnState){
-        //if mac shutdown is checked then shutdown mac after 60 sec
-        [self viewStateForProgressFinish:YES];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MacHandler shutdownSystem];
-        });
-    }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
-        //if mac shutdown isn't checked then show link
-        [self performSegueWithIdentifier:@"ShowLink" sender:self];
-    }
-}
-
--(void)invalidPerametersWithWebView:(WebView *)webView{
-    [Common showAlertWithTitle:@"AppBox Error" andMessage:@"Can't able to send email right now!!"];
-    [self viewStateForProgressFinish:YES];
-}
-
--(void)loginSuccessWithWebView:(WebView *)webView{
-    //enable sendmail button if user LoggedIn Success
-    [UserData setIsGmailLoggedIn:YES];
-    [buttonSendMail setState:NSOnState];
-    [self enableMailField:YES];
-}
-
+#pragma mark - E-Mail -
 -(void)enableMailField:(BOOL)enable{
     //Gmail Logout Button
     [self updateMenuButtons];
@@ -1052,10 +1038,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [self textFieldDevMessageValueChanged:textFieldMessage];
 }
 
-- (void)gmailLogoutHandler:(id)sender{
-    [buttonSendMail setState:NSOffState];
-}
-
 #pragma mark - TabView Delegate -
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
     //update view state based on selected tap
@@ -1064,26 +1046,92 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 #pragma mark - ProjectAdvancedViewDelegate - 
 - (void)projectAdvancedSaveButtonTapped:(NSButton *)sender{
-    if (project.fullPath == nil){
-        [self runALAppStoreScriptForValidation:YES];
-    }
+
 }
 
 - (void)projectAdvancedCancelButtonTapped:(NSButton *)sender{
-    if (project.fullPath == nil){
+    
+}
+
+#pragma mark - AppleDeveloperLogin Delegate -
+- (void)itcLoginResult:(BOOL)success{
+    if (success) {
+        //check xcode and application loader path
+        [XCHandler getXCodePathWithCompletion:^(NSString *xcodePath, NSString *applicationLoaderPath) {
+            if (xcodePath != nil){
+                [project setXcodePath: xcodePath];
+                if (applicationLoaderPath != nil){
+                    [project setAlPath: applicationLoaderPath];
+                    
+                    //check for ipa, if ipa start upload
+                    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+                        [self runALAppStoreScriptForValidation:YES];
+                    }else{
+                        [self updateViewState];
+                    }
+                }else{
+                    [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
+                }
+            }else{
+                [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
+            }
+        }];
+    }
+}
+
+-(void)itcLoginCanceled{
+    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
         [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+    } else {
+        [project setBuildType:abEmptyString];
+        [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];
+        [self updateViewState];
+    }
+}
+
+#pragma mark - Navigation -
+-(void)logAppUploadEventAndShareURLOnSlackChannel{
+    //Log IPA Upload Success Rate with Other Options
+    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
+    
+    if ([UserData userSlackMessage].length > 0) {
+        [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
+        [SlackClient sendMessageForProject:project completion:^(BOOL success) {
+            [self handleAppURLAfterSlack];
+        }];
+    } else {
+        [self handleAppURLAfterSlack];
     }
 }
 
 
-#pragma mark - Navigation -
--(void)showURL{
-    //Log IPA Upload Success Rate with Other Options
-    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
-    
+-(void) handleAppURLAfterSlack {
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
-        [self performSegueWithIdentifier:@"MailView" sender:self];
+        [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
+        [MailHandler sendMailForProject:project complition:^(BOOL success) {
+            if (success) {
+                [MBProgressHUD showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+                if (buttonShutdownMac.state == NSOnState){
+                    //if mac shutdown is checked then shutdown mac after 60 sec
+                    [self viewStateForProgressFinish:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [MacHandler shutdownSystem];
+                    });
+                }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
+                    //if mac shutdown isn't checked then show link
+                    if (repoProject == nil){
+                        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                    }else{
+                        [self viewStateForProgressFinish:YES];
+                        exit(0);
+                    }
+                }
+            } else {
+                [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+                [self performSegueWithIdentifier:@"ShowLink" sender:self];
+            }
+        }];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
     }
@@ -1098,18 +1146,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [self viewStateForProgressFinish:YES];
     }
     
-    //prepare to send mail
-    else if([segue.destinationController isKindOfClass:[MailViewController class]]){
-        MailViewController *mailViewController = ((MailViewController *)segue.destinationController);
-        [mailViewController setDelegate:self];
-        if (project.appShortShareableURL == nil){
-            [mailViewController setUrl: abMailerBaseURL];
-        }else{
-            NSString *mailURL = [project buildMailURLStringForEmailId:textFieldEmail.stringValue andMessage:textFieldMessage.stringValue];
-            [mailViewController setUrl: mailURL];
-        }
-    }
-    
     //prepare to show advanced project settings
     else if([segue.destinationController isKindOfClass:[ProjectAdvancedViewController class]]){
         ProjectAdvancedViewController *projectAdvancedViewController = ((ProjectAdvancedViewController *)segue.destinationController);
@@ -1121,6 +1157,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     else if([segue.destinationController isKindOfClass:[CIViewController class]]){
         CIViewController *ciViewController = ((CIViewController *)segue.destinationController);
         [ciViewController setProject:project];
+    }
+    
+    //prepare to show AppleDeveloperLogin
+    else if ([segue.destinationController isKindOfClass:[ITCLoginViewController class]]){
+        ITCLoginViewController *itcLoginViewController = ((ITCLoginViewController *)segue.destinationController);
+        [itcLoginViewController setProject:project];
+        [itcLoginViewController setDelegate:self];
     }
 }
 

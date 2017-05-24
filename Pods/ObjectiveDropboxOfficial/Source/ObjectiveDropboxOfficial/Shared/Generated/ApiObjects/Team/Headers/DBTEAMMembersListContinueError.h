@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersListContinueError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersListContinueError : NSObject <DBSerializable>
+@interface DBTEAMMembersListContinueError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -46,14 +48,16 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersListContinueErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidCursor;
+- (instancetype)initWithInvalidCursor;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -76,7 +80,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersListContinueErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -96,7 +100,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersListContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersListContinueError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersListContinueError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersListContinueError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersListContinueError` instances.
@@ -106,6 +110,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersListContinueErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersListContinueError` object.
 ///
-+ (DBTEAMMembersListContinueError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersListContinueError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

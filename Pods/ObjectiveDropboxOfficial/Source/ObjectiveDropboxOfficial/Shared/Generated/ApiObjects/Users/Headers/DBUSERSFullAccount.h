@@ -9,10 +9,12 @@
 #import "DBSerializableProtocol.h"
 #import "DBUSERSAccount.h"
 
-@class DBUSERSAccountType;
+@class DBUSERSCOMMONAccountType;
 @class DBUSERSFullAccount;
 @class DBUSERSFullTeam;
 @class DBUSERSName;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - API Object
 
@@ -25,35 +27,35 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSFullAccount : DBUSERSAccount <DBSerializable>
+@interface DBUSERSFullAccount : DBUSERSAccount <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The user's two-letter country code, if available. Country codes are based on
 /// ISO 3166-1 http://en.wikipedia.org/wiki/ISO_3166-1.
-@property (nonatomic, readonly) NSString * _Nullable country;
+@property (nonatomic, readonly, copy, nullable) NSString *country;
 
 /// The language that the user specified. Locale tags will be IETF language tags
 /// http://en.wikipedia.org/wiki/IETF_language_tag.
-@property (nonatomic, readonly, copy) NSString * _Nonnull locale;
+@property (nonatomic, readonly, copy) NSString *locale;
 
 /// The user's referral link https://www.dropbox.com/referrals.
-@property (nonatomic, readonly, copy) NSString * _Nonnull referralLink;
+@property (nonatomic, readonly, copy) NSString *referralLink;
 
 /// If this account is a member of a team, information about that team.
-@property (nonatomic, readonly) DBUSERSFullTeam * _Nullable team;
+@property (nonatomic, readonly, nullable) DBUSERSFullTeam *team;
 
 /// This account's unique team member id. This field will only be present if
 /// team is present.
-@property (nonatomic, readonly) NSString * _Nullable teamMemberId;
+@property (nonatomic, readonly, copy, nullable) NSString *teamMemberId;
 
 /// Whether the user has a personal and work account. If the current account is
 /// personal, then team will always be null, but isPaired will indicate if a
 /// work account is linked.
-@property (nonatomic, readonly) NSNumber * _Nonnull isPaired;
+@property (nonatomic, readonly) NSNumber *isPaired;
 
 /// What type of account this user has.
-@property (nonatomic, readonly) DBUSERSAccountType * _Nonnull accountType;
+@property (nonatomic, readonly) DBUSERSCOMMONAccountType *accountType;
 
 #pragma mark - Constructors
 
@@ -86,19 +88,19 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                     name:(DBUSERSName * _Nonnull)name
-                                    email:(NSString * _Nonnull)email
-                            emailVerified:(NSNumber * _Nonnull)emailVerified
-                                 disabled:(NSNumber * _Nonnull)disabled
-                                   locale:(NSString * _Nonnull)locale
-                             referralLink:(NSString * _Nonnull)referralLink
-                                 isPaired:(NSNumber * _Nonnull)isPaired
-                              accountType:(DBUSERSAccountType * _Nonnull)accountType
-                          profilePhotoUrl:(NSString * _Nullable)profilePhotoUrl
-                                  country:(NSString * _Nullable)country
-                                     team:(DBUSERSFullTeam * _Nullable)team
-                             teamMemberId:(NSString * _Nullable)teamMemberId;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                             name:(DBUSERSName *)name
+                            email:(NSString *)email
+                    emailVerified:(NSNumber *)emailVerified
+                         disabled:(NSNumber *)disabled
+                           locale:(NSString *)locale
+                     referralLink:(NSString *)referralLink
+                         isPaired:(NSNumber *)isPaired
+                      accountType:(DBUSERSCOMMONAccountType *)accountType
+                  profilePhotoUrl:(nullable NSString *)profilePhotoUrl
+                          country:(nullable NSString *)country
+                             team:(nullable DBUSERSFullTeam *)team
+                     teamMemberId:(nullable NSString *)teamMemberId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -122,15 +124,15 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                     name:(DBUSERSName * _Nonnull)name
-                                    email:(NSString * _Nonnull)email
-                            emailVerified:(NSNumber * _Nonnull)emailVerified
-                                 disabled:(NSNumber * _Nonnull)disabled
-                                   locale:(NSString * _Nonnull)locale
-                             referralLink:(NSString * _Nonnull)referralLink
-                                 isPaired:(NSNumber * _Nonnull)isPaired
-                              accountType:(DBUSERSAccountType * _Nonnull)accountType;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                             name:(DBUSERSName *)name
+                            email:(NSString *)email
+                    emailVerified:(NSNumber *)emailVerified
+                         disabled:(NSNumber *)disabled
+                           locale:(NSString *)locale
+                     referralLink:(NSString *)referralLink
+                         isPaired:(NSNumber *)isPaired
+                      accountType:(DBUSERSCOMMONAccountType *)accountType;
 
 @end
 
@@ -149,7 +151,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSFullAccount` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSFullAccount * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSFullAccount *)instance;
 
 ///
 /// Deserializes `DBUSERSFullAccount` instances.
@@ -159,6 +161,8 @@
 ///
 /// @return An instantiation of the `DBUSERSFullAccount` object.
 ///
-+ (DBUSERSFullAccount * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSFullAccount *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

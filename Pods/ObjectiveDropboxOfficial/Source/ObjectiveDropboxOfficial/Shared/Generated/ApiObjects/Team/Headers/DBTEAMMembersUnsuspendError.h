@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersUnsuspendError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersUnsuspendError : NSObject <DBSerializable>
+@interface DBTEAMMembersUnsuspendError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -57,7 +59,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -67,14 +69,14 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "unsuspend_non_suspended_member".
@@ -84,7 +86,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnsuspendNonSuspendedMember;
+- (instancetype)initWithUnsuspendNonSuspendedMember;
 
 ///
 /// Initializes union class with tag state of "team_license_limit".
@@ -94,7 +96,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamLicenseLimit;
+- (instancetype)initWithTeamLicenseLimit;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -143,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -162,7 +166,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersUnsuspendError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersUnsuspendError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersUnsuspendError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersUnsuspendError` instances.
@@ -172,6 +176,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersUnsuspendError` object.
 ///
-+ (DBTEAMMembersUnsuspendError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersUnsuspendError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

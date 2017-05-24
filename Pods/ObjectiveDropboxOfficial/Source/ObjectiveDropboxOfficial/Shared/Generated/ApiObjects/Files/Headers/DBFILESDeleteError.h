@@ -12,6 +12,8 @@
 @class DBFILESLookupError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESDeleteError : NSObject <DBSerializable>
+@interface DBFILESDeleteError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -44,11 +46,11 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 
 /// (no description). @note Ensure the `isPathLookup` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull pathLookup;
+@property (nonatomic, readonly) DBFILESLookupError *pathLookup;
 
 /// (no description). @note Ensure the `isPathWrite` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull pathWrite;
+@property (nonatomic, readonly) DBFILESWriteError *pathWrite;
 
 #pragma mark - Constructors
 
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPathLookup:(DBFILESLookupError * _Nonnull)pathLookup;
+- (instancetype)initWithPathLookup:(DBFILESLookupError *)pathLookup;
 
 ///
 /// Initializes union class with tag state of "path_write".
@@ -68,14 +70,16 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPathWrite:(DBFILESWriteError * _Nonnull)pathWrite;
+- (instancetype)initWithPathWrite:(DBFILESWriteError *)pathWrite;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -111,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -130,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESDeleteError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESDeleteError *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteError` instances.
@@ -140,6 +144,8 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESDeleteError` object.
 ///
-+ (DBFILESDeleteError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESDeleteError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

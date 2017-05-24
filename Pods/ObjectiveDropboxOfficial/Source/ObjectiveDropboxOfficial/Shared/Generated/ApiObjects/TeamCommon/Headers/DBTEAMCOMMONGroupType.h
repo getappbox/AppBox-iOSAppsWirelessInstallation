@@ -10,6 +10,8 @@
 
 @class DBTEAMCOMMONGroupType;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMCOMMONGroupType : NSObject <DBSerializable>
+@interface DBTEAMCOMMONGroupType : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -54,7 +56,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeam;
+- (instancetype)initWithTeam;
 
 ///
 /// Initializes union class with tag state of "user_managed".
@@ -64,14 +66,16 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserManaged;
+- (instancetype)initWithUserManaged;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -101,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -120,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONGroupType` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMCOMMONGroupType * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMCOMMONGroupType *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONGroupType` instances.
@@ -130,6 +134,8 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMCOMMONGroupType` object.
 ///
-+ (DBTEAMCOMMONGroupType * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMCOMMONGroupType *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

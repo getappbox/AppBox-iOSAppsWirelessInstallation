@@ -11,6 +11,8 @@
 @class DBSHARINGShareFolderErrorBase;
 @class DBSHARINGSharePathError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGShareFolderErrorBase : NSObject <DBSerializable>
+@interface DBSHARINGShareFolderErrorBase : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -52,7 +54,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 /// `path` in `DBSHARINGShareFolderArg` is invalid. @note Ensure the `isBadPath`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBSHARINGSharePathError * _Nonnull badPath;
+@property (nonatomic, readonly) DBSHARINGSharePathError *badPath;
 
 #pragma mark - Constructors
 
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmailUnverified;
+- (instancetype)initWithEmailUnverified;
 
 ///
 /// Initializes union class with tag state of "bad_path".
@@ -76,7 +78,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithBadPath:(DBSHARINGSharePathError * _Nonnull)badPath;
+- (instancetype)initWithBadPath:(DBSHARINGSharePathError *)badPath;
 
 ///
 /// Initializes union class with tag state of
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamPolicyDisallowsMemberPolicy;
+- (instancetype)initWithTeamPolicyDisallowsMemberPolicy;
 
 ///
 /// Initializes union class with tag state of "disallowed_shared_link_policy".
@@ -98,14 +100,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDisallowedSharedLinkPolicy;
+- (instancetype)initWithDisallowedSharedLinkPolicy;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -157,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -177,7 +181,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGShareFolderErrorBase` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGShareFolderErrorBase * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGShareFolderErrorBase *)instance;
 
 ///
 /// Deserializes `DBSHARINGShareFolderErrorBase` instances.
@@ -187,6 +191,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
 ///
 /// @return An instantiation of the `DBSHARINGShareFolderErrorBase` object.
 ///
-+ (DBSHARINGShareFolderErrorBase * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGShareFolderErrorBase *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

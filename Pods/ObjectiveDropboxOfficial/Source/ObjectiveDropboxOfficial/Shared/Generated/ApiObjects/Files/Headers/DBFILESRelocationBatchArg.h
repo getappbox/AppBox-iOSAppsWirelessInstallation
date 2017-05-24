@@ -11,6 +11,8 @@
 @class DBFILESRelocationBatchArg;
 @class DBFILESRelocationPath;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,22 +22,22 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationBatchArg : NSObject <DBSerializable>
+@interface DBFILESRelocationBatchArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// List of entries to be moved or copied. Each entry is RelocationPath.
-@property (nonatomic, readonly) NSArray<DBFILESRelocationPath *> * _Nonnull entries;
+@property (nonatomic, readonly) NSArray<DBFILESRelocationPath *> *entries;
 
 /// If true, `dCopyBatch` will copy contents in shared folder, otherwise
 /// `cantCopySharedFolder` in `DBFILESRelocationError` will be returned if
 /// `fromPath` in `DBFILESRelocationPath` contains shared folder.  This field is
 /// always true for `moveBatch`.
-@property (nonatomic, readonly) NSNumber * _Nonnull allowSharedFolder;
+@property (nonatomic, readonly) NSNumber *allowSharedFolder;
 
 /// If there's a conflict with any file, have the Dropbox server try to
 /// autorename that file to avoid the conflict.
-@property (nonatomic, readonly) NSNumber * _Nonnull autorename;
+@property (nonatomic, readonly) NSNumber *autorename;
 
 #pragma mark - Constructors
 
@@ -53,9 +55,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEntries:(NSArray<DBFILESRelocationPath *> * _Nonnull)entries
-                      allowSharedFolder:(NSNumber * _Nullable)allowSharedFolder
-                             autorename:(NSNumber * _Nullable)autorename;
+- (instancetype)initWithEntries:(NSArray<DBFILESRelocationPath *> *)entries
+              allowSharedFolder:(nullable NSNumber *)allowSharedFolder
+                     autorename:(nullable NSNumber *)autorename;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -66,7 +68,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEntries:(NSArray<DBFILESRelocationPath *> * _Nonnull)entries;
+- (instancetype)initWithEntries:(NSArray<DBFILESRelocationPath *> *)entries;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -85,7 +89,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationBatchArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRelocationBatchArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRelocationBatchArg *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationBatchArg` instances.
@@ -95,6 +99,8 @@
 ///
 /// @return An instantiation of the `DBFILESRelocationBatchArg` object.
 ///
-+ (DBFILESRelocationBatchArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRelocationBatchArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

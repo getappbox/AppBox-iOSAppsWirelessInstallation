@@ -10,6 +10,8 @@
 
 @class DBFILESCreateFolderArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,16 +21,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESCreateFolderArg : NSObject <DBSerializable>
+@interface DBFILESCreateFolderArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Path in the user's Dropbox to create.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// If there's a conflict, have the Dropbox server try to autorename the folder
 /// to avoid the conflict.
-@property (nonatomic, readonly) NSNumber * _Nonnull autorename;
+@property (nonatomic, readonly) NSNumber *autorename;
 
 #pragma mark - Constructors
 
@@ -41,7 +43,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path autorename:(NSNumber * _Nullable)autorename;
+- (instancetype)initWithPath:(NSString *)path autorename:(nullable NSNumber *)autorename;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -51,7 +53,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -70,7 +74,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESCreateFolderArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESCreateFolderArg *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderArg` instances.
@@ -80,6 +84,8 @@
 ///
 /// @return An instantiation of the `DBFILESCreateFolderArg` object.
 ///
-+ (DBFILESCreateFolderArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESCreateFolderArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

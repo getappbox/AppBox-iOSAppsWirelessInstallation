@@ -12,5 +12,6 @@
 
 + (NSArray *)getAllTeamId;
 + (void)removeAllStoredCredentials;
++ (void)installPrivateKeyFromPath:(NSString *)path withPassword:(NSString *)password;
 
 @end

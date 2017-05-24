@@ -10,6 +10,8 @@
 
 @class DBFILESRemovePropertiesArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,16 +21,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRemovePropertiesArg : NSObject <DBSerializable>
+@interface DBFILESRemovePropertiesArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A unique identifier for the file.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// A list of identifiers for a property template created by route
 /// properties/template/add.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull propertyTemplateIds;
+@property (nonatomic, readonly) NSArray<NSString *> *propertyTemplateIds;
 
 #pragma mark - Constructors
 
@@ -41,8 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path
-                 propertyTemplateIds:(NSArray<NSString *> * _Nonnull)propertyTemplateIds;
+- (instancetype)initWithPath:(NSString *)path propertyTemplateIds:(NSArray<NSString *> *)propertyTemplateIds;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -61,7 +64,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRemovePropertiesArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRemovePropertiesArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRemovePropertiesArg *)instance;
 
 ///
 /// Deserializes `DBFILESRemovePropertiesArg` instances.
@@ -71,6 +74,8 @@
 ///
 /// @return An instantiation of the `DBFILESRemovePropertiesArg` object.
 ///
-+ (DBFILESRemovePropertiesArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRemovePropertiesArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

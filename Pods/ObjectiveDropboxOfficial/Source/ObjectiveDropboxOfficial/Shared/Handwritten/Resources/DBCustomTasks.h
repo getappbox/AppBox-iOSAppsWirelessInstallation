@@ -6,6 +6,8 @@
 
 @class DBBatchUploadData;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Dropbox task object for custom batch upload route.
 ///
@@ -23,11 +25,22 @@
 ///
 /// @returns A DBBatchUploadTask instance.
 ///
-- (nonnull instancetype)initWithUploadData:(DBBatchUploadData * _Nonnull)uploadData;
+- (instancetype)initWithUploadData:(DBBatchUploadData *)uploadData;
 
 ///
 /// Cancels the current request.
 ///
 - (void)cancel;
 
+///
+/// Determines whether there are any upload tasks still in progress.
+///
+/// NOTE: This will return `NO` during the final polling / commit phase of batch upload.
+///
+/// @return Whether there are any upload tasks in progress.
+///
+- (BOOL)uploadsInProgress;
+
 @end
+
+NS_ASSUME_NONNULL_END

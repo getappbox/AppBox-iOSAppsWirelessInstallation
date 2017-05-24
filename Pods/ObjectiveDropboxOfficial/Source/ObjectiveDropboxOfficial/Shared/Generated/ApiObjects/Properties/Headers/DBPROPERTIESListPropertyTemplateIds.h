@@ -10,6 +10,8 @@
 
 @class DBPROPERTIESListPropertyTemplateIds;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPROPERTIESListPropertyTemplateIds : NSObject <DBSerializable>
+@interface DBPROPERTIESListPropertyTemplateIds : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// List of identifiers for templates added by route properties/template/add.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull templateIds;
+@property (nonatomic, readonly) NSArray<NSString *> *templateIds;
 
 #pragma mark - Constructors
 
@@ -36,7 +38,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateIds:(NSArray<NSString *> * _Nonnull)templateIds;
+- (instancetype)initWithTemplateIds:(NSArray<NSString *> *)templateIds;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -56,7 +60,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPROPERTIESListPropertyTemplateIds` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPROPERTIESListPropertyTemplateIds * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPROPERTIESListPropertyTemplateIds *)instance;
 
 ///
 /// Deserializes `DBPROPERTIESListPropertyTemplateIds` instances.
@@ -67,6 +71,8 @@
 /// @return An instantiation of the `DBPROPERTIESListPropertyTemplateIds`
 /// object.
 ///
-+ (DBPROPERTIESListPropertyTemplateIds * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPROPERTIESListPropertyTemplateIds *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

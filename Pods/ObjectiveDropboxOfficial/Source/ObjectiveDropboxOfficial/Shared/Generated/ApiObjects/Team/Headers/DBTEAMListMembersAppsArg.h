@@ -10,6 +10,8 @@
 
 @class DBTEAMListMembersAppsArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMListMembersAppsArg : NSObject <DBSerializable>
+@interface DBTEAMListMembersAppsArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -29,7 +31,7 @@
 /// shouldn't be passed. Then, if the result of the call includes a cursor, the
 /// following requests should include the received cursors in order to receive
 /// the next sub list of the team applications
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -43,7 +45,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nullable)cursor;
+- (instancetype)initWithCursor:(nullable NSString *)cursor;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -52,7 +54,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -71,7 +75,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListMembersAppsArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMListMembersAppsArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMListMembersAppsArg *)instance;
 
 ///
 /// Deserializes `DBTEAMListMembersAppsArg` instances.
@@ -81,6 +85,8 @@
 ///
 /// @return An instantiation of the `DBTEAMListMembersAppsArg` object.
 ///
-+ (DBTEAMListMembersAppsArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMListMembersAppsArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

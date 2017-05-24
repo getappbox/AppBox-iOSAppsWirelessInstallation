@@ -10,6 +10,8 @@
 
 @class DBSHARINGListSharedLinksArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,18 +21,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListSharedLinksArg : NSObject <DBSerializable>
+@interface DBSHARINGListSharedLinksArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// See `listSharedLinks` description.
-@property (nonatomic, readonly) NSString * _Nullable path;
+@property (nonatomic, readonly, copy, nullable) NSString *path;
 
 /// The cursor returned by your last call to `listSharedLinks`.
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 /// See `listSharedLinks` description.
-@property (nonatomic, readonly) NSNumber * _Nullable directOnly;
+@property (nonatomic, readonly, nullable) NSNumber *directOnly;
 
 #pragma mark - Constructors
 
@@ -43,9 +45,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nullable)path
-                              cursor:(NSString * _Nullable)cursor
-                          directOnly:(NSNumber * _Nullable)directOnly;
+- (instancetype)initWithPath:(nullable NSString *)path
+                      cursor:(nullable NSString *)cursor
+                  directOnly:(nullable NSNumber *)directOnly;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -54,7 +56,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -73,7 +77,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListSharedLinksArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListSharedLinksArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListSharedLinksArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListSharedLinksArg` instances.
@@ -83,6 +87,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGListSharedLinksArg` object.
 ///
-+ (DBSHARINGListSharedLinksArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListSharedLinksArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

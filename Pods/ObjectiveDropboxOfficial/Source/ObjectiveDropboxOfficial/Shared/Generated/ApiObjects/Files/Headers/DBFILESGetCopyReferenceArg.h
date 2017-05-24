@@ -10,6 +10,8 @@
 
 @class DBFILESGetCopyReferenceArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESGetCopyReferenceArg : NSObject <DBSerializable>
+@interface DBFILESGetCopyReferenceArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path to the file or folder you want to get a copy reference to.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 #pragma mark - Constructors
 
@@ -36,7 +38,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetCopyReferenceArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESGetCopyReferenceArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESGetCopyReferenceArg *)instance;
 
 ///
 /// Deserializes `DBFILESGetCopyReferenceArg` instances.
@@ -65,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBFILESGetCopyReferenceArg` object.
 ///
-+ (DBFILESGetCopyReferenceArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESGetCopyReferenceArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

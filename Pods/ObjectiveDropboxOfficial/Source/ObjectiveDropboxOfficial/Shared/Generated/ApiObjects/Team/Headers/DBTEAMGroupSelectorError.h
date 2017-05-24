@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupSelectorError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupSelectorError : NSObject <DBSerializable>
+@interface DBTEAMGroupSelectorError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -49,14 +51,16 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNotFound;
+- (instancetype)initWithGroupNotFound;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -79,7 +83,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -98,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupSelectorError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupSelectorError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupSelectorError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupSelectorError` instances.
@@ -108,6 +112,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupSelectorError` object.
 ///
-+ (DBTEAMGroupSelectorError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupSelectorError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 @class DBFILESDeleteArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESDeleteArg : NSObject <DBSerializable>
+@interface DBFILESDeleteArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Path in the user's Dropbox to delete.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -54,7 +58,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESDeleteArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESDeleteArg *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteArg` instances.
@@ -64,6 +68,8 @@
 ///
 /// @return An instantiation of the `DBFILESDeleteArg` object.
 ///
-+ (DBFILESDeleteArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESDeleteArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,12 +2,12 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
-#import "DBCustomDatatypes.h"
 #import "DBCustomTasks.h"
+#import "DBCustomDatatypes.h"
 #import "DBTasksStorage.h"
 
 @implementation DBBatchUploadTask {
-  DBBatchUploadData * _Nonnull _uploadData;
+  DBBatchUploadData *_uploadData;
 }
 
 - (instancetype)initWithUploadData:(DBBatchUploadData *)uploadData {
@@ -21,6 +21,10 @@
 - (void)cancel {
   _uploadData.cancel = YES;
   [_uploadData.taskStorage cancelAllTasks];
+}
+
+- (BOOL)uploadsInProgress {
+  return [_uploadData.taskStorage tasksInProgress];
 }
 
 @end

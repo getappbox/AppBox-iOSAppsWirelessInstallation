@@ -10,6 +10,8 @@
 
 @class DBPAPERFolderSubscriptionLevel;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,23 +23,23 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERFolderSubscriptionLevel : NSObject <DBSerializable>
+@interface DBPAPERFolderSubscriptionLevel : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The `DBPAPERFolderSubscriptionLevelTag` enum type represents the possible
 /// tag states with which the `DBPAPERFolderSubscriptionLevel` union can exist.
 typedef NS_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag) {
-  /// Not shown in activity, no e-mails.
+  /// Not shown in activity, no email messages.
   DBPAPERFolderSubscriptionLevelNone,
 
-  /// Shown in activity, no e-mails.
+  /// Shown in activity, no email messages.
   DBPAPERFolderSubscriptionLevelActivityOnly,
 
-  /// Shown in activity, daily e-mails.
+  /// Shown in activity, daily email messages.
   DBPAPERFolderSubscriptionLevelDailyEmails,
 
-  /// Shown in activity, weekly e-mails.
+  /// Shown in activity, weekly email messages.
   DBPAPERFolderSubscriptionLevelWeeklyEmails,
 
 };
@@ -50,40 +52,44 @@ typedef NS_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag) {
 ///
 /// Initializes union class with tag state of "none".
 ///
-/// Description of the "none" tag state: Not shown in activity, no e-mails.
+/// Description of the "none" tag state: Not shown in activity, no email
+/// messages.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNone;
+- (instancetype)initWithNone;
 
 ///
 /// Initializes union class with tag state of "activity_only".
 ///
-/// Description of the "activity_only" tag state: Shown in activity, no e-mails.
+/// Description of the "activity_only" tag state: Shown in activity, no email
+/// messages.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithActivityOnly;
+- (instancetype)initWithActivityOnly;
 
 ///
 /// Initializes union class with tag state of "daily_emails".
 ///
-/// Description of the "daily_emails" tag state: Shown in activity, daily
-/// e-mails.
+/// Description of the "daily_emails" tag state: Shown in activity, daily email
+/// messages.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDailyEmails;
+- (instancetype)initWithDailyEmails;
 
 ///
 /// Initializes union class with tag state of "weekly_emails".
 ///
 /// Description of the "weekly_emails" tag state: Shown in activity, weekly
-/// e-mails.
+/// email messages.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithWeeklyEmails;
+- (instancetype)initWithWeeklyEmails;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -120,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -140,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERFolderSubscriptionLevel` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERFolderSubscriptionLevel * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERFolderSubscriptionLevel *)instance;
 
 ///
 /// Deserializes `DBPAPERFolderSubscriptionLevel` instances.
@@ -150,6 +156,8 @@ typedef NS_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag) {
 ///
 /// @return An instantiation of the `DBPAPERFolderSubscriptionLevel` object.
 ///
-+ (DBPAPERFolderSubscriptionLevel * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERFolderSubscriptionLevel *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

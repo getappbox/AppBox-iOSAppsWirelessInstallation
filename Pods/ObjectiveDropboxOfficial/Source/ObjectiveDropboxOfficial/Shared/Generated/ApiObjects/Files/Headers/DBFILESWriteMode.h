@@ -10,6 +10,8 @@
 
 @class DBFILESWriteMode;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -29,7 +31,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESWriteMode : NSObject <DBSerializable>
+@interface DBFILESWriteMode : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -62,7 +64,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 /// copy).txt" or "document (Panda's conflicted copy).txt". @note Ensure the
 /// `isUpdate` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull update;
+@property (nonatomic, readonly, copy) NSString *update;
 
 #pragma mark - Constructors
 
@@ -75,7 +77,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAdd;
+- (instancetype)initWithAdd;
 
 ///
 /// Initializes union class with tag state of "overwrite".
@@ -85,7 +87,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOverwrite;
+- (instancetype)initWithOverwrite;
 
 ///
 /// Initializes union class with tag state of "update".
@@ -103,7 +105,9 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUpdate:(NSString * _Nonnull)update;
+- (instancetype)initWithUpdate:(NSString *)update;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -136,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -155,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESWriteMode` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESWriteMode * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESWriteMode *)instance;
 
 ///
 /// Deserializes `DBFILESWriteMode` instances.
@@ -165,6 +169,8 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 ///
 /// @return An instantiation of the `DBFILESWriteMode` object.
 ///
-+ (DBFILESWriteMode * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESWriteMode *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

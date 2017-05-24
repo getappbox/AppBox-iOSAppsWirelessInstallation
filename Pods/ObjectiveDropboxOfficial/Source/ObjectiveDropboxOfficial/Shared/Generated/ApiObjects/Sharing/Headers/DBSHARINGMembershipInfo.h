@@ -12,6 +12,8 @@
 @class DBSHARINGMemberPermission;
 @class DBSHARINGMembershipInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,22 +25,22 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGMembershipInfo : NSObject <DBSerializable>
+@interface DBSHARINGMembershipInfo : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The access type for this member.
-@property (nonatomic, readonly) DBSHARINGAccessLevel * _Nonnull accessType;
+@property (nonatomic, readonly) DBSHARINGAccessLevel *accessType;
 
 /// The permissions that requesting user has on this member. The set of
 /// permissions corresponds to the MemberActions in the request.
-@property (nonatomic, readonly) NSArray<DBSHARINGMemberPermission *> * _Nullable permissions;
+@property (nonatomic, readonly, nullable) NSArray<DBSHARINGMemberPermission *> *permissions;
 
 /// Suggested name initials for a member.
-@property (nonatomic, readonly) NSString * _Nullable initials;
+@property (nonatomic, readonly, copy, nullable) NSString *initials;
 
 /// True if the member has access from a parent folder.
-@property (nonatomic, readonly) NSNumber * _Nonnull isInherited;
+@property (nonatomic, readonly) NSNumber *isInherited;
 
 #pragma mark - Constructors
 
@@ -53,10 +55,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                               permissions:(NSArray<DBSHARINGMemberPermission *> * _Nullable)permissions
-                                  initials:(NSString * _Nullable)initials
-                               isInherited:(NSNumber * _Nullable)isInherited;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType
+                       permissions:(nullable NSArray<DBSHARINGMemberPermission *> *)permissions
+                          initials:(nullable NSString *)initials
+                       isInherited:(nullable NSNumber *)isInherited;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -66,7 +68,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -85,7 +89,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMembershipInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGMembershipInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGMembershipInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGMembershipInfo` instances.
@@ -95,6 +99,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGMembershipInfo` object.
 ///
-+ (DBSHARINGMembershipInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGMembershipInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

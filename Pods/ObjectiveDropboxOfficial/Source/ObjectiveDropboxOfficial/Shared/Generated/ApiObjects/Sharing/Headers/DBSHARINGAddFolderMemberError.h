@@ -12,6 +12,8 @@
 @class DBSHARINGAddMemberSelectorError;
 @class DBSHARINGSharedFolderAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGAddFolderMemberError : NSObject <DBSerializable>
+@interface DBSHARINGAddFolderMemberError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -75,22 +77,22 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 
 /// Unable to access shared folder. @note Ensure the `isAccessError` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 /// `members` in `DBSHARINGAddFolderMemberArg` contains a bad invitation
 /// recipient. @note Ensure the `isBadMember` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGAddMemberSelectorError * _Nonnull badMember;
+@property (nonatomic, readonly) DBSHARINGAddMemberSelectorError *badMember;
 
 /// The value is the member limit that was reached. @note Ensure the
 /// `isTooManyMembers` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) NSNumber * _Nonnull tooManyMembers;
+@property (nonatomic, readonly) NSNumber *tooManyMembers;
 
 /// The value is the pending invite limit that was reached. @note Ensure the
 /// `isTooManyPendingInvites` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly) NSNumber * _Nonnull tooManyPendingInvites;
+@property (nonatomic, readonly) NSNumber *tooManyPendingInvites;
 
 #pragma mark - Constructors
 
@@ -103,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "email_unverified".
@@ -113,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmailUnverified;
+- (instancetype)initWithEmailUnverified;
 
 ///
 /// Initializes union class with tag state of "bad_member".
@@ -126,7 +128,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithBadMember:(DBSHARINGAddMemberSelectorError * _Nonnull)badMember;
+- (instancetype)initWithBadMember:(DBSHARINGAddMemberSelectorError *)badMember;
 
 ///
 /// Initializes union class with tag state of "cant_share_outside_team".
@@ -136,7 +138,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCantShareOutsideTeam;
+- (instancetype)initWithCantShareOutsideTeam;
 
 ///
 /// Initializes union class with tag state of "too_many_members".
@@ -148,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyMembers:(NSNumber * _Nonnull)tooManyMembers;
+- (instancetype)initWithTooManyMembers:(NSNumber *)tooManyMembers;
 
 ///
 /// Initializes union class with tag state of "too_many_pending_invites".
@@ -161,7 +163,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyPendingInvites:(NSNumber * _Nonnull)tooManyPendingInvites;
+- (instancetype)initWithTooManyPendingInvites:(NSNumber *)tooManyPendingInvites;
 
 ///
 /// Initializes union class with tag state of "rate_limit".
@@ -171,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRateLimit;
+- (instancetype)initWithRateLimit;
 
 ///
 /// Initializes union class with tag state of "too_many_invitees".
@@ -181,7 +183,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyInvitees;
+- (instancetype)initWithTooManyInvitees;
 
 ///
 /// Initializes union class with tag state of "insufficient_plan".
@@ -193,7 +195,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsufficientPlan;
+- (instancetype)initWithInsufficientPlan;
 
 ///
 /// Initializes union class with tag state of "team_folder".
@@ -203,7 +205,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolder;
+- (instancetype)initWithTeamFolder;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -213,14 +215,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -334,7 +338,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -354,7 +358,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddFolderMemberError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGAddFolderMemberError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGAddFolderMemberError *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddFolderMemberError` instances.
@@ -364,6 +368,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGAddFolderMemberError` object.
 ///
-+ (DBSHARINGAddFolderMemberError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGAddFolderMemberError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

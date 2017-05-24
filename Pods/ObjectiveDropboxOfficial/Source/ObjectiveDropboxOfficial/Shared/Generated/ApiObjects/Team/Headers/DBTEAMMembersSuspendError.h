@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersSuspendError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersSuspendError : NSObject <DBSerializable>
+@interface DBTEAMMembersSuspendError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -70,14 +72,14 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "suspend_inactive_user".
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuspendInactiveUser;
+- (instancetype)initWithSuspendInactiveUser;
 
 ///
 /// Initializes union class with tag state of "suspend_last_admin".
@@ -97,7 +99,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuspendLastAdmin;
+- (instancetype)initWithSuspendLastAdmin;
 
 ///
 /// Initializes union class with tag state of "team_license_limit".
@@ -107,7 +109,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamLicenseLimit;
+- (instancetype)initWithTeamLicenseLimit;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -165,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -184,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSuspendError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersSuspendError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersSuspendError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSuspendError` instances.
@@ -194,6 +198,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersSuspendError` object.
 ///
-+ (DBTEAMMembersSuspendError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersSuspendError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

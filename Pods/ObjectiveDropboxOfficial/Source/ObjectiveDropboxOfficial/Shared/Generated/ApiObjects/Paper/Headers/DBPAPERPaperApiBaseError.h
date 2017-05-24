@@ -10,6 +10,8 @@
 
 @class DBPAPERPaperApiBaseError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERPaperApiBaseError : NSObject <DBSerializable>
+@interface DBPAPERPaperApiBaseError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -47,14 +49,16 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiBaseErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsufficientPermissions;
+- (instancetype)initWithInsufficientPermissions;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -79,7 +83,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiBaseErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -98,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiBaseErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperApiBaseError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERPaperApiBaseError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERPaperApiBaseError *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperApiBaseError` instances.
@@ -108,6 +112,8 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiBaseErrorTag) {
 ///
 /// @return An instantiation of the `DBPAPERPaperApiBaseError` object.
 ///
-+ (DBPAPERPaperApiBaseError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERPaperApiBaseError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

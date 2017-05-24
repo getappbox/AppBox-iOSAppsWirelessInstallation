@@ -13,6 +13,8 @@
 @class DBSHARINGRemoveFolderMemberError;
 @class DBSHARINGUnshareFolderError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,7 +27,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGJobError : NSObject <DBSerializable>
+@interface DBSHARINGJobError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -52,17 +54,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 /// Error occurred while performing `unshareFolder` action. @note Ensure the
 /// `isUnshareFolderError` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGUnshareFolderError * _Nonnull unshareFolderError;
+@property (nonatomic, readonly) DBSHARINGUnshareFolderError *unshareFolderError;
 
 /// Error occurred while performing `removeFolderMember` action. @note Ensure
 /// the `isRemoveFolderMemberError` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGRemoveFolderMemberError * _Nonnull removeFolderMemberError;
+@property (nonatomic, readonly) DBSHARINGRemoveFolderMemberError *removeFolderMemberError;
 
 /// Error occurred while performing `relinquishFolderMembership` action. @note
 /// Ensure the `isRelinquishFolderMembershipError` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGRelinquishFolderMembershipError * _Nonnull relinquishFolderMembershipError;
+@property (nonatomic, readonly) DBSHARINGRelinquishFolderMembershipError *relinquishFolderMembershipError;
 
 #pragma mark - Constructors
 
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnshareFolderError:(DBSHARINGUnshareFolderError * _Nonnull)unshareFolderError;
+- (instancetype)initWithUnshareFolderError:(DBSHARINGUnshareFolderError *)unshareFolderError;
 
 ///
 /// Initializes union class with tag state of "remove_folder_member_error".
@@ -90,8 +92,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemoveFolderMemberError:
-    (DBSHARINGRemoveFolderMemberError * _Nonnull)removeFolderMemberError;
+- (instancetype)initWithRemoveFolderMemberError:(DBSHARINGRemoveFolderMemberError *)removeFolderMemberError;
 
 ///
 /// Initializes union class with tag state of
@@ -105,15 +106,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRelinquishFolderMembershipError:
-    (DBSHARINGRelinquishFolderMembershipError * _Nonnull)relinquishFolderMembershipError;
+- (instancetype)initWithRelinquishFolderMembershipError:
+    (DBSHARINGRelinquishFolderMembershipError *)relinquishFolderMembershipError;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -167,7 +170,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -186,7 +189,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGJobError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGJobError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGJobError *)instance;
 
 ///
 /// Deserializes `DBSHARINGJobError` instances.
@@ -196,6 +199,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGJobError` object.
 ///
-+ (DBSHARINGJobError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGJobError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

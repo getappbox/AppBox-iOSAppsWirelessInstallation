@@ -11,6 +11,8 @@
 @class DBFILESUploadSessionFinishArg;
 @class DBFILESUploadSessionFinishBatchArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,12 +22,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionFinishBatchArg : NSObject <DBSerializable>
+@interface DBFILESUploadSessionFinishBatchArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Commit information for each file in the batch.
-@property (nonatomic, readonly) NSArray<DBFILESUploadSessionFinishArg *> * _Nonnull entries;
+@property (nonatomic, readonly) NSArray<DBFILESUploadSessionFinishArg *> *entries;
 
 #pragma mark - Constructors
 
@@ -36,7 +38,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEntries:(NSArray<DBFILESUploadSessionFinishArg *> * _Nonnull)entries;
+- (instancetype)initWithEntries:(NSArray<DBFILESUploadSessionFinishArg *> *)entries;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -56,7 +60,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishBatchArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionFinishBatchArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionFinishBatchArg *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishBatchArg` instances.
@@ -66,6 +70,8 @@
 ///
 /// @return An instantiation of the `DBFILESUploadSessionFinishBatchArg` object.
 ///
-+ (DBFILESUploadSessionFinishBatchArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionFinishBatchArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

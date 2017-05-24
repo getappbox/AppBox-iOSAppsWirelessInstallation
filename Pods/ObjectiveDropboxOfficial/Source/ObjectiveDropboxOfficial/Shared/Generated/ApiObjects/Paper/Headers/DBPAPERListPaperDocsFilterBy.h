@@ -10,6 +10,8 @@
 
 @class DBPAPERListPaperDocsFilterBy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,17 +21,17 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListPaperDocsFilterBy : NSObject <DBSerializable>
+@interface DBPAPERListPaperDocsFilterBy : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The `DBPAPERListPaperDocsFilterByTag` enum type represents the possible tag
 /// states with which the `DBPAPERListPaperDocsFilterBy` union can exist.
 typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsFilterByTag) {
-  /// Fetches all Paper doc ids that the user has ever accessed.
+  /// Fetches all Paper doc IDs that the user has ever accessed.
   DBPAPERListPaperDocsFilterByDocsAccessed,
 
-  /// Fetches only the Paper doc ids that the user has created.
+  /// Fetches only the Paper doc IDs that the user has created.
   DBPAPERListPaperDocsFilterByDocsCreated,
 
   /// (no description).
@@ -45,29 +47,31 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsFilterByTag) {
 ///
 /// Initializes union class with tag state of "docs_accessed".
 ///
-/// Description of the "docs_accessed" tag state: Fetches all Paper doc ids that
+/// Description of the "docs_accessed" tag state: Fetches all Paper doc IDs that
 /// the user has ever accessed.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocsAccessed;
+- (instancetype)initWithDocsAccessed;
 
 ///
 /// Initializes union class with tag state of "docs_created".
 ///
-/// Description of the "docs_created" tag state: Fetches only the Paper doc ids
+/// Description of the "docs_created" tag state: Fetches only the Paper doc IDs
 /// that the user has created.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocsCreated;
+- (instancetype)initWithDocsCreated;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -97,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsFilterByTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -117,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsFilterByTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListPaperDocsFilterBy` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListPaperDocsFilterBy * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListPaperDocsFilterBy *)instance;
 
 ///
 /// Deserializes `DBPAPERListPaperDocsFilterBy` instances.
@@ -127,6 +131,8 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsFilterByTag) {
 ///
 /// @return An instantiation of the `DBPAPERListPaperDocsFilterBy` object.
 ///
-+ (DBPAPERListPaperDocsFilterBy * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListPaperDocsFilterBy *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

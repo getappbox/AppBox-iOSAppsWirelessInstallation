@@ -11,6 +11,8 @@
 @class DBTEAMListTeamAppsResult;
 @class DBTEAMMemberLinkedApps;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,20 +24,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMListTeamAppsResult : NSObject <DBSerializable>
+@interface DBTEAMListTeamAppsResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The linked applications of each member of the team
-@property (nonatomic, readonly) NSArray<DBTEAMMemberLinkedApps *> * _Nonnull apps;
+@property (nonatomic, readonly) NSArray<DBTEAMMemberLinkedApps *> *apps;
 
 /// If true, then there are more apps available. Pass the cursor to
 /// `linkedAppsListTeamLinkedApps` to retrieve the rest.
-@property (nonatomic, readonly) NSNumber * _Nonnull hasMore;
+@property (nonatomic, readonly) NSNumber *hasMore;
 
 /// Pass the cursor into `linkedAppsListTeamLinkedApps` to receive the next sub
 /// list of team's applications.
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -50,9 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithApps:(NSArray<DBTEAMMemberLinkedApps *> * _Nonnull)apps
-                             hasMore:(NSNumber * _Nonnull)hasMore
-                              cursor:(NSString * _Nullable)cursor;
+- (instancetype)initWithApps:(NSArray<DBTEAMMemberLinkedApps *> *)apps
+                     hasMore:(NSNumber *)hasMore
+                      cursor:(nullable NSString *)cursor;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -64,8 +66,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithApps:(NSArray<DBTEAMMemberLinkedApps *> * _Nonnull)apps
-                             hasMore:(NSNumber * _Nonnull)hasMore;
+- (instancetype)initWithApps:(NSArray<DBTEAMMemberLinkedApps *> *)apps hasMore:(NSNumber *)hasMore;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -84,7 +87,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListTeamAppsResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMListTeamAppsResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMListTeamAppsResult *)instance;
 
 ///
 /// Deserializes `DBTEAMListTeamAppsResult` instances.
@@ -94,6 +97,8 @@
 ///
 /// @return An instantiation of the `DBTEAMListTeamAppsResult` object.
 ///
-+ (DBTEAMListTeamAppsResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMListTeamAppsResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

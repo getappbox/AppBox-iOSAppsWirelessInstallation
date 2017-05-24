@@ -12,6 +12,8 @@
 @class DBFILESRelocationBatchError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationBatchError : NSObject <DBSerializable>
+@interface DBFILESRelocationBatchError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -68,15 +70,15 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 
 /// (no description). @note Ensure the `isFromLookup` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull fromLookup;
+@property (nonatomic, readonly) DBFILESLookupError *fromLookup;
 
 /// (no description). @note Ensure the `isFromWrite` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull fromWrite;
+@property (nonatomic, readonly) DBFILESWriteError *fromWrite;
 
 /// (no description). @note Ensure the `isTo` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull to;
+@property (nonatomic, readonly) DBFILESWriteError *to;
 
 #pragma mark - Constructors
 
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFromLookup:(DBFILESLookupError * _Nonnull)fromLookup;
+- (instancetype)initWithFromLookup:(DBFILESLookupError *)fromLookup;
 
 ///
 /// Initializes union class with tag state of "from_write".
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFromWrite:(DBFILESWriteError * _Nonnull)fromWrite;
+- (instancetype)initWithFromWrite:(DBFILESWriteError *)fromWrite;
 
 ///
 /// Initializes union class with tag state of "to".
@@ -105,7 +107,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTo:(DBFILESWriteError * _Nonnull)to;
+- (instancetype)initWithTo:(DBFILESWriteError *)to;
 
 ///
 /// Initializes union class with tag state of "cant_copy_shared_folder".
@@ -115,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCantCopySharedFolder;
+- (instancetype)initWithCantCopySharedFolder;
 
 ///
 /// Initializes union class with tag state of "cant_nest_shared_folder".
@@ -125,7 +127,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCantNestSharedFolder;
+- (instancetype)initWithCantNestSharedFolder;
 
 ///
 /// Initializes union class with tag state of "cant_move_folder_into_itself".
@@ -135,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCantMoveFolderIntoItself;
+- (instancetype)initWithCantMoveFolderIntoItself;
 
 ///
 /// Initializes union class with tag state of "too_many_files".
@@ -145,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyFiles;
+- (instancetype)initWithTooManyFiles;
 
 ///
 /// Initializes union class with tag state of "duplicated_or_nested_paths".
@@ -156,14 +158,14 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDuplicatedOrNestedPaths;
+- (instancetype)initWithDuplicatedOrNestedPaths;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "too_many_write_operations".
@@ -173,7 +175,9 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyWriteOperations;
+- (instancetype)initWithTooManyWriteOperations;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -271,7 +275,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -290,7 +294,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationBatchError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESRelocationBatchError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESRelocationBatchError *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationBatchError` instances.
@@ -300,6 +304,8 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESRelocationBatchError` object.
 ///
-+ (DBFILESRelocationBatchError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESRelocationBatchError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

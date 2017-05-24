@@ -12,6 +12,8 @@
 @class DBTEAMTeamFolderInvalidStatusError;
 @class DBTEAMTeamFolderPermanentlyDeleteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamFolderPermanentlyDeleteError : NSObject <DBSerializable>
+@interface DBTEAMTeamFolderPermanentlyDeleteError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -45,11 +47,11 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMTeamFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBTEAMTeamFolderAccessError *accessError;
 
 /// (no description). @note Ensure the `isStatusError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMTeamFolderInvalidStatusError * _Nonnull statusError;
+@property (nonatomic, readonly) DBTEAMTeamFolderInvalidStatusError *statusError;
 
 #pragma mark - Constructors
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBTEAMTeamFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBTEAMTeamFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "status_error".
@@ -69,14 +71,16 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithStatusError:(DBTEAMTeamFolderInvalidStatusError * _Nonnull)statusError;
+- (instancetype)initWithStatusError:(DBTEAMTeamFolderInvalidStatusError *)statusError;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -112,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -133,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderPermanentlyDeleteError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamFolderPermanentlyDeleteError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamFolderPermanentlyDeleteError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderPermanentlyDeleteError` instances.
@@ -144,6 +148,8 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 /// @return An instantiation of the `DBTEAMTeamFolderPermanentlyDeleteError`
 /// object.
 ///
-+ (DBTEAMTeamFolderPermanentlyDeleteError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamFolderPermanentlyDeleteError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

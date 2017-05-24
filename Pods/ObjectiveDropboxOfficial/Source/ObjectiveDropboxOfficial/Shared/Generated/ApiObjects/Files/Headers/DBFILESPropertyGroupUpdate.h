@@ -11,6 +11,8 @@
 @class DBFILESPropertyGroupUpdate;
 @class DBPROPERTIESPropertyField;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,20 +22,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESPropertyGroupUpdate : NSObject <DBSerializable>
+@interface DBFILESPropertyGroupUpdate : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A unique identifier for a property template.
-@property (nonatomic, readonly, copy) NSString * _Nonnull templateId;
+@property (nonatomic, readonly, copy) NSString *templateId;
 
 /// List of property fields to update if the field already exists. If the field
 /// doesn't exist, add the field to the property group.
-@property (nonatomic, readonly) NSArray<DBPROPERTIESPropertyField *> * _Nullable addOrUpdateFields;
+@property (nonatomic, readonly, nullable) NSArray<DBPROPERTIESPropertyField *> *addOrUpdateFields;
 
 /// List of property field names to remove from property group if the field
 /// exists.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nullable removeFields;
+@property (nonatomic, readonly, nullable) NSArray<NSString *> *removeFields;
 
 #pragma mark - Constructors
 
@@ -49,9 +51,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateId:(NSString * _Nonnull)templateId
-                         addOrUpdateFields:(NSArray<DBPROPERTIESPropertyField *> * _Nullable)addOrUpdateFields
-                              removeFields:(NSArray<NSString *> * _Nullable)removeFields;
+- (instancetype)initWithTemplateId:(NSString *)templateId
+                 addOrUpdateFields:(nullable NSArray<DBPROPERTIESPropertyField *> *)addOrUpdateFields
+                      removeFields:(nullable NSArray<NSString *> *)removeFields;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -61,7 +63,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateId:(NSString * _Nonnull)templateId;
+- (instancetype)initWithTemplateId:(NSString *)templateId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -80,7 +84,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESPropertyGroupUpdate` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESPropertyGroupUpdate * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESPropertyGroupUpdate *)instance;
 
 ///
 /// Deserializes `DBFILESPropertyGroupUpdate` instances.
@@ -90,6 +94,8 @@
 ///
 /// @return An instantiation of the `DBFILESPropertyGroupUpdate` object.
 ///
-+ (DBFILESPropertyGroupUpdate * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESPropertyGroupUpdate *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

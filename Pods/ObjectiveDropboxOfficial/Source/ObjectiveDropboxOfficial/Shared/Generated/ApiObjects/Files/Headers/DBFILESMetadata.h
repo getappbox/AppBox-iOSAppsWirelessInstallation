@@ -10,6 +10,8 @@
 
 @class DBFILESMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,17 +23,17 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESMetadata : NSObject <DBSerializable>
+@interface DBFILESMetadata : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The last component of the path (including extension). This never contains a
 /// slash.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /// The lowercased full path in the user's Dropbox. This always starts with a
 /// slash. This field will be null if the file or folder is not mounted.
-@property (nonatomic, readonly) NSString * _Nullable pathLower;
+@property (nonatomic, readonly, copy, nullable) NSString *pathLower;
 
 /// The cased path to be used for display purposes only. In rare instances the
 /// casing will not correctly match the user's filesystem, but this behavior
@@ -39,11 +41,11 @@
 /// component will have the correct casing. Changes to only the casing of paths
 /// won't be returned by `listFolderContinue`. This field will be null if the
 /// file or folder is not mounted.
-@property (nonatomic, readonly) NSString * _Nullable pathDisplay;
+@property (nonatomic, readonly, copy, nullable) NSString *pathDisplay;
 
 /// Deprecated. Please use `parentSharedFolderId` in `DBFILESFileSharingInfo` or
 /// `parentSharedFolderId` in `DBFILESFolderSharingInfo` instead.
-@property (nonatomic, readonly) NSString * _Nullable parentSharedFolderId;
+@property (nonatomic, readonly, copy, nullable) NSString *parentSharedFolderId;
 
 #pragma mark - Constructors
 
@@ -67,10 +69,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                           pathLower:(NSString * _Nullable)pathLower
-                         pathDisplay:(NSString * _Nullable)pathDisplay
-                parentSharedFolderId:(NSString * _Nullable)parentSharedFolderId;
+- (instancetype)initWithName:(NSString *)name
+                   pathLower:(nullable NSString *)pathLower
+                 pathDisplay:(nullable NSString *)pathDisplay
+        parentSharedFolderId:(nullable NSString *)parentSharedFolderId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -81,7 +83,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name;
+- (instancetype)initWithName:(NSString *)name;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -100,7 +104,7 @@
 /// @return A json-compatible dictionary representation of the `DBFILESMetadata`
 /// API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESMetadata` instances.
@@ -110,6 +114,8 @@
 ///
 /// @return An instantiation of the `DBFILESMetadata` object.
 ///
-+ (DBFILESMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

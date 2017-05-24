@@ -10,6 +10,8 @@
 
 @class DBPROPERTIESPropertyTemplateError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPROPERTIESPropertyTemplateError : NSObject <DBSerializable>
+@interface DBPROPERTIESPropertyTemplateError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -44,7 +46,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESPropertyTemplateErrorTag) {
 /// Property template does not exist for given identifier. @note Ensure the
 /// `isTemplateNotFound` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull templateNotFound;
+@property (nonatomic, readonly, copy) NSString *templateNotFound;
 
 #pragma mark - Constructors
 
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateNotFound:(NSString * _Nonnull)templateNotFound;
+- (instancetype)initWithTemplateNotFound:(NSString *)templateNotFound;
 
 ///
 /// Initializes union class with tag state of "restricted_content".
@@ -69,14 +71,16 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRestrictedContent;
+- (instancetype)initWithRestrictedContent;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -113,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESPropertyTemplateErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -133,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESPropertyTemplateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPROPERTIESPropertyTemplateError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPROPERTIESPropertyTemplateError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPROPERTIESPropertyTemplateError *)instance;
 
 ///
 /// Deserializes `DBPROPERTIESPropertyTemplateError` instances.
@@ -143,6 +147,8 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESPropertyTemplateErrorTag) {
 ///
 /// @return An instantiation of the `DBPROPERTIESPropertyTemplateError` object.
 ///
-+ (DBPROPERTIESPropertyTemplateError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPROPERTIESPropertyTemplateError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

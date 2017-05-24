@@ -2,19 +2,19 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBTransportDefaultClient.h"
 #import "DBDelegate.h"
 #import "DBFILESRouteObjects.h"
 #import "DBSDKConstants.h"
 #import "DBStoneBase.h"
 #import "DBTasksImpl.h"
 #import "DBTransportBaseClient+Internal.h"
-#import "DBTransportDefaultClient.h"
 #import "DBTransportDefaultConfig.h"
 
 @implementation DBTransportDefaultClient {
   /// The delegate used to manage execution of all response / error code. By default, this
   /// is an instance of `DBDelegate` with the main thread queue as delegate queue.
-  DBDelegate * _Nonnull _delegate;
+  DBDelegate *_delegate;
 }
 
 @synthesize session = _session;
@@ -24,17 +24,19 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAccessToken:(NSString *)accessToken
+                           tokenUid:(NSString *)tokenUid
                     transportConfig:(DBTransportDefaultConfig *)transportConfig {
-  if (self = [super initWithAccessToken:accessToken transportConfig:transportConfig]) {
-    _delegateQueue = transportConfig.delegateQueue ?: [NSOperationQueue mainQueue];
+  if (self = [super initWithAccessToken:accessToken tokenUid:tokenUid transportConfig:transportConfig]) {
+    _delegateQueue = transportConfig.delegateQueue ?: [NSOperationQueue new];
+    _delegateQueue.maxConcurrentOperationCount = 1;
     _delegate = [[DBDelegate alloc] initWithQueue:_delegateQueue];
 
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     sessionConfig.timeoutIntervalForRequest = 60.0;
 
     _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:_delegate delegateQueue:_delegateQueue];
-    _forceBackgroundSession = transportConfig.forceForegroundSession ? YES : NO;
-    if (!_forceBackgroundSession) {
+    _forceForegroundSession = transportConfig.forceForegroundSession ? YES : NO;
+    if (!_forceForegroundSession) {
       NSString *backgroundId = [NSString stringWithFormat:@"%@.%@", kBackgroundSessionId, [NSUUID UUID].UUIDString];
       NSURLSessionConfiguration *backgroundSessionConfig =
           [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundId];
@@ -78,8 +80,11 @@
   }
 
   NSURLSessionDataTask *task = [sessionToUse dataTaskWithRequest:request];
-  DBRpcTaskImpl *rpcTask =
-      [[DBRpcTaskImpl alloc] initWithTask:task session:sessionToUse delegate:_delegate route:route];
+  DBRpcTaskImpl *rpcTask = [[DBRpcTaskImpl alloc] initWithTask:task
+                                                      tokenUid:self.tokenUid
+                                                       session:sessionToUse
+                                                      delegate:_delegate
+                                                         route:route];
   [task resume];
 
   return rpcTask;
@@ -87,7 +92,8 @@
 
 #pragma mark - Upload-style request (NSURL)
 
-- (DBUploadTaskImpl *)requestUpload:(DBRoute *)route arg:(id<DBSerializable>)arg inputUrl:(NSURL *)input {
+- (DBUploadTaskImpl *)requestUpload:(DBRoute *)route arg:(id<DBSerializable>)arg inputUrl:(NSString *)input {
+  NSURL *inputUrl = [NSURL fileURLWithPath:input];
   NSURL *requestUrl = [[self class] urlWithRoute:route];
   NSString *serializedArg = [[self class] serializeStringWithRoute:route routeArg:arg];
   NSDictionary *headers =
@@ -95,9 +101,14 @@
 
   NSURLRequest *request = [[self class] requestWithHeaders:headers url:requestUrl content:nil stream:nil];
 
-  NSURLSessionUploadTask *task = [_secondarySession uploadTaskWithRequest:request fromFile:input];
-  DBUploadTaskImpl *uploadTask =
-      [[DBUploadTaskImpl alloc] initWithTask:task session:_secondarySession delegate:_delegate route:route];
+  NSURLSessionUploadTask *task = [_secondarySession uploadTaskWithRequest:request fromFile:inputUrl];
+  DBUploadTaskImpl *uploadTask = [[DBUploadTaskImpl alloc] initWithTask:task
+                                                               tokenUid:self.tokenUid
+                                                                session:_secondarySession
+                                                               delegate:_delegate
+                                                                  route:route
+                                                               inputUrl:inputUrl
+                                                              inputData:nil];
   [task resume];
 
   return uploadTask;
@@ -114,8 +125,13 @@
   NSURLRequest *request = [[self class] requestWithHeaders:headers url:requestUrl content:nil stream:nil];
 
   NSURLSessionUploadTask *task = [_session uploadTaskWithRequest:request fromData:input];
-  DBUploadTaskImpl *uploadTask =
-      [[DBUploadTaskImpl alloc] initWithTask:task session:_session delegate:_delegate route:route];
+  DBUploadTaskImpl *uploadTask = [[DBUploadTaskImpl alloc] initWithTask:task
+                                                               tokenUid:self.tokenUid
+                                                                session:_session
+                                                               delegate:_delegate
+                                                                  route:route
+                                                               inputUrl:nil
+                                                              inputData:input];
   [task resume];
 
   return uploadTask;
@@ -132,8 +148,13 @@
   NSURLRequest *request = [[self class] requestWithHeaders:headers url:requestUrl content:nil stream:input];
 
   NSURLSessionUploadTask *task = [_session uploadTaskWithStreamedRequest:request];
-  DBUploadTaskImpl *uploadTask =
-      [[DBUploadTaskImpl alloc] initWithTask:task session:_session delegate:_delegate route:route];
+  DBUploadTaskImpl *uploadTask = [[DBUploadTaskImpl alloc] initWithTask:task
+                                                               tokenUid:self.tokenUid
+                                                                session:_session
+                                                               delegate:_delegate
+                                                                  route:route
+                                                               inputUrl:nil
+                                                              inputData:nil];
   [task resume];
 
   return uploadTask;
@@ -171,6 +192,7 @@
 
   NSURLSessionDownloadTask *task = [_secondarySession downloadTaskWithRequest:request];
   DBDownloadUrlTaskImpl *downloadTask = [[DBDownloadUrlTaskImpl alloc] initWithTask:task
+                                                                           tokenUid:self.tokenUid
                                                                             session:_secondarySession
                                                                            delegate:_delegate
                                                                               route:route
@@ -202,8 +224,11 @@
   NSURLRequest *request = [[self class] requestWithHeaders:headers url:requestUrl content:nil stream:nil];
 
   NSURLSessionDownloadTask *task = [_secondarySession downloadTaskWithRequest:request];
-  DBDownloadDataTaskImpl *downloadTask =
-      [[DBDownloadDataTaskImpl alloc] initWithTask:task session:_secondarySession delegate:_delegate route:route];
+  DBDownloadDataTaskImpl *downloadTask = [[DBDownloadDataTaskImpl alloc] initWithTask:task
+                                                                             tokenUid:self.tokenUid
+                                                                              session:_secondarySession
+                                                                             delegate:_delegate
+                                                                                route:route];
   [task resume];
 
   return downloadTask;
@@ -215,7 +240,7 @@
                                                 userAgent:self.userAgent
                                                asMemberId:asMemberId
                                             delegateQueue:_delegateQueue
-                                   forceForegroundSession:_forceBackgroundSession];
+                                   forceForegroundSession:_forceForegroundSession];
 }
 
 #pragma mark - Session accessors and mutators

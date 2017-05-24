@@ -12,6 +12,8 @@
 @class DBSHARINGAddMember;
 @class DBSHARINGMemberSelector;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,16 +26,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGAddMember : NSObject <DBSerializable>
+@interface DBSHARINGAddMember : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The member to add to the shared folder.
-@property (nonatomic, readonly) DBSHARINGMemberSelector * _Nonnull member;
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
 
 /// The access level to grant member to the shared folder.  `owner` in
 /// `DBSHARINGAccessLevel` is disallowed.
-@property (nonatomic, readonly) DBSHARINGAccessLevel * _Nonnull accessLevel;
+@property (nonatomic, readonly) DBSHARINGAccessLevel *accessLevel;
 
 #pragma mark - Constructors
 
@@ -46,8 +48,8 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMember:(DBSHARINGMemberSelector * _Nonnull)member
-                           accessLevel:(DBSHARINGAccessLevel * _Nullable)accessLevel;
+- (instancetype)initWithMember:(DBSHARINGMemberSelector *)member
+                   accessLevel:(nullable DBSHARINGAccessLevel *)accessLevel;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,7 +59,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMember:(DBSHARINGMemberSelector * _Nonnull)member;
+- (instancetype)initWithMember:(DBSHARINGMemberSelector *)member;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -76,7 +80,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddMember` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGAddMember * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGAddMember *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddMember` instances.
@@ -86,6 +90,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGAddMember` object.
 ///
-+ (DBSHARINGAddMember * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGAddMember *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

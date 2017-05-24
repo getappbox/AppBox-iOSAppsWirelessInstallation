@@ -14,6 +14,8 @@
 @class DBTEAMGroupSelector;
 @class DBTEAMUserSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,17 +25,17 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMembersSetAccessTypeArg : DBTEAMGroupMemberSelector <DBSerializable>
+@interface DBTEAMGroupMembersSetAccessTypeArg : DBTEAMGroupMemberSelector <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// New group access type the user will have.
-@property (nonatomic, readonly) DBTEAMGroupAccessType * _Nonnull accessType;
+@property (nonatomic, readonly) DBTEAMGroupAccessType *accessType;
 
 /// Whether to return the list of members in the group.  Note that the default
 /// value will cause all the group members  to be returned in the response. This
 /// may take a long time for large groups.
-@property (nonatomic, readonly) NSNumber * _Nonnull returnMembers;
+@property (nonatomic, readonly) NSNumber *returnMembers;
 
 #pragma mark - Constructors
 
@@ -49,10 +51,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                                 user:(DBTEAMUserSelectorArg * _Nonnull)user
-                           accessType:(DBTEAMGroupAccessType * _Nonnull)accessType
-                        returnMembers:(NSNumber * _Nullable)returnMembers;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group
+                         user:(DBTEAMUserSelectorArg *)user
+                   accessType:(DBTEAMGroupAccessType *)accessType
+                returnMembers:(nullable NSNumber *)returnMembers;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -64,9 +66,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                                 user:(DBTEAMUserSelectorArg * _Nonnull)user
-                           accessType:(DBTEAMGroupAccessType * _Nonnull)accessType;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group
+                         user:(DBTEAMUserSelectorArg *)user
+                   accessType:(DBTEAMGroupAccessType *)accessType;
 
 @end
 
@@ -86,7 +88,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersSetAccessTypeArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMembersSetAccessTypeArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMembersSetAccessTypeArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersSetAccessTypeArg` instances.
@@ -96,6 +98,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersSetAccessTypeArg` object.
 ///
-+ (DBTEAMGroupMembersSetAccessTypeArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMembersSetAccessTypeArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

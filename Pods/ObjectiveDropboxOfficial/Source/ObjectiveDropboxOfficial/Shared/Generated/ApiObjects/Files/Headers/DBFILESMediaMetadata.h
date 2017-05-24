@@ -12,6 +12,8 @@
 @class DBFILESGpsCoordinates;
 @class DBFILESMediaMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,18 +25,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESMediaMetadata : NSObject <DBSerializable>
+@interface DBFILESMediaMetadata : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Dimension of the photo/video.
-@property (nonatomic, readonly) DBFILESDimensions * _Nullable dimensions;
+@property (nonatomic, readonly, nullable) DBFILESDimensions *dimensions;
 
 /// The GPS coordinate of the photo/video.
-@property (nonatomic, readonly) DBFILESGpsCoordinates * _Nullable location;
+@property (nonatomic, readonly, nullable) DBFILESGpsCoordinates *location;
 
 /// The timestamp when the photo/video is taken.
-@property (nonatomic, readonly) NSDate * _Nullable timeTaken;
+@property (nonatomic, readonly, nullable) NSDate *timeTaken;
 
 #pragma mark - Constructors
 
@@ -47,9 +49,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDimensions:(DBFILESDimensions * _Nullable)dimensions
-                                  location:(DBFILESGpsCoordinates * _Nullable)location
-                                 timeTaken:(NSDate * _Nullable)timeTaken;
+- (instancetype)initWithDimensions:(nullable DBFILESDimensions *)dimensions
+                          location:(nullable DBFILESGpsCoordinates *)location
+                         timeTaken:(nullable NSDate *)timeTaken;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +60,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,7 +81,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESMediaMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESMediaMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESMediaMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESMediaMetadata` instances.
@@ -87,6 +91,8 @@
 ///
 /// @return An instantiation of the `DBFILESMediaMetadata` object.
 ///
-+ (DBFILESMediaMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESMediaMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

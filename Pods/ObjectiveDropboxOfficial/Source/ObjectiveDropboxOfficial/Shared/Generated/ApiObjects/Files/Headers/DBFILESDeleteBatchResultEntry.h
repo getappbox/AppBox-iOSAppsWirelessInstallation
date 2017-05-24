@@ -12,6 +12,8 @@
 @class DBFILESDeleteError;
 @class DBFILESDeleteResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESDeleteBatchResultEntry : NSObject <DBSerializable>
+@interface DBFILESDeleteBatchResultEntry : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -41,11 +43,11 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 
 /// (no description). @note Ensure the `isSuccess` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESDeleteResult * _Nonnull success;
+@property (nonatomic, readonly) DBFILESDeleteResult *success;
 
 /// (no description). @note Ensure the `isFailure` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESDeleteError * _Nonnull failure;
+@property (nonatomic, readonly) DBFILESDeleteError *failure;
 
 #pragma mark - Constructors
 
@@ -56,7 +58,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess:(DBFILESDeleteResult * _Nonnull)success;
+- (instancetype)initWithSuccess:(DBFILESDeleteResult *)success;
 
 ///
 /// Initializes union class with tag state of "failure".
@@ -65,7 +67,9 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailure:(DBFILESDeleteError * _Nonnull)failure;
+- (instancetype)initWithFailure:(DBFILESDeleteError *)failure;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -94,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -114,7 +118,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchResultEntry` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESDeleteBatchResultEntry * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESDeleteBatchResultEntry *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchResultEntry` instances.
@@ -124,6 +128,8 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 ///
 /// @return An instantiation of the `DBFILESDeleteBatchResultEntry` object.
 ///
-+ (DBFILESDeleteBatchResultEntry * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESDeleteBatchResultEntry *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

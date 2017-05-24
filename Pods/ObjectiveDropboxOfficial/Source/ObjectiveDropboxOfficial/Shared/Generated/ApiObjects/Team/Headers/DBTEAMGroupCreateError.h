@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupCreateError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupCreateError : NSObject <DBSerializable>
+@interface DBTEAMGroupCreateError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -56,7 +58,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNameAlreadyUsed;
+- (instancetype)initWithGroupNameAlreadyUsed;
 
 ///
 /// Initializes union class with tag state of "group_name_invalid".
@@ -66,7 +68,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNameInvalid;
+- (instancetype)initWithGroupNameInvalid;
 
 ///
 /// Initializes union class with tag state of "external_id_already_in_use".
@@ -76,7 +78,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithExternalIdAlreadyInUse;
+- (instancetype)initWithExternalIdAlreadyInUse;
 
 ///
 /// Initializes union class with tag state of "system_managed_group_disallowed".
@@ -86,14 +88,16 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSystemManagedGroupDisallowed;
+- (instancetype)initWithSystemManagedGroupDisallowed;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -145,7 +149,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -164,7 +168,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupCreateError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupCreateError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupCreateError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupCreateError` instances.
@@ -174,6 +178,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupCreateError` object.
 ///
-+ (DBTEAMGroupCreateError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupCreateError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

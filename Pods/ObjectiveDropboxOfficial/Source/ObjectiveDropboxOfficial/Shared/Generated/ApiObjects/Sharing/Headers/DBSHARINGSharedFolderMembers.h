@@ -13,6 +13,8 @@
 @class DBSHARINGSharedFolderMembers;
 @class DBSHARINGUserMembershipInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,23 +26,23 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGSharedFolderMembers : NSObject <DBSerializable>
+@interface DBSHARINGSharedFolderMembers : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The list of user members of the shared folder.
-@property (nonatomic, readonly) NSArray<DBSHARINGUserMembershipInfo *> * _Nonnull users;
+@property (nonatomic, readonly) NSArray<DBSHARINGUserMembershipInfo *> *users;
 
 /// The list of group members of the shared folder.
-@property (nonatomic, readonly) NSArray<DBSHARINGGroupMembershipInfo *> * _Nonnull groups;
+@property (nonatomic, readonly) NSArray<DBSHARINGGroupMembershipInfo *> *groups;
 
 /// The list of invitees to the shared folder.
-@property (nonatomic, readonly) NSArray<DBSHARINGInviteeMembershipInfo *> * _Nonnull invitees;
+@property (nonatomic, readonly) NSArray<DBSHARINGInviteeMembershipInfo *> *invitees;
 
 /// Present if there are additional shared folder members that have not been
 /// returned yet. Pass the cursor into `listFolderMembersContinue` to list
 /// additional members.
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -56,10 +58,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUsers:(NSArray<DBSHARINGUserMembershipInfo *> * _Nonnull)users
-                               groups:(NSArray<DBSHARINGGroupMembershipInfo *> * _Nonnull)groups
-                             invitees:(NSArray<DBSHARINGInviteeMembershipInfo *> * _Nonnull)invitees
-                               cursor:(NSString * _Nullable)cursor;
+- (instancetype)initWithUsers:(NSArray<DBSHARINGUserMembershipInfo *> *)users
+                       groups:(NSArray<DBSHARINGGroupMembershipInfo *> *)groups
+                     invitees:(NSArray<DBSHARINGInviteeMembershipInfo *> *)invitees
+                       cursor:(nullable NSString *)cursor;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -71,9 +73,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUsers:(NSArray<DBSHARINGUserMembershipInfo *> * _Nonnull)users
-                               groups:(NSArray<DBSHARINGGroupMembershipInfo *> * _Nonnull)groups
-                             invitees:(NSArray<DBSHARINGInviteeMembershipInfo *> * _Nonnull)invitees;
+- (instancetype)initWithUsers:(NSArray<DBSHARINGUserMembershipInfo *> *)users
+                       groups:(NSArray<DBSHARINGGroupMembershipInfo *> *)groups
+                     invitees:(NSArray<DBSHARINGInviteeMembershipInfo *> *)invitees;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,7 +97,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedFolderMembers` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGSharedFolderMembers * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGSharedFolderMembers *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedFolderMembers` instances.
@@ -103,6 +107,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGSharedFolderMembers` object.
 ///
-+ (DBSHARINGSharedFolderMembers * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGSharedFolderMembers *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

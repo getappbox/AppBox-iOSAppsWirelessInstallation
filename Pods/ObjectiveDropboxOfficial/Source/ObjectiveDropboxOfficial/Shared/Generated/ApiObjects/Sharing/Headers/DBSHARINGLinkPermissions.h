@@ -13,6 +13,8 @@
 @class DBSHARINGResolvedVisibility;
 @class DBSHARINGSharedLinkAccessFailureReason;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,7 +24,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGLinkPermissions : NSObject <DBSerializable>
+@interface DBSHARINGLinkPermissions : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -31,20 +33,20 @@
 /// the shared folder (in case the linked file is part of a shared folder). This
 /// field is shown only if the caller has access to this info (the link's owner
 /// always has access to this data).
-@property (nonatomic, readonly) DBSHARINGResolvedVisibility * _Nullable resolvedVisibility;
+@property (nonatomic, readonly, nullable) DBSHARINGResolvedVisibility *resolvedVisibility;
 
 /// The shared link's requested visibility. This can be overridden by the team
 /// and shared folder policies. The final visibility, after considering these
 /// policies, can be found in resolvedVisibility. This is shown only if the
 /// caller is the link's owner.
-@property (nonatomic, readonly) DBSHARINGRequestedVisibility * _Nullable requestedVisibility;
+@property (nonatomic, readonly, nullable) DBSHARINGRequestedVisibility *requestedVisibility;
 
 /// Whether the caller can revoke the shared link
-@property (nonatomic, readonly) NSNumber * _Nonnull canRevoke;
+@property (nonatomic, readonly) NSNumber *canRevoke;
 
 /// The failure reason for revoking the link. This field will only be present if
 /// the canRevoke is false.
-@property (nonatomic, readonly) DBSHARINGSharedLinkAccessFailureReason * _Nullable revokeFailureReason;
+@property (nonatomic, readonly, nullable) DBSHARINGSharedLinkAccessFailureReason *revokeFailureReason;
 
 #pragma mark - Constructors
 
@@ -66,10 +68,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCanRevoke:(NSNumber * _Nonnull)canRevoke
-                       resolvedVisibility:(DBSHARINGResolvedVisibility * _Nullable)resolvedVisibility
-                      requestedVisibility:(DBSHARINGRequestedVisibility * _Nullable)requestedVisibility
-                      revokeFailureReason:(DBSHARINGSharedLinkAccessFailureReason * _Nullable)revokeFailureReason;
+- (instancetype)initWithCanRevoke:(NSNumber *)canRevoke
+               resolvedVisibility:(nullable DBSHARINGResolvedVisibility *)resolvedVisibility
+              requestedVisibility:(nullable DBSHARINGRequestedVisibility *)requestedVisibility
+              revokeFailureReason:(nullable DBSHARINGSharedLinkAccessFailureReason *)revokeFailureReason;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -79,7 +81,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCanRevoke:(NSNumber * _Nonnull)canRevoke;
+- (instancetype)initWithCanRevoke:(NSNumber *)canRevoke;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -98,7 +102,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkPermissions` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGLinkPermissions * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGLinkPermissions *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkPermissions` instances.
@@ -108,6 +112,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGLinkPermissions` object.
 ///
-+ (DBSHARINGLinkPermissions * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGLinkPermissions *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

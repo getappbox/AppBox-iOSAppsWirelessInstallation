@@ -12,7 +12,11 @@
 //Base URL's
 #define abMailerBaseURL @"https://appboxapi.github.io/mail"
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
+#define abMailGunBaseURL @"https://api.mailgun.net/v3/tryappbox.com/messages"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
+
+//MailGun
+#define abMailGunFromEmail @"AppBox Build <mailgun@tryappbox.com>"
 
 //Other URL's
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
@@ -20,6 +24,7 @@
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/tryappbox"
+#define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
 
 //AppBox AppStore service. Note: these constanst also need to change in ALAppStore.sh file
 #define abALUploadApp @"upload-app"
@@ -32,9 +37,10 @@
 
 //notification
 #define abSessionLogUpdated @"SessionLogUpdated"
-#define abGmailLoggedOutNotification @"GmailLoggedOutNotification"
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
+#define abBuildRepoNotification @"BuildRepoNotification"
+#define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
@@ -56,7 +62,9 @@
 //default setting
 #define abBuildLocation @"~/Desktop"
 #define abXcodeLocation @"/Applications/Xcode.app"
-#define abApplicationLoaderLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
+#define abApplicationLoaderAppLocation @"/Contents/Applications/Application Loader.app"
+#define abApplicationLoaderALToolLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
+
 
 //others
 #define abEmptyString @""

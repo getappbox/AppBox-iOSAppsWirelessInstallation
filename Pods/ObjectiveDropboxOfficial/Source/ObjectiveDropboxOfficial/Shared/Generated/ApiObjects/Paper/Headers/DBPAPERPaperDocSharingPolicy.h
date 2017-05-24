@@ -12,6 +12,8 @@
 @class DBPAPERPaperDocSharingPolicy;
 @class DBPAPERSharingPolicy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,25 +23,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERPaperDocSharingPolicy : DBPAPERRefPaperDoc <DBSerializable>
+@interface DBPAPERPaperDocSharingPolicy : DBPAPERRefPaperDoc <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The default sharing policy to be set for the Paper doc.
-@property (nonatomic, readonly) DBPAPERSharingPolicy * _Nonnull sharingPolicy;
+@property (nonatomic, readonly) DBPAPERSharingPolicy *sharingPolicy;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 /// @param sharingPolicy The default sharing policy to be set for the Paper doc.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId
-                        sharingPolicy:(DBPAPERSharingPolicy * _Nonnull)sharingPolicy;
+- (instancetype)initWithDocId:(NSString *)docId sharingPolicy:(DBPAPERSharingPolicy *)sharingPolicy;
 
 @end
 
@@ -59,7 +60,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperDocSharingPolicy` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERPaperDocSharingPolicy * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERPaperDocSharingPolicy *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperDocSharingPolicy` instances.
@@ -69,6 +70,8 @@
 ///
 /// @return An instantiation of the `DBPAPERPaperDocSharingPolicy` object.
 ///
-+ (DBPAPERPaperDocSharingPolicy * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERPaperDocSharingPolicy *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

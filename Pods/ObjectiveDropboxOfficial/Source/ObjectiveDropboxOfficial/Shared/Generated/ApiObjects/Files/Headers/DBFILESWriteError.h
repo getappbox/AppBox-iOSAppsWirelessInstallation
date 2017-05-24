@@ -11,6 +11,8 @@
 @class DBFILESWriteConflictError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESWriteError : NSObject <DBSerializable>
+@interface DBFILESWriteError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -43,6 +45,9 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
   /// Dropbox will not save the file or folder because of its name.
   DBFILESWriteErrorDisallowedName,
 
+  /// This endpoint cannot modify or delete team folders.
+  DBFILESWriteErrorTeamFolder,
+
   /// (no description).
   DBFILESWriteErrorOther,
 
@@ -53,12 +58,12 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 
 /// (no description). @note Ensure the `isMalformedPath` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSString * _Nullable malformedPath;
+@property (nonatomic, readonly, copy, nullable) NSString *malformedPath;
 
 /// Couldn't write to the target path because there was something in the way.
 /// @note Ensure the `isConflict` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteConflictError * _Nonnull conflict;
+@property (nonatomic, readonly) DBFILESWriteConflictError *conflict;
 
 #pragma mark - Constructors
 
@@ -69,7 +74,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMalformedPath:(NSString * _Nullable)malformedPath;
+- (instancetype)initWithMalformedPath:(nullable NSString *)malformedPath;
 
 ///
 /// Initializes union class with tag state of "conflict".
@@ -82,7 +87,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithConflict:(DBFILESWriteConflictError * _Nonnull)conflict;
+- (instancetype)initWithConflict:(DBFILESWriteConflictError *)conflict;
 
 ///
 /// Initializes union class with tag state of "no_write_permission".
@@ -92,7 +97,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoWritePermission;
+- (instancetype)initWithNoWritePermission;
 
 ///
 /// Initializes union class with tag state of "insufficient_space".
@@ -102,7 +107,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsufficientSpace;
+- (instancetype)initWithInsufficientSpace;
 
 ///
 /// Initializes union class with tag state of "disallowed_name".
@@ -112,14 +117,26 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDisallowedName;
+- (instancetype)initWithDisallowedName;
+
+///
+/// Initializes union class with tag state of "team_folder".
+///
+/// Description of the "team_folder" tag state: This endpoint cannot modify or
+/// delete team folders.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamFolder;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -169,6 +186,13 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 - (BOOL)isDisallowedName;
 
 ///
+/// Retrieves whether the union's current tag state has value "team_folder".
+///
+/// @return Whether the union's current tag state has value "team_folder".
+///
+- (BOOL)isTeamFolder;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -180,7 +204,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -199,7 +223,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESWriteError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESWriteError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESWriteError *)instance;
 
 ///
 /// Deserializes `DBFILESWriteError` instances.
@@ -209,6 +233,8 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESWriteError` object.
 ///
-+ (DBFILESWriteError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESWriteError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

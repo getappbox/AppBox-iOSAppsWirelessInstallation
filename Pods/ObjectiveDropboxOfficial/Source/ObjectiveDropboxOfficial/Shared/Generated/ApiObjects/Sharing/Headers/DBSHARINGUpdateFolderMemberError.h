@@ -13,6 +13,8 @@
 @class DBSHARINGSharedFolderMemberError;
 @class DBSHARINGUpdateFolderMemberError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,7 +24,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUpdateFolderMemberError : NSObject <DBSerializable>
+@interface DBSHARINGUpdateFolderMemberError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -58,17 +60,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 /// (no description). @note Ensure the `isMemberError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderMemberError * _Nonnull memberError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderMemberError *memberError;
 
 /// If updating the access type required the member to be added to the shared
 /// folder and there was an error when adding the member. @note Ensure the
 /// `isNoExplicitAccess` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGAddFolderMemberError * _Nonnull noExplicitAccess;
+@property (nonatomic, readonly) DBSHARINGAddFolderMemberError *noExplicitAccess;
 
 #pragma mark - Constructors
 
@@ -79,7 +81,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "member_error".
@@ -88,7 +90,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMemberError:(DBSHARINGSharedFolderMemberError * _Nonnull)memberError;
+- (instancetype)initWithMemberError:(DBSHARINGSharedFolderMemberError *)memberError;
 
 ///
 /// Initializes union class with tag state of "no_explicit_access".
@@ -102,7 +104,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoExplicitAccess:(DBSHARINGAddFolderMemberError * _Nonnull)noExplicitAccess;
+- (instancetype)initWithNoExplicitAccess:(DBSHARINGAddFolderMemberError *)noExplicitAccess;
 
 ///
 /// Initializes union class with tag state of "insufficient_plan".
@@ -114,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsufficientPlan;
+- (instancetype)initWithInsufficientPlan;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -124,14 +126,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -194,7 +198,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -214,7 +218,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUpdateFolderMemberError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUpdateFolderMemberError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUpdateFolderMemberError *)instance;
 
 ///
 /// Deserializes `DBSHARINGUpdateFolderMemberError` instances.
@@ -224,6 +228,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGUpdateFolderMemberError` object.
 ///
-+ (DBSHARINGUpdateFolderMemberError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUpdateFolderMemberError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

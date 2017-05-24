@@ -10,6 +10,8 @@
 
 @class DBPAPERExportFormat;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERExportFormat : NSObject <DBSerializable>
+@interface DBPAPERExportFormat : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithHtml;
+- (instancetype)initWithHtml;
 
 ///
 /// Initializes union class with tag state of "markdown".
@@ -60,14 +62,16 @@ typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMarkdown;
+- (instancetype)initWithMarkdown;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -97,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -116,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERExportFormat` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERExportFormat * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERExportFormat *)instance;
 
 ///
 /// Deserializes `DBPAPERExportFormat` instances.
@@ -126,6 +130,8 @@ typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
 ///
 /// @return An instantiation of the `DBPAPERExportFormat` object.
 ///
-+ (DBPAPERExportFormat * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERExportFormat *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

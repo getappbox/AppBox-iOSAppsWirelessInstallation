@@ -11,6 +11,8 @@
 @class DBUSERSAccount;
 @class DBUSERSName;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,29 +25,29 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSAccount : NSObject <DBSerializable>
+@interface DBUSERSAccount : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The user's unique Dropbox ID.
-@property (nonatomic, readonly, copy) NSString * _Nonnull accountId;
+@property (nonatomic, readonly, copy) NSString *accountId;
 
 /// Details of a user's name.
-@property (nonatomic, readonly) DBUSERSName * _Nonnull name;
+@property (nonatomic, readonly) DBUSERSName *name;
 
 /// The user's e-mail address. Do not rely on this without checking the
 /// emailVerified field. Even then, it's possible that the user has since lost
 /// access to their e-mail.
-@property (nonatomic, readonly, copy) NSString * _Nonnull email;
+@property (nonatomic, readonly, copy) NSString *email;
 
 /// Whether the user has verified their e-mail address.
-@property (nonatomic, readonly) NSNumber * _Nonnull emailVerified;
+@property (nonatomic, readonly) NSNumber *emailVerified;
 
 /// URL for the photo representing the user, if one is set.
-@property (nonatomic, readonly) NSString * _Nullable profilePhotoUrl;
+@property (nonatomic, readonly, copy, nullable) NSString *profilePhotoUrl;
 
 /// Whether the user has been disabled.
-@property (nonatomic, readonly) NSNumber * _Nonnull disabled;
+@property (nonatomic, readonly) NSNumber *disabled;
 
 #pragma mark - Constructors
 
@@ -64,12 +66,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                     name:(DBUSERSName * _Nonnull)name
-                                    email:(NSString * _Nonnull)email
-                            emailVerified:(NSNumber * _Nonnull)emailVerified
-                                 disabled:(NSNumber * _Nonnull)disabled
-                          profilePhotoUrl:(NSString * _Nullable)profilePhotoUrl;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                             name:(DBUSERSName *)name
+                            email:(NSString *)email
+                    emailVerified:(NSNumber *)emailVerified
+                         disabled:(NSNumber *)disabled
+                  profilePhotoUrl:(nullable NSString *)profilePhotoUrl;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -85,11 +87,13 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccountId:(NSString * _Nonnull)accountId
-                                     name:(DBUSERSName * _Nonnull)name
-                                    email:(NSString * _Nonnull)email
-                            emailVerified:(NSNumber * _Nonnull)emailVerified
-                                 disabled:(NSNumber * _Nonnull)disabled;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                             name:(DBUSERSName *)name
+                            email:(NSString *)email
+                    emailVerified:(NSNumber *)emailVerified
+                         disabled:(NSNumber *)disabled;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -108,7 +112,7 @@
 /// @return A json-compatible dictionary representation of the `DBUSERSAccount`
 /// API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSAccount * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSAccount *)instance;
 
 ///
 /// Deserializes `DBUSERSAccount` instances.
@@ -118,6 +122,8 @@
 ///
 /// @return An instantiation of the `DBUSERSAccount` object.
 ///
-+ (DBUSERSAccount * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSAccount *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -13,6 +13,8 @@
 @class DBPAPERListPaperDocsSortBy;
 @class DBPAPERListPaperDocsSortOrder;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,22 +24,22 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListPaperDocsArgs : NSObject <DBSerializable>
+@interface DBPAPERListPaperDocsArgs : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Allows user to specify how the Paper docs should be filtered.
-@property (nonatomic, readonly) DBPAPERListPaperDocsFilterBy * _Nonnull filterBy;
+@property (nonatomic, readonly) DBPAPERListPaperDocsFilterBy *filterBy;
 
 /// Allows user to specify how the Paper docs should be sorted.
-@property (nonatomic, readonly) DBPAPERListPaperDocsSortBy * _Nonnull sortBy;
+@property (nonatomic, readonly) DBPAPERListPaperDocsSortBy *sortBy;
 
 /// Allows user to specify the sort order of the result.
-@property (nonatomic, readonly) DBPAPERListPaperDocsSortOrder * _Nonnull sortOrder;
+@property (nonatomic, readonly) DBPAPERListPaperDocsSortOrder *sortOrder;
 
 /// Size limit per batch. The maximum number of docs that can be retrieved per
 /// batch is 1000. Higher value results in invalid arguments error.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
 
@@ -54,10 +56,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFilterBy:(DBPAPERListPaperDocsFilterBy * _Nullable)filterBy
-                                  sortBy:(DBPAPERListPaperDocsSortBy * _Nullable)sortBy
-                               sortOrder:(DBPAPERListPaperDocsSortOrder * _Nullable)sortOrder
-                                   limit:(NSNumber * _Nullable)limit;
+- (instancetype)initWithFilterBy:(nullable DBPAPERListPaperDocsFilterBy *)filterBy
+                          sortBy:(nullable DBPAPERListPaperDocsSortBy *)sortBy
+                       sortOrder:(nullable DBPAPERListPaperDocsSortOrder *)sortOrder
+                           limit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -66,7 +68,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -85,7 +89,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListPaperDocsArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListPaperDocsArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListPaperDocsArgs *)instance;
 
 ///
 /// Deserializes `DBPAPERListPaperDocsArgs` instances.
@@ -95,6 +99,8 @@
 ///
 /// @return An instantiation of the `DBPAPERListPaperDocsArgs` object.
 ///
-+ (DBPAPERListPaperDocsArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListPaperDocsArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

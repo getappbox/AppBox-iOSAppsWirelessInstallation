@@ -19,6 +19,7 @@
 
 #import "Tiny.h"
 #import "GooglURLShortenerService.h"
+#import "MBProgressHUD+ProgressHud.h"
 
 #import "UserData.h"
 #import "XCProject.h"
@@ -26,10 +27,15 @@
 
 #import "Constants.h"
 #import "DropboxKeys.h"
+#import "HTTPStatusCode.h"
 
 #import "Common.h"
+#import "XCHandler.h"
 #import "MacHandler.h"
 #import "MailHandler.h"
+#import "SlackClient.h"
+#import "TaskHandler.h"
+#import "RepoBuilder.h"
 #import "UpdateHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"

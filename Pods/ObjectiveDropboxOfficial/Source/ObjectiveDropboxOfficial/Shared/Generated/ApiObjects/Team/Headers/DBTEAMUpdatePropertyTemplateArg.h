@@ -11,6 +11,8 @@
 @class DBPROPERTIESPropertyFieldTemplate;
 @class DBTEAMUpdatePropertyTemplateArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,24 +22,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMUpdatePropertyTemplateArg : NSObject <DBSerializable>
+@interface DBTEAMUpdatePropertyTemplateArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// An identifier for property template added by `propertiesTemplateAdd`.
-@property (nonatomic, readonly, copy) NSString * _Nonnull templateId;
+@property (nonatomic, readonly, copy) NSString *templateId;
 
 /// A display name for the property template. Property template names can be up
 /// to 256 bytes.
-@property (nonatomic, readonly) NSString * _Nullable name;
+@property (nonatomic, readonly, copy, nullable) NSString *name;
 
 /// Description for new property template. Property template descriptions can be
 /// up to 1024 bytes.
-@property (nonatomic, readonly) NSString * _Nullable description_;
+@property (nonatomic, readonly, copy, nullable) NSString *description_;
 
 /// This is a list of custom properties to add to the property template. There
 /// can be up to 64 properties in a single property template.
-@property (nonatomic, readonly) NSArray<DBPROPERTIESPropertyFieldTemplate *> * _Nullable addFields;
+@property (nonatomic, readonly, nullable) NSArray<DBPROPERTIESPropertyFieldTemplate *> *addFields;
 
 #pragma mark - Constructors
 
@@ -55,10 +57,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateId:(NSString * _Nonnull)templateId
-                                      name:(NSString * _Nullable)name
-                              description_:(NSString * _Nullable)description_
-                                 addFields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> * _Nullable)addFields;
+- (instancetype)initWithTemplateId:(NSString *)templateId
+                              name:(nullable NSString *)name
+                      description_:(nullable NSString *)description_
+                         addFields:(nullable NSArray<DBPROPERTIESPropertyFieldTemplate *> *)addFields;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -69,7 +71,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateId:(NSString * _Nonnull)templateId;
+- (instancetype)initWithTemplateId:(NSString *)templateId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -89,7 +93,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMUpdatePropertyTemplateArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMUpdatePropertyTemplateArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMUpdatePropertyTemplateArg *)instance;
 
 ///
 /// Deserializes `DBTEAMUpdatePropertyTemplateArg` instances.
@@ -99,6 +103,8 @@
 ///
 /// @return An instantiation of the `DBTEAMUpdatePropertyTemplateArg` object.
 ///
-+ (DBTEAMUpdatePropertyTemplateArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMUpdatePropertyTemplateArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

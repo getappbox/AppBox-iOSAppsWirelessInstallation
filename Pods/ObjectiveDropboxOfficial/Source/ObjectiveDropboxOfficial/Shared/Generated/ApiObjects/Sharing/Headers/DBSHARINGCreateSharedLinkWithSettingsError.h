@@ -12,6 +12,8 @@
 @class DBSHARINGCreateSharedLinkWithSettingsError;
 @class DBSHARINGSharedLinkSettingsError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGCreateSharedLinkWithSettingsError : NSObject <DBSerializable>
+@interface DBSHARINGCreateSharedLinkWithSettingsError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -51,12 +53,12 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESLookupError *path;
 
 /// There is an error with the given settings @note Ensure the `isSettingsError`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBSHARINGSharedLinkSettingsError * _Nonnull settingsError;
+@property (nonatomic, readonly) DBSHARINGSharedLinkSettingsError *settingsError;
 
 #pragma mark - Constructors
 
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESLookupError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
 /// Initializes union class with tag state of "email_not_verified".
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmailNotVerified;
+- (instancetype)initWithEmailNotVerified;
 
 ///
 /// Initializes union class with tag state of "shared_link_already_exists".
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedLinkAlreadyExists;
+- (instancetype)initWithSharedLinkAlreadyExists;
 
 ///
 /// Initializes union class with tag state of "settings_error".
@@ -99,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSettingsError:(DBSHARINGSharedLinkSettingsError * _Nonnull)settingsError;
+- (instancetype)initWithSettingsError:(DBSHARINGSharedLinkSettingsError *)settingsError;
 
 ///
 /// Initializes union class with tag state of "access_denied".
@@ -109,7 +111,9 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessDenied;
+- (instancetype)initWithAccessDenied;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -163,7 +167,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -184,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCreateSharedLinkWithSettingsError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGCreateSharedLinkWithSettingsError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsError *)instance;
 
 ///
 /// Deserializes `DBSHARINGCreateSharedLinkWithSettingsError` instances.
@@ -195,6 +199,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// @return An instantiation of the `DBSHARINGCreateSharedLinkWithSettingsError`
 /// object.
 ///
-+ (DBSHARINGCreateSharedLinkWithSettingsError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGCreateSharedLinkWithSettingsError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 @class DBFILESSearchMatchType;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSearchMatchType : NSObject <DBSerializable>
+@interface DBFILESSearchMatchType : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -52,7 +54,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFilename;
+- (instancetype)initWithFilename;
 
 ///
 /// Initializes union class with tag state of "content".
@@ -62,7 +64,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithContent;
+- (instancetype)initWithContent;
 
 ///
 /// Initializes union class with tag state of "both".
@@ -72,7 +74,9 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithBoth;
+- (instancetype)initWithBoth;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -102,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -121,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchMatchType` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSearchMatchType * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSearchMatchType *)instance;
 
 ///
 /// Deserializes `DBFILESSearchMatchType` instances.
@@ -131,6 +135,8 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 ///
 /// @return An instantiation of the `DBFILESSearchMatchType` object.
 ///
-+ (DBFILESSearchMatchType * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSearchMatchType *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

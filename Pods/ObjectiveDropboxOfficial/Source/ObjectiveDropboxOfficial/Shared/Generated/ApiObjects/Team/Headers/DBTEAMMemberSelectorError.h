@@ -10,6 +10,8 @@
 
 @class DBTEAMMemberSelectorError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMemberSelectorError : NSObject <DBSerializable>
+@interface DBTEAMMemberSelectorError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,7 +50,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -58,7 +60,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -82,7 +86,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -101,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberSelectorError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMemberSelectorError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMemberSelectorError *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberSelectorError` instances.
@@ -111,6 +115,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMemberSelectorError` object.
 ///
-+ (DBTEAMMemberSelectorError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMemberSelectorError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBSHARINGMemberSelector;
 @class DBSHARINGRemoveFolderMemberArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,20 +22,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRemoveFolderMemberArg : NSObject <DBSerializable>
+@interface DBSHARINGRemoveFolderMemberArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID for the shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 /// The member to remove from the folder.
-@property (nonatomic, readonly) DBSHARINGMemberSelector * _Nonnull member;
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
 
 /// If true, the removed user will keep their copy of the folder after it's
 /// unshared, assuming it was mounted. Otherwise, it will be removed from their
 /// Dropbox. Also, this must be set to false when kicking a group.
-@property (nonatomic, readonly) NSNumber * _Nonnull leaveACopy;
+@property (nonatomic, readonly) NSNumber *leaveACopy;
 
 #pragma mark - Constructors
 
@@ -49,9 +51,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId
-                                        member:(DBSHARINGMemberSelector * _Nonnull)member
-                                    leaveACopy:(NSNumber * _Nonnull)leaveACopy;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId
+                                member:(DBSHARINGMemberSelector *)member
+                            leaveACopy:(NSNumber *)leaveACopy;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -71,7 +75,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRemoveFolderMemberArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRemoveFolderMemberArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRemoveFolderMemberArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRemoveFolderMemberArg` instances.
@@ -81,6 +85,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGRemoveFolderMemberArg` object.
 ///
-+ (DBSHARINGRemoveFolderMemberArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRemoveFolderMemberArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

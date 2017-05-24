@@ -13,6 +13,8 @@
 @class DBFILESFolderSharingInfo;
 @class DBPROPERTIESPropertyGroup;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,23 +24,23 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESFolderMetadata : DBFILESMetadata <DBSerializable>
+@interface DBFILESFolderMetadata : DBFILESMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A unique identifier for the folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull id_;
+@property (nonatomic, readonly, copy) NSString *id_;
 
 /// Deprecated. Please use sharingInfo instead.
-@property (nonatomic, readonly) NSString * _Nullable sharedFolderId;
+@property (nonatomic, readonly, copy, nullable) NSString *sharedFolderId;
 
 /// Set if the folder is contained in a shared folder or is a shared folder
 /// mount point.
-@property (nonatomic, readonly) DBFILESFolderSharingInfo * _Nullable sharingInfo;
+@property (nonatomic, readonly, nullable) DBFILESFolderSharingInfo *sharingInfo;
 
 /// Additional information if the file has custom properties with the property
 /// template specified.
-@property (nonatomic, readonly) NSArray<DBPROPERTIESPropertyGroup *> * _Nullable propertyGroups;
+@property (nonatomic, readonly, nullable) NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups;
 
 #pragma mark - Constructors
 
@@ -68,14 +70,14 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                                 id_:(NSString * _Nonnull)id_
-                           pathLower:(NSString * _Nullable)pathLower
-                         pathDisplay:(NSString * _Nullable)pathDisplay
-                parentSharedFolderId:(NSString * _Nullable)parentSharedFolderId
-                      sharedFolderId:(NSString * _Nullable)sharedFolderId
-                         sharingInfo:(DBFILESFolderSharingInfo * _Nullable)sharingInfo
-                      propertyGroups:(NSArray<DBPROPERTIESPropertyGroup *> * _Nullable)propertyGroups;
+- (instancetype)initWithName:(NSString *)name
+                         id_:(NSString *)id_
+                   pathLower:(nullable NSString *)pathLower
+                 pathDisplay:(nullable NSString *)pathDisplay
+        parentSharedFolderId:(nullable NSString *)parentSharedFolderId
+              sharedFolderId:(nullable NSString *)sharedFolderId
+                 sharingInfo:(nullable DBFILESFolderSharingInfo *)sharingInfo
+              propertyGroups:(nullable NSArray<DBPROPERTIESPropertyGroup *> *)propertyGroups;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -87,7 +89,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name id_:(NSString * _Nonnull)id_;
+- (instancetype)initWithName:(NSString *)name id_:(NSString *)id_;
 
 @end
 
@@ -106,7 +108,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESFolderMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESFolderMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESFolderMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESFolderMetadata` instances.
@@ -116,6 +118,8 @@
 ///
 /// @return An instantiation of the `DBFILESFolderMetadata` object.
 ///
-+ (DBFILESFolderMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESFolderMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

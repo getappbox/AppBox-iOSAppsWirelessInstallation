@@ -10,6 +10,8 @@
 
 @class DBAUTHTokenFromOAuth1Result;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBAUTHTokenFromOAuth1Result : NSObject <DBSerializable>
+@interface DBAUTHTokenFromOAuth1Result : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The OAuth 2.0 token generated from the supplied OAuth 1.0 token.
-@property (nonatomic, readonly, copy) NSString * _Nonnull oauth2Token;
+@property (nonatomic, readonly, copy) NSString *oauth2Token;
 
 #pragma mark - Constructors
 
@@ -36,7 +38,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOauth2Token:(NSString * _Nonnull)oauth2Token;
+- (instancetype)initWithOauth2Token:(NSString *)oauth2Token;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHTokenFromOAuth1Result` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBAUTHTokenFromOAuth1Result * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBAUTHTokenFromOAuth1Result *)instance;
 
 ///
 /// Deserializes `DBAUTHTokenFromOAuth1Result` instances.
@@ -65,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBAUTHTokenFromOAuth1Result` object.
 ///
-+ (DBAUTHTokenFromOAuth1Result * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBAUTHTokenFromOAuth1Result *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

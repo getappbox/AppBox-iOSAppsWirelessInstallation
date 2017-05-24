@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersListContinueArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersListContinueArg : NSObject <DBSerializable>
+@interface DBTEAMMembersListContinueArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Indicates from what point to get the next set of members.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nonnull)cursor;
+- (instancetype)initWithCursor:(NSString *)cursor;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersListContinueArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersListContinueArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersListContinueArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersListContinueArg` instances.
@@ -65,6 +69,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMembersListContinueArg` object.
 ///
-+ (DBTEAMMembersListContinueArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersListContinueArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -12,6 +12,8 @@
 @class DBTEAMTeamFolderArchiveJobStatus;
 @class DBTEAMTeamFolderMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamFolderArchiveJobStatus : NSObject <DBSerializable>
+@interface DBTEAMTeamFolderArchiveJobStatus : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -48,12 +50,12 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 /// The archive job has finished. The value is the metadata for the resulting
 /// team folder. @note Ensure the `isComplete` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMTeamFolderMetadata * _Nonnull complete;
+@property (nonatomic, readonly) DBTEAMTeamFolderMetadata *complete;
 
 /// Error occurred while performing an asynchronous job from
 /// `teamFolderArchive`. @note Ensure the `isFailed` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMTeamFolderArchiveError * _Nonnull failed;
+@property (nonatomic, readonly) DBTEAMTeamFolderArchiveError *failed;
 
 #pragma mark - Constructors
 
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInProgress;
+- (instancetype)initWithInProgress;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -78,7 +80,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete:(DBTEAMTeamFolderMetadata * _Nonnull)complete;
+- (instancetype)initWithComplete:(DBTEAMTeamFolderMetadata *)complete;
 
 ///
 /// Initializes union class with tag state of "failed".
@@ -91,7 +93,9 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailed:(DBTEAMTeamFolderArchiveError * _Nonnull)failed;
+- (instancetype)initWithFailed:(DBTEAMTeamFolderArchiveError *)failed;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -127,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -147,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderArchiveJobStatus` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamFolderArchiveJobStatus * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamFolderArchiveJobStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderArchiveJobStatus` instances.
@@ -157,6 +161,8 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderArchiveJobStatus` object.
 ///
-+ (DBTEAMTeamFolderArchiveJobStatus * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamFolderArchiveJobStatus *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBSHARINGSharedFolderAccessError;
 @class DBSHARINGUnshareFolderError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUnshareFolderError : NSObject <DBSerializable>
+@interface DBSHARINGUnshareFolderError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -49,7 +51,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "team_folder".
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolder;
+- (instancetype)initWithTeamFolder;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -80,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "too_many_files".
@@ -90,14 +92,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyFiles;
+- (instancetype)initWithTooManyFiles;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -144,7 +148,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -163,7 +167,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnshareFolderError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUnshareFolderError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUnshareFolderError *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnshareFolderError` instances.
@@ -173,6 +177,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGUnshareFolderError` object.
 ///
-+ (DBSHARINGUnshareFolderError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUnshareFolderError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

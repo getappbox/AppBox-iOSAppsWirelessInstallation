@@ -14,6 +14,8 @@
 @class DBSHARINGUserInfo;
 @class DBSHARINGUserMembershipInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,12 +27,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUserMembershipInfo : DBSHARINGMembershipInfo <DBSerializable>
+@interface DBSHARINGUserMembershipInfo : DBSHARINGMembershipInfo <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The account information for the membership user.
-@property (nonatomic, readonly) DBSHARINGUserInfo * _Nonnull user;
+@property (nonatomic, readonly) DBSHARINGUserInfo *user;
 
 #pragma mark - Constructors
 
@@ -46,11 +48,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                                      user:(DBSHARINGUserInfo * _Nonnull)user
-                               permissions:(NSArray<DBSHARINGMemberPermission *> * _Nullable)permissions
-                                  initials:(NSString * _Nullable)initials
-                               isInherited:(NSNumber * _Nullable)isInherited;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType
+                              user:(DBSHARINGUserInfo *)user
+                       permissions:(nullable NSArray<DBSHARINGMemberPermission *> *)permissions
+                          initials:(nullable NSString *)initials
+                       isInherited:(nullable NSNumber *)isInherited;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -61,8 +63,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessType:(DBSHARINGAccessLevel * _Nonnull)accessType
-                                      user:(DBSHARINGUserInfo * _Nonnull)user;
+- (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType user:(DBSHARINGUserInfo *)user;
 
 @end
 
@@ -81,7 +82,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUserMembershipInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUserMembershipInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUserMembershipInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGUserMembershipInfo` instances.
@@ -91,6 +92,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGUserMembershipInfo` object.
 ///
-+ (DBSHARINGUserMembershipInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUserMembershipInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

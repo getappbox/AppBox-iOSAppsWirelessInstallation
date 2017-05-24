@@ -11,6 +11,8 @@
 @class DBFILESGetTemporaryLinkError;
 @class DBFILESLookupError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESGetTemporaryLinkError : NSObject <DBSerializable>
+@interface DBFILESGetTemporaryLinkError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -40,7 +42,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookupError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESLookupError *path;
 
 #pragma mark - Constructors
 
@@ -51,14 +53,16 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESLookupError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -84,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -104,7 +108,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetTemporaryLinkError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESGetTemporaryLinkError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESGetTemporaryLinkError *)instance;
 
 ///
 /// Deserializes `DBFILESGetTemporaryLinkError` instances.
@@ -114,6 +118,8 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESGetTemporaryLinkError` object.
 ///
-+ (DBFILESGetTemporaryLinkError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESGetTemporaryLinkError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

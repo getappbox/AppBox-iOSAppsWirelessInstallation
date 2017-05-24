@@ -2,15 +2,15 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBTasksStorage.h"
 #import "DBSDKConstants.h"
 #import "DBTasksImpl.h"
-#import "DBTasksStorage.h"
 
 @interface DBTasksStorage ()
 
-@property (nonatomic) NSMutableDictionary<NSString *, DBUploadTaskImpl *> * _Nonnull uploadTasks;
-@property (nonatomic) NSMutableDictionary<NSString *, DBDownloadUrlTaskImpl *> * _Nonnull downloadUrlTasks;
-@property (nonatomic) NSMutableDictionary<NSString *, DBDownloadDataTaskImpl *> * _Nonnull downloadDataTasks;
+@property (nonatomic) NSMutableDictionary<NSString *, DBUploadTaskImpl *> *uploadTasks;
+@property (nonatomic) NSMutableDictionary<NSString *, DBDownloadUrlTaskImpl *> *downloadUrlTasks;
+@property (nonatomic) NSMutableDictionary<NSString *, DBDownloadDataTaskImpl *> *downloadDataTasks;
 
 @property (nonatomic) BOOL cancel;
 
@@ -112,6 +112,12 @@
     NSString *key =
         [NSString stringWithFormat:@"%@/%lu", sessionId, (unsigned long)task.downloadDataTask.taskIdentifier];
     [_downloadDataTasks removeObjectForKey:key];
+  }
+}
+
+- (BOOL)tasksInProgress {
+  @synchronized(self) {
+    return [_uploadTasks count] > 0 || [_downloadUrlTasks count] > 0 || [_downloadDataTasks count] > 0;
   }
 }
 

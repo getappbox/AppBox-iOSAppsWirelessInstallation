@@ -8,6 +8,8 @@
 
 @class DBRoute;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Stone route objects for the Sharing namespace. Each route in the Sharing
 /// namespace has its own static object, which contains information about the
@@ -16,129 +18,131 @@
 @interface DBSHARINGRouteObjects : NSObject
 
 /// Accessor method for the addFileMember route object.
-+ (DBRoute * _Nonnull)DBSHARINGAddFileMember;
++ (DBRoute *)DBSHARINGAddFileMember;
 
 /// Accessor method for the addFolderMember route object.
-+ (DBRoute * _Nonnull)DBSHARINGAddFolderMember;
++ (DBRoute *)DBSHARINGAddFolderMember;
 
 /// Accessor method for the changeFileMemberAccess route object.
-+ (DBRoute * _Nonnull)DBSHARINGChangeFileMemberAccess;
++ (DBRoute *)DBSHARINGChangeFileMemberAccess;
 
 /// Accessor method for the checkJobStatus route object.
-+ (DBRoute * _Nonnull)DBSHARINGCheckJobStatus;
++ (DBRoute *)DBSHARINGCheckJobStatus;
 
 /// Accessor method for the checkRemoveMemberJobStatus route object.
-+ (DBRoute * _Nonnull)DBSHARINGCheckRemoveMemberJobStatus;
++ (DBRoute *)DBSHARINGCheckRemoveMemberJobStatus;
 
 /// Accessor method for the checkShareJobStatus route object.
-+ (DBRoute * _Nonnull)DBSHARINGCheckShareJobStatus;
++ (DBRoute *)DBSHARINGCheckShareJobStatus;
 
 /// Accessor method for the createSharedLink route object.
-+ (DBRoute * _Nonnull)DBSHARINGCreateSharedLink;
++ (DBRoute *)DBSHARINGCreateSharedLink;
 
 /// Accessor method for the createSharedLinkWithSettings route object.
-+ (DBRoute * _Nonnull)DBSHARINGCreateSharedLinkWithSettings;
++ (DBRoute *)DBSHARINGCreateSharedLinkWithSettings;
 
 /// Accessor method for the getFileMetadata route object.
-+ (DBRoute * _Nonnull)DBSHARINGGetFileMetadata;
++ (DBRoute *)DBSHARINGGetFileMetadata;
 
 /// Accessor method for the getFileMetadataBatch route object.
-+ (DBRoute * _Nonnull)DBSHARINGGetFileMetadataBatch;
++ (DBRoute *)DBSHARINGGetFileMetadataBatch;
 
 /// Accessor method for the getFolderMetadata route object.
-+ (DBRoute * _Nonnull)DBSHARINGGetFolderMetadata;
++ (DBRoute *)DBSHARINGGetFolderMetadata;
 
 /// Accessor method for the getSharedLinkFile route object.
-+ (DBRoute * _Nonnull)DBSHARINGGetSharedLinkFile;
++ (DBRoute *)DBSHARINGGetSharedLinkFile;
 
 /// Accessor method for the getSharedLinkMetadata route object.
-+ (DBRoute * _Nonnull)DBSHARINGGetSharedLinkMetadata;
++ (DBRoute *)DBSHARINGGetSharedLinkMetadata;
 
 /// Accessor method for the getSharedLinks route object.
-+ (DBRoute * _Nonnull)DBSHARINGGetSharedLinks;
++ (DBRoute *)DBSHARINGGetSharedLinks;
 
 /// Accessor method for the listFileMembers route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFileMembers;
++ (DBRoute *)DBSHARINGListFileMembers;
 
 /// Accessor method for the listFileMembersBatch route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFileMembersBatch;
++ (DBRoute *)DBSHARINGListFileMembersBatch;
 
 /// Accessor method for the listFileMembersContinue route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFileMembersContinue;
++ (DBRoute *)DBSHARINGListFileMembersContinue;
 
 /// Accessor method for the listFolderMembers route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFolderMembers;
++ (DBRoute *)DBSHARINGListFolderMembers;
 
 /// Accessor method for the listFolderMembersContinue route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFolderMembersContinue;
++ (DBRoute *)DBSHARINGListFolderMembersContinue;
 
 /// Accessor method for the listFolders route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFolders;
++ (DBRoute *)DBSHARINGListFolders;
 
 /// Accessor method for the listFoldersContinue route object.
-+ (DBRoute * _Nonnull)DBSHARINGListFoldersContinue;
++ (DBRoute *)DBSHARINGListFoldersContinue;
 
 /// Accessor method for the listMountableFolders route object.
-+ (DBRoute * _Nonnull)DBSHARINGListMountableFolders;
++ (DBRoute *)DBSHARINGListMountableFolders;
 
 /// Accessor method for the listMountableFoldersContinue route object.
-+ (DBRoute * _Nonnull)DBSHARINGListMountableFoldersContinue;
++ (DBRoute *)DBSHARINGListMountableFoldersContinue;
 
 /// Accessor method for the listReceivedFiles route object.
-+ (DBRoute * _Nonnull)DBSHARINGListReceivedFiles;
++ (DBRoute *)DBSHARINGListReceivedFiles;
 
 /// Accessor method for the listReceivedFilesContinue route object.
-+ (DBRoute * _Nonnull)DBSHARINGListReceivedFilesContinue;
++ (DBRoute *)DBSHARINGListReceivedFilesContinue;
 
 /// Accessor method for the listSharedLinks route object.
-+ (DBRoute * _Nonnull)DBSHARINGListSharedLinks;
++ (DBRoute *)DBSHARINGListSharedLinks;
 
 /// Accessor method for the modifySharedLinkSettings route object.
-+ (DBRoute * _Nonnull)DBSHARINGModifySharedLinkSettings;
++ (DBRoute *)DBSHARINGModifySharedLinkSettings;
 
 /// Accessor method for the mountFolder route object.
-+ (DBRoute * _Nonnull)DBSHARINGMountFolder;
++ (DBRoute *)DBSHARINGMountFolder;
 
 /// Accessor method for the relinquishFileMembership route object.
-+ (DBRoute * _Nonnull)DBSHARINGRelinquishFileMembership;
++ (DBRoute *)DBSHARINGRelinquishFileMembership;
 
 /// Accessor method for the relinquishFolderMembership route object.
-+ (DBRoute * _Nonnull)DBSHARINGRelinquishFolderMembership;
++ (DBRoute *)DBSHARINGRelinquishFolderMembership;
 
 /// Accessor method for the removeFileMember route object.
-+ (DBRoute * _Nonnull)DBSHARINGRemoveFileMember;
++ (DBRoute *)DBSHARINGRemoveFileMember;
 
 /// Accessor method for the removeFileMember2 route object.
-+ (DBRoute * _Nonnull)DBSHARINGRemoveFileMember2;
++ (DBRoute *)DBSHARINGRemoveFileMember2;
 
 /// Accessor method for the removeFolderMember route object.
-+ (DBRoute * _Nonnull)DBSHARINGRemoveFolderMember;
++ (DBRoute *)DBSHARINGRemoveFolderMember;
 
 /// Accessor method for the revokeSharedLink route object.
-+ (DBRoute * _Nonnull)DBSHARINGRevokeSharedLink;
++ (DBRoute *)DBSHARINGRevokeSharedLink;
 
 /// Accessor method for the shareFolder route object.
-+ (DBRoute * _Nonnull)DBSHARINGShareFolder;
++ (DBRoute *)DBSHARINGShareFolder;
 
 /// Accessor method for the transferFolder route object.
-+ (DBRoute * _Nonnull)DBSHARINGTransferFolder;
++ (DBRoute *)DBSHARINGTransferFolder;
 
 /// Accessor method for the unmountFolder route object.
-+ (DBRoute * _Nonnull)DBSHARINGUnmountFolder;
++ (DBRoute *)DBSHARINGUnmountFolder;
 
 /// Accessor method for the unshareFile route object.
-+ (DBRoute * _Nonnull)DBSHARINGUnshareFile;
++ (DBRoute *)DBSHARINGUnshareFile;
 
 /// Accessor method for the unshareFolder route object.
-+ (DBRoute * _Nonnull)DBSHARINGUnshareFolder;
++ (DBRoute *)DBSHARINGUnshareFolder;
 
 /// Accessor method for the updateFileMember route object.
-+ (DBRoute * _Nonnull)DBSHARINGUpdateFileMember;
++ (DBRoute *)DBSHARINGUpdateFileMember;
 
 /// Accessor method for the updateFolderMember route object.
-+ (DBRoute * _Nonnull)DBSHARINGUpdateFolderMember;
++ (DBRoute *)DBSHARINGUpdateFolderMember;
 
 /// Accessor method for the updateFolderPolicy route object.
-+ (DBRoute * _Nonnull)DBSHARINGUpdateFolderPolicy;
++ (DBRoute *)DBSHARINGUpdateFolderPolicy;
 
 @end
+
+NS_ASSUME_NONNULL_END

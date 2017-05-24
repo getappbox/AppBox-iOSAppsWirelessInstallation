@@ -8,8 +8,10 @@
 
 @class DBTransportDefaultConfig;
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
-/// Dropbox User API Client.
+/// Dropbox User API Client for all endpoints with auth type "user".
 ///
 /// This is the SDK user's primary interface with the Dropbox API. Routes can be accessed via each "namespace" object in
 /// the instance fields of its parent, `DBUserBaseClient`. To see a full list of the User API endpoints available,
@@ -17,47 +19,52 @@
 ///
 @interface DBUserClient : DBUserBaseClient
 
+/// Identifies a unique Dropbox account. Used for the multi Dropbox account case where client objects are each
+/// associated with a particular Dropbox account.
+@property (nonatomic, readonly, copy, nullable) NSString *tokenUid;
+
 ///
 /// Convenience constructor.
 ///
 /// Uses standard network configuration parameters.
 ///
-/// @param accessToken The Dropbox OAuth2 access token used to make requests.
+/// @param accessToken The Dropbox OAuth 2.0 access token used to make requests.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessToken:(NSString * _Nonnull)accessToken;
+- (instancetype)initWithAccessToken:(NSString *)accessToken;
 
 ///
-/// Constructor for initializing an "unauthorized" client.
+/// Convenience constructor.
 ///
-/// This "unauthorized" client can be used to query endpoints that do not require an OAuth 2.0 access token as part of
-/// the authorization.
-///
+/// @param accessToken The Dropbox OAuth 2.0 access token used to make requests.
 /// @param transportConfig A wrapper around the different parameters that can be set to change network calling behavior.
 /// `DBTransportDefaultConfig` offers a number of different constructors to customize networking settings.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initAsUnauthorizedClientWithTransportConfig:(DBTransportDefaultConfig * _Nonnull)transportConfig;
+- (instancetype)initWithAccessToken:(NSString *)accessToken
+                    transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
 
 ///
 /// Full constructor.
 ///
+/// @param accessToken The Dropbox OAuth 2.0 access token used to make requests.
+/// @param tokenUid Identifies a unique Dropbox account. Used for the multi Dropbox account case where client objects
+/// are each associated with a particular Dropbox account.
 /// @param transportConfig A wrapper around the different parameters that can be set to change network calling behavior.
 /// `DBTransportDefaultConfig` offers a number of different constructors to customize networking settings.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessToken:(NSString * _Nonnull)accessToken
-                            transportConfig:(DBTransportDefaultConfig * _Nullable)transportConfig;
+- (instancetype)initWithAccessToken:(NSString *)accessToken
+                           tokenUid:(nullable NSString *)tokenUid
+                    transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
 
 ///
-/// Updates access token used to make API requests.
+/// Returns the current access token used to make API requests.
 ///
-/// @param accessToken The updated access token with which to make API calls.
-///
-- (void)updateAccessToken:(NSString * _Nonnull)accessToken;
+- (nullable NSString *)accessToken;
 
 ///
 /// Returns whether the client is authorized.
@@ -67,3 +74,5 @@
 - (BOOL)isAuthorized;
 
 @end
+
+NS_ASSUME_NONNULL_END

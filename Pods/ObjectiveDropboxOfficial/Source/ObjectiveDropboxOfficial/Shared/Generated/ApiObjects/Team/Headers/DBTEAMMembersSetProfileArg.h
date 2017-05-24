@@ -11,6 +11,8 @@
 @class DBTEAMMembersSetProfileArg;
 @class DBTEAMUserSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,28 +26,28 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersSetProfileArg : NSObject <DBSerializable>
+@interface DBTEAMMembersSetProfileArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Identity of user whose profile will be set.
-@property (nonatomic, readonly) DBTEAMUserSelectorArg * _Nonnull user;
+@property (nonatomic, readonly) DBTEAMUserSelectorArg *user;
 
 /// New email for member.
-@property (nonatomic, readonly) NSString * _Nullable dNewEmail;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewEmail;
 
 /// New external ID for member.
-@property (nonatomic, readonly) NSString * _Nullable dNewExternalId;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewExternalId;
 
 /// New given name for member.
-@property (nonatomic, readonly) NSString * _Nullable dNewGivenName;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewGivenName;
 
 /// New surname for member.
-@property (nonatomic, readonly) NSString * _Nullable dNewSurname;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewSurname;
 
 /// New persistent ID. This field only available to teams using persistent ID
 /// SAML configuration.
-@property (nonatomic, readonly) NSString * _Nullable dNewPersistentId;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewPersistentId;
 
 #pragma mark - Constructors
 
@@ -62,12 +64,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUser:(DBTEAMUserSelectorArg * _Nonnull)user
-                           dNewEmail:(NSString * _Nullable)dNewEmail
-                      dNewExternalId:(NSString * _Nullable)dNewExternalId
-                       dNewGivenName:(NSString * _Nullable)dNewGivenName
-                         dNewSurname:(NSString * _Nullable)dNewSurname
-                    dNewPersistentId:(NSString * _Nullable)dNewPersistentId;
+- (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user
+                   dNewEmail:(nullable NSString *)dNewEmail
+              dNewExternalId:(nullable NSString *)dNewExternalId
+               dNewGivenName:(nullable NSString *)dNewGivenName
+                 dNewSurname:(nullable NSString *)dNewSurname
+            dNewPersistentId:(nullable NSString *)dNewPersistentId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -77,7 +79,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUser:(DBTEAMUserSelectorArg * _Nonnull)user;
+- (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -96,7 +100,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetProfileArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersSetProfileArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersSetProfileArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetProfileArg` instances.
@@ -106,6 +110,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMembersSetProfileArg` object.
 ///
-+ (DBTEAMMembersSetProfileArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersSetProfileArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

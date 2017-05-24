@@ -12,6 +12,8 @@
 @class DBSHARINGListFileMembersIndividualResult;
 @class DBSHARINGSharingFileAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFileMembersIndividualResult : NSObject <DBSerializable>
+@interface DBSHARINGListFileMembersIndividualResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -46,12 +48,12 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
 /// The results of the query for this file if it was successful. @note Ensure
 /// the `isResult` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBSHARINGListFileMembersCountResult * _Nonnull result;
+@property (nonatomic, readonly) DBSHARINGListFileMembersCountResult *result;
 
 /// The result of the query for this file if it was an error. @note Ensure the
 /// `isAccessError` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingFileAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharingFileAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithResult:(DBSHARINGListFileMembersCountResult * _Nonnull)result;
+- (instancetype)initWithResult:(DBSHARINGListFileMembersCountResult *)result;
 
 ///
 /// Initializes union class with tag state of "access_error".
@@ -77,14 +79,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -120,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -141,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersIndividualResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFileMembersIndividualResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFileMembersIndividualResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersIndividualResult` instances.
@@ -152,6 +156,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
 /// @return An instantiation of the `DBSHARINGListFileMembersIndividualResult`
 /// object.
 ///
-+ (DBSHARINGListFileMembersIndividualResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFileMembersIndividualResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

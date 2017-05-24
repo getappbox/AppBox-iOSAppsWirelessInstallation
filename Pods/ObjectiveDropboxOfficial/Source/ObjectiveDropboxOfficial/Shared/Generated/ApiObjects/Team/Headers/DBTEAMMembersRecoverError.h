@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersRecoverError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersRecoverError : NSObject <DBSerializable>
+@interface DBTEAMMembersRecoverError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -57,7 +59,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "user_unrecoverable".
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserUnrecoverable;
+- (instancetype)initWithUserUnrecoverable;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "team_license_limit".
@@ -87,14 +89,16 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamLicenseLimit;
+- (instancetype)initWithTeamLicenseLimit;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -143,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -162,7 +166,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRecoverError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersRecoverError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersRecoverError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRecoverError` instances.
@@ -172,6 +176,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersRecoverError` object.
 ///
-+ (DBTEAMMembersRecoverError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersRecoverError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

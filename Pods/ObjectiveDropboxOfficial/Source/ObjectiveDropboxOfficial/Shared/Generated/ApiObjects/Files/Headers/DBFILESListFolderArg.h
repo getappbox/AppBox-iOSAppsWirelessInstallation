@@ -10,6 +10,8 @@
 
 @class DBFILESListFolderArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,27 +21,27 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESListFolderArg : NSObject <DBSerializable>
+@interface DBFILESListFolderArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path to the folder you want to see the contents of.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// If true, the list folder operation will be applied recursively to all
 /// subfolders and the response will contain contents of all subfolders.
-@property (nonatomic, readonly) NSNumber * _Nonnull recursive;
+@property (nonatomic, readonly) NSNumber *recursive;
 
 /// If true, `mediaInfo` in `DBFILESFileMetadata` is set for photo and video.
-@property (nonatomic, readonly) NSNumber * _Nonnull includeMediaInfo;
+@property (nonatomic, readonly) NSNumber *includeMediaInfo;
 
 /// If true, the results will include entries for files and folders that used to
 /// exist but were deleted.
-@property (nonatomic, readonly) NSNumber * _Nonnull includeDeleted;
+@property (nonatomic, readonly) NSNumber *includeDeleted;
 
 /// If true, the results will include a flag for each file indicating whether or
 /// not  that file has any explicit members.
-@property (nonatomic, readonly) NSNumber * _Nonnull includeHasExplicitSharedMembers;
+@property (nonatomic, readonly) NSNumber *includeHasExplicitSharedMembers;
 
 #pragma mark - Constructors
 
@@ -60,11 +62,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path
-                           recursive:(NSNumber * _Nullable)recursive
-                    includeMediaInfo:(NSNumber * _Nullable)includeMediaInfo
-                      includeDeleted:(NSNumber * _Nullable)includeDeleted
-     includeHasExplicitSharedMembers:(NSNumber * _Nullable)includeHasExplicitSharedMembers;
+- (instancetype)initWithPath:(NSString *)path
+                          recursive:(nullable NSNumber *)recursive
+                   includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                     includeDeleted:(nullable NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -74,7 +76,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -93,7 +97,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESListFolderArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESListFolderArg *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderArg` instances.
@@ -103,6 +107,8 @@
 ///
 /// @return An instantiation of the `DBFILESListFolderArg` object.
 ///
-+ (DBFILESListFolderArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESListFolderArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

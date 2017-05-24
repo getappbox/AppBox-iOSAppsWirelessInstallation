@@ -11,6 +11,8 @@
 
 @class DBTEAMTeamFolderArchiveArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,12 +22,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamFolderArchiveArg : DBTEAMTeamFolderIdArg <DBSerializable>
+@interface DBTEAMTeamFolderArchiveArg : DBTEAMTeamFolderIdArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Whether to force the archive to happen synchronously.
-@property (nonatomic, readonly) NSNumber * _Nonnull forceAsyncOff;
+@property (nonatomic, readonly) NSNumber *forceAsyncOff;
 
 #pragma mark - Constructors
 
@@ -37,8 +39,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolderId:(NSString * _Nonnull)teamFolderId
-                               forceAsyncOff:(NSNumber * _Nullable)forceAsyncOff;
+- (instancetype)initWithTeamFolderId:(NSString *)teamFolderId forceAsyncOff:(nullable NSNumber *)forceAsyncOff;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -48,7 +49,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolderId:(NSString * _Nonnull)teamFolderId;
+- (instancetype)initWithTeamFolderId:(NSString *)teamFolderId;
 
 @end
 
@@ -67,7 +68,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderArchiveArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamFolderArchiveArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamFolderArchiveArg *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderArchiveArg` instances.
@@ -77,6 +78,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderArchiveArg` object.
 ///
-+ (DBTEAMTeamFolderArchiveArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamFolderArchiveArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

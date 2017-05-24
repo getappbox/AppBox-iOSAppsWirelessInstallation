@@ -10,6 +10,8 @@
 
 @class DBSHARINGLinkAction;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,13 +23,16 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGLinkAction : NSObject <DBSerializable>
+@interface DBSHARINGLinkAction : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The `DBSHARINGLinkActionTag` enum type represents the possible tag states
 /// with which the `DBSHARINGLinkAction` union can exist.
 typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
+  /// Change the access level of the link.
+  DBSHARINGLinkActionChangeAccessLevel,
+
   /// Change the audience of the link.
   DBSHARINGLinkActionChangeAudience,
 
@@ -54,6 +59,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 #pragma mark - Constructors
 
 ///
+/// Initializes union class with tag state of "change_access_level".
+///
+/// Description of the "change_access_level" tag state: Change the access level
+/// of the link.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithChangeAccessLevel;
+
+///
 /// Initializes union class with tag state of "change_audience".
 ///
 /// Description of the "change_audience" tag state: Change the audience of the
@@ -61,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithChangeAudience;
+- (instancetype)initWithChangeAudience;
 
 ///
 /// Initializes union class with tag state of "remove_expiry".
@@ -71,7 +86,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemoveExpiry;
+- (instancetype)initWithRemoveExpiry;
 
 ///
 /// Initializes union class with tag state of "remove_password".
@@ -81,7 +96,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemovePassword;
+- (instancetype)initWithRemovePassword;
 
 ///
 /// Initializes union class with tag state of "set_expiry".
@@ -91,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSetExpiry;
+- (instancetype)initWithSetExpiry;
 
 ///
 /// Initializes union class with tag state of "set_password".
@@ -101,16 +116,27 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSetPassword;
+- (instancetype)initWithSetPassword;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "change_access_level".
+///
+/// @return Whether the union's current tag state has value
+/// "change_access_level".
+///
+- (BOOL)isChangeAccessLevel;
 
 ///
 /// Retrieves whether the union's current tag state has value "change_audience".
@@ -159,7 +185,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -178,7 +204,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkAction` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGLinkAction * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGLinkAction *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkAction` instances.
@@ -188,6 +214,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An instantiation of the `DBSHARINGLinkAction` object.
 ///
-+ (DBSHARINGLinkAction * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGLinkAction *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

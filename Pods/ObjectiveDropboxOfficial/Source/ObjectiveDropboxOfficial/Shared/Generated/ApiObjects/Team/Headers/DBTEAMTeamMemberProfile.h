@@ -14,6 +14,8 @@
 @class DBTEAMTeamMembershipType;
 @class DBUSERSName;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,12 +27,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMTeamMemberProfile : DBTEAMMemberProfile <DBSerializable>
+@interface DBTEAMTeamMemberProfile : DBTEAMMemberProfile <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// List of group IDs of groups that the user belongs to.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull groups;
+@property (nonatomic, readonly) NSArray<NSString *> *groups;
 
 #pragma mark - Constructors
 
@@ -57,17 +59,17 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamMemberId:(NSString * _Nonnull)teamMemberId
-                                       email:(NSString * _Nonnull)email
-                               emailVerified:(NSNumber * _Nonnull)emailVerified
-                                      status:(DBTEAMTeamMemberStatus * _Nonnull)status
-                                        name:(DBUSERSName * _Nonnull)name
-                              membershipType:(DBTEAMTeamMembershipType * _Nonnull)membershipType
-                                      groups:(NSArray<NSString *> * _Nonnull)groups
-                                  externalId:(NSString * _Nullable)externalId
-                                   accountId:(NSString * _Nullable)accountId
-                                    joinedOn:(NSDate * _Nullable)joinedOn
-                                persistentId:(NSString * _Nullable)persistentId;
+- (instancetype)initWithTeamMemberId:(NSString *)teamMemberId
+                               email:(NSString *)email
+                       emailVerified:(NSNumber *)emailVerified
+                              status:(DBTEAMTeamMemberStatus *)status
+                                name:(DBUSERSName *)name
+                      membershipType:(DBTEAMTeamMembershipType *)membershipType
+                              groups:(NSArray<NSString *> *)groups
+                          externalId:(nullable NSString *)externalId
+                           accountId:(nullable NSString *)accountId
+                            joinedOn:(nullable NSDate *)joinedOn
+                        persistentId:(nullable NSString *)persistentId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -85,13 +87,13 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamMemberId:(NSString * _Nonnull)teamMemberId
-                                       email:(NSString * _Nonnull)email
-                               emailVerified:(NSNumber * _Nonnull)emailVerified
-                                      status:(DBTEAMTeamMemberStatus * _Nonnull)status
-                                        name:(DBUSERSName * _Nonnull)name
-                              membershipType:(DBTEAMTeamMembershipType * _Nonnull)membershipType
-                                      groups:(NSArray<NSString *> * _Nonnull)groups;
+- (instancetype)initWithTeamMemberId:(NSString *)teamMemberId
+                               email:(NSString *)email
+                       emailVerified:(NSNumber *)emailVerified
+                              status:(DBTEAMTeamMemberStatus *)status
+                                name:(DBUSERSName *)name
+                      membershipType:(DBTEAMTeamMembershipType *)membershipType
+                              groups:(NSArray<NSString *> *)groups;
 
 @end
 
@@ -110,7 +112,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamMemberProfile` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMTeamMemberProfile * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMTeamMemberProfile *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamMemberProfile` instances.
@@ -120,6 +122,8 @@
 ///
 /// @return An instantiation of the `DBTEAMTeamMemberProfile` object.
 ///
-+ (DBTEAMTeamMemberProfile * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMTeamMemberProfile *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

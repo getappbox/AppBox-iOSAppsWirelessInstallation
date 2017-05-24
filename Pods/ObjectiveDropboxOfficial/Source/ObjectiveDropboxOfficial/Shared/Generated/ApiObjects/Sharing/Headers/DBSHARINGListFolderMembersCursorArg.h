@@ -11,6 +11,8 @@
 @class DBSHARINGListFolderMembersCursorArg;
 @class DBSHARINGMemberAction;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,18 +22,18 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFolderMembersCursorArg : NSObject <DBSerializable>
+@interface DBSHARINGListFolderMembersCursorArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// This is a list indicating whether each returned member will include a
 /// boolean value `allow` in `DBSHARINGMemberPermission` that describes whether
 /// the current user can perform the MemberAction on the member.
-@property (nonatomic, readonly) NSArray<DBSHARINGMemberAction *> * _Nullable actions;
+@property (nonatomic, readonly, nullable) NSArray<DBSHARINGMemberAction *> *actions;
 
 /// The maximum number of results that include members, groups and invitees to
 /// return per request.
-@property (nonatomic, readonly) NSNumber * _Nonnull limit;
+@property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
 
@@ -47,8 +49,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithActions:(NSArray<DBSHARINGMemberAction *> * _Nullable)actions
-                                  limit:(NSNumber * _Nullable)limit;
+- (instancetype)initWithActions:(nullable NSArray<DBSHARINGMemberAction *> *)actions limit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,7 +58,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -77,7 +80,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFolderMembersCursorArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFolderMembersCursorArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFolderMembersCursorArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFolderMembersCursorArg` instances.
@@ -88,6 +91,8 @@
 /// @return An instantiation of the `DBSHARINGListFolderMembersCursorArg`
 /// object.
 ///
-+ (DBSHARINGListFolderMembersCursorArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFolderMembersCursorArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

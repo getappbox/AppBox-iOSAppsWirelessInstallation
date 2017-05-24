@@ -10,6 +10,8 @@
 
 @class DBTEAMRevokeDeviceSessionBatchError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMRevokeDeviceSessionBatchError : NSObject <DBSerializable>
+@interface DBTEAMRevokeDeviceSessionBatchError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -42,7 +44,9 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionBatchErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -58,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionBatchErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -78,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionBatchError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMRevokeDeviceSessionBatchError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionBatchError *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionBatchError` instances.
@@ -89,6 +93,8 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionBatchErrorTag) {
 /// @return An instantiation of the `DBTEAMRevokeDeviceSessionBatchError`
 /// object.
 ///
-+ (DBTEAMRevokeDeviceSessionBatchError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMRevokeDeviceSessionBatchError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 @class DBSHARINGRequestedVisibility;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -25,7 +27,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRequestedVisibility : NSObject <DBSerializable>
+@interface DBSHARINGRequestedVisibility : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -57,7 +59,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedVisibilityTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPublic;
+- (instancetype)initWithPublic;
 
 ///
 /// Initializes union class with tag state of "team_only".
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedVisibilityTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamOnly;
+- (instancetype)initWithTeamOnly;
 
 ///
 /// Initializes union class with tag state of "password".
@@ -77,7 +79,9 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedVisibilityTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPassword;
+- (instancetype)initWithPassword;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -107,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedVisibilityTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -127,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedVisibilityTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRequestedVisibility` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRequestedVisibility * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRequestedVisibility *)instance;
 
 ///
 /// Deserializes `DBSHARINGRequestedVisibility` instances.
@@ -137,6 +141,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedVisibilityTag) {
 ///
 /// @return An instantiation of the `DBSHARINGRequestedVisibility` object.
 ///
-+ (DBSHARINGRequestedVisibility * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRequestedVisibility *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

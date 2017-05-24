@@ -12,6 +12,8 @@
 @class DBFILESDeleteBatchJobStatus;
 @class DBFILESDeleteBatchResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESDeleteBatchJobStatus : NSObject <DBSerializable>
+@interface DBFILESDeleteBatchJobStatus : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -47,11 +49,11 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 
 /// The batch delete has finished. @note Ensure the `isComplete` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESDeleteBatchResult * _Nonnull complete;
+@property (nonatomic, readonly) DBFILESDeleteBatchResult *complete;
 
 /// The batch delete has failed. @note Ensure the `isFailed` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESDeleteBatchError * _Nonnull failed;
+@property (nonatomic, readonly) DBFILESDeleteBatchError *failed;
 
 #pragma mark - Constructors
 
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInProgress;
+- (instancetype)initWithInProgress;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete:(DBFILESDeleteBatchResult * _Nonnull)complete;
+- (instancetype)initWithComplete:(DBFILESDeleteBatchResult *)complete;
 
 ///
 /// Initializes union class with tag state of "failed".
@@ -85,14 +87,16 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailed:(DBFILESDeleteBatchError * _Nonnull)failed;
+- (instancetype)initWithFailed:(DBFILESDeleteBatchError *)failed;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -135,7 +139,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -154,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchJobStatus` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESDeleteBatchJobStatus * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESDeleteBatchJobStatus *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchJobStatus` instances.
@@ -164,6 +168,8 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 ///
 /// @return An instantiation of the `DBFILESDeleteBatchJobStatus` object.
 ///
-+ (DBFILESDeleteBatchJobStatus * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESDeleteBatchJobStatus *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

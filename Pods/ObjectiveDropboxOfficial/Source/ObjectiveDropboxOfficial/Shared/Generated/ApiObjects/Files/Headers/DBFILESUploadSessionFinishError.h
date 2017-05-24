@@ -12,6 +12,8 @@
 @class DBFILESUploadSessionLookupError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionFinishError : NSObject <DBSerializable>
+@interface DBFILESUploadSessionFinishError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -39,6 +41,10 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
   /// folder.
   DBFILESUploadSessionFinishErrorTooManySharedFolderTargets,
 
+  /// There are too many write operations happening in the user's Dropbox. You
+  /// should retry uploading this file.
+  DBFILESUploadSessionFinishErrorTooManyWriteOperations,
+
   /// (no description).
   DBFILESUploadSessionFinishErrorOther,
 
@@ -50,12 +56,12 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 /// The session arguments are incorrect; the value explains the reason. @note
 /// Ensure the `isLookupFailed` method returns true before accessing, otherwise
 /// a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESUploadSessionLookupError * _Nonnull lookupFailed;
+@property (nonatomic, readonly) DBFILESUploadSessionLookupError *lookupFailed;
 
 /// Unable to save the uploaded contents to a file. @note Ensure the `isPath`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESWriteError *path;
 
 #pragma mark - Constructors
 
@@ -70,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLookupFailed:(DBFILESUploadSessionLookupError * _Nonnull)lookupFailed;
+- (instancetype)initWithLookupFailed:(DBFILESUploadSessionLookupError *)lookupFailed;
 
 ///
 /// Initializes union class with tag state of "path".
@@ -82,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESWriteError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESWriteError *)path;
 
 ///
 /// Initializes union class with tag state of "too_many_shared_folder_targets".
@@ -93,14 +99,27 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManySharedFolderTargets;
+- (instancetype)initWithTooManySharedFolderTargets;
+
+///
+/// Initializes union class with tag state of "too_many_write_operations".
+///
+/// Description of the "too_many_write_operations" tag state: There are too many
+/// write operations happening in the user's Dropbox. You should retry uploading
+/// this file.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTooManyWriteOperations;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -134,6 +153,15 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 - (BOOL)isTooManySharedFolderTargets;
 
 ///
+/// Retrieves whether the union's current tag state has value
+/// "too_many_write_operations".
+///
+/// @return Whether the union's current tag state has value
+/// "too_many_write_operations".
+///
+- (BOOL)isTooManyWriteOperations;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -145,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -165,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionFinishError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionFinishError *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishError` instances.
@@ -175,6 +203,8 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESUploadSessionFinishError` object.
 ///
-+ (DBFILESUploadSessionFinishError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionFinishError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

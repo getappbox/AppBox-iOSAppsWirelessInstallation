@@ -10,6 +10,8 @@
 
 @class DBSHARINGMemberAction;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGMemberAction : NSObject <DBSerializable>
+@interface DBSHARINGMemberAction : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLeaveACopy;
+- (instancetype)initWithLeaveACopy;
 
 ///
 /// Initializes union class with tag state of "make_editor".
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMakeEditor;
+- (instancetype)initWithMakeEditor;
 
 ///
 /// Initializes union class with tag state of "make_owner".
@@ -84,7 +86,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMakeOwner;
+- (instancetype)initWithMakeOwner;
 
 ///
 /// Initializes union class with tag state of "make_viewer".
@@ -94,7 +96,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMakeViewer;
+- (instancetype)initWithMakeViewer;
 
 ///
 /// Initializes union class with tag state of "make_viewer_no_comment".
@@ -104,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMakeViewerNoComment;
+- (instancetype)initWithMakeViewerNoComment;
 
 ///
 /// Initializes union class with tag state of "remove".
@@ -113,14 +115,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemove;
+- (instancetype)initWithRemove;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -180,7 +184,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -199,7 +203,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberAction` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGMemberAction * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGMemberAction *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberAction` instances.
@@ -209,6 +213,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 ///
 /// @return An instantiation of the `DBSHARINGMemberAction` object.
 ///
-+ (DBSHARINGMemberAction * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGMemberAction *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -12,6 +12,8 @@
 @class DBTEAMMembersRemoveArg;
 @class DBTEAMUserSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,24 +23,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersRemoveArg : DBTEAMMembersDeactivateArg <DBSerializable>
+@interface DBTEAMMembersRemoveArg : DBTEAMMembersDeactivateArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// If provided, files from the deleted member account will be transferred to
 /// this user.
-@property (nonatomic, readonly) DBTEAMUserSelectorArg * _Nullable transferDestId;
+@property (nonatomic, readonly, nullable) DBTEAMUserSelectorArg *transferDestId;
 
 /// If provided, errors during the transfer process will be sent via email to
 /// this user. If the transfer_dest_id argument was provided, then this argument
 /// must be provided as well.
-@property (nonatomic, readonly) DBTEAMUserSelectorArg * _Nullable transferAdminId;
+@property (nonatomic, readonly, nullable) DBTEAMUserSelectorArg *transferAdminId;
 
 /// Downgrade the member to a Basic account. The user will retain the email
 /// address associated with their Dropbox  account and data in their account
 /// that is not restricted to team members. In order to keep the account the
 /// argument wipe_data should be set to False.
-@property (nonatomic, readonly) NSNumber * _Nonnull keepAccount;
+@property (nonatomic, readonly) NSNumber *keepAccount;
 
 #pragma mark - Constructors
 
@@ -60,11 +62,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUser:(DBTEAMUserSelectorArg * _Nonnull)user
-                            wipeData:(NSNumber * _Nullable)wipeData
-                      transferDestId:(DBTEAMUserSelectorArg * _Nullable)transferDestId
-                     transferAdminId:(DBTEAMUserSelectorArg * _Nullable)transferAdminId
-                         keepAccount:(NSNumber * _Nullable)keepAccount;
+- (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user
+                    wipeData:(nullable NSNumber *)wipeData
+              transferDestId:(nullable DBTEAMUserSelectorArg *)transferDestId
+             transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
+                 keepAccount:(nullable NSNumber *)keepAccount;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -74,7 +76,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUser:(DBTEAMUserSelectorArg * _Nonnull)user;
+- (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user;
 
 @end
 
@@ -93,7 +95,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRemoveArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersRemoveArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersRemoveArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRemoveArg` instances.
@@ -103,6 +105,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMembersRemoveArg` object.
 ///
-+ (DBTEAMMembersRemoveArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersRemoveArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

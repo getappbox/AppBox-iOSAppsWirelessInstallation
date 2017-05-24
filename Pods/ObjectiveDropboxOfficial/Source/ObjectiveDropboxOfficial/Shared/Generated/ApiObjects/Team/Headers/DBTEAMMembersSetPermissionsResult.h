@@ -11,6 +11,8 @@
 @class DBTEAMAdminTier;
 @class DBTEAMMembersSetPermissionsResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersSetPermissionsResult : NSObject <DBSerializable>
+@interface DBTEAMMembersSetPermissionsResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The member ID of the user to which the change was applied.
-@property (nonatomic, readonly, copy) NSString * _Nonnull teamMemberId;
+@property (nonatomic, readonly, copy) NSString *teamMemberId;
 
 /// The role after the change.
-@property (nonatomic, readonly) DBTEAMAdminTier * _Nonnull role;
+@property (nonatomic, readonly) DBTEAMAdminTier *role;
 
 #pragma mark - Constructors
 
@@ -41,7 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamMemberId:(NSString * _Nonnull)teamMemberId role:(DBTEAMAdminTier * _Nonnull)role;
+- (instancetype)initWithTeamMemberId:(NSString *)teamMemberId role:(DBTEAMAdminTier *)role;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -61,7 +65,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetPermissionsResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersSetPermissionsResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersSetPermissionsResult *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetPermissionsResult` instances.
@@ -71,6 +75,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMembersSetPermissionsResult` object.
 ///
-+ (DBTEAMMembersSetPermissionsResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersSetPermissionsResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

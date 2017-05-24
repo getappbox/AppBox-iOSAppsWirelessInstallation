@@ -10,6 +10,8 @@
 
 @class DBSHARINGPermissionDeniedReason;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGPermissionDeniedReason : NSObject <DBSerializable>
+@interface DBSHARINGPermissionDeniedReason : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -86,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotSameTeamAsOwner;
+- (instancetype)initWithUserNotSameTeamAsOwner;
 
 ///
 /// Initializes union class with tag state of "user_not_allowed_by_owner".
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotAllowedByOwner;
+- (instancetype)initWithUserNotAllowedByOwner;
 
 ///
 /// Initializes union class with tag state of "target_is_indirect_member".
@@ -106,7 +108,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTargetIsIndirectMember;
+- (instancetype)initWithTargetIsIndirectMember;
 
 ///
 /// Initializes union class with tag state of "target_is_owner".
@@ -116,7 +118,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTargetIsOwner;
+- (instancetype)initWithTargetIsOwner;
 
 ///
 /// Initializes union class with tag state of "target_is_self".
@@ -125,7 +127,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTargetIsSelf;
+- (instancetype)initWithTargetIsSelf;
 
 ///
 /// Initializes union class with tag state of "target_not_active".
@@ -135,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTargetNotActive;
+- (instancetype)initWithTargetNotActive;
 
 ///
 /// Initializes union class with tag state of "folder_is_limited_team_folder".
@@ -145,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFolderIsLimitedTeamFolder;
+- (instancetype)initWithFolderIsLimitedTeamFolder;
 
 ///
 /// Initializes union class with tag state of "owner_not_on_team".
@@ -155,7 +157,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOwnerNotOnTeam;
+- (instancetype)initWithOwnerNotOnTeam;
 
 ///
 /// Initializes union class with tag state of "permission_denied".
@@ -165,7 +167,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPermissionDenied;
+- (instancetype)initWithPermissionDenied;
 
 ///
 /// Initializes union class with tag state of "restricted_by_team".
@@ -175,7 +177,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRestrictedByTeam;
+- (instancetype)initWithRestrictedByTeam;
 
 ///
 /// Initializes union class with tag state of "user_account_type".
@@ -185,7 +187,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserAccountType;
+- (instancetype)initWithUserAccountType;
 
 ///
 /// Initializes union class with tag state of "user_not_on_team".
@@ -195,7 +197,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotOnTeam;
+- (instancetype)initWithUserNotOnTeam;
 
 ///
 /// Initializes union class with tag state of "folder_is_inside_shared_folder".
@@ -205,14 +207,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFolderIsInsideSharedFolder;
+- (instancetype)initWithFolderIsInsideSharedFolder;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -336,7 +340,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -356,7 +360,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGPermissionDeniedReason` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGPermissionDeniedReason * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGPermissionDeniedReason *)instance;
 
 ///
 /// Deserializes `DBSHARINGPermissionDeniedReason` instances.
@@ -366,6 +370,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An instantiation of the `DBSHARINGPermissionDeniedReason` object.
 ///
-+ (DBSHARINGPermissionDeniedReason * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGPermissionDeniedReason *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

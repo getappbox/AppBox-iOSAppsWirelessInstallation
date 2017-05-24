@@ -4,6 +4,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Configuration class for `DBTransportBaseClient`.
 ///
@@ -11,18 +13,18 @@
 
 /// The consumer app key associated with the app that is integrating with the Dropbox API. Here, app key is used for
 /// querying endpoints the have "app auth" authentication type.
-@property (nonatomic, readonly, copy) NSString * _Nullable appKey;
+@property (nonatomic, readonly, copy, nullable) NSString *appKey;
 
 /// The consumer app secret associated with the app that is integrating with the Dropbox API. Here, app key is used for
 /// querying endpoints the have "app auth" authentication type.
-@property (nonatomic, readonly, copy) NSString * _Nullable appSecret;
+@property (nonatomic, readonly, copy, nullable) NSString *appSecret;
 
 /// The user agent associated with all networking requests. Used for server logging.
-@property (nonatomic, readonly, copy) NSString * _Nonnull userAgent;
+@property (nonatomic, readonly, copy, nullable) NSString *userAgent;
 
 /// An additional authentication header field used when a team app with the appropriate permissions "performs" user API
 /// actions on behalf of a team member.
-@property (nonatomic, readonly, copy) NSString * _Nullable asMemberId;
+@property (nonatomic, readonly, copy, nullable) NSString *asMemberId;
 
 ///
 /// Convenience constructor.
@@ -33,7 +35,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAppKey:(NSString * _Nonnull)appKey userAgent:(NSString * _Nullable)userAgent;
+- (instancetype)initWithAppKey:(NSString *)appKey userAgent:(nullable NSString *)userAgent;
 
 ///
 /// Convenience constructor.
@@ -46,9 +48,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAppKey:(NSString * _Nonnull)appKey
-                             appSecret:(NSString * _Nullable)appSecret
-                             userAgent:(NSString * _Nullable)userAgent;
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     appSecret:(nullable NSString *)appSecret
+                     userAgent:(nullable NSString *)userAgent;
 
 ///
 /// Full constructor.
@@ -63,9 +65,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAppKey:(NSString * _Nonnull)appKey
-                             appSecret:(NSString * _Nullable)appSecret
-                             userAgent:(NSString * _Nullable)userAgent
-                            asMemberId:(NSString * _Nullable)asMemberId;
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     appSecret:(nullable NSString *)appSecret
+                     userAgent:(nullable NSString *)userAgent
+                    asMemberId:(nullable NSString *)asMemberId;
 
 @end
+
+NS_ASSUME_NONNULL_END

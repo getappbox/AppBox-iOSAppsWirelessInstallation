@@ -13,6 +13,8 @@
 @class DBTEAMGroupSelector;
 @class DBTEAMUserSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,15 +24,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMembersRemoveArg : DBTEAMIncludeMembersArg <DBSerializable>
+@interface DBTEAMGroupMembersRemoveArg : DBTEAMIncludeMembersArg <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Group from which users will be removed.
-@property (nonatomic, readonly) DBTEAMGroupSelector * _Nonnull group;
+@property (nonatomic, readonly) DBTEAMGroupSelector *group;
 
 /// List of users to be removed from the group.
-@property (nonatomic, readonly) NSArray<DBTEAMUserSelectorArg *> * _Nonnull users;
+@property (nonatomic, readonly) NSArray<DBTEAMUserSelectorArg *> *users;
 
 #pragma mark - Constructors
 
@@ -45,9 +47,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                                users:(NSArray<DBTEAMUserSelectorArg *> * _Nonnull)users
-                        returnMembers:(NSNumber * _Nullable)returnMembers;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group
+                        users:(NSArray<DBTEAMUserSelectorArg *> *)users
+                returnMembers:(nullable NSNumber *)returnMembers;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,8 +60,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                                users:(NSArray<DBTEAMUserSelectorArg *> * _Nonnull)users;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group users:(NSArray<DBTEAMUserSelectorArg *> *)users;
 
 @end
 
@@ -78,7 +79,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersRemoveArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMembersRemoveArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMembersRemoveArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersRemoveArg` instances.
@@ -88,6 +89,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersRemoveArg` object.
 ///
-+ (DBTEAMGroupMembersRemoveArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMembersRemoveArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

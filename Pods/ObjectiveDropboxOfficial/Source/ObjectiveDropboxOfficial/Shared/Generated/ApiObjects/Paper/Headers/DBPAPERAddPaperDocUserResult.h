@@ -10,6 +10,8 @@
 
 @class DBPAPERAddPaperDocUserResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERAddPaperDocUserResult : NSObject <DBSerializable>
+@interface DBPAPERAddPaperDocUserResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSuccess;
+- (instancetype)initWithSuccess;
 
 ///
 /// Initializes union class with tag state of "unknown_error".
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnknownError;
+- (instancetype)initWithUnknownError;
 
 ///
 /// Initializes union class with tag state of "sharing_outside_team_disabled".
@@ -87,7 +89,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharingOutsideTeamDisabled;
+- (instancetype)initWithSharingOutsideTeamDisabled;
 
 ///
 /// Initializes union class with tag state of "daily_limit_reached".
@@ -97,7 +99,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDailyLimitReached;
+- (instancetype)initWithDailyLimitReached;
 
 ///
 /// Initializes union class with tag state of "user_is_owner".
@@ -107,7 +109,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserIsOwner;
+- (instancetype)initWithUserIsOwner;
 
 ///
 /// Initializes union class with tag state of "failed_user_data_retrieval".
@@ -117,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailedUserDataRetrieval;
+- (instancetype)initWithFailedUserDataRetrieval;
 
 ///
 /// Initializes union class with tag state of "permission_already_granted".
@@ -127,14 +129,16 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPermissionAlreadyGranted;
+- (instancetype)initWithPermissionAlreadyGranted;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -207,7 +211,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -227,7 +231,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERAddPaperDocUserResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERAddPaperDocUserResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERAddPaperDocUserResult *)instance;
 
 ///
 /// Deserializes `DBPAPERAddPaperDocUserResult` instances.
@@ -237,6 +241,8 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An instantiation of the `DBPAPERAddPaperDocUserResult` object.
 ///
-+ (DBPAPERAddPaperDocUserResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERAddPaperDocUserResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

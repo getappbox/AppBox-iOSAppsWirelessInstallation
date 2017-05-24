@@ -12,6 +12,8 @@
 @class DBSHARINGMountFolderError;
 @class DBSHARINGSharedFolderAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGMountFolderError : NSObject <DBSerializable>
+@interface DBSHARINGMountFolderError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -59,12 +61,12 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 /// The current user does not have enough space to mount the shared folder.
 /// @note Ensure the `isInsufficientQuota` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGInsufficientQuotaAmounts * _Nonnull insufficientQuota;
+@property (nonatomic, readonly) DBSHARINGInsufficientQuotaAmounts *insufficientQuota;
 
 #pragma mark - Constructors
 
@@ -75,7 +77,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "inside_shared_folder".
@@ -85,7 +87,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsideSharedFolder;
+- (instancetype)initWithInsideSharedFolder;
 
 ///
 /// Initializes union class with tag state of "insufficient_quota".
@@ -98,7 +100,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInsufficientQuota:(DBSHARINGInsufficientQuotaAmounts * _Nonnull)insufficientQuota;
+- (instancetype)initWithInsufficientQuota:(DBSHARINGInsufficientQuotaAmounts *)insufficientQuota;
 
 ///
 /// Initializes union class with tag state of "already_mounted".
@@ -108,7 +110,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAlreadyMounted;
+- (instancetype)initWithAlreadyMounted;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -118,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "not_mountable".
@@ -129,14 +131,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotMountable;
+- (instancetype)initWithNotMountable;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -204,7 +208,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -223,7 +227,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMountFolderError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGMountFolderError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGMountFolderError *)instance;
 
 ///
 /// Deserializes `DBSHARINGMountFolderError` instances.
@@ -233,6 +237,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGMountFolderError` object.
 ///
-+ (DBSHARINGMountFolderError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGMountFolderError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

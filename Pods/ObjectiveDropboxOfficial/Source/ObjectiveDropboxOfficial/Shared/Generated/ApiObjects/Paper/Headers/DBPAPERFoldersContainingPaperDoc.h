@@ -12,6 +12,8 @@
 @class DBPAPERFolderSharingPolicyType;
 @class DBPAPERFoldersContainingPaperDoc;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,15 +25,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERFoldersContainingPaperDoc : NSObject <DBSerializable>
+@interface DBPAPERFoldersContainingPaperDoc : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The sharing policy of the folder containing the Paper doc.
-@property (nonatomic, readonly) DBPAPERFolderSharingPolicyType * _Nullable folderSharingPolicyType;
+@property (nonatomic, readonly, nullable) DBPAPERFolderSharingPolicyType *folderSharingPolicyType;
 
 /// The folder path. If present the first folder is the root folder.
-@property (nonatomic, readonly) NSArray<DBPAPERFolder *> * _Nullable folders;
+@property (nonatomic, readonly, nullable) NSArray<DBPAPERFolder *> *folders;
 
 #pragma mark - Constructors
 
@@ -45,9 +47,8 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFolderSharingPolicyType:
-                            (DBPAPERFolderSharingPolicyType * _Nullable)folderSharingPolicyType
-                                                folders:(NSArray<DBPAPERFolder *> * _Nullable)folders;
+- (instancetype)initWithFolderSharingPolicyType:(nullable DBPAPERFolderSharingPolicyType *)folderSharingPolicyType
+                                        folders:(nullable NSArray<DBPAPERFolder *> *)folders;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -56,7 +57,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -76,7 +79,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERFoldersContainingPaperDoc` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERFoldersContainingPaperDoc * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERFoldersContainingPaperDoc *)instance;
 
 ///
 /// Deserializes `DBPAPERFoldersContainingPaperDoc` instances.
@@ -86,6 +89,8 @@
 ///
 /// @return An instantiation of the `DBPAPERFoldersContainingPaperDoc` object.
 ///
-+ (DBPAPERFoldersContainingPaperDoc * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERFoldersContainingPaperDoc *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

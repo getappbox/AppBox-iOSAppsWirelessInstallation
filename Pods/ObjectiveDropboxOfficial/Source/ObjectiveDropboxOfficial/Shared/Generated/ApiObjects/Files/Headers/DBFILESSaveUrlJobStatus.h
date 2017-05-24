@@ -12,6 +12,8 @@
 @class DBFILESSaveUrlError;
 @class DBFILESSaveUrlJobStatus;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSaveUrlJobStatus : NSObject <DBSerializable>
+@interface DBFILESSaveUrlJobStatus : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -45,11 +47,11 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 /// Metadata of the file where the URL is saved to. @note Ensure the
 /// `isComplete` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBFILESFileMetadata * _Nonnull complete;
+@property (nonatomic, readonly) DBFILESFileMetadata *complete;
 
 /// (no description). @note Ensure the `isFailed` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESSaveUrlError * _Nonnull failed;
+@property (nonatomic, readonly) DBFILESSaveUrlError *failed;
 
 #pragma mark - Constructors
 
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInProgress;
+- (instancetype)initWithInProgress;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -73,7 +75,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete:(DBFILESFileMetadata * _Nonnull)complete;
+- (instancetype)initWithComplete:(DBFILESFileMetadata *)complete;
 
 ///
 /// Initializes union class with tag state of "failed".
@@ -82,7 +84,9 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFailed:(DBFILESSaveUrlError * _Nonnull)failed;
+- (instancetype)initWithFailed:(DBFILESSaveUrlError *)failed;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -118,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -137,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveUrlJobStatus` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSaveUrlJobStatus * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSaveUrlJobStatus *)instance;
 
 ///
 /// Deserializes `DBFILESSaveUrlJobStatus` instances.
@@ -147,6 +151,8 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 ///
 /// @return An instantiation of the `DBFILESSaveUrlJobStatus` object.
 ///
-+ (DBFILESSaveUrlJobStatus * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSaveUrlJobStatus *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

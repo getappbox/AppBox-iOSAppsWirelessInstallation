@@ -11,6 +11,8 @@
 @class DBFILESGetCopyReferenceResult;
 @class DBFILESMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,19 +22,19 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESGetCopyReferenceResult : NSObject <DBSerializable>
+@interface DBFILESGetCopyReferenceResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Metadata of the file or folder.
-@property (nonatomic, readonly) DBFILESMetadata * _Nonnull metadata;
+@property (nonatomic, readonly) DBFILESMetadata *metadata;
 
 /// A copy reference to the file or folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull dCopyReference;
+@property (nonatomic, readonly, copy) NSString *dCopyReference;
 
 /// The expiration date of the copy reference. This value is currently set to be
 /// far enough in the future so that expiration is effectively not an issue.
-@property (nonatomic, readonly) NSDate * _Nonnull expires;
+@property (nonatomic, readonly) NSDate *expires;
 
 #pragma mark - Constructors
 
@@ -47,9 +49,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMetadata:(DBFILESMetadata * _Nonnull)metadata
-                          dCopyReference:(NSString * _Nonnull)dCopyReference
-                                 expires:(NSDate * _Nonnull)expires;
+- (instancetype)initWithMetadata:(DBFILESMetadata *)metadata
+                  dCopyReference:(NSString *)dCopyReference
+                         expires:(NSDate *)expires;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -69,7 +73,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetCopyReferenceResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESGetCopyReferenceResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESGetCopyReferenceResult *)instance;
 
 ///
 /// Deserializes `DBFILESGetCopyReferenceResult` instances.
@@ -79,6 +83,8 @@
 ///
 /// @return An instantiation of the `DBFILESGetCopyReferenceResult` object.
 ///
-+ (DBFILESGetCopyReferenceResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESGetCopyReferenceResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

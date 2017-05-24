@@ -11,6 +11,8 @@
 @class DBSHARINGAddFolderMemberArg;
 @class DBSHARINGAddMember;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,23 +22,23 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGAddFolderMemberArg : NSObject <DBSerializable>
+@interface DBSHARINGAddFolderMemberArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID for the shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 /// The intended list of members to add.  Added members will receive invites to
 /// join the shared folder.
-@property (nonatomic, readonly) NSArray<DBSHARINGAddMember *> * _Nonnull members;
+@property (nonatomic, readonly) NSArray<DBSHARINGAddMember *> *members;
 
 /// Whether added members should be notified via email and device notifications
 /// of their invite.
-@property (nonatomic, readonly) NSNumber * _Nonnull quiet;
+@property (nonatomic, readonly) NSNumber *quiet;
 
 /// Optional message to display to added members in their invitation.
-@property (nonatomic, readonly) NSString * _Nullable customMessage;
+@property (nonatomic, readonly, copy, nullable) NSString *customMessage;
 
 #pragma mark - Constructors
 
@@ -53,10 +55,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId
-                                       members:(NSArray<DBSHARINGAddMember *> * _Nonnull)members
-                                         quiet:(NSNumber * _Nullable)quiet
-                                 customMessage:(NSString * _Nullable)customMessage;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId
+                               members:(NSArray<DBSHARINGAddMember *> *)members
+                                 quiet:(nullable NSNumber *)quiet
+                         customMessage:(nullable NSString *)customMessage;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -68,8 +70,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId
-                                       members:(NSArray<DBSHARINGAddMember *> * _Nonnull)members;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId members:(NSArray<DBSHARINGAddMember *> *)members;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -88,7 +91,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddFolderMemberArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGAddFolderMemberArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGAddFolderMemberArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddFolderMemberArg` instances.
@@ -98,6 +101,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGAddFolderMemberArg` object.
 ///
-+ (DBSHARINGAddFolderMemberArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGAddFolderMemberArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

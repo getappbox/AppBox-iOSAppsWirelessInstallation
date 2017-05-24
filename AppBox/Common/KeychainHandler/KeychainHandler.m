@@ -123,6 +123,19 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
     return result;
 }
 
+#pragma mark - Install Certificates
++ (void)installPrivateKeyFromPath:(NSString *)path withPassword:(NSString *)password {
+    NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:path, nil];
+    if (password != nil && password.length > 0){
+        [arguments addObject: password];
+    }
+    [TaskHandler runTaskWithName:@"InstallPrivateKey" andArgument:arguments taskLaunch:^(NSTask *task) {
+        
+    } outputStream:^(NSTask *task, NSString *output) {
+        NSLog(@"%@", output);
+    }];
+}
+
 
 #pragma mark - Remove All Cache, Cookies and Credentials
 + (void)removeAllStoredCredentials{

@@ -10,6 +10,8 @@
 
 @class DBPAPERFolder;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,27 +23,29 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERFolder : NSObject <DBSerializable>
+@interface DBPAPERFolder : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
-/// Paper folder id. This id uniquely identifies the folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull id_;
+/// Paper folder ID. This ID uniquely identifies the folder.
+@property (nonatomic, readonly, copy) NSString *id_;
 
 /// Paper folder name.
-@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param id_ Paper folder id. This id uniquely identifies the folder.
+/// @param id_ Paper folder ID. This ID uniquely identifies the folder.
 /// @param name Paper folder name.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithId_:(NSString * _Nonnull)id_ name:(NSString * _Nonnull)name;
+- (instancetype)initWithId_:(NSString *)id_ name:(NSString *)name;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -60,7 +64,7 @@
 /// @return A json-compatible dictionary representation of the `DBPAPERFolder`
 /// API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERFolder * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERFolder *)instance;
 
 ///
 /// Deserializes `DBPAPERFolder` instances.
@@ -70,6 +74,8 @@
 ///
 /// @return An instantiation of the `DBPAPERFolder` object.
 ///
-+ (DBPAPERFolder * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERFolder *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

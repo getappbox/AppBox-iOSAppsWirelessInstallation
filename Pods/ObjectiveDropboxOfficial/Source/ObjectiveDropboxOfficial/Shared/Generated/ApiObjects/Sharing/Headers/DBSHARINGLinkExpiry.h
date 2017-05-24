@@ -10,6 +10,8 @@
 
 @class DBSHARINGLinkExpiry;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGLinkExpiry : NSObject <DBSerializable>
+@interface DBSHARINGLinkExpiry : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -43,7 +45,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 /// Set a new expiry or change an existing expiry. @note Ensure the
 /// `isSetExpiry` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) NSDate * _Nonnull setExpiry;
+@property (nonatomic, readonly) NSDate *setExpiry;
 
 #pragma mark - Constructors
 
@@ -55,7 +57,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemoveExpiry;
+- (instancetype)initWithRemoveExpiry;
 
 ///
 /// Initializes union class with tag state of "set_expiry".
@@ -67,14 +69,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSetExpiry:(NSDate * _Nonnull)setExpiry;
+- (instancetype)initWithSetExpiry:(NSDate *)setExpiry;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -107,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -126,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkExpiry` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGLinkExpiry * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGLinkExpiry *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkExpiry` instances.
@@ -136,6 +140,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 ///
 /// @return An instantiation of the `DBSHARINGLinkExpiry` object.
 ///
-+ (DBSHARINGLinkExpiry * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGLinkExpiry *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBTEAMGroupMemberInfo;
 @class DBTEAMGroupsMembersListResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,20 +22,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupsMembersListResult : NSObject <DBSerializable>
+@interface DBTEAMGroupsMembersListResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// (no description).
-@property (nonatomic, readonly) NSArray<DBTEAMGroupMemberInfo *> * _Nonnull members;
+@property (nonatomic, readonly) NSArray<DBTEAMGroupMemberInfo *> *members;
 
 /// Pass the cursor into `groupsMembersListContinue` to obtain additional group
 /// members.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 /// Is true if there are additional group members that have not been returned
 /// yet. An additional call to `groupsMembersListContinue` can retrieve them.
-@property (nonatomic, readonly) NSNumber * _Nonnull hasMore;
+@property (nonatomic, readonly) NSNumber *hasMore;
 
 #pragma mark - Constructors
 
@@ -49,9 +51,11 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMembers:(NSArray<DBTEAMGroupMemberInfo *> * _Nonnull)members
-                                 cursor:(NSString * _Nonnull)cursor
-                                hasMore:(NSNumber * _Nonnull)hasMore;
+- (instancetype)initWithMembers:(NSArray<DBTEAMGroupMemberInfo *> *)members
+                         cursor:(NSString *)cursor
+                        hasMore:(NSNumber *)hasMore;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -71,7 +75,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsMembersListResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupsMembersListResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupsMembersListResult *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsMembersListResult` instances.
@@ -81,6 +85,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupsMembersListResult` object.
 ///
-+ (DBTEAMGroupsMembersListResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupsMembersListResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

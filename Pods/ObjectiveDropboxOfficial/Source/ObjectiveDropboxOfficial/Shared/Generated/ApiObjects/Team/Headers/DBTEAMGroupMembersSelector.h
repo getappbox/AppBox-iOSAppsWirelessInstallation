@@ -12,6 +12,8 @@
 @class DBTEAMGroupSelector;
 @class DBTEAMUsersSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,15 +25,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMembersSelector : NSObject <DBSerializable>
+@interface DBTEAMGroupMembersSelector : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Specify a group.
-@property (nonatomic, readonly) DBTEAMGroupSelector * _Nonnull group;
+@property (nonatomic, readonly) DBTEAMGroupSelector *group;
 
 /// A list of users that are members of group.
-@property (nonatomic, readonly) DBTEAMUsersSelectorArg * _Nonnull users;
+@property (nonatomic, readonly) DBTEAMUsersSelectorArg *users;
 
 #pragma mark - Constructors
 
@@ -43,8 +45,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroup:(DBTEAMGroupSelector * _Nonnull)group
-                                users:(DBTEAMUsersSelectorArg * _Nonnull)users;
+- (instancetype)initWithGroup:(DBTEAMGroupSelector *)group users:(DBTEAMUsersSelectorArg *)users;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +66,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersSelector` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMembersSelector * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMembersSelector *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersSelector` instances.
@@ -73,6 +76,8 @@
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersSelector` object.
 ///
-+ (DBTEAMGroupMembersSelector * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMembersSelector *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

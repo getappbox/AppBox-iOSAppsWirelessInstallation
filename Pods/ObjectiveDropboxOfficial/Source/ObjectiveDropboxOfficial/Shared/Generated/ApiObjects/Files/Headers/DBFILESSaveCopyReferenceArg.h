@@ -10,6 +10,8 @@
 
 @class DBFILESSaveCopyReferenceArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,15 +21,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSaveCopyReferenceArg : NSObject <DBSerializable>
+@interface DBFILESSaveCopyReferenceArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A copy reference returned by `dCopyReferenceGet`.
-@property (nonatomic, readonly, copy) NSString * _Nonnull dCopyReference;
+@property (nonatomic, readonly, copy) NSString *dCopyReference;
 
 /// Path in the user's Dropbox that is the destination.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDCopyReference:(NSString * _Nonnull)dCopyReference path:(NSString * _Nonnull)path;
+- (instancetype)initWithDCopyReference:(NSString *)dCopyReference path:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,7 +62,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveCopyReferenceArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSaveCopyReferenceArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSaveCopyReferenceArg *)instance;
 
 ///
 /// Deserializes `DBFILESSaveCopyReferenceArg` instances.
@@ -68,6 +72,8 @@
 ///
 /// @return An instantiation of the `DBFILESSaveCopyReferenceArg` object.
 ///
-+ (DBFILESSaveCopyReferenceArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSaveCopyReferenceArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBSHARINGCreateSharedLinkArg;
 @class DBSHARINGPendingUploadMode;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,21 +22,21 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGCreateSharedLinkArg : NSObject <DBSerializable>
+@interface DBSHARINGCreateSharedLinkArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path to share.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// Whether to return a shortened URL.
-@property (nonatomic, readonly) NSNumber * _Nonnull shortUrl;
+@property (nonatomic, readonly) NSNumber *shortUrl;
 
 /// If it's okay to share a path that does not yet exist, set this to either
 /// `file` in `DBSHARINGPendingUploadMode` or `folder` in
 /// `DBSHARINGPendingUploadMode` to indicate whether to assume it's a file or
 /// folder.
-@property (nonatomic, readonly) DBSHARINGPendingUploadMode * _Nullable pendingUpload;
+@property (nonatomic, readonly, nullable) DBSHARINGPendingUploadMode *pendingUpload;
 
 #pragma mark - Constructors
 
@@ -50,9 +52,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path
-                            shortUrl:(NSNumber * _Nullable)shortUrl
-                       pendingUpload:(DBSHARINGPendingUploadMode * _Nullable)pendingUpload;
+- (instancetype)initWithPath:(NSString *)path
+                    shortUrl:(nullable NSNumber *)shortUrl
+               pendingUpload:(nullable DBSHARINGPendingUploadMode *)pendingUpload;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -62,7 +64,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path;
+- (instancetype)initWithPath:(NSString *)path;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -82,7 +86,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCreateSharedLinkArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGCreateSharedLinkArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGCreateSharedLinkArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGCreateSharedLinkArg` instances.
@@ -92,6 +96,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGCreateSharedLinkArg` object.
 ///
-+ (DBSHARINGCreateSharedLinkArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGCreateSharedLinkArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

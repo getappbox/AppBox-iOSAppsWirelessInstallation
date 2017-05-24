@@ -10,6 +10,8 @@
 
 @class DBSHARINGRelinquishFileMembershipArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRelinquishFileMembershipArg : NSObject <DBSerializable>
+@interface DBSHARINGRelinquishFileMembershipArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The path or id for the file.
-@property (nonatomic, readonly, copy) NSString * _Nonnull file;
+@property (nonatomic, readonly, copy) NSString *file;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file;
+- (instancetype)initWithFile:(NSString *)file;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -55,7 +59,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRelinquishFileMembershipArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRelinquishFileMembershipArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRelinquishFileMembershipArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRelinquishFileMembershipArg` instances.
@@ -66,6 +70,8 @@
 /// @return An instantiation of the `DBSHARINGRelinquishFileMembershipArg`
 /// object.
 ///
-+ (DBSHARINGRelinquishFileMembershipArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRelinquishFileMembershipArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBSHARINGListSharedLinksResult;
 @class DBSHARINGSharedLinkMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,20 +22,20 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListSharedLinksResult : NSObject <DBSerializable>
+@interface DBSHARINGListSharedLinksResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Shared links applicable to the path argument.
-@property (nonatomic, readonly) NSArray<DBSHARINGSharedLinkMetadata *> * _Nonnull links;
+@property (nonatomic, readonly) NSArray<DBSHARINGSharedLinkMetadata *> *links;
 
 /// Is true if there are additional shared links that have not been returned
 /// yet. Pass the cursor into `listSharedLinks` to retrieve them.
-@property (nonatomic, readonly) NSNumber * _Nonnull hasMore;
+@property (nonatomic, readonly) NSNumber *hasMore;
 
 /// Pass the cursor into `listSharedLinks` to obtain the additional links.
 /// Cursor is returned only if no path is given.
-@property (nonatomic, readonly) NSString * _Nullable cursor;
+@property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -48,9 +50,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLinks:(NSArray<DBSHARINGSharedLinkMetadata *> * _Nonnull)links
-                              hasMore:(NSNumber * _Nonnull)hasMore
-                               cursor:(NSString * _Nullable)cursor;
+- (instancetype)initWithLinks:(NSArray<DBSHARINGSharedLinkMetadata *> *)links
+                      hasMore:(NSNumber *)hasMore
+                       cursor:(nullable NSString *)cursor;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -62,8 +64,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLinks:(NSArray<DBSHARINGSharedLinkMetadata *> * _Nonnull)links
-                              hasMore:(NSNumber * _Nonnull)hasMore;
+- (instancetype)initWithLinks:(NSArray<DBSHARINGSharedLinkMetadata *> *)links hasMore:(NSNumber *)hasMore;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -83,7 +86,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListSharedLinksResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListSharedLinksResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListSharedLinksResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGListSharedLinksResult` instances.
@@ -93,6 +96,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGListSharedLinksResult` object.
 ///
-+ (DBSHARINGListSharedLinksResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListSharedLinksResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

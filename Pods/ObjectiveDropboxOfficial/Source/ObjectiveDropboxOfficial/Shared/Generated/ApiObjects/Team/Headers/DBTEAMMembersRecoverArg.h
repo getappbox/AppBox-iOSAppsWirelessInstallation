@@ -11,6 +11,8 @@
 @class DBTEAMMembersRecoverArg;
 @class DBTEAMUserSelectorArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,12 +25,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersRecoverArg : NSObject <DBSerializable>
+@interface DBTEAMMembersRecoverArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Identity of user to recover.
-@property (nonatomic, readonly) DBTEAMUserSelectorArg * _Nonnull user;
+@property (nonatomic, readonly) DBTEAMUserSelectorArg *user;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUser:(DBTEAMUserSelectorArg * _Nonnull)user;
+- (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -58,7 +62,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRecoverArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersRecoverArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersRecoverArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRecoverArg` instances.
@@ -68,6 +72,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMembersRecoverArg` object.
 ///
-+ (DBTEAMMembersRecoverArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersRecoverArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

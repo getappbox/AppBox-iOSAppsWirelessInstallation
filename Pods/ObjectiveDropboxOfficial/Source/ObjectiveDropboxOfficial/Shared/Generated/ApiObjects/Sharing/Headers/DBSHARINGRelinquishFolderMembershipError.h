@@ -11,6 +11,8 @@
 @class DBSHARINGRelinquishFolderMembershipError;
 @class DBSHARINGSharedFolderAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRelinquishFolderMembershipError : NSObject <DBSerializable>
+@interface DBSHARINGRelinquishFolderMembershipError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -75,7 +77,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "folder_owner".
@@ -86,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFolderOwner;
+- (instancetype)initWithFolderOwner;
 
 ///
 /// Initializes union class with tag state of "mounted".
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMounted;
+- (instancetype)initWithMounted;
 
 ///
 /// Initializes union class with tag state of "group_access".
@@ -107,7 +109,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupAccess;
+- (instancetype)initWithGroupAccess;
 
 ///
 /// Initializes union class with tag state of "team_folder".
@@ -117,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolder;
+- (instancetype)initWithTeamFolder;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -127,7 +129,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "no_explicit_access".
@@ -138,14 +140,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoExplicitAccess;
+- (instancetype)initWithNoExplicitAccess;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -215,7 +219,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -236,7 +240,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRelinquishFolderMembershipError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRelinquishFolderMembershipError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRelinquishFolderMembershipError *)instance;
 
 ///
 /// Deserializes `DBSHARINGRelinquishFolderMembershipError` instances.
@@ -247,6 +251,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
 /// @return An instantiation of the `DBSHARINGRelinquishFolderMembershipError`
 /// object.
 ///
-+ (DBSHARINGRelinquishFolderMembershipError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRelinquishFolderMembershipError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

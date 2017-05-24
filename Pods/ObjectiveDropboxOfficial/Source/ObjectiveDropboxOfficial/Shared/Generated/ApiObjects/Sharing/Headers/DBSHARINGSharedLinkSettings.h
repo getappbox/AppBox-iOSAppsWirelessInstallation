@@ -11,6 +11,8 @@
 @class DBSHARINGRequestedVisibility;
 @class DBSHARINGSharedLinkSettings;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,19 +22,19 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGSharedLinkSettings : NSObject <DBSerializable>
+@interface DBSHARINGSharedLinkSettings : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The requested access for this shared link.
-@property (nonatomic, readonly) DBSHARINGRequestedVisibility * _Nullable requestedVisibility;
+@property (nonatomic, readonly, nullable) DBSHARINGRequestedVisibility *requestedVisibility;
 
 /// If requestedVisibility is `password` in `DBSHARINGRequestedVisibility` this
 /// is needed to specify the password to access the link.
-@property (nonatomic, readonly) NSString * _Nullable linkPassword;
+@property (nonatomic, readonly, copy, nullable) NSString *linkPassword;
 
 /// Expiration time of the shared link. By default the link won't expire.
-@property (nonatomic, readonly) NSDate * _Nullable expires;
+@property (nonatomic, readonly, nullable) NSDate *expires;
 
 #pragma mark - Constructors
 
@@ -48,9 +50,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRequestedVisibility:(DBSHARINGRequestedVisibility * _Nullable)requestedVisibility
-                                       linkPassword:(NSString * _Nullable)linkPassword
-                                            expires:(NSDate * _Nullable)expires;
+- (instancetype)initWithRequestedVisibility:(nullable DBSHARINGRequestedVisibility *)requestedVisibility
+                               linkPassword:(nullable NSString *)linkPassword
+                                    expires:(nullable NSDate *)expires;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -59,7 +61,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -78,7 +82,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkSettings` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGSharedLinkSettings * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGSharedLinkSettings *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkSettings` instances.
@@ -88,6 +92,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGSharedLinkSettings` object.
 ///
-+ (DBSHARINGSharedLinkSettings * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGSharedLinkSettings *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,14 +10,15 @@
 
 @interface UserData : NSObject
 
-+(BOOL)isGmailLoggedIn;
-+(void)setIsGmailLoggedIn:(BOOL)isGmailLoggedIn;
-
 +(NSString *)userEmail;
 +(void)setUserEmail:(NSString *)userEmail;
-
 +(NSString *)userMessage;
 +(void)setUserMessage:(NSString *)userMessage;
+
++(NSString *)userSlackChannel;
++(void)setUserSlackChannel:(NSString *)slackChannel;
++(NSString *)userSlackMessage;
++(void)setUserSlackMessage:(NSString *)slackMessage;
 
 +(NSURL *)buildLocation;
 +(void)setBuildLocation:(NSURL *)buildLocation;

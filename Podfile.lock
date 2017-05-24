@@ -18,10 +18,10 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - ISO8601 (0.6.0)
-  - ObjectiveDropboxOfficial (3.0.4)
+  - ObjectiveDropboxOfficial (3.1.0)
   - SAMKeychain (1.5.2)
   - Sparkle (1.17.0)
-  - SSZipArchive (1.7)
+  - SSZipArchive (1.8.1)
   - ZXingObjC (3.2.1):
     - ZXingObjC/All (= 3.2.1)
   - ZXingObjC/All (3.2.1)
@@ -44,10 +44,10 @@ SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
-  ObjectiveDropboxOfficial: 3d59f2f0106fac447b2a830e6c922c1b1d7dc4cd
+  ObjectiveDropboxOfficial: a9ea1b673406dba9475e87e966fc1459da6a98d5
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
-  SSZipArchive: 63f8e11cfcc33e03e4cd666b4359ea8bd6facd0c
+  SSZipArchive: 04547dfa448be5ed7ecbaf7eaf8a6e9eb9b42997
   ZXingObjC: bbf7b8f0cf8933fdd33eb4f9f46e22308552869b
 
 PODFILE CHECKSUM: 761f3c9f5fcd846ce1e3fced84d255167aa9b61f

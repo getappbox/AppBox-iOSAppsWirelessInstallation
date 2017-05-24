@@ -10,6 +10,8 @@
 
 @class DBPROPERTIESModifyPropertyTemplateError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPROPERTIESModifyPropertyTemplateError : NSObject <DBSerializable>
+@interface DBPROPERTIESModifyPropertyTemplateError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -57,7 +59,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 /// Property template does not exist for given identifier. @note Ensure the
 /// `isTemplateNotFound` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull templateNotFound;
+@property (nonatomic, readonly, copy) NSString *templateNotFound;
 
 #pragma mark - Constructors
 
@@ -72,7 +74,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateNotFound:(NSString * _Nonnull)templateNotFound;
+- (instancetype)initWithTemplateNotFound:(NSString *)templateNotFound;
 
 ///
 /// Initializes union class with tag state of "restricted_content".
@@ -82,14 +84,14 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRestrictedContent;
+- (instancetype)initWithRestrictedContent;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "conflicting_property_names".
@@ -99,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithConflictingPropertyNames;
+- (instancetype)initWithConflictingPropertyNames;
 
 ///
 /// Initializes union class with tag state of "too_many_properties".
@@ -110,7 +112,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyProperties;
+- (instancetype)initWithTooManyProperties;
 
 ///
 /// Initializes union class with tag state of "too_many_templates".
@@ -120,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyTemplates;
+- (instancetype)initWithTooManyTemplates;
 
 ///
 /// Initializes union class with tag state of "template_attribute_too_large".
@@ -130,7 +132,9 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTemplateAttributeTooLarge;
+- (instancetype)initWithTemplateAttributeTooLarge;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -203,7 +207,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -224,7 +228,7 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPROPERTIESModifyPropertyTemplateError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPROPERTIESModifyPropertyTemplateError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPROPERTIESModifyPropertyTemplateError *)instance;
 
 ///
 /// Deserializes `DBPROPERTIESModifyPropertyTemplateError` instances.
@@ -235,6 +239,8 @@ typedef NS_ENUM(NSInteger, DBPROPERTIESModifyPropertyTemplateErrorTag) {
 /// @return An instantiation of the `DBPROPERTIESModifyPropertyTemplateError`
 /// object.
 ///
-+ (DBPROPERTIESModifyPropertyTemplateError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPROPERTIESModifyPropertyTemplateError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

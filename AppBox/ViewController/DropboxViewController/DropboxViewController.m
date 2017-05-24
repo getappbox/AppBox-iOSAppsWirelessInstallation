@@ -29,7 +29,9 @@
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
     [Answers logCustomEventWithName:@"Authenticating Dropbox " customAttributes:nil];
     //Authenticate user
-    [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace] controller:self openURL:^(NSURL *url){ [[NSWorkspace sharedWorkspace] openURL:url];} browserAuth:YES];
+    [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace] controller:self openURL:^(NSURL * _Nonnull url) {
+        [[NSWorkspace sharedWorkspace] openURL:url];
+    }];
 }
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender {

@@ -10,6 +10,8 @@
 
 @class DBSHARINGUnmountFolderArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,12 +21,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUnmountFolderArg : NSObject <DBSerializable>
+@interface DBSHARINGUnmountFolderArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID for the shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 #pragma mark - Constructors
 
@@ -35,7 +37,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -54,7 +58,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnmountFolderArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUnmountFolderArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUnmountFolderArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnmountFolderArg` instances.
@@ -64,6 +68,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGUnmountFolderArg` object.
 ///
-+ (DBSHARINGUnmountFolderArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUnmountFolderArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

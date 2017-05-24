@@ -11,6 +11,8 @@
 @class DBSHARINGMemberSelector;
 @class DBSHARINGRemoveFileMemberArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,17 +24,17 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGRemoveFileMemberArg : NSObject <DBSerializable>
+@interface DBSHARINGRemoveFileMemberArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// File from which to remove members.
-@property (nonatomic, readonly, copy) NSString * _Nonnull file;
+@property (nonatomic, readonly, copy) NSString *file;
 
 /// Member to remove from this file. Note that even if an email is specified, it
 /// may result in the removal of a user (not an invitee) if the user's main
 /// account corresponds to that email address.
-@property (nonatomic, readonly) DBSHARINGMemberSelector * _Nonnull member;
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
 
 #pragma mark - Constructors
 
@@ -46,7 +48,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithFile:(NSString * _Nonnull)file member:(DBSHARINGMemberSelector * _Nonnull)member;
+- (instancetype)initWithFile:(NSString *)file member:(DBSHARINGMemberSelector *)member;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -66,7 +70,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRemoveFileMemberArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGRemoveFileMemberArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGRemoveFileMemberArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRemoveFileMemberArg` instances.
@@ -76,6 +80,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGRemoveFileMemberArg` object.
 ///
-+ (DBSHARINGRemoveFileMemberArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGRemoveFileMemberArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,9 +7,11 @@
 
 #import "DBChunkInputStream.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DBChunkInputStream ()
 
-@property (nonatomic, readonly) NSInputStream * _Nonnull parentStream;
+@property (nonatomic, readonly) NSInputStream *parentStream;
 @property (nonatomic) NSStreamStatus parentStreamStatus;
 @property (nonatomic, readonly) id<NSStreamDelegate> streamDelegate;
 
@@ -60,11 +62,11 @@
   _parentStreamStatus = NSStreamStatusClosed;
 }
 
-- (id<NSStreamDelegate>)delegate {
+- (nullable id<NSStreamDelegate>)delegate {
   return _streamDelegate;
 }
 
-- (void)setDelegate:(id<NSStreamDelegate>)aDelegate {
+- (void)setDelegate:(nullable id<NSStreamDelegate>)aDelegate {
   if (!aDelegate) {
     _streamDelegate = self;
   } else {
@@ -80,11 +82,11 @@
   [_parentStream removeFromRunLoop:aRunLoop forMode:mode];
 }
 
-- (id)propertyForKey:(NSString *)key {
+- (nullable id)propertyForKey:(NSString *)key {
   return [_parentStream propertyForKey:key];
 }
 
-- (BOOL)setProperty:(id)property forKey:(NSString *)key {
+- (BOOL)setProperty:(nullable id)property forKey:(NSString *)key {
   return [_parentStream setProperty:property forKey:key];
 }
 
@@ -92,7 +94,7 @@
   return _parentStreamStatus;
 }
 
-- (NSError *)streamError {
+- (nullable NSError *)streamError {
   return [_parentStream streamError];
 }
 
@@ -205,3 +207,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

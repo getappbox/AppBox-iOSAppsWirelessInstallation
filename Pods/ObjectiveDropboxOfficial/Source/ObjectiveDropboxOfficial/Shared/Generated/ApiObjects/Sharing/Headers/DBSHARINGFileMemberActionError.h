@@ -12,6 +12,8 @@
 @class DBSHARINGMemberAccessLevelResult;
 @class DBSHARINGSharingFileAccessError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGFileMemberActionError : NSObject <DBSerializable>
+@interface DBSHARINGFileMemberActionError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -53,14 +55,14 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 /// Specified file was invalid or user does not have access. @note Ensure the
 /// `isAccessError` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharingFileAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharingFileAccessError *accessError;
 
 /// The action cannot be completed because the target member does not have
 /// explicit access to the file. The return value is the access that the member
 /// has to the file from a parent folder. @note Ensure the `isNoExplicitAccess`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBSHARINGMemberAccessLevelResult * _Nonnull noExplicitAccess;
+@property (nonatomic, readonly) DBSHARINGMemberAccessLevelResult *noExplicitAccess;
 
 #pragma mark - Constructors
 
@@ -72,7 +74,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidMember;
+- (instancetype)initWithInvalidMember;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -82,7 +84,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "access_error".
@@ -94,7 +96,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharingFileAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "no_explicit_access".
@@ -110,14 +112,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoExplicitAccess:(DBSHARINGMemberAccessLevelResult * _Nonnull)noExplicitAccess;
+- (instancetype)initWithNoExplicitAccess:(DBSHARINGMemberAccessLevelResult *)noExplicitAccess;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -169,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -189,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileMemberActionError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGFileMemberActionError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGFileMemberActionError *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileMemberActionError` instances.
@@ -199,6 +203,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGFileMemberActionError` object.
 ///
-+ (DBSHARINGFileMemberActionError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGFileMemberActionError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

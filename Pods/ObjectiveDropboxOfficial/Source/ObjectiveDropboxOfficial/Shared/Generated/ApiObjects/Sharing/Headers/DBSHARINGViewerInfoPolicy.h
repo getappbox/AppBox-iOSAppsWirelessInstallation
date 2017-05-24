@@ -10,6 +10,8 @@
 
 @class DBSHARINGViewerInfoPolicy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGViewerInfoPolicy : NSObject <DBSerializable>
+@interface DBSHARINGViewerInfoPolicy : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -50,7 +52,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGViewerInfoPolicyTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEnabled;
+- (instancetype)initWithEnabled;
 
 ///
 /// Initializes union class with tag state of "disabled".
@@ -60,14 +62,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGViewerInfoPolicyTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDisabled;
+- (instancetype)initWithDisabled;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -97,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGViewerInfoPolicyTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -116,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGViewerInfoPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGViewerInfoPolicy` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGViewerInfoPolicy * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGViewerInfoPolicy *)instance;
 
 ///
 /// Deserializes `DBSHARINGViewerInfoPolicy` instances.
@@ -126,6 +130,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGViewerInfoPolicyTag) {
 ///
 /// @return An instantiation of the `DBSHARINGViewerInfoPolicy` object.
 ///
-+ (DBSHARINGViewerInfoPolicy * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGViewerInfoPolicy *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

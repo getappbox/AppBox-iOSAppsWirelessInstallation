@@ -12,6 +12,8 @@
 @class DBUSERSSpaceAllocation;
 @class DBUSERSTeamSpaceAllocation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBUSERSSpaceAllocation : NSObject <DBSerializable>
+@interface DBUSERSSpaceAllocation : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -47,12 +49,12 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 /// The user's space allocation applies only to their individual account. @note
 /// Ensure the `isIndividual` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly) DBUSERSIndividualSpaceAllocation * _Nonnull individual;
+@property (nonatomic, readonly) DBUSERSIndividualSpaceAllocation *individual;
 
 /// The user shares space with other members of their team. @note Ensure the
 /// `isTeam` method returns true before accessing, otherwise a runtime exception
 /// will be raised.
-@property (nonatomic, readonly) DBUSERSTeamSpaceAllocation * _Nonnull team;
+@property (nonatomic, readonly) DBUSERSTeamSpaceAllocation *team;
 
 #pragma mark - Constructors
 
@@ -67,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithIndividual:(DBUSERSIndividualSpaceAllocation * _Nonnull)individual;
+- (instancetype)initWithIndividual:(DBUSERSIndividualSpaceAllocation *)individual;
 
 ///
 /// Initializes union class with tag state of "team".
@@ -79,14 +81,16 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeam:(DBUSERSTeamSpaceAllocation * _Nonnull)team;
+- (instancetype)initWithTeam:(DBUSERSTeamSpaceAllocation *)team;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -122,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -141,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSSpaceAllocation` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBUSERSSpaceAllocation * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBUSERSSpaceAllocation *)instance;
 
 ///
 /// Deserializes `DBUSERSSpaceAllocation` instances.
@@ -151,6 +155,8 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 ///
 /// @return An instantiation of the `DBUSERSSpaceAllocation` object.
 ///
-+ (DBUSERSSpaceAllocation * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBUSERSSpaceAllocation *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

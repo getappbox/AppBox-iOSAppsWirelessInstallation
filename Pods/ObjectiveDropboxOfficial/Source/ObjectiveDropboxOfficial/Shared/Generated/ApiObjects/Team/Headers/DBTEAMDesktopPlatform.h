@@ -10,6 +10,8 @@
 
 @class DBTEAMDesktopPlatform;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMDesktopPlatform : NSObject <DBSerializable>
+@interface DBTEAMDesktopPlatform : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -53,7 +55,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithWindows;
+- (instancetype)initWithWindows;
 
 ///
 /// Initializes union class with tag state of "mac".
@@ -62,7 +64,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMac;
+- (instancetype)initWithMac;
 
 ///
 /// Initializes union class with tag state of "linux".
@@ -71,14 +73,16 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithLinux;
+- (instancetype)initWithLinux;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -115,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -134,7 +138,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDesktopPlatform` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMDesktopPlatform * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMDesktopPlatform *)instance;
 
 ///
 /// Deserializes `DBTEAMDesktopPlatform` instances.
@@ -144,6 +148,8 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// @return An instantiation of the `DBTEAMDesktopPlatform` object.
 ///
-+ (DBTEAMDesktopPlatform * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMDesktopPlatform *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

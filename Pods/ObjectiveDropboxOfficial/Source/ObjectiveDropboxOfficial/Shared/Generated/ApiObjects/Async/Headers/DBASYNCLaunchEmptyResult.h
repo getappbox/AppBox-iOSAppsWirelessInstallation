@@ -10,6 +10,8 @@
 
 @class DBASYNCLaunchEmptyResult;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBASYNCLaunchEmptyResult : NSObject <DBSerializable>
+@interface DBASYNCLaunchEmptyResult : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -46,7 +48,7 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
 /// an id that can be used to obtain the status of the asynchronous job. @note
 /// Ensure the `isAsyncJobId` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull asyncJobId;
+@property (nonatomic, readonly, copy) NSString *asyncJobId;
 
 #pragma mark - Constructors
 
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAsyncJobId:(NSString * _Nonnull)asyncJobId;
+- (instancetype)initWithAsyncJobId:(NSString *)asyncJobId;
 
 ///
 /// Initializes union class with tag state of "complete".
@@ -73,7 +75,9 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithComplete;
+- (instancetype)initWithComplete;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -99,7 +103,7 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -118,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBASYNCLaunchEmptyResult` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBASYNCLaunchEmptyResult * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBASYNCLaunchEmptyResult *)instance;
 
 ///
 /// Deserializes `DBASYNCLaunchEmptyResult` instances.
@@ -128,6 +132,8 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
 ///
 /// @return An instantiation of the `DBASYNCLaunchEmptyResult` object.
 ///
-+ (DBASYNCLaunchEmptyResult * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBASYNCLaunchEmptyResult *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

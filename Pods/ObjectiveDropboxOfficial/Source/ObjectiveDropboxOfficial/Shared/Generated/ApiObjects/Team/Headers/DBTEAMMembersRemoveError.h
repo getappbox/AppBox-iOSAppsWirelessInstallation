@@ -10,6 +10,8 @@
 
 @class DBTEAMMembersRemoveError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersRemoveError : NSObject <DBSerializable>
+@interface DBTEAMMembersRemoveError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -90,7 +92,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotFound;
+- (instancetype)initWithUserNotFound;
 
 ///
 /// Initializes union class with tag state of "user_not_in_team".
@@ -100,14 +102,14 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserNotInTeam;
+- (instancetype)initWithUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "remove_last_admin".
@@ -117,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemoveLastAdmin;
+- (instancetype)initWithRemoveLastAdmin;
 
 ///
 /// Initializes union class with tag state of
@@ -128,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemovedAndTransferDestShouldDiffer;
+- (instancetype)initWithRemovedAndTransferDestShouldDiffer;
 
 ///
 /// Initializes union class with tag state of
@@ -139,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithRemovedAndTransferAdminShouldDiffer;
+- (instancetype)initWithRemovedAndTransferAdminShouldDiffer;
 
 ///
 /// Initializes union class with tag state of "transfer_dest_user_not_found".
@@ -149,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTransferDestUserNotFound;
+- (instancetype)initWithTransferDestUserNotFound;
 
 ///
 /// Initializes union class with tag state of "transfer_dest_user_not_in_team".
@@ -159,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTransferDestUserNotInTeam;
+- (instancetype)initWithTransferDestUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "transfer_admin_user_not_found".
@@ -169,7 +171,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTransferAdminUserNotFound;
+- (instancetype)initWithTransferAdminUserNotFound;
 
 ///
 /// Initializes union class with tag state of "transfer_admin_user_not_in_team".
@@ -179,7 +181,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTransferAdminUserNotInTeam;
+- (instancetype)initWithTransferAdminUserNotInTeam;
 
 ///
 /// Initializes union class with tag state of "unspecified_transfer_admin_id".
@@ -189,7 +191,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUnspecifiedTransferAdminId;
+- (instancetype)initWithUnspecifiedTransferAdminId;
 
 ///
 /// Initializes union class with tag state of "transfer_admin_is_not_admin".
@@ -199,7 +201,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTransferAdminIsNotAdmin;
+- (instancetype)initWithTransferAdminIsNotAdmin;
 
 ///
 /// Initializes union class with tag state of
@@ -210,7 +212,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCannotKeepAccountAndTransfer;
+- (instancetype)initWithCannotKeepAccountAndTransfer;
 
 ///
 /// Initializes union class with tag state of
@@ -222,7 +224,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCannotKeepAccountAndDeleteData;
+- (instancetype)initWithCannotKeepAccountAndDeleteData;
 
 ///
 /// Initializes union class with tag state of
@@ -233,7 +235,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmailAddressTooLongToBeDisabled;
+- (instancetype)initWithEmailAddressTooLongToBeDisabled;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -371,7 +375,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -390,7 +394,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRemoveError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMembersRemoveError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMembersRemoveError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRemoveError` instances.
@@ -400,6 +404,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersRemoveError` object.
 ///
-+ (DBTEAMMembersRemoveError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMembersRemoveError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

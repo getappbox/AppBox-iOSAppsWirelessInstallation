@@ -11,6 +11,8 @@
 @class DBTEAMApiApp;
 @class DBTEAMMemberLinkedApps;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -22,15 +24,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMemberLinkedApps : NSObject <DBSerializable>
+@interface DBTEAMMemberLinkedApps : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The member unique Id
-@property (nonatomic, readonly, copy) NSString * _Nonnull teamMemberId;
+@property (nonatomic, readonly, copy) NSString *teamMemberId;
 
 /// List of third party applications linked by this team member
-@property (nonatomic, readonly) NSArray<DBTEAMApiApp *> * _Nonnull linkedApiApps;
+@property (nonatomic, readonly) NSArray<DBTEAMApiApp *> *linkedApiApps;
 
 #pragma mark - Constructors
 
@@ -43,8 +45,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamMemberId:(NSString * _Nonnull)teamMemberId
-                               linkedApiApps:(NSArray<DBTEAMApiApp *> * _Nonnull)linkedApiApps;
+- (instancetype)initWithTeamMemberId:(NSString *)teamMemberId linkedApiApps:(NSArray<DBTEAMApiApp *> *)linkedApiApps;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -63,7 +66,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberLinkedApps` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMemberLinkedApps * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMemberLinkedApps *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberLinkedApps` instances.
@@ -73,6 +76,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMemberLinkedApps` object.
 ///
-+ (DBTEAMMemberLinkedApps * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMemberLinkedApps *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 @class DBTEAMGroupMembersAddError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMGroupMembersAddError : NSObject <DBSerializable>
+@interface DBTEAMGroupMembersAddError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -69,17 +71,17 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 /// subsequent version. To add new members to your Dropbox Business team, use
 /// the `membersAdd` endpoint. @note Ensure the `isMembersNotInTeam` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull membersNotInTeam;
+@property (nonatomic, readonly) NSArray<NSString *> *membersNotInTeam;
 
 /// These users were not found in Dropbox. @note Ensure the `isUsersNotFound`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull usersNotFound;
+@property (nonatomic, readonly) NSArray<NSString *> *usersNotFound;
 
 /// A company-managed group cannot be managed by a user. @note Ensure the
 /// `isUserCannotBeManagerOfCompanyManagedGroup` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) NSArray<NSString *> * _Nonnull userCannotBeManagerOfCompanyManagedGroup;
+@property (nonatomic, readonly) NSArray<NSString *> *userCannotBeManagerOfCompanyManagedGroup;
 
 #pragma mark - Constructors
 
@@ -91,14 +93,14 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNotFound;
+- (instancetype)initWithGroupNotFound;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "system_managed_group_disallowed".
@@ -108,7 +110,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSystemManagedGroupDisallowed;
+- (instancetype)initWithSystemManagedGroupDisallowed;
 
 ///
 /// Initializes union class with tag state of "duplicate_user".
@@ -119,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDuplicateUser;
+- (instancetype)initWithDuplicateUser;
 
 ///
 /// Initializes union class with tag state of "group_not_in_team".
@@ -129,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithGroupNotInTeam;
+- (instancetype)initWithGroupNotInTeam;
 
 ///
 /// Initializes union class with tag state of "members_not_in_team".
@@ -147,7 +149,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithMembersNotInTeam:(NSArray<NSString *> * _Nonnull)membersNotInTeam;
+- (instancetype)initWithMembersNotInTeam:(NSArray<NSString *> *)membersNotInTeam;
 
 ///
 /// Initializes union class with tag state of "users_not_found".
@@ -159,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUsersNotFound:(NSArray<NSString *> * _Nonnull)usersNotFound;
+- (instancetype)initWithUsersNotFound:(NSArray<NSString *> *)usersNotFound;
 
 ///
 /// Initializes union class with tag state of "user_must_be_active_to_be_owner".
@@ -169,7 +171,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserMustBeActiveToBeOwner;
+- (instancetype)initWithUserMustBeActiveToBeOwner;
 
 ///
 /// Initializes union class with tag state of
@@ -183,8 +185,10 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserCannotBeManagerOfCompanyManagedGroup:
-    (NSArray<NSString *> * _Nonnull)userCannotBeManagerOfCompanyManagedGroup;
+- (instancetype)initWithUserCannotBeManagerOfCompanyManagedGroup:
+    (NSArray<NSString *> *)userCannotBeManagerOfCompanyManagedGroup;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -275,7 +279,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -294,7 +298,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersAddError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMGroupMembersAddError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMGroupMembersAddError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersAddError` instances.
@@ -304,6 +308,8 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersAddError` object.
 ///
-+ (DBTEAMGroupMembersAddError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMGroupMembersAddError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

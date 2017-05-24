@@ -9,26 +9,22 @@
 @class DBOAuthManager;
 @class DBTransportDefaultConfig;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DBClientsManager (Protected)
 
-+ (void)setupWithOAuthManager:(DBOAuthManager * _Nonnull)oAuthManager
-              transportConfig:(DBTransportDefaultConfig * _Nonnull)transportConfig;
++ (void)setupWithOAuthManager:(DBOAuthManager *)oAuthManager
+              transportConfig:(DBTransportDefaultConfig *)transportConfig;
 
-+ (void)setupWithOAuthManagerMultiUser:(DBOAuthManager * _Nonnull)oAuthManager
-                       transportConfig:(DBTransportDefaultConfig * _Nonnull)transportConfig
-                              tokenUid:(NSString * _Nullable)tokenUid;
++ (void)setupWithOAuthManagerTeam:(DBOAuthManager *)oAuthManager
+                  transportConfig:(DBTransportDefaultConfig *)transportConfig;
 
-+ (void)setupWithOAuthManagerTeam:(DBOAuthManager * _Nonnull)oAuthManager
-                  transportConfig:(DBTransportDefaultConfig * _Nonnull)transportConfig;
++ (void)setTransportConfig:(DBTransportDefaultConfig *)transportConfig;
 
-+ (void)setupWithOAuthManagerTeamMultiUser:(DBOAuthManager * _Nonnull)oAuthManager
-                           transportConfig:(DBTransportDefaultConfig * _Nonnull)transportConfig
-                                  tokenUid:(NSString * _Nullable)tokenUid;
++ (DBTransportDefaultConfig *)transportConfig;
 
-+ (void)setTransportConfig:(DBTransportDefaultConfig * _Nonnull)transportConfig;
-
-+ (DBTransportDefaultConfig * _Nonnull)transportConfig;
-
-+ (void)setAppKey:(NSString * _Nonnull)appKey;
++ (void)setAppKey:(NSString *)appKey;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -12,6 +12,8 @@
 @class DBFILESUploadSessionCursor;
 @class DBFILESUploadSessionFinishArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,15 +23,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUploadSessionFinishArg : NSObject <DBSerializable>
+@interface DBFILESUploadSessionFinishArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Contains the upload session ID and the offset.
-@property (nonatomic, readonly) DBFILESUploadSessionCursor * _Nonnull cursor;
+@property (nonatomic, readonly) DBFILESUploadSessionCursor *cursor;
 
 /// Contains the path and other optional modifiers for the commit.
-@property (nonatomic, readonly) DBFILESCommitInfo * _Nonnull commit;
+@property (nonatomic, readonly) DBFILESCommitInfo *commit;
 
 #pragma mark - Constructors
 
@@ -41,8 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(DBFILESUploadSessionCursor * _Nonnull)cursor
-                                commit:(DBFILESCommitInfo * _Nonnull)commit;
+- (instancetype)initWithCursor:(DBFILESUploadSessionCursor *)cursor commit:(DBFILESCommitInfo *)commit;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -62,7 +65,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUploadSessionFinishArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUploadSessionFinishArg *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishArg` instances.
@@ -72,6 +75,8 @@
 ///
 /// @return An instantiation of the `DBFILESUploadSessionFinishArg` object.
 ///
-+ (DBFILESUploadSessionFinishArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUploadSessionFinishArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

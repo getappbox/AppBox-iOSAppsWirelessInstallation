@@ -4,6 +4,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 ///
 /// Protocol which all Obj-C SDK API route objects must implement, otherwise a compiler-warning
 /// is generated.
@@ -18,7 +20,7 @@
 ///
 /// @return A serialized, json-compatible dictionary representation of the API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(id _Nonnull)instance;
++ (NSDictionary *)serialize:(id)instance;
 
 ///
 /// Class method which returns an instantiation of the supplied object as represented
@@ -28,13 +30,15 @@
 ///
 /// @return A deserialized, instantiation of the API object.
 ///
-+ (id _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (id)deserialize:(NSDictionary *)dict;
 
 ///
 /// Description method.
 ///
 /// @return A human-readable representation of the current object.
 ///
-- (NSString * _Nonnull)description;
+- (NSString *)description;
 
 @end
+
+NS_ASSUME_NONNULL_END

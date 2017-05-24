@@ -13,6 +13,8 @@
 @class DBFILESGpsCoordinates;
 @class DBFILESVideoMetadata;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,12 +26,12 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESVideoMetadata : DBFILESMediaMetadata <DBSerializable>
+@interface DBFILESVideoMetadata : DBFILESMediaMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The duration of the video in milliseconds.
-@property (nonatomic, readonly) NSNumber * _Nullable duration;
+@property (nonatomic, readonly, nullable) NSNumber *duration;
 
 #pragma mark - Constructors
 
@@ -43,10 +45,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDimensions:(DBFILESDimensions * _Nullable)dimensions
-                                  location:(DBFILESGpsCoordinates * _Nullable)location
-                                 timeTaken:(NSDate * _Nullable)timeTaken
-                                  duration:(NSNumber * _Nullable)duration;
+- (instancetype)initWithDimensions:(nullable DBFILESDimensions *)dimensions
+                          location:(nullable DBFILESGpsCoordinates *)location
+                         timeTaken:(nullable NSDate *)timeTaken
+                          duration:(nullable NSNumber *)duration;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -55,7 +57,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)init;
+- (instancetype)initDefault;
 
 @end
 
@@ -74,7 +76,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESVideoMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESVideoMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESVideoMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESVideoMetadata` instances.
@@ -84,6 +86,8 @@
 ///
 /// @return An instantiation of the `DBFILESVideoMetadata` object.
 ///
-+ (DBFILESVideoMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESVideoMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

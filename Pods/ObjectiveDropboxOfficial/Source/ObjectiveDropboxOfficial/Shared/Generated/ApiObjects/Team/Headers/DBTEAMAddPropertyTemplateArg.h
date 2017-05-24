@@ -12,6 +12,8 @@
 @class DBPROPERTIESPropertyFieldTemplate;
 @class DBTEAMAddPropertyTemplateArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,7 +25,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMAddPropertyTemplateArg : DBPROPERTIESPropertyGroupTemplate <DBSerializable>
+@interface DBTEAMAddPropertyTemplateArg : DBPROPERTIESPropertyGroupTemplate <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -41,9 +43,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                        description_:(NSString * _Nonnull)description_
-                              fields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> * _Nonnull)fields;
+- (instancetype)initWithName:(NSString *)name
+                description_:(NSString *)description_
+                      fields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> *)fields;
 
 @end
 
@@ -63,7 +65,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMAddPropertyTemplateArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMAddPropertyTemplateArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMAddPropertyTemplateArg *)instance;
 
 ///
 /// Deserializes `DBTEAMAddPropertyTemplateArg` instances.
@@ -73,6 +75,8 @@
 ///
 /// @return An instantiation of the `DBTEAMAddPropertyTemplateArg` object.
 ///
-+ (DBTEAMAddPropertyTemplateArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMAddPropertyTemplateArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 @class DBFILESSaveCopyReferenceError;
 @class DBFILESWriteError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESSaveCopyReferenceError : NSObject <DBSerializable>
+@interface DBFILESSaveCopyReferenceError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -54,7 +56,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESWriteError * _Nonnull path;
+@property (nonatomic, readonly) DBFILESWriteError *path;
 
 #pragma mark - Constructors
 
@@ -65,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(DBFILESWriteError * _Nonnull)path;
+- (instancetype)initWithPath:(DBFILESWriteError *)path;
 
 ///
 /// Initializes union class with tag state of "invalid_copy_reference".
@@ -75,7 +77,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidCopyReference;
+- (instancetype)initWithInvalidCopyReference;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -86,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "not_found".
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNotFound;
+- (instancetype)initWithNotFound;
 
 ///
 /// Initializes union class with tag state of "too_many_files".
@@ -106,14 +108,16 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTooManyFiles;
+- (instancetype)initWithTooManyFiles;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -169,7 +173,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -189,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveCopyReferenceError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESSaveCopyReferenceError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESSaveCopyReferenceError *)instance;
 
 ///
 /// Deserializes `DBFILESSaveCopyReferenceError` instances.
@@ -199,6 +203,8 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESSaveCopyReferenceError` object.
 ///
-+ (DBFILESSaveCopyReferenceError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESSaveCopyReferenceError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

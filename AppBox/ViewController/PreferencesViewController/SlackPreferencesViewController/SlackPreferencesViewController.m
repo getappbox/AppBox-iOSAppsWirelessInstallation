@@ -1,0 +1,52 @@
+//
+//  SlackPreferencesViewController.m
+//  AppBox
+//
+//  Created by Vineet Choudhary on 10/05/17.
+//  Copyright © 2017 Developer Insider. All rights reserved.
+//
+
+#import "SlackPreferencesViewController.h"
+
+@interface SlackPreferencesViewController ()
+
+@end
+
+@implementation SlackPreferencesViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do view setup here.
+    
+    [slackChannelTextField setStringValue:[UserData userSlackChannel]];
+    [slackMessageTextField setStringValue:[UserData userSlackMessage]];
+}
+
+- (IBAction)saveButtonTapped:(NSButton *)sender {
+    [self.view.window makeFirstResponder:self.view];
+    [UserData setUserSlackChannel:slackChannelTextField.stringValue];
+    [UserData setUserSlackMessage:slackMessageTextField.stringValue];
+    [MBProgressHUD showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
+}
+
+- (IBAction)sendTextMessageButtonTapped:(NSButton *)sender {
+    [self.view.window makeFirstResponder:self.view];
+    
+    //create a test project for demo email
+    XCProject *project = [[XCProject alloc] init];
+    [project setName:@"TestApp"];
+    [project setVersion:@"1.0"];
+    [project setBuild:@"1"];
+    [project setAppShortShareableURL:[NSURL URLWithString:@"tryappbox.com"]];
+    
+    [MBProgressHUD showStatus:@"Sending Test Message..." onView:self.view];
+    [SlackClient sendMessageForProject:project completion:^(BOOL success) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (success) {
+            [MBProgressHUD showStatus:@"Message Sent." forSuccess:YES onView:self.view];
+        } else {
+            [MBProgressHUD showStatus:@"Message Failed." forSuccess:NO onView:self.view];
+        }
+    }];
+}
+@end

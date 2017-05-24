@@ -12,6 +12,8 @@
 @class DBTEAMMobileClientPlatform;
 @class DBTEAMMobileClientSession;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,24 +25,24 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMobileClientSession : DBTEAMDeviceSession <DBSerializable>
+@interface DBTEAMMobileClientSession : DBTEAMDeviceSession <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The device name
-@property (nonatomic, readonly, copy) NSString * _Nonnull deviceName;
+@property (nonatomic, readonly, copy) NSString *deviceName;
 
 /// The mobile application type
-@property (nonatomic, readonly) DBTEAMMobileClientPlatform * _Nonnull clientType;
+@property (nonatomic, readonly) DBTEAMMobileClientPlatform *clientType;
 
 /// The dropbox client version
-@property (nonatomic, readonly) NSString * _Nullable clientVersion;
+@property (nonatomic, readonly, copy, nullable) NSString *clientVersion;
 
 /// The hosting OS version
-@property (nonatomic, readonly) NSString * _Nullable osVersion;
+@property (nonatomic, readonly, copy, nullable) NSString *osVersion;
 
 /// last carrier used by the device
-@property (nonatomic, readonly) NSString * _Nullable lastCarrier;
+@property (nonatomic, readonly, copy, nullable) NSString *lastCarrier;
 
 #pragma mark - Constructors
 
@@ -61,16 +63,16 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId
-                               deviceName:(NSString * _Nonnull)deviceName
-                               clientType:(DBTEAMMobileClientPlatform * _Nonnull)clientType
-                                ipAddress:(NSString * _Nullable)ipAddress
-                                  country:(NSString * _Nullable)country
-                                  created:(NSDate * _Nullable)created
-                                  updated:(NSDate * _Nullable)updated
-                            clientVersion:(NSString * _Nullable)clientVersion
-                                osVersion:(NSString * _Nullable)osVersion
-                              lastCarrier:(NSString * _Nullable)lastCarrier;
+- (instancetype)initWithSessionId:(NSString *)sessionId
+                       deviceName:(NSString *)deviceName
+                       clientType:(DBTEAMMobileClientPlatform *)clientType
+                        ipAddress:(nullable NSString *)ipAddress
+                          country:(nullable NSString *)country
+                          created:(nullable NSDate *)created
+                          updated:(nullable NSDate *)updated
+                    clientVersion:(nullable NSString *)clientVersion
+                        osVersion:(nullable NSString *)osVersion
+                      lastCarrier:(nullable NSString *)lastCarrier;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -82,9 +84,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSessionId:(NSString * _Nonnull)sessionId
-                               deviceName:(NSString * _Nonnull)deviceName
-                               clientType:(DBTEAMMobileClientPlatform * _Nonnull)clientType;
+- (instancetype)initWithSessionId:(NSString *)sessionId
+                       deviceName:(NSString *)deviceName
+                       clientType:(DBTEAMMobileClientPlatform *)clientType;
 
 @end
 
@@ -103,7 +105,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMobileClientSession` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMobileClientSession * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMobileClientSession *)instance;
 
 ///
 /// Deserializes `DBTEAMMobileClientSession` instances.
@@ -113,6 +115,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMobileClientSession` object.
 ///
-+ (DBTEAMMobileClientSession * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMobileClientSession *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

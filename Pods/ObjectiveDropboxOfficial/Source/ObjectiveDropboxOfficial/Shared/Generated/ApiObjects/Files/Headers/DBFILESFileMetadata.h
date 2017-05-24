@@ -14,6 +14,8 @@
 @class DBFILESMediaInfo;
 @class DBPROPERTIESPropertyGroup;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -23,52 +25,52 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESFileMetadata : DBFILESMetadata <DBSerializable>
+@interface DBFILESFileMetadata : DBFILESMetadata <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A unique identifier for the file.
-@property (nonatomic, readonly, copy) NSString * _Nonnull id_;
+@property (nonatomic, readonly, copy) NSString *id_;
 
 /// For files, this is the modification time set by the desktop client when the
 /// file was added to Dropbox. Since this time is not verified (the Dropbox
 /// server stores whatever the desktop client sends up), this should only be
 /// used for display purposes (such as sorting) and not, for example, to
 /// determine if a file has changed or not.
-@property (nonatomic, readonly) NSDate * _Nonnull clientModified;
+@property (nonatomic, readonly) NSDate *clientModified;
 
 /// The last time the file was modified on Dropbox.
-@property (nonatomic, readonly) NSDate * _Nonnull serverModified;
+@property (nonatomic, readonly) NSDate *serverModified;
 
 /// A unique identifier for the current revision of a file. This field is the
 /// same rev as elsewhere in the API and can be used to detect changes and avoid
 /// conflicts.
-@property (nonatomic, readonly, copy) NSString * _Nonnull rev;
+@property (nonatomic, readonly, copy) NSString *rev;
 
 /// The file size in bytes.
-@property (nonatomic, readonly) NSNumber * _Nonnull size;
+@property (nonatomic, readonly) NSNumber *size;
 
 /// Additional information if the file is a photo or video.
-@property (nonatomic, readonly) DBFILESMediaInfo * _Nullable mediaInfo;
+@property (nonatomic, readonly, nullable) DBFILESMediaInfo *mediaInfo;
 
 /// Set if this file is contained in a shared folder.
-@property (nonatomic, readonly) DBFILESFileSharingInfo * _Nullable sharingInfo;
+@property (nonatomic, readonly, nullable) DBFILESFileSharingInfo *sharingInfo;
 
 /// Additional information if the file has custom properties with the property
 /// template specified.
-@property (nonatomic, readonly) NSArray<DBPROPERTIESPropertyGroup *> * _Nullable propertyGroups;
+@property (nonatomic, readonly, nullable) NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups;
 
 /// This flag will only be present if include_has_explicit_shared_members  is
 /// true in `listFolder` or `getMetadata`. If this  flag is present, it will be
 /// true if this file has any explicit shared  members. This is different from
 /// sharing_info in that this could be true  in the case where a file has
 /// explicit members but is not contained within  a shared folder.
-@property (nonatomic, readonly) NSNumber * _Nullable hasExplicitSharedMembers;
+@property (nonatomic, readonly, nullable) NSNumber *hasExplicitSharedMembers;
 
 /// A hash of the file content. This field can be used to verify data integrity.
 /// For more information see our Content hash /developers/reference/content-hash
 /// page.
-@property (nonatomic, readonly) NSString * _Nullable contentHash;
+@property (nonatomic, readonly, copy, nullable) NSString *contentHash;
 
 #pragma mark - Constructors
 
@@ -116,20 +118,20 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                                 id_:(NSString * _Nonnull)id_
-                      clientModified:(NSDate * _Nonnull)clientModified
-                      serverModified:(NSDate * _Nonnull)serverModified
-                                 rev:(NSString * _Nonnull)rev
-                                size:(NSNumber * _Nonnull)size
-                           pathLower:(NSString * _Nullable)pathLower
-                         pathDisplay:(NSString * _Nullable)pathDisplay
-                parentSharedFolderId:(NSString * _Nullable)parentSharedFolderId
-                           mediaInfo:(DBFILESMediaInfo * _Nullable)mediaInfo
-                         sharingInfo:(DBFILESFileSharingInfo * _Nullable)sharingInfo
-                      propertyGroups:(NSArray<DBPROPERTIESPropertyGroup *> * _Nullable)propertyGroups
-            hasExplicitSharedMembers:(NSNumber * _Nullable)hasExplicitSharedMembers
-                         contentHash:(NSString * _Nullable)contentHash;
+- (instancetype)initWithName:(NSString *)name
+                         id_:(NSString *)id_
+              clientModified:(NSDate *)clientModified
+              serverModified:(NSDate *)serverModified
+                         rev:(NSString *)rev
+                        size:(NSNumber *)size
+                   pathLower:(nullable NSString *)pathLower
+                 pathDisplay:(nullable NSString *)pathDisplay
+        parentSharedFolderId:(nullable NSString *)parentSharedFolderId
+                   mediaInfo:(nullable DBFILESMediaInfo *)mediaInfo
+                 sharingInfo:(nullable DBFILESFileSharingInfo *)sharingInfo
+              propertyGroups:(nullable NSArray<DBPROPERTIESPropertyGroup *> *)propertyGroups
+    hasExplicitSharedMembers:(nullable NSNumber *)hasExplicitSharedMembers
+                 contentHash:(nullable NSString *)contentHash;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -151,12 +153,12 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name
-                                 id_:(NSString * _Nonnull)id_
-                      clientModified:(NSDate * _Nonnull)clientModified
-                      serverModified:(NSDate * _Nonnull)serverModified
-                                 rev:(NSString * _Nonnull)rev
-                                size:(NSNumber * _Nonnull)size;
+- (instancetype)initWithName:(NSString *)name
+                         id_:(NSString *)id_
+              clientModified:(NSDate *)clientModified
+              serverModified:(NSDate *)serverModified
+                         rev:(NSString *)rev
+                        size:(NSNumber *)size;
 
 @end
 
@@ -175,7 +177,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESFileMetadata` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESFileMetadata * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESFileMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESFileMetadata` instances.
@@ -185,6 +187,8 @@
 ///
 /// @return An instantiation of the `DBFILESFileMetadata` object.
 ///
-+ (DBFILESFileMetadata * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESFileMetadata *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

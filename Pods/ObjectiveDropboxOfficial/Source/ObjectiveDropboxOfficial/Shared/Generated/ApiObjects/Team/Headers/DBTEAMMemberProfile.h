@@ -13,6 +13,8 @@
 @class DBTEAMTeamMembershipType;
 @class DBUSERSName;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -24,43 +26,43 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMemberProfile : NSObject <DBSerializable>
+@interface DBTEAMMemberProfile : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// ID of user as a member of a team.
-@property (nonatomic, readonly, copy) NSString * _Nonnull teamMemberId;
+@property (nonatomic, readonly, copy) NSString *teamMemberId;
 
 /// External ID that a team can attach to the user. An application using the API
 /// may find it easier to use their own IDs instead of Dropbox IDs like
 /// account_id or team_member_id.
-@property (nonatomic, readonly) NSString * _Nullable externalId;
+@property (nonatomic, readonly, copy, nullable) NSString *externalId;
 
 /// A user's account identifier.
-@property (nonatomic, readonly) NSString * _Nullable accountId;
+@property (nonatomic, readonly, copy, nullable) NSString *accountId;
 
 /// Email address of user.
-@property (nonatomic, readonly, copy) NSString * _Nonnull email;
+@property (nonatomic, readonly, copy) NSString *email;
 
 /// Is true if the user's email is verified to be owned by the user.
-@property (nonatomic, readonly) NSNumber * _Nonnull emailVerified;
+@property (nonatomic, readonly) NSNumber *emailVerified;
 
 /// The user's status as a member of a specific team.
-@property (nonatomic, readonly) DBTEAMTeamMemberStatus * _Nonnull status;
+@property (nonatomic, readonly) DBTEAMTeamMemberStatus *status;
 
 /// Representations for a person's name.
-@property (nonatomic, readonly) DBUSERSName * _Nonnull name;
+@property (nonatomic, readonly) DBUSERSName *name;
 
 /// The user's membership type: full (normal team member) vs limited (does not
 /// use a license; no access to the team's shared quota).
-@property (nonatomic, readonly) DBTEAMTeamMembershipType * _Nonnull membershipType;
+@property (nonatomic, readonly) DBTEAMTeamMembershipType *membershipType;
 
 /// The date and time the user joined as a member of a specific team.
-@property (nonatomic, readonly) NSDate * _Nullable joinedOn;
+@property (nonatomic, readonly, nullable) NSDate *joinedOn;
 
 /// Persistent ID that a team can attach to the user. The persistent ID is
 /// unique ID to be used for SAML authentication.
-@property (nonatomic, readonly) NSString * _Nullable persistentId;
+@property (nonatomic, readonly, copy, nullable) NSString *persistentId;
 
 #pragma mark - Constructors
 
@@ -86,16 +88,16 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamMemberId:(NSString * _Nonnull)teamMemberId
-                                       email:(NSString * _Nonnull)email
-                               emailVerified:(NSNumber * _Nonnull)emailVerified
-                                      status:(DBTEAMTeamMemberStatus * _Nonnull)status
-                                        name:(DBUSERSName * _Nonnull)name
-                              membershipType:(DBTEAMTeamMembershipType * _Nonnull)membershipType
-                                  externalId:(NSString * _Nullable)externalId
-                                   accountId:(NSString * _Nullable)accountId
-                                    joinedOn:(NSDate * _Nullable)joinedOn
-                                persistentId:(NSString * _Nullable)persistentId;
+- (instancetype)initWithTeamMemberId:(NSString *)teamMemberId
+                               email:(NSString *)email
+                       emailVerified:(NSNumber *)emailVerified
+                              status:(DBTEAMTeamMemberStatus *)status
+                                name:(DBUSERSName *)name
+                      membershipType:(DBTEAMTeamMembershipType *)membershipType
+                          externalId:(nullable NSString *)externalId
+                           accountId:(nullable NSString *)accountId
+                            joinedOn:(nullable NSDate *)joinedOn
+                        persistentId:(nullable NSString *)persistentId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -112,12 +114,14 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamMemberId:(NSString * _Nonnull)teamMemberId
-                                       email:(NSString * _Nonnull)email
-                               emailVerified:(NSNumber * _Nonnull)emailVerified
-                                      status:(DBTEAMTeamMemberStatus * _Nonnull)status
-                                        name:(DBUSERSName * _Nonnull)name
-                              membershipType:(DBTEAMTeamMembershipType * _Nonnull)membershipType;
+- (instancetype)initWithTeamMemberId:(NSString *)teamMemberId
+                               email:(NSString *)email
+                       emailVerified:(NSNumber *)emailVerified
+                              status:(DBTEAMTeamMemberStatus *)status
+                                name:(DBUSERSName *)name
+                      membershipType:(DBTEAMTeamMembershipType *)membershipType;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -136,7 +140,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberProfile` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBTEAMMemberProfile * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBTEAMMemberProfile *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberProfile` instances.
@@ -146,6 +150,8 @@
 ///
 /// @return An instantiation of the `DBTEAMMemberProfile` object.
 ///
-+ (DBTEAMMemberProfile * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBTEAMMemberProfile *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

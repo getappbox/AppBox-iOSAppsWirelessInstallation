@@ -10,6 +10,8 @@
 
 @class DBAUTHTokenFromOAuth1Error;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,7 +21,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBAUTHTokenFromOAuth1Error : NSObject <DBSerializable>
+@interface DBAUTHTokenFromOAuth1Error : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidOauth1TokenInfo;
+- (instancetype)initWithInvalidOauth1TokenInfo;
 
 ///
 /// Initializes union class with tag state of "app_id_mismatch".
@@ -61,14 +63,16 @@ typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAppIdMismatch;
+- (instancetype)initWithAppIdMismatch;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -100,7 +104,7 @@ typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -119,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHTokenFromOAuth1Error` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBAUTHTokenFromOAuth1Error * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBAUTHTokenFromOAuth1Error *)instance;
 
 ///
 /// Deserializes `DBAUTHTokenFromOAuth1Error` instances.
@@ -129,6 +133,8 @@ typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
 ///
 /// @return An instantiation of the `DBAUTHTokenFromOAuth1Error` object.
 ///
-+ (DBAUTHTokenFromOAuth1Error * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBAUTHTokenFromOAuth1Error *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 
 @class DBPAPERListUsersOnFolderContinueArgs;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,26 +22,26 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBPAPERListUsersOnFolderContinueArgs : DBPAPERRefPaperDoc <DBSerializable>
+@interface DBPAPERListUsersOnFolderContinueArgs : DBPAPERRefPaperDoc <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The cursor obtained from `docsFolderUsersList` or
 /// `docsFolderUsersListContinue`. Allows for pagination.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param docId (no description).
+/// @param docId The Paper doc ID.
 /// @param cursor The cursor obtained from `docsFolderUsersList` or
 /// `docsFolderUsersListContinue`. Allows for pagination.
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDocId:(NSString * _Nonnull)docId cursor:(NSString * _Nonnull)cursor;
+- (instancetype)initWithDocId:(NSString *)docId cursor:(NSString *)cursor;
 
 @end
 
@@ -59,7 +61,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListUsersOnFolderContinueArgs` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBPAPERListUsersOnFolderContinueArgs * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBPAPERListUsersOnFolderContinueArgs *)instance;
 
 ///
 /// Deserializes `DBPAPERListUsersOnFolderContinueArgs` instances.
@@ -70,6 +72,8 @@
 /// @return An instantiation of the `DBPAPERListUsersOnFolderContinueArgs`
 /// object.
 ///
-+ (DBPAPERListUsersOnFolderContinueArgs * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBPAPERListUsersOnFolderContinueArgs *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

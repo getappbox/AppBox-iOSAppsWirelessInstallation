@@ -10,6 +10,8 @@
 
 @class DBSHARINGInviteeInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGInviteeInfo : NSObject <DBSerializable>
+@interface DBSHARINGInviteeInfo : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -41,7 +43,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 
 /// E-mail address of invited user. @note Ensure the `isEmail` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly, copy) NSString * _Nonnull email;
+@property (nonatomic, readonly, copy) NSString *email;
 
 #pragma mark - Constructors
 
@@ -54,14 +56,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithEmail:(NSString * _Nonnull)email;
+- (instancetype)initWithEmail:(NSString *)email;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -87,7 +91,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -106,7 +110,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGInviteeInfo` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGInviteeInfo * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGInviteeInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGInviteeInfo` instances.
@@ -116,6 +120,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 ///
 /// @return An instantiation of the `DBSHARINGInviteeInfo` object.
 ///
-+ (DBSHARINGInviteeInfo * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGInviteeInfo *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

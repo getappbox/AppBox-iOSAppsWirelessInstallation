@@ -12,8 +12,8 @@
             resultType:(Class<DBSerializable>)resultType
              errorType:(Class<DBSerializable>)errorType
                  attrs:(NSDictionary<NSString *, NSString *> *)attrs
-      arraySerialBlock:(id _Nonnull (^)(id))arraySerialBlock
-    arrayDeserialBlock:(id _Nonnull (^)(id))arrayDeserialBlock {
+      arraySerialBlock:(id (^)(id))arraySerialBlock
+    arrayDeserialBlock:(id (^)(id))arrayDeserialBlock {
   self = [self init];
   if (self != nil) {
     _name = name;

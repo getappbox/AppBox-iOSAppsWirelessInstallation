@@ -49,6 +49,51 @@
   return [[DBPAPERAddMemberSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.member hash];
+  result = prime * result + [self.permissionLevel hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAddMember:other];
+}
+
+- (BOOL)isEqualToAddMember:(DBPAPERAddMember *)anAddMember {
+  if (self == anAddMember) {
+    return YES;
+  }
+  if (![self.member isEqual:anAddMember.member]) {
+    return NO;
+  }
+  if (![self.permissionLevel isEqual:anAddMember.permissionLevel]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -109,6 +154,47 @@
 
 - (NSString *)description {
   return [[DBPAPERRefPaperDocSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRefPaperDoc:other];
+}
+
+- (BOOL)isEqualToRefPaperDoc:(DBPAPERRefPaperDoc *)aRefPaperDoc {
+  if (self == aRefPaperDoc) {
+    return YES;
+  }
+  if (![self.docId isEqual:aRefPaperDoc.docId]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -180,6 +266,63 @@
   return [[DBPAPERAddPaperDocUserSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.members hash];
+  if (self.customMessage) {
+    result = prime * result + [self.customMessage hash];
+  }
+  result = prime * result + [self.quiet hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAddPaperDocUser:other];
+}
+
+- (BOOL)isEqualToAddPaperDocUser:(DBPAPERAddPaperDocUser *)anAddPaperDocUser {
+  if (self == anAddPaperDocUser) {
+    return YES;
+  }
+  if (![self.docId isEqual:anAddPaperDocUser.docId]) {
+    return NO;
+  }
+  if (![self.members isEqual:anAddPaperDocUser.members]) {
+    return NO;
+  }
+  if (self.customMessage) {
+    if (![self.customMessage isEqual:anAddPaperDocUser.customMessage]) {
+      return NO;
+    }
+  }
+  if (![self.quiet isEqual:anAddPaperDocUser.quiet]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -191,8 +334,8 @@
 
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"members"] = [DBArraySerializer serialize:valueObj.members
-                                            withBlock:^id(id elem) {
-                                              return [DBPAPERAddMemberSerializer serialize:elem];
+                                            withBlock:^id(id elem0) {
+                                              return [DBPAPERAddMemberSerializer serialize:elem0];
                                             }];
   if (valueObj.customMessage) {
     jsonDict[@"custom_message"] = valueObj.customMessage;
@@ -205,8 +348,8 @@
 + (DBPAPERAddPaperDocUser *)deserialize:(NSDictionary *)valueDict {
   NSString *docId = valueDict[@"doc_id"];
   NSArray<DBPAPERAddMember *> *members = [DBArraySerializer deserialize:valueDict[@"members"]
-                                                              withBlock:^id(id elem) {
-                                                                return [DBPAPERAddMemberSerializer deserialize:elem];
+                                                              withBlock:^id(id elem0) {
+                                                                return [DBPAPERAddMemberSerializer deserialize:elem0];
                                                               }];
   NSString *customMessage = valueDict[@"custom_message"] ?: nil;
   NSNumber *quiet = valueDict[@"quiet"] ?: @NO;
@@ -252,6 +395,51 @@
 
 - (NSString *)description {
   return [[DBPAPERAddPaperDocUserMemberResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.member hash];
+  result = prime * result + [self.result hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAddPaperDocUserMemberResult:other];
+}
+
+- (BOOL)isEqualToAddPaperDocUserMemberResult:(DBPAPERAddPaperDocUserMemberResult *)anAddPaperDocUserMemberResult {
+  if (self == anAddPaperDocUserMemberResult) {
+    return YES;
+  }
+  if (![self.member isEqual:anAddPaperDocUserMemberResult.member]) {
+    return NO;
+  }
+  if (![self.result isEqual:anAddPaperDocUserMemberResult.result]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -427,6 +615,82 @@
   return [[DBPAPERAddPaperDocUserResultSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERAddPaperDocUserResultSuccess:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultUnknownError:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultSharingOutsideTeamDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultDailyLimitReached:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultUserIsOwner:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultFailedUserDataRetrieval:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultPermissionAlreadyGranted:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERAddPaperDocUserResultOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAddPaperDocUserResult:other];
+}
+
+- (BOOL)isEqualToAddPaperDocUserResult:(DBPAPERAddPaperDocUserResult *)anAddPaperDocUserResult {
+  if (self == anAddPaperDocUserResult) {
+    return YES;
+  }
+  if (self.tag != anAddPaperDocUserResult.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERAddPaperDocUserResultSuccess:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultUnknownError:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultSharingOutsideTeamDisabled:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultDailyLimitReached:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultUserIsOwner:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultFailedUserDataRetrieval:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultPermissionAlreadyGranted:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  case DBPAPERAddPaperDocUserResultOther:
+    return [[self tagName] isEqual:[anAddPaperDocUserResult tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -482,6 +746,7 @@
     return [[DBPAPERAddPaperDocUserResult alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERCursor.h"
@@ -522,6 +787,55 @@
 
 - (NSString *)description {
   return [[DBPAPERCursorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.value hash];
+  if (self.expiration) {
+    result = prime * result + [self.expiration hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToCursor:other];
+}
+
+- (BOOL)isEqualToCursor:(DBPAPERCursor *)aCursor {
+  if (self == aCursor) {
+    return YES;
+  }
+  if (![self.value isEqual:aCursor.value]) {
+    return NO;
+  }
+  if (self.expiration) {
+    if (![self.expiration isEqual:aCursor.expiration]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -617,6 +931,58 @@
   return [[DBPAPERPaperApiBaseErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERPaperApiBaseErrorInsufficientPermissions:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperApiBaseErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperApiBaseError:other];
+}
+
+- (BOOL)isEqualToPaperApiBaseError:(DBPAPERPaperApiBaseError *)aPaperApiBaseError {
+  if (self == aPaperApiBaseError) {
+    return YES;
+  }
+  if (self.tag != aPaperApiBaseError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERPaperApiBaseErrorInsufficientPermissions:
+    return [[self tagName] isEqual:[aPaperApiBaseError tagName]];
+  case DBPAPERPaperApiBaseErrorOther:
+    return [[self tagName] isEqual:[aPaperApiBaseError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -648,6 +1014,7 @@
     return [[DBPAPERPaperApiBaseError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERDocLookupError.h"
@@ -730,6 +1097,62 @@
   return [[DBPAPERDocLookupErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERDocLookupErrorInsufficientPermissions:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERDocLookupErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERDocLookupErrorDocNotFound:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDocLookupError:other];
+}
+
+- (BOOL)isEqualToDocLookupError:(DBPAPERDocLookupError *)aDocLookupError {
+  if (self == aDocLookupError) {
+    return YES;
+  }
+  if (self.tag != aDocLookupError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERDocLookupErrorInsufficientPermissions:
+    return [[self tagName] isEqual:[aDocLookupError tagName]];
+  case DBPAPERDocLookupErrorOther:
+    return [[self tagName] isEqual:[aDocLookupError tagName]];
+  case DBPAPERDocLookupErrorDocNotFound:
+    return [[self tagName] isEqual:[aDocLookupError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -765,6 +1188,7 @@
     return [[DBPAPERDocLookupError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERDocSubscriptionLevel.h"
@@ -860,6 +1284,66 @@
   return [[DBPAPERDocSubscriptionLevelSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERDocSubscriptionLevelDefault_:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERDocSubscriptionLevelIgnore:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERDocSubscriptionLevelEvery:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERDocSubscriptionLevelNoEmail:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDocSubscriptionLevel:other];
+}
+
+- (BOOL)isEqualToDocSubscriptionLevel:(DBPAPERDocSubscriptionLevel *)aDocSubscriptionLevel {
+  if (self == aDocSubscriptionLevel) {
+    return YES;
+  }
+  if (self.tag != aDocSubscriptionLevel.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERDocSubscriptionLevelDefault_:
+    return [[self tagName] isEqual:[aDocSubscriptionLevel tagName]];
+  case DBPAPERDocSubscriptionLevelIgnore:
+    return [[self tagName] isEqual:[aDocSubscriptionLevel tagName]];
+  case DBPAPERDocSubscriptionLevelEvery:
+    return [[self tagName] isEqual:[aDocSubscriptionLevel tagName]];
+  case DBPAPERDocSubscriptionLevelNoEmail:
+    return [[self tagName] isEqual:[aDocSubscriptionLevel tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -904,6 +1388,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBPAPERExportFormat.h"
@@ -985,6 +1470,62 @@
   return [[DBPAPERExportFormatSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERExportFormatHtml:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERExportFormatMarkdown:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERExportFormatOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExportFormat:other];
+}
+
+- (BOOL)isEqualToExportFormat:(DBPAPERExportFormat *)anExportFormat {
+  if (self == anExportFormat) {
+    return YES;
+  }
+  if (self.tag != anExportFormat.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERExportFormatHtml:
+    return [[self tagName] isEqual:[anExportFormat tagName]];
+  case DBPAPERExportFormatMarkdown:
+    return [[self tagName] isEqual:[anExportFormat tagName]];
+  case DBPAPERExportFormatOther:
+    return [[self tagName] isEqual:[anExportFormat tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1020,6 +1561,7 @@
     return [[DBPAPERExportFormat alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERFolder.h"
@@ -1056,6 +1598,51 @@
 
 - (NSString *)description {
   return [[DBPAPERFolderSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.id_ hash];
+  result = prime * result + [self.name hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolder:other];
+}
+
+- (BOOL)isEqualToFolder:(DBPAPERFolder *)aFolder {
+  if (self == aFolder) {
+    return YES;
+  }
+  if (![self.id_ isEqual:aFolder.id_]) {
+    return NO;
+  }
+  if (![self.name isEqual:aFolder.name]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1147,6 +1734,58 @@
   return [[DBPAPERFolderSharingPolicyTypeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERFolderSharingPolicyTypeTeam:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERFolderSharingPolicyTypeInviteOnly:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderSharingPolicyType:other];
+}
+
+- (BOOL)isEqualToFolderSharingPolicyType:(DBPAPERFolderSharingPolicyType *)aFolderSharingPolicyType {
+  if (self == aFolderSharingPolicyType) {
+    return YES;
+  }
+  if (self.tag != aFolderSharingPolicyType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERFolderSharingPolicyTypeTeam:
+    return [[self tagName] isEqual:[aFolderSharingPolicyType tagName]];
+  case DBPAPERFolderSharingPolicyTypeInviteOnly:
+    return [[self tagName] isEqual:[aFolderSharingPolicyType tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1183,6 +1822,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBPAPERFolderSubscriptionLevel.h"
@@ -1278,6 +1918,66 @@
   return [[DBPAPERFolderSubscriptionLevelSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERFolderSubscriptionLevelNone:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERFolderSubscriptionLevelActivityOnly:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERFolderSubscriptionLevelDailyEmails:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERFolderSubscriptionLevelWeeklyEmails:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFolderSubscriptionLevel:other];
+}
+
+- (BOOL)isEqualToFolderSubscriptionLevel:(DBPAPERFolderSubscriptionLevel *)aFolderSubscriptionLevel {
+  if (self == aFolderSubscriptionLevel) {
+    return YES;
+  }
+  if (self.tag != aFolderSubscriptionLevel.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERFolderSubscriptionLevelNone:
+    return [[self tagName] isEqual:[aFolderSubscriptionLevel tagName]];
+  case DBPAPERFolderSubscriptionLevelActivityOnly:
+    return [[self tagName] isEqual:[aFolderSubscriptionLevel tagName]];
+  case DBPAPERFolderSubscriptionLevelDailyEmails:
+    return [[self tagName] isEqual:[aFolderSubscriptionLevel tagName]];
+  case DBPAPERFolderSubscriptionLevelWeeklyEmails:
+    return [[self tagName] isEqual:[aFolderSubscriptionLevel tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1322,6 +2022,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBPAPERFolder.h"
@@ -1348,7 +2049,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithFolderSharingPolicyType:nil folders:nil];
 }
 
@@ -1368,6 +2069,59 @@
   return [[DBPAPERFoldersContainingPaperDocSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.folderSharingPolicyType) {
+    result = prime * result + [self.folderSharingPolicyType hash];
+  }
+  if (self.folders) {
+    result = prime * result + [self.folders hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFoldersContainingPaperDoc:other];
+}
+
+- (BOOL)isEqualToFoldersContainingPaperDoc:(DBPAPERFoldersContainingPaperDoc *)aFoldersContainingPaperDoc {
+  if (self == aFoldersContainingPaperDoc) {
+    return YES;
+  }
+  if (self.folderSharingPolicyType) {
+    if (![self.folderSharingPolicyType isEqual:aFoldersContainingPaperDoc.folderSharingPolicyType]) {
+      return NO;
+    }
+  }
+  if (self.folders) {
+    if (![self.folders isEqual:aFoldersContainingPaperDoc.folders]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1383,8 +2137,8 @@
   }
   if (valueObj.folders) {
     jsonDict[@"folders"] = [DBArraySerializer serialize:valueObj.folders
-                                              withBlock:^id(id elem) {
-                                                return [DBPAPERFolderSerializer serialize:elem];
+                                              withBlock:^id(id elem0) {
+                                                return [DBPAPERFolderSerializer serialize:elem0];
                                               }];
   }
 
@@ -1398,8 +2152,8 @@
           : nil;
   NSArray<DBPAPERFolder *> *folders = valueDict[@"folders"]
                                           ? [DBArraySerializer deserialize:valueDict[@"folders"]
-                                                                 withBlock:^id(id elem) {
-                                                                   return [DBPAPERFolderSerializer deserialize:elem];
+                                                                 withBlock:^id(id elem0) {
+                                                                   return [DBPAPERFolderSerializer deserialize:elem0];
                                                                  }]
                                           : nil;
 
@@ -1446,6 +2200,52 @@
 
 - (NSString *)description {
   return [[DBPAPERInviteeInfoWithPermissionLevelSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.invitee hash];
+  result = prime * result + [self.permissionLevel hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToInviteeInfoWithPermissionLevel:other];
+}
+
+- (BOOL)isEqualToInviteeInfoWithPermissionLevel:
+    (DBPAPERInviteeInfoWithPermissionLevel *)anInviteeInfoWithPermissionLevel {
+  if (self == anInviteeInfoWithPermissionLevel) {
+    return YES;
+  }
+  if (![self.invitee isEqual:anInviteeInfoWithPermissionLevel.invitee]) {
+    return NO;
+  }
+  if (![self.permissionLevel isEqual:anInviteeInfoWithPermissionLevel.permissionLevel]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1550,6 +2350,58 @@
   return [[DBPAPERListDocsCursorErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERListDocsCursorErrorCursorError:
+    result = prime * result + [self.cursorError hash];
+  case DBPAPERListDocsCursorErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListDocsCursorError:other];
+}
+
+- (BOOL)isEqualToListDocsCursorError:(DBPAPERListDocsCursorError *)aListDocsCursorError {
+  if (self == aListDocsCursorError) {
+    return YES;
+  }
+  if (self.tag != aListDocsCursorError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERListDocsCursorErrorCursorError:
+    return [self.cursorError isEqual:aListDocsCursorError.cursorError];
+  case DBPAPERListDocsCursorErrorOther:
+    return [[self tagName] isEqual:[aListDocsCursorError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1584,6 +2436,7 @@
     return [[DBPAPERListDocsCursorError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERListPaperDocsArgs.h"
@@ -1615,7 +2468,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithFilterBy:nil sortBy:nil sortOrder:nil limit:nil];
 }
 
@@ -1633,6 +2486,59 @@
 
 - (NSString *)description {
   return [[DBPAPERListPaperDocsArgsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.filterBy hash];
+  result = prime * result + [self.sortBy hash];
+  result = prime * result + [self.sortOrder hash];
+  result = prime * result + [self.limit hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPaperDocsArgs:other];
+}
+
+- (BOOL)isEqualToListPaperDocsArgs:(DBPAPERListPaperDocsArgs *)aListPaperDocsArgs {
+  if (self == aListPaperDocsArgs) {
+    return YES;
+  }
+  if (![self.filterBy isEqual:aListPaperDocsArgs.filterBy]) {
+    return NO;
+  }
+  if (![self.sortBy isEqual:aListPaperDocsArgs.sortBy]) {
+    return NO;
+  }
+  if (![self.sortOrder isEqual:aListPaperDocsArgs.sortOrder]) {
+    return NO;
+  }
+  if (![self.limit isEqual:aListPaperDocsArgs.limit]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1702,6 +2608,47 @@
 
 - (NSString *)description {
   return [[DBPAPERListPaperDocsContinueArgsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPaperDocsContinueArgs:other];
+}
+
+- (BOOL)isEqualToListPaperDocsContinueArgs:(DBPAPERListPaperDocsContinueArgs *)aListPaperDocsContinueArgs {
+  if (self == aListPaperDocsContinueArgs) {
+    return YES;
+  }
+  if (![self.cursor isEqual:aListPaperDocsContinueArgs.cursor]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -1805,6 +2752,62 @@
   return [[DBPAPERListPaperDocsFilterBySerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERListPaperDocsFilterByDocsAccessed:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsFilterByDocsCreated:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsFilterByOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPaperDocsFilterBy:other];
+}
+
+- (BOOL)isEqualToListPaperDocsFilterBy:(DBPAPERListPaperDocsFilterBy *)aListPaperDocsFilterBy {
+  if (self == aListPaperDocsFilterBy) {
+    return YES;
+  }
+  if (self.tag != aListPaperDocsFilterBy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERListPaperDocsFilterByDocsAccessed:
+    return [[self tagName] isEqual:[aListPaperDocsFilterBy tagName]];
+  case DBPAPERListPaperDocsFilterByDocsCreated:
+    return [[self tagName] isEqual:[aListPaperDocsFilterBy tagName]];
+  case DBPAPERListPaperDocsFilterByOther:
+    return [[self tagName] isEqual:[aListPaperDocsFilterBy tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1840,6 +2843,7 @@
     return [[DBPAPERListPaperDocsFilterBy alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERCursor.h"
@@ -1883,6 +2887,55 @@
   return [[DBPAPERListPaperDocsResponseSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docIds hash];
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.hasMore hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPaperDocsResponse:other];
+}
+
+- (BOOL)isEqualToListPaperDocsResponse:(DBPAPERListPaperDocsResponse *)aListPaperDocsResponse {
+  if (self == aListPaperDocsResponse) {
+    return YES;
+  }
+  if (![self.docIds isEqual:aListPaperDocsResponse.docIds]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aListPaperDocsResponse.cursor]) {
+    return NO;
+  }
+  if (![self.hasMore isEqual:aListPaperDocsResponse.hasMore]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -1893,8 +2946,8 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"doc_ids"] = [DBArraySerializer serialize:valueObj.docIds
-                                            withBlock:^id(id elem) {
-                                              return elem;
+                                            withBlock:^id(id elem0) {
+                                              return elem0;
                                             }];
   jsonDict[@"cursor"] = [DBPAPERCursorSerializer serialize:valueObj.cursor];
   jsonDict[@"has_more"] = valueObj.hasMore;
@@ -1904,8 +2957,8 @@
 
 + (DBPAPERListPaperDocsResponse *)deserialize:(NSDictionary *)valueDict {
   NSArray<NSString *> *docIds = [DBArraySerializer deserialize:valueDict[@"doc_ids"]
-                                                     withBlock:^id(id elem) {
-                                                       return elem;
+                                                     withBlock:^id(id elem0) {
+                                                       return elem0;
                                                      }];
   DBPAPERCursor *cursor = [DBPAPERCursorSerializer deserialize:valueDict[@"cursor"]];
   NSNumber *hasMore = valueDict[@"has_more"];
@@ -2008,6 +3061,66 @@
   return [[DBPAPERListPaperDocsSortBySerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERListPaperDocsSortByAccessed:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsSortByModified:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsSortByCreated:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsSortByOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPaperDocsSortBy:other];
+}
+
+- (BOOL)isEqualToListPaperDocsSortBy:(DBPAPERListPaperDocsSortBy *)aListPaperDocsSortBy {
+  if (self == aListPaperDocsSortBy) {
+    return YES;
+  }
+  if (self.tag != aListPaperDocsSortBy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERListPaperDocsSortByAccessed:
+    return [[self tagName] isEqual:[aListPaperDocsSortBy tagName]];
+  case DBPAPERListPaperDocsSortByModified:
+    return [[self tagName] isEqual:[aListPaperDocsSortBy tagName]];
+  case DBPAPERListPaperDocsSortByCreated:
+    return [[self tagName] isEqual:[aListPaperDocsSortBy tagName]];
+  case DBPAPERListPaperDocsSortByOther:
+    return [[self tagName] isEqual:[aListPaperDocsSortBy tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2047,6 +3160,7 @@
     return [[DBPAPERListPaperDocsSortBy alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERListPaperDocsSortOrder.h"
@@ -2128,6 +3242,62 @@
   return [[DBPAPERListPaperDocsSortOrderSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERListPaperDocsSortOrderAscending:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsSortOrderDescending:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListPaperDocsSortOrderOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListPaperDocsSortOrder:other];
+}
+
+- (BOOL)isEqualToListPaperDocsSortOrder:(DBPAPERListPaperDocsSortOrder *)aListPaperDocsSortOrder {
+  if (self == aListPaperDocsSortOrder) {
+    return YES;
+  }
+  if (self.tag != aListPaperDocsSortOrder.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERListPaperDocsSortOrderAscending:
+    return [[self tagName] isEqual:[aListPaperDocsSortOrder tagName]];
+  case DBPAPERListPaperDocsSortOrderDescending:
+    return [[self tagName] isEqual:[aListPaperDocsSortOrder tagName]];
+  case DBPAPERListPaperDocsSortOrderOther:
+    return [[self tagName] isEqual:[aListPaperDocsSortOrder tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2163,6 +3333,7 @@
     return [[DBPAPERListPaperDocsSortOrder alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERListUsersCursorError.h"
@@ -2271,6 +3442,66 @@
   return [[DBPAPERListUsersCursorErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERListUsersCursorErrorInsufficientPermissions:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListUsersCursorErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListUsersCursorErrorDocNotFound:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERListUsersCursorErrorCursorError:
+    result = prime * result + [self.cursorError hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersCursorError:other];
+}
+
+- (BOOL)isEqualToListUsersCursorError:(DBPAPERListUsersCursorError *)aListUsersCursorError {
+  if (self == aListUsersCursorError) {
+    return YES;
+  }
+  if (self.tag != aListUsersCursorError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERListUsersCursorErrorInsufficientPermissions:
+    return [[self tagName] isEqual:[aListUsersCursorError tagName]];
+  case DBPAPERListUsersCursorErrorOther:
+    return [[self tagName] isEqual:[aListUsersCursorError tagName]];
+  case DBPAPERListUsersCursorErrorDocNotFound:
+    return [[self tagName] isEqual:[aListUsersCursorError tagName]];
+  case DBPAPERListUsersCursorErrorCursorError:
+    return [self.cursorError isEqual:aListUsersCursorError.cursorError];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2313,6 +3544,7 @@
     return [[DBPAPERListUsersCursorError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERListUsersOnFolderArgs.h"
@@ -2354,6 +3586,51 @@
 
 - (NSString *)description {
   return [[DBPAPERListUsersOnFolderArgsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.limit hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersOnFolderArgs:other];
+}
+
+- (BOOL)isEqualToListUsersOnFolderArgs:(DBPAPERListUsersOnFolderArgs *)aListUsersOnFolderArgs {
+  if (self == aListUsersOnFolderArgs) {
+    return YES;
+  }
+  if (![self.docId isEqual:aListUsersOnFolderArgs.docId]) {
+    return NO;
+  }
+  if (![self.limit isEqual:aListUsersOnFolderArgs.limit]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -2414,6 +3691,51 @@
 
 - (NSString *)description {
   return [[DBPAPERListUsersOnFolderContinueArgsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersOnFolderContinueArgs:other];
+}
+
+- (BOOL)isEqualToListUsersOnFolderContinueArgs:(DBPAPERListUsersOnFolderContinueArgs *)aListUsersOnFolderContinueArgs {
+  if (self == aListUsersOnFolderContinueArgs) {
+    return YES;
+  }
+  if (![self.docId isEqual:aListUsersOnFolderContinueArgs.docId]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aListUsersOnFolderContinueArgs.cursor]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -2486,6 +3808,59 @@
   return [[DBPAPERListUsersOnFolderResponseSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.invitees hash];
+  result = prime * result + [self.users hash];
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.hasMore hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersOnFolderResponse:other];
+}
+
+- (BOOL)isEqualToListUsersOnFolderResponse:(DBPAPERListUsersOnFolderResponse *)aListUsersOnFolderResponse {
+  if (self == aListUsersOnFolderResponse) {
+    return YES;
+  }
+  if (![self.invitees isEqual:aListUsersOnFolderResponse.invitees]) {
+    return NO;
+  }
+  if (![self.users isEqual:aListUsersOnFolderResponse.users]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aListUsersOnFolderResponse.cursor]) {
+    return NO;
+  }
+  if (![self.hasMore isEqual:aListUsersOnFolderResponse.hasMore]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2496,12 +3871,12 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"invitees"] = [DBArraySerializer serialize:valueObj.invitees
-                                             withBlock:^id(id elem) {
-                                               return [DBSHARINGInviteeInfoSerializer serialize:elem];
+                                             withBlock:^id(id elem0) {
+                                               return [DBSHARINGInviteeInfoSerializer serialize:elem0];
                                              }];
   jsonDict[@"users"] = [DBArraySerializer serialize:valueObj.users
-                                          withBlock:^id(id elem) {
-                                            return [DBSHARINGUserInfoSerializer serialize:elem];
+                                          withBlock:^id(id elem0) {
+                                            return [DBSHARINGUserInfoSerializer serialize:elem0];
                                           }];
   jsonDict[@"cursor"] = [DBPAPERCursorSerializer serialize:valueObj.cursor];
   jsonDict[@"has_more"] = valueObj.hasMore;
@@ -2512,12 +3887,12 @@
 + (DBPAPERListUsersOnFolderResponse *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBSHARINGInviteeInfo *> *invitees =
       [DBArraySerializer deserialize:valueDict[@"invitees"]
-                           withBlock:^id(id elem) {
-                             return [DBSHARINGInviteeInfoSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBSHARINGInviteeInfoSerializer deserialize:elem0];
                            }];
   NSArray<DBSHARINGUserInfo *> *users = [DBArraySerializer deserialize:valueDict[@"users"]
-                                                             withBlock:^id(id elem) {
-                                                               return [DBSHARINGUserInfoSerializer deserialize:elem];
+                                                             withBlock:^id(id elem0) {
+                                                               return [DBSHARINGUserInfoSerializer deserialize:elem0];
                                                              }];
   DBPAPERCursor *cursor = [DBPAPERCursorSerializer deserialize:valueDict[@"cursor"]];
   NSNumber *hasMore = valueDict[@"has_more"];
@@ -2570,6 +3945,55 @@
 
 - (NSString *)description {
   return [[DBPAPERListUsersOnPaperDocArgsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.limit hash];
+  result = prime * result + [self.filterBy hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersOnPaperDocArgs:other];
+}
+
+- (BOOL)isEqualToListUsersOnPaperDocArgs:(DBPAPERListUsersOnPaperDocArgs *)aListUsersOnPaperDocArgs {
+  if (self == aListUsersOnPaperDocArgs) {
+    return YES;
+  }
+  if (![self.docId isEqual:aListUsersOnPaperDocArgs.docId]) {
+    return NO;
+  }
+  if (![self.limit isEqual:aListUsersOnPaperDocArgs.limit]) {
+    return NO;
+  }
+  if (![self.filterBy isEqual:aListUsersOnPaperDocArgs.filterBy]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -2634,6 +4058,52 @@
 
 - (NSString *)description {
   return [[DBPAPERListUsersOnPaperDocContinueArgsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersOnPaperDocContinueArgs:other];
+}
+
+- (BOOL)isEqualToListUsersOnPaperDocContinueArgs:
+    (DBPAPERListUsersOnPaperDocContinueArgs *)aListUsersOnPaperDocContinueArgs {
+  if (self == aListUsersOnPaperDocContinueArgs) {
+    return YES;
+  }
+  if (![self.docId isEqual:aListUsersOnPaperDocContinueArgs.docId]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aListUsersOnPaperDocContinueArgs.cursor]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -2709,6 +4179,63 @@
   return [[DBPAPERListUsersOnPaperDocResponseSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.invitees hash];
+  result = prime * result + [self.users hash];
+  result = prime * result + [self.docOwner hash];
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.hasMore hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToListUsersOnPaperDocResponse:other];
+}
+
+- (BOOL)isEqualToListUsersOnPaperDocResponse:(DBPAPERListUsersOnPaperDocResponse *)aListUsersOnPaperDocResponse {
+  if (self == aListUsersOnPaperDocResponse) {
+    return YES;
+  }
+  if (![self.invitees isEqual:aListUsersOnPaperDocResponse.invitees]) {
+    return NO;
+  }
+  if (![self.users isEqual:aListUsersOnPaperDocResponse.users]) {
+    return NO;
+  }
+  if (![self.docOwner isEqual:aListUsersOnPaperDocResponse.docOwner]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aListUsersOnPaperDocResponse.cursor]) {
+    return NO;
+  }
+  if (![self.hasMore isEqual:aListUsersOnPaperDocResponse.hasMore]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2719,12 +4246,12 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"invitees"] = [DBArraySerializer serialize:valueObj.invitees
-                                             withBlock:^id(id elem) {
-                                               return [DBPAPERInviteeInfoWithPermissionLevelSerializer serialize:elem];
+                                             withBlock:^id(id elem0) {
+                                               return [DBPAPERInviteeInfoWithPermissionLevelSerializer serialize:elem0];
                                              }];
   jsonDict[@"users"] = [DBArraySerializer serialize:valueObj.users
-                                          withBlock:^id(id elem) {
-                                            return [DBPAPERUserInfoWithPermissionLevelSerializer serialize:elem];
+                                          withBlock:^id(id elem0) {
+                                            return [DBPAPERUserInfoWithPermissionLevelSerializer serialize:elem0];
                                           }];
   jsonDict[@"doc_owner"] = [DBSHARINGUserInfoSerializer serialize:valueObj.docOwner];
   jsonDict[@"cursor"] = [DBPAPERCursorSerializer serialize:valueObj.cursor];
@@ -2736,13 +4263,13 @@
 + (DBPAPERListUsersOnPaperDocResponse *)deserialize:(NSDictionary *)valueDict {
   NSArray<DBPAPERInviteeInfoWithPermissionLevel *> *invitees =
       [DBArraySerializer deserialize:valueDict[@"invitees"]
-                           withBlock:^id(id elem) {
-                             return [DBPAPERInviteeInfoWithPermissionLevelSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPAPERInviteeInfoWithPermissionLevelSerializer deserialize:elem0];
                            }];
   NSArray<DBPAPERUserInfoWithPermissionLevel *> *users =
       [DBArraySerializer deserialize:valueDict[@"users"]
-                           withBlock:^id(id elem) {
-                             return [DBPAPERUserInfoWithPermissionLevelSerializer deserialize:elem];
+                           withBlock:^id(id elem0) {
+                             return [DBPAPERUserInfoWithPermissionLevelSerializer deserialize:elem0];
                            }];
   DBSHARINGUserInfo *docOwner = [DBSHARINGUserInfoSerializer deserialize:valueDict[@"doc_owner"]];
   DBPAPERCursor *cursor = [DBPAPERCursorSerializer deserialize:valueDict[@"cursor"]];
@@ -2864,6 +4391,70 @@
   return [[DBPAPERPaperApiCursorErrorSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERPaperApiCursorErrorExpiredCursor:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperApiCursorErrorInvalidCursor:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperApiCursorErrorWrongUserInCursor:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperApiCursorErrorReset:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperApiCursorErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperApiCursorError:other];
+}
+
+- (BOOL)isEqualToPaperApiCursorError:(DBPAPERPaperApiCursorError *)aPaperApiCursorError {
+  if (self == aPaperApiCursorError) {
+    return YES;
+  }
+  if (self.tag != aPaperApiCursorError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERPaperApiCursorErrorExpiredCursor:
+    return [[self tagName] isEqual:[aPaperApiCursorError tagName]];
+  case DBPAPERPaperApiCursorErrorInvalidCursor:
+    return [[self tagName] isEqual:[aPaperApiCursorError tagName]];
+  case DBPAPERPaperApiCursorErrorWrongUserInCursor:
+    return [[self tagName] isEqual:[aPaperApiCursorError tagName]];
+  case DBPAPERPaperApiCursorErrorReset:
+    return [[self tagName] isEqual:[aPaperApiCursorError tagName]];
+  case DBPAPERPaperApiCursorErrorOther:
+    return [[self tagName] isEqual:[aPaperApiCursorError tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -2907,6 +4498,7 @@
     return [[DBPAPERPaperApiCursorError alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERExportFormat.h"
@@ -2944,6 +4536,51 @@
 
 - (NSString *)description {
   return [[DBPAPERPaperDocExportSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.exportFormat hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocExport:other];
+}
+
+- (BOOL)isEqualToPaperDocExport:(DBPAPERPaperDocExport *)aPaperDocExport {
+  if (self == aPaperDocExport) {
+    return YES;
+  }
+  if (![self.docId isEqual:aPaperDocExport.docId]) {
+    return NO;
+  }
+  if (![self.exportFormat isEqual:aPaperDocExport.exportFormat]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3009,6 +4646,59 @@
 
 - (NSString *)description {
   return [[DBPAPERPaperDocExportResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.owner hash];
+  result = prime * result + [self.title hash];
+  result = prime * result + [self.revision hash];
+  result = prime * result + [self.mimeType hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocExportResult:other];
+}
+
+- (BOOL)isEqualToPaperDocExportResult:(DBPAPERPaperDocExportResult *)aPaperDocExportResult {
+  if (self == aPaperDocExportResult) {
+    return YES;
+  }
+  if (![self.owner isEqual:aPaperDocExportResult.owner]) {
+    return NO;
+  }
+  if (![self.title isEqual:aPaperDocExportResult.title]) {
+    return NO;
+  }
+  if (![self.revision isEqual:aPaperDocExportResult.revision]) {
+    return NO;
+  }
+  if (![self.mimeType isEqual:aPaperDocExportResult.mimeType]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3118,6 +4808,62 @@
   return [[DBPAPERPaperDocPermissionLevelSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERPaperDocPermissionLevelEdit:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperDocPermissionLevelViewAndComment:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperDocPermissionLevelOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocPermissionLevel:other];
+}
+
+- (BOOL)isEqualToPaperDocPermissionLevel:(DBPAPERPaperDocPermissionLevel *)aPaperDocPermissionLevel {
+  if (self == aPaperDocPermissionLevel) {
+    return YES;
+  }
+  if (self.tag != aPaperDocPermissionLevel.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERPaperDocPermissionLevelEdit:
+    return [[self tagName] isEqual:[aPaperDocPermissionLevel tagName]];
+  case DBPAPERPaperDocPermissionLevelViewAndComment:
+    return [[self tagName] isEqual:[aPaperDocPermissionLevel tagName]];
+  case DBPAPERPaperDocPermissionLevelOther:
+    return [[self tagName] isEqual:[aPaperDocPermissionLevel tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3153,6 +4899,7 @@
     return [[DBPAPERPaperDocPermissionLevel alloc] initWithOther];
   }
 }
+
 @end
 
 #import "DBPAPERPaperDocSharingPolicy.h"
@@ -3190,6 +4937,51 @@
 
 - (NSString *)description {
   return [[DBPAPERPaperDocSharingPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.sharingPolicy hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocSharingPolicy:other];
+}
+
+- (BOOL)isEqualToPaperDocSharingPolicy:(DBPAPERPaperDocSharingPolicy *)aPaperDocSharingPolicy {
+  if (self == aPaperDocSharingPolicy) {
+    return YES;
+  }
+  if (![self.docId isEqual:aPaperDocSharingPolicy.docId]) {
+    return NO;
+  }
+  if (![self.sharingPolicy isEqual:aPaperDocSharingPolicy.sharingPolicy]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3253,6 +5045,51 @@
   return [[DBPAPERRemovePaperDocUserSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.docId hash];
+  result = prime * result + [self.member hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRemovePaperDocUser:other];
+}
+
+- (BOOL)isEqualToRemovePaperDocUser:(DBPAPERRemovePaperDocUser *)aRemovePaperDocUser {
+  if (self == aRemovePaperDocUser) {
+    return YES;
+  }
+  if (![self.docId isEqual:aRemovePaperDocUser.docId]) {
+    return NO;
+  }
+  if (![self.member isEqual:aRemovePaperDocUser.member]) {
+    return NO;
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3300,7 +5137,7 @@
   return self;
 }
 
-- (instancetype)init {
+- (instancetype)initDefault {
   return [self initWithPublicSharingPolicy:nil teamSharingPolicy:nil];
 }
 
@@ -3318,6 +5155,59 @@
 
 - (NSString *)description {
   return [[DBPAPERSharingPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.publicSharingPolicy) {
+    result = prime * result + [self.publicSharingPolicy hash];
+  }
+  if (self.teamSharingPolicy) {
+    result = prime * result + [self.teamSharingPolicy hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSharingPolicy:other];
+}
+
+- (BOOL)isEqualToSharingPolicy:(DBPAPERSharingPolicy *)aSharingPolicy {
+  if (self == aSharingPolicy) {
+    return YES;
+  }
+  if (self.publicSharingPolicy) {
+    if (![self.publicSharingPolicy isEqual:aSharingPolicy.publicSharingPolicy]) {
+      return NO;
+    }
+  }
+  if (self.teamSharingPolicy) {
+    if (![self.teamSharingPolicy isEqual:aSharingPolicy.teamSharingPolicy]) {
+      return NO;
+    }
+  }
+  return YES;
 }
 
 @end
@@ -3435,6 +5325,62 @@
   return [[DBPAPERSharingTeamPolicyTypeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERSharingTeamPolicyTypePeopleWithLinkCanEdit:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERSharingTeamPolicyTypePeopleWithLinkCanViewAndComment:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERSharingTeamPolicyTypeInviteOnly:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSharingTeamPolicyType:other];
+}
+
+- (BOOL)isEqualToSharingTeamPolicyType:(DBPAPERSharingTeamPolicyType *)aSharingTeamPolicyType {
+  if (self == aSharingTeamPolicyType) {
+    return YES;
+  }
+  if (self.tag != aSharingTeamPolicyType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERSharingTeamPolicyTypePeopleWithLinkCanEdit:
+    return [[self tagName] isEqual:[aSharingTeamPolicyType tagName]];
+  case DBPAPERSharingTeamPolicyTypePeopleWithLinkCanViewAndComment:
+    return [[self tagName] isEqual:[aSharingTeamPolicyType tagName]];
+  case DBPAPERSharingTeamPolicyTypeInviteOnly:
+    return [[self tagName] isEqual:[aSharingTeamPolicyType tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3475,6 +5421,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBPAPERSharingPublicPolicyType.h"
@@ -3571,6 +5518,66 @@
   return [[DBPAPERSharingPublicPolicyTypeSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERSharingPublicPolicyTypePeopleWithLinkCanEdit:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERSharingPublicPolicyTypePeopleWithLinkCanViewAndComment:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERSharingPublicPolicyTypeInviteOnly:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERSharingPublicPolicyTypeDisabled:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSharingPublicPolicyType:other];
+}
+
+- (BOOL)isEqualToSharingPublicPolicyType:(DBPAPERSharingPublicPolicyType *)aSharingPublicPolicyType {
+  if (self == aSharingPublicPolicyType) {
+    return YES;
+  }
+  if (self.tag != aSharingPublicPolicyType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERSharingPublicPolicyTypePeopleWithLinkCanEdit:
+    return [[self tagName] isEqual:[aSharingPublicPolicyType tagName]];
+  case DBPAPERSharingPublicPolicyTypePeopleWithLinkCanViewAndComment:
+    return [[self tagName] isEqual:[aSharingPublicPolicyType tagName]];
+  case DBPAPERSharingPublicPolicyTypeInviteOnly:
+    return [[self tagName] isEqual:[aSharingPublicPolicyType tagName]];
+  case DBPAPERSharingPublicPolicyTypeDisabled:
+    return [[self tagName] isEqual:[aSharingPublicPolicyType tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3615,6 +5622,7 @@
                  userInfo:nil]);
   }
 }
+
 @end
 
 #import "DBPAPERPaperDocPermissionLevel.h"
@@ -3654,6 +5662,51 @@
 
 - (NSString *)description {
   return [[DBPAPERUserInfoWithPermissionLevelSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.user hash];
+  result = prime * result + [self.permissionLevel hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserInfoWithPermissionLevel:other];
+}
+
+- (BOOL)isEqualToUserInfoWithPermissionLevel:(DBPAPERUserInfoWithPermissionLevel *)anUserInfoWithPermissionLevel {
+  if (self == anUserInfoWithPermissionLevel) {
+    return YES;
+  }
+  if (![self.user isEqual:anUserInfoWithPermissionLevel.user]) {
+    return NO;
+  }
+  if (![self.permissionLevel isEqual:anUserInfoWithPermissionLevel.permissionLevel]) {
+    return NO;
+  }
+  return YES;
 }
 
 @end
@@ -3760,6 +5813,62 @@
   return [[DBPAPERUserOnPaperDocFilterSerializer serialize:self] description];
 }
 
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERUserOnPaperDocFilterVisited:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERUserOnPaperDocFilterShared:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERUserOnPaperDocFilterOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserOnPaperDocFilter:other];
+}
+
+- (BOOL)isEqualToUserOnPaperDocFilter:(DBPAPERUserOnPaperDocFilter *)anUserOnPaperDocFilter {
+  if (self == anUserOnPaperDocFilter) {
+    return YES;
+  }
+  if (self.tag != anUserOnPaperDocFilter.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERUserOnPaperDocFilterVisited:
+    return [[self tagName] isEqual:[anUserOnPaperDocFilter tagName]];
+  case DBPAPERUserOnPaperDocFilterShared:
+    return [[self tagName] isEqual:[anUserOnPaperDocFilter tagName]];
+  case DBPAPERUserOnPaperDocFilterOther:
+    return [[self tagName] isEqual:[anUserOnPaperDocFilter tagName]];
+  }
+  return YES;
+}
+
 @end
 
 #pragma mark - Serializer Object
@@ -3795,4 +5904,5 @@
     return [[DBPAPERUserOnPaperDocFilter alloc] initWithOther];
   }
 }
+
 @end

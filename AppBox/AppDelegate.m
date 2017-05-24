@@ -16,6 +16,13 @@
 
 @implementation AppDelegate
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    //Handle URL Scheme
+    
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     [center setDelegate:self];
@@ -24,13 +31,9 @@
     //Check Dropbox Keys
     [Common checkDropboxKeys];
     
-    
     //Init Crashlytics
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
     [Fabric with:@[[Crashlytics class], [Answers class]]];
-    
-    //Handle URL Scheme
-    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
@@ -38,15 +41,28 @@
             [UpdateHandler showUpdateAlertWithUpdateURL:url];
         }
     }];
+    
+    //Check for arguments
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    for (NSString *argument in arguments) {
+        if ([argument containsString:@"build="]) {
+            NSArray *components = [argument componentsSeparatedByString:@"build="];
+            if (components.count == 2) {
+                [self handleProjectAtPath:[components lastObject]];
+            }
+            break;
+        }
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    [UserData setIsGmailLoggedIn:NO];
+    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
     return YES;
 }
+
 
 
 #pragma mark - AppDelegate Helper
@@ -82,9 +98,29 @@
             [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : authResult.errorDescription}];
             [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
         }
+    } else if (url != nil) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"query = %@", url.query]];
+        if (url.query != nil && url.query.length > 0) {
+            [self handleProjectAtPath:url.query];
+        }
     }
-    if (url != nil){
-        
+}
+
+-(void)handleProjectAtPath:(NSString *)projectPath {
+    NSString *certInfoPath = [RepoBuilder isValidRepoForCertificateFileAtPath:projectPath];
+    [RepoBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
+    
+    NSString *settingPath = [RepoBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
+    XCProject *project = [RepoBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
+    if (project == nil) {
+        return;
+    }
+    if (self.isReadyToBuild) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToBuildNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+        }];
     }
 }
 

@@ -10,6 +10,8 @@
 
 @class DBSHARINGListFileMembersContinueArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,13 +23,13 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGListFileMembersContinueArg : NSObject <DBSerializable>
+@interface DBSHARINGListFileMembersContinueArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The cursor returned by your last call to `listFileMembers`,
 /// `listFileMembersContinue`, or `listFileMembersBatch`.
-@property (nonatomic, readonly, copy) NSString * _Nonnull cursor;
+@property (nonatomic, readonly, copy) NSString *cursor;
 
 #pragma mark - Constructors
 
@@ -39,7 +41,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithCursor:(NSString * _Nonnull)cursor;
+- (instancetype)initWithCursor:(NSString *)cursor;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -59,7 +63,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersContinueArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGListFileMembersContinueArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGListFileMembersContinueArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersContinueArg` instances.
@@ -70,6 +74,8 @@
 /// @return An instantiation of the `DBSHARINGListFileMembersContinueArg`
 /// object.
 ///
-+ (DBSHARINGListFileMembersContinueArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGListFileMembersContinueArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

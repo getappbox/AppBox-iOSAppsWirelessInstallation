@@ -11,6 +11,8 @@
 @class DBSHARINGSharedFolderAccessError;
 @class DBSHARINGTransferFolderError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,7 +22,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGTransferFolderError : NSObject <DBSerializable>
+@interface DBSHARINGTransferFolderError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -58,7 +60,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 
 /// (no description). @note Ensure the `isAccessError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError * _Nonnull accessError;
+@property (nonatomic, readonly) DBSHARINGSharedFolderAccessError *accessError;
 
 #pragma mark - Constructors
 
@@ -69,7 +71,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError * _Nonnull)accessError;
+- (instancetype)initWithAccessError:(DBSHARINGSharedFolderAccessError *)accessError;
 
 ///
 /// Initializes union class with tag state of "invalid_dropbox_id".
@@ -79,7 +81,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidDropboxId;
+- (instancetype)initWithInvalidDropboxId;
 
 ///
 /// Initializes union class with tag state of "new_owner_not_a_member".
@@ -89,7 +91,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDNewOwnerNotAMember;
+- (instancetype)initWithDNewOwnerNotAMember;
 
 ///
 /// Initializes union class with tag state of "new_owner_unmounted".
@@ -99,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDNewOwnerUnmounted;
+- (instancetype)initWithDNewOwnerUnmounted;
 
 ///
 /// Initializes union class with tag state of "new_owner_email_unverified".
@@ -109,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithDNewOwnerEmailUnverified;
+- (instancetype)initWithDNewOwnerEmailUnverified;
 
 ///
 /// Initializes union class with tag state of "team_folder".
@@ -119,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithTeamFolder;
+- (instancetype)initWithTeamFolder;
 
 ///
 /// Initializes union class with tag state of "no_permission".
@@ -129,14 +131,16 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithNoPermission;
+- (instancetype)initWithNoPermission;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -212,7 +216,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -232,7 +236,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGTransferFolderError` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGTransferFolderError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGTransferFolderError *)instance;
 
 ///
 /// Deserializes `DBSHARINGTransferFolderError` instances.
@@ -242,6 +246,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGTransferFolderError` object.
 ///
-+ (DBSHARINGTransferFolderError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGTransferFolderError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

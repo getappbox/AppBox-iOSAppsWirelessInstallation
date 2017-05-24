@@ -10,6 +10,8 @@
 
 @class DBAUTHAuthError;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -21,7 +23,7 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBAUTHAuthError : NSObject <DBSerializable>
+@interface DBAUTHAuthError : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidAccessToken;
+- (instancetype)initWithInvalidAccessToken;
 
 ///
 /// Initializes union class with tag state of "invalid_select_user".
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidSelectUser;
+- (instancetype)initWithInvalidSelectUser;
 
 ///
 /// Initializes union class with tag state of "invalid_select_admin".
@@ -80,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithInvalidSelectAdmin;
+- (instancetype)initWithInvalidSelectAdmin;
 
 ///
 /// Initializes union class with tag state of "user_suspended".
@@ -89,14 +91,16 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithUserSuspended;
+- (instancetype)initWithUserSuspended;
 
 ///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithOther;
+- (instancetype)initWithOther;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
@@ -146,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 ///
 /// @return A human-readable string representing the union's current tag state.
 ///
-- (NSString * _Nonnull)tagName;
+- (NSString *)tagName;
 
 @end
 
@@ -165,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 /// @return A json-compatible dictionary representation of the `DBAUTHAuthError`
 /// API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBAUTHAuthError * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBAUTHAuthError *)instance;
 
 ///
 /// Deserializes `DBAUTHAuthError` instances.
@@ -175,6 +179,8 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 ///
 /// @return An instantiation of the `DBAUTHAuthError` object.
 ///
-+ (DBAUTHAuthError * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBAUTHAuthError *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

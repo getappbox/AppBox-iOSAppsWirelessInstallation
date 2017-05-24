@@ -10,6 +10,8 @@
 
 @class DBSHARINGUnshareFolderArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -19,17 +21,17 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUnshareFolderArg : NSObject <DBSerializable>
+@interface DBSHARINGUnshareFolderArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// The ID for the shared folder.
-@property (nonatomic, readonly, copy) NSString * _Nonnull sharedFolderId;
+@property (nonatomic, readonly, copy) NSString *sharedFolderId;
 
 /// If true, members of this shared folder will get a copy of this folder after
 /// it's unshared. Otherwise, it will be removed from their Dropbox. The current
 /// user, who is an owner, will always retain their copy.
-@property (nonatomic, readonly) NSNumber * _Nonnull leaveACopy;
+@property (nonatomic, readonly) NSNumber *leaveACopy;
 
 #pragma mark - Constructors
 
@@ -43,8 +45,7 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId
-                                    leaveACopy:(NSNumber * _Nullable)leaveACopy;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId leaveACopy:(nullable NSNumber *)leaveACopy;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -54,7 +55,9 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithSharedFolderId:(NSString * _Nonnull)sharedFolderId;
+- (instancetype)initWithSharedFolderId:(NSString *)sharedFolderId;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -73,7 +76,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnshareFolderArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBSHARINGUnshareFolderArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBSHARINGUnshareFolderArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnshareFolderArg` instances.
@@ -83,6 +86,8 @@
 ///
 /// @return An instantiation of the `DBSHARINGUnshareFolderArg` object.
 ///
-+ (DBSHARINGUnshareFolderArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBSHARINGUnshareFolderArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END

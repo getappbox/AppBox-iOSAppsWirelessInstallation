@@ -11,6 +11,8 @@
 @class DBFILESPropertyGroupUpdate;
 @class DBFILESUpdatePropertyGroupArg;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - API Object
 
 ///
@@ -20,15 +22,15 @@
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESUpdatePropertyGroupArg : NSObject <DBSerializable>
+@interface DBFILESUpdatePropertyGroupArg : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// A unique identifier for the file.
-@property (nonatomic, readonly, copy) NSString * _Nonnull path;
+@property (nonatomic, readonly, copy) NSString *path;
 
 /// Filled custom property templates associated with a file.
-@property (nonatomic, readonly) NSArray<DBFILESPropertyGroupUpdate *> * _Nonnull updatePropertyGroups;
+@property (nonatomic, readonly) NSArray<DBFILESPropertyGroupUpdate *> *updatePropertyGroups;
 
 #pragma mark - Constructors
 
@@ -41,8 +43,10 @@
 ///
 /// @return An initialized instance.
 ///
-- (nonnull instancetype)initWithPath:(NSString * _Nonnull)path
-                updatePropertyGroups:(NSArray<DBFILESPropertyGroupUpdate *> * _Nonnull)updatePropertyGroups;
+- (instancetype)initWithPath:(NSString *)path
+        updatePropertyGroups:(NSArray<DBFILESPropertyGroupUpdate *> *)updatePropertyGroups;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
@@ -62,7 +66,7 @@
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUpdatePropertyGroupArg` API object.
 ///
-+ (NSDictionary * _Nonnull)serialize:(DBFILESUpdatePropertyGroupArg * _Nonnull)instance;
++ (NSDictionary *)serialize:(DBFILESUpdatePropertyGroupArg *)instance;
 
 ///
 /// Deserializes `DBFILESUpdatePropertyGroupArg` instances.
@@ -72,6 +76,8 @@
 ///
 /// @return An instantiation of the `DBFILESUpdatePropertyGroupArg` object.
 ///
-+ (DBFILESUpdatePropertyGroupArg * _Nonnull)deserialize:(NSDictionary * _Nonnull)dict;
++ (DBFILESUpdatePropertyGroupArg *)deserialize:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END
