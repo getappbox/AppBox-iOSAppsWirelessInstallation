@@ -7,6 +7,8 @@
 # AppBox - iOS Apps Wireless Installation 🥇 
 AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
 
+**FLUX WARNING** - Major release in progress, expect things in master to be broken. So, download only [stable release](http://tryappbox.com/download).
+
 # Features ⚡️ 
 - Just Select Project/Workspace to archive -> make ipa -> upload ipa -> send mail -> and shutdown mac
 - Keep Same Link
@@ -21,7 +23,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 - Uploaded App Expiration => Until you delete from your Dropbox
 - Installations Per App => Unlimited
  
-# Download latest release 📦
+# Download latest stable release 📦
 [![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](http://tryappbox.com/download)
 
 # How to use AppBox 
