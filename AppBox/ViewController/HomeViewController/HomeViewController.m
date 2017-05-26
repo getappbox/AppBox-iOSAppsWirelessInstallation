@@ -35,7 +35,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [project setBuildDirectory: [UserData buildLocation]];
     
     //setup dropbox
-    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
+    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
+    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+//    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
     
     //update available memory
     [[NSApplication sharedApplication] updateDropboxUsage];
@@ -513,63 +515,70 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
-        [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-            
-            //Get payload entry
-            if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found payload at path = %@",entry]];
-                payloadEntry = entry;
-            }
-            
-            //Get Info.plist entry
-            NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
-            if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found Info.plist at path = %@",mainInfoPlistPath]];
-                infoPlistPath = entry;
-            }
-            
-            //Get embedded mobile provision
-            if (project.buildType == nil){
-                NSString *mobileProvisionPath = [NSString stringWithFormat:@"%@embedded.mobileprovision",payloadEntry].lowercaseString;
-                if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found mobileprovision at path = %@",mobileProvisionPath]];
-                    [project setBuildType:[MobileProvision buildTypeForProvisioning:[NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath]]];
-                }
-            }
-            
-            //show status and log files entry
-            [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
-        } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
-            if (error) {
-                //show error and return
-                [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
-                [self viewStateForProgressFinish:YES];
-                return;
-            }
-            
-            //get info.plist
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Final Info.plist path = %@",infoPlistPath]];
-            [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
-            
-            //show error if info.plist is nil or invalid
-            if (![project isValidProjectInfoPlist]) {
-                [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
-                [self viewStateForProgressFinish:YES];
-                return;
-            }
-            
-            if ([AppDelegate appDelegate].isInternetConnected){
-                [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
-            }else{
-                [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
-            }
-            
-            //prepare for upload and check ipa type
-            NSURL *ipaFileURL = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
-            [project setIpaFullPath:ipaFileURL];
-            [self uploadIPAFileWithLocalURL:ipaFileURL];
-        }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
+                    
+                    //Get payload entry
+                    if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
+                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found payload at path = %@",entry]];
+                        payloadEntry = entry;
+                    }
+                    
+                    //Get Info.plist entry
+                    NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
+                    if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
+                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found Info.plist at path = %@",mainInfoPlistPath]];
+                        infoPlistPath = entry;
+                    }
+                    
+                    //Get embedded mobile provision
+                    if (project.buildType == nil){
+                        NSString *mobileProvisionPath = [NSString stringWithFormat:@"%@embedded.mobileprovision",payloadEntry].lowercaseString;
+                        if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
+                            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found mobileprovision at path = %@",mobileProvisionPath]];
+                            [project setBuildType:[MobileProvision buildTypeForProvisioning:[NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath]]];
+                        }
+                    }
+                    
+                    //show status and log files entry
+                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
+                });
+            } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (error) {
+                        //show error and return
+                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                        [self viewStateForProgressFinish:YES];
+                        return;
+                    }
+                    
+                    //get info.plist
+                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Final Info.plist path = %@",infoPlistPath]];
+                    [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
+                    
+                    //show error if info.plist is nil or invalid
+                    if (![project isValidProjectInfoPlist]) {
+                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
+                        [self viewStateForProgressFinish:YES];
+                        return;
+                    }
+                    
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
+                    }else{
+                        [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+                    }
+                    
+                    //prepare for upload and check ipa type
+                    NSURL *ipaFileURL = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
+                    [project setIpaFullPath:ipaFileURL];
+                    [self uploadIPAFileWithLocalURL:ipaFileURL];
+                });
+            }];
+        });
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
         [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
@@ -956,7 +965,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     //log status in session log
     [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
     
