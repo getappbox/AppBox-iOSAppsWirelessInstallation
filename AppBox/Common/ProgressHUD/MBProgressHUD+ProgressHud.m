@@ -10,39 +10,59 @@
 
 @implementation MBProgressHUD (ProgressHud)
 
++(MBProgressHUD *)hudForView:(NSView *)view {
+    static NSMutableDictionary *hudDictionary = nil;
+    if (hudDictionary == nil) {
+        hudDictionary = [[NSMutableDictionary alloc] init];
+    }
+    MBProgressHUD *hud;
+    if ([hudDictionary.allKeys containsObject:view.description]) {
+        hud = [hudDictionary objectForKey:view.description];
+    } else {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [hudDictionary setObject:hud forKey:view.description];
+    }
+    if (![view.subviews containsObject:hud]) {
+        [view addSubview:hud];
+    }
+    [hud setMargin: 10.f];
+    [hud setYOffset: 0];
+    [hud show:YES];
+    return hud;
+}
 
 +(void)showStatus:(NSString *)status onView:(NSView *)view {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
+    [hud setMode:MBProgressHUDModeIndeterminate];
     [hud setLabelText: status];
 }
 
 +(void)showStatus:(NSString *)status witProgress:(double)progress onView:(NSView *)view {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
+    [hud setMode:MBProgressHUDModeDeterminate];
     [hud setProgress:progress];
     [hud setLabelText: status];
 }
 
 +(void)showStatus:(NSString *)status forSuccess:(BOOL)success onView:(NSView *)view {
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
-    [view addSubview:hud];
+    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
     [hud setLabelText: status];
-    
-    hud.customView = [[NSImageView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 37.0f, 37.0f)];
-    NSImage *img = success ? [NSImage imageNamed:@"Check"] : [NSImage imageNamed:@"Multiply"];
-    [(NSImageView *)hud.customView setImage:img];
-
     [hud setMode: MBProgressHUDModeCustomView];
-    [hud show:YES];
+    
+    NSImageView *imageView = [[NSImageView alloc] initWithFrame:NSMakeRect(0.0f, 0.0f, 37.0f, 37.0f)];
+    NSImage *resultImage = success ? [NSImage imageNamed:@"Check"] : [NSImage imageNamed:@"Multiply"];
+    [imageView setImage:resultImage];
+    [hud setCustomView: imageView];
+
     [MBProgressHUD hideAllHudFromView:view after:2];
 }
 
 +(void)showOnlyStatus:(NSString *)status onView:(NSView *)view{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText = status;
-    hud.margin = 10.f;
-    hud.yOffset = 150.f;
-    hud.removeFromSuperViewOnHide = YES;
+    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
+    [hud setMode: MBProgressHUDModeText];
+    [hud setLabelText: status];
+    [hud setMargin: 10.f];
+    [hud setYOffset: 150.f];
     [MBProgressHUD hideAllHudFromView:view after:3];
 }
 
