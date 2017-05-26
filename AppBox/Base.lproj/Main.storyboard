@@ -230,8 +230,8 @@
         <scene sceneID="irr-iO-vGD">
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="108" width="737" height="284"/>
+                    <view key="view" id="eYA-Pb-PSo">
+                        <rect key="frame" x="0.0" y="0.0" width="737" height="284"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
@@ -251,7 +251,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="140" id="UHO-AH-UOi"/>
                                                             </constraints>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Project / Workspace" id="qj3-mD-WHj">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Project / Workspace" id="qj3-mD-WHj">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -273,7 +273,7 @@
                                                         </pathControl>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NRl-Cb-doh">
                                                             <rect key="frame" x="13" y="89" width="144" height="19"/>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Scheme" id="QsB-km-KDc">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Build Scheme" id="QsB-km-KDc">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -292,7 +292,7 @@
                                                         </comboBox>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="888-HS-ADa">
                                                             <rect key="frame" x="13" y="55" width="144" height="19"/>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save for" id="gRB-Rp-wfi">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Save for" id="gRB-Rp-wfi">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -317,7 +317,7 @@
                                                         </comboBox>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqa-Ms-QwW">
                                                             <rect key="frame" x="13" y="21" width="144" height="19"/>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Team ID" id="KXz-7n-D3j">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Team ID" id="KXz-7n-D3j">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -373,7 +373,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="140" id="908-Q1-MqY"/>
                                                             </constraints>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IPA File" id="Lxa-ZQ-lF9">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="IPA File" id="Lxa-ZQ-lF9">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -445,7 +445,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="35q-Co-dnE"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Email Address" id="kr1-Yc-qik">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Email Address" id="kr1-Yc-qik">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -467,7 +467,7 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DAM-Ui-aXb">
                                         <rect key="frame" x="10" y="65" width="154" height="19"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Personal Message" id="joa-dI-eJP">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Personal Message" id="joa-dI-eJP">
                                             <font key="font" metaFont="systemLight" size="15"/>
                                             <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

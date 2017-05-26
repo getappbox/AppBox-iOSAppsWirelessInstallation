@@ -36,4 +36,13 @@
     
 }
 
+- (IBAction)appStoreSymbolsFileCheckBokValueChanged:(NSButton *)sender {
+}
+
+- (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender {
+}
+
+- (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender {
+}
+
 @end

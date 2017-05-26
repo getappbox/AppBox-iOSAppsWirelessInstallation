@@ -9,11 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 @interface PreferencesViewController : NSViewController {
-    IBOutlet NSPathControl *pathBuild;
-    IBOutlet NSPathControl *pathXCode;
+    __weak IBOutlet NSPathControl *pathBuild;
+    __weak IBOutlet NSPathControl *pathXCode;
+    __weak IBOutlet NSPathControl *pathApplicationLoaded;
 }
 
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
 - (IBAction)xcodePathHandler:(NSPathControl *)sender;
+
+- (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender;
+- (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender;
+- (IBAction)appStoreSymbolsFileCheckBokValueChanged:(NSButton *)sender;
 
 @end

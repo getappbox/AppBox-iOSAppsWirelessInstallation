@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController">
             <connections>
+                <outlet property="pathApplicationLoaded" destination="ccC-9z-Hhl" id="bmO-4L-cuB"/>
                 <outlet property="pathBuild" destination="551-hz-G00" id="jfA-9F-eaH"/>
                 <outlet property="pathXCode" destination="1qf-8k-ZUe" id="0aI-Ot-7nn"/>
                 <outlet property="view" destination="taC-Ah-5bC" id="GIR-EZ-Gne"/>
@@ -137,6 +138,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="appStoreSymbolsFileCheckBokValueChanged:" target="-2" id="q7j-Yf-Brw"/>
+                    </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="k8I-Hq-4Cd">
                     <rect key="frame" x="228" y="80" width="245" height="18"/>
@@ -144,6 +148,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="appStoreBitcodeCheckBokValueChanged:" target="-2" id="xGB-iW-vpi"/>
+                    </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="tft-z6-Exe">
                     <rect key="frame" x="228" y="41" width="282" height="18"/>
@@ -151,6 +158,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="compileBitcodeCheckBokValueChanged:" target="-2" id="wqu-po-cOj"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
