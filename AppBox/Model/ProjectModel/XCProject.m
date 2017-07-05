@@ -151,8 +151,13 @@
 - (void)upadteDbDirectoryByBundleDirectory{
     //Build URL for DropBox
     NSString *toPath = [self.bundleDirectory.absoluteString stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid]];
+    toPath = [toPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self setDbDirectory:[NSURL URLWithString:toPath]];
-    [self setDbIPAFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@.ipa",toPath,self.name]]];
+    
+    NSString * dbIPAFullPathString = [NSString stringWithFormat:@"%@/%@.ipa",toPath,self.name];
+    dbIPAFullPathString = [dbIPAFullPathString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [self setDbIPAFullPath:[NSURL URLWithString:dbIPAFullPathString]];
+    
     [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
     [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",self.bundleDirectory,abAppInfoFileName]]];
 }
