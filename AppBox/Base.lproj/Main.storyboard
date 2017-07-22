@@ -124,6 +124,12 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem title="Referesh Usage" id="dmE-7A-S8S">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="dropboxSpaceTapped:" target="hnw-xV-0zn" id="hl0-zM-evi"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Dropbox Space" enabled="NO" id="Ug8-0u-jHy" userLabel="Dropbox Space">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
@@ -231,14 +237,14 @@
             <objects>
                 <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="737" height="284"/>
+                        <rect key="frame" x="0.0" y="0.0" width="737" height="392"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="737" height="279"/>
+                                <rect key="frame" x="0.0" y="0.0" width="737" height="387"/>
                                 <subviews>
                                     <tabView initialItem="Q1W-fI-E8i" translatesAutoresizingMaskIntoConstraints="NO" id="ay9-ED-rIF">
-                                        <rect key="frame" x="3" y="175" width="731" height="100"/>
+                                        <rect key="frame" x="3" y="175" width="731" height="208"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Archive and Upload IPA" identifier="1" id="h9M-To-5mB">
