@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XCArchiveResult.h"
 
 @interface XCArchiveParser : NSObject
+
++(XCArchiveResult *)archiveResultMessageFromString:(NSString *)unformatedMessage;
 
 @end

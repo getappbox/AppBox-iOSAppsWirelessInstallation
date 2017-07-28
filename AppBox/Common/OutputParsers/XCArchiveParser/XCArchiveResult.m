@@ -10,4 +10,12 @@
 
 @implementation XCArchiveResult
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.message = [[NSMutableString alloc] init];
+    }
+    return self;
+}
+
 @end
