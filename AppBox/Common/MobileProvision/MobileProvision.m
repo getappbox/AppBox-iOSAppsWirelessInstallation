@@ -47,7 +47,8 @@
     } else if ([[mobileProvision objectForKey:@"ProvisionsAllDevices"] boolValue]) {
         // enterprise distribution contains ProvisionsAllDevices - true
         return BuildTypeEnterprise;
-    } else if ([mobileProvision objectForKey:@"ProvisionedDevices"] && [[mobileProvision objectForKey:@"ProvisionedDevices"] count] > 0) {
+    } else if ([mobileProvision objectForKey:@"ProvisionedDevices"] &&
+               [((NSArray *)[mobileProvision objectForKey:@"ProvisionedDevices"]) count] > 0) {
         NSDictionary *entitlements = [mobileProvision objectForKey:@"Entitlements"];
         // development contains UDIDs and get-task-allow is true
         // ad hoc contains UDIDs and get-task-allow is false
