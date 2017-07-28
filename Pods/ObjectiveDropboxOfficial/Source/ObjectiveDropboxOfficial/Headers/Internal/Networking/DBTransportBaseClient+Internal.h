@@ -25,10 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
                        byteOffsetStart:(nullable NSNumber *)byteOffsetStart
                          byteOffsetEnd:(nullable NSNumber *)byteOffsetEnd;
 
-+ (NSURLRequest *)requestWithHeaders:(NSDictionary *)httpHeaders
-                                 url:(NSURL *)url
-                             content:(nullable NSData *)content
-                              stream:(nullable NSInputStream *)stream;
++ (NSMutableURLRequest *)requestWithHeaders:(NSDictionary *)httpHeaders
+                                        url:(NSURL *)url
+                                    content:(nullable NSData *)content
+                                     stream:(nullable NSInputStream *)stream;
 
 + (NSURL *)urlWithRoute:(DBRoute *)route;
 

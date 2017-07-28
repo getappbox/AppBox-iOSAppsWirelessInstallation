@@ -1079,6 +1079,7 @@
 #import "DBTEAMBaseTeamFolderError.h"
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderInvalidStatusError.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
 
 #pragma mark - API Object
 
@@ -1086,6 +1087,7 @@
 
 @synthesize accessError = _accessError;
 @synthesize statusError = _statusError;
+@synthesize teamSharedDropboxError = _teamSharedDropboxError;
 
 #pragma mark - Constructors
 
@@ -1103,6 +1105,15 @@
   if (self) {
     _tag = DBTEAMBaseTeamFolderErrorStatusError;
     _statusError = statusError;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamSharedDropboxError:(DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMBaseTeamFolderErrorTeamSharedDropboxError;
+    _teamSharedDropboxError = teamSharedDropboxError;
   }
   return self;
 }
@@ -1133,6 +1144,15 @@
   return _statusError;
 }
 
+- (DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  if (![self isTeamSharedDropboxError]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMBaseTeamFolderErrorTeamSharedDropboxError, but was %@.", [self tagName]];
+  }
+  return _teamSharedDropboxError;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isAccessError {
@@ -1141,6 +1161,10 @@
 
 - (BOOL)isStatusError {
   return _tag == DBTEAMBaseTeamFolderErrorStatusError;
+}
+
+- (BOOL)isTeamSharedDropboxError {
+  return _tag == DBTEAMBaseTeamFolderErrorTeamSharedDropboxError;
 }
 
 - (BOOL)isOther {
@@ -1153,6 +1177,8 @@
     return @"DBTEAMBaseTeamFolderErrorAccessError";
   case DBTEAMBaseTeamFolderErrorStatusError:
     return @"DBTEAMBaseTeamFolderErrorStatusError";
+  case DBTEAMBaseTeamFolderErrorTeamSharedDropboxError:
+    return @"DBTEAMBaseTeamFolderErrorTeamSharedDropboxError";
   case DBTEAMBaseTeamFolderErrorOther:
     return @"DBTEAMBaseTeamFolderErrorOther";
   }
@@ -1195,6 +1221,8 @@
     result = prime * result + [self.accessError hash];
   case DBTEAMBaseTeamFolderErrorStatusError:
     result = prime * result + [self.statusError hash];
+  case DBTEAMBaseTeamFolderErrorTeamSharedDropboxError:
+    result = prime * result + [self.teamSharedDropboxError hash];
   case DBTEAMBaseTeamFolderErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -1226,6 +1254,8 @@
     return [self.accessError isEqual:aBaseTeamFolderError.accessError];
   case DBTEAMBaseTeamFolderErrorStatusError:
     return [self.statusError isEqual:aBaseTeamFolderError.statusError];
+  case DBTEAMBaseTeamFolderErrorTeamSharedDropboxError:
+    return [self.teamSharedDropboxError isEqual:aBaseTeamFolderError.teamSharedDropboxError];
   case DBTEAMBaseTeamFolderErrorOther:
     return [[self tagName] isEqual:[aBaseTeamFolderError tagName]];
   }
@@ -1248,6 +1278,10 @@
     jsonDict[@"status_error"] =
         [[DBTEAMTeamFolderInvalidStatusErrorSerializer serialize:valueObj.statusError] mutableCopy];
     jsonDict[@".tag"] = @"status_error";
+  } else if ([valueObj isTeamSharedDropboxError]) {
+    jsonDict[@"team_shared_dropbox_error"] =
+        [[DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:valueObj.teamSharedDropboxError] mutableCopy];
+    jsonDict[@".tag"] = @"team_shared_dropbox_error";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -1268,6 +1302,10 @@
     DBTEAMTeamFolderInvalidStatusError *statusError =
         [DBTEAMTeamFolderInvalidStatusErrorSerializer deserialize:valueDict[@"status_error"]];
     return [[DBTEAMBaseTeamFolderError alloc] initWithStatusError:statusError];
+  } else if ([tag isEqualToString:@"team_shared_dropbox_error"]) {
+    DBTEAMTeamFolderTeamSharedDropboxError *teamSharedDropboxError =
+        [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer deserialize:valueDict[@"team_shared_dropbox_error"]];
+    return [[DBTEAMBaseTeamFolderError alloc] initWithTeamSharedDropboxError:teamSharedDropboxError];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMBaseTeamFolderError alloc] initWithOther];
   } else {
@@ -2270,6 +2308,14 @@
   return self;
 }
 
+- (instancetype)initWithHasTeamSharedDropbox {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMFeatureHasTeamSharedDropbox;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -2286,6 +2332,10 @@
   return _tag == DBTEAMFeatureUploadApiRateLimit;
 }
 
+- (BOOL)isHasTeamSharedDropbox {
+  return _tag == DBTEAMFeatureHasTeamSharedDropbox;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMFeatureOther;
 }
@@ -2294,6 +2344,8 @@
   switch (_tag) {
   case DBTEAMFeatureUploadApiRateLimit:
     return @"DBTEAMFeatureUploadApiRateLimit";
+  case DBTEAMFeatureHasTeamSharedDropbox:
+    return @"DBTEAMFeatureHasTeamSharedDropbox";
   case DBTEAMFeatureOther:
     return @"DBTEAMFeatureOther";
   }
@@ -2334,6 +2386,8 @@
   switch (_tag) {
   case DBTEAMFeatureUploadApiRateLimit:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMFeatureHasTeamSharedDropbox:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMFeatureOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -2363,6 +2417,8 @@
   switch (_tag) {
   case DBTEAMFeatureUploadApiRateLimit:
     return [[self tagName] isEqual:[aFeature tagName]];
+  case DBTEAMFeatureHasTeamSharedDropbox:
+    return [[self tagName] isEqual:[aFeature tagName]];
   case DBTEAMFeatureOther:
     return [[self tagName] isEqual:[aFeature tagName]];
   }
@@ -2380,6 +2436,8 @@
 
   if ([valueObj isUploadApiRateLimit]) {
     jsonDict[@".tag"] = @"upload_api_rate_limit";
+  } else if ([valueObj isHasTeamSharedDropbox]) {
+    jsonDict[@".tag"] = @"has_team_shared_dropbox";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -2394,6 +2452,8 @@
 
   if ([tag isEqualToString:@"upload_api_rate_limit"]) {
     return [[DBTEAMFeature alloc] initWithUploadApiRateLimit];
+  } else if ([tag isEqualToString:@"has_team_shared_dropbox"]) {
+    return [[DBTEAMFeature alloc] initWithHasTeamSharedDropbox];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMFeature alloc] initWithOther];
   } else {
@@ -2406,6 +2466,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMFeatureValue.h"
+#import "DBTEAMHasTeamSharedDropboxValue.h"
 #import "DBTEAMUploadApiRateLimitValue.h"
 
 #pragma mark - API Object
@@ -2413,6 +2474,7 @@
 @implementation DBTEAMFeatureValue
 
 @synthesize uploadApiRateLimit = _uploadApiRateLimit;
+@synthesize hasTeamSharedDropbox = _hasTeamSharedDropbox;
 
 #pragma mark - Constructors
 
@@ -2421,6 +2483,15 @@
   if (self) {
     _tag = DBTEAMFeatureValueUploadApiRateLimit;
     _uploadApiRateLimit = uploadApiRateLimit;
+  }
+  return self;
+}
+
+- (instancetype)initWithHasTeamSharedDropbox:(DBTEAMHasTeamSharedDropboxValue *)hasTeamSharedDropbox {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMFeatureValueHasTeamSharedDropbox;
+    _hasTeamSharedDropbox = hasTeamSharedDropbox;
   }
   return self;
 }
@@ -2443,10 +2514,22 @@
   return _uploadApiRateLimit;
 }
 
+- (DBTEAMHasTeamSharedDropboxValue *)hasTeamSharedDropbox {
+  if (![self isHasTeamSharedDropbox]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMFeatureValueHasTeamSharedDropbox, but was %@.", [self tagName]];
+  }
+  return _hasTeamSharedDropbox;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isUploadApiRateLimit {
   return _tag == DBTEAMFeatureValueUploadApiRateLimit;
+}
+
+- (BOOL)isHasTeamSharedDropbox {
+  return _tag == DBTEAMFeatureValueHasTeamSharedDropbox;
 }
 
 - (BOOL)isOther {
@@ -2457,6 +2540,8 @@
   switch (_tag) {
   case DBTEAMFeatureValueUploadApiRateLimit:
     return @"DBTEAMFeatureValueUploadApiRateLimit";
+  case DBTEAMFeatureValueHasTeamSharedDropbox:
+    return @"DBTEAMFeatureValueHasTeamSharedDropbox";
   case DBTEAMFeatureValueOther:
     return @"DBTEAMFeatureValueOther";
   }
@@ -2497,6 +2582,8 @@
   switch (_tag) {
   case DBTEAMFeatureValueUploadApiRateLimit:
     result = prime * result + [self.uploadApiRateLimit hash];
+  case DBTEAMFeatureValueHasTeamSharedDropbox:
+    result = prime * result + [self.hasTeamSharedDropbox hash];
   case DBTEAMFeatureValueOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -2526,6 +2613,8 @@
   switch (_tag) {
   case DBTEAMFeatureValueUploadApiRateLimit:
     return [self.uploadApiRateLimit isEqual:aFeatureValue.uploadApiRateLimit];
+  case DBTEAMFeatureValueHasTeamSharedDropbox:
+    return [self.hasTeamSharedDropbox isEqual:aFeatureValue.hasTeamSharedDropbox];
   case DBTEAMFeatureValueOther:
     return [[self tagName] isEqual:[aFeatureValue tagName]];
   }
@@ -2545,6 +2634,10 @@
     jsonDict[@"upload_api_rate_limit"] =
         [[DBTEAMUploadApiRateLimitValueSerializer serialize:valueObj.uploadApiRateLimit] mutableCopy];
     jsonDict[@".tag"] = @"upload_api_rate_limit";
+  } else if ([valueObj isHasTeamSharedDropbox]) {
+    jsonDict[@"has_team_shared_dropbox"] =
+        [[DBTEAMHasTeamSharedDropboxValueSerializer serialize:valueObj.hasTeamSharedDropbox] mutableCopy];
+    jsonDict[@".tag"] = @"has_team_shared_dropbox";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -2561,6 +2654,10 @@
     DBTEAMUploadApiRateLimitValue *uploadApiRateLimit =
         [DBTEAMUploadApiRateLimitValueSerializer deserialize:valueDict[@"upload_api_rate_limit"]];
     return [[DBTEAMFeatureValue alloc] initWithUploadApiRateLimit:uploadApiRateLimit];
+  } else if ([tag isEqualToString:@"has_team_shared_dropbox"]) {
+    DBTEAMHasTeamSharedDropboxValue *hasTeamSharedDropbox =
+        [DBTEAMHasTeamSharedDropboxValueSerializer deserialize:valueDict[@"has_team_shared_dropbox"]];
+    return [[DBTEAMFeatureValue alloc] initWithHasTeamSharedDropbox:hasTeamSharedDropbox];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMFeatureValue alloc] initWithOther];
   } else {
@@ -9447,6 +9544,171 @@
         exceptionWithName:@"InvalidTag"
                    reason:[NSString stringWithFormat:@"Tag has an invalid value: \"%@\".", valueDict[@".tag"]]
                  userInfo:nil]);
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMHasTeamSharedDropboxValue.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMHasTeamSharedDropboxValue
+
+@synthesize hasTeamSharedDropbox = _hasTeamSharedDropbox;
+
+#pragma mark - Constructors
+
+- (instancetype)initWithHasTeamSharedDropbox:(NSNumber *)hasTeamSharedDropbox {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox;
+    _hasTeamSharedDropbox = hasTeamSharedDropbox;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMHasTeamSharedDropboxValueOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+- (NSNumber *)hasTeamSharedDropbox {
+  if (![self isHasTeamSharedDropbox]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox, but was %@.",
+                       [self tagName]];
+  }
+  return _hasTeamSharedDropbox;
+}
+
+#pragma mark - Tag state methods
+
+- (BOOL)isHasTeamSharedDropbox {
+  return _tag == DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMHasTeamSharedDropboxValueOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox:
+    return @"DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox";
+  case DBTEAMHasTeamSharedDropboxValueOther:
+    return @"DBTEAMHasTeamSharedDropboxValueOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMHasTeamSharedDropboxValueSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMHasTeamSharedDropboxValueSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMHasTeamSharedDropboxValueSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox:
+    result = prime * result + [self.hasTeamSharedDropbox hash];
+  case DBTEAMHasTeamSharedDropboxValueOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToHasTeamSharedDropboxValue:other];
+}
+
+- (BOOL)isEqualToHasTeamSharedDropboxValue:(DBTEAMHasTeamSharedDropboxValue *)aHasTeamSharedDropboxValue {
+  if (self == aHasTeamSharedDropboxValue) {
+    return YES;
+  }
+  if (self.tag != aHasTeamSharedDropboxValue.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox:
+    return [self.hasTeamSharedDropbox isEqual:aHasTeamSharedDropboxValue.hasTeamSharedDropbox];
+  case DBTEAMHasTeamSharedDropboxValueOther:
+    return [[self tagName] isEqual:[aHasTeamSharedDropboxValue tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMHasTeamSharedDropboxValueSerializer
+
++ (NSDictionary *)serialize:(DBTEAMHasTeamSharedDropboxValue *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isHasTeamSharedDropbox]) {
+    jsonDict[@"has_team_shared_dropbox"] = valueObj.hasTeamSharedDropbox;
+    jsonDict[@".tag"] = @"has_team_shared_dropbox";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMHasTeamSharedDropboxValue *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"has_team_shared_dropbox"]) {
+    NSNumber *hasTeamSharedDropbox = valueDict[@"has_team_shared_dropbox"];
+    return [[DBTEAMHasTeamSharedDropboxValue alloc] initWithHasTeamSharedDropbox:hasTeamSharedDropbox];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMHasTeamSharedDropboxValue alloc] initWithOther];
+  } else {
+    return [[DBTEAMHasTeamSharedDropboxValue alloc] initWithOther];
   }
 }
 
@@ -18441,6 +18703,362 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMNamespaceMetadata.h"
+#import "DBTEAMNamespaceType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMNamespaceMetadata
+
+#pragma mark - Constructors
+
+- (instancetype)initWithName:(NSString *)name
+                 namespaceId:(NSString *)namespaceId
+               namespaceType:(DBTEAMNamespaceType *)namespaceType
+                teamMemberId:(NSString *)teamMemberId {
+  [DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"](namespaceId);
+
+  self = [super init];
+  if (self) {
+    _name = name;
+    _namespaceId = namespaceId;
+    _namespaceType = namespaceType;
+    _teamMemberId = teamMemberId;
+  }
+  return self;
+}
+
+- (instancetype)initWithName:(NSString *)name
+                 namespaceId:(NSString *)namespaceId
+               namespaceType:(DBTEAMNamespaceType *)namespaceType {
+  return [self initWithName:name namespaceId:namespaceId namespaceType:namespaceType teamMemberId:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMNamespaceMetadataSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMNamespaceMetadataSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMNamespaceMetadataSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.namespaceId hash];
+  result = prime * result + [self.namespaceType hash];
+  if (self.teamMemberId) {
+    result = prime * result + [self.teamMemberId hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToNamespaceMetadata:other];
+}
+
+- (BOOL)isEqualToNamespaceMetadata:(DBTEAMNamespaceMetadata *)aNamespaceMetadata {
+  if (self == aNamespaceMetadata) {
+    return YES;
+  }
+  if (![self.name isEqual:aNamespaceMetadata.name]) {
+    return NO;
+  }
+  if (![self.namespaceId isEqual:aNamespaceMetadata.namespaceId]) {
+    return NO;
+  }
+  if (![self.namespaceType isEqual:aNamespaceMetadata.namespaceType]) {
+    return NO;
+  }
+  if (self.teamMemberId) {
+    if (![self.teamMemberId isEqual:aNamespaceMetadata.teamMemberId]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMNamespaceMetadataSerializer
+
++ (NSDictionary *)serialize:(DBTEAMNamespaceMetadata *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"namespace_id"] = valueObj.namespaceId;
+  jsonDict[@"namespace_type"] = [DBTEAMNamespaceTypeSerializer serialize:valueObj.namespaceType];
+  if (valueObj.teamMemberId) {
+    jsonDict[@"team_member_id"] = valueObj.teamMemberId;
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMNamespaceMetadata *)deserialize:(NSDictionary *)valueDict {
+  NSString *name = valueDict[@"name"];
+  NSString *namespaceId = valueDict[@"namespace_id"];
+  DBTEAMNamespaceType *namespaceType = [DBTEAMNamespaceTypeSerializer deserialize:valueDict[@"namespace_type"]];
+  NSString *teamMemberId = valueDict[@"team_member_id"] ?: nil;
+
+  return [[DBTEAMNamespaceMetadata alloc] initWithName:name
+                                           namespaceId:namespaceId
+                                         namespaceType:namespaceType
+                                          teamMemberId:teamMemberId];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMNamespaceType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMNamespaceType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithAppFolder {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMNamespaceTypeAppFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithSharedFolder {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMNamespaceTypeSharedFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamFolder {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMNamespaceTypeTeamFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamMemberFolder {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMNamespaceTypeTeamMemberFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMNamespaceTypeOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isAppFolder {
+  return _tag == DBTEAMNamespaceTypeAppFolder;
+}
+
+- (BOOL)isSharedFolder {
+  return _tag == DBTEAMNamespaceTypeSharedFolder;
+}
+
+- (BOOL)isTeamFolder {
+  return _tag == DBTEAMNamespaceTypeTeamFolder;
+}
+
+- (BOOL)isTeamMemberFolder {
+  return _tag == DBTEAMNamespaceTypeTeamMemberFolder;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMNamespaceTypeOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMNamespaceTypeAppFolder:
+    return @"DBTEAMNamespaceTypeAppFolder";
+  case DBTEAMNamespaceTypeSharedFolder:
+    return @"DBTEAMNamespaceTypeSharedFolder";
+  case DBTEAMNamespaceTypeTeamFolder:
+    return @"DBTEAMNamespaceTypeTeamFolder";
+  case DBTEAMNamespaceTypeTeamMemberFolder:
+    return @"DBTEAMNamespaceTypeTeamMemberFolder";
+  case DBTEAMNamespaceTypeOther:
+    return @"DBTEAMNamespaceTypeOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMNamespaceTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMNamespaceTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMNamespaceTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMNamespaceTypeAppFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMNamespaceTypeSharedFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMNamespaceTypeTeamFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMNamespaceTypeTeamMemberFolder:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMNamespaceTypeOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToNamespaceType:other];
+}
+
+- (BOOL)isEqualToNamespaceType:(DBTEAMNamespaceType *)aNamespaceType {
+  if (self == aNamespaceType) {
+    return YES;
+  }
+  if (self.tag != aNamespaceType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMNamespaceTypeAppFolder:
+    return [[self tagName] isEqual:[aNamespaceType tagName]];
+  case DBTEAMNamespaceTypeSharedFolder:
+    return [[self tagName] isEqual:[aNamespaceType tagName]];
+  case DBTEAMNamespaceTypeTeamFolder:
+    return [[self tagName] isEqual:[aNamespaceType tagName]];
+  case DBTEAMNamespaceTypeTeamMemberFolder:
+    return [[self tagName] isEqual:[aNamespaceType tagName]];
+  case DBTEAMNamespaceTypeOther:
+    return [[self tagName] isEqual:[aNamespaceType tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMNamespaceTypeSerializer
+
++ (NSDictionary *)serialize:(DBTEAMNamespaceType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isAppFolder]) {
+    jsonDict[@".tag"] = @"app_folder";
+  } else if ([valueObj isSharedFolder]) {
+    jsonDict[@".tag"] = @"shared_folder";
+  } else if ([valueObj isTeamFolder]) {
+    jsonDict[@".tag"] = @"team_folder";
+  } else if ([valueObj isTeamMemberFolder]) {
+    jsonDict[@".tag"] = @"team_member_folder";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMNamespaceType *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"app_folder"]) {
+    return [[DBTEAMNamespaceType alloc] initWithAppFolder];
+  } else if ([tag isEqualToString:@"shared_folder"]) {
+    return [[DBTEAMNamespaceType alloc] initWithSharedFolder];
+  } else if ([tag isEqualToString:@"team_folder"]) {
+    return [[DBTEAMNamespaceType alloc] initWithTeamFolder];
+  } else if ([tag isEqualToString:@"team_member_folder"]) {
+    return [[DBTEAMNamespaceType alloc] initWithTeamMemberFolder];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMNamespaceType alloc] initWithOther];
+  } else {
+    return [[DBTEAMNamespaceType alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMRemovedStatus.h"
 
 #pragma mark - API Object
@@ -20546,6 +21164,7 @@
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderActivateError.h"
 #import "DBTEAMTeamFolderInvalidStatusError.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
 
 #pragma mark - API Object
 
@@ -20553,6 +21172,7 @@
 
 @synthesize accessError = _accessError;
 @synthesize statusError = _statusError;
+@synthesize teamSharedDropboxError = _teamSharedDropboxError;
 
 #pragma mark - Constructors
 
@@ -20570,6 +21190,15 @@
   if (self) {
     _tag = DBTEAMTeamFolderActivateErrorStatusError;
     _statusError = statusError;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamSharedDropboxError:(DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamFolderActivateErrorTeamSharedDropboxError;
+    _teamSharedDropboxError = teamSharedDropboxError;
   }
   return self;
 }
@@ -20600,6 +21229,15 @@
   return _statusError;
 }
 
+- (DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  if (![self isTeamSharedDropboxError]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMTeamFolderActivateErrorTeamSharedDropboxError, but was %@.",
+                       [self tagName]];
+  }
+  return _teamSharedDropboxError;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isAccessError {
@@ -20608,6 +21246,10 @@
 
 - (BOOL)isStatusError {
   return _tag == DBTEAMTeamFolderActivateErrorStatusError;
+}
+
+- (BOOL)isTeamSharedDropboxError {
+  return _tag == DBTEAMTeamFolderActivateErrorTeamSharedDropboxError;
 }
 
 - (BOOL)isOther {
@@ -20620,6 +21262,8 @@
     return @"DBTEAMTeamFolderActivateErrorAccessError";
   case DBTEAMTeamFolderActivateErrorStatusError:
     return @"DBTEAMTeamFolderActivateErrorStatusError";
+  case DBTEAMTeamFolderActivateErrorTeamSharedDropboxError:
+    return @"DBTEAMTeamFolderActivateErrorTeamSharedDropboxError";
   case DBTEAMTeamFolderActivateErrorOther:
     return @"DBTEAMTeamFolderActivateErrorOther";
   }
@@ -20662,6 +21306,8 @@
     result = prime * result + [self.accessError hash];
   case DBTEAMTeamFolderActivateErrorStatusError:
     result = prime * result + [self.statusError hash];
+  case DBTEAMTeamFolderActivateErrorTeamSharedDropboxError:
+    result = prime * result + [self.teamSharedDropboxError hash];
   case DBTEAMTeamFolderActivateErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -20693,6 +21339,8 @@
     return [self.accessError isEqual:aTeamFolderActivateError.accessError];
   case DBTEAMTeamFolderActivateErrorStatusError:
     return [self.statusError isEqual:aTeamFolderActivateError.statusError];
+  case DBTEAMTeamFolderActivateErrorTeamSharedDropboxError:
+    return [self.teamSharedDropboxError isEqual:aTeamFolderActivateError.teamSharedDropboxError];
   case DBTEAMTeamFolderActivateErrorOther:
     return [[self tagName] isEqual:[aTeamFolderActivateError tagName]];
   }
@@ -20715,6 +21363,10 @@
     jsonDict[@"status_error"] =
         [[DBTEAMTeamFolderInvalidStatusErrorSerializer serialize:valueObj.statusError] mutableCopy];
     jsonDict[@".tag"] = @"status_error";
+  } else if ([valueObj isTeamSharedDropboxError]) {
+    jsonDict[@"team_shared_dropbox_error"] =
+        [[DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:valueObj.teamSharedDropboxError] mutableCopy];
+    jsonDict[@".tag"] = @"team_shared_dropbox_error";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -20735,6 +21387,10 @@
     DBTEAMTeamFolderInvalidStatusError *statusError =
         [DBTEAMTeamFolderInvalidStatusErrorSerializer deserialize:valueDict[@"status_error"]];
     return [[DBTEAMTeamFolderActivateError alloc] initWithStatusError:statusError];
+  } else if ([tag isEqualToString:@"team_shared_dropbox_error"]) {
+    DBTEAMTeamFolderTeamSharedDropboxError *teamSharedDropboxError =
+        [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer deserialize:valueDict[@"team_shared_dropbox_error"]];
+    return [[DBTEAMTeamFolderActivateError alloc] initWithTeamSharedDropboxError:teamSharedDropboxError];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMTeamFolderActivateError alloc] initWithOther];
   } else {
@@ -20959,6 +21615,7 @@
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderArchiveError.h"
 #import "DBTEAMTeamFolderInvalidStatusError.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
 
 #pragma mark - API Object
 
@@ -20966,6 +21623,7 @@
 
 @synthesize accessError = _accessError;
 @synthesize statusError = _statusError;
+@synthesize teamSharedDropboxError = _teamSharedDropboxError;
 
 #pragma mark - Constructors
 
@@ -20983,6 +21641,15 @@
   if (self) {
     _tag = DBTEAMTeamFolderArchiveErrorStatusError;
     _statusError = statusError;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamSharedDropboxError:(DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError;
+    _teamSharedDropboxError = teamSharedDropboxError;
   }
   return self;
 }
@@ -21013,6 +21680,15 @@
   return _statusError;
 }
 
+- (DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  if (![self isTeamSharedDropboxError]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError, but was %@.",
+                       [self tagName]];
+  }
+  return _teamSharedDropboxError;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isAccessError {
@@ -21021,6 +21697,10 @@
 
 - (BOOL)isStatusError {
   return _tag == DBTEAMTeamFolderArchiveErrorStatusError;
+}
+
+- (BOOL)isTeamSharedDropboxError {
+  return _tag == DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError;
 }
 
 - (BOOL)isOther {
@@ -21033,6 +21713,8 @@
     return @"DBTEAMTeamFolderArchiveErrorAccessError";
   case DBTEAMTeamFolderArchiveErrorStatusError:
     return @"DBTEAMTeamFolderArchiveErrorStatusError";
+  case DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError:
+    return @"DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError";
   case DBTEAMTeamFolderArchiveErrorOther:
     return @"DBTEAMTeamFolderArchiveErrorOther";
   }
@@ -21075,6 +21757,8 @@
     result = prime * result + [self.accessError hash];
   case DBTEAMTeamFolderArchiveErrorStatusError:
     result = prime * result + [self.statusError hash];
+  case DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError:
+    result = prime * result + [self.teamSharedDropboxError hash];
   case DBTEAMTeamFolderArchiveErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -21106,6 +21790,8 @@
     return [self.accessError isEqual:aTeamFolderArchiveError.accessError];
   case DBTEAMTeamFolderArchiveErrorStatusError:
     return [self.statusError isEqual:aTeamFolderArchiveError.statusError];
+  case DBTEAMTeamFolderArchiveErrorTeamSharedDropboxError:
+    return [self.teamSharedDropboxError isEqual:aTeamFolderArchiveError.teamSharedDropboxError];
   case DBTEAMTeamFolderArchiveErrorOther:
     return [[self tagName] isEqual:[aTeamFolderArchiveError tagName]];
   }
@@ -21128,6 +21814,10 @@
     jsonDict[@"status_error"] =
         [[DBTEAMTeamFolderInvalidStatusErrorSerializer serialize:valueObj.statusError] mutableCopy];
     jsonDict[@".tag"] = @"status_error";
+  } else if ([valueObj isTeamSharedDropboxError]) {
+    jsonDict[@"team_shared_dropbox_error"] =
+        [[DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:valueObj.teamSharedDropboxError] mutableCopy];
+    jsonDict[@".tag"] = @"team_shared_dropbox_error";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -21148,6 +21838,10 @@
     DBTEAMTeamFolderInvalidStatusError *statusError =
         [DBTEAMTeamFolderInvalidStatusErrorSerializer deserialize:valueDict[@"status_error"]];
     return [[DBTEAMTeamFolderArchiveError alloc] initWithStatusError:statusError];
+  } else if ([tag isEqualToString:@"team_shared_dropbox_error"]) {
+    DBTEAMTeamFolderTeamSharedDropboxError *teamSharedDropboxError =
+        [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer deserialize:valueDict[@"team_shared_dropbox_error"]];
+    return [[DBTEAMTeamFolderArchiveError alloc] initWithTeamSharedDropboxError:teamSharedDropboxError];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMTeamFolderArchiveError alloc] initWithOther];
   } else {
@@ -22913,7 +23607,8 @@
 
 - (instancetype)initWithTeamFolderId:(NSString *)teamFolderId
                                 name:(NSString *)name
-                              status:(DBTEAMTeamFolderStatus *)status {
+                              status:(DBTEAMTeamFolderStatus *)status
+                 isTeamSharedDropbox:(NSNumber *)isTeamSharedDropbox {
   [DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"](teamFolderId);
 
   self = [super init];
@@ -22921,6 +23616,7 @@
     _teamFolderId = teamFolderId;
     _name = name;
     _status = status;
+    _isTeamSharedDropbox = isTeamSharedDropbox;
   }
   return self;
 }
@@ -22958,6 +23654,7 @@
   result = prime * result + [self.teamFolderId hash];
   result = prime * result + [self.name hash];
   result = prime * result + [self.status hash];
+  result = prime * result + [self.isTeamSharedDropbox hash];
 
   return prime * result;
 }
@@ -22987,6 +23684,9 @@
   if (![self.status isEqual:aTeamFolderMetadata.status]) {
     return NO;
   }
+  if (![self.isTeamSharedDropbox isEqual:aTeamFolderMetadata.isTeamSharedDropbox]) {
+    return NO;
+  }
   return YES;
 }
 
@@ -23002,6 +23702,7 @@
   jsonDict[@"team_folder_id"] = valueObj.teamFolderId;
   jsonDict[@"name"] = valueObj.name;
   jsonDict[@"status"] = [DBTEAMTeamFolderStatusSerializer serialize:valueObj.status];
+  jsonDict[@"is_team_shared_dropbox"] = valueObj.isTeamSharedDropbox;
 
   return jsonDict;
 }
@@ -23010,8 +23711,12 @@
   NSString *teamFolderId = valueDict[@"team_folder_id"];
   NSString *name = valueDict[@"name"];
   DBTEAMTeamFolderStatus *status = [DBTEAMTeamFolderStatusSerializer deserialize:valueDict[@"status"]];
+  NSNumber *isTeamSharedDropbox = valueDict[@"is_team_shared_dropbox"];
 
-  return [[DBTEAMTeamFolderMetadata alloc] initWithTeamFolderId:teamFolderId name:name status:status];
+  return [[DBTEAMTeamFolderMetadata alloc] initWithTeamFolderId:teamFolderId
+                                                           name:name
+                                                         status:status
+                                            isTeamSharedDropbox:isTeamSharedDropbox];
 }
 
 @end
@@ -23022,6 +23727,7 @@
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderInvalidStatusError.h"
 #import "DBTEAMTeamFolderPermanentlyDeleteError.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
 
 #pragma mark - API Object
 
@@ -23029,6 +23735,7 @@
 
 @synthesize accessError = _accessError;
 @synthesize statusError = _statusError;
+@synthesize teamSharedDropboxError = _teamSharedDropboxError;
 
 #pragma mark - Constructors
 
@@ -23046,6 +23753,15 @@
   if (self) {
     _tag = DBTEAMTeamFolderPermanentlyDeleteErrorStatusError;
     _statusError = statusError;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamSharedDropboxError:(DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError;
+    _teamSharedDropboxError = teamSharedDropboxError;
   }
   return self;
 }
@@ -23078,6 +23794,16 @@
   return _statusError;
 }
 
+- (DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  if (![self isTeamSharedDropboxError]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError, but was %@.",
+               [self tagName]];
+  }
+  return _teamSharedDropboxError;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isAccessError {
@@ -23086,6 +23812,10 @@
 
 - (BOOL)isStatusError {
   return _tag == DBTEAMTeamFolderPermanentlyDeleteErrorStatusError;
+}
+
+- (BOOL)isTeamSharedDropboxError {
+  return _tag == DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError;
 }
 
 - (BOOL)isOther {
@@ -23098,6 +23828,8 @@
     return @"DBTEAMTeamFolderPermanentlyDeleteErrorAccessError";
   case DBTEAMTeamFolderPermanentlyDeleteErrorStatusError:
     return @"DBTEAMTeamFolderPermanentlyDeleteErrorStatusError";
+  case DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError:
+    return @"DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError";
   case DBTEAMTeamFolderPermanentlyDeleteErrorOther:
     return @"DBTEAMTeamFolderPermanentlyDeleteErrorOther";
   }
@@ -23140,6 +23872,8 @@
     result = prime * result + [self.accessError hash];
   case DBTEAMTeamFolderPermanentlyDeleteErrorStatusError:
     result = prime * result + [self.statusError hash];
+  case DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError:
+    result = prime * result + [self.teamSharedDropboxError hash];
   case DBTEAMTeamFolderPermanentlyDeleteErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -23172,6 +23906,8 @@
     return [self.accessError isEqual:aTeamFolderPermanentlyDeleteError.accessError];
   case DBTEAMTeamFolderPermanentlyDeleteErrorStatusError:
     return [self.statusError isEqual:aTeamFolderPermanentlyDeleteError.statusError];
+  case DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError:
+    return [self.teamSharedDropboxError isEqual:aTeamFolderPermanentlyDeleteError.teamSharedDropboxError];
   case DBTEAMTeamFolderPermanentlyDeleteErrorOther:
     return [[self tagName] isEqual:[aTeamFolderPermanentlyDeleteError tagName]];
   }
@@ -23194,6 +23930,10 @@
     jsonDict[@"status_error"] =
         [[DBTEAMTeamFolderInvalidStatusErrorSerializer serialize:valueObj.statusError] mutableCopy];
     jsonDict[@".tag"] = @"status_error";
+  } else if ([valueObj isTeamSharedDropboxError]) {
+    jsonDict[@"team_shared_dropbox_error"] =
+        [[DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:valueObj.teamSharedDropboxError] mutableCopy];
+    jsonDict[@".tag"] = @"team_shared_dropbox_error";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -23214,6 +23954,10 @@
     DBTEAMTeamFolderInvalidStatusError *statusError =
         [DBTEAMTeamFolderInvalidStatusErrorSerializer deserialize:valueDict[@"status_error"]];
     return [[DBTEAMTeamFolderPermanentlyDeleteError alloc] initWithStatusError:statusError];
+  } else if ([tag isEqualToString:@"team_shared_dropbox_error"]) {
+    DBTEAMTeamFolderTeamSharedDropboxError *teamSharedDropboxError =
+        [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer deserialize:valueDict[@"team_shared_dropbox_error"]];
+    return [[DBTEAMTeamFolderPermanentlyDeleteError alloc] initWithTeamSharedDropboxError:teamSharedDropboxError];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMTeamFolderPermanentlyDeleteError alloc] initWithOther];
   } else {
@@ -23335,6 +24079,7 @@
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderInvalidStatusError.h"
 #import "DBTEAMTeamFolderRenameError.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
 
 #pragma mark - API Object
 
@@ -23342,6 +24087,7 @@
 
 @synthesize accessError = _accessError;
 @synthesize statusError = _statusError;
+@synthesize teamSharedDropboxError = _teamSharedDropboxError;
 
 #pragma mark - Constructors
 
@@ -23359,6 +24105,15 @@
   if (self) {
     _tag = DBTEAMTeamFolderRenameErrorStatusError;
     _statusError = statusError;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamSharedDropboxError:(DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamFolderRenameErrorTeamSharedDropboxError;
+    _teamSharedDropboxError = teamSharedDropboxError;
   }
   return self;
 }
@@ -23413,6 +24168,15 @@
   return _statusError;
 }
 
+- (DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError {
+  if (![self isTeamSharedDropboxError]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMTeamFolderRenameErrorTeamSharedDropboxError, but was %@.", [self tagName]];
+  }
+  return _teamSharedDropboxError;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isAccessError {
@@ -23421,6 +24185,10 @@
 
 - (BOOL)isStatusError {
   return _tag == DBTEAMTeamFolderRenameErrorStatusError;
+}
+
+- (BOOL)isTeamSharedDropboxError {
+  return _tag == DBTEAMTeamFolderRenameErrorTeamSharedDropboxError;
 }
 
 - (BOOL)isOther {
@@ -23445,6 +24213,8 @@
     return @"DBTEAMTeamFolderRenameErrorAccessError";
   case DBTEAMTeamFolderRenameErrorStatusError:
     return @"DBTEAMTeamFolderRenameErrorStatusError";
+  case DBTEAMTeamFolderRenameErrorTeamSharedDropboxError:
+    return @"DBTEAMTeamFolderRenameErrorTeamSharedDropboxError";
   case DBTEAMTeamFolderRenameErrorOther:
     return @"DBTEAMTeamFolderRenameErrorOther";
   case DBTEAMTeamFolderRenameErrorInvalidFolderName:
@@ -23493,6 +24263,8 @@
     result = prime * result + [self.accessError hash];
   case DBTEAMTeamFolderRenameErrorStatusError:
     result = prime * result + [self.statusError hash];
+  case DBTEAMTeamFolderRenameErrorTeamSharedDropboxError:
+    result = prime * result + [self.teamSharedDropboxError hash];
   case DBTEAMTeamFolderRenameErrorOther:
     result = prime * result + [[self tagName] hash];
   case DBTEAMTeamFolderRenameErrorInvalidFolderName:
@@ -23530,6 +24302,8 @@
     return [self.accessError isEqual:aTeamFolderRenameError.accessError];
   case DBTEAMTeamFolderRenameErrorStatusError:
     return [self.statusError isEqual:aTeamFolderRenameError.statusError];
+  case DBTEAMTeamFolderRenameErrorTeamSharedDropboxError:
+    return [self.teamSharedDropboxError isEqual:aTeamFolderRenameError.teamSharedDropboxError];
   case DBTEAMTeamFolderRenameErrorOther:
     return [[self tagName] isEqual:[aTeamFolderRenameError tagName]];
   case DBTEAMTeamFolderRenameErrorInvalidFolderName:
@@ -23558,6 +24332,10 @@
     jsonDict[@"status_error"] =
         [[DBTEAMTeamFolderInvalidStatusErrorSerializer serialize:valueObj.statusError] mutableCopy];
     jsonDict[@".tag"] = @"status_error";
+  } else if ([valueObj isTeamSharedDropboxError]) {
+    jsonDict[@"team_shared_dropbox_error"] =
+        [[DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:valueObj.teamSharedDropboxError] mutableCopy];
+    jsonDict[@".tag"] = @"team_shared_dropbox_error";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else if ([valueObj isInvalidFolderName]) {
@@ -23584,6 +24362,10 @@
     DBTEAMTeamFolderInvalidStatusError *statusError =
         [DBTEAMTeamFolderInvalidStatusErrorSerializer deserialize:valueDict[@"status_error"]];
     return [[DBTEAMTeamFolderRenameError alloc] initWithStatusError:statusError];
+  } else if ([tag isEqualToString:@"team_shared_dropbox_error"]) {
+    DBTEAMTeamFolderTeamSharedDropboxError *teamSharedDropboxError =
+        [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer deserialize:valueDict[@"team_shared_dropbox_error"]];
+    return [[DBTEAMTeamFolderRenameError alloc] initWithTeamSharedDropboxError:teamSharedDropboxError];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMTeamFolderRenameError alloc] initWithOther];
   } else if ([tag isEqualToString:@"invalid_folder_name"]) {
@@ -23789,6 +24571,158 @@
     return [[DBTEAMTeamFolderStatus alloc] initWithOther];
   } else {
     return [[DBTEAMTeamFolderStatus alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMTeamFolderTeamSharedDropboxError
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisallowed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamFolderTeamSharedDropboxErrorOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisallowed {
+  return _tag == DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMTeamFolderTeamSharedDropboxErrorOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed:
+    return @"DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed";
+  case DBTEAMTeamFolderTeamSharedDropboxErrorOther:
+    return @"DBTEAMTeamFolderTeamSharedDropboxErrorOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMTeamFolderTeamSharedDropboxErrorSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMTeamFolderTeamSharedDropboxErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMTeamFolderTeamSharedDropboxErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamFolderTeamSharedDropboxError:other];
+}
+
+- (BOOL)isEqualToTeamFolderTeamSharedDropboxError:
+    (DBTEAMTeamFolderTeamSharedDropboxError *)aTeamFolderTeamSharedDropboxError {
+  if (self == aTeamFolderTeamSharedDropboxError) {
+    return YES;
+  }
+  if (self.tag != aTeamFolderTeamSharedDropboxError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed:
+    return [[self tagName] isEqual:[aTeamFolderTeamSharedDropboxError tagName]];
+  case DBTEAMTeamFolderTeamSharedDropboxErrorOther:
+    return [[self tagName] isEqual:[aTeamFolderTeamSharedDropboxError tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMTeamFolderTeamSharedDropboxErrorSerializer
+
++ (NSDictionary *)serialize:(DBTEAMTeamFolderTeamSharedDropboxError *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisallowed]) {
+    jsonDict[@".tag"] = @"disallowed";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMTeamFolderTeamSharedDropboxError *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disallowed"]) {
+    return [[DBTEAMTeamFolderTeamSharedDropboxError alloc] initWithDisallowed];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMTeamFolderTeamSharedDropboxError alloc] initWithOther];
+  } else {
+    return [[DBTEAMTeamFolderTeamSharedDropboxError alloc] initWithOther];
   }
 }
 
@@ -24058,11 +24992,13 @@
                                 name:(DBUSERSName *)name
                       membershipType:(DBTEAMTeamMembershipType *)membershipType
                               groups:(NSArray<NSString *> *)groups
+                      memberFolderId:(NSString *)memberFolderId
                           externalId:(NSString *)externalId
                            accountId:(NSString *)accountId
                             joinedOn:(NSDate *)joinedOn
                         persistentId:(NSString *)persistentId {
   [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](groups);
+  [DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"](memberFolderId);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
 
@@ -24078,6 +25014,7 @@
                         persistentId:persistentId];
   if (self) {
     _groups = groups;
+    _memberFolderId = memberFolderId;
   }
   return self;
 }
@@ -24088,7 +25025,8 @@
                               status:(DBTEAMTeamMemberStatus *)status
                                 name:(DBUSERSName *)name
                       membershipType:(DBTEAMTeamMembershipType *)membershipType
-                              groups:(NSArray<NSString *> *)groups {
+                              groups:(NSArray<NSString *> *)groups
+                      memberFolderId:(NSString *)memberFolderId {
   return [self initWithTeamMemberId:teamMemberId
                               email:email
                       emailVerified:emailVerified
@@ -24096,6 +25034,7 @@
                                name:name
                      membershipType:membershipType
                              groups:groups
+                     memberFolderId:memberFolderId
                          externalId:nil
                           accountId:nil
                            joinedOn:nil
@@ -24139,6 +25078,7 @@
   result = prime * result + [self.name hash];
   result = prime * result + [self.membershipType hash];
   result = prime * result + [self.groups hash];
+  result = prime * result + [self.memberFolderId hash];
   if (self.externalId) {
     result = prime * result + [self.externalId hash];
   }
@@ -24192,6 +25132,9 @@
   if (![self.groups isEqual:aTeamMemberProfile.groups]) {
     return NO;
   }
+  if (![self.memberFolderId isEqual:aTeamMemberProfile.memberFolderId]) {
+    return NO;
+  }
   if (self.externalId) {
     if (![self.externalId isEqual:aTeamMemberProfile.externalId]) {
       return NO;
@@ -24234,6 +25177,7 @@
                                            withBlock:^id(id elem0) {
                                              return elem0;
                                            }];
+  jsonDict[@"member_folder_id"] = valueObj.memberFolderId;
   if (valueObj.externalId) {
     jsonDict[@"external_id"] = valueObj.externalId;
   }
@@ -24262,6 +25206,7 @@
                                                      withBlock:^id(id elem0) {
                                                        return elem0;
                                                      }];
+  NSString *memberFolderId = valueDict[@"member_folder_id"];
   NSString *externalId = valueDict[@"external_id"] ?: nil;
   NSString *accountId = valueDict[@"account_id"] ?: nil;
   NSDate *joinedOn = valueDict[@"joined_on"]
@@ -24276,6 +25221,7 @@
                                                           name:name
                                                 membershipType:membershipType
                                                         groups:groups
+                                                memberFolderId:memberFolderId
                                                     externalId:externalId
                                                      accountId:accountId
                                                       joinedOn:joinedOn
@@ -24650,6 +25596,482 @@
                    reason:[NSString stringWithFormat:@"Tag has an invalid value: \"%@\".", valueDict[@".tag"]]
                  userInfo:nil]);
   }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMTeamNamespacesListArg.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMTeamNamespacesListArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithLimit:(NSNumber *)limit {
+  [DBStoneValidators numericValidator:@(1) maxValue:@(1000)](limit ?: @(1000));
+
+  self = [super init];
+  if (self) {
+    _limit = limit ?: @(1000);
+  }
+  return self;
+}
+
+- (instancetype)initDefault {
+  return [self initWithLimit:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMTeamNamespacesListArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMTeamNamespacesListArgSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMTeamNamespacesListArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.limit hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamNamespacesListArg:other];
+}
+
+- (BOOL)isEqualToTeamNamespacesListArg:(DBTEAMTeamNamespacesListArg *)aTeamNamespacesListArg {
+  if (self == aTeamNamespacesListArg) {
+    return YES;
+  }
+  if (![self.limit isEqual:aTeamNamespacesListArg.limit]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMTeamNamespacesListArgSerializer
+
++ (NSDictionary *)serialize:(DBTEAMTeamNamespacesListArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"limit"] = valueObj.limit;
+
+  return jsonDict;
+}
+
++ (DBTEAMTeamNamespacesListArg *)deserialize:(NSDictionary *)valueDict {
+  NSNumber *limit = valueDict[@"limit"] ?: @(1000);
+
+  return [[DBTEAMTeamNamespacesListArg alloc] initWithLimit:limit];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMTeamNamespacesListContinueArg.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMTeamNamespacesListContinueArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithCursor:(NSString *)cursor {
+
+  self = [super init];
+  if (self) {
+    _cursor = cursor;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMTeamNamespacesListContinueArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMTeamNamespacesListContinueArgSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMTeamNamespacesListContinueArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamNamespacesListContinueArg:other];
+}
+
+- (BOOL)isEqualToTeamNamespacesListContinueArg:(DBTEAMTeamNamespacesListContinueArg *)aTeamNamespacesListContinueArg {
+  if (self == aTeamNamespacesListContinueArg) {
+    return YES;
+  }
+  if (![self.cursor isEqual:aTeamNamespacesListContinueArg.cursor]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMTeamNamespacesListContinueArgSerializer
+
++ (NSDictionary *)serialize:(DBTEAMTeamNamespacesListContinueArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"cursor"] = valueObj.cursor;
+
+  return jsonDict;
+}
+
++ (DBTEAMTeamNamespacesListContinueArg *)deserialize:(NSDictionary *)valueDict {
+  NSString *cursor = valueDict[@"cursor"];
+
+  return [[DBTEAMTeamNamespacesListContinueArg alloc] initWithCursor:cursor];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMTeamNamespacesListContinueError.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMTeamNamespacesListContinueError
+
+#pragma mark - Constructors
+
+- (instancetype)initWithInvalidCursor {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamNamespacesListContinueErrorInvalidCursor;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMTeamNamespacesListContinueErrorOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isInvalidCursor {
+  return _tag == DBTEAMTeamNamespacesListContinueErrorInvalidCursor;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMTeamNamespacesListContinueErrorOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMTeamNamespacesListContinueErrorInvalidCursor:
+    return @"DBTEAMTeamNamespacesListContinueErrorInvalidCursor";
+  case DBTEAMTeamNamespacesListContinueErrorOther:
+    return @"DBTEAMTeamNamespacesListContinueErrorOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMTeamNamespacesListContinueErrorSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMTeamNamespacesListContinueErrorSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMTeamNamespacesListContinueErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMTeamNamespacesListContinueErrorInvalidCursor:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMTeamNamespacesListContinueErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamNamespacesListContinueError:other];
+}
+
+- (BOOL)isEqualToTeamNamespacesListContinueError:
+    (DBTEAMTeamNamespacesListContinueError *)aTeamNamespacesListContinueError {
+  if (self == aTeamNamespacesListContinueError) {
+    return YES;
+  }
+  if (self.tag != aTeamNamespacesListContinueError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMTeamNamespacesListContinueErrorInvalidCursor:
+    return [[self tagName] isEqual:[aTeamNamespacesListContinueError tagName]];
+  case DBTEAMTeamNamespacesListContinueErrorOther:
+    return [[self tagName] isEqual:[aTeamNamespacesListContinueError tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMTeamNamespacesListContinueErrorSerializer
+
++ (NSDictionary *)serialize:(DBTEAMTeamNamespacesListContinueError *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isInvalidCursor]) {
+    jsonDict[@".tag"] = @"invalid_cursor";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMTeamNamespacesListContinueError *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"invalid_cursor"]) {
+    return [[DBTEAMTeamNamespacesListContinueError alloc] initWithInvalidCursor];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMTeamNamespacesListContinueError alloc] initWithOther];
+  } else {
+    return [[DBTEAMTeamNamespacesListContinueError alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMNamespaceMetadata.h"
+#import "DBTEAMTeamNamespacesListResult.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMTeamNamespacesListResult
+
+#pragma mark - Constructors
+
+- (instancetype)initWithNamespaces:(NSArray<DBTEAMNamespaceMetadata *> *)namespaces
+                            cursor:(NSString *)cursor
+                           hasMore:(NSNumber *)hasMore {
+  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](namespaces);
+
+  self = [super init];
+  if (self) {
+    _namespaces = namespaces;
+    _cursor = cursor;
+    _hasMore = hasMore;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMTeamNamespacesListResultSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMTeamNamespacesListResultSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMTeamNamespacesListResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.namespaces hash];
+  result = prime * result + [self.cursor hash];
+  result = prime * result + [self.hasMore hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamNamespacesListResult:other];
+}
+
+- (BOOL)isEqualToTeamNamespacesListResult:(DBTEAMTeamNamespacesListResult *)aTeamNamespacesListResult {
+  if (self == aTeamNamespacesListResult) {
+    return YES;
+  }
+  if (![self.namespaces isEqual:aTeamNamespacesListResult.namespaces]) {
+    return NO;
+  }
+  if (![self.cursor isEqual:aTeamNamespacesListResult.cursor]) {
+    return NO;
+  }
+  if (![self.hasMore isEqual:aTeamNamespacesListResult.hasMore]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMTeamNamespacesListResultSerializer
+
++ (NSDictionary *)serialize:(DBTEAMTeamNamespacesListResult *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"namespaces"] = [DBArraySerializer serialize:valueObj.namespaces
+                                               withBlock:^id(id elem0) {
+                                                 return [DBTEAMNamespaceMetadataSerializer serialize:elem0];
+                                               }];
+  jsonDict[@"cursor"] = valueObj.cursor;
+  jsonDict[@"has_more"] = valueObj.hasMore;
+
+  return jsonDict;
+}
+
++ (DBTEAMTeamNamespacesListResult *)deserialize:(NSDictionary *)valueDict {
+  NSArray<DBTEAMNamespaceMetadata *> *namespaces =
+      [DBArraySerializer deserialize:valueDict[@"namespaces"]
+                           withBlock:^id(id elem0) {
+                             return [DBTEAMNamespaceMetadataSerializer deserialize:elem0];
+                           }];
+  NSString *cursor = valueDict[@"cursor"];
+  NSNumber *hasMore = valueDict[@"has_more"];
+
+  return [[DBTEAMTeamNamespacesListResult alloc] initWithNamespaces:namespaces cursor:cursor hasMore:hasMore];
 }
 
 @end

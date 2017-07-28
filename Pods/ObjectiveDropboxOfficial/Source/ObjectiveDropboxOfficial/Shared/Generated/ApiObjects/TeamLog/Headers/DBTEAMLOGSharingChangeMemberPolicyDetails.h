@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGExternalSharingPolicy;
 @class DBTEAMLOGSharingChangeMemberPolicyDetails;
+@class DBTEAMLOGSharingMemberPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New external invite policy.
-@property (nonatomic, readonly) DBTEAMLOGExternalSharingPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGSharingMemberPolicy *dNewValue;
 
 /// Previous external invite policy. Might be missing due to historical data
 /// gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGExternalSharingPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGSharingMemberPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGExternalSharingPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGExternalSharingPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGSharingMemberPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGSharingMemberPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGExternalSharingPolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGSharingMemberPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

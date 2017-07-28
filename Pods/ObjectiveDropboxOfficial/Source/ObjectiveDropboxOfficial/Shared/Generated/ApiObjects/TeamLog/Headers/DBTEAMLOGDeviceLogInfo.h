@@ -55,6 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Last activity. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *lastActivity;
 
+/// Linking app version. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *appVersion;
+
 #pragma mark - Constructors
 
 ///
@@ -76,6 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param ipAddress IP address. Might be missing due to historical data gap.
 /// @param lastActivity Last activity. Might be missing due to historical data
 /// gap.
+/// @param appVersion Linking app version. Might be missing due to historical
+/// data gap.
 ///
 /// @return An initialized instance.
 ///
@@ -87,7 +92,8 @@ NS_ASSUME_NONNULL_BEGIN
                        osVersion:(nullable NSString *)osVersion
                       deviceType:(nullable NSString *)deviceType
                        ipAddress:(nullable NSString *)ipAddress
-                    lastActivity:(nullable NSString *)lastActivity;
+                    lastActivity:(nullable NSString *)lastActivity
+                      appVersion:(nullable NSString *)appVersion;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

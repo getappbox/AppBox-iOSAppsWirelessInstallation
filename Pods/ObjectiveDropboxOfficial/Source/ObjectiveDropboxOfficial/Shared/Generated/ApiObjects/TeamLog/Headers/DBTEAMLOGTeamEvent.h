@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The Dropbox timestamp representing when the action was taken.
 @property (nonatomic, readonly) NSDate *timestamp;
 
-/// One or more categories that this type of action belongs to.
-@property (nonatomic, readonly) NSArray<DBTEAMLOGEventCategory *> *eventCategories;
+/// The category that this type of action belongs to.
+@property (nonatomic, readonly) DBTEAMLOGEventCategory *eventCategory;
 
 /// The entity who actually performed the action.
 @property (nonatomic, readonly) DBTEAMLOGActorLogInfo *actor;
@@ -79,8 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param timestamp The Dropbox timestamp representing when the action was
 /// taken.
-/// @param eventCategories One or more categories that this type of action
-/// belongs to.
+/// @param eventCategory The category that this type of action belongs to.
 /// @param actor The entity who actually performed the action.
 /// @param involveNonTeamMember True if the action involved a non team member
 /// either as the actor or as one of the affected users.
@@ -103,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTimestamp:(NSDate *)timestamp
-                  eventCategories:(NSArray<DBTEAMLOGEventCategory *> *)eventCategories
+                    eventCategory:(DBTEAMLOGEventCategory *)eventCategory
                             actor:(DBTEAMLOGActorLogInfo *)actor
              involveNonTeamMember:(NSNumber *)involveNonTeamMember
                           context:(DBTEAMLOGContextLogInfo *)context
@@ -119,8 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param timestamp The Dropbox timestamp representing when the action was
 /// taken.
-/// @param eventCategories One or more categories that this type of action
-/// belongs to.
+/// @param eventCategory The category that this type of action belongs to.
 /// @param actor The entity who actually performed the action.
 /// @param involveNonTeamMember True if the action involved a non team member
 /// either as the actor or as one of the affected users.
@@ -133,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTimestamp:(NSDate *)timestamp
-                  eventCategories:(NSArray<DBTEAMLOGEventCategory *> *)eventCategories
+                    eventCategory:(DBTEAMLOGEventCategory *)eventCategory
                             actor:(DBTEAMLOGActorLogInfo *)actor
              involveNonTeamMember:(NSNumber *)involveNonTeamMember
                           context:(DBTEAMLOGContextLogInfo *)context

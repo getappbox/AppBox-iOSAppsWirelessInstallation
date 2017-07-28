@@ -29,7 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// If the file is deleted.
 @property (nonatomic, readonly) NSNumber *isDeleted;
 
-/// The revisions for the file. Only non-delete revisions will show up here.
+/// The time of deletion if the file was deleted.
+@property (nonatomic, readonly, nullable) NSDate *serverDeleted;
+
+/// The revisions for the file. Only revisions that are not deleted will show up
+/// here.
 @property (nonatomic, readonly) NSArray<DBFILESFileMetadata *> *entries;
 
 #pragma mark - Constructors
@@ -38,8 +42,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param isDeleted If the file is deleted.
-/// @param entries The revisions for the file. Only non-delete revisions will
-/// show up here.
+/// @param entries The revisions for the file. Only revisions that are not
+/// deleted will show up here.
+/// @param serverDeleted The time of deletion if the file was deleted.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithIsDeleted:(NSNumber *)isDeleted
+                          entries:(NSArray<DBFILESFileMetadata *> *)entries
+                    serverDeleted:(nullable NSDate *)serverDeleted;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+/// @param isDeleted If the file is deleted.
+/// @param entries The revisions for the file. Only revisions that are not
+/// deleted will show up here.
 ///
 /// @return An initialized instance.
 ///

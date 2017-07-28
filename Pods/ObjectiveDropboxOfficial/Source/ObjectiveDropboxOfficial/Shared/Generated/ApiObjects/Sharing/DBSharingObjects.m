@@ -1796,6 +1796,220 @@
 
 @end
 
+#import "DBSHARINGAudienceExceptionContentInfo.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBSHARINGAudienceExceptionContentInfo
+
+#pragma mark - Constructors
+
+- (instancetype)initWithName:(NSString *)name {
+
+  self = [super init];
+  if (self) {
+    _name = name;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBSHARINGAudienceExceptionContentInfoSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBSHARINGAudienceExceptionContentInfoSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBSHARINGAudienceExceptionContentInfoSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAudienceExceptionContentInfo:other];
+}
+
+- (BOOL)isEqualToAudienceExceptionContentInfo:(DBSHARINGAudienceExceptionContentInfo *)anAudienceExceptionContentInfo {
+  if (self == anAudienceExceptionContentInfo) {
+    return YES;
+  }
+  if (![self.name isEqual:anAudienceExceptionContentInfo.name]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBSHARINGAudienceExceptionContentInfoSerializer
+
++ (NSDictionary *)serialize:(DBSHARINGAudienceExceptionContentInfo *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"name"] = valueObj.name;
+
+  return jsonDict;
+}
+
++ (DBSHARINGAudienceExceptionContentInfo *)deserialize:(NSDictionary *)valueDict {
+  NSString *name = valueDict[@"name"];
+
+  return [[DBSHARINGAudienceExceptionContentInfo alloc] initWithName:name];
+}
+
+@end
+
+#import "DBSHARINGAudienceExceptionContentInfo.h"
+#import "DBSHARINGAudienceExceptions.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBSHARINGAudienceExceptions
+
+#pragma mark - Constructors
+
+- (instancetype)initWithCount:(NSNumber *)count
+                   exceptions:(NSArray<DBSHARINGAudienceExceptionContentInfo *> *)exceptions {
+  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](exceptions);
+
+  self = [super init];
+  if (self) {
+    _count = count;
+    _exceptions = exceptions;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBSHARINGAudienceExceptionsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBSHARINGAudienceExceptionsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBSHARINGAudienceExceptionsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.count hash];
+  result = prime * result + [self.exceptions hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAudienceExceptions:other];
+}
+
+- (BOOL)isEqualToAudienceExceptions:(DBSHARINGAudienceExceptions *)anAudienceExceptions {
+  if (self == anAudienceExceptions) {
+    return YES;
+  }
+  if (![self.count isEqual:anAudienceExceptions.count]) {
+    return NO;
+  }
+  if (![self.exceptions isEqual:anAudienceExceptions.exceptions]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBSHARINGAudienceExceptionsSerializer
+
++ (NSDictionary *)serialize:(DBSHARINGAudienceExceptions *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"count"] = valueObj.count;
+  jsonDict[@"exceptions"] =
+      [DBArraySerializer serialize:valueObj.exceptions
+                         withBlock:^id(id elem0) {
+                           return [DBSHARINGAudienceExceptionContentInfoSerializer serialize:elem0];
+                         }];
+
+  return jsonDict;
+}
+
++ (DBSHARINGAudienceExceptions *)deserialize:(NSDictionary *)valueDict {
+  NSNumber *count = valueDict[@"count"];
+  NSArray<DBSHARINGAudienceExceptionContentInfo *> *exceptions =
+      [DBArraySerializer deserialize:valueDict[@"exceptions"]
+                           withBlock:^id(id elem0) {
+                             return [DBSHARINGAudienceExceptionContentInfoSerializer deserialize:elem0];
+                           }];
+
+  return [[DBSHARINGAudienceExceptions alloc] initWithCount:count exceptions:exceptions];
+}
+
+@end
+
 #import "DBSHARINGAudienceRestrictingSharedFolder.h"
 #import "DBSHARINGLinkAudience.h"
 #import "DBStoneSerializers.h"
@@ -8594,6 +8808,121 @@
                                                       permissions:permissions
                                                          initials:initials
                                                       isInherited:isInherited];
+}
+
+@end
+
+#import "DBSHARINGInsufficientPlan.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBSHARINGInsufficientPlan
+
+#pragma mark - Constructors
+
+- (instancetype)initWithMessage:(NSString *)message upsellUrl:(NSString *)upsellUrl {
+
+  self = [super init];
+  if (self) {
+    _message = message;
+    _upsellUrl = upsellUrl;
+  }
+  return self;
+}
+
+- (instancetype)initWithMessage:(NSString *)message {
+  return [self initWithMessage:message upsellUrl:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBSHARINGInsufficientPlanSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBSHARINGInsufficientPlanSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBSHARINGInsufficientPlanSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.message hash];
+  if (self.upsellUrl) {
+    result = prime * result + [self.upsellUrl hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToInsufficientPlan:other];
+}
+
+- (BOOL)isEqualToInsufficientPlan:(DBSHARINGInsufficientPlan *)anInsufficientPlan {
+  if (self == anInsufficientPlan) {
+    return YES;
+  }
+  if (![self.message isEqual:anInsufficientPlan.message]) {
+    return NO;
+  }
+  if (self.upsellUrl) {
+    if (![self.upsellUrl isEqual:anInsufficientPlan.upsellUrl]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBSHARINGInsufficientPlanSerializer
+
++ (NSDictionary *)serialize:(DBSHARINGInsufficientPlan *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"message"] = valueObj.message;
+  if (valueObj.upsellUrl) {
+    jsonDict[@"upsell_url"] = valueObj.upsellUrl;
+  }
+
+  return jsonDict;
+}
+
++ (DBSHARINGInsufficientPlan *)deserialize:(NSDictionary *)valueDict {
+  NSString *message = valueDict[@"message"];
+  NSString *upsellUrl = valueDict[@"upsell_url"] ?: nil;
+
+  return [[DBSHARINGInsufficientPlan alloc] initWithMessage:message upsellUrl:upsellUrl];
 }
 
 @end
@@ -16128,6 +16457,7 @@
 
 @end
 
+#import "DBSHARINGInsufficientPlan.h"
 #import "DBSHARINGPermissionDeniedReason.h"
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
@@ -16135,6 +16465,8 @@
 #pragma mark - API Object
 
 @implementation DBSHARINGPermissionDeniedReason
+
+@synthesize insufficientPlan = _insufficientPlan;
 
 #pragma mark - Constructors
 
@@ -16242,6 +16574,15 @@
   return self;
 }
 
+- (instancetype)initWithInsufficientPlan:(DBSHARINGInsufficientPlan *)insufficientPlan {
+  self = [super init];
+  if (self) {
+    _tag = DBSHARINGPermissionDeniedReasonInsufficientPlan;
+    _insufficientPlan = insufficientPlan;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -16251,6 +16592,15 @@
 }
 
 #pragma mark - Instance field accessors
+
+- (DBSHARINGInsufficientPlan *)insufficientPlan {
+  if (![self isInsufficientPlan]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBSHARINGPermissionDeniedReasonInsufficientPlan, but was %@.", [self tagName]];
+  }
+  return _insufficientPlan;
+}
 
 #pragma mark - Tag state methods
 
@@ -16306,6 +16656,10 @@
   return _tag == DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder;
 }
 
+- (BOOL)isInsufficientPlan {
+  return _tag == DBSHARINGPermissionDeniedReasonInsufficientPlan;
+}
+
 - (BOOL)isOther {
   return _tag == DBSHARINGPermissionDeniedReasonOther;
 }
@@ -16338,6 +16692,8 @@
     return @"DBSHARINGPermissionDeniedReasonUserNotOnTeam";
   case DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder:
     return @"DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder";
+  case DBSHARINGPermissionDeniedReasonInsufficientPlan:
+    return @"DBSHARINGPermissionDeniedReasonInsufficientPlan";
   case DBSHARINGPermissionDeniedReasonOther:
     return @"DBSHARINGPermissionDeniedReasonOther";
   }
@@ -16402,6 +16758,8 @@
     result = prime * result + [[self tagName] hash];
   case DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder:
     result = prime * result + [[self tagName] hash];
+  case DBSHARINGPermissionDeniedReasonInsufficientPlan:
+    result = prime * result + [self.insufficientPlan hash];
   case DBSHARINGPermissionDeniedReasonOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -16455,6 +16813,8 @@
     return [[self tagName] isEqual:[aPermissionDeniedReason tagName]];
   case DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder:
     return [[self tagName] isEqual:[aPermissionDeniedReason tagName]];
+  case DBSHARINGPermissionDeniedReasonInsufficientPlan:
+    return [self.insufficientPlan isEqual:aPermissionDeniedReason.insufficientPlan];
   case DBSHARINGPermissionDeniedReasonOther:
     return [[self tagName] isEqual:[aPermissionDeniedReason tagName]];
   }
@@ -16496,6 +16856,10 @@
     jsonDict[@".tag"] = @"user_not_on_team";
   } else if ([valueObj isFolderIsInsideSharedFolder]) {
     jsonDict[@".tag"] = @"folder_is_inside_shared_folder";
+  } else if ([valueObj isInsufficientPlan]) {
+    jsonDict[@"insufficient_plan"] =
+        [[DBSHARINGInsufficientPlanSerializer serialize:valueObj.insufficientPlan] mutableCopy];
+    jsonDict[@".tag"] = @"insufficient_plan";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -16534,6 +16898,9 @@
     return [[DBSHARINGPermissionDeniedReason alloc] initWithUserNotOnTeam];
   } else if ([tag isEqualToString:@"folder_is_inside_shared_folder"]) {
     return [[DBSHARINGPermissionDeniedReason alloc] initWithFolderIsInsideSharedFolder];
+  } else if ([tag isEqualToString:@"insufficient_plan"]) {
+    DBSHARINGInsufficientPlan *insufficientPlan = [DBSHARINGInsufficientPlanSerializer deserialize:valueDict];
+    return [[DBSHARINGPermissionDeniedReason alloc] initWithInsufficientPlan:insufficientPlan];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBSHARINGPermissionDeniedReason alloc] initWithOther];
   } else {
@@ -18968,10 +19335,201 @@
 @end
 
 #import "DBSHARINGAclUpdatePolicy.h"
+#import "DBSHARINGMemberPolicy.h"
+#import "DBSHARINGShareFolderArgBase.h"
+#import "DBSHARINGSharedLinkPolicy.h"
+#import "DBSHARINGViewerInfoPolicy.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBSHARINGShareFolderArgBase
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPath:(NSString *)path
+             aclUpdatePolicy:(DBSHARINGAclUpdatePolicy *)aclUpdatePolicy
+                  forceAsync:(NSNumber *)forceAsync
+                memberPolicy:(DBSHARINGMemberPolicy *)memberPolicy
+            sharedLinkPolicy:(DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
+            viewerInfoPolicy:(DBSHARINGViewerInfoPolicy *)viewerInfoPolicy {
+  [DBStoneValidators stringValidator:nil maxLength:nil pattern:@"(/(.|[\\r\\n])*)|(ns:[0-9]+(/.*)?)"](path);
+
+  self = [super init];
+  if (self) {
+    _aclUpdatePolicy = aclUpdatePolicy;
+    _forceAsync = forceAsync ?: @NO;
+    _memberPolicy = memberPolicy;
+    _path = path;
+    _sharedLinkPolicy = sharedLinkPolicy;
+    _viewerInfoPolicy = viewerInfoPolicy;
+  }
+  return self;
+}
+
+- (instancetype)initWithPath:(NSString *)path {
+  return [self initWithPath:path
+            aclUpdatePolicy:nil
+                 forceAsync:nil
+               memberPolicy:nil
+           sharedLinkPolicy:nil
+           viewerInfoPolicy:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBSHARINGShareFolderArgBaseSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBSHARINGShareFolderArgBaseSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBSHARINGShareFolderArgBaseSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.path hash];
+  if (self.aclUpdatePolicy) {
+    result = prime * result + [self.aclUpdatePolicy hash];
+  }
+  result = prime * result + [self.forceAsync hash];
+  if (self.memberPolicy) {
+    result = prime * result + [self.memberPolicy hash];
+  }
+  if (self.sharedLinkPolicy) {
+    result = prime * result + [self.sharedLinkPolicy hash];
+  }
+  if (self.viewerInfoPolicy) {
+    result = prime * result + [self.viewerInfoPolicy hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToShareFolderArgBase:other];
+}
+
+- (BOOL)isEqualToShareFolderArgBase:(DBSHARINGShareFolderArgBase *)aShareFolderArgBase {
+  if (self == aShareFolderArgBase) {
+    return YES;
+  }
+  if (![self.path isEqual:aShareFolderArgBase.path]) {
+    return NO;
+  }
+  if (self.aclUpdatePolicy) {
+    if (![self.aclUpdatePolicy isEqual:aShareFolderArgBase.aclUpdatePolicy]) {
+      return NO;
+    }
+  }
+  if (![self.forceAsync isEqual:aShareFolderArgBase.forceAsync]) {
+    return NO;
+  }
+  if (self.memberPolicy) {
+    if (![self.memberPolicy isEqual:aShareFolderArgBase.memberPolicy]) {
+      return NO;
+    }
+  }
+  if (self.sharedLinkPolicy) {
+    if (![self.sharedLinkPolicy isEqual:aShareFolderArgBase.sharedLinkPolicy]) {
+      return NO;
+    }
+  }
+  if (self.viewerInfoPolicy) {
+    if (![self.viewerInfoPolicy isEqual:aShareFolderArgBase.viewerInfoPolicy]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBSHARINGShareFolderArgBaseSerializer
+
++ (NSDictionary *)serialize:(DBSHARINGShareFolderArgBase *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"path"] = valueObj.path;
+  if (valueObj.aclUpdatePolicy) {
+    jsonDict[@"acl_update_policy"] = [DBSHARINGAclUpdatePolicySerializer serialize:valueObj.aclUpdatePolicy];
+  }
+  jsonDict[@"force_async"] = valueObj.forceAsync;
+  if (valueObj.memberPolicy) {
+    jsonDict[@"member_policy"] = [DBSHARINGMemberPolicySerializer serialize:valueObj.memberPolicy];
+  }
+  if (valueObj.sharedLinkPolicy) {
+    jsonDict[@"shared_link_policy"] = [DBSHARINGSharedLinkPolicySerializer serialize:valueObj.sharedLinkPolicy];
+  }
+  if (valueObj.viewerInfoPolicy) {
+    jsonDict[@"viewer_info_policy"] = [DBSHARINGViewerInfoPolicySerializer serialize:valueObj.viewerInfoPolicy];
+  }
+
+  return jsonDict;
+}
+
++ (DBSHARINGShareFolderArgBase *)deserialize:(NSDictionary *)valueDict {
+  NSString *path = valueDict[@"path"];
+  DBSHARINGAclUpdatePolicy *aclUpdatePolicy =
+      valueDict[@"acl_update_policy"] ? [DBSHARINGAclUpdatePolicySerializer deserialize:valueDict[@"acl_update_policy"]]
+                                      : nil;
+  NSNumber *forceAsync = valueDict[@"force_async"] ?: @NO;
+  DBSHARINGMemberPolicy *memberPolicy =
+      valueDict[@"member_policy"] ? [DBSHARINGMemberPolicySerializer deserialize:valueDict[@"member_policy"]] : nil;
+  DBSHARINGSharedLinkPolicy *sharedLinkPolicy =
+      valueDict[@"shared_link_policy"]
+          ? [DBSHARINGSharedLinkPolicySerializer deserialize:valueDict[@"shared_link_policy"]]
+          : nil;
+  DBSHARINGViewerInfoPolicy *viewerInfoPolicy =
+      valueDict[@"viewer_info_policy"]
+          ? [DBSHARINGViewerInfoPolicySerializer deserialize:valueDict[@"viewer_info_policy"]]
+          : nil;
+
+  return [[DBSHARINGShareFolderArgBase alloc] initWithPath:path
+                                           aclUpdatePolicy:aclUpdatePolicy
+                                                forceAsync:forceAsync
+                                              memberPolicy:memberPolicy
+                                          sharedLinkPolicy:sharedLinkPolicy
+                                          viewerInfoPolicy:viewerInfoPolicy];
+}
+
+@end
+
+#import "DBSHARINGAclUpdatePolicy.h"
 #import "DBSHARINGFolderAction.h"
 #import "DBSHARINGLinkSettings.h"
 #import "DBSHARINGMemberPolicy.h"
 #import "DBSHARINGShareFolderArg.h"
+#import "DBSHARINGShareFolderArgBase.h"
 #import "DBSHARINGSharedLinkPolicy.h"
 #import "DBSHARINGViewerInfoPolicy.h"
 #import "DBStoneSerializers.h"
@@ -18984,39 +19542,38 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithPath:(NSString *)path
-                memberPolicy:(DBSHARINGMemberPolicy *)memberPolicy
              aclUpdatePolicy:(DBSHARINGAclUpdatePolicy *)aclUpdatePolicy
-            sharedLinkPolicy:(DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
                   forceAsync:(NSNumber *)forceAsync
+                memberPolicy:(DBSHARINGMemberPolicy *)memberPolicy
+            sharedLinkPolicy:(DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
+            viewerInfoPolicy:(DBSHARINGViewerInfoPolicy *)viewerInfoPolicy
                      actions:(NSArray<DBSHARINGFolderAction *> *)actions
-                linkSettings:(DBSHARINGLinkSettings *)linkSettings
-            viewerInfoPolicy:(DBSHARINGViewerInfoPolicy *)viewerInfoPolicy {
+                linkSettings:(DBSHARINGLinkSettings *)linkSettings {
   [DBStoneValidators stringValidator:nil maxLength:nil pattern:@"(/(.|[\\r\\n])*)|(ns:[0-9]+(/.*)?)"](path);
   [DBStoneValidators nullableValidator:[DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil]](actions);
 
-  self = [super init];
+  self = [super initWithPath:path
+             aclUpdatePolicy:aclUpdatePolicy
+                  forceAsync:forceAsync
+                memberPolicy:memberPolicy
+            sharedLinkPolicy:sharedLinkPolicy
+            viewerInfoPolicy:viewerInfoPolicy];
   if (self) {
-    _path = path;
-    _memberPolicy = memberPolicy;
-    _aclUpdatePolicy = aclUpdatePolicy;
-    _sharedLinkPolicy = sharedLinkPolicy;
-    _forceAsync = forceAsync ?: @NO;
     _actions = actions;
     _linkSettings = linkSettings;
-    _viewerInfoPolicy = viewerInfoPolicy;
   }
   return self;
 }
 
 - (instancetype)initWithPath:(NSString *)path {
   return [self initWithPath:path
-               memberPolicy:nil
             aclUpdatePolicy:nil
-           sharedLinkPolicy:nil
                  forceAsync:nil
+               memberPolicy:nil
+           sharedLinkPolicy:nil
+           viewerInfoPolicy:nil
                     actions:nil
-               linkSettings:nil
-           viewerInfoPolicy:nil];
+               linkSettings:nil];
 }
 
 #pragma mark - Serialization methods
@@ -19050,24 +19607,24 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.path hash];
-  if (self.memberPolicy) {
-    result = prime * result + [self.memberPolicy hash];
-  }
   if (self.aclUpdatePolicy) {
     result = prime * result + [self.aclUpdatePolicy hash];
+  }
+  result = prime * result + [self.forceAsync hash];
+  if (self.memberPolicy) {
+    result = prime * result + [self.memberPolicy hash];
   }
   if (self.sharedLinkPolicy) {
     result = prime * result + [self.sharedLinkPolicy hash];
   }
-  result = prime * result + [self.forceAsync hash];
+  if (self.viewerInfoPolicy) {
+    result = prime * result + [self.viewerInfoPolicy hash];
+  }
   if (self.actions) {
     result = prime * result + [self.actions hash];
   }
   if (self.linkSettings) {
     result = prime * result + [self.linkSettings hash];
-  }
-  if (self.viewerInfoPolicy) {
-    result = prime * result + [self.viewerInfoPolicy hash];
   }
 
   return prime * result;
@@ -19092,13 +19649,16 @@
   if (![self.path isEqual:aShareFolderArg.path]) {
     return NO;
   }
-  if (self.memberPolicy) {
-    if (![self.memberPolicy isEqual:aShareFolderArg.memberPolicy]) {
+  if (self.aclUpdatePolicy) {
+    if (![self.aclUpdatePolicy isEqual:aShareFolderArg.aclUpdatePolicy]) {
       return NO;
     }
   }
-  if (self.aclUpdatePolicy) {
-    if (![self.aclUpdatePolicy isEqual:aShareFolderArg.aclUpdatePolicy]) {
+  if (![self.forceAsync isEqual:aShareFolderArg.forceAsync]) {
+    return NO;
+  }
+  if (self.memberPolicy) {
+    if (![self.memberPolicy isEqual:aShareFolderArg.memberPolicy]) {
       return NO;
     }
   }
@@ -19107,8 +19667,10 @@
       return NO;
     }
   }
-  if (![self.forceAsync isEqual:aShareFolderArg.forceAsync]) {
-    return NO;
+  if (self.viewerInfoPolicy) {
+    if (![self.viewerInfoPolicy isEqual:aShareFolderArg.viewerInfoPolicy]) {
+      return NO;
+    }
   }
   if (self.actions) {
     if (![self.actions isEqual:aShareFolderArg.actions]) {
@@ -19117,11 +19679,6 @@
   }
   if (self.linkSettings) {
     if (![self.linkSettings isEqual:aShareFolderArg.linkSettings]) {
-      return NO;
-    }
-  }
-  if (self.viewerInfoPolicy) {
-    if (![self.viewerInfoPolicy isEqual:aShareFolderArg.viewerInfoPolicy]) {
       return NO;
     }
   }
@@ -19138,16 +19695,19 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"path"] = valueObj.path;
-  if (valueObj.memberPolicy) {
-    jsonDict[@"member_policy"] = [DBSHARINGMemberPolicySerializer serialize:valueObj.memberPolicy];
-  }
   if (valueObj.aclUpdatePolicy) {
     jsonDict[@"acl_update_policy"] = [DBSHARINGAclUpdatePolicySerializer serialize:valueObj.aclUpdatePolicy];
+  }
+  jsonDict[@"force_async"] = valueObj.forceAsync;
+  if (valueObj.memberPolicy) {
+    jsonDict[@"member_policy"] = [DBSHARINGMemberPolicySerializer serialize:valueObj.memberPolicy];
   }
   if (valueObj.sharedLinkPolicy) {
     jsonDict[@"shared_link_policy"] = [DBSHARINGSharedLinkPolicySerializer serialize:valueObj.sharedLinkPolicy];
   }
-  jsonDict[@"force_async"] = valueObj.forceAsync;
+  if (valueObj.viewerInfoPolicy) {
+    jsonDict[@"viewer_info_policy"] = [DBSHARINGViewerInfoPolicySerializer serialize:valueObj.viewerInfoPolicy];
+  }
   if (valueObj.actions) {
     jsonDict[@"actions"] = [DBArraySerializer serialize:valueObj.actions
                                               withBlock:^id(id elem0) {
@@ -19157,25 +19717,26 @@
   if (valueObj.linkSettings) {
     jsonDict[@"link_settings"] = [DBSHARINGLinkSettingsSerializer serialize:valueObj.linkSettings];
   }
-  if (valueObj.viewerInfoPolicy) {
-    jsonDict[@"viewer_info_policy"] = [DBSHARINGViewerInfoPolicySerializer serialize:valueObj.viewerInfoPolicy];
-  }
 
   return jsonDict;
 }
 
 + (DBSHARINGShareFolderArg *)deserialize:(NSDictionary *)valueDict {
   NSString *path = valueDict[@"path"];
-  DBSHARINGMemberPolicy *memberPolicy =
-      valueDict[@"member_policy"] ? [DBSHARINGMemberPolicySerializer deserialize:valueDict[@"member_policy"]] : nil;
   DBSHARINGAclUpdatePolicy *aclUpdatePolicy =
       valueDict[@"acl_update_policy"] ? [DBSHARINGAclUpdatePolicySerializer deserialize:valueDict[@"acl_update_policy"]]
                                       : nil;
+  NSNumber *forceAsync = valueDict[@"force_async"] ?: @NO;
+  DBSHARINGMemberPolicy *memberPolicy =
+      valueDict[@"member_policy"] ? [DBSHARINGMemberPolicySerializer deserialize:valueDict[@"member_policy"]] : nil;
   DBSHARINGSharedLinkPolicy *sharedLinkPolicy =
       valueDict[@"shared_link_policy"]
           ? [DBSHARINGSharedLinkPolicySerializer deserialize:valueDict[@"shared_link_policy"]]
           : nil;
-  NSNumber *forceAsync = valueDict[@"force_async"] ?: @NO;
+  DBSHARINGViewerInfoPolicy *viewerInfoPolicy =
+      valueDict[@"viewer_info_policy"]
+          ? [DBSHARINGViewerInfoPolicySerializer deserialize:valueDict[@"viewer_info_policy"]]
+          : nil;
   NSArray<DBSHARINGFolderAction *> *actions =
       valueDict[@"actions"] ? [DBArraySerializer deserialize:valueDict[@"actions"]
                                                    withBlock:^id(id elem0) {
@@ -19184,19 +19745,15 @@
                             : nil;
   DBSHARINGLinkSettings *linkSettings =
       valueDict[@"link_settings"] ? [DBSHARINGLinkSettingsSerializer deserialize:valueDict[@"link_settings"]] : nil;
-  DBSHARINGViewerInfoPolicy *viewerInfoPolicy =
-      valueDict[@"viewer_info_policy"]
-          ? [DBSHARINGViewerInfoPolicySerializer deserialize:valueDict[@"viewer_info_policy"]]
-          : nil;
 
   return [[DBSHARINGShareFolderArg alloc] initWithPath:path
-                                          memberPolicy:memberPolicy
                                        aclUpdatePolicy:aclUpdatePolicy
-                                      sharedLinkPolicy:sharedLinkPolicy
                                             forceAsync:forceAsync
+                                          memberPolicy:memberPolicy
+                                      sharedLinkPolicy:sharedLinkPolicy
+                                      viewerInfoPolicy:viewerInfoPolicy
                                                actions:actions
-                                          linkSettings:linkSettings
-                                      viewerInfoPolicy:viewerInfoPolicy];
+                                          linkSettings:linkSettings];
 }
 
 @end
@@ -20506,6 +21063,7 @@
 @end
 
 #import "DBSHARINGAccessLevel.h"
+#import "DBSHARINGAudienceExceptions.h"
 #import "DBSHARINGAudienceRestrictingSharedFolder.h"
 #import "DBSHARINGLinkAudience.h"
 #import "DBSHARINGLinkPermission.h"
@@ -20527,7 +21085,8 @@
                                     url:(NSString *)url
                             accessLevel:(DBSHARINGAccessLevel *)accessLevel
         audienceRestrictingSharedFolder:(DBSHARINGAudienceRestrictingSharedFolder *)audienceRestrictingSharedFolder
-                                 expiry:(NSDate *)expiry {
+                                 expiry:(NSDate *)expiry
+                     audienceExceptions:(DBSHARINGAudienceExceptions *)audienceExceptions {
   [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](audienceOptions);
   [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](linkPermissions);
 
@@ -20539,6 +21098,7 @@
         audienceRestrictingSharedFolder:audienceRestrictingSharedFolder
                                  expiry:expiry];
   if (self) {
+    _audienceExceptions = audienceExceptions;
     _url = url;
   }
   return self;
@@ -20556,7 +21116,8 @@
                                    url:url
                            accessLevel:nil
        audienceRestrictingSharedFolder:nil
-                                expiry:nil];
+                                expiry:nil
+                    audienceExceptions:nil];
 }
 
 #pragma mark - Serialization methods
@@ -20602,6 +21163,9 @@
   }
   if (self.expiry) {
     result = prime * result + [self.expiry hash];
+  }
+  if (self.audienceExceptions) {
+    result = prime * result + [self.audienceExceptions hash];
   }
 
   return prime * result;
@@ -20653,6 +21217,11 @@
       return NO;
     }
   }
+  if (self.audienceExceptions) {
+    if (![self.audienceExceptions isEqual:aSharedContentLinkMetadata.audienceExceptions]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -20686,6 +21255,9 @@
   if (valueObj.expiry) {
     jsonDict[@"expiry"] = [DBNSDateSerializer serialize:valueObj.expiry dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
   }
+  if (valueObj.audienceExceptions) {
+    jsonDict[@"audience_exceptions"] = [DBSHARINGAudienceExceptionsSerializer serialize:valueObj.audienceExceptions];
+  }
 
   return jsonDict;
 }
@@ -20714,6 +21286,10 @@
   NSDate *expiry = valueDict[@"expiry"]
                        ? [DBNSDateSerializer deserialize:valueDict[@"expiry"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"]
                        : nil;
+  DBSHARINGAudienceExceptions *audienceExceptions =
+      valueDict[@"audience_exceptions"]
+          ? [DBSHARINGAudienceExceptionsSerializer deserialize:valueDict[@"audience_exceptions"]]
+          : nil;
 
   return [[DBSHARINGSharedContentLinkMetadata alloc] initWithAudienceOptions:audienceOptions
                                                              currentAudience:currentAudience
@@ -20722,7 +21298,8 @@
                                                                          url:url
                                                                  accessLevel:accessLevel
                                              audienceRestrictingSharedFolder:audienceRestrictingSharedFolder
-                                                                      expiry:expiry];
+                                                                      expiry:expiry
+                                                          audienceExceptions:audienceExceptions];
 }
 
 @end
@@ -20911,6 +21488,7 @@
                  accessType:(DBSHARINGAccessLevel *)accessType
        expectedLinkMetadata:(DBSHARINGExpectedSharedContentLinkMetadata *)expectedLinkMetadata
                linkMetadata:(DBSHARINGSharedContentLinkMetadata *)linkMetadata
+          ownerDisplayNames:(NSArray<NSString *> *)ownerDisplayNames
                   ownerTeam:(DBUSERSTeam *)ownerTeam
        parentSharedFolderId:(NSString *)parentSharedFolderId
                 pathDisplay:(NSString *)pathDisplay
@@ -20918,6 +21496,8 @@
                 permissions:(NSArray<DBSHARINGFilePermission *> *)permissions
                 timeInvited:(NSDate *)timeInvited {
   [DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"id:.*"](id_);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil]](ownerDisplayNames);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"]](
       parentSharedFolderId);
@@ -20931,6 +21511,7 @@
     _expectedLinkMetadata = expectedLinkMetadata;
     _linkMetadata = linkMetadata;
     _name = name;
+    _ownerDisplayNames = ownerDisplayNames;
     _ownerTeam = ownerTeam;
     _parentSharedFolderId = parentSharedFolderId;
     _pathDisplay = pathDisplay;
@@ -20954,6 +21535,7 @@
                 accessType:nil
       expectedLinkMetadata:nil
               linkMetadata:nil
+         ownerDisplayNames:nil
                  ownerTeam:nil
       parentSharedFolderId:nil
                pathDisplay:nil
@@ -21004,6 +21586,9 @@
   }
   if (self.linkMetadata) {
     result = prime * result + [self.linkMetadata hash];
+  }
+  if (self.ownerDisplayNames) {
+    result = prime * result + [self.ownerDisplayNames hash];
   }
   if (self.ownerTeam) {
     result = prime * result + [self.ownerTeam hash];
@@ -21070,6 +21655,11 @@
       return NO;
     }
   }
+  if (self.ownerDisplayNames) {
+    if (![self.ownerDisplayNames isEqual:aSharedFileMetadata.ownerDisplayNames]) {
+      return NO;
+    }
+  }
   if (self.ownerTeam) {
     if (![self.ownerTeam isEqual:aSharedFileMetadata.ownerTeam]) {
       return NO;
@@ -21126,6 +21716,12 @@
   if (valueObj.linkMetadata) {
     jsonDict[@"link_metadata"] = [DBSHARINGSharedContentLinkMetadataSerializer serialize:valueObj.linkMetadata];
   }
+  if (valueObj.ownerDisplayNames) {
+    jsonDict[@"owner_display_names"] = [DBArraySerializer serialize:valueObj.ownerDisplayNames
+                                                          withBlock:^id(id elem0) {
+                                                            return elem0;
+                                                          }];
+  }
   if (valueObj.ownerTeam) {
     jsonDict[@"owner_team"] = [DBUSERSTeamSerializer serialize:valueObj.ownerTeam];
   }
@@ -21166,6 +21762,12 @@
       valueDict[@"link_metadata"]
           ? [DBSHARINGSharedContentLinkMetadataSerializer deserialize:valueDict[@"link_metadata"]]
           : nil;
+  NSArray<NSString *> *ownerDisplayNames = valueDict[@"owner_display_names"]
+                                               ? [DBArraySerializer deserialize:valueDict[@"owner_display_names"]
+                                                                      withBlock:^id(id elem0) {
+                                                                        return elem0;
+                                                                      }]
+                                               : nil;
   DBUSERSTeam *ownerTeam =
       valueDict[@"owner_team"] ? [DBUSERSTeamSerializer deserialize:valueDict[@"owner_team"]] : nil;
   NSString *parentSharedFolderId = valueDict[@"parent_shared_folder_id"] ?: nil;
@@ -21188,6 +21790,7 @@
                                                accessType:accessType
                                      expectedLinkMetadata:expectedLinkMetadata
                                              linkMetadata:linkMetadata
+                                        ownerDisplayNames:ownerDisplayNames
                                                 ownerTeam:ownerTeam
                                      parentSharedFolderId:parentSharedFolderId
                                               pathDisplay:pathDisplay
@@ -21803,9 +22406,12 @@
 - (instancetype)initWithAccessType:(DBSHARINGAccessLevel *)accessType
                 isInsideTeamFolder:(NSNumber *)isInsideTeamFolder
                       isTeamFolder:(NSNumber *)isTeamFolder
+                 ownerDisplayNames:(NSArray<NSString *> *)ownerDisplayNames
                          ownerTeam:(DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(NSString *)parentSharedFolderId
                          pathLower:(NSString *)pathLower {
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil]](ownerDisplayNames);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"]](
       parentSharedFolderId);
@@ -21815,6 +22421,7 @@
     _accessType = accessType;
     _isInsideTeamFolder = isInsideTeamFolder;
     _isTeamFolder = isTeamFolder;
+    _ownerDisplayNames = ownerDisplayNames;
     _ownerTeam = ownerTeam;
     _parentSharedFolderId = parentSharedFolderId;
     _pathLower = pathLower;
@@ -21828,6 +22435,7 @@
   return [self initWithAccessType:accessType
                isInsideTeamFolder:isInsideTeamFolder
                      isTeamFolder:isTeamFolder
+                ownerDisplayNames:nil
                         ownerTeam:nil
              parentSharedFolderId:nil
                         pathLower:nil];
@@ -21866,6 +22474,9 @@
   result = prime * result + [self.accessType hash];
   result = prime * result + [self.isInsideTeamFolder hash];
   result = prime * result + [self.isTeamFolder hash];
+  if (self.ownerDisplayNames) {
+    result = prime * result + [self.ownerDisplayNames hash];
+  }
   if (self.ownerTeam) {
     result = prime * result + [self.ownerTeam hash];
   }
@@ -21904,6 +22515,11 @@
   if (![self.isTeamFolder isEqual:aSharedFolderMetadataBase.isTeamFolder]) {
     return NO;
   }
+  if (self.ownerDisplayNames) {
+    if (![self.ownerDisplayNames isEqual:aSharedFolderMetadataBase.ownerDisplayNames]) {
+      return NO;
+    }
+  }
   if (self.ownerTeam) {
     if (![self.ownerTeam isEqual:aSharedFolderMetadataBase.ownerTeam]) {
       return NO;
@@ -21934,6 +22550,12 @@
   jsonDict[@"access_type"] = [DBSHARINGAccessLevelSerializer serialize:valueObj.accessType];
   jsonDict[@"is_inside_team_folder"] = valueObj.isInsideTeamFolder;
   jsonDict[@"is_team_folder"] = valueObj.isTeamFolder;
+  if (valueObj.ownerDisplayNames) {
+    jsonDict[@"owner_display_names"] = [DBArraySerializer serialize:valueObj.ownerDisplayNames
+                                                          withBlock:^id(id elem0) {
+                                                            return elem0;
+                                                          }];
+  }
   if (valueObj.ownerTeam) {
     jsonDict[@"owner_team"] = [DBUSERSTeamSerializer serialize:valueObj.ownerTeam];
   }
@@ -21951,6 +22573,12 @@
   DBSHARINGAccessLevel *accessType = [DBSHARINGAccessLevelSerializer deserialize:valueDict[@"access_type"]];
   NSNumber *isInsideTeamFolder = valueDict[@"is_inside_team_folder"];
   NSNumber *isTeamFolder = valueDict[@"is_team_folder"];
+  NSArray<NSString *> *ownerDisplayNames = valueDict[@"owner_display_names"]
+                                               ? [DBArraySerializer deserialize:valueDict[@"owner_display_names"]
+                                                                      withBlock:^id(id elem0) {
+                                                                        return elem0;
+                                                                      }]
+                                               : nil;
   DBUSERSTeam *ownerTeam =
       valueDict[@"owner_team"] ? [DBUSERSTeamSerializer deserialize:valueDict[@"owner_team"]] : nil;
   NSString *parentSharedFolderId = valueDict[@"parent_shared_folder_id"] ?: nil;
@@ -21959,6 +22587,7 @@
   return [[DBSHARINGSharedFolderMetadataBase alloc] initWithAccessType:accessType
                                                     isInsideTeamFolder:isInsideTeamFolder
                                                           isTeamFolder:isTeamFolder
+                                                     ownerDisplayNames:ownerDisplayNames
                                                              ownerTeam:ownerTeam
                                                   parentSharedFolderId:parentSharedFolderId
                                                              pathLower:pathLower];
@@ -21990,12 +22619,15 @@
                         previewUrl:(NSString *)previewUrl
                     sharedFolderId:(NSString *)sharedFolderId
                        timeInvited:(NSDate *)timeInvited
+                 ownerDisplayNames:(NSArray<NSString *> *)ownerDisplayNames
                          ownerTeam:(DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(NSString *)parentSharedFolderId
                          pathLower:(NSString *)pathLower
                       linkMetadata:(DBSHARINGSharedContentLinkMetadata *)linkMetadata
                        permissions:(NSArray<DBSHARINGFolderPermission *> *)permissions {
   [DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"](sharedFolderId);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil]](ownerDisplayNames);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"]](
       parentSharedFolderId);
@@ -22005,6 +22637,7 @@
   self = [super initWithAccessType:accessType
                 isInsideTeamFolder:isInsideTeamFolder
                       isTeamFolder:isTeamFolder
+                 ownerDisplayNames:ownerDisplayNames
                          ownerTeam:ownerTeam
               parentSharedFolderId:parentSharedFolderId
                          pathLower:pathLower];
@@ -22036,6 +22669,7 @@
                        previewUrl:previewUrl
                    sharedFolderId:sharedFolderId
                       timeInvited:timeInvited
+                ownerDisplayNames:nil
                         ownerTeam:nil
              parentSharedFolderId:nil
                         pathLower:nil
@@ -22081,6 +22715,9 @@
   result = prime * result + [self.previewUrl hash];
   result = prime * result + [self.sharedFolderId hash];
   result = prime * result + [self.timeInvited hash];
+  if (self.ownerDisplayNames) {
+    result = prime * result + [self.ownerDisplayNames hash];
+  }
   if (self.ownerTeam) {
     result = prime * result + [self.ownerTeam hash];
   }
@@ -22140,6 +22777,11 @@
   if (![self.timeInvited isEqual:aSharedFolderMetadata.timeInvited]) {
     return NO;
   }
+  if (self.ownerDisplayNames) {
+    if (![self.ownerDisplayNames isEqual:aSharedFolderMetadata.ownerDisplayNames]) {
+      return NO;
+    }
+  }
   if (self.ownerTeam) {
     if (![self.ownerTeam isEqual:aSharedFolderMetadata.ownerTeam]) {
       return NO;
@@ -22185,6 +22827,12 @@
   jsonDict[@"preview_url"] = valueObj.previewUrl;
   jsonDict[@"shared_folder_id"] = valueObj.sharedFolderId;
   jsonDict[@"time_invited"] = [DBNSDateSerializer serialize:valueObj.timeInvited dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+  if (valueObj.ownerDisplayNames) {
+    jsonDict[@"owner_display_names"] = [DBArraySerializer serialize:valueObj.ownerDisplayNames
+                                                          withBlock:^id(id elem0) {
+                                                            return elem0;
+                                                          }];
+  }
   if (valueObj.ownerTeam) {
     jsonDict[@"owner_team"] = [DBUSERSTeamSerializer serialize:valueObj.ownerTeam];
   }
@@ -22216,6 +22864,12 @@
   NSString *previewUrl = valueDict[@"preview_url"];
   NSString *sharedFolderId = valueDict[@"shared_folder_id"];
   NSDate *timeInvited = [DBNSDateSerializer deserialize:valueDict[@"time_invited"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+  NSArray<NSString *> *ownerDisplayNames = valueDict[@"owner_display_names"]
+                                               ? [DBArraySerializer deserialize:valueDict[@"owner_display_names"]
+                                                                      withBlock:^id(id elem0) {
+                                                                        return elem0;
+                                                                      }]
+                                               : nil;
   DBUSERSTeam *ownerTeam =
       valueDict[@"owner_team"] ? [DBUSERSTeamSerializer deserialize:valueDict[@"owner_team"]] : nil;
   NSString *parentSharedFolderId = valueDict[@"parent_shared_folder_id"] ?: nil;
@@ -22239,6 +22893,7 @@
                                                         previewUrl:previewUrl
                                                     sharedFolderId:sharedFolderId
                                                        timeInvited:timeInvited
+                                                 ownerDisplayNames:ownerDisplayNames
                                                          ownerTeam:ownerTeam
                                               parentSharedFolderId:parentSharedFolderId
                                                          pathLower:pathLower

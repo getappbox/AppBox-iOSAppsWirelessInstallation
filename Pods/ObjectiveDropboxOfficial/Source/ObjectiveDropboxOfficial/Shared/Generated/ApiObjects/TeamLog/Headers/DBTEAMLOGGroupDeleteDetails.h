@@ -9,7 +9,6 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGGroupDeleteDetails;
-@class DBTEAMLOGGroupLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Group details.
-@property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *groupInfo;
-
 /// Is admin managed group. Might be missing due to historical data gap.
 @property (nonatomic, readonly, nullable) NSNumber *isAdminManaged;
 
@@ -39,23 +35,21 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param groupInfo Group details.
 /// @param isAdminManaged Is admin managed group. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo isAdminManaged:(nullable NSNumber *)isAdminManaged;
+- (instancetype)initWithIsAdminManaged:(nullable NSNumber *)isAdminManaged;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param groupInfo Group details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

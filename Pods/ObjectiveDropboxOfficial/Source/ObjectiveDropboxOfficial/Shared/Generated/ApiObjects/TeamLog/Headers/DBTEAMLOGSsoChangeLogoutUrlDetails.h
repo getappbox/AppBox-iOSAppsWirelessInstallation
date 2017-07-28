@@ -28,34 +28,33 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Previous single sign-on logout URL.
-@property (nonatomic, readonly, copy) NSString *previousSsoLogoutUrl;
+@property (nonatomic, readonly, copy) NSString *previousValue;
 
 /// New single sign-on logout URL. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *dNewSsoLogoutUrl;
+@property (nonatomic, readonly, copy, nullable) NSString *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousSsoLogoutUrl Previous single sign-on logout URL.
-/// @param dNewSsoLogoutUrl New single sign-on logout URL. Might be missing due
-/// to historical data gap.
+/// @param previousValue Previous single sign-on logout URL.
+/// @param dNewValue New single sign-on logout URL. Might be missing due to
+/// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousSsoLogoutUrl:(NSString *)previousSsoLogoutUrl
-                            dNewSsoLogoutUrl:(nullable NSString *)dNewSsoLogoutUrl;
+- (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(nullable NSString *)dNewValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param previousSsoLogoutUrl Previous single sign-on logout URL.
+/// @param previousValue Previous single sign-on logout URL.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousSsoLogoutUrl:(NSString *)previousSsoLogoutUrl;
+- (instancetype)initWithPreviousValue:(NSString *)previousValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

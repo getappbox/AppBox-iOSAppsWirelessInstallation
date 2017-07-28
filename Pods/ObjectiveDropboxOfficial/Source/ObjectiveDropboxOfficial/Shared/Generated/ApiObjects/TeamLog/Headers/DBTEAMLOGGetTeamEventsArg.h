@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMCOMMONTimeRange;
+@class DBTEAMLOGEventCategory;
 @class DBTEAMLOGGetTeamEventsArg;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -36,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Filter by time range.
 @property (nonatomic, readonly, nullable) DBTEAMCOMMONTimeRange *time;
 
+/// Filter the returned events to a single category.
+@property (nonatomic, readonly, nullable) DBTEAMLOGEventCategory *category;
+
 #pragma mark - Constructors
 
 ///
@@ -45,12 +49,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param accountId Filter the events by account ID. Return ony events with
 /// this account_id as either Actor, Context, or Participants.
 /// @param time Filter by time range.
+/// @param category Filter the returned events to a single category.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithLimit:(nullable NSNumber *)limit
                     accountId:(nullable NSString *)accountId
-                         time:(nullable DBTEAMCOMMONTimeRange *)time;
+                         time:(nullable DBTEAMCOMMONTimeRange *)time
+                     category:(nullable DBTEAMLOGEventCategory *)category;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

@@ -37,7 +37,8 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
   /// User's email should be verified
   DBSHARINGCreateSharedLinkWithSettingsErrorEmailNotVerified,
 
-  /// The shared link already exists
+  /// The shared link already exists. You can call `listSharedLinks` to get
+  /// the existing link.
   DBSHARINGCreateSharedLinkWithSettingsErrorSharedLinkAlreadyExists,
 
   /// There is an error with the given settings
@@ -85,7 +86,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// Initializes union class with tag state of "shared_link_already_exists".
 ///
 /// Description of the "shared_link_already_exists" tag state: The shared link
-/// already exists
+/// already exists. You can call `listSharedLinks` to get the existing link.
 ///
 /// @return An initialized instance.
 ///

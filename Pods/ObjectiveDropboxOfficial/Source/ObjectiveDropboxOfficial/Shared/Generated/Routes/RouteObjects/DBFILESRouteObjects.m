@@ -11,14 +11,17 @@
 #import "DBFILESAddPropertiesError.h"
 #import "DBFILESAlphaGetMetadataError.h"
 #import "DBFILESCreateFolderError.h"
+#import "DBFILESCreateFolderResult.h"
 #import "DBFILESDeleteBatchError.h"
 #import "DBFILESDeleteBatchJobStatus.h"
 #import "DBFILESDeleteBatchLaunch.h"
 #import "DBFILESDeleteBatchResult.h"
 #import "DBFILESDeleteError.h"
+#import "DBFILESDeleteResult.h"
 #import "DBFILESDeletedMetadata.h"
 #import "DBFILESDownloadError.h"
 #import "DBFILESFileMetadata.h"
+#import "DBFILESFileOpsResult.h"
 #import "DBFILESFileSharingInfo.h"
 #import "DBFILESFolderMetadata.h"
 #import "DBFILESFolderSharingInfo.h"
@@ -47,6 +50,7 @@
 #import "DBFILESRelocationBatchLaunch.h"
 #import "DBFILESRelocationBatchResult.h"
 #import "DBFILESRelocationError.h"
+#import "DBFILESRelocationResult.h"
 #import "DBFILESRemovePropertiesError.h"
 #import "DBFILESRestoreError.h"
 #import "DBFILESSaveCopyReferenceError.h"
@@ -89,10 +93,13 @@ static DBRoute *DBFILESDCopyBatch;
 static DBRoute *DBFILESDCopyBatchCheck;
 static DBRoute *DBFILESDCopyReferenceGet;
 static DBRoute *DBFILESDCopyReferenceSave;
+static DBRoute *DBFILESDCopyV2;
 static DBRoute *DBFILESCreateFolder;
+static DBRoute *DBFILESCreateFolderV2;
 static DBRoute *DBFILESDelete_;
 static DBRoute *DBFILESDeleteBatch;
 static DBRoute *DBFILESDeleteBatchCheck;
+static DBRoute *DBFILESDeleteV2;
 static DBRoute *DBFILESDownload;
 static DBRoute *DBFILESGetMetadata;
 static DBRoute *DBFILESGetPreview;
@@ -106,6 +113,7 @@ static DBRoute *DBFILESListRevisions;
 static DBRoute *DBFILESMove;
 static DBRoute *DBFILESMoveBatch;
 static DBRoute *DBFILESMoveBatchCheck;
+static DBRoute *DBFILESMoveV2;
 static DBRoute *DBFILESPermanentlyDelete;
 static DBRoute *DBFILESPropertiesAdd;
 static DBRoute *DBFILESPropertiesOverwrite;
@@ -137,8 +145,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                 @"host" : @"api",
                                                 @"style" : @"rpc"
                                               }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
   }
   return DBFILESAlphaGetMetadata;
 }
@@ -155,8 +163,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                            @"host" : @"content",
                                            @"style" : @"upload"
                                          }
-                              arraySerialBlock:nil
-                            arrayDeserialBlock:nil];
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
   }
   return DBFILESAlphaUpload;
 }
@@ -165,7 +173,7 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESDCopy) {
     DBFILESDCopy = [[DBRoute alloc] init:@"copy"
                               namespace_:@"files"
-                              deprecated:@NO
+                              deprecated:@YES
                               resultType:[DBFILESMetadata class]
                                errorType:[DBFILESRelocationError class]
                                    attrs:@{
@@ -173,8 +181,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                      @"host" : @"api",
                                      @"style" : @"rpc"
                                    }
-                        arraySerialBlock:nil
-                      arrayDeserialBlock:nil];
+                   dataStructSerialBlock:nil
+                 dataStructDeserialBlock:nil];
   }
   return DBFILESDCopy;
 }
@@ -191,8 +199,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                           @"host" : @"api",
                                           @"style" : @"rpc"
                                         }
-                             arraySerialBlock:nil
-                           arrayDeserialBlock:nil];
+                        dataStructSerialBlock:nil
+                      dataStructDeserialBlock:nil];
   }
   return DBFILESDCopyBatch;
 }
@@ -209,8 +217,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                @"host" : @"api",
                                                @"style" : @"rpc"
                                              }
-                                  arraySerialBlock:nil
-                                arrayDeserialBlock:nil];
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
   }
   return DBFILESDCopyBatchCheck;
 }
@@ -227,8 +235,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                  @"host" : @"api",
                                                  @"style" : @"rpc"
                                                }
-                                    arraySerialBlock:nil
-                                  arrayDeserialBlock:nil];
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
   }
   return DBFILESDCopyReferenceGet;
 }
@@ -245,17 +253,35 @@ static DBRoute *DBFILESUploadSessionStart;
                                                   @"host" : @"api",
                                                   @"style" : @"rpc"
                                                 }
-                                     arraySerialBlock:nil
-                                   arrayDeserialBlock:nil];
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
   }
   return DBFILESDCopyReferenceSave;
+}
+
++ (DBRoute *)DBFILESDCopyV2 {
+  if (!DBFILESDCopyV2) {
+    DBFILESDCopyV2 = [[DBRoute alloc] init:@"copy_v2"
+                                namespace_:@"files"
+                                deprecated:@NO
+                                resultType:[DBFILESRelocationResult class]
+                                 errorType:[DBFILESRelocationError class]
+                                     attrs:@{
+                                       @"auth" : @"user",
+                                       @"host" : @"api",
+                                       @"style" : @"rpc"
+                                     }
+                     dataStructSerialBlock:nil
+                   dataStructDeserialBlock:nil];
+  }
+  return DBFILESDCopyV2;
 }
 
 + (DBRoute *)DBFILESCreateFolder {
   if (!DBFILESCreateFolder) {
     DBFILESCreateFolder = [[DBRoute alloc] init:@"create_folder"
                                      namespace_:@"files"
-                                     deprecated:@NO
+                                     deprecated:@YES
                                      resultType:[DBFILESFolderMetadata class]
                                       errorType:[DBFILESCreateFolderError class]
                                           attrs:@{
@@ -263,17 +289,35 @@ static DBRoute *DBFILESUploadSessionStart;
                                             @"host" : @"api",
                                             @"style" : @"rpc"
                                           }
-                               arraySerialBlock:nil
-                             arrayDeserialBlock:nil];
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
   }
   return DBFILESCreateFolder;
+}
+
++ (DBRoute *)DBFILESCreateFolderV2 {
+  if (!DBFILESCreateFolderV2) {
+    DBFILESCreateFolderV2 = [[DBRoute alloc] init:@"create_folder_v2"
+                                       namespace_:@"files"
+                                       deprecated:@NO
+                                       resultType:[DBFILESCreateFolderResult class]
+                                        errorType:[DBFILESCreateFolderError class]
+                                            attrs:@{
+                                              @"auth" : @"user",
+                                              @"host" : @"api",
+                                              @"style" : @"rpc"
+                                            }
+                            dataStructSerialBlock:nil
+                          dataStructDeserialBlock:nil];
+  }
+  return DBFILESCreateFolderV2;
 }
 
 + (DBRoute *)DBFILESDelete_ {
   if (!DBFILESDelete_) {
     DBFILESDelete_ = [[DBRoute alloc] init:@"delete"
                                 namespace_:@"files"
-                                deprecated:@NO
+                                deprecated:@YES
                                 resultType:[DBFILESMetadata class]
                                  errorType:[DBFILESDeleteError class]
                                      attrs:@{
@@ -281,8 +325,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                        @"host" : @"api",
                                        @"style" : @"rpc"
                                      }
-                          arraySerialBlock:nil
-                        arrayDeserialBlock:nil];
+                     dataStructSerialBlock:nil
+                   dataStructDeserialBlock:nil];
   }
   return DBFILESDelete_;
 }
@@ -299,8 +343,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                            @"host" : @"api",
                                            @"style" : @"rpc"
                                          }
-                              arraySerialBlock:nil
-                            arrayDeserialBlock:nil];
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
   }
   return DBFILESDeleteBatch;
 }
@@ -317,10 +361,28 @@ static DBRoute *DBFILESUploadSessionStart;
                                                 @"host" : @"api",
                                                 @"style" : @"rpc"
                                               }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
   }
   return DBFILESDeleteBatchCheck;
+}
+
++ (DBRoute *)DBFILESDeleteV2 {
+  if (!DBFILESDeleteV2) {
+    DBFILESDeleteV2 = [[DBRoute alloc] init:@"delete_v2"
+                                 namespace_:@"files"
+                                 deprecated:@NO
+                                 resultType:[DBFILESDeleteResult class]
+                                  errorType:[DBFILESDeleteError class]
+                                      attrs:@{
+                                        @"auth" : @"user",
+                                        @"host" : @"api",
+                                        @"style" : @"rpc"
+                                      }
+                      dataStructSerialBlock:nil
+                    dataStructDeserialBlock:nil];
+  }
+  return DBFILESDeleteV2;
 }
 
 + (DBRoute *)DBFILESDownload {
@@ -335,8 +397,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                         @"host" : @"content",
                                         @"style" : @"download"
                                       }
-                           arraySerialBlock:nil
-                         arrayDeserialBlock:nil];
+                      dataStructSerialBlock:nil
+                    dataStructDeserialBlock:nil];
   }
   return DBFILESDownload;
 }
@@ -353,8 +415,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                            @"host" : @"api",
                                            @"style" : @"rpc"
                                          }
-                              arraySerialBlock:nil
-                            arrayDeserialBlock:nil];
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
   }
   return DBFILESGetMetadata;
 }
@@ -371,8 +433,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                           @"host" : @"content",
                                           @"style" : @"download"
                                         }
-                             arraySerialBlock:nil
-                           arrayDeserialBlock:nil];
+                        dataStructSerialBlock:nil
+                      dataStructDeserialBlock:nil];
   }
   return DBFILESGetPreview;
 }
@@ -389,8 +451,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                 @"host" : @"api",
                                                 @"style" : @"rpc"
                                               }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
   }
   return DBFILESGetTemporaryLink;
 }
@@ -407,8 +469,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                             @"host" : @"content",
                                             @"style" : @"download"
                                           }
-                               arraySerialBlock:nil
-                             arrayDeserialBlock:nil];
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
   }
   return DBFILESGetThumbnail;
 }
@@ -425,8 +487,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                           @"host" : @"api",
                                           @"style" : @"rpc"
                                         }
-                             arraySerialBlock:nil
-                           arrayDeserialBlock:nil];
+                        dataStructSerialBlock:nil
+                      dataStructDeserialBlock:nil];
   }
   return DBFILESListFolder;
 }
@@ -443,8 +505,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                   @"host" : @"api",
                                                   @"style" : @"rpc"
                                                 }
-                                     arraySerialBlock:nil
-                                   arrayDeserialBlock:nil];
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
   }
   return DBFILESListFolderContinue;
 }
@@ -461,8 +523,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                          @"host" : @"api",
                                                          @"style" : @"rpc"
                                                        }
-                                            arraySerialBlock:nil
-                                          arrayDeserialBlock:nil];
+                                       dataStructSerialBlock:nil
+                                     dataStructDeserialBlock:nil];
   }
   return DBFILESListFolderGetLatestCursor;
 }
@@ -479,8 +541,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                   @"host" : @"notify",
                                                   @"style" : @"rpc"
                                                 }
-                                     arraySerialBlock:nil
-                                   arrayDeserialBlock:nil];
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
   }
   return DBFILESListFolderLongpoll;
 }
@@ -497,8 +559,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                              @"host" : @"api",
                                              @"style" : @"rpc"
                                            }
-                                arraySerialBlock:nil
-                              arrayDeserialBlock:nil];
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
   }
   return DBFILESListRevisions;
 }
@@ -507,7 +569,7 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESMove) {
     DBFILESMove = [[DBRoute alloc] init:@"move"
                              namespace_:@"files"
-                             deprecated:@NO
+                             deprecated:@YES
                              resultType:[DBFILESMetadata class]
                               errorType:[DBFILESRelocationError class]
                                   attrs:@{
@@ -515,8 +577,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                     @"host" : @"api",
                                     @"style" : @"rpc"
                                   }
-                       arraySerialBlock:nil
-                     arrayDeserialBlock:nil];
+                  dataStructSerialBlock:nil
+                dataStructDeserialBlock:nil];
   }
   return DBFILESMove;
 }
@@ -533,8 +595,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                          @"host" : @"api",
                                          @"style" : @"rpc"
                                        }
-                            arraySerialBlock:nil
-                          arrayDeserialBlock:nil];
+                       dataStructSerialBlock:nil
+                     dataStructDeserialBlock:nil];
   }
   return DBFILESMoveBatch;
 }
@@ -551,10 +613,28 @@ static DBRoute *DBFILESUploadSessionStart;
                                               @"host" : @"api",
                                               @"style" : @"rpc"
                                             }
-                                 arraySerialBlock:nil
-                               arrayDeserialBlock:nil];
+                            dataStructSerialBlock:nil
+                          dataStructDeserialBlock:nil];
   }
   return DBFILESMoveBatchCheck;
+}
+
++ (DBRoute *)DBFILESMoveV2 {
+  if (!DBFILESMoveV2) {
+    DBFILESMoveV2 = [[DBRoute alloc] init:@"move_v2"
+                               namespace_:@"files"
+                               deprecated:@NO
+                               resultType:[DBFILESRelocationResult class]
+                                errorType:[DBFILESRelocationError class]
+                                    attrs:@{
+                                      @"auth" : @"user",
+                                      @"host" : @"api",
+                                      @"style" : @"rpc"
+                                    }
+                    dataStructSerialBlock:nil
+                  dataStructDeserialBlock:nil];
+  }
+  return DBFILESMoveV2;
 }
 
 + (DBRoute *)DBFILESPermanentlyDelete {
@@ -569,8 +649,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                  @"host" : @"api",
                                                  @"style" : @"rpc"
                                                }
-                                    arraySerialBlock:nil
-                                  arrayDeserialBlock:nil];
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
   }
   return DBFILESPermanentlyDelete;
 }
@@ -587,8 +667,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                              @"host" : @"api",
                                              @"style" : @"rpc"
                                            }
-                                arraySerialBlock:nil
-                              arrayDeserialBlock:nil];
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
   }
   return DBFILESPropertiesAdd;
 }
@@ -605,8 +685,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                    @"host" : @"api",
                                                    @"style" : @"rpc"
                                                  }
-                                      arraySerialBlock:nil
-                                    arrayDeserialBlock:nil];
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
   }
   return DBFILESPropertiesOverwrite;
 }
@@ -623,8 +703,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                 @"host" : @"api",
                                                 @"style" : @"rpc"
                                               }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
   }
   return DBFILESPropertiesRemove;
 }
@@ -641,8 +721,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                      @"host" : @"api",
                                                      @"style" : @"rpc"
                                                    }
-                                        arraySerialBlock:nil
-                                      arrayDeserialBlock:nil];
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
   }
   return DBFILESPropertiesTemplateGet;
 }
@@ -659,8 +739,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                       @"host" : @"api",
                                                       @"style" : @"rpc"
                                                     }
-                                         arraySerialBlock:nil
-                                       arrayDeserialBlock:nil];
+                                    dataStructSerialBlock:nil
+                                  dataStructDeserialBlock:nil];
   }
   return DBFILESPropertiesTemplateList;
 }
@@ -677,8 +757,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                 @"host" : @"api",
                                                 @"style" : @"rpc"
                                               }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
   }
   return DBFILESPropertiesUpdate;
 }
@@ -695,8 +775,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                        @"host" : @"api",
                                        @"style" : @"rpc"
                                      }
-                          arraySerialBlock:nil
-                        arrayDeserialBlock:nil];
+                     dataStructSerialBlock:nil
+                   dataStructDeserialBlock:nil];
   }
   return DBFILESRestore;
 }
@@ -713,8 +793,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                        @"host" : @"api",
                                        @"style" : @"rpc"
                                      }
-                          arraySerialBlock:nil
-                        arrayDeserialBlock:nil];
+                     dataStructSerialBlock:nil
+                   dataStructDeserialBlock:nil];
   }
   return DBFILESSaveUrl;
 }
@@ -731,8 +811,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                      @"host" : @"api",
                                                      @"style" : @"rpc"
                                                    }
-                                        arraySerialBlock:nil
-                                      arrayDeserialBlock:nil];
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
   }
   return DBFILESSaveUrlCheckJobStatus;
 }
@@ -749,8 +829,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                       @"host" : @"api",
                                       @"style" : @"rpc"
                                     }
-                         arraySerialBlock:nil
-                       arrayDeserialBlock:nil];
+                    dataStructSerialBlock:nil
+                  dataStructDeserialBlock:nil];
   }
   return DBFILESSearch;
 }
@@ -767,8 +847,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                       @"host" : @"content",
                                       @"style" : @"upload"
                                     }
-                         arraySerialBlock:nil
-                       arrayDeserialBlock:nil];
+                    dataStructSerialBlock:nil
+                  dataStructDeserialBlock:nil];
   }
   return DBFILESUpload;
 }
@@ -785,8 +865,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                    @"host" : @"content",
                                                    @"style" : @"upload"
                                                  }
-                                      arraySerialBlock:nil
-                                    arrayDeserialBlock:nil];
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
   }
   return DBFILESUploadSessionAppend;
 }
@@ -803,8 +883,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                      @"host" : @"content",
                                                      @"style" : @"upload"
                                                    }
-                                        arraySerialBlock:nil
-                                      arrayDeserialBlock:nil];
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
   }
   return DBFILESUploadSessionAppendV2;
 }
@@ -821,8 +901,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                    @"host" : @"content",
                                                    @"style" : @"upload"
                                                  }
-                                      arraySerialBlock:nil
-                                    arrayDeserialBlock:nil];
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
   }
   return DBFILESUploadSessionFinish;
 }
@@ -839,8 +919,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                         @"host" : @"api",
                                                         @"style" : @"rpc"
                                                       }
-                                           arraySerialBlock:nil
-                                         arrayDeserialBlock:nil];
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
   }
   return DBFILESUploadSessionFinishBatch;
 }
@@ -857,8 +937,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                              @"host" : @"api",
                                                              @"style" : @"rpc"
                                                            }
-                                                arraySerialBlock:nil
-                                              arrayDeserialBlock:nil];
+                                           dataStructSerialBlock:nil
+                                         dataStructDeserialBlock:nil];
   }
   return DBFILESUploadSessionFinishBatchCheck;
 }
@@ -875,8 +955,8 @@ static DBRoute *DBFILESUploadSessionStart;
                                                   @"host" : @"content",
                                                   @"style" : @"upload"
                                                 }
-                                     arraySerialBlock:nil
-                                   arrayDeserialBlock:nil];
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
   }
   return DBFILESUploadSessionStart;
 }

@@ -9,7 +9,6 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGGroupChangeMemberRoleDetails;
-@class DBTEAMLOGGroupLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Group details.
-@property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *groupInfo;
-
 /// Is group owner.
 @property (nonatomic, readonly) NSNumber *isGroupOwner;
 
@@ -39,12 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param groupInfo Group details.
 /// @param isGroupOwner Is group owner.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo isGroupOwner:(NSNumber *)isGroupOwner;
+- (instancetype)initWithIsGroupOwner:(NSNumber *)isGroupOwner;
 
 - (instancetype)init NS_UNAVAILABLE;
 

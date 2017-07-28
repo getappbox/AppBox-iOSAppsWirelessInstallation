@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGSessionsManagementSessionLengthPolicy;
 @class DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetails;
+@class DBTEAMLOGWebSessionsFixedLengthPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New session length policy.
-@property (nonatomic, readonly) DBTEAMLOGSessionsManagementSessionLengthPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGWebSessionsFixedLengthPolicy *dNewValue;
 
 /// Previous session length policy.
-@property (nonatomic, readonly) DBTEAMLOGSessionsManagementSessionLengthPolicy *previousValue;
+@property (nonatomic, readonly) DBTEAMLOGWebSessionsFixedLengthPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -44,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGSessionsManagementSessionLengthPolicy *)dNewValue
-                    previousValue:(DBTEAMLOGSessionsManagementSessionLengthPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGWebSessionsFixedLengthPolicy *)dNewValue
+                    previousValue:(DBTEAMLOGWebSessionsFixedLengthPolicy *)previousValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

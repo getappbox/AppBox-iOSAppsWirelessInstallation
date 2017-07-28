@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TfaConfiguration` union.
 ///
+/// Two factor authentication configuration. Note: the enabled option is
+/// deprecated.
+///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.

@@ -32,7 +32,7 @@ typedef void (^DBOAuthCancelBlock)(void);
 ///
 - (void)presentErrorMessageWithHandlers:(NSString *)message
                                   title:(NSString *)title
-                         buttonHandlers:(NSDictionary<NSString *, void (^)()> *)buttonHandlers;
+                         buttonHandlers:(NSDictionary<NSString *, void (^)(void)> *)buttonHandlers;
 
 ///
 /// Presents platform-specific authorization paths.

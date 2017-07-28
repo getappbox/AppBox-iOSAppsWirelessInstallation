@@ -29,8 +29,8 @@ static DBRoute *DBAUTHTokenRevoke;
                                               @"host" : @"api",
                                               @"style" : @"rpc"
                                             }
-                                 arraySerialBlock:nil
-                               arrayDeserialBlock:nil];
+                            dataStructSerialBlock:nil
+                          dataStructDeserialBlock:nil];
   }
   return DBAUTHTokenFromOauth1;
 }
@@ -47,8 +47,8 @@ static DBRoute *DBAUTHTokenRevoke;
                                           @"host" : @"api",
                                           @"style" : @"rpc"
                                         }
-                             arraySerialBlock:nil
-                           arrayDeserialBlock:nil];
+                        dataStructSerialBlock:nil
+                      dataStructDeserialBlock:nil];
   }
   return DBAUTHTokenRevoke;
 }

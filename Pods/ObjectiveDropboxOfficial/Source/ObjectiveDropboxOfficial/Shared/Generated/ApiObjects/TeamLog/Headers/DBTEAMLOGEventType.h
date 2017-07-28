@@ -70,8 +70,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// longer exists.
   DBTEAMLOGEventTypeSfExternalInviteWarn,
 
-  /// Merged the team into another team.
-  DBTEAMLOGEventTypeTeamMerge,
+  /// Merged another team into this team.
+  DBTEAMLOGEventTypeTeamMergeFrom,
+
+  /// Merged this team into another team.
+  DBTEAMLOGEventTypeTeamMergeTo,
 
   /// Linked an app for team.
   DBTEAMLOGEventTypeAppLinkTeam,
@@ -314,35 +317,20 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// Set team member name when joining team.
   DBTEAMLOGEventTypeMemberAddName,
 
+  /// Change the admin role belonging to team member.
+  DBTEAMLOGEventTypeMemberChangeAdminRole,
+
   /// Changed team member email address.
   DBTEAMLOGEventTypeMemberChangeEmail,
 
   /// Changed team member name.
   DBTEAMLOGEventTypeMemberChangeName,
 
-  /// Change the admin permissions belonging to team member.
-  DBTEAMLOGEventTypeMemberChangeRole,
-
-  /// Invited a user to join the team.
-  DBTEAMLOGEventTypeMemberInvite,
-
-  /// Joined the team.
-  DBTEAMLOGEventTypeMemberJoin,
-
-  /// Removed a team member.
-  DBTEAMLOGEventTypeMemberLeave,
-
-  /// Recovered a removed member.
-  DBTEAMLOGEventTypeMemberRecover,
+  /// Changed the membership status of a team member.
+  DBTEAMLOGEventTypeMemberChangeStatus,
 
   /// Suggested a new team member to be added to the team.
   DBTEAMLOGEventTypeMemberSuggest,
-
-  /// Suspended a team member.
-  DBTEAMLOGEventTypeMemberSuspend,
-
-  /// Unsuspended a team member.
-  DBTEAMLOGEventTypeMemberUnsuspend,
 
   /// Added users to the membership of a Paper doc or folder.
   DBTEAMLOGEventTypePaperContentAddMember,
@@ -865,6 +853,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// Changed the default Smart Sync policy for team members.
   DBTEAMLOGEventTypeSmartSyncChangePolicy,
 
+  /// Opted team into Smart Sync.
+  DBTEAMLOGEventTypeSmartSyncNotOptOut,
+
+  /// Opted team out of Smart Sync.
+  DBTEAMLOGEventTypeSmartSyncOptOut,
+
   /// Change the single sign-on policy for the team.
   DBTEAMLOGEventTypeSsoChangePolicy,
 
@@ -1042,14 +1036,24 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 - (instancetype)initWithSfExternalInviteWarn;
 
 ///
-/// Initializes union class with tag state of "team_merge".
+/// Initializes union class with tag state of "team_merge_from".
 ///
-/// Description of the "team_merge" tag state: Merged the team into another
+/// Description of the "team_merge_from" tag state: Merged another team into
+/// this team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamMergeFrom;
+
+///
+/// Initializes union class with tag state of "team_merge_to".
+///
+/// Description of the "team_merge_to" tag state: Merged this team into another
 /// team.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamMerge;
+- (instancetype)initWithTeamMergeTo;
 
 ///
 /// Initializes union class with tag state of "app_link_team".
@@ -1804,6 +1808,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 - (instancetype)initWithMemberAddName;
 
 ///
+/// Initializes union class with tag state of "member_change_admin_role".
+///
+/// Description of the "member_change_admin_role" tag state: Change the admin
+/// role belonging to team member.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberChangeAdminRole;
+
+///
 /// Initializes union class with tag state of "member_change_email".
 ///
 /// Description of the "member_change_email" tag state: Changed team member
@@ -1823,51 +1837,14 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 - (instancetype)initWithMemberChangeName;
 
 ///
-/// Initializes union class with tag state of "member_change_role".
+/// Initializes union class with tag state of "member_change_status".
 ///
-/// Description of the "member_change_role" tag state: Change the admin
-/// permissions belonging to team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberChangeRole;
-
-///
-/// Initializes union class with tag state of "member_invite".
-///
-/// Description of the "member_invite" tag state: Invited a user to join the
-/// team.
+/// Description of the "member_change_status" tag state: Changed the membership
+/// status of a team member.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithMemberInvite;
-
-///
-/// Initializes union class with tag state of "member_join".
-///
-/// Description of the "member_join" tag state: Joined the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberJoin;
-
-///
-/// Initializes union class with tag state of "member_leave".
-///
-/// Description of the "member_leave" tag state: Removed a team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberLeave;
-
-///
-/// Initializes union class with tag state of "member_recover".
-///
-/// Description of the "member_recover" tag state: Recovered a removed member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberRecover;
+- (instancetype)initWithMemberChangeStatus;
 
 ///
 /// Initializes union class with tag state of "member_suggest".
@@ -1878,24 +1855,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMemberSuggest;
-
-///
-/// Initializes union class with tag state of "member_suspend".
-///
-/// Description of the "member_suspend" tag state: Suspended a team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberSuspend;
-
-///
-/// Initializes union class with tag state of "member_unsuspend".
-///
-/// Description of the "member_unsuspend" tag state: Unsuspended a team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberUnsuspend;
 
 ///
 /// Initializes union class with tag state of "paper_content_add_member".
@@ -3461,6 +3420,26 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 - (instancetype)initWithSmartSyncChangePolicy;
 
 ///
+/// Initializes union class with tag state of "smart_sync_not_opt_out".
+///
+/// Description of the "smart_sync_not_opt_out" tag state: Opted team into Smart
+/// Sync.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSmartSyncNotOptOut;
+
+///
+/// Initializes union class with tag state of "smart_sync_opt_out".
+///
+/// Description of the "smart_sync_opt_out" tag state: Opted team out of Smart
+/// Sync.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSmartSyncOptOut;
+
+///
 /// Initializes union class with tag state of "sso_change_policy".
 ///
 /// Description of the "sso_change_policy" tag state: Change the single sign-on
@@ -3726,11 +3705,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 - (BOOL)isSfExternalInviteWarn;
 
 ///
-/// Retrieves whether the union's current tag state has value "team_merge".
+/// Retrieves whether the union's current tag state has value "team_merge_from".
 ///
-/// @return Whether the union's current tag state has value "team_merge".
+/// @return Whether the union's current tag state has value "team_merge_from".
 ///
-- (BOOL)isTeamMerge;
+- (BOOL)isTeamMergeFrom;
+
+///
+/// Retrieves whether the union's current tag state has value "team_merge_to".
+///
+/// @return Whether the union's current tag state has value "team_merge_to".
+///
+- (BOOL)isTeamMergeTo;
 
 ///
 /// Retrieves whether the union's current tag state has value "app_link_team".
@@ -4359,6 +4345,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "member_change_admin_role".
+///
+/// @return Whether the union's current tag state has value
+/// "member_change_admin_role".
+///
+- (BOOL)isMemberChangeAdminRole;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "member_change_email".
 ///
 /// @return Whether the union's current tag state has value
@@ -4377,40 +4372,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "member_change_role".
+/// "member_change_status".
 ///
 /// @return Whether the union's current tag state has value
-/// "member_change_role".
+/// "member_change_status".
 ///
-- (BOOL)isMemberChangeRole;
-
-///
-/// Retrieves whether the union's current tag state has value "member_invite".
-///
-/// @return Whether the union's current tag state has value "member_invite".
-///
-- (BOOL)isMemberInvite;
-
-///
-/// Retrieves whether the union's current tag state has value "member_join".
-///
-/// @return Whether the union's current tag state has value "member_join".
-///
-- (BOOL)isMemberJoin;
-
-///
-/// Retrieves whether the union's current tag state has value "member_leave".
-///
-/// @return Whether the union's current tag state has value "member_leave".
-///
-- (BOOL)isMemberLeave;
-
-///
-/// Retrieves whether the union's current tag state has value "member_recover".
-///
-/// @return Whether the union's current tag state has value "member_recover".
-///
-- (BOOL)isMemberRecover;
+- (BOOL)isMemberChangeStatus;
 
 ///
 /// Retrieves whether the union's current tag state has value "member_suggest".
@@ -4418,21 +4385,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// @return Whether the union's current tag state has value "member_suggest".
 ///
 - (BOOL)isMemberSuggest;
-
-///
-/// Retrieves whether the union's current tag state has value "member_suspend".
-///
-/// @return Whether the union's current tag state has value "member_suspend".
-///
-- (BOOL)isMemberSuspend;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_unsuspend".
-///
-/// @return Whether the union's current tag state has value "member_unsuspend".
-///
-- (BOOL)isMemberUnsuspend;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -5719,6 +5671,24 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "smart_sync_change_policy".
 ///
 - (BOOL)isSmartSyncChangePolicy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "smart_sync_not_opt_out".
+///
+/// @return Whether the union's current tag state has value
+/// "smart_sync_not_opt_out".
+///
+- (BOOL)isSmartSyncNotOptOut;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "smart_sync_opt_out".
+///
+/// @return Whether the union's current tag state has value
+/// "smart_sync_opt_out".
+///
+- (BOOL)isSmartSyncOptOut;
 
 ///
 /// Retrieves whether the union's current tag state has value

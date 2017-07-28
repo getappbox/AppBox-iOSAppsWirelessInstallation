@@ -38,14 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) NSDictionary<NSString *, NSString *> *attrs;
 
 /// Serialization block for the route's result object type, if that result object
-/// type is an `NSArray`, otherwise nil. This block is designed to be passed into
-/// the serialize method of the `DBArraySerializer` class.
-@property (nonatomic, readonly, nullable) id (^arraySerialBlock)(id array);
+/// type is an `NSArray`, otherwise nil.
+@property (nonatomic, readonly, nullable) id (^dataStructSerialBlock)(id dataStruct);
 
 /// Deserialization block for the route's result object type, if that result object
-/// type is an `NSArray`, otherwise nil. This block is designed to be passed into
-/// the deserialize method of the `DBArraySerializer` class.
-@property (nonatomic, readonly, nullable) id (^arrayDeserialBlock)(id array);
+/// type is a data structure, otherwise nil.
+@property (nonatomic, readonly, nullable) id (^dataStructDeserialBlock)(id dataStruct);
 
 /// Initializes the route object.
 - (nonnull instancetype)init:(NSString *)name
@@ -54,8 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
                   resultType:(nullable Class<DBSerializable>)resultType
                    errorType:(nullable Class<DBSerializable>)errorType
                        attrs:(NSDictionary<NSString *, NSString *> *)attrs
-            arraySerialBlock:(id (^_Nullable)(id))arraySerialBlock
-          arrayDeserialBlock:(id (^_Nullable)(id))arrayDeserialBlock;
+       dataStructSerialBlock:(id (^_Nullable)(id))dataStructSerialBlock
+     dataStructDeserialBlock:(id (^_Nullable)(id))dataStructDeserialBlock;
 
 @end
 

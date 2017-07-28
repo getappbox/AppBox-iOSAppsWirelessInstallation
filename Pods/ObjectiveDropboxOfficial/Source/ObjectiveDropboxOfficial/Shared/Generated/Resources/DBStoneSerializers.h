@@ -66,4 +66,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+///
+/// Serializer functions used by the SDK to serialize/deserialize `NSArray` types.
+///
+@interface DBMapSerializer : NSObject
+
+/// Applies a serialization block to each element in the map and returns a new map with
+/// all elements serialized. The serialization block either serializes the object, or if the
+/// object is a wrapper for a primitive type, it leaves it unchanged.
++ (NSDictionary *)serialize:(NSDictionary *)value withBlock:(id (^_Nonnull)(id))serializeBlock;
+
+/// Applies a deserialization block to each element in the map and returns a new map with
+/// all elements deserialized. The serialization block either deserializes the object, or if the
+/// object is a wrapper for a primitive type, it leaves it unchanged.
++ (NSDictionary *)deserialize:(NSDictionary *)jsonData withBlock:(id (^_Nonnull)(id))deserializeBlock;
+
+@end
+
 NS_ASSUME_NONNULL_END

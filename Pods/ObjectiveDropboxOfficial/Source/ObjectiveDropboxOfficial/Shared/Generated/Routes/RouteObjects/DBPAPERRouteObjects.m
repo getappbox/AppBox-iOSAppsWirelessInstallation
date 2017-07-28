@@ -61,8 +61,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                            @"host" : @"api",
                                            @"style" : @"rpc"
                                          }
-                              arraySerialBlock:nil
-                            arrayDeserialBlock:nil];
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsArchive;
 }
@@ -79,8 +79,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                             @"host" : @"api",
                                             @"style" : @"download"
                                           }
-                               arraySerialBlock:nil
-                             arrayDeserialBlock:nil];
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsDownload;
 }
@@ -97,8 +97,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                    @"host" : @"api",
                                                    @"style" : @"rpc"
                                                  }
-                                      arraySerialBlock:nil
-                                    arrayDeserialBlock:nil];
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsFolderUsersList;
 }
@@ -115,8 +115,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                            @"host" : @"api",
                                                            @"style" : @"rpc"
                                                          }
-                                              arraySerialBlock:nil
-                                            arrayDeserialBlock:nil];
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsFolderUsersListContinue;
 }
@@ -133,8 +133,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                  @"host" : @"api",
                                                  @"style" : @"rpc"
                                                }
-                                    arraySerialBlock:nil
-                                  arrayDeserialBlock:nil];
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsGetFolderInfo;
 }
@@ -151,8 +151,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                         @"host" : @"api",
                                         @"style" : @"rpc"
                                       }
-                           arraySerialBlock:nil
-                         arrayDeserialBlock:nil];
+                      dataStructSerialBlock:nil
+                    dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsList;
 }
@@ -169,8 +169,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                 @"host" : @"api",
                                                 @"style" : @"rpc"
                                               }
-                                   arraySerialBlock:nil
-                                 arrayDeserialBlock:nil];
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsListContinue;
 }
@@ -187,8 +187,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                      @"host" : @"api",
                                                      @"style" : @"rpc"
                                                    }
-                                        arraySerialBlock:nil
-                                      arrayDeserialBlock:nil];
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsPermanentlyDelete;
 }
@@ -205,8 +205,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                     @"host" : @"api",
                                                     @"style" : @"rpc"
                                                   }
-                                       arraySerialBlock:nil
-                                     arrayDeserialBlock:nil];
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsSharingPolicyGet;
 }
@@ -223,8 +223,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                     @"host" : @"api",
                                                     @"style" : @"rpc"
                                                   }
-                                       arraySerialBlock:nil
-                                     arrayDeserialBlock:nil];
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsSharingPolicySet;
 }
@@ -241,9 +241,9 @@ static DBRoute *DBPAPERDocsUsersRemove;
           @"host" : @"api",
           @"style" : @"rpc"
         }
-        arraySerialBlock:nil
-        arrayDeserialBlock:^id(id array) {
-          return [DBArraySerializer deserialize:array
+        dataStructSerialBlock:nil
+        dataStructDeserialBlock:^id(id dataStruct) {
+          return [DBArraySerializer deserialize:dataStruct
                                       withBlock:^id(id elem0) {
                                         return [DBPAPERAddPaperDocUserMemberResultSerializer deserialize:elem0];
                                       }];
@@ -264,8 +264,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                              @"host" : @"api",
                                              @"style" : @"rpc"
                                            }
-                                arraySerialBlock:nil
-                              arrayDeserialBlock:nil];
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsUsersList;
 }
@@ -282,8 +282,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                      @"host" : @"api",
                                                      @"style" : @"rpc"
                                                    }
-                                        arraySerialBlock:nil
-                                      arrayDeserialBlock:nil];
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsUsersListContinue;
 }
@@ -300,8 +300,8 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                                @"host" : @"api",
                                                @"style" : @"rpc"
                                              }
-                                  arraySerialBlock:nil
-                                arrayDeserialBlock:nil];
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsUsersRemove;
 }

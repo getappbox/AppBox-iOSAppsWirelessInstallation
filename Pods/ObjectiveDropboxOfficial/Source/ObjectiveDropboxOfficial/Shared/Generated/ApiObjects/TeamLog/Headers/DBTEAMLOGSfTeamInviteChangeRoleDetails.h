@@ -33,8 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
 
-/// Sharing permission. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
+/// New sharing permission. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *dNewSharingPermission;
 
 /// Previous sharing permission. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *previousSharingPermission;
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param targetIndex Target asset index.
 /// @param originalFolderName Original shared folder name.
-/// @param sharingPermission Sharing permission. Might be missing due to
+/// @param dNewSharingPermission New sharing permission. Might be missing due to
 /// historical data gap.
 /// @param previousSharingPermission Previous sharing permission. Might be
 /// missing due to historical data gap.
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
                  originalFolderName:(NSString *)originalFolderName
-                  sharingPermission:(nullable NSString *)sharingPermission
+              dNewSharingPermission:(nullable NSString *)dNewSharingPermission
           previousSharingPermission:(nullable NSString *)previousSharingPermission;
 
 ///

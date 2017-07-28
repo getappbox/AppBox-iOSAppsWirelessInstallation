@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBTEAMLOGCertificate;
 @class DBTEAMLOGSsoChangeCertDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,49 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Certificate subject.
-@property (nonatomic, readonly, copy) NSString *subject;
-
-/// Certificate issuer.
-@property (nonatomic, readonly, copy) NSString *issuer;
-
-/// Certificate issue date.
-@property (nonatomic, readonly, copy) NSString *issueDate;
-
-/// Certificate expiration date.
-@property (nonatomic, readonly, copy) NSString *expirationDate;
-
-/// Certificate serial number.
-@property (nonatomic, readonly, copy) NSString *serialNumber;
-
-/// Certificate sha1 fingerprint.
-@property (nonatomic, readonly, copy) NSString *sha1Fingerprint;
-
-/// Certificate common name.
-@property (nonatomic, readonly, copy) NSString *commonName;
+/// SSO certificate details.
+@property (nonatomic, readonly) DBTEAMLOGCertificate *certificateDetails;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param subject Certificate subject.
-/// @param issuer Certificate issuer.
-/// @param issueDate Certificate issue date.
-/// @param expirationDate Certificate expiration date.
-/// @param serialNumber Certificate serial number.
-/// @param sha1Fingerprint Certificate sha1 fingerprint.
-/// @param commonName Certificate common name.
+/// @param certificateDetails SSO certificate details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSubject:(NSString *)subject
-                         issuer:(NSString *)issuer
-                      issueDate:(NSString *)issueDate
-                 expirationDate:(NSString *)expirationDate
-                   serialNumber:(NSString *)serialNumber
-                sha1Fingerprint:(NSString *)sha1Fingerprint
-                     commonName:(NSString *)commonName;
+- (instancetype)initWithCertificateDetails:(DBTEAMLOGCertificate *)certificateDetails;
 
 - (instancetype)init NS_UNAVAILABLE;
 

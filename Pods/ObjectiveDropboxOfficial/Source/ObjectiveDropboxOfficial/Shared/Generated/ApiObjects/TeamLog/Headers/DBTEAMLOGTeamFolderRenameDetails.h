@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBTEAMLOGRelocateAssetReferencesLogInfo;
 @class DBTEAMLOGTeamFolderRenameDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,23 +28,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Source asset index.
-@property (nonatomic, readonly) NSNumber *srcIndex;
-
-/// Destination asset index.
-@property (nonatomic, readonly) NSNumber *destIndex;
+/// Specifies the source and destination indices in the assets list.
+@property (nonatomic, readonly) DBTEAMLOGRelocateAssetReferencesLogInfo *relocateActionDetails;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param srcIndex Source asset index.
-/// @param destIndex Destination asset index.
+/// @param relocateActionDetails Specifies the source and destination indices in
+/// the assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSrcIndex:(NSNumber *)srcIndex destIndex:(NSNumber *)destIndex;
+- (instancetype)initWithRelocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails;
 
 - (instancetype)init NS_UNAVAILABLE;
 

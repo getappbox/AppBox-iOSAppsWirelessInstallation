@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBTEAMLOGTeamName;
 @class DBTEAMLOGTeamProfileChangeNameDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,23 +28,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Team's display name.
-@property (nonatomic, readonly, copy) NSString *teamDisplayName;
+/// Previous teams name. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGTeamName *previousValue;
 
-/// Team's legal name.
-@property (nonatomic, readonly, copy) NSString *teamLegalName;
+/// New team name.
+@property (nonatomic, readonly) DBTEAMLOGTeamName *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param teamDisplayName Team's display name.
-/// @param teamLegalName Team's legal name.
+/// @param dNewValue New team name.
+/// @param previousValue Previous teams name. Might be missing due to historical
+/// data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamDisplayName:(NSString *)teamDisplayName teamLegalName:(NSString *)teamLegalName;
+- (instancetype)initWithDNewValue:(DBTEAMLOGTeamName *)dNewValue
+                    previousValue:(nullable DBTEAMLOGTeamName *)previousValue;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+/// @param dNewValue New team name.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDNewValue:(DBTEAMLOGTeamName *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

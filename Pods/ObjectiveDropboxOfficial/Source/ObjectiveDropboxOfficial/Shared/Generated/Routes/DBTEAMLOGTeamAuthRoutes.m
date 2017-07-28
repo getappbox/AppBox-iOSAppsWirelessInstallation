@@ -8,6 +8,7 @@
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTEAMCOMMONTimeRange.h"
+#import "DBTEAMLOGEventCategory.h"
 #import "DBTEAMLOGGetTeamEventsArg.h"
 #import "DBTEAMLOGGetTeamEventsContinueArg.h"
 #import "DBTEAMLOGGetTeamEventsContinueError.h"
@@ -33,10 +34,13 @@
   return [self.client requestRpc:route arg:arg];
 }
 
-- (DBRpcTask *)getEvents:(NSNumber *)limit accountId:(NSString *)accountId time:(DBTEAMCOMMONTimeRange *)time {
+- (DBRpcTask *)getEvents:(NSNumber *)limit
+               accountId:(NSString *)accountId
+                    time:(DBTEAMCOMMONTimeRange *)time
+                category:(DBTEAMLOGEventCategory *)category {
   DBRoute *route = DBTEAMLOGRouteObjects.DBTEAMLOGGetEvents;
   DBTEAMLOGGetTeamEventsArg *arg =
-      [[DBTEAMLOGGetTeamEventsArg alloc] initWithLimit:limit accountId:accountId time:time];
+      [[DBTEAMLOGGetTeamEventsArg alloc] initWithLimit:limit accountId:accountId time:time category:category];
   return [self.client requestRpc:route arg:arg];
 }
 

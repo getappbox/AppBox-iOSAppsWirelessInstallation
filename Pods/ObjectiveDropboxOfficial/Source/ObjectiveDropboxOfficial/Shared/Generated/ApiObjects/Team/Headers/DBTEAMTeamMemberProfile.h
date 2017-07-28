@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// List of group IDs of groups that the user belongs to.
 @property (nonatomic, readonly) NSArray<NSString *> *groups;
 
+/// The namespace id of the user's root folder.
+@property (nonatomic, readonly, copy) NSString *memberFolderId;
+
 #pragma mark - Constructors
 
 ///
@@ -48,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param membershipType The user's membership type: full (normal team member)
 /// vs limited (does not use a license; no access to the team's shared quota).
 /// @param groups List of group IDs of groups that the user belongs to.
+/// @param memberFolderId The namespace id of the user's root folder.
 /// @param externalId External ID that a team can attach to the user. An
 /// application using the API may find it easier to use their own IDs instead of
 /// Dropbox IDs like account_id or team_member_id.
@@ -66,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 name:(DBUSERSName *)name
                       membershipType:(DBTEAMTeamMembershipType *)membershipType
                               groups:(NSArray<NSString *> *)groups
+                      memberFolderId:(NSString *)memberFolderId
                           externalId:(nullable NSString *)externalId
                            accountId:(nullable NSString *)accountId
                             joinedOn:(nullable NSDate *)joinedOn
@@ -84,6 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param membershipType The user's membership type: full (normal team member)
 /// vs limited (does not use a license; no access to the team's shared quota).
 /// @param groups List of group IDs of groups that the user belongs to.
+/// @param memberFolderId The namespace id of the user's root folder.
 ///
 /// @return An initialized instance.
 ///
@@ -93,7 +99,8 @@ NS_ASSUME_NONNULL_BEGIN
                               status:(DBTEAMTeamMemberStatus *)status
                                 name:(DBUSERSName *)name
                       membershipType:(DBTEAMTeamMembershipType *)membershipType
-                              groups:(NSArray<NSString *> *)groups;
+                              groups:(NSArray<NSString *> *)groups
+                      memberFolderId:(NSString *)memberFolderId;
 
 @end
 

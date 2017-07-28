@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Report start date.
-@property (nonatomic, readonly, copy) NSString *startDate;
+@property (nonatomic, readonly) NSDate *startDate;
 
 /// Report end date.
-@property (nonatomic, readonly, copy) NSString *endDate;
+@property (nonatomic, readonly) NSDate *endDate;
 
 #pragma mark - Constructors
 
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithStartDate:(NSString *)startDate endDate:(NSString *)endDate;
+- (instancetype)initWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
 - (instancetype)init NS_UNAVAILABLE;
 

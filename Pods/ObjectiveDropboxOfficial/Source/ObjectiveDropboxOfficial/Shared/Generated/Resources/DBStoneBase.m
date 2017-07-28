@@ -7,13 +7,13 @@
 @implementation DBRoute
 
 - (instancetype)init:(NSString *)name
-            namespace_:(NSString *)namespace_
-            deprecated:(NSNumber *)deprecated
-            resultType:(Class<DBSerializable>)resultType
-             errorType:(Class<DBSerializable>)errorType
-                 attrs:(NSDictionary<NSString *, NSString *> *)attrs
-      arraySerialBlock:(id (^)(id))arraySerialBlock
-    arrayDeserialBlock:(id (^)(id))arrayDeserialBlock {
+                 namespace_:(NSString *)namespace_
+                 deprecated:(NSNumber *)deprecated
+                 resultType:(Class<DBSerializable>)resultType
+                  errorType:(Class<DBSerializable>)errorType
+                      attrs:(NSDictionary<NSString *, NSString *> *)attrs
+      dataStructSerialBlock:(id (^)(id))dataStructSerialBlock
+    dataStructDeserialBlock:(id (^)(id))dataStructDeserialBlock {
   self = [self init];
   if (self != nil) {
     _name = name;
@@ -22,8 +22,8 @@
     _resultType = resultType;
     _errorType = errorType;
     _attrs = attrs;
-    _arraySerialBlock = arraySerialBlock;
-    _arrayDeserialBlock = arrayDeserialBlock;
+    _dataStructSerialBlock = dataStructSerialBlock;
+    _dataStructDeserialBlock = dataStructDeserialBlock;
   }
   return self;
 }

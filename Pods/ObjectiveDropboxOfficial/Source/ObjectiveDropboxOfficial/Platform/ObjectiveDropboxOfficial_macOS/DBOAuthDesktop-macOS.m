@@ -34,7 +34,7 @@
 
 - (void)presentErrorMessageWithHandlers:(NSString *)message
                                   title:(NSString *)title
-                         buttonHandlers:(NSDictionary<NSString *, void (^)()> *)buttonHandlers {
+                         buttonHandlers:(NSDictionary<NSString *, void (^)(void)> *)buttonHandlers {
 #pragma unused(buttonHandlers)
   [self presentErrorMessage:message title:title];
 }

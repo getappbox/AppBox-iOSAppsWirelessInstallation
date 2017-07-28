@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGDeviceLinkFailDetails;
+@class DBTEAMLOGDeviceLogInfo;
 @class DBTEAMLOGDeviceType;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
+/// Device information. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGDeviceLogInfo *deviceInfo;
+
 /// A description of the device used while user approval blocked.
 @property (nonatomic, readonly) DBTEAMLOGDeviceType *deviceType;
 
@@ -35,6 +39,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param deviceType A description of the device used while user approval
+/// blocked.
+/// @param deviceInfo Device information. Might be missing due to historical
+/// data gap.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDeviceType:(DBTEAMLOGDeviceType *)deviceType
+                        deviceInfo:(nullable DBTEAMLOGDeviceLogInfo *)deviceInfo;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param deviceType A description of the device used while user approval
 /// blocked.

@@ -30,8 +30,8 @@ static DBRoute *DBTEAMLOGGetEventsContinue;
                                            @"host" : @"api",
                                            @"style" : @"rpc"
                                          }
-                              arraySerialBlock:nil
-                            arrayDeserialBlock:nil];
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
   }
   return DBTEAMLOGGetEvents;
 }
@@ -48,8 +48,8 @@ static DBRoute *DBTEAMLOGGetEventsContinue;
                                                    @"host" : @"api",
                                                    @"style" : @"rpc"
                                                  }
-                                      arraySerialBlock:nil
-                                    arrayDeserialBlock:nil];
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
   }
   return DBTEAMLOGGetEventsContinue;
 }

@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGEmmChangePolicyDetails;
-@class DBTEAMLOGOptionalChangePolicy;
+@class DBTEAMLOGEmmPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New enterprise mobility management policy.
-@property (nonatomic, readonly) DBTEAMLOGOptionalChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGEmmPolicy *dNewValue;
 
 /// Previous enterprise mobility management policy. Might be missing due to
 /// historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGOptionalChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGEmmPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGOptionalChangePolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGOptionalChangePolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGEmmPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGEmmPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGOptionalChangePolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGEmmPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

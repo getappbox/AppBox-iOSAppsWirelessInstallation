@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGEnableDisableChangePolicy;
 @class DBTEAMLOGMemberSuggestionsChangePolicyDetails;
+@class DBTEAMLOGMemberSuggestionsPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New team member suggestions policy.
-@property (nonatomic, readonly) DBTEAMLOGEnableDisableChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGMemberSuggestionsPolicy *dNewValue;
 
 /// Previous team member suggestions policy. Might be missing due to historical
 /// data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGEnableDisableChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGMemberSuggestionsPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGEnableDisableChangePolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGMemberSuggestionsPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGMemberSuggestionsPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGMemberSuggestionsPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

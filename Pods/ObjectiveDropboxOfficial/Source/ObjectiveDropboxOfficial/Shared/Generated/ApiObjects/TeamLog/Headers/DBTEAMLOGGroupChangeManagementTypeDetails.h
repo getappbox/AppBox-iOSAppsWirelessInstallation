@@ -9,7 +9,6 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGGroupChangeManagementTypeDetails;
-@class DBTEAMLOGGroupLogInfo;
 @class DBTEAMLOGGroupManagementType;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Group details.
-@property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *groupInfo;
-
 /// New group management type.
 @property (nonatomic, readonly) DBTEAMLOGGroupManagementType *dNewValue;
 
@@ -43,28 +39,24 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param groupInfo Group details.
 /// @param dNewValue New group management type.
 /// @param previousValue Previous group management type. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo
-                        dNewValue:(DBTEAMLOGGroupManagementType *)dNewValue
+- (instancetype)initWithDNewValue:(DBTEAMLOGGroupManagementType *)dNewValue
                     previousValue:(nullable DBTEAMLOGGroupManagementType *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param groupInfo Group details.
 /// @param dNewValue New group management type.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo
-                        dNewValue:(DBTEAMLOGGroupManagementType *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGGroupManagementType *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

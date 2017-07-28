@@ -10,6 +10,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBSHARINGAccessLevel;
+@class DBSHARINGAudienceExceptions;
 @class DBSHARINGAudienceRestrictingSharedFolder;
 @class DBSHARINGLinkAudience;
 @class DBSHARINGLinkPermission;
@@ -31,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DBSHARINGSharedContentLinkMetadata : DBSHARINGSharedContentLinkMetadataBase <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
+
+/// The content inside this folder with link audience different than this
+/// folder's. This is only returned when an endpoint that returns metadata for a
+/// single shared folder is called, e.g. /get_folder_metadata.
+@property (nonatomic, readonly, nullable) DBSHARINGAudienceExceptions *audienceExceptions;
 
 /// The URL of the link.
 @property (nonatomic, readonly, copy) NSString *url;
@@ -56,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param expiry Whether the link has an expiry set on it. A link with an
 /// expiry will have its  audience changed to members when the expiry is
 /// reached.
+/// @param audienceExceptions The content inside this folder with link audience
+/// different than this folder's. This is only returned when an endpoint that
+/// returns metadata for a single shared folder is called, e.g.
+/// /get_folder_metadata.
 ///
 /// @return An initialized instance.
 ///
@@ -67,7 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
                             accessLevel:(nullable DBSHARINGAccessLevel *)accessLevel
         audienceRestrictingSharedFolder:
             (nullable DBSHARINGAudienceRestrictingSharedFolder *)audienceRestrictingSharedFolder
-                                 expiry:(nullable NSDate *)expiry;
+                                 expiry:(nullable NSDate *)expiry
+                     audienceExceptions:(nullable DBSHARINGAudienceExceptions *)audienceExceptions;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

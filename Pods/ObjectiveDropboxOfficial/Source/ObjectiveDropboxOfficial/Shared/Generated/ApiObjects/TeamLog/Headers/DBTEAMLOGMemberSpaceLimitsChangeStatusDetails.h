@@ -30,23 +30,23 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Previous storage quota status.
-@property (nonatomic, readonly) DBTEAMLOGSpaceLimitsStatus *previousStatus;
+@property (nonatomic, readonly) DBTEAMLOGSpaceLimitsStatus *previousValue;
 
 /// New storage quota status.
-@property (nonatomic, readonly) DBTEAMLOGSpaceLimitsStatus *dNewStatus;
+@property (nonatomic, readonly) DBTEAMLOGSpaceLimitsStatus *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousStatus Previous storage quota status.
-/// @param dNewStatus New storage quota status.
+/// @param previousValue Previous storage quota status.
+/// @param dNewValue New storage quota status.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousStatus:(DBTEAMLOGSpaceLimitsStatus *)previousStatus
-                            dNewStatus:(DBTEAMLOGSpaceLimitsStatus *)dNewStatus;
+- (instancetype)initWithPreviousValue:(DBTEAMLOGSpaceLimitsStatus *)previousValue
+                            dNewValue:(DBTEAMLOGSpaceLimitsStatus *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

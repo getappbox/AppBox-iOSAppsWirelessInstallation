@@ -10,7 +10,6 @@
 
 @class DBTEAMLOGGroupJoinPolicy;
 @class DBTEAMLOGGroupJoinPolicyUpdatedDetails;
-@class DBTEAMLOGGroupLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Group details.
-@property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *groupInfo;
-
 /// Is admin managed group. Might be missing due to historical data gap.
 @property (nonatomic, readonly, nullable) NSNumber *isAdminManaged;
 
@@ -43,27 +39,24 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param groupInfo Group details.
 /// @param joinPolicy Group join policy.
 /// @param isAdminManaged Is admin managed group. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo
-                       joinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy
-                   isAdminManaged:(nullable NSNumber *)isAdminManaged;
+- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy
+                    isAdminManaged:(nullable NSNumber *)isAdminManaged;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param groupInfo Group details.
 /// @param joinPolicy Group join policy.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo joinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy;
+- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy;
 
 - (instancetype)init NS_UNAVAILABLE;
 

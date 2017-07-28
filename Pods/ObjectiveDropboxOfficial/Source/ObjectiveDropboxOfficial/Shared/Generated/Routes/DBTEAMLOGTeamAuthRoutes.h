@@ -10,6 +10,7 @@
 
 @class DBNilObject;
 @class DBTEAMCOMMONTimeRange;
+@class DBTEAMLOGEventCategory;
 @class DBTEAMLOGGetTeamEventsContinueError;
 @class DBTEAMLOGGetTeamEventsError;
 @class DBTEAMLOGGetTeamEventsResult;
@@ -49,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param accountId Filter the events by account ID. Return ony events with this account_id as either Actor, Context,
 /// or Participants.
 /// @param time Filter by time range.
+/// @param category Filter the returned events to a single category.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLOGGetTeamEventsResult` object on success or
 /// a `DBTEAMLOGGetTeamEventsError` object on failure.
@@ -56,7 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (DBRpcTask<DBTEAMLOGGetTeamEventsResult *, DBTEAMLOGGetTeamEventsError *> *)
 getEvents:(nullable NSNumber *)limit
 accountId:(nullable NSString *)accountId
-     time:(nullable DBTEAMCOMMONTimeRange *)time;
+     time:(nullable DBTEAMCOMMONTimeRange *)time
+ category:(nullable DBTEAMLOGEventCategory *)category;
 
 ///
 /// Once a cursor has been retrieved from `getEvents`, use this to paginate through all events. Permission : Team

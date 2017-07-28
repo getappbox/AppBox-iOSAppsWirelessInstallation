@@ -128,6 +128,7 @@
 #import "DBTEAMMembersUnsuspendArg.h"
 #import "DBTEAMMembersUnsuspendError.h"
 #import "DBTEAMMobileClientSession.h"
+#import "DBTEAMNamespaceMetadata.h"
 #import "DBTEAMPOLICIESTeamMemberPolicies.h"
 #import "DBTEAMRevokeDesktopClientArg.h"
 #import "DBTEAMRevokeDeviceSessionArg.h"
@@ -166,9 +167,14 @@
 #import "DBTEAMTeamFolderRenameArg.h"
 #import "DBTEAMTeamFolderRenameError.h"
 #import "DBTEAMTeamFolderStatus.h"
+#import "DBTEAMTeamFolderTeamSharedDropboxError.h"
 #import "DBTEAMTeamGetInfoResult.h"
 #import "DBTEAMTeamMemberInfo.h"
 #import "DBTEAMTeamMemberProfile.h"
+#import "DBTEAMTeamNamespacesListArg.h"
+#import "DBTEAMTeamNamespacesListContinueArg.h"
+#import "DBTEAMTeamNamespacesListContinueError.h"
+#import "DBTEAMTeamNamespacesListResult.h"
 #import "DBTEAMTokenGetAuthenticatedAdminError.h"
 #import "DBTEAMTokenGetAuthenticatedAdminResult.h"
 #import "DBTEAMUpdatePropertyTemplateArg.h"
@@ -582,6 +588,24 @@
 - (DBRpcTask *)membersUnsuspend:(DBTEAMUserSelectorArg *)user {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersUnsuspend;
   DBTEAMMembersUnsuspendArg *arg = [[DBTEAMMembersUnsuspendArg alloc] initWithUser:user];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)namespacesList {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMNamespacesList;
+  DBTEAMTeamNamespacesListArg *arg = [[DBTEAMTeamNamespacesListArg alloc] initDefault];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)namespacesList:(NSNumber *)limit {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMNamespacesList;
+  DBTEAMTeamNamespacesListArg *arg = [[DBTEAMTeamNamespacesListArg alloc] initWithLimit:limit];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)namespacesListContinue:(NSString *)cursor {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMNamespacesListContinue;
+  DBTEAMTeamNamespacesListContinueArg *arg = [[DBTEAMTeamNamespacesListContinueArg alloc] initWithCursor:cursor];
   return [self.client requestRpc:route arg:arg];
 }
 

@@ -30,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Domain names.
 @property (nonatomic, readonly) NSArray<NSString *> *domainNames;
 
-/// Domain name verification method.
+/// Domain name verification method. Might be missing due to historical data
+/// gap.
 @property (nonatomic, readonly, copy, nullable) NSString *verificationMethod;
 
 #pragma mark - Constructors
@@ -39,7 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param domainNames Domain names.
-/// @param verificationMethod Domain name verification method.
+/// @param verificationMethod Domain name verification method. Might be missing
+/// due to historical data gap.
 ///
 /// @return An initialized instance.
 ///

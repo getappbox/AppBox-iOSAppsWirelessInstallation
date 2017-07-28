@@ -92,7 +92,7 @@ static DBOAuthManager *s_sharedOAuthManager;
 }
 
 - (void)authorizeFromSharedApplication:(id<DBSharedApplication>)sharedApplication {
-  void (^cancelHandler)() = ^{
+  void (^cancelHandler)(void) = ^{
     [sharedApplication presentExternalApp:self->_cancelURL];
   };
 
@@ -102,7 +102,7 @@ static DBOAuthManager *s_sharedOAuthManager;
     NSString *title = NSLocalizedString(@"No internet connection",
                                         @"Displayed when commencing authorization flow without internet connection.");
 
-    NSDictionary<NSString *, void (^)()> *buttonHandlers = @{
+    NSDictionary<NSString *, void (^)(void)> *buttonHandlers = @{
       @"Cancel" : ^{
         cancelHandler();
       },

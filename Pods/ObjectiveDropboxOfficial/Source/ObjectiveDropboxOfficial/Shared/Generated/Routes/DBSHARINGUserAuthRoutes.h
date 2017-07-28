@@ -570,9 +570,9 @@ getSharedLinkMetadata:(NSString *)url
 
 ///
 /// DEPRECATED: Returns a list of LinkMetadata objects for this user, including collection links. If no path is given,
-/// returns a list of all shared links for the current user, including collection links. If a non-empty path is given,
-/// returns a list of all shared links that allow access to the given path.  Collection links are never returned in this
-/// case. Note that the url field in the response is never the shortened URL.
+/// returns a list of all shared links for the current user, including collection links, up to a maximum of 1000 links.
+/// If a non-empty path is given, returns a list of all shared links that allow access to the given path.  Collection
+/// links are never returned in this case. Note that the url field in the response is never the shortened URL.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGGetSharedLinksResult` object on success
@@ -583,9 +583,9 @@ getSharedLinkMetadata:(NSString *)url
 
 ///
 /// DEPRECATED: Returns a list of LinkMetadata objects for this user, including collection links. If no path is given,
-/// returns a list of all shared links for the current user, including collection links. If a non-empty path is given,
-/// returns a list of all shared links that allow access to the given path.  Collection links are never returned in this
-/// case. Note that the url field in the response is never the shortened URL.
+/// returns a list of all shared links for the current user, including collection links, up to a maximum of 1000 links.
+/// If a non-empty path is given, returns a list of all shared links that allow access to the given path.  Collection
+/// links are never returned in this case. Note that the url field in the response is never the shortened URL.
 ///
 /// @param path See `getSharedLinks` description.
 ///
@@ -995,7 +995,6 @@ removeFolderMember:(NSString *)sharedFolderId
 /// `DBSHARINGShareFolderLaunch` is returned, you'll need to call `checkShareJobStatus` until the action completes to
 /// get the metadata for the folder. Apps must have full Dropbox access to use this endpoint.
 ///
-/// @param path The path to the folder to share. If it does not exist, then a new one is created.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGShareFolderLaunch` object on success or a
 /// `DBSHARINGShareFolderError` object on failure.
@@ -1008,30 +1007,23 @@ removeFolderMember:(NSString *)sharedFolderId
 /// `DBSHARINGShareFolderLaunch` is returned, you'll need to call `checkShareJobStatus` until the action completes to
 /// get the metadata for the folder. Apps must have full Dropbox access to use this endpoint.
 ///
-/// @param path The path to the folder to share. If it does not exist, then a new one is created.
-/// @param memberPolicy Who can be a member of this shared folder. Only applicable if the current user is on a team.
-/// @param aclUpdatePolicy Who can add and remove members of this shared folder.
-/// @param sharedLinkPolicy The policy to apply to shared links created for content inside this shared folder.  The
-/// current user must be on a team to set this policy to `members` in `DBSHARINGSharedLinkPolicy`.
-/// @param forceAsync Whether to force the share to happen asynchronously.
 /// @param actions A list of `FolderAction`s corresponding to `FolderPermission`s that should appear in the  response's
 /// `permissions` in `DBSHARINGSharedFolderMetadata` field describing the actions the  authenticated user can perform on
 /// the folder.
 /// @param linkSettings Settings on the link for this folder.
-/// @param viewerInfoPolicy Who can enable/disable viewer info for this shared folder.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGShareFolderLaunch` object on success or a
 /// `DBSHARINGShareFolderError` object on failure.
 ///
 - (DBRpcTask<DBSHARINGShareFolderLaunch *, DBSHARINGShareFolderError *> *)
      shareFolder:(NSString *)path
-    memberPolicy:(nullable DBSHARINGMemberPolicy *)memberPolicy
  aclUpdatePolicy:(nullable DBSHARINGAclUpdatePolicy *)aclUpdatePolicy
-sharedLinkPolicy:(nullable DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
       forceAsync:(nullable NSNumber *)forceAsync
+    memberPolicy:(nullable DBSHARINGMemberPolicy *)memberPolicy
+sharedLinkPolicy:(nullable DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
+viewerInfoPolicy:(nullable DBSHARINGViewerInfoPolicy *)viewerInfoPolicy
          actions:(nullable NSArray<DBSHARINGFolderAction *> *)actions
-    linkSettings:(nullable DBSHARINGLinkSettings *)linkSettings
-viewerInfoPolicy:(nullable DBSHARINGViewerInfoPolicy *)viewerInfoPolicy;
+    linkSettings:(nullable DBSHARINGLinkSettings *)linkSettings;
 
 ///
 /// Transfer ownership of a shared folder to a member of the shared folder. User must have `owner` in

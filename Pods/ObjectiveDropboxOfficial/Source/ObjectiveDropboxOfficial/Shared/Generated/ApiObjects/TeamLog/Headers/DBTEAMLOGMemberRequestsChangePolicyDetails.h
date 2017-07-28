@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGMemberRequestsChangePolicy;
 @class DBTEAMLOGMemberRequestsChangePolicyDetails;
+@class DBTEAMLOGMemberRequestsPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New member change requests policy.
-@property (nonatomic, readonly) DBTEAMLOGMemberRequestsChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGMemberRequestsPolicy *dNewValue;
 
 /// Previous member change requests policy. Might be missing due to historical
 /// data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGMemberRequestsChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGMemberRequestsPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGMemberRequestsChangePolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGMemberRequestsChangePolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGMemberRequestsPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGMemberRequestsPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGMemberRequestsChangePolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGMemberRequestsPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

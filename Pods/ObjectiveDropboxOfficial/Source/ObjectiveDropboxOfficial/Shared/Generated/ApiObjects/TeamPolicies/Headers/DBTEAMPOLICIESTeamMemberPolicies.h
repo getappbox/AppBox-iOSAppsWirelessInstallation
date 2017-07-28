@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMPOLICIESEmmState;
+@class DBTEAMPOLICIESOfficeAddInPolicy;
 @class DBTEAMPOLICIESTeamMemberPolicies;
 @class DBTEAMPOLICIESTeamSharingPolicies;
 
@@ -39,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// future we'll be adding more new fields and additional documentation.
 @property (nonatomic, readonly) DBTEAMPOLICIESEmmState *emmState;
 
+/// The admin policy around the Dropbox Office Add-In for this team.
+@property (nonatomic, readonly) DBTEAMPOLICIESOfficeAddInPolicy *officeAddin;
+
 #pragma mark - Constructors
 
 ///
@@ -51,11 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// and apply restrictions upon the team's Dropbox usage on mobile devices. This
 /// is a new feature and in the future we'll be adding more new fields and
 /// additional documentation.
+/// @param officeAddin The admin policy around the Dropbox Office Add-In for
+/// this team.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharing:(DBTEAMPOLICIESTeamSharingPolicies *)sharing
-                       emmState:(DBTEAMPOLICIESEmmState *)emmState;
+                       emmState:(DBTEAMPOLICIESEmmState *)emmState
+                    officeAddin:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddin;
 
 - (instancetype)init NS_UNAVAILABLE;
 

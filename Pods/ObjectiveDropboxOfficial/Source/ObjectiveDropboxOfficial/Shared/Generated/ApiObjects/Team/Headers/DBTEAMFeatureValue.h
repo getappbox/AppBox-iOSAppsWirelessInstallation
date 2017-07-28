@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMFeatureValue;
+@class DBTEAMHasTeamSharedDropboxValue;
 @class DBTEAMUploadApiRateLimitValue;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -36,6 +37,9 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
   DBTEAMFeatureValueUploadApiRateLimit,
 
   /// (no description).
+  DBTEAMFeatureValueHasTeamSharedDropbox,
+
+  /// (no description).
   DBTEAMFeatureValueOther,
 
 };
@@ -47,6 +51,10 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMUploadApiRateLimitValue *uploadApiRateLimit;
 
+/// (no description). @note Ensure the `isHasTeamSharedDropbox` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMHasTeamSharedDropboxValue *hasTeamSharedDropbox;
+
 #pragma mark - Constructors
 
 ///
@@ -57,6 +65,15 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithUploadApiRateLimit:(DBTEAMUploadApiRateLimitValue *)uploadApiRateLimit;
+
+///
+/// Initializes union class with tag state of "has_team_shared_dropbox".
+///
+/// @param hasTeamSharedDropbox (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithHasTeamSharedDropbox:(DBTEAMHasTeamSharedDropboxValue *)hasTeamSharedDropbox;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -80,6 +97,19 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// "upload_api_rate_limit".
 ///
 - (BOOL)isUploadApiRateLimit;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "has_team_shared_dropbox".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `hasTeamSharedDropbox` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "has_team_shared_dropbox".
+///
+- (BOOL)isHasTeamSharedDropbox;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

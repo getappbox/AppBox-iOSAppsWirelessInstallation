@@ -51,6 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// The name of this file.
 @property (nonatomic, readonly, copy) NSString *name;
 
+/// The display names of the users that own the file. If the file is part of a
+/// team folder, the display names of the team admins are also included. Absent
+/// if the owner display names cannot be fetched.
+@property (nonatomic, readonly, nullable) NSArray<NSString *> *ownerDisplayNames;
+
 /// The team that owns the file. This field is not present if the file is not
 /// owned by a team.
 @property (nonatomic, readonly, nullable) DBUSERSTeam *ownerTeam;
@@ -100,6 +105,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// for an unreleased feature so it may not be returned yet.
 /// @param linkMetadata The metadata of the link associated for the file. This
 /// is for an unreleased feature so it may not be returned yet.
+/// @param ownerDisplayNames The display names of the users that own the file.
+/// If the file is part of a team folder, the display names of the team admins
+/// are also included. Absent if the owner display names cannot be fetched.
 /// @param ownerTeam The team that owns the file. This field is not present if
 /// the file is not owned by a team.
 /// @param parentSharedFolderId The ID of the parent shared folder. This field
@@ -128,6 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
                  accessType:(nullable DBSHARINGAccessLevel *)accessType
        expectedLinkMetadata:(nullable DBSHARINGExpectedSharedContentLinkMetadata *)expectedLinkMetadata
                linkMetadata:(nullable DBSHARINGSharedContentLinkMetadata *)linkMetadata
+          ownerDisplayNames:(nullable NSArray<NSString *> *)ownerDisplayNames
                   ownerTeam:(nullable DBUSERSTeam *)ownerTeam
        parentSharedFolderId:(nullable NSString *)parentSharedFolderId
                 pathDisplay:(nullable NSString *)pathDisplay

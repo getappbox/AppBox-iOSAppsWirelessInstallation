@@ -102,15 +102,12 @@
 @class DBTEAMLOGGroupUserManagementChangePolicyDetails;
 @class DBTEAMLOGLogoutDetails;
 @class DBTEAMLOGMemberAddNameDetails;
+@class DBTEAMLOGMemberChangeAdminRoleDetails;
 @class DBTEAMLOGMemberChangeEmailDetails;
 @class DBTEAMLOGMemberChangeMembershipTypeDetails;
 @class DBTEAMLOGMemberChangeNameDetails;
-@class DBTEAMLOGMemberChangeRoleDetails;
-@class DBTEAMLOGMemberInviteDetails;
-@class DBTEAMLOGMemberJoinDetails;
-@class DBTEAMLOGMemberLeaveDetails;
+@class DBTEAMLOGMemberChangeStatusDetails;
 @class DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetails;
-@class DBTEAMLOGMemberRecoverDetails;
 @class DBTEAMLOGMemberRequestsChangePolicyDetails;
 @class DBTEAMLOGMemberSpaceLimitsAddExceptionDetails;
 @class DBTEAMLOGMemberSpaceLimitsChangePolicyDetails;
@@ -118,9 +115,7 @@
 @class DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails;
 @class DBTEAMLOGMemberSuggestDetails;
 @class DBTEAMLOGMemberSuggestionsChangePolicyDetails;
-@class DBTEAMLOGMemberSuspendDetails;
 @class DBTEAMLOGMemberTransferAccountContentsDetails;
-@class DBTEAMLOGMemberUnsuspendDetails;
 @class DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails;
 @class DBTEAMLOGMissingDetails;
 @class DBTEAMLOGNetworkControlChangePolicyDetails;
@@ -242,6 +237,8 @@
 @class DBTEAMLOGSignInAsSessionStartDetails;
 @class DBTEAMLOGSmartSyncChangePolicyDetails;
 @class DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails;
+@class DBTEAMLOGSmartSyncNotOptOutDetails;
+@class DBTEAMLOGSmartSyncOptOutDetails;
 @class DBTEAMLOGSsoChangeCertDetails;
 @class DBTEAMLOGSsoChangeLoginUrlDetails;
 @class DBTEAMLOGSsoChangeLogoutUrlDetails;
@@ -254,7 +251,8 @@
 @class DBTEAMLOGTeamFolderDowngradeDetails;
 @class DBTEAMLOGTeamFolderPermanentlyDeleteDetails;
 @class DBTEAMLOGTeamFolderRenameDetails;
-@class DBTEAMLOGTeamMergeDetails;
+@class DBTEAMLOGTeamMergeFromDetails;
+@class DBTEAMLOGTeamMergeToDetails;
 @class DBTEAMLOGTeamProfileAddLogoDetails;
 @class DBTEAMLOGTeamProfileChangeLogoDetails;
 @class DBTEAMLOGTeamProfileChangeNameDetails;
@@ -323,8 +321,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// outside the team (DEPRECATED FEATURE).
   DBTEAMLOGEventDetailsSfExternalInviteWarnDetails,
 
-  /// Merged the team into another team.
-  DBTEAMLOGEventDetailsTeamMergeDetails,
+  /// Merged another team into this team.
+  DBTEAMLOGEventDetailsTeamMergeFromDetails,
+
+  /// Merged this team into another team.
+  DBTEAMLOGEventDetailsTeamMergeToDetails,
 
   /// Linked an app for team.
   DBTEAMLOGEventDetailsAppLinkTeamDetails,
@@ -555,35 +556,20 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Set team member name when joining team.
   DBTEAMLOGEventDetailsMemberAddNameDetails,
 
+  /// Change the admin role belonging to team member.
+  DBTEAMLOGEventDetailsMemberChangeAdminRoleDetails,
+
   /// Changed team member email address.
   DBTEAMLOGEventDetailsMemberChangeEmailDetails,
 
   /// Changed team member name.
   DBTEAMLOGEventDetailsMemberChangeNameDetails,
 
-  /// Change the admin permissions belonging to team member.
-  DBTEAMLOGEventDetailsMemberChangeRoleDetails,
-
-  /// Invited a user to join the team.
-  DBTEAMLOGEventDetailsMemberInviteDetails,
-
-  /// Joined the team.
-  DBTEAMLOGEventDetailsMemberJoinDetails,
-
-  /// Removed a team member.
-  DBTEAMLOGEventDetailsMemberLeaveDetails,
-
-  /// Recovered a removed member.
-  DBTEAMLOGEventDetailsMemberRecoverDetails,
+  /// Changed the membership status of a team member.
+  DBTEAMLOGEventDetailsMemberChangeStatusDetails,
 
   /// Suggested a new team member to be added to the team.
   DBTEAMLOGEventDetailsMemberSuggestDetails,
-
-  /// Suspended a team member.
-  DBTEAMLOGEventDetailsMemberSuspendDetails,
-
-  /// Unsuspended a team member.
-  DBTEAMLOGEventDetailsMemberUnsuspendDetails,
 
   /// Added users to the membership of a Paper doc or folder.
   DBTEAMLOGEventDetailsPaperContentAddMemberDetails,
@@ -1054,6 +1040,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Changed the default Smart Sync policy for team members.
   DBTEAMLOGEventDetailsSmartSyncChangePolicyDetails,
 
+  /// Opted team into Smart Sync.
+  DBTEAMLOGEventDetailsSmartSyncNotOptOutDetails,
+
+  /// Opted team out of Smart Sync.
+  DBTEAMLOGEventDetailsSmartSyncOptOutDetails,
+
   /// Change the single sign-on policy for the team.
   DBTEAMLOGEventDetailsSsoChangePolicyDetails,
 
@@ -1170,10 +1162,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSfExternalInviteWarnDetails *sfExternalInviteWarnDetails;
 
-/// Merged the team into another team. @note Ensure the `isTeamMergeDetails`
+/// Merged another team into this team. @note Ensure the
+/// `isTeamMergeFromDetails` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamMergeFromDetails *teamMergeFromDetails;
+
+/// Merged this team into another team. @note Ensure the `isTeamMergeToDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBTEAMLOGTeamMergeDetails *teamMergeDetails;
+@property (nonatomic, readonly) DBTEAMLOGTeamMergeToDetails *teamMergeToDetails;
 
 /// Linked an app for team. @note Ensure the `isAppLinkTeamDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -1537,6 +1534,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberAddNameDetails *memberAddNameDetails;
 
+/// Change the admin role belonging to team member. @note Ensure the
+/// `isMemberChangeAdminRoleDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGMemberChangeAdminRoleDetails *memberChangeAdminRoleDetails;
+
 /// Changed team member email address. @note Ensure the
 /// `isMemberChangeEmailDetails` method returns true before accessing, otherwise
 /// a runtime exception will be raised.
@@ -1547,41 +1549,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberChangeNameDetails *memberChangeNameDetails;
 
-/// Change the admin permissions belonging to team member. @note Ensure the
-/// `isMemberChangeRoleDetails` method returns true before accessing, otherwise
-/// a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberChangeRoleDetails *memberChangeRoleDetails;
-
-/// Invited a user to join the team. @note Ensure the `isMemberInviteDetails`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberInviteDetails *memberInviteDetails;
-
-/// Joined the team. @note Ensure the `isMemberJoinDetails` method returns true
-/// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberJoinDetails *memberJoinDetails;
-
-/// Removed a team member. @note Ensure the `isMemberLeaveDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberLeaveDetails *memberLeaveDetails;
-
-/// Recovered a removed member. @note Ensure the `isMemberRecoverDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberRecoverDetails *memberRecoverDetails;
+/// Changed the membership status of a team member. @note Ensure the
+/// `isMemberChangeStatusDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGMemberChangeStatusDetails *memberChangeStatusDetails;
 
 /// Suggested a new team member to be added to the team. @note Ensure the
 /// `isMemberSuggestDetails` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberSuggestDetails *memberSuggestDetails;
-
-/// Suspended a team member. @note Ensure the `isMemberSuspendDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberSuspendDetails *memberSuspendDetails;
-
-/// Unsuspended a team member. @note Ensure the `isMemberUnsuspendDetails`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGMemberUnsuspendDetails *memberUnsuspendDetails;
 
 /// Added users to the membership of a Paper doc or folder. @note Ensure the
 /// `isPaperContentAddMemberDetails` method returns true before accessing,
@@ -2345,6 +2321,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSmartSyncChangePolicyDetails *smartSyncChangePolicyDetails;
 
+/// Opted team into Smart Sync. @note Ensure the `isSmartSyncNotOptOutDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSmartSyncNotOptOutDetails *smartSyncNotOptOutDetails;
+
+/// Opted team out of Smart Sync. @note Ensure the `isSmartSyncOptOutDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSmartSyncOptOutDetails *smartSyncOptOutDetails;
+
 /// Change the single sign-on policy for the team. @note Ensure the
 /// `isSsoChangePolicyDetails` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
@@ -2587,16 +2573,28 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithSfExternalInviteWarnDetails:(DBTEAMLOGSfExternalInviteWarnDetails *)sfExternalInviteWarnDetails;
 
 ///
-/// Initializes union class with tag state of "team_merge_details".
+/// Initializes union class with tag state of "team_merge_from_details".
 ///
-/// Description of the "team_merge_details" tag state: Merged the team into
-/// another team.
+/// Description of the "team_merge_from_details" tag state: Merged another team
+/// into this team.
 ///
-/// @param teamMergeDetails Merged the team into another team.
+/// @param teamMergeFromDetails Merged another team into this team.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamMergeDetails:(DBTEAMLOGTeamMergeDetails *)teamMergeDetails;
+- (instancetype)initWithTeamMergeFromDetails:(DBTEAMLOGTeamMergeFromDetails *)teamMergeFromDetails;
+
+///
+/// Initializes union class with tag state of "team_merge_to_details".
+///
+/// Description of the "team_merge_to_details" tag state: Merged this team into
+/// another team.
+///
+/// @param teamMergeToDetails Merged this team into another team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamMergeToDetails:(DBTEAMLOGTeamMergeToDetails *)teamMergeToDetails;
 
 ///
 /// Initializes union class with tag state of "app_link_team_details".
@@ -3577,6 +3575,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithMemberAddNameDetails:(DBTEAMLOGMemberAddNameDetails *)memberAddNameDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "member_change_admin_role_details".
+///
+/// Description of the "member_change_admin_role_details" tag state: Change the
+/// admin role belonging to team member.
+///
+/// @param memberChangeAdminRoleDetails Change the admin role belonging to team
+/// member.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberChangeAdminRoleDetails:
+    (DBTEAMLOGMemberChangeAdminRoleDetails *)memberChangeAdminRoleDetails;
+
+///
 /// Initializes union class with tag state of "member_change_email_details".
 ///
 /// Description of the "member_change_email_details" tag state: Changed team
@@ -3601,63 +3614,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithMemberChangeNameDetails:(DBTEAMLOGMemberChangeNameDetails *)memberChangeNameDetails;
 
 ///
-/// Initializes union class with tag state of "member_change_role_details".
+/// Initializes union class with tag state of "member_change_status_details".
 ///
-/// Description of the "member_change_role_details" tag state: Change the admin
-/// permissions belonging to team member.
+/// Description of the "member_change_status_details" tag state: Changed the
+/// membership status of a team member.
 ///
-/// @param memberChangeRoleDetails Change the admin permissions belonging to
-/// team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberChangeRoleDetails:(DBTEAMLOGMemberChangeRoleDetails *)memberChangeRoleDetails;
-
-///
-/// Initializes union class with tag state of "member_invite_details".
-///
-/// Description of the "member_invite_details" tag state: Invited a user to join
-/// the team.
-///
-/// @param memberInviteDetails Invited a user to join the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberInviteDetails:(DBTEAMLOGMemberInviteDetails *)memberInviteDetails;
-
-///
-/// Initializes union class with tag state of "member_join_details".
-///
-/// Description of the "member_join_details" tag state: Joined the team.
-///
-/// @param memberJoinDetails Joined the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberJoinDetails:(DBTEAMLOGMemberJoinDetails *)memberJoinDetails;
-
-///
-/// Initializes union class with tag state of "member_leave_details".
-///
-/// Description of the "member_leave_details" tag state: Removed a team member.
-///
-/// @param memberLeaveDetails Removed a team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberLeaveDetails:(DBTEAMLOGMemberLeaveDetails *)memberLeaveDetails;
-
-///
-/// Initializes union class with tag state of "member_recover_details".
-///
-/// Description of the "member_recover_details" tag state: Recovered a removed
+/// @param memberChangeStatusDetails Changed the membership status of a team
 /// member.
 ///
-/// @param memberRecoverDetails Recovered a removed member.
-///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithMemberRecoverDetails:(DBTEAMLOGMemberRecoverDetails *)memberRecoverDetails;
+- (instancetype)initWithMemberChangeStatusDetails:(DBTEAMLOGMemberChangeStatusDetails *)memberChangeStatusDetails;
 
 ///
 /// Initializes union class with tag state of "member_suggest_details".
@@ -3671,30 +3638,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMemberSuggestDetails:(DBTEAMLOGMemberSuggestDetails *)memberSuggestDetails;
-
-///
-/// Initializes union class with tag state of "member_suspend_details".
-///
-/// Description of the "member_suspend_details" tag state: Suspended a team
-/// member.
-///
-/// @param memberSuspendDetails Suspended a team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberSuspendDetails:(DBTEAMLOGMemberSuspendDetails *)memberSuspendDetails;
-
-///
-/// Initializes union class with tag state of "member_unsuspend_details".
-///
-/// Description of the "member_unsuspend_details" tag state: Unsuspended a team
-/// member.
-///
-/// @param memberUnsuspendDetails Unsuspended a team member.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMemberUnsuspendDetails:(DBTEAMLOGMemberUnsuspendDetails *)memberUnsuspendDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -5731,6 +5674,30 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
     (DBTEAMLOGSmartSyncChangePolicyDetails *)smartSyncChangePolicyDetails;
 
 ///
+/// Initializes union class with tag state of "smart_sync_not_opt_out_details".
+///
+/// Description of the "smart_sync_not_opt_out_details" tag state: Opted team
+/// into Smart Sync.
+///
+/// @param smartSyncNotOptOutDetails Opted team into Smart Sync.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSmartSyncNotOptOutDetails:(DBTEAMLOGSmartSyncNotOptOutDetails *)smartSyncNotOptOutDetails;
+
+///
+/// Initializes union class with tag state of "smart_sync_opt_out_details".
+///
+/// Description of the "smart_sync_opt_out_details" tag state: Opted team out of
+/// Smart Sync.
+///
+/// @param smartSyncOptOutDetails Opted team out of Smart Sync.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSmartSyncOptOutDetails:(DBTEAMLOGSmartSyncOptOutDetails *)smartSyncOptOutDetails;
+
+///
 /// Initializes union class with tag state of "sso_change_policy_details".
 ///
 /// Description of the "sso_change_policy_details" tag state: Change the single
@@ -6107,15 +6074,28 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "team_merge_details".
+/// "team_merge_from_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `teamMergeDetails` property, otherwise a runtime exception will be thrown.
+/// `teamMergeFromDetails` property, otherwise a runtime exception will be
+/// thrown.
 ///
 /// @return Whether the union's current tag state has value
-/// "team_merge_details".
+/// "team_merge_from_details".
 ///
-- (BOOL)isTeamMergeDetails;
+- (BOOL)isTeamMergeFromDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_merge_to_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamMergeToDetails` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_merge_to_details".
+///
+- (BOOL)isTeamMergeToDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -7072,6 +7052,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "member_change_admin_role_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `memberChangeAdminRoleDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "member_change_admin_role_details".
+///
+- (BOOL)isMemberChangeAdminRoleDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "member_change_email_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7098,66 +7091,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "member_change_role_details".
+/// "member_change_status_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `memberChangeRoleDetails` property, otherwise a runtime exception will be
+/// `memberChangeStatusDetails` property, otherwise a runtime exception will be
 /// thrown.
 ///
 /// @return Whether the union's current tag state has value
-/// "member_change_role_details".
+/// "member_change_status_details".
 ///
-- (BOOL)isMemberChangeRoleDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_invite_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `memberInviteDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "member_invite_details".
-///
-- (BOOL)isMemberInviteDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_join_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `memberJoinDetails` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "member_join_details".
-///
-- (BOOL)isMemberJoinDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_leave_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `memberLeaveDetails` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "member_leave_details".
-///
-- (BOOL)isMemberLeaveDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_recover_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `memberRecoverDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "member_recover_details".
-///
-- (BOOL)isMemberRecoverDetails;
+- (BOOL)isMemberChangeStatusDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -7171,32 +7114,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "member_suggest_details".
 ///
 - (BOOL)isMemberSuggestDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_suspend_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `memberSuspendDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "member_suspend_details".
-///
-- (BOOL)isMemberSuspendDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "member_unsuspend_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `memberUnsuspendDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "member_unsuspend_details".
-///
-- (BOOL)isMemberUnsuspendDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -9114,6 +9031,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "smart_sync_change_policy_details".
 ///
 - (BOOL)isSmartSyncChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "smart_sync_not_opt_out_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `smartSyncNotOptOutDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "smart_sync_not_opt_out_details".
+///
+- (BOOL)isSmartSyncNotOptOutDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "smart_sync_opt_out_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `smartSyncOptOutDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "smart_sync_opt_out_details".
+///
+- (BOOL)isSmartSyncOptOutDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
