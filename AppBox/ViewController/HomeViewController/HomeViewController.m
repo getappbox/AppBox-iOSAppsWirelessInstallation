@@ -35,9 +35,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [project setBuildDirectory: [UserData buildLocation]];
     
     //setup dropbox
-    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
-    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
-//    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
+//    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
+//    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
     
     //update available memory
     [[NSApplication sharedApplication] updateDropboxUsage];
@@ -403,6 +403,34 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
+                
+                XCArchiveResult *result = [XCArchiveParser archiveResultMessageFromString:outputString];
+                switch (result.type) {
+                    case XCArchiveResultCleanSucceeded:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultArchiveFailed:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultArchiveSucceeded:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultExportFailed:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultExportSucceeded:{
+                        
+                    }break;
+                        
+                    default:
+                        break;
+                }
+                
+                
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
                     [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
@@ -604,7 +632,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:ipaURL.resourceSpecifier to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding
+                    to:project.dbIPAFullPath.absoluteString
+                  mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 

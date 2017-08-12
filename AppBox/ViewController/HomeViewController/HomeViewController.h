@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ALOutputParser.h"
+#import "XCArchiveParser.h"
 #import "MobileProvision.h"
 #import "CIViewController.h"
 #import "DropboxViewController.h"
