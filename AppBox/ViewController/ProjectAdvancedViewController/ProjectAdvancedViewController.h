@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "LocalServerHandler.h"
 
 @class ProjectAdvancedViewController;
 @protocol ProjectAdvancedViewDelegate <NSObject>
@@ -22,6 +23,8 @@
 
 @property(nonatomic, strong) XCProject *project;
 @property(weak) id <ProjectAdvancedViewDelegate> delegate;
+
+@property (weak) IBOutlet NSButton *localNetworkCheckBox;
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender;
 - (IBAction)buttonCancelTapped:(NSButton *)sender;

@@ -15,6 +15,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Project Advanced Settings"];
+    [self.localNetworkCheckBox setTitle: [LocalServerHandler getLocalIPAddress]];
 }
 
 //MARK: - Action Button Tapped
@@ -30,6 +31,8 @@
     
     [self dismissController:self];
 }
+
+
 
 
 
