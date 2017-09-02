@@ -1162,7 +1162,7 @@ Gw
                                     <constraint firstAttribute="height" constant="25" id="Nuy-Ou-Adw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="xys-jg-h02"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Default will bundle identifier" drawsBackground="YES" id="shS-Qh-yS1">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Default will bundle identifier" drawsBackground="YES" id="shS-Qh-yS1">
                                     <font key="font" metaFont="systemLight" size="16"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1210,6 +1210,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dbFolderNameTextField" destination="KOs-Ma-CB8" id="Phy-e0-FUB"/>
                         <outlet property="localNetworkCheckBox" destination="LBi-UH-2sG" id="08R-3h-ipO"/>
                     </connections>
                 </viewController>

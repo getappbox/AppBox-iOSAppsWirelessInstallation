@@ -25,6 +25,7 @@
 @property(weak) id <ProjectAdvancedViewDelegate> delegate;
 
 @property (weak) IBOutlet NSButton *localNetworkCheckBox;
+@property (weak) IBOutlet NSTextField *dbFolderNameTextField;
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender;
 - (IBAction)buttonCancelTapped:(NSButton *)sender;

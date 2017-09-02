@@ -144,7 +144,9 @@
 
     //Bundle directory path
     NSString *bundlePath = [NSString stringWithFormat:@"/%@",self.identifer];
-    [self setBundleDirectory:[NSURL URLWithString:bundlePath]];
+    if (self.bundleDirectory.absoluteString.length == 0){
+        [self setBundleDirectory:[NSURL URLWithString:bundlePath]];
+    }
     [self upadteDbDirectoryByBundleDirectory];
 }
 

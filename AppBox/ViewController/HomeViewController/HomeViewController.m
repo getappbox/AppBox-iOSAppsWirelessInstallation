@@ -140,7 +140,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-    
+    project.isKeepSameLinkEnabled = (sender.state == NSOnState);
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
@@ -593,6 +593,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         [self viewStateForProgressFinish:YES];
                         return;
                     }
+                    
+                    //set dropbox folder name & log if user changing folder name or not
+                    if (project.bundleDirectory.absoluteString.length == 0){
+                        [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0}];
+                    }else{
+                        [project upadteDbDirectoryByBundleDirectory];
+                        [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
+                    }
+
                     
                     if ([AppDelegate appDelegate].isInternetConnected){
                         [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
@@ -1081,6 +1090,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
     //update view state based on selected tap
     [self updateViewState];
+}
+
+-(BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+    return ![AppDelegate appDelegate].processing;
 }
 
 #pragma mark - ProjectAdvancedViewDelegate - 

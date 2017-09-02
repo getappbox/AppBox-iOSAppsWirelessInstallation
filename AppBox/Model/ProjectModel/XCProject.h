@@ -58,6 +58,7 @@
 @property(nonatomic, retain) NSDictionary *exportOptionsPlist;
 
 //UniqueLink.json
+@property(nonatomic, assign) BOOL isKeepSameLinkEnabled;
 @property(nonatomic, retain) NSURL *uniquelinkShareableURL;
 @property(nonatomic, retain) DBFILESFileMetadata *uniqueLinkJsonMetaData;
 
