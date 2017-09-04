@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBSHARINGInsufficientPlan;
 @class DBSHARINGPermissionDeniedReason;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -71,12 +72,19 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
   DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder,
 
   /// (no description).
+  DBSHARINGPermissionDeniedReasonInsufficientPlan,
+
+  /// (no description).
   DBSHARINGPermissionDeniedReasonOther,
 
 };
 
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBSHARINGPermissionDeniedReasonTag tag;
+
+/// (no description). @note Ensure the `isInsufficientPlan` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBSHARINGInsufficientPlan *insufficientPlan;
 
 #pragma mark - Constructors
 
@@ -210,6 +218,15 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 - (instancetype)initWithFolderIsInsideSharedFolder;
 
 ///
+/// Initializes union class with tag state of "insufficient_plan".
+///
+/// @param insufficientPlan (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInsufficientPlan:(DBSHARINGInsufficientPlan *)insufficientPlan;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -327,6 +344,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 /// "folder_is_inside_shared_folder".
 ///
 - (BOOL)isFolderIsInsideSharedFolder;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "insufficient_plan".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `insufficientPlan` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "insufficient_plan".
+///
+- (BOOL)isInsufficientPlan;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

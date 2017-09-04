@@ -18,11 +18,21 @@
                      appSecret:(NSString *)appSecret
                      userAgent:(NSString *)userAgent
                     asMemberId:(NSString *)asMemberId {
+  return
+      [self initWithAppKey:appKey appSecret:appSecret userAgent:userAgent asMemberId:asMemberId additionalHeaders:nil];
+}
+
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     appSecret:(NSString *)appSecret
+                     userAgent:(NSString *)userAgent
+                    asMemberId:(NSString *)asMemberId
+             additionalHeaders:(NSDictionary<NSString *, NSString *> *)additionalHeaders {
   if (self = [super init]) {
     _userAgent = userAgent;
     _appKey = appKey;
     _appSecret = appSecret;
     _asMemberId = asMemberId;
+    _additionalHeaders = additionalHeaders;
   }
   return self;
 }

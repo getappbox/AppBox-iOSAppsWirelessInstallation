@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBSHARINGShareFolderArgBase.h"
 #import "DBSerializableProtocol.h"
 
 @class DBSHARINGAclUpdatePolicy;
@@ -27,28 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGShareFolderArg : NSObject <DBSerializable, NSCopying>
+@interface DBSHARINGShareFolderArg : DBSHARINGShareFolderArgBase <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
-
-/// The path to the folder to share. If it does not exist, then a new one is
-/// created.
-@property (nonatomic, readonly, copy) NSString *path;
-
-/// Who can be a member of this shared folder. Only applicable if the current
-/// user is on a team.
-@property (nonatomic, readonly, nullable) DBSHARINGMemberPolicy *memberPolicy;
-
-/// Who can add and remove members of this shared folder.
-@property (nonatomic, readonly, nullable) DBSHARINGAclUpdatePolicy *aclUpdatePolicy;
-
-/// The policy to apply to shared links created for content inside this shared
-/// folder.  The current user must be on a team to set this policy to `members`
-/// in `DBSHARINGSharedLinkPolicy`.
-@property (nonatomic, readonly, nullable) DBSHARINGSharedLinkPolicy *sharedLinkPolicy;
-
-/// Whether to force the share to happen asynchronously.
-@property (nonatomic, readonly) NSNumber *forceAsync;
 
 /// A list of `FolderAction`s corresponding to `FolderPermission`s that should
 /// appear in the  response's `permissions` in `DBSHARINGSharedFolderMetadata`
@@ -59,9 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Settings on the link for this folder.
 @property (nonatomic, readonly, nullable) DBSHARINGLinkSettings *linkSettings;
 
-/// Who can enable/disable viewer info for this shared folder.
-@property (nonatomic, readonly, nullable) DBSHARINGViewerInfoPolicy *viewerInfoPolicy;
-
 #pragma mark - Constructors
 
 ///
@@ -69,31 +48,31 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param path The path to the folder to share. If it does not exist, then a
 /// new one is created.
+/// @param aclUpdatePolicy Who can add and remove members of this shared folder.
+/// @param forceAsync Whether to force the share to happen asynchronously.
 /// @param memberPolicy Who can be a member of this shared folder. Only
 /// applicable if the current user is on a team.
-/// @param aclUpdatePolicy Who can add and remove members of this shared folder.
 /// @param sharedLinkPolicy The policy to apply to shared links created for
 /// content inside this shared folder.  The current user must be on a team to
 /// set this policy to `members` in `DBSHARINGSharedLinkPolicy`.
-/// @param forceAsync Whether to force the share to happen asynchronously.
+/// @param viewerInfoPolicy Who can enable/disable viewer info for this shared
+/// folder.
 /// @param actions A list of `FolderAction`s corresponding to
 /// `FolderPermission`s that should appear in the  response's `permissions` in
 /// `DBSHARINGSharedFolderMetadata` field describing the actions the
 /// authenticated user can perform on the folder.
 /// @param linkSettings Settings on the link for this folder.
-/// @param viewerInfoPolicy Who can enable/disable viewer info for this shared
-/// folder.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPath:(NSString *)path
-                memberPolicy:(nullable DBSHARINGMemberPolicy *)memberPolicy
              aclUpdatePolicy:(nullable DBSHARINGAclUpdatePolicy *)aclUpdatePolicy
-            sharedLinkPolicy:(nullable DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
                   forceAsync:(nullable NSNumber *)forceAsync
+                memberPolicy:(nullable DBSHARINGMemberPolicy *)memberPolicy
+            sharedLinkPolicy:(nullable DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
+            viewerInfoPolicy:(nullable DBSHARINGViewerInfoPolicy *)viewerInfoPolicy
                      actions:(nullable NSArray<DBSHARINGFolderAction *> *)actions
-                linkSettings:(nullable DBSHARINGLinkSettings *)linkSettings
-            viewerInfoPolicy:(nullable DBSHARINGViewerInfoPolicy *)viewerInfoPolicy;
+                linkSettings:(nullable DBSHARINGLinkSettings *)linkSettings;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -105,8 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPath:(NSString *)path;
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

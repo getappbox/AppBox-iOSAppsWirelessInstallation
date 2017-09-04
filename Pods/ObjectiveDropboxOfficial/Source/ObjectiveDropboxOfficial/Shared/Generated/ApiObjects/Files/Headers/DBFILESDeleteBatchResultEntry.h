@@ -8,9 +8,9 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILESDeleteBatchResultData;
 @class DBFILESDeleteBatchResultEntry;
 @class DBFILESDeleteError;
-@class DBFILESDeleteResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 
 /// (no description). @note Ensure the `isSuccess` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESDeleteResult *success;
+@property (nonatomic, readonly) DBFILESDeleteBatchResultData *success;
 
 /// (no description). @note Ensure the `isFailure` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSuccess:(DBFILESDeleteResult *)success;
+- (instancetype)initWithSuccess:(DBFILESDeleteBatchResultData *)success;
 
 ///
 /// Initializes union class with tag state of "failure".

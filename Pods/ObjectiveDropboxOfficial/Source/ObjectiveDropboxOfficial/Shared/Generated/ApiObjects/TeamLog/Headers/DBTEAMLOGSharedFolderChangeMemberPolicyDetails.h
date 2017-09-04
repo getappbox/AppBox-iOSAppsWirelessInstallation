@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGExternalSharingPolicy;
 @class DBTEAMLOGSharedFolderChangeMemberPolicyDetails;
+@class DBTEAMLOGSharedFolderMemberPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,11 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
 
 /// New external invite policy.
-@property (nonatomic, readonly) DBTEAMLOGExternalSharingPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGSharedFolderMemberPolicy *dNewValue;
 
 /// Previous external invite policy. Might be missing due to historical data
 /// gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGExternalSharingPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGSharedFolderMemberPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -61,9 +61,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
                  originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGExternalSharingPolicy *)dNewValue
+                          dNewValue:(DBTEAMLOGSharedFolderMemberPolicy *)dNewValue
                    sharedFolderType:(nullable NSString *)sharedFolderType
-                      previousValue:(nullable DBTEAMLOGExternalSharingPolicy *)previousValue;
+                      previousValue:(nullable DBTEAMLOGSharedFolderMemberPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
                  originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGExternalSharingPolicy *)dNewValue;
+                          dNewValue:(DBTEAMLOGSharedFolderMemberPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

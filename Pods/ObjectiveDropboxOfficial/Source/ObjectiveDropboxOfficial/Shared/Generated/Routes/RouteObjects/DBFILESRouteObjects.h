@@ -38,8 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the dCopyReferenceSave route object.
 + (DBRoute *)DBFILESDCopyReferenceSave;
 
+/// Accessor method for the dCopyV2 route object.
++ (DBRoute *)DBFILESDCopyV2;
+
 /// Accessor method for the createFolder route object.
 + (DBRoute *)DBFILESCreateFolder;
+
+/// Accessor method for the createFolderV2 route object.
++ (DBRoute *)DBFILESCreateFolderV2;
 
 /// Accessor method for the delete_ route object.
 + (DBRoute *)DBFILESDelete_;
@@ -49,6 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the deleteBatchCheck route object.
 + (DBRoute *)DBFILESDeleteBatchCheck;
+
+/// Accessor method for the deleteV2 route object.
++ (DBRoute *)DBFILESDeleteV2;
 
 /// Accessor method for the download route object.
 + (DBRoute *)DBFILESDownload;
@@ -88,6 +97,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the moveBatchCheck route object.
 + (DBRoute *)DBFILESMoveBatchCheck;
+
+/// Accessor method for the moveV2 route object.
++ (DBRoute *)DBFILESMoveV2;
 
 /// Accessor method for the permanentlyDelete route object.
 + (DBRoute *)DBFILESPermanentlyDelete;

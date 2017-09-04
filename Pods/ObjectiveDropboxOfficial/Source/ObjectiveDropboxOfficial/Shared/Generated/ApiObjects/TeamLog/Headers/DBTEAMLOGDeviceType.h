@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// with which the `DBTEAMLOGDeviceType` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag) {
   /// (no description).
-  DBTEAMLOGDeviceTypeMobile,
+  DBTEAMLOGDeviceTypeDesktop,
 
   /// (no description).
-  DBTEAMLOGDeviceTypeDesktop,
+  DBTEAMLOGDeviceTypeMobile,
 
   /// (no description).
   DBTEAMLOGDeviceTypeOther,
@@ -45,18 +45,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "mobile".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMobile;
-
-///
 /// Initializes union class with tag state of "desktop".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDesktop;
+
+///
+/// Initializes union class with tag state of "mobile".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMobile;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -70,18 +70,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "mobile".
-///
-/// @return Whether the union's current tag state has value "mobile".
-///
-- (BOOL)isMobile;
-
-///
 /// Retrieves whether the union's current tag state has value "desktop".
 ///
 /// @return Whether the union's current tag state has value "desktop".
 ///
 - (BOOL)isDesktop;
+
+///
+/// Retrieves whether the union's current tag state has value "mobile".
+///
+/// @return Whether the union's current tag state has value "mobile".
+///
+- (BOOL)isMobile;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

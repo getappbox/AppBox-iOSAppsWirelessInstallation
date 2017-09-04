@@ -13,12 +13,14 @@
 @class DBFILESAlphaGetMetadataError;
 @class DBFILESCommitInfo;
 @class DBFILESCreateFolderError;
+@class DBFILESCreateFolderResult;
 @class DBFILESDeleteArg;
 @class DBFILESDeleteBatchError;
 @class DBFILESDeleteBatchJobStatus;
 @class DBFILESDeleteBatchLaunch;
 @class DBFILESDeleteBatchResult;
 @class DBFILESDeleteError;
+@class DBFILESDeleteResult;
 @class DBFILESDownloadError;
 @class DBFILESFileMetadata;
 @class DBFILESFileSharingInfo;
@@ -50,6 +52,7 @@
 @class DBFILESRelocationBatchResult;
 @class DBFILESRelocationError;
 @class DBFILESRelocationPath;
+@class DBFILESRelocationResult;
 @class DBFILESRemovePropertiesError;
 @class DBFILESRestoreError;
 @class DBFILESSaveCopyReferenceError;
@@ -233,22 +236,26 @@ alphaUploadStream:(NSString *)path
       inputStream:(NSInputStream *)inputStream;
 
 ///
-/// Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
-/// will be copied.
+/// DEPRECATED: Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all
+/// its contents will be copied.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESMetadata` object on success or a
 /// `DBFILESRelocationError` object on failure.
 ///
-- (DBRpcTask<DBFILESMetadata *, DBFILESRelocationError *> *)dCopy:(NSString *)fromPath toPath:(NSString *)toPath;
+- (DBRpcTask<DBFILESMetadata *, DBFILESRelocationError *> *)dCopy:(NSString *)fromPath
+                                                           toPath:(NSString *)toPath
+    __deprecated_msg("copy is deprecated. Use copy_v2.");
 
 ///
-/// Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
-/// will be copied.
+/// DEPRECATED: Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all
+/// its contents will be copied.
 ///
 /// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
 /// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
+/// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
+/// being moved. This does not apply to copies.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESMetadata` object on success or a
 /// `DBFILESRelocationError` object on failure.
@@ -256,7 +263,9 @@ alphaUploadStream:(NSString *)path
 - (DBRpcTask<DBFILESMetadata *, DBFILESRelocationError *> *)dCopy:(NSString *)fromPath
                                                            toPath:(NSString *)toPath
                                                 allowSharedFolder:(nullable NSNumber *)allowSharedFolder
-                                                       autorename:(nullable NSNumber *)autorename;
+                                                       autorename:(nullable NSNumber *)autorename
+                                           allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer
+    __deprecated_msg("copy is deprecated. Use copy_v2.");
 
 ///
 /// Copy multiple files or folders to different locations at once in the user's Dropbox. If `allowSharedFolder` in
@@ -285,13 +294,16 @@ alphaUploadStream:(NSString *)path
 /// field is always true for `moveBatch`.
 /// @param autorename If there's a conflict with any file, have the Dropbox server try to autorename that file to avoid
 /// the conflict.
+/// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
+/// being moved. This does not apply to copies.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationBatchLaunch` object on success or
 /// a `void` object on failure.
 ///
 - (DBRpcTask<DBFILESRelocationBatchLaunch *, DBNilObject *> *)dCopyBatch:(NSArray<DBFILESRelocationPath *> *)entries
                                                        allowSharedFolder:(nullable NSNumber *)allowSharedFolder
-                                                              autorename:(nullable NSNumber *)autorename;
+                                                              autorename:(nullable NSNumber *)autorename
+                                                  allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer;
 
 ///
 /// Returns the status of an asynchronous job for `dCopyBatch`. If success, it returns list of results for each entry.
@@ -329,17 +341,48 @@ alphaUploadStream:(NSString *)path
                                                                                                 path:(NSString *)path;
 
 ///
-/// Create a folder at a given path.
+/// Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
+/// will be copied.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBFILESRelocationResult` object on success or a
+/// `DBFILESRelocationError` object on failure.
+///
+- (DBRpcTask<DBFILESRelocationResult *, DBFILESRelocationError *> *)dCopyV2:(NSString *)fromPath
+                                                                     toPath:(NSString *)toPath;
+
+///
+/// Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
+/// will be copied.
+///
+/// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
+/// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
+/// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
+/// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
+/// being moved. This does not apply to copies.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESRelocationResult` object on success or a
+/// `DBFILESRelocationError` object on failure.
+///
+- (DBRpcTask<DBFILESRelocationResult *, DBFILESRelocationError *> *)dCopyV2:(NSString *)fromPath
+                                                                     toPath:(NSString *)toPath
+                                                          allowSharedFolder:(nullable NSNumber *)allowSharedFolder
+                                                                 autorename:(nullable NSNumber *)autorename
+                                                     allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer;
+
+///
+/// DEPRECATED: Create a folder at a given path.
 ///
 /// @param path Path in the user's Dropbox to create.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFolderMetadata` object on success or a
 /// `DBFILESCreateFolderError` object on failure.
 ///
-- (DBRpcTask<DBFILESFolderMetadata *, DBFILESCreateFolderError *> *)createFolder:(NSString *)path;
+- (DBRpcTask<DBFILESFolderMetadata *, DBFILESCreateFolderError *> *)createFolder:(NSString *)path
+    __deprecated_msg("create_folder is deprecated. Use create_folder_v2.");
 
 ///
-/// Create a folder at a given path.
+/// DEPRECATED: Create a folder at a given path.
 ///
 /// @param path Path in the user's Dropbox to create.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the folder to avoid the conflict.
@@ -348,19 +391,43 @@ alphaUploadStream:(NSString *)path
 /// `DBFILESCreateFolderError` object on failure.
 ///
 - (DBRpcTask<DBFILESFolderMetadata *, DBFILESCreateFolderError *> *)createFolder:(NSString *)path
-                                                                      autorename:(nullable NSNumber *)autorename;
+                                                                      autorename:(nullable NSNumber *)autorename
+    __deprecated_msg("create_folder is deprecated. Use create_folder_v2.");
 
 ///
-/// Delete the file or folder at a given path. If the path is a folder, all its contents will be deleted too. A
-/// successful response indicates that the file or folder was deleted. The returned metadata will be the corresponding
-/// FileMetadata or FolderMetadata for the item at time of deletion, and not a DeletedMetadata object.
+/// Create a folder at a given path.
+///
+/// @param path Path in the user's Dropbox to create.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESCreateFolderResult` object on success or a
+/// `DBFILESCreateFolderError` object on failure.
+///
+- (DBRpcTask<DBFILESCreateFolderResult *, DBFILESCreateFolderError *> *)createFolderV2:(NSString *)path;
+
+///
+/// Create a folder at a given path.
+///
+/// @param path Path in the user's Dropbox to create.
+/// @param autorename If there's a conflict, have the Dropbox server try to autorename the folder to avoid the conflict.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESCreateFolderResult` object on success or a
+/// `DBFILESCreateFolderError` object on failure.
+///
+- (DBRpcTask<DBFILESCreateFolderResult *, DBFILESCreateFolderError *> *)createFolderV2:(NSString *)path
+                                                                            autorename:(nullable NSNumber *)autorename;
+
+///
+/// DEPRECATED: Delete the file or folder at a given path. If the path is a folder, all its contents will be deleted
+/// too. A successful response indicates that the file or folder was deleted. The returned metadata will be the
+/// corresponding FileMetadata or FolderMetadata for the item at time of deletion, and not a DeletedMetadata object.
 ///
 /// @param path Path in the user's Dropbox to delete.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESMetadata` object on success or a
 /// `DBFILESDeleteError` object on failure.
 ///
-- (DBRpcTask<DBFILESMetadata *, DBFILESDeleteError *> *)delete_:(NSString *)path;
+- (DBRpcTask<DBFILESMetadata *, DBFILESDeleteError *> *)delete_:(NSString *)path
+    __deprecated_msg("delete is deprecated. Use delete_v2.");
 
 ///
 /// Delete multiple files/folders at once. This route is asynchronous, which returns a job ID immediately and runs the
@@ -382,6 +449,18 @@ alphaUploadStream:(NSString *)path
 /// a `DBASYNCPollError` object on failure.
 ///
 - (DBRpcTask<DBFILESDeleteBatchJobStatus *, DBASYNCPollError *> *)deleteBatchCheck:(NSString *)asyncJobId;
+
+///
+/// Delete the file or folder at a given path. If the path is a folder, all its contents will be deleted too. A
+/// successful response indicates that the file or folder was deleted. The returned metadata will be the corresponding
+/// FileMetadata or FolderMetadata for the item at time of deletion, and not a DeletedMetadata object.
+///
+/// @param path Path in the user's Dropbox to delete.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESDeleteResult` object on success or a
+/// `DBFILESDeleteError` object on failure.
+///
+- (DBRpcTask<DBFILESDeleteResult *, DBFILESDeleteError *> *)deleteV2:(NSString *)path;
 
 ///
 /// Download a file from a user's Dropbox.
@@ -894,7 +973,7 @@ getThumbnailData:(NSString *)path
 /// multiple `listFolder` or `listFolderContinue` calls with same parameters are made simultaneously by same API app for
 /// same user. If your app implements retry logic, please hold off the retry until the previous request finishes.
 ///
-/// @param path The path to the folder you want to see the contents of.
+/// @param path A unique identifier for the file.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESListFolderResult` object on success or a
 /// `DBFILESListFolderError` object on failure.
@@ -916,7 +995,7 @@ getThumbnailData:(NSString *)path
 /// multiple `listFolder` or `listFolderContinue` calls with same parameters are made simultaneously by same API app for
 /// same user. If your app implements retry logic, please hold off the retry until the previous request finishes.
 ///
-/// @param path The path to the folder you want to see the contents of.
+/// @param path A unique identifier for the file.
 /// @param recursive If true, the list folder operation will be applied recursively to all subfolders and the response
 /// will contain contents of all subfolders.
 /// @param includeMediaInfo If true, `mediaInfo` in `DBFILESFileMetadata` is set for photo and video.
@@ -951,7 +1030,7 @@ getThumbnailData:(NSString *)path
 /// return any entries. This endpoint is for app which only needs to know about new files and modifications and doesn't
 /// need to know about files that already exist in Dropbox.
 ///
-/// @param path The path to the folder you want to see the contents of.
+/// @param path A unique identifier for the file.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESListFolderGetLatestCursorResult` object on
 /// success or a `DBFILESListFolderError` object on failure.
@@ -964,7 +1043,7 @@ getThumbnailData:(NSString *)path
 /// return any entries. This endpoint is for app which only needs to know about new files and modifications and doesn't
 /// need to know about files that already exist in Dropbox.
 ///
-/// @param path The path to the folder you want to see the contents of.
+/// @param path A unique identifier for the file.
 /// @param recursive If true, the list folder operation will be applied recursively to all subfolders and the response
 /// will contain contents of all subfolders.
 /// @param includeMediaInfo If true, `mediaInfo` in `DBFILESFileMetadata` is set for photo and video.
@@ -1042,22 +1121,26 @@ listFolderLongpoll:(NSString *)cursor
                                                                                   limit:(nullable NSNumber *)limit;
 
 ///
-/// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
-/// will be moved.
+/// DEPRECATED: Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all
+/// its contents will be moved.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESMetadata` object on success or a
 /// `DBFILESRelocationError` object on failure.
 ///
-- (DBRpcTask<DBFILESMetadata *, DBFILESRelocationError *> *)move:(NSString *)fromPath toPath:(NSString *)toPath;
+- (DBRpcTask<DBFILESMetadata *, DBFILESRelocationError *> *)move:(NSString *)fromPath
+                                                          toPath:(NSString *)toPath
+    __deprecated_msg("move is deprecated. Use move_v2.");
 
 ///
-/// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
-/// will be moved.
+/// DEPRECATED: Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all
+/// its contents will be moved.
 ///
 /// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
 /// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
+/// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
+/// being moved. This does not apply to copies.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESMetadata` object on success or a
 /// `DBFILESRelocationError` object on failure.
@@ -1065,7 +1148,9 @@ listFolderLongpoll:(NSString *)cursor
 - (DBRpcTask<DBFILESMetadata *, DBFILESRelocationError *> *)move:(NSString *)fromPath
                                                           toPath:(NSString *)toPath
                                                allowSharedFolder:(nullable NSNumber *)allowSharedFolder
-                                                      autorename:(nullable NSNumber *)autorename;
+                                                      autorename:(nullable NSNumber *)autorename
+                                          allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer
+    __deprecated_msg("move is deprecated. Use move_v2.");
 
 ///
 /// Move multiple files or folders to different locations at once in the user's Dropbox. This route is 'all or nothing',
@@ -1090,13 +1175,16 @@ listFolderLongpoll:(NSString *)cursor
 /// field is always true for `moveBatch`.
 /// @param autorename If there's a conflict with any file, have the Dropbox server try to autorename that file to avoid
 /// the conflict.
+/// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
+/// being moved. This does not apply to copies.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationBatchLaunch` object on success or
 /// a `void` object on failure.
 ///
 - (DBRpcTask<DBFILESRelocationBatchLaunch *, DBNilObject *> *)moveBatch:(NSArray<DBFILESRelocationPath *> *)entries
                                                       allowSharedFolder:(nullable NSNumber *)allowSharedFolder
-                                                             autorename:(nullable NSNumber *)autorename;
+                                                             autorename:(nullable NSNumber *)autorename
+                                                 allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer;
 
 ///
 /// Returns the status of an asynchronous job for `moveBatch`. If success, it returns list of results for each entry.
@@ -1108,6 +1196,36 @@ listFolderLongpoll:(NSString *)cursor
 /// or a `DBASYNCPollError` object on failure.
 ///
 - (DBRpcTask<DBFILESRelocationBatchJobStatus *, DBASYNCPollError *> *)moveBatchCheck:(NSString *)asyncJobId;
+
+///
+/// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
+/// will be moved.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBFILESRelocationResult` object on success or a
+/// `DBFILESRelocationError` object on failure.
+///
+- (DBRpcTask<DBFILESRelocationResult *, DBFILESRelocationError *> *)moveV2:(NSString *)fromPath
+                                                                    toPath:(NSString *)toPath;
+
+///
+/// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
+/// will be moved.
+///
+/// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
+/// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
+/// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
+/// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
+/// being moved. This does not apply to copies.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESRelocationResult` object on success or a
+/// `DBFILESRelocationError` object on failure.
+///
+- (DBRpcTask<DBFILESRelocationResult *, DBFILESRelocationError *> *)moveV2:(NSString *)fromPath
+                                                                    toPath:(NSString *)toPath
+                                                         allowSharedFolder:(nullable NSNumber *)allowSharedFolder
+                                                                autorename:(nullable NSNumber *)autorename
+                                                    allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer;
 
 ///
 /// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). Note: This endpoint

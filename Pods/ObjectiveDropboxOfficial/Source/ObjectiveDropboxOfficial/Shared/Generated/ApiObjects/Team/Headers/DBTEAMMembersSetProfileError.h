@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
   /// The external ID is already in use by another team member.
   DBTEAMMembersSetProfileErrorExternalIdUsedByOtherUser,
 
-  /// Pending team member's email cannot be modified.
+  /// Modifying deleted users is not allowed.
   DBTEAMMembersSetProfileErrorSetProfileDisallowed,
 
   /// Parameter new_email cannot be empty.
@@ -135,8 +135,8 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// Initializes union class with tag state of "set_profile_disallowed".
 ///
-/// Description of the "set_profile_disallowed" tag state: Pending team member's
-/// email cannot be modified.
+/// Description of the "set_profile_disallowed" tag state: Modifying deleted
+/// users is not allowed.
 ///
 /// @return An initialized instance.
 ///

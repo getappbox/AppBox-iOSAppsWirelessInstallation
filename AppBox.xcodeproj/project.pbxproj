@@ -18,6 +18,8 @@
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
 		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
 		E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E143637A1DF59AFD00FB10CA /* LogViewController.m */; };
+		E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14A441E1F277590006A9102 /* XCArchiveResult.m */; };
+		E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E14A44211F2775A2006A9102 /* XCArchiveParser.m */; };
 		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
@@ -56,6 +58,7 @@
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F471E2F94F700BA81A1 /* WindowController.m */; };
+		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
 		E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
@@ -111,6 +114,10 @@
 		E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ProjectBuildScript.sh; sourceTree = "<group>"; };
 		E14363791DF59AFD00FB10CA /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		E143637A1DF59AFD00FB10CA /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		E14A441D1F277590006A9102 /* XCArchiveResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCArchiveResult.h; sourceTree = "<group>"; };
+		E14A441E1F277590006A9102 /* XCArchiveResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCArchiveResult.m; sourceTree = "<group>"; };
+		E14A44201F2775A2006A9102 /* XCArchiveParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCArchiveParser.h; sourceTree = "<group>"; };
+		E14A44211F2775A2006A9102 /* XCArchiveParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCArchiveParser.m; sourceTree = "<group>"; };
 		E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MenuHandler.h"; sourceTree = "<group>"; };
 		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MenuHandler.m"; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
@@ -183,6 +190,8 @@
 		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		E1AA0F461E2F94F700BA81A1 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
 		E1AA0F471E2F94F700BA81A1 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
+		E1AE88701F3F15780085B173 /* LocalServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalServerHandler.m; sourceTree = "<group>"; };
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
 		E1C0246F1E9B4E6C00C87CC9 /* SlackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackClient.h; sourceTree = "<group>"; };
 		E1C024701E9B4E6C00C87CC9 /* SlackClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlackClient.m; sourceTree = "<group>"; };
@@ -311,6 +320,38 @@
 				E143637A1DF59AFD00FB10CA /* LogViewController.m */,
 			);
 			path = LogViewController;
+			sourceTree = "<group>";
+		};
+		E14A44191F277567006A9102 /* XCArchiveParser */ = {
+			isa = PBXGroup;
+			children = (
+				E14A44201F2775A2006A9102 /* XCArchiveParser.h */,
+				E14A44211F2775A2006A9102 /* XCArchiveParser.m */,
+				E14A441D1F277590006A9102 /* XCArchiveResult.h */,
+				E14A441E1F277590006A9102 /* XCArchiveResult.m */,
+			);
+			path = XCArchiveParser;
+			sourceTree = "<group>";
+		};
+		E14A441A1F277567006A9102 /* XCIPAParser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XCIPAParser;
+			sourceTree = "<group>";
+		};
+		E14A441B1F277567006A9102 /* XCSchemeParser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XCSchemeParser;
+			sourceTree = "<group>";
+		};
+		E14A441C1F277567006A9102 /* XCTeamIDParser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XCTeamIDParser;
 			sourceTree = "<group>";
 		};
 		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
@@ -466,6 +507,10 @@
 		E16D72D11E88F99A0031FB7C /* OutputParsers */ = {
 			isa = PBXGroup;
 			children = (
+				E14A44191F277567006A9102 /* XCArchiveParser */,
+				E14A441A1F277567006A9102 /* XCIPAParser */,
+				E14A441B1F277567006A9102 /* XCSchemeParser */,
+				E14A441C1F277567006A9102 /* XCTeamIDParser */,
 				E16D72D21E88F99A0031FB7C /* ALOutputParser */,
 			);
 			path = OutputParsers;
@@ -683,6 +728,15 @@
 			path = WindowController;
 			sourceTree = "<group>";
 		};
+		E1AE886E1F3F156A0085B173 /* LocalServerHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E1AE886F1F3F15780085B173 /* LocalServerHandler.h */,
+				E1AE88701F3F15780085B173 /* LocalServerHandler.m */,
+			);
+			path = LocalServerHandler;
+			sourceTree = "<group>";
+		};
 		E1C0246E1E9B4E4C00C87CC9 /* SlackClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +764,7 @@
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
+				E1AE886E1F3F156A0085B173 /* LocalServerHandler */,
 				E1AF8FD71E266CC000A57633 /* DropboxKeys.h */,
 				E1DC25F91ECD826C001EF106 /* MailGunKeys.h */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
@@ -922,6 +977,7 @@
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */,
+				E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */,
@@ -950,10 +1006,12 @@
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
+				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
 				E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */,
+				E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 				E1D479D31E4B04A500BBC838 /* UploadRecord+CoreDataClass.m in Sources */,
 				E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */,

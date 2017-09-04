@@ -27,19 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Tells if the user signed in from an EMM managed device.
-@property (nonatomic, readonly) NSNumber *isEmmManaged;
-
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param isEmmManaged Tells if the user signed in from an EMM managed device.
-///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithIsEmmManaged:(NSNumber *)isEmmManaged;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

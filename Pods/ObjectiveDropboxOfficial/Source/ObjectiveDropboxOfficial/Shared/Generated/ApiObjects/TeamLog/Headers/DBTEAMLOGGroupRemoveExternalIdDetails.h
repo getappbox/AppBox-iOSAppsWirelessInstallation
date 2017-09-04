@@ -8,7 +8,6 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGGroupLogInfo;
 @class DBTEAMLOGGroupRemoveExternalIdDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Group details.
-@property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *groupInfo;
-
 /// Old external id.
 @property (nonatomic, readonly, copy) NSString *previousValue;
 
@@ -39,12 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param groupInfo Group details.
 /// @param previousValue Old external id.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo previousValue:(NSString *)previousValue;
+- (instancetype)initWithPreviousValue:(NSString *)previousValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

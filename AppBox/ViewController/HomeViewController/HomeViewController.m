@@ -140,7 +140,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
-    
+    project.isKeepSameLinkEnabled = (sender.state == NSOnState);
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
@@ -203,7 +203,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (buttonSendMail.state == NSOffState || (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue])){
         //set email
-        [self enableMailField:buttonSendMail.state == NSOnState];
+        if (project.emails == nil) {
+            [self enableMailField:buttonSendMail.state == NSOnState];
+        }
         
         //set processing flg
         [[AppDelegate appDelegate] setProcessing:true];
@@ -403,6 +405,34 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
+                
+                XCArchiveResult *result = [XCArchiveParser archiveResultMessageFromString:outputString];
+                switch (result.type) {
+                    case XCArchiveResultCleanSucceeded:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultArchiveFailed:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultArchiveSucceeded:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultExportFailed:{
+                        
+                    }break;
+                        
+                    case XCArchiveResultExportSucceeded:{
+                        
+                    }break;
+                        
+                    default:
+                        break;
+                }
+                
+                
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
                     [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
@@ -566,6 +596,15 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         return;
                     }
                     
+                    //set dropbox folder name & log if user changing folder name or not
+                    if (project.bundleDirectory.absoluteString.length == 0){
+                        [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0}];
+                    }else{
+                        [project upadteDbDirectoryByBundleDirectory];
+                        [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
+                    }
+
+                    
                     if ([AppDelegate appDelegate].isInternetConnected){
                         [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
                     }else{
@@ -604,7 +643,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:ipaURL.resourceSpecifier to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding
+                    to:project.dbIPAFullPath.absoluteString
+                  mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
@@ -1050,6 +1092,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
     //update view state based on selected tap
     [self updateViewState];
+}
+
+-(BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+    return ![AppDelegate appDelegate].processing;
 }
 
 #pragma mark - ProjectAdvancedViewDelegate - 

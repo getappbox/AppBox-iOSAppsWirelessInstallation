@@ -32,22 +32,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag) {
   DBTEAMLOGDeviceApprovalsPolicyUnlimited,
 
   /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyZero,
-
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyOne,
-
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyTwo,
-
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyThree,
-
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyFour,
-
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyFive,
+  DBTEAMLOGDeviceApprovalsPolicyLimited,
 
   /// (no description).
   DBTEAMLOGDeviceApprovalsPolicyOther,
@@ -67,46 +52,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag) {
 - (instancetype)initWithUnlimited;
 
 ///
-/// Initializes union class with tag state of "zero".
+/// Initializes union class with tag state of "limited".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithZero;
-
-///
-/// Initializes union class with tag state of "one".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithOne;
-
-///
-/// Initializes union class with tag state of "two".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithTwo;
-
-///
-/// Initializes union class with tag state of "three".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithThree;
-
-///
-/// Initializes union class with tag state of "four".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFour;
-
-///
-/// Initializes union class with tag state of "five".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFive;
+- (instancetype)initWithLimited;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -127,46 +77,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag) {
 - (BOOL)isUnlimited;
 
 ///
-/// Retrieves whether the union's current tag state has value "zero".
+/// Retrieves whether the union's current tag state has value "limited".
 ///
-/// @return Whether the union's current tag state has value "zero".
+/// @return Whether the union's current tag state has value "limited".
 ///
-- (BOOL)isZero;
-
-///
-/// Retrieves whether the union's current tag state has value "one".
-///
-/// @return Whether the union's current tag state has value "one".
-///
-- (BOOL)isOne;
-
-///
-/// Retrieves whether the union's current tag state has value "two".
-///
-/// @return Whether the union's current tag state has value "two".
-///
-- (BOOL)isTwo;
-
-///
-/// Retrieves whether the union's current tag state has value "three".
-///
-/// @return Whether the union's current tag state has value "three".
-///
-- (BOOL)isThree;
-
-///
-/// Retrieves whether the union's current tag state has value "four".
-///
-/// @return Whether the union's current tag state has value "four".
-///
-- (BOOL)isFour;
-
-///
-/// Retrieves whether the union's current tag state has value "five".
-///
-/// @return Whether the union's current tag state has value "five".
-///
-- (BOOL)isFive;
+- (BOOL)isLimited;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

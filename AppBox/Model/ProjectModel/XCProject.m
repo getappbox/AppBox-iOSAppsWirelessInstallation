@@ -144,17 +144,28 @@
 
     //Bundle directory path
     NSString *bundlePath = [NSString stringWithFormat:@"/%@",self.identifer];
-    [self setBundleDirectory:[NSURL URLWithString:bundlePath]];
+    if (self.bundleDirectory.absoluteString.length == 0){
+        [self setBundleDirectory:[NSURL URLWithString:bundlePath]];
+    }
     [self upadteDbDirectoryByBundleDirectory];
 }
 
 - (void)upadteDbDirectoryByBundleDirectory{
     //Build URL for DropBox
-    NSString *toPath = [self.bundleDirectory.absoluteString stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",self.name,self.version,self.build,self.uuid]];
+    NSString *validName = [self validURLString:self.name];
+    NSString *validVersion = [self validURLString:self.version];
+    NSString *validBuild = [self validURLString:self.build];
+    NSString *validUUID = [self validURLString:self.uuid];
+    NSString *validBundleDirectory = [self validURLString:self.bundleDirectory.absoluteString];
+    
+    NSString *toPath = [validBundleDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",validName, validVersion, validBuild, validUUID]];
     [self setDbDirectory:[NSURL URLWithString:toPath]];
-    [self setDbIPAFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@.ipa",toPath,self.name]]];
+    
+    NSString * dbIPAFullPathString = [NSString stringWithFormat:@"%@/%@.ipa", toPath, validName];
+    [self setDbIPAFullPath:[NSURL URLWithString:dbIPAFullPathString]];
+    
     [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
-    [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",self.bundleDirectory,abAppInfoFileName]]];
+    [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,abAppInfoFileName]]];
 }
 
 - (void)setBuildListInfo:(NSDictionary *)buildListInfo{
@@ -166,6 +177,11 @@
         [self setTargets: [projectInfo valueForKey:@"targets"]];
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nBuild List Info\n======\n\n %@",buildListInfo]];
     }
+}
+
+-(NSString *)validURLString:(NSString *)urlString{
+    NSString *temp = [[urlString componentsSeparatedByCharactersInSet:[NSCharacterSet URLQueryAllowedCharacterSet].invertedSet] componentsJoinedByString:@""];
+    return temp.length == 0 ? @"AppBox" : temp;
 }
 
 @end

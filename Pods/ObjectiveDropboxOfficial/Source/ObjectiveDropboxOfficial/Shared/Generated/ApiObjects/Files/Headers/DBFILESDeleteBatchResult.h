@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBFILESFileOpsResult.h"
 #import "DBSerializableProtocol.h"
 
 @class DBFILESDeleteBatchResult;
@@ -22,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESDeleteBatchResult : NSObject <DBSerializable, NSCopying>
+@interface DBFILESDeleteBatchResult : DBFILESFileOpsResult <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
@@ -39,8 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEntries:(NSArray<DBFILESDeleteBatchResultEntry *> *)entries;
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

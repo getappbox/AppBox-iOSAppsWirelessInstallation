@@ -127,6 +127,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the membersUnsuspend route object.
 + (DBRoute *)DBTEAMMembersUnsuspend;
 
+/// Accessor method for the namespacesList route object.
++ (DBRoute *)DBTEAMNamespacesList;
+
+/// Accessor method for the namespacesListContinue route object.
++ (DBRoute *)DBTEAMNamespacesListContinue;
+
 /// Accessor method for the propertiesTemplateAdd route object.
 + (DBRoute *)DBTEAMPropertiesTemplateAdd;
 

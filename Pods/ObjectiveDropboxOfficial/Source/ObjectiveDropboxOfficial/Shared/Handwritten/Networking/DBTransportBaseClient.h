@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// actions on behalf of a team member.
 @property (nonatomic, readonly, copy, nullable) NSString *asMemberId;
 
+/// Additional HTTP headers to be injected into each client request.
+@property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, NSString *> *additionalHeaders;
+
 ///
 /// Full constructor.
 ///

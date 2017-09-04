@@ -8,7 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGEnableDisableChangePolicy;
+@class DBTEAMLOGContentPermanentDeletePolicy;
 @class DBTEAMLOGPermanentDeleteChangePolicyDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New permanent delete content policy.
-@property (nonatomic, readonly) DBTEAMLOGEnableDisableChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGContentPermanentDeletePolicy *dNewValue;
 
 /// Previous permanent delete content policy. Might be missing due to historical
 /// data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGEnableDisableChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGContentPermanentDeletePolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGEnableDisableChangePolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGContentPermanentDeletePolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGContentPermanentDeletePolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGContentPermanentDeletePolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

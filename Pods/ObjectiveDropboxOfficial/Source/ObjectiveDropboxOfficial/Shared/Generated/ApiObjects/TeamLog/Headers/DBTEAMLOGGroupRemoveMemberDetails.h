@@ -8,7 +8,6 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGGroupLogInfo;
 @class DBTEAMLOGGroupRemoveMemberDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,19 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Group details.
-@property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *groupInfo;
-
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param groupInfo Group details.
-///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithGroupInfo:(DBTEAMLOGGroupLogInfo *)groupInfo;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
         forceForegroundSession:(BOOL)forceForegroundSession;
 
 ///
-/// Full constructor.
+/// Convenience constructor.
 ///
 /// @param appKey The consumer app key associated with the app that is integrating with the Dropbox API. Here, app key
 /// is used for querying endpoints that have "app auth" authentication type.
@@ -153,6 +153,35 @@ NS_ASSUME_NONNULL_BEGIN
                      appSecret:(nullable NSString *)appSecret
                      userAgent:(nullable NSString *)userAgent
                     asMemberId:(nullable NSString *)asMemberId
+                 delegateQueue:(nullable NSOperationQueue *)delegateQueue
+        forceForegroundSession:(BOOL)forceForegroundSession
+     sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier;
+
+///
+/// Full constructor.
+///
+/// @param appKey The consumer app key associated with the app that is integrating with the Dropbox API. Here, app key
+/// is used for querying endpoints that have "app auth" authentication type.
+/// @param appSecret The consumer app secret associated with the app that is integrating with the Dropbox API. Here, app
+/// key is used for querying endpoints that have "app auth" authentication type.
+/// @param userAgent The user agent associated with all networking requests. Used for server logging.
+/// @param delegateQueue A serial delegate queue used for executing blocks of code that touch state shared across
+/// threads (mainly the request handlers storage).
+/// @param forceForegroundSession If set to true, all network requests are made on foreground sessions (by default, most
+/// upload/download operations are performed with a background session).
+/// @param asMemberId An additional authentication header field used when a team app with the appropriate permissions
+/// "performs" user API actions on behalf of a team member.
+/// @param sharedContainerIdentifier The identifier for the shared container into which files in background URL sessions
+/// should be downloaded. This needs to be set when downloading via an app extension.
+/// @param additionalHeaders Additional HTTP headers to be injected into each client request.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     appSecret:(nullable NSString *)appSecret
+                     userAgent:(nullable NSString *)userAgent
+                    asMemberId:(nullable NSString *)asMemberId
+             additionalHeaders:(nullable NSDictionary<NSString *, NSString *> *)additionalHeaders
                  delegateQueue:(nullable NSOperationQueue *)delegateQueue
         forceForegroundSession:(BOOL)forceForegroundSession
      sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier;

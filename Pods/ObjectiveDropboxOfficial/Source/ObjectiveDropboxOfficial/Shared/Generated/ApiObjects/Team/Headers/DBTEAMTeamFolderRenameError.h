@@ -11,6 +11,7 @@
 @class DBTEAMTeamFolderAccessError;
 @class DBTEAMTeamFolderInvalidStatusError;
 @class DBTEAMTeamFolderRenameError;
+@class DBTEAMTeamFolderTeamSharedDropboxError;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,6 +38,9 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
   DBTEAMTeamFolderRenameErrorStatusError,
 
   /// (no description).
+  DBTEAMTeamFolderRenameErrorTeamSharedDropboxError,
+
+  /// (no description).
   DBTEAMTeamFolderRenameErrorOther,
 
   /// The provided folder name cannot be used.
@@ -61,6 +65,10 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMTeamFolderInvalidStatusError *statusError;
 
+/// (no description). @note Ensure the `isTeamSharedDropboxError` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMTeamFolderTeamSharedDropboxError *teamSharedDropboxError;
+
 #pragma mark - Constructors
 
 ///
@@ -80,6 +88,15 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithStatusError:(DBTEAMTeamFolderInvalidStatusError *)statusError;
+
+///
+/// Initializes union class with tag state of "team_shared_dropbox_error".
+///
+/// @param teamSharedDropboxError (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamSharedDropboxError:(DBTEAMTeamFolderTeamSharedDropboxError *)teamSharedDropboxError;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -141,6 +158,19 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
 /// @return Whether the union's current tag state has value "status_error".
 ///
 - (BOOL)isStatusError;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_shared_dropbox_error".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamSharedDropboxError` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_shared_dropbox_error".
+///
+- (BOOL)isTeamSharedDropboxError;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

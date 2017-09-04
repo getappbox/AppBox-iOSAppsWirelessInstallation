@@ -33,6 +33,9 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
   /// The number of upload API calls allowed per month.
   DBTEAMFeatureUploadApiRateLimit,
 
+  /// Does this team have a have a company shared dropbox.
+  DBTEAMFeatureHasTeamSharedDropbox,
+
   /// (no description).
   DBTEAMFeatureOther,
 
@@ -54,6 +57,16 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
 - (instancetype)initWithUploadApiRateLimit;
 
 ///
+/// Initializes union class with tag state of "has_team_shared_dropbox".
+///
+/// Description of the "has_team_shared_dropbox" tag state: Does this team have
+/// a have a company shared dropbox.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithHasTeamSharedDropbox;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -72,6 +85,15 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
 /// "upload_api_rate_limit".
 ///
 - (BOOL)isUploadApiRateLimit;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "has_team_shared_dropbox".
+///
+/// @return Whether the union's current tag state has value
+/// "has_team_shared_dropbox".
+///
+- (BOOL)isHasTeamSharedDropbox;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

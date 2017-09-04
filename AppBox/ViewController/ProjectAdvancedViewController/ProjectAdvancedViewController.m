@@ -15,6 +15,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Common logScreen:@"Project Advanced Settings"];
+    if (self.project.bundleDirectory) {
+        [self.dbFolderNameTextField setStringValue:self.project.bundleDirectory.lastPathComponent];
+    }
+    [self.dbFolderNameTextField setEnabled:self.project.isKeepSameLinkEnabled];
+    [self.localNetworkCheckBox setTitle: [LocalServerHandler getLocalIPAddress]];
 }
 
 //MARK: - Action Button Tapped
@@ -28,8 +33,16 @@
         [self.delegate projectAdvancedSaveButtonTapped:sender];
     }
     
+    if(![self.dbFolderNameTextField.stringValue isEqualToString:self.project.identifer] && self.dbFolderNameTextField.stringValue.length>0){
+        NSString *bundlePath = [NSString stringWithFormat:@"/%@",self.dbFolderNameTextField.stringValue];
+        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
+        [self.project setBundleDirectory:[NSURL URLWithString:bundlePath]];
+    }
+
     [self dismissController:self];
 }
+
+
 
 
 

@@ -53,6 +53,7 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
                                                  stringByAppendingString:defaultUserAgent]
                                            : defaultUserAgent;
     _asMemberId = transportConfig.asMemberId;
+    _additionalHeaders = transportConfig.additionalHeaders;
   }
   return self;
 }
@@ -120,13 +121,17 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
     [headers setObject:bytesRangeSpecifier forKey:@"Range"];
   }
 
+  if (_additionalHeaders != nil) {
+    [headers addEntriesFromDictionary:_additionalHeaders];
+  }
+
   return headers;
 }
 
-+ (NSURLRequest *)requestWithHeaders:(NSDictionary *)httpHeaders
-                                 url:(NSURL *)url
-                             content:(NSData *)content
-                              stream:(NSInputStream *)stream {
++ (NSMutableURLRequest *)requestWithHeaders:(NSDictionary *)httpHeaders
+                                        url:(NSURL *)url
+                                    content:(NSData *)content
+                                     stream:(NSInputStream *)stream {
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
   for (NSString *key in httpHeaders) {
     [request addValue:httpHeaders[key] forHTTPHeaderField:key];
@@ -151,9 +156,8 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
     return nil;
   }
 
-  if (route.arraySerialBlock) {
-    NSArray *serializedArray = route.arraySerialBlock(arg);
-    return [[self class] jsonDataWithJsonObj:serializedArray];
+  if (route.dataStructSerialBlock) {
+    return [[self class] jsonDataWithJsonObj:route.dataStructSerialBlock(arg)];
   }
 
   NSDictionary *serializedDict = [[arg class] serialize:arg];
@@ -329,8 +333,8 @@ NSDictionary<NSString *, NSString *> *kV2SDKBaseHosts;
   }
 
   if (route.resultType) {
-    if (route.arrayDeserialBlock) {
-      return route.arrayDeserialBlock(jsonData);
+    if (route.dataStructDeserialBlock) {
+      return route.dataStructDeserialBlock(jsonData);
     }
     return [(Class)route.resultType deserialize:jsonData];
   }

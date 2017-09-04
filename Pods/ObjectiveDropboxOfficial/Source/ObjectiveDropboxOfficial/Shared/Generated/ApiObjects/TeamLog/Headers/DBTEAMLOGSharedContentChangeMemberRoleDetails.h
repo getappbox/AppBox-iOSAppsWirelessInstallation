@@ -33,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Original shared folder name.
 @property (nonatomic, readonly, copy, nullable) NSString *originalFolderName;
 
-/// Sharing permission. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
-
-/// Shared folder type. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
+/// New sharing permission. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *dNewSharingPermission;
 
 /// Previous sharing permission. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *previousSharingPermission;
+
+/// Shared folder type. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
 
 #pragma mark - Constructors
 
@@ -49,20 +49,20 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param targetIndex Target asset index.
 /// @param originalFolderName Original shared folder name.
-/// @param sharingPermission Sharing permission. Might be missing due to
-/// historical data gap.
-/// @param sharedFolderType Shared folder type. Might be missing due to
+/// @param dNewSharingPermission New sharing permission. Might be missing due to
 /// historical data gap.
 /// @param previousSharingPermission Previous sharing permission. Might be
 /// missing due to historical data gap.
+/// @param sharedFolderType Shared folder type. Might be missing due to
+/// historical data gap.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
                  originalFolderName:(nullable NSString *)originalFolderName
-                  sharingPermission:(nullable NSString *)sharingPermission
-                   sharedFolderType:(nullable NSString *)sharedFolderType
-          previousSharingPermission:(nullable NSString *)previousSharingPermission;
+              dNewSharingPermission:(nullable NSString *)dNewSharingPermission
+          previousSharingPermission:(nullable NSString *)previousSharingPermission
+                   sharedFolderType:(nullable NSString *)sharedFolderType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

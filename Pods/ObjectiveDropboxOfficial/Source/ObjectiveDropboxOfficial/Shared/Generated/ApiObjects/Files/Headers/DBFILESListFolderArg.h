@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The path to the folder you want to see the contents of.
+/// A unique identifier for the file.
 @property (nonatomic, readonly, copy) NSString *path;
 
 /// If true, the list folder operation will be applied recursively to all
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param path The path to the folder you want to see the contents of.
+/// @param path A unique identifier for the file.
 /// @param recursive If true, the list folder operation will be applied
 /// recursively to all subfolders and the response will contain contents of all
 /// subfolders.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param path The path to the folder you want to see the contents of.
+/// @param path A unique identifier for the file.
 ///
 /// @return An initialized instance.
 ///

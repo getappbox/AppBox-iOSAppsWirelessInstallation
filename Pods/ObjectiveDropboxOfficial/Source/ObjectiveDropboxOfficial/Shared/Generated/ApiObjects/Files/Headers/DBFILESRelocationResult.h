@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBFILESFileOpsResult.h"
 #import "DBSerializableProtocol.h"
 
 @class DBFILESMetadata;
@@ -22,11 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationResult : NSObject <DBSerializable, NSCopying>
+@interface DBFILESRelocationResult : DBFILESFileOpsResult <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
-/// (no description).
+/// Metadata of the relocated object.
 @property (nonatomic, readonly) DBFILESMetadata *metadata;
 
 #pragma mark - Constructors
@@ -34,13 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param metadata (no description).
+/// @param metadata Metadata of the relocated object.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMetadata:(DBFILESMetadata *)metadata;
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

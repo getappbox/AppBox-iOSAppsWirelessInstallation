@@ -6,10 +6,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBFILESFileOpsResult.h"
 #import "DBSerializableProtocol.h"
 
 @class DBFILESRelocationBatchResult;
-@class DBFILESRelocationResult;
+@class DBFILESRelocationBatchResultData;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,12 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESRelocationBatchResult : NSObject <DBSerializable, NSCopying>
+@interface DBFILESRelocationBatchResult : DBFILESFileOpsResult <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// (no description).
-@property (nonatomic, readonly) NSArray<DBFILESRelocationResult *> *entries;
+@property (nonatomic, readonly) NSArray<DBFILESRelocationBatchResultData *> *entries;
 
 #pragma mark - Constructors
 
@@ -38,9 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithEntries:(NSArray<DBFILESRelocationResult *> *)entries;
-
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithEntries:(NSArray<DBFILESRelocationBatchResultData *> *)entries;
 
 @end
 

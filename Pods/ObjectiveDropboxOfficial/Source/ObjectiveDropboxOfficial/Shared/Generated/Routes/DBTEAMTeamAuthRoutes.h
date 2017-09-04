@@ -89,6 +89,7 @@
 @class DBTEAMMembersSuspendError;
 @class DBTEAMMembersUnsuspendError;
 @class DBTEAMMobileClientSession;
+@class DBTEAMNamespaceMetadata;
 @class DBTEAMPOLICIESTeamMemberPolicies;
 @class DBTEAMRevokeDesktopClientArg;
 @class DBTEAMRevokeDeviceSessionArg;
@@ -117,9 +118,12 @@
 @class DBTEAMTeamFolderPermanentlyDeleteError;
 @class DBTEAMTeamFolderRenameError;
 @class DBTEAMTeamFolderStatus;
+@class DBTEAMTeamFolderTeamSharedDropboxError;
 @class DBTEAMTeamGetInfoResult;
 @class DBTEAMTeamMemberInfo;
 @class DBTEAMTeamMemberProfile;
+@class DBTEAMTeamNamespacesListContinueError;
+@class DBTEAMTeamNamespacesListResult;
 @class DBTEAMTokenGetAuthenticatedAdminError;
 @class DBTEAMTokenGetAuthenticatedAdminResult;
 @class DBTEAMUpdatePropertyTemplateResult;
@@ -863,6 +867,43 @@ membersSetProfile:(DBTEAMUserSelectorArg *)user
 /// `DBTEAMMembersUnsuspendError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBTEAMMembersUnsuspendError *> *)membersUnsuspend:(DBTEAMUserSelectorArg *)user;
+
+///
+/// Returns a list of all team-accessible namespaces. This list includes team folders, shared folders containing team
+/// members, team members' home namespaces, and team members' app folders. Home namespaces and app folders are always
+/// owned by this team or members of the team, but shared folders may be owned by other users or other teams. Duplicates
+/// may occur in the list.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamNamespacesListResult` object on success
+/// or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBNilObject *> *)namespacesList;
+
+///
+/// Returns a list of all team-accessible namespaces. This list includes team folders, shared folders containing team
+/// members, team members' home namespaces, and team members' app folders. Home namespaces and app folders are always
+/// owned by this team or members of the team, but shared folders may be owned by other users or other teams. Duplicates
+/// may occur in the list.
+///
+/// @param limit The approximate maximum number of results to return per request. This limit may be exceeded.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamNamespacesListResult` object on success
+/// or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBNilObject *> *)namespacesList:(nullable NSNumber *)limit;
+
+///
+/// Once a cursor has been retrieved from `namespacesList`, use this to paginate through all team-accessible namespaces.
+/// Duplicates may occur in the list.
+///
+/// @param cursor Indicates from what point to get the next set of team-accessible namespaces.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamNamespacesListResult` object on success
+/// or a `DBTEAMTeamNamespacesListContinueError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBTEAMTeamNamespacesListContinueError *> *)namespacesListContinue:
+    (NSString *)cursor;
 
 ///
 /// Add a property template. See route files/properties/add to add properties to a file.

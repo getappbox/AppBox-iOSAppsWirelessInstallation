@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGExternalSharingAccessibilityPolicy;
 @class DBTEAMLOGPaperChangeMemberPolicyDetails;
+@class DBTEAMLOGPaperMemberPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New paper external accessibility policy.
-@property (nonatomic, readonly) DBTEAMLOGExternalSharingAccessibilityPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGPaperMemberPolicy *dNewValue;
 
 /// Previous paper external accessibility policy. Might be missing due to
 /// historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGExternalSharingAccessibilityPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGPaperMemberPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -48,8 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGExternalSharingAccessibilityPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGExternalSharingAccessibilityPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGPaperMemberPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGPaperMemberPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGExternalSharingAccessibilityPolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGPaperMemberPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

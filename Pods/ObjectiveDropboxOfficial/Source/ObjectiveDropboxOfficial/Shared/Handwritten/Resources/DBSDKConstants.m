@@ -8,7 +8,7 @@
 
 #import "DBSDKConstants.h"
 
-NSString *const kV2SDKVersion = @"3.1.0";
+NSString *const kV2SDKVersion = @"3.2.0";
 NSString *const kV2SDKDefaultUserAgentPrefix = @"OfficialDropboxObjCSDKv2";
 NSString *const kForegroundSessionId = @"com.dropbox.dropbox_sdk_obj_c_foreground";
 NSString *const kBackgroundSessionId = @"com.dropbox.dropbox_sdk_obj_c_background";

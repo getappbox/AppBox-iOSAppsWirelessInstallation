@@ -78,6 +78,9 @@
         [sender setEnabled:NO];
     }
 }
+- (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender {
+    [self updateDropboxUsage];
+}
 
 #pragma mark - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {

@@ -29,34 +29,34 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New team folder status.
-@property (nonatomic, readonly) DBTEAMLOGTeamFolderStatus *dNewStatus;
+@property (nonatomic, readonly) DBTEAMLOGTeamFolderStatus *dNewValue;
 
 /// Previous team folder status. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGTeamFolderStatus *previousStatus;
+@property (nonatomic, readonly, nullable) DBTEAMLOGTeamFolderStatus *previousValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param dNewStatus New team folder status.
-/// @param previousStatus Previous team folder status. Might be missing due to
+/// @param dNewValue New team folder status.
+/// @param previousValue Previous team folder status. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewStatus:(DBTEAMLOGTeamFolderStatus *)dNewStatus
-                    previousStatus:(nullable DBTEAMLOGTeamFolderStatus *)previousStatus;
+- (instancetype)initWithDNewValue:(DBTEAMLOGTeamFolderStatus *)dNewValue
+                    previousValue:(nullable DBTEAMLOGTeamFolderStatus *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param dNewStatus New team folder status.
+/// @param dNewValue New team folder status.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewStatus:(DBTEAMLOGTeamFolderStatus *)dNewStatus;
+- (instancetype)initWithDNewValue:(DBTEAMLOGTeamFolderStatus *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

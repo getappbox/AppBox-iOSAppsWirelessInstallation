@@ -203,6 +203,179 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMPOLICIESOfficeAddInPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMPOLICIESOfficeAddInPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESOfficeAddInPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESOfficeAddInPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESOfficeAddInPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMPOLICIESOfficeAddInPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMPOLICIESOfficeAddInPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMPOLICIESOfficeAddInPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMPOLICIESOfficeAddInPolicyDisabled:
+    return @"DBTEAMPOLICIESOfficeAddInPolicyDisabled";
+  case DBTEAMPOLICIESOfficeAddInPolicyEnabled:
+    return @"DBTEAMPOLICIESOfficeAddInPolicyEnabled";
+  case DBTEAMPOLICIESOfficeAddInPolicyOther:
+    return @"DBTEAMPOLICIESOfficeAddInPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (NSDictionary *)serialize:(id)instance {
+  return [DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMPOLICIESOfficeAddInPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMPOLICIESOfficeAddInPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMPOLICIESOfficeAddInPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMPOLICIESOfficeAddInPolicyOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToOfficeAddInPolicy:other];
+}
+
+- (BOOL)isEqualToOfficeAddInPolicy:(DBTEAMPOLICIESOfficeAddInPolicy *)anOfficeAddInPolicy {
+  if (self == anOfficeAddInPolicy) {
+    return YES;
+  }
+  if (self.tag != anOfficeAddInPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMPOLICIESOfficeAddInPolicyDisabled:
+    return [[self tagName] isEqual:[anOfficeAddInPolicy tagName]];
+  case DBTEAMPOLICIESOfficeAddInPolicyEnabled:
+    return [[self tagName] isEqual:[anOfficeAddInPolicy tagName]];
+  case DBTEAMPOLICIESOfficeAddInPolicyOther:
+    return [[self tagName] isEqual:[anOfficeAddInPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMPOLICIESOfficeAddInPolicySerializer
+
++ (NSDictionary *)serialize:(DBTEAMPOLICIESOfficeAddInPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return jsonDict;
+}
+
++ (DBTEAMPOLICIESOfficeAddInPolicy *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMPOLICIESOfficeAddInPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMPOLICIESOfficeAddInPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMPOLICIESOfficeAddInPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMPOLICIESOfficeAddInPolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMPOLICIESSharedFolderJoinPolicy.h"
 
 #pragma mark - API Object
@@ -745,6 +918,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMPOLICIESEmmState.h"
+#import "DBTEAMPOLICIESOfficeAddInPolicy.h"
 #import "DBTEAMPOLICIESTeamMemberPolicies.h"
 #import "DBTEAMPOLICIESTeamSharingPolicies.h"
 
@@ -755,12 +929,14 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithSharing:(DBTEAMPOLICIESTeamSharingPolicies *)sharing
-                       emmState:(DBTEAMPOLICIESEmmState *)emmState {
+                       emmState:(DBTEAMPOLICIESEmmState *)emmState
+                    officeAddin:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddin {
 
   self = [super init];
   if (self) {
     _sharing = sharing;
     _emmState = emmState;
+    _officeAddin = officeAddin;
   }
   return self;
 }
@@ -797,6 +973,7 @@
 
   result = prime * result + [self.sharing hash];
   result = prime * result + [self.emmState hash];
+  result = prime * result + [self.officeAddin hash];
 
   return prime * result;
 }
@@ -823,6 +1000,9 @@
   if (![self.emmState isEqual:aTeamMemberPolicies.emmState]) {
     return NO;
   }
+  if (![self.officeAddin isEqual:aTeamMemberPolicies.officeAddin]) {
+    return NO;
+  }
   return YES;
 }
 
@@ -837,6 +1017,7 @@
 
   jsonDict[@"sharing"] = [DBTEAMPOLICIESTeamSharingPoliciesSerializer serialize:valueObj.sharing];
   jsonDict[@"emm_state"] = [DBTEAMPOLICIESEmmStateSerializer serialize:valueObj.emmState];
+  jsonDict[@"office_addin"] = [DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:valueObj.officeAddin];
 
   return jsonDict;
 }
@@ -845,8 +1026,10 @@
   DBTEAMPOLICIESTeamSharingPolicies *sharing =
       [DBTEAMPOLICIESTeamSharingPoliciesSerializer deserialize:valueDict[@"sharing"]];
   DBTEAMPOLICIESEmmState *emmState = [DBTEAMPOLICIESEmmStateSerializer deserialize:valueDict[@"emm_state"]];
+  DBTEAMPOLICIESOfficeAddInPolicy *officeAddin =
+      [DBTEAMPOLICIESOfficeAddInPolicySerializer deserialize:valueDict[@"office_addin"]];
 
-  return [[DBTEAMPOLICIESTeamMemberPolicies alloc] initWithSharing:sharing emmState:emmState];
+  return [[DBTEAMPOLICIESTeamMemberPolicies alloc] initWithSharing:sharing emmState:emmState officeAddin:officeAddin];
 }
 
 @end

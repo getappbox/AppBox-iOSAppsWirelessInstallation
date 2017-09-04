@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBTEAMLOGFailureDetailsLogInfo;
 @class DBTEAMLOGPasswordLoginFailDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,29 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Login failure reason. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *failureReason;
+/// Login failure details.
+@property (nonatomic, readonly) DBTEAMLOGFailureDetailsLogInfo *errorDetails;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param failureReason Login failure reason. Might be missing due to
-/// historical data gap.
+/// @param errorDetails Login failure details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithFailureReason:(nullable NSString *)failureReason;
-
-///
-/// Convenience constructor (exposes only non-nullable instance variables with
-/// no default value).
-///
-///
-/// @return An initialized instance.
-///
-- (instancetype)initDefault;
+- (instancetype)initWithErrorDetails:(DBTEAMLOGFailureDetailsLogInfo *)errorDetails;
 
 - (instancetype)init NS_UNAVAILABLE;
 

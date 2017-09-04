@@ -27,23 +27,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Previous SSO Url.
-@property (nonatomic, readonly, copy) NSString *previousSsoUrl;
+/// Previous single sign-on login URL.
+@property (nonatomic, readonly, copy) NSString *previousValue;
 
-/// New SSO Url.
-@property (nonatomic, readonly, copy) NSString *dNewSsoUrl;
+/// New single sign-on login URL.
+@property (nonatomic, readonly, copy) NSString *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousSsoUrl Previous SSO Url.
-/// @param dNewSsoUrl New SSO Url.
+/// @param previousValue Previous single sign-on login URL.
+/// @param dNewValue New single sign-on login URL.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousSsoUrl:(NSString *)previousSsoUrl dNewSsoUrl:(NSString *)dNewSsoUrl;
+- (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(NSString *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

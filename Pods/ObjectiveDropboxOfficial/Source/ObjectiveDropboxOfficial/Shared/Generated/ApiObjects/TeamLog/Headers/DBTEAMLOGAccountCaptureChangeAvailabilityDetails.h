@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBTEAMLOGAccountCaptureAvailability;
 @class DBTEAMLOGAccountCaptureChangeAvailabilityDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,14 +29,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
+/// New account capture availabilty value.
+@property (nonatomic, readonly) DBTEAMLOGAccountCaptureAvailability *dNewValue;
+
+/// Previous account capture availabilty value. Might be missing due to
+/// historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGAccountCaptureAvailability *previousValue;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
+/// @param dNewValue New account capture availabilty value.
+/// @param previousValue Previous account capture availabilty value. Might be
+/// missing due to historical data gap.
+///
 /// @return An initialized instance.
 ///
-- (instancetype)initDefault;
+- (instancetype)initWithDNewValue:(DBTEAMLOGAccountCaptureAvailability *)dNewValue
+                    previousValue:(nullable DBTEAMLOGAccountCaptureAvailability *)previousValue;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+/// @param dNewValue New account capture availabilty value.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDNewValue:(DBTEAMLOGAccountCaptureAvailability *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

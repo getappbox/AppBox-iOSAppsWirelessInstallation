@@ -34,11 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
 
+/// New sharing permission. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *dNewSharingPermission;
+
 /// Previous sharing permission. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *previousSharingPermission;
-
-/// Sharing permission. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
 
 #pragma mark - Constructors
 
@@ -47,17 +47,17 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param targetIndex Target asset index.
 /// @param originalFolderName Original shared folder name.
+/// @param dNewSharingPermission New sharing permission. Might be missing due to
+/// historical data gap.
 /// @param previousSharingPermission Previous sharing permission. Might be
 /// missing due to historical data gap.
-/// @param sharingPermission Sharing permission. Might be missing due to
-/// historical data gap.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
                  originalFolderName:(NSString *)originalFolderName
-          previousSharingPermission:(nullable NSString *)previousSharingPermission
-                  sharingPermission:(nullable NSString *)sharingPermission;
+              dNewSharingPermission:(nullable NSString *)dNewSharingPermission
+          previousSharingPermission:(nullable NSString *)previousSharingPermission;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

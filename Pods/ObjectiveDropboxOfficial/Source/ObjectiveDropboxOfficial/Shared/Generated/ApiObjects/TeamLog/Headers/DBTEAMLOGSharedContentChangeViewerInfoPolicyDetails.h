@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGEnableDisableChangePolicy;
 @class DBTEAMLOGSharedContentChangeViewerInfoPolicyDetails;
+@class DBTEAMLOGSharedContentViewerInfoPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,10 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
 
 /// New viewer info policy.
-@property (nonatomic, readonly) DBTEAMLOGEnableDisableChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGSharedContentViewerInfoPolicy *dNewValue;
 
 /// Previous view info policy. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGEnableDisableChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGSharedContentViewerInfoPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -59,10 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue
+                          dNewValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)dNewValue
                  originalFolderName:(nullable NSString *)originalFolderName
                    sharedFolderType:(nullable NSString *)sharedFolderType
-                      previousValue:(nullable DBTEAMLOGEnableDisableChangePolicy *)previousValue;
+                      previousValue:(nullable DBTEAMLOGSharedContentViewerInfoPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -73,7 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex dNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue;
+- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
+                          dNewValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

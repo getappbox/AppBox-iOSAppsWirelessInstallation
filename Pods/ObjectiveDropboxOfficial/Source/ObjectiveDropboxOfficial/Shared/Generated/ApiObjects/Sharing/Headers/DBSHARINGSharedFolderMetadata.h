@@ -73,6 +73,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param sharedFolderId The ID of the shared folder.
 /// @param timeInvited Timestamp indicating when the current user was invited to
 /// this shared folder.
+/// @param ownerDisplayNames The display names of the users that own the folder.
+/// If the folder is part of a team folder, the display names of the team admins
+/// are also included. Absent if the owner display names cannot be fetched.
 /// @param ownerTeam The team that owns the folder. This field is not present if
 /// the folder is not owned by a team.
 /// @param parentSharedFolderId The ID of the parent shared folder. This field
@@ -96,6 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
                         previewUrl:(NSString *)previewUrl
                     sharedFolderId:(NSString *)sharedFolderId
                        timeInvited:(NSDate *)timeInvited
+                 ownerDisplayNames:(nullable NSArray<NSString *> *)ownerDisplayNames
                          ownerTeam:(nullable DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(nullable NSString *)parentSharedFolderId
                          pathLower:(nullable NSString *)pathLower

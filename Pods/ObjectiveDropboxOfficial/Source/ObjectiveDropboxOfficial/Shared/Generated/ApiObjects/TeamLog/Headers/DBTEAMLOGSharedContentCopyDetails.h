@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBTEAMLOGRelocateAssetReferencesLogInfo;
 @class DBTEAMLOGSharedContentCopyDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,14 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Sharing permission. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
 
-/// Source asset index.
-@property (nonatomic, readonly) NSNumber *srcIndex;
-
-/// Destination asset index.
-@property (nonatomic, readonly) NSNumber *destIndex;
-
 /// Target asset index.
 @property (nonatomic, readonly) NSNumber *targetIndex;
+
+/// Specifies the source and destination indices in the assets list.
+@property (nonatomic, readonly) DBTEAMLOGRelocateAssetReferencesLogInfo *relocateActionDetails;
 
 #pragma mark - Constructors
 
@@ -48,18 +46,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param srcIndex Source asset index.
-/// @param destIndex Destination asset index.
 /// @param targetIndex Target asset index.
+/// @param relocateActionDetails Specifies the source and destination indices in
+/// the assets list.
 /// @param sharingPermission Sharing permission. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                                 srcIndex:(NSNumber *)srcIndex
-                                destIndex:(NSNumber *)destIndex
                               targetIndex:(NSNumber *)targetIndex
+                    relocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails
                         sharingPermission:(nullable NSString *)sharingPermission;
 
 ///
@@ -67,16 +64,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// no default value).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param srcIndex Source asset index.
-/// @param destIndex Destination asset index.
 /// @param targetIndex Target asset index.
+/// @param relocateActionDetails Specifies the source and destination indices in
+/// the assets list.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                                 srcIndex:(NSNumber *)srcIndex
-                                destIndex:(NSNumber *)destIndex
-                              targetIndex:(NSNumber *)targetIndex;
+                              targetIndex:(NSNumber *)targetIndex
+                    relocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails;
 
 - (instancetype)init NS_UNAVAILABLE;
 

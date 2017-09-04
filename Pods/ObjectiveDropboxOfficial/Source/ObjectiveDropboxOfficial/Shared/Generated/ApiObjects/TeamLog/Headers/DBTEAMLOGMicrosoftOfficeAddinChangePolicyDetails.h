@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGEnableDisableChangePolicy;
 @class DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails;
+@class DBTEAMLOGMicrosoftOfficeAddinPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New Microsoft Office addin policy.
-@property (nonatomic, readonly) DBTEAMLOGEnableDisableChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGMicrosoftOfficeAddinPolicy *dNewValue;
 
 /// Previous Microsoft Office addin policy. Might be missing due to historical
 /// data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGEnableDisableChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGMicrosoftOfficeAddinPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGEnableDisableChangePolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGMicrosoftOfficeAddinPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGMicrosoftOfficeAddinPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEnableDisableChangePolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGMicrosoftOfficeAddinPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

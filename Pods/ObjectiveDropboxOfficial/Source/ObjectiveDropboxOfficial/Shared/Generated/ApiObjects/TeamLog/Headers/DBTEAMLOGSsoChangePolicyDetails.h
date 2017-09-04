@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGOptionalChangePolicy;
 @class DBTEAMLOGSsoChangePolicyDetails;
+@class DBTEAMLOGSsoPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New single sign-on policy.
-@property (nonatomic, readonly) DBTEAMLOGOptionalChangePolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGSsoPolicy *dNewValue;
 
 /// Previous single sign-on policy. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGOptionalChangePolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGSsoPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGOptionalChangePolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGOptionalChangePolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGSsoPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGSsoPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGOptionalChangePolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGSsoPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

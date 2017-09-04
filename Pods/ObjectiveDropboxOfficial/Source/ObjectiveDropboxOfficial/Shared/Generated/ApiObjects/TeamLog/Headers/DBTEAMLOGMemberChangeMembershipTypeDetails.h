@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGMemberChangeMembershipTypeDetails;
+@class DBTEAMLOGTeamMembershipType;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,23 +29,23 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Previous membership type.
-@property (nonatomic, readonly) NSNumber *prevMembershipType;
+@property (nonatomic, readonly) DBTEAMLOGTeamMembershipType *prevValue;
 
 /// New membership type.
-@property (nonatomic, readonly) NSNumber *dNewMembershipType;
+@property (nonatomic, readonly) DBTEAMLOGTeamMembershipType *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param prevMembershipType Previous membership type.
-/// @param dNewMembershipType New membership type.
+/// @param prevValue Previous membership type.
+/// @param dNewValue New membership type.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPrevMembershipType:(NSNumber *)prevMembershipType
-                        dNewMembershipType:(NSNumber *)dNewMembershipType;
+- (instancetype)initWithPrevValue:(DBTEAMLOGTeamMembershipType *)prevValue
+                        dNewValue:(DBTEAMLOGTeamMembershipType *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

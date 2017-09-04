@@ -728,6 +728,7 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMPOLICIESOfficeAddInPolicy.h"
 #import "DBTEAMPOLICIESTeamSharingPolicies.h"
 #import "DBUSERSFullTeam.h"
 #import "DBUSERSTeam.h"
@@ -740,11 +741,13 @@
 
 - (instancetype)initWithId_:(NSString *)id_
                        name:(NSString *)name
-            sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies *)sharingPolicies {
+            sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies *)sharingPolicies
+          officeAddinPolicy:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddinPolicy {
 
   self = [super initWithId_:id_ name:name];
   if (self) {
     _sharingPolicies = sharingPolicies;
+    _officeAddinPolicy = officeAddinPolicy;
   }
   return self;
 }
@@ -782,6 +785,7 @@
   result = prime * result + [self.id_ hash];
   result = prime * result + [self.name hash];
   result = prime * result + [self.sharingPolicies hash];
+  result = prime * result + [self.officeAddinPolicy hash];
 
   return prime * result;
 }
@@ -811,6 +815,9 @@
   if (![self.sharingPolicies isEqual:aFullTeam.sharingPolicies]) {
     return NO;
   }
+  if (![self.officeAddinPolicy isEqual:aFullTeam.officeAddinPolicy]) {
+    return NO;
+  }
   return YES;
 }
 
@@ -826,6 +833,7 @@
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"name"] = valueObj.name;
   jsonDict[@"sharing_policies"] = [DBTEAMPOLICIESTeamSharingPoliciesSerializer serialize:valueObj.sharingPolicies];
+  jsonDict[@"office_addin_policy"] = [DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:valueObj.officeAddinPolicy];
 
   return jsonDict;
 }
@@ -835,8 +843,13 @@
   NSString *name = valueDict[@"name"];
   DBTEAMPOLICIESTeamSharingPolicies *sharingPolicies =
       [DBTEAMPOLICIESTeamSharingPoliciesSerializer deserialize:valueDict[@"sharing_policies"]];
+  DBTEAMPOLICIESOfficeAddInPolicy *officeAddinPolicy =
+      [DBTEAMPOLICIESOfficeAddInPolicySerializer deserialize:valueDict[@"office_addin_policy"]];
 
-  return [[DBUSERSFullTeam alloc] initWithId_:id_ name:name sharingPolicies:sharingPolicies];
+  return [[DBUSERSFullTeam alloc] initWithId_:id_
+                                         name:name
+                              sharingPolicies:sharingPolicies
+                            officeAddinPolicy:officeAddinPolicy];
 }
 
 @end

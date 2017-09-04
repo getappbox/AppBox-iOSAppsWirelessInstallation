@@ -20,6 +20,7 @@
 - (void)updateDropboxUsage;
 
 //Accounts
+- (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender;
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender;
 
 //Help

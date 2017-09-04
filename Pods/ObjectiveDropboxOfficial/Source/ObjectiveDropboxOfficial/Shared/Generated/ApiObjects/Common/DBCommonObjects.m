@@ -125,7 +125,7 @@
 @implementation DBCOMMONPathRoot
 
 @synthesize team = _team;
-@synthesize sharedFolder = _sharedFolder;
+@synthesize namespaceId = _namespaceId;
 
 #pragma mark - Constructors
 
@@ -162,11 +162,11 @@
   return self;
 }
 
-- (instancetype)initWithSharedFolder:(NSString *)sharedFolder {
+- (instancetype)initWithNamespaceId:(NSString *)namespaceId {
   self = [super init];
   if (self) {
-    _tag = DBCOMMONPathRootSharedFolder;
-    _sharedFolder = sharedFolder;
+    _tag = DBCOMMONPathRootNamespaceId;
+    _namespaceId = namespaceId;
   }
   return self;
 }
@@ -189,12 +189,12 @@
   return _team;
 }
 
-- (NSString *)sharedFolder {
-  if (![self isSharedFolder]) {
+- (NSString *)namespaceId {
+  if (![self isNamespaceId]) {
     [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBCOMMONPathRootSharedFolder, but was %@.", [self tagName]];
+                format:@"Invalid tag: required DBCOMMONPathRootNamespaceId, but was %@.", [self tagName]];
   }
-  return _sharedFolder;
+  return _namespaceId;
 }
 
 #pragma mark - Tag state methods
@@ -215,8 +215,8 @@
   return _tag == DBCOMMONPathRootUserHome;
 }
 
-- (BOOL)isSharedFolder {
-  return _tag == DBCOMMONPathRootSharedFolder;
+- (BOOL)isNamespaceId {
+  return _tag == DBCOMMONPathRootNamespaceId;
 }
 
 - (BOOL)isOther {
@@ -233,8 +233,8 @@
     return @"DBCOMMONPathRootTeam";
   case DBCOMMONPathRootUserHome:
     return @"DBCOMMONPathRootUserHome";
-  case DBCOMMONPathRootSharedFolder:
-    return @"DBCOMMONPathRootSharedFolder";
+  case DBCOMMONPathRootNamespaceId:
+    return @"DBCOMMONPathRootNamespaceId";
   case DBCOMMONPathRootOther:
     return @"DBCOMMONPathRootOther";
   }
@@ -281,8 +281,8 @@
     result = prime * result + [self.team hash];
   case DBCOMMONPathRootUserHome:
     result = prime * result + [[self tagName] hash];
-  case DBCOMMONPathRootSharedFolder:
-    result = prime * result + [self.sharedFolder hash];
+  case DBCOMMONPathRootNamespaceId:
+    result = prime * result + [self.namespaceId hash];
   case DBCOMMONPathRootOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -318,8 +318,8 @@
     return [self.team isEqual:aPathRoot.team];
   case DBCOMMONPathRootUserHome:
     return [[self tagName] isEqual:[aPathRoot tagName]];
-  case DBCOMMONPathRootSharedFolder:
-    return [self.sharedFolder isEqual:aPathRoot.sharedFolder];
+  case DBCOMMONPathRootNamespaceId:
+    return [self.namespaceId isEqual:aPathRoot.namespaceId];
   case DBCOMMONPathRootOther:
     return [[self tagName] isEqual:[aPathRoot tagName]];
   }
@@ -344,9 +344,9 @@
     jsonDict[@".tag"] = @"team";
   } else if ([valueObj isUserHome]) {
     jsonDict[@".tag"] = @"user_home";
-  } else if ([valueObj isSharedFolder]) {
-    jsonDict[@"shared_folder"] = valueObj.sharedFolder;
-    jsonDict[@".tag"] = @"shared_folder";
+  } else if ([valueObj isNamespaceId]) {
+    jsonDict[@"namespace_id"] = valueObj.namespaceId;
+    jsonDict[@".tag"] = @"namespace_id";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -368,9 +368,9 @@
     return [[DBCOMMONPathRoot alloc] initWithTeam:team];
   } else if ([tag isEqualToString:@"user_home"]) {
     return [[DBCOMMONPathRoot alloc] initWithUserHome];
-  } else if ([tag isEqualToString:@"shared_folder"]) {
-    NSString *sharedFolder = valueDict[@"shared_folder"];
-    return [[DBCOMMONPathRoot alloc] initWithSharedFolder:sharedFolder];
+  } else if ([tag isEqualToString:@"namespace_id"]) {
+    NSString *namespaceId = valueDict[@"namespace_id"];
+    return [[DBCOMMONPathRoot alloc] initWithNamespaceId:namespaceId];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBCOMMONPathRoot alloc] initWithOther];
   } else {

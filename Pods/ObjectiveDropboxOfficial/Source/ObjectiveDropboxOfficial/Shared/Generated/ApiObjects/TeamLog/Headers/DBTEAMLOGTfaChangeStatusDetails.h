@@ -35,7 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// to historical data gap.
 @property (nonatomic, readonly, nullable) DBTEAMLOGTfaConfiguration *previousValue;
 
-/// Used two factor authentication code.
+/// Used two factor authentication rescue code. This flag is relevant when the
+/// two factor authentication configuration is disabled.
 @property (nonatomic, readonly, nullable) NSNumber *usedRescueCode;
 
 #pragma mark - Constructors
@@ -46,7 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param dNewValue The new two factor authentication configuration.
 /// @param previousValue The previous two factor authentication configuration.
 /// Might be missing due to historical data gap.
-/// @param usedRescueCode Used two factor authentication code.
+/// @param usedRescueCode Used two factor authentication rescue code. This flag
+/// is relevant when the two factor authentication configuration is disabled.
 ///
 /// @return An initialized instance.
 ///

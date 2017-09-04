@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 #import "DBUSERSTeam.h"
 
+@class DBTEAMPOLICIESOfficeAddInPolicy;
 @class DBTEAMPOLICIESTeamSharingPolicies;
 @class DBUSERSFullTeam;
 
@@ -32,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Team policies governing sharing.
 @property (nonatomic, readonly) DBTEAMPOLICIESTeamSharingPolicies *sharingPolicies;
 
+/// Team policy governing the use of the Office Add-In.
+@property (nonatomic, readonly) DBTEAMPOLICIESOfficeAddInPolicy *officeAddinPolicy;
+
 #pragma mark - Constructors
 
 ///
@@ -40,12 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param id_ The team's unique ID.
 /// @param name The name of the team.
 /// @param sharingPolicies Team policies governing sharing.
+/// @param officeAddinPolicy Team policy governing the use of the Office Add-In.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithId_:(NSString *)id_
                        name:(NSString *)name
-            sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies *)sharingPolicies;
+            sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies *)sharingPolicies
+          officeAddinPolicy:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddinPolicy;
 
 @end
 

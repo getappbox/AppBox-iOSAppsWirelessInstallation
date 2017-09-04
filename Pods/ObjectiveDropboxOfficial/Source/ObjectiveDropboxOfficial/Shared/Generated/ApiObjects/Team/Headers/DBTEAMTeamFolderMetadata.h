@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The status of the team folder.
 @property (nonatomic, readonly) DBTEAMTeamFolderStatus *status;
 
+/// True if this team folder is the team shared dropbox.
+@property (nonatomic, readonly) NSNumber *isTeamSharedDropbox;
+
 #pragma mark - Constructors
 
 ///
@@ -45,12 +48,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param teamFolderId The ID of the team folder.
 /// @param name The name of the team folder.
 /// @param status The status of the team folder.
+/// @param isTeamSharedDropbox True if this team folder is the team shared
+/// dropbox.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTeamFolderId:(NSString *)teamFolderId
                                 name:(NSString *)name
-                              status:(DBTEAMTeamFolderStatus *)status;
+                              status:(DBTEAMTeamFolderStatus *)status
+                 isTeamSharedDropbox:(NSNumber *)isTeamSharedDropbox;
 
 - (instancetype)init NS_UNAVAILABLE;
 

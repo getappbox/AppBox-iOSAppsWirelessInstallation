@@ -28,23 +28,22 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Previous single sign-on identity mode.
-@property (nonatomic, readonly) NSNumber *previousSamlIdentityMode;
+@property (nonatomic, readonly) NSNumber *previousValue;
 
 /// New single sign-on identity mode.
-@property (nonatomic, readonly) NSNumber *dNewSamlIdentityMode;
+@property (nonatomic, readonly) NSNumber *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousSamlIdentityMode Previous single sign-on identity mode.
-/// @param dNewSamlIdentityMode New single sign-on identity mode.
+/// @param previousValue Previous single sign-on identity mode.
+/// @param dNewValue New single sign-on identity mode.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousSamlIdentityMode:(NSNumber *)previousSamlIdentityMode
-                            dNewSamlIdentityMode:(NSNumber *)dNewSamlIdentityMode;
+- (instancetype)initWithPreviousValue:(NSNumber *)previousValue dNewValue:(NSNumber *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -160,3 +160,27 @@
 }
 
 @end
+
+@implementation DBMapSerializer
+
++ (NSDictionary *)serialize:(NSDictionary *)value withBlock:(id (^)(id))serializeBlock {
+  NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
+
+  for (id key in value) {
+    [resultDict setObject:serializeBlock(value[key]) forKey:key];
+  }
+
+  return resultDict;
+}
+
++ (NSDictionary *)deserialize:(NSDictionary *)value withBlock:(id (^)(id))deserializeBlock {
+  NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
+
+  for (id key in value) {
+    [resultDict setObject:deserializeBlock(value[key]) forKey:key];
+  }
+
+  return resultDict;
+}
+
+@end

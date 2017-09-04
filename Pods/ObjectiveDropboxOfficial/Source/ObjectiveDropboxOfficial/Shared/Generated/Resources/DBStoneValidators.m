@@ -83,6 +83,18 @@
   return validator;
 }
 
++ (void (^)(NSDictionary<NSString *, id> *))mapValidator:(void (^)(id))itemValidator {
+  void (^validator)(NSDictionary<NSString *, id> *) = ^(NSDictionary<NSString *, id> *value) {
+    if (itemValidator) {
+      for (id key in value) {
+        itemValidator(value[key]);
+      }
+    }
+  };
+
+  return validator;
+}
+
 + (void (^_Nonnull)(id))nullableValidator:(void (^_Nonnull)(id))internalValidator {
   void (^validator)(NSNumber *) = ^(NSNumber *value) {
     if (value) {

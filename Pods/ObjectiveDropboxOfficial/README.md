@@ -142,7 +142,13 @@ From here, you can pull SDK updates using the following command:
 $ pod update
 ```
 
-If Xcode errors with a message about `Undefined symbols for architecture...`, try adding `$(inherited)` to your project's **Other Linker Flags** in **Build Settings**, and ensure that the `-ObjC` flag is included in **Other Linker Flags**.
+##### Common issues
+
+###### Undefined architecture
+
+If Xcode errors with a message about `Undefined symbols for architecture...`, try the following:
+
+- Project Navigator > build target > **Build Settings** > **Other Linker Flags** add `$(inherited)` and `-ObjC`.
 
 ---
 
@@ -159,7 +165,7 @@ brew install carthage
 
 ```
 # ObjectiveDropboxOfficial
-github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.1.0
+github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.2.0
 ```
 
 Then, run the following command to checkout and build the Dropbox Objective-C SDK repository:
@@ -193,13 +199,25 @@ In the Project Navigator in Xcode, select your project, and then navigate to **G
 
 Then navigate to **Build Phases** > **+** > **New Copy Files Phase**. In the newly-created **Copy Files** section, click the **Destination** drop-down menu and select **Products Directory**, then drag and drop `ObjectiveDropboxOfficial.framework.dSYM` (from `Carthage/Build/Mac`).
 
->Note: If you wish to keep the SDK outside of your Xcode project folder (perhaps to share between different apps), you will need to configure your a few environmental variables.
->
->In the Project Navigator in Xcode, select your project, and then navigate to your project's build target > **Build Settings**:
->
->**Header Search Path**: `$(PROJECT_DIR)/../<PATH_TO_SDK>/dropbox-sdk-obj-c/Source/ObjectiveDropboxOfficial (recursive)`
->
->**Framework Search Paths**: `$(PROJECT_DIR)/../<PATH_TO_SDK>/dropbox-sdk-obj-c/Source/ObjectiveDropboxOfficial/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME) (non-recursive)`
+##### Common issues
+
+###### Linking errors
+
+Please make sure the SDK is inside of your Xcode project folder, otherwise your app may run into linking errors.
+
+If you wish to keep the SDK outside of your Xcode project folder (perhaps to share between different apps), you will need to configure your a few environmental variables.
+
+- Project Navigator > build target > **Build Settings** > **Header Search Path** add `$(PROJECT_DIR)/../<PATH_TO_SDK>/dropbox-sdk-obj-c/Source/ObjectiveDropboxOfficial (recursive)`
+
+- Project Navigator > build target > **Build Settings** > **Framework Search Paths** add `$(PROJECT_DIR)/../<PATH_TO_SDK>/dropbox-sdk-obj-c/Source/ObjectiveDropboxOfficial/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME) (non-recursive)`
+
+###### dyld: Library not loaded error
+
+If you receive a run-time error message like `dyld: Library not loaded:`, please try the following:
+
+- Add ObjectiveDropboxOfficial framework to **Embedded Binaries** as well as **Linked Frameworks and Libraries**.
+- Project Navigator > build target > **Build Settings** > **Linking** > **Runpath Search Paths** add `$(inherited) @executable_path/Frameworks`.
+
 ---
 
 ### Manually add subproject
@@ -585,8 +603,8 @@ Here's an example of an advanced upload case for "batch" uploading a large numbe
 
 ```objective-c
 NSMutableDictionary<NSURL *, DBFILESCommitInfo *> *uploadFilesUrlsToCommitInfo = [NSMutableDictionary new];
-DBFILESCommitInfo *commitInfo = [[DBFILESCommitInfo alloc] initWithPath:@"/output/path/in/Dropbox"];
-[uploadFilesUrlsToCommitInfo setObject:commitInfo forKey:[NSURL fileURLWithPath:@"/local/path/to/my/file"]];
+DBFILESCommitInfo *commitInfo = [[DBFILESCommitInfo alloc] initWithPath:@"/output/path/in/Dropbox/file.txt"];
+[uploadFilesUrlsToCommitInfo setObject:commitInfo forKey:[NSURL fileURLWithPath:@"/local/path/to/file.txt"]];
 
 [client.filesRoutes batchUploadFiles:uploadFilesUrlsToCommitInfo
     queue:nil

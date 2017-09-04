@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGGroupUserManagementChangePolicyDetails;
-@class DBTEAMLOGGroupsUserManagementPolicy;
+@class DBTEAMLOGGroupUserManagementPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New group users management policy.
-@property (nonatomic, readonly) DBTEAMLOGGroupsUserManagementPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMLOGGroupUserManagementPolicy *dNewValue;
 
 /// Previous group users management policy. Might be missing due to historical
 /// data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGGroupsUserManagementPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMLOGGroupUserManagementPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGGroupsUserManagementPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGGroupsUserManagementPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGGroupUserManagementPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGGroupUserManagementPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGGroupsUserManagementPolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMLOGGroupUserManagementPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
