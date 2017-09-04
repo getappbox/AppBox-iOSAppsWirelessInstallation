@@ -35,9 +35,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [project setBuildDirectory: [UserData buildLocation]];
     
     //setup dropbox
-//    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
-//    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
-    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
+    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
+    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+//    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
     
     //update available memory
     [[NSApplication sharedApplication] updateDropboxUsage];
