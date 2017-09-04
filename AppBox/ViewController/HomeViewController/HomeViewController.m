@@ -373,6 +373,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         }
                     }
                 }else{
+                    [self viewStateForProgressFinish:YES];
                     [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
                 }
             }
