@@ -180,7 +180,8 @@
 }
 
 -(NSString *)validURLString:(NSString *)urlString{
-    return [[urlString componentsSeparatedByCharactersInSet:[NSCharacterSet URLQueryAllowedCharacterSet].invertedSet] componentsJoinedByString:@""];
+    NSString *temp = [[urlString componentsSeparatedByCharactersInSet:[NSCharacterSet URLQueryAllowedCharacterSet].invertedSet] componentsJoinedByString:@""];
+    return temp.length == 0 ? @"AppBox" : temp;
 }
 
 @end
