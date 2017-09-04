@@ -203,7 +203,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (buttonSendMail.state == NSOffState || (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue])){
         //set email
-        [self enableMailField:buttonSendMail.state == NSOnState];
+        if (project.emails == nil) {
+            [self enableMailField:buttonSendMail.state == NSOnState];
+        }
         
         //set processing flg
         [[AppDelegate appDelegate] setProcessing:true];
