@@ -28,6 +28,16 @@
     [self.delegate projectAdvancedCancelButtonTapped:sender];
 }
 
+- (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
+    if (sender.state == NSOnState) {
+        [MBProgressHUD showStatus:@"Starting Local Server..." onView:self.view];
+        [TaskHandler runTaskWithName:@"PythonServer" andArgument:@[[UserData buildLocation].absoluteString] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
+            [[AppDelegate appDelegate] addSessionLog:output];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    }
+}
+
 - (IBAction)buttonSaveTapped:(NSButton *)sender {
     if (self.delegate != nil){
         [self.delegate projectAdvancedSaveButtonTapped:sender];
