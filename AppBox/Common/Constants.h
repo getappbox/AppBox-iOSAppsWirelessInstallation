@@ -45,7 +45,7 @@
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
-#define abKeepSameLinkHelpMessage  @"This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below. \n\nIf this option is enable, you can also download the previous build with same url."
+#define abKeepSameLinkHelpMessage  @"This feature will keep same short url for all future ipa uploaded with same bundle identifier, this means old ipa url will replaced by new ipa file. You can change the link by providing a \"Custom Dropbox Folder Name\" in \"Other Setting\". \n\nIf this option is enable, you can also download the previous build with same url."
 #define abKeepSameLinkReadMoreURL @"https://iosappswirelessinstallation.codeplex.com/wikipage?title=KeepSameLink"
 
 #define abConnectedToInternet @"Connected to the Internet."
