@@ -34,6 +34,8 @@ NSString * const RepoCertificateDirectoryName = @"cert";
     if ([[NSFileManager defaultManager] fileExistsAtPath:repoSettingPlist]) {
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Setting path = %@",repoSettingPlist]];
         return repoSettingPlist;
+    }else {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"File not found at path = %@", repoSettingPlist]];
     }
     return nil;
 }
@@ -43,6 +45,7 @@ NSString * const RepoCertificateDirectoryName = @"cert";
     
     //get project raw setting from plist
     NSDictionary *projectRawSetting = [NSDictionary dictionaryWithContentsOfFile:settingPath];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Project Raw Setting - %@", projectRawSetting]];
     if (projectRawSetting == nil) {
         return nil;
     }

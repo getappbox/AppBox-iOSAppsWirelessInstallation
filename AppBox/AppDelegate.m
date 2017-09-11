@@ -44,13 +44,20 @@
     
     //Check for arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    [self addSessionLog:[NSString stringWithFormat:@"All Arguments = %@",arguments]];
     for (NSString *argument in arguments) {
         if ([argument containsString:@"build="]) {
             NSArray *components = [argument componentsSeparatedByString:@"build="];
+            [self addSessionLog:[NSString stringWithFormat:@"Path Components = %@",components]];
             if (components.count == 2) {
                 [self handleProjectAtPath:[components lastObject]];
+            } else {
+                [self addSessionLog:[NSString stringWithFormat:@"Invalid command %@",arguments]];
+                exit(abExitCodeForUnstableBuild);
             }
             break;
+        } else if ([arguments indexOfObject:argument] == arguments.count - 1){
+            [self addSessionLog:[NSString stringWithFormat:@"Normal Run"]];
         }
     }
 }
@@ -113,12 +120,16 @@
     NSString *settingPath = [RepoBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
     XCProject *project = [RepoBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
     if (project == nil) {
+        [self addSessionLog:@"AppBox can't able to create project model of this repo."];
+        exit(abExitCodeForUnstableBuild);
         return;
     }
     if (self.isReadyToBuild) {
+        [self addSessionLog:@"AppBox is ready to build."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToBuildNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [self addSessionLog:@"AppBox is ready to build. [Block]"];
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];
     }
