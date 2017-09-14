@@ -15,6 +15,7 @@
 
 - (IBAction)saveButtonTapped:(NSButton *)sender;
 - (IBAction)sendTextMessageButtonTapped:(NSButton *)sender;
+- (IBAction)setupNewSlackWebhook:(NSButton *)sender;
 
 
 @end

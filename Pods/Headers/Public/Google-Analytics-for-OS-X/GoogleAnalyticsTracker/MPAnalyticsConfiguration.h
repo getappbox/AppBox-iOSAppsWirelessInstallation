@@ -1,0 +1,1 @@
+../../../../Google-Analytics-for-OS-X/GoogleAnalyticsTracker/MPAnalyticsConfiguration.h

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="3dJ-l5-zof"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Slack Channel Address:" id="2aL-XI-hHx">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Slack Channel Webhook:" id="2aL-XI-hHx">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -92,6 +92,16 @@
                         <action selector="sendTextMessageButtonTapped:" target="-2" id="BRk-8S-d2z"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b9B-T0-d3K">
+                    <rect key="frame" x="14" y="13" width="216" height="32"/>
+                    <buttonCell key="cell" type="push" title="Set up a new Slack Webhook" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aoK-W3-B2a">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="setupNewSlackWebhook:" target="-2" id="pwq-Ko-ISP"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9r2-v4-bkQ" secondAttribute="trailing" constant="20" id="0z4-Ow-JCX"/>
@@ -103,11 +113,13 @@
                 <constraint firstItem="UIS-te-x1g" firstAttribute="trailing" secondItem="Mjn-bT-CIG" secondAttribute="trailing" id="Ohz-lg-UR5"/>
                 <constraint firstItem="Mjn-bT-CIG" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="WVJ-B9-ROa"/>
                 <constraint firstItem="9r2-v4-bkQ" firstAttribute="leading" secondItem="TBN-E3-vOT" secondAttribute="leading" id="XzP-Sn-H3I"/>
+                <constraint firstItem="b9B-T0-d3K" firstAttribute="centerY" secondItem="N6m-ow-2SF" secondAttribute="centerY" id="YFM-b8-N2b"/>
                 <constraint firstItem="Mjn-bT-CIG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="acB-lj-TCW"/>
                 <constraint firstItem="VI4-aB-Pi7" firstAttribute="leading" secondItem="N6m-ow-2SF" secondAttribute="trailing" constant="15" id="bi5-eW-NlT"/>
                 <constraint firstItem="UIS-te-x1g" firstAttribute="leading" secondItem="Mjn-bT-CIG" secondAttribute="leading" id="lzb-GU-kQB"/>
                 <constraint firstItem="dNt-JQ-OEn" firstAttribute="trailing" secondItem="VI4-aB-Pi7" secondAttribute="trailing" id="mAy-0p-81W"/>
                 <constraint firstAttribute="bottom" secondItem="VI4-aB-Pi7" secondAttribute="bottom" constant="20" id="n44-0K-iJ4"/>
+                <constraint firstItem="Mjn-bT-CIG" firstAttribute="leading" secondItem="b9B-T0-d3K" secondAttribute="leading" id="plo-HZ-sla"/>
                 <constraint firstItem="TBN-E3-vOT" firstAttribute="leading" secondItem="dNt-JQ-OEn" secondAttribute="leading" id="r2S-x3-Nod"/>
                 <constraint firstItem="9r2-v4-bkQ" firstAttribute="trailing" secondItem="TBN-E3-vOT" secondAttribute="trailing" id="rZN-yA-DvK"/>
                 <constraint firstItem="dNt-JQ-OEn" firstAttribute="top" secondItem="TBN-E3-vOT" secondAttribute="bottom" constant="5" id="tkt-E1-tEc"/>
@@ -116,5 +128,14 @@
             </constraints>
             <point key="canvasLocation" x="25" y="169"/>
         </customView>
+        <button verticalHuggingPriority="750" id="vFd-xy-lGc">
+            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xuE-c2-EZa">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <point key="canvasLocation" x="-256" y="232"/>
+        </button>
     </objects>
 </document>

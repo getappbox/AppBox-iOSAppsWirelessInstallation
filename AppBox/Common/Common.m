@@ -26,10 +26,6 @@
     return [NSURL URLWithString:fileDirectory];
 }
 
-+ (void)logScreen:(NSString *)name{
-    [Answers logContentViewWithName:name contentType:@"screen" contentId:nil customAttributes:nil];
-}
-
 #pragma mark - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"ALERT -\nTitle - %@ Message - %@", title, message]];

@@ -22,8 +22,20 @@
     [slackMessageTextField setStringValue:[UserData userSlackMessage]];
 }
 
+
+- (BOOL)validateSlackInformation{
+    if (slackChannelTextField.stringValue.length == 0 || [NSURL URLWithString:slackChannelTextField.stringValue] == nil) {
+        [Common showAlertWithTitle:@"Error" andMessage:@"Please enter a valid URL."];
+        return NO;
+    }
+    return YES;
+}
+
 - (IBAction)saveButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
+    if (![self validateSlackInformation]) {
+        return;
+    }
     [UserData setUserSlackChannel:slackChannelTextField.stringValue];
     [UserData setUserSlackMessage:slackMessageTextField.stringValue];
     [MBProgressHUD showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
@@ -31,6 +43,9 @@
 
 - (IBAction)sendTextMessageButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
+    if (![self validateSlackInformation]) {
+        return;
+    }
     
     //create a test project for demo email
     XCProject *project = [[XCProject alloc] init];
@@ -49,4 +64,9 @@
         }
     }];
 }
+
+- (IBAction)setupNewSlackWebhook:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abWebHookSetupURL]];
+}
+
 @end

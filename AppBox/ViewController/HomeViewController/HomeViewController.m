@@ -59,6 +59,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    //track screen
+    [EventTracker logScreen:@"Home Screen"];
 }
 
 - (void)viewWillAppear{
@@ -152,7 +155,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [alert addButtonWithTitle:@"Ok"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
-        [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Keep Same Link"}];
+        [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Keep Same Link"}
+                                action:@"Keep Same Link" label:@"Keep Same Link" value:@1];
     }
 }
 
@@ -212,11 +216,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         [[textFieldEmail window] makeFirstResponder:self.view];
         
         if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
-            [Answers logCustomEventWithName:@"Archive and Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}]];
+            NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}];
+            [EventTracker logEventWithName:@"Archive and Upload IPA" customAttributes:currentSetting
+                                    action:@"Build Type" label:comboBuildType.stringValue value:@1];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
         }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
-            [Answers logCustomEventWithName:@"Upload IPA" customAttributes:[self getBasicViewStateWithOthersSettings:nil]];
+            NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:nil];
+            [EventTracker logEventWithName:@"Upload IPA" customAttributes:currentSetting action:@"Upload IPA" label:@"Upload IPA" value:@1];
             [self getIPAInfoFromLocalURL:project.ipaFullPath];
         }
         [self viewStateForProgressFinish:NO];
@@ -373,6 +380,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         }
                     }
                 }else{
+                    [self viewStateForProgressFinish:YES];
                     [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
                 }
             }
@@ -497,7 +505,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
             [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
             [self viewStateForProgressFinish:YES];
-            [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}]];
+            NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}];
+            [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting
+                                    action:@"Uploaded to" label:@"AppStore" value:@1];
         }
     }else{
         //if internet is connected, show direct error
@@ -598,10 +608,10 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     
                     //set dropbox folder name & log if user changing folder name or not
                     if (project.bundleDirectory.absoluteString.length == 0){
-                        [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0}];
+                        [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0} action:@"DB Folder Name" label:@"Default" value:@1];
                     }else{
                         [project upadteDbDirectoryByBundleDirectory];
-                        [Answers logCustomEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1}];
+                        [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1} action:@"DB Folder Name" label:@"Custom" value:@1];
                     }
 
                     
@@ -1146,7 +1156,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #pragma mark - Navigation -
 -(void)logAppUploadEventAndShareURLOnSlackChannel{
     //Log IPA Upload Success Rate with Other Options
-    [Answers logCustomEventWithName:@"IPA Uploaded Success" customAttributes:[self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}]];
+    NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
+    [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting action:@"Uploaded to" label:@"Dropbox" value:@1];
     
     if ([UserData userSlackMessage].length > 0) {
         [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];

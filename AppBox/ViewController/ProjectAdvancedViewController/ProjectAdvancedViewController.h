@@ -27,8 +27,10 @@
 @property (weak) IBOutlet NSButton *localNetworkCheckBox;
 @property (weak) IBOutlet NSTextField *dbFolderNameTextField;
 
+
 - (IBAction)buttonSaveTapped:(NSButton *)sender;
 - (IBAction)buttonCancelTapped:(NSButton *)sender;
+- (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender;
 
 
 

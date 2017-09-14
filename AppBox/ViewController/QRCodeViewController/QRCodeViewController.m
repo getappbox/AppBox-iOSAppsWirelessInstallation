@@ -13,7 +13,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //log screen
-    [Common logScreen:@"QR Code View"];
+    [EventTracker logScreen:@"QR Code View"];
     
     //create qr code and show in imageview
     NSError *error = nil;

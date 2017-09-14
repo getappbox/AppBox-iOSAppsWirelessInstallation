@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //log view
-    [Common logScreen:@"AppBox Log"];
+    [EventTracker logScreen:@"AppBox Log"];
     
     //enable auto scroll
     isAutoScrollEnabled = YES;

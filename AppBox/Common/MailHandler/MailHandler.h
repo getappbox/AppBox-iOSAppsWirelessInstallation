@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MailGunKeys.h"
 
 @interface MailHandler : NSObject
 

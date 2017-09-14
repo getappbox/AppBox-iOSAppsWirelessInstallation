@@ -25,6 +25,7 @@
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/tryappbox"
 #define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
+#define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
 
 //AppBox AppStore service. Note: these constanst also need to change in ALAppStore.sh file
 #define abALUploadApp @"upload-app"
@@ -44,7 +45,7 @@
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
-#define abKeepSameLinkHelpMessage  @"This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below. \n\nIf this option is enable, you can also download the previous build with same url."
+#define abKeepSameLinkHelpMessage  @"This feature will keep same short url for all future ipa uploaded with same bundle identifier, this means old ipa url will replaced by new ipa file. You can change the link by providing a \"Custom Dropbox Folder Name\" in \"Other Setting\". \n\nIf this option is enable, you can also download the previous build with same url."
 #define abKeepSameLinkReadMoreURL @"https://iosappswirelessinstallation.codeplex.com/wikipage?title=KeepSameLink"
 
 #define abConnectedToInternet @"Connected to the Internet."
@@ -90,5 +91,9 @@ typedef enum : NSUInteger {
     ScriptTypeAppStoreValidation,
     ScriptTypeAppStoreUpload,
 } ScriptType;
+
+//CI
+#define abExitCodeForUnstableBuild 255
+
 
 #endif /* Constants_h */

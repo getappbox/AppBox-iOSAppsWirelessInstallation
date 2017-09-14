@@ -53,7 +53,7 @@
                      [Common showAlertWithTitle:@"Warning" andMessage:[NSString stringWithFormat:@"You're running out of Dropbox space\n\n %@MB of %@MB used.", usage, allocated]];
                  }
              } @catch (NSException *exception) {
-                 [Answers logCustomEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription}];
+                 [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
              }
          }
      }];
@@ -85,23 +85,22 @@
 #pragma mark - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
-    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Help"}];
+    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Help"} action:@"title" label:@"Help" value:@1];
 }
 
 - (IBAction)latestNewsTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abTwitterURL]];
-    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Twitter"}];
-
+    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Twitter"} action:@"title" label:@"Twitter" value:@1];
 }
 
 - (IBAction)releaseNotesTapped:(NSMenuItem *)sender {
-    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"Release Notes"}];
+    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Release Notes"} action:@"title" label:@"Release Notes" value:@1];
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",abGitHubReleaseBaseURL,versionString]]];
 }
 
 - (IBAction)licenseTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
-    [Answers logCustomEventWithName:@"External Links" customAttributes:@{@"title":@"License"}];
+    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"License"} action:@"title" label:@"License" value:@1];
 }
 @end

@@ -14,7 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [Common logScreen:@"Project Advanced Settings"];
+    [EventTracker logScreen:@"Project Advanced Settings"];
     if (self.project.bundleDirectory) {
         [self.dbFolderNameTextField setStringValue:self.project.bundleDirectory.lastPathComponent];
     }
@@ -26,6 +26,16 @@
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
     [self dismissController:self];
     [self.delegate projectAdvancedCancelButtonTapped:sender];
+}
+
+- (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
+    if (sender.state == NSOnState) {
+        [MBProgressHUD showStatus:@"Starting Local Server..." onView:self.view];
+        [TaskHandler runTaskWithName:@"PythonServer" andArgument:@[[UserData buildLocation].absoluteString] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
+            [[AppDelegate appDelegate] addSessionLog:output];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    }
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {

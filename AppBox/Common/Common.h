@@ -13,7 +13,6 @@
 
 + (void)checkDropboxKeys;
 + (NSString*)generateUUID;
-+ (void)logScreen:(NSString *)name;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;

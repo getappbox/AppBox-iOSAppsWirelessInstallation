@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [Common logScreen:@"Apple Developer Login"];
+    [EventTracker logScreen:@"Apple Developer Login"];
     
     //Load iTunes UserName and password
     itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
