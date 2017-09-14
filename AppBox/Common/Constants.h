@@ -92,4 +92,8 @@ typedef enum : NSUInteger {
     ScriptTypeAppStoreUpload,
 } ScriptType;
 
+//CI
+#define abExitCodeForUnstableBuild 255
+
+
 #endif /* Constants_h */
