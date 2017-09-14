@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [Common logScreen:@"AppBox ShareLink"];
+    [EventTracker logScreen:@"AppBox ShareLink"];
     [textFieldAppLink setStringValue: self.project.appShortShareableURL.absoluteString];
     [textFieldHint setStringValue: ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) ? LongURLUserHint : ShortURLUserHint];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"App URL - %@",textFieldHint.stringValue]];
@@ -27,7 +27,8 @@
 
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
-    [Answers logCustomEventWithName:@"Copy to Clipboard" customAttributes:@{}];
+    [EventTracker logEventWithName:@"Copy to Clipboard" customAttributes:@{@"Copy to Clipboard":@1}
+                            action:@"Copy to Clipboard" label:@"Copy to Clipboard" value:@1];
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.absoluteString  forType:NSStringPboardType];
     [sender setTitle:@"Copied!!"];

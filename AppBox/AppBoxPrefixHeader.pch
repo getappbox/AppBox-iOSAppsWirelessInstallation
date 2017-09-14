@@ -28,6 +28,7 @@
 #import "Constants.h"
 #import "DropboxKeys.h"
 #import "HTTPStatusCode.h"
+#import "OtherServicesKeys.h"
 
 #import "Common.h"
 #import "XCHandler.h"
@@ -36,6 +37,7 @@
 #import "SlackClient.h"
 #import "TaskHandler.h"
 #import "RepoBuilder.h"
+#import "EventTracker.h"
 #import "UpdateHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"

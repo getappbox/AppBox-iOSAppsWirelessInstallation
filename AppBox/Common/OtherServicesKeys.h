@@ -9,6 +9,6 @@
 #ifndef MailGunKeys_h
 #define MailGunKeys_h
 
-#define abMailGunKey @""
+#define abMailGunKey @"key-501eff63e4624b69e3ec848ccc1f248c"
 
 #endif /* MailGunKeys_h */

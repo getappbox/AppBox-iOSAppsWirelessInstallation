@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		9740CD411E005DB100224D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9740CD3F1E005DB100224D9F /* Main.storyboard */; };
+		DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFC680C1F6AE957007A4ED2 /* EventTracker.m */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
@@ -101,6 +102,8 @@
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
 		DB3D7CC81F64501F00217096 /* PythonServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PythonServer.sh; sourceTree = "<group>"; };
+		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
+		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
@@ -221,7 +224,7 @@
 		E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
 		E1D479CF1E4B04A500BBC838 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E1DC25F91ECD826C001EF106 /* MailGunKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MailGunKeys.h; sourceTree = "<group>"; };
+		E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherServicesKeys.h; sourceTree = "<group>"; };
 		E1DC25FB1ECDBC16001EF106 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ProgressHud.h"; sourceTree = "<group>"; };
@@ -257,6 +260,15 @@
 				179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DBFC680A1F6AE942007A4ED2 /* EventTracker */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC680B1F6AE957007A4ED2 /* EventTracker.h */,
+				DBFC680C1F6AE957007A4ED2 /* EventTracker.m */,
+			);
+			path = EventTracker;
 			sourceTree = "<group>";
 		};
 		E11633961E558609005EAB31 /* MobileProvision */ = {
@@ -759,6 +771,7 @@
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
 				E16D72D91E88F9EE0031FB7C /* XcodeHandler */,
+				DBFC680A1F6AE942007A4ED2 /* EventTracker */,
 				E16D72D11E88F99A0031FB7C /* OutputParsers */,
 				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
@@ -768,7 +781,7 @@
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
 				E1AE886E1F3F156A0085B173 /* LocalServerHandler */,
 				E1AF8FD71E266CC000A57633 /* DropboxKeys.h */,
-				E1DC25F91ECD826C001EF106 /* MailGunKeys.h */,
+				E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */,
 				E16018F11DEC0EB700E3A377 /* Constants.h */,
 				E1CFC65C1D7E7FEA005872BE /* Common.h */,
 				E1CFC65D1D7E7FEA005872BE /* Common.m */,
@@ -1002,6 +1015,7 @@
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
+				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
 				E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */,
