@@ -10,6 +10,7 @@
 
 @interface TaskHandler : NSObject
 
++ (void)runPrivilegeTaskWithName:(NSString *)name andArgument:(NSArray *)arguments outputStream:(void (^) (STPrivilegedTask *task, BOOL success ,NSString *output))outputStream;
 + (void)runTaskWithName:(NSString *)name andArgument:(NSArray *)arguments taskLaunch:(void (^) (NSTask *task))taskLaunch outputStream:(void (^) (NSTask *task, NSString *output))outputStream;
 
 @end

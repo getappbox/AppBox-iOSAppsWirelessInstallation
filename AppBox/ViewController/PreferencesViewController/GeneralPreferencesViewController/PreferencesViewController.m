@@ -19,6 +19,8 @@
     
     //set build url
     [pathBuild setURL:[UserData buildLocation]];
+    [pathXCode setURL:[UserData xCodeLocation]];
+    [pathApplicationLoaded setURL:[UserData applicationLoaderLocation]];
 }
 
 //Build Path Handler
@@ -33,7 +35,23 @@
 
 //Xcode Path Handler
 - (IBAction)xcodePathHandler:(NSPathControl *)sender {
-    
+    NSString *selectedXcode = sender.URL.resourceSpecifier;
+    NSString *alPath = [[selectedXcode stringByAppendingPathComponent:abApplicationLoaderALToolLocation] stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:alPath]){
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Application Loader = %@", alPath]];
+        [XCHandler changeDefaultXcodePath:selectedXcode withCompletion:^(BOOL success, NSString *error) {
+            if (success) {
+                [UserData setXCodeLocation:selectedXcode];
+                [UserData setApplicationLoaderLocation:alPath];
+            } else {
+                [sender setURL:[UserData xCodeLocation]];
+                [Common showAlertWithTitle:@"Error" andMessage:error];
+            }
+        }];
+    } else {
+        [sender setURL:nil];
+        [Common showAlertWithTitle:@"Error" andMessage:@"Please select a valid Xcode. AppBox don't able to find application loader for selected Xcode."];
+    }
 }
 
 - (IBAction)appStoreSymbolsFileCheckBokValueChanged:(NSButton *)sender {

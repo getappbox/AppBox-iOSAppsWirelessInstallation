@@ -34,4 +34,14 @@
     }];
 }
 
++(void)changeDefaultXcodePath:(NSString *)path withCompletion:(void (^) (BOOL success, NSString *error))completion {
+    [TaskHandler runPrivilegeTaskWithName:@"SwitchXcode" andArgument:@[path] outputStream:^(STPrivilegedTask *task, BOOL success, NSString *output) {
+        if (success && [output isEqualToString:abEmptyString]) {
+            completion(success, nil);
+        } else {
+            completion(success, output);
+        }
+    }];
+}
+
 @end
