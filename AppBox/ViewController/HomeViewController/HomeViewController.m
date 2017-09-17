@@ -653,9 +653,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     
     //upload ipa
     fileType = FileTypeIPA;
-    [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding
-                    to:project.dbIPAFullPath.absoluteString
-                  mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    if ([AppDelegate appDelegate].isInternetConnected) {
+        [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    } else {
+        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+            [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+        }];
+    }
     
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
@@ -717,9 +721,16 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
           }
           //unable to upload file, show error
           else {
-              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
-              [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
-              [self viewStateForProgressFinish:YES];
+              //The Internet connection appears to be offline
+              if (error.nsError.code == -1009) {
+                  lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                      [self dbUploadFile:file to:path mode:mode];
+                  }];
+              } else {
+                  [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
+                  [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
+                  [self viewStateForProgressFinish:YES];
+              }
           }
       }]
      
