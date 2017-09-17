@@ -80,12 +80,13 @@
 
 #define XCodeLocation @"XCodeLocation"
 
-+(NSString *)xCodeLocation{
++(NSURL *)xCodeLocation{
     NSString *xCodeLocation = [[NSUserDefaults standardUserDefaults] stringForKey:XCodeLocation];
     if (xCodeLocation == nil){
         xCodeLocation = abXcodeLocation;
+        
     }
-    return xCodeLocation;
+    return [NSURL URLWithString: xCodeLocation];
 }
 
 +(void)setXCodeLocation:(NSString *)xCodeLocation{
@@ -95,12 +96,12 @@
 
 #define ApplicationLoaderLocation @"ApplicationLoaderLocation"
 
-+(NSString *)applicationLoaderLocation{
++(NSURL *)applicationLoaderLocation{
     NSString *alLocation = [[NSUserDefaults standardUserDefaults] stringForKey:ApplicationLoaderLocation];
     if (alLocation == nil) {
         alLocation = abApplicationLoaderAppLocation;
     }
-    return alLocation;
+    return [NSURL URLWithString: alLocation];
 }
 
 +(void)setApplicationLoaderLocation:(NSString *)alLocation{
