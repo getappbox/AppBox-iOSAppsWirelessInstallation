@@ -60,8 +60,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
-    //track screen
+    //Track screen
     [EventTracker logScreen:@"Home Screen"];
+    
+    //Get Xcode and Application Loader path
+    [XCHandler getXCodePathWithCompletion:^(NSString *xcodePath, NSString *applicationLoaderPath) {
+        [UserData setXCodeLocation:xcodePath];
+        [UserData setApplicationLoaderLocation:applicationLoaderPath];
+    }];
 }
 
 - (void)viewWillAppear{

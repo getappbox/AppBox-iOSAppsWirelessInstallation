@@ -26,6 +26,9 @@
 +(NSString *)xCodeLocation;
 +(void)setXCodeLocation:(NSString *)xCodeLocation;
 
++(NSString *)applicationLoaderLocation;
++(void)setApplicationLoaderLocation:(NSString *)alLocation;
+
 +(NSNumber *)dropboxUsedSpace;
 +(NSNumber *)dropboxAvailableSpace;
 +(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
