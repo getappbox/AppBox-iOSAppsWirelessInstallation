@@ -19,7 +19,9 @@
         [self.dbFolderNameTextField setStringValue:self.project.bundleDirectory.lastPathComponent];
     }
     [self.dbFolderNameTextField setEnabled:self.project.isKeepSameLinkEnabled];
-    [self.localNetworkCheckBox setTitle: [LocalServerHandler getLocalIPAddress]];
+    [LocalServerHandler getLocalIPAddressWithCompletion:^(NSString *ipAddress) {
+        [self.localNetworkCheckBox setTitle: ipAddress];
+    }];
 }
 
 //MARK: - Action Button Tapped

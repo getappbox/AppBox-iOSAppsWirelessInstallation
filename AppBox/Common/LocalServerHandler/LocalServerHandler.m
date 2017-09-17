@@ -10,14 +10,22 @@
 
 @implementation LocalServerHandler
 
-+(NSString *)getLocalIPAddress{
-    NSArray *ipAddresses = [[NSHost hostWithName:[[NSHost currentHost] name]] addresses];
-    for (NSString *ipAddress in ipAddresses) {
-        if ([ipAddress componentsSeparatedByString:@"."].count == 4) {
-            return ipAddress;
++(void)getLocalIPAddressWithCompletion:(void (^)(NSString *ipAddress))completion{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray *ipAddresses = [[NSHost hostWithName:[[NSHost currentHost] name]] addresses];
+        for (NSString *ipAddress in ipAddresses) {
+            if ([ipAddress componentsSeparatedByString:@"."].count == 4) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(ipAddress);
+                });
+                return;
+            }
         }
-    }
-    return @"Not Connected.";
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(@"Not Connected.");
+            return;
+        });
+    });
 }
 
 @end

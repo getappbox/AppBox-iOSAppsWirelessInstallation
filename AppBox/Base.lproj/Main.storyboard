@@ -1111,7 +1111,7 @@ Gw
             <objects>
                 <viewController title="Advanced" id="n1u-76-r4M" customClass="ProjectAdvancedViewController" sceneMemberID="viewController">
                     <view key="view" id="OXY-Ua-ZSc">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="273"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="164"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pae-a2-qHY">
@@ -1138,7 +1138,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haB-7R-3Q7">
-                                <rect key="frame" x="10" y="242" width="121" height="21"/>
+                                <rect key="frame" x="10" y="133" width="121" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Other Settings" placeholderString="" id="XTF-c4-JRS">
                                     <font key="font" metaFont="systemSemibold" size="17"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1146,7 +1146,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-aq-vvf">
-                                <rect key="frame" x="10" y="203" width="234" height="19"/>
+                                <rect key="frame" x="10" y="94" width="234" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="QNc-mx-fOf"/>
                                 </constraints>
@@ -1157,7 +1157,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KOs-Ma-CB8">
-                                <rect key="frame" x="252" y="200" width="400" height="25"/>
+                                <rect key="frame" x="252" y="91" width="400" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Nuy-Ou-Adw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="xys-jg-h02"/>
@@ -1172,8 +1172,8 @@ Gw
                                 </connections>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="LBi-UH-2sG">
-                                <rect key="frame" x="250" y="169" width="89" height="18"/>
-                                <buttonCell key="cell" type="check" title="checking..." bezelStyle="regularSquare" imagePosition="left" inset="2" id="flS-RW-vjS">
+                                <rect key="frame" x="250" y="60" width="194" height="18"/>
+                                <buttonCell key="cell" type="check" title="checking... (Comming Soon)" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="flS-RW-vjS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1182,7 +1182,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ve3-DL-dXm">
-                                <rect key="frame" x="10" y="169" width="234" height="19"/>
+                                <rect key="frame" x="10" y="60" width="234" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="pHR-7t-wdQ"/>
                                 </constraints>
@@ -1204,6 +1204,7 @@ Gw
                             <constraint firstItem="6Bs-aq-vvf" firstAttribute="top" secondItem="haB-7R-3Q7" secondAttribute="bottom" constant="20" id="Qee-nJ-bo4"/>
                             <constraint firstItem="6Bs-aq-vvf" firstAttribute="trailing" secondItem="Ve3-DL-dXm" secondAttribute="trailing" id="XfI-bg-DBF"/>
                             <constraint firstAttribute="bottom" secondItem="Pae-a2-qHY" secondAttribute="bottom" constant="20" id="acY-Xu-LDg"/>
+                            <constraint firstAttribute="bottom" secondItem="Ve3-DL-dXm" secondAttribute="bottom" constant="60" id="bPb-IJ-icj"/>
                             <constraint firstItem="Ve3-DL-dXm" firstAttribute="top" secondItem="6Bs-aq-vvf" secondAttribute="bottom" constant="15" id="kko-3S-5tp"/>
                             <constraint firstItem="Pae-a2-qHY" firstAttribute="leading" secondItem="JEl-Gx-e8o" secondAttribute="trailing" constant="10" id="nRo-HT-HDO"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="top" secondItem="OXY-Ua-ZSc" secondAttribute="top" constant="10" id="qUN-m0-bsS"/>
@@ -1219,7 +1220,7 @@ Gw
                 </viewController>
                 <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-795" y="1405.5"/>
+            <point key="canvasLocation" x="-801" y="1345"/>
         </scene>
         <!--ShowLink-->
         <scene sceneID="Wfl-7U-Izx">
