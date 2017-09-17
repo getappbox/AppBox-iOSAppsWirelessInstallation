@@ -23,6 +23,7 @@ PODS:
   - SAMKeychain (1.5.2)
   - Sparkle (1.17.0)
   - SSZipArchive (2.0.2)
+  - STPrivilegedTask (1.0.1)
   - ZXingObjC (3.2.1):
     - ZXingObjC/All (= 3.2.1)
   - ZXingObjC/All (3.2.1)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - SAMKeychain
   - Sparkle
   - SSZipArchive
+  - STPrivilegedTask
   - ZXingObjC
 
 SPEC CHECKSUMS:
@@ -51,8 +53,9 @@ SPEC CHECKSUMS:
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
   SSZipArchive: 5fdf578dbbb60000b23439f80fa04e81d00740ee
+  STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
   ZXingObjC: bbf7b8f0cf8933fdd33eb4f9f46e22308552869b
 
-PODFILE CHECKSUM: 48cd9cb2f5365efdd8b144fc35c7825a1949cde1
+PODFILE CHECKSUM: 39c0748d32297688abd917f031cdf1afcc093c24
 
 COCOAPODS: 1.3.1

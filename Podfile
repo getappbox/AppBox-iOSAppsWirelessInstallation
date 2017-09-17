@@ -12,4 +12,5 @@ target :AppBox do
     pod 'SAMKeychain'
     pod 'Sparkle'
     pod 'Google-Analytics-for-OS-X'
+    pod 'STPrivilegedTask'
 end
