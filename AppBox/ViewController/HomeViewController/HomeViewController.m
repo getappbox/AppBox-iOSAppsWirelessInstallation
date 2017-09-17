@@ -16,7 +16,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     XCProject *project;
     XCProject *repoProject;
     ScriptType scriptType;
-    FileType fileType;
+    DBFileType dbFileType;
     NSArray *allTeamIds;
     NSBlockOperation *lastfailedOperation;
 }
@@ -60,8 +60,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
-    //track screen
+    //Track screen
     [EventTracker logScreen:@"Home Screen"];
+    
+    //Get Xcode and Application Loader path
+    [XCHandler getXCodePathWithCompletion:^(NSString *xcodePath, NSString *applicationLoaderPath) {
+        [UserData setXCodeLocation:xcodePath];
+        [UserData setApplicationLoaderLocation:applicationLoaderPath];
+    }];
 }
 
 - (void)viewWillAppear{
@@ -652,10 +658,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
     
     //upload ipa
-    fileType = FileTypeIPA;
-    [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding
-                    to:project.dbIPAFullPath.absoluteString
-                  mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    dbFileType = DBFileTypeIPA;
+    if ([AppDelegate appDelegate].isInternetConnected) {
+        [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+    } else {
+        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+            [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+        }];
+    }
     
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
@@ -686,7 +696,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
               [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploaded file metadata = %@", response]];
               
               //AppInfo.json file uploaded and creating shared url
-              if(fileType == FileTypeJson){
+              if(dbFileType == DBFileTypeJson){
                   project.uniqueLinkJsonMetaData = response;
                   if(project.appShortShareableURL){
                       [self logAppUploadEventAndShareURLOnSlackChannel];
@@ -697,7 +707,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                   }
               }
               //IPA file uploaded and creating shared url
-              else if (fileType == FileTypeIPA){
+              else if (dbFileType == DBFileTypeIPA){
                   [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
                   NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
@@ -706,7 +716,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                   [self dbCreateSharedURLForFile:response.pathDisplay];
               }
               //Manifest file uploaded and creating shared url
-              else if (fileType == FileTypeManifest){
+              else if (dbFileType == DBFileTypeManifest){
                   [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"Manifest file uploaded."];
                   NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
@@ -717,9 +727,16 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
           }
           //unable to upload file, show error
           else {
-              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
-              [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
-              [self viewStateForProgressFinish:YES];
+              //The Internet connection appears to be offline
+              if (error.nsError.code == -1009) {
+                  lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                      [self dbUploadFile:file to:path mode:mode];
+                  }];
+              } else {
+                  [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
+                  [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
+                  [self viewStateForProgressFinish:YES];
+              }
           }
       }]
      
@@ -727,13 +744,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
      setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
          //Calculate and show progress based on file type
          CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
-         if (fileType == FileTypeIPA) {
+         if (dbFileType == DBFileTypeIPA) {
              NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
              [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }else if (fileType == FileTypeManifest){
+         }else if (dbFileType == DBFileTypeManifest){
              NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress]];
              [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }else if (fileType == FileTypeJson){
+         }else if (dbFileType == DBFileTypeJson){
              NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress]];
              [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
          }
@@ -784,7 +801,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)handleSharedURLResult:(NSString *)url{
     //Create manifest file with share IPA url and upload manifest file
-    if (fileType == FileTypeIPA) {
+    if (dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
         project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
@@ -794,14 +811,14 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                 [self viewStateForProgressFinish:YES];
             }else{
                 //change file type and upload manifest
-                fileType = FileTypeManifest;
+                dbFileType = DBFileTypeManifest;
                 [self dbUploadFile:manifestURL.resourceSpecifier to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
             }
         }];
         
     }
     //if same link enable load appinfo.json otherwise Create short shareable url of manifest
-    else if (fileType == FileTypeManifest){
+    else if (dbFileType == DBFileTypeManifest){
         NSString *shareableLink = [url substringToIndex:url.length-5];
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
         project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
@@ -824,7 +841,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
     
     //create app info file short sharable url
-    else if (fileType == FileTypeJson){
+    else if (dbFileType == DBFileTypeJson){
         NSString *shareableLink = [url substringToIndex:url.length-5];
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
         project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
@@ -881,7 +898,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 }
 
 -(void)uploadUniqueLinkJsonFile{
-    fileType = FileTypeJson;
+    dbFileType = DBFileTypeJson;
     NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
     
     //set mode for appinfo.json file to upload/update

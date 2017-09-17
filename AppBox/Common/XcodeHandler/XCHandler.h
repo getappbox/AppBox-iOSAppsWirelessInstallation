@@ -11,5 +11,6 @@
 @interface XCHandler : NSObject
 
 +(void)getXCodePathWithCompletion:(void (^) (NSString *xcodePath, NSString *applicationLoaderPath))completion;
++(void)changeDefaultXcodePath:(NSString *)path withCompletion:(void (^) (BOOL success, NSString *error))completion;
 
 @end

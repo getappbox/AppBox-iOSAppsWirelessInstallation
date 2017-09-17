@@ -11,6 +11,32 @@
 @implementation TaskHandler
 
 
++ (void)runPrivilegeTaskWithName:(NSString *)name andArgument:(NSArray *)arguments outputStream:(void (^) (STPrivilegedTask *task, BOOL success ,NSString *output))outputStream {
+    NSString *launchPath = [[NSBundle mainBundle] pathForResource: name ofType:@"sh"];
+    STPrivilegedTask *privilegedTask = [[STPrivilegedTask alloc] init];
+    [privilegedTask setLaunchPath:launchPath];
+    [privilegedTask setArguments:arguments];
+    
+    OSStatus err = [privilegedTask launch];
+    if (err != errAuthorizationSuccess) {
+        if (err == errAuthorizationCanceled) {
+            outputStream(privilegedTask, NO, @"Please provide privileges access to change your default Xcode.");
+        } else {
+            outputStream(privilegedTask, NO, @"Something went wrong");
+        }
+    } else {
+        NSLog(@"Task successfully launched");
+        
+        [privilegedTask waitUntilExit];
+        
+        // Read output file handle for data
+        NSFileHandle *readHandle = [privilegedTask outputFileHandle];
+        NSData *outputData = [readHandle readDataToEndOfFile];
+        NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+        outputStream(privilegedTask, YES, outputString);
+    }
+}
+
 + (void)runTaskWithName:(NSString *)name andArgument:(NSArray *)arguments taskLaunch:(void (^) (NSTask *task))taskLaunch outputStream:(void (^) (NSTask *task, NSString *output))outputStream{
     //Setup Task
     NSString *launchPath = [[NSBundle mainBundle] pathForResource: name ofType:@"sh"];

@@ -78,10 +78,10 @@
 
 //enums
 typedef enum : NSUInteger {
-    FileTypeIPA,
-    FileTypeManifest,
-    FileTypeJson,
-} FileType;
+    DBFileTypeIPA,
+    DBFileTypeManifest,
+    DBFileTypeJson,
+} DBFileType;
 
 typedef enum : NSUInteger {
     ScriptTypeGetScheme,
