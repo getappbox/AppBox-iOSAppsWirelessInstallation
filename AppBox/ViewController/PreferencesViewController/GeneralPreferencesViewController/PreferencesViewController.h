@@ -11,7 +11,9 @@
 @interface PreferencesViewController : NSViewController {
     __weak IBOutlet NSPathControl *pathBuild;
     __weak IBOutlet NSPathControl *pathXCode;
-    __weak IBOutlet NSPathControl *pathApplicationLoaded;
+    __weak IBOutlet NSButton *uploadSymbolButton;
+    __weak IBOutlet NSButton *uploadBitCodeButton;
+    __weak IBOutlet NSButton *compileBitCodeButton;
 }
 
 - (IBAction)buildPathHandler:(NSPathControl *)sender;

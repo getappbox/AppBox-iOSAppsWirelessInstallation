@@ -133,5 +133,47 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - ExportOption Plist Values -
+
+#define UploadSymbols @"uploadSymbols"
++(BOOL)uploadSymbols{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:UploadSymbols];
+}
+
++(void)setUploadSymbols:(BOOL)uploadSymbol{
+    [[NSUserDefaults standardUserDefaults] setBool:uploadSymbol forKey:UploadSymbols];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define UploadBitcode @"uploadBitcode"
++(BOOL)uploadBitcode{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:UploadBitcode];
+}
+
++(void)setUploadBitcode:(BOOL)uploadBitcode{
+    [[NSUserDefaults standardUserDefaults] setBool:uploadBitcode forKey:UploadBitcode];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define CompileBitcode @"compileBitcode"
++(BOOL)compileBitcode{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:CompileBitcode];
+}
+
++(void)setCompileBitcode:(BOOL)compileBitcode{
+    [[NSUserDefaults standardUserDefaults] setBool:compileBitcode forKey:CompileBitcode];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - App Settings -
+#define AppSettingIsFirstTime @"AppSettingIsFirstTime"
++(BOOL)isFirstTime{
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:AppSettingIsFirstTime];
+}
+
++(void)setIsFirstTime:(BOOL)isFirstTime{
+    [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:AppSettingIsFirstTime];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 @end
