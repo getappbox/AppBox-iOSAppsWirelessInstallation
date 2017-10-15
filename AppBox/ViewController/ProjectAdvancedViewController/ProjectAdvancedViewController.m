@@ -32,9 +32,8 @@
 
 - (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
     if (sender.state == NSOnState) {
-        [MBProgressHUD showStatus:@"Starting Local Server..." onView:self.view];
-        [TaskHandler runTaskWithName:@"PythonServer" andArgument:@[[UserData buildLocation].absoluteString] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
-            [[AppDelegate appDelegate] addSessionLog:output];
+        [MBProgressHUD showStatus:@"Starting Python Server" onView:self.view];
+        [LocalServerHandler startLocalServerWithCompletion:^(BOOL isOn) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     }

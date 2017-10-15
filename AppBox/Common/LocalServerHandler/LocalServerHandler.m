@@ -12,7 +12,7 @@
 
 +(void)getLocalIPAddressWithCompletion:(void (^)(NSString *ipAddress))completion{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *ipAddresses = [[NSHost hostWithName:[[NSHost currentHost] name]] addresses];
+        NSArray *ipAddresses = [[NSHost currentHost] addresses];
         for (NSString *ipAddress in ipAddresses) {
             if ([ipAddress componentsSeparatedByString:@"."].count == 4) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -26,6 +26,13 @@
             return;
         });
     });
+}
+
++(void)startLocalServerWithCompletion:(void (^)(BOOL isOn))completion{
+    [TaskHandler runTaskWithName:@"PythonServer" andArgument:@[[UserData buildLocation].absoluteString] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
+        [[AppDelegate appDelegate] addSessionLog:output];
+        completion(YES);
+    }];
 }
 
 @end

@@ -10,6 +10,7 @@
 
 @interface LocalServerHandler : NSObject
 
++(void)startLocalServerWithCompletion:(void (^)(BOOL isOn))completion;
 +(void)getLocalIPAddressWithCompletion:(void (^)(NSString *ipAddress))completion;
 
 @end
