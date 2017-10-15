@@ -20,7 +20,11 @@
     //set build url
     [pathBuild setURL:[UserData buildLocation]];
     [pathXCode setURL:[UserData xCodeLocation]];
-    [pathApplicationLoaded setURL:[UserData applicationLoaderLocation]];
+    
+    //set settings
+    [uploadSymbolButton setState:[UserData uploadSymbols]];
+    [uploadBitCodeButton setState:[UserData uploadBitcode]];
+    [compileBitCodeButton setState:[UserData compileBitcode]];
 }
 
 //Build Path Handler
@@ -55,12 +59,15 @@
 }
 
 - (IBAction)appStoreSymbolsFileCheckBokValueChanged:(NSButton *)sender {
+    [UserData setUploadSymbols:(sender.state == NSOnState)];
 }
 
 - (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender {
+    [UserData setCompileBitcode:(sender.state == NSOnState)];
 }
 
 - (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender {
+    [UserData setUploadBitcode:(sender.state == NSOnState)];
 }
 
 @end

@@ -66,6 +66,9 @@
     NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
     [exportOption setValue:self.teamId forKey:@"teamID"];
     [exportOption setValue:self.buildType forKey:@"method"];
+    [exportOption setValue:[NSNumber numberWithBool:[UserData uploadBitcode]] forKey:@"uploadBitcode"];
+    [exportOption setValue:[NSNumber numberWithBool:[UserData uploadSymbols]] forKey:@"uploadSymbols"];
+    [exportOption setValue:[NSNumber numberWithBool:[UserData compileBitcode]] forKey:@"compileBitcode"];
     return [exportOption writeToFile:[self.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding] atomically:YES];
 }
 

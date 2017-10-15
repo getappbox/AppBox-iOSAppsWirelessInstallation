@@ -10,7 +10,6 @@ target :AppBox do
     pod 'ObjectiveDropboxOfficial'
     pod 'ZXingObjC'
     pod 'SAMKeychain'
-    pod 'Sparkle'
     pod 'Google-Analytics-for-OS-X'
     pod 'STPrivilegedTask'
 end

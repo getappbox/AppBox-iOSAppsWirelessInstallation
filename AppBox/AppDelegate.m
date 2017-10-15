@@ -28,6 +28,10 @@
     [center setDelegate:self];
     self.sessionLog = [[NSMutableString alloc] init];
     
+    //Default Setting
+    [DefaultSettings setFirstTimeSettings];
+    [DefaultSettings setEveryStartupSettings];
+    
     //Check Dropbox Keys
     [Common checkDropboxKeys];
     

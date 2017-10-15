@@ -34,4 +34,14 @@
 +(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
 +(void)setDropboxAvailableSpace:(NSNumber *)availableSpace;
 
++(BOOL)uploadSymbols;
++(void)setUploadSymbols:(BOOL)uploadSymbol;
++(BOOL)uploadBitcode;
++(void)setUploadBitcode:(BOOL)uploadBitcode;
++(BOOL)compileBitcode;
++(void)setCompileBitcode:(BOOL)compileBitcode;
+
++(BOOL)isFirstTime;
++(void)setIsFirstTime:(BOOL)isFirstTime;
+
 @end

@@ -8,8 +8,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController">
             <connections>
+                <outlet property="compileBitCodeButton" destination="tft-z6-Exe" id="Wg2-rK-MO3"/>
                 <outlet property="pathBuild" destination="551-hz-G00" id="jfA-9F-eaH"/>
                 <outlet property="pathXCode" destination="1qf-8k-ZUe" id="0aI-Ot-7nn"/>
+                <outlet property="uploadBitCodeButton" destination="k8I-Hq-4Cd" id="YTd-Kd-LKF"/>
+                <outlet property="uploadSymbolButton" destination="wsi-kl-DmL" id="1Ni-bl-ayi"/>
                 <outlet property="view" destination="taC-Ah-5bC" id="GIR-EZ-Gne"/>
             </connections>
         </customObject>
