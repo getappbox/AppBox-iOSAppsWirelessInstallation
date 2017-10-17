@@ -8,12 +8,6 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
-
-- (IBAction)saveAction:(id)sender;
-
-@end
-
 @implementation AppDelegate
 
 - (void)awakeFromNib{
@@ -67,7 +61,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    
+    [self saveCoreDataChanges];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
@@ -232,7 +226,7 @@
 
 #pragma mark - Core Data Saving and Undo support
 
-- (IBAction)saveAction:(id)sender {
+- (void)saveCoreDataChanges{
     // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));

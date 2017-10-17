@@ -11,13 +11,13 @@
 #import "UploadRecord+CoreDataClass.h"
 @implementation Project
 
-- (Project *)addProjectWithXCProject:(XCProject *)xcProject andSaveDetails:(SaveDetails)saveDetails{
++(Project *)addProjectWithXCProject:(XCProject *)xcProject andSaveDetails:(SaveDetailTypes)saveDetailTypes{
     
     //fetch existing project with same identifer (if any)
     NSError *error;
     NSFetchRequest *fetchRequest = [Project fetchRequest];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"SELF.bundleIdentifier = %@", xcProject.identifer]];
-    NSArray *projects = [fetchRequest execute:&error];
+    NSArray *projects = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     if (error){
         //error in fetch request
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
@@ -38,7 +38,7 @@
             [project setProjectPath:[xcProject.fullPath.resourceSpecifier stringByRemovingPercentEncoding]];
         }
         
-        if (saveDetails == SaveCIDetails){
+        if (saveDetailTypes == SaveCIDetails){
             //fetch exisiting CI setting based on branch
             NSFetchRequest *fetchRequest = [CISetting fetchRequest];
             [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"SELF.branchName = %@", xcProject.branch]];
@@ -72,8 +72,9 @@
                     ciSettingsSet = [[NSMutableOrderedSet alloc] init];
                 }
                 [ciSettingsSet addObject:ciSetting];
+                [project setCiSettings:ciSettingsSet];
             }
-        } else if (saveDetails == SaveUploadDetails){
+        } else if (saveDetailTypes == SaveUploadDetails){
             //create new upload record
             UploadRecord *uploadRecord = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([UploadRecord class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
             
@@ -91,7 +92,7 @@
             [uploadRecord setDbFolderName:[[xcProject.dbDirectory pathComponents] firstObject]];
             [uploadRecord setDbIPAFullPath:xcProject.dbIPAFullPath.absoluteString];
             [uploadRecord setDbManifestFullPath:xcProject.dbManifestFullPath.absoluteString];
-//            [uploadRecord setDbSharedAppInfoURL:xcProject.ipaFileDBShareableURL]
+            //[uploadRecord setDbSharedAppInfoURL:xcProject.ipaFileDBShareableURL.absoluteString];
             [uploadRecord setDbSharedIPAURL:xcProject.ipaFileDBShareableURL.absoluteString];
             [uploadRecord setDbSharedManifestURL:xcProject.manifestFileSharableURL.absoluteString];
             [uploadRecord setKeepSameLink:xcProject.keepSameLink];
@@ -112,10 +113,10 @@
                 uploadRecordsSet = [[NSMutableOrderedSet alloc] init];
             }
             [uploadRecordsSet addObject:uploadRecord];
+            [project addUploadRecords:uploadRecordsSet];
         }
         
-        
-        
+        [[AppDelegate appDelegate] saveCoreDataChanges];
         
         return project;
     }

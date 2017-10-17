@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="CISetting" representedClassName="CISetting" syncable="YES">
         <attribute name="branchName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="buildScheme" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,8 +40,8 @@
         <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CISetting" positionX="-11729" positionY="-2647" width="128" height="195"/>
-        <element name="Project" positionX="-11927" positionY="-2592" width="128" height="105"/>
+        <element name="CISetting" positionX="-11736" positionY="-2679" width="128" height="195"/>
+        <element name="Project" positionX="-11918" positionY="-2628" width="128" height="105"/>
         <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="330"/>
     </elements>
 </model>

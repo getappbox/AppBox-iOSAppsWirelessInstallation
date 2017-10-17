@@ -20,6 +20,7 @@
 
 +(AppDelegate *)appDelegate;
 -(void)addSessionLog:(NSString *)sessionLog;
+- (void)saveCoreDataChanges;
 
 @property (nonatomic) BOOL processing;
 @property (nonatomic) BOOL isReadyToBuild;
