@@ -834,8 +834,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                  if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
                      [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
                      project.uniqueLinkJsonMetaData = [response.entries firstObject];
-                 } else if (error) {
-                     [DBErrorHandler handleNetworkErrorWith:error];
                  }
                  
                  //handle meta data
