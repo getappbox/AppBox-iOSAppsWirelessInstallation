@@ -81,7 +81,7 @@
                 [uploadRecord setBuildScheme:xcProject.selectedSchemes];
             }
             if (xcProject.buildType){
-                [uploadRecord setBuildScheme:xcProject.buildType];
+                [uploadRecord setBuildType:xcProject.buildType];
             }
             if (xcProject.dbAppInfoJSONFullPath){
                 [uploadRecord setDbAppInfoFullPath:xcProject.dbAppInfoJSONFullPath.absoluteString];
