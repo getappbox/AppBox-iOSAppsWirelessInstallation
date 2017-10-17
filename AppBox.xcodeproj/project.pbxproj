@@ -16,6 +16,7 @@
 		DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */; };
 		DB2629771F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629711F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m */; };
 		DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */; };
+		DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */; };
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
@@ -50,7 +51,6 @@
 		E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72DB1E88FA230031FB7C /* XCHandler.m */; };
 		E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72E31E88FB660031FB7C /* TaskHandler.m */; };
 		E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */ = {isa = PBXBuildFile; fileRef = E119EF5F1E3735EA00A7798E /* XCodePath.sh */; };
-		E16D72EB1E893DD70031FB7C /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */; };
 		E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186CD1E8A3BC00002509F /* PreferencesTabViewController.m */; };
 		E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186D51E8A45C30002509F /* PreferencesViewController.m */; };
 		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
@@ -119,6 +119,7 @@
 		DB2629711F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
 		DB2629791F95ED9A00C4C647 /* NSDate+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Date.h"; sourceTree = "<group>"; };
 		DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Date.m"; sourceTree = "<group>"; };
+		DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
 		DB3D7CC81F64501F00217096 /* PythonServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PythonServer.sh; sourceTree = "<group>"; };
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
@@ -174,7 +175,6 @@
 		E16D72DB1E88FA230031FB7C /* XCHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCHandler.m; sourceTree = "<group>"; };
 		E16D72E21E88FB660031FB7C /* TaskHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHandler.h; sourceTree = "<group>"; };
 		E16D72E31E88FB660031FB7C /* TaskHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHandler.m; sourceTree = "<group>"; };
-		E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
 		E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GetSchemeScript.sh; sourceTree = "<group>"; };
 		E178C9891E95067F008D2CAF /* appbox.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appbox.plist; sourceTree = "<group>"; };
 		E18186CC1E8A3BC00002509F /* PreferencesTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesTabViewController.h; sourceTree = "<group>"; };
@@ -499,7 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				E16437DE1D743A4E00CE8B7E /* Assets.xcassets */,
-				E16D72EA1E893DD70031FB7C /* AppBoxIcons.xcassets */,
+				DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -933,9 +933,9 @@
 				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
 				9740CD411E005DB100224D9F /* Main.storyboard in Resources */,
 				E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */,
-				E16D72EB1E893DD70031FB7C /* AppBoxIcons.xcassets in Resources */,
 				DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */,
 				E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */,
+				DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
 				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
