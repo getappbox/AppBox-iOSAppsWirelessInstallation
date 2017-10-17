@@ -55,6 +55,8 @@
              } @catch (NSException *exception) {
                  [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
              }
+         } else if (error.tag == DBRequestErrorAuth) {
+             [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
          }
      }];
 }
@@ -97,6 +99,9 @@
     [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Release Notes"} action:@"title" label:@"Release Notes" value:@1];
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",abGitHubReleaseBaseURL,versionString]]];
+}
+
+- (IBAction)showDashboardTapped:(NSMenuItem *)sender {
 }
 
 - (IBAction)licenseTapped:(NSMenuItem *)sender {

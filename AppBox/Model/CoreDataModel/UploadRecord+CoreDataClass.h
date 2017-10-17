@@ -2,12 +2,14 @@
 //  UploadRecord+CoreDataClass.h
 //  
 //
-//  Created by Vineet Choudhary on 08/02/17.
+//  Created by Vineet Choudhary on 17/10/17.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+
+@class Project;
 
 NS_ASSUME_NONNULL_BEGIN
 

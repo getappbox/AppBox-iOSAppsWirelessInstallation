@@ -40,9 +40,12 @@
 #import "RepoBuilder.h"
 #import "EventTracker.h"
 #import "UpdateHandler.h"
+#import "DBErrorHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
 #import "NSApplication+MenuHandler.h"
+
+#import "NSDate+Date.h"
 
 
 

@@ -14,6 +14,7 @@
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
 #define abMailGunBaseURL @"https://api.mailgun.net/v3/tryappbox.com/messages"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
+#define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Powered%20by%20DB"
 
 //MailGun
 #define abMailGunFromEmail @"AppBox Build <mailgun@tryappbox.com>"

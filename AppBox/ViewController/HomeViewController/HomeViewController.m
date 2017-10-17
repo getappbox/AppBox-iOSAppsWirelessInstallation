@@ -734,8 +734,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                   }];
               } else {
                   [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
-                  [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
                   [self viewStateForProgressFinish:YES];
+                  if (error) {
+                      [DBErrorHandler handleNetworkErrorWith:error];
+                  } else if (routeError) {
+                      [DBErrorHandler handleUploadErrorWith:routeError];
+                  }
               }
           }
       }]
@@ -794,7 +798,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }else if([error isHttpError] && error.statusCode.integerValue == 409){
         [self dbGetSharedURLForFile:file];
     }else{
-        [Common showAlertWithTitle:@"Error" andMessage:error.nsError.localizedDescription];
+        [DBErrorHandler handleNetworkErrorWith:error];
         [self viewStateForProgressFinish:YES];
     }
 }
@@ -919,8 +923,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                      [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
                  }
              }
-             else if (routeError || error){
-                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error while loading metadata %@",error.nsError.localizedDescription]];
+             else if (error){
+                 [DBErrorHandler handleNetworkErrorWith:error];
                  //create new appinfo.json
                  [self handleAfterUniqueJsonMetaDataLoaded];
              }
