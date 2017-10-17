@@ -2,7 +2,7 @@
 //  UploadRecord+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 08/02/17.
+//  Created by Vineet Choudhary on 17/10/17.
 //
 //
 
@@ -17,6 +17,7 @@
 @dynamic build;
 @dynamic buildScheme;
 @dynamic buildType;
+@dynamic datetime;
 @dynamic dbAppInfoFullPath;
 @dynamic dbDirectroy;
 @dynamic dbFolderName;
@@ -28,9 +29,10 @@
 @dynamic keepSameLink;
 @dynamic localBuildPath;
 @dynamic mailURL;
+@dynamic projectPath;
 @dynamic shortURL;
 @dynamic teamId;
 @dynamic version;
-@dynamic datetime;
+@dynamic project;
 
 @end

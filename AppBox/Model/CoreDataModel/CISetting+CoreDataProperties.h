@@ -2,7 +2,7 @@
 //  CISetting+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 08/02/17.
+//  Created by Vineet Choudhary on 17/10/17.
 //
 //
 
@@ -18,11 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *branchName;
 @property (nullable, nonatomic, copy) NSString *buildScheme;
 @property (nullable, nonatomic, copy) NSString *buildType;
+@property (nullable, nonatomic, copy) NSString *dbFolderName;
 @property (nullable, nonatomic, copy) NSString *emailAddress;
 @property (nullable, nonatomic, copy) NSNumber *keepSameLink;
 @property (nullable, nonatomic, copy) NSString *personalMessage;
+@property (nullable, nonatomic, copy) NSString *projectPath;
 @property (nullable, nonatomic, copy) NSNumber *shutdownMac;
 @property (nullable, nonatomic, copy) NSString *teamId;
+@property (nullable, nonatomic, retain) Project *project;
 
 @end
 

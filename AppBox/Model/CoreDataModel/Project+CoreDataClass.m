@@ -2,13 +2,14 @@
 //  Project+CoreDataClass.m
 //  
 //
-//  Created by Vineet Choudhary on 08/02/17.
+//  Created by Vineet Choudhary on 17/10/17.
 //
 //
 
 #import "Project+CoreDataClass.h"
 #import "CISetting+CoreDataClass.h"
 #import "UploadRecord+CoreDataClass.h"
+
 @implementation Project
 
 +(Project *)addProjectWithXCProject:(XCProject *)xcProject andSaveDetails:(SaveDetailTypes)saveDetailTypes{
@@ -34,9 +35,6 @@
         
         //set other project properties
         [project setName:xcProject.name];
-        if (xcProject.fullPath){
-            [project setProjectPath:[xcProject.fullPath.resourceSpecifier stringByRemovingPercentEncoding]];
-        }
         
         if (saveDetailTypes == SaveCIDetails){
             //fetch exisiting CI setting based on branch
@@ -88,6 +86,12 @@
             if (xcProject.dbAppInfoJSONFullPath){
                 [uploadRecord setDbAppInfoFullPath:xcProject.dbAppInfoJSONFullPath.absoluteString];
             }
+            if (xcProject.fullPath){
+                [uploadRecord setProjectPath:[xcProject.fullPath.resourceSpecifier stringByRemovingPercentEncoding]];
+            }
+            if (xcProject.teamId){
+                [uploadRecord setTeamId:xcProject.teamId];
+            }
             [uploadRecord setDbDirectroy:xcProject.dbDirectory.absoluteString];
             [uploadRecord setDbFolderName:[[xcProject.dbDirectory pathComponents] firstObject]];
             [uploadRecord setDbIPAFullPath:xcProject.dbIPAFullPath.absoluteString];
@@ -97,10 +101,7 @@
             [uploadRecord setDbSharedManifestURL:xcProject.manifestFileSharableURL.absoluteString];
             [uploadRecord setKeepSameLink:xcProject.keepSameLink];
             [uploadRecord setLocalBuildPath:[xcProject.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
-//            [uploadRecord setMailURL:];
-            if (xcProject.teamId){
-                [uploadRecord setTeamId:xcProject.teamId];
-            }
+            //            [uploadRecord setMailURL:];
             [uploadRecord setShortURL:xcProject.appShortShareableURL.absoluteString];
             [uploadRecord setBuild:xcProject.build];
             [uploadRecord setVersion:xcProject.version];

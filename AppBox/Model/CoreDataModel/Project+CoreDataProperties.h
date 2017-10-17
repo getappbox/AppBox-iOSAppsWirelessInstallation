@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 08/02/17.
+//  Created by Vineet Choudhary on 17/10/17.
 //
 //
 
@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, copy) NSString *bundleIdentifier;
 @property (nullable, nonatomic, copy) NSString *name;
-@property (nullable, nonatomic, copy) NSString *projectPath;
 @property (nullable, nonatomic, retain) NSOrderedSet<CISetting *> *ciSettings;
 @property (nullable, nonatomic, retain) NSOrderedSet<UploadRecord *> *uploadRecords;
 

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		9740CD411E005DB100224D9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9740CD3F1E005DB100224D9F /* Main.storyboard */; };
+		DB2629721F95E38C00C4C647 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */; };
+		DB2629731F95E38C00C4C647 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629691F95E38C00C4C647 /* CISetting+CoreDataProperties.m */; };
+		DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */; };
+		DB2629751F95E38C00C4C647 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296D1F95E38C00C4C647 /* Project+CoreDataProperties.m */; };
+		DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */; };
+		DB2629771F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629711F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m */; };
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
@@ -74,12 +80,6 @@
 		E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */; };
 		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
 		E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */; };
-		E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */; };
-		E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */; };
-		E1D479D31E4B04A500BBC838 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CA1E4B04A500BBC838 /* UploadRecord+CoreDataClass.m */; };
-		E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */; };
-		E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */; };
-		E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */; };
 		E1DC25FD1ECDBC16001EF106 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */; };
 		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
 		E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E215B61E869BDF0091565D /* ITCLoginViewController.m */; };
@@ -104,6 +104,18 @@
 		9740CD401E005DB100224D9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = AppBox/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
+		DB2629661F95E38C00C4C647 /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB2629681F95E38C00C4C647 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB2629691F95E38C00C4C647 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB26296A1F95E38C00C4C647 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB26296C1F95E38C00C4C647 /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB26296D1F95E38C00C4C647 /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB26296E1F95E38C00C4C647 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB2629701F95E38C00C4C647 /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB2629711F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
 		DB3D7CC81F64501F00217096 /* PythonServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PythonServer.sh; sourceTree = "<group>"; };
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
@@ -218,18 +230,6 @@
 		E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpPreferencesViewController.xib; sourceTree = "<group>"; };
 		E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitRepoDetails.h; sourceTree = "<group>"; };
 		E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitRepoDetails.m; sourceTree = "<group>"; };
-		E1D479C51E4B04A500BBC838 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
-		E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
-		E1D479C71E4B04A500BBC838 /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E1D479C91E4B04A500BBC838 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
-		E1D479CA1E4B04A500BBC838 /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
-		E1D479CB1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E1D479CD1E4B04A500BBC838 /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
-		E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
-		E1D479CF1E4B04A500BBC838 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherServicesKeys.h; sourceTree = "<group>"; };
 		E1DC25FB1ECDBC16001EF106 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -298,18 +298,18 @@
 		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				E1D479C51E4B04A500BBC838 /* Project+CoreDataClass.h */,
-				E1D479C61E4B04A500BBC838 /* Project+CoreDataClass.m */,
-				E1D479C71E4B04A500BBC838 /* Project+CoreDataProperties.h */,
-				E1D479C81E4B04A500BBC838 /* Project+CoreDataProperties.m */,
-				E1D479C91E4B04A500BBC838 /* UploadRecord+CoreDataClass.h */,
-				E1D479CA1E4B04A500BBC838 /* UploadRecord+CoreDataClass.m */,
-				E1D479CB1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.h */,
-				E1D479CC1E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m */,
-				E1D479CD1E4B04A500BBC838 /* CISetting+CoreDataClass.h */,
-				E1D479CE1E4B04A500BBC838 /* CISetting+CoreDataClass.m */,
-				E1D479CF1E4B04A500BBC838 /* CISetting+CoreDataProperties.h */,
-				E1D479D01E4B04A500BBC838 /* CISetting+CoreDataProperties.m */,
+				DB2629661F95E38C00C4C647 /* CISetting+CoreDataClass.h */,
+				DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */,
+				DB2629681F95E38C00C4C647 /* CISetting+CoreDataProperties.h */,
+				DB2629691F95E38C00C4C647 /* CISetting+CoreDataProperties.m */,
+				DB26296A1F95E38C00C4C647 /* Project+CoreDataClass.h */,
+				DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */,
+				DB26296C1F95E38C00C4C647 /* Project+CoreDataProperties.h */,
+				DB26296D1F95E38C00C4C647 /* Project+CoreDataProperties.m */,
+				DB26296E1F95E38C00C4C647 /* UploadRecord+CoreDataClass.h */,
+				DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */,
+				DB2629701F95E38C00C4C647 /* UploadRecord+CoreDataProperties.h */,
+				DB2629711F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -1020,15 +1020,16 @@
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
-				E1D479D61E4B04A500BBC838 /* CISetting+CoreDataProperties.m in Sources */,
 				E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */,
+				DB2629731F95E38C00C4C647 /* CISetting+CoreDataProperties.m in Sources */,
+				DB2629771F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
-				E1D479D21E4B04A500BBC838 /* Project+CoreDataProperties.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
+				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
@@ -1038,28 +1039,27 @@
 				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
-				E1D479D11E4B04A500BBC838 /* Project+CoreDataClass.m in Sources */,
+				DB2629721F95E38C00C4C647 /* CISetting+CoreDataClass.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				E1DC25FD1ECDBC16001EF106 /* MBProgressHUD.m in Sources */,
 				E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */,
+				DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */,
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
+				DB2629751F95E38C00C4C647 /* Project+CoreDataProperties.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
-				E1D479D51E4B04A500BBC838 /* CISetting+CoreDataClass.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
-				E1D479D41E4B04A500BBC838 /* UploadRecord+CoreDataProperties.m in Sources */,
 				E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
-				E1D479D31E4B04A500BBC838 /* UploadRecord+CoreDataClass.m in Sources */,
 				E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

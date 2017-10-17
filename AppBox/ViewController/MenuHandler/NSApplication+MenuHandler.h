@@ -29,4 +29,6 @@
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender;
 - (IBAction)releaseNotesTapped:(NSMenuItem *)sender;
 
+//Window
+- (IBAction)showDashboardTapped:(NSMenuItem *)sender;
 @end

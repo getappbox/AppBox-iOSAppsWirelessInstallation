@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 08/02/17.
+//  Created by Vineet Choudhary on 17/10/17.
 //
 //
 
@@ -16,7 +16,6 @@
 
 @dynamic bundleIdentifier;
 @dynamic name;
-@dynamic projectPath;
 @dynamic ciSettings;
 @dynamic uploadRecords;
 
