@@ -43,12 +43,13 @@ typedef enum : NSUInteger {
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     NSArray *fetchResults = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
+    //remove any existing upload request
     if (uploadRecords){
         [uploadRecords removeAllObjects];
     }
     
+    //handle fetchrequest error, manage action view and reload data
     if (error){
-        //error in fetch request
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
     }else if (fetchResults.count > 0){
         uploadRecords = [NSMutableArray arrayWithArray:fetchResults];
@@ -67,7 +68,7 @@ typedef enum : NSUInteger {
     } completionHandler:nil];
 }
 
-#pragma mark - NSTableView Delegate
+#pragma mark - NSTableView Delegate and DataSource
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return uploadRecords.count;
 }
@@ -100,7 +101,7 @@ typedef enum : NSUInteger {
     return YES;
 }
 
-#pragma mark - Actions
+#pragma mark - Build Action
 - (IBAction)copyURLButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
     [[NSPasteboard generalPasteboard] clearContents];
