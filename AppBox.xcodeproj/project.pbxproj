@@ -17,6 +17,7 @@
 		DB2629771F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629711F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m */; };
 		DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */; };
 		DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */; };
+		DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629841F961F4700C4C647 /* DBErrorHandler.m */; };
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
@@ -120,6 +121,8 @@
 		DB2629791F95ED9A00C4C647 /* NSDate+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Date.h"; sourceTree = "<group>"; };
 		DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Date.m"; sourceTree = "<group>"; };
 		DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
+		DB2629831F961F4700C4C647 /* DBErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBErrorHandler.h; sourceTree = "<group>"; };
+		DB2629841F961F4700C4C647 /* DBErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBErrorHandler.m; sourceTree = "<group>"; };
 		DB3D7CC81F64501F00217096 /* PythonServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PythonServer.sh; sourceTree = "<group>"; };
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
@@ -278,6 +281,15 @@
 				DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DB2629821F961F3100C4C647 /* DBErrorHandler */ = {
+			isa = PBXGroup;
+			children = (
+				DB2629831F961F4700C4C647 /* DBErrorHandler.h */,
+				DB2629841F961F4700C4C647 /* DBErrorHandler.m */,
+			);
+			path = DBErrorHandler;
 			sourceTree = "<group>";
 		};
 		DB425C021F8A514E008CB032 /* DefaultSettings */ = {
@@ -791,6 +803,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				DB2629781F95ED8900C4C647 /* Extensions */,
 				DB425C021F8A514E008CB032 /* DefaultSettings */,
 				E1902B501E16617B00C3E0F6 /* UserData */,
@@ -1069,6 +1082,7 @@
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
+				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
