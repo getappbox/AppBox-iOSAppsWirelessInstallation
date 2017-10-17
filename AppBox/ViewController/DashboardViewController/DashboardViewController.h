@@ -10,7 +10,9 @@
 #import "Project+CoreDataClass.h"
 #import "UploadRecord+CoreDataClass.h"
 
-@interface DashboardViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
+@interface DashboardViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>{
+    __weak IBOutlet NSLayoutConstraint *actionViewHeightConstraint;
+}
 
 @property (weak) IBOutlet NSTableView *dashboardTableView;
 @end

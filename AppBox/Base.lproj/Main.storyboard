@@ -1005,13 +1005,13 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVq-E7-tmk">
-                                <rect key="frame" x="0.0" y="0.0" width="700" height="290"/>
+                                <rect key="frame" x="0.0" y="0.0" width="700" height="350"/>
                                 <clipView key="contentView" id="dfT-GK-ipx">
-                                    <rect key="frame" x="1" y="0.0" width="698" height="289"/>
+                                    <rect key="frame" x="1" y="0.0" width="698" height="349"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="2UY-W2-qdH" viewBased="YES" id="WAg-ve-7Hr">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="266"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="326"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1291,7 +1291,7 @@ Gw
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="fqx-9A-aGC">
-                                    <rect key="frame" x="1" y="273" width="698" height="16"/>
+                                    <rect key="frame" x="1" y="333" width="698" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="QiA-Gy-5ui">
@@ -1304,19 +1304,19 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="cG3-db-hb7">
-                                <rect key="frame" x="0.0" y="290" width="700" height="60"/>
+                                <rect key="frame" x="0.0" y="350" width="700" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="bJL-u9-E3w"/>
+                                    <constraint firstAttribute="height" id="bJL-u9-E3w"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="mP7-5G-LVv" kind="embed" id="j07-To-kDu"/>
                                 </connections>
                             </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="vhI-XZ-D03" userLabel="CopyURLView">
-                                <rect key="frame" x="0.0" y="290" width="90" height="60"/>
+                                <rect key="frame" x="0.0" y="350" width="90" height="0.0"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mya-qj-BnO">
-                                        <rect key="frame" x="30" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="30" y="-35" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="9nt-tk-pOz"/>
                                             <constraint firstAttribute="width" constant="30" id="Pgy-dv-LXX"/>
@@ -1332,7 +1332,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="YOC-KZ-ONy">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="0.0"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="BFv-60-afv">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1353,10 +1353,10 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="c2h-mf-KBX" userLabel="DeleteBuildView">
-                                <rect key="frame" x="90" y="290" width="90" height="60"/>
+                                <rect key="frame" x="90" y="350" width="90" height="0.0"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3D0-6t-uyB">
-                                        <rect key="frame" x="30" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="30" y="-35" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="J28-dJ-Sai"/>
                                             <constraint firstAttribute="width" constant="30" id="OJl-jL-GMW"/>
@@ -1372,7 +1372,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="6x6-6y-hdp">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="0.0"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="nGr-dQ-sK7">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1393,10 +1393,10 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="myH-Q1-2TZ" userLabel="ShowInFinderView">
-                                <rect key="frame" x="480" y="290" width="110" height="60"/>
+                                <rect key="frame" x="480" y="350" width="110" height="0.0"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7aO-Wt-SsQ">
-                                        <rect key="frame" x="40" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="40" y="-35" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="jQB-CT-M9w"/>
                                             <constraint firstAttribute="height" constant="30" id="yM2-AB-QXv"/>
@@ -1412,7 +1412,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="jJ2-fD-YQ7">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="0.0"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="B9i-CT-odk">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1433,10 +1433,10 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="E6H-Mi-UMb" userLabel="ShowInDropboxView">
-                                <rect key="frame" x="590" y="290" width="110" height="60"/>
+                                <rect key="frame" x="590" y="350" width="110" height="0.0"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="weq-Pu-TYH">
-                                        <rect key="frame" x="40" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="40" y="-35" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="3qU-j5-el4"/>
                                             <constraint firstAttribute="width" constant="30" id="EEv-P7-0h4"/>
@@ -1452,7 +1452,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="hl5-GF-hNb">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="0.0"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="t5b-kK-RYy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1498,6 +1498,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionViewHeightConstraint" destination="bJL-u9-E3w" id="2lO-ER-13B"/>
                         <outlet property="dashboardTableView" destination="WAg-ve-7Hr" id="Wzm-mH-Z8b"/>
                     </connections>
                 </viewController>

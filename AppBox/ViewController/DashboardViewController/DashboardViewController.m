@@ -29,6 +29,10 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Setup TableView
+    [_dashboardTableView setAllowsEmptySelection:NO];
+    
+    //Load data
     NSError *error;
     NSFetchRequest *fetchRequest = [UploadRecord fetchRequest];
     NSArray *fetchResults = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
@@ -69,5 +73,14 @@ typedef enum : NSUInteger {
     return cell;
 }
 
+-(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
+        context.duration = 0.25;
+        context.allowsImplicitAnimation = YES;
+        actionViewHeightConstraint.constant = 65;
+        [self.view layoutSubtreeIfNeeded];
+    } completionHandler:nil];
+    return YES;
+}
 
 @end
