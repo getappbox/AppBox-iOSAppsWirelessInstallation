@@ -33,19 +33,38 @@ typedef enum : NSUInteger {
     [_dashboardTableView setAllowsEmptySelection:NO];
     
     //Load data
+    [self loadData];
+}
+
+-(void)loadData{
     NSError *error;
     NSFetchRequest *fetchRequest = [UploadRecord fetchRequest];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datetime" ascending:NO];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     NSArray *fetchResults = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
+    if (uploadRecords){
+        [uploadRecords removeAllObjects];
+    }
+    
     if (error){
         //error in fetch request
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
     }else if (fetchResults.count > 0){
         uploadRecords = [NSMutableArray arrayWithArray:fetchResults];
+    } else if (fetchResults.count == 0) {
+        [self setActionButtonViewHidden:YES];
     }
     [_dashboardTableView reloadData];
+}
+
+-(void)setActionButtonViewHidden:(BOOL)hidden{
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
+        context.duration = 0.25;
+        context.allowsImplicitAnimation = YES;
+        actionViewHeightConstraint.constant = hidden ? 0 : 65;
+        [self.view layoutSubtreeIfNeeded];
+    } completionHandler:nil];
 }
 
 #pragma mark - NSTableView Delegate
@@ -77,12 +96,7 @@ typedef enum : NSUInteger {
 }
 
 -(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
-        context.duration = 0.25;
-        context.allowsImplicitAnimation = YES;
-        actionViewHeightConstraint.constant = 65;
-        [self.view layoutSubtreeIfNeeded];
-    } completionHandler:nil];
+    [self setActionButtonViewHidden:NO];
     return YES;
 }
 
@@ -112,7 +126,7 @@ typedef enum : NSUInteger {
             if (result) {
                 [[[AppDelegate appDelegate] managedObjectContext] deleteObject:uploadRecord];
                 [[AppDelegate appDelegate] saveCoreDataChanges];
-                [self.dashboardTableView reloadData];
+                [self loadData];
             } else if (routeError) {
                 [DBErrorHandler handleDeleteErrorWith:routeError];
             } else if (networkError) {
@@ -125,8 +139,12 @@ typedef enum : NSUInteger {
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
-    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:NO]) {
+        NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
+        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
+    } else {
+        [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
+    }
 }
 
 - (IBAction)showInDropBoxButtonTapped:(NSButton *)sender {
