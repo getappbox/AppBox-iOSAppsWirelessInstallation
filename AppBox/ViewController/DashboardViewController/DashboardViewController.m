@@ -35,7 +35,10 @@ typedef enum : NSUInteger {
     //Load data
     NSError *error;
     NSFetchRequest *fetchRequest = [UploadRecord fetchRequest];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datetime" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
     NSArray *fetchResults = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
     if (error){
         //error in fetch request
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
@@ -56,7 +59,7 @@ typedef enum : NSUInteger {
     if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnName]) {
         [cell.textField setStringValue: uploadRecord.project.name];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex: DashBoardColumnVersion]){
-        [cell.textField setStringValue:uploadRecord.version];
+        [cell.textField setStringValue:[NSString stringWithFormat:@"%@ (%@)", uploadRecord.version, uploadRecord.build]];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnShortURL]){
         [cell.textField setStringValue:uploadRecord.shortURL];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDate]){
@@ -82,5 +85,57 @@ typedef enum : NSUInteger {
     } completionHandler:nil];
     return YES;
 }
+
+#pragma mark - Actions
+- (IBAction)copyURLButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    [[NSPasteboard generalPasteboard] clearContents];
+    [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
+    [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
+}
+
+- (IBAction)deleteBuildButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    
+    //Show Delete Alert
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText: @"Are you sure you want to delete this build?"];
+    [alert setInformativeText:[NSString stringWithFormat:@"You're about to delete \"%@-%@(%@)\". This is permanent! We warned you, k?", uploadRecord.project.name, uploadRecord.version, uploadRecord.build]];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    [alert addButtonWithTitle:@"Delete"];
+    [alert addButtonWithTitle:@"Cancel"];
+    
+    if ([alert runModal] == NSAlertFirstButtonReturn){
+        [MBProgressHUD showStatus:@"Deleting..." onView:self.view];
+        [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:uploadRecord.dbDirectroy] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if (result) {
+                [[[AppDelegate appDelegate] managedObjectContext] deleteObject:uploadRecord];
+                [[AppDelegate appDelegate] saveCoreDataChanges];
+                [self.dashboardTableView reloadData];
+            } else if (routeError) {
+                [DBErrorHandler handleDeleteErrorWith:routeError];
+            } else if (networkError) {
+                [DBErrorHandler handleNetworkErrorWith:networkError];
+            }
+        }];
+        [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Update"} action:@"title" label:@"Update" value:@1];
+    }
+}
+
+- (IBAction)showInFinderButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
+}
+
+- (IBAction)showInDropBoxButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
+    NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
+    [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
+}
+
+
 
 @end
