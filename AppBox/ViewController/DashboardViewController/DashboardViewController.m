@@ -56,11 +56,13 @@ typedef enum : NSUInteger {
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnShortURL]){
         [cell.textField setStringValue:uploadRecord.shortURL];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDate]){
-        [cell.textField setStringValue:uploadRecord.datetime.description];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType]){
+        [cell.textField setStringValue:uploadRecord.datetime.string];
+    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType] && uploadRecord.buildType){
         [cell.textField setStringValue:uploadRecord.buildType];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId]){
+    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.teamId){
         [cell.textField setStringValue:uploadRecord.teamId];
+    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme] && uploadRecord.buildScheme) {
+        [cell.textField setStringValue:uploadRecord.buildScheme];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDropboxFolder]) {
         [cell.textField setStringValue:uploadRecord.dbDirectroy];
     }

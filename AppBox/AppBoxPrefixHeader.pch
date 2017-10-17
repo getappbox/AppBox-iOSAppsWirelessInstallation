@@ -44,6 +44,8 @@
 #import "KeychainHandler.h"
 #import "NSApplication+MenuHandler.h"
 
+#import "NSDate+Date.h"
+
 
 
 #endif /* AppBoxPrefixHeader_pch */
