@@ -55,6 +55,8 @@
              } @catch (NSException *exception) {
                  [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
              }
+         } else if (error.tag == DBRequestErrorAuth) {
+             [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
          }
      }];
 }
