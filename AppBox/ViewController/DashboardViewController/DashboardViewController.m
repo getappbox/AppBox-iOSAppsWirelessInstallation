@@ -34,6 +34,14 @@ typedef enum : NSUInteger {
     
     //Load data
     [self loadData];
+    
+    //Coredata changes notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+}
+
+-(void)viewDidDisappear{
+    [super viewDidDisappear];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)loadData{
