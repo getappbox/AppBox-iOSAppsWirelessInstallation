@@ -26,7 +26,11 @@
         }break;
             
         case DBRequestErrorClient:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to a problem on the client-side of the SDK. Please try again."];
+            if (![[AppDelegate appDelegate] isInternetConnected]){
+                [Common showNoInternetConnectionAvailabeAlert];
+            } else {
+                [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to a problem on the client-side of the SDK. Please try again."];
+            }
         }break;
             
         case DBRequestErrorBadInput:{

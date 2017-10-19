@@ -14,6 +14,8 @@
 + (void)checkDropboxKeys;
 + (NSString*)generateUUID;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
+
++ (void)showNoInternetConnectionAvailabeAlert;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
 

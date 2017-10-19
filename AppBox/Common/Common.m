@@ -36,6 +36,10 @@
     return [alert runModal];
 }
 
++ (void)showNoInternetConnectionAvailabeAlert{
+    [Common showAlertWithTitle:@"Error" andMessage:@"There is no Internet connection."];
+}
+
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message{
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     [notification setTitle:title == nil ? @"Error" : title];
