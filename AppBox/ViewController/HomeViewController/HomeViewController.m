@@ -467,11 +467,12 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                     [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
                     [self viewStateForProgressFinish:YES];
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
-                    [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
-                    if ([AppDelegate appDelegate].isInternetConnected){
+                    if ([AppDelegate appDelegate].isInternetConnected || [outputString containsString:@"^"]){
+                        [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
                         [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
                         [self viewStateForProgressFinish:YES];
                     }else{
+                        [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                         lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
                             [self runBuildScript];
                         }];
