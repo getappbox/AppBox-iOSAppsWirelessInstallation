@@ -8,17 +8,12 @@
 
 #import "HomeViewController.h"
 
-static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
-static NSString *const UNIQUE_LINK_SHORT = @"uniqueLinkShort";
-static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
-
 @implementation HomeViewController{
     XCProject *project;
     XCProject *repoProject;
     ScriptType scriptType;
-    DBFileType dbFileType;
     NSArray *allTeamIds;
-    NSBlockOperation *lastfailedOperation;
+    UploadManager *uploadManager;
 }
 
 - (void)viewDidLoad {
@@ -35,9 +30,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     [project setBuildDirectory: [UserData buildLocation]];
     
     //setup dropbox
-    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
-    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
-//    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
+    [UploadManager setupDBClientsManager];
+    [self setupUploadManager];
     
     //update available memory
     [[NSApplication sharedApplication] updateDropboxUsage];
@@ -51,9 +45,9 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             }else{
                 [self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
                 //restart last failed operation
-                if (lastfailedOperation){
-                    [lastfailedOperation start];
-                    lastfailedOperation = nil;
+                if (uploadManager.lastfailedOperation){
+                    [uploadManager.lastfailedOperation start];
+                    uploadManager.lastfailedOperation = nil;
                 }
             }
         }
@@ -80,6 +74,33 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
     [[AppDelegate appDelegate] setIsReadyToBuild:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
+}
+
+#pragma mark - Upload Manager
+-(void)setupUploadManager{
+    uploadManager = [[UploadManager alloc] init];
+    [uploadManager setProject:project];
+    [uploadManager setCurrentViewController:self];
+    
+    __unsafe_unretained typeof(self) weakSelf = self;
+    
+    [uploadManager setProgressBlock:^(NSString *title){
+        
+    }];
+    
+    [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
+        if (terminate) {
+            [weakSelf viewStateForProgressFinish:YES];
+        }
+    }];
+    
+    [uploadManager setItcLoginBlock:^(){
+        [weakSelf performSegueWithIdentifier:@"ITCLogin" sender:weakSelf];
+    }];
+    
+    [uploadManager setCompletionBlock:^(){
+        [weakSelf logAppUploadEventAndShareURLOnSlackChannel];
+    }];
 }
 
 
@@ -230,7 +251,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
         }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:nil];
             [EventTracker logEventWithName:@"Upload IPA" customAttributes:currentSetting action:@"Upload IPA" label:@"Upload IPA" value:@1];
-            [self getIPAInfoFromLocalURL:project.ipaFullPath];
+            [uploadManager uploadIPAFile:project.ipaFullPath];
         }
         [self viewStateForProgressFinish:NO];
     }else{
@@ -473,7 +494,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
                         [self viewStateForProgressFinish:YES];
                     }else{
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
-                        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                        uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
                             [self runBuildScript];
                         }];
                     }
@@ -525,7 +546,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             
             //if internet connection is lost, show watting message and start process again when connected
             [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
-            lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+            uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
                 if (scriptType == ScriptTypeAppStoreValidation){
                     [self runALAppStoreScriptForValidation:YES];
                 }else if (scriptType == ScriptTypeAppStoreUpload){
@@ -546,129 +567,13 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
             [self runALAppStoreScriptForValidation:YES];
         }else{
             //get ipa details and upload to dropbox
-            [self getIPAInfoFromLocalURL:project.ipaFullPath];
+            [uploadManager uploadIPAFile:project.ipaFullPath];
         }
     }else{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self checkIPACreated];
         });
     }
-}
-
-- (void)getIPAInfoFromLocalURL:(NSURL *)ipaFileURL{
-    NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",ipaPath]];
-        //Unzip ipa
-        __block NSString *payloadEntry;
-        __block NSString *infoPlistPath;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
-                    
-                    //Get payload entry
-                    if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
-                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found payload at path = %@",entry]];
-                        payloadEntry = entry;
-                    }
-                    
-                    //Get Info.plist entry
-                    NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
-                    if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
-                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found Info.plist at path = %@",mainInfoPlistPath]];
-                        infoPlistPath = entry;
-                    }
-                    
-                    //Get embedded mobile provision
-                    if (project.buildType == nil){
-                        NSString *mobileProvisionPath = [NSString stringWithFormat:@"%@embedded.mobileprovision",payloadEntry].lowercaseString;
-                        if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
-                            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found mobileprovision at path = %@",mobileProvisionPath]];
-                            [project setBuildType:[MobileProvision buildTypeForProvisioning:[NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath]]];
-                        }
-                    }
-                    
-                    //show status and log files entry
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
-                });
-            } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (error) {
-                        //show error and return
-                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
-                        [self viewStateForProgressFinish:YES];
-                        return;
-                    }
-                    
-                    //get info.plist
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Final Info.plist path = %@",infoPlistPath]];
-                    [project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
-                    
-                    //show error if info.plist is nil or invalid
-                    if (![project isValidProjectInfoPlist]) {
-                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
-                        [self viewStateForProgressFinish:YES];
-                        return;
-                    }
-                    
-                    //set dropbox folder name & log if user changing folder name or not
-                    if (project.bundleDirectory.absoluteString.length == 0){
-                        [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0} action:@"DB Folder Name" label:@"Default" value:@1];
-                    }else{
-                        [project upadteDbDirectoryByBundleDirectory];
-                        [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1} action:@"DB Folder Name" label:@"Custom" value:@1];
-                    }
-
-                    
-                    if ([AppDelegate appDelegate].isInternetConnected){
-                        [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
-                    }else{
-                        [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
-                    }
-                    
-                    //prepare for upload and check ipa type
-                    NSURL *ipaFileURL = ([project.ipaFullPath isFileURL]) ? project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
-                    [project setIpaFullPath:ipaFileURL];
-                    [self uploadIPAFileWithLocalURL:ipaFileURL];
-                });
-            }];
-        });
-    }else{
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
-        [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
-        [self viewStateForProgressFinish:YES];
-    }
-}
-
--(void)uploadIPAFileWithLocalURL:(NSURL *)ipaURL{
-    if ([project.buildType isEqualToString: BuildTypeAppStore] && project.fullPath == nil){
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText: @"Please confirm"];
-        [alert setInformativeText:@"AppBox found an AppStore provisioning profile in this IPA file. Do you want to upload this on AppStore?"];
-        [alert setAlertStyle:NSInformationalAlertStyle];
-        [alert addButtonWithTitle:@"YES! Upload on AppStore."];
-        [alert addButtonWithTitle:@"NO! Upload on Dropbox"];
-        if ([alert runModal] == NSAlertFirstButtonReturn){
-            [self performSegueWithIdentifier:@"ITCLogin" sender:self];
-            return;
-        }
-    }
-
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",project.ipaInfoPlist]];
-    
-    //upload ipa
-    dbFileType = DBFileTypeIPA;
-    if ([AppDelegate appDelegate].isInternetConnected) {
-        [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
-    } else {
-        lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-            [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
-        }];
-    }
-    
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
 }
 
 #pragma mark - Dropbox Helper -
@@ -687,286 +592,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     }
 }
 
-#pragma mark → Dropbox Upload Files
--(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
-    //uploadUrl:path inputUrl:file
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
-      //Track response with result and error
-      setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
-          if (response) {
-              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploaded file metadata = %@", response]];
-              
-              //AppInfo.json file uploaded and creating shared url
-              if(dbFileType == DBFileTypeJson){
-                  project.uniqueLinkJsonMetaData = response;
-                  if(project.appShortShareableURL){
-                      [self logAppUploadEventAndShareURLOnSlackChannel];
-                      return;
-                  }else{
-                      //create shared url for appinfo.json
-                      [self dbCreateSharedURLForFile:response.pathDisplay];
-                  }
-              }
-              //IPA file uploaded and creating shared url
-              else if (dbFileType == DBFileTypeIPA){
-                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
-                  NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
-                  [self showStatus:status andShowProgressBar:YES withProgress:-1];
-                  
-                  //create shared url for ipa
-                  [self dbCreateSharedURLForFile:response.pathDisplay];
-              }
-              //Manifest file uploaded and creating shared url
-              else if (dbFileType == DBFileTypeManifest){
-                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"Manifest file uploaded."];
-                  NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
-                  [self showStatus:status andShowProgressBar:YES withProgress:-1];
-                  
-                  //create shared url for manifest
-                  [self dbCreateSharedURLForFile:response.pathDisplay];
-              }
-          }
-          //unable to upload file, show error
-          else {
-              //The Internet connection appears to be offline
-              if (error.nsError.code == -1009) {
-                  lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                      [self dbUploadFile:file to:path mode:mode];
-                  }];
-              } else {
-                  [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
-                  [self viewStateForProgressFinish:YES];
-                  if (error) {
-                      [DBErrorHandler handleNetworkErrorWith:error];
-                  } else if (routeError) {
-                      [DBErrorHandler handleUploadErrorWith:routeError];
-                  }
-              }
-          }
-      }]
-     
-     //Track and show upload progress
-     setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-         //Calculate and show progress based on file type
-         CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
-         if (dbFileType == DBFileTypeIPA) {
-             NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }else if (dbFileType == DBFileTypeManifest){
-             NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }else if (dbFileType == DBFileTypeJson){
-             NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }
-     }];
-}
-
-
-#pragma mark → Dropbox Create/Get Shared Link
--(void)dbCreateSharedURLForFile:(NSString *)file{
-    [[[DBClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
-     //Track response with result and error
-     setResponseBlock:^(DBSHARINGSharedLinkMetadata * _Nullable response, DBSHARINGCreateSharedLinkWithSettingsError * _Nullable routeError, DBRequestError * _Nullable error) {
-         if (response){
-             [self handleSharedURLResult:response.url];
-         }else{
-             [self handleSharedURLError:error forFile:file];
-         }
-     }];
-}
-
--(void)dbGetSharedURLForFile:(NSString *)file{
-    [[[DBClientsManager authorizedClient].sharingRoutes listSharedLinks:file cursor:nil directOnly:nil] setResponseBlock:^(DBSHARINGListSharedLinksResult * _Nullable response, DBSHARINGListSharedLinksError * _Nullable routeError, DBRequestError * _Nullable error) {
-        if (response && response.links && response.links.count > 0){
-            [self handleSharedURLResult:[[response.links firstObject] url]];
-        }else{
-            [self handleSharedURLError:error forFile:file];
-        }
-    }];
-}
-
--(void)handleSharedURLError:(DBRequestError *)error forFile:(NSString *)file{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Create Share Link Error - %@",error]];
-    if ([error isClientError]){
-        if ([[AppDelegate appDelegate] isInternetConnected]){
-            [self dbCreateSharedURLForFile:file];
-        }else{
-            lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                [self dbCreateSharedURLForFile:file];
-            }];
-        }
-    }else if([error isHttpError] && error.statusCode.integerValue == 409){
-        [self dbGetSharedURLForFile:file];
-    }else{
-        [DBErrorHandler handleNetworkErrorWith:error];
-        [self viewStateForProgressFinish:YES];
-    }
-}
-
--(void)handleSharedURLResult:(NSString *)url{
-    //Create manifest file with share IPA url and upload manifest file
-    if (dbFileType == DBFileTypeIPA) {
-        NSString *shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
-        project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
-        [project createManifestWithIPAURL:project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
-            if (manifestURL == nil){
-                //show error if manifest file url is nil
-                [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
-                [self viewStateForProgressFinish:YES];
-            }else{
-                //change file type and upload manifest
-                dbFileType = DBFileTypeManifest;
-                [self dbUploadFile:manifestURL.resourceSpecifier to:project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
-            }
-        }];
-        
-    }
-    //if same link enable load appinfo.json otherwise Create short shareable url of manifest
-    else if (dbFileType == DBFileTypeManifest){
-        NSString *shareableLink = [url substringToIndex:url.length-5];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
-        project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
-        if(buttonUniqueLink.state){
-            //Download previously uploaded appinfo
-            [[[DBClientsManager authorizedClient].filesRoutes listRevisions:project.dbAppInfoJSONFullPath.absoluteString limit:@1]
-             setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
-                 //check there is any rev available
-                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-                     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
-                     project.uniqueLinkJsonMetaData = [response.entries firstObject];
-                 }
-                 
-                 //handle meta data
-                 [self handleAfterUniqueJsonMetaDataLoaded];
-             }];
-        }else{
-            [self createManifestShortSharableUrl];
-        }
-    }
-    
-    //create app info file short sharable url
-    else if (dbFileType == DBFileTypeJson){
-        NSString *shareableLink = [url substringToIndex:url.length-5];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
-        project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
-        NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-        [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
-        [self writeUniqueJsonWithDict:dictUniqueFile];
-        if(project.appShortShareableURL){
-            [self logAppUploadEventAndShareURLOnSlackChannel];
-        }else{
-            [self createUniqueShortSharableUrl];
-        }
-    }
-}
-
-#pragma mark - Updating Unique Link -
--(void)updateUniquLinkDictinory:(NSMutableDictionary *)dictUniqueLink{
-    if(![dictUniqueLink isKindOfClass:[NSDictionary class]])
-    dictUniqueLink = [NSMutableDictionary new];
-    NSDictionary *latestVersion = @{
-                                    @"name" : project.name,
-                                    @"version" : project.version,
-                                    @"build" : project.build,
-                                    @"identifier" : project.identifer,
-                                    @"manifestLink" : project.manifestFileSharableURL.absoluteString,
-                                    @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
-                                    };
-    NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
-    if(!versionHistory){
-        versionHistory = [NSMutableArray new];
-    }
-    [versionHistory addObject:latestVersion];
-    [dictUniqueLink setObject:versionHistory forKey:@"versions"];
-    [dictUniqueLink setObject:latestVersion forKey:@"latestVersion"];
-    [self writeUniqueJsonWithDict:dictUniqueLink];
-    project.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHARED]];
-    project.appShortShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHORT]];
-    [self uploadUniqueLinkJsonFile];
-}
-
-- (NSDictionary *)getUniqueJsonDict{
-    NSError *error;
-    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary]];
-    return dictionary;
-}
-
--(void)writeUniqueJsonWithDict:(NSDictionary *)jsonDict{
-    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON];
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-    }
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:nil];
-    [jsonData writeToFile:path atomically:YES];
-}
-
--(void)uploadUniqueLinkJsonFile{
-    dbFileType = DBFileTypeJson;
-    NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
-    
-    //set mode for appinfo.json file to upload/update
-    DBFILESWriteMode *mode = (project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
-    [self dbUploadFile:path.resourceSpecifier to:project.dbAppInfoJSONFullPath.absoluteString mode:mode];
-}
-
--(void)handleAfterUniqueJsonMetaDataLoaded{
-    if(project.uniqueLinkJsonMetaData){
-        NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
-        
-        //download appinfo.json file
-        [[[DBClientsManager authorizedClient].filesRoutes downloadUrl:project.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
-         setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESDownloadError * _Nullable routeError, DBRequestError * _Nullable error, NSURL * _Nonnull destination) {
-             if (response){
-                 if([response.name hasSuffix:FILE_NAME_UNIQUE_JSON]){
-                     //append new version
-                     [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
-                 }
-             }
-             else if (error){
-                 [DBErrorHandler handleNetworkErrorWith:error];
-                 //create new appinfo.json
-                 [self handleAfterUniqueJsonMetaDataLoaded];
-             }
-         }];
-    }else{
-        [self updateUniquLinkDictinory:[NSMutableDictionary new]];
-    }
-}
-
-#pragma mark - Create ShortSharable URL -
--(void)createUniqueShortSharableUrl{
-    NSString *originalURL = [project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
-    //create short url
-    project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-        project.appShortShareableURL = shortURL;
-        NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-        [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
-        [self writeUniqueJsonWithDict:dictUniqueFile];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //upload file unique short url
-            [self uploadUniqueLinkJsonFile];
-        });
-    }];
-}
-
--(void)createManifestShortSharableUrl{
-    NSString *originalURL = [project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
-    //create short url
-    project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]];
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-        project.appShortShareableURL = shortURL;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //show url
-            [self logAppUploadEventAndShareURLOnSlackChannel];
-        });
-    }];
-}
-
 
 #pragma mark - Controller Helpers -
 
@@ -979,6 +604,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
     if (finish){
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
+        [uploadManager setProject:project];
         [MBProgressHUD hideAllHUDsForView:self.view animated:true];
     }
     
@@ -1167,7 +793,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 
 -(void)itcLoginCanceled{
     if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
-        [self uploadIPAFileWithLocalURL:project.ipaFullPath];
+        [uploadManager uploadIPAFileWithoutUnzip:project.ipaFullPath];
     } else {
         [project setBuildType:abEmptyString];
         [comboBuildType deselectItemAtIndex:comboBuildType.indexOfSelectedItem];

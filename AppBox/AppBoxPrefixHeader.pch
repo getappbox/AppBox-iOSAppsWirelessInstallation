@@ -33,6 +33,7 @@
 
 #import "Common.h"
 #import "XCHandler.h"
+#import "UploadManager.h"
 #import "MacHandler.h"
 #import "MailHandler.h"
 #import "SlackClient.h"
