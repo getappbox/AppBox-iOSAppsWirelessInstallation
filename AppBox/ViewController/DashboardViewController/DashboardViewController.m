@@ -35,6 +35,9 @@ typedef enum : NSUInteger {
     //Load data
     [self loadData];
     
+    //Track screen
+    [EventTracker logScreen:@"Dashboard Screen"];
+    
     //Coredata changes notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
 }
@@ -115,6 +118,7 @@ typedef enum : NSUInteger {
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
     [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
+    [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
 }
 
 - (IBAction)deleteBuildButtonTapped:(NSButton *)sender {
@@ -142,7 +146,6 @@ typedef enum : NSUInteger {
                 [DBErrorHandler handleNetworkErrorWith:networkError];
             }
         }];
-        [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Update"} action:@"title" label:@"Update" value:@1];
     }
 }
 

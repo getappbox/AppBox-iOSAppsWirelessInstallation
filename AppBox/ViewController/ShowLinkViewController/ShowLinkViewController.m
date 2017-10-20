@@ -30,8 +30,7 @@
 
 
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
-    [EventTracker logEventWithName:@"Copy to Clipboard" customAttributes:@{@"Copy to Clipboard":@1}
-                            action:@"Copy to Clipboard" label:@"Copy to Clipboard" value:@1];
+    [EventTracker logEventWithType:LogEventTypeCopyToClipboard];
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.absoluteString  forType:NSStringPboardType];
     [sender setTitle:@"Copied!!"];

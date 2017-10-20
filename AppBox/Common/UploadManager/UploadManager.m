@@ -80,10 +80,10 @@
                     
                     //set dropbox folder name & log if user changing folder name or not
                     if (self.project.bundleDirectory.absoluteString.length == 0){
-                        [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0} action:@"DB Folder Name" label:@"Default" value:@1];
+                        [EventTracker logEventWithType:LogEventTypeUploadWithDefaultDBFolderName];
                     }else{
                         [self.project upadteDbDirectoryByBundleDirectory];
-                        [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1} action:@"DB Folder Name" label:@"Custom" value:@1];
+                        [EventTracker logEventWithType:LogEventTypeUploadWithCustomBDFolderName];
                     }
                     
                     

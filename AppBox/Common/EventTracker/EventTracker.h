@@ -9,11 +9,38 @@
 #import <Foundation/Foundation.h>
 #import <GoogleAnalyticsTracker/GoogleAnalyticsTracker.h>
 
+typedef enum : NSUInteger {
+    LogEventTypeCopyToClipboard,
+    LogEventTypeCopyToClipboardFromDashboard,
+    LogEventTypeUpdateExternalLink,
+    LogEventTypeUploadWithCustomBDFolderName,
+    LogEventTypeUploadWithDefaultDBFolderName,
+    LogEventTypeShortURLFailedInFirstRequest,
+    LogEventTypeShortURLFailedInSecondRequest,
+    LogEventTypeShortURLSuccessInFirstRequest,
+    LogEventTypeShortURLSuccessInSecondRequest,
+    LogEventTypeExternalLinkTwitter,
+    LogEventTypeExternalLinkHelp,
+    LogEventTypeExternalLinkReleaseNote,
+    LogEventTypeExternalLinkLicense,
+    LogEventTypeExternalLinkKeepSameLink,
+    LogEventTypeAuthDropbox,
+    LogEventTypeExitWithoutAuth,
+} LogEventTypes;
+
+typedef enum : NSUInteger {
+    LogEventSettingTypeUploadIPA,
+    LogEventSettingTypeArchiveAndUpload,
+    LogEventSettingTypeUploadIPASuccess
+} LogEventSettingTypes;
+
 @interface EventTracker : NSObject {
     
 }
 
 +(void)logScreen:(NSString *)name;
++(void)logEventWithType:(LogEventTypes)eventType;
++(void)logEventSettingWithType:(LogEventSettingTypes)eventType andSettings:(NSDictionary *)currentSetting;
 +(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes action:(NSString *)action label:(NSString *)label value:(NSNumber *)value;
 
 @end

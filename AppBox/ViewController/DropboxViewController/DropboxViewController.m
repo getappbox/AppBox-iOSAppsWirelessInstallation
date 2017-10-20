@@ -27,7 +27,7 @@
 }
 
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
-    [EventTracker logEventWithName:@"Authenticating Dropbox" customAttributes:nil action:nil label:nil value:nil];
+    [EventTracker logEventWithType:LogEventTypeAuthDropbox];
     //Authenticate user
     [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace] controller:self openURL:^(NSURL * _Nonnull url) {
         [[NSWorkspace sharedWorkspace] openURL:url];
@@ -35,7 +35,7 @@
 }
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender {
-    [EventTracker logEventWithName:@"AppBox terminated before Dropbox LoggedIN :(" customAttributes:nil action:nil label:nil value:nil];
+    [EventTracker logEventWithType:LogEventTypeExitWithoutAuth];
     [self dismissController:self];
     [NSApp terminate:self];
 }

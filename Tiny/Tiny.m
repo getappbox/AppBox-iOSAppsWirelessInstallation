@@ -21,8 +21,7 @@
         if (error){
             
             //Log failed rate
-            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@1}
-                                    action:@"Request No" label:@"1" value:@1];
+            [EventTracker logEventWithType:LogEventTypeShortURLFailedInFirstRequest];
             //Give it another try
             NSURLRequest *URLRequest = [service URLRequestToShortenURL:longURL];
             NSURLSession *session = [NSURLSession sharedSession];
@@ -30,8 +29,7 @@
                 if (error){
                     
                     //Log failed rate
-                    [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@2}
-                                            action:@"Request No" label:@"2" value:@1];
+                    [EventTracker logEventWithType:LogEventTypeShortURLFailedInSecondRequest];
                     if (completionBlock){
                         completionBlock(longURL, error);
                     }
@@ -45,8 +43,7 @@
                     NSURL *URL = [NSURL URLWithString:shortenedURLString];
                     
                     //Log success rate
-                    [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@2}
-                                            action:@"Request No" label:@"2" value:@1];
+                    [EventTracker logEventWithType:LogEventTypeShortURLSuccessInSecondRequest];
                     if (completionBlock){
                         completionBlock(URL, nil);
                     }
@@ -61,8 +58,7 @@
             NSString *shortenedURLString = [JSON valueForKeyPath:keyPath];
             NSURL *URL = [NSURL URLWithString:shortenedURLString];
             //Log success rate
-            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@1}
-                                    action:@"Request No" label:@"1" value:@1];
+            [EventTracker logEventWithType:LogEventTypeShortURLSuccessInFirstRequest];
             if (completionBlock){
                 completionBlock(URL, nil);
             }

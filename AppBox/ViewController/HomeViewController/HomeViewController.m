@@ -182,8 +182,7 @@
     [alert addButtonWithTitle:@"Ok"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
-        [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Keep Same Link"}
-                                action:@"Keep Same Link" label:@"Keep Same Link" value:@1];
+        [EventTracker logEventWithType:LogEventTypeExternalLinkKeepSameLink];
     }
 }
 
@@ -244,13 +243,12 @@
         
         if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}];
-            [EventTracker logEventWithName:@"Archive and Upload IPA" customAttributes:currentSetting
-                                    action:@"Build Type" label:comboBuildType.stringValue value:@1];
+            [EventTracker logEventSettingWithType:LogEventSettingTypeArchiveAndUpload andSettings:currentSetting];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
         }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:nil];
-            [EventTracker logEventWithName:@"Upload IPA" customAttributes:currentSetting action:@"Upload IPA" label:@"Upload IPA" value:@1];
+            [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPA andSettings:currentSetting];
             [uploadManager uploadIPAFile:project.ipaFullPath];
         }
         [self viewStateForProgressFinish:NO];
@@ -534,8 +532,7 @@
             [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
             [self viewStateForProgressFinish:YES];
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}];
-            [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting
-                                    action:@"Uploaded to" label:@"AppStore" value:@1];
+            [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
         }
     }else{
         //if internet is connected, show direct error
@@ -805,7 +802,7 @@
 -(void)logAppUploadEventAndShareURLOnSlackChannel{
     //Log IPA Upload Success Rate with Other Options
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
-    [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting action:@"Uploaded to" label:@"Dropbox" value:@1];
+    [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
     
     if ([UserData userSlackMessage].length > 0) {
         [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
