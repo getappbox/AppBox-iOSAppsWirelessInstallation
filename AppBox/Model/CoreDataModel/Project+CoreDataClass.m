@@ -94,7 +94,10 @@
             }
             if (xcProject.dbDirectory){
                 [uploadRecord setDbDirectroy:xcProject.dbDirectory.absoluteString];
-                [uploadRecord setDbFolderName:[[xcProject.dbDirectory pathComponents] firstObject]];
+                NSArray *pathComponents = [xcProject.dbDirectory pathComponents];
+                if (pathComponents.count > 1) {
+                    [uploadRecord setDbFolderName:[NSString stringWithFormat:@"%@%@", pathComponents[0], pathComponents[1]]];
+                }
             }
             if (xcProject.dbIPAFullPath){
                 [uploadRecord setDbIPAFullPath:xcProject.dbIPAFullPath.absoluteString];
