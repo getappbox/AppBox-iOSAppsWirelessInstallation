@@ -21,6 +21,7 @@
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
+		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFC680C1F6AE957007A4ED2 /* EventTracker.m */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
@@ -127,6 +128,8 @@
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
+		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
+		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
 		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
@@ -299,6 +302,15 @@
 				DB425C041F8A517D008CB032 /* DefaultSettings.m */,
 			);
 			path = DefaultSettings;
+			sourceTree = "<group>";
+		};
+		DBDCFBBB1F99C7860022097B /* UploadManager */ = {
+			isa = PBXGroup;
+			children = (
+				DBDCFBBC1F99C7860022097B /* UploadManager.h */,
+				DBDCFBBD1F99C7860022097B /* UploadManager.m */,
+			);
+			path = UploadManager;
 			sourceTree = "<group>";
 		};
 		DBFC680A1F6AE942007A4ED2 /* EventTracker */ = {
@@ -803,22 +815,23 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DB2629821F961F3100C4C647 /* DBErrorHandler */,
-				DB2629781F95ED8900C4C647 /* Extensions */,
-				DB425C021F8A514E008CB032 /* DefaultSettings */,
 				E1902B501E16617B00C3E0F6 /* UserData */,
 				E1902B491E16617B00C3E0F6 /* GitHandler */,
+				DB2629781F95ED8900C4C647 /* Extensions */,
 				E1C0246E1E9B4E4C00C87CC9 /* SlackClient */,
 				E13161EF1E97775100586052 /* RepoBuilder */,
 				E1902B4A1E16617B00C3E0F6 /* MacHandler */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
-				E16D72D91E88F9EE0031FB7C /* XcodeHandler */,
-				DBFC680A1F6AE942007A4ED2 /* EventTracker */,
-				E16D72D11E88F99A0031FB7C /* OutputParsers */,
 				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
+				DBFC680A1F6AE942007A4ED2 /* EventTracker */,
+				E16D72D91E88F9EE0031FB7C /* XcodeHandler */,
+				E16D72D11E88F99A0031FB7C /* OutputParsers */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
 				E1902B4F1E16617B00C3E0F6 /* UpdateHandler */,
+				DB2629821F961F3100C4C647 /* DBErrorHandler */,
+				DB425C021F8A514E008CB032 /* DefaultSettings */,
+				DBDCFBBB1F99C7860022097B /* UploadManager */,
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E1902B611E1662E300C3E0F6 /* KeychainHandler */,
@@ -1076,6 +1089,7 @@
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */,
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
+				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
 				DB2629751F95E38C00C4C647 /* Project+CoreDataProperties.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,

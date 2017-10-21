@@ -24,6 +24,7 @@ typedef enum : NSUInteger {
 
 @implementation DashboardViewController{
     NSMutableArray<UploadRecord *> *uploadRecords;
+    UploadManager *uploadManager;
 }
 
 - (void)viewDidLoad {
@@ -34,6 +35,37 @@ typedef enum : NSUInteger {
     
     //Load data
     [self loadData];
+    [self setupUploadManager];
+    
+    //Track screen
+    [EventTracker logScreen:@"Dashboard Screen"];
+    
+    //Coredata changes notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+}
+
+-(void)viewDidDisappear{
+    [super viewDidDisappear];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)setupUploadManager{
+    uploadManager = [[UploadManager alloc] init];
+    [uploadManager setCurrentViewController:self];
+    __unsafe_unretained typeof(self) weakSelf = self;
+    __unsafe_unretained typeof(UploadManager *) weakUploadManager = uploadManager;
+    [uploadManager setCompletionBlock:^{
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (weakUploadManager.uploadRecord){
+            [[[AppDelegate appDelegate] managedObjectContext] deleteObject: weakUploadManager.uploadRecord];
+        }
+        [[AppDelegate appDelegate] saveCoreDataChanges];
+        [weakSelf loadData];
+    }];
+    
+    [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+    }];
 }
 
 -(void)loadData{
@@ -107,6 +139,7 @@ typedef enum : NSUInteger {
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
     [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
+    [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
 }
 
 - (IBAction)deleteBuildButtonTapped:(NSButton *)sender {
@@ -121,20 +154,9 @@ typedef enum : NSUInteger {
     [alert addButtonWithTitle:@"Cancel"];
     
     if ([alert runModal] == NSAlertFirstButtonReturn){
-        [MBProgressHUD showStatus:@"Deleting..." onView:self.view];
-        [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:uploadRecord.dbDirectroy] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            if (result) {
-                [[[AppDelegate appDelegate] managedObjectContext] deleteObject:uploadRecord];
-                [[AppDelegate appDelegate] saveCoreDataChanges];
-                [self loadData];
-            } else if (routeError) {
-                [DBErrorHandler handleDeleteErrorWith:routeError];
-            } else if (networkError) {
-                [DBErrorHandler handleNetworkErrorWith:networkError];
-            }
-        }];
-        [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Update"} action:@"title" label:@"Update" value:@1];
+        [uploadManager setUploadRecord:uploadRecord];
+        [uploadManager setProject:uploadRecord.xcProject];
+        [uploadManager deleteBuildFromDropbox];
     }
 }
 
@@ -154,7 +176,6 @@ typedef enum : NSUInteger {
     NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
     [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
 }
-
 
 
 @end

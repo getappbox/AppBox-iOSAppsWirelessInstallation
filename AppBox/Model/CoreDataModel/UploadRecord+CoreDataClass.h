@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UploadRecord : NSManagedObject
 
+@property(nonatomic, retain) XCProject *xcProject;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -87,16 +87,16 @@
 #pragma mark - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
-    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Help"} action:@"title" label:@"Help" value:@1];
+    [EventTracker logEventWithType:LogEventTypeExternalLinkHelp];
 }
 
 - (IBAction)latestNewsTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abTwitterURL]];
-    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Twitter"} action:@"title" label:@"Twitter" value:@1];
+    [EventTracker logEventWithType:LogEventTypeExternalLinkTwitter];
 }
 
 - (IBAction)releaseNotesTapped:(NSMenuItem *)sender {
-    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Release Notes"} action:@"title" label:@"Release Notes" value:@1];
+    [EventTracker logEventWithType:LogEventTypeExternalLinkReleaseNote];
     NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",abGitHubReleaseBaseURL,versionString]]];
 }
@@ -105,7 +105,8 @@
 }
 
 - (IBAction)licenseTapped:(NSMenuItem *)sender {
+    [EventTracker logEventWithType:LogEventTypeExternalLinkLicense];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];
-    [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"License"} action:@"title" label:@"License" value:@1];
+    
 }
 @end

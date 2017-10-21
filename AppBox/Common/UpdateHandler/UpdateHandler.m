@@ -21,8 +21,7 @@
     [alert addButtonWithTitle:@"NO"];
     if ([alert runModal] == NSAlertFirstButtonReturn){
         [[NSWorkspace sharedWorkspace] openURL:url];
-        [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Update"}
-                                action:@"title" label:@"Update" value:@1];
+        [EventTracker logEventWithType:LogEventTypeUpdateExternalLink];
     }
 }
 
