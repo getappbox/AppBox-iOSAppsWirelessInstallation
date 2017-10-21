@@ -158,6 +158,7 @@ typedef enum : NSUInteger {
         [uploadManager setProject:uploadRecord.xcProject];
         [uploadManager deleteBuildFromDropbox];
     }
+    [EventTracker logEventWithType:LogEventTypeDeleteBuild];
 }
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
@@ -168,6 +169,7 @@ typedef enum : NSUInteger {
     } else {
         [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
     }
+    [EventTracker logEventWithType:LogEventTypeOpenInFinder];
 }
 
 - (IBAction)showInDropBoxButtonTapped:(NSButton *)sender {
@@ -175,6 +177,7 @@ typedef enum : NSUInteger {
     NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
     NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
     [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
+    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
 }
 
 

@@ -26,6 +26,9 @@ typedef enum : NSUInteger {
     LogEventTypeExternalLinkKeepSameLink,
     LogEventTypeAuthDropbox,
     LogEventTypeExitWithoutAuth,
+    LogEventTypeDeleteBuild,
+    LogEventTypeOpenInFinder,
+    LogEventTypeOpenInDropbox
 } LogEventTypes;
 
 typedef enum : NSUInteger {
