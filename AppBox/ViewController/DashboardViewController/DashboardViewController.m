@@ -24,6 +24,7 @@ typedef enum : NSUInteger {
 
 @implementation DashboardViewController{
     NSMutableArray<UploadRecord *> *uploadRecords;
+    UploadManager *uploadManager;
 }
 
 - (void)viewDidLoad {
@@ -34,6 +35,7 @@ typedef enum : NSUInteger {
     
     //Load data
     [self loadData];
+    [self setupUploadManager];
     
     //Track screen
     [EventTracker logScreen:@"Dashboard Screen"];
@@ -45,6 +47,20 @@ typedef enum : NSUInteger {
 -(void)viewDidDisappear{
     [super viewDidDisappear];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)setupUploadManager{
+    uploadManager = [[UploadManager alloc] init];
+    [uploadManager setCurrentViewController:self];
+    __unsafe_unretained typeof(self) weakSelf = self;
+    __unsafe_unretained typeof(UploadManager *) weakUploadManager = uploadManager;
+    [uploadManager setCompletionBlock:^{
+        if (weakUploadManager.uploadRecord){
+            [[[AppDelegate appDelegate] managedObjectContext] deleteObject: weakUploadManager.uploadRecord];
+        }
+        [[AppDelegate appDelegate] saveCoreDataChanges];
+        [weakSelf loadData];
+    }];
 }
 
 -(void)loadData{
@@ -133,19 +149,9 @@ typedef enum : NSUInteger {
     [alert addButtonWithTitle:@"Cancel"];
     
     if ([alert runModal] == NSAlertFirstButtonReturn){
-        [MBProgressHUD showStatus:@"Deleting..." onView:self.view];
-        [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:uploadRecord.dbDirectroy] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            if (result) {
-                [[[AppDelegate appDelegate] managedObjectContext] deleteObject:uploadRecord];
-                [[AppDelegate appDelegate] saveCoreDataChanges];
-                [self loadData];
-            } else if (routeError) {
-                [DBErrorHandler handleDeleteErrorWith:routeError];
-            } else if (networkError) {
-                [DBErrorHandler handleNetworkErrorWith:networkError];
-            }
-        }];
+        [uploadManager setUploadRecord:uploadRecord];
+        [uploadManager setProject:uploadRecord.xcProject];
+        [uploadManager deleteBuildFromDropbox];
     }
 }
 
@@ -165,7 +171,6 @@ typedef enum : NSUInteger {
     NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
     [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
 }
-
 
 
 @end

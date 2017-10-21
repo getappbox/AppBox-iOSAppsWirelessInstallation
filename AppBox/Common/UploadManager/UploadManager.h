@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MobileProvision.h"
-
+#import "UploadRecord+CoreDataClass.h"
 
 typedef void(^ProgressBlock)(NSString *title);
 typedef void(^ErrorBlock)(NSError *error, BOOL terminate);
@@ -24,6 +24,7 @@ typedef void(^CompletionBlock)();
 @property(nonatomic, strong) XCProject *project;
 @property(nonatomic, assign) DBFileType dbFileType;
 @property(nonatomic, weak) NSViewController *currentViewController;
+@property(nonatomic, weak) UploadRecord *uploadRecord;
 @property(nonatomic, strong) NSBlockOperation *lastfailedOperation;
 
 //blocks
@@ -36,5 +37,7 @@ typedef void(^CompletionBlock)();
 +(void)setupDBClientsManager;
 -(void)uploadIPAFile:(NSURL *)ipaFileURL;
 -(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL;
+
+-(void)deleteBuildFromDropbox;
 
 @end

@@ -19,6 +19,7 @@
     //    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
 }
 
+#pragma mark - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
@@ -300,7 +301,7 @@
      }];
 }
 
-#pragma mark → Dropbox Create/Get Shared Link
+#pragma mark - Dropbox Create/Get Shared Link
 -(void)dbCreateSharedURLForFile:(NSString *)file{
     [[[DBClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
      //Track response with result and error
@@ -398,7 +399,7 @@
     }
 }
 
-#pragma mark - Create ShortSharable URL -
+#pragma mark - Create ShortSharable URL
 -(void)createUniqueShortSharableUrl{
     NSString *originalURL = [self.project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
@@ -429,6 +430,32 @@
     }];
 }
 
+#pragma mark - Delete Files
+-(void)deleteBuildFromDropbox{
+    [self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
+    if (self.project.isKeepSameLinkEnabled) {
+        [self deleteBuildDetailsFromAppInfoJSON];
+    } else {
+        [self deleteBuildFolder];
+    }
+}
+
+-(void)deleteBuildFolder{
+    [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+        [MBProgressHUD hideHUDForView:self.currentViewController.view animated:YES];
+        if (result) {
+            self.completionBlock();
+        } else if (routeError) {
+            [DBErrorHandler handleDeleteErrorWith:routeError];
+        } else if (networkError) {
+            [DBErrorHandler handleNetworkErrorWith:networkError];
+        }
+    }];
+}
+
+-(void)deleteBuildDetailsFromAppInfoJSON{
+    
+}
 
 #pragma mark - Show Status
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
