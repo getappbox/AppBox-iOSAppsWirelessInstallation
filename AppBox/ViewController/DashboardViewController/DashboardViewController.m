@@ -55,11 +55,16 @@ typedef enum : NSUInteger {
     __unsafe_unretained typeof(self) weakSelf = self;
     __unsafe_unretained typeof(UploadManager *) weakUploadManager = uploadManager;
     [uploadManager setCompletionBlock:^{
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (weakUploadManager.uploadRecord){
             [[[AppDelegate appDelegate] managedObjectContext] deleteObject: weakUploadManager.uploadRecord];
         }
         [[AppDelegate appDelegate] saveCoreDataChanges];
         [weakSelf loadData];
+    }];
+    
+    [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     }];
 }
 

@@ -139,20 +139,6 @@
 
 
 #pragma mark - UNIQUE Link Handlers
--(void)loadAppInfoMetaDataWithCompletion:(void (^)(DBFILESListRevisionsResult * response))completion{
-    [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString limit:@1]
-     setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
-         //check there is any rev available
-         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
-             self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
-         }
-         
-         //handle meta data
-         [self handleAfterUniqueJsonMetaDataLoaded];
-     }];
-}
-
 -(void)handleAfterUniqueJsonMetaDataLoaded{
     if(self.project.uniqueLinkJsonMetaData){
         NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
@@ -162,12 +148,14 @@
          setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESDownloadError * _Nullable routeError, DBRequestError * _Nullable error, NSURL * _Nonnull destination) {
              if (response){
                  if([response.name hasSuffix:FILE_NAME_UNIQUE_JSON]){
-                     //append new version
                      [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
                  }
              }
              else if (error){
-                 [DBErrorHandler handleNetworkErrorWith:error];
+                 if (self.uploadRecord) {
+                     self.errorBlock(error.nsError, NO);
+                     [DBErrorHandler handleNetworkErrorWith:error];
+                 }
                  //create new appinfo.json
                  [self handleAfterUniqueJsonMetaDataLoaded];
              }
@@ -188,21 +176,47 @@
     if(![dictUniqueLink isKindOfClass:[NSDictionary class]]){
         dictUniqueLink = [NSMutableDictionary new];
     }
-    NSDictionary *latestVersion = @{
-                                    @"name" : self.project.name,
-                                    @"version" : self.project.version,
-                                    @"build" : self.project.build,
-                                    @"identifier" : self.project.identifer,
-                                    @"manifestLink" : self.project.manifestFileSharableURL.absoluteString,
-                                    @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
-                                    };
-    NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
-    if(!versionHistory){
-        versionHistory = [NSMutableArray new];
+    if (self.uploadRecord) {
+        NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
+        if(versionHistory){
+            //remove version from history
+            [versionHistory enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([[obj valueForKey:@"manifestLink"] isEqualToString:self.uploadRecord.dbSharedManifestURL]) {
+                    [versionHistory removeObject:obj];
+                    *stop = YES;
+                }
+            }];
+            
+            if (versionHistory.count > 0) {
+                //replace latest version with last version, if user removed first version
+                NSMutableDictionary *latestVersion = [dictUniqueLink objectForKey:@"latestVersion"];
+                if (latestVersion && [[latestVersion valueForKey:@"manifestLink"] isEqualToString:self.uploadRecord.dbSharedManifestURL]){
+                    latestVersion = [versionHistory lastObject];
+                }
+                [dictUniqueLink setObject:versionHistory forKey:@"versions"];
+                [dictUniqueLink setObject:latestVersion forKey:@"latestVersion"];
+            } else {
+                [self deleteBuildRootFolder];
+                return;
+            }
+        }
+    } else {
+        NSDictionary *latestVersion = @{
+                                        @"name" : self.project.name,
+                                        @"version" : self.project.version,
+                                        @"build" : self.project.build,
+                                        @"identifier" : self.project.identifer,
+                                        @"manifestLink" : self.project.manifestFileSharableURL.absoluteString,
+                                        @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
+                                        };
+        NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
+        if(!versionHistory){
+            versionHistory = [NSMutableArray new];
+        }
+        [versionHistory addObject:latestVersion];
+        [dictUniqueLink setObject:versionHistory forKey:@"versions"];
+        [dictUniqueLink setObject:latestVersion forKey:@"latestVersion"];
     }
-    [versionHistory addObject:latestVersion];
-    [dictUniqueLink setObject:versionHistory forKey:@"versions"];
-    [dictUniqueLink setObject:latestVersion forKey:@"latestVersion"];
     [self writeUniqueJsonWithDict:dictUniqueLink];
     self.project.uniquelinkShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHARED]];
     self.project.appShortShareableURL = [NSURL URLWithString:[dictUniqueLink objectForKey:UNIQUE_LINK_SHORT]];
@@ -227,6 +241,22 @@
     [self dbUploadFile:path.resourceSpecifier to:self.project.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
 
+#pragma mark - Update AppInfo.JSON file
+-(void)loadAppInfoMetaData{
+    [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString limit:@1]
+     setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+         //check there is any rev available
+         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
+             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
+             self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
+         }
+         
+         //handle meta data
+         [self handleAfterUniqueJsonMetaDataLoaded];
+     }];
+}
+
+#pragma mark - Upload Files
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     //uploadUrl:path inputUrl:file
     [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
@@ -239,7 +269,11 @@
               if(self.dbFileType == DBFileTypeJson){
                   self.project.uniqueLinkJsonMetaData = response;
                   if(self.project.appShortShareableURL){
-                      self.completionBlock();
+                      if (self.uploadRecord) {
+                          [self deleteBuildFolder];
+                      } else {
+                          self.completionBlock();
+                      }
                       return;
                   }else{
                       //create shared url for appinfo.json
@@ -286,17 +320,19 @@
      
      //Track and show upload progress
      setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-         //Calculate and show progress based on file type
-         CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
-         if (self.dbFileType == DBFileTypeIPA) {
-             NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }else if (self.dbFileType == DBFileTypeManifest){
-             NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-         }else if (self.dbFileType == DBFileTypeJson){
-             NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress]];
-             [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
+         if (!self.uploadRecord) {
+             //Calculate and show progress based on file type
+             CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
+             if (self.dbFileType == DBFileTypeIPA) {
+                 NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
+                 [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
+             }else if (self.dbFileType == DBFileTypeManifest){
+                 NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress]];
+                 [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
+             }else if (self.dbFileType == DBFileTypeJson){
+                 NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress]];
+                 [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
+             }
          }
      }];
 }
@@ -453,8 +489,21 @@
     }];
 }
 
+-(void)deleteBuildRootFolder{
+    [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:self.uploadRecord.dbFolderName] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+        [MBProgressHUD hideHUDForView:self.currentViewController.view animated:YES];
+        if (result) {
+            self.completionBlock();
+        } else if (routeError) {
+            [DBErrorHandler handleDeleteErrorWith:routeError];
+        } else if (networkError) {
+            [DBErrorHandler handleNetworkErrorWith:networkError];
+        }
+    }];
+}
+
 -(void)deleteBuildDetailsFromAppInfoJSON{
-    
+    [self loadAppInfoMetaData];
 }
 
 #pragma mark - Show Status
