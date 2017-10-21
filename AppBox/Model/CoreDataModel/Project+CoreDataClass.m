@@ -92,19 +92,38 @@
             if (xcProject.teamId){
                 [uploadRecord setTeamId:xcProject.teamId];
             }
-            [uploadRecord setDbDirectroy:xcProject.dbDirectory.absoluteString];
-            [uploadRecord setDbFolderName:[[xcProject.dbDirectory pathComponents] firstObject]];
-            [uploadRecord setDbIPAFullPath:xcProject.dbIPAFullPath.absoluteString];
-            [uploadRecord setDbManifestFullPath:xcProject.dbManifestFullPath.absoluteString];
+            if (xcProject.dbDirectory){
+                [uploadRecord setDbDirectroy:xcProject.dbDirectory.absoluteString];
+                [uploadRecord setDbFolderName:[[xcProject.dbDirectory pathComponents] firstObject]];
+            }
+            if (xcProject.dbIPAFullPath){
+                [uploadRecord setDbIPAFullPath:xcProject.dbIPAFullPath.absoluteString];
+            }
+            if (xcProject.dbManifestFullPath){
+                [uploadRecord setDbManifestFullPath:xcProject.dbManifestFullPath.absoluteString];
+            }
             //[uploadRecord setDbSharedAppInfoURL:xcProject.ipaFileDBShareableURL.absoluteString];
-            [uploadRecord setDbSharedIPAURL:xcProject.ipaFileDBShareableURL.absoluteString];
-            [uploadRecord setDbSharedManifestURL:xcProject.manifestFileSharableURL.absoluteString];
-            [uploadRecord setKeepSameLink:xcProject.keepSameLink];
-            [uploadRecord setLocalBuildPath:[xcProject.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
-            //            [uploadRecord setMailURL:];
-            [uploadRecord setShortURL:xcProject.appShortShareableURL.absoluteString];
-            [uploadRecord setBuild:xcProject.build];
-            [uploadRecord setVersion:xcProject.version];
+            if (xcProject.ipaFileDBShareableURL){
+                [uploadRecord setDbSharedIPAURL:xcProject.ipaFileDBShareableURL.absoluteString];
+            }
+            if (xcProject.manifestFileSharableURL){
+                [uploadRecord setDbSharedManifestURL:xcProject.manifestFileSharableURL.absoluteString];
+            }
+            
+            if (xcProject.ipaFullPath){
+                [uploadRecord setLocalBuildPath:[xcProject.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
+            }
+            if (xcProject.appShortShareableURL){
+                [uploadRecord setShortURL:xcProject.appShortShareableURL.absoluteString];
+            }
+            if (xcProject.build){
+                [uploadRecord setBuild:xcProject.build];
+            }
+            if (xcProject.version){
+                [uploadRecord setVersion:xcProject.version];
+            }
+            
+            [uploadRecord setKeepSameLink:[NSNumber numberWithBool:xcProject.isKeepSameLinkEnabled]];
             [uploadRecord setDatetime:[NSDate date]];
             
             NSMutableOrderedSet *uploadRecordsSet;
