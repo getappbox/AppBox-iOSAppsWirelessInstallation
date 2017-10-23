@@ -12,13 +12,13 @@
 
 typedef enum : NSUInteger {
     DashBoardColumnName = 0,
+    DashBoardColumnBundleIdentifer,
     DashBoardColumnVersion,
     DashBoardColumnShortURL,
     DashBoardColumnDate,
     DashBoardColumnBuidlType,
-    DashBoardColumnTeamId,
     DashBoardColumnScheme,
-    DashBoardColumnDropboxFolder
+    DashBoardColumnTeamId
 } DashBoardColumn;
 
 
@@ -110,6 +110,8 @@ typedef enum : NSUInteger {
     NSTableCellView *cell = [tableView makeViewWithIdentifier:ShortURLCellId owner:nil];
     if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnName]) {
         [cell.textField setStringValue: uploadRecord.project.name];
+    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBundleIdentifer]) {
+        [cell.textField setStringValue:uploadRecord.project.bundleIdentifier];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex: DashBoardColumnVersion]){
         [cell.textField setStringValue:[NSString stringWithFormat:@"%@ (%@)", uploadRecord.version, uploadRecord.build]];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnShortURL]){
@@ -118,12 +120,10 @@ typedef enum : NSUInteger {
         [cell.textField setStringValue:uploadRecord.datetime.string];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType] && uploadRecord.buildType){
         [cell.textField setStringValue:uploadRecord.buildType];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.teamId){
-        [cell.textField setStringValue:uploadRecord.teamId];
     } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme] && uploadRecord.buildScheme) {
         [cell.textField setStringValue:uploadRecord.buildScheme];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDropboxFolder]) {
-        [cell.textField setStringValue:uploadRecord.dbDirectroy];
+    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.teamId){
+        [cell.textField setStringValue:uploadRecord.teamId];
     }
     return cell;
 }
@@ -158,6 +158,7 @@ typedef enum : NSUInteger {
         [uploadManager setProject:uploadRecord.xcProject];
         [uploadManager deleteBuildFromDropbox];
     }
+    [EventTracker logEventWithType:LogEventTypeDeleteBuild];
 }
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
@@ -168,6 +169,7 @@ typedef enum : NSUInteger {
     } else {
         [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
     }
+    [EventTracker logEventWithType:LogEventTypeOpenInFinder];
 }
 
 - (IBAction)showInDropBoxButtonTapped:(NSButton *)sender {
@@ -175,6 +177,7 @@ typedef enum : NSUInteger {
     NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
     NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
     [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
+    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
 }
 
 

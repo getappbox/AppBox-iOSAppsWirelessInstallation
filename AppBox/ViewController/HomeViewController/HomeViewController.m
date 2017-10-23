@@ -695,8 +695,8 @@
     [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
     
     //update CI button
-    [buttonConfigCI setHidden:(tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
-    [buttonConfigCI setEnabled:(buttonAction.enabled && !buttonConfigCI.hidden)];
+    //[buttonConfigCI setHidden:(tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
+    //[buttonConfigCI setEnabled:(buttonAction.enabled && !buttonConfigCI.hidden)];
     
     //update keepsame link
     [buttonUniqueLink setEnabled:((project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||

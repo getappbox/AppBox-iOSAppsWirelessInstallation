@@ -103,6 +103,21 @@
                                     action:@"Keep Same Link" label:@"Keep Same Link" value:@1];
         }break;
             
+        case LogEventTypeDeleteBuild:{
+            NSString *name = @"Build Deleted";
+            [EventTracker logEventWithName:name customAttributes:@{name:@1} action:name label:name value:@1];
+        }break;
+            
+        case LogEventTypeOpenInFinder:{
+            NSString *name = @"Open In Finder";
+            [EventTracker logEventWithName:name customAttributes:@{name:@1} action:name label:name value:@1];
+        }break;
+            
+        case LogEventTypeOpenInDropbox:{
+            NSString *name = @"Open In Dropbox";
+            [EventTracker logEventWithName:name customAttributes:@{name:@1} action:name label:name value:@1];
+        }break;
+            
         default:
             break;
     }
