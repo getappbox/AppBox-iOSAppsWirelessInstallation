@@ -65,15 +65,19 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" autoenablesItems="NO" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="View Log" keyEquivalent="l" id="Rk6-gK-cUU">
+                                        <menuItem title="Home" keyEquivalent="o" id="KGl-Kf-VId">
                                             <connections>
-                                                <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
+                                                <segue destination="B8D-0N-5wS" kind="show" id="1IX-Tc-Z3b"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Dashboard" keyEquivalent="d" id="uvp-M9-ShX">
                                             <connections>
-                                                <action selector="showDashboardTapped:" target="hnw-xV-0zn" id="5hv-9e-00G"/>
-                                                <segue destination="xJf-6e-3AH" kind="show" id="eUx-1j-AfJ"/>
+                                                <segue destination="xJf-6e-3AH" kind="show" id="4nc-Zt-qRE"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="View Log" keyEquivalent="l" id="Rk6-gK-cUU">
+                                            <connections>
+                                                <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
@@ -151,20 +155,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="BPG-IT-FEB"/>
-                                        <menuItem title="View Log" id="wFj-c5-AyQ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <segue destination="6aM-eF-B0k" kind="show" id="8fD-5i-iaO"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Dashboard" id="0If-cr-hDy">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="showDashboardTapped:" target="hnw-xV-0zn" id="KzR-wk-Y5P"/>
-                                                <segue destination="xJf-6e-3AH" kind="show" id="dMI-a5-ZNL"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="SeP-p1-Yui"/>
                                         <menuItem title="Bring All to Front" id="Jl8-B2-zoN">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -220,12 +210,12 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="BRM-Lk-bJm"/>
             </objects>
-            <point key="canvasLocation" x="905" y="-192"/>
+            <point key="canvasLocation" x="691" y="-300"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
                     <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="538" y="299" width="700" height="500"/>
@@ -242,12 +232,12 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="111"/>
+            <point key="canvasLocation" x="74" y="167"/>
         </scene>
         <!--AppBox-->
         <scene sceneID="irr-iO-vGD">
             <objects>
-                <viewController title="AppBox" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController title="AppBox" showSeguePresentationStyle="single" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
                         <rect key="frame" x="0.0" y="0.0" width="737" height="392"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -680,7 +670,7 @@
                 </viewController>
                 <customObject id="Sep-aN-CO8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904" y="177"/>
+            <point key="canvasLocation" x="880" y="75"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rwx-Q7-rOS">
@@ -1590,7 +1580,7 @@ Gw
                 </viewController>
                 <customObject id="XGA-DM-bZH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1724.5" y="167"/>
+            <point key="canvasLocation" x="1689" y="65"/>
         </scene>
         <!--Advanced-->
         <scene sceneID="QDA-aw-Y08">
@@ -1931,12 +1921,13 @@ Gw
             <objects>
                 <viewController id="mP7-5G-LVv" sceneMemberID="viewController">
                     <view key="view" id="8aw-kS-1CD">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="301"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
                 <customObject id="3hG-Wo-uNM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1724" y="650"/>
         </scene>
     </scenes>
     <resources>
@@ -1946,8 +1937,4 @@ Gw
         <image name="Dropbox" width="51.200000762939453" height="51.200000762939453"/>
         <image name="Finder" width="51.200000762939453" height="51.200000762939453"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="dMI-a5-ZNL"/>
-        <segue reference="jTU-hR-7QO"/>
-    </inferredMetricsTieBreakers>
 </document>
