@@ -39,6 +39,7 @@
     });
 }
 
+
 - (IBAction)buttonCloseTapped:(NSButton *)sender {
     [self dismissController:self];
 }
@@ -47,6 +48,8 @@
 -(void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationController isKindOfClass:[QRCodeViewController class]]){
         ((QRCodeViewController *) segue.destinationController).project = self.project;
+    } else if([segue.destinationController isKindOfClass:[DashboardViewController class]]) {
+        [EventTracker logEventWithType:LogEventTypeOpenDashboardFromShowLink];
     }
 }
 

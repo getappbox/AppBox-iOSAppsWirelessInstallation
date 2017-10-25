@@ -855,7 +855,7 @@ Gw
                 </viewController>
                 <customObject id="dXx-op-3yP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="872" y="861"/>
+            <point key="canvasLocation" x="74" y="2062"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="zTD-qn-WeB">
@@ -984,7 +984,7 @@ Gw
                 </viewController>
                 <customObject id="NPf-SP-fPu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="419" y="1315"/>
+            <point key="canvasLocation" x="75" y="1802"/>
         </scene>
         <!--AppBox Dashboard-->
         <scene sceneID="Nhl-bU-R4s">
@@ -1298,9 +1298,6 @@ Gw
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="bJL-u9-E3w"/>
                                 </constraints>
-                                <connections>
-                                    <segue destination="mP7-5G-LVv" kind="embed" id="j07-To-kDu"/>
-                                </connections>
                             </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="vhI-XZ-D03" userLabel="CopyURLView">
                                 <rect key="frame" x="0.0" y="290" width="90" height="60"/>
@@ -1580,7 +1577,7 @@ Gw
                 </viewController>
                 <customObject id="XGA-DM-bZH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1689" y="65"/>
+            <point key="canvasLocation" x="870" y="543"/>
         </scene>
         <!--Advanced-->
         <scene sceneID="QDA-aw-Y08">
@@ -1696,7 +1693,7 @@ Gw
                 </viewController>
                 <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-801" y="1345"/>
+            <point key="canvasLocation" x="75" y="1527"/>
         </scene>
         <!--ShowLink-->
         <scene sceneID="Wfl-7U-Izx">
@@ -1704,7 +1701,7 @@ Gw
                 <customObject id="ND1-nP-4X2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="ShowLink" id="dq2-4K-v2z" customClass="ShowLinkViewController" sceneMemberID="viewController">
                     <view key="view" id="6cG-sr-Ub0">
-                        <rect key="frame" x="0.0" y="0.0" width="420" height="115"/>
+                        <rect key="frame" x="0.0" y="0.0" width="550" height="115"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ui-cf-b7U">
@@ -1721,7 +1718,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IRS-6c-DTS">
-                                <rect key="frame" x="341" y="3" width="75" height="36"/>
+                                <rect key="frame" x="471" y="3" width="75" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="F94-lw-CMj"/>
                                 </constraints>
@@ -1734,7 +1731,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ou-Ey-jkC">
-                                <rect key="frame" x="8" y="86" width="404" height="19"/>
+                                <rect key="frame" x="8" y="86" width="534" height="19"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your app is ready. Copy this link and send it to anyone." id="CUt-fW-c2L">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1742,9 +1739,9 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n7a-6Z-Rsw">
-                                <rect key="frame" x="8" y="45" width="404" height="31"/>
+                                <rect key="frame" x="8" y="45" width="534" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="WFe-iy-WuT"/>
+                                    <constraint firstAttribute="width" constant="530" id="6f7-UJ-syU"/>
                                 </constraints>
                                 <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" id="2jf-AI-4Wx">
                                     <font key="font" metaFont="systemThin" size="26"/>
@@ -1762,6 +1759,16 @@ Gw
                                     <segue destination="YHW-mV-vBN" kind="sheet" id="dOt-Qn-wXP"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-NH-4vK">
+                                <rect key="frame" x="243" y="3" width="158" height="36"/>
+                                <buttonCell key="cell" type="push" title="Show in Dashboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UTX-ch-aqL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="xJf-6e-3AH" kind="show" id="Uyb-q3-B4B"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="leading" secondItem="4Ui-cf-b7U" secondAttribute="trailing" constant="10" id="3f6-QP-bnd"/>
@@ -1769,14 +1776,17 @@ Gw
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="top" secondItem="7Ou-Ey-jkC" secondAttribute="bottom" constant="10" id="Bx8-jU-i7e"/>
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="CRC-NK-qVo"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="centerY" secondItem="IRS-6c-DTS" secondAttribute="centerY" id="CTG-vm-7Im"/>
+                            <constraint firstItem="q2Q-Fd-lUk" firstAttribute="bottom" secondItem="fh5-NH-4vK" secondAttribute="bottom" id="Ch0-py-Oqs"/>
                             <constraint firstAttribute="bottom" secondItem="4Ui-cf-b7U" secondAttribute="bottom" constant="10" id="DxC-hv-HOr"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Kgm-9b-oHh"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="q2Q-Fd-lUk" secondAttribute="top" id="L0j-IF-PTp"/>
+                            <constraint firstItem="q2Q-Fd-lUk" firstAttribute="top" secondItem="fh5-NH-4vK" secondAttribute="top" id="Neu-oE-BGZ"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="SSZ-cE-eOL"/>
                             <constraint firstAttribute="trailing" secondItem="IRS-6c-DTS" secondAttribute="trailing" constant="10" id="U37-G7-Ws4"/>
-                            <constraint firstItem="IRS-6c-DTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="q2Q-Fd-lUk" secondAttribute="trailing" constant="100" id="czp-D7-wyH"/>
                             <constraint firstAttribute="trailing" secondItem="7Ou-Ey-jkC" secondAttribute="trailing" constant="10" id="gqg-In-9mB"/>
+                            <constraint firstItem="IRS-6c-DTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fh5-NH-4vK" secondAttribute="trailing" constant="50" id="gre-ni-EYg"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="bottom" secondItem="q2Q-Fd-lUk" secondAttribute="bottom" id="nuN-hJ-td8"/>
+                            <constraint firstItem="fh5-NH-4vK" firstAttribute="leading" secondItem="q2Q-Fd-lUk" secondAttribute="trailing" constant="10" id="tRe-kp-lh8"/>
                             <constraint firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" constant="10" id="whj-HD-7sC"/>
                             <constraint firstItem="7Ou-Ey-jkC" firstAttribute="top" secondItem="6cG-sr-Ub0" secondAttribute="top" constant="10" id="xAb-wu-E9f"/>
                         </constraints>
@@ -1788,7 +1798,7 @@ Gw
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-238" y="1485"/>
+            <point key="canvasLocation" x="806" y="862"/>
         </scene>
         <!--showQRCode-->
         <scene sceneID="ucc-Ab-VQ4">
@@ -1851,7 +1861,7 @@ Gw
                 </viewController>
                 <customObject id="ZRc-Sc-zo3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-328" y="1880"/>
+            <point key="canvasLocation" x="813" y="1224"/>
         </scene>
         <!--Connect to Dropbox-->
         <scene sceneID="PM4-1m-3co">
@@ -1914,20 +1924,7 @@ Gw
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-238" y="1316"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="e7Q-GM-bml">
-            <objects>
-                <viewController id="mP7-5G-LVv" sceneMemberID="viewController">
-                    <view key="view" id="8aw-kS-1CD">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="301"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="3hG-Wo-uNM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1724" y="650"/>
+            <point key="canvasLocation" x="126" y="1316"/>
         </scene>
     </scenes>
     <resources>
@@ -1937,4 +1934,7 @@ Gw
         <image name="Dropbox" width="51.200000762939453" height="51.200000762939453"/>
         <image name="Finder" width="51.200000762939453" height="51.200000762939453"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Uyb-q3-B4B"/>
+    </inferredMetricsTieBreakers>
 </document>
