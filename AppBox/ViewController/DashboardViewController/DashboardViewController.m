@@ -161,6 +161,13 @@ typedef enum : NSUInteger {
     [EventTracker logEventWithType:LogEventTypeDeleteBuild];
 }
 
+- (IBAction)analyticsButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    NSURL *analyticsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@.info", uploadRecord.shortURL]];
+    [[NSWorkspace sharedWorkspace] openURL:analyticsURL];
+}
+
+
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
     if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:NO]) {
