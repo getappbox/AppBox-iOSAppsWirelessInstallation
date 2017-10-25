@@ -36,7 +36,9 @@
     //if auto scroll enabled replace content and scroll to bottom
     if (isAutoScrollEnabled){
         textView.string = [[AppDelegate appDelegate] sessionLog];
-        [textView scrollToEndOfDocument:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [textView scrollToEndOfDocument:self];
+        });
     }
 }
 
