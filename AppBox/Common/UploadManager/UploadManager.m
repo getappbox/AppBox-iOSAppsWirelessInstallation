@@ -12,8 +12,10 @@
 
 +(void)setupDBClientsManager{
     //Force Foreground Session
-    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
-    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+    if (![DBClientsManager authorizedClient]) {
+        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
+        [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+    }
     
     //Default Session (Background)
     //    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
