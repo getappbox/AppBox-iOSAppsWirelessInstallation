@@ -8,13 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BuildTypeUnknown @"unknown"
-#define BuildTypeAdHoc @"ad-hoc"
-#define BuildTypePackage @"package"
-#define BuildTypeAppStore @"app-store"
-#define BuildTypeEnterprise @"enterprise"
-#define BuildTypeDevelopment @"development"
-#define BuildTypeDeveloperId @"developer-id"
+#import "MobileProvision.h"
 
 #define AppStoreUploadToolAL @"Application Loader"
 #define AppStoreUploadToolXcode @"Xcode"
@@ -56,6 +50,7 @@
 @property(nonatomic, retain) NSDictionary *manifestData;
 @property(nonatomic, retain) NSDictionary *buildListInfo;
 @property(nonatomic, retain) NSDictionary *exportOptionsPlist;
+@property(nonatomic, retain) MobileProvision *mobileProvision;
 
 //UniqueLink.json
 @property(nonatomic, assign) BOOL isKeepSameLinkEnabled;
