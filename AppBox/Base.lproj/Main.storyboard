@@ -1777,12 +1777,12 @@ Gw
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="CRC-NK-qVo"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="centerY" secondItem="IRS-6c-DTS" secondAttribute="centerY" id="CTG-vm-7Im"/>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="bottom" secondItem="fh5-NH-4vK" secondAttribute="bottom" id="Ch0-py-Oqs"/>
-                            <constraint firstAttribute="bottom" secondItem="4Ui-cf-b7U" secondAttribute="bottom" constant="10" id="DxC-hv-HOr"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Kgm-9b-oHh"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="q2Q-Fd-lUk" secondAttribute="top" id="L0j-IF-PTp"/>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="top" secondItem="fh5-NH-4vK" secondAttribute="top" id="Neu-oE-BGZ"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="SSZ-cE-eOL"/>
                             <constraint firstAttribute="trailing" secondItem="IRS-6c-DTS" secondAttribute="trailing" constant="10" id="U37-G7-Ws4"/>
+                            <constraint firstAttribute="bottom" secondItem="4Ui-cf-b7U" secondAttribute="bottom" constant="10" id="fWh-L7-YQl"/>
                             <constraint firstAttribute="trailing" secondItem="7Ou-Ey-jkC" secondAttribute="trailing" constant="10" id="gqg-In-9mB"/>
                             <constraint firstItem="IRS-6c-DTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fh5-NH-4vK" secondAttribute="trailing" constant="50" id="gre-ni-EYg"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="bottom" secondItem="q2Q-Fd-lUk" secondAttribute="bottom" id="nuN-hJ-td8"/>
@@ -1798,7 +1798,7 @@ Gw
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="806" y="862"/>
+            <point key="canvasLocation" x="806" y="910.5"/>
         </scene>
         <!--showQRCode-->
         <scene sceneID="ucc-Ab-VQ4">
@@ -1861,7 +1861,7 @@ Gw
                 </viewController>
                 <customObject id="ZRc-Sc-zo3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="813" y="1224"/>
+            <point key="canvasLocation" x="806" y="1307"/>
         </scene>
         <!--Connect to Dropbox-->
         <scene sceneID="PM4-1m-3co">
