@@ -157,6 +157,7 @@
     _mobileProvision = mobileProvision;
     if (self.mobileProvision){
         if (!self.teamId) self.teamId = self.mobileProvision.teamId;
+        if (!self.buildType) self.buildType = self.mobileProvision.buildType;
     }
 }
 

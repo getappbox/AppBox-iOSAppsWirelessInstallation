@@ -7,11 +7,10 @@
 //
 
 #import "UploadRecord+CoreDataClass.h"
-
+#import "ProvisioningProfile+CoreDataClass.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ProvisioningProfile;
 @interface UploadRecord (CoreDataProperties)
 
 + (NSFetchRequest<UploadRecord *> *)fetchRequest;

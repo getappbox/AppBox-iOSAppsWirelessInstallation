@@ -150,6 +150,7 @@
                         //Create ProvisionedDevice Object and Add into Set
                         ProvisionedDevice *device = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisionedDevice class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
                         [device setDeviceId:obj];
+                        [provisionDeviceSet addObject:device];
                     }];
                     
                     ProvisioningProfile *provisioningProfile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisioningProfile class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
@@ -160,6 +161,7 @@
                     [provisioningProfile setCreateDate:xcProject.mobileProvision.createDate];
                     [provisioningProfile setExpirationDate:xcProject.mobileProvision.expirationDate];
                     [provisioningProfile addProvisionedDevices:provisionDeviceSet];
+                    [provisioningProfile addUploadRecordObject:uploadRecord];
                     
                     [uploadRecord setProvisioningProfile:provisioningProfile];
                 }

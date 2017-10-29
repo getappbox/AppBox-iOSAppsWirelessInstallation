@@ -108,22 +108,45 @@ typedef enum : NSUInteger {
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:row];
     NSTableCellView *cell = [tableView makeViewWithIdentifier:ShortURLCellId owner:nil];
+    
+    //Project Name
     if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnName]) {
         [cell.textField setStringValue: uploadRecord.project.name];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBundleIdentifer]) {
+    }
+    
+    //Bundle Identifer
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBundleIdentifer]) {
         [cell.textField setStringValue:uploadRecord.project.bundleIdentifier];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex: DashBoardColumnVersion]){
+    }
+    
+    //Version and Build
+    else if (tableColumn == [tableView.tableColumns objectAtIndex: DashBoardColumnVersion]){
         [cell.textField setStringValue:[NSString stringWithFormat:@"%@ (%@)", uploadRecord.version, uploadRecord.build]];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnShortURL]){
+    }
+    
+    //Short URL
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnShortURL]){
         [cell.textField setStringValue:uploadRecord.shortURL];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDate]){
+    }
+    
+    //Upload Date
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDate]){
         [cell.textField setStringValue:uploadRecord.datetime.string];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType] && uploadRecord.buildType){
-        [cell.textField setStringValue:uploadRecord.buildType];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme] && uploadRecord.buildScheme) {
+    }
+    
+    //Build Type
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType] && uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.buildType){
+        [cell.textField setStringValue:uploadRecord.provisioningProfile.buildType.capitalizedString];
+    }
+    
+    //Scheme
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme] && uploadRecord.buildScheme) {
         [cell.textField setStringValue:uploadRecord.buildScheme];
-    } else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.teamId){
-        [cell.textField setStringValue:uploadRecord.teamId];
+    }
+    
+    //TeamId
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName){
+        [cell.textField setStringValue:[NSString stringWithFormat:@"%@ - %@", uploadRecord.provisioningProfile.teamId, uploadRecord.provisioningProfile.teamName]];
     }
     return cell;
 }
@@ -159,6 +182,14 @@ typedef enum : NSUInteger {
         [uploadManager deleteBuildFromDropbox];
     }
     [EventTracker logEventWithType:LogEventTypeDeleteBuild];
+}
+
+- (IBAction)provisioningDetailsButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+    
+    ProvisioningDetailsViewController *provisioningDetailsViewController = [[ProvisioningDetailsViewController alloc] initWithNibName:NSStringFromClass([ProvisioningDetailsViewController class]) bundle:nil];
+    [provisioningDetailsViewController setUploadRecord:uploadRecord];
+    [self presentViewControllerAsSheet:provisioningDetailsViewController];
 }
 
 - (IBAction)analyticsButtonTapped:(NSButton *)sender {
