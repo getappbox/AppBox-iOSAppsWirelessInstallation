@@ -153,6 +153,14 @@
     [self upadteDbDirectoryByBundleDirectory];
 }
 
+-(void)setMobileProvision:(MobileProvision *)mobileProvision{
+    _mobileProvision = mobileProvision;
+    if (self.mobileProvision){
+        if (!self.teamId) self.teamId = self.mobileProvision.teamId;
+        if (!self.buildType) self.buildType = self.mobileProvision.buildType;
+    }
+}
+
 - (void)upadteDbDirectoryByBundleDirectory{
     //Build URL for DropBox
     NSString *validName = [self validURLString:self.name];

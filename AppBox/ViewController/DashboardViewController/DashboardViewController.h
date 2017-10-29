@@ -7,8 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+
+
 #import "Project+CoreDataClass.h"
 #import "UploadRecord+CoreDataClass.h"
+#import "ProvisioningDetailsViewController.h"
 
 @interface DashboardViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>{
     __weak IBOutlet NSLayoutConstraint *actionViewHeightConstraint;

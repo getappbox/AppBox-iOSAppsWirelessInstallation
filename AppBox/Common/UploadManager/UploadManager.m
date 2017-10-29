@@ -12,8 +12,10 @@
 
 +(void)setupDBClientsManager{
     //Force Foreground Session
-    DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
-    [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+    if (![DBClientsManager authorizedClient]) {
+        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
+        [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+    }
     
     //Default Session (Background)
     //    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
@@ -48,11 +50,12 @@
                     }
                     
                     //Get embedded mobile provision
-                    if (self.project.buildType == nil){
+                    if (self.project.mobileProvision == nil){
                         NSString *mobileProvisionPath = [NSString stringWithFormat:@"%@embedded.mobileprovision",payloadEntry].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found mobileprovision at path = %@",mobileProvisionPath]];
-                            [self.project setBuildType:[MobileProvision buildTypeForProvisioning:[NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath]]];
+                            mobileProvisionPath = [NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath];
+                            self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
                     

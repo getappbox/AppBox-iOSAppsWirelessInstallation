@@ -22,7 +22,13 @@
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
+		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
+		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
 		DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFC680C1F6AE957007A4ED2 /* EventTracker.m */; };
+		DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA571FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m */; };
+		DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA591FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m */; };
+		DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */; };
+		DBFEEA641FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
@@ -130,8 +136,20 @@
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
 		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
+		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
+		DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvisioningDetailsViewController.m; sourceTree = "<group>"; };
+		DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProvisioningDetailsViewController.xib; sourceTree = "<group>"; };
 		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
 		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
+		DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox2.xcdatamodel; sourceTree = "<group>"; };
+		DBFEEA561FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataClass.h"; sourceTree = "<group>"; };
+		DBFEEA571FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataClass.m"; sourceTree = "<group>"; };
+		DBFEEA581FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DBFEEA591FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DBFEEA5C1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataClass.h"; sourceTree = "<group>"; };
+		DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataClass.m"; sourceTree = "<group>"; };
+		DBFEEA5E1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
@@ -313,6 +331,16 @@
 			path = UploadManager;
 			sourceTree = "<group>";
 		};
+		DBF290D31FA64A3E0046D5CE /* ProvisioningDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */,
+				DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */,
+				DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */,
+			);
+			path = ProvisioningDetailsViewController;
+			sourceTree = "<group>";
+		};
 		DBFC680A1F6AE942007A4ED2 /* EventTracker */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +362,14 @@
 		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
+				DBFEEA561FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.h */,
+				DBFEEA571FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m */,
+				DBFEEA581FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.h */,
+				DBFEEA591FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m */,
+				DBFEEA5C1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.h */,
+				DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */,
+				DBFEEA5E1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.h */,
+				DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */,
 				DB2629661F95E38C00C4C647 /* CISetting+CoreDataClass.h */,
 				DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */,
 				DB2629681F95E38C00C4C647 /* CISetting+CoreDataProperties.h */,
@@ -353,6 +389,7 @@
 		E12E6D061D8FC6E20054814D /* DashboardViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DBF290D31FA64A3E0046D5CE /* ProvisioningDetailsViewController */,
 				E12E6D071D8FC77D0054814D /* DashboardViewController.h */,
 				E12E6D081D8FC77D0054814D /* DashboardViewController.m */,
 			);
@@ -948,6 +985,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */,
 				E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */,
 				DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
@@ -1046,12 +1084,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
+				DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
+				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
@@ -1060,6 +1101,7 @@
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */,
+				DBFEEA641FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m in Sources */,
 				DB2629731F95E38C00C4C647 /* CISetting+CoreDataProperties.m in Sources */,
 				DB2629771F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
@@ -1072,6 +1114,7 @@
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
+				DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
@@ -1284,9 +1327,10 @@
 		E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */,
 				E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */,
 			);
-			currentVersion = E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */;
+			currentVersion = DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */;
 			name = AppBox.xcdatamodeld;
 			path = ../AppBox.xcdatamodeld;
 			sourceTree = "<group>";

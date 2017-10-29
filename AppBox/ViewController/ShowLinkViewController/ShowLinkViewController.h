@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "QRCodeViewController.h"
 #import "Project+CoreDataClass.h"
+#import "DashboardViewController.h"
 
 @interface ShowLinkViewController : NSViewController{
     IBOutlet NSTextField *textFieldHint;
