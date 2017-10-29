@@ -132,6 +132,7 @@
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
 		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
+		DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox2.xcdatamodel; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
@@ -1284,9 +1285,10 @@
 		E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */,
 				E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */,
 			);
-			currentVersion = E16437DC1D743A4E00CE8B7E /* AppBox.xcdatamodel */;
+			currentVersion = DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */;
 			name = AppBox.xcdatamodeld;
 			path = ../AppBox.xcdatamodeld;
 			sourceTree = "<group>";
