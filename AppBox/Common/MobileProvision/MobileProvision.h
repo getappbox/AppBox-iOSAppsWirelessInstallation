@@ -8,8 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MobileProvision : NSObject
+#define BuildTypeUnknown @"unknown"
+#define BuildTypeAdHoc @"ad-hoc"
+#define BuildTypePackage @"package"
+#define BuildTypeAppStore @"app-store"
+#define BuildTypeEnterprise @"enterprise"
+#define BuildTypeDevelopment @"development"
+#define BuildTypeDeveloperId @"developer-id"
 
-+(NSString *) buildTypeForProvisioning:(NSString *)provisioningPath;
+@interface MobileProvision : NSObject{
+    NSDictionary *mobileProvision;
+}
+
+@property(nonatomic, assign) BOOL isValid;
+@property(nonatomic, strong) NSString *uuid;
+@property(nonatomic, strong) NSString *teamId;
+@property(nonatomic, strong) NSString *teamName;
+@property(nonatomic, strong) NSString *buildType;
+@property(nonatomic, strong) NSString *createDate;
+@property(nonatomic, strong) NSString *expirationDate;
+@property(nonatomic, strong) NSArray<NSString *> *provisionedDevices;
+
+- (instancetype)initWithPath:(NSString *)path;
 
 @end
