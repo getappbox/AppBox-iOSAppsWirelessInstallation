@@ -118,6 +118,11 @@
             [EventTracker logEventWithName:name customAttributes:@{name:@1} action:name label:name value:@1];
         }break;
             
+        case LogEventTypeOpenDashboardFromShowLink:{
+            NSString *name = @"Dashboard open from Show Link";
+            [EventTracker logEventWithName:name customAttributes:@{name:@1} action:name label:name value:@1];
+        }break;
+            
         default:
             break;
     }
