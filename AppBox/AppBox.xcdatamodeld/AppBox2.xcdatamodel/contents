@@ -19,10 +19,10 @@
         <relationship name="ciSettings" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CISetting" inverseName="project" inverseEntity="CISetting" syncable="YES"/>
         <relationship name="uploadRecords" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="UploadRecord" inverseName="project" inverseEntity="UploadRecord" syncable="YES"/>
     </entity>
-    <entity name="ProvisionedDevice" syncable="YES">
+    <entity name="ProvisionedDevice" representedClassName="ProvisionedDevice" syncable="YES">
         <attribute name="deviceId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ProvisioningProfile" syncable="YES">
+    <entity name="ProvisioningProfile" representedClassName="ProvisioningProfile" syncable="YES">
         <attribute name="buildType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="expirationDate" optional="YES" attributeType="String" syncable="YES"/>
