@@ -25,8 +25,8 @@
 @property(nonatomic, strong) NSString *teamId;
 @property(nonatomic, strong) NSString *teamName;
 @property(nonatomic, strong) NSString *buildType;
-@property(nonatomic, strong) NSString *createDate;
-@property(nonatomic, strong) NSString *expirationDate;
+@property(nonatomic, strong) NSDate *createDate;
+@property(nonatomic, strong) NSDate *expirationDate;
 @property(nonatomic, strong) NSArray<NSString *> *provisionedDevices;
 
 - (instancetype)initWithPath:(NSString *)path;

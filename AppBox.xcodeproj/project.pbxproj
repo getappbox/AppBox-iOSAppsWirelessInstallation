@@ -27,7 +27,6 @@
 		DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA591FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m */; };
 		DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */; };
 		DBFEEA641FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */; };
-		DBFEEA661FA5BF5500F09ECD /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA651FA5BF5500F09ECD /* Model.xcmappingmodel */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
@@ -146,7 +145,6 @@
 		DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataClass.m"; sourceTree = "<group>"; };
 		DBFEEA5E1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataProperties.h"; sourceTree = "<group>"; };
 		DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
-		DBFEEA651FA5BF5500F09ECD /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
@@ -538,7 +536,6 @@
 				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
 				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
-				DBFEEA651FA5BF5500F09ECD /* Model.xcmappingmodel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1093,7 +1090,6 @@
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
-				DBFEEA661FA5BF5500F09ECD /* Model.xcmappingmodel in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
 				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,

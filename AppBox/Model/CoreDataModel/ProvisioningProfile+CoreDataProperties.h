@@ -18,11 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *uuid;
 @property (nullable, nonatomic, copy) NSString *teamId;
 @property (nullable, nonatomic, copy) NSString *teamName;
-@property (nullable, nonatomic, copy) NSString *expirationDate;
+@property (nullable, nonatomic, copy) NSDate *expirationDate;
 @property (nullable, nonatomic, copy) NSString *buildType;
-@property (nullable, nonatomic, copy) NSString *createDate;
-@property (nullable, nonatomic, retain) NSSet<UploadRecord *> *uploadRecord;
-@property (nullable, nonatomic, retain) NSSet<ProvisionedDevice *> *provisionedDevices;
+@property (nullable, nonatomic, copy) NSDate *createDate;
+@property (nullable, nonatomic, retain) NSOrderedSet<UploadRecord *> *uploadRecord;
+@property (nullable, nonatomic, retain) NSOrderedSet<ProvisionedDevice *> *provisionedDevices;
 
 @end
 
@@ -30,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addUploadRecordObject:(UploadRecord *)value;
 - (void)removeUploadRecordObject:(UploadRecord *)value;
-- (void)addUploadRecord:(NSSet<UploadRecord *> *)values;
-- (void)removeUploadRecord:(NSSet<UploadRecord *> *)values;
+- (void)addUploadRecord:(NSOrderedSet<UploadRecord *> *)values;
+- (void)removeUploadRecord:(NSOrderedSet<UploadRecord *> *)values;
 
 - (void)addProvisionedDevicesObject:(ProvisionedDevice *)value;
 - (void)removeProvisionedDevicesObject:(ProvisionedDevice *)value;
-- (void)addProvisionedDevices:(NSSet<ProvisionedDevice *> *)values;
-- (void)removeProvisionedDevices:(NSSet<ProvisionedDevice *> *)values;
+- (void)addProvisionedDevices:(NSOrderedSet<ProvisionedDevice *> *)values;
+- (void)removeProvisionedDevices:(NSOrderedSet<ProvisionedDevice *> *)values;
 
 @end
 

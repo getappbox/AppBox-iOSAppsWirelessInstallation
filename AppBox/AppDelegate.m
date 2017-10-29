@@ -188,8 +188,7 @@
     if (!shouldFail && !error) {
         NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
         NSURL *url = [applicationDocumentsDirectory URLByAppendingPathComponent:@"OSXCoreDataObjC.storedata"];
-        NSDictionary* storeOptions = @{NSMigratePersistentStoresAutomaticallyOption : [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption : [NSNumber numberWithBool:YES]};
-        if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:storeOptions error:&error]) {
+        if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
             coordinator = nil;
         }
         _persistentStoreCoordinator = coordinator;

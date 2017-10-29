@@ -24,13 +24,13 @@
     </entity>
     <entity name="ProvisioningProfile" representedClassName="ProvisioningProfile" syncable="YES">
         <attribute name="buildType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createDate" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="expirationDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="expirationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="teamId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teamName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="provisionedDevices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProvisionedDevice" syncable="YES"/>
-        <relationship name="uploadRecord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UploadRecord" inverseName="provisioningProfile" inverseEntity="UploadRecord" syncable="YES"/>
+        <relationship name="provisionedDevices" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ProvisionedDevice" syncable="YES"/>
+        <relationship name="uploadRecord" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="UploadRecord" inverseName="provisioningProfile" inverseEntity="UploadRecord" syncable="YES"/>
     </entity>
     <entity name="UploadRecord" representedClassName="UploadRecord" syncable="YES">
         <attribute name="build" optional="YES" attributeType="String" syncable="YES"/>
