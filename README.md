@@ -62,6 +62,14 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 ### Share URL
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/AppURL.png?raw=true)
 
+### Dashboard
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/Dashboard.png?raw=true)
+
+### Preferences
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/General.png?raw=true)
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/Email.png?raw=true)
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/Slack.png?raw=true)
+
 ### Installation and All Builds WebPage
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/webpage1.png?raw=true)        ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/webpage2.png?raw=true)
 
