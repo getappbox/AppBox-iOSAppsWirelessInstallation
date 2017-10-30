@@ -47,7 +47,6 @@
     }];
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:devices forType:NSStringPboardType];
-    [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
 }
 
 - (IBAction)closeButtonTapped:(NSButton *)sender {
