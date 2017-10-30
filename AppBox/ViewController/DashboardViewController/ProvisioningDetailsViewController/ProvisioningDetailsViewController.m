@@ -30,9 +30,13 @@
     [labelTeam setStringValue:[NSString stringWithFormat:@"%@ - %@", self.uploadRecord.provisioningProfile.teamId, self.uploadRecord.provisioningProfile.teamName]];
     
     //device label
-    NSNumber *totalDevices = [NSNumber numberWithInteger:self.uploadRecord.provisioningProfile.provisionedDevices.count];
-    NSString *postFix = totalDevices.integerValue > 1 ? @"s" : @"";
-    [labelProvisionedDevices setStringValue:[NSString stringWithFormat:@"%@ Device%@", totalDevices, postFix]];
+    if ([self.uploadRecord.provisioningProfile.buildType isEqualToString: BuildTypeEnterprise]){
+        [labelProvisionedDevices setStringValue:[NSString stringWithFormat:@"∞ Devices"]];
+    } else {
+        NSNumber *totalDevices = [NSNumber numberWithInteger:self.uploadRecord.provisioningProfile.provisionedDevices.count];
+        NSString *postFix = totalDevices.integerValue > 1 ? @"s" : @"";
+        [labelProvisionedDevices setStringValue:[NSString stringWithFormat:@"%@ Device%@", totalDevices, postFix]];
+    }
 }
 
 
@@ -43,7 +47,6 @@
     }];
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] setString:devices forType:NSStringPboardType];
-    [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
 }
 
 - (IBAction)closeButtonTapped:(NSButton *)sender {
