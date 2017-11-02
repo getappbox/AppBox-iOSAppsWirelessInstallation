@@ -163,7 +163,15 @@
                             [provisioningProfile setCreateDate:xcProject.mobileProvision.createDate];
                             [provisioningProfile setExpirationDate:xcProject.mobileProvision.expirationDate];
                             [provisioningProfile addProvisionedDevices:provisionDeviceSet];
-                            [provisioningProfile addUploadRecordObject:uploadRecord];
+                            
+                            NSMutableOrderedSet *uploadRecordsSet;
+                            if (provisioningProfile.uploadRecord && provisioningProfile.uploadRecord.count > 0){
+                                uploadRecordsSet = [[NSMutableOrderedSet alloc] initWithOrderedSet:provisioningProfile.uploadRecord];
+                            } else {
+                                uploadRecordsSet = [[NSMutableOrderedSet alloc] init];
+                            }
+                            [uploadRecordsSet addObject:uploadRecord];
+                            [provisioningProfile addUploadRecord:uploadRecordsSet];
                             [uploadRecord setProvisioningProfile:provisioningProfile];
                         }
                     } @catch (NSException *exception) {
