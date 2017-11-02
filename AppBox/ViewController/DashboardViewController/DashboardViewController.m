@@ -135,18 +135,26 @@ typedef enum : NSUInteger {
     }
     
     //Build Type
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType] && uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.buildType){
-        [cell.textField setStringValue:uploadRecord.provisioningProfile.buildType.capitalizedString];
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType]){
+        if (uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.buildType) {
+            [cell.textField setStringValue:uploadRecord.provisioningProfile.buildType.capitalizedString];
+        } else {
+            [cell.textField setStringValue:@"N/A"];
+        }
     }
     
     //Scheme
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme] && uploadRecord.buildScheme) {
-        [cell.textField setStringValue:uploadRecord.buildScheme];
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme]) {
+        [cell.textField setStringValue:uploadRecord.buildScheme == nil ? @"N/A" : uploadRecord.buildScheme];
     }
     
     //TeamId
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName){
-        [cell.textField setStringValue:[NSString stringWithFormat:@"%@ - %@", uploadRecord.provisioningProfile.teamId, uploadRecord.provisioningProfile.teamName]];
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId]){
+        if (uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName) {
+            [cell.textField setStringValue:[NSString stringWithFormat:@"%@ - %@", uploadRecord.provisioningProfile.teamId, uploadRecord.provisioningProfile.teamName]];
+        } else {
+            [cell.textField setStringValue:@"N/A"];
+        }
     }
     return cell;
 }
