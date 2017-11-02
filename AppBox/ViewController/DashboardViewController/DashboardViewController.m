@@ -135,18 +135,26 @@ typedef enum : NSUInteger {
     }
     
     //Build Type
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType] && uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.buildType){
-        [cell.textField setStringValue:uploadRecord.provisioningProfile.buildType.capitalizedString];
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBuidlType]){
+        if (uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.buildType) {
+            [cell.textField setStringValue:uploadRecord.provisioningProfile.buildType.capitalizedString];
+        } else {
+            [cell.textField setStringValue:@"N/A"];
+        }
     }
     
     //Scheme
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme] && uploadRecord.buildScheme) {
-        [cell.textField setStringValue:uploadRecord.buildScheme];
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme]) {
+        [cell.textField setStringValue:uploadRecord.buildScheme == nil ? @"N/A" : uploadRecord.buildScheme];
     }
     
     //TeamId
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId] && uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName){
-        [cell.textField setStringValue:[NSString stringWithFormat:@"%@ - %@", uploadRecord.provisioningProfile.teamId, uploadRecord.provisioningProfile.teamName]];
+    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId]){
+        if (uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName) {
+            [cell.textField setStringValue:[NSString stringWithFormat:@"%@ - %@", uploadRecord.provisioningProfile.teamId, uploadRecord.provisioningProfile.teamName]];
+        } else {
+            [cell.textField setStringValue:@"N/A"];
+        }
     }
     return cell;
 }
@@ -158,64 +166,88 @@ typedef enum : NSUInteger {
 
 #pragma mark - Build Action
 - (IBAction)copyURLButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
-    [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
-    [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
+    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    if (uploadRecord){
+        [[NSPasteboard generalPasteboard] clearContents];
+        [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
+        [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
+        [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
+    }
 }
 
 - (IBAction)deleteBuildButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    
-    //Show Delete Alert
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText: @"Are you sure you want to delete this build?"];
-    [alert setInformativeText:[NSString stringWithFormat:@"You're about to delete \"%@-%@(%@)\". This is permanent! We warned you, k?", uploadRecord.project.name, uploadRecord.version, uploadRecord.build]];
-    [alert setAlertStyle:NSInformationalAlertStyle];
-    [alert addButtonWithTitle:@"Delete"];
-    [alert addButtonWithTitle:@"Cancel"];
-    
-    if ([alert runModal] == NSAlertFirstButtonReturn){
-        [uploadManager setUploadRecord:uploadRecord];
-        [uploadManager setProject:uploadRecord.xcProject];
-        [uploadManager deleteBuildFromDropbox];
+    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    if (uploadRecord){
+        //Show Delete Alert
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText: @"Are you sure you want to delete this build?"];
+        [alert setInformativeText:[NSString stringWithFormat:@"You're about to delete \"%@-%@(%@)\". This is permanent! We warned you, k?", uploadRecord.project.name, uploadRecord.version, uploadRecord.build]];
+        [alert setAlertStyle:NSInformationalAlertStyle];
+        [alert addButtonWithTitle:@"Delete"];
+        [alert addButtonWithTitle:@"Cancel"];
+        
+        if ([alert runModal] == NSAlertFirstButtonReturn){
+            [uploadManager setUploadRecord:uploadRecord];
+            [uploadManager setProject:uploadRecord.xcProject];
+            [uploadManager deleteBuildFromDropbox];
+        }
+        [EventTracker logEventWithType:LogEventTypeDeleteBuild];
     }
-    [EventTracker logEventWithType:LogEventTypeDeleteBuild];
 }
 
 - (IBAction)provisioningDetailsButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    
-    ProvisioningDetailsViewController *provisioningDetailsViewController = [[ProvisioningDetailsViewController alloc] initWithNibName:NSStringFromClass([ProvisioningDetailsViewController class]) bundle:nil];
-    [provisioningDetailsViewController setUploadRecord:uploadRecord];
-    [self presentViewControllerAsSheet:provisioningDetailsViewController];
+    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    if (uploadRecord){
+        if (uploadRecord.provisioningProfile){
+            ProvisioningDetailsViewController *provisioningDetailsViewController = [[ProvisioningDetailsViewController alloc] initWithNibName:NSStringFromClass([ProvisioningDetailsViewController class]) bundle:nil];
+            [provisioningDetailsViewController setUploadRecord:uploadRecord];
+            [self presentViewControllerAsSheet:provisioningDetailsViewController];
+        } else {
+            [Common showAlertWithTitle:@"Information" andMessage:@"Provisioning profiles details not available for this build."];
+        }
+    }
 }
 
 - (IBAction)analyticsButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    NSURL *analyticsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@.info", uploadRecord.shortURL]];
-    [[NSWorkspace sharedWorkspace] openURL:analyticsURL];
+    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    if (uploadRecord){
+        NSURL *analyticsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@.info", uploadRecord.shortURL]];
+        [[NSWorkspace sharedWorkspace] openURL:analyticsURL];
+    }
 }
 
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
-    UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:NO]) {
-        NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
-        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
-    } else {
-        [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
+    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    if (uploadRecord){
+        UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:NO]) {
+            NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
+            [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
+        } else {
+            [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
+        }
+        [EventTracker logEventWithType:LogEventTypeOpenInFinder];
     }
-    [EventTracker logEventWithType:LogEventTypeOpenInFinder];
 }
 
 - (IBAction)showInDropBoxButtonTapped:(NSButton *)sender {
+    UploadRecord *uploadRecord = [self selectedUploadRecord];
+    if (uploadRecord){
+        NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
+        NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
+        [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
+        [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
+    }
+}
+
+#pragma mark - Helper Method
+-(UploadRecord *)selectedUploadRecord{
+    if (_dashboardTableView.selectedRow == -1 || uploadRecords == nil || (uploadRecords && uploadRecords.count == 0)){
+        return nil;
+    }
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-    NSString *dropboxURLString = [NSString stringWithFormat:@"%@%@", abDropBoxAppBaseURL, uploadRecord.dbDirectroy];
-    NSURL *dropboxURL = [NSURL URLWithString: dropboxURLString];
-    [[NSWorkspace sharedWorkspace] openURL:dropboxURL];
-    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
+    return uploadRecord;
 }
 
 
