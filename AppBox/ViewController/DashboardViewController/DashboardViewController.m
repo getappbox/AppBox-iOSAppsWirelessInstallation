@@ -187,9 +187,13 @@ typedef enum : NSUInteger {
 - (IBAction)provisioningDetailsButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
     
-    ProvisioningDetailsViewController *provisioningDetailsViewController = [[ProvisioningDetailsViewController alloc] initWithNibName:NSStringFromClass([ProvisioningDetailsViewController class]) bundle:nil];
-    [provisioningDetailsViewController setUploadRecord:uploadRecord];
-    [self presentViewControllerAsSheet:provisioningDetailsViewController];
+    if (uploadRecord.provisioningProfile){
+        ProvisioningDetailsViewController *provisioningDetailsViewController = [[ProvisioningDetailsViewController alloc] initWithNibName:NSStringFromClass([ProvisioningDetailsViewController class]) bundle:nil];
+        [provisioningDetailsViewController setUploadRecord:uploadRecord];
+        [self presentViewControllerAsSheet:provisioningDetailsViewController];
+    } else {
+        [Common showAlertWithTitle:@"Information" andMessage:@"Provisioning profiles details not available for this build."];
+    }
 }
 
 - (IBAction)analyticsButtonTapped:(NSButton *)sender {
