@@ -133,38 +133,42 @@
                 [uploadRecord setDatetime:[NSDate date]];
                 
                 if (xcProject.mobileProvision){
-                    //check either existing provisioning profile already exist or not
-                    NSFetchRequest *provisioningProfileFetchRequest = [ProvisioningProfile fetchRequest];
-                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uuid = %@", xcProject.mobileProvision.uuid];
-                    [provisioningProfileFetchRequest setPredicate:predicate];
-                    NSArray *fetchedResult = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:provisioningProfileFetchRequest error:nil];
-                    
-                    if (fetchedResult.count > 0 && [fetchedResult.firstObject isKindOfClass:[ProvisioningProfile class]]) {
-                        //if provisioning profile exist update records
-                        ProvisioningProfile *provisioningProfile = (ProvisioningProfile *)fetchedResult.firstObject;
-                        [provisioningProfile addUploadRecordObject:uploadRecord];
-                        [uploadRecord setProvisioningProfile:provisioningProfile];
-                    } else {
-                        //Create new provisioning profile record
-                        NSMutableOrderedSet<ProvisionedDevice *> *provisionDeviceSet = [[NSMutableOrderedSet<ProvisionedDevice *> alloc] init];
-                        [xcProject.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                            //Create ProvisionedDevice Object and Add into Set
-                            ProvisionedDevice *device = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisionedDevice class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
-                            [device setDeviceId:obj];
-                            [provisionDeviceSet addObject:device];
-                        }];
+                    @try {
+                        //check either existing provisioning profile already exist or not
+                        NSFetchRequest *provisioningProfileFetchRequest = [ProvisioningProfile fetchRequest];
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uuid = %@", xcProject.mobileProvision.uuid];
+                        [provisioningProfileFetchRequest setPredicate:predicate];
+                        NSArray *fetchedResult = [[[AppDelegate appDelegate] managedObjectContext] executeFetchRequest:provisioningProfileFetchRequest error:nil];
                         
-                        ProvisioningProfile *provisioningProfile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisioningProfile class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
-                        [provisioningProfile setUuid:xcProject.mobileProvision.uuid];
-                        [provisioningProfile setTeamId:xcProject.mobileProvision.teamId];
-                        [provisioningProfile setTeamName:xcProject.mobileProvision.teamName];
-                        [provisioningProfile setBuildType:xcProject.mobileProvision.buildType];
-                        [provisioningProfile setCreateDate:xcProject.mobileProvision.createDate];
-                        [provisioningProfile setExpirationDate:xcProject.mobileProvision.expirationDate];
-                        [provisioningProfile addProvisionedDevices:provisionDeviceSet];
-                        [provisioningProfile addUploadRecordObject:uploadRecord];
-                        
-                        [uploadRecord setProvisioningProfile:provisioningProfile];
+                        if (fetchedResult.count > 0 && [fetchedResult.firstObject isKindOfClass:[ProvisioningProfile class]]) {
+                            //if provisioning profile exist update records
+                            ProvisioningProfile *provisioningProfile = (ProvisioningProfile *)fetchedResult.firstObject;
+                            [provisioningProfile addUploadRecordObject:uploadRecord];
+                            [uploadRecord setProvisioningProfile:provisioningProfile];
+                        } else {
+                            //Create new provisioning profile record
+                            NSMutableOrderedSet<ProvisionedDevice *> *provisionDeviceSet = [[NSMutableOrderedSet<ProvisionedDevice *> alloc] init];
+                            [xcProject.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                //Create ProvisionedDevice Object and Add into Set
+                                ProvisionedDevice *device = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisionedDevice class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
+                                [device setDeviceId:obj];
+                                [provisionDeviceSet addObject:device];
+                            }];
+                            
+                            ProvisioningProfile *provisioningProfile = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ProvisioningProfile class]) inManagedObjectContext:[[AppDelegate appDelegate] managedObjectContext]];
+                            [provisioningProfile setUuid:xcProject.mobileProvision.uuid];
+                            [provisioningProfile setTeamId:xcProject.mobileProvision.teamId];
+                            [provisioningProfile setTeamName:xcProject.mobileProvision.teamName];
+                            [provisioningProfile setBuildType:xcProject.mobileProvision.buildType];
+                            [provisioningProfile setCreateDate:xcProject.mobileProvision.createDate];
+                            [provisioningProfile setExpirationDate:xcProject.mobileProvision.expirationDate];
+                            [provisioningProfile addProvisionedDevices:provisionDeviceSet];
+                            [provisioningProfile addUploadRecordObject:uploadRecord];
+                            [uploadRecord setProvisioningProfile:provisioningProfile];
+                        }
+                    } @catch (NSException *exception) {
+                        [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
+                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Exception %@",exception.userInfo]];
                     }
                 }
                 
