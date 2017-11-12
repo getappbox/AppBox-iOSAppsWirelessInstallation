@@ -44,4 +44,20 @@
     }];
 }
 
++(void)getXcodeVersionWithCompletion:(void (^) (BOOL success, XcodeVersion version, NSString *versionString))completion {
+    [TaskHandler runTaskWithName:@"XcodeVersion" andArgument:nil taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
+        if (![output isEqualToString:abEmptyString] && [output.lowercaseString containsString:@"xcode"]){
+            NSString *version = [output stringByReplacingOccurrencesOfString:@"Xcode " withString:@""];
+            if(version){
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Xcode Version - %@", version]];
+                completion(YES, [version integerValue], version);
+            } else{
+                completion(NO, XcodeVersionNone, nil);
+            }
+        } else {
+            completion(NO, XcodeVersionNone, nil);
+        }
+    }];
+}
+
 @end
