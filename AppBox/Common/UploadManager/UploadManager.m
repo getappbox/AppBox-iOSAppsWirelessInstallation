@@ -418,7 +418,8 @@
                  [self handleAfterUniqueJsonMetaDataLoaded];
              }];
         }else{
-            [self createManifestShortSharableUrl];
+            //[self createManifestShortSharableUrl];
+            [self updateUniquLinkDictinory:nil];
         }
     }
     
