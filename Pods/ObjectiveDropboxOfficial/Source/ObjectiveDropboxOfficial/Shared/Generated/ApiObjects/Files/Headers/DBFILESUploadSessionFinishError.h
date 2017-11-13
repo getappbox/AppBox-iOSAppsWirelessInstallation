@@ -193,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESUploadSessionFinishError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESUploadSessionFinishError *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishError` instances.

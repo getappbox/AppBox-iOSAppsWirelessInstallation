@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderTeamSharedDropboxErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderTeamSharedDropboxError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderTeamSharedDropboxError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderTeamSharedDropboxError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderTeamSharedDropboxError` instances.

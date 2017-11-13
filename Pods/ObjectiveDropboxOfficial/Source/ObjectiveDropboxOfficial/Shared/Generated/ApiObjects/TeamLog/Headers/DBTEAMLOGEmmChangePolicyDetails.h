@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGEmmChangePolicyDetails;
-@class DBTEAMLOGEmmPolicy;
+@class DBTEAMPOLICIESEmmState;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New enterprise mobility management policy.
-@property (nonatomic, readonly) DBTEAMLOGEmmPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMPOLICIESEmmState *dNewValue;
 
 /// Previous enterprise mobility management policy. Might be missing due to
 /// historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGEmmPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESEmmState *previousValue;
 
 #pragma mark - Constructors
 
@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEmmPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGEmmPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESEmmState *)dNewValue
+                    previousValue:(nullable DBTEAMPOLICIESEmmState *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGEmmPolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESEmmState *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEmmChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGEmmChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGEmmChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEmmChangePolicyDetails` instances.

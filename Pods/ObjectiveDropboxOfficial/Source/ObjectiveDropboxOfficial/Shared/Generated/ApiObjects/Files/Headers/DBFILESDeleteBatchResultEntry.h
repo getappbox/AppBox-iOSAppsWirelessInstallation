@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchResultEntry` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESDeleteBatchResultEntry *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESDeleteBatchResultEntry *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchResultEntry` instances.

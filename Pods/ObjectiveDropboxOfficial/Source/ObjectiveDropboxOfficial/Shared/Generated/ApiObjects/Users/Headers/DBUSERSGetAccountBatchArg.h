@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSGetAccountBatchArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBUSERSGetAccountBatchArg *)instance;
++ (nullable NSDictionary *)serialize:(DBUSERSGetAccountBatchArg *)instance;
 
 ///
 /// Deserializes `DBUSERSGetAccountBatchArg` instances.

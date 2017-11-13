@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFolderMembersCursorArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGListFolderMembersCursorArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGListFolderMembersCursorArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFolderMembersCursorArg` instances.

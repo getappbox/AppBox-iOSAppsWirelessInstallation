@@ -34,17 +34,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
   /// (no description).
   DBSHARINGCreateSharedLinkWithSettingsErrorPath,
 
-  /// User's email should be verified
+  /// User's email should be verified.
   DBSHARINGCreateSharedLinkWithSettingsErrorEmailNotVerified,
 
   /// The shared link already exists. You can call `listSharedLinks` to get
   /// the existing link.
   DBSHARINGCreateSharedLinkWithSettingsErrorSharedLinkAlreadyExists,
 
-  /// There is an error with the given settings
+  /// There is an error with the given settings.
   DBSHARINGCreateSharedLinkWithSettingsErrorSettingsError,
 
-  /// Access to the requested path is forbidden
+  /// Access to the requested path is forbidden.
   DBSHARINGCreateSharedLinkWithSettingsErrorAccessDenied,
 
 };
@@ -56,9 +56,9 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILESLookupError *path;
 
-/// There is an error with the given settings @note Ensure the `isSettingsError`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
+/// There is an error with the given settings. @note Ensure the
+/// `isSettingsError` method returns true before accessing, otherwise a runtime
+/// exception will be raised.
 @property (nonatomic, readonly) DBSHARINGSharedLinkSettingsError *settingsError;
 
 #pragma mark - Constructors
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// Initializes union class with tag state of "email_not_verified".
 ///
 /// Description of the "email_not_verified" tag state: User's email should be
-/// verified
+/// verified.
 ///
 /// @return An initialized instance.
 ///
@@ -96,9 +96,9 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// Initializes union class with tag state of "settings_error".
 ///
 /// Description of the "settings_error" tag state: There is an error with the
-/// given settings
+/// given settings.
 ///
-/// @param settingsError There is an error with the given settings
+/// @param settingsError There is an error with the given settings.
 ///
 /// @return An initialized instance.
 ///
@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// Initializes union class with tag state of "access_denied".
 ///
 /// Description of the "access_denied" tag state: Access to the requested path
-/// is forbidden
+/// is forbidden.
 ///
 /// @return An initialized instance.
 ///
@@ -189,7 +189,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCreateSharedLinkWithSettingsError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsError *)instance;
 
 ///
 /// Deserializes `DBSHARINGCreateSharedLinkWithSettingsError` instances.

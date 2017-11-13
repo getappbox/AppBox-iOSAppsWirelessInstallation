@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONGroupSummary` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMCOMMONGroupSummary *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMCOMMONGroupSummary *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONGroupSummary` instances.

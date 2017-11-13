@@ -27,20 +27,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Is admin managed group. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) NSNumber *isAdminManaged;
+/// Is company managed group. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) NSNumber *isCompanyManaged;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param isAdminManaged Is admin managed group. Might be missing due to
+/// @param isCompanyManaged Is company managed group. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithIsAdminManaged:(nullable NSNumber *)isAdminManaged;
+- (instancetype)initWithIsCompanyManaged:(nullable NSNumber *)isCompanyManaged;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupDeleteDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupDeleteDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupDeleteDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupDeleteDetails` instances.

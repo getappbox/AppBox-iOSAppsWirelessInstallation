@@ -177,7 +177,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESDeleteError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESDeleteError *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteError` instances.

@@ -88,6 +88,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the linkedAppsRevokeLinkedAppBatch route object.
 + (DBRoute *)DBTEAMLinkedAppsRevokeLinkedAppBatch;
 
+/// Accessor method for the memberSpaceLimitsGetCustomQuota route object.
++ (DBRoute *)DBTEAMMemberSpaceLimitsGetCustomQuota;
+
+/// Accessor method for the memberSpaceLimitsRemoveCustomQuota route object.
++ (DBRoute *)DBTEAMMemberSpaceLimitsRemoveCustomQuota;
+
+/// Accessor method for the memberSpaceLimitsSetCustomQuota route object.
++ (DBRoute *)DBTEAMMemberSpaceLimitsSetCustomQuota;
+
 /// Accessor method for the membersAdd route object.
 + (DBRoute *)DBTEAMMembersAdd;
 

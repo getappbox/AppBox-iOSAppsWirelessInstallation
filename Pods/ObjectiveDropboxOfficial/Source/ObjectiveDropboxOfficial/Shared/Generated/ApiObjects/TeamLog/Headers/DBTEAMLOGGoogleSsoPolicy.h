@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGGoogleSsoPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGoogleSsoPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGGoogleSsoPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGGoogleSsoPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGoogleSsoPolicy` instances.

@@ -28,19 +28,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// SSO certificate details.
-@property (nonatomic, readonly) DBTEAMLOGCertificate *certificateDetails;
+/// Previous SSO certificate details.
+@property (nonatomic, readonly, nullable) DBTEAMLOGCertificate *previousCertificateDetails;
+
+/// New SSO certificate details.
+@property (nonatomic, readonly) DBTEAMLOGCertificate *dNewCertificateDetails;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param certificateDetails SSO certificate details.
+/// @param dNewCertificateDetails New SSO certificate details.
+/// @param previousCertificateDetails Previous SSO certificate details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithCertificateDetails:(DBTEAMLOGCertificate *)certificateDetails;
+- (instancetype)initWithDNewCertificateDetails:(DBTEAMLOGCertificate *)dNewCertificateDetails
+                    previousCertificateDetails:(nullable DBTEAMLOGCertificate *)previousCertificateDetails;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+/// @param dNewCertificateDetails New SSO certificate details.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDNewCertificateDetails:(DBTEAMLOGCertificate *)dNewCertificateDetails;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -62,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoChangeCertDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSsoChangeCertDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoChangeCertDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoChangeCertDetails` instances.

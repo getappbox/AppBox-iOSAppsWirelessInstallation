@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainVerificationAddDomainSuccessDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGDomainVerificationAddDomainSuccessDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainVerificationAddDomainSuccessDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainVerificationAddDomainSuccessDetails` instances.

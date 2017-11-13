@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBPAPERUserOnPaperDocFilterTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERUserOnPaperDocFilter` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERUserOnPaperDocFilter *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERUserOnPaperDocFilter *)instance;
 
 ///
 /// Deserializes `DBPAPERUserOnPaperDocFilter` instances.

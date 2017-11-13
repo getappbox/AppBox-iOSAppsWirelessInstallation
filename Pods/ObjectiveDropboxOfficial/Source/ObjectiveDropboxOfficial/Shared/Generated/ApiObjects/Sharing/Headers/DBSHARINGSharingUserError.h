@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharingUserErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharingUserError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGSharingUserError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGSharingUserError *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharingUserError` instances.

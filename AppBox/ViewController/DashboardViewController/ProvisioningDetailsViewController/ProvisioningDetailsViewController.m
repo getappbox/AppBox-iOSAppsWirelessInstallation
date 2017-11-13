@@ -49,6 +49,18 @@
     [[NSPasteboard generalPasteboard] setString:devices forType:NSStringPboardType];
 }
 
+- (IBAction)showInFinderButtonTapped:(NSButton *)sender {
+    NSString *path = [NSString stringWithFormat:@"~/Library/MobileDevice/Provisioning Profiles/%@.mobileprovision", self.uploadRecord.provisioningProfile.uuid];
+    path = [path stringByExpandingTildeInPath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:NO]) {
+        NSURL *fileURL = [NSURL fileURLWithPath:path];
+        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
+    } else {
+        [Common showAlertWithTitle:@"Error" andMessage:@"File not found."];
+    }
+    [EventTracker logEventWithType:LogEventTypeOpenInFinder];
+}
+
 - (IBAction)closeButtonTapped:(NSButton *)sender {
     [self dismissController:self];
 }

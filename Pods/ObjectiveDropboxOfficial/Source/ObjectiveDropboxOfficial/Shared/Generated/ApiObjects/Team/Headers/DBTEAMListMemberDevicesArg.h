@@ -25,16 +25,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The team's member id
+/// The team's member id.
 @property (nonatomic, readonly, copy) NSString *teamMemberId;
 
-/// Whether to list web sessions of the team's member
+/// Whether to list web sessions of the team's member.
 @property (nonatomic, readonly) NSNumber *includeWebSessions;
 
-/// Whether to list linked desktop devices of the team's member
+/// Whether to list linked desktop devices of the team's member.
 @property (nonatomic, readonly) NSNumber *includeDesktopClients;
 
-/// Whether to list linked mobile devices of the team's member
+/// Whether to list linked mobile devices of the team's member.
 @property (nonatomic, readonly) NSNumber *includeMobileClients;
 
 #pragma mark - Constructors
@@ -42,12 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param teamMemberId The team's member id
-/// @param includeWebSessions Whether to list web sessions of the team's member
+/// @param teamMemberId The team's member id.
+/// @param includeWebSessions Whether to list web sessions of the team's member.
 /// @param includeDesktopClients Whether to list linked desktop devices of the
-/// team's member
+/// team's member.
 /// @param includeMobileClients Whether to list linked mobile devices of the
-/// team's member
+/// team's member.
 ///
 /// @return An initialized instance.
 ///
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param teamMemberId The team's member id
+/// @param teamMemberId The team's member id.
 ///
 /// @return An initialized instance.
 ///
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListMemberDevicesArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMListMemberDevicesArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMListMemberDevicesArg *)instance;
 
 ///
 /// Deserializes `DBTEAMListMemberDevicesArg` instances.

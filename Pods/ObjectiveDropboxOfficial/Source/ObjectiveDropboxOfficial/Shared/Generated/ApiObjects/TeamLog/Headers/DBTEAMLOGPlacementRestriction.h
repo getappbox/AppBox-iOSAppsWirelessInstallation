@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPlacementRestrictionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPlacementRestriction` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPlacementRestriction *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPlacementRestriction *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPlacementRestriction` instances.

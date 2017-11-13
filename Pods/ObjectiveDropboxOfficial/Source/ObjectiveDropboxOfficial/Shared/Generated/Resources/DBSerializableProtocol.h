@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return A serialized, json-compatible dictionary representation of the API object.
 ///
-+ (NSDictionary *)serialize:(id)instance;
++ (nullable NSDictionary *)serialize:(id)instance;
 
 ///
 /// Class method which returns an instantiation of the supplied object as represented

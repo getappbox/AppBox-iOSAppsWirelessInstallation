@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetMetadataErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetMetadataError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESGetMetadataError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESGetMetadataError *)instance;
 
 ///
 /// Deserializes `DBFILESGetMetadataError` instances.

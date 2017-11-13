@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERSharingPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERSharingPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERSharingPolicy *)instance;
 
 ///
 /// Deserializes `DBPAPERSharingPolicy` instances.

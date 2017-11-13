@@ -4,6 +4,8 @@ The Official Dropbox Objective-C SDK for integrating with Dropbox [API v2](https
 
 Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/latest/).
 
+NOTE: Please do not rely on `master` in production. Please instead use one of our tagged [release commits](https://github.com/dropbox/dropbox-sdk-obj-c/releases) (preferrably fetched via CocoaPods or Carthage), as these commits have been more thoroughly tested.
+
 ---
 
 ## Table of Contents
@@ -56,7 +58,7 @@ Full documentation [here](http://dropbox.github.io/dropbox-sdk-obj-c/api-docs/la
 
 - iOS 9.0+
 - macOS 10.10+
-- Xcode 7.3+
+- Xcode 8+
 
 ---
 
@@ -165,7 +167,7 @@ brew install carthage
 
 ```
 # ObjectiveDropboxOfficial
-github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.2.0
+github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.3.5
 ```
 
 Then, run the following command to checkout and build the Dropbox Objective-C SDK repository:
@@ -336,6 +338,9 @@ To facilitate the above authorization flows, you should take the following steps
 You can commence the auth flow by calling `authorizeFromController:controller:openURL` method in your application's
 view controller.
 
+Please ensure that the supplied view controller is the top-most controller, so that the authorization view displays correctly. 
+
+
 ##### iOS
 
 ```objective-c
@@ -343,10 +348,21 @@ view controller.
 
 - (void)myButtonInControllerPressed {
   [DBClientsManager authorizeFromController:[UIApplication sharedApplication]
-                                 controller:self
+                                 controller:[[self class] topMostController]
                                     openURL:^(NSURL *url) {
                                       [[UIApplication sharedApplication] openURL:url];
                                     }];
+}
+
++ (UIViewController*)topMostController
+{
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+
+    return topController;
 }
 
 ```
@@ -358,8 +374,19 @@ view controller.
 
 - (void)myButtonInControllerPressed {
   [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace]
-                                        controller:self
+                                        controller:[[self class] topMostController]
                                            openURL:^(NSURL *url){ [[NSWorkspace sharedWorkspace] openURL:url]; }];
+}
+
++ (UIViewController*)topMostController
+{
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+
+    return topController;
 }
 ```
 
@@ -1067,6 +1094,20 @@ If you're interested in modifying the SDK codebase, you should take the followin
 * navigate to `TestObjectiveDropbox` and run `pod install`
 * open `TestObjectiveDropbox/TestObjectiveDropbox.xcworkspace` in Xcode
 * implement your changes to the SDK source code.
+
+To ensure your changes have not broken any existing functionality, you can run a series of integration tests by
+following the instructions listed in the `ViewController.m` file.
+
+---
+
+## Code generation
+
+If you're interested in manually generating the SDK serialization logic, perform the following:
+
+* clone this GitHub repository to your local filesystem
+* run `git submodule init` and then `git submodule update`
+* navigate to the [Stone GitHub repo](https://github.com/dropbox/stone), and install all necessary dependencies
+* run `./generate_base_client.py` to generate code
 
 To ensure your changes have not broken any existing functionality, you can run a series of integration tests by
 following the instructions listed in the `ViewController.m` file.

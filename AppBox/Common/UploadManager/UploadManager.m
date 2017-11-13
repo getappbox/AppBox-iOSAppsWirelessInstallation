@@ -246,17 +246,18 @@
 
 #pragma mark - Update AppInfo.JSON file
 -(void)loadAppInfoMetaData{
-    [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString limit:@1]
-     setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
-         //check there is any rev available
-         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
-             self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
-         }
-         
-         //handle meta data
-         [self handleAfterUniqueJsonMetaDataLoaded];
-     }];
+    DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
+    [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode limit:@1 ] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+        //check there is any rev available
+        if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
+            self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
+        }
+        
+        //handle meta data
+        [self handleAfterUniqueJsonMetaDataLoaded];
+    }];
+     
 }
 
 #pragma mark - Upload Files
@@ -406,19 +407,20 @@
         self.project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         if(self.project.isKeepSameLinkEnabled){
             //Download previously uploaded appinfo
-            [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString limit:@1]
-             setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
-                 //check there is any rev available
-                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-                     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
-                     self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
-                 }
-                 
-                 //handle meta data
-                 [self handleAfterUniqueJsonMetaDataLoaded];
-             }];
+            DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
+            [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode  limit:@1] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+                //check there is any rev available
+                if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
+                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
+                    self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
+                }
+                
+                //handle meta data
+                [self handleAfterUniqueJsonMetaDataLoaded];
+            }];
         }else{
-            [self createManifestShortSharableUrl];
+            //[self createManifestShortSharableUrl];
+            [self updateUniquLinkDictinory:nil];
         }
     }
     

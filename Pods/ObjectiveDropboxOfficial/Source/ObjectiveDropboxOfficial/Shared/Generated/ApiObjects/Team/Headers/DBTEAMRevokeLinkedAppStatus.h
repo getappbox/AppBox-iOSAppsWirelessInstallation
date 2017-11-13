@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Result of the revoking request
+/// Result of the revoking request.
 @property (nonatomic, readonly) NSNumber *success;
 
-/// The error cause in case of a failure
+/// The error cause in case of a failure.
 @property (nonatomic, readonly, nullable) DBTEAMRevokeLinkedAppError *errorType;
 
 #pragma mark - Constructors
@@ -37,8 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param success Result of the revoking request
-/// @param errorType The error cause in case of a failure
+/// @param success Result of the revoking request.
+/// @param errorType The error cause in case of a failure.
 ///
 /// @return An initialized instance.
 ///
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param success Result of the revoking request
+/// @param success Result of the revoking request.
 ///
 /// @return An initialized instance.
 ///
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeLinkedAppStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRevokeLinkedAppStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRevokeLinkedAppStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeLinkedAppStatus` instances.

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRevokeSharedLinkArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGRevokeSharedLinkArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGRevokeSharedLinkArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRevokeSharedLinkArg` instances.

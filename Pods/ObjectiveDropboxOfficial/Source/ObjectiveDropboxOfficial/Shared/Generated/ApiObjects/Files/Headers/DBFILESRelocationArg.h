@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESRelocationArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESRelocationArg *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationArg` instances.

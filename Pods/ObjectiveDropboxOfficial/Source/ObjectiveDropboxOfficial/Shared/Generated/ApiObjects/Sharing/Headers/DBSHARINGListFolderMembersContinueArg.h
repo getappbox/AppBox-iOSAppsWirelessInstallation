@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFolderMembersContinueArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGListFolderMembersContinueArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGListFolderMembersContinueArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFolderMembersContinueArg` instances.

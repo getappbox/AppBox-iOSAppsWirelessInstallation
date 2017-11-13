@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetPermissionsError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersSetPermissionsError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersSetPermissionsError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetPermissionsError` instances.

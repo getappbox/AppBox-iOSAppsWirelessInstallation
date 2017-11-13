@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPendingUploadModeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGPendingUploadMode` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGPendingUploadMode *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGPendingUploadMode *)instance;
 
 ///
 /// Deserializes `DBSHARINGPendingUploadMode` instances.

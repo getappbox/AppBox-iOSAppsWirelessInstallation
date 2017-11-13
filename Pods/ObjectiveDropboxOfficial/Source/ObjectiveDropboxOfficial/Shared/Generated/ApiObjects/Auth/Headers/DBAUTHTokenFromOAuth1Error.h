@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHTokenFromOAuth1Error` API object.
 ///
-+ (NSDictionary *)serialize:(DBAUTHTokenFromOAuth1Error *)instance;
++ (nullable NSDictionary *)serialize:(DBAUTHTokenFromOAuth1Error *)instance;
 
 ///
 /// Deserializes `DBAUTHTokenFromOAuth1Error` instances.

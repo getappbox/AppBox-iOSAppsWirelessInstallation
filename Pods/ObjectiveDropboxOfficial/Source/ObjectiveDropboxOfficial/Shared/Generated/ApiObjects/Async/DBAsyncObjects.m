@@ -54,7 +54,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBASYNCLaunchResultBaseSerializer serialize:instance];
 }
 
@@ -134,7 +134,7 @@
                                  userInfo:nil]);
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBASYNCLaunchResultBase *)deserialize:(NSDictionary *)valueDict {
@@ -216,7 +216,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBASYNCLaunchEmptyResultSerializer serialize:instance];
 }
 
@@ -302,7 +302,7 @@
                                  userInfo:nil]);
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBASYNCLaunchEmptyResult *)deserialize:(NSDictionary *)valueDict {
@@ -334,7 +334,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAsyncJobId:(NSString *)asyncJobId {
-  [DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil](asyncJobId);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](asyncJobId);
 
   self = [super init];
   if (self) {
@@ -345,7 +345,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBASYNCPollArgSerializer serialize:instance];
 }
 
@@ -411,7 +411,7 @@
 
   jsonDict[@"async_job_id"] = valueObj.asyncJobId;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBASYNCPollArg *)deserialize:(NSDictionary *)valueDict {
@@ -459,7 +459,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBASYNCPollResultBaseSerializer serialize:instance];
 }
 
@@ -538,7 +538,7 @@
                                  userInfo:nil]);
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBASYNCPollResultBase *)deserialize:(NSDictionary *)valueDict {
@@ -608,7 +608,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBASYNCPollEmptyResultSerializer serialize:instance];
 }
 
@@ -693,7 +693,7 @@
                                  userInfo:nil]);
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBASYNCPollEmptyResult *)deserialize:(NSDictionary *)valueDict {
@@ -778,7 +778,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBASYNCPollErrorSerializer serialize:instance];
 }
 
@@ -867,7 +867,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBASYNCPollError *)deserialize:(NSDictionary *)valueDict {

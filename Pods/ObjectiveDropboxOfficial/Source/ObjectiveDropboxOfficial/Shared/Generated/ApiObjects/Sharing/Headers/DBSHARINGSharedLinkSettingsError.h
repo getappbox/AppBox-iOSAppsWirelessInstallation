@@ -33,13 +33,13 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkSettingsErrorTag) {
   /// SharedLinkSettings are empty, the requested visibility is `password` in
   /// `DBSHARINGRequestedVisibility` but the `linkPassword` in
   /// `DBSHARINGSharedLinkSettings` is missing, `expires` in
-  /// `DBSHARINGSharedLinkSettings` is set to the past, etc.)
+  /// `DBSHARINGSharedLinkSettings` is set to the past, etc.).
   DBSHARINGSharedLinkSettingsErrorInvalidSettings,
 
   /// User is not allowed to modify the settings of this link. Note that basic
   /// users can only set `public` in `DBSHARINGRequestedVisibility` as the
   /// `requestedVisibility` in `DBSHARINGSharedLinkSettings` and cannot set
-  /// `expires` in `DBSHARINGSharedLinkSettings`
+  /// `expires` in `DBSHARINGSharedLinkSettings`.
   DBSHARINGSharedLinkSettingsErrorNotAuthorized,
 
 };
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkSettingsErrorTag) {
 /// invalid (for example, all attributes of the SharedLinkSettings are empty,
 /// the requested visibility is `password` in `DBSHARINGRequestedVisibility` but
 /// the `linkPassword` in `DBSHARINGSharedLinkSettings` is missing, `expires` in
-/// `DBSHARINGSharedLinkSettings` is set to the past, etc.)
+/// `DBSHARINGSharedLinkSettings` is set to the past, etc.).
 ///
 /// @return An initialized instance.
 ///
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkSettingsErrorTag) {
 /// the settings of this link. Note that basic users can only set `public` in
 /// `DBSHARINGRequestedVisibility` as the `requestedVisibility` in
 /// `DBSHARINGSharedLinkSettings` and cannot set `expires` in
-/// `DBSHARINGSharedLinkSettings`
+/// `DBSHARINGSharedLinkSettings`.
 ///
 /// @return An initialized instance.
 ///
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkSettingsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkSettingsError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGSharedLinkSettingsError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGSharedLinkSettingsError *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkSettingsError` instances.

@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperDocChangeSharingPolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperDocChangeSharingPolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperDocChangeSharingPolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperDocChangeSharingPolicyDetails` instances.

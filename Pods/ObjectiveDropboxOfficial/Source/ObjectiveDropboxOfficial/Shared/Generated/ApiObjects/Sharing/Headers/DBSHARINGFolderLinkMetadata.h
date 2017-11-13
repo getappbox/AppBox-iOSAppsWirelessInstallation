@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `FolderLinkMetadata` struct.
 ///
-/// The metadata of a folder shared link
+/// The metadata of a folder shared link.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFolderLinkMetadata` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGFolderLinkMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGFolderLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGFolderLinkMetadata` instances.

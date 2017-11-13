@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGCreateFolderDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGCreateFolderDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGCreateFolderDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGCreateFolderDetails` instances.

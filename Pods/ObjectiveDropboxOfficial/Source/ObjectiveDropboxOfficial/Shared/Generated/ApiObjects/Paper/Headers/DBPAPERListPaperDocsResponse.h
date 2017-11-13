@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListPaperDocsResponse` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERListPaperDocsResponse *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERListPaperDocsResponse *)instance;
 
 ///
 /// Deserializes `DBPAPERListPaperDocsResponse` instances.

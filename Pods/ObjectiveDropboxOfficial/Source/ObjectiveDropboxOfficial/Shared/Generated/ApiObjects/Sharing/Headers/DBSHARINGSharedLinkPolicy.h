@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGSharedLinkPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGSharedLinkPolicy *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkPolicy` instances.

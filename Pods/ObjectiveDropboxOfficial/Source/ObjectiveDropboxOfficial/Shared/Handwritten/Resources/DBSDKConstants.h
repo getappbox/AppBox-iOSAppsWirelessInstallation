@@ -10,4 +10,5 @@ extern NSString *const kV2SDKVersion;
 extern NSString *const kV2SDKDefaultUserAgentPrefix;
 extern NSString *const kForegroundSessionId;
 extern NSString *const kBackgroundSessionId;
+extern NSString *const kSDKDebugHost;
 extern BOOL const kSDKDebug;

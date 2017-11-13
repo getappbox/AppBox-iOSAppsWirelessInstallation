@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, DBPAPERFolderSharingPolicyTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERFolderSharingPolicyType` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERFolderSharingPolicyType *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERFolderSharingPolicyType *)instance;
 
 ///
 /// Deserializes `DBPAPERFolderSharingPolicyType` instances.

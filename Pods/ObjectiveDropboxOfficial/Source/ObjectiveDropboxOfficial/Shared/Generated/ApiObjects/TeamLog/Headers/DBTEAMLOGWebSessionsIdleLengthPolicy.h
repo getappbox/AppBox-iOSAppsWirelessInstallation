@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGWebSessionsIdleLengthPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGWebSessionsIdleLengthPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGWebSessionsIdleLengthPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGWebSessionsIdleLengthPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGWebSessionsIdleLengthPolicy` instances.

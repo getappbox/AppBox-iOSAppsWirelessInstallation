@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetPermissionsArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersSetPermissionsArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersSetPermissionsArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetPermissionsArg` instances.

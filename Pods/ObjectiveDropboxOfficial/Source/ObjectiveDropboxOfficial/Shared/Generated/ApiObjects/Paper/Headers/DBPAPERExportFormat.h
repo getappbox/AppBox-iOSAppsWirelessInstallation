@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERExportFormat` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERExportFormat *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERExportFormat *)instance;
 
 ///
 /// Deserializes `DBPAPERExportFormat` instances.

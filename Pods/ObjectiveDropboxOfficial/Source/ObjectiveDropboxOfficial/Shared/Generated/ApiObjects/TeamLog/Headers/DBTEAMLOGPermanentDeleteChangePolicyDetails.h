@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPermanentDeleteChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPermanentDeleteChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPermanentDeleteChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPermanentDeleteChangePolicyDetails` instances.

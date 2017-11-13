@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedFolderMembershipManagementPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderMembershipManagementPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderMembershipManagementPolicy` instances.

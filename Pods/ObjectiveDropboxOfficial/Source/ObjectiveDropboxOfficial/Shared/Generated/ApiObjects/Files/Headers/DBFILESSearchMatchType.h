@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchMatchTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchMatchType` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESSearchMatchType *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESSearchMatchType *)instance;
 
 ///
 /// Deserializes `DBFILESSearchMatchType` instances.

@@ -30,16 +30,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// Previous display name.
 @property (nonatomic, readonly, copy) NSString *previousValue;
 
+/// New display name.
+@property (nonatomic, readonly, copy) NSString *dNewValue;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param previousValue Previous display name.
+/// @param dNewValue New display name.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousValue:(NSString *)previousValue;
+- (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(NSString *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -60,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupRenameDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupRenameDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupRenameDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupRenameDetails` instances.

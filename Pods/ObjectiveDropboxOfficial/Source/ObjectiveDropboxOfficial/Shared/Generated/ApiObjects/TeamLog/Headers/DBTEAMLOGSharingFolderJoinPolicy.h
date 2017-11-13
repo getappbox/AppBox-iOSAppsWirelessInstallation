@@ -33,10 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGSharingFolderJoinPolicyTag) {
   /// (no description).
-  DBTEAMLOGSharingFolderJoinPolicyTeamOnly,
+  DBTEAMLOGSharingFolderJoinPolicyFromAnyone,
 
   /// (no description).
-  DBTEAMLOGSharingFolderJoinPolicyAnyone,
+  DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly,
 
   /// (no description).
   DBTEAMLOGSharingFolderJoinPolicyOther,
@@ -49,18 +49,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingFolderJoinPolicyTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "team_only".
+/// Initializes union class with tag state of "from_anyone".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamOnly;
+- (instancetype)initWithFromAnyone;
 
 ///
-/// Initializes union class with tag state of "anyone".
+/// Initializes union class with tag state of "from_team_only".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAnyone;
+- (instancetype)initWithFromTeamOnly;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -74,18 +74,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingFolderJoinPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "team_only".
+/// Retrieves whether the union's current tag state has value "from_anyone".
 ///
-/// @return Whether the union's current tag state has value "team_only".
+/// @return Whether the union's current tag state has value "from_anyone".
 ///
-- (BOOL)isTeamOnly;
+- (BOOL)isFromAnyone;
 
 ///
-/// Retrieves whether the union's current tag state has value "anyone".
+/// Retrieves whether the union's current tag state has value "from_team_only".
 ///
-/// @return Whether the union's current tag state has value "anyone".
+/// @return Whether the union's current tag state has value "from_team_only".
 ///
-- (BOOL)isAnyone;
+- (BOOL)isFromTeamOnly;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingFolderJoinPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharingFolderJoinPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharingFolderJoinPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharingFolderJoinPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharingFolderJoinPolicy` instances.

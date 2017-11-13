@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBCOMMONInvalidPathRootError` API object.
 ///
-+ (NSDictionary *)serialize:(DBCOMMONInvalidPathRootError *)instance;
++ (nullable NSDictionary *)serialize:(DBCOMMONInvalidPathRootError *)instance;
 
 ///
 /// Deserializes `DBCOMMONInvalidPathRootError` instances.

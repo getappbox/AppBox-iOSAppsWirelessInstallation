@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAclUpdatePolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAclUpdatePolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGAclUpdatePolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGAclUpdatePolicy *)instance;
 
 ///
 /// Deserializes `DBSHARINGAclUpdatePolicy` instances.

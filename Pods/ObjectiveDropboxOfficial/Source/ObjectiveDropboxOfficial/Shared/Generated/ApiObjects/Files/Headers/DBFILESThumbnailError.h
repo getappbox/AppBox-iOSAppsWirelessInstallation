@@ -158,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESThumbnailError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESThumbnailError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESThumbnailError *)instance;
 
 ///
 /// Deserializes `DBFILESThumbnailError` instances.

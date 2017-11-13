@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGetStorageReport` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGetStorageReport *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGetStorageReport *)instance;
 
 ///
 /// Deserializes `DBTEAMGetStorageReport` instances.

@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailFormatTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESThumbnailFormat` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESThumbnailFormat *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESThumbnailFormat *)instance;
 
 ///
 /// Deserializes `DBFILESThumbnailFormat` instances.

@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGroupInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGGroupInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGGroupInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGGroupInfo` instances.

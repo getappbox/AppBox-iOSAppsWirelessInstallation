@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTokenGetAuthenticatedAdminErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTokenGetAuthenticatedAdminError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTokenGetAuthenticatedAdminError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTokenGetAuthenticatedAdminError *)instance;
 
 ///
 /// Deserializes `DBTEAMTokenGetAuthenticatedAdminError` instances.

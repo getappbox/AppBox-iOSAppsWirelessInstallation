@@ -31,13 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGSharingLinkPolicy` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag) {
   /// (no description).
-  DBTEAMLOGSharingLinkPolicyTeamOnly,
+  DBTEAMLOGSharingLinkPolicyDefaultPrivate,
 
   /// (no description).
-  DBTEAMLOGSharingLinkPolicyDefaultTeamOnly,
+  DBTEAMLOGSharingLinkPolicyDefaultPublic,
 
   /// (no description).
-  DBTEAMLOGSharingLinkPolicyDefaultAnyone,
+  DBTEAMLOGSharingLinkPolicyOnlyPrivate,
 
   /// (no description).
   DBTEAMLOGSharingLinkPolicyOther,
@@ -50,25 +50,25 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "team_only".
+/// Initializes union class with tag state of "default_private".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamOnly;
+- (instancetype)initWithDefaultPrivate;
 
 ///
-/// Initializes union class with tag state of "default_team_only".
+/// Initializes union class with tag state of "default_public".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDefaultTeamOnly;
+- (instancetype)initWithDefaultPublic;
 
 ///
-/// Initializes union class with tag state of "default_anyone".
+/// Initializes union class with tag state of "only_private".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDefaultAnyone;
+- (instancetype)initWithOnlyPrivate;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -82,26 +82,25 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "team_only".
+/// Retrieves whether the union's current tag state has value "default_private".
 ///
-/// @return Whether the union's current tag state has value "team_only".
+/// @return Whether the union's current tag state has value "default_private".
 ///
-- (BOOL)isTeamOnly;
+- (BOOL)isDefaultPrivate;
 
 ///
-/// Retrieves whether the union's current tag state has value
-/// "default_team_only".
+/// Retrieves whether the union's current tag state has value "default_public".
 ///
-/// @return Whether the union's current tag state has value "default_team_only".
+/// @return Whether the union's current tag state has value "default_public".
 ///
-- (BOOL)isDefaultTeamOnly;
+- (BOOL)isDefaultPublic;
 
 ///
-/// Retrieves whether the union's current tag state has value "default_anyone".
+/// Retrieves whether the union's current tag state has value "only_private".
 ///
-/// @return Whether the union's current tag state has value "default_anyone".
+/// @return Whether the union's current tag state has value "only_private".
 ///
-- (BOOL)isDefaultAnyone;
+- (BOOL)isOnlyPrivate;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -134,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharingLinkPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharingLinkPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharingLinkPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharingLinkPolicy` instances.

@@ -28,23 +28,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Source asset index.
-@property (nonatomic, readonly) NSNumber *srcIndex;
+/// Source asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *srcAssetIndex;
 
-/// Destination asset index.
-@property (nonatomic, readonly) NSNumber *destIndex;
+/// Destination asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *destAssetIndex;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param srcIndex Source asset index.
-/// @param destIndex Destination asset index.
+/// @param srcAssetIndex Source asset position in the Assets list.
+/// @param destAssetIndex Destination asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSrcIndex:(NSNumber *)srcIndex destIndex:(NSNumber *)destIndex;
+- (instancetype)initWithSrcAssetIndex:(NSNumber *)srcAssetIndex destAssetIndex:(NSNumber *)destAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGRelocateAssetReferencesLogInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGRelocateAssetReferencesLogInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGRelocateAssetReferencesLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGRelocateAssetReferencesLogInfo` instances.

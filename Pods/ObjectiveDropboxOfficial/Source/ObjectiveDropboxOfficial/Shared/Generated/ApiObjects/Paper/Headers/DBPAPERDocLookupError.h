@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBPAPERDocLookupErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERDocLookupError` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERDocLookupError *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERDocLookupError *)instance;
 
 ///
 /// Deserializes `DBPAPERDocLookupError` instances.

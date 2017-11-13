@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails`

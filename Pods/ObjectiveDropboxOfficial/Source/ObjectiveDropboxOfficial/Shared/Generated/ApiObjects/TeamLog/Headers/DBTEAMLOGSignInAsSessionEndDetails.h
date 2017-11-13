@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSignInAsSessionEndDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSignInAsSessionEndDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSignInAsSessionEndDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSignInAsSessionEndDetails` instances.

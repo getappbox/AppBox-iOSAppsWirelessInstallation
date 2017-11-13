@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONGroupManagementType` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMCOMMONGroupManagementType *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMCOMMONGroupManagementType *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONGroupManagementType` instances.

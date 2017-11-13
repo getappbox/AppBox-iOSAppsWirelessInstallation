@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONTimeRange` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMCOMMONTimeRange *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMCOMMONTimeRange *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONTimeRange` instances.

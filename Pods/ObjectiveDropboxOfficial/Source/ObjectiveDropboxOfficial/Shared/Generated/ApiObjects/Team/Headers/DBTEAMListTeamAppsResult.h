@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The linked applications of each member of the team
+/// The linked applications of each member of the team.
 @property (nonatomic, readonly) NSArray<DBTEAMMemberLinkedApps *> *apps;
 
 /// If true, then there are more apps available. Pass the cursor to
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param apps The linked applications of each member of the team
+/// @param apps The linked applications of each member of the team.
 /// @param hasMore If true, then there are more apps available. Pass the cursor
 /// to `linkedAppsListTeamLinkedApps` to retrieve the rest.
 /// @param cursor Pass the cursor into `linkedAppsListTeamLinkedApps` to receive
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param apps The linked applications of each member of the team
+/// @param apps The linked applications of each member of the team.
 /// @param hasMore If true, then there are more apps available. Pass the cursor
 /// to `linkedAppsListTeamLinkedApps` to retrieve the rest.
 ///
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListTeamAppsResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMListTeamAppsResult *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMListTeamAppsResult *)instance;
 
 ///
 /// Deserializes `DBTEAMListTeamAppsResult` instances.

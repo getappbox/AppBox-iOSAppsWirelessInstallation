@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAudienceExceptionContentInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGAudienceExceptionContentInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGAudienceExceptionContentInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGAudienceExceptionContentInfo` instances.

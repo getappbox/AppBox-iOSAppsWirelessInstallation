@@ -227,7 +227,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMountFolderError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGMountFolderError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGMountFolderError *)instance;
 
 ///
 /// Deserializes `DBSHARINGMountFolderError` instances.

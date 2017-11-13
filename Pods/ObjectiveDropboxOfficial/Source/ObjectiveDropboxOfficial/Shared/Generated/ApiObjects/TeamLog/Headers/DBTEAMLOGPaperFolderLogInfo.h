@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperFolderLogInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperFolderLogInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperFolderLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperFolderLogInfo` instances.

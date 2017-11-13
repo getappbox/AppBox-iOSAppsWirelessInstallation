@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Sharing permission. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Specifies the source and destination indices in the assets list.
 @property (nonatomic, readonly) DBTEAMLOGRelocateAssetReferencesLogInfo *relocateActionDetails;
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param relocateActionDetails Specifies the source and destination indices in
 /// the assets list.
 /// @param sharingPermission Sharing permission. Might be missing due to
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                     relocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails
                         sharingPermission:(nullable NSString *)sharingPermission;
 
@@ -64,14 +64,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// no default value).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param relocateActionDetails Specifies the source and destination indices in
 /// the assets list.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                     relocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails;
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentCopyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedContentCopyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentCopyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentCopyDetails` instances.

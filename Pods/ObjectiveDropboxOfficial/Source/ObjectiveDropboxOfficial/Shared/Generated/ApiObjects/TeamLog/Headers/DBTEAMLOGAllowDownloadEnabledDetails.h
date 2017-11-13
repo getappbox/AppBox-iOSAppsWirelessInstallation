@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAllowDownloadEnabledDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGAllowDownloadEnabledDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGAllowDownloadEnabledDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAllowDownloadEnabledDetails` instances.

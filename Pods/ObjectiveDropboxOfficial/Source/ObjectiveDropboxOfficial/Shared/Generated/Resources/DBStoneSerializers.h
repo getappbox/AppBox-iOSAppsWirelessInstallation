@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 @interface NSArray (DBSerializable) <DBSerializable>
 
-+ (NSDictionary *)serialize:(id)obj;
++ (nullable NSDictionary *)serialize:(id)obj;
 
 + (id)deserialize:(NSDictionary *)dict;
 
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 @interface NSString (DBSerializable) <DBSerializable>
 
-+ (NSDictionary *)serialize:(id)obj;
++ (nullable NSDictionary *)serialize:(id)obj;
 
 + (id)deserialize:(NSDictionary *)dict;
 

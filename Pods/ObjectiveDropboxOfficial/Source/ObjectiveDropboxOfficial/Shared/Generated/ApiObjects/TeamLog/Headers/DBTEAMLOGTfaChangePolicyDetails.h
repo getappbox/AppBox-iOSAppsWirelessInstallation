@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGTfaChangePolicyDetails;
-@class DBTEAMLOGTfaPolicy;
+@class DBTEAMPOLICIESTwoStepVerificationPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New change policy.
-@property (nonatomic, readonly) DBTEAMLOGTfaPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMPOLICIESTwoStepVerificationPolicy *dNewValue;
 
 /// Previous change policy. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGTfaPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESTwoStepVerificationPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGTfaPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGTfaPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESTwoStepVerificationPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMPOLICIESTwoStepVerificationPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGTfaPolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESTwoStepVerificationPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGTfaChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaChangePolicyDetails` instances.

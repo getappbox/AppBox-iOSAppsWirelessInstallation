@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersDeactivateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersDeactivateError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersDeactivateError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersDeactivateError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersDeactivateError` instances.

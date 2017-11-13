@@ -111,27 +111,33 @@ typedef enum : NSUInteger {
     
     //Project Name
     if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnName]) {
-        [cell.textField setStringValue: uploadRecord.project.name];
+        NSString *projectName = uploadRecord.project.name == nil ? @"N/A" : uploadRecord.project.name;
+        [cell.textField setStringValue: projectName];
     }
     
     //Bundle Identifer
     else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnBundleIdentifer]) {
-        [cell.textField setStringValue:uploadRecord.project.bundleIdentifier];
+        NSString *bundleIdentifer = uploadRecord.project.bundleIdentifier == nil ? @"N/A" : uploadRecord.project.bundleIdentifier;
+        [cell.textField setStringValue: bundleIdentifer];
     }
     
     //Version and Build
     else if (tableColumn == [tableView.tableColumns objectAtIndex: DashBoardColumnVersion]){
-        [cell.textField setStringValue:[NSString stringWithFormat:@"%@ (%@)", uploadRecord.version, uploadRecord.build]];
+        NSString *version = uploadRecord.version == nil ? @"N/A" : uploadRecord.version;
+        NSString *build = uploadRecord.build == nil ? @"N/A" : uploadRecord.build;
+        [cell.textField setStringValue:[NSString stringWithFormat:@"%@ (%@)", version, build]];
     }
     
     //Short URL
     else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnShortURL]){
-        [cell.textField setStringValue:uploadRecord.shortURL];
+        NSString *shortURL = uploadRecord.shortURL == nil ? @"N/A" : uploadRecord.shortURL;
+        [cell.textField setStringValue:shortURL];
     }
     
     //Upload Date
     else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnDate]){
-        [cell.textField setStringValue:uploadRecord.datetime.string];
+        NSString *uploadDate = uploadRecord.datetime == nil ? @"N/A" : uploadRecord.datetime.string;
+        [cell.textField setStringValue:uploadDate];
     }
     
     //Build Type

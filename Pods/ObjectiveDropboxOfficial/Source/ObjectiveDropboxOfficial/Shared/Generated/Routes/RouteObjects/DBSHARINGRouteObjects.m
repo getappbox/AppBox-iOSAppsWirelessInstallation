@@ -89,6 +89,7 @@
 #import "DBSHARINGUpdateFolderMemberError.h"
 #import "DBSHARINGUpdateFolderPolicyError.h"
 #import "DBSHARINGUserAuthRoutes.h"
+#import "DBSHARINGUserFileMembershipInfo.h"
 #import "DBSHARINGUserMembershipInfo.h"
 #import "DBSHARINGVisibility.h"
 #import "DBStoneBase.h"

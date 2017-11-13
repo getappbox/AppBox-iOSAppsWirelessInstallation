@@ -31,13 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGPaperMemberPolicy` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGPaperMemberPolicyTag) {
   /// (no description).
-  DBTEAMLOGPaperMemberPolicyTeamOnly,
+  DBTEAMLOGPaperMemberPolicyAnyoneWithLink,
 
   /// (no description).
-  DBTEAMLOGPaperMemberPolicyDefaultTeamOnly,
+  DBTEAMLOGPaperMemberPolicyOnlyTeam,
 
   /// (no description).
-  DBTEAMLOGPaperMemberPolicyDefaultAnyone,
+  DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared,
 
   /// (no description).
   DBTEAMLOGPaperMemberPolicyOther,
@@ -50,25 +50,25 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperMemberPolicyTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "team_only".
+/// Initializes union class with tag state of "anyone_with_link".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamOnly;
+- (instancetype)initWithAnyoneWithLink;
 
 ///
-/// Initializes union class with tag state of "default_team_only".
+/// Initializes union class with tag state of "only_team".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDefaultTeamOnly;
+- (instancetype)initWithOnlyTeam;
 
 ///
-/// Initializes union class with tag state of "default_anyone".
+/// Initializes union class with tag state of "team_and_explicitly_shared".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDefaultAnyone;
+- (instancetype)initWithTeamAndExplicitlyShared;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -82,26 +82,28 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperMemberPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "team_only".
+/// Retrieves whether the union's current tag state has value
+/// "anyone_with_link".
 ///
-/// @return Whether the union's current tag state has value "team_only".
+/// @return Whether the union's current tag state has value "anyone_with_link".
 ///
-- (BOOL)isTeamOnly;
+- (BOOL)isAnyoneWithLink;
+
+///
+/// Retrieves whether the union's current tag state has value "only_team".
+///
+/// @return Whether the union's current tag state has value "only_team".
+///
+- (BOOL)isOnlyTeam;
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "default_team_only".
+/// "team_and_explicitly_shared".
 ///
-/// @return Whether the union's current tag state has value "default_team_only".
+/// @return Whether the union's current tag state has value
+/// "team_and_explicitly_shared".
 ///
-- (BOOL)isDefaultTeamOnly;
-
-///
-/// Retrieves whether the union's current tag state has value "default_anyone".
-///
-/// @return Whether the union's current tag state has value "default_anyone".
-///
-- (BOOL)isDefaultAnyone;
+- (BOOL)isTeamAndExplicitlyShared;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -134,7 +136,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperMemberPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperMemberPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperMemberPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperMemberPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperMemberPolicy` instances.

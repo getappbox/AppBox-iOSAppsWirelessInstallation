@@ -33,8 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Sharing permission. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 #pragma mark - Constructors
 
@@ -42,14 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param sharingPermission Sharing permission. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                         sharingPermission:(nullable NSString *)sharingPermission;
 
 ///
@@ -57,11 +57,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// no default value).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetIndex:(NSNumber *)targetIndex;
+- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetAssetIndex:(NSNumber *)targetAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentViewDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedContentViewDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentViewDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentViewDetails` instances.

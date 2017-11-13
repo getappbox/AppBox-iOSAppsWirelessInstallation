@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGGetFileMetadataIndividualResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetFileMetadataIndividualResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGGetFileMetadataIndividualResult *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGGetFileMetadataIndividualResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetFileMetadataIndividualResult` instances.

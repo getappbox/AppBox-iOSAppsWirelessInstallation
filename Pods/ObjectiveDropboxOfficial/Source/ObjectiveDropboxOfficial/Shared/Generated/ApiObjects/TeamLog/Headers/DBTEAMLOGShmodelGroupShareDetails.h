@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShmodelGroupShareDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGShmodelGroupShareDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGShmodelGroupShareDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShmodelGroupShareDetails` instances.

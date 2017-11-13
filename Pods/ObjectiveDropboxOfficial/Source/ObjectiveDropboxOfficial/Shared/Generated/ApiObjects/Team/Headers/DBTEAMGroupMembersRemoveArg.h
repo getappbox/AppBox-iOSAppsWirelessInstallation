@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersRemoveArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupMembersRemoveArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupMembersRemoveArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersRemoveArg` instances.

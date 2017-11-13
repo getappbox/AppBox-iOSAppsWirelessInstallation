@@ -30,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMRevokeDeviceSessionArgTag` enum type represents the possible tag
 /// states with which the `DBTEAMRevokeDeviceSessionArg` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
-  /// End an active session
+  /// End an active session.
   DBTEAMRevokeDeviceSessionArgWebSession,
 
-  /// Unlink a linked desktop device
+  /// Unlink a linked desktop device.
   DBTEAMRevokeDeviceSessionArgDesktopClient,
 
-  /// Unlink a linked mobile device
+  /// Unlink a linked mobile device.
   DBTEAMRevokeDeviceSessionArgMobileClient,
 
 };
@@ -44,15 +44,15 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMRevokeDeviceSessionArgTag tag;
 
-/// End an active session @note Ensure the `isWebSession` method returns true
+/// End an active session. @note Ensure the `isWebSession` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMDeviceSessionArg *webSession;
 
-/// Unlink a linked desktop device @note Ensure the `isDesktopClient` method
+/// Unlink a linked desktop device. @note Ensure the `isDesktopClient` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMRevokeDesktopClientArg *desktopClient;
 
-/// Unlink a linked mobile device @note Ensure the `isMobileClient` method
+/// Unlink a linked mobile device. @note Ensure the `isMobileClient` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMDeviceSessionArg *mobileClient;
 
@@ -61,9 +61,9 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// Initializes union class with tag state of "web_session".
 ///
-/// Description of the "web_session" tag state: End an active session
+/// Description of the "web_session" tag state: End an active session.
 ///
-/// @param webSession End an active session
+/// @param webSession End an active session.
 ///
 /// @return An initialized instance.
 ///
@@ -73,9 +73,9 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 /// Initializes union class with tag state of "desktop_client".
 ///
 /// Description of the "desktop_client" tag state: Unlink a linked desktop
-/// device
+/// device.
 ///
-/// @param desktopClient Unlink a linked desktop device
+/// @param desktopClient Unlink a linked desktop device.
 ///
 /// @return An initialized instance.
 ///
@@ -84,9 +84,9 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// Initializes union class with tag state of "mobile_client".
 ///
-/// Description of the "mobile_client" tag state: Unlink a linked mobile device
+/// Description of the "mobile_client" tag state: Unlink a linked mobile device.
 ///
-/// @param mobileClient Unlink a linked mobile device
+/// @param mobileClient Unlink a linked mobile device.
 ///
 /// @return An initialized instance.
 ///
@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionArg *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionArg` instances.

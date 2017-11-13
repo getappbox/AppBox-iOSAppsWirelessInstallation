@@ -139,7 +139,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkAudienceTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkAudience` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGLinkAudience *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGLinkAudience *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkAudience` instances.
