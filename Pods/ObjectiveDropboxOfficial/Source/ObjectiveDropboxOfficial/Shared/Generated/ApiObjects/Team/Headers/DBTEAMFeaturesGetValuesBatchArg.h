@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMFeaturesGetValuesBatchArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMFeaturesGetValuesBatchArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMFeaturesGetValuesBatchArg *)instance;
 
 ///
 /// Deserializes `DBTEAMFeaturesGetValuesBatchArg` instances.

@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param prevParentNsId Previous parent namespace ID. Might be missing due to
 /// historical data gap.
@@ -53,21 +53,21 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                     prevParentNsId:(nullable NSString *)prevParentNsId
-                     dNewParentNsId:(nullable NSString *)dNewParentNsId;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                          prevParentNsId:(nullable NSString *)prevParentNsId
+                          dNewParentNsId:(nullable NSString *)dNewParentNsId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex originalFolderName:(NSString *)originalFolderName;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfNestDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSfNestDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSfNestDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfNestDetails` instances.

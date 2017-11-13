@@ -25,19 +25,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The session id
+/// The session id.
 @property (nonatomic, readonly, copy) NSString *sessionId;
 
-/// The IP address of the last activity from this session
+/// The IP address of the last activity from this session.
 @property (nonatomic, readonly, copy, nullable) NSString *ipAddress;
 
-/// The country from which the last activity from this session was made
+/// The country from which the last activity from this session was made.
 @property (nonatomic, readonly, copy, nullable) NSString *country;
 
-/// The time this session was created
+/// The time this session was created.
 @property (nonatomic, readonly, nullable) NSDate *created;
 
-/// The time of the last activity from this session
+/// The time of the last activity from this session.
 @property (nonatomic, readonly, nullable) NSDate *updated;
 
 #pragma mark - Constructors
@@ -45,12 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param sessionId The session id
-/// @param ipAddress The IP address of the last activity from this session
+/// @param sessionId The session id.
+/// @param ipAddress The IP address of the last activity from this session.
 /// @param country The country from which the last activity from this session
-/// was made
-/// @param created The time this session was created
-/// @param updated The time of the last activity from this session
+/// was made.
+/// @param created The time this session was created.
+/// @param updated The time of the last activity from this session.
 ///
 /// @return An initialized instance.
 ///
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param sessionId The session id
+/// @param sessionId The session id.
 ///
 /// @return An initialized instance.
 ///
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDeviceSession` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMDeviceSession *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMDeviceSession *)instance;
 
 ///
 /// Deserializes `DBTEAMDeviceSession` instances.

@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionError *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionError` instances.

@@ -158,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESThumbnailSize` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESThumbnailSize *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESThumbnailSize *)instance;
 
 ///
 /// Deserializes `DBFILESThumbnailSize` instances.

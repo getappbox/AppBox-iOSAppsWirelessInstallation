@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGFileRequestsPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestsPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileRequestsPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestsPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestsPolicy` instances.

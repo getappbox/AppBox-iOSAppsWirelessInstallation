@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRecoverError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersRecoverError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersRecoverError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRecoverError` instances.

@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedContentDownloadsPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentDownloadsPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedContentDownloadsPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentDownloadsPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentDownloadsPolicy` instances.

@@ -21,6 +21,7 @@
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
+		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
@@ -134,6 +135,7 @@
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
+		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
 		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
@@ -672,6 +674,7 @@
 				E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */,
 				DB3D7CC81F64501F00217096 /* PythonServer.sh */,
 				DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */,
+				DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -998,6 +1001,7 @@
 				9740CD411E005DB100224D9F /* Main.storyboard in Resources */,
 				E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */,
 				DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */,
+				DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */,
 				E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */,
 				DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,
@@ -1061,7 +1065,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E1974F331E20CA770060F03F /* ShellScript */ = {

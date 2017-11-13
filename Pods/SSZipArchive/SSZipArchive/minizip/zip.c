@@ -1,14 +1,15 @@
 /* zip.c -- IO on .zip files using zlib
-   Version 1.1, February 14h, 2010
+   Version 1.2.0, September 16th, 2017
    part of the MiniZip project
 
+   Copyright (C) 2010-2017 Nathan Moinvaziri
+     Modifications for AES, PKWARE disk spanning
+     https://github.com/nmoinvaz/minizip
+   Copyright (C) 2009-2010 Mathias Svensson
+     Modifications for Zip64 support
+     http://result42.com
    Copyright (C) 1998-2010 Gilles Vollant
      http://www.winimage.com/zLibDll/minizip.html
-   Modifications for Zip64 support
-     Copyright (C) 2009-2010 Mathias Svensson
-     http://result42.com
-   Modifications for AES, PKWARE disk spanning
-     Copyright (C) 2010-2014 Nathan Moinvaziri
 
    This program is distributed under the terms of the same license as zlib.
    See the accompanying LICENSE file for the full text of the license.
@@ -909,10 +910,25 @@ extern zipFile ZEXPORT zipOpen64(const void *path, int append)
     return zipOpen3(path, append, 0, NULL, NULL);
 }
 
-extern int ZEXPORT zipOpenNewFileInZip4_64(zipFile file, const char *filename, const zip_fileinfo *zipfi,
-    const void *extrafield_local, uint16_t size_extrafield_local, const void *extrafield_global,
-    uint16_t size_extrafield_global, const char *comment, uint16_t method, int level, int raw, int windowBits, int memLevel,
-    int strategy, const char *password, uint32_t crc_for_crypting, uint16_t version_madeby, uint16_t flag_base, int zip64)
+extern int ZEXPORT zipOpenNewFileInZip_internal(zipFile file,
+                                                const char *filename,
+                                                const zip_fileinfo *zipfi,
+                                                const void *extrafield_local,
+                                                uint16_t size_extrafield_local,
+                                                const void *extrafield_global,
+                                                uint16_t size_extrafield_global,
+                                                const char *comment,
+                                                uint16_t flag_base,
+                                                int zip64,
+                                                uint16_t method,
+                                                int level,
+                                                int raw,
+                                                int windowBits,
+                                                int memLevel,
+                                                int strategy,
+                                                const char *password,
+                                                int aes,
+                                                uint16_t version_madeby)
 {
     zip64_internal *zi = NULL;
     uint64_t size_available = 0;
@@ -924,7 +940,6 @@ extern int ZEXPORT zipOpenNewFileInZip4_64(zipFile file, const char *filename, c
     int err = ZIP_OK;
 
 #ifdef NOCRYPT
-    (crc_for_crypting);
     if (password != NULL)
         return ZIP_PARAMERROR;
 #endif
@@ -978,7 +993,8 @@ extern int ZEXPORT zipOpenNewFileInZip4_64(zipFile file, const char *filename, c
     {
         zi->ci.flag |= 1;
 #ifdef HAVE_AES
-        zi->ci.method = AES_METHOD;
+        if (aes)
+            zi->ci.method = AES_METHOD;
 #endif
     }
     else
@@ -1237,10 +1253,7 @@ extern int ZEXPORT zipOpenNewFileInZip4_64(zipFile file, const char *filename, c
             /*
             Info-ZIP modification to ZipCrypto format:
             If bit 3 of the general purpose bit flag is set, it uses high byte of 16-bit File Time. 
-
-            verify1 = (uint8_t)((crc_for_crypting >> 16) & 0xff);
-            verify2 = (uint8_t)((crc_for_crypting >> 24) & 0xff); */
-
+            */
             verify1 = (uint8_t)((zi->ci.dos_date >> 16) & 0xff);
             verify2 = (uint8_t)((zi->ci.dos_date >> 8) & 0xff);
 
@@ -1258,10 +1271,34 @@ extern int ZEXPORT zipOpenNewFileInZip4_64(zipFile file, const char *filename, c
     return err;
 }
 
+extern int ZEXPORT zipOpenNewFileInZip5(zipFile file, const char *filename, const zip_fileinfo *zipfi,
+    const void *extrafield_local, uint16_t size_extrafield_local, const void *extrafield_global,
+    uint16_t size_extrafield_global, const char *comment, uint16_t flag_base, int zip64, uint16_t method, int level, int raw,
+    int windowBits, int memLevel, int strategy, const char *password, int aes)
+{
+    return zipOpenNewFileInZip_internal(file, filename, zipfi, extrafield_local, size_extrafield_local, extrafield_global,
+        size_extrafield_global, comment, flag_base, zip64, method, level, raw, windowBits, memLevel, strategy, password, aes,
+        VERSIONMADEBY);
+}
+
+extern int ZEXPORT zipOpenNewFileInZip4_64(zipFile file, const char *filename, const zip_fileinfo *zipfi,
+    const void *extrafield_local, uint16_t size_extrafield_local, const void *extrafield_global,
+    uint16_t size_extrafield_global, const char *comment, uint16_t method, int level, int raw, int windowBits, int memLevel,
+    int strategy, const char *password, ZIP_UNUSED uint32_t crc_for_crypting, uint16_t version_madeby, uint16_t flag_base, int zip64)
+{
+    uint8_t aes = 0;
+#ifdef HAVE_AES
+    aes = 1;
+#endif
+    return zipOpenNewFileInZip_internal(file, filename, zipfi, extrafield_local, size_extrafield_local, extrafield_global,
+        size_extrafield_global, comment, flag_base, zip64, method, level, raw, windowBits, memLevel, strategy, password, aes,
+        version_madeby);
+}
+
 extern int ZEXPORT zipOpenNewFileInZip4(zipFile file, const char *filename, const zip_fileinfo *zipfi,
     const void *extrafield_local, uint16_t size_extrafield_local, const void *extrafield_global,
     uint16_t size_extrafield_global, const char *comment, uint16_t method, int level, int raw, int windowBits,
-    int memLevel, int strategy, const char *password, uint32_t crc_for_crypting, uint16_t version_madeby, uint16_t flag_base)
+    int memLevel, int strategy, const char *password, ZIP_UNUSED uint32_t crc_for_crypting, uint16_t version_madeby, uint16_t flag_base)
 {
     return zipOpenNewFileInZip4_64(file, filename, zipfi, extrafield_local, size_extrafield_local,
         extrafield_global, size_extrafield_global, comment, method, level, raw, windowBits, memLevel,
@@ -1271,7 +1308,7 @@ extern int ZEXPORT zipOpenNewFileInZip4(zipFile file, const char *filename, cons
 extern int ZEXPORT zipOpenNewFileInZip3(zipFile file, const char *filename, const zip_fileinfo *zipfi,
     const void *extrafield_local, uint16_t size_extrafield_local, const void *extrafield_global,
     uint16_t size_extrafield_global, const char *comment, uint16_t method, int level, int raw, int windowBits,
-    int memLevel, int strategy, const char *password, uint32_t crc_for_crypting)
+    int memLevel, int strategy, const char *password, ZIP_UNUSED uint32_t crc_for_crypting)
 {
     return zipOpenNewFileInZip4_64(file, filename, zipfi, extrafield_local, size_extrafield_local,
         extrafield_global, size_extrafield_global, comment, method, level, raw, windowBits, memLevel,
@@ -1281,7 +1318,7 @@ extern int ZEXPORT zipOpenNewFileInZip3(zipFile file, const char *filename, cons
 extern int ZEXPORT zipOpenNewFileInZip3_64(zipFile file, const char *filename, const zip_fileinfo *zipfi,
     const void *extrafield_local, uint16_t size_extrafield_local, const void *extrafield_global,
     uint16_t size_extrafield_global, const char *comment, uint16_t method, int level, int raw, int windowBits,
-    int memLevel, int strategy, const char *password, uint32_t crc_for_crypting, int zip64)
+    int memLevel, int strategy, const char *password, ZIP_UNUSED uint32_t crc_for_crypting, int zip64)
 {
     return zipOpenNewFileInZip4_64(file, filename, zipfi, extrafield_local, size_extrafield_local,
         extrafield_global, size_extrafield_global, comment, method, level, raw, windowBits, memLevel, strategy,
@@ -1332,8 +1369,6 @@ static int zipFlushWriteBuffer(zip64_internal *zi)
     uint32_t total_written = 0;
     uint32_t write = 0;
     uint32_t max_write = 0;
-    uint32_t i = 0;
-    uint8_t t = 0;
     int err = ZIP_OK;
 
     if ((zi->ci.flag & 1) != 0)
@@ -1347,6 +1382,9 @@ static int zipFlushWriteBuffer(zip64_internal *zi)
         else
 #endif
         {
+            uint32_t i = 0;
+            uint8_t t = 0;
+
             for (i = 0; i < zi->ci.pos_in_buffered_data; i++)
                 zi->ci.buffered_data[i] = (uint8_t)zencode(zi->ci.keys, zi->ci.pcrc_32_tab, zi->ci.buffered_data[i], t);
         }

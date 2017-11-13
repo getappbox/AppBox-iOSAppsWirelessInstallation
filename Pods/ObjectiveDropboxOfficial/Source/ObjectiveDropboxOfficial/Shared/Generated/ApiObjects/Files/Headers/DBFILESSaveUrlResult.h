@@ -129,7 +129,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveUrlResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESSaveUrlResult *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESSaveUrlResult *)instance;
 
 ///
 /// Deserializes `DBFILESSaveUrlResult` instances.

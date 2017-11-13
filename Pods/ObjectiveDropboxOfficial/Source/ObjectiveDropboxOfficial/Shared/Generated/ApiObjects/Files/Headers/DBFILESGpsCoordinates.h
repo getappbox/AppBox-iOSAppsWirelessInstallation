@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGpsCoordinates` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESGpsCoordinates *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESGpsCoordinates *)instance;
 
 ///
 /// Deserializes `DBFILESGpsCoordinates` instances.

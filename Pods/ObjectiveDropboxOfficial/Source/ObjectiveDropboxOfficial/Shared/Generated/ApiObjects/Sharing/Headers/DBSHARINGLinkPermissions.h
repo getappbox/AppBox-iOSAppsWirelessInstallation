@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// caller is the link's owner.
 @property (nonatomic, readonly, nullable) DBSHARINGRequestedVisibility *requestedVisibility;
 
-/// Whether the caller can revoke the shared link
+/// Whether the caller can revoke the shared link.
 @property (nonatomic, readonly) NSNumber *canRevoke;
 
 /// The failure reason for revoking the link. This field will only be present if
@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param canRevoke Whether the caller can revoke the shared link
+/// @param canRevoke Whether the caller can revoke the shared link.
 /// @param resolvedVisibility The current visibility of the link after
 /// considering the shared links policies of the the team (in case the link's
 /// owner is part of a team) and the shared folder (in case the linked file is
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param canRevoke Whether the caller can revoke the shared link
+/// @param canRevoke Whether the caller can revoke the shared link.
 ///
 /// @return An initialized instance.
 ///
@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkPermissions` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGLinkPermissions *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGLinkPermissions *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkPermissions` instances.

@@ -15,6 +15,7 @@
 #import "DBPAPERFolder.h"
 #import "DBPAPERFolderSharingPolicyType.h"
 #import "DBPAPERFoldersContainingPaperDoc.h"
+#import "DBPAPERImportFormat.h"
 #import "DBPAPERInviteeInfoWithPermissionLevel.h"
 #import "DBPAPERListDocsCursorError.h"
 #import "DBPAPERListPaperDocsArgs.h"
@@ -32,9 +33,15 @@
 #import "DBPAPERListUsersOnPaperDocResponse.h"
 #import "DBPAPERPaperApiBaseError.h"
 #import "DBPAPERPaperApiCursorError.h"
+#import "DBPAPERPaperDocCreateArgs.h"
+#import "DBPAPERPaperDocCreateError.h"
+#import "DBPAPERPaperDocCreateUpdateResult.h"
 #import "DBPAPERPaperDocExport.h"
 #import "DBPAPERPaperDocExportResult.h"
 #import "DBPAPERPaperDocSharingPolicy.h"
+#import "DBPAPERPaperDocUpdateArgs.h"
+#import "DBPAPERPaperDocUpdateError.h"
+#import "DBPAPERPaperDocUpdatePolicy.h"
 #import "DBPAPERRefPaperDoc.h"
 #import "DBPAPERRemovePaperDocUser.h"
 #import "DBPAPERRouteObjects.h"
@@ -64,6 +71,51 @@
   DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsArchive;
   DBPAPERRefPaperDoc *arg = [[DBPAPERRefPaperDoc alloc] initWithDocId:docId];
   return [self.client requestRpc:route arg:arg];
+}
+
+- (DBUploadTask *)docsCreateUrl:(DBPAPERImportFormat *)importFormat inputUrl:(NSString *)inputUrl {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsCreate;
+  DBPAPERPaperDocCreateArgs *arg = [[DBPAPERPaperDocCreateArgs alloc] initWithImportFormat:importFormat];
+  return [self.client requestUpload:route arg:arg inputUrl:inputUrl];
+}
+
+- (DBUploadTask *)docsCreateUrl:(DBPAPERImportFormat *)importFormat
+                 parentFolderId:(NSString *)parentFolderId
+                       inputUrl:(NSString *)inputUrl {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsCreate;
+  DBPAPERPaperDocCreateArgs *arg =
+      [[DBPAPERPaperDocCreateArgs alloc] initWithImportFormat:importFormat parentFolderId:parentFolderId];
+  return [self.client requestUpload:route arg:arg inputUrl:inputUrl];
+}
+
+- (DBUploadTask *)docsCreateData:(DBPAPERImportFormat *)importFormat inputData:(NSData *)inputData {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsCreate;
+  DBPAPERPaperDocCreateArgs *arg = [[DBPAPERPaperDocCreateArgs alloc] initWithImportFormat:importFormat];
+  return [self.client requestUpload:route arg:arg inputData:inputData];
+}
+
+- (DBUploadTask *)docsCreateData:(DBPAPERImportFormat *)importFormat
+                  parentFolderId:(NSString *)parentFolderId
+                       inputData:(NSData *)inputData {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsCreate;
+  DBPAPERPaperDocCreateArgs *arg =
+      [[DBPAPERPaperDocCreateArgs alloc] initWithImportFormat:importFormat parentFolderId:parentFolderId];
+  return [self.client requestUpload:route arg:arg inputData:inputData];
+}
+
+- (DBUploadTask *)docsCreateStream:(DBPAPERImportFormat *)importFormat inputStream:(NSInputStream *)inputStream {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsCreate;
+  DBPAPERPaperDocCreateArgs *arg = [[DBPAPERPaperDocCreateArgs alloc] initWithImportFormat:importFormat];
+  return [self.client requestUpload:route arg:arg inputStream:inputStream];
+}
+
+- (DBUploadTask *)docsCreateStream:(DBPAPERImportFormat *)importFormat
+                    parentFolderId:(NSString *)parentFolderId
+                       inputStream:(NSInputStream *)inputStream {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsCreate;
+  DBPAPERPaperDocCreateArgs *arg =
+      [[DBPAPERPaperDocCreateArgs alloc] initWithImportFormat:importFormat parentFolderId:parentFolderId];
+  return [self.client requestUpload:route arg:arg inputStream:inputStream];
 }
 
 - (DBDownloadUrlTask *)docsDownloadUrl:(NSString *)docId
@@ -170,6 +222,45 @@
   DBPAPERPaperDocSharingPolicy *arg =
       [[DBPAPERPaperDocSharingPolicy alloc] initWithDocId:docId sharingPolicy:sharingPolicy];
   return [self.client requestRpc:route arg:arg];
+}
+
+- (DBUploadTask *)docsUpdateUrl:(NSString *)docId
+                docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+                       revision:(NSNumber *)revision
+                   importFormat:(DBPAPERImportFormat *)importFormat
+                       inputUrl:(NSString *)inputUrl {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsUpdate;
+  DBPAPERPaperDocUpdateArgs *arg = [[DBPAPERPaperDocUpdateArgs alloc] initWithDocId:docId
+                                                                    docUpdatePolicy:docUpdatePolicy
+                                                                           revision:revision
+                                                                       importFormat:importFormat];
+  return [self.client requestUpload:route arg:arg inputUrl:inputUrl];
+}
+
+- (DBUploadTask *)docsUpdateData:(NSString *)docId
+                 docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+                        revision:(NSNumber *)revision
+                    importFormat:(DBPAPERImportFormat *)importFormat
+                       inputData:(NSData *)inputData {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsUpdate;
+  DBPAPERPaperDocUpdateArgs *arg = [[DBPAPERPaperDocUpdateArgs alloc] initWithDocId:docId
+                                                                    docUpdatePolicy:docUpdatePolicy
+                                                                           revision:revision
+                                                                       importFormat:importFormat];
+  return [self.client requestUpload:route arg:arg inputData:inputData];
+}
+
+- (DBUploadTask *)docsUpdateStream:(NSString *)docId
+                   docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+                          revision:(NSNumber *)revision
+                      importFormat:(DBPAPERImportFormat *)importFormat
+                       inputStream:(NSInputStream *)inputStream {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsUpdate;
+  DBPAPERPaperDocUpdateArgs *arg = [[DBPAPERPaperDocUpdateArgs alloc] initWithDocId:docId
+                                                                    docUpdatePolicy:docUpdatePolicy
+                                                                           revision:revision
+                                                                       importFormat:importFormat];
+  return [self.client requestUpload:route arg:arg inputStream:inputStream];
 }
 
 - (DBRpcTask *)docsUsersAdd:(NSString *)docId members:(NSArray<DBPAPERAddMember *> *)members {

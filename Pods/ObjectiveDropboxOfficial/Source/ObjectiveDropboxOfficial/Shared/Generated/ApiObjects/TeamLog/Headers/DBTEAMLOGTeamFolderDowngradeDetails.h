@@ -27,19 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamFolderDowngradeDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGTeamFolderDowngradeDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamFolderDowngradeDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamFolderDowngradeDetails` instances.

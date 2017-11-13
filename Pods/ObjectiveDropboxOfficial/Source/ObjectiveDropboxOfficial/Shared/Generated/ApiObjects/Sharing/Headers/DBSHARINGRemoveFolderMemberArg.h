@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRemoveFolderMemberArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGRemoveFolderMemberArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGRemoveFolderMemberArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRemoveFolderMemberArg` instances.

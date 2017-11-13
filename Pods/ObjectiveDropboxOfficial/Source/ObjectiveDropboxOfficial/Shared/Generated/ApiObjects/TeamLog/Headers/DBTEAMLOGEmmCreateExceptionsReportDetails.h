@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEmmCreateExceptionsReportDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGEmmCreateExceptionsReportDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGEmmCreateExceptionsReportDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEmmCreateExceptionsReportDetails` instances.

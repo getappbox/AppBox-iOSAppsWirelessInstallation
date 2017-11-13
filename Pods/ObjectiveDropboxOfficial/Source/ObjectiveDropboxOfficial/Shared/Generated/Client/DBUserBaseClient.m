@@ -6,6 +6,8 @@
 
 #import "DBUserBaseClient.h"
 #import "DBAUTHUserAuthRoutes.h"
+#import "DBFILEPROPERTIESUserAuthRoutes.h"
+#import "DBFILEREQUESTSUserAuthRoutes.h"
 #import "DBFILESUserAuthRoutes.h"
 #import "DBPAPERUserAuthRoutes.h"
 #import "DBSHARINGUserAuthRoutes.h"
@@ -19,6 +21,8 @@
   if (self) {
     _transportClient = client;
     _authRoutes = [[DBAUTHUserAuthRoutes alloc] init:client];
+    _filePropertiesRoutes = [[DBFILEPROPERTIESUserAuthRoutes alloc] init:client];
+    _fileRequestsRoutes = [[DBFILEREQUESTSUserAuthRoutes alloc] init:client];
     _filesRoutes = [[DBFILESUserAuthRoutes alloc] init:client];
     _paperRoutes = [[DBPAPERUserAuthRoutes alloc] init:client];
     _sharingRoutes = [[DBSHARINGUserAuthRoutes alloc] init:client];

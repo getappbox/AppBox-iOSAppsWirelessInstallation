@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGLinkAudienceTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGLinkAudience` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGLinkAudience *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGLinkAudience *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGLinkAudience` instances.

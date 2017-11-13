@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnshareFolderArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGUnshareFolderArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGUnshareFolderArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnshareFolderArg` instances.

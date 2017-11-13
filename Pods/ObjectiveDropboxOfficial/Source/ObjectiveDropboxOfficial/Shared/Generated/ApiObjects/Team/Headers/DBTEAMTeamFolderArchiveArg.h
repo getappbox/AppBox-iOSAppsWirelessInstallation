@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderArchiveArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderArchiveArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderArchiveArg *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderArchiveArg` instances.

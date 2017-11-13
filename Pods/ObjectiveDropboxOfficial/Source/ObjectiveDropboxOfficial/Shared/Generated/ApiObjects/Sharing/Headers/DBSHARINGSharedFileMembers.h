@@ -11,7 +11,7 @@
 @class DBSHARINGGroupMembershipInfo;
 @class DBSHARINGInviteeMembershipInfo;
 @class DBSHARINGSharedFileMembers;
-@class DBSHARINGUserMembershipInfo;
+@class DBSHARINGUserFileMembershipInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// The list of user members of the shared file.
-@property (nonatomic, readonly) NSArray<DBSHARINGUserMembershipInfo *> *users;
+@property (nonatomic, readonly) NSArray<DBSHARINGUserFileMembershipInfo *> *users;
 
 /// The list of group members of the shared file.
 @property (nonatomic, readonly) NSArray<DBSHARINGGroupMembershipInfo *> *groups;
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithUsers:(NSArray<DBSHARINGUserMembershipInfo *> *)users
+- (instancetype)initWithUsers:(NSArray<DBSHARINGUserFileMembershipInfo *> *)users
                        groups:(NSArray<DBSHARINGGroupMembershipInfo *> *)groups
                      invitees:(NSArray<DBSHARINGInviteeMembershipInfo *> *)invitees
                        cursor:(nullable NSString *)cursor;
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithUsers:(NSArray<DBSHARINGUserMembershipInfo *> *)users
+- (instancetype)initWithUsers:(NSArray<DBSHARINGUserFileMembershipInfo *> *)users
                        groups:(NSArray<DBSHARINGGroupMembershipInfo *> *)groups
                      invitees:(NSArray<DBSHARINGInviteeMembershipInfo *> *)invitees;
 
@@ -101,7 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedFileMembers` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGSharedFileMembers *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGSharedFileMembers *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedFileMembers` instances.

@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMDesktopPlatformTag` enum type represents the possible tag states
 /// with which the `DBTEAMDesktopPlatform` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
-  /// Official Windows Dropbox desktop client
+  /// Official Windows Dropbox desktop client.
   DBTEAMDesktopPlatformWindows,
 
-  /// Official Mac Dropbox desktop client
+  /// Official Mac Dropbox desktop client.
   DBTEAMDesktopPlatformMac,
 
-  /// Official Linux Dropbox desktop client
+  /// Official Linux Dropbox desktop client.
   DBTEAMDesktopPlatformLinux,
 
   /// (no description).
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 /// Initializes union class with tag state of "windows".
 ///
 /// Description of the "windows" tag state: Official Windows Dropbox desktop
-/// client
+/// client.
 ///
 /// @return An initialized instance.
 ///
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// Initializes union class with tag state of "mac".
 ///
-/// Description of the "mac" tag state: Official Mac Dropbox desktop client
+/// Description of the "mac" tag state: Official Mac Dropbox desktop client.
 ///
 /// @return An initialized instance.
 ///
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 ///
 /// Initializes union class with tag state of "linux".
 ///
-/// Description of the "linux" tag state: Official Linux Dropbox desktop client
+/// Description of the "linux" tag state: Official Linux Dropbox desktop client.
 ///
 /// @return An initialized instance.
 ///
@@ -138,7 +138,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDesktopPlatform` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMDesktopPlatform *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMDesktopPlatform *)instance;
 
 ///
 /// Deserializes `DBTEAMDesktopPlatform` instances.

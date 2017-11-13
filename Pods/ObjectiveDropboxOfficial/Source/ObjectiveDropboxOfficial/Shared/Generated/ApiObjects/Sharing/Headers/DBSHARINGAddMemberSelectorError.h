@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddMemberSelectorError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGAddMemberSelectorError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGAddMemberSelectorError *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddMemberSelectorError` instances.

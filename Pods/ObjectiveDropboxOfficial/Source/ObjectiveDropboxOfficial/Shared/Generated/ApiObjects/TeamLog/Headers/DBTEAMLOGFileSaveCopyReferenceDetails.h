@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileSaveCopyReferenceDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileSaveCopyReferenceDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileSaveCopyReferenceDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileSaveCopyReferenceDetails` instances.

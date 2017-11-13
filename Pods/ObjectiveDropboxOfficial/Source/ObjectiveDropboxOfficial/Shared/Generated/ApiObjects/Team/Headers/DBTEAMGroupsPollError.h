@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsPollError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupsPollError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupsPollError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsPollError` instances.

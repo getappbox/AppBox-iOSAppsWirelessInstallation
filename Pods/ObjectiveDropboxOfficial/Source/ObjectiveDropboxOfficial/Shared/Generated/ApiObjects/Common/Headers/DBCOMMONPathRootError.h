@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBCOMMONPathRootError` API object.
 ///
-+ (NSDictionary *)serialize:(DBCOMMONPathRootError *)instance;
++ (nullable NSDictionary *)serialize:(DBCOMMONPathRootError *)instance;
 
 ///
 /// Deserializes `DBCOMMONPathRootError` instances.

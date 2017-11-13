@@ -14,6 +14,7 @@
     ScriptType scriptType;
     NSArray *allTeamIds;
     UploadManager *uploadManager;
+    NSInteger schemeScriptRunCount;
 }
 
 - (void)viewDidLoad {
@@ -61,6 +62,11 @@
     [XCHandler getXCodePathWithCompletion:^(NSString *xcodePath, NSString *applicationLoaderPath) {
         [UserData setXCodeLocation:xcodePath];
         [UserData setApplicationLoaderLocation:applicationLoaderPath];
+    }];
+    
+    //Get Xcode Version
+    [XCHandler getXcodeVersionWithCompletion:^(BOOL success, XcodeVersion version, NSString *versionString) {
+        
     }];
 }
 
@@ -405,8 +411,15 @@
                         }
                     }
                 }else{
-                    [self viewStateForProgressFinish:YES];
-                    [self showStatus:@"Failed to load scheme information." andShowProgressBar:NO withProgress:-1];
+                    if (schemeScriptRunCount == 3){
+                        schemeScriptRunCount = 0;
+                        [self viewStateForProgressFinish:YES];
+                        [Common showAlertWithTitle:@"" andMessage:@"Failed to load scheme information. Please try again."];
+                    } else {
+                        schemeScriptRunCount++;
+                        [self runGetSchemeScript];
+                        [[AppDelegate appDelegate] addSessionLog:@"Failed to load scheme information."];
+                    }
                 }
             }
             

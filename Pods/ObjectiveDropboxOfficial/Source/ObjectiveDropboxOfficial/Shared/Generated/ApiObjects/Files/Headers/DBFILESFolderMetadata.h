@@ -9,9 +9,9 @@
 #import "DBFILESMetadata.h"
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESPropertyGroup;
 @class DBFILESFolderMetadata;
 @class DBFILESFolderSharingInfo;
-@class DBPROPERTIESPropertyGroup;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// A unique identifier for the folder.
 @property (nonatomic, readonly, copy) NSString *id_;
 
-/// Deprecated. Please use sharingInfo instead.
+/// Please use sharingInfo instead.
 @property (nonatomic, readonly, copy, nullable) NSString *sharedFolderId;
 
 /// Set if the folder is contained in a shared folder or is a shared folder
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Additional information if the file has custom properties with the property
 /// template specified.
-@property (nonatomic, readonly, nullable) NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups;
+@property (nonatomic, readonly, nullable) NSArray<DBFILEPROPERTIESPropertyGroup *> *propertyGroups;
 
 #pragma mark - Constructors
 
@@ -59,10 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// least the last path component will have the correct casing. Changes to only
 /// the casing of paths won't be returned by `listFolderContinue`. This field
 /// will be null if the file or folder is not mounted.
-/// @param parentSharedFolderId Deprecated. Please use `parentSharedFolderId` in
+/// @param parentSharedFolderId Please use `parentSharedFolderId` in
 /// `DBFILESFileSharingInfo` or `parentSharedFolderId` in
 /// `DBFILESFolderSharingInfo` instead.
-/// @param sharedFolderId Deprecated. Please use sharingInfo instead.
+/// @param sharedFolderId Please use sharingInfo instead.
 /// @param sharingInfo Set if the folder is contained in a shared folder or is a
 /// shared folder mount point.
 /// @param propertyGroups Additional information if the file has custom
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
         parentSharedFolderId:(nullable NSString *)parentSharedFolderId
               sharedFolderId:(nullable NSString *)sharedFolderId
                  sharingInfo:(nullable DBFILESFolderSharingInfo *)sharingInfo
-              propertyGroups:(nullable NSArray<DBPROPERTIESPropertyGroup *> *)propertyGroups;
+              propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESFolderMetadata` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESFolderMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESFolderMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESFolderMetadata` instances.

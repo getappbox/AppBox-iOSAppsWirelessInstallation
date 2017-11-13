@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationBatchResultData` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESRelocationBatchResultData *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESRelocationBatchResultData *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationBatchResultData` instances.

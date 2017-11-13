@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the docsArchive route object.
 + (DBRoute *)DBPAPERDocsArchive;
 
+/// Accessor method for the docsCreate route object.
++ (DBRoute *)DBPAPERDocsCreate;
+
 /// Accessor method for the docsDownload route object.
 + (DBRoute *)DBPAPERDocsDownload;
 
@@ -46,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the docsSharingPolicySet route object.
 + (DBRoute *)DBPAPERDocsSharingPolicySet;
+
+/// Accessor method for the docsUpdate route object.
++ (DBRoute *)DBPAPERDocsUpdate;
 
 /// Accessor method for the docsUsersAdd route object.
 + (DBRoute *)DBPAPERDocsUsersAdd;

@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListUsersOnFolderResponse` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERListUsersOnFolderResponse *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERListUsersOnFolderResponse *)instance;
 
 ///
 /// Deserializes `DBPAPERListUsersOnFolderResponse` instances.

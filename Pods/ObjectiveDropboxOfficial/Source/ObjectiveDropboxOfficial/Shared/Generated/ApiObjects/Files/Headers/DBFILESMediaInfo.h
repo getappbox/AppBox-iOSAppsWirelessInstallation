@@ -113,7 +113,7 @@ typedef NS_ENUM(NSInteger, DBFILESMediaInfoTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESMediaInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESMediaInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESMediaInfo *)instance;
 
 ///
 /// Deserializes `DBFILESMediaInfo` instances.

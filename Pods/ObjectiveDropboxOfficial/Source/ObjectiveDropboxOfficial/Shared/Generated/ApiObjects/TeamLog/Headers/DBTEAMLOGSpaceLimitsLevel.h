@@ -148,7 +148,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSpaceLimitsLevelTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSpaceLimitsLevel` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSpaceLimitsLevel *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSpaceLimitsLevel *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSpaceLimitsLevel` instances.

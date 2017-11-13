@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMBaseDfbReport` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMBaseDfbReport *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMBaseDfbReport *)instance;
 
 ///
 /// Deserializes `DBTEAMBaseDfbReport` instances.

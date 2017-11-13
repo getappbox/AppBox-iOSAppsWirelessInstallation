@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaResetDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGTfaResetDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaResetDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaResetDetails` instances.

@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGSharedLinkError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGSharedLinkError *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkError` instances.

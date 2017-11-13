@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedFolderLinkPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderLinkPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedFolderLinkPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderLinkPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderLinkPolicy` instances.

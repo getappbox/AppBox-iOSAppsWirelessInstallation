@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamMembershipType` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGTeamMembershipType *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamMembershipType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamMembershipType` instances.

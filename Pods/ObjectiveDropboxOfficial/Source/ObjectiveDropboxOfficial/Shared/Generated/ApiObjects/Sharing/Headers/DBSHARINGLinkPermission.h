@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkPermission` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGLinkPermission *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGLinkPermission *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkPermission` instances.

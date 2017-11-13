@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SharedLinkMetadata` struct.
 ///
-/// The metadata of a shared link
+/// The metadata of a shared link.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -124,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkMetadata` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGSharedLinkMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGSharedLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkMetadata` instances.

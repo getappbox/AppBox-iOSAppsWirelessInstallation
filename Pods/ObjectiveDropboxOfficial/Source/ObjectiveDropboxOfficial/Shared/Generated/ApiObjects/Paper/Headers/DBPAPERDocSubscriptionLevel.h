@@ -148,7 +148,7 @@ typedef NS_ENUM(NSInteger, DBPAPERDocSubscriptionLevelTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERDocSubscriptionLevel` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERDocSubscriptionLevel *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERDocSubscriptionLevel *)instance;
 
 ///
 /// Deserializes `DBPAPERDocSubscriptionLevel` instances.

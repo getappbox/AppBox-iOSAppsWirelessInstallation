@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBFILESPreviewErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESPreviewError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESPreviewError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESPreviewError *)instance;
 
 ///
 /// Deserializes `DBFILESPreviewError` instances.

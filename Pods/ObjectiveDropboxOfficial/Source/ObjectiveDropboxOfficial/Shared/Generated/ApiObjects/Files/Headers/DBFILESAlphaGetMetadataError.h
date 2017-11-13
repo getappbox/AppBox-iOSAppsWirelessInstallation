@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESLookUpPropertiesError;
 @class DBFILESAlphaGetMetadataError;
-@class DBFILESLookUpPropertiesError;
 @class DBFILESLookupError;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, DBFILESAlphaGetMetadataErrorTag) {
 
 /// (no description). @note Ensure the `isPropertiesError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESLookUpPropertiesError *propertiesError;
+@property (nonatomic, readonly) DBFILEPROPERTIESLookUpPropertiesError *propertiesError;
 
 #pragma mark - Constructors
 
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, DBFILESAlphaGetMetadataErrorTag) {
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPropertiesError:(DBFILESLookUpPropertiesError *)propertiesError;
+- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESLookUpPropertiesError *)propertiesError;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBFILESAlphaGetMetadataErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESAlphaGetMetadataError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESAlphaGetMetadataError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESAlphaGetMetadataError *)instance;
 
 ///
 /// Deserializes `DBFILESAlphaGetMetadataError` instances.

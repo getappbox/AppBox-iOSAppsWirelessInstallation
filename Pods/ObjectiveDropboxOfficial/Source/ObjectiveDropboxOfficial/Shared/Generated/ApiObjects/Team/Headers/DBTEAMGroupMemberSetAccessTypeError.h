@@ -169,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMemberSetAccessTypeErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMemberSetAccessTypeError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupMemberSetAccessTypeError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupMemberSetAccessTypeError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMemberSetAccessTypeError` instances.

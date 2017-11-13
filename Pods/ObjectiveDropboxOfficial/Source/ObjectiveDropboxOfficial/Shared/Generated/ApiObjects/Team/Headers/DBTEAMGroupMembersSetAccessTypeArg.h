@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersSetAccessTypeArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupMembersSetAccessTypeArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupMembersSetAccessTypeArg *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersSetAccessTypeArg` instances.

@@ -27,23 +27,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Source asset index.
-@property (nonatomic, readonly) NSNumber *srcIndex;
+/// Source participant position in the Participants list.
+@property (nonatomic, readonly) NSNumber *srcParticipantIndex;
 
-/// Destination asset index.
-@property (nonatomic, readonly) NSNumber *destIndex;
+/// Destination participant position in the Participants list.
+@property (nonatomic, readonly) NSNumber *destParticipantIndex;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param srcIndex Source asset index.
-/// @param destIndex Destination asset index.
+/// @param srcParticipantIndex Source participant position in the Participants
+/// list.
+/// @param destParticipantIndex Destination participant position in the
+/// Participants list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSrcIndex:(NSNumber *)srcIndex destIndex:(NSNumber *)destIndex;
+- (instancetype)initWithSrcParticipantIndex:(NSNumber *)srcParticipantIndex
+                       destParticipantIndex:(NSNumber *)destParticipantIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -66,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberTransferAccountContentsDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGMemberTransferAccountContentsDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberTransferAccountContentsDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberTransferAccountContentsDetails` instances.

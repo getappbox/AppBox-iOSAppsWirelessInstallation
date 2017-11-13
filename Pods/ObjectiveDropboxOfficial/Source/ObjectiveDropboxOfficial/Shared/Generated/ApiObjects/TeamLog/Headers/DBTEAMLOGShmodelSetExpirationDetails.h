@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShmodelSetExpirationDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGShmodelSetExpirationDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGShmodelSetExpirationDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShmodelSetExpirationDetails` instances.

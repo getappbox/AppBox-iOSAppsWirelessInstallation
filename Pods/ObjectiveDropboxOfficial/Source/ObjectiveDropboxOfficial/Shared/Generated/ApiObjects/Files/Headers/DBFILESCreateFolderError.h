@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, DBFILESCreateFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESCreateFolderError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESCreateFolderError *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderError` instances.

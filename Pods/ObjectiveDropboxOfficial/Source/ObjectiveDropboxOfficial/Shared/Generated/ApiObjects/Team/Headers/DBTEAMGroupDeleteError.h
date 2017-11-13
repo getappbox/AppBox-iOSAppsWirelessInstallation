@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupDeleteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupDeleteError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupDeleteError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupDeleteError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupDeleteError` instances.

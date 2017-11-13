@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupSelectorError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupSelectorError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupSelectorError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupSelectorError` instances.

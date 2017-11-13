@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionIndividualResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileMemberActionIndividualResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGFileMemberActionIndividualResult *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGFileMemberActionIndividualResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileMemberActionIndividualResult` instances.

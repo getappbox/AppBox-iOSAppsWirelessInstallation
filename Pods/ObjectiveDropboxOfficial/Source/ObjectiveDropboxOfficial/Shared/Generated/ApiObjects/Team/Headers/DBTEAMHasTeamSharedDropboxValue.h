@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMHasTeamSharedDropboxValueTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMHasTeamSharedDropboxValue` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMHasTeamSharedDropboxValue *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMHasTeamSharedDropboxValue *)instance;
 
 ///
 /// Deserializes `DBTEAMHasTeamSharedDropboxValue` instances.

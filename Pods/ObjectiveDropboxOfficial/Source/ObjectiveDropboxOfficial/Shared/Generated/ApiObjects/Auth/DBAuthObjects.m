@@ -94,7 +94,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHAccessErrorSerializer serialize:instance];
 }
 
@@ -187,7 +187,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHAccessError *)deserialize:(NSDictionary *)valueDict {
@@ -303,7 +303,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHAuthErrorSerializer serialize:instance];
 }
 
@@ -404,7 +404,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHAuthError *)deserialize:(NSDictionary *)valueDict {
@@ -492,7 +492,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHInvalidAccountTypeErrorSerializer serialize:instance];
 }
 
@@ -581,7 +581,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHInvalidAccountTypeError *)deserialize:(NSDictionary *)valueDict {
@@ -665,7 +665,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHPaperAccessErrorSerializer serialize:instance];
 }
 
@@ -754,7 +754,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHPaperAccessError *)deserialize:(NSDictionary *)valueDict {
@@ -785,6 +785,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithReason:(DBAUTHRateLimitReason *)reason retryAfter:(NSNumber *)retryAfter {
+  [DBStoneValidators nonnullValidator:nil](reason);
 
   self = [super init];
   if (self) {
@@ -800,7 +801,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHRateLimitErrorSerializer serialize:instance];
 }
 
@@ -871,7 +872,7 @@
   jsonDict[@"reason"] = [DBAUTHRateLimitReasonSerializer serialize:valueObj.reason];
   jsonDict[@"retry_after"] = valueObj.retryAfter;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHRateLimitError *)deserialize:(NSDictionary *)valueDict {
@@ -948,7 +949,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHRateLimitReasonSerializer serialize:instance];
 }
 
@@ -1037,7 +1038,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHRateLimitReason *)deserialize:(NSDictionary *)valueDict {
@@ -1067,8 +1068,9 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithOauth1Token:(NSString *)oauth1Token oauth1TokenSecret:(NSString *)oauth1TokenSecret {
-  [DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil](oauth1Token);
-  [DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil](oauth1TokenSecret);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](oauth1Token);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](oauth1TokenSecret);
 
   self = [super init];
   if (self) {
@@ -1080,7 +1082,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHTokenFromOAuth1ArgSerializer serialize:instance];
 }
 
@@ -1151,7 +1153,7 @@
   jsonDict[@"oauth1_token"] = valueObj.oauth1Token;
   jsonDict[@"oauth1_token_secret"] = valueObj.oauth1TokenSecret;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHTokenFromOAuth1Arg *)deserialize:(NSDictionary *)valueDict {
@@ -1228,7 +1230,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHTokenFromOAuth1ErrorSerializer serialize:instance];
 }
 
@@ -1317,7 +1319,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHTokenFromOAuth1Error *)deserialize:(NSDictionary *)valueDict {
@@ -1347,7 +1349,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithOauth2Token:(NSString *)oauth2Token {
-  [DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil](oauth2Token);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](oauth2Token);
 
   self = [super init];
   if (self) {
@@ -1358,7 +1360,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBAUTHTokenFromOAuth1ResultSerializer serialize:instance];
 }
 
@@ -1424,7 +1426,7 @@
 
   jsonDict[@"oauth2_token"] = valueObj.oauth2Token;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBAUTHTokenFromOAuth1Result *)deserialize:(NSDictionary *)valueDict {

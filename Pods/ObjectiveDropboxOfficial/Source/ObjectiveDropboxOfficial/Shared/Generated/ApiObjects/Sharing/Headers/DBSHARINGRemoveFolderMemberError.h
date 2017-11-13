@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveFolderMemberErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRemoveFolderMemberError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGRemoveFolderMemberError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGRemoveFolderMemberError *)instance;
 
 ///
 /// Deserializes `DBSHARINGRemoveFolderMemberError` instances.

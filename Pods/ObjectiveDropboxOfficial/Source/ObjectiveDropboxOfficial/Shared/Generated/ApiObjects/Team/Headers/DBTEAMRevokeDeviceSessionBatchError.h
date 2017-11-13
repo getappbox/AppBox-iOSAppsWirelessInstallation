@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionBatchError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionBatchError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionBatchError *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionBatchError` instances.

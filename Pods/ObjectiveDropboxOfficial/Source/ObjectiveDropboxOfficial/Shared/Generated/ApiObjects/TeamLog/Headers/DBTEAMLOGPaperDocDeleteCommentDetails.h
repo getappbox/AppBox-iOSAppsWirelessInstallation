@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperDocDeleteCommentDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperDocDeleteCommentDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperDocDeleteCommentDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperDocDeleteCommentDetails` instances.

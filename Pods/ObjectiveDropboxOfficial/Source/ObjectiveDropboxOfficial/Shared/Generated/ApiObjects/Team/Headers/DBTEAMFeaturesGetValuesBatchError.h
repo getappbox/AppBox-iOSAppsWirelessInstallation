@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBTEAMFeaturesGetValuesBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMFeaturesGetValuesBatchError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMFeaturesGetValuesBatchError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMFeaturesGetValuesBatchError *)instance;
 
 ///
 /// Deserializes `DBTEAMFeaturesGetValuesBatchError` instances.

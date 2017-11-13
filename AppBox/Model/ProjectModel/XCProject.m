@@ -176,7 +176,12 @@
     [self setDbIPAFullPath:[NSURL URLWithString:dbIPAFullPathString]];
     
     [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
-    [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,abAppInfoFileName]]];
+    
+    if (self.isKeepSameLinkEnabled){
+        [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,abAppInfoFileName]]];
+    } else {
+        [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",toPath, abAppInfoFileName]]];
+    }
 }
 
 - (void)setBuildListInfo:(NSDictionary *)buildListInfo{

@@ -58,8 +58,10 @@
 @class DBTEAMLOGExtendedVersionHistoryChangePolicyDetails;
 @class DBTEAMLOGFileAddCommentDetails;
 @class DBTEAMLOGFileAddDetails;
+@class DBTEAMLOGFileChangeCommentSubscriptionDetails;
 @class DBTEAMLOGFileCommentsChangePolicyDetails;
 @class DBTEAMLOGFileCopyDetails;
+@class DBTEAMLOGFileDeleteCommentDetails;
 @class DBTEAMLOGFileDeleteDetails;
 @class DBTEAMLOGFileDownloadDetails;
 @class DBTEAMLOGFileEditDetails;
@@ -80,11 +82,13 @@
 @class DBTEAMLOGFileRequestsChangePolicyDetails;
 @class DBTEAMLOGFileRequestsEmailsEnabledDetails;
 @class DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails;
+@class DBTEAMLOGFileResolveCommentDetails;
 @class DBTEAMLOGFileRestoreDetails;
 @class DBTEAMLOGFileRevertDetails;
 @class DBTEAMLOGFileRollbackChangesDetails;
 @class DBTEAMLOGFileSaveCopyReferenceDetails;
 @class DBTEAMLOGFileUnlikeCommentDetails;
+@class DBTEAMLOGFileUnresolveCommentDetails;
 @class DBTEAMLOGGoogleSsoChangePolicyDetails;
 @class DBTEAMLOGGroupAddExternalIdDetails;
 @class DBTEAMLOGGroupAddMemberDetails;
@@ -93,8 +97,6 @@
 @class DBTEAMLOGGroupChangeMemberRoleDetails;
 @class DBTEAMLOGGroupCreateDetails;
 @class DBTEAMLOGGroupDeleteDetails;
-@class DBTEAMLOGGroupDescriptionUpdatedDetails;
-@class DBTEAMLOGGroupJoinPolicyUpdatedDetails;
 @class DBTEAMLOGGroupMovedDetails;
 @class DBTEAMLOGGroupRemoveExternalIdDetails;
 @class DBTEAMLOGGroupRemoveMemberDetails;
@@ -125,13 +127,14 @@
 @class DBTEAMLOGNoteShareReceiveDetails;
 @class DBTEAMLOGNoteSharedDetails;
 @class DBTEAMLOGOpenNoteSharedDetails;
+@class DBTEAMLOGPaperAdminExportStartDetails;
 @class DBTEAMLOGPaperChangeDeploymentPolicyDetails;
+@class DBTEAMLOGPaperChangeMemberLinkPolicyDetails;
 @class DBTEAMLOGPaperChangeMemberPolicyDetails;
 @class DBTEAMLOGPaperChangePolicyDetails;
 @class DBTEAMLOGPaperContentAddMemberDetails;
 @class DBTEAMLOGPaperContentAddToFolderDetails;
 @class DBTEAMLOGPaperContentArchiveDetails;
-@class DBTEAMLOGPaperContentChangeSubscriptionDetails;
 @class DBTEAMLOGPaperContentCreateDetails;
 @class DBTEAMLOGPaperContentPermanentlyDeleteDetails;
 @class DBTEAMLOGPaperContentRemoveFromFolderDetails;
@@ -141,6 +144,7 @@
 @class DBTEAMLOGPaperDocAddCommentDetails;
 @class DBTEAMLOGPaperDocChangeMemberRoleDetails;
 @class DBTEAMLOGPaperDocChangeSharingPolicyDetails;
+@class DBTEAMLOGPaperDocChangeSubscriptionDetails;
 @class DBTEAMLOGPaperDocDeleteCommentDetails;
 @class DBTEAMLOGPaperDocDeletedDetails;
 @class DBTEAMLOGPaperDocDownloadDetails;
@@ -153,13 +157,16 @@
 @class DBTEAMLOGPaperDocRevertDetails;
 @class DBTEAMLOGPaperDocSlackShareDetails;
 @class DBTEAMLOGPaperDocTeamInviteDetails;
+@class DBTEAMLOGPaperDocTrashedDetails;
 @class DBTEAMLOGPaperDocUnresolveCommentDetails;
+@class DBTEAMLOGPaperDocUntrashedDetails;
 @class DBTEAMLOGPaperDocViewDetails;
 @class DBTEAMLOGPaperEnabledUsersGroupAdditionDetails;
 @class DBTEAMLOGPaperEnabledUsersGroupRemovalDetails;
 @class DBTEAMLOGPaperExternalViewAllowDetails;
 @class DBTEAMLOGPaperExternalViewDefaultTeamDetails;
 @class DBTEAMLOGPaperExternalViewForbidDetails;
+@class DBTEAMLOGPaperFolderChangeSubscriptionDetails;
 @class DBTEAMLOGPaperFolderDeletedDetails;
 @class DBTEAMLOGPaperFolderFollowedDetails;
 @class DBTEAMLOGPaperFolderTeamInviteDetails;
@@ -169,8 +176,6 @@
 @class DBTEAMLOGPasswordResetAllDetails;
 @class DBTEAMLOGPasswordResetDetails;
 @class DBTEAMLOGPermanentDeleteChangePolicyDetails;
-@class DBTEAMLOGRemoveLogoutUrlDetails;
-@class DBTEAMLOGRemoveSsoUrlDetails;
 @class DBTEAMLOGResellerSupportSessionEndDetails;
 @class DBTEAMLOGResellerSupportSessionStartDetails;
 @class DBTEAMLOGSfAddGroupDetails;
@@ -239,12 +244,18 @@
 @class DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails;
 @class DBTEAMLOGSmartSyncNotOptOutDetails;
 @class DBTEAMLOGSmartSyncOptOutDetails;
+@class DBTEAMLOGSsoAddCertDetails;
+@class DBTEAMLOGSsoAddLoginUrlDetails;
+@class DBTEAMLOGSsoAddLogoutUrlDetails;
 @class DBTEAMLOGSsoChangeCertDetails;
 @class DBTEAMLOGSsoChangeLoginUrlDetails;
 @class DBTEAMLOGSsoChangeLogoutUrlDetails;
 @class DBTEAMLOGSsoChangePolicyDetails;
 @class DBTEAMLOGSsoChangeSamlIdentityModeDetails;
 @class DBTEAMLOGSsoLoginFailDetails;
+@class DBTEAMLOGSsoRemoveCertDetails;
+@class DBTEAMLOGSsoRemoveLoginUrlDetails;
+@class DBTEAMLOGSsoRemoveLogoutUrlDetails;
 @class DBTEAMLOGTeamActivityCreateReportDetails;
 @class DBTEAMLOGTeamFolderChangeStatusDetails;
 @class DBTEAMLOGTeamFolderCreateDetails;
@@ -254,6 +265,7 @@
 @class DBTEAMLOGTeamMergeFromDetails;
 @class DBTEAMLOGTeamMergeToDetails;
 @class DBTEAMLOGTeamProfileAddLogoDetails;
+@class DBTEAMLOGTeamProfileChangeDefaultLanguageDetails;
 @class DBTEAMLOGTeamProfileChangeLogoDetails;
 @class DBTEAMLOGTeamProfileChangeNameDetails;
 @class DBTEAMLOGTeamProfileRemoveLogoDetails;
@@ -302,6 +314,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Transferred contents of a removed team member account to another member.
   DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails,
 
+  /// Exported all Paper documents in the team.
+  DBTEAMLOGEventDetailsPaperAdminExportStartDetails,
+
   /// Users added to Paper enabled users list.
   DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails,
 
@@ -338,6 +353,27 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// Unlinked an app for team member.
   DBTEAMLOGEventDetailsAppUnlinkUserDetails,
+
+  /// Added a file comment.
+  DBTEAMLOGEventDetailsFileAddCommentDetails,
+
+  /// Subscribed to or unsubscribed from comment notifications for file.
+  DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails,
+
+  /// Deleted a file comment.
+  DBTEAMLOGEventDetailsFileDeleteCommentDetails,
+
+  /// Liked a file comment.
+  DBTEAMLOGEventDetailsFileLikeCommentDetails,
+
+  /// Resolved a file comment.
+  DBTEAMLOGEventDetailsFileResolveCommentDetails,
+
+  /// Unliked a file comment.
+  DBTEAMLOGEventDetailsFileUnlikeCommentDetails,
+
+  /// Unresolved a file comment.
+  DBTEAMLOGEventDetailsFileUnresolveCommentDetails,
 
   /// IP address associated with active desktop session changed.
   DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails,
@@ -508,12 +544,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Deleted a group.
   DBTEAMLOGEventDetailsGroupDeleteDetails,
 
-  /// Updated a group.
-  DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails,
-
-  /// Updated a group join policy.
-  DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails,
-
   /// Moved a group.
   DBTEAMLOGEventDetailsGroupMovedDetails,
 
@@ -580,9 +610,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Archived Paper doc or folder.
   DBTEAMLOGEventDetailsPaperContentArchiveDetails,
 
-  /// Followed or unfollowed a Paper doc or folder.
-  DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails,
-
   /// Created a Paper doc or folder.
   DBTEAMLOGEventDetailsPaperContentCreateDetails,
 
@@ -609,6 +636,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// Changed the sharing policy for Paper doc.
   DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails,
+
+  /// Followed or unfollowed a Paper doc.
+  DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails,
 
   /// Paper doc archived.
   DBTEAMLOGEventDetailsPaperDocDeletedDetails,
@@ -646,11 +676,20 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Paper doc shared with team member.
   DBTEAMLOGEventDetailsPaperDocTeamInviteDetails,
 
+  /// Paper doc trashed.
+  DBTEAMLOGEventDetailsPaperDocTrashedDetails,
+
   /// Unresolved a Paper doc comment.
   DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails,
 
+  /// Paper doc untrashed.
+  DBTEAMLOGEventDetailsPaperDocUntrashedDetails,
+
   /// Viewed Paper doc.
   DBTEAMLOGEventDetailsPaperDocViewDetails,
+
+  /// Followed or unfollowed a Paper folder.
+  DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails,
 
   /// Paper folder archived.
   DBTEAMLOGEventDetailsPaperFolderDeletedDetails,
@@ -684,15 +723,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// Shared an album.
   DBTEAMLOGEventDetailsCollectionShareDetails,
-
-  /// Added a file comment.
-  DBTEAMLOGEventDetailsFileAddCommentDetails,
-
-  /// Liked a file comment.
-  DBTEAMLOGEventDetailsFileLikeCommentDetails,
-
-  /// Unliked a file comment.
-  DBTEAMLOGEventDetailsFileUnlikeCommentDetails,
 
   /// Changed a Paper document to be invite-only.
   DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails,
@@ -884,11 +914,14 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// Made a file/folder visible only to team members with the link.
   DBTEAMLOGEventDetailsShmodelVisibilityTeamOnlyDetails,
 
-  /// Removed single sign-on logout URL.
-  DBTEAMLOGEventDetailsRemoveLogoutUrlDetails,
+  /// Added the X.509 certificate for SSO.
+  DBTEAMLOGEventDetailsSsoAddCertDetails,
 
-  /// Changed the sign-out URL for SSO.
-  DBTEAMLOGEventDetailsRemoveSsoUrlDetails,
+  /// Added sign-in URL for SSO.
+  DBTEAMLOGEventDetailsSsoAddLoginUrlDetails,
+
+  /// Added sign-out URL for SSO.
+  DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails,
 
   /// Changed the X.509 certificate for SSO.
   DBTEAMLOGEventDetailsSsoChangeCertDetails,
@@ -901,6 +934,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// Changed the SAML identity mode for SSO.
   DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails,
+
+  /// Removed the X.509 certificate for SSO.
+  DBTEAMLOGEventDetailsSsoRemoveCertDetails,
+
+  /// Removed the sign-in URL for SSO.
+  DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails,
+
+  /// Removed single sign-on logout URL.
+  DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails,
 
   /// Changed the archival status of a team folder.
   DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails,
@@ -1012,6 +1054,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   /// to specific members of the team.
   DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails,
 
+  /// Changed whether non team members can view Paper documents using a link.
+  DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails,
+
   /// Changed whether team members can share Paper documents externally (i.e.
   /// outside the team), and if so, whether they should be accessible only by
   /// team members or anyone by default.
@@ -1065,6 +1110,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// Added a team logo to be displayed on shared link headers.
   DBTEAMLOGEventDetailsTeamProfileAddLogoDetails,
+
+  /// Changed the default language for the team.
+  DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails,
 
   /// Changed the team logo to be displayed on shared link headers.
   DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails,
@@ -1131,6 +1179,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberTransferAccountContentsDetails *memberTransferAccountContentsDetails;
 
+/// Exported all Paper documents in the team. @note Ensure the
+/// `isPaperAdminExportStartDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGPaperAdminExportStartDetails *paperAdminExportStartDetails;
+
 /// Users added to Paper enabled users list. @note Ensure the
 /// `isPaperEnabledUsersGroupAdditionDetails` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -1189,6 +1242,37 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGAppUnlinkUserDetails *appUnlinkUserDetails;
+
+/// Added a file comment. @note Ensure the `isFileAddCommentDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileAddCommentDetails *fileAddCommentDetails;
+
+/// Subscribed to or unsubscribed from comment notifications for file. @note
+/// Ensure the `isFileChangeCommentSubscriptionDetails` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileChangeCommentSubscriptionDetails *fileChangeCommentSubscriptionDetails;
+
+/// Deleted a file comment. @note Ensure the `isFileDeleteCommentDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileDeleteCommentDetails *fileDeleteCommentDetails;
+
+/// Liked a file comment. @note Ensure the `isFileLikeCommentDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileLikeCommentDetails *fileLikeCommentDetails;
+
+/// Resolved a file comment. @note Ensure the `isFileResolveCommentDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileResolveCommentDetails *fileResolveCommentDetails;
+
+/// Unliked a file comment. @note Ensure the `isFileUnlikeCommentDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileUnlikeCommentDetails *fileUnlikeCommentDetails;
+
+/// Unresolved a file comment. @note Ensure the `isFileUnresolveCommentDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileUnresolveCommentDetails *fileUnresolveCommentDetails;
 
 /// IP address associated with active desktop session changed. @note Ensure the
 /// `isDeviceChangeIpDesktopDetails` method returns true before accessing,
@@ -1459,15 +1543,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGGroupDeleteDetails *groupDeleteDetails;
 
-/// Updated a group. @note Ensure the `isGroupDescriptionUpdatedDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGGroupDescriptionUpdatedDetails *groupDescriptionUpdatedDetails;
-
-/// Updated a group join policy. @note Ensure the
-/// `isGroupJoinPolicyUpdatedDetails` method returns true before accessing,
-/// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGGroupJoinPolicyUpdatedDetails *groupJoinPolicyUpdatedDetails;
-
 /// Moved a group. @note Ensure the `isGroupMovedDetails` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGGroupMovedDetails *groupMovedDetails;
@@ -1574,11 +1649,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperContentArchiveDetails *paperContentArchiveDetails;
 
-/// Followed or unfollowed a Paper doc or folder. @note Ensure the
-/// `isPaperContentChangeSubscriptionDetails` method returns true before
-/// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGPaperContentChangeSubscriptionDetails *paperContentChangeSubscriptionDetails;
-
 /// Created a Paper doc or folder. @note Ensure the
 /// `isPaperContentCreateDetails` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
@@ -1623,6 +1693,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// `isPaperDocChangeSharingPolicyDetails` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperDocChangeSharingPolicyDetails *paperDocChangeSharingPolicyDetails;
+
+/// Followed or unfollowed a Paper doc. @note Ensure the
+/// `isPaperDocChangeSubscriptionDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGPaperDocChangeSubscriptionDetails *paperDocChangeSubscriptionDetails;
 
 /// Paper doc archived. @note Ensure the `isPaperDocDeletedDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -1681,14 +1756,27 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperDocTeamInviteDetails *paperDocTeamInviteDetails;
 
+/// Paper doc trashed. @note Ensure the `isPaperDocTrashedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGPaperDocTrashedDetails *paperDocTrashedDetails;
+
 /// Unresolved a Paper doc comment. @note Ensure the
 /// `isPaperDocUnresolveCommentDetails` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperDocUnresolveCommentDetails *paperDocUnresolveCommentDetails;
 
+/// Paper doc untrashed. @note Ensure the `isPaperDocUntrashedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGPaperDocUntrashedDetails *paperDocUntrashedDetails;
+
 /// Viewed Paper doc. @note Ensure the `isPaperDocViewDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperDocViewDetails *paperDocViewDetails;
+
+/// Followed or unfollowed a Paper folder. @note Ensure the
+/// `isPaperFolderChangeSubscriptionDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGPaperFolderChangeSubscriptionDetails *paperFolderChangeSubscriptionDetails;
 
 /// Paper folder archived. @note Ensure the `isPaperFolderDeletedDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -1741,18 +1829,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// Shared an album. @note Ensure the `isCollectionShareDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGCollectionShareDetails *collectionShareDetails;
-
-/// Added a file comment. @note Ensure the `isFileAddCommentDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGFileAddCommentDetails *fileAddCommentDetails;
-
-/// Liked a file comment. @note Ensure the `isFileLikeCommentDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGFileLikeCommentDetails *fileLikeCommentDetails;
-
-/// Unliked a file comment. @note Ensure the `isFileUnlikeCommentDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGFileUnlikeCommentDetails *fileUnlikeCommentDetails;
 
 /// Changed a Paper document to be invite-only. @note Ensure the
 /// `isNoteAclInviteOnlyDetails` method returns true before accessing, otherwise
@@ -2066,15 +2142,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGShmodelVisibilityTeamOnlyDetails *shmodelVisibilityTeamOnlyDetails;
 
-/// Removed single sign-on logout URL. @note Ensure the
-/// `isRemoveLogoutUrlDetails` method returns true before accessing, otherwise a
-/// runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGRemoveLogoutUrlDetails *removeLogoutUrlDetails;
-
-/// Changed the sign-out URL for SSO. @note Ensure the `isRemoveSsoUrlDetails`
+/// Added the X.509 certificate for SSO. @note Ensure the `isSsoAddCertDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
-@property (nonatomic, readonly) DBTEAMLOGRemoveSsoUrlDetails *removeSsoUrlDetails;
+@property (nonatomic, readonly) DBTEAMLOGSsoAddCertDetails *ssoAddCertDetails;
+
+/// Added sign-in URL for SSO. @note Ensure the `isSsoAddLoginUrlDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSsoAddLoginUrlDetails *ssoAddLoginUrlDetails;
+
+/// Added sign-out URL for SSO. @note Ensure the `isSsoAddLogoutUrlDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSsoAddLogoutUrlDetails *ssoAddLogoutUrlDetails;
 
 /// Changed the X.509 certificate for SSO. @note Ensure the
 /// `isSsoChangeCertDetails` method returns true before accessing, otherwise a
@@ -2095,6 +2175,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// `isSsoChangeSamlIdentityModeDetails` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSsoChangeSamlIdentityModeDetails *ssoChangeSamlIdentityModeDetails;
+
+/// Removed the X.509 certificate for SSO. @note Ensure the
+/// `isSsoRemoveCertDetails` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSsoRemoveCertDetails *ssoRemoveCertDetails;
+
+/// Removed the sign-in URL for SSO. @note Ensure the
+/// `isSsoRemoveLoginUrlDetails` method returns true before accessing, otherwise
+/// a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSsoRemoveLoginUrlDetails *ssoRemoveLoginUrlDetails;
+
+/// Removed single sign-on logout URL. @note Ensure the
+/// `isSsoRemoveLogoutUrlDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSsoRemoveLogoutUrlDetails *ssoRemoveLogoutUrlDetails;
 
 /// Changed the archival status of a team folder. @note Ensure the
 /// `isTeamFolderChangeStatusDetails` method returns true before accessing,
@@ -2280,6 +2375,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperChangeDeploymentPolicyDetails *paperChangeDeploymentPolicyDetails;
 
+/// Changed whether non team members can view Paper documents using a link.
+/// @note Ensure the `isPaperChangeMemberLinkPolicyDetails` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGPaperChangeMemberLinkPolicyDetails *paperChangeMemberLinkPolicyDetails;
+
 /// Changed whether team members can share Paper documents externally (i.e.
 /// outside the team), and if so, whether they should be accessible only by team
 /// members or anyone by default. @note Ensure the
@@ -2363,6 +2463,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// `isTeamProfileAddLogoDetails` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamProfileAddLogoDetails *teamProfileAddLogoDetails;
+
+/// Changed the default language for the team. @note Ensure the
+/// `isTeamProfileChangeDefaultLanguageDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *teamProfileChangeDefaultLanguageDetails;
 
 /// Changed the team logo to be displayed on shared link headers. @note Ensure
 /// the `isTeamProfileChangeLogoDetails` method returns true before accessing,
@@ -2482,6 +2588,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithMemberTransferAccountContentsDetails:
     (DBTEAMLOGMemberTransferAccountContentsDetails *)memberTransferAccountContentsDetails;
+
+///
+/// Initializes union class with tag state of
+/// "paper_admin_export_start_details".
+///
+/// Description of the "paper_admin_export_start_details" tag state: Exported
+/// all Paper documents in the team.
+///
+/// @param paperAdminExportStartDetails Exported all Paper documents in the
+/// team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperAdminExportStartDetails:
+    (DBTEAMLOGPaperAdminExportStartDetails *)paperAdminExportStartDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -2643,6 +2764,93 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAppUnlinkUserDetails:(DBTEAMLOGAppUnlinkUserDetails *)appUnlinkUserDetails;
+
+///
+/// Initializes union class with tag state of "file_add_comment_details".
+///
+/// Description of the "file_add_comment_details" tag state: Added a file
+/// comment.
+///
+/// @param fileAddCommentDetails Added a file comment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileAddCommentDetails:(DBTEAMLOGFileAddCommentDetails *)fileAddCommentDetails;
+
+///
+/// Initializes union class with tag state of
+/// "file_change_comment_subscription_details".
+///
+/// Description of the "file_change_comment_subscription_details" tag state:
+/// Subscribed to or unsubscribed from comment notifications for file.
+///
+/// @param fileChangeCommentSubscriptionDetails Subscribed to or unsubscribed
+/// from comment notifications for file.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileChangeCommentSubscriptionDetails:
+    (DBTEAMLOGFileChangeCommentSubscriptionDetails *)fileChangeCommentSubscriptionDetails;
+
+///
+/// Initializes union class with tag state of "file_delete_comment_details".
+///
+/// Description of the "file_delete_comment_details" tag state: Deleted a file
+/// comment.
+///
+/// @param fileDeleteCommentDetails Deleted a file comment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileDeleteCommentDetails:(DBTEAMLOGFileDeleteCommentDetails *)fileDeleteCommentDetails;
+
+///
+/// Initializes union class with tag state of "file_like_comment_details".
+///
+/// Description of the "file_like_comment_details" tag state: Liked a file
+/// comment.
+///
+/// @param fileLikeCommentDetails Liked a file comment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileLikeCommentDetails:(DBTEAMLOGFileLikeCommentDetails *)fileLikeCommentDetails;
+
+///
+/// Initializes union class with tag state of "file_resolve_comment_details".
+///
+/// Description of the "file_resolve_comment_details" tag state: Resolved a file
+/// comment.
+///
+/// @param fileResolveCommentDetails Resolved a file comment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileResolveCommentDetails:(DBTEAMLOGFileResolveCommentDetails *)fileResolveCommentDetails;
+
+///
+/// Initializes union class with tag state of "file_unlike_comment_details".
+///
+/// Description of the "file_unlike_comment_details" tag state: Unliked a file
+/// comment.
+///
+/// @param fileUnlikeCommentDetails Unliked a file comment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileUnlikeCommentDetails:(DBTEAMLOGFileUnlikeCommentDetails *)fileUnlikeCommentDetails;
+
+///
+/// Initializes union class with tag state of "file_unresolve_comment_details".
+///
+/// Description of the "file_unresolve_comment_details" tag state: Unresolved a
+/// file comment.
+///
+/// @param fileUnresolveCommentDetails Unresolved a file comment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileUnresolveCommentDetails:(DBTEAMLOGFileUnresolveCommentDetails *)fileUnresolveCommentDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -3375,34 +3583,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithGroupDeleteDetails:(DBTEAMLOGGroupDeleteDetails *)groupDeleteDetails;
 
 ///
-/// Initializes union class with tag state of
-/// "group_description_updated_details".
-///
-/// Description of the "group_description_updated_details" tag state: Updated a
-/// group.
-///
-/// @param groupDescriptionUpdatedDetails Updated a group.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithGroupDescriptionUpdatedDetails:
-    (DBTEAMLOGGroupDescriptionUpdatedDetails *)groupDescriptionUpdatedDetails;
-
-///
-/// Initializes union class with tag state of
-/// "group_join_policy_updated_details".
-///
-/// Description of the "group_join_policy_updated_details" tag state: Updated a
-/// group join policy.
-///
-/// @param groupJoinPolicyUpdatedDetails Updated a group join policy.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithGroupJoinPolicyUpdatedDetails:
-    (DBTEAMLOGGroupJoinPolicyUpdatedDetails *)groupJoinPolicyUpdatedDetails;
-
-///
 /// Initializes union class with tag state of "group_moved_details".
 ///
 /// Description of the "group_moved_details" tag state: Moved a group.
@@ -3681,21 +3861,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithPaperContentArchiveDetails:(DBTEAMLOGPaperContentArchiveDetails *)paperContentArchiveDetails;
 
 ///
-/// Initializes union class with tag state of
-/// "paper_content_change_subscription_details".
-///
-/// Description of the "paper_content_change_subscription_details" tag state:
-/// Followed or unfollowed a Paper doc or folder.
-///
-/// @param paperContentChangeSubscriptionDetails Followed or unfollowed a Paper
-/// doc or folder.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithPaperContentChangeSubscriptionDetails:
-    (DBTEAMLOGPaperContentChangeSubscriptionDetails *)paperContentChangeSubscriptionDetails;
-
-///
 /// Initializes union class with tag state of "paper_content_create_details".
 ///
 /// Description of the "paper_content_create_details" tag state: Created a Paper
@@ -3817,6 +3982,20 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithPaperDocChangeSharingPolicyDetails:
     (DBTEAMLOGPaperDocChangeSharingPolicyDetails *)paperDocChangeSharingPolicyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "paper_doc_change_subscription_details".
+///
+/// Description of the "paper_doc_change_subscription_details" tag state:
+/// Followed or unfollowed a Paper doc.
+///
+/// @param paperDocChangeSubscriptionDetails Followed or unfollowed a Paper doc.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperDocChangeSubscriptionDetails:
+    (DBTEAMLOGPaperDocChangeSubscriptionDetails *)paperDocChangeSubscriptionDetails;
 
 ///
 /// Initializes union class with tag state of "paper_doc_deleted_details".
@@ -3969,6 +4148,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithPaperDocTeamInviteDetails:(DBTEAMLOGPaperDocTeamInviteDetails *)paperDocTeamInviteDetails;
 
 ///
+/// Initializes union class with tag state of "paper_doc_trashed_details".
+///
+/// Description of the "paper_doc_trashed_details" tag state: Paper doc trashed.
+///
+/// @param paperDocTrashedDetails Paper doc trashed.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperDocTrashedDetails:(DBTEAMLOGPaperDocTrashedDetails *)paperDocTrashedDetails;
+
+///
 /// Initializes union class with tag state of
 /// "paper_doc_unresolve_comment_details".
 ///
@@ -3983,6 +4173,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
     (DBTEAMLOGPaperDocUnresolveCommentDetails *)paperDocUnresolveCommentDetails;
 
 ///
+/// Initializes union class with tag state of "paper_doc_untrashed_details".
+///
+/// Description of the "paper_doc_untrashed_details" tag state: Paper doc
+/// untrashed.
+///
+/// @param paperDocUntrashedDetails Paper doc untrashed.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperDocUntrashedDetails:(DBTEAMLOGPaperDocUntrashedDetails *)paperDocUntrashedDetails;
+
+///
 /// Initializes union class with tag state of "paper_doc_view_details".
 ///
 /// Description of the "paper_doc_view_details" tag state: Viewed Paper doc.
@@ -3992,6 +4194,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPaperDocViewDetails:(DBTEAMLOGPaperDocViewDetails *)paperDocViewDetails;
+
+///
+/// Initializes union class with tag state of
+/// "paper_folder_change_subscription_details".
+///
+/// Description of the "paper_folder_change_subscription_details" tag state:
+/// Followed or unfollowed a Paper folder.
+///
+/// @param paperFolderChangeSubscriptionDetails Followed or unfollowed a Paper
+/// folder.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperFolderChangeSubscriptionDetails:
+    (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)paperFolderChangeSubscriptionDetails;
 
 ///
 /// Initializes union class with tag state of "paper_folder_deleted_details".
@@ -4130,42 +4347,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithCollectionShareDetails:(DBTEAMLOGCollectionShareDetails *)collectionShareDetails;
-
-///
-/// Initializes union class with tag state of "file_add_comment_details".
-///
-/// Description of the "file_add_comment_details" tag state: Added a file
-/// comment.
-///
-/// @param fileAddCommentDetails Added a file comment.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFileAddCommentDetails:(DBTEAMLOGFileAddCommentDetails *)fileAddCommentDetails;
-
-///
-/// Initializes union class with tag state of "file_like_comment_details".
-///
-/// Description of the "file_like_comment_details" tag state: Liked a file
-/// comment.
-///
-/// @param fileLikeCommentDetails Liked a file comment.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFileLikeCommentDetails:(DBTEAMLOGFileLikeCommentDetails *)fileLikeCommentDetails;
-
-///
-/// Initializes union class with tag state of "file_unlike_comment_details".
-///
-/// Description of the "file_unlike_comment_details" tag state: Unliked a file
-/// comment.
-///
-/// @param fileUnlikeCommentDetails Unliked a file comment.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFileUnlikeCommentDetails:(DBTEAMLOGFileUnlikeCommentDetails *)fileUnlikeCommentDetails;
 
 ///
 /// Initializes union class with tag state of "note_acl_invite_only_details".
@@ -5007,28 +5188,40 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
     (DBTEAMLOGShmodelVisibilityTeamOnlyDetails *)shmodelVisibilityTeamOnlyDetails;
 
 ///
-/// Initializes union class with tag state of "remove_logout_url_details".
+/// Initializes union class with tag state of "sso_add_cert_details".
 ///
-/// Description of the "remove_logout_url_details" tag state: Removed single
-/// sign-on logout URL.
+/// Description of the "sso_add_cert_details" tag state: Added the X.509
+/// certificate for SSO.
 ///
-/// @param removeLogoutUrlDetails Removed single sign-on logout URL.
+/// @param ssoAddCertDetails Added the X.509 certificate for SSO.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithRemoveLogoutUrlDetails:(DBTEAMLOGRemoveLogoutUrlDetails *)removeLogoutUrlDetails;
+- (instancetype)initWithSsoAddCertDetails:(DBTEAMLOGSsoAddCertDetails *)ssoAddCertDetails;
 
 ///
-/// Initializes union class with tag state of "remove_sso_url_details".
+/// Initializes union class with tag state of "sso_add_login_url_details".
 ///
-/// Description of the "remove_sso_url_details" tag state: Changed the sign-out
-/// URL for SSO.
+/// Description of the "sso_add_login_url_details" tag state: Added sign-in URL
+/// for SSO.
 ///
-/// @param removeSsoUrlDetails Changed the sign-out URL for SSO.
+/// @param ssoAddLoginUrlDetails Added sign-in URL for SSO.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithRemoveSsoUrlDetails:(DBTEAMLOGRemoveSsoUrlDetails *)removeSsoUrlDetails;
+- (instancetype)initWithSsoAddLoginUrlDetails:(DBTEAMLOGSsoAddLoginUrlDetails *)ssoAddLoginUrlDetails;
+
+///
+/// Initializes union class with tag state of "sso_add_logout_url_details".
+///
+/// Description of the "sso_add_logout_url_details" tag state: Added sign-out
+/// URL for SSO.
+///
+/// @param ssoAddLogoutUrlDetails Added sign-out URL for SSO.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSsoAddLogoutUrlDetails:(DBTEAMLOGSsoAddLogoutUrlDetails *)ssoAddLogoutUrlDetails;
 
 ///
 /// Initializes union class with tag state of "sso_change_cert_details".
@@ -5080,6 +5273,42 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithSsoChangeSamlIdentityModeDetails:
     (DBTEAMLOGSsoChangeSamlIdentityModeDetails *)ssoChangeSamlIdentityModeDetails;
+
+///
+/// Initializes union class with tag state of "sso_remove_cert_details".
+///
+/// Description of the "sso_remove_cert_details" tag state: Removed the X.509
+/// certificate for SSO.
+///
+/// @param ssoRemoveCertDetails Removed the X.509 certificate for SSO.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSsoRemoveCertDetails:(DBTEAMLOGSsoRemoveCertDetails *)ssoRemoveCertDetails;
+
+///
+/// Initializes union class with tag state of "sso_remove_login_url_details".
+///
+/// Description of the "sso_remove_login_url_details" tag state: Removed the
+/// sign-in URL for SSO.
+///
+/// @param ssoRemoveLoginUrlDetails Removed the sign-in URL for SSO.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSsoRemoveLoginUrlDetails:(DBTEAMLOGSsoRemoveLoginUrlDetails *)ssoRemoveLoginUrlDetails;
+
+///
+/// Initializes union class with tag state of "sso_remove_logout_url_details".
+///
+/// Description of the "sso_remove_logout_url_details" tag state: Removed single
+/// sign-on logout URL.
+///
+/// @param ssoRemoveLogoutUrlDetails Removed single sign-on logout URL.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSsoRemoveLogoutUrlDetails:(DBTEAMLOGSsoRemoveLogoutUrlDetails *)ssoRemoveLogoutUrlDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -5563,6 +5792,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "paper_change_member_link_policy_details".
+///
+/// Description of the "paper_change_member_link_policy_details" tag state:
+/// Changed whether non team members can view Paper documents using a link.
+///
+/// @param paperChangeMemberLinkPolicyDetails Changed whether non team members
+/// can view Paper documents using a link.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperChangeMemberLinkPolicyDetails:
+    (DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)paperChangeMemberLinkPolicyDetails;
+
+///
+/// Initializes union class with tag state of
 /// "paper_change_member_policy_details".
 ///
 /// Description of the "paper_change_member_policy_details" tag state: Changed
@@ -5786,6 +6030,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "team_profile_change_default_language_details".
+///
+/// Description of the "team_profile_change_default_language_details" tag state:
+/// Changed the default language for the team.
+///
+/// @param teamProfileChangeDefaultLanguageDetails Changed the default language
+/// for the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamProfileChangeDefaultLanguageDetails:
+    (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)teamProfileChangeDefaultLanguageDetails;
+
+///
+/// Initializes union class with tag state of
 /// "team_profile_change_logo_details".
 ///
 /// Description of the "team_profile_change_logo_details" tag state: Changed the
@@ -5996,6 +6255,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "paper_admin_export_start_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperAdminExportStartDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_admin_export_start_details".
+///
+- (BOOL)isPaperAdminExportStartDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "paper_enabled_users_group_addition_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -6146,6 +6418,97 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "app_unlink_user_details".
 ///
 - (BOOL)isAppUnlinkUserDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_add_comment_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileAddCommentDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_add_comment_details".
+///
+- (BOOL)isFileAddCommentDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_change_comment_subscription_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileChangeCommentSubscriptionDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_change_comment_subscription_details".
+///
+- (BOOL)isFileChangeCommentSubscriptionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_delete_comment_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileDeleteCommentDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_delete_comment_details".
+///
+- (BOOL)isFileDeleteCommentDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_like_comment_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileLikeCommentDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_like_comment_details".
+///
+- (BOOL)isFileLikeCommentDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_resolve_comment_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileResolveCommentDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_resolve_comment_details".
+///
+- (BOOL)isFileResolveCommentDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_unlike_comment_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileUnlikeCommentDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_unlike_comment_details".
+///
+- (BOOL)isFileUnlikeCommentDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_unresolve_comment_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileUnresolveCommentDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_unresolve_comment_details".
+///
+- (BOOL)isFileUnresolveCommentDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -6849,32 +7212,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "group_description_updated_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `groupDescriptionUpdatedDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "group_description_updated_details".
-///
-- (BOOL)isGroupDescriptionUpdatedDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "group_join_policy_updated_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `groupJoinPolicyUpdatedDetails` property, otherwise a runtime exception will
-/// be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "group_join_policy_updated_details".
-///
-- (BOOL)isGroupJoinPolicyUpdatedDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
 /// "group_moved_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7156,19 +7493,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "paper_content_change_subscription_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `paperContentChangeSubscriptionDetails` property, otherwise a runtime
-/// exception will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "paper_content_change_subscription_details".
-///
-- (BOOL)isPaperContentChangeSubscriptionDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
 /// "paper_content_create_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7283,6 +7607,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "paper_doc_change_sharing_policy_details".
 ///
 - (BOOL)isPaperDocChangeSharingPolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "paper_doc_change_subscription_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperDocChangeSubscriptionDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_doc_change_subscription_details".
+///
+- (BOOL)isPaperDocChangeSubscriptionDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -7442,6 +7779,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "paper_doc_trashed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperDocTrashedDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_doc_trashed_details".
+///
+- (BOOL)isPaperDocTrashedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "paper_doc_unresolve_comment_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7455,6 +7805,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "paper_doc_untrashed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperDocUntrashedDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_doc_untrashed_details".
+///
+- (BOOL)isPaperDocUntrashedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "paper_doc_view_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7465,6 +7828,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "paper_doc_view_details".
 ///
 - (BOOL)isPaperDocViewDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "paper_folder_change_subscription_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperFolderChangeSubscriptionDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_folder_change_subscription_details".
+///
+- (BOOL)isPaperFolderChangeSubscriptionDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -7608,45 +7984,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "collection_share_details".
 ///
 - (BOOL)isCollectionShareDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "file_add_comment_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `fileAddCommentDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "file_add_comment_details".
-///
-- (BOOL)isFileAddCommentDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "file_like_comment_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `fileLikeCommentDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "file_like_comment_details".
-///
-- (BOOL)isFileLikeCommentDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "file_unlike_comment_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `fileUnlikeCommentDetails` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "file_unlike_comment_details".
-///
-- (BOOL)isFileUnlikeCommentDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8449,29 +8786,41 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "remove_logout_url_details".
+/// "sso_add_cert_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `removeLogoutUrlDetails` property, otherwise a runtime exception will be
-/// thrown.
+/// `ssoAddCertDetails` property, otherwise a runtime exception will be thrown.
 ///
 /// @return Whether the union's current tag state has value
-/// "remove_logout_url_details".
+/// "sso_add_cert_details".
 ///
-- (BOOL)isRemoveLogoutUrlDetails;
+- (BOOL)isSsoAddCertDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "remove_sso_url_details".
+/// "sso_add_login_url_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `removeSsoUrlDetails` property, otherwise a runtime exception will be
+/// `ssoAddLoginUrlDetails` property, otherwise a runtime exception will be
 /// thrown.
 ///
 /// @return Whether the union's current tag state has value
-/// "remove_sso_url_details".
+/// "sso_add_login_url_details".
 ///
-- (BOOL)isRemoveSsoUrlDetails;
+- (BOOL)isSsoAddLoginUrlDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "sso_add_logout_url_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ssoAddLogoutUrlDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "sso_add_logout_url_details".
+///
+- (BOOL)isSsoAddLogoutUrlDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8524,6 +8873,45 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "sso_change_saml_identity_mode_details".
 ///
 - (BOOL)isSsoChangeSamlIdentityModeDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "sso_remove_cert_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ssoRemoveCertDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "sso_remove_cert_details".
+///
+- (BOOL)isSsoRemoveCertDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "sso_remove_login_url_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ssoRemoveLoginUrlDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "sso_remove_login_url_details".
+///
+- (BOOL)isSsoRemoveLoginUrlDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "sso_remove_logout_url_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `ssoRemoveLogoutUrlDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "sso_remove_logout_url_details".
+///
+- (BOOL)isSsoRemoveLogoutUrlDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8943,6 +9331,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "paper_change_member_link_policy_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperChangeMemberLinkPolicyDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_change_member_link_policy_details".
+///
+- (BOOL)isPaperChangeMemberLinkPolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "paper_change_member_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -9138,6 +9539,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "team_profile_change_default_language_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamProfileChangeDefaultLanguageDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_profile_change_default_language_details".
+///
+- (BOOL)isTeamProfileChangeDefaultLanguageDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "team_profile_change_logo_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -9305,7 +9719,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEventDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGEventDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGEventDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEventDetails` instances.

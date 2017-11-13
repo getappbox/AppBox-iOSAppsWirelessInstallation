@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkMetadata` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGLinkMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkMetadata` instances.

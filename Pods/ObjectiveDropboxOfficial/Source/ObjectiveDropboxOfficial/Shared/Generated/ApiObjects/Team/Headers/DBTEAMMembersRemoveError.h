@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
   /// The user is the last admin of the team, so it cannot be removed from it.
   DBTEAMMembersRemoveErrorRemoveLastAdmin,
 
-  /// Expected removed user and transfer_dest user to be different
+  /// Expected removed user and transfer_dest user to be different.
   DBTEAMMembersRemoveErrorRemovedAndTransferDestShouldDiffer,
 
   /// Expected removed user and transfer_admin user to be different.
@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 /// "removed_and_transfer_dest_should_differ".
 ///
 /// Description of the "removed_and_transfer_dest_should_differ" tag state:
-/// Expected removed user and transfer_dest user to be different
+/// Expected removed user and transfer_dest user to be different.
 ///
 /// @return An initialized instance.
 ///
@@ -394,7 +394,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRemoveError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersRemoveError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersRemoveError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRemoveError` instances.

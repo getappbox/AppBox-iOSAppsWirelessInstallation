@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESDeleteBatchErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESDeleteBatchError` union can exist.
 typedef NS_ENUM(NSInteger, DBFILESDeleteBatchErrorTag) {
-  /// Deprecated by `tooManyWriteOperations` in `DBFILESDeleteError`.
-  /// `deleteBatch` now provides smaller granularity about which entry has
-  /// failed because of this.
+  /// Use `tooManyWriteOperations` in `DBFILESDeleteError`. `deleteBatch` now
+  /// provides smaller granularity about which entry has failed because of
+  /// this.
   DBFILESDeleteBatchErrorTooManyWriteOperations,
 
   /// (no description).
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchErrorTag) {
 ///
 /// Initializes union class with tag state of "too_many_write_operations".
 ///
-/// Description of the "too_many_write_operations" tag state: Deprecated by
+/// Description of the "too_many_write_operations" tag state: Use
 /// `tooManyWriteOperations` in `DBFILESDeleteError`. `deleteBatch` now provides
 /// smaller granularity about which entry has failed because of this.
 ///
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESDeleteBatchError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESDeleteBatchError *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchError` instances.

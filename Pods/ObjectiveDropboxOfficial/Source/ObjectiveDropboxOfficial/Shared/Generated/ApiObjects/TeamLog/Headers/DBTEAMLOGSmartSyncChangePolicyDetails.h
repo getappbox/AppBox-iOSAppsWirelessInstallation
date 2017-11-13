@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSmartSyncChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSmartSyncChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSmartSyncChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSmartSyncChangePolicyDetails` instances.
