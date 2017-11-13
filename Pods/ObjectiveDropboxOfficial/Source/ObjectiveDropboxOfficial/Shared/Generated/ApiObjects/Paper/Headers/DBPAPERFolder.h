@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBPAPERFolder`
 /// API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERFolder *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERFolder *)instance;
 
 ///
 /// Deserializes `DBPAPERFolder` instances.

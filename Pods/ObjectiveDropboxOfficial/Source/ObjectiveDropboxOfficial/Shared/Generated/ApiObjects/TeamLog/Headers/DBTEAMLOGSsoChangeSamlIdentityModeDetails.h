@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoChangeSamlIdentityModeDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSsoChangeSamlIdentityModeDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoChangeSamlIdentityModeDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoChangeSamlIdentityModeDetails` instances.

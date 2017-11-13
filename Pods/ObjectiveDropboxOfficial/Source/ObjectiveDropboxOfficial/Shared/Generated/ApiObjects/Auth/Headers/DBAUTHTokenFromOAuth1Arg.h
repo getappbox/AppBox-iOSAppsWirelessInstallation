@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHTokenFromOAuth1Arg` API object.
 ///
-+ (NSDictionary *)serialize:(DBAUTHTokenFromOAuth1Arg *)instance;
++ (nullable NSDictionary *)serialize:(DBAUTHTokenFromOAuth1Arg *)instance;
 
 ///
 /// Deserializes `DBAUTHTokenFromOAuth1Arg` instances.

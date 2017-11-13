@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperDocExport` API object.
 ///
-+ (NSDictionary *)serialize:(DBPAPERPaperDocExport *)instance;
++ (nullable NSDictionary *)serialize:(DBPAPERPaperDocExport *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperDocExport` instances.

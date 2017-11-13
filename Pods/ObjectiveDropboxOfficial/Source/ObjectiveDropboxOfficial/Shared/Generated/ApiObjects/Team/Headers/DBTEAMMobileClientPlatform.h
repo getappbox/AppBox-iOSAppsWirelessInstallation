@@ -28,19 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMMobileClientPlatformTag` enum type represents the possible tag
 /// states with which the `DBTEAMMobileClientPlatform` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
-  /// Official Dropbox iPhone client
+  /// Official Dropbox iPhone client.
   DBTEAMMobileClientPlatformIphone,
 
-  /// Official Dropbox iPad client
+  /// Official Dropbox iPad client.
   DBTEAMMobileClientPlatformIpad,
 
-  /// Official Dropbox Android client
+  /// Official Dropbox Android client.
   DBTEAMMobileClientPlatformAndroid,
 
-  /// Official Dropbox Windows phone client
+  /// Official Dropbox Windows phone client.
   DBTEAMMobileClientPlatformWindowsPhone,
 
-  /// Official Dropbox Blackberry client
+  /// Official Dropbox Blackberry client.
   DBTEAMMobileClientPlatformBlackberry,
 
   /// (no description).
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// Initializes union class with tag state of "iphone".
 ///
-/// Description of the "iphone" tag state: Official Dropbox iPhone client
+/// Description of the "iphone" tag state: Official Dropbox iPhone client.
 ///
 /// @return An initialized instance.
 ///
@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// Initializes union class with tag state of "ipad".
 ///
-/// Description of the "ipad" tag state: Official Dropbox iPad client
+/// Description of the "ipad" tag state: Official Dropbox iPad client.
 ///
 /// @return An initialized instance.
 ///
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 ///
 /// Initializes union class with tag state of "android".
 ///
-/// Description of the "android" tag state: Official Dropbox Android client
+/// Description of the "android" tag state: Official Dropbox Android client.
 ///
 /// @return An initialized instance.
 ///
@@ -84,7 +84,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 /// Initializes union class with tag state of "windows_phone".
 ///
 /// Description of the "windows_phone" tag state: Official Dropbox Windows phone
-/// client
+/// client.
 ///
 /// @return An initialized instance.
 ///
@@ -94,7 +94,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 /// Initializes union class with tag state of "blackberry".
 ///
 /// Description of the "blackberry" tag state: Official Dropbox Blackberry
-/// client
+/// client.
 ///
 /// @return An initialized instance.
 ///
@@ -177,7 +177,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMobileClientPlatformTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMobileClientPlatform` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMobileClientPlatform *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMobileClientPlatform *)instance;
 
 ///
 /// Deserializes `DBTEAMMobileClientPlatform` instances.

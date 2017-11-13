@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails` instances.

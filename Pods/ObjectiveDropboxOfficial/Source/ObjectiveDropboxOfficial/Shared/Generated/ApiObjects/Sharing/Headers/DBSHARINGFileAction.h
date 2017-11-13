@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileActionTag) {
   /// Relinquish one's own membership to the file.
   DBSHARINGFileActionRelinquishMembership,
 
-  /// This action is deprecated. Use create_link instead.
+  /// Use create_link instead.
   DBSHARINGFileActionShareLink,
 
   /// Create a shared link to the file.
@@ -139,8 +139,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileActionTag) {
 ///
 /// Initializes union class with tag state of "share_link".
 ///
-/// Description of the "share_link" tag state: This action is deprecated. Use
-/// create_link instead.
+/// Description of the "share_link" tag state: Use create_link instead.
 ///
 /// @return An initialized instance.
 ///
@@ -269,7 +268,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileActionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileAction` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGFileAction *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGFileAction *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileAction` instances.

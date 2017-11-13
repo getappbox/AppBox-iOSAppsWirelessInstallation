@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param teamName Team name.
 /// @param sharingPermission Sharing permission. Might be missing due to
@@ -52,24 +52,24 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                           teamName:(NSString *)teamName
-                  sharingPermission:(nullable NSString *)sharingPermission;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                                teamName:(NSString *)teamName
+                       sharingPermission:(nullable NSString *)sharingPermission;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param teamName Team name.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                           teamName:(NSString *)teamName;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                                teamName:(NSString *)teamName;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfAddGroupDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSfAddGroupDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSfAddGroupDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfAddGroupDetails` instances.

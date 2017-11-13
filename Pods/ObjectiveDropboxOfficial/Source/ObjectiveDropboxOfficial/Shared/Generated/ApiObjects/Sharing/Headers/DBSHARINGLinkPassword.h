@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkPassword` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGLinkPassword *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGLinkPassword *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkPassword` instances.

@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberAction` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGMemberAction *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGMemberAction *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberAction` instances.

@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFilePermanentlyDeleteDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFilePermanentlyDeleteDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFilePermanentlyDeleteDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFilePermanentlyDeleteDetails` instances.

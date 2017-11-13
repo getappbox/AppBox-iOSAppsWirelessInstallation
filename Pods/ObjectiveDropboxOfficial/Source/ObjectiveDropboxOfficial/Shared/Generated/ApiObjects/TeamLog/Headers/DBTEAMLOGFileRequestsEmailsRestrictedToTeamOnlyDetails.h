@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails`

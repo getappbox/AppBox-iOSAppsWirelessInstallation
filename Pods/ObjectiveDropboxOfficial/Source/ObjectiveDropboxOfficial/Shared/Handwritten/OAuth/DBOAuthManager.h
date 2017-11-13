@@ -90,14 +90,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAppKey:(NSString *)appKey;
 
 ///
-/// `DBOAuthManager` full constructor.
+/// `DBOAuthManager` convenience constructor.
 ///
 /// @param appKey The app key from the developer console that identifies this app.
-/// @param host The host of the OAuth web flow.
+/// @param host The host of the OAuth web flow. Leave nil to use default host.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAppKey:(NSString *)appKey host:(NSString *)host;
+- (instancetype)initWithAppKey:(NSString *)appKey host:(nullable NSString *)host;
+
+///
+/// `DBOAuthManager` full constructor.
+///
+/// @param appKey The app key from the developer console that identifies this app.
+/// @param host The host of the OAuth web flow. Leave nil to use default host.
+/// @param redirectURL The redirect url of the OAuth web flow. Default to "db-<appKey>://2/token"
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAppKey:(NSString *)appKey
+                          host:(nullable NSString *)host
+                   redirectURL:(nullable NSString *)redirectURL;
 
 #pragma mark - Auth flow methods
 

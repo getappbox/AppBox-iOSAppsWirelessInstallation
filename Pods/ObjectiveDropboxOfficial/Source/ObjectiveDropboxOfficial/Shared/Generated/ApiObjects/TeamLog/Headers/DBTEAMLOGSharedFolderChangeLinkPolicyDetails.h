@@ -28,8 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param dNewValue New shared folder link policy.
 /// @param sharedFolderType Shared folder type. Might be missing due to
@@ -59,25 +59,25 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue
-                   sharedFolderType:(nullable NSString *)sharedFolderType
-                      previousValue:(nullable DBTEAMLOGSharedFolderLinkPolicy *)previousValue;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue
+                        sharedFolderType:(nullable NSString *)sharedFolderType
+                           previousValue:(nullable DBTEAMLOGSharedFolderLinkPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param dNewValue New shared folder link policy.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderChangeLinkPolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeLinkPolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeLinkPolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderChangeLinkPolicyDetails` instances.

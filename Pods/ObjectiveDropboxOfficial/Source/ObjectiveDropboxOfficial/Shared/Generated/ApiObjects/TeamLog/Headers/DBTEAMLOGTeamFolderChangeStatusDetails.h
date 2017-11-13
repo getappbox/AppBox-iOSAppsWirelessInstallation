@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamFolderChangeStatusDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGTeamFolderChangeStatusDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamFolderChangeStatusDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamFolderChangeStatusDetails` instances.

@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBTEAMNamespaceTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMNamespaceType` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMNamespaceType *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMNamespaceType *)instance;
 
 ///
 /// Deserializes `DBTEAMNamespaceType` instances.

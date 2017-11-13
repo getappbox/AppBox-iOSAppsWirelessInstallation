@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The member unique Id
+/// The member unique Id.
 @property (nonatomic, readonly, copy) NSString *teamMemberId;
 
-/// List of third party applications linked by this team member
+/// List of third party applications linked by this team member.
 @property (nonatomic, readonly) NSArray<DBTEAMApiApp *> *linkedApiApps;
 
 #pragma mark - Constructors
@@ -39,9 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param teamMemberId The member unique Id
+/// @param teamMemberId The member unique Id.
 /// @param linkedApiApps List of third party applications linked by this team
-/// member
+/// member.
 ///
 /// @return An initialized instance.
 ///
@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberLinkedApps` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMemberLinkedApps *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMemberLinkedApps *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberLinkedApps` instances.

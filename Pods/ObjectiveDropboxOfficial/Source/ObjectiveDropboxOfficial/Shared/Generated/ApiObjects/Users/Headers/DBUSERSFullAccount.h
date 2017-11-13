@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSFullAccount` API object.
 ///
-+ (NSDictionary *)serialize:(DBUSERSFullAccount *)instance;
++ (nullable NSDictionary *)serialize:(DBUSERSFullAccount *)instance;
 
 ///
 /// Deserializes `DBUSERSFullAccount` instances.

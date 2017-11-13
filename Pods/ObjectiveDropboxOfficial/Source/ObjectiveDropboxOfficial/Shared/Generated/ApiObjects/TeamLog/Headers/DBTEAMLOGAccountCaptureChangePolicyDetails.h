@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccountCaptureChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGAccountCaptureChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGAccountCaptureChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccountCaptureChangePolicyDetails` instances.

@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGConfidentialityTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGConfidentiality` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGConfidentiality *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGConfidentiality *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGConfidentiality` instances.

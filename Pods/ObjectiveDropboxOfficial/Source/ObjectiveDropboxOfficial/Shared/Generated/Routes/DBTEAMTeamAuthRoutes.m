@@ -11,24 +11,29 @@
 #import "DBASYNCPollEmptyResult.h"
 #import "DBASYNCPollError.h"
 #import "DBASYNCPollResultBase.h"
-#import "DBPROPERTIESGetPropertyTemplateArg.h"
-#import "DBPROPERTIESGetPropertyTemplateResult.h"
-#import "DBPROPERTIESListPropertyTemplateIds.h"
-#import "DBPROPERTIESModifyPropertyTemplateError.h"
-#import "DBPROPERTIESPropertyFieldTemplate.h"
-#import "DBPROPERTIESPropertyGroupTemplate.h"
-#import "DBPROPERTIESPropertyTemplateError.h"
+#import "DBFILEPROPERTIESAddTemplateArg.h"
+#import "DBFILEPROPERTIESAddTemplateResult.h"
+#import "DBFILEPROPERTIESGetTemplateArg.h"
+#import "DBFILEPROPERTIESGetTemplateResult.h"
+#import "DBFILEPROPERTIESListTemplateResult.h"
+#import "DBFILEPROPERTIESModifyTemplateError.h"
+#import "DBFILEPROPERTIESPropertyFieldTemplate.h"
+#import "DBFILEPROPERTIESPropertyGroupTemplate.h"
+#import "DBFILEPROPERTIESTemplateError.h"
+#import "DBFILEPROPERTIESUpdateTemplateArg.h"
+#import "DBFILEPROPERTIESUpdateTemplateResult.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTEAMActiveWebSession.h"
-#import "DBTEAMAddPropertyTemplateArg.h"
-#import "DBTEAMAddPropertyTemplateResult.h"
 #import "DBTEAMAdminTier.h"
 #import "DBTEAMApiApp.h"
 #import "DBTEAMBaseDfbReport.h"
 #import "DBTEAMBaseTeamFolderError.h"
 #import "DBTEAMCOMMONGroupManagementType.h"
 #import "DBTEAMCOMMONGroupSummary.h"
+#import "DBTEAMCustomQuotaError.h"
+#import "DBTEAMCustomQuotaResult.h"
+#import "DBTEAMCustomQuotaUsersArg.h"
 #import "DBTEAMDateRange.h"
 #import "DBTEAMDateRangeError.h"
 #import "DBTEAMDesktopClientSession.h"
@@ -130,6 +135,7 @@
 #import "DBTEAMMobileClientSession.h"
 #import "DBTEAMNamespaceMetadata.h"
 #import "DBTEAMPOLICIESTeamMemberPolicies.h"
+#import "DBTEAMRemoveCustomQuotaResult.h"
 #import "DBTEAMRevokeDesktopClientArg.h"
 #import "DBTEAMRevokeDeviceSessionArg.h"
 #import "DBTEAMRevokeDeviceSessionBatchArg.h"
@@ -144,6 +150,7 @@
 #import "DBTEAMRevokeLinkedAppError.h"
 #import "DBTEAMRevokeLinkedAppStatus.h"
 #import "DBTEAMRouteObjects.h"
+#import "DBTEAMSetCustomQuotaArg.h"
 #import "DBTEAMStorageBucket.h"
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderActivateError.h"
@@ -177,8 +184,8 @@
 #import "DBTEAMTeamNamespacesListResult.h"
 #import "DBTEAMTokenGetAuthenticatedAdminError.h"
 #import "DBTEAMTokenGetAuthenticatedAdminResult.h"
-#import "DBTEAMUpdatePropertyTemplateArg.h"
-#import "DBTEAMUpdatePropertyTemplateResult.h"
+#import "DBTEAMUserCustomQuotaArg.h"
+#import "DBTEAMUserCustomQuotaResult.h"
 #import "DBTEAMUserSelectorArg.h"
 #import "DBTEAMUserSelectorError.h"
 #import "DBTransportClientProtocol.h"
@@ -465,6 +472,24 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)memberSpaceLimitsGetCustomQuota:(NSArray<DBTEAMUserSelectorArg *> *)users {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsGetCustomQuota;
+  DBTEAMCustomQuotaUsersArg *arg = [[DBTEAMCustomQuotaUsersArg alloc] initWithUsers:users];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsRemoveCustomQuota:(NSArray<DBTEAMUserSelectorArg *> *)users {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsRemoveCustomQuota;
+  DBTEAMCustomQuotaUsersArg *arg = [[DBTEAMCustomQuotaUsersArg alloc] initWithUsers:users];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsSetCustomQuota:(NSArray<DBTEAMUserCustomQuotaArg *> *)usersAndQuotas {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsSetCustomQuota;
+  DBTEAMSetCustomQuotaArg *arg = [[DBTEAMSetCustomQuotaArg alloc] initWithUsersAndQuotas:usersAndQuotas];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)membersAdd:(NSArray<DBTEAMMemberAddArg *> *)dNewMembers {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersAdd;
   DBTEAMMembersAddArg *arg = [[DBTEAMMembersAddArg alloc] initWithDNewMembers:dNewMembers];
@@ -611,16 +636,16 @@
 
 - (DBRpcTask *)propertiesTemplateAdd:(NSString *)name
                         description_:(NSString *)description_
-                              fields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> *)fields {
+                              fields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)fields {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMPropertiesTemplateAdd;
-  DBTEAMAddPropertyTemplateArg *arg =
-      [[DBTEAMAddPropertyTemplateArg alloc] initWithName:name description_:description_ fields:fields];
+  DBFILEPROPERTIESAddTemplateArg *arg =
+      [[DBFILEPROPERTIESAddTemplateArg alloc] initWithName:name description_:description_ fields:fields];
   return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)propertiesTemplateGet:(NSString *)templateId {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMPropertiesTemplateGet;
-  DBPROPERTIESGetPropertyTemplateArg *arg = [[DBPROPERTIESGetPropertyTemplateArg alloc] initWithTemplateId:templateId];
+  DBFILEPROPERTIESGetTemplateArg *arg = [[DBFILEPROPERTIESGetTemplateArg alloc] initWithTemplateId:templateId];
   return [self.client requestRpc:route arg:arg];
 }
 
@@ -631,19 +656,19 @@
 
 - (DBRpcTask *)propertiesTemplateUpdate:(NSString *)templateId {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMPropertiesTemplateUpdate;
-  DBTEAMUpdatePropertyTemplateArg *arg = [[DBTEAMUpdatePropertyTemplateArg alloc] initWithTemplateId:templateId];
+  DBFILEPROPERTIESUpdateTemplateArg *arg = [[DBFILEPROPERTIESUpdateTemplateArg alloc] initWithTemplateId:templateId];
   return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)propertiesTemplateUpdate:(NSString *)templateId
                                    name:(NSString *)name
                            description_:(NSString *)description_
-                              addFields:(NSArray<DBPROPERTIESPropertyFieldTemplate *> *)addFields {
+                              addFields:(NSArray<DBFILEPROPERTIESPropertyFieldTemplate *> *)addFields {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMPropertiesTemplateUpdate;
-  DBTEAMUpdatePropertyTemplateArg *arg = [[DBTEAMUpdatePropertyTemplateArg alloc] initWithTemplateId:templateId
-                                                                                                name:name
-                                                                                        description_:description_
-                                                                                           addFields:addFields];
+  DBFILEPROPERTIESUpdateTemplateArg *arg = [[DBFILEPROPERTIESUpdateTemplateArg alloc] initWithTemplateId:templateId
+                                                                                                    name:name
+                                                                                            description_:description_
+                                                                                               addFields:addFields];
   return [self.client requestRpc:route arg:arg];
 }
 

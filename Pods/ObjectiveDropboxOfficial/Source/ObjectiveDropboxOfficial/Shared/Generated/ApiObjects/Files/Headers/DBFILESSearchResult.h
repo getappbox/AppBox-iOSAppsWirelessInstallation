@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESSearchResult *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESSearchResult *)instance;
 
 ///
 /// Deserializes `DBFILESSearchResult` instances.

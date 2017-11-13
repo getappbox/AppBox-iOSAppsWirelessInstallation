@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupUpdateError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupUpdateError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupUpdateError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupUpdateError` instances.

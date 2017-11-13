@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGDeviceApprovalsChangeOverageActionDetails;
-@class DBTEAMLOGDeviceApprovalsRolloutPolicy;
+@class DBTEAMPOLICIESRolloutMethod;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,10 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New over the limits policy. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGDeviceApprovalsRolloutPolicy *dNewValue;
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESRolloutMethod *dNewValue;
 
 /// Previous over the limit policy. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGDeviceApprovalsRolloutPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESRolloutMethod *previousValue;
 
 #pragma mark - Constructors
 
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(nullable DBTEAMLOGDeviceApprovalsRolloutPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGDeviceApprovalsRolloutPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(nullable DBTEAMPOLICIESRolloutMethod *)dNewValue
+                    previousValue:(nullable DBTEAMPOLICIESRolloutMethod *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceApprovalsChangeOverageActionDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGDeviceApprovalsChangeOverageActionDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceApprovalsChangeOverageActionDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceApprovalsChangeOverageActionDetails` instances.

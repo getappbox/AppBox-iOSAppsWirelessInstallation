@@ -168,7 +168,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccessMethodLogInfoSerializer serialize:instance];
 }
 
@@ -281,7 +281,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccessMethodLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -376,7 +376,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccountCaptureAvailabilitySerializer serialize:instance];
 }
 
@@ -465,7 +465,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccountCaptureAvailability *)deserialize:(NSDictionary *)valueDict {
@@ -497,6 +497,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGAccountCaptureAvailability *)dNewValue
                     previousValue:(DBTEAMLOGAccountCaptureAvailability *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -512,7 +513,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccountCaptureChangeAvailabilityDetailsSerializer serialize:instance];
 }
 
@@ -541,7 +542,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -590,7 +591,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGAccountCaptureAvailabilitySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccountCaptureChangeAvailabilityDetails *)deserialize:(NSDictionary *)valueDict {
@@ -620,6 +621,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGAccountCapturePolicy *)dNewValue
                     previousValue:(DBTEAMLOGAccountCapturePolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -635,7 +637,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccountCaptureChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -664,7 +666,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -713,7 +715,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGAccountCapturePolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccountCaptureChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -739,6 +741,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDomainName:(NSString *)domainName {
+  [DBStoneValidators nonnullValidator:nil](domainName);
 
   self = [super init];
   if (self) {
@@ -749,7 +752,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccountCaptureMigrateAccountDetailsSerializer serialize:instance];
 }
 
@@ -816,7 +819,7 @@
 
   jsonDict[@"domain_name"] = valueObj.domainName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccountCaptureMigrateAccountDetails *)deserialize:(NSDictionary *)valueDict {
@@ -906,7 +909,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccountCapturePolicySerializer serialize:instance];
 }
 
@@ -1001,7 +1004,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccountCapturePolicy *)deserialize:(NSDictionary *)valueDict {
@@ -1033,6 +1036,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDomainName:(NSString *)domainName {
+  [DBStoneValidators nonnullValidator:nil](domainName);
 
   self = [super init];
   if (self) {
@@ -1043,7 +1047,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAccountCaptureRelinquishAccountDetailsSerializer serialize:instance];
 }
 
@@ -1110,7 +1114,7 @@
 
   jsonDict[@"domain_name"] = valueObj.domainName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAccountCaptureRelinquishAccountDetails *)deserialize:(NSDictionary *)valueDict {
@@ -1272,7 +1276,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGActorLogInfoSerializer serialize:instance];
 }
 
@@ -1383,7 +1387,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGActorLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -1519,7 +1523,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAdminRoleSerializer serialize:instance];
 }
 
@@ -1626,7 +1630,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAdminRole *)deserialize:(NSDictionary *)valueDict {
@@ -1671,7 +1675,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAllowDownloadDisabledDetailsSerializer serialize:instance];
 }
 
@@ -1731,7 +1735,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAllowDownloadDisabledDetails *)deserialize:(NSDictionary *)valueDict {
@@ -1762,7 +1766,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAllowDownloadEnabledDetailsSerializer serialize:instance];
 }
 
@@ -1822,7 +1826,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAllowDownloadEnabledDetails *)deserialize:(NSDictionary *)valueDict {
@@ -1844,6 +1848,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithRequestId:(NSString *)requestId {
+  [DBStoneValidators nonnullValidator:nil](requestId);
 
   self = [super init];
   if (self) {
@@ -1854,7 +1859,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGApiSessionLogInfoSerializer serialize:instance];
 }
 
@@ -1920,7 +1925,7 @@
 
   jsonDict[@"request_id"] = valueObj.requestId;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGApiSessionLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -1943,6 +1948,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAppInfo:(DBTEAMLOGAppLogInfo *)appInfo {
+  [DBStoneValidators nonnullValidator:nil](appInfo);
 
   self = [super init];
   if (self) {
@@ -1953,7 +1959,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAppLinkTeamDetailsSerializer serialize:instance];
 }
 
@@ -2019,7 +2025,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAppLinkTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -2042,6 +2048,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAppInfo:(DBTEAMLOGAppLogInfo *)appInfo {
+  [DBStoneValidators nonnullValidator:nil](appInfo);
 
   self = [super init];
   if (self) {
@@ -2052,7 +2059,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAppLinkUserDetailsSerializer serialize:instance];
 }
 
@@ -2118,7 +2125,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAppLinkUserDetails *)deserialize:(NSDictionary *)valueDict {
@@ -2158,7 +2165,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAppLogInfoSerializer serialize:instance];
 }
 
@@ -2186,10 +2193,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.appId) {
+  if (self.appId != nil) {
     result = prime * result + [self.appId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
 
@@ -2264,7 +2271,7 @@
     jsonDict[@".tag"] = @"teamLinkedApp";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAppLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -2298,6 +2305,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAppInfo:(DBTEAMLOGAppLogInfo *)appInfo {
+  [DBStoneValidators nonnullValidator:nil](appInfo);
 
   self = [super init];
   if (self) {
@@ -2308,7 +2316,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAppUnlinkTeamDetailsSerializer serialize:instance];
 }
 
@@ -2374,7 +2382,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAppUnlinkTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -2397,6 +2405,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAppInfo:(DBTEAMLOGAppLogInfo *)appInfo {
+  [DBStoneValidators nonnullValidator:nil](appInfo);
 
   self = [super init];
   if (self) {
@@ -2407,7 +2416,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAppUnlinkUserDetailsSerializer serialize:instance];
 }
 
@@ -2473,7 +2482,7 @@
 
   jsonDict[@"app_info"] = [DBTEAMLOGAppLogInfoSerializer serialize:valueObj.appInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAppUnlinkUserDetails *)deserialize:(NSDictionary *)valueDict {
@@ -2622,7 +2631,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGAssetLogInfoSerializer serialize:instance];
 }
 
@@ -2728,7 +2737,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGAssetLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -2772,6 +2781,13 @@
                    serialNumber:(NSString *)serialNumber
                 sha1Fingerprint:(NSString *)sha1Fingerprint
                      commonName:(NSString *)commonName {
+  [DBStoneValidators nonnullValidator:nil](subject);
+  [DBStoneValidators nonnullValidator:nil](issuer);
+  [DBStoneValidators nonnullValidator:nil](issueDate);
+  [DBStoneValidators nonnullValidator:nil](expirationDate);
+  [DBStoneValidators nonnullValidator:nil](serialNumber);
+  [DBStoneValidators nonnullValidator:nil](sha1Fingerprint);
+  [DBStoneValidators nonnullValidator:nil](commonName);
 
   self = [super init];
   if (self) {
@@ -2788,7 +2804,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGCertificateSerializer serialize:instance];
 }
 
@@ -2884,7 +2900,7 @@
   jsonDict[@"sha1_fingerprint"] = valueObj.sha1Fingerprint;
   jsonDict[@"common_name"] = valueObj.commonName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGCertificate *)deserialize:(NSDictionary *)valueDict {
@@ -2918,6 +2934,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAlbumName:(NSString *)albumName {
+  [DBStoneValidators nonnullValidator:nil](albumName);
 
   self = [super init];
   if (self) {
@@ -2928,7 +2945,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGCollectionShareDetailsSerializer serialize:instance];
 }
 
@@ -2994,7 +3011,7 @@
 
   jsonDict[@"album_name"] = valueObj.albumName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGCollectionShareDetails *)deserialize:(NSDictionary *)valueDict {
@@ -3070,7 +3087,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGConfidentialitySerializer serialize:instance];
 }
 
@@ -3159,7 +3176,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGConfidentiality *)deserialize:(NSDictionary *)valueDict {
@@ -3243,7 +3260,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGContentPermanentDeletePolicySerializer serialize:instance];
 }
 
@@ -3332,7 +3349,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGContentPermanentDeletePolicy *)deserialize:(NSDictionary *)valueDict {
@@ -3453,7 +3470,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGContextLogInfoSerializer serialize:instance];
 }
 
@@ -3551,7 +3568,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGContextLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -3594,7 +3611,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGCreateFolderDetailsSerializer serialize:instance];
 }
 
@@ -3654,7 +3671,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGCreateFolderDetails *)deserialize:(NSDictionary *)valueDict {
@@ -3678,6 +3695,8 @@
 
 - (instancetype)initWithPreviousValue:(DBTEAMLOGPlacementRestriction *)previousValue
                             dNewValue:(DBTEAMLOGPlacementRestriction *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -3689,7 +3708,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDataPlacementRestrictionChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -3761,7 +3780,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGPlacementRestrictionSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGPlacementRestrictionSerializer serialize:valueObj.dNewValue];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDataPlacementRestrictionChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -3788,6 +3807,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithPlacementRestriction:(DBTEAMLOGPlacementRestriction *)placementRestriction {
+  [DBStoneValidators nonnullValidator:nil](placementRestriction);
 
   self = [super init];
   if (self) {
@@ -3798,7 +3818,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetailsSerializer serialize:instance];
 }
 
@@ -3866,7 +3886,7 @@
   jsonDict[@"placement_restriction"] =
       [DBTEAMLOGPlacementRestrictionSerializer serialize:valueObj.placementRestriction];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -3907,7 +3927,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSessionLogInfoSerializer serialize:instance];
 }
 
@@ -3935,7 +3955,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sessionId) {
+  if (self.sessionId != nil) {
     result = prime * result + [self.sessionId hash];
   }
 
@@ -4002,7 +4022,7 @@
     jsonDict[@".tag"] = @"mobile";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSessionLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -4049,7 +4069,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDesktopSessionLogInfoSerializer serialize:instance];
 }
 
@@ -4077,7 +4097,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sessionId) {
+  if (self.sessionId != nil) {
     result = prime * result + [self.sessionId hash];
   }
 
@@ -4121,7 +4141,7 @@
     jsonDict[@"session_id"] = valueObj.sessionId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDesktopSessionLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -4160,7 +4180,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetailsSerializer serialize:instance];
 }
 
@@ -4188,10 +4208,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.dNewValue) {
+  if (self.dNewValue != nil) {
     result = prime * result + [self.dNewValue hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -4244,7 +4264,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDeviceApprovalsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -4288,7 +4308,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetailsSerializer serialize:instance];
 }
 
@@ -4316,10 +4336,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.dNewValue) {
+  if (self.dNewValue != nil) {
     result = prime * result + [self.dNewValue hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -4372,7 +4392,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDeviceApprovalsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -4391,7 +4411,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMLOGDeviceApprovalsChangeOverageActionDetails.h"
-#import "DBTEAMLOGDeviceApprovalsRolloutPolicy.h"
+#import "DBTEAMPOLICIESRolloutMethod.h"
 
 #pragma mark - API Object
 
@@ -4399,8 +4419,8 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGDeviceApprovalsRolloutPolicy *)dNewValue
-                    previousValue:(DBTEAMLOGDeviceApprovalsRolloutPolicy *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESRolloutMethod *)dNewValue
+                    previousValue:(DBTEAMPOLICIESRolloutMethod *)previousValue {
 
   self = [super init];
   if (self) {
@@ -4416,7 +4436,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceApprovalsChangeOverageActionDetailsSerializer serialize:instance];
 }
 
@@ -4444,10 +4464,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.dNewValue) {
+  if (self.dNewValue != nil) {
     result = prime * result + [self.dNewValue hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -4494,23 +4514,21 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if (valueObj.dNewValue) {
-    jsonDict[@"new_value"] = [DBTEAMLOGDeviceApprovalsRolloutPolicySerializer serialize:valueObj.dNewValue];
+    jsonDict[@"new_value"] = [DBTEAMPOLICIESRolloutMethodSerializer serialize:valueObj.dNewValue];
   }
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGDeviceApprovalsRolloutPolicySerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMPOLICIESRolloutMethodSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeOverageActionDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGDeviceApprovalsRolloutPolicy *dNewValue =
-      valueDict[@"new_value"] ? [DBTEAMLOGDeviceApprovalsRolloutPolicySerializer deserialize:valueDict[@"new_value"]]
-                              : nil;
-  DBTEAMLOGDeviceApprovalsRolloutPolicy *previousValue =
-      valueDict[@"previous_value"]
-          ? [DBTEAMLOGDeviceApprovalsRolloutPolicySerializer deserialize:valueDict[@"previous_value"]]
-          : nil;
+  DBTEAMPOLICIESRolloutMethod *dNewValue =
+      valueDict[@"new_value"] ? [DBTEAMPOLICIESRolloutMethodSerializer deserialize:valueDict[@"new_value"]] : nil;
+  DBTEAMPOLICIESRolloutMethod *previousValue =
+      valueDict[@"previous_value"] ? [DBTEAMPOLICIESRolloutMethodSerializer deserialize:valueDict[@"previous_value"]]
+                                   : nil;
 
   return [[DBTEAMLOGDeviceApprovalsChangeOverageActionDetails alloc] initWithDNewValue:dNewValue
                                                                          previousValue:previousValue];
@@ -4546,7 +4564,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetailsSerializer serialize:instance];
 }
 
@@ -4574,10 +4592,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.dNewValue) {
+  if (self.dNewValue != nil) {
     result = prime * result + [self.dNewValue hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -4630,7 +4648,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGDeviceUnlinkPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -4711,7 +4729,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceApprovalsPolicySerializer serialize:instance];
 }
 
@@ -4800,7 +4818,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceApprovalsPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -4821,201 +4839,6 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
-#import "DBTEAMLOGDeviceApprovalsRolloutPolicy.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGDeviceApprovalsRolloutPolicy
-
-#pragma mark - Constructors
-
-- (instancetype)initWithRemoveOldest {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveOldest;
-  }
-  return self;
-}
-
-- (instancetype)initWithRemoveAll {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveAll;
-  }
-  return self;
-}
-
-- (instancetype)initWithAddException {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGDeviceApprovalsRolloutPolicyAddException;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGDeviceApprovalsRolloutPolicyOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isRemoveOldest {
-  return _tag == DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveOldest;
-}
-
-- (BOOL)isRemoveAll {
-  return _tag == DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveAll;
-}
-
-- (BOOL)isAddException {
-  return _tag == DBTEAMLOGDeviceApprovalsRolloutPolicyAddException;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGDeviceApprovalsRolloutPolicyOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveOldest:
-    return @"DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveOldest";
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveAll:
-    return @"DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveAll";
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyAddException:
-    return @"DBTEAMLOGDeviceApprovalsRolloutPolicyAddException";
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyOther:
-    return @"DBTEAMLOGDeviceApprovalsRolloutPolicyOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGDeviceApprovalsRolloutPolicySerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGDeviceApprovalsRolloutPolicySerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGDeviceApprovalsRolloutPolicySerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveOldest:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveAll:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyAddException:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyOther:
-    result = prime * result + [[self tagName] hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToDeviceApprovalsRolloutPolicy:other];
-}
-
-- (BOOL)isEqualToDeviceApprovalsRolloutPolicy:(DBTEAMLOGDeviceApprovalsRolloutPolicy *)aDeviceApprovalsRolloutPolicy {
-  if (self == aDeviceApprovalsRolloutPolicy) {
-    return YES;
-  }
-  if (self.tag != aDeviceApprovalsRolloutPolicy.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveOldest:
-    return [[self tagName] isEqual:[aDeviceApprovalsRolloutPolicy tagName]];
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyRemoveAll:
-    return [[self tagName] isEqual:[aDeviceApprovalsRolloutPolicy tagName]];
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyAddException:
-    return [[self tagName] isEqual:[aDeviceApprovalsRolloutPolicy tagName]];
-  case DBTEAMLOGDeviceApprovalsRolloutPolicyOther:
-    return [[self tagName] isEqual:[aDeviceApprovalsRolloutPolicy tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGDeviceApprovalsRolloutPolicySerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGDeviceApprovalsRolloutPolicy *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isRemoveOldest]) {
-    jsonDict[@".tag"] = @"remove_oldest";
-  } else if ([valueObj isRemoveAll]) {
-    jsonDict[@".tag"] = @"remove_all";
-  } else if ([valueObj isAddException]) {
-    jsonDict[@".tag"] = @"add_exception";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGDeviceApprovalsRolloutPolicy *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"remove_oldest"]) {
-    return [[DBTEAMLOGDeviceApprovalsRolloutPolicy alloc] initWithRemoveOldest];
-  } else if ([tag isEqualToString:@"remove_all"]) {
-    return [[DBTEAMLOGDeviceApprovalsRolloutPolicy alloc] initWithRemoveAll];
-  } else if ([tag isEqualToString:@"add_exception"]) {
-    return [[DBTEAMLOGDeviceApprovalsRolloutPolicy alloc] initWithAddException];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGDeviceApprovalsRolloutPolicy alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGDeviceApprovalsRolloutPolicy alloc] initWithOther];
-  }
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
 #import "DBTEAMLOGDeviceChangeIpDesktopDetails.h"
 #import "DBTEAMLOGDeviceLogInfo.h"
 
@@ -5026,6 +4849,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo {
+  [DBStoneValidators nonnullValidator:nil](deviceInfo);
 
   self = [super init];
   if (self) {
@@ -5036,7 +4860,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer serialize:instance];
 }
 
@@ -5102,7 +4926,7 @@
 
   jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceChangeIpDesktopDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5125,6 +4949,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo {
+  [DBStoneValidators nonnullValidator:nil](deviceInfo);
 
   self = [super init];
   if (self) {
@@ -5135,7 +4960,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceChangeIpMobileDetailsSerializer serialize:instance];
 }
 
@@ -5201,7 +5026,7 @@
 
   jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceChangeIpMobileDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5224,6 +5049,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithUserAgent:(NSString *)userAgent deviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo {
+  [DBStoneValidators nonnullValidator:nil](userAgent);
 
   self = [super init];
   if (self) {
@@ -5239,7 +5065,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceChangeIpWebDetailsSerializer serialize:instance];
 }
 
@@ -5268,7 +5094,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.userAgent hash];
-  if (self.deviceInfo) {
+  if (self.deviceInfo != nil) {
     result = prime * result + [self.deviceInfo hash];
   }
 
@@ -5316,7 +5142,7 @@
     jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceChangeIpWebDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5341,6 +5167,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo numFailures:(NSNumber *)numFailures {
+  [DBStoneValidators nonnullValidator:nil](deviceInfo);
+  [DBStoneValidators nonnullValidator:nil](numFailures);
 
   self = [super init];
   if (self) {
@@ -5352,7 +5180,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceDeleteOnUnlinkFailDetailsSerializer serialize:instance];
 }
 
@@ -5424,7 +5252,7 @@
   jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
   jsonDict[@"num_failures"] = valueObj.numFailures;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceDeleteOnUnlinkFailDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5448,6 +5276,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo {
+  [DBStoneValidators nonnullValidator:nil](deviceInfo);
 
   self = [super init];
   if (self) {
@@ -5458,7 +5287,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceDeleteOnUnlinkSuccessDetailsSerializer serialize:instance];
 }
 
@@ -5525,7 +5354,7 @@
 
   jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceDeleteOnUnlinkSuccessDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5549,6 +5378,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceType:(DBTEAMLOGDeviceType *)deviceType deviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo {
+  [DBStoneValidators nonnullValidator:nil](deviceType);
 
   self = [super init];
   if (self) {
@@ -5564,7 +5394,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceLinkFailDetailsSerializer serialize:instance];
 }
 
@@ -5593,7 +5423,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.deviceType hash];
-  if (self.deviceInfo) {
+  if (self.deviceInfo != nil) {
     result = prime * result + [self.deviceInfo hash];
   }
 
@@ -5641,7 +5471,7 @@
     jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceLinkFailDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5666,6 +5496,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo {
+  [DBStoneValidators nonnullValidator:nil](deviceInfo);
 
   self = [super init];
   if (self) {
@@ -5676,7 +5507,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceLinkSuccessDetailsSerializer serialize:instance];
 }
 
@@ -5742,7 +5573,7 @@
 
   jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceLinkSuccessDetails *)deserialize:(NSDictionary *)valueDict {
@@ -5773,10 +5604,6 @@
                        ipAddress:(NSString *)ipAddress
                     lastActivity:(NSString *)lastActivity
                       appVersion:(NSString *)appVersion {
-  [DBStoneValidators
-   nullableValidator:[DBStoneValidators stringValidator:nil
-                                              maxLength:nil
-                                                pattern:@"^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$"]](ipAddress);
 
   self = [super init];
   if (self) {
@@ -5809,7 +5636,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceLogInfoSerializer serialize:instance];
 }
 
@@ -5837,34 +5664,34 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.deviceId) {
+  if (self.deviceId != nil) {
     result = prime * result + [self.deviceId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.isEmmManaged) {
+  if (self.isEmmManaged != nil) {
     result = prime * result + [self.isEmmManaged hash];
   }
-  if (self.platform) {
+  if (self.platform != nil) {
     result = prime * result + [self.platform hash];
   }
-  if (self.macAddress) {
+  if (self.macAddress != nil) {
     result = prime * result + [self.macAddress hash];
   }
-  if (self.osVersion) {
+  if (self.osVersion != nil) {
     result = prime * result + [self.osVersion hash];
   }
-  if (self.deviceType) {
+  if (self.deviceType != nil) {
     result = prime * result + [self.deviceType hash];
   }
-  if (self.ipAddress) {
+  if (self.ipAddress != nil) {
     result = prime * result + [self.ipAddress hash];
   }
-  if (self.lastActivity) {
+  if (self.lastActivity != nil) {
     result = prime * result + [self.lastActivity hash];
   }
-  if (self.appVersion) {
+  if (self.appVersion != nil) {
     result = prime * result + [self.appVersion hash];
   }
 
@@ -5980,7 +5807,7 @@
     jsonDict[@"app_version"] = valueObj.appVersion;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -6029,7 +5856,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceManagementDisabledDetailsSerializer serialize:instance];
 }
 
@@ -6090,7 +5917,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceManagementDisabledDetails *)deserialize:(NSDictionary *)valueDict {
@@ -6121,7 +5948,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceManagementEnabledDetailsSerializer serialize:instance];
 }
 
@@ -6182,7 +6009,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceManagementEnabledDetails *)deserialize:(NSDictionary *)valueDict {
@@ -6258,7 +6085,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceTypeSerializer serialize:instance];
 }
 
@@ -6347,7 +6174,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceType *)deserialize:(NSDictionary *)valueDict {
@@ -6378,6 +6205,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo deleteData:(NSNumber *)deleteData {
+  [DBStoneValidators nonnullValidator:nil](deviceInfo);
+  [DBStoneValidators nonnullValidator:nil](deleteData);
 
   self = [super init];
   if (self) {
@@ -6389,7 +6218,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceUnlinkDetailsSerializer serialize:instance];
 }
 
@@ -6460,7 +6289,7 @@
   jsonDict[@"device_info"] = [DBTEAMLOGDeviceLogInfoSerializer serialize:valueObj.deviceInfo];
   jsonDict[@"delete_data"] = valueObj.deleteData;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceUnlinkDetails *)deserialize:(NSDictionary *)valueDict {
@@ -6537,7 +6366,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDeviceUnlinkPolicySerializer serialize:instance];
 }
 
@@ -6626,7 +6455,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDeviceUnlinkPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -6665,7 +6494,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDisabledDomainInvitesDetailsSerializer serialize:instance];
 }
 
@@ -6725,7 +6554,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDisabledDomainInvitesDetails *)deserialize:(NSDictionary *)valueDict {
@@ -6756,7 +6585,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainInvitesApproveRequestToJoinTeamDetailsSerializer serialize:instance];
 }
 
@@ -6817,7 +6646,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainInvitesApproveRequestToJoinTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -6848,7 +6677,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamDetailsSerializer serialize:instance];
 }
 
@@ -6909,7 +6738,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -6931,7 +6760,11 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDomainName:(NSArray<NSString *> *)domainName numRecipients:(NSNumber *)numRecipients {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](domainName);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](domainName);
+  [DBStoneValidators nonnullValidator:nil](numRecipients);
 
   self = [super init];
   if (self) {
@@ -6943,7 +6776,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainInvitesEmailExistingUsersDetailsSerializer serialize:instance];
 }
 
@@ -7018,7 +6851,7 @@
                                                 }];
   jsonDict[@"num_recipients"] = valueObj.numRecipients;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainInvitesEmailExistingUsersDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7054,7 +6887,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainInvitesRequestToJoinTeamDetailsSerializer serialize:instance];
 }
 
@@ -7115,7 +6948,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainInvitesRequestToJoinTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7146,7 +6979,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoDetailsSerializer serialize:instance];
 }
 
@@ -7207,7 +7040,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7238,7 +7071,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesDetailsSerializer serialize:instance];
 }
 
@@ -7299,7 +7132,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7321,6 +7154,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDomainName:(NSString *)domainName verificationMethod:(NSString *)verificationMethod {
+  [DBStoneValidators nonnullValidator:nil](domainName);
 
   self = [super init];
   if (self) {
@@ -7336,7 +7170,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainVerificationAddDomainFailDetailsSerializer serialize:instance];
 }
 
@@ -7365,7 +7199,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.domainName hash];
-  if (self.verificationMethod) {
+  if (self.verificationMethod != nil) {
     result = prime * result + [self.verificationMethod hash];
   }
 
@@ -7414,7 +7248,7 @@
     jsonDict[@"verification_method"] = valueObj.verificationMethod;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainVerificationAddDomainFailDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7439,7 +7273,10 @@
 
 - (instancetype)initWithDomainNames:(NSArray<NSString *> *)domainNames
                  verificationMethod:(NSString *)verificationMethod {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](domainNames);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](domainNames);
 
   self = [super init];
   if (self) {
@@ -7455,7 +7292,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainVerificationAddDomainSuccessDetailsSerializer serialize:instance];
 }
 
@@ -7484,7 +7321,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.domainNames hash];
-  if (self.verificationMethod) {
+  if (self.verificationMethod != nil) {
     result = prime * result + [self.verificationMethod hash];
   }
 
@@ -7536,7 +7373,7 @@
     jsonDict[@"verification_method"] = valueObj.verificationMethod;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainVerificationAddDomainSuccessDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7562,25 +7399,22 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDomainNames:(NSArray<NSString *> *)domainNames
-                 verificationMethod:(NSString *)verificationMethod {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](domainNames);
+- (instancetype)initWithDomainNames:(NSArray<NSString *> *)domainNames {
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](domainNames);
 
   self = [super init];
   if (self) {
     _domainNames = domainNames;
-    _verificationMethod = verificationMethod;
   }
   return self;
 }
 
-- (instancetype)initWithDomainNames:(NSArray<NSString *> *)domainNames {
-  return [self initWithDomainNames:domainNames verificationMethod:nil];
-}
-
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDomainVerificationRemoveDomainDetailsSerializer serialize:instance];
 }
 
@@ -7609,9 +7443,6 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.domainNames hash];
-  if (self.verificationMethod) {
-    result = prime * result + [self.verificationMethod hash];
-  }
 
   return prime * result;
 }
@@ -7636,11 +7467,6 @@
   if (![self.domainNames isEqual:aDomainVerificationRemoveDomainDetails.domainNames]) {
     return NO;
   }
-  if (self.verificationMethod) {
-    if (![self.verificationMethod isEqual:aDomainVerificationRemoveDomainDetails.verificationMethod]) {
-      return NO;
-    }
-  }
   return YES;
 }
 
@@ -7657,11 +7483,8 @@
                                                  withBlock:^id(id elem0) {
                                                    return elem0;
                                                  }];
-  if (valueObj.verificationMethod) {
-    jsonDict[@"verification_method"] = valueObj.verificationMethod;
-  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDomainVerificationRemoveDomainDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7669,10 +7492,8 @@
                                                           withBlock:^id(id elem0) {
                                                             return elem0;
                                                           }];
-  NSString *verificationMethod = valueDict[@"verification_method"] ?: nil;
 
-  return [[DBTEAMLOGDomainVerificationRemoveDomainDetails alloc] initWithDomainNames:domainNames
-                                                                  verificationMethod:verificationMethod];
+  return [[DBTEAMLOGDomainVerificationRemoveDomainDetails alloc] initWithDomainNames:domainNames];
 }
 
 @end
@@ -7689,6 +7510,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithUnit:(DBTEAMLOGTimeUnit *)unit amount:(NSNumber *)amount {
+  [DBStoneValidators nonnullValidator:nil](unit);
+  [DBStoneValidators nonnullValidator:nil](amount);
 
   self = [super init];
   if (self) {
@@ -7700,7 +7523,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGDurationLogInfoSerializer serialize:instance];
 }
 
@@ -7771,7 +7594,7 @@
   jsonDict[@"unit"] = [DBTEAMLOGTimeUnitSerializer serialize:valueObj.unit];
   jsonDict[@"amount"] = valueObj.amount;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGDurationLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -7803,7 +7626,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmAddExceptionDetailsSerializer serialize:instance];
 }
 
@@ -7863,7 +7686,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmAddExceptionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -7877,7 +7700,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMLOGEmmChangePolicyDetails.h"
-#import "DBTEAMLOGEmmPolicy.h"
+#import "DBTEAMPOLICIESEmmState.h"
 
 #pragma mark - API Object
 
@@ -7885,7 +7708,9 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGEmmPolicy *)dNewValue previousValue:(DBTEAMLOGEmmPolicy *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESEmmState *)dNewValue
+                    previousValue:(DBTEAMPOLICIESEmmState *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -7895,13 +7720,13 @@
   return self;
 }
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGEmmPolicy *)dNewValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESEmmState *)dNewValue {
   return [self initWithDNewValue:dNewValue previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -7930,7 +7755,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -7973,18 +7798,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGEmmChangePolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGEmmPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"new_value"] = [DBTEAMPOLICIESEmmStateSerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGEmmPolicySerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMPOLICIESEmmStateSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGEmmPolicy *dNewValue = [DBTEAMLOGEmmPolicySerializer deserialize:valueDict[@"new_value"]];
-  DBTEAMLOGEmmPolicy *previousValue =
-      valueDict[@"previous_value"] ? [DBTEAMLOGEmmPolicySerializer deserialize:valueDict[@"previous_value"]] : nil;
+  DBTEAMPOLICIESEmmState *dNewValue = [DBTEAMPOLICIESEmmStateSerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMPOLICIESEmmState *previousValue =
+      valueDict[@"previous_value"] ? [DBTEAMPOLICIESEmmStateSerializer deserialize:valueDict[@"previous_value"]] : nil;
 
   return [[DBTEAMLOGEmmChangePolicyDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
 }
@@ -8011,7 +7836,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmCreateExceptionsReportDetailsSerializer serialize:instance];
 }
 
@@ -8072,7 +7897,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmCreateExceptionsReportDetails *)deserialize:(NSDictionary *)valueDict {
@@ -8103,7 +7928,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmCreateUsageReportDetailsSerializer serialize:instance];
 }
 
@@ -8163,7 +7988,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmCreateUsageReportDetails *)deserialize:(NSDictionary *)valueDict {
@@ -8194,7 +8019,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmLoginSuccessDetailsSerializer serialize:instance];
 }
 
@@ -8254,208 +8079,13 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmLoginSuccessDetails *)deserialize:(NSDictionary *)valueDict {
 #pragma unused(valueDict)
 
   return [[DBTEAMLOGEmmLoginSuccessDetails alloc] initDefault];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGEmmPolicy.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGEmmPolicy
-
-#pragma mark - Constructors
-
-- (instancetype)initWithDisabled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEmmPolicyDisabled;
-  }
-  return self;
-}
-
-- (instancetype)initWithOptional {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEmmPolicyOptional;
-  }
-  return self;
-}
-
-- (instancetype)initWithRequired {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEmmPolicyRequired;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEmmPolicyOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isDisabled {
-  return _tag == DBTEAMLOGEmmPolicyDisabled;
-}
-
-- (BOOL)isOptional {
-  return _tag == DBTEAMLOGEmmPolicyOptional;
-}
-
-- (BOOL)isRequired {
-  return _tag == DBTEAMLOGEmmPolicyRequired;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGEmmPolicyOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGEmmPolicyDisabled:
-    return @"DBTEAMLOGEmmPolicyDisabled";
-  case DBTEAMLOGEmmPolicyOptional:
-    return @"DBTEAMLOGEmmPolicyOptional";
-  case DBTEAMLOGEmmPolicyRequired:
-    return @"DBTEAMLOGEmmPolicyRequired";
-  case DBTEAMLOGEmmPolicyOther:
-    return @"DBTEAMLOGEmmPolicyOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGEmmPolicySerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGEmmPolicySerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGEmmPolicySerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBTEAMLOGEmmPolicyDisabled:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEmmPolicyOptional:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEmmPolicyRequired:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEmmPolicyOther:
-    result = prime * result + [[self tagName] hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToEmmPolicy:other];
-}
-
-- (BOOL)isEqualToEmmPolicy:(DBTEAMLOGEmmPolicy *)anEmmPolicy {
-  if (self == anEmmPolicy) {
-    return YES;
-  }
-  if (self.tag != anEmmPolicy.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGEmmPolicyDisabled:
-    return [[self tagName] isEqual:[anEmmPolicy tagName]];
-  case DBTEAMLOGEmmPolicyOptional:
-    return [[self tagName] isEqual:[anEmmPolicy tagName]];
-  case DBTEAMLOGEmmPolicyRequired:
-    return [[self tagName] isEqual:[anEmmPolicy tagName]];
-  case DBTEAMLOGEmmPolicyOther:
-    return [[self tagName] isEqual:[anEmmPolicy tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGEmmPolicySerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGEmmPolicy *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isDisabled]) {
-    jsonDict[@".tag"] = @"disabled";
-  } else if ([valueObj isOptional]) {
-    jsonDict[@".tag"] = @"optional";
-  } else if ([valueObj isRequired]) {
-    jsonDict[@".tag"] = @"required";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGEmmPolicy *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"disabled"]) {
-    return [[DBTEAMLOGEmmPolicy alloc] initWithDisabled];
-  } else if ([tag isEqualToString:@"optional"]) {
-    return [[DBTEAMLOGEmmPolicy alloc] initWithOptional];
-  } else if ([tag isEqualToString:@"required"]) {
-    return [[DBTEAMLOGEmmPolicy alloc] initWithRequired];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGEmmPolicy alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGEmmPolicy alloc] initWithOther];
-  }
 }
 
 @end
@@ -8480,7 +8110,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer serialize:instance];
 }
 
@@ -8540,7 +8170,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmRefreshAuthTokenDetails *)deserialize:(NSDictionary *)valueDict {
@@ -8571,7 +8201,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEmmRemoveExceptionDetailsSerializer serialize:instance];
 }
 
@@ -8631,7 +8261,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEmmRemoveExceptionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -8662,7 +8292,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEnabledDomainInvitesDetailsSerializer serialize:instance];
 }
 
@@ -8722,7 +8352,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEnabledDomainInvitesDetails *)deserialize:(NSDictionary *)valueDict {
@@ -9204,7 +8834,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEventCategorySerializer serialize:instance];
 }
 
@@ -9467,7 +9097,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEventCategory *)deserialize:(NSDictionary *)valueDict {
@@ -9596,8 +9226,10 @@
 #import "DBTEAMLOGExtendedVersionHistoryChangePolicyDetails.h"
 #import "DBTEAMLOGFileAddCommentDetails.h"
 #import "DBTEAMLOGFileAddDetails.h"
+#import "DBTEAMLOGFileChangeCommentSubscriptionDetails.h"
 #import "DBTEAMLOGFileCommentsChangePolicyDetails.h"
 #import "DBTEAMLOGFileCopyDetails.h"
+#import "DBTEAMLOGFileDeleteCommentDetails.h"
 #import "DBTEAMLOGFileDeleteDetails.h"
 #import "DBTEAMLOGFileDownloadDetails.h"
 #import "DBTEAMLOGFileEditDetails.h"
@@ -9618,11 +9250,13 @@
 #import "DBTEAMLOGFileRequestsChangePolicyDetails.h"
 #import "DBTEAMLOGFileRequestsEmailsEnabledDetails.h"
 #import "DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails.h"
+#import "DBTEAMLOGFileResolveCommentDetails.h"
 #import "DBTEAMLOGFileRestoreDetails.h"
 #import "DBTEAMLOGFileRevertDetails.h"
 #import "DBTEAMLOGFileRollbackChangesDetails.h"
 #import "DBTEAMLOGFileSaveCopyReferenceDetails.h"
 #import "DBTEAMLOGFileUnlikeCommentDetails.h"
+#import "DBTEAMLOGFileUnresolveCommentDetails.h"
 #import "DBTEAMLOGGoogleSsoChangePolicyDetails.h"
 #import "DBTEAMLOGGroupAddExternalIdDetails.h"
 #import "DBTEAMLOGGroupAddMemberDetails.h"
@@ -9631,8 +9265,6 @@
 #import "DBTEAMLOGGroupChangeMemberRoleDetails.h"
 #import "DBTEAMLOGGroupCreateDetails.h"
 #import "DBTEAMLOGGroupDeleteDetails.h"
-#import "DBTEAMLOGGroupDescriptionUpdatedDetails.h"
-#import "DBTEAMLOGGroupJoinPolicyUpdatedDetails.h"
 #import "DBTEAMLOGGroupMovedDetails.h"
 #import "DBTEAMLOGGroupRemoveExternalIdDetails.h"
 #import "DBTEAMLOGGroupRemoveMemberDetails.h"
@@ -9663,13 +9295,14 @@
 #import "DBTEAMLOGNoteShareReceiveDetails.h"
 #import "DBTEAMLOGNoteSharedDetails.h"
 #import "DBTEAMLOGOpenNoteSharedDetails.h"
+#import "DBTEAMLOGPaperAdminExportStartDetails.h"
 #import "DBTEAMLOGPaperChangeDeploymentPolicyDetails.h"
+#import "DBTEAMLOGPaperChangeMemberLinkPolicyDetails.h"
 #import "DBTEAMLOGPaperChangeMemberPolicyDetails.h"
 #import "DBTEAMLOGPaperChangePolicyDetails.h"
 #import "DBTEAMLOGPaperContentAddMemberDetails.h"
 #import "DBTEAMLOGPaperContentAddToFolderDetails.h"
 #import "DBTEAMLOGPaperContentArchiveDetails.h"
-#import "DBTEAMLOGPaperContentChangeSubscriptionDetails.h"
 #import "DBTEAMLOGPaperContentCreateDetails.h"
 #import "DBTEAMLOGPaperContentPermanentlyDeleteDetails.h"
 #import "DBTEAMLOGPaperContentRemoveFromFolderDetails.h"
@@ -9679,6 +9312,7 @@
 #import "DBTEAMLOGPaperDocAddCommentDetails.h"
 #import "DBTEAMLOGPaperDocChangeMemberRoleDetails.h"
 #import "DBTEAMLOGPaperDocChangeSharingPolicyDetails.h"
+#import "DBTEAMLOGPaperDocChangeSubscriptionDetails.h"
 #import "DBTEAMLOGPaperDocDeleteCommentDetails.h"
 #import "DBTEAMLOGPaperDocDeletedDetails.h"
 #import "DBTEAMLOGPaperDocDownloadDetails.h"
@@ -9691,13 +9325,16 @@
 #import "DBTEAMLOGPaperDocRevertDetails.h"
 #import "DBTEAMLOGPaperDocSlackShareDetails.h"
 #import "DBTEAMLOGPaperDocTeamInviteDetails.h"
+#import "DBTEAMLOGPaperDocTrashedDetails.h"
 #import "DBTEAMLOGPaperDocUnresolveCommentDetails.h"
+#import "DBTEAMLOGPaperDocUntrashedDetails.h"
 #import "DBTEAMLOGPaperDocViewDetails.h"
 #import "DBTEAMLOGPaperEnabledUsersGroupAdditionDetails.h"
 #import "DBTEAMLOGPaperEnabledUsersGroupRemovalDetails.h"
 #import "DBTEAMLOGPaperExternalViewAllowDetails.h"
 #import "DBTEAMLOGPaperExternalViewDefaultTeamDetails.h"
 #import "DBTEAMLOGPaperExternalViewForbidDetails.h"
+#import "DBTEAMLOGPaperFolderChangeSubscriptionDetails.h"
 #import "DBTEAMLOGPaperFolderDeletedDetails.h"
 #import "DBTEAMLOGPaperFolderFollowedDetails.h"
 #import "DBTEAMLOGPaperFolderTeamInviteDetails.h"
@@ -9707,8 +9344,6 @@
 #import "DBTEAMLOGPasswordResetAllDetails.h"
 #import "DBTEAMLOGPasswordResetDetails.h"
 #import "DBTEAMLOGPermanentDeleteChangePolicyDetails.h"
-#import "DBTEAMLOGRemoveLogoutUrlDetails.h"
-#import "DBTEAMLOGRemoveSsoUrlDetails.h"
 #import "DBTEAMLOGResellerSupportSessionEndDetails.h"
 #import "DBTEAMLOGResellerSupportSessionStartDetails.h"
 #import "DBTEAMLOGSfAddGroupDetails.h"
@@ -9777,12 +9412,18 @@
 #import "DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails.h"
 #import "DBTEAMLOGSmartSyncNotOptOutDetails.h"
 #import "DBTEAMLOGSmartSyncOptOutDetails.h"
+#import "DBTEAMLOGSsoAddCertDetails.h"
+#import "DBTEAMLOGSsoAddLoginUrlDetails.h"
+#import "DBTEAMLOGSsoAddLogoutUrlDetails.h"
 #import "DBTEAMLOGSsoChangeCertDetails.h"
 #import "DBTEAMLOGSsoChangeLoginUrlDetails.h"
 #import "DBTEAMLOGSsoChangeLogoutUrlDetails.h"
 #import "DBTEAMLOGSsoChangePolicyDetails.h"
 #import "DBTEAMLOGSsoChangeSamlIdentityModeDetails.h"
 #import "DBTEAMLOGSsoLoginFailDetails.h"
+#import "DBTEAMLOGSsoRemoveCertDetails.h"
+#import "DBTEAMLOGSsoRemoveLoginUrlDetails.h"
+#import "DBTEAMLOGSsoRemoveLogoutUrlDetails.h"
 #import "DBTEAMLOGTeamActivityCreateReportDetails.h"
 #import "DBTEAMLOGTeamFolderChangeStatusDetails.h"
 #import "DBTEAMLOGTeamFolderCreateDetails.h"
@@ -9792,6 +9433,7 @@
 #import "DBTEAMLOGTeamMergeFromDetails.h"
 #import "DBTEAMLOGTeamMergeToDetails.h"
 #import "DBTEAMLOGTeamProfileAddLogoDetails.h"
+#import "DBTEAMLOGTeamProfileChangeDefaultLanguageDetails.h"
 #import "DBTEAMLOGTeamProfileChangeLogoDetails.h"
 #import "DBTEAMLOGTeamProfileChangeNameDetails.h"
 #import "DBTEAMLOGTeamProfileRemoveLogoDetails.h"
@@ -9815,6 +9457,7 @@
 @synthesize memberPermanentlyDeleteAccountContentsDetails = _memberPermanentlyDeleteAccountContentsDetails;
 @synthesize memberSpaceLimitsChangeStatusDetails = _memberSpaceLimitsChangeStatusDetails;
 @synthesize memberTransferAccountContentsDetails = _memberTransferAccountContentsDetails;
+@synthesize paperAdminExportStartDetails = _paperAdminExportStartDetails;
 @synthesize paperEnabledUsersGroupAdditionDetails = _paperEnabledUsersGroupAdditionDetails;
 @synthesize paperEnabledUsersGroupRemovalDetails = _paperEnabledUsersGroupRemovalDetails;
 @synthesize paperExternalViewAllowDetails = _paperExternalViewAllowDetails;
@@ -9827,6 +9470,13 @@
 @synthesize appLinkUserDetails = _appLinkUserDetails;
 @synthesize appUnlinkTeamDetails = _appUnlinkTeamDetails;
 @synthesize appUnlinkUserDetails = _appUnlinkUserDetails;
+@synthesize fileAddCommentDetails = _fileAddCommentDetails;
+@synthesize fileChangeCommentSubscriptionDetails = _fileChangeCommentSubscriptionDetails;
+@synthesize fileDeleteCommentDetails = _fileDeleteCommentDetails;
+@synthesize fileLikeCommentDetails = _fileLikeCommentDetails;
+@synthesize fileResolveCommentDetails = _fileResolveCommentDetails;
+@synthesize fileUnlikeCommentDetails = _fileUnlikeCommentDetails;
+@synthesize fileUnresolveCommentDetails = _fileUnresolveCommentDetails;
 @synthesize deviceChangeIpDesktopDetails = _deviceChangeIpDesktopDetails;
 @synthesize deviceChangeIpMobileDetails = _deviceChangeIpMobileDetails;
 @synthesize deviceChangeIpWebDetails = _deviceChangeIpWebDetails;
@@ -9882,8 +9532,6 @@
 @synthesize groupChangeMemberRoleDetails = _groupChangeMemberRoleDetails;
 @synthesize groupCreateDetails = _groupCreateDetails;
 @synthesize groupDeleteDetails = _groupDeleteDetails;
-@synthesize groupDescriptionUpdatedDetails = _groupDescriptionUpdatedDetails;
-@synthesize groupJoinPolicyUpdatedDetails = _groupJoinPolicyUpdatedDetails;
 @synthesize groupMovedDetails = _groupMovedDetails;
 @synthesize groupRemoveExternalIdDetails = _groupRemoveExternalIdDetails;
 @synthesize groupRemoveMemberDetails = _groupRemoveMemberDetails;
@@ -9906,7 +9554,6 @@
 @synthesize paperContentAddMemberDetails = _paperContentAddMemberDetails;
 @synthesize paperContentAddToFolderDetails = _paperContentAddToFolderDetails;
 @synthesize paperContentArchiveDetails = _paperContentArchiveDetails;
-@synthesize paperContentChangeSubscriptionDetails = _paperContentChangeSubscriptionDetails;
 @synthesize paperContentCreateDetails = _paperContentCreateDetails;
 @synthesize paperContentPermanentlyDeleteDetails = _paperContentPermanentlyDeleteDetails;
 @synthesize paperContentRemoveFromFolderDetails = _paperContentRemoveFromFolderDetails;
@@ -9916,6 +9563,7 @@
 @synthesize paperDocAddCommentDetails = _paperDocAddCommentDetails;
 @synthesize paperDocChangeMemberRoleDetails = _paperDocChangeMemberRoleDetails;
 @synthesize paperDocChangeSharingPolicyDetails = _paperDocChangeSharingPolicyDetails;
+@synthesize paperDocChangeSubscriptionDetails = _paperDocChangeSubscriptionDetails;
 @synthesize paperDocDeletedDetails = _paperDocDeletedDetails;
 @synthesize paperDocDeleteCommentDetails = _paperDocDeleteCommentDetails;
 @synthesize paperDocDownloadDetails = _paperDocDownloadDetails;
@@ -9928,8 +9576,11 @@
 @synthesize paperDocRevertDetails = _paperDocRevertDetails;
 @synthesize paperDocSlackShareDetails = _paperDocSlackShareDetails;
 @synthesize paperDocTeamInviteDetails = _paperDocTeamInviteDetails;
+@synthesize paperDocTrashedDetails = _paperDocTrashedDetails;
 @synthesize paperDocUnresolveCommentDetails = _paperDocUnresolveCommentDetails;
+@synthesize paperDocUntrashedDetails = _paperDocUntrashedDetails;
 @synthesize paperDocViewDetails = _paperDocViewDetails;
+@synthesize paperFolderChangeSubscriptionDetails = _paperFolderChangeSubscriptionDetails;
 @synthesize paperFolderDeletedDetails = _paperFolderDeletedDetails;
 @synthesize paperFolderFollowedDetails = _paperFolderFollowedDetails;
 @synthesize paperFolderTeamInviteDetails = _paperFolderTeamInviteDetails;
@@ -9941,9 +9592,6 @@
 @synthesize smartSyncCreateAdminPrivilegeReportDetails = _smartSyncCreateAdminPrivilegeReportDetails;
 @synthesize teamActivityCreateReportDetails = _teamActivityCreateReportDetails;
 @synthesize collectionShareDetails = _collectionShareDetails;
-@synthesize fileAddCommentDetails = _fileAddCommentDetails;
-@synthesize fileLikeCommentDetails = _fileLikeCommentDetails;
-@synthesize fileUnlikeCommentDetails = _fileUnlikeCommentDetails;
 @synthesize noteAclInviteOnlyDetails = _noteAclInviteOnlyDetails;
 @synthesize noteAclLinkDetails = _noteAclLinkDetails;
 @synthesize noteAclTeamLinkDetails = _noteAclTeamLinkDetails;
@@ -10006,12 +9654,16 @@
 @synthesize shmodelVisibilityPasswordDetails = _shmodelVisibilityPasswordDetails;
 @synthesize shmodelVisibilityPublicDetails = _shmodelVisibilityPublicDetails;
 @synthesize shmodelVisibilityTeamOnlyDetails = _shmodelVisibilityTeamOnlyDetails;
-@synthesize removeLogoutUrlDetails = _removeLogoutUrlDetails;
-@synthesize removeSsoUrlDetails = _removeSsoUrlDetails;
+@synthesize ssoAddCertDetails = _ssoAddCertDetails;
+@synthesize ssoAddLoginUrlDetails = _ssoAddLoginUrlDetails;
+@synthesize ssoAddLogoutUrlDetails = _ssoAddLogoutUrlDetails;
 @synthesize ssoChangeCertDetails = _ssoChangeCertDetails;
 @synthesize ssoChangeLoginUrlDetails = _ssoChangeLoginUrlDetails;
 @synthesize ssoChangeLogoutUrlDetails = _ssoChangeLogoutUrlDetails;
 @synthesize ssoChangeSamlIdentityModeDetails = _ssoChangeSamlIdentityModeDetails;
+@synthesize ssoRemoveCertDetails = _ssoRemoveCertDetails;
+@synthesize ssoRemoveLoginUrlDetails = _ssoRemoveLoginUrlDetails;
+@synthesize ssoRemoveLogoutUrlDetails = _ssoRemoveLogoutUrlDetails;
 @synthesize teamFolderChangeStatusDetails = _teamFolderChangeStatusDetails;
 @synthesize teamFolderCreateDetails = _teamFolderCreateDetails;
 @synthesize teamFolderDowngradeDetails = _teamFolderDowngradeDetails;
@@ -10044,6 +9696,7 @@
 @synthesize microsoftOfficeAddinChangePolicyDetails = _microsoftOfficeAddinChangePolicyDetails;
 @synthesize networkControlChangePolicyDetails = _networkControlChangePolicyDetails;
 @synthesize paperChangeDeploymentPolicyDetails = _paperChangeDeploymentPolicyDetails;
+@synthesize paperChangeMemberLinkPolicyDetails = _paperChangeMemberLinkPolicyDetails;
 @synthesize paperChangeMemberPolicyDetails = _paperChangeMemberPolicyDetails;
 @synthesize paperChangePolicyDetails = _paperChangePolicyDetails;
 @synthesize permanentDeleteChangePolicyDetails = _permanentDeleteChangePolicyDetails;
@@ -10059,6 +9712,7 @@
 @synthesize webSessionsChangeFixedLengthPolicyDetails = _webSessionsChangeFixedLengthPolicyDetails;
 @synthesize webSessionsChangeIdleLengthPolicyDetails = _webSessionsChangeIdleLengthPolicyDetails;
 @synthesize teamProfileAddLogoDetails = _teamProfileAddLogoDetails;
+@synthesize teamProfileChangeDefaultLanguageDetails = _teamProfileChangeDefaultLanguageDetails;
 @synthesize teamProfileChangeLogoDetails = _teamProfileChangeLogoDetails;
 @synthesize teamProfileChangeNameDetails = _teamProfileChangeNameDetails;
 @synthesize teamProfileRemoveLogoDetails = _teamProfileRemoveLogoDetails;
@@ -10109,6 +9763,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails;
     _memberTransferAccountContentsDetails = memberTransferAccountContentsDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithPaperAdminExportStartDetails:
+    (DBTEAMLOGPaperAdminExportStartDetails *)paperAdminExportStartDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsPaperAdminExportStartDetails;
+    _paperAdminExportStartDetails = paperAdminExportStartDetails;
   }
   return self;
 }
@@ -10223,6 +9887,71 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsAppUnlinkUserDetails;
     _appUnlinkUserDetails = appUnlinkUserDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileAddCommentDetails:(DBTEAMLOGFileAddCommentDetails *)fileAddCommentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileAddCommentDetails;
+    _fileAddCommentDetails = fileAddCommentDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileChangeCommentSubscriptionDetails:
+    (DBTEAMLOGFileChangeCommentSubscriptionDetails *)fileChangeCommentSubscriptionDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails;
+    _fileChangeCommentSubscriptionDetails = fileChangeCommentSubscriptionDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileDeleteCommentDetails:(DBTEAMLOGFileDeleteCommentDetails *)fileDeleteCommentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileDeleteCommentDetails;
+    _fileDeleteCommentDetails = fileDeleteCommentDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileLikeCommentDetails:(DBTEAMLOGFileLikeCommentDetails *)fileLikeCommentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileLikeCommentDetails;
+    _fileLikeCommentDetails = fileLikeCommentDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileResolveCommentDetails:(DBTEAMLOGFileResolveCommentDetails *)fileResolveCommentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileResolveCommentDetails;
+    _fileResolveCommentDetails = fileResolveCommentDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileUnlikeCommentDetails:(DBTEAMLOGFileUnlikeCommentDetails *)fileUnlikeCommentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileUnlikeCommentDetails;
+    _fileUnlikeCommentDetails = fileUnlikeCommentDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileUnresolveCommentDetails:
+    (DBTEAMLOGFileUnresolveCommentDetails *)fileUnresolveCommentDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsFileUnresolveCommentDetails;
+    _fileUnresolveCommentDetails = fileUnresolveCommentDetails;
   }
   return self;
 }
@@ -10753,26 +10482,6 @@
   return self;
 }
 
-- (instancetype)initWithGroupDescriptionUpdatedDetails:
-    (DBTEAMLOGGroupDescriptionUpdatedDetails *)groupDescriptionUpdatedDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails;
-    _groupDescriptionUpdatedDetails = groupDescriptionUpdatedDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithGroupJoinPolicyUpdatedDetails:
-    (DBTEAMLOGGroupJoinPolicyUpdatedDetails *)groupJoinPolicyUpdatedDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails;
-    _groupJoinPolicyUpdatedDetails = groupJoinPolicyUpdatedDetails;
-  }
-  return self;
-}
-
 - (instancetype)initWithGroupMovedDetails:(DBTEAMLOGGroupMovedDetails *)groupMovedDetails {
   self = [super init];
   if (self) {
@@ -10979,16 +10688,6 @@
   return self;
 }
 
-- (instancetype)initWithPaperContentChangeSubscriptionDetails:
-    (DBTEAMLOGPaperContentChangeSubscriptionDetails *)paperContentChangeSubscriptionDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails;
-    _paperContentChangeSubscriptionDetails = paperContentChangeSubscriptionDetails;
-  }
-  return self;
-}
-
 - (instancetype)initWithPaperContentCreateDetails:(DBTEAMLOGPaperContentCreateDetails *)paperContentCreateDetails {
   self = [super init];
   if (self) {
@@ -11071,6 +10770,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails;
     _paperDocChangeSharingPolicyDetails = paperDocChangeSharingPolicyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithPaperDocChangeSubscriptionDetails:
+    (DBTEAMLOGPaperDocChangeSubscriptionDetails *)paperDocChangeSubscriptionDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails;
+    _paperDocChangeSubscriptionDetails = paperDocChangeSubscriptionDetails;
   }
   return self;
 }
@@ -11186,6 +10895,15 @@
   return self;
 }
 
+- (instancetype)initWithPaperDocTrashedDetails:(DBTEAMLOGPaperDocTrashedDetails *)paperDocTrashedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsPaperDocTrashedDetails;
+    _paperDocTrashedDetails = paperDocTrashedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithPaperDocUnresolveCommentDetails:
     (DBTEAMLOGPaperDocUnresolveCommentDetails *)paperDocUnresolveCommentDetails {
   self = [super init];
@@ -11196,11 +10914,30 @@
   return self;
 }
 
+- (instancetype)initWithPaperDocUntrashedDetails:(DBTEAMLOGPaperDocUntrashedDetails *)paperDocUntrashedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsPaperDocUntrashedDetails;
+    _paperDocUntrashedDetails = paperDocUntrashedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithPaperDocViewDetails:(DBTEAMLOGPaperDocViewDetails *)paperDocViewDetails {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventDetailsPaperDocViewDetails;
     _paperDocViewDetails = paperDocViewDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithPaperFolderChangeSubscriptionDetails:
+    (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)paperFolderChangeSubscriptionDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails;
+    _paperFolderChangeSubscriptionDetails = paperFolderChangeSubscriptionDetails;
   }
   return self;
 }
@@ -11305,33 +11042,6 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsCollectionShareDetails;
     _collectionShareDetails = collectionShareDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithFileAddCommentDetails:(DBTEAMLOGFileAddCommentDetails *)fileAddCommentDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsFileAddCommentDetails;
-    _fileAddCommentDetails = fileAddCommentDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithFileLikeCommentDetails:(DBTEAMLOGFileLikeCommentDetails *)fileLikeCommentDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsFileLikeCommentDetails;
-    _fileLikeCommentDetails = fileLikeCommentDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithFileUnlikeCommentDetails:(DBTEAMLOGFileUnlikeCommentDetails *)fileUnlikeCommentDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsFileUnlikeCommentDetails;
-    _fileUnlikeCommentDetails = fileUnlikeCommentDetails;
   }
   return self;
 }
@@ -11927,20 +11637,29 @@
   return self;
 }
 
-- (instancetype)initWithRemoveLogoutUrlDetails:(DBTEAMLOGRemoveLogoutUrlDetails *)removeLogoutUrlDetails {
+- (instancetype)initWithSsoAddCertDetails:(DBTEAMLOGSsoAddCertDetails *)ssoAddCertDetails {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGEventDetailsRemoveLogoutUrlDetails;
-    _removeLogoutUrlDetails = removeLogoutUrlDetails;
+    _tag = DBTEAMLOGEventDetailsSsoAddCertDetails;
+    _ssoAddCertDetails = ssoAddCertDetails;
   }
   return self;
 }
 
-- (instancetype)initWithRemoveSsoUrlDetails:(DBTEAMLOGRemoveSsoUrlDetails *)removeSsoUrlDetails {
+- (instancetype)initWithSsoAddLoginUrlDetails:(DBTEAMLOGSsoAddLoginUrlDetails *)ssoAddLoginUrlDetails {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGEventDetailsRemoveSsoUrlDetails;
-    _removeSsoUrlDetails = removeSsoUrlDetails;
+    _tag = DBTEAMLOGEventDetailsSsoAddLoginUrlDetails;
+    _ssoAddLoginUrlDetails = ssoAddLoginUrlDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoAddLogoutUrlDetails:(DBTEAMLOGSsoAddLogoutUrlDetails *)ssoAddLogoutUrlDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails;
+    _ssoAddLogoutUrlDetails = ssoAddLogoutUrlDetails;
   }
   return self;
 }
@@ -11978,6 +11697,33 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails;
     _ssoChangeSamlIdentityModeDetails = ssoChangeSamlIdentityModeDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoRemoveCertDetails:(DBTEAMLOGSsoRemoveCertDetails *)ssoRemoveCertDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsSsoRemoveCertDetails;
+    _ssoRemoveCertDetails = ssoRemoveCertDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoRemoveLoginUrlDetails:(DBTEAMLOGSsoRemoveLoginUrlDetails *)ssoRemoveLoginUrlDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails;
+    _ssoRemoveLoginUrlDetails = ssoRemoveLoginUrlDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoRemoveLogoutUrlDetails:(DBTEAMLOGSsoRemoveLogoutUrlDetails *)ssoRemoveLogoutUrlDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails;
+    _ssoRemoveLogoutUrlDetails = ssoRemoveLogoutUrlDetails;
   }
   return self;
 }
@@ -12296,6 +12042,16 @@
   return self;
 }
 
+- (instancetype)initWithPaperChangeMemberLinkPolicyDetails:
+    (DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)paperChangeMemberLinkPolicyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails;
+    _paperChangeMemberLinkPolicyDetails = paperChangeMemberLinkPolicyDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithPaperChangeMemberPolicyDetails:
     (DBTEAMLOGPaperChangeMemberPolicyDetails *)paperChangeMemberPolicyDetails {
   self = [super init];
@@ -12436,6 +12192,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsTeamProfileAddLogoDetails;
     _teamProfileAddLogoDetails = teamProfileAddLogoDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileChangeDefaultLanguageDetails:
+    (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)teamProfileChangeDefaultLanguageDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails;
+    _teamProfileChangeDefaultLanguageDetails = teamProfileChangeDefaultLanguageDetails;
   }
   return self;
 }
@@ -12592,6 +12358,15 @@
   return _memberTransferAccountContentsDetails;
 }
 
+- (DBTEAMLOGPaperAdminExportStartDetails *)paperAdminExportStartDetails {
+  if (![self isPaperAdminExportStartDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperAdminExportStartDetails, but was %@.", [self tagName]];
+  }
+  return _paperAdminExportStartDetails;
+}
+
 - (DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)paperEnabledUsersGroupAdditionDetails {
   if (![self isPaperEnabledUsersGroupAdditionDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -12692,6 +12467,69 @@
                 format:@"Invalid tag: required DBTEAMLOGEventDetailsAppUnlinkUserDetails, but was %@.", [self tagName]];
   }
   return _appUnlinkUserDetails;
+}
+
+- (DBTEAMLOGFileAddCommentDetails *)fileAddCommentDetails {
+  if (![self isFileAddCommentDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileAddCommentDetails, but was %@.", [self tagName]];
+  }
+  return _fileAddCommentDetails;
+}
+
+- (DBTEAMLOGFileChangeCommentSubscriptionDetails *)fileChangeCommentSubscriptionDetails {
+  if (![self isFileChangeCommentSubscriptionDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _fileChangeCommentSubscriptionDetails;
+}
+
+- (DBTEAMLOGFileDeleteCommentDetails *)fileDeleteCommentDetails {
+  if (![self isFileDeleteCommentDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileDeleteCommentDetails, but was %@.", [self tagName]];
+  }
+  return _fileDeleteCommentDetails;
+}
+
+- (DBTEAMLOGFileLikeCommentDetails *)fileLikeCommentDetails {
+  if (![self isFileLikeCommentDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileLikeCommentDetails, but was %@.", [self tagName]];
+  }
+  return _fileLikeCommentDetails;
+}
+
+- (DBTEAMLOGFileResolveCommentDetails *)fileResolveCommentDetails {
+  if (![self isFileResolveCommentDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileResolveCommentDetails, but was %@.", [self tagName]];
+  }
+  return _fileResolveCommentDetails;
+}
+
+- (DBTEAMLOGFileUnlikeCommentDetails *)fileUnlikeCommentDetails {
+  if (![self isFileUnlikeCommentDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileUnlikeCommentDetails, but was %@.", [self tagName]];
+  }
+  return _fileUnlikeCommentDetails;
+}
+
+- (DBTEAMLOGFileUnresolveCommentDetails *)fileUnresolveCommentDetails {
+  if (![self isFileUnresolveCommentDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileUnresolveCommentDetails, but was %@.", [self tagName]];
+  }
+  return _fileUnresolveCommentDetails;
 }
 
 - (DBTEAMLOGDeviceChangeIpDesktopDetails *)deviceChangeIpDesktopDetails {
@@ -13184,24 +13022,6 @@
   return _groupDeleteDetails;
 }
 
-- (DBTEAMLOGGroupDescriptionUpdatedDetails *)groupDescriptionUpdatedDetails {
-  if (![self isGroupDescriptionUpdatedDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _groupDescriptionUpdatedDetails;
-}
-
-- (DBTEAMLOGGroupJoinPolicyUpdatedDetails *)groupJoinPolicyUpdatedDetails {
-  if (![self isGroupJoinPolicyUpdatedDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _groupJoinPolicyUpdatedDetails;
-}
-
 - (DBTEAMLOGGroupMovedDetails *)groupMovedDetails {
   if (![self isGroupMovedDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -13394,15 +13214,6 @@
   return _paperContentArchiveDetails;
 }
 
-- (DBTEAMLOGPaperContentChangeSubscriptionDetails *)paperContentChangeSubscriptionDetails {
-  if (![self isPaperContentChangeSubscriptionDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _paperContentChangeSubscriptionDetails;
-}
-
 - (DBTEAMLOGPaperContentCreateDetails *)paperContentCreateDetails {
   if (![self isPaperContentCreateDetails]) {
     [NSException
@@ -13482,6 +13293,15 @@
                        [self tagName]];
   }
   return _paperDocChangeSharingPolicyDetails;
+}
+
+- (DBTEAMLOGPaperDocChangeSubscriptionDetails *)paperDocChangeSubscriptionDetails {
+  if (![self isPaperDocChangeSubscriptionDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _paperDocChangeSubscriptionDetails;
 }
 
 - (DBTEAMLOGPaperDocDeletedDetails *)paperDocDeletedDetails {
@@ -13591,6 +13411,15 @@
   return _paperDocTeamInviteDetails;
 }
 
+- (DBTEAMLOGPaperDocTrashedDetails *)paperDocTrashedDetails {
+  if (![self isPaperDocTrashedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperDocTrashedDetails, but was %@.", [self tagName]];
+  }
+  return _paperDocTrashedDetails;
+}
+
 - (DBTEAMLOGPaperDocUnresolveCommentDetails *)paperDocUnresolveCommentDetails {
   if (![self isPaperDocUnresolveCommentDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -13600,12 +13429,30 @@
   return _paperDocUnresolveCommentDetails;
 }
 
+- (DBTEAMLOGPaperDocUntrashedDetails *)paperDocUntrashedDetails {
+  if (![self isPaperDocUntrashedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperDocUntrashedDetails, but was %@.", [self tagName]];
+  }
+  return _paperDocUntrashedDetails;
+}
+
 - (DBTEAMLOGPaperDocViewDetails *)paperDocViewDetails {
   if (![self isPaperDocViewDetails]) {
     [NSException raise:@"IllegalStateException"
                 format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperDocViewDetails, but was %@.", [self tagName]];
   }
   return _paperDocViewDetails;
+}
+
+- (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)paperFolderChangeSubscriptionDetails {
+  if (![self isPaperFolderChangeSubscriptionDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _paperFolderChangeSubscriptionDetails;
 }
 
 - (DBTEAMLOGPaperFolderDeletedDetails *)paperFolderDeletedDetails {
@@ -13705,33 +13552,6 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsCollectionShareDetails, but was %@.", [self tagName]];
   }
   return _collectionShareDetails;
-}
-
-- (DBTEAMLOGFileAddCommentDetails *)fileAddCommentDetails {
-  if (![self isFileAddCommentDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileAddCommentDetails, but was %@.", [self tagName]];
-  }
-  return _fileAddCommentDetails;
-}
-
-- (DBTEAMLOGFileLikeCommentDetails *)fileLikeCommentDetails {
-  if (![self isFileLikeCommentDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileLikeCommentDetails, but was %@.", [self tagName]];
-  }
-  return _fileLikeCommentDetails;
-}
-
-- (DBTEAMLOGFileUnlikeCommentDetails *)fileUnlikeCommentDetails {
-  if (![self isFileUnlikeCommentDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsFileUnlikeCommentDetails, but was %@.", [self tagName]];
-  }
-  return _fileUnlikeCommentDetails;
 }
 
 - (DBTEAMLOGNoteAclInviteOnlyDetails *)noteAclInviteOnlyDetails {
@@ -14292,21 +14112,30 @@
   return _shmodelVisibilityTeamOnlyDetails;
 }
 
-- (DBTEAMLOGRemoveLogoutUrlDetails *)removeLogoutUrlDetails {
-  if (![self isRemoveLogoutUrlDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsRemoveLogoutUrlDetails, but was %@.", [self tagName]];
+- (DBTEAMLOGSsoAddCertDetails *)ssoAddCertDetails {
+  if (![self isSsoAddCertDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoAddCertDetails, but was %@.", [self tagName]];
   }
-  return _removeLogoutUrlDetails;
+  return _ssoAddCertDetails;
 }
 
-- (DBTEAMLOGRemoveSsoUrlDetails *)removeSsoUrlDetails {
-  if (![self isRemoveSsoUrlDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsRemoveSsoUrlDetails, but was %@.", [self tagName]];
+- (DBTEAMLOGSsoAddLoginUrlDetails *)ssoAddLoginUrlDetails {
+  if (![self isSsoAddLoginUrlDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoAddLoginUrlDetails, but was %@.", [self tagName]];
   }
-  return _removeSsoUrlDetails;
+  return _ssoAddLoginUrlDetails;
+}
+
+- (DBTEAMLOGSsoAddLogoutUrlDetails *)ssoAddLogoutUrlDetails {
+  if (![self isSsoAddLogoutUrlDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails, but was %@.", [self tagName]];
+  }
+  return _ssoAddLogoutUrlDetails;
 }
 
 - (DBTEAMLOGSsoChangeCertDetails *)ssoChangeCertDetails {
@@ -14342,6 +14171,32 @@
                        [self tagName]];
   }
   return _ssoChangeSamlIdentityModeDetails;
+}
+
+- (DBTEAMLOGSsoRemoveCertDetails *)ssoRemoveCertDetails {
+  if (![self isSsoRemoveCertDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoRemoveCertDetails, but was %@.", [self tagName]];
+  }
+  return _ssoRemoveCertDetails;
+}
+
+- (DBTEAMLOGSsoRemoveLoginUrlDetails *)ssoRemoveLoginUrlDetails {
+  if (![self isSsoRemoveLoginUrlDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails, but was %@.", [self tagName]];
+  }
+  return _ssoRemoveLoginUrlDetails;
+}
+
+- (DBTEAMLOGSsoRemoveLogoutUrlDetails *)ssoRemoveLogoutUrlDetails {
+  if (![self isSsoRemoveLogoutUrlDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails, but was %@.", [self tagName]];
+  }
+  return _ssoRemoveLogoutUrlDetails;
 }
 
 - (DBTEAMLOGTeamFolderChangeStatusDetails *)teamFolderChangeStatusDetails {
@@ -14643,6 +14498,15 @@
   return _paperChangeDeploymentPolicyDetails;
 }
 
+- (DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)paperChangeMemberLinkPolicyDetails {
+  if (![self isPaperChangeMemberLinkPolicyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _paperChangeMemberLinkPolicyDetails;
+}
+
 - (DBTEAMLOGPaperChangeMemberPolicyDetails *)paperChangeMemberPolicyDetails {
   if (![self isPaperChangeMemberPolicyDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -14780,6 +14644,16 @@
   return _teamProfileAddLogoDetails;
 }
 
+- (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)teamProfileChangeDefaultLanguageDetails {
+  if (![self isTeamProfileChangeDefaultLanguageDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails, but was %@.",
+               [self tagName]];
+  }
+  return _teamProfileChangeDefaultLanguageDetails;
+}
+
 - (DBTEAMLOGTeamProfileChangeLogoDetails *)teamProfileChangeLogoDetails {
   if (![self isTeamProfileChangeLogoDetails]) {
     [NSException
@@ -14895,6 +14769,10 @@
   return _tag == DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails;
 }
 
+- (BOOL)isPaperAdminExportStartDetails {
+  return _tag == DBTEAMLOGEventDetailsPaperAdminExportStartDetails;
+}
+
 - (BOOL)isPaperEnabledUsersGroupAdditionDetails {
   return _tag == DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails;
 }
@@ -14941,6 +14819,34 @@
 
 - (BOOL)isAppUnlinkUserDetails {
   return _tag == DBTEAMLOGEventDetailsAppUnlinkUserDetails;
+}
+
+- (BOOL)isFileAddCommentDetails {
+  return _tag == DBTEAMLOGEventDetailsFileAddCommentDetails;
+}
+
+- (BOOL)isFileChangeCommentSubscriptionDetails {
+  return _tag == DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails;
+}
+
+- (BOOL)isFileDeleteCommentDetails {
+  return _tag == DBTEAMLOGEventDetailsFileDeleteCommentDetails;
+}
+
+- (BOOL)isFileLikeCommentDetails {
+  return _tag == DBTEAMLOGEventDetailsFileLikeCommentDetails;
+}
+
+- (BOOL)isFileResolveCommentDetails {
+  return _tag == DBTEAMLOGEventDetailsFileResolveCommentDetails;
+}
+
+- (BOOL)isFileUnlikeCommentDetails {
+  return _tag == DBTEAMLOGEventDetailsFileUnlikeCommentDetails;
+}
+
+- (BOOL)isFileUnresolveCommentDetails {
+  return _tag == DBTEAMLOGEventDetailsFileUnresolveCommentDetails;
 }
 
 - (BOOL)isDeviceChangeIpDesktopDetails {
@@ -15163,14 +15069,6 @@
   return _tag == DBTEAMLOGEventDetailsGroupDeleteDetails;
 }
 
-- (BOOL)isGroupDescriptionUpdatedDetails {
-  return _tag == DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails;
-}
-
-- (BOOL)isGroupJoinPolicyUpdatedDetails {
-  return _tag == DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails;
-}
-
 - (BOOL)isGroupMovedDetails {
   return _tag == DBTEAMLOGEventDetailsGroupMovedDetails;
 }
@@ -15259,10 +15157,6 @@
   return _tag == DBTEAMLOGEventDetailsPaperContentArchiveDetails;
 }
 
-- (BOOL)isPaperContentChangeSubscriptionDetails {
-  return _tag == DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails;
-}
-
 - (BOOL)isPaperContentCreateDetails {
   return _tag == DBTEAMLOGEventDetailsPaperContentCreateDetails;
 }
@@ -15297,6 +15191,10 @@
 
 - (BOOL)isPaperDocChangeSharingPolicyDetails {
   return _tag == DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails;
+}
+
+- (BOOL)isPaperDocChangeSubscriptionDetails {
+  return _tag == DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails;
 }
 
 - (BOOL)isPaperDocDeletedDetails {
@@ -15347,12 +15245,24 @@
   return _tag == DBTEAMLOGEventDetailsPaperDocTeamInviteDetails;
 }
 
+- (BOOL)isPaperDocTrashedDetails {
+  return _tag == DBTEAMLOGEventDetailsPaperDocTrashedDetails;
+}
+
 - (BOOL)isPaperDocUnresolveCommentDetails {
   return _tag == DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails;
 }
 
+- (BOOL)isPaperDocUntrashedDetails {
+  return _tag == DBTEAMLOGEventDetailsPaperDocUntrashedDetails;
+}
+
 - (BOOL)isPaperDocViewDetails {
   return _tag == DBTEAMLOGEventDetailsPaperDocViewDetails;
+}
+
+- (BOOL)isPaperFolderChangeSubscriptionDetails {
+  return _tag == DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails;
 }
 
 - (BOOL)isPaperFolderDeletedDetails {
@@ -15397,18 +15307,6 @@
 
 - (BOOL)isCollectionShareDetails {
   return _tag == DBTEAMLOGEventDetailsCollectionShareDetails;
-}
-
-- (BOOL)isFileAddCommentDetails {
-  return _tag == DBTEAMLOGEventDetailsFileAddCommentDetails;
-}
-
-- (BOOL)isFileLikeCommentDetails {
-  return _tag == DBTEAMLOGEventDetailsFileLikeCommentDetails;
-}
-
-- (BOOL)isFileUnlikeCommentDetails {
-  return _tag == DBTEAMLOGEventDetailsFileUnlikeCommentDetails;
 }
 
 - (BOOL)isNoteAclInviteOnlyDetails {
@@ -15659,12 +15557,16 @@
   return _tag == DBTEAMLOGEventDetailsShmodelVisibilityTeamOnlyDetails;
 }
 
-- (BOOL)isRemoveLogoutUrlDetails {
-  return _tag == DBTEAMLOGEventDetailsRemoveLogoutUrlDetails;
+- (BOOL)isSsoAddCertDetails {
+  return _tag == DBTEAMLOGEventDetailsSsoAddCertDetails;
 }
 
-- (BOOL)isRemoveSsoUrlDetails {
-  return _tag == DBTEAMLOGEventDetailsRemoveSsoUrlDetails;
+- (BOOL)isSsoAddLoginUrlDetails {
+  return _tag == DBTEAMLOGEventDetailsSsoAddLoginUrlDetails;
+}
+
+- (BOOL)isSsoAddLogoutUrlDetails {
+  return _tag == DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails;
 }
 
 - (BOOL)isSsoChangeCertDetails {
@@ -15681,6 +15583,18 @@
 
 - (BOOL)isSsoChangeSamlIdentityModeDetails {
   return _tag == DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails;
+}
+
+- (BOOL)isSsoRemoveCertDetails {
+  return _tag == DBTEAMLOGEventDetailsSsoRemoveCertDetails;
+}
+
+- (BOOL)isSsoRemoveLoginUrlDetails {
+  return _tag == DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails;
+}
+
+- (BOOL)isSsoRemoveLogoutUrlDetails {
+  return _tag == DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails;
 }
 
 - (BOOL)isTeamFolderChangeStatusDetails {
@@ -15811,6 +15725,10 @@
   return _tag == DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails;
 }
 
+- (BOOL)isPaperChangeMemberLinkPolicyDetails {
+  return _tag == DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails;
+}
+
 - (BOOL)isPaperChangeMemberPolicyDetails {
   return _tag == DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails;
 }
@@ -15871,6 +15789,10 @@
   return _tag == DBTEAMLOGEventDetailsTeamProfileAddLogoDetails;
 }
 
+- (BOOL)isTeamProfileChangeDefaultLanguageDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails;
+}
+
 - (BOOL)isTeamProfileChangeLogoDetails {
   return _tag == DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails;
 }
@@ -15929,6 +15851,8 @@
     return @"DBTEAMLOGEventDetailsMemberSpaceLimitsChangeStatusDetails";
   case DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails:
     return @"DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails";
+  case DBTEAMLOGEventDetailsPaperAdminExportStartDetails:
+    return @"DBTEAMLOGEventDetailsPaperAdminExportStartDetails";
   case DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails:
     return @"DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails";
   case DBTEAMLOGEventDetailsPaperEnabledUsersGroupRemovalDetails:
@@ -15953,6 +15877,20 @@
     return @"DBTEAMLOGEventDetailsAppUnlinkTeamDetails";
   case DBTEAMLOGEventDetailsAppUnlinkUserDetails:
     return @"DBTEAMLOGEventDetailsAppUnlinkUserDetails";
+  case DBTEAMLOGEventDetailsFileAddCommentDetails:
+    return @"DBTEAMLOGEventDetailsFileAddCommentDetails";
+  case DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails:
+    return @"DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails";
+  case DBTEAMLOGEventDetailsFileDeleteCommentDetails:
+    return @"DBTEAMLOGEventDetailsFileDeleteCommentDetails";
+  case DBTEAMLOGEventDetailsFileLikeCommentDetails:
+    return @"DBTEAMLOGEventDetailsFileLikeCommentDetails";
+  case DBTEAMLOGEventDetailsFileResolveCommentDetails:
+    return @"DBTEAMLOGEventDetailsFileResolveCommentDetails";
+  case DBTEAMLOGEventDetailsFileUnlikeCommentDetails:
+    return @"DBTEAMLOGEventDetailsFileUnlikeCommentDetails";
+  case DBTEAMLOGEventDetailsFileUnresolveCommentDetails:
+    return @"DBTEAMLOGEventDetailsFileUnresolveCommentDetails";
   case DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails:
     return @"DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails";
   case DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails:
@@ -16063,10 +16001,6 @@
     return @"DBTEAMLOGEventDetailsGroupCreateDetails";
   case DBTEAMLOGEventDetailsGroupDeleteDetails:
     return @"DBTEAMLOGEventDetailsGroupDeleteDetails";
-  case DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails:
-    return @"DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails";
-  case DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails:
-    return @"DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails";
   case DBTEAMLOGEventDetailsGroupMovedDetails:
     return @"DBTEAMLOGEventDetailsGroupMovedDetails";
   case DBTEAMLOGEventDetailsGroupRemoveExternalIdDetails:
@@ -16111,8 +16045,6 @@
     return @"DBTEAMLOGEventDetailsPaperContentAddToFolderDetails";
   case DBTEAMLOGEventDetailsPaperContentArchiveDetails:
     return @"DBTEAMLOGEventDetailsPaperContentArchiveDetails";
-  case DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails:
-    return @"DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails";
   case DBTEAMLOGEventDetailsPaperContentCreateDetails:
     return @"DBTEAMLOGEventDetailsPaperContentCreateDetails";
   case DBTEAMLOGEventDetailsPaperContentPermanentlyDeleteDetails:
@@ -16131,6 +16063,8 @@
     return @"DBTEAMLOGEventDetailsPaperDocChangeMemberRoleDetails";
   case DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails:
     return @"DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails";
+  case DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails:
+    return @"DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails";
   case DBTEAMLOGEventDetailsPaperDocDeletedDetails:
     return @"DBTEAMLOGEventDetailsPaperDocDeletedDetails";
   case DBTEAMLOGEventDetailsPaperDocDeleteCommentDetails:
@@ -16155,10 +16089,16 @@
     return @"DBTEAMLOGEventDetailsPaperDocSlackShareDetails";
   case DBTEAMLOGEventDetailsPaperDocTeamInviteDetails:
     return @"DBTEAMLOGEventDetailsPaperDocTeamInviteDetails";
+  case DBTEAMLOGEventDetailsPaperDocTrashedDetails:
+    return @"DBTEAMLOGEventDetailsPaperDocTrashedDetails";
   case DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails:
     return @"DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails";
+  case DBTEAMLOGEventDetailsPaperDocUntrashedDetails:
+    return @"DBTEAMLOGEventDetailsPaperDocUntrashedDetails";
   case DBTEAMLOGEventDetailsPaperDocViewDetails:
     return @"DBTEAMLOGEventDetailsPaperDocViewDetails";
+  case DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails:
+    return @"DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails";
   case DBTEAMLOGEventDetailsPaperFolderDeletedDetails:
     return @"DBTEAMLOGEventDetailsPaperFolderDeletedDetails";
   case DBTEAMLOGEventDetailsPaperFolderFollowedDetails:
@@ -16181,12 +16121,6 @@
     return @"DBTEAMLOGEventDetailsTeamActivityCreateReportDetails";
   case DBTEAMLOGEventDetailsCollectionShareDetails:
     return @"DBTEAMLOGEventDetailsCollectionShareDetails";
-  case DBTEAMLOGEventDetailsFileAddCommentDetails:
-    return @"DBTEAMLOGEventDetailsFileAddCommentDetails";
-  case DBTEAMLOGEventDetailsFileLikeCommentDetails:
-    return @"DBTEAMLOGEventDetailsFileLikeCommentDetails";
-  case DBTEAMLOGEventDetailsFileUnlikeCommentDetails:
-    return @"DBTEAMLOGEventDetailsFileUnlikeCommentDetails";
   case DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails:
     return @"DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails";
   case DBTEAMLOGEventDetailsNoteAclLinkDetails:
@@ -16311,10 +16245,12 @@
     return @"DBTEAMLOGEventDetailsShmodelVisibilityPublicDetails";
   case DBTEAMLOGEventDetailsShmodelVisibilityTeamOnlyDetails:
     return @"DBTEAMLOGEventDetailsShmodelVisibilityTeamOnlyDetails";
-  case DBTEAMLOGEventDetailsRemoveLogoutUrlDetails:
-    return @"DBTEAMLOGEventDetailsRemoveLogoutUrlDetails";
-  case DBTEAMLOGEventDetailsRemoveSsoUrlDetails:
-    return @"DBTEAMLOGEventDetailsRemoveSsoUrlDetails";
+  case DBTEAMLOGEventDetailsSsoAddCertDetails:
+    return @"DBTEAMLOGEventDetailsSsoAddCertDetails";
+  case DBTEAMLOGEventDetailsSsoAddLoginUrlDetails:
+    return @"DBTEAMLOGEventDetailsSsoAddLoginUrlDetails";
+  case DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails:
+    return @"DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails";
   case DBTEAMLOGEventDetailsSsoChangeCertDetails:
     return @"DBTEAMLOGEventDetailsSsoChangeCertDetails";
   case DBTEAMLOGEventDetailsSsoChangeLoginUrlDetails:
@@ -16323,6 +16259,12 @@
     return @"DBTEAMLOGEventDetailsSsoChangeLogoutUrlDetails";
   case DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails:
     return @"DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails";
+  case DBTEAMLOGEventDetailsSsoRemoveCertDetails:
+    return @"DBTEAMLOGEventDetailsSsoRemoveCertDetails";
+  case DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails:
+    return @"DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails";
+  case DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails:
+    return @"DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails";
   case DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails:
     return @"DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails";
   case DBTEAMLOGEventDetailsTeamFolderCreateDetails:
@@ -16387,6 +16329,8 @@
     return @"DBTEAMLOGEventDetailsNetworkControlChangePolicyDetails";
   case DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails:
     return @"DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails";
+  case DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails:
+    return @"DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails";
   case DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails:
     return @"DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails";
   case DBTEAMLOGEventDetailsPaperChangePolicyDetails:
@@ -16417,6 +16361,8 @@
     return @"DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails";
   case DBTEAMLOGEventDetailsTeamProfileAddLogoDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileAddLogoDetails";
+  case DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails:
+    return @"DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails";
   case DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails";
   case DBTEAMLOGEventDetailsTeamProfileChangeNameDetails:
@@ -16448,7 +16394,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEventDetailsSerializer serialize:instance];
 }
 
@@ -16485,6 +16431,8 @@
     result = prime * result + [self.memberSpaceLimitsChangeStatusDetails hash];
   case DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails:
     result = prime * result + [self.memberTransferAccountContentsDetails hash];
+  case DBTEAMLOGEventDetailsPaperAdminExportStartDetails:
+    result = prime * result + [self.paperAdminExportStartDetails hash];
   case DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails:
     result = prime * result + [self.paperEnabledUsersGroupAdditionDetails hash];
   case DBTEAMLOGEventDetailsPaperEnabledUsersGroupRemovalDetails:
@@ -16509,6 +16457,20 @@
     result = prime * result + [self.appUnlinkTeamDetails hash];
   case DBTEAMLOGEventDetailsAppUnlinkUserDetails:
     result = prime * result + [self.appUnlinkUserDetails hash];
+  case DBTEAMLOGEventDetailsFileAddCommentDetails:
+    result = prime * result + [self.fileAddCommentDetails hash];
+  case DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails:
+    result = prime * result + [self.fileChangeCommentSubscriptionDetails hash];
+  case DBTEAMLOGEventDetailsFileDeleteCommentDetails:
+    result = prime * result + [self.fileDeleteCommentDetails hash];
+  case DBTEAMLOGEventDetailsFileLikeCommentDetails:
+    result = prime * result + [self.fileLikeCommentDetails hash];
+  case DBTEAMLOGEventDetailsFileResolveCommentDetails:
+    result = prime * result + [self.fileResolveCommentDetails hash];
+  case DBTEAMLOGEventDetailsFileUnlikeCommentDetails:
+    result = prime * result + [self.fileUnlikeCommentDetails hash];
+  case DBTEAMLOGEventDetailsFileUnresolveCommentDetails:
+    result = prime * result + [self.fileUnresolveCommentDetails hash];
   case DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails:
     result = prime * result + [self.deviceChangeIpDesktopDetails hash];
   case DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails:
@@ -16619,10 +16581,6 @@
     result = prime * result + [self.groupCreateDetails hash];
   case DBTEAMLOGEventDetailsGroupDeleteDetails:
     result = prime * result + [self.groupDeleteDetails hash];
-  case DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails:
-    result = prime * result + [self.groupDescriptionUpdatedDetails hash];
-  case DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails:
-    result = prime * result + [self.groupJoinPolicyUpdatedDetails hash];
   case DBTEAMLOGEventDetailsGroupMovedDetails:
     result = prime * result + [self.groupMovedDetails hash];
   case DBTEAMLOGEventDetailsGroupRemoveExternalIdDetails:
@@ -16667,8 +16625,6 @@
     result = prime * result + [self.paperContentAddToFolderDetails hash];
   case DBTEAMLOGEventDetailsPaperContentArchiveDetails:
     result = prime * result + [self.paperContentArchiveDetails hash];
-  case DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails:
-    result = prime * result + [self.paperContentChangeSubscriptionDetails hash];
   case DBTEAMLOGEventDetailsPaperContentCreateDetails:
     result = prime * result + [self.paperContentCreateDetails hash];
   case DBTEAMLOGEventDetailsPaperContentPermanentlyDeleteDetails:
@@ -16687,6 +16643,8 @@
     result = prime * result + [self.paperDocChangeMemberRoleDetails hash];
   case DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails:
     result = prime * result + [self.paperDocChangeSharingPolicyDetails hash];
+  case DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails:
+    result = prime * result + [self.paperDocChangeSubscriptionDetails hash];
   case DBTEAMLOGEventDetailsPaperDocDeletedDetails:
     result = prime * result + [self.paperDocDeletedDetails hash];
   case DBTEAMLOGEventDetailsPaperDocDeleteCommentDetails:
@@ -16711,10 +16669,16 @@
     result = prime * result + [self.paperDocSlackShareDetails hash];
   case DBTEAMLOGEventDetailsPaperDocTeamInviteDetails:
     result = prime * result + [self.paperDocTeamInviteDetails hash];
+  case DBTEAMLOGEventDetailsPaperDocTrashedDetails:
+    result = prime * result + [self.paperDocTrashedDetails hash];
   case DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails:
     result = prime * result + [self.paperDocUnresolveCommentDetails hash];
+  case DBTEAMLOGEventDetailsPaperDocUntrashedDetails:
+    result = prime * result + [self.paperDocUntrashedDetails hash];
   case DBTEAMLOGEventDetailsPaperDocViewDetails:
     result = prime * result + [self.paperDocViewDetails hash];
+  case DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails:
+    result = prime * result + [self.paperFolderChangeSubscriptionDetails hash];
   case DBTEAMLOGEventDetailsPaperFolderDeletedDetails:
     result = prime * result + [self.paperFolderDeletedDetails hash];
   case DBTEAMLOGEventDetailsPaperFolderFollowedDetails:
@@ -16737,12 +16701,6 @@
     result = prime * result + [self.teamActivityCreateReportDetails hash];
   case DBTEAMLOGEventDetailsCollectionShareDetails:
     result = prime * result + [self.collectionShareDetails hash];
-  case DBTEAMLOGEventDetailsFileAddCommentDetails:
-    result = prime * result + [self.fileAddCommentDetails hash];
-  case DBTEAMLOGEventDetailsFileLikeCommentDetails:
-    result = prime * result + [self.fileLikeCommentDetails hash];
-  case DBTEAMLOGEventDetailsFileUnlikeCommentDetails:
-    result = prime * result + [self.fileUnlikeCommentDetails hash];
   case DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails:
     result = prime * result + [self.noteAclInviteOnlyDetails hash];
   case DBTEAMLOGEventDetailsNoteAclLinkDetails:
@@ -16867,10 +16825,12 @@
     result = prime * result + [self.shmodelVisibilityPublicDetails hash];
   case DBTEAMLOGEventDetailsShmodelVisibilityTeamOnlyDetails:
     result = prime * result + [self.shmodelVisibilityTeamOnlyDetails hash];
-  case DBTEAMLOGEventDetailsRemoveLogoutUrlDetails:
-    result = prime * result + [self.removeLogoutUrlDetails hash];
-  case DBTEAMLOGEventDetailsRemoveSsoUrlDetails:
-    result = prime * result + [self.removeSsoUrlDetails hash];
+  case DBTEAMLOGEventDetailsSsoAddCertDetails:
+    result = prime * result + [self.ssoAddCertDetails hash];
+  case DBTEAMLOGEventDetailsSsoAddLoginUrlDetails:
+    result = prime * result + [self.ssoAddLoginUrlDetails hash];
+  case DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails:
+    result = prime * result + [self.ssoAddLogoutUrlDetails hash];
   case DBTEAMLOGEventDetailsSsoChangeCertDetails:
     result = prime * result + [self.ssoChangeCertDetails hash];
   case DBTEAMLOGEventDetailsSsoChangeLoginUrlDetails:
@@ -16879,6 +16839,12 @@
     result = prime * result + [self.ssoChangeLogoutUrlDetails hash];
   case DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails:
     result = prime * result + [self.ssoChangeSamlIdentityModeDetails hash];
+  case DBTEAMLOGEventDetailsSsoRemoveCertDetails:
+    result = prime * result + [self.ssoRemoveCertDetails hash];
+  case DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails:
+    result = prime * result + [self.ssoRemoveLoginUrlDetails hash];
+  case DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails:
+    result = prime * result + [self.ssoRemoveLogoutUrlDetails hash];
   case DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails:
     result = prime * result + [self.teamFolderChangeStatusDetails hash];
   case DBTEAMLOGEventDetailsTeamFolderCreateDetails:
@@ -16943,6 +16909,8 @@
     result = prime * result + [self.networkControlChangePolicyDetails hash];
   case DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails:
     result = prime * result + [self.paperChangeDeploymentPolicyDetails hash];
+  case DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails:
+    result = prime * result + [self.paperChangeMemberLinkPolicyDetails hash];
   case DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails:
     result = prime * result + [self.paperChangeMemberPolicyDetails hash];
   case DBTEAMLOGEventDetailsPaperChangePolicyDetails:
@@ -16973,6 +16941,8 @@
     result = prime * result + [self.webSessionsChangeIdleLengthPolicyDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileAddLogoDetails:
     result = prime * result + [self.teamProfileAddLogoDetails hash];
+  case DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails:
+    result = prime * result + [self.teamProfileChangeDefaultLanguageDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails:
     result = prime * result + [self.teamProfileChangeLogoDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileChangeNameDetails:
@@ -17031,6 +17001,8 @@
     return [self.memberSpaceLimitsChangeStatusDetails isEqual:anEventDetails.memberSpaceLimitsChangeStatusDetails];
   case DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails:
     return [self.memberTransferAccountContentsDetails isEqual:anEventDetails.memberTransferAccountContentsDetails];
+  case DBTEAMLOGEventDetailsPaperAdminExportStartDetails:
+    return [self.paperAdminExportStartDetails isEqual:anEventDetails.paperAdminExportStartDetails];
   case DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails:
     return [self.paperEnabledUsersGroupAdditionDetails isEqual:anEventDetails.paperEnabledUsersGroupAdditionDetails];
   case DBTEAMLOGEventDetailsPaperEnabledUsersGroupRemovalDetails:
@@ -17055,6 +17027,20 @@
     return [self.appUnlinkTeamDetails isEqual:anEventDetails.appUnlinkTeamDetails];
   case DBTEAMLOGEventDetailsAppUnlinkUserDetails:
     return [self.appUnlinkUserDetails isEqual:anEventDetails.appUnlinkUserDetails];
+  case DBTEAMLOGEventDetailsFileAddCommentDetails:
+    return [self.fileAddCommentDetails isEqual:anEventDetails.fileAddCommentDetails];
+  case DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails:
+    return [self.fileChangeCommentSubscriptionDetails isEqual:anEventDetails.fileChangeCommentSubscriptionDetails];
+  case DBTEAMLOGEventDetailsFileDeleteCommentDetails:
+    return [self.fileDeleteCommentDetails isEqual:anEventDetails.fileDeleteCommentDetails];
+  case DBTEAMLOGEventDetailsFileLikeCommentDetails:
+    return [self.fileLikeCommentDetails isEqual:anEventDetails.fileLikeCommentDetails];
+  case DBTEAMLOGEventDetailsFileResolveCommentDetails:
+    return [self.fileResolveCommentDetails isEqual:anEventDetails.fileResolveCommentDetails];
+  case DBTEAMLOGEventDetailsFileUnlikeCommentDetails:
+    return [self.fileUnlikeCommentDetails isEqual:anEventDetails.fileUnlikeCommentDetails];
+  case DBTEAMLOGEventDetailsFileUnresolveCommentDetails:
+    return [self.fileUnresolveCommentDetails isEqual:anEventDetails.fileUnresolveCommentDetails];
   case DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails:
     return [self.deviceChangeIpDesktopDetails isEqual:anEventDetails.deviceChangeIpDesktopDetails];
   case DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails:
@@ -17171,10 +17157,6 @@
     return [self.groupCreateDetails isEqual:anEventDetails.groupCreateDetails];
   case DBTEAMLOGEventDetailsGroupDeleteDetails:
     return [self.groupDeleteDetails isEqual:anEventDetails.groupDeleteDetails];
-  case DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails:
-    return [self.groupDescriptionUpdatedDetails isEqual:anEventDetails.groupDescriptionUpdatedDetails];
-  case DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails:
-    return [self.groupJoinPolicyUpdatedDetails isEqual:anEventDetails.groupJoinPolicyUpdatedDetails];
   case DBTEAMLOGEventDetailsGroupMovedDetails:
     return [self.groupMovedDetails isEqual:anEventDetails.groupMovedDetails];
   case DBTEAMLOGEventDetailsGroupRemoveExternalIdDetails:
@@ -17219,8 +17201,6 @@
     return [self.paperContentAddToFolderDetails isEqual:anEventDetails.paperContentAddToFolderDetails];
   case DBTEAMLOGEventDetailsPaperContentArchiveDetails:
     return [self.paperContentArchiveDetails isEqual:anEventDetails.paperContentArchiveDetails];
-  case DBTEAMLOGEventDetailsPaperContentChangeSubscriptionDetails:
-    return [self.paperContentChangeSubscriptionDetails isEqual:anEventDetails.paperContentChangeSubscriptionDetails];
   case DBTEAMLOGEventDetailsPaperContentCreateDetails:
     return [self.paperContentCreateDetails isEqual:anEventDetails.paperContentCreateDetails];
   case DBTEAMLOGEventDetailsPaperContentPermanentlyDeleteDetails:
@@ -17239,6 +17219,8 @@
     return [self.paperDocChangeMemberRoleDetails isEqual:anEventDetails.paperDocChangeMemberRoleDetails];
   case DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails:
     return [self.paperDocChangeSharingPolicyDetails isEqual:anEventDetails.paperDocChangeSharingPolicyDetails];
+  case DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails:
+    return [self.paperDocChangeSubscriptionDetails isEqual:anEventDetails.paperDocChangeSubscriptionDetails];
   case DBTEAMLOGEventDetailsPaperDocDeletedDetails:
     return [self.paperDocDeletedDetails isEqual:anEventDetails.paperDocDeletedDetails];
   case DBTEAMLOGEventDetailsPaperDocDeleteCommentDetails:
@@ -17263,10 +17245,16 @@
     return [self.paperDocSlackShareDetails isEqual:anEventDetails.paperDocSlackShareDetails];
   case DBTEAMLOGEventDetailsPaperDocTeamInviteDetails:
     return [self.paperDocTeamInviteDetails isEqual:anEventDetails.paperDocTeamInviteDetails];
+  case DBTEAMLOGEventDetailsPaperDocTrashedDetails:
+    return [self.paperDocTrashedDetails isEqual:anEventDetails.paperDocTrashedDetails];
   case DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails:
     return [self.paperDocUnresolveCommentDetails isEqual:anEventDetails.paperDocUnresolveCommentDetails];
+  case DBTEAMLOGEventDetailsPaperDocUntrashedDetails:
+    return [self.paperDocUntrashedDetails isEqual:anEventDetails.paperDocUntrashedDetails];
   case DBTEAMLOGEventDetailsPaperDocViewDetails:
     return [self.paperDocViewDetails isEqual:anEventDetails.paperDocViewDetails];
+  case DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails:
+    return [self.paperFolderChangeSubscriptionDetails isEqual:anEventDetails.paperFolderChangeSubscriptionDetails];
   case DBTEAMLOGEventDetailsPaperFolderDeletedDetails:
     return [self.paperFolderDeletedDetails isEqual:anEventDetails.paperFolderDeletedDetails];
   case DBTEAMLOGEventDetailsPaperFolderFollowedDetails:
@@ -17290,12 +17278,6 @@
     return [self.teamActivityCreateReportDetails isEqual:anEventDetails.teamActivityCreateReportDetails];
   case DBTEAMLOGEventDetailsCollectionShareDetails:
     return [self.collectionShareDetails isEqual:anEventDetails.collectionShareDetails];
-  case DBTEAMLOGEventDetailsFileAddCommentDetails:
-    return [self.fileAddCommentDetails isEqual:anEventDetails.fileAddCommentDetails];
-  case DBTEAMLOGEventDetailsFileLikeCommentDetails:
-    return [self.fileLikeCommentDetails isEqual:anEventDetails.fileLikeCommentDetails];
-  case DBTEAMLOGEventDetailsFileUnlikeCommentDetails:
-    return [self.fileUnlikeCommentDetails isEqual:anEventDetails.fileUnlikeCommentDetails];
   case DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails:
     return [self.noteAclInviteOnlyDetails isEqual:anEventDetails.noteAclInviteOnlyDetails];
   case DBTEAMLOGEventDetailsNoteAclLinkDetails:
@@ -17426,10 +17408,12 @@
     return [self.shmodelVisibilityPublicDetails isEqual:anEventDetails.shmodelVisibilityPublicDetails];
   case DBTEAMLOGEventDetailsShmodelVisibilityTeamOnlyDetails:
     return [self.shmodelVisibilityTeamOnlyDetails isEqual:anEventDetails.shmodelVisibilityTeamOnlyDetails];
-  case DBTEAMLOGEventDetailsRemoveLogoutUrlDetails:
-    return [self.removeLogoutUrlDetails isEqual:anEventDetails.removeLogoutUrlDetails];
-  case DBTEAMLOGEventDetailsRemoveSsoUrlDetails:
-    return [self.removeSsoUrlDetails isEqual:anEventDetails.removeSsoUrlDetails];
+  case DBTEAMLOGEventDetailsSsoAddCertDetails:
+    return [self.ssoAddCertDetails isEqual:anEventDetails.ssoAddCertDetails];
+  case DBTEAMLOGEventDetailsSsoAddLoginUrlDetails:
+    return [self.ssoAddLoginUrlDetails isEqual:anEventDetails.ssoAddLoginUrlDetails];
+  case DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails:
+    return [self.ssoAddLogoutUrlDetails isEqual:anEventDetails.ssoAddLogoutUrlDetails];
   case DBTEAMLOGEventDetailsSsoChangeCertDetails:
     return [self.ssoChangeCertDetails isEqual:anEventDetails.ssoChangeCertDetails];
   case DBTEAMLOGEventDetailsSsoChangeLoginUrlDetails:
@@ -17438,6 +17422,12 @@
     return [self.ssoChangeLogoutUrlDetails isEqual:anEventDetails.ssoChangeLogoutUrlDetails];
   case DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails:
     return [self.ssoChangeSamlIdentityModeDetails isEqual:anEventDetails.ssoChangeSamlIdentityModeDetails];
+  case DBTEAMLOGEventDetailsSsoRemoveCertDetails:
+    return [self.ssoRemoveCertDetails isEqual:anEventDetails.ssoRemoveCertDetails];
+  case DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails:
+    return [self.ssoRemoveLoginUrlDetails isEqual:anEventDetails.ssoRemoveLoginUrlDetails];
+  case DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails:
+    return [self.ssoRemoveLogoutUrlDetails isEqual:anEventDetails.ssoRemoveLogoutUrlDetails];
   case DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails:
     return [self.teamFolderChangeStatusDetails isEqual:anEventDetails.teamFolderChangeStatusDetails];
   case DBTEAMLOGEventDetailsTeamFolderCreateDetails:
@@ -17512,6 +17502,8 @@
     return [self.networkControlChangePolicyDetails isEqual:anEventDetails.networkControlChangePolicyDetails];
   case DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails:
     return [self.paperChangeDeploymentPolicyDetails isEqual:anEventDetails.paperChangeDeploymentPolicyDetails];
+  case DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails:
+    return [self.paperChangeMemberLinkPolicyDetails isEqual:anEventDetails.paperChangeMemberLinkPolicyDetails];
   case DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails:
     return [self.paperChangeMemberPolicyDetails isEqual:anEventDetails.paperChangeMemberPolicyDetails];
   case DBTEAMLOGEventDetailsPaperChangePolicyDetails:
@@ -17544,6 +17536,9 @@
         [self.webSessionsChangeIdleLengthPolicyDetails isEqual:anEventDetails.webSessionsChangeIdleLengthPolicyDetails];
   case DBTEAMLOGEventDetailsTeamProfileAddLogoDetails:
     return [self.teamProfileAddLogoDetails isEqual:anEventDetails.teamProfileAddLogoDetails];
+  case DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails:
+    return
+        [self.teamProfileChangeDefaultLanguageDetails isEqual:anEventDetails.teamProfileChangeDefaultLanguageDetails];
   case DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails:
     return [self.teamProfileChangeLogoDetails isEqual:anEventDetails.teamProfileChangeLogoDetails];
   case DBTEAMLOGEventDetailsTeamProfileChangeNameDetails:
@@ -17598,6 +17593,10 @@
     jsonDict[@"member_transfer_account_contents_details"] = [[DBTEAMLOGMemberTransferAccountContentsDetailsSerializer
         serialize:valueObj.memberTransferAccountContentsDetails] mutableCopy];
     jsonDict[@".tag"] = @"member_transfer_account_contents_details";
+  } else if ([valueObj isPaperAdminExportStartDetails]) {
+    jsonDict[@"paper_admin_export_start_details"] =
+        [[DBTEAMLOGPaperAdminExportStartDetailsSerializer serialize:valueObj.paperAdminExportStartDetails] mutableCopy];
+    jsonDict[@".tag"] = @"paper_admin_export_start_details";
   } else if ([valueObj isPaperEnabledUsersGroupAdditionDetails]) {
     jsonDict[@"paper_enabled_users_group_addition_details"] = [[DBTEAMLOGPaperEnabledUsersGroupAdditionDetailsSerializer
         serialize:valueObj.paperEnabledUsersGroupAdditionDetails] mutableCopy];
@@ -17646,6 +17645,34 @@
     jsonDict[@"app_unlink_user_details"] =
         [[DBTEAMLOGAppUnlinkUserDetailsSerializer serialize:valueObj.appUnlinkUserDetails] mutableCopy];
     jsonDict[@".tag"] = @"app_unlink_user_details";
+  } else if ([valueObj isFileAddCommentDetails]) {
+    jsonDict[@"file_add_comment_details"] =
+        [[DBTEAMLOGFileAddCommentDetailsSerializer serialize:valueObj.fileAddCommentDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_add_comment_details";
+  } else if ([valueObj isFileChangeCommentSubscriptionDetails]) {
+    jsonDict[@"file_change_comment_subscription_details"] = [[DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer
+        serialize:valueObj.fileChangeCommentSubscriptionDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_change_comment_subscription_details";
+  } else if ([valueObj isFileDeleteCommentDetails]) {
+    jsonDict[@"file_delete_comment_details"] =
+        [[DBTEAMLOGFileDeleteCommentDetailsSerializer serialize:valueObj.fileDeleteCommentDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_delete_comment_details";
+  } else if ([valueObj isFileLikeCommentDetails]) {
+    jsonDict[@"file_like_comment_details"] =
+        [[DBTEAMLOGFileLikeCommentDetailsSerializer serialize:valueObj.fileLikeCommentDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_like_comment_details";
+  } else if ([valueObj isFileResolveCommentDetails]) {
+    jsonDict[@"file_resolve_comment_details"] =
+        [[DBTEAMLOGFileResolveCommentDetailsSerializer serialize:valueObj.fileResolveCommentDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_resolve_comment_details";
+  } else if ([valueObj isFileUnlikeCommentDetails]) {
+    jsonDict[@"file_unlike_comment_details"] =
+        [[DBTEAMLOGFileUnlikeCommentDetailsSerializer serialize:valueObj.fileUnlikeCommentDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_unlike_comment_details";
+  } else if ([valueObj isFileUnresolveCommentDetails]) {
+    jsonDict[@"file_unresolve_comment_details"] =
+        [[DBTEAMLOGFileUnresolveCommentDetailsSerializer serialize:valueObj.fileUnresolveCommentDetails] mutableCopy];
+    jsonDict[@".tag"] = @"file_unresolve_comment_details";
   } else if ([valueObj isDeviceChangeIpDesktopDetails]) {
     jsonDict[@"device_change_ip_desktop_details"] =
         [[DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer serialize:valueObj.deviceChangeIpDesktopDetails] mutableCopy];
@@ -17875,14 +17902,6 @@
     jsonDict[@"group_delete_details"] =
         [[DBTEAMLOGGroupDeleteDetailsSerializer serialize:valueObj.groupDeleteDetails] mutableCopy];
     jsonDict[@".tag"] = @"group_delete_details";
-  } else if ([valueObj isGroupDescriptionUpdatedDetails]) {
-    jsonDict[@"group_description_updated_details"] = [[DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer
-        serialize:valueObj.groupDescriptionUpdatedDetails] mutableCopy];
-    jsonDict[@".tag"] = @"group_description_updated_details";
-  } else if ([valueObj isGroupJoinPolicyUpdatedDetails]) {
-    jsonDict[@"group_join_policy_updated_details"] = [[DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer
-        serialize:valueObj.groupJoinPolicyUpdatedDetails] mutableCopy];
-    jsonDict[@".tag"] = @"group_join_policy_updated_details";
   } else if ([valueObj isGroupMovedDetails]) {
     jsonDict[@"group_moved_details"] =
         [[DBTEAMLOGGroupMovedDetailsSerializer serialize:valueObj.groupMovedDetails] mutableCopy];
@@ -17970,10 +17989,6 @@
     jsonDict[@"paper_content_archive_details"] =
         [[DBTEAMLOGPaperContentArchiveDetailsSerializer serialize:valueObj.paperContentArchiveDetails] mutableCopy];
     jsonDict[@".tag"] = @"paper_content_archive_details";
-  } else if ([valueObj isPaperContentChangeSubscriptionDetails]) {
-    jsonDict[@"paper_content_change_subscription_details"] = [[DBTEAMLOGPaperContentChangeSubscriptionDetailsSerializer
-        serialize:valueObj.paperContentChangeSubscriptionDetails] mutableCopy];
-    jsonDict[@".tag"] = @"paper_content_change_subscription_details";
   } else if ([valueObj isPaperContentCreateDetails]) {
     jsonDict[@"paper_content_create_details"] =
         [[DBTEAMLOGPaperContentCreateDetailsSerializer serialize:valueObj.paperContentCreateDetails] mutableCopy];
@@ -18010,6 +18025,10 @@
     jsonDict[@"paper_doc_change_sharing_policy_details"] = [[DBTEAMLOGPaperDocChangeSharingPolicyDetailsSerializer
         serialize:valueObj.paperDocChangeSharingPolicyDetails] mutableCopy];
     jsonDict[@".tag"] = @"paper_doc_change_sharing_policy_details";
+  } else if ([valueObj isPaperDocChangeSubscriptionDetails]) {
+    jsonDict[@"paper_doc_change_subscription_details"] = [[DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer
+        serialize:valueObj.paperDocChangeSubscriptionDetails] mutableCopy];
+    jsonDict[@".tag"] = @"paper_doc_change_subscription_details";
   } else if ([valueObj isPaperDocDeletedDetails]) {
     jsonDict[@"paper_doc_deleted_details"] =
         [[DBTEAMLOGPaperDocDeletedDetailsSerializer serialize:valueObj.paperDocDeletedDetails] mutableCopy];
@@ -18058,14 +18077,26 @@
     jsonDict[@"paper_doc_team_invite_details"] =
         [[DBTEAMLOGPaperDocTeamInviteDetailsSerializer serialize:valueObj.paperDocTeamInviteDetails] mutableCopy];
     jsonDict[@".tag"] = @"paper_doc_team_invite_details";
+  } else if ([valueObj isPaperDocTrashedDetails]) {
+    jsonDict[@"paper_doc_trashed_details"] =
+        [[DBTEAMLOGPaperDocTrashedDetailsSerializer serialize:valueObj.paperDocTrashedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"paper_doc_trashed_details";
   } else if ([valueObj isPaperDocUnresolveCommentDetails]) {
     jsonDict[@"paper_doc_unresolve_comment_details"] = [[DBTEAMLOGPaperDocUnresolveCommentDetailsSerializer
         serialize:valueObj.paperDocUnresolveCommentDetails] mutableCopy];
     jsonDict[@".tag"] = @"paper_doc_unresolve_comment_details";
+  } else if ([valueObj isPaperDocUntrashedDetails]) {
+    jsonDict[@"paper_doc_untrashed_details"] =
+        [[DBTEAMLOGPaperDocUntrashedDetailsSerializer serialize:valueObj.paperDocUntrashedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"paper_doc_untrashed_details";
   } else if ([valueObj isPaperDocViewDetails]) {
     jsonDict[@"paper_doc_view_details"] =
         [[DBTEAMLOGPaperDocViewDetailsSerializer serialize:valueObj.paperDocViewDetails] mutableCopy];
     jsonDict[@".tag"] = @"paper_doc_view_details";
+  } else if ([valueObj isPaperFolderChangeSubscriptionDetails]) {
+    jsonDict[@"paper_folder_change_subscription_details"] = [[DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer
+        serialize:valueObj.paperFolderChangeSubscriptionDetails] mutableCopy];
+    jsonDict[@".tag"] = @"paper_folder_change_subscription_details";
   } else if ([valueObj isPaperFolderDeletedDetails]) {
     jsonDict[@"paper_folder_deleted_details"] =
         [[DBTEAMLOGPaperFolderDeletedDetailsSerializer serialize:valueObj.paperFolderDeletedDetails] mutableCopy];
@@ -18111,18 +18142,6 @@
     jsonDict[@"collection_share_details"] =
         [[DBTEAMLOGCollectionShareDetailsSerializer serialize:valueObj.collectionShareDetails] mutableCopy];
     jsonDict[@".tag"] = @"collection_share_details";
-  } else if ([valueObj isFileAddCommentDetails]) {
-    jsonDict[@"file_add_comment_details"] =
-        [[DBTEAMLOGFileAddCommentDetailsSerializer serialize:valueObj.fileAddCommentDetails] mutableCopy];
-    jsonDict[@".tag"] = @"file_add_comment_details";
-  } else if ([valueObj isFileLikeCommentDetails]) {
-    jsonDict[@"file_like_comment_details"] =
-        [[DBTEAMLOGFileLikeCommentDetailsSerializer serialize:valueObj.fileLikeCommentDetails] mutableCopy];
-    jsonDict[@".tag"] = @"file_like_comment_details";
-  } else if ([valueObj isFileUnlikeCommentDetails]) {
-    jsonDict[@"file_unlike_comment_details"] =
-        [[DBTEAMLOGFileUnlikeCommentDetailsSerializer serialize:valueObj.fileUnlikeCommentDetails] mutableCopy];
-    jsonDict[@".tag"] = @"file_unlike_comment_details";
   } else if ([valueObj isNoteAclInviteOnlyDetails]) {
     jsonDict[@"note_acl_invite_only_details"] =
         [[DBTEAMLOGNoteAclInviteOnlyDetailsSerializer serialize:valueObj.noteAclInviteOnlyDetails] mutableCopy];
@@ -18379,14 +18398,18 @@
     jsonDict[@"shmodel_visibility_team_only_details"] = [[DBTEAMLOGShmodelVisibilityTeamOnlyDetailsSerializer
         serialize:valueObj.shmodelVisibilityTeamOnlyDetails] mutableCopy];
     jsonDict[@".tag"] = @"shmodel_visibility_team_only_details";
-  } else if ([valueObj isRemoveLogoutUrlDetails]) {
-    jsonDict[@"remove_logout_url_details"] =
-        [[DBTEAMLOGRemoveLogoutUrlDetailsSerializer serialize:valueObj.removeLogoutUrlDetails] mutableCopy];
-    jsonDict[@".tag"] = @"remove_logout_url_details";
-  } else if ([valueObj isRemoveSsoUrlDetails]) {
-    jsonDict[@"remove_sso_url_details"] =
-        [[DBTEAMLOGRemoveSsoUrlDetailsSerializer serialize:valueObj.removeSsoUrlDetails] mutableCopy];
-    jsonDict[@".tag"] = @"remove_sso_url_details";
+  } else if ([valueObj isSsoAddCertDetails]) {
+    jsonDict[@"sso_add_cert_details"] =
+        [[DBTEAMLOGSsoAddCertDetailsSerializer serialize:valueObj.ssoAddCertDetails] mutableCopy];
+    jsonDict[@".tag"] = @"sso_add_cert_details";
+  } else if ([valueObj isSsoAddLoginUrlDetails]) {
+    jsonDict[@"sso_add_login_url_details"] =
+        [[DBTEAMLOGSsoAddLoginUrlDetailsSerializer serialize:valueObj.ssoAddLoginUrlDetails] mutableCopy];
+    jsonDict[@".tag"] = @"sso_add_login_url_details";
+  } else if ([valueObj isSsoAddLogoutUrlDetails]) {
+    jsonDict[@"sso_add_logout_url_details"] =
+        [[DBTEAMLOGSsoAddLogoutUrlDetailsSerializer serialize:valueObj.ssoAddLogoutUrlDetails] mutableCopy];
+    jsonDict[@".tag"] = @"sso_add_logout_url_details";
   } else if ([valueObj isSsoChangeCertDetails]) {
     jsonDict[@"sso_change_cert_details"] =
         [[DBTEAMLOGSsoChangeCertDetailsSerializer serialize:valueObj.ssoChangeCertDetails] mutableCopy];
@@ -18403,6 +18426,18 @@
     jsonDict[@"sso_change_saml_identity_mode_details"] = [[DBTEAMLOGSsoChangeSamlIdentityModeDetailsSerializer
         serialize:valueObj.ssoChangeSamlIdentityModeDetails] mutableCopy];
     jsonDict[@".tag"] = @"sso_change_saml_identity_mode_details";
+  } else if ([valueObj isSsoRemoveCertDetails]) {
+    jsonDict[@"sso_remove_cert_details"] =
+        [[DBTEAMLOGSsoRemoveCertDetailsSerializer serialize:valueObj.ssoRemoveCertDetails] mutableCopy];
+    jsonDict[@".tag"] = @"sso_remove_cert_details";
+  } else if ([valueObj isSsoRemoveLoginUrlDetails]) {
+    jsonDict[@"sso_remove_login_url_details"] =
+        [[DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer serialize:valueObj.ssoRemoveLoginUrlDetails] mutableCopy];
+    jsonDict[@".tag"] = @"sso_remove_login_url_details";
+  } else if ([valueObj isSsoRemoveLogoutUrlDetails]) {
+    jsonDict[@"sso_remove_logout_url_details"] =
+        [[DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer serialize:valueObj.ssoRemoveLogoutUrlDetails] mutableCopy];
+    jsonDict[@".tag"] = @"sso_remove_logout_url_details";
   } else if ([valueObj isTeamFolderChangeStatusDetails]) {
     jsonDict[@"team_folder_change_status_details"] = [[DBTEAMLOGTeamFolderChangeStatusDetailsSerializer
         serialize:valueObj.teamFolderChangeStatusDetails] mutableCopy];
@@ -18542,6 +18577,10 @@
     jsonDict[@"paper_change_deployment_policy_details"] = [[DBTEAMLOGPaperChangeDeploymentPolicyDetailsSerializer
         serialize:valueObj.paperChangeDeploymentPolicyDetails] mutableCopy];
     jsonDict[@".tag"] = @"paper_change_deployment_policy_details";
+  } else if ([valueObj isPaperChangeMemberLinkPolicyDetails]) {
+    jsonDict[@"paper_change_member_link_policy_details"] = [[DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer
+        serialize:valueObj.paperChangeMemberLinkPolicyDetails] mutableCopy];
+    jsonDict[@".tag"] = @"paper_change_member_link_policy_details";
   } else if ([valueObj isPaperChangeMemberPolicyDetails]) {
     jsonDict[@"paper_change_member_policy_details"] = [[DBTEAMLOGPaperChangeMemberPolicyDetailsSerializer
         serialize:valueObj.paperChangeMemberPolicyDetails] mutableCopy];
@@ -18604,6 +18643,11 @@
     jsonDict[@"team_profile_add_logo_details"] =
         [[DBTEAMLOGTeamProfileAddLogoDetailsSerializer serialize:valueObj.teamProfileAddLogoDetails] mutableCopy];
     jsonDict[@".tag"] = @"team_profile_add_logo_details";
+  } else if ([valueObj isTeamProfileChangeDefaultLanguageDetails]) {
+    jsonDict[@"team_profile_change_default_language_details"] =
+        [[DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer
+            serialize:valueObj.teamProfileChangeDefaultLanguageDetails] mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_change_default_language_details";
   } else if ([valueObj isTeamProfileChangeLogoDetails]) {
     jsonDict[@"team_profile_change_logo_details"] =
         [[DBTEAMLOGTeamProfileChangeLogoDetailsSerializer serialize:valueObj.teamProfileChangeLogoDetails] mutableCopy];
@@ -18653,7 +18697,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEventDetails *)deserialize:(NSDictionary *)valueDict {
@@ -18678,6 +18722,10 @@
         [DBTEAMLOGMemberTransferAccountContentsDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc]
         initWithMemberTransferAccountContentsDetails:memberTransferAccountContentsDetails];
+  } else if ([tag isEqualToString:@"paper_admin_export_start_details"]) {
+    DBTEAMLOGPaperAdminExportStartDetails *paperAdminExportStartDetails =
+        [DBTEAMLOGPaperAdminExportStartDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithPaperAdminExportStartDetails:paperAdminExportStartDetails];
   } else if ([tag isEqualToString:@"paper_enabled_users_group_addition_details"]) {
     DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *paperEnabledUsersGroupAdditionDetails =
         [DBTEAMLOGPaperEnabledUsersGroupAdditionDetailsSerializer deserialize:valueDict];
@@ -18726,6 +18774,35 @@
     DBTEAMLOGAppUnlinkUserDetails *appUnlinkUserDetails =
         [DBTEAMLOGAppUnlinkUserDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithAppUnlinkUserDetails:appUnlinkUserDetails];
+  } else if ([tag isEqualToString:@"file_add_comment_details"]) {
+    DBTEAMLOGFileAddCommentDetails *fileAddCommentDetails =
+        [DBTEAMLOGFileAddCommentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileAddCommentDetails:fileAddCommentDetails];
+  } else if ([tag isEqualToString:@"file_change_comment_subscription_details"]) {
+    DBTEAMLOGFileChangeCommentSubscriptionDetails *fileChangeCommentSubscriptionDetails =
+        [DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithFileChangeCommentSubscriptionDetails:fileChangeCommentSubscriptionDetails];
+  } else if ([tag isEqualToString:@"file_delete_comment_details"]) {
+    DBTEAMLOGFileDeleteCommentDetails *fileDeleteCommentDetails =
+        [DBTEAMLOGFileDeleteCommentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileDeleteCommentDetails:fileDeleteCommentDetails];
+  } else if ([tag isEqualToString:@"file_like_comment_details"]) {
+    DBTEAMLOGFileLikeCommentDetails *fileLikeCommentDetails =
+        [DBTEAMLOGFileLikeCommentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileLikeCommentDetails:fileLikeCommentDetails];
+  } else if ([tag isEqualToString:@"file_resolve_comment_details"]) {
+    DBTEAMLOGFileResolveCommentDetails *fileResolveCommentDetails =
+        [DBTEAMLOGFileResolveCommentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileResolveCommentDetails:fileResolveCommentDetails];
+  } else if ([tag isEqualToString:@"file_unlike_comment_details"]) {
+    DBTEAMLOGFileUnlikeCommentDetails *fileUnlikeCommentDetails =
+        [DBTEAMLOGFileUnlikeCommentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileUnlikeCommentDetails:fileUnlikeCommentDetails];
+  } else if ([tag isEqualToString:@"file_unresolve_comment_details"]) {
+    DBTEAMLOGFileUnresolveCommentDetails *fileUnresolveCommentDetails =
+        [DBTEAMLOGFileUnresolveCommentDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithFileUnresolveCommentDetails:fileUnresolveCommentDetails];
   } else if ([tag isEqualToString:@"device_change_ip_desktop_details"]) {
     DBTEAMLOGDeviceChangeIpDesktopDetails *deviceChangeIpDesktopDetails =
         [DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer deserialize:valueDict];
@@ -18945,14 +19022,6 @@
   } else if ([tag isEqualToString:@"group_delete_details"]) {
     DBTEAMLOGGroupDeleteDetails *groupDeleteDetails = [DBTEAMLOGGroupDeleteDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithGroupDeleteDetails:groupDeleteDetails];
-  } else if ([tag isEqualToString:@"group_description_updated_details"]) {
-    DBTEAMLOGGroupDescriptionUpdatedDetails *groupDescriptionUpdatedDetails =
-        [DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithGroupDescriptionUpdatedDetails:groupDescriptionUpdatedDetails];
-  } else if ([tag isEqualToString:@"group_join_policy_updated_details"]) {
-    DBTEAMLOGGroupJoinPolicyUpdatedDetails *groupJoinPolicyUpdatedDetails =
-        [DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithGroupJoinPolicyUpdatedDetails:groupJoinPolicyUpdatedDetails];
   } else if ([tag isEqualToString:@"group_moved_details"]) {
     DBTEAMLOGGroupMovedDetails *groupMovedDetails = [DBTEAMLOGGroupMovedDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithGroupMovedDetails:groupMovedDetails];
@@ -19038,11 +19107,6 @@
     DBTEAMLOGPaperContentArchiveDetails *paperContentArchiveDetails =
         [DBTEAMLOGPaperContentArchiveDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithPaperContentArchiveDetails:paperContentArchiveDetails];
-  } else if ([tag isEqualToString:@"paper_content_change_subscription_details"]) {
-    DBTEAMLOGPaperContentChangeSubscriptionDetails *paperContentChangeSubscriptionDetails =
-        [DBTEAMLOGPaperContentChangeSubscriptionDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc]
-        initWithPaperContentChangeSubscriptionDetails:paperContentChangeSubscriptionDetails];
   } else if ([tag isEqualToString:@"paper_content_create_details"]) {
     DBTEAMLOGPaperContentCreateDetails *paperContentCreateDetails =
         [DBTEAMLOGPaperContentCreateDetailsSerializer deserialize:valueDict];
@@ -19082,6 +19146,10 @@
         [DBTEAMLOGPaperDocChangeSharingPolicyDetailsSerializer deserialize:valueDict];
     return
         [[DBTEAMLOGEventDetails alloc] initWithPaperDocChangeSharingPolicyDetails:paperDocChangeSharingPolicyDetails];
+  } else if ([tag isEqualToString:@"paper_doc_change_subscription_details"]) {
+    DBTEAMLOGPaperDocChangeSubscriptionDetails *paperDocChangeSubscriptionDetails =
+        [DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithPaperDocChangeSubscriptionDetails:paperDocChangeSubscriptionDetails];
   } else if ([tag isEqualToString:@"paper_doc_deleted_details"]) {
     DBTEAMLOGPaperDocDeletedDetails *paperDocDeletedDetails =
         [DBTEAMLOGPaperDocDeletedDetailsSerializer deserialize:valueDict];
@@ -19129,13 +19197,26 @@
     DBTEAMLOGPaperDocTeamInviteDetails *paperDocTeamInviteDetails =
         [DBTEAMLOGPaperDocTeamInviteDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithPaperDocTeamInviteDetails:paperDocTeamInviteDetails];
+  } else if ([tag isEqualToString:@"paper_doc_trashed_details"]) {
+    DBTEAMLOGPaperDocTrashedDetails *paperDocTrashedDetails =
+        [DBTEAMLOGPaperDocTrashedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithPaperDocTrashedDetails:paperDocTrashedDetails];
   } else if ([tag isEqualToString:@"paper_doc_unresolve_comment_details"]) {
     DBTEAMLOGPaperDocUnresolveCommentDetails *paperDocUnresolveCommentDetails =
         [DBTEAMLOGPaperDocUnresolveCommentDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithPaperDocUnresolveCommentDetails:paperDocUnresolveCommentDetails];
+  } else if ([tag isEqualToString:@"paper_doc_untrashed_details"]) {
+    DBTEAMLOGPaperDocUntrashedDetails *paperDocUntrashedDetails =
+        [DBTEAMLOGPaperDocUntrashedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithPaperDocUntrashedDetails:paperDocUntrashedDetails];
   } else if ([tag isEqualToString:@"paper_doc_view_details"]) {
     DBTEAMLOGPaperDocViewDetails *paperDocViewDetails = [DBTEAMLOGPaperDocViewDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithPaperDocViewDetails:paperDocViewDetails];
+  } else if ([tag isEqualToString:@"paper_folder_change_subscription_details"]) {
+    DBTEAMLOGPaperFolderChangeSubscriptionDetails *paperFolderChangeSubscriptionDetails =
+        [DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithPaperFolderChangeSubscriptionDetails:paperFolderChangeSubscriptionDetails];
   } else if ([tag isEqualToString:@"paper_folder_deleted_details"]) {
     DBTEAMLOGPaperFolderDeletedDetails *paperFolderDeletedDetails =
         [DBTEAMLOGPaperFolderDeletedDetailsSerializer deserialize:valueDict];
@@ -19181,18 +19262,6 @@
     DBTEAMLOGCollectionShareDetails *collectionShareDetails =
         [DBTEAMLOGCollectionShareDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithCollectionShareDetails:collectionShareDetails];
-  } else if ([tag isEqualToString:@"file_add_comment_details"]) {
-    DBTEAMLOGFileAddCommentDetails *fileAddCommentDetails =
-        [DBTEAMLOGFileAddCommentDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithFileAddCommentDetails:fileAddCommentDetails];
-  } else if ([tag isEqualToString:@"file_like_comment_details"]) {
-    DBTEAMLOGFileLikeCommentDetails *fileLikeCommentDetails =
-        [DBTEAMLOGFileLikeCommentDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithFileLikeCommentDetails:fileLikeCommentDetails];
-  } else if ([tag isEqualToString:@"file_unlike_comment_details"]) {
-    DBTEAMLOGFileUnlikeCommentDetails *fileUnlikeCommentDetails =
-        [DBTEAMLOGFileUnlikeCommentDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithFileUnlikeCommentDetails:fileUnlikeCommentDetails];
   } else if ([tag isEqualToString:@"note_acl_invite_only_details"]) {
     DBTEAMLOGNoteAclInviteOnlyDetails *noteAclInviteOnlyDetails =
         [DBTEAMLOGNoteAclInviteOnlyDetailsSerializer deserialize:valueDict];
@@ -19453,13 +19522,17 @@
     DBTEAMLOGShmodelVisibilityTeamOnlyDetails *shmodelVisibilityTeamOnlyDetails =
         [DBTEAMLOGShmodelVisibilityTeamOnlyDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithShmodelVisibilityTeamOnlyDetails:shmodelVisibilityTeamOnlyDetails];
-  } else if ([tag isEqualToString:@"remove_logout_url_details"]) {
-    DBTEAMLOGRemoveLogoutUrlDetails *removeLogoutUrlDetails =
-        [DBTEAMLOGRemoveLogoutUrlDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithRemoveLogoutUrlDetails:removeLogoutUrlDetails];
-  } else if ([tag isEqualToString:@"remove_sso_url_details"]) {
-    DBTEAMLOGRemoveSsoUrlDetails *removeSsoUrlDetails = [DBTEAMLOGRemoveSsoUrlDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithRemoveSsoUrlDetails:removeSsoUrlDetails];
+  } else if ([tag isEqualToString:@"sso_add_cert_details"]) {
+    DBTEAMLOGSsoAddCertDetails *ssoAddCertDetails = [DBTEAMLOGSsoAddCertDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithSsoAddCertDetails:ssoAddCertDetails];
+  } else if ([tag isEqualToString:@"sso_add_login_url_details"]) {
+    DBTEAMLOGSsoAddLoginUrlDetails *ssoAddLoginUrlDetails =
+        [DBTEAMLOGSsoAddLoginUrlDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithSsoAddLoginUrlDetails:ssoAddLoginUrlDetails];
+  } else if ([tag isEqualToString:@"sso_add_logout_url_details"]) {
+    DBTEAMLOGSsoAddLogoutUrlDetails *ssoAddLogoutUrlDetails =
+        [DBTEAMLOGSsoAddLogoutUrlDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithSsoAddLogoutUrlDetails:ssoAddLogoutUrlDetails];
   } else if ([tag isEqualToString:@"sso_change_cert_details"]) {
     DBTEAMLOGSsoChangeCertDetails *ssoChangeCertDetails =
         [DBTEAMLOGSsoChangeCertDetailsSerializer deserialize:valueDict];
@@ -19476,6 +19549,18 @@
     DBTEAMLOGSsoChangeSamlIdentityModeDetails *ssoChangeSamlIdentityModeDetails =
         [DBTEAMLOGSsoChangeSamlIdentityModeDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithSsoChangeSamlIdentityModeDetails:ssoChangeSamlIdentityModeDetails];
+  } else if ([tag isEqualToString:@"sso_remove_cert_details"]) {
+    DBTEAMLOGSsoRemoveCertDetails *ssoRemoveCertDetails =
+        [DBTEAMLOGSsoRemoveCertDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithSsoRemoveCertDetails:ssoRemoveCertDetails];
+  } else if ([tag isEqualToString:@"sso_remove_login_url_details"]) {
+    DBTEAMLOGSsoRemoveLoginUrlDetails *ssoRemoveLoginUrlDetails =
+        [DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithSsoRemoveLoginUrlDetails:ssoRemoveLoginUrlDetails];
+  } else if ([tag isEqualToString:@"sso_remove_logout_url_details"]) {
+    DBTEAMLOGSsoRemoveLogoutUrlDetails *ssoRemoveLogoutUrlDetails =
+        [DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithSsoRemoveLogoutUrlDetails:ssoRemoveLogoutUrlDetails];
   } else if ([tag isEqualToString:@"team_folder_change_status_details"]) {
     DBTEAMLOGTeamFolderChangeStatusDetails *teamFolderChangeStatusDetails =
         [DBTEAMLOGTeamFolderChangeStatusDetailsSerializer deserialize:valueDict];
@@ -19620,6 +19705,11 @@
         [DBTEAMLOGPaperChangeDeploymentPolicyDetailsSerializer deserialize:valueDict];
     return
         [[DBTEAMLOGEventDetails alloc] initWithPaperChangeDeploymentPolicyDetails:paperChangeDeploymentPolicyDetails];
+  } else if ([tag isEqualToString:@"paper_change_member_link_policy_details"]) {
+    DBTEAMLOGPaperChangeMemberLinkPolicyDetails *paperChangeMemberLinkPolicyDetails =
+        [DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithPaperChangeMemberLinkPolicyDetails:paperChangeMemberLinkPolicyDetails];
   } else if ([tag isEqualToString:@"paper_change_member_policy_details"]) {
     DBTEAMLOGPaperChangeMemberPolicyDetails *paperChangeMemberPolicyDetails =
         [DBTEAMLOGPaperChangeMemberPolicyDetailsSerializer deserialize:valueDict];
@@ -19684,6 +19774,11 @@
     DBTEAMLOGTeamProfileAddLogoDetails *teamProfileAddLogoDetails =
         [DBTEAMLOGTeamProfileAddLogoDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithTeamProfileAddLogoDetails:teamProfileAddLogoDetails];
+  } else if ([tag isEqualToString:@"team_profile_change_default_language_details"]) {
+    DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *teamProfileChangeDefaultLanguageDetails =
+        [DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithTeamProfileChangeDefaultLanguageDetails:teamProfileChangeDefaultLanguageDetails];
   } else if ([tag isEqualToString:@"team_profile_change_logo_details"]) {
     DBTEAMLOGTeamProfileChangeLogoDetails *teamProfileChangeLogoDetails =
         [DBTEAMLOGTeamProfileChangeLogoDetailsSerializer deserialize:valueDict];
@@ -19773,6 +19868,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeMemberTransferAccountContents;
+  }
+  return self;
+}
+
+- (instancetype)initWithPaperAdminExportStart {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypePaperAdminExportStart;
   }
   return self;
 }
@@ -19869,6 +19972,62 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeAppUnlinkUser;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileAddComment {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileAddComment;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileChangeCommentSubscription {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileChangeCommentSubscription;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileDeleteComment {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileDeleteComment;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileLikeComment {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileLikeComment;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileResolveComment {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileResolveComment;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileUnlikeComment {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileUnlikeComment;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileUnresolveComment {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeFileUnresolveComment;
   }
   return self;
 }
@@ -20313,22 +20472,6 @@
   return self;
 }
 
-- (instancetype)initWithGroupDescriptionUpdated {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeGroupDescriptionUpdated;
-  }
-  return self;
-}
-
-- (instancetype)initWithGroupJoinPolicyUpdated {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeGroupJoinPolicyUpdated;
-  }
-  return self;
-}
-
 - (instancetype)initWithGroupMoved {
   self = [super init];
   if (self) {
@@ -20505,14 +20648,6 @@
   return self;
 }
 
-- (instancetype)initWithPaperContentChangeSubscription {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypePaperContentChangeSubscription;
-  }
-  return self;
-}
-
 - (instancetype)initWithPaperContentCreate {
   self = [super init];
   if (self) {
@@ -20581,6 +20716,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypePaperDocChangeSharingPolicy;
+  }
+  return self;
+}
+
+- (instancetype)initWithPaperDocChangeSubscription {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypePaperDocChangeSubscription;
   }
   return self;
 }
@@ -20681,6 +20824,14 @@
   return self;
 }
 
+- (instancetype)initWithPaperDocTrashed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypePaperDocTrashed;
+  }
+  return self;
+}
+
 - (instancetype)initWithPaperDocUnresolveComment {
   self = [super init];
   if (self) {
@@ -20689,10 +20840,26 @@
   return self;
 }
 
+- (instancetype)initWithPaperDocUntrashed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypePaperDocUntrashed;
+  }
+  return self;
+}
+
 - (instancetype)initWithPaperDocView {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypePaperDocView;
+  }
+  return self;
+}
+
+- (instancetype)initWithPaperFolderChangeSubscription {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypePaperFolderChangeSubscription;
   }
   return self;
 }
@@ -20781,30 +20948,6 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeCollectionShare;
-  }
-  return self;
-}
-
-- (instancetype)initWithFileAddComment {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeFileAddComment;
-  }
-  return self;
-}
-
-- (instancetype)initWithFileLikeComment {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeFileLikeComment;
-  }
-  return self;
-}
-
-- (instancetype)initWithFileUnlikeComment {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeFileUnlikeComment;
   }
   return self;
 }
@@ -21305,18 +21448,26 @@
   return self;
 }
 
-- (instancetype)initWithRemoveLogoutUrl {
+- (instancetype)initWithSsoAddCert {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGEventTypeRemoveLogoutUrl;
+    _tag = DBTEAMLOGEventTypeSsoAddCert;
   }
   return self;
 }
 
-- (instancetype)initWithRemoveSsoUrl {
+- (instancetype)initWithSsoAddLoginUrl {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGEventTypeRemoveSsoUrl;
+    _tag = DBTEAMLOGEventTypeSsoAddLoginUrl;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoAddLogoutUrl {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeSsoAddLogoutUrl;
   }
   return self;
 }
@@ -21349,6 +21500,30 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeSsoChangeSamlIdentityMode;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoRemoveCert {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeSsoRemoveCert;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoRemoveLoginUrl {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeSsoRemoveLoginUrl;
+  }
+  return self;
+}
+
+- (instancetype)initWithSsoRemoveLogoutUrl {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeSsoRemoveLogoutUrl;
   }
   return self;
 }
@@ -21609,6 +21784,14 @@
   return self;
 }
 
+- (instancetype)initWithPaperChangeMemberLinkPolicy {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypePaperChangeMemberLinkPolicy;
+  }
+  return self;
+}
+
 - (instancetype)initWithPaperChangeMemberPolicy {
   self = [super init];
   if (self) {
@@ -21729,6 +21912,14 @@
   return self;
 }
 
+- (instancetype)initWithTeamProfileChangeDefaultLanguage {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamProfileChangeLogo {
   self = [super init];
   if (self) {
@@ -21837,6 +22028,10 @@
   return _tag == DBTEAMLOGEventTypeMemberTransferAccountContents;
 }
 
+- (BOOL)isPaperAdminExportStart {
+  return _tag == DBTEAMLOGEventTypePaperAdminExportStart;
+}
+
 - (BOOL)isPaperEnabledUsersGroupAddition {
   return _tag == DBTEAMLOGEventTypePaperEnabledUsersGroupAddition;
 }
@@ -21883,6 +22078,34 @@
 
 - (BOOL)isAppUnlinkUser {
   return _tag == DBTEAMLOGEventTypeAppUnlinkUser;
+}
+
+- (BOOL)isFileAddComment {
+  return _tag == DBTEAMLOGEventTypeFileAddComment;
+}
+
+- (BOOL)isFileChangeCommentSubscription {
+  return _tag == DBTEAMLOGEventTypeFileChangeCommentSubscription;
+}
+
+- (BOOL)isFileDeleteComment {
+  return _tag == DBTEAMLOGEventTypeFileDeleteComment;
+}
+
+- (BOOL)isFileLikeComment {
+  return _tag == DBTEAMLOGEventTypeFileLikeComment;
+}
+
+- (BOOL)isFileResolveComment {
+  return _tag == DBTEAMLOGEventTypeFileResolveComment;
+}
+
+- (BOOL)isFileUnlikeComment {
+  return _tag == DBTEAMLOGEventTypeFileUnlikeComment;
+}
+
+- (BOOL)isFileUnresolveComment {
+  return _tag == DBTEAMLOGEventTypeFileUnresolveComment;
 }
 
 - (BOOL)isDeviceChangeIpDesktop {
@@ -22105,14 +22328,6 @@
   return _tag == DBTEAMLOGEventTypeGroupDelete;
 }
 
-- (BOOL)isGroupDescriptionUpdated {
-  return _tag == DBTEAMLOGEventTypeGroupDescriptionUpdated;
-}
-
-- (BOOL)isGroupJoinPolicyUpdated {
-  return _tag == DBTEAMLOGEventTypeGroupJoinPolicyUpdated;
-}
-
 - (BOOL)isGroupMoved {
   return _tag == DBTEAMLOGEventTypeGroupMoved;
 }
@@ -22201,10 +22416,6 @@
   return _tag == DBTEAMLOGEventTypePaperContentArchive;
 }
 
-- (BOOL)isPaperContentChangeSubscription {
-  return _tag == DBTEAMLOGEventTypePaperContentChangeSubscription;
-}
-
 - (BOOL)isPaperContentCreate {
   return _tag == DBTEAMLOGEventTypePaperContentCreate;
 }
@@ -22239,6 +22450,10 @@
 
 - (BOOL)isPaperDocChangeSharingPolicy {
   return _tag == DBTEAMLOGEventTypePaperDocChangeSharingPolicy;
+}
+
+- (BOOL)isPaperDocChangeSubscription {
+  return _tag == DBTEAMLOGEventTypePaperDocChangeSubscription;
 }
 
 - (BOOL)isPaperDocDeleted {
@@ -22289,12 +22504,24 @@
   return _tag == DBTEAMLOGEventTypePaperDocTeamInvite;
 }
 
+- (BOOL)isPaperDocTrashed {
+  return _tag == DBTEAMLOGEventTypePaperDocTrashed;
+}
+
 - (BOOL)isPaperDocUnresolveComment {
   return _tag == DBTEAMLOGEventTypePaperDocUnresolveComment;
 }
 
+- (BOOL)isPaperDocUntrashed {
+  return _tag == DBTEAMLOGEventTypePaperDocUntrashed;
+}
+
 - (BOOL)isPaperDocView {
   return _tag == DBTEAMLOGEventTypePaperDocView;
+}
+
+- (BOOL)isPaperFolderChangeSubscription {
+  return _tag == DBTEAMLOGEventTypePaperFolderChangeSubscription;
 }
 
 - (BOOL)isPaperFolderDeleted {
@@ -22339,18 +22566,6 @@
 
 - (BOOL)isCollectionShare {
   return _tag == DBTEAMLOGEventTypeCollectionShare;
-}
-
-- (BOOL)isFileAddComment {
-  return _tag == DBTEAMLOGEventTypeFileAddComment;
-}
-
-- (BOOL)isFileLikeComment {
-  return _tag == DBTEAMLOGEventTypeFileLikeComment;
-}
-
-- (BOOL)isFileUnlikeComment {
-  return _tag == DBTEAMLOGEventTypeFileUnlikeComment;
 }
 
 - (BOOL)isNoteAclInviteOnly {
@@ -22601,12 +22816,16 @@
   return _tag == DBTEAMLOGEventTypeShmodelVisibilityTeamOnly;
 }
 
-- (BOOL)isRemoveLogoutUrl {
-  return _tag == DBTEAMLOGEventTypeRemoveLogoutUrl;
+- (BOOL)isSsoAddCert {
+  return _tag == DBTEAMLOGEventTypeSsoAddCert;
 }
 
-- (BOOL)isRemoveSsoUrl {
-  return _tag == DBTEAMLOGEventTypeRemoveSsoUrl;
+- (BOOL)isSsoAddLoginUrl {
+  return _tag == DBTEAMLOGEventTypeSsoAddLoginUrl;
+}
+
+- (BOOL)isSsoAddLogoutUrl {
+  return _tag == DBTEAMLOGEventTypeSsoAddLogoutUrl;
 }
 
 - (BOOL)isSsoChangeCert {
@@ -22623,6 +22842,18 @@
 
 - (BOOL)isSsoChangeSamlIdentityMode {
   return _tag == DBTEAMLOGEventTypeSsoChangeSamlIdentityMode;
+}
+
+- (BOOL)isSsoRemoveCert {
+  return _tag == DBTEAMLOGEventTypeSsoRemoveCert;
+}
+
+- (BOOL)isSsoRemoveLoginUrl {
+  return _tag == DBTEAMLOGEventTypeSsoRemoveLoginUrl;
+}
+
+- (BOOL)isSsoRemoveLogoutUrl {
+  return _tag == DBTEAMLOGEventTypeSsoRemoveLogoutUrl;
 }
 
 - (BOOL)isTeamFolderChangeStatus {
@@ -22753,6 +22984,10 @@
   return _tag == DBTEAMLOGEventTypePaperChangeDeploymentPolicy;
 }
 
+- (BOOL)isPaperChangeMemberLinkPolicy {
+  return _tag == DBTEAMLOGEventTypePaperChangeMemberLinkPolicy;
+}
+
 - (BOOL)isPaperChangeMemberPolicy {
   return _tag == DBTEAMLOGEventTypePaperChangeMemberPolicy;
 }
@@ -22813,6 +23048,10 @@
   return _tag == DBTEAMLOGEventTypeTeamProfileAddLogo;
 }
 
+- (BOOL)isTeamProfileChangeDefaultLanguage {
+  return _tag == DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage;
+}
+
 - (BOOL)isTeamProfileChangeLogo {
   return _tag == DBTEAMLOGEventTypeTeamProfileChangeLogo;
 }
@@ -22867,6 +23106,8 @@
     return @"DBTEAMLOGEventTypeMemberSpaceLimitsChangeStatus";
   case DBTEAMLOGEventTypeMemberTransferAccountContents:
     return @"DBTEAMLOGEventTypeMemberTransferAccountContents";
+  case DBTEAMLOGEventTypePaperAdminExportStart:
+    return @"DBTEAMLOGEventTypePaperAdminExportStart";
   case DBTEAMLOGEventTypePaperEnabledUsersGroupAddition:
     return @"DBTEAMLOGEventTypePaperEnabledUsersGroupAddition";
   case DBTEAMLOGEventTypePaperEnabledUsersGroupRemoval:
@@ -22891,6 +23132,20 @@
     return @"DBTEAMLOGEventTypeAppUnlinkTeam";
   case DBTEAMLOGEventTypeAppUnlinkUser:
     return @"DBTEAMLOGEventTypeAppUnlinkUser";
+  case DBTEAMLOGEventTypeFileAddComment:
+    return @"DBTEAMLOGEventTypeFileAddComment";
+  case DBTEAMLOGEventTypeFileChangeCommentSubscription:
+    return @"DBTEAMLOGEventTypeFileChangeCommentSubscription";
+  case DBTEAMLOGEventTypeFileDeleteComment:
+    return @"DBTEAMLOGEventTypeFileDeleteComment";
+  case DBTEAMLOGEventTypeFileLikeComment:
+    return @"DBTEAMLOGEventTypeFileLikeComment";
+  case DBTEAMLOGEventTypeFileResolveComment:
+    return @"DBTEAMLOGEventTypeFileResolveComment";
+  case DBTEAMLOGEventTypeFileUnlikeComment:
+    return @"DBTEAMLOGEventTypeFileUnlikeComment";
+  case DBTEAMLOGEventTypeFileUnresolveComment:
+    return @"DBTEAMLOGEventTypeFileUnresolveComment";
   case DBTEAMLOGEventTypeDeviceChangeIpDesktop:
     return @"DBTEAMLOGEventTypeDeviceChangeIpDesktop";
   case DBTEAMLOGEventTypeDeviceChangeIpMobile:
@@ -23001,10 +23256,6 @@
     return @"DBTEAMLOGEventTypeGroupCreate";
   case DBTEAMLOGEventTypeGroupDelete:
     return @"DBTEAMLOGEventTypeGroupDelete";
-  case DBTEAMLOGEventTypeGroupDescriptionUpdated:
-    return @"DBTEAMLOGEventTypeGroupDescriptionUpdated";
-  case DBTEAMLOGEventTypeGroupJoinPolicyUpdated:
-    return @"DBTEAMLOGEventTypeGroupJoinPolicyUpdated";
   case DBTEAMLOGEventTypeGroupMoved:
     return @"DBTEAMLOGEventTypeGroupMoved";
   case DBTEAMLOGEventTypeGroupRemoveExternalId:
@@ -23049,8 +23300,6 @@
     return @"DBTEAMLOGEventTypePaperContentAddToFolder";
   case DBTEAMLOGEventTypePaperContentArchive:
     return @"DBTEAMLOGEventTypePaperContentArchive";
-  case DBTEAMLOGEventTypePaperContentChangeSubscription:
-    return @"DBTEAMLOGEventTypePaperContentChangeSubscription";
   case DBTEAMLOGEventTypePaperContentCreate:
     return @"DBTEAMLOGEventTypePaperContentCreate";
   case DBTEAMLOGEventTypePaperContentPermanentlyDelete:
@@ -23069,6 +23318,8 @@
     return @"DBTEAMLOGEventTypePaperDocChangeMemberRole";
   case DBTEAMLOGEventTypePaperDocChangeSharingPolicy:
     return @"DBTEAMLOGEventTypePaperDocChangeSharingPolicy";
+  case DBTEAMLOGEventTypePaperDocChangeSubscription:
+    return @"DBTEAMLOGEventTypePaperDocChangeSubscription";
   case DBTEAMLOGEventTypePaperDocDeleted:
     return @"DBTEAMLOGEventTypePaperDocDeleted";
   case DBTEAMLOGEventTypePaperDocDeleteComment:
@@ -23093,10 +23344,16 @@
     return @"DBTEAMLOGEventTypePaperDocSlackShare";
   case DBTEAMLOGEventTypePaperDocTeamInvite:
     return @"DBTEAMLOGEventTypePaperDocTeamInvite";
+  case DBTEAMLOGEventTypePaperDocTrashed:
+    return @"DBTEAMLOGEventTypePaperDocTrashed";
   case DBTEAMLOGEventTypePaperDocUnresolveComment:
     return @"DBTEAMLOGEventTypePaperDocUnresolveComment";
+  case DBTEAMLOGEventTypePaperDocUntrashed:
+    return @"DBTEAMLOGEventTypePaperDocUntrashed";
   case DBTEAMLOGEventTypePaperDocView:
     return @"DBTEAMLOGEventTypePaperDocView";
+  case DBTEAMLOGEventTypePaperFolderChangeSubscription:
+    return @"DBTEAMLOGEventTypePaperFolderChangeSubscription";
   case DBTEAMLOGEventTypePaperFolderDeleted:
     return @"DBTEAMLOGEventTypePaperFolderDeleted";
   case DBTEAMLOGEventTypePaperFolderFollowed:
@@ -23119,12 +23376,6 @@
     return @"DBTEAMLOGEventTypeTeamActivityCreateReport";
   case DBTEAMLOGEventTypeCollectionShare:
     return @"DBTEAMLOGEventTypeCollectionShare";
-  case DBTEAMLOGEventTypeFileAddComment:
-    return @"DBTEAMLOGEventTypeFileAddComment";
-  case DBTEAMLOGEventTypeFileLikeComment:
-    return @"DBTEAMLOGEventTypeFileLikeComment";
-  case DBTEAMLOGEventTypeFileUnlikeComment:
-    return @"DBTEAMLOGEventTypeFileUnlikeComment";
   case DBTEAMLOGEventTypeNoteAclInviteOnly:
     return @"DBTEAMLOGEventTypeNoteAclInviteOnly";
   case DBTEAMLOGEventTypeNoteAclLink:
@@ -23249,10 +23500,12 @@
     return @"DBTEAMLOGEventTypeShmodelVisibilityPublic";
   case DBTEAMLOGEventTypeShmodelVisibilityTeamOnly:
     return @"DBTEAMLOGEventTypeShmodelVisibilityTeamOnly";
-  case DBTEAMLOGEventTypeRemoveLogoutUrl:
-    return @"DBTEAMLOGEventTypeRemoveLogoutUrl";
-  case DBTEAMLOGEventTypeRemoveSsoUrl:
-    return @"DBTEAMLOGEventTypeRemoveSsoUrl";
+  case DBTEAMLOGEventTypeSsoAddCert:
+    return @"DBTEAMLOGEventTypeSsoAddCert";
+  case DBTEAMLOGEventTypeSsoAddLoginUrl:
+    return @"DBTEAMLOGEventTypeSsoAddLoginUrl";
+  case DBTEAMLOGEventTypeSsoAddLogoutUrl:
+    return @"DBTEAMLOGEventTypeSsoAddLogoutUrl";
   case DBTEAMLOGEventTypeSsoChangeCert:
     return @"DBTEAMLOGEventTypeSsoChangeCert";
   case DBTEAMLOGEventTypeSsoChangeLoginUrl:
@@ -23261,6 +23514,12 @@
     return @"DBTEAMLOGEventTypeSsoChangeLogoutUrl";
   case DBTEAMLOGEventTypeSsoChangeSamlIdentityMode:
     return @"DBTEAMLOGEventTypeSsoChangeSamlIdentityMode";
+  case DBTEAMLOGEventTypeSsoRemoveCert:
+    return @"DBTEAMLOGEventTypeSsoRemoveCert";
+  case DBTEAMLOGEventTypeSsoRemoveLoginUrl:
+    return @"DBTEAMLOGEventTypeSsoRemoveLoginUrl";
+  case DBTEAMLOGEventTypeSsoRemoveLogoutUrl:
+    return @"DBTEAMLOGEventTypeSsoRemoveLogoutUrl";
   case DBTEAMLOGEventTypeTeamFolderChangeStatus:
     return @"DBTEAMLOGEventTypeTeamFolderChangeStatus";
   case DBTEAMLOGEventTypeTeamFolderCreate:
@@ -23325,6 +23584,8 @@
     return @"DBTEAMLOGEventTypeNetworkControlChangePolicy";
   case DBTEAMLOGEventTypePaperChangeDeploymentPolicy:
     return @"DBTEAMLOGEventTypePaperChangeDeploymentPolicy";
+  case DBTEAMLOGEventTypePaperChangeMemberLinkPolicy:
+    return @"DBTEAMLOGEventTypePaperChangeMemberLinkPolicy";
   case DBTEAMLOGEventTypePaperChangeMemberPolicy:
     return @"DBTEAMLOGEventTypePaperChangeMemberPolicy";
   case DBTEAMLOGEventTypePaperChangePolicy:
@@ -23355,6 +23616,8 @@
     return @"DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy";
   case DBTEAMLOGEventTypeTeamProfileAddLogo:
     return @"DBTEAMLOGEventTypeTeamProfileAddLogo";
+  case DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage:
+    return @"DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage";
   case DBTEAMLOGEventTypeTeamProfileChangeLogo:
     return @"DBTEAMLOGEventTypeTeamProfileChangeLogo";
   case DBTEAMLOGEventTypeTeamProfileChangeName:
@@ -23384,7 +23647,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGEventTypeSerializer serialize:instance];
 }
 
@@ -23421,6 +23684,8 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeMemberTransferAccountContents:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypePaperAdminExportStart:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperEnabledUsersGroupAddition:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperEnabledUsersGroupRemoval:
@@ -23444,6 +23709,20 @@
   case DBTEAMLOGEventTypeAppUnlinkTeam:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeAppUnlinkUser:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileAddComment:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileChangeCommentSubscription:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileDeleteComment:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileLikeComment:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileResolveComment:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileUnlikeComment:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeFileUnresolveComment:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeDeviceChangeIpDesktop:
     result = prime * result + [[self tagName] hash];
@@ -23555,10 +23834,6 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeGroupDelete:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeGroupDescriptionUpdated:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeGroupJoinPolicyUpdated:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeGroupMoved:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeGroupRemoveExternalId:
@@ -23603,8 +23878,6 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperContentArchive:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypePaperContentChangeSubscription:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperContentCreate:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperContentPermanentlyDelete:
@@ -23622,6 +23895,8 @@
   case DBTEAMLOGEventTypePaperDocChangeMemberRole:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperDocChangeSharingPolicy:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypePaperDocChangeSubscription:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperDocDeleted:
     result = prime * result + [[self tagName] hash];
@@ -23647,9 +23922,15 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperDocTeamInvite:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypePaperDocTrashed:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperDocUnresolveComment:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypePaperDocUntrashed:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperDocView:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypePaperFolderChangeSubscription:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperFolderDeleted:
     result = prime * result + [[self tagName] hash];
@@ -23672,12 +23953,6 @@
   case DBTEAMLOGEventTypeTeamActivityCreateReport:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeCollectionShare:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeFileAddComment:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeFileLikeComment:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeFileUnlikeComment:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeNoteAclInviteOnly:
     result = prime * result + [[self tagName] hash];
@@ -23803,9 +24078,11 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeShmodelVisibilityTeamOnly:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeRemoveLogoutUrl:
+  case DBTEAMLOGEventTypeSsoAddCert:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeRemoveSsoUrl:
+  case DBTEAMLOGEventTypeSsoAddLoginUrl:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeSsoAddLogoutUrl:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeSsoChangeCert:
     result = prime * result + [[self tagName] hash];
@@ -23814,6 +24091,12 @@
   case DBTEAMLOGEventTypeSsoChangeLogoutUrl:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeSsoChangeSamlIdentityMode:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeSsoRemoveCert:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeSsoRemoveLoginUrl:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeSsoRemoveLogoutUrl:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeTeamFolderChangeStatus:
     result = prime * result + [[self tagName] hash];
@@ -23879,6 +24162,8 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperChangeDeploymentPolicy:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypePaperChangeMemberLinkPolicy:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperChangeMemberPolicy:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypePaperChangePolicy:
@@ -23908,6 +24193,8 @@
   case DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeTeamProfileAddLogo:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeTeamProfileChangeLogo:
     result = prime * result + [[self tagName] hash];
@@ -23964,6 +24251,8 @@
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeMemberTransferAccountContents:
     return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypePaperAdminExportStart:
+    return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperEnabledUsersGroupAddition:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperEnabledUsersGroupRemoval:
@@ -23987,6 +24276,20 @@
   case DBTEAMLOGEventTypeAppUnlinkTeam:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeAppUnlinkUser:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileAddComment:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileChangeCommentSubscription:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileDeleteComment:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileLikeComment:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileResolveComment:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileUnlikeComment:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeFileUnresolveComment:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeDeviceChangeIpDesktop:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24098,10 +24401,6 @@
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeGroupDelete:
     return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeGroupDescriptionUpdated:
-    return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeGroupJoinPolicyUpdated:
-    return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeGroupMoved:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeGroupRemoveExternalId:
@@ -24146,8 +24445,6 @@
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperContentArchive:
     return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypePaperContentChangeSubscription:
-    return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperContentCreate:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperContentPermanentlyDelete:
@@ -24165,6 +24462,8 @@
   case DBTEAMLOGEventTypePaperDocChangeMemberRole:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperDocChangeSharingPolicy:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypePaperDocChangeSubscription:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperDocDeleted:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24190,9 +24489,15 @@
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperDocTeamInvite:
     return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypePaperDocTrashed:
+    return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperDocUnresolveComment:
     return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypePaperDocUntrashed:
+    return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperDocView:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypePaperFolderChangeSubscription:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperFolderDeleted:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24215,12 +24520,6 @@
   case DBTEAMLOGEventTypeTeamActivityCreateReport:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeCollectionShare:
-    return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeFileAddComment:
-    return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeFileLikeComment:
-    return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeFileUnlikeComment:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeNoteAclInviteOnly:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24346,9 +24645,11 @@
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeShmodelVisibilityTeamOnly:
     return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeRemoveLogoutUrl:
+  case DBTEAMLOGEventTypeSsoAddCert:
     return [[self tagName] isEqual:[anEventType tagName]];
-  case DBTEAMLOGEventTypeRemoveSsoUrl:
+  case DBTEAMLOGEventTypeSsoAddLoginUrl:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeSsoAddLogoutUrl:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeSsoChangeCert:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24357,6 +24658,12 @@
   case DBTEAMLOGEventTypeSsoChangeLogoutUrl:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeSsoChangeSamlIdentityMode:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeSsoRemoveCert:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeSsoRemoveLoginUrl:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeSsoRemoveLogoutUrl:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeTeamFolderChangeStatus:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24422,6 +24729,8 @@
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperChangeDeploymentPolicy:
     return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypePaperChangeMemberLinkPolicy:
+    return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperChangeMemberPolicy:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypePaperChangePolicy:
@@ -24451,6 +24760,8 @@
   case DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeTeamProfileAddLogo:
+    return [[self tagName] isEqual:[anEventType tagName]];
+  case DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage:
     return [[self tagName] isEqual:[anEventType tagName]];
   case DBTEAMLOGEventTypeTeamProfileChangeLogo:
     return [[self tagName] isEqual:[anEventType tagName]];
@@ -24495,6 +24806,8 @@
     jsonDict[@".tag"] = @"member_space_limits_change_status";
   } else if ([valueObj isMemberTransferAccountContents]) {
     jsonDict[@".tag"] = @"member_transfer_account_contents";
+  } else if ([valueObj isPaperAdminExportStart]) {
+    jsonDict[@".tag"] = @"paper_admin_export_start";
   } else if ([valueObj isPaperEnabledUsersGroupAddition]) {
     jsonDict[@".tag"] = @"paper_enabled_users_group_addition";
   } else if ([valueObj isPaperEnabledUsersGroupRemoval]) {
@@ -24519,6 +24832,20 @@
     jsonDict[@".tag"] = @"app_unlink_team";
   } else if ([valueObj isAppUnlinkUser]) {
     jsonDict[@".tag"] = @"app_unlink_user";
+  } else if ([valueObj isFileAddComment]) {
+    jsonDict[@".tag"] = @"file_add_comment";
+  } else if ([valueObj isFileChangeCommentSubscription]) {
+    jsonDict[@".tag"] = @"file_change_comment_subscription";
+  } else if ([valueObj isFileDeleteComment]) {
+    jsonDict[@".tag"] = @"file_delete_comment";
+  } else if ([valueObj isFileLikeComment]) {
+    jsonDict[@".tag"] = @"file_like_comment";
+  } else if ([valueObj isFileResolveComment]) {
+    jsonDict[@".tag"] = @"file_resolve_comment";
+  } else if ([valueObj isFileUnlikeComment]) {
+    jsonDict[@".tag"] = @"file_unlike_comment";
+  } else if ([valueObj isFileUnresolveComment]) {
+    jsonDict[@".tag"] = @"file_unresolve_comment";
   } else if ([valueObj isDeviceChangeIpDesktop]) {
     jsonDict[@".tag"] = @"device_change_ip_desktop";
   } else if ([valueObj isDeviceChangeIpMobile]) {
@@ -24629,10 +24956,6 @@
     jsonDict[@".tag"] = @"group_create";
   } else if ([valueObj isGroupDelete]) {
     jsonDict[@".tag"] = @"group_delete";
-  } else if ([valueObj isGroupDescriptionUpdated]) {
-    jsonDict[@".tag"] = @"group_description_updated";
-  } else if ([valueObj isGroupJoinPolicyUpdated]) {
-    jsonDict[@".tag"] = @"group_join_policy_updated";
   } else if ([valueObj isGroupMoved]) {
     jsonDict[@".tag"] = @"group_moved";
   } else if ([valueObj isGroupRemoveExternalId]) {
@@ -24677,8 +25000,6 @@
     jsonDict[@".tag"] = @"paper_content_add_to_folder";
   } else if ([valueObj isPaperContentArchive]) {
     jsonDict[@".tag"] = @"paper_content_archive";
-  } else if ([valueObj isPaperContentChangeSubscription]) {
-    jsonDict[@".tag"] = @"paper_content_change_subscription";
   } else if ([valueObj isPaperContentCreate]) {
     jsonDict[@".tag"] = @"paper_content_create";
   } else if ([valueObj isPaperContentPermanentlyDelete]) {
@@ -24697,6 +25018,8 @@
     jsonDict[@".tag"] = @"paper_doc_change_member_role";
   } else if ([valueObj isPaperDocChangeSharingPolicy]) {
     jsonDict[@".tag"] = @"paper_doc_change_sharing_policy";
+  } else if ([valueObj isPaperDocChangeSubscription]) {
+    jsonDict[@".tag"] = @"paper_doc_change_subscription";
   } else if ([valueObj isPaperDocDeleted]) {
     jsonDict[@".tag"] = @"paper_doc_deleted";
   } else if ([valueObj isPaperDocDeleteComment]) {
@@ -24721,10 +25044,16 @@
     jsonDict[@".tag"] = @"paper_doc_slack_share";
   } else if ([valueObj isPaperDocTeamInvite]) {
     jsonDict[@".tag"] = @"paper_doc_team_invite";
+  } else if ([valueObj isPaperDocTrashed]) {
+    jsonDict[@".tag"] = @"paper_doc_trashed";
   } else if ([valueObj isPaperDocUnresolveComment]) {
     jsonDict[@".tag"] = @"paper_doc_unresolve_comment";
+  } else if ([valueObj isPaperDocUntrashed]) {
+    jsonDict[@".tag"] = @"paper_doc_untrashed";
   } else if ([valueObj isPaperDocView]) {
     jsonDict[@".tag"] = @"paper_doc_view";
+  } else if ([valueObj isPaperFolderChangeSubscription]) {
+    jsonDict[@".tag"] = @"paper_folder_change_subscription";
   } else if ([valueObj isPaperFolderDeleted]) {
     jsonDict[@".tag"] = @"paper_folder_deleted";
   } else if ([valueObj isPaperFolderFollowed]) {
@@ -24747,12 +25076,6 @@
     jsonDict[@".tag"] = @"team_activity_create_report";
   } else if ([valueObj isCollectionShare]) {
     jsonDict[@".tag"] = @"collection_share";
-  } else if ([valueObj isFileAddComment]) {
-    jsonDict[@".tag"] = @"file_add_comment";
-  } else if ([valueObj isFileLikeComment]) {
-    jsonDict[@".tag"] = @"file_like_comment";
-  } else if ([valueObj isFileUnlikeComment]) {
-    jsonDict[@".tag"] = @"file_unlike_comment";
   } else if ([valueObj isNoteAclInviteOnly]) {
     jsonDict[@".tag"] = @"note_acl_invite_only";
   } else if ([valueObj isNoteAclLink]) {
@@ -24877,10 +25200,12 @@
     jsonDict[@".tag"] = @"shmodel_visibility_public";
   } else if ([valueObj isShmodelVisibilityTeamOnly]) {
     jsonDict[@".tag"] = @"shmodel_visibility_team_only";
-  } else if ([valueObj isRemoveLogoutUrl]) {
-    jsonDict[@".tag"] = @"remove_logout_url";
-  } else if ([valueObj isRemoveSsoUrl]) {
-    jsonDict[@".tag"] = @"remove_sso_url";
+  } else if ([valueObj isSsoAddCert]) {
+    jsonDict[@".tag"] = @"sso_add_cert";
+  } else if ([valueObj isSsoAddLoginUrl]) {
+    jsonDict[@".tag"] = @"sso_add_login_url";
+  } else if ([valueObj isSsoAddLogoutUrl]) {
+    jsonDict[@".tag"] = @"sso_add_logout_url";
   } else if ([valueObj isSsoChangeCert]) {
     jsonDict[@".tag"] = @"sso_change_cert";
   } else if ([valueObj isSsoChangeLoginUrl]) {
@@ -24889,6 +25214,12 @@
     jsonDict[@".tag"] = @"sso_change_logout_url";
   } else if ([valueObj isSsoChangeSamlIdentityMode]) {
     jsonDict[@".tag"] = @"sso_change_saml_identity_mode";
+  } else if ([valueObj isSsoRemoveCert]) {
+    jsonDict[@".tag"] = @"sso_remove_cert";
+  } else if ([valueObj isSsoRemoveLoginUrl]) {
+    jsonDict[@".tag"] = @"sso_remove_login_url";
+  } else if ([valueObj isSsoRemoveLogoutUrl]) {
+    jsonDict[@".tag"] = @"sso_remove_logout_url";
   } else if ([valueObj isTeamFolderChangeStatus]) {
     jsonDict[@".tag"] = @"team_folder_change_status";
   } else if ([valueObj isTeamFolderCreate]) {
@@ -24953,6 +25284,8 @@
     jsonDict[@".tag"] = @"network_control_change_policy";
   } else if ([valueObj isPaperChangeDeploymentPolicy]) {
     jsonDict[@".tag"] = @"paper_change_deployment_policy";
+  } else if ([valueObj isPaperChangeMemberLinkPolicy]) {
+    jsonDict[@".tag"] = @"paper_change_member_link_policy";
   } else if ([valueObj isPaperChangeMemberPolicy]) {
     jsonDict[@".tag"] = @"paper_change_member_policy";
   } else if ([valueObj isPaperChangePolicy]) {
@@ -24983,6 +25316,8 @@
     jsonDict[@".tag"] = @"web_sessions_change_idle_length_policy";
   } else if ([valueObj isTeamProfileAddLogo]) {
     jsonDict[@".tag"] = @"team_profile_add_logo";
+  } else if ([valueObj isTeamProfileChangeDefaultLanguage]) {
+    jsonDict[@".tag"] = @"team_profile_change_default_language";
   } else if ([valueObj isTeamProfileChangeLogo]) {
     jsonDict[@".tag"] = @"team_profile_change_logo";
   } else if ([valueObj isTeamProfileChangeName]) {
@@ -25009,7 +25344,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGEventType *)deserialize:(NSDictionary *)valueDict {
@@ -25023,6 +25358,8 @@
     return [[DBTEAMLOGEventType alloc] initWithMemberSpaceLimitsChangeStatus];
   } else if ([tag isEqualToString:@"member_transfer_account_contents"]) {
     return [[DBTEAMLOGEventType alloc] initWithMemberTransferAccountContents];
+  } else if ([tag isEqualToString:@"paper_admin_export_start"]) {
+    return [[DBTEAMLOGEventType alloc] initWithPaperAdminExportStart];
   } else if ([tag isEqualToString:@"paper_enabled_users_group_addition"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperEnabledUsersGroupAddition];
   } else if ([tag isEqualToString:@"paper_enabled_users_group_removal"]) {
@@ -25047,6 +25384,20 @@
     return [[DBTEAMLOGEventType alloc] initWithAppUnlinkTeam];
   } else if ([tag isEqualToString:@"app_unlink_user"]) {
     return [[DBTEAMLOGEventType alloc] initWithAppUnlinkUser];
+  } else if ([tag isEqualToString:@"file_add_comment"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileAddComment];
+  } else if ([tag isEqualToString:@"file_change_comment_subscription"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileChangeCommentSubscription];
+  } else if ([tag isEqualToString:@"file_delete_comment"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileDeleteComment];
+  } else if ([tag isEqualToString:@"file_like_comment"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileLikeComment];
+  } else if ([tag isEqualToString:@"file_resolve_comment"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileResolveComment];
+  } else if ([tag isEqualToString:@"file_unlike_comment"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileUnlikeComment];
+  } else if ([tag isEqualToString:@"file_unresolve_comment"]) {
+    return [[DBTEAMLOGEventType alloc] initWithFileUnresolveComment];
   } else if ([tag isEqualToString:@"device_change_ip_desktop"]) {
     return [[DBTEAMLOGEventType alloc] initWithDeviceChangeIpDesktop];
   } else if ([tag isEqualToString:@"device_change_ip_mobile"]) {
@@ -25157,10 +25508,6 @@
     return [[DBTEAMLOGEventType alloc] initWithGroupCreate];
   } else if ([tag isEqualToString:@"group_delete"]) {
     return [[DBTEAMLOGEventType alloc] initWithGroupDelete];
-  } else if ([tag isEqualToString:@"group_description_updated"]) {
-    return [[DBTEAMLOGEventType alloc] initWithGroupDescriptionUpdated];
-  } else if ([tag isEqualToString:@"group_join_policy_updated"]) {
-    return [[DBTEAMLOGEventType alloc] initWithGroupJoinPolicyUpdated];
   } else if ([tag isEqualToString:@"group_moved"]) {
     return [[DBTEAMLOGEventType alloc] initWithGroupMoved];
   } else if ([tag isEqualToString:@"group_remove_external_id"]) {
@@ -25205,8 +25552,6 @@
     return [[DBTEAMLOGEventType alloc] initWithPaperContentAddToFolder];
   } else if ([tag isEqualToString:@"paper_content_archive"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperContentArchive];
-  } else if ([tag isEqualToString:@"paper_content_change_subscription"]) {
-    return [[DBTEAMLOGEventType alloc] initWithPaperContentChangeSubscription];
   } else if ([tag isEqualToString:@"paper_content_create"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperContentCreate];
   } else if ([tag isEqualToString:@"paper_content_permanently_delete"]) {
@@ -25225,6 +25570,8 @@
     return [[DBTEAMLOGEventType alloc] initWithPaperDocChangeMemberRole];
   } else if ([tag isEqualToString:@"paper_doc_change_sharing_policy"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperDocChangeSharingPolicy];
+  } else if ([tag isEqualToString:@"paper_doc_change_subscription"]) {
+    return [[DBTEAMLOGEventType alloc] initWithPaperDocChangeSubscription];
   } else if ([tag isEqualToString:@"paper_doc_deleted"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperDocDeleted];
   } else if ([tag isEqualToString:@"paper_doc_delete_comment"]) {
@@ -25249,10 +25596,16 @@
     return [[DBTEAMLOGEventType alloc] initWithPaperDocSlackShare];
   } else if ([tag isEqualToString:@"paper_doc_team_invite"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperDocTeamInvite];
+  } else if ([tag isEqualToString:@"paper_doc_trashed"]) {
+    return [[DBTEAMLOGEventType alloc] initWithPaperDocTrashed];
   } else if ([tag isEqualToString:@"paper_doc_unresolve_comment"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperDocUnresolveComment];
+  } else if ([tag isEqualToString:@"paper_doc_untrashed"]) {
+    return [[DBTEAMLOGEventType alloc] initWithPaperDocUntrashed];
   } else if ([tag isEqualToString:@"paper_doc_view"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperDocView];
+  } else if ([tag isEqualToString:@"paper_folder_change_subscription"]) {
+    return [[DBTEAMLOGEventType alloc] initWithPaperFolderChangeSubscription];
   } else if ([tag isEqualToString:@"paper_folder_deleted"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperFolderDeleted];
   } else if ([tag isEqualToString:@"paper_folder_followed"]) {
@@ -25275,12 +25628,6 @@
     return [[DBTEAMLOGEventType alloc] initWithTeamActivityCreateReport];
   } else if ([tag isEqualToString:@"collection_share"]) {
     return [[DBTEAMLOGEventType alloc] initWithCollectionShare];
-  } else if ([tag isEqualToString:@"file_add_comment"]) {
-    return [[DBTEAMLOGEventType alloc] initWithFileAddComment];
-  } else if ([tag isEqualToString:@"file_like_comment"]) {
-    return [[DBTEAMLOGEventType alloc] initWithFileLikeComment];
-  } else if ([tag isEqualToString:@"file_unlike_comment"]) {
-    return [[DBTEAMLOGEventType alloc] initWithFileUnlikeComment];
   } else if ([tag isEqualToString:@"note_acl_invite_only"]) {
     return [[DBTEAMLOGEventType alloc] initWithNoteAclInviteOnly];
   } else if ([tag isEqualToString:@"note_acl_link"]) {
@@ -25405,10 +25752,12 @@
     return [[DBTEAMLOGEventType alloc] initWithShmodelVisibilityPublic];
   } else if ([tag isEqualToString:@"shmodel_visibility_team_only"]) {
     return [[DBTEAMLOGEventType alloc] initWithShmodelVisibilityTeamOnly];
-  } else if ([tag isEqualToString:@"remove_logout_url"]) {
-    return [[DBTEAMLOGEventType alloc] initWithRemoveLogoutUrl];
-  } else if ([tag isEqualToString:@"remove_sso_url"]) {
-    return [[DBTEAMLOGEventType alloc] initWithRemoveSsoUrl];
+  } else if ([tag isEqualToString:@"sso_add_cert"]) {
+    return [[DBTEAMLOGEventType alloc] initWithSsoAddCert];
+  } else if ([tag isEqualToString:@"sso_add_login_url"]) {
+    return [[DBTEAMLOGEventType alloc] initWithSsoAddLoginUrl];
+  } else if ([tag isEqualToString:@"sso_add_logout_url"]) {
+    return [[DBTEAMLOGEventType alloc] initWithSsoAddLogoutUrl];
   } else if ([tag isEqualToString:@"sso_change_cert"]) {
     return [[DBTEAMLOGEventType alloc] initWithSsoChangeCert];
   } else if ([tag isEqualToString:@"sso_change_login_url"]) {
@@ -25417,6 +25766,12 @@
     return [[DBTEAMLOGEventType alloc] initWithSsoChangeLogoutUrl];
   } else if ([tag isEqualToString:@"sso_change_saml_identity_mode"]) {
     return [[DBTEAMLOGEventType alloc] initWithSsoChangeSamlIdentityMode];
+  } else if ([tag isEqualToString:@"sso_remove_cert"]) {
+    return [[DBTEAMLOGEventType alloc] initWithSsoRemoveCert];
+  } else if ([tag isEqualToString:@"sso_remove_login_url"]) {
+    return [[DBTEAMLOGEventType alloc] initWithSsoRemoveLoginUrl];
+  } else if ([tag isEqualToString:@"sso_remove_logout_url"]) {
+    return [[DBTEAMLOGEventType alloc] initWithSsoRemoveLogoutUrl];
   } else if ([tag isEqualToString:@"team_folder_change_status"]) {
     return [[DBTEAMLOGEventType alloc] initWithTeamFolderChangeStatus];
   } else if ([tag isEqualToString:@"team_folder_create"]) {
@@ -25481,6 +25836,8 @@
     return [[DBTEAMLOGEventType alloc] initWithNetworkControlChangePolicy];
   } else if ([tag isEqualToString:@"paper_change_deployment_policy"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperChangeDeploymentPolicy];
+  } else if ([tag isEqualToString:@"paper_change_member_link_policy"]) {
+    return [[DBTEAMLOGEventType alloc] initWithPaperChangeMemberLinkPolicy];
   } else if ([tag isEqualToString:@"paper_change_member_policy"]) {
     return [[DBTEAMLOGEventType alloc] initWithPaperChangeMemberPolicy];
   } else if ([tag isEqualToString:@"paper_change_policy"]) {
@@ -25511,6 +25868,8 @@
     return [[DBTEAMLOGEventType alloc] initWithWebSessionsChangeIdleLengthPolicy];
   } else if ([tag isEqualToString:@"team_profile_add_logo"]) {
     return [[DBTEAMLOGEventType alloc] initWithTeamProfileAddLogo];
+  } else if ([tag isEqualToString:@"team_profile_change_default_language"]) {
+    return [[DBTEAMLOGEventType alloc] initWithTeamProfileChangeDefaultLanguage];
   } else if ([tag isEqualToString:@"team_profile_change_logo"]) {
     return [[DBTEAMLOGEventType alloc] initWithTeamProfileChangeLogo];
   } else if ([tag isEqualToString:@"team_profile_change_name"]) {
@@ -25553,6 +25912,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGExtendedVersionHistoryPolicy *)dNewValue
                     previousValue:(DBTEAMLOGExtendedVersionHistoryPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -25568,7 +25928,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGExtendedVersionHistoryChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -25597,7 +25957,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -25646,7 +26006,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGExtendedVersionHistoryPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGExtendedVersionHistoryChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -25673,18 +26033,26 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithLimited {
+- (instancetype)initWithExplicitlyLimited {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGExtendedVersionHistoryPolicyLimited;
+    _tag = DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited;
   }
   return self;
 }
 
-- (instancetype)initWithUnlimited {
+- (instancetype)initWithExplicitlyUnlimited {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGExtendedVersionHistoryPolicyUnlimited;
+    _tag = DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited;
+  }
+  return self;
+}
+
+- (instancetype)initWithImplicitlyLimited {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited;
   }
   return self;
 }
@@ -25701,12 +26069,16 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isLimited {
-  return _tag == DBTEAMLOGExtendedVersionHistoryPolicyLimited;
+- (BOOL)isExplicitlyLimited {
+  return _tag == DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited;
 }
 
-- (BOOL)isUnlimited {
-  return _tag == DBTEAMLOGExtendedVersionHistoryPolicyUnlimited;
+- (BOOL)isExplicitlyUnlimited {
+  return _tag == DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited;
+}
+
+- (BOOL)isImplicitlyLimited {
+  return _tag == DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited;
 }
 
 - (BOOL)isOther {
@@ -25715,10 +26087,12 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGExtendedVersionHistoryPolicyLimited:
-    return @"DBTEAMLOGExtendedVersionHistoryPolicyLimited";
-  case DBTEAMLOGExtendedVersionHistoryPolicyUnlimited:
-    return @"DBTEAMLOGExtendedVersionHistoryPolicyUnlimited";
+  case DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited:
+    return @"DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited";
+  case DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited:
+    return @"DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited";
+  case DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited:
+    return @"DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited";
   case DBTEAMLOGExtendedVersionHistoryPolicyOther:
     return @"DBTEAMLOGExtendedVersionHistoryPolicyOther";
   }
@@ -25728,7 +26102,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGExtendedVersionHistoryPolicySerializer serialize:instance];
 }
 
@@ -25757,9 +26131,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGExtendedVersionHistoryPolicyLimited:
+  case DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGExtendedVersionHistoryPolicyUnlimited:
+  case DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGExtendedVersionHistoryPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -25788,9 +26164,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGExtendedVersionHistoryPolicyLimited:
+  case DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited:
     return [[self tagName] isEqual:[anExtendedVersionHistoryPolicy tagName]];
-  case DBTEAMLOGExtendedVersionHistoryPolicyUnlimited:
+  case DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited:
+    return [[self tagName] isEqual:[anExtendedVersionHistoryPolicy tagName]];
+  case DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited:
     return [[self tagName] isEqual:[anExtendedVersionHistoryPolicy tagName]];
   case DBTEAMLOGExtendedVersionHistoryPolicyOther:
     return [[self tagName] isEqual:[anExtendedVersionHistoryPolicy tagName]];
@@ -25807,26 +26185,30 @@
 + (NSDictionary *)serialize:(DBTEAMLOGExtendedVersionHistoryPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isLimited]) {
-    jsonDict[@".tag"] = @"limited";
-  } else if ([valueObj isUnlimited]) {
-    jsonDict[@".tag"] = @"unlimited";
+  if ([valueObj isExplicitlyLimited]) {
+    jsonDict[@".tag"] = @"explicitly_limited";
+  } else if ([valueObj isExplicitlyUnlimited]) {
+    jsonDict[@".tag"] = @"explicitly_unlimited";
+  } else if ([valueObj isImplicitlyLimited]) {
+    jsonDict[@".tag"] = @"implicitly_limited";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGExtendedVersionHistoryPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"limited"]) {
-    return [[DBTEAMLOGExtendedVersionHistoryPolicy alloc] initWithLimited];
-  } else if ([tag isEqualToString:@"unlimited"]) {
-    return [[DBTEAMLOGExtendedVersionHistoryPolicy alloc] initWithUnlimited];
+  if ([tag isEqualToString:@"explicitly_limited"]) {
+    return [[DBTEAMLOGExtendedVersionHistoryPolicy alloc] initWithExplicitlyLimited];
+  } else if ([tag isEqualToString:@"explicitly_unlimited"]) {
+    return [[DBTEAMLOGExtendedVersionHistoryPolicy alloc] initWithExplicitlyUnlimited];
+  } else if ([tag isEqualToString:@"implicitly_limited"]) {
+    return [[DBTEAMLOGExtendedVersionHistoryPolicy alloc] initWithImplicitlyLimited];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGExtendedVersionHistoryPolicy alloc] initWithOther];
   } else {
@@ -25863,7 +26245,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFailureDetailsLogInfoSerializer serialize:instance];
 }
 
@@ -25891,10 +26273,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.userFriendlyMessage) {
+  if (self.userFriendlyMessage != nil) {
     result = prime * result + [self.userFriendlyMessage hash];
   }
-  if (self.technicalErrorMessage) {
+  if (self.technicalErrorMessage != nil) {
     result = prime * result + [self.technicalErrorMessage hash];
   }
 
@@ -25946,7 +26328,7 @@
     jsonDict[@"technical_error_message"] = valueObj.technicalErrorMessage;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFailureDetailsLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -25969,23 +26351,24 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex commentText:(NSString *)commentText {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _commentText = commentText;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex commentText:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex commentText:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileAddCommentDetailsSerializer serialize:instance];
 }
 
@@ -26013,8 +26396,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.commentText) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -26037,7 +26420,7 @@
   if (self == aFileAddCommentDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aFileAddCommentDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aFileAddCommentDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.commentText) {
@@ -26057,19 +26440,19 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileAddCommentDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.commentText) {
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileAddCommentDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *commentText = valueDict[@"comment_text"] ?: nil;
 
-  return [[DBTEAMLOGFileAddCommentDetails alloc] initWithTargetIndex:targetIndex commentText:commentText];
+  return [[DBTEAMLOGFileAddCommentDetails alloc] initWithTargetAssetIndex:targetAssetIndex commentText:commentText];
 }
 
 @end
@@ -26094,7 +26477,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileAddDetailsSerializer serialize:instance];
 }
 
@@ -26154,13 +26537,322 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileAddDetails *)deserialize:(NSDictionary *)valueDict {
 #pragma unused(valueDict)
 
   return [[DBTEAMLOGFileAddDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileChangeCommentSubscriptionDetails.h"
+#import "DBTEAMLOGFileCommentNotificationPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileChangeCommentSubscriptionDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGFileCommentNotificationPolicy *)dNewValue
+                           previousValue:(DBTEAMLOGFileCommentNotificationPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _targetAssetIndex = targetAssetIndex;
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGFileCommentNotificationPolicy *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex dNewValue:dNewValue previousValue:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.targetAssetIndex hash];
+  result = prime * result + [self.dNewValue hash];
+  if (self.previousValue != nil) {
+    result = prime * result + [self.previousValue hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileChangeCommentSubscriptionDetails:other];
+}
+
+- (BOOL)isEqualToFileChangeCommentSubscriptionDetails:
+    (DBTEAMLOGFileChangeCommentSubscriptionDetails *)aFileChangeCommentSubscriptionDetails {
+  if (self == aFileChangeCommentSubscriptionDetails) {
+    return YES;
+  }
+  if (![self.targetAssetIndex isEqual:aFileChangeCommentSubscriptionDetails.targetAssetIndex]) {
+    return NO;
+  }
+  if (![self.dNewValue isEqual:aFileChangeCommentSubscriptionDetails.dNewValue]) {
+    return NO;
+  }
+  if (self.previousValue) {
+    if (![self.previousValue isEqual:aFileChangeCommentSubscriptionDetails.previousValue]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGFileChangeCommentSubscriptionDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
+  jsonDict[@"new_value"] = [DBTEAMLOGFileCommentNotificationPolicySerializer serialize:valueObj.dNewValue];
+  if (valueObj.previousValue) {
+    jsonDict[@"previous_value"] = [DBTEAMLOGFileCommentNotificationPolicySerializer serialize:valueObj.previousValue];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGFileChangeCommentSubscriptionDetails *)deserialize:(NSDictionary *)valueDict {
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
+  DBTEAMLOGFileCommentNotificationPolicy *dNewValue =
+      [DBTEAMLOGFileCommentNotificationPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGFileCommentNotificationPolicy *previousValue =
+      valueDict[@"previous_value"]
+          ? [DBTEAMLOGFileCommentNotificationPolicySerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
+
+  return [[DBTEAMLOGFileChangeCommentSubscriptionDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                               dNewValue:dNewValue
+                                                                           previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileCommentNotificationPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileCommentNotificationPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFileCommentNotificationPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFileCommentNotificationPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFileCommentNotificationPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGFileCommentNotificationPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGFileCommentNotificationPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGFileCommentNotificationPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGFileCommentNotificationPolicyDisabled:
+    return @"DBTEAMLOGFileCommentNotificationPolicyDisabled";
+  case DBTEAMLOGFileCommentNotificationPolicyEnabled:
+    return @"DBTEAMLOGFileCommentNotificationPolicyEnabled";
+  case DBTEAMLOGFileCommentNotificationPolicyOther:
+    return @"DBTEAMLOGFileCommentNotificationPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGFileCommentNotificationPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGFileCommentNotificationPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGFileCommentNotificationPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGFileCommentNotificationPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGFileCommentNotificationPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGFileCommentNotificationPolicyOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileCommentNotificationPolicy:other];
+}
+
+- (BOOL)isEqualToFileCommentNotificationPolicy:
+    (DBTEAMLOGFileCommentNotificationPolicy *)aFileCommentNotificationPolicy {
+  if (self == aFileCommentNotificationPolicy) {
+    return YES;
+  }
+  if (self.tag != aFileCommentNotificationPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGFileCommentNotificationPolicyDisabled:
+    return [[self tagName] isEqual:[aFileCommentNotificationPolicy tagName]];
+  case DBTEAMLOGFileCommentNotificationPolicyEnabled:
+    return [[self tagName] isEqual:[aFileCommentNotificationPolicy tagName]];
+  case DBTEAMLOGFileCommentNotificationPolicyOther:
+    return [[self tagName] isEqual:[aFileCommentNotificationPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileCommentNotificationPolicySerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGFileCommentNotificationPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGFileCommentNotificationPolicy *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGFileCommentNotificationPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGFileCommentNotificationPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGFileCommentNotificationPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGFileCommentNotificationPolicy alloc] initWithOther];
+  }
 }
 
 @end
@@ -26178,6 +26870,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGFileCommentsPolicy *)dNewValue
                     previousValue:(DBTEAMLOGFileCommentsPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -26193,7 +26886,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileCommentsChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -26222,7 +26915,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -26271,7 +26964,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGFileCommentsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileCommentsChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -26350,7 +27043,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileCommentsPolicySerializer serialize:instance];
 }
 
@@ -26439,7 +27132,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileCommentsPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -26471,7 +27164,10 @@
 
 - (instancetype)initWithRelocateActionDetails:
     (NSArray<DBTEAMLOGRelocateAssetReferencesLogInfo *> *)relocateActionDetails {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](relocateActionDetails);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](relocateActionDetails);
 
   self = [super init];
   if (self) {
@@ -26482,7 +27178,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileCopyDetailsSerializer serialize:instance];
 }
 
@@ -26552,7 +27248,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileCopyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -26563,6 +27259,122 @@
                            }];
 
   return [[DBTEAMLOGFileCopyDetails alloc] initWithRelocateActionDetails:relocateActionDetails];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileDeleteCommentDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileDeleteCommentDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+
+  self = [super init];
+  if (self) {
+    _targetAssetIndex = targetAssetIndex;
+    _commentText = commentText;
+  }
+  return self;
+}
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex commentText:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGFileDeleteCommentDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGFileDeleteCommentDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGFileDeleteCommentDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.commentText != nil) {
+    result = prime * result + [self.commentText hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileDeleteCommentDetails:other];
+}
+
+- (BOOL)isEqualToFileDeleteCommentDetails:(DBTEAMLOGFileDeleteCommentDetails *)aFileDeleteCommentDetails {
+  if (self == aFileDeleteCommentDetails) {
+    return YES;
+  }
+  if (![self.targetAssetIndex isEqual:aFileDeleteCommentDetails.targetAssetIndex]) {
+    return NO;
+  }
+  if (self.commentText) {
+    if (![self.commentText isEqual:aFileDeleteCommentDetails.commentText]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileDeleteCommentDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGFileDeleteCommentDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
+  if (valueObj.commentText) {
+    jsonDict[@"comment_text"] = valueObj.commentText;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGFileDeleteCommentDetails *)deserialize:(NSDictionary *)valueDict {
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
+  NSString *commentText = valueDict[@"comment_text"] ?: nil;
+
+  return [[DBTEAMLOGFileDeleteCommentDetails alloc] initWithTargetAssetIndex:targetAssetIndex commentText:commentText];
 }
 
 @end
@@ -26587,7 +27399,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileDeleteDetailsSerializer serialize:instance];
 }
 
@@ -26647,7 +27459,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileDeleteDetails *)deserialize:(NSDictionary *)valueDict {
@@ -26678,7 +27490,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileDownloadDetailsSerializer serialize:instance];
 }
 
@@ -26738,7 +27550,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileDownloadDetails *)deserialize:(NSDictionary *)valueDict {
@@ -26769,7 +27581,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileEditDetailsSerializer serialize:instance];
 }
 
@@ -26829,7 +27641,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileEditDetails *)deserialize:(NSDictionary *)valueDict {
@@ -26860,7 +27672,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileGetCopyReferenceDetailsSerializer serialize:instance];
 }
 
@@ -26920,7 +27732,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileGetCopyReferenceDetails *)deserialize:(NSDictionary *)valueDict {
@@ -26941,23 +27753,24 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex commentText:(NSString *)commentText {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _commentText = commentText;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex commentText:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex commentText:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileLikeCommentDetailsSerializer serialize:instance];
 }
 
@@ -26985,8 +27798,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.commentText) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -27009,7 +27822,7 @@
   if (self == aFileLikeCommentDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aFileLikeCommentDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aFileLikeCommentDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.commentText) {
@@ -27029,19 +27842,19 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileLikeCommentDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.commentText) {
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileLikeCommentDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *commentText = valueDict[@"comment_text"] ?: nil;
 
-  return [[DBTEAMLOGFileLikeCommentDetails alloc] initWithTargetIndex:targetIndex commentText:commentText];
+  return [[DBTEAMLOGFileLikeCommentDetails alloc] initWithTargetAssetIndex:targetAssetIndex commentText:commentText];
 }
 
 @end
@@ -27060,6 +27873,7 @@
 - (instancetype)initWithPath:(DBTEAMLOGPathLogInfo *)path
                  displayName:(NSString *)displayName
                       fileId:(NSString *)fileId {
+  [DBStoneValidators nonnullValidator:nil](path);
 
   self = [super init];
   if (self) {
@@ -27076,7 +27890,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileOrFolderLogInfoSerializer serialize:instance];
 }
 
@@ -27105,10 +27919,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.path hash];
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.fileId) {
+  if (self.fileId != nil) {
     result = prime * result + [self.fileId hash];
   }
 
@@ -27164,7 +27978,7 @@
     jsonDict[@"file_id"] = valueObj.fileId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileOrFolderLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -27192,6 +28006,7 @@
 - (instancetype)initWithPath:(DBTEAMLOGPathLogInfo *)path
                  displayName:(NSString *)displayName
                       fileId:(NSString *)fileId {
+  [DBStoneValidators nonnullValidator:nil](path);
 
   self = [super initWithPath:path displayName:displayName fileId:fileId];
   if (self) {
@@ -27205,7 +28020,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileLogInfoSerializer serialize:instance];
 }
 
@@ -27234,10 +28049,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.path hash];
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.fileId) {
+  if (self.fileId != nil) {
     result = prime * result + [self.fileId hash];
   }
 
@@ -27293,7 +28108,7 @@
     jsonDict[@"file_id"] = valueObj.fileId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -27319,7 +28134,10 @@
 
 - (instancetype)initWithRelocateActionDetails:
     (NSArray<DBTEAMLOGRelocateAssetReferencesLogInfo *> *)relocateActionDetails {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](relocateActionDetails);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](relocateActionDetails);
 
   self = [super init];
   if (self) {
@@ -27330,7 +28148,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileMoveDetailsSerializer serialize:instance];
 }
 
@@ -27400,7 +28218,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileMoveDetails *)deserialize:(NSDictionary *)valueDict {
@@ -27435,7 +28253,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFilePermanentlyDeleteDetailsSerializer serialize:instance];
 }
 
@@ -27495,7 +28313,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFilePermanentlyDeleteDetails *)deserialize:(NSDictionary *)valueDict {
@@ -27526,7 +28344,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFilePreviewDetailsSerializer serialize:instance];
 }
 
@@ -27586,7 +28404,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFilePreviewDetails *)deserialize:(NSDictionary *)valueDict {
@@ -27610,7 +28428,10 @@
 
 - (instancetype)initWithRelocateActionDetails:
     (NSArray<DBTEAMLOGRelocateAssetReferencesLogInfo *> *)relocateActionDetails {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](relocateActionDetails);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](relocateActionDetails);
 
   self = [super init];
   if (self) {
@@ -27621,7 +28442,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRenameDetailsSerializer serialize:instance];
 }
 
@@ -27691,7 +28512,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRenameDetails *)deserialize:(NSDictionary *)valueDict {
@@ -27725,9 +28546,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestAddDeadlineDetailsSerializer serialize:instance];
 }
 
@@ -27755,7 +28580,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -27777,8 +28604,10 @@
   if (self == aFileRequestAddDeadlineDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestAddDeadlineDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestAddDeadlineDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -27792,13 +28621,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestAddDeadlineDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestAddDeadlineDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestAddDeadlineDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -27824,9 +28655,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestChangeFolderDetailsSerializer serialize:instance];
 }
 
@@ -27854,7 +28689,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -27876,8 +28713,10 @@
   if (self == aFileRequestChangeFolderDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestChangeFolderDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestChangeFolderDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -27891,13 +28730,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestChangeFolderDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestChangeFolderDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestChangeFolderDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -27923,9 +28764,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestChangeTitleDetailsSerializer serialize:instance];
 }
 
@@ -27953,7 +28798,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -27975,8 +28822,10 @@
   if (self == aFileRequestChangeTitleDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestChangeTitleDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestChangeTitleDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -27990,13 +28839,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestChangeTitleDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestChangeTitleDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestChangeTitleDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -28022,9 +28873,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestCloseDetailsSerializer serialize:instance];
 }
 
@@ -28052,7 +28907,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -28073,8 +28930,10 @@
   if (self == aFileRequestCloseDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestCloseDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestCloseDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -28088,13 +28947,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestCloseDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestCloseDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestCloseDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -28120,9 +28981,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestCreateDetailsSerializer serialize:instance];
 }
 
@@ -28150,7 +29015,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -28171,8 +29038,10 @@
   if (self == aFileRequestCreateDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestCreateDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestCreateDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -28186,13 +29055,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestCreateDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestCreateDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestCreateDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -28209,9 +29080,12 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithRequestTitle:(NSString *)requestTitle
-                  submittedFileNames:(NSArray<NSString *> *)submittedFileNames {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](submittedFileNames);
+- (instancetype)initWithSubmittedFileNames:(NSArray<NSString *> *)submittedFileNames
+                              requestTitle:(NSString *)requestTitle {
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](submittedFileNames);
 
   self = [super init];
   if (self) {
@@ -28221,9 +29095,13 @@
   return self;
 }
 
+- (instancetype)initWithSubmittedFileNames:(NSArray<NSString *> *)submittedFileNames {
+  return [self initWithSubmittedFileNames:submittedFileNames requestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestReceiveFileDetailsSerializer serialize:instance];
 }
 
@@ -28251,8 +29129,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
   result = prime * result + [self.submittedFileNames hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -28274,11 +29154,13 @@
   if (self == aFileRequestReceiveFileDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestReceiveFileDetails.requestTitle]) {
-    return NO;
-  }
   if (![self.submittedFileNames isEqual:aFileRequestReceiveFileDetails.submittedFileNames]) {
     return NO;
+  }
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestReceiveFileDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -28292,24 +29174,26 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestReceiveFileDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
   jsonDict[@"submitted_file_names"] = [DBArraySerializer serialize:valueObj.submittedFileNames
                                                          withBlock:^id(id elem0) {
                                                            return elem0;
                                                          }];
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestReceiveFileDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
   NSArray<NSString *> *submittedFileNames = [DBArraySerializer deserialize:valueDict[@"submitted_file_names"]
                                                                  withBlock:^id(id elem0) {
                                                                    return elem0;
                                                                  }];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
-  return [[DBTEAMLOGFileRequestReceiveFileDetails alloc] initWithRequestTitle:requestTitle
-                                                           submittedFileNames:submittedFileNames];
+  return [[DBTEAMLOGFileRequestReceiveFileDetails alloc] initWithSubmittedFileNames:submittedFileNames
+                                                                       requestTitle:requestTitle];
 }
 
 @end
@@ -28333,9 +29217,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestRemoveDeadlineDetailsSerializer serialize:instance];
 }
 
@@ -28363,7 +29251,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -28385,8 +29275,10 @@
   if (self == aFileRequestRemoveDeadlineDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestRemoveDeadlineDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestRemoveDeadlineDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -28400,13 +29292,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestRemoveDeadlineDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestRemoveDeadlineDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestRemoveDeadlineDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -28432,9 +29326,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithRequestTitle:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestSendDetailsSerializer serialize:instance];
 }
 
@@ -28462,7 +29360,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.requestTitle hash];
+  if (self.requestTitle != nil) {
+    result = prime * result + [self.requestTitle hash];
+  }
 
   return prime * result;
 }
@@ -28483,8 +29383,10 @@
   if (self == aFileRequestSendDetails) {
     return YES;
   }
-  if (![self.requestTitle isEqual:aFileRequestSendDetails.requestTitle]) {
-    return NO;
+  if (self.requestTitle) {
+    if (![self.requestTitle isEqual:aFileRequestSendDetails.requestTitle]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -28498,13 +29400,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileRequestSendDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"request_title"] = valueObj.requestTitle;
+  if (valueObj.requestTitle) {
+    jsonDict[@"request_title"] = valueObj.requestTitle;
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestSendDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *requestTitle = valueDict[@"request_title"];
+  NSString *requestTitle = valueDict[@"request_title"] ?: nil;
 
   return [[DBTEAMLOGFileRequestSendDetails alloc] initWithRequestTitle:requestTitle];
 }
@@ -28524,6 +29428,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGFileRequestsPolicy *)dNewValue
                     previousValue:(DBTEAMLOGFileRequestsPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -28539,7 +29444,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestsChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -28568,7 +29473,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -28617,7 +29522,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGFileRequestsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestsChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -28651,7 +29556,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestsEmailsEnabledDetailsSerializer serialize:instance];
 }
 
@@ -28712,7 +29617,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestsEmailsEnabledDetails *)deserialize:(NSDictionary *)valueDict {
@@ -28743,7 +29648,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetailsSerializer serialize:instance];
 }
 
@@ -28804,7 +29709,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -28880,7 +29785,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRequestsPolicySerializer serialize:instance];
 }
 
@@ -28969,7 +29874,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRequestsPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -28984,6 +29889,122 @@
   } else {
     return [[DBTEAMLOGFileRequestsPolicy alloc] initWithOther];
   }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileResolveCommentDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileResolveCommentDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+
+  self = [super init];
+  if (self) {
+    _targetAssetIndex = targetAssetIndex;
+    _commentText = commentText;
+  }
+  return self;
+}
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex commentText:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGFileResolveCommentDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGFileResolveCommentDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGFileResolveCommentDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.commentText != nil) {
+    result = prime * result + [self.commentText hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileResolveCommentDetails:other];
+}
+
+- (BOOL)isEqualToFileResolveCommentDetails:(DBTEAMLOGFileResolveCommentDetails *)aFileResolveCommentDetails {
+  if (self == aFileResolveCommentDetails) {
+    return YES;
+  }
+  if (![self.targetAssetIndex isEqual:aFileResolveCommentDetails.targetAssetIndex]) {
+    return NO;
+  }
+  if (self.commentText) {
+    if (![self.commentText isEqual:aFileResolveCommentDetails.commentText]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileResolveCommentDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGFileResolveCommentDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
+  if (valueObj.commentText) {
+    jsonDict[@"comment_text"] = valueObj.commentText;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGFileResolveCommentDetails *)deserialize:(NSDictionary *)valueDict {
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
+  NSString *commentText = valueDict[@"comment_text"] ?: nil;
+
+  return [[DBTEAMLOGFileResolveCommentDetails alloc] initWithTargetAssetIndex:targetAssetIndex commentText:commentText];
 }
 
 @end
@@ -29008,7 +30029,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRestoreDetailsSerializer serialize:instance];
 }
 
@@ -29068,7 +30089,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRestoreDetails *)deserialize:(NSDictionary *)valueDict {
@@ -29099,7 +30120,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRevertDetailsSerializer serialize:instance];
 }
 
@@ -29159,7 +30180,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRevertDetails *)deserialize:(NSDictionary *)valueDict {
@@ -29190,7 +30211,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileRollbackChangesDetailsSerializer serialize:instance];
 }
 
@@ -29250,7 +30271,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileRollbackChangesDetails *)deserialize:(NSDictionary *)valueDict {
@@ -29274,7 +30295,10 @@
 
 - (instancetype)initWithRelocateActionDetails:
     (NSArray<DBTEAMLOGRelocateAssetReferencesLogInfo *> *)relocateActionDetails {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](relocateActionDetails);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](relocateActionDetails);
 
   self = [super init];
   if (self) {
@@ -29285,7 +30309,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileSaveCopyReferenceDetailsSerializer serialize:instance];
 }
 
@@ -29355,7 +30379,7 @@
                            return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:elem0];
                          }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileSaveCopyReferenceDetails *)deserialize:(NSDictionary *)valueDict {
@@ -29380,23 +30404,24 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex commentText:(NSString *)commentText {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _commentText = commentText;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex commentText:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex commentText:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFileUnlikeCommentDetailsSerializer serialize:instance];
 }
 
@@ -29424,8 +30449,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.commentText) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -29448,7 +30473,7 @@
   if (self == aFileUnlikeCommentDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aFileUnlikeCommentDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aFileUnlikeCommentDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.commentText) {
@@ -29468,19 +30493,136 @@
 + (NSDictionary *)serialize:(DBTEAMLOGFileUnlikeCommentDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.commentText) {
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFileUnlikeCommentDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *commentText = valueDict[@"comment_text"] ?: nil;
 
-  return [[DBTEAMLOGFileUnlikeCommentDetails alloc] initWithTargetIndex:targetIndex commentText:commentText];
+  return [[DBTEAMLOGFileUnlikeCommentDetails alloc] initWithTargetAssetIndex:targetAssetIndex commentText:commentText];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGFileUnresolveCommentDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGFileUnresolveCommentDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+
+  self = [super init];
+  if (self) {
+    _targetAssetIndex = targetAssetIndex;
+    _commentText = commentText;
+  }
+  return self;
+}
+
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex commentText:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGFileUnresolveCommentDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGFileUnresolveCommentDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGFileUnresolveCommentDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.commentText != nil) {
+    result = prime * result + [self.commentText hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileUnresolveCommentDetails:other];
+}
+
+- (BOOL)isEqualToFileUnresolveCommentDetails:(DBTEAMLOGFileUnresolveCommentDetails *)aFileUnresolveCommentDetails {
+  if (self == aFileUnresolveCommentDetails) {
+    return YES;
+  }
+  if (![self.targetAssetIndex isEqual:aFileUnresolveCommentDetails.targetAssetIndex]) {
+    return NO;
+  }
+  if (self.commentText) {
+    if (![self.commentText isEqual:aFileUnresolveCommentDetails.commentText]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGFileUnresolveCommentDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGFileUnresolveCommentDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
+  if (valueObj.commentText) {
+    jsonDict[@"comment_text"] = valueObj.commentText;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGFileUnresolveCommentDetails *)deserialize:(NSDictionary *)valueDict {
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
+  NSString *commentText = valueDict[@"comment_text"] ?: nil;
+
+  return
+      [[DBTEAMLOGFileUnresolveCommentDetails alloc] initWithTargetAssetIndex:targetAssetIndex commentText:commentText];
 }
 
 @end
@@ -29500,6 +30642,7 @@
 - (instancetype)initWithPath:(DBTEAMLOGPathLogInfo *)path
                  displayName:(NSString *)displayName
                       fileId:(NSString *)fileId {
+  [DBStoneValidators nonnullValidator:nil](path);
 
   self = [super initWithPath:path displayName:displayName fileId:fileId];
   if (self) {
@@ -29513,7 +30656,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGFolderLogInfoSerializer serialize:instance];
 }
 
@@ -29542,10 +30685,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.path hash];
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.fileId) {
+  if (self.fileId != nil) {
     result = prime * result + [self.fileId hash];
   }
 
@@ -29601,7 +30744,7 @@
     jsonDict[@"file_id"] = valueObj.fileId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGFolderLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -29628,8 +30771,7 @@
                              city:(NSString *)city
                            region:(NSString *)region
                           country:(NSString *)country {
-  [DBStoneValidators stringValidator:nil maxLength:nil
-                             pattern:@"^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$"](ipAddress);
+  [DBStoneValidators nonnullValidator:nil](ipAddress);
 
   self = [super init];
   if (self) {
@@ -29647,7 +30789,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGeoLocationLogInfoSerializer serialize:instance];
 }
 
@@ -29676,13 +30818,13 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.ipAddress hash];
-  if (self.city) {
+  if (self.city != nil) {
     result = prime * result + [self.city hash];
   }
-  if (self.region) {
+  if (self.region != nil) {
     result = prime * result + [self.region hash];
   }
-  if (self.country) {
+  if (self.country != nil) {
     result = prime * result + [self.country hash];
   }
 
@@ -29746,7 +30888,7 @@
     jsonDict[@"country"] = valueObj.country;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGeoLocationLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -29776,7 +30918,6 @@
                     accountId:(NSString *)accountId
                          time:(DBTEAMCOMMONTimeRange *)time
                      category:(DBTEAMLOGEventCategory *)category {
-  [DBStoneValidators numericValidator:@(1) maxValue:@(1000)](limit ?: @(1000));
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
 
@@ -29796,7 +30937,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGetTeamEventsArgSerializer serialize:instance];
 }
 
@@ -29825,13 +30966,13 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.limit hash];
-  if (self.accountId) {
+  if (self.accountId != nil) {
     result = prime * result + [self.accountId hash];
   }
-  if (self.time) {
+  if (self.time != nil) {
     result = prime * result + [self.time hash];
   }
-  if (self.category) {
+  if (self.category != nil) {
     result = prime * result + [self.category hash];
   }
 
@@ -29895,7 +31036,7 @@
     jsonDict[@"category"] = [DBTEAMLOGEventCategorySerializer serialize:valueObj.category];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGetTeamEventsArg *)deserialize:(NSDictionary *)valueDict {
@@ -29922,6 +31063,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithCursor:(NSString *)cursor {
+  [DBStoneValidators nonnullValidator:nil](cursor);
 
   self = [super init];
   if (self) {
@@ -29932,7 +31074,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGetTeamEventsContinueArgSerializer serialize:instance];
 }
 
@@ -29998,7 +31140,7 @@
 
   jsonDict[@"cursor"] = valueObj.cursor;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGetTeamEventsContinueArg *)deserialize:(NSDictionary *)valueDict {
@@ -30060,7 +31202,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGetTeamEventsContinueErrorSerializer serialize:instance];
 }
 
@@ -30143,7 +31285,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGetTeamEventsContinueError *)deserialize:(NSDictionary *)valueDict {
@@ -30225,7 +31367,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGetTeamEventsErrorSerializer serialize:instance];
 }
 
@@ -30314,7 +31456,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGetTeamEventsError *)deserialize:(NSDictionary *)valueDict {
@@ -30347,7 +31489,12 @@
 - (instancetype)initWithEvents:(NSArray<DBTEAMLOGTeamEvent *> *)events
                         cursor:(NSString *)cursor
                        hasMore:(NSNumber *)hasMore {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](events);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](events);
+  [DBStoneValidators nonnullValidator:nil](cursor);
+  [DBStoneValidators nonnullValidator:nil](hasMore);
 
   self = [super init];
   if (self) {
@@ -30360,7 +31507,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGetTeamEventsResultSerializer serialize:instance];
 }
 
@@ -30439,7 +31586,7 @@
   jsonDict[@"cursor"] = valueObj.cursor;
   jsonDict[@"has_more"] = valueObj.hasMore;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGetTeamEventsResult *)deserialize:(NSDictionary *)valueDict {
@@ -30469,6 +31616,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGGoogleSsoPolicy *)dNewValue
                     previousValue:(DBTEAMLOGGoogleSsoPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -30484,7 +31632,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGoogleSsoChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -30513,7 +31661,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -30561,7 +31709,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGGoogleSsoPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGoogleSsoChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -30640,7 +31788,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGoogleSsoPolicySerializer serialize:instance];
 }
 
@@ -30729,7 +31877,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGoogleSsoPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -30759,6 +31907,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDNewValue:(NSString *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -30769,7 +31918,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupAddExternalIdDetailsSerializer serialize:instance];
 }
 
@@ -30835,7 +31984,7 @@
 
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupAddExternalIdDetails *)deserialize:(NSDictionary *)valueDict {
@@ -30857,6 +32006,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithIsGroupOwner:(NSNumber *)isGroupOwner {
+  [DBStoneValidators nonnullValidator:nil](isGroupOwner);
 
   self = [super init];
   if (self) {
@@ -30867,7 +32017,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupAddMemberDetailsSerializer serialize:instance];
 }
 
@@ -30933,7 +32083,7 @@
 
   jsonDict[@"is_group_owner"] = valueObj.isGroupOwner;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupAddMemberDetails *)deserialize:(NSDictionary *)valueDict {
@@ -30955,6 +32105,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDNewValue:(NSString *)dNewValue previousValue:(NSString *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
 
   self = [super init];
   if (self) {
@@ -30966,7 +32118,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupChangeExternalIdDetailsSerializer serialize:instance];
 }
 
@@ -31037,7 +32189,7 @@
   jsonDict[@"new_value"] = valueObj.dNewValue;
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupChangeExternalIdDetails *)deserialize:(NSDictionary *)valueDict {
@@ -31051,8 +32203,8 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMCOMMONGroupManagementType.h"
 #import "DBTEAMLOGGroupChangeManagementTypeDetails.h"
-#import "DBTEAMLOGGroupManagementType.h"
 
 #pragma mark - API Object
 
@@ -31060,8 +32212,9 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGGroupManagementType *)dNewValue
-                    previousValue:(DBTEAMLOGGroupManagementType *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMCOMMONGroupManagementType *)dNewValue
+                    previousValue:(DBTEAMCOMMONGroupManagementType *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -31071,13 +32224,13 @@
   return self;
 }
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGGroupManagementType *)dNewValue {
+- (instancetype)initWithDNewValue:(DBTEAMCOMMONGroupManagementType *)dNewValue {
   return [self initWithDNewValue:dNewValue previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupChangeManagementTypeDetailsSerializer serialize:instance];
 }
 
@@ -31106,7 +32259,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -31150,20 +32303,21 @@
 + (NSDictionary *)serialize:(DBTEAMLOGGroupChangeManagementTypeDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGGroupManagementTypeSerializer serialize:valueObj.dNewValue];
+  jsonDict[@"new_value"] = [DBTEAMCOMMONGroupManagementTypeSerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGGroupManagementTypeSerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMCOMMONGroupManagementTypeSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupChangeManagementTypeDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGGroupManagementType *dNewValue =
-      [DBTEAMLOGGroupManagementTypeSerializer deserialize:valueDict[@"new_value"]];
-  DBTEAMLOGGroupManagementType *previousValue =
-      valueDict[@"previous_value"] ? [DBTEAMLOGGroupManagementTypeSerializer deserialize:valueDict[@"previous_value"]]
-                                   : nil;
+  DBTEAMCOMMONGroupManagementType *dNewValue =
+      [DBTEAMCOMMONGroupManagementTypeSerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMCOMMONGroupManagementType *previousValue =
+      valueDict[@"previous_value"]
+          ? [DBTEAMCOMMONGroupManagementTypeSerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
 
   return [[DBTEAMLOGGroupChangeManagementTypeDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
 }
@@ -31181,6 +32335,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithIsGroupOwner:(NSNumber *)isGroupOwner {
+  [DBStoneValidators nonnullValidator:nil](isGroupOwner);
 
   self = [super init];
   if (self) {
@@ -31191,7 +32346,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupChangeMemberRoleDetailsSerializer serialize:instance];
 }
 
@@ -31257,7 +32412,7 @@
 
   jsonDict[@"is_group_owner"] = valueObj.isGroupOwner;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupChangeMemberRoleDetails *)deserialize:(NSDictionary *)valueDict {
@@ -31279,23 +32434,25 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy isAdminManaged:(NSNumber *)isAdminManaged {
+- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy
+                  isCompanyManaged:(NSNumber *)isCompanyManaged {
+  [DBStoneValidators nonnullValidator:nil](joinPolicy);
 
   self = [super init];
   if (self) {
-    _isAdminManaged = isAdminManaged;
+    _isCompanyManaged = isCompanyManaged;
     _joinPolicy = joinPolicy;
   }
   return self;
 }
 
 - (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy {
-  return [self initWithJoinPolicy:joinPolicy isAdminManaged:nil];
+  return [self initWithJoinPolicy:joinPolicy isCompanyManaged:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupCreateDetailsSerializer serialize:instance];
 }
 
@@ -31324,8 +32481,8 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.joinPolicy hash];
-  if (self.isAdminManaged) {
-    result = prime * result + [self.isAdminManaged hash];
+  if (self.isCompanyManaged != nil) {
+    result = prime * result + [self.isCompanyManaged hash];
   }
 
   return prime * result;
@@ -31350,8 +32507,8 @@
   if (![self.joinPolicy isEqual:aGroupCreateDetails.joinPolicy]) {
     return NO;
   }
-  if (self.isAdminManaged) {
-    if (![self.isAdminManaged isEqual:aGroupCreateDetails.isAdminManaged]) {
+  if (self.isCompanyManaged) {
+    if (![self.isCompanyManaged isEqual:aGroupCreateDetails.isCompanyManaged]) {
       return NO;
     }
   }
@@ -31368,18 +32525,18 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"join_policy"] = [DBTEAMLOGGroupJoinPolicySerializer serialize:valueObj.joinPolicy];
-  if (valueObj.isAdminManaged) {
-    jsonDict[@"is_admin_managed"] = valueObj.isAdminManaged;
+  if (valueObj.isCompanyManaged) {
+    jsonDict[@"is_company_managed"] = valueObj.isCompanyManaged;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupCreateDetails *)deserialize:(NSDictionary *)valueDict {
   DBTEAMLOGGroupJoinPolicy *joinPolicy = [DBTEAMLOGGroupJoinPolicySerializer deserialize:valueDict[@"join_policy"]];
-  NSNumber *isAdminManaged = valueDict[@"is_admin_managed"] ?: nil;
+  NSNumber *isCompanyManaged = valueDict[@"is_company_managed"] ?: nil;
 
-  return [[DBTEAMLOGGroupCreateDetails alloc] initWithJoinPolicy:joinPolicy isAdminManaged:isAdminManaged];
+  return [[DBTEAMLOGGroupCreateDetails alloc] initWithJoinPolicy:joinPolicy isCompanyManaged:isCompanyManaged];
 }
 
 @end
@@ -31394,22 +32551,22 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithIsAdminManaged:(NSNumber *)isAdminManaged {
+- (instancetype)initWithIsCompanyManaged:(NSNumber *)isCompanyManaged {
 
   self = [super init];
   if (self) {
-    _isAdminManaged = isAdminManaged;
+    _isCompanyManaged = isCompanyManaged;
   }
   return self;
 }
 
 - (instancetype)initDefault {
-  return [self initWithIsAdminManaged:nil];
+  return [self initWithIsCompanyManaged:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupDeleteDetailsSerializer serialize:instance];
 }
 
@@ -31437,8 +32594,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.isAdminManaged) {
-    result = prime * result + [self.isAdminManaged hash];
+  if (self.isCompanyManaged != nil) {
+    result = prime * result + [self.isCompanyManaged hash];
   }
 
   return prime * result;
@@ -31460,8 +32617,8 @@
   if (self == aGroupDeleteDetails) {
     return YES;
   }
-  if (self.isAdminManaged) {
-    if (![self.isAdminManaged isEqual:aGroupDeleteDetails.isAdminManaged]) {
+  if (self.isCompanyManaged) {
+    if (![self.isCompanyManaged isEqual:aGroupDeleteDetails.isCompanyManaged]) {
       return NO;
     }
   }
@@ -31477,109 +32634,17 @@
 + (NSDictionary *)serialize:(DBTEAMLOGGroupDeleteDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if (valueObj.isAdminManaged) {
-    jsonDict[@"is_admin_managed"] = valueObj.isAdminManaged;
+  if (valueObj.isCompanyManaged) {
+    jsonDict[@"is_company_managed"] = valueObj.isCompanyManaged;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupDeleteDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *isAdminManaged = valueDict[@"is_admin_managed"] ?: nil;
+  NSNumber *isCompanyManaged = valueDict[@"is_company_managed"] ?: nil;
 
-  return [[DBTEAMLOGGroupDeleteDetails alloc] initWithIsAdminManaged:isAdminManaged];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGGroupDescriptionUpdatedDetails.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGGroupDescriptionUpdatedDetails
-
-#pragma mark - Constructors
-
-- (instancetype)initDefault {
-
-  self = [super init];
-  if (self) {
-  }
-  return self;
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToGroupDescriptionUpdatedDetails:other];
-}
-
-- (BOOL)isEqualToGroupDescriptionUpdatedDetails:
-    (DBTEAMLOGGroupDescriptionUpdatedDetails *)aGroupDescriptionUpdatedDetails {
-  if (self == aGroupDescriptionUpdatedDetails) {
-    return YES;
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupDescriptionUpdatedDetails *)valueObj {
-#pragma unused(valueObj)
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGGroupDescriptionUpdatedDetails *)deserialize:(NSDictionary *)valueDict {
-#pragma unused(valueDict)
-
-  return [[DBTEAMLOGGroupDescriptionUpdatedDetails alloc] initDefault];
+  return [[DBTEAMLOGGroupDeleteDetails alloc] initWithIsCompanyManaged:isCompanyManaged];
 }
 
 @end
@@ -31649,7 +32714,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupJoinPolicySerializer serialize:instance];
 }
 
@@ -31738,7 +32803,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupJoinPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -31759,123 +32824,6 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
-#import "DBTEAMLOGGroupJoinPolicy.h"
-#import "DBTEAMLOGGroupJoinPolicyUpdatedDetails.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGGroupJoinPolicyUpdatedDetails
-
-#pragma mark - Constructors
-
-- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy isAdminManaged:(NSNumber *)isAdminManaged {
-
-  self = [super init];
-  if (self) {
-    _isAdminManaged = isAdminManaged;
-    _joinPolicy = joinPolicy;
-  }
-  return self;
-}
-
-- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy {
-  return [self initWithJoinPolicy:joinPolicy isAdminManaged:nil];
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  result = prime * result + [self.joinPolicy hash];
-  if (self.isAdminManaged) {
-    result = prime * result + [self.isAdminManaged hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToGroupJoinPolicyUpdatedDetails:other];
-}
-
-- (BOOL)isEqualToGroupJoinPolicyUpdatedDetails:
-    (DBTEAMLOGGroupJoinPolicyUpdatedDetails *)aGroupJoinPolicyUpdatedDetails {
-  if (self == aGroupJoinPolicyUpdatedDetails) {
-    return YES;
-  }
-  if (![self.joinPolicy isEqual:aGroupJoinPolicyUpdatedDetails.joinPolicy]) {
-    return NO;
-  }
-  if (self.isAdminManaged) {
-    if (![self.isAdminManaged isEqual:aGroupJoinPolicyUpdatedDetails.isAdminManaged]) {
-      return NO;
-    }
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupJoinPolicyUpdatedDetails *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  jsonDict[@"join_policy"] = [DBTEAMLOGGroupJoinPolicySerializer serialize:valueObj.joinPolicy];
-  if (valueObj.isAdminManaged) {
-    jsonDict[@"is_admin_managed"] = valueObj.isAdminManaged;
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGGroupJoinPolicyUpdatedDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGGroupJoinPolicy *joinPolicy = [DBTEAMLOGGroupJoinPolicySerializer deserialize:valueDict[@"join_policy"]];
-  NSNumber *isAdminManaged = valueDict[@"is_admin_managed"] ?: nil;
-
-  return [[DBTEAMLOGGroupJoinPolicyUpdatedDetails alloc] initWithJoinPolicy:joinPolicy isAdminManaged:isAdminManaged];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
 #import "DBTEAMLOGGroupLogInfo.h"
 
 #pragma mark - API Object
@@ -31887,6 +32835,7 @@
 - (instancetype)initWithDisplayName:(NSString *)displayName
                             groupId:(NSString *)groupId
                          externalId:(NSString *)externalId {
+  [DBStoneValidators nonnullValidator:nil](displayName);
 
   self = [super init];
   if (self) {
@@ -31903,7 +32852,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupLogInfoSerializer serialize:instance];
 }
 
@@ -31932,10 +32881,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.displayName hash];
-  if (self.groupId) {
+  if (self.groupId != nil) {
     result = prime * result + [self.groupId hash];
   }
-  if (self.externalId) {
+  if (self.externalId != nil) {
     result = prime * result + [self.externalId hash];
   }
 
@@ -31991,7 +32940,7 @@
     jsonDict[@"external_id"] = valueObj.externalId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -32000,179 +32949,6 @@
   NSString *externalId = valueDict[@"external_id"] ?: nil;
 
   return [[DBTEAMLOGGroupLogInfo alloc] initWithDisplayName:displayName groupId:groupId externalId:externalId];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGGroupManagementType.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGGroupManagementType
-
-#pragma mark - Constructors
-
-- (instancetype)initWithAdminManagementGroup {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGGroupManagementTypeAdminManagementGroup;
-  }
-  return self;
-}
-
-- (instancetype)initWithMemberManagementGroup {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGGroupManagementTypeMemberManagementGroup;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGGroupManagementTypeOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isAdminManagementGroup {
-  return _tag == DBTEAMLOGGroupManagementTypeAdminManagementGroup;
-}
-
-- (BOOL)isMemberManagementGroup {
-  return _tag == DBTEAMLOGGroupManagementTypeMemberManagementGroup;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGGroupManagementTypeOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGGroupManagementTypeAdminManagementGroup:
-    return @"DBTEAMLOGGroupManagementTypeAdminManagementGroup";
-  case DBTEAMLOGGroupManagementTypeMemberManagementGroup:
-    return @"DBTEAMLOGGroupManagementTypeMemberManagementGroup";
-  case DBTEAMLOGGroupManagementTypeOther:
-    return @"DBTEAMLOGGroupManagementTypeOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGGroupManagementTypeSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGGroupManagementTypeSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGGroupManagementTypeSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBTEAMLOGGroupManagementTypeAdminManagementGroup:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGGroupManagementTypeMemberManagementGroup:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGGroupManagementTypeOther:
-    result = prime * result + [[self tagName] hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToGroupManagementType:other];
-}
-
-- (BOOL)isEqualToGroupManagementType:(DBTEAMLOGGroupManagementType *)aGroupManagementType {
-  if (self == aGroupManagementType) {
-    return YES;
-  }
-  if (self.tag != aGroupManagementType.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGGroupManagementTypeAdminManagementGroup:
-    return [[self tagName] isEqual:[aGroupManagementType tagName]];
-  case DBTEAMLOGGroupManagementTypeMemberManagementGroup:
-    return [[self tagName] isEqual:[aGroupManagementType tagName]];
-  case DBTEAMLOGGroupManagementTypeOther:
-    return [[self tagName] isEqual:[aGroupManagementType tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGGroupManagementTypeSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupManagementType *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isAdminManagementGroup]) {
-    jsonDict[@".tag"] = @"admin_management_group";
-  } else if ([valueObj isMemberManagementGroup]) {
-    jsonDict[@".tag"] = @"member_management_group";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGGroupManagementType *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"admin_management_group"]) {
-    return [[DBTEAMLOGGroupManagementType alloc] initWithAdminManagementGroup];
-  } else if ([tag isEqualToString:@"member_management_group"]) {
-    return [[DBTEAMLOGGroupManagementType alloc] initWithMemberManagementGroup];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGGroupManagementType alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGGroupManagementType alloc] initWithOther];
-  }
 }
 
 @end
@@ -32197,7 +32973,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupMovedDetailsSerializer serialize:instance];
 }
 
@@ -32257,7 +33033,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupMovedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -32279,6 +33055,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithPreviousValue:(NSString *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
 
   self = [super init];
   if (self) {
@@ -32289,7 +33066,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupRemoveExternalIdDetailsSerializer serialize:instance];
 }
 
@@ -32355,7 +33132,7 @@
 
   jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupRemoveExternalIdDetails *)deserialize:(NSDictionary *)valueDict {
@@ -32386,7 +33163,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupRemoveMemberDetailsSerializer serialize:instance];
 }
 
@@ -32446,7 +33223,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupRemoveMemberDetails *)deserialize:(NSDictionary *)valueDict {
@@ -32467,18 +33244,21 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithPreviousValue:(NSString *)previousValue {
+- (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(NSString *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
     _previousValue = previousValue;
+    _dNewValue = dNewValue;
   }
   return self;
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupRenameDetailsSerializer serialize:instance];
 }
 
@@ -32507,6 +33287,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.previousValue hash];
+  result = prime * result + [self.dNewValue hash];
 
   return prime * result;
 }
@@ -32530,6 +33311,9 @@
   if (![self.previousValue isEqual:aGroupRenameDetails.previousValue]) {
     return NO;
   }
+  if (![self.dNewValue isEqual:aGroupRenameDetails.dNewValue]) {
+    return NO;
+  }
   return YES;
 }
 
@@ -32543,14 +33327,16 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"previous_value"] = valueObj.previousValue;
+  jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupRenameDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *previousValue = valueDict[@"previous_value"];
+  NSString *dNewValue = valueDict[@"new_value"];
 
-  return [[DBTEAMLOGGroupRenameDetails alloc] initWithPreviousValue:previousValue];
+  return [[DBTEAMLOGGroupRenameDetails alloc] initWithPreviousValue:previousValue dNewValue:dNewValue];
 }
 
 @end
@@ -32568,6 +33354,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGGroupUserManagementPolicy *)dNewValue
                     previousValue:(DBTEAMLOGGroupUserManagementPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -32583,7 +33370,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupUserManagementChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -32612,7 +33399,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -32661,7 +33448,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGGroupUserManagementPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupUserManagementChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -32688,18 +33475,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithAllUsers {
+- (instancetype)initWithAdminsOnly {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGGroupUserManagementPolicyAllUsers;
+    _tag = DBTEAMLOGGroupUserManagementPolicyAdminsOnly;
   }
   return self;
 }
 
-- (instancetype)initWithOnlyAdmins {
+- (instancetype)initWithAllUsers {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGGroupUserManagementPolicyOnlyAdmins;
+    _tag = DBTEAMLOGGroupUserManagementPolicyAllUsers;
   }
   return self;
 }
@@ -32716,12 +33503,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isAllUsers {
-  return _tag == DBTEAMLOGGroupUserManagementPolicyAllUsers;
+- (BOOL)isAdminsOnly {
+  return _tag == DBTEAMLOGGroupUserManagementPolicyAdminsOnly;
 }
 
-- (BOOL)isOnlyAdmins {
-  return _tag == DBTEAMLOGGroupUserManagementPolicyOnlyAdmins;
+- (BOOL)isAllUsers {
+  return _tag == DBTEAMLOGGroupUserManagementPolicyAllUsers;
 }
 
 - (BOOL)isOther {
@@ -32730,10 +33517,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGGroupUserManagementPolicyAdminsOnly:
+    return @"DBTEAMLOGGroupUserManagementPolicyAdminsOnly";
   case DBTEAMLOGGroupUserManagementPolicyAllUsers:
     return @"DBTEAMLOGGroupUserManagementPolicyAllUsers";
-  case DBTEAMLOGGroupUserManagementPolicyOnlyAdmins:
-    return @"DBTEAMLOGGroupUserManagementPolicyOnlyAdmins";
   case DBTEAMLOGGroupUserManagementPolicyOther:
     return @"DBTEAMLOGGroupUserManagementPolicyOther";
   }
@@ -32743,7 +33530,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGGroupUserManagementPolicySerializer serialize:instance];
 }
 
@@ -32772,9 +33559,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGGroupUserManagementPolicyAllUsers:
+  case DBTEAMLOGGroupUserManagementPolicyAdminsOnly:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGGroupUserManagementPolicyOnlyAdmins:
+  case DBTEAMLOGGroupUserManagementPolicyAllUsers:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGGroupUserManagementPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -32803,9 +33590,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGGroupUserManagementPolicyAllUsers:
+  case DBTEAMLOGGroupUserManagementPolicyAdminsOnly:
     return [[self tagName] isEqual:[aGroupUserManagementPolicy tagName]];
-  case DBTEAMLOGGroupUserManagementPolicyOnlyAdmins:
+  case DBTEAMLOGGroupUserManagementPolicyAllUsers:
     return [[self tagName] isEqual:[aGroupUserManagementPolicy tagName]];
   case DBTEAMLOGGroupUserManagementPolicyOther:
     return [[self tagName] isEqual:[aGroupUserManagementPolicy tagName]];
@@ -32822,26 +33609,26 @@
 + (NSDictionary *)serialize:(DBTEAMLOGGroupUserManagementPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isAllUsers]) {
+  if ([valueObj isAdminsOnly]) {
+    jsonDict[@".tag"] = @"admins_only";
+  } else if ([valueObj isAllUsers]) {
     jsonDict[@".tag"] = @"all_users";
-  } else if ([valueObj isOnlyAdmins]) {
-    jsonDict[@".tag"] = @"only_admins";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGGroupUserManagementPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"all_users"]) {
+  if ([tag isEqualToString:@"admins_only"]) {
+    return [[DBTEAMLOGGroupUserManagementPolicy alloc] initWithAdminsOnly];
+  } else if ([tag isEqualToString:@"all_users"]) {
     return [[DBTEAMLOGGroupUserManagementPolicy alloc] initWithAllUsers];
-  } else if ([tag isEqualToString:@"only_admins"]) {
-    return [[DBTEAMLOGGroupUserManagementPolicy alloc] initWithOnlyAdmins];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGGroupUserManagementPolicy alloc] initWithOther];
   } else {
@@ -32877,7 +33664,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGHostLogInfoSerializer serialize:instance];
 }
 
@@ -32905,10 +33692,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.hostId) {
+  if (self.hostId != nil) {
     result = prime * result + [self.hostId hash];
   }
-  if (self.hostName) {
+  if (self.hostName != nil) {
     result = prime * result + [self.hostName hash];
   }
 
@@ -32960,7 +33747,7 @@
     jsonDict[@"host_name"] = valueObj.hostName;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGHostLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -32988,9 +33775,18 @@
 - (instancetype)initWithLinkedApps:(NSArray<DBTEAMLOGAppLogInfo *> *)linkedApps
                      linkedDevices:(NSArray<DBTEAMLOGDeviceLogInfo *> *)linkedDevices
                linkedSharedFolders:(NSArray<DBTEAMLOGFolderLogInfo *> *)linkedSharedFolders {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](linkedApps);
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](linkedDevices);
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](linkedSharedFolders);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](linkedApps);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](linkedDevices);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](linkedSharedFolders);
 
   self = [super init];
   if (self) {
@@ -33003,7 +33799,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGJoinTeamDetailsSerializer serialize:instance];
 }
 
@@ -33088,7 +33884,7 @@
                                                             return [DBTEAMLOGFolderLogInfoSerializer serialize:elem0];
                                                           }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGJoinTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -33194,7 +33990,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGLinkAudienceSerializer serialize:instance];
 }
 
@@ -33289,7 +34085,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGLinkAudience *)deserialize:(NSDictionary *)valueDict {
@@ -33330,7 +34126,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGLogoutDetailsSerializer serialize:instance];
 }
 
@@ -33390,7 +34186,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGLogoutDetails *)deserialize:(NSDictionary *)valueDict {
@@ -33413,6 +34209,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithValue:(DBTEAMLOGUserNameLogInfo *)value {
+  [DBStoneValidators nonnullValidator:nil](value);
 
   self = [super init];
   if (self) {
@@ -33423,7 +34220,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberAddNameDetailsSerializer serialize:instance];
 }
 
@@ -33489,7 +34286,7 @@
 
   jsonDict[@"value"] = [DBTEAMLOGUserNameLogInfoSerializer serialize:valueObj.value];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberAddNameDetails *)deserialize:(NSDictionary *)valueDict {
@@ -33527,7 +34324,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberChangeAdminRoleDetailsSerializer serialize:instance];
 }
 
@@ -33555,10 +34352,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.dNewValue) {
+  if (self.dNewValue != nil) {
     result = prime * result + [self.dNewValue hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -33610,7 +34407,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGAdminRoleSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberChangeAdminRoleDetails *)deserialize:(NSDictionary *)valueDict {
@@ -33635,8 +34432,11 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDNewValue:(NSString *)dNewValue previousValue:(NSString *)previousValue {
-  [DBStoneValidators stringValidator:nil maxLength:@(255)
-                             pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9.-]*.[A-Za-z]{2,15}$"](dNewValue);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators
+                        stringValidator:nil
+                              maxLength:@(255)
+                                pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9.-]*.[A-Za-z]{2,15}$"]](dNewValue);
   [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:nil
                                                                 maxLength:@(255)
                                                                   pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
@@ -33656,7 +34456,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberChangeEmailDetailsSerializer serialize:instance];
 }
 
@@ -33685,7 +34485,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -33733,7 +34533,7 @@
     jsonDict[@"previous_value"] = valueObj.previousValue;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberChangeEmailDetails *)deserialize:(NSDictionary *)valueDict {
@@ -33758,6 +34558,8 @@
 
 - (instancetype)initWithPrevValue:(DBTEAMLOGTeamMembershipType *)prevValue
                         dNewValue:(DBTEAMLOGTeamMembershipType *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](prevValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -33769,7 +34571,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberChangeMembershipTypeDetailsSerializer serialize:instance];
 }
 
@@ -33841,7 +34643,7 @@
   jsonDict[@"prev_value"] = [DBTEAMLOGTeamMembershipTypeSerializer serialize:valueObj.prevValue];
   jsonDict[@"new_value"] = [DBTEAMLOGTeamMembershipTypeSerializer serialize:valueObj.dNewValue];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberChangeMembershipTypeDetails *)deserialize:(NSDictionary *)valueDict {
@@ -33866,6 +34668,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGUserNameLogInfo *)dNewValue
                     previousValue:(DBTEAMLOGUserNameLogInfo *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -33875,9 +34678,13 @@
   return self;
 }
 
+- (instancetype)initWithDNewValue:(DBTEAMLOGUserNameLogInfo *)dNewValue {
+  return [self initWithDNewValue:dNewValue previousValue:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberChangeNameDetailsSerializer serialize:instance];
 }
 
@@ -33906,7 +34713,9 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  result = prime * result + [self.previousValue hash];
+  if (self.previousValue != nil) {
+    result = prime * result + [self.previousValue hash];
+  }
 
   return prime * result;
 }
@@ -33930,8 +34739,10 @@
   if (![self.dNewValue isEqual:aMemberChangeNameDetails.dNewValue]) {
     return NO;
   }
-  if (![self.previousValue isEqual:aMemberChangeNameDetails.previousValue]) {
-    return NO;
+  if (self.previousValue) {
+    if (![self.previousValue isEqual:aMemberChangeNameDetails.previousValue]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -33946,15 +34757,18 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"new_value"] = [DBTEAMLOGUserNameLogInfoSerializer serialize:valueObj.dNewValue];
-  jsonDict[@"previous_value"] = [DBTEAMLOGUserNameLogInfoSerializer serialize:valueObj.previousValue];
+  if (valueObj.previousValue) {
+    jsonDict[@"previous_value"] = [DBTEAMLOGUserNameLogInfoSerializer serialize:valueObj.previousValue];
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberChangeNameDetails *)deserialize:(NSDictionary *)valueDict {
   DBTEAMLOGUserNameLogInfo *dNewValue = [DBTEAMLOGUserNameLogInfoSerializer deserialize:valueDict[@"new_value"]];
   DBTEAMLOGUserNameLogInfo *previousValue =
-      [DBTEAMLOGUserNameLogInfoSerializer deserialize:valueDict[@"previous_value"]];
+      valueDict[@"previous_value"] ? [DBTEAMLOGUserNameLogInfoSerializer deserialize:valueDict[@"previous_value"]]
+                                   : nil;
 
   return [[DBTEAMLOGMemberChangeNameDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
 }
@@ -33976,6 +34790,7 @@
 - (instancetype)initWithDNewValue:(DBTEAMLOGMemberStatus *)dNewValue
                     previousValue:(DBTEAMLOGMemberStatus *)previousValue
                   teamJoinDetails:(DBTEAMLOGJoinTeamDetails *)teamJoinDetails {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -33992,7 +34807,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberChangeStatusDetailsSerializer serialize:instance];
 }
 
@@ -34021,10 +34836,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
-  if (self.teamJoinDetails) {
+  if (self.teamJoinDetails != nil) {
     result = prime * result + [self.teamJoinDetails hash];
   }
 
@@ -34080,7 +34895,7 @@
     jsonDict[@"team_join_details"] = [DBTEAMLOGJoinTeamDetailsSerializer serialize:valueObj.teamJoinDetails];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberChangeStatusDetails *)deserialize:(NSDictionary *)valueDict {
@@ -34118,7 +34933,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetailsSerializer serialize:instance];
 }
 
@@ -34179,7 +34994,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetails *)deserialize:(NSDictionary *)valueDict {
@@ -34203,6 +35018,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGMemberRequestsPolicy *)dNewValue
                     previousValue:(DBTEAMLOGMemberRequestsPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -34218,7 +35034,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberRequestsChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -34247,7 +35063,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -34296,7 +35112,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGMemberRequestsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberRequestsChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -34321,6 +35137,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithAutoAccept {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGMemberRequestsPolicyAutoAccept;
+  }
+  return self;
+}
+
 - (instancetype)initWithDisabled {
   self = [super init];
   if (self) {
@@ -34337,14 +35161,6 @@
   return self;
 }
 
-- (instancetype)initWithAutoApproval {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGMemberRequestsPolicyAutoApproval;
-  }
-  return self;
-}
-
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -34357,6 +35173,10 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAutoAccept {
+  return _tag == DBTEAMLOGMemberRequestsPolicyAutoAccept;
+}
+
 - (BOOL)isDisabled {
   return _tag == DBTEAMLOGMemberRequestsPolicyDisabled;
 }
@@ -34365,22 +35185,18 @@
   return _tag == DBTEAMLOGMemberRequestsPolicyRequireApproval;
 }
 
-- (BOOL)isAutoApproval {
-  return _tag == DBTEAMLOGMemberRequestsPolicyAutoApproval;
-}
-
 - (BOOL)isOther {
   return _tag == DBTEAMLOGMemberRequestsPolicyOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGMemberRequestsPolicyAutoAccept:
+    return @"DBTEAMLOGMemberRequestsPolicyAutoAccept";
   case DBTEAMLOGMemberRequestsPolicyDisabled:
     return @"DBTEAMLOGMemberRequestsPolicyDisabled";
   case DBTEAMLOGMemberRequestsPolicyRequireApproval:
     return @"DBTEAMLOGMemberRequestsPolicyRequireApproval";
-  case DBTEAMLOGMemberRequestsPolicyAutoApproval:
-    return @"DBTEAMLOGMemberRequestsPolicyAutoApproval";
   case DBTEAMLOGMemberRequestsPolicyOther:
     return @"DBTEAMLOGMemberRequestsPolicyOther";
   }
@@ -34390,7 +35206,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberRequestsPolicySerializer serialize:instance];
 }
 
@@ -34419,11 +35235,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGMemberRequestsPolicyAutoAccept:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberRequestsPolicyDisabled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberRequestsPolicyRequireApproval:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGMemberRequestsPolicyAutoApproval:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberRequestsPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -34452,11 +35268,11 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGMemberRequestsPolicyAutoAccept:
+    return [[self tagName] isEqual:[aMemberRequestsPolicy tagName]];
   case DBTEAMLOGMemberRequestsPolicyDisabled:
     return [[self tagName] isEqual:[aMemberRequestsPolicy tagName]];
   case DBTEAMLOGMemberRequestsPolicyRequireApproval:
-    return [[self tagName] isEqual:[aMemberRequestsPolicy tagName]];
-  case DBTEAMLOGMemberRequestsPolicyAutoApproval:
     return [[self tagName] isEqual:[aMemberRequestsPolicy tagName]];
   case DBTEAMLOGMemberRequestsPolicyOther:
     return [[self tagName] isEqual:[aMemberRequestsPolicy tagName]];
@@ -34473,30 +35289,30 @@
 + (NSDictionary *)serialize:(DBTEAMLOGMemberRequestsPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isDisabled]) {
+  if ([valueObj isAutoAccept]) {
+    jsonDict[@".tag"] = @"auto_accept";
+  } else if ([valueObj isDisabled]) {
     jsonDict[@".tag"] = @"disabled";
   } else if ([valueObj isRequireApproval]) {
     jsonDict[@".tag"] = @"require_approval";
-  } else if ([valueObj isAutoApproval]) {
-    jsonDict[@".tag"] = @"auto_approval";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberRequestsPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"disabled"]) {
+  if ([tag isEqualToString:@"auto_accept"]) {
+    return [[DBTEAMLOGMemberRequestsPolicy alloc] initWithAutoAccept];
+  } else if ([tag isEqualToString:@"disabled"]) {
     return [[DBTEAMLOGMemberRequestsPolicy alloc] initWithDisabled];
   } else if ([tag isEqualToString:@"require_approval"]) {
     return [[DBTEAMLOGMemberRequestsPolicy alloc] initWithRequireApproval];
-  } else if ([tag isEqualToString:@"auto_approval"]) {
-    return [[DBTEAMLOGMemberRequestsPolicy alloc] initWithAutoApproval];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGMemberRequestsPolicy alloc] initWithOther];
   } else {
@@ -34526,7 +35342,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSpaceLimitsAddExceptionDetailsSerializer serialize:instance];
 }
 
@@ -34587,7 +35403,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsAddExceptionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -34611,6 +35427,8 @@
 
 - (instancetype)initWithPreviousValue:(DBTEAMLOGSpaceLimitsLevel *)previousValue
                             dNewValue:(DBTEAMLOGSpaceLimitsLevel *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -34622,7 +35440,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSpaceLimitsChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -34694,7 +35512,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSpaceLimitsLevelSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSpaceLimitsLevelSerializer serialize:valueObj.dNewValue];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -34721,6 +35539,8 @@
 
 - (instancetype)initWithPreviousValue:(DBTEAMLOGSpaceLimitsStatus *)previousValue
                             dNewValue:(DBTEAMLOGSpaceLimitsStatus *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -34732,7 +35552,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSpaceLimitsChangeStatusDetailsSerializer serialize:instance];
 }
 
@@ -34804,7 +35624,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSpaceLimitsStatusSerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSpaceLimitsStatusSerializer serialize:valueObj.dNewValue];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsChangeStatusDetails *)deserialize:(NSDictionary *)valueDict {
@@ -34838,7 +35658,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetailsSerializer serialize:instance];
 }
 
@@ -34899,7 +35719,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -35017,7 +35837,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberStatusSerializer serialize:instance];
 }
 
@@ -35124,7 +35944,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberStatus *)deserialize:(NSDictionary *)valueDict {
@@ -35169,7 +35989,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSuggestDetailsSerializer serialize:instance];
 }
 
@@ -35229,7 +36049,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSuggestDetails *)deserialize:(NSDictionary *)valueDict {
@@ -35253,6 +36073,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGMemberSuggestionsPolicy *)dNewValue
                     previousValue:(DBTEAMLOGMemberSuggestionsPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -35268,7 +36089,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSuggestionsChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -35297,7 +36118,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -35346,7 +36167,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGMemberSuggestionsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSuggestionsChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -35428,7 +36249,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberSuggestionsPolicySerializer serialize:instance];
 }
 
@@ -35517,7 +36338,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberSuggestionsPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -35546,19 +36367,22 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithSrcIndex:(NSNumber *)srcIndex destIndex:(NSNumber *)destIndex {
+- (instancetype)initWithSrcParticipantIndex:(NSNumber *)srcParticipantIndex
+                       destParticipantIndex:(NSNumber *)destParticipantIndex {
+  [DBStoneValidators nonnullValidator:nil](srcParticipantIndex);
+  [DBStoneValidators nonnullValidator:nil](destParticipantIndex);
 
   self = [super init];
   if (self) {
-    _srcIndex = srcIndex;
-    _destIndex = destIndex;
+    _srcParticipantIndex = srcParticipantIndex;
+    _destParticipantIndex = destParticipantIndex;
   }
   return self;
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMemberTransferAccountContentsDetailsSerializer serialize:instance];
 }
 
@@ -35586,8 +36410,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.srcIndex hash];
-  result = prime * result + [self.destIndex hash];
+  result = prime * result + [self.srcParticipantIndex hash];
+  result = prime * result + [self.destParticipantIndex hash];
 
   return prime * result;
 }
@@ -35609,10 +36433,10 @@
   if (self == aMemberTransferAccountContentsDetails) {
     return YES;
   }
-  if (![self.srcIndex isEqual:aMemberTransferAccountContentsDetails.srcIndex]) {
+  if (![self.srcParticipantIndex isEqual:aMemberTransferAccountContentsDetails.srcParticipantIndex]) {
     return NO;
   }
-  if (![self.destIndex isEqual:aMemberTransferAccountContentsDetails.destIndex]) {
+  if (![self.destParticipantIndex isEqual:aMemberTransferAccountContentsDetails.destParticipantIndex]) {
     return NO;
   }
   return YES;
@@ -35627,17 +36451,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGMemberTransferAccountContentsDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"src_index"] = valueObj.srcIndex;
-  jsonDict[@"dest_index"] = valueObj.destIndex;
+  jsonDict[@"src_participant_index"] = valueObj.srcParticipantIndex;
+  jsonDict[@"dest_participant_index"] = valueObj.destParticipantIndex;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMemberTransferAccountContentsDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *srcIndex = valueDict[@"src_index"];
-  NSNumber *destIndex = valueDict[@"dest_index"];
+  NSNumber *srcParticipantIndex = valueDict[@"src_participant_index"];
+  NSNumber *destParticipantIndex = valueDict[@"dest_participant_index"];
 
-  return [[DBTEAMLOGMemberTransferAccountContentsDetails alloc] initWithSrcIndex:srcIndex destIndex:destIndex];
+  return [[DBTEAMLOGMemberTransferAccountContentsDetails alloc] initWithSrcParticipantIndex:srcParticipantIndex
+                                                                       destParticipantIndex:destParticipantIndex];
 }
 
 @end
@@ -35655,6 +36480,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGMicrosoftOfficeAddinPolicy *)dNewValue
                     previousValue:(DBTEAMLOGMicrosoftOfficeAddinPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -35670,7 +36496,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -35699,7 +36525,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -35748,7 +36574,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGMicrosoftOfficeAddinPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -35830,7 +36656,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMicrosoftOfficeAddinPolicySerializer serialize:instance];
 }
 
@@ -35919,7 +36745,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMicrosoftOfficeAddinPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -35958,7 +36784,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMissingDetailsSerializer serialize:instance];
 }
 
@@ -36018,7 +36844,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMissingDetails *)deserialize:(NSDictionary *)valueDict {
@@ -36054,7 +36880,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGMobileSessionLogInfoSerializer serialize:instance];
 }
 
@@ -36082,7 +36908,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sessionId) {
+  if (self.sessionId != nil) {
     result = prime * result + [self.sessionId hash];
   }
 
@@ -36126,7 +36952,7 @@
     jsonDict[@"session_id"] = valueObj.sessionId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGMobileSessionLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -36167,7 +36993,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNamespaceRelativePathLogInfoSerializer serialize:instance];
 }
 
@@ -36195,10 +37021,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.nsId) {
+  if (self.nsId != nil) {
     result = prime * result + [self.nsId hash];
   }
-  if (self.relativePath) {
+  if (self.relativePath != nil) {
     result = prime * result + [self.relativePath hash];
   }
 
@@ -36250,7 +37076,7 @@
     jsonDict[@"relative_path"] = valueObj.relativePath;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNamespaceRelativePathLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -36275,6 +37101,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGNetworkControlPolicy *)dNewValue
                     previousValue:(DBTEAMLOGNetworkControlPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -36290,7 +37117,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNetworkControlChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -36319,7 +37146,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -36368,7 +37195,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGNetworkControlPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNetworkControlChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -36448,7 +37275,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNetworkControlPolicySerializer serialize:instance];
 }
 
@@ -36537,7 +37364,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNetworkControlPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -36571,8 +37398,7 @@
 - (instancetype)initWithAccountId:(NSString *)accountId displayName:(NSString *)displayName email:(NSString *)email {
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
-  [DBStoneValidators
-   nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"[^/:?<>\"|]*"]](displayName);
+  [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](displayName);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators
                          stringValidator:nil
@@ -36594,7 +37420,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGUserLogInfoSerializer serialize:instance];
 }
 
@@ -36622,13 +37448,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.accountId) {
+  if (self.accountId != nil) {
     result = prime * result + [self.accountId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.email) {
+  if (self.email != nil) {
     result = prime * result + [self.email hash];
   }
 
@@ -36704,7 +37530,7 @@
     jsonDict[@".tag"] = @"nonTeamMember";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGUserLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -36737,8 +37563,7 @@
 - (instancetype)initWithAccountId:(NSString *)accountId displayName:(NSString *)displayName email:(NSString *)email {
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
-  [DBStoneValidators
-   nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"[^/:?<>\"|]*"]](displayName);
+  [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](displayName);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators
                          stringValidator:nil
@@ -36757,7 +37582,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNonTeamMemberLogInfoSerializer serialize:instance];
 }
 
@@ -36785,13 +37610,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.accountId) {
+  if (self.accountId != nil) {
     result = prime * result + [self.accountId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.email) {
+  if (self.email != nil) {
     result = prime * result + [self.email hash];
   }
 
@@ -36851,7 +37676,7 @@
     jsonDict[@"email"] = valueObj.email;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNonTeamMemberLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -36884,7 +37709,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNoteAclInviteOnlyDetailsSerializer serialize:instance];
 }
 
@@ -36944,7 +37769,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNoteAclInviteOnlyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -36975,7 +37800,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNoteAclLinkDetailsSerializer serialize:instance];
 }
 
@@ -37035,7 +37860,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNoteAclLinkDetails *)deserialize:(NSDictionary *)valueDict {
@@ -37066,7 +37891,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNoteAclTeamLinkDetailsSerializer serialize:instance];
 }
 
@@ -37126,7 +37951,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNoteAclTeamLinkDetails *)deserialize:(NSDictionary *)valueDict {
@@ -37157,7 +37982,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNoteShareReceiveDetailsSerializer serialize:instance];
 }
 
@@ -37217,7 +38042,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNoteShareReceiveDetails *)deserialize:(NSDictionary *)valueDict {
@@ -37248,7 +38073,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGNoteSharedDetailsSerializer serialize:instance];
 }
 
@@ -37308,7 +38133,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGNoteSharedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -37339,7 +38164,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGOpenNoteSharedDetailsSerializer serialize:instance];
 }
 
@@ -37399,7 +38224,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGOpenNoteSharedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -37426,6 +38251,7 @@
 - (instancetype)initWithAccessMethod:(DBTEAMLOGAccessMethodLogInfo *)accessMethod
                          geoLocation:(DBTEAMLOGGeoLocationLogInfo *)geoLocation
                                 host:(DBTEAMLOGHostLogInfo *)host {
+  [DBStoneValidators nonnullValidator:nil](accessMethod);
 
   self = [super init];
   if (self) {
@@ -37442,7 +38268,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGOriginLogInfoSerializer serialize:instance];
 }
 
@@ -37471,10 +38297,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.accessMethod hash];
-  if (self.geoLocation) {
+  if (self.geoLocation != nil) {
     result = prime * result + [self.geoLocation hash];
   }
-  if (self.host) {
+  if (self.host != nil) {
     result = prime * result + [self.host hash];
   }
 
@@ -37530,7 +38356,7 @@
     jsonDict[@"host"] = [DBTEAMLOGHostLogInfoSerializer serialize:valueObj.host];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGOriginLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -37625,7 +38451,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperAccessTypeSerializer serialize:instance];
 }
 
@@ -37720,7 +38546,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperAccessType *)deserialize:(NSDictionary *)valueDict {
@@ -37743,8 +38569,99 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGPaperAdminExportStartDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPaperAdminExportStartDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGPaperAdminExportStartDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGPaperAdminExportStartDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGPaperAdminExportStartDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperAdminExportStartDetails:other];
+}
+
+- (BOOL)isEqualToPaperAdminExportStartDetails:(DBTEAMLOGPaperAdminExportStartDetails *)aPaperAdminExportStartDetails {
+  if (self == aPaperAdminExportStartDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPaperAdminExportStartDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGPaperAdminExportStartDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPaperAdminExportStartDetails *)deserialize:(NSDictionary *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGPaperAdminExportStartDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGPaperChangeDeploymentPolicyDetails.h"
-#import "DBTEAMLOGPaperDeploymentPolicy.h"
+#import "DBTEAMPOLICIESPaperDeploymentPolicy.h"
 
 #pragma mark - API Object
 
@@ -37752,8 +38669,9 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGPaperDeploymentPolicy *)dNewValue
-                    previousValue:(DBTEAMLOGPaperDeploymentPolicy *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESPaperDeploymentPolicy *)dNewValue
+                    previousValue:(DBTEAMPOLICIESPaperDeploymentPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -37763,13 +38681,13 @@
   return self;
 }
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGPaperDeploymentPolicy *)dNewValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESPaperDeploymentPolicy *)dNewValue {
   return [self initWithDNewValue:dNewValue previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperChangeDeploymentPolicyDetailsSerializer serialize:instance];
 }
 
@@ -37798,7 +38716,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -37842,22 +38760,124 @@
 + (NSDictionary *)serialize:(DBTEAMLOGPaperChangeDeploymentPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGPaperDeploymentPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"new_value"] = [DBTEAMPOLICIESPaperDeploymentPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGPaperDeploymentPolicySerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMPOLICIESPaperDeploymentPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperChangeDeploymentPolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGPaperDeploymentPolicy *dNewValue =
-      [DBTEAMLOGPaperDeploymentPolicySerializer deserialize:valueDict[@"new_value"]];
-  DBTEAMLOGPaperDeploymentPolicy *previousValue =
-      valueDict[@"previous_value"] ? [DBTEAMLOGPaperDeploymentPolicySerializer deserialize:valueDict[@"previous_value"]]
-                                   : nil;
+  DBTEAMPOLICIESPaperDeploymentPolicy *dNewValue =
+      [DBTEAMPOLICIESPaperDeploymentPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMPOLICIESPaperDeploymentPolicy *previousValue =
+      valueDict[@"previous_value"]
+          ? [DBTEAMPOLICIESPaperDeploymentPolicySerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
 
   return [[DBTEAMLOGPaperChangeDeploymentPolicyDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGPaperChangeMemberLinkPolicyDetails.h"
+#import "DBTEAMLOGPaperMemberPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPaperChangeMemberLinkPolicyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGPaperMemberPolicy *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperChangeMemberLinkPolicyDetails:other];
+}
+
+- (BOOL)isEqualToPaperChangeMemberLinkPolicyDetails:
+    (DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)aPaperChangeMemberLinkPolicyDetails {
+  if (self == aPaperChangeMemberLinkPolicyDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aPaperChangeMemberLinkPolicyDetails.dNewValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGPaperMemberPolicySerializer serialize:valueObj.dNewValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPaperChangeMemberLinkPolicyDetails *)deserialize:(NSDictionary *)valueDict {
+  DBTEAMLOGPaperMemberPolicy *dNewValue = [DBTEAMLOGPaperMemberPolicySerializer deserialize:valueDict[@"new_value"]];
+
+  return [[DBTEAMLOGPaperChangeMemberLinkPolicyDetails alloc] initWithDNewValue:dNewValue];
 }
 
 @end
@@ -37875,6 +38895,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGPaperMemberPolicy *)dNewValue
                     previousValue:(DBTEAMLOGPaperMemberPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -37890,7 +38911,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperChangeMemberPolicyDetailsSerializer serialize:instance];
 }
 
@@ -37919,7 +38940,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -37968,7 +38989,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGPaperMemberPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperChangeMemberPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -37985,7 +39006,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMLOGPaperChangePolicyDetails.h"
-#import "DBTEAMLOGPaperPolicy.h"
+#import "DBTEAMPOLICIESPaperEnabledPolicy.h"
 
 #pragma mark - API Object
 
@@ -37993,8 +39014,9 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGPaperPolicy *)dNewValue
-                    previousValue:(DBTEAMLOGPaperPolicy *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESPaperEnabledPolicy *)dNewValue
+                    previousValue:(DBTEAMPOLICIESPaperEnabledPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -38004,13 +39026,13 @@
   return self;
 }
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGPaperPolicy *)dNewValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESPaperEnabledPolicy *)dNewValue {
   return [self initWithDNewValue:dNewValue previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -38039,7 +39061,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -38082,18 +39104,21 @@
 + (NSDictionary *)serialize:(DBTEAMLOGPaperChangePolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGPaperPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"new_value"] = [DBTEAMPOLICIESPaperEnabledPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGPaperPolicySerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMPOLICIESPaperEnabledPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGPaperPolicy *dNewValue = [DBTEAMLOGPaperPolicySerializer deserialize:valueDict[@"new_value"]];
-  DBTEAMLOGPaperPolicy *previousValue =
-      valueDict[@"previous_value"] ? [DBTEAMLOGPaperPolicySerializer deserialize:valueDict[@"previous_value"]] : nil;
+  DBTEAMPOLICIESPaperEnabledPolicy *dNewValue =
+      [DBTEAMPOLICIESPaperEnabledPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMPOLICIESPaperEnabledPolicy *previousValue =
+      valueDict[@"previous_value"]
+          ? [DBTEAMPOLICIESPaperEnabledPolicySerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
 
   return [[DBTEAMLOGPaperChangePolicyDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
 }
@@ -38111,6 +39136,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38121,7 +39147,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentAddMemberDetailsSerializer serialize:instance];
 }
 
@@ -38187,7 +39213,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentAddMemberDetails *)deserialize:(NSDictionary *)valueDict {
@@ -38209,21 +39235,24 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid
-                      targetIndex:(NSNumber *)targetIndex
-                      parentIndex:(NSNumber *)parentIndex {
+                 targetAssetIndex:(NSNumber *)targetAssetIndex
+                 parentAssetIndex:(NSNumber *)parentAssetIndex {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](parentAssetIndex);
 
   self = [super init];
   if (self) {
     _eventUuid = eventUuid;
-    _targetIndex = targetIndex;
-    _parentIndex = parentIndex;
+    _targetAssetIndex = targetAssetIndex;
+    _parentAssetIndex = parentAssetIndex;
   }
   return self;
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentAddToFolderDetailsSerializer serialize:instance];
 }
 
@@ -38252,8 +39281,8 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  result = prime * result + [self.targetIndex hash];
-  result = prime * result + [self.parentIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
+  result = prime * result + [self.parentAssetIndex hash];
 
   return prime * result;
 }
@@ -38278,10 +39307,10 @@
   if (![self.eventUuid isEqual:aPaperContentAddToFolderDetails.eventUuid]) {
     return NO;
   }
-  if (![self.targetIndex isEqual:aPaperContentAddToFolderDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aPaperContentAddToFolderDetails.targetAssetIndex]) {
     return NO;
   }
-  if (![self.parentIndex isEqual:aPaperContentAddToFolderDetails.parentIndex]) {
+  if (![self.parentAssetIndex isEqual:aPaperContentAddToFolderDetails.parentAssetIndex]) {
     return NO;
   }
   return YES;
@@ -38297,20 +39326,20 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
-  jsonDict[@"target_index"] = valueObj.targetIndex;
-  jsonDict[@"parent_index"] = valueObj.parentIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
+  jsonDict[@"parent_asset_index"] = valueObj.parentAssetIndex;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentAddToFolderDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *eventUuid = valueDict[@"event_uuid"];
-  NSNumber *targetIndex = valueDict[@"target_index"];
-  NSNumber *parentIndex = valueDict[@"parent_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
+  NSNumber *parentAssetIndex = valueDict[@"parent_asset_index"];
 
   return [[DBTEAMLOGPaperContentAddToFolderDetails alloc] initWithEventUuid:eventUuid
-                                                                targetIndex:targetIndex
-                                                                parentIndex:parentIndex];
+                                                           targetAssetIndex:targetAssetIndex
+                                                           parentAssetIndex:parentAssetIndex];
 }
 
 @end
@@ -38326,6 +39355,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38336,7 +39366,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentArchiveDetailsSerializer serialize:instance];
 }
 
@@ -38402,147 +39432,13 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentArchiveDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *eventUuid = valueDict[@"event_uuid"];
 
   return [[DBTEAMLOGPaperContentArchiveDetails alloc] initWithEventUuid:eventUuid];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGPaperContentChangeSubscriptionDetails.h"
-#import "DBTEAMLOGPaperTaggedValue.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGPaperContentChangeSubscriptionDetails
-
-#pragma mark - Constructors
-
-- (instancetype)initWithEventUuid:(NSString *)eventUuid
-            dNewSubscriptionLevel:(DBTEAMLOGPaperTaggedValue *)dNewSubscriptionLevel
-        previousSubscriptionLevel:(DBTEAMLOGPaperTaggedValue *)previousSubscriptionLevel {
-
-  self = [super init];
-  if (self) {
-    _eventUuid = eventUuid;
-    _dNewSubscriptionLevel = dNewSubscriptionLevel;
-    _previousSubscriptionLevel = previousSubscriptionLevel;
-  }
-  return self;
-}
-
-- (instancetype)initWithEventUuid:(NSString *)eventUuid
-            dNewSubscriptionLevel:(DBTEAMLOGPaperTaggedValue *)dNewSubscriptionLevel {
-  return [self initWithEventUuid:eventUuid dNewSubscriptionLevel:dNewSubscriptionLevel previousSubscriptionLevel:nil];
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGPaperContentChangeSubscriptionDetailsSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGPaperContentChangeSubscriptionDetailsSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGPaperContentChangeSubscriptionDetailsSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  result = prime * result + [self.eventUuid hash];
-  result = prime * result + [self.dNewSubscriptionLevel hash];
-  if (self.previousSubscriptionLevel) {
-    result = prime * result + [self.previousSubscriptionLevel hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToPaperContentChangeSubscriptionDetails:other];
-}
-
-- (BOOL)isEqualToPaperContentChangeSubscriptionDetails:
-    (DBTEAMLOGPaperContentChangeSubscriptionDetails *)aPaperContentChangeSubscriptionDetails {
-  if (self == aPaperContentChangeSubscriptionDetails) {
-    return YES;
-  }
-  if (![self.eventUuid isEqual:aPaperContentChangeSubscriptionDetails.eventUuid]) {
-    return NO;
-  }
-  if (![self.dNewSubscriptionLevel isEqual:aPaperContentChangeSubscriptionDetails.dNewSubscriptionLevel]) {
-    return NO;
-  }
-  if (self.previousSubscriptionLevel) {
-    if (![self.previousSubscriptionLevel isEqual:aPaperContentChangeSubscriptionDetails.previousSubscriptionLevel]) {
-      return NO;
-    }
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGPaperContentChangeSubscriptionDetailsSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperContentChangeSubscriptionDetails *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  jsonDict[@"event_uuid"] = valueObj.eventUuid;
-  jsonDict[@"new_subscription_level"] = [DBTEAMLOGPaperTaggedValueSerializer serialize:valueObj.dNewSubscriptionLevel];
-  if (valueObj.previousSubscriptionLevel) {
-    jsonDict[@"previous_subscription_level"] =
-        [DBTEAMLOGPaperTaggedValueSerializer serialize:valueObj.previousSubscriptionLevel];
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGPaperContentChangeSubscriptionDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *eventUuid = valueDict[@"event_uuid"];
-  DBTEAMLOGPaperTaggedValue *dNewSubscriptionLevel =
-      [DBTEAMLOGPaperTaggedValueSerializer deserialize:valueDict[@"new_subscription_level"]];
-  DBTEAMLOGPaperTaggedValue *previousSubscriptionLevel =
-      valueDict[@"previous_subscription_level"]
-          ? [DBTEAMLOGPaperTaggedValueSerializer deserialize:valueDict[@"previous_subscription_level"]]
-          : nil;
-
-  return [[DBTEAMLOGPaperContentChangeSubscriptionDetails alloc] initWithEventUuid:eventUuid
-                                                             dNewSubscriptionLevel:dNewSubscriptionLevel
-                                                         previousSubscriptionLevel:previousSubscriptionLevel];
 }
 
 @end
@@ -38558,6 +39454,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38568,7 +39465,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentCreateDetailsSerializer serialize:instance];
 }
 
@@ -38634,7 +39531,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentCreateDetails *)deserialize:(NSDictionary *)valueDict {
@@ -38656,6 +39553,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38666,7 +39564,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentPermanentlyDeleteDetailsSerializer serialize:instance];
 }
 
@@ -38733,7 +39631,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentPermanentlyDeleteDetails *)deserialize:(NSDictionary *)valueDict {
@@ -38755,6 +39653,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38765,7 +39664,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentRemoveFromFolderDetailsSerializer serialize:instance];
 }
 
@@ -38832,7 +39731,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentRemoveFromFolderDetails *)deserialize:(NSDictionary *)valueDict {
@@ -38854,6 +39753,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38864,7 +39764,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentRemoveMemberDetailsSerializer serialize:instance];
 }
 
@@ -38931,7 +39831,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentRemoveMemberDetails *)deserialize:(NSDictionary *)valueDict {
@@ -38953,6 +39853,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -38963,7 +39864,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentRenameDetailsSerializer serialize:instance];
 }
 
@@ -39029,7 +39930,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentRenameDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39051,6 +39952,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -39061,7 +39963,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperContentRestoreDetailsSerializer serialize:instance];
 }
 
@@ -39127,186 +40029,13 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperContentRestoreDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *eventUuid = valueDict[@"event_uuid"];
 
   return [[DBTEAMLOGPaperContentRestoreDetails alloc] initWithEventUuid:eventUuid];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGPaperDeploymentPolicy.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGPaperDeploymentPolicy
-
-#pragma mark - Constructors
-
-- (instancetype)initWithPartial {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperDeploymentPolicyPartial;
-  }
-  return self;
-}
-
-- (instancetype)initWithFull {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperDeploymentPolicyFull;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperDeploymentPolicyOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isPartial {
-  return _tag == DBTEAMLOGPaperDeploymentPolicyPartial;
-}
-
-- (BOOL)isFull {
-  return _tag == DBTEAMLOGPaperDeploymentPolicyFull;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGPaperDeploymentPolicyOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGPaperDeploymentPolicyPartial:
-    return @"DBTEAMLOGPaperDeploymentPolicyPartial";
-  case DBTEAMLOGPaperDeploymentPolicyFull:
-    return @"DBTEAMLOGPaperDeploymentPolicyFull";
-  case DBTEAMLOGPaperDeploymentPolicyOther:
-    return @"DBTEAMLOGPaperDeploymentPolicyOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGPaperDeploymentPolicySerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGPaperDeploymentPolicySerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGPaperDeploymentPolicySerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBTEAMLOGPaperDeploymentPolicyPartial:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGPaperDeploymentPolicyFull:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGPaperDeploymentPolicyOther:
-    result = prime * result + [[self tagName] hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToPaperDeploymentPolicy:other];
-}
-
-- (BOOL)isEqualToPaperDeploymentPolicy:(DBTEAMLOGPaperDeploymentPolicy *)aPaperDeploymentPolicy {
-  if (self == aPaperDeploymentPolicy) {
-    return YES;
-  }
-  if (self.tag != aPaperDeploymentPolicy.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGPaperDeploymentPolicyPartial:
-    return [[self tagName] isEqual:[aPaperDeploymentPolicy tagName]];
-  case DBTEAMLOGPaperDeploymentPolicyFull:
-    return [[self tagName] isEqual:[aPaperDeploymentPolicy tagName]];
-  case DBTEAMLOGPaperDeploymentPolicyOther:
-    return [[self tagName] isEqual:[aPaperDeploymentPolicy tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGPaperDeploymentPolicySerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperDeploymentPolicy *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isPartial]) {
-    jsonDict[@".tag"] = @"partial";
-  } else if ([valueObj isFull]) {
-    jsonDict[@".tag"] = @"full";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGPaperDeploymentPolicy *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"partial"]) {
-    return [[DBTEAMLOGPaperDeploymentPolicy alloc] initWithPartial];
-  } else if ([tag isEqualToString:@"full"]) {
-    return [[DBTEAMLOGPaperDeploymentPolicy alloc] initWithFull];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGPaperDeploymentPolicy alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGPaperDeploymentPolicy alloc] initWithOther];
-  }
 }
 
 @end
@@ -39322,6 +40051,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -39337,7 +40067,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocAddCommentDetailsSerializer serialize:instance];
 }
 
@@ -39366,7 +40096,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  if (self.commentText) {
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -39414,7 +40144,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocAddCommentDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39438,6 +40168,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid accessType:(DBTEAMLOGPaperAccessType *)accessType {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+  [DBStoneValidators nonnullValidator:nil](accessType);
 
   self = [super init];
   if (self) {
@@ -39449,7 +40181,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocChangeMemberRoleDetailsSerializer serialize:instance];
 }
 
@@ -39521,7 +40253,7 @@
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
   jsonDict[@"access_type"] = [DBTEAMLOGPaperAccessTypeSerializer serialize:valueObj.accessType];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocChangeMemberRoleDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39546,6 +40278,7 @@
 - (instancetype)initWithEventUuid:(NSString *)eventUuid
               publicSharingPolicy:(NSString *)publicSharingPolicy
                 teamSharingPolicy:(NSString *)teamSharingPolicy {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -39562,7 +40295,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocChangeSharingPolicyDetailsSerializer serialize:instance];
 }
 
@@ -39591,10 +40324,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  if (self.publicSharingPolicy) {
+  if (self.publicSharingPolicy != nil) {
     result = prime * result + [self.publicSharingPolicy hash];
   }
-  if (self.teamSharingPolicy) {
+  if (self.teamSharingPolicy != nil) {
     result = prime * result + [self.teamSharingPolicy hash];
   }
 
@@ -39651,7 +40384,7 @@
     jsonDict[@"team_sharing_policy"] = valueObj.teamSharingPolicy;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocChangeSharingPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39668,6 +40401,135 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGPaperDocChangeSubscriptionDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPaperDocChangeSubscriptionDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEventUuid:(NSString *)eventUuid
+            dNewSubscriptionLevel:(NSString *)dNewSubscriptionLevel
+        previousSubscriptionLevel:(NSString *)previousSubscriptionLevel {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+  [DBStoneValidators nonnullValidator:nil](dNewSubscriptionLevel);
+
+  self = [super init];
+  if (self) {
+    _eventUuid = eventUuid;
+    _dNewSubscriptionLevel = dNewSubscriptionLevel;
+    _previousSubscriptionLevel = previousSubscriptionLevel;
+  }
+  return self;
+}
+
+- (instancetype)initWithEventUuid:(NSString *)eventUuid dNewSubscriptionLevel:(NSString *)dNewSubscriptionLevel {
+  return [self initWithEventUuid:eventUuid dNewSubscriptionLevel:dNewSubscriptionLevel previousSubscriptionLevel:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.eventUuid hash];
+  result = prime * result + [self.dNewSubscriptionLevel hash];
+  if (self.previousSubscriptionLevel != nil) {
+    result = prime * result + [self.previousSubscriptionLevel hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocChangeSubscriptionDetails:other];
+}
+
+- (BOOL)isEqualToPaperDocChangeSubscriptionDetails:
+    (DBTEAMLOGPaperDocChangeSubscriptionDetails *)aPaperDocChangeSubscriptionDetails {
+  if (self == aPaperDocChangeSubscriptionDetails) {
+    return YES;
+  }
+  if (![self.eventUuid isEqual:aPaperDocChangeSubscriptionDetails.eventUuid]) {
+    return NO;
+  }
+  if (![self.dNewSubscriptionLevel isEqual:aPaperDocChangeSubscriptionDetails.dNewSubscriptionLevel]) {
+    return NO;
+  }
+  if (self.previousSubscriptionLevel) {
+    if (![self.previousSubscriptionLevel isEqual:aPaperDocChangeSubscriptionDetails.previousSubscriptionLevel]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGPaperDocChangeSubscriptionDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"event_uuid"] = valueObj.eventUuid;
+  jsonDict[@"new_subscription_level"] = valueObj.dNewSubscriptionLevel;
+  if (valueObj.previousSubscriptionLevel) {
+    jsonDict[@"previous_subscription_level"] = valueObj.previousSubscriptionLevel;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPaperDocChangeSubscriptionDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *eventUuid = valueDict[@"event_uuid"];
+  NSString *dNewSubscriptionLevel = valueDict[@"new_subscription_level"];
+  NSString *previousSubscriptionLevel = valueDict[@"previous_subscription_level"] ?: nil;
+
+  return [[DBTEAMLOGPaperDocChangeSubscriptionDetails alloc] initWithEventUuid:eventUuid
+                                                         dNewSubscriptionLevel:dNewSubscriptionLevel
+                                                     previousSubscriptionLevel:previousSubscriptionLevel];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGPaperDocDeleteCommentDetails.h"
 
 #pragma mark - API Object
@@ -39677,6 +40539,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -39692,7 +40555,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocDeleteCommentDetailsSerializer serialize:instance];
 }
 
@@ -39721,7 +40584,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  if (self.commentText) {
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -39769,7 +40632,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocDeleteCommentDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39792,6 +40655,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -39802,7 +40666,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocDeletedDetailsSerializer serialize:instance];
 }
 
@@ -39868,7 +40732,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocDeletedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39892,6 +40756,8 @@
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid
                  exportFileFormat:(DBTEAMLOGPaperDownloadFormat *)exportFileFormat {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+  [DBStoneValidators nonnullValidator:nil](exportFileFormat);
 
   self = [super init];
   if (self) {
@@ -39903,7 +40769,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocDownloadDetailsSerializer serialize:instance];
 }
 
@@ -39974,7 +40840,7 @@
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
   jsonDict[@"export_file_format"] = [DBTEAMLOGPaperDownloadFormatSerializer serialize:valueObj.exportFileFormat];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocDownloadDetails *)deserialize:(NSDictionary *)valueDict {
@@ -39998,6 +40864,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40013,7 +40880,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocEditCommentDetailsSerializer serialize:instance];
 }
 
@@ -40042,7 +40909,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  if (self.commentText) {
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -40090,7 +40957,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocEditCommentDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40113,6 +40980,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40123,7 +40991,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocEditDetailsSerializer serialize:instance];
 }
 
@@ -40189,7 +41057,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocEditDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40211,6 +41079,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40221,7 +41090,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocFollowedDetailsSerializer serialize:instance];
 }
 
@@ -40287,7 +41156,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocFollowedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40309,6 +41178,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40319,7 +41189,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocMentionDetailsSerializer serialize:instance];
 }
 
@@ -40385,7 +41255,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocMentionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40407,6 +41277,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40417,7 +41288,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocRequestAccessDetailsSerializer serialize:instance];
 }
 
@@ -40483,7 +41354,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocRequestAccessDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40505,6 +41376,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40520,7 +41392,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocResolveCommentDetailsSerializer serialize:instance];
 }
 
@@ -40549,7 +41421,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  if (self.commentText) {
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -40598,7 +41470,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocResolveCommentDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40621,6 +41493,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40631,7 +41504,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocRevertDetailsSerializer serialize:instance];
 }
 
@@ -40697,7 +41570,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocRevertDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40719,6 +41592,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40729,7 +41603,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocSlackShareDetailsSerializer serialize:instance];
 }
 
@@ -40795,7 +41669,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocSlackShareDetails *)deserialize:(NSDictionary *)valueDict {
@@ -40817,6 +41691,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40827,7 +41702,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocTeamInviteDetailsSerializer serialize:instance];
 }
 
@@ -40893,13 +41768,112 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocTeamInviteDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *eventUuid = valueDict[@"event_uuid"];
 
   return [[DBTEAMLOGPaperDocTeamInviteDetails alloc] initWithEventUuid:eventUuid];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGPaperDocTrashedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPaperDocTrashedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+
+  self = [super init];
+  if (self) {
+    _eventUuid = eventUuid;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGPaperDocTrashedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGPaperDocTrashedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGPaperDocTrashedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.eventUuid hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocTrashedDetails:other];
+}
+
+- (BOOL)isEqualToPaperDocTrashedDetails:(DBTEAMLOGPaperDocTrashedDetails *)aPaperDocTrashedDetails {
+  if (self == aPaperDocTrashedDetails) {
+    return YES;
+  }
+  if (![self.eventUuid isEqual:aPaperDocTrashedDetails.eventUuid]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPaperDocTrashedDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGPaperDocTrashedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"event_uuid"] = valueObj.eventUuid;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPaperDocTrashedDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *eventUuid = valueDict[@"event_uuid"];
+
+  return [[DBTEAMLOGPaperDocTrashedDetails alloc] initWithEventUuid:eventUuid];
 }
 
 @end
@@ -40915,6 +41889,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid commentText:(NSString *)commentText {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -40930,7 +41905,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocUnresolveCommentDetailsSerializer serialize:instance];
 }
 
@@ -40959,7 +41934,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.eventUuid hash];
-  if (self.commentText) {
+  if (self.commentText != nil) {
     result = prime * result + [self.commentText hash];
   }
 
@@ -41008,7 +41983,7 @@
     jsonDict[@"comment_text"] = valueObj.commentText;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocUnresolveCommentDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41016,6 +41991,105 @@
   NSString *commentText = valueDict[@"comment_text"] ?: nil;
 
   return [[DBTEAMLOGPaperDocUnresolveCommentDetails alloc] initWithEventUuid:eventUuid commentText:commentText];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGPaperDocUntrashedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPaperDocUntrashedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+
+  self = [super init];
+  if (self) {
+    _eventUuid = eventUuid;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGPaperDocUntrashedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGPaperDocUntrashedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGPaperDocUntrashedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.eventUuid hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperDocUntrashedDetails:other];
+}
+
+- (BOOL)isEqualToPaperDocUntrashedDetails:(DBTEAMLOGPaperDocUntrashedDetails *)aPaperDocUntrashedDetails {
+  if (self == aPaperDocUntrashedDetails) {
+    return YES;
+  }
+  if (![self.eventUuid isEqual:aPaperDocUntrashedDetails.eventUuid]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPaperDocUntrashedDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGPaperDocUntrashedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"event_uuid"] = valueObj.eventUuid;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPaperDocUntrashedDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *eventUuid = valueDict[@"event_uuid"];
+
+  return [[DBTEAMLOGPaperDocUntrashedDetails alloc] initWithEventUuid:eventUuid];
 }
 
 @end
@@ -41031,6 +42105,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -41041,7 +42116,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocViewDetailsSerializer serialize:instance];
 }
 
@@ -41107,7 +42182,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocViewDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41129,6 +42204,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDocId:(NSString *)docId docTitle:(NSString *)docTitle {
+  [DBStoneValidators nonnullValidator:nil](docId);
+  [DBStoneValidators nonnullValidator:nil](docTitle);
 
   self = [super init];
   if (self) {
@@ -41140,7 +42217,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDocumentLogInfoSerializer serialize:instance];
 }
 
@@ -41211,7 +42288,7 @@
   jsonDict[@"doc_id"] = valueObj.docId;
   jsonDict[@"doc_title"] = valueObj.docTitle;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDocumentLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -41302,7 +42379,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperDownloadFormatSerializer serialize:instance];
 }
 
@@ -41397,7 +42474,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperDownloadFormat *)deserialize:(NSDictionary *)valueDict {
@@ -41438,7 +42515,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperEnabledUsersGroupAdditionDetailsSerializer serialize:instance];
 }
 
@@ -41499,7 +42576,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41530,7 +42607,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperEnabledUsersGroupRemovalDetailsSerializer serialize:instance];
 }
 
@@ -41591,7 +42668,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperEnabledUsersGroupRemovalDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41622,7 +42699,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperExternalViewAllowDetailsSerializer serialize:instance];
 }
 
@@ -41683,7 +42760,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperExternalViewAllowDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41714,7 +42791,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperExternalViewDefaultTeamDetailsSerializer serialize:instance];
 }
 
@@ -41775,7 +42852,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperExternalViewDefaultTeamDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41806,7 +42883,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperExternalViewForbidDetailsSerializer serialize:instance];
 }
 
@@ -41867,13 +42944,142 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperExternalViewForbidDetails *)deserialize:(NSDictionary *)valueDict {
 #pragma unused(valueDict)
 
   return [[DBTEAMLOGPaperExternalViewForbidDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGPaperFolderChangeSubscriptionDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPaperFolderChangeSubscriptionDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEventUuid:(NSString *)eventUuid
+            dNewSubscriptionLevel:(NSString *)dNewSubscriptionLevel
+        previousSubscriptionLevel:(NSString *)previousSubscriptionLevel {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
+  [DBStoneValidators nonnullValidator:nil](dNewSubscriptionLevel);
+
+  self = [super init];
+  if (self) {
+    _eventUuid = eventUuid;
+    _dNewSubscriptionLevel = dNewSubscriptionLevel;
+    _previousSubscriptionLevel = previousSubscriptionLevel;
+  }
+  return self;
+}
+
+- (instancetype)initWithEventUuid:(NSString *)eventUuid dNewSubscriptionLevel:(NSString *)dNewSubscriptionLevel {
+  return [self initWithEventUuid:eventUuid dNewSubscriptionLevel:dNewSubscriptionLevel previousSubscriptionLevel:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.eventUuid hash];
+  result = prime * result + [self.dNewSubscriptionLevel hash];
+  if (self.previousSubscriptionLevel != nil) {
+    result = prime * result + [self.previousSubscriptionLevel hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperFolderChangeSubscriptionDetails:other];
+}
+
+- (BOOL)isEqualToPaperFolderChangeSubscriptionDetails:
+    (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)aPaperFolderChangeSubscriptionDetails {
+  if (self == aPaperFolderChangeSubscriptionDetails) {
+    return YES;
+  }
+  if (![self.eventUuid isEqual:aPaperFolderChangeSubscriptionDetails.eventUuid]) {
+    return NO;
+  }
+  if (![self.dNewSubscriptionLevel isEqual:aPaperFolderChangeSubscriptionDetails.dNewSubscriptionLevel]) {
+    return NO;
+  }
+  if (self.previousSubscriptionLevel) {
+    if (![self.previousSubscriptionLevel isEqual:aPaperFolderChangeSubscriptionDetails.previousSubscriptionLevel]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGPaperFolderChangeSubscriptionDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"event_uuid"] = valueObj.eventUuid;
+  jsonDict[@"new_subscription_level"] = valueObj.dNewSubscriptionLevel;
+  if (valueObj.previousSubscriptionLevel) {
+    jsonDict[@"previous_subscription_level"] = valueObj.previousSubscriptionLevel;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *eventUuid = valueDict[@"event_uuid"];
+  NSString *dNewSubscriptionLevel = valueDict[@"new_subscription_level"];
+  NSString *previousSubscriptionLevel = valueDict[@"previous_subscription_level"] ?: nil;
+
+  return [[DBTEAMLOGPaperFolderChangeSubscriptionDetails alloc] initWithEventUuid:eventUuid
+                                                            dNewSubscriptionLevel:dNewSubscriptionLevel
+                                                        previousSubscriptionLevel:previousSubscriptionLevel];
 }
 
 @end
@@ -41889,6 +43095,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -41899,7 +43106,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperFolderDeletedDetailsSerializer serialize:instance];
 }
 
@@ -41965,7 +43172,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperFolderDeletedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -41987,6 +43194,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -41997,7 +43205,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperFolderFollowedDetailsSerializer serialize:instance];
 }
 
@@ -42063,7 +43271,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperFolderFollowedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -42085,6 +43293,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithFolderId:(NSString *)folderId folderName:(NSString *)folderName {
+  [DBStoneValidators nonnullValidator:nil](folderId);
+  [DBStoneValidators nonnullValidator:nil](folderName);
 
   self = [super init];
   if (self) {
@@ -42096,7 +43306,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperFolderLogInfoSerializer serialize:instance];
 }
 
@@ -42167,7 +43377,7 @@
   jsonDict[@"folder_id"] = valueObj.folderId;
   jsonDict[@"folder_name"] = valueObj.folderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperFolderLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -42190,6 +43400,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithEventUuid:(NSString *)eventUuid {
+  [DBStoneValidators nonnullValidator:nil](eventUuid);
 
   self = [super init];
   if (self) {
@@ -42200,7 +43411,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperFolderTeamInviteDetailsSerializer serialize:instance];
 }
 
@@ -42266,7 +43477,7 @@
 
   jsonDict[@"event_uuid"] = valueObj.eventUuid;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperFolderTeamInviteDetails *)deserialize:(NSDictionary *)valueDict {
@@ -42287,26 +43498,26 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTeamOnly {
+- (instancetype)initWithAnyoneWithLink {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGPaperMemberPolicyTeamOnly;
+    _tag = DBTEAMLOGPaperMemberPolicyAnyoneWithLink;
   }
   return self;
 }
 
-- (instancetype)initWithDefaultTeamOnly {
+- (instancetype)initWithOnlyTeam {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGPaperMemberPolicyDefaultTeamOnly;
+    _tag = DBTEAMLOGPaperMemberPolicyOnlyTeam;
   }
   return self;
 }
 
-- (instancetype)initWithDefaultAnyone {
+- (instancetype)initWithTeamAndExplicitlyShared {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGPaperMemberPolicyDefaultAnyone;
+    _tag = DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared;
   }
   return self;
 }
@@ -42323,16 +43534,16 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isTeamOnly {
-  return _tag == DBTEAMLOGPaperMemberPolicyTeamOnly;
+- (BOOL)isAnyoneWithLink {
+  return _tag == DBTEAMLOGPaperMemberPolicyAnyoneWithLink;
 }
 
-- (BOOL)isDefaultTeamOnly {
-  return _tag == DBTEAMLOGPaperMemberPolicyDefaultTeamOnly;
+- (BOOL)isOnlyTeam {
+  return _tag == DBTEAMLOGPaperMemberPolicyOnlyTeam;
 }
 
-- (BOOL)isDefaultAnyone {
-  return _tag == DBTEAMLOGPaperMemberPolicyDefaultAnyone;
+- (BOOL)isTeamAndExplicitlyShared {
+  return _tag == DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared;
 }
 
 - (BOOL)isOther {
@@ -42341,12 +43552,12 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGPaperMemberPolicyTeamOnly:
-    return @"DBTEAMLOGPaperMemberPolicyTeamOnly";
-  case DBTEAMLOGPaperMemberPolicyDefaultTeamOnly:
-    return @"DBTEAMLOGPaperMemberPolicyDefaultTeamOnly";
-  case DBTEAMLOGPaperMemberPolicyDefaultAnyone:
-    return @"DBTEAMLOGPaperMemberPolicyDefaultAnyone";
+  case DBTEAMLOGPaperMemberPolicyAnyoneWithLink:
+    return @"DBTEAMLOGPaperMemberPolicyAnyoneWithLink";
+  case DBTEAMLOGPaperMemberPolicyOnlyTeam:
+    return @"DBTEAMLOGPaperMemberPolicyOnlyTeam";
+  case DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared:
+    return @"DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared";
   case DBTEAMLOGPaperMemberPolicyOther:
     return @"DBTEAMLOGPaperMemberPolicyOther";
   }
@@ -42356,7 +43567,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPaperMemberPolicySerializer serialize:instance];
 }
 
@@ -42385,11 +43596,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGPaperMemberPolicyTeamOnly:
+  case DBTEAMLOGPaperMemberPolicyAnyoneWithLink:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGPaperMemberPolicyDefaultTeamOnly:
+  case DBTEAMLOGPaperMemberPolicyOnlyTeam:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGPaperMemberPolicyDefaultAnyone:
+  case DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPaperMemberPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -42418,11 +43629,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGPaperMemberPolicyTeamOnly:
+  case DBTEAMLOGPaperMemberPolicyAnyoneWithLink:
     return [[self tagName] isEqual:[aPaperMemberPolicy tagName]];
-  case DBTEAMLOGPaperMemberPolicyDefaultTeamOnly:
+  case DBTEAMLOGPaperMemberPolicyOnlyTeam:
     return [[self tagName] isEqual:[aPaperMemberPolicy tagName]];
-  case DBTEAMLOGPaperMemberPolicyDefaultAnyone:
+  case DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared:
     return [[self tagName] isEqual:[aPaperMemberPolicy tagName]];
   case DBTEAMLOGPaperMemberPolicyOther:
     return [[self tagName] isEqual:[aPaperMemberPolicy tagName]];
@@ -42439,306 +43650,35 @@
 + (NSDictionary *)serialize:(DBTEAMLOGPaperMemberPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamOnly]) {
-    jsonDict[@".tag"] = @"team_only";
-  } else if ([valueObj isDefaultTeamOnly]) {
-    jsonDict[@".tag"] = @"default_team_only";
-  } else if ([valueObj isDefaultAnyone]) {
-    jsonDict[@".tag"] = @"default_anyone";
+  if ([valueObj isAnyoneWithLink]) {
+    jsonDict[@".tag"] = @"anyone_with_link";
+  } else if ([valueObj isOnlyTeam]) {
+    jsonDict[@".tag"] = @"only_team";
+  } else if ([valueObj isTeamAndExplicitlyShared]) {
+    jsonDict[@".tag"] = @"team_and_explicitly_shared";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPaperMemberPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_only"]) {
-    return [[DBTEAMLOGPaperMemberPolicy alloc] initWithTeamOnly];
-  } else if ([tag isEqualToString:@"default_team_only"]) {
-    return [[DBTEAMLOGPaperMemberPolicy alloc] initWithDefaultTeamOnly];
-  } else if ([tag isEqualToString:@"default_anyone"]) {
-    return [[DBTEAMLOGPaperMemberPolicy alloc] initWithDefaultAnyone];
+  if ([tag isEqualToString:@"anyone_with_link"]) {
+    return [[DBTEAMLOGPaperMemberPolicy alloc] initWithAnyoneWithLink];
+  } else if ([tag isEqualToString:@"only_team"]) {
+    return [[DBTEAMLOGPaperMemberPolicy alloc] initWithOnlyTeam];
+  } else if ([tag isEqualToString:@"team_and_explicitly_shared"]) {
+    return [[DBTEAMLOGPaperMemberPolicy alloc] initWithTeamAndExplicitlyShared];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGPaperMemberPolicy alloc] initWithOther];
   } else {
     return [[DBTEAMLOGPaperMemberPolicy alloc] initWithOther];
   }
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGPaperPolicy.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGPaperPolicy
-
-#pragma mark - Constructors
-
-- (instancetype)initWithDisabled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperPolicyDisabled;
-  }
-  return self;
-}
-
-- (instancetype)initWithEnabled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperPolicyEnabled;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperPolicyOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isDisabled {
-  return _tag == DBTEAMLOGPaperPolicyDisabled;
-}
-
-- (BOOL)isEnabled {
-  return _tag == DBTEAMLOGPaperPolicyEnabled;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGPaperPolicyOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGPaperPolicyDisabled:
-    return @"DBTEAMLOGPaperPolicyDisabled";
-  case DBTEAMLOGPaperPolicyEnabled:
-    return @"DBTEAMLOGPaperPolicyEnabled";
-  case DBTEAMLOGPaperPolicyOther:
-    return @"DBTEAMLOGPaperPolicyOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGPaperPolicySerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGPaperPolicySerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGPaperPolicySerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBTEAMLOGPaperPolicyDisabled:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGPaperPolicyEnabled:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGPaperPolicyOther:
-    result = prime * result + [[self tagName] hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToPaperPolicy:other];
-}
-
-- (BOOL)isEqualToPaperPolicy:(DBTEAMLOGPaperPolicy *)aPaperPolicy {
-  if (self == aPaperPolicy) {
-    return YES;
-  }
-  if (self.tag != aPaperPolicy.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGPaperPolicyDisabled:
-    return [[self tagName] isEqual:[aPaperPolicy tagName]];
-  case DBTEAMLOGPaperPolicyEnabled:
-    return [[self tagName] isEqual:[aPaperPolicy tagName]];
-  case DBTEAMLOGPaperPolicyOther:
-    return [[self tagName] isEqual:[aPaperPolicy tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGPaperPolicySerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperPolicy *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isDisabled]) {
-    jsonDict[@".tag"] = @"disabled";
-  } else if ([valueObj isEnabled]) {
-    jsonDict[@".tag"] = @"enabled";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGPaperPolicy *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"disabled"]) {
-    return [[DBTEAMLOGPaperPolicy alloc] initWithDisabled];
-  } else if ([tag isEqualToString:@"enabled"]) {
-    return [[DBTEAMLOGPaperPolicy alloc] initWithEnabled];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGPaperPolicy alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGPaperPolicy alloc] initWithOther];
-  }
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGPaperTaggedValue.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGPaperTaggedValue
-
-#pragma mark - Constructors
-
-- (instancetype)initWithTag:(NSString *)tag {
-
-  self = [super init];
-  if (self) {
-    _tag = tag;
-  }
-  return self;
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGPaperTaggedValueSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGPaperTaggedValueSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGPaperTaggedValueSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  result = prime * result + [self.tag hash];
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToPaperTaggedValue:other];
-}
-
-- (BOOL)isEqualToPaperTaggedValue:(DBTEAMLOGPaperTaggedValue *)aPaperTaggedValue {
-  if (self == aPaperTaggedValue) {
-    return YES;
-  }
-  if (![self.tag isEqual:aPaperTaggedValue.tag]) {
-    return NO;
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGPaperTaggedValueSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperTaggedValue *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  jsonDict[@"tag"] = valueObj.tag;
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGPaperTaggedValue *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@"tag"];
-
-  return [[DBTEAMLOGPaperTaggedValue alloc] initWithTag:tag];
 }
 
 @end
@@ -42831,7 +43771,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGParticipantLogInfoSerializer serialize:instance];
 }
 
@@ -42922,7 +43862,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGParticipantLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -42963,7 +43903,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPasswordChangeDetailsSerializer serialize:instance];
 }
 
@@ -43023,7 +43963,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPasswordChangeDetails *)deserialize:(NSDictionary *)valueDict {
@@ -43046,6 +43986,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithErrorDetails:(DBTEAMLOGFailureDetailsLogInfo *)errorDetails {
+  [DBStoneValidators nonnullValidator:nil](errorDetails);
 
   self = [super init];
   if (self) {
@@ -43056,7 +43997,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPasswordLoginFailDetailsSerializer serialize:instance];
 }
 
@@ -43122,7 +44063,7 @@
 
   jsonDict[@"error_details"] = [DBTEAMLOGFailureDetailsLogInfoSerializer serialize:valueObj.errorDetails];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPasswordLoginFailDetails *)deserialize:(NSDictionary *)valueDict {
@@ -43154,7 +44095,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPasswordLoginSuccessDetailsSerializer serialize:instance];
 }
 
@@ -43214,7 +44155,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPasswordLoginSuccessDetails *)deserialize:(NSDictionary *)valueDict {
@@ -43245,7 +44186,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPasswordResetAllDetailsSerializer serialize:instance];
 }
 
@@ -43305,7 +44246,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPasswordResetAllDetails *)deserialize:(NSDictionary *)valueDict {
@@ -43336,7 +44277,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPasswordResetDetailsSerializer serialize:instance];
 }
 
@@ -43396,7 +44337,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPasswordResetDetails *)deserialize:(NSDictionary *)valueDict {
@@ -43420,6 +44361,7 @@
 
 - (instancetype)initWithNamespaceRelative:(DBTEAMLOGNamespaceRelativePathLogInfo *)namespaceRelative
                                contextual:(NSString *)contextual {
+  [DBStoneValidators nonnullValidator:nil](namespaceRelative);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"/(.|[\\r\\n])*"]](contextual);
 
@@ -43437,7 +44379,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPathLogInfoSerializer serialize:instance];
 }
 
@@ -43466,7 +44408,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.namespaceRelative hash];
-  if (self.contextual) {
+  if (self.contextual != nil) {
     result = prime * result + [self.contextual hash];
   }
 
@@ -43515,7 +44457,7 @@
     jsonDict[@"contextual"] = valueObj.contextual;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPathLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -43541,6 +44483,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGContentPermanentDeletePolicy *)dNewValue
                     previousValue:(DBTEAMLOGContentPermanentDeletePolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -43556,7 +44499,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPermanentDeleteChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -43585,7 +44528,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -43634,7 +44577,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGContentPermanentDeletePolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPermanentDeleteChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -43715,7 +44658,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGPlacementRestrictionSerializer serialize:instance];
 }
 
@@ -43804,7 +44747,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGPlacementRestriction *)deserialize:(NSDictionary *)valueDict {
@@ -43833,19 +44776,21 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithSrcIndex:(NSNumber *)srcIndex destIndex:(NSNumber *)destIndex {
+- (instancetype)initWithSrcAssetIndex:(NSNumber *)srcAssetIndex destAssetIndex:(NSNumber *)destAssetIndex {
+  [DBStoneValidators nonnullValidator:nil](srcAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](destAssetIndex);
 
   self = [super init];
   if (self) {
-    _srcIndex = srcIndex;
-    _destIndex = destIndex;
+    _srcAssetIndex = srcAssetIndex;
+    _destAssetIndex = destAssetIndex;
   }
   return self;
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:instance];
 }
 
@@ -43873,8 +44818,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.srcIndex hash];
-  result = prime * result + [self.destIndex hash];
+  result = prime * result + [self.srcAssetIndex hash];
+  result = prime * result + [self.destAssetIndex hash];
 
   return prime * result;
 }
@@ -43896,10 +44841,10 @@
   if (self == aRelocateAssetReferencesLogInfo) {
     return YES;
   }
-  if (![self.srcIndex isEqual:aRelocateAssetReferencesLogInfo.srcIndex]) {
+  if (![self.srcAssetIndex isEqual:aRelocateAssetReferencesLogInfo.srcAssetIndex]) {
     return NO;
   }
-  if (![self.destIndex isEqual:aRelocateAssetReferencesLogInfo.destIndex]) {
+  if (![self.destAssetIndex isEqual:aRelocateAssetReferencesLogInfo.destAssetIndex]) {
     return NO;
   }
   return YES;
@@ -43914,230 +44859,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGRelocateAssetReferencesLogInfo *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"src_index"] = valueObj.srcIndex;
-  jsonDict[@"dest_index"] = valueObj.destIndex;
+  jsonDict[@"src_asset_index"] = valueObj.srcAssetIndex;
+  jsonDict[@"dest_asset_index"] = valueObj.destAssetIndex;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGRelocateAssetReferencesLogInfo *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *srcIndex = valueDict[@"src_index"];
-  NSNumber *destIndex = valueDict[@"dest_index"];
+  NSNumber *srcAssetIndex = valueDict[@"src_asset_index"];
+  NSNumber *destAssetIndex = valueDict[@"dest_asset_index"];
 
-  return [[DBTEAMLOGRelocateAssetReferencesLogInfo alloc] initWithSrcIndex:srcIndex destIndex:destIndex];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGRemoveLogoutUrlDetails.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGRemoveLogoutUrlDetails
-
-#pragma mark - Constructors
-
-- (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(NSString *)dNewValue {
-
-  self = [super init];
-  if (self) {
-    _previousValue = previousValue;
-    _dNewValue = dNewValue;
-  }
-  return self;
-}
-
-- (instancetype)initWithPreviousValue:(NSString *)previousValue {
-  return [self initWithPreviousValue:previousValue dNewValue:nil];
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGRemoveLogoutUrlDetailsSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGRemoveLogoutUrlDetailsSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGRemoveLogoutUrlDetailsSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  result = prime * result + [self.previousValue hash];
-  if (self.dNewValue) {
-    result = prime * result + [self.dNewValue hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToRemoveLogoutUrlDetails:other];
-}
-
-- (BOOL)isEqualToRemoveLogoutUrlDetails:(DBTEAMLOGRemoveLogoutUrlDetails *)aRemoveLogoutUrlDetails {
-  if (self == aRemoveLogoutUrlDetails) {
-    return YES;
-  }
-  if (![self.previousValue isEqual:aRemoveLogoutUrlDetails.previousValue]) {
-    return NO;
-  }
-  if (self.dNewValue) {
-    if (![self.dNewValue isEqual:aRemoveLogoutUrlDetails.dNewValue]) {
-      return NO;
-    }
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGRemoveLogoutUrlDetailsSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGRemoveLogoutUrlDetails *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  jsonDict[@"previous_value"] = valueObj.previousValue;
-  if (valueObj.dNewValue) {
-    jsonDict[@"new_value"] = valueObj.dNewValue;
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGRemoveLogoutUrlDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *previousValue = valueDict[@"previous_value"];
-  NSString *dNewValue = valueDict[@"new_value"] ?: nil;
-
-  return [[DBTEAMLOGRemoveLogoutUrlDetails alloc] initWithPreviousValue:previousValue dNewValue:dNewValue];
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGRemoveSsoUrlDetails.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGRemoveSsoUrlDetails
-
-#pragma mark - Constructors
-
-- (instancetype)initWithPreviousValue:(NSString *)previousValue {
-
-  self = [super init];
-  if (self) {
-    _previousValue = previousValue;
-  }
-  return self;
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGRemoveSsoUrlDetailsSerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGRemoveSsoUrlDetailsSerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGRemoveSsoUrlDetailsSerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  result = prime * result + [self.previousValue hash];
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToRemoveSsoUrlDetails:other];
-}
-
-- (BOOL)isEqualToRemoveSsoUrlDetails:(DBTEAMLOGRemoveSsoUrlDetails *)aRemoveSsoUrlDetails {
-  if (self == aRemoveSsoUrlDetails) {
-    return YES;
-  }
-  if (![self.previousValue isEqual:aRemoveSsoUrlDetails.previousValue]) {
-    return NO;
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGRemoveSsoUrlDetailsSerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGRemoveSsoUrlDetails *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  jsonDict[@"previous_value"] = valueObj.previousValue;
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGRemoveSsoUrlDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *previousValue = valueDict[@"previous_value"];
-
-  return [[DBTEAMLOGRemoveSsoUrlDetails alloc] initWithPreviousValue:previousValue];
+  return [[DBTEAMLOGRelocateAssetReferencesLogInfo alloc] initWithSrcAssetIndex:srcAssetIndex
+                                                                 destAssetIndex:destAssetIndex];
 }
 
 @end
@@ -44153,6 +44886,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithResellerName:(NSString *)resellerName resellerId:(NSString *)resellerId {
+  [DBStoneValidators nonnullValidator:nil](resellerName);
+  [DBStoneValidators nonnullValidator:nil](resellerId);
 
   self = [super init];
   if (self) {
@@ -44164,7 +44899,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGResellerLogInfoSerializer serialize:instance];
 }
 
@@ -44235,7 +44970,7 @@
   jsonDict[@"reseller_name"] = valueObj.resellerName;
   jsonDict[@"reseller_id"] = valueObj.resellerId;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGResellerLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -44267,7 +45002,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGResellerSupportSessionEndDetailsSerializer serialize:instance];
 }
 
@@ -44328,7 +45063,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGResellerSupportSessionEndDetails *)deserialize:(NSDictionary *)valueDict {
@@ -44359,7 +45094,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGResellerSupportSessionStartDetailsSerializer serialize:instance];
 }
 
@@ -44420,7 +45155,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGResellerSupportSessionStartDetails *)deserialize:(NSDictionary *)valueDict {
@@ -44441,14 +45176,17 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                           teamName:(NSString *)teamName
-                  sharingPermission:(NSString *)sharingPermission {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                                teamName:(NSString *)teamName
+                       sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
+  [DBStoneValidators nonnullValidator:nil](teamName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharingPermission = sharingPermission;
     _teamName = teamName;
@@ -44456,18 +45194,18 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                           teamName:(NSString *)teamName {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-                          teamName:teamName
-                 sharingPermission:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                                teamName:(NSString *)teamName {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                               teamName:teamName
+                      sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfAddGroupDetailsSerializer serialize:instance];
 }
 
@@ -44495,10 +45233,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
   result = prime * result + [self.teamName hash];
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -44521,7 +45259,7 @@
   if (self == aSfAddGroupDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfAddGroupDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfAddGroupDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfAddGroupDetails.originalFolderName]) {
@@ -44547,26 +45285,26 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfAddGroupDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   jsonDict[@"team_name"] = valueObj.teamName;
   if (valueObj.sharingPermission) {
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfAddGroupDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *teamName = valueDict[@"team_name"];
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
-  return [[DBTEAMLOGSfAddGroupDetails alloc] initWithTargetIndex:targetIndex
-                                              originalFolderName:originalFolderName
-                                                        teamName:teamName
-                                               sharingPermission:sharingPermission];
+  return [[DBTEAMLOGSfAddGroupDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                   originalFolderName:originalFolderName
+                                                             teamName:teamName
+                                                    sharingPermission:sharingPermission];
 }
 
 @end
@@ -44581,26 +45319,29 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
-  return [self initWithTargetIndex:targetIndex originalFolderName:originalFolderName sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:originalFolderName sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetailsSerializer serialize:instance];
 }
 
@@ -44628,9 +45369,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -44654,7 +45395,7 @@
   if (self == aSfAllowNonMembersToViewSharedLinksDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfAllowNonMembersToViewSharedLinksDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfAllowNonMembersToViewSharedLinksDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfAllowNonMembersToViewSharedLinksDetails.originalFolderName]) {
@@ -44677,23 +45418,23 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   if (valueObj.sharedFolderType) {
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails alloc] initWithTargetIndex:targetIndex
-                                                                      originalFolderName:originalFolderName
-                                                                        sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                           originalFolderName:originalFolderName
+                                                                             sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -44718,7 +45459,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfExternalInviteWarnDetailsSerializer serialize:instance];
 }
 
@@ -44778,7 +45519,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfExternalInviteWarnDetails *)deserialize:(NSDictionary *)valueDict {
@@ -44799,18 +45540,19 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
   }
   return self;
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfInviteGroupDetailsSerializer serialize:instance];
 }
 
@@ -44838,7 +45580,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
 
   return prime * result;
 }
@@ -44859,7 +45601,7 @@
   if (self == aSfInviteGroupDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfInviteGroupDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfInviteGroupDetails.targetAssetIndex]) {
     return NO;
   }
   return YES;
@@ -44874,15 +45616,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfInviteGroupDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfInviteGroupDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
 
-  return [[DBTEAMLOGSfInviteGroupDetails alloc] initWithTargetIndex:targetIndex];
+  return [[DBTEAMLOGSfInviteGroupDetails alloc] initWithTargetAssetIndex:targetAssetIndex];
 }
 
 @end
@@ -44897,10 +45639,12 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                     prevParentNsId:(NSString *)prevParentNsId
-                     dNewParentNsId:(NSString *)dNewParentNsId {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                          prevParentNsId:(NSString *)prevParentNsId
+                          dNewParentNsId:(NSString *)dNewParentNsId {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"]](prevParentNsId);
   [DBStoneValidators
@@ -44908,7 +45652,7 @@
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _prevParentNsId = prevParentNsId;
     _dNewParentNsId = dNewParentNsId;
@@ -44916,16 +45660,17 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-                    prevParentNsId:nil
-                    dNewParentNsId:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                         prevParentNsId:nil
+                         dNewParentNsId:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfNestDetailsSerializer serialize:instance];
 }
 
@@ -44953,12 +45698,12 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
-  if (self.prevParentNsId) {
+  if (self.prevParentNsId != nil) {
     result = prime * result + [self.prevParentNsId hash];
   }
-  if (self.dNewParentNsId) {
+  if (self.dNewParentNsId != nil) {
     result = prime * result + [self.dNewParentNsId hash];
   }
 
@@ -44981,7 +45726,7 @@
   if (self == aSfNestDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfNestDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfNestDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfNestDetails.originalFolderName]) {
@@ -45009,7 +45754,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfNestDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   if (valueObj.prevParentNsId) {
     jsonDict[@"prev_parent_ns_id"] = valueObj.prevParentNsId;
@@ -45018,19 +45763,19 @@
     jsonDict[@"new_parent_ns_id"] = valueObj.dNewParentNsId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfNestDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *prevParentNsId = valueDict[@"prev_parent_ns_id"] ?: nil;
   NSString *dNewParentNsId = valueDict[@"new_parent_ns_id"] ?: nil;
 
-  return [[DBTEAMLOGSfNestDetails alloc] initWithTargetIndex:targetIndex
-                                          originalFolderName:originalFolderName
-                                              prevParentNsId:prevParentNsId
-                                              dNewParentNsId:dNewParentNsId];
+  return [[DBTEAMLOGSfNestDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                               originalFolderName:originalFolderName
+                                                   prevParentNsId:prevParentNsId
+                                                   dNewParentNsId:dNewParentNsId];
 }
 
 @end
@@ -45045,11 +45790,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -45057,7 +45805,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamDeclineDetailsSerializer serialize:instance];
 }
 
@@ -45085,7 +45833,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -45107,7 +45855,7 @@
   if (self == aSfTeamDeclineDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamDeclineDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamDeclineDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamDeclineDetails.originalFolderName]) {
@@ -45125,17 +45873,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamDeclineDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamDeclineDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSfTeamDeclineDetails alloc] initWithTargetIndex:targetIndex originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSfTeamDeclineDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                      originalFolderName:originalFolderName];
 }
 
 @end
@@ -45150,11 +45899,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -45162,7 +45914,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamGrantAccessDetailsSerializer serialize:instance];
 }
 
@@ -45190,7 +45942,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -45212,7 +45964,7 @@
   if (self == aSfTeamGrantAccessDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamGrantAccessDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamGrantAccessDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamGrantAccessDetails.originalFolderName]) {
@@ -45230,18 +45982,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamGrantAccessDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamGrantAccessDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return
-      [[DBTEAMLOGSfTeamGrantAccessDetails alloc] initWithTargetIndex:targetIndex originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSfTeamGrantAccessDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                          originalFolderName:originalFolderName];
 }
 
 @end
@@ -45256,14 +46008,16 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-              dNewSharingPermission:(NSString *)dNewSharingPermission
-          previousSharingPermission:(NSString *)previousSharingPermission {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                   dNewSharingPermission:(NSString *)dNewSharingPermission
+               previousSharingPermission:(NSString *)previousSharingPermission {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _dNewSharingPermission = dNewSharingPermission;
     _previousSharingPermission = previousSharingPermission;
@@ -45271,16 +46025,17 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-             dNewSharingPermission:nil
-         previousSharingPermission:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                  dNewSharingPermission:nil
+              previousSharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamInviteChangeRoleDetailsSerializer serialize:instance];
 }
 
@@ -45308,12 +46063,12 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
-  if (self.dNewSharingPermission) {
+  if (self.dNewSharingPermission != nil) {
     result = prime * result + [self.dNewSharingPermission hash];
   }
-  if (self.previousSharingPermission) {
+  if (self.previousSharingPermission != nil) {
     result = prime * result + [self.previousSharingPermission hash];
   }
 
@@ -45337,7 +46092,7 @@
   if (self == aSfTeamInviteChangeRoleDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamInviteChangeRoleDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamInviteChangeRoleDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamInviteChangeRoleDetails.originalFolderName]) {
@@ -45365,7 +46120,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamInviteChangeRoleDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   if (valueObj.dNewSharingPermission) {
     jsonDict[@"new_sharing_permission"] = valueObj.dNewSharingPermission;
@@ -45374,19 +46129,19 @@
     jsonDict[@"previous_sharing_permission"] = valueObj.previousSharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamInviteChangeRoleDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *dNewSharingPermission = valueDict[@"new_sharing_permission"] ?: nil;
   NSString *previousSharingPermission = valueDict[@"previous_sharing_permission"] ?: nil;
 
-  return [[DBTEAMLOGSfTeamInviteChangeRoleDetails alloc] initWithTargetIndex:targetIndex
-                                                          originalFolderName:originalFolderName
-                                                       dNewSharingPermission:dNewSharingPermission
-                                                   previousSharingPermission:previousSharingPermission];
+  return [[DBTEAMLOGSfTeamInviteChangeRoleDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                               originalFolderName:originalFolderName
+                                                            dNewSharingPermission:dNewSharingPermission
+                                                        previousSharingPermission:previousSharingPermission];
 }
 
 @end
@@ -45401,26 +46156,29 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                  sharingPermission:(NSString *)sharingPermission {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                       sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharingPermission = sharingPermission;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
-  return [self initWithTargetIndex:targetIndex originalFolderName:originalFolderName sharingPermission:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:originalFolderName sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamInviteDetailsSerializer serialize:instance];
 }
 
@@ -45448,9 +46206,9 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -45473,7 +46231,7 @@
   if (self == aSfTeamInviteDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamInviteDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamInviteDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamInviteDetails.originalFolderName]) {
@@ -45496,23 +46254,23 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamInviteDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   if (valueObj.sharingPermission) {
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamInviteDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
-  return [[DBTEAMLOGSfTeamInviteDetails alloc] initWithTargetIndex:targetIndex
-                                                originalFolderName:originalFolderName
-                                                 sharingPermission:sharingPermission];
+  return [[DBTEAMLOGSfTeamInviteDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                     originalFolderName:originalFolderName
+                                                      sharingPermission:sharingPermission];
 }
 
 @end
@@ -45527,11 +46285,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -45539,7 +46300,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamJoinDetailsSerializer serialize:instance];
 }
 
@@ -45567,7 +46328,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -45589,7 +46350,7 @@
   if (self == aSfTeamJoinDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamJoinDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamJoinDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamJoinDetails.originalFolderName]) {
@@ -45607,17 +46368,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamJoinDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamJoinDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSfTeamJoinDetails alloc] initWithTargetIndex:targetIndex originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSfTeamJoinDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                   originalFolderName:originalFolderName];
 }
 
 @end
@@ -45632,14 +46394,16 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                           tokenKey:(NSString *)tokenKey
-                  sharingPermission:(NSString *)sharingPermission {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                                tokenKey:(NSString *)tokenKey
+                       sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _tokenKey = tokenKey;
     _sharingPermission = sharingPermission;
@@ -45647,14 +46411,17 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
-  return
-      [self initWithTargetIndex:targetIndex originalFolderName:originalFolderName tokenKey:nil sharingPermission:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                               tokenKey:nil
+                      sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamJoinFromOobLinkDetailsSerializer serialize:instance];
 }
 
@@ -45682,12 +46449,12 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
-  if (self.tokenKey) {
+  if (self.tokenKey != nil) {
     result = prime * result + [self.tokenKey hash];
   }
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -45710,7 +46477,7 @@
   if (self == aSfTeamJoinFromOobLinkDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamJoinFromOobLinkDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamJoinFromOobLinkDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamJoinFromOobLinkDetails.originalFolderName]) {
@@ -45738,7 +46505,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamJoinFromOobLinkDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   if (valueObj.tokenKey) {
     jsonDict[@"token_key"] = valueObj.tokenKey;
@@ -45747,19 +46514,19 @@
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamJoinFromOobLinkDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *tokenKey = valueDict[@"token_key"] ?: nil;
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
-  return [[DBTEAMLOGSfTeamJoinFromOobLinkDetails alloc] initWithTargetIndex:targetIndex
-                                                         originalFolderName:originalFolderName
-                                                                   tokenKey:tokenKey
-                                                          sharingPermission:sharingPermission];
+  return [[DBTEAMLOGSfTeamJoinFromOobLinkDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                              originalFolderName:originalFolderName
+                                                                        tokenKey:tokenKey
+                                                               sharingPermission:sharingPermission];
 }
 
 @end
@@ -45774,11 +46541,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -45786,7 +46556,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSfTeamUninviteDetailsSerializer serialize:instance];
 }
 
@@ -45814,7 +46584,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -45836,7 +46606,7 @@
   if (self == aSfTeamUninviteDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSfTeamUninviteDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSfTeamUninviteDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSfTeamUninviteDetails.originalFolderName]) {
@@ -45854,17 +46624,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSfTeamUninviteDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSfTeamUninviteDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSfTeamUninviteDetails alloc] initWithTargetIndex:targetIndex originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSfTeamUninviteDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                       originalFolderName:originalFolderName];
 }
 
 @end
@@ -45879,26 +46650,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                  sharingPermission:(NSString *)sharingPermission {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                       sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharingPermission = sharingPermission;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharingPermission:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentAddInviteesDetailsSerializer serialize:instance];
 }
 
@@ -45926,11 +46698,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -45954,7 +46726,7 @@
   if (self == aSharedContentAddInviteesDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentAddInviteesDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentAddInviteesDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -45979,7 +46751,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentAddInviteesDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -45987,17 +46759,17 @@
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentAddInviteesDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentAddInviteesDetails alloc] initWithTargetIndex:targetIndex
-                                                            originalFolderName:originalFolderName
-                                                             sharingPermission:sharingPermission];
+  return [[DBTEAMLOGSharedContentAddInviteesDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                 originalFolderName:originalFolderName
+                                                                  sharingPermission:sharingPermission];
 }
 
 @end
@@ -46012,15 +46784,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                expirationStartDate:(NSString *)expirationStartDate
-                     expirationDays:(NSNumber *)expirationDays
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                     expirationStartDate:(NSString *)expirationStartDate
+                          expirationDays:(NSNumber *)expirationDays
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](expirationStartDate);
+  [DBStoneValidators nonnullValidator:nil](expirationDays);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _expirationStartDate = expirationStartDate;
@@ -46029,19 +46804,19 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                expirationStartDate:(NSString *)expirationStartDate
-                     expirationDays:(NSNumber *)expirationDays {
-  return [self initWithTargetIndex:targetIndex
-               expirationStartDate:expirationStartDate
-                    expirationDays:expirationDays
-                originalFolderName:nil
-                  sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                     expirationStartDate:(NSString *)expirationStartDate
+                          expirationDays:(NSNumber *)expirationDays {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                    expirationStartDate:expirationStartDate
+                         expirationDays:expirationDays
+                     originalFolderName:nil
+                       sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentAddLinkExpiryDetailsSerializer serialize:instance];
 }
 
@@ -46069,13 +46844,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.expirationStartDate hash];
   result = prime * result + [self.expirationDays hash];
-  if (self.originalFolderName) {
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -46099,7 +46874,7 @@
   if (self == aSharedContentAddLinkExpiryDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentAddLinkExpiryDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentAddLinkExpiryDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.expirationStartDate isEqual:aSharedContentAddLinkExpiryDetails.expirationStartDate]) {
@@ -46130,7 +46905,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentAddLinkExpiryDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"expiration_start_date"] = valueObj.expirationStartDate;
   jsonDict[@"expiration_days"] = valueObj.expirationDays;
   if (valueObj.originalFolderName) {
@@ -46140,21 +46915,21 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentAddLinkExpiryDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *expirationStartDate = valueDict[@"expiration_start_date"];
   NSNumber *expirationDays = valueDict[@"expiration_days"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentAddLinkExpiryDetails alloc] initWithTargetIndex:targetIndex
-                                                             expirationStartDate:expirationStartDate
-                                                                  expirationDays:expirationDays
-                                                              originalFolderName:originalFolderName
-                                                                sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentAddLinkExpiryDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                  expirationStartDate:expirationStartDate
+                                                                       expirationDays:expirationDays
+                                                                   originalFolderName:originalFolderName
+                                                                     sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -46169,26 +46944,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentAddLinkPasswordDetailsSerializer serialize:instance];
 }
 
@@ -46216,11 +46992,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -46244,7 +47020,7 @@
   if (self == aSharedContentAddLinkPasswordDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentAddLinkPasswordDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentAddLinkPasswordDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -46269,7 +47045,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentAddLinkPasswordDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -46277,17 +47053,17 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentAddLinkPasswordDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentAddLinkPasswordDetails alloc] initWithTargetIndex:targetIndex
-                                                                originalFolderName:originalFolderName
-                                                                  sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentAddLinkPasswordDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                     originalFolderName:originalFolderName
+                                                                       sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -46302,14 +47078,15 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                  sharingPermission:(NSString *)sharingPermission
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                       sharingPermission:(NSString *)sharingPermission
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharingPermission = sharingPermission;
     _sharedFolderType = sharedFolderType;
@@ -46317,13 +47094,16 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharingPermission:nil sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:nil
+                      sharingPermission:nil
+                       sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentAddMemberDetailsSerializer serialize:instance];
 }
 
@@ -46351,14 +47131,14 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -46382,7 +47162,7 @@
   if (self == aSharedContentAddMemberDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentAddMemberDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentAddMemberDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -46412,7 +47192,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentAddMemberDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -46423,19 +47203,19 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentAddMemberDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentAddMemberDetails alloc] initWithTargetIndex:targetIndex
-                                                          originalFolderName:originalFolderName
-                                                           sharingPermission:sharingPermission
-                                                            sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentAddMemberDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                               originalFolderName:originalFolderName
+                                                                sharingPermission:sharingPermission
+                                                                 sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -46451,15 +47231,17 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGSharedContentDownloadsPolicy *)dNewValue
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType
-                      previousValue:(DBTEAMLOGSharedContentDownloadsPolicy *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGSharedContentDownloadsPolicy *)dNewValue
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType
+                           previousValue:(DBTEAMLOGSharedContentDownloadsPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _dNewValue = dNewValue;
@@ -46468,18 +47250,18 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGSharedContentDownloadsPolicy *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                         dNewValue:dNewValue
-                originalFolderName:nil
-                  sharedFolderType:nil
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGSharedContentDownloadsPolicy *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                              dNewValue:dNewValue
+                     originalFolderName:nil
+                       sharedFolderType:nil
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeDownloadsPolicyDetailsSerializer serialize:instance];
 }
 
@@ -46507,15 +47289,15 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.originalFolderName) {
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -46539,7 +47321,7 @@
   if (self == aSharedContentChangeDownloadsPolicyDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeDownloadsPolicyDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeDownloadsPolicyDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.dNewValue isEqual:aSharedContentChangeDownloadsPolicyDetails.dNewValue]) {
@@ -46572,7 +47354,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeDownloadsPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"new_value"] = [DBTEAMLOGSharedContentDownloadsPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
@@ -46584,11 +47366,11 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharedContentDownloadsPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeDownloadsPolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   DBTEAMLOGSharedContentDownloadsPolicy *dNewValue =
       [DBTEAMLOGSharedContentDownloadsPolicySerializer deserialize:valueDict[@"new_value"]];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
@@ -46598,11 +47380,11 @@
           ? [DBTEAMLOGSharedContentDownloadsPolicySerializer deserialize:valueDict[@"previous_value"]]
           : nil;
 
-  return [[DBTEAMLOGSharedContentChangeDownloadsPolicyDetails alloc] initWithTargetIndex:targetIndex
-                                                                               dNewValue:dNewValue
-                                                                      originalFolderName:originalFolderName
-                                                                        sharedFolderType:sharedFolderType
-                                                                           previousValue:previousValue];
+  return [[DBTEAMLOGSharedContentChangeDownloadsPolicyDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                                    dNewValue:dNewValue
+                                                                           originalFolderName:originalFolderName
+                                                                             sharedFolderType:sharedFolderType
+                                                                                previousValue:previousValue];
 }
 
 @end
@@ -46617,14 +47399,16 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-              dNewSharingPermission:(NSString *)dNewSharingPermission
-          previousSharingPermission:(NSString *)previousSharingPermission {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                   dNewSharingPermission:(NSString *)dNewSharingPermission
+               previousSharingPermission:(NSString *)previousSharingPermission {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _dNewSharingPermission = dNewSharingPermission;
     _previousSharingPermission = previousSharingPermission;
@@ -46632,16 +47416,17 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-             dNewSharingPermission:nil
-         previousSharingPermission:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                  dNewSharingPermission:nil
+              previousSharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeInviteeRoleDetailsSerializer serialize:instance];
 }
 
@@ -46669,12 +47454,12 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
-  if (self.dNewSharingPermission) {
+  if (self.dNewSharingPermission != nil) {
     result = prime * result + [self.dNewSharingPermission hash];
   }
-  if (self.previousSharingPermission) {
+  if (self.previousSharingPermission != nil) {
     result = prime * result + [self.previousSharingPermission hash];
   }
 
@@ -46698,7 +47483,7 @@
   if (self == aSharedContentChangeInviteeRoleDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeInviteeRoleDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeInviteeRoleDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedContentChangeInviteeRoleDetails.originalFolderName]) {
@@ -46726,7 +47511,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeInviteeRoleDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   if (valueObj.dNewSharingPermission) {
     jsonDict[@"new_sharing_permission"] = valueObj.dNewSharingPermission;
@@ -46735,19 +47520,19 @@
     jsonDict[@"previous_sharing_permission"] = valueObj.previousSharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeInviteeRoleDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   NSString *dNewSharingPermission = valueDict[@"new_sharing_permission"] ?: nil;
   NSString *previousSharingPermission = valueDict[@"previous_sharing_permission"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentChangeInviteeRoleDetails alloc] initWithTargetIndex:targetIndex
-                                                                  originalFolderName:originalFolderName
-                                                               dNewSharingPermission:dNewSharingPermission
-                                                           previousSharingPermission:previousSharingPermission];
+  return [[DBTEAMLOGSharedContentChangeInviteeRoleDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                       originalFolderName:originalFolderName
+                                                                    dNewSharingPermission:dNewSharingPermission
+                                                                previousSharingPermission:previousSharingPermission];
 }
 
 @end
@@ -46763,15 +47548,17 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGLinkAudience *)dNewValue
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType
-                      previousValue:(DBTEAMLOGLinkAudience *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGLinkAudience *)dNewValue
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType
+                           previousValue:(DBTEAMLOGLinkAudience *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _dNewValue = dNewValue;
@@ -46780,17 +47567,17 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex dNewValue:(DBTEAMLOGLinkAudience *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                         dNewValue:dNewValue
-                originalFolderName:nil
-                  sharedFolderType:nil
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex dNewValue:(DBTEAMLOGLinkAudience *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                              dNewValue:dNewValue
+                     originalFolderName:nil
+                       sharedFolderType:nil
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeLinkAudienceDetailsSerializer serialize:instance];
 }
 
@@ -46818,15 +47605,15 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.originalFolderName) {
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -46850,7 +47637,7 @@
   if (self == aSharedContentChangeLinkAudienceDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeLinkAudienceDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeLinkAudienceDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.dNewValue isEqual:aSharedContentChangeLinkAudienceDetails.dNewValue]) {
@@ -46883,7 +47670,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeLinkAudienceDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"new_value"] = [DBTEAMLOGLinkAudienceSerializer serialize:valueObj.dNewValue];
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
@@ -46895,22 +47682,22 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGLinkAudienceSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkAudienceDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   DBTEAMLOGLinkAudience *dNewValue = [DBTEAMLOGLinkAudienceSerializer deserialize:valueDict[@"new_value"]];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
   DBTEAMLOGLinkAudience *previousValue =
       valueDict[@"previous_value"] ? [DBTEAMLOGLinkAudienceSerializer deserialize:valueDict[@"previous_value"]] : nil;
 
-  return [[DBTEAMLOGSharedContentChangeLinkAudienceDetails alloc] initWithTargetIndex:targetIndex
-                                                                            dNewValue:dNewValue
-                                                                   originalFolderName:originalFolderName
-                                                                     sharedFolderType:sharedFolderType
-                                                                        previousValue:previousValue];
+  return [[DBTEAMLOGSharedContentChangeLinkAudienceDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                                 dNewValue:dNewValue
+                                                                        originalFolderName:originalFolderName
+                                                                          sharedFolderType:sharedFolderType
+                                                                             previousValue:previousValue];
 }
 
 @end
@@ -46925,15 +47712,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                expirationStartDate:(NSString *)expirationStartDate
-                     expirationDays:(NSNumber *)expirationDays
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                     expirationStartDate:(NSString *)expirationStartDate
+                          expirationDays:(NSNumber *)expirationDays
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](expirationStartDate);
+  [DBStoneValidators nonnullValidator:nil](expirationDays);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _expirationStartDate = expirationStartDate;
@@ -46942,19 +47732,19 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                expirationStartDate:(NSString *)expirationStartDate
-                     expirationDays:(NSNumber *)expirationDays {
-  return [self initWithTargetIndex:targetIndex
-               expirationStartDate:expirationStartDate
-                    expirationDays:expirationDays
-                originalFolderName:nil
-                  sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                     expirationStartDate:(NSString *)expirationStartDate
+                          expirationDays:(NSNumber *)expirationDays {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                    expirationStartDate:expirationStartDate
+                         expirationDays:expirationDays
+                     originalFolderName:nil
+                       sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeLinkExpiryDetailsSerializer serialize:instance];
 }
 
@@ -46982,13 +47772,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.expirationStartDate hash];
   result = prime * result + [self.expirationDays hash];
-  if (self.originalFolderName) {
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -47012,7 +47802,7 @@
   if (self == aSharedContentChangeLinkExpiryDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeLinkExpiryDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeLinkExpiryDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.expirationStartDate isEqual:aSharedContentChangeLinkExpiryDetails.expirationStartDate]) {
@@ -47043,7 +47833,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeLinkExpiryDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"expiration_start_date"] = valueObj.expirationStartDate;
   jsonDict[@"expiration_days"] = valueObj.expirationDays;
   if (valueObj.originalFolderName) {
@@ -47053,21 +47843,21 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkExpiryDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *expirationStartDate = valueDict[@"expiration_start_date"];
   NSNumber *expirationDays = valueDict[@"expiration_days"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentChangeLinkExpiryDetails alloc] initWithTargetIndex:targetIndex
-                                                                expirationStartDate:expirationStartDate
-                                                                     expirationDays:expirationDays
-                                                                 originalFolderName:originalFolderName
-                                                                   sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentChangeLinkExpiryDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                     expirationStartDate:expirationStartDate
+                                                                          expirationDays:expirationDays
+                                                                      originalFolderName:originalFolderName
+                                                                        sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -47082,26 +47872,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeLinkPasswordDetailsSerializer serialize:instance];
 }
 
@@ -47129,11 +47920,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -47157,7 +47948,7 @@
   if (self == aSharedContentChangeLinkPasswordDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeLinkPasswordDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeLinkPasswordDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -47182,7 +47973,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeLinkPasswordDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -47190,17 +47981,17 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeLinkPasswordDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentChangeLinkPasswordDetails alloc] initWithTargetIndex:targetIndex
-                                                                   originalFolderName:originalFolderName
-                                                                     sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentChangeLinkPasswordDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                        originalFolderName:originalFolderName
+                                                                          sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -47215,15 +48006,16 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-              dNewSharingPermission:(NSString *)dNewSharingPermission
-          previousSharingPermission:(NSString *)previousSharingPermission
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                   dNewSharingPermission:(NSString *)dNewSharingPermission
+               previousSharingPermission:(NSString *)previousSharingPermission
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _dNewSharingPermission = dNewSharingPermission;
     _previousSharingPermission = previousSharingPermission;
@@ -47232,17 +48024,17 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:nil
-             dNewSharingPermission:nil
-         previousSharingPermission:nil
-                  sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:nil
+                  dNewSharingPermission:nil
+              previousSharingPermission:nil
+                       sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeMemberRoleDetailsSerializer serialize:instance];
 }
 
@@ -47270,17 +48062,17 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.dNewSharingPermission) {
+  if (self.dNewSharingPermission != nil) {
     result = prime * result + [self.dNewSharingPermission hash];
   }
-  if (self.previousSharingPermission) {
+  if (self.previousSharingPermission != nil) {
     result = prime * result + [self.previousSharingPermission hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -47304,7 +48096,7 @@
   if (self == aSharedContentChangeMemberRoleDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeMemberRoleDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeMemberRoleDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -47339,7 +48131,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeMemberRoleDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -47353,21 +48145,21 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeMemberRoleDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *dNewSharingPermission = valueDict[@"new_sharing_permission"] ?: nil;
   NSString *previousSharingPermission = valueDict[@"previous_sharing_permission"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentChangeMemberRoleDetails alloc] initWithTargetIndex:targetIndex
-                                                                 originalFolderName:originalFolderName
-                                                              dNewSharingPermission:dNewSharingPermission
-                                                          previousSharingPermission:previousSharingPermission
-                                                                   sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentChangeMemberRoleDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                      originalFolderName:originalFolderName
+                                                                   dNewSharingPermission:dNewSharingPermission
+                                                               previousSharingPermission:previousSharingPermission
+                                                                        sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -47383,15 +48175,17 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)dNewValue
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType
-                      previousValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)dNewValue
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType
+                           previousValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _dNewValue = dNewValue;
@@ -47400,18 +48194,18 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                         dNewValue:dNewValue
-                originalFolderName:nil
-                  sharedFolderType:nil
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGSharedContentViewerInfoPolicy *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                              dNewValue:dNewValue
+                     originalFolderName:nil
+                       sharedFolderType:nil
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentChangeViewerInfoPolicyDetailsSerializer serialize:instance];
 }
 
@@ -47439,15 +48233,15 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.originalFolderName) {
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -47471,7 +48265,7 @@
   if (self == aSharedContentChangeViewerInfoPolicyDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentChangeViewerInfoPolicyDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentChangeViewerInfoPolicyDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.dNewValue isEqual:aSharedContentChangeViewerInfoPolicyDetails.dNewValue]) {
@@ -47504,7 +48298,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeViewerInfoPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"new_value"] = [DBTEAMLOGSharedContentViewerInfoPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
@@ -47516,11 +48310,11 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharedContentViewerInfoPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentChangeViewerInfoPolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   DBTEAMLOGSharedContentViewerInfoPolicy *dNewValue =
       [DBTEAMLOGSharedContentViewerInfoPolicySerializer deserialize:valueDict[@"new_value"]];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
@@ -47530,11 +48324,11 @@
           ? [DBTEAMLOGSharedContentViewerInfoPolicySerializer deserialize:valueDict[@"previous_value"]]
           : nil;
 
-  return [[DBTEAMLOGSharedContentChangeViewerInfoPolicyDetails alloc] initWithTargetIndex:targetIndex
-                                                                                dNewValue:dNewValue
-                                                                       originalFolderName:originalFolderName
-                                                                         sharedFolderType:sharedFolderType
-                                                                            previousValue:previousValue];
+  return [[DBTEAMLOGSharedContentChangeViewerInfoPolicyDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                                     dNewValue:dNewValue
+                                                                            originalFolderName:originalFolderName
+                                                                              sharedFolderType:sharedFolderType
+                                                                                 previousValue:previousValue];
 }
 
 @end
@@ -47549,26 +48343,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                  sharedContentLink:(NSString *)sharedContentLink {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                       sharedContentLink:(NSString *)sharedContentLink {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedContentLink = sharedContentLink;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharedContentLink:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharedContentLink:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentClaimInvitationDetailsSerializer serialize:instance];
 }
 
@@ -47596,11 +48391,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedContentLink) {
+  if (self.sharedContentLink != nil) {
     result = prime * result + [self.sharedContentLink hash];
   }
 
@@ -47624,7 +48419,7 @@
   if (self == aSharedContentClaimInvitationDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentClaimInvitationDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentClaimInvitationDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -47649,7 +48444,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentClaimInvitationDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -47657,17 +48452,17 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentClaimInvitationDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedContentLink = valueDict[@"shared_content_link"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentClaimInvitationDetails alloc] initWithTargetIndex:targetIndex
-                                                                originalFolderName:originalFolderName
-                                                                 sharedContentLink:sharedContentLink];
+  return [[DBTEAMLOGSharedContentClaimInvitationDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                     originalFolderName:originalFolderName
+                                                                      sharedContentLink:sharedContentLink];
 }
 
 @end
@@ -47684,32 +48479,35 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                     relocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails
                         sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](sharedContentLink);
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](relocateActionDetails);
 
   self = [super init];
   if (self) {
     _sharedContentLink = sharedContentLink;
     _sharingPermission = sharingPermission;
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _relocateActionDetails = relocateActionDetails;
   }
   return self;
 }
 
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                     relocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails {
   return [self initWithSharedContentLink:sharedContentLink
-                             targetIndex:targetIndex
+                        targetAssetIndex:targetAssetIndex
                    relocateActionDetails:relocateActionDetails
                        sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentCopyDetailsSerializer serialize:instance];
 }
 
@@ -47738,9 +48536,9 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.sharedContentLink hash];
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.relocateActionDetails hash];
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -47766,7 +48564,7 @@
   if (![self.sharedContentLink isEqual:aSharedContentCopyDetails.sharedContentLink]) {
     return NO;
   }
-  if (![self.targetIndex isEqual:aSharedContentCopyDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentCopyDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.relocateActionDetails isEqual:aSharedContentCopyDetails.relocateActionDetails]) {
@@ -47790,25 +48588,25 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"relocate_action_details"] =
       [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:valueObj.relocateActionDetails];
   if (valueObj.sharingPermission) {
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentCopyDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *sharedContentLink = valueDict[@"shared_content_link"];
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   DBTEAMLOGRelocateAssetReferencesLogInfo *relocateActionDetails =
       [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer deserialize:valueDict[@"relocate_action_details"]];
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
   return [[DBTEAMLOGSharedContentCopyDetails alloc] initWithSharedContentLink:sharedContentLink
-                                                                  targetIndex:targetIndex
+                                                             targetAssetIndex:targetAssetIndex
                                                         relocateActionDetails:relocateActionDetails
                                                             sharingPermission:sharingPermission];
 }
@@ -47826,25 +48624,27 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                         sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](sharedContentLink);
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
     _sharedContentLink = sharedContentLink;
     _sharingPermission = sharingPermission;
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
   }
   return self;
 }
 
-- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetIndex:(NSNumber *)targetIndex {
-  return [self initWithSharedContentLink:sharedContentLink targetIndex:targetIndex sharingPermission:nil];
+- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithSharedContentLink:sharedContentLink targetAssetIndex:targetAssetIndex sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentDownloadDetailsSerializer serialize:instance];
 }
 
@@ -47873,8 +48673,8 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.sharedContentLink hash];
-  result = prime * result + [self.targetIndex hash];
-  if (self.sharingPermission) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -47900,7 +48700,7 @@
   if (![self.sharedContentLink isEqual:aSharedContentDownloadDetails.sharedContentLink]) {
     return NO;
   }
-  if (![self.targetIndex isEqual:aSharedContentDownloadDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentDownloadDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.sharingPermission) {
@@ -47921,21 +48721,21 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.sharingPermission) {
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentDownloadDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *sharedContentLink = valueDict[@"shared_content_link"];
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
   return [[DBTEAMLOGSharedContentDownloadDetails alloc] initWithSharedContentLink:sharedContentLink
-                                                                      targetIndex:targetIndex
+                                                                 targetAssetIndex:targetAssetIndex
                                                                 sharingPermission:sharingPermission];
 }
 
@@ -48006,7 +48806,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentDownloadsPolicySerializer serialize:instance];
 }
 
@@ -48095,7 +48895,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentDownloadsPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -48124,11 +48924,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -48136,7 +48939,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentRelinquishMembershipDetailsSerializer serialize:instance];
 }
 
@@ -48164,7 +48967,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -48187,7 +48990,7 @@
   if (self == aSharedContentRelinquishMembershipDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentRelinquishMembershipDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentRelinquishMembershipDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedContentRelinquishMembershipDetails.originalFolderName]) {
@@ -48205,18 +49008,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentRelinquishMembershipDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentRelinquishMembershipDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSharedContentRelinquishMembershipDetails alloc] initWithTargetIndex:targetIndex
-                                                                     originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSharedContentRelinquishMembershipDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                          originalFolderName:originalFolderName];
 }
 
 @end
@@ -48231,11 +49034,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -48243,7 +49049,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentRemoveInviteeDetailsSerializer serialize:instance];
 }
 
@@ -48271,7 +49077,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -48294,7 +49100,7 @@
   if (self == aSharedContentRemoveInviteeDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentRemoveInviteeDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentRemoveInviteeDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedContentRemoveInviteeDetails.originalFolderName]) {
@@ -48312,18 +49118,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentRemoveInviteeDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentRemoveInviteeDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSharedContentRemoveInviteeDetails alloc] initWithTargetIndex:targetIndex
-                                                              originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSharedContentRemoveInviteeDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                   originalFolderName:originalFolderName];
 }
 
 @end
@@ -48338,26 +49144,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentRemoveLinkExpiryDetailsSerializer serialize:instance];
 }
 
@@ -48385,11 +49192,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -48413,7 +49220,7 @@
   if (self == aSharedContentRemoveLinkExpiryDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentRemoveLinkExpiryDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentRemoveLinkExpiryDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -48438,7 +49245,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentRemoveLinkExpiryDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -48446,17 +49253,17 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentRemoveLinkExpiryDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentRemoveLinkExpiryDetails alloc] initWithTargetIndex:targetIndex
-                                                                 originalFolderName:originalFolderName
-                                                                   sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentRemoveLinkExpiryDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                      originalFolderName:originalFolderName
+                                                                        sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -48471,26 +49278,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentRemoveLinkPasswordDetailsSerializer serialize:instance];
 }
 
@@ -48518,11 +49326,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -48546,7 +49354,7 @@
   if (self == aSharedContentRemoveLinkPasswordDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentRemoveLinkPasswordDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentRemoveLinkPasswordDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -48571,7 +49379,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentRemoveLinkPasswordDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -48579,17 +49387,17 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentRemoveLinkPasswordDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentRemoveLinkPasswordDetails alloc] initWithTargetIndex:targetIndex
-                                                                   originalFolderName:originalFolderName
-                                                                     sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentRemoveLinkPasswordDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                        originalFolderName:originalFolderName
+                                                                          sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -48604,14 +49412,15 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                  sharingPermission:(NSString *)sharingPermission
-                   sharedFolderType:(NSString *)sharedFolderType {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                       sharingPermission:(NSString *)sharingPermission
+                        sharedFolderType:(NSString *)sharedFolderType {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharingPermission = sharingPermission;
     _sharedFolderType = sharedFolderType;
@@ -48619,13 +49428,16 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharingPermission:nil sharedFolderType:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:nil
+                      sharingPermission:nil
+                       sharedFolderType:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentRemoveMemberDetailsSerializer serialize:instance];
 }
 
@@ -48653,14 +49465,14 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
 
@@ -48684,7 +49496,7 @@
   if (self == aSharedContentRemoveMemberDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentRemoveMemberDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentRemoveMemberDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -48714,7 +49526,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentRemoveMemberDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -48725,19 +49537,19 @@
     jsonDict[@"shared_folder_type"] = valueObj.sharedFolderType;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentRemoveMemberDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
   NSString *sharedFolderType = valueDict[@"shared_folder_type"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentRemoveMemberDetails alloc] initWithTargetIndex:targetIndex
-                                                             originalFolderName:originalFolderName
-                                                              sharingPermission:sharingPermission
-                                                               sharedFolderType:sharedFolderType];
+  return [[DBTEAMLOGSharedContentRemoveMemberDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                  originalFolderName:originalFolderName
+                                                                   sharingPermission:sharingPermission
+                                                                    sharedFolderType:sharedFolderType];
 }
 
 @end
@@ -48752,26 +49564,27 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                  sharedContentLink:(NSString *)sharedContentLink {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                       sharedContentLink:(NSString *)sharedContentLink {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedContentLink = sharedContentLink;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil sharedContentLink:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil sharedContentLink:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentRequestAccessDetailsSerializer serialize:instance];
 }
 
@@ -48799,11 +49612,11 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
-  if (self.sharedContentLink) {
+  if (self.sharedContentLink != nil) {
     result = prime * result + [self.sharedContentLink hash];
   }
 
@@ -48827,7 +49640,7 @@
   if (self == aSharedContentRequestAccessDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentRequestAccessDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentRequestAccessDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -48852,7 +49665,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentRequestAccessDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
@@ -48860,17 +49673,17 @@
     jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentRequestAccessDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
   NSString *sharedContentLink = valueDict[@"shared_content_link"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentRequestAccessDetails alloc] initWithTargetIndex:targetIndex
-                                                              originalFolderName:originalFolderName
-                                                               sharedContentLink:sharedContentLink];
+  return [[DBTEAMLOGSharedContentRequestAccessDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                   originalFolderName:originalFolderName
+                                                                    sharedContentLink:sharedContentLink];
 }
 
 @end
@@ -48885,23 +49698,25 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex originalFolderName:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex originalFolderName:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentUnshareDetailsSerializer serialize:instance];
 }
 
@@ -48929,8 +49744,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.originalFolderName) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.originalFolderName != nil) {
     result = prime * result + [self.originalFolderName hash];
   }
 
@@ -48953,7 +49768,7 @@
   if (self == aSharedContentUnshareDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedContentUnshareDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentUnshareDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.originalFolderName) {
@@ -48973,20 +49788,20 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedContentUnshareDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.originalFolderName) {
     jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentUnshareDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"] ?: nil;
 
-  return [[DBTEAMLOGSharedContentUnshareDetails alloc] initWithTargetIndex:targetIndex
-                                                        originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSharedContentUnshareDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                             originalFolderName:originalFolderName];
 }
 
 @end
@@ -49002,25 +49817,27 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                              targetIndex:(NSNumber *)targetIndex
+                         targetAssetIndex:(NSNumber *)targetAssetIndex
                         sharingPermission:(NSString *)sharingPermission {
+  [DBStoneValidators nonnullValidator:nil](sharedContentLink);
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
     _sharedContentLink = sharedContentLink;
     _sharingPermission = sharingPermission;
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
   }
   return self;
 }
 
-- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetIndex:(NSNumber *)targetIndex {
-  return [self initWithSharedContentLink:sharedContentLink targetIndex:targetIndex sharingPermission:nil];
+- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithSharedContentLink:sharedContentLink targetAssetIndex:targetAssetIndex sharingPermission:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentViewDetailsSerializer serialize:instance];
 }
 
@@ -49049,8 +49866,8 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.sharedContentLink hash];
-  result = prime * result + [self.targetIndex hash];
-  if (self.sharingPermission) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
 
@@ -49076,7 +49893,7 @@
   if (![self.sharedContentLink isEqual:aSharedContentViewDetails.sharedContentLink]) {
     return NO;
   }
-  if (![self.targetIndex isEqual:aSharedContentViewDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedContentViewDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.sharingPermission) {
@@ -49097,21 +49914,21 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"shared_content_link"] = valueObj.sharedContentLink;
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.sharingPermission) {
     jsonDict[@"sharing_permission"] = valueObj.sharingPermission;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentViewDetails *)deserialize:(NSDictionary *)valueDict {
   NSString *sharedContentLink = valueDict[@"shared_content_link"];
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *sharingPermission = valueDict[@"sharing_permission"] ?: nil;
 
   return [[DBTEAMLOGSharedContentViewDetails alloc] initWithSharedContentLink:sharedContentLink
-                                                                  targetIndex:targetIndex
+                                                             targetAssetIndex:targetAssetIndex
                                                             sharingPermission:sharingPermission];
 }
 
@@ -49182,7 +49999,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedContentViewerInfoPolicySerializer serialize:instance];
 }
 
@@ -49272,7 +50089,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedContentViewerInfoPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -49302,14 +50119,17 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGConfidentiality *)dNewValue
-                      previousValue:(DBTEAMLOGConfidentiality *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGConfidentiality *)dNewValue
+                           previousValue:(DBTEAMLOGConfidentiality *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _dNewValue = dNewValue;
     _previousValue = previousValue;
@@ -49317,18 +50137,18 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGConfidentiality *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-                         dNewValue:dNewValue
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGConfidentiality *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                              dNewValue:dNewValue
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderChangeConfidentialityDetailsSerializer serialize:instance];
 }
 
@@ -49356,10 +50176,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -49383,7 +50203,7 @@
   if (self == aSharedFolderChangeConfidentialityDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderChangeConfidentialityDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderChangeConfidentialityDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderChangeConfidentialityDetails.originalFolderName]) {
@@ -49409,28 +50229,28 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeConfidentialityDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   jsonDict[@"new_value"] = [DBTEAMLOGConfidentialitySerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
     jsonDict[@"previous_value"] = [DBTEAMLOGConfidentialitySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderChangeConfidentialityDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   DBTEAMLOGConfidentiality *dNewValue = [DBTEAMLOGConfidentialitySerializer deserialize:valueDict[@"new_value"]];
   DBTEAMLOGConfidentiality *previousValue =
       valueDict[@"previous_value"] ? [DBTEAMLOGConfidentialitySerializer deserialize:valueDict[@"previous_value"]]
                                    : nil;
 
-  return [[DBTEAMLOGSharedFolderChangeConfidentialityDetails alloc] initWithTargetIndex:targetIndex
-                                                                     originalFolderName:originalFolderName
-                                                                              dNewValue:dNewValue
-                                                                          previousValue:previousValue];
+  return [[DBTEAMLOGSharedFolderChangeConfidentialityDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                          originalFolderName:originalFolderName
+                                                                                   dNewValue:dNewValue
+                                                                               previousValue:previousValue];
 }
 
 @end
@@ -49446,15 +50266,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue
-                   sharedFolderType:(NSString *)sharedFolderType
-                      previousValue:(DBTEAMLOGSharedFolderLinkPolicy *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue
+                        sharedFolderType:(NSString *)sharedFolderType
+                           previousValue:(DBTEAMLOGSharedFolderLinkPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _dNewValue = dNewValue;
@@ -49463,19 +50286,19 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-                         dNewValue:dNewValue
-                  sharedFolderType:nil
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderLinkPolicy *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                              dNewValue:dNewValue
+                       sharedFolderType:nil
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderChangeLinkPolicyDetailsSerializer serialize:instance];
 }
 
@@ -49503,13 +50326,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -49533,7 +50356,7 @@
   if (self == aSharedFolderChangeLinkPolicyDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderChangeLinkPolicyDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderChangeLinkPolicyDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderChangeLinkPolicyDetails.originalFolderName]) {
@@ -49564,7 +50387,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeLinkPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   jsonDict[@"new_value"] = [DBTEAMLOGSharedFolderLinkPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.sharedFolderType) {
@@ -49574,11 +50397,11 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharedFolderLinkPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderChangeLinkPolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   DBTEAMLOGSharedFolderLinkPolicy *dNewValue =
       [DBTEAMLOGSharedFolderLinkPolicySerializer deserialize:valueDict[@"new_value"]];
@@ -49588,11 +50411,11 @@
           ? [DBTEAMLOGSharedFolderLinkPolicySerializer deserialize:valueDict[@"previous_value"]]
           : nil;
 
-  return [[DBTEAMLOGSharedFolderChangeLinkPolicyDetails alloc] initWithTargetIndex:targetIndex
-                                                                originalFolderName:originalFolderName
-                                                                         dNewValue:dNewValue
-                                                                  sharedFolderType:sharedFolderType
-                                                                     previousValue:previousValue];
+  return [[DBTEAMLOGSharedFolderChangeLinkPolicyDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                     originalFolderName:originalFolderName
+                                                                              dNewValue:dNewValue
+                                                                       sharedFolderType:sharedFolderType
+                                                                          previousValue:previousValue];
 }
 
 @end
@@ -49608,15 +50431,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)dNewValue
-                   sharedFolderType:(NSString *)sharedFolderType
-                      previousValue:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)dNewValue
+                        sharedFolderType:(NSString *)sharedFolderType
+                           previousValue:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _dNewValue = dNewValue;
@@ -49625,19 +50451,19 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-                         dNewValue:dNewValue
-                  sharedFolderType:nil
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderMembershipManagementPolicy *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                              dNewValue:dNewValue
+                       sharedFolderType:nil
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderChangeMemberManagementPolicyDetailsSerializer serialize:instance];
 }
 
@@ -49665,13 +50491,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -49695,7 +50521,7 @@
   if (self == aSharedFolderChangeMemberManagementPolicyDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderChangeMemberManagementPolicyDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderChangeMemberManagementPolicyDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderChangeMemberManagementPolicyDetails.originalFolderName]) {
@@ -49726,7 +50552,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeMemberManagementPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   jsonDict[@"new_value"] = [DBTEAMLOGSharedFolderMembershipManagementPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.sharedFolderType) {
@@ -49737,11 +50563,11 @@
         [DBTEAMLOGSharedFolderMembershipManagementPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderChangeMemberManagementPolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   DBTEAMLOGSharedFolderMembershipManagementPolicy *dNewValue =
       [DBTEAMLOGSharedFolderMembershipManagementPolicySerializer deserialize:valueDict[@"new_value"]];
@@ -49751,11 +50577,11 @@
           ? [DBTEAMLOGSharedFolderMembershipManagementPolicySerializer deserialize:valueDict[@"previous_value"]]
           : nil;
 
-  return [[DBTEAMLOGSharedFolderChangeMemberManagementPolicyDetails alloc] initWithTargetIndex:targetIndex
-                                                                            originalFolderName:originalFolderName
-                                                                                     dNewValue:dNewValue
-                                                                              sharedFolderType:sharedFolderType
-                                                                                 previousValue:previousValue];
+  return [[DBTEAMLOGSharedFolderChangeMemberManagementPolicyDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                                 originalFolderName:originalFolderName
+                                                                                          dNewValue:dNewValue
+                                                                                   sharedFolderType:sharedFolderType
+                                                                                      previousValue:previousValue];
 }
 
 @end
@@ -49771,15 +50597,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderMemberPolicy *)dNewValue
-                   sharedFolderType:(NSString *)sharedFolderType
-                      previousValue:(DBTEAMLOGSharedFolderMemberPolicy *)previousValue {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderMemberPolicy *)dNewValue
+                        sharedFolderType:(NSString *)sharedFolderType
+                           previousValue:(DBTEAMLOGSharedFolderMemberPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
     _sharedFolderType = sharedFolderType;
     _dNewValue = dNewValue;
@@ -49788,19 +50617,19 @@
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(NSString *)originalFolderName
-                          dNewValue:(DBTEAMLOGSharedFolderMemberPolicy *)dNewValue {
-  return [self initWithTargetIndex:targetIndex
-                originalFolderName:originalFolderName
-                         dNewValue:dNewValue
-                  sharedFolderType:nil
-                     previousValue:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName
+                               dNewValue:(DBTEAMLOGSharedFolderMemberPolicy *)dNewValue {
+  return [self initWithTargetAssetIndex:targetAssetIndex
+                     originalFolderName:originalFolderName
+                              dNewValue:dNewValue
+                       sharedFolderType:nil
+                          previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderChangeMemberPolicyDetailsSerializer serialize:instance];
 }
 
@@ -49828,13 +50657,13 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
   result = prime * result + [self.dNewValue hash];
-  if (self.sharedFolderType) {
+  if (self.sharedFolderType != nil) {
     result = prime * result + [self.sharedFolderType hash];
   }
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -49858,7 +50687,7 @@
   if (self == aSharedFolderChangeMemberPolicyDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderChangeMemberPolicyDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderChangeMemberPolicyDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderChangeMemberPolicyDetails.originalFolderName]) {
@@ -49889,7 +50718,7 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeMemberPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
   jsonDict[@"new_value"] = [DBTEAMLOGSharedFolderMemberPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.sharedFolderType) {
@@ -49899,11 +50728,11 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharedFolderMemberPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderChangeMemberPolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
   DBTEAMLOGSharedFolderMemberPolicy *dNewValue =
       [DBTEAMLOGSharedFolderMemberPolicySerializer deserialize:valueDict[@"new_value"]];
@@ -49913,11 +50742,11 @@
           ? [DBTEAMLOGSharedFolderMemberPolicySerializer deserialize:valueDict[@"previous_value"]]
           : nil;
 
-  return [[DBTEAMLOGSharedFolderChangeMemberPolicyDetails alloc] initWithTargetIndex:targetIndex
-                                                                  originalFolderName:originalFolderName
-                                                                           dNewValue:dNewValue
-                                                                    sharedFolderType:sharedFolderType
-                                                                       previousValue:previousValue];
+  return [[DBTEAMLOGSharedFolderChangeMemberPolicyDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                       originalFolderName:originalFolderName
+                                                                                dNewValue:dNewValue
+                                                                         sharedFolderType:sharedFolderType
+                                                                            previousValue:previousValue];
 }
 
 @end
@@ -49932,25 +50761,26 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex parentNsId:(NSString *)parentNsId {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex parentNsId:(NSString *)parentNsId {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"[-_0-9a-zA-Z:]+"]](parentNsId);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _parentNsId = parentNsId;
   }
   return self;
 }
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
-  return [self initWithTargetIndex:targetIndex parentNsId:nil];
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  return [self initWithTargetAssetIndex:targetAssetIndex parentNsId:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderCreateDetailsSerializer serialize:instance];
 }
 
@@ -49978,8 +50808,8 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
-  if (self.parentNsId) {
+  result = prime * result + [self.targetAssetIndex hash];
+  if (self.parentNsId != nil) {
     result = prime * result + [self.parentNsId hash];
   }
 
@@ -50002,7 +50832,7 @@
   if (self == aSharedFolderCreateDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderCreateDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderCreateDetails.targetAssetIndex]) {
     return NO;
   }
   if (self.parentNsId) {
@@ -50022,19 +50852,19 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderCreateDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   if (valueObj.parentNsId) {
     jsonDict[@"parent_ns_id"] = valueObj.parentNsId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderCreateDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *parentNsId = valueDict[@"parent_ns_id"] ?: nil;
 
-  return [[DBTEAMLOGSharedFolderCreateDetails alloc] initWithTargetIndex:targetIndex parentNsId:parentNsId];
+  return [[DBTEAMLOGSharedFolderCreateDetails alloc] initWithTargetAssetIndex:targetAssetIndex parentNsId:parentNsId];
 }
 
 @end
@@ -50118,7 +50948,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderLinkPolicySerializer serialize:instance];
 }
 
@@ -50213,7 +51043,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderLinkPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -50299,7 +51129,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderMemberPolicySerializer serialize:instance];
 }
 
@@ -50388,7 +51218,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderMemberPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -50472,7 +51302,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderMembershipManagementPolicySerializer serialize:instance];
 }
 
@@ -50562,7 +51392,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderMembershipManagementPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -50591,11 +51421,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -50603,7 +51436,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderMountDetailsSerializer serialize:instance];
 }
 
@@ -50631,7 +51464,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -50653,7 +51486,7 @@
   if (self == aSharedFolderMountDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderMountDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderMountDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderMountDetails.originalFolderName]) {
@@ -50671,18 +51504,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderMountDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderMountDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return
-      [[DBTEAMLOGSharedFolderMountDetails alloc] initWithTargetIndex:targetIndex originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSharedFolderMountDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                          originalFolderName:originalFolderName];
 }
 
 @end
@@ -50697,11 +51530,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -50709,7 +51545,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderTransferOwnershipDetailsSerializer serialize:instance];
 }
 
@@ -50737,7 +51573,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -50760,7 +51596,7 @@
   if (self == aSharedFolderTransferOwnershipDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderTransferOwnershipDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderTransferOwnershipDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderTransferOwnershipDetails.originalFolderName]) {
@@ -50778,18 +51614,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderTransferOwnershipDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderTransferOwnershipDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSharedFolderTransferOwnershipDetails alloc] initWithTargetIndex:targetIndex
-                                                                 originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSharedFolderTransferOwnershipDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                                      originalFolderName:originalFolderName];
 }
 
 @end
@@ -50804,11 +51640,14 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(NSString *)originalFolderName {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
+  [DBStoneValidators nonnullValidator:nil](originalFolderName);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
     _originalFolderName = originalFolderName;
   }
   return self;
@@ -50816,7 +51655,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedFolderUnmountDetailsSerializer serialize:instance];
 }
 
@@ -50844,7 +51683,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
   result = prime * result + [self.originalFolderName hash];
 
   return prime * result;
@@ -50866,7 +51705,7 @@
   if (self == aSharedFolderUnmountDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aSharedFolderUnmountDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aSharedFolderUnmountDetails.targetAssetIndex]) {
     return NO;
   }
   if (![self.originalFolderName isEqual:aSharedFolderUnmountDetails.originalFolderName]) {
@@ -50884,18 +51723,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharedFolderUnmountDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
   jsonDict[@"original_folder_name"] = valueObj.originalFolderName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedFolderUnmountDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
   NSString *originalFolderName = valueDict[@"original_folder_name"];
 
-  return [[DBTEAMLOGSharedFolderUnmountDetails alloc] initWithTargetIndex:targetIndex
-                                                       originalFolderName:originalFolderName];
+  return [[DBTEAMLOGSharedFolderUnmountDetails alloc] initWithTargetAssetIndex:targetAssetIndex
+                                                            originalFolderName:originalFolderName];
 }
 
 @end
@@ -50920,7 +51759,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharedNoteOpenedDetailsSerializer serialize:instance];
 }
 
@@ -50980,7 +51819,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharedNoteOpenedDetails *)deserialize:(NSDictionary *)valueDict {
@@ -51004,6 +51843,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGSharingFolderJoinPolicy *)dNewValue
                     previousValue:(DBTEAMLOGSharingFolderJoinPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -51019,7 +51859,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharingChangeFolderJoinPolicyDetailsSerializer serialize:instance];
 }
 
@@ -51048,7 +51888,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -51097,7 +51937,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharingFolderJoinPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharingChangeFolderJoinPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -51127,6 +51967,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGSharingLinkPolicy *)dNewValue
                     previousValue:(DBTEAMLOGSharingLinkPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -51142,7 +51983,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharingChangeLinkPolicyDetailsSerializer serialize:instance];
 }
 
@@ -51171,7 +52012,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -51220,7 +52061,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharingLinkPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharingChangeLinkPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -51247,6 +52088,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGSharingMemberPolicy *)dNewValue
                     previousValue:(DBTEAMLOGSharingMemberPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -51262,7 +52104,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharingChangeMemberPolicyDetailsSerializer serialize:instance];
 }
 
@@ -51291,7 +52133,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -51340,7 +52182,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSharingMemberPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharingChangeMemberPolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -51365,18 +52207,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTeamOnly {
+- (instancetype)initWithFromAnyone {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingFolderJoinPolicyTeamOnly;
+    _tag = DBTEAMLOGSharingFolderJoinPolicyFromAnyone;
   }
   return self;
 }
 
-- (instancetype)initWithAnyone {
+- (instancetype)initWithFromTeamOnly {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingFolderJoinPolicyAnyone;
+    _tag = DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly;
   }
   return self;
 }
@@ -51393,12 +52235,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isTeamOnly {
-  return _tag == DBTEAMLOGSharingFolderJoinPolicyTeamOnly;
+- (BOOL)isFromAnyone {
+  return _tag == DBTEAMLOGSharingFolderJoinPolicyFromAnyone;
 }
 
-- (BOOL)isAnyone {
-  return _tag == DBTEAMLOGSharingFolderJoinPolicyAnyone;
+- (BOOL)isFromTeamOnly {
+  return _tag == DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly;
 }
 
 - (BOOL)isOther {
@@ -51407,10 +52249,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGSharingFolderJoinPolicyTeamOnly:
-    return @"DBTEAMLOGSharingFolderJoinPolicyTeamOnly";
-  case DBTEAMLOGSharingFolderJoinPolicyAnyone:
-    return @"DBTEAMLOGSharingFolderJoinPolicyAnyone";
+  case DBTEAMLOGSharingFolderJoinPolicyFromAnyone:
+    return @"DBTEAMLOGSharingFolderJoinPolicyFromAnyone";
+  case DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly:
+    return @"DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly";
   case DBTEAMLOGSharingFolderJoinPolicyOther:
     return @"DBTEAMLOGSharingFolderJoinPolicyOther";
   }
@@ -51420,7 +52262,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharingFolderJoinPolicySerializer serialize:instance];
 }
 
@@ -51449,9 +52291,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGSharingFolderJoinPolicyTeamOnly:
+  case DBTEAMLOGSharingFolderJoinPolicyFromAnyone:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSharingFolderJoinPolicyAnyone:
+  case DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSharingFolderJoinPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -51480,9 +52322,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGSharingFolderJoinPolicyTeamOnly:
+  case DBTEAMLOGSharingFolderJoinPolicyFromAnyone:
     return [[self tagName] isEqual:[aSharingFolderJoinPolicy tagName]];
-  case DBTEAMLOGSharingFolderJoinPolicyAnyone:
+  case DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly:
     return [[self tagName] isEqual:[aSharingFolderJoinPolicy tagName]];
   case DBTEAMLOGSharingFolderJoinPolicyOther:
     return [[self tagName] isEqual:[aSharingFolderJoinPolicy tagName]];
@@ -51499,26 +52341,26 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharingFolderJoinPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamOnly]) {
-    jsonDict[@".tag"] = @"team_only";
-  } else if ([valueObj isAnyone]) {
-    jsonDict[@".tag"] = @"anyone";
+  if ([valueObj isFromAnyone]) {
+    jsonDict[@".tag"] = @"from_anyone";
+  } else if ([valueObj isFromTeamOnly]) {
+    jsonDict[@".tag"] = @"from_team_only";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharingFolderJoinPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_only"]) {
-    return [[DBTEAMLOGSharingFolderJoinPolicy alloc] initWithTeamOnly];
-  } else if ([tag isEqualToString:@"anyone"]) {
-    return [[DBTEAMLOGSharingFolderJoinPolicy alloc] initWithAnyone];
+  if ([tag isEqualToString:@"from_anyone"]) {
+    return [[DBTEAMLOGSharingFolderJoinPolicy alloc] initWithFromAnyone];
+  } else if ([tag isEqualToString:@"from_team_only"]) {
+    return [[DBTEAMLOGSharingFolderJoinPolicy alloc] initWithFromTeamOnly];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGSharingFolderJoinPolicy alloc] initWithOther];
   } else {
@@ -51538,26 +52380,26 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTeamOnly {
+- (instancetype)initWithDefaultPrivate {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingLinkPolicyTeamOnly;
+    _tag = DBTEAMLOGSharingLinkPolicyDefaultPrivate;
   }
   return self;
 }
 
-- (instancetype)initWithDefaultTeamOnly {
+- (instancetype)initWithDefaultPublic {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingLinkPolicyDefaultTeamOnly;
+    _tag = DBTEAMLOGSharingLinkPolicyDefaultPublic;
   }
   return self;
 }
 
-- (instancetype)initWithDefaultAnyone {
+- (instancetype)initWithOnlyPrivate {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingLinkPolicyDefaultAnyone;
+    _tag = DBTEAMLOGSharingLinkPolicyOnlyPrivate;
   }
   return self;
 }
@@ -51574,16 +52416,16 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isTeamOnly {
-  return _tag == DBTEAMLOGSharingLinkPolicyTeamOnly;
+- (BOOL)isDefaultPrivate {
+  return _tag == DBTEAMLOGSharingLinkPolicyDefaultPrivate;
 }
 
-- (BOOL)isDefaultTeamOnly {
-  return _tag == DBTEAMLOGSharingLinkPolicyDefaultTeamOnly;
+- (BOOL)isDefaultPublic {
+  return _tag == DBTEAMLOGSharingLinkPolicyDefaultPublic;
 }
 
-- (BOOL)isDefaultAnyone {
-  return _tag == DBTEAMLOGSharingLinkPolicyDefaultAnyone;
+- (BOOL)isOnlyPrivate {
+  return _tag == DBTEAMLOGSharingLinkPolicyOnlyPrivate;
 }
 
 - (BOOL)isOther {
@@ -51592,12 +52434,12 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGSharingLinkPolicyTeamOnly:
-    return @"DBTEAMLOGSharingLinkPolicyTeamOnly";
-  case DBTEAMLOGSharingLinkPolicyDefaultTeamOnly:
-    return @"DBTEAMLOGSharingLinkPolicyDefaultTeamOnly";
-  case DBTEAMLOGSharingLinkPolicyDefaultAnyone:
-    return @"DBTEAMLOGSharingLinkPolicyDefaultAnyone";
+  case DBTEAMLOGSharingLinkPolicyDefaultPrivate:
+    return @"DBTEAMLOGSharingLinkPolicyDefaultPrivate";
+  case DBTEAMLOGSharingLinkPolicyDefaultPublic:
+    return @"DBTEAMLOGSharingLinkPolicyDefaultPublic";
+  case DBTEAMLOGSharingLinkPolicyOnlyPrivate:
+    return @"DBTEAMLOGSharingLinkPolicyOnlyPrivate";
   case DBTEAMLOGSharingLinkPolicyOther:
     return @"DBTEAMLOGSharingLinkPolicyOther";
   }
@@ -51607,7 +52449,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharingLinkPolicySerializer serialize:instance];
 }
 
@@ -51636,11 +52478,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGSharingLinkPolicyTeamOnly:
+  case DBTEAMLOGSharingLinkPolicyDefaultPrivate:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSharingLinkPolicyDefaultTeamOnly:
+  case DBTEAMLOGSharingLinkPolicyDefaultPublic:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSharingLinkPolicyDefaultAnyone:
+  case DBTEAMLOGSharingLinkPolicyOnlyPrivate:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSharingLinkPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -51669,11 +52511,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGSharingLinkPolicyTeamOnly:
+  case DBTEAMLOGSharingLinkPolicyDefaultPrivate:
     return [[self tagName] isEqual:[aSharingLinkPolicy tagName]];
-  case DBTEAMLOGSharingLinkPolicyDefaultTeamOnly:
+  case DBTEAMLOGSharingLinkPolicyDefaultPublic:
     return [[self tagName] isEqual:[aSharingLinkPolicy tagName]];
-  case DBTEAMLOGSharingLinkPolicyDefaultAnyone:
+  case DBTEAMLOGSharingLinkPolicyOnlyPrivate:
     return [[self tagName] isEqual:[aSharingLinkPolicy tagName]];
   case DBTEAMLOGSharingLinkPolicyOther:
     return [[self tagName] isEqual:[aSharingLinkPolicy tagName]];
@@ -51690,30 +52532,30 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharingLinkPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamOnly]) {
-    jsonDict[@".tag"] = @"team_only";
-  } else if ([valueObj isDefaultTeamOnly]) {
-    jsonDict[@".tag"] = @"default_team_only";
-  } else if ([valueObj isDefaultAnyone]) {
-    jsonDict[@".tag"] = @"default_anyone";
+  if ([valueObj isDefaultPrivate]) {
+    jsonDict[@".tag"] = @"default_private";
+  } else if ([valueObj isDefaultPublic]) {
+    jsonDict[@".tag"] = @"default_public";
+  } else if ([valueObj isOnlyPrivate]) {
+    jsonDict[@".tag"] = @"only_private";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharingLinkPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_only"]) {
-    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithTeamOnly];
-  } else if ([tag isEqualToString:@"default_team_only"]) {
-    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultTeamOnly];
-  } else if ([tag isEqualToString:@"default_anyone"]) {
-    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultAnyone];
+  if ([tag isEqualToString:@"default_private"]) {
+    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultPrivate];
+  } else if ([tag isEqualToString:@"default_public"]) {
+    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultPublic];
+  } else if ([tag isEqualToString:@"only_private"]) {
+    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithOnlyPrivate];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGSharingLinkPolicy alloc] initWithOther];
   } else {
@@ -51733,18 +52575,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTeamOnly {
+- (instancetype)initWithAllow {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingMemberPolicyTeamOnly;
+    _tag = DBTEAMLOGSharingMemberPolicyAllow;
   }
   return self;
 }
 
-- (instancetype)initWithAnyone {
+- (instancetype)initWithForbid {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSharingMemberPolicyAnyone;
+    _tag = DBTEAMLOGSharingMemberPolicyForbid;
   }
   return self;
 }
@@ -51761,12 +52603,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isTeamOnly {
-  return _tag == DBTEAMLOGSharingMemberPolicyTeamOnly;
+- (BOOL)isAllow {
+  return _tag == DBTEAMLOGSharingMemberPolicyAllow;
 }
 
-- (BOOL)isAnyone {
-  return _tag == DBTEAMLOGSharingMemberPolicyAnyone;
+- (BOOL)isForbid {
+  return _tag == DBTEAMLOGSharingMemberPolicyForbid;
 }
 
 - (BOOL)isOther {
@@ -51775,10 +52617,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGSharingMemberPolicyTeamOnly:
-    return @"DBTEAMLOGSharingMemberPolicyTeamOnly";
-  case DBTEAMLOGSharingMemberPolicyAnyone:
-    return @"DBTEAMLOGSharingMemberPolicyAnyone";
+  case DBTEAMLOGSharingMemberPolicyAllow:
+    return @"DBTEAMLOGSharingMemberPolicyAllow";
+  case DBTEAMLOGSharingMemberPolicyForbid:
+    return @"DBTEAMLOGSharingMemberPolicyForbid";
   case DBTEAMLOGSharingMemberPolicyOther:
     return @"DBTEAMLOGSharingMemberPolicyOther";
   }
@@ -51788,7 +52630,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSharingMemberPolicySerializer serialize:instance];
 }
 
@@ -51817,9 +52659,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGSharingMemberPolicyTeamOnly:
+  case DBTEAMLOGSharingMemberPolicyAllow:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSharingMemberPolicyAnyone:
+  case DBTEAMLOGSharingMemberPolicyForbid:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSharingMemberPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -51848,9 +52690,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGSharingMemberPolicyTeamOnly:
+  case DBTEAMLOGSharingMemberPolicyAllow:
     return [[self tagName] isEqual:[aSharingMemberPolicy tagName]];
-  case DBTEAMLOGSharingMemberPolicyAnyone:
+  case DBTEAMLOGSharingMemberPolicyForbid:
     return [[self tagName] isEqual:[aSharingMemberPolicy tagName]];
   case DBTEAMLOGSharingMemberPolicyOther:
     return [[self tagName] isEqual:[aSharingMemberPolicy tagName]];
@@ -51867,26 +52709,26 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSharingMemberPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamOnly]) {
-    jsonDict[@".tag"] = @"team_only";
-  } else if ([valueObj isAnyone]) {
-    jsonDict[@".tag"] = @"anyone";
+  if ([valueObj isAllow]) {
+    jsonDict[@".tag"] = @"allow";
+  } else if ([valueObj isForbid]) {
+    jsonDict[@".tag"] = @"forbid";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSharingMemberPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_only"]) {
-    return [[DBTEAMLOGSharingMemberPolicy alloc] initWithTeamOnly];
-  } else if ([tag isEqualToString:@"anyone"]) {
-    return [[DBTEAMLOGSharingMemberPolicy alloc] initWithAnyone];
+  if ([tag isEqualToString:@"allow"]) {
+    return [[DBTEAMLOGSharingMemberPolicy alloc] initWithAllow];
+  } else if ([tag isEqualToString:@"forbid"]) {
+    return [[DBTEAMLOGSharingMemberPolicy alloc] initWithForbid];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGSharingMemberPolicy alloc] initWithOther];
   } else {
@@ -51922,7 +52764,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelAppCreateDetailsSerializer serialize:instance];
 }
 
@@ -51950,10 +52792,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
-  if (self.tokenKey) {
+  if (self.tokenKey != nil) {
     result = prime * result + [self.tokenKey hash];
   }
 
@@ -52005,7 +52847,7 @@
     jsonDict[@"token_key"] = valueObj.tokenKey;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelAppCreateDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52043,7 +52885,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelCreateDetailsSerializer serialize:instance];
 }
 
@@ -52071,10 +52913,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
-  if (self.tokenKey) {
+  if (self.tokenKey != nil) {
     result = prime * result + [self.tokenKey hash];
   }
 
@@ -52126,7 +52968,7 @@
     jsonDict[@"token_key"] = valueObj.tokenKey;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelCreateDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52164,7 +53006,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelDisableDetailsSerializer serialize:instance];
 }
 
@@ -52192,10 +53034,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sharingPermission) {
+  if (self.sharingPermission != nil) {
     result = prime * result + [self.sharingPermission hash];
   }
-  if (self.tokenKey) {
+  if (self.tokenKey != nil) {
     result = prime * result + [self.tokenKey hash];
   }
 
@@ -52247,7 +53089,7 @@
     jsonDict[@"token_key"] = valueObj.tokenKey;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelDisableDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52272,7 +53114,10 @@
 
 - (instancetype)initWithSharingNonMemberRecipients:
     (NSArray<DBTEAMLOGNonTeamMemberLogInfo *> *)sharingNonMemberRecipients {
-  [DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil](sharingNonMemberRecipients);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                                               maxItems:nil
+                                                          itemValidator:[DBStoneValidators nonnullValidator:nil]]](
+      sharingNonMemberRecipients);
 
   self = [super init];
   if (self) {
@@ -52283,7 +53128,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelFbShareDetailsSerializer serialize:instance];
 }
 
@@ -52353,7 +53198,7 @@
                            return [DBTEAMLOGNonTeamMemberLogInfoSerializer serialize:elem0];
                          }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelFbShareDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52388,7 +53233,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelGroupShareDetailsSerializer serialize:instance];
 }
 
@@ -52448,7 +53293,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelGroupShareDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52479,7 +53324,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelRemoveExpirationDetailsSerializer serialize:instance];
 }
 
@@ -52540,7 +53385,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelRemoveExpirationDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52562,6 +53407,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithExpirationStartDate:(NSString *)expirationStartDate expirationDays:(NSNumber *)expirationDays {
+  [DBStoneValidators nonnullValidator:nil](expirationStartDate);
+  [DBStoneValidators nonnullValidator:nil](expirationDays);
 
   self = [super init];
   if (self) {
@@ -52573,7 +53420,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelSetExpirationDetailsSerializer serialize:instance];
 }
 
@@ -52644,7 +53491,7 @@
   jsonDict[@"expiration_start_date"] = valueObj.expirationStartDate;
   jsonDict[@"expiration_days"] = valueObj.expirationDays;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelSetExpirationDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52677,7 +53524,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelTeamCopyDetailsSerializer serialize:instance];
 }
 
@@ -52737,7 +53584,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelTeamCopyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52768,7 +53615,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelTeamDownloadDetailsSerializer serialize:instance];
 }
 
@@ -52828,7 +53675,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelTeamDownloadDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52859,7 +53706,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelTeamShareDetailsSerializer serialize:instance];
 }
 
@@ -52919,7 +53766,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelTeamShareDetails *)deserialize:(NSDictionary *)valueDict {
@@ -52950,7 +53797,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelTeamViewDetailsSerializer serialize:instance];
 }
 
@@ -53010,7 +53857,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelTeamViewDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53041,7 +53888,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelVisibilityPasswordDetailsSerializer serialize:instance];
 }
 
@@ -53102,7 +53949,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelVisibilityPasswordDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53133,7 +53980,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelVisibilityPublicDetailsSerializer serialize:instance];
 }
 
@@ -53194,7 +54041,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelVisibilityPublicDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53225,7 +54072,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGShmodelVisibilityTeamOnlyDetailsSerializer serialize:instance];
 }
 
@@ -53286,7 +54133,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGShmodelVisibilityTeamOnlyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53317,7 +54164,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSignInAsSessionEndDetailsSerializer serialize:instance];
 }
 
@@ -53377,7 +54224,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSignInAsSessionEndDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53408,7 +54255,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSignInAsSessionStartDetailsSerializer serialize:instance];
 }
 
@@ -53468,7 +54315,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSignInAsSessionStartDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53492,6 +54339,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGSmartSyncPolicy *)dNewValue
                     previousValue:(DBTEAMLOGSmartSyncPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -53507,7 +54355,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSmartSyncChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -53536,7 +54384,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -53584,7 +54432,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGSmartSyncPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSmartSyncChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53618,7 +54466,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetailsSerializer serialize:instance];
 }
 
@@ -53679,7 +54527,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53703,6 +54551,8 @@
 
 - (instancetype)initWithPreviousValue:(DBTEAMLOGSmartSyncOptOutPolicy *)previousValue
                             dNewValue:(DBTEAMLOGSmartSyncOptOutPolicy *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -53714,7 +54564,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSmartSyncNotOptOutDetailsSerializer serialize:instance];
 }
 
@@ -53785,7 +54635,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.dNewValue];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSmartSyncNotOptOutDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53812,6 +54662,8 @@
 
 - (instancetype)initWithPreviousValue:(DBTEAMLOGSmartSyncOptOutPolicy *)previousValue
                             dNewValue:(DBTEAMLOGSmartSyncOptOutPolicy *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -53823,7 +54675,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSmartSyncOptOutDetailsSerializer serialize:instance];
 }
 
@@ -53894,7 +54746,7 @@
   jsonDict[@"previous_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.previousValue];
   jsonDict[@"new_value"] = [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:valueObj.dNewValue];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSmartSyncOptOutDetails *)deserialize:(NSDictionary *)valueDict {
@@ -53918,18 +54770,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithOptedOut {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGSmartSyncOptOutPolicyOptedOut;
-  }
-  return self;
-}
-
 - (instancetype)initWithDefault_ {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGSmartSyncOptOutPolicyDefault_;
+  }
+  return self;
+}
+
+- (instancetype)initWithOptedOut {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGSmartSyncOptOutPolicyOptedOut;
   }
   return self;
 }
@@ -53946,12 +54798,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isOptedOut {
-  return _tag == DBTEAMLOGSmartSyncOptOutPolicyOptedOut;
-}
-
 - (BOOL)isDefault_ {
   return _tag == DBTEAMLOGSmartSyncOptOutPolicyDefault_;
+}
+
+- (BOOL)isOptedOut {
+  return _tag == DBTEAMLOGSmartSyncOptOutPolicyOptedOut;
 }
 
 - (BOOL)isOther {
@@ -53960,10 +54812,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGSmartSyncOptOutPolicyOptedOut:
-    return @"DBTEAMLOGSmartSyncOptOutPolicyOptedOut";
   case DBTEAMLOGSmartSyncOptOutPolicyDefault_:
     return @"DBTEAMLOGSmartSyncOptOutPolicyDefault_";
+  case DBTEAMLOGSmartSyncOptOutPolicyOptedOut:
+    return @"DBTEAMLOGSmartSyncOptOutPolicyOptedOut";
   case DBTEAMLOGSmartSyncOptOutPolicyOther:
     return @"DBTEAMLOGSmartSyncOptOutPolicyOther";
   }
@@ -53973,7 +54825,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSmartSyncOptOutPolicySerializer serialize:instance];
 }
 
@@ -54002,9 +54854,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGSmartSyncOptOutPolicyOptedOut:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSmartSyncOptOutPolicyDefault_:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGSmartSyncOptOutPolicyOptedOut:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSmartSyncOptOutPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -54033,9 +54885,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGSmartSyncOptOutPolicyOptedOut:
-    return [[self tagName] isEqual:[aSmartSyncOptOutPolicy tagName]];
   case DBTEAMLOGSmartSyncOptOutPolicyDefault_:
+    return [[self tagName] isEqual:[aSmartSyncOptOutPolicy tagName]];
+  case DBTEAMLOGSmartSyncOptOutPolicyOptedOut:
     return [[self tagName] isEqual:[aSmartSyncOptOutPolicy tagName]];
   case DBTEAMLOGSmartSyncOptOutPolicyOther:
     return [[self tagName] isEqual:[aSmartSyncOptOutPolicy tagName]];
@@ -54052,26 +54904,26 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSmartSyncOptOutPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isOptedOut]) {
-    jsonDict[@".tag"] = @"opted_out";
-  } else if ([valueObj isDefault_]) {
+  if ([valueObj isDefault_]) {
     jsonDict[@".tag"] = @"default";
+  } else if ([valueObj isOptedOut]) {
+    jsonDict[@".tag"] = @"opted_out";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSmartSyncOptOutPolicy *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"opted_out"]) {
-    return [[DBTEAMLOGSmartSyncOptOutPolicy alloc] initWithOptedOut];
-  } else if ([tag isEqualToString:@"default"]) {
+  if ([tag isEqualToString:@"default"]) {
     return [[DBTEAMLOGSmartSyncOptOutPolicy alloc] initWithDefault_];
+  } else if ([tag isEqualToString:@"opted_out"]) {
+    return [[DBTEAMLOGSmartSyncOptOutPolicy alloc] initWithOptedOut];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGSmartSyncOptOutPolicy alloc] initWithOther];
   } else {
@@ -54146,7 +54998,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSmartSyncPolicySerializer serialize:instance];
 }
 
@@ -54235,7 +55087,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSmartSyncPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -54347,7 +55199,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSpaceLimitsLevelSerializer serialize:instance];
 }
 
@@ -54448,7 +55300,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSpaceLimitsLevel *)deserialize:(NSDictionary *)valueDict {
@@ -54550,7 +55402,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSpaceLimitsStatusSerializer serialize:instance];
 }
 
@@ -54645,7 +55497,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSpaceLimitsStatus *)deserialize:(NSDictionary *)valueDict {
@@ -54669,15 +55521,16 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMLOGCertificate.h"
-#import "DBTEAMLOGSsoChangeCertDetails.h"
+#import "DBTEAMLOGSsoAddCertDetails.h"
 
 #pragma mark - API Object
 
-@implementation DBTEAMLOGSsoChangeCertDetails
+@implementation DBTEAMLOGSsoAddCertDetails
 
 #pragma mark - Constructors
 
 - (instancetype)initWithCertificateDetails:(DBTEAMLOGCertificate *)certificateDetails {
+  [DBStoneValidators nonnullValidator:nil](certificateDetails);
 
   self = [super init];
   if (self) {
@@ -54688,18 +55541,18 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGSsoChangeCertDetailsSerializer serialize:instance];
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoAddCertDetailsSerializer serialize:instance];
 }
 
 + (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGSsoChangeCertDetailsSerializer deserialize:dict];
+  return [DBTEAMLOGSsoAddCertDetailsSerializer deserialize:dict];
 }
 
 #pragma mark - Description method
 
 - (NSString *)description {
-  return [[DBTEAMLOGSsoChangeCertDetailsSerializer serialize:self] description];
+  return [[DBTEAMLOGSsoAddCertDetailsSerializer serialize:self] description];
 }
 
 #pragma mark - Copyable method
@@ -54730,6 +55583,323 @@
   if (!other || ![other isKindOfClass:[self class]]) {
     return NO;
   }
+  return [self isEqualToSsoAddCertDetails:other];
+}
+
+- (BOOL)isEqualToSsoAddCertDetails:(DBTEAMLOGSsoAddCertDetails *)aSsoAddCertDetails {
+  if (self == aSsoAddCertDetails) {
+    return YES;
+  }
+  if (![self.certificateDetails isEqual:aSsoAddCertDetails.certificateDetails]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGSsoAddCertDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGSsoAddCertDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"certificate_details"] = [DBTEAMLOGCertificateSerializer serialize:valueObj.certificateDetails];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGSsoAddCertDetails *)deserialize:(NSDictionary *)valueDict {
+  DBTEAMLOGCertificate *certificateDetails =
+      [DBTEAMLOGCertificateSerializer deserialize:valueDict[@"certificate_details"]];
+
+  return [[DBTEAMLOGSsoAddCertDetails alloc] initWithCertificateDetails:certificateDetails];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGSsoAddLoginUrlDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGSsoAddLoginUrlDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(NSString *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoAddLoginUrlDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGSsoAddLoginUrlDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGSsoAddLoginUrlDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSsoAddLoginUrlDetails:other];
+}
+
+- (BOOL)isEqualToSsoAddLoginUrlDetails:(DBTEAMLOGSsoAddLoginUrlDetails *)aSsoAddLoginUrlDetails {
+  if (self == aSsoAddLoginUrlDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aSsoAddLoginUrlDetails.dNewValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGSsoAddLoginUrlDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGSsoAddLoginUrlDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = valueObj.dNewValue;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGSsoAddLoginUrlDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *dNewValue = valueDict[@"new_value"];
+
+  return [[DBTEAMLOGSsoAddLoginUrlDetails alloc] initWithDNewValue:dNewValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGSsoAddLogoutUrlDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGSsoAddLogoutUrlDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(NSString *)dNewValue {
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+- (instancetype)initDefault {
+  return [self initWithDNewValue:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoAddLogoutUrlDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGSsoAddLogoutUrlDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGSsoAddLogoutUrlDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.dNewValue != nil) {
+    result = prime * result + [self.dNewValue hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSsoAddLogoutUrlDetails:other];
+}
+
+- (BOOL)isEqualToSsoAddLogoutUrlDetails:(DBTEAMLOGSsoAddLogoutUrlDetails *)aSsoAddLogoutUrlDetails {
+  if (self == aSsoAddLogoutUrlDetails) {
+    return YES;
+  }
+  if (self.dNewValue) {
+    if (![self.dNewValue isEqual:aSsoAddLogoutUrlDetails.dNewValue]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGSsoAddLogoutUrlDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGSsoAddLogoutUrlDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if (valueObj.dNewValue) {
+    jsonDict[@"new_value"] = valueObj.dNewValue;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGSsoAddLogoutUrlDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *dNewValue = valueDict[@"new_value"] ?: nil;
+
+  return [[DBTEAMLOGSsoAddLogoutUrlDetails alloc] initWithDNewValue:dNewValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGCertificate.h"
+#import "DBTEAMLOGSsoChangeCertDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGSsoChangeCertDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewCertificateDetails:(DBTEAMLOGCertificate *)dNewCertificateDetails
+                    previousCertificateDetails:(DBTEAMLOGCertificate *)previousCertificateDetails {
+  [DBStoneValidators nonnullValidator:nil](dNewCertificateDetails);
+
+  self = [super init];
+  if (self) {
+    _previousCertificateDetails = previousCertificateDetails;
+    _dNewCertificateDetails = dNewCertificateDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithDNewCertificateDetails:(DBTEAMLOGCertificate *)dNewCertificateDetails {
+  return [self initWithDNewCertificateDetails:dNewCertificateDetails previousCertificateDetails:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoChangeCertDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGSsoChangeCertDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGSsoChangeCertDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewCertificateDetails hash];
+  if (self.previousCertificateDetails != nil) {
+    result = prime * result + [self.previousCertificateDetails hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
   return [self isEqualToSsoChangeCertDetails:other];
 }
 
@@ -54737,8 +55907,13 @@
   if (self == aSsoChangeCertDetails) {
     return YES;
   }
-  if (![self.certificateDetails isEqual:aSsoChangeCertDetails.certificateDetails]) {
+  if (![self.dNewCertificateDetails isEqual:aSsoChangeCertDetails.dNewCertificateDetails]) {
     return NO;
+  }
+  if (self.previousCertificateDetails) {
+    if (![self.previousCertificateDetails isEqual:aSsoChangeCertDetails.previousCertificateDetails]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -54752,16 +55927,25 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSsoChangeCertDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"certificate_details"] = [DBTEAMLOGCertificateSerializer serialize:valueObj.certificateDetails];
+  jsonDict[@"new_certificate_details"] = [DBTEAMLOGCertificateSerializer serialize:valueObj.dNewCertificateDetails];
+  if (valueObj.previousCertificateDetails) {
+    jsonDict[@"previous_certificate_details"] =
+        [DBTEAMLOGCertificateSerializer serialize:valueObj.previousCertificateDetails];
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSsoChangeCertDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGCertificate *certificateDetails =
-      [DBTEAMLOGCertificateSerializer deserialize:valueDict[@"certificate_details"]];
+  DBTEAMLOGCertificate *dNewCertificateDetails =
+      [DBTEAMLOGCertificateSerializer deserialize:valueDict[@"new_certificate_details"]];
+  DBTEAMLOGCertificate *previousCertificateDetails =
+      valueDict[@"previous_certificate_details"]
+          ? [DBTEAMLOGCertificateSerializer deserialize:valueDict[@"previous_certificate_details"]]
+          : nil;
 
-  return [[DBTEAMLOGSsoChangeCertDetails alloc] initWithCertificateDetails:certificateDetails];
+  return [[DBTEAMLOGSsoChangeCertDetails alloc] initWithDNewCertificateDetails:dNewCertificateDetails
+                                                    previousCertificateDetails:previousCertificateDetails];
 }
 
 @end
@@ -54777,6 +55961,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(NSString *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -54788,7 +55974,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSsoChangeLoginUrlDetailsSerializer serialize:instance];
 }
 
@@ -54859,7 +56045,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSsoChangeLoginUrlDetails *)deserialize:(NSDictionary *)valueDict {
@@ -54891,13 +56077,13 @@
   return self;
 }
 
-- (instancetype)initWithPreviousValue:(NSString *)previousValue {
-  return [self initWithPreviousValue:previousValue dNewValue:nil];
+- (instancetype)initDefault {
+  return [self initWithPreviousValue:nil dNewValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSsoChangeLogoutUrlDetailsSerializer serialize:instance];
 }
 
@@ -54925,8 +56111,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.previousValue hash];
-  if (self.dNewValue) {
+  if (self.previousValue != nil) {
+    result = prime * result + [self.previousValue hash];
+  }
+  if (self.dNewValue != nil) {
     result = prime * result + [self.dNewValue hash];
   }
 
@@ -54949,8 +56137,10 @@
   if (self == aSsoChangeLogoutUrlDetails) {
     return YES;
   }
-  if (![self.previousValue isEqual:aSsoChangeLogoutUrlDetails.previousValue]) {
-    return NO;
+  if (self.previousValue) {
+    if (![self.previousValue isEqual:aSsoChangeLogoutUrlDetails.previousValue]) {
+      return NO;
+    }
   }
   if (self.dNewValue) {
     if (![self.dNewValue isEqual:aSsoChangeLogoutUrlDetails.dNewValue]) {
@@ -54969,16 +56159,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSsoChangeLogoutUrlDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"previous_value"] = valueObj.previousValue;
+  if (valueObj.previousValue) {
+    jsonDict[@"previous_value"] = valueObj.previousValue;
+  }
   if (valueObj.dNewValue) {
     jsonDict[@"new_value"] = valueObj.dNewValue;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSsoChangeLogoutUrlDetails *)deserialize:(NSDictionary *)valueDict {
-  NSString *previousValue = valueDict[@"previous_value"];
+  NSString *previousValue = valueDict[@"previous_value"] ?: nil;
   NSString *dNewValue = valueDict[@"new_value"] ?: nil;
 
   return [[DBTEAMLOGSsoChangeLogoutUrlDetails alloc] initWithPreviousValue:previousValue dNewValue:dNewValue];
@@ -54989,7 +56181,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMLOGSsoChangePolicyDetails.h"
-#import "DBTEAMLOGSsoPolicy.h"
+#import "DBTEAMPOLICIESSsoPolicy.h"
 
 #pragma mark - API Object
 
@@ -54997,7 +56189,9 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGSsoPolicy *)dNewValue previousValue:(DBTEAMLOGSsoPolicy *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESSsoPolicy *)dNewValue
+                    previousValue:(DBTEAMPOLICIESSsoPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -55007,13 +56201,13 @@
   return self;
 }
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGSsoPolicy *)dNewValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESSsoPolicy *)dNewValue {
   return [self initWithDNewValue:dNewValue previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSsoChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -55042,7 +56236,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -55085,18 +56279,18 @@
 + (NSDictionary *)serialize:(DBTEAMLOGSsoChangePolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGSsoPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"new_value"] = [DBTEAMPOLICIESSsoPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGSsoPolicySerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMPOLICIESSsoPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSsoChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGSsoPolicy *dNewValue = [DBTEAMLOGSsoPolicySerializer deserialize:valueDict[@"new_value"]];
-  DBTEAMLOGSsoPolicy *previousValue =
-      valueDict[@"previous_value"] ? [DBTEAMLOGSsoPolicySerializer deserialize:valueDict[@"previous_value"]] : nil;
+  DBTEAMPOLICIESSsoPolicy *dNewValue = [DBTEAMPOLICIESSsoPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMPOLICIESSsoPolicy *previousValue =
+      valueDict[@"previous_value"] ? [DBTEAMPOLICIESSsoPolicySerializer deserialize:valueDict[@"previous_value"]] : nil;
 
   return [[DBTEAMLOGSsoChangePolicyDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
 }
@@ -55114,6 +56308,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithPreviousValue:(NSNumber *)previousValue dNewValue:(NSNumber *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -55125,7 +56321,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSsoChangeSamlIdentityModeDetailsSerializer serialize:instance];
 }
 
@@ -55197,7 +56393,7 @@
   jsonDict[@"previous_value"] = valueObj.previousValue;
   jsonDict[@"new_value"] = valueObj.dNewValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSsoChangeSamlIdentityModeDetails *)deserialize:(NSDictionary *)valueDict {
@@ -55221,6 +56417,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithErrorDetails:(DBTEAMLOGFailureDetailsLogInfo *)errorDetails {
+  [DBStoneValidators nonnullValidator:nil](errorDetails);
 
   self = [super init];
   if (self) {
@@ -55231,7 +56428,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGSsoLoginFailDetailsSerializer serialize:instance];
 }
 
@@ -55297,7 +56494,7 @@
 
   jsonDict[@"error_details"] = [DBTEAMLOGFailureDetailsLogInfoSerializer serialize:valueObj.errorDetails];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGSsoLoginFailDetails *)deserialize:(NSDictionary *)valueDict {
@@ -55311,95 +56508,36 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
-#import "DBTEAMLOGSsoPolicy.h"
+#import "DBTEAMLOGSsoRemoveCertDetails.h"
 
 #pragma mark - API Object
 
-@implementation DBTEAMLOGSsoPolicy
+@implementation DBTEAMLOGSsoRemoveCertDetails
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDisabled {
+- (instancetype)initDefault {
+
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGSsoPolicyDisabled;
   }
   return self;
-}
-
-- (instancetype)initWithOptional {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGSsoPolicyOptional;
-  }
-  return self;
-}
-
-- (instancetype)initWithRequired {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGSsoPolicyRequired;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGSsoPolicyOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isDisabled {
-  return _tag == DBTEAMLOGSsoPolicyDisabled;
-}
-
-- (BOOL)isOptional {
-  return _tag == DBTEAMLOGSsoPolicyOptional;
-}
-
-- (BOOL)isRequired {
-  return _tag == DBTEAMLOGSsoPolicyRequired;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGSsoPolicyOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGSsoPolicyDisabled:
-    return @"DBTEAMLOGSsoPolicyDisabled";
-  case DBTEAMLOGSsoPolicyOptional:
-    return @"DBTEAMLOGSsoPolicyOptional";
-  case DBTEAMLOGSsoPolicyRequired:
-    return @"DBTEAMLOGSsoPolicyRequired";
-  case DBTEAMLOGSsoPolicyOther:
-    return @"DBTEAMLOGSsoPolicyOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGSsoPolicySerializer serialize:instance];
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoRemoveCertDetailsSerializer serialize:instance];
 }
 
 + (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGSsoPolicySerializer deserialize:dict];
+  return [DBTEAMLOGSsoRemoveCertDetailsSerializer deserialize:dict];
 }
 
 #pragma mark - Description method
 
 - (NSString *)description {
-  return [[DBTEAMLOGSsoPolicySerializer serialize:self] description];
+  return [[DBTEAMLOGSsoRemoveCertDetailsSerializer serialize:self] description];
 }
 
 #pragma mark - Copyable method
@@ -55416,16 +56554,100 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  switch (_tag) {
-  case DBTEAMLOGSsoPolicyDisabled:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSsoPolicyOptional:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSsoPolicyRequired:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGSsoPolicyOther:
-    result = prime * result + [[self tagName] hash];
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
   }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSsoRemoveCertDetails:other];
+}
+
+- (BOOL)isEqualToSsoRemoveCertDetails:(DBTEAMLOGSsoRemoveCertDetails *)aSsoRemoveCertDetails {
+  if (self == aSsoRemoveCertDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGSsoRemoveCertDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGSsoRemoveCertDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGSsoRemoveCertDetails *)deserialize:(NSDictionary *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGSsoRemoveCertDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGSsoRemoveLoginUrlDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGSsoRemoveLoginUrlDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPreviousValue:(NSString *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.previousValue hash];
 
   return prime * result;
 }
@@ -55439,25 +56661,15 @@
   if (!other || ![other isKindOfClass:[self class]]) {
     return NO;
   }
-  return [self isEqualToSsoPolicy:other];
+  return [self isEqualToSsoRemoveLoginUrlDetails:other];
 }
 
-- (BOOL)isEqualToSsoPolicy:(DBTEAMLOGSsoPolicy *)aSsoPolicy {
-  if (self == aSsoPolicy) {
+- (BOOL)isEqualToSsoRemoveLoginUrlDetails:(DBTEAMLOGSsoRemoveLoginUrlDetails *)aSsoRemoveLoginUrlDetails {
+  if (self == aSsoRemoveLoginUrlDetails) {
     return YES;
   }
-  if (self.tag != aSsoPolicy.tag) {
+  if (![self.previousValue isEqual:aSsoRemoveLoginUrlDetails.previousValue]) {
     return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGSsoPolicyDisabled:
-    return [[self tagName] isEqual:[aSsoPolicy tagName]];
-  case DBTEAMLOGSsoPolicyOptional:
-    return [[self tagName] isEqual:[aSsoPolicy tagName]];
-  case DBTEAMLOGSsoPolicyRequired:
-    return [[self tagName] isEqual:[aSsoPolicy tagName]];
-  case DBTEAMLOGSsoPolicyOther:
-    return [[self tagName] isEqual:[aSsoPolicy tagName]];
   }
   return YES;
 }
@@ -55466,40 +56678,119 @@
 
 #pragma mark - Serializer Object
 
-@implementation DBTEAMLOGSsoPolicySerializer
+@implementation DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer
 
-+ (NSDictionary *)serialize:(DBTEAMLOGSsoPolicy *)valueObj {
++ (NSDictionary *)serialize:(DBTEAMLOGSsoRemoveLoginUrlDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isDisabled]) {
-    jsonDict[@".tag"] = @"disabled";
-  } else if ([valueObj isOptional]) {
-    jsonDict[@".tag"] = @"optional";
-  } else if ([valueObj isRequired]) {
-    jsonDict[@".tag"] = @"required";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
+  jsonDict[@"previous_value"] = valueObj.previousValue;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBTEAMLOGSsoPolicy *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
++ (DBTEAMLOGSsoRemoveLoginUrlDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *previousValue = valueDict[@"previous_value"];
 
-  if ([tag isEqualToString:@"disabled"]) {
-    return [[DBTEAMLOGSsoPolicy alloc] initWithDisabled];
-  } else if ([tag isEqualToString:@"optional"]) {
-    return [[DBTEAMLOGSsoPolicy alloc] initWithOptional];
-  } else if ([tag isEqualToString:@"required"]) {
-    return [[DBTEAMLOGSsoPolicy alloc] initWithRequired];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGSsoPolicy alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGSsoPolicy alloc] initWithOther];
+  return [[DBTEAMLOGSsoRemoveLoginUrlDetails alloc] initWithPreviousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGSsoRemoveLogoutUrlDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGSsoRemoveLogoutUrlDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPreviousValue:(NSString *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _previousValue = previousValue;
   }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToSsoRemoveLogoutUrlDetails:other];
+}
+
+- (BOOL)isEqualToSsoRemoveLogoutUrlDetails:(DBTEAMLOGSsoRemoveLogoutUrlDetails *)aSsoRemoveLogoutUrlDetails {
+  if (self == aSsoRemoveLogoutUrlDetails) {
+    return YES;
+  }
+  if (![self.previousValue isEqual:aSsoRemoveLogoutUrlDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGSsoRemoveLogoutUrlDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"previous_value"] = valueObj.previousValue;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGSsoRemoveLogoutUrlDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *previousValue = valueDict[@"previous_value"];
+
+  return [[DBTEAMLOGSsoRemoveLogoutUrlDetails alloc] initWithPreviousValue:previousValue];
 }
 
 @end
@@ -55515,6 +56806,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+  [DBStoneValidators nonnullValidator:nil](startDate);
+  [DBStoneValidators nonnullValidator:nil](endDate);
 
   self = [super init];
   if (self) {
@@ -55526,7 +56819,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamActivityCreateReportDetailsSerializer serialize:instance];
 }
 
@@ -55595,15 +56888,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGTeamActivityCreateReportDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%d"];
-  jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%d"];
+  jsonDict[@"start_date"] = [DBNSDateSerializer serialize:valueObj.startDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+  jsonDict[@"end_date"] = [DBNSDateSerializer serialize:valueObj.endDate dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamActivityCreateReportDetails *)deserialize:(NSDictionary *)valueDict {
-  NSDate *startDate = [DBNSDateSerializer deserialize:valueDict[@"start_date"] dateFormat:@"%Y-%m-%d"];
-  NSDate *endDate = [DBNSDateSerializer deserialize:valueDict[@"end_date"] dateFormat:@"%Y-%m-%d"];
+  NSDate *startDate = [DBNSDateSerializer deserialize:valueDict[@"start_date"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+  NSDate *endDate = [DBNSDateSerializer deserialize:valueDict[@"end_date"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"];
 
   return [[DBTEAMLOGTeamActivityCreateReportDetails alloc] initWithStartDate:startDate endDate:endDate];
 }
@@ -55638,9 +56931,21 @@
                            origin:(DBTEAMLOGOriginLogInfo *)origin
                      participants:(NSArray<DBTEAMLOGParticipantLogInfo *> *)participants
                            assets:(NSArray<DBTEAMLOGAssetLogInfo *> *)assets {
+  [DBStoneValidators nonnullValidator:nil](timestamp);
+  [DBStoneValidators nonnullValidator:nil](eventCategory);
+  [DBStoneValidators nonnullValidator:nil](actor);
+  [DBStoneValidators nonnullValidator:nil](involveNonTeamMember);
+  [DBStoneValidators nonnullValidator:nil](context);
+  [DBStoneValidators nonnullValidator:nil](eventType);
+  [DBStoneValidators nonnullValidator:nil](details);
   [DBStoneValidators
-   nullableValidator:[DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil]](participants);
-  [DBStoneValidators nullableValidator:[DBStoneValidators arrayValidator:nil maxItems:nil itemValidator:nil]](assets);
+   nullableValidator:[DBStoneValidators arrayValidator:nil
+                                              maxItems:nil
+                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](participants);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil
+                                              maxItems:nil
+                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](assets);
 
   self = [super init];
   if (self) {
@@ -55648,10 +56953,10 @@
     _eventCategory = eventCategory;
     _actor = actor;
     _origin = origin;
-    _participants = participants;
-    _assets = assets;
     _involveNonTeamMember = involveNonTeamMember;
     _context = context;
+    _participants = participants;
+    _assets = assets;
     _eventType = eventType;
     _details = details;
   }
@@ -55679,7 +56984,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamEventSerializer serialize:instance];
 }
 
@@ -55714,13 +57019,13 @@
   result = prime * result + [self.context hash];
   result = prime * result + [self.eventType hash];
   result = prime * result + [self.details hash];
-  if (self.origin) {
+  if (self.origin != nil) {
     result = prime * result + [self.origin hash];
   }
-  if (self.participants) {
+  if (self.participants != nil) {
     result = prime * result + [self.participants hash];
   }
-  if (self.assets) {
+  if (self.assets != nil) {
     result = prime * result + [self.assets hash];
   }
 
@@ -55814,7 +57119,7 @@
                                              }];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamEvent *)deserialize:(NSDictionary *)valueDict {
@@ -55868,6 +57173,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGTeamFolderStatus *)dNewValue
                     previousValue:(DBTEAMLOGTeamFolderStatus *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -55883,7 +57189,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamFolderChangeStatusDetailsSerializer serialize:instance];
 }
 
@@ -55912,7 +57218,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -55961,7 +57267,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGTeamFolderStatusSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamFolderChangeStatusDetails *)deserialize:(NSDictionary *)valueDict {
@@ -55995,7 +57301,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamFolderCreateDetailsSerializer serialize:instance];
 }
 
@@ -56055,7 +57361,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamFolderCreateDetails *)deserialize:(NSDictionary *)valueDict {
@@ -56076,18 +57382,19 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex {
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex {
+  [DBStoneValidators nonnullValidator:nil](targetAssetIndex);
 
   self = [super init];
   if (self) {
-    _targetIndex = targetIndex;
+    _targetAssetIndex = targetAssetIndex;
   }
   return self;
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamFolderDowngradeDetailsSerializer serialize:instance];
 }
 
@@ -56115,7 +57422,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.targetIndex hash];
+  result = prime * result + [self.targetAssetIndex hash];
 
   return prime * result;
 }
@@ -56136,7 +57443,7 @@
   if (self == aTeamFolderDowngradeDetails) {
     return YES;
   }
-  if (![self.targetIndex isEqual:aTeamFolderDowngradeDetails.targetIndex]) {
+  if (![self.targetAssetIndex isEqual:aTeamFolderDowngradeDetails.targetAssetIndex]) {
     return NO;
   }
   return YES;
@@ -56151,15 +57458,15 @@
 + (NSDictionary *)serialize:(DBTEAMLOGTeamFolderDowngradeDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"target_index"] = valueObj.targetIndex;
+  jsonDict[@"target_asset_index"] = valueObj.targetAssetIndex;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamFolderDowngradeDetails *)deserialize:(NSDictionary *)valueDict {
-  NSNumber *targetIndex = valueDict[@"target_index"];
+  NSNumber *targetAssetIndex = valueDict[@"target_asset_index"];
 
-  return [[DBTEAMLOGTeamFolderDowngradeDetails alloc] initWithTargetIndex:targetIndex];
+  return [[DBTEAMLOGTeamFolderDowngradeDetails alloc] initWithTargetAssetIndex:targetAssetIndex];
 }
 
 @end
@@ -56184,7 +57491,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamFolderPermanentlyDeleteDetailsSerializer serialize:instance];
 }
 
@@ -56245,7 +57552,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamFolderPermanentlyDeleteDetails *)deserialize:(NSDictionary *)valueDict {
@@ -56268,6 +57575,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithRelocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails {
+  [DBStoneValidators nonnullValidator:nil](relocateActionDetails);
 
   self = [super init];
   if (self) {
@@ -56278,7 +57586,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamFolderRenameDetailsSerializer serialize:instance];
 }
 
@@ -56345,7 +57653,7 @@
   jsonDict[@"relocate_action_details"] =
       [DBTEAMLOGRelocateAssetReferencesLogInfoSerializer serialize:valueObj.relocateActionDetails];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamFolderRenameDetails *)deserialize:(NSDictionary *)valueDict {
@@ -56422,7 +57730,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamFolderStatusSerializer serialize:instance];
 }
 
@@ -56511,7 +57819,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamFolderStatus *)deserialize:(NSDictionary *)valueDict {
@@ -56555,7 +57863,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamLinkedAppLogInfoSerializer serialize:instance];
 }
 
@@ -56583,10 +57891,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.appId) {
+  if (self.appId != nil) {
     result = prime * result + [self.appId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
 
@@ -56638,7 +57946,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamLinkedAppLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -56668,8 +57976,7 @@
                  memberExternalId:(NSString *)memberExternalId {
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
-  [DBStoneValidators
-   nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"[^/:?<>\"|]*"]](displayName);
+  [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](displayName);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators
                          stringValidator:nil
@@ -56692,7 +57999,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamMemberLogInfoSerializer serialize:instance];
 }
 
@@ -56720,19 +58027,19 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.accountId) {
+  if (self.accountId != nil) {
     result = prime * result + [self.accountId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
-  if (self.email) {
+  if (self.email != nil) {
     result = prime * result + [self.email hash];
   }
-  if (self.teamMemberId) {
+  if (self.teamMemberId != nil) {
     result = prime * result + [self.teamMemberId hash];
   }
-  if (self.memberExternalId) {
+  if (self.memberExternalId != nil) {
     result = prime * result + [self.memberExternalId hash];
   }
 
@@ -56808,7 +58115,7 @@
     jsonDict[@"member_external_id"] = valueObj.memberExternalId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamMemberLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -56892,7 +58199,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamMembershipTypeSerializer serialize:instance];
 }
 
@@ -56981,7 +58288,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamMembershipType *)deserialize:(NSDictionary *)valueDict {
@@ -57011,6 +58318,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithTeamName:(NSString *)teamName {
+  [DBStoneValidators nonnullValidator:nil](teamName);
 
   self = [super init];
   if (self) {
@@ -57021,7 +58329,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamMergeFromDetailsSerializer serialize:instance];
 }
 
@@ -57087,7 +58395,7 @@
 
   jsonDict[@"team_name"] = valueObj.teamName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamMergeFromDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57109,6 +58417,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithTeamName:(NSString *)teamName {
+  [DBStoneValidators nonnullValidator:nil](teamName);
 
   self = [super init];
   if (self) {
@@ -57119,7 +58428,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamMergeToDetailsSerializer serialize:instance];
 }
 
@@ -57185,7 +58494,7 @@
 
   jsonDict[@"team_name"] = valueObj.teamName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamMergeToDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57207,6 +58516,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithTeamDisplayName:(NSString *)teamDisplayName teamLegalName:(NSString *)teamLegalName {
+  [DBStoneValidators nonnullValidator:nil](teamDisplayName);
+  [DBStoneValidators nonnullValidator:nil](teamLegalName);
 
   self = [super init];
   if (self) {
@@ -57218,7 +58529,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamNameSerializer serialize:instance];
 }
 
@@ -57289,7 +58600,7 @@
   jsonDict[@"team_display_name"] = valueObj.teamDisplayName;
   jsonDict[@"team_legal_name"] = valueObj.teamLegalName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamName *)deserialize:(NSDictionary *)valueDict {
@@ -57321,7 +58632,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamProfileAddLogoDetailsSerializer serialize:instance];
 }
 
@@ -57381,13 +58692,123 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamProfileAddLogoDetails *)deserialize:(NSDictionary *)valueDict {
 #pragma unused(valueDict)
 
   return [[DBTEAMLOGTeamProfileAddLogoDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileChangeDefaultLanguageDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileChangeDefaultLanguageDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(NSString *)dNewValue previousValue:(NSString *)previousValue {
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(2) maxLength:nil pattern:nil]](dNewValue);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators stringValidator:@(2) maxLength:nil pattern:nil]](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileChangeDefaultLanguageDetails:other];
+}
+
+- (BOOL)isEqualToTeamProfileChangeDefaultLanguageDetails:
+    (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)aTeamProfileChangeDefaultLanguageDetails {
+  if (self == aTeamProfileChangeDefaultLanguageDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aTeamProfileChangeDefaultLanguageDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aTeamProfileChangeDefaultLanguageDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer
+
++ (NSDictionary *)serialize:(DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = valueObj.dNewValue;
+  jsonDict[@"previous_value"] = valueObj.previousValue;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)deserialize:(NSDictionary *)valueDict {
+  NSString *dNewValue = valueDict[@"new_value"];
+  NSString *previousValue = valueDict[@"previous_value"];
+
+  return [[DBTEAMLOGTeamProfileChangeDefaultLanguageDetails alloc] initWithDNewValue:dNewValue
+                                                                       previousValue:previousValue];
 }
 
 @end
@@ -57412,7 +58833,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamProfileChangeLogoDetailsSerializer serialize:instance];
 }
 
@@ -57472,7 +58893,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamProfileChangeLogoDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57495,6 +58916,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGTeamName *)dNewValue previousValue:(DBTEAMLOGTeamName *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -57510,7 +58932,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamProfileChangeNameDetailsSerializer serialize:instance];
 }
 
@@ -57539,7 +58961,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -57587,7 +59009,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGTeamNameSerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamProfileChangeNameDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57620,7 +59042,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTeamProfileRemoveLogoDetailsSerializer serialize:instance];
 }
 
@@ -57680,7 +59102,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamProfileRemoveLogoDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57711,7 +59133,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaAddBackupPhoneDetailsSerializer serialize:instance];
 }
 
@@ -57771,7 +59193,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaAddBackupPhoneDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57802,7 +59224,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaAddSecurityKeyDetailsSerializer serialize:instance];
 }
 
@@ -57862,7 +59284,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaAddSecurityKeyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57893,7 +59315,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaChangeBackupPhoneDetailsSerializer serialize:instance];
 }
 
@@ -57953,7 +59375,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaChangeBackupPhoneDetails *)deserialize:(NSDictionary *)valueDict {
@@ -57967,7 +59389,7 @@
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 #import "DBTEAMLOGTfaChangePolicyDetails.h"
-#import "DBTEAMLOGTfaPolicy.h"
+#import "DBTEAMPOLICIESTwoStepVerificationPolicy.h"
 
 #pragma mark - API Object
 
@@ -57975,7 +59397,9 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGTfaPolicy *)dNewValue previousValue:(DBTEAMLOGTfaPolicy *)previousValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESTwoStepVerificationPolicy *)dNewValue
+                    previousValue:(DBTEAMPOLICIESTwoStepVerificationPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -57985,13 +59409,13 @@
   return self;
 }
 
-- (instancetype)initWithDNewValue:(DBTEAMLOGTfaPolicy *)dNewValue {
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESTwoStepVerificationPolicy *)dNewValue {
   return [self initWithDNewValue:dNewValue previousValue:nil];
 }
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -58020,7 +59444,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -58063,18 +59487,21 @@
 + (NSDictionary *)serialize:(DBTEAMLOGTfaChangePolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGTfaPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"new_value"] = [DBTEAMPOLICIESTwoStepVerificationPolicySerializer serialize:valueObj.dNewValue];
   if (valueObj.previousValue) {
-    jsonDict[@"previous_value"] = [DBTEAMLOGTfaPolicySerializer serialize:valueObj.previousValue];
+    jsonDict[@"previous_value"] = [DBTEAMPOLICIESTwoStepVerificationPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
-  DBTEAMLOGTfaPolicy *dNewValue = [DBTEAMLOGTfaPolicySerializer deserialize:valueDict[@"new_value"]];
-  DBTEAMLOGTfaPolicy *previousValue =
-      valueDict[@"previous_value"] ? [DBTEAMLOGTfaPolicySerializer deserialize:valueDict[@"previous_value"]] : nil;
+  DBTEAMPOLICIESTwoStepVerificationPolicy *dNewValue =
+      [DBTEAMPOLICIESTwoStepVerificationPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMPOLICIESTwoStepVerificationPolicy *previousValue =
+      valueDict[@"previous_value"]
+          ? [DBTEAMPOLICIESTwoStepVerificationPolicySerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
 
   return [[DBTEAMLOGTfaChangePolicyDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
 }
@@ -58095,6 +59522,7 @@
 - (instancetype)initWithDNewValue:(DBTEAMLOGTfaConfiguration *)dNewValue
                     previousValue:(DBTEAMLOGTfaConfiguration *)previousValue
                    usedRescueCode:(NSNumber *)usedRescueCode {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -58111,7 +59539,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaChangeStatusDetailsSerializer serialize:instance];
 }
 
@@ -58140,10 +59568,10 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
-  if (self.usedRescueCode) {
+  if (self.usedRescueCode != nil) {
     result = prime * result + [self.usedRescueCode hash];
   }
 
@@ -58199,7 +59627,7 @@
     jsonDict[@"used_rescue_code"] = valueObj.usedRescueCode;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaChangeStatusDetails *)deserialize:(NSDictionary *)valueDict {
@@ -58309,7 +59737,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaConfigurationSerializer serialize:instance];
 }
 
@@ -58410,7 +59838,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaConfiguration *)deserialize:(NSDictionary *)valueDict {
@@ -58428,201 +59856,6 @@
     return [[DBTEAMLOGTfaConfiguration alloc] initWithOther];
   } else {
     return [[DBTEAMLOGTfaConfiguration alloc] initWithOther];
-  }
-}
-
-@end
-
-#import "DBStoneSerializers.h"
-#import "DBStoneValidators.h"
-#import "DBTEAMLOGTfaPolicy.h"
-
-#pragma mark - API Object
-
-@implementation DBTEAMLOGTfaPolicy
-
-#pragma mark - Constructors
-
-- (instancetype)initWithDisabled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTfaPolicyDisabled;
-  }
-  return self;
-}
-
-- (instancetype)initWithOptional {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTfaPolicyOptional;
-  }
-  return self;
-}
-
-- (instancetype)initWithRequired {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTfaPolicyRequired;
-  }
-  return self;
-}
-
-- (instancetype)initWithOther {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTfaPolicyOther;
-  }
-  return self;
-}
-
-#pragma mark - Instance field accessors
-
-#pragma mark - Tag state methods
-
-- (BOOL)isDisabled {
-  return _tag == DBTEAMLOGTfaPolicyDisabled;
-}
-
-- (BOOL)isOptional {
-  return _tag == DBTEAMLOGTfaPolicyOptional;
-}
-
-- (BOOL)isRequired {
-  return _tag == DBTEAMLOGTfaPolicyRequired;
-}
-
-- (BOOL)isOther {
-  return _tag == DBTEAMLOGTfaPolicyOther;
-}
-
-- (NSString *)tagName {
-  switch (_tag) {
-  case DBTEAMLOGTfaPolicyDisabled:
-    return @"DBTEAMLOGTfaPolicyDisabled";
-  case DBTEAMLOGTfaPolicyOptional:
-    return @"DBTEAMLOGTfaPolicyOptional";
-  case DBTEAMLOGTfaPolicyRequired:
-    return @"DBTEAMLOGTfaPolicyRequired";
-  case DBTEAMLOGTfaPolicyOther:
-    return @"DBTEAMLOGTfaPolicyOther";
-  }
-
-  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
-}
-
-#pragma mark - Serialization methods
-
-+ (NSDictionary *)serialize:(id)instance {
-  return [DBTEAMLOGTfaPolicySerializer serialize:instance];
-}
-
-+ (id)deserialize:(NSDictionary *)dict {
-  return [DBTEAMLOGTfaPolicySerializer deserialize:dict];
-}
-
-#pragma mark - Description method
-
-- (NSString *)description {
-  return [[DBTEAMLOGTfaPolicySerializer serialize:self] description];
-}
-
-#pragma mark - Copyable method
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-#pragma unused(zone)
-  /// object is immutable
-  return self;
-}
-
-#pragma mark - Hash method
-
-- (NSUInteger)hash {
-  NSUInteger prime = 31;
-  NSUInteger result = 1;
-
-  switch (_tag) {
-  case DBTEAMLOGTfaPolicyDisabled:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTfaPolicyOptional:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTfaPolicyRequired:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTfaPolicyOther:
-    result = prime * result + [[self tagName] hash];
-  }
-
-  return prime * result;
-}
-
-#pragma mark - Equality method
-
-- (BOOL)isEqual:(id)other {
-  if (other == self) {
-    return YES;
-  }
-  if (!other || ![other isKindOfClass:[self class]]) {
-    return NO;
-  }
-  return [self isEqualToTfaPolicy:other];
-}
-
-- (BOOL)isEqualToTfaPolicy:(DBTEAMLOGTfaPolicy *)aTfaPolicy {
-  if (self == aTfaPolicy) {
-    return YES;
-  }
-  if (self.tag != aTfaPolicy.tag) {
-    return NO;
-  }
-  switch (_tag) {
-  case DBTEAMLOGTfaPolicyDisabled:
-    return [[self tagName] isEqual:[aTfaPolicy tagName]];
-  case DBTEAMLOGTfaPolicyOptional:
-    return [[self tagName] isEqual:[aTfaPolicy tagName]];
-  case DBTEAMLOGTfaPolicyRequired:
-    return [[self tagName] isEqual:[aTfaPolicy tagName]];
-  case DBTEAMLOGTfaPolicyOther:
-    return [[self tagName] isEqual:[aTfaPolicy tagName]];
-  }
-  return YES;
-}
-
-@end
-
-#pragma mark - Serializer Object
-
-@implementation DBTEAMLOGTfaPolicySerializer
-
-+ (NSDictionary *)serialize:(DBTEAMLOGTfaPolicy *)valueObj {
-  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-
-  if ([valueObj isDisabled]) {
-    jsonDict[@".tag"] = @"disabled";
-  } else if ([valueObj isOptional]) {
-    jsonDict[@".tag"] = @"optional";
-  } else if ([valueObj isRequired]) {
-    jsonDict[@".tag"] = @"required";
-  } else if ([valueObj isOther]) {
-    jsonDict[@".tag"] = @"other";
-  } else {
-    jsonDict[@".tag"] = @"other";
-  }
-
-  return jsonDict;
-}
-
-+ (DBTEAMLOGTfaPolicy *)deserialize:(NSDictionary *)valueDict {
-  NSString *tag = valueDict[@".tag"];
-
-  if ([tag isEqualToString:@"disabled"]) {
-    return [[DBTEAMLOGTfaPolicy alloc] initWithDisabled];
-  } else if ([tag isEqualToString:@"optional"]) {
-    return [[DBTEAMLOGTfaPolicy alloc] initWithOptional];
-  } else if ([tag isEqualToString:@"required"]) {
-    return [[DBTEAMLOGTfaPolicy alloc] initWithRequired];
-  } else if ([tag isEqualToString:@"other"]) {
-    return [[DBTEAMLOGTfaPolicy alloc] initWithOther];
-  } else {
-    return [[DBTEAMLOGTfaPolicy alloc] initWithOther];
   }
 }
 
@@ -58648,7 +59881,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaRemoveBackupPhoneDetailsSerializer serialize:instance];
 }
 
@@ -58708,7 +59941,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaRemoveBackupPhoneDetails *)deserialize:(NSDictionary *)valueDict {
@@ -58739,7 +59972,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaRemoveSecurityKeyDetailsSerializer serialize:instance];
 }
 
@@ -58799,7 +60032,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaRemoveSecurityKeyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -58830,7 +60063,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTfaResetDetailsSerializer serialize:instance];
 }
 
@@ -58890,7 +60123,7 @@
 #pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTfaResetDetails *)deserialize:(NSDictionary *)valueDict {
@@ -59050,7 +60283,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTimeUnitSerializer serialize:instance];
 }
 
@@ -59175,7 +60408,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTimeUnit *)deserialize:(NSDictionary *)valueDict {
@@ -59219,6 +60452,7 @@
 
 - (instancetype)initWithDNewValue:(DBTEAMLOGTwoAccountPolicy *)dNewValue
                     previousValue:(DBTEAMLOGTwoAccountPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
 
   self = [super init];
   if (self) {
@@ -59234,7 +60468,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTwoAccountChangePolicyDetailsSerializer serialize:instance];
 }
 
@@ -59263,7 +60497,7 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.dNewValue hash];
-  if (self.previousValue) {
+  if (self.previousValue != nil) {
     result = prime * result + [self.previousValue hash];
   }
 
@@ -59312,7 +60546,7 @@
     jsonDict[@"previous_value"] = [DBTEAMLOGTwoAccountPolicySerializer serialize:valueObj.previousValue];
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTwoAccountChangePolicyDetails *)deserialize:(NSDictionary *)valueDict {
@@ -59391,7 +60625,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGTwoAccountPolicySerializer serialize:instance];
 }
 
@@ -59480,7 +60714,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTwoAccountPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -59524,7 +60758,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGUserLinkedAppLogInfoSerializer serialize:instance];
 }
 
@@ -59552,10 +60786,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.appId) {
+  if (self.appId != nil) {
     result = prime * result + [self.appId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
 
@@ -59607,7 +60841,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGUserLinkedAppLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -59630,6 +60864,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithGivenName:(NSString *)givenName surname:(NSString *)surname locale:(NSString *)locale {
+  [DBStoneValidators nonnullValidator:nil](givenName);
+  [DBStoneValidators nonnullValidator:nil](surname);
 
   self = [super init];
   if (self) {
@@ -59646,7 +60882,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGUserNameLogInfoSerializer serialize:instance];
 }
 
@@ -59676,7 +60912,7 @@
 
   result = prime * result + [self.givenName hash];
   result = prime * result + [self.surname hash];
-  if (self.locale) {
+  if (self.locale != nil) {
     result = prime * result + [self.locale hash];
   }
 
@@ -59728,7 +60964,7 @@
     jsonDict[@"locale"] = valueObj.locale;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGUserNameLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -59766,7 +61002,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGUserOrTeamLinkedAppLogInfoSerializer serialize:instance];
 }
 
@@ -59794,10 +61030,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.appId) {
+  if (self.appId != nil) {
     result = prime * result + [self.appId hash];
   }
-  if (self.displayName) {
+  if (self.displayName != nil) {
     result = prime * result + [self.displayName hash];
   }
 
@@ -59849,7 +61085,7 @@
     jsonDict[@"display_name"] = valueObj.displayName;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGUserOrTeamLinkedAppLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -59886,7 +61122,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGWebSessionLogInfoSerializer serialize:instance];
 }
 
@@ -59914,7 +61150,7 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  if (self.sessionId) {
+  if (self.sessionId != nil) {
     result = prime * result + [self.sessionId hash];
   }
 
@@ -59958,7 +61194,7 @@
     jsonDict[@"session_id"] = valueObj.sessionId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGWebSessionLogInfo *)deserialize:(NSDictionary *)valueDict {
@@ -59991,9 +61227,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithDNewValue:nil previousValue:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetailsSerializer serialize:instance];
 }
 
@@ -60021,8 +61261,12 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.dNewValue hash];
-  result = prime * result + [self.previousValue hash];
+  if (self.dNewValue != nil) {
+    result = prime * result + [self.dNewValue hash];
+  }
+  if (self.previousValue != nil) {
+    result = prime * result + [self.previousValue hash];
+  }
 
   return prime * result;
 }
@@ -60044,11 +61288,15 @@
   if (self == aWebSessionsChangeFixedLengthPolicyDetails) {
     return YES;
   }
-  if (![self.dNewValue isEqual:aWebSessionsChangeFixedLengthPolicyDetails.dNewValue]) {
-    return NO;
+  if (self.dNewValue) {
+    if (![self.dNewValue isEqual:aWebSessionsChangeFixedLengthPolicyDetails.dNewValue]) {
+      return NO;
+    }
   }
-  if (![self.previousValue isEqual:aWebSessionsChangeFixedLengthPolicyDetails.previousValue]) {
-    return NO;
+  if (self.previousValue) {
+    if (![self.previousValue isEqual:aWebSessionsChangeFixedLengthPolicyDetails.previousValue]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -60062,17 +61310,24 @@
 + (NSDictionary *)serialize:(DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGWebSessionsFixedLengthPolicySerializer serialize:valueObj.dNewValue];
-  jsonDict[@"previous_value"] = [DBTEAMLOGWebSessionsFixedLengthPolicySerializer serialize:valueObj.previousValue];
+  if (valueObj.dNewValue) {
+    jsonDict[@"new_value"] = [DBTEAMLOGWebSessionsFixedLengthPolicySerializer serialize:valueObj.dNewValue];
+  }
+  if (valueObj.previousValue) {
+    jsonDict[@"previous_value"] = [DBTEAMLOGWebSessionsFixedLengthPolicySerializer serialize:valueObj.previousValue];
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetails *)deserialize:(NSDictionary *)valueDict {
   DBTEAMLOGWebSessionsFixedLengthPolicy *dNewValue =
-      [DBTEAMLOGWebSessionsFixedLengthPolicySerializer deserialize:valueDict[@"new_value"]];
+      valueDict[@"new_value"] ? [DBTEAMLOGWebSessionsFixedLengthPolicySerializer deserialize:valueDict[@"new_value"]]
+                              : nil;
   DBTEAMLOGWebSessionsFixedLengthPolicy *previousValue =
-      [DBTEAMLOGWebSessionsFixedLengthPolicySerializer deserialize:valueDict[@"previous_value"]];
+      valueDict[@"previous_value"]
+          ? [DBTEAMLOGWebSessionsFixedLengthPolicySerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
 
   return [[DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetails alloc] initWithDNewValue:dNewValue
                                                                          previousValue:previousValue];
@@ -60102,9 +61357,13 @@
   return self;
 }
 
+- (instancetype)initDefault {
+  return [self initWithDNewValue:nil previousValue:nil];
+}
+
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetailsSerializer serialize:instance];
 }
 
@@ -60132,8 +61391,12 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
-  result = prime * result + [self.dNewValue hash];
-  result = prime * result + [self.previousValue hash];
+  if (self.dNewValue != nil) {
+    result = prime * result + [self.dNewValue hash];
+  }
+  if (self.previousValue != nil) {
+    result = prime * result + [self.previousValue hash];
+  }
 
   return prime * result;
 }
@@ -60155,11 +61418,15 @@
   if (self == aWebSessionsChangeIdleLengthPolicyDetails) {
     return YES;
   }
-  if (![self.dNewValue isEqual:aWebSessionsChangeIdleLengthPolicyDetails.dNewValue]) {
-    return NO;
+  if (self.dNewValue) {
+    if (![self.dNewValue isEqual:aWebSessionsChangeIdleLengthPolicyDetails.dNewValue]) {
+      return NO;
+    }
   }
-  if (![self.previousValue isEqual:aWebSessionsChangeIdleLengthPolicyDetails.previousValue]) {
-    return NO;
+  if (self.previousValue) {
+    if (![self.previousValue isEqual:aWebSessionsChangeIdleLengthPolicyDetails.previousValue]) {
+      return NO;
+    }
   }
   return YES;
 }
@@ -60173,17 +61440,24 @@
 + (NSDictionary *)serialize:(DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  jsonDict[@"new_value"] = [DBTEAMLOGWebSessionsIdleLengthPolicySerializer serialize:valueObj.dNewValue];
-  jsonDict[@"previous_value"] = [DBTEAMLOGWebSessionsIdleLengthPolicySerializer serialize:valueObj.previousValue];
+  if (valueObj.dNewValue) {
+    jsonDict[@"new_value"] = [DBTEAMLOGWebSessionsIdleLengthPolicySerializer serialize:valueObj.dNewValue];
+  }
+  if (valueObj.previousValue) {
+    jsonDict[@"previous_value"] = [DBTEAMLOGWebSessionsIdleLengthPolicySerializer serialize:valueObj.previousValue];
+  }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails *)deserialize:(NSDictionary *)valueDict {
   DBTEAMLOGWebSessionsIdleLengthPolicy *dNewValue =
-      [DBTEAMLOGWebSessionsIdleLengthPolicySerializer deserialize:valueDict[@"new_value"]];
+      valueDict[@"new_value"] ? [DBTEAMLOGWebSessionsIdleLengthPolicySerializer deserialize:valueDict[@"new_value"]]
+                              : nil;
   DBTEAMLOGWebSessionsIdleLengthPolicy *previousValue =
-      [DBTEAMLOGWebSessionsIdleLengthPolicySerializer deserialize:valueDict[@"previous_value"]];
+      valueDict[@"previous_value"]
+          ? [DBTEAMLOGWebSessionsIdleLengthPolicySerializer deserialize:valueDict[@"previous_value"]]
+          : nil;
 
   return [[DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails alloc] initWithDNewValue:dNewValue
                                                                         previousValue:previousValue];
@@ -60269,7 +61543,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGWebSessionsFixedLengthPolicySerializer serialize:instance];
 }
 
@@ -60359,7 +61633,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGWebSessionsFixedLengthPolicy *)deserialize:(NSDictionary *)valueDict {
@@ -60457,7 +61731,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBTEAMLOGWebSessionsIdleLengthPolicySerializer serialize:instance];
 }
 
@@ -60547,7 +61821,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGWebSessionsIdleLengthPolicy *)deserialize:(NSDictionary *)valueDict {

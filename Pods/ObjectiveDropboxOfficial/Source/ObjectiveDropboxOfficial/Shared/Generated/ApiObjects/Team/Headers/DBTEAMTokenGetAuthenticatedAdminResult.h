@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTokenGetAuthenticatedAdminResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTokenGetAuthenticatedAdminResult *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTokenGetAuthenticatedAdminResult *)instance;
 
 ///
 /// Deserializes `DBTEAMTokenGetAuthenticatedAdminResult` instances.

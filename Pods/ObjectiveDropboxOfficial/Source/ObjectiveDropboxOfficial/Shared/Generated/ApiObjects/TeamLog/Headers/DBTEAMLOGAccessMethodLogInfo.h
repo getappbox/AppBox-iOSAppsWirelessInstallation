@@ -227,7 +227,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccessMethodLogInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGAccessMethodLogInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGAccessMethodLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccessMethodLogInfo` instances.

@@ -29,24 +29,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// New idle length policy.
-@property (nonatomic, readonly) DBTEAMLOGWebSessionsIdleLengthPolicy *dNewValue;
+/// New idle length policy. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGWebSessionsIdleLengthPolicy *dNewValue;
 
-/// Previous idle length policy.
-@property (nonatomic, readonly) DBTEAMLOGWebSessionsIdleLengthPolicy *previousValue;
+/// Previous idle length policy. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGWebSessionsIdleLengthPolicy *previousValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param dNewValue New idle length policy.
-/// @param previousValue Previous idle length policy.
+/// @param dNewValue New idle length policy. Might be missing due to historical
+/// data gap.
+/// @param previousValue Previous idle length policy. Might be missing due to
+/// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGWebSessionsIdleLengthPolicy *)dNewValue
-                    previousValue:(DBTEAMLOGWebSessionsIdleLengthPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(nullable DBTEAMLOGWebSessionsIdleLengthPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMLOGWebSessionsIdleLengthPolicy *)previousValue;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+///
+/// @return An initialized instance.
+///
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -69,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails` instances.

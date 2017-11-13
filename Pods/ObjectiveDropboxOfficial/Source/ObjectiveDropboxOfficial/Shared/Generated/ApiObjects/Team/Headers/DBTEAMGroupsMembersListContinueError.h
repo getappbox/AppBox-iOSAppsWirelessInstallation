@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsMembersListContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsMembersListContinueError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupsMembersListContinueError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupsMembersListContinueError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsMembersListContinueError` instances.

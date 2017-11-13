@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderListError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderListError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderListError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderListError` instances.

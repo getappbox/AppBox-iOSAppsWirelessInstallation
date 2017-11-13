@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeLinkedAppBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeLinkedAppBatchError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRevokeLinkedAppBatchError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRevokeLinkedAppBatchError *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeLinkedAppBatchError` instances.

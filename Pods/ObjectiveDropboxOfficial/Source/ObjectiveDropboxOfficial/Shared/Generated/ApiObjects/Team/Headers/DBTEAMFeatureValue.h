@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMFeatureValue` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMFeatureValue *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMFeatureValue *)instance;
 
 ///
 /// Deserializes `DBTEAMFeatureValue` instances.

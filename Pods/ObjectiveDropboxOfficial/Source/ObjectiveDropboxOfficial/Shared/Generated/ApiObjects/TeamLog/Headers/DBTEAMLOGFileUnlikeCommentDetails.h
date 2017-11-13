@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Comment text. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *commentText;
@@ -38,23 +38,23 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param commentText Comment text. Might be missing due to historical data
 /// gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex commentText:(nullable NSString *)commentText;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex commentText:(nullable NSString *)commentText;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileUnlikeCommentDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileUnlikeCommentDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileUnlikeCommentDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileUnlikeCommentDetails` instances.

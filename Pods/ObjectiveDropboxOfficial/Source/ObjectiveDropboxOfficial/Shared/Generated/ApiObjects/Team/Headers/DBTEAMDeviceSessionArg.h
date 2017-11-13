@@ -25,10 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The session id
+/// The session id.
 @property (nonatomic, readonly, copy) NSString *sessionId;
 
-/// The unique id of the member owning the device
+/// The unique id of the member owning the device.
 @property (nonatomic, readonly, copy) NSString *teamMemberId;
 
 #pragma mark - Constructors
@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param sessionId The session id
-/// @param teamMemberId The unique id of the member owning the device
+/// @param sessionId The session id.
+/// @param teamMemberId The unique id of the member owning the device.
 ///
 /// @return An initialized instance.
 ///
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDeviceSessionArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMDeviceSessionArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMDeviceSessionArg *)instance;
 
 ///
 /// Deserializes `DBTEAMDeviceSessionArg` instances.

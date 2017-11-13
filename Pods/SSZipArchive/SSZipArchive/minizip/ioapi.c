@@ -1,11 +1,13 @@
 /* ioapi.c -- IO base function header for compress/uncompress .zip
    part of the MiniZip project
 
-   Copyright (C) 1998-2010 Gilles Vollant
-     http://www.winimage.com/zLibDll/minizip.html
+   Copyright (C) 2012-2017 Nathan Moinvaziri
+     https://github.com/nmoinvaz/minizip
    Modifications for Zip64 support
      Copyright (C) 2009-2010 Mathias Svensson
      http://result42.com
+   Copyright (C) 1998-2010 Gilles Vollant
+     http://www.winimage.com/zLibDll/minizip.html
 
    This program is distributed under the terms of the same license as zlib.
    See the accompanying LICENSE file for the full text of the license.
@@ -79,7 +81,7 @@ void fill_zlib_filefunc64_32_def_from_filefunc32(zlib_filefunc64_32_def *p_filef
     p_filefunc64_32->ztell32_file = p_filefunc32->ztell_file;
 }
 
-static voidpf   ZCALLBACK fopen_file_func(voidpf opaque, const char *filename, int mode);
+static voidpf   ZCALLBACK fopen_file_func(ZIP_UNUSED voidpf opaque, const char *filename, int mode);
 static uint32_t ZCALLBACK fread_file_func(voidpf opaque, voidpf stream, void* buf, uint32_t size);
 static uint32_t ZCALLBACK fwrite_file_func(voidpf opaque, voidpf stream, const void *buf, uint32_t size);
 static uint64_t ZCALLBACK ftell64_file_func(voidpf opaque, voidpf stream);
@@ -107,7 +109,7 @@ static voidpf file_build_ioposix(FILE *file, const char *filename)
     return (voidpf)ioposix;
 }
 
-static voidpf ZCALLBACK fopen_file_func(voidpf opaque, const char *filename, int mode)
+static voidpf ZCALLBACK fopen_file_func(ZIP_UNUSED voidpf opaque, const char *filename, int mode)
 {
     FILE* file = NULL;
     const char *mode_fopen = NULL;
@@ -126,7 +128,7 @@ static voidpf ZCALLBACK fopen_file_func(voidpf opaque, const char *filename, int
     return file;
 }
 
-static voidpf ZCALLBACK fopen64_file_func(voidpf opaque, const void *filename, int mode)
+static voidpf ZCALLBACK fopen64_file_func(ZIP_UNUSED voidpf opaque, const void *filename, int mode)
 {
     FILE* file = NULL;
     const char *mode_fopen = NULL;
@@ -195,7 +197,7 @@ static voidpf ZCALLBACK fopendisk_file_func(voidpf opaque, voidpf stream, uint32
     return ret;
 }
 
-static uint32_t ZCALLBACK fread_file_func(voidpf opaque, voidpf stream, void* buf, uint32_t size)
+static uint32_t ZCALLBACK fread_file_func(ZIP_UNUSED voidpf opaque, voidpf stream, void* buf, uint32_t size)
 {
     FILE_IOPOSIX *ioposix = NULL;
     uint32_t read = (uint32_t)-1;
@@ -206,7 +208,7 @@ static uint32_t ZCALLBACK fread_file_func(voidpf opaque, voidpf stream, void* bu
     return read;
 }
 
-static uint32_t ZCALLBACK fwrite_file_func(voidpf opaque, voidpf stream, const void *buf, uint32_t size)
+static uint32_t ZCALLBACK fwrite_file_func(ZIP_UNUSED voidpf opaque, voidpf stream, const void *buf, uint32_t size)
 {
     FILE_IOPOSIX *ioposix = NULL;
     uint32_t written = (uint32_t)-1;
@@ -217,7 +219,7 @@ static uint32_t ZCALLBACK fwrite_file_func(voidpf opaque, voidpf stream, const v
     return written;
 }
 
-static long ZCALLBACK ftell_file_func(voidpf opaque, voidpf stream)
+static long ZCALLBACK ftell_file_func(ZIP_UNUSED voidpf opaque, voidpf stream)
 {
     FILE_IOPOSIX *ioposix = NULL;
     long ret = -1;
@@ -228,7 +230,7 @@ static long ZCALLBACK ftell_file_func(voidpf opaque, voidpf stream)
     return ret;
 }
 
-static uint64_t ZCALLBACK ftell64_file_func(voidpf opaque, voidpf stream)
+static uint64_t ZCALLBACK ftell64_file_func(ZIP_UNUSED voidpf opaque, voidpf stream)
 {
     FILE_IOPOSIX *ioposix = NULL;
     uint64_t ret = (uint64_t)-1;
@@ -239,7 +241,7 @@ static uint64_t ZCALLBACK ftell64_file_func(voidpf opaque, voidpf stream)
     return ret;
 }
 
-static long ZCALLBACK fseek_file_func(voidpf opaque, voidpf stream, uint32_t offset, int origin)
+static long ZCALLBACK fseek_file_func(ZIP_UNUSED voidpf opaque, voidpf stream, uint32_t offset, int origin)
 {
     FILE_IOPOSIX *ioposix = NULL;
     int fseek_origin = 0;
@@ -268,7 +270,7 @@ static long ZCALLBACK fseek_file_func(voidpf opaque, voidpf stream, uint32_t off
     return ret;
 }
 
-static long ZCALLBACK fseek64_file_func(voidpf opaque, voidpf stream, uint64_t offset, int origin)
+static long ZCALLBACK fseek64_file_func(ZIP_UNUSED voidpf opaque, voidpf stream, uint64_t offset, int origin)
 {
     FILE_IOPOSIX *ioposix = NULL;
     int fseek_origin = 0;
@@ -299,7 +301,7 @@ static long ZCALLBACK fseek64_file_func(voidpf opaque, voidpf stream, uint64_t o
     return ret;
 }
 
-static int ZCALLBACK fclose_file_func(voidpf opaque, voidpf stream)
+static int ZCALLBACK fclose_file_func(ZIP_UNUSED voidpf opaque, voidpf stream)
 {
     FILE_IOPOSIX *ioposix = NULL;
     int ret = -1;
@@ -313,7 +315,7 @@ static int ZCALLBACK fclose_file_func(voidpf opaque, voidpf stream)
     return ret;
 }
 
-static int ZCALLBACK ferror_file_func(voidpf opaque, voidpf stream)
+static int ZCALLBACK ferror_file_func(ZIP_UNUSED voidpf opaque, voidpf stream)
 {
     FILE_IOPOSIX *ioposix = NULL;
     int ret = -1;

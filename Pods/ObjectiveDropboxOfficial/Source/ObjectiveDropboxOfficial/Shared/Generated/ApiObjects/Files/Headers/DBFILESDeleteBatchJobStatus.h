@@ -158,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchJobStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESDeleteBatchJobStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESDeleteBatchJobStatus *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchJobStatus` instances.

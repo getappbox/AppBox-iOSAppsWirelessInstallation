@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGParentFolderAccessInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGParentFolderAccessInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGParentFolderAccessInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGParentFolderAccessInfo` instances.

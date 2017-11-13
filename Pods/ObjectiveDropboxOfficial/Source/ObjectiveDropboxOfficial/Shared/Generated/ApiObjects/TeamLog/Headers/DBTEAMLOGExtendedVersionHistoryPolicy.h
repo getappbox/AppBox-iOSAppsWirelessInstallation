@@ -30,10 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
   /// (no description).
-  DBTEAMLOGExtendedVersionHistoryPolicyLimited,
+  DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyLimited,
 
   /// (no description).
-  DBTEAMLOGExtendedVersionHistoryPolicyUnlimited,
+  DBTEAMLOGExtendedVersionHistoryPolicyExplicitlyUnlimited,
+
+  /// (no description).
+  DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited,
 
   /// (no description).
   DBTEAMLOGExtendedVersionHistoryPolicyOther,
@@ -46,18 +49,25 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "limited".
+/// Initializes union class with tag state of "explicitly_limited".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithLimited;
+- (instancetype)initWithExplicitlyLimited;
 
 ///
-/// Initializes union class with tag state of "unlimited".
+/// Initializes union class with tag state of "explicitly_unlimited".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithUnlimited;
+- (instancetype)initWithExplicitlyUnlimited;
+
+///
+/// Initializes union class with tag state of "implicitly_limited".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithImplicitlyLimited;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -71,18 +81,31 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "limited".
+/// Retrieves whether the union's current tag state has value
+/// "explicitly_limited".
 ///
-/// @return Whether the union's current tag state has value "limited".
+/// @return Whether the union's current tag state has value
+/// "explicitly_limited".
 ///
-- (BOOL)isLimited;
+- (BOOL)isExplicitlyLimited;
 
 ///
-/// Retrieves whether the union's current tag state has value "unlimited".
+/// Retrieves whether the union's current tag state has value
+/// "explicitly_unlimited".
 ///
-/// @return Whether the union's current tag state has value "unlimited".
+/// @return Whether the union's current tag state has value
+/// "explicitly_unlimited".
 ///
-- (BOOL)isUnlimited;
+- (BOOL)isExplicitlyUnlimited;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "implicitly_limited".
+///
+/// @return Whether the union's current tag state has value
+/// "implicitly_limited".
+///
+- (BOOL)isImplicitlyLimited;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -117,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGExtendedVersionHistoryPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGExtendedVersionHistoryPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGExtendedVersionHistoryPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGExtendedVersionHistoryPolicy` instances.

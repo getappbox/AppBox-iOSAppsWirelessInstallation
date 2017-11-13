@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderMetadata` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderMetadata *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderMetadata` instances.

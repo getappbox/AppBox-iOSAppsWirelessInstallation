@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeLinkedAppBatchResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRevokeLinkedAppBatchResult *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRevokeLinkedAppBatchResult *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeLinkedAppBatchResult` instances.

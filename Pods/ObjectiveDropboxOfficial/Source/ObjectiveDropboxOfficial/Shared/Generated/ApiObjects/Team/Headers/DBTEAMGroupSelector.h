@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupSelector` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMGroupSelector *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMGroupSelector *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupSelector` instances.

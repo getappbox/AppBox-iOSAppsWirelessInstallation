@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESOfficeAddInPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMPOLICIESOfficeAddInPolicy` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMPOLICIESOfficeAddInPolicyTag) {
-  /// Office Add-In is disabled
+  /// Office Add-In is disabled.
   DBTEAMPOLICIESOfficeAddInPolicyDisabled,
 
-  /// Office Add-In is enabled
+  /// Office Add-In is enabled.
   DBTEAMPOLICIESOfficeAddInPolicyEnabled,
 
   /// (no description).
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESOfficeAddInPolicyTag) {
 ///
 /// Initializes union class with tag state of "disabled".
 ///
-/// Description of the "disabled" tag state: Office Add-In is disabled
+/// Description of the "disabled" tag state: Office Add-In is disabled.
 ///
 /// @return An initialized instance.
 ///
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESOfficeAddInPolicyTag) {
 ///
 /// Initializes union class with tag state of "enabled".
 ///
-/// Description of the "enabled" tag state: Office Add-In is enabled
+/// Description of the "enabled" tag state: Office Add-In is enabled.
 ///
 /// @return An initialized instance.
 ///
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESOfficeAddInPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESOfficeAddInPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMPOLICIESOfficeAddInPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESOfficeAddInPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESOfficeAddInPolicy` instances.

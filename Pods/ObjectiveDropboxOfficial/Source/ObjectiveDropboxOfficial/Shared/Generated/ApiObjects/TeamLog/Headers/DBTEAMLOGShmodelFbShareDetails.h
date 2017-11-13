@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShmodelFbShareDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGShmodelFbShareDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGShmodelFbShareDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShmodelFbShareDetails` instances.

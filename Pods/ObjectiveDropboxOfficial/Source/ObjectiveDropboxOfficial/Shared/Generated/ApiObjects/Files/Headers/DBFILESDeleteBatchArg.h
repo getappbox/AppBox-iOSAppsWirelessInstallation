@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESDeleteBatchArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESDeleteBatchArg *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchArg` instances.

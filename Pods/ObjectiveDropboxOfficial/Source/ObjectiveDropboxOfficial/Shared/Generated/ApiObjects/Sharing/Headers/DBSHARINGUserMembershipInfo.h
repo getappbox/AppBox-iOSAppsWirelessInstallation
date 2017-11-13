@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUserMembershipInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGUserMembershipInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGUserMembershipInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGUserMembershipInfo` instances.

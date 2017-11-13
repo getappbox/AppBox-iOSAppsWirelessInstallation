@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBFILESListRevisionsArg;
+@class DBFILESListRevisionsMode;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The path to the file you want to see the revisions of.
 @property (nonatomic, readonly, copy) NSString *path;
 
+/// Determines the behavior of the API in listing the revisions for a given file
+/// path or id.
+@property (nonatomic, readonly) DBFILESListRevisionsMode *mode;
+
 /// The maximum number of revision entries returned.
 @property (nonatomic, readonly) NSNumber *limit;
 
@@ -37,11 +42,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param path The path to the file you want to see the revisions of.
+/// @param mode Determines the behavior of the API in listing the revisions for
+/// a given file path or id.
 /// @param limit The maximum number of revision entries returned.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPath:(NSString *)path limit:(nullable NSNumber *)limit;
+- (instancetype)initWithPath:(NSString *)path
+                        mode:(nullable DBFILESListRevisionsMode *)mode
+                       limit:(nullable NSNumber *)limit;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -72,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListRevisionsArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESListRevisionsArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESListRevisionsArg *)instance;
 
 ///
 /// Deserializes `DBFILESListRevisionsArg` instances.

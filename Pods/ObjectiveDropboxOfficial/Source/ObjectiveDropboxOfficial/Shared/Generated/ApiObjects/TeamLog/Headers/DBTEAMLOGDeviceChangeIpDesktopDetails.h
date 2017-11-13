@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceChangeIpDesktopDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGDeviceChangeIpDesktopDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceChangeIpDesktopDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceChangeIpDesktopDetails` instances.

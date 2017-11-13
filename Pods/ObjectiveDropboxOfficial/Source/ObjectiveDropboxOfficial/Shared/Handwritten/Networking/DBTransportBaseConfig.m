@@ -27,10 +27,42 @@
                      userAgent:(NSString *)userAgent
                     asMemberId:(NSString *)asMemberId
              additionalHeaders:(NSDictionary<NSString *, NSString *> *)additionalHeaders {
+  return [self initWithAppKey:appKey
+                    appSecret:appSecret
+               hostnameConfig:nil
+                    userAgent:userAgent
+                   asMemberId:asMemberId
+            additionalHeaders:additionalHeaders];
+}
+
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     appSecret:(NSString *)appSecret
+                hostnameConfig:(DBTransportBaseHostnameConfig *)hostnameConfig
+                     userAgent:(NSString *)userAgent
+                    asMemberId:(NSString *)asMemberId
+             additionalHeaders:(NSDictionary<NSString *, NSString *> *)additionalHeaders {
+  return [self initWithAppKey:appKey
+                    appSecret:appSecret
+               hostnameConfig:hostnameConfig
+                  redirectURL:nil
+                    userAgent:userAgent
+                   asMemberId:asMemberId
+            additionalHeaders:additionalHeaders];
+}
+
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     appSecret:(NSString *)appSecret
+                hostnameConfig:(DBTransportBaseHostnameConfig *)hostnameConfig
+                   redirectURL:(NSString *)redirectURL
+                     userAgent:(NSString *)userAgent
+                    asMemberId:(NSString *)asMemberId
+             additionalHeaders:(NSDictionary<NSString *, NSString *> *)additionalHeaders {
   if (self = [super init]) {
     _userAgent = userAgent;
     _appKey = appKey;
     _appSecret = appSecret;
+    _redirectURL = redirectURL;
+    _hostnameConfig = hostnameConfig;
     _asMemberId = asMemberId;
     _additionalHeaders = additionalHeaders;
   }

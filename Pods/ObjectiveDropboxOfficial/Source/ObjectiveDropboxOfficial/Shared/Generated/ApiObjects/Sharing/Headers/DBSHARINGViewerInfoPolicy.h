@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGViewerInfoPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGViewerInfoPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGViewerInfoPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGViewerInfoPolicy *)instance;
 
 ///
 /// Deserializes `DBSHARINGViewerInfoPolicy` instances.

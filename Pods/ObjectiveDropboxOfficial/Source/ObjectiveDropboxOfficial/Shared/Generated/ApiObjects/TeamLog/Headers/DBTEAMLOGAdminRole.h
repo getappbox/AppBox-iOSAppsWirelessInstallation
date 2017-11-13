@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAdminRoleTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAdminRole` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGAdminRole *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGAdminRole *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAdminRole` instances.

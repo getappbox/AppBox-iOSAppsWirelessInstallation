@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGGetFileMetadataErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetFileMetadataError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGGetFileMetadataError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGGetFileMetadataError *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetFileMetadataError` instances.

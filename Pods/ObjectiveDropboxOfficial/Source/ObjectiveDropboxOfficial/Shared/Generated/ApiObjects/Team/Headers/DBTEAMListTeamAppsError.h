@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `ListTeamAppsError` union.
 ///
-/// Error returned by `linkedAppsListTeamLinkedApps`
+/// Error returned by `linkedAppsListTeamLinkedApps`.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBTEAMListTeamAppsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListTeamAppsError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMListTeamAppsError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMListTeamAppsError *)instance;
 
 ///
 /// Deserializes `DBTEAMListTeamAppsError` instances.

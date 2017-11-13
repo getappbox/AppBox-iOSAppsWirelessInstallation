@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderStatus` instances.

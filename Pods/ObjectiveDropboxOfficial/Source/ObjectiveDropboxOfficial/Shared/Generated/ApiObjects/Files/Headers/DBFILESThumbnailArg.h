@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESThumbnailArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESThumbnailArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESThumbnailArg *)instance;
 
 ///
 /// Deserializes `DBFILESThumbnailArg` instances.

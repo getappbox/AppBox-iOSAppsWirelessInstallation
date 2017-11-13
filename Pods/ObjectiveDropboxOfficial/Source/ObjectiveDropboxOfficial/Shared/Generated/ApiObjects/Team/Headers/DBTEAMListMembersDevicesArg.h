@@ -28,16 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// At the first call to the `devicesListMembersDevices` the cursor shouldn't be
 /// passed. Then, if the result of the call includes a cursor, the following
 /// requests should include the received cursors in order to receive the next
-/// sub list of team devices
+/// sub list of team devices.
 @property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
-/// Whether to list web sessions of the team members
+/// Whether to list web sessions of the team members.
 @property (nonatomic, readonly) NSNumber *includeWebSessions;
 
-/// Whether to list desktop clients of the team members
+/// Whether to list desktop clients of the team members.
 @property (nonatomic, readonly) NSNumber *includeDesktopClients;
 
-/// Whether to list mobile clients of the team members
+/// Whether to list mobile clients of the team members.
 @property (nonatomic, readonly) NSNumber *includeMobileClients;
 
 #pragma mark - Constructors
@@ -48,12 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param cursor At the first call to the `devicesListMembersDevices` the
 /// cursor shouldn't be passed. Then, if the result of the call includes a
 /// cursor, the following requests should include the received cursors in order
-/// to receive the next sub list of team devices
-/// @param includeWebSessions Whether to list web sessions of the team members
+/// to receive the next sub list of team devices.
+/// @param includeWebSessions Whether to list web sessions of the team members.
 /// @param includeDesktopClients Whether to list desktop clients of the team
-/// members
+/// members.
 /// @param includeMobileClients Whether to list mobile clients of the team
-/// members
+/// members.
 ///
 /// @return An initialized instance.
 ///
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListMembersDevicesArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMListMembersDevicesArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMListMembersDevicesArg *)instance;
 
 ///
 /// Deserializes `DBTEAMListMembersDevicesArg` instances.

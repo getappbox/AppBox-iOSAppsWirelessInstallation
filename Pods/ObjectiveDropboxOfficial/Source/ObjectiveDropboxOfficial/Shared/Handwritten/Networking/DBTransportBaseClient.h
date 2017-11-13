@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAccessToken:(NSString *)accessToken
+- (instancetype)initWithAccessToken:(nullable NSString *)accessToken
                            tokenUid:(nullable NSString *)tokenUid
                     transportConfig:(DBTransportBaseConfig *)transportConfig;
 

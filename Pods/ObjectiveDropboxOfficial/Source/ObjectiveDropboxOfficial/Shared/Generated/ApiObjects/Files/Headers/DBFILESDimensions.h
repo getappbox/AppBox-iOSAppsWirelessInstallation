@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDimensions` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESDimensions *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESDimensions *)instance;
 
 ///
 /// Deserializes `DBFILESDimensions` instances.

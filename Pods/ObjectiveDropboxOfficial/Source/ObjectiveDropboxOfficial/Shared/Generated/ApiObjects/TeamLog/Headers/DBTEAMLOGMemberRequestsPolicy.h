@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGMemberRequestsPolicy` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
   /// (no description).
+  DBTEAMLOGMemberRequestsPolicyAutoAccept,
+
+  /// (no description).
   DBTEAMLOGMemberRequestsPolicyDisabled,
 
   /// (no description).
   DBTEAMLOGMemberRequestsPolicyRequireApproval,
-
-  /// (no description).
-  DBTEAMLOGMemberRequestsPolicyAutoApproval,
 
   /// (no description).
   DBTEAMLOGMemberRequestsPolicyOther,
@@ -46,6 +46,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
 @property (nonatomic, readonly) DBTEAMLOGMemberRequestsPolicyTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "auto_accept".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAutoAccept;
 
 ///
 /// Initializes union class with tag state of "disabled".
@@ -62,13 +69,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
 - (instancetype)initWithRequireApproval;
 
 ///
-/// Initializes union class with tag state of "auto_approval".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithAutoApproval;
-
-///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -78,6 +78,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "auto_accept".
+///
+/// @return Whether the union's current tag state has value "auto_accept".
+///
+- (BOOL)isAutoAccept;
 
 ///
 /// Retrieves whether the union's current tag state has value "disabled".
@@ -93,13 +100,6 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
 /// @return Whether the union's current tag state has value "require_approval".
 ///
 - (BOOL)isRequireApproval;
-
-///
-/// Retrieves whether the union's current tag state has value "auto_approval".
-///
-/// @return Whether the union's current tag state has value "auto_approval".
-///
-- (BOOL)isAutoApproval;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberRequestsPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGMemberRequestsPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberRequestsPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberRequestsPolicy` instances.

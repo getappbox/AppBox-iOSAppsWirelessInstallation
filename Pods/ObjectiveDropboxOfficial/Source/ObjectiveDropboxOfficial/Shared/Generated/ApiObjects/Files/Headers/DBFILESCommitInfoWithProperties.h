@@ -9,9 +9,9 @@
 #import "DBFILESCommitInfo.h"
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESPropertyGroup;
 @class DBFILESCommitInfoWithProperties;
 @class DBFILESWriteMode;
-@class DBPROPERTIESPropertyGroup;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// List of custom properties to add to file.
-@property (nonatomic, readonly, nullable) NSArray<DBPROPERTIESPropertyGroup *> *propertyGroups;
+@property (nonatomic, readonly, nullable) NSArray<DBFILEPROPERTIESPropertyGroup *> *propertyGroups;
 
 #pragma mark - Constructors
 
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
                   autorename:(nullable NSNumber *)autorename
               clientModified:(nullable NSDate *)clientModified
                         mute:(nullable NSNumber *)mute
-              propertyGroups:(nullable NSArray<DBPROPERTIESPropertyGroup *> *)propertyGroups;
+              propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCommitInfoWithProperties` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESCommitInfoWithProperties *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESCommitInfoWithProperties *)instance;
 
 ///
 /// Deserializes `DBFILESCommitInfoWithProperties` instances.

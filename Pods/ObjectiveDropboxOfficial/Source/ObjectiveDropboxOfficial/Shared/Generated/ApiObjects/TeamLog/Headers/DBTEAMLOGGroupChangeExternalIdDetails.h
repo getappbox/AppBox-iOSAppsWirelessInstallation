@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupChangeExternalIdDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupChangeExternalIdDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupChangeExternalIdDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupChangeExternalIdDetails` instances.

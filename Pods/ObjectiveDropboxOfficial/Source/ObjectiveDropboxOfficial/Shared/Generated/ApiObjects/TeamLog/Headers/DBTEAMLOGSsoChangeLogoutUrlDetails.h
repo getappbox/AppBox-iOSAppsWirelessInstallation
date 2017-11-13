@@ -27,8 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Previous single sign-on logout URL.
-@property (nonatomic, readonly, copy) NSString *previousValue;
+/// Previous single sign-on logout URL. Might be missing due to historical data
+/// gap.
+@property (nonatomic, readonly, copy, nullable) NSString *previousValue;
 
 /// New single sign-on logout URL. Might be missing due to historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *dNewValue;
@@ -38,23 +39,23 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousValue Previous single sign-on logout URL.
+/// @param previousValue Previous single sign-on logout URL. Might be missing
+/// due to historical data gap.
 /// @param dNewValue New single sign-on logout URL. Might be missing due to
 /// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousValue:(NSString *)previousValue dNewValue:(nullable NSString *)dNewValue;
+- (instancetype)initWithPreviousValue:(nullable NSString *)previousValue dNewValue:(nullable NSString *)dNewValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param previousValue Previous single sign-on logout URL.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousValue:(NSString *)previousValue;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -76,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoChangeLogoutUrlDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSsoChangeLogoutUrlDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoChangeLogoutUrlDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoChangeLogoutUrlDetails` instances.

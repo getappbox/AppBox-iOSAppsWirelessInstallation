@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddFileMemberArgs` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGAddFileMemberArgs *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGAddFileMemberArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddFileMemberArgs` instances.

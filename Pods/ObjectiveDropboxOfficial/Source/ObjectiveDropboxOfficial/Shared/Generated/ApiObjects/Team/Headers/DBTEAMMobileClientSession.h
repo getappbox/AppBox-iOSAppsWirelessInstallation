@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MobileClientSession` struct.
 ///
-/// Information about linked Dropbox mobile client sessions
+/// Information about linked Dropbox mobile client sessions.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -29,19 +29,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The device name
+/// The device name.
 @property (nonatomic, readonly, copy) NSString *deviceName;
 
-/// The mobile application type
+/// The mobile application type.
 @property (nonatomic, readonly) DBTEAMMobileClientPlatform *clientType;
 
-/// The dropbox client version
+/// The dropbox client version.
 @property (nonatomic, readonly, copy, nullable) NSString *clientVersion;
 
-/// The hosting OS version
+/// The hosting OS version.
 @property (nonatomic, readonly, copy, nullable) NSString *osVersion;
 
-/// last carrier used by the device
+/// last carrier used by the device.
 @property (nonatomic, readonly, copy, nullable) NSString *lastCarrier;
 
 #pragma mark - Constructors
@@ -49,17 +49,17 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param sessionId The session id
-/// @param deviceName The device name
-/// @param clientType The mobile application type
-/// @param ipAddress The IP address of the last activity from this session
+/// @param sessionId The session id.
+/// @param deviceName The device name.
+/// @param clientType The mobile application type.
+/// @param ipAddress The IP address of the last activity from this session.
 /// @param country The country from which the last activity from this session
-/// was made
-/// @param created The time this session was created
-/// @param updated The time of the last activity from this session
-/// @param clientVersion The dropbox client version
-/// @param osVersion The hosting OS version
-/// @param lastCarrier last carrier used by the device
+/// was made.
+/// @param created The time this session was created.
+/// @param updated The time of the last activity from this session.
+/// @param clientVersion The dropbox client version.
+/// @param osVersion The hosting OS version.
+/// @param lastCarrier last carrier used by the device.
 ///
 /// @return An initialized instance.
 ///
@@ -78,9 +78,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param sessionId The session id
-/// @param deviceName The device name
-/// @param clientType The mobile application type
+/// @param sessionId The session id.
+/// @param deviceName The device name.
+/// @param clientType The mobile application type.
 ///
 /// @return An initialized instance.
 ///
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMobileClientSession` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMobileClientSession *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMobileClientSession *)instance;
 
 ///
 /// Deserializes `DBTEAMMobileClientSession` instances.

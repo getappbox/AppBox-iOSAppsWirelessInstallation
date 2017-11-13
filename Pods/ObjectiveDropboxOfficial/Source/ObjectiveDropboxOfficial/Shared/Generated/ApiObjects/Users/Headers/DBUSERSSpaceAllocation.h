@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSSpaceAllocation` API object.
 ///
-+ (NSDictionary *)serialize:(DBUSERSSpaceAllocation *)instance;
++ (nullable NSDictionary *)serialize:(DBUSERSSpaceAllocation *)instance;
 
 ///
 /// Deserializes `DBUSERSSpaceAllocation` instances.

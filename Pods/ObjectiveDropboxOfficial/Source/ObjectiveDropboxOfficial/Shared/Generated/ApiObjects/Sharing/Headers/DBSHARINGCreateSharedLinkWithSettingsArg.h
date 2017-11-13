@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The path to be shared by the shared link
+/// The path to be shared by the shared link.
 @property (nonatomic, readonly, copy) NSString *path;
 
-/// The requested settings for the newly created shared link
+/// The requested settings for the newly created shared link.
 @property (nonatomic, readonly, nullable) DBSHARINGSharedLinkSettings *settings;
 
 #pragma mark - Constructors
@@ -37,8 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param path The path to be shared by the shared link
-/// @param settings The requested settings for the newly created shared link
+/// @param path The path to be shared by the shared link.
+/// @param settings The requested settings for the newly created shared link.
 ///
 /// @return An initialized instance.
 ///
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param path The path to be shared by the shared link
+/// @param path The path to be shared by the shared link.
 ///
 /// @return An initialized instance.
 ///
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCreateSharedLinkWithSettingsArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGCreateSharedLinkWithSettingsArg` instances.

@@ -137,6 +137,7 @@
 #import "DBSHARINGUpdateFolderMemberError.h"
 #import "DBSHARINGUpdateFolderPolicyArg.h"
 #import "DBSHARINGUpdateFolderPolicyError.h"
+#import "DBSHARINGUserFileMembershipInfo.h"
 #import "DBSHARINGUserMembershipInfo.h"
 #import "DBSHARINGViewerInfoPolicy.h"
 #import "DBSHARINGVisibility.h"

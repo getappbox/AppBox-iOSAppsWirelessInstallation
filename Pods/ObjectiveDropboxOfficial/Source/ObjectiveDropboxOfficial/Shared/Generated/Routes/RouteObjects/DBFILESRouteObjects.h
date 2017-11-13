@@ -74,6 +74,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the getThumbnail route object.
 + (DBRoute *)DBFILESGetThumbnail;
 
+/// Accessor method for the getThumbnailBatch route object.
++ (DBRoute *)DBFILESGetThumbnailBatch;
+
 /// Accessor method for the listFolder route object.
 + (DBRoute *)DBFILESListFolder;
 

@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFoldersArgs` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGListFoldersArgs *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGListFoldersArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFoldersArgs` instances.

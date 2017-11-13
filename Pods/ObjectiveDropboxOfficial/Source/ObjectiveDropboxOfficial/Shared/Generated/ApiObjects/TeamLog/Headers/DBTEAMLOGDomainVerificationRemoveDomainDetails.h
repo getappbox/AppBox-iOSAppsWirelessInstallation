@@ -30,27 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Domain names.
 @property (nonatomic, readonly) NSArray<NSString *> *domainNames;
 
-/// Domain name verification method. Might be missing due to historical data
-/// gap.
-@property (nonatomic, readonly, copy, nullable) NSString *verificationMethod;
-
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
-///
-/// @param domainNames Domain names.
-/// @param verificationMethod Domain name verification method. Might be missing
-/// due to historical data gap.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithDomainNames:(NSArray<NSString *> *)domainNames
-                 verificationMethod:(nullable NSString *)verificationMethod;
-
-///
-/// Convenience constructor (exposes only non-nullable instance variables with
-/// no default value).
 ///
 /// @param domainNames Domain names.
 ///
@@ -79,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainVerificationRemoveDomainDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGDomainVerificationRemoveDomainDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainVerificationRemoveDomainDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainVerificationRemoveDomainDetails` instances.

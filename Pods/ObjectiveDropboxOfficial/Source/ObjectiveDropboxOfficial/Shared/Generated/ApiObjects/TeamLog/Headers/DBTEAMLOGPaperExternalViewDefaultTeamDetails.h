@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperExternalViewDefaultTeamDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperExternalViewDefaultTeamDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperExternalViewDefaultTeamDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperExternalViewDefaultTeamDetails` instances.

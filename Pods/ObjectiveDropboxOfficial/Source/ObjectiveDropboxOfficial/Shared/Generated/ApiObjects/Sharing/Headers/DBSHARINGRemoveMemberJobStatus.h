@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRemoveMemberJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRemoveMemberJobStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGRemoveMemberJobStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGRemoveMemberJobStatus *)instance;
 
 ///
 /// Deserializes `DBSHARINGRemoveMemberJobStatus` instances.

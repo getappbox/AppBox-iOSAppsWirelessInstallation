@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGSharingMemberPolicy` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGSharingMemberPolicyTag) {
   /// (no description).
-  DBTEAMLOGSharingMemberPolicyTeamOnly,
+  DBTEAMLOGSharingMemberPolicyAllow,
 
   /// (no description).
-  DBTEAMLOGSharingMemberPolicyAnyone,
+  DBTEAMLOGSharingMemberPolicyForbid,
 
   /// (no description).
   DBTEAMLOGSharingMemberPolicyOther,
@@ -47,18 +47,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingMemberPolicyTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "team_only".
+/// Initializes union class with tag state of "allow".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamOnly;
+- (instancetype)initWithAllow;
 
 ///
-/// Initializes union class with tag state of "anyone".
+/// Initializes union class with tag state of "forbid".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAnyone;
+- (instancetype)initWithForbid;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -72,18 +72,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingMemberPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "team_only".
+/// Retrieves whether the union's current tag state has value "allow".
 ///
-/// @return Whether the union's current tag state has value "team_only".
+/// @return Whether the union's current tag state has value "allow".
 ///
-- (BOOL)isTeamOnly;
+- (BOOL)isAllow;
 
 ///
-/// Retrieves whether the union's current tag state has value "anyone".
+/// Retrieves whether the union's current tag state has value "forbid".
 ///
-/// @return Whether the union's current tag state has value "anyone".
+/// @return Whether the union's current tag state has value "forbid".
 ///
-- (BOOL)isAnyone;
+- (BOOL)isForbid;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingMemberPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharingMemberPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharingMemberPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharingMemberPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharingMemberPolicy` instances.

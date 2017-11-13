@@ -11,8 +11,11 @@
 
    Based on Unzip ioapi.c version 0.22, May 19th, 2003
 
+   Copyright (C) 2012-2017 Nathan Moinvaziri
+     https://github.com/nmoinvaz/minizip
+   Copyright (C) 2003 Justin Fletcher
    Copyright (C) 1998-2003 Gilles Vollant
-             (C) 2003 Justin Fletcher
+     http://www.winimage.com/zLibDll/minizip.html
 
    This file is under the same license as the Unzip tool it is distributed
    with.
@@ -30,14 +33,14 @@
 
 #ifndef IOMEM_BUFFERSIZE
 #  define IOMEM_BUFFERSIZE (UINT16_MAX)
-#endif 
+#endif
 
-voidpf ZCALLBACK fopen_mem_func(voidpf opaque, const char *filename, int mode)
+voidpf ZCALLBACK fopen_mem_func(voidpf opaque, ZIP_UNUSED const char *filename, int mode)
 {
     ourmemory_t *mem = (ourmemory_t *)opaque;
     if (mem == NULL)
         return NULL; /* Mem structure passed in was null */
-    
+
     if (mode & ZLIB_FILEFUNC_MODE_CREATE)
     {
         if (mem->grow)
@@ -56,13 +59,13 @@ voidpf ZCALLBACK fopen_mem_func(voidpf opaque, const char *filename, int mode)
     return mem;
 }
 
-voidpf ZCALLBACK fopendisk_mem_func(voidpf opaque, voidpf stream, uint32_t number_disk, int mode)
+voidpf ZCALLBACK fopendisk_mem_func(ZIP_UNUSED voidpf opaque, ZIP_UNUSED voidpf stream, ZIP_UNUSED uint32_t number_disk, ZIP_UNUSED int mode)
 {
     /* Not used */
     return NULL;
 }
 
-uint32_t ZCALLBACK fread_mem_func(voidpf opaque, voidpf stream, void *buf, uint32_t size)
+uint32_t ZCALLBACK fread_mem_func(ZIP_UNUSED voidpf opaque, voidpf stream, void *buf, uint32_t size)
 {
     ourmemory_t *mem = (ourmemory_t *)stream;
 
@@ -75,7 +78,7 @@ uint32_t ZCALLBACK fread_mem_func(voidpf opaque, voidpf stream, void *buf, uint3
     return size;
 }
 
-uint32_t ZCALLBACK fwrite_mem_func(voidpf opaque, voidpf stream, const void *buf, uint32_t size)
+uint32_t ZCALLBACK fwrite_mem_func(ZIP_UNUSED voidpf opaque, voidpf stream, const void *buf, uint32_t size)
 {
     ourmemory_t *mem = (ourmemory_t *)stream;
     uint32_t newmemsize = 0;
@@ -107,13 +110,13 @@ uint32_t ZCALLBACK fwrite_mem_func(voidpf opaque, voidpf stream, const void *buf
     return size;
 }
 
-long ZCALLBACK ftell_mem_func(voidpf opaque, voidpf stream)
+long ZCALLBACK ftell_mem_func(ZIP_UNUSED voidpf opaque, voidpf stream)
 {
     ourmemory_t *mem = (ourmemory_t *)stream;
     return mem->cur_offset;
 }
 
-long ZCALLBACK fseek_mem_func(voidpf opaque, voidpf stream, uint32_t offset, int origin)
+long ZCALLBACK fseek_mem_func(ZIP_UNUSED voidpf opaque, voidpf stream, uint32_t offset, int origin)
 {
     ourmemory_t *mem = (ourmemory_t *)stream;
     uint32_t new_pos = 0;
@@ -128,7 +131,7 @@ long ZCALLBACK fseek_mem_func(voidpf opaque, voidpf stream, uint32_t offset, int
         case ZLIB_FILEFUNC_SEEK_SET:
             new_pos = offset;
             break;
-        default: 
+        default:
             return -1;
     }
 
@@ -138,13 +141,13 @@ long ZCALLBACK fseek_mem_func(voidpf opaque, voidpf stream, uint32_t offset, int
     return 0;
 }
 
-int ZCALLBACK fclose_mem_func(voidpf opaque, voidpf stream)
+int ZCALLBACK fclose_mem_func(ZIP_UNUSED voidpf opaque, ZIP_UNUSED voidpf stream)
 {
     /* Even with grow = 1, caller must always free() memory */
     return 0;
 }
 
-int ZCALLBACK ferror_mem_func(voidpf opaque, voidpf stream)
+int ZCALLBACK ferror_mem_func(ZIP_UNUSED voidpf opaque, ZIP_UNUSED voidpf stream)
 {
     /* We never return errors */
     return 0;

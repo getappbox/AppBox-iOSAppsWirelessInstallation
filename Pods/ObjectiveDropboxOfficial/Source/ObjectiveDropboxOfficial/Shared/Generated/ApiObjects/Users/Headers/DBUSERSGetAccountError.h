@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, DBUSERSGetAccountErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSGetAccountError` API object.
 ///
-+ (NSDictionary *)serialize:(DBUSERSGetAccountError *)instance;
++ (nullable NSDictionary *)serialize:(DBUSERSGetAccountError *)instance;
 
 ///
 /// Deserializes `DBUSERSGetAccountError` instances.

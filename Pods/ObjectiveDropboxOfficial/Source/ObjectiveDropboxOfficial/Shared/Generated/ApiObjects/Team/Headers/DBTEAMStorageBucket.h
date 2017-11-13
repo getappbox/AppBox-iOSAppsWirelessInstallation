@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMStorageBucket` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMStorageBucket *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMStorageBucket *)instance;
 
 ///
 /// Deserializes `DBTEAMStorageBucket` instances.

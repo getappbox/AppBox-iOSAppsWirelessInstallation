@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGListFoldersContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFoldersContinueError` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGListFoldersContinueError *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGListFoldersContinueError *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFoldersContinueError` instances.

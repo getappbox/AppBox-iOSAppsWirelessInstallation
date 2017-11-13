@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Event unique identifier.
 @property (nonatomic, readonly, copy) NSString *eventUuid;
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
-/// Parent asset index.
-@property (nonatomic, readonly) NSNumber *parentIndex;
+/// Parent asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *parentAssetIndex;
 
 #pragma mark - Constructors
 
@@ -42,14 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param eventUuid Event unique identifier.
-/// @param targetIndex Target asset index.
-/// @param parentIndex Parent asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
+/// @param parentAssetIndex Parent asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEventUuid:(NSString *)eventUuid
-                      targetIndex:(NSNumber *)targetIndex
-                      parentIndex:(NSNumber *)parentIndex;
+                 targetAssetIndex:(NSNumber *)targetAssetIndex
+                 parentAssetIndex:(NSNumber *)parentAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperContentAddToFolderDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperContentAddToFolderDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperContentAddToFolderDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperContentAddToFolderDetails` instances.
