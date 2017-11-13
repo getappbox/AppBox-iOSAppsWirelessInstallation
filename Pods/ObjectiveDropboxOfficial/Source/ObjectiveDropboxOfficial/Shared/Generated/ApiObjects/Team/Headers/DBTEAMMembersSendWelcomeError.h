@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSendWelcomeErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSendWelcomeError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersSendWelcomeError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersSendWelcomeError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSendWelcomeError` instances.

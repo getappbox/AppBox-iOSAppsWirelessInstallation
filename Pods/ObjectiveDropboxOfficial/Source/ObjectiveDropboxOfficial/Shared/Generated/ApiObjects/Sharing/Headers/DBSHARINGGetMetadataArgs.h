@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetMetadataArgs` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGGetMetadataArgs *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGGetMetadataArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetMetadataArgs` instances.

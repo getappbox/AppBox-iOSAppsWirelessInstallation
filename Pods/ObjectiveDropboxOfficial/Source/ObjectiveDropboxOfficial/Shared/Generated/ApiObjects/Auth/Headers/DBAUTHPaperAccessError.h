@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBAUTHPaperAccessErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHPaperAccessError` API object.
 ///
-+ (NSDictionary *)serialize:(DBAUTHPaperAccessError *)instance;
++ (nullable NSDictionary *)serialize:(DBAUTHPaperAccessError *)instance;
 
 ///
 /// Deserializes `DBAUTHPaperAccessError` instances.

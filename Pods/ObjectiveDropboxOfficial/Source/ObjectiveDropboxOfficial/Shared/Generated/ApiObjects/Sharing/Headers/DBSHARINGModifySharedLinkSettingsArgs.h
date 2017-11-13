@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// URL of the shared link to change its settings
+/// URL of the shared link to change its settings.
 @property (nonatomic, readonly, copy) NSString *url;
 
 /// Set of settings for the shared link.
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param url URL of the shared link to change its settings
+/// @param url URL of the shared link to change its settings.
 /// @param settings Set of settings for the shared link.
 /// @param removeExpiration If set to true, removes the expiration of the shared
 /// link.
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param url URL of the shared link to change its settings
+/// @param url URL of the shared link to change its settings.
 /// @param settings Set of settings for the shared link.
 ///
 /// @return An initialized instance.
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGModifySharedLinkSettingsArgs` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGModifySharedLinkSettingsArgs *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGModifySharedLinkSettingsArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGModifySharedLinkSettingsArgs` instances.

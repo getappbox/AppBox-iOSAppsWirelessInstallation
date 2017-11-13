@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGoogleSsoChangePolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGGoogleSsoChangePolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGGoogleSsoChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGoogleSsoChangePolicyDetails` instances.

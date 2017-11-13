@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGroupMembershipInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGGroupMembershipInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGGroupMembershipInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGGroupMembershipInfo` instances.

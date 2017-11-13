@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAppUnlinkUserDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGAppUnlinkUserDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGAppUnlinkUserDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAppUnlinkUserDetails` instances.

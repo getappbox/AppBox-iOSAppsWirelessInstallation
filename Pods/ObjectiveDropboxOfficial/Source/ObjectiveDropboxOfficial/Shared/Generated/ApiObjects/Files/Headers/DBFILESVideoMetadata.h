@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESVideoMetadata` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESVideoMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESVideoMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESVideoMetadata` instances.

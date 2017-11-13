@@ -49,6 +49,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// programmatically via the API the origin represents the API client.
 @property (nonatomic, readonly, nullable) DBTEAMLOGOriginLogInfo *origin;
 
+/// True if the action involved a non team member either as the actor or as one
+/// of the affected users.
+@property (nonatomic, readonly) NSNumber *involveNonTeamMember;
+
+/// The user or team on whose behalf the actor performed the action.
+@property (nonatomic, readonly) DBTEAMLOGContextLogInfo *context;
+
 /// Zero or more users and/or groups that are affected by the action. Note that
 /// this list doesn't include any actors or users in context.
 @property (nonatomic, readonly, nullable) NSArray<DBTEAMLOGParticipantLogInfo *> *participants;
@@ -57,13 +64,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Dropbox files and folders but in the future we might add other asset types
 /// such as Paper documents, folders, projects, etc.
 @property (nonatomic, readonly, nullable) NSArray<DBTEAMLOGAssetLogInfo *> *assets;
-
-/// True if the action involved a non team member either as the actor or as one
-/// of the affected users.
-@property (nonatomic, readonly) NSNumber *involveNonTeamMember;
-
-/// The user or team on whose behalf the actor performed the action.
-@property (nonatomic, readonly) DBTEAMLOGContextLogInfo *context;
 
 /// The particular type of action taken.
 @property (nonatomic, readonly) DBTEAMLOGEventType *eventType;
@@ -157,7 +157,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamEvent` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGTeamEvent *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamEvent *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamEvent` instances.

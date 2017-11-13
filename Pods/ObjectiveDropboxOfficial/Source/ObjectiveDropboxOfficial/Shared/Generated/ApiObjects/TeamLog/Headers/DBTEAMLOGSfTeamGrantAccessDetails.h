@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
@@ -38,12 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex originalFolderName:(NSString *)originalFolderName;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex originalFolderName:(NSString *)originalFolderName;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfTeamGrantAccessDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSfTeamGrantAccessDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSfTeamGrantAccessDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfTeamGrantAccessDetails` instances.

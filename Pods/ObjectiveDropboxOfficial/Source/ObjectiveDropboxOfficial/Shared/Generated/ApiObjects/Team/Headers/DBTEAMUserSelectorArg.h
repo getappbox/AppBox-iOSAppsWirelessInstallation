@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMUserSelectorArgTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMUserSelectorArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMUserSelectorArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMUserSelectorArg *)instance;
 
 ///
 /// Deserializes `DBTEAMUserSelectorArg` instances.

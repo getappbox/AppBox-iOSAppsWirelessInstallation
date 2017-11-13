@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRemovedStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMRemovedStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMRemovedStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRemovedStatus` instances.

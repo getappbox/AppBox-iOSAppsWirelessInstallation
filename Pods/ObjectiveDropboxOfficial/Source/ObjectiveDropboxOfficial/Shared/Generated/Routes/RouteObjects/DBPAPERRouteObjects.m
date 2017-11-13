@@ -20,7 +20,10 @@
 #import "DBPAPERListUsersOnPaperDocResponse.h"
 #import "DBPAPERPaperApiBaseError.h"
 #import "DBPAPERPaperApiCursorError.h"
+#import "DBPAPERPaperDocCreateError.h"
+#import "DBPAPERPaperDocCreateUpdateResult.h"
 #import "DBPAPERPaperDocExportResult.h"
+#import "DBPAPERPaperDocUpdateError.h"
 #import "DBPAPERSharingPolicy.h"
 #import "DBPAPERSharingPublicPolicyType.h"
 #import "DBPAPERSharingTeamPolicyType.h"
@@ -35,6 +38,7 @@
 @implementation DBPAPERRouteObjects
 
 static DBRoute *DBPAPERDocsArchive;
+static DBRoute *DBPAPERDocsCreate;
 static DBRoute *DBPAPERDocsDownload;
 static DBRoute *DBPAPERDocsFolderUsersList;
 static DBRoute *DBPAPERDocsFolderUsersListContinue;
@@ -44,6 +48,7 @@ static DBRoute *DBPAPERDocsListContinue;
 static DBRoute *DBPAPERDocsPermanentlyDelete;
 static DBRoute *DBPAPERDocsSharingPolicyGet;
 static DBRoute *DBPAPERDocsSharingPolicySet;
+static DBRoute *DBPAPERDocsUpdate;
 static DBRoute *DBPAPERDocsUsersAdd;
 static DBRoute *DBPAPERDocsUsersList;
 static DBRoute *DBPAPERDocsUsersListContinue;
@@ -65,6 +70,24 @@ static DBRoute *DBPAPERDocsUsersRemove;
                        dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsArchive;
+}
+
++ (DBRoute *)DBPAPERDocsCreate {
+  if (!DBPAPERDocsCreate) {
+    DBPAPERDocsCreate = [[DBRoute alloc] init:@"docs/create"
+                                   namespace_:@"paper"
+                                   deprecated:@NO
+                                   resultType:[DBPAPERPaperDocCreateUpdateResult class]
+                                    errorType:[DBPAPERPaperDocCreateError class]
+                                        attrs:@{
+                                          @"auth" : @"user",
+                                          @"host" : @"api",
+                                          @"style" : @"upload"
+                                        }
+                        dataStructSerialBlock:nil
+                      dataStructDeserialBlock:nil];
+  }
+  return DBPAPERDocsCreate;
 }
 
 + (DBRoute *)DBPAPERDocsDownload {
@@ -227,6 +250,24 @@ static DBRoute *DBPAPERDocsUsersRemove;
                                 dataStructDeserialBlock:nil];
   }
   return DBPAPERDocsSharingPolicySet;
+}
+
++ (DBRoute *)DBPAPERDocsUpdate {
+  if (!DBPAPERDocsUpdate) {
+    DBPAPERDocsUpdate = [[DBRoute alloc] init:@"docs/update"
+                                   namespace_:@"paper"
+                                   deprecated:@NO
+                                   resultType:[DBPAPERPaperDocCreateUpdateResult class]
+                                    errorType:[DBPAPERPaperDocUpdateError class]
+                                        attrs:@{
+                                          @"auth" : @"user",
+                                          @"host" : @"api",
+                                          @"style" : @"upload"
+                                        }
+                        dataStructSerialBlock:nil
+                      dataStructDeserialBlock:nil];
+  }
+  return DBPAPERDocsUpdate;
 }
 
 + (DBRoute *)DBPAPERDocsUsersAdd {

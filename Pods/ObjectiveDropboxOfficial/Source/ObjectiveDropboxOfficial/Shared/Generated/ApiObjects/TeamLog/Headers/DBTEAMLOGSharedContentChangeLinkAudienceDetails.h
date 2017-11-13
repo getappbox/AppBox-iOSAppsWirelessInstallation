@@ -28,8 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Original shared folder name.
 @property (nonatomic, readonly, copy, nullable) NSString *originalFolderName;
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param dNewValue New link audience value.
 /// @param originalFolderName Original shared folder name.
 /// @param sharedFolderType Shared folder type. Might be missing due to
@@ -58,22 +58,22 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                          dNewValue:(DBTEAMLOGLinkAudience *)dNewValue
-                 originalFolderName:(nullable NSString *)originalFolderName
-                   sharedFolderType:(nullable NSString *)sharedFolderType
-                      previousValue:(nullable DBTEAMLOGLinkAudience *)previousValue;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                               dNewValue:(DBTEAMLOGLinkAudience *)dNewValue
+                      originalFolderName:(nullable NSString *)originalFolderName
+                        sharedFolderType:(nullable NSString *)sharedFolderType
+                           previousValue:(nullable DBTEAMLOGLinkAudience *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param dNewValue New link audience value.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex dNewValue:(DBTEAMLOGLinkAudience *)dNewValue;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex dNewValue:(DBTEAMLOGLinkAudience *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentChangeLinkAudienceDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeLinkAudienceDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeLinkAudienceDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentChangeLinkAudienceDetails` instances.

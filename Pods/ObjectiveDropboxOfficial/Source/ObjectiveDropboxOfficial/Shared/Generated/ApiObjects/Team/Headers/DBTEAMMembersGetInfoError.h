@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersGetInfoErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersGetInfoError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersGetInfoError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersGetInfoError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersGetInfoError` instances.

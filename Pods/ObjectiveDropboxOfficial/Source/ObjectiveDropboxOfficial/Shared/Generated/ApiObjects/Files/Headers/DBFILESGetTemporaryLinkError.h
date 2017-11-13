@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetTemporaryLinkError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESGetTemporaryLinkError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESGetTemporaryLinkError *)instance;
 
 ///
 /// Deserializes `DBFILESGetTemporaryLinkError` instances.

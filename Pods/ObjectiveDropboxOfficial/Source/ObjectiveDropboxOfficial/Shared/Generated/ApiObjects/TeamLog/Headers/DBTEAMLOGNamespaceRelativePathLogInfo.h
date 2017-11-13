@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGNamespaceRelativePathLogInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGNamespaceRelativePathLogInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGNamespaceRelativePathLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGNamespaceRelativePathLogInfo` instances.

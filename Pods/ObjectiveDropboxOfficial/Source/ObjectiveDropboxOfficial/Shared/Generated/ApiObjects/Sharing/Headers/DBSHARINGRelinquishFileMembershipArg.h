@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRelinquishFileMembershipArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGRelinquishFileMembershipArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGRelinquishFileMembershipArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGRelinquishFileMembershipArg` instances.

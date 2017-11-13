@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderListContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderListContinueError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderListContinueError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderListContinueError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderListContinueError` instances.

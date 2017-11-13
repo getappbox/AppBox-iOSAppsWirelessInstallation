@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSharingInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESSharingInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESSharingInfo *)instance;
 
 ///
 /// Deserializes `DBFILESSharingInfo` instances.

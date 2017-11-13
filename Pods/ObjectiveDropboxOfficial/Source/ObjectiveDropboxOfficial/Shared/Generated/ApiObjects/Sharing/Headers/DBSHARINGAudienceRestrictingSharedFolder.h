@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAudienceRestrictingSharedFolder` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGAudienceRestrictingSharedFolder *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGAudienceRestrictingSharedFolder *)instance;
 
 ///
 /// Deserializes `DBSHARINGAudienceRestrictingSharedFolder` instances.

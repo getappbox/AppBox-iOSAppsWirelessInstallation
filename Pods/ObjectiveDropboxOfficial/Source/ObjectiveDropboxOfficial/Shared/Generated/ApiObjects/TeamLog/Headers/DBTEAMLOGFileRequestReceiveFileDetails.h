@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// File request title.
-@property (nonatomic, readonly, copy) NSString *requestTitle;
+@property (nonatomic, readonly, copy, nullable) NSString *requestTitle;
 
 /// Submitted file names.
 @property (nonatomic, readonly) NSArray<NSString *> *submittedFileNames;
@@ -38,13 +38,23 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
+/// @param submittedFileNames Submitted file names.
 /// @param requestTitle File request title.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSubmittedFileNames:(NSArray<NSString *> *)submittedFileNames
+                              requestTitle:(nullable NSString *)requestTitle;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
 /// @param submittedFileNames Submitted file names.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithRequestTitle:(NSString *)requestTitle
-                  submittedFileNames:(NSArray<NSString *> *)submittedFileNames;
+- (instancetype)initWithSubmittedFileNames:(NSArray<NSString *> *)submittedFileNames;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -66,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestReceiveFileDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileRequestReceiveFileDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestReceiveFileDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestReceiveFileDetails` instances.

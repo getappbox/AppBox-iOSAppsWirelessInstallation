@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGPaperChangeDeploymentPolicyDetails;
-@class DBTEAMLOGPaperDeploymentPolicy;
+@class DBTEAMPOLICIESPaperDeploymentPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New Dropbox Paper deployment policy.
-@property (nonatomic, readonly) DBTEAMLOGPaperDeploymentPolicy *dNewValue;
+@property (nonatomic, readonly) DBTEAMPOLICIESPaperDeploymentPolicy *dNewValue;
 
 /// Previous Dropbox Paper deployment policy. Might be missing due to historical
 /// data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGPaperDeploymentPolicy *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESPaperDeploymentPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGPaperDeploymentPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGPaperDeploymentPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESPaperDeploymentPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMPOLICIESPaperDeploymentPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGPaperDeploymentPolicy *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMPOLICIESPaperDeploymentPolicy *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperChangeDeploymentPolicyDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGPaperChangeDeploymentPolicyDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperChangeDeploymentPolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperChangeDeploymentPolicyDetails` instances.

@@ -8,7 +8,19 @@
 #import "DBASYNCLaunchResultBase.h"
 #import "DBASYNCPollError.h"
 #import "DBASYNCPollResultBase.h"
-#import "DBFILESAddPropertiesError.h"
+#import "DBFILEPROPERTIESAddPropertiesError.h"
+#import "DBFILEPROPERTIESGetTemplateResult.h"
+#import "DBFILEPROPERTIESInvalidPropertyGroupError.h"
+#import "DBFILEPROPERTIESListTemplateResult.h"
+#import "DBFILEPROPERTIESLookUpPropertiesError.h"
+#import "DBFILEPROPERTIESLookupError.h"
+#import "DBFILEPROPERTIESPropertiesError.h"
+#import "DBFILEPROPERTIESPropertyFieldTemplate.h"
+#import "DBFILEPROPERTIESPropertyGroup.h"
+#import "DBFILEPROPERTIESPropertyGroupTemplate.h"
+#import "DBFILEPROPERTIESRemovePropertiesError.h"
+#import "DBFILEPROPERTIESTemplateError.h"
+#import "DBFILEPROPERTIESUpdatePropertiesError.h"
 #import "DBFILESAlphaGetMetadataError.h"
 #import "DBFILESCreateFolderError.h"
 #import "DBFILESCreateFolderResult.h"
@@ -30,7 +42,9 @@
 #import "DBFILESGetMetadataError.h"
 #import "DBFILESGetTemporaryLinkError.h"
 #import "DBFILESGetTemporaryLinkResult.h"
-#import "DBFILESInvalidPropertyGroupError.h"
+#import "DBFILESGetThumbnailBatchError.h"
+#import "DBFILESGetThumbnailBatchResult.h"
+#import "DBFILESGetThumbnailBatchResultEntry.h"
 #import "DBFILESListFolderContinueError.h"
 #import "DBFILESListFolderError.h"
 #import "DBFILESListFolderGetLatestCursorResult.h"
@@ -39,19 +53,16 @@
 #import "DBFILESListFolderResult.h"
 #import "DBFILESListRevisionsError.h"
 #import "DBFILESListRevisionsResult.h"
-#import "DBFILESLookUpPropertiesError.h"
 #import "DBFILESLookupError.h"
 #import "DBFILESMediaInfo.h"
 #import "DBFILESMetadata.h"
 #import "DBFILESPreviewError.h"
-#import "DBFILESPropertiesError.h"
 #import "DBFILESRelocationBatchError.h"
 #import "DBFILESRelocationBatchJobStatus.h"
 #import "DBFILESRelocationBatchLaunch.h"
 #import "DBFILESRelocationBatchResult.h"
 #import "DBFILESRelocationError.h"
 #import "DBFILESRelocationResult.h"
-#import "DBFILESRemovePropertiesError.h"
 #import "DBFILESRestoreError.h"
 #import "DBFILESSaveCopyReferenceError.h"
 #import "DBFILESSaveCopyReferenceResult.h"
@@ -62,7 +73,6 @@
 #import "DBFILESSearchMatch.h"
 #import "DBFILESSearchResult.h"
 #import "DBFILESThumbnailError.h"
-#import "DBFILESUpdatePropertiesError.h"
 #import "DBFILESUploadError.h"
 #import "DBFILESUploadErrorWithProperties.h"
 #import "DBFILESUploadSessionFinishBatchJobStatus.h"
@@ -75,12 +85,6 @@
 #import "DBFILESUploadWriteFailed.h"
 #import "DBFILESUserAuthRoutes.h"
 #import "DBFILESWriteError.h"
-#import "DBPROPERTIESGetPropertyTemplateResult.h"
-#import "DBPROPERTIESListPropertyTemplateIds.h"
-#import "DBPROPERTIESPropertyFieldTemplate.h"
-#import "DBPROPERTIESPropertyGroup.h"
-#import "DBPROPERTIESPropertyGroupTemplate.h"
-#import "DBPROPERTIESPropertyTemplateError.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 
@@ -105,6 +109,7 @@ static DBRoute *DBFILESGetMetadata;
 static DBRoute *DBFILESGetPreview;
 static DBRoute *DBFILESGetTemporaryLink;
 static DBRoute *DBFILESGetThumbnail;
+static DBRoute *DBFILESGetThumbnailBatch;
 static DBRoute *DBFILESListFolder;
 static DBRoute *DBFILESListFolderContinue;
 static DBRoute *DBFILESListFolderGetLatestCursor;
@@ -475,6 +480,24 @@ static DBRoute *DBFILESUploadSessionStart;
   return DBFILESGetThumbnail;
 }
 
++ (DBRoute *)DBFILESGetThumbnailBatch {
+  if (!DBFILESGetThumbnailBatch) {
+    DBFILESGetThumbnailBatch = [[DBRoute alloc] init:@"get_thumbnail_batch"
+                                          namespace_:@"files"
+                                          deprecated:@NO
+                                          resultType:[DBFILESGetThumbnailBatchResult class]
+                                           errorType:[DBFILESGetThumbnailBatchError class]
+                                               attrs:@{
+                                                 @"auth" : @"user",
+                                                 @"host" : @"content",
+                                                 @"style" : @"rpc"
+                                               }
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
+  }
+  return DBFILESGetThumbnailBatch;
+}
+
 + (DBRoute *)DBFILESListFolder {
   if (!DBFILESListFolder) {
     DBFILESListFolder = [[DBRoute alloc] init:@"list_folder"
@@ -659,9 +682,9 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESPropertiesAdd) {
     DBFILESPropertiesAdd = [[DBRoute alloc] init:@"properties/add"
                                       namespace_:@"files"
-                                      deprecated:@NO
+                                      deprecated:@YES
                                       resultType:nil
-                                       errorType:[DBFILESAddPropertiesError class]
+                                       errorType:[DBFILEPROPERTIESAddPropertiesError class]
                                            attrs:@{
                                              @"auth" : @"user",
                                              @"host" : @"api",
@@ -677,9 +700,9 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESPropertiesOverwrite) {
     DBFILESPropertiesOverwrite = [[DBRoute alloc] init:@"properties/overwrite"
                                             namespace_:@"files"
-                                            deprecated:@NO
+                                            deprecated:@YES
                                             resultType:nil
-                                             errorType:[DBFILESInvalidPropertyGroupError class]
+                                             errorType:[DBFILEPROPERTIESInvalidPropertyGroupError class]
                                                  attrs:@{
                                                    @"auth" : @"user",
                                                    @"host" : @"api",
@@ -695,9 +718,9 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESPropertiesRemove) {
     DBFILESPropertiesRemove = [[DBRoute alloc] init:@"properties/remove"
                                          namespace_:@"files"
-                                         deprecated:@NO
+                                         deprecated:@YES
                                          resultType:nil
-                                          errorType:[DBFILESRemovePropertiesError class]
+                                          errorType:[DBFILEPROPERTIESRemovePropertiesError class]
                                               attrs:@{
                                                 @"auth" : @"user",
                                                 @"host" : @"api",
@@ -713,9 +736,9 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESPropertiesTemplateGet) {
     DBFILESPropertiesTemplateGet = [[DBRoute alloc] init:@"properties/template/get"
                                               namespace_:@"files"
-                                              deprecated:@NO
-                                              resultType:[DBPROPERTIESGetPropertyTemplateResult class]
-                                               errorType:[DBPROPERTIESPropertyTemplateError class]
+                                              deprecated:@YES
+                                              resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                                               errorType:[DBFILEPROPERTIESTemplateError class]
                                                    attrs:@{
                                                      @"auth" : @"user",
                                                      @"host" : @"api",
@@ -731,9 +754,9 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESPropertiesTemplateList) {
     DBFILESPropertiesTemplateList = [[DBRoute alloc] init:@"properties/template/list"
                                                namespace_:@"files"
-                                               deprecated:@NO
-                                               resultType:[DBPROPERTIESListPropertyTemplateIds class]
-                                                errorType:[DBPROPERTIESPropertyTemplateError class]
+                                               deprecated:@YES
+                                               resultType:[DBFILEPROPERTIESListTemplateResult class]
+                                                errorType:[DBFILEPROPERTIESTemplateError class]
                                                     attrs:@{
                                                       @"auth" : @"user",
                                                       @"host" : @"api",
@@ -749,9 +772,9 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESPropertiesUpdate) {
     DBFILESPropertiesUpdate = [[DBRoute alloc] init:@"properties/update"
                                          namespace_:@"files"
-                                         deprecated:@NO
+                                         deprecated:@YES
                                          resultType:nil
-                                          errorType:[DBFILESUpdatePropertiesError class]
+                                          errorType:[DBFILEPROPERTIESUpdatePropertiesError class]
                                               attrs:@{
                                                 @"auth" : @"user",
                                                 @"host" : @"api",

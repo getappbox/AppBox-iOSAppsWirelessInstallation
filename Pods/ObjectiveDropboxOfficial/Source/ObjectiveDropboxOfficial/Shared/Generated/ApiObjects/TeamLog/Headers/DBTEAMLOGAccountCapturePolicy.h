@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccountCapturePolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccountCapturePolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGAccountCapturePolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGAccountCapturePolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccountCapturePolicy` instances.

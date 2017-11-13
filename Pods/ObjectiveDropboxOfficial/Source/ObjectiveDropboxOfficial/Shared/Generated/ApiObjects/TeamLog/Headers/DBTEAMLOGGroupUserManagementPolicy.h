@@ -30,10 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGGroupUserManagementPolicyTag) {
   /// (no description).
-  DBTEAMLOGGroupUserManagementPolicyAllUsers,
+  DBTEAMLOGGroupUserManagementPolicyAdminsOnly,
 
   /// (no description).
-  DBTEAMLOGGroupUserManagementPolicyOnlyAdmins,
+  DBTEAMLOGGroupUserManagementPolicyAllUsers,
 
   /// (no description).
   DBTEAMLOGGroupUserManagementPolicyOther,
@@ -46,18 +46,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGGroupUserManagementPolicyTag) {
 #pragma mark - Constructors
 
 ///
+/// Initializes union class with tag state of "admins_only".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAdminsOnly;
+
+///
 /// Initializes union class with tag state of "all_users".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAllUsers;
-
-///
-/// Initializes union class with tag state of "only_admins".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithOnlyAdmins;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -71,18 +71,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGGroupUserManagementPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
+/// Retrieves whether the union's current tag state has value "admins_only".
+///
+/// @return Whether the union's current tag state has value "admins_only".
+///
+- (BOOL)isAdminsOnly;
+
+///
 /// Retrieves whether the union's current tag state has value "all_users".
 ///
 /// @return Whether the union's current tag state has value "all_users".
 ///
 - (BOOL)isAllUsers;
-
-///
-/// Retrieves whether the union's current tag state has value "only_admins".
-///
-/// @return Whether the union's current tag state has value "only_admins".
-///
-- (BOOL)isOnlyAdmins;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGGroupUserManagementPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupUserManagementPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGGroupUserManagementPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupUserManagementPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupUserManagementPolicy` instances.

@@ -71,7 +71,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSCOMMONAccountTypeSerializer serialize:instance];
 }
 
@@ -162,7 +162,7 @@
                                  userInfo:nil]);
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSCOMMONAccountType *)deserialize:(NSDictionary *)valueDict {

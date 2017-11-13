@@ -112,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBUSERSAccount`
 /// API object.
 ///
-+ (NSDictionary *)serialize:(DBUSERSAccount *)instance;
++ (nullable NSDictionary *)serialize:(DBUSERSAccount *)instance;
 
 ///
 /// Deserializes `DBUSERSAccount` instances.

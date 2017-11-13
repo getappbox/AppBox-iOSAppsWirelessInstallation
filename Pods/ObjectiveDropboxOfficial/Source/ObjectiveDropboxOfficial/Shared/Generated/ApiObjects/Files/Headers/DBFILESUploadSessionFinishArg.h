@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESUploadSessionFinishArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESUploadSessionFinishArg *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishArg` instances.

@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSmartSyncPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSmartSyncPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSmartSyncPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSmartSyncPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSmartSyncPolicy` instances.

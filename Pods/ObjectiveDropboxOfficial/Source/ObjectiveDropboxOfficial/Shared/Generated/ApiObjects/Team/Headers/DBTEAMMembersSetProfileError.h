@@ -35,11 +35,11 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
   /// The user is not a member of the team.
   DBTEAMMembersSetProfileErrorUserNotInTeam,
 
-  /// It is unsafe to use both external_id and new_external_id
+  /// It is unsafe to use both external_id and new_external_id.
   DBTEAMMembersSetProfileErrorExternalIdAndNewExternalIdUnsafe,
 
   /// None of new_email, new_given_name, new_surname, or new_external_id are
-  /// specified
+  /// specified.
   DBTEAMMembersSetProfileErrorNoNewDataSpecified,
 
   /// Email is already reserved for another user.
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 /// "external_id_and_new_external_id_unsafe".
 ///
 /// Description of the "external_id_and_new_external_id_unsafe" tag state: It is
-/// unsafe to use both external_id and new_external_id
+/// unsafe to use both external_id and new_external_id.
 ///
 /// @return An initialized instance.
 ///
@@ -106,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 /// Initializes union class with tag state of "no_new_data_specified".
 ///
 /// Description of the "no_new_data_specified" tag state: None of new_email,
-/// new_given_name, new_surname, or new_external_id are specified
+/// new_given_name, new_surname, or new_external_id are specified.
 ///
 /// @return An initialized instance.
 ///
@@ -304,7 +304,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetProfileError` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMMembersSetProfileError *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMMembersSetProfileError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetProfileError` instances.

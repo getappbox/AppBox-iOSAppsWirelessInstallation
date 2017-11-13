@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGMemberSelectorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberSelector` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGMemberSelector *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGMemberSelector *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberSelector` instances.

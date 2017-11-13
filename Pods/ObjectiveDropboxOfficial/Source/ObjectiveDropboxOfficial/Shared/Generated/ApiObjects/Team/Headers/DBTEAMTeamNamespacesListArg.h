@@ -25,8 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The approximate maximum number of results to return per request. This limit
-/// may be exceeded.
+/// Specifying a value here has no effect.
 @property (nonatomic, readonly) NSNumber *limit;
 
 #pragma mark - Constructors
@@ -34,8 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param limit The approximate maximum number of results to return per
-/// request. This limit may be exceeded.
+/// @param limit Specifying a value here has no effect.
 ///
 /// @return An initialized instance.
 ///
@@ -69,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamNamespacesListArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamNamespacesListArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamNamespacesListArg *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamNamespacesListArg` instances.

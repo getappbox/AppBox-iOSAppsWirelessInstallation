@@ -33,21 +33,21 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
   DBCOMMONPathRootHome,
 
   /// Paths are relative to the authenticating team member's home directory.
-  /// (This results in :field:`PathRootError.invalid' if the user does not
-  /// belong to a team.)
+  /// (This results in `invalid` in `DBCOMMONPathRootError` if the user does
+  /// not belong to a team.).
   DBCOMMONPathRootMemberHome,
 
   /// Paths are relative to the given team directory. (This results in
   /// `invalid` in `DBCOMMONPathRootError` if the user is not a member of the
-  /// team associated with that path root id.)
+  /// team associated with that path root id.).
   DBCOMMONPathRootTeam,
 
   /// Paths are relative to the user's home directory. (This results in
-  /// `invalid` in `DBCOMMONPathRootError` if the belongs to a team.)
+  /// `invalid` in `DBCOMMONPathRootError` if the belongs to a team.).
   DBCOMMONPathRootUserHome,
 
   /// Paths are relative to given namespace id (This results in `noPermission`
-  /// in `DBCOMMONPathRootError` if you don't have access to this namespace.)
+  /// in `DBCOMMONPathRootError` if you don't have access to this namespace.).
   DBCOMMONPathRootNamespaceId,
 
   /// (no description).
@@ -60,12 +60,12 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
 
 /// Paths are relative to the given team directory. (This results in `invalid`
 /// in `DBCOMMONPathRootError` if the user is not a member of the team
-/// associated with that path root id.) @note Ensure the `isTeam` method returns
-/// true before accessing, otherwise a runtime exception will be raised.
+/// associated with that path root id.). @note Ensure the `isTeam` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *team;
 
 /// Paths are relative to given namespace id (This results in `noPermission` in
-/// `DBCOMMONPathRootError` if you don't have access to this namespace.) @note
+/// `DBCOMMONPathRootError` if you don't have access to this namespace.). @note
 /// Ensure the `isNamespaceId` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *namespaceId;
@@ -87,8 +87,8 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
 /// Initializes union class with tag state of "member_home".
 ///
 /// Description of the "member_home" tag state: Paths are relative to the
-/// authenticating team member's home directory. (This results in
-/// :field:`PathRootError.invalid' if the user does not belong to a team.)
+/// authenticating team member's home directory. (This results in `invalid` in
+/// `DBCOMMONPathRootError` if the user does not belong to a team.).
 ///
 /// @return An initialized instance.
 ///
@@ -99,11 +99,11 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
 ///
 /// Description of the "team" tag state: Paths are relative to the given team
 /// directory. (This results in `invalid` in `DBCOMMONPathRootError` if the user
-/// is not a member of the team associated with that path root id.)
+/// is not a member of the team associated with that path root id.).
 ///
 /// @param team Paths are relative to the given team directory. (This results in
 /// `invalid` in `DBCOMMONPathRootError` if the user is not a member of the team
-/// associated with that path root id.)
+/// associated with that path root id.).
 ///
 /// @return An initialized instance.
 ///
@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
 ///
 /// Description of the "user_home" tag state: Paths are relative to the user's
 /// home directory. (This results in `invalid` in `DBCOMMONPathRootError` if the
-/// belongs to a team.)
+/// belongs to a team.).
 ///
 /// @return An initialized instance.
 ///
@@ -125,11 +125,11 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
 ///
 /// Description of the "namespace_id" tag state: Paths are relative to given
 /// namespace id (This results in `noPermission` in `DBCOMMONPathRootError` if
-/// you don't have access to this namespace.)
+/// you don't have access to this namespace.).
 ///
 /// @param namespaceId Paths are relative to given namespace id (This results in
 /// `noPermission` in `DBCOMMONPathRootError` if you don't have access to this
-/// namespace.)
+/// namespace.).
 ///
 /// @return An initialized instance.
 ///
@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBCOMMONPathRoot` API object.
 ///
-+ (NSDictionary *)serialize:(DBCOMMONPathRoot *)instance;
++ (nullable NSDictionary *)serialize:(DBCOMMONPathRoot *)instance;
 
 ///
 /// Deserializes `DBCOMMONPathRoot` instances.

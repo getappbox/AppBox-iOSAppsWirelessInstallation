@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, DBASYNCLaunchResultBaseTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBASYNCLaunchResultBase` API object.
 ///
-+ (NSDictionary *)serialize:(DBASYNCLaunchResultBase *)instance;
++ (nullable NSDictionary *)serialize:(DBASYNCLaunchResultBase *)instance;
 
 ///
 /// Deserializes `DBASYNCLaunchResultBase` instances.

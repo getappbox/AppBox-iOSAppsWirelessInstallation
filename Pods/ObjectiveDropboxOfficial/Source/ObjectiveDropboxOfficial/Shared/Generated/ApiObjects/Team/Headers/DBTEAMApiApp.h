@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `ApiApp` struct.
 ///
-/// Information on linked third party applications
+/// Information on linked third party applications.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -27,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The application unique id
+/// The application unique id.
 @property (nonatomic, readonly, copy) NSString *appId;
 
-/// The application name
+/// The application name.
 @property (nonatomic, readonly, copy) NSString *appName;
 
-/// The application publisher name
+/// The application publisher name.
 @property (nonatomic, readonly, copy, nullable) NSString *publisher;
 
-/// The publisher's URL
+/// The publisher's URL.
 @property (nonatomic, readonly, copy, nullable) NSString *publisherUrl;
 
-/// The time this application was linked
+/// The time this application was linked.
 @property (nonatomic, readonly, nullable) NSDate *linked;
 
-/// Whether the linked application uses a dedicated folder
+/// Whether the linked application uses a dedicated folder.
 @property (nonatomic, readonly) NSNumber *isAppFolder;
 
 #pragma mark - Constructors
@@ -50,12 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param appId The application unique id
-/// @param appName The application name
-/// @param isAppFolder Whether the linked application uses a dedicated folder
-/// @param publisher The application publisher name
-/// @param publisherUrl The publisher's URL
-/// @param linked The time this application was linked
+/// @param appId The application unique id.
+/// @param appName The application name.
+/// @param isAppFolder Whether the linked application uses a dedicated folder.
+/// @param publisher The application publisher name.
+/// @param publisherUrl The publisher's URL.
+/// @param linked The time this application was linked.
 ///
 /// @return An initialized instance.
 ///
@@ -70,9 +70,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param appId The application unique id
-/// @param appName The application name
-/// @param isAppFolder Whether the linked application uses a dedicated folder
+/// @param appId The application unique id.
+/// @param appName The application name.
+/// @param isAppFolder Whether the linked application uses a dedicated folder.
 ///
 /// @return An initialized instance.
 ///
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBTEAMApiApp`
 /// API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMApiApp *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMApiApp *)instance;
 
 ///
 /// Deserializes `DBTEAMApiApp` instances.

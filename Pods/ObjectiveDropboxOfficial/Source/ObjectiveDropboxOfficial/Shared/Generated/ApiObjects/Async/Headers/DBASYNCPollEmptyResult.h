@@ -106,7 +106,7 @@ typedef NS_ENUM(NSInteger, DBASYNCPollEmptyResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBASYNCPollEmptyResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBASYNCPollEmptyResult *)instance;
++ (nullable NSDictionary *)serialize:(DBASYNCPollEmptyResult *)instance;
 
 ///
 /// Deserializes `DBASYNCPollEmptyResult` instances.

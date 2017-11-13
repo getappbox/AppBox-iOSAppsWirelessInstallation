@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedNoteOpenedDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedNoteOpenedDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedNoteOpenedDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedNoteOpenedDetails` instances.

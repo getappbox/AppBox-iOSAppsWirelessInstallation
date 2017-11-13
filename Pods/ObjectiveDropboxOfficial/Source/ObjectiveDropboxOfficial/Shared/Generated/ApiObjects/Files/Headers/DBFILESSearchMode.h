@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchModeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchMode` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESSearchMode *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESSearchMode *)instance;
 
 ///
 /// Deserializes `DBFILESSearchMode` instances.

@@ -10,22 +10,25 @@
 #import "DBASYNCPollEmptyResult.h"
 #import "DBASYNCPollError.h"
 #import "DBASYNCPollResultBase.h"
-#import "DBPROPERTIESGetPropertyTemplateResult.h"
-#import "DBPROPERTIESListPropertyTemplateIds.h"
-#import "DBPROPERTIESModifyPropertyTemplateError.h"
-#import "DBPROPERTIESPropertyFieldTemplate.h"
-#import "DBPROPERTIESPropertyGroupTemplate.h"
-#import "DBPROPERTIESPropertyTemplateError.h"
+#import "DBFILEPROPERTIESAddTemplateResult.h"
+#import "DBFILEPROPERTIESGetTemplateResult.h"
+#import "DBFILEPROPERTIESListTemplateResult.h"
+#import "DBFILEPROPERTIESModifyTemplateError.h"
+#import "DBFILEPROPERTIESPropertyFieldTemplate.h"
+#import "DBFILEPROPERTIESPropertyGroupTemplate.h"
+#import "DBFILEPROPERTIESTemplateError.h"
+#import "DBFILEPROPERTIESUpdateTemplateResult.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTEAMActiveWebSession.h"
-#import "DBTEAMAddPropertyTemplateResult.h"
 #import "DBTEAMAdminTier.h"
 #import "DBTEAMApiApp.h"
 #import "DBTEAMBaseDfbReport.h"
 #import "DBTEAMBaseTeamFolderError.h"
 #import "DBTEAMCOMMONGroupManagementType.h"
 #import "DBTEAMCOMMONGroupSummary.h"
+#import "DBTEAMCustomQuotaError.h"
+#import "DBTEAMCustomQuotaResult.h"
 #import "DBTEAMDateRangeError.h"
 #import "DBTEAMDesktopClientSession.h"
 #import "DBTEAMDevicesActive.h"
@@ -91,6 +94,7 @@
 #import "DBTEAMMobileClientSession.h"
 #import "DBTEAMNamespaceMetadata.h"
 #import "DBTEAMPOLICIESTeamMemberPolicies.h"
+#import "DBTEAMRemoveCustomQuotaResult.h"
 #import "DBTEAMRevokeDeviceSessionBatchError.h"
 #import "DBTEAMRevokeDeviceSessionBatchResult.h"
 #import "DBTEAMRevokeDeviceSessionError.h"
@@ -124,7 +128,8 @@
 #import "DBTEAMTeamNamespacesListResult.h"
 #import "DBTEAMTokenGetAuthenticatedAdminError.h"
 #import "DBTEAMTokenGetAuthenticatedAdminResult.h"
-#import "DBTEAMUpdatePropertyTemplateResult.h"
+#import "DBTEAMUserCustomQuotaResult.h"
+#import "DBTEAMUserSelectorArg.h"
 #import "DBTEAMUserSelectorError.h"
 
 @implementation DBTEAMRouteObjects
@@ -153,6 +158,9 @@ static DBRoute *DBTEAMLinkedAppsListMembersLinkedApps;
 static DBRoute *DBTEAMLinkedAppsListTeamLinkedApps;
 static DBRoute *DBTEAMLinkedAppsRevokeLinkedApp;
 static DBRoute *DBTEAMLinkedAppsRevokeLinkedAppBatch;
+static DBRoute *DBTEAMMemberSpaceLimitsGetCustomQuota;
+static DBRoute *DBTEAMMemberSpaceLimitsRemoveCustomQuota;
+static DBRoute *DBTEAMMemberSpaceLimitsSetCustomQuota;
 static DBRoute *DBTEAMMembersAdd;
 static DBRoute *DBTEAMMembersAddJobStatusGet;
 static DBRoute *DBTEAMMembersGetInfo;
@@ -629,6 +637,75 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   return DBTEAMLinkedAppsRevokeLinkedAppBatch;
 }
 
++ (DBRoute *)DBTEAMMemberSpaceLimitsGetCustomQuota {
+  if (!DBTEAMMemberSpaceLimitsGetCustomQuota) {
+    DBTEAMMemberSpaceLimitsGetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/get_custom_quota"
+        namespace_:@"team"
+        deprecated:@NO
+        resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
+        errorType:[DBTEAMCustomQuotaError class]
+        attrs:@{
+          @"auth" : @"team",
+          @"host" : @"api",
+          @"style" : @"rpc"
+        }
+        dataStructSerialBlock:nil
+        dataStructDeserialBlock:^id(id dataStruct) {
+          return [DBArraySerializer deserialize:dataStruct
+                                      withBlock:^id(id elem0) {
+                                        return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
+                                      }];
+        }];
+  }
+  return DBTEAMMemberSpaceLimitsGetCustomQuota;
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsRemoveCustomQuota {
+  if (!DBTEAMMemberSpaceLimitsRemoveCustomQuota) {
+    DBTEAMMemberSpaceLimitsRemoveCustomQuota = [[DBRoute alloc] init:@"member_space_limits/remove_custom_quota"
+        namespace_:@"team"
+        deprecated:@NO
+        resultType:[NSArray<DBTEAMRemoveCustomQuotaResult *> class]
+        errorType:[DBTEAMCustomQuotaError class]
+        attrs:@{
+          @"auth" : @"team",
+          @"host" : @"api",
+          @"style" : @"rpc"
+        }
+        dataStructSerialBlock:nil
+        dataStructDeserialBlock:^id(id dataStruct) {
+          return [DBArraySerializer deserialize:dataStruct
+                                      withBlock:^id(id elem0) {
+                                        return [DBTEAMRemoveCustomQuotaResultSerializer deserialize:elem0];
+                                      }];
+        }];
+  }
+  return DBTEAMMemberSpaceLimitsRemoveCustomQuota;
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsSetCustomQuota {
+  if (!DBTEAMMemberSpaceLimitsSetCustomQuota) {
+    DBTEAMMemberSpaceLimitsSetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/set_custom_quota"
+        namespace_:@"team"
+        deprecated:@NO
+        resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
+        errorType:[DBTEAMCustomQuotaError class]
+        attrs:@{
+          @"auth" : @"team",
+          @"host" : @"api",
+          @"style" : @"rpc"
+        }
+        dataStructSerialBlock:nil
+        dataStructDeserialBlock:^id(id dataStruct) {
+          return [DBArraySerializer deserialize:dataStruct
+                                      withBlock:^id(id elem0) {
+                                        return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
+                                      }];
+        }];
+  }
+  return DBTEAMMemberSpaceLimitsSetCustomQuota;
+}
+
 + (DBRoute *)DBTEAMMembersAdd {
   if (!DBTEAMMembersAdd) {
     DBTEAMMembersAdd = [[DBRoute alloc] init:@"members/add"
@@ -908,9 +985,9 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMPropertiesTemplateAdd) {
     DBTEAMPropertiesTemplateAdd = [[DBRoute alloc] init:@"properties/template/add"
                                              namespace_:@"team"
-                                             deprecated:@NO
-                                             resultType:[DBTEAMAddPropertyTemplateResult class]
-                                              errorType:[DBPROPERTIESModifyPropertyTemplateError class]
+                                             deprecated:@YES
+                                             resultType:[DBFILEPROPERTIESAddTemplateResult class]
+                                              errorType:[DBFILEPROPERTIESModifyTemplateError class]
                                                   attrs:@{
                                                     @"auth" : @"team",
                                                     @"host" : @"api",
@@ -926,9 +1003,9 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMPropertiesTemplateGet) {
     DBTEAMPropertiesTemplateGet = [[DBRoute alloc] init:@"properties/template/get"
                                              namespace_:@"team"
-                                             deprecated:@NO
-                                             resultType:[DBPROPERTIESGetPropertyTemplateResult class]
-                                              errorType:[DBPROPERTIESPropertyTemplateError class]
+                                             deprecated:@YES
+                                             resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                                              errorType:[DBFILEPROPERTIESTemplateError class]
                                                   attrs:@{
                                                     @"auth" : @"team",
                                                     @"host" : @"api",
@@ -944,9 +1021,9 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMPropertiesTemplateList) {
     DBTEAMPropertiesTemplateList = [[DBRoute alloc] init:@"properties/template/list"
                                               namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBPROPERTIESListPropertyTemplateIds class]
-                                               errorType:[DBPROPERTIESPropertyTemplateError class]
+                                              deprecated:@YES
+                                              resultType:[DBFILEPROPERTIESListTemplateResult class]
+                                               errorType:[DBFILEPROPERTIESTemplateError class]
                                                    attrs:@{
                                                      @"auth" : @"team",
                                                      @"host" : @"api",
@@ -962,9 +1039,9 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMPropertiesTemplateUpdate) {
     DBTEAMPropertiesTemplateUpdate = [[DBRoute alloc] init:@"properties/template/update"
                                                 namespace_:@"team"
-                                                deprecated:@NO
-                                                resultType:[DBTEAMUpdatePropertyTemplateResult class]
-                                                 errorType:[DBPROPERTIESModifyPropertyTemplateError class]
+                                                deprecated:@YES
+                                                resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
+                                                 errorType:[DBFILEPROPERTIESModifyTemplateError class]
                                                      attrs:@{
                                                        @"auth" : @"team",
                                                        @"host" : @"api",

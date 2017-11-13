@@ -23,7 +23,11 @@
                     emailVerified:(NSNumber *)emailVerified
                          disabled:(NSNumber *)disabled
                   profilePhotoUrl:(NSString *)profilePhotoUrl {
-  [DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil](accountId);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](email);
+  [DBStoneValidators nonnullValidator:nil](emailVerified);
+  [DBStoneValidators nonnullValidator:nil](disabled);
 
   self = [super init];
   if (self) {
@@ -52,7 +56,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSAccountSerializer serialize:instance];
 }
 
@@ -85,7 +89,7 @@
   result = prime * result + [self.email hash];
   result = prime * result + [self.emailVerified hash];
   result = prime * result + [self.disabled hash];
-  if (self.profilePhotoUrl) {
+  if (self.profilePhotoUrl != nil) {
     result = prime * result + [self.profilePhotoUrl hash];
   }
 
@@ -149,7 +153,7 @@
     jsonDict[@"profile_photo_url"] = valueObj.profilePhotoUrl;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSAccount *)deserialize:(NSDictionary *)valueDict {
@@ -190,7 +194,12 @@
                        isTeammate:(NSNumber *)isTeammate
                   profilePhotoUrl:(NSString *)profilePhotoUrl
                      teamMemberId:(NSString *)teamMemberId {
-  [DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil](accountId);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](email);
+  [DBStoneValidators nonnullValidator:nil](emailVerified);
+  [DBStoneValidators nonnullValidator:nil](disabled);
+  [DBStoneValidators nonnullValidator:nil](isTeammate);
 
   self = [super initWithAccountId:accountId
                              name:name
@@ -223,7 +232,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSBasicAccountSerializer serialize:instance];
 }
 
@@ -257,10 +266,10 @@
   result = prime * result + [self.emailVerified hash];
   result = prime * result + [self.disabled hash];
   result = prime * result + [self.isTeammate hash];
-  if (self.profilePhotoUrl) {
+  if (self.profilePhotoUrl != nil) {
     result = prime * result + [self.profilePhotoUrl hash];
   }
-  if (self.teamMemberId) {
+  if (self.teamMemberId != nil) {
     result = prime * result + [self.teamMemberId hash];
   }
 
@@ -336,7 +345,7 @@
     jsonDict[@"team_member_id"] = valueObj.teamMemberId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSBasicAccount *)deserialize:(NSDictionary *)valueDict {
@@ -388,8 +397,15 @@
                           country:(NSString *)country
                              team:(DBUSERSFullTeam *)team
                      teamMemberId:(NSString *)teamMemberId {
-  [DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil](accountId);
-  [DBStoneValidators stringValidator:@(2) maxLength:nil pattern:nil](locale);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](email);
+  [DBStoneValidators nonnullValidator:nil](emailVerified);
+  [DBStoneValidators nonnullValidator:nil](disabled);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(2) maxLength:nil pattern:nil]](locale);
+  [DBStoneValidators nonnullValidator:nil](referralLink);
+  [DBStoneValidators nonnullValidator:nil](isPaired);
+  [DBStoneValidators nonnullValidator:nil](accountType);
   [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:@(2) maxLength:@(2) pattern:nil]](country);
 
   self = [super initWithAccountId:accountId
@@ -436,7 +452,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSFullAccountSerializer serialize:instance];
 }
 
@@ -473,16 +489,16 @@
   result = prime * result + [self.referralLink hash];
   result = prime * result + [self.isPaired hash];
   result = prime * result + [self.accountType hash];
-  if (self.profilePhotoUrl) {
+  if (self.profilePhotoUrl != nil) {
     result = prime * result + [self.profilePhotoUrl hash];
   }
-  if (self.country) {
+  if (self.country != nil) {
     result = prime * result + [self.country hash];
   }
-  if (self.team) {
+  if (self.team != nil) {
     result = prime * result + [self.team hash];
   }
-  if (self.teamMemberId) {
+  if (self.teamMemberId != nil) {
     result = prime * result + [self.teamMemberId hash];
   }
 
@@ -586,7 +602,7 @@
     jsonDict[@"team_member_id"] = valueObj.teamMemberId;
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSFullAccount *)deserialize:(NSDictionary *)valueDict {
@@ -632,6 +648,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithId_:(NSString *)id_ name:(NSString *)name {
+  [DBStoneValidators nonnullValidator:nil](id_);
+  [DBStoneValidators nonnullValidator:nil](name);
 
   self = [super init];
   if (self) {
@@ -643,7 +661,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSTeamSerializer serialize:instance];
 }
 
@@ -714,7 +732,7 @@
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"name"] = valueObj.name;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSTeam *)deserialize:(NSDictionary *)valueDict {
@@ -743,6 +761,10 @@
                        name:(NSString *)name
             sharingPolicies:(DBTEAMPOLICIESTeamSharingPolicies *)sharingPolicies
           officeAddinPolicy:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddinPolicy {
+  [DBStoneValidators nonnullValidator:nil](id_);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](sharingPolicies);
+  [DBStoneValidators nonnullValidator:nil](officeAddinPolicy);
 
   self = [super initWithId_:id_ name:name];
   if (self) {
@@ -754,7 +776,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSFullTeamSerializer serialize:instance];
 }
 
@@ -835,7 +857,7 @@
   jsonDict[@"sharing_policies"] = [DBTEAMPOLICIESTeamSharingPoliciesSerializer serialize:valueObj.sharingPolicies];
   jsonDict[@"office_addin_policy"] = [DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:valueObj.officeAddinPolicy];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSFullTeam *)deserialize:(NSDictionary *)valueDict {
@@ -865,7 +887,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAccountId:(NSString *)accountId {
-  [DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil](accountId);
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
 
   self = [super init];
   if (self) {
@@ -876,7 +898,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSGetAccountArgSerializer serialize:instance];
 }
 
@@ -942,7 +964,7 @@
 
   jsonDict[@"account_id"] = valueObj.accountId;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSGetAccountArg *)deserialize:(NSDictionary *)valueDict {
@@ -964,8 +986,14 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAccountIds:(NSArray<NSString *> *)accountIds {
-  [DBStoneValidators arrayValidator:@(1) maxItems:nil
-                      itemValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountIds);
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators
+                        arrayValidator:@(1)
+                              maxItems:nil
+                         itemValidator:[DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(40)
+                                                                                                    maxLength:@(40)
+                                                                                                      pattern:nil]]]](
+      accountIds);
 
   self = [super init];
   if (self) {
@@ -976,7 +1004,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSGetAccountBatchArgSerializer serialize:instance];
 }
 
@@ -1045,7 +1073,7 @@
                                                   return elem0;
                                                 }];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSGetAccountBatchArg *)deserialize:(NSDictionary *)valueDict {
@@ -1121,7 +1149,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSGetAccountBatchErrorSerializer serialize:instance];
 }
 
@@ -1205,7 +1233,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSGetAccountBatchError *)deserialize:(NSDictionary *)valueDict {
@@ -1274,7 +1302,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSGetAccountErrorSerializer serialize:instance];
 }
 
@@ -1357,7 +1385,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSGetAccountError *)deserialize:(NSDictionary *)valueDict {
@@ -1385,6 +1413,7 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithAllocated:(NSNumber *)allocated {
+  [DBStoneValidators nonnullValidator:nil](allocated);
 
   self = [super init];
   if (self) {
@@ -1395,7 +1424,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSIndividualSpaceAllocationSerializer serialize:instance];
 }
 
@@ -1461,7 +1490,7 @@
 
   jsonDict[@"allocated"] = valueObj.allocated;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSIndividualSpaceAllocation *)deserialize:(NSDictionary *)valueDict {
@@ -1487,6 +1516,11 @@
                      familiarName:(NSString *)familiarName
                       displayName:(NSString *)displayName
                   abbreviatedName:(NSString *)abbreviatedName {
+  [DBStoneValidators nonnullValidator:nil](givenName);
+  [DBStoneValidators nonnullValidator:nil](surname);
+  [DBStoneValidators nonnullValidator:nil](familiarName);
+  [DBStoneValidators nonnullValidator:nil](displayName);
+  [DBStoneValidators nonnullValidator:nil](abbreviatedName);
 
   self = [super init];
   if (self) {
@@ -1501,7 +1535,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSNameSerializer serialize:instance];
 }
 
@@ -1587,7 +1621,7 @@
   jsonDict[@"display_name"] = valueObj.displayName;
   jsonDict[@"abbreviated_name"] = valueObj.abbreviatedName;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSName *)deserialize:(NSDictionary *)valueDict {
@@ -1694,7 +1728,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSSpaceAllocationSerializer serialize:instance];
 }
 
@@ -1785,7 +1819,7 @@
     jsonDict[@".tag"] = @"other";
   }
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSSpaceAllocation *)deserialize:(NSDictionary *)valueDict {
@@ -1818,6 +1852,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithUsed:(NSNumber *)used allocation:(DBUSERSSpaceAllocation *)allocation {
+  [DBStoneValidators nonnullValidator:nil](used);
+  [DBStoneValidators nonnullValidator:nil](allocation);
 
   self = [super init];
   if (self) {
@@ -1829,7 +1865,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSSpaceUsageSerializer serialize:instance];
 }
 
@@ -1900,7 +1936,7 @@
   jsonDict[@"used"] = valueObj.used;
   jsonDict[@"allocation"] = [DBUSERSSpaceAllocationSerializer serialize:valueObj.allocation];
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSSpaceUsage *)deserialize:(NSDictionary *)valueDict {
@@ -1923,6 +1959,8 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithUsed:(NSNumber *)used allocated:(NSNumber *)allocated {
+  [DBStoneValidators nonnullValidator:nil](used);
+  [DBStoneValidators nonnullValidator:nil](allocated);
 
   self = [super init];
   if (self) {
@@ -1934,7 +1972,7 @@
 
 #pragma mark - Serialization methods
 
-+ (NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary *)serialize:(id)instance {
   return [DBUSERSTeamSpaceAllocationSerializer serialize:instance];
 }
 
@@ -2005,7 +2043,7 @@
   jsonDict[@"used"] = valueObj.used;
   jsonDict[@"allocated"] = valueObj.allocated;
 
-  return jsonDict;
+  return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBUSERSTeamSpaceAllocation *)deserialize:(NSDictionary *)valueDict {

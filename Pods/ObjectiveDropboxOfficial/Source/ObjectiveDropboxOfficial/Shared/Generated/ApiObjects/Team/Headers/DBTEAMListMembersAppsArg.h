@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// At the first call to the `linkedAppsListMembersLinkedApps` the cursor
 /// shouldn't be passed. Then, if the result of the call includes a cursor, the
 /// following requests should include the received cursors in order to receive
-/// the next sub list of the team applications
+/// the next sub list of the team applications.
 @property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param cursor At the first call to the `linkedAppsListMembersLinkedApps` the
 /// cursor shouldn't be passed. Then, if the result of the call includes a
 /// cursor, the following requests should include the received cursors in order
-/// to receive the next sub list of the team applications
+/// to receive the next sub list of the team applications.
 ///
 /// @return An initialized instance.
 ///
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListMembersAppsArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMListMembersAppsArg *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMListMembersAppsArg *)instance;
 
 ///
 /// Deserializes `DBTEAMListMembersAppsArg` instances.

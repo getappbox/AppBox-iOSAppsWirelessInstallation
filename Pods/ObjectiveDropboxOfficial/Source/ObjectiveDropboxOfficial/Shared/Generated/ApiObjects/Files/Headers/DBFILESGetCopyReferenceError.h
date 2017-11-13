@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetCopyReferenceErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetCopyReferenceError` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESGetCopyReferenceError *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESGetCopyReferenceError *)instance;
 
 ///
 /// Deserializes `DBFILESGetCopyReferenceError` instances.

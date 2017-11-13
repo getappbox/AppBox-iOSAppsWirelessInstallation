@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESFolderSharingInfo` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESFolderSharingInfo *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESFolderSharingInfo *)instance;
 
 ///
 /// Deserializes `DBFILESFolderSharingInfo` instances.

@@ -27,10 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Optional starting date (inclusive)
+/// Optional starting date (inclusive).
 @property (nonatomic, readonly, nullable) NSDate *startDate;
 
-/// Optional ending date (exclusive)
+/// Optional ending date (exclusive).
 @property (nonatomic, readonly, nullable) NSDate *endDate;
 
 #pragma mark - Constructors
@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param startDate Optional starting date (inclusive)
-/// @param endDate Optional ending date (exclusive)
+/// @param startDate Optional starting date (inclusive).
+/// @param endDate Optional ending date (exclusive).
 ///
 /// @return An initialized instance.
 ///
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBTEAMDateRange`
 /// API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMDateRange *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMDateRange *)instance;
 
 ///
 /// Deserializes `DBTEAMDateRange` instances.

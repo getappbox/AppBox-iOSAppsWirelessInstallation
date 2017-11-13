@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetTemporaryLinkArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESGetTemporaryLinkArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESGetTemporaryLinkArg *)instance;
 
 ///
 /// Deserializes `DBFILESGetTemporaryLinkArg` instances.

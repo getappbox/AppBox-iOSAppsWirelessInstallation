@@ -1,9 +1,12 @@
 /* crypt.c -- base code for traditional PKWARE encryption
-   Version 1.01e, February 12th, 2005
+   Version 1.2.0, September 16th, 2017
 
+   Copyright (C) 2012-2017 Nathan Moinvaziri
+     https://github.com/nmoinvaz/minizip
    Copyright (C) 1998-2005 Gilles Vollant
-   Modifications for Info-ZIP crypting
-     Copyright (C) 2003 Terry Thorsen
+     Modifications for Info-ZIP crypting
+     http://www.winimage.com/zLibDll/minizip.html
+   Copyright (C) 2003 Terry Thorsen
 
    This code is a modified version of crypting code in Info-ZIP distribution
 
@@ -42,10 +45,6 @@
 /***************************************************************************/
 
 #define CRC32(c, b) ((*(pcrc_32_tab+(((uint32_t)(c) ^ (b)) & 0xff))) ^ ((c) >> 8))
-
-#ifndef ZCR_SEED2
-#  define ZCR_SEED2 3141592654UL     /* use PI as default pattern */
-#endif
 
 /***************************************************************************/
 
@@ -87,11 +86,10 @@ void init_keys(const char *passwd, uint32_t *pkeys, const z_crc_t *pcrc_32_tab)
 
 int cryptrand(unsigned char *buf, unsigned int len)
 {
-    static unsigned calls = 0;
-    int rlen = 0;
 #ifdef _WIN32
     HCRYPTPROV provider;
     unsigned __int64 pentium_tsc[1];
+    int rlen = 0;
     int result = 0;
 
 
@@ -109,27 +107,15 @@ int cryptrand(unsigned char *buf, unsigned int len)
             QueryPerformanceCounter((LARGE_INTEGER *)pentium_tsc);
         buf[rlen] = ((unsigned char*)pentium_tsc)[rlen % 8];
     }
-#else
-    int frand = open("/dev/urandom", O_RDONLY);
-    if (frand != -1)
-    {
-        rlen = (int)read(frand, buf, len);
-        close(frand);
-    }
-#endif
-    if (rlen < (int)len)
-    {
-        /* Ensure different random header each time */
-        if (++calls == 1)
-            srand((unsigned)(time(NULL) ^ ZCR_SEED2));
 
-        while (rlen < (int)len)
-            buf[rlen++] = (rand() >> 7) & 0xff;
-    }
     return rlen;
+#else
+    arc4random_buf(buf, len);
+    return len;
+#endif
 }
 
-int crypthead(const char *passwd, uint8_t *buf, int buf_size, uint32_t *pkeys, 
+int crypthead(const char *passwd, uint8_t *buf, int buf_size, uint32_t *pkeys,
               const z_crc_t *pcrc_32_tab, uint8_t verify1, uint8_t verify2)
 {
     uint8_t n = 0;                      /* index in random header */

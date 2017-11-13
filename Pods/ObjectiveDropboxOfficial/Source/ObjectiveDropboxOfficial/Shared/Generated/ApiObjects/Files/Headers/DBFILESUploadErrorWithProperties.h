@@ -8,7 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBFILESInvalidPropertyGroupError;
+@class DBFILEPROPERTIESInvalidPropertyGroupError;
 @class DBFILESUploadErrorWithProperties;
 @class DBFILESUploadWriteFailed;
 
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 
 /// (no description). @note Ensure the `isPropertiesError` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBFILESInvalidPropertyGroupError *propertiesError;
+@property (nonatomic, readonly) DBFILEPROPERTIESInvalidPropertyGroupError *propertiesError;
 
 #pragma mark - Constructors
 
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPropertiesError:(DBFILESInvalidPropertyGroupError *)propertiesError;
+- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadErrorWithProperties` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESUploadErrorWithProperties *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESUploadErrorWithProperties *)instance;
 
 ///
 /// Deserializes `DBFILESUploadErrorWithProperties` instances.

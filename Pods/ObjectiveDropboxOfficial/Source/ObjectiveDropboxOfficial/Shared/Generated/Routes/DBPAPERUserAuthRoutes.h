@@ -18,6 +18,7 @@
 @class DBPAPERFolder;
 @class DBPAPERFolderSharingPolicyType;
 @class DBPAPERFoldersContainingPaperDoc;
+@class DBPAPERImportFormat;
 @class DBPAPERInviteeInfoWithPermissionLevel;
 @class DBPAPERListDocsCursorError;
 @class DBPAPERListPaperDocsFilterBy;
@@ -28,8 +29,12 @@
 @class DBPAPERListUsersOnFolderResponse;
 @class DBPAPERListUsersOnPaperDocResponse;
 @class DBPAPERPaperApiCursorError;
+@class DBPAPERPaperDocCreateError;
+@class DBPAPERPaperDocCreateUpdateResult;
 @class DBPAPERPaperDocExportResult;
 @class DBPAPERPaperDocPermissionLevel;
+@class DBPAPERPaperDocUpdateError;
+@class DBPAPERPaperDocUpdatePolicy;
 @class DBPAPERSharingPolicy;
 @class DBPAPERSharingPublicPolicyType;
 @class DBPAPERSharingTeamPolicyType;
@@ -67,6 +72,93 @@ NS_ASSUME_NONNULL_BEGIN
 /// `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsArchive:(NSString *)docId;
+
+///
+/// Creates a new Paper doc with the provided content.
+///
+/// @param importFormat The format of provided data.
+/// @param inputUrl The file to upload, as an NSString * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocCreateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
+docsCreateUrl:(DBPAPERImportFormat *)importFormat
+     inputUrl:(NSString *)inputUrl;
+
+///
+/// Creates a new Paper doc with the provided content.
+///
+/// @param parentFolderId The Paper folder ID where the Paper document should be created. The API user has to have write
+/// access to this folder or error is thrown.
+/// @param importFormat The format of provided data.
+/// @param inputUrl The file to upload, as an NSString * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocCreateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
+ docsCreateUrl:(DBPAPERImportFormat *)importFormat
+parentFolderId:(nullable NSString *)parentFolderId
+      inputUrl:(NSString *)inputUrl;
+
+///
+/// Creates a new Paper doc with the provided content.
+///
+/// @param importFormat The format of provided data.
+/// @param inputData The file to upload, as an NSData * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocCreateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
+docsCreateData:(DBPAPERImportFormat *)importFormat
+     inputData:(NSData *)inputData;
+
+///
+/// Creates a new Paper doc with the provided content.
+///
+/// @param parentFolderId The Paper folder ID where the Paper document should be created. The API user has to have write
+/// access to this folder or error is thrown.
+/// @param importFormat The format of provided data.
+/// @param inputData The file to upload, as an NSData * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocCreateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
+docsCreateData:(DBPAPERImportFormat *)importFormat
+parentFolderId:(nullable NSString *)parentFolderId
+     inputData:(NSData *)inputData;
+
+///
+/// Creates a new Paper doc with the provided content.
+///
+/// @param importFormat The format of provided data.
+/// @param inputStream The file to upload, as an NSInputStream * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocCreateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
+docsCreateStream:(DBPAPERImportFormat *)importFormat
+     inputStream:(NSInputStream *)inputStream;
+
+///
+/// Creates a new Paper doc with the provided content.
+///
+/// @param parentFolderId The Paper folder ID where the Paper document should be created. The API user has to have write
+/// access to this folder or error is thrown.
+/// @param importFormat The format of provided data.
+/// @param inputStream The file to upload, as an NSInputStream * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocCreateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
+docsCreateStream:(DBPAPERImportFormat *)importFormat
+  parentFolderId:(nullable NSString *)parentFolderId
+     inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Exports and downloads Paper doc either as HTML or markdown.
@@ -261,6 +353,63 @@ docsFolderUsersListContinue:(NSString *)docId
 ///
 - (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsSharingPolicySet:(NSString *)docId
                                                               sharingPolicy:(DBPAPERSharingPolicy *)sharingPolicy;
+
+///
+/// Updates an existing Paper doc with the provided content.
+///
+/// @param docUpdatePolicy The policy used for the current update call.
+/// @param revision The latest doc revision. This value must match the head revision or an error code will be returned.
+/// This is to prevent colliding writes.
+/// @param importFormat The format of provided data.
+/// @param inputUrl The file to upload, as an NSString * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocUpdateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocUpdateError *> *)
+  docsUpdateUrl:(NSString *)docId
+docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+       revision:(NSNumber *)revision
+   importFormat:(DBPAPERImportFormat *)importFormat
+       inputUrl:(NSString *)inputUrl;
+
+///
+/// Updates an existing Paper doc with the provided content.
+///
+/// @param docUpdatePolicy The policy used for the current update call.
+/// @param revision The latest doc revision. This value must match the head revision or an error code will be returned.
+/// This is to prevent colliding writes.
+/// @param importFormat The format of provided data.
+/// @param inputData The file to upload, as an NSData * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocUpdateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocUpdateError *> *)
+ docsUpdateData:(NSString *)docId
+docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+       revision:(NSNumber *)revision
+   importFormat:(DBPAPERImportFormat *)importFormat
+      inputData:(NSData *)inputData;
+
+///
+/// Updates an existing Paper doc with the provided content.
+///
+/// @param docUpdatePolicy The policy used for the current update call.
+/// @param revision The latest doc revision. This value must match the head revision or an error code will be returned.
+/// This is to prevent colliding writes.
+/// @param importFormat The format of provided data.
+/// @param inputStream The file to upload, as an NSInputStream * object.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperDocCreateUpdateResult` object on
+/// success or a `DBPAPERPaperDocUpdateError` object on failure.
+///
+- (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocUpdateError *> *)
+docsUpdateStream:(NSString *)docId
+ docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
+        revision:(NSNumber *)revision
+    importFormat:(DBPAPERImportFormat *)importFormat
+     inputStream:(NSInputStream *)inputStream;
 
 ///
 /// Allows an owner or editor to add users to a Paper doc or change their permissions using their email address or

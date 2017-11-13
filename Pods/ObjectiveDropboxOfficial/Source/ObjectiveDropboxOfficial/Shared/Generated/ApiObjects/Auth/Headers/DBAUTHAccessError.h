@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHAccessError` API object.
 ///
-+ (NSDictionary *)serialize:(DBAUTHAccessError *)instance;
++ (nullable NSDictionary *)serialize:(DBAUTHAccessError *)instance;
 
 ///
 /// Deserializes `DBAUTHAccessError` instances.

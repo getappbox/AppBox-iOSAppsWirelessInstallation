@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// tag states with which the `DBTEAMLOGSmartSyncOptOutPolicy` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGSmartSyncOptOutPolicyTag) {
   /// (no description).
-  DBTEAMLOGSmartSyncOptOutPolicyOptedOut,
+  DBTEAMLOGSmartSyncOptOutPolicyDefault_,
 
   /// (no description).
-  DBTEAMLOGSmartSyncOptOutPolicyDefault_,
+  DBTEAMLOGSmartSyncOptOutPolicyOptedOut,
 
   /// (no description).
   DBTEAMLOGSmartSyncOptOutPolicyOther,
@@ -45,18 +45,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSmartSyncOptOutPolicyTag) {
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "opted_out".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithOptedOut;
-
-///
 /// Initializes union class with tag state of "default".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDefault_;
+
+///
+/// Initializes union class with tag state of "opted_out".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOptedOut;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -70,18 +70,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSmartSyncOptOutPolicyTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "opted_out".
-///
-/// @return Whether the union's current tag state has value "opted_out".
-///
-- (BOOL)isOptedOut;
-
-///
 /// Retrieves whether the union's current tag state has value "default".
 ///
 /// @return Whether the union's current tag state has value "default".
 ///
 - (BOOL)isDefault_;
+
+///
+/// Retrieves whether the union's current tag state has value "opted_out".
+///
+/// @return Whether the union's current tag state has value "opted_out".
+///
+- (BOOL)isOptedOut;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSmartSyncOptOutPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSmartSyncOptOutPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSmartSyncOptOutPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSmartSyncOptOutPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSmartSyncOptOutPolicy` instances.

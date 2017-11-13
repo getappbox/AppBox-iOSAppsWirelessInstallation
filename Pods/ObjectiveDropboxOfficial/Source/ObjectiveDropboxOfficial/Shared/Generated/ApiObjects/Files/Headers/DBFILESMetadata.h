@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// file or folder is not mounted.
 @property (nonatomic, readonly, copy, nullable) NSString *pathDisplay;
 
-/// Deprecated. Please use `parentSharedFolderId` in `DBFILESFileSharingInfo` or
+/// Please use `parentSharedFolderId` in `DBFILESFileSharingInfo` or
 /// `parentSharedFolderId` in `DBFILESFolderSharingInfo` instead.
 @property (nonatomic, readonly, copy, nullable) NSString *parentSharedFolderId;
 
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// least the last path component will have the correct casing. Changes to only
 /// the casing of paths won't be returned by `listFolderContinue`. This field
 /// will be null if the file or folder is not mounted.
-/// @param parentSharedFolderId Deprecated. Please use `parentSharedFolderId` in
+/// @param parentSharedFolderId Please use `parentSharedFolderId` in
 /// `DBFILESFileSharingInfo` or `parentSharedFolderId` in
 /// `DBFILESFolderSharingInfo` instead.
 ///
@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBFILESMetadata`
 /// API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESMetadata *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESMetadata` instances.

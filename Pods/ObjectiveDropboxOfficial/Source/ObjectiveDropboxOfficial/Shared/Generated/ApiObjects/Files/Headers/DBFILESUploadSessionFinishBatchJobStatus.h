@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishBatchJobStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESUploadSessionFinishBatchJobStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESUploadSessionFinishBatchJobStatus *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishBatchJobStatus` instances.

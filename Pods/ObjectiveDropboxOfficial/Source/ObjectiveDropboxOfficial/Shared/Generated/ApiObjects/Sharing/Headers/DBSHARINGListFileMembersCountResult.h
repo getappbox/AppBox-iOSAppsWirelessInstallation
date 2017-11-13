@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersCountResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGListFileMembersCountResult *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGListFileMembersCountResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersCountResult` instances.

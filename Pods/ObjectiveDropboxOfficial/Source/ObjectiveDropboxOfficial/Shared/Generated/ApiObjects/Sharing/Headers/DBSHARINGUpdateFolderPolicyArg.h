@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUpdateFolderPolicyArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGUpdateFolderPolicyArg *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGUpdateFolderPolicyArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGUpdateFolderPolicyArg` instances.

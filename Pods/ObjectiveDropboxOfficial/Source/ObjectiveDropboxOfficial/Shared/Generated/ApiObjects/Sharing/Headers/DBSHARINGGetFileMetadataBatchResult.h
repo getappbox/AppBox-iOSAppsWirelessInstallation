@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetFileMetadataBatchResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGGetFileMetadataBatchResult *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGGetFileMetadataBatchResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetFileMetadataBatchResult` instances.

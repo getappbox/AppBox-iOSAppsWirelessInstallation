@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// List of web sessions made by this team member
+/// List of web sessions made by this team member.
 @property (nonatomic, readonly, nullable) NSArray<DBTEAMActiveWebSession *> *activeWebSessions;
 
-/// List of desktop clients used by this team member
+/// List of desktop clients used by this team member.
 @property (nonatomic, readonly, nullable) NSArray<DBTEAMDesktopClientSession *> *desktopClientSessions;
 
-/// List of mobile client used by this team member
+/// List of mobile client used by this team member.
 @property (nonatomic, readonly, nullable) NSArray<DBTEAMMobileClientSession *> *mobileClientSessions;
 
 #pragma mark - Constructors
@@ -42,10 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param activeWebSessions List of web sessions made by this team member
+/// @param activeWebSessions List of web sessions made by this team member.
 /// @param desktopClientSessions List of desktop clients used by this team
-/// member
-/// @param mobileClientSessions List of mobile client used by this team member
+/// member.
+/// @param mobileClientSessions List of mobile client used by this team member.
 ///
 /// @return An initialized instance.
 ///
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListMemberDevicesResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMListMemberDevicesResult *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMListMemberDevicesResult *)instance;
 
 ///
 /// Deserializes `DBTEAMListMemberDevicesResult` instances.

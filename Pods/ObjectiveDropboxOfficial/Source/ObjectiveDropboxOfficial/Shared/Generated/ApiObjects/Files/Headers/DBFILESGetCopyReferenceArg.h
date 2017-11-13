@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetCopyReferenceArg` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESGetCopyReferenceArg *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESGetCopyReferenceArg *)instance;
 
 ///
 /// Deserializes `DBFILESGetCopyReferenceArg` instances.

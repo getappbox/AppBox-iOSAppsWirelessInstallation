@@ -180,7 +180,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileErrorResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileErrorResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGFileErrorResult *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGFileErrorResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileErrorResult` instances.

@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderArchiveLaunch` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMTeamFolderArchiveLaunch *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderArchiveLaunch *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderArchiveLaunch` instances.

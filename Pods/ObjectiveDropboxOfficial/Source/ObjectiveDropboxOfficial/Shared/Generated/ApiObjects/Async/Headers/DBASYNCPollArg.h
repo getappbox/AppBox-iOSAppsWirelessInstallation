@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBASYNCPollArg`
 /// API object.
 ///
-+ (NSDictionary *)serialize:(DBASYNCPollArg *)instance;
++ (nullable NSDictionary *)serialize:(DBASYNCPollArg *)instance;
 
 ///
 /// Deserializes `DBASYNCPollArg` instances.

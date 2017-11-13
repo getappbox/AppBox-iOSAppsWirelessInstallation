@@ -3,8 +3,8 @@
 
    This version of ioapi is designed to buffer IO.
 
-   Copyright (C) 1998-2003 Gilles Vollant
-             (C) 2012-2014 Nathan Moinvaziri
+   Copyright (C) 2012-2017 Nathan Moinvaziri
+      https://github.com/nmoinvaz/minizip
 
    This program is distributed under the terms of the same license as zlib.
    See the accompanying LICENSE file for the full text of the license.
@@ -23,7 +23,7 @@
 
 #ifndef IOBUF_BUFFERSIZE
 #  define IOBUF_BUFFERSIZE (UINT16_MAX)
-#endif 
+#endif
 
 #if defined(_WIN32)
 #  include <conio.h>
@@ -39,16 +39,16 @@
 #ifdef __GNUC__
 #ifndef max
 #define max(x,y) ({ \
-const typeof(x) _x = (x);	\
-const typeof(y) _y = (y);	\
+const __typeof__(x) _x = (x);	\
+const __typeof__(y) _y = (y);	\
 (void) (&_x == &_y);		\
 _x > _y ? _x : _y; })
 #endif /* __GNUC__ */
 
 #ifndef min
 #define min(x,y) ({ \
-const typeof(x) _x = (x);	\
-const typeof(y) _y = (y);	\
+const __typeof__(x) _x = (x);	\
+const __typeof__(y) _y = (y);	\
 (void) (&_x == &_y);		\
 _x < _y ? _x : _y; })
 #endif
@@ -73,9 +73,9 @@ typedef struct ourstream_s {
 #  define print_buf(o,s,f,...) print_buf_internal(o,s,f,__VA_ARGS__);
 #else
 #  define print_buf(o,s,f,...)
-#endif 
+#endif
 
-void print_buf_internal(voidpf opaque, voidpf stream, char *format, ...)
+void print_buf_internal(ZIP_UNUSED voidpf opaque, voidpf stream, char *format, ...)
 {
     ourstream_t *streamio = (ourstream_t *)stream;
     va_list arglist;
@@ -85,7 +85,7 @@ void print_buf_internal(voidpf opaque, voidpf stream, char *format, ...)
     va_end(arglist);
 }
 
-voidpf fopen_buf_internal_func(voidpf opaque, voidpf stream, uint32_t number_disk, int mode)
+voidpf fopen_buf_internal_func(ZIP_UNUSED voidpf opaque, voidpf stream, ZIP_UNUSED uint32_t number_disk, ZIP_UNUSED int mode)
 {
     ourstream_t *streamio = NULL;
     if (stream == NULL)
@@ -137,7 +137,7 @@ long fflush_buf(voidpf opaque, voidpf stream)
     uint32_t bytes_to_write = streamio->writebuf_len;
     uint32_t bytes_left_to_write = streamio->writebuf_len;
     long bytes_written = 0;
-    
+
     while (bytes_left_to_write > 0)
     {
         if (bufio->filefunc64.zwrite_file != NULL)
@@ -264,7 +264,7 @@ uint32_t ZCALLBACK fwrite_buf_func(voidpf opaque, voidpf stream, const void *buf
 
             continue;
         }
-        
+
         memcpy(streamio->writebuf + streamio->writebuf_pos, (char *)buf + (bytes_to_write - bytes_left_to_write), bytes_to_copy);
 
         print_buf(opaque, stream, "write copy [remaining %d write %d:%d len %d]\n", bytes_to_copy, bytes_to_write, bytes_left_to_write, streamio->writebuf_len);
@@ -280,7 +280,7 @@ uint32_t ZCALLBACK fwrite_buf_func(voidpf opaque, voidpf stream, const void *buf
     return size - bytes_left_to_write;
 }
 
-uint64_t ftell_buf_internal_func(voidpf opaque, voidpf stream, uint64_t position)
+uint64_t ftell_buf_internal_func(ZIP_UNUSED voidpf opaque, voidpf stream, uint64_t position)
 {
     ourstream_t *streamio = (ourstream_t *)stream;
     streamio->position = position;
@@ -344,7 +344,7 @@ int fseek_buf_internal_func(voidpf opaque, voidpf stream, uint64_t offset, int o
                 {
                     streamio->readbuf_pos += (uint32_t)offset;
                     return 0;
-                } 
+                }
                 offset -= (streamio->readbuf_len - streamio->readbuf_pos);
                 streamio->position += offset;
             }
@@ -419,7 +419,7 @@ int ZCALLBACK fclose_buf_func(voidpf opaque, voidpf stream)
         print_buf(opaque, stream, "write efficency %.02f%%\n", (streamio->writebuf_hits / ((float)streamio->writebuf_hits + streamio->writebuf_misses)) * 100);
     if (bufio->filefunc64.zclose_file != NULL)
         ret = bufio->filefunc64.zclose_file(bufio->filefunc64.opaque, streamio->stream);
-    else 
+    else
         ret = bufio->filefunc.zclose_file(bufio->filefunc.opaque, streamio->stream);
     free(streamio);
     return ret;

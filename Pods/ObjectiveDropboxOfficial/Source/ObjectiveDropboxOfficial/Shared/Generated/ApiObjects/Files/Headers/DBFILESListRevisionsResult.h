@@ -26,7 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// If the file is deleted.
+/// If the file identified by the latest revision in the response is either
+/// deleted or moved.
 @property (nonatomic, readonly) NSNumber *isDeleted;
 
 /// The time of deletion if the file was deleted.
@@ -41,7 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param isDeleted If the file is deleted.
+/// @param isDeleted If the file identified by the latest revision in the
+/// response is either deleted or moved.
 /// @param entries The revisions for the file. Only revisions that are not
 /// deleted will show up here.
 /// @param serverDeleted The time of deletion if the file was deleted.
@@ -56,7 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param isDeleted If the file is deleted.
+/// @param isDeleted If the file identified by the latest revision in the
+/// response is either deleted or moved.
 /// @param entries The revisions for the file. Only revisions that are not
 /// deleted will show up here.
 ///
@@ -83,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListRevisionsResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESListRevisionsResult *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESListRevisionsResult *)instance;
 
 ///
 /// Deserializes `DBFILESListRevisionsResult` instances.

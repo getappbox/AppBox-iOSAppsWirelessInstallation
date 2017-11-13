@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRollbackChangesDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileRollbackChangesDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRollbackChangesDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRollbackChangesDetails` instances.

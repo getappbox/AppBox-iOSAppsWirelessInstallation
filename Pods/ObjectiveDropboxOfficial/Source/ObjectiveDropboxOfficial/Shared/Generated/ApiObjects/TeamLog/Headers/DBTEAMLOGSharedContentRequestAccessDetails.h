@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset index.
-@property (nonatomic, readonly) NSNumber *targetIndex;
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
 
 /// Original shared folder name.
 @property (nonatomic, readonly, copy, nullable) NSString *originalFolderName;
@@ -41,25 +41,25 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param sharedContentLink Shared content link.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex
-                 originalFolderName:(nullable NSString *)originalFolderName
-                  sharedContentLink:(nullable NSString *)sharedContentLink;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
+                      originalFolderName:(nullable NSString *)originalFolderName
+                       sharedContentLink:(nullable NSString *)sharedContentLink;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetIndex Target asset index.
+/// @param targetAssetIndex Target asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetIndex:(NSNumber *)targetIndex;
+- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentRequestAccessDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedContentRequestAccessDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentRequestAccessDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentRequestAccessDetails` instances.

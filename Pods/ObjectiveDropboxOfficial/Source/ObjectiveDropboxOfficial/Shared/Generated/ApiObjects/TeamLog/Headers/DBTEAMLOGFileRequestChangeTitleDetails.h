@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// File request title.
-@property (nonatomic, readonly, copy) NSString *requestTitle;
+@property (nonatomic, readonly, copy, nullable) NSString *requestTitle;
 
 #pragma mark - Constructors
 
@@ -39,7 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithRequestTitle:(NSString *)requestTitle;
+- (instancetype)initWithRequestTitle:(nullable NSString *)requestTitle;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+///
+/// @return An initialized instance.
+///
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -61,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestChangeTitleDetails` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGFileRequestChangeTitleDetails *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestChangeTitleDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestChangeTitleDetails` instances.

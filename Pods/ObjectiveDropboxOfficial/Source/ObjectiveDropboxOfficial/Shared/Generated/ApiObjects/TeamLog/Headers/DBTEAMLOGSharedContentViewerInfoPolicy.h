@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedContentViewerInfoPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentViewerInfoPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBTEAMLOGSharedContentViewerInfoPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentViewerInfoPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentViewerInfoPolicy` instances.

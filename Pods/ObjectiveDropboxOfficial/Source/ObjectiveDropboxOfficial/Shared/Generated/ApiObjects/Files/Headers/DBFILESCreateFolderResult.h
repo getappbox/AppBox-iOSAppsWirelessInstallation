@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESCreateFolderResult *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESCreateFolderResult *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderResult` instances.

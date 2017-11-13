@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESFileOpsResult` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESFileOpsResult *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESFileOpsResult *)instance;
 
 ///
 /// Deserializes `DBFILESFileOpsResult` instances.

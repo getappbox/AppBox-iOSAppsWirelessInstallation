@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGInsufficientQuotaAmounts` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGInsufficientQuotaAmounts *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGInsufficientQuotaAmounts *)instance;
 
 ///
 /// Deserializes `DBSHARINGInsufficientQuotaAmounts` instances.

@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFolderPolicy` API object.
 ///
-+ (NSDictionary *)serialize:(DBSHARINGFolderPolicy *)instance;
++ (nullable NSDictionary *)serialize:(DBSHARINGFolderPolicy *)instance;
 
 ///
 /// Deserializes `DBSHARINGFolderPolicy` instances.

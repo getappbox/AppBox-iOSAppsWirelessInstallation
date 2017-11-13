@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveUrlJobStatus` API object.
 ///
-+ (NSDictionary *)serialize:(DBFILESSaveUrlJobStatus *)instance;
++ (nullable NSDictionary *)serialize:(DBFILESSaveUrlJobStatus *)instance;
 
 ///
 /// Deserializes `DBFILESSaveUrlJobStatus` instances.
