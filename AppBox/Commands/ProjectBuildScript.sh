@@ -7,25 +7,11 @@
 #  Copyright © 2016 Developer Insider. All rights reserved.
 
 #{1} - Project Directory
-cd "${1}"
-
-if [[ "${2}" == *"xcodeproj" ]]
-then
 
 #Make Archove
 #{2} - -workspace VisualStudioMobileCenterDemo.xcworkspace or -project -vsmcd.xcodeproj
 #{3} - VisualStudioMobileCenterDemo
 #{4} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/VSMCD.xcarchive
-
-echo "Building Project..."
-xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
-
-else
-
-echo "Building Workspace..."
-xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
-
-fi
 
 
 #Make IPA
@@ -33,5 +19,54 @@ fi
 #{6} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/
 #{7} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/exportoption.plist
 
+
+#change directory to project
+cd "${1}"
+
+################################################
+#               Make Archive                   #
+################################################
+
+#check either project is Xcode Project or Xcode Workspace
+if [[ "${2}" == *"xcodeproj" ]]
+then
+    echo "Building Project..."
+
+    #check either selected xcode is 9 or higher
+    if [[ "${7}" > "9" || "${7}" == "9" ]]
+    then
+        echo "Building Project with Xcode 9"
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+    else
+        echo "Building Project with Xcode 8"
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
+    fi
+
+else
+    echo "Building Workspace..."
+
+    #check either selected xcode is 9 or higher
+    if [[ "${7}" > "9" || "${7}" == "9" ]]
+    then
+        echo "Building Project with Xcode 9"
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+    else
+        echo "Building Project with Xcode 8"
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+    fi
+
+fi
+
+####################################
+#            Make IPA              #
+####################################
 echo "Creating IPA..."
-xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
+#check either selected xcode is 9 or higher
+if [[ "${7}" > "9" || "${7}" == "9" ]]
+then
+    echo "Creatomg IPA with Xcode 9"
+    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+else
+    echo "Creatomg IPA with Xcode 8"
+    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
+fi

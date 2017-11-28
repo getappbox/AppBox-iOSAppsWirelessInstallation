@@ -63,11 +63,6 @@
         [UserData setXCodeLocation:xcodePath];
         [UserData setApplicationLoaderLocation:applicationLoaderPath];
     }];
-    
-    //Get Xcode Version
-    [XCHandler getXcodeVersionWithCompletion:^(BOOL success, XcodeVersion version, NSString *versionString) {
-        
-    }];
 }
 
 - (void)viewWillAppear{
@@ -317,8 +312,25 @@
     //${6} export options plist Location
     [buildArgument addObject:[project.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding]];
     
-    //Run Task
-    [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
+    
+    //Get Xcode Version
+    [XCHandler getXcodeVersionWithCompletion:^(BOOL success, XcodeVersion version, NSString *versionString) {
+        //${7} xcode version
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *version;
+            if (success) {
+                version = [NSString stringWithFormat:@"%@",[NSNumber numberWithInteger:[versionString integerValue]]];
+            } else {
+                version = @"8";
+            }
+            [buildArgument addObject:version];
+            
+            //Run Task
+            [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
+        });
+        
+    }];
+    
 }
 
 - (void)runXcodePathScript{
