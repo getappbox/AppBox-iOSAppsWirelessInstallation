@@ -24,6 +24,7 @@
 #pragma mark - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\n Preparing to Upload IPA - %@\n======\n\n",ipaFileURL]];
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",ipaPath]];
