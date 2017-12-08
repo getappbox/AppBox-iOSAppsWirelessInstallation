@@ -414,6 +414,7 @@
                             [comboTeamId addItemWithObjectValue:project.teamId];
                             [comboTeamId selectItemWithObjectValue:project.teamId];
                             [comboBuildType selectItemWithObjectValue:project.buildType];
+                            [comboBuildScheme selectItemWithObjectValue:project.selectedSchemes];
                             [textFieldEmail setStringValue:project.emails];
                             [textFieldMessage setStringValue:project.personalMessage];
                             if (project.emails.length > 0){
@@ -582,7 +583,9 @@
 #pragma mark - Get IPA Info and Upload -
 
 -(void)checkIPACreated{
+    [self showStatus:@"Checking IPA File..." andShowProgressBar:YES withProgress:-1];
     NSString *ipaPath = [project.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Finding IPA file at path - %@", ipaPath]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]){
         if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
             //get required info and upload to appstore
@@ -592,6 +595,7 @@
             [uploadManager uploadIPAFile:project.ipaFullPath];
         }
     }else{
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Not able to find IPA file at path - %@", ipaPath]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self checkIPACreated];
         });
