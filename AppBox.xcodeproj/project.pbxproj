@@ -23,6 +23,7 @@
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
+		DBA88C7A1FDD41CC009C365B /* appbox.zip in Resources */ = {isa = PBXBuildFile; fileRef = DBA88C791FDD41CC009C365B /* appbox.zip */; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
@@ -139,6 +140,7 @@
 		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerViewController.h; sourceTree = "<group>"; };
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
+		DBA88C791FDD41CC009C365B /* appbox.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = appbox.zip; sourceTree = "<group>"; };
 		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
@@ -342,6 +344,14 @@
 				DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */,
 			);
 			path = LocalServerViewController;
+			sourceTree = "<group>";
+		};
+		DBA88C781FDD4199009C365B /* AppBoxStatic */ = {
+			isa = PBXGroup;
+			children = (
+				DBA88C791FDD41CC009C365B /* appbox.zip */,
+			);
+			path = AppBoxStatic;
 			sourceTree = "<group>";
 		};
 		DBDCFBBB1F99C7860022097B /* UploadManager */ = {
@@ -850,6 +860,7 @@
 		E1AE886E1F3F156A0085B173 /* LocalServerHandler */ = {
 			isa = PBXGroup;
 			children = (
+				DBA88C781FDD4199009C365B /* AppBoxStatic */,
 				E1AE886F1F3F15780085B173 /* LocalServerHandler.h */,
 				E1AE88701F3F15780085B173 /* LocalServerHandler.m */,
 			);
@@ -1014,6 +1025,7 @@
 				E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */,
 				DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */,
 				DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */,
+				DBA88C7A1FDD41CC009C365B /* appbox.zip in Resources */,
 				E1D12EE81EC2F4360065E59A /* PreferencesTabViewController.xib in Resources */,
 				DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */,
 				E16437DF1D743A4E00CE8B7E /* Assets.xcassets in Resources */,

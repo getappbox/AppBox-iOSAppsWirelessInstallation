@@ -24,6 +24,10 @@
     }];
 }
 
+- (void)viewDidDisappear{
+    [super viewDidDisappear];
+}
+
 //MARK: - Action Button Tapped
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
     [self dismissController:self];
@@ -32,6 +36,16 @@
 
 - (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
     if (sender.state == NSOnState) {
+        //build distribution path
+        NSURL *localDirectory = [[UserData buildLocation] URLByAppendingPathComponent:@"appbox"];
+        if (self.project.selectedSchemes){
+            localDirectory = [localDirectory URLByAppendingPathComponent:self.project.selectedSchemes];
+        }else{
+            NSString *ipaDirectory = [[_project.ipaFullPath URLByDeletingPathExtension] lastPathComponent];
+            localDirectory = [localDirectory URLByAppendingPathComponent:ipaDirectory];
+        }
+        self.project.distributeOverLocalNetwork = YES;
+        self.project.distributionLocalDirectory = [localDirectory resourceSpecifier];
         [self performSegueWithIdentifier:NSStringFromClass([LocalServerViewController class]) sender:nil];
     }
 }

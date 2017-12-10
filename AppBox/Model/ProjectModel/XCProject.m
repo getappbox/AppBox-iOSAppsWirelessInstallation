@@ -30,7 +30,11 @@
 
 -(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion{
     NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
-    [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
+    if (self.distributeOverLocalNetwork) {
+        [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
+    } else {
+        [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
+    }
     [assetsDict setValue:@"software-package" forKey:@"kind"];
     
     NSMutableDictionary *metadataDict = [[NSMutableDictionary alloc] init];

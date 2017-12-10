@@ -16,7 +16,7 @@
 @interface XCProject : NSObject
 
 //Project Basic Properties
-@property(nonatomic) BOOL isBuildOnly;
+@property(nonatomic, assign) BOOL isBuildOnly;
 @property(nonatomic, retain) NSString *uuid;
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *version;
@@ -75,6 +75,10 @@
 @property(nonatomic, retain) NSNumber *shutdownMac;
 @property(nonatomic, retain) NSNumber *keepSameLink;
 @property(nonatomic, retain) NSString *personalMessage;
+
+//Distribute over local network
+@property(nonatomic, assign) BOOL distributeOverLocalNetwork;
+@property(nonatomic, retain) NSString *distributionLocalDirectory;
 
 - (BOOL)isValidProjectInfoPlist;
 - (BOOL)createExportOptionPlist;
