@@ -32,10 +32,7 @@
 
 - (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
     if (sender.state == NSOnState) {
-        [MBProgressHUD showStatus:@"Starting Python Server" onView:self.view];
-        [LocalServerHandler startLocalServerWithCompletion:^(BOOL isOn) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        }];
+        [self performSegueWithIdentifier:NSStringFromClass([LocalServerViewController class]) sender:nil];
     }
 }
 

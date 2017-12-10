@@ -28,11 +28,5 @@
     });
 }
 
-+(void)startLocalServerWithCompletion:(void (^)(BOOL isOn))completion{
-    [TaskHandler runTaskWithName:@"PythonServer" andArgument:@[[UserData buildLocation].absoluteString] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
-        [[AppDelegate appDelegate] addSessionLog:output];
-        completion(YES);
-    }];
-}
 
 @end
