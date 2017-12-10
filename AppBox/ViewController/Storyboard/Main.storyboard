@@ -81,6 +81,12 @@
                                                 <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Local Server" keyEquivalent="s" id="oru-mY-nnP">
+                                            <connections>
+                                                <action selector="showLocalServerTapped:" target="hnw-xV-0zn" id="F4k-XH-IF6"/>
+                                                <segue destination="47f-6T-mtV" kind="show" id="L00-qU-EdN"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
@@ -858,10 +864,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="74" y="2062"/>
         </scene>
-        <!--Local Server View Controller-->
+        <!--AppBox Server-->
         <scene sceneID="Red-Jq-GH5">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="47f-6T-mtV" customClass="LocalServerViewController" sceneMemberID="viewController">
+                <viewController title="AppBox Server" showSeguePresentationStyle="single" id="47f-6T-mtV" customClass="LocalServerViewController" sceneMemberID="viewController">
                     <view key="view" id="umJ-41-MjG">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -949,7 +955,7 @@ Gw
                 </viewController>
                 <customObject id="Mfy-hE-0o9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-461" y="1905"/>
+            <point key="canvasLocation" x="-508" y="1907"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="zTD-qn-WeB">
@@ -2110,5 +2116,6 @@ Gw
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4nc-Zt-qRE"/>
+        <segue reference="L00-qU-EdN"/>
     </inferredMetricsTieBreakers>
 </document>
