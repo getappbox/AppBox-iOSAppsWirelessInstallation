@@ -10,7 +10,8 @@
 
 @interface LocalServerHandler : NSObject
 
-+(void)startLocalServerWithCompletion:(void (^)(BOOL isOn))completion;
+@property(nonatomic, strong) NSTask *task;
+
 +(void)getLocalIPAddressWithCompletion:(void (^)(NSString *ipAddress))completion;
 
 @end

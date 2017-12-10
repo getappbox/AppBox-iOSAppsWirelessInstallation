@@ -858,6 +858,99 @@ Gw
             </objects>
             <point key="canvasLocation" x="74" y="2062"/>
         </scene>
+        <!--Local Server View Controller-->
+        <scene sceneID="Red-Jq-GH5">
+            <objects>
+                <viewController showSeguePresentationStyle="single" id="47f-6T-mtV" customClass="LocalServerViewController" sceneMemberID="viewController">
+                    <view key="view" id="umJ-41-MjG">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR8-UX-Ahn">
+                                <rect key="frame" x="9" y="10" width="431" height="223"/>
+                                <clipView key="contentView" id="TsC-Xp-jeT">
+                                    <rect key="frame" x="1" y="1" width="429" height="221"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="sXn-1o-EZg">
+                                            <rect key="frame" x="0.0" y="0.0" width="429" height="221"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="429" height="221"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="O6I-cl-Qh3">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="MYi-0c-wZ8">
+                                    <rect key="frame" x="414" y="1" width="16" height="221"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GYw-kM-c7S">
+                                <rect key="frame" x="8" y="271" width="103" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="yhb-d8-nlv"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Server Status :" id="N7F-0b-zfu">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udU-Ec-OKy">
+                                <rect key="frame" x="8" y="242" width="103" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="xAJ-95-Xkc"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Server Logs:" id="o8d-4P-yMj">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HkQ-Qo-lre">
+                                <rect key="frame" x="119" y="273" width="17" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="26d-3r-AdC"/>
+                                    <constraint firstAttribute="width" constant="16" id="SgI-A6-ubz"/>
+                                </constraints>
+                                <levelIndicatorCell key="cell" alignment="left" maxValue="1" warningValue="2" criticalValue="3" id="Vcm-7V-R6V"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </levelIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="GYw-kM-c7S" firstAttribute="leading" secondItem="umJ-41-MjG" secondAttribute="leading" constant="10" id="Ad9-a6-67v"/>
+                            <constraint firstAttribute="trailing" secondItem="lR8-UX-Ahn" secondAttribute="trailing" constant="10" id="Bb1-hD-Cv7"/>
+                            <constraint firstItem="GYw-kM-c7S" firstAttribute="top" secondItem="umJ-41-MjG" secondAttribute="top" constant="10" id="HSQ-pq-afO"/>
+                            <constraint firstItem="sXn-1o-EZg" firstAttribute="top" secondItem="udU-Ec-OKy" secondAttribute="bottom" constant="10" id="RMA-en-7hz"/>
+                            <constraint firstItem="GYw-kM-c7S" firstAttribute="trailing" secondItem="udU-Ec-OKy" secondAttribute="trailing" id="T5A-XG-aE0"/>
+                            <constraint firstItem="GYw-kM-c7S" firstAttribute="centerY" secondItem="HkQ-Qo-lre" secondAttribute="centerY" id="TYs-bv-PYG"/>
+                            <constraint firstItem="HkQ-Qo-lre" firstAttribute="leading" secondItem="GYw-kM-c7S" secondAttribute="trailing" constant="10" id="VBZ-xA-kVw"/>
+                            <constraint firstItem="udU-Ec-OKy" firstAttribute="leading" secondItem="sXn-1o-EZg" secondAttribute="leading" id="YVd-XZ-bHc"/>
+                            <constraint firstItem="GYw-kM-c7S" firstAttribute="leading" secondItem="udU-Ec-OKy" secondAttribute="leading" id="ad3-Pa-2AJ"/>
+                            <constraint firstAttribute="bottom" secondItem="lR8-UX-Ahn" secondAttribute="bottom" constant="10" id="p3A-Bc-kR7"/>
+                            <constraint firstItem="udU-Ec-OKy" firstAttribute="top" secondItem="GYw-kM-c7S" secondAttribute="bottom" constant="10" id="vO0-nN-wUr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="serverLogTextView" destination="sXn-1o-EZg" id="dP2-nd-GKm"/>
+                        <outlet property="serverStatusIndicator" destination="HkQ-Qo-lre" id="0Nc-7i-X9x"/>
+                    </connections>
+                </viewController>
+                <customObject id="Mfy-hE-0o9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-461" y="1905"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="zTD-qn-WeB">
             <objects>
@@ -1724,8 +1817,8 @@ Gw
                                 </connections>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="LBi-UH-2sG">
-                                <rect key="frame" x="250" y="60" width="194" height="18"/>
-                                <buttonCell key="cell" type="check" title="checking... (Comming Soon)" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="flS-RW-vjS">
+                                <rect key="frame" x="250" y="60" width="89" height="18"/>
+                                <buttonCell key="cell" type="check" title="checking..." bezelStyle="regularSquare" imagePosition="left" inset="2" id="flS-RW-vjS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1768,6 +1861,7 @@ Gw
                     <connections>
                         <outlet property="dbFolderNameTextField" destination="KOs-Ma-CB8" id="Phy-e0-FUB"/>
                         <outlet property="localNetworkCheckBox" destination="LBi-UH-2sG" id="08R-3h-ipO"/>
+                        <segue destination="47f-6T-mtV" kind="show" identifier="LocalServerViewController" id="gG2-D7-P5j"/>
                     </connections>
                 </viewController>
                 <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -2015,6 +2109,6 @@ Gw
         <image name="ProvisioningProfile" width="51.200000762939453" height="51.200000762939453"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uyb-q3-B4B"/>
+        <segue reference="4nc-Zt-qRE"/>
     </inferredMetricsTieBreakers>
 </document>
