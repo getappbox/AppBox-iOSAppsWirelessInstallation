@@ -324,6 +324,14 @@
 			path = DefaultSettings;
 			sourceTree = "<group>";
 		};
+		DBA66CEE1FDCF33B0002A956 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				9740CD3F1E005DB100224D9F /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		DBDCFBBB1F99C7860022097B /* UploadManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +539,7 @@
 		E16437EA1D743A8800CE8B7E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E16437ED1D743ABE00CE8B7E /* Storyboard */,
+				DBA66CEE1FDCF33B0002A956 /* Storyboard */,
 				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
 				E1AA0F451E2F94C500BA81A1 /* WindowController */,
 				E167245D1E1D2ABF00346502 /* CIViewController */,
@@ -565,14 +573,6 @@
 				DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		E16437ED1D743ABE00CE8B7E /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				9740CD3F1E005DB100224D9F /* Main.storyboard */,
-			);
-			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		E16437F01D743B3600CE8B7E /* HomeViewController */ = {
