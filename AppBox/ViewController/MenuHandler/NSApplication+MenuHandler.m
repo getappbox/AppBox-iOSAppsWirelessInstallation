@@ -104,6 +104,9 @@
 - (IBAction)showDashboardTapped:(NSMenuItem *)sender {
 }
 
+- (IBAction)showLocalServerTapped:(NSMenuItem *)sender {
+}
+
 - (IBAction)licenseTapped:(NSMenuItem *)sender {
     [EventTracker logEventWithType:LogEventTypeExternalLinkLicense];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abLicenseURL]];

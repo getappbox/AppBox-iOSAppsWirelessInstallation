@@ -17,9 +17,11 @@
 - (IBAction)checkForUpdateTapped:(NSMenuItem *)sender;
 
 //File
-- (void)updateDropboxUsage;
+- (IBAction)showDashboardTapped:(NSMenuItem *)sender;
+- (IBAction)showLocalServerTapped:(NSMenuItem *)sender;
 
 //Accounts
+- (void)updateDropboxUsage;
 - (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender;
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender;
 
@@ -30,5 +32,4 @@
 - (IBAction)releaseNotesTapped:(NSMenuItem *)sender;
 
 //Window
-- (IBAction)showDashboardTapped:(NSMenuItem *)sender;
 @end
