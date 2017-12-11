@@ -50,6 +50,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 #define abBuildRepoNotification @"BuildRepoNotification"
 #define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
+#define abStopAppBoxLocalServer @"StopAppBoxLocalServer"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
@@ -71,6 +72,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //default setting
 #define abBuildLocation @"~/Desktop"
 #define abXcodeLocation @"/Applications/Xcode.app"
+#define abAppBoxLocalServerBuildsDirectory @"AppBoxServerBuilds"
 #define abApplicationLoaderAppLocation @"/Contents/Applications/Application Loader.app"
 #define abApplicationLoaderALToolLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
 

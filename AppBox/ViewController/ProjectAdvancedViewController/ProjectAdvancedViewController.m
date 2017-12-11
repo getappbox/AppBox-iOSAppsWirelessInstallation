@@ -21,7 +21,13 @@
     [self.dbFolderNameTextField setEnabled:self.project.isKeepSameLinkEnabled];
     [LocalServerHandler getLocalIPAddressWithCompletion:^(NSString *ipAddress) {
         [self.localNetworkCheckBox setTitle: ipAddress];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8888",ipAddress]];
+        [self.project setIpaFileLocalShareableURL:url];
     }];
+}
+
+- (void)viewDidDisappear{
+    [super viewDidDisappear];
 }
 
 //MARK: - Action Button Tapped
@@ -32,10 +38,17 @@
 
 - (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
     if (sender.state == NSOnState) {
-        [MBProgressHUD showStatus:@"Starting Python Server" onView:self.view];
-        [LocalServerHandler startLocalServerWithCompletion:^(BOOL isOn) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        }];
+        //build distribution path
+        NSURL *localDirectory = [[UserData buildLocation] URLByAppendingPathComponent:@"appbox"];
+        if (self.project.selectedSchemes){
+            localDirectory = [localDirectory URLByAppendingPathComponent:self.project.selectedSchemes];
+        }else{
+            NSString *ipaDirectory = [[_project.ipaFullPath URLByDeletingPathExtension] lastPathComponent];
+            localDirectory = [localDirectory URLByAppendingPathComponent:ipaDirectory];
+        }
+        self.project.distributeOverLocalNetwork = YES;
+        self.project.distributionLocalDirectory = [localDirectory resourceSpecifier];
+        [self performSegueWithIdentifier:NSStringFromClass([LocalServerViewController class]) sender:nil];
     }
 }
 

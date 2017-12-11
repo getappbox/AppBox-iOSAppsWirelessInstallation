@@ -28,11 +28,14 @@
     });
 }
 
-+(void)startLocalServerWithCompletion:(void (^)(BOOL isOn))completion{
-    [TaskHandler runTaskWithName:@"PythonServer" andArgument:@[[UserData buildLocation].absoluteString] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
-        [[AppDelegate appDelegate] addSessionLog:output];
-        completion(YES);
++(void)setupAppBoxInstallationServices:(void (^)(BOOL isSuccess))completion{
+    NSString *appBoxWebServicePath = [[NSBundle mainBundle] pathForResource:@"appbox" ofType:@"zip"];
+    [SSZipArchive unzipFileAtPath:appBoxWebServicePath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
+    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+        completion(succeeded);
     }];
 }
+
 
 @end

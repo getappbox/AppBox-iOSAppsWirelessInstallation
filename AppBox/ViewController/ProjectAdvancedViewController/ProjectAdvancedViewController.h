@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "LocalServerHandler.h"
+
+#import "LocalServerViewController.h"
 
 @class ProjectAdvancedViewController;
 @protocol ProjectAdvancedViewDelegate <NSObject>
