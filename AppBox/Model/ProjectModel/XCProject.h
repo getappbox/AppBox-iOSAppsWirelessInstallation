@@ -79,6 +79,7 @@
 //Distribute over local network
 @property(nonatomic, assign) BOOL distributeOverLocalNetwork;
 @property(nonatomic, retain) NSString *distributionLocalDirectory;
+@property(nonatomic, retain) NSURL *ipaFileLocalShareableURL;
 
 - (BOOL)isValidProjectInfoPlist;
 - (BOOL)createExportOptionPlist;
