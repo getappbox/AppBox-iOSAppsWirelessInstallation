@@ -21,6 +21,8 @@
     [self.dbFolderNameTextField setEnabled:self.project.isKeepSameLinkEnabled];
     [LocalServerHandler getLocalIPAddressWithCompletion:^(NSString *ipAddress) {
         [self.localNetworkCheckBox setTitle: ipAddress];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8888",ipAddress]];
+        [self.project setIpaFileLocalShareableURL:url];
     }];
 }
 

@@ -48,7 +48,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [serverLogTextView setString:serverLogs];
             [serverLogTextView scrollToEndOfDocument:self];
-            if ([outputString containsString:@"port 8888"]){
+            if ([serverLogs containsString:@"port 8888"]){
                 [serverStatusIndicator setIntValue:1];
             } else {
                 [serverStatusIndicator setIntValue:3];
