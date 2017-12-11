@@ -20,6 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self startLocalServer];
+    [[NSNotificationCenter defaultCenter] addObserverForName:abStopAppBoxLocalServer object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [serverTask terminate];
+    }];
+}
+
+- (void)viewDidDisappear{
+    [super viewDidDisappear];
 }
 
 -(void)startLocalServer{

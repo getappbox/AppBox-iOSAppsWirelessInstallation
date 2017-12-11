@@ -1,18 +1,18 @@
 //
-//  WindowController.m
+//  HomeWindowController.m
 //  AppBox
 //
-//  Created by Vineet Choudhary on 18/01/17.
+//  Created by Vineet Choudhary on 11/12/17.
 //  Copyright © 2017 Developer Insider. All rights reserved.
 //
 
-#import "WindowController.h"
+#import "HomeWindowController.h"
 
-@interface WindowController ()
+@interface HomeWindowController ()
 
 @end
 
-@implementation WindowController
+@implementation HomeWindowController
 
 - (void)windowDidLoad {
     [super windowDidLoad];

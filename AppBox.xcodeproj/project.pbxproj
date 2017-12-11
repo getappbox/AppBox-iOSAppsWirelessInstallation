@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
+		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
+		DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */; };
 		DB2629721F95E38C00C4C647 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */; };
 		DB2629731F95E38C00C4C647 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629691F95E38C00C4C647 /* CISetting+CoreDataProperties.m */; };
 		DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */; };
@@ -78,7 +80,6 @@
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
-		E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F471E2F94F700BA81A1 /* WindowController.m */; };
 		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
 		E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */; };
@@ -114,6 +115,10 @@
 		179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.release.xcconfig"; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
+		DB1FC58E1FDEED5400179799 /* HomeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeWindowController.h; sourceTree = "<group>"; };
+		DB1FC58F1FDEED5400179799 /* HomeWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeWindowController.m; sourceTree = "<group>"; };
+		DB1FC5921FDEF29A00179799 /* LocalServerWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerWindowController.h; sourceTree = "<group>"; };
+		DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerWindowController.m; sourceTree = "<group>"; };
 		DB2629661F95E38C00C4C647 /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
 		DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
 		DB2629681F95E38C00C4C647 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -242,8 +247,6 @@
 		E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ALAppStore.sh; sourceTree = "<group>"; };
 		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
-		E1AA0F461E2F94F700BA81A1 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
-		E1AA0F471E2F94F700BA81A1 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
 		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
 		E1AE88701F3F15780085B173 /* LocalServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalServerHandler.m; sourceTree = "<group>"; };
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
@@ -300,6 +303,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DB1FC58D1FDEEC6A00179799 /* HomeWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				DB1FC58E1FDEED5400179799 /* HomeWindowController.h */,
+				DB1FC58F1FDEED5400179799 /* HomeWindowController.m */,
+			);
+			path = HomeWindowController;
+			sourceTree = "<group>";
+		};
+		DB1FC5911FDEF27D00179799 /* LocalServerWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				DB1FC5921FDEF29A00179799 /* LocalServerWindowController.h */,
+				DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */,
+			);
+			path = LocalServerWindowController;
+			sourceTree = "<group>";
+		};
 		DB2629781F95ED8900C4C647 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +359,7 @@
 		DBA66CF21FDD08C40002A956 /* LocalServerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB1FC5911FDEF27D00179799 /* LocalServerWindowController */,
 				DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */,
 				DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */,
 			);
@@ -553,7 +575,6 @@
 			children = (
 				DBA66CEF1FDCF4A60002A956 /* Storyboard */,
 				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
-				E1AA0F451E2F94C500BA81A1 /* WindowController */,
 				E167245D1E1D2ABF00346502 /* CIViewController */,
 				E16018ED1DEC0BA600E3A377 /* DropboxViewController */,
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
@@ -591,6 +612,7 @@
 		E16437F01D743B3600CE8B7E /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB1FC58D1FDEEC6A00179799 /* HomeWindowController */,
 				E16437F11D743B6800CE8B7E /* HomeViewController.h */,
 				E16437F21D743B6800CE8B7E /* HomeViewController.m */,
 			);
@@ -836,15 +858,6 @@
 				E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */,
 			);
 			path = QRCodeViewController;
-			sourceTree = "<group>";
-		};
-		E1AA0F451E2F94C500BA81A1 /* WindowController */ = {
-			isa = PBXGroup;
-			children = (
-				E1AA0F461E2F94F700BA81A1 /* WindowController.h */,
-				E1AA0F471E2F94F700BA81A1 /* WindowController.m */,
-			);
-			path = WindowController;
 			sourceTree = "<group>";
 		};
 		E1AE886E1F3F156A0085B173 /* LocalServerHandler */ = {
@@ -1106,7 +1119,6 @@
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
 				DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
-				E1AA0F481E2F94F700BA81A1 /* WindowController.m in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
@@ -1123,6 +1135,7 @@
 				DB2629771F95E38C00C4C647 /* UploadRecord+CoreDataProperties.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
+				DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
@@ -1130,6 +1143,7 @@
 				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
 				DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
+				DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */,

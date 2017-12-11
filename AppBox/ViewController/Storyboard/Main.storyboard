@@ -84,7 +84,7 @@
                                         <menuItem title="Local Server" keyEquivalent="s" id="oru-mY-nnP">
                                             <connections>
                                                 <action selector="showLocalServerTapped:" target="hnw-xV-0zn" id="F4k-XH-IF6"/>
-                                                <segue destination="47f-6T-mtV" kind="show" id="L00-qU-EdN"/>
+                                                <segue destination="MGm-bY-xKw" kind="show" id="RSW-RI-e7e"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
@@ -222,7 +222,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="WindowController" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="HomeWindowController" sceneMemberID="viewController">
                     <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="538" y="299" width="700" height="500"/>
@@ -864,6 +864,28 @@ Gw
             </objects>
             <point key="canvasLocation" x="74" y="2062"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="MJI-wC-ppq">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="MGm-bY-xKw" customClass="LocalServerWindowController" sceneMemberID="viewController">
+                    <window key="window" title="AppBox Server" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6nA-tV-Eml">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="700" height="350"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <value key="minSize" type="size" width="700" height="350"/>
+                        <connections>
+                            <outlet property="delegate" destination="MGm-bY-xKw" id="nTH-Up-a1I"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="47f-6T-mtV" kind="relationship" relationship="window.shadowedContentViewController" id="plQ-Xo-hhK"/>
+                    </connections>
+                </windowController>
+                <customObject id="q2w-lL-cHC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-813" y="-25"/>
+        </scene>
         <!--AppBox Server-->
         <scene sceneID="Red-Jq-GH5">
             <objects>
@@ -955,7 +977,7 @@ Gw
                 </viewController>
                 <customObject id="Mfy-hE-0o9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-508" y="1907"/>
+            <point key="canvasLocation" x="-823" y="472"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="zTD-qn-WeB">
@@ -1760,6 +1782,7 @@ Gw
         <!--Advanced-->
         <scene sceneID="QDA-aw-Y08">
             <objects>
+                <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="Advanced" id="n1u-76-r4M" customClass="ProjectAdvancedViewController" sceneMemberID="viewController">
                     <view key="view" id="OXY-Ua-ZSc">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="164"/>
@@ -1867,10 +1890,9 @@ Gw
                     <connections>
                         <outlet property="dbFolderNameTextField" destination="KOs-Ma-CB8" id="Phy-e0-FUB"/>
                         <outlet property="localNetworkCheckBox" destination="LBi-UH-2sG" id="08R-3h-ipO"/>
-                        <segue destination="47f-6T-mtV" kind="show" identifier="LocalServerViewController" id="gG2-D7-P5j"/>
+                        <segue destination="MGm-bY-xKw" kind="show" identifier="LocalServerViewController" id="LeW-rl-CQd"/>
                     </connections>
                 </viewController>
-                <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="74.5" y="1527"/>
         </scene>
@@ -2116,6 +2138,6 @@ Gw
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4nc-Zt-qRE"/>
-        <segue reference="L00-qU-EdN"/>
+        <segue reference="RSW-RI-e7e"/>
     </inferredMetricsTieBreakers>
 </document>
