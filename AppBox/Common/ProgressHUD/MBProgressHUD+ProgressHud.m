@@ -32,16 +32,24 @@
 }
 
 +(void)showStatus:(NSString *)status onView:(NSView *)view {
-    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
-    [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setLabelText: status];
+    static ABHudViewController *hud = nil;
+    if (hud == nil) {
+        hud = [[ABHudViewController alloc] init];
+    }
+    hud.view.frame = view.frame;
+    [view addSubview:hud.view];
+    
+//    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
+//    [hud setMode:MBProgressHUDModeIndeterminate];
+//    [hud setLabelText: status];
 }
 
 +(void)showStatus:(NSString *)status witProgress:(double)progress onView:(NSView *)view {
-    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
-    [hud setMode:MBProgressHUDModeDeterminate];
-    [hud setProgress:progress];
-    [hud setLabelText: status];
+    [MBProgressHUD showStatus:status onView:view];
+//    MBProgressHUD *hud = [MBProgressHUD hudForView:view];
+//    [hud setMode:MBProgressHUDModeDeterminate];
+//    [hud setProgress:progress];
+//    [hud setLabelText: status];
 }
 
 +(void)showStatus:(NSString *)status forSuccess:(BOOL)success onView:(NSView *)view {

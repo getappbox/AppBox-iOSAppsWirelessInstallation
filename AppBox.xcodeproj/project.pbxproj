@@ -23,6 +23,8 @@
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
+		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
+		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
@@ -141,6 +143,9 @@
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
 		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
+		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
+		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
+		DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ABHudViewController.xib; sourceTree = "<group>"; };
 		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerViewController.h; sourceTree = "<group>"; };
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
@@ -346,6 +351,16 @@
 				DB425C041F8A517D008CB032 /* DefaultSettings.m */,
 			);
 			path = DefaultSettings;
+			sourceTree = "<group>";
+		};
+		DB831BC21FF6B5240065B646 /* ABHudViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB831BC81FF6B5780065B646 /* ABHudViewController.h */,
+				DB831BC91FF6B5780065B646 /* ABHudViewController.m */,
+				DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */,
+			);
+			path = ABHudViewController;
 			sourceTree = "<group>";
 		};
 		DBA66CEF1FDCF4A60002A956 /* Storyboard */ = {
@@ -573,6 +588,7 @@
 		E16437EA1D743A8800CE8B7E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB831BC21FF6B5240065B646 /* ABHudViewController */,
 				DBA66CEF1FDCF4A60002A956 /* Storyboard */,
 				E14F332E1E1A3D1300C3DD34 /* MenuHandler */,
 				E167245D1E1D2ABF00346502 /* CIViewController */,
@@ -1033,6 +1049,7 @@
 				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
 				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
+				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1137,7 @@
 				DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
+				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
