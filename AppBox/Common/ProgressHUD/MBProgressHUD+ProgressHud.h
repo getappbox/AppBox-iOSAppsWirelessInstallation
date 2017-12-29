@@ -7,6 +7,7 @@
 //
 
 #import "MBProgressHUD.h"
+#import "ABHudViewController.h"
 
 @interface MBProgressHUD (ProgressHud)
 
