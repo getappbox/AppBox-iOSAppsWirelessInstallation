@@ -41,6 +41,7 @@
         if (![view.subviews containsObject:hud.view]) {
             [view addSubview:hud.view];
         }
+        [hud updateAd];
         return hud;
     }
 }
@@ -60,25 +61,57 @@
     self.view.frame = self.hudSuperView.frame;
 }
 
+#pragma mark - Ad Manager
+
+-(void)updateAd{
+    NSArray<Ads *> *ads = [[AdStore shared] ads];
+    NSPredicate *activeAdsPredicate = [NSPredicate predicateWithFormat:@"active = 1"];
+    ads = [ads filteredArrayUsingPredicate:activeAdsPredicate];
+    if (ads.count > 0) {
+        NSPredicate *featuredPredicate = [NSPredicate predicateWithFormat:@"featured = 1"];
+        NSArray<Ads *> *featuredAds = [ads filteredArrayUsingPredicate:featuredPredicate];
+        Ads *ad = nil;
+        if (featuredAds.count > 0) {
+            ad = [featuredAds lastObject];
+        } else {
+            int random = arc4random() % (ads.count - 1);
+            if (random < ads.count){
+                ad = [ads objectAtIndex:random];
+            } else {
+                ad = [ads firstObject];
+            }
+        }
+        if (ad) {
+            self.adURL = ad.url;
+            self.adTitle = ad.title;
+            self.adSubtitle = ad.subtitle;
+        }
+    }
+}
+
 #pragma mark - Properties
 
 -(void)setAdURL:(NSString *)adURL{
-    
+    _adURL = adURL;
 }
 
 -(void)setAdTitle:(NSString *)adTitle{
+    _adTitle = adTitle;
     adTitleLabel.stringValue = adTitle;
 }
 
 -(void)setAdSubtitle:(NSString *)adSubtitle{
+    _adSubtitle = adSubtitle;
     adSubtitleLabel.stringValue = adSubtitle;
 }
 
 -(void)setStatus:(NSString *)status{
+    _status = status;
     progressLabel.stringValue = status;
 }
 
 -(void)setProgress:(NSNumber *)progress{
+    _progress = progress;
     [progressIndicator startAnimation:self];
     [progressIndicator setHidden:(progress.integerValue == -2)];
     [resultImageView setHidden:YES];
@@ -91,6 +124,7 @@
 }
 
 -(void)setResult:(BOOL)result{
+    _result = result;
     [resultImageView setHidden:NO];
     [progressIndicator setHidden:YES];
     NSImage *resultImage = result ? [NSImage imageNamed:@"Check"] : [NSImage imageNamed:@"Multiply"];
