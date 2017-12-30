@@ -9,6 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 
+typedef enum : NSUInteger {
+    HudTypeProgress,
+    HudTypeStatus,
+    HudTypeResult,
+} HudType;
+
 @interface ABHudViewController : NSViewController {
     __weak IBOutlet NSProgressIndicator *progressIndicator;
     __weak IBOutlet NSTextField *progressLabel;
@@ -23,6 +29,7 @@
 @property(nonatomic, strong) NSString *adSubtitle;
 @property(nonatomic, strong) NSString *adURL;
 @property(nonatomic, strong) NSNumber *progress;
+@property(nonatomic, assign) HudType hudType;
 @property(nonatomic, assign) BOOL result;
 
 + (ABHudViewController *)hudForView:(NSView *)view hide:(BOOL)hide;
