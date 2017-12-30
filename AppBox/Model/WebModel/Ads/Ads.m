@@ -8,19 +8,26 @@
 
 #import "Ads.h"
 
+NSString *const adTitleKey = @"title";
+NSString *const adSubTitleKey = @"subtitle";
+NSString *const adURLKey = @"url";
+NSString *const adActiveKey = @"active";
+NSString *const adFeaturedKey = @"featured";
+
 @implementation Ads
 
-+ (NSArray<Ads *> *)getAllAdsWithAds:(NSArray<Ads *> *)newAds{
-    static NSMutableArray *ads = nil;
-    if (ads == nil) {
-        
+- (instancetype)initWithRawAd:(NSDictionary *)rawAd{
+    self = [super init];
+    if (self) {
+        if ([rawAd.allKeys containsObject:adTitleKey] && [rawAd.allKeys containsObject:adSubTitleKey] && [rawAd.allKeys containsObject:adURLKey] && [rawAd.allKeys containsObject:adActiveKey] && [rawAd.allKeys containsObject:adFeaturedKey]) {
+            self.title = [rawAd objectForKey:adTitleKey];
+            self.subtitle = [rawAd objectForKey:adSubTitleKey];
+            self.url = [rawAd objectForKey:adURLKey];
+            self.active = [rawAd objectForKey:adActiveKey];
+            self.featured = [rawAd objectForKey:adFeaturedKey];
+        }
     }
-}
-
-+ (void)loadAds{
-    [NetworkHandler requestWithURL:abAppBoxAdsURL withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
-        
-    }];
+    return self;
 }
 
 @end

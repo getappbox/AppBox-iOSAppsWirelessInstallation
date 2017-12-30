@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Ads;
+
 @interface Ads : NSObject
 
 @property(nonatomic, strong) NSString *title;
@@ -17,7 +17,6 @@
 @property(nonatomic, strong) NSNumber *featured;
 @property(nonatomic, strong) NSNumber *active;
 
-+ (NSArray<Ads *> *)getAllAds;
-+ (void)loadAds;
+- (instancetype)initWithRawAd:(NSDictionary *)rawAd;
 
 @end

@@ -27,6 +27,7 @@
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
 		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
 		DB8CE5FF1FF796A8003FEB65 /* Ads.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5FE1FF796A8003FEB65 /* Ads.m */; };
+		DB8CE6051FF7AA6A003FEB65 /* AdStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE6041FF7AA6A003FEB65 /* AdStore.m */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
@@ -151,6 +152,8 @@
 		DB8CE5F71FF77199003FEB65 /* DisabledView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisabledView.m; sourceTree = "<group>"; };
 		DB8CE5FD1FF796A8003FEB65 /* Ads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ads.h; sourceTree = "<group>"; };
 		DB8CE5FE1FF796A8003FEB65 /* Ads.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ads.m; sourceTree = "<group>"; };
+		DB8CE6031FF7AA6A003FEB65 /* AdStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdStore.h; sourceTree = "<group>"; };
+		DB8CE6041FF7AA6A003FEB65 /* AdStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdStore.m; sourceTree = "<group>"; };
 		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerViewController.h; sourceTree = "<group>"; };
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
@@ -389,6 +392,8 @@
 			children = (
 				DB8CE5FD1FF796A8003FEB65 /* Ads.h */,
 				DB8CE5FE1FF796A8003FEB65 /* Ads.m */,
+				DB8CE6031FF7AA6A003FEB65 /* AdStore.h */,
+				DB8CE6041FF7AA6A003FEB65 /* AdStore.m */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -1161,6 +1166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB8CE5FF1FF796A8003FEB65 /* Ads.m in Sources */,
+				DB8CE6051FF7AA6A003FEB65 /* AdStore.m in Sources */,
 				DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
