@@ -25,6 +25,8 @@
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
+		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
+		DB8CE5FF1FF796A8003FEB65 /* Ads.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5FE1FF796A8003FEB65 /* Ads.m */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
@@ -94,7 +96,6 @@
 		E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */; };
 		E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */; };
 		E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */; };
-		E1DC25FD1ECDBC16001EF106 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */; };
 		E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */; };
 		E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E215B61E869BDF0091565D /* ITCLoginViewController.m */; };
 		E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E215BA1E869BF70091565D /* ITCLogin.m */; };
@@ -146,6 +147,10 @@
 		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
 		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
 		DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ABHudViewController.xib; sourceTree = "<group>"; };
+		DB8CE5F61FF77199003FEB65 /* DisabledView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisabledView.h; sourceTree = "<group>"; };
+		DB8CE5F71FF77199003FEB65 /* DisabledView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisabledView.m; sourceTree = "<group>"; };
+		DB8CE5FD1FF796A8003FEB65 /* Ads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ads.h; sourceTree = "<group>"; };
+		DB8CE5FE1FF796A8003FEB65 /* Ads.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ads.m; sourceTree = "<group>"; };
 		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerViewController.h; sourceTree = "<group>"; };
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
@@ -271,8 +276,6 @@
 		E1D479C21E4AE4BC00BBC838 /* GitRepoDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitRepoDetails.h; sourceTree = "<group>"; };
 		E1D479C31E4AE4BC00BBC838 /* GitRepoDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitRepoDetails.m; sourceTree = "<group>"; };
 		E1DC25F91ECD826C001EF106 /* OtherServicesKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherServicesKeys.h; sourceTree = "<group>"; };
-		E1DC25FB1ECDBC16001EF106 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ProgressHud.h"; sourceTree = "<group>"; };
 		E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ProgressHud.m"; sourceTree = "<group>"; };
 		E1E215B51E869BDF0091565D /* ITCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITCLoginViewController.h; sourceTree = "<group>"; };
@@ -356,11 +359,38 @@
 		DB831BC21FF6B5240065B646 /* ABHudViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB8CE5F51FF77185003FEB65 /* DisabledView */,
 				DB831BC81FF6B5780065B646 /* ABHudViewController.h */,
 				DB831BC91FF6B5780065B646 /* ABHudViewController.m */,
 				DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */,
 			);
 			path = ABHudViewController;
+			sourceTree = "<group>";
+		};
+		DB8CE5F51FF77185003FEB65 /* DisabledView */ = {
+			isa = PBXGroup;
+			children = (
+				DB8CE5F61FF77199003FEB65 /* DisabledView.h */,
+				DB8CE5F71FF77199003FEB65 /* DisabledView.m */,
+			);
+			path = DisabledView;
+			sourceTree = "<group>";
+		};
+		DB8CE5FB1FF7966E003FEB65 /* WebModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB8CE5FC1FF79677003FEB65 /* Ads */,
+			);
+			path = WebModel;
+			sourceTree = "<group>";
+		};
+		DB8CE5FC1FF79677003FEB65 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				DB8CE5FD1FF796A8003FEB65 /* Ads.h */,
+				DB8CE5FE1FF796A8003FEB65 /* Ads.m */,
+			);
+			path = Ads;
 			sourceTree = "<group>";
 		};
 		DBA66CEF1FDCF4A60002A956 /* Storyboard */ = {
@@ -609,6 +639,7 @@
 		E16437EB1D743A9300CE8B7E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DB8CE5FB1FF7966E003FEB65 /* WebModel */,
 				E139460F1DF2AFC200B3FAD0 /* ProjectModel */,
 				E12A9AAA1E49F360002DDA3C /* CoreDataModel */,
 				E16437DB1D743A4E00CE8B7E /* AppBox.xcdatamodeld */,
@@ -940,8 +971,6 @@
 		E1DC25FA1ECDBC16001EF106 /* ProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				E1DC25FB1ECDBC16001EF106 /* MBProgressHUD.h */,
-				E1DC25FC1ECDBC16001EF106 /* MBProgressHUD.m */,
 				E1DC25FE1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.h */,
 				E1DC25FF1ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m */,
 			);
@@ -1131,6 +1160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8CE5FF1FF796A8003FEB65 /* Ads.m in Sources */,
 				DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
@@ -1145,6 +1175,7 @@
 				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
+				DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */,
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
 				E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */,
@@ -1175,7 +1206,6 @@
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */,
-				E1DC25FD1ECDBC16001EF106 /* MBProgressHUD.m in Sources */,
 				E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */,
 				DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,

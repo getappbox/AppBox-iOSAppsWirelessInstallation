@@ -7,7 +7,24 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface ABHudViewController : NSViewController
+@interface ABHudViewController : NSViewController {
+    __weak IBOutlet NSProgressIndicator *progressIndicator;
+    __weak IBOutlet NSTextField *progressLabel;
+    __weak IBOutlet NSTextField *adTitleLabel;
+    __weak IBOutlet NSTextField *adSubtitleLabel;
+    __weak IBOutlet NSImageView *resultImageView;
+}
 
+@property(nonatomic, weak) NSView *hudSuperView;
+@property(nonatomic, strong) NSString *status;
+@property(nonatomic, strong) NSString *adTitle;
+@property(nonatomic, strong) NSString *adSubtitle;
+@property(nonatomic, strong) NSString *adURL;
+@property(nonatomic, strong) NSNumber *progress;
+@property(nonatomic, assign) BOOL result;
+
++ (ABHudViewController *)hudForView:(NSView *)view hide:(BOOL)hide;
+- (IBAction)adViewClickGestureRecognized:(NSClickGestureRecognizer *)sender;
 @end

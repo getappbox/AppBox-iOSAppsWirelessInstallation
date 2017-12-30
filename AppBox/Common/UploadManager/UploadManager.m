@@ -519,7 +519,7 @@
 
 -(void)deleteBuildFolder{
     [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
-        [MBProgressHUD hideHUDForView:self.currentViewController.view animated:YES];
+        [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
         } else if (routeError) {
@@ -532,7 +532,7 @@
 
 -(void)deleteBuildRootFolder{
     [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:self.uploadRecord.dbFolderName] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
-        [MBProgressHUD hideHUDForView:self.currentViewController.view animated:YES];
+        [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
         } else if (routeError) {
@@ -555,15 +555,15 @@
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
         if (showProgressBar){
-            [MBProgressHUD showStatus:status onView:self.currentViewController.view];
+            [ABHudViewController showStatus:status onView:self.currentViewController.view];
         }else{
-            [MBProgressHUD showOnlyStatus:status onView:self.currentViewController.view];
+            [ABHudViewController showOnlyStatus:status onView:self.currentViewController.view];
         }
     }else{
         if (showProgressBar){
-            [MBProgressHUD showStatus:status witProgress:progress onView:self.currentViewController.view];
+            [ABHudViewController showStatus:status witProgress:progress onView:self.currentViewController.view];
         }else{
-            [MBProgressHUD showOnlyStatus:status onView:self.currentViewController.view];
+            [ABHudViewController showOnlyStatus:status onView:self.currentViewController.view];
         }
     }
 }
