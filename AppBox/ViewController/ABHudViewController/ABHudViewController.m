@@ -37,11 +37,11 @@
             hud.hudSuperView = view;
             [[NSNotificationCenter defaultCenter] addObserver:hud selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:nil];
             [hudDictionary setObject:hud forKey:view.description];
+            [hud updateAd];
         }
         if (![view.subviews containsObject:hud.view]) {
             [view addSubview:hud.view];
         }
-        [hud updateAd];
         return hud;
     }
 }
@@ -113,8 +113,6 @@
 -(void)setProgress:(NSNumber *)progress{
     _progress = progress;
     [progressIndicator startAnimation:self];
-    [progressIndicator setHidden:(progress.integerValue == -2)];
-    [resultImageView setHidden:YES];
     if (progress.integerValue == -1){
         [progressIndicator setIndeterminate: YES];
     } else {
@@ -125,10 +123,30 @@
 
 -(void)setResult:(BOOL)result{
     _result = result;
-    [resultImageView setHidden:NO];
-    [progressIndicator setHidden:YES];
     NSImage *resultImage = result ? [NSImage imageNamed:@"Check"] : [NSImage imageNamed:@"Multiply"];
     [resultImageView setImage:resultImage];
+}
+
+-(void)setHudType:(HudType)hudType{
+    switch (hudType) {
+        case HudTypeResult:{
+            [resultImageView setHidden:NO];
+            [progressIndicator setHidden:YES];
+        }break;
+            
+        case HudTypeStatus: {
+            [progressIndicator setHidden:YES];
+            [resultImageView setHidden:YES];
+        }break;
+            
+        case HudTypeProgress: {
+            [progressIndicator setHidden:NO];
+            [resultImageView setHidden:YES];
+        }break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - Actions
