@@ -6,10 +6,9 @@
 //  Copyright © 2017 Developer Insider. All rights reserved.
 //
 
-#import "MBProgressHUD.h"
 #import "ABHudViewController.h"
 
-@interface MBProgressHUD (ProgressHud)
+@interface ABHudViewController (ProgressHud)
 
 +(void)showStatus:(NSString *)status onView:(NSView *)view;
 +(void)showOnlyStatus:(NSString *)status onView:(NSView *)view;

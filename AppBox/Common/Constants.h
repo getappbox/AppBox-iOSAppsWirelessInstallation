@@ -22,6 +22,7 @@
 #define abMailGunFromEmail @"AppBox Build <mailgun@tryappbox.com>"
 
 //Other URL's
+#define abAppBoxAdsURL @"https://appbox-ads.firebaseio.com/ads.json"
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
 #define abDocumentationURL @"https://tryappbox.github.io/help/"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"

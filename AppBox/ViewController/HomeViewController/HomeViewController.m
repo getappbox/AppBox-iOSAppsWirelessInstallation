@@ -631,7 +631,7 @@
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
         [uploadManager setProject:project];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:true];
+        [ABHudViewController hideAllHudFromView:self.view after:0];
     }
     
     //unique link
@@ -697,15 +697,15 @@
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
         if (showProgressBar){
-            [MBProgressHUD showStatus:status onView:self.view];
+            [ABHudViewController showStatus:status onView:self.view];
         }else{
-            [MBProgressHUD showOnlyStatus:status onView:self.view];
+            [ABHudViewController showOnlyStatus:status onView:self.view];
         }
     }else{
         if (showProgressBar){
-            [MBProgressHUD showStatus:status witProgress:progress onView:self.view];
+            [ABHudViewController showStatus:status witProgress:progress onView:self.view];
         }else{
-            [MBProgressHUD showOnlyStatus:status onView:self.view];
+            [ABHudViewController showOnlyStatus:status onView:self.view];
         }
     }
 }
@@ -850,7 +850,7 @@
         [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
         [MailHandler sendMailForProject:project complition:^(BOOL success) {
             if (success) {
-                [MBProgressHUD showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+                [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
                 if (buttonShutdownMac.state == NSOnState){
                     //if mac shutdown is checked then shutdown mac after 60 sec
                     [self viewStateForProgressFinish:YES];
@@ -867,7 +867,7 @@
                     }
                 }
             } else {
-                [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+                [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
                 [self performSegueWithIdentifier:@"ShowLink" sender:self];
             }
         }];

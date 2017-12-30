@@ -55,7 +55,7 @@ typedef enum : NSUInteger {
     __unsafe_unretained typeof(self) weakSelf = self;
     __unsafe_unretained typeof(UploadManager *) weakUploadManager = uploadManager;
     [uploadManager setCompletionBlock:^{
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [ABHudViewController hideAllHudFromView:weakSelf.view after:0];
         if (weakUploadManager.uploadRecord){
             [[[AppDelegate appDelegate] managedObjectContext] deleteObject: weakUploadManager.uploadRecord];
         }
@@ -64,7 +64,7 @@ typedef enum : NSUInteger {
     }];
     
     [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [ABHudViewController hideAllHudFromView:weakSelf.view after:0];
     }];
 }
 
@@ -176,7 +176,7 @@ typedef enum : NSUInteger {
     if (uploadRecord){
         [[NSPasteboard generalPasteboard] clearContents];
         [[NSPasteboard generalPasteboard] setString:uploadRecord.shortURL forType:NSStringPboardType];
-        [MBProgressHUD showOnlyStatus:@"Copied!!" onView:self.view];
+        [ABHudViewController showOnlyStatus:@"Copied!!" onView:self.view];
         [EventTracker logEventWithType:LogEventTypeCopyToClipboardFromDashboard];
     }
 }
