@@ -154,7 +154,8 @@
 #pragma mark - Actions
 
 - (IBAction)adViewClickGestureRecognized:(NSClickGestureRecognizer *)sender {
-    NSURL *url = [NSURL URLWithString:self.adURL];
+    NSString *utm = @"?utm_source=appbox&utm_medium=appbox-native&utm_campaign=appbox";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.adURL, utm]];
     if (url){
         [[NSWorkspace sharedWorkspace] openURL:url];
     }
