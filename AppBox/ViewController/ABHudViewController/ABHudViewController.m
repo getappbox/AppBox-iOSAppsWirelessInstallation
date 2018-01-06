@@ -22,9 +22,11 @@
     if (hudDictionary == nil) {
         hudDictionary = [[NSMutableDictionary alloc] init];
     }
-    if (hide && [hudDictionary.allKeys containsObject:view.description]) {
-        ABHudViewController *hud = [hudDictionary objectForKey:view.description];
-        [hud.view removeFromSuperview];
+    if (hide) {
+        if ([hudDictionary.allKeys containsObject:view.description]) {
+            ABHudViewController *hud = [hudDictionary objectForKey:view.description];
+            [hud.view removeFromSuperview];
+        }
         return nil;
     } else {
         ABHudViewController *hud;
