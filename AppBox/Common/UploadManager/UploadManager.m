@@ -478,20 +478,37 @@
 
 #pragma mark - Create ShortSharable URL
 -(void)createUniqueShortSharableUrl{
+    //Build URL
     NSString *originalURL = [self.project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
-    //create short url
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
+    
+    //Create Short URL
     GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
     [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-        self.project.appShortShareableURL = shortURL;
-        NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
-        [dictUniqueFile setObject:shortURL.absoluteString forKey:UNIQUE_LINK_SHORT];
-        [self writeUniqueJsonWithDict:dictUniqueFile];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //upload file unique short url
-            [self uploadUniqueLinkJsonFile];
-        });
+        //Retry to create short URL if first try failed
+        if (shortURL == nil || error) {
+            [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
+                if (shortURL == nil || error) {
+                    [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
+                } else {
+                    [self createAndUploadJsonWithURL:shortURL];
+                }
+            }];
+        } else {
+            [self createAndUploadJsonWithURL:shortURL];
+        }
     }];
+}
+
+-(void)createAndUploadJsonWithURL:(NSURL *)shareURL{
+    self.project.appShortShareableURL = shareURL;
+    NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
+    [dictUniqueFile setObject:shareURL.absoluteString forKey:UNIQUE_LINK_SHORT];
+    [self writeUniqueJsonWithDict:dictUniqueFile];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //upload file unique short url
+        [self uploadUniqueLinkJsonFile];
+    });
 }
 
 -(void)createManifestShortSharableUrl{
