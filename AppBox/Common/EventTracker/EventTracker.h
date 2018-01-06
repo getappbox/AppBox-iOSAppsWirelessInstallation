@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
     LogEventTypeShortURLFailedInSecondRequest,
     LogEventTypeShortURLSuccessInFirstRequest,
     LogEventTypeShortURLSuccessInSecondRequest,
+    LogEventTypeShortURLElseBlockExecuted,
     LogEventTypeExternalLinkTwitter,
     LogEventTypeExternalLinkHelp,
     LogEventTypeExternalLinkReleaseNote,

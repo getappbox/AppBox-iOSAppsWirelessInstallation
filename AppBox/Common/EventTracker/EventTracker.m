@@ -74,6 +74,11 @@
                                     action:@"Request No" label:@"2" value:@1];
         }break;
             
+        case LogEventTypeShortURLElseBlockExecuted: {
+            [EventTracker logEventWithName:@"Short URL Else Block Executed" customAttributes:@{@"Request No":@1}
+                                    action:@"Request No" label:@"1" value:@1];
+        }break;
+            
         case LogEventTypeExternalLinkHelp:{
             [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Help"} action:@"title" label:@"Help" value:@1];
         }break;
