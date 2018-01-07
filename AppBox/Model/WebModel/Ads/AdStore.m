@@ -41,6 +41,8 @@
                         [[[AdStore shared] ads] addObject:ad];
                     }
                 }];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:abAdsLoadCompleted object:nil];
             }
         }
     }];

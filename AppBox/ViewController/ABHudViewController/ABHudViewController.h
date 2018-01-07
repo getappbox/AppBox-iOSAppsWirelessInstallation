@@ -34,4 +34,7 @@ typedef enum : NSUInteger {
 
 + (ABHudViewController *)hudForView:(NSView *)view hide:(BOOL)hide;
 - (IBAction)adViewClickGestureRecognized:(NSClickGestureRecognizer *)sender;
+- (IBAction)previousButtonClicked:(NSButton *)sender;
+- (IBAction)nextButtonClicked:(NSButton *)sender;
+
 @end
