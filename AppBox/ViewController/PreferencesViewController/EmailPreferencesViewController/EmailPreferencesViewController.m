@@ -54,6 +54,7 @@
     [project setName:@"TestApp"];
     [project setVersion:@"1.0"];
     [project setBuild:@"1"];
+    [project setSelectedSchemes:@"UAT"];
     [project setEmails: emailTextField.stringValue];
     [project setAppShortShareableURL:[NSURL URLWithString:@"tryappbox.com"]];
     [project setPersonalMessage: [MailHandler parseMessage:personalMessageTextField.stringValue forProject:project]];

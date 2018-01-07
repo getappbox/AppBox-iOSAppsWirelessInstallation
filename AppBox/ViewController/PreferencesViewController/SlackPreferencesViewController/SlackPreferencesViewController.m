@@ -52,6 +52,7 @@
     [project setName:@"TestApp"];
     [project setVersion:@"1.0"];
     [project setBuild:@"1"];
+    [project setSelectedSchemes:@"UAT"];
     [project setAppShortShareableURL:[NSURL URLWithString:@"tryappbox.com"]];
     
     [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
