@@ -30,6 +30,7 @@
 #define abTwitterURL @"https://twitter.com/tryappbox"
 #define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
+#define abShareXcodeProjectSchemeURL @"http://www.tryappbox.com/features/faq/HowToShareXcodeProjectSchemes.html"
 
 //Unique links
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
