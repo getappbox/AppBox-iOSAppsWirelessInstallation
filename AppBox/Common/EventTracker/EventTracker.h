@@ -36,7 +36,8 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     LogEventSettingTypeUploadIPA,
     LogEventSettingTypeArchiveAndUpload,
-    LogEventSettingTypeUploadIPASuccess
+    LogEventSettingTypeUploadIPASuccess,
+    LogEventAdsClicked
 } LogEventSettingTypes;
 
 @interface EventTracker : NSObject {

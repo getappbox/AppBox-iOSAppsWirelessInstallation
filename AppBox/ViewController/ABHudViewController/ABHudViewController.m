@@ -18,6 +18,9 @@
 
 #pragma mark - Hud View
 + (ABHudViewController *)hudForView:(NSView *)view hide:(BOOL)hide{
+    if ([AdStore shared].ads.count == 0){
+        [AdStore loadAds];
+    }
     static NSMutableDictionary *hudDictionary = nil;
     if (hudDictionary == nil) {
         hudDictionary = [[NSMutableDictionary alloc] init];
@@ -174,10 +177,13 @@
 #pragma mark - Actions
 
 - (IBAction)adViewClickGestureRecognized:(NSClickGestureRecognizer *)sender {
-    NSString *utm = @"?utm_source=appbox&utm_medium=appbox-native&utm_campaign=appbox";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.adURL, utm]];
-    if (url){
-        [[NSWorkspace sharedWorkspace] openURL:url];
+    if (self.adURL != nil) {
+        NSString *utm = @"?utm_source=appbox&utm_medium=appbox-native&utm_campaign=appbox";
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.adURL, utm]];
+        if (url){
+            [EventTracker logEventSettingWithType:LogEventAdsClicked andSettings:@{@"Title": self.adTitle, @"URL": self.adURL}];
+            [[NSWorkspace sharedWorkspace] openURL:url];
+        }
     }
 }
 
