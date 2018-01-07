@@ -52,6 +52,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abBuildRepoNotification @"BuildRepoNotification"
 #define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
 #define abStopAppBoxLocalServer @"StopAppBoxLocalServer"
+#define abAdsLoadCompleted @"AdsLoadCompleted"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"

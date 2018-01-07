@@ -95,7 +95,7 @@
                                             <constraint firstAttribute="width" constant="60" id="x8M-8Y-7PX"/>
                                             <constraint firstAttribute="height" constant="25" id="zZq-hl-Wqx"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="Previous" id="kMl-Ll-RPQ">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Previous" id="kMl-Ll-RPQ">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -108,6 +108,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="previousButtonClicked:" target="-2" id="baP-FE-xmO"/>
+                                        </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tvf-7w-HYg">
                                         <rect key="frame" x="400" y="3" width="64" height="25"/>
@@ -121,13 +124,15 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ikb-JS-V64">
-                                        <rect key="frame" x="400" y="5" width="60" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ikb-JS-V64">
+                                        <rect key="frame" x="402" y="3" width="60" height="25"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="1wo-ev-Ond">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="nextButtonClicked:" target="-2" id="8eK-10-Ors"/>
+                                        </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cCP-Y0-c49">
                                         <rect key="frame" x="73" y="11" width="321" height="17"/>
@@ -142,11 +147,15 @@
                                     </box>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ikb-JS-V64" firstAttribute="leading" secondItem="tvf-7w-HYg" secondAttribute="leading" id="18n-os-6Rm"/>
                                     <constraint firstAttribute="height" constant="35" id="5q7-rV-eSZ"/>
+                                    <constraint firstItem="ikb-JS-V64" firstAttribute="trailing" secondItem="tvf-7w-HYg" secondAttribute="trailing" id="8Zn-M9-889"/>
                                     <constraint firstItem="cCP-Y0-c49" firstAttribute="top" secondItem="7ZY-IM-V3c" secondAttribute="top" constant="7" id="Bf0-vh-5ZN"/>
                                     <constraint firstAttribute="trailing" secondItem="tvf-7w-HYg" secondAttribute="trailing" constant="5" id="Gh9-Ma-6HK"/>
                                     <constraint firstItem="DWY-Ye-Uf7" firstAttribute="leading" secondItem="7ZY-IM-V3c" secondAttribute="leading" id="NAV-QS-Np6"/>
                                     <constraint firstAttribute="trailing" secondItem="DWY-Ye-Uf7" secondAttribute="trailing" id="SHN-n4-yTD"/>
+                                    <constraint firstItem="ikb-JS-V64" firstAttribute="bottom" secondItem="tvf-7w-HYg" secondAttribute="bottom" id="U8g-ko-cyF"/>
+                                    <constraint firstItem="ikb-JS-V64" firstAttribute="top" secondItem="tvf-7w-HYg" secondAttribute="top" id="Y9m-s7-HU7"/>
                                     <constraint firstAttribute="bottom" secondItem="DWY-Ye-Uf7" secondAttribute="bottom" constant="5" id="ZCu-gj-lDs"/>
                                     <constraint firstItem="oGg-WG-ojI" firstAttribute="leading" secondItem="7ZY-IM-V3c" secondAttribute="leading" constant="5" id="bwU-Wc-Rkp"/>
                                     <constraint firstItem="tvf-7w-HYg" firstAttribute="top" secondItem="7ZY-IM-V3c" secondAttribute="top" constant="7" id="gOZ-St-cc7"/>
@@ -159,26 +168,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="467" height="131"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="giI-WW-t3b">
-                                        <rect key="frame" x="172" y="34" width="123" height="63"/>
+                                        <rect key="frame" x="191" y="34" width="86" height="63"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-eZ-5AJ">
-                                                <rect key="frame" x="-2" y="42" width="127" height="21"/>
-                                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="3zC-lf-0TK">
+                                                <rect key="frame" x="-2" y="42" width="90" height="21"/>
+                                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Loading..." id="3zC-lf-0TK">
                                                     <font key="font" metaFont="systemBold" size="17"/>
                                                     <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="5Kq-5S-MvA">
-                                                <rect key="frame" x="-2" y="23" width="127" height="19"/>
-                                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="Iqa-nF-HZJ">
+                                                <rect key="frame" x="-2" y="23" width="90" height="19"/>
+                                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Loading..." id="Iqa-nF-HZJ">
                                                     <font key="font" metaFont="system" size="15"/>
                                                     <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bpM-lz-HRq">
-                                                <rect key="frame" x="17" y="0.0" width="90" height="18"/>
+                                                <rect key="frame" x="-2" y="0.0" width="90" height="18"/>
                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Read more..." id="Qyp-gr-sPy">
                                                     <font key="font" metaFont="system" size="14"/>
                                                     <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
