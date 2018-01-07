@@ -64,9 +64,9 @@ echo "Creating IPA..."
 #check either selected xcode is 9 or higher
 if [[ "${7}" > "9" || "${7}" == "9" ]]
 then
-    echo "Creatomg IPA with Xcode 9"
+    echo "Creating IPA with Xcode 9"
     xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
 else
-    echo "Creatomg IPA with Xcode 8"
+    echo "Creating IPA with Xcode 8"
     xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
 fi
