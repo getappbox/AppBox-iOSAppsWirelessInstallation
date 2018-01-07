@@ -74,6 +74,11 @@
                                     action:@"Request No" label:@"2" value:@1];
         }break;
             
+        case LogEventTypeShortURLElseBlockExecuted: {
+            [EventTracker logEventWithName:@"Short URL Else Block Executed" customAttributes:@{@"Request No":@1}
+                                    action:@"Request No" label:@"1" value:@1];
+        }break;
+            
         case LogEventTypeExternalLinkHelp:{
             [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Help"} action:@"title" label:@"Help" value:@1];
         }break;
@@ -122,6 +127,7 @@
             NSString *name = @"Dashboard open from Show Link";
             [EventTracker logEventWithName:name customAttributes:@{name:@1} action:name label:name value:@1];
         }break;
+        
             
         default:
             break;
@@ -141,6 +147,12 @@
         case LogEventSettingTypeUploadIPASuccess: {
             [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting action:@"Uploaded to" label:@"AppStore" value:@1];
         }break;
+            
+        case LogEventAdsClicked:{
+            NSString *name = @"Ad Clicked";
+            [EventTracker logEventWithName:name customAttributes:currentSetting action:@"Ad Clicked" label:@"AppBox-Native" value:@1];
+        }break;
+        
         default:
             break;
     }

@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
     LogEventTypeShortURLFailedInSecondRequest,
     LogEventTypeShortURLSuccessInFirstRequest,
     LogEventTypeShortURLSuccessInSecondRequest,
+    LogEventTypeShortURLElseBlockExecuted,
     LogEventTypeExternalLinkTwitter,
     LogEventTypeExternalLinkHelp,
     LogEventTypeExternalLinkReleaseNote,
@@ -35,7 +36,8 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     LogEventSettingTypeUploadIPA,
     LogEventSettingTypeArchiveAndUpload,
-    LogEventSettingTypeUploadIPASuccess
+    LogEventSettingTypeUploadIPASuccess,
+    LogEventAdsClicked
 } LogEventSettingTypes;
 
 @interface EventTracker : NSObject {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
@@ -16,11 +17,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="680" height="193"/>
+            <rect key="frame" x="0.0" y="0.0" width="680" height="218"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mjn-bT-CIG">
-                    <rect key="frame" x="18" y="154" width="179" height="19"/>
+                    <rect key="frame" x="18" y="179" width="179" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="3dJ-l5-zof"/>
                     </constraints>
@@ -31,7 +32,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9r2-v4-bkQ">
-                    <rect key="frame" x="210" y="152" width="450" height="24"/>
+                    <rect key="frame" x="210" y="177" width="450" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="1bh-dv-2k0"/>
                     </constraints>
@@ -42,7 +43,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIS-te-x1g">
-                    <rect key="frame" x="18" y="115" width="179" height="19"/>
+                    <rect key="frame" x="18" y="140" width="179" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Link Prefix Message:" id="waD-8i-7aN">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,7 +51,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBN-E3-vOT">
-                    <rect key="frame" x="210" y="113" width="450" height="24"/>
+                    <rect key="frame" x="210" y="138" width="450" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Slack Message Here" drawsBackground="YES" id="2Hv-ni-fmB">
                         <font key="font" metaFont="systemLight" size="16"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -58,16 +59,17 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNt-JQ-OEn">
-                    <rect key="frame" x="208" y="56" width="454" height="52"/>
+                    <rect key="frame" x="208" y="66" width="454" height="67"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="52" id="Jj5-m3-heC"/>
+                        <constraint firstAttribute="height" constant="67" id="Jj5-m3-heC"/>
                     </constraints>
                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" id="jnf-oH-zV9">
                         <font key="font" metaFont="system" size="10"/>
                         <string key="title">Supported Keywords: The
 {PROJECT_NAME} - For Project Name
 {BUILD_VERSION} - For Build Version
-{BUILD_NUMBER} - For Build Number </string>
+{BUILD_NUMBER} - For Build Number 
+{PROJECT_SCHEME} - For Project Scheme</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -106,7 +108,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9r2-v4-bkQ" secondAttribute="trailing" constant="20" id="0z4-Ow-JCX"/>
                 <constraint firstItem="N6m-ow-2SF" firstAttribute="centerY" secondItem="VI4-aB-Pi7" secondAttribute="centerY" id="9Nc-zu-3Ku"/>
-                <constraint firstItem="VI4-aB-Pi7" firstAttribute="top" secondItem="dNt-JQ-OEn" secondAttribute="bottom" constant="15" id="AEK-H0-5vE"/>
+                <constraint firstItem="VI4-aB-Pi7" firstAttribute="top" secondItem="dNt-JQ-OEn" secondAttribute="bottom" constant="25" id="AEK-H0-5vE"/>
                 <constraint firstItem="9r2-v4-bkQ" firstAttribute="leading" secondItem="Mjn-bT-CIG" secondAttribute="trailing" constant="15" id="BBj-fx-41A"/>
                 <constraint firstItem="Mjn-bT-CIG" firstAttribute="centerY" secondItem="9r2-v4-bkQ" secondAttribute="centerY" id="G0V-HT-u5A"/>
                 <constraint firstItem="UIS-te-x1g" firstAttribute="top" secondItem="Mjn-bT-CIG" secondAttribute="bottom" constant="20" id="IuK-Jj-4Ts"/>

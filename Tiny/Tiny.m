@@ -47,6 +47,9 @@
                     if (completionBlock){
                         completionBlock(URL, nil);
                     }
+                } else {
+                    [EventTracker logEventWithType:LogEventTypeShortURLElseBlockExecuted];
+                    completionBlock(nil, nil);
                 }
             }];
             [dataTask resume];
@@ -62,6 +65,9 @@
             if (completionBlock){
                 completionBlock(URL, nil);
             }
+        } else {
+            [EventTracker logEventWithType:LogEventTypeShortURLElseBlockExecuted];
+            completionBlock(nil, nil);
         }
     }];
     [dataTask resume];
