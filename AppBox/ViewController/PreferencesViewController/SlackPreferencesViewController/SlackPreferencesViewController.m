@@ -38,7 +38,7 @@
     }
     [UserData setUserSlackChannel:slackChannelTextField.stringValue];
     [UserData setUserSlackMessage:slackMessageTextField.stringValue];
-    [MBProgressHUD showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
+    [ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
 }
 
 - (IBAction)sendTextMessageButtonTapped:(NSButton *)sender {
@@ -52,15 +52,16 @@
     [project setName:@"TestApp"];
     [project setVersion:@"1.0"];
     [project setBuild:@"1"];
+    [project setSelectedSchemes:@"UAT"];
     [project setAppShortShareableURL:[NSURL URLWithString:@"tryappbox.com"]];
     
-    [MBProgressHUD showStatus:@"Sending Test Message..." onView:self.view];
+    [ABHudViewController showStatus:@"Sending Test Message..." onView:self.view];
     [SlackClient sendMessageForProject:project completion:^(BOOL success) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
-            [MBProgressHUD showStatus:@"Message Sent." forSuccess:YES onView:self.view];
+            [ABHudViewController showStatus:@"Message Sent." forSuccess:YES onView:self.view];
         } else {
-            [MBProgressHUD showStatus:@"Message Failed." forSuccess:NO onView:self.view];
+            [ABHudViewController showStatus:@"Message Failed." forSuccess:NO onView:self.view];
         }
     }];
 }

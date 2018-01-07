@@ -58,6 +58,9 @@
             [self addSessionLog:[NSString stringWithFormat:@"Normal Run"]];
         }
     }
+    
+    //Load Ads
+    [AdStore loadAds];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

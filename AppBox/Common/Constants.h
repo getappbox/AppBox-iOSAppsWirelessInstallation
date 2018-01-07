@@ -22,6 +22,7 @@
 #define abMailGunFromEmail @"AppBox Build <mailgun@tryappbox.com>"
 
 //Other URL's
+#define abAppBoxAdsURL @"https://appbox-ads.firebaseio.com/ads.json"
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
 #define abDocumentationURL @"https://tryappbox.github.io/help/"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
@@ -29,6 +30,7 @@
 #define abTwitterURL @"https://twitter.com/tryappbox"
 #define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
+#define abShareXcodeProjectSchemeURL @"http://www.tryappbox.com/features/faq/HowToShareXcodeProjectSchemes.html"
 
 //Unique links
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
@@ -51,6 +53,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abBuildRepoNotification @"BuildRepoNotification"
 #define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
 #define abStopAppBoxLocalServer @"StopAppBoxLocalServer"
+#define abAdsLoadCompleted @"AdsLoadCompleted"
 
 //messages
 #define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"

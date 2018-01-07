@@ -397,37 +397,45 @@
             if (scriptType == ScriptTypeGetScheme){
                 NSError *error;
                 NSDictionary *buildList = [NSJSONSerialization JSONObjectWithData:outputData options:NSJSONReadingAllowFragments error:&error];
-                if (buildList != nil){
+                if (buildList != nil) {
                     [project setBuildListInfo:buildList];
                     [comboBuildScheme removeAllItems];
                     [comboBuildScheme addItemsWithObjectValues:project.schemes];
-                    if (comboBuildScheme.numberOfItems > 0){
-                        [comboBuildScheme selectItemAtIndex:0];
-                        if (repoProject == nil) {
-                            [self comboBuildSchemeValueChanged:comboBuildScheme];
-                            
-                            //Run Team Id Script
-                            [self runTeamIDScript];
-                        } else {
-                            [RepoBuilder setProjectSettingFromProject:repoProject toProject:project];
-                            [comboTeamId removeAllItems];
-                            [comboTeamId addItemWithObjectValue:project.teamId];
-                            [comboTeamId selectItemWithObjectValue:project.teamId];
-                            [comboBuildType selectItemWithObjectValue:project.buildType];
-                            [comboBuildScheme selectItemWithObjectValue:project.selectedSchemes];
-                            [textFieldEmail setStringValue:project.emails];
-                            [textFieldMessage setStringValue:project.personalMessage];
-                            if (project.emails.length > 0){
-                                [buttonSendMail setState:NSOnState];
-                            }
-                            [self actionButtonTapped:buttonAction];
+                }
+                if (buildList != nil && comboBuildScheme.numberOfItems > 0){
+                    [comboBuildScheme selectItemAtIndex:0];
+                    if (repoProject == nil) {
+                        [self comboBuildSchemeValueChanged:comboBuildScheme];
+                        
+                        //Run Team Id Script
+                        [self runTeamIDScript];
+                    } else {
+                        [RepoBuilder setProjectSettingFromProject:repoProject toProject:project];
+                        [comboTeamId removeAllItems];
+                        [comboTeamId addItemWithObjectValue:project.teamId];
+                        [comboTeamId selectItemWithObjectValue:project.teamId];
+                        [comboBuildType selectItemWithObjectValue:project.buildType];
+                        [comboBuildScheme selectItemWithObjectValue:project.selectedSchemes];
+                        [textFieldEmail setStringValue:project.emails];
+                        [textFieldMessage setStringValue:project.personalMessage];
+                        if (project.emails.length > 0){
+                            [buttonSendMail setState:NSOnState];
                         }
+                        [self actionButtonTapped:buttonAction];
                     }
                 }else{
                     if (schemeScriptRunCount == 3){
                         schemeScriptRunCount = 0;
                         [self viewStateForProgressFinish:YES];
-                        [Common showAlertWithTitle:@"" andMessage:@"Failed to load scheme information. Please try again."];
+                        NSAlert *alert = [[NSAlert alloc] init];
+                        [alert setMessageText: @"Failed to load scheme information."];
+                        [alert setInformativeText:@"Please try again with shared Xcode project schemes."];
+                        [alert setAlertStyle:NSInformationalAlertStyle];
+                        [alert addButtonWithTitle:@"How to share Xcode Project Schemes?"];
+                        [alert addButtonWithTitle:@"OK"];
+                        if ([alert runModal] == NSAlertFirstButtonReturn){
+                            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abShareXcodeProjectSchemeURL]];
+                        }
                     } else {
                         schemeScriptRunCount++;
                         [self runGetSchemeScript];
@@ -631,7 +639,7 @@
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
         [uploadManager setProject:project];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:true];
+        [ABHudViewController hideAllHudFromView:self.view after:0];
     }
     
     //unique link
@@ -697,15 +705,15 @@
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
         if (showProgressBar){
-            [MBProgressHUD showStatus:status onView:self.view];
+            [ABHudViewController showStatus:status onView:self.view];
         }else{
-            [MBProgressHUD showOnlyStatus:status onView:self.view];
+            [ABHudViewController showOnlyStatus:status onView:self.view];
         }
     }else{
         if (showProgressBar){
-            [MBProgressHUD showStatus:status witProgress:progress onView:self.view];
+            [ABHudViewController showStatus:status witProgress:progress onView:self.view];
         }else{
-            [MBProgressHUD showOnlyStatus:status onView:self.view];
+            [ABHudViewController showOnlyStatus:status onView:self.view];
         }
     }
 }
@@ -850,7 +858,7 @@
         [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
         [MailHandler sendMailForProject:project complition:^(BOOL success) {
             if (success) {
-                [MBProgressHUD showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+                [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
                 if (buttonShutdownMac.state == NSOnState){
                     //if mac shutdown is checked then shutdown mac after 60 sec
                     [self viewStateForProgressFinish:YES];
@@ -867,7 +875,7 @@
                     }
                 }
             } else {
-                [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+                [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
                 [self performSegueWithIdentifier:@"ShowLink" sender:self];
             }
         }];

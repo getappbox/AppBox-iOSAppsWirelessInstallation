@@ -39,7 +39,7 @@
     }
     [UserData setUserEmail:emailTextField.stringValue];
     [UserData setUserMessage:personalMessageTextField.stringValue];
-    [MBProgressHUD showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
+    [ABHudViewController showStatus:@"Details Saved!" forSuccess:YES onView:self.view];
 }
 
 - (IBAction)sendTestMailButtonTapped:(NSButton *)sender {
@@ -54,18 +54,19 @@
     [project setName:@"TestApp"];
     [project setVersion:@"1.0"];
     [project setBuild:@"1"];
+    [project setSelectedSchemes:@"UAT"];
     [project setEmails: emailTextField.stringValue];
     [project setAppShortShareableURL:[NSURL URLWithString:@"tryappbox.com"]];
     [project setPersonalMessage: [MailHandler parseMessage:personalMessageTextField.stringValue forProject:project]];
     
     //send mail
-    [MBProgressHUD showStatus:@"Sending Test Mail" onView:self.view];
+    [ABHudViewController showStatus:@"Sending Test Mail" onView:self.view];
     [MailHandler sendMailForProject:project complition:^(BOOL success) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
-            [MBProgressHUD showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+            [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
         } else {
-            [MBProgressHUD showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+            [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
         }
     }];
 }
