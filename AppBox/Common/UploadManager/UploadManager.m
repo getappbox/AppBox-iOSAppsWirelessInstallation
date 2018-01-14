@@ -316,6 +316,10 @@
             sessionId = result.sessionId;
             offset += nextChunkToUpload.length;
             [self uploadNextChunk];
+        } else if (networkError .nsError.code == -1009) {
+            self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                [self dbUploadLargeFile:file to:path mode:mode];
+            }];
         } else if (networkError) {
             [DBErrorHandler handleNetworkErrorWith:networkError];
         }
@@ -338,6 +342,10 @@
                     //create shared url for ipa
                     [self dbCreateSharedURLForFile:result.pathDisplay];
                 }
+            } else if (networkError.nsError.code == -1009) {
+                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                    [self uploadNextChunk];
+                }];
             } else if (routeError) {
                 [DBErrorHandler handleUploadSessionFinishError:routeError];
             } else {
@@ -351,7 +359,11 @@
             if (result) {
                 offset += nextChunkToUpload.length;
                 [self uploadNextChunk];
-            } else if (routeError) {
+            } else if (networkError.nsError.code == -1009) {
+                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                    [self uploadNextChunk];
+                }];
+            }else if (routeError) {
                 [DBErrorHandler handleUploadSessionLookupError:routeError];
             } else {
                 [DBErrorHandler handleNetworkErrorWith:networkError];
