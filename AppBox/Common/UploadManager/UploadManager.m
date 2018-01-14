@@ -385,7 +385,7 @@
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     //Upload large ipa file with dropbox session api
-    if (self.dbFileType == DBFileTypeIPA) {
+    if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
         [self dbUploadLargeFile:file to:path mode:mode];
         return;
     }
