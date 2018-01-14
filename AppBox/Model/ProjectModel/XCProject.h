@@ -24,6 +24,7 @@
 @property(nonatomic, retain) NSString *identifer;
 @property(nonatomic, retain) NSString *teamId;
 @property(nonatomic, retain) NSString *buildType;
+@property(nonatomic, retain) NSNumber *ipaFileSize;
 
 //Local URLS
 @property(nonatomic, retain) NSURL *fullPath;

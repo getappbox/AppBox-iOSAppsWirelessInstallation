@@ -126,6 +126,20 @@
 
 #pragma mark - Setter
 
+-(void)setIpaFullPath:(NSURL *)ipaFullPath{
+    _ipaFullPath = ipaFullPath;
+    NSError *error;
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:ipaFullPath.resourceSpecifier.stringByRemovingPercentEncoding error:&error];
+    if (error) {
+        _ipaFileSize = [NSNumber numberWithLongLong:0];
+    } else {
+        NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
+        long long fileSize = [fileSizeNumber longLongValue];
+        _ipaFileSize = [NSNumber numberWithLongLong:(fileSize/1000000)];
+    }
+    
+}
+
 - (void)setName:(NSString *)name{
     _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 }
