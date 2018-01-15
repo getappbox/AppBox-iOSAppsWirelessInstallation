@@ -305,7 +305,7 @@
 #pragma mark - Upload Files
 -(void)dbUploadLargeFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     offset = 0;
-    chunkSize = 1 * 1024 * 1024;
+    chunkSize = [UserData uploadChunkSize] * abBytesToMB;
     ipaFileData = [NSData dataWithContentsOfFile:file];
     fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
