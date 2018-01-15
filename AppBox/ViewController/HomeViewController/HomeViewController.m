@@ -390,7 +390,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:outputPipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSData *outputData =  outputPipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Task Output - %@\n",outputString]];
+        [[AppDelegate appDelegate] addSessionLog:outputString];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Handle Project Scheme Response

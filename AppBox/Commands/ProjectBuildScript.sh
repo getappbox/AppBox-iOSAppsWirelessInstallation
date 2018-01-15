@@ -36,10 +36,10 @@ then
     if [[ "${7}" > "9" || "${7}" == "9" ]]
     then
         echo "Building Project with Xcode 9"
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | /usr/local/bin/xcpretty && exit ${PIPESTATUS[0]}
     else
         echo "Building Project with Xcode 8"
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"  | /usr/local/bin/xcpretty && exit ${PIPESTATUS[0]}
     fi
 
 else
@@ -49,10 +49,10 @@ else
     if [[ "${7}" > "9" || "${7}" == "9" ]]
     then
         echo "Building Project with Xcode 9"
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | /usr/local/bin/xcpretty && exit ${PIPESTATUS[0]}
     else
         echo "Building Project with Xcode 8"
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"  | xcpretty && exit ${PIPESTATUS[0]}
     fi
 
 fi
@@ -68,5 +68,5 @@ then
     xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
 else
     echo "Creating IPA with Xcode 8"
-    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
+    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" 
 fi
