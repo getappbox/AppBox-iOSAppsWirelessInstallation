@@ -472,34 +472,6 @@
             
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
-                
-                XCArchiveResult *result = [XCArchiveParser archiveResultMessageFromString:outputString];
-                switch (result.type) {
-                    case XCArchiveResultCleanSucceeded:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultArchiveFailed:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultArchiveSucceeded:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultExportFailed:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultExportSucceeded:{
-                        
-                    }break;
-                        
-                    default:
-                        break;
-                }
-                
-                
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
                     [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];

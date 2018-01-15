@@ -543,27 +543,6 @@
 			path = XCArchiveParser;
 			sourceTree = "<group>";
 		};
-		E14A441A1F277567006A9102 /* XCIPAParser */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = XCIPAParser;
-			sourceTree = "<group>";
-		};
-		E14A441B1F277567006A9102 /* XCSchemeParser */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = XCSchemeParser;
-			sourceTree = "<group>";
-		};
-		E14A441C1F277567006A9102 /* XCTeamIDParser */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = XCTeamIDParser;
-			sourceTree = "<group>";
-		};
 		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,9 +692,6 @@
 			isa = PBXGroup;
 			children = (
 				E14A44191F277567006A9102 /* XCArchiveParser */,
-				E14A441A1F277567006A9102 /* XCIPAParser */,
-				E14A441B1F277567006A9102 /* XCSchemeParser */,
-				E14A441C1F277567006A9102 /* XCTeamIDParser */,
 				E16D72D21E88F99A0031FB7C /* ALOutputParser */,
 			);
 			path = OutputParsers;
