@@ -176,4 +176,16 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - Chunk Size -
+#define UploadChunkSize @"UploadChunkSize"
++(NSInteger)uploadChunkSize{
+    NSInteger chunkSize = [[NSUserDefaults standardUserDefaults] integerForKey:UploadChunkSize];
+    return chunkSize > 0 ? chunkSize : 100;
+}
+
++(void)setUploadChunkSize:(NSInteger)chunkSize{
+    [[NSUserDefaults standardUserDefaults] setInteger:chunkSize forKey:UploadChunkSize];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end
