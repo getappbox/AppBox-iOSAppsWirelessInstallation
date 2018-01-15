@@ -13,5 +13,7 @@
 +(void)handleNetworkErrorWith:(DBRequestError *)networkError;
 +(void)handleDeleteErrorWith:(DBFILESDeleteError *)deleteError;
 +(void)handleUploadErrorWith:(DBFILESUploadError *)uploadError;
++(void)handleUploadSessionLookupError:(DBFILESUploadSessionLookupError *)error;
++(void)handleUploadSessionFinishError:(DBFILESUploadSessionFinishError *)error;
 
 @end

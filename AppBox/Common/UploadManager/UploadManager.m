@@ -8,7 +8,16 @@
 
 #import "UploadManager.h"
 
-@implementation UploadManager
+@implementation UploadManager {
+    //For Large Upload
+    NSString *sessionId;
+    NSData *ipaFileData;
+    NSData *nextChunkToUpload;
+    NSUInteger chunkSize;
+    NSUInteger offset;
+    NSFileHandle *fileHandle;
+    DBFILESCommitInfo *fileCommitInfo;
+}
 
 +(void)setupDBClientsManager{
     //Force Foreground Session
@@ -294,7 +303,93 @@
 }
 
 #pragma mark - Upload Files
+-(void)dbUploadLargeFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+    offset = 0;
+    chunkSize = 1 * 1024 * 1024;
+    ipaFileData = [NSData dataWithContentsOfFile:file];
+    fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
+    nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
+    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO];
+    
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
+        if (result) {
+            sessionId = result.sessionId;
+            offset += nextChunkToUpload.length;
+            [self uploadNextChunk];
+        } else if (networkError .nsError.code == -1009) {
+            self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                [self dbUploadLargeFile:file to:path mode:mode];
+            }];
+        } else if (networkError) {
+            [DBErrorHandler handleNetworkErrorWith:networkError];
+        }
+    }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+        [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+    }];
+}
+
+-(void)uploadNextChunk{
+    nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
+    DBFILESUploadSessionCursor *cursor = [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:[NSNumber numberWithUnsignedInteger:offset]];
+    if (nextChunkToUpload.length < chunkSize) {
+        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            if (result) {
+                if (self.dbFileType == DBFileTypeIPA){
+                    [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
+                    NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
+                    [self showStatus:status andShowProgressBar:YES withProgress:-1];
+                    
+                    //create shared url for ipa
+                    [self dbCreateSharedURLForFile:result.pathDisplay];
+                }
+            } else if (networkError.nsError.code == -1009) {
+                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                    [self uploadNextChunk];
+                }];
+            } else if (routeError) {
+                [DBErrorHandler handleUploadSessionFinishError:routeError];
+            } else {
+                [DBErrorHandler handleNetworkErrorWith:networkError];
+            }
+        }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+            [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+        }];
+    } else {
+        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionLookupError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            if (result) {
+                offset += nextChunkToUpload.length;
+                [self uploadNextChunk];
+            } else if (networkError.nsError.code == -1009) {
+                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                    [self uploadNextChunk];
+                }];
+            }else if (routeError) {
+                [DBErrorHandler handleUploadSessionLookupError:routeError];
+            } else {
+                [DBErrorHandler handleNetworkErrorWith:networkError];
+            }
+        }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+            [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+        }];
+    }
+}
+
+-(void)updateProgressBytesWritten:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
+    //CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
+    NSUInteger newBytesWritten = offset + totalBytesWritten;
+    CGFloat progress = (newBytesWritten * 100 / ipaFileData.length );
+    NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)", [NSNumber numberWithInt:progress]];
+    [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
+}
+
+
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+    //Upload large ipa file with dropbox session api
+    if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
+        [self dbUploadLargeFile:file to:path mode:mode];
+        return;
+    }
+    
     //uploadUrl:path inputUrl:file
     [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
       //Track response with result and error
