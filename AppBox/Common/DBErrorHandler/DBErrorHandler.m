@@ -99,4 +99,58 @@
     }
 }
 
++(void)handleUploadSessionLookupError:(DBFILESUploadSessionLookupError *)error{
+    switch (error.tag) {
+        case DBFILESUploadSessionLookupErrorClosed:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"You are attempting to append data to an upload session that has already been closed. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionLookupErrorNotFound:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"he upload session ID was not found or has expired. Upload sessions are valid for 48 hours. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionLookupErrorNotClosed:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"The session must be closed before calling upload_session/finish_batch. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionLookupErrorIncorrectOffset:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"The specified offset was incorrect. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionLookupErrorOther:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"Something goes wrong. Please try again."];
+        }break;
+            
+        default:
+            break;
+    }
+}
+
++(void)handleUploadSessionFinishError:(DBFILESUploadSessionFinishError *)error{
+    switch (error.tag) {
+        case DBFILESUploadSessionFinishErrorPath:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"Unable to save the uploaded contents to a file. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionFinishErrorLookupFailed:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"The session arguments are incorrect. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionFinishErrorTooManyWriteOperations:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"There are too many write operations happening in the user's Dropbox. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"The batch request commits files into too many different shared folders. Please try again."];
+        }break;
+            
+        case DBFILESUploadSessionFinishErrorOther:{
+            [Common showAlertWithTitle:@"Error" andMessage:@"Something goes wrong. Please try again."];
+        }break;
+            
+        default:
+            break;
+    }
+}
+
 @end

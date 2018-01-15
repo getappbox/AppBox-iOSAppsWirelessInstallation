@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController">
             <connections>
+                <outlet property="chunkSizeComboBox" destination="6Bo-Mb-ZwI" id="wrb-LN-Rad"/>
                 <outlet property="compileBitCodeButton" destination="tft-z6-Exe" id="Wg2-rK-MO3"/>
                 <outlet property="pathBuild" destination="551-hz-G00" id="jfA-9F-eaH"/>
                 <outlet property="pathXCode" destination="1qf-8k-ZUe" id="0aI-Ot-7nn"/>
@@ -19,11 +21,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <view id="taC-Ah-5bC">
-            <rect key="frame" x="0.0" y="0.0" width="695" height="235"/>
+            <rect key="frame" x="0.0" y="0.0" width="695" height="329"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TPS-di-ZXM">
-                    <rect key="frame" x="13" y="196" width="204" height="19"/>
+                    <rect key="frame" x="13" y="290" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="8UR-jQ-x3B"/>
                         <constraint firstAttribute="width" constant="200" id="Teb-Xo-E6G"/>
@@ -35,7 +37,7 @@
                     </textFieldCell>
                 </textField>
                 <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="551-hz-G00">
-                    <rect key="frame" x="227" y="192" width="306" height="26"/>
+                    <rect key="frame" x="227" y="286" width="306" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="zXT-Ex-KgB"/>
                     </constraints>
@@ -51,7 +53,7 @@
                     </connections>
                 </pathControl>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iq9-J2-dU4">
-                    <rect key="frame" x="13" y="157" width="204" height="19"/>
+                    <rect key="frame" x="13" y="251" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="FQh-6E-Ul0"/>
                     </constraints>
@@ -61,8 +63,19 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqs-mB-4cB">
+                    <rect key="frame" x="13" y="212" width="204" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="4d0-vz-AEV"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Large IPA Chunk Size:" id="hvZ-Xj-3SQ">
+                        <font key="font" metaFont="systemLight" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wMC-pZ-5mS">
-                    <rect key="frame" x="13" y="118" width="204" height="19"/>
+                    <rect key="frame" x="13" y="173" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="jle-Is-6ju"/>
                     </constraints>
@@ -73,7 +86,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G6O-9S-a5G">
-                    <rect key="frame" x="13" y="79" width="204" height="19"/>
+                    <rect key="frame" x="13" y="134" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="O0D-yZ-xx8"/>
                     </constraints>
@@ -84,7 +97,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7B-GY-RTi">
-                    <rect key="frame" x="13" y="40" width="204" height="19"/>
+                    <rect key="frame" x="13" y="95" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="QMP-ab-EVl"/>
                     </constraints>
@@ -95,7 +108,7 @@
                     </textFieldCell>
                 </textField>
                 <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1qf-8k-ZUe">
-                    <rect key="frame" x="227" y="153" width="306" height="26"/>
+                    <rect key="frame" x="227" y="247" width="306" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="VJ4-df-tbu"/>
                     </constraints>
@@ -111,7 +124,7 @@
                     </connections>
                 </pathControl>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="wsi-kl-DmL">
-                    <rect key="frame" x="228" y="119" width="250" height="18"/>
+                    <rect key="frame" x="228" y="174" width="250" height="18"/>
                     <buttonCell key="cell" type="check" title="Upload symbols for AppStore exports" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="QdQ-Wi-Vmj">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -121,7 +134,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="k8I-Hq-4Cd">
-                    <rect key="frame" x="228" y="80" width="245" height="18"/>
+                    <rect key="frame" x="228" y="135" width="245" height="18"/>
                     <buttonCell key="cell" type="check" title="Upload bitcode for AppStore exports" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Aba-HG-jIu">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -131,7 +144,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="tft-z6-Exe">
-                    <rect key="frame" x="228" y="41" width="282" height="18"/>
+                    <rect key="frame" x="228" y="96" width="282" height="18"/>
                     <buttonCell key="cell" type="check" title="Compile bitcode for Non-AppStore exports" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="k7G-Mq-xqK">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -140,15 +153,35 @@
                         <action selector="compileBitcodeCheckBokValueChanged:" target="-2" id="wqu-po-cOj"/>
                     </connections>
                 </button>
+                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bo-Mb-ZwI">
+                    <rect key="frame" x="230" y="208" width="303" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="nOg-Jf-D7x"/>
+                    </constraints>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="FBY-AW-l43">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </comboBoxCell>
+                    <connections>
+                        <action selector="chunckSizeComboBoxValueChanged:" target="-2" id="r7b-rP-7NM"/>
+                        <outlet property="dataSource" destination="-2" id="wwz-yV-IcQ"/>
+                        <outlet property="delegate" destination="-2" id="Htz-cp-g1s"/>
+                    </connections>
+                </comboBox>
             </subviews>
             <constraints>
+                <constraint firstItem="Iq9-J2-dU4" firstAttribute="leading" secondItem="qqs-mB-4cB" secondAttribute="leading" id="0dG-eZ-Dxk"/>
+                <constraint firstItem="qqs-mB-4cB" firstAttribute="top" secondItem="Iq9-J2-dU4" secondAttribute="bottom" constant="20" id="3UW-US-mUS"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="551-hz-G00" secondAttribute="trailing" constant="35" id="50W-ZZ-S1b"/>
                 <constraint firstItem="TPS-di-ZXM" firstAttribute="leading" secondItem="Iq9-J2-dU4" secondAttribute="leading" id="50j-s1-oq8"/>
                 <constraint firstItem="G6O-9S-a5G" firstAttribute="top" secondItem="wMC-pZ-5mS" secondAttribute="bottom" constant="20" id="5uC-Ok-TbX"/>
                 <constraint firstItem="Iq9-J2-dU4" firstAttribute="top" secondItem="TPS-di-ZXM" secondAttribute="bottom" constant="20" id="AgL-vy-3FQ"/>
                 <constraint firstItem="C7B-GY-RTi" firstAttribute="top" secondItem="G6O-9S-a5G" secondAttribute="bottom" constant="20" id="CAc-rP-FHQ"/>
+                <constraint firstItem="Iq9-J2-dU4" firstAttribute="trailing" secondItem="qqs-mB-4cB" secondAttribute="trailing" id="FXq-D7-4lQ"/>
                 <constraint firstItem="wMC-pZ-5mS" firstAttribute="centerY" secondItem="wsi-kl-DmL" secondAttribute="centerY" id="Jki-5n-cA9"/>
                 <constraint firstItem="Iq9-J2-dU4" firstAttribute="trailing" secondItem="wMC-pZ-5mS" secondAttribute="trailing" id="JnS-dR-e5a"/>
+                <constraint firstItem="6Bo-Mb-ZwI" firstAttribute="centerY" secondItem="qqs-mB-4cB" secondAttribute="centerY" id="Lnr-1e-CqG"/>
                 <constraint firstItem="1qf-8k-ZUe" firstAttribute="leading" secondItem="wsi-kl-DmL" secondAttribute="leading" id="MFT-t5-FIR"/>
                 <constraint firstItem="wMC-pZ-5mS" firstAttribute="leading" secondItem="G6O-9S-a5G" secondAttribute="leading" id="ODd-i7-oDF"/>
                 <constraint firstItem="G6O-9S-a5G" firstAttribute="leading" secondItem="C7B-GY-RTi" secondAttribute="leading" id="POB-Qr-jTh"/>
@@ -156,20 +189,22 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1qf-8k-ZUe" secondAttribute="trailing" constant="35" id="TAh-1J-nzu"/>
                 <constraint firstItem="wsi-kl-DmL" firstAttribute="leading" secondItem="k8I-Hq-4Cd" secondAttribute="leading" id="TP9-1Z-xnz"/>
                 <constraint firstItem="TPS-di-ZXM" firstAttribute="leading" secondItem="taC-Ah-5bC" secondAttribute="leading" constant="15" id="Vo9-Sp-o4b"/>
+                <constraint firstItem="wMC-pZ-5mS" firstAttribute="top" secondItem="qqs-mB-4cB" secondAttribute="bottom" constant="20" id="ZEm-C2-3UV"/>
                 <constraint firstItem="G6O-9S-a5G" firstAttribute="centerY" secondItem="k8I-Hq-4Cd" secondAttribute="centerY" id="Zfu-yG-hX3"/>
                 <constraint firstItem="TPS-di-ZXM" firstAttribute="top" secondItem="taC-Ah-5bC" secondAttribute="top" constant="20" id="aP7-H9-Rne"/>
                 <constraint firstItem="k8I-Hq-4Cd" firstAttribute="leading" secondItem="tft-z6-Exe" secondAttribute="leading" id="b5f-a6-ewy"/>
                 <constraint firstItem="C7B-GY-RTi" firstAttribute="centerY" secondItem="tft-z6-Exe" secondAttribute="centerY" id="eaG-ei-9DF"/>
-                <constraint firstItem="wMC-pZ-5mS" firstAttribute="top" secondItem="Iq9-J2-dU4" secondAttribute="bottom" constant="20" id="hUK-gP-7yN"/>
                 <constraint firstItem="wMC-pZ-5mS" firstAttribute="trailing" secondItem="G6O-9S-a5G" secondAttribute="trailing" id="hkQ-9V-TDm"/>
                 <constraint firstItem="Iq9-J2-dU4" firstAttribute="leading" secondItem="wMC-pZ-5mS" secondAttribute="leading" id="mJG-6I-C9C"/>
                 <constraint firstItem="G6O-9S-a5G" firstAttribute="trailing" secondItem="C7B-GY-RTi" secondAttribute="trailing" id="mNe-je-IF9"/>
+                <constraint firstItem="1qf-8k-ZUe" firstAttribute="leading" secondItem="6Bo-Mb-ZwI" secondAttribute="leading" id="mNo-GO-v0T"/>
                 <constraint firstItem="551-hz-G00" firstAttribute="leading" secondItem="1qf-8k-ZUe" secondAttribute="leading" id="qy9-aQ-n27"/>
                 <constraint firstItem="Iq9-J2-dU4" firstAttribute="centerY" secondItem="1qf-8k-ZUe" secondAttribute="centerY" id="u5F-LY-c9U"/>
+                <constraint firstItem="1qf-8k-ZUe" firstAttribute="trailing" secondItem="6Bo-Mb-ZwI" secondAttribute="trailing" id="up6-wT-sHj"/>
                 <constraint firstItem="TPS-di-ZXM" firstAttribute="centerY" secondItem="551-hz-G00" secondAttribute="centerY" id="uzd-Hs-Izl"/>
-                <constraint firstAttribute="bottom" secondItem="C7B-GY-RTi" secondAttribute="bottom" constant="40" id="wED-6q-7xi"/>
                 <constraint firstItem="TPS-di-ZXM" firstAttribute="trailing" secondItem="Iq9-J2-dU4" secondAttribute="trailing" id="z12-0v-iyD"/>
             </constraints>
+            <point key="canvasLocation" x="138.5" y="215.5"/>
         </view>
     </objects>
 </document>

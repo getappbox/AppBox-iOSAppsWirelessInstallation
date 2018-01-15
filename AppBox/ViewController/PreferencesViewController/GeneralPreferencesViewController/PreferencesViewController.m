@@ -12,10 +12,14 @@
 
 @end
 
-@implementation PreferencesViewController
+@implementation PreferencesViewController {
+    NSArray *chunkSizes;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    chunkSizes = @[@10, @25, @50, @75, @100, @125, @150];
     
     //set build url
     [pathBuild setURL:[UserData buildLocation]];
@@ -25,6 +29,7 @@
     [uploadSymbolButton setState:[UserData uploadSymbols]];
     [uploadBitCodeButton setState:[UserData uploadBitcode]];
     [compileBitCodeButton setState:[UserData compileBitcode]];
+    
 }
 
 //Build Path Handler
@@ -62,12 +67,25 @@
     [UserData setUploadSymbols:(sender.state == NSOnState)];
 }
 
+- (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender {
+    
+}
+
 - (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender {
     [UserData setCompileBitcode:(sender.state == NSOnState)];
 }
 
 - (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender {
     [UserData setUploadBitcode:(sender.state == NSOnState)];
+}
+
+#pragma mark - NSComboBoxDataSource
+-(NSInteger)numberOfItemsInComboBox:(NSComboBox *)comboBox{
+    return chunkSizes.count;
+}
+
+-(id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index{
+    return [NSString stringWithFormat:@"%@ MB", chunkSizes[index]];
 }
 
 @end
