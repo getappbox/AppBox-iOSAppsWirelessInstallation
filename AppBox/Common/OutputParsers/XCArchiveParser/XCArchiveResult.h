@@ -14,7 +14,7 @@ typedef enum : NSUInteger {
     XCArchiveResultArchiveSucceeded,
     XCArchiveResultExportFailed,
     XCArchiveResultExportSucceeded,
-    XCArchiveResultTypeCheckDependencies
+    XCArchiveResultTypeCheckPrint
 } XCArchiveResultType;
 
 @interface XCArchiveResult : NSObject
