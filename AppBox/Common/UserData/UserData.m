@@ -188,4 +188,14 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define DebugLogEnable @"DebugLogEnable"
++(BOOL)debugLog{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];
+}
+
++(void)setEnableDebugLog:(BOOL)debugLog{
+    [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

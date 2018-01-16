@@ -42,20 +42,20 @@
     
     //Check for arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    [self addSessionLog:[NSString stringWithFormat:@"All Arguments = %@",arguments]];
+    [ABLog log:@"All Command Line Arguments = %@",arguments];
     for (NSString *argument in arguments) {
         if ([argument containsString:@"build="]) {
             NSArray *components = [argument componentsSeparatedByString:@"build="];
-            [self addSessionLog:[NSString stringWithFormat:@"Path Components = %@",components]];
+            [ABLog log:@"Path Components = %@",components];
             if (components.count == 2) {
                 [self handleProjectAtPath:[components lastObject]];
             } else {
-                [self addSessionLog:[NSString stringWithFormat:@"Invalid command %@",arguments]];
+                [ABLog log:@"Invalid command %@",arguments];
                 exit(abExitCodeForUnstableBuild);
             }
             break;
         } else if ([arguments indexOfObject:argument] == arguments.count - 1){
-            [self addSessionLog:[NSString stringWithFormat:@"Normal Run"]];
+            [ABLog log:@"Normal Run"];
         }
     }
     
@@ -80,8 +80,8 @@
 }
 
 -(void)addSessionLog:(NSString *)sessionLog{
-    [_sessionLog appendFormat: @"\n\n%@ - %@",[NSDate date],sessionLog];
     NSLog(@"%@",sessionLog);
+    [_sessionLog appendFormat: @"%@",sessionLog];
     [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
 }
 

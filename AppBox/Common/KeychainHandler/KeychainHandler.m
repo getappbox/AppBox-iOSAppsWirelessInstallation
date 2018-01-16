@@ -37,7 +37,7 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
             
             //Check existing team id
             NSPredicate *existingTeam = [NSPredicate predicateWithFormat:@"SELF.teamId = %@ AND SELF.teamName = %@ AND SELF.fullName = %@",teamId, teamName, fullName];
-            NSLog(@"filter - %@",[plainCertifcates filteredArrayUsingPredicate:existingTeam]);
+            [ABLog log:@"filter - %@",[plainCertifcates filteredArrayUsingPredicate:existingTeam]];
             
             //Filter invalid cert
             if ([plainCertifcates filteredArrayUsingPredicate:existingTeam].count == 0){

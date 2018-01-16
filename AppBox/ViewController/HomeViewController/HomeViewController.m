@@ -325,6 +325,9 @@
             }
             [buildArgument addObject:version];
             
+            NSString *xcPrettyPath = [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
+            [buildArgument addObject:xcPrettyPath];
+            
             //Run Task
             [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
         });
@@ -375,9 +378,9 @@
     [self captureStandardOutputWithTask:task];
     [task launch];
     if (scriptType == ScriptTypeTeamId){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [task terminate];
-            [[AppDelegate appDelegate] addSessionLog:@"terminating task!!"];
+            [ABLog log:@"terminating task!!"];
         });
     }
 }
@@ -602,7 +605,7 @@
 #pragma mark - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]]];
+    [ABLog log:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]];
     [[AppDelegate appDelegate] setProcessing:!finish];
     [[AppDelegate appDelegate] setIsReadyToBuild:!finish];
     
@@ -812,6 +815,8 @@
     //Log IPA Upload Success Rate with Other Options
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
     [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
+    
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n\nBUILD URL - %@\n\n\n", project.appShortShareableURL]];
     
     if ([UserData userSlackMessage].length > 0) {
         [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];

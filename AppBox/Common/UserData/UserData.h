@@ -47,5 +47,7 @@
 +(NSInteger)uploadChunkSize;
 +(void)setUploadChunkSize:(NSInteger)chunkSize;
 
++(BOOL)debugLog;
++(void)setEnableDebugLog:(BOOL)debugLog;
 
 @end

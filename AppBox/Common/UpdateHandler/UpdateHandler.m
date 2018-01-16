@@ -32,7 +32,7 @@
 
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
-        [[AppDelegate appDelegate] addSessionLog:@"Checking for new version..."];
+        [ABLog log:@"Checking for new version..."];
         [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
             //handle error and check for all required keys
             if (error == nil &&
@@ -48,7 +48,7 @@
                 NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
                 
                 //log current and latest version
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Current Version - %@ <=> Latest Version - %@", versionString, tag]];
+                [ABLog log:@"Current Version - %@ <=> Latest Version - %@", versionString, tag];
                 
                 //return result based on version strings
                 completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);

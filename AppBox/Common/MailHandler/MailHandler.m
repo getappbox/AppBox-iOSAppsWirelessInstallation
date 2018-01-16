@@ -69,7 +69,7 @@
         [parameters setValue:subject forKey:@"subject"];
         [parameters setValue:body forKey:@"html"];
         
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Mail Parameters - %@", parameters]];
+        [ABLog log:@"Mail Parameters - %@", parameters];
         
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         [manager setRequestSerializer: [AFHTTPRequestSerializer serializer]];
