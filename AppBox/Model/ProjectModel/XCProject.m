@@ -206,7 +206,6 @@
         [self setName: [projectInfo valueForKey:@"name"]];
         [self setSchemes: [projectInfo valueForKey:@"schemes"]];
         [self setTargets: [projectInfo valueForKey:@"targets"]];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nBuild List Info\n======\n\n %@",buildListInfo]];
     }
 }
 

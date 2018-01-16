@@ -10,4 +10,13 @@
 
 @implementation ABLog
 
++(void)log:(NSString *)format, ...{
+    if ([UserData debugLog]) {
+        va_list args;
+        va_start(args, format);
+        NSLogv(format, args);
+        va_end(args);
+    }
+}
+
 @end

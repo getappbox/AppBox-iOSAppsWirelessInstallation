@@ -41,6 +41,7 @@
 		DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA591FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m */; };
 		DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */; };
 		DBFEEA641FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */; };
+		E101D2BE200DE7E00062078B /* xcpretty in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D22F200DE0170062078B /* xcpretty */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
@@ -76,6 +77,24 @@
 		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
 		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */; };
 		E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */; };
+		E185337B200DF9D400E88529 /* xcpretty.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D25D200DE0170062078B /* xcpretty.rb */; };
+		E185337D200DF9FA00E88529 /* ansi.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D24B200DE0170062078B /* ansi.rb */; };
+		E185337E200DF9FA00E88529 /* parser.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D252200DE0170062078B /* parser.rb */; };
+		E185337F200DF9FA00E88529 /* printer.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D253200DE0170062078B /* printer.rb */; };
+		E1853380200DF9FA00E88529 /* snippet.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D259200DE0170062078B /* snippet.rb */; };
+		E1853381200DF9FA00E88529 /* syntax.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D25A200DE0170062078B /* syntax.rb */; };
+		E1853382200DF9FA00E88529 /* term.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D25B200DE0170062078B /* term.rb */; };
+		E1853383200DF9FA00E88529 /* version.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D25C200DE0170062078B /* version.rb */; };
+		E1853385200DFA2300E88529 /* formatter.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D24D200DE0170062078B /* formatter.rb */; };
+		E1853386200DFA2300E88529 /* knock.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D24E200DE0170062078B /* knock.rb */; };
+		E1853387200DFA2300E88529 /* rspec.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D24F200DE0170062078B /* rspec.rb */; };
+		E1853388200DFA2300E88529 /* simple.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D250200DE0170062078B /* simple.rb */; };
+		E1853389200DFA2300E88529 /* tap.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D251200DE0170062078B /* tap.rb */; };
+		E185338B200DFA4100E88529 /* html.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D255200DE0170062078B /* html.rb */; };
+		E185338C200DFA4100E88529 /* json_compilation_database.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D256200DE0170062078B /* json_compilation_database.rb */; };
+		E185338D200DFA4100E88529 /* junit.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D257200DE0170062078B /* junit.rb */; };
+		E185338E200DFA4100E88529 /* reporter.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D258200DE0170062078B /* reporter.rb */; };
+		E1853392200E084500E88529 /* ABLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E1853391200E084500E88529 /* ABLog.m */; };
 		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
 		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
 		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
@@ -105,14 +124,67 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E16438A51D746A1800CE8B7E /* Copy Files (1 item) */ = {
+		E101D2BC200DE72A0062078B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstPath = xcpretty/bin;
+			dstSubfolderSpec = 7;
 			files = (
+				E101D2BE200DE7E00062078B /* xcpretty in CopyFiles */,
 			);
-			name = "Copy Files (1 item)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E185337A200DF9AE00E88529 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = xcpretty/lib;
+			dstSubfolderSpec = 7;
+			files = (
+				E185337B200DF9D400E88529 /* xcpretty.rb in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E185337C200DF9DD00E88529 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = xcpretty/lib/xcpretty;
+			dstSubfolderSpec = 7;
+			files = (
+				E185337D200DF9FA00E88529 /* ansi.rb in CopyFiles */,
+				E185337E200DF9FA00E88529 /* parser.rb in CopyFiles */,
+				E185337F200DF9FA00E88529 /* printer.rb in CopyFiles */,
+				E1853380200DF9FA00E88529 /* snippet.rb in CopyFiles */,
+				E1853381200DF9FA00E88529 /* syntax.rb in CopyFiles */,
+				E1853382200DF9FA00E88529 /* term.rb in CopyFiles */,
+				E1853383200DF9FA00E88529 /* version.rb in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1853384200DFA0900E88529 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = xcpretty/lib/xcpretty/formatters;
+			dstSubfolderSpec = 7;
+			files = (
+				E1853385200DFA2300E88529 /* formatter.rb in CopyFiles */,
+				E1853386200DFA2300E88529 /* knock.rb in CopyFiles */,
+				E1853387200DFA2300E88529 /* rspec.rb in CopyFiles */,
+				E1853388200DFA2300E88529 /* simple.rb in CopyFiles */,
+				E1853389200DFA2300E88529 /* tap.rb in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E185338A200DFA2A00E88529 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = xcpretty/lib/xcpretty/reporters;
+			dstSubfolderSpec = 7;
+			files = (
+				E185338B200DFA4100E88529 /* html.rb in CopyFiles */,
+				E185338C200DFA4100E88529 /* json_compilation_database.rb in CopyFiles */,
+				E185338D200DFA4100E88529 /* junit.rb in CopyFiles */,
+				E185338E200DFA4100E88529 /* reporter.rb in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -179,6 +251,24 @@
 		DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataClass.m"; sourceTree = "<group>"; };
 		DBFEEA5E1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataProperties.h"; sourceTree = "<group>"; };
 		DBFEEA5F1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E101D22F200DE0170062078B /* xcpretty */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xcpretty; sourceTree = "<group>"; };
+		E101D24B200DE0170062078B /* ansi.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ansi.rb; sourceTree = "<group>"; };
+		E101D24D200DE0170062078B /* formatter.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = formatter.rb; sourceTree = "<group>"; };
+		E101D24E200DE0170062078B /* knock.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = knock.rb; sourceTree = "<group>"; };
+		E101D24F200DE0170062078B /* rspec.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = rspec.rb; sourceTree = "<group>"; };
+		E101D250200DE0170062078B /* simple.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = simple.rb; sourceTree = "<group>"; };
+		E101D251200DE0170062078B /* tap.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = tap.rb; sourceTree = "<group>"; };
+		E101D252200DE0170062078B /* parser.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = parser.rb; sourceTree = "<group>"; };
+		E101D253200DE0170062078B /* printer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = printer.rb; sourceTree = "<group>"; };
+		E101D255200DE0170062078B /* html.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = html.rb; sourceTree = "<group>"; };
+		E101D256200DE0170062078B /* json_compilation_database.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = json_compilation_database.rb; sourceTree = "<group>"; };
+		E101D257200DE0170062078B /* junit.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = junit.rb; sourceTree = "<group>"; };
+		E101D258200DE0170062078B /* reporter.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = reporter.rb; sourceTree = "<group>"; };
+		E101D259200DE0170062078B /* snippet.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = snippet.rb; sourceTree = "<group>"; };
+		E101D25A200DE0170062078B /* syntax.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = syntax.rb; sourceTree = "<group>"; };
+		E101D25B200DE0170062078B /* term.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = term.rb; sourceTree = "<group>"; };
+		E101D25C200DE0170062078B /* version.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = version.rb; sourceTree = "<group>"; };
+		E101D25D200DE0170062078B /* xcpretty.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = xcpretty.rb; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
@@ -240,6 +330,8 @@
 		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailPreferencesViewController.m; sourceTree = "<group>"; };
 		E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPreferencesViewController.h; sourceTree = "<group>"; };
 		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
+		E1853390200E084500E88529 /* ABLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABLog.h; sourceTree = "<group>"; };
+		E1853391200E084500E88529 /* ABLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABLog.m; sourceTree = "<group>"; };
 		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
 		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
 		E188EA0B1D78485900EBCA52 /* GooglURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglURLShortenerService.h; sourceTree = "<group>"; };
@@ -457,6 +549,71 @@
 				DBFC680C1F6AE957007A4ED2 /* EventTracker.m */,
 			);
 			path = EventTracker;
+			sourceTree = "<group>";
+		};
+		E101D22B200DE0170062078B /* xcpretty */ = {
+			isa = PBXGroup;
+			children = (
+				E101D22E200DE0170062078B /* bin */,
+				E101D249200DE0170062078B /* lib */,
+			);
+			path = xcpretty;
+			sourceTree = "<group>";
+		};
+		E101D22E200DE0170062078B /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				E101D22F200DE0170062078B /* xcpretty */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		E101D249200DE0170062078B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				E101D24A200DE0170062078B /* xcpretty */,
+				E101D25D200DE0170062078B /* xcpretty.rb */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		E101D24A200DE0170062078B /* xcpretty */ = {
+			isa = PBXGroup;
+			children = (
+				E101D24B200DE0170062078B /* ansi.rb */,
+				E101D24C200DE0170062078B /* formatters */,
+				E101D252200DE0170062078B /* parser.rb */,
+				E101D253200DE0170062078B /* printer.rb */,
+				E101D254200DE0170062078B /* reporters */,
+				E101D259200DE0170062078B /* snippet.rb */,
+				E101D25A200DE0170062078B /* syntax.rb */,
+				E101D25B200DE0170062078B /* term.rb */,
+				E101D25C200DE0170062078B /* version.rb */,
+			);
+			path = xcpretty;
+			sourceTree = "<group>";
+		};
+		E101D24C200DE0170062078B /* formatters */ = {
+			isa = PBXGroup;
+			children = (
+				E101D24D200DE0170062078B /* formatter.rb */,
+				E101D24E200DE0170062078B /* knock.rb */,
+				E101D24F200DE0170062078B /* rspec.rb */,
+				E101D250200DE0170062078B /* simple.rb */,
+				E101D251200DE0170062078B /* tap.rb */,
+			);
+			path = formatters;
+			sourceTree = "<group>";
+		};
+		E101D254200DE0170062078B /* reporters */ = {
+			isa = PBXGroup;
+			children = (
+				E101D255200DE0170062078B /* html.rb */,
+				E101D256200DE0170062078B /* json_compilation_database.rb */,
+				E101D257200DE0170062078B /* junit.rb */,
+				E101D258200DE0170062078B /* reporter.rb */,
+			);
+			path = reporters;
 			sourceTree = "<group>";
 		};
 		E11633961E558609005EAB31 /* MobileProvision */ = {
@@ -745,6 +902,7 @@
 		E172E13A1DEEB34D00405EF2 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				E101D22B200DE0170062078B /* xcpretty */,
 				E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */,
 				E10B82211DF0498600BBE0CD /* TeamIDScript.sh */,
 				E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */,
@@ -796,6 +954,15 @@
 				E1D12EED1EC320760065E59A /* HelpPreferencesViewController.xib */,
 			);
 			path = HelpPreferencesViewController;
+			sourceTree = "<group>";
+		};
+		E185338F200E082800E88529 /* LogManager */ = {
+			isa = PBXGroup;
+			children = (
+				E1853390200E084500E88529 /* ABLog.h */,
+				E1853391200E084500E88529 /* ABLog.m */,
+			);
+			path = LogManager;
 			sourceTree = "<group>";
 		};
 		E188EA071D78485900EBCA52 /* Tiny */ = {
@@ -925,6 +1092,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E185338F200E082800E88529 /* LogManager */,
 				E1902B501E16617B00C3E0F6 /* UserData */,
 				E1902B491E16617B00C3E0F6 /* GitHandler */,
 				DB2629781F95ED8900C4C647 /* Extensions */,
@@ -1002,11 +1170,15 @@
 				C3566842BD53E8411EB6A412 /* [CP] Check Pods Manifest.lock */,
 				E16437CB1D743A4E00CE8B7E /* Sources */,
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
-				E16438A51D746A1800CE8B7E /* Copy Files (1 item) */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
 				1E3F482E629E66DAF83B929E /* [CP] Embed Pods Frameworks */,
 				7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */,
 				E1974F331E20CA770060F03F /* ShellScript */,
+				E101D2BC200DE72A0062078B /* CopyFiles */,
+				E185337A200DF9AE00E88529 /* CopyFiles */,
+				E185337C200DF9DD00E88529 /* CopyFiles */,
+				E1853384200DFA0900E88529 /* CopyFiles */,
+				E185338A200DFA2A00E88529 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1167,6 +1339,7 @@
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
+				E1853392200E084500E88529 /* ABLog.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,

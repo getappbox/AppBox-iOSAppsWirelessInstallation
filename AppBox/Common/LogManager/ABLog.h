@@ -10,4 +10,6 @@
 
 @interface ABLog : NSObject
 
++(void)log:(NSString *)format, ...;
+
 @end
