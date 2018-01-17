@@ -50,8 +50,8 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="hFA-EH-Q1G">
-                    <rect key="frame" x="228" y="200" width="198" height="18"/>
-                    <buttonCell key="cell" type="check" title="Disable AppBox Update Alert" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gAn-23-FPZ">
+                    <rect key="frame" x="228" y="200" width="93" height="18"/>
+                    <buttonCell key="cell" type="check" title="Limited Log" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gAn-23-FPZ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

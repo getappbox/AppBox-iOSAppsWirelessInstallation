@@ -30,7 +30,10 @@
     [uploadBitCodeButton setState:[UserData uploadBitcode]];
     [compileBitCodeButton setState:[UserData compileBitcode]];
     
+    NSNumber *chunkSize = [NSNumber numberWithInteger:[UserData uploadChunkSize]];
+    [chunkSizeComboBox selectItemAtIndex:[chunkSizes indexOfObject:chunkSize]];
 }
+
 
 //Build Path Handler
 - (IBAction)buildPathHandler:(NSPathControl *)sender {
@@ -68,7 +71,7 @@
 }
 
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender {
-    
+    [UserData setUploadChunkSize:[chunkSizes[[sender indexOfSelectedItem]] integerValue]];
 }
 
 - (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender {
@@ -77,15 +80,6 @@
 
 - (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender {
     [UserData setUploadBitcode:(sender.state == NSOnState)];
-}
-
-#pragma mark - NSComboBoxDataSource
--(NSInteger)numberOfItemsInComboBox:(NSComboBox *)comboBox{
-    return chunkSizes.count;
-}
-
--(id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index{
-    return [NSString stringWithFormat:@"%@ MB", chunkSizes[index]];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesViewController : NSViewController<NSComboBoxDataSource> {
+@interface PreferencesViewController : NSViewController {
     __weak IBOutlet NSPathControl *pathBuild;
     __weak IBOutlet NSPathControl *pathXCode;
     __weak IBOutlet NSButton *uploadSymbolButton;
