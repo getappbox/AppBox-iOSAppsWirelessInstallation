@@ -70,8 +70,8 @@ echo "Creating IPA..."
 if [[ "${7}" > "9" || "${7}" == "9" ]]
 then
     echo "Creating IPA with Xcode 9"
-    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | ${8} && exit ${PIPESTATUS[0]}
+    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
 else
     echo "Creating IPA with Xcode 8"
-    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"  | ${8} && exit ${PIPESTATUS[0]}
+    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
 fi
