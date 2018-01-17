@@ -33,13 +33,14 @@
 #pragma mark - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\n Preparing to Upload IPA - %@\n======\n\n",ipaFileURL]];
+    [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nUploading IPA - %@\n======\n\n",ipaPath]];
+        [ABLog log:@"nUploading IPA -  %@", ipaPath];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
+        [[AppDelegate appDelegate] addSessionLog:@"Extracting Files..."];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
                 
@@ -47,30 +48,36 @@
                     [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
                     
                     //Get payload entry
-                    if ((entry.lastPathComponent.length > 4) && [[entry.lastPathComponent substringFromIndex:(entry.lastPathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
-                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found payload at path = %@",entry]];
-                        payloadEntry = entry;
+                    if (payloadEntry == nil && [entry containsString:@".app"]) {
+                        [[entry pathComponents] enumerateObjectsUsingBlock:^(NSString * _Nonnull pathComponent, NSUInteger idx, BOOL * _Nonnull stop) {
+                            if ((pathComponent.length > 4) && [[pathComponent substringFromIndex:(pathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
+                                
+                                [ABLog log:@"Found payload at path = %@",entry];
+                                payloadEntry = [NSString pathWithComponents:[[entry pathComponents] subarrayWithRange:NSMakeRange(0, idx+1)]];
+                                *stop = YES;
+                            }
+                        }];
                     }
                     
                     //Get Info.plist entry
-                    NSString *mainInfoPlistPath = [NSString stringWithFormat:@"%@Info.plist",payloadEntry].lowercaseString;
+                    NSString *mainInfoPlistPath = [payloadEntry stringByAppendingPathComponent:@"Info.plist"].lowercaseString;
                     if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
-                        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found Info.plist at path = %@",mainInfoPlistPath]];
+                        [ABLog log:@"Found Info.plist at path = %@",mainInfoPlistPath];
                         infoPlistPath = entry;
                     }
                     
                     //Get embedded mobile provision
                     if (self.project.mobileProvision == nil){
-                        NSString *mobileProvisionPath = [NSString stringWithFormat:@"%@embedded.mobileprovision",payloadEntry].lowercaseString;
+                        NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
-                            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Found mobileprovision at path = %@",mobileProvisionPath]];
+                            [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
                             mobileProvisionPath = [NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
                     
                     //show status and log files entry
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry]];
+                    [ABLog log:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry];
                 });
             } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -167,7 +174,7 @@
         }
     }
     
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nIPA Info.plist\n======\n\n - %@",self.project.ipaInfoPlist]];
+    [ABLog log:@"IPA Info.plist %@", self.project.ipaInfoPlist];
     
     //upload ipa
     self.dbFileType = DBFileTypeIPA;
@@ -178,8 +185,7 @@
             [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:self.project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
         }];
     }
-    
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Temporaray folder %@",NSTemporaryDirectory()]];
+    [ABLog log:@"Temporaray Folder %@", NSTemporaryDirectory()];
 }
 
 
@@ -213,7 +219,7 @@
 -(NSDictionary *)getUniqueJsonDict{
     NSError *error;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary]];
+    [ABLog log:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary];
     return dictionary;
 }
 
@@ -292,7 +298,7 @@
     [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode limit:@1 ] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
         //check there is any rev available
         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
+            [ABLog log:@"Loaded Meta Data %@",response];
             self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
         }
         
@@ -305,7 +311,7 @@
 #pragma mark - Upload Files
 -(void)dbUploadLargeFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     offset = 0;
-    chunkSize = 1 * 1024 * 1024;
+    chunkSize = [UserData uploadChunkSize] * abBytesToMB;
     ipaFileData = [NSData dataWithContentsOfFile:file];
     fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
@@ -316,12 +322,15 @@
             sessionId = result.sessionId;
             offset += nextChunkToUpload.length;
             [self uploadNextChunk];
-        } else if (networkError .nsError.code == -1009) {
-            self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                [self dbUploadLargeFile:file to:path mode:mode];
-            }];
-        } else if (networkError) {
-            [DBErrorHandler handleNetworkErrorWith:networkError];
+        } else {
+            if (networkError.nsError.code == -1009) {
+                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                    [self dbUploadLargeFile:file to:path mode:mode];
+                }];
+            } else if (networkError) {
+                self.errorBlock(nil, YES);
+                [DBErrorHandler handleNetworkErrorWith:networkError];
+            }
         }
     }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
         [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
@@ -342,14 +351,19 @@
                     //create shared url for ipa
                     [self dbCreateSharedURLForFile:result.pathDisplay];
                 }
-            } else if (networkError.nsError.code == -1009) {
-                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                    [self uploadNextChunk];
-                }];
-            } else if (routeError) {
-                [DBErrorHandler handleUploadSessionFinishError:routeError];
             } else {
-                [DBErrorHandler handleNetworkErrorWith:networkError];
+                if (networkError.nsError.code == -1009) {
+                    self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                        [self uploadNextChunk];
+                    }];
+                } else {
+                    self.errorBlock(nil, YES);
+                    if (routeError) {
+                        [DBErrorHandler handleUploadSessionFinishError:routeError];
+                    } else {
+                        [DBErrorHandler handleNetworkErrorWith:networkError];
+                    }
+                }
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
@@ -359,14 +373,19 @@
             if (result) {
                 offset += nextChunkToUpload.length;
                 [self uploadNextChunk];
-            } else if (networkError.nsError.code == -1009) {
-                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                    [self uploadNextChunk];
-                }];
-            }else if (routeError) {
-                [DBErrorHandler handleUploadSessionLookupError:routeError];
             } else {
-                [DBErrorHandler handleNetworkErrorWith:networkError];
+                if (networkError.nsError.code == -1009) {
+                    self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                        [self uploadNextChunk];
+                    }];
+                }else{
+                    self.errorBlock(nil, YES);
+                    if (routeError) {
+                        [DBErrorHandler handleUploadSessionLookupError:routeError];
+                    } else {
+                        [DBErrorHandler handleNetworkErrorWith:networkError];
+                    }
+                }
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
@@ -662,7 +681,7 @@
 #pragma mark - Show Status
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     //log status in session log
-    [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
+    [ABLog log:@"%@",status];
     
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){

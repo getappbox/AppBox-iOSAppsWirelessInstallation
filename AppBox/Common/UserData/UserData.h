@@ -44,4 +44,10 @@
 +(BOOL)isFirstTime;
 +(void)setIsFirstTime:(BOOL)isFirstTime;
 
++(NSInteger)uploadChunkSize;
++(void)setUploadChunkSize:(NSInteger)chunkSize;
+
++(BOOL)debugLog;
++(void)setEnableDebugLog:(BOOL)debugLog;
+
 @end

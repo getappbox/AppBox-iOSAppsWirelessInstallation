@@ -10,11 +10,11 @@
 
 @implementation HomeViewController{
     XCProject *project;
-    XCProject *repoProject;
+    XCProject *ciRepoProject;
     ScriptType scriptType;
     NSArray *allTeamIds;
     UploadManager *uploadManager;
-    NSInteger schemeScriptRunCount;
+    NSInteger processExecuteCount;
 }
 
 - (void)viewDidLoad {
@@ -108,9 +108,9 @@
 #pragma mark - Build Repo
 - (void)initBuildRepoProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
-        repoProject = notification.object;
+        ciRepoProject = notification.object;
         [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
-        [self initProjectBuildProcessForURL: repoProject.fullPath];
+        [self initProjectBuildProcessForURL: ciRepoProject.fullPath];
     }
 }
 
@@ -325,6 +325,9 @@
             }
             [buildArgument addObject:version];
             
+            NSString *xcPrettyPath = [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
+            [buildArgument addObject:xcPrettyPath];
+            
             //Run Task
             [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
         });
@@ -375,9 +378,9 @@
     [self captureStandardOutputWithTask:task];
     [task launch];
     if (scriptType == ScriptTypeTeamId){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [task terminate];
-            [[AppDelegate appDelegate] addSessionLog:@"terminating task!!"];
+            [ABLog log:@"terminating task!!"];
         });
     }
 }
@@ -390,7 +393,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification object:outputPipe.fileHandleForReading queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSData *outputData =  outputPipe.fileHandleForReading.availableData;
         NSString *outputString = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Task Output - %@\n",outputString]];
+        [[AppDelegate appDelegate] addSessionLog:outputString];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Handle Project Scheme Response
@@ -404,13 +407,9 @@
                 }
                 if (buildList != nil && comboBuildScheme.numberOfItems > 0){
                     [comboBuildScheme selectItemAtIndex:0];
-                    if (repoProject == nil) {
-                        [self comboBuildSchemeValueChanged:comboBuildScheme];
-                        
-                        //Run Team Id Script
-                        [self runTeamIDScript];
-                    } else {
-                        [RepoBuilder setProjectSettingFromProject:repoProject toProject:project];
+                    //If CI Project then set project details direct from appbox.plist
+                    if (ciRepoProject) {
+                        [RepoBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
                         [comboTeamId removeAllItems];
                         [comboTeamId addItemWithObjectValue:project.teamId];
                         [comboTeamId selectItemWithObjectValue:project.teamId];
@@ -422,11 +421,18 @@
                             [buttonSendMail setState:NSOnState];
                         }
                         [self actionButtonTapped:buttonAction];
+                    } else {
+                        [self comboBuildSchemeValueChanged:comboBuildScheme];
+                        [self runTeamIDScript];
                     }
                 }else{
-                    if (schemeScriptRunCount == 3){
-                        schemeScriptRunCount = 0;
+                    if (processExecuteCount == 3){
+                        processExecuteCount = 0;
                         [self viewStateForProgressFinish:YES];
+                        //exit if appbox failed to load scheme information for ci project
+                        if (ciRepoProject) {
+                            exit(1);
+                        }
                         NSAlert *alert = [[NSAlert alloc] init];
                         [alert setMessageText: @"Failed to load scheme information."];
                         [alert setInformativeText:@"Please try again with shared Xcode project schemes."];
@@ -437,7 +443,7 @@
                             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abShareXcodeProjectSchemeURL]];
                         }
                     } else {
-                        schemeScriptRunCount++;
+                        processExecuteCount++;
                         [self runGetSchemeScript];
                         [[AppDelegate appDelegate] addSessionLog:@"Failed to load scheme information."];
                     }
@@ -472,34 +478,6 @@
             
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
-                
-                XCArchiveResult *result = [XCArchiveParser archiveResultMessageFromString:outputString];
-                switch (result.type) {
-                    case XCArchiveResultCleanSucceeded:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultArchiveFailed:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultArchiveSucceeded:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultExportFailed:{
-                        
-                    }break;
-                        
-                    case XCArchiveResultExportSucceeded:{
-                        
-                    }break;
-                        
-                    default:
-                        break;
-                }
-                
-                
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
                     [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
@@ -514,16 +492,23 @@
                         [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
                         [self checkIPACreated];
                     }
-                    
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
                     [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
                     [self viewStateForProgressFinish:YES];
+                    //exit if appbox failed to export IPA file
+                    if (ciRepoProject) {
+                        exit(1);
+                    }
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     if ([AppDelegate appDelegate].isInternetConnected || [outputString containsString:@"^"]){
                         [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
                         [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
                         [self viewStateForProgressFinish:YES];
+                        //exit if appbox failed to archive the project
+                        if (ciRepoProject) {
+                            exit(1);
+                        }
                     }else{
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                         uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
@@ -630,7 +615,7 @@
 #pragma mark - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]]];
+    [ABLog log:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]];
     [[AppDelegate appDelegate] setProcessing:!finish];
     [[AppDelegate appDelegate] setIsReadyToBuild:!finish];
     
@@ -841,6 +826,8 @@
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
     [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
     
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n\nBUILD URL - %@\n\n\n", project.appShortShareableURL]];
+    
     if ([UserData userSlackMessage].length > 0) {
         [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
         [SlackClient sendMessageForProject:project completion:^(BOOL success) {
@@ -867,7 +854,7 @@
                     });
                 }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
                     //if mac shutdown isn't checked then show link
-                    if (repoProject == nil){
+                    if (ciRepoProject == nil){
                         [self performSegueWithIdentifier:@"ShowLink" sender:self];
                     }else{
                         [self viewStateForProgressFinish:YES];

@@ -9,15 +9,20 @@
 #{1} - Project Directory
 
 #Make Archove
-#{2} - -workspace VisualStudioMobileCenterDemo.xcworkspace or -project -vsmcd.xcodeproj
-#{3} - VisualStudioMobileCenterDemo
-#{4} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/VSMCD.xcarchive
+#{2} - Project Workspace or XcodeProject -workspace VisualStudioMobileCenterDemo.xcworkspace or -project -vsmcd.xcodeproj
+#{3} - Project Scheme - VisualStudioMobileCenterDemo
+#{4} - Project Archive Path - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/VSMCD.xcarchive
 
 
 #Make IPA
-#{5} - "/Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/VSMCD.xcarchive"
-#{6} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/
-#{7} - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/exportoption.plist
+#{4} - Project Archive Path - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/VSMCD.xcarchive
+#{5} - IPA Export Path - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/build/
+#{6} - IPA Export options plist - /Users/emp195/Desktop/VisualStudioMobileCenterDemoGitHub/VisualStudioMobileCenterDemo/exportoption.plist
+
+
+#Others
+#{7} - Xcode Version
+#{8} - xcpretty path
 
 
 #change directory to project
@@ -36,10 +41,10 @@ then
     if [[ "${7}" > "9" || "${7}" == "9" ]]
     then
         echo "Building Project with Xcode 9"
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | ${8} && exit ${PIPESTATUS[0]}
     else
         echo "Building Project with Xcode 8"
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | ${8} && exit ${PIPESTATUS[0]}
     fi
 
 else
@@ -49,10 +54,10 @@ else
     if [[ "${7}" > "9" || "${7}" == "9" ]]
     then
         echo "Building Project with Xcode 9"
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | ${8} && exit ${PIPESTATUS[0]}
     else
         echo "Building Project with Xcode 8"
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | ${8} && exit ${PIPESTATUS[0]}
     fi
 
 fi

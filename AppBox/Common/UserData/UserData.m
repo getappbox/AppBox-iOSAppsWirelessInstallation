@@ -176,4 +176,26 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - Chunk Size -
+#define UploadChunkSize @"UploadChunkSize"
++(NSInteger)uploadChunkSize{
+    NSInteger chunkSize = [[NSUserDefaults standardUserDefaults] integerForKey:UploadChunkSize];
+    return chunkSize > 0 ? chunkSize : 100;
+}
+
++(void)setUploadChunkSize:(NSInteger)chunkSize{
+    [[NSUserDefaults standardUserDefaults] setInteger:chunkSize forKey:UploadChunkSize];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define DebugLogEnable @"DebugLogEnable"
++(BOOL)debugLog{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];
+}
+
++(void)setEnableDebugLog:(BOOL)debugLog{
+    [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

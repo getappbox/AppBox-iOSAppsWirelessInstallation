@@ -69,7 +69,7 @@
     
     NSTabViewItem *ciPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"ci"];
     [ciPreferencesTabViewItem setLabel:@"CI Setting"];
-    [ciPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueHelp"]];
+    [ciPreferencesTabViewItem setImage:[NSImage imageNamed:@"CI"]];
     [ciPreferencesTabViewItem setViewController:ciSettingViewController];
     
     [self addTabViewItem:ciPreferencesTabViewItem];
