@@ -188,13 +188,24 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - CI Settings -
 #define DebugLogEnable @"DebugLogEnable"
 +(BOOL)debugLog{
     return [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];
 }
 
 +(void)setEnableDebugLog:(BOOL)debugLog{
-    [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];
+    [[NSUserDefaults standardUserDefaults] setBool:debugLog forKey:DebugLogEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define UpdateAlertEnable @"UpdateAlertEnable"
++(BOOL)updateAlertEnable{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:UpdateAlertEnable];
+}
+
++(void)setUpdateAlertEnable:(BOOL)updateAlert{
+    [[NSUserDefaults standardUserDefaults] setBool:updateAlert forKey:UpdateAlertEnable];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

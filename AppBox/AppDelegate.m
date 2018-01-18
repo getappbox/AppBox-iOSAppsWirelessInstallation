@@ -36,7 +36,9 @@
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
-            [UpdateHandler showUpdateAlertWithUpdateURL:url];
+            if (![UserData updateAlertEnable]){
+                [UpdateHandler showUpdateAlertWithUpdateURL:url];
+            }
         }
     }];
     
@@ -81,7 +83,7 @@
 
 -(void)addSessionLog:(NSString *)sessionLog{
     NSLog(@"%@",sessionLog);
-    [_sessionLog appendFormat: @"%@",sessionLog];
+    [_sessionLog appendFormat: @"%@\n",sessionLog];
     [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
 }
 
