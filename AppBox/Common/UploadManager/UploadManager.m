@@ -108,9 +108,7 @@
                     }
                     
                     
-                    if ([AppDelegate appDelegate].isInternetConnected){
-                        [self showStatus:@"Ready to upload..." andShowProgressBar:NO withProgress:-1];
-                    }else{
+                    if (![AppDelegate appDelegate].isInternetConnected){
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                     }
                     
@@ -403,6 +401,8 @@
 
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+    [[AppDelegate appDelegate] addSessionLog:@"Uploading IPA File..."];
+    
     //Upload large ipa file with dropbox session api
     if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
         [self dbUploadLargeFile:file to:path mode:mode];
