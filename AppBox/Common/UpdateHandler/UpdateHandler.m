@@ -48,7 +48,7 @@
                 NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
                 
                 //log current and latest version
-                [ABLog log:@"Current Version - %@ <=> Latest Version - %@", versionString, tag];
+                [ABLog log:@"\n\nCurrent Version - %@ <=> Latest Version - %@\n\n", versionString, tag];
                 
                 //return result based on version strings
                 completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);

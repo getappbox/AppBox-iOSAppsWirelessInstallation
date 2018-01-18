@@ -41,10 +41,10 @@ then
     if [[ "${7}" > "9" || "${7}" == "9" ]]
     then
         echo "Building Project with Xcode 9"
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | ${8} && exit ${PIPESTATUS[0]}
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
     else
         echo "Building Project with Xcode 8"
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | ${8} && exit ${PIPESTATUS[0]}
+        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
     fi
 
 else
@@ -54,24 +54,10 @@ else
     if [[ "${7}" > "9" || "${7}" == "9" ]]
     then
         echo "Building Project with Xcode 9"
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | ${8} && exit ${PIPESTATUS[0]}
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
     else
         echo "Building Project with Xcode 8"
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | ${8} && exit ${PIPESTATUS[0]}
+        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
     fi
 
-fi
-
-####################################
-#            Make IPA              #
-####################################
-echo "Creating IPA..."
-#check either selected xcode is 9 or higher
-if [[ "${7}" > "9" || "${7}" == "9" ]]
-then
-    echo "Creating IPA with Xcode 9"
-    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
-else
-    echo "Creating IPA with Xcode 8"
-    xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
 fi

@@ -9,17 +9,19 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CISettingViewController">
             <connections>
+                <outlet property="limitedLogCheckBox" destination="hFA-EH-Q1G" id="kbD-m2-E9a"/>
+                <outlet property="updateAlertCheckBox" destination="Xkg-gZ-ZBq" id="21o-s7-CeI"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="639" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="639" height="108"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ePf-zu-nBy">
-                    <rect key="frame" x="13" y="233" width="204" height="19"/>
+                    <rect key="frame" x="13" y="69" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="VI4-Zo-cdG"/>
                         <constraint firstAttribute="width" constant="200" id="vS2-iC-wQq"/>
@@ -31,14 +33,17 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xkg-gZ-ZBq">
-                    <rect key="frame" x="228" y="234" width="198" height="18"/>
+                    <rect key="frame" x="228" y="70" width="198" height="18"/>
                     <buttonCell key="cell" type="check" title="Disable AppBox Update Alert" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NxJ-An-afm">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="updateAlertCheckBoxChanged:" target="-2" id="qMu-qa-2XG"/>
+                    </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P3m-Vy-dHM">
-                    <rect key="frame" x="13" y="199" width="204" height="19"/>
+                    <rect key="frame" x="13" y="35" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="StU-2U-1RL"/>
                         <constraint firstAttribute="width" constant="200" id="e9V-GM-prE"/>
@@ -50,15 +55,19 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="hFA-EH-Q1G">
-                    <rect key="frame" x="228" y="200" width="93" height="18"/>
+                    <rect key="frame" x="228" y="36" width="93" height="18"/>
                     <buttonCell key="cell" type="check" title="Limited Log" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gAn-23-FPZ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="limitedLogCheckBoxChanged:" target="-2" id="wl6-5i-mvJ"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ePf-zu-nBy" firstAttribute="centerY" secondItem="Xkg-gZ-ZBq" secondAttribute="centerY" id="1xL-l2-XIB"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="P3m-Vy-dHM" secondAttribute="bottom" constant="35" id="8Gb-iF-Esb"/>
                 <constraint firstItem="P3m-Vy-dHM" firstAttribute="centerY" secondItem="hFA-EH-Q1G" secondAttribute="centerY" id="B9h-6S-M2i"/>
                 <constraint firstItem="hFA-EH-Q1G" firstAttribute="leading" secondItem="P3m-Vy-dHM" secondAttribute="trailing" constant="15" id="NAn-GY-55l"/>
                 <constraint firstItem="ePf-zu-nBy" firstAttribute="trailing" secondItem="P3m-Vy-dHM" secondAttribute="trailing" id="Rv9-BL-Nw1"/>
