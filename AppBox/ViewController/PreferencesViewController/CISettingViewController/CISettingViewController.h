@@ -8,6 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CISettingViewController : NSViewController
+@interface CISettingViewController : NSViewController{
+    __weak IBOutlet NSButton *updateAlertCheckBox;
+    __weak IBOutlet NSButton *limitedLogCheckBox;
+}
+- (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender;
+- (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender;
 
 @end

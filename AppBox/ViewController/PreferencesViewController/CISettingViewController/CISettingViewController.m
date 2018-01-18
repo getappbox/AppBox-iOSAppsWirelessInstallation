@@ -16,7 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    [limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
+    [updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
 }
 
+- (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender {
+    [UserData setUpdateAlertEnable:(sender.state == NSOnState)];
+}
+
+- (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender {
+    [UserData setEnableDebugLog:(sender.state == NSOnState)];
+}
 @end
