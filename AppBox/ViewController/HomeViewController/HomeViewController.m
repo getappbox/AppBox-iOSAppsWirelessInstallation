@@ -44,7 +44,7 @@
             if (status == AFNetworkReachabilityStatusNotReachable){
                 [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             }else{
-                [self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
+                //[self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
                 //restart last failed operation
                 if (uploadManager.lastfailedOperation){
                     [uploadManager.lastfailedOperation start];
@@ -280,18 +280,7 @@
     [self runTaskWithLaunchPath:teamIdScriptPath andArgument:@[project.rootDirectory]];
 }
 
-- (void)runBuildScript{
-    [self showStatus:@"Cleaning..." andShowProgressBar:YES withProgress:-1];
-    scriptType = ScriptTypeBuild;
-    
-    //Create Export Option Plist
-    if (![project createExportOptionPlist]){
-        [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create file in this directory."];
-        return;
-    }
-    
-    //Build Script
-    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:@"ProjectBuildScript" ofType:@"sh"];
+-(void)buildAndIPAArguments:(void (^) (NSArray *arguments))completion{
     NSMutableArray *buildArgument = [[NSMutableArray alloc] init];
     
     //${1} Project Location
@@ -312,10 +301,8 @@
     //${6} export options plist Location
     [buildArgument addObject:[project.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding]];
     
-    
     //Get Xcode Version
     [XCHandler getXcodeVersionWithCompletion:^(BOOL success, XcodeVersion version, NSString *versionString) {
-        //${7} xcode version
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString *version;
             if (success) {
@@ -323,17 +310,59 @@
             } else {
                 version = @"8";
             }
+            //${7} xcode version
             [buildArgument addObject:version];
             
+            //${8} xcpretty
             NSString *xcPrettyPath = [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
             [buildArgument addObject:xcPrettyPath];
-            
-            //Run Task
-            [self runTaskWithLaunchPath:buildScriptPath andArgument:buildArgument];
+            if (buildArgument.count == 8) {
+                completion(buildArgument);
+            } else {
+                NSString *errorLog = [NSString stringWithFormat:@"Failed to create build command.\n Build Arguments %@", buildArgument];
+                if (ciRepoProject) {
+                    [[AppDelegate appDelegate] addSessionLog:errorLog];
+                    exit(1);
+                } else {
+                    [ABLog log:errorLog];
+                    [Common showAlertWithTitle:@"Error" andMessage:@"Failed to create build command."];
+                    [self viewStateForProgressFinish:YES];
+                    completion(nil);
+                }
+            }
         });
         
     }];
+}
+
+- (void)runBuildScript{
+    [self showStatus:@"Cleaning..." andShowProgressBar:YES withProgress:-1];
+    scriptType = ScriptTypeBuild;
     
+    //Create Export Option Plist
+    if (![project createExportOptionPlist]){
+        [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create file in this directory."];
+        return;
+    }
+    
+    //Run Task
+    NSString *buildScriptPath = [[NSBundle mainBundle] pathForResource:@"ProjectBuildScript" ofType:@"sh"];
+    [self buildAndIPAArguments:^(NSArray *arguments) {
+        if (arguments){
+            [self runTaskWithLaunchPath:buildScriptPath andArgument:arguments];
+        }
+    }];
+}
+
+- (void)runCreateIPAScript{
+    scriptType = ScriptTypeCreateIPA;
+    [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
+    NSString *createIPASriptPath = [[NSBundle mainBundle] pathForResource:@"CreateIPAScript" ofType:@"sh"];
+    [self buildAndIPAArguments:^(NSArray *arguments) {
+        if (arguments){
+            [self runTaskWithLaunchPath:createIPASriptPath andArgument:arguments];
+        }
+    }];
 }
 
 - (void)runXcodePathScript{
@@ -479,27 +508,10 @@
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
-                    [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
-                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                    [self runCreateIPAScript];
                 } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
                     [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
-                } else if ([outputString.lowercaseString containsString:@"export succeeded"]){
-                    //Check and Upload IPA File
-                    if (project.isBuildOnly){
-                        [self showStatus:[NSString stringWithFormat:@"Export Succeeded - %@",project.buildUUIDDirectory] andShowProgressBar:NO withProgress:-1];
-                    }else{
-                        [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
-                        [self checkIPACreated];
-                    }
-                } else if ([outputString.lowercaseString containsString:@"export failed"]){
-                    [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
-                    [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
-                    [self viewStateForProgressFinish:YES];
-                    //exit if appbox failed to export IPA file
-                    if (ciRepoProject) {
-                        exit(1);
-                    }
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     if ([AppDelegate appDelegate].isInternetConnected || [outputString containsString:@"^"]){
                         [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
@@ -520,8 +532,38 @@
                 }
             }
             
+            //Handle Create IPA Script Response
+            else if (scriptType == ScriptTypeCreateIPA) {
+                if ([outputString.lowercaseString containsString:@"export succeeded"]){
+                    //Check and Upload IPA File
+                    if (project.isBuildOnly){
+                        [self showStatus:[NSString stringWithFormat:@"Export Succeeded - %@",project.buildUUIDDirectory] andShowProgressBar:NO withProgress:-1];
+                    }else{
+                        [self showStatus:@"Export Succeeded" andShowProgressBar:YES withProgress:-1];
+                        [self checkIPACreated];
+                    }
+                } else if ([outputString.lowercaseString containsString:@"export failed"]){
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                        [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
+                        [self viewStateForProgressFinish:YES];
+                    } else {
+                        [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+                        uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                            [self runCreateIPAScript];
+                        }];
+                    }
+                    //exit if appbox failed to export IPA file
+                    if (ciRepoProject) {
+                        exit(1);
+                    }
+                } else {
+                    [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
+                }
+            }
+            
             //Handle Xcode Path Response
-            else if (scriptType == ScriptTypeXcodePath){
+            else if (scriptType == ScriptTypeXcodePath) {
                 
             }
             
@@ -624,7 +666,7 @@
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
         [uploadManager setProject:project];
-        [ABHudViewController hideAllHudFromView:self.view after:0];
+        [ABHudViewController hudForView:self.view hide:YES];
     }
     
     //unique link

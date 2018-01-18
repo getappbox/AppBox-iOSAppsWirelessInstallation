@@ -100,6 +100,7 @@ typedef enum : NSUInteger {
     ScriptTypeGetScheme,
     ScriptTypeTeamId,
     ScriptTypeBuild,
+    ScriptTypeCreateIPA,
     ScriptTypeXcodePath,
     ScriptTypeAppStoreValidation,
     ScriptTypeAppStoreUpload,

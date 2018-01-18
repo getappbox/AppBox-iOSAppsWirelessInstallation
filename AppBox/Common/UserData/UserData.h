@@ -49,5 +49,7 @@
 
 +(BOOL)debugLog;
 +(void)setEnableDebugLog:(BOOL)debugLog;
++(BOOL)updateAlertEnable;
++(void)setUpdateAlertEnable:(BOOL)updateAlert;
 
 @end
