@@ -44,7 +44,7 @@
             if (status == AFNetworkReachabilityStatusNotReachable){
                 [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             }else{
-                [self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
+                //[self showStatus:abConnectedToInternet andShowProgressBar:NO withProgress:-1];
                 //restart last failed operation
                 if (uploadManager.lastfailedOperation){
                     [uploadManager.lastfailedOperation start];
@@ -356,6 +356,7 @@
 
 - (void)runCreateIPAScript{
     scriptType = ScriptTypeCreateIPA;
+    [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
     NSString *createIPASriptPath = [[NSBundle mainBundle] pathForResource:@"CreateIPAScript" ofType:@"sh"];
     [self buildAndIPAArguments:^(NSArray *arguments) {
         if (arguments){
@@ -507,7 +508,6 @@
             //Handle Build Response
             else if (scriptType == ScriptTypeBuild){
                 if ([outputString.lowercaseString containsString:@"archive succeeded"]){
-                    [self showStatus:@"Creating IPA..." andShowProgressBar:YES withProgress:-1];
                     [self runCreateIPAScript];
                 } else if ([outputString.lowercaseString containsString:@"clean succeeded"]){
                     [self showStatus:@"Archiving..." andShowProgressBar:YES withProgress:-1];
@@ -543,9 +543,16 @@
                         [self checkIPACreated];
                     }
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
-                    [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
-                    [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
-                    [self viewStateForProgressFinish:YES];
+                    if ([AppDelegate appDelegate].isInternetConnected){
+                        [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
+                        [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
+                        [self viewStateForProgressFinish:YES];
+                    } else {
+                        [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
+                        uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
+                            [self runCreateIPAScript];
+                        }];
+                    }
                     //exit if appbox failed to export IPA file
                     if (ciRepoProject) {
                         exit(1);
@@ -659,7 +666,7 @@
         project = [[XCProject alloc] init];
         [project setBuildDirectory:[UserData buildLocation]];
         [uploadManager setProject:project];
-        [ABHudViewController hideAllHudFromView:self.view after:0];
+        [ABHudViewController hudForView:self.view hide:YES];
     }
     
     //unique link
