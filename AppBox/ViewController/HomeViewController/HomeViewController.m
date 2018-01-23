@@ -81,6 +81,7 @@
 -(void)setupUploadManager{
     uploadManager = [[UploadManager alloc] init];
     [uploadManager setProject:project];
+    [uploadManager setCiRepoProject:ciRepoProject];
     [uploadManager setCurrentViewController:self];
     
     __unsafe_unretained typeof(self) weakSelf = self;

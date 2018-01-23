@@ -83,7 +83,13 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (error) {
                         //show error and return
-                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                        if (self.ciRepoProject) {
+                            NSString *log = [NSString stringWithFormat:@"Error - %@", error.localizedDescription];
+                            [[AppDelegate appDelegate] addSessionLog:log];
+                            exit(abExitCodeUnZipIPAError);
+                        } else {
+                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                        }
                         self.errorBlock(nil, YES);
                         return;
                     }
@@ -94,7 +100,13 @@
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
-                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
+                        NSString *log = @"AppBox can't able to find Info.plist in you IPA.";
+                        if (self.ciRepoProject) {
+                            [[AppDelegate appDelegate] addSessionLog:log];
+                            exit(abExitCodeInfoPlistNotFound);
+                        } else {
+                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:log];
+                        }
                         self.errorBlock(nil, YES);
                         return;
                     }
@@ -125,7 +137,11 @@
         });
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
-        [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
+        if (self.ciRepoProject) {
+            exit(abExitCodeIPAFileNotFound);
+        } else {
+            [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
+        }
         self.errorBlock(nil, YES);
     }
 }
@@ -326,6 +342,9 @@
                     [self dbUploadLargeFile:file to:path mode:mode];
                 }];
             } else if (networkError) {
+                if (self.ciRepoProject) {
+                    exit(abExitCodeForUploadFailed);
+                }
                 self.errorBlock(nil, YES);
                 [DBErrorHandler handleNetworkErrorWith:networkError];
             }
@@ -355,6 +374,9 @@
                         [self uploadNextChunk];
                     }];
                 } else {
+                    if (self.ciRepoProject) {
+                        exit(abExitCodeForUploadFailed);
+                    }
                     self.errorBlock(nil, YES);
                     if (routeError) {
                         [DBErrorHandler handleUploadSessionFinishError:routeError];
@@ -377,6 +399,9 @@
                         [self uploadNextChunk];
                     }];
                 }else{
+                    if (self.ciRepoProject) {
+                        exit(abExitCodeForUploadFailed);
+                    }
                     self.errorBlock(nil, YES);
                     if (routeError) {
                         [DBErrorHandler handleUploadSessionLookupError:routeError];
@@ -459,6 +484,9 @@
                   }];
               } else {
                   [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
+                  if (self.ciRepoProject) {
+                      exit(abExitCodeForUploadFailed);
+                  }
                   self.errorBlock(nil, YES);
                   if (error) {
                       [DBErrorHandler handleNetworkErrorWith:error];
@@ -524,6 +552,9 @@
     }else if([error isHttpError] && error.statusCode.integerValue == 409){
         [self dbGetSharedURLForFile:file];
     }else{
+        if (self.ciRepoProject) {
+            exit(abExitCodeForUploadFailed);
+        }
         [DBErrorHandler handleNetworkErrorWith:error];
         self.errorBlock(nil, YES);
     }
@@ -540,6 +571,9 @@
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
             if (manifestURL == nil){
                 //show error if manifest file url is nil
+                if (self.ciRepoProject) {
+                    exit(abExitCodeUnableToCreateManiFestFile);
+                }
                 [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
                 self.errorBlock(nil, YES);
             }else{
