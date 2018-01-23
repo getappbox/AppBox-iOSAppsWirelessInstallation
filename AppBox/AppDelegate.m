@@ -139,6 +139,7 @@
         return;
     }
     if (scheme) {
+        [self addSessionLog:[NSString stringWithFormat:@"Changing project scheme to %@ from %@", scheme, project.selectedSchemes]];
         project.selectedSchemes = scheme;
     }
     if (self.isReadyToBuild) {
