@@ -316,7 +316,9 @@
             
             //${8} xcpretty
             NSString *xcPrettyPath = [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
-            [buildArgument addObject:xcPrettyPath];
+            if (xcPrettyPath){
+                [buildArgument addObject:xcPrettyPath];
+            }
             if (buildArgument.count == 8) {
                 completion(buildArgument);
             } else {
