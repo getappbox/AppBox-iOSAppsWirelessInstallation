@@ -120,5 +120,10 @@ typedef enum : NSUInteger {
 #define abExitCodeUnableToCreateManiFestFile 118
 #define abExitCodeForSuccess 0
 
+#define abArgsWorkspace @"build="
+#define abArgsScheme @"scheme="
+#define abArgsBuildType @"buildtype="
+#define abArgsTeamId @"teamid="
+
 
 #endif /* Constants_h */

@@ -85,6 +85,42 @@ NSString * const RepoCertificateDirectoryName = @"cert";
         project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
     }
     
+    //Replace current settings from command line arguments
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    [ABLog log:@"All Command Line Arguments = %@",arguments];
+    for (NSString *argument in arguments) {
+        if ([arguments containsObject:abArgsScheme]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsScheme];
+            [ABLog log:@"Scheme Components = %@",components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project scheme to %@ from %@", [components lastObject], project.selectedSchemes]];
+                project.selectedSchemes = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Scheme Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        } else if ([arguments containsObject:abArgsBuildType]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsBuildType];
+            [ABLog log:@"BuildType Components = %@",components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project build type to %@ from %@", [components lastObject], project.buildType]];
+                project.buildType = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid BuildType Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        } else if ([arguments containsObject:abArgsTeamId]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsTeamId];
+            [ABLog log:@"TeamId Components = %@",components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project TeamId to %@ from %@", [components lastObject], project.teamId]];
+                project.teamId = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid TeamId Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+    }
     return project;
 }
 
