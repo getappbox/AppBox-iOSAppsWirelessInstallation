@@ -44,32 +44,19 @@
     
     //Check for arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    NSString *workspace = nil;
-    NSString *scheme = nil;
     [ABLog log:@"All Command Line Arguments = %@",arguments];
     for (NSString *argument in arguments) {
-        if ([argument containsString:@"build="]) {
-            NSArray *components = [argument componentsSeparatedByString:@"build="];
+        if ([argument containsString:abArgsWorkspace]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsWorkspace];
             [ABLog log:@"Workspace Components = %@",components];
             if (components.count == 2) {
-                workspace = [components lastObject];
+                [self handleProjectAtPath:[components lastObject]];
             } else {
                 [self addSessionLog:[NSString stringWithFormat:@"Invalid Workspace Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
             }
-        } else if ([arguments containsObject:@"scheme="]) {
-            NSArray *components = [argument componentsSeparatedByString:@"scheme="];
-            [ABLog log:@"Scheme Components = %@",components];
-            if (components.count == 2) {
-                scheme = [components lastObject];
-            } else {
-                [self addSessionLog:[NSString stringWithFormat:@"Invalid Scheme Argument %@",arguments]];
-                exit(abExitCodeForInvalidCommand);
-            }
+            break;
         }
-    }
-    if (workspace) {
-        [self handleProjectAtPath:workspace andScheme:scheme];
     }
     
     //Load Ads
@@ -127,7 +114,7 @@
     }
 }
 
--(void)handleProjectAtPath:(NSString *)projectPath andScheme:(NSString *)scheme {
+-(void)handleProjectAtPath:(NSString *)projectPath {
     NSString *certInfoPath = [RepoBuilder isValidRepoForCertificateFileAtPath:projectPath];
     [RepoBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
     
@@ -137,10 +124,6 @@
         [self addSessionLog:@"AppBox can't able to create project model of this repo."];
         exit(abExitCodeForInvalidAppBoxSettingFile);
         return;
-    }
-    if (scheme) {
-        [self addSessionLog:[NSString stringWithFormat:@"Changing project scheme to %@ from %@", scheme, project.selectedSchemes]];
-        project.selectedSchemes = scheme;
     }
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to build."];
