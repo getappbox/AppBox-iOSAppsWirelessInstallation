@@ -114,6 +114,10 @@ typedef enum : NSUInteger {
 #define abExitCodeForInvalidAppBoxSettingFile 123 //appbox.plist
 #define abExitCodeForInvalidArgumentsXcodeBuild 122
 #define abExitCodeForFailedToLoadSchemeInfo 122
+#define abExitCodeUnZipIPAError 121
+#define abExitCodeInfoPlistNotFound 120
+#define abExitCodeIPAFileNotFound 119
+#define abExitCodeUnableToCreateManiFestFile 118
 #define abExitCodeForSuccess 0
 
 
