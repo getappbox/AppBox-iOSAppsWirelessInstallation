@@ -57,7 +57,7 @@
                 [self addSessionLog:[NSString stringWithFormat:@"Invalid Workspace Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
             }
-        } else if ([arguments containsObject:@"scheme"]) {
+        } else if ([arguments containsObject:@"scheme="]) {
             NSArray *components = [argument componentsSeparatedByString:@"scheme="];
             [ABLog log:@"Scheme Components = %@",components];
             if (components.count == 2) {
