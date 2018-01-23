@@ -322,7 +322,7 @@
                 NSString *errorLog = [NSString stringWithFormat:@"Failed to create build command.\n Build Arguments %@", buildArgument];
                 if (ciRepoProject) {
                     [[AppDelegate appDelegate] addSessionLog:errorLog];
-                    exit(1);
+                    exit(abExitCodeForInvalidArgumentsXcodeBuild);
                 } else {
                     [ABLog log:errorLog];
                     [Common showAlertWithTitle:@"Error" andMessage:@"Failed to create build command."];
@@ -460,7 +460,7 @@
                         [self viewStateForProgressFinish:YES];
                         //exit if appbox failed to load scheme information for ci project
                         if (ciRepoProject) {
-                            exit(1);
+                            exit(abExitCodeForFailedToLoadSchemeInfo);
                         }
                         NSAlert *alert = [[NSAlert alloc] init];
                         [alert setMessageText: @"Failed to load scheme information."];
@@ -515,12 +515,12 @@
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     if ([AppDelegate appDelegate].isInternetConnected || [outputString containsString:@"^"]){
                         [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
-                        [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
-                        [self viewStateForProgressFinish:YES];
-                        //exit if appbox failed to archive the project
                         if (ciRepoProject) {
-                            exit(1);
+                            exit(abExitCodeForArchiveFailed); //exit if appbox failed to archive the project
+                        } else {
+                            [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
                         }
+                        [self viewStateForProgressFinish:YES];
                     }else{
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                         uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
@@ -545,17 +545,17 @@
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     if ([AppDelegate appDelegate].isInternetConnected){
                         [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
-                        [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
+                        if (ciRepoProject) {
+                            exit(abExitCodeForExportFailed); //exit if appbox failed to export IPA file
+                        } else {
+                            [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
+                        }
                         [self viewStateForProgressFinish:YES];
                     } else {
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                         uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
                             [self runCreateIPAScript];
                         }];
-                    }
-                    //exit if appbox failed to export IPA file
-                    if (ciRepoProject) {
-                        exit(1);
                     }
                 } else {
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
@@ -900,7 +900,7 @@
                         [self performSegueWithIdentifier:@"ShowLink" sender:self];
                     }else{
                         [self viewStateForProgressFinish:YES];
-                        exit(0);
+                        exit(abExitCodeForSuccess);
                     }
                 }
             } else {
