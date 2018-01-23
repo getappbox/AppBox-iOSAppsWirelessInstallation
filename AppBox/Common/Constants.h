@@ -107,7 +107,12 @@ typedef enum : NSUInteger {
 } ScriptType;
 
 //CI
-#define abExitCodeForUnstableBuild 255
+#define abExitCodeForInvalidCommand 127
+#define abExitCodeForArchiveFailed 126
+#define abExitCodeForExportFailed 125
+#define abExitCodeForUploadFailed 124
+#define abExitCodeForInvalidAppBoxSettingFile 123 //appbox.plist
+#define abExitCodeForSuccess 0
 
 
 #endif /* Constants_h */
