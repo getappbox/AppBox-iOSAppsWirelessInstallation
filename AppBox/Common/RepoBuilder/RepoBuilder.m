@@ -8,6 +8,7 @@
 
 #import "RepoBuilder.h"
 
+//Project
 NSString * const RepoProjectKey = @"project";
 NSString * const RepoSchemeKey = @"scheme";
 NSString * const RepoBuildTypeKey = @"buildtype";
@@ -17,11 +18,14 @@ NSString * const RepoDropboxFolderNameKey = @"dropboxfoldername";
 NSString * const RepoEmailKey = @"email";
 NSString * const RepoPersonalMessageKey = @"personalmessage";
 
+//Certificate
 NSString * const RepoCertificateNameKey = @"name";
 NSString * const RepoCertificatePasswordKey = @"password";
-
 NSString * const RepoCertificateDirectoryName = @"cert";
 
+//iTunesConnect
+NSString *const RepoITCEmail = @"itcemail";
+NSString *const RepoITCPassword = @"itcpassword";
 
 @implementation RepoBuilder{
     
@@ -54,7 +58,7 @@ NSString * const RepoCertificateDirectoryName = @"cert";
     if ([projectRawSetting.allKeys containsObject:RepoProjectKey]) {
         NSString *projectPath = [repoPath stringByAppendingPathComponent:[projectRawSetting valueForKey:RepoProjectKey]];
         projectPath = [@"file://" stringByAppendingString:projectPath];
-        NSURL *projectURL = [[NSURL URLWithString:projectPath] filePathURL];
+        NSURL *projectURL = [NSURL fileURLWithPath:projectPath];
         project.fullPath = projectURL;
     }
     
@@ -73,23 +77,36 @@ NSString * const RepoCertificateDirectoryName = @"cert";
         project.teamId = [projectRawSetting valueForKey: RepoTeamIdKey];
     }
     
+    //Dropbox folder name
     if ([projectRawSetting.allKeys containsObject:RepoDropboxFolderNameKey]) {
         project.keepSameLink = [projectRawSetting valueForKey:RepoKeepSameLinkKey];
     }
     
+    //Email
     if ([projectRawSetting.allKeys containsObject:RepoEmailKey]) {
         project.emails = [projectRawSetting valueForKey:RepoEmailKey];
     }
     
+    //Personal Message
     if ([projectRawSetting.allKeys containsObject:RepoPersonalMessageKey]) {
         project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
+    }
+    
+    //itcemail
+    if ([projectRawSetting.allKeys containsObject:RepoITCEmail]) {
+        project.itcUserName = [projectRawSetting valueForKey:RepoITCEmail];
+    }
+    
+    //itcpassword
+    if ([projectRawSetting.allKeys containsObject:RepoITCPassword]) {
+        project.itcPasswod = [projectRawSetting valueForKey:RepoITCPassword];
     }
     
     //Replace current settings from command line arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
     [ABLog log:@"All Command Line Arguments = %@",arguments];
     for (NSString *argument in arguments) {
-        if ([arguments containsObject:abArgsScheme]) {
+        if ([argument containsString:abArgsScheme]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsScheme];
             [ABLog log:@"Scheme Components = %@",components];
             if (components.count == 2) {
@@ -99,7 +116,7 @@ NSString * const RepoCertificateDirectoryName = @"cert";
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Scheme Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
             }
-        } else if ([arguments containsObject:abArgsBuildType]) {
+        } else if ([argument containsString:abArgsBuildType]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsBuildType];
             [ABLog log:@"BuildType Components = %@",components];
             if (components.count == 2) {
@@ -109,7 +126,7 @@ NSString * const RepoCertificateDirectoryName = @"cert";
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid BuildType Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
             }
-        } else if ([arguments containsObject:abArgsTeamId]) {
+        } else if ([argument containsString:abArgsTeamId]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsTeamId];
             [ABLog log:@"TeamId Components = %@",components];
             if (components.count == 2) {
