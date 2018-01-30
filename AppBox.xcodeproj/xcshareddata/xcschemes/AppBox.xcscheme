@@ -65,6 +65,10 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
+            argument = "build=/Users/emp195/Downloads/PrymeTime-iOS"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "build=/Volumes/LongTime/ProjectWorking/V2.2.2"
             isEnabled = "NO">
          </CommandLineArgument>

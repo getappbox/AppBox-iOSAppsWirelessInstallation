@@ -42,6 +42,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abALValidateApp @"validate-app"
 #define abALValidateUser @"validate-user"
 #define abiTunesConnectService @"AppBox - iTunesConnect"
+#define abiTunesConnectServiceCI @"AppBox - iTunesConnect - CI"
 
 //Serives Key
 #define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
