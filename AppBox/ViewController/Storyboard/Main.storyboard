@@ -982,7 +982,7 @@ Gw
         <!--Login View Controller-->
         <scene sceneID="zTD-qn-WeB">
             <objects>
-                <viewController id="PbW-uV-2L2" customClass="ITCLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ITCLoginViewController" id="PbW-uV-2L2" customClass="ITCLoginViewController" sceneMemberID="viewController">
                     <view key="view" id="22p-rt-iZL">
                         <rect key="frame" x="0.0" y="0.0" width="535" height="144"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2068,7 +2068,7 @@ Gw
         <scene sceneID="PM4-1m-3co">
             <objects>
                 <customObject id="LJU-Ru-PwF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController title="Connect to Dropbox" id="9dR-R1-8zT" customClass="DropboxViewController" sceneMemberID="viewController">
+                <viewController title="Connect to Dropbox" storyboardIdentifier="DropboxViewController" id="9dR-R1-8zT" customClass="DropboxViewController" sceneMemberID="viewController">
                     <view key="view" id="fEa-Vc-Khq">
                         <rect key="frame" x="0.0" y="0.0" width="420" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -68,6 +68,9 @@
 		E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A11D7469D200CE8B7E /* CoreData.framework */; };
 		E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E16438A31D7469D900CE8B7E /* Foundation.framework */; };
 		E16724601E1D2AE000346502 /* CIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E167245F1E1D2AE000346502 /* CIViewController.m */; };
+		E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */; };
+		E16BB8C120284236002E9B5A /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */; };
+		E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */; };
 		E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72D41E88F99A0031FB7C /* ALOutput.m */; };
 		E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72D61E88F99A0031FB7C /* ALOutputParser.m */; };
 		E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72DB1E88FA230031FB7C /* XCHandler.m */; };
@@ -312,6 +315,11 @@
 		E16438A31D7469D900CE8B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E167245E1E1D2AE000346502 /* CIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIViewController.h; sourceTree = "<group>"; };
 		E167245F1E1D2AE000346502 /* CIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIViewController.m; sourceTree = "<group>"; };
+		E16BB8BD20284236002E9B5A /* SelectAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAccountViewController.h; sourceTree = "<group>"; };
+		E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountViewController.m; sourceTree = "<group>"; };
+		E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAccountViewController.xib; sourceTree = "<group>"; };
+		E16BB8C320285A38002E9B5A /* SelectAccountCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAccountCellView.h; sourceTree = "<group>"; };
+		E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountCellView.m; sourceTree = "<group>"; };
 		E16D72D31E88F99A0031FB7C /* ALOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALOutput.h; sourceTree = "<group>"; };
 		E16D72D41E88F99A0031FB7C /* ALOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALOutput.m; sourceTree = "<group>"; };
 		E16D72D51E88F99A0031FB7C /* ALOutputParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALOutputParser.h; sourceTree = "<group>"; };
@@ -847,6 +855,26 @@
 			path = CIViewController;
 			sourceTree = "<group>";
 		};
+		E16BB8BC20284207002E9B5A /* SelectAccountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E16BB8C220284493002E9B5A /* SelectAccountCellView */,
+				E16BB8BD20284236002E9B5A /* SelectAccountViewController.h */,
+				E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */,
+				E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */,
+			);
+			path = SelectAccountViewController;
+			sourceTree = "<group>";
+		};
+		E16BB8C220284493002E9B5A /* SelectAccountCellView */ = {
+			isa = PBXGroup;
+			children = (
+				E16BB8C320285A38002E9B5A /* SelectAccountCellView.h */,
+				E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */,
+			);
+			path = SelectAccountCellView;
+			sourceTree = "<group>";
+		};
 		E16D72D11E88F99A0031FB7C /* OutputParsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -932,6 +960,7 @@
 		E18186D71E8A479E0002509F /* AccountPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E16BB8BC20284207002E9B5A /* SelectAccountViewController */,
 				E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */,
 				E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */,
 				E1D12EEB1EC31AC80065E59A /* AccountPreferencesViewController.xib */,
@@ -1232,6 +1261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */,
+				E16BB8C120284236002E9B5A /* SelectAccountViewController.xib in Resources */,
 				E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */,
 				DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
@@ -1366,6 +1396,7 @@
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
+				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
 				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
 				DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
@@ -1384,6 +1415,7 @@
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */,
 				E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */,
+				E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */,
 				DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
