@@ -71,6 +71,7 @@
 		E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8BE20284236002E9B5A /* SelectAccountViewController.m */; };
 		E16BB8C120284236002E9B5A /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */; };
 		E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */; };
+		E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E16BB8C8202873FA002E9B5A /* AccountCellView.m */; };
 		E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72D41E88F99A0031FB7C /* ALOutput.m */; };
 		E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72D61E88F99A0031FB7C /* ALOutputParser.m */; };
 		E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E16D72DB1E88FA230031FB7C /* XCHandler.m */; };
@@ -320,6 +321,8 @@
 		E16BB8BF20284236002E9B5A /* SelectAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAccountViewController.xib; sourceTree = "<group>"; };
 		E16BB8C320285A38002E9B5A /* SelectAccountCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAccountCellView.h; sourceTree = "<group>"; };
 		E16BB8C420285A38002E9B5A /* SelectAccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAccountCellView.m; sourceTree = "<group>"; };
+		E16BB8C7202873FA002E9B5A /* AccountCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountCellView.h; sourceTree = "<group>"; };
+		E16BB8C8202873FA002E9B5A /* AccountCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCellView.m; sourceTree = "<group>"; };
 		E16D72D31E88F99A0031FB7C /* ALOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALOutput.h; sourceTree = "<group>"; };
 		E16D72D41E88F99A0031FB7C /* ALOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALOutput.m; sourceTree = "<group>"; };
 		E16D72D51E88F99A0031FB7C /* ALOutputParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALOutputParser.h; sourceTree = "<group>"; };
@@ -875,6 +878,15 @@
 			path = SelectAccountCellView;
 			sourceTree = "<group>";
 		};
+		E16BB8C6202873E1002E9B5A /* AccountCellView */ = {
+			isa = PBXGroup;
+			children = (
+				E16BB8C7202873FA002E9B5A /* AccountCellView.h */,
+				E16BB8C8202873FA002E9B5A /* AccountCellView.m */,
+			);
+			path = AccountCellView;
+			sourceTree = "<group>";
+		};
 		E16D72D11E88F99A0031FB7C /* OutputParsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,6 +972,7 @@
 		E18186D71E8A479E0002509F /* AccountPreferencesViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E16BB8C6202873E1002E9B5A /* AccountCellView */,
 				E16BB8BC20284207002E9B5A /* SelectAccountViewController */,
 				E18186DA1E8A47C10002509F /* AccountPreferencesViewController.h */,
 				E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */,
@@ -1432,6 +1445,7 @@
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
+				E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */,
 				E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */,
 				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 				E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */,

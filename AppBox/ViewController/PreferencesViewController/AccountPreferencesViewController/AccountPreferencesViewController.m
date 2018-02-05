@@ -12,13 +12,41 @@
 
 @end
 
-@implementation AccountPreferencesViewController
+@implementation AccountPreferencesViewController{
+    NSArray *itcAccounts;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    [self loadAccounts];
 }
 
+-(void)loadAccounts{
+    itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
+}
+
+#pragma mark - AccountPreferencesViewController Delegate
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    return itcAccounts.count;
+}
+
+-(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
+    AccountCellView *cell = [tableView makeViewWithIdentifier:@"AccountCell" owner:self];
+    NSDictionary *keyChainAccount = [NSDictionary dictionaryWithDictionary:[itcAccounts objectAtIndex:row]];
+    [cell.accountIdLabel setStringValue:[keyChainAccount valueForKey:kSAMKeychainAccountKey]];
+    [cell.accountDescLabel setStringValue:[keyChainAccount valueForKey:kSAMKeychainLabelKey]];
+    return cell;
+}
+
+-(BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
+    NSDictionary *keyChainAccount = [NSDictionary dictionaryWithDictionary:[itcAccounts objectAtIndex:row]];
+    [accountNameLabel setStringValue:[keyChainAccount valueForKey:kSAMKeychainLabelKey]];
+    [accountIdLabel setStringValue:[keyChainAccount valueForKey:kSAMKeychainAccountKey]];
+    [accountDescLabel setStringValue:[keyChainAccount valueForKey:kSAMKeychainAccountKey]];
+    return YES;
+}
+
+#pragma mark - Actions
 - (IBAction)addAccountButtonTapped:(NSButton *)sender {
     SelectAccountViewController *selectAccountViewController = [[SelectAccountViewController alloc] initWithNibName:NSStringFromClass([SelectAccountViewController class]) bundle:nil];
     selectAccountViewController.delegate = self;
@@ -53,7 +81,8 @@
 
 -(void)itcLoginResult:(BOOL)success{
     if (success) {
-        
+        [self loadAccounts];
+        [accountTableView reloadData];
     }
 }
 

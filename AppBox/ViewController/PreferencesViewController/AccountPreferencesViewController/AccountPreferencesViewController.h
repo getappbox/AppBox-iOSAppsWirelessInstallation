@@ -8,11 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "AccountCellView.h"
 #import "DropboxViewController.h"
 #import "ITCLoginViewController.h"
 #import "SelectAccountViewController.h"
 
-@interface AccountPreferencesViewController : NSViewController <SelectAccountViewControllerDelegate, ITCLoginDelegate>{
+@interface AccountPreferencesViewController : NSViewController <SelectAccountViewControllerDelegate, ITCLoginDelegate, NSTableViewDelegate, NSTableViewDataSource>{
     __weak IBOutlet NSTableView *accountTableView;
     __weak IBOutlet NSTextField *accountNameLabel;
     __weak IBOutlet NSTextField *accountIdLabel;
