@@ -19,4 +19,42 @@
     // Do view setup here.
 }
 
+- (IBAction)addAccountButtonTapped:(NSButton *)sender {
+    SelectAccountViewController *selectAccountViewController = [[SelectAccountViewController alloc] initWithNibName:NSStringFromClass([SelectAccountViewController class]) bundle:nil];
+    selectAccountViewController.delegate = self;
+    [self presentViewControllerAsSheet:selectAccountViewController];
+}
+
+- (IBAction)deleteAccountButtonTapped:(NSButton *)sender {
+    
+}
+
+#pragma mark - SelectAccountViewController Delegate
+-(void)selectedAccountType:(AccountType)accountType{
+    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    switch (accountType) {
+        case AccountTypeDropBox: {
+            DropboxViewController *dropboxViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([DropboxViewController class])];
+            [self presentViewControllerAsSheet:dropboxViewController];
+        }break;
+            
+        case AccountTypeITC: {
+            ITCLoginViewController *itcLoginViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([ITCLoginViewController class])];
+            itcLoginViewController.delegate = self;
+            [self presentViewControllerAsSheet:itcLoginViewController];
+        }break;
+    }
+}
+
+#pragma mark - ITCLoginViewController Delegate
+-(void)itcLoginCanceled{
+    
+}
+
+-(void)itcLoginResult:(BOOL)success{
+    if (success) {
+        
+    }
+}
+
 @end
