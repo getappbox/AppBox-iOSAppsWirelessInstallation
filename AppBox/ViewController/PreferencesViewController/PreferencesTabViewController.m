@@ -59,7 +59,7 @@
     
     NSTabViewItem *slackPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"slack"];
     [slackPreferencesTabViewItem setLabel:@"Slack"];
-    [slackPreferencesTabViewItem setImage:[NSImage imageNamed:@"SlackLogo"]];
+    [slackPreferencesTabViewItem setImage:[NSImage imageNamed:@"Integration"]];
     [slackPreferencesTabViewItem setViewController:slackPreferencesViewController];
     
     [self addTabViewItem:slackPreferencesTabViewItem];
