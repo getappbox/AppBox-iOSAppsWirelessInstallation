@@ -49,6 +49,30 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define UserHangoutChatWebHook @"UserHangoutChatWebHook"
+
++(NSString *)userHangoutChatWebHook {
+    NSString *userHangoutChatWebHook = [[NSUserDefaults standardUserDefaults] stringForKey:UserHangoutChatWebHook];
+    return userHangoutChatWebHook == nil ? abEmptyString : userHangoutChatWebHook;
+}
+
++(void)setUserHangoutChatWebHook:(NSString *)slackChannel {
+    [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserHangoutChatWebHook];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define UserMicrosoftTeamWebHook @"UserMicrosoftTeamWebHook"
+
++(NSString *)userMicrosoftTeamWebHook {
+    NSString *userMicrosoftTeamWebHook = [[NSUserDefaults standardUserDefaults] stringForKey:UserMicrosoftTeamWebHook];
+    return userMicrosoftTeamWebHook == nil ? abEmptyString : userMicrosoftTeamWebHook;
+}
+
++(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel {
+    [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserMicrosoftTeamWebHook];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #define UserSlackMessage @"UserSlackMessage"
 
 +(NSString *)userSlackMessage {

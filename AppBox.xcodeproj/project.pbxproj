@@ -111,6 +111,8 @@
 		E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5C1E1661B300C3E0F6 /* MailHandler.m */; };
 		E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B5F1E1661BE00C3E0F6 /* UpdateHandler.m */; };
 		E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B631E16633A00C3E0F6 /* KeychainHandler.m */; };
+		E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */; };
+		E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F7205F9FDC00CF12F9 /* HangoutClient.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
@@ -369,6 +371,10 @@
 		E1902B621E16633A00C3E0F6 /* KeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainHandler.h; sourceTree = "<group>"; };
 		E1902B631E16633A00C3E0F6 /* KeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainHandler.m; sourceTree = "<group>"; };
 		E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ALAppStore.sh; sourceTree = "<group>"; };
+		E19473F3205F9FC800CF12F9 /* MSTeamsClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSTeamsClient.h; sourceTree = "<group>"; };
+		E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSTeamsClient.m; sourceTree = "<group>"; };
+		E19473F6205F9FDC00CF12F9 /* HangoutClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HangoutClient.h; sourceTree = "<group>"; };
+		E19473F7205F9FDC00CF12F9 /* HangoutClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HangoutClient.m; sourceTree = "<group>"; };
 		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
@@ -1107,6 +1113,34 @@
 			path = KeychainHandler;
 			sourceTree = "<group>";
 		};
+		E19473F0205F9F2900CF12F9 /* ServiceIntegrations */ = {
+			isa = PBXGroup;
+			children = (
+				E19473F2205F9F8600CF12F9 /* MSTeamsClient */,
+				E19473F1205F9F7100CF12F9 /* HangoutClient */,
+				E1C0246E1E9B4E4C00C87CC9 /* SlackClient */,
+			);
+			path = ServiceIntegrations;
+			sourceTree = "<group>";
+		};
+		E19473F1205F9F7100CF12F9 /* HangoutClient */ = {
+			isa = PBXGroup;
+			children = (
+				E19473F6205F9FDC00CF12F9 /* HangoutClient.h */,
+				E19473F7205F9FDC00CF12F9 /* HangoutClient.m */,
+			);
+			path = HangoutClient;
+			sourceTree = "<group>";
+		};
+		E19473F2205F9F8600CF12F9 /* MSTeamsClient */ = {
+			isa = PBXGroup;
+			children = (
+				E19473F3205F9FC800CF12F9 /* MSTeamsClient.h */,
+				E19473F4205F9FC800CF12F9 /* MSTeamsClient.m */,
+			);
+			path = MSTeamsClient;
+			sourceTree = "<group>";
+		};
 		E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,11 +1171,11 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E19473F0205F9F2900CF12F9 /* ServiceIntegrations */,
 				E185338F200E082800E88529 /* LogManager */,
 				E1902B501E16617B00C3E0F6 /* UserData */,
 				E1902B491E16617B00C3E0F6 /* GitHandler */,
 				DB2629781F95ED8900C4C647 /* Extensions */,
-				E1C0246E1E9B4E4C00C87CC9 /* SlackClient */,
 				E13161EF1E97775100586052 /* RepoBuilder */,
 				E1902B4A1E16617B00C3E0F6 /* MacHandler */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
@@ -1407,10 +1441,12 @@
 				DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
+				E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
 				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
 				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
+				E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */,
 				DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */,
