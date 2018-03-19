@@ -19,6 +19,10 @@
 +(void)setUserSlackChannel:(NSString *)slackChannel;
 +(NSString *)userSlackMessage;
 +(void)setUserSlackMessage:(NSString *)slackMessage;
++(NSString *)userHangoutChatWebHook;
++(void)setUserHangoutChatWebHook:(NSString *)slackChannel;
++(NSString *)userMicrosoftTeamWebHook;
++(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel;
 
 +(NSURL *)buildLocation;
 +(void)setBuildLocation:(NSURL *)buildLocation;

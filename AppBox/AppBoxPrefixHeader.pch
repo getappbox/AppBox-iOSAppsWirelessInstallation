@@ -38,6 +38,8 @@
 #import "MacHandler.h"
 #import "MailHandler.h"
 #import "SlackClient.h"
+#import "HangoutClient.h"
+#import "MSTeamsClient.h"
 #import "TaskHandler.h"
 #import "RepoBuilder.h"
 #import "EventTracker.h"
