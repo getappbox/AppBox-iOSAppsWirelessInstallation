@@ -443,9 +443,18 @@
                     if (ciRepoProject) {
                         [RepoBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
                         [comboTeamId removeAllItems];
+                        if (project.teamId == nil) {
+                            [self showStatus:@"Private key not available in keychain." andShowProgressBar:NO withProgress:-1];
+                            exit(abExitCodeForPrivateKeyNotFound);
+                        }
                         [comboTeamId addItemWithObjectValue:project.teamId];
                         [comboTeamId selectItemWithObjectValue:project.teamId];
                         [comboBuildType selectItemWithObjectValue:project.buildType];
+                        if (project.schemes == nil || project.schemes.count == 0) {
+                            NSString *message = [NSString stringWithFormat:@"Failed to load scheme information. Please try again with shared Xcode project schemes. Click here to read how to share project scheme - %@", abShareXcodeProjectSchemeURL];
+                            [self showStatus:message andShowProgressBar:NO withProgress:-1];
+                            exit(abExitCodeForSchemeNotFound);
+                        }
                         [comboBuildScheme selectItemWithObjectValue:project.selectedSchemes];
                         [textFieldEmail setStringValue:project.emails];
                         [textFieldMessage setStringValue:project.personalMessage];
