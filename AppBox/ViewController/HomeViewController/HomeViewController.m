@@ -92,6 +92,9 @@
     
     [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
         if (terminate) {
+            if (ciRepoProject) {
+                exit(abExitCodeForUploadFailed);
+            }
             [weakSelf viewStateForProgressFinish:YES];
         }
     }];
@@ -590,8 +593,10 @@
 -(void)appStoreScriptOutputHandlerWithOutput:(NSString *)output{
     //parse application loader response
     ALOutput *alOutput = [ALOutputParser messageFromXMLString:output];
-    [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+    [alOutput.messages enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj && obj.length > 0){
+            [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+        }
     }];
     
     //check if response is valid or error
@@ -601,19 +606,25 @@
             [self runALAppStoreScriptForValidation:NO];
         }else if (scriptType == ScriptTypeAppStoreUpload){
             //show upload succeess message
-            [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
-            [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
-            [self viewStateForProgressFinish:YES];
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}];
             [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
+            [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+            if (ciRepoProject) {
+                exit(abExitCodeForSuccess);
+            }
+            [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
+            [self viewStateForProgressFinish:YES];
         }
     }else{
         //if internet is connected, show direct error
         if ([AppDelegate appDelegate].isInternetConnected){
+            [[AppDelegate appDelegate] addSessionLog:@"Failed to upload on AppStore."];
+            if (ciRepoProject) {
+                exit(abExitCodeForAppStoreUploadFailed);
+            }
             [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
             [self viewStateForProgressFinish:YES];
         }else{
-            
             //if internet connection is lost, show watting message and start process again when connected
             [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
@@ -636,7 +647,11 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]){
         if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
             //get required info and upload to appstore
-            [self runALAppStoreScriptForValidation:YES];
+            if (project.alPath) {
+                [self runALAppStoreScriptForValidation:YES];
+            } else {
+                [self itcLoginResult:YES];
+            }
         }else{
             //get ipa details and upload to dropbox
             [uploadManager uploadIPAFile:project.ipaFullPath];
@@ -852,13 +867,27 @@
                     if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
                         [self runALAppStoreScriptForValidation:YES];
                     }else{
-                        [self updateViewState];
+                        if (ciRepoProject){
+                            [self runALAppStoreScriptForValidation:YES];
+                        } else {
+                            [self updateViewState];
+                        }
                     }
                 }else{
-                    [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
+                    if (ciRepoProject) {
+                        [[AppDelegate appDelegate] addSessionLog:@"Can't able to find application loader in your machine."];
+                        exit(abExitCodeForApplicationLoaderNotFount);
+                    } else {
+                        [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
+                    }
                 }
             }else{
-                [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
+                if (ciRepoProject) {
+                    [[AppDelegate appDelegate] addSessionLog:@"Can't able to find xcode in your machine."];
+                    exit(abExitCodeForXcodeNotFount);
+                } else {
+                    [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
+                }
             }
         }];
     }
