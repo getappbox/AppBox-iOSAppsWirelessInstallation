@@ -108,8 +108,6 @@ typedef enum : NSUInteger {
 } ScriptType;
 
 //CI
-#define abExitCodeForSchemeNotFound 129
-#define abExitCodeForPrivateKeyNotFound 128
 #define abExitCodeForInvalidCommand 127
 #define abExitCodeForArchiveFailed 126
 #define abExitCodeForExportFailed 125
@@ -121,6 +119,12 @@ typedef enum : NSUInteger {
 #define abExitCodeInfoPlistNotFound 120
 #define abExitCodeIPAFileNotFound 119
 #define abExitCodeUnableToCreateManiFestFile 118
+#define abExitCodeForXcodeNotFount 117
+#define abExitCodeForApplicationLoaderNotFount 116
+#define abExitCodeForSchemeNotFound 115
+#define abExitCodeForPrivateKeyNotFound 114
+#define abExitCodeForAppStoreUploadFailed 113
+#define abExitCodeForInvalidITCAccount 112
 #define abExitCodeForSuccess 0
 
 #define abArgsWorkspace @"build="

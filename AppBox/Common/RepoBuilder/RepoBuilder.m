@@ -95,11 +95,18 @@ NSString *const RepoITCPassword = @"itcpassword";
     //itcemail
     if ([projectRawSetting.allKeys containsObject:RepoITCEmail]) {
         project.itcUserName = [projectRawSetting valueForKey:RepoITCEmail];
-    }
-    
-    //itcpassword
-    if ([projectRawSetting.allKeys containsObject:RepoITCPassword]) {
-        project.itcPasswod = [projectRawSetting valueForKey:RepoITCPassword];
+        if ([MailHandler isAllValidEmail:project.itcUserName]) {
+            NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:project.itcUserName];
+            if (password == nil || password.length == 0) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not available in keychain. Please add account in AppBox first.", project.itcUserName]];
+                exit(abExitCodeForInvalidITCAccount);
+            } else {
+                project.itcPasswod = password;
+            }
+        } else if (project.itcUserName.length > 0) {
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not a valid email.", project.itcUserName]];
+            exit(abExitCodeForInvalidITCAccount);
+        }
     }
     
     //Replace current settings from command line arguments
@@ -153,12 +160,15 @@ NSString *const RepoITCPassword = @"itcpassword";
         [project setTeamId: [team valueForKey:abTeamId]];
     }
     
+    [project setItcUserName:repoProject.itcUserName];
+    [project setItcPasswod:repoProject.itcPasswod];
+    
     [project setEmails:repoProject.emails];
     [project setPersonalMessage:repoProject.personalMessage];
 }
 
-#pragma mark - Certificates 
-    
+#pragma mark - Certificates
+
 + (NSString *)isValidRepoForCertificateFileAtPath:(NSString *)path {
     NSString *repoCertificatePlist = [path stringByAppendingPathComponent:RepoCertificateDirectoryName];
     repoCertificatePlist = [repoCertificatePlist stringByAppendingPathComponent:@"appbox.plist"];
@@ -168,7 +178,7 @@ NSString *const RepoITCPassword = @"itcpassword";
     }
     return nil;
 }
-    
+
 + (void)installCertificateWithDetailsInFile:(NSString *)detailsFilePath andRepoPath:(NSString *)repoPath {
     NSArray *certificateDetails = [NSArray arrayWithContentsOfFile:detailsFilePath];
     for (NSDictionary *details in certificateDetails) {
@@ -179,6 +189,7 @@ NSString *const RepoITCPassword = @"itcpassword";
         [KeychainHandler installPrivateKeyFromPath:certificatePath withPassword:password];
     }
 }
-    
+
 
 @end
+
