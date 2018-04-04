@@ -31,7 +31,7 @@
                                      @"text": slackMessage,};
         
         //send message
-        [NetworkHandler requestWithURL:channelURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSError *error) {
+        [NetworkHandler requestWithURL:channelURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             if (responseObj && error == nil) {
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Slack Response - %@", responseObj]];
                 completion(YES);

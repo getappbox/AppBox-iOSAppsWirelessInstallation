@@ -9,7 +9,7 @@
 #import "ShowLinkViewController.h"
 
 #define ShortURLUserHint @"Your app is ready. Copy this link and send it to anyone."
-#define LongURLUserHint @"Your app is ready. Copy this link and send it to anyone, sorry for long url, google shortener API getting failed currently."
+#define LongURLUserHint @"Your app is ready. Copy this link and send it to anyone, sorry for long url, our shortener URL API getting failed currently."
 
 @interface ShowLinkViewController ()
 

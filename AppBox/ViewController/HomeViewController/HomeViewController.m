@@ -912,13 +912,26 @@
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n\nBUILD URL - %@\n\n\n", project.appShortShareableURL]];
     
     if ([UserData userSlackMessage].length > 0) {
-        [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
-        [SlackClient sendMessageForProject:project completion:^(BOOL success) {
-            [self handleAppURLAfterSlack];
-        }];
-    } else {
-        [self handleAppURLAfterSlack];
+        if ([UserData userSlackChannel].length > 0){
+            [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
+            [SlackClient sendMessageForProject:project completion:^(BOOL success) {
+            }];
+        }
+        if ([UserData userHangoutChatWebHook].length > 0){
+            [self showStatus:@"Sending Message on Hangout..." andShowProgressBar:YES withProgress:-1];
+            [HangoutClient sendMessageForProject:project completion:^(BOOL success) {
+            }];
+        }
+        if ([UserData userMicrosoftTeamWebHook].length > 0){
+            [self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
+            [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {
+            }];
+        }
+        
     }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self handleAppURLAfterSlack];
+    });
 }
 
 

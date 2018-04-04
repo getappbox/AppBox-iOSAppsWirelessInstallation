@@ -28,7 +28,7 @@
         NSDictionary *parameters = @{@"text" : hangoutMessage};
         
         //send message
-        [NetworkHandler requestWithURL:webHookURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSError *error) {
+        [NetworkHandler requestWithURL:webHookURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             if (responseObj && error == nil) {
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Microsoft Team Response - %@", responseObj]];
                 completion(YES);

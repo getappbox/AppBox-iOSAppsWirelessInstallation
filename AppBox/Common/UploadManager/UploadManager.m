@@ -631,17 +631,9 @@
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
     
     //Create Short URL
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-        //Retry to create short URL if first try failed
+    [[BranchIO shared] shortenURLForProject:self.project completion:^(NSURL *shortURL, NSError *error) {
         if (shortURL == nil || error) {
-            [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-                if (shortURL == nil || error) {
-                    [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
-                } else {
-                    [self createAndUploadJsonWithURL:shortURL];
-                }
-            }];
+            [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
         } else {
             [self createAndUploadJsonWithURL:shortURL];
         }
@@ -663,8 +655,7 @@
     NSString *originalURL = [self.project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]];
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
+    [[BranchIO shared] shortenURLForProject:self.project completion:^(NSURL *shortURL, NSError *error) {
         self.project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.completionBlock();
