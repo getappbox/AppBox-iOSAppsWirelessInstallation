@@ -21,5 +21,6 @@
 #define HTTP_PAYMENT_REQUIRED 402
 #define HTTP_FORBIDDEN 403
 #define HTTP_NOT_FOUND 404
+#define HTTP_CONFLICT 409
 
 #endif /* HTTPStatusCode_h */

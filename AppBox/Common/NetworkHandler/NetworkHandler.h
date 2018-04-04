@@ -15,7 +15,7 @@ typedef enum : NSUInteger {
     RequestPOST,
 } RequestType;
 
-+(void)requestWithURL:(NSString *)url withParameters:(id)parmeters andRequestType:(RequestType)requestType andCompletetion:(void (^)(id responseObj, NSError *error))completion;
++(void)requestWithURL:(NSString *)url withParameters:(id)parmeters andRequestType:(RequestType)requestType andCompletetion:(void (^)(id responseObj, NSInteger httpStatus, NSError *error))completion;
 +(void)getContentOfURL:(NSString *)url withParameters:(id)parmeters withRequestType:(RequestType)requestType andCompletetion:(void (^)(id responseObj, NSInteger statusCode, NSError *error))completion;
 
 @end

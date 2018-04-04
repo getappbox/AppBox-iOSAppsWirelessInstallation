@@ -11,7 +11,7 @@
 
 @implementation NetworkHandler
 
-+(void)requestWithURL:(NSString *)url withParameters:(id)parmeters andRequestType:(RequestType)requestType andCompletetion:(void (^)(id responseObj, NSError *error))completion{
++(void)requestWithURL:(NSString *)url withParameters:(id)parmeters andRequestType:(RequestType)requestType andCompletetion:(void (^)(id responseObj, NSInteger httpStatus, NSError *error))completion{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager setRequestSerializer: [AFJSONRequestSerializer serializer]];
     [manager setResponseSerializer: [AFJSONResponseSerializer serializer]];
@@ -19,24 +19,28 @@
         [manager GET:url parameters:parmeters progress:^(NSProgress * _Nonnull downloadProgress) {
             [ABLog log:@"Request In Progress -  %@", url];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            completion(responseObject, nil);
+            NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
+            completion(responseObject, statusCode, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            if (((NSHTTPURLResponse *)task.response).statusCode == HTTP_OK) {
-                completion(@"ok", nil);
+            NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
+            if (statusCode == HTTP_OK) {
+                completion(@"ok", statusCode, nil);
             }else{
-                completion(nil, error);
+                completion(nil, statusCode, error);
             }
         }];
     }else if (requestType == RequestPOST){
         [manager POST:url parameters:parmeters progress:^(NSProgress * _Nonnull uploadProgress) {
             [ABLog log:@"Request In Progress -  %@", url];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            completion(responseObject, nil);
+            NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
+            completion(responseObject, statusCode, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            if (((NSHTTPURLResponse *)task.response).statusCode == HTTP_OK) {
-                completion(@"ok", nil);
+            NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
+            if (statusCode == HTTP_OK) {
+                completion(@"ok", statusCode, nil);
             }else{
-                completion(nil, error);
+                completion(nil, statusCode, error);
             }
         }];
     }

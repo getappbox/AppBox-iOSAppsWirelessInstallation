@@ -100,9 +100,6 @@
 		E185338D200DFA4100E88529 /* junit.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D257200DE0170062078B /* junit.rb */; };
 		E185338E200DFA4100E88529 /* reporter.rb in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D258200DE0170062078B /* reporter.rb */; };
 		E1853392200E084500E88529 /* ABLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E1853391200E084500E88529 /* ABLog.m */; };
-		E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */; };
-		E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */; };
-		E188EA121D78485900EBCA52 /* Tiny.m in Sources */ = {isa = PBXBuildFile; fileRef = E188EA0F1D78485900EBCA52 /* Tiny.m */; };
 		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
 		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
 		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
@@ -117,6 +114,7 @@
 		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
+		E1BC9FC22072030A00EF7299 /* BranchIO.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FC12072030900EF7299 /* BranchIO.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
 		E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
@@ -349,13 +347,6 @@
 		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
 		E1853390200E084500E88529 /* ABLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABLog.h; sourceTree = "<group>"; };
 		E1853391200E084500E88529 /* ABLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABLog.m; sourceTree = "<group>"; };
-		E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortenerService.h; sourceTree = "<group>"; };
-		E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortenerService.m; sourceTree = "<group>"; };
-		E188EA0B1D78485900EBCA52 /* GooglURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglURLShortenerService.h; sourceTree = "<group>"; };
-		E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglURLShortenerService.m; sourceTree = "<group>"; };
-		E188EA0D1D78485900EBCA52 /* NTAURLShortenerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTAURLShortenerService.h; sourceTree = "<group>"; };
-		E188EA0E1D78485900EBCA52 /* Tiny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tiny.h; sourceTree = "<group>"; };
-		E188EA0F1D78485900EBCA52 /* Tiny.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tiny.m; sourceTree = "<group>"; };
 		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
 		E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectAdvancedViewController.m; sourceTree = "<group>"; };
 		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
@@ -386,6 +377,8 @@
 		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
 		E1AE88701F3F15780085B173 /* LocalServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalServerHandler.m; sourceTree = "<group>"; };
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
+		E1BC9FC02072030900EF7299 /* BranchIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BranchIO.h; sourceTree = "<group>"; };
+		E1BC9FC12072030900EF7299 /* BranchIO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BranchIO.m; sourceTree = "<group>"; };
 		E1C0246F1E9B4E6C00C87CC9 /* SlackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackClient.h; sourceTree = "<group>"; };
 		E1C024701E9B4E6C00C87CC9 /* SlackClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlackClient.m; sourceTree = "<group>"; };
 		E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = InstallPrivateKey.sh; sourceTree = "<group>"; };
@@ -852,7 +845,6 @@
 		E164389A1D743ECA00CE8B7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E188EA071D78485900EBCA52 /* Tiny */,
 				E16438A31D7469D900CE8B7E /* Foundation.framework */,
 				E16438A11D7469D200CE8B7E /* CoreData.framework */,
 				E164389F1D7469CD00CE8B7E /* AppKit.framework */,
@@ -1024,28 +1016,6 @@
 			path = LogManager;
 			sourceTree = "<group>";
 		};
-		E188EA071D78485900EBCA52 /* Tiny */ = {
-			isa = PBXGroup;
-			children = (
-				E188EA081D78485900EBCA52 /* NTAURLShortenerService */,
-				E188EA0E1D78485900EBCA52 /* Tiny.h */,
-				E188EA0F1D78485900EBCA52 /* Tiny.m */,
-			);
-			path = Tiny;
-			sourceTree = "<group>";
-		};
-		E188EA081D78485900EBCA52 /* NTAURLShortenerService */ = {
-			isa = PBXGroup;
-			children = (
-				E188EA091D78485900EBCA52 /* BitlyURLShortenerService.h */,
-				E188EA0A1D78485900EBCA52 /* BitlyURLShortenerService.m */,
-				E188EA0B1D78485900EBCA52 /* GooglURLShortenerService.h */,
-				E188EA0C1D78485900EBCA52 /* GooglURLShortenerService.m */,
-				E188EA0D1D78485900EBCA52 /* NTAURLShortenerService.h */,
-			);
-			path = NTAURLShortenerService;
-			sourceTree = "<group>";
-		};
 		E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1176,6 +1146,15 @@
 			path = LocalServerHandler;
 			sourceTree = "<group>";
 		};
+		E1BC9FBF2071FDCC00EF7299 /* BranchIO */ = {
+			isa = PBXGroup;
+			children = (
+				E1BC9FC02072030900EF7299 /* BranchIO.h */,
+				E1BC9FC12072030900EF7299 /* BranchIO.m */,
+			);
+			path = BranchIO;
+			sourceTree = "<group>";
+		};
 		E1C0246E1E9B4E4C00C87CC9 /* SlackClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1188,6 +1167,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E1BC9FBF2071FDCC00EF7299 /* BranchIO */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
 				E16D72D11E88F99A0031FB7C /* OutputParsers */,
@@ -1435,7 +1415,6 @@
 				E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */,
 				DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
-				E188EA121D78485900EBCA52 /* Tiny.m in Sources */,
 				DBFEEA611FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
@@ -1475,7 +1454,6 @@
 				DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
-				E188EA111D78485900EBCA52 /* GooglURLShortenerService.m in Sources */,
 				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
@@ -1492,6 +1470,7 @@
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
 				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
+				E1BC9FC22072030A00EF7299 /* BranchIO.m in Sources */,
 				DB2629751F95E38C00C4C647 /* Project+CoreDataProperties.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
@@ -1503,7 +1482,6 @@
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
 				E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */,
 				E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */,
-				E188EA101D78485900EBCA52 /* BitlyURLShortenerService.m in Sources */,
 				E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
