@@ -706,7 +706,7 @@
 -(void)viewStateForProgressFinish:(BOOL)finish{
     [ABLog log:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]];
     [[AppDelegate appDelegate] setProcessing:!finish];
-    [[AppDelegate appDelegate] setIsReadyToBuild:!finish];
+    [[AppDelegate appDelegate] setIsReadyToBuild:finish];
     
     //reset project
     if (finish){

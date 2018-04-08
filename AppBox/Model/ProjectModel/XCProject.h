@@ -25,6 +25,8 @@
 @property(nonatomic, retain) NSString *teamId;
 @property(nonatomic, retain) NSString *buildType;
 @property(nonatomic, retain) NSNumber *ipaFileSize;
+@property(nonatomic, retain) NSString *miniOSVersion;
+@property(nonatomic, retain) NSString *supportedDevice;
 
 //Local URLS
 @property(nonatomic, retain) NSURL *fullPath;
