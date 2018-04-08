@@ -61,6 +61,7 @@
     
     //Load Ads
     [AdStore loadAds];
+    [self setAppBoxAsDefualt];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -71,7 +72,28 @@
     return YES;
 }
 
+-(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename{
+    if (self.isReadyToBuild) {
+        [self addSessionLog:@"AppBox is ready to use open file."];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filename];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [self addSessionLog:@"AppBox is ready to use open file. [Block]"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filename];
+        }];
+    }
+    return YES;
+}
 
+#pragma mark - Default Application
+-(BOOL)setAppBoxAsDefualt{
+    OSStatus returnStatus = LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.iTunes.ipa"), kLSRolesAll, (__bridge CFStringRef) [[NSBundle mainBundle] bundleIdentifier]);
+    if (returnStatus != 0) {
+        NSLog(@"Got an error when setting default application - %d", (int)returnStatus);
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - AppDelegate Helper
 
@@ -129,7 +151,7 @@
         [self addSessionLog:@"AppBox is ready to build."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToBuildNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             [self addSessionLog:@"AppBox is ready to build. [Block]"];
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];
