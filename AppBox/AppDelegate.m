@@ -73,6 +73,9 @@
 }
 
 -(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename{
+    if (self.processing){
+        return YES;
+    }
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to use open file."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filename];

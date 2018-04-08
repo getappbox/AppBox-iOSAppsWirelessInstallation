@@ -266,14 +266,53 @@
             }
         }
     } else {
-        NSDictionary *latestVersion = @{
-                                        @"name" : self.project.name,
-                                        @"version" : self.project.version,
-                                        @"build" : self.project.build,
-                                        @"identifier" : self.project.identifer,
-                                        @"manifestLink" : self.project.manifestFileSharableURL.absoluteString,
-                                        @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
-                                        };
+        NSNumber *currentTimeStamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+        NSMutableDictionary *latestVersion = [[NSMutableDictionary alloc] init];
+        [latestVersion setObject:self.project.name forKey:@"name"];
+        [latestVersion setObject:self.project.version forKey:@"version"];
+        [latestVersion setObject:self.project.build forKey:@"build"];
+        [latestVersion setObject:self.project.identifer forKey:@"identifier"];
+        [latestVersion setObject:self.project.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
+        if (self.project.miniOSVersion){
+            [latestVersion setObject:self.project.miniOSVersion forKey:@"minosversion"];
+        }
+        if (self.project.supportedDevice){
+            [latestVersion setObject:self.project.supportedDevice forKey:@"supporteddevice"];
+        }
+        if (self.project.buildType){
+            [latestVersion setObject:self.project.buildType forKey:@"buildtype"];
+        }
+        if (self.project.ipaFileSize) {
+            [latestVersion setObject:self.project.ipaFileSize forKey:@"ipafilesize"];
+        }
+        [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
+        
+        //Provisioning Profile Details
+        if (!self.project.keepSameLink.boolValue) {
+            NSMutableDictionary *mobileProvision = [[NSMutableDictionary alloc] init];
+            if (self.project.mobileProvision.createDate) {
+                NSNumber *create = [NSNumber numberWithDouble: self.project.mobileProvision.createDate.timeIntervalSince1970];
+                [mobileProvision setObject:create forKey:@"createdate"];
+            }
+            if (self.project.mobileProvision.expirationDate) {
+                NSNumber *expire = [NSNumber numberWithDouble: self.project.mobileProvision.expirationDate.timeIntervalSince1970];
+                [mobileProvision setObject:expire forKey:@"expirationdata"];
+            }
+            if (self.project.mobileProvision.provisionedDevices) {
+                [mobileProvision setObject:self.project.mobileProvision.provisionedDevices forKey:@"devicesudid"];
+            }
+            if (self.project.mobileProvision.teamId) {
+                [mobileProvision setObject:self.project.mobileProvision.teamId forKey:@"teamid"];
+            }
+            if (self.project.mobileProvision.teamName) {
+                [mobileProvision setObject:self.project.mobileProvision.teamName forKey:@"teamname"];
+            }
+            if (self.project.mobileProvision.uuid) {
+                [mobileProvision setObject:self.project.mobileProvision.uuid forKey:@"uuid"];
+            }
+            [latestVersion setObject:mobileProvision forKey:@"mobileprovision"];
+        }
+        
         NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
         if(!versionHistory){
             versionHistory = [NSMutableArray new];
@@ -293,7 +332,8 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     }
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:&error];
     [jsonData writeToFile:path atomically:YES];
 }
 
