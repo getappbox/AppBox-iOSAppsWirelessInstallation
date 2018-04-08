@@ -80,5 +80,92 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>LSHandlerRank</key>
+			<string>Editor</string>
+			<key>CFBundleTypeName</key>
+			<string>iPhone Application</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>iTunes-ipa</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSIsAppleDefaultForType</key>
+			<string>Yes</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.iTunes.ipa</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>xcworkspace</string>
+			</array>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
+			<key>LSTypeIsPackage</key>
+			<true/>
+			<key>CFBundleTypeName</key>
+			<string>Xcode Workspace</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>workspace_Icon</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.dt.document.workspace</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>IDEWorkspaceDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>xcarchive</string>
+			</array>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
+			<key>LSTypeIsPackage</key>
+			<true/>
+			<key>CFBundleTypeName</key>
+			<string>Xcode Archive</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>archive_Icon</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.xcode.archive</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>xcodeproj</string>
+				<string>xcode</string>
+				<string>pbproj</string>
+			</array>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
+			<key>LSTypeIsPackage</key>
+			<true/>
+			<key>CFBundleTypeName</key>
+			<string>Xcode Project</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>xcode-project_Icon</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.xcode.project</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>Xcode3ProjectDocument</string>
+		</dict>
+	</array>
 </dict>
 </plist>

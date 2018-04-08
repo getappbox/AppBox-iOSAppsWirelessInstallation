@@ -26,6 +26,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initOpenFilesProcess:) name:abUseOpenFilesNotification object:nil];
     
     //setup initial value
     [project setBuildDirectory: [UserData buildLocation]];
@@ -74,7 +75,7 @@
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
     [[AppDelegate appDelegate] setIsReadyToBuild:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToUseNotification object:self];
 }
 
 #pragma mark - Upload Manager
@@ -109,12 +110,31 @@
 }
 
 
-#pragma mark - Build Repo
+#pragma mark - Build Repo / Open Files Notification
 - (void)initBuildRepoProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         ciRepoProject = notification.object;
         [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
         [self initProjectBuildProcessForURL: ciRepoProject.fullPath];
+    }
+}
+
+- (void)initOpenFilesProcess:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[NSString class]]) {
+        NSURL *fileURL = [notification.object ipaURL];
+        if (fileURL) {
+            [tabView selectTabViewItem:tabView.tabViewItems.lastObject];
+            [pathIPAFile setURL:fileURL.filePathURL];
+            [self ipaFilePathHandle:pathIPAFile];
+            return;
+        }
+        fileURL = [notification.object projectURL];
+        if (fileURL) {
+            [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
+            [pathProject setURL:fileURL.filePathURL];
+            [self projectPathHandler:pathProject];
+            return;
+        }
     }
 }
 

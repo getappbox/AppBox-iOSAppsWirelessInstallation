@@ -52,7 +52,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 #define abBuildRepoNotification @"BuildRepoNotification"
-#define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
+#define abUseOpenFilesNotification @"UseOpenFilesNotification"
+#define abAppBoxReadyToUseNotification @"AppBoxReadyToBuildNotification"
 #define abStopAppBoxLocalServer @"StopAppBoxLocalServer"
 #define abAdsLoadCompleted @"AdsLoadCompleted"
 

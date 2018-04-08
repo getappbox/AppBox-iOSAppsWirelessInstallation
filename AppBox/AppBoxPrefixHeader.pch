@@ -49,6 +49,7 @@
 #import "NSApplication+MenuHandler.h"
 
 #import "NSDate+Date.h"
+#import "NSString+String.h"
 
 
 
