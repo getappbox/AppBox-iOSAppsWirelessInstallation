@@ -29,6 +29,10 @@
 }
 
 -(void)shortenURLForProject:(XCProject *)project completion:(TinyURLShortenerCompletionBlock)completionBlock{
+    if ([abBranchIOProductionKey isEqualToString:abEmptyString]) {
+        completionBlock(nil, nil);
+        return;
+    }
     NSDictionary *parameters = @{
                                  @"branch_key": abBranchIOProductionKey,
                                  @"channel": @"Email",
