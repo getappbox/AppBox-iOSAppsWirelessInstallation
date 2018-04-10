@@ -287,30 +287,29 @@
         }
         [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
         
-        //Provisioning Profile Details
-        if (!self.project.keepSameLink.boolValue) {
-            NSMutableDictionary *mobileProvision = [[NSMutableDictionary alloc] init];
-            if (self.project.mobileProvision.createDate) {
-                NSNumber *create = [NSNumber numberWithDouble: self.project.mobileProvision.createDate.timeIntervalSince1970];
-                [mobileProvision setObject:create forKey:@"createdate"];
-            }
-            if (self.project.mobileProvision.expirationDate) {
-                NSNumber *expire = [NSNumber numberWithDouble: self.project.mobileProvision.expirationDate.timeIntervalSince1970];
-                [mobileProvision setObject:expire forKey:@"expirationdata"];
-            }
-            if (self.project.mobileProvision.provisionedDevices) {
-                [mobileProvision setObject:self.project.mobileProvision.provisionedDevices forKey:@"devicesudid"];
-            }
-            if (self.project.mobileProvision.teamId) {
-                [mobileProvision setObject:self.project.mobileProvision.teamId forKey:@"teamid"];
-            }
-            if (self.project.mobileProvision.teamName) {
-                [mobileProvision setObject:self.project.mobileProvision.teamName forKey:@"teamname"];
-            }
-            if (self.project.mobileProvision.uuid) {
-                [mobileProvision setObject:self.project.mobileProvision.uuid forKey:@"uuid"];
-            }
-            [latestVersion setObject:mobileProvision forKey:@"mobileprovision"];
+        NSMutableDictionary *mobileProvision = [[NSMutableDictionary alloc] init];
+        if (self.project.mobileProvision.createDate) {
+            NSNumber *create = [NSNumber numberWithDouble: self.project.mobileProvision.createDate.timeIntervalSince1970];
+            [mobileProvision setObject:create forKey:@"createdate"];
+        }
+        if (self.project.mobileProvision.expirationDate) {
+            NSNumber *expire = [NSNumber numberWithDouble: self.project.mobileProvision.expirationDate.timeIntervalSince1970];
+            [mobileProvision setObject:expire forKey:@"expirationdata"];
+        }
+        if (self.project.mobileProvision.provisionedDevices) {
+            [mobileProvision setObject:self.project.mobileProvision.provisionedDevices forKey:@"devicesudid"];
+        }
+        if (self.project.mobileProvision.teamId) {
+            [mobileProvision setObject:self.project.mobileProvision.teamId forKey:@"teamid"];
+        }
+        if (self.project.mobileProvision.teamName) {
+            [mobileProvision setObject:self.project.mobileProvision.teamName forKey:@"teamname"];
+        }
+        if (self.project.mobileProvision.uuid) {
+            [mobileProvision setObject:self.project.mobileProvision.uuid forKey:@"uuid"];
+        }
+        if (mobileProvision.allKeys.count > 0) {
+            [latestVersion setObject:mobileProvision forKey:@"mobileprovision"];            
         }
         
         NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
