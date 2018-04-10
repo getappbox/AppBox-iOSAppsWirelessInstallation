@@ -14,6 +14,7 @@
 }
 
 @property(nonatomic, strong) XCProject *project;
+@property(nonatomic, strong) UploadRecord *uploadRecord;
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender;
 

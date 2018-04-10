@@ -1131,13 +1131,13 @@ Gw
             <objects>
                 <viewController title="AppBox Dashboard" showSeguePresentationStyle="single" id="xJf-6e-3AH" customClass="DashboardViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="PxO-db-MX4">
-                        <rect key="frame" x="0.0" y="0.0" width="880" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="970" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVq-E7-tmk">
-                                <rect key="frame" x="0.0" y="0.0" width="880" height="290"/>
+                                <rect key="frame" x="0.0" y="0.0" width="970" height="290"/>
                                 <clipView key="contentView" id="dfT-GK-ipx">
-                                    <rect key="frame" x="1" y="0.0" width="878" height="289"/>
+                                    <rect key="frame" x="1" y="0.0" width="968" height="289"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="2UY-W2-qdH" viewBased="YES" id="WAg-ve-7Hr">
@@ -1421,7 +1421,7 @@ Gw
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="fqx-9A-aGC">
-                                    <rect key="frame" x="1" y="273" width="878" height="16"/>
+                                    <rect key="frame" x="1" y="273" width="968" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="QiA-Gy-5ui">
@@ -1434,7 +1434,7 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="cG3-db-hb7">
-                                <rect key="frame" x="0.0" y="290" width="880" height="60"/>
+                                <rect key="frame" x="0.0" y="290" width="970" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="bJL-u9-E3w"/>
                                 </constraints>
@@ -1542,7 +1542,7 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="c2h-mf-KBX" userLabel="DeleteBuildView">
-                                <rect key="frame" x="180" y="290" width="90" height="60"/>
+                                <rect key="frame" x="270" y="290" width="90" height="60"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3D0-6t-uyB">
                                         <rect key="frame" x="30" y="25" width="30" height="30"/>
@@ -1599,7 +1599,7 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Enl-9d-Udr" userLabel="Provisioning">
-                                <rect key="frame" x="270" y="290" width="90" height="60"/>
+                                <rect key="frame" x="360" y="290" width="90" height="60"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wug-ap-ygW">
                                         <rect key="frame" x="30" y="25" width="30" height="30"/>
@@ -1656,7 +1656,7 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="myH-Q1-2TZ" userLabel="ShowInFinderView">
-                                <rect key="frame" x="660" y="290" width="110" height="60"/>
+                                <rect key="frame" x="750" y="290" width="110" height="60"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7aO-Wt-SsQ">
                                         <rect key="frame" x="40" y="25" width="30" height="30"/>
@@ -1699,7 +1699,7 @@ Gw
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="E6H-Mi-UMb" userLabel="ShowInDropboxView">
-                                <rect key="frame" x="770" y="290" width="110" height="60"/>
+                                <rect key="frame" x="860" y="290" width="110" height="60"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="weq-Pu-TYH">
                                         <rect key="frame" x="40" y="25" width="30" height="30"/>
@@ -1742,13 +1742,56 @@ Gw
                                     <constraint firstItem="weq-Pu-TYH" firstAttribute="top" secondItem="E6H-Mi-UMb" secondAttribute="top" constant="5" id="tI0-OL-PzQ"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="C18-a0-Hhv" userLabel="ShowQR">
+                                <rect key="frame" x="180" y="290" width="90" height="60"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qo5-Q7-Pts">
+                                        <rect key="frame" x="30" y="25" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="55N-1c-XGN"/>
+                                            <constraint firstAttribute="width" constant="30" id="R2L-CA-xad"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="QRCode" id="QAF-qh-0h6"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mbi-e3-cN2">
+                                        <rect key="frame" x="-2" y="5" width="94" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Show QR" id="Bdg-FW-Svi">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="j3I-1l-cr1">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="EfP-Z1-mzQ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="showQRCodeButtonTapped:" target="xJf-6e-3AH" id="8nV-Kh-e9f"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="C7d-E2-jPV"/>
+                                    <constraint firstItem="Mbi-e3-cN2" firstAttribute="leading" secondItem="C18-a0-Hhv" secondAttribute="leading" id="DtV-Pw-Lt4"/>
+                                    <constraint firstItem="j3I-1l-cr1" firstAttribute="top" secondItem="C18-a0-Hhv" secondAttribute="top" id="Guz-z3-N7c"/>
+                                    <constraint firstAttribute="bottom" secondItem="j3I-1l-cr1" secondAttribute="bottom" id="IeS-3V-6D5"/>
+                                    <constraint firstItem="Qo5-Q7-Pts" firstAttribute="centerX" secondItem="C18-a0-Hhv" secondAttribute="centerX" id="Lng-60-KTr"/>
+                                    <constraint firstItem="Qo5-Q7-Pts" firstAttribute="top" secondItem="C18-a0-Hhv" secondAttribute="top" constant="5" id="MvD-zX-XIg"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mbi-e3-cN2" secondAttribute="bottom" constant="5" id="VRt-lX-HuP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mbi-e3-cN2" secondAttribute="trailing" id="ZPL-mh-SbV"/>
+                                    <constraint firstItem="j3I-1l-cr1" firstAttribute="leading" secondItem="C18-a0-Hhv" secondAttribute="leading" id="ke4-FL-RSS"/>
+                                    <constraint firstAttribute="trailing" secondItem="j3I-1l-cr1" secondAttribute="trailing" id="rtk-MH-Gnd"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="vhI-XZ-D03" firstAttribute="leading" secondItem="3It-ni-tuW" secondAttribute="trailing" id="0wn-tW-fQn"/>
-                            <constraint firstItem="c2h-mf-KBX" firstAttribute="leading" secondItem="vhI-XZ-D03" secondAttribute="trailing" id="2fR-iL-wOX"/>
                             <constraint firstItem="3It-ni-tuW" firstAttribute="leading" secondItem="PxO-db-MX4" secondAttribute="leading" id="3TB-oG-0ZC"/>
                             <constraint firstItem="wVq-E7-tmk" firstAttribute="top" secondItem="c2h-mf-KBX" secondAttribute="bottom" id="7DS-1R-kAf"/>
                             <constraint firstItem="E6H-Mi-UMb" firstAttribute="leading" secondItem="myH-Q1-2TZ" secondAttribute="trailing" id="CvL-gL-eIm"/>
+                            <constraint firstItem="C18-a0-Hhv" firstAttribute="top" secondItem="PxO-db-MX4" secondAttribute="top" id="Hk7-fT-rUt"/>
                             <constraint firstAttribute="bottom" secondItem="wVq-E7-tmk" secondAttribute="bottom" id="ONI-w0-zPd"/>
                             <constraint firstItem="c2h-mf-KBX" firstAttribute="top" secondItem="PxO-db-MX4" secondAttribute="top" id="PBU-ME-oia"/>
                             <constraint firstItem="wVq-E7-tmk" firstAttribute="top" secondItem="vhI-XZ-D03" secondAttribute="bottom" id="PDZ-un-DvJ"/>
@@ -1766,6 +1809,9 @@ Gw
                             <constraint firstItem="wVq-E7-tmk" firstAttribute="top" secondItem="myH-Q1-2TZ" secondAttribute="bottom" id="gcL-qT-wv4"/>
                             <constraint firstItem="myH-Q1-2TZ" firstAttribute="top" secondItem="PxO-db-MX4" secondAttribute="top" id="iUj-oX-e2Y"/>
                             <constraint firstItem="E6H-Mi-UMb" firstAttribute="top" secondItem="PxO-db-MX4" secondAttribute="top" id="jOf-2o-3iI"/>
+                            <constraint firstItem="C18-a0-Hhv" firstAttribute="leading" secondItem="vhI-XZ-D03" secondAttribute="trailing" id="ldD-va-lS8"/>
+                            <constraint firstItem="wVq-E7-tmk" firstAttribute="top" secondItem="C18-a0-Hhv" secondAttribute="bottom" id="nyb-Gg-KNG"/>
+                            <constraint firstItem="c2h-mf-KBX" firstAttribute="leading" secondItem="C18-a0-Hhv" secondAttribute="trailing" id="qGJ-B9-GDk"/>
                             <constraint firstItem="wVq-E7-tmk" firstAttribute="top" secondItem="cG3-db-hb7" secondAttribute="bottom" id="s79-nA-5Cy"/>
                             <constraint firstItem="3It-ni-tuW" firstAttribute="top" secondItem="PxO-db-MX4" secondAttribute="top" id="sfd-Nn-7eo"/>
                             <constraint firstItem="wVq-E7-tmk" firstAttribute="top" secondItem="3It-ni-tuW" secondAttribute="bottom" id="vd6-Ci-Ruf"/>
@@ -2006,7 +2052,7 @@ Gw
         <!--showQRCode-->
         <scene sceneID="ucc-Ab-VQ4">
             <objects>
-                <viewController title="showQRCode" id="YHW-mV-vBN" customClass="QRCodeViewController" sceneMemberID="viewController">
+                <viewController title="showQRCode" storyboardIdentifier="QRCodeViewController" id="YHW-mV-vBN" customClass="QRCodeViewController" sceneMemberID="viewController">
                     <view key="view" id="A9H-aC-ojk">
                         <rect key="frame" x="0.0" y="0.0" width="290" height="324"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2137,6 +2183,7 @@ Gw
         <image name="Dropbox" width="51.200000762939453" height="51.200000762939453"/>
         <image name="Finder" width="51.200000762939453" height="51.200000762939453"/>
         <image name="ProvisioningProfile" width="51.200000762939453" height="51.200000762939453"/>
+        <image name="QRCode" width="51.200000762939453" height="51.200000762939453"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Uyb-q3-B4B"/>

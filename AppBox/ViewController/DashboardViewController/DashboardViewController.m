@@ -222,6 +222,14 @@ typedef enum : NSUInteger {
     }
 }
 
+- (IBAction)showQRCodeButtonTapped:(NSButton *)sender {
+    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    QRCodeViewController *qrCodeViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([QRCodeViewController class])];
+    [qrCodeViewController setUploadRecord:[self selectedUploadRecord]];
+    [self presentViewControllerAsSheet:qrCodeViewController];
+}
+
+
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [self selectedUploadRecord];
