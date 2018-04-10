@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
+#import "QRCodeViewController.h"
 #import "Project+CoreDataClass.h"
 #import "UploadRecord+CoreDataClass.h"
 #import "ProvisioningDetailsViewController.h"
