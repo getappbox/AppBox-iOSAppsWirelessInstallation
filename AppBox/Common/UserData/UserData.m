@@ -189,6 +189,27 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - AppBox Installation Page Settings -
+#define DonwloadIPAEnable @"DonwloadIPAEnable"
++(BOOL)downloadIPAEnable{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DonwloadIPAEnable];
+}
+
++(void)setDownloadIPAEnable:(BOOL)downloadIPA{
+    [[NSUserDefaults standardUserDefaults] setBool:downloadIPA forKey:DonwloadIPAEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define MoreDetailsEnable @"MoreDetailsEnable"
++(BOOL)moreDetailsEnable{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:MoreDetailsEnable];
+}
+
++(void)setMoreDetailsEnable:(BOOL)moreDetails{
+    [[NSUserDefaults standardUserDefaults] setBool:moreDetails forKey:MoreDetailsEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - App Settings -
 #define AppSettingIsFirstTime @"AppSettingIsFirstTime"
 +(BOOL)isFirstTime{
@@ -197,6 +218,20 @@
 
 +(void)setIsFirstTime:(BOOL)isFirstTime{
     [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:AppSettingIsFirstTime];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSString *)appSettingIsFirstTimeAfterUpdate{
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    return [NSString stringWithFormat:@"AppSettingIsFirstTimeAfterUpdate%@", versionString];
+}
+
++(BOOL)isFirstTimeAfterUpdate{
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:[self appSettingIsFirstTimeAfterUpdate]];
+}
+
++(void)setIsFirstTimeAfterUpdate:(BOOL)isFirstTime{
+    [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:[self appSettingIsFirstTimeAfterUpdate]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

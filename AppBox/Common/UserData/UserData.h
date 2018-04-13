@@ -44,9 +44,15 @@
 +(void)setUploadBitcode:(BOOL)uploadBitcode;
 +(BOOL)compileBitcode;
 +(void)setCompileBitcode:(BOOL)compileBitcode;
++(BOOL)downloadIPAEnable;
++(void)setDownloadIPAEnable:(BOOL)downloadIPA;
++(BOOL)moreDetailsEnable;
++(void)setMoreDetailsEnable:(BOOL)moreDetails;
 
 +(BOOL)isFirstTime;
 +(void)setIsFirstTime:(BOOL)isFirstTime;
++(BOOL)isFirstTimeAfterUpdate;
++(void)setIsFirstTimeAfterUpdate:(BOOL)isFirstTime;
 
 +(NSInteger)uploadChunkSize;
 +(void)setUploadChunkSize:(NSInteger)chunkSize;
