@@ -16,6 +16,14 @@
         [UserData setUploadBitcode:YES];
         [UserData setUploadSymbols:YES];
         [UserData setCompileBitcode:YES];
+        [UserData setDownloadIPAEnable:NO];
+        [UserData setMoreDetailsEnable:YES];
+    }
+    
+    if([UserData isFirstTimeAfterUpdate]){
+        [UserData setIsFirstTimeAfterUpdate:YES];
+        [UserData setDownloadIPAEnable:NO];
+        [UserData setMoreDetailsEnable:YES];
     }
 }
 

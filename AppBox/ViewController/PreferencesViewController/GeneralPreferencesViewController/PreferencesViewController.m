@@ -29,6 +29,8 @@
     [uploadSymbolButton setState:[UserData uploadSymbols]];
     [uploadBitCodeButton setState:[UserData uploadBitcode]];
     [compileBitCodeButton setState:[UserData compileBitcode]];
+    [downloadIPAButton setState:[UserData downloadIPAEnable]];
+    [moreDetailsButton setState:[UserData moreDetailsEnable]];
     
     NSNumber *chunkSize = [NSNumber numberWithInteger:[UserData uploadChunkSize]];
     [chunkSizeComboBox selectItemAtIndex:[chunkSizes indexOfObject:chunkSize]];
@@ -72,6 +74,14 @@
 
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender {
     [UserData setUploadChunkSize:[chunkSizes[[sender indexOfSelectedItem]] integerValue]];
+}
+
+- (IBAction)downloadIPACheckBoxValueChanged:(NSButton *)sender {
+    [UserData setDownloadIPAEnable:(sender.state == NSOnState)];
+}
+
+- (IBAction)moreDetailsCheckBoxValueChanged:(NSButton *)sender {
+    [UserData setMoreDetailsEnable:(sender.state == NSOnState)];
 }
 
 - (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender {
