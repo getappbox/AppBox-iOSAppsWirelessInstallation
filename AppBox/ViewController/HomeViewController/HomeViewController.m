@@ -22,6 +22,8 @@
     
     project = [[XCProject alloc] init];
     allTeamIds = [KeychainHandler getAllTeamId];
+    buildOptionBoxHeightConstraint.constant = 0;
+    
     //Notification Handler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
@@ -530,6 +532,7 @@
                                 [comboTeamId selectItemWithObjectValue:project.teamId];
                             }
                             [self updateViewState];
+                            buildOptionBoxHeightConstraint.constant = 104;
                             [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }
@@ -714,6 +717,7 @@
         [project setBuildDirectory:[UserData buildLocation]];
         [uploadManager setProject:project];
         [ABHudViewController hudForView:self.view hide:YES];
+        buildOptionBoxHeightConstraint.constant = 0;
     }
     
     //unique link
