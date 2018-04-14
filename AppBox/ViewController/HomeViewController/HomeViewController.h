@@ -38,6 +38,7 @@
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
     IBOutlet NSTextField *textFieldMessage;
+    __weak IBOutlet NSLayoutConstraint *buildOptionBoxHeightConstraint;
 }
 
 - (IBAction)actionButtonTapped:(NSButton *)sender;
