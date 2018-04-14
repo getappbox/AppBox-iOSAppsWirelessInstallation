@@ -306,9 +306,6 @@
                 NSNumber *expire = [NSNumber numberWithDouble: self.project.mobileProvision.expirationDate.timeIntervalSince1970];
                 [mobileProvision setObject:expire forKey:@"expirationdata"];
             }
-            if (self.project.mobileProvision.provisionedDevices) {
-                [mobileProvision setObject:self.project.mobileProvision.provisionedDevices forKey:@"devicesudid"];
-            }
             if (self.project.mobileProvision.teamId) {
                 [mobileProvision setObject:self.project.mobileProvision.teamId forKey:@"teamid"];
             }
@@ -320,6 +317,18 @@
             }
             if (mobileProvision.allKeys.count > 0) {
                 [latestVersion setObject:mobileProvision forKey:@"mobileprovision"];
+            }
+            
+            //Hide some information of provisioned deviecs UDIDs
+            NSMutableArray *modifiedProvisionedDevices = [[NSMutableArray alloc] init];
+            [self.project.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.length > 30) {
+                    NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(10, 20) withString:@"....."];
+                    [modifiedProvisionedDevices addObject:modifiedProvisioning];
+                }
+            }];
+            if (self.project.mobileProvision.provisionedDevices) {
+                [mobileProvision setObject:modifiedProvisionedDevices forKey:@"devicesudid"];
             }
         }
         
