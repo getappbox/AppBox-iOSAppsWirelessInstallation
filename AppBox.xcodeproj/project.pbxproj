@@ -28,6 +28,7 @@
 		DB53855E2083374F004BFC84 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DB53855D2083374F004BFC84 /* README.md */; };
 		DB53856620834BB2004BFC84 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856420834BB2004BFC84 /* PaymentViewController.m */; };
 		DB53856720834BB2004BFC84 /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB53856520834BB2004BFC84 /* PaymentViewController.xib */; };
+		DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5385692083622A004BFC84 /* NSURL+URL.m */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
@@ -239,6 +240,8 @@
 		DB53856320834BB2004BFC84 /* PaymentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
 		DB53856420834BB2004BFC84 /* PaymentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
 		DB53856520834BB2004BFC84 /* PaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
+		DB5385682083622A004BFC84 /* NSURL+URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+URL.h"; sourceTree = "<group>"; };
+		DB5385692083622A004BFC84 /* NSURL+URL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URL.m"; sourceTree = "<group>"; };
 		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
 		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
 		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 				E19473FA205FD14C00CF12F9 /* NSColor+Color.m */,
 				DB1C843F2079F54E007AC74C /* NSString+String.h */,
 				DB1C84402079F54E007AC74C /* NSString+String.m */,
+				DB5385682083622A004BFC84 /* NSURL+URL.h */,
+				DB5385692083622A004BFC84 /* NSURL+URL.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1498,6 +1503,7 @@
 				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
 				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
 				E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */,
+				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
 				DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */,
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,

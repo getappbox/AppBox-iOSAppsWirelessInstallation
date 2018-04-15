@@ -17,33 +17,27 @@
 #import "ProjectAdvancedViewController.h"
 
 @interface HomeViewController : NSViewController <NSTabViewDelegate, ProjectAdvancedViewDelegate, ITCLoginDelegate>{
-    //Tab
-    IBOutlet NSTabView *tabView;
-    
-    //Build
-    IBOutlet NSPathControl *pathProject;
+
+    //Build & Upload IPA
+    IBOutlet NSPathControl *selectedFilePath;
     IBOutlet NSComboBox *comboBuildScheme;
     IBOutlet NSComboBox *comboTeamId;
     IBOutlet NSComboBox *comboBuildType;
     IBOutlet NSButton *buttonAction;
     IBOutlet NSButton *buttonAdcanced;
     IBOutlet NSButton *buttonConfigCI;
-    
-    //Upload IPA
-    IBOutlet NSPathControl *pathIPAFile;
     IBOutlet NSButton *buttonUniqueLink;
+    __weak IBOutlet NSLayoutConstraint *buildOptionBoxHeightConstraint;
     
     //Mail and Shutdown
     IBOutlet NSButton *buttonSendMail;
     IBOutlet NSButton *buttonShutdownMac;
     IBOutlet NSTextField *textFieldEmail;
     IBOutlet NSTextField *textFieldMessage;
-    __weak IBOutlet NSLayoutConstraint *buildOptionBoxHeightConstraint;
 }
 
 - (IBAction)actionButtonTapped:(NSButton *)sender;
-- (IBAction)projectPathHandler:(NSPathControl *)sender;
-- (IBAction)ipaFilePathHandle:(NSPathControl *)sender;
+- (IBAction)selectedFilePathHandler:(NSPathControl *)sender;
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender;
 - (IBAction)buttonConfigCITapped:(NSButton *)sender;
 

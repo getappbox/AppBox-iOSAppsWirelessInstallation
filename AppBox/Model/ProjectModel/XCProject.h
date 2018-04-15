@@ -29,7 +29,7 @@
 @property(nonatomic, retain) NSString *supportedDevice;
 
 //Local URLS
-@property(nonatomic, retain) NSURL *fullPath;
+@property(nonatomic, retain) NSURL *projectFullPath;
 @property(nonatomic, retain) NSURL *ipaFullPath;
 @property(nonatomic, retain) NSURL *rootDirectory;
 @property(nonatomic, retain) NSURL *buildDirectory;

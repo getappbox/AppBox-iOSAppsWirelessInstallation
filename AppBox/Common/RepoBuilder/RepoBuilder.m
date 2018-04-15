@@ -59,7 +59,7 @@ NSString *const RepoITCPassword = @"itcpassword";
         NSString *projectPath = [repoPath stringByAppendingPathComponent:[projectRawSetting valueForKey:RepoProjectKey]];
         projectPath = [@"file://" stringByAppendingString:projectPath];
         NSURL *projectURL = [NSURL fileURLWithPath:projectPath];
-        project.fullPath = projectURL;
+        project.projectFullPath = projectURL;
     }
     
     //project scheme

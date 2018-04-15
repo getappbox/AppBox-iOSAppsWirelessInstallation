@@ -89,8 +89,8 @@
                 if (xcProject.dbAppInfoJSONFullPath){
                     [uploadRecord setDbAppInfoFullPath:xcProject.dbAppInfoJSONFullPath.absoluteString];
                 }
-                if (xcProject.fullPath){
-                    [uploadRecord setProjectPath:[xcProject.fullPath.resourceSpecifier stringByRemovingPercentEncoding]];
+                if (xcProject.projectFullPath){
+                    [uploadRecord setProjectPath:[xcProject.projectFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
                 }
                 if (xcProject.teamId){
                     [uploadRecord setTeamId:xcProject.teamId];

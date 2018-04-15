@@ -48,6 +48,7 @@
 #import "KeychainHandler.h"
 #import "NSApplication+MenuHandler.h"
 
+#import "NSURL+URL.h"
 #import "NSDate+Date.h"
 #import "NSString+String.h"
 
