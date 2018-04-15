@@ -333,7 +333,11 @@
         }
         
         NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
-        if(!versionHistory){
+        if ([UserData showPreviousVersions]) {
+            if(!versionHistory){
+                versionHistory = [NSMutableArray new];
+            }
+        } else {
             versionHistory = [NSMutableArray new];
         }
         [versionHistory addObject:latestVersion];

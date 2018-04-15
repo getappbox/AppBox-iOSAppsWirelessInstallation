@@ -48,6 +48,8 @@
 +(void)setDownloadIPAEnable:(BOOL)downloadIPA;
 +(BOOL)moreDetailsEnable;
 +(void)setMoreDetailsEnable:(BOOL)moreDetails;
++(BOOL)showPreviousVersions;
++(void)setShowPreviousVersions:(BOOL)previousVersion;
 
 +(BOOL)isFirstTime;
 +(void)setIsFirstTime:(BOOL)isFirstTime;

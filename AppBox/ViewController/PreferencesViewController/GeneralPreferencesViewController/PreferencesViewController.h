@@ -17,6 +17,7 @@
     __weak IBOutlet NSComboBox *chunkSizeComboBox;
     __weak IBOutlet NSButton *downloadIPAButton;
     __weak IBOutlet NSButton *moreDetailsButton;
+    __weak IBOutlet NSButton *showPerviousBuildsButton;
 }
 
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
@@ -28,5 +29,7 @@
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender;
 - (IBAction)downloadIPACheckBoxValueChanged:(NSButton *)sender;
 - (IBAction)moreDetailsCheckBoxValueChanged:(NSButton *)sender;
+- (IBAction)showPreviousVersionCheckBoxValueChanged:(NSButton *)sender;
+
 
 @end
