@@ -13,6 +13,7 @@
 +(void)showStatus:(NSString *)status onView:(NSView *)view {
     ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
     hud.status = status;
+    hud.showAds = NO;
     hud.hudType = HudTypeProgress;
     hud.progress = [NSNumber numberWithInteger:-1];
 }
@@ -20,6 +21,7 @@
 +(void)showStatus:(NSString *)status witProgress:(double)progress onView:(NSView *)view {
     ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
     hud.progress = [NSNumber numberWithDouble:progress];
+    hud.showAds = YES;
     hud.hudType = HudTypeProgress;
     hud.status = status;
 }
@@ -28,6 +30,7 @@
     ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
     hud.status = status;
     hud.result = success;
+    hud.showAds = NO;
     hud.hudType = HudTypeResult;
     [ABHudViewController hideAllHudFromView:view after:2];
 }
@@ -35,6 +38,7 @@
 +(void)showOnlyStatus:(NSString *)status onView:(NSView *)view{
     ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
     hud.status = status;
+    hud.showAds = NO;
     hud.hudType = HudTypeStatus;
     [ABHudViewController hideAllHudFromView:view after:3];
 }

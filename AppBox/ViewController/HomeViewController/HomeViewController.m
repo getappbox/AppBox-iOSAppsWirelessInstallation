@@ -255,7 +255,7 @@
             [self enableMailField:buttonSendMail.state == NSOnState];
         }
         
-        //set processing flg
+        //set processing flag
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         
@@ -269,7 +269,7 @@
             [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPA andSettings:currentSetting];
             [uploadManager uploadIPAFile:project.ipaFullPath];
         }
-        [self viewStateForProgressFinish:NO];
+        [self viewStateForProgressFinish:![AppDelegate appDelegate].processing];
     }else{
         [MailHandler showInvalidEmailAddressAlert];
     }
