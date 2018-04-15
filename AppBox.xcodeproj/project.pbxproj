@@ -494,6 +494,7 @@
 		DB53855C208333FA004BFC84 /* ABPrivate */ = {
 			isa = PBXGroup;
 			children = (
+				E1BC9FBF2071FDCC00EF7299 /* BranchIO */,
 			);
 			path = ABPrivate;
 			sourceTree = "<group>";
@@ -1187,7 +1188,6 @@
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E16D72D91E88F9EE0031FB7C /* XcodeHandler */,
 				E1902B491E16617B00C3E0F6 /* GitHandler */,
-				E1BC9FBF2071FDCC00EF7299 /* BranchIO */,
 				E13161EF1E97775100586052 /* RepoBuilder */,
 				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				DBDCFBBB1F99C7860022097B /* UploadManager */,
