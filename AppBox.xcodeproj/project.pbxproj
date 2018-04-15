@@ -29,6 +29,7 @@
 		DB53856620834BB2004BFC84 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856420834BB2004BFC84 /* PaymentViewController.m */; };
 		DB53856720834BB2004BFC84 /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB53856520834BB2004BFC84 /* PaymentViewController.xib */; };
 		DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5385692083622A004BFC84 /* NSURL+URL.m */; };
+		DB53856E20838913004BFC84 /* DragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856D20838913004BFC84 /* DragDropView.m */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
@@ -242,6 +243,8 @@
 		DB53856520834BB2004BFC84 /* PaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
 		DB5385682083622A004BFC84 /* NSURL+URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+URL.h"; sourceTree = "<group>"; };
 		DB5385692083622A004BFC84 /* NSURL+URL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URL.m"; sourceTree = "<group>"; };
+		DB53856C20838913004BFC84 /* DragDropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragDropView.h; sourceTree = "<group>"; };
+		DB53856D20838913004BFC84 /* DragDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragDropView.m; sourceTree = "<group>"; };
 		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
 		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
 		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
@@ -539,6 +542,15 @@
 				DB53856520834BB2004BFC84 /* PaymentViewController.xib */,
 			);
 			path = PaymentViewController;
+			sourceTree = "<group>";
+		};
+		DB53856B208388F3004BFC84 /* DragDropView */ = {
+			isa = PBXGroup;
+			children = (
+				DB53856C20838913004BFC84 /* DragDropView.h */,
+				DB53856D20838913004BFC84 /* DragDropView.m */,
+			);
+			path = DragDropView;
 			sourceTree = "<group>";
 		};
 		DB831BC21FF6B5240065B646 /* ABHudViewController */ = {
@@ -890,6 +902,7 @@
 		E16437F01D743B3600CE8B7E /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB53856B208388F3004BFC84 /* DragDropView */,
 				DB1FC58D1FDEEC6A00179799 /* HomeWindowController */,
 				E16437F11D743B6800CE8B7E /* HomeViewController.h */,
 				E16437F21D743B6800CE8B7E /* HomeViewController.m */,
@@ -1501,6 +1514,7 @@
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
 				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
+				DB53856E20838913004BFC84 /* DragDropView.m in Sources */,
 				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
 				E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */,
 				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,

@@ -246,11 +246,11 @@
         <scene sceneID="irr-iO-vGD">
             <objects>
                 <viewController title="AppBox" showSeguePresentationStyle="single" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
-                    <view key="view" id="eYA-Pb-PSo">
+                    <view key="view" id="eYA-Pb-PSo" customClass="DragDropView">
                         <rect key="frame" x="0.0" y="0.0" width="737" height="393"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ" customClass="DragDropView">
                                 <rect key="frame" x="0.0" y="0.0" width="737" height="388"/>
                                 <subviews>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="sgg-Iy-WMT">
@@ -387,7 +387,7 @@
                                             <action selector="buttonUniqueLinkTapped:" target="lct-wo-jYo" id="M9U-ie-FSk"/>
                                         </connections>
                                     </button>
-                                    <view translatesAutoresizingMaskIntoConstraints="NO" id="1cA-Pc-6wM">
+                                    <view translatesAutoresizingMaskIntoConstraints="NO" id="1cA-Pc-6wM" customClass="DragDropView">
                                         <rect key="frame" x="0.0" y="170" width="737" height="218"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WRo-aA-1D6">
