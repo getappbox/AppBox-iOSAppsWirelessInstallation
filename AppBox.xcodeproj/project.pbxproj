@@ -491,6 +491,13 @@
 			path = CISettingViewController;
 			sourceTree = "<group>";
 		};
+		DB53855C208333FA004BFC84 /* ABPrivate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ABPrivate;
+			sourceTree = "<group>";
+		};
 		DB831BC21FF6B5240065B646 /* ABHudViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1172,6 +1179,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DB53855C208333FA004BFC84 /* ABPrivate */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
 				E16D72D11E88F99A0031FB7C /* OutputParsers */,
