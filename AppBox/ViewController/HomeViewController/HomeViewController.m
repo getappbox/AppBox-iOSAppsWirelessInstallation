@@ -520,7 +520,7 @@
                                 [comboTeamId selectItemWithObjectValue:project.teamId];
                             }
                             [self updateViewState];
-                            buildOptionBoxHeightConstraint.constant = 104;
+                            buildOptionBoxHeightConstraint.constant = 119;
                             [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }

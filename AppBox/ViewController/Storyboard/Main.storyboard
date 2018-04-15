@@ -247,11 +247,11 @@
             <objects>
                 <viewController title="AppBox" showSeguePresentationStyle="single" id="lct-wo-jYo" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="eYA-Pb-PSo">
-                        <rect key="frame" x="0.0" y="0.0" width="737" height="333"/>
+                        <rect key="frame" x="0.0" y="0.0" width="737" height="393"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RTB-1n-lrJ">
-                                <rect key="frame" x="0.0" y="0.0" width="737" height="328"/>
+                                <rect key="frame" x="0.0" y="0.0" width="737" height="388"/>
                                 <subviews>
                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="sgg-Iy-WMT">
                                         <rect key="frame" x="0.0" y="167" width="737" height="5"/>
@@ -337,8 +337,8 @@
                                         <rect key="frame" x="0.0" y="39" width="737" height="5"/>
                                     </box>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cfm-Bd-TVp">
-                                        <rect key="frame" x="644" y="3" width="84" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Action" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EI8-jG-NBh">
+                                        <rect key="frame" x="614" y="3" width="114" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Upload IPA" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EI8-jG-NBh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
                                         </buttonCell>
@@ -347,7 +347,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qRD-nm-pGY">
-                                        <rect key="frame" x="406" y="3" width="103" height="32"/>
+                                        <rect key="frame" x="376" y="3" width="103" height="32"/>
                                         <buttonCell key="cell" type="push" title="Config CI" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HbN-yq-sbf">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
@@ -358,7 +358,7 @@
                                         </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zka-0X-0Ih">
-                                        <rect key="frame" x="507" y="3" width="139" height="32"/>
+                                        <rect key="frame" x="477" y="3" width="139" height="32"/>
                                         <buttonCell key="cell" type="push" title="Other Settings" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9yL-qR-ycX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
@@ -388,41 +388,28 @@
                                         </connections>
                                     </button>
                                     <view translatesAutoresizingMaskIntoConstraints="NO" id="1cA-Pc-6wM">
-                                        <rect key="frame" x="0.0" y="170" width="737" height="158"/>
+                                        <rect key="frame" x="0.0" y="170" width="737" height="218"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WRo-aA-1D6">
-                                                <rect key="frame" x="13" y="124" width="144" height="19"/>
+                                                <rect key="frame" x="18" y="179" width="701" height="24"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="140" id="B6Y-6r-avw"/>
-                                                    <constraint firstAttribute="height" constant="19" id="WOv-Zq-fJp"/>
+                                                    <constraint firstAttribute="height" constant="24" id="WOv-Zq-fJp"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="IPA / Project File" id="8fd-6L-9zr">
-                                                    <font key="font" metaFont="systemLight" size="15"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Select IPA File to Upload or Select Project / Workspace to Archive and Upload" id="8fd-6L-9zr">
+                                                    <font key="font" metaFont="systemLight" size="20"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tO9-sq-PBp">
-                                                <rect key="frame" x="167" y="119" width="558" height="26"/>
-                                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select IPA File to Upload or Select Project/Workspace to Archive and Upload" pathStyle="popUp" id="AXI-o2-ndF">
-                                                    <font key="font" metaFont="systemLight" size="15"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <allowedTypes>
-                                                        <string>xcodeproj</string>
-                                                        <string>xcworkspace</string>
-                                                        <string>ipa</string>
-                                                    </allowedTypes>
-                                                </pathCell>
-                                                <connections>
-                                                    <action selector="selectedFilePathHandler:" target="lct-wo-jYo" id="C9C-2J-2YR"/>
-                                                </connections>
-                                            </pathControl>
                                             <box autoresizesSubviews="NO" boxType="custom" borderType="line" title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tpx-aW-kEh">
-                                                <rect key="frame" x="0.0" y="5" width="737" height="104"/>
+                                                <rect key="frame" x="0.0" y="5" width="737" height="119"/>
                                                 <view key="contentView" id="ARO-x3-0ji">
-                                                    <rect key="frame" x="1" y="1" width="735" height="102"/>
+                                                    <rect key="frame" x="1" y="1" width="735" height="117"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
+                                                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="shu-7h-KTK">
+                                                            <rect key="frame" x="0.0" y="114" width="735" height="5"/>
+                                                        </box>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xLX-qk-S58">
                                                             <rect key="frame" x="13" y="83" width="144" height="19"/>
                                                             <constraints>
@@ -435,7 +422,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SDg-ej-OSw">
-                                                            <rect key="frame" x="165" y="10" width="563" height="28"/>
+                                                            <rect key="frame" x="165" y="10" width="558" height="28"/>
                                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="qk1-g7-J8I">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -462,7 +449,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Dc-U3-BYr">
-                                                            <rect key="frame" x="165" y="78" width="563" height="28"/>
+                                                            <rect key="frame" x="165" y="78" width="558" height="28"/>
                                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Nil-B2-ODb">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -473,7 +460,7 @@
                                                             </connections>
                                                         </comboBox>
                                                         <comboBox verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFB-jV-gI6">
-                                                            <rect key="frame" x="165" y="44" width="563" height="28"/>
+                                                            <rect key="frame" x="165" y="44" width="558" height="28"/>
                                                             <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="" drawsBackground="YES" completes="NO" numberOfVisibleItems="4" id="XRv-xo-gq2">
                                                                 <font key="font" metaFont="systemLight" size="15"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -494,36 +481,58 @@
                                                         <constraint firstItem="TbA-A2-zRm" firstAttribute="trailing" secondItem="cAU-fk-LUy" secondAttribute="trailing" id="5Sf-VO-u0L"/>
                                                         <constraint firstItem="SDg-ej-OSw" firstAttribute="leading" secondItem="cAU-fk-LUy" secondAttribute="trailing" constant="10" id="7kV-Ve-Hsh"/>
                                                         <constraint firstItem="TbA-A2-zRm" firstAttribute="top" secondItem="xLX-qk-S58" secondAttribute="bottom" constant="15" id="A93-Eh-sse"/>
+                                                        <constraint firstItem="shu-7h-KTK" firstAttribute="leading" secondItem="ARO-x3-0ji" secondAttribute="leading" id="D6W-Bl-cEa"/>
                                                         <constraint firstItem="TbA-A2-zRm" firstAttribute="leading" secondItem="cAU-fk-LUy" secondAttribute="leading" id="HJh-1Y-hfP"/>
                                                         <constraint firstItem="xLX-qk-S58" firstAttribute="trailing" secondItem="TbA-A2-zRm" secondAttribute="trailing" id="J80-Er-STd"/>
                                                         <constraint firstItem="cAU-fk-LUy" firstAttribute="top" secondItem="TbA-A2-zRm" secondAttribute="bottom" constant="15" id="Lao-fD-h9m"/>
-                                                        <constraint firstAttribute="trailing" secondItem="0Dc-U3-BYr" secondAttribute="trailing" constant="10" id="Qem-uv-qrI"/>
+                                                        <constraint firstAttribute="trailing" secondItem="0Dc-U3-BYr" secondAttribute="trailing" constant="15" id="Qem-uv-qrI"/>
                                                         <constraint firstItem="cAU-fk-LUy" firstAttribute="centerY" secondItem="SDg-ej-OSw" secondAttribute="centerY" id="QpS-Bg-jqI"/>
-                                                        <constraint firstItem="xLX-qk-S58" firstAttribute="top" secondItem="ARO-x3-0ji" secondAttribute="top" id="Rwb-en-NUC"/>
+                                                        <constraint firstItem="xLX-qk-S58" firstAttribute="top" secondItem="ARO-x3-0ji" secondAttribute="top" constant="15" id="Rwb-en-NUC"/>
                                                         <constraint firstItem="xLX-qk-S58" firstAttribute="leading" secondItem="ARO-x3-0ji" secondAttribute="leading" constant="15" id="VZh-ev-ZI3"/>
                                                         <constraint firstItem="0Dc-U3-BYr" firstAttribute="leading" secondItem="xLX-qk-S58" secondAttribute="trailing" constant="10" id="Y1D-N2-AXD"/>
+                                                        <constraint firstItem="shu-7h-KTK" firstAttribute="top" secondItem="ARO-x3-0ji" secondAttribute="top" id="cDv-NX-isO"/>
                                                         <constraint firstItem="bFB-jV-gI6" firstAttribute="leading" secondItem="TbA-A2-zRm" secondAttribute="trailing" constant="10" id="k7N-Wg-KMy"/>
-                                                        <constraint firstAttribute="trailing" secondItem="SDg-ej-OSw" secondAttribute="trailing" constant="10" id="oF4-at-e4E"/>
+                                                        <constraint firstAttribute="trailing" secondItem="SDg-ej-OSw" secondAttribute="trailing" constant="15" id="oF4-at-e4E"/>
                                                         <constraint firstItem="TbA-A2-zRm" firstAttribute="centerY" secondItem="bFB-jV-gI6" secondAttribute="centerY" id="pdm-Vf-IhV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="bFB-jV-gI6" secondAttribute="trailing" constant="10" id="syC-2b-uSY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="shu-7h-KTK" secondAttribute="trailing" id="pkU-jf-K52"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bFB-jV-gI6" secondAttribute="trailing" constant="15" id="syC-2b-uSY"/>
                                                         <constraint firstItem="xLX-qk-S58" firstAttribute="centerY" secondItem="0Dc-U3-BYr" secondAttribute="centerY" id="tcJ-K9-DSi"/>
                                                         <constraint firstItem="xLX-qk-S58" firstAttribute="leading" secondItem="TbA-A2-zRm" secondAttribute="leading" id="w0o-vv-RCO"/>
                                                     </constraints>
                                                 </view>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="104" id="Cdg-Wm-Pg9"/>
+                                                    <constraint firstAttribute="height" constant="119" id="Cdg-Wm-Pg9"/>
                                                 </constraints>
                                             </box>
+                                            <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tO9-sq-PBp">
+                                                <rect key="frame" x="17" y="135" width="703" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="AK8-3U-bSt"/>
+                                                </constraints>
+                                                <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select or Drag and Drop IPA / Project / Workspace file here " pathStyle="popUp" id="AXI-o2-ndF">
+                                                    <font key="font" metaFont="systemLight" size="20"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <allowedTypes>
+                                                        <string>xcodeproj</string>
+                                                        <string>xcworkspace</string>
+                                                        <string>ipa</string>
+                                                    </allowedTypes>
+                                                </pathCell>
+                                                <connections>
+                                                    <action selector="selectedFilePathHandler:" target="lct-wo-jYo" id="C9C-2J-2YR"/>
+                                                </connections>
+                                            </pathControl>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="WRo-aA-1D6" firstAttribute="centerY" secondItem="tO9-sq-PBp" secondAttribute="centerY" id="4HC-md-tF9"/>
-                                            <constraint firstItem="tO9-sq-PBp" firstAttribute="leading" secondItem="WRo-aA-1D6" secondAttribute="trailing" constant="15" id="KXz-GH-xFh"/>
-                                            <constraint firstAttribute="trailing" secondItem="tO9-sq-PBp" secondAttribute="trailing" constant="15" id="KmU-Ox-KnS"/>
-                                            <constraint firstItem="WRo-aA-1D6" firstAttribute="leading" secondItem="1cA-Pc-6wM" secondAttribute="leading" constant="15" id="PUr-aU-C0V"/>
+                                            <constraint firstItem="Tpx-aW-kEh" firstAttribute="top" secondItem="tO9-sq-PBp" secondAttribute="bottom" constant="15" id="5J7-Wa-Rsy"/>
+                                            <constraint firstItem="tO9-sq-PBp" firstAttribute="leading" secondItem="1cA-Pc-6wM" secondAttribute="leading" constant="20" id="6v6-Zq-55F"/>
+                                            <constraint firstAttribute="trailing" secondItem="WRo-aA-1D6" secondAttribute="trailing" constant="20" id="K8F-cf-cYU"/>
+                                            <constraint firstAttribute="trailing" secondItem="tO9-sq-PBp" secondAttribute="trailing" constant="20" id="KmU-Ox-KnS"/>
+                                            <constraint firstItem="WRo-aA-1D6" firstAttribute="leading" secondItem="1cA-Pc-6wM" secondAttribute="leading" constant="20" id="PUr-aU-C0V"/>
                                             <constraint firstItem="Tpx-aW-kEh" firstAttribute="leading" secondItem="1cA-Pc-6wM" secondAttribute="leading" id="TrS-Ok-tsv"/>
                                             <constraint firstAttribute="trailing" secondItem="Tpx-aW-kEh" secondAttribute="trailing" id="bXo-Ya-WjE"/>
                                             <constraint firstAttribute="bottom" secondItem="Tpx-aW-kEh" secondAttribute="bottom" constant="5" id="da7-bN-s6g"/>
-                                            <constraint firstItem="Tpx-aW-kEh" firstAttribute="top" secondItem="WRo-aA-1D6" secondAttribute="bottom" constant="15" id="oy6-am-unr"/>
+                                            <constraint firstItem="tO9-sq-PBp" firstAttribute="top" secondItem="WRo-aA-1D6" secondAttribute="bottom" constant="10" id="rdK-ar-Eme"/>
                                             <constraint firstItem="WRo-aA-1D6" firstAttribute="top" secondItem="1cA-Pc-6wM" secondAttribute="top" constant="15" id="sef-w0-Vnv"/>
                                         </constraints>
                                     </view>
