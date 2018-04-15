@@ -137,9 +137,12 @@
 - (IBAction)selectedFilePathHandler:(NSPathControl *)sender {
     NSURL *url = [sender.URL filePathURL];
     if (url.isIPA && ![project.ipaFullPath isEqual:url]) {
+        [self viewStateForProgressFinish:YES];
         [project setIpaFullPath: url];
+        [selectedFilePath setURL:url];
         [self updateViewState];
     } else if (url.isProject && ![project.projectFullPath isEqualTo:url]) {
+        [self viewStateForProgressFinish:YES];
         [self initProjectBuildProcessForURL: url];
     }
 }

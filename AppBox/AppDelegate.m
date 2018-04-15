@@ -76,16 +76,20 @@
     if (self.processing){
         return YES;
     }
+    [self openFileWithPath:filename];
+    return YES;
+}
+
+-(void)openFileWithPath:(NSString *)filePath{
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to use open file."];
-        [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filename];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             [self addSessionLog:@"AppBox is ready to use open file. [Block]"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filename];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
         }];
     }
-    return YES;
 }
 
 #pragma mark - Default Application
