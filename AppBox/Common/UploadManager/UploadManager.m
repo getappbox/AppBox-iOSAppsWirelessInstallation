@@ -175,7 +175,7 @@
 }
 
 -(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{
-    if ([self.project.buildType isEqualToString: BuildTypeAppStore] && self.project.fullPath == nil){
+    if ([self.project.buildType isEqualToString: BuildTypeAppStore] && self.project.projectFullPath == nil){
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText: @"Please confirm"];
         [alert setInformativeText:@"AppBox found an AppStore provisioning profile in this IPA file. Do you want to upload this on AppStore?"];

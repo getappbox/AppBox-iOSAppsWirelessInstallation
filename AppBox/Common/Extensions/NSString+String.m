@@ -26,4 +26,12 @@
     return nil;
 }
 
+-(NSURL *)validURL{
+    NSURL *url = [NSURL fileURLWithPath:self];
+    if (url && ([url.pathExtension.lowercaseString isEqualToString:@"xcodeproj"] || [url.pathExtension.lowercaseString isEqualToString:@"xcworkspace"] || [url.pathExtension.lowercaseString isEqualToString:@"ipa" ])) {
+        return url;
+    }
+    return nil;
+}
+
 @end

@@ -12,5 +12,6 @@
 
 -(NSURL *)ipaURL;
 -(NSURL *)projectURL;
+-(NSURL *)validURL;
 
 @end

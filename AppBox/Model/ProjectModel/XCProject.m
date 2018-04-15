@@ -150,11 +150,10 @@
     _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 }
 
-- (void)setFullPath:(NSURL *)fullPath{
-    _fullPath = fullPath;
-    [self setRootDirectory: [Common getFileDirectoryForFilePath:fullPath]];
+-(void)setProjectFullPath:(NSURL *)projectFullPath{
+    _projectFullPath = projectFullPath;
+    [self setRootDirectory: [Common getFileDirectoryForFilePath:projectFullPath]];
 }
-
 
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
     _ipaInfoPlist = ipaInfoPlist;

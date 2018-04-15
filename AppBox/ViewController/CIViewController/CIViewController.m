@@ -16,7 +16,7 @@
 
 -(void)viewWillAppear{
     [super viewWillAppear];
-    GitRepoDetails *repoDetails = [GitHandler getGitBranchesForProjectURL:[self.project.fullPath filePathURL]];
+    GitRepoDetails *repoDetails = [GitHandler getGitBranchesForProjectURL:[self.project.projectFullPath filePathURL]];
     if (repoDetails == nil){
         [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find vaild git repository."];
     }else if (repoDetails.branchs.count > 0){

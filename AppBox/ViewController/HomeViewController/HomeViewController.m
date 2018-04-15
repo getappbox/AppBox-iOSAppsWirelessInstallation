@@ -116,25 +116,16 @@
 - (void)initBuildRepoProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         ciRepoProject = notification.object;
-        [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
-        [self initProjectBuildProcessForURL: ciRepoProject.fullPath];
+        [self initProjectBuildProcessForURL: ciRepoProject.projectFullPath];
     }
 }
 
 - (void)initOpenFilesProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[NSString class]]) {
-        NSURL *fileURL = [notification.object ipaURL];
+        NSURL *fileURL = [notification.object validURL];
         if (fileURL) {
-            [tabView selectTabViewItem:tabView.tabViewItems.lastObject];
-            [pathIPAFile setURL:fileURL.filePathURL];
-            [self ipaFilePathHandle:pathIPAFile];
-            return;
-        }
-        fileURL = [notification.object projectURL];
-        if (fileURL) {
-            [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
-            [pathProject setURL:fileURL.filePathURL];
-            [self projectPathHandler:pathProject];
+            [selectedFilePath setURL:fileURL.filePathURL];
+            [self selectedFilePathHandler:selectedFilePath];
             return;
         }
     }
@@ -143,18 +134,21 @@
 #pragma mark - Controls Action Handler -
 #pragma mark → Project / Workspace Controls Action
 //Project Path Handler
-- (IBAction)projectPathHandler:(NSPathControl *)sender {
-    NSURL *projectURL = [sender.URL filePathURL];
-    [self initProjectBuildProcessForURL: projectURL];
+- (IBAction)selectedFilePathHandler:(NSPathControl *)sender {
+    NSURL *url = [sender.URL filePathURL];
+    if (url.isIPA && ![project.ipaFullPath isEqual:url]) {
+        [project setIpaFullPath: url];
+        [self updateViewState];
+    } else if (url.isProject && ![project.projectFullPath isEqualTo:url]) {
+        [self initProjectBuildProcessForURL: url];
+    }
 }
 
 - (void)initProjectBuildProcessForURL:(NSURL *)projectURL {
-    if (![project.fullPath isEqualTo:projectURL]){
-        [self viewStateForProgressFinish:YES];
-        [project setFullPath: projectURL];
-        [pathProject setURL:projectURL];
-        [self runGetSchemeScript];
-    }
+    [self viewStateForProgressFinish:YES];
+    [project setProjectFullPath: projectURL];
+    [selectedFilePath setURL:projectURL];
+    [self runGetSchemeScript];
 }
 
 //Scheme Value Changed
@@ -189,12 +183,6 @@
 
 #pragma mark → IPA File Controlles Actions
 //IPA File Path Handler
-- (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
-    if (![project.fullPath isEqual:sender.URL]){
-        project.ipaFullPath = sender.URL.filePathURL;
-        [self updateViewState];
-    }
-}
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
     project.isKeepSameLinkEnabled = (sender.state == NSOnState);
@@ -268,12 +256,12 @@
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         
-        if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
+        if (project.projectFullPath.isProject){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}];
             [EventTracker logEventSettingWithType:LogEventSettingTypeArchiveAndUpload andSettings:currentSetting];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
-        }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+        }else if (project.ipaFullPath.isIPA){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:nil];
             [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPA andSettings:currentSetting];
             [uploadManager uploadIPAFile:project.ipaFullPath];
@@ -313,7 +301,7 @@
     [buildArgument addObject:project.rootDirectory];
     
     //${2} Project type workspace/scheme
-    [buildArgument addObject:pathProject.URL.lastPathComponent];
+    [buildArgument addObject:selectedFilePath.URL.lastPathComponent];
     
     //${3} Build Scheme
     [buildArgument addObject:comboBuildScheme.stringValue];
@@ -724,13 +712,9 @@
     [buttonUniqueLink setEnabled:finish];
     [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
     
-    //ipa path
-    [pathIPAFile setEnabled:finish];
-    [pathIPAFile setURL: finish ? nil : pathIPAFile.URL.filePathURL];
-    
-    //project path
-    [pathProject setEnabled:finish];
-    [pathProject setURL: finish ? nil : pathProject.URL.filePathURL];
+    //ipa or project path
+    [selectedFilePath setEnabled:finish];
+    [selectedFilePath setURL: finish ? nil : selectedFilePath.URL.filePathURL];
     
     //team id combo
     [comboTeamId setEnabled:finish];
@@ -801,13 +785,14 @@
     BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 && //build scheme
                     comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0 && //build type
                     comboTeamId.stringValue != nil && comboTeamId.stringValue.length > 0 && //team id
-                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab &&
+                    project.projectFullPath != nil && selectedFilePath.URL.isProject &&
                     (![comboBuildType.stringValue isEqualToString: BuildTypeAppStore] || project.itcPasswod.length > 0)) ||
                    
                    //if ipa selected
-                   (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
-    [buttonAction setEnabled:(enable && (pathProject.enabled || pathIPAFile.enabled))];
-    [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
+                   (project.ipaFullPath != nil && selectedFilePath.URL.isIPA));
+    
+    [buttonAction setEnabled:enable];
+    [buttonAction setTitle:selectedFilePath.URL.isIPA ? @"Upload IPA" : @"Archive and Upload IPA" ];
     
     //update CI button
     //[buttonConfigCI setHidden:(tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
@@ -815,7 +800,7 @@
     
     //update keepsame link
     [buttonUniqueLink setEnabled:((project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
-                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab) && ![[AppDelegate appDelegate] processing])];
+                                  selectedFilePath.URL.isIPA) && ![[AppDelegate appDelegate] processing])];
     
     //update advanced button
     [buttonAdcanced setEnabled:buttonAction.enabled];
@@ -824,7 +809,7 @@
 
 -(void)updateMenuButtons{
     //Menu Buttons
-    BOOL enable = ([DBClientsManager authorizedClient] && pathProject.enabled && pathIPAFile.enabled);
+    BOOL enable = ([DBClientsManager authorizedClient] && selectedFilePath.enabled);
     [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
@@ -888,7 +873,7 @@
                     [project setAlPath: applicationLoaderPath];
                     
                     //check for ipa, if ipa start upload
-                    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+                    if (selectedFilePath.URL.isIPA){
                         [self runALAppStoreScriptForValidation:YES];
                     }else{
                         if (ciRepoProject){
@@ -918,7 +903,7 @@
 }
 
 -(void)itcLoginCanceled{
-    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+    if (selectedFilePath.URL.isIPA){
         [uploadManager uploadIPAFileWithoutUnzip:project.ipaFullPath];
     } else {
         [project setBuildType:abEmptyString];
