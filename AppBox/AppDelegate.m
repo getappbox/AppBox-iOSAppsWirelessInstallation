@@ -61,7 +61,7 @@
     
     //Load Ads
     [AdStore loadAds];
-    [self setAppBoxAsDefualt];
+    //[self setAppBoxAsDefualt];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
