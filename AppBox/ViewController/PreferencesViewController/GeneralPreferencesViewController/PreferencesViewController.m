@@ -31,6 +31,7 @@
     [compileBitCodeButton setState:[UserData compileBitcode]];
     [downloadIPAButton setState:[UserData downloadIPAEnable]];
     [moreDetailsButton setState:[UserData moreDetailsEnable]];
+    [showPerviousBuildsButton setState:![UserData showPreviousVersions]];
     
     NSNumber *chunkSize = [NSNumber numberWithInteger:[UserData uploadChunkSize]];
     [chunkSizeComboBox selectItemAtIndex:[chunkSizes indexOfObject:chunkSize]];
@@ -82,6 +83,10 @@
 
 - (IBAction)moreDetailsCheckBoxValueChanged:(NSButton *)sender {
     [UserData setMoreDetailsEnable:(sender.state == NSOnState)];
+}
+
+- (IBAction)showPreviousVersionCheckBoxValueChanged:(NSButton *)sender {
+    [UserData setShowPreviousVersions:(sender.state == NSOffState)];
 }
 
 - (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender {

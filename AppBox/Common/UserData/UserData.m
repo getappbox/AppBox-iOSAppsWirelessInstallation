@@ -210,6 +210,17 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define ShowPreviousVersions @"ShowPreviousVersions"
++(BOOL)showPreviousVersions{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:ShowPreviousVersions];
+}
+
++(void)setShowPreviousVersions:(BOOL)previousVersion{
+    [[NSUserDefaults standardUserDefaults] setBool:previousVersion forKey:ShowPreviousVersions];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 #pragma mark - App Settings -
 #define AppSettingIsFirstTime @"AppSettingIsFirstTime"
 +(BOOL)isFirstTime{
