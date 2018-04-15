@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?branch=master)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 [![Github All Releases](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg)](http://tryappbox.com/download)
 [![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg)](http://tryappbox.com/download)
@@ -13,13 +12,12 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 # Features ⚡️ 
 - Just Select Project/Workspace to archive -> make ipa -> upload ipa -> send mail -> and shutdown mac
 - Keep Same Link
- - This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below.
- - If this option is enabled, you can also download the previous build with same url.
- - [Read more here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/wiki/Keep-Same-Link)
+    - This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below.
+    - If this option is enabled, you can also download the previous build with same url. [Read more here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/wiki/Keep-Same-Link)
 - Auto E-Mail App Distribution Link
 - Auto Shutdown Mac after Distribution
- - After 1 min when mail sent notification come
- - You can only shutdown if mail option is enable
+- After 1 min when mail sent notification come
+- You can only shutdown if mail option is enable
 - Maximum Upload Size => Equal to your Dropbox account storage
 - Uploaded App Expiration => Until you delete from your Dropbox
 - Installations Per App => Unlimited
