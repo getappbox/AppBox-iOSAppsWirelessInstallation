@@ -26,6 +26,8 @@
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
 		DB53855E2083374F004BFC84 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DB53855D2083374F004BFC84 /* README.md */; };
+		DB53856620834BB2004BFC84 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856420834BB2004BFC84 /* PaymentViewController.m */; };
+		DB53856720834BB2004BFC84 /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB53856520834BB2004BFC84 /* PaymentViewController.xib */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
@@ -234,6 +236,9 @@
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
 		DB53855D2083374F004BFC84 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DB53855F208337B8004BFC84 /* ABPrivateConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABPrivateConstant.h; sourceTree = "<group>"; };
+		DB53856320834BB2004BFC84 /* PaymentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
+		DB53856420834BB2004BFC84 /* PaymentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
+		DB53856520834BB2004BFC84 /* PaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
 		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
 		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
 		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
@@ -499,9 +504,36 @@
 			children = (
 				DB53855D2083374F004BFC84 /* README.md */,
 				DB53855F208337B8004BFC84 /* ABPrivateConstant.h */,
+				DB53856020834B47004BFC84 /* Payment */,
 				E1BC9FBF2071FDCC00EF7299 /* BranchIO */,
 			);
 			path = ABPrivate;
+			sourceTree = "<group>";
+		};
+		DB53856020834B47004BFC84 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				DB53856220834B8B004BFC84 /* PaymentViewController */,
+				DB53856120834B53004BFC84 /* PaytmLinks */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		DB53856120834B53004BFC84 /* PaytmLinks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PaytmLinks;
+			sourceTree = "<group>";
+		};
+		DB53856220834B8B004BFC84 /* PaymentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB53856320834BB2004BFC84 /* PaymentViewController.h */,
+				DB53856420834BB2004BFC84 /* PaymentViewController.m */,
+				DB53856520834BB2004BFC84 /* PaymentViewController.xib */,
+			);
+			path = PaymentViewController;
 			sourceTree = "<group>";
 		};
 		DB831BC21FF6B5240065B646 /* ABHudViewController */ = {
@@ -1346,6 +1378,7 @@
 				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
 				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
+				DB53856720834BB2004BFC84 /* PaymentViewController.xib in Resources */,
 				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1495,6 +1528,7 @@
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
+				DB53856620834BB2004BFC84 /* PaymentViewController.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
