@@ -25,6 +25,7 @@
 		DB439EAF200A750900589A96 /* CISettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB439EAD200A750900589A96 /* CISettingViewController.xib */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
+		DB53855E2083374F004BFC84 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DB53855D2083374F004BFC84 /* README.md */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
@@ -231,6 +232,8 @@
 		DB439EAC200A750900589A96 /* CISettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISettingViewController.m; sourceTree = "<group>"; };
 		DB439EAD200A750900589A96 /* CISettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CISettingViewController.xib; sourceTree = "<group>"; };
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
+		DB53855D2083374F004BFC84 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DB53855F208337B8004BFC84 /* ABPrivateConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABPrivateConstant.h; sourceTree = "<group>"; };
 		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
 		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
 		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
@@ -494,6 +497,8 @@
 		DB53855C208333FA004BFC84 /* ABPrivate */ = {
 			isa = PBXGroup;
 			children = (
+				DB53855D2083374F004BFC84 /* README.md */,
+				DB53855F208337B8004BFC84 /* ABPrivateConstant.h */,
 				E1BC9FBF2071FDCC00EF7299 /* BranchIO */,
 			);
 			path = ABPrivate;
@@ -1324,6 +1329,7 @@
 				DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
 				E1D12EE41EC2F17B0065E59A /* SlackPreferencesViewController.xib in Resources */,
+				DB53855E2083374F004BFC84 /* README.md in Resources */,
 				E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */,
 				E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */,
 				E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */,
