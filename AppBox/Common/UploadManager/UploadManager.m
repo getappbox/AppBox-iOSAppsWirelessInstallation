@@ -154,7 +154,7 @@
         NSString *appboxServerBuildsPath = [NSString stringWithFormat:@"%@/%@-%@/", abAppBoxLocalServerBuildsDirectory, ipaName, [Common generateUUID]];
         NSURL *toURL = [[UserData buildLocation] URLByAppendingPathComponent:appboxServerBuildsPath];
         NSError *error;
-        
+        NSString *ipaPath = [ipaURL.resourceSpecifier stringByRemovingPercentEncoding];
         //Create AppBox Server Directory
         if ([fileManager createDirectoryAtPath:toURL.resourceSpecifier withIntermediateDirectories:YES attributes:nil error:&error]){
             //Copy  IPA file to Server Directory
