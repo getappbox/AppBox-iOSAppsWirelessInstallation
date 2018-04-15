@@ -29,7 +29,7 @@
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender{
     NSLog(@"draggingEntered");
-    if (sender.draggingPasteboard.pasteboardItems.count > 1 && [AppDelegate appDelegate].processing) {
+    if (sender.draggingPasteboard.pasteboardItems.count > 1 || [AppDelegate appDelegate].processing) {
         return NSDragOperationNone;
     }
     NSString *filePath = [self getFilePath:sender];
