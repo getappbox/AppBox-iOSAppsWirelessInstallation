@@ -1,4 +1,4 @@
-CC BY-ND License
+cc-by-nd-4.0 License
 
 Human Readable Summary - https://creativecommons.org/licenses/by-nd/4.0/      
 Full License - https://creativecommons.org/licenses/by-nd/4.0/legalcode
