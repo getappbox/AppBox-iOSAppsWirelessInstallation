@@ -20,16 +20,27 @@
     __weak IBOutlet NSButton *showPerviousBuildsButton;
 }
 
+//Locations
 - (IBAction)buildPathHandler:(NSPathControl *)sender;
 - (IBAction)xcodePathHandler:(NSPathControl *)sender;
 
-- (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender;
-- (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender;
-- (IBAction)appStoreSymbolsFileCheckBokValueChanged:(NSButton *)sender;
+//AppBox Upload Settings
 - (IBAction)chunckSizeComboBoxValueChanged:(NSComboBox *)sender;
 - (IBAction)downloadIPACheckBoxValueChanged:(NSButton *)sender;
 - (IBAction)moreDetailsCheckBoxValueChanged:(NSButton *)sender;
 - (IBAction)showPreviousVersionCheckBoxValueChanged:(NSButton *)sender;
+
+
+//Xcode Build and AppStore Upload Settings
+- (IBAction)compileBitcodeCheckBokValueChanged:(NSButton *)sender;
+- (IBAction)appStoreBitcodeCheckBokValueChanged:(NSButton *)sender;
+- (IBAction)appStoreSymbolsFileCheckBokValueChanged:(NSButton *)sender;
+
+//Help Buttons Action
+- (IBAction)helpDownloadIPAButtonAction:(NSButton *)sender;
+- (IBAction)helpMoreInformationAction:(NSButton *)sender;
+- (IBAction)helpDontShowPerviousBuildAction:(NSButton *)sender;
+- (IBAction)helpUploadChunkSizeAction:(NSButton *)sender;
 
 
 @end

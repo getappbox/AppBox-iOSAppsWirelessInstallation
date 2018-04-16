@@ -192,16 +192,8 @@
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText: abKeepSameLinkHelpTitle];
-    [alert setInformativeText:abKeepSameLinkHelpMessage];
-    [alert setAlertStyle:NSInformationalAlertStyle];
-    [alert addButtonWithTitle:@"Know More"];
-    [alert addButtonWithTitle:@"Ok"];
-    if ([alert runModal] == NSAlertFirstButtonReturn){
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
-        [EventTracker logEventWithType:LogEventTypeExternalLinkKeepSameLink];
-    }
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
+    [EventTracker logEventWithType:LogEventTypeExternalLinkKeepSameLink];
 }
 
 
