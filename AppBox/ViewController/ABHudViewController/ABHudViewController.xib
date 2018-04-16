@@ -9,13 +9,17 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ABHudViewController">
             <connections>
-                <outlet property="adHeightConstraint" destination="0yc-Gr-TIA" id="5B0-Nl-ATI"/>
+                <outlet property="adBoxView" destination="Rei-Oa-cdf" id="umj-CA-aQE"/>
                 <outlet property="adSubtitleLabel" destination="5Kq-5S-MvA" id="TEq-gj-Pqk"/>
                 <outlet property="adTitleLabel" destination="Yds-eZ-5AJ" id="1Q0-fM-iOc"/>
-                <outlet property="equalHeightConstraint" destination="lM7-76-ogf" id="ZmH-G1-Jkf"/>
-                <outlet property="progressIndicator" destination="18q-dk-CaA" id="uGB-Ni-hL8"/>
-                <outlet property="progressLabel" destination="vbD-ud-8NK" id="O7V-8M-4VH"/>
-                <outlet property="resultImageView" destination="GK2-Yk-WhU" id="ZNz-8c-bae"/>
+                <outlet property="hudWithAds" destination="TfF-HY-YgA" id="DQl-Hb-37m"/>
+                <outlet property="hudWithoutAds" destination="LX8-oY-J2Y" id="yxg-hC-pTL"/>
+                <outlet property="progressIndicator" destination="SoI-s8-cPQ" id="zNi-St-kty"/>
+                <outlet property="progressIndicatorAds" destination="18q-dk-CaA" id="xJH-o1-Imc"/>
+                <outlet property="progressLabel" destination="xVp-yi-xIc" id="4Jv-gW-dN6"/>
+                <outlet property="progressLabelAds" destination="vbD-ud-8NK" id="ihT-iU-Kpn"/>
+                <outlet property="resultImageView" destination="DX0-Y6-mk6" id="Kqi-JK-xAj"/>
+                <outlet property="resultImageViewAds" destination="GK2-Yk-WhU" id="7tK-gV-f5E"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -33,6 +37,55 @@
                     </view>
                     <color key="fillColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </box>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="LX8-oY-J2Y">
+                    <rect key="frame" x="10" y="10" width="469" height="341"/>
+                    <subviews>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-ca-0Ng">
+                            <rect key="frame" x="173" y="140" width="123" height="61"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-Y6-mk6">
+                                    <rect key="frame" x="41" y="21" width="40" height="40"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ubS-FY-wmv"/>
+                                </imageView>
+                                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="SoI-s8-cPQ">
+                                    <rect key="frame" x="41" y="21" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="9l0-Nq-dTE"/>
+                                        <constraint firstAttribute="width" constant="40" id="S3I-uu-8tD"/>
+                                    </constraints>
+                                </progressIndicator>
+                                <textField translatesAutoresizingMaskIntoConstraints="NO" id="xVp-yi-xIc">
+                                    <rect key="frame" x="-2" y="0.0" width="127" height="21"/>
+                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="oHR-5n-Upo">
+                                        <font key="font" metaFont="systemBold" size="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="top" secondItem="SoI-s8-cPQ" secondAttribute="top" id="7Db-V8-EHI"/>
+                                <constraint firstAttribute="bottom" secondItem="xVp-yi-xIc" secondAttribute="bottom" id="FnN-Ei-gLy"/>
+                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="trailing" secondItem="SoI-s8-cPQ" secondAttribute="trailing" id="O50-GV-xH7"/>
+                                <constraint firstItem="xVp-yi-xIc" firstAttribute="leading" secondItem="ZDX-ca-0Ng" secondAttribute="leading" id="U7Z-sp-rid"/>
+                                <constraint firstItem="SoI-s8-cPQ" firstAttribute="top" secondItem="ZDX-ca-0Ng" secondAttribute="top" id="Uur-R2-ssX"/>
+                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="bottom" secondItem="SoI-s8-cPQ" secondAttribute="bottom" id="W7a-50-1ZI"/>
+                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="leading" secondItem="SoI-s8-cPQ" secondAttribute="leading" id="lq0-Yr-BaU"/>
+                                <constraint firstItem="xVp-yi-xIc" firstAttribute="top" secondItem="SoI-s8-cPQ" secondAttribute="bottom" id="nJ3-v4-qKp"/>
+                                <constraint firstItem="SoI-s8-cPQ" firstAttribute="centerX" secondItem="ZDX-ca-0Ng" secondAttribute="centerX" id="t4d-BB-d5T"/>
+                                <constraint firstAttribute="trailing" secondItem="xVp-yi-xIc" secondAttribute="trailing" id="tjv-eP-d0Q"/>
+                            </constraints>
+                        </customView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="centerX" secondItem="LX8-oY-J2Y" secondAttribute="centerX" id="HJ8-3d-Teb"/>
+                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LX8-oY-J2Y" secondAttribute="leading" id="HuM-zi-eE9"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZDX-ca-0Ng" secondAttribute="bottom" id="OD8-hC-s7b"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZDX-ca-0Ng" secondAttribute="trailing" id="ffv-Qb-p39"/>
+                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="centerY" secondItem="LX8-oY-J2Y" secondAttribute="centerY" id="wE0-LQ-Kf9"/>
+                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LX8-oY-J2Y" secondAttribute="top" id="zX6-KK-fHc"/>
+                    </constraints>
+                </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="TfF-HY-YgA">
                     <rect key="frame" x="10" y="183" width="469" height="168"/>
                     <subviews>
@@ -237,9 +290,6 @@
                             <constraint firstItem="ap4-fc-Y8m" firstAttribute="top" secondItem="7ZY-IM-V3c" secondAttribute="bottom" id="xdi-ug-QuD"/>
                         </constraints>
                     </view>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="168" id="0yc-Gr-TIA"/>
-                    </constraints>
                     <color key="fillColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                 </box>
             </subviews>
@@ -247,14 +297,18 @@
                 <constraint firstItem="TfF-HY-YgA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="2tV-z3-Bwe"/>
                 <constraint firstAttribute="trailing" secondItem="ixu-3E-1KM" secondAttribute="trailing" constant="-10" id="4Rh-kI-KM3"/>
                 <constraint firstItem="Rei-Oa-cdf" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="Bia-U8-weQ"/>
+                <constraint firstAttribute="bottom" secondItem="LX8-oY-J2Y" secondAttribute="bottom" constant="10" id="H7X-9h-kNO"/>
+                <constraint firstItem="LX8-oY-J2Y" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="HEL-ZL-z3h"/>
                 <constraint firstAttribute="trailing" secondItem="TfF-HY-YgA" secondAttribute="trailing" constant="10" id="HP4-cf-Yqx"/>
                 <constraint firstItem="Rei-Oa-cdf" firstAttribute="top" secondItem="TfF-HY-YgA" secondAttribute="bottom" constant="5" id="KA1-fo-ieb"/>
                 <constraint firstItem="ixu-3E-1KM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="-10" id="Q14-xE-rcP"/>
                 <constraint firstAttribute="bottom" secondItem="ixu-3E-1KM" secondAttribute="bottom" constant="-10" id="VXI-wB-sBf"/>
                 <constraint firstItem="TfF-HY-YgA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="azh-gL-7PI"/>
+                <constraint firstItem="LX8-oY-J2Y" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="eGv-kB-2kS"/>
                 <constraint firstItem="TfF-HY-YgA" firstAttribute="height" secondItem="Rei-Oa-cdf" secondAttribute="height" id="lM7-76-ogf"/>
                 <constraint firstItem="ixu-3E-1KM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="-10" id="ojK-d6-Shr"/>
                 <constraint firstAttribute="trailing" secondItem="Rei-Oa-cdf" secondAttribute="trailing" constant="10" id="r3k-cM-P6k"/>
+                <constraint firstAttribute="trailing" secondItem="LX8-oY-J2Y" secondAttribute="trailing" constant="10" id="tAM-1x-LpP"/>
                 <constraint firstAttribute="bottom" secondItem="Rei-Oa-cdf" secondAttribute="bottom" constant="10" id="wKk-PG-mFg"/>
             </constraints>
             <point key="canvasLocation" x="138.5" y="264.5"/>
