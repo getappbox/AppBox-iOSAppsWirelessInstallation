@@ -11,5 +11,7 @@
 
 #define abMailGunKey @""
 #define abGoogleAnalyticsKey @""
+#define abBranchIOTestKey @""
+#define abBranchIOProductionKey @""
 
 #endif /* MailGunKeys_h */

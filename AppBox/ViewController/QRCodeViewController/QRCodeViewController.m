@@ -16,9 +16,17 @@
     [EventTracker logScreen:@"QR Code View"];
     
     //create qr code and show in imageview
+    NSString *url;
+    if (self.project) {
+        url = self.project.appShortShareableURL.absoluteString;
+    } else if (self.uploadRecord){
+        url = self.uploadRecord.shortURL;
+    } else {
+        url = @"No URL found.";
+    }
     NSError *error = nil;
     ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
-    ZXBitMatrix *result = [writer encode:self.project.appShortShareableURL.absoluteString format:kBarcodeFormatQRCode width:250 height:250 error:&error];
+    ZXBitMatrix *result = [writer encode:url format:kBarcodeFormatQRCode width:250 height:250 error:&error];
     if (result){
         CGImageRef qrCodeImage = [[ZXImage imageWithMatrix:result] cgimage];
         [imageViewQRCode setImage:[[NSImage alloc] initWithCGImage:qrCodeImage size:NSMakeSize(250, 250)]];

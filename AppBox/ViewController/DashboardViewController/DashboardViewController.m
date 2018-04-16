@@ -214,13 +214,21 @@ typedef enum : NSUInteger {
     }
 }
 
-- (IBAction)analyticsButtonTapped:(NSButton *)sender {
+- (IBAction)openURLButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
-        NSURL *analyticsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@.info", uploadRecord.shortURL]];
+        NSURL *analyticsURL = [NSURL URLWithString:uploadRecord.shortURL];
         [[NSWorkspace sharedWorkspace] openURL:analyticsURL];
     }
 }
+
+- (IBAction)showQRCodeButtonTapped:(NSButton *)sender {
+    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    QRCodeViewController *qrCodeViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([QRCodeViewController class])];
+    [qrCodeViewController setUploadRecord:[self selectedUploadRecord]];
+    [self presentViewControllerAsSheet:qrCodeViewController];
+}
+
 
 
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {

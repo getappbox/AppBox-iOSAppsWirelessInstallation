@@ -39,6 +39,7 @@
             hud = [[ABHudViewController alloc] initWithNibName:NSStringFromClass([ABHudViewController class]) bundle:nil];
             view.postsFrameChangedNotifications = YES;
             hud.view.frame = view.frame;
+            hud.showAds = YES;
             hud.hudSuperView = view;
             [[NSNotificationCenter defaultCenter] addObserver:hud selector:@selector(viewFrameChanged:) name:NSViewFrameDidChangeNotification object:nil];
             [hudDictionary setObject:hud forKey:view.description];
@@ -115,6 +116,13 @@
 }
 
 #pragma mark - Properties
+
+-(void)setShowAds:(BOOL)showAds{
+    _showAds = showAds;
+    [adHeightConstraint setActive: !showAds];
+    [equalHeightConstraint setActive: showAds];
+    [adHeightConstraint setConstant:0];
+}
 
 -(void)setAdURL:(NSString *)adURL{
     _adURL = adURL;

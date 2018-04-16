@@ -74,7 +74,7 @@
         xcProject.ipaFullPath = [NSURL fileURLWithPath:self.localBuildPath];
     }
     if (self.projectPath){
-        xcProject.fullPath = [NSURL fileURLWithPath:self.projectPath];
+        xcProject.projectFullPath = [NSURL fileURLWithPath:self.projectPath];
     }
     
     return xcProject;

@@ -33,7 +33,7 @@
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
         [ABLog log:@"Checking for new version..."];
-        [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
+        [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             //handle error and check for all required keys
             if (error == nil &&
                 [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&

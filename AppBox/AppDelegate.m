@@ -46,23 +46,22 @@
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
     [ABLog log:@"All Command Line Arguments = %@",arguments];
     for (NSString *argument in arguments) {
-        if ([argument containsString:@"build="]) {
-            NSArray *components = [argument componentsSeparatedByString:@"build="];
-            [ABLog log:@"Path Components = %@",components];
+        if ([argument containsString:abArgsWorkspace]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsWorkspace];
+            [ABLog log:@"Workspace Components = %@",components];
             if (components.count == 2) {
                 [self handleProjectAtPath:[components lastObject]];
             } else {
-                [ABLog log:@"Invalid command %@",arguments];
-                exit(abExitCodeForUnstableBuild);
+                [self addSessionLog:[NSString stringWithFormat:@"Invalid Workspace Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
             }
             break;
-        } else if ([arguments indexOfObject:argument] == arguments.count - 1){
-            [ABLog log:@"Normal Run"];
         }
     }
     
     //Load Ads
     [AdStore loadAds];
+    //[self setAppBoxAsDefualt];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -73,7 +72,35 @@
     return YES;
 }
 
+-(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename{
+    if (self.processing){
+        return YES;
+    }
+    [self openFileWithPath:filename];
+    return YES;
+}
 
+-(void)openFileWithPath:(NSString *)filePath{
+    if (self.isReadyToBuild) {
+        [self addSessionLog:@"AppBox is ready to use open file."];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [self addSessionLog:@"AppBox is ready to use open file. [Block]"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
+        }];
+    }
+}
+
+#pragma mark - Default Application
+-(BOOL)setAppBoxAsDefualt{
+    OSStatus returnStatus = LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.iTunes.ipa"), kLSRolesAll, (__bridge CFStringRef) [[NSBundle mainBundle] bundleIdentifier]);
+    if (returnStatus != 0) {
+        NSLog(@"Got an error when setting default application - %d", (int)returnStatus);
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - AppDelegate Helper
 
@@ -110,9 +137,9 @@
         }
     } else if (url != nil) {
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"query = %@", url.query]];
-        if (url.query != nil && url.query.length > 0) {
-            [self handleProjectAtPath:url.query];
-        }
+//        if (url.query != nil && url.query.length > 0) {
+//            [self handleProjectAtPath:url.query];
+//        }
     }
 }
 
@@ -124,14 +151,14 @@
     XCProject *project = [RepoBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
     if (project == nil) {
         [self addSessionLog:@"AppBox can't able to create project model of this repo."];
-        exit(abExitCodeForUnstableBuild);
+        exit(abExitCodeForInvalidAppBoxSettingFile);
         return;
     }
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to build."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToBuildNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             [self addSessionLog:@"AppBox is ready to build. [Block]"];
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];

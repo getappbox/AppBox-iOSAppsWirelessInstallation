@@ -19,6 +19,10 @@
 +(void)setUserSlackChannel:(NSString *)slackChannel;
 +(NSString *)userSlackMessage;
 +(void)setUserSlackMessage:(NSString *)slackMessage;
++(NSString *)userHangoutChatWebHook;
++(void)setUserHangoutChatWebHook:(NSString *)slackChannel;
++(NSString *)userMicrosoftTeamWebHook;
++(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel;
 
 +(NSURL *)buildLocation;
 +(void)setBuildLocation:(NSURL *)buildLocation;
@@ -40,9 +44,17 @@
 +(void)setUploadBitcode:(BOOL)uploadBitcode;
 +(BOOL)compileBitcode;
 +(void)setCompileBitcode:(BOOL)compileBitcode;
++(BOOL)downloadIPAEnable;
++(void)setDownloadIPAEnable:(BOOL)downloadIPA;
++(BOOL)moreDetailsEnable;
++(void)setMoreDetailsEnable:(BOOL)moreDetails;
++(BOOL)showPreviousVersions;
++(void)setShowPreviousVersions:(BOOL)previousVersion;
 
 +(BOOL)isFirstTime;
 +(void)setIsFirstTime:(BOOL)isFirstTime;
++(BOOL)isFirstTimeAfterUpdate;
++(void)setIsFirstTimeAfterUpdate:(BOOL)isFirstTime;
 
 +(NSInteger)uploadChunkSize;
 +(void)setUploadChunkSize:(NSInteger)chunkSize;

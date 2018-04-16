@@ -21,7 +21,8 @@
 
 +(AppDelegate *)appDelegate;
 -(void)addSessionLog:(NSString *)sessionLog;
-- (void)saveCoreDataChanges;
+-(void)saveCoreDataChanges;
+-(void)openFileWithPath:(NSString *)filePath;
 
 @property (nonatomic) BOOL processing;
 @property (nonatomic) BOOL isReadyToBuild;
