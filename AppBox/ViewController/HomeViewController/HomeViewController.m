@@ -921,7 +921,9 @@
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
     [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
     
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n\nBUILD URL - %@\n\n\n", project.appShortShareableURL]];
+    NSString *notificationMessage = [NSString stringWithFormat:@"%@ IPA file uploaded.\nShare URL - %@", project.name, project.appShortShareableURL];
+    [Common showLocalNotificationWithTitle:@"AppBox" andMessage:notificationMessage];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nBUILD URL - %@\n\n\n.", project.appShortShareableURL]];
     
     if ([UserData userSlackMessage].length > 0) {
         if ([UserData userSlackChannel].length > 0){
