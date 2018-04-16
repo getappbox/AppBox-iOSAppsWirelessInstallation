@@ -22,7 +22,7 @@
 }
 
 + (void)loadAds{
-    [NetworkHandler requestWithURL:abAppBoxAdsURL withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSError *error) {
+    [NetworkHandler requestWithURL:abAppBoxAdsURL withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
         if ([responseObj isKindOfClass:[NSArray class]]){
             NSArray *rawAds = (NSArray *)responseObj;
             if (rawAds.count > 0) {

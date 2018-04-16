@@ -10,13 +10,13 @@
 #define Constants_h
 
 //Base URL's
-#define abMailerBaseURL @"https://appboxapi.github.io/mail"
+#define abBranchBaseURL @"https://api.branch.io/v1/url"
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
+#define abMailerBaseURL @"https://appboxapi.github.io/mail"
 #define abMailGunBaseURL @"https://api.mailgun.net/v3/tryappbox.com/messages"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
 //#define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Powered%20by%20DB"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
-
 
 //MailGun
 #define abMailGunFromEmail @"AppBox Build <mailgun@tryappbox.com>"
@@ -42,6 +42,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abALValidateApp @"validate-app"
 #define abALValidateUser @"validate-user"
 #define abiTunesConnectService @"AppBox - iTunesConnect"
+#define abiTunesConnectServiceCI @"AppBox - iTunesConnect - CI"
 
 //Serives Key
 #define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
@@ -51,7 +52,8 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 #define abBuildRepoNotification @"BuildRepoNotification"
-#define abAppBoxReadyToBuildNotification @"AppBoxReadyToBuildNotification"
+#define abUseOpenFilesNotification @"UseOpenFilesNotification"
+#define abAppBoxReadyToUseNotification @"AppBoxReadyToBuildNotification"
 #define abStopAppBoxLocalServer @"StopAppBoxLocalServer"
 #define abAdsLoadCompleted @"AdsLoadCompleted"
 
@@ -107,7 +109,29 @@ typedef enum : NSUInteger {
 } ScriptType;
 
 //CI
-#define abExitCodeForUnstableBuild 255
+#define abExitCodeForInvalidCommand 127
+#define abExitCodeForArchiveFailed 126
+#define abExitCodeForExportFailed 125
+#define abExitCodeForUploadFailed 124
+#define abExitCodeForInvalidAppBoxSettingFile 123 //appbox.plist
+#define abExitCodeForInvalidArgumentsXcodeBuild 122
+#define abExitCodeForFailedToLoadSchemeInfo 122
+#define abExitCodeUnZipIPAError 121
+#define abExitCodeInfoPlistNotFound 120
+#define abExitCodeIPAFileNotFound 119
+#define abExitCodeUnableToCreateManiFestFile 118
+#define abExitCodeForXcodeNotFount 117
+#define abExitCodeForApplicationLoaderNotFount 116
+#define abExitCodeForSchemeNotFound 115
+#define abExitCodeForPrivateKeyNotFound 114
+#define abExitCodeForAppStoreUploadFailed 113
+#define abExitCodeForInvalidITCAccount 112
+#define abExitCodeForSuccess 0
+
+#define abArgsWorkspace @"build="
+#define abArgsScheme @"scheme="
+#define abArgsBuildType @"buildtype="
+#define abArgsTeamId @"teamid="
 
 
 #endif /* Constants_h */

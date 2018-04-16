@@ -9,12 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 @interface SlackPreferencesViewController : NSViewController {
-    IBOutlet NSTextField *slackChannelTextField;
-    IBOutlet NSTextField *slackMessageTextField;
+    __weak IBOutlet NSTextField *slackChannelTextField;
+    __weak IBOutlet NSTextField *slackMessageTextField;
+    __weak IBOutlet NSTextField *hangoutChatTextField;
+    __weak IBOutlet NSTextField *microsoftTeamWebHook;
 }
 
 - (IBAction)saveButtonTapped:(NSButton *)sender;
-- (IBAction)sendTextMessageButtonTapped:(NSButton *)sender;
+- (IBAction)testSlackButtonTapped:(NSButton *)sender;
+- (IBAction)testHangoutChatButtonTapped:(NSButton *)sender;
+- (IBAction)testMicrosoftTeamButtonTapped:(NSButton *)sender;
+
+
+
 - (IBAction)setupNewSlackWebhook:(NSButton *)sender;
 
 

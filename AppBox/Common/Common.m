@@ -26,6 +26,12 @@
     return [NSURL URLWithString:fileDirectory];
 }
 
++(NSError *)errorWithDesc:(NSString *)error andCode:(NSInteger)code{
+    NSMutableDictionary *errorInfo = [[NSMutableDictionary alloc] init];
+    [errorInfo setValue:error forKey:NSLocalizedDescriptionKey];
+    return [NSError errorWithDomain:NSCocoaErrorDomain code:code userInfo:errorInfo];
+}
+
 #pragma mark - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"ALERT -\nTitle - %@ Message - %@", title, message]];

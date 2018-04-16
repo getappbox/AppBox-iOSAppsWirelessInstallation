@@ -83,7 +83,13 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (error) {
                         //show error and return
-                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                        if (self.ciRepoProject) {
+                            NSString *log = [NSString stringWithFormat:@"Error - %@", error.localizedDescription];
+                            [[AppDelegate appDelegate] addSessionLog:log];
+                            exit(abExitCodeUnZipIPAError);
+                        } else {
+                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
+                        }
                         self.errorBlock(nil, YES);
                         return;
                     }
@@ -94,7 +100,13 @@
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
-                        [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox can't able to find Info.plist in you IPA."];
+                        NSString *log = @"AppBox can't able to find Info.plist in you IPA.";
+                        if (self.ciRepoProject) {
+                            [[AppDelegate appDelegate] addSessionLog:log];
+                            exit(abExitCodeInfoPlistNotFound);
+                        } else {
+                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:log];
+                        }
                         self.errorBlock(nil, YES);
                         return;
                     }
@@ -125,7 +137,11 @@
         });
     }else{
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
-        [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
+        if (self.ciRepoProject) {
+            exit(abExitCodeIPAFileNotFound);
+        } else {
+            [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
+        }
         self.errorBlock(nil, YES);
     }
 }
@@ -138,7 +154,7 @@
         NSString *appboxServerBuildsPath = [NSString stringWithFormat:@"%@/%@-%@/", abAppBoxLocalServerBuildsDirectory, ipaName, [Common generateUUID]];
         NSURL *toURL = [[UserData buildLocation] URLByAppendingPathComponent:appboxServerBuildsPath];
         NSError *error;
-        
+        NSString *ipaPath = [ipaURL.resourceSpecifier stringByRemovingPercentEncoding];
         //Create AppBox Server Directory
         if ([fileManager createDirectoryAtPath:toURL.resourceSpecifier withIntermediateDirectories:YES attributes:nil error:&error]){
             //Copy  IPA file to Server Directory
@@ -159,7 +175,7 @@
 }
 
 -(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{
-    if ([self.project.buildType isEqualToString: BuildTypeAppStore] && self.project.fullPath == nil){
+    if ([self.project.buildType isEqualToString: BuildTypeAppStore] && self.project.projectFullPath == nil){
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText: @"Please confirm"];
         [alert setInformativeText:@"AppBox found an AppStore provisioning profile in this IPA file. Do you want to upload this on AppStore?"];
@@ -250,16 +266,78 @@
             }
         }
     } else {
-        NSDictionary *latestVersion = @{
-                                        @"name" : self.project.name,
-                                        @"version" : self.project.version,
-                                        @"build" : self.project.build,
-                                        @"identifier" : self.project.identifer,
-                                        @"manifestLink" : self.project.manifestFileSharableURL.absoluteString,
-                                        @"timestamp" : [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]
-                                        };
+        NSNumber *currentTimeStamp = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+        NSMutableDictionary *latestVersion = [[NSMutableDictionary alloc] init];
+        [latestVersion setObject:self.project.name forKey:@"name"];
+        [latestVersion setObject:self.project.version forKey:@"version"];
+        [latestVersion setObject:self.project.build forKey:@"build"];
+        [latestVersion setObject:self.project.identifer forKey:@"identifier"];
+        [latestVersion setObject:self.project.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
+        [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
+        
+        //check if developer want to show donwload button IPA file button to the user
+        if ([UserData downloadIPAEnable]) {
+            [latestVersion setObject:self.project.ipaFileDBShareableURL.absoluteString forKey:@"ipaFileLink"];
+        }
+        
+        //check if developer want to show more information about build
+        if ([UserData moreDetailsEnable]) {
+            //set basic details of app
+            if (self.project.miniOSVersion){
+                [latestVersion setObject:self.project.miniOSVersion forKey:@"minosversion"];
+            }
+            if (self.project.supportedDevice){
+                [latestVersion setObject:self.project.supportedDevice forKey:@"supporteddevice"];
+            }
+            if (self.project.buildType){
+                [latestVersion setObject:self.project.buildType forKey:@"buildtype"];
+            }
+            if (self.project.ipaFileSize) {
+                [latestVersion setObject:self.project.ipaFileSize forKey:@"ipafilesize"];
+            }
+            
+            //set details which obtains from mobile provisioing profile
+            NSMutableDictionary *mobileProvision = [[NSMutableDictionary alloc] init];
+            if (self.project.mobileProvision.createDate) {
+                NSNumber *create = [NSNumber numberWithDouble: self.project.mobileProvision.createDate.timeIntervalSince1970];
+                [mobileProvision setObject:create forKey:@"createdate"];
+            }
+            if (self.project.mobileProvision.expirationDate) {
+                NSNumber *expire = [NSNumber numberWithDouble: self.project.mobileProvision.expirationDate.timeIntervalSince1970];
+                [mobileProvision setObject:expire forKey:@"expirationdata"];
+            }
+            if (self.project.mobileProvision.teamId) {
+                [mobileProvision setObject:self.project.mobileProvision.teamId forKey:@"teamid"];
+            }
+            if (self.project.mobileProvision.teamName) {
+                [mobileProvision setObject:self.project.mobileProvision.teamName forKey:@"teamname"];
+            }
+            if (self.project.mobileProvision.uuid) {
+                [mobileProvision setObject:self.project.mobileProvision.uuid forKey:@"uuid"];
+            }
+            if (mobileProvision.allKeys.count > 0) {
+                [latestVersion setObject:mobileProvision forKey:@"mobileprovision"];
+            }
+            
+            //Hide some information of provisioned deviecs UDIDs
+            NSMutableArray *modifiedProvisionedDevices = [[NSMutableArray alloc] init];
+            [self.project.mobileProvision.provisionedDevices enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.length > 30) {
+                    NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(10, 20) withString:@"....."];
+                    [modifiedProvisionedDevices addObject:modifiedProvisioning];
+                }
+            }];
+            if (self.project.mobileProvision.provisionedDevices) {
+                [mobileProvision setObject:modifiedProvisionedDevices forKey:@"devicesudid"];
+            }
+        }
+        
         NSMutableArray *versionHistory = [[dictUniqueLink objectForKey:@"versions"] mutableCopy];
-        if(!versionHistory){
+        if ([UserData showPreviousVersions]) {
+            if(!versionHistory){
+                versionHistory = [NSMutableArray new];
+            }
+        } else {
             versionHistory = [NSMutableArray new];
         }
         [versionHistory addObject:latestVersion];
@@ -277,7 +355,8 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     }
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:nil];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:&error];
     [jsonData writeToFile:path atomically:YES];
 }
 
@@ -326,6 +405,9 @@
                     [self dbUploadLargeFile:file to:path mode:mode];
                 }];
             } else if (networkError) {
+                if (self.ciRepoProject) {
+                    exit(abExitCodeForUploadFailed);
+                }
                 self.errorBlock(nil, YES);
                 [DBErrorHandler handleNetworkErrorWith:networkError];
             }
@@ -355,6 +437,9 @@
                         [self uploadNextChunk];
                     }];
                 } else {
+                    if (self.ciRepoProject) {
+                        exit(abExitCodeForUploadFailed);
+                    }
                     self.errorBlock(nil, YES);
                     if (routeError) {
                         [DBErrorHandler handleUploadSessionFinishError:routeError];
@@ -377,6 +462,9 @@
                         [self uploadNextChunk];
                     }];
                 }else{
+                    if (self.ciRepoProject) {
+                        exit(abExitCodeForUploadFailed);
+                    }
                     self.errorBlock(nil, YES);
                     if (routeError) {
                         [DBErrorHandler handleUploadSessionLookupError:routeError];
@@ -459,6 +547,9 @@
                   }];
               } else {
                   [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
+                  if (self.ciRepoProject) {
+                      exit(abExitCodeForUploadFailed);
+                  }
                   self.errorBlock(nil, YES);
                   if (error) {
                       [DBErrorHandler handleNetworkErrorWith:error];
@@ -524,6 +615,9 @@
     }else if([error isHttpError] && error.statusCode.integerValue == 409){
         [self dbGetSharedURLForFile:file];
     }else{
+        if (self.ciRepoProject) {
+            exit(abExitCodeForUploadFailed);
+        }
         [DBErrorHandler handleNetworkErrorWith:error];
         self.errorBlock(nil, YES);
     }
@@ -540,6 +634,9 @@
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
             if (manifestURL == nil){
                 //show error if manifest file url is nil
+                if (self.ciRepoProject) {
+                    exit(abExitCodeUnableToCreateManiFestFile);
+                }
                 [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
                 self.errorBlock(nil, YES);
             }else{
@@ -597,17 +694,9 @@
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
     
     //Create Short URL
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-        //Retry to create short URL if first try failed
+    [[BranchIO shared] shortenURLForProject:self.project completion:^(NSURL *shortURL, NSError *error) {
         if (shortURL == nil || error) {
-            [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
-                if (shortURL == nil || error) {
-                    [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
-                } else {
-                    [self createAndUploadJsonWithURL:shortURL];
-                }
-            }];
+            [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
         } else {
             [self createAndUploadJsonWithURL:shortURL];
         }
@@ -629,8 +718,7 @@
     NSString *originalURL = [self.project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]];
-    GooglURLShortenerService *service = [GooglURLShortenerService serviceWithAPIKey: abGoogleTiny];
-    [Tiny shortenURL:self.project.appLongShareableURL withService:service completion:^(NSURL *shortURL, NSError *error) {
+    [[BranchIO shared] shortenURLForProject:self.project completion:^(NSURL *shortURL, NSError *error) {
         self.project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.completionBlock();

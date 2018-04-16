@@ -33,6 +33,12 @@
     [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
     [assetsDict setValue:@"software-package" forKey:@"kind"];
     
+    //TODO: Upload ICONS
+    NSMutableDictionary *iconDict = [[NSMutableDictionary alloc] init];
+    [iconDict setValue:@"display-image" forKey:@"kind"];
+    [iconDict setValue:NO forKey:@"needs-shine"];
+    [iconDict setValue:@"" forKey:@"url"];
+    
     NSMutableDictionary *metadataDict = [[NSMutableDictionary alloc] init];
     [metadataDict setValue:@"software" forKey:@"kind"];
     [metadataDict setValue:self.name forKey:@"title"];
@@ -144,11 +150,10 @@
     _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 }
 
-- (void)setFullPath:(NSURL *)fullPath{
-    _fullPath = fullPath;
-    [self setRootDirectory: [Common getFileDirectoryForFilePath:fullPath]];
+-(void)setProjectFullPath:(NSURL *)projectFullPath{
+    _projectFullPath = projectFullPath;
+    [self setRootDirectory: [Common getFileDirectoryForFilePath:projectFullPath]];
 }
-
 
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
     _ipaInfoPlist = ipaInfoPlist;
@@ -159,7 +164,23 @@
     [self setBuild: [ipaInfoPlist valueForKey:@"CFBundleVersion"]];
     [self setIdentifer:[self.ipaInfoPlist valueForKey:@"CFBundleIdentifier"]];
     [self setVersion: [ipaInfoPlist valueForKey:@"CFBundleShortVersionString"]];
-
+    [self setMiniOSVersion:[ipaInfoPlist valueForKey:@"MinimumOSVersion"]];
+    
+    //Supported Devices
+    NSArray *supportedDeviceKey = [ipaInfoPlist valueForKey:@"UIDeviceFamily"];
+    NSMutableString *supportedDevice = [[NSMutableString alloc] init];
+    [supportedDeviceKey enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj integerValue] == 1) {
+            [supportedDevice appendString:@"iPhone"];
+        } else if ([obj integerValue] == 2) {
+            if (supportedDevice.length > 0){
+                [supportedDevice appendString:@" and "];
+            }
+            [supportedDevice appendString:@"iPad"];
+        }
+    }];
+    [self setSupportedDevice:supportedDevice];
+    
     //Bundle directory path
     NSString *bundlePath = [NSString stringWithFormat:@"/%@",self.identifer];
     if (self.bundleDirectory.absoluteString.length == 0){

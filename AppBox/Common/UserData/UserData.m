@@ -49,6 +49,30 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define UserHangoutChatWebHook @"UserHangoutChatWebHook"
+
++(NSString *)userHangoutChatWebHook {
+    NSString *userHangoutChatWebHook = [[NSUserDefaults standardUserDefaults] stringForKey:UserHangoutChatWebHook];
+    return userHangoutChatWebHook == nil ? abEmptyString : userHangoutChatWebHook;
+}
+
++(void)setUserHangoutChatWebHook:(NSString *)slackChannel {
+    [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserHangoutChatWebHook];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define UserMicrosoftTeamWebHook @"UserMicrosoftTeamWebHook"
+
++(NSString *)userMicrosoftTeamWebHook {
+    NSString *userMicrosoftTeamWebHook = [[NSUserDefaults standardUserDefaults] stringForKey:UserMicrosoftTeamWebHook];
+    return userMicrosoftTeamWebHook == nil ? abEmptyString : userMicrosoftTeamWebHook;
+}
+
++(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel {
+    [[NSUserDefaults standardUserDefaults] setValue:slackChannel forKey:UserMicrosoftTeamWebHook];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #define UserSlackMessage @"UserSlackMessage"
 
 +(NSString *)userSlackMessage {
@@ -165,6 +189,38 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - AppBox Installation Page Settings -
+#define DonwloadIPAEnable @"DonwloadIPAEnable"
++(BOOL)downloadIPAEnable{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DonwloadIPAEnable];
+}
+
++(void)setDownloadIPAEnable:(BOOL)downloadIPA{
+    [[NSUserDefaults standardUserDefaults] setBool:downloadIPA forKey:DonwloadIPAEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define MoreDetailsEnable @"MoreDetailsEnable"
++(BOOL)moreDetailsEnable{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:MoreDetailsEnable];
+}
+
++(void)setMoreDetailsEnable:(BOOL)moreDetails{
+    [[NSUserDefaults standardUserDefaults] setBool:moreDetails forKey:MoreDetailsEnable];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define ShowPreviousVersions @"ShowPreviousVersions"
++(BOOL)showPreviousVersions{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:ShowPreviousVersions];
+}
+
++(void)setShowPreviousVersions:(BOOL)previousVersion{
+    [[NSUserDefaults standardUserDefaults] setBool:previousVersion forKey:ShowPreviousVersions];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 #pragma mark - App Settings -
 #define AppSettingIsFirstTime @"AppSettingIsFirstTime"
 +(BOOL)isFirstTime{
@@ -173,6 +229,20 @@
 
 +(void)setIsFirstTime:(BOOL)isFirstTime{
     [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:AppSettingIsFirstTime];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSString *)appSettingIsFirstTimeAfterUpdate{
+    NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    return [NSString stringWithFormat:@"AppSettingIsFirstTimeAfterUpdate%@", versionString];
+}
+
++(BOOL)isFirstTimeAfterUpdate{
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:[self appSettingIsFirstTimeAfterUpdate]];
+}
+
++(void)setIsFirstTimeAfterUpdate:(BOOL)isFirstTime{
+    [[NSUserDefaults standardUserDefaults] setBool:isFirstTime forKey:[self appSettingIsFirstTimeAfterUpdate]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

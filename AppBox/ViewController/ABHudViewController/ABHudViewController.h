@@ -21,6 +21,8 @@ typedef enum : NSUInteger {
     __weak IBOutlet NSTextField *adTitleLabel;
     __weak IBOutlet NSTextField *adSubtitleLabel;
     __weak IBOutlet NSImageView *resultImageView;
+    __weak IBOutlet NSLayoutConstraint *adHeightConstraint;
+    __weak IBOutlet NSLayoutConstraint *equalHeightConstraint;
 }
 
 @property(nonatomic, weak) NSView *hudSuperView;
@@ -31,6 +33,7 @@ typedef enum : NSUInteger {
 @property(nonatomic, strong) NSNumber *progress;
 @property(nonatomic, assign) HudType hudType;
 @property(nonatomic, assign) BOOL result;
+@property(nonatomic, assign) BOOL showAds;
 
 + (ABHudViewController *)hudForView:(NSView *)view hide:(BOOL)hide;
 - (IBAction)adViewClickGestureRecognized:(NSClickGestureRecognizer *)sender;

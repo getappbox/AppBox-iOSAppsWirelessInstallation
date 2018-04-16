@@ -22,10 +22,13 @@
     
     project = [[XCProject alloc] init];
     allTeamIds = [KeychainHandler getAllTeamId];
+    buildOptionBoxHeightConstraint.constant = 0;
+    
     //Notification Handler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initOpenFilesProcess:) name:abUseOpenFilesNotification object:nil];
     
     //setup initial value
     [project setBuildDirectory: [UserData buildLocation]];
@@ -74,13 +77,14 @@
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
     [[AppDelegate appDelegate] setIsReadyToBuild:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToBuildNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToUseNotification object:self];
 }
 
 #pragma mark - Upload Manager
 -(void)setupUploadManager{
     uploadManager = [[UploadManager alloc] init];
     [uploadManager setProject:project];
+    [uploadManager setCiRepoProject:ciRepoProject];
     [uploadManager setCurrentViewController:self];
     
     __unsafe_unretained typeof(self) weakSelf = self;
@@ -91,6 +95,9 @@
     
     [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
         if (terminate) {
+            if (ciRepoProject) {
+                exit(abExitCodeForUploadFailed);
+            }
             [weakSelf viewStateForProgressFinish:YES];
         }
     }];
@@ -105,30 +112,46 @@
 }
 
 
-#pragma mark - Build Repo
+#pragma mark - Build Repo / Open Files Notification
 - (void)initBuildRepoProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         ciRepoProject = notification.object;
-        [tabView selectTabViewItem:tabView.tabViewItems.firstObject];
-        [self initProjectBuildProcessForURL: ciRepoProject.fullPath];
+        [self initProjectBuildProcessForURL: ciRepoProject.projectFullPath];
+    }
+}
+
+- (void)initOpenFilesProcess:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[NSString class]]) {
+        NSURL *fileURL = [notification.object validURL];
+        if (fileURL) {
+            [selectedFilePath setURL:fileURL.filePathURL];
+            [self selectedFilePathHandler:selectedFilePath];
+            return;
+        }
     }
 }
 
 #pragma mark - Controls Action Handler -
 #pragma mark → Project / Workspace Controls Action
 //Project Path Handler
-- (IBAction)projectPathHandler:(NSPathControl *)sender {
-    NSURL *projectURL = [sender.URL filePathURL];
-    [self initProjectBuildProcessForURL: projectURL];
+- (IBAction)selectedFilePathHandler:(NSPathControl *)sender {
+    NSURL *url = [sender.URL filePathURL];
+    if (url.isIPA && ![project.ipaFullPath isEqual:url]) {
+        [self viewStateForProgressFinish:YES];
+        [project setIpaFullPath: url];
+        [selectedFilePath setURL:url];
+        [self updateViewState];
+    } else if (url.isProject && ![project.projectFullPath isEqualTo:url]) {
+        [self viewStateForProgressFinish:YES];
+        [self initProjectBuildProcessForURL: url];
+    }
 }
 
 - (void)initProjectBuildProcessForURL:(NSURL *)projectURL {
-    if (![project.fullPath isEqualTo:projectURL]){
-        [self viewStateForProgressFinish:YES];
-        [project setFullPath: projectURL];
-        [pathProject setURL:projectURL];
-        [self runGetSchemeScript];
-    }
+    [self viewStateForProgressFinish:YES];
+    [project setProjectFullPath: projectURL];
+    [selectedFilePath setURL:projectURL];
+    [self runGetSchemeScript];
 }
 
 //Scheme Value Changed
@@ -163,12 +186,6 @@
 
 #pragma mark → IPA File Controlles Actions
 //IPA File Path Handler
-- (IBAction)ipaFilePathHandle:(NSPathControl *)sender {
-    if (![project.fullPath isEqual:sender.URL]){
-        project.ipaFullPath = sender.URL.filePathURL;
-        [self updateViewState];
-    }
-}
 
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender{
     project.isKeepSameLinkEnabled = (sender.state == NSOnState);
@@ -238,21 +255,21 @@
             [self enableMailField:buttonSendMail.state == NSOnState];
         }
         
-        //set processing flg
+        //set processing flag
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
         
-        if (project.fullPath && tabView.tabViewItems.firstObject.tabState == NSSelectedTab){
+        if (project.projectFullPath.isProject){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Build Type" : comboBuildType.stringValue}];
             [EventTracker logEventSettingWithType:LogEventSettingTypeArchiveAndUpload andSettings:currentSetting];
             [project setIsBuildOnly:NO];
             [self runBuildScript];
-        }else if (project.ipaFullPath  && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+        }else if (project.ipaFullPath.isIPA){
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:nil];
             [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPA andSettings:currentSetting];
             [uploadManager uploadIPAFile:project.ipaFullPath];
         }
-        [self viewStateForProgressFinish:NO];
+        [self viewStateForProgressFinish:![AppDelegate appDelegate].processing];
     }else{
         [MailHandler showInvalidEmailAddressAlert];
     }
@@ -287,7 +304,7 @@
     [buildArgument addObject:project.rootDirectory];
     
     //${2} Project type workspace/scheme
-    [buildArgument addObject:pathProject.URL.lastPathComponent];
+    [buildArgument addObject:selectedFilePath.URL.lastPathComponent];
     
     //${3} Build Scheme
     [buildArgument addObject:comboBuildScheme.stringValue];
@@ -315,14 +332,16 @@
             
             //${8} xcpretty
             NSString *xcPrettyPath = [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
-            [buildArgument addObject:xcPrettyPath];
+            if (xcPrettyPath){
+                [buildArgument addObject:xcPrettyPath];
+            }
             if (buildArgument.count == 8) {
                 completion(buildArgument);
             } else {
                 NSString *errorLog = [NSString stringWithFormat:@"Failed to create build command.\n Build Arguments %@", buildArgument];
                 if (ciRepoProject) {
                     [[AppDelegate appDelegate] addSessionLog:errorLog];
-                    exit(1);
+                    exit(abExitCodeForInvalidArgumentsXcodeBuild);
                 } else {
                     [ABLog log:errorLog];
                     [Common showAlertWithTitle:@"Error" andMessage:@"Failed to create build command."];
@@ -440,9 +459,18 @@
                     if (ciRepoProject) {
                         [RepoBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
                         [comboTeamId removeAllItems];
+                        if (project.teamId == nil) {
+                            [self showStatus:@"Private key not available in keychain." andShowProgressBar:NO withProgress:-1];
+                            exit(abExitCodeForPrivateKeyNotFound);
+                        }
                         [comboTeamId addItemWithObjectValue:project.teamId];
                         [comboTeamId selectItemWithObjectValue:project.teamId];
                         [comboBuildType selectItemWithObjectValue:project.buildType];
+                        if (project.schemes == nil || project.schemes.count == 0) {
+                            NSString *message = [NSString stringWithFormat:@"Failed to load scheme information. Please try again with shared Xcode project schemes. Click here to read how to share project scheme - %@", abShareXcodeProjectSchemeURL];
+                            [self showStatus:message andShowProgressBar:NO withProgress:-1];
+                            exit(abExitCodeForSchemeNotFound);
+                        }
                         [comboBuildScheme selectItemWithObjectValue:project.selectedSchemes];
                         [textFieldEmail setStringValue:project.emails];
                         [textFieldMessage setStringValue:project.personalMessage];
@@ -460,7 +488,7 @@
                         [self viewStateForProgressFinish:YES];
                         //exit if appbox failed to load scheme information for ci project
                         if (ciRepoProject) {
-                            exit(1);
+                            exit(abExitCodeForFailedToLoadSchemeInfo);
                         }
                         NSAlert *alert = [[NSAlert alloc] init];
                         [alert setMessageText: @"Failed to load scheme information."];
@@ -495,6 +523,7 @@
                                 [comboTeamId selectItemWithObjectValue:project.teamId];
                             }
                             [self updateViewState];
+                            buildOptionBoxHeightConstraint.constant = 119;
                             [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
                         }
                     }
@@ -515,12 +544,12 @@
                 } else if ([outputString.lowercaseString containsString:@"archive failed"]){
                     if ([AppDelegate appDelegate].isInternetConnected || [outputString containsString:@"^"]){
                         [self showStatus:@"Archive Failed" andShowProgressBar:NO withProgress:-1];
-                        [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
-                        [self viewStateForProgressFinish:YES];
-                        //exit if appbox failed to archive the project
                         if (ciRepoProject) {
-                            exit(1);
+                            exit(abExitCodeForArchiveFailed); //exit if appbox failed to archive the project
+                        } else {
+                            [Common showAlertWithTitle:@"Archive Failed" andMessage:outputString];
                         }
+                        [self viewStateForProgressFinish:YES];
                     }else{
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                         uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
@@ -545,17 +574,17 @@
                 } else if ([outputString.lowercaseString containsString:@"export failed"]){
                     if ([AppDelegate appDelegate].isInternetConnected){
                         [self showStatus:@"Export Failed" andShowProgressBar:NO withProgress:-1];
-                        [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
+                        if (ciRepoProject) {
+                            exit(abExitCodeForExportFailed); //exit if appbox failed to export IPA file
+                        } else {
+                            [Common showAlertWithTitle:@"Export Failed" andMessage:outputString];
+                        }
                         [self viewStateForProgressFinish:YES];
                     } else {
                         [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
                         uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
                             [self runCreateIPAScript];
                         }];
-                    }
-                    //exit if appbox failed to export IPA file
-                    if (ciRepoProject) {
-                        exit(1);
                     }
                 } else {
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
@@ -578,8 +607,10 @@
 -(void)appStoreScriptOutputHandlerWithOutput:(NSString *)output{
     //parse application loader response
     ALOutput *alOutput = [ALOutputParser messageFromXMLString:output];
-    [alOutput.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+    [alOutput.messages enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj && obj.length > 0){
+            [self showStatus:obj andShowProgressBar:NO withProgress:-1];
+        }
     }];
     
     //check if response is valid or error
@@ -589,19 +620,25 @@
             [self runALAppStoreScriptForValidation:NO];
         }else if (scriptType == ScriptTypeAppStoreUpload){
             //show upload succeess message
-            [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
-            [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
-            [self viewStateForProgressFinish:YES];
             NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"AppStore"}];
             [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
+            [self showStatus:@"App uploaded to AppStore." andShowProgressBar:NO withProgress:-1];
+            if (ciRepoProject) {
+                exit(abExitCodeForSuccess);
+            }
+            [Common showAlertWithTitle:@"App uploaded to AppStore." andMessage:nil];
+            [self viewStateForProgressFinish:YES];
         }
     }else{
         //if internet is connected, show direct error
         if ([AppDelegate appDelegate].isInternetConnected){
+            [[AppDelegate appDelegate] addSessionLog:@"Failed to upload on AppStore."];
+            if (ciRepoProject) {
+                exit(abExitCodeForAppStoreUploadFailed);
+            }
             [Common showAlertWithTitle:@"Error" andMessage:[alOutput.messages componentsJoinedByString:@"\n\n"]];
             [self viewStateForProgressFinish:YES];
         }else{
-            
             //if internet connection is lost, show watting message and start process again when connected
             [self showStatus:abNotConnectedToInternet andShowProgressBar:YES withProgress:-1];
             uploadManager.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
@@ -624,7 +661,11 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]){
         if ([comboBuildType.stringValue isEqualToString: BuildTypeAppStore]){
             //get required info and upload to appstore
-            [self runALAppStoreScriptForValidation:YES];
+            if (project.alPath) {
+                [self runALAppStoreScriptForValidation:YES];
+            } else {
+                [self itcLoginResult:YES];
+            }
         }else{
             //get ipa details and upload to dropbox
             [uploadManager uploadIPAFile:project.ipaFullPath];
@@ -659,7 +700,7 @@
 -(void)viewStateForProgressFinish:(BOOL)finish{
     [ABLog log:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]];
     [[AppDelegate appDelegate] setProcessing:!finish];
-    [[AppDelegate appDelegate] setIsReadyToBuild:!finish];
+    [[AppDelegate appDelegate] setIsReadyToBuild:finish];
     
     //reset project
     if (finish){
@@ -667,19 +708,16 @@
         [project setBuildDirectory:[UserData buildLocation]];
         [uploadManager setProject:project];
         [ABHudViewController hudForView:self.view hide:YES];
+        buildOptionBoxHeightConstraint.constant = 0;
     }
     
     //unique link
     [buttonUniqueLink setEnabled:finish];
     [buttonUniqueLink setState: finish ? NSOffState : buttonUniqueLink.state];
     
-    //ipa path
-    [pathIPAFile setEnabled:finish];
-    [pathIPAFile setURL: finish ? nil : pathIPAFile.URL.filePathURL];
-    
-    //project path
-    [pathProject setEnabled:finish];
-    [pathProject setURL: finish ? nil : pathProject.URL.filePathURL];
+    //ipa or project path
+    [selectedFilePath setEnabled:finish];
+    [selectedFilePath setURL: finish ? nil : selectedFilePath.URL.filePathURL];
     
     //team id combo
     [comboTeamId setEnabled:finish];
@@ -750,13 +788,14 @@
     BOOL enable = ((comboBuildScheme.stringValue != nil && comboBuildType.stringValue.length > 0 && //build scheme
                     comboBuildType.stringValue != nil && comboBuildType.stringValue.length > 0 && //build type
                     comboTeamId.stringValue != nil && comboTeamId.stringValue.length > 0 && //team id
-                    tabView.tabViewItems.firstObject.tabState == NSSelectedTab &&
+                    project.projectFullPath != nil && selectedFilePath.URL.isProject &&
                     (![comboBuildType.stringValue isEqualToString: BuildTypeAppStore] || project.itcPasswod.length > 0)) ||
                    
                    //if ipa selected
-                   (project.ipaFullPath != nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab));
-    [buttonAction setEnabled:(enable && (pathProject.enabled || pathIPAFile.enabled))];
-    [buttonAction setTitle:(tabView.selectedTabViewItem.label)];
+                   (project.ipaFullPath != nil && selectedFilePath.URL.isIPA));
+    
+    [buttonAction setEnabled:enable];
+    [buttonAction setTitle:selectedFilePath.URL.isIPA ? @"Upload IPA" : @"Archive and Upload IPA" ];
     
     //update CI button
     //[buttonConfigCI setHidden:(tabView.tabViewItems.lastObject.tabState == NSSelectedTab)];
@@ -764,7 +803,7 @@
     
     //update keepsame link
     [buttonUniqueLink setEnabled:((project.buildType == nil || ![project.buildType isEqualToString:BuildTypeAppStore] ||
-                                  tabView.tabViewItems.lastObject.tabState == NSSelectedTab) && ![[AppDelegate appDelegate] processing])];
+                                  selectedFilePath.URL.isIPA) && ![[AppDelegate appDelegate] processing])];
     
     //update advanced button
     [buttonAdcanced setEnabled:buttonAction.enabled];
@@ -773,7 +812,7 @@
 
 -(void)updateMenuButtons{
     //Menu Buttons
-    BOOL enable = ([DBClientsManager authorizedClient] && pathProject.enabled && pathIPAFile.enabled);
+    BOOL enable = ([DBClientsManager authorizedClient] && selectedFilePath.enabled);
     [[[AppDelegate appDelegate] dropboxLogoutButton] setEnabled:enable];
 }
 
@@ -837,23 +876,37 @@
                     [project setAlPath: applicationLoaderPath];
                     
                     //check for ipa, if ipa start upload
-                    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+                    if (selectedFilePath.URL.isIPA){
                         [self runALAppStoreScriptForValidation:YES];
                     }else{
-                        [self updateViewState];
+                        if (ciRepoProject){
+                            [self runALAppStoreScriptForValidation:YES];
+                        } else {
+                            [self updateViewState];
+                        }
                     }
                 }else{
-                    [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
+                    if (ciRepoProject) {
+                        [[AppDelegate appDelegate] addSessionLog:@"Can't able to find application loader in your machine."];
+                        exit(abExitCodeForApplicationLoaderNotFount);
+                    } else {
+                        [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find application loader in your machine."];
+                    }
                 }
             }else{
-                [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
+                if (ciRepoProject) {
+                    [[AppDelegate appDelegate] addSessionLog:@"Can't able to find xcode in your machine."];
+                    exit(abExitCodeForXcodeNotFount);
+                } else {
+                    [Common showAlertWithTitle:@"Error" andMessage:@"Can't able to find xcode in your machine."];
+                }
             }
         }];
     }
 }
 
 -(void)itcLoginCanceled{
-    if (project.fullPath == nil && tabView.tabViewItems.lastObject.tabState == NSSelectedTab){
+    if (selectedFilePath.URL.isIPA){
         [uploadManager uploadIPAFileWithoutUnzip:project.ipaFullPath];
     } else {
         [project setBuildType:abEmptyString];
@@ -871,13 +924,26 @@
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n\nBUILD URL - %@\n\n\n", project.appShortShareableURL]];
     
     if ([UserData userSlackMessage].length > 0) {
-        [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
-        [SlackClient sendMessageForProject:project completion:^(BOOL success) {
-            [self handleAppURLAfterSlack];
-        }];
-    } else {
-        [self handleAppURLAfterSlack];
+        if ([UserData userSlackChannel].length > 0){
+            [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
+            [SlackClient sendMessageForProject:project completion:^(BOOL success) {
+            }];
+        }
+        if ([UserData userHangoutChatWebHook].length > 0){
+            [self showStatus:@"Sending Message on Hangout..." andShowProgressBar:YES withProgress:-1];
+            [HangoutClient sendMessageForProject:project completion:^(BOOL success) {
+            }];
+        }
+        if ([UserData userMicrosoftTeamWebHook].length > 0){
+            [self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
+            [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {
+            }];
+        }
+        
     }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self handleAppURLAfterSlack];
+    });
 }
 
 
@@ -900,7 +966,7 @@
                         [self performSegueWithIdentifier:@"ShowLink" sender:self];
                     }else{
                         [self viewStateForProgressFinish:YES];
-                        exit(0);
+                        exit(abExitCodeForSuccess);
                     }
                 }
             } else {
