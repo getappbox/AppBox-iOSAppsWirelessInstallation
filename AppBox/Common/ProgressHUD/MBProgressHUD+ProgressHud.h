@@ -7,6 +7,7 @@
 //
 
 #import "ABHudViewController.h"
+#import "DragDropView.h"
 
 @interface ABHudViewController (ProgressHud)
 
