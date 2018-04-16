@@ -424,7 +424,6 @@
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
             if (result) {
                 if (self.dbFileType == DBFileTypeIPA){
-                    [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
                     NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
                     [self showStatus:status andShowProgressBar:YES withProgress:-1];
                     
@@ -521,7 +520,6 @@
               }
               //IPA file uploaded and creating shared url
               else if (self.dbFileType == DBFileTypeIPA){
-                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
                   NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
                   
@@ -530,7 +528,6 @@
               }
               //Manifest file uploaded and creating shared url
               else if (self.dbFileType == DBFileTypeManifest){
-                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"Manifest file uploaded."];
                   NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
                   
