@@ -97,4 +97,19 @@
     [UserData setUploadBitcode:(sender.state == NSOnState)];
 }
 
+- (IBAction)helpDownloadIPAButtonAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDownloadIPAHelpURL]];
+}
+
+- (IBAction)helpMoreInformationAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abMoreDetailsHelpURL]];
+}
+
+- (IBAction)helpDontShowPerviousBuildAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDontShowPerviousBuildURL]];
+}
+
+- (IBAction)helpUploadChunkSizeAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abUploadChunkSizeHelpURL]];
+}
 @end

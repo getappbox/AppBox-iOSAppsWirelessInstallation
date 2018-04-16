@@ -24,12 +24,19 @@
 //Other URL's
 #define abAppBoxAdsURL @"https://appbox-ads.firebaseio.com/ads.json"
 #define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
-#define abDocumentationURL @"https://tryappbox.github.io/help/"
+#define abDocumentationURL @"http://www.tryappbox.com/help/"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/tryappbox"
 #define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
+
+//Help URL
+#define abDownloadIPAHelpURL @"http://www.tryappbox.com/features/downloadipa/"
+#define abMoreDetailsHelpURL @"http://www.tryappbox.com/features/moredetails/"
+#define abUploadChunkSizeHelpURL @"http://www.tryappbox.com/features/uploadchunksize/"
+#define abDontShowPerviousBuildURL @"https://tryappbox.github.io/features/keepsamelink/index.html#dontshowpreviousbuild"
+#define abKeepSameLinkReadMoreURL @"https://tryappbox.github.io/features/keepsamelink/"
 #define abShareXcodeProjectSchemeURL @"http://www.tryappbox.com/features/faq/HowToShareXcodeProjectSchemes.html"
 
 //Unique links
@@ -58,10 +65,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abAdsLoadCompleted @"AdsLoadCompleted"
 
 //messages
-#define abKeepSameLinkHelpTitle @"What is keep same link for all future upload?"
-#define abKeepSameLinkHelpMessage  @"This feature will keep same short url for all future ipa uploaded with same bundle identifier, this means old ipa url will replaced by new ipa file. You can change the link by providing a \"Custom Dropbox Folder Name\" in \"Other Setting\". \n\nIf this option is enable, you can also download the previous build with same url."
-#define abKeepSameLinkReadMoreURL @"https://tryappbox.github.io/features/keepsamelink/"
-
 #define abConnectedToInternet @"Connected to the Internet."
 #define abNotConnectedToInternet @"Waiting for the Internet Connection."
 
