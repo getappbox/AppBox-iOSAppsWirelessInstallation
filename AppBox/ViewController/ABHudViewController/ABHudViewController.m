@@ -149,6 +149,10 @@
 
 -(void)setProgress:(NSNumber *)progress{
     _progress = progress;
+    [resultImageView setHidden:YES];
+    [resultImageViewAds setHidden:YES];
+    [progressIndicator setHidden:NO];
+    [progressIndicatorAds setHidden:NO];
     [progressIndicator startAnimation:self];
     [progressIndicatorAds startAnimation:self];
     if (progress.integerValue == -1){
@@ -164,6 +168,10 @@
 
 -(void)setResult:(BOOL)result{
     _result = result;
+    [resultImageView setHidden:NO];
+    [resultImageViewAds setHidden:NO];
+    [progressIndicator setHidden:YES];
+    [progressIndicatorAds setHidden:YES];
     NSImage *resultImage = result ? [NSImage imageNamed:@"Check"] : [NSImage imageNamed:@"Multiply"];
     [resultImageView setImage:resultImage];
     [resultImageViewAds setImage:resultImage];
