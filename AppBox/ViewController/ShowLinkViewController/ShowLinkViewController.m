@@ -39,6 +39,11 @@
     });
 }
 
+- (IBAction)buttonOpenURLAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:self.project.appShortShareableURL];
+    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
+}
+
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender {
     [self dismissController:self];

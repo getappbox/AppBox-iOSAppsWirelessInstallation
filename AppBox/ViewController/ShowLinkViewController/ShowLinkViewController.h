@@ -21,6 +21,7 @@
 
 - (IBAction)buttonCloseTapped:(NSButton *)sender;
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender;
+- (IBAction)buttonOpenURLAction:(NSButton *)sender;
 
 
 @end
