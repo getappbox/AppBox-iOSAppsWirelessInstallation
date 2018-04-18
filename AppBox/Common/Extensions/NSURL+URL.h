@@ -13,5 +13,6 @@
 -(BOOL)isIPA;
 -(BOOL)isProject;
 -(BOOL)acceptableURL;
+-(NSString *)stringValue;
 
 @end

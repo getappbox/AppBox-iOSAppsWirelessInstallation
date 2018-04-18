@@ -120,7 +120,7 @@
                     [uploadRecord setLocalBuildPath:[xcProject.ipaFullPath.resourceSpecifier stringByRemovingPercentEncoding]];
                 }
                 if (xcProject.appShortShareableURL){
-                    [uploadRecord setShortURL:xcProject.appShortShareableURL.absoluteString];
+                    [uploadRecord setShortURL:xcProject.appShortShareableURL.stringValue];
                 }
                 if (xcProject.build){
                     [uploadRecord setBuild:xcProject.build];
