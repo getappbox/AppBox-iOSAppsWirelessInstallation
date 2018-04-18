@@ -44,7 +44,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 | Auto E-Mail App Distribution Link |	Yes |	No |
 | Auto Shutdown Mac after Distribution |	Yes |	No |
 | Maximum Upload Size |	Equal to your Dropbox account storage |	100MB |
-| Uploaded App Expiration |	Until you delete from your Dropbox |	3days |
+| Uploaded App Expiration |	Until you delete from your Dropbox | 1day |
 | Installations Per App |	Unlimited |	10 | 
 | Auto Restart Upload After Network Change or Failure | Yes | No | 
 | Dashboard |	Yes |	Yes (login required) |
