@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBCOMMONPathRoot.h"
 #import "DBTransportBaseConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -232,6 +233,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// upload/download operations are performed with a background session).
 /// @param asMemberId An additional authentication header field used when a team app with the appropriate permissions
 /// "performs" user API actions on behalf of a team member.
+/// @param pathRoot The value of path root object which will be used as Dropbox-Api-Path-Root header.
 /// @param sharedContainerIdentifier The identifier for the shared container into which files in background URL sessions
 /// should be downloaded. This needs to be set when downloading via an app extension.
 /// @param additionalHeaders Additional HTTP headers to be injected into each client request.
@@ -244,6 +246,7 @@ NS_ASSUME_NONNULL_BEGIN
                    redirectURL:(nullable NSString *)redirectURL
                      userAgent:(nullable NSString *)userAgent
                     asMemberId:(nullable NSString *)asMemberId
+                      pathRoot:(nullable DBCOMMONPathRoot *)pathRoot
              additionalHeaders:(nullable NSDictionary<NSString *, NSString *> *)additionalHeaders
                  delegateQueue:(nullable NSOperationQueue *)delegateQueue
         forceForegroundSession:(BOOL)forceForegroundSession

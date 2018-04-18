@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The path for the matched file or folder.
 @property (nonatomic, readonly, copy) NSString *path;
 
+/// Whether the file or folder is deleted.
+@property (nonatomic, readonly) NSNumber *isDeleted;
+
 /// List of custom property groups associated with the file.
 @property (nonatomic, readonly) NSArray<DBFILEPROPERTIESPropertyGroup *> *propertyGroups;
 
@@ -42,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param id_ The ID for the matched file or folder.
 /// @param path The path for the matched file or folder.
+/// @param isDeleted Whether the file or folder is deleted.
 /// @param propertyGroups List of custom property groups associated with the
 /// file.
 ///
@@ -49,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)initWithId_:(NSString *)id_
                        path:(NSString *)path
+                  isDeleted:(NSNumber *)isDeleted
              propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 
 - (instancetype)init NS_UNAVAILABLE;

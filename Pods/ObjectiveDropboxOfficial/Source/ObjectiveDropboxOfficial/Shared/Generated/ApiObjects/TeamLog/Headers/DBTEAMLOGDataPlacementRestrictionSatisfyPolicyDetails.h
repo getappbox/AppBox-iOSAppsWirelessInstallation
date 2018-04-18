@@ -18,9 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DataPlacementRestrictionSatisfyPolicyDetails` struct.
 ///
-/// Satisfied a previously set restriction policy regarding the location of data
-/// centers where team data resides (i.e. all data have been migrated according
-/// to the restriction placed).
+/// Completed restrictions on data center locations where team data resides.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

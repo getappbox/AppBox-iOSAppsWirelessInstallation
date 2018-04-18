@@ -49,6 +49,9 @@ typedef NS_ENUM(NSInteger, DBOAuthErrorType) {
   /// of the server.
   DBAuthTemporarilyUnavailable,
 
+  /// The state param received from the authorization server does not match the state param stored by the SDK.
+  DBAuthInconsistentState,
+
   /// Some other error (outside of the OAuth2 specification)
   DBAuthUnknown,
 };

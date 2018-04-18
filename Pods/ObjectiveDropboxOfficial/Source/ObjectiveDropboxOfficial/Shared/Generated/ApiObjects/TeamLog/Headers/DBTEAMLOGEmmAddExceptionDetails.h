@@ -17,8 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `EmmAddExceptionDetails` struct.
 ///
-/// Added an exception for one or more team members to optionally use the
-/// regular Dropbox app when EMM is enabled.
+/// Added members to EMM exception list.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

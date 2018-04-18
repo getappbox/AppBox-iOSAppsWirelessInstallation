@@ -28,10 +28,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// Path in the user's Dropbox to delete.
 @property (nonatomic, readonly, copy) NSString *path;
 
+/// Perform delete if given "rev" matches the existing file's latest "rev". This
+/// field does not support deleting a folder.
+@property (nonatomic, readonly, copy, nullable) NSString *parentRev;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param path Path in the user's Dropbox to delete.
+/// @param parentRev Perform delete if given "rev" matches the existing file's
+/// latest "rev". This field does not support deleting a folder.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPath:(NSString *)path parentRev:(nullable NSString *)parentRev;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param path Path in the user's Dropbox to delete.
 ///

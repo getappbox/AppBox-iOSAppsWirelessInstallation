@@ -8,6 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILESContentSyncSetting;
+@class DBFILESSyncSetting;
 @class DBTEAMTeamFolderMetadata;
 @class DBTEAMTeamFolderStatus;
 
@@ -37,8 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// The status of the team folder.
 @property (nonatomic, readonly) DBTEAMTeamFolderStatus *status;
 
-/// True if this team folder is the team shared dropbox.
+/// True if this team folder is a shared team root.
 @property (nonatomic, readonly) NSNumber *isTeamSharedDropbox;
+
+/// The sync setting applied to this team folder.
+@property (nonatomic, readonly) DBFILESSyncSetting *syncSetting;
+
+/// Sync settings applied to contents of this team folder.
+@property (nonatomic, readonly) NSArray<DBFILESContentSyncSetting *> *contentSyncSettings;
 
 #pragma mark - Constructors
 
@@ -48,15 +56,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param teamFolderId The ID of the team folder.
 /// @param name The name of the team folder.
 /// @param status The status of the team folder.
-/// @param isTeamSharedDropbox True if this team folder is the team shared
-/// dropbox.
+/// @param isTeamSharedDropbox True if this team folder is a shared team root.
+/// @param syncSetting The sync setting applied to this team folder.
+/// @param contentSyncSettings Sync settings applied to contents of this team
+/// folder.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTeamFolderId:(NSString *)teamFolderId
                                 name:(NSString *)name
                               status:(DBTEAMTeamFolderStatus *)status
-                 isTeamSharedDropbox:(NSNumber *)isTeamSharedDropbox;
+                 isTeamSharedDropbox:(NSNumber *)isTeamSharedDropbox
+                         syncSetting:(DBFILESSyncSetting *)syncSetting
+                 contentSyncSettings:(NSArray<DBFILESContentSyncSetting *> *)contentSyncSettings;
 
 - (instancetype)init NS_UNAVAILABLE;
 

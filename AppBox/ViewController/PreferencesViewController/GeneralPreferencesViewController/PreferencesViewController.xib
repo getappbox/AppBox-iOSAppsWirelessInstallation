@@ -106,18 +106,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqs-mB-4cB">
-                                <rect key="frame" x="8" y="107" width="152" height="19"/>
+                                <rect key="frame" x="8" y="107" width="137" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="4d0-vz-AEV"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Large IPA Chunk Size:" id="hvZ-Xj-3SQ">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Upload Chunk Size:" id="hvZ-Xj-3SQ">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bo-Mb-ZwI">
-                                <rect key="frame" x="168" y="103" width="674" height="26"/>
+                                <rect key="frame" x="153" y="103" width="689" height="26"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="FBY-AW-l43">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -139,7 +139,7 @@
                                 </connections>
                             </comboBox>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-MF-fEN">
-                                <rect key="frame" x="8" y="73" width="152" height="19"/>
+                                <rect key="frame" x="8" y="73" width="137" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="nRu-1I-0ka"/>
                                 </constraints>
@@ -150,7 +150,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="dAR-QF-2ra">
-                                <rect key="frame" x="166" y="74" width="706" height="18"/>
+                                <rect key="frame" x="151" y="74" width="356" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show Download IPA file button on app installation page" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oQ9-M5-a8q">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -160,7 +160,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nNM-fO-i2f">
-                                <rect key="frame" x="8" y="44" width="152" height="19"/>
+                                <rect key="frame" x="8" y="44" width="137" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="09P-1R-vyr"/>
                                 </constraints>
@@ -171,7 +171,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Sa0-iS-zi2">
-                                <rect key="frame" x="166" y="45" width="326" height="18"/>
+                                <rect key="frame" x="151" y="45" width="326" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show More Details button on app installation page" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="QEZ-Um-6RV">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -181,7 +181,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c2Q-KG-dKN">
-                                <rect key="frame" x="8" y="15" width="152" height="19"/>
+                                <rect key="frame" x="8" y="15" width="137" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="XfM-fq-AX4"/>
                                 </constraints>
@@ -192,7 +192,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="I3y-0i-Hgf">
-                                <rect key="frame" x="166" y="16" width="347" height="18"/>
+                                <rect key="frame" x="151" y="16" width="347" height="18"/>
                                 <buttonCell key="cell" type="check" title="Don't show previous versions on app installation page" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SWI-gH-cms">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -202,11 +202,14 @@
                                 </connections>
                             </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oEw-FL-iow">
-                                <rect key="frame" x="519" y="12" width="25" height="25"/>
+                                <rect key="frame" x="504" y="12" width="25" height="25"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="obc-s6-icX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="helpDontShowPerviousBuildAction:" target="-2" id="imb-hw-422"/>
+                                </connections>
                             </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c3g-OG-Few">
                                 <rect key="frame" x="847" y="104" width="25" height="25"/>
@@ -214,21 +217,46 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="helpUploadChunkSizeAction:" target="-2" id="EWO-Xv-8CU"/>
+                                </connections>
+                            </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KrO-0m-s8W">
+                                <rect key="frame" x="513" y="70" width="25" height="25"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zko-c8-NuW">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="helpDownloadIPAButtonAction:" target="-2" id="ORa-UP-8fJ"/>
+                                </connections>
+                            </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wef-vq-B5L">
+                                <rect key="frame" x="483" y="41" width="25" height="25"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="p9O-1v-cBo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="helpMoreInformationAction:" target="-2" id="YNw-eN-qE9"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="cEY-MF-fEN" firstAttribute="leading" secondItem="dv6-kG-vNa" secondAttribute="leading" constant="10" id="25M-HG-Pqa"/>
+                            <constraint firstItem="KrO-0m-s8W" firstAttribute="leading" secondItem="dAR-QF-2ra" secondAttribute="trailing" constant="10" id="4iA-Qm-ffg"/>
                             <constraint firstItem="qqs-mB-4cB" firstAttribute="leading" secondItem="cEY-MF-fEN" secondAttribute="leading" id="56U-Bv-ChN"/>
                             <constraint firstItem="nNM-fO-i2f" firstAttribute="leading" secondItem="dv6-kG-vNa" secondAttribute="leading" constant="10" id="7Mn-H0-EUF"/>
+                            <constraint firstItem="dAR-QF-2ra" firstAttribute="centerY" secondItem="KrO-0m-s8W" secondAttribute="centerY" id="8tV-tf-j6f"/>
                             <constraint firstItem="6Bo-Mb-ZwI" firstAttribute="centerY" secondItem="qqs-mB-4cB" secondAttribute="centerY" id="CDE-gc-LHl"/>
                             <constraint firstItem="nNM-fO-i2f" firstAttribute="leading" secondItem="c2Q-KG-dKN" secondAttribute="leading" id="FMU-8a-Hw3"/>
                             <constraint firstItem="I3y-0i-Hgf" firstAttribute="leading" secondItem="c2Q-KG-dKN" secondAttribute="trailing" constant="10" id="Fu6-vA-8He"/>
                             <constraint firstItem="nNM-fO-i2f" firstAttribute="trailing" secondItem="c2Q-KG-dKN" secondAttribute="trailing" id="G5G-Pf-vNn"/>
                             <constraint firstAttribute="trailing" secondItem="c3g-OG-Few" secondAttribute="trailing" constant="10" id="HxT-et-6C5"/>
-                            <constraint firstAttribute="trailing" secondItem="dAR-QF-2ra" secondAttribute="trailing" constant="10" id="JHP-O8-jXF"/>
                             <constraint firstAttribute="bottom" secondItem="c2Q-KG-dKN" secondAttribute="bottom" constant="15" id="JQW-4p-bCY"/>
                             <constraint firstItem="qqs-mB-4cB" firstAttribute="trailing" secondItem="cEY-MF-fEN" secondAttribute="trailing" id="Jqu-BD-1DZ"/>
                             <constraint firstItem="oEw-FL-iow" firstAttribute="leading" secondItem="I3y-0i-Hgf" secondAttribute="trailing" constant="10" id="KiV-NT-bTt"/>
+                            <constraint firstItem="Sa0-iS-zi2" firstAttribute="centerY" secondItem="Wef-vq-B5L" secondAttribute="centerY" id="REg-7h-WkM"/>
                             <constraint firstItem="6Bo-Mb-ZwI" firstAttribute="leading" secondItem="qqs-mB-4cB" secondAttribute="trailing" constant="10" id="Rq9-fD-s3W"/>
                             <constraint firstItem="cEY-MF-fEN" firstAttribute="top" secondItem="qqs-mB-4cB" secondAttribute="bottom" constant="15" id="UXh-Pa-gtY"/>
                             <constraint firstItem="dAR-QF-2ra" firstAttribute="leading" secondItem="cEY-MF-fEN" secondAttribute="trailing" constant="10" id="ViB-Rk-8rP"/>
@@ -238,6 +266,7 @@
                             <constraint firstItem="Sa0-iS-zi2" firstAttribute="leading" secondItem="nNM-fO-i2f" secondAttribute="trailing" constant="10" id="hK6-s6-4sY"/>
                             <constraint firstItem="nNM-fO-i2f" firstAttribute="centerY" secondItem="Sa0-iS-zi2" secondAttribute="centerY" id="iQW-cA-DEK"/>
                             <constraint firstItem="cEY-MF-fEN" firstAttribute="trailing" secondItem="nNM-fO-i2f" secondAttribute="trailing" id="kZC-UI-TwT"/>
+                            <constraint firstItem="Wef-vq-B5L" firstAttribute="leading" secondItem="Sa0-iS-zi2" secondAttribute="trailing" constant="10" id="lco-dX-fyB"/>
                             <constraint firstItem="cEY-MF-fEN" firstAttribute="centerY" secondItem="dAR-QF-2ra" secondAttribute="centerY" id="oNn-xJ-NZW"/>
                             <constraint firstItem="qqs-mB-4cB" firstAttribute="top" secondItem="dv6-kG-vNa" secondAttribute="top" constant="10" id="rtj-v6-eqh"/>
                             <constraint firstItem="qqs-mB-4cB" firstAttribute="leading" secondItem="dv6-kG-vNa" secondAttribute="leading" constant="10" id="sA3-Wu-C5h"/>

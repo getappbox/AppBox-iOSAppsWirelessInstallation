@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TwoAccountChangePolicyDetails` struct.
 ///
-/// Enabled or disabled the option for team members to link a personal Dropbox
-/// account in addition to their work account to the same computer.
+/// Enabled/disabled option for members to link personal Dropbox account and
+/// team account to same computer.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperContentRemoveFromFolderDetails` struct.
 ///
-/// Removed Paper doc or folder from a folder.
+/// Removed Paper doc/folder from folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -30,16 +30,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// Event unique identifier.
 @property (nonatomic, readonly, copy) NSString *eventUuid;
 
+/// Target asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *targetAssetIndex;
+
+/// Parent asset position in the Assets list.
+@property (nonatomic, readonly) NSNumber *parentAssetIndex;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param eventUuid Event unique identifier.
+/// @param targetAssetIndex Target asset position in the Assets list.
+/// @param parentAssetIndex Parent asset position in the Assets list.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithEventUuid:(NSString *)eventUuid;
+- (instancetype)initWithEventUuid:(NSString *)eventUuid
+                 targetAssetIndex:(NSNumber *)targetAssetIndex
+                 parentAssetIndex:(NSNumber *)parentAssetIndex;
 
 - (instancetype)init NS_UNAVAILABLE;
 

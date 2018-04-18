@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESTemplateFilterBase;
 @class DBFILESListFolderArg;
 @class DBFILESSharedLink;
 
@@ -59,6 +60,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// non-recursive mode is supported for shared link.
 @property (nonatomic, readonly, nullable) DBFILESSharedLink *sharedLink;
 
+/// If set to a valid list of template IDs, `propertyGroups` in
+/// `DBFILESFileMetadata` is set if there exists property data associated with
+/// the file and each of the listed templates.
+@property (nonatomic, readonly, nullable) DBFILEPROPERTIESTemplateFilterBase *includePropertyGroups;
+
 #pragma mark - Constructors
 
 ///
@@ -84,6 +90,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// password-protected, the password must be provided. If this field is present,
 /// `path` in `DBFILESListFolderArg` will be relative to root of the shared
 /// link. Only non-recursive mode is supported for shared link.
+/// @param includePropertyGroups If set to a valid list of template IDs,
+/// `propertyGroups` in `DBFILESFileMetadata` is set if there exists property
+/// data associated with the file and each of the listed templates.
 ///
 /// @return An initialized instance.
 ///
@@ -94,7 +103,8 @@ NS_ASSUME_NONNULL_BEGIN
     includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
               includeMountedFolders:(nullable NSNumber *)includeMountedFolders
                               limit:(nullable NSNumber *)limit
-                         sharedLink:(nullable DBFILESSharedLink *)sharedLink;
+                         sharedLink:(nullable DBFILESSharedLink *)sharedLink
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

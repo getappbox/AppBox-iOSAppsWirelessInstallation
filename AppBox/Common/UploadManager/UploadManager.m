@@ -392,7 +392,7 @@
     ipaFileData = [NSData dataWithContentsOfFile:file];
     fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
-    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO];
+    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil];
     
     [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
         if (result) {
@@ -424,7 +424,6 @@
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
             if (result) {
                 if (self.dbFileType == DBFileTypeIPA){
-                    [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
                     NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
                     [self showStatus:status andShowProgressBar:YES withProgress:-1];
                     
@@ -489,7 +488,7 @@
 
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
-    [[AppDelegate appDelegate] addSessionLog:@"Uploading IPA File..."];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
     
     //Upload large ipa file with dropbox session api
     if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
@@ -498,7 +497,7 @@
     }
     
     //uploadUrl:path inputUrl:file
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil inputUrl:file]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {
@@ -521,7 +520,6 @@
               }
               //IPA file uploaded and creating shared url
               else if (self.dbFileType == DBFileTypeIPA){
-                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"IPA file uploaded."];
                   NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
                   
@@ -530,7 +528,6 @@
               }
               //Manifest file uploaded and creating shared url
               else if (self.dbFileType == DBFileTypeManifest){
-                  [Common showLocalNotificationWithTitle:@"AppBox" andMessage:@"Manifest file uploaded."];
                   NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
                   

@@ -22,4 +22,8 @@
     return (self && ([self.pathExtension.lowercaseString isEqualToString:@"xcodeproj"] || [self.pathExtension.lowercaseString isEqualToString:@"xcworkspace"] || [self.pathExtension.lowercaseString isEqualToString:@"ipa" ]));
 }
 
+-(NSString *)stringValue {
+    return [NSString stringWithFormat:@"%@",self];
+}
+
 @end

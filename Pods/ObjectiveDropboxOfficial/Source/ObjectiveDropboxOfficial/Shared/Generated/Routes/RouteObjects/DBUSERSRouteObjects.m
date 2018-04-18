@@ -5,6 +5,7 @@
 ///
 
 #import "DBUSERSRouteObjects.h"
+#import "DBCOMMONRootInfo.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBUSERSAccount.h"

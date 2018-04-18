@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `EmmRefreshAuthTokenDetails` struct.
 ///
-/// Refreshed the auth token used for setting up enterprise mobility management.
+/// Refreshed auth token used for setting up enterprise mobility management.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

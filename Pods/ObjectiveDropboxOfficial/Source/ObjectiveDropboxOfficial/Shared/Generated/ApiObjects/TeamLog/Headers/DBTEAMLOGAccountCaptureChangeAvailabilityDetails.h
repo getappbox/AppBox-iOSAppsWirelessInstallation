@@ -18,8 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `AccountCaptureChangeAvailabilityDetails` struct.
 ///
-/// Granted or revoked the option to enable account capture on domains belonging
-/// to the team.
+/// Granted/revoked option to enable account capture on team domains.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

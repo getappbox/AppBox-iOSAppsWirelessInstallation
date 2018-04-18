@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SharedFolderUnmountDetails` struct.
 ///
-/// Deleted a shared folder from Dropbox.
+/// Deleted shared folder from Dropbox.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -27,23 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset position in the Assets list.
-@property (nonatomic, readonly) NSNumber *targetAssetIndex;
-
-/// Original shared folder name.
-@property (nonatomic, readonly, copy) NSString *originalFolderName;
-
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetAssetIndex Target asset position in the Assets list.
-/// @param originalFolderName Original shared folder name.
-///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex originalFolderName:(NSString *)originalFolderName;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

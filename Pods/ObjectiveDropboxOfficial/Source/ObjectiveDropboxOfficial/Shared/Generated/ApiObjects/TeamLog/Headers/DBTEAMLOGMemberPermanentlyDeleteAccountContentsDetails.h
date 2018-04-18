@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberPermanentlyDeleteAccountContentsDetails` struct.
 ///
-/// Permanently deleted contents of a removed team member account.
+/// Permanently deleted contents of deleted team member account.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

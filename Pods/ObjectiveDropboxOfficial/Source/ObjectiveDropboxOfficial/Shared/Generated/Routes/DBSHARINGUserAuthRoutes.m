@@ -12,6 +12,7 @@
 #import "DBASYNCPollResultBase.h"
 #import "DBFILESLookupError.h"
 #import "DBRequestErrors.h"
+#import "DBSHARINGAccessInheritance.h"
 #import "DBSHARINGAccessLevel.h"
 #import "DBSHARINGAclUpdatePolicy.h"
 #import "DBSHARINGAddFileMemberArgs.h"
@@ -101,6 +102,8 @@
 #import "DBSHARINGRevokeSharedLinkArg.h"
 #import "DBSHARINGRevokeSharedLinkError.h"
 #import "DBSHARINGRouteObjects.h"
+#import "DBSHARINGSetAccessInheritanceArg.h"
+#import "DBSHARINGSetAccessInheritanceError.h"
 #import "DBSHARINGShareFolderArg.h"
 #import "DBSHARINGShareFolderArgBase.h"
 #import "DBSHARINGShareFolderError.h"
@@ -591,6 +594,22 @@
 - (DBRpcTask *)revokeSharedLink:(NSString *)url {
   DBRoute *route = DBSHARINGRouteObjects.DBSHARINGRevokeSharedLink;
   DBSHARINGRevokeSharedLinkArg *arg = [[DBSHARINGRevokeSharedLinkArg alloc] initWithUrl:url];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)setAccessInheritance:(NSString *)sharedFolderId {
+  DBRoute *route = DBSHARINGRouteObjects.DBSHARINGSetAccessInheritance;
+  DBSHARINGSetAccessInheritanceArg *arg =
+      [[DBSHARINGSetAccessInheritanceArg alloc] initWithSharedFolderId:sharedFolderId];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)setAccessInheritance:(NSString *)sharedFolderId
+                  accessInheritance:(DBSHARINGAccessInheritance *)accessInheritance {
+  DBRoute *route = DBSHARINGRouteObjects.DBSHARINGSetAccessInheritance;
+  DBSHARINGSetAccessInheritanceArg *arg =
+      [[DBSHARINGSetAccessInheritanceArg alloc] initWithSharedFolderId:sharedFolderId
+                                                     accessInheritance:accessInheritance];
   return [self.client requestRpc:route arg:arg];
 }
 

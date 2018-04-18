@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGParticipantLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGParticipantLogInfo` union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag) {
-  /// User details.
+  /// A user with a Dropbox account.
   DBTEAMLOGParticipantLogInfoUser,
 
   /// Group details.
@@ -46,8 +46,8 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag) {
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGParticipantLogInfoTag tag;
 
-/// User details. @note Ensure the `isUser` method returns true before
-/// accessing, otherwise a runtime exception will be raised.
+/// A user with a Dropbox account. @note Ensure the `isUser` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGUserLogInfo *user;
 
 /// Group details. @note Ensure the `isGroup` method returns true before
@@ -59,9 +59,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag) {
 ///
 /// Initializes union class with tag state of "user".
 ///
-/// Description of the "user" tag state: User details.
+/// Description of the "user" tag state: A user with a Dropbox account.
 ///
-/// @param user User details.
+/// @param user A user with a Dropbox account.
 ///
 /// @return An initialized instance.
 ///

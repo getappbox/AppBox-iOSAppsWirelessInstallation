@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperDocUnresolveCommentDetails` struct.
 ///
-/// Unresolved a Paper doc comment.
+/// Unresolved Paper doc comment.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

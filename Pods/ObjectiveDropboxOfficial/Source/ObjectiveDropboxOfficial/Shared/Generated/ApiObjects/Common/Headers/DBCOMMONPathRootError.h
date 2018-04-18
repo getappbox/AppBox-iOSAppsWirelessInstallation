@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBCOMMONInvalidPathRootError;
 @class DBCOMMONPathRootError;
+@class DBCOMMONRootInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBCOMMONPathRootErrorTag` enum type represents the possible tag states
 /// with which the `DBCOMMONPathRootError` union can exist.
 typedef NS_ENUM(NSInteger, DBCOMMONPathRootErrorTag) {
-  /// The path root id value in Dropbox-API-Path-Root header is no longer
-  /// valid.
-  DBCOMMONPathRootErrorInvalid,
+  /// The root namespace id in Dropbox-API-Path-Root header is not valid. The
+  /// value of this error is use's latest root info.
+  DBCOMMONPathRootErrorInvalidRoot,
 
-  /// You don't have permission to access the path root id in
+  /// You don't have permission to access the namespace id in
   /// Dropbox-API-Path-Root  header.
   DBCOMMONPathRootErrorNoPermission,
 
@@ -45,31 +45,33 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootErrorTag) {
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBCOMMONPathRootErrorTag tag;
 
-/// The path root id value in Dropbox-API-Path-Root header is no longer valid.
-/// @note Ensure the `isInvalid` method returns true before accessing, otherwise
-/// a runtime exception will be raised.
-@property (nonatomic, readonly) DBCOMMONInvalidPathRootError *invalid;
+/// The root namespace id in Dropbox-API-Path-Root header is not valid. The
+/// value of this error is use's latest root info. @note Ensure the
+/// `isInvalidRoot` method returns true before accessing, otherwise a runtime
+/// exception will be raised.
+@property (nonatomic, readonly) DBCOMMONRootInfo *invalidRoot;
 
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "invalid".
+/// Initializes union class with tag state of "invalid_root".
 ///
-/// Description of the "invalid" tag state: The path root id value in
-/// Dropbox-API-Path-Root header is no longer valid.
+/// Description of the "invalid_root" tag state: The root namespace id in
+/// Dropbox-API-Path-Root header is not valid. The value of this error is use's
+/// latest root info.
 ///
-/// @param invalid The path root id value in Dropbox-API-Path-Root header is no
-/// longer valid.
+/// @param invalidRoot The root namespace id in Dropbox-API-Path-Root header is
+/// not valid. The value of this error is use's latest root info.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithInvalid:(DBCOMMONInvalidPathRootError *)invalid;
+- (instancetype)initWithInvalidRoot:(DBCOMMONRootInfo *)invalidRoot;
 
 ///
 /// Initializes union class with tag state of "no_permission".
 ///
 /// Description of the "no_permission" tag state: You don't have permission to
-/// access the path root id in Dropbox-API-Path-Root  header.
+/// access the namespace id in Dropbox-API-Path-Root  header.
 ///
 /// @return An initialized instance.
 ///
@@ -87,14 +89,14 @@ typedef NS_ENUM(NSInteger, DBCOMMONPathRootErrorTag) {
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "invalid".
+/// Retrieves whether the union's current tag state has value "invalid_root".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `invalid` property, otherwise a runtime exception will be thrown.
+/// `invalidRoot` property, otherwise a runtime exception will be thrown.
 ///
-/// @return Whether the union's current tag state has value "invalid".
+/// @return Whether the union's current tag state has value "invalid_root".
 ///
-- (BOOL)isInvalid;
+- (BOOL)isInvalidRoot;
 
 ///
 /// Retrieves whether the union's current tag state has value "no_permission".

@@ -39,7 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) DBFILESFolderSharingInfo *sharingInfo;
 
 /// Additional information if the file has custom properties with the property
-/// template specified.
+/// template specified. Note that only properties associated with user-owned
+/// templates, not team-owned templates, can be attached to folders.
 @property (nonatomic, readonly, nullable) NSArray<DBFILEPROPERTIESPropertyGroup *> *propertyGroups;
 
 #pragma mark - Constructors
@@ -66,7 +67,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param sharingInfo Set if the folder is contained in a shared folder or is a
 /// shared folder mount point.
 /// @param propertyGroups Additional information if the file has custom
-/// properties with the property template specified.
+/// properties with the property template specified. Note that only properties
+/// associated with user-owned templates, not team-owned templates, can be
+/// attached to folders.
 ///
 /// @return An initialized instance.
 ///

@@ -8,7 +8,9 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBSHARINGAccessLevel;
 @class DBTEAMLOGSharedContentDownloadDetails;
+@class DBTEAMLOGUserLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SharedContentDownloadDetails` struct.
 ///
-/// Downloaded the shared file or folder.
+/// Downloaded shared file/folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -30,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Shared content link.
 @property (nonatomic, readonly, copy) NSString *sharedContentLink;
 
-/// Sharing permission. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
+/// The shared content owner.
+@property (nonatomic, readonly, nullable) DBTEAMLOGUserLogInfo *sharedContentOwner;
 
-/// Target asset position in the Assets list.
-@property (nonatomic, readonly) NSNumber *targetAssetIndex;
+/// Shared content access level.
+@property (nonatomic, readonly) DBSHARINGAccessLevel *sharedContentAccessLevel;
 
 #pragma mark - Constructors
 
@@ -42,26 +44,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param targetAssetIndex Target asset position in the Assets list.
-/// @param sharingPermission Sharing permission. Might be missing due to
-/// historical data gap.
+/// @param sharedContentAccessLevel Shared content access level.
+/// @param sharedContentOwner The shared content owner.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
-                         targetAssetIndex:(NSNumber *)targetAssetIndex
-                        sharingPermission:(nullable NSString *)sharingPermission;
+                 sharedContentAccessLevel:(DBSHARINGAccessLevel *)sharedContentAccessLevel
+                       sharedContentOwner:(nullable DBTEAMLOGUserLogInfo *)sharedContentOwner;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
 /// @param sharedContentLink Shared content link.
-/// @param targetAssetIndex Target asset position in the Assets list.
+/// @param sharedContentAccessLevel Shared content access level.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink targetAssetIndex:(NSNumber *)targetAssetIndex;
+- (instancetype)initWithSharedContentLink:(NSString *)sharedContentLink
+                 sharedContentAccessLevel:(DBSHARINGAccessLevel *)sharedContentAccessLevel;
 
 - (instancetype)init NS_UNAVAILABLE;
 

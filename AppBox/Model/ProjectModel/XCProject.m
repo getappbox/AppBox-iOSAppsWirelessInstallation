@@ -23,7 +23,7 @@
     [mailString appendFormat:@"&app=%@",self.name];
     [mailString appendFormat:@"&ver=%@",self.version];
     [mailString appendFormat:@"&build=%@",self.build];
-    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.absoluteString];
+    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.stringValue];
     [mailString appendFormat:@"&devmsg=%@",message];
     return mailString;
 }
@@ -76,6 +76,7 @@
     [exportOption setValue:[NSNumber numberWithBool:[UserData uploadSymbols]] forKey:@"uploadSymbols"];
     [exportOption setValue:[NSNumber numberWithBool:[UserData compileBitcode]] forKey:@"compileBitcode"];
     [exportOption setValue:@"automatic" forKey:@"signingStyle"];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Export Options - %@", exportOption]];
     return [exportOption writeToFile:[self.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding] atomically:YES];
 }
 

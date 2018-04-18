@@ -34,11 +34,11 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
   /// Unable to save the uploaded contents to a file.
   DBFILESUploadErrorWithPropertiesPath,
 
-  /// (no description).
-  DBFILESUploadErrorWithPropertiesOther,
+  /// The supplied property group is invalid.
+  DBFILESUploadErrorWithPropertiesPropertiesError,
 
   /// (no description).
-  DBFILESUploadErrorWithPropertiesPropertiesError,
+  DBFILESUploadErrorWithPropertiesOther,
 
 };
 
@@ -50,8 +50,9 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 /// raised.
 @property (nonatomic, readonly) DBFILESUploadWriteFailed *path;
 
-/// (no description). @note Ensure the `isPropertiesError` method returns true
-/// before accessing, otherwise a runtime exception will be raised.
+/// The supplied property group is invalid. @note Ensure the `isPropertiesError`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
 @property (nonatomic, readonly) DBFILEPROPERTIESInvalidPropertyGroupError *propertiesError;
 
 #pragma mark - Constructors
@@ -69,20 +70,23 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 - (instancetype)initWithPath:(DBFILESUploadWriteFailed *)path;
 
 ///
+/// Initializes union class with tag state of "properties_error".
+///
+/// Description of the "properties_error" tag state: The supplied property group
+/// is invalid.
+///
+/// @param propertiesError The supplied property group is invalid.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithOther;
-
-///
-/// Initializes union class with tag state of "properties_error".
-///
-/// @param propertiesError (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -99,13 +103,6 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 - (BOOL)isPath;
 
 ///
-/// Retrieves whether the union's current tag state has value "other".
-///
-/// @return Whether the union's current tag state has value "other".
-///
-- (BOOL)isOther;
-
-///
 /// Retrieves whether the union's current tag state has value
 /// "properties_error".
 ///
@@ -115,6 +112,13 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 /// @return Whether the union's current tag state has value "properties_error".
 ///
 - (BOOL)isPropertiesError;
+
+///
+/// Retrieves whether the union's current tag state has value "other".
+///
+/// @return Whether the union's current tag state has value "other".
+///
+- (BOOL)isOther;
 
 ///
 /// Retrieves string value of union's current tag state.

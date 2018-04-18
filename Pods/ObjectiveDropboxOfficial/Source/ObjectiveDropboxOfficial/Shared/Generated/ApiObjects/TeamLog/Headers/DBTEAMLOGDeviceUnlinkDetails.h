@@ -8,8 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGDeviceLogInfo;
 @class DBTEAMLOGDeviceUnlinkDetails;
+@class DBTEAMLOGSessionLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceUnlinkDetails` struct.
 ///
-/// Disconnected a device.
+/// Disconnected device.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,8 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Device information.
-@property (nonatomic, readonly) DBTEAMLOGDeviceLogInfo *deviceInfo;
+/// Session unique id.
+@property (nonatomic, readonly, nullable) DBTEAMLOGSessionLogInfo *sessionInfo;
+
+/// The device name. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *displayName;
 
 /// True if the user requested to delete data after device unlink, false
 /// otherwise.
@@ -40,13 +43,28 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param deviceInfo Device information.
+/// @param deleteData True if the user requested to delete data after device
+/// unlink, false otherwise.
+/// @param sessionInfo Session unique id.
+/// @param displayName The device name. Might be missing due to historical data
+/// gap.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDeleteData:(NSNumber *)deleteData
+                       sessionInfo:(nullable DBTEAMLOGSessionLogInfo *)sessionInfo
+                       displayName:(nullable NSString *)displayName;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
 /// @param deleteData True if the user requested to delete data after device
 /// unlink, false otherwise.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo deleteData:(NSNumber *)deleteData;
+- (instancetype)initWithDeleteData:(NSNumber *)deleteData;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -48,6 +48,10 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
   /// This endpoint cannot move or delete team folders.
   DBFILESWriteErrorTeamFolder,
 
+  /// There are too many write operations in user's Dropbox. Please retry this
+  /// request.
+  DBFILESWriteErrorTooManyWriteOperations,
+
   /// (no description).
   DBFILESWriteErrorOther,
 
@@ -130,6 +134,16 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 - (instancetype)initWithTeamFolder;
 
 ///
+/// Initializes union class with tag state of "too_many_write_operations".
+///
+/// Description of the "too_many_write_operations" tag state: There are too many
+/// write operations in user's Dropbox. Please retry this request.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTooManyWriteOperations;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -191,6 +205,15 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 /// @return Whether the union's current tag state has value "team_folder".
 ///
 - (BOOL)isTeamFolder;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "too_many_write_operations".
+///
+/// @return Whether the union's current tag state has value
+/// "too_many_write_operations".
+///
+- (BOOL)isTooManyWriteOperations;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

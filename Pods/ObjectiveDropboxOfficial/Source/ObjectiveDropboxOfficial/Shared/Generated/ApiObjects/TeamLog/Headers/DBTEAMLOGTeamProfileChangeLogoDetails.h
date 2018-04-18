@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TeamProfileChangeLogoDetails` struct.
 ///
-/// Changed the team logo to be displayed on shared link headers.
+/// Changed team logo displayed on shared link headers.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

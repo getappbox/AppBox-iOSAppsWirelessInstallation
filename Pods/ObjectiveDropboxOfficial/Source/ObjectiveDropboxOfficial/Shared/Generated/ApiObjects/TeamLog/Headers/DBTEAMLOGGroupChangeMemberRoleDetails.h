@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `GroupChangeMemberRoleDetails` struct.
 ///
-/// Changed the manager permissions belonging to a group member.
+/// Changed manager permissions of group member.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

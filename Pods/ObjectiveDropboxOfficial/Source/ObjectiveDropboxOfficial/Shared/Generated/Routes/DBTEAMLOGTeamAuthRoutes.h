@@ -35,7 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Retrieves team events. Permission : Team Auditing.
+/// Retrieves team events. Events have a lifespan of two years. Events older than two years will not be returned. Many
+/// attributes note 'may be missing due to historical data gap'. Permission : Team Auditing.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLOGGetTeamEventsResult` object on success or
@@ -44,7 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (DBRpcTask<DBTEAMLOGGetTeamEventsResult *, DBTEAMLOGGetTeamEventsError *> *)getEvents;
 
 ///
-/// Retrieves team events. Permission : Team Auditing.
+/// Retrieves team events. Events have a lifespan of two years. Events older than two years will not be returned. Many
+/// attributes note 'may be missing due to historical data gap'. Permission : Team Auditing.
 ///
 /// @param limit Number of results to return per call.
 /// @param accountId Filter the events by account ID. Return ony events with this account_id as either Actor, Context,

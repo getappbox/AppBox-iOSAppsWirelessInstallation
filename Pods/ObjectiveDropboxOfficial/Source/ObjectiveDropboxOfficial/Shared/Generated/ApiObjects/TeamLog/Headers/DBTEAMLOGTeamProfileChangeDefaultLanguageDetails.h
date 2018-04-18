@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TeamProfileChangeDefaultLanguageDetails` struct.
 ///
-/// Changed the default language for the team.
+/// Changed default language for team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

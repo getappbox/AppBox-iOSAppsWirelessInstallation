@@ -18,6 +18,9 @@
 #import "DBFILEPROPERTIESPropertyGroupTemplate.h"
 #import "DBFILEPROPERTIESTemplateError.h"
 #import "DBFILEPROPERTIESUpdateTemplateResult.h"
+#import "DBFILESContentSyncSetting.h"
+#import "DBFILESSyncSetting.h"
+#import "DBFILESSyncSettingsError.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTEAMActiveWebSession.h"
@@ -32,6 +35,12 @@
 #import "DBTEAMDateRangeError.h"
 #import "DBTEAMDesktopClientSession.h"
 #import "DBTEAMDevicesActive.h"
+#import "DBTEAMExcludedUsersListContinueError.h"
+#import "DBTEAMExcludedUsersListError.h"
+#import "DBTEAMExcludedUsersListResult.h"
+#import "DBTEAMExcludedUsersUpdateError.h"
+#import "DBTEAMExcludedUsersUpdateResult.h"
+#import "DBTEAMExcludedUsersUpdateStatus.h"
 #import "DBTEAMFeatureValue.h"
 #import "DBTEAMFeaturesGetValuesBatchError.h"
 #import "DBTEAMFeaturesGetValuesBatchResult.h"
@@ -74,6 +83,7 @@
 #import "DBTEAMMemberAddResult.h"
 #import "DBTEAMMemberDevices.h"
 #import "DBTEAMMemberLinkedApps.h"
+#import "DBTEAMMemberProfile.h"
 #import "DBTEAMMemberSelectorError.h"
 #import "DBTEAMMembersAddJobStatus.h"
 #import "DBTEAMMembersAddLaunch.h"
@@ -103,6 +113,7 @@
 #import "DBTEAMRevokeLinkedAppBatchResult.h"
 #import "DBTEAMRevokeLinkedAppError.h"
 #import "DBTEAMRevokeLinkedAppStatus.h"
+#import "DBTEAMSetCustomQuotaError.h"
 #import "DBTEAMStorageBucket.h"
 #import "DBTEAMTeamAuthRoutes.h"
 #import "DBTEAMTeamFolderAccessError.h"
@@ -121,6 +132,7 @@
 #import "DBTEAMTeamFolderRenameError.h"
 #import "DBTEAMTeamFolderStatus.h"
 #import "DBTEAMTeamFolderTeamSharedDropboxError.h"
+#import "DBTEAMTeamFolderUpdateSyncSettingsError.h"
 #import "DBTEAMTeamGetInfoResult.h"
 #import "DBTEAMTeamMemberInfo.h"
 #import "DBTEAMTeamMemberProfile.h"
@@ -158,6 +170,10 @@ static DBRoute *DBTEAMLinkedAppsListMembersLinkedApps;
 static DBRoute *DBTEAMLinkedAppsListTeamLinkedApps;
 static DBRoute *DBTEAMLinkedAppsRevokeLinkedApp;
 static DBRoute *DBTEAMLinkedAppsRevokeLinkedAppBatch;
+static DBRoute *DBTEAMMemberSpaceLimitsExcludedUsersAdd;
+static DBRoute *DBTEAMMemberSpaceLimitsExcludedUsersList;
+static DBRoute *DBTEAMMemberSpaceLimitsExcludedUsersListContinue;
+static DBRoute *DBTEAMMemberSpaceLimitsExcludedUsersRemove;
 static DBRoute *DBTEAMMemberSpaceLimitsGetCustomQuota;
 static DBRoute *DBTEAMMemberSpaceLimitsRemoveCustomQuota;
 static DBRoute *DBTEAMMemberSpaceLimitsSetCustomQuota;
@@ -193,6 +209,7 @@ static DBRoute *DBTEAMTeamFolderList;
 static DBRoute *DBTEAMTeamFolderListContinue;
 static DBRoute *DBTEAMTeamFolderPermanentlyDelete;
 static DBRoute *DBTEAMTeamFolderRename;
+static DBRoute *DBTEAMTeamFolderUpdateSyncSettings;
 static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
 
 + (DBRoute *)DBTEAMDevicesListMemberDevices {
@@ -637,6 +654,79 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   return DBTEAMLinkedAppsRevokeLinkedAppBatch;
 }
 
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersAdd {
+  if (!DBTEAMMemberSpaceLimitsExcludedUsersAdd) {
+    DBTEAMMemberSpaceLimitsExcludedUsersAdd = [[DBRoute alloc] init:@"member_space_limits/excluded_users/add"
+                                                         namespace_:@"team"
+                                                         deprecated:@NO
+                                                         resultType:[DBTEAMExcludedUsersUpdateResult class]
+                                                          errorType:[DBTEAMExcludedUsersUpdateError class]
+                                                              attrs:@{
+                                                                @"auth" : @"team",
+                                                                @"host" : @"api",
+                                                                @"style" : @"rpc"
+                                                              }
+                                              dataStructSerialBlock:nil
+                                            dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMemberSpaceLimitsExcludedUsersAdd;
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersList {
+  if (!DBTEAMMemberSpaceLimitsExcludedUsersList) {
+    DBTEAMMemberSpaceLimitsExcludedUsersList = [[DBRoute alloc] init:@"member_space_limits/excluded_users/list"
+                                                          namespace_:@"team"
+                                                          deprecated:@NO
+                                                          resultType:[DBTEAMExcludedUsersListResult class]
+                                                           errorType:[DBTEAMExcludedUsersListError class]
+                                                               attrs:@{
+                                                                 @"auth" : @"team",
+                                                                 @"host" : @"api",
+                                                                 @"style" : @"rpc"
+                                                               }
+                                               dataStructSerialBlock:nil
+                                             dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMemberSpaceLimitsExcludedUsersList;
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersListContinue {
+  if (!DBTEAMMemberSpaceLimitsExcludedUsersListContinue) {
+    DBTEAMMemberSpaceLimitsExcludedUsersListContinue =
+        [[DBRoute alloc] init:@"member_space_limits/excluded_users/list/continue"
+                         namespace_:@"team"
+                         deprecated:@NO
+                         resultType:[DBTEAMExcludedUsersListResult class]
+                          errorType:[DBTEAMExcludedUsersListContinueError class]
+                              attrs:@{
+                                @"auth" : @"team",
+                                @"host" : @"api",
+                                @"style" : @"rpc"
+                              }
+              dataStructSerialBlock:nil
+            dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMemberSpaceLimitsExcludedUsersListContinue;
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersRemove {
+  if (!DBTEAMMemberSpaceLimitsExcludedUsersRemove) {
+    DBTEAMMemberSpaceLimitsExcludedUsersRemove = [[DBRoute alloc] init:@"member_space_limits/excluded_users/remove"
+                                                            namespace_:@"team"
+                                                            deprecated:@NO
+                                                            resultType:[DBTEAMExcludedUsersUpdateResult class]
+                                                             errorType:[DBTEAMExcludedUsersUpdateError class]
+                                                                 attrs:@{
+                                                                   @"auth" : @"team",
+                                                                   @"host" : @"api",
+                                                                   @"style" : @"rpc"
+                                                                 }
+                                                 dataStructSerialBlock:nil
+                                               dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMemberSpaceLimitsExcludedUsersRemove;
+}
+
 + (DBRoute *)DBTEAMMemberSpaceLimitsGetCustomQuota {
   if (!DBTEAMMemberSpaceLimitsGetCustomQuota) {
     DBTEAMMemberSpaceLimitsGetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/get_custom_quota"
@@ -689,7 +779,7 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
         namespace_:@"team"
         deprecated:@NO
         resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
-        errorType:[DBTEAMCustomQuotaError class]
+        errorType:[DBTEAMSetCustomQuotaError class]
         attrs:@{
           @"auth" : @"team",
           @"host" : @"api",
@@ -1290,6 +1380,24 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                            dataStructDeserialBlock:nil];
   }
   return DBTEAMTeamFolderRename;
+}
+
++ (DBRoute *)DBTEAMTeamFolderUpdateSyncSettings {
+  if (!DBTEAMTeamFolderUpdateSyncSettings) {
+    DBTEAMTeamFolderUpdateSyncSettings = [[DBRoute alloc] init:@"team_folder/update_sync_settings"
+                                                    namespace_:@"team"
+                                                    deprecated:@NO
+                                                    resultType:[DBTEAMTeamFolderMetadata class]
+                                                     errorType:[DBTEAMTeamFolderUpdateSyncSettingsError class]
+                                                         attrs:@{
+                                                           @"auth" : @"team",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+  }
+  return DBTEAMTeamFolderUpdateSyncSettings;
 }
 
 + (DBRoute *)DBTEAMTokenGetAuthenticatedAdmin {

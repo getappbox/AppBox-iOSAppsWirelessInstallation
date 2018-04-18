@@ -10,7 +10,6 @@
 
 @class DBTEAMLOGAccessMethodLogInfo;
 @class DBTEAMLOGGeoLocationLogInfo;
-@class DBTEAMLOGHostLogInfo;
 @class DBTEAMLOGOriginLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,9 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Geographic location details.
 @property (nonatomic, readonly, nullable) DBTEAMLOGGeoLocationLogInfo *geoLocation;
 
-/// Host details.
-@property (nonatomic, readonly, nullable) DBTEAMLOGHostLogInfo *host;
-
 /// The method that was used to perform the action.
 @property (nonatomic, readonly) DBTEAMLOGAccessMethodLogInfo *accessMethod;
 
@@ -46,13 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param accessMethod The method that was used to perform the action.
 /// @param geoLocation Geographic location details.
-/// @param host Host details.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAccessMethod:(DBTEAMLOGAccessMethodLogInfo *)accessMethod
-                         geoLocation:(nullable DBTEAMLOGGeoLocationLogInfo *)geoLocation
-                                host:(nullable DBTEAMLOGHostLogInfo *)host;
+                         geoLocation:(nullable DBTEAMLOGGeoLocationLogInfo *)geoLocation;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

@@ -341,6 +341,9 @@
                                         <buttonCell key="cell" type="push" title="Upload IPA" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EI8-jG-NBh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemLight" size="15"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                         </buttonCell>
                                         <connections>
                                             <action selector="actionButtonTapped:" target="lct-wo-jYo" id="P46-nN-7f9"/>
@@ -1028,6 +1031,9 @@ Gw
                                 <buttonCell key="cell" type="push" title="Login" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6tM-gW-nVX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="buttonLoginTapped:" target="PbW-uV-2L2" id="k19-SS-9Lq"/>
@@ -1451,6 +1457,9 @@ Gw
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RqC-bG-I5D">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                         </buttonCell>
                                         <connections>
                                             <action selector="openURLButtonTapped:" target="xJf-6e-3AH" id="ZdD-46-xGk"/>
@@ -1553,6 +1562,10 @@ Gw
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="yBK-zw-06v">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="deleteBuildButtonTapped:" target="xJf-6e-3AH" id="Q6Y-pP-6BZ"/>
@@ -1819,6 +1832,9 @@ Gw
                                 <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U3I-vl-IWy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="buttonSaveTapped:" target="n1u-76-r4M" id="E0h-bv-gwE"/>
@@ -1931,6 +1947,19 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="550" height="115"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yjb-Ai-pHD">
+                                <rect key="frame" x="10" y="45" width="530" height="31"/>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XB5-fc-FCv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonOpenURLAction:" target="dq2-4K-v2z" id="KJB-vY-llm"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ui-cf-b7U">
                                 <rect key="frame" x="4" y="3" width="148" height="36"/>
                                 <constraints>
@@ -1952,6 +1981,9 @@ Gw
                                 <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iOf-2L-VzI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="buttonCloseTapped:" target="dq2-4K-v2z" id="MFE-u4-ph6"/>
@@ -1973,7 +2005,7 @@ Gw
                                 <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" id="2jf-AI-4Wx">
                                     <font key="font" metaFont="systemThin" size="26"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.92931067943572998" green="0.92946994304656982" blue="0.92930072546005249" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2Q-Fd-lUk">
@@ -2004,15 +2036,19 @@ Gw
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="CRC-NK-qVo"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="centerY" secondItem="IRS-6c-DTS" secondAttribute="centerY" id="CTG-vm-7Im"/>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="bottom" secondItem="fh5-NH-4vK" secondAttribute="bottom" id="Ch0-py-Oqs"/>
+                            <constraint firstItem="yjb-Ai-pHD" firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" id="HyA-nQ-iAg"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Kgm-9b-oHh"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="q2Q-Fd-lUk" secondAttribute="top" id="L0j-IF-PTp"/>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="top" secondItem="fh5-NH-4vK" secondAttribute="top" id="Neu-oE-BGZ"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="SSZ-cE-eOL"/>
                             <constraint firstAttribute="trailing" secondItem="IRS-6c-DTS" secondAttribute="trailing" constant="10" id="U37-G7-Ws4"/>
+                            <constraint firstItem="yjb-Ai-pHD" firstAttribute="leading" secondItem="n7a-6Z-Rsw" secondAttribute="leading" id="Xfp-2i-bBr"/>
                             <constraint firstAttribute="bottom" secondItem="4Ui-cf-b7U" secondAttribute="bottom" constant="10" id="fWh-L7-YQl"/>
                             <constraint firstAttribute="trailing" secondItem="7Ou-Ey-jkC" secondAttribute="trailing" constant="10" id="gqg-In-9mB"/>
                             <constraint firstItem="IRS-6c-DTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fh5-NH-4vK" secondAttribute="trailing" constant="50" id="gre-ni-EYg"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="bottom" secondItem="q2Q-Fd-lUk" secondAttribute="bottom" id="nuN-hJ-td8"/>
+                            <constraint firstItem="yjb-Ai-pHD" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="top" id="pHj-93-7fF"/>
+                            <constraint firstItem="yjb-Ai-pHD" firstAttribute="bottom" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" id="sJF-EG-WUu"/>
                             <constraint firstItem="fh5-NH-4vK" firstAttribute="leading" secondItem="q2Q-Fd-lUk" secondAttribute="trailing" constant="10" id="tRe-kp-lh8"/>
                             <constraint firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" constant="10" id="whj-HD-7sC"/>
                             <constraint firstItem="7Ou-Ey-jkC" firstAttribute="top" secondItem="6cG-sr-Ub0" secondAttribute="top" constant="10" id="xAb-wu-E9f"/>
@@ -2062,6 +2098,9 @@ Gw
                                 <buttonCell key="cell" type="push" title="X" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gaZ-72-mhP">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="buttonCloseTapped:" target="YHW-mV-vBN" id="7dQ-Gc-8Ks"/>

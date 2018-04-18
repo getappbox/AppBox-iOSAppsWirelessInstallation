@@ -77,6 +77,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
   /// The email address of the user is too long to be disabled.
   DBTEAMMembersRemoveErrorEmailAddressTooLongToBeDisabled,
 
+  /// Cannot keep account of an invited user.
+  DBTEAMMembersRemoveErrorCannotKeepInvitedUserAccount,
+
 };
 
 /// Represents the union's current tag state.
@@ -237,6 +240,17 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 ///
 - (instancetype)initWithEmailAddressTooLongToBeDisabled;
 
+///
+/// Initializes union class with tag state of
+/// "cannot_keep_invited_user_account".
+///
+/// Description of the "cannot_keep_invited_user_account" tag state: Cannot keep
+/// account of an invited user.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithCannotKeepInvitedUserAccount;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
@@ -369,6 +383,15 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersRemoveErrorTag) {
 /// "email_address_too_long_to_be_disabled".
 ///
 - (BOOL)isEmailAddressTooLongToBeDisabled;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "cannot_keep_invited_user_account".
+///
+/// @return Whether the union's current tag state has value
+/// "cannot_keep_invited_user_account".
+///
+- (BOOL)isCannotKeepInvitedUserAccount;
 
 ///
 /// Retrieves string value of union's current tag state.

@@ -18,8 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceApprovalsChangeOverageActionDetails` struct.
 ///
-/// Changed the action taken when a team member is already over the limits (e.g
-/// when they join the team, an admin lowers limits, etc.).
+/// Changed device approvals setting when member is over limit.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

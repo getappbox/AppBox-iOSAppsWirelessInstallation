@@ -37,8 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The type of this namespace.
 @property (nonatomic, readonly) DBTEAMNamespaceType *namespaceType;
 
-/// If this is a team member folder, the ID of the team member. Otherwise, this
-/// field is not present.
+/// If this is a team member or app folder, the ID of the owning team member.
+/// Otherwise, this field is not present.
 @property (nonatomic, readonly, copy, nullable) NSString *teamMemberId;
 
 #pragma mark - Constructors
@@ -49,8 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param name The name of this namespace.
 /// @param namespaceId The ID of this namespace.
 /// @param namespaceType The type of this namespace.
-/// @param teamMemberId If this is a team member folder, the ID of the team
-/// member. Otherwise, this field is not present.
+/// @param teamMemberId If this is a team member or app folder, the ID of the
+/// owning team member. Otherwise, this field is not present.
 ///
 /// @return An initialized instance.
 ///

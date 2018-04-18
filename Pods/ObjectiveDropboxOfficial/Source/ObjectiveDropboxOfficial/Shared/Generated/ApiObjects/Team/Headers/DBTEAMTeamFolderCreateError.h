@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILESSyncSettingsError;
 @class DBTEAMTeamFolderCreateError;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -37,6 +38,9 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderCreateErrorTag) {
   /// The provided name cannot be used because it is reserved.
   DBTEAMTeamFolderCreateErrorFolderNameReserved,
 
+  /// An error occurred setting the sync settings.
+  DBTEAMTeamFolderCreateErrorSyncSettingsError,
+
   /// (no description).
   DBTEAMTeamFolderCreateErrorOther,
 
@@ -44,6 +48,11 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderCreateErrorTag) {
 
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMTeamFolderCreateErrorTag tag;
+
+/// An error occurred setting the sync settings. @note Ensure the
+/// `isSyncSettingsError` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
+@property (nonatomic, readonly) DBFILESSyncSettingsError *syncSettingsError;
 
 #pragma mark - Constructors
 
@@ -76,6 +85,18 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderCreateErrorTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithFolderNameReserved;
+
+///
+/// Initializes union class with tag state of "sync_settings_error".
+///
+/// Description of the "sync_settings_error" tag state: An error occurred
+/// setting the sync settings.
+///
+/// @param syncSettingsError An error occurred setting the sync settings.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSyncSettingsError:(DBFILESSyncSettingsError *)syncSettingsError;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -114,6 +135,18 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderCreateErrorTag) {
 /// "folder_name_reserved".
 ///
 - (BOOL)isFolderNameReserved;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "sync_settings_error".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `syncSettingsError` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "sync_settings_error".
+///
+- (BOOL)isSyncSettingsError;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

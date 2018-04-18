@@ -2,6 +2,7 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBCOMMONPathRoot.h"
 #import <Foundation/Foundation.h>
 
 @class DBTransportBaseConfig;
@@ -31,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// An additional authentication header field used when a team app with the appropriate permissions "performs" user API
 /// actions on behalf of a team member.
 @property (nonatomic, readonly, copy, nullable) NSString *asMemberId;
+
+/// The value of path root object which will be used as Dropbox-Api-Path-Root header.
+@property (nonatomic, readonly, copy, nullable) DBCOMMONPathRoot *pathRoot;
 
 /// Additional HTTP headers to be injected into each client request.
 @property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, NSString *> *additionalHeaders;

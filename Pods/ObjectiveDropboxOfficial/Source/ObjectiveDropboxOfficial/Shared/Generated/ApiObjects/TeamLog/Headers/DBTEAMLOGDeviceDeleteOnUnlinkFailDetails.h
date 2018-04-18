@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGDeviceDeleteOnUnlinkFailDetails;
-@class DBTEAMLOGDeviceLogInfo;
+@class DBTEAMLOGSessionLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceDeleteOnUnlinkFailDetails` struct.
 ///
-/// Failed to delete all files from an unlinked device.
+/// Failed to delete all files from unlinked device.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,8 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Device information.
-@property (nonatomic, readonly) DBTEAMLOGDeviceLogInfo *deviceInfo;
+/// Session unique id. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGSessionLogInfo *sessionInfo;
+
+/// The device name. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *displayName;
 
 /// The number of times that remote file deletion failed.
 @property (nonatomic, readonly) NSNumber *numFailures;
@@ -39,12 +42,27 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param deviceInfo Device information.
+/// @param numFailures The number of times that remote file deletion failed.
+/// @param sessionInfo Session unique id. Might be missing due to historical
+/// data gap.
+/// @param displayName The device name. Might be missing due to historical data
+/// gap.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNumFailures:(NSNumber *)numFailures
+                        sessionInfo:(nullable DBTEAMLOGSessionLogInfo *)sessionInfo
+                        displayName:(nullable NSString *)displayName;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
 /// @param numFailures The number of times that remote file deletion failed.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo numFailures:(NSNumber *)numFailures;
+- (instancetype)initWithNumFailures:(NSNumber *)numFailures;
 
 - (instancetype)init NS_UNAVAILABLE;
 

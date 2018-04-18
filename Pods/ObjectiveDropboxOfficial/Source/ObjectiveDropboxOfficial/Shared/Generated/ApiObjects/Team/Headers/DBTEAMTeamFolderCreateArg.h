@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILESSyncSettingArg;
 @class DBTEAMTeamFolderCreateArg;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,10 +29,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// Name for the new team folder.
 @property (nonatomic, readonly, copy) NSString *name;
 
+/// The sync setting to apply to this team folder. Only permitted if the team
+/// has team selective sync enabled.
+@property (nonatomic, readonly, nullable) DBFILESSyncSettingArg *syncSetting;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param name Name for the new team folder.
+/// @param syncSetting The sync setting to apply to this team folder. Only
+/// permitted if the team has team selective sync enabled.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithName:(NSString *)name syncSetting:(nullable DBFILESSyncSettingArg *)syncSetting;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param name Name for the new team folder.
 ///

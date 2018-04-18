@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `EmmChangePolicyDetails` struct.
 ///
-/// Enabled or disabled enterprise mobility management for team members.
+/// Enabled/disabled enterprise mobility management for members.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
