@@ -23,7 +23,7 @@
     [mailString appendFormat:@"&app=%@",self.name];
     [mailString appendFormat:@"&ver=%@",self.version];
     [mailString appendFormat:@"&build=%@",self.build];
-    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.absoluteString];
+    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.stringValue];
     [mailString appendFormat:@"&devmsg=%@",message];
     return mailString;
 }

@@ -50,6 +50,7 @@
 		E101D2BE200DE7E00062078B /* xcpretty in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D22F200DE0170062078B /* xcpretty */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
+		E114C46720872AA5008FC59C /* NSImage+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = E114C46620872AA5008FC59C /* NSImage+Image.m */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */ = {isa = PBXBuildFile; fileRef = E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
@@ -294,6 +295,8 @@
 		E101D25C200DE0170062078B /* version.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = version.rb; sourceTree = "<group>"; };
 		E101D25D200DE0170062078B /* xcpretty.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = xcpretty.rb; sourceTree = "<group>"; };
 		E10B82211DF0498600BBE0CD /* TeamIDScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TeamIDScript.sh; sourceTree = "<group>"; };
+		E114C46520872AA5008FC59C /* NSImage+Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+Image.h"; sourceTree = "<group>"; };
+		E114C46620872AA5008FC59C /* NSImage+Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Image.m"; sourceTree = "<group>"; };
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
 		E119EF5F1E3735EA00A7798E /* XCodePath.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XCodePath.sh; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 				DB1C84402079F54E007AC74C /* NSString+String.m */,
 				DB5385682083622A004BFC84 /* NSURL+URL.h */,
 				DB5385692083622A004BFC84 /* NSURL+URL.m */,
+				E114C46520872AA5008FC59C /* NSImage+Image.h */,
+				E114C46620872AA5008FC59C /* NSImage+Image.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1491,6 +1496,7 @@
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
 				E1853392200E084500E88529 /* ABLog.m in Sources */,
+				E114C46720872AA5008FC59C /* NSImage+Image.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
