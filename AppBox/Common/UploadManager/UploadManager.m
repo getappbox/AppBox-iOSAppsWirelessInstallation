@@ -488,7 +488,7 @@
 
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
-    [[AppDelegate appDelegate] addSessionLog:@"Uploading IPA File..."];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
     
     //Upload large ipa file with dropbox session api
     if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
