@@ -39,6 +39,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
   DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyLimited,
 
   /// (no description).
+  DBTEAMLOGExtendedVersionHistoryPolicyImplicitlyUnlimited,
+
+  /// (no description).
   DBTEAMLOGExtendedVersionHistoryPolicyOther,
 
 };
@@ -68,6 +71,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithImplicitlyLimited;
+
+///
+/// Initializes union class with tag state of "implicitly_unlimited".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithImplicitlyUnlimited;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -106,6 +116,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGExtendedVersionHistoryPolicyTag) {
 /// "implicitly_limited".
 ///
 - (BOOL)isImplicitlyLimited;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "implicitly_unlimited".
+///
+/// @return Whether the union's current tag state has value
+/// "implicitly_unlimited".
+///
+- (BOOL)isImplicitlyUnlimited;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

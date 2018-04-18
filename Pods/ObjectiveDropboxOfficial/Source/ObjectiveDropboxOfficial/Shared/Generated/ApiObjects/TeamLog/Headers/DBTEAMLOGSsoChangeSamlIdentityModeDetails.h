@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SsoChangeSamlIdentityModeDetails` struct.
 ///
-/// Changed the SAML identity mode for SSO.
+/// Changed SAML identity mode for SSO.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

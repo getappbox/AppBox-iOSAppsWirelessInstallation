@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberSuggestDetails` struct.
 ///
-/// Suggested a new team member to be added to the team.
+/// Suggested person to add to team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -27,14 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
+/// suggested users emails.
+@property (nonatomic, readonly) NSArray<NSString *> *suggestedMembers;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
+/// @param suggestedMembers suggested users emails.
+///
 /// @return An initialized instance.
 ///
-- (instancetype)initDefault;
+- (instancetype)initWithSuggestedMembers:(NSArray<NSString *> *)suggestedMembers;
 
 - (instancetype)init NS_UNAVAILABLE;
 

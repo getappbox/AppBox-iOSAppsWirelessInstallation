@@ -55,17 +55,23 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
         do {
             ret = unzOpenCurrentFile(zip);
             if (ret != UNZ_OK) {
+                // attempting with an arbitrary password to workaround `unzOpenCurrentFile` limitation on AES encrypted files
+                ret = unzOpenCurrentFilePassword(zip, "");
+                unzCloseCurrentFile(zip);
+                if (ret == UNZ_OK || ret == UNZ_BADPASSWORD) {
+                    return YES;
+                }
                 return NO;
             }
             unz_file_info fileInfo = {};
             ret = unzGetCurrentFileInfo(zip, &fileInfo, NULL, 0, NULL, 0, NULL, 0);
+            unzCloseCurrentFile(zip);
             if (ret != UNZ_OK) {
                 return NO;
             } else if ((fileInfo.flag & 1) == 1) {
                 return YES;
             }
             
-            unzCloseCurrentFile(zip);
             ret = unzGoToNextFile(zip);
         } while (ret == UNZ_OK);
     }
@@ -256,7 +262,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     }
     
     NSDictionary * fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
-    unsigned long long fileSize = [fileAttributes[NSFileSize] unsignedLongLongValue];
+    unsigned long long fileSize = [[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];
     unsigned long long currentPosition = 0;
     
     unz_global_info globalInfo = {};
@@ -359,11 +365,15 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
             
             BOOL fileIsSymbolicLink = _fileIsSymbolicLink(&fileInfo);
             
-            NSString * strPath = [SSZipArchive _filenameStringWithCString:filename size:fileInfo.size_filename];
+            NSString * strPath = [SSZipArchive _filenameStringWithCString:filename
+                                                          version_made_by:fileInfo.version
+                                                     general_purpose_flag:fileInfo.flag
+                                                                     size:fileInfo.size_filename];
             if ([strPath hasPrefix:@"__MACOSX/"]) {
                 // ignoring resource forks: https://superuser.com/questions/104500/what-is-macosx-folder
                 unzCloseCurrentFile(zip);
                 ret = unzGoToNextFile(zip);
+                free(filename);
                 continue;
             }
             if (!strPath.length) {
@@ -483,7 +493,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                                 NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithDictionary:[fileManager attributesOfItemAtPath:fullPath error:nil]];
                                 
                                 // Set the value in the attributes dict
-                                attrs[NSFilePosixPermissions] = permissionsValue;
+                                [attrs setObject:permissionsValue forKey:NSFilePosixPermissions];
                                 
                                 // Update attributes
                                 if (![fileManager setAttributes:attrs ofItemAtPath:fullPath error:nil]) {
@@ -594,8 +604,8 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     if (success && preserveAttributes) {
         NSError * err = nil;
         for (NSDictionary * d in directoriesModificationDates) {
-            if (![[NSFileManager defaultManager] setAttributes:@{NSFileModificationDate: d[@"modDate"]} ofItemAtPath:d[@"path"] error:&err]) {
-                NSLog(@"[SSZipArchive] Set attributes failed for directory: %@.", d[@"path"]);
+            if (![[NSFileManager defaultManager] setAttributes:@{NSFileModificationDate: [d objectForKey:@"modDate"]} ofItemAtPath:[d objectForKey:@"path"] error:&err]) {
+                NSLog(@"[SSZipArchive] Set attributes failed for directory: %@.", [d objectForKey:@"path"]);
             }
             if (err) {
                 NSLog(@"[SSZipArchive] Error setting directory file modification date attribute: %@", err.localizedDescription);
@@ -855,28 +865,56 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
 
 #pragma mark - Private
 
-+ (NSString *)_filenameStringWithCString:(const char *)filename size:(uint16_t)size_filename
-{
++ (NSString *)_filenameStringWithCString:(const char *)filename
+                         version_made_by:(uint16_t)version_made_by
+                    general_purpose_flag:(uint16_t)flag
+                                    size:(uint16_t)size_filename {
+    
+    // Respect Language encoding flag only reading filename as UTF-8 when this is set
+    // when file entry created on dos system.
+    //
+    // https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+    //   Bit 11: Language encoding flag (EFS).  If this bit is set,
+    //           the filename and comment fields for this file
+    //           MUST be encoded using UTF-8. (see APPENDIX D)
+    uint16_t made_by = version_made_by >> 8;
+    BOOL made_on_dos = made_by == 0;
+    BOOL languageEncoding = (flag & (1 << 11)) != 0;
+    if(!languageEncoding && made_on_dos) {
+        // APPNOTE.TXT D.1:
+        //   D.2 If general purpose bit 11 is unset, the file name and comment should conform
+        //   to the original ZIP character encoding.  If general purpose bit 11 is set, the
+        //   filename and comment must support The Unicode Standard, Version 4.1.0 or
+        //   greater using the character encoding form defined by the UTF-8 storage
+        //   specification.  The Unicode Standard is published by the The Unicode
+        //   Consortium (www.unicode.org).  UTF-8 encoded data stored within ZIP files
+        //   is expected to not include a byte order mark (BOM).
+        
+        //  Code Page 437 corresponds to kCFStringEncodingDOSLatinUS
+        NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSLatinUS);
+        NSString* strPath = [NSString stringWithCString:filename encoding:encoding];
+        if(strPath) return strPath;
+    }
+    
+    // attempting unicode encoding
     NSString * strPath = @(filename);
     if (strPath) {
         return strPath;
     }
+    
     // if filename is non-unicode, detect and transform Encoding
     NSData *data = [NSData dataWithBytes:(const void *)filename length:sizeof(unsigned char) * size_filename];
-#ifdef __MAC_10_13
-    // Xcode 9+
-    if (@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)) {
-        // supported encodings are in [NSString availableStringEncodings]
-        [NSString stringEncodingForData:data encodingOptions:nil convertedString:&strPath usedLossyConversion:nil];
-    }
-#else
+// Testing availability of @available (https://stackoverflow.com/a/46927445/1033581)
+#if __clang_major__ < 9
     // Xcode 8-
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber10_9_2) {
+#else
+    // Xcode 9+
+    if (@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)) {
+#endif
         // supported encodings are in [NSString availableStringEncodings]
         [NSString stringEncodingForData:data encodingOptions:nil convertedString:&strPath usedLossyConversion:nil];
-    }
-#endif
-    else {
+    } else {
         // fallback to a simple manual detect for macOS 10.9 or older
         NSArray<NSNumber *> *encodings = @[@(kCFStringEncodingGB_18030_2000), @(kCFStringEncodingShiftJIS)];
         for (NSNumber *encoding in encodings) {
@@ -886,11 +924,13 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
             }
         }
     }
-    if (!strPath) {
-        // if filename encoding is non-detected, we default to something based on data
-        // _hexString is more readable than _base64RFC4648 for debugging unknown encodings
-        strPath = [data _hexString];
+    if (strPath) {
+        return strPath;
     }
+    
+    // if filename encoding is non-detected, we default to something based on data
+    // _hexString is more readable than _base64RFC4648 for debugging unknown encodings
+    strPath = [data _hexString];
     return strPath;
 }
 
@@ -899,7 +939,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error: nil];
     if (attr)
     {
-        NSDate *fileDate = (NSDate *)attr[NSFileModificationDate];
+        NSDate *fileDate = (NSDate *)[attr objectForKey:NSFileModificationDate];
         if (fileDate)
         {
             [self zipInfo:zipInfo setDate:fileDate];
@@ -907,7 +947,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
         
         // Write permissions into the external attributes, for details on this see here: http://unix.stackexchange.com/a/14727
         // Get the permissions value from the files attributes
-        NSNumber *permissionsValue = (NSNumber *)attr[NSFilePosixPermissions];
+        NSNumber *permissionsValue = (NSNumber *)[attr objectForKey:NSFilePosixPermissions];
         if (permissionsValue != nil) {
             // Get the short value for the permissions
             short permissionsShort = permissionsValue.shortValue;
@@ -991,7 +1031,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
 
 int _zipOpenEntry(zipFile entry, NSString *name, const zip_fileinfo *zipfi, int level, NSString *password, BOOL aes)
 {
-    return zipOpenNewFileInZip5(entry, name.fileSystemRepresentation, zipfi, NULL, 0, NULL, 0, NULL, 0, 0, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, aes);
+    return zipOpenNewFileInZip5(entry, name.fileSystemRepresentation, zipfi, NULL, 0, NULL, 0, NULL, 0, 0, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, aes, 0);
 }
 
 #pragma mark - Private tools for file info
@@ -1042,6 +1082,11 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo)
     NSUInteger length = self.length;
     const unsigned char *bytes = self.bytes;
     char *chars = malloc(length * 2);
+    if (chars == NULL) {
+        // we directly raise an exception instead of using NSAssert to make sure assertion is not disabled as this is irrecoverable
+        [NSException raise:@"NSInternalInconsistencyException" format:@"failed malloc" arguments:nil];
+        return nil;
+    }
     char *s = chars;
     NSUInteger i = length;
     while (i--) {

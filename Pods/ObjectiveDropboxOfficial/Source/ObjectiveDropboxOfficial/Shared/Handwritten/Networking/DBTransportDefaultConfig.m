@@ -111,6 +111,7 @@
                     redirectURL:nil
                       userAgent:userAgent
                      asMemberId:asMemberId
+                       pathRoot:nil
               additionalHeaders:additionalHeaders
                   delegateQueue:delegateQueue
          forceForegroundSession:forceForegroundSession
@@ -123,6 +124,7 @@
                    redirectURL:(NSString *)redirectURL
                      userAgent:(NSString *)userAgent
                     asMemberId:(NSString *)asMemberId
+                      pathRoot:(nullable DBCOMMONPathRoot *)pathRoot
              additionalHeaders:(NSDictionary<NSString *, NSString *> *)additionalHeaders
                  delegateQueue:(NSOperationQueue *)delegateQueue
         forceForegroundSession:(BOOL)forceForegroundSession
@@ -133,6 +135,7 @@
                        redirectURL:redirectURL
                          userAgent:userAgent
                         asMemberId:asMemberId
+                          pathRoot:pathRoot
                  additionalHeaders:additionalHeaders]) {
     _delegateQueue = delegateQueue;
     _forceForegroundSession = forceForegroundSession;

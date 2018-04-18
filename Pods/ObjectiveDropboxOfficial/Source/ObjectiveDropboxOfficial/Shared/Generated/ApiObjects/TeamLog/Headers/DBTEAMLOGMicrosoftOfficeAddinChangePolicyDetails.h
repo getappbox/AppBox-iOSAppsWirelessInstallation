@@ -18,8 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MicrosoftOfficeAddinChangePolicyDetails` struct.
 ///
-/// Enabled or disabled the Microsoft Office add-in, which lets team members
-/// save files to Dropbox directly from Microsoft Office.
+/// Enabled/disabled Microsoft Office add-in.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

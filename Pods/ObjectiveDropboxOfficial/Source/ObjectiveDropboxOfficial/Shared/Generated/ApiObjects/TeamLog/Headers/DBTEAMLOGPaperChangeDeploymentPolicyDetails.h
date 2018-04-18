@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperChangeDeploymentPolicyDetails` struct.
 ///
-/// Changed whether Dropbox Paper, when enabled, is deployed to all teams or to
-/// specific members of the team.
+/// Changed whether Dropbox Paper, when enabled, is deployed to all members or
+/// to specific members.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

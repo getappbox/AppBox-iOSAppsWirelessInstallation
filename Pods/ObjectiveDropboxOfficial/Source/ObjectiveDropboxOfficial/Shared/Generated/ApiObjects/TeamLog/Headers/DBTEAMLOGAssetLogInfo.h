@@ -13,6 +13,7 @@
 @class DBTEAMLOGFolderLogInfo;
 @class DBTEAMLOGPaperDocumentLogInfo;
 @class DBTEAMLOGPaperFolderLogInfo;
+@class DBTEAMLOGShowcaseDocumentLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,6 +47,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAssetLogInfoTag) {
   /// Paper folder's details.
   DBTEAMLOGAssetLogInfoPaperFolder,
 
+  /// Showcase document's details.
+  DBTEAMLOGAssetLogInfoShowcaseDocument,
+
   /// (no description).
   DBTEAMLOGAssetLogInfoOther,
 
@@ -69,6 +73,10 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAssetLogInfoTag) {
 /// Paper folder's details. @note Ensure the `isPaperFolder` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperFolderLogInfo *paperFolder;
+
+/// Showcase document's details. @note Ensure the `isShowcaseDocument` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseDocumentLogInfo *showcaseDocument;
 
 #pragma mark - Constructors
 
@@ -115,6 +123,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAssetLogInfoTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPaperFolder:(DBTEAMLOGPaperFolderLogInfo *)paperFolder;
+
+///
+/// Initializes union class with tag state of "showcase_document".
+///
+/// Description of the "showcase_document" tag state: Showcase document's
+/// details.
+///
+/// @param showcaseDocument Showcase document's details.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseDocument:(DBTEAMLOGShowcaseDocumentLogInfo *)showcaseDocument;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -166,6 +186,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAssetLogInfoTag) {
 /// @return Whether the union's current tag state has value "paper_folder".
 ///
 - (BOOL)isPaperFolder;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_document".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseDocument` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "showcase_document".
+///
+- (BOOL)isShowcaseDocument;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

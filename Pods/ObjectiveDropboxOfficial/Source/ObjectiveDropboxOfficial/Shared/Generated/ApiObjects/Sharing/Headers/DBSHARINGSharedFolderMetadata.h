@@ -9,6 +9,7 @@
 #import "DBSHARINGSharedFolderMetadataBase.h"
 #import "DBSerializableProtocol.h"
 
+@class DBSHARINGAccessInheritance;
 @class DBSHARINGAccessLevel;
 @class DBSHARINGFolderPermission;
 @class DBSHARINGFolderPolicy;
@@ -58,6 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// folder.
 @property (nonatomic, readonly) NSDate *timeInvited;
 
+/// Whether the folder inherits its members from its parent.
+@property (nonatomic, readonly) DBSHARINGAccessInheritance *accessInheritance;
+
 #pragma mark - Constructors
 
 ///
@@ -88,6 +92,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param permissions Actions the current user may perform on the folder and
 /// its contents. The set of permissions corresponds to the FolderActions in the
 /// request.
+/// @param accessInheritance Whether the folder inherits its members from its
+/// parent.
 ///
 /// @return An initialized instance.
 ///
@@ -104,7 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
               parentSharedFolderId:(nullable NSString *)parentSharedFolderId
                          pathLower:(nullable NSString *)pathLower
                       linkMetadata:(nullable DBSHARINGSharedContentLinkMetadata *)linkMetadata
-                       permissions:(nullable NSArray<DBSHARINGFolderPermission *> *)permissions;
+                       permissions:(nullable NSArray<DBSHARINGFolderPermission *> *)permissions
+                 accessInheritance:(nullable DBSHARINGAccessInheritance *)accessInheritance;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

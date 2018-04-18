@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Domain names.
-@property (nonatomic, readonly) NSArray<NSString *> *domainName;
+@property (nonatomic, readonly, copy) NSString *domainName;
 
 /// Number of recipients.
 @property (nonatomic, readonly) NSNumber *numRecipients;
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDomainName:(NSArray<NSString *> *)domainName numRecipients:(NSNumber *)numRecipients;
+- (instancetype)initWithDomainName:(NSString *)domainName numRecipients:(NSNumber *)numRecipients;
 
 - (instancetype)init NS_UNAVAILABLE;
 

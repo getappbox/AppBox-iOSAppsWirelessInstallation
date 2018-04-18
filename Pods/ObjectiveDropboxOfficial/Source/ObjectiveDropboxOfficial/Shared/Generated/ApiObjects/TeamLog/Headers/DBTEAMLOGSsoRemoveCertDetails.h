@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SsoRemoveCertDetails` struct.
 ///
-/// Removed the X.509 certificate for SSO.
+/// Removed X.509 certificate for SSO.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

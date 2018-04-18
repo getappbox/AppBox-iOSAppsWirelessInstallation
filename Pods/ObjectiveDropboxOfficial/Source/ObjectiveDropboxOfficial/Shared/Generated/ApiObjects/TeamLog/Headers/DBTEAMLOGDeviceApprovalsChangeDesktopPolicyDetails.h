@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceApprovalsChangeDesktopPolicyDetails` struct.
 ///
-/// Set or removed a limit on the number of computers each team member can link
-/// to their work Dropbox account.
+/// Set/removed limit on number of computers member can link to team Dropbox
+/// account.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

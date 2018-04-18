@@ -37,11 +37,23 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
   /// 128 by 128 px.
   DBFILESThumbnailSizeW128h128,
 
+  /// 256 by 256 px.
+  DBFILESThumbnailSizeW256h256,
+
+  /// 480 by 320 px.
+  DBFILESThumbnailSizeW480h320,
+
   /// 640 by 480 px.
   DBFILESThumbnailSizeW640h480,
 
-  /// 1024 by 768.
+  /// 960 by 640 px.
+  DBFILESThumbnailSizeW960h640,
+
+  /// 1024 by 768 px.
   DBFILESThumbnailSizeW1024h768,
+
+  /// 2048 by 1536 px.
+  DBFILESThumbnailSizeW2048h1536,
 
 };
 
@@ -78,6 +90,24 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 - (instancetype)initWithW128h128;
 
 ///
+/// Initializes union class with tag state of "w256h256".
+///
+/// Description of the "w256h256" tag state: 256 by 256 px.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithW256h256;
+
+///
+/// Initializes union class with tag state of "w480h320".
+///
+/// Description of the "w480h320" tag state: 480 by 320 px.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithW480h320;
+
+///
 /// Initializes union class with tag state of "w640h480".
 ///
 /// Description of the "w640h480" tag state: 640 by 480 px.
@@ -87,13 +117,31 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 - (instancetype)initWithW640h480;
 
 ///
+/// Initializes union class with tag state of "w960h640".
+///
+/// Description of the "w960h640" tag state: 960 by 640 px.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithW960h640;
+
+///
 /// Initializes union class with tag state of "w1024h768".
 ///
-/// Description of the "w1024h768" tag state: 1024 by 768.
+/// Description of the "w1024h768" tag state: 1024 by 768 px.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithW1024h768;
+
+///
+/// Initializes union class with tag state of "w2048h1536".
+///
+/// Description of the "w2048h1536" tag state: 2048 by 1536 px.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithW2048h1536;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -121,6 +169,20 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 - (BOOL)isW128h128;
 
 ///
+/// Retrieves whether the union's current tag state has value "w256h256".
+///
+/// @return Whether the union's current tag state has value "w256h256".
+///
+- (BOOL)isW256h256;
+
+///
+/// Retrieves whether the union's current tag state has value "w480h320".
+///
+/// @return Whether the union's current tag state has value "w480h320".
+///
+- (BOOL)isW480h320;
+
+///
 /// Retrieves whether the union's current tag state has value "w640h480".
 ///
 /// @return Whether the union's current tag state has value "w640h480".
@@ -128,11 +190,25 @@ typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
 - (BOOL)isW640h480;
 
 ///
+/// Retrieves whether the union's current tag state has value "w960h640".
+///
+/// @return Whether the union's current tag state has value "w960h640".
+///
+- (BOOL)isW960h640;
+
+///
 /// Retrieves whether the union's current tag state has value "w1024h768".
 ///
 /// @return Whether the union's current tag state has value "w1024h768".
 ///
 - (BOOL)isW1024h768;
+
+///
+/// Retrieves whether the union's current tag state has value "w2048h1536".
+///
+/// @return Whether the union's current tag state has value "w2048h1536".
+///
+- (BOOL)isW2048h1536;
 
 ///
 /// Retrieves string value of union's current tag state.

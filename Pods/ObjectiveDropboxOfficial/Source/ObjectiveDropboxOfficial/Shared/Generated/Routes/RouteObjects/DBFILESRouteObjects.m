@@ -22,6 +22,10 @@
 #import "DBFILEPROPERTIESTemplateError.h"
 #import "DBFILEPROPERTIESUpdatePropertiesError.h"
 #import "DBFILESAlphaGetMetadataError.h"
+#import "DBFILESCreateFolderBatchError.h"
+#import "DBFILESCreateFolderBatchJobStatus.h"
+#import "DBFILESCreateFolderBatchLaunch.h"
+#import "DBFILESCreateFolderBatchResult.h"
 #import "DBFILESCreateFolderError.h"
 #import "DBFILESCreateFolderResult.h"
 #import "DBFILESDeleteBatchError.h"
@@ -32,6 +36,8 @@
 #import "DBFILESDeleteResult.h"
 #import "DBFILESDeletedMetadata.h"
 #import "DBFILESDownloadError.h"
+#import "DBFILESDownloadZipError.h"
+#import "DBFILESDownloadZipResult.h"
 #import "DBFILESFileMetadata.h"
 #import "DBFILESFileOpsResult.h"
 #import "DBFILESFileSharingInfo.h"
@@ -72,6 +78,7 @@
 #import "DBFILESSearchError.h"
 #import "DBFILESSearchMatch.h"
 #import "DBFILESSearchResult.h"
+#import "DBFILESSymlinkInfo.h"
 #import "DBFILESThumbnailError.h"
 #import "DBFILESUploadError.h"
 #import "DBFILESUploadErrorWithProperties.h"
@@ -99,12 +106,15 @@ static DBRoute *DBFILESDCopyReferenceGet;
 static DBRoute *DBFILESDCopyReferenceSave;
 static DBRoute *DBFILESDCopyV2;
 static DBRoute *DBFILESCreateFolder;
+static DBRoute *DBFILESCreateFolderBatch;
+static DBRoute *DBFILESCreateFolderBatchCheck;
 static DBRoute *DBFILESCreateFolderV2;
 static DBRoute *DBFILESDelete_;
 static DBRoute *DBFILESDeleteBatch;
 static DBRoute *DBFILESDeleteBatchCheck;
 static DBRoute *DBFILESDeleteV2;
 static DBRoute *DBFILESDownload;
+static DBRoute *DBFILESDownloadZip;
 static DBRoute *DBFILESGetMetadata;
 static DBRoute *DBFILESGetPreview;
 static DBRoute *DBFILESGetTemporaryLink;
@@ -142,7 +152,7 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESAlphaGetMetadata) {
     DBFILESAlphaGetMetadata = [[DBRoute alloc] init:@"alpha/get_metadata"
                                          namespace_:@"files"
-                                         deprecated:@NO
+                                         deprecated:@YES
                                          resultType:[DBFILESMetadata class]
                                           errorType:[DBFILESAlphaGetMetadataError class]
                                               attrs:@{
@@ -160,7 +170,7 @@ static DBRoute *DBFILESUploadSessionStart;
   if (!DBFILESAlphaUpload) {
     DBFILESAlphaUpload = [[DBRoute alloc] init:@"alpha/upload"
                                     namespace_:@"files"
-                                    deprecated:@NO
+                                    deprecated:@YES
                                     resultType:[DBFILESFileMetadata class]
                                      errorType:[DBFILESUploadErrorWithProperties class]
                                          attrs:@{
@@ -300,6 +310,42 @@ static DBRoute *DBFILESUploadSessionStart;
   return DBFILESCreateFolder;
 }
 
++ (DBRoute *)DBFILESCreateFolderBatch {
+  if (!DBFILESCreateFolderBatch) {
+    DBFILESCreateFolderBatch = [[DBRoute alloc] init:@"create_folder_batch"
+                                          namespace_:@"files"
+                                          deprecated:@NO
+                                          resultType:[DBFILESCreateFolderBatchLaunch class]
+                                           errorType:nil
+                                               attrs:@{
+                                                 @"auth" : @"user",
+                                                 @"host" : @"api",
+                                                 @"style" : @"rpc"
+                                               }
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
+  }
+  return DBFILESCreateFolderBatch;
+}
+
++ (DBRoute *)DBFILESCreateFolderBatchCheck {
+  if (!DBFILESCreateFolderBatchCheck) {
+    DBFILESCreateFolderBatchCheck = [[DBRoute alloc] init:@"create_folder_batch/check"
+                                               namespace_:@"files"
+                                               deprecated:@NO
+                                               resultType:[DBFILESCreateFolderBatchJobStatus class]
+                                                errorType:[DBASYNCPollError class]
+                                                    attrs:@{
+                                                      @"auth" : @"user",
+                                                      @"host" : @"api",
+                                                      @"style" : @"rpc"
+                                                    }
+                                    dataStructSerialBlock:nil
+                                  dataStructDeserialBlock:nil];
+  }
+  return DBFILESCreateFolderBatchCheck;
+}
+
 + (DBRoute *)DBFILESCreateFolderV2 {
   if (!DBFILESCreateFolderV2) {
     DBFILESCreateFolderV2 = [[DBRoute alloc] init:@"create_folder_v2"
@@ -406,6 +452,24 @@ static DBRoute *DBFILESUploadSessionStart;
                     dataStructDeserialBlock:nil];
   }
   return DBFILESDownload;
+}
+
++ (DBRoute *)DBFILESDownloadZip {
+  if (!DBFILESDownloadZip) {
+    DBFILESDownloadZip = [[DBRoute alloc] init:@"download_zip"
+                                    namespace_:@"files"
+                                    deprecated:@NO
+                                    resultType:[DBFILESDownloadZipResult class]
+                                     errorType:[DBFILESDownloadZipError class]
+                                         attrs:@{
+                                           @"auth" : @"user",
+                                           @"host" : @"content",
+                                           @"style" : @"download"
+                                         }
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
+  }
+  return DBFILESDownloadZip;
 }
 
 + (DBRoute *)DBFILESGetMetadata {

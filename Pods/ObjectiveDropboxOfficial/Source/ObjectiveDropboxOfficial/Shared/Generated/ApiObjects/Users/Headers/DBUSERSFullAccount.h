@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 #import "DBUSERSAccount.h"
 
+@class DBCOMMONRootInfo;
 @class DBUSERSCOMMONAccountType;
 @class DBUSERSFullAccount;
 @class DBUSERSFullTeam;
@@ -57,6 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// What type of account this user has.
 @property (nonatomic, readonly) DBUSERSCOMMONAccountType *accountType;
 
+/// The root info for this account.
+@property (nonatomic, readonly) DBCOMMONRootInfo *rootInfo;
+
 #pragma mark - Constructors
 
 ///
@@ -77,6 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// current account is personal, then team will always be null, but isPaired
 /// will indicate if a work account is linked.
 /// @param accountType What type of account this user has.
+/// @param rootInfo The root info for this account.
 /// @param profilePhotoUrl URL for the photo representing the user, if one is
 /// set.
 /// @param country The user's two-letter country code, if available. Country
@@ -97,6 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
                      referralLink:(NSString *)referralLink
                          isPaired:(NSNumber *)isPaired
                       accountType:(DBUSERSCOMMONAccountType *)accountType
+                         rootInfo:(DBCOMMONRootInfo *)rootInfo
                   profilePhotoUrl:(nullable NSString *)profilePhotoUrl
                           country:(nullable NSString *)country
                              team:(nullable DBUSERSFullTeam *)team
@@ -121,6 +127,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// current account is personal, then team will always be null, but isPaired
 /// will indicate if a work account is linked.
 /// @param accountType What type of account this user has.
+/// @param rootInfo The root info for this account.
 ///
 /// @return An initialized instance.
 ///
@@ -132,7 +139,8 @@ NS_ASSUME_NONNULL_BEGIN
                            locale:(NSString *)locale
                      referralLink:(NSString *)referralLink
                          isPaired:(NSNumber *)isPaired
-                      accountType:(DBUSERSCOMMONAccountType *)accountType;
+                      accountType:(DBUSERSCOMMONAccountType *)accountType
+                         rootInfo:(DBCOMMONRootInfo *)rootInfo;
 
 @end
 

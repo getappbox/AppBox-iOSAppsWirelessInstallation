@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `FileGetCopyReferenceDetails` struct.
 ///
-/// Create a copy reference to a file or folder.
+/// Created copy reference to file/folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

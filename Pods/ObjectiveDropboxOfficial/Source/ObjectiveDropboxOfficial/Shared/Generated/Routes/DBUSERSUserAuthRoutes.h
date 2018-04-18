@@ -8,6 +8,7 @@
 
 #import "DBTasks.h"
 
+@class DBCOMMONRootInfo;
 @class DBNilObject;
 @class DBUSERSBasicAccount;
 @class DBUSERSCOMMONAccountType;

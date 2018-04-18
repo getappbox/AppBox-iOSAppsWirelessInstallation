@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `ExtendedVersionHistoryChangePolicyDetails` struct.
 ///
-/// Accepted or opted out of extended version history.
+/// Accepted/opted out of extended version history.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

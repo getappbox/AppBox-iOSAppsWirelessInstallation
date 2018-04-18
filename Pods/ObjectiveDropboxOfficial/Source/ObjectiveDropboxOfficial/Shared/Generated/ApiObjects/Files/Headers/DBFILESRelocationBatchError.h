@@ -61,6 +61,9 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
   /// `DBFILESRelocationArg` to true.
   DBFILESRelocationBatchErrorCantTransferOwnership,
 
+  /// The current user does not have enough space to move or copy the files.
+  DBFILESRelocationBatchErrorInsufficientQuota,
+
   /// (no description).
   DBFILESRelocationBatchErrorOther,
 
@@ -177,6 +180,16 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 - (instancetype)initWithCantTransferOwnership;
 
 ///
+/// Initializes union class with tag state of "insufficient_quota".
+///
+/// Description of the "insufficient_quota" tag state: The current user does not
+/// have enough space to move or copy the files.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInsufficientQuota;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -278,6 +291,15 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 /// "cant_transfer_ownership".
 ///
 - (BOOL)isCantTransferOwnership;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "insufficient_quota".
+///
+/// @return Whether the union's current tag state has value
+/// "insufficient_quota".
+///
+- (BOOL)isInsufficientQuota;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

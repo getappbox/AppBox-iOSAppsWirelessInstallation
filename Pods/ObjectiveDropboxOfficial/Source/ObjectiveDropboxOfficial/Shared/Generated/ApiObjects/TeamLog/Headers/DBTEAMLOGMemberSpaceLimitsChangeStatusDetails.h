@@ -18,8 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberSpaceLimitsChangeStatusDetails` struct.
 ///
-/// Changed the status with respect to whether the team member is under or over
-/// storage quota specified by policy.
+/// Changed space limit status.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

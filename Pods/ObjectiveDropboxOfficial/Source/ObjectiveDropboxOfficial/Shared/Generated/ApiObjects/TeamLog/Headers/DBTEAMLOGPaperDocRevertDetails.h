@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperDocRevertDetails` struct.
 ///
-/// Restored a Paper doc to previous revision.
+/// Restored Paper doc to previous version.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
