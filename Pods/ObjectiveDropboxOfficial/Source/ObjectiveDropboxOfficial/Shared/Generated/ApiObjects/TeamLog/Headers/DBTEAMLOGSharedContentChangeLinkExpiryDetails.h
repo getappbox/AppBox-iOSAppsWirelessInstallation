@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SharedContentChangeLinkExpiryDetails` struct.
 ///
-/// Changed the expiry of the link for the shared file or folder.
+/// Changed link expiration of shared file/folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -27,57 +27,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset position in the Assets list.
-@property (nonatomic, readonly) NSNumber *targetAssetIndex;
+/// New shared content link expiration date. Might be missing due to historical
+/// data gap.
+@property (nonatomic, readonly, nullable) NSDate *dNewValue;
 
-/// Original shared folder name.
-@property (nonatomic, readonly, copy, nullable) NSString *originalFolderName;
-
-/// Shared folder type. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
-
-/// Expiration starting date.
-@property (nonatomic, readonly, copy) NSString *expirationStartDate;
-
-/// The number of days from the starting expiration date after which the link
-/// will expire.
-@property (nonatomic, readonly) NSNumber *expirationDays;
+/// Previous shared content link expiration date. Might be missing due to
+/// historical data gap.
+@property (nonatomic, readonly, nullable) NSDate *previousValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetAssetIndex Target asset position in the Assets list.
-/// @param expirationStartDate Expiration starting date.
-/// @param expirationDays The number of days from the starting expiration date
-/// after which the link will expire.
-/// @param originalFolderName Original shared folder name.
-/// @param sharedFolderType Shared folder type. Might be missing due to
-/// historical data gap.
+/// @param dNewValue New shared content link expiration date. Might be missing
+/// due to historical data gap.
+/// @param previousValue Previous shared content link expiration date. Might be
+/// missing due to historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
-                     expirationStartDate:(NSString *)expirationStartDate
-                          expirationDays:(NSNumber *)expirationDays
-                      originalFolderName:(nullable NSString *)originalFolderName
-                        sharedFolderType:(nullable NSString *)sharedFolderType;
+- (instancetype)initWithDNewValue:(nullable NSDate *)dNewValue previousValue:(nullable NSDate *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetAssetIndex Target asset position in the Assets list.
-/// @param expirationStartDate Expiration starting date.
-/// @param expirationDays The number of days from the starting expiration date
-/// after which the link will expire.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
-                     expirationStartDate:(NSString *)expirationStartDate
-                          expirationDays:(NSNumber *)expirationDays;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

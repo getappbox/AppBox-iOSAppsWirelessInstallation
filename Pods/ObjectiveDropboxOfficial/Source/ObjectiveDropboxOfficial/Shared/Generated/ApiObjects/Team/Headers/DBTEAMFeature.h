@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `Feature` union.
 ///
-/// A set of features that Dropbox for Business account support.
+/// A set of features that a Dropbox Business account may support.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -33,8 +33,14 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
   /// The number of upload API calls allowed per month.
   DBTEAMFeatureUploadApiRateLimit,
 
-  /// Does this team have a have a company shared dropbox.
+  /// Does this team have a shared team root.
   DBTEAMFeatureHasTeamSharedDropbox,
+
+  /// Does this team have file events.
+  DBTEAMFeatureHasTeamFileEvents,
+
+  /// Does this team have team selective sync enabled.
+  DBTEAMFeatureHasTeamSelectiveSync,
 
   /// (no description).
   DBTEAMFeatureOther,
@@ -60,11 +66,31 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
 /// Initializes union class with tag state of "has_team_shared_dropbox".
 ///
 /// Description of the "has_team_shared_dropbox" tag state: Does this team have
-/// a have a company shared dropbox.
+/// a shared team root.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithHasTeamSharedDropbox;
+
+///
+/// Initializes union class with tag state of "has_team_file_events".
+///
+/// Description of the "has_team_file_events" tag state: Does this team have
+/// file events.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithHasTeamFileEvents;
+
+///
+/// Initializes union class with tag state of "has_team_selective_sync".
+///
+/// Description of the "has_team_selective_sync" tag state: Does this team have
+/// team selective sync enabled.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithHasTeamSelectiveSync;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -94,6 +120,24 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
 /// "has_team_shared_dropbox".
 ///
 - (BOOL)isHasTeamSharedDropbox;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "has_team_file_events".
+///
+/// @return Whether the union's current tag state has value
+/// "has_team_file_events".
+///
+- (BOOL)isHasTeamFileEvents;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "has_team_selective_sync".
+///
+/// @return Whether the union's current tag state has value
+/// "has_team_selective_sync".
+///
+- (BOOL)isHasTeamSelectiveSync;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

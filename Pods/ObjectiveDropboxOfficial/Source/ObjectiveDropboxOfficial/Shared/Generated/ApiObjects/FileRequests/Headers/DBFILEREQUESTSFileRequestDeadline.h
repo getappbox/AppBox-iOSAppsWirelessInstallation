@@ -29,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The deadline for this file request.
 @property (nonatomic, readonly) NSDate *deadline;
 
-/// If set, allow uploads after the deadline has passed. These uploads will be
-/// marked overdue.
+/// If set, allow uploads after the deadline has passed. These     uploads will
+/// be marked overdue.
 @property (nonatomic, readonly, nullable) DBFILEREQUESTSGracePeriod *allowLateUploads;
 
 #pragma mark - Constructors
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param deadline The deadline for this file request.
 /// @param allowLateUploads If set, allow uploads after the deadline has passed.
-/// These uploads will be marked overdue.
+/// These     uploads will be marked overdue.
 ///
 /// @return An initialized instance.
 ///

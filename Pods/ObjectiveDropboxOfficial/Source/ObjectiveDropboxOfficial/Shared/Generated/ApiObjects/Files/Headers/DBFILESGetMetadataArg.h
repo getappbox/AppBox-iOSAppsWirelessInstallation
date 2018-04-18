@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESTemplateFilterBase;
 @class DBFILESGetMetadataArg;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,6 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// not  that file has any explicit members.
 @property (nonatomic, readonly) NSNumber *includeHasExplicitSharedMembers;
 
+/// If set to a valid list of template IDs, `propertyGroups` in
+/// `DBFILESFileMetadata` is set if there exists property data associated with
+/// the file and each of the listed templates.
+@property (nonatomic, readonly, nullable) DBFILEPROPERTIESTemplateFilterBase *includePropertyGroups;
+
 #pragma mark - Constructors
 
 ///
@@ -53,13 +59,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param includeHasExplicitSharedMembers If true, the results will include a
 /// flag for each file indicating whether or not  that file has any explicit
 /// members.
+/// @param includePropertyGroups If set to a valid list of template IDs,
+/// `propertyGroups` in `DBFILESFileMetadata` is set if there exists property
+/// data associated with the file and each of the listed templates.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPath:(NSString *)path
                    includeMediaInfo:(nullable NSNumber *)includeMediaInfo
                      includeDeleted:(nullable NSNumber *)includeDeleted
-    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers;
+    includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

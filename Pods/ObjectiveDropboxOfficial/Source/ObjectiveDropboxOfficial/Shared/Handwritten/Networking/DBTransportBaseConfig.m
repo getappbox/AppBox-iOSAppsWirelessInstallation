@@ -47,6 +47,7 @@
                   redirectURL:nil
                     userAgent:userAgent
                    asMemberId:asMemberId
+                     pathRoot:nil
             additionalHeaders:additionalHeaders];
 }
 
@@ -56,6 +57,7 @@
                    redirectURL:(NSString *)redirectURL
                      userAgent:(NSString *)userAgent
                     asMemberId:(NSString *)asMemberId
+                      pathRoot:(nullable DBCOMMONPathRoot *)pathRoot
              additionalHeaders:(NSDictionary<NSString *, NSString *> *)additionalHeaders {
   if (self = [super init]) {
     _userAgent = userAgent;
@@ -64,6 +66,7 @@
     _redirectURL = redirectURL;
     _hostnameConfig = hostnameConfig;
     _asMemberId = asMemberId;
+    _pathRoot = pathRoot;
     _additionalHeaders = additionalHeaders;
   }
   return self;

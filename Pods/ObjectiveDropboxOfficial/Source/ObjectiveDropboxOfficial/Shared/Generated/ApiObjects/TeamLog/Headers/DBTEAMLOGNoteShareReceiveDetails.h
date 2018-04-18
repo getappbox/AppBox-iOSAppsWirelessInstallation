@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `NoteShareReceiveDetails` struct.
 ///
-/// Shared Paper document received.
+/// Shared received Paper doc.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

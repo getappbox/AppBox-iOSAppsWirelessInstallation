@@ -19,6 +19,8 @@
 #import "DBFILEPROPERTIESOverwritePropertyGroupArg.h"
 #import "DBFILEPROPERTIESPropertiesError.h"
 #import "DBFILEPROPERTIESPropertiesSearchArg.h"
+#import "DBFILEPROPERTIESPropertiesSearchContinueArg.h"
+#import "DBFILEPROPERTIESPropertiesSearchContinueError.h"
 #import "DBFILEPROPERTIESPropertiesSearchError.h"
 #import "DBFILEPROPERTIESPropertiesSearchMatch.h"
 #import "DBFILEPROPERTIESPropertiesSearchQuery.h"
@@ -29,6 +31,7 @@
 #import "DBFILEPROPERTIESPropertyGroupUpdate.h"
 #import "DBFILEPROPERTIESRemovePropertiesArg.h"
 #import "DBFILEPROPERTIESRemovePropertiesError.h"
+#import "DBFILEPROPERTIESRemoveTemplateArg.h"
 #import "DBFILEPROPERTIESRouteObjects.h"
 #import "DBFILEPROPERTIESTemplateError.h"
 #import "DBFILEPROPERTIESTemplateFilter.h"
@@ -68,6 +71,12 @@
 - (DBRpcTask *)templatesListForTeam {
   DBRoute *route = DBFILEPROPERTIESRouteObjects.DBFILEPROPERTIESTemplatesListForTeam;
   return [self.client requestRpc:route arg:nil];
+}
+
+- (DBRpcTask *)templatesRemoveForTeam:(NSString *)templateId {
+  DBRoute *route = DBFILEPROPERTIESRouteObjects.DBFILEPROPERTIESTemplatesRemoveForTeam;
+  DBFILEPROPERTIESRemoveTemplateArg *arg = [[DBFILEPROPERTIESRemoveTemplateArg alloc] initWithTemplateId:templateId];
+  return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)templatesUpdateForTeam:(NSString *)templateId {

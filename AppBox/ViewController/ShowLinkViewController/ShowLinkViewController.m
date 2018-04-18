@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [EventTracker logScreen:@"AppBox ShareLink"];
-    [textFieldAppLink setStringValue: self.project.appShortShareableURL.absoluteString];
+    [textFieldAppLink setStringValue: self.project.appShortShareableURL.stringValue];
     [textFieldHint setStringValue: ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) ? LongURLUserHint : ShortURLUserHint];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"App URL - %@",textFieldHint.stringValue]];
     
@@ -32,11 +32,16 @@
 - (IBAction)buttonCopyToClipboardTapped:(NSButton *)sender {
     [EventTracker logEventWithType:LogEventTypeCopyToClipboard];
     [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.absoluteString  forType:NSStringPboardType];
+    [[NSPasteboard generalPasteboard] setString:self.project.appShortShareableURL.stringValue  forType:NSStringPboardType];
     [sender setTitle:@"Copied!!"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [sender setTitle:@"Copy to Clipboard"];
     });
+}
+
+- (IBAction)buttonOpenURLAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:self.project.appShortShareableURL];
+    [EventTracker logEventWithType:LogEventTypeOpenInDropbox];
 }
 
 

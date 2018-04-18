@@ -9,7 +9,6 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGMemberSpaceLimitsChangePolicyDetails;
-@class DBTEAMLOGSpaceLimitsLevel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberSpaceLimitsChangePolicyDetails` struct.
 ///
-/// Changed the storage limits applied to team members by policy.
+/// Changed team default member space limit.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,24 +27,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Previous storage limits policy.
-@property (nonatomic, readonly) DBTEAMLOGSpaceLimitsLevel *previousValue;
+/// Previous team default limit value in bytes. Might be missing due to
+/// historical data gap.
+@property (nonatomic, readonly, nullable) NSNumber *previousValue;
 
-/// New storage limits policy.
-@property (nonatomic, readonly) DBTEAMLOGSpaceLimitsLevel *dNewValue;
+/// New team default limit value in bytes. Might be missing due to historical
+/// data gap.
+@property (nonatomic, readonly, nullable) NSNumber *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousValue Previous storage limits policy.
-/// @param dNewValue New storage limits policy.
+/// @param previousValue Previous team default limit value in bytes. Might be
+/// missing due to historical data gap.
+/// @param dNewValue New team default limit value in bytes. Might be missing due
+/// to historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithPreviousValue:(DBTEAMLOGSpaceLimitsLevel *)previousValue
-                            dNewValue:(DBTEAMLOGSpaceLimitsLevel *)dNewValue;
+- (instancetype)initWithPreviousValue:(nullable NSNumber *)previousValue dNewValue:(nullable NSNumber *)dNewValue;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+///
+/// @return An initialized instance.
+///
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

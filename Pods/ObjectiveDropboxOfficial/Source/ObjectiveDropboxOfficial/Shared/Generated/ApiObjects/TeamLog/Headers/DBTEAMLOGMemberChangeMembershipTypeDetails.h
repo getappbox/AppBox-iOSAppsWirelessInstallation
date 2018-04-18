@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberChangeMembershipTypeDetails` struct.
 ///
-/// Changed the membership type (limited vs full) for team member.
+/// Changed membership type (limited/full) of member.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

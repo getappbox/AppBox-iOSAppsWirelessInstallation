@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperContentAddMemberDetails` struct.
 ///
-/// Added users to the membership of a Paper doc or folder.
+/// Added team member to Paper doc/folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

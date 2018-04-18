@@ -12,3 +12,4 @@ extern NSString *const kForegroundSessionId;
 extern NSString *const kBackgroundSessionId;
 extern NSString *const kSDKDebugHost;
 extern BOOL const kSDKDebug;
+extern NSString *const kCSERFKey;

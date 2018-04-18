@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberAddNameDetails` struct.
 ///
-/// Set team member name when joining team.
+/// Added team member name.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,19 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// User's name.
-@property (nonatomic, readonly) DBTEAMLOGUserNameLogInfo *value;
+/// New user's name.
+@property (nonatomic, readonly) DBTEAMLOGUserNameLogInfo *dNewValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param value User's name.
+/// @param dNewValue New user's name.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithValue:(DBTEAMLOGUserNameLogInfo *)value;
+- (instancetype)initWithDNewValue:(DBTEAMLOGUserNameLogInfo *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGSmartSyncChangePolicyDetails;
-@class DBTEAMLOGSmartSyncPolicy;
+@class DBTEAMPOLICIESSmartSyncPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SmartSyncChangePolicyDetails` struct.
 ///
-/// Changed the default Smart Sync policy for team members.
+/// Changed default Smart Sync setting for team members.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New smart sync policy.
-@property (nonatomic, readonly) DBTEAMLOGSmartSyncPolicy *dNewValue;
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESSmartSyncPolicy *dNewValue;
 
-/// Previous smart sync policy. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGSmartSyncPolicy *previousValue;
+/// Previous smart sync policy.
+@property (nonatomic, readonly, nullable) DBTEAMPOLICIESSmartSyncPolicy *previousValue;
 
 #pragma mark - Constructors
 
@@ -40,23 +40,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param dNewValue New smart sync policy.
-/// @param previousValue Previous smart sync policy. Might be missing due to
-/// historical data gap.
+/// @param previousValue Previous smart sync policy.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGSmartSyncPolicy *)dNewValue
-                    previousValue:(nullable DBTEAMLOGSmartSyncPolicy *)previousValue;
+- (instancetype)initWithDNewValue:(nullable DBTEAMPOLICIESSmartSyncPolicy *)dNewValue
+                    previousValue:(nullable DBTEAMPOLICIESSmartSyncPolicy *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param dNewValue New smart sync policy.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGSmartSyncPolicy *)dNewValue;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

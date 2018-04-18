@@ -19,6 +19,8 @@
 #import "DBFILEPROPERTIESOverwritePropertyGroupArg.h"
 #import "DBFILEPROPERTIESPropertiesError.h"
 #import "DBFILEPROPERTIESPropertiesSearchArg.h"
+#import "DBFILEPROPERTIESPropertiesSearchContinueArg.h"
+#import "DBFILEPROPERTIESPropertiesSearchContinueError.h"
 #import "DBFILEPROPERTIESPropertiesSearchError.h"
 #import "DBFILEPROPERTIESPropertiesSearchMatch.h"
 #import "DBFILEPROPERTIESPropertiesSearchQuery.h"
@@ -29,6 +31,7 @@
 #import "DBFILEPROPERTIESPropertyGroupUpdate.h"
 #import "DBFILEPROPERTIESRemovePropertiesArg.h"
 #import "DBFILEPROPERTIESRemovePropertiesError.h"
+#import "DBFILEPROPERTIESRemoveTemplateArg.h"
 #import "DBFILEPROPERTIESRouteObjects.h"
 #import "DBFILEPROPERTIESTemplateError.h"
 #import "DBFILEPROPERTIESTemplateFilter.h"
@@ -87,6 +90,13 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)propertiesSearchContinue:(NSString *)cursor {
+  DBRoute *route = DBFILEPROPERTIESRouteObjects.DBFILEPROPERTIESPropertiesSearchContinue;
+  DBFILEPROPERTIESPropertiesSearchContinueArg *arg =
+      [[DBFILEPROPERTIESPropertiesSearchContinueArg alloc] initWithCursor:cursor];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)propertiesUpdate:(NSString *)path
            updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePropertyGroups {
   DBRoute *route = DBFILEPROPERTIESRouteObjects.DBFILEPROPERTIESPropertiesUpdate;
@@ -113,6 +123,12 @@
 - (DBRpcTask *)templatesListForUser {
   DBRoute *route = DBFILEPROPERTIESRouteObjects.DBFILEPROPERTIESTemplatesListForUser;
   return [self.client requestRpc:route arg:nil];
+}
+
+- (DBRpcTask *)templatesRemoveForUser:(NSString *)templateId {
+  DBRoute *route = DBFILEPROPERTIESRouteObjects.DBFILEPROPERTIESTemplatesRemoveForUser;
+  DBFILEPROPERTIESRemoveTemplateArg *arg = [[DBFILEPROPERTIESRemoveTemplateArg alloc] initWithTemplateId:templateId];
+  return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)templatesUpdateForUser:(NSString *)templateId {

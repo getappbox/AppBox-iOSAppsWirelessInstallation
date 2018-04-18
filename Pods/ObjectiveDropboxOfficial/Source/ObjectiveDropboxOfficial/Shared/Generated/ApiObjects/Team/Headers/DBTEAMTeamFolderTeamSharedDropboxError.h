@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// possible tag states with which the `DBTEAMTeamFolderTeamSharedDropboxError`
 /// union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMTeamFolderTeamSharedDropboxErrorTag) {
-  /// This action is not allowed for a team shared dropbox.
+  /// This action is not allowed for a shared team root.
   DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed,
 
   /// (no description).
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderTeamSharedDropboxErrorTag) {
 /// Initializes union class with tag state of "disallowed".
 ///
 /// Description of the "disallowed" tag state: This action is not allowed for a
-/// team shared dropbox.
+/// shared team root.
 ///
 /// @return An initialized instance.
 ///

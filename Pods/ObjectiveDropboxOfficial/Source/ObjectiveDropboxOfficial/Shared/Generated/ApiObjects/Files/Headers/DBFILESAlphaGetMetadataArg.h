@@ -9,6 +9,7 @@
 #import "DBFILESGetMetadataArg.h"
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESTemplateFilterBase;
 @class DBFILESAlphaGetMetadataArg;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -44,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param includeHasExplicitSharedMembers If true, the results will include a
 /// flag for each file indicating whether or not  that file has any explicit
 /// members.
+/// @param includePropertyGroups If set to a valid list of template IDs,
+/// `propertyGroups` in `DBFILESFileMetadata` is set if there exists property
+/// data associated with the file and each of the listed templates.
 /// @param includePropertyTemplates If set to a valid list of template IDs,
 /// `propertyGroups` in `DBFILESFileMetadata` is set for files with custom
 /// properties.
@@ -54,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
                    includeMediaInfo:(nullable NSNumber *)includeMediaInfo
                      includeDeleted:(nullable NSNumber *)includeDeleted
     includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
            includePropertyTemplates:(nullable NSArray<NSString *> *)includePropertyTemplates;
 
 ///

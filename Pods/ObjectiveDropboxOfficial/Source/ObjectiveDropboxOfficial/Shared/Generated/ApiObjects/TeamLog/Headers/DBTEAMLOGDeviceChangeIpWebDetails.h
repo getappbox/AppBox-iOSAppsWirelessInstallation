@@ -9,7 +9,6 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGDeviceChangeIpWebDetails;
-@class DBTEAMLOGDeviceLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceChangeIpWebDetails` struct.
 ///
-/// IP address associated with active Web session changed.
+/// Changed IP address associated with active web session.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Device information. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGDeviceLogInfo *deviceInfo;
-
 /// Web browser name.
 @property (nonatomic, readonly, copy) NSString *userAgent;
 
@@ -38,18 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
-///
-/// @param userAgent Web browser name.
-/// @param deviceInfo Device information. Might be missing due to historical
-/// data gap.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithUserAgent:(NSString *)userAgent deviceInfo:(nullable DBTEAMLOGDeviceLogInfo *)deviceInfo;
-
-///
-/// Convenience constructor (exposes only non-nullable instance variables with
-/// no default value).
 ///
 /// @param userAgent Web browser name.
 ///

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `GroupCreateDetails` struct.
 ///
-/// Created a group.
+/// Created group.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -32,31 +32,30 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) NSNumber *isCompanyManaged;
 
 /// Group join policy.
-@property (nonatomic, readonly) DBTEAMLOGGroupJoinPolicy *joinPolicy;
+@property (nonatomic, readonly, nullable) DBTEAMLOGGroupJoinPolicy *joinPolicy;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param joinPolicy Group join policy.
 /// @param isCompanyManaged Is company managed group. Might be missing due to
 /// historical data gap.
+/// @param joinPolicy Group join policy.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy
-                  isCompanyManaged:(nullable NSNumber *)isCompanyManaged;
+- (instancetype)initWithIsCompanyManaged:(nullable NSNumber *)isCompanyManaged
+                              joinPolicy:(nullable DBTEAMLOGGroupJoinPolicy *)joinPolicy;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param joinPolicy Group join policy.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithJoinPolicy:(DBTEAMLOGGroupJoinPolicy *)joinPolicy;
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

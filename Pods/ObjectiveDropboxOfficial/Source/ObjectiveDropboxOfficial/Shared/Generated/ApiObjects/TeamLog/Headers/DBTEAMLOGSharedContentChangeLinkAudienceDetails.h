@@ -8,7 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGLinkAudience;
+@class DBSHARINGLinkAudience;
 @class DBTEAMLOGSharedContentChangeLinkAudienceDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SharedContentChangeLinkAudienceDetails` struct.
 ///
-/// Changed the audience of the link for a shared file or folder.
+/// Changed link audience of shared file/folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,52 +28,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Target asset position in the Assets list.
-@property (nonatomic, readonly) NSNumber *targetAssetIndex;
-
-/// Original shared folder name.
-@property (nonatomic, readonly, copy, nullable) NSString *originalFolderName;
-
-/// Shared folder type. Might be missing due to historical data gap.
-@property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
-
 /// New link audience value.
-@property (nonatomic, readonly) DBTEAMLOGLinkAudience *dNewValue;
+@property (nonatomic, readonly) DBSHARINGLinkAudience *dNewValue;
 
-/// Previous link audience value. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGLinkAudience *previousValue;
+/// Previous link audience value.
+@property (nonatomic, readonly, nullable) DBSHARINGLinkAudience *previousValue;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param dNewValue New link audience value.
-/// @param originalFolderName Original shared folder name.
-/// @param sharedFolderType Shared folder type. Might be missing due to
-/// historical data gap.
-/// @param previousValue Previous link audience value. Might be missing due to
-/// historical data gap.
+/// @param previousValue Previous link audience value.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex
-                               dNewValue:(DBTEAMLOGLinkAudience *)dNewValue
-                      originalFolderName:(nullable NSString *)originalFolderName
-                        sharedFolderType:(nullable NSString *)sharedFolderType
-                           previousValue:(nullable DBTEAMLOGLinkAudience *)previousValue;
+- (instancetype)initWithDNewValue:(DBSHARINGLinkAudience *)dNewValue
+                    previousValue:(nullable DBSHARINGLinkAudience *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param targetAssetIndex Target asset position in the Assets list.
 /// @param dNewValue New link audience value.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTargetAssetIndex:(NSNumber *)targetAssetIndex dNewValue:(DBTEAMLOGLinkAudience *)dNewValue;
+- (instancetype)initWithDNewValue:(DBSHARINGLinkAudience *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

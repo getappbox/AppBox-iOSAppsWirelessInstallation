@@ -17,6 +17,7 @@
 @class DBFILEPROPERTIESLookUpPropertiesError;
 @class DBFILEPROPERTIESLookupError;
 @class DBFILEPROPERTIESModifyTemplateError;
+@class DBFILEPROPERTIESPropertiesSearchContinueError;
 @class DBFILEPROPERTIESPropertiesSearchError;
 @class DBFILEPROPERTIESPropertiesSearchMatch;
 @class DBFILEPROPERTIESPropertiesSearchMode;
@@ -82,9 +83,9 @@ propertiesOverwrite:(NSString *)path
      propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;
 
 ///
-/// Remove the specified property group from the file. To remove specific property field key value pairs, see
-/// `propertiesUpdate`. To update a template, see `templatesUpdateForUser` or `templatesUpdateForTeam`. Templates can't
-/// be removed once created.
+/// Permanently removes the specified property group from the file. To remove specific property field key value pairs,
+/// see `propertiesUpdate`. To update a template, see `templatesUpdateForUser` or `templatesUpdateForTeam`. To remove a
+/// template, see `templatesRemoveForUser` or `templatesRemoveForTeam`.
 ///
 /// @param path A unique identifier for the file or folder.
 /// @param propertyTemplateIds A list of identifiers for a template created by `templatesAddForUser` or
@@ -120,6 +121,17 @@ propertiesOverwrite:(NSString *)path
 - (DBRpcTask<DBFILEPROPERTIESPropertiesSearchResult *, DBFILEPROPERTIESPropertiesSearchError *> *)
 propertiesSearch:(NSArray<DBFILEPROPERTIESPropertiesSearchQuery *> *)queries
   templateFilter:(nullable DBFILEPROPERTIESTemplateFilter *)templateFilter;
+
+///
+/// Once a cursor has been retrieved from `propertiesSearch`, use this to paginate through all search results.
+///
+/// @param cursor The cursor returned by your last call to `propertiesSearch` or `propertiesSearchContinue`.
+///
+/// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESPropertiesSearchResult` object on
+/// success or a `DBFILEPROPERTIESPropertiesSearchContinueError` object on failure.
+///
+- (DBRpcTask<DBFILEPROPERTIESPropertiesSearchResult *, DBFILEPROPERTIESPropertiesSearchContinueError *> *)
+propertiesSearchContinue:(NSString *)cursor;
 
 ///
 /// Add, update or remove properties associated with the supplied file and templates. This endpoint should be used
@@ -170,6 +182,17 @@ templatesAddForUser:(NSString *)name
 /// success or a `DBFILEPROPERTIESTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESListTemplateResult *, DBFILEPROPERTIESTemplateError *> *)templatesListForUser;
+
+///
+/// Permanently removes the specified template created from `templatesAddForUser`. All properties associated with the
+/// template will also be removed. This action cannot be undone.
+///
+/// @param templateId An identifier for a template created by `templatesAddForUser` or `templatesAddForTeam`.
+///
+/// @return Through the response callback, the caller will receive a `void` object on success or a
+/// `DBFILEPROPERTIESTemplateError` object on failure.
+///
+- (DBRpcTask<DBNilObject *, DBFILEPROPERTIESTemplateError *> *)templatesRemoveForUser:(NSString *)templateId;
 
 ///
 /// Update a template associated with a user. This route can update the template name, the template description and add

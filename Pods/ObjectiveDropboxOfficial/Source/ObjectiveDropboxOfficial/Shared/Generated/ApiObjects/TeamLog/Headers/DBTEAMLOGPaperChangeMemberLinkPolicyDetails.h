@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperChangeMemberLinkPolicyDetails` struct.
 ///
-/// Changed whether non team members can view Paper documents using a link.
+/// Changed whether non-members can view Paper docs with link.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

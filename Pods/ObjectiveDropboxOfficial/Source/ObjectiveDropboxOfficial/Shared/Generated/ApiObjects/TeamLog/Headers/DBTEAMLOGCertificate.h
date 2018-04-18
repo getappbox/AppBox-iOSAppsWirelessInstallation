@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSString *sha1Fingerprint;
 
 /// Certificate common name.
-@property (nonatomic, readonly, copy) NSString *commonName;
+@property (nonatomic, readonly, copy, nullable) NSString *commonName;
 
 #pragma mark - Constructors
 
@@ -69,7 +69,27 @@ NS_ASSUME_NONNULL_BEGIN
                  expirationDate:(NSString *)expirationDate
                    serialNumber:(NSString *)serialNumber
                 sha1Fingerprint:(NSString *)sha1Fingerprint
-                     commonName:(NSString *)commonName;
+                     commonName:(nullable NSString *)commonName;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+/// @param subject Certificate subject.
+/// @param issuer Certificate issuer.
+/// @param issueDate Certificate issue date.
+/// @param expirationDate Certificate expiration date.
+/// @param serialNumber Certificate serial number.
+/// @param sha1Fingerprint Certificate sha1 fingerprint.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSubject:(NSString *)subject
+                         issuer:(NSString *)issuer
+                      issueDate:(NSString *)issueDate
+                 expirationDate:(NSString *)expirationDate
+                   serialNumber:(NSString *)serialNumber
+                sha1Fingerprint:(NSString *)sha1Fingerprint;
 
 - (instancetype)init NS_UNAVAILABLE;
 

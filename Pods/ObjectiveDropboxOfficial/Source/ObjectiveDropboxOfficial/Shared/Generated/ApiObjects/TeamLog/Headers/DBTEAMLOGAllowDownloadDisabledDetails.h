@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `AllowDownloadDisabledDetails` struct.
 ///
-/// Disabled allow downloads.
+/// Disabled downloads.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

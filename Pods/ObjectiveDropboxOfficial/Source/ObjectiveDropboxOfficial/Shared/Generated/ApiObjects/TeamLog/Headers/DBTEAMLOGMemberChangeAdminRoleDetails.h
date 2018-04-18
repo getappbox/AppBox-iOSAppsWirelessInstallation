@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberChangeAdminRoleDetails` struct.
 ///
-/// Change the admin role belonging to team member.
+/// Changed team member admin role.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

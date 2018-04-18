@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `AppUnlinkTeamDetails` struct.
 ///
-/// Unlinked an app for team.
+/// Unlinked app for team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

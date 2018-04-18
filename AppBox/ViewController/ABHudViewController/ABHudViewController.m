@@ -61,6 +61,7 @@
     [lighten setDefaults];
     [lighten setValue:@1 forKey:@"inputBrightness"];
     [progressIndicator setContentFilters:[NSArray arrayWithObjects:lighten, nil]];
+    [progressIndicatorAds setContentFilters:[NSArray arrayWithObjects:lighten, nil]];
     
     //set default adindex
     adIndex = @0;
@@ -119,9 +120,11 @@
 
 -(void)setShowAds:(BOOL)showAds{
     _showAds = showAds;
-    [adHeightConstraint setActive: !showAds];
-    [equalHeightConstraint setActive: showAds];
-    [adHeightConstraint setConstant:0];
+    //show ads
+    [self.adBoxView setHidden:!showAds];
+    [self.hudWithAds setHidden:!showAds];
+    //hide ads
+    [self.hudWithoutAds setHidden:showAds];
 }
 
 -(void)setAdURL:(NSString *)adURL{
@@ -140,24 +143,38 @@
 
 -(void)setStatus:(NSString *)status{
     _status = status;
-    progressLabel.stringValue = status;
+    [progressLabel setStringValue: status];
+    [progressLabelAds setStringValue: status];
 }
 
 -(void)setProgress:(NSNumber *)progress{
     _progress = progress;
+    [resultImageView setHidden:YES];
+    [resultImageViewAds setHidden:YES];
+    [progressIndicator setHidden:NO];
+    [progressIndicatorAds setHidden:NO];
     [progressIndicator startAnimation:self];
+    [progressIndicatorAds startAnimation:self];
     if (progress.integerValue == -1){
         [progressIndicator setIndeterminate: YES];
+        [progressIndicatorAds setIndeterminate: YES];
     } else {
         [progressIndicator setIndeterminate: NO];
-        progressIndicator.doubleValue = progress.doubleValue;
+        [progressIndicator setDoubleValue: progress.doubleValue];
+        [progressIndicatorAds setIndeterminate: NO];
+        [progressIndicatorAds setDoubleValue: progress.doubleValue];
     }
 }
 
 -(void)setResult:(BOOL)result{
     _result = result;
+    [resultImageView setHidden:NO];
+    [resultImageViewAds setHidden:NO];
+    [progressIndicator setHidden:YES];
+    [progressIndicatorAds setHidden:YES];
     NSImage *resultImage = result ? [NSImage imageNamed:@"Check"] : [NSImage imageNamed:@"Multiply"];
     [resultImageView setImage:resultImage];
+    [resultImageViewAds setImage:resultImage];
 }
 
 -(void)setHudType:(HudType)hudType{

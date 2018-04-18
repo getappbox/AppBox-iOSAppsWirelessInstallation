@@ -9,6 +9,7 @@
 #import "DBSHARINGUserMembershipInfo.h"
 #import "DBSerializableProtocol.h"
 
+@class DBSEENSTATEPlatformType;
 @class DBSHARINGAccessLevel;
 @class DBSHARINGMemberPermission;
 @class DBSHARINGUserFileMembershipInfo;
@@ -35,6 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The UTC timestamp of when the user has last seen the content, if they have.
 @property (nonatomic, readonly, nullable) NSDate *timeLastSeen;
 
+/// The platform on which the user has last seen the content, or unknown.
+@property (nonatomic, readonly, nullable) DBSEENSTATEPlatformType *platformType;
+
 #pragma mark - Constructors
 
 ///
@@ -44,10 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param user The account information for the membership user.
 /// @param permissions The permissions that requesting user has on this member.
 /// The set of permissions corresponds to the MemberActions in the request.
-/// @param initials Suggested name initials for a member.
+/// @param initials Never set.
 /// @param isInherited True if the member has access from a parent folder.
 /// @param timeLastSeen The UTC timestamp of when the user has last seen the
 /// content, if they have.
+/// @param platformType The platform on which the user has last seen the
+/// content, or unknown.
 ///
 /// @return An initialized instance.
 ///
@@ -56,7 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
                        permissions:(nullable NSArray<DBSHARINGMemberPermission *> *)permissions
                           initials:(nullable NSString *)initials
                        isInherited:(nullable NSNumber *)isInherited
-                      timeLastSeen:(nullable NSDate *)timeLastSeen;
+                      timeLastSeen:(nullable NSDate *)timeLastSeen
+                      platformType:(nullable DBSEENSTATEPlatformType *)platformType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

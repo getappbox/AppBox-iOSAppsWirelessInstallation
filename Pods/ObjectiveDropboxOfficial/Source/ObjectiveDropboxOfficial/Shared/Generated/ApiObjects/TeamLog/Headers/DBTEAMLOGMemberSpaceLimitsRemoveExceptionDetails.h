@@ -17,8 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `MemberSpaceLimitsRemoveExceptionDetails` struct.
 ///
-/// Removed an exception for one or more team members to bypass space limits
-/// imposed by policy.
+/// Removed members from member space limit exception list.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

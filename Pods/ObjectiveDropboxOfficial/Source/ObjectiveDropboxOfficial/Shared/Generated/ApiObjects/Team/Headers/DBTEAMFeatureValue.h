@@ -9,6 +9,8 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMFeatureValue;
+@class DBTEAMHasTeamFileEventsValue;
+@class DBTEAMHasTeamSelectiveSyncValue;
 @class DBTEAMHasTeamSharedDropboxValue;
 @class DBTEAMUploadApiRateLimitValue;
 
@@ -20,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `FeatureValue` union.
 ///
 /// The values correspond to entries in Feature. You may get different value
-/// according to your Dropbox for Business plan.
+/// according to your Dropbox Business plan.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -40,6 +42,12 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
   DBTEAMFeatureValueHasTeamSharedDropbox,
 
   /// (no description).
+  DBTEAMFeatureValueHasTeamFileEvents,
+
+  /// (no description).
+  DBTEAMFeatureValueHasTeamSelectiveSync,
+
+  /// (no description).
   DBTEAMFeatureValueOther,
 
 };
@@ -54,6 +62,14 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// (no description). @note Ensure the `isHasTeamSharedDropbox` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMHasTeamSharedDropboxValue *hasTeamSharedDropbox;
+
+/// (no description). @note Ensure the `isHasTeamFileEvents` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMHasTeamFileEventsValue *hasTeamFileEvents;
+
+/// (no description). @note Ensure the `isHasTeamSelectiveSync` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMHasTeamSelectiveSyncValue *hasTeamSelectiveSync;
 
 #pragma mark - Constructors
 
@@ -74,6 +90,24 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithHasTeamSharedDropbox:(DBTEAMHasTeamSharedDropboxValue *)hasTeamSharedDropbox;
+
+///
+/// Initializes union class with tag state of "has_team_file_events".
+///
+/// @param hasTeamFileEvents (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithHasTeamFileEvents:(DBTEAMHasTeamFileEventsValue *)hasTeamFileEvents;
+
+///
+/// Initializes union class with tag state of "has_team_selective_sync".
+///
+/// @param hasTeamSelectiveSync (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithHasTeamSelectiveSync:(DBTEAMHasTeamSelectiveSyncValue *)hasTeamSelectiveSync;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -110,6 +144,31 @@ typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
 /// "has_team_shared_dropbox".
 ///
 - (BOOL)isHasTeamSharedDropbox;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "has_team_file_events".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `hasTeamFileEvents` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "has_team_file_events".
+///
+- (BOOL)isHasTeamFileEvents;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "has_team_selective_sync".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `hasTeamSelectiveSync` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "has_team_selective_sync".
+///
+- (BOOL)isHasTeamSelectiveSync;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

@@ -8,10 +8,10 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGAppLogInfo;
-@class DBTEAMLOGDeviceLogInfo;
 @class DBTEAMLOGFolderLogInfo;
 @class DBTEAMLOGJoinTeamDetails;
+@class DBTEAMLOGLinkedDeviceLogInfo;
+@class DBTEAMLOGUserLinkedAppLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Linked applications.
-@property (nonatomic, readonly) NSArray<DBTEAMLOGAppLogInfo *> *linkedApps;
+@property (nonatomic, readonly) NSArray<DBTEAMLOGUserLinkedAppLogInfo *> *linkedApps;
 
 /// Linked devices.
-@property (nonatomic, readonly) NSArray<DBTEAMLOGDeviceLogInfo *> *linkedDevices;
+@property (nonatomic, readonly) NSArray<DBTEAMLOGLinkedDeviceLogInfo *> *linkedDevices;
 
 /// Linked shared folders.
 @property (nonatomic, readonly) NSArray<DBTEAMLOGFolderLogInfo *> *linkedSharedFolders;
@@ -50,8 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithLinkedApps:(NSArray<DBTEAMLOGAppLogInfo *> *)linkedApps
-                     linkedDevices:(NSArray<DBTEAMLOGDeviceLogInfo *> *)linkedDevices
+- (instancetype)initWithLinkedApps:(NSArray<DBTEAMLOGUserLinkedAppLogInfo *> *)linkedApps
+                     linkedDevices:(NSArray<DBTEAMLOGLinkedDeviceLogInfo *> *)linkedDevices
                linkedSharedFolders:(NSArray<DBTEAMLOGFolderLogInfo *> *)linkedSharedFolders;
 
 - (instancetype)init NS_UNAVAILABLE;

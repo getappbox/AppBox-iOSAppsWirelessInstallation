@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperDocSlackShareDetails` struct.
 ///
-/// Paper doc link shared via slack.
+/// Shared Paper doc via Slack.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

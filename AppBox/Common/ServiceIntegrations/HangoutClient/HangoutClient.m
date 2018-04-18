@@ -52,14 +52,14 @@
     [keyValues setObject:[NSString stringWithFormat:@"%@ (%@)", project.version, project.build] forKey:@"content"];
     [keyValues setObject:[NSString stringWithFormat:@"Build Scheme - %@", project.selectedSchemes] forKey:@"bottomLabel"];
     [keyValues setObject:@"false" forKey:@"contentMultiline"];
-    NSDictionary *cardAction = @{@"openLink" : @{ @"url" : project.appShortShareableURL.absoluteString }};
+    NSDictionary *cardAction = @{@"openLink" : @{ @"url" : project.appShortShareableURL.stringValue }};
     [keyValues setObject:cardAction forKey:@"onClick"];
     [keyValues setObject:@"DESCRIPTION" forKey:@"icon"];
     
     //Download Button
     NSMutableDictionary *downloadButton = [[NSMutableDictionary alloc] init];
     [downloadButton setObject:@"Install Application" forKey:@"text"];
-    NSDictionary *downloadButtonAction = @{@"openLink" : @{ @"url" : project.appShortShareableURL.absoluteString }};
+    NSDictionary *downloadButtonAction = @{@"openLink" : @{ @"url" : project.appShortShareableURL.stringValue }};
     [downloadButton setObject:downloadButtonAction forKey:@"onClick"];
     [keyValues setObject:@{@"textButton": downloadButton} forKey:@"button"];
     

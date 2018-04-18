@@ -192,16 +192,8 @@
 }
 
 - (IBAction)buttonSameLinkHelpTapped:(NSButton *)sender {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText: abKeepSameLinkHelpTitle];
-    [alert setInformativeText:abKeepSameLinkHelpMessage];
-    [alert setAlertStyle:NSInformationalAlertStyle];
-    [alert addButtonWithTitle:@"Know More"];
-    [alert addButtonWithTitle:@"Ok"];
-    if ([alert runModal] == NSAlertFirstButtonReturn){
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
-        [EventTracker logEventWithType:LogEventTypeExternalLinkKeepSameLink];
-    }
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abKeepSameLinkReadMoreURL]];
+    [EventTracker logEventWithType:LogEventTypeExternalLinkKeepSameLink];
 }
 
 
@@ -255,6 +247,10 @@
             [self enableMailField:buttonSendMail.state == NSOnState];
         }
         
+        if ([AppDelegate appDelegate].processing){
+            [[AppDelegate appDelegate] addSessionLog:@"A request already in progress."];
+            return;
+        }
         //set processing flag
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
@@ -921,7 +917,9 @@
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
     [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
     
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n\nBUILD URL - %@\n\n\n", project.appShortShareableURL]];
+    NSString *notificationMessage = [NSString stringWithFormat:@"%@ IPA file uploaded.\nShare URL - %@", project.name, project.appShortShareableURL];
+    [Common showLocalNotificationWithTitle:@"AppBox" andMessage:notificationMessage];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nBUILD URL - %@\n\n\n.", project.appShortShareableURL]];
     
     if ([UserData userSlackMessage].length > 0) {
         if ([UserData userSlackChannel].length > 0){

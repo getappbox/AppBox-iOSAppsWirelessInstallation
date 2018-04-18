@@ -119,6 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the revokeSharedLink route object.
 + (DBRoute *)DBSHARINGRevokeSharedLink;
 
+/// Accessor method for the setAccessInheritance route object.
++ (DBRoute *)DBSHARINGSetAccessInheritance;
+
 /// Accessor method for the shareFolder route object.
 + (DBRoute *)DBSHARINGShareFolder;
 
