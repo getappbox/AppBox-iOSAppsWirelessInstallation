@@ -247,6 +247,10 @@
             [self enableMailField:buttonSendMail.state == NSOnState];
         }
         
+        if ([AppDelegate appDelegate].processing){
+            [[AppDelegate appDelegate] addSessionLog:@"A request already in progress."];
+            return;
+        }
         //set processing flag
         [[AppDelegate appDelegate] setProcessing:true];
         [[textFieldEmail window] makeFirstResponder:self.view];
