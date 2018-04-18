@@ -29,7 +29,7 @@
     ZXBitMatrix *result = [writer encode:url format:kBarcodeFormatQRCode width:250 height:250 error:&error];
     if (result){
         CGImageRef qrCodeImage = [[ZXImage imageWithMatrix:result] cgimage];
-        [imageViewQRCode setImage:[[NSImage alloc] initWithCGImage:qrCodeImage size:NSMakeSize(250, 250)]];
+        [imageViewQRCode setImage:[NSImage imageWithCGImage:qrCodeImage]];
     }else{
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
     }
