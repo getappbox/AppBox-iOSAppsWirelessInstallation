@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperExternalViewDefaultTeamDetails` struct.
 ///
-/// Paper external sharing policy changed: default team.
+/// Changed Paper external sharing setting to default team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -27,14 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
+/// Event unique identifier.
+@property (nonatomic, readonly, copy) NSString *eventUuid;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
+/// @param eventUuid Event unique identifier.
+///
 /// @return An initialized instance.
 ///
-- (instancetype)initDefault;
+- (instancetype)initWithEventUuid:(NSString *)eventUuid;
 
 - (instancetype)init NS_UNAVAILABLE;
 

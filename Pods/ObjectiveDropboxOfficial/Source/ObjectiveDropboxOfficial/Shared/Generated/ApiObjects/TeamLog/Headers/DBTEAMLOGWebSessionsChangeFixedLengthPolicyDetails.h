@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `WebSessionsChangeFixedLengthPolicyDetails` struct.
 ///
-/// Changed how long team members can stay signed in to Dropbox on the web.
+/// Changed how long members can stay signed in to Dropbox.com.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

@@ -28,16 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESTemplateFilterTag` enum type represents the possible
 /// tag states with which the `DBFILEPROPERTIESTemplateFilter` union can exist.
 typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
-  /// No templates will be filtered from the result (all templates will be
-  /// returned).
-  DBFILEPROPERTIESTemplateFilterFilterNone,
-
   /// Only templates with an ID in the supplied list will be returned (a
   /// subset of templates will be returned).
   DBFILEPROPERTIESTemplateFilterFilterSome,
 
   /// (no description).
   DBFILEPROPERTIESTemplateFilterOther,
+
+  /// No templates will be filtered from the result (all templates will be
+  /// returned).
+  DBFILEPROPERTIESTemplateFilterFilterNone,
 
 };
 
@@ -50,16 +50,6 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
 @property (nonatomic, readonly) NSArray<NSString *> *filterSome;
 
 #pragma mark - Constructors
-
-///
-/// Initializes union class with tag state of "filter_none".
-///
-/// Description of the "filter_none" tag state: No templates will be filtered
-/// from the result (all templates will be returned).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFilterNone;
 
 ///
 /// Initializes union class with tag state of "filter_some".
@@ -81,16 +71,19 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
 ///
 - (instancetype)initWithOther;
 
+///
+/// Initializes union class with tag state of "filter_none".
+///
+/// Description of the "filter_none" tag state: No templates will be filtered
+/// from the result (all templates will be returned).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFilterNone;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value "filter_none".
-///
-/// @return Whether the union's current tag state has value "filter_none".
-///
-- (BOOL)isFilterNone;
 
 ///
 /// Retrieves whether the union's current tag state has value "filter_some".
@@ -108,6 +101,13 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
 /// @return Whether the union's current tag state has value "other".
 ///
 - (BOOL)isOther;
+
+///
+/// Retrieves whether the union's current tag state has value "filter_none".
+///
+/// @return Whether the union's current tag state has value "filter_none".
+///
+- (BOOL)isFilterNone;
 
 ///
 /// Retrieves string value of union's current tag state.

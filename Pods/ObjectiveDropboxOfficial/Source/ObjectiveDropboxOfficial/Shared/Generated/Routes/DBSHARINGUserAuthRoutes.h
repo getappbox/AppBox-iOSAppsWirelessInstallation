@@ -13,6 +13,7 @@
 @class DBASYNCPollError;
 @class DBFILESLookupError;
 @class DBNilObject;
+@class DBSHARINGAccessInheritance;
 @class DBSHARINGAccessLevel;
 @class DBSHARINGAclUpdatePolicy;
 @class DBSHARINGAddFileMemberError;
@@ -75,6 +76,7 @@
 @class DBSHARINGRemoveMemberJobStatus;
 @class DBSHARINGRequestedVisibility;
 @class DBSHARINGRevokeSharedLinkError;
+@class DBSHARINGSetAccessInheritanceError;
 @class DBSHARINGShareFolderError;
 @class DBSHARINGShareFolderJobStatus;
 @class DBSHARINGShareFolderLaunch;
@@ -989,6 +991,34 @@ removeFolderMember:(NSString *)sharedFolderId
 /// `DBSHARINGRevokeSharedLinkError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBSHARINGRevokeSharedLinkError *> *)revokeSharedLink:(NSString *)url;
+
+///
+/// Change the inheritance policy of an existing Shared Folder. Only permitted for shared folders in a shared team root.
+/// If a `asyncJobId` in `DBSHARINGShareFolderLaunch` is returned, you'll need to call `checkShareJobStatus` until the
+/// action completes to get the metadata for the folder.
+///
+/// @param sharedFolderId The ID for the shared folder.
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGShareFolderLaunch` object on success or a
+/// `DBSHARINGSetAccessInheritanceError` object on failure.
+///
+- (DBRpcTask<DBSHARINGShareFolderLaunch *, DBSHARINGSetAccessInheritanceError *> *)setAccessInheritance:
+    (NSString *)sharedFolderId;
+
+///
+/// Change the inheritance policy of an existing Shared Folder. Only permitted for shared folders in a shared team root.
+/// If a `asyncJobId` in `DBSHARINGShareFolderLaunch` is returned, you'll need to call `checkShareJobStatus` until the
+/// action completes to get the metadata for the folder.
+///
+/// @param accessInheritance The access inheritance settings for the folder.
+/// @param sharedFolderId The ID for the shared folder.
+///
+/// @return Through the response callback, the caller will receive a `DBSHARINGShareFolderLaunch` object on success or a
+/// `DBSHARINGSetAccessInheritanceError` object on failure.
+///
+- (DBRpcTask<DBSHARINGShareFolderLaunch *, DBSHARINGSetAccessInheritanceError *> *)
+setAccessInheritance:(NSString *)sharedFolderId
+   accessInheritance:(nullable DBSHARINGAccessInheritance *)accessInheritance;
 
 ///
 /// Share a folder with collaborators. Most sharing will be completed synchronously. Large folders will be completed

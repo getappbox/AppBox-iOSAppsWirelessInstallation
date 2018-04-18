@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Reseller name.
 @property (nonatomic, readonly, copy) NSString *resellerName;
 
-/// Reseller ID.
-@property (nonatomic, readonly, copy) NSString *resellerId;
+/// Reseller email.
+@property (nonatomic, readonly, copy) NSString *resellerEmail;
 
 #pragma mark - Constructors
 
@@ -39,11 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param resellerName Reseller name.
-/// @param resellerId Reseller ID.
+/// @param resellerEmail Reseller email.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithResellerName:(NSString *)resellerName resellerId:(NSString *)resellerId;
+- (instancetype)initWithResellerName:(NSString *)resellerName resellerEmail:(NSString *)resellerEmail;
 
 - (instancetype)init NS_UNAVAILABLE;
 

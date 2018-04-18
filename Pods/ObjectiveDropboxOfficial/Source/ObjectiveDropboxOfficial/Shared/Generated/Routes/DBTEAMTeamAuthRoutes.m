@@ -22,6 +22,11 @@
 #import "DBFILEPROPERTIESTemplateError.h"
 #import "DBFILEPROPERTIESUpdateTemplateArg.h"
 #import "DBFILEPROPERTIESUpdateTemplateResult.h"
+#import "DBFILESContentSyncSetting.h"
+#import "DBFILESContentSyncSettingArg.h"
+#import "DBFILESSyncSetting.h"
+#import "DBFILESSyncSettingArg.h"
+#import "DBFILESSyncSettingsError.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTEAMActiveWebSession.h"
@@ -39,6 +44,15 @@
 #import "DBTEAMDesktopClientSession.h"
 #import "DBTEAMDeviceSessionArg.h"
 #import "DBTEAMDevicesActive.h"
+#import "DBTEAMExcludedUsersListArg.h"
+#import "DBTEAMExcludedUsersListContinueArg.h"
+#import "DBTEAMExcludedUsersListContinueError.h"
+#import "DBTEAMExcludedUsersListError.h"
+#import "DBTEAMExcludedUsersListResult.h"
+#import "DBTEAMExcludedUsersUpdateArg.h"
+#import "DBTEAMExcludedUsersUpdateError.h"
+#import "DBTEAMExcludedUsersUpdateResult.h"
+#import "DBTEAMExcludedUsersUpdateStatus.h"
 #import "DBTEAMFeature.h"
 #import "DBTEAMFeatureValue.h"
 #import "DBTEAMFeaturesGetValuesBatchArg.h"
@@ -105,6 +119,7 @@
 #import "DBTEAMMemberAddResult.h"
 #import "DBTEAMMemberDevices.h"
 #import "DBTEAMMemberLinkedApps.h"
+#import "DBTEAMMemberProfile.h"
 #import "DBTEAMMemberSelectorError.h"
 #import "DBTEAMMembersAddArg.h"
 #import "DBTEAMMembersAddJobStatus.h"
@@ -151,6 +166,7 @@
 #import "DBTEAMRevokeLinkedAppStatus.h"
 #import "DBTEAMRouteObjects.h"
 #import "DBTEAMSetCustomQuotaArg.h"
+#import "DBTEAMSetCustomQuotaError.h"
 #import "DBTEAMStorageBucket.h"
 #import "DBTEAMTeamFolderAccessError.h"
 #import "DBTEAMTeamFolderActivateError.h"
@@ -175,6 +191,8 @@
 #import "DBTEAMTeamFolderRenameError.h"
 #import "DBTEAMTeamFolderStatus.h"
 #import "DBTEAMTeamFolderTeamSharedDropboxError.h"
+#import "DBTEAMTeamFolderUpdateSyncSettingsArg.h"
+#import "DBTEAMTeamFolderUpdateSyncSettingsError.h"
 #import "DBTEAMTeamGetInfoResult.h"
 #import "DBTEAMTeamMemberInfo.h"
 #import "DBTEAMTeamMemberProfile.h"
@@ -472,6 +490,48 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersAdd {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersAdd;
+  DBTEAMExcludedUsersUpdateArg *arg = [[DBTEAMExcludedUsersUpdateArg alloc] initDefault];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersAdd:(NSArray<DBTEAMUserSelectorArg *> *)users {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersAdd;
+  DBTEAMExcludedUsersUpdateArg *arg = [[DBTEAMExcludedUsersUpdateArg alloc] initWithUsers:users];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersList {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersList;
+  DBTEAMExcludedUsersListArg *arg = [[DBTEAMExcludedUsersListArg alloc] initDefault];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersList:(NSNumber *)limit {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersList;
+  DBTEAMExcludedUsersListArg *arg = [[DBTEAMExcludedUsersListArg alloc] initWithLimit:limit];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersListContinue:(NSString *)cursor {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersListContinue;
+  DBTEAMExcludedUsersListContinueArg *arg = [[DBTEAMExcludedUsersListContinueArg alloc] initWithCursor:cursor];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersRemove {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersRemove;
+  DBTEAMExcludedUsersUpdateArg *arg = [[DBTEAMExcludedUsersUpdateArg alloc] initDefault];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)memberSpaceLimitsExcludedUsersRemove:(NSArray<DBTEAMUserSelectorArg *> *)users {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsExcludedUsersRemove;
+  DBTEAMExcludedUsersUpdateArg *arg = [[DBTEAMExcludedUsersUpdateArg alloc] initWithUsers:users];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)memberSpaceLimitsGetCustomQuota:(NSArray<DBTEAMUserSelectorArg *> *)users {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMMemberSpaceLimitsGetCustomQuota;
   DBTEAMCustomQuotaUsersArg *arg = [[DBTEAMCustomQuotaUsersArg alloc] initWithUsers:users];
@@ -751,6 +811,12 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)teamFolderCreate:(NSString *)name syncSetting:(DBFILESSyncSettingArg *)syncSetting {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMTeamFolderCreate;
+  DBTEAMTeamFolderCreateArg *arg = [[DBTEAMTeamFolderCreateArg alloc] initWithName:name syncSetting:syncSetting];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)teamFolderGetInfo:(NSArray<NSString *> *)teamFolderIds {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMTeamFolderGetInfo;
   DBTEAMTeamFolderIdListArg *arg = [[DBTEAMTeamFolderIdListArg alloc] initWithTeamFolderIds:teamFolderIds];
@@ -784,6 +850,24 @@
 - (DBRpcTask *)teamFolderRename:(NSString *)teamFolderId name:(NSString *)name {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMTeamFolderRename;
   DBTEAMTeamFolderRenameArg *arg = [[DBTEAMTeamFolderRenameArg alloc] initWithTeamFolderId:teamFolderId name:name];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)teamFolderUpdateSyncSettings:(NSString *)teamFolderId {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMTeamFolderUpdateSyncSettings;
+  DBTEAMTeamFolderUpdateSyncSettingsArg *arg =
+      [[DBTEAMTeamFolderUpdateSyncSettingsArg alloc] initWithTeamFolderId:teamFolderId];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)teamFolderUpdateSyncSettings:(NSString *)teamFolderId
+                                syncSetting:(DBFILESSyncSettingArg *)syncSetting
+                        contentSyncSettings:(NSArray<DBFILESContentSyncSettingArg *> *)contentSyncSettings {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMTeamFolderUpdateSyncSettings;
+  DBTEAMTeamFolderUpdateSyncSettingsArg *arg =
+      [[DBTEAMTeamFolderUpdateSyncSettingsArg alloc] initWithTeamFolderId:teamFolderId
+                                                              syncSetting:syncSetting
+                                                      contentSyncSettings:contentSyncSettings];
   return [self.client requestRpc:route arg:arg];
 }
 

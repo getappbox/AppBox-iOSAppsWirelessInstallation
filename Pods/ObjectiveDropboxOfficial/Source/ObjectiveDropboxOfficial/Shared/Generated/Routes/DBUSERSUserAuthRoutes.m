@@ -5,6 +5,7 @@
 ///
 
 #import "DBUSERSUserAuthRoutes.h"
+#import "DBCOMMONRootInfo.h"
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTransportClientProtocol.h"

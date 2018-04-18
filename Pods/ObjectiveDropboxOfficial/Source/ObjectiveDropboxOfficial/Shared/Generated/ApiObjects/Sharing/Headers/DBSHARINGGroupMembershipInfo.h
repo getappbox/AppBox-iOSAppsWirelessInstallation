@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param group The information about the membership group.
 /// @param permissions The permissions that requesting user has on this member.
 /// The set of permissions corresponds to the MemberActions in the request.
-/// @param initials Suggested name initials for a member.
+/// @param initials Never set.
 /// @param isInherited True if the member has access from a parent folder.
 ///
 /// @return An initialized instance.

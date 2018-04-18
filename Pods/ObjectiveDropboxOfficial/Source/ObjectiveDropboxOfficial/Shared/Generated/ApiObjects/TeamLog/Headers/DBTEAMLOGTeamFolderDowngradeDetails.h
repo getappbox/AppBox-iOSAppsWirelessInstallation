@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TeamFolderDowngradeDetails` struct.
 ///
-/// Downgraded a team folder to a regular shared folder.
+/// Downgraded team folder to regular shared folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

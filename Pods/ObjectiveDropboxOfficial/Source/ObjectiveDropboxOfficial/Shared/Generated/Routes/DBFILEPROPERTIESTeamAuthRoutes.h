@@ -17,6 +17,7 @@
 @class DBFILEPROPERTIESLookUpPropertiesError;
 @class DBFILEPROPERTIESLookupError;
 @class DBFILEPROPERTIESModifyTemplateError;
+@class DBFILEPROPERTIESPropertiesSearchContinueError;
 @class DBFILEPROPERTIESPropertiesSearchError;
 @class DBFILEPROPERTIESPropertiesSearchMatch;
 @class DBFILEPROPERTIESPropertiesSearchMode;
@@ -53,7 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Add a template associated with a team. See `propertiesAdd` to add properties to a file or folder.
+/// Add a template associated with a team. See `propertiesAdd` to add properties to a file or folder. Note: this
+/// endpoint will create team-owned templates.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESAddTemplateResult` object on
@@ -83,6 +85,17 @@ templatesAddForTeam:(NSString *)name
 /// success or a `DBFILEPROPERTIESTemplateError` object on failure.
 ///
 - (DBRpcTask<DBFILEPROPERTIESListTemplateResult *, DBFILEPROPERTIESTemplateError *> *)templatesListForTeam;
+
+///
+/// Permanently removes the specified template created from `templatesAddForUser`. All properties associated with the
+/// template will also be removed. This action cannot be undone.
+///
+/// @param templateId An identifier for a template created by `templatesAddForUser` or `templatesAddForTeam`.
+///
+/// @return Through the response callback, the caller will receive a `void` object on success or a
+/// `DBFILEPROPERTIESTemplateError` object on failure.
+///
+- (DBRpcTask<DBNilObject *, DBFILEPROPERTIESTemplateError *> *)templatesRemoveForTeam:(NSString *)templateId;
 
 ///
 /// Update a template associated with a team. This route can update the template name, the template description and add

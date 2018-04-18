@@ -36,6 +36,7 @@
                                                  stringByAppendingString:defaultUserAgent]
                                            : defaultUserAgent;
     _asMemberId = transportConfig.asMemberId;
+    _pathRoot = transportConfig.pathRoot;
     _additionalHeaders = transportConfig.additionalHeaders;
   }
   return self;
@@ -62,6 +63,11 @@
   if (!noauth) {
     if (_asMemberId) {
       [headers setObject:_asMemberId forKey:@"Dropbox-Api-Select-User"];
+    }
+
+    if (_pathRoot) {
+      NSString *pathRootStr = [[self class] serializeStringWithRoute:nil routeArg:_pathRoot];
+      [headers setObject:pathRootStr forKey:@"Dropbox-Api-Path-Root"];
     }
 
     if (routeAuth && [routeAuth isEqualToString:@"app"]) {
@@ -133,7 +139,7 @@
     return nil;
   }
 
-  if (route.dataStructSerialBlock) {
+  if (route != nil && route.dataStructSerialBlock) {
     return [[self class] jsonDataWithJsonObj:route.dataStructSerialBlock(arg)];
   }
 

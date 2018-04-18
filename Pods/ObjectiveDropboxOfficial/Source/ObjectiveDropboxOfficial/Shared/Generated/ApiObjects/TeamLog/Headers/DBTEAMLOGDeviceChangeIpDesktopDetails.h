@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGDeviceChangeIpDesktopDetails;
-@class DBTEAMLOGDeviceLogInfo;
+@class DBTEAMLOGDeviceSessionLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceChangeIpDesktopDetails` struct.
 ///
-/// IP address associated with active desktop session changed.
+/// Changed IP address associated with active desktop session.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,19 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Device information.
-@property (nonatomic, readonly) DBTEAMLOGDeviceLogInfo *deviceInfo;
+/// Device's session logged information.
+@property (nonatomic, readonly) DBTEAMLOGDeviceSessionLogInfo *deviceSessionInfo;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param deviceInfo Device information.
+/// @param deviceSessionInfo Device's session logged information.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo;
+- (instancetype)initWithDeviceSessionInfo:(DBTEAMLOGDeviceSessionLogInfo *)deviceSessionInfo;
 
 - (instancetype)init NS_UNAVAILABLE;
 

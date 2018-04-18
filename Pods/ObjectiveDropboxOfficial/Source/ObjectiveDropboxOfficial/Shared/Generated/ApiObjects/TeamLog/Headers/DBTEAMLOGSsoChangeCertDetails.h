@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SsoChangeCertDetails` struct.
 ///
-/// Changed the X.509 certificate for SSO.
+/// Changed X.509 certificate for SSO.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Previous SSO certificate details.
+/// Previous SSO certificate details. Might be missing due to historical data
+/// gap.
 @property (nonatomic, readonly, nullable) DBTEAMLOGCertificate *previousCertificateDetails;
 
 /// New SSO certificate details.
@@ -40,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param dNewCertificateDetails New SSO certificate details.
-/// @param previousCertificateDetails Previous SSO certificate details.
+/// @param previousCertificateDetails Previous SSO certificate details. Might be
+/// missing due to historical data gap.
 ///
 /// @return An initialized instance.
 ///

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SfAllowNonMembersToViewSharedLinksDetails` struct.
 ///
-/// Allowed non collaborators to view links to files in a shared folder.
+/// Allowed non-collaborators to view links to files in shared folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

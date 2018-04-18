@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBCOMMONPathRoot.h"
 #import "DBTransportBaseHostnameConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// An additional authentication header field used when a team app with the appropriate permissions "performs" user API
 /// actions on behalf of a team member.
 @property (nonatomic, readonly, copy, nullable) NSString *asMemberId;
+
+/// The value of path root object which will be used as Dropbox-Api-Path-Root header.
+@property (nonatomic, readonly, copy, nullable) DBCOMMONPathRoot *pathRoot;
 
 /// Additional HTTP headers to be injected into each client request.
 @property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, NSString *> *additionalHeaders;
@@ -135,6 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param userAgent The user agent associated with all networking requests. Used for server logging.
 /// @param asMemberId An additional authentication header field used when a team app with the appropriate permissions
 /// "performs" user API actions on behalf of a team member.
+/// @param pathRoot The value of path root object which will be used as Dropbox-Api-Path-Root header.
 /// @param additionalHeaders Additional HTTP headers to be injected into each client request.
 ///
 /// @return An initialized instance.
@@ -145,6 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
                    redirectURL:(nullable NSString *)redirectURL
                      userAgent:(nullable NSString *)userAgent
                     asMemberId:(nullable NSString *)asMemberId
+                      pathRoot:(nullable DBCOMMONPathRoot *)pathRoot
              additionalHeaders:(nullable NSDictionary<NSString *, NSString *> *)additionalHeaders;
 
 @end

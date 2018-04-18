@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the propertiesSearch route object.
 + (DBRoute *)DBFILEPROPERTIESPropertiesSearch;
 
+/// Accessor method for the propertiesSearchContinue route object.
++ (DBRoute *)DBFILEPROPERTIESPropertiesSearchContinue;
+
 /// Accessor method for the propertiesUpdate route object.
 + (DBRoute *)DBFILEPROPERTIESPropertiesUpdate;
 
@@ -49,6 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the templatesListForUser route object.
 + (DBRoute *)DBFILEPROPERTIESTemplatesListForUser;
+
+/// Accessor method for the templatesRemoveForTeam route object.
++ (DBRoute *)DBFILEPROPERTIESTemplatesRemoveForTeam;
+
+/// Accessor method for the templatesRemoveForUser route object.
++ (DBRoute *)DBFILEPROPERTIESTemplatesRemoveForUser;
 
 /// Accessor method for the templatesUpdateForTeam route object.
 + (DBRoute *)DBFILEPROPERTIESTemplatesUpdateForTeam;

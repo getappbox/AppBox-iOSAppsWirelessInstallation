@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGDeviceDeleteOnUnlinkSuccessDetails;
-@class DBTEAMLOGDeviceLogInfo;
+@class DBTEAMLOGSessionLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `DeviceDeleteOnUnlinkSuccessDetails` struct.
 ///
-/// Deleted all files from an unlinked device.
+/// Deleted all files from unlinked device.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,19 +28,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Device information.
-@property (nonatomic, readonly) DBTEAMLOGDeviceLogInfo *deviceInfo;
+/// Session unique id. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGSessionLogInfo *sessionInfo;
+
+/// The device name. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *displayName;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param deviceInfo Device information.
+/// @param sessionInfo Session unique id. Might be missing due to historical
+/// data gap.
+/// @param displayName The device name. Might be missing due to historical data
+/// gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDeviceInfo:(DBTEAMLOGDeviceLogInfo *)deviceInfo;
+- (instancetype)initWithSessionInfo:(nullable DBTEAMLOGSessionLogInfo *)sessionInfo
+                        displayName:(nullable NSString *)displayName;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+///
+/// @return An initialized instance.
+///
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

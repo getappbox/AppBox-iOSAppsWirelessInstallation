@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `AccountCaptureMigrateAccountDetails` struct.
 ///
-/// Account captured user migrated their account to the team.
+/// Account-captured user migrated account to team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

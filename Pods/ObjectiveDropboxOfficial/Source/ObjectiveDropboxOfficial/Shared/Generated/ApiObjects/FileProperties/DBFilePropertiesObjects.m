@@ -2932,6 +2932,258 @@
 
 @end
 
+#import "DBFILEPROPERTIESPropertiesSearchContinueArg.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBFILEPROPERTIESPropertiesSearchContinueArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithCursor:(NSString *)cursor {
+  [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](cursor);
+
+  self = [super init];
+  if (self) {
+    _cursor = cursor;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBFILEPROPERTIESPropertiesSearchContinueArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBFILEPROPERTIESPropertiesSearchContinueArgSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBFILEPROPERTIESPropertiesSearchContinueArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.cursor hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertiesSearchContinueArg:other];
+}
+
+- (BOOL)isEqualToPropertiesSearchContinueArg:
+    (DBFILEPROPERTIESPropertiesSearchContinueArg *)aPropertiesSearchContinueArg {
+  if (self == aPropertiesSearchContinueArg) {
+    return YES;
+  }
+  if (![self.cursor isEqual:aPropertiesSearchContinueArg.cursor]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBFILEPROPERTIESPropertiesSearchContinueArgSerializer
+
++ (NSDictionary *)serialize:(DBFILEPROPERTIESPropertiesSearchContinueArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"cursor"] = valueObj.cursor;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBFILEPROPERTIESPropertiesSearchContinueArg *)deserialize:(NSDictionary *)valueDict {
+  NSString *cursor = valueDict[@"cursor"];
+
+  return [[DBFILEPROPERTIESPropertiesSearchContinueArg alloc] initWithCursor:cursor];
+}
+
+@end
+
+#import "DBFILEPROPERTIESPropertiesSearchContinueError.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBFILEPROPERTIESPropertiesSearchContinueError
+
+#pragma mark - Constructors
+
+- (instancetype)initWithReset {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESPropertiesSearchContinueErrorReset;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESPropertiesSearchContinueErrorOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isReset {
+  return _tag == DBFILEPROPERTIESPropertiesSearchContinueErrorReset;
+}
+
+- (BOOL)isOther {
+  return _tag == DBFILEPROPERTIESPropertiesSearchContinueErrorOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBFILEPROPERTIESPropertiesSearchContinueErrorReset:
+    return @"DBFILEPROPERTIESPropertiesSearchContinueErrorReset";
+  case DBFILEPROPERTIESPropertiesSearchContinueErrorOther:
+    return @"DBFILEPROPERTIESPropertiesSearchContinueErrorOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBFILEPROPERTIESPropertiesSearchContinueErrorSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBFILEPROPERTIESPropertiesSearchContinueErrorSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBFILEPROPERTIESPropertiesSearchContinueErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILEPROPERTIESPropertiesSearchContinueErrorReset:
+    result = prime * result + [[self tagName] hash];
+  case DBFILEPROPERTIESPropertiesSearchContinueErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPropertiesSearchContinueError:other];
+}
+
+- (BOOL)isEqualToPropertiesSearchContinueError:
+    (DBFILEPROPERTIESPropertiesSearchContinueError *)aPropertiesSearchContinueError {
+  if (self == aPropertiesSearchContinueError) {
+    return YES;
+  }
+  if (self.tag != aPropertiesSearchContinueError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILEPROPERTIESPropertiesSearchContinueErrorReset:
+    return [[self tagName] isEqual:[aPropertiesSearchContinueError tagName]];
+  case DBFILEPROPERTIESPropertiesSearchContinueErrorOther:
+    return [[self tagName] isEqual:[aPropertiesSearchContinueError tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBFILEPROPERTIESPropertiesSearchContinueErrorSerializer
+
++ (NSDictionary *)serialize:(DBFILEPROPERTIESPropertiesSearchContinueError *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isReset]) {
+    jsonDict[@".tag"] = @"reset";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBFILEPROPERTIESPropertiesSearchContinueError *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"reset"]) {
+    return [[DBFILEPROPERTIESPropertiesSearchContinueError alloc] initWithReset];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBFILEPROPERTIESPropertiesSearchContinueError alloc] initWithOther];
+  } else {
+    return [[DBFILEPROPERTIESPropertiesSearchContinueError alloc] initWithOther];
+  }
+}
+
+@end
+
 #import "DBFILEPROPERTIESLookUpPropertiesError.h"
 #import "DBFILEPROPERTIESPropertiesSearchError.h"
 #import "DBStoneSerializers.h"
@@ -3113,9 +3365,11 @@
 
 - (instancetype)initWithId_:(NSString *)id_
                        path:(NSString *)path
+                  isDeleted:(NSNumber *)isDeleted
              propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups {
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](id_);
   [DBStoneValidators nonnullValidator:nil](path);
+  [DBStoneValidators nonnullValidator:nil](isDeleted);
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators arrayValidator:nil
                                              maxItems:nil
@@ -3125,6 +3379,7 @@
   if (self) {
     _id_ = id_;
     _path = path;
+    _isDeleted = isDeleted;
     _propertyGroups = propertyGroups;
   }
   return self;
@@ -3162,6 +3417,7 @@
 
   result = prime * result + [self.id_ hash];
   result = prime * result + [self.path hash];
+  result = prime * result + [self.isDeleted hash];
   result = prime * result + [self.propertyGroups hash];
 
   return prime * result;
@@ -3189,6 +3445,9 @@
   if (![self.path isEqual:aPropertiesSearchMatch.path]) {
     return NO;
   }
+  if (![self.isDeleted isEqual:aPropertiesSearchMatch.isDeleted]) {
+    return NO;
+  }
   if (![self.propertyGroups isEqual:aPropertiesSearchMatch.propertyGroups]) {
     return NO;
   }
@@ -3206,6 +3465,7 @@
 
   jsonDict[@"id"] = valueObj.id_;
   jsonDict[@"path"] = valueObj.path;
+  jsonDict[@"is_deleted"] = valueObj.isDeleted;
   jsonDict[@"property_groups"] = [DBArraySerializer serialize:valueObj.propertyGroups
                                                     withBlock:^id(id elem0) {
                                                       return [DBFILEPROPERTIESPropertyGroupSerializer serialize:elem0];
@@ -3217,13 +3477,17 @@
 + (DBFILEPROPERTIESPropertiesSearchMatch *)deserialize:(NSDictionary *)valueDict {
   NSString *id_ = valueDict[@"id"];
   NSString *path = valueDict[@"path"];
+  NSNumber *isDeleted = valueDict[@"is_deleted"];
   NSArray<DBFILEPROPERTIESPropertyGroup *> *propertyGroups =
       [DBArraySerializer deserialize:valueDict[@"property_groups"]
                            withBlock:^id(id elem0) {
                              return [DBFILEPROPERTIESPropertyGroupSerializer deserialize:elem0];
                            }];
 
-  return [[DBFILEPROPERTIESPropertiesSearchMatch alloc] initWithId_:id_ path:path propertyGroups:propertyGroups];
+  return [[DBFILEPROPERTIESPropertiesSearchMatch alloc] initWithId_:id_
+                                                               path:path
+                                                          isDeleted:isDeleted
+                                                     propertyGroups:propertyGroups];
 }
 
 @end
@@ -3530,17 +3794,23 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithMatches:(NSArray<DBFILEPROPERTIESPropertiesSearchMatch *> *)matches {
+- (instancetype)initWithMatches:(NSArray<DBFILEPROPERTIESPropertiesSearchMatch *> *)matches cursor:(NSString *)cursor {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators arrayValidator:nil
                                              maxItems:nil
                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](matches);
+  [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](cursor);
 
   self = [super init];
   if (self) {
     _matches = matches;
+    _cursor = cursor;
   }
   return self;
+}
+
+- (instancetype)initWithMatches:(NSArray<DBFILEPROPERTIESPropertiesSearchMatch *> *)matches {
+  return [self initWithMatches:matches cursor:nil];
 }
 
 #pragma mark - Serialization methods
@@ -3574,6 +3844,9 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.matches hash];
+  if (self.cursor != nil) {
+    result = prime * result + [self.cursor hash];
+  }
 
   return prime * result;
 }
@@ -3597,6 +3870,11 @@
   if (![self.matches isEqual:aPropertiesSearchResult.matches]) {
     return NO;
   }
+  if (self.cursor) {
+    if (![self.cursor isEqual:aPropertiesSearchResult.cursor]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -3613,6 +3891,9 @@
                                             withBlock:^id(id elem0) {
                                               return [DBFILEPROPERTIESPropertiesSearchMatchSerializer serialize:elem0];
                                             }];
+  if (valueObj.cursor) {
+    jsonDict[@"cursor"] = valueObj.cursor;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -3623,8 +3904,9 @@
                            withBlock:^id(id elem0) {
                              return [DBFILEPROPERTIESPropertiesSearchMatchSerializer deserialize:elem0];
                            }];
+  NSString *cursor = valueDict[@"cursor"] ?: nil;
 
-  return [[DBFILEPROPERTIESPropertiesSearchResult alloc] initWithMatches:matches];
+  return [[DBFILEPROPERTIESPropertiesSearchResult alloc] initWithMatches:matches cursor:cursor];
 }
 
 @end
@@ -4692,7 +4974,279 @@
 
 @end
 
+#import "DBFILEPROPERTIESRemoveTemplateArg.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBFILEPROPERTIESRemoveTemplateArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithTemplateId:(NSString *)templateId {
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"(/|ptid:).*"]](templateId);
+
+  self = [super init];
+  if (self) {
+    _templateId = templateId;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBFILEPROPERTIESRemoveTemplateArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBFILEPROPERTIESRemoveTemplateArgSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBFILEPROPERTIESRemoveTemplateArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.templateId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToRemoveTemplateArg:other];
+}
+
+- (BOOL)isEqualToRemoveTemplateArg:(DBFILEPROPERTIESRemoveTemplateArg *)aRemoveTemplateArg {
+  if (self == aRemoveTemplateArg) {
+    return YES;
+  }
+  if (![self.templateId isEqual:aRemoveTemplateArg.templateId]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBFILEPROPERTIESRemoveTemplateArgSerializer
+
++ (NSDictionary *)serialize:(DBFILEPROPERTIESRemoveTemplateArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"template_id"] = valueObj.templateId;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBFILEPROPERTIESRemoveTemplateArg *)deserialize:(NSDictionary *)valueDict {
+  NSString *templateId = valueDict[@"template_id"];
+
+  return [[DBFILEPROPERTIESRemoveTemplateArg alloc] initWithTemplateId:templateId];
+}
+
+@end
+
+#import "DBFILEPROPERTIESTemplateFilterBase.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBFILEPROPERTIESTemplateFilterBase
+
+@synthesize filterSome = _filterSome;
+
+#pragma mark - Constructors
+
+- (instancetype)initWithFilterSome:(NSArray<NSString *> *)filterSome {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESTemplateFilterBaseFilterSome;
+    _filterSome = filterSome;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESTemplateFilterBaseOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+- (NSArray<NSString *> *)filterSome {
+  if (![self isFilterSome]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBFILEPROPERTIESTemplateFilterBaseFilterSome, but was %@.", [self tagName]];
+  }
+  return _filterSome;
+}
+
+#pragma mark - Tag state methods
+
+- (BOOL)isFilterSome {
+  return _tag == DBFILEPROPERTIESTemplateFilterBaseFilterSome;
+}
+
+- (BOOL)isOther {
+  return _tag == DBFILEPROPERTIESTemplateFilterBaseOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBFILEPROPERTIESTemplateFilterBaseFilterSome:
+    return @"DBFILEPROPERTIESTemplateFilterBaseFilterSome";
+  case DBFILEPROPERTIESTemplateFilterBaseOther:
+    return @"DBFILEPROPERTIESTemplateFilterBaseOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary *)serialize:(id)instance {
+  return [DBFILEPROPERTIESTemplateFilterBaseSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary *)dict {
+  return [DBFILEPROPERTIESTemplateFilterBaseSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBFILEPROPERTIESTemplateFilterBaseSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBFILEPROPERTIESTemplateFilterBaseFilterSome:
+    result = prime * result + [self.filterSome hash];
+  case DBFILEPROPERTIESTemplateFilterBaseOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTemplateFilterBase:other];
+}
+
+- (BOOL)isEqualToTemplateFilterBase:(DBFILEPROPERTIESTemplateFilterBase *)aTemplateFilterBase {
+  if (self == aTemplateFilterBase) {
+    return YES;
+  }
+  if (self.tag != aTemplateFilterBase.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBFILEPROPERTIESTemplateFilterBaseFilterSome:
+    return [self.filterSome isEqual:aTemplateFilterBase.filterSome];
+  case DBFILEPROPERTIESTemplateFilterBaseOther:
+    return [[self tagName] isEqual:[aTemplateFilterBase tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBFILEPROPERTIESTemplateFilterBaseSerializer
+
++ (NSDictionary *)serialize:(DBFILEPROPERTIESTemplateFilterBase *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isFilterSome]) {
+    jsonDict[@"filter_some"] = [DBArraySerializer serialize:valueObj.filterSome
+                                                  withBlock:^id(id elem0) {
+                                                    return elem0;
+                                                  }];
+    jsonDict[@".tag"] = @"filter_some";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBFILEPROPERTIESTemplateFilterBase *)deserialize:(NSDictionary *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"filter_some"]) {
+    NSArray<NSString *> *filterSome = [DBArraySerializer deserialize:valueDict[@"filter_some"]
+                                                           withBlock:^id(id elem0) {
+                                                             return elem0;
+                                                           }];
+    return [[DBFILEPROPERTIESTemplateFilterBase alloc] initWithFilterSome:filterSome];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBFILEPROPERTIESTemplateFilterBase alloc] initWithOther];
+  } else {
+    return [[DBFILEPROPERTIESTemplateFilterBase alloc] initWithOther];
+  }
+}
+
+@end
+
 #import "DBFILEPROPERTIESTemplateFilter.h"
+#import "DBFILEPROPERTIESTemplateFilterBase.h"
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
 
@@ -4703,14 +5257,6 @@
 @synthesize filterSome = _filterSome;
 
 #pragma mark - Constructors
-
-- (instancetype)initWithFilterNone {
-  self = [super init];
-  if (self) {
-    _tag = DBFILEPROPERTIESTemplateFilterFilterNone;
-  }
-  return self;
-}
 
 - (instancetype)initWithFilterSome:(NSArray<NSString *> *)filterSome {
   self = [super init];
@@ -4729,6 +5275,14 @@
   return self;
 }
 
+- (instancetype)initWithFilterNone {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESTemplateFilterFilterNone;
+  }
+  return self;
+}
+
 #pragma mark - Instance field accessors
 
 - (NSArray<NSString *> *)filterSome {
@@ -4741,10 +5295,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isFilterNone {
-  return _tag == DBFILEPROPERTIESTemplateFilterFilterNone;
-}
-
 - (BOOL)isFilterSome {
   return _tag == DBFILEPROPERTIESTemplateFilterFilterSome;
 }
@@ -4753,14 +5303,18 @@
   return _tag == DBFILEPROPERTIESTemplateFilterOther;
 }
 
+- (BOOL)isFilterNone {
+  return _tag == DBFILEPROPERTIESTemplateFilterFilterNone;
+}
+
 - (NSString *)tagName {
   switch (_tag) {
-  case DBFILEPROPERTIESTemplateFilterFilterNone:
-    return @"DBFILEPROPERTIESTemplateFilterFilterNone";
   case DBFILEPROPERTIESTemplateFilterFilterSome:
     return @"DBFILEPROPERTIESTemplateFilterFilterSome";
   case DBFILEPROPERTIESTemplateFilterOther:
     return @"DBFILEPROPERTIESTemplateFilterOther";
+  case DBFILEPROPERTIESTemplateFilterFilterNone:
+    return @"DBFILEPROPERTIESTemplateFilterFilterNone";
   }
 
   @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
@@ -4797,11 +5351,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBFILEPROPERTIESTemplateFilterFilterNone:
-    result = prime * result + [[self tagName] hash];
   case DBFILEPROPERTIESTemplateFilterFilterSome:
     result = prime * result + [self.filterSome hash];
   case DBFILEPROPERTIESTemplateFilterOther:
+    result = prime * result + [[self tagName] hash];
+  case DBFILEPROPERTIESTemplateFilterFilterNone:
     result = prime * result + [[self tagName] hash];
   }
 
@@ -4828,11 +5382,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBFILEPROPERTIESTemplateFilterFilterNone:
-    return [[self tagName] isEqual:[aTemplateFilter tagName]];
   case DBFILEPROPERTIESTemplateFilterFilterSome:
     return [self.filterSome isEqual:aTemplateFilter.filterSome];
   case DBFILEPROPERTIESTemplateFilterOther:
+    return [[self tagName] isEqual:[aTemplateFilter tagName]];
+  case DBFILEPROPERTIESTemplateFilterFilterNone:
     return [[self tagName] isEqual:[aTemplateFilter tagName]];
   }
   return YES;
@@ -4847,9 +5401,7 @@
 + (NSDictionary *)serialize:(DBFILEPROPERTIESTemplateFilter *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isFilterNone]) {
-    jsonDict[@".tag"] = @"filter_none";
-  } else if ([valueObj isFilterSome]) {
+  if ([valueObj isFilterSome]) {
     jsonDict[@"filter_some"] = [DBArraySerializer serialize:valueObj.filterSome
                                                   withBlock:^id(id elem0) {
                                                     return elem0;
@@ -4857,6 +5409,8 @@
     jsonDict[@".tag"] = @"filter_some";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
+  } else if ([valueObj isFilterNone]) {
+    jsonDict[@".tag"] = @"filter_none";
   } else {
     jsonDict[@".tag"] = @"other";
   }
@@ -4867,9 +5421,7 @@
 + (DBFILEPROPERTIESTemplateFilter *)deserialize:(NSDictionary *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"filter_none"]) {
-    return [[DBFILEPROPERTIESTemplateFilter alloc] initWithFilterNone];
-  } else if ([tag isEqualToString:@"filter_some"]) {
+  if ([tag isEqualToString:@"filter_some"]) {
     NSArray<NSString *> *filterSome = [DBArraySerializer deserialize:valueDict[@"filter_some"]
                                                            withBlock:^id(id elem0) {
                                                              return elem0;
@@ -4877,6 +5429,8 @@
     return [[DBFILEPROPERTIESTemplateFilter alloc] initWithFilterSome:filterSome];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBFILEPROPERTIESTemplateFilter alloc] initWithOther];
+  } else if ([tag isEqualToString:@"filter_none"]) {
+    return [[DBFILEPROPERTIESTemplateFilter alloc] initWithFilterNone];
   } else {
     return [[DBFILEPROPERTIESTemplateFilter alloc] initWithOther];
   }

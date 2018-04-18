@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TfaAddSecurityKeyDetails` struct.
 ///
-/// Added a security key for two-step verification.
+/// Added security key for two-step verification.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

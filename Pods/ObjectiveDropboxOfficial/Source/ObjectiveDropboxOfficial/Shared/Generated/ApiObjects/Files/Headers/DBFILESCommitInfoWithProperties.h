@@ -28,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// List of custom properties to add to file.
-@property (nonatomic, readonly, nullable) NSArray<DBFILEPROPERTIESPropertyGroup *> *propertyGroups;
-
 #pragma mark - Constructors
 
 ///

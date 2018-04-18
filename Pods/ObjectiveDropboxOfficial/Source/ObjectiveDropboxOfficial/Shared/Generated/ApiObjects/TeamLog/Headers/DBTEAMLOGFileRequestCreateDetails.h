@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGFileRequestCreateDetails;
+@class DBTEAMLOGFileRequestDetails;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `FileRequestCreateDetails` struct.
 ///
-/// Created a file request.
+/// Created file request.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -27,19 +28,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// File request title.
-@property (nonatomic, readonly, copy, nullable) NSString *requestTitle;
+/// File request id. Might be missing due to historical data gap.
+@property (nonatomic, readonly, copy, nullable) NSString *fileRequestId;
+
+/// File request details. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGFileRequestDetails *requestDetails;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param requestTitle File request title.
+/// @param fileRequestId File request id. Might be missing due to historical
+/// data gap.
+/// @param requestDetails File request details. Might be missing due to
+/// historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithRequestTitle:(nullable NSString *)requestTitle;
+- (instancetype)initWithFileRequestId:(nullable NSString *)fileRequestId
+                       requestDetails:(nullable DBTEAMLOGFileRequestDetails *)requestDetails;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

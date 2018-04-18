@@ -392,7 +392,7 @@
     ipaFileData = [NSData dataWithContentsOfFile:file];
     fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
-    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO];
+    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil];
     
     [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
         if (result) {
@@ -497,7 +497,7 @@
     }
     
     //uploadUrl:path inputUrl:file
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO inputUrl:file]
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil inputUrl:file]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {

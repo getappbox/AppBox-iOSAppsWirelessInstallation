@@ -48,6 +48,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag) {
   /// Action done by Dropbox.
   DBTEAMLOGActorLogInfoDropbox,
 
+  /// Anonymous actor.
+  DBTEAMLOGActorLogInfoAnonymous,
+
   /// (no description).
   DBTEAMLOGActorLogInfoOther,
 
@@ -128,6 +131,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag) {
 - (instancetype)initWithDropbox;
 
 ///
+/// Initializes union class with tag state of "anonymous".
+///
+/// Description of the "anonymous" tag state: Anonymous actor.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAnonymous;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -184,6 +196,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag) {
 /// @return Whether the union's current tag state has value "dropbox".
 ///
 - (BOOL)isDropbox;
+
+///
+/// Retrieves whether the union's current tag state has value "anonymous".
+///
+/// @return Whether the union's current tag state has value "anonymous".
+///
+- (BOOL)isAnonymous;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

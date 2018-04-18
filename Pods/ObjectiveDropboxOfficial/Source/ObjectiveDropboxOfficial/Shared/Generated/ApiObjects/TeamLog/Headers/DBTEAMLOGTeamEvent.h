@@ -41,8 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The category that this type of action belongs to.
 @property (nonatomic, readonly) DBTEAMLOGEventCategory *eventCategory;
 
-/// The entity who actually performed the action.
-@property (nonatomic, readonly) DBTEAMLOGActorLogInfo *actor;
+/// The entity who actually performed the action. Might be missing due to
+/// historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGActorLogInfo *actor;
 
 /// The origin from which the actor performed the action including information
 /// about host, ip address, location, session, etc. If the action was performed
@@ -50,11 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) DBTEAMLOGOriginLogInfo *origin;
 
 /// True if the action involved a non team member either as the actor or as one
-/// of the affected users.
-@property (nonatomic, readonly) NSNumber *involveNonTeamMember;
+/// of the affected users. Might be missing due to historical data gap.
+@property (nonatomic, readonly, nullable) NSNumber *involveNonTeamMember;
 
-/// The user or team on whose behalf the actor performed the action.
-@property (nonatomic, readonly) DBTEAMLOGContextLogInfo *context;
+/// The user or team on whose behalf the actor performed the action. Might be
+/// missing due to historical data gap.
+@property (nonatomic, readonly, nullable) DBTEAMLOGContextLogInfo *context;
 
 /// Zero or more users and/or groups that are affected by the action. Note that
 /// this list doesn't include any actors or users in context.
@@ -80,18 +82,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param timestamp The Dropbox timestamp representing when the action was
 /// taken.
 /// @param eventCategory The category that this type of action belongs to.
-/// @param actor The entity who actually performed the action.
-/// @param involveNonTeamMember True if the action involved a non team member
-/// either as the actor or as one of the affected users.
-/// @param context The user or team on whose behalf the actor performed the
-/// action.
 /// @param eventType The particular type of action taken.
 /// @param details The variable event schema applicable to this type of action,
 /// instantiated with respect to this particular action.
+/// @param actor The entity who actually performed the action. Might be missing
+/// due to historical data gap.
 /// @param origin The origin from which the actor performed the action including
 /// information about host, ip address, location, session, etc. If the action
 /// was performed programmatically via the API the origin represents the API
 /// client.
+/// @param involveNonTeamMember True if the action involved a non team member
+/// either as the actor or as one of the affected users. Might be missing due to
+/// historical data gap.
+/// @param context The user or team on whose behalf the actor performed the
+/// action. Might be missing due to historical data gap.
 /// @param participants Zero or more users and/or groups that are affected by
 /// the action. Note that this list doesn't include any actors or users in
 /// context.
@@ -103,12 +107,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)initWithTimestamp:(NSDate *)timestamp
                     eventCategory:(DBTEAMLOGEventCategory *)eventCategory
-                            actor:(DBTEAMLOGActorLogInfo *)actor
-             involveNonTeamMember:(NSNumber *)involveNonTeamMember
-                          context:(DBTEAMLOGContextLogInfo *)context
                         eventType:(DBTEAMLOGEventType *)eventType
                           details:(DBTEAMLOGEventDetails *)details
+                            actor:(nullable DBTEAMLOGActorLogInfo *)actor
                            origin:(nullable DBTEAMLOGOriginLogInfo *)origin
+             involveNonTeamMember:(nullable NSNumber *)involveNonTeamMember
+                          context:(nullable DBTEAMLOGContextLogInfo *)context
                      participants:(nullable NSArray<DBTEAMLOGParticipantLogInfo *> *)participants
                            assets:(nullable NSArray<DBTEAMLOGAssetLogInfo *> *)assets;
 
@@ -119,11 +123,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param timestamp The Dropbox timestamp representing when the action was
 /// taken.
 /// @param eventCategory The category that this type of action belongs to.
-/// @param actor The entity who actually performed the action.
-/// @param involveNonTeamMember True if the action involved a non team member
-/// either as the actor or as one of the affected users.
-/// @param context The user or team on whose behalf the actor performed the
-/// action.
 /// @param eventType The particular type of action taken.
 /// @param details The variable event schema applicable to this type of action,
 /// instantiated with respect to this particular action.
@@ -132,9 +131,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)initWithTimestamp:(NSDate *)timestamp
                     eventCategory:(DBTEAMLOGEventCategory *)eventCategory
-                            actor:(DBTEAMLOGActorLogInfo *)actor
-             involveNonTeamMember:(NSNumber *)involveNonTeamMember
-                          context:(DBTEAMLOGContextLogInfo *)context
                         eventType:(DBTEAMLOGEventType *)eventType
                           details:(DBTEAMLOGEventDetails *)details;
 

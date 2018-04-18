@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESInvalidPropertyGroupError;
 @class DBFILESUploadError;
 @class DBFILESUploadWriteFailed;
 
@@ -32,6 +33,9 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
   /// Unable to save the uploaded contents to a file.
   DBFILESUploadErrorPath,
 
+  /// The supplied property group is invalid.
+  DBFILESUploadErrorPropertiesError,
+
   /// (no description).
   DBFILESUploadErrorOther,
 
@@ -44,6 +48,11 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBFILESUploadWriteFailed *path;
+
+/// The supplied property group is invalid. @note Ensure the `isPropertiesError`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBFILEPROPERTIESInvalidPropertyGroupError *propertiesError;
 
 #pragma mark - Constructors
 
@@ -58,6 +67,18 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPath:(DBFILESUploadWriteFailed *)path;
+
+///
+/// Initializes union class with tag state of "properties_error".
+///
+/// Description of the "properties_error" tag state: The supplied property group
+/// is invalid.
+///
+/// @param propertiesError The supplied property group is invalid.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -79,6 +100,17 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 /// @return Whether the union's current tag state has value "path".
 ///
 - (BOOL)isPath;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "properties_error".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `propertiesError` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "properties_error".
+///
+- (BOOL)isPropertiesError;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

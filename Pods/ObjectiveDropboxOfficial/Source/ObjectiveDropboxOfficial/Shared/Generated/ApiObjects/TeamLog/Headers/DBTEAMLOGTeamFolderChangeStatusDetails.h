@@ -9,7 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGTeamFolderChangeStatusDetails;
-@class DBTEAMLOGTeamFolderStatus;
+@class DBTEAMTeamFolderStatus;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TeamFolderChangeStatusDetails` struct.
 ///
-/// Changed the archival status of a team folder.
+/// Changed archival status of team folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// New team folder status.
-@property (nonatomic, readonly) DBTEAMLOGTeamFolderStatus *dNewValue;
+@property (nonatomic, readonly) DBTEAMTeamFolderStatus *dNewValue;
 
 /// Previous team folder status. Might be missing due to historical data gap.
-@property (nonatomic, readonly, nullable) DBTEAMLOGTeamFolderStatus *previousValue;
+@property (nonatomic, readonly, nullable) DBTEAMTeamFolderStatus *previousValue;
 
 #pragma mark - Constructors
 
@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGTeamFolderStatus *)dNewValue
-                    previousValue:(nullable DBTEAMLOGTeamFolderStatus *)previousValue;
+- (instancetype)initWithDNewValue:(DBTEAMTeamFolderStatus *)dNewValue
+                    previousValue:(nullable DBTEAMTeamFolderStatus *)previousValue;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithDNewValue:(DBTEAMLOGTeamFolderStatus *)dNewValue;
+- (instancetype)initWithDNewValue:(DBTEAMTeamFolderStatus *)dNewValue;
 
 - (instancetype)init NS_UNAVAILABLE;
 

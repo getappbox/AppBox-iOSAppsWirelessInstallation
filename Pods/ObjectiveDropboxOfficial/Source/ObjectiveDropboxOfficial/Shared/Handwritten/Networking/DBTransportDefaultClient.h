@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBCOMMONPathRoot.h"
 #import "DBTransportBaseClient.h"
 #import "DBTransportClientProtocol.h"
 
@@ -85,6 +86,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// perform actions on behalf of the team member specified by `asMemberId`.
 ///
 - (DBTransportDefaultConfig *)duplicateTransportConfigWithAsMemberId:(NSString *)asMemberId;
+
+///
+/// Creates a transport config with the same settings as the current transport client, to be used with
+/// specific path root header value.
+///
+/// @param pathRoot The value of path root object which will be used as Dropbox-Api-Path-Root header.
+///
+/// @return A transport config with the same settings as the current transport client, except with
+/// Dropbox-Api-Path-Root header value specified by pathRoot.
+///
+- (DBTransportDefaultConfig *)duplicateTransportConfigWithPathRoot:(DBCOMMONPathRoot *)pathRoot;
 
 @end
 

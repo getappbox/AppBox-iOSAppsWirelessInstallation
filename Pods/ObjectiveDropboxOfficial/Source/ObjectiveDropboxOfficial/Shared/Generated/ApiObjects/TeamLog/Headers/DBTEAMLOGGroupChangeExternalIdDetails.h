@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `GroupChangeExternalIdDetails` struct.
 ///
-/// Changed the external ID for group.
+/// Changed external ID for group.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

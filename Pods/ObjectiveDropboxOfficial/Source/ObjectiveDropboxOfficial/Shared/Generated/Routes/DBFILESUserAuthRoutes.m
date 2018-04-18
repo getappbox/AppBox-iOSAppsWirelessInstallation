@@ -26,6 +26,7 @@
 #import "DBFILEPROPERTIESRemovePropertiesArg.h"
 #import "DBFILEPROPERTIESRemovePropertiesError.h"
 #import "DBFILEPROPERTIESTemplateError.h"
+#import "DBFILEPROPERTIESTemplateFilterBase.h"
 #import "DBFILEPROPERTIESUpdatePropertiesArg.h"
 #import "DBFILEPROPERTIESUpdatePropertiesError.h"
 #import "DBFILESAlphaGetMetadataArg.h"
@@ -33,6 +34,11 @@
 #import "DBFILESCommitInfo.h"
 #import "DBFILESCommitInfoWithProperties.h"
 #import "DBFILESCreateFolderArg.h"
+#import "DBFILESCreateFolderBatchArg.h"
+#import "DBFILESCreateFolderBatchError.h"
+#import "DBFILESCreateFolderBatchJobStatus.h"
+#import "DBFILESCreateFolderBatchLaunch.h"
+#import "DBFILESCreateFolderBatchResult.h"
 #import "DBFILESCreateFolderError.h"
 #import "DBFILESCreateFolderResult.h"
 #import "DBFILESDeleteArg.h"
@@ -46,6 +52,9 @@
 #import "DBFILESDeletedMetadata.h"
 #import "DBFILESDownloadArg.h"
 #import "DBFILESDownloadError.h"
+#import "DBFILESDownloadZipArg.h"
+#import "DBFILESDownloadZipError.h"
+#import "DBFILESDownloadZipResult.h"
 #import "DBFILESFileMetadata.h"
 #import "DBFILESFileOpsResult.h"
 #import "DBFILESFileSharingInfo.h"
@@ -106,9 +115,11 @@
 #import "DBFILESSearchMode.h"
 #import "DBFILESSearchResult.h"
 #import "DBFILESSharedLink.h"
+#import "DBFILESSymlinkInfo.h"
 #import "DBFILESThumbnailArg.h"
 #import "DBFILESThumbnailError.h"
 #import "DBFILESThumbnailFormat.h"
+#import "DBFILESThumbnailMode.h"
 #import "DBFILESThumbnailSize.h"
 #import "DBFILESUploadError.h"
 #import "DBFILESUploadErrorWithProperties.h"
@@ -151,12 +162,14 @@
                    includeMediaInfo:(NSNumber *)includeMediaInfo
                      includeDeleted:(NSNumber *)includeDeleted
     includeHasExplicitSharedMembers:(NSNumber *)includeHasExplicitSharedMembers
+              includePropertyGroups:(DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
            includePropertyTemplates:(NSArray<NSString *> *)includePropertyTemplates {
   DBRoute *route = DBFILESRouteObjects.DBFILESAlphaGetMetadata;
   DBFILESAlphaGetMetadataArg *arg = [[DBFILESAlphaGetMetadataArg alloc] initWithPath:path
                                                                     includeMediaInfo:includeMediaInfo
                                                                       includeDeleted:includeDeleted
                                                      includeHasExplicitSharedMembers:includeHasExplicitSharedMembers
+                                                               includePropertyGroups:includePropertyGroups
                                                             includePropertyTemplates:includePropertyTemplates];
   return [self.client requestRpc:route arg:arg];
 }
@@ -319,6 +332,27 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)createFolderBatch:(NSArray<NSString *> *)paths {
+  DBRoute *route = DBFILESRouteObjects.DBFILESCreateFolderBatch;
+  DBFILESCreateFolderBatchArg *arg = [[DBFILESCreateFolderBatchArg alloc] initWithPaths:paths];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)createFolderBatch:(NSArray<NSString *> *)paths
+                      autorename:(NSNumber *)autorename
+                      forceAsync:(NSNumber *)forceAsync {
+  DBRoute *route = DBFILESRouteObjects.DBFILESCreateFolderBatch;
+  DBFILESCreateFolderBatchArg *arg =
+      [[DBFILESCreateFolderBatchArg alloc] initWithPaths:paths autorename:autorename forceAsync:forceAsync];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)createFolderBatchCheck:(NSString *)asyncJobId {
+  DBRoute *route = DBFILESRouteObjects.DBFILESCreateFolderBatchCheck;
+  DBASYNCPollArg *arg = [[DBASYNCPollArg alloc] initWithAsyncJobId:asyncJobId];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)createFolderV2:(NSString *)path {
   DBRoute *route = DBFILESRouteObjects.DBFILESCreateFolderV2;
   DBFILESCreateFolderArg *arg = [[DBFILESCreateFolderArg alloc] initWithPath:path];
@@ -337,6 +371,12 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)delete_:(NSString *)path parentRev:(NSString *)parentRev {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDelete_;
+  DBFILESDeleteArg *arg = [[DBFILESDeleteArg alloc] initWithPath:path parentRev:parentRev];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)deleteBatch:(NSArray<DBFILESDeleteArg *> *)entries {
   DBRoute *route = DBFILESRouteObjects.DBFILESDeleteBatch;
   DBFILESDeleteBatchArg *arg = [[DBFILESDeleteBatchArg alloc] initWithEntries:entries];
@@ -352,6 +392,12 @@
 - (DBRpcTask *)deleteV2:(NSString *)path {
   DBRoute *route = DBFILESRouteObjects.DBFILESDeleteV2;
   DBFILESDeleteArg *arg = [[DBFILESDeleteArg alloc] initWithPath:path];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)deleteV2:(NSString *)path parentRev:(NSString *)parentRev {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDeleteV2;
+  DBFILESDeleteArg *arg = [[DBFILESDeleteArg alloc] initWithPath:path parentRev:parentRev];
   return [self.client requestRpc:route arg:arg];
 }
 
@@ -430,6 +476,41 @@
   return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
 }
 
+- (DBDownloadUrlTask *)downloadZipUrl:(NSString *)path overwrite:(BOOL)overwrite destination:(NSURL *)destination {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownloadZip;
+  DBFILESDownloadZipArg *arg = [[DBFILESDownloadZipArg alloc] initWithPath:path];
+  return [self.client requestDownload:route arg:arg overwrite:overwrite destination:destination];
+}
+
+- (DBDownloadUrlTask *)downloadZipUrl:(NSString *)path
+                            overwrite:(BOOL)overwrite
+                          destination:(NSURL *)destination
+                      byteOffsetStart:(NSNumber *)byteOffsetStart
+                        byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownloadZip;
+  DBFILESDownloadZipArg *arg = [[DBFILESDownloadZipArg alloc] initWithPath:path];
+  return [self.client requestDownload:route
+                                  arg:arg
+                            overwrite:overwrite
+                          destination:destination
+                      byteOffsetStart:byteOffsetStart
+                        byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBDownloadDataTask *)downloadZipData:(NSString *)path {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownloadZip;
+  DBFILESDownloadZipArg *arg = [[DBFILESDownloadZipArg alloc] initWithPath:path];
+  return [self.client requestDownload:route arg:arg];
+}
+
+- (DBDownloadDataTask *)downloadZipData:(NSString *)path
+                        byteOffsetStart:(NSNumber *)byteOffsetStart
+                          byteOffsetEnd:(NSNumber *)byteOffsetEnd {
+  DBRoute *route = DBFILESRouteObjects.DBFILESDownloadZip;
+  DBFILESDownloadZipArg *arg = [[DBFILESDownloadZipArg alloc] initWithPath:path];
+  return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
+}
+
 - (DBRpcTask *)getMetadata:(NSString *)path {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetMetadata;
   DBFILESGetMetadataArg *arg = [[DBFILESGetMetadataArg alloc] initWithPath:path];
@@ -439,12 +520,14 @@
 - (DBRpcTask *)getMetadata:(NSString *)path
                    includeMediaInfo:(NSNumber *)includeMediaInfo
                      includeDeleted:(NSNumber *)includeDeleted
-    includeHasExplicitSharedMembers:(NSNumber *)includeHasExplicitSharedMembers {
+    includeHasExplicitSharedMembers:(NSNumber *)includeHasExplicitSharedMembers
+              includePropertyGroups:(DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetMetadata;
   DBFILESGetMetadataArg *arg = [[DBFILESGetMetadataArg alloc] initWithPath:path
                                                           includeMediaInfo:includeMediaInfo
                                                             includeDeleted:includeDeleted
-                                           includeHasExplicitSharedMembers:includeHasExplicitSharedMembers];
+                                           includeHasExplicitSharedMembers:includeHasExplicitSharedMembers
+                                                     includePropertyGroups:includePropertyGroups];
   return [self.client requestRpc:route arg:arg];
 }
 
@@ -538,10 +621,11 @@
 - (DBDownloadUrlTask *)getThumbnailUrl:(NSString *)path
                                 format:(DBFILESThumbnailFormat *)format
                                   size:(DBFILESThumbnailSize *)size
+                                  mode:(DBFILESThumbnailMode *)mode
                              overwrite:(BOOL)overwrite
                            destination:(NSURL *)destination {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
-  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size mode:mode];
   return [self.client requestDownload:route arg:arg overwrite:overwrite destination:destination];
 }
 
@@ -563,12 +647,13 @@
 - (DBDownloadUrlTask *)getThumbnailUrl:(NSString *)path
                                 format:(DBFILESThumbnailFormat *)format
                                   size:(DBFILESThumbnailSize *)size
+                                  mode:(DBFILESThumbnailMode *)mode
                              overwrite:(BOOL)overwrite
                            destination:(NSURL *)destination
                        byteOffsetStart:(NSNumber *)byteOffsetStart
                          byteOffsetEnd:(NSNumber *)byteOffsetEnd {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
-  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size mode:mode];
   return [self.client requestDownload:route
                                   arg:arg
                             overwrite:overwrite
@@ -585,9 +670,10 @@
 
 - (DBDownloadDataTask *)getThumbnailData:(NSString *)path
                                   format:(DBFILESThumbnailFormat *)format
-                                    size:(DBFILESThumbnailSize *)size {
+                                    size:(DBFILESThumbnailSize *)size
+                                    mode:(DBFILESThumbnailMode *)mode {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
-  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size mode:mode];
   return [self.client requestDownload:route arg:arg];
 }
 
@@ -602,10 +688,11 @@
 - (DBDownloadDataTask *)getThumbnailData:(NSString *)path
                                   format:(DBFILESThumbnailFormat *)format
                                     size:(DBFILESThumbnailSize *)size
+                                    mode:(DBFILESThumbnailMode *)mode
                          byteOffsetStart:(NSNumber *)byteOffsetStart
                            byteOffsetEnd:(NSNumber *)byteOffsetEnd {
   DBRoute *route = DBFILESRouteObjects.DBFILESGetThumbnail;
-  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size];
+  DBFILESThumbnailArg *arg = [[DBFILESThumbnailArg alloc] initWithPath:path format:format size:size mode:mode];
   return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
 }
 
@@ -628,7 +715,8 @@
     includeHasExplicitSharedMembers:(NSNumber *)includeHasExplicitSharedMembers
               includeMountedFolders:(NSNumber *)includeMountedFolders
                               limit:(NSNumber *)limit
-                         sharedLink:(DBFILESSharedLink *)sharedLink {
+                         sharedLink:(DBFILESSharedLink *)sharedLink
+              includePropertyGroups:(DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups {
   DBRoute *route = DBFILESRouteObjects.DBFILESListFolder;
   DBFILESListFolderArg *arg = [[DBFILESListFolderArg alloc] initWithPath:path
                                                                recursive:recursive
@@ -637,7 +725,8 @@
                                          includeHasExplicitSharedMembers:includeHasExplicitSharedMembers
                                                    includeMountedFolders:includeMountedFolders
                                                                    limit:limit
-                                                              sharedLink:sharedLink];
+                                                              sharedLink:sharedLink
+                                                   includePropertyGroups:includePropertyGroups];
   return [self.client requestRpc:route arg:arg];
 }
 
@@ -660,7 +749,8 @@
          includeHasExplicitSharedMembers:(NSNumber *)includeHasExplicitSharedMembers
                    includeMountedFolders:(NSNumber *)includeMountedFolders
                                    limit:(NSNumber *)limit
-                              sharedLink:(DBFILESSharedLink *)sharedLink {
+                              sharedLink:(DBFILESSharedLink *)sharedLink
+                   includePropertyGroups:(DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups {
   DBRoute *route = DBFILESRouteObjects.DBFILESListFolderGetLatestCursor;
   DBFILESListFolderArg *arg = [[DBFILESListFolderArg alloc] initWithPath:path
                                                                recursive:recursive
@@ -669,7 +759,8 @@
                                          includeHasExplicitSharedMembers:includeHasExplicitSharedMembers
                                                    includeMountedFolders:includeMountedFolders
                                                                    limit:limit
-                                                              sharedLink:sharedLink];
+                                                              sharedLink:sharedLink
+                                                   includePropertyGroups:includePropertyGroups];
   return [self.client requestRpc:route arg:arg];
 }
 
@@ -767,6 +858,12 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)permanentlyDelete:(NSString *)path parentRev:(NSString *)parentRev {
+  DBRoute *route = DBFILESRouteObjects.DBFILESPermanentlyDelete;
+  DBFILESDeleteArg *arg = [[DBFILESDeleteArg alloc] initWithPath:path parentRev:parentRev];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)propertiesAdd:(NSString *)path
               propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups {
   DBRoute *route = DBFILESRouteObjects.DBFILESPropertiesAdd;
@@ -855,13 +952,15 @@
                  autorename:(NSNumber *)autorename
              clientModified:(NSDate *)clientModified
                        mute:(NSNumber *)mute
+             propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
                    inputUrl:(NSString *)inputUrl {
   DBRoute *route = DBFILESRouteObjects.DBFILESUpload;
   DBFILESCommitInfo *arg = [[DBFILESCommitInfo alloc] initWithPath:path
                                                               mode:mode
                                                         autorename:autorename
                                                     clientModified:clientModified
-                                                              mute:mute];
+                                                              mute:mute
+                                                    propertyGroups:propertyGroups];
   return [self.client requestUpload:route arg:arg inputUrl:inputUrl];
 }
 
@@ -876,13 +975,15 @@
                   autorename:(NSNumber *)autorename
               clientModified:(NSDate *)clientModified
                         mute:(NSNumber *)mute
+              propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
                    inputData:(NSData *)inputData {
   DBRoute *route = DBFILESRouteObjects.DBFILESUpload;
   DBFILESCommitInfo *arg = [[DBFILESCommitInfo alloc] initWithPath:path
                                                               mode:mode
                                                         autorename:autorename
                                                     clientModified:clientModified
-                                                              mute:mute];
+                                                              mute:mute
+                                                    propertyGroups:propertyGroups];
   return [self.client requestUpload:route arg:arg inputData:inputData];
 }
 
@@ -897,13 +998,15 @@
                     autorename:(NSNumber *)autorename
                 clientModified:(NSDate *)clientModified
                           mute:(NSNumber *)mute
+                propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
                    inputStream:(NSInputStream *)inputStream {
   DBRoute *route = DBFILESRouteObjects.DBFILESUpload;
   DBFILESCommitInfo *arg = [[DBFILESCommitInfo alloc] initWithPath:path
                                                               mode:mode
                                                         autorename:autorename
                                                     clientModified:clientModified
-                                                              mute:mute];
+                                                              mute:mute
+                                                    propertyGroups:propertyGroups];
   return [self.client requestUpload:route arg:arg inputStream:inputStream];
 }
 

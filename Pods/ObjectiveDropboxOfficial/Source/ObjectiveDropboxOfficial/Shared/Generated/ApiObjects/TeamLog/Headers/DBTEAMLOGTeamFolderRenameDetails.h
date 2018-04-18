@@ -8,7 +8,6 @@
 
 #import "DBSerializableProtocol.h"
 
-@class DBTEAMLOGRelocateAssetReferencesLogInfo;
 @class DBTEAMLOGTeamFolderRenameDetails;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `TeamFolderRenameDetails` struct.
 ///
-/// Renamed an active or archived team folder.
+/// Renamed active/archived team folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,20 +27,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Specifies the source and destination indices in the assets list.
-@property (nonatomic, readonly) DBTEAMLOGRelocateAssetReferencesLogInfo *relocateActionDetails;
+/// Previous folder name.
+@property (nonatomic, readonly, copy) NSString *previousFolderName;
+
+/// New folder name.
+@property (nonatomic, readonly, copy) NSString *dNewFolderName;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param relocateActionDetails Specifies the source and destination indices in
-/// the assets list.
+/// @param previousFolderName Previous folder name.
+/// @param dNewFolderName New folder name.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithRelocateActionDetails:(DBTEAMLOGRelocateAssetReferencesLogInfo *)relocateActionDetails;
+- (instancetype)initWithPreviousFolderName:(NSString *)previousFolderName dNewFolderName:(NSString *)dNewFolderName;
 
 - (instancetype)init NS_UNAVAILABLE;
 

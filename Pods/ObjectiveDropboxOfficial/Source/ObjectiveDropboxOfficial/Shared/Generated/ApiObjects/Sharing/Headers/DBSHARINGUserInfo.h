@@ -31,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The account ID of the user.
 @property (nonatomic, readonly, copy) NSString *accountId;
 
+/// Email address of user.
+@property (nonatomic, readonly, copy) NSString *email;
+
+/// The display name of the user.
+@property (nonatomic, readonly, copy) NSString *displayName;
+
 /// If the user is in the same team as current user.
 @property (nonatomic, readonly) NSNumber *sameTeam;
 
@@ -44,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param accountId The account ID of the user.
+/// @param email Email address of user.
+/// @param displayName The display name of the user.
 /// @param sameTeam If the user is in the same team as current user.
 /// @param teamMemberId The team member ID of the shared folder member. Only
 /// present if sameTeam is true.
@@ -51,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAccountId:(NSString *)accountId
+                            email:(NSString *)email
+                      displayName:(NSString *)displayName
                          sameTeam:(NSNumber *)sameTeam
                      teamMemberId:(nullable NSString *)teamMemberId;
 
@@ -59,11 +69,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// no default value).
 ///
 /// @param accountId The account ID of the user.
+/// @param email Email address of user.
+/// @param displayName The display name of the user.
 /// @param sameTeam If the user is in the same team as current user.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAccountId:(NSString *)accountId sameTeam:(NSNumber *)sameTeam;
+- (instancetype)initWithAccountId:(NSString *)accountId
+                            email:(NSString *)email
+                      displayName:(NSString *)displayName
+                         sameTeam:(NSNumber *)sameTeam;
 
 - (instancetype)init NS_UNAVAILABLE;
 

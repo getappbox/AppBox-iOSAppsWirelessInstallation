@@ -1,31 +1,31 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.0):
+    - AFNetworking/NSURLSession (= 3.2.0)
+    - AFNetworking/Reachability (= 3.2.0)
+    - AFNetworking/Security (= 3.2.0)
+    - AFNetworking/Serialization (= 3.2.0)
+    - AFNetworking/UIKit (= 3.2.0)
+  - AFNetworking/NSURLSession (3.2.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/Reachability (3.2.0)
+  - AFNetworking/Security (3.2.0)
+  - AFNetworking/Serialization (3.2.0)
   - CMDQueryStringSerialization (0.4.1):
     - ISO8601
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
-  - Fabric (1.7.2)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.6)
   - Google-Analytics-for-OS-X (1.1)
   - ISO8601 (0.6.0)
-  - ObjectiveDropboxOfficial (3.3.5)
+  - ObjectiveDropboxOfficial (3.9.0)
   - SAMKeychain (1.5.3)
-  - SSZipArchive (2.1.1)
+  - SSZipArchive (2.1.2)
   - STPrivilegedTask (1.0.1)
-  - ZXingObjC (3.2.1):
-    - ZXingObjC/All (= 3.2.1)
-  - ZXingObjC/All (3.2.1)
+  - ZXingObjC (3.2.2):
+    - ZXingObjC/All (= 3.2.2)
+  - ZXingObjC/All (3.2.2)
 
 DEPENDENCIES:
   - AFNetworking
@@ -41,18 +41,18 @@ DEPENDENCIES:
   - ZXingObjC
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
   CMDQueryStringSerialization: 4bb0a2f5e7d8d8678d911d88072274952cbef4e5
-  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
-  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   Google-Analytics-for-OS-X: 66376760d74d980fd81ad48b125c5496d3d4402a
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
-  ObjectiveDropboxOfficial: f5f3b1099817ad319f3a72614b4d1cc082022d24
+  ObjectiveDropboxOfficial: 64a809a85744ce58866bf98066f98be5d4c0582e
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
+  SSZipArchive: d4009d2ce5520a421f231fd97028cc0e2667eed8
   STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
-  ZXingObjC: bbf7b8f0cf8933fdd33eb4f9f46e22308552869b
+  ZXingObjC: 2c95a0dc52daac69b23ec78fad8fa2fec05f8981
 
 PODFILE CHECKSUM: b803d983d7c9f4e9eee63ce665f655a1a3ff598c
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0

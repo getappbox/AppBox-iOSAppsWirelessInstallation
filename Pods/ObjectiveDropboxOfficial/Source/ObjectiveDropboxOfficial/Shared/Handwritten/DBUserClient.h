@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBCOMMONPathRoot.h"
 #import "DBUserBaseClient.h"
 
 @class DBTransportDefaultConfig;
@@ -60,6 +61,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAccessToken:(NSString *)accessToken
                            tokenUid:(nullable NSString *)tokenUid
                     transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
+
+///
+/// Returns a `DBUserClient` instance that can be used to make API calls with given path root value.
+/// @param pathRoot Value of the path root object which will be used as Dropbox-Api-Path-Root header.
+///
+/// @return An initialized User API client instance.
+///
+- (DBUserClient *)withPathRoot:(DBCOMMONPathRoot *)pathRoot;
 
 ///
 /// Returns the current access token used to make API requests.

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SsoRemoveLoginUrlDetails` struct.
 ///
-/// Removed the sign-in URL for SSO.
+/// Removed sign-in URL for SSO.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
