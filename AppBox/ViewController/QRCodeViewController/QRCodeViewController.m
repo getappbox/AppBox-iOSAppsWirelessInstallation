@@ -9,7 +9,6 @@
 #import "QRCodeViewController.h"
 
 @implementation QRCodeViewController{
-    CGImageRef qrCodeImage;
 }
 
 - (void)viewDidLoad {
@@ -30,12 +29,8 @@
     ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
     ZXBitMatrix *result = [writer encode:url format:kBarcodeFormatQRCode width:250 height:250 error:&error];
     if (result){
-        qrCodeImage = [[ZXImage imageWithMatrix:result] cgimage];
-        if (qrCodeImage) {
-            NSImage *image = [[NSImage alloc] initWithCGImage:qrCodeImage size:NSMakeSize(250, 250)];
-            [imageViewQRCode setImage:image];
-            CGImageRelease(qrCodeImage);
-        }
+        NSImage *image = [[NSImage alloc] initWithCGImage:[[ZXImage imageWithMatrix:result] cgimage] size:NSMakeSize(250, 250)];
+        [imageViewQRCode setImage:image];
     }else{
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
     }
