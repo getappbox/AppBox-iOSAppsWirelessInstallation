@@ -10,7 +10,7 @@
 #import <ZXingObjC/ZXingObjC.h>
 
 @interface QRCodeViewController : NSViewController{
-    IBOutlet NSImageView *imageViewQRCode;
+    __weak IBOutlet NSImageView *imageViewQRCode;
 }
 
 @property(nonatomic, strong) XCProject *project;
