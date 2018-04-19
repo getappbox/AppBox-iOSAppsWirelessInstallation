@@ -1565,7 +1565,6 @@ DQ
                                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
-                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="deleteBuildButtonTapped:" target="xJf-6e-3AH" id="Q6Y-pP-6BZ"/>
