@@ -1,7 +1,7 @@
 <!--
     Thanks for your interest in using the AppBox. 
-    You can use this tamplete to create your issue. 
-    However, you can erase all the tamplet content and write your own.
+    You can use this template to create your issue. 
+    However, you can erase all the template content and write your own.
 -->
 
 ## Description
@@ -42,11 +42,11 @@ Please describe the issue you are facing or a feature you would like to be added
 4. Crash Report
 
 ```
-<!--If you have crash report, then please copy paste that here otherwise remove this option.
+<!--If you have the crash report, then please copy paste that here otherwise remove this option.
 ```
 
 ## Other Details
-<!-- If you have any other information which can help us resolve this issue please descripe that here. -->
+<!-- If you have any other information which can help us resolve this issue please describe that here. -->
 
 
 <!--
