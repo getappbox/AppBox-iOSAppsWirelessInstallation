@@ -131,6 +131,34 @@
     return _buildArchivePath;
 }
 
+-(ABPProject *)abpProject{
+    ABPProject *project = [[ABPProject alloc] init];
+    [project setName:self.name];
+    [project setVersion:self.version];
+    [project setBuild:self.build];
+    [project setIdentifer:self.identifer];
+    [project setTeamId:self.teamId];
+    [project setBuildType:self.buildType];
+    [project setIpaFileSize:self.ipaFileSize];
+    [project setMiniOSVersion:self.miniOSVersion];
+    [project setSupportedDevice:self.supportedDevice];
+    [project setSelectedSchemes:self.selectedSchemes];
+    
+    [project setIsKeepSameLinkEnabled:self.isKeepSameLinkEnabled];
+    [project setUniquelinkShareableURL:self.uniquelinkShareableURL];
+    
+    [project setDbAppInfoJSONFullPath:self.dbAppInfoJSONFullPath];
+    [project setIpaFileDBShareableURL:self.ipaFileDBShareableURL];
+    [project setManifestFileSharableURL:self.manifestFileSharableURL];
+    [project setAppLongShareableURL:self.appLongShareableURL];
+    [project setAppShortShareableURL:self.appShortShareableURL];
+    
+    [project setEmails:self.emails];
+    [project setPersonalMessage:self.personalMessage];
+    
+    return project;
+}
+
 #pragma mark - Setter
 
 -(void)setIpaFullPath:(NSURL *)ipaFullPath{

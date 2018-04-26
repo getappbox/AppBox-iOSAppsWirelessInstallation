@@ -11,7 +11,6 @@
 
 @interface Common : NSObject
 
-+ (void)checkDropboxKeys;
 + (NSString*)generateUUID;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
 +(NSError *)errorWithDesc:(NSString *)error andCode:(NSInteger)code;

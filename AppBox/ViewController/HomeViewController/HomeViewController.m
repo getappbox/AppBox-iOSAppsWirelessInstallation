@@ -949,7 +949,7 @@
     //Send mail if valid email address othervise show link
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
         [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
-        [MailHandler sendMailForProject:project complition:^(BOOL success) {
+        [MailGun sendMailWithProject:project.abpProject complition:^(BOOL success, NSError *error) {
             if (success) {
                 [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
                 if (buttonShutdownMac.state == NSOnState){
