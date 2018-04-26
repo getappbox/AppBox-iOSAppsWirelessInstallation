@@ -115,9 +115,9 @@
 		E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473F7205F9FDC00CF12F9 /* HangoutClient.m */; };
 		E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FA205FD14C00CF12F9 /* NSColor+Color.m */; };
 		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
-		E19973302091CFBC0035CCE9 /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E199732F2091CFBC0035CCE9 /* ABPrivate.framework */; };
-		E19973312091D2630035CCE9 /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E199732F2091CFBC0035CCE9 /* ABPrivate.framework */; };
-		E19973322091D2630035CCE9 /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E199732F2091CFBC0035CCE9 /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E19973352091EFAB0035CCE9 /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E19973342091EFAA0035CCE9 /* ABPrivate.framework */; };
+		E19973362091F0490035CCE9 /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E19973342091EFAA0035CCE9 /* ABPrivate.framework */; };
+		E19973372091F0490035CCE9 /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E19973342091EFAA0035CCE9 /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
@@ -205,7 +205,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E19973322091D2630035CCE9 /* ABPrivate.framework in Embed Frameworks */,
+				E19973372091F0490035CCE9 /* ABPrivate.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,7 +394,7 @@
 		E19473FA205FD14C00CF12F9 /* NSColor+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Color.m"; sourceTree = "<group>"; };
 		E19473FD205FD3F100CF12F9 /* AppBoxTableRowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppBoxTableRowView.h; sourceTree = "<group>"; };
 		E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppBoxTableRowView.m; sourceTree = "<group>"; };
-		E199732F2091CFBC0035CCE9 /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ABPrivate.framework; sourceTree = "<group>"; };
+		E19973342091EFAA0035CCE9 /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ABPrivate.framework; sourceTree = "<group>"; };
 		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
@@ -433,9 +433,9 @@
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
 				E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */,
 				E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */,
-				E19973312091D2630035CCE9 /* ABPrivate.framework in Frameworks */,
+				E19973362091F0490035CCE9 /* ABPrivate.framework in Frameworks */,
 				84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */,
-				E19973302091CFBC0035CCE9 /* ABPrivate.framework in Frameworks */,
+				E19973352091EFAB0035CCE9 /* ABPrivate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,7 +881,7 @@
 		E164389A1D743ECA00CE8B7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E199732F2091CFBC0035CCE9 /* ABPrivate.framework */,
+				E19973342091EFAA0035CCE9 /* ABPrivate.framework */,
 				E16438A31D7469D900CE8B7E /* Foundation.framework */,
 				E16438A11D7469D200CE8B7E /* CoreData.framework */,
 				E164389F1D7469CD00CE8B7E /* AppKit.framework */,
