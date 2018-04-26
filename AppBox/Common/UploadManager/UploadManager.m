@@ -22,12 +22,12 @@
 +(void)setupDBClientsManager{
     //Force Foreground Session
     if (![DBClientsManager authorizedClient]) {
-        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:abDbAppkey forceForegroundSession:YES];
+        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:[DBManager dbKey] forceForegroundSession:YES];
         [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
     }
     
     //Default Session (Background)
-    //    [DBClientsManager setupWithAppKeyDesktop:abDbAppkey];
+    //    [DBClientsManager setupWithAppKeyDesktop:[DBManager dbKey]];
 }
 
 #pragma mark - UnZip IPA File
@@ -691,7 +691,7 @@
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
     
     //Create Short URL
-    [[BranchIO shared] shortenURLForProject:self.project completion:^(NSURL *shortURL, NSError *error) {
+    [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
         if (shortURL == nil || error) {
             [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
         } else {
@@ -715,7 +715,7 @@
     NSString *originalURL = [self.project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
     //create short url
     self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]];
-    [[BranchIO shared] shortenURLForProject:self.project completion:^(NSURL *shortURL, NSError *error) {
+    [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
         self.project.appShortShareableURL = shortURL;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.completionBlock();
