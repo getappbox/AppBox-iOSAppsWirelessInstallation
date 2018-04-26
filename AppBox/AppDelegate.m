@@ -26,9 +26,6 @@
     [DefaultSettings setFirstTimeSettings];
     [DefaultSettings setEveryStartupSettings];
     
-    //Check Dropbox Keys
-    [Common checkDropboxKeys];
-    
     //Init Crashlytics
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
     [Fabric with:@[[Crashlytics class], [Answers class]]];

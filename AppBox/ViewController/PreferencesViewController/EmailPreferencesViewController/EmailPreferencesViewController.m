@@ -61,7 +61,7 @@
     
     //send mail
     [ABHudViewController showStatus:@"Sending Test Mail" onView:self.view];
-    [MailHandler sendMailForProject:project complition:^(BOOL success) {
+    [MailGun sendMailWithProject:project.abpProject complition:^(BOOL success, NSError *error) {
         [ABHudViewController hideAllHudFromView:self.view after:0];
         if (success) {
             [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];

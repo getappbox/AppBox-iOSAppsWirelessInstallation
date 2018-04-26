@@ -27,6 +27,7 @@
 @property(nonatomic, retain) NSNumber *ipaFileSize;
 @property(nonatomic, retain) NSString *miniOSVersion;
 @property(nonatomic, retain) NSString *supportedDevice;
+@property(nonatomic, retain, readonly) ABPProject *abpProject;
 
 //Local URLS
 @property(nonatomic, retain) NSURL *projectFullPath;
