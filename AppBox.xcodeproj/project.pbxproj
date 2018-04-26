@@ -25,9 +25,6 @@
 		DB439EAF200A750900589A96 /* CISettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB439EAD200A750900589A96 /* CISettingViewController.xib */; };
 		DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB3D7CC81F64501F00217096 /* PythonServer.sh */; };
 		DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */; };
-		DB53855E2083374F004BFC84 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DB53855D2083374F004BFC84 /* README.md */; };
-		DB53856620834BB2004BFC84 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856420834BB2004BFC84 /* PaymentViewController.m */; };
-		DB53856720834BB2004BFC84 /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB53856520834BB2004BFC84 /* PaymentViewController.xib */; };
 		DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5385692083622A004BFC84 /* NSURL+URL.m */; };
 		DB53856E20838913004BFC84 /* DragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856D20838913004BFC84 /* DragDropView.m */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
@@ -120,7 +117,6 @@
 		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
 		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
-		E1BC9FC22072030A00EF7299 /* BranchIO.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FC12072030900EF7299 /* BranchIO.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
 		E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */; };
 		E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC65D1D7E7FEA005872BE /* Common.m */; };
@@ -236,11 +232,6 @@
 		DB439EAC200A750900589A96 /* CISettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CISettingViewController.m; sourceTree = "<group>"; };
 		DB439EAD200A750900589A96 /* CISettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CISettingViewController.xib; sourceTree = "<group>"; };
 		DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SwitchXcode.sh; sourceTree = "<group>"; };
-		DB53855D2083374F004BFC84 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		DB53855F208337B8004BFC84 /* ABPrivateConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABPrivateConstant.h; sourceTree = "<group>"; };
-		DB53856320834BB2004BFC84 /* PaymentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
-		DB53856420834BB2004BFC84 /* PaymentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
-		DB53856520834BB2004BFC84 /* PaymentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
 		DB5385682083622A004BFC84 /* NSURL+URL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+URL.h"; sourceTree = "<group>"; };
 		DB5385692083622A004BFC84 /* NSURL+URL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+URL.m"; sourceTree = "<group>"; };
 		DB53856C20838913004BFC84 /* DragDropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragDropView.h; sourceTree = "<group>"; };
@@ -394,8 +385,6 @@
 		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
 		E1AE88701F3F15780085B173 /* LocalServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalServerHandler.m; sourceTree = "<group>"; };
 		E1AF8FD71E266CC000A57633 /* DropboxKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropboxKeys.h; sourceTree = "<group>"; };
-		E1BC9FC02072030900EF7299 /* BranchIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BranchIO.h; sourceTree = "<group>"; };
-		E1BC9FC12072030900EF7299 /* BranchIO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BranchIO.m; sourceTree = "<group>"; };
 		E1C0246F1E9B4E6C00C87CC9 /* SlackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackClient.h; sourceTree = "<group>"; };
 		E1C024701E9B4E6C00C87CC9 /* SlackClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlackClient.m; sourceTree = "<group>"; };
 		E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = InstallPrivateKey.sh; sourceTree = "<group>"; };
@@ -505,43 +494,6 @@
 				DB439EAD200A750900589A96 /* CISettingViewController.xib */,
 			);
 			path = CISettingViewController;
-			sourceTree = "<group>";
-		};
-		DB53855C208333FA004BFC84 /* ABPrivate */ = {
-			isa = PBXGroup;
-			children = (
-				DB53855D2083374F004BFC84 /* README.md */,
-				DB53855F208337B8004BFC84 /* ABPrivateConstant.h */,
-				DB53856020834B47004BFC84 /* Payment */,
-				E1BC9FBF2071FDCC00EF7299 /* BranchIO */,
-			);
-			path = ABPrivate;
-			sourceTree = "<group>";
-		};
-		DB53856020834B47004BFC84 /* Payment */ = {
-			isa = PBXGroup;
-			children = (
-				DB53856220834B8B004BFC84 /* PaymentViewController */,
-				DB53856120834B53004BFC84 /* PaytmLinks */,
-			);
-			path = Payment;
-			sourceTree = "<group>";
-		};
-		DB53856120834B53004BFC84 /* PaytmLinks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PaytmLinks;
-			sourceTree = "<group>";
-		};
-		DB53856220834B8B004BFC84 /* PaymentViewController */ = {
-			isa = PBXGroup;
-			children = (
-				DB53856320834BB2004BFC84 /* PaymentViewController.h */,
-				DB53856420834BB2004BFC84 /* PaymentViewController.m */,
-				DB53856520834BB2004BFC84 /* PaymentViewController.xib */,
-			);
-			path = PaymentViewController;
 			sourceTree = "<group>";
 		};
 		DB53856B208388F3004BFC84 /* DragDropView */ = {
@@ -1214,15 +1166,6 @@
 			path = LocalServerHandler;
 			sourceTree = "<group>";
 		};
-		E1BC9FBF2071FDCC00EF7299 /* BranchIO */ = {
-			isa = PBXGroup;
-			children = (
-				E1BC9FC02072030900EF7299 /* BranchIO.h */,
-				E1BC9FC12072030900EF7299 /* BranchIO.m */,
-			);
-			path = BranchIO;
-			sourceTree = "<group>";
-		};
 		E1C0246E1E9B4E4C00C87CC9 /* SlackClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,7 +1178,6 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DB53855C208333FA004BFC84 /* ABPrivate */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
 				E16D72D11E88F99A0031FB7C /* OutputParsers */,
@@ -1379,7 +1321,6 @@
 				DB45B45B1F6EC5EE0041EB42 /* PythonServer.sh in Resources */,
 				E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */,
 				E1D12EE41EC2F17B0065E59A /* SlackPreferencesViewController.xib in Resources */,
-				DB53855E2083374F004BFC84 /* README.md in Resources */,
 				E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */,
 				E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */,
 				E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */,
@@ -1396,7 +1337,6 @@
 				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
 				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
-				DB53856720834BB2004BFC84 /* PaymentViewController.xib in Resources */,
 				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1544,12 +1484,10 @@
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
 				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
-				E1BC9FC22072030A00EF7299 /* BranchIO.m in Sources */,
 				DB2629751F95E38C00C4C647 /* Project+CoreDataProperties.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
-				DB53856620834BB2004BFC84 /* PaymentViewController.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
