@@ -1,0 +1,6 @@
+framework module ABPrivate {
+  umbrella header "ABPrivate.h"
+
+  export *
+  module * { export * }
+}

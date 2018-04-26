@@ -9,9 +9,6 @@
 #ifndef OtherServicesKeys_h
 #define OtherServicesKeys_h
 
-#define abMailGunKey @""
 #define abGoogleAnalyticsKey @""
-#define abBranchIOTestKey @""
-#define abBranchIOProductionKey @""
 
 #endif /* MailGunKeys_h */
