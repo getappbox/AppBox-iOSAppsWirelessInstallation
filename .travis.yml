@@ -1,0 +1,6 @@
+language: objective-c
+xcode_project: AppBox.xcworkspace
+osx_image: xcode9.3
+xcode_scheme: AppBox
+script:
+- xcodebuild clean build -workspace AppBox.xcworkspace -scheme AppBox CODE_SIGNING_REQUIRED=NO
