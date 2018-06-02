@@ -17,17 +17,6 @@
     }
 }
 
--(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message{
-    NSMutableString *mailString = [NSMutableString stringWithString:abMailerBaseURL];
-    [mailString appendFormat:@"?to=%@",mailId];
-    [mailString appendFormat:@"&app=%@",self.name];
-    [mailString appendFormat:@"&ver=%@",self.version];
-    [mailString appendFormat:@"&build=%@",self.build];
-    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.stringValue];
-    [mailString appendFormat:@"&devmsg=%@",message];
-    return mailString;
-}
-
 -(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion{
     NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
     [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];

@@ -12,9 +12,7 @@
 //Base URL's
 #define abBranchBaseURL @"https://api.branch.io/v1/url"
 #define abInstallWebAppBaseURL @"https://tryapp.github.io"
-#define abMailerBaseURL @"https://appboxapi.github.io/mail"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
-//#define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Powered%20by%20DB"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
 
 //Other URL's
