@@ -55,6 +55,7 @@
 		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
 		E14237C22010A6F600F83501 /* CreateIPAScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E14237C12010A16300F83501 /* CreateIPAScript.sh */; };
 		E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E143637A1DF59AFD00FB10CA /* LogViewController.m */; };
+		E144261E20A30F80006E71C5 /* JenkinsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E144261D20A30F80006E71C5 /* JenkinsHandler.m */; };
 		E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14A441E1F277590006A9102 /* XCArchiveResult.m */; };
 		E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E14A44211F2775A2006A9102 /* XCArchiveParser.m */; };
 		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
@@ -313,6 +314,8 @@
 		E14237C12010A16300F83501 /* CreateIPAScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CreateIPAScript.sh; sourceTree = "<group>"; };
 		E14363791DF59AFD00FB10CA /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		E143637A1DF59AFD00FB10CA /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		E144261C20A30F80006E71C5 /* JenkinsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JenkinsHandler.h; sourceTree = "<group>"; };
+		E144261D20A30F80006E71C5 /* JenkinsHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JenkinsHandler.m; sourceTree = "<group>"; };
 		E14A441D1F277590006A9102 /* XCArchiveResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCArchiveResult.h; sourceTree = "<group>"; };
 		E14A441E1F277590006A9102 /* XCArchiveResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCArchiveResult.m; sourceTree = "<group>"; };
 		E14A44201F2775A2006A9102 /* XCArchiveParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCArchiveParser.h; sourceTree = "<group>"; };
@@ -742,6 +745,15 @@
 				E143637A1DF59AFD00FB10CA /* LogViewController.m */,
 			);
 			path = LogViewController;
+			sourceTree = "<group>";
+		};
+		E144261B20A30F6A006E71C5 /* JenkinsHandler */ = {
+			isa = PBXGroup;
+			children = (
+				E144261C20A30F80006E71C5 /* JenkinsHandler.h */,
+				E144261D20A30F80006E71C5 /* JenkinsHandler.m */,
+			);
+			path = JenkinsHandler;
 			sourceTree = "<group>";
 		};
 		E14A44191F277567006A9102 /* XCArchiveParser */ = {
@@ -1195,6 +1207,7 @@
 		E1CFC65B1D7E7FD9005872BE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E144261B20A30F6A006E71C5 /* JenkinsHandler */,
 				E16D72E11E88FB540031FB7C /* TaskHandler */,
 				E1E215B81E869BF70091565D /* ITCLoginClient */,
 				E16D72D11E88F99A0031FB7C /* OutputParsers */,
@@ -1493,6 +1506,7 @@
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */,
 				E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */,
+				E144261E20A30F80006E71C5 /* JenkinsHandler.m in Sources */,
 				E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */,
 				DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,

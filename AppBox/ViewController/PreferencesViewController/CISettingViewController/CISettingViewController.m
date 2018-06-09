@@ -18,6 +18,7 @@
     [super viewDidLoad];
     [limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
     [updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
+    [copyBuildArtifactsCheckBox setState: [UserData copyBuildArtifacts] ? NSOnState : NSOffState];
 }
 
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender {
@@ -26,5 +27,9 @@
 
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender {
     [UserData setEnableDebugLog:(sender.state == NSOnState)];
+}
+
+- (IBAction)copyBuildArtifactsCheckBoxChanged:(NSButton *)sender {
+    [UserData setCopyBuildArtifacts:(sender.state == NSOnState)];
 }
 @end

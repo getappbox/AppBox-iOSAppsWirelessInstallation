@@ -63,5 +63,7 @@
 +(void)setEnableDebugLog:(BOOL)debugLog;
 +(BOOL)updateAlertEnable;
 +(void)setUpdateAlertEnable:(BOOL)updateAlert;
++(BOOL)copyBuildArtifacts;
++(void)setCopyBuildArtifacts:(BOOL)copyBuildArtifacts;
 
 @end

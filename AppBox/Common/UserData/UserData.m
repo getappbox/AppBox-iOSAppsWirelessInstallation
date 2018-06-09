@@ -279,4 +279,14 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define CopyBuildArtifacts @"CopyBuildArtifacts"
++(BOOL)copyBuildArtifacts{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:CopyBuildArtifacts];
+}
+
++(void)setCopyBuildArtifacts:(BOOL)copyBuildArtifacts{
+    [[NSUserDefaults standardUserDefaults] setBool:copyBuildArtifacts forKey:CopyBuildArtifacts];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

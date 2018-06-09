@@ -41,6 +41,7 @@
 #import "RepoBuilder.h"
 #import "EventTracker.h"
 #import "UpdateHandler.h"
+#import "JenkinsHandler.h"
 #import "DBErrorHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"

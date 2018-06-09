@@ -11,8 +11,10 @@
 @interface CISettingViewController : NSViewController{
     __weak IBOutlet NSButton *updateAlertCheckBox;
     __weak IBOutlet NSButton *limitedLogCheckBox;
+    __weak IBOutlet NSButton *copyBuildArtifactsCheckBox;
 }
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender;
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender;
+- (IBAction)copyBuildArtifactsCheckBoxChanged:(NSButton *)sender;
 
 @end
