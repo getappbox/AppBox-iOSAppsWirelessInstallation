@@ -10,7 +10,6 @@
 
 @interface JenkinsHandler : NSObject
 
-+(void)test;
 +(BOOL)copyArtifactsInBuildFolderForProject:(XCProject *)project;
 
 @end
