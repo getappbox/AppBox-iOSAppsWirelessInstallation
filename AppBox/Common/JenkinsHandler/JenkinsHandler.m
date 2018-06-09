@@ -16,41 +16,36 @@ const NSString *artifactsDir = @"/builds";
 
 @implementation JenkinsHandler
 
-+(void)test{
-    XCProject *project = [[XCProject alloc] init];
-    [project setProjectFullPath:[NSURL URLWithString:@"/Users/emp195/.jenkins/workspace/ourValues-iOS/Vbreathe.xcworkspace"]];
-    [[self class] copyArtifactsInBuildFolderForProject:project];
-}
-
 +(BOOL)copyArtifactsInBuildFolderForProject:(XCProject *)project {
-    NSMutableArray *projectPathComponents = [[NSMutableArray alloc] initWithArray:[project.projectFullPath pathComponents]];
+    NSMutableArray *projectPathComponents = [[NSMutableArray alloc] initWithArray:[project.projectFullPath.resourceSpecifier pathComponents]];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Path - %@", project.projectFullPath.resourceSpecifier]];
+    if ([projectPathComponents.lastObject isEqualToString:@"/"]){
+        [projectPathComponents removeLastObject];
+    }
     [projectPathComponents removeLastObject];
     if ([projectPathComponents containsObject:jenkinsWorkspaceDir]) {
         [projectPathComponents replaceObjectAtIndex:[projectPathComponents indexOfObject:jenkinsWorkspaceDir] withObject:jenkinsJobsDir];
-        [projectPathComponents addObjectsFromArray:@[artifactsRootDir, lastSuccessfulBuildShortcut]];
-        NSURL *aliasPath = [NSURL fileURLWithPathComponents:projectPathComponents];
+        [projectPathComponents addObjectsFromArray:@[artifactsRootDir, lastSuccessfulBuildShortcut, artifactsDir]];
+        NSURL *path = [NSURL fileURLWithPathComponents:projectPathComponents];
         NSError *error;
-        NSData *bookmarkData = [NSURL bookmarkDataWithContentsOfURL:aliasPath error:&error];
-        NSDictionary<NSURLResourceKey, id> *resources = [NSURL resourceValuesForKeys:@[NSURLPathKey, NSURLIsAliasFileKey] fromBookmarkData:bookmarkData];
-        if ([resources.allKeys containsObject:NSURLPathKey]) {
-            NSURL *path = [NSURL URLWithString:[resources valueForKey:NSURLPathKey]];
-            BOOL isDirectory = NO;
-            BOOL artifactsPathExists = [[NSFileManager defaultManager] fileExistsAtPath:path.absoluteString isDirectory:&isDirectory];
-            BOOL ipaFileExists = [[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.absoluteString];
-            BOOL buildArchiveExists = [[NSFileManager defaultManager] fileExistsAtPath:project.buildArchivePath.absoluteString];
-            BOOL exportOptionExists = [[NSFileManager defaultManager] fileExistsAtPath:project.exportOptionsPlistPath.absoluteString];
-            if (artifactsPathExists && isDirectory && ipaFileExists && buildArchiveExists && exportOptionExists){
-                NSError *error;
-                [[NSFileManager defaultManager] copyItemAtURL:path toURL:project.ipaFullPath error:&error];
-                [[NSFileManager defaultManager] copyItemAtURL:path toURL:project.exportOptionsPlistPath error:&error];
-                [[NSFileManager defaultManager] copyItemAtURL:path toURL:project.buildArchivePath error:&error];
-                return YES;
-            } else {
-                return NO;
-            }
+        [[NSFileManager defaultManager] createDirectoryAtURL:path withIntermediateDirectories:YES attributes:nil error:&error];
+        BOOL ipaFileExists = [[NSFileManager defaultManager] fileExistsAtPath:project.ipaFullPath.resourceSpecifier];
+        BOOL buildArchiveExists = [[NSFileManager defaultManager] fileExistsAtPath:project.buildArchivePath.resourceSpecifier];
+        BOOL exportOptionExists = [[NSFileManager defaultManager] fileExistsAtPath:project.exportOptionsPlistPath.resourceSpecifier];
+        if (ipaFileExists && buildArchiveExists && exportOptionExists){
+            NSString *newIPAPath = [path.resourceSpecifier stringByAppendingString:project.ipaFullPath.lastPathComponent];
+            [[NSFileManager defaultManager] copyItemAtPath:project.ipaFullPath.resourceSpecifier toPath:newIPAPath error:&error];
+            
+            NSString *newArchivePath = [path.resourceSpecifier stringByAppendingString:project.buildArchivePath.lastPathComponent];
+            [[NSFileManager defaultManager] copyItemAtPath:project.buildArchivePath.resourceSpecifier toPath:newArchivePath error:&error];
+            
+            NSString *newExportPath = [path.resourceSpecifier stringByAppendingString:project.exportOptionsPlistPath.lastPathComponent];
+            [[NSFileManager defaultManager] copyItemAtPath:project.exportOptionsPlistPath.resourceSpecifier toPath:newExportPath error:&error];
+            return YES;
         } else {
             return NO;
         }
+        
     } else {
         return NO;
     }

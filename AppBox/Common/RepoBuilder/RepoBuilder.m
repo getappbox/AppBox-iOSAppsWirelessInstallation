@@ -57,7 +57,6 @@ NSString *const RepoITCPassword = @"itcpassword";
     //project path
     if ([projectRawSetting.allKeys containsObject:RepoProjectKey]) {
         NSString *projectPath = [repoPath stringByAppendingPathComponent:[projectRawSetting valueForKey:RepoProjectKey]];
-        projectPath = [@"file://" stringByAppendingString:projectPath];
         NSURL *projectURL = [NSURL fileURLWithPath:projectPath];
         project.projectFullPath = projectURL;
     }
