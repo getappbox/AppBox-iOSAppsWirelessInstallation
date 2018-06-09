@@ -40,6 +40,7 @@
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
+        __block NSString *appIconPath;
         [[AppDelegate appDelegate] addSessionLog:@"Extracting Files..."];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
@@ -57,6 +58,12 @@
                                 *stop = YES;
                             }
                         }];
+                    }
+                    
+                    //Get App Icon
+                    NSString *lastPathComponent = entry.lowercaseString.lastPathComponent;
+                    if ([lastPathComponent containsString:@"appicon"] && [lastPathComponent containsString:@"png"]) {
+                        appIconPath = [NSTemporaryDirectory() stringByAppendingPathComponent:entry];
                     }
                     
                     //Get Info.plist entry
@@ -127,6 +134,7 @@
                     //prepare for upload and check ipa type
                     NSURL *ipaFileURL = ([self.project.ipaFullPath isFileURL]) ? self.project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
                     [self.project setIpaFullPath:ipaFileURL];
+                    [self.project setAppIconPath: [NSURL fileURLWithPath:appIconPath]];
                     if (self.project.distributeOverLocalNetwork){
                         [self distributeLocalIPAWithURL:ipaFileURL];
                     } else {
@@ -154,7 +162,7 @@
         NSString *appboxServerBuildsPath = [NSString stringWithFormat:@"%@/%@-%@/", abAppBoxLocalServerBuildsDirectory, ipaName, [Common generateUUID]];
         NSURL *toURL = [[UserData buildLocation] URLByAppendingPathComponent:appboxServerBuildsPath];
         NSError *error;
-        NSString *ipaPath = [ipaURL.resourceSpecifier stringByRemovingPercentEncoding];
+        
         //Create AppBox Server Directory
         if ([fileManager createDirectoryAtPath:toURL.resourceSpecifier withIntermediateDirectories:YES attributes:nil error:&error]){
             //Copy  IPA file to Server Directory
@@ -518,20 +526,31 @@
                       [self dbCreateSharedURLForFile:response.pathDisplay];
                   }
               }
+              
               //IPA file uploaded and creating shared url
               else if (self.dbFileType == DBFileTypeIPA){
-                  NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
+                  NSString *status = @"Creating Sharable Link for IPA";
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
                   
                   //create shared url for ipa
                   [self dbCreateSharedURLForFile:response.pathDisplay];
               }
+              
               //Manifest file uploaded and creating shared url
               else if (self.dbFileType == DBFileTypeManifest){
-                  NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for Manifest"];
+                  NSString *status = @"Creating Sharable Link for Manifest";
                   [self showStatus:status andShowProgressBar:YES withProgress:-1];
                   
                   //create shared url for manifest
+                  [self dbCreateSharedURLForFile:response.pathDisplay];
+              }
+              
+              //AppIcon uploaded and creating shared url
+              else if (self.dbFileType == DBFileTypeIcon) {
+                  NSString *status = @"Creating Sharable Link for AppIcon";
+                  [self showStatus:status andShowProgressBar:YES withProgress:-1];
+                  
+                  //create shared url for icon
                   [self dbCreateSharedURLForFile:response.pathDisplay];
               }
           }
@@ -565,11 +584,14 @@
              if (self.dbFileType == DBFileTypeIPA) {
                  NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)",[NSNumber numberWithInt:progress]];
                  [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-             }else if (self.dbFileType == DBFileTypeManifest){
+             } else if (self.dbFileType == DBFileTypeManifest) {
                  NSString *status = [NSString stringWithFormat:@"Uploading Manifest (%@%%)",[NSNumber numberWithInt:progress]];
                  [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-             }else if (self.dbFileType == DBFileTypeJson){
+             } else if (self.dbFileType == DBFileTypeJson) {
                  NSString *status = [NSString stringWithFormat:@"Uploading AppInfo (%@%%)",[NSNumber numberWithInt:progress]];
+                 [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
+             } else if (self.dbFileType == DBFileTypeIcon) {
+                 NSString *status = [NSString stringWithFormat:@"Uploading AppIcon (%@%%)",[NSNumber numberWithInt:progress]];
                  [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
              }
          }
@@ -628,7 +650,7 @@
             shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
         }
         self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
-        [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
+        [self.project createManifestWithCompletion:^(NSURL *manifestURL) {
             if (manifestURL == nil){
                 //show error if manifest file url is nil
                 if (self.ciRepoProject) {
@@ -644,6 +666,11 @@
         }];
         
     }
+    
+    else if (self.dbFileType == DBFileTypeIcon) {
+        
+    }
+    
     //if same link enable load appinfo.json otherwise Create short shareable url of manifest
     else if (self.dbFileType == DBFileTypeManifest){
         NSString *shareableLink = [url substringToIndex:url.length-5];

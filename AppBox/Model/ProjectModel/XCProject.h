@@ -37,6 +37,7 @@
 @property(nonatomic, retain) NSURL *buildArchivePath;
 @property(nonatomic, retain) NSURL *buildUUIDDirectory;
 @property(nonatomic, retain) NSURL *exportOptionsPlistPath;
+@property(nonatomic, retain) NSURL *appIconPath;
 
 //Project Schemes and Targets
 @property(nonatomic, retain) NSArray *schemes;
@@ -66,12 +67,14 @@
 @property(nonatomic, retain) NSURL *dbIPAFullPath;
 @property(nonatomic, retain) NSURL *dbManifestFullPath;
 @property(nonatomic, retain) NSURL *dbAppInfoJSONFullPath;
+@property(nonatomic, retain) NSURL *dbAppIConFullPath;
 
 @property(nonatomic, retain) NSURL *bundleDirectory;
 @property(nonatomic, retain) NSURL *ipaFileDBShareableURL;
 @property(nonatomic, retain) NSURL *manifestFileSharableURL;
 @property(nonatomic, retain) NSURL *appLongShareableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
+@property(nonatomic, retain) NSURL *appIconSharableURL;
 
 //CI Settings
 @property(nonatomic, retain) NSString *branch;
@@ -89,5 +92,5 @@
 - (BOOL)createExportOptionPlist;
 - (void)createUDIDAndIsNew:(BOOL)isNew;
 - (void)upadteDbDirectoryByBundleDirectory;
-- (void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion;
+- (void)createManifestWithCompletion:(void(^)(NSURL *manifestURL))completion;
 @end

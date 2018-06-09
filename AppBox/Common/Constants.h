@@ -91,6 +91,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 //enums
 typedef enum : NSUInteger {
     DBFileTypeIPA,
+    DBFileTypeIcon,
     DBFileTypeManifest,
     DBFileTypeJson,
 } DBFileType;
