@@ -917,10 +917,12 @@
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];
     [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
     
+    //Create message for 3rd party services
     NSString *notificationMessage = [NSString stringWithFormat:@"%@ IPA file uploaded.\nShare URL - %@", project.name, project.appShortShareableURL];
     [Common showLocalNotificationWithTitle:@"AppBox" andMessage:notificationMessage];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nBUILD URL - %@\n\n\n.", project.appShortShareableURL]];
     
+    //Check message format
     if ([UserData userSlackMessage].length > 0) {
         if ([UserData userSlackChannel].length > 0){
             [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
@@ -937,9 +939,15 @@
             [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {
             }];
         }
-        
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    //Copy Artifacts for Jenkins
+    if (ciRepoProject && [JenkinsHandler copyArtifactsInBuildFolderForProject:project]) {
+        [[AppDelegate appDelegate] addSessionLog:@"Copying Build Artifacts..."];
+    }
+    NSInteger waitTime = ciRepoProject == nil ? 5 : 15;
+    //Handle App URL After 3rd party processing
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(waitTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self handleAppURLAfterSlack];
     });
 }
