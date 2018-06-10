@@ -134,7 +134,9 @@
                     //prepare for upload and check ipa type
                     NSURL *ipaFileURL = ([self.project.ipaFullPath isFileURL]) ? self.project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
                     [self.project setIpaFullPath:ipaFileURL];
-                    [self.project setAppIconPath: [NSURL fileURLWithPath:appIconPath]];
+                    if (appIconPath) {
+                        [self.project setAppIconPath: [NSURL fileURLWithPath:appIconPath]];
+                    }
                     if (self.project.distributeOverLocalNetwork){
                         [self distributeLocalIPAWithURL:ipaFileURL];
                     } else {
@@ -280,9 +282,12 @@
         [latestVersion setObject:self.project.version forKey:@"version"];
         [latestVersion setObject:self.project.build forKey:@"build"];
         [latestVersion setObject:self.project.identifer forKey:@"identifier"];
-        [latestVersion setObject:self.project.appIconSharableURL.absoluteString forKey:@"icon"];
         [latestVersion setObject:self.project.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
         [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
+        
+        if (self.project.appIconSharableURL){
+            [latestVersion setObject:self.project.appIconSharableURL.absoluteString forKey:@"icon"];
+        }
         
         //check if developer want to show donwload button IPA file button to the user
         if ([UserData downloadIPAEnable]) {
@@ -655,18 +660,24 @@
         
         //Upload AppIcon File
         [self setDbFileType:DBFileTypeIcon];
-        [self dbUploadFile: self.project.appIconPath.resourceSpecifier
-                        to: self.project.dbAppIConFullPath.absoluteString
-                      mode: [[DBFILESWriteMode alloc] initWithOverwrite]];
+        if (self.project.appIconPath) {
+            [self dbUploadFile: self.project.appIconPath.resourceSpecifier
+                            to: self.project.dbAppIConFullPath.absoluteString
+                          mode: [[DBFILESWriteMode alloc] initWithOverwrite]];
+        } else {
+            [self handleSharedURLResult:nil];
+        }
     }
     
     else if (self.dbFileType == DBFileTypeIcon) {
-        //Set App Icon Shared URL
-        NSString *shareableLink = url;
-        if(!self.project.distributeOverLocalNetwork){
-            shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
+        if (url) {
+            //Set App Icon Shared URL
+            NSString *shareableLink = url;
+            if(!self.project.distributeOverLocalNetwork){
+                shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
+            }
+            self.project.appIconSharableURL = [NSURL URLWithString:shareableLink];
         }
-        self.project.appIconSharableURL = [NSURL URLWithString:shareableLink];
         
         //Create and Upload Manifest file
         [self.project createManifestWithCompletion:^(NSURL *manifestURL) {

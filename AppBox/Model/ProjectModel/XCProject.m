@@ -23,9 +23,11 @@
     [ipaAssetsDict setValue:@"software-package" forKey:@"kind"];
     
     NSMutableDictionary *iconAssetsDict = [[NSMutableDictionary alloc] init];
-    [iconAssetsDict setValue:self.appIconSharableURL.absoluteString forKey:@"url"];
-    [iconAssetsDict setValue:@"display-image" forKey:@"kind"];
-    [iconAssetsDict setValue:@YES forKey:@"needs-shine"];
+    if (self.appIconSharableURL) {
+        [iconAssetsDict setValue:self.appIconSharableURL.absoluteString forKey:@"url"];
+        [iconAssetsDict setValue:@"display-image" forKey:@"kind"];
+        [iconAssetsDict setValue:@YES forKey:@"needs-shine"];
+    }
     
     //TODO: Upload ICONS
     NSMutableDictionary *iconDict = [[NSMutableDictionary alloc] init];
@@ -40,7 +42,11 @@
     [metadataDict setValue:self.version forKey:@"bundle-version"];
     
     NSMutableDictionary *mainItemDict = [[NSMutableDictionary alloc] init];
-    [mainItemDict setValue:[NSArray arrayWithObjects:ipaAssetsDict, iconAssetsDict, nil] forKey:@"assets"];
+    NSMutableArray *assetsItem = [[NSMutableArray alloc] initWithObjects:ipaAssetsDict, nil];
+    if (self.appIconSharableURL) {
+        [assetsItem addObject:iconAssetsDict];
+    }
+    [mainItemDict setValue:assetsItem forKey:@"assets"];
     [mainItemDict setValue:metadataDict forKey:@"metadata"];
     
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
