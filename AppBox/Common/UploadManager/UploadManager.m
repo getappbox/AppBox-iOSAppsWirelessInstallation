@@ -280,6 +280,7 @@
         [latestVersion setObject:self.project.version forKey:@"version"];
         [latestVersion setObject:self.project.build forKey:@"build"];
         [latestVersion setObject:self.project.identifer forKey:@"identifier"];
+        [latestVersion setObject:self.project.appIconSharableURL forKey:@"icon"];
         [latestVersion setObject:self.project.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
         [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
         
@@ -645,11 +646,29 @@
 -(void)handleSharedURLResult:(NSString *)url{
     //Create manifest file with share IPA url and upload manifest file
     if (self.dbFileType == DBFileTypeIPA) {
+        //Set Shared IPA File URL
         NSString *shareableLink = url;
         if(!self.project.distributeOverLocalNetwork){
             shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
         }
-        self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
+        [self.project setIpaFileDBShareableURL: [NSURL URLWithString:shareableLink]];
+        
+        //Upload AppIcon File
+        [self setDbFileType:DBFileTypeIcon];
+        [self dbUploadFile: self.project.appIconPath.resourceSpecifier
+                        to: self.project.dbAppIConFullPath.absoluteString
+                      mode: [[DBFILESWriteMode alloc] initWithOverwrite]];
+    }
+    
+    else if (self.dbFileType == DBFileTypeIcon) {
+        //Set App Icon Shared URL
+        NSString *shareableLink = url;
+        if(!self.project.distributeOverLocalNetwork){
+            shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
+        }
+        self.project.appIconSharableURL = [NSURL URLWithString:shareableLink];
+        
+        //Create and Upload Manifest file
         [self.project createManifestWithCompletion:^(NSURL *manifestURL) {
             if (manifestURL == nil){
                 //show error if manifest file url is nil
@@ -661,14 +680,11 @@
             }else{
                 //change file type and upload manifest
                 self.dbFileType = DBFileTypeManifest;
-                [self dbUploadFile:manifestURL.resourceSpecifier to:self.project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
+                [self dbUploadFile: manifestURL.resourceSpecifier
+                                to: self.project.dbManifestFullPath.absoluteString
+                              mode: [[DBFILESWriteMode alloc] initWithOverwrite]];
             }
         }];
-        
-    }
-    
-    else if (self.dbFileType == DBFileTypeIcon) {
-        
     }
     
     //if same link enable load appinfo.json otherwise Create short shareable url of manifest

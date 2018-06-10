@@ -40,7 +40,7 @@
     [metadataDict setValue:self.version forKey:@"bundle-version"];
     
     NSMutableDictionary *mainItemDict = [[NSMutableDictionary alloc] init];
-    [mainItemDict setValue:[NSArray arrayWithObjects:ipaAssetsDict, nil] forKey:@"assets"];
+    [mainItemDict setValue:[NSArray arrayWithObjects:ipaAssetsDict, iconAssetsDict, nil] forKey:@"assets"];
     [mainItemDict setValue:metadataDict forKey:@"metadata"];
     
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
@@ -228,14 +228,24 @@
     NSString *validUUID = [self validURLString:self.uuid];
     NSString *validBundleDirectory = [self validURLString:self.bundleDirectory.absoluteString];
     
-    NSString *toPath = [validBundleDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ver%@(%@)-%@",validName, validVersion, validBuild, validUUID]];
-    [self setDbDirectory:[NSURL URLWithString:toPath]];
+    //Build Dropbox Directory
+    NSString *folderName = [NSString stringWithFormat:@"%@-ver%@(%@)-%@",validName, validVersion, validBuild, validUUID];
+    NSString *toPath = [validBundleDirectory stringByAppendingPathComponent:folderName];
+    [self setDbDirectory: [NSURL URLWithString:toPath]];
     
-    NSString * dbIPAFullPathString = [NSString stringWithFormat:@"%@/%@.ipa", toPath, validName];
-    [self setDbIPAFullPath:[NSURL URLWithString:dbIPAFullPathString]];
+    //IPA file full Dropbox path
+    NSString *dbIPAFullPath = [NSString stringWithFormat:@"%@/%@.ipa", toPath, validName];
+    [self setDbIPAFullPath: [NSURL URLWithString:dbIPAFullPath]];
     
-    [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
+    //Manifest file full Dropbox path
+    NSString *manifestFullPath = [NSString stringWithFormat:@"%@/manifest.plist",toPath];
+    [self setDbManifestFullPath: [NSURL URLWithString:manifestFullPath]];
     
+    //AppIcon file full Dropbox path
+    NSString *appIconFullPath = [NSString stringWithFormat:@"%@/AppIcon.png",toPath];
+    [self setDbAppIConFullPath: [NSURL URLWithString:appIconFullPath]];
+    
+    //AppInfo file full Dropbox path
     if (self.isKeepSameLinkEnabled){
         [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,abAppInfoFileName]]];
     } else {
