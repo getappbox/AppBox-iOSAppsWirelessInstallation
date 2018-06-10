@@ -280,7 +280,7 @@
         [latestVersion setObject:self.project.version forKey:@"version"];
         [latestVersion setObject:self.project.build forKey:@"build"];
         [latestVersion setObject:self.project.identifer forKey:@"identifier"];
-        [latestVersion setObject:self.project.appIconSharableURL forKey:@"icon"];
+        [latestVersion setObject:self.project.appIconSharableURL.absoluteString forKey:@"icon"];
         [latestVersion setObject:self.project.manifestFileSharableURL.absoluteString forKey:@"manifestLink"];
         [latestVersion setObject:currentTimeStamp forKey:@"timestamp"];
         
