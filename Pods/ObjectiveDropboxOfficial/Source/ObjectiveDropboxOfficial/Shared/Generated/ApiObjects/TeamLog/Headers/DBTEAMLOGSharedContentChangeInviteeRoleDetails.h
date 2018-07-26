@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `SharedContentChangeInviteeRoleDetails` struct.
 ///
-/// Changed access type of invitee to shared file/folder before invite accepted.
+/// Changed access type of invitee to shared file/folder before invite was
+/// accepted.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

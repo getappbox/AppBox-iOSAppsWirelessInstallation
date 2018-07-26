@@ -37,6 +37,8 @@
 @class DBTEAMLOGDeviceManagementDisabledDetails;
 @class DBTEAMLOGDeviceManagementEnabledDetails;
 @class DBTEAMLOGDeviceUnlinkDetails;
+@class DBTEAMLOGDirectoryRestrictionsAddMembersDetails;
+@class DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails;
 @class DBTEAMLOGDisabledDomainInvitesDetails;
 @class DBTEAMLOGDomainInvitesApproveRequestToJoinTeamDetails;
 @class DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamDetails;
@@ -182,6 +184,7 @@
 @class DBTEAMLOGPermanentDeleteChangePolicyDetails;
 @class DBTEAMLOGResellerSupportSessionEndDetails;
 @class DBTEAMLOGResellerSupportSessionStartDetails;
+@class DBTEAMLOGSecondaryMailsPolicyChangedDetails;
 @class DBTEAMLOGSfAddGroupDetails;
 @class DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails;
 @class DBTEAMLOGSfExternalInviteWarnDetails;
@@ -245,6 +248,9 @@
 @class DBTEAMLOGShowcaseAccessGrantedDetails;
 @class DBTEAMLOGShowcaseAddMemberDetails;
 @class DBTEAMLOGShowcaseArchivedDetails;
+@class DBTEAMLOGShowcaseChangeDownloadPolicyDetails;
+@class DBTEAMLOGShowcaseChangeEnabledPolicyDetails;
+@class DBTEAMLOGShowcaseChangeExternalSharingPolicyDetails;
 @class DBTEAMLOGShowcaseCreatedDetails;
 @class DBTEAMLOGShowcaseDeleteCommentDetails;
 @class DBTEAMLOGShowcaseEditCommentDetails;
@@ -260,8 +266,10 @@
 @class DBTEAMLOGShowcaseRequestAccessDetails;
 @class DBTEAMLOGShowcaseResolveCommentDetails;
 @class DBTEAMLOGShowcaseRestoredDetails;
+@class DBTEAMLOGShowcaseTrashedDeprecatedDetails;
 @class DBTEAMLOGShowcaseTrashedDetails;
 @class DBTEAMLOGShowcaseUnresolveCommentDetails;
+@class DBTEAMLOGShowcaseUntrashedDeprecatedDetails;
 @class DBTEAMLOGShowcaseUntrashedDetails;
 @class DBTEAMLOGShowcaseViewDetails;
 @class DBTEAMLOGSignInAsSessionEndDetails;
@@ -600,6 +608,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// (no description).
   DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsSecondaryMailsPolicyChangedDetails,
 
   /// (no description).
   DBTEAMLOGEventDetailsPaperContentAddMemberDetails,
@@ -986,10 +997,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
   DBTEAMLOGEventDetailsShowcaseTrashedDetails,
 
   /// (no description).
+  DBTEAMLOGEventDetailsShowcaseTrashedDeprecatedDetails,
+
+  /// (no description).
   DBTEAMLOGEventDetailsShowcaseUnresolveCommentDetails,
 
   /// (no description).
   DBTEAMLOGEventDetailsShowcaseUntrashedDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsShowcaseUntrashedDeprecatedDetails,
 
   /// (no description).
   DBTEAMLOGEventDetailsShowcaseViewDetails,
@@ -1068,6 +1085,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// (no description).
   DBTEAMLOGEventDetailsDeviceApprovalsChangeUnlinkActionDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsDirectoryRestrictionsAddMembersDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails,
 
   /// (no description).
   DBTEAMLOGEventDetailsEmmAddExceptionDetails,
@@ -1152,6 +1175,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
   /// (no description).
   DBTEAMLOGEventDetailsSharingChangeMemberPolicyDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsShowcaseChangeDownloadPolicyDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsShowcaseChangeEnabledPolicyDetails,
+
+  /// (no description).
+  DBTEAMLOGEventDetailsShowcaseChangeExternalSharingPolicyDetails,
 
   /// (no description).
   DBTEAMLOGEventDetailsSmartSyncChangePolicyDetails,
@@ -1631,6 +1663,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberTransferAccountContentsDetails *memberTransferAccountContentsDetails;
+
+/// (no description). @note Ensure the `isSecondaryMailsPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSecondaryMailsPolicyChangedDetails *secondaryMailsPolicyChangedDetails;
 
 /// (no description). @note Ensure the `isPaperContentAddMemberDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2189,6 +2226,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGShowcaseTrashedDetails *showcaseTrashedDetails;
 
+/// (no description). @note Ensure the `isShowcaseTrashedDeprecatedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseTrashedDeprecatedDetails *showcaseTrashedDeprecatedDetails;
+
 /// (no description). @note Ensure the `isShowcaseUnresolveCommentDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
@@ -2197,6 +2239,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// (no description). @note Ensure the `isShowcaseUntrashedDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGShowcaseUntrashedDetails *showcaseUntrashedDetails;
+
+/// (no description). @note Ensure the `isShowcaseUntrashedDeprecatedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseUntrashedDeprecatedDetails *showcaseUntrashedDeprecatedDetails;
 
 /// (no description). @note Ensure the `isShowcaseViewDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
@@ -2318,6 +2365,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly)
     DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails *deviceApprovalsChangeUnlinkActionDetails;
+
+/// (no description). @note Ensure the
+/// `isDirectoryRestrictionsAddMembersDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGDirectoryRestrictionsAddMembersDetails *directoryRestrictionsAddMembersDetails;
+
+/// (no description). @note Ensure the
+/// `isDirectoryRestrictionsRemoveMembersDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *directoryRestrictionsRemoveMembersDetails;
 
 /// (no description). @note Ensure the `isEmmAddExceptionDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
@@ -2456,6 +2514,22 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGSharingChangeMemberPolicyDetails *sharingChangeMemberPolicyDetails;
+
+/// (no description). @note Ensure the `isShowcaseChangeDownloadPolicyDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseChangeDownloadPolicyDetails *showcaseChangeDownloadPolicyDetails;
+
+/// (no description). @note Ensure the `isShowcaseChangeEnabledPolicyDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseChangeEnabledPolicyDetails *showcaseChangeEnabledPolicyDetails;
+
+/// (no description). @note Ensure the
+/// `isShowcaseChangeExternalSharingPolicyDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGShowcaseChangeExternalSharingPolicyDetails *showcaseChangeExternalSharingPolicyDetails;
 
 /// (no description). @note Ensure the `isSmartSyncChangePolicyDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -3453,6 +3527,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithMemberTransferAccountContentsDetails:
     (DBTEAMLOGMemberTransferAccountContentsDetails *)memberTransferAccountContentsDetails;
+
+///
+/// Initializes union class with tag state of
+/// "secondary_mails_policy_changed_details".
+///
+/// @param secondaryMailsPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSecondaryMailsPolicyChangedDetails:
+    (DBTEAMLOGSecondaryMailsPolicyChangedDetails *)secondaryMailsPolicyChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -4719,6 +4804,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "showcase_trashed_deprecated_details".
+///
+/// @param showcaseTrashedDeprecatedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseTrashedDeprecatedDetails:
+    (DBTEAMLOGShowcaseTrashedDeprecatedDetails *)showcaseTrashedDeprecatedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "showcase_unresolve_comment_details".
 ///
 /// @param showcaseUnresolveCommentDetails (no description).
@@ -4736,6 +4832,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithShowcaseUntrashedDetails:(DBTEAMLOGShowcaseUntrashedDetails *)showcaseUntrashedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "showcase_untrashed_deprecated_details".
+///
+/// @param showcaseUntrashedDeprecatedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseUntrashedDeprecatedDetails:
+    (DBTEAMLOGShowcaseUntrashedDeprecatedDetails *)showcaseUntrashedDeprecatedDetails;
 
 ///
 /// Initializes union class with tag state of "showcase_view_details".
@@ -4993,6 +5100,28 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithDeviceApprovalsChangeUnlinkActionDetails:
     (DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails *)deviceApprovalsChangeUnlinkActionDetails;
+
+///
+/// Initializes union class with tag state of
+/// "directory_restrictions_add_members_details".
+///
+/// @param directoryRestrictionsAddMembersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDirectoryRestrictionsAddMembersDetails:
+    (DBTEAMLOGDirectoryRestrictionsAddMembersDetails *)directoryRestrictionsAddMembersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "directory_restrictions_remove_members_details".
+///
+/// @param directoryRestrictionsRemoveMembersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDirectoryRestrictionsRemoveMembersDetails:
+    (DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *)directoryRestrictionsRemoveMembersDetails;
 
 ///
 /// Initializes union class with tag state of "emm_add_exception_details".
@@ -5293,6 +5422,39 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithSharingChangeMemberPolicyDetails:
     (DBTEAMLOGSharingChangeMemberPolicyDetails *)sharingChangeMemberPolicyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "showcase_change_download_policy_details".
+///
+/// @param showcaseChangeDownloadPolicyDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseChangeDownloadPolicyDetails:
+    (DBTEAMLOGShowcaseChangeDownloadPolicyDetails *)showcaseChangeDownloadPolicyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "showcase_change_enabled_policy_details".
+///
+/// @param showcaseChangeEnabledPolicyDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseChangeEnabledPolicyDetails:
+    (DBTEAMLOGShowcaseChangeEnabledPolicyDetails *)showcaseChangeEnabledPolicyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "showcase_change_external_sharing_policy_details".
+///
+/// @param showcaseChangeExternalSharingPolicyDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseChangeExternalSharingPolicyDetails:
+    (DBTEAMLOGShowcaseChangeExternalSharingPolicyDetails *)showcaseChangeExternalSharingPolicyDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -6687,6 +6849,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "member_transfer_account_contents_details".
 ///
 - (BOOL)isMemberTransferAccountContentsDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "secondary_mails_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `secondaryMailsPolicyChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "secondary_mails_policy_changed_details".
+///
+- (BOOL)isSecondaryMailsPolicyChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8349,6 +8524,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "showcase_trashed_deprecated_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseTrashedDeprecatedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_trashed_deprecated_details".
+///
+- (BOOL)isShowcaseTrashedDeprecatedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "showcase_unresolve_comment_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -8372,6 +8560,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "showcase_untrashed_details".
 ///
 - (BOOL)isShowcaseUntrashedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_untrashed_deprecated_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseUntrashedDeprecatedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_untrashed_deprecated_details".
+///
+- (BOOL)isShowcaseUntrashedDeprecatedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8709,6 +8910,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "device_approvals_change_unlink_action_details".
 ///
 - (BOOL)isDeviceApprovalsChangeUnlinkActionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "directory_restrictions_add_members_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `directoryRestrictionsAddMembersDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "directory_restrictions_add_members_details".
+///
+- (BOOL)isDirectoryRestrictionsAddMembersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "directory_restrictions_remove_members_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `directoryRestrictionsRemoveMembersDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "directory_restrictions_remove_members_details".
+///
+- (BOOL)isDirectoryRestrictionsRemoveMembersDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -9073,6 +9300,45 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "sharing_change_member_policy_details".
 ///
 - (BOOL)isSharingChangeMemberPolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_change_download_policy_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseChangeDownloadPolicyDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_change_download_policy_details".
+///
+- (BOOL)isShowcaseChangeDownloadPolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_change_enabled_policy_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseChangeEnabledPolicyDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_change_enabled_policy_details".
+///
+- (BOOL)isShowcaseChangeEnabledPolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_change_external_sharing_policy_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseChangeExternalSharingPolicyDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_change_external_sharing_policy_details".
+///
+- (BOOL)isShowcaseChangeExternalSharingPolicyDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value

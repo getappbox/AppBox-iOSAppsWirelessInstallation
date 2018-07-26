@@ -29,7 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The reason why the file couldn't be saved.
 @property (nonatomic, readonly) DBFILESWriteError *reason;
 
-/// The upload session ID; this may be used to retry the commit.
+/// The upload session ID; data has already been uploaded to the corresponding
+/// upload session and this ID may be used to retry the commit with
+/// `uploadSessionFinish`.
 @property (nonatomic, readonly, copy) NSString *uploadSessionId;
 
 #pragma mark - Constructors
@@ -38,8 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param reason The reason why the file couldn't be saved.
-/// @param uploadSessionId The upload session ID; this may be used to retry the
-/// commit.
+/// @param uploadSessionId The upload session ID; data has already been uploaded
+/// to the corresponding upload session and this ID may be used to retry the
+/// commit with `uploadSessionFinish`.
 ///
 /// @return An initialized instance.
 ///

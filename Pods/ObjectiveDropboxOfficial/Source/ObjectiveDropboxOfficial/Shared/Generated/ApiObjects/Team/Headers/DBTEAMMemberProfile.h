@@ -64,6 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// unique ID to be used for SAML authentication.
 @property (nonatomic, readonly, copy, nullable) NSString *persistentId;
 
+/// Whether the user is a directory restricted user.
+@property (nonatomic, readonly, nullable) NSNumber *isDirectoryRestricted;
+
 #pragma mark - Constructors
 
 ///
@@ -85,6 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// team.
 /// @param persistentId Persistent ID that a team can attach to the user. The
 /// persistent ID is unique ID to be used for SAML authentication.
+/// @param isDirectoryRestricted Whether the user is a directory restricted
+/// user.
 ///
 /// @return An initialized instance.
 ///
@@ -97,7 +102,8 @@ NS_ASSUME_NONNULL_BEGIN
                           externalId:(nullable NSString *)externalId
                            accountId:(nullable NSString *)accountId
                             joinedOn:(nullable NSDate *)joinedOn
-                        persistentId:(nullable NSString *)persistentId;
+                        persistentId:(nullable NSString *)persistentId
+               isDirectoryRestricted:(nullable NSNumber *)isDirectoryRestricted;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
