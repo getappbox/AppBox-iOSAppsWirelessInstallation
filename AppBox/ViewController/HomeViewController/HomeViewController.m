@@ -950,27 +950,29 @@
     if (textFieldEmail.stringValue.length > 0 && [MailHandler isAllValidEmail:textFieldEmail.stringValue]) {
         [self showStatus:@"Sending Mail..." andShowProgressBar:YES withProgress:-1];
         [MailGun sendMailWithProject:project.abpProject complition:^(BOOL success, NSError *error) {
-            if (success) {
-                [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
-                if (buttonShutdownMac.state == NSOnState){
-                    //if mac shutdown is checked then shutdown mac after 60 sec
-                    [self viewStateForProgressFinish:YES];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [MacHandler shutdownSystem];
-                    });
-                }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
-                    //if mac shutdown isn't checked then show link
-                    if (ciRepoProject == nil){
-                        [self performSegueWithIdentifier:@"ShowLink" sender:self];
-                    }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (success) {
+                    [ABHudViewController showStatus:@"Mail Sent" forSuccess:YES onView:self.view];
+                    if (buttonShutdownMac.state == NSOnState){
+                        //if mac shutdown is checked then shutdown mac after 60 sec
                         [self viewStateForProgressFinish:YES];
-                        exit(abExitCodeForSuccess);
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [MacHandler shutdownSystem];
+                        });
+                    }else if(![self.presentedViewControllers.lastObject isKindOfClass:[ShowLinkViewController class]]){
+                        //if mac shutdown isn't checked then show link
+                        if (ciRepoProject == nil){
+                            [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                        }else{
+                            [self viewStateForProgressFinish:YES];
+                            exit(abExitCodeForSuccess);
+                        }
                     }
+                } else {
+                    [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
+                    [self performSegueWithIdentifier:@"ShowLink" sender:self];
                 }
-            } else {
-                [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
-                [self performSegueWithIdentifier:@"ShowLink" sender:self];
-            }
+            });
         }];
     }else{
         [self performSegueWithIdentifier:@"ShowLink" sender:self];
