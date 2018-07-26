@@ -61,6 +61,9 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
   /// The persistent ID is already in use by another team member.
   DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser,
 
+  /// Directory Restrictions option is not available.
+  DBTEAMMembersSetProfileErrorDirectoryRestrictedOff,
+
   /// (no description).
   DBTEAMMembersSetProfileErrorOther,
 
@@ -175,6 +178,16 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 - (instancetype)initWithPersistentIdUsedByOtherUser;
 
 ///
+/// Initializes union class with tag state of "directory_restricted_off".
+///
+/// Description of the "directory_restricted_off" tag state: Directory
+/// Restrictions option is not available.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDirectoryRestrictedOff;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -271,6 +284,15 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 /// "persistent_id_used_by_other_user".
 ///
 - (BOOL)isPersistentIdUsedByOtherUser;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "directory_restricted_off".
+///
+/// @return Whether the union's current tag state has value
+/// "directory_restricted_off".
+///
+- (BOOL)isDirectoryRestrictedOff;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

@@ -11379,7 +11379,7 @@
                      autorename:(NSNumber *)autorename
          allowOwnershipTransfer:(NSNumber *)allowOwnershipTransfer {
   [DBStoneValidators
-   nonnullValidator:[DBStoneValidators arrayValidator:nil
+   nonnullValidator:[DBStoneValidators arrayValidator:@(1)
                                              maxItems:nil
                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](entries);
 
@@ -18746,6 +18746,7 @@
 
 @end
 
+#import "DBFILEPROPERTIESInvalidPropertyGroupError.h"
 #import "DBFILESUploadSessionFinishError.h"
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESWriteError.h"
@@ -18758,6 +18759,7 @@
 
 @synthesize lookupFailed = _lookupFailed;
 @synthesize path = _path;
+@synthesize propertiesError = _propertiesError;
 
 #pragma mark - Constructors
 
@@ -18775,6 +18777,15 @@
   if (self) {
     _tag = DBFILESUploadSessionFinishErrorPath;
     _path = path;
+  }
+  return self;
+}
+
+- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError {
+  self = [super init];
+  if (self) {
+    _tag = DBFILESUploadSessionFinishErrorPropertiesError;
+    _propertiesError = propertiesError;
   }
   return self;
 }
@@ -18822,6 +18833,15 @@
   return _path;
 }
 
+- (DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError {
+  if (![self isPropertiesError]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBFILESUploadSessionFinishErrorPropertiesError, but was %@.", [self tagName]];
+  }
+  return _propertiesError;
+}
+
 #pragma mark - Tag state methods
 
 - (BOOL)isLookupFailed {
@@ -18830,6 +18850,10 @@
 
 - (BOOL)isPath {
   return _tag == DBFILESUploadSessionFinishErrorPath;
+}
+
+- (BOOL)isPropertiesError {
+  return _tag == DBFILESUploadSessionFinishErrorPropertiesError;
 }
 
 - (BOOL)isTooManySharedFolderTargets {
@@ -18850,6 +18874,8 @@
     return @"DBFILESUploadSessionFinishErrorLookupFailed";
   case DBFILESUploadSessionFinishErrorPath:
     return @"DBFILESUploadSessionFinishErrorPath";
+  case DBFILESUploadSessionFinishErrorPropertiesError:
+    return @"DBFILESUploadSessionFinishErrorPropertiesError";
   case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:
     return @"DBFILESUploadSessionFinishErrorTooManySharedFolderTargets";
   case DBFILESUploadSessionFinishErrorTooManyWriteOperations:
@@ -18896,6 +18922,8 @@
     result = prime * result + [self.lookupFailed hash];
   case DBFILESUploadSessionFinishErrorPath:
     result = prime * result + [self.path hash];
+  case DBFILESUploadSessionFinishErrorPropertiesError:
+    result = prime * result + [self.propertiesError hash];
   case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:
     result = prime * result + [[self tagName] hash];
   case DBFILESUploadSessionFinishErrorTooManyWriteOperations:
@@ -18931,6 +18959,8 @@
     return [self.lookupFailed isEqual:anUploadSessionFinishError.lookupFailed];
   case DBFILESUploadSessionFinishErrorPath:
     return [self.path isEqual:anUploadSessionFinishError.path];
+  case DBFILESUploadSessionFinishErrorPropertiesError:
+    return [self.propertiesError isEqual:anUploadSessionFinishError.propertiesError];
   case DBFILESUploadSessionFinishErrorTooManySharedFolderTargets:
     return [[self tagName] isEqual:[anUploadSessionFinishError tagName]];
   case DBFILESUploadSessionFinishErrorTooManyWriteOperations:
@@ -18957,6 +18987,10 @@
   } else if ([valueObj isPath]) {
     jsonDict[@"path"] = [[DBFILESWriteErrorSerializer serialize:valueObj.path] mutableCopy];
     jsonDict[@".tag"] = @"path";
+  } else if ([valueObj isPropertiesError]) {
+    jsonDict[@"properties_error"] =
+        [[DBFILEPROPERTIESInvalidPropertyGroupErrorSerializer serialize:valueObj.propertiesError] mutableCopy];
+    jsonDict[@".tag"] = @"properties_error";
   } else if ([valueObj isTooManySharedFolderTargets]) {
     jsonDict[@".tag"] = @"too_many_shared_folder_targets";
   } else if ([valueObj isTooManyWriteOperations]) {
@@ -18980,6 +19014,10 @@
   } else if ([tag isEqualToString:@"path"]) {
     DBFILESWriteError *path = [DBFILESWriteErrorSerializer deserialize:valueDict[@"path"]];
     return [[DBFILESUploadSessionFinishError alloc] initWithPath:path];
+  } else if ([tag isEqualToString:@"properties_error"]) {
+    DBFILEPROPERTIESInvalidPropertyGroupError *propertiesError =
+        [DBFILEPROPERTIESInvalidPropertyGroupErrorSerializer deserialize:valueDict[@"properties_error"]];
+    return [[DBFILESUploadSessionFinishError alloc] initWithPropertiesError:propertiesError];
   } else if ([tag isEqualToString:@"too_many_shared_folder_targets"]) {
     return [[DBFILESUploadSessionFinishError alloc] initWithTooManySharedFolderTargets];
   } else if ([tag isEqualToString:@"too_many_write_operations"]) {
@@ -19039,6 +19077,14 @@
   return self;
 }
 
+- (instancetype)initWithTooLarge {
+  self = [super init];
+  if (self) {
+    _tag = DBFILESUploadSessionLookupErrorTooLarge;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -19076,6 +19122,10 @@
   return _tag == DBFILESUploadSessionLookupErrorNotClosed;
 }
 
+- (BOOL)isTooLarge {
+  return _tag == DBFILESUploadSessionLookupErrorTooLarge;
+}
+
 - (BOOL)isOther {
   return _tag == DBFILESUploadSessionLookupErrorOther;
 }
@@ -19090,6 +19140,8 @@
     return @"DBFILESUploadSessionLookupErrorClosed";
   case DBFILESUploadSessionLookupErrorNotClosed:
     return @"DBFILESUploadSessionLookupErrorNotClosed";
+  case DBFILESUploadSessionLookupErrorTooLarge:
+    return @"DBFILESUploadSessionLookupErrorTooLarge";
   case DBFILESUploadSessionLookupErrorOther:
     return @"DBFILESUploadSessionLookupErrorOther";
   }
@@ -19136,6 +19188,8 @@
     result = prime * result + [[self tagName] hash];
   case DBFILESUploadSessionLookupErrorNotClosed:
     result = prime * result + [[self tagName] hash];
+  case DBFILESUploadSessionLookupErrorTooLarge:
+    result = prime * result + [[self tagName] hash];
   case DBFILESUploadSessionLookupErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -19171,6 +19225,8 @@
     return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
   case DBFILESUploadSessionLookupErrorNotClosed:
     return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
+  case DBFILESUploadSessionLookupErrorTooLarge:
+    return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
   case DBFILESUploadSessionLookupErrorOther:
     return [[self tagName] isEqual:[anUploadSessionLookupError tagName]];
   }
@@ -19196,6 +19252,8 @@
     jsonDict[@".tag"] = @"closed";
   } else if ([valueObj isNotClosed]) {
     jsonDict[@".tag"] = @"not_closed";
+  } else if ([valueObj isTooLarge]) {
+    jsonDict[@".tag"] = @"too_large";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -19218,6 +19276,8 @@
     return [[DBFILESUploadSessionLookupError alloc] initWithClosed];
   } else if ([tag isEqualToString:@"not_closed"]) {
     return [[DBFILESUploadSessionLookupError alloc] initWithNotClosed];
+  } else if ([tag isEqualToString:@"too_large"]) {
+    return [[DBFILESUploadSessionLookupError alloc] initWithTooLarge];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBFILESUploadSessionLookupError alloc] initWithOther];
   } else {

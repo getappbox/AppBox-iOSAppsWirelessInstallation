@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILEPROPERTIESInvalidPropertyGroupError;
 @class DBFILESUploadSessionFinishError;
 @class DBFILESUploadSessionLookupError;
 @class DBFILESWriteError;
@@ -33,8 +34,14 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
   /// The session arguments are incorrect; the value explains the reason.
   DBFILESUploadSessionFinishErrorLookupFailed,
 
-  /// Unable to save the uploaded contents to a file.
+  /// Unable to save the uploaded contents to a file. Data has already been
+  /// appended to the upload session. Please retry with empty data body and
+  /// updated offset.
   DBFILESUploadSessionFinishErrorPath,
+
+  /// The supplied property group is invalid. The file has uploaded without
+  /// property groups.
+  DBFILESUploadSessionFinishErrorPropertiesError,
 
   /// The batch request commits files into too many different shared folders.
   /// Please limit your batch request to files contained in a single shared
@@ -58,10 +65,16 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 /// a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILESUploadSessionLookupError *lookupFailed;
 
-/// Unable to save the uploaded contents to a file. @note Ensure the `isPath`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
+/// Unable to save the uploaded contents to a file. Data has already been
+/// appended to the upload session. Please retry with empty data body and
+/// updated offset. @note Ensure the `isPath` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILESWriteError *path;
+
+/// The supplied property group is invalid. The file has uploaded without
+/// property groups. @note Ensure the `isPropertiesError` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBFILEPROPERTIESInvalidPropertyGroupError *propertiesError;
 
 #pragma mark - Constructors
 
@@ -82,13 +95,29 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 /// Initializes union class with tag state of "path".
 ///
 /// Description of the "path" tag state: Unable to save the uploaded contents to
-/// a file.
+/// a file. Data has already been appended to the upload session. Please retry
+/// with empty data body and updated offset.
 ///
-/// @param path Unable to save the uploaded contents to a file.
+/// @param path Unable to save the uploaded contents to a file. Data has already
+/// been appended to the upload session. Please retry with empty data body and
+/// updated offset.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPath:(DBFILESWriteError *)path;
+
+///
+/// Initializes union class with tag state of "properties_error".
+///
+/// Description of the "properties_error" tag state: The supplied property group
+/// is invalid. The file has uploaded without property groups.
+///
+/// @param propertiesError The supplied property group is invalid. The file has
+/// uploaded without property groups.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError;
 
 ///
 /// Initializes union class with tag state of "too_many_shared_folder_targets".
@@ -142,6 +171,17 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag) {
 /// @return Whether the union's current tag state has value "path".
 ///
 - (BOOL)isPath;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "properties_error".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `propertiesError` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "properties_error".
+///
+- (BOOL)isPropertiesError;
 
 ///
 /// Retrieves whether the union's current tag state has value

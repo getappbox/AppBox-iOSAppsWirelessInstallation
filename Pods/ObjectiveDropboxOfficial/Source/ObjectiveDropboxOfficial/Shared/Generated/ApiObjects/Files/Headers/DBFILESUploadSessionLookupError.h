@@ -46,6 +46,10 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag) {
   /// The session must be closed before calling upload_session/finish_batch.
   DBFILESUploadSessionLookupErrorNotClosed,
 
+  /// You can not append to the upload session because the size of a file
+  /// should not reach the max file size limit (i.e. 350GB).
+  DBFILESUploadSessionLookupErrorTooLarge,
+
   /// (no description).
   DBFILESUploadSessionLookupErrorOther,
 
@@ -111,6 +115,17 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag) {
 - (instancetype)initWithNotClosed;
 
 ///
+/// Initializes union class with tag state of "too_large".
+///
+/// Description of the "too_large" tag state: You can not append to the upload
+/// session because the size of a file should not reach the max file size limit
+/// (i.e. 350GB).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTooLarge;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -152,6 +167,13 @@ typedef NS_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag) {
 /// @return Whether the union's current tag state has value "not_closed".
 ///
 - (BOOL)isNotClosed;
+
+///
+/// Retrieves whether the union's current tag state has value "too_large".
+///
+/// @return Whether the union's current tag state has value "too_large".
+///
+- (BOOL)isTooLarge;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
