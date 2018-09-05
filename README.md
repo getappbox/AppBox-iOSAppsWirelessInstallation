@@ -53,11 +53,8 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 
 
 # Current Version Screenshot 🎨
-### Upload IPA
+### Upload IPA or Archive and Upload IPA
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/UploadIPA.png?raw=true)
-
-### Archive and Upload IPA
-![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/ArchiveAndUpload.png?raw=true)
 
 ### Share URL
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/AppURL.png?raw=true)
