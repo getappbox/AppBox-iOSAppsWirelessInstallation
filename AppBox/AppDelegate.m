@@ -54,6 +54,17 @@
             }
             break;
         }
+        else if ([argument containsString:abArgsIPA]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsIPA];
+            [ABLog log:@"IPA Components = %@",components];
+            if (components.count == 2) {
+                [self handleIPAAtPath:[components lastObject]];
+            } else {
+                [self addSessionLog:[NSString stringWithFormat:@"Invalid IPA Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+            break;
+        }
     }
     
     //Load Ads
@@ -151,6 +162,20 @@
         exit(abExitCodeForInvalidAppBoxSettingFile);
         return;
     }
+    if (self.isReadyToBuild) {
+        [self addSessionLog:@"AppBox is ready to build."];
+        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [self addSessionLog:@"AppBox is ready to build. [Block]"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
+        }];
+    }
+}
+
+-(void)handleIPAAtPath:(NSString *)ipaPath {
+    XCProject *project = [[XCProject alloc] init];
+    project.ipaFullPath = [NSURL fileURLWithPath:ipaPath];
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to build."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
