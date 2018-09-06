@@ -37,6 +37,8 @@
 @class DBTEAMLOGDeviceManagementDisabledType;
 @class DBTEAMLOGDeviceManagementEnabledType;
 @class DBTEAMLOGDeviceUnlinkType;
+@class DBTEAMLOGDirectoryRestrictionsAddMembersType;
+@class DBTEAMLOGDirectoryRestrictionsRemoveMembersType;
 @class DBTEAMLOGDisabledDomainInvitesType;
 @class DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType;
 @class DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamType;
@@ -181,6 +183,7 @@
 @class DBTEAMLOGPermanentDeleteChangePolicyType;
 @class DBTEAMLOGResellerSupportSessionEndType;
 @class DBTEAMLOGResellerSupportSessionStartType;
+@class DBTEAMLOGSecondaryMailsPolicyChangedType;
 @class DBTEAMLOGSfAddGroupType;
 @class DBTEAMLOGSfAllowNonMembersToViewSharedLinksType;
 @class DBTEAMLOGSfExternalInviteWarnType;
@@ -244,6 +247,9 @@
 @class DBTEAMLOGShowcaseAccessGrantedType;
 @class DBTEAMLOGShowcaseAddMemberType;
 @class DBTEAMLOGShowcaseArchivedType;
+@class DBTEAMLOGShowcaseChangeDownloadPolicyType;
+@class DBTEAMLOGShowcaseChangeEnabledPolicyType;
+@class DBTEAMLOGShowcaseChangeExternalSharingPolicyType;
 @class DBTEAMLOGShowcaseCreatedType;
 @class DBTEAMLOGShowcaseDeleteCommentType;
 @class DBTEAMLOGShowcaseEditCommentType;
@@ -259,8 +265,10 @@
 @class DBTEAMLOGShowcaseRequestAccessType;
 @class DBTEAMLOGShowcaseResolveCommentType;
 @class DBTEAMLOGShowcaseRestoredType;
+@class DBTEAMLOGShowcaseTrashedDeprecatedType;
 @class DBTEAMLOGShowcaseTrashedType;
 @class DBTEAMLOGShowcaseUnresolveCommentType;
+@class DBTEAMLOGShowcaseUntrashedDeprecatedType;
 @class DBTEAMLOGShowcaseUntrashedType;
 @class DBTEAMLOGShowcaseViewType;
 @class DBTEAMLOGSignInAsSessionEndType;
@@ -417,7 +425,8 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (domains) Declined user's request to join team
   DBTEAMLOGEventTypeDomainInvitesDeclineRequestToJoinTeam,
 
-  /// (domains) Sent domain invites to existing domain accounts
+  /// (domains) Sent domain invites to existing domain accounts (deprecated,
+  /// no longer logged)
   DBTEAMLOGEventTypeDomainInvitesEmailExistingUsers,
 
   /// (domains) Requested to join team
@@ -584,7 +593,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (members) Changed team member name
   DBTEAMLOGEventTypeMemberChangeName,
 
-  /// (members) Changed membership status of team member
+  /// (members) Changed member status (invited, joined, suspended, etc.)
   DBTEAMLOGEventTypeMemberChangeStatus,
 
   /// (members) Permanently deleted contents of deleted team member account
@@ -608,6 +617,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (members) Transferred contents of deleted member account to another
   /// member
   DBTEAMLOGEventTypeMemberTransferAccountContents,
+
+  /// (members) Secondary mails policy changed
+  DBTEAMLOGEventTypeSecondaryMailsPolicyChanged,
 
   /// (paper) Added team member to Paper doc/folder
   DBTEAMLOGEventTypePaperContentAddMember,
@@ -819,7 +831,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   DBTEAMLOGEventTypeSfTeamJoinFromOobLink,
 
   /// (sharing) Unshared folder with team member (deprecated, replaced by
-  /// 'Removed invitee from shared file/folder before invite accepted')
+  /// 'Removed invitee from shared file/folder before invite was accepted')
   DBTEAMLOGEventTypeSfTeamUninvite,
 
   /// (sharing) Invited user to Dropbox and added them to shared file/folder
@@ -838,7 +850,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   DBTEAMLOGEventTypeSharedContentChangeDownloadsPolicy,
 
   /// (sharing) Changed access type of invitee to shared file/folder before
-  /// invite accepted
+  /// invite was accepted
   DBTEAMLOGEventTypeSharedContentChangeInviteeRole,
 
   /// (sharing) Changed link audience of shared file/folder
@@ -868,7 +880,8 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (sharing) Left shared file/folder
   DBTEAMLOGEventTypeSharedContentRelinquishMembership,
 
-  /// (sharing) Removed invitee from shared file/folder before invite accepted
+  /// (sharing) Removed invitee from shared file/folder before invite was
+  /// accepted
   DBTEAMLOGEventTypeSharedContentRemoveInvitees,
 
   /// (sharing) Removed link expiration date of shared file/folder
@@ -1014,11 +1027,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (showcase) Deleted showcase
   DBTEAMLOGEventTypeShowcaseTrashed,
 
+  /// (showcase) Deleted showcase (old version) (deprecated, replaced by
+  /// 'Deleted showcase')
+  DBTEAMLOGEventTypeShowcaseTrashedDeprecated,
+
   /// (showcase) Unresolved showcase comment
   DBTEAMLOGEventTypeShowcaseUnresolveComment,
 
   /// (showcase) Restored showcase
   DBTEAMLOGEventTypeShowcaseUntrashed,
+
+  /// (showcase) Restored showcase (old version) (deprecated, replaced by
+  /// 'Restored showcase')
+  DBTEAMLOGEventTypeShowcaseUntrashedDeprecated,
 
   /// (showcase) Viewed showcase
   DBTEAMLOGEventTypeShowcaseView,
@@ -1103,6 +1124,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (team_policies) Changed device approvals setting when member unlinks
   /// approved device
   DBTEAMLOGEventTypeDeviceApprovalsChangeUnlinkAction,
+
+  /// (team_policies) Added members to directory restrictions list
+  DBTEAMLOGEventTypeDirectoryRestrictionsAddMembers,
+
+  /// (team_policies) Removed members from directory restrictions list
+  DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers,
 
   /// (team_policies) Added members to EMM exception list
   DBTEAMLOGEventTypeEmmAddException,
@@ -1199,6 +1226,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
   /// (team_policies) Changed whether members can share files/folders outside
   /// team
   DBTEAMLOGEventTypeSharingChangeMemberPolicy,
+
+  /// (team_policies) Enabled/disabled downloading files from Dropbox Showcase
+  /// for team
+  DBTEAMLOGEventTypeShowcaseChangeDownloadPolicy,
+
+  /// (team_policies) Enabled/disabled Dropbox Showcase for team
+  DBTEAMLOGEventTypeShowcaseChangeEnabledPolicy,
+
+  /// (team_policies) Enabled/disabled sharing Dropbox Showcase externally for
+  /// team
+  DBTEAMLOGEventTypeShowcaseChangeExternalSharingPolicy,
 
   /// (team_policies) Changed default Smart Sync setting for team members
   DBTEAMLOGEventTypeSmartSyncChangePolicy,
@@ -1416,9 +1454,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 @property (nonatomic, readonly)
     DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamType *domainInvitesDeclineRequestToJoinTeam;
 
-/// (domains) Sent domain invites to existing domain accounts @note Ensure the
-/// `isDomainInvitesEmailExistingUsers` method returns true before accessing,
-/// otherwise a runtime exception will be raised.
+/// (domains) Sent domain invites to existing domain accounts (deprecated, no
+/// longer logged) @note Ensure the `isDomainInvitesEmailExistingUsers` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGDomainInvitesEmailExistingUsersType *domainInvitesEmailExistingUsers;
 
 /// (domains) Requested to join team @note Ensure the
@@ -1680,9 +1718,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberChangeNameType *memberChangeName;
 
-/// (members) Changed membership status of team member @note Ensure the
-/// `isMemberChangeStatus` method returns true before accessing, otherwise a
-/// runtime exception will be raised.
+/// (members) Changed member status (invited, joined, suspended, etc.) @note
+/// Ensure the `isMemberChangeStatus` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberChangeStatusType *memberChangeStatus;
 
 /// (members) Permanently deleted contents of deleted team member account @note
@@ -1720,6 +1758,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// @note Ensure the `isMemberTransferAccountContents` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberTransferAccountContentsType *memberTransferAccountContents;
+
+/// (members) Secondary mails policy changed @note Ensure the
+/// `isSecondaryMailsPolicyChanged` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSecondaryMailsPolicyChangedType *secondaryMailsPolicyChanged;
 
 /// (paper) Added team member to Paper doc/folder @note Ensure the
 /// `isPaperContentAddMember` method returns true before accessing, otherwise a
@@ -2038,9 +2081,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 @property (nonatomic, readonly) DBTEAMLOGSfTeamJoinFromOobLinkType *sfTeamJoinFromOobLink;
 
 /// (sharing) Unshared folder with team member (deprecated, replaced by 'Removed
-/// invitee from shared file/folder before invite accepted') @note Ensure the
-/// `isSfTeamUninvite` method returns true before accessing, otherwise a runtime
-/// exception will be raised.
+/// invitee from shared file/folder before invite was accepted') @note Ensure
+/// the `isSfTeamUninvite` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSfTeamUninviteType *sfTeamUninvite;
 
 /// (sharing) Invited user to Dropbox and added them to shared file/folder @note
@@ -2069,8 +2112,8 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 @property (nonatomic, readonly) DBTEAMLOGSharedContentChangeDownloadsPolicyType *sharedContentChangeDownloadsPolicy;
 
 /// (sharing) Changed access type of invitee to shared file/folder before invite
-/// accepted @note Ensure the `isSharedContentChangeInviteeRole` method returns
-/// true before accessing, otherwise a runtime exception will be raised.
+/// was accepted @note Ensure the `isSharedContentChangeInviteeRole` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedContentChangeInviteeRoleType *sharedContentChangeInviteeRole;
 
 /// (sharing) Changed link audience of shared file/folder @note Ensure the
@@ -2118,7 +2161,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedContentRelinquishMembershipType *sharedContentRelinquishMembership;
 
-/// (sharing) Removed invitee from shared file/folder before invite accepted
+/// (sharing) Removed invitee from shared file/folder before invite was accepted
 /// @note Ensure the `isSharedContentRemoveInvitees` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedContentRemoveInviteesType *sharedContentRemoveInvitees;
@@ -2351,6 +2394,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGShowcaseTrashedType *showcaseTrashed;
 
+/// (showcase) Deleted showcase (old version) (deprecated, replaced by 'Deleted
+/// showcase') @note Ensure the `isShowcaseTrashedDeprecated` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseTrashedDeprecatedType *showcaseTrashedDeprecated;
+
 /// (showcase) Unresolved showcase comment @note Ensure the
 /// `isShowcaseUnresolveComment` method returns true before accessing, otherwise
 /// a runtime exception will be raised.
@@ -2359,6 +2407,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// (showcase) Restored showcase @note Ensure the `isShowcaseUntrashed` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGShowcaseUntrashedType *showcaseUntrashed;
+
+/// (showcase) Restored showcase (old version) (deprecated, replaced by
+/// 'Restored showcase') @note Ensure the `isShowcaseUntrashedDeprecated` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseUntrashedDeprecatedType *showcaseUntrashedDeprecated;
 
 /// (showcase) Viewed showcase @note Ensure the `isShowcaseView` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
@@ -2490,6 +2543,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *deviceApprovalsChangeUnlinkAction;
+
+/// (team_policies) Added members to directory restrictions list @note Ensure
+/// the `isDirectoryRestrictionsAddMembers` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGDirectoryRestrictionsAddMembersType *directoryRestrictionsAddMembers;
+
+/// (team_policies) Removed members from directory restrictions list @note
+/// Ensure the `isDirectoryRestrictionsRemoveMembers` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGDirectoryRestrictionsRemoveMembersType *directoryRestrictionsRemoveMembers;
 
 /// (team_policies) Added members to EMM exception list @note Ensure the
 /// `isEmmAddException` method returns true before accessing, otherwise a
@@ -2636,6 +2699,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// @note Ensure the `isSharingChangeMemberPolicy` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharingChangeMemberPolicyType *sharingChangeMemberPolicy;
+
+/// (team_policies) Enabled/disabled downloading files from Dropbox Showcase for
+/// team @note Ensure the `isShowcaseChangeDownloadPolicy` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseChangeDownloadPolicyType *showcaseChangeDownloadPolicy;
+
+/// (team_policies) Enabled/disabled Dropbox Showcase for team @note Ensure the
+/// `isShowcaseChangeEnabledPolicy` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseChangeEnabledPolicyType *showcaseChangeEnabledPolicy;
+
+/// (team_policies) Enabled/disabled sharing Dropbox Showcase externally for
+/// team @note Ensure the `isShowcaseChangeExternalSharingPolicy` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShowcaseChangeExternalSharingPolicyType *showcaseChangeExternalSharingPolicy;
 
 /// (team_policies) Changed default Smart Sync setting for team members @note
 /// Ensure the `isSmartSyncChangePolicy` method returns true before accessing,
@@ -3130,10 +3208,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "domain_invites_email_existing_users".
 ///
 /// Description of the "domain_invites_email_existing_users" tag state:
-/// (domains) Sent domain invites to existing domain accounts
+/// (domains) Sent domain invites to existing domain accounts (deprecated, no
+/// longer logged)
 ///
 /// @param domainInvitesEmailExistingUsers (domains) Sent domain invites to
-/// existing domain accounts
+/// existing domain accounts (deprecated, no longer logged)
 ///
 /// @return An initialized instance.
 ///
@@ -3806,9 +3885,10 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// Initializes union class with tag state of "member_change_status".
 ///
 /// Description of the "member_change_status" tag state: (members) Changed
-/// membership status of team member
+/// member status (invited, joined, suspended, etc.)
 ///
-/// @param memberChangeStatus (members) Changed membership status of team member
+/// @param memberChangeStatus (members) Changed member status (invited, joined,
+/// suspended, etc.)
 ///
 /// @return An initialized instance.
 ///
@@ -3914,6 +3994,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 ///
 - (instancetype)initWithMemberTransferAccountContents:
     (DBTEAMLOGMemberTransferAccountContentsType *)memberTransferAccountContents;
+
+///
+/// Initializes union class with tag state of "secondary_mails_policy_changed".
+///
+/// Description of the "secondary_mails_policy_changed" tag state: (members)
+/// Secondary mails policy changed
+///
+/// @param secondaryMailsPolicyChanged (members) Secondary mails policy changed
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSecondaryMailsPolicyChanged:
+    (DBTEAMLOGSecondaryMailsPolicyChangedType *)secondaryMailsPolicyChanged;
 
 ///
 /// Initializes union class with tag state of "paper_content_add_member".
@@ -4735,11 +4828,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 ///
 /// Description of the "sf_team_uninvite" tag state: (sharing) Unshared folder
 /// with team member (deprecated, replaced by 'Removed invitee from shared
-/// file/folder before invite accepted')
+/// file/folder before invite was accepted')
 ///
 /// @param sfTeamUninvite (sharing) Unshared folder with team member
 /// (deprecated, replaced by 'Removed invitee from shared file/folder before
-/// invite accepted')
+/// invite was accepted')
 ///
 /// @return An initialized instance.
 ///
@@ -4820,10 +4913,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "shared_content_change_invitee_role".
 ///
 /// Description of the "shared_content_change_invitee_role" tag state: (sharing)
-/// Changed access type of invitee to shared file/folder before invite accepted
+/// Changed access type of invitee to shared file/folder before invite was
+/// accepted
 ///
 /// @param sharedContentChangeInviteeRole (sharing) Changed access type of
-/// invitee to shared file/folder before invite accepted
+/// invitee to shared file/folder before invite was accepted
 ///
 /// @return An initialized instance.
 ///
@@ -4961,10 +5055,10 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// Initializes union class with tag state of "shared_content_remove_invitees".
 ///
 /// Description of the "shared_content_remove_invitees" tag state: (sharing)
-/// Removed invitee from shared file/folder before invite accepted
+/// Removed invitee from shared file/folder before invite was accepted
 ///
 /// @param sharedContentRemoveInvitees (sharing) Removed invitee from shared
-/// file/folder before invite accepted
+/// file/folder before invite was accepted
 ///
 /// @return An initialized instance.
 ///
@@ -5567,6 +5661,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 - (instancetype)initWithShowcaseTrashed:(DBTEAMLOGShowcaseTrashedType *)showcaseTrashed;
 
 ///
+/// Initializes union class with tag state of "showcase_trashed_deprecated".
+///
+/// Description of the "showcase_trashed_deprecated" tag state: (showcase)
+/// Deleted showcase (old version) (deprecated, replaced by 'Deleted showcase')
+///
+/// @param showcaseTrashedDeprecated (showcase) Deleted showcase (old version)
+/// (deprecated, replaced by 'Deleted showcase')
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseTrashedDeprecated:(DBTEAMLOGShowcaseTrashedDeprecatedType *)showcaseTrashedDeprecated;
+
+///
 /// Initializes union class with tag state of "showcase_unresolve_comment".
 ///
 /// Description of the "showcase_unresolve_comment" tag state: (showcase)
@@ -5589,6 +5696,21 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithShowcaseUntrashed:(DBTEAMLOGShowcaseUntrashedType *)showcaseUntrashed;
+
+///
+/// Initializes union class with tag state of "showcase_untrashed_deprecated".
+///
+/// Description of the "showcase_untrashed_deprecated" tag state: (showcase)
+/// Restored showcase (old version) (deprecated, replaced by 'Restored
+/// showcase')
+///
+/// @param showcaseUntrashedDeprecated (showcase) Restored showcase (old
+/// version) (deprecated, replaced by 'Restored showcase')
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseUntrashedDeprecated:
+    (DBTEAMLOGShowcaseUntrashedDeprecatedType *)showcaseUntrashedDeprecated;
 
 ///
 /// Initializes union class with tag state of "showcase_view".
@@ -5933,6 +6055,36 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 ///
 - (instancetype)initWithDeviceApprovalsChangeUnlinkAction:
     (DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *)deviceApprovalsChangeUnlinkAction;
+
+///
+/// Initializes union class with tag state of
+/// "directory_restrictions_add_members".
+///
+/// Description of the "directory_restrictions_add_members" tag state:
+/// (team_policies) Added members to directory restrictions list
+///
+/// @param directoryRestrictionsAddMembers (team_policies) Added members to
+/// directory restrictions list
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDirectoryRestrictionsAddMembers:
+    (DBTEAMLOGDirectoryRestrictionsAddMembersType *)directoryRestrictionsAddMembers;
+
+///
+/// Initializes union class with tag state of
+/// "directory_restrictions_remove_members".
+///
+/// Description of the "directory_restrictions_remove_members" tag state:
+/// (team_policies) Removed members from directory restrictions list
+///
+/// @param directoryRestrictionsRemoveMembers (team_policies) Removed members
+/// from directory restrictions list
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDirectoryRestrictionsRemoveMembers:
+    (DBTEAMLOGDirectoryRestrictionsRemoveMembersType *)directoryRestrictionsRemoveMembers;
 
 ///
 /// Initializes union class with tag state of "emm_add_exception".
@@ -6335,6 +6487,51 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharingChangeMemberPolicy:(DBTEAMLOGSharingChangeMemberPolicyType *)sharingChangeMemberPolicy;
+
+///
+/// Initializes union class with tag state of "showcase_change_download_policy".
+///
+/// Description of the "showcase_change_download_policy" tag state:
+/// (team_policies) Enabled/disabled downloading files from Dropbox Showcase for
+/// team
+///
+/// @param showcaseChangeDownloadPolicy (team_policies) Enabled/disabled
+/// downloading files from Dropbox Showcase for team
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseChangeDownloadPolicy:
+    (DBTEAMLOGShowcaseChangeDownloadPolicyType *)showcaseChangeDownloadPolicy;
+
+///
+/// Initializes union class with tag state of "showcase_change_enabled_policy".
+///
+/// Description of the "showcase_change_enabled_policy" tag state:
+/// (team_policies) Enabled/disabled Dropbox Showcase for team
+///
+/// @param showcaseChangeEnabledPolicy (team_policies) Enabled/disabled Dropbox
+/// Showcase for team
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseChangeEnabledPolicy:
+    (DBTEAMLOGShowcaseChangeEnabledPolicyType *)showcaseChangeEnabledPolicy;
+
+///
+/// Initializes union class with tag state of
+/// "showcase_change_external_sharing_policy".
+///
+/// Description of the "showcase_change_external_sharing_policy" tag state:
+/// (team_policies) Enabled/disabled sharing Dropbox Showcase externally for
+/// team
+///
+/// @param showcaseChangeExternalSharingPolicy (team_policies) Enabled/disabled
+/// sharing Dropbox Showcase externally for team
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShowcaseChangeExternalSharingPolicy:
+    (DBTEAMLOGShowcaseChangeExternalSharingPolicyType *)showcaseChangeExternalSharingPolicy;
 
 ///
 /// Initializes union class with tag state of "smart_sync_change_policy".
@@ -7712,6 +7909,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "member_transfer_account_contents".
 ///
 - (BOOL)isMemberTransferAccountContents;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "secondary_mails_policy_changed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `secondaryMailsPolicyChanged` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "secondary_mails_policy_changed".
+///
+- (BOOL)isSecondaryMailsPolicyChanged;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -9283,6 +9493,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "showcase_trashed_deprecated".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseTrashedDeprecated` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_trashed_deprecated".
+///
+- (BOOL)isShowcaseTrashedDeprecated;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "showcase_unresolve_comment".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -9305,6 +9528,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "showcase_untrashed".
 ///
 - (BOOL)isShowcaseUntrashed;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_untrashed_deprecated".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseUntrashedDeprecated` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_untrashed_deprecated".
+///
+- (BOOL)isShowcaseUntrashedDeprecated;
 
 ///
 /// Retrieves whether the union's current tag state has value "showcase_view".
@@ -9622,6 +9858,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "device_approvals_change_unlink_action".
 ///
 - (BOOL)isDeviceApprovalsChangeUnlinkAction;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "directory_restrictions_add_members".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `directoryRestrictionsAddMembers` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "directory_restrictions_add_members".
+///
+- (BOOL)isDirectoryRestrictionsAddMembers;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "directory_restrictions_remove_members".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `directoryRestrictionsRemoveMembers` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "directory_restrictions_remove_members".
+///
+- (BOOL)isDirectoryRestrictionsRemoveMembers;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -9980,6 +10242,45 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventTypeTag) {
 /// "sharing_change_member_policy".
 ///
 - (BOOL)isSharingChangeMemberPolicy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_change_download_policy".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseChangeDownloadPolicy` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_change_download_policy".
+///
+- (BOOL)isShowcaseChangeDownloadPolicy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_change_enabled_policy".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseChangeEnabledPolicy` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_change_enabled_policy".
+///
+- (BOOL)isShowcaseChangeEnabledPolicy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "showcase_change_external_sharing_policy".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `showcaseChangeExternalSharingPolicy` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "showcase_change_external_sharing_policy".
+///
+- (BOOL)isShowcaseChangeExternalSharingPolicy;
 
 ///
 /// Retrieves whether the union's current tag state has value

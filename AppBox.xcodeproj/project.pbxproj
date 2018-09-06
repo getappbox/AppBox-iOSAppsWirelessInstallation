@@ -1274,7 +1274,6 @@
 				E16437CB1D743A4E00CE8B7E /* Sources */,
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
-				1E3F482E629E66DAF83B929E /* [CP] Embed Pods Frameworks */,
 				7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */,
 				E1974F331E20CA770060F03F /* ShellScript */,
 				E101D2BC200DE72A0062078B /* CopyFiles */,
@@ -1361,24 +1360,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E3F482E629E66DAF83B929E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AppBox/Pods-AppBox-frameworks.sh",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppBox/Pods-AppBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7D6EE5393594D016BF9A0389 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

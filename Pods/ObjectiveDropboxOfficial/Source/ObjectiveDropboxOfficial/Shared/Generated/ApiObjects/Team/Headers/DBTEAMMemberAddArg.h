@@ -51,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// (no description).
 @property (nonatomic, readonly) DBTEAMAdminTier *role;
 
+/// Whether a user is directory restricted.
+@property (nonatomic, readonly, nullable) NSNumber *isDirectoryRestricted;
+
 #pragma mark - Constructors
 
 ///
@@ -67,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// This may be useful for apps using single sign-on (SSO) flows for onboarding
 /// that want to handle announcements themselves.
 /// @param role (no description).
+/// @param isDirectoryRestricted Whether a user is directory restricted.
 ///
 /// @return An initialized instance.
 ///
@@ -76,7 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
                    memberExternalId:(nullable NSString *)memberExternalId
                  memberPersistentId:(nullable NSString *)memberPersistentId
                    sendWelcomeEmail:(nullable NSNumber *)sendWelcomeEmail
-                               role:(nullable DBTEAMAdminTier *)role;
+                               role:(nullable DBTEAMAdminTier *)role
+              isDirectoryRestricted:(nullable NSNumber *)isDirectoryRestricted;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

@@ -49,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// SAML configuration.
 @property (nonatomic, readonly, copy, nullable) NSString *dNewPersistentId;
 
+/// New value for whether the user is a directory restricted user.
+@property (nonatomic, readonly, nullable) NSNumber *dNewIsDirectoryRestricted;
+
 #pragma mark - Constructors
 
 ///
@@ -61,15 +64,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param dNewSurname New surname for member.
 /// @param dNewPersistentId New persistent ID. This field only available to
 /// teams using persistent ID SAML configuration.
+/// @param dNewIsDirectoryRestricted New value for whether the user is a
+/// directory restricted user.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user
-                   dNewEmail:(nullable NSString *)dNewEmail
-              dNewExternalId:(nullable NSString *)dNewExternalId
-               dNewGivenName:(nullable NSString *)dNewGivenName
-                 dNewSurname:(nullable NSString *)dNewSurname
-            dNewPersistentId:(nullable NSString *)dNewPersistentId;
+                    dNewEmail:(nullable NSString *)dNewEmail
+               dNewExternalId:(nullable NSString *)dNewExternalId
+                dNewGivenName:(nullable NSString *)dNewGivenName
+                  dNewSurname:(nullable NSString *)dNewSurname
+             dNewPersistentId:(nullable NSString *)dNewPersistentId
+    dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

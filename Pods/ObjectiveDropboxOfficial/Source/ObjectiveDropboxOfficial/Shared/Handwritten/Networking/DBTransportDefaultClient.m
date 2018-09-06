@@ -9,6 +9,7 @@
 #import "DBStoneBase.h"
 #import "DBTasksImpl.h"
 #import "DBTransportBaseClient+Internal.h"
+#import "DBTransportBaseHostnameConfig.h"
 #import "DBTransportDefaultConfig.h"
 
 @implementation DBTransportDefaultClient {
@@ -98,7 +99,7 @@
   NSURLSession *sessionToUse = _session;
 
   // longpoll requests have a much longer timeout period than other requests
-  if ([route.attrs[@"host"] isEqualToString:@"notify"]) {
+  if (route.host == DBRouteHostNotify) {
     sessionToUse = _longpollSession;
   }
 

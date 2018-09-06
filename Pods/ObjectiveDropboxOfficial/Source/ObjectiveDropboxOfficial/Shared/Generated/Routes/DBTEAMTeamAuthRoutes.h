@@ -951,17 +951,19 @@ membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
 /// @param dNewSurname New surname for member.
 /// @param dNewPersistentId New persistent ID. This field only available to teams using persistent ID SAML
 /// configuration.
+/// @param dNewIsDirectoryRestricted New value for whether the user is a directory restricted user.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfo` object on success or a
 /// `DBTEAMMembersSetProfileError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamMemberInfo *, DBTEAMMembersSetProfileError *> *)
-membersSetProfile:(DBTEAMUserSelectorArg *)user
-        dNewEmail:(nullable NSString *)dNewEmail
-   dNewExternalId:(nullable NSString *)dNewExternalId
-    dNewGivenName:(nullable NSString *)dNewGivenName
-      dNewSurname:(nullable NSString *)dNewSurname
- dNewPersistentId:(nullable NSString *)dNewPersistentId;
+        membersSetProfile:(DBTEAMUserSelectorArg *)user
+                dNewEmail:(nullable NSString *)dNewEmail
+           dNewExternalId:(nullable NSString *)dNewExternalId
+            dNewGivenName:(nullable NSString *)dNewGivenName
+              dNewSurname:(nullable NSString *)dNewSurname
+         dNewPersistentId:(nullable NSString *)dNewPersistentId
+dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 
 ///
 /// Suspend a member from a team. Permission : Team member management Exactly one of team_member_id, email, or

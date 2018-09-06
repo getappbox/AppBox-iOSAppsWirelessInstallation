@@ -647,14 +647,16 @@
                   dNewExternalId:(NSString *)dNewExternalId
                    dNewGivenName:(NSString *)dNewGivenName
                      dNewSurname:(NSString *)dNewSurname
-                dNewPersistentId:(NSString *)dNewPersistentId {
+                dNewPersistentId:(NSString *)dNewPersistentId
+       dNewIsDirectoryRestricted:(NSNumber *)dNewIsDirectoryRestricted {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersSetProfile;
   DBTEAMMembersSetProfileArg *arg = [[DBTEAMMembersSetProfileArg alloc] initWithUser:user
                                                                            dNewEmail:dNewEmail
                                                                       dNewExternalId:dNewExternalId
                                                                        dNewGivenName:dNewGivenName
                                                                          dNewSurname:dNewSurname
-                                                                    dNewPersistentId:dNewPersistentId];
+                                                                    dNewPersistentId:dNewPersistentId
+                                                           dNewIsDirectoryRestricted:dNewIsDirectoryRestricted];
   return [self.client requestRpc:route arg:arg];
 }
 

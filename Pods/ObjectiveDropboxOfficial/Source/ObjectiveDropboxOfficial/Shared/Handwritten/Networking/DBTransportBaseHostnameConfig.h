@@ -2,9 +2,25 @@
 /// Copyright (c) 2017 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBStoneBase.h"
 #import <Foundation/Foundation.h>
 
+/// Enum of Dropbox API hosts.
+typedef NS_ENUM(NSUInteger, DBRouteHost) {
+  DBRouteHostUnknown = 0,
+  DBRouteHostApi,
+  DBRouteHostContent,
+  DBRouteHostNotify,
+};
+
 NS_ASSUME_NONNULL_BEGIN
+
+@interface DBRoute (DropboxHost)
+
+/// @return which host this route points to
+@property (nonatomic, readonly) DBRouteHost host;
+
+@end
 
 ///
 /// Configuration class that defines the different hostnames that the Dropbox SDK uses
@@ -38,12 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Returns the prefix to use for API calls to the given route type.
 ///
-/// @param routeType the type of route to get a prefix for.
-/// Currently the valid values are: "api", "content", and "notify".
+/// @param route the type of route to get a prefix for.
+/// Currently the valid hosts are: "api", "content", and "notify".
 ///
 /// @return An absolute URL prefix, typically "https://<hostname>/2" or nil if an invalid route type is provided.
 ///
-- (nullable NSString *)apiV2PrefixWithRouteType:(NSString *)routeType;
+- (nullable NSString *)apiV2PrefixWithRoute:(DBRoute *)route;
 
 @end
 
