@@ -25,7 +25,7 @@
     buildOptionBoxHeightConstraint.constant = 0;
     
     //Notification Handler
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initBuildRepoProcess:) name:abBuildRepoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initCIProcess:) name:abBuildRepoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initOpenFilesProcess:) name:abUseOpenFilesNotification object:nil];
@@ -113,10 +113,17 @@
 
 
 #pragma mark - Build Repo / Open Files Notification
-- (void)initBuildRepoProcess:(NSNotification *)notification {
+- (void)initCIProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         ciRepoProject = notification.object;
-        [self initProjectBuildProcessForURL: ciRepoProject.projectFullPath];
+        if (ciRepoProject.ipaFullPath)
+        {
+            [self initIPAUploadProcessForURL: ciRepoProject.ipaFullPath];
+        }
+        else
+        {
+            [self initProjectBuildProcessForURL: ciRepoProject.projectFullPath];
+        }
     }
 }
 
@@ -152,6 +159,13 @@
     [project setProjectFullPath: projectURL];
     [selectedFilePath setURL:projectURL];
     [self runGetSchemeScript];
+}
+
+- (void)initIPAUploadProcessForURL:(NSURL *)ipaURL {
+    [self viewStateForProgressFinish:YES];
+    [project setIpaFullPath:ipaURL];
+    [selectedFilePath setURL:ipaURL];
+    [self actionButtonTapped:buttonAction];
 }
 
 //Scheme Value Changed
