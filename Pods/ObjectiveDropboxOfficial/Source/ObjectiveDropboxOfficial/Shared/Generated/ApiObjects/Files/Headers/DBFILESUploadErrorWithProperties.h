@@ -34,7 +34,8 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
   /// Unable to save the uploaded contents to a file.
   DBFILESUploadErrorWithPropertiesPath,
 
-  /// The supplied property group is invalid.
+  /// The supplied property group is invalid. The file has uploaded without
+  /// property groups.
   DBFILESUploadErrorWithPropertiesPropertiesError,
 
   /// (no description).
@@ -50,9 +51,9 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 /// raised.
 @property (nonatomic, readonly) DBFILESUploadWriteFailed *path;
 
-/// The supplied property group is invalid. @note Ensure the `isPropertiesError`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
+/// The supplied property group is invalid. The file has uploaded without
+/// property groups. @note Ensure the `isPropertiesError` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILEPROPERTIESInvalidPropertyGroupError *propertiesError;
 
 #pragma mark - Constructors
@@ -73,9 +74,10 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
 /// Initializes union class with tag state of "properties_error".
 ///
 /// Description of the "properties_error" tag state: The supplied property group
-/// is invalid.
+/// is invalid. The file has uploaded without property groups.
 ///
-/// @param propertiesError The supplied property group is invalid.
+/// @param propertiesError The supplied property group is invalid. The file has
+/// uploaded without property groups.
 ///
 /// @return An initialized instance.
 ///

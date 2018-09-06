@@ -131,6 +131,8 @@ typedef enum : NSUInteger {
 #define abArgsScheme @"scheme="
 #define abArgsBuildType @"buildtype="
 #define abArgsTeamId @"teamid="
+#define abArgsIPA @"ipa="
+#define abArgsIPAInfo @"ipaInfo="
 
 
 #endif /* Constants_h */

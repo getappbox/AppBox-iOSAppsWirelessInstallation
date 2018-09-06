@@ -13,6 +13,7 @@
 #import "DBStoneBase.h"
 #import "DBTransportBaseClient.h"
 #import "DBTransportBaseConfig.h"
+#import "DBTransportBaseHostnameConfig.h"
 
 #pragma mark - Internal serialization helpers
 
@@ -130,7 +131,7 @@
 }
 
 - (NSURL *)urlWithRoute:(DBRoute *)route {
-  NSString *routePrefix = [_hostnameConfig apiV2PrefixWithRouteType:route.attrs[@"host"]];
+  NSString *routePrefix = [_hostnameConfig apiV2PrefixWithRoute:route];
   return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@", routePrefix, route.namespace_, route.name]];
 }
 

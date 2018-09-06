@@ -67,6 +67,14 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/PayloadIpad10.0.ipa"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/Space Test/PayloadIphone10.0.ipa"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "build=/Volumes/LongTime/ProjectWorking/AR"
             isEnabled = "NO">
          </CommandLineArgument>

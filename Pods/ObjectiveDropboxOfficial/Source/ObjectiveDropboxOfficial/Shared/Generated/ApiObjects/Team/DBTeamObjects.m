@@ -14272,7 +14272,8 @@
                    memberExternalId:(NSString *)memberExternalId
                  memberPersistentId:(NSString *)memberPersistentId
                    sendWelcomeEmail:(NSNumber *)sendWelcomeEmail
-                               role:(DBTEAMAdminTier *)role {
+                               role:(DBTEAMAdminTier *)role
+              isDirectoryRestricted:(NSNumber *)isDirectoryRestricted {
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:nil
                                                                maxLength:@(255)
                                                                  pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9."
@@ -14294,6 +14295,7 @@
     _memberPersistentId = memberPersistentId;
     _sendWelcomeEmail = sendWelcomeEmail ?: @YES;
     _role = role ?: [[DBTEAMAdminTier alloc] initWithMemberOnly];
+    _isDirectoryRestricted = isDirectoryRestricted;
   }
   return self;
 }
@@ -14305,7 +14307,8 @@
                   memberExternalId:nil
                 memberPersistentId:nil
                   sendWelcomeEmail:nil
-                              role:nil];
+                              role:nil
+             isDirectoryRestricted:nil];
 }
 
 #pragma mark - Serialization methods
@@ -14353,6 +14356,9 @@
   }
   result = prime * result + [self.sendWelcomeEmail hash];
   result = prime * result + [self.role hash];
+  if (self.isDirectoryRestricted != nil) {
+    result = prime * result + [self.isDirectoryRestricted hash];
+  }
 
   return prime * result;
 }
@@ -14402,6 +14408,11 @@
   if (![self.role isEqual:aMemberAddArg.role]) {
     return NO;
   }
+  if (self.isDirectoryRestricted) {
+    if (![self.isDirectoryRestricted isEqual:aMemberAddArg.isDirectoryRestricted]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -14429,6 +14440,9 @@
   }
   jsonDict[@"send_welcome_email"] = valueObj.sendWelcomeEmail;
   jsonDict[@"role"] = [DBTEAMAdminTierSerializer serialize:valueObj.role];
+  if (valueObj.isDirectoryRestricted) {
+    jsonDict[@"is_directory_restricted"] = valueObj.isDirectoryRestricted;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -14442,6 +14456,7 @@
   NSNumber *sendWelcomeEmail = valueDict[@"send_welcome_email"] ?: @YES;
   DBTEAMAdminTier *role = valueDict[@"role"] ? [DBTEAMAdminTierSerializer deserialize:valueDict[@"role"]]
                                              : [[DBTEAMAdminTier alloc] initWithMemberOnly];
+  NSNumber *isDirectoryRestricted = valueDict[@"is_directory_restricted"] ?: nil;
 
   return [[DBTEAMMemberAddArg alloc] initWithMemberEmail:memberEmail
                                          memberGivenName:memberGivenName
@@ -14449,7 +14464,8 @@
                                         memberExternalId:memberExternalId
                                       memberPersistentId:memberPersistentId
                                         sendWelcomeEmail:sendWelcomeEmail
-                                                    role:role];
+                                                    role:role
+                                   isDirectoryRestricted:isDirectoryRestricted];
 }
 
 @end
@@ -15273,7 +15289,8 @@
                           externalId:(NSString *)externalId
                            accountId:(NSString *)accountId
                             joinedOn:(NSDate *)joinedOn
-                        persistentId:(NSString *)persistentId {
+                        persistentId:(NSString *)persistentId
+               isDirectoryRestricted:(NSNumber *)isDirectoryRestricted {
   [DBStoneValidators nonnullValidator:nil](teamMemberId);
   [DBStoneValidators nonnullValidator:nil](email);
   [DBStoneValidators nonnullValidator:nil](emailVerified);
@@ -15295,6 +15312,7 @@
     _membershipType = membershipType;
     _joinedOn = joinedOn;
     _persistentId = persistentId;
+    _isDirectoryRestricted = isDirectoryRestricted;
   }
   return self;
 }
@@ -15314,7 +15332,8 @@
                          externalId:nil
                           accountId:nil
                            joinedOn:nil
-                       persistentId:nil];
+                       persistentId:nil
+              isDirectoryRestricted:nil];
 }
 
 #pragma mark - Serialization methods
@@ -15364,6 +15383,9 @@
   }
   if (self.persistentId != nil) {
     result = prime * result + [self.persistentId hash];
+  }
+  if (self.isDirectoryRestricted != nil) {
+    result = prime * result + [self.isDirectoryRestricted hash];
   }
 
   return prime * result;
@@ -15423,6 +15445,11 @@
       return NO;
     }
   }
+  if (self.isDirectoryRestricted) {
+    if (![self.isDirectoryRestricted isEqual:aMemberProfile.isDirectoryRestricted]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -15453,6 +15480,9 @@
   if (valueObj.persistentId) {
     jsonDict[@"persistent_id"] = valueObj.persistentId;
   }
+  if (valueObj.isDirectoryRestricted) {
+    jsonDict[@"is_directory_restricted"] = valueObj.isDirectoryRestricted;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -15471,6 +15501,7 @@
                          ? [DBNSDateSerializer deserialize:valueDict[@"joined_on"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"]
                          : nil;
   NSString *persistentId = valueDict[@"persistent_id"] ?: nil;
+  NSNumber *isDirectoryRestricted = valueDict[@"is_directory_restricted"] ?: nil;
 
   return [[DBTEAMMemberProfile alloc] initWithTeamMemberId:teamMemberId
                                                      email:email
@@ -15481,7 +15512,8 @@
                                                 externalId:externalId
                                                  accountId:accountId
                                                   joinedOn:joinedOn
-                                              persistentId:persistentId];
+                                              persistentId:persistentId
+                                     isDirectoryRestricted:isDirectoryRestricted];
 }
 
 @end
@@ -19198,11 +19230,12 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user
-                   dNewEmail:(NSString *)dNewEmail
-              dNewExternalId:(NSString *)dNewExternalId
-               dNewGivenName:(NSString *)dNewGivenName
-                 dNewSurname:(NSString *)dNewSurname
-            dNewPersistentId:(NSString *)dNewPersistentId {
+                    dNewEmail:(NSString *)dNewEmail
+               dNewExternalId:(NSString *)dNewExternalId
+                dNewGivenName:(NSString *)dNewGivenName
+                  dNewSurname:(NSString *)dNewSurname
+             dNewPersistentId:(NSString *)dNewPersistentId
+    dNewIsDirectoryRestricted:(NSNumber *)dNewIsDirectoryRestricted {
   [DBStoneValidators nonnullValidator:nil](user);
   [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:nil
                                                                 maxLength:@(255)
@@ -19223,13 +19256,19 @@
     _dNewGivenName = dNewGivenName;
     _dNewSurname = dNewSurname;
     _dNewPersistentId = dNewPersistentId;
+    _dNewIsDirectoryRestricted = dNewIsDirectoryRestricted;
   }
   return self;
 }
 
 - (instancetype)initWithUser:(DBTEAMUserSelectorArg *)user {
-  return
-      [self initWithUser:user dNewEmail:nil dNewExternalId:nil dNewGivenName:nil dNewSurname:nil dNewPersistentId:nil];
+  return [self initWithUser:user
+                      dNewEmail:nil
+                 dNewExternalId:nil
+                  dNewGivenName:nil
+                    dNewSurname:nil
+               dNewPersistentId:nil
+      dNewIsDirectoryRestricted:nil];
 }
 
 #pragma mark - Serialization methods
@@ -19277,6 +19316,9 @@
   }
   if (self.dNewPersistentId != nil) {
     result = prime * result + [self.dNewPersistentId hash];
+  }
+  if (self.dNewIsDirectoryRestricted != nil) {
+    result = prime * result + [self.dNewIsDirectoryRestricted hash];
   }
 
   return prime * result;
@@ -19326,6 +19368,11 @@
       return NO;
     }
   }
+  if (self.dNewIsDirectoryRestricted) {
+    if (![self.dNewIsDirectoryRestricted isEqual:aMembersSetProfileArg.dNewIsDirectoryRestricted]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -19354,6 +19401,9 @@
   if (valueObj.dNewPersistentId) {
     jsonDict[@"new_persistent_id"] = valueObj.dNewPersistentId;
   }
+  if (valueObj.dNewIsDirectoryRestricted) {
+    jsonDict[@"new_is_directory_restricted"] = valueObj.dNewIsDirectoryRestricted;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -19365,13 +19415,15 @@
   NSString *dNewGivenName = valueDict[@"new_given_name"] ?: nil;
   NSString *dNewSurname = valueDict[@"new_surname"] ?: nil;
   NSString *dNewPersistentId = valueDict[@"new_persistent_id"] ?: nil;
+  NSNumber *dNewIsDirectoryRestricted = valueDict[@"new_is_directory_restricted"] ?: nil;
 
   return [[DBTEAMMembersSetProfileArg alloc] initWithUser:user
                                                 dNewEmail:dNewEmail
                                            dNewExternalId:dNewExternalId
                                             dNewGivenName:dNewGivenName
                                               dNewSurname:dNewSurname
-                                         dNewPersistentId:dNewPersistentId];
+                                         dNewPersistentId:dNewPersistentId
+                                dNewIsDirectoryRestricted:dNewIsDirectoryRestricted];
 }
 
 @end
@@ -19467,6 +19519,14 @@
   return self;
 }
 
+- (instancetype)initWithDirectoryRestrictedOff {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMMembersSetProfileErrorDirectoryRestrictedOff;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -19519,6 +19579,10 @@
   return _tag == DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser;
 }
 
+- (BOOL)isDirectoryRestrictedOff {
+  return _tag == DBTEAMMembersSetProfileErrorDirectoryRestrictedOff;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMMembersSetProfileErrorOther;
 }
@@ -19545,6 +19609,8 @@
     return @"DBTEAMMembersSetProfileErrorPersistentIdDisabled";
   case DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser:
     return @"DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser";
+  case DBTEAMMembersSetProfileErrorDirectoryRestrictedOff:
+    return @"DBTEAMMembersSetProfileErrorDirectoryRestrictedOff";
   case DBTEAMMembersSetProfileErrorOther:
     return @"DBTEAMMembersSetProfileErrorOther";
   }
@@ -19603,6 +19669,8 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMMembersSetProfileErrorDirectoryRestrictedOff:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMMembersSetProfileErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -19650,6 +19718,8 @@
     return [[self tagName] isEqual:[aMembersSetProfileError tagName]];
   case DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser:
     return [[self tagName] isEqual:[aMembersSetProfileError tagName]];
+  case DBTEAMMembersSetProfileErrorDirectoryRestrictedOff:
+    return [[self tagName] isEqual:[aMembersSetProfileError tagName]];
   case DBTEAMMembersSetProfileErrorOther:
     return [[self tagName] isEqual:[aMembersSetProfileError tagName]];
   }
@@ -19685,6 +19755,8 @@
     jsonDict[@".tag"] = @"persistent_id_disabled";
   } else if ([valueObj isPersistentIdUsedByOtherUser]) {
     jsonDict[@".tag"] = @"persistent_id_used_by_other_user";
+  } else if ([valueObj isDirectoryRestrictedOff]) {
+    jsonDict[@".tag"] = @"directory_restricted_off";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -19717,6 +19789,8 @@
     return [[DBTEAMMembersSetProfileError alloc] initWithPersistentIdDisabled];
   } else if ([tag isEqualToString:@"persistent_id_used_by_other_user"]) {
     return [[DBTEAMMembersSetProfileError alloc] initWithPersistentIdUsedByOtherUser];
+  } else if ([tag isEqualToString:@"directory_restricted_off"]) {
+    return [[DBTEAMMembersSetProfileError alloc] initWithDirectoryRestrictedOff];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMMembersSetProfileError alloc] initWithOther];
   } else {
@@ -28120,7 +28194,8 @@
                           externalId:(NSString *)externalId
                            accountId:(NSString *)accountId
                             joinedOn:(NSDate *)joinedOn
-                        persistentId:(NSString *)persistentId {
+                        persistentId:(NSString *)persistentId
+               isDirectoryRestricted:(NSNumber *)isDirectoryRestricted {
   [DBStoneValidators nonnullValidator:nil](teamMemberId);
   [DBStoneValidators nonnullValidator:nil](email);
   [DBStoneValidators nonnullValidator:nil](emailVerified);
@@ -28145,7 +28220,8 @@
                           externalId:externalId
                            accountId:accountId
                             joinedOn:joinedOn
-                        persistentId:persistentId];
+                        persistentId:persistentId
+               isDirectoryRestricted:isDirectoryRestricted];
   if (self) {
     _groups = groups;
     _memberFolderId = memberFolderId;
@@ -28172,7 +28248,8 @@
                          externalId:nil
                           accountId:nil
                            joinedOn:nil
-                       persistentId:nil];
+                       persistentId:nil
+              isDirectoryRestricted:nil];
 }
 
 #pragma mark - Serialization methods
@@ -28224,6 +28301,9 @@
   }
   if (self.persistentId != nil) {
     result = prime * result + [self.persistentId hash];
+  }
+  if (self.isDirectoryRestricted != nil) {
+    result = prime * result + [self.isDirectoryRestricted hash];
   }
 
   return prime * result;
@@ -28289,6 +28369,11 @@
       return NO;
     }
   }
+  if (self.isDirectoryRestricted) {
+    if (![self.isDirectoryRestricted isEqual:aTeamMemberProfile.isDirectoryRestricted]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -28324,6 +28409,9 @@
   if (valueObj.persistentId) {
     jsonDict[@"persistent_id"] = valueObj.persistentId;
   }
+  if (valueObj.isDirectoryRestricted) {
+    jsonDict[@"is_directory_restricted"] = valueObj.isDirectoryRestricted;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -28347,6 +28435,7 @@
                          ? [DBNSDateSerializer deserialize:valueDict[@"joined_on"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"]
                          : nil;
   NSString *persistentId = valueDict[@"persistent_id"] ?: nil;
+  NSNumber *isDirectoryRestricted = valueDict[@"is_directory_restricted"] ?: nil;
 
   return [[DBTEAMTeamMemberProfile alloc] initWithTeamMemberId:teamMemberId
                                                          email:email
@@ -28359,7 +28448,8 @@
                                                     externalId:externalId
                                                      accountId:accountId
                                                       joinedOn:joinedOn
-                                                  persistentId:persistentId];
+                                                  persistentId:persistentId
+                                         isDirectoryRestricted:isDirectoryRestricted];
 }
 
 @end
