@@ -1,0 +1,32 @@
+site_name: AppBox Docs
+site_description: AppBox Documentation
+site_url: https://docs.getappbox.com
+copyright: Copyright © AppBox
+repo_url: https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation
+repo_name: AppBox
+remote_branch: master
+dev_addr: 127.0.0.1:2000 
+
+# Google Analytics
+google_analytics:
+  - 'UA-85215717-4'
+  - 'auto'
+
+# Customization
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation'
+    - type: 'twitter'
+      link: 'https://twitter.com/tryappbox'
+
+# Configuration
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
