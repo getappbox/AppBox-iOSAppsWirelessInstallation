@@ -22,7 +22,11 @@
 +(void)setupDBClientsManager{
     //Force Foreground Session
     if (![DBClientsManager authorizedClient]) {
-        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:[DBManager dbKey] forceForegroundSession:YES];
+        DBManager *manager = [[DBManager alloc] init];
+        manager.appName = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleNameKey];
+        manager.version = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
+        manager.bundleId = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleIdentifierKey];
+        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:[manager getDBKey] forceForegroundSession:YES];
         [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
     }
     
