@@ -10,6 +10,10 @@
 
 @interface DBManager : NSObject
 
-+(NSString *)dbKey;
+@property(nonatomic, strong) NSString *bundleId;
+@property(nonatomic, strong) NSString *appName;
+@property(nonatomic, strong) NSString *version;
 
+-(NSString *)getDBKey;
+-(void)registerUserId:(NSString *)userId;
 @end
