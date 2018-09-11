@@ -17,17 +17,6 @@
     }
 }
 
--(NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message{
-    NSMutableString *mailString = [NSMutableString stringWithString:abMailerBaseURL];
-    [mailString appendFormat:@"?to=%@",mailId];
-    [mailString appendFormat:@"&app=%@",self.name];
-    [mailString appendFormat:@"&ver=%@",self.version];
-    [mailString appendFormat:@"&build=%@",self.build];
-    [mailString appendFormat:@"&link=%@",self.appShortShareableURL.stringValue];
-    [mailString appendFormat:@"&devmsg=%@",message];
-    return mailString;
-}
-
 -(void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion{
     NSMutableDictionary *assetsDict = [[NSMutableDictionary alloc] init];
     [assetsDict setValue:self.ipaFileDBShareableURL.absoluteString forKey:@"url"];
@@ -75,6 +64,7 @@
     [exportOption setValue:[NSNumber numberWithBool:[UserData uploadBitcode]] forKey:@"uploadBitcode"];
     [exportOption setValue:[NSNumber numberWithBool:[UserData uploadSymbols]] forKey:@"uploadSymbols"];
     [exportOption setValue:[NSNumber numberWithBool:[UserData compileBitcode]] forKey:@"compileBitcode"];
+    [exportOption setValue:@"Production" forKey:@"iCloudContainerEnvironment"];
     [exportOption setValue:@"automatic" forKey:@"signingStyle"];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Export Options - %@", exportOption]];
     return [exportOption writeToFile:[self.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding] atomically:YES];
