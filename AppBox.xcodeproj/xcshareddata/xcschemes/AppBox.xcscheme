@@ -68,7 +68,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/PayloadIpad10.0.ipa"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/Space Test/PayloadIphone10.0.ipa"

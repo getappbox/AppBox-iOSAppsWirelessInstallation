@@ -90,6 +90,4 @@
 - (void)createUDIDAndIsNew:(BOOL)isNew;
 - (void)upadteDbDirectoryByBundleDirectory;
 - (void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion;
-
-- (NSString *)buildMailURLStringForEmailId:(NSString *)mailId andMessage:(NSString *)message;
 @end
