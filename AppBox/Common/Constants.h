@@ -10,17 +10,15 @@
 #define Constants_h
 
 //Base URL's
-#define abBranchBaseURL @"https://api.branch.io/v1/url"
-#define abInstallWebAppBaseURL @"https://tryapp.github.io"
-#define abMailerBaseURL @"https://appboxapi.github.io/mail"
+#define abInstallWebAppBaseURL @"https://web.getappbox.com"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
 //#define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Powered%20by%20DB"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
 
 //Other URL's
 #define abAppBoxAdsURL @"https://appbox-ads.firebaseio.com/ads.json"
-#define abDefaultLatestDownloadURL @"https://tryappbox.github.io/download"
-#define abDocumentationURL @"http://www.tryappbox.com/help/"
+#define abDefaultLatestDownloadURL @"https://getappbox.com/download"
+#define abDocumentationURL @"http://docs.getappbox.com"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/tryappbox"
