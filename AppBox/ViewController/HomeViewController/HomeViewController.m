@@ -534,7 +534,7 @@
                             }
                             [self updateViewState];
                             buildOptionBoxHeightConstraint.constant = 119;
-                            [self showStatus:@"Now please select ipa type (save for). You can view log from File -> View Log." andShowProgressBar:NO withProgress:-1];
+                            [self showStatus:@"Now select ipa type (save for)." andShowProgressBar:NO withProgress:-1];
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {

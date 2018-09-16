@@ -33,8 +33,6 @@
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
 		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
-		DB8CE5FF1FF796A8003FEB65 /* Ads.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5FE1FF796A8003FEB65 /* Ads.m */; };
-		DB8CE6051FF7AA6A003FEB65 /* AdStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE6041FF7AA6A003FEB65 /* AdStore.m */; };
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
 		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
@@ -256,10 +254,6 @@
 		DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ABHudViewController.xib; sourceTree = "<group>"; };
 		DB8CE5F61FF77199003FEB65 /* DisabledView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisabledView.h; sourceTree = "<group>"; };
 		DB8CE5F71FF77199003FEB65 /* DisabledView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisabledView.m; sourceTree = "<group>"; };
-		DB8CE5FD1FF796A8003FEB65 /* Ads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ads.h; sourceTree = "<group>"; };
-		DB8CE5FE1FF796A8003FEB65 /* Ads.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ads.m; sourceTree = "<group>"; };
-		DB8CE6031FF7AA6A003FEB65 /* AdStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdStore.h; sourceTree = "<group>"; };
-		DB8CE6041FF7AA6A003FEB65 /* AdStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdStore.m; sourceTree = "<group>"; };
 		DBA66CF01FDCF4A60002A956 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerViewController.h; sourceTree = "<group>"; };
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
@@ -542,20 +536,8 @@
 		DB8CE5FB1FF7966E003FEB65 /* WebModel */ = {
 			isa = PBXGroup;
 			children = (
-				DB8CE5FC1FF79677003FEB65 /* Ads */,
 			);
 			path = WebModel;
-			sourceTree = "<group>";
-		};
-		DB8CE5FC1FF79677003FEB65 /* Ads */ = {
-			isa = PBXGroup;
-			children = (
-				DB8CE5FD1FF796A8003FEB65 /* Ads.h */,
-				DB8CE5FE1FF796A8003FEB65 /* Ads.m */,
-				DB8CE6031FF7AA6A003FEB65 /* AdStore.h */,
-				DB8CE6041FF7AA6A003FEB65 /* AdStore.m */,
-			);
-			path = Ads;
 			sourceTree = "<group>";
 		};
 		DBA66CEF1FDCF4A60002A956 /* Storyboard */ = {
@@ -1417,8 +1399,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */,
-				DB8CE5FF1FF796A8003FEB65 /* Ads.m in Sources */,
-				DB8CE6051FF7AA6A003FEB65 /* AdStore.m in Sources */,
 				E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */,
 				DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,

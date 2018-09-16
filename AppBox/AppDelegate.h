@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-#import "AdStore.h"
 #import "DefaultSettings.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
