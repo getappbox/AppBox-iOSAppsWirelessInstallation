@@ -75,6 +75,12 @@
     //Handle Dropbox Login
     if ([DBClientsManager authorizedClient] == nil) {
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
+    } else {
+        [[[DBClientsManager authorizedClient].usersRoutes getCurrentAccount] setResponseBlock:^(DBUSERSFullAccount * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            if (result) {
+                [[Common currentDBManager] registerUserId:result.email];
+            }
+        }];
     }
     [[AppDelegate appDelegate] setIsReadyToBuild:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToUseNotification object:self];
@@ -534,7 +540,7 @@
                             }
                             [self updateViewState];
                             buildOptionBoxHeightConstraint.constant = 119;
-                            [self showStatus:@"Now select ipa type (save for)." andShowProgressBar:NO withProgress:-1];
+                            [self showStatus:@"Now select Build Type to Archive and Upload." andShowProgressBar:NO withProgress:-1];
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {

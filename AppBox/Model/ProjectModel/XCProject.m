@@ -145,6 +145,7 @@
     
     [project setEmails:self.emails];
     [project setPersonalMessage:self.personalMessage];
+    [project setDbManager:[Common currentDBManager]];
     
     return project;
 }

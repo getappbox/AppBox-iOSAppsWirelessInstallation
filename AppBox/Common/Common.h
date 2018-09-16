@@ -13,10 +13,11 @@
 
 + (NSString*)generateUUID;
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath;
-+(NSError *)errorWithDesc:(NSString *)error andCode:(NSInteger)code;
++ (NSError *)errorWithDesc:(NSString *)error andCode:(NSInteger)code;
 
 + (void)showNoInternetConnectionAvailabeAlert;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
 
++ (DBManager *)currentDBManager;
 @end
