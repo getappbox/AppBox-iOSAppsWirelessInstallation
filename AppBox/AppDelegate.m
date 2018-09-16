@@ -67,8 +67,6 @@
         }
     }
     
-    //Load Ads
-    [AdStore loadAds];
     //[self setAppBoxAsDefualt];
 }
 

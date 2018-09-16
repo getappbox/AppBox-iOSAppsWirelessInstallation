@@ -56,5 +56,16 @@
     [center scheduleNotification:notification];
 }
 
++ (DBManager *)currentDBManager {
+    static DBManager *manager = NULL;
+    if (manager == NULL) {
+        manager = [[DBManager alloc] init];
+        manager.appName = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleNameKey];
+        manager.version = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
+        manager.bundleId = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleIdentifierKey];
+    }
+    return manager;
+}
+
 
 @end

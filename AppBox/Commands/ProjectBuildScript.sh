@@ -38,12 +38,11 @@ then
     echo "Building Project..."
 
     #check either selected xcode is 9 or higher
-    if [[ "${7}" > "9" || "${7}" == "9" ]]
+    echo "Building Project with Xcode ${7}"
+    if [[ ${7} -gt 9 || ${7} -eq 9 ]]
     then
-        echo "Building Project with Xcode 9"
         xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
     else
-        echo "Building Project with Xcode 8"
         xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
     fi
 
@@ -51,12 +50,11 @@ else
     echo "Building Workspace..."
 
     #check either selected xcode is 9 or higher
-    if [[ "${7}" > "9" || "${7}" == "9" ]]
+    echo "Building Project with Xcode ${7}"
+    if [[ ${7} -gt 9 || ${7} -eq 9 ]]
     then
-        echo "Building Project with Xcode 9"
         xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
     else
-        echo "Building Project with Xcode 8"
         xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
     fi
 

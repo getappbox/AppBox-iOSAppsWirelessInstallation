@@ -13,7 +13,7 @@
 +(void)ga{
     static MPAnalyticsConfiguration *configuration = nil;
     if (configuration == nil) {
-        configuration = [[MPAnalyticsConfiguration alloc] initWithAnalyticsIdentifier: abGoogleAnalyticsKey];
+        configuration = [[MPAnalyticsConfiguration alloc] initWithAnalyticsIdentifier: [DBManager gaKey]];
         [MPGoogleAnalyticsTracker activateConfiguration:configuration];
     }
 }
