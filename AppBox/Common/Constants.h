@@ -16,7 +16,6 @@
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
 
 //Other URL's
-#define abAppBoxAdsURL @"https://appbox-ads.firebaseio.com/ads.json"
 #define abDefaultLatestDownloadURL @"https://getappbox.com/download"
 #define abDocumentationURL @"http://docs.getappbox.com"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
@@ -56,7 +55,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abUseOpenFilesNotification @"UseOpenFilesNotification"
 #define abAppBoxReadyToUseNotification @"AppBoxReadyToBuildNotification"
 #define abStopAppBoxLocalServer @"StopAppBoxLocalServer"
-#define abAdsLoadCompleted @"AdsLoadCompleted"
 
 //messages
 #define abConnectedToInternet @"Connected to the Internet."

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBManager.h"
 
 @interface ABPProject : NSObject
 
@@ -36,5 +37,8 @@
 //Emails
 @property(nonatomic, retain) NSString *emails;
 @property(nonatomic, retain) NSString *personalMessage;
+
+//Client
+@property(nonatomic, retain) DBManager *dbManager;
 
 @end
