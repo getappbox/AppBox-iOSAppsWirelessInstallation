@@ -61,7 +61,7 @@
     if (manager == NULL) {
         manager = [[DBManager alloc] init];
         manager.appName = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleNameKey];
-        manager.version = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
+        manager.version = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
         manager.bundleId = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleIdentifierKey];
     }
     return manager;
