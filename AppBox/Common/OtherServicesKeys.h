@@ -9,6 +9,4 @@
 #ifndef OtherServicesKeys_h
 #define OtherServicesKeys_h
 
-#define abGoogleAnalyticsKey @""
-
 #endif /* MailGunKeys_h */

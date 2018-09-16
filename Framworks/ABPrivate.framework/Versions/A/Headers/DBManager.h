@@ -13,7 +13,9 @@
 @property(nonatomic, strong) NSString *bundleId;
 @property(nonatomic, strong) NSString *appName;
 @property(nonatomic, strong) NSString *version;
+@property(nonatomic, strong) NSString *userId;
 
++(NSString *)gaKey;
 -(NSString *)getDBKey;
 -(void)registerUserId:(NSString *)userId;
 @end

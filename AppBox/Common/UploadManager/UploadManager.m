@@ -21,17 +21,13 @@
 
 +(void)setupDBClientsManager{
     //Force Foreground Session
-    if (![DBClientsManager authorizedClient]) {
-        DBManager *manager = [[DBManager alloc] init];
-        manager.appName = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleNameKey];
-        manager.version = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
-        manager.bundleId = [NSBundle.mainBundle.infoDictionary objectForKey:(NSString *)kCFBundleIdentifierKey];
-        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:[manager getDBKey] forceForegroundSession:YES];
+    DBUserClient *client = [DBClientsManager authorizedClient];
+    if (!client) {
+        DBTransportDefaultConfig *transportConfig = [[DBTransportDefaultConfig alloc] initWithAppKey:[[Common currentDBManager] getDBKey] forceForegroundSession:YES];
         [DBClientsManager setupWithTransportConfigDesktop:transportConfig];
+        //Default Session (Background)
+        //[DBClientsManager setupWithAppKeyDesktop:[DBManager dbKey]];
     }
-    
-    //Default Session (Background)
-    //    [DBClientsManager setupWithAppKeyDesktop:[DBManager dbKey]];
 }
 
 #pragma mark - UnZip IPA File
