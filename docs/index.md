@@ -1,17 +1,32 @@
-# Welcome to MkDocs
+# Home
+AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
+## Why AppBox?
+| | AppBox
+-|-
+🔑 | Auto App Signing
+🚀 | Auto Upload on Dropbox or AppStore after Archive 
+🔗 | Keep same installation link for same app
+🖇️ | Install previous version with same installation link
+✉️ | Auto E-Mail App Distribution Link
+🔌 | Auto Shutdown Mac after Distribution
+📦 | Maximum Upload Size - Equal to your Dropbox account storage
+📅 | Uploaded App Expiration - Until you delete from your Dropbox 
+✨ | Unlimited app installations
+🔥 | Auto Restart Upload After Network Change or Failure 
+🎩 | Easy setup assistant to get started in a few minutes
+🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
+🤔 | Dashboard
+🚢 | Jenkins Support
 
-## Commands
+## How to use AppBox 
+| |
+|-|
+| [Download](http://tryappbox.com/download) and Open AppBox |
+| Link your Dropbox account with AppBox. |
+| Select and upload the iOS application "OR" select project/workspace to archive and upload the iOS application. |
+| Send the link to your testers, clients, friends or even use it yourself. |
+| Open the link in the browser on the device and click on install. |
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## System requirements
+Currently, AppBox is only supported to run on macOS 10.10 or later.
