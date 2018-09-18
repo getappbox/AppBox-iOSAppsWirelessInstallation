@@ -16,7 +16,7 @@
 
 //Other URL's
 #define abDefaultLatestDownloadURL @"https://getappbox.com/download"
-#define abDocumentationURL @"http://docs.getappbox.com"
+#define abDocumentationURL @"https://docs.getappbox.com"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
 #define abTwitterURL @"https://twitter.com/tryappbox"

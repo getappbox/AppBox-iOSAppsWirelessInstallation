@@ -117,7 +117,7 @@
     [project setVersion:@"1.0"];
     [project setBuild:@"1"];
     [project setSelectedSchemes:@"UAT"];
-    [project setAppShortShareableURL:[NSURL URLWithString:@"http://tryappbox.com"]];
+    [project setAppShortShareableURL:[NSURL URLWithString:@"https://getappbox.com"]];
     return project;
 }
 
