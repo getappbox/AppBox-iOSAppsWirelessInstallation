@@ -1,14 +1,14 @@
 [![Build Status](https://img.shields.io/travis-ci/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 [![Github All Releases](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg?style=flat-square)](http://tryappbox.com/download)
-[![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg?style=flat-square)](http://tryappbox.com/download)
+[![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg?style=flat-square)](https://getappbox.com/download)
 [![Twitter](https://img.shields.io/twitter/follow/tryappbox.svg?style=social&label=Follow)](https://twitter.com/tryappbox)
 [![License](https://i.creativecommons.org/l/by-nd/4.0/80x15.png)](#user-content-license)
 
 # AppBox - iOS Apps Wireless Installation 🥇 
 AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
 
-**FLUX WARNING** - Major release in progress, expect things in master to be broken. So, download only [stable release](http://tryappbox.com/download).
+**FLUX WARNING** - Major release in progress, expect things in master to be broken. So, download only [stable release](https://getappbox.com/download).
 
 # Features ⚡️ 
 - Just Select Project/Workspace to archive -> make ipa -> upload ipa -> send mail -> and shutdown mac
@@ -24,7 +24,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 - Installations Per App => Unlimited
  
 # Download latest stable release 📦
-[![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](http://tryappbox.com/download)
+[![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](https://getappbox.com/download)
 
 # How to use AppBox 
 | Step | Description |
