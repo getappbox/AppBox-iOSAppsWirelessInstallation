@@ -6,7 +6,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 -|-
 🔑 | Auto App Signing
 🚀 | Auto Upload on Dropbox or AppStore after Archive 
-🔗 | Keep same installation link for same app
+🔗 | Keep same installation link for the same app
 🖇️ | Install previous version with same installation link
 ✉️ | Auto E-Mail App Distribution Link
 🔌 | Auto Shutdown Mac after Distribution
@@ -22,7 +22,7 @@ AppBox is a tool for developers to build and deploy Development and In-house app
 ## How to use AppBox 
 | |
 |-|
-| [Download](http://tryappbox.com/download) and Open AppBox |
+| [Download](http://getappbox.com/download) and Open AppBox |
 | Link your Dropbox account with AppBox. |
 | Select and upload the iOS application "OR" select project/workspace to archive and upload the iOS application. |
 | Send the link to your testers, clients, friends or even use it yourself. |
