@@ -12,7 +12,6 @@
 //Base URL's
 #define abInstallWebAppBaseURL @"https://web.getappbox.com"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
-//#define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Powered%20by%20DB"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
 
 //Other URL's
@@ -25,12 +24,12 @@
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
 
 //Help URL
-#define abDownloadIPAHelpURL @"http://www.tryappbox.com/features/downloadipa/"
-#define abMoreDetailsHelpURL @"http://www.tryappbox.com/features/moredetails/"
-#define abUploadChunkSizeHelpURL @"http://www.tryappbox.com/features/uploadchunksize/"
-#define abDontShowPerviousBuildURL @"https://tryappbox.github.io/features/keepsamelink/index.html#dontshowpreviousbuild"
-#define abKeepSameLinkReadMoreURL @"https://tryappbox.github.io/features/keepsamelink/"
-#define abShareXcodeProjectSchemeURL @"http://www.tryappbox.com/features/faq/HowToShareXcodeProjectSchemes.html"
+#define abDownloadIPAHelpURL @"https://docs.getappbox.com/Features/downloadipa/"
+#define abMoreDetailsHelpURL @"https://docs.getappbox.com/Features/moredetails/"
+#define abKeepSameLinkReadMoreURL @"https://docs.getappbox.com/Features/keepsamelink/"
+#define abUploadChunkSizeHelpURL @"https://docs.getappbox.com/Features/uploadchunksize/"
+#define abShareXcodeProjectSchemeURL @"https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/"
+#define abDontShowPerviousBuildURL @"https://docs.getappbox.com/Features/keepsamelink/#3-how-to-keep-the-same-link-but-also-hide-the-previous-version-from-the-installation-page"
 
 //Unique links
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
