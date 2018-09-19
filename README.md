@@ -6,22 +6,27 @@
 [![License](https://i.creativecommons.org/l/by-nd/4.0/80x15.png)](#user-content-license)
 
 # AppBox - iOS Apps Wireless Installation 🥇 
-AppBox is a tool for developers to build and deploy Development and In-house applications directly to the devices from your Dropbox account.
+AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
-**FLUX WARNING** - Major release in progress, expect things in master to be broken. So, download only [stable release](https://getappbox.com/download).
+**FLUX WARNING** - Release in progress, expect things in master to be broken. So, download only [stable release](https://getappbox.com/download).
 
 # Features ⚡️ 
-- Just Select Project/Workspace to archive -> make ipa -> upload ipa -> send mail -> and shutdown mac
-- Keep Same Link
-    - This feature will keep same short url for all future build/ipa uploaded with same bundle identifier, this means old build/ipa url will replaced by new ipa file. You can change the link by changing the Dropbox app folder name below.
-    - If this option is enabled, you can also download the previous build with same url. [Read more here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/wiki/Keep-Same-Link)
-- Auto E-Mail App Distribution Link
-- Auto Shutdown Mac after Distribution
-- After 1 min when mail sent notification come
-- You can only shutdown if mail option is enable
-- Maximum Upload Size => Equal to your Dropbox account storage
-- Uploaded App Expiration => Until you delete from your Dropbox
-- Installations Per App => Unlimited
+| | AppBox
+-|-
+🔑 | Auto App Signing
+🚀 | Auto Upload on Dropbox or AppStore after Archive 
+🔗 | Keep same installation link for the same app
+🖇️ | Install previous version with same installation link
+✉️ | Auto E-Mail App Distribution Link
+🔌 | Auto Shutdown Mac after Distribution
+📦 | Maximum Upload Size - Equal to your Dropbox account storage
+📅 | Uploaded App Expiration - Until you delete from your Dropbox 
+✨ | Unlimited app installations
+🔥 | Auto Restart Upload After Network Change or Failure 
+🎩 | Easy setup assistant to get started in a few minutes
+🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
+🤔 | Dashboard
+🚢 | Jenkins Support
  
 # Download latest stable release 📦
 [![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](https://getappbox.com/download)
