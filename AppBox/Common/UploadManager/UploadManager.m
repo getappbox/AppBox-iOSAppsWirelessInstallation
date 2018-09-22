@@ -663,7 +663,6 @@
                 [self handleAfterUniqueJsonMetaDataLoaded];
             }];
         }else{
-            //[self createManifestShortSharableUrl];
             [self updateUniquLinkDictinory:nil];
         }
     }
@@ -686,10 +685,6 @@
 
 #pragma mark - Create ShortSharable URL
 -(void)createUniqueShortSharableUrl{
-    //Build URL
-    NSString *originalURL = [self.project.uniquelinkShareableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
-    self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL, originalURL]];
-    
     //Create Short URL
     [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
         if (shortURL == nil || error) {
@@ -709,18 +704,6 @@
         //upload file unique short url
         [self uploadUniqueLinkJsonFile];
     });
-}
-
--(void)createManifestShortSharableUrl{
-    NSString *originalURL = [self.project.manifestFileSharableURL.absoluteString componentsSeparatedByString:@"dropbox.com"][1];
-    //create short url
-    self.project.appLongShareableURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?url=%@", abInstallWebAppBaseURL,originalURL]];
-    [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
-        self.project.appShortShareableURL = shortURL;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.completionBlock();
-        });
-    }];
 }
 
 #pragma mark - Delete Files

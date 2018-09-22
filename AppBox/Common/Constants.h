@@ -10,7 +10,6 @@
 #define Constants_h
 
 //Base URL's
-#define abInstallWebAppBaseURL @"https://web.getappbox.com"
 #define abGitHubReleaseBaseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/tag/"
 #define abDropBoxAppBaseURL @"https://www.dropbox.com/home/Apps/AppBox%20-%20Build%2C%20Test%20and%20Distribute%20iOS%20Apps"
 

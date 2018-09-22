@@ -138,9 +138,6 @@
     [project setUniquelinkShareableURL:self.uniquelinkShareableURL];
     
     [project setDbAppInfoJSONFullPath:self.dbAppInfoJSONFullPath];
-    [project setIpaFileDBShareableURL:self.ipaFileDBShareableURL];
-    [project setManifestFileSharableURL:self.manifestFileSharableURL];
-    [project setAppLongShareableURL:self.appLongShareableURL];
     [project setAppShortShareableURL:self.appShortShareableURL];
     
     [project setEmails:self.emails];
