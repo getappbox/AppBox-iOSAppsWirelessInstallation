@@ -29,9 +29,6 @@
 
 //Shareable URL DropBox or Google Shortern
 @property(nonatomic, retain) NSURL *dbAppInfoJSONFullPath;
-@property(nonatomic, retain) NSURL *ipaFileDBShareableURL;
-@property(nonatomic, retain) NSURL *manifestFileSharableURL;
-@property(nonatomic, retain) NSURL *appLongShareableURL;
 @property(nonatomic, retain) NSURL *appShortShareableURL;
 
 //Emails

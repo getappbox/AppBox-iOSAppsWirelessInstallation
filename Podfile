@@ -1,5 +1,7 @@
 platform :osx, '10.10'
 
+inhibit_all_warnings!
+
 target :AppBox do
     pod 'ISO8601'
     pod 'AFNetworking'
