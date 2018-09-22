@@ -259,6 +259,7 @@
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
 		DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
 		DBD1CE2D2156230400549C0A /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABPrivate.framework; path = Frameworks/ABPrivate.framework; sourceTree = "<group>"; };
+		DBD1CE3221562EC300549C0A /* AppBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppBox.entitlements; sourceTree = "<group>"; };
 		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
@@ -785,6 +786,7 @@
 		E16437D11D743A4E00CE8B7E /* AppBox */ = {
 			isa = PBXGroup;
 			children = (
+				DBD1CE3221562EC300549C0A /* AppBox.entitlements */,
 				E1CFC65B1D7E7FD9005872BE /* Common */,
 				E16437EC1D743AA100CE8B7E /* Assets */,
 				E16437EB1D743A9300CE8B7E /* Model */,
@@ -1287,6 +1289,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 4F7SW76LL6;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1570,6 +1577,7 @@
 			baseConfigurationReference = BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4F7SW76LL6;
@@ -1597,6 +1605,7 @@
 			baseConfigurationReference = 179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4F7SW76LL6;
