@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
-		DB0E46C321450C76009BCA0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0E46C221450C76009BCA0A /* ABPrivate.framework */; };
-		DB0E46C421450C80009BCA0A /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB0E46C221450C76009BCA0A /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
 		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
 		DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */; };
@@ -36,6 +34,9 @@
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
 		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
+		DBD1CE2E2156230400549C0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; };
+		DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; };
+		DBD1CE302156230800549C0A /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
@@ -202,7 +203,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DB0E46C421450C80009BCA0A /* ABPrivate.framework in Embed Frameworks */,
+				DBD1CE302156230800549C0A /* ABPrivate.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,7 +214,6 @@
 		179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.release.xcconfig"; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
-		DB0E46C221450C76009BCA0A /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABPrivate.framework; path = Framworks/ABPrivate.framework; sourceTree = "<group>"; };
 		DB1C843F2079F54E007AC74C /* NSString+String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+String.h"; sourceTree = "<group>"; };
 		DB1C84402079F54E007AC74C /* NSString+String.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+String.m"; sourceTree = "<group>"; };
 		DB1FC58E1FDEED5400179799 /* HomeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeWindowController.h; sourceTree = "<group>"; };
@@ -258,6 +258,7 @@
 		DBA66CF31FDD08E60002A956 /* LocalServerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerViewController.h; sourceTree = "<group>"; };
 		DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerViewController.m; sourceTree = "<group>"; };
 		DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
+		DBD1CE2D2156230400549C0A /* ABPrivate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ABPrivate.framework; path = Frameworks/ABPrivate.framework; sourceTree = "<group>"; };
 		DBDCFBBC1F99C7860022097B /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		DBDCFBBD1F99C7860022097B /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		DBF290D41FA64A590046D5CE /* ProvisioningDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningDetailsViewController.h; sourceTree = "<group>"; };
@@ -421,13 +422,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB0E46C321450C76009BCA0A /* ABPrivate.framework in Frameworks */,
 				E16438A01D7469CD00CE8B7E /* AppKit.framework in Frameworks */,
 				E16438A41D7469D900CE8B7E /* Foundation.framework in Frameworks */,
 				84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */,
 				E16438A21D7469D200CE8B7E /* CoreData.framework in Frameworks */,
 				E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */,
+				DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */,
 				E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */,
+				DBD1CE2E2156230400549C0A /* ABPrivate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +863,7 @@
 		E164389A1D743ECA00CE8B7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DB0E46C221450C76009BCA0A /* ABPrivate.framework */,
+				DBD1CE2D2156230400549C0A /* ABPrivate.framework */,
 				E16438A31D7469D900CE8B7E /* Foundation.framework */,
 				E16438A11D7469D200CE8B7E /* CoreData.framework */,
 				E164389F1D7469CD00CE8B7E /* AppKit.framework */,
@@ -1576,8 +1578,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/AppBox",
-					"$(PROJECT_DIR)/Framworks/**",
-					"$(PROJECT_DIR)/Framworks",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
@@ -1604,8 +1605,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/AppBox",
-					"$(PROJECT_DIR)/Framworks/**",
-					"$(PROJECT_DIR)/Framworks",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
