@@ -27,7 +27,7 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>10A254a</string>
+	<string>10A255</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
@@ -37,7 +37,7 @@
 	<key>DTXcode</key>
 	<string>1000</string>
 	<key>DTXcodeBuild</key>
-	<string>10A254a</string>
+	<string>10A255</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018 Developer Insider. All rights reserved.</string>
 </dict>
