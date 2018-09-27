@@ -14,7 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    accounts = @[@"iTunes Connect"];
+    accounts = @[@"App Store Connect"];
     // Do view setup here.
 }
 

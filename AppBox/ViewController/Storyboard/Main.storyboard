@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -224,7 +222,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="HomeWindowController" sceneMemberID="viewController">
-                    <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="AppBox - Build, Test and Distribute iOS Apps" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="538" y="299" width="700" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -292,7 +290,7 @@
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Email Address" id="kr1-Yc-qik">
                                             <font key="font" metaFont="systemLight" size="15"/>
-                                            <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -303,7 +301,7 @@
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="user@example.com,user2@example.com,..." drawsBackground="YES" id="1CV-KM-paZ">
                                             <font key="font" metaFont="systemLight" size="16"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -314,7 +312,7 @@
                                         <rect key="frame" x="10" y="65" width="154" height="19"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Personal Message" id="joa-dI-eJP">
                                             <font key="font" metaFont="systemLight" size="15"/>
-                                            <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -326,7 +324,7 @@
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="3kO-iB-a5g">
                                             <font key="font" metaFont="systemLight" size="16"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -371,7 +369,7 @@ DQ
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VAU-Tg-Nmj">
-                                        <rect key="frame" x="138" y="7" width="25" height="25"/>
+                                        <rect key="frame" x="138" y="6" width="25" height="25"/>
                                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wr3-Z9-aCa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -514,7 +512,7 @@ DQ
                                                 </constraints>
                                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select or Drag and Drop IPA / Project / Workspace file here " pathStyle="popUp" id="AXI-o2-ndF">
                                                     <font key="font" metaFont="systemLight" size="20"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     <allowedTypes>
                                                         <string>xcodeproj</string>
                                                         <string>xcworkspace</string>
@@ -620,26 +618,26 @@ DQ
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-uL-Hq6">
                                 <rect key="frame" x="0.0" y="0.0" width="780" height="369"/>
-                                <clipView key="contentView" copiesOnScroll="NO" id="EQ4-Ej-Nlf">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="EQ4-Ej-Nlf">
                                     <rect key="frame" x="1" y="1" width="778" height="367"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hek-dT-Drn">
                                             <rect key="frame" x="0.0" y="0.0" width="778" height="367"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="778" height="367"/>
                                             <size key="maxSize" width="780" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="1gl-4E-pHR">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="1gl-4E-pHR">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5af-Y7-Vzh">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="5af-Y7-Vzh">
                                     <rect key="frame" x="763" y="1" width="16" height="367"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -665,14 +663,14 @@ DQ
             <objects>
                 <viewController id="upV-9k-J48" customClass="CIViewController" sceneMemberID="viewController">
                     <view key="view" id="lKT-nx-CqW">
-                        <rect key="frame" x="0.0" y="0.0" width="650" height="238"/>
+                        <rect key="frame" x="0.0" y="0.0" width="650" height="239"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHc-P4-lBt">
-                                <rect key="frame" x="8" y="209" width="634" height="19"/>
+                                <rect key="frame" x="8" y="210" width="634" height="19"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="Select branch and build on every commit. You can also build manually at any time." id="xeo-aL-XpF">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -700,13 +698,13 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5c8-0r-BM2">
-                                <rect key="frame" x="8" y="180" width="124" height="19"/>
+                                <rect key="frame" x="8" y="181" width="124" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="fPV-fR-A9n"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Branch" id="COc-J0-l6v">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -731,7 +729,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Repository Path" id="vJM-Ie-BH6">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -739,7 +737,7 @@ Gw
                                 <rect key="frame" x="138" y="139" width="504" height="19"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" title="Branch" id="J7Y-NC-wNy">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -750,7 +748,7 @@ Gw
                                 <rect key="frame" x="8" y="110" width="124" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Branch" id="WIU-aY-mjR">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -758,7 +756,7 @@ Gw
                                 <rect key="frame" x="138" y="110" width="504" height="19"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Please select branch" id="W5l-eo-fBK">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -766,7 +764,7 @@ Gw
                                 <rect key="frame" x="8" y="81" width="124" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build On" id="HyS-Ed-idS">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -774,7 +772,7 @@ Gw
                                 <rect key="frame" x="138" y="81" width="504" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Every Commit" id="L7Y-ew-ayF">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -782,7 +780,7 @@ Gw
                                 <rect key="frame" x="8" y="41" width="634" height="19"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="All settings will be same for all future CI builds." id="W0T-Iq-pdk">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -849,7 +847,7 @@ Gw
         <scene sceneID="MJI-wC-ppq">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="MGm-bY-xKw" customClass="LocalServerWindowController" sceneMemberID="viewController">
-                    <window key="window" title="AppBox Server" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6nA-tV-Eml">
+                    <window key="window" title="AppBox Server" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6nA-tV-Eml">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="700" height="350"/>
@@ -877,26 +875,26 @@ Gw
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR8-UX-Ahn">
                                 <rect key="frame" x="9" y="10" width="431" height="223"/>
-                                <clipView key="contentView" id="TsC-Xp-jeT">
+                                <clipView key="contentView" drawsBackground="NO" id="TsC-Xp-jeT">
                                     <rect key="frame" x="1" y="1" width="429" height="221"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="sXn-1o-EZg">
                                             <rect key="frame" x="0.0" y="0.0" width="429" height="221"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="429" height="221"/>
                                             <size key="maxSize" width="463" height="10000000"/>
-                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="O6I-cl-Qh3">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="O6I-cl-Qh3">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="MYi-0c-wZ8">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="MYi-0c-wZ8">
                                     <rect key="frame" x="414" y="1" width="16" height="221"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -924,7 +922,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HkQ-Qo-lre">
-                                <rect key="frame" x="119" y="273" width="17" height="16"/>
+                                <rect key="frame" x="119" y="271" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="26d-3r-AdC"/>
                                     <constraint firstAttribute="width" constant="16" id="SgI-A6-ubz"/>
@@ -969,7 +967,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Po2-xN-nM2">
-                                <rect key="frame" x="18" y="77" width="134" height="19"/>
+                                <rect key="frame" x="18" y="78" width="134" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="U2x-Xq-zhb"/>
                                 </constraints>
@@ -986,7 +984,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Username/Email" drawsBackground="YES" id="6JI-so-6WJ">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -1005,7 +1003,7 @@ Gw
                                 </connections>
                             </comboBox>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beq-DX-d3f">
-                                <rect key="frame" x="18" y="43" width="134" height="19"/>
+                                <rect key="frame" x="18" y="44" width="134" height="19"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="Bcx-DN-DL7">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1016,7 +1014,7 @@ Gw
                                 <rect key="frame" x="165" y="41" width="350" height="24"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password" drawsBackground="YES" usesSingleLineMode="YES" id="0Lj-sX-iPw">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <allowedInputSourceLocales>
                                         <string>NSAllRomanInputSourcesLocaleIdentifier</string>
@@ -1132,7 +1130,7 @@ Gw
                                             <tableViewGridLines key="gridStyleMask" vertical="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="150" minWidth="150" maxWidth="1000" id="zfq-J8-MhU">
+                                                <tableColumn width="150" minWidth="150" maxWidth="1000" id="zfq-J8-MhU">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1165,7 +1163,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="150" minWidth="150" maxWidth="1000" id="QaN-D7-OfZ">
+                                                <tableColumn width="150" minWidth="150" maxWidth="1000" id="QaN-D7-OfZ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Bundle Identifier">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1198,7 +1196,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="100" minWidth="40" maxWidth="1000" id="pk0-Ms-Y30">
+                                                <tableColumn width="100" minWidth="40" maxWidth="1000" id="pk0-Ms-Y30">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Version">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1231,7 +1229,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="250" minWidth="250" maxWidth="1000" id="r0U-7c-hDC">
+                                                <tableColumn width="250" minWidth="250" maxWidth="1000" id="r0U-7c-hDC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Share URL">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1264,7 +1262,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="150" minWidth="150" maxWidth="1000" id="9Pk-B1-VWR">
+                                                <tableColumn width="150" minWidth="150" maxWidth="1000" id="9Pk-B1-VWR">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Upload Date">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1297,7 +1295,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="100" minWidth="100" maxWidth="1000" id="MhI-vG-1BY">
+                                                <tableColumn width="100" minWidth="100" maxWidth="1000" id="MhI-vG-1BY">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Build Type">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1330,7 +1328,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="150" minWidth="150" maxWidth="1000" id="r0L-YK-piT">
+                                                <tableColumn width="150" minWidth="150" maxWidth="1000" id="r0L-YK-piT">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Build Scheme">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1363,7 +1361,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="500" minWidth="100" maxWidth="1000" id="mkf-V2-ZtU">
+                                                <tableColumn width="500" minWidth="100" maxWidth="1000" id="mkf-V2-ZtU">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Team">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1404,11 +1402,11 @@ Gw
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="fqx-9A-aGC">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="fqx-9A-aGC">
                                     <rect key="frame" x="1" y="273" width="968" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="QiA-Gy-5ui">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QiA-Gy-5ui">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1867,7 +1865,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Custom Dropbox Folder Name:" id="80T-I4-goH">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1879,7 +1877,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Default will bundle identifier" drawsBackground="YES" id="shS-Qh-yS1">
                                     <font key="font" metaFont="systemLight" size="16"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -1887,7 +1885,7 @@ Gw
                                 </connections>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="LBi-UH-2sG">
-                                <rect key="frame" x="250" y="60" width="89" height="18"/>
+                                <rect key="frame" x="250" y="61" width="89" height="18"/>
                                 <buttonCell key="cell" type="check" title="checking..." bezelStyle="regularSquare" imagePosition="left" inset="2" id="flS-RW-vjS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1903,7 +1901,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Distribute IPA over localnetwork:" id="hKG-dI-IkJ">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" white="0.0" alpha="0.71660981509999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>

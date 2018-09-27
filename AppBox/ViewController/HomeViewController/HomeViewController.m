@@ -544,7 +544,8 @@
                         }
                     }
                 } else if ([outputString.lowercaseString containsString:@"endofteamidscript"] || outputString.lowercaseString.length == 0) {
-                    [self showStatus:@"Can't able to find Team ID! Please select/enter manually!" andShowProgressBar:NO withProgress:-1];
+                    buildOptionBoxHeightConstraint.constant = 119;
+                    [self showStatus:@"AppBox not able to find Team ID! Please select/enter manually!" andShowProgressBar:NO withProgress:-1];
                 } else {
                     [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                 }
