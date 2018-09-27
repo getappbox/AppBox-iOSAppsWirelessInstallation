@@ -29,7 +29,10 @@
     ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
     ZXBitMatrix *result = [writer encode:url format:kBarcodeFormatQRCode width:250 height:250 error:&error];
     if (result){
-        NSImage *image = [[NSImage alloc] initWithCGImage:[[ZXImage imageWithMatrix:result] cgimage] size:NSMakeSize(250, 250)];
+        ZXImage *zxImage = [ZXImage imageWithMatrix: result
+                                            onColor: NSColor.labelColor.CGColor
+                                           offColor: NSColor.windowBackgroundColor.CGColor];
+        NSImage *image = [[NSImage alloc] initWithCGImage:[zxImage cgimage] size:NSMakeSize(250, 250)];
         [imageViewQRCode setImage:image];
     }else{
         [Common showAlertWithTitle:@"Error" andMessage:error.localizedDescription];
