@@ -512,7 +512,7 @@ DQ
                                                 </constraints>
                                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="Select or Drag and Drop IPA / Project / Workspace file here " pathStyle="popUp" id="AXI-o2-ndF">
                                                     <font key="font" metaFont="systemLight" size="20"/>
-                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     <allowedTypes>
                                                         <string>xcodeproj</string>
                                                         <string>xcworkspace</string>
@@ -625,7 +625,7 @@ DQ
                                         <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hek-dT-Drn">
                                             <rect key="frame" x="0.0" y="0.0" width="778" height="367"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="778" height="367"/>
                                             <size key="maxSize" width="780" height="10000000"/>
@@ -1058,7 +1058,7 @@ Gw
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z0x-KT-hae">
                                 <rect key="frame" x="18" y="115" width="499" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Login with App Store Connect" id="Sny-jA-ChF">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Login with iTunes Connect" id="Sny-jA-ChF">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
