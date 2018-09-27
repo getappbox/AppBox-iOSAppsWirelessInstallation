@@ -28,6 +28,7 @@
 		DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5385692083622A004BFC84 /* NSURL+URL.m */; };
 		DB53856E20838913004BFC84 /* DragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB53856D20838913004BFC84 /* DragDropView.m */; };
 		DB5F8E991FB880FB009C3BD0 /* XcodeVersion.sh in Resources */ = {isa = PBXBuildFile; fileRef = DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */; };
+		DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */; };
 		DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB831BC91FF6B5780065B646 /* ABHudViewController.m */; };
 		DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */; };
 		DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8CE5F71FF77199003FEB65 /* DisabledView.m */; };
@@ -249,6 +250,7 @@
 		DB53856C20838913004BFC84 /* DragDropView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragDropView.h; sourceTree = "<group>"; };
 		DB53856D20838913004BFC84 /* DragDropView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragDropView.m; sourceTree = "<group>"; };
 		DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XcodeVersion.sh; sourceTree = "<group>"; };
+		DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxColors.xcassets; sourceTree = "<group>"; };
 		DB831BC81FF6B5780065B646 /* ABHudViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABHudViewController.h; sourceTree = "<group>"; };
 		DB831BC91FF6B5780065B646 /* ABHudViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABHudViewController.m; sourceTree = "<group>"; };
 		DB831BCA1FF6B5780065B646 /* ABHudViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ABHudViewController.xib; sourceTree = "<group>"; };
@@ -847,6 +849,7 @@
 			children = (
 				E16437DE1D743A4E00CE8B7E /* Assets.xcassets */,
 				DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */,
+				DB6F784E215D459A00C77966 /* AppBoxColors.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				DB439EAF200A750900589A96 /* CISettingViewController.xib in Resources */,
 				E1D12EEE1EC320760065E59A /* HelpPreferencesViewController.xib in Resources */,
 				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
+				DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
 				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
 			);

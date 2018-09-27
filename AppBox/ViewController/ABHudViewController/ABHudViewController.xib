@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ABHudViewController">
             <connections>
-                <outlet property="hudWithoutAds" destination="LX8-oY-J2Y" id="yxg-hC-pTL"/>
                 <outlet property="progressIndicator" destination="SoI-s8-cPQ" id="zNi-St-kty"/>
                 <outlet property="progressLabel" destination="xVp-yi-xIc" id="4Jv-gW-dN6"/>
                 <outlet property="resultImageView" destination="DX0-Y6-mk6" id="Kqi-JK-xAj"/>
@@ -21,73 +20,63 @@
             <rect key="frame" x="0.0" y="0.0" width="489" height="361"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <box alphaValue="0.69999999999999996" boxType="custom" cornerRadius="4" translatesAutoresizingMaskIntoConstraints="NO" id="ixu-3E-1KM">
+                <box boxType="custom" borderType="none" borderWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ixu-3E-1KM">
                     <rect key="frame" x="-10" y="-10" width="509" height="381"/>
                     <view key="contentView" id="5Zt-yE-0nf">
-                        <rect key="frame" x="1" y="1" width="507" height="379"/>
+                        <rect key="frame" x="0.0" y="0.0" width="509" height="381"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-ca-0Ng">
+                                <rect key="frame" x="193" y="160" width="123" height="61"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-Y6-mk6">
+                                        <rect key="frame" x="42" y="21" width="40" height="40"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ubS-FY-wmv"/>
+                                    </imageView>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="SoI-s8-cPQ">
+                                        <rect key="frame" x="42" y="21" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="9l0-Nq-dTE"/>
+                                            <constraint firstAttribute="width" constant="40" id="S3I-uu-8tD"/>
+                                        </constraints>
+                                    </progressIndicator>
+                                    <textField translatesAutoresizingMaskIntoConstraints="NO" id="xVp-yi-xIc">
+                                        <rect key="frame" x="-2" y="0.0" width="127" height="21"/>
+                                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="oHR-5n-Upo">
+                                            <font key="font" metaFont="systemBold" size="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="DX0-Y6-mk6" firstAttribute="top" secondItem="SoI-s8-cPQ" secondAttribute="top" id="7Db-V8-EHI"/>
+                                    <constraint firstAttribute="bottom" secondItem="xVp-yi-xIc" secondAttribute="bottom" id="FnN-Ei-gLy"/>
+                                    <constraint firstItem="DX0-Y6-mk6" firstAttribute="trailing" secondItem="SoI-s8-cPQ" secondAttribute="trailing" id="O50-GV-xH7"/>
+                                    <constraint firstItem="xVp-yi-xIc" firstAttribute="leading" secondItem="ZDX-ca-0Ng" secondAttribute="leading" id="U7Z-sp-rid"/>
+                                    <constraint firstItem="SoI-s8-cPQ" firstAttribute="top" secondItem="ZDX-ca-0Ng" secondAttribute="top" id="Uur-R2-ssX"/>
+                                    <constraint firstItem="DX0-Y6-mk6" firstAttribute="bottom" secondItem="SoI-s8-cPQ" secondAttribute="bottom" id="W7a-50-1ZI"/>
+                                    <constraint firstItem="DX0-Y6-mk6" firstAttribute="leading" secondItem="SoI-s8-cPQ" secondAttribute="leading" id="lq0-Yr-BaU"/>
+                                    <constraint firstItem="xVp-yi-xIc" firstAttribute="top" secondItem="SoI-s8-cPQ" secondAttribute="bottom" id="nJ3-v4-qKp"/>
+                                    <constraint firstItem="SoI-s8-cPQ" firstAttribute="centerX" secondItem="ZDX-ca-0Ng" secondAttribute="centerX" id="t4d-BB-d5T"/>
+                                    <constraint firstAttribute="trailing" secondItem="xVp-yi-xIc" secondAttribute="trailing" id="tjv-eP-d0Q"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ZDX-ca-0Ng" firstAttribute="centerX" secondItem="5Zt-yE-0nf" secondAttribute="centerX" id="9SJ-bJ-thu"/>
+                            <constraint firstItem="ZDX-ca-0Ng" firstAttribute="centerY" secondItem="5Zt-yE-0nf" secondAttribute="centerY" id="MD0-EE-Frw"/>
+                        </constraints>
                     </view>
-                    <color key="fillColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="borderColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" white="0.0" alpha="0.70196963028169013" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </box>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="LX8-oY-J2Y">
-                    <rect key="frame" x="10" y="10" width="469" height="341"/>
-                    <subviews>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-ca-0Ng">
-                            <rect key="frame" x="173" y="140" width="123" height="61"/>
-                            <subviews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-Y6-mk6">
-                                    <rect key="frame" x="41" y="21" width="40" height="40"/>
-                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ubS-FY-wmv"/>
-                                </imageView>
-                                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="SoI-s8-cPQ">
-                                    <rect key="frame" x="41" y="21" width="40" height="40"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="9l0-Nq-dTE"/>
-                                        <constraint firstAttribute="width" constant="40" id="S3I-uu-8tD"/>
-                                    </constraints>
-                                </progressIndicator>
-                                <textField translatesAutoresizingMaskIntoConstraints="NO" id="xVp-yi-xIc">
-                                    <rect key="frame" x="-2" y="0.0" width="127" height="21"/>
-                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="oHR-5n-Upo">
-                                        <font key="font" metaFont="systemBold" size="17"/>
-                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="top" secondItem="SoI-s8-cPQ" secondAttribute="top" id="7Db-V8-EHI"/>
-                                <constraint firstAttribute="bottom" secondItem="xVp-yi-xIc" secondAttribute="bottom" id="FnN-Ei-gLy"/>
-                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="trailing" secondItem="SoI-s8-cPQ" secondAttribute="trailing" id="O50-GV-xH7"/>
-                                <constraint firstItem="xVp-yi-xIc" firstAttribute="leading" secondItem="ZDX-ca-0Ng" secondAttribute="leading" id="U7Z-sp-rid"/>
-                                <constraint firstItem="SoI-s8-cPQ" firstAttribute="top" secondItem="ZDX-ca-0Ng" secondAttribute="top" id="Uur-R2-ssX"/>
-                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="bottom" secondItem="SoI-s8-cPQ" secondAttribute="bottom" id="W7a-50-1ZI"/>
-                                <constraint firstItem="DX0-Y6-mk6" firstAttribute="leading" secondItem="SoI-s8-cPQ" secondAttribute="leading" id="lq0-Yr-BaU"/>
-                                <constraint firstItem="xVp-yi-xIc" firstAttribute="top" secondItem="SoI-s8-cPQ" secondAttribute="bottom" id="nJ3-v4-qKp"/>
-                                <constraint firstItem="SoI-s8-cPQ" firstAttribute="centerX" secondItem="ZDX-ca-0Ng" secondAttribute="centerX" id="t4d-BB-d5T"/>
-                                <constraint firstAttribute="trailing" secondItem="xVp-yi-xIc" secondAttribute="trailing" id="tjv-eP-d0Q"/>
-                            </constraints>
-                        </customView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="centerX" secondItem="LX8-oY-J2Y" secondAttribute="centerX" id="HJ8-3d-Teb"/>
-                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LX8-oY-J2Y" secondAttribute="leading" id="HuM-zi-eE9"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZDX-ca-0Ng" secondAttribute="bottom" id="OD8-hC-s7b"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZDX-ca-0Ng" secondAttribute="trailing" id="ffv-Qb-p39"/>
-                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="centerY" secondItem="LX8-oY-J2Y" secondAttribute="centerY" id="wE0-LQ-Kf9"/>
-                        <constraint firstItem="ZDX-ca-0Ng" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LX8-oY-J2Y" secondAttribute="top" id="zX6-KK-fHc"/>
-                    </constraints>
-                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ixu-3E-1KM" secondAttribute="trailing" constant="-10" id="4Rh-kI-KM3"/>
-                <constraint firstAttribute="bottom" secondItem="LX8-oY-J2Y" secondAttribute="bottom" constant="10" id="H7X-9h-kNO"/>
-                <constraint firstItem="LX8-oY-J2Y" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="HEL-ZL-z3h"/>
                 <constraint firstItem="ixu-3E-1KM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="-10" id="Q14-xE-rcP"/>
                 <constraint firstAttribute="bottom" secondItem="ixu-3E-1KM" secondAttribute="bottom" constant="-10" id="VXI-wB-sBf"/>
-                <constraint firstItem="LX8-oY-J2Y" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="eGv-kB-2kS"/>
                 <constraint firstItem="ixu-3E-1KM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="-10" id="ojK-d6-Shr"/>
-                <constraint firstAttribute="trailing" secondItem="LX8-oY-J2Y" secondAttribute="trailing" constant="10" id="tAM-1x-LpP"/>
             </constraints>
             <point key="canvasLocation" x="138.5" y="264.5"/>
         </customView>
