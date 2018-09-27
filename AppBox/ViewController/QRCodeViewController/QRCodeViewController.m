@@ -31,7 +31,7 @@
     if (result){
         ZXImage *zxImage = [ZXImage imageWithMatrix: result
                                             onColor: NSColor.labelColor.CGColor
-                                           offColor: NSColor.windowBackgroundColor.CGColor];
+                                           offColor: NSColor.clearColor.CGColor];
         NSImage *image = [[NSImage alloc] initWithCGImage:[zxImage cgimage] size:NSMakeSize(250, 250)];
         [imageViewQRCode setImage:image];
     }else{
