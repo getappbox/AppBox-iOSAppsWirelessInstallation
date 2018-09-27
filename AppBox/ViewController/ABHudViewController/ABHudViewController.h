@@ -20,7 +20,7 @@ typedef enum : NSUInteger {
     __weak IBOutlet NSTextField *progressLabel;
     __weak IBOutlet NSImageView *resultImageView;
 }
-@property (weak) IBOutlet NSView *hudWithoutAds;
+
 @property(nonatomic, weak) NSView *hudSuperView;
 @property(nonatomic, strong) NSString *status;
 @property(nonatomic, strong) NSNumber *progress;
