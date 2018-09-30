@@ -46,12 +46,16 @@
     [Common showAlertWithTitle:@"Error" andMessage:@"There is no Internet connection."];
 }
 
-+ (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message{
++ (void)showUploadNotificationWithName:(NSString *)name andURL:(NSURL *)url {
+    NSString *title = [NSString stringWithFormat:@"%@ Uploaded.", name];
+    NSString *message = [NSString stringWithFormat:@"Share URL - %@", url.absoluteString];
+    
     NSUserNotification *notification = [[NSUserNotification alloc] init];
-    [notification setTitle:title == nil ? @"Error" : title];
-    [notification setInformativeText:message == nil ? @"" : message];
-    [notification setDeliveryDate:[NSDate dateWithTimeInterval:1 sinceDate:[NSDate date]]];
+    [notification setTitle: title];
+    [notification setInformativeText: message];
     [notification setSoundName:NSUserNotificationDefaultSoundName];
+    [notification setDeliveryDate:[NSDate dateWithTimeInterval:1 sinceDate:[NSDate date]]];
+    
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     [center scheduleNotification:notification];
 }
