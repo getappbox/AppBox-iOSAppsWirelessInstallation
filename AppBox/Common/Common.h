@@ -16,8 +16,8 @@
 + (NSError *)errorWithDesc:(NSString *)error andCode:(NSInteger)code;
 
 + (void)showNoInternetConnectionAvailabeAlert;
++ (void)showUploadNotificationWithName:(NSString *)name andURL:(NSURL *)url;
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
-+ (void)showLocalNotificationWithTitle:(NSString *)title andMessage:(NSString *)message;
 
 + (DBManager *)currentDBManager;
 @end
