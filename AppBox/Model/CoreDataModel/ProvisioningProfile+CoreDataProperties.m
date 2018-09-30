@@ -2,7 +2,7 @@
 //  ProvisioningProfile+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 29/10/17.
+//  Created by Vineet Choudhary on 30/09/18.
 //
 //
 
@@ -11,16 +11,16 @@
 @implementation ProvisioningProfile (CoreDataProperties)
 
 + (NSFetchRequest<ProvisioningProfile *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"ProvisioningProfile"];
+	return [NSFetchRequest fetchRequestWithEntityName:@"ProvisioningProfile"];
 }
 
-@dynamic uuid;
-@dynamic teamId;
-@dynamic teamName;
-@dynamic expirationDate;
 @dynamic buildType;
 @dynamic createDate;
-@dynamic uploadRecord;
+@dynamic expirationDate;
+@dynamic teamId;
+@dynamic teamName;
+@dynamic uuid;
 @dynamic provisionedDevices;
+@dynamic uploadRecord;
 
 @end

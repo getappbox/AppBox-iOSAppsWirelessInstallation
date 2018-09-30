@@ -2,7 +2,7 @@
 //  ProvisionedDevice+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 29/10/17.
+//  Created by Vineet Choudhary on 30/09/18.
 //
 //
 
@@ -11,7 +11,7 @@
 @implementation ProvisionedDevice (CoreDataProperties)
 
 + (NSFetchRequest<ProvisionedDevice *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"ProvisionedDevice"];
+	return [NSFetchRequest fetchRequestWithEntityName:@"ProvisionedDevice"];
 }
 
 @dynamic deviceId;

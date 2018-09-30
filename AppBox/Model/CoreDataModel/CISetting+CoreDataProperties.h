@@ -2,7 +2,7 @@
 //  CISetting+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 17/10/17.
+//  Created by Vineet Choudhary on 30/09/18.
 //
 //
 

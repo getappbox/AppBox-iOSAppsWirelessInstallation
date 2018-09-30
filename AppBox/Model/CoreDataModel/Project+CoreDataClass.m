@@ -7,10 +7,6 @@
 //
 
 #import "Project+CoreDataClass.h"
-#import "CISetting+CoreDataClass.h"
-#import "UploadRecord+CoreDataClass.h"
-#import "ProvisionedDevice+CoreDataClass.h"
-#import "ProvisioningProfile+CoreDataClass.h"
 
 @implementation Project
 
