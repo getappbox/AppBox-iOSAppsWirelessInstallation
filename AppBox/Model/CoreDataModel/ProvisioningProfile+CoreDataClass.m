@@ -7,9 +7,6 @@
 //
 
 #import "ProvisioningProfile+CoreDataClass.h"
-#import "ProvisionedDevice+CoreDataClass.h"
-
-#import "UploadRecord+CoreDataClass.h"
 
 @implementation ProvisioningProfile
 

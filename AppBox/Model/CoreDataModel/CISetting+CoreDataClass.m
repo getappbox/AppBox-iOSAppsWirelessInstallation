@@ -7,7 +7,6 @@
 //
 
 #import "CISetting+CoreDataClass.h"
-#import "Project+CoreDataClass.h"
 
 @implementation CISetting
 

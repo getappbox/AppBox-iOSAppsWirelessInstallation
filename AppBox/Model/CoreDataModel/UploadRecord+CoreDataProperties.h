@@ -2,12 +2,13 @@
 //  UploadRecord+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 29/10/17.
+//  Created by Vineet Choudhary on 30/09/18.
 //
 //
 
 #import "UploadRecord+CoreDataClass.h"
-#import "ProvisioningProfile+CoreDataClass.h"
+
+@class ProvisioningProfile;
 
 NS_ASSUME_NONNULL_BEGIN
 
