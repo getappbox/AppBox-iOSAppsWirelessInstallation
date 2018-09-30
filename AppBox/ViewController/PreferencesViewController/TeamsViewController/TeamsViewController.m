@@ -21,7 +21,8 @@
 }
 
 - (IBAction)AddTeamAction:(NSButton *)sender {
-
+    AddTeamViewController *addTeamViewController = [[AddTeamViewController alloc] initWithNibName:NSStringFromClass([AddTeamViewController class]) bundle:nil];
+    [self presentViewControllerAsSheet:addTeamViewController];
 }
 
 - (IBAction)RemoveTeamAction:(NSButton *)sender {
