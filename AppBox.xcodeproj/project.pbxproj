@@ -14,6 +14,8 @@
 		DB1A065C2160D691008D33FD /* Teams+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A065B2160D691008D33FD /* Teams+CoreDataProperties.m */; };
 		DB1A065F2160DC22008D33FD /* Teams+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A065E2160DC22008D33FD /* Teams+CoreDataClass.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
+		DB1A06672160E0C4008D33FD /* AddTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06652160E0C4008D33FD /* AddTeamViewController.m */; };
+		DB1A06682160E0C4008D33FD /* AddTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1A06662160E0C4008D33FD /* AddTeamViewController.xib */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
 		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
 		DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */; };
@@ -232,6 +234,9 @@
 		DB1A065D2160DC21008D33FD /* Teams+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Teams+CoreDataClass.h"; sourceTree = "<group>"; };
 		DB1A065E2160DC22008D33FD /* Teams+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Teams+CoreDataClass.m"; sourceTree = "<group>"; };
 		DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration2to3.xcmappingmodel; sourceTree = "<group>"; };
+		DB1A06642160E0C4008D33FD /* AddTeamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddTeamViewController.h; sourceTree = "<group>"; };
+		DB1A06652160E0C4008D33FD /* AddTeamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddTeamViewController.m; sourceTree = "<group>"; };
+		DB1A06662160E0C4008D33FD /* AddTeamViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTeamViewController.xib; sourceTree = "<group>"; };
 		DB1C843F2079F54E007AC74C /* NSString+String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+String.h"; sourceTree = "<group>"; };
 		DB1C84402079F54E007AC74C /* NSString+String.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+String.m"; sourceTree = "<group>"; };
 		DB1FC58E1FDEED5400179799 /* HomeWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeWindowController.h; sourceTree = "<group>"; };
@@ -468,6 +473,7 @@
 		DB1A064F2160CCE5008D33FD /* TeamsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB1A06632160E082008D33FD /* AddTeamViewController */,
 				DB1A06552160CEEC008D33FD /* TeamCellView */,
 				DB1A06502160CE27008D33FD /* TeamsViewController.h */,
 				DB1A06512160CE27008D33FD /* TeamsViewController.m */,
@@ -491,6 +497,16 @@
 				DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */,
 			);
 			path = CoreDataMigration;
+			sourceTree = "<group>";
+		};
+		DB1A06632160E082008D33FD /* AddTeamViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB1A06642160E0C4008D33FD /* AddTeamViewController.h */,
+				DB1A06652160E0C4008D33FD /* AddTeamViewController.m */,
+				DB1A06662160E0C4008D33FD /* AddTeamViewController.xib */,
+			);
+			path = AddTeamViewController;
 			sourceTree = "<group>";
 		};
 		DB1FC58D1FDEEC6A00179799 /* HomeWindowController */ = {
@@ -1397,6 +1413,7 @@
 				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
 				DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
+				DB1A06682160E0C4008D33FD /* AddTeamViewController.xib in Resources */,
 				DB1A06542160CE27008D33FD /* TeamsViewController.xib in Resources */,
 				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
 			);
@@ -1512,6 +1529,7 @@
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
+				DB1A06672160E0C4008D33FD /* AddTeamViewController.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */,

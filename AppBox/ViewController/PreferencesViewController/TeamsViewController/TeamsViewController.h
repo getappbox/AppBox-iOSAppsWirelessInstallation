@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AddTeamViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
