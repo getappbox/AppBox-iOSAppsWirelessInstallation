@@ -11,32 +11,40 @@
 @implementation ABHudViewController (ProgressHud)
 
 +(void)showStatus:(NSString *)status onView:(NSView *)view {
-    ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
-    hud.status = status;
-    hud.hudType = HudTypeProgress;
-    hud.progress = [NSNumber numberWithInteger:-1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
+        hud.status = status;
+        hud.hudType = HudTypeProgress;
+        hud.progress = [NSNumber numberWithInteger:-1];
+    });
 }
 
 +(void)showStatus:(NSString *)status witProgress:(double)progress onView:(NSView *)view {
-    ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
-    hud.progress = [NSNumber numberWithDouble:progress];
-    hud.hudType = HudTypeProgress;
-    hud.status = status;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
+        hud.progress = [NSNumber numberWithDouble:progress];
+        hud.hudType = HudTypeProgress;
+        hud.status = status;
+    });
 }
 
 +(void)showStatus:(NSString *)status forSuccess:(BOOL)success onView:(NSView *)view {
-    ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
-    hud.status = status;
-    hud.result = success;
-    hud.hudType = HudTypeResult;
-    [ABHudViewController hideAllHudFromView:view after:2];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
+        hud.status = status;
+        hud.result = success;
+        hud.hudType = HudTypeResult;
+        [ABHudViewController hideAllHudFromView:view after:2];
+    });
 }
 
 +(void)showOnlyStatus:(NSString *)status onView:(NSView *)view{
-    ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
-    hud.status = status;
-    hud.hudType = HudTypeStatus;
-    [ABHudViewController hideAllHudFromView:view after:3];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ABHudViewController *hud = [ABHudViewController hudForView:view hide:NO];
+        hud.status = status;
+        hud.hudType = HudTypeStatus;
+        [ABHudViewController hideAllHudFromView:view after:3];
+    });
 }
 
 +(void)hideAllHudFromView:(NSView *)view after:(NSTimeInterval)sec{

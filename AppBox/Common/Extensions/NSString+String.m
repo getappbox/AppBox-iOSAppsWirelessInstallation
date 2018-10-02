@@ -34,4 +34,9 @@
     return nil;
 }
 
+-(bool)isEmpty {
+    NSString *string = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    return string.length == 0;
+}
+
 @end

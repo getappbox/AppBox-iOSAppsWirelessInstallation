@@ -14,4 +14,6 @@
 -(NSURL *)projectURL;
 -(NSURL *)validURL;
 
+-(bool)isEmpty;
+
 @end
