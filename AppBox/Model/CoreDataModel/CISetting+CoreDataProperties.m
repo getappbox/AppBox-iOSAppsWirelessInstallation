@@ -2,7 +2,7 @@
 //  CISetting+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 17/10/17.
+//  Created by Vineet Choudhary on 30/09/18.
 //
 //
 
@@ -11,7 +11,7 @@
 @implementation CISetting (CoreDataProperties)
 
 + (NSFetchRequest<CISetting *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"CISetting"];
+	return [NSFetchRequest fetchRequestWithEntityName:@"CISetting"];
 }
 
 @dynamic branchName;

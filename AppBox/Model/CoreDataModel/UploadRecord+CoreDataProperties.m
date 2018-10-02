@@ -2,7 +2,7 @@
 //  UploadRecord+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 29/10/17.
+//  Created by Vineet Choudhary on 30/09/18.
 //
 //
 
@@ -11,7 +11,7 @@
 @implementation UploadRecord (CoreDataProperties)
 
 + (NSFetchRequest<UploadRecord *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"UploadRecord"];
+	return [NSFetchRequest fetchRequestWithEntityName:@"UploadRecord"];
 }
 
 @dynamic build;

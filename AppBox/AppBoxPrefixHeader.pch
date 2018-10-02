@@ -50,6 +50,11 @@
 #import "NSDate+Date.h"
 #import "NSString+String.h"
 
-
+#import "Teams+CoreDataProperties.h"
+#import "Project+CoreDataProperties.h"
+#import "CISetting+CoreDataProperties.h"
+#import "UploadRecord+CoreDataProperties.h"
+#import "ProvisionedDevice+CoreDataProperties.h"
+#import "ProvisioningProfile+CoreDataProperties.h"
 
 #endif /* AppBoxPrefixHeader_pch */
