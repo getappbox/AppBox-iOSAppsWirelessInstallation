@@ -63,10 +63,6 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "build=/Volumes/LongTime/ProjectWorking/V2.2.2"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
             argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/PayloadIpad10.0.ipa"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -79,7 +75,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "build=/Users/emp195/Documents/ProjectWorking/jenkinstest"
+            argument = "build=/Users/vineetchoudhary/Desktop/xcode10test"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
