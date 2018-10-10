@@ -83,7 +83,7 @@ NSString *const RepoITCPassword = @"itcpassword";
     }
     
     //Email and Email Subject Prefix
-    NSMutableArray *emails = [[NSMutableArray alloc] init];
+    NSMutableSet *emails = [[NSMutableSet alloc] init];
 
     if ([UserData defaultCIEmail].length > 0) {
         [emails addObjectsFromArray:[[UserData defaultCIEmail] componentsSeparatedByString:@","]];
@@ -92,9 +92,10 @@ NSString *const RepoITCPassword = @"itcpassword";
         [emails addObjectsFromArray:[[projectRawSetting valueForKey:RepoEmailKey] componentsSeparatedByString:@","]];
     }
     
+    [emails removeObject:@""];
     if (emails.count > 0) {
         project.subjectPrefix = [UserData ciSubjectPrefix];
-        project.emails = [emails componentsJoinedByString:@","];
+        project.emails = [emails.allObjects componentsJoinedByString:@","];
     }
     
     //Email Personal Message

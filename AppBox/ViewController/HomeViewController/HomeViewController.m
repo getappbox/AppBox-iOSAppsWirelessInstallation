@@ -994,7 +994,12 @@
                     }
                 } else {
                     [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
-                    [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                    if (ciRepoProject == nil){
+                        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                    }else{
+                        [self viewStateForProgressFinish:YES];
+                        exit(abExitCodeForMailFailed);
+                    }
                 }
             });
         }];
