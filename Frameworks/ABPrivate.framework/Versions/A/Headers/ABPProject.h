@@ -33,6 +33,7 @@
 
 //Emails
 @property(nonatomic, retain) NSString *emails;
+@property(nonatomic, retain) NSString *subjectPrefix;
 @property(nonatomic, retain) NSString *personalMessage;
 
 //Client
