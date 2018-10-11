@@ -2,7 +2,7 @@
 //  Teams+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 30/09/18.
+//  Created by Vineet Choudhary on 11/10/18.
 //
 //
 
@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Teams *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *about;
 @property (nullable, nonatomic, copy) NSString *emails;
-@property (nullable, nonatomic, copy) NSString *slackWebHookURL;
-@property (nullable, nonatomic, copy) NSString *msTeamsWebHookURL;
 @property (nullable, nonatomic, copy) NSString *hangoutWebHookURL;
+@property (nullable, nonatomic, copy) NSString *msTeamsWebHookURL;
+@property (nullable, nonatomic, copy) NSString *name;
+@property (nullable, nonatomic, copy) NSString *slackWebHookURL;
 @property (nullable, nonatomic, retain) NSSet<Project *> *projects;
 
 @end

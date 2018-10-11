@@ -100,10 +100,10 @@
     }];
     
     [uploadManager setErrorBlock:^(NSError *error, BOOL terminate){
+        if (terminate && ciRepoProject) {
+            exit(abExitCodeForUploadFailed);
+        }
         if (terminate) {
-            if (ciRepoProject) {
-                exit(abExitCodeForUploadFailed);
-            }
             [weakSelf viewStateForProgressFinish:YES];
         }
     }];
@@ -130,6 +130,9 @@
         {
             [self initProjectBuildProcessForURL: ciRepoProject.projectFullPath];
         }
+        
+        //Copy other setting from ciRepoProject to project
+        [project setSubjectPrefix:ciRepoProject.subjectPrefix];
     }
 }
 
@@ -991,7 +994,12 @@
                     }
                 } else {
                     [ABHudViewController showStatus:@"Mail Failed" forSuccess:NO onView:self.view];
-                    [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                    if (ciRepoProject == nil){
+                        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+                    }else{
+                        [self viewStateForProgressFinish:YES];
+                        exit(abExitCodeForMailFailed);
+                    }
                 }
             });
         }];

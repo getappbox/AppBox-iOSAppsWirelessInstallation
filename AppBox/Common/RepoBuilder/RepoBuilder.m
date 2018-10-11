@@ -82,12 +82,23 @@ NSString *const RepoITCPassword = @"itcpassword";
         project.keepSameLink = [projectRawSetting valueForKey:RepoKeepSameLinkKey];
     }
     
-    //Email
+    //Email and Email Subject Prefix
+    NSMutableSet *emails = [[NSMutableSet alloc] init];
+
+    if ([UserData defaultCIEmail].length > 0) {
+        [emails addObjectsFromArray:[[UserData defaultCIEmail] componentsSeparatedByString:@","]];
+    }
     if ([projectRawSetting.allKeys containsObject:RepoEmailKey]) {
-        project.emails = [projectRawSetting valueForKey:RepoEmailKey];
+        [emails addObjectsFromArray:[[projectRawSetting valueForKey:RepoEmailKey] componentsSeparatedByString:@","]];
     }
     
-    //Personal Message
+    [emails removeObject:@""];
+    if (emails.count > 0) {
+        project.subjectPrefix = [UserData ciSubjectPrefix];
+        project.emails = [emails.allObjects componentsJoinedByString:@","];
+    }
+    
+    //Email Personal Message
     if ([projectRawSetting.allKeys containsObject:RepoPersonalMessageKey]) {
         project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
     }

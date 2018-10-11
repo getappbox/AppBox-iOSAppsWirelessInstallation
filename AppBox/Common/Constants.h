@@ -119,6 +119,7 @@ typedef enum : NSUInteger {
 #define abExitCodeForPrivateKeyNotFound 114
 #define abExitCodeForAppStoreUploadFailed 113
 #define abExitCodeForInvalidITCAccount 112
+#define abExitCodeForMailFailed 111
 #define abExitCodeForSuccess 0
 
 #define abArgsWorkspace @"build="

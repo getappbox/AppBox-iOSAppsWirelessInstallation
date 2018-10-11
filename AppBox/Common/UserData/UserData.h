@@ -63,5 +63,9 @@
 +(void)setEnableDebugLog:(BOOL)debugLog;
 +(BOOL)updateAlertEnable;
 +(void)setUpdateAlertEnable:(BOOL)updateAlert;
++(NSString *)defaultCIEmail;
++(void)setDefaultCIEmail:(NSString *)email;
++(NSString *)ciSubjectPrefix;
++(void)setCISubjectPrefix:(NSString *)prefix;
 
 @end

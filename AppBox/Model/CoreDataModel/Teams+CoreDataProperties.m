@@ -2,7 +2,7 @@
 //  Teams+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 30/09/18.
+//  Created by Vineet Choudhary on 11/10/18.
 //
 //
 
@@ -14,12 +14,12 @@
 	return [NSFetchRequest fetchRequestWithEntityName:@"Teams"];
 }
 
-@dynamic name;
 @dynamic about;
 @dynamic emails;
-@dynamic slackWebHookURL;
-@dynamic msTeamsWebHookURL;
 @dynamic hangoutWebHookURL;
+@dynamic msTeamsWebHookURL;
+@dynamic name;
+@dynamic slackWebHookURL;
 @dynamic projects;
 
 @end
