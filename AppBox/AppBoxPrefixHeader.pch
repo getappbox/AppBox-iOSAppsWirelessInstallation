@@ -44,6 +44,7 @@
 #import "DBErrorHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
+#import "KeychainHandler+Helper.h"
 #import "NSApplication+MenuHandler.h"
 
 #import "NSURL+URL.h"

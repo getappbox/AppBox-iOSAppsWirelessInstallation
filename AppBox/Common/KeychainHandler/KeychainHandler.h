@@ -15,6 +15,7 @@
 + (void)installPrivateKeyFromPath:(NSString *)path withPassword:(NSString *)password;
 
 +(void)lockAllKeychain;
-+(NSString *)unlockKeyChain:(NSString *)path withPassword:(NSString *)password;
++(NSString *)errorMessageForStatus:(OSStatus)status;
++(OSStatus)unlockKeyChain:(NSString *)path withPassword:(NSString *)password;
 
 @end

@@ -300,4 +300,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define KeychainPath @"KeychainPath"
++(NSString *)keychainPath {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:KeychainPath];
+}
+
++(void)setKeychainPath:(NSString *)path {
+    [[NSUserDefaults standardUserDefaults] setValue:path forKey:KeychainPath];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end
