@@ -67,5 +67,7 @@
 +(void)setDefaultCIEmail:(NSString *)email;
 +(NSString *)ciSubjectPrefix;
 +(void)setCISubjectPrefix:(NSString *)prefix;
++(NSString *)keychainPath;
++(void)setKeychainPath:(NSString *)path;
 
 @end

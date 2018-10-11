@@ -16,11 +16,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //set general settings
+    [limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
+    [updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
+    
     //set user emails and password
     [defaultEmalTextField setStringValue:[UserData defaultCIEmail] ? [UserData defaultCIEmail] : @""];
     [subjectPrefixTextField setStringValue:[UserData ciSubjectPrefix] ? [UserData ciSubjectPrefix] : @""];
-    [limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
-    [updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
+
+    //set user keychain settings
+    NSString *keychainPassword = [SAMKeychain passwordForService:abmacOSKeyChainService account:abmacOSKeyChainAccount];
+    [keychainPasswordTextField setStringValue:keychainPassword ? keychainPassword : @""];
+    [keychainPathTextField setStringValue:[UserData keychainPath] ? [UserData keychainPath] : @""];
 }
 
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender {
@@ -46,8 +54,31 @@
 }
 
 - (IBAction)keychainUnlockButtonAction:(NSButton *)sender {
-    NSString *error = [KeychainHandler unlockKeyChain:keychainPathTextField.stringValue
+    //Unlock Keychain
+    OSStatus status = [KeychainHandler unlockKeyChain:keychainPathTextField.stringValue
                                          withPassword:keychainPasswordTextField.stringValue];
-    [Common showAlertWithTitle:@"" andMessage:error];
+    
+    //if status not equal to zero means error
+    if (status != 0) {
+        [Common showAlertWithTitle:@"" andMessage:[KeychainHandler errorMessageForStatus:status]];
+        return;
+    }
+    
+    //save keychain path
+    if (!(keychainPathTextField.stringValue == nil || keychainPathTextField.stringValue.length == 0)) {
+        [UserData setKeychainPath:keychainPathTextField.stringValue];
+    }
+    
+    //save password in keychain
+    NSError *error;
+    [SAMKeychain setPassword:keychainPasswordTextField.stringValue
+                  forService:abmacOSKeyChainService
+                     account:abmacOSKeyChainAccount
+                       error:&error];
+    if (error) {
+        [Common showAlertWithTitle:nil andMessage:error.localizedDescription];
+    } else {
+        [Common showAlertWithTitle:@"Success" andMessage:@""];
+    }
 }
 @end
