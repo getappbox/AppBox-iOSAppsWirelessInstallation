@@ -141,6 +141,7 @@
     [project setAppShortShareableURL:self.appShortShareableURL];
     
     [project setEmails:self.emails];
+    [project setSubjectPrefix:self.subjectPrefix];
     [project setPersonalMessage:self.personalMessage];
     [project setDbManager:[Common currentDBManager]];
     

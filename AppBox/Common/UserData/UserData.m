@@ -279,4 +279,25 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define DefaultCIEmail @"DefaultCIEmail"
++(NSString *)defaultCIEmail {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCIEmail];
+}
+
++(void)setDefaultCIEmail:(NSString *)email {
+    [[NSUserDefaults standardUserDefaults] setValue:email forKey:DefaultCIEmail];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+#define CISubjectPrefix @"CISubjectPrefix"
++(NSString *)ciSubjectPrefix {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:CISubjectPrefix];
+}
+
++(void)setCISubjectPrefix:(NSString *)prefix {
+    [[NSUserDefaults standardUserDefaults] setValue:prefix forKey:CISubjectPrefix];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

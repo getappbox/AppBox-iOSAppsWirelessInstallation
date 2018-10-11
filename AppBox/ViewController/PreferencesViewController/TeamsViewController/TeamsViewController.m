@@ -22,11 +22,18 @@
 
 - (IBAction)AddTeamAction:(NSButton *)sender {
     AddTeamViewController *addTeamViewController = [[AddTeamViewController alloc] initWithNibName:NSStringFromClass([AddTeamViewController class]) bundle:nil];
+    [addTeamViewController setDelegate:self];
     [self presentViewControllerAsSheet:addTeamViewController];
 }
 
 - (IBAction)RemoveTeamAction:(NSButton *)sender {
 
 }
+
+#pragma mark - AddTeamViewController Delegate
+-(void)createTeamWithName:(NSString *)name andDescription:(NSString *)description {
+    
+}
+
 
 @end

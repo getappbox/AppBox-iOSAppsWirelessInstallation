@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 30/09/18.
+//  Created by Vineet Choudhary on 11/10/18.
 //
 //
 
@@ -17,7 +17,7 @@
 @dynamic bundleIdentifier;
 @dynamic name;
 @dynamic ciSettings;
-@dynamic uploadRecords;
 @dynamic teams;
+@dynamic uploadRecords;
 
 @end

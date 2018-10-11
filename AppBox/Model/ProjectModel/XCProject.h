@@ -79,6 +79,8 @@
 @property(nonatomic, retain) NSNumber *shutdownMac;
 @property(nonatomic, retain) NSNumber *keepSameLink;
 @property(nonatomic, retain) NSString *personalMessage;
+@property(nonatomic, retain) NSString *ciEmails;
+@property(nonatomic, retain) NSString *subjectPrefix;
 
 //Distribute over local network
 @property(nonatomic, assign) BOOL distributeOverLocalNetwork;
