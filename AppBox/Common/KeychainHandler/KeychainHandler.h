@@ -14,4 +14,7 @@
 + (void)removeAllStoredCredentials;
 + (void)installPrivateKeyFromPath:(NSString *)path withPassword:(NSString *)password;
 
++(void)lockAllKeychain;
++(NSString *)unlockKeyChain:(NSString *)path withPassword:(NSString *)password;
+
 @end

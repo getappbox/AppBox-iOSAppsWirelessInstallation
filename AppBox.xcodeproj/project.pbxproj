@@ -11,19 +11,27 @@
 		DB1A06532160CE27008D33FD /* TeamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06512160CE27008D33FD /* TeamsViewController.m */; };
 		DB1A06542160CE27008D33FD /* TeamsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1A06522160CE27008D33FD /* TeamsViewController.xib */; };
 		DB1A06582160CF04008D33FD /* TeamTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06572160CF04008D33FD /* TeamTableCellView.m */; };
-		DB1A065F2160DC22008D33FD /* Teams+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A065E2160DC22008D33FD /* Teams+CoreDataClass.m */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
 		DB1A06672160E0C4008D33FD /* AddTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06652160E0C4008D33FD /* AddTeamViewController.m */; };
 		DB1A06682160E0C4008D33FD /* AddTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1A06662160E0C4008D33FD /* AddTeamViewController.xib */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
 		DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC58F1FDEED5400179799 /* HomeWindowController.m */; };
 		DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */; };
-		DB2629721F95E38C00C4C647 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */; };
-		DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */; };
-		DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */; };
 		DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */; };
 		DB26297D1F95F35C00C4C647 /* AppBoxIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */; };
 		DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2629841F961F4700C4C647 /* DBErrorHandler.m */; };
+		DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B4C216FB1AA0080CAC0 /* ProvisioningProfile+CoreDataProperties.m */; };
+		DB358B65216FB1AC0080CAC0 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B4D216FB1AA0080CAC0 /* CISetting+CoreDataProperties.m */; };
+		DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B4E216FB1AA0080CAC0 /* UploadRecord+CoreDataClass.m */; };
+		DB358B67216FB1AC0080CAC0 /* CISetting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B4F216FB1AB0080CAC0 /* CISetting+CoreDataClass.m */; };
+		DB358B68216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B50216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.m */; };
+		DB358B69216FB1AC0080CAC0 /* Teams+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B51216FB1AB0080CAC0 /* Teams+CoreDataClass.m */; };
+		DB358B6A216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B53216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.m */; };
+		DB358B6B216FB1AC0080CAC0 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B57216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.m */; };
+		DB358B6C216FB1AC0080CAC0 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B58216FB1AB0080CAC0 /* Project+CoreDataProperties.m */; };
+		DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */; };
+		DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */; };
+		DB358B6F216FB1AC0080CAC0 /* Teams+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B5D216FB1AB0080CAC0 /* Teams+CoreDataProperties.m */; };
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB439EAE200A750900589A96 /* CISettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB439EAC200A750900589A96 /* CISettingViewController.m */; };
 		DB439EAF200A750900589A96 /* CISettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB439EAD200A750900589A96 /* CISettingViewController.xib */; };
@@ -46,19 +54,11 @@
 		DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF290D51FA64A590046D5CE /* ProvisioningDetailsViewController.m */; };
 		DBF290D81FA64A590046D5CE /* ProvisioningDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF290D61FA64A590046D5CE /* ProvisioningDetailsViewController.xib */; };
 		DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFC680C1F6AE957007A4ED2 /* EventTracker.m */; };
-		DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA571FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m */; };
-		DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */; };
 		E101D2BE200DE7E00062078B /* xcpretty in CopyFiles */ = {isa = PBXBuildFile; fileRef = E101D22F200DE0170062078B /* xcpretty */; };
 		E10B821E1DF043EA00BBE0CD /* GetSchemeScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E172E13B1DEEB3B900405EF2 /* GetSchemeScript.sh */; };
 		E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E10B82211DF0498600BBE0CD /* TeamIDScript.sh */; };
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */ = {isa = PBXBuildFile; fileRef = E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */; };
-		E125ACF3216F141A00EB1F34 /* UploadRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E125ACE7216F141700EB1F34 /* UploadRecord+CoreDataProperties.m */; };
-		E125ACF4216F141A00EB1F34 /* Project+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E125ACEC216F141800EB1F34 /* Project+CoreDataProperties.m */; };
-		E125ACF5216F141A00EB1F34 /* ProvisioningProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E125ACED216F141800EB1F34 /* ProvisioningProfile+CoreDataProperties.m */; };
-		E125ACF6216F141A00EB1F34 /* ProvisionedDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E125ACEE216F141800EB1F34 /* ProvisionedDevice+CoreDataProperties.m */; };
-		E125ACF7216F141A00EB1F34 /* CISetting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E125ACF0216F141900EB1F34 /* CISetting+CoreDataProperties.m */; };
-		E125ACF8216F141A00EB1F34 /* Teams+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E125ACF1216F141900EB1F34 /* Teams+CoreDataProperties.m */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* RepoBuilder.m */; };
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
@@ -229,8 +229,6 @@
 		DB1A06562160CF04008D33FD /* TeamTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamTableCellView.h; sourceTree = "<group>"; };
 		DB1A06572160CF04008D33FD /* TeamTableCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamTableCellView.m; sourceTree = "<group>"; };
 		DB1A06592160D47C008D33FD /* AppBox3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox3.xcdatamodel; sourceTree = "<group>"; };
-		DB1A065D2160DC21008D33FD /* Teams+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Teams+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB1A065E2160DC22008D33FD /* Teams+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Teams+CoreDataClass.m"; sourceTree = "<group>"; };
 		DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration2to3.xcmappingmodel; sourceTree = "<group>"; };
 		DB1A06642160E0C4008D33FD /* AddTeamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddTeamViewController.h; sourceTree = "<group>"; };
 		DB1A06652160E0C4008D33FD /* AddTeamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddTeamViewController.m; sourceTree = "<group>"; };
@@ -241,17 +239,35 @@
 		DB1FC58F1FDEED5400179799 /* HomeWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeWindowController.m; sourceTree = "<group>"; };
 		DB1FC5921FDEF29A00179799 /* LocalServerWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalServerWindowController.h; sourceTree = "<group>"; };
 		DB1FC5931FDEF29A00179799 /* LocalServerWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalServerWindowController.m; sourceTree = "<group>"; };
-		DB2629661F95E38C00C4C647 /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
-		DB26296A1F95E38C00C4C647 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
-		DB26296E1F95E38C00C4C647 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
-		DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
 		DB2629791F95ED9A00C4C647 /* NSDate+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Date.h"; sourceTree = "<group>"; };
 		DB26297A1F95ED9A00C4C647 /* NSDate+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Date.m"; sourceTree = "<group>"; };
 		DB26297C1F95F35C00C4C647 /* AppBoxIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppBoxIcons.xcassets; sourceTree = "<group>"; };
 		DB2629831F961F4700C4C647 /* DBErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBErrorHandler.h; sourceTree = "<group>"; };
 		DB2629841F961F4700C4C647 /* DBErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBErrorHandler.m; sourceTree = "<group>"; };
+		DB358B4C216FB1AA0080CAC0 /* ProvisioningProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB358B4D216FB1AA0080CAC0 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB358B4E216FB1AA0080CAC0 /* UploadRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB358B4F216FB1AB0080CAC0 /* CISetting+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CISetting+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB358B50216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB358B51216FB1AB0080CAC0 /* Teams+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Teams+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB358B52216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB358B53216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB358B54216FB1AB0080CAC0 /* Project+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB358B55216FB1AB0080CAC0 /* CISetting+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB358B56216FB1AB0080CAC0 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CISetting+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB358B57216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UploadRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB358B58216FB1AB0080CAC0 /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Project+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB358B5A216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataClass.m"; sourceTree = "<group>"; };
+		DB358B5C216FB1AB0080CAC0 /* Teams+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Teams+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB358B5D216FB1AB0080CAC0 /* Teams+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Teams+CoreDataProperties.m"; sourceTree = "<group>"; };
+		DB358B5E216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB358B5F216FB1AB0080CAC0 /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB358B60216FB1AB0080CAC0 /* Teams+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Teams+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB358B61216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB358B62216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
+		DB358B63216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
 		DB3D7CC81F64501F00217096 /* PythonServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PythonServer.sh; sourceTree = "<group>"; };
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
@@ -284,10 +300,6 @@
 		DBFC680B1F6AE957007A4ED2 /* EventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTracker.h; sourceTree = "<group>"; };
 		DBFC680C1F6AE957007A4ED2 /* EventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTracker.m; sourceTree = "<group>"; };
 		DBFEEA551FA5BA4700F09ECD /* AppBox2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox2.xcdatamodel; sourceTree = "<group>"; };
-		DBFEEA561FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataClass.h"; sourceTree = "<group>"; };
-		DBFEEA571FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisioningProfile+CoreDataClass.m"; sourceTree = "<group>"; };
-		DBFEEA5C1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisionedDevice+CoreDataClass.h"; sourceTree = "<group>"; };
-		DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProvisionedDevice+CoreDataClass.m"; sourceTree = "<group>"; };
 		E101D22F200DE0170062078B /* xcpretty */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xcpretty; sourceTree = "<group>"; };
 		E101D24B200DE0170062078B /* ansi.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ansi.rb; sourceTree = "<group>"; };
 		E101D24D200DE0170062078B /* formatter.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = formatter.rb; sourceTree = "<group>"; };
@@ -310,18 +322,6 @@
 		E11633971E558635005EAB31 /* MobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileProvision.h; sourceTree = "<group>"; };
 		E11633981E558635005EAB31 /* MobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileProvision.m; sourceTree = "<group>"; };
 		E119EF5F1E3735EA00A7798E /* XCodePath.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XCodePath.sh; sourceTree = "<group>"; };
-		E125ACE7216F141700EB1F34 /* UploadRecord+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UploadRecord+CoreDataProperties.m"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/UploadRecord+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		E125ACE8216F141700EB1F34 /* CISetting+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CISetting+CoreDataProperties.h"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/CISetting+CoreDataProperties.h"; sourceTree = "<absolute>"; };
-		E125ACE9216F141700EB1F34 /* UploadRecord+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UploadRecord+CoreDataProperties.h"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/UploadRecord+CoreDataProperties.h"; sourceTree = "<absolute>"; };
-		E125ACEA216F141800EB1F34 /* Teams+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Teams+CoreDataProperties.h"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/Teams+CoreDataProperties.h"; sourceTree = "<absolute>"; };
-		E125ACEB216F141800EB1F34 /* ProvisionedDevice+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ProvisionedDevice+CoreDataProperties.h"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/ProvisionedDevice+CoreDataProperties.h"; sourceTree = "<absolute>"; };
-		E125ACEC216F141800EB1F34 /* Project+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Project+CoreDataProperties.m"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/Project+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		E125ACED216F141800EB1F34 /* ProvisioningProfile+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "ProvisioningProfile+CoreDataProperties.m"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/ProvisioningProfile+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		E125ACEE216F141800EB1F34 /* ProvisionedDevice+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "ProvisionedDevice+CoreDataProperties.m"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/ProvisionedDevice+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		E125ACEF216F141900EB1F34 /* Project+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Project+CoreDataProperties.h"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/Project+CoreDataProperties.h"; sourceTree = "<absolute>"; };
-		E125ACF0216F141900EB1F34 /* CISetting+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CISetting+CoreDataProperties.m"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/CISetting+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		E125ACF1216F141900EB1F34 /* Teams+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Teams+CoreDataProperties.m"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/Teams+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		E125ACF2216F141900EB1F34 /* ProvisioningProfile+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ProvisioningProfile+CoreDataProperties.h"; path = "/Volumes/LongTime/ProjectWorking/AppBox-macOS/AppBox/Model/CoreDataModel/ProvisioningProfile+CoreDataProperties.h"; sourceTree = "<absolute>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		E13161F01E9777DF00586052 /* RepoBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoBuilder.h; sourceTree = "<group>"; };
@@ -729,30 +729,30 @@
 		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				E125ACEA216F141800EB1F34 /* Teams+CoreDataProperties.h */,
-				E125ACF1216F141900EB1F34 /* Teams+CoreDataProperties.m */,
-				E125ACE8216F141700EB1F34 /* CISetting+CoreDataProperties.h */,
-				E125ACF0216F141900EB1F34 /* CISetting+CoreDataProperties.m */,
-				E125ACE9216F141700EB1F34 /* UploadRecord+CoreDataProperties.h */,
-				E125ACE7216F141700EB1F34 /* UploadRecord+CoreDataProperties.m */,
-				E125ACEF216F141900EB1F34 /* Project+CoreDataProperties.h */,
-				E125ACEC216F141800EB1F34 /* Project+CoreDataProperties.m */,
-				E125ACEB216F141800EB1F34 /* ProvisionedDevice+CoreDataProperties.h */,
-				E125ACEE216F141800EB1F34 /* ProvisionedDevice+CoreDataProperties.m */,
-				E125ACF2216F141900EB1F34 /* ProvisioningProfile+CoreDataProperties.h */,
-				E125ACED216F141800EB1F34 /* ProvisioningProfile+CoreDataProperties.m */,
-				DB1A065D2160DC21008D33FD /* Teams+CoreDataClass.h */,
-				DB1A065E2160DC22008D33FD /* Teams+CoreDataClass.m */,
-				DBFEEA561FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.h */,
-				DBFEEA571FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m */,
-				DBFEEA5C1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.h */,
-				DBFEEA5D1FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m */,
-				DB2629661F95E38C00C4C647 /* CISetting+CoreDataClass.h */,
-				DB2629671F95E38C00C4C647 /* CISetting+CoreDataClass.m */,
-				DB26296A1F95E38C00C4C647 /* Project+CoreDataClass.h */,
-				DB26296B1F95E38C00C4C647 /* Project+CoreDataClass.m */,
-				DB26296E1F95E38C00C4C647 /* UploadRecord+CoreDataClass.h */,
-				DB26296F1F95E38C00C4C647 /* UploadRecord+CoreDataClass.m */,
+				DB358B55216FB1AB0080CAC0 /* CISetting+CoreDataClass.h */,
+				DB358B4F216FB1AB0080CAC0 /* CISetting+CoreDataClass.m */,
+				DB358B56216FB1AB0080CAC0 /* CISetting+CoreDataProperties.h */,
+				DB358B4D216FB1AA0080CAC0 /* CISetting+CoreDataProperties.m */,
+				DB358B54216FB1AB0080CAC0 /* Project+CoreDataClass.h */,
+				DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */,
+				DB358B5F216FB1AB0080CAC0 /* Project+CoreDataProperties.h */,
+				DB358B58216FB1AB0080CAC0 /* Project+CoreDataProperties.m */,
+				DB358B5E216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.h */,
+				DB358B50216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataClass.m */,
+				DB358B5A216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.h */,
+				DB358B53216FB1AB0080CAC0 /* ProvisionedDevice+CoreDataProperties.m */,
+				DB358B61216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.h */,
+				DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */,
+				DB358B62216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.h */,
+				DB358B4C216FB1AA0080CAC0 /* ProvisioningProfile+CoreDataProperties.m */,
+				DB358B5C216FB1AB0080CAC0 /* Teams+CoreDataClass.h */,
+				DB358B51216FB1AB0080CAC0 /* Teams+CoreDataClass.m */,
+				DB358B60216FB1AB0080CAC0 /* Teams+CoreDataProperties.h */,
+				DB358B5D216FB1AB0080CAC0 /* Teams+CoreDataProperties.m */,
+				DB358B63216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.h */,
+				DB358B4E216FB1AA0080CAC0 /* UploadRecord+CoreDataClass.m */,
+				DB358B52216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.h */,
+				DB358B57216FB1AB0080CAC0 /* UploadRecord+CoreDataProperties.m */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -1482,72 +1482,71 @@
 			files = (
 				E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */,
 				E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */,
-				DBFEEA601FA5BD1A00F09ECD /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
 				E1853392200E084500E88529 /* ABLog.m in Sources */,
-				E125ACF7216F141A00EB1F34 /* CISetting+CoreDataProperties.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
+				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,
+				DB358B67216FB1AC0080CAC0 /* CISetting+CoreDataClass.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
+				DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
+				DB358B6C216FB1AC0080CAC0 /* Project+CoreDataProperties.m in Sources */,
 				E1D479C41E4AE4BC00BBC838 /* GitRepoDetails.m in Sources */,
 				E1902B571E16619800C3E0F6 /* GitHandler.m in Sources */,
 				E16724601E1D2AE000346502 /* CIViewController.m in Sources */,
+				DB358B65216FB1AC0080CAC0 /* CISetting+CoreDataProperties.m in Sources */,
+				DB358B6B216FB1AC0080CAC0 /* UploadRecord+CoreDataProperties.m in Sources */,
+				DB358B68216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataClass.m in Sources */,
 				DB8CE5F81FF77199003FEB65 /* DisabledView.m in Sources */,
 				DB439EAE200A750900589A96 /* CISettingViewController.m in Sources */,
 				E16D72DC1E88FA230031FB7C /* XCHandler.m in Sources */,
+				DB358B6A216FB1AC0080CAC0 /* ProvisionedDevice+CoreDataProperties.m in Sources */,
 				E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */,
+				DB358B6F216FB1AC0080CAC0 /* Teams+CoreDataProperties.m in Sources */,
 				E14A441F1F277590006A9102 /* XCArchiveResult.m in Sources */,
 				DB1A06582160CF04008D33FD /* TeamTableCellView.m in Sources */,
 				E1902B5A1E1661A300C3E0F6 /* MacHandler.m in Sources */,
 				E1CFC65E1D7E7FEA005872BE /* Common.m in Sources */,
 				DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
-				E125ACF4216F141A00EB1F34 /* Project+CoreDataProperties.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
 				E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* SlackPreferencesViewController.m in Sources */,
 				DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */,
-				DB1A065F2160DC22008D33FD /* Teams+CoreDataClass.m in Sources */,
 				E16BB8C020284236002E9B5A /* SelectAccountViewController.m in Sources */,
 				DB53856E20838913004BFC84 /* DragDropView.m in Sources */,
-				DB2629761F95E38C00C4C647 /* UploadRecord+CoreDataClass.m in Sources */,
 				E19473F8205F9FDC00CF12F9 /* HangoutClient.m in Sources */,
 				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
 				DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */,
-				E125ACF8216F141A00EB1F34 /* Teams+CoreDataProperties.m in Sources */,
-				E125ACF3216F141A00EB1F34 /* UploadRecord+CoreDataProperties.m in Sources */,
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
 				DB1FC5941FDEF29A00179799 /* LocalServerWindowController.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
-				DBFEEA631FA5BD1A00F09ECD /* ProvisionedDevice+CoreDataClass.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				DB1A06672160E0C4008D33FD /* AddTeamViewController.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E16D72D81E88F99A0031FB7C /* ALOutputParser.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
-				DB2629721F95E38C00C4C647 /* CISetting+CoreDataClass.m in Sources */,
+				DB358B64216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.m in Sources */,
+				DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */,
 				E16437F31D743B6800CE8B7E /* HomeViewController.m in Sources */,
 				E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */,
 				DB26297B1F95ED9A00C4C647 /* NSDate+Date.m in Sources */,
 				E1E215BB1E869BF70091565D /* ITCLogin.m in Sources */,
 				E16BB8C520285A38002E9B5A /* SelectAccountCellView.m in Sources */,
-				DB2629741F95E38C00C4C647 /* Project+CoreDataClass.m in Sources */,
 				E1902B641E16633A00C3E0F6 /* KeychainHandler.m in Sources */,
 				E1902B5D1E1661B300C3E0F6 /* MailHandler.m in Sources */,
 				E1DC26001ECDBCA8001EF106 /* MBProgressHUD+ProgressHud.m in Sources */,
-				E125ACF6216F141A00EB1F34 /* ProvisionedDevice+CoreDataProperties.m in Sources */,
 				E16D72D71E88F99A0031FB7C /* ALOutput.m in Sources */,
 				DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */,
 				E16D72E41E88FB660031FB7C /* TaskHandler.m in Sources */,
-				E125ACF5216F141A00EB1F34 /* ProvisioningProfile+CoreDataProperties.m in Sources */,
 				DB1A06532160CE27008D33FD /* TeamsViewController.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
@@ -1557,6 +1556,7 @@
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,
+				DB358B69216FB1AC0080CAC0 /* Teams+CoreDataClass.m in Sources */,
 				E16BB8C9202873FA002E9B5A /* AccountCellView.m in Sources */,
 				E14A44221F2775A2006A9102 /* XCArchiveParser.m in Sources */,
 				E1E215B71E869BDF0091565D /* ITCLoginViewController.m in Sources */,
