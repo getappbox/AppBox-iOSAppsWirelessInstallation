@@ -32,6 +32,7 @@
 		DB358B6D216FB1AC0080CAC0 /* Project+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */; };
 		DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B5B216FB1AB0080CAC0 /* ProvisioningProfile+CoreDataClass.m */; };
 		DB358B6F216FB1AC0080CAC0 /* Teams+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B5D216FB1AB0080CAC0 /* Teams+CoreDataProperties.m */; };
+		DB358B72216FCD430080CAC0 /* KeychainHandler+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB358B71216FCD430080CAC0 /* KeychainHandler+Helper.m */; };
 		DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB425C041F8A517D008CB032 /* DefaultSettings.m */; };
 		DB439EAE200A750900589A96 /* CISettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB439EAC200A750900589A96 /* CISettingViewController.m */; };
 		DB439EAF200A750900589A96 /* CISettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB439EAD200A750900589A96 /* CISettingViewController.xib */; };
@@ -268,6 +269,8 @@
 		DB358B61216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataClass.h"; sourceTree = "<group>"; };
 		DB358B62216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProvisioningProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
 		DB358B63216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UploadRecord+CoreDataClass.h"; sourceTree = "<group>"; };
+		DB358B70216FCD430080CAC0 /* KeychainHandler+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KeychainHandler+Helper.h"; sourceTree = "<group>"; };
+		DB358B71216FCD430080CAC0 /* KeychainHandler+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "KeychainHandler+Helper.m"; sourceTree = "<group>"; };
 		DB3D7CC81F64501F00217096 /* PythonServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PythonServer.sh; sourceTree = "<group>"; };
 		DB425C031F8A517D008CB032 /* DefaultSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
 		DB425C041F8A517D008CB032 /* DefaultSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
@@ -1178,6 +1181,8 @@
 			children = (
 				E1902B621E16633A00C3E0F6 /* KeychainHandler.h */,
 				E1902B631E16633A00C3E0F6 /* KeychainHandler.m */,
+				DB358B70216FCD430080CAC0 /* KeychainHandler+Helper.h */,
+				DB358B71216FCD430080CAC0 /* KeychainHandler+Helper.m */,
 			);
 			path = KeychainHandler;
 			sourceTree = "<group>";
@@ -1481,6 +1486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */,
+				DB358B72216FCD430080CAC0 /* KeychainHandler+Helper.m in Sources */,
 				E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */,
 				E1902B541E16617B00C3E0F6 /* UserData.m in Sources */,
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
