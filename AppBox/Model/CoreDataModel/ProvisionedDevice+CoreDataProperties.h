@@ -2,7 +2,7 @@
 //  ProvisionedDevice+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 30/09/18.
+//  Created by Vineet Choudhary on 11/10/18.
 //
 //
 

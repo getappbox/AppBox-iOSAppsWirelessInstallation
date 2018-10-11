@@ -17,8 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //set user emails and password
-    [defaultEmalTextField setStringValue:[UserData defaultCIEmail]];
-    [subjectPrefixTextField setStringValue:[UserData ciSubjectPrefix]];
+    [defaultEmalTextField setStringValue:[UserData defaultCIEmail] ? [UserData defaultCIEmail] : @""];
+    [subjectPrefixTextField setStringValue:[UserData ciSubjectPrefix] ? [UserData ciSubjectPrefix] : @""];
     [limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
     [updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
 }
