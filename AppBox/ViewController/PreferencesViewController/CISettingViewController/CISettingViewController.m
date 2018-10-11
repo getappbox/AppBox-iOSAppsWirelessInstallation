@@ -44,4 +44,10 @@
         [UserData setCISubjectPrefix:subjectPrefixTextField.stringValue];
     }
 }
+
+- (IBAction)keychainUnlockButtonAction:(NSButton *)sender {
+    NSString *error = [KeychainHandler unlockKeyChain:keychainPathTextField.stringValue
+                                         withPassword:keychainPasswordTextField.stringValue];
+    [Common showAlertWithTitle:@"" andMessage:error];
+}
 @end

@@ -13,9 +13,12 @@
     __weak IBOutlet NSButton *limitedLogCheckBox;
     __weak IBOutlet NSTextField *defaultEmalTextField;
     __weak IBOutlet NSTextField *subjectPrefixTextField;
+    __weak IBOutlet NSTextField *keychainPathTextField;
+    __weak IBOutlet NSSecureTextField *keychainPasswordTextField;
 }
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender;
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender;
 - (IBAction)emailSettingSaveButtonAction:(NSButton *)sender;
+- (IBAction)keychainUnlockButtonAction:(NSButton *)sender;
 
 @end
