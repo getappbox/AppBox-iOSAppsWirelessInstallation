@@ -142,7 +142,13 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
     SecKeychainLockAll();
 }
 
-+(NSString *)unlockKeyChain:(NSString *)path withPassword:(NSString *)password {
++(NSString *)errorMessageForStatus:(OSStatus)status {
+    CFStringRef errorMessage = SecCopyErrorMessageString(status, NULL);
+    NSString *errorString = (__bridge NSString *)errorMessage;
+    return errorString;
+}
+
++(OSStatus)unlockKeyChain:(NSString *)path withPassword:(NSString *)password {
     char const *charPassword = [password cStringUsingEncoding:NSUTF8StringEncoding];
     SecKeychainRef keychainRef = NULL;
     OSStatus status = 0;
@@ -155,19 +161,13 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
         char const *charKeychainPath = [path cStringUsingEncoding:NSUTF8StringEncoding];
         status = SecKeychainOpen(charKeychainPath, &keychainRef);
     }
-    else
-    {
-        return @"Keychain file not found.";
-    }
     
     status = SecKeychainLock(keychainRef);
     status = SecKeychainUnlock(keychainRef, (UInt32)strlen(charPassword), charPassword, YES);
     
-    CFStringRef errorMessage = SecCopyErrorMessageString(status, NULL);
-    NSString *errorString = (__bridge NSString *)errorMessage;
-    
-    return errorString;
+    return status;
 }
+
 
 
 #pragma mark - Remove All Cache, Cookies and Credentials
