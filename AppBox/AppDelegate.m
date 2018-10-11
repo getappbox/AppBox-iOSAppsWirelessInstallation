@@ -150,16 +150,25 @@
 }
 
 -(void)handleProjectAtPath:(NSString *)projectPath {
+    //unlock keychain
+    [KeychainHandler unlockSavedKeychain];
+    
+    //get certificate
     NSString *certInfoPath = [RepoBuilder isValidRepoForCertificateFileAtPath:projectPath];
     [RepoBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
     
+    //create project
     NSString *settingPath = [RepoBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
     XCProject *project = [RepoBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
+    
+    //check project
     if (project == nil) {
         [self addSessionLog:@"AppBox can't able to create project model of this repo."];
         exit(abExitCodeForInvalidAppBoxSettingFile);
         return;
     }
+    
+    //check if appbox is read to build
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to build."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
