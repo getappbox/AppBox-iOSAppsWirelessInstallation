@@ -136,6 +136,39 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
     }];
 }
 
+#pragma mark - Keychain
+
++(void)lockAllKeychain {
+    SecKeychainLockAll();
+}
+
++(NSString *)unlockKeyChain:(NSString *)path withPassword:(NSString *)password {
+    char const *charPassword = [password cStringUsingEncoding:NSUTF8StringEncoding];
+    SecKeychainRef keychainRef = NULL;
+    OSStatus status = 0;
+    if (path == nil || path.length == 0)
+    {
+        status = SecKeychainCopyDefault(&keychainRef);
+    }
+    else if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+    {
+        char const *charKeychainPath = [path cStringUsingEncoding:NSUTF8StringEncoding];
+        status = SecKeychainOpen(charKeychainPath, &keychainRef);
+    }
+    else
+    {
+        return @"Keychain file not found.";
+    }
+    
+    status = SecKeychainLock(keychainRef);
+    status = SecKeychainUnlock(keychainRef, (UInt32)strlen(charPassword), charPassword, YES);
+    
+    CFStringRef errorMessage = SecCopyErrorMessageString(status, NULL);
+    NSString *errorString = (__bridge NSString *)errorMessage;
+    
+    return errorString;
+}
+
 
 #pragma mark - Remove All Cache, Cookies and Credentials
 + (void)removeAllStoredCredentials{
