@@ -14,6 +14,12 @@
     NSString *keychainPassword = [SAMKeychain passwordForService:abmacOSKeyChainService account:abmacOSKeyChainAccount];
     NSString *keychainPath = [UserData keychainPath] ? [UserData keychainPath] : @"";
     keychainPassword = keychainPassword ? keychainPassword : @"";
+    
+    if (keychainPassword.length == 0) {
+        [[AppDelegate appDelegate] addSessionLog:@"Keychain Unlock Status - Auto Unlock not Setup."];
+        return 0;
+    }
+    
     OSStatus status = [[self class] unlockKeyChain:keychainPath withPassword:keychainPassword];
     NSString *error = [[self class] errorMessageForStatus:status];
     
