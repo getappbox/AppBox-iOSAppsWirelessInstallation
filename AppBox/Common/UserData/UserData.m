@@ -309,4 +309,14 @@
     [[NSUserDefaults standardUserDefaults] setValue:path forKey:KeychainPath];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+#define KeychainPassword @"KeychainPassword"
++(NSString *)keychainPassword {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:KeychainPassword];
+}
+
++(void)setKeychainPassword:(NSString *)password {
+    [[NSUserDefaults standardUserDefaults] setValue:password forKey:KeychainPassword];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end

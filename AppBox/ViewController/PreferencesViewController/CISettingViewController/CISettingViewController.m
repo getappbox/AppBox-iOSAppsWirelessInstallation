@@ -26,9 +26,8 @@
     [subjectPrefixTextField setStringValue:[UserData ciSubjectPrefix] ? [UserData ciSubjectPrefix] : @""];
 
     //set user keychain settings
-    NSString *keychainPassword = [SAMKeychain passwordForService:abmacOSKeyChainService account:abmacOSKeyChainAccount];
-    [keychainPasswordTextField setStringValue:keychainPassword ? keychainPassword : @""];
     [keychainPathTextField setStringValue:[UserData keychainPath] ? [UserData keychainPath] : @""];
+    [keychainPasswordTextField setStringValue:[UserData keychainPassword] ? [UserData keychainPassword] : @""];
 }
 
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender {
@@ -54,6 +53,12 @@
 }
 
 - (IBAction)keychainUnlockButtonAction:(NSButton *)sender {
+    //Check Password
+    if (keychainPasswordTextField.stringValue == nil || keychainPasswordTextField.stringValue.length == 0) {
+        [Common showAlertWithTitle:@"" andMessage:@"Password can not be empty."];
+        return;
+    }
+    
     //Unlock Keychain
     OSStatus status = [KeychainHandler unlockKeyChain:keychainPathTextField.stringValue
                                          withPassword:keychainPasswordTextField.stringValue];
@@ -69,16 +74,8 @@
         [UserData setKeychainPath:keychainPathTextField.stringValue];
     }
     
-    //save password in keychain
-    NSError *error;
-    [SAMKeychain setPassword:keychainPasswordTextField.stringValue
-                  forService:abmacOSKeyChainService
-                     account:abmacOSKeyChainAccount
-                       error:&error];
-    if (error) {
-        [Common showAlertWithTitle:nil andMessage:error.localizedDescription];
-    } else {
-        [Common showAlertWithTitle:@"Success" andMessage:@""];
-    }
+    //save password
+    [UserData setKeychainPassword:keychainPasswordTextField.stringValue];
+    [Common showAlertWithTitle:@"Success" andMessage:@""];
 }
 @end
