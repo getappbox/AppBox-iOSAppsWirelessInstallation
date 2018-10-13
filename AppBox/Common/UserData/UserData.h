@@ -69,5 +69,7 @@
 +(void)setCISubjectPrefix:(NSString *)prefix;
 +(NSString *)keychainPath;
 +(void)setKeychainPath:(NSString *)path;
++(NSString *)keychainPassword;
++(void)setKeychainPassword:(NSString *)password;
 
 @end

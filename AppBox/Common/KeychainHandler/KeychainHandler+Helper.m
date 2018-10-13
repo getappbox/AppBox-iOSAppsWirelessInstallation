@@ -11,9 +11,8 @@
 @implementation KeychainHandler (Helper)
 
 +(OSStatus)unlockSavedKeychain {
-    NSString *keychainPassword = [SAMKeychain passwordForService:abmacOSKeyChainService account:abmacOSKeyChainAccount];
     NSString *keychainPath = [UserData keychainPath] ? [UserData keychainPath] : @"";
-    keychainPassword = keychainPassword ? keychainPassword : @"";
+    NSString *keychainPassword = [UserData keychainPassword] ? [UserData keychainPassword] : @"";
     
     if (keychainPassword.length == 0) {
         [[AppDelegate appDelegate] addSessionLog:@"Keychain Unlock Status - Auto Unlock not Setup."];
