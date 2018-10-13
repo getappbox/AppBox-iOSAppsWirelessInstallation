@@ -149,10 +149,7 @@
     }
 }
 
--(void)handleProjectAtPath:(NSString *)projectPath {
-    //unlock keychain
-    [KeychainHandler unlockSavedKeychain];
-    
+-(void)handleProjectAtPath:(NSString *)projectPath {    
     //get certificate
     NSString *certInfoPath = [RepoBuilder isValidRepoForCertificateFileAtPath:projectPath];
     [RepoBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
