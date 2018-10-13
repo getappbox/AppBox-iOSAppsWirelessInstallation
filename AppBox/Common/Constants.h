@@ -39,8 +39,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abALUploadApp @"upload-app"
 #define abALValidateApp @"validate-app"
 #define abALValidateUser @"validate-user"
-#define abmacOSKeyChainAccount @"AppBoxCI"
-#define abmacOSKeyChainService @"AppBoxCI - Keychain"
 #define abiTunesConnectService @"AppBox - iTunesConnect"
 #define abiTunesConnectServiceCI @"AppBox - iTunesConnect - CI"
 

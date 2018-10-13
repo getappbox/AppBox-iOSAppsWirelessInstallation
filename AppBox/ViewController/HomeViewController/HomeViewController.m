@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //unlock keychain
+    [KeychainHandler unlockSavedKeychain];
+    
     project = [[XCProject alloc] init];
     allTeamIds = [KeychainHandler getAllTeamId];
     buildOptionBoxHeightConstraint.constant = 0;
