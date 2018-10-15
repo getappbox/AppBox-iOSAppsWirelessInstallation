@@ -18,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="750" height="352"/>
+            <rect key="frame" x="0.0" y="0.0" width="750" height="358"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box title="General" translatesAutoresizingMaskIntoConstraints="NO" id="jKT-rd-69g">
-                    <rect key="frame" x="7" y="256" width="736" height="86"/>
+                    <rect key="frame" x="7" y="262" width="736" height="86"/>
                     <view key="contentView" id="mMI-v1-Tgu">
                         <rect key="frame" x="3" y="3" width="730" height="68"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
                     </view>
                 </box>
                 <box title="Email" translatesAutoresizingMaskIntoConstraints="NO" id="Blk-8Q-6zC">
-                    <rect key="frame" x="7" y="131" width="736" height="119"/>
+                    <rect key="frame" x="7" y="137" width="736" height="119"/>
                     <view key="contentView" id="acj-jE-WTQ">
                         <rect key="frame" x="3" y="3" width="730" height="101"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,14 +161,14 @@
                     </view>
                 </box>
                 <box title="Unlock Keychain" translatesAutoresizingMaskIntoConstraints="NO" id="JLP-nw-kga">
-                    <rect key="frame" x="7" y="6" width="736" height="119"/>
+                    <rect key="frame" x="7" y="6" width="736" height="125"/>
                     <view key="contentView" id="wco-0f-8j4">
-                        <rect key="frame" x="3" y="3" width="730" height="101"/>
+                        <rect key="frame" x="3" y="3" width="730" height="107"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZUI-LS-zNr">
-                                <rect key="frame" x="220" y="41" width="500" height="22"/>
-                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter password to unlock keychain" drawsBackground="YES" usesSingleLineMode="YES" id="2iX-e2-Gjg">
+                                <rect key="frame" x="220" y="47" width="500" height="22"/>
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter password to unlock keychain " drawsBackground="YES" usesSingleLineMode="YES" id="2iX-e2-Gjg">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -178,7 +178,7 @@
                                 </secureTextFieldCell>
                             </secureTextField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TfW-Ng-m8n">
-                                <rect key="frame" x="8" y="72" width="204" height="19"/>
+                                <rect key="frame" x="8" y="78" width="204" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="YlM-Du-i5W"/>
                                 </constraints>
@@ -189,11 +189,11 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etf-Wu-roO">
-                                <rect key="frame" x="8" y="43" width="204" height="19"/>
+                                <rect key="frame" x="8" y="49" width="204" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="TMY-7Y-Kn6"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Password:" id="0BN-51-8Fe">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Password to Unlock Keychain:" id="0BN-51-8Fe">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -210,10 +210,18 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PB9-Id-I2n">
-                                <rect key="frame" x="220" y="70" width="500" height="22"/>
+                                <rect key="frame" x="220" y="76" width="500" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter kechain path you want to unlock (leave blank for default keychain)" drawsBackground="YES" id="NeD-Up-4uF">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wq7-rI-Duq">
+                                <rect key="frame" x="218" y="36" width="504" height="11"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="* Note - Your password will be saved unencrypted in your system" id="Gce-uJ-C1p">
+                                    <font key="font" metaFont="system" size="9"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -224,13 +232,16 @@
                             <constraint firstAttribute="trailing" secondItem="ZUI-LS-zNr" secondAttribute="trailing" constant="10" id="I3K-ko-XOs"/>
                             <constraint firstAttribute="bottom" secondItem="74Q-UZ-LZ9" secondAttribute="bottom" constant="10" id="N3a-X8-2Gz"/>
                             <constraint firstItem="TfW-Ng-m8n" firstAttribute="top" secondItem="wco-0f-8j4" secondAttribute="top" constant="10" id="SVh-w8-6rI"/>
+                            <constraint firstItem="ZUI-LS-zNr" firstAttribute="trailing" secondItem="Wq7-rI-Duq" secondAttribute="trailing" id="VzC-MP-Hwe"/>
                             <constraint firstAttribute="trailing" secondItem="74Q-UZ-LZ9" secondAttribute="trailing" constant="10" id="ZYM-3I-eqv"/>
                             <constraint firstItem="etf-Wu-roO" firstAttribute="leading" secondItem="wco-0f-8j4" secondAttribute="leading" constant="10" id="aSu-G6-9Pj"/>
                             <constraint firstAttribute="trailing" secondItem="PB9-Id-I2n" secondAttribute="trailing" constant="10" id="bt9-ZP-ei6"/>
+                            <constraint firstItem="74Q-UZ-LZ9" firstAttribute="top" secondItem="Wq7-rI-Duq" secondAttribute="bottom" constant="5" id="dVR-Sj-8Nr"/>
                             <constraint firstItem="TfW-Ng-m8n" firstAttribute="centerY" secondItem="PB9-Id-I2n" secondAttribute="centerY" id="p22-hV-6aC"/>
-                            <constraint firstItem="74Q-UZ-LZ9" firstAttribute="top" secondItem="ZUI-LS-zNr" secondAttribute="bottom" constant="10" id="pcc-pf-CIp"/>
+                            <constraint firstItem="ZUI-LS-zNr" firstAttribute="leading" secondItem="Wq7-rI-Duq" secondAttribute="leading" id="tkY-Hz-J50"/>
                             <constraint firstItem="etf-Wu-roO" firstAttribute="top" secondItem="TfW-Ng-m8n" secondAttribute="bottom" constant="10" id="tp3-JH-9WB"/>
                             <constraint firstItem="ZUI-LS-zNr" firstAttribute="leading" secondItem="etf-Wu-roO" secondAttribute="trailing" constant="10" id="vBm-6K-L7A"/>
+                            <constraint firstItem="Wq7-rI-Duq" firstAttribute="top" secondItem="ZUI-LS-zNr" secondAttribute="bottom" id="vH6-MT-f4m"/>
                             <constraint firstItem="PB9-Id-I2n" firstAttribute="leading" secondItem="TfW-Ng-m8n" secondAttribute="trailing" constant="10" id="ymu-25-fXi"/>
                         </constraints>
                     </view>
@@ -248,7 +259,7 @@
                 <constraint firstItem="JLP-nw-kga" firstAttribute="top" secondItem="Blk-8Q-6zC" secondAttribute="bottom" constant="10" id="bUN-QL-Q2D"/>
                 <constraint firstAttribute="trailing" secondItem="JLP-nw-kga" secondAttribute="trailing" constant="10" id="fxH-1M-htq"/>
             </constraints>
-            <point key="canvasLocation" x="249" y="364"/>
+            <point key="canvasLocation" x="249" y="369"/>
         </customView>
     </objects>
 </document>

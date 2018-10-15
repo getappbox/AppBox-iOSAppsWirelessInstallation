@@ -30,4 +30,18 @@ theme:
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
-
+pages:
+- Home: index.md
+- Getting Started: 
+  - How to use AppBox?: GettingStarted/useappbox.md
+- Features:
+  - Keep Same Link: Features/keepsamelink.md
+  - Upload Chunk Size: Features/uploadchunksize.md
+  - Download IPA file from AppBox Installation Webpage: Features/downloadipa.md
+  - Get Application Details on AppBox Installation Web Page: Features/moredetails.md
+- FAQs:
+  - How to delete an uploaded app or disable a link on AppBox?: FAQs/deleteapplication.md
+  - Is there any installation limit per app on AppBox?: FAQs/installationlimit.md
+  - How long will Application Installation links be available on AppBox?: FAQs/installationlinkexpire.md
+  - What is the Maximum Upload Application Size?: FAQs/maximumuploadsize.md
+  - How to share Xcode Project Schemes?: FAQs/sharexcodeprojectschemes.md
