@@ -34,6 +34,7 @@ pages:
 - Home: index.md
 - Getting Started: 
   - How to use AppBox?: GettingStarted/useappbox.md
+  - How to use AppBox with Jenkins and GitLab for CI and CD?: GettingStarted/usewithjenkinsandgitlab.md
 - Features:
   - Keep Same Link: Features/keepsamelink.md
   - Upload Chunk Size: Features/uploadchunksize.md
