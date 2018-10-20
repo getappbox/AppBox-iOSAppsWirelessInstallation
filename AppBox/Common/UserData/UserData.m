@@ -319,4 +319,15 @@
     [[NSUserDefaults standardUserDefaults] setValue:password forKey:KeychainPassword];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+ 
+#define XcodeVersionPath @"XcodeVersionPath"
++(NSString *)xcodeVersionPath {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:XcodeVersionPath];
+}
+    
++(void)setXcodeVersionPath:(NSString *)xcodeVersionPath {
+    [[NSUserDefaults standardUserDefaults] setValue:xcodeVersionPath forKey:XcodeVersionPath];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+    
 @end
