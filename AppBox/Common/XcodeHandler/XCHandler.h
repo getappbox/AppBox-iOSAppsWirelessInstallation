@@ -16,8 +16,10 @@ typedef enum : NSUInteger {
 
 @interface XCHandler : NSObject
 
++(NSString *)checkALPath:(NSString *)xcodePath;
++(NSString *)checkXCodePath:(NSString *)xcodePath;
 +(void)getXCodePathWithCompletion:(void (^) (NSString *xcodePath, NSString *applicationLoaderPath))completion;
 +(void)changeDefaultXcodePath:(NSString *)path withCompletion:(void (^) (BOOL success, NSString *error))completion;
-+(void)getXcodeVersionWithCompletion:(void (^) (BOOL success, XcodeVersion version, NSString *versionString))completion;
++(void)getXcodeVersion:(NSString *)path WithCompletion:(void (^) (BOOL success, XcodeVersion version, NSString *versionString))completion ;
 
 @end

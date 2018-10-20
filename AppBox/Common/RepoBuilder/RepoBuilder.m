@@ -18,6 +18,10 @@ NSString * const RepoDropboxFolderNameKey = @"dropboxfoldername";
 NSString * const RepoEmailKey = @"email";
 NSString * const RepoPersonalMessageKey = @"personalmessage";
 
+//xcode
+NSString * const XcodeVersionKey = @"xcode";
+NSString * const XcodeVersionIdentifier = @"{VERSION}";
+
 //Certificate
 NSString * const RepoCertificateNameKey = @"name";
 NSString * const RepoCertificatePasswordKey = @"password";
@@ -82,6 +86,14 @@ NSString *const RepoITCPassword = @"itcpassword";
         project.keepSameLink = [projectRawSetting valueForKey:RepoKeepSameLinkKey];
     }
     
+    //xcode version
+    if ([projectRawSetting.allKeys containsObject:XcodeVersionKey] && [UserData xcodeVersionPath]) {
+        NSString *xcodeVersion = [projectRawSetting valueForKey:XcodeVersionKey];
+        NSString *xcodeVersionPath = [[UserData xcodeVersionPath] stringByReplacingOccurrencesOfString:XcodeVersionIdentifier withString:xcodeVersion];
+        [project setAlPath:[XCHandler checkALPath:xcodeVersionPath]];
+        [project setXcodePath:[XCHandler checkXCodePath:xcodeVersionPath]];
+    }
+    
     //Email and Email Subject Prefix
     NSMutableSet *emails = [[NSMutableSet alloc] init];
 
@@ -103,8 +115,15 @@ NSString *const RepoITCPassword = @"itcpassword";
         project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
     }
     
+    //app-store and itcmail check
+    BOOL isAppStoreBuild = [projectRawSetting.allKeys containsObject:RepoBuildTypeKey] && [project.buildType isEqualToString: BuildTypeAppStore];
+    if (isAppStoreBuild && ![projectRawSetting.allKeys containsObject:RepoITCEmail]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account email not available in appbox.plist. You need to add \"%@\" key with iTubes Connect Account email id.", RepoITCEmail]];
+        exit(abExitCodeITCMailNotFound);
+    }
+    
     //itcemail
-    if ([projectRawSetting.allKeys containsObject:RepoITCEmail]) {
+    if (isAppStoreBuild && [projectRawSetting.allKeys containsObject:RepoITCEmail]) {
         project.itcUserName = [projectRawSetting valueForKey:RepoITCEmail];
         if ([MailHandler isAllValidEmail:project.itcUserName]) {
             NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:project.itcUserName];

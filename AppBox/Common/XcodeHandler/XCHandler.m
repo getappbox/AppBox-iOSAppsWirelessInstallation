@@ -15,23 +15,34 @@
         NSMutableArray *pathComponents = [[NSMutableArray alloc] initWithArray:[output pathComponents]];
         if (pathComponents.count > 2){
             NSString *xcodePath = [[output stringByDeletingLastPathComponent] stringByDeletingLastPathComponent];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:xcodePath]){
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"XCode = %@", xcodePath]];
-                
-                //set xcode location
+            NSString *validXcodePath = [XCHandler checkXCodePath:xcodePath];
+            NSString *validALPath = [XCHandler checkALPath:xcodePath];
+            if (validXcodePath != nil){
                 [UserData setXCodeLocation:xcodePath];
-                NSString *alPath = [[xcodePath stringByAppendingPathComponent:abApplicationLoaderALToolLocation] stringByRemovingPercentEncoding];
-                if ([[NSFileManager defaultManager] fileExistsAtPath:alPath]){
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Application Loader = %@", alPath]];
-                    completion(xcodePath, alPath);
-                } else {
-                    completion(xcodePath, nil);
-                }
-            }else{
-                completion(nil, nil);
             }
+            completion(validXcodePath, validALPath);
         }
     }];
+}
+    
++(NSString *)checkXCodePath:(NSString *)xcodePath {
+    xcodePath = [xcodePath stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:xcodePath]){
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"XCode = %@", xcodePath]];
+        return xcodePath;
+    }else{
+        return nil;
+    }
+}
+    
++(NSString *)checkALPath:(NSString *)xcodePath {
+    NSString *alPath = [[xcodePath stringByAppendingPathComponent:abApplicationLoaderALToolLocation] stringByRemovingPercentEncoding];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:alPath]){
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Application Loader = %@", alPath]];
+        return alPath;
+    } else {
+        return nil;
+    }
 }
 
 +(void)changeDefaultXcodePath:(NSString *)path withCompletion:(void (^) (BOOL success, NSString *error))completion {
@@ -44,8 +55,9 @@
     }];
 }
 
-+(void)getXcodeVersionWithCompletion:(void (^) (BOOL success, XcodeVersion version, NSString *versionString))completion {
-    [TaskHandler runTaskWithName:@"XcodeVersion" andArgument:nil taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
++(void)getXcodeVersion:(NSString *)path WithCompletion:(void (^) (BOOL success, XcodeVersion version, NSString *versionString))completion {
+    path = path ? path : abEmptyString;
+    [TaskHandler runTaskWithName:@"XcodeVersion" andArgument:@[path] taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
         if (![output isEqualToString:abEmptyString] && [output.lowercaseString containsString:@"xcode"]){
             NSString *version = [output stringByReplacingOccurrencesOfString:@"Xcode " withString:@""];
             if(version){
