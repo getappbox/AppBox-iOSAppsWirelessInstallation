@@ -83,7 +83,8 @@
 }
     
 - (IBAction)xcodeSaveButtonAction:(NSButton *)sender {
-    
+    [UserData setXcodeVersionPath:xcodePathTextField.stringValue];
+    [Common showAlertWithTitle:@"Success" andMessage:@""];
 }
 
 @end

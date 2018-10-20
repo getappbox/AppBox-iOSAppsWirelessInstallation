@@ -135,6 +135,8 @@
         }
         
         //Copy other setting from ciRepoProject to project
+        [project setAlPath:ciRepoProject.alPath];
+        [project setXcodePath:ciRepoProject.xcodePath];
         [project setSubjectPrefix:ciRepoProject.subjectPrefix];
     }
 }
@@ -341,7 +343,7 @@
     [buildArgument addObject:[project.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding]];
     
     //Get Xcode Version
-    [XCHandler getXcodeVersionWithCompletion:^(BOOL success, XcodeVersion version, NSString *versionString) {
+    [XCHandler getXcodeVersion:project.xcodePath WithCompletion:^(BOOL success, XcodeVersion version, NSString *versionString) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString *version;
             if (success) {
@@ -357,7 +359,11 @@
             if (xcPrettyPath){
                 [buildArgument addObject:xcPrettyPath];
             }
-            if (buildArgument.count == 8) {
+            
+            //${9} xcode path
+            [buildArgument addObject:(project.xcodePath ? project.xcodePath : abEmptyString)];
+            
+            if (buildArgument.count == 9) {
                 completion(buildArgument);
             } else {
                 NSString *errorLog = [NSString stringWithFormat:@"Failed to create build command.\n Build Arguments %@", buildArgument];

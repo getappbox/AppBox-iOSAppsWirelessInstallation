@@ -3,8 +3,8 @@
 #  CreateIPAScript.sh
 #  AppBox
 #
-#  Created by Vineet Choudhary on 18/01/18.
-#  Copyright © 2018 Developer Insider. All rights reserved.
+#  Created by Vineet Choudhary on 01/12/16.
+#  Copyright © 2016 Developer Insider. All rights reserved.
 
 #{1} - Project Directory
 
@@ -23,7 +23,15 @@
 #Others
 #{7} - Xcode Version
 #{8} - xcpretty path
+#{9} - Xcode Path
 
+#buildcommand
+if [[ -z "${9}" ]]
+then
+    buildcommand="xcodebuild"
+else
+    buildcommand="${9}/Contents/Developer/usr/bin/xcodebuild"
+fi
 
 #change directory to project
 cd "${1}"
@@ -37,8 +45,8 @@ echo "Creating IPA..."
 echo "Creating IPA with Xcode ${7}"
 if [[ ${7} -gt 9 || ${7} -eq 9 ]]
 then
-xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+    "$buildcommand" -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
 else
-xcodebuild -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
+    "$buildcommand" -exportArchive -archivePath "${4}" -exportPath "${5}" -exportOptionsPlist "${6}"
 fi
 echo "End of build script."

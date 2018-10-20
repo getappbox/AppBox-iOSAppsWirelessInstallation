@@ -6,6 +6,7 @@
 #  Created by Vineet Choudhary on 01/12/16.
 #  Copyright © 2016 Developer Insider. All rights reserved.
 
+# Arguments Descriptions -
 #{1} - Project Directory
 
 #Make Archove
@@ -23,7 +24,15 @@
 #Others
 #{7} - Xcode Version
 #{8} - xcpretty path
+#{9} - Xcode Path
 
+#buildcommand
+if [[ -z "${9}" ]]
+then
+    buildcommand="xcodebuild"
+else
+    buildcommand="${9}/Contents/Developer/usr/bin/xcodebuild"
+fi
 
 #change directory to project
 cd "${1}"
@@ -41,9 +50,9 @@ then
     echo "Building Project with Xcode ${7}"
     if [[ ${7} -gt 9 || ${7} -eq 9 ]]
     then
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
+        "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
     else
-        xcodebuild clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
+        "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
     fi
 
 else
@@ -53,9 +62,9 @@ else
     echo "Building Project with Xcode ${7}"
     if [[ ${7} -gt 9 || ${7} -eq 9 ]]
     then
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
+        "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
     else
-        xcodebuild clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
+        "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
     fi
 
 fi
