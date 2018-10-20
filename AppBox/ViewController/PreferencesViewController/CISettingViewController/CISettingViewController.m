@@ -28,6 +28,9 @@
     //set user keychain settings
     [keychainPathTextField setStringValue:[UserData keychainPath] ? [UserData keychainPath] : @""];
     [keychainPasswordTextField setStringValue:[UserData keychainPassword] ? [UserData keychainPassword] : @""];
+    
+    //set xcode version path
+    [xcodePathTextField setStringValue:[UserData xcodeVersionPath] ? [UserData xcodeVersionPath] : @""];
 }
 
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender {
@@ -78,4 +81,9 @@
     [UserData setKeychainPassword:keychainPasswordTextField.stringValue];
     [Common showAlertWithTitle:@"Success" andMessage:@""];
 }
+    
+- (IBAction)xcodeSaveButtonAction:(NSButton *)sender {
+    
+}
+
 @end
