@@ -104,7 +104,8 @@ NSString *const RepoITCPassword = @"itcpassword";
     }
     
     //itcemail
-    if ([projectRawSetting.allKeys containsObject:RepoITCEmail]) {
+    if ([projectRawSetting.allKeys containsObject:RepoITCEmail] && [projectRawSetting.allKeys containsObject:RepoBuildTypeKey] &&
+        [project.buildType isEqualToString: BuildTypeAppStore]) {
         project.itcUserName = [projectRawSetting valueForKey:RepoITCEmail];
         if ([MailHandler isAllValidEmail:project.itcUserName]) {
             NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:project.itcUserName];
