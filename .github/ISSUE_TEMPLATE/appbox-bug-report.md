@@ -13,7 +13,6 @@ about: Create a bug report for AppBox macOS Application
 ## Description
 A clear and concise description of what the bug is.
 
-<!-- If making a feature request, remove the below information -->
 <!--Please list the steps used to reproduce your issue.-->
 ## Steps to Reproduce
 1.
