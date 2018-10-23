@@ -21,15 +21,11 @@ A clear and concise description of what the bug is.
 
 
 ## Details
-<!--Remove the space between the brackets and put an X between the brackets in front of the version of AppBox you are using. Like - [X] 2.5.0 -->
+<!--Remove the space between the brackets and put an X between the brackets in front of the version of AppBox you are using. Like - [X] 2.6.0 -->
 1. Which AppBox version are you using?
+    - [ ] 2.6.1
+    - [ ] 2.6.0
     - [ ] 2.5.0
-    - [ ] 2.3.0
-    - [ ] 2.2.0
-    - [ ] 2.1.2
-    - [ ] 2.0.2
-    - [ ] 2.0.1
-    - [ ] 1.1.2
     
 <!--Remove the space between the brackets and put an X between the brackets in front of the version of macOS you are using.  Like - [X] macOS 10.12.x-->
 2. Which macOS version did you experience the issue on?
