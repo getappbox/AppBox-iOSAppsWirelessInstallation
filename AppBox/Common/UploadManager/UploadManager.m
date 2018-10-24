@@ -687,11 +687,11 @@
 -(void)createUniqueShortSharableUrl{
     //Create Short URL
     [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
-        if (shortURL == nil || error) {
-            [self createAndUploadJsonWithURL:self.project.appLongShareableURL];
-        } else {
-            [self createAndUploadJsonWithURL:shortURL];
+        if (error) {
+            self.project.appLongShareableURL = shortURL;
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error in creating short URL - %@", error.localizedDescription]];
         }
+        [self createAndUploadJsonWithURL:shortURL];
     }];
 }
 
