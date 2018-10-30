@@ -16,11 +16,13 @@
     __weak IBOutlet NSTextField *keychainPathTextField;
     __weak IBOutlet NSSecureTextField *keychainPasswordTextField;
     __weak IBOutlet NSTextField *xcodePathTextField;
+    __weak IBOutlet NSButton *xcprettyCheckBox;
 }
 - (IBAction)updateAlertCheckBoxChanged:(NSButton *)sender;
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender;
+- (IBAction)xcPrettyCheckBoxChanged:(NSButton *)sender;
 - (IBAction)emailSettingSaveButtonAction:(NSButton *)sender;
 - (IBAction)keychainUnlockButtonAction:(NSButton *)sender;
 - (IBAction)xcodeSaveButtonAction:(NSButton *)sender;
-    
+
 @end
