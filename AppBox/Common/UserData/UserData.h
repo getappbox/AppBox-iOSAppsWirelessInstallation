@@ -75,10 +75,14 @@
 +(void)setEnableDebugLog:(BOOL)debugLog;
 +(BOOL)updateAlertEnable;
 +(void)setUpdateAlertEnable:(BOOL)updateAlert;
++(BOOL)useXCPretty;
++(void)setUseXCPretty:(BOOL)useXCPretty;
+
 +(NSString *)defaultCIEmail;
 +(void)setDefaultCIEmail:(NSString *)email;
 +(NSString *)ciSubjectPrefix;
 +(void)setCISubjectPrefix:(NSString *)prefix;
+
 +(NSString *)keychainPath;
 +(void)setKeychainPath:(NSString *)path;
 +(NSString *)keychainPassword;

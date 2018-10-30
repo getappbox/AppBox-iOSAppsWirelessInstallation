@@ -355,9 +355,11 @@
             [buildArgument addObject:version];
             
             //${8} xcpretty
-            NSString *xcPrettyPath = [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
-            if (xcPrettyPath){
+            NSString *xcPrettyPath =  [[NSBundle mainBundle] pathForResource:@"xcpretty/bin/xcpretty" ofType:nil];
+            if (xcPrettyPath && [UserData useXCPretty]){
                 [buildArgument addObject:xcPrettyPath];
+            } else {
+                [buildArgument addObject:abEmptyString];
             }
             
             //${9} xcode path
