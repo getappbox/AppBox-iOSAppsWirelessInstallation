@@ -30,16 +30,17 @@ Add a `appbox.plist` file in your project main directory. This file will contain
 </plist>
 ```
 
-**`appBox.plist` key description**
-**project** (required) — Name of the Xcode project/workspace file. Project must be manage signing automatically.
-**scheme** (required) — Name of the scheme to build. Project scheme must be [shared](https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/).
-**buildtype** (required) — "ad-hoc", "enterprise", "app-store" or "development"
-**teamid** (required) — Development TeamId.
-**email** (required) — mail build share url
-**personalmessage** (optional) — Attach personal message in email
-**keepsamelink** (optional) — true/false ([read more](https://docs.getappbox.com/Features/keepsamelink/))
-**dropboxfoldername** (optional) — Custom Dropbox Folder Name (By default will be bundle identifier).
-**itcemail*** (optional) - iTunesConnect/AppStore Connect email (if buildtype is app-store).
+**`appBox.plist` key description** -
+       
+- **project** (string, required) — Name of the Xcode project/workspace file. Project must be manage signing automatically.
+- **scheme** (string, required) — Name of the scheme to build. Project scheme must be [shared](https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/).
+- **buildtype** (string, required) — "ad-hoc", "enterprise", "app-store" or "development"
+- **teamid** (string, required) — Development TeamId.
+- **email** (string, required) — mail build share url
+- **personalmessage** (string, optional) — Attach personal message in email
+- **keepsamelink** (boolean, optional) — true/false ([read more](https://docs.getappbox.com/Features/keepsamelink/))
+- **dropboxfoldername** (string, optional) — Custom Dropbox Folder Name (By default will be bundle identifier).
+- **itcemail** (string, optional) - iTunesConnect/AppStore Connect email (if buildtype is app-store).
 
 #### 1.2 Private keys and Provisioning Profiles
 All your private keys and provisioning profile should be in a directory called `cert` inside project main directory. Directory `cert` will include certificates and provisioning profile and plist with name `appbox.plist` **Note** — All private key must have some valid password.
