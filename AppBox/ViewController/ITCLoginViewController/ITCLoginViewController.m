@@ -63,6 +63,28 @@
     }];
 }
 
+- (IBAction)buttonUseWithoutLoginTapped:(NSButton *)sender {
+    [[textFieldPassword window] makeFirstResponder:self.view];
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText: @"Warning"];
+    [alert setInformativeText:@"Please make sure Username/Email and Password correct. Because AppBox would not verify with AppStore."];
+    [alert addButtonWithTitle:@"Login"];
+    [alert addButtonWithTitle:@"Continue without Login"];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    
+    if ([alert runModal] == NSAlertFirstButtonReturn){
+        [self buttonLoginTapped:sender];
+    } else {
+        [self.project setItcUserName:textFieldUserName.stringValue];
+        [self.project setItcPasswod:textFieldPassword.stringValue];
+        //save username and password in keychain
+        [SAMKeychain setPassword:textFieldPassword.stringValue forService:abiTunesConnectService account:textFieldUserName.stringValue];
+        [self.delegate itcLoginResult:YES];
+        [self dismissController:self];
+    }
+}
+
+
 - (IBAction)buttonCancelTapped:(NSButton *)sender{
     [self.delegate itcLoginCanceled];
     [self dismissController:self];
@@ -87,7 +109,6 @@
 //    [self buttonLoginTapped:buttonLogin];
 }
 
-
 #pragma mark - Helper Methods
 
 - (void)selectITCAccountAtIndex:(NSInteger)index{
@@ -102,6 +123,8 @@
     [progressIndicator setHidden:!progress];
     [buttonLogin setEnabled:!progress];
     [buttonCancel setEnabled:!progress];
+    [buttonUseWithoutLogin setEnabled:!progress];
+    
     if (progress){
         [progressIndicator startAnimation:nil];
     }else{
