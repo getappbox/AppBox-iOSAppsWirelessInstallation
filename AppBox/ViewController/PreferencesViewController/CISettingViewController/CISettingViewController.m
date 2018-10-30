@@ -18,6 +18,7 @@
     [super viewDidLoad];
 
     //set general settings
+    [xcprettyCheckBox setState:[UserData useXCPretty] ? NSOnState : NSOffState];
     [limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
     [updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
     
@@ -39,6 +40,10 @@
 
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender {
     [UserData setEnableDebugLog:(sender.state == NSOnState)];
+}
+
+- (IBAction)xcPrettyCheckBoxChanged:(NSButton *)sender {
+    [UserData setUseXCPretty:(sender.state == NSOnState)];
 }
 
 - (IBAction)emailSettingSaveButtonAction:(NSButton *)sender {

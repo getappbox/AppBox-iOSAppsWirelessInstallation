@@ -279,6 +279,16 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#define UseXCPretty @"UseXCPretty"
++(BOOL)useXCPretty{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:UseXCPretty];
+}
+
++(void)setUseXCPretty:(BOOL)useXCPretty{
+    [[NSUserDefaults standardUserDefaults] setBool:useXCPretty forKey:UseXCPretty];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #define DefaultCIEmail @"DefaultCIEmail"
 +(NSString *)defaultCIEmail {
     return [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCIEmail];
