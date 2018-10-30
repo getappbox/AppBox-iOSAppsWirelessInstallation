@@ -60,7 +60,7 @@ module XCPretty
     # @regex Captured groups
     # $1 compiler_command
     # $2 file_path
-    COMPILE_COMMAND_MATCHER = /^\s*(.*\/bin\/clang\s.*\s\-c\s(.*\.(?:m|mm|c|cc|cpp|cxx))\s.*\.o)$/
+    COMPILE_COMMAND_MATCHER = /^\s*(.*clang\s.*\s\-c\s(.*\.(?:m|mm|c|cc|cpp|cxx))\s.*\.o)$/
 
     # @regex Captured groups
     # $1 file_path
@@ -423,7 +423,7 @@ module XCPretty
       when WILL_NOT_BE_CODE_SIGNED_MATCHER
         formatter.format_will_not_be_code_signed($1)
       else
-        ""
+        formatter.format_other(text)
       end
     end
 
