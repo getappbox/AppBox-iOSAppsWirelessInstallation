@@ -41,30 +41,62 @@ cd "${1}"
 #               Make Archive                   #
 ################################################
 
-#check either project is Xcode Project or Xcode Workspace
-if [[ "${2}" == *"xcodeproj" ]]
+#check if build with xcpretty or not
+if [[ "${8}" == "" ]]
 then
-    echo "Building Project..."
+    echo "XCPretty Disabled..."
 
-    #check either selected xcode is 9 or higher
-    echo "Building Project with Xcode ${7}"
-    if [[ ${7} -gt 9 || ${7} -eq 9 ]]
+    #check either project is Xcode Project or Xcode Workspace
+    if [[ "${2}" == *"xcodeproj" ]]
     then
-        "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
-    else
-        "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
-    fi
+        echo "Building Project..."
+        echo "Building Project with Xcode ${7}"
 
+        #check either selected xcode is 9 or higher
+        if [[ ${7} -gt 9 || ${7} -eq 9 ]]
+        then
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+        else
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
+        fi
+
+    else
+        echo "Building Workspace..."
+        echo "Building Project with Xcode ${7}"
+
+        #check either selected xcode is 9 or higher
+        if [[ ${7} -gt 9 || ${7} -eq 9 ]]
+        then
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+        else
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+        fi
+    fi
 else
-    echo "Building Workspace..."
-
-    #check either selected xcode is 9 or higher
-    echo "Building Project with Xcode ${7}"
-    if [[ ${7} -gt 9 || ${7} -eq 9 ]]
+    #check either project is Xcode Project or Xcode Workspace
+    if [[ "${2}" == *"xcodeproj" ]]
     then
-        "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
-    else
-        "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
-    fi
+        echo "Building Project..."
+        echo "Building Project with Xcode ${7}"
 
+        #check either selected xcode is 9 or higher
+        if [[ ${7} -gt 9 || ${7} -eq 9 ]]
+        then
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
+        else
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
+        fi
+
+    else
+        echo "Building Workspace..."
+        echo "Building Project with Xcode ${7}"
+
+        #check either selected xcode is 9 or higher
+        if [[ ${7} -gt 9 || ${7} -eq 9 ]]
+        then
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
+        else
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
+        fi
+    fi
 fi
