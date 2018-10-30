@@ -1038,8 +1038,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f90-He-X67">
-                                <rect key="frame" x="357" y="3" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hgJ-EJ-Kl5">
+                                <rect key="frame" x="289" y="3" width="150" height="32"/>
+                                <buttonCell key="cell" type="push" title="Use without Login" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hgJ-EJ-Kl5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <string key="keyEquivalent" base64-UTF8="YES">
@@ -1047,57 +1047,71 @@ Gw
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="buttonCancelTapped:" target="PbW-uV-2L2" id="j97-cQ-pmo"/>
+                                    <action selector="buttonUseWithoutLoginTapped:" target="PbW-uV-2L2" id="tAn-Nr-keD"/>
                                 </connections>
                             </button>
                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="d4L-SC-RTJ">
-                                <rect key="frame" x="20" y="13" width="16" height="16"/>
+                                <rect key="frame" x="499" y="117" width="16" height="16"/>
                             </progressIndicator>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="6ir-tD-Xes">
                                 <rect key="frame" x="0.0" y="107" width="535" height="5"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z0x-KT-hae">
-                                <rect key="frame" x="18" y="115" width="499" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Login with iTunes Connect" id="Sny-jA-ChF">
+                                <rect key="frame" x="18" y="115" width="207" height="19"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Login with AppStore Connect" id="Sny-jA-ChF">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-WA-cC2">
+                                <rect key="frame" x="14" y="3" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qXv-Ih-AYl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonCancelTapped:" target="PbW-uV-2L2" id="Ntj-fB-KhY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="z0x-KT-hae" firstAttribute="leading" secondItem="22p-rt-iZL" secondAttribute="leading" constant="20" id="4Vs-Kl-Hdz"/>
+                            <constraint firstItem="d4L-SC-RTJ" firstAttribute="trailing" secondItem="D65-om-pT7" secondAttribute="trailing" id="7fN-f0-sia"/>
                             <constraint firstAttribute="trailing" secondItem="6ir-tD-Xes" secondAttribute="trailing" id="96W-aJ-XAb"/>
                             <constraint firstItem="D65-om-pT7" firstAttribute="centerY" secondItem="Vkc-JU-DbO" secondAttribute="centerY" id="9aM-Lz-SWg"/>
                             <constraint firstItem="beq-DX-d3f" firstAttribute="top" secondItem="Po2-xN-nM2" secondAttribute="bottom" constant="15" id="A9D-KP-3zh"/>
                             <constraint firstItem="Po2-xN-nM2" firstAttribute="centerY" secondItem="Vkc-JU-DbO" secondAttribute="centerY" id="DRn-44-7eU"/>
                             <constraint firstItem="D65-om-pT7" firstAttribute="trailing" secondItem="Vkc-JU-DbO" secondAttribute="trailing" id="EKb-cW-l64"/>
                             <constraint firstItem="D65-om-pT7" firstAttribute="leading" secondItem="Vkc-JU-DbO" secondAttribute="leading" id="Hd4-jj-d1u"/>
-                            <constraint firstItem="d4L-SC-RTJ" firstAttribute="centerY" secondItem="f90-He-X67" secondAttribute="centerY" id="Iov-ex-sza"/>
                             <constraint firstItem="sjt-vM-8hr" firstAttribute="leading" secondItem="f90-He-X67" secondAttribute="trailing" constant="20" id="KLX-eg-f4o"/>
                             <constraint firstItem="Vkc-JU-DbO" firstAttribute="trailing" secondItem="gDv-1Z-wd2" secondAttribute="trailing" id="NYV-wF-ylA"/>
                             <constraint firstItem="6ir-tD-Xes" firstAttribute="leading" secondItem="22p-rt-iZL" secondAttribute="leading" id="Qks-fk-2ft"/>
-                            <constraint firstItem="beq-DX-d3f" firstAttribute="leading" secondItem="d4L-SC-RTJ" secondAttribute="leading" id="Qzl-7p-HFp"/>
                             <constraint firstItem="6ir-tD-Xes" firstAttribute="top" secondItem="z0x-KT-hae" secondAttribute="bottom" constant="5" id="VOn-Fi-aDT"/>
+                            <constraint firstItem="beq-DX-d3f" firstAttribute="leading" secondItem="uoW-WA-cC2" secondAttribute="leading" id="XSP-u7-aKz"/>
                             <constraint firstItem="gDv-1Z-wd2" firstAttribute="leading" secondItem="beq-DX-d3f" secondAttribute="trailing" constant="15" id="Y5q-Lo-ejh"/>
                             <constraint firstItem="Vkc-JU-DbO" firstAttribute="leading" secondItem="Po2-xN-nM2" secondAttribute="trailing" constant="15" id="bic-SM-Km5"/>
                             <constraint firstAttribute="bottom" secondItem="sjt-vM-8hr" secondAttribute="bottom" constant="10" id="cyY-Rf-Q0q"/>
                             <constraint firstItem="f90-He-X67" firstAttribute="centerY" secondItem="sjt-vM-8hr" secondAttribute="centerY" id="djE-5K-rnV"/>
                             <constraint firstItem="Po2-xN-nM2" firstAttribute="leading" secondItem="beq-DX-d3f" secondAttribute="leading" id="e8I-hb-3hc"/>
+                            <constraint firstItem="uoW-WA-cC2" firstAttribute="centerY" secondItem="f90-He-X67" secondAttribute="centerY" id="eEN-Tw-izg"/>
                             <constraint firstItem="Vkc-JU-DbO" firstAttribute="top" secondItem="6ir-tD-Xes" secondAttribute="bottom" constant="10" id="iap-46-FAg"/>
                             <constraint firstItem="sjt-vM-8hr" firstAttribute="top" secondItem="gDv-1Z-wd2" secondAttribute="bottom" constant="10" id="j2g-jZ-wA9"/>
                             <constraint firstItem="Po2-xN-nM2" firstAttribute="trailing" secondItem="beq-DX-d3f" secondAttribute="trailing" id="mpz-gg-sTs"/>
+                            <constraint firstItem="z0x-KT-hae" firstAttribute="centerY" secondItem="d4L-SC-RTJ" secondAttribute="centerY" id="oBi-15-s6W"/>
                             <constraint firstAttribute="trailing" secondItem="Vkc-JU-DbO" secondAttribute="trailing" constant="20" id="pBb-T4-ma3"/>
                             <constraint firstItem="beq-DX-d3f" firstAttribute="centerY" secondItem="gDv-1Z-wd2" secondAttribute="centerY" id="qcg-MR-roN"/>
-                            <constraint firstAttribute="trailing" secondItem="z0x-KT-hae" secondAttribute="trailing" constant="20" id="sWa-hg-Jvm"/>
                             <constraint firstItem="z0x-KT-hae" firstAttribute="top" secondItem="22p-rt-iZL" secondAttribute="top" constant="10" id="tfH-C3-t8V"/>
                             <constraint firstItem="gDv-1Z-wd2" firstAttribute="trailing" secondItem="sjt-vM-8hr" secondAttribute="trailing" id="ub8-kx-5nb"/>
                             <constraint firstItem="Po2-xN-nM2" firstAttribute="leading" secondItem="22p-rt-iZL" secondAttribute="leading" constant="20" id="y88-nq-Cbg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonCancel" destination="f90-He-X67" id="x0l-Mi-1si"/>
                         <outlet property="buttonLogin" destination="sjt-vM-8hr" id="IeO-kl-W4E"/>
+                        <outlet property="buttonUseWithoutLogin" destination="f90-He-X67" id="5Rc-NF-TRp"/>
                         <outlet property="comboUserName" destination="D65-om-pT7" id="Mzh-qQ-aEi"/>
                         <outlet property="progressIndicator" destination="d4L-SC-RTJ" id="Bsq-yA-261"/>
                         <outlet property="textFieldPassword" destination="gDv-1Z-wd2" id="vSE-c4-irU"/>
