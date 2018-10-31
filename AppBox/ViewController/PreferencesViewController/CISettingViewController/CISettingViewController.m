@@ -92,4 +92,8 @@
     [Common showAlertWithTitle:@"Success" andMessage:@""];
 }
 
+- (IBAction)xcodePathHelpButtonAction:(NSButton *)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abMultipleXcodeVersionURL]];
+}
+
 @end

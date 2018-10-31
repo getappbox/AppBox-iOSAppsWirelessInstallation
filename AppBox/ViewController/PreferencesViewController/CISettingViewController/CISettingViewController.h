@@ -24,5 +24,6 @@
 - (IBAction)emailSettingSaveButtonAction:(NSButton *)sender;
 - (IBAction)keychainUnlockButtonAction:(NSButton *)sender;
 - (IBAction)xcodeSaveButtonAction:(NSButton *)sender;
+- (IBAction)xcodePathHelpButtonAction:(NSButton *)sender;
 
 @end
