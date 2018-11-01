@@ -115,28 +115,6 @@ NSString *const RepoITCPassword = @"itcpassword";
         project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
     }
     
-    //app-store and itcmail check
-    if (![projectRawSetting.allKeys containsObject:RepoITCEmail]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"AppStore Connect Account email not available in appbox.plist. You need to add \"%@\" key with AppStore Connect Account email id in appbox.plist. Read more here - %@", RepoITCEmail, abCICDAppStore]];
-        exit(abExitCodeITCMailNotFound);
-    }
-    
-    //itcemail
-    if ([projectRawSetting.allKeys containsObject:RepoITCEmail]) {
-        project.itcUserName = [projectRawSetting valueForKey:RepoITCEmail];
-        if ([MailHandler isAllValidEmail:project.itcUserName]) {
-            NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:project.itcUserName];
-            if (password == nil || password.length == 0) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not available in keychain. Please add account in AppBox first. Read more here - %@", project.itcUserName, abCICDAppStore]];
-                exit(abExitCodeForInvalidITCAccount);
-            } else {
-                project.itcPasswod = password;
-            }
-        } else if (project.itcUserName.length > 0) {
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not a valid email. Please enter a valid email address.", project.itcUserName]];
-            exit(abExitCodeForInvalidITCAccount);
-        }
-    }
     
     //Replace current settings from command line arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
@@ -174,6 +152,32 @@ NSString *const RepoITCPassword = @"itcpassword";
             }
         }
     }
+    
+    
+    //app-store and itcmail check
+    bool isAppStoreBuild = (project.buildType != nil && [project.buildType isEqualToString: BuildTypeAppStore]);
+    if (isAppStoreBuild && ![projectRawSetting.allKeys containsObject:RepoITCEmail]) {
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"AppStore Connect Account email not available in appbox.plist. You need to add \"%@\" key with AppStore Connect Account email id in appbox.plist. Read more here - %@", RepoITCEmail, abCICDAppStore]];
+        exit(abExitCodeITCMailNotFound);
+    }
+    
+    //itcemail
+    if (isAppStoreBuild && [projectRawSetting.allKeys containsObject:RepoITCEmail]) {
+        project.itcUserName = [projectRawSetting valueForKey:RepoITCEmail];
+        if ([MailHandler isAllValidEmail:project.itcUserName]) {
+            NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:project.itcUserName];
+            if (password == nil || password.length == 0) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not available in keychain. Please add account in AppBox first. Read more here - %@", project.itcUserName, abCICDAppStore]];
+                exit(abExitCodeForInvalidITCAccount);
+            } else {
+                project.itcPasswod = password;
+            }
+        } else if (project.itcUserName.length > 0) {
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not a valid email. Please enter a valid email address.", project.itcUserName]];
+            exit(abExitCodeForInvalidITCAccount);
+        }
+    }
+    
     return project;
 }
 
