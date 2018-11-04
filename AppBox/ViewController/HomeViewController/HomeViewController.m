@@ -127,12 +127,6 @@
         ciRepoProject = notification.object;
         if (ciRepoProject.ipaFullPath)
         {
-            [CIProjectBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
-            [textFieldEmail setStringValue:ciRepoProject.emails];
-            [textFieldMessage setStringValue:ciRepoProject.personalMessage];
-            if (project.emails.length > 0){
-                [buttonSendMail setState:NSOnState];
-            }
             [self initIPAUploadProcessForURL: ciRepoProject.ipaFullPath];
         }
         else
@@ -183,8 +177,14 @@
 
 - (void)initIPAUploadProcessForURL:(NSURL *)ipaURL {
     [self viewStateForProgressFinish:YES];
+    [CIProjectBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
+    if (project.emails.length > 0){
+        [buttonSendMail setState:NSOnState];
+    }
     [project setIpaFullPath:ipaURL];
-    [selectedFilePath setURL:ipaURL];
+    [selectedFilePath setURL:ipaURL]; 
+    [textFieldEmail setStringValue:project.emails];
+    [textFieldMessage setStringValue:project.personalMessage];
     [self actionButtonTapped:buttonAction];
 }
 
