@@ -10,6 +10,20 @@
 
 @implementation XCProject
 
+#pragma mark - Init
+
+- (instancetype)initEmpty {
+    self = [super init];
+    if (self) {
+        self.keepSameLink = @0;
+        self.emails = abEmptyString;
+        self.buildType = abEmptyString;
+        self.selectedSchemes = abEmptyString;
+        self.personalMessage = abEmptyString;
+    }
+    return self;
+}
+
 #pragma mark - Helper
 -(void)createUDIDAndIsNew:(BOOL)isNew{
     if (isNew || _uuid == nil){

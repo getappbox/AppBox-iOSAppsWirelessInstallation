@@ -178,8 +178,7 @@
 }
 
 -(void)handleIPAAtPath:(NSString *)ipaPath {
-    XCProject *project = [[XCProject alloc] init];
-    project.ipaFullPath = [NSURL fileURLWithPath:ipaPath];
+    XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
     if (self.isReadyToBuild) {
         [self addSessionLog:@"AppBox is ready to build."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];

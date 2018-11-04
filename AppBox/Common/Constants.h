@@ -131,7 +131,10 @@ typedef enum : NSUInteger {
 #define abArgsBuildType @"buildtype="
 #define abArgsTeamId @"teamid="
 #define abArgsIPA @"ipa="
-#define abArgsIPAInfo @"ipaInfo="
+#define abArgsEmails @"email="
+#define abArgsPersonalMessage @"message="
+#define abArgsKeepSameLink @"keepsamelink="
+#define abArgsDropBoxFolderName @"dbfolder="
 
 
 #endif /* Constants_h */
