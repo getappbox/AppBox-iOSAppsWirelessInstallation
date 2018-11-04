@@ -487,7 +487,7 @@
                     [comboBuildScheme selectItemAtIndex:0];
                     //If CI Project then set project details direct from appbox.plist
                     if (ciRepoProject) {
-                        [RepoBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
+                        [CIProjectBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
                         [comboTeamId removeAllItems];
                         if (project.teamId == nil) {
                             [self showStatus:@"Private key not available in keychain." andShowProgressBar:NO withProgress:-1];

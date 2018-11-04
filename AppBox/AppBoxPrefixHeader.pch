@@ -38,12 +38,12 @@
 #import "HangoutClient.h"
 #import "MSTeamsClient.h"
 #import "TaskHandler.h"
-#import "RepoBuilder.h"
 #import "EventTracker.h"
 #import "UpdateHandler.h"
 #import "DBErrorHandler.h"
 #import "NetworkHandler.h"
 #import "KeychainHandler.h"
+#import "CIProjectBuilder.h"
 #import "KeychainHandler+Helper.h"
 #import "NSApplication+MenuHandler.h"
 

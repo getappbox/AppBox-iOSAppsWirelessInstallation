@@ -6,7 +6,7 @@
 //  Copyright © 2017 Developer Insider. All rights reserved.
 //
 
-#import "RepoBuilder.h"
+#import "CIProjectBuilder.h"
 
 //Project
 NSString * const RepoProjectKey = @"project";
@@ -31,7 +31,7 @@ NSString * const RepoCertificateDirectoryName = @"cert";
 NSString *const RepoITCEmail = @"itcemail";
 NSString *const RepoITCPassword = @"itcpassword";
 
-@implementation RepoBuilder{
+@implementation CIProjectBuilder{
     
 }
 

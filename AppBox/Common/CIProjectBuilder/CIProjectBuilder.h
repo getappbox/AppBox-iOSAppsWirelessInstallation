@@ -10,7 +10,7 @@
 
 #import "XCProject.h"
 
-@interface RepoBuilder : NSObject {
+@interface CIProjectBuilder : NSObject {
     
 }
 
