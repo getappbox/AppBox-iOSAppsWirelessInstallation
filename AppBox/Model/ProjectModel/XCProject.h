@@ -87,6 +87,7 @@
 @property(nonatomic, retain) NSString *distributionLocalDirectory;
 @property(nonatomic, retain) NSURL *ipaFileLocalShareableURL;
 
+- (instancetype)initEmpty;
 - (BOOL)isValidProjectInfoPlist;
 - (BOOL)createExportOptionPlist;
 - (void)createUDIDAndIsNew:(BOOL)isNew;

@@ -21,4 +21,6 @@
 + (NSString *)isValidRepoForCertificateFileAtPath:(NSString *)path;
 + (void)installCertificateWithDetailsInFile:(NSString *)detailsFilePath andRepoPath:(NSString *)repoPath;
 
++ (XCProject *)xcProjectWithIPAPath:(NSString *)ipaPath;
+
 @end

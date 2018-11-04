@@ -127,6 +127,12 @@
         ciRepoProject = notification.object;
         if (ciRepoProject.ipaFullPath)
         {
+            [CIProjectBuilder setProjectSettingFromProject:ciRepoProject toProject:project];
+            [textFieldEmail setStringValue:ciRepoProject.emails];
+            [textFieldMessage setStringValue:ciRepoProject.personalMessage];
+            if (project.emails.length > 0){
+                [buttonSendMail setState:NSOnState];
+            }
             [self initIPAUploadProcessForURL: ciRepoProject.ipaFullPath];
         }
         else
