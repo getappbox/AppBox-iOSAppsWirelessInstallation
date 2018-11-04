@@ -151,12 +151,12 @@
 
 -(void)handleProjectAtPath:(NSString *)projectPath {    
     //get certificate
-    NSString *certInfoPath = [RepoBuilder isValidRepoForCertificateFileAtPath:projectPath];
-    [RepoBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
+    NSString *certInfoPath = [CIProjectBuilder isValidRepoForCertificateFileAtPath:projectPath];
+    [CIProjectBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
     
     //create project
-    NSString *settingPath = [RepoBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
-    XCProject *project = [RepoBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
+    NSString *settingPath = [CIProjectBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
+    XCProject *project = [CIProjectBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
     
     //check project
     if (project == nil) {
