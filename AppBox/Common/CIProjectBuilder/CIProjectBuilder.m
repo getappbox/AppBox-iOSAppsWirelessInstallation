@@ -6,7 +6,7 @@
 //  Copyright © 2017 Developer Insider. All rights reserved.
 //
 
-#import "RepoBuilder.h"
+#import "CIProjectBuilder.h"
 
 //Project
 NSString * const RepoProjectKey = @"project";
@@ -31,7 +31,7 @@ NSString * const RepoCertificateDirectoryName = @"cert";
 NSString *const RepoITCEmail = @"itcemail";
 NSString *const RepoITCPassword = @"itcpassword";
 
-@implementation RepoBuilder{
+@implementation CIProjectBuilder{
     
 }
 
@@ -49,7 +49,7 @@ NSString *const RepoITCPassword = @"itcpassword";
 }
 
 + (XCProject *)xcProjectWithRepoPath:(NSString *)repoPath andSettingFilePath:(NSString *)settingPath {
-    XCProject *project = [[XCProject alloc] init];
+    XCProject *project = [[XCProject alloc] initEmpty];
     
     //get project raw setting from plist
     NSDictionary *projectRawSetting = [NSDictionary dictionaryWithContentsOfFile:settingPath];
@@ -115,10 +115,15 @@ NSString *const RepoITCPassword = @"itcpassword";
         project.personalMessage = [projectRawSetting valueForKey:RepoPersonalMessageKey];
     }
     
+    
+    //Replace current settings from command line arguments
+    [[self class] setCommonArgumentsToProject:project];
+    
+    
     //app-store and itcmail check
-    BOOL isAppStoreBuild = [projectRawSetting.allKeys containsObject:RepoBuildTypeKey] && [project.buildType isEqualToString: BuildTypeAppStore];
+    bool isAppStoreBuild = (project.buildType != nil && [project.buildType isEqualToString: BuildTypeAppStore]);
     if (isAppStoreBuild && ![projectRawSetting.allKeys containsObject:RepoITCEmail]) {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account email not available in appbox.plist. You need to add \"%@\" key with iTubes Connect Account email id.", RepoITCEmail]];
+        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"AppStore Connect Account email not available in appbox.plist. You need to add \"%@\" key with AppStore Connect Account email id in appbox.plist. Read more here - %@", RepoITCEmail, abCICDAppStore]];
         exit(abExitCodeITCMailNotFound);
     }
     
@@ -128,53 +133,17 @@ NSString *const RepoITCPassword = @"itcpassword";
         if ([MailHandler isAllValidEmail:project.itcUserName]) {
             NSString *password = [SAMKeychain passwordForService:abiTunesConnectService account:project.itcUserName];
             if (password == nil || password.length == 0) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not available in keychain. Please add account in AppBox first.", project.itcUserName]];
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not available in keychain. Please add account in AppBox first. Read more here - %@", project.itcUserName, abCICDAppStore]];
                 exit(abExitCodeForInvalidITCAccount);
             } else {
                 project.itcPasswod = password;
             }
         } else if (project.itcUserName.length > 0) {
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not a valid email.", project.itcUserName]];
+            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"iTunes Connect Account %@ not a valid email. Please enter a valid email address.", project.itcUserName]];
             exit(abExitCodeForInvalidITCAccount);
         }
     }
     
-    //Replace current settings from command line arguments
-    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    [ABLog log:@"All Command Line Arguments = %@",arguments];
-    for (NSString *argument in arguments) {
-        if ([argument containsString:abArgsScheme]) {
-            NSArray *components = [argument componentsSeparatedByString:abArgsScheme];
-            [ABLog log:@"Scheme Components = %@",components];
-            if (components.count == 2) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project scheme to %@ from %@", [components lastObject], project.selectedSchemes]];
-                project.selectedSchemes = [components lastObject];
-            } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Scheme Argument %@",arguments]];
-                exit(abExitCodeForInvalidCommand);
-            }
-        } else if ([argument containsString:abArgsBuildType]) {
-            NSArray *components = [argument componentsSeparatedByString:abArgsBuildType];
-            [ABLog log:@"BuildType Components = %@",components];
-            if (components.count == 2) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project build type to %@ from %@", [components lastObject], project.buildType]];
-                project.buildType = [components lastObject];
-            } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid BuildType Argument %@",arguments]];
-                exit(abExitCodeForInvalidCommand);
-            }
-        } else if ([argument containsString:abArgsTeamId]) {
-            NSArray *components = [argument componentsSeparatedByString:abArgsTeamId];
-            [ABLog log:@"TeamId Components = %@",components];
-            if (components.count == 2) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project TeamId to %@ from %@", [components lastObject], project.teamId]];
-                project.teamId = [components lastObject];
-            } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid TeamId Argument %@",arguments]];
-                exit(abExitCodeForInvalidCommand);
-            }
-        }
-    }
     return project;
 }
 
@@ -220,6 +189,107 @@ NSString *const RepoITCPassword = @"itcpassword";
     }
 }
 
+#pragma mark - IPA
++ (XCProject *)xcProjectWithIPAPath:(NSString *)ipaPath {
+    XCProject *project = [[XCProject alloc] initEmpty];
+    project.ipaFullPath = [NSURL fileURLWithPath:ipaPath];
+    [[self class] setCommonArgumentsToProject:project];
+    return project;
+}
+
+
+#pragma mark - Common Arguments
++(void)setCommonArgumentsToProject:(XCProject *)project {
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    [ABLog log:@"All Command Line Arguments = %@",arguments];
+    for (NSString *argument in arguments) {
+        //Project Scheme
+        if ([argument containsString:abArgsScheme]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsScheme];
+            [ABLog log:@"Scheme Components = %@",components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project scheme to %@ from %@", [components lastObject], project.selectedSchemes]];
+                project.selectedSchemes = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Scheme Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        //Project Build Type
+        else if ([argument containsString:abArgsBuildType]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsBuildType];
+            [ABLog log:@"BuildType Components = %@",components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project build type to %@ from %@", [components lastObject], project.buildType]];
+                project.buildType = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid BuildType Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        //Project Team Id
+        else if ([argument containsString:abArgsTeamId]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsTeamId];
+            [ABLog log:@"TeamId Components = %@",components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project TeamId to %@ from %@", [components lastObject], project.teamId]];
+                project.teamId = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid TeamId Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        //Project Emails
+        else if ([argument containsString:abArgsEmails]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
+            [ABLog log:@"Email Components = %@", components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project Emails to %@ from %@", [components lastObject], project.emails]];
+                project.emails = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Emails Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        //Project Personal Messages
+        else if ([argument containsString:abArgsPersonalMessage]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsPersonalMessage];
+            [ABLog log:@"Personal Message Components = %@", components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project personal message to %@ from %@", [components lastObject], project.personalMessage]];
+                project.personalMessage = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Personal Message Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        //Project Personal Messages
+        else if ([argument containsString:abArgsKeepSameLink]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsKeepSameLink];
+            [ABLog log:@"Keep Same Links Components = %@", components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project personal message to %@ from %@", [components lastObject], project.personalMessage]];
+                project.keepSameLink = [[components lastObject] isEqualToString:@"0"] ? @0 : @1;
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Personal Message Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        //Project dropbox folder name
+        else if ([argument containsString:abArgsDropBoxFolderName]) {
+            NSArray *components = [argument componentsSeparatedByString:abArgsDropBoxFolderName];
+            [ABLog log:@"Dropbox folder Components = %@", components];
+            if (components.count == 2) {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing Dropbox folder name to %@ from %@", [components lastObject], project.personalMessage]];
+                //project.db = [components lastObject];
+            } else {
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Dropbox Folder Name Argument %@",arguments]];
+                exit(abExitCodeForInvalidCommand);
+            }
+        }
+        
+    }
+}
 
 @end
 

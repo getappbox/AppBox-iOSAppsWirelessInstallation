@@ -61,7 +61,7 @@
 		E11633991E558635005EAB31 /* MobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = E11633981E558635005EAB31 /* MobileProvision.m */; };
 		E119EF601E373C9B00A7798E /* ALAppStore.sh in Resources */ = {isa = PBXBuildFile; fileRef = E191F7C21E1E7B2A00D2A590 /* ALAppStore.sh */; };
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
-		E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* RepoBuilder.m */; };
+		E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CIProjectBuilder.m */; };
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
 		E13946161DF2FBAD00B3FAD0 /* ProjectBuildScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E13946141DF2FBAD00B3FAD0 /* ProjectBuildScript.sh */; };
 		E14237C22010A6F600F83501 /* CreateIPAScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = E14237C12010A16300F83501 /* CreateIPAScript.sh */; };
@@ -327,8 +327,8 @@
 		E119EF5F1E3735EA00A7798E /* XCodePath.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = XCodePath.sh; sourceTree = "<group>"; };
 		E12E6D071D8FC77D0054814D /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		E12E6D081D8FC77D0054814D /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
-		E13161F01E9777DF00586052 /* RepoBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoBuilder.h; sourceTree = "<group>"; };
-		E13161F11E9777DF00586052 /* RepoBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoBuilder.m; sourceTree = "<group>"; };
+		E13161F01E9777DF00586052 /* CIProjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIProjectBuilder.h; sourceTree = "<group>"; };
+		E13161F11E9777DF00586052 /* CIProjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIProjectBuilder.m; sourceTree = "<group>"; };
 		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
 		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
 		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
@@ -770,13 +770,13 @@
 			path = DashboardViewController;
 			sourceTree = "<group>";
 		};
-		E13161EF1E97775100586052 /* RepoBuilder */ = {
+		E13161EF1E97775100586052 /* CIProjectBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				E13161F01E9777DF00586052 /* RepoBuilder.h */,
-				E13161F11E9777DF00586052 /* RepoBuilder.m */,
+				E13161F01E9777DF00586052 /* CIProjectBuilder.h */,
+				E13161F11E9777DF00586052 /* CIProjectBuilder.m */,
 			);
-			path = RepoBuilder;
+			path = CIProjectBuilder;
 			sourceTree = "<group>";
 		};
 		E139460F1DF2AFC200B3FAD0 /* ProjectModel */ = {
@@ -1261,7 +1261,7 @@
 				E11633961E558609005EAB31 /* MobileProvision */,
 				E16D72D91E88F9EE0031FB7C /* XcodeHandler */,
 				E1902B491E16617B00C3E0F6 /* GitHandler */,
-				E13161EF1E97775100586052 /* RepoBuilder */,
+				E13161EF1E97775100586052 /* CIProjectBuilder */,
 				DB2629821F961F3100C4C647 /* DBErrorHandler */,
 				DBDCFBBB1F99C7860022097B /* UploadManager */,
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
@@ -1556,7 +1556,7 @@
 				DB1A06532160CE27008D33FD /* TeamsViewController.m in Sources */,
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
-				E13161F21E9777DF00586052 /* RepoBuilder.m in Sources */,
+				E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */,

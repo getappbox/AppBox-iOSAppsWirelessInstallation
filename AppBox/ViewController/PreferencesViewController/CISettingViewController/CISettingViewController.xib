@@ -281,7 +281,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L4t-jD-8Hk">
-                                <rect key="frame" x="220" y="47" width="500" height="22"/>
+                                <rect key="frame" x="220" y="47" width="469" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="example - /Applications/Xcode-{Version}.app" drawsBackground="YES" id="t17-QJ-peO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -310,13 +310,23 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3eH-wn-aNc">
-                                <rect key="frame" x="218" y="36" width="504" height="11"/>
+                                <rect key="frame" x="218" y="36" width="473" height="11"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="{Version} will be replaced by given version in appbox.plist" id="W6W-3w-nEh">
                                     <font key="font" metaFont="miniSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4sJ-Vn-XCY">
+                                <rect key="frame" x="697" y="44" width="25" height="25"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EPY-rs-MIW">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="xcodePathHelpButtonAction:" target="-2" id="Z2s-0a-JTt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ftZ-ix-fVO" secondAttribute="bottom" constant="10" id="3Hj-Ku-nHn"/>
@@ -324,11 +334,13 @@
                             <constraint firstItem="L4t-jD-8Hk" firstAttribute="trailing" secondItem="3eH-wn-aNc" secondAttribute="trailing" id="7xn-vm-US9"/>
                             <constraint firstItem="70v-F6-Vug" firstAttribute="centerY" secondItem="L4t-jD-8Hk" secondAttribute="centerY" id="CQT-JR-mw6"/>
                             <constraint firstItem="3eH-wn-aNc" firstAttribute="top" secondItem="L4t-jD-8Hk" secondAttribute="bottom" id="PUJ-ky-cfW"/>
+                            <constraint firstAttribute="trailing" secondItem="4sJ-Vn-XCY" secondAttribute="trailing" constant="10" id="VCt-Wl-WA3"/>
                             <constraint firstAttribute="trailing" secondItem="ftZ-ix-fVO" secondAttribute="trailing" constant="10" id="Yhg-Gu-OJI"/>
                             <constraint firstItem="70v-F6-Vug" firstAttribute="top" secondItem="Sm9-bN-hv5" secondAttribute="top" constant="10" id="ahH-zk-4h8"/>
+                            <constraint firstItem="L4t-jD-8Hk" firstAttribute="centerY" secondItem="4sJ-Vn-XCY" secondAttribute="centerY" id="fYp-C5-PfR"/>
                             <constraint firstItem="70v-F6-Vug" firstAttribute="leading" secondItem="Sm9-bN-hv5" secondAttribute="leading" constant="10" id="lhB-Tz-Umq"/>
-                            <constraint firstAttribute="trailing" secondItem="L4t-jD-8Hk" secondAttribute="trailing" constant="10" id="raU-zb-2aS"/>
                             <constraint firstItem="ftZ-ix-fVO" firstAttribute="top" secondItem="3eH-wn-aNc" secondAttribute="bottom" constant="5" id="slG-ui-aWe"/>
+                            <constraint firstItem="4sJ-Vn-XCY" firstAttribute="leading" secondItem="L4t-jD-8Hk" secondAttribute="trailing" constant="10" id="xMt-RA-teH"/>
                             <constraint firstItem="L4t-jD-8Hk" firstAttribute="leading" secondItem="3eH-wn-aNc" secondAttribute="leading" id="zaU-dk-5WJ"/>
                         </constraints>
                     </view>

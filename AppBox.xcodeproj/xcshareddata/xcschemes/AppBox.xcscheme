@@ -67,6 +67,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "build=/Users/vineetchoudhary/Downloads/ourValues-iOS-UAT-AppStore"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/Space Test/PayloadIphone10.0.ipa"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -75,7 +79,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "build=/Users/vineetchoudhary/Desktop/xcode10test"
+            argument = "build=/Users/vineetchoudhary/Desktop/xcode10test/xcode10appstore"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

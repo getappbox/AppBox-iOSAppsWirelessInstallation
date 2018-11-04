@@ -27,6 +27,8 @@
 #define abMoreDetailsHelpURL @"https://docs.getappbox.com/Features/moredetails/"
 #define abKeepSameLinkReadMoreURL @"https://docs.getappbox.com/Features/keepsamelink/"
 #define abUploadChunkSizeHelpURL @"https://docs.getappbox.com/Features/uploadchunksize/"
+#define abMultipleXcodeVersionURL @"https://docs.getappbox.com/FAQs/cimultiplexcodeversion/"
+#define abCICDAppStore @"https://docs.getappbox.com/ContinuousIntegration/cicdforappstore/"
 #define abShareXcodeProjectSchemeURL @"https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/"
 #define abDontShowPerviousBuildURL @"https://docs.getappbox.com/Features/keepsamelink/#3-how-to-keep-the-same-link-but-also-hide-the-previous-version-from-the-installation-page"
 
@@ -129,7 +131,10 @@ typedef enum : NSUInteger {
 #define abArgsBuildType @"buildtype="
 #define abArgsTeamId @"teamid="
 #define abArgsIPA @"ipa="
-#define abArgsIPAInfo @"ipaInfo="
+#define abArgsEmails @"email="
+#define abArgsPersonalMessage @"message="
+#define abArgsKeepSameLink @"keepsamelink="
+#define abArgsDropBoxFolderName @"dbfolder="
 
 
 #endif /* Constants_h */
