@@ -1958,6 +1958,17 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="550" height="115"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n7a-6Z-Rsw">
+                                <rect key="frame" x="8" y="45" width="534" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="530" id="6f7-UJ-syU"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" id="2jf-AI-4Wx">
+                                    <font key="font" metaFont="systemThin" size="26"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.92931067943572998" green="0.92946994304656982" blue="0.92930072546005249" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yjb-Ai-pHD">
                                 <rect key="frame" x="10" y="45" width="530" height="31"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XB5-fc-FCv">
@@ -1969,19 +1980,6 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="buttonOpenURLAction:" target="dq2-4K-v2z" id="KJB-vY-llm"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ui-cf-b7U">
-                                <rect key="frame" x="4" y="3" width="148" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="gAi-u0-YKY"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" title="Copy to clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="phf-yf-lsh">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="buttonCopyToClipboardTapped:" target="dq2-4K-v2z" id="3Hn-c6-QKR"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IRS-6c-DTS">
@@ -2008,19 +2006,8 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n7a-6Z-Rsw">
-                                <rect key="frame" x="8" y="45" width="534" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="530" id="6f7-UJ-syU"/>
-                                </constraints>
-                                <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" id="2jf-AI-4Wx">
-                                    <font key="font" metaFont="systemThin" size="26"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" red="0.92931067943572998" green="0.92946994304656982" blue="0.92930072546005249" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2Q-Fd-lUk">
-                                <rect key="frame" x="150" y="3" width="95" height="36"/>
+                                <rect key="frame" x="4" y="3" width="95" height="36"/>
                                 <buttonCell key="cell" type="push" title="QR Code" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PIs-5c-F0T">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2030,7 +2017,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-NH-4vK">
-                                <rect key="frame" x="243" y="3" width="158" height="36"/>
+                                <rect key="frame" x="97" y="3" width="158" height="36"/>
                                 <buttonCell key="cell" type="push" title="Show in Dashboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UTX-ch-aqL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2039,28 +2026,41 @@ Gw
                                     <segue destination="xJf-6e-3AH" kind="show" id="Uyb-q3-B4B"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ui-cf-b7U">
+                                <rect key="frame" x="253" y="3" width="148" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="gAi-u0-YKY"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Copy to clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="phf-yf-lsh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonCopyToClipboardTapped:" target="dq2-4K-v2z" id="3Hn-c6-QKR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="q2Q-Fd-lUk" firstAttribute="leading" secondItem="4Ui-cf-b7U" secondAttribute="trailing" constant="10" id="3f6-QP-bnd"/>
+                            <constraint firstItem="fh5-NH-4vK" firstAttribute="leading" secondItem="q2Q-Fd-lUk" secondAttribute="trailing" constant="10" id="6Bh-BB-ebm"/>
                             <constraint firstItem="7Ou-Ey-jkC" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="AfO-by-l0M"/>
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="top" secondItem="7Ou-Ey-jkC" secondAttribute="bottom" constant="10" id="Bx8-jU-i7e"/>
                             <constraint firstItem="n7a-6Z-Rsw" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="CRC-NK-qVo"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="centerY" secondItem="IRS-6c-DTS" secondAttribute="centerY" id="CTG-vm-7Im"/>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="bottom" secondItem="fh5-NH-4vK" secondAttribute="bottom" id="Ch0-py-Oqs"/>
+                            <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="fh5-NH-4vK" secondAttribute="trailing" constant="10" id="GwX-5G-lcE"/>
                             <constraint firstItem="yjb-Ai-pHD" firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" id="HyA-nQ-iAg"/>
-                            <constraint firstItem="4Ui-cf-b7U" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Kgm-9b-oHh"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="q2Q-Fd-lUk" secondAttribute="top" id="L0j-IF-PTp"/>
                             <constraint firstItem="q2Q-Fd-lUk" firstAttribute="top" secondItem="fh5-NH-4vK" secondAttribute="top" id="Neu-oE-BGZ"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" constant="10" id="SSZ-cE-eOL"/>
+                            <constraint firstItem="q2Q-Fd-lUk" firstAttribute="leading" secondItem="6cG-sr-Ub0" secondAttribute="leading" constant="10" id="Svy-hK-wAj"/>
                             <constraint firstAttribute="trailing" secondItem="IRS-6c-DTS" secondAttribute="trailing" constant="10" id="U37-G7-Ws4"/>
                             <constraint firstItem="yjb-Ai-pHD" firstAttribute="leading" secondItem="n7a-6Z-Rsw" secondAttribute="leading" id="Xfp-2i-bBr"/>
                             <constraint firstAttribute="bottom" secondItem="4Ui-cf-b7U" secondAttribute="bottom" constant="10" id="fWh-L7-YQl"/>
                             <constraint firstAttribute="trailing" secondItem="7Ou-Ey-jkC" secondAttribute="trailing" constant="10" id="gqg-In-9mB"/>
-                            <constraint firstItem="IRS-6c-DTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fh5-NH-4vK" secondAttribute="trailing" constant="50" id="gre-ni-EYg"/>
                             <constraint firstItem="4Ui-cf-b7U" firstAttribute="bottom" secondItem="q2Q-Fd-lUk" secondAttribute="bottom" id="nuN-hJ-td8"/>
                             <constraint firstItem="yjb-Ai-pHD" firstAttribute="top" secondItem="n7a-6Z-Rsw" secondAttribute="top" id="pHj-93-7fF"/>
                             <constraint firstItem="yjb-Ai-pHD" firstAttribute="bottom" secondItem="n7a-6Z-Rsw" secondAttribute="bottom" id="sJF-EG-WUu"/>
-                            <constraint firstItem="fh5-NH-4vK" firstAttribute="leading" secondItem="q2Q-Fd-lUk" secondAttribute="trailing" constant="10" id="tRe-kp-lh8"/>
+                            <constraint firstItem="IRS-6c-DTS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Ui-cf-b7U" secondAttribute="trailing" constant="50" id="sUS-cQ-lGB"/>
                             <constraint firstAttribute="trailing" secondItem="n7a-6Z-Rsw" secondAttribute="trailing" constant="10" id="whj-HD-7sC"/>
                             <constraint firstItem="7Ou-Ey-jkC" firstAttribute="top" secondItem="6cG-sr-Ub0" secondAttribute="top" constant="10" id="xAb-wu-E9f"/>
                         </constraints>
@@ -2072,7 +2072,7 @@ Gw
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="826" y="867"/>
+            <point key="canvasLocation" x="826" y="866.5"/>
         </scene>
         <!--showQRCode-->
         <scene sceneID="ucc-Ab-VQ4">
