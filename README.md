@@ -25,8 +25,9 @@ AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and 
 🔥 | Auto Restart Upload After Network Change or Failure 
 🎩 | Easy setup assistant to get started in a few minutes
 🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
-🤔 | Dashboard
-🚢 | Jenkins Support
+😘 | Dashboard
+🚢 | Jenkins Support [read more](https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/)
+🕶️ | Dark Theme
  
 # Download latest stable release 📦
 [![](https://github.com/developerinsider/developer-insider-content/blob/master/Logo/Download-25.png)](http://tryappbox.com/download)  [Click here to download AppBox.app for your Mac](https://getappbox.com/download)
@@ -60,12 +61,14 @@ AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and 
 # Current Version Screenshot 🎨
 ### Upload IPA or Archive and Upload IPA
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/UploadIPA.png?raw=true)
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/UploadIPA-Dark.png?raw=true)
 
 ### Share URL
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/AppURL.png?raw=true)
 
 ### Dashboard
-![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/Dashboard.png?raw=true)
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/UploadIPA.png?raw=true)
+![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/UploadIPA-Dark.png?raw=true)
 
 ### Preferences
 ![](https://github.com/tryappbox/tryappbox.github.io/blob/master/Images/General.png?raw=true)
