@@ -13,8 +13,8 @@ if [[ "${1}" == *"p12" ]]
 then
 
 
-echo "Installing certificate..."
-security import ${1} -k ~/Library/Keychains/login.keychain -P ${2} -T /usr/bin/codesign
+echo "Installing certificate for All Applications in login keychain..."
+security import ${1} -k ~/Library/Keychains/login.keychain -P ${2} -A
 
 else
 
