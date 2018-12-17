@@ -22,6 +22,7 @@ A clear and concise description of what the bug is.
 ## Details
 <!--Remove the space between the brackets and put an X between the brackets in front of the version of AppBox you are using. Like - [X] 2.6.0 -->
 1. Which AppBox version are you using?
+    - [ ] 2.7.0
     - [ ] 2.6.1
     - [ ] 2.6.0
     - [ ] 2.5.0
