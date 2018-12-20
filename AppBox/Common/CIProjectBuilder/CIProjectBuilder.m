@@ -94,21 +94,11 @@ NSString *const RepoITCPassword = @"itcpassword";
         [project setXcodePath:[XCHandler checkXCodePath:xcodeVersionPath]];
     }
     
-    //Email and Email Subject Prefix
-    NSMutableSet *emails = [[NSMutableSet alloc] init];
-
-    if ([UserData defaultCIEmail].length > 0) {
-        [emails addObjectsFromArray:[[UserData defaultCIEmail] componentsSeparatedByString:@","]];
-    }
+    //Emails
     if ([projectRawSetting.allKeys containsObject:RepoEmailKey]) {
-        [emails addObjectsFromArray:[[projectRawSetting valueForKey:RepoEmailKey] componentsSeparatedByString:@","]];
+        [project setEmails:[projectRawSetting valueForKey:RepoEmailKey]];
     }
     
-    [emails removeObject:@""];
-    if (emails.count > 0) {
-        project.subjectPrefix = [UserData ciSubjectPrefix];
-        project.emails = [emails.allObjects componentsJoinedByString:@","];
-    }
     
     //Email Personal Message
     if ([projectRawSetting.allKeys containsObject:RepoPersonalMessageKey]) {
@@ -215,6 +205,7 @@ NSString *const RepoITCPassword = @"itcpassword";
                 exit(abExitCodeForInvalidCommand);
             }
         }
+        
         //Project Build Type
         else if ([argument containsString:abArgsBuildType]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsBuildType];
@@ -227,6 +218,7 @@ NSString *const RepoITCPassword = @"itcpassword";
                 exit(abExitCodeForInvalidCommand);
             }
         }
+        
         //Project Team Id
         else if ([argument containsString:abArgsTeamId]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsTeamId];
@@ -239,6 +231,7 @@ NSString *const RepoITCPassword = @"itcpassword";
                 exit(abExitCodeForInvalidCommand);
             }
         }
+        
         //Project Emails
         else if ([argument containsString:abArgsEmails]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
@@ -251,6 +244,7 @@ NSString *const RepoITCPassword = @"itcpassword";
                 exit(abExitCodeForInvalidCommand);
             }
         }
+        
         //Project Personal Messages
         else if ([argument containsString:abArgsPersonalMessage]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsPersonalMessage];
@@ -263,6 +257,7 @@ NSString *const RepoITCPassword = @"itcpassword";
                 exit(abExitCodeForInvalidCommand);
             }
         }
+        
         //Project Personal Messages
         else if ([argument containsString:abArgsKeepSameLink]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsKeepSameLink];
@@ -275,6 +270,7 @@ NSString *const RepoITCPassword = @"itcpassword";
                 exit(abExitCodeForInvalidCommand);
             }
         }
+        
         //Project dropbox folder name
         else if ([argument containsString:abArgsDropBoxFolderName]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsDropBoxFolderName];
@@ -286,6 +282,23 @@ NSString *const RepoITCPassword = @"itcpassword";
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Dropbox Folder Name Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
             }
+        }
+        
+        //Email and Email Subject Prefix
+        NSMutableSet *emails = [[NSMutableSet alloc] init];
+        
+        if ([UserData defaultCIEmail].length > 0) {
+            [emails addObjectsFromArray:[[UserData defaultCIEmail] componentsSeparatedByString:@","]];
+        }
+        
+        if (project.emails && project.emails.length > 0) {
+            [emails addObjectsFromArray:[project.emails componentsSeparatedByString:@","]];
+        }
+        
+        [emails removeObject:@""];
+        if (emails.count > 0) {
+            project.subjectPrefix = [UserData ciSubjectPrefix];
+            project.emails = [emails.allObjects componentsJoinedByString:@","];
         }
         
     }
