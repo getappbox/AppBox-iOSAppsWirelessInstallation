@@ -12,12 +12,26 @@ module Fastlane
 
         if params[:emails]
           emails = params[:emails]
-          UI.message(emails)
+          UI.message("Emails - #{emails}")
         end
 
-        exec "/Applications/AppBox.app/Contents/MacOS/AppBox ipa=#{ipa_path} emails=#{emails}"
+        if params[:message]
+          message = params[:message]
+          UI.message("Message - #{message}")
+        end
 
-        UI.message("The appbox plugin is working!")
+        if params[:appbox_path]
+          appbox_path = "#{params[:appbox_path]}/Contents/MacOS/AppBox"
+        else
+          appbox_path =  "/Applications/AppBox.app/Contents/MacOS/AppBox"
+        end
+        UI.message("AppBox Path - #{appbox_path}")
+
+        # Start AppBox
+        UI.message("Starting AppBox...")
+        exit_status = system("exec #{appbox_path} ipa='#{ipa_path}' email='#{emails}' message='#{message}'")
+        UI.message("Back to the Fastlane from AppBox with Success: #{exit_status}")
+        
       end
 
       def self.description
@@ -40,8 +54,18 @@ module Fastlane
         [
           FastlaneCore::ConfigItem.new(key: :emails,
                                        env_name: "FL_APPBOX_EMAILS",
-                                       description: "Change to a specific version. This will replace the bump type value",
+                                       description: "Comma-separated list of email address that should receive application installation link",
                                        optional: false),
+
+          FastlaneCore::ConfigItem.new(key: :appbox_path,
+                                       env_name: "FL_APPBOX_PATH",
+                                       description: "If you've setup AppBox in the different directory then you need to mention that here. Default is '/Applications/AppBox.app'",
+                                       optional: true),
+
+          FastlaneCore::ConfigItem.new(key: :message,
+                                       env_name: "FL_APPBOX_MESSAGE",
+                                       description: "Attach personal message in the email. Supported Keywords: The {PROJECT_NAME} - For Project Name, {BUILD_VERSION} - For Build Version, and {BUILD_NUMBER} - For Build Number",
+                                       optional: true),
         ]
       end
 

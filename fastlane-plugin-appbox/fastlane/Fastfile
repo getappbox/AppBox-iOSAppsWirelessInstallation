@@ -1,3 +1,15 @@
-lane :test do
-  appbox(emails:'vineet.choudhary@finoit.com')
+lane :testSingleEmail do
+  appbox(emails:'info@developerinsider.in')
+end
+
+lane :testMultipleEmail do
+  appbox(emails:'info@developerinsider.in,publisher@developerinsider.in')
+end
+
+lane :testEmailWithCustomMessage do
+  appbox(emails:'info@developerinsider.in' message: '{PROJECT_NAME} - {BUILD_VERSION}({BUILD_NUMBER}) is ready to test.')
+end
+
+lane :testCustomPath do
+  appbox(emails:'info@developerinsider.in', path:'/Users/vineetchoudhary/Desktop/AppBox2.8.0/AppBox.app')
 end
