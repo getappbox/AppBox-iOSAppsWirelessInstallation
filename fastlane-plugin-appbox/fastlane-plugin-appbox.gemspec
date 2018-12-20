@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'vineetchoudhary@live.in'
 
   spec.summary       = 'Deploy Development, Ad-Hoc and In-house (Enterprise) iOS applications directly to the devices from your Dropbox account.'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-appbox"
+  spec.homepage      = "https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/tree/master/fastlane-plugin-appbox"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
