@@ -26,6 +26,7 @@ AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and 
 🎩 | Easy setup assistant to get started in a few minutes
 🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
 😘 | Dashboard
+🚀 | Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
 🚢 | Jenkins Support [read more](https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/)
 🕶️ | Dark Theme
  
