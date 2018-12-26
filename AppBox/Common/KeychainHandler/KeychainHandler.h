@@ -11,6 +11,7 @@
 @interface KeychainHandler : NSObject
 
 + (NSArray *)getAllTeamId;
++ (NSArray *)getAllITCAccounts;
 + (void)removeAllStoredCredentials;
 + (void)installPrivateKeyFromPath:(NSString *)path withPassword:(NSString *)password;
 
