@@ -21,23 +21,41 @@
     [super viewDidLoad];
     [EventTracker logScreen:@"Apple Developer Login"];
     
-    //Load iTunes UserName and password
-    itcAccounts = [KeychainHandler getAllITCAccounts];
-    
-    if (itcAccounts.count > 0){
-        [self selectITCAccountAtIndex:0];
-    }
-    
-    //check for multiple account available in keychain
-    BOOL isMultipleAccounts = itcAccounts.count > 1;
-    [comboUserName setHidden:!isMultipleAccounts];
-    [textFieldUserName setHidden:isMultipleAccounts];
-    if (isMultipleAccounts) {
-        for (NSDictionary *itcAccount in itcAccounts) {
-            [comboUserName addItemWithObjectValue:[itcAccount valueForKey:kSAMKeychainAccountKey]];
+    if (self.isNewAccount) {
+        itcAccounts = [[NSArray alloc] init];
+        [comboUserName setHidden:YES];
+        [textFieldUserName setHidden:NO];
+    } else {
+        //Load iTunes UserName and password
+        itcAccounts = [KeychainHandler getAllITCAccounts];
+        
+        NSInteger selectedAccountIndex = 0;
+        if (self.editAccountKey && !self.editAccountKey.isEmpty) {
+            selectedAccountIndex = [itcAccounts indexOfObjectPassingTest:^BOOL(NSDictionary*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return [[obj valueForKey:kSAMKeychainAccountKey] isEqualToString:self.editAccountKey];
+            }];
+        } else if (itcAccounts.count > 0){
+            selectedAccountIndex = 0;
         }
-        [comboUserName selectItemAtIndex:0];
+        
+        //check for multiple account available in keychain
+        BOOL isMultipleAccounts = itcAccounts.count > 1;
+        [comboUserName setHidden:!isMultipleAccounts];
+        [textFieldUserName setHidden:isMultipleAccounts];
+        if (isMultipleAccounts) {
+            for (NSDictionary *itcAccount in itcAccounts) {
+                [comboUserName addItemWithObjectValue:[itcAccount valueForKey:kSAMKeychainAccountKey]];
+            }
+        }
+        
+        if (itcAccounts.count > selectedAccountIndex) {
+            [self selectITCAccountAtIndex: selectedAccountIndex];
+            if (isMultipleAccounts) {
+                [comboUserName selectItemAtIndex: selectedAccountIndex];
+            }
+        }
     }
+    
 }
 
 #pragma mark - Controls actions

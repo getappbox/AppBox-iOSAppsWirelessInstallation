@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +13,8 @@
                 <outlet property="accountNameLabel" destination="2eG-h7-GB4" id="d0y-6P-tPY"/>
                 <outlet property="accountTableView" destination="Atw-PS-fJk" id="qVI-2Q-kPA"/>
                 <outlet property="addAccountButton" destination="I5i-WL-49k" id="OXI-ci-r3u"/>
-                <outlet property="deleteAccount" destination="kRF-zj-szT" id="Le2-xy-l6m"/>
+                <outlet property="deleteAccountButton" destination="kRF-zj-szT" id="4CY-SO-uPY"/>
+                <outlet property="updateAccountButton" destination="zWR-NC-uh3" id="fAe-o9-hj2"/>
                 <outlet property="view" destination="c22-O7-iKe" id="ooY-yC-Uve"/>
             </connections>
         </customObject>
@@ -217,6 +218,16 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zWR-NC-uh3">
+                                <rect key="frame" x="341" y="3" width="85" height="32"/>
+                                <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kNi-xz-wHD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="updateAccountButtonTapped:" target="-2" id="Edr-Rd-jFg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dLy-W7-B5U" firstAttribute="top" secondItem="3i4-JX-aZZ" secondAttribute="bottom" constant="10" id="2tM-ef-rIh"/>
@@ -230,6 +241,8 @@
                             <constraint firstItem="2eG-h7-GB4" firstAttribute="leading" secondItem="hFF-KE-Kie" secondAttribute="leading" constant="10" id="Qfh-Rk-mZ1"/>
                             <constraint firstAttribute="trailing" secondItem="uue-bT-doF" secondAttribute="trailing" id="R5a-QK-8Nt"/>
                             <constraint firstItem="3i4-JX-aZZ" firstAttribute="leading" secondItem="dLy-W7-B5U" secondAttribute="leading" id="Y77-7S-yfh"/>
+                            <constraint firstAttribute="trailing" secondItem="zWR-NC-uh3" secondAttribute="trailing" constant="10" id="cNP-Uv-uod"/>
+                            <constraint firstAttribute="bottom" secondItem="zWR-NC-uh3" secondAttribute="bottom" constant="10" id="dF0-xY-gpx"/>
                             <constraint firstItem="dLy-W7-B5U" firstAttribute="centerY" secondItem="Gub-si-xNs" secondAttribute="centerY" id="gO8-Wd-9Bx"/>
                             <constraint firstItem="uue-bT-doF" firstAttribute="top" secondItem="2eG-h7-GB4" secondAttribute="bottom" constant="5" id="iRd-7b-GYQ"/>
                             <constraint firstItem="pAe-4d-QNW" firstAttribute="trailing" secondItem="Gub-si-xNs" secondAttribute="trailing" id="lIZ-kc-R0n"/>

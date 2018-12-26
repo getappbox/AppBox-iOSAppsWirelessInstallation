@@ -19,10 +19,12 @@
     __weak IBOutlet NSTextField *accountIdLabel;
     __weak IBOutlet NSTextField *accountDescLabel;
     __weak IBOutlet NSButton *addAccountButton;
-    __weak IBOutlet NSButton *deleteAccount;
+    __weak IBOutlet NSButton *deleteAccountButton;
+    __weak IBOutlet NSButton *updateAccountButton;
 }
 
 - (IBAction)addAccountButtonTapped:(NSButton *)sender;
 - (IBAction)deleteAccountButtonTapped:(NSButton *)sender;
+- (IBAction)updateAccountButtonTapped:(NSButton *)sender;
 
 @end
