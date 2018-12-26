@@ -22,7 +22,7 @@
 }
 
 -(void)loadAccounts{
-    itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
+    itcAccounts = [KeychainHandler getAllITCAccounts];
 }
 
 #pragma mark - AccountPreferencesViewController Delegate

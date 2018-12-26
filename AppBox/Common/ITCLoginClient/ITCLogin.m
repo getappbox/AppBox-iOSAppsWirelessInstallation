@@ -10,7 +10,7 @@
 
 #define ITCStatsURL @"https://olympus.itunes.apple.com/itc/ui/stats"
 #define ITCLoginURL @"https://idmsa.apple.com/appleauth/auth/signin?widgetKey="
-#define ITCLoginControlURL @"https://itunesconnect.apple.com/itc/static-resources/controllers/login_cntrl.js"
+#define ITCLoginControlURL @"https://appstoreconnect.apple.com/itc/static-resources/controllers/login_cntrl.js"
 
 #define ITCServiceKeyStartIdentifier @"var itcServiceKey = '"
 #define ITCServiceKeyEndIdentifier @"'"
