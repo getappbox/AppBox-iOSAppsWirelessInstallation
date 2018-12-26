@@ -21,27 +21,50 @@
     [super viewDidLoad];
     [EventTracker logScreen:@"Apple Developer Login"];
     
-    //Load iTunes UserName and password
-    itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
-    if (itcAccounts.count > 0){
-        [self selectITCAccountAtIndex:0];
+    if (self.isNewAccount) {
+        itcAccounts = [[NSArray alloc] init];
+        [comboUserName setHidden:YES];
+        [textFieldUserName setHidden:NO];
+    } else {
+        //Load iTunes UserName and password
+        itcAccounts = [KeychainHandler getAllITCAccounts];
+        
+        NSInteger selectedAccountIndex = 0;
+        if (self.editAccountKey && !self.editAccountKey.isEmpty) {
+            selectedAccountIndex = [itcAccounts indexOfObjectPassingTest:^BOOL(NSDictionary*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                return [[obj valueForKey:kSAMKeychainAccountKey] isEqualToString:self.editAccountKey];
+            }];
+        } else if (itcAccounts.count > 0){
+            selectedAccountIndex = 0;
+        }
+        
+        //check for multiple account available in keychain
+        BOOL isMultipleAccounts = itcAccounts.count > 1;
+        [comboUserName setHidden:!isMultipleAccounts];
+        [textFieldUserName setHidden:isMultipleAccounts];
+        if (isMultipleAccounts) {
+            for (NSDictionary *itcAccount in itcAccounts) {
+                [comboUserName addItemWithObjectValue:[itcAccount valueForKey:kSAMKeychainAccountKey]];
+            }
+        }
+        
+        if (itcAccounts.count > selectedAccountIndex) {
+            [self selectITCAccountAtIndex: selectedAccountIndex];
+            if (isMultipleAccounts) {
+                [comboUserName selectItemAtIndex: selectedAccountIndex];
+            }
+        }
     }
     
-    //check for multiple account available in keychain
-    BOOL isMultipleAccounts = itcAccounts.count > 1;
-    [comboUserName setHidden:!isMultipleAccounts];
-    [textFieldUserName setHidden:isMultipleAccounts];
-    if (isMultipleAccounts) {
-        for (NSDictionary *itcAccount in itcAccounts) {
-            [comboUserName addItemWithObjectValue:[itcAccount valueForKey:kSAMKeychainAccountKey]];
-        }
-        [comboUserName selectItemAtIndex:0];
-    }
 }
 
 #pragma mark - Controls actions
 - (IBAction)buttonLoginTapped:(NSButton *)sender{
     [[textFieldPassword window] makeFirstResponder:self.view];
+    if (![self isValidDetails]) {
+        return;
+    }
+    
     [self showProgress:YES];
     [ITCLogin loginWithUserName:textFieldUserName.stringValue andPassword:textFieldPassword.stringValue completion:^(bool success, NSString *message) {
         [self showProgress:NO];
@@ -65,6 +88,10 @@
 
 - (IBAction)buttonUseWithoutLoginTapped:(NSButton *)sender {
     [[textFieldPassword window] makeFirstResponder:self.view];
+    if (![self isValidDetails]) {
+        return;
+    }
+    
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Warning"];
     [alert setInformativeText:@"Please make sure Username/Email and Password correct. Because AppBox would not verify with AppStore."];
@@ -130,6 +157,22 @@
     }else{
         [progressIndicator stopAnimation:nil];
     }
+}
+
+-(BOOL)isValidDetails {
+    NSString *userName = [textFieldUserName stringValue];
+    NSString *password = [textFieldPassword stringValue];
+    
+    if (userName && !userName.isEmpty && [MailHandler isValidEmail:userName]) {
+        if (password && !password.isEmpty) {
+            return YES;
+        } else {
+            [Common showAlertWithTitle:nil andMessage:@"Please enter a Password."];
+        }
+    } else {
+        [Common showAlertWithTitle:nil andMessage:@"Please enter a valid AppStore Connect email."];
+    }
+    return NO;
 }
 
 @end

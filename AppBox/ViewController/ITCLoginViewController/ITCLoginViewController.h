@@ -30,6 +30,8 @@
 
 @property(nonatomic, strong) XCProject *project;
 @property(weak) id <ITCLoginDelegate> delegate;
+@property(nonatomic, strong) NSNumber *isNewAccount;
+@property(nonatomic, strong) NSString *editAccountKey;
 
 - (IBAction)buttonLoginTapped:(NSButton *)sender;
 - (IBAction)buttonCancelTapped:(NSButton *)sender;

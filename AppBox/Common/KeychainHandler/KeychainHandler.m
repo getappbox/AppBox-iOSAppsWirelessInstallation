@@ -123,6 +123,18 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
     return result;
 }
 
+#pragma mark - ITC Accounts
++ (NSArray *)getAllITCAccounts {
+    NSMutableArray *filteredITCAccounts = [[NSMutableArray alloc] init];
+    NSArray *itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
+    for (NSDictionary *account in itcAccounts) {
+        if ([account.allKeys containsObject:kSAMKeychainAccountKey]) {
+            [filteredITCAccounts addObject:account];
+        }
+    }
+    return filteredITCAccounts;
+}
+
 #pragma mark - Install Certificates
 + (void)installPrivateKeyFromPath:(NSString *)path withPassword:(NSString *)password {
     NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:path, nil];
