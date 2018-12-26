@@ -22,7 +22,8 @@
     [EventTracker logScreen:@"Apple Developer Login"];
     
     //Load iTunes UserName and password
-    itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
+    itcAccounts = [KeychainHandler getAllITCAccounts];
+    
     if (itcAccounts.count > 0){
         [self selectITCAccountAtIndex:0];
     }
@@ -42,6 +43,10 @@
 #pragma mark - Controls actions
 - (IBAction)buttonLoginTapped:(NSButton *)sender{
     [[textFieldPassword window] makeFirstResponder:self.view];
+    if (![self isValidDetails]) {
+        return;
+    }
+    
     [self showProgress:YES];
     [ITCLogin loginWithUserName:textFieldUserName.stringValue andPassword:textFieldPassword.stringValue completion:^(bool success, NSString *message) {
         [self showProgress:NO];
@@ -65,6 +70,10 @@
 
 - (IBAction)buttonUseWithoutLoginTapped:(NSButton *)sender {
     [[textFieldPassword window] makeFirstResponder:self.view];
+    if (![self isValidDetails]) {
+        return;
+    }
+    
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Warning"];
     [alert setInformativeText:@"Please make sure Username/Email and Password correct. Because AppBox would not verify with AppStore."];
@@ -130,6 +139,22 @@
     }else{
         [progressIndicator stopAnimation:nil];
     }
+}
+
+-(BOOL)isValidDetails {
+    NSString *userName = [textFieldUserName stringValue];
+    NSString *password = [textFieldPassword stringValue];
+    
+    if (userName && !userName.isEmpty && [MailHandler isValidEmail:userName]) {
+        if (password && !password.isEmpty) {
+            return YES;
+        } else {
+            [Common showAlertWithTitle:nil andMessage:@"Please enter a Password."];
+        }
+    } else {
+        [Common showAlertWithTitle:nil andMessage:@"Please enter a valid AppStore Connect email."];
+    }
+    return NO;
 }
 
 @end
