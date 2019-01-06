@@ -7,15 +7,15 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macOS-10.13'
+  vmImage: 'macOS-10.14'
 
 steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
     scheme: 'AppBox'
-    sdk: 'macosx10.13'
+    sdk: 'macosx10.14'
     packageApp: false
     configuration: 'Release'
-    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-    xcodeVersion: '10' # Options: 8, 9, 10, default, specifyPath
+    xcWorkspacePath: '**/AppBox.xcworkspace'
+    xcodeVersion: '10'
