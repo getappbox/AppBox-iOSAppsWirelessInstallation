@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "ipa=/Users/vineetchoudhary/Desktop/IPAs/PayloadIpad10.0.ipa email=vineet.choudhary@finoit.com,vineetchoudhary@live.in message=&apos;Hello there!!&apos;"
+            argument = "ipa=/Volumes/LongTime/ProjectWorking/fastlane-plugin-appbox/AppBox-Fastlane-Demo-Project/AppBox-Fastlane-Demo.ipa email=vineet.choudhary@finoit.com,vineetchoudhary@live.in message=&apos;Hello there!!&apos; keepsamelink=true"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument

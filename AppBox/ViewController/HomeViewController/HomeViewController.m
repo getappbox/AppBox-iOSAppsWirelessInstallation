@@ -182,9 +182,10 @@
         [buttonSendMail setState:NSOnState];
     }
     [project setIpaFullPath:ipaURL];
-    [selectedFilePath setURL:ipaURL]; 
+    [selectedFilePath setURL:ipaURL];
     [textFieldEmail setStringValue:project.emails];
     [textFieldMessage setStringValue:project.personalMessage];
+    [buttonUniqueLink setState:project.keepSameLink.boolValue ? NSOnState : NSOffState];
     [self actionButtonTapped:buttonAction];
 }
 

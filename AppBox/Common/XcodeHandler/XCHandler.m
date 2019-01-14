@@ -28,7 +28,7 @@
 +(NSString *)checkXCodePath:(NSString *)xcodePath {
     xcodePath = [xcodePath stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:xcodePath]){
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"XCode = %@", xcodePath]];
+        [ABLog log:@"XCode = %@", xcodePath];
         return xcodePath;
     }else{
         return nil;
@@ -38,7 +38,7 @@
 +(NSString *)checkALPath:(NSString *)xcodePath {
     NSString *alPath = [[xcodePath stringByAppendingPathComponent:abApplicationLoaderALToolLocation] stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:alPath]){
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Application Loader = %@", alPath]];
+        [ABLog log:@"Application Loader = %@", alPath];
         return alPath;
     } else {
         return nil;
