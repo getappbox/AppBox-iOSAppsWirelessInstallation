@@ -81,9 +81,17 @@ NSString *const RepoITCPassword = @"itcpassword";
         project.teamId = [projectRawSetting valueForKey: RepoTeamIdKey];
     }
     
+    //Dropbox keep same link
+    if ([projectRawSetting.allKeys containsObject:RepoKeepSameLinkKey]) {
+        project.keepSameLink = [projectRawSetting valueForKey:RepoKeepSameLinkKey];
+        project.isKeepSameLinkEnabled = project.keepSameLink.boolValue;
+    }
+    
     //Dropbox folder name
     if ([projectRawSetting.allKeys containsObject:RepoDropboxFolderNameKey]) {
-        project.keepSameLink = [projectRawSetting valueForKey:RepoKeepSameLinkKey];
+        NSString *bundlePath = [projectRawSetting valueForKey:RepoDropboxFolderNameKey];
+        bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
+        project.bundleDirectory = [NSURL URLWithString:bundlePath];
     }
     
     //xcode version
@@ -258,15 +266,16 @@ NSString *const RepoITCPassword = @"itcpassword";
             }
         }
         
-        //Project Personal Messages
+        //Project Keep Same Link
         else if ([argument containsString:abArgsKeepSameLink]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsKeepSameLink];
             [ABLog log:@"Keep Same Links Components = %@", components];
             if (components.count == 2) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing project personal message to %@ from %@", [components lastObject], project.personalMessage]];
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing Keep Same Link to %@ from %@", [components lastObject], project.personalMessage]];
                 project.keepSameLink = [[components lastObject] isEqualToString:@"0"] ? @0 : @1;
+                project.isKeepSameLinkEnabled = project.keepSameLink.boolValue;
             } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Personal Message Argument %@",arguments]];
+                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Keep Same Link Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
             }
         }
@@ -277,7 +286,9 @@ NSString *const RepoITCPassword = @"itcpassword";
             [ABLog log:@"Dropbox folder Components = %@", components];
             if (components.count == 2) {
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Changing Dropbox folder name to %@ from %@", [components lastObject], project.personalMessage]];
-                //project.db = [components lastObject];
+                NSString *bundlePath = [NSString stringWithFormat:@"/%@",[components lastObject]];
+                bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
+                project.bundleDirectory = [NSURL URLWithString:bundlePath];
             } else {
                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Invalid Dropbox Folder Name Argument %@",arguments]];
                 exit(abExitCodeForInvalidCommand);
