@@ -95,7 +95,7 @@
                     }
                     
                     //get info.plist
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Final Info.plist path = %@",infoPlistPath]];
+                    [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
                     [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
@@ -501,7 +501,7 @@
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {
-              [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploaded file metadata = %@", response]];
+              [ABLog log:@"Uploaded file metadata = %@", response];
               
               //AppInfo.json file uploaded and creating shared url
               if(self.dbFileType == DBFileTypeJson){
@@ -647,7 +647,7 @@
     //if same link enable load appinfo.json otherwise Create short shareable url of manifest
     else if (self.dbFileType == DBFileTypeManifest){
         NSString *shareableLink = [url substringToIndex:url.length-5];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Manifest Sharable link - %@",shareableLink]];
+        [ABLog log:@"Manifest Sharable link - %@",shareableLink];
         self.project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         if(self.project.isKeepSameLinkEnabled){
             //Download previously uploaded appinfo
@@ -655,7 +655,7 @@
             [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode  limit:@1] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
                 //check there is any rev available
                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Loaded Meta Data %@",response]];
+                    [ABLog log:@"Loaded Meta Data %@",response];
                     self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
                 }
                 
@@ -670,7 +670,7 @@
     //create app info file short sharable url
     else if (self.dbFileType == DBFileTypeJson){
         NSString *shareableLink = [url substringToIndex:url.length-5];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"APPInfo Sharable link - %@",shareableLink]];
+        [ABLog log:@"APPInfo Sharable link - %@",shareableLink];
         self.project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];

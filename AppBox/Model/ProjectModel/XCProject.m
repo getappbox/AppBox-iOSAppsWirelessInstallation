@@ -55,11 +55,11 @@
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
     [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
     
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nManifest\n======\n\n %@",manifestDict]];
+    [ABLog log:@"\n\n======\nManifest\n======\n\n %@",manifestDict];
     
     NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
     if ([manifestDict writeToFile:manifestPath atomically:YES]){
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Menifest File Created and Saved at %@", manifestPath]];
+        [ABLog log:@"Menifest File Created and Saved at %@", manifestPath];
         dispatch_async(dispatch_get_main_queue(), ^{
             completion([NSURL fileURLWithPath:manifestPath]);
         });

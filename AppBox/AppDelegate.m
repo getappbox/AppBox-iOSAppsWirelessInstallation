@@ -88,11 +88,11 @@
 
 -(void)openFileWithPath:(NSString *)filePath{
     if (self.isReadyToBuild) {
-        [self addSessionLog:@"AppBox is ready to use open file."];
+        [ABLog log:@"AppBox is ready to use."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [self addSessionLog:@"AppBox is ready to use open file. [Block]"];
+            [ABLog log:@"AppBox is ready to use. [Block]"];
             [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
         }];
     }
@@ -180,11 +180,11 @@
 -(void)handleIPAAtPath:(NSString *)ipaPath {
     XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
     if (self.isReadyToBuild) {
-        [self addSessionLog:@"AppBox is ready to build."];
+        [self addSessionLog:@"AppBox is ready to upload IPA."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [self addSessionLog:@"AppBox is ready to build. [Block]"];
+            [self addSessionLog:@"AppBox is ready to upload IPA. [Block]"];
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];
     }
