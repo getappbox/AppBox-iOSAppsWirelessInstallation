@@ -962,11 +962,18 @@
     //Show Notification
     [Common showUploadNotificationWithName:project.name andURL:project.appShortShareableURL];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nSHARE URL - %@\n\n\n.", project.appShortShareableURL]];
-    NSString *appShareURL = [NSString stringWithFormat:@"export APPBOX_SHARE_URL=%@",project.appShortShareableURL];
-    NSString *appLongShareURL = [NSString stringWithFormat:@"export APPBOX_LONG_SHARE_URL=%@",project.appLongShareableURL];
-    int status1 = system([appShareURL cStringUsingEncoding:NSUTF8StringEncoding]);
-    int status2 = system([appShareURL cStringUsingEncoding:NSUTF8StringEncoding]);
-    [self runTaskWithLaunchPath:@"/bin/echo" andArgument:@[@"$APPBOX_SHARE_URL"]];
+    
+    // Set Shared Variables
+    NSString *appShareURL = [NSString stringWithFormat:@"APPBOX_SHARE_URL=%@",project.appShortShareableURL];
+    NSString *appLongShareURL = [NSString stringWithFormat:@"APPBOX_LONG_SHARE_URL=%@", project.appLongShareableURL];
+    NSString *appIPAURL = [NSString stringWithFormat:@"APPBOX_SHARE_URL=%@",project.ipaFileDBShareableURL];
+    NSString *appManifestURL = [NSString stringWithFormat:@"APPBOX_LONG_SHARE_URL=%@",project.manifestFileSharableURL];
+    
+    [TaskHandler runTaskWithName:@"ExportVariables" andArgument:@[appShareURL, appLongShareURL, appIPAURL, appManifestURL]
+                      taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
+                          
+                      }];
+    
     
     if ([UserData userSlackMessage].length > 0) {
         if ([UserData userSlackChannel].length > 0){
