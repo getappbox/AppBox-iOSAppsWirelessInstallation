@@ -116,6 +116,7 @@
     }];
     
     [uploadManager setCompletionBlock:^(){
+        [weakSelf exportSharedURLInSystemFile];
         [weakSelf logAppUploadEventAndShareURLOnSlackChannel];
     }];
 }
@@ -149,6 +150,12 @@
             [self selectedFilePathHandler:selectedFilePath];
             return;
         }
+    }
+}
+
+- (void)exportSharedURLInSystemFile{
+    if (ciRepoProject) {
+        [project exportSharedURLInSystemFile];
     }
 }
 
@@ -963,33 +970,19 @@
     [Common showUploadNotificationWithName:project.name andURL:project.appShortShareableURL];
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nSHARE URL - %@\n\n\n.", project.appShortShareableURL]];
     
-    // Set Shared Variables
-    NSString *appShareURL = [NSString stringWithFormat:@"APPBOX_SHARE_URL=%@",project.appShortShareableURL];
-    NSString *appLongShareURL = [NSString stringWithFormat:@"APPBOX_LONG_SHARE_URL=%@", project.appLongShareableURL];
-    NSString *appIPAURL = [NSString stringWithFormat:@"APPBOX_SHARE_URL=%@",project.ipaFileDBShareableURL];
-    NSString *appManifestURL = [NSString stringWithFormat:@"APPBOX_LONG_SHARE_URL=%@",project.manifestFileSharableURL];
-    
-    [TaskHandler runTaskWithName:@"ExportVariables" andArgument:@[appShareURL, appLongShareURL, appIPAURL, appManifestURL]
-                      taskLaunch:nil outputStream:^(NSTask *task, NSString *output) {
-                          
-                      }];
-    
     
     if ([UserData userSlackMessage].length > 0) {
         if ([UserData userSlackChannel].length > 0){
             [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
-            [SlackClient sendMessageForProject:project completion:^(BOOL success) {
-            }];
+            [SlackClient sendMessageForProject:project completion:^(BOOL success) {}];
         }
         if ([UserData userHangoutChatWebHook].length > 0){
             [self showStatus:@"Sending Message on Hangout..." andShowProgressBar:YES withProgress:-1];
-            [HangoutClient sendMessageForProject:project completion:^(BOOL success) {
-            }];
+            [HangoutClient sendMessageForProject:project completion:^(BOOL success) {}];
         }
         if ([UserData userMicrosoftTeamWebHook].length > 0){
             [self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
-            [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {
-            }];
+            [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {}];
         }
         
     }
