@@ -90,6 +90,7 @@
 - (instancetype)initEmpty;
 - (BOOL)isValidProjectInfoPlist;
 - (BOOL)createExportOptionPlist;
+- (BOOL)exportSharedURLInSystemFile;
 - (void)createUDIDAndIsNew:(BOOL)isNew;
 - (void)upadteDbDirectoryByBundleDirectory;
 - (void)createManifestWithIPAURL:(NSURL *)ipaURL completion:(void(^)(NSURL *manifestURL))completion;

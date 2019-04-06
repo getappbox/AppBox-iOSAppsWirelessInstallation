@@ -116,6 +116,7 @@
     }];
     
     [uploadManager setCompletionBlock:^(){
+        [weakSelf exportSharedURLInSystemFile];
         [weakSelf logAppUploadEventAndShareURLOnSlackChannel];
     }];
 }
@@ -149,6 +150,12 @@
             [self selectedFilePathHandler:selectedFilePath];
             return;
         }
+    }
+}
+
+- (void)exportSharedURLInSystemFile{
+    if (ciRepoProject) {
+        [project exportSharedURLInSystemFile];
     }
 }
 
@@ -961,23 +968,21 @@
     
     //Show Notification
     [Common showUploadNotificationWithName:project.name andURL:project.appShortShareableURL];
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nBUILD URL - %@\n\n\n.", project.appShortShareableURL]];
+    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nSHARE URL - %@\n\n\n.", project.appShortShareableURL]];
+    
     
     if ([UserData userSlackMessage].length > 0) {
         if ([UserData userSlackChannel].length > 0){
             [self showStatus:@"Sending Message on Slack..." andShowProgressBar:YES withProgress:-1];
-            [SlackClient sendMessageForProject:project completion:^(BOOL success) {
-            }];
+            [SlackClient sendMessageForProject:project completion:^(BOOL success) {}];
         }
         if ([UserData userHangoutChatWebHook].length > 0){
             [self showStatus:@"Sending Message on Hangout..." andShowProgressBar:YES withProgress:-1];
-            [HangoutClient sendMessageForProject:project completion:^(BOOL success) {
-            }];
+            [HangoutClient sendMessageForProject:project completion:^(BOOL success) {}];
         }
         if ([UserData userMicrosoftTeamWebHook].length > 0){
             [self showStatus:@"Sending Message on Microsoft Team..." andShowProgressBar:YES withProgress:-1];
-            [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {
-            }];
+            [MSTeamsClient sendMessageForProject:project completion:^(BOOL success) {}];
         }
         
     }
