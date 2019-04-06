@@ -246,9 +246,9 @@
     [self setDbManifestFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/manifest.plist",toPath]]];
     
     if (self.isKeepSameLinkEnabled){
-        [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,abAppInfoFileName]]];
+        [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,FILE_NAME_UNIQUE_JSON]]];
     } else {
-        [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",toPath, abAppInfoFileName]]];
+        [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",toPath, FILE_NAME_UNIQUE_JSON]]];
     }
 }
 
@@ -265,6 +265,24 @@
 -(NSString *)validURLString:(NSString *)urlString{
     NSString *temp = [[urlString componentsSeparatedByCharactersInSet:[NSCharacterSet URLQueryAllowedCharacterSet].invertedSet] componentsJoinedByString:@""];
     return temp.length == 0 ? @"AppBox" : temp;
+}
+
+- (BOOL)exportSharedURLInSystemFile {
+    // Set Shared Variables
+    NSMutableDictionary *exportVariable = [[NSMutableDictionary alloc] init];
+    [exportVariable setValue: [NSString stringWithFormat:@"%@", self.appShortShareableURL] forKey: @"APPBOX_SHARE_URL"];
+    [exportVariable setValue: [NSString stringWithFormat:@"%@", self.appLongShareableURL] forKey: @"APPBOX_LONG_SHARE_URL"];
+    [exportVariable setValue: [NSString stringWithFormat:@"%@", self.ipaFileDBShareableURL] forKey: @"APPBOX_IPA_URL"];
+    [exportVariable setValue: [NSString stringWithFormat:@"%@", self.manifestFileSharableURL] forKey: @"APPBOX_MANIFEST_URL"];
+    
+    NSString *path = [[NSString stringWithFormat:@"~/%@", FILE_NAME_SHARE_URL] stringByExpandingTildeInPath];
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    }
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:exportVariable options:NSJSONWritingPrettyPrinted error:&error];
+    return [jsonData writeToFile:path atomically:YES];
 }
 
 @end

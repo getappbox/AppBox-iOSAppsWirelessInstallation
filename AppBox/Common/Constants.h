@@ -36,6 +36,7 @@
 static NSString *const UNIQUE_LINK_SHARED = @"uniqueLinkShared";
 static NSString *const UNIQUE_LINK_SHORT = @"uniqueLinkShort";
 static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
+static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 
 //AppBox AppStore service. Note: these constanst also need to change in ALAppStore.sh file
 #define abALUploadApp @"upload-app"
@@ -81,8 +82,7 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 #define abEmptyString @""
 #define abTeamIdLength 10
 #define abBytesToMB (1024 * 1024)
-#define abDropboxOutOfSpaceWarningSize 150 
-#define abAppInfoFileName @"appinfo.json"
+#define abDropboxOutOfSpaceWarningSize 150
 #define abEndOfSessionLog @"abEndOfSessionLog"
 
 

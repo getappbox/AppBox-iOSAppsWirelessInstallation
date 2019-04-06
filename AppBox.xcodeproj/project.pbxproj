@@ -127,7 +127,6 @@
 		E19473FB205FD14C00CF12F9 /* NSColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FA205FD14C00CF12F9 /* NSColor+Color.m */; };
 		E19473FF205FD3F100CF12F9 /* AppBoxTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */; };
 		E1AA0F441E2F328300BA81A1 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */; };
-		E1AE6499221415D100202EC5 /* ExportVariables.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1AE64982214050E00202EC5 /* ExportVariables.sh */; };
 		E1AE88711F3F15780085B173 /* LocalServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE88701F3F15780085B173 /* LocalServerHandler.m */; };
 		E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C024701E9B4E6C00C87CC9 /* SlackClient.m */; };
 		E1C024731E9B9DD500C87CC9 /* InstallPrivateKey.sh in Resources */ = {isa = PBXBuildFile; fileRef = E1C024721E9B9DC700C87CC9 /* InstallPrivateKey.sh */; };
@@ -420,7 +419,6 @@
 		E19473FE205FD3F100CF12F9 /* AppBoxTableRowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppBoxTableRowView.m; sourceTree = "<group>"; };
 		E1AA0F421E2F328300BA81A1 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
 		E1AA0F431E2F328300BA81A1 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
-		E1AE64982214050E00202EC5 /* ExportVariables.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ExportVariables.sh; sourceTree = "<group>"; };
 		E1AE886F1F3F15780085B173 /* LocalServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalServerHandler.h; sourceTree = "<group>"; };
 		E1AE88701F3F15780085B173 /* LocalServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalServerHandler.m; sourceTree = "<group>"; };
 		E1C0246F1E9B4E6C00C87CC9 /* SlackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlackClient.h; sourceTree = "<group>"; };
@@ -1057,7 +1055,6 @@
 				DB3D7CC81F64501F00217096 /* PythonServer.sh */,
 				DB45B4591F6EC3B80041EB42 /* SwitchXcode.sh */,
 				DB5F8E981FB87C79009C3BD0 /* XcodeVersion.sh */,
-				E1AE64982214050E00202EC5 /* ExportVariables.sh */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -1421,7 +1418,6 @@
 				DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */,
 				DB6F784F215D459A00C77966 /* AppBoxColors.xcassets in Resources */,
 				E1D12EEC1EC31AC80065E59A /* AccountPreferencesViewController.xib in Resources */,
-				E1AE6499221415D100202EC5 /* ExportVariables.sh in Resources */,
 				DB1A06682160E0C4008D33FD /* AddTeamViewController.xib in Resources */,
 				DB1A06542160CE27008D33FD /* TeamsViewController.xib in Resources */,
 				DB831BCC1FF6B5780065B646 /* ABHudViewController.xib in Resources */,
