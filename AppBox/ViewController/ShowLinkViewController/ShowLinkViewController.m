@@ -22,7 +22,6 @@
     [EventTracker logScreen:@"AppBox ShareLink"];
     [textFieldAppLink setStringValue: self.project.appShortShareableURL.stringValue];
     [textFieldHint setStringValue: ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) ? LongURLUserHint : ShortURLUserHint];
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"App URL - %@",textFieldHint.stringValue]];
     
     //Save Project Details
     [Project addProjectWithXCProject:self.project andSaveDetails:SaveUploadDetails];
