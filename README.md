@@ -36,7 +36,7 @@ AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and 
 
 ## Using curl
 You can install AppBox by running following command in your terminal -
-```
+```bash
 curl -s https://getappbox.com/install.sh | bash
 ```
 
