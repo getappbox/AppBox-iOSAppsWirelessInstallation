@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaChangeStatusDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaChangeStatusDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaChangeStatusDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaChangeStatusDetails` instances.
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTfaChangeStatusDetails` object.
 ///
-+ (DBTEAMLOGTfaChangeStatusDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTfaChangeStatusDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

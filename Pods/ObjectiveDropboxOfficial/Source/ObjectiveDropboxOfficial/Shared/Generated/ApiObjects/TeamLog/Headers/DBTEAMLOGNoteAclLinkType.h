@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGNoteAclLinkType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGNoteAclLinkType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGNoteAclLinkType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGNoteAclLinkType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGNoteAclLinkType` object.
 ///
-+ (DBTEAMLOGNoteAclLinkType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGNoteAclLinkType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

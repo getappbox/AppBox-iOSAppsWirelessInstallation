@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersAddLaunch` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMMembersAddLaunch *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMMembersAddLaunch *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersAddLaunch` instances.
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersAddLaunchTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersAddLaunch` object.
 ///
-+ (DBTEAMMembersAddLaunch *)deserialize:(NSDictionary *)dict;
++ (DBTEAMMembersAddLaunch *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

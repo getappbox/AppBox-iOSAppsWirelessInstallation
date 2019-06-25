@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadErrorTag) {
   /// (no description).
   DBFILESDownloadErrorPath,
 
+  /// This file type cannot be downloaded directly; use `export` instead.
+  DBFILESDownloadErrorUnsupportedFile,
+
   /// (no description).
   DBFILESDownloadErrorOther,
 
@@ -56,6 +59,16 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadErrorTag) {
 - (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
+/// Initializes union class with tag state of "unsupported_file".
+///
+/// Description of the "unsupported_file" tag state: This file type cannot be
+/// downloaded directly; use `export` instead.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUnsupportedFile;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -75,6 +88,14 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadErrorTag) {
 /// @return Whether the union's current tag state has value "path".
 ///
 - (BOOL)isPath;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "unsupported_file".
+///
+/// @return Whether the union's current tag state has value "unsupported_file".
+///
+- (BOOL)isUnsupportedFile;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -107,7 +128,7 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDownloadError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESDownloadError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESDownloadError *)instance;
 
 ///
 /// Deserializes `DBFILESDownloadError` instances.
@@ -117,7 +138,7 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESDownloadError` object.
 ///
-+ (DBFILESDownloadError *)deserialize:(NSDictionary *)dict;
++ (DBFILESDownloadError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

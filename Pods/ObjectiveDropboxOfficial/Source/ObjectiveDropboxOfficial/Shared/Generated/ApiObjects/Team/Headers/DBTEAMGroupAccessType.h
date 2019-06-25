@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupAccessTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupAccessType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMGroupAccessType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMGroupAccessType *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupAccessType` instances.
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupAccessTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupAccessType` object.
 ///
-+ (DBTEAMGroupAccessType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMGroupAccessType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

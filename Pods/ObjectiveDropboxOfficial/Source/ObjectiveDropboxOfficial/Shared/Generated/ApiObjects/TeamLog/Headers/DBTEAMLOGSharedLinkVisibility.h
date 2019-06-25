@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedLinkVisibility` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedLinkVisibility *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedLinkVisibility *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedLinkVisibility` instances.
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGSharedLinkVisibility` object.
 ///
-+ (DBTEAMLOGSharedLinkVisibility *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedLinkVisibility *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESPropertiesSearchContinueArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESPropertiesSearchContinueArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESPropertiesSearchContinueArg *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESPropertiesSearchContinueArg` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBFILEPROPERTIESPropertiesSearchContinueArg` object.
 ///
-+ (DBFILEPROPERTIESPropertiesSearchContinueArg *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESPropertiesSearchContinueArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

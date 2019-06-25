@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGWebSessionsFixedLengthPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGWebSessionsFixedLengthPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGWebSessionsFixedLengthPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGWebSessionsFixedLengthPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGWebSessionsFixedLengthPolicy` instances.
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGWebSessionsFixedLengthPolicyTag) {
 /// @return An instantiation of the `DBTEAMLOGWebSessionsFixedLengthPolicy`
 /// object.
 ///
-+ (DBTEAMLOGWebSessionsFixedLengthPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGWebSessionsFixedLengthPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

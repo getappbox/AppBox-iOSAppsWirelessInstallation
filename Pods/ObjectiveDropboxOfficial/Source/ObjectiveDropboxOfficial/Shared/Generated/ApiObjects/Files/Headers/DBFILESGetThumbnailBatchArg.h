@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetThumbnailBatchArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESGetThumbnailBatchArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESGetThumbnailBatchArg *)instance;
 
 ///
 /// Deserializes `DBFILESGetThumbnailBatchArg` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESGetThumbnailBatchArg` object.
 ///
-+ (DBFILESGetThumbnailBatchArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESGetThumbnailBatchArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

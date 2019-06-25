@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGeoLocationLogInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGGeoLocationLogInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGeoLocationLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGeoLocationLogInfo` instances.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGGeoLocationLogInfo` object.
 ///
-+ (DBTEAMLOGGeoLocationLogInfo *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGGeoLocationLogInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

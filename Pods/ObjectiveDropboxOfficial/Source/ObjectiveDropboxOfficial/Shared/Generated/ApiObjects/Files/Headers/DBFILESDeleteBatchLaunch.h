@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteBatchLaunch` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESDeleteBatchLaunch *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESDeleteBatchLaunch *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteBatchLaunch` instances.
@@ -155,7 +155,7 @@ typedef NS_ENUM(NSInteger, DBFILESDeleteBatchLaunchTag) {
 ///
 /// @return An instantiation of the `DBFILESDeleteBatchLaunch` object.
 ///
-+ (DBFILESDeleteBatchLaunch *)deserialize:(NSDictionary *)dict;
++ (DBFILESDeleteBatchLaunch *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -139,7 +139,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteConflictErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESWriteConflictError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESWriteConflictError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESWriteConflictError *)instance;
 
 ///
 /// Deserializes `DBFILESWriteConflictError` instances.
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteConflictErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESWriteConflictError` object.
 ///
-+ (DBFILESWriteConflictError *)deserialize:(NSDictionary *)dict;
++ (DBFILESWriteConflictError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

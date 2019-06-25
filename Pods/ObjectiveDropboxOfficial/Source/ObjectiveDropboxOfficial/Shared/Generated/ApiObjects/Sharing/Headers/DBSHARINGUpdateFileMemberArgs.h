@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUpdateFileMemberArgs` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGUpdateFileMemberArgs *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGUpdateFileMemberArgs *)instance;
 
 ///
 /// Deserializes `DBSHARINGUpdateFileMemberArgs` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGUpdateFileMemberArgs` object.
 ///
-+ (DBSHARINGUpdateFileMemberArgs *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGUpdateFileMemberArgs *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

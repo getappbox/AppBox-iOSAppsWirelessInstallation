@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGContentPermanentDeletePolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGContentPermanentDeletePolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGContentPermanentDeletePolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGContentPermanentDeletePolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGContentPermanentDeletePolicy` instances.
@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGContentPermanentDeletePolicyTag) {
 /// @return An instantiation of the `DBTEAMLOGContentPermanentDeletePolicy`
 /// object.
 ///
-+ (DBTEAMLOGContentPermanentDeletePolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGContentPermanentDeletePolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

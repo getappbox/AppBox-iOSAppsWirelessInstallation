@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGNoteAclInviteOnlyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGNoteAclInviteOnlyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGNoteAclInviteOnlyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGNoteAclInviteOnlyType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGNoteAclInviteOnlyType` object.
 ///
-+ (DBTEAMLOGNoteAclInviteOnlyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGNoteAclInviteOnlyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESPhotoMetadata` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESPhotoMetadata *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESPhotoMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESPhotoMetadata` instances.
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESPhotoMetadata` object.
 ///
-+ (DBFILESPhotoMetadata *)deserialize:(NSDictionary *)dict;
++ (DBFILESPhotoMetadata *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

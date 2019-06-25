@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSGracePeriodTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEREQUESTSGracePeriod` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEREQUESTSGracePeriod *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEREQUESTSGracePeriod *)instance;
 
 ///
 /// Deserializes `DBFILEREQUESTSGracePeriod` instances.
@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSGracePeriodTag) {
 ///
 /// @return An instantiation of the `DBFILEREQUESTSGracePeriod` object.
 ///
-+ (DBFILEREQUESTSGracePeriod *)deserialize:(NSDictionary *)dict;
++ (DBFILEREQUESTSGracePeriod *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

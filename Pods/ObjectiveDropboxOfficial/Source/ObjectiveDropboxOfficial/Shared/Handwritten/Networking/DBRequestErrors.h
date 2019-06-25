@@ -11,6 +11,37 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#pragma mark - Error Parameters
+
+/// A wrapper objct that has a localized human-readable error message and the locale.
+@interface DBLocalizedUserMessage : NSObject
+
+/// Localized, human-readable text.
+@property (nonatomic, readonly, copy) NSString *text;
+//  IETF BCP 47 language tag of text locale.
+@property (nonatomic, readonly, copy) NSString *locale;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+///
+/// DBLocalizedUserMessage full constructor.
+///
+/// @param text   The localized, human-readable text.
+/// @param locale The IETF BCP 47 language tag of text locale.
+///
+/// @return An initialized DBLocalizedUserMessage instance.
+///
+- (instancetype)initWithText:(NSString *)text locale:(NSString *)locale;
+
+///
+/// Description method.
+///
+/// @return A human-readable representation of the current DBLocalizedUserMessage object.
+///
+- (NSString *)description;
+
+@end
+
 #pragma mark - HTTP error
 
 ///
@@ -32,8 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// the value of the "error_summary" key.
 @property (nonatomic, readonly, copy) NSString *errorContent;
 
-/// A human-readable error message that is optionally returned from some API endpoints.
-@property (nonatomic, readonly, copy, nullable) NSString *userMessage;
+/// An object containing a localized human-readable error message that is optionally returned from some API endpoints.
+@property (nonatomic, readonly, strong, nullable) DBLocalizedUserMessage *userMessage;
 
 ///
 /// DBRequestHttpError full constructor.
@@ -43,14 +74,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 ///
 /// @return An initialized DBRequestHttpError instance.
 ///
 - (instancetype)init:(NSString *)requestId
           statusCode:(NSNumber *)statusCode
         errorContent:(NSString *)errorContent
-         userMessage:(nullable NSString *)userMessage;
+         userMessage:(nullable DBLocalizedUserMessage *)userMessage;
 
 ///
 /// Description method.
@@ -79,14 +110,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 ///
 /// @return An initialized DBRequestBadInputError instance.
 ///
 - (instancetype)init:(NSString *)requestId
           statusCode:(NSNumber *)statusCode
         errorContent:(NSString *)errorContent
-         userMessage:(nullable NSString *)userMessage;
+         userMessage:(nullable DBLocalizedUserMessage *)userMessage;
 
 ///
 /// Description method.
@@ -119,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredAuthError The structured object returned by the Dropbox API in the event of a 401 auth error.
 ///
 /// @return An initialized DBRequestAuthError instance.
@@ -127,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(NSString *)requestId
              statusCode:(NSNumber *)statusCode
            errorContent:(NSString *)errorContent
-            userMessage:(nullable NSString *)userMessage
+            userMessage:(nullable DBLocalizedUserMessage *)userMessage
     structuredAuthError:(DBAUTHAuthError *)structuredAuthError;
 
 ///
@@ -160,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredAccessError The structured object returned by the Dropbox API in the event of a 403 access error.
 ///
 /// @return An initialized DBRequestAccessError instance.
@@ -168,7 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(NSString *)requestId
                statusCode:(NSNumber *)statusCode
              errorContent:(NSString *)errorContent
-              userMessage:(nullable NSString *)userMessage
+              userMessage:(nullable DBLocalizedUserMessage *)userMessage
     structuredAccessError:(DBAUTHAccessError *)structuredAccessError;
 
 ///
@@ -201,7 +232,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredPathRootError The structured object returned by the Dropbox API in the event of a 422 path root
 /// error.
 ///
@@ -210,7 +241,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(NSString *)requestId
                  statusCode:(NSNumber *)statusCode
                errorContent:(NSString *)errorContent
-                userMessage:(nullable NSString *)userMessage
+                userMessage:(nullable DBLocalizedUserMessage *)userMessage
     structuredPathRootError:(DBCOMMONPathRootError *)structuredPathRootError;
 
 ///
@@ -246,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredRateLimitError The structured object returned by the Dropbox API in the event of a 429 rate-limit
 /// error.
 /// @param backoff The number of seconds to wait before making any additional requests in the event of a rate-limit
@@ -257,7 +288,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(NSString *)requestId
                   statusCode:(NSNumber *)statusCode
                 errorContent:(NSString *)errorContent
-                 userMessage:(nullable NSString *)userMessage
+                 userMessage:(nullable DBLocalizedUserMessage *)userMessage
     structuredRateLimitError:(DBAUTHRateLimitError *)structuredRateLimitError
                      backoff:(NSNumber *)backoff;
 
@@ -390,8 +421,8 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// the value of the "error_summary" key.
 @property (nonatomic, readonly, copy, nullable) NSString *errorContent;
 
-/// A human-readable error message that is optionally returned from some API endpoints.
-@property (nonatomic, readonly, copy, nullable) NSString *userMessage;
+/// An object containing a localized human-readable error message that is optionally returned from some API endpoints.
+@property (nonatomic, readonly, strong, nullable) DBLocalizedUserMessage *userMessage;
 
 /// The structured object returned by the Dropbox API in the event of a 401 auth error.
 @property (nonatomic, readonly, nullable) DBAUTHAuthError *structuredAuthError;
@@ -423,14 +454,14 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 ///
 /// @return An initialized `DBRequestError` instance with HTTP error state.
 ///
 - (instancetype)initAsHttpError:(nullable NSString *)requestId
                      statusCode:(nullable NSNumber *)statusCode
                    errorContent:(nullable NSString *)errorContent
-                    userMessage:(nullable NSString *)userMessage;
+                    userMessage:(nullable DBLocalizedUserMessage *)userMessage;
 
 ///
 /// DBRequestError convenience constructor.
@@ -442,14 +473,14 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 ///
 /// @return An initialized `DBRequestError` instance with Bad Input error state.
 ///
 - (instancetype)initAsBadInputError:(nullable NSString *)requestId
                          statusCode:(nullable NSNumber *)statusCode
                        errorContent:(nullable NSString *)errorContent
-                        userMessage:(nullable NSString *)userMessage;
+                        userMessage:(nullable DBLocalizedUserMessage *)userMessage;
 
 ///
 /// DBRequestError convenience constructor.
@@ -462,7 +493,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredAuthError The structured object returned by the Dropbox API in the event of a 401 auth error.
 ///
 /// @return An initialized `DBRequestError` instance with Auth error state.
@@ -470,7 +501,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 - (instancetype)initAsAuthError:(nullable NSString *)requestId
                      statusCode:(nullable NSNumber *)statusCode
                    errorContent:(nullable NSString *)errorContent
-                    userMessage:(nullable NSString *)userMessage
+                    userMessage:(nullable DBLocalizedUserMessage *)userMessage
             structuredAuthError:(DBAUTHAuthError *)structuredAuthError;
 
 ///
@@ -484,7 +515,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredAccessError The structured object returned by the Dropbox API in the event of a 403 access error.
 ///
 /// @return An initialized `DBRequestError` instance with Auth error state.
@@ -492,7 +523,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 - (instancetype)initAsAccessError:(nullable NSString *)requestId
                        statusCode:(nullable NSNumber *)statusCode
                      errorContent:(nullable NSString *)errorContent
-                      userMessage:(nullable NSString *)userMessage
+                      userMessage:(nullable DBLocalizedUserMessage *)userMessage
             structuredAccessError:(DBAUTHAccessError *)structuredAccessError;
 
 ///
@@ -505,7 +536,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredPathRootError The structured object returned by the Dropbox API in the event of a 422 path root
 /// error.
 ///
@@ -514,7 +545,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 - (instancetype)initAsPathRootError:(nullable NSString *)requestId
                          statusCode:(nullable NSNumber *)statusCode
                        errorContent:(nullable NSString *)errorContent
-                        userMessage:(nullable NSString *)userMessage
+                        userMessage:(nullable DBLocalizedUserMessage *)userMessage
             structuredPathRootError:(DBCOMMONPathRootError *)structuredPathRootError;
 
 ///
@@ -528,7 +559,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredRateLimitError The structured object returned by the Dropbox API in the event of a 429 rate-limit
 /// error.
 /// @param backoff The number of seconds to wait before making any additional requests in the event of a rate-limit
@@ -539,7 +570,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 - (instancetype)initAsRateLimitError:(nullable NSString *)requestId
                           statusCode:(nullable NSNumber *)statusCode
                         errorContent:(nullable NSString *)errorContent
-                         userMessage:(nullable NSString *)userMessage
+                         userMessage:(nullable DBLocalizedUserMessage *)userMessage
             structuredRateLimitError:(DBAUTHRateLimitError *)structuredRateLimitError
                              backoff:(NSNumber *)backoff;
 
@@ -553,7 +584,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// Dropbox's SDKs and API.
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints. If for a
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// route-specific error, this field will be the value of the "error_summary" key.
 ///
 /// @return An initialized `DBRequestError` instance with Internal Server error state.
@@ -561,7 +592,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 - (instancetype)initAsInternalServerError:(nullable NSString *)requestId
                                statusCode:(nullable NSNumber *)statusCode
                              errorContent:(nullable NSString *)errorContent
-                              userMessage:(nullable NSString *)userMessage;
+                              userMessage:(nullable DBLocalizedUserMessage *)userMessage;
 
 ///
 /// `DBRequestError` convenience constructor.
@@ -584,7 +615,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
 /// @param statusCode The HTTP response status code of the request.
 /// @param errorContent A string representation of the error body received in the reponse. If for a route-specific
 /// error, this field will be the value of the "error_summary" key.
-/// @param userMessage A human-readable error message that is optionally returned from some API endpoints.
+/// @param userMessage An error message object that is optionally returned from some API endpoints.
 /// @param structuredAuthError The structured object returned by the Dropbox API in the event of a 401 auth error.
 /// @param structuredAccessError The structured object returned by the Dropbox API in the event of a 403 access error.
 /// @param structuredPathRootError The structured object returned by the Dropbox API in the event of a 422 path root
@@ -601,7 +632,7 @@ typedef NS_ENUM(NSInteger, DBRequestErrorTag) {
                    requestId:(nullable NSString *)requestId
                   statusCode:(nullable NSNumber *)statusCode
                 errorContent:(nullable NSString *)errorContent
-                 userMessage:(nullable NSString *)userMessage
+                 userMessage:(nullable DBLocalizedUserMessage *)userMessage
          structuredAuthError:(nullable DBAUTHAuthError *)structuredAuthError
        structuredAccessError:(nullable DBAUTHAccessError *)structuredAccessError
      structuredPathRootError:(nullable DBCOMMONPathRootError *)structuredPathRootError

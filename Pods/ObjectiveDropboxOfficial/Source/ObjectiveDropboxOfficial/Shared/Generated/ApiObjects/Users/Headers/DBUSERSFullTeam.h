@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBUSERSFullTeam`
 /// API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSFullTeam *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSFullTeam *)instance;
 
 ///
 /// Deserializes `DBUSERSFullTeam` instances.
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBUSERSFullTeam` object.
 ///
-+ (DBUSERSFullTeam *)deserialize:(NSDictionary *)dict;
++ (DBUSERSFullTeam *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSecondaryMailsPolicyChangedType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSecondaryMailsPolicyChangedType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSecondaryMailsPolicyChangedType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSecondaryMailsPolicyChangedType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSecondaryMailsPolicyChangedType`
 /// object.
 ///
-+ (DBTEAMLOGSecondaryMailsPolicyChangedType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSecondaryMailsPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

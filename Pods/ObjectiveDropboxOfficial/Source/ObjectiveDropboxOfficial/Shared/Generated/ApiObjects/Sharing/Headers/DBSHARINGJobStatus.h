@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobStatusTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGJobStatus` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGJobStatus *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGJobStatus *)instance;
 
 ///
 /// Deserializes `DBSHARINGJobStatus` instances.
@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobStatusTag) {
 ///
 /// @return An instantiation of the `DBSHARINGJobStatus` object.
 ///
-+ (DBSHARINGJobStatus *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGJobStatus *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

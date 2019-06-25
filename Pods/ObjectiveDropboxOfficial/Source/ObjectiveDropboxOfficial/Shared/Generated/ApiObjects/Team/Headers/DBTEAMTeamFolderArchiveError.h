@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderArchiveError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderArchiveError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderArchiveError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderArchiveError` instances.
@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderArchiveError` object.
 ///
-+ (DBTEAMTeamFolderArchiveError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderArchiveError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

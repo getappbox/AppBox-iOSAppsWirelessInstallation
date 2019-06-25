@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiBaseErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperApiBaseError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERPaperApiBaseError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperApiBaseError *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperApiBaseError` instances.
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiBaseErrorTag) {
 ///
 /// @return An instantiation of the `DBPAPERPaperApiBaseError` object.
 ///
-+ (DBPAPERPaperApiBaseError *)deserialize:(NSDictionary *)dict;
++ (DBPAPERPaperApiBaseError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

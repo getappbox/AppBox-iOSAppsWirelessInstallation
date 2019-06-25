@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBTEAMHasTeamFileEventsValueTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMHasTeamFileEventsValue` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMHasTeamFileEventsValue *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMHasTeamFileEventsValue *)instance;
 
 ///
 /// Deserializes `DBTEAMHasTeamFileEventsValue` instances.
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBTEAMHasTeamFileEventsValueTag) {
 ///
 /// @return An instantiation of the `DBTEAMHasTeamFileEventsValue` object.
 ///
-+ (DBTEAMHasTeamFileEventsValue *)deserialize:(NSDictionary *)dict;
++ (DBTEAMHasTeamFileEventsValue *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

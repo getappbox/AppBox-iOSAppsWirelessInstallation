@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersUnsuspendError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMMembersUnsuspendError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMMembersUnsuspendError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersUnsuspendError` instances.
@@ -176,7 +176,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersUnsuspendError` object.
 ///
-+ (DBTEAMMembersUnsuspendError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMMembersUnsuspendError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

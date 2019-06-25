@@ -52,7 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// paper events are not available on all Dropbox Business plans /business/plans-comparison. Use features/get_values
 /// /developers/documentation/http/teams#team-features-get_values to check for this feature. Permission : Team Auditing.
 ///
-/// @param limit Number of results to return per call.
+/// @param limit The maximal number of results to return per call. Note that some calls may not return limit number of
+/// events, and may even return no events, even with `has_more` set to true. In this case, callers should fetch again
+/// using `getEventsContinue`.
 /// @param accountId Filter the events by account ID. Return ony events with this account_id as either Actor, Context,
 /// or Participants.
 /// @param time Filter by time range.

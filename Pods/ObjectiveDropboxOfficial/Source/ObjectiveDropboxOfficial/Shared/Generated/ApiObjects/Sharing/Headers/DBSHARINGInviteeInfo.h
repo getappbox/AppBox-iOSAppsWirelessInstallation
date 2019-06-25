@@ -110,7 +110,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGInviteeInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGInviteeInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGInviteeInfo *)instance;
 
 ///
 /// Deserializes `DBSHARINGInviteeInfo` instances.
@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
 ///
 /// @return An instantiation of the `DBSHARINGInviteeInfo` object.
 ///
-+ (DBSHARINGInviteeInfo *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGInviteeInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

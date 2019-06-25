@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderMembersInheritancePolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderMembersInheritancePolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedFolderMembersInheritancePolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderMembersInheritancePolicy` instances.
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyTag) {
 /// @return An instantiation of the
 /// `DBTEAMLOGSharedFolderMembersInheritancePolicy` object.
 ///
-+ (DBTEAMLOGSharedFolderMembersInheritancePolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedFolderMembersInheritancePolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

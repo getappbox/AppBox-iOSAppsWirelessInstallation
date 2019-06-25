@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDownloadZipArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESDownloadZipArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESDownloadZipArg *)instance;
 
 ///
 /// Deserializes `DBFILESDownloadZipArg` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESDownloadZipArg` object.
 ///
-+ (DBFILESDownloadZipArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESDownloadZipArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

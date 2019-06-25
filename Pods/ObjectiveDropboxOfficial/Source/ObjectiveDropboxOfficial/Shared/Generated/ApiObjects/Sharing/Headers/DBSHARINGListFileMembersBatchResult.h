@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFileMembersBatchResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGListFileMembersBatchResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGListFileMembersBatchResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFileMembersBatchResult` instances.
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBSHARINGListFileMembersBatchResult`
 /// object.
 ///
-+ (DBSHARINGListFileMembersBatchResult *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGListFileMembersBatchResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

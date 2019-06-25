@@ -446,7 +446,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMemberAddResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMMemberAddResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMMemberAddResult *)instance;
 
 ///
 /// Deserializes `DBTEAMMemberAddResult` instances.
@@ -456,7 +456,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMemberAddResultTag) {
 ///
 /// @return An instantiation of the `DBTEAMMemberAddResult` object.
 ///
-+ (DBTEAMMemberAddResult *)deserialize:(NSDictionary *)dict;
++ (DBTEAMMemberAddResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

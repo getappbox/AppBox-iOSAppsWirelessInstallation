@@ -29,7 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESWriteErrorTag` enum type represents the possible tag states with
 /// which the `DBFILESWriteError` union can exist.
 typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
-  /// (no description).
+  /// The given path does not satisfy the required path format. Please refer
+  /// to the Path formats documentation
+  /// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+  /// for more information.
   DBFILESWriteErrorMalformedPath,
 
   /// Couldn't write to the target path because there was something in the
@@ -60,7 +63,10 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBFILESWriteErrorTag tag;
 
-/// (no description). @note Ensure the `isMalformedPath` method returns true
+/// The given path does not satisfy the required path format. Please refer to
+/// the Path formats documentation
+/// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+/// for more information. @note Ensure the `isMalformedPath` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy, nullable) NSString *malformedPath;
 
@@ -74,7 +80,16 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// Initializes union class with tag state of "malformed_path".
 ///
-/// @param malformedPath (no description).
+/// Description of the "malformed_path" tag state: The given path does not
+/// satisfy the required path format. Please refer to the Path formats
+/// documentation
+/// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+/// for more information.
+///
+/// @param malformedPath The given path does not satisfy the required path
+/// format. Please refer to the Path formats documentation
+/// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+/// for more information.
 ///
 /// @return An initialized instance.
 ///
@@ -246,7 +261,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESWriteError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESWriteError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESWriteError *)instance;
 
 ///
 /// Deserializes `DBFILESWriteError` instances.
@@ -256,7 +271,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESWriteError` object.
 ///
-+ (DBFILESWriteError *)deserialize:(NSDictionary *)dict;
++ (DBFILESWriteError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

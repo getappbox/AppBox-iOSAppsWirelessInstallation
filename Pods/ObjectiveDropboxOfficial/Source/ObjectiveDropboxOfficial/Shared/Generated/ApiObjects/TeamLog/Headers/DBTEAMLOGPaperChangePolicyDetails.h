@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperChangePolicyDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperChangePolicyDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperChangePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperChangePolicyDetails` instances.
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperChangePolicyDetails` object.
 ///
-+ (DBTEAMLOGPaperChangePolicyDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

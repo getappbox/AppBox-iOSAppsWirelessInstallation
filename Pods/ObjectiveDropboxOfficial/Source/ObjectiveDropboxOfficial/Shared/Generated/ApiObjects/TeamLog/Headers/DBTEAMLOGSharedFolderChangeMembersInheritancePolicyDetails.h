@@ -81,7 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:
+    (DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails`
@@ -93,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails` object.
 ///
-+ (DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

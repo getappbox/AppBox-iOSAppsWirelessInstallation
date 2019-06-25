@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag) {
   DBTEAMLOGPaperDownloadFormatMarkdown,
 
   /// (no description).
+  DBTEAMLOGPaperDownloadFormatPdf,
+
+  /// (no description).
   DBTEAMLOGPaperDownloadFormatOther,
 
 };
@@ -67,6 +70,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMarkdown;
+
+///
+/// Initializes union class with tag state of "pdf".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPdf;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -101,6 +111,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag) {
 - (BOOL)isMarkdown;
 
 ///
+/// Retrieves whether the union's current tag state has value "pdf".
+///
+/// @return Whether the union's current tag state has value "pdf".
+///
+- (BOOL)isPdf;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -132,7 +149,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperDownloadFormat` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperDownloadFormat *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperDownloadFormat *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperDownloadFormat` instances.
@@ -142,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperDownloadFormat` object.
 ///
-+ (DBTEAMLOGPaperDownloadFormat *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperDownloadFormat *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

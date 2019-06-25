@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGShowcaseDownloadPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseDownloadPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseDownloadPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseDownloadPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseDownloadPolicy` instances.
@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGShowcaseDownloadPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGShowcaseDownloadPolicy` object.
 ///
-+ (DBTEAMLOGShowcaseDownloadPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseDownloadPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -216,7 +216,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGTimeUnitTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTimeUnit` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTimeUnit *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTimeUnit *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTimeUnit` instances.
@@ -226,7 +226,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGTimeUnitTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGTimeUnit` object.
 ///
-+ (DBTEAMLOGTimeUnit *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTimeUnit *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

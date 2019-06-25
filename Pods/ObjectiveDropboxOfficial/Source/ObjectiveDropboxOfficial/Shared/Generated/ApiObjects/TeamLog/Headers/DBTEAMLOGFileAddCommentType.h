@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileAddCommentType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileAddCommentType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileAddCommentType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileAddCommentType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileAddCommentType` object.
 ///
-+ (DBTEAMLOGFileAddCommentType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileAddCommentType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

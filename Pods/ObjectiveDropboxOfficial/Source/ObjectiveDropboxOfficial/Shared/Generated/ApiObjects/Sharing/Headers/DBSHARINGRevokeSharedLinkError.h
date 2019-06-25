@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRevokeSharedLinkErrorTag) {
   /// The caller is not allowed to access this shared link.
   DBSHARINGRevokeSharedLinkErrorSharedLinkAccessDenied,
 
-  /// This type of link is not supported.
+  /// This type of link is not supported; use `files` instead.
   DBSHARINGRevokeSharedLinkErrorUnsupportedLinkType,
 
   /// (no description).
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRevokeSharedLinkErrorTag) {
 /// Initializes union class with tag state of "unsupported_link_type".
 ///
 /// Description of the "unsupported_link_type" tag state: This type of link is
-/// not supported.
+/// not supported; use `files` instead.
 ///
 /// @return An initialized instance.
 ///
@@ -169,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRevokeSharedLinkErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRevokeSharedLinkError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGRevokeSharedLinkError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGRevokeSharedLinkError *)instance;
 
 ///
 /// Deserializes `DBSHARINGRevokeSharedLinkError` instances.
@@ -179,7 +179,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRevokeSharedLinkErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGRevokeSharedLinkError` object.
 ///
-+ (DBSHARINGRevokeSharedLinkError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGRevokeSharedLinkError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

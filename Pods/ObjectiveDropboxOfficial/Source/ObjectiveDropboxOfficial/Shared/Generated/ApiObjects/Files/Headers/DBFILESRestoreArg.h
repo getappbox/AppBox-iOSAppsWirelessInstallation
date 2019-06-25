@@ -25,10 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The path to the file you want to restore.
+/// The path to save the restored file.
 @property (nonatomic, readonly, copy) NSString *path;
 
-/// The revision to restore for the file.
+/// The revision to restore.
 @property (nonatomic, readonly, copy) NSString *rev;
 
 #pragma mark - Constructors
@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param path The path to the file you want to restore.
-/// @param rev The revision to restore for the file.
+/// @param path The path to save the restored file.
+/// @param rev The revision to restore.
 ///
 /// @return An initialized instance.
 ///
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRestoreArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESRestoreArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESRestoreArg *)instance;
 
 ///
 /// Deserializes `DBFILESRestoreArg` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESRestoreArg` object.
 ///
-+ (DBFILESRestoreArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESRestoreArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

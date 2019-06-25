@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationBatchLaunch` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESRelocationBatchLaunch *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESRelocationBatchLaunch *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationBatchLaunch` instances.
@@ -156,7 +156,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
 ///
 /// @return An instantiation of the `DBFILESRelocationBatchLaunch` object.
 ///
-+ (DBFILESRelocationBatchLaunch *)deserialize:(NSDictionary *)dict;
++ (DBFILESRelocationBatchLaunch *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberPermission` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGMemberPermission *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGMemberPermission *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberPermission` instances.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGMemberPermission` object.
 ///
-+ (DBSHARINGMemberPermission *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGMemberPermission *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

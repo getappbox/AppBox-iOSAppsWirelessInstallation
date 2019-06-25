@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPaperDeploymentPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESPaperDeploymentPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESPaperDeploymentPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESPaperDeploymentPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESPaperDeploymentPolicy` instances.
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPaperDeploymentPolicyTag) {
 /// @return An instantiation of the `DBTEAMPOLICIESPaperDeploymentPolicy`
 /// object.
 ///
-+ (DBTEAMPOLICIESPaperDeploymentPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESPaperDeploymentPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

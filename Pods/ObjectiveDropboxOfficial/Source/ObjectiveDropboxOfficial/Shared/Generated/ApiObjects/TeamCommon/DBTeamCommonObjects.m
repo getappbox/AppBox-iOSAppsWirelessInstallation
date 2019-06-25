@@ -85,11 +85,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBTEAMCOMMONGroupManagementTypeSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBTEAMCOMMONGroupManagementTypeSerializer deserialize:dict];
 }
 
@@ -165,7 +165,7 @@
 
 @implementation DBTEAMCOMMONGroupManagementTypeSerializer
 
-+ (NSDictionary *)serialize:(DBTEAMCOMMONGroupManagementType *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMCOMMONGroupManagementType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isUserManaged]) {
@@ -183,7 +183,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBTEAMCOMMONGroupManagementType *)deserialize:(NSDictionary *)valueDict {
++ (DBTEAMCOMMONGroupManagementType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"user_managed"]) {
@@ -244,11 +244,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBTEAMCOMMONGroupSummarySerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBTEAMCOMMONGroupSummarySerializer deserialize:dict];
 }
 
@@ -329,7 +329,7 @@
 
 @implementation DBTEAMCOMMONGroupSummarySerializer
 
-+ (NSDictionary *)serialize:(DBTEAMCOMMONGroupSummary *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMCOMMONGroupSummary *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"group_name"] = valueObj.groupName;
@@ -346,7 +346,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBTEAMCOMMONGroupSummary *)deserialize:(NSDictionary *)valueDict {
++ (DBTEAMCOMMONGroupSummary *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *groupName = valueDict[@"group_name"];
   NSString *groupId = valueDict[@"group_id"];
   DBTEAMCOMMONGroupManagementType *groupManagementType =
@@ -428,11 +428,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBTEAMCOMMONGroupTypeSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBTEAMCOMMONGroupTypeSerializer deserialize:dict];
 }
 
@@ -504,7 +504,7 @@
 
 @implementation DBTEAMCOMMONGroupTypeSerializer
 
-+ (NSDictionary *)serialize:(DBTEAMCOMMONGroupType *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMCOMMONGroupType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isTeam]) {
@@ -520,7 +520,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBTEAMCOMMONGroupType *)deserialize:(NSDictionary *)valueDict {
++ (DBTEAMCOMMONGroupType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"team"]) {
@@ -615,11 +615,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBTEAMCOMMONMemberSpaceLimitTypeSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBTEAMCOMMONMemberSpaceLimitTypeSerializer deserialize:dict];
 }
 
@@ -695,7 +695,7 @@
 
 @implementation DBTEAMCOMMONMemberSpaceLimitTypeSerializer
 
-+ (NSDictionary *)serialize:(DBTEAMCOMMONMemberSpaceLimitType *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMCOMMONMemberSpaceLimitType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isOff]) {
@@ -713,7 +713,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBTEAMCOMMONMemberSpaceLimitType *)deserialize:(NSDictionary *)valueDict {
++ (DBTEAMCOMMONMemberSpaceLimitType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"off"]) {
@@ -757,11 +757,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBTEAMCOMMONTimeRangeSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBTEAMCOMMONTimeRangeSerializer deserialize:dict];
 }
 
@@ -830,7 +830,7 @@
 
 @implementation DBTEAMCOMMONTimeRangeSerializer
 
-+ (NSDictionary *)serialize:(DBTEAMCOMMONTimeRange *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMCOMMONTimeRange *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if (valueObj.startTime) {
@@ -843,7 +843,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBTEAMCOMMONTimeRange *)deserialize:(NSDictionary *)valueDict {
++ (DBTEAMCOMMONTimeRange *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSDate *startTime = valueDict[@"start_time"]
                           ? [DBNSDateSerializer deserialize:valueDict[@"start_time"] dateFormat:@"%Y-%m-%dT%H:%M:%SZ"]
                           : nil;

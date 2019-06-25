@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESFolderMetadata` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESFolderMetadata *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESFolderMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESFolderMetadata` instances.
@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESFolderMetadata` object.
 ///
-+ (DBFILESFolderMetadata *)deserialize:(NSDictionary *)dict;
++ (DBFILESFolderMetadata *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

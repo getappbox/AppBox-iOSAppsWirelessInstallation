@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERUserInfoWithPermissionLevel` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERUserInfoWithPermissionLevel *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERUserInfoWithPermissionLevel *)instance;
 
 ///
 /// Deserializes `DBPAPERUserInfoWithPermissionLevel` instances.
@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBPAPERUserInfoWithPermissionLevel` object.
 ///
-+ (DBPAPERUserInfoWithPermissionLevel *)deserialize:(NSDictionary *)dict;
++ (DBPAPERUserInfoWithPermissionLevel *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEREQUESTSFileRequestDeadline` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEREQUESTSFileRequestDeadline *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEREQUESTSFileRequestDeadline *)instance;
 
 ///
 /// Deserializes `DBFILEREQUESTSFileRequestDeadline` instances.
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILEREQUESTSFileRequestDeadline` object.
 ///
-+ (DBFILEREQUESTSFileRequestDeadline *)deserialize:(NSDictionary *)dict;
++ (DBFILEREQUESTSFileRequestDeadline *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGUserNameLogInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGUserNameLogInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGUserNameLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGUserNameLogInfo` instances.
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGUserNameLogInfo` object.
 ///
-+ (DBTEAMLOGUserNameLogInfo *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGUserNameLogInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

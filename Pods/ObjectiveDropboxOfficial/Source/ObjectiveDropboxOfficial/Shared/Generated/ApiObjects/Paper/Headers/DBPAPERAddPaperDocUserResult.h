@@ -231,7 +231,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERAddPaperDocUserResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERAddPaperDocUserResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERAddPaperDocUserResult *)instance;
 
 ///
 /// Deserializes `DBPAPERAddPaperDocUserResult` instances.
@@ -241,7 +241,7 @@ typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
 ///
 /// @return An instantiation of the `DBPAPERAddPaperDocUserResult` object.
 ///
-+ (DBPAPERAddPaperDocUserResult *)deserialize:(NSDictionary *)dict;
++ (DBPAPERAddPaperDocUserResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHInvalidAccountTypeError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBAUTHInvalidAccountTypeError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBAUTHInvalidAccountTypeError *)instance;
 
 ///
 /// Deserializes `DBAUTHInvalidAccountTypeError` instances.
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
 ///
 /// @return An instantiation of the `DBAUTHInvalidAccountTypeError` object.
 ///
-+ (DBAUTHInvalidAccountTypeError *)deserialize:(NSDictionary *)dict;
++ (DBAUTHInvalidAccountTypeError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

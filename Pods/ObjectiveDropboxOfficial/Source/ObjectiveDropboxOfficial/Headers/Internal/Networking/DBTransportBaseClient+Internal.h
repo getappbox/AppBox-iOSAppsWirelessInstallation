@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)serializeStringWithRoute:(DBRoute *)route routeArg:(id<DBSerializable>)arg;
 
++ (NSString *)asciiEscapeWithString:(NSString *)string;
+
 + (nullable DBRequestError *)dBRequestErrorWithErrorData:(nullable NSData *)errorData
                                              clientError:(nullable NSError *)clientError
                                               statusCode:(int)statusCode

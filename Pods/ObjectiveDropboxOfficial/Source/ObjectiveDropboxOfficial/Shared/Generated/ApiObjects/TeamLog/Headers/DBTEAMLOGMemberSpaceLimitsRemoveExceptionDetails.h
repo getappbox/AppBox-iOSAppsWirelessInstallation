@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails` object.
 ///
-+ (DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

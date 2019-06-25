@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails` object.
 ///
-+ (DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

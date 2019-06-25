@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGNoteAclTeamLinkDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGNoteAclTeamLinkDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGNoteAclTeamLinkDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGNoteAclTeamLinkDetails` instances.
@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGNoteAclTeamLinkDetails` object.
 ///
-+ (DBTEAMLOGNoteAclTeamLinkDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGNoteAclTeamLinkDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

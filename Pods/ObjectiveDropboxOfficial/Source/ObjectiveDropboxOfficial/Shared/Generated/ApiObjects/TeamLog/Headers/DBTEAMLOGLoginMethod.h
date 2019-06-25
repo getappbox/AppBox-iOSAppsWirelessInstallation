@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGLoginMethodTag) {
   DBTEAMLOGLoginMethodSaml,
 
   /// (no description).
+  DBTEAMLOGLoginMethodGoogleOauth,
+
+  /// (no description).
   DBTEAMLOGLoginMethodOther,
 
 };
@@ -67,6 +70,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGLoginMethodTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSaml;
+
+///
+/// Initializes union class with tag state of "google_oauth".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGoogleOauth;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -103,6 +113,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGLoginMethodTag) {
 - (BOOL)isSaml;
 
 ///
+/// Retrieves whether the union's current tag state has value "google_oauth".
+///
+/// @return Whether the union's current tag state has value "google_oauth".
+///
+- (BOOL)isGoogleOauth;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -133,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGLoginMethodTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGLoginMethod` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGLoginMethod *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGLoginMethod *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGLoginMethod` instances.
@@ -143,7 +160,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGLoginMethodTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGLoginMethod` object.
 ///
-+ (DBTEAMLOGLoginMethod *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGLoginMethod *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderPermanentlyDeleteError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderPermanentlyDeleteError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderPermanentlyDeleteError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderPermanentlyDeleteError` instances.
@@ -178,7 +178,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
 /// @return An instantiation of the `DBTEAMTeamFolderPermanentlyDeleteError`
 /// object.
 ///
-+ (DBTEAMTeamFolderPermanentlyDeleteError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderPermanentlyDeleteError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

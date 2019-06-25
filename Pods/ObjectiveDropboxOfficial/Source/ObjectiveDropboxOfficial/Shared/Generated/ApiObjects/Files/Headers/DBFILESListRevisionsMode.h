@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBFILESListRevisionsModeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListRevisionsMode` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListRevisionsMode *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListRevisionsMode *)instance;
 
 ///
 /// Deserializes `DBFILESListRevisionsMode` instances.
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBFILESListRevisionsModeTag) {
 ///
 /// @return An instantiation of the `DBFILESListRevisionsMode` object.
 ///
-+ (DBFILESListRevisionsMode *)deserialize:(NSDictionary *)dict;
++ (DBFILESListRevisionsMode *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

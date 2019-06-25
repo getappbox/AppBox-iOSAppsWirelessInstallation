@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetThumbnailBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetThumbnailBatchError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESGetThumbnailBatchError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESGetThumbnailBatchError *)instance;
 
 ///
 /// Deserializes `DBFILESGetThumbnailBatchError` instances.
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetThumbnailBatchErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESGetThumbnailBatchError` object.
 ///
-+ (DBFILESGetThumbnailBatchError *)deserialize:(NSDictionary *)dict;
++ (DBFILESGetThumbnailBatchError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

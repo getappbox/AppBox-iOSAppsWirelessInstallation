@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *recursive;
 
 /// If true, `mediaInfo` in `DBFILESFileMetadata` is set for photo and video.
+/// This parameter will no longer have an effect starting December 2, 2019.
 @property (nonatomic, readonly) NSNumber *includeMediaInfo;
 
 /// If true, the results will include entries for files and folders that used to
@@ -65,6 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// the file and each of the listed templates.
 @property (nonatomic, readonly, nullable) DBFILEPROPERTIESTemplateFilterBase *includePropertyGroups;
 
+/// If true, include files that are not downloadable, i.e. Google Docs.
+@property (nonatomic, readonly) NSNumber *includeNonDownloadableFiles;
+
 #pragma mark - Constructors
 
 ///
@@ -75,7 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// recursively to all subfolders and the response will contain contents of all
 /// subfolders.
 /// @param includeMediaInfo If true, `mediaInfo` in `DBFILESFileMetadata` is set
-/// for photo and video.
+/// for photo and video. This parameter will no longer have an effect starting
+/// December 2, 2019.
 /// @param includeDeleted If true, the results will include entries for files
 /// and folders that used to exist but were deleted.
 /// @param includeHasExplicitSharedMembers If true, the results will include a
@@ -93,6 +98,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param includePropertyGroups If set to a valid list of template IDs,
 /// `propertyGroups` in `DBFILESFileMetadata` is set if there exists property
 /// data associated with the file and each of the listed templates.
+/// @param includeNonDownloadableFiles If true, include files that are not
+/// downloadable, i.e. Google Docs.
 ///
 /// @return An initialized instance.
 ///
@@ -104,7 +111,8 @@ NS_ASSUME_NONNULL_BEGIN
               includeMountedFolders:(nullable NSNumber *)includeMountedFolders
                               limit:(nullable NSNumber *)limit
                          sharedLink:(nullable DBFILESSharedLink *)sharedLink
-              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups;
+              includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+        includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -135,7 +143,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListFolderArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListFolderArg *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderArg` instances.
@@ -145,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESListFolderArg` object.
 ///
-+ (DBFILESListFolderArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESListFolderArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

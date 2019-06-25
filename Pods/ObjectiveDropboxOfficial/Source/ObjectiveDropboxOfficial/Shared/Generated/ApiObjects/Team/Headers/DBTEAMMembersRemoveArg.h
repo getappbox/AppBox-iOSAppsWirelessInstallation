@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param user Identity of user to remove/suspend.
+/// @param user Identity of user to remove/suspend/have their files moved.
 /// @param wipeData If provided, controls if the user's data will be deleted on
 /// their linked devices.
 /// @param transferDestId If provided, files from the deleted member account
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param user Identity of user to remove/suspend.
+/// @param user Identity of user to remove/suspend/have their files moved.
 ///
 /// @return An initialized instance.
 ///
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersRemoveArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMMembersRemoveArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMMembersRemoveArg *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersRemoveArg` instances.
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMMembersRemoveArg` object.
 ///
-+ (DBTEAMMembersRemoveArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMMembersRemoveArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

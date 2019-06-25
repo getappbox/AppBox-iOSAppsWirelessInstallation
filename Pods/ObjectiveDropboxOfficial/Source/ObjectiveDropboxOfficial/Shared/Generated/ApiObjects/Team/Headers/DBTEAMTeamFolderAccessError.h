@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderAccessErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderAccessError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderAccessError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderAccessError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderAccessError` instances.
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderAccessErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderAccessError` object.
 ///
-+ (DBTEAMTeamFolderAccessError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderAccessError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

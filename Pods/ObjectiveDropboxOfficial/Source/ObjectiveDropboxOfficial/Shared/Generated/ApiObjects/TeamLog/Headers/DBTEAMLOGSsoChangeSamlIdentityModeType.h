@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoChangeSamlIdentityModeType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoChangeSamlIdentityModeType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSsoChangeSamlIdentityModeType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoChangeSamlIdentityModeType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSsoChangeSamlIdentityModeType`
 /// object.
 ///
-+ (DBTEAMLOGSsoChangeSamlIdentityModeType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSsoChangeSamlIdentityModeType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

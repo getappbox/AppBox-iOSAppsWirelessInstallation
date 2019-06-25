@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentChangeLinkExpiryType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeLinkExpiryType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentChangeLinkExpiryType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentChangeLinkExpiryType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentChangeLinkExpiryType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentChangeLinkExpiryType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentChangeLinkExpiryType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

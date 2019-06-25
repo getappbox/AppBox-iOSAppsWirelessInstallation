@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeLinkedAppStatus` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRevokeLinkedAppStatus *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRevokeLinkedAppStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeLinkedAppStatus` instances.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMRevokeLinkedAppStatus` object.
 ///
-+ (DBTEAMRevokeLinkedAppStatus *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRevokeLinkedAppStatus *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberChangeMembershipTypeType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberChangeMembershipTypeType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberChangeMembershipTypeType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberChangeMembershipTypeType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGMemberChangeMembershipTypeType`
 /// object.
 ///
-+ (DBTEAMLOGMemberChangeMembershipTypeType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberChangeMembershipTypeType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

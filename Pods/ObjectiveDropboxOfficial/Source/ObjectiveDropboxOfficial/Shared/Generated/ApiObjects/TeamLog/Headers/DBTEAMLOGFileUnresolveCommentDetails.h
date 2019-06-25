@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileUnresolveCommentDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileUnresolveCommentDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileUnresolveCommentDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileUnresolveCommentDetails` instances.
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGFileUnresolveCommentDetails`
 /// object.
 ///
-+ (DBTEAMLOGFileUnresolveCommentDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileUnresolveCommentDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

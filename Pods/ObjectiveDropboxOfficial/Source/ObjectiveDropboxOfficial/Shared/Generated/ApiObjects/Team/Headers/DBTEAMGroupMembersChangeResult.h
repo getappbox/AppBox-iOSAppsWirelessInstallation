@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersChangeResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMGroupMembersChangeResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMGroupMembersChangeResult *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersChangeResult` instances.
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersChangeResult` object.
 ///
-+ (DBTEAMGroupMembersChangeResult *)deserialize:(NSDictionary *)dict;
++ (DBTEAMGroupMembersChangeResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

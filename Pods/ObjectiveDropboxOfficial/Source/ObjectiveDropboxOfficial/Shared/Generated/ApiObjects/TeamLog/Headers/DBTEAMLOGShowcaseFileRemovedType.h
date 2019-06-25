@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseFileRemovedType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseFileRemovedType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseFileRemovedType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseFileRemovedType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGShowcaseFileRemovedType` object.
 ///
-+ (DBTEAMLOGShowcaseFileRemovedType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseFileRemovedType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderLongpollError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListFolderLongpollError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListFolderLongpollError *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderLongpollError` instances.
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESListFolderLongpollError` object.
 ///
-+ (DBFILESListFolderLongpollError *)deserialize:(NSDictionary *)dict;
++ (DBFILESListFolderLongpollError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

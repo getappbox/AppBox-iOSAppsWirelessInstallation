@@ -73,6 +73,7 @@ static DBOAuthManager *s_sharedOAuthManager;
 #else
     _disableSignup = YES;
 #endif
+    _webAuthShouldForceReauthentication = NO;
   }
   return self;
 }
@@ -179,6 +180,8 @@ static DBOAuthManager *s_sharedOAuthManager;
     [NSURLQueryItem queryItemWithName:@"client_id" value:_appKey],
     [NSURLQueryItem queryItemWithName:@"redirect_uri" value:[_redirectURL absoluteString]],
     [NSURLQueryItem queryItemWithName:@"disable_signup" value:self.disableSignup ? @"true" : @"false"],
+    [NSURLQueryItem queryItemWithName:@"force_reauthentication"
+                                value:self.webAuthShouldForceReauthentication ? @"true" : @"false"],
     [NSURLQueryItem queryItemWithName:@"locale" value:[self.locale localeIdentifier] ?: localeIdentifier],
     [NSURLQueryItem queryItemWithName:@"state" value:state],
   ];

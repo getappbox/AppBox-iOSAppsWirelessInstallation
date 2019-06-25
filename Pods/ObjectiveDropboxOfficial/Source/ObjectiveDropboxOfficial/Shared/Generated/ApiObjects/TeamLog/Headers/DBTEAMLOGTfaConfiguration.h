@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaConfiguration` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaConfiguration *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaConfiguration *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaConfiguration` instances.
@@ -161,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGTfaConfiguration` object.
 ///
-+ (DBTEAMLOGTfaConfiguration *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTfaConfiguration *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

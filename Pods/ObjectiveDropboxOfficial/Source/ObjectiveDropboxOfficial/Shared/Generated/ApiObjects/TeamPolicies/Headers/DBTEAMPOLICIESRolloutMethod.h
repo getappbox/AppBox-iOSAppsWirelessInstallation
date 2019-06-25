@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESRolloutMethodTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESRolloutMethod` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESRolloutMethod *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESRolloutMethod *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESRolloutMethod` instances.
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESRolloutMethodTag) {
 ///
 /// @return An instantiation of the `DBTEAMPOLICIESRolloutMethod` object.
 ///
-+ (DBTEAMPOLICIESRolloutMethod *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESRolloutMethod *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

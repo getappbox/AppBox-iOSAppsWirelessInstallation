@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDesktopClientSession` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMDesktopClientSession *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMDesktopClientSession *)instance;
 
 ///
 /// Deserializes `DBTEAMDesktopClientSession` instances.
@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMDesktopClientSession` object.
 ///
-+ (DBTEAMDesktopClientSession *)deserialize:(NSDictionary *)dict;
++ (DBTEAMDesktopClientSession *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

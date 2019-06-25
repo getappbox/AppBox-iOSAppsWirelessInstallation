@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderBatchError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESCreateFolderBatchError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESCreateFolderBatchError *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderBatchError` instances.
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESCreateFolderBatchError` object.
 ///
-+ (DBFILESCreateFolderBatchError *)deserialize:(NSDictionary *)dict;
++ (DBFILESCreateFolderBatchError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

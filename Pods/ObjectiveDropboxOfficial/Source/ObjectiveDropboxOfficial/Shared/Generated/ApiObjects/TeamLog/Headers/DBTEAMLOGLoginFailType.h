@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGLoginFailType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGLoginFailType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGLoginFailType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGLoginFailType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGLoginFailType` object.
 ///
-+ (DBTEAMLOGLoginFailType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGLoginFailType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

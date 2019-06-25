@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceChangeIpMobileType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceChangeIpMobileType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceChangeIpMobileType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceChangeIpMobileType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGDeviceChangeIpMobileType` object.
 ///
-+ (DBTEAMLOGDeviceChangeIpMobileType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceChangeIpMobileType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

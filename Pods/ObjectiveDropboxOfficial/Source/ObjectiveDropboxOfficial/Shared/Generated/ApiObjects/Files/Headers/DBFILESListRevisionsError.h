@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, DBFILESListRevisionsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListRevisionsError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListRevisionsError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListRevisionsError *)instance;
 
 ///
 /// Deserializes `DBFILESListRevisionsError` instances.
@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBFILESListRevisionsErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESListRevisionsError` object.
 ///
-+ (DBFILESListRevisionsError *)deserialize:(NSDictionary *)dict;
++ (DBFILESListRevisionsError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

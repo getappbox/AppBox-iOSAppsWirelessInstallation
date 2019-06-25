@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDesktopDeviceSessionLogInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDesktopDeviceSessionLogInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDesktopDeviceSessionLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDesktopDeviceSessionLogInfo` instances.
@@ -126,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGDesktopDeviceSessionLogInfo`
 /// object.
 ///
-+ (DBTEAMLOGDesktopDeviceSessionLogInfo *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDesktopDeviceSessionLogInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 
