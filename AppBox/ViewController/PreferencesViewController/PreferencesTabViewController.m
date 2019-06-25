@@ -42,12 +42,12 @@
     [self addTabViewItem:accountPreferencesTabViewItem];
     
     //Mail Preferences
-    TeamsViewController *teamsViewController = [[TeamsViewController alloc] initWithNibName:NSStringFromClass([TeamsViewController class]) bundle:nil];
-    NSTabViewItem *teamsTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"teams"];
-    [teamsTabViewItem setLabel:@"Project Teams"];
-    [teamsTabViewItem setImage:[NSImage imageNamed:@"Teams"]];
-    [teamsTabViewItem setViewController:teamsViewController];
-    [self addTabViewItem:teamsTabViewItem];
+    //TeamsViewController *teamsViewController = [[TeamsViewController alloc] initWithNibName:NSStringFromClass([TeamsViewController class]) bundle:nil];
+    //NSTabViewItem *teamsTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"teams"];
+    //[teamsTabViewItem setLabel:@"Project Teams"];
+    //[teamsTabViewItem setImage:[NSImage imageNamed:@"Teams"]];
+    //[teamsTabViewItem setViewController:teamsViewController];
+    //[self addTabViewItem:teamsTabViewItem];
     
     //Mail Preferences
     EmailPreferencesViewController *emailPreferencesViewController = [[EmailPreferencesViewController alloc] initWithNibName:NSStringFromClass([EmailPreferencesViewController class]) bundle:nil];
