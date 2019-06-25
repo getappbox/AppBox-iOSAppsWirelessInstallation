@@ -202,6 +202,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// apps.
 @property (nonatomic, assign) BOOL disableSignup;
 
+///
+/// When YES, users who use the web auth flow (NOT dbapp delegated auth) will be forced to sign in from scratch.
+/// When NO, there is saved session data from the SafariViewController that can be used across signin attempts.
+/// This is intended for use with multi-account applications for App Store compliance, since
+/// adding a second account would shortcut the username/password entry page and use the first account's credentials.
+///
+/// Default value is NO, which is consistent with historical behavior.
+///
+@property (nonatomic, assign) BOOL webAuthShouldForceReauthentication;
+
 @end
 
 NS_ASSUME_NONNULL_END

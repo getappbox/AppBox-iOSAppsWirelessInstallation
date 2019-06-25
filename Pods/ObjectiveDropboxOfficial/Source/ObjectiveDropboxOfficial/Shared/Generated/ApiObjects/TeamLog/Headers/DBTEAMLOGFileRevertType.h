@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRevertType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRevertType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileRevertType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRevertType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileRevertType` object.
 ///
-+ (DBTEAMLOGFileRevertType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileRevertType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

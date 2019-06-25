@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceApprovalsChangeOverageActionType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceApprovalsChangeOverageActionType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceApprovalsChangeOverageActionType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceApprovalsChangeOverageActionType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDeviceApprovalsChangeOverageActionType` object.
 ///
-+ (DBTEAMLOGDeviceApprovalsChangeOverageActionType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceApprovalsChangeOverageActionType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

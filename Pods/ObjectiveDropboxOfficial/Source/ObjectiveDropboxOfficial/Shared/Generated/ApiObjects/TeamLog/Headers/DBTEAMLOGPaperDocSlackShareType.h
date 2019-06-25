@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperDocSlackShareType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperDocSlackShareType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperDocSlackShareType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperDocSlackShareType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperDocSlackShareType` object.
 ///
-+ (DBTEAMLOGPaperDocSlackShareType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperDocSlackShareType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperContentRestoreType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperContentRestoreType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperContentRestoreType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperContentRestoreType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperContentRestoreType` object.
 ///
-+ (DBTEAMLOGPaperContentRestoreType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperContentRestoreType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

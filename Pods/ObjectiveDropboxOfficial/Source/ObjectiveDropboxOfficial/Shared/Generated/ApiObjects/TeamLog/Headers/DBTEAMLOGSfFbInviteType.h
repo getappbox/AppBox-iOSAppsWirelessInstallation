@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfFbInviteType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfFbInviteType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfFbInviteType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfFbInviteType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfFbInviteType` object.
 ///
-+ (DBTEAMLOGSfFbInviteType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfFbInviteType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

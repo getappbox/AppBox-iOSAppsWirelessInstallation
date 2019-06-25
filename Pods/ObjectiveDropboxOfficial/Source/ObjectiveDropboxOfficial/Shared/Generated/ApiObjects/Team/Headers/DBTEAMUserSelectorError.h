@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, DBTEAMUserSelectorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMUserSelectorError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMUserSelectorError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMUserSelectorError *)instance;
 
 ///
 /// Deserializes `DBTEAMUserSelectorError` instances.
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, DBTEAMUserSelectorErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMUserSelectorError` object.
 ///
-+ (DBTEAMUserSelectorError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMUserSelectorError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

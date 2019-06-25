@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersListErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMExcludedUsersListError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMExcludedUsersListError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMExcludedUsersListError *)instance;
 
 ///
 /// Deserializes `DBTEAMExcludedUsersListError` instances.
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersListErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMExcludedUsersListError` object.
 ///
-+ (DBTEAMExcludedUsersListError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMExcludedUsersListError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

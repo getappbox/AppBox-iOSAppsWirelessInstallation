@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESContentSyncSetting` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESContentSyncSetting *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESContentSyncSetting *)instance;
 
 ///
 /// Deserializes `DBFILESContentSyncSetting` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESContentSyncSetting` object.
 ///
-+ (DBFILESContentSyncSetting *)deserialize:(NSDictionary *)dict;
++ (DBFILESContentSyncSetting *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

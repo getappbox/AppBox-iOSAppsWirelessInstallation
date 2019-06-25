@@ -8,6 +8,8 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBSHARINGLinkAudience;
+@class DBSHARINGRequestedLinkAccessLevel;
 @class DBSHARINGRequestedVisibility;
 @class DBSHARINGSharedLinkSettings;
 
@@ -36,6 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// Expiration time of the shared link. By default the link won't expire.
 @property (nonatomic, readonly, nullable) NSDate *expires;
 
+/// The new audience who can benefit from the access level specified by the
+/// link's access level specified in the `link_access_level` field of
+/// `LinkPermissions`. This is used in conjunction with team policies and shared
+/// folder policies to determine the final effective audience type in the
+/// `effective_audience` field of `LinkPermissions.
+@property (nonatomic, readonly, nullable) DBSHARINGLinkAudience *audience;
+
+/// Requested access level you want the audience to gain from this link.
+@property (nonatomic, readonly, nullable) DBSHARINGRequestedLinkAccessLevel *access;
+
 #pragma mark - Constructors
 
 ///
@@ -47,12 +59,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// access the link.
 /// @param expires Expiration time of the shared link. By default the link won't
 /// expire.
+/// @param audience The new audience who can benefit from the access level
+/// specified by the link's access level specified in the `link_access_level`
+/// field of `LinkPermissions`. This is used in conjunction with team policies
+/// and shared folder policies to determine the final effective audience type in
+/// the `effective_audience` field of `LinkPermissions.
+/// @param access Requested access level you want the audience to gain from this
+/// link.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithRequestedVisibility:(nullable DBSHARINGRequestedVisibility *)requestedVisibility
                                linkPassword:(nullable NSString *)linkPassword
-                                    expires:(nullable NSDate *)expires;
+                                    expires:(nullable NSDate *)expires
+                                   audience:(nullable DBSHARINGLinkAudience *)audience
+                                     access:(nullable DBSHARINGRequestedLinkAccessLevel *)access;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -82,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkSettings` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGSharedLinkSettings *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGSharedLinkSettings *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkSettings` instances.
@@ -92,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGSharedLinkSettings` object.
 ///
-+ (DBSHARINGSharedLinkSettings *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGSharedLinkSettings *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

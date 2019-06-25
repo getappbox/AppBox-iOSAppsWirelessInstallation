@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESShowcaseEnabledPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESShowcaseEnabledPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESShowcaseEnabledPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESShowcaseEnabledPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESShowcaseEnabledPolicy` instances.
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESShowcaseEnabledPolicyTag) {
 /// @return An instantiation of the `DBTEAMPOLICIESShowcaseEnabledPolicy`
 /// object.
 ///
-+ (DBTEAMPOLICIESShowcaseEnabledPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESShowcaseEnabledPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

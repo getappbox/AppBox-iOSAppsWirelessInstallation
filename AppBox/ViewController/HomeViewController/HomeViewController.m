@@ -967,7 +967,9 @@
     [EventTracker logEventSettingWithType:LogEventSettingTypeUploadIPASuccess andSettings:currentSetting];
     
     //Show Notification
-    [Common showUploadNotificationWithName:project.name andURL:project.appShortShareableURL];
+    if (ciRepoProject == nil) {
+        [Common showUploadNotificationWithName:project.name andURL:project.appShortShareableURL];
+    }
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nSHARE URL - %@\n\n\n.", project.appShortShareableURL]];
     
     

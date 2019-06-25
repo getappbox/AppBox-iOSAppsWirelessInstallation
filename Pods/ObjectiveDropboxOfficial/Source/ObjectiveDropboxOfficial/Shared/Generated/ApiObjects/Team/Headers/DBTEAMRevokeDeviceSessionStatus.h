@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionStatus` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionStatus *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRevokeDeviceSessionStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionStatus` instances.
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMRevokeDeviceSessionStatus` object.
 ///
-+ (DBTEAMRevokeDeviceSessionStatus *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRevokeDeviceSessionStatus *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

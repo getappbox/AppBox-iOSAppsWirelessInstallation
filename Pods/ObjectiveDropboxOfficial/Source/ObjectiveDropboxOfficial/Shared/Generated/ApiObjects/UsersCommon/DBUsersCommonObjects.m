@@ -71,11 +71,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSCOMMONAccountTypeSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSCOMMONAccountTypeSerializer deserialize:dict];
 }
 
@@ -147,7 +147,7 @@
 
 @implementation DBUSERSCOMMONAccountTypeSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSCOMMONAccountType *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSCOMMONAccountType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isBasic]) {
@@ -165,7 +165,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSCOMMONAccountType *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSCOMMONAccountType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"basic"]) {

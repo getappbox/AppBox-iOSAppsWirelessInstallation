@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, DBTEAMUploadApiRateLimitValueTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMUploadApiRateLimitValue` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMUploadApiRateLimitValue *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMUploadApiRateLimitValue *)instance;
 
 ///
 /// Deserializes `DBTEAMUploadApiRateLimitValue` instances.
@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBTEAMUploadApiRateLimitValueTag) {
 ///
 /// @return An instantiation of the `DBTEAMUploadApiRateLimitValue` object.
 ///
-+ (DBTEAMUploadApiRateLimitValue *)deserialize:(NSDictionary *)dict;
++ (DBTEAMUploadApiRateLimitValue *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

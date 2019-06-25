@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESSharedFolderJoinPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESSharedFolderJoinPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESSharedFolderJoinPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESSharedFolderJoinPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESSharedFolderJoinPolicy` instances.
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESSharedFolderJoinPolicyTag) {
 /// @return An instantiation of the `DBTEAMPOLICIESSharedFolderJoinPolicy`
 /// object.
 ///
-+ (DBTEAMPOLICIESSharedFolderJoinPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESSharedFolderJoinPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

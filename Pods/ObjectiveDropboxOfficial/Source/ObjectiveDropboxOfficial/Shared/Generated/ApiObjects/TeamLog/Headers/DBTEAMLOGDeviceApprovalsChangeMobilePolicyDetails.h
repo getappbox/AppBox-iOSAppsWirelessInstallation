@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails` instances.
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails` object.
 ///
-+ (DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

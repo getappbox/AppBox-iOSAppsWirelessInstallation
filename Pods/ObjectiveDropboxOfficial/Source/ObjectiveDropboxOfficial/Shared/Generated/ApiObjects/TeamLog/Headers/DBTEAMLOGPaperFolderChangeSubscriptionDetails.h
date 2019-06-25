@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperFolderChangeSubscriptionDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperFolderChangeSubscriptionDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperFolderChangeSubscriptionDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperFolderChangeSubscriptionDetails` instances.
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGPaperFolderChangeSubscriptionDetails` object.
 ///
-+ (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperFolderChangeSubscriptionDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSGetAccountArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSGetAccountArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSGetAccountArg *)instance;
 
 ///
 /// Deserializes `DBUSERSGetAccountArg` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBUSERSGetAccountArg` object.
 ///
-+ (DBUSERSGetAccountArg *)deserialize:(NSDictionary *)dict;
++ (DBUSERSGetAccountArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

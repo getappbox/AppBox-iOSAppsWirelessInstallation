@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEmmErrorDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGEmmErrorDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEmmErrorDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEmmErrorDetails` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGEmmErrorDetails` object.
 ///
-+ (DBTEAMLOGEmmErrorDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGEmmErrorDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

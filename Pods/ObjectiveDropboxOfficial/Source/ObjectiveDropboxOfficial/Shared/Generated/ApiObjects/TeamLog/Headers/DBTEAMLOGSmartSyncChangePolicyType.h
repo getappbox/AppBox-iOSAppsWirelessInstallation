@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSmartSyncChangePolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSmartSyncChangePolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSmartSyncChangePolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSmartSyncChangePolicyType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSmartSyncChangePolicyType` object.
 ///
-+ (DBTEAMLOGSmartSyncChangePolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSmartSyncChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

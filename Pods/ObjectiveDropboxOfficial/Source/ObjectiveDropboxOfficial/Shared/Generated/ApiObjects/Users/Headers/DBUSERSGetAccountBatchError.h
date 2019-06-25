@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBUSERSGetAccountBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSGetAccountBatchError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSGetAccountBatchError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSGetAccountBatchError *)instance;
 
 ///
 /// Deserializes `DBUSERSGetAccountBatchError` instances.
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBUSERSGetAccountBatchErrorTag) {
 ///
 /// @return An instantiation of the `DBUSERSGetAccountBatchError` object.
 ///
-+ (DBUSERSGetAccountBatchError *)deserialize:(NSDictionary *)dict;
++ (DBUSERSGetAccountBatchError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentChangeMemberRoleType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeMemberRoleType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentChangeMemberRoleType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentChangeMemberRoleType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentChangeMemberRoleType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentChangeMemberRoleType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentChangeMemberRoleType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

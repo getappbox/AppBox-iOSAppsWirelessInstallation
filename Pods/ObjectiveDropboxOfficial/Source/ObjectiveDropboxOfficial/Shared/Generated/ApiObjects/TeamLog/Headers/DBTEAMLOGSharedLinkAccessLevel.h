@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedLinkAccessLevelTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedLinkAccessLevel` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedLinkAccessLevel *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedLinkAccessLevel *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedLinkAccessLevel` instances.
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharedLinkAccessLevelTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGSharedLinkAccessLevel` object.
 ///
-+ (DBTEAMLOGSharedLinkAccessLevel *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedLinkAccessLevel *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

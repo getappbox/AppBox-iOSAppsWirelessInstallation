@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderInvalidStatusErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderInvalidStatusError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderInvalidStatusError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderInvalidStatusError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderInvalidStatusError` instances.
@@ -154,7 +154,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderInvalidStatusErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderInvalidStatusError` object.
 ///
-+ (DBTEAMTeamFolderInvalidStatusError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderInvalidStatusError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

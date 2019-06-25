@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestsEmailsEnabledDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestsEmailsEnabledDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileRequestsEmailsEnabledDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestsEmailsEnabledDetails` instances.
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGFileRequestsEmailsEnabledDetails`
 /// object.
 ///
-+ (DBTEAMLOGFileRequestsEmailsEnabledDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileRequestsEmailsEnabledDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

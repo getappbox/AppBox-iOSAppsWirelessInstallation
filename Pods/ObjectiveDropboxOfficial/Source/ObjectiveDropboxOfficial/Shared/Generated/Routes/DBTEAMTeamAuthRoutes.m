@@ -124,7 +124,9 @@
 #import "DBTEAMMembersAddArg.h"
 #import "DBTEAMMembersAddJobStatus.h"
 #import "DBTEAMMembersAddLaunch.h"
+#import "DBTEAMMembersDataTransferArg.h"
 #import "DBTEAMMembersDeactivateArg.h"
+#import "DBTEAMMembersDeactivateBaseArg.h"
 #import "DBTEAMMembersDeactivateError.h"
 #import "DBTEAMMembersGetInfoArgs.h"
 #import "DBTEAMMembersGetInfoError.h"
@@ -145,6 +147,8 @@
 #import "DBTEAMMembersSetProfileArg.h"
 #import "DBTEAMMembersSetProfileError.h"
 #import "DBTEAMMembersSuspendError.h"
+#import "DBTEAMMembersTransferFilesError.h"
+#import "DBTEAMMembersTransferFormerMembersFilesError.h"
 #import "DBTEAMMembersUnsuspendArg.h"
 #import "DBTEAMMembersUnsuspendError.h"
 #import "DBTEAMMobileClientSession.h"
@@ -199,6 +203,7 @@
 #import "DBTEAMTeamNamespacesListArg.h"
 #import "DBTEAMTeamNamespacesListContinueArg.h"
 #import "DBTEAMTeamNamespacesListContinueError.h"
+#import "DBTEAMTeamNamespacesListError.h"
 #import "DBTEAMTeamNamespacesListResult.h"
 #import "DBTEAMTokenGetAuthenticatedAdminError.h"
 #import "DBTEAMTokenGetAuthenticatedAdminResult.h"
@@ -589,6 +594,22 @@
 - (DBRpcTask *)membersListContinue:(NSString *)cursor {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersListContinue;
   DBTEAMMembersListContinueArg *arg = [[DBTEAMMembersListContinueArg alloc] initWithCursor:cursor];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
+                             transferDestId:(DBTEAMUserSelectorArg *)transferDestId
+                            transferAdminId:(DBTEAMUserSelectorArg *)transferAdminId {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersMoveFormerMemberFiles;
+  DBTEAMMembersDataTransferArg *arg = [[DBTEAMMembersDataTransferArg alloc] initWithUser:user
+                                                                          transferDestId:transferDestId
+                                                                         transferAdminId:transferAdminId];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)membersMoveFormerMemberFilesJobStatusCheck:(NSString *)asyncJobId {
+  DBRoute *route = DBTEAMRouteObjects.DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
+  DBASYNCPollArg *arg = [[DBASYNCPollArg alloc] initWithAsyncJobId:asyncJobId];
   return [self.client requestRpc:route arg:arg];
 }
 

@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSmartSyncNotOptOutDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSmartSyncNotOptOutDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSmartSyncNotOptOutDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSmartSyncNotOptOutDetails` instances.
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSmartSyncNotOptOutDetails` object.
 ///
-+ (DBTEAMLOGSmartSyncNotOptOutDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSmartSyncNotOptOutDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

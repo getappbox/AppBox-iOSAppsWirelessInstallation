@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharingLinkPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharingLinkPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharingLinkPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharingLinkPolicy` instances.
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGSharingLinkPolicy` object.
 ///
-+ (DBTEAMLOGSharingLinkPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharingLinkPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSearchError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSearchError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSearchError *)instance;
 
 ///
 /// Deserializes `DBFILESSearchError` instances.
@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBFILESSearchErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESSearchError` object.
 ///
-+ (DBFILESSearchError *)deserialize:(NSDictionary *)dict;
++ (DBFILESSearchError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

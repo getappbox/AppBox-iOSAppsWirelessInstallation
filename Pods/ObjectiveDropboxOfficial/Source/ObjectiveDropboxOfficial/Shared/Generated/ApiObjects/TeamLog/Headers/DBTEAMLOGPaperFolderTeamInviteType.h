@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperFolderTeamInviteType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperFolderTeamInviteType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperFolderTeamInviteType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperFolderTeamInviteType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperFolderTeamInviteType` object.
 ///
-+ (DBTEAMLOGPaperFolderTeamInviteType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperFolderTeamInviteType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

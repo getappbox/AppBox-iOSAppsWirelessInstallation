@@ -193,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveCopyReferenceError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSaveCopyReferenceError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSaveCopyReferenceError *)instance;
 
 ///
 /// Deserializes `DBFILESSaveCopyReferenceError` instances.
@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESSaveCopyReferenceError` object.
 ///
-+ (DBFILESSaveCopyReferenceError *)deserialize:(NSDictionary *)dict;
++ (DBFILESSaveCopyReferenceError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

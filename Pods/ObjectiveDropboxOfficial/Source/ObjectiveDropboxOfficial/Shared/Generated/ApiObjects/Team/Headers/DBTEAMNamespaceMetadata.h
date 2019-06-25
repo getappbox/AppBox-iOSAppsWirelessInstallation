@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMNamespaceMetadata` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMNamespaceMetadata *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMNamespaceMetadata *)instance;
 
 ///
 /// Deserializes `DBTEAMNamespaceMetadata` instances.
@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMNamespaceMetadata` object.
 ///
-+ (DBTEAMNamespaceMetadata *)deserialize:(NSDictionary *)dict;
++ (DBTEAMNamespaceMetadata *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

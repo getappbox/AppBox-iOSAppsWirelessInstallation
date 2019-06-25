@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGetMembershipReport` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMGetMembershipReport *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMGetMembershipReport *)instance;
 
 ///
 /// Deserializes `DBTEAMGetMembershipReport` instances.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMGetMembershipReport` object.
 ///
-+ (DBTEAMGetMembershipReport *)deserialize:(NSDictionary *)dict;
++ (DBTEAMGetMembershipReport *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

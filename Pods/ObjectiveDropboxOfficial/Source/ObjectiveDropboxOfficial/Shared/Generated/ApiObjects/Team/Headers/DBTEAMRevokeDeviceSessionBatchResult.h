@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionBatchResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionBatchResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRevokeDeviceSessionBatchResult *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionBatchResult` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMRevokeDeviceSessionBatchResult`
 /// object.
 ///
-+ (DBTEAMRevokeDeviceSessionBatchResult *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRevokeDeviceSessionBatchResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

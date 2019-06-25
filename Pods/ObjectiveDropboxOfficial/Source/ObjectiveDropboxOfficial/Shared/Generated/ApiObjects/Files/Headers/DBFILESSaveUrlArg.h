@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveUrlArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSaveUrlArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSaveUrlArg *)instance;
 
 ///
 /// Deserializes `DBFILESSaveUrlArg` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESSaveUrlArg` object.
 ///
-+ (DBFILESSaveUrlArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESSaveUrlArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

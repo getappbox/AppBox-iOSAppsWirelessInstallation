@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSIndividualSpaceAllocation` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSIndividualSpaceAllocation *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSIndividualSpaceAllocation *)instance;
 
 ///
 /// Deserializes `DBUSERSIndividualSpaceAllocation` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBUSERSIndividualSpaceAllocation` object.
 ///
-+ (DBUSERSIndividualSpaceAllocation *)deserialize:(NSDictionary *)dict;
++ (DBUSERSIndividualSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

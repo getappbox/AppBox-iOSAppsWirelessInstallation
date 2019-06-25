@@ -35,10 +35,11 @@ typedef void(^CompletionBlock)();
 @property(nonatomic, strong) CompletionBlock completionBlock;
 
 
-+(void)setupDBClientsManager;
--(void)uploadIPAFile:(NSURL *)ipaFileURL;
--(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL;
++ (void)setupDBClientsManager;
+- (instancetype)init;
+- (void)uploadIPAFile:(NSURL *)ipaFileURL;
+- (void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL;
 
--(void)deleteBuildFromDropbox;
+- (void)deleteBuildFromDropbox;
 
 @end

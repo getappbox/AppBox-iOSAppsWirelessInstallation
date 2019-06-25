@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionOffsetError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESUploadSessionOffsetError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESUploadSessionOffsetError *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionOffsetError` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESUploadSessionOffsetError` object.
 ///
-+ (DBFILESUploadSessionOffsetError *)deserialize:(NSDictionary *)dict;
++ (DBFILESUploadSessionOffsetError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

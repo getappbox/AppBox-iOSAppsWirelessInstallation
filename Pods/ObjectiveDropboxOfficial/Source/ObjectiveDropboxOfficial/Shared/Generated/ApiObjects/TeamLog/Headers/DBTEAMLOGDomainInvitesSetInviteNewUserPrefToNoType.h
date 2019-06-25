@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType` object.
 ///
-+ (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

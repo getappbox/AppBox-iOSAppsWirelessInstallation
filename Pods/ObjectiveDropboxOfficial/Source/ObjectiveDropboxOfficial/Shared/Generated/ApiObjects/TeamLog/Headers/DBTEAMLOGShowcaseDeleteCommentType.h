@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseDeleteCommentType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseDeleteCommentType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseDeleteCommentType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseDeleteCommentType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGShowcaseDeleteCommentType` object.
 ///
-+ (DBTEAMLOGShowcaseDeleteCommentType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseDeleteCommentType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

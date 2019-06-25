@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfFbInviteChangeRoleType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfFbInviteChangeRoleType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfFbInviteChangeRoleType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfFbInviteChangeRoleType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfFbInviteChangeRoleType` object.
 ///
-+ (DBTEAMLOGSfFbInviteChangeRoleType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfFbInviteChangeRoleType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

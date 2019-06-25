@@ -152,7 +152,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFileMembershipErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGRelinquishFileMembershipError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGRelinquishFileMembershipError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGRelinquishFileMembershipError *)instance;
 
 ///
 /// Deserializes `DBSHARINGRelinquishFileMembershipError` instances.
@@ -163,7 +163,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFileMembershipErrorTag) {
 /// @return An instantiation of the `DBSHARINGRelinquishFileMembershipError`
 /// object.
 ///
-+ (DBSHARINGRelinquishFileMembershipError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGRelinquishFileMembershipError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

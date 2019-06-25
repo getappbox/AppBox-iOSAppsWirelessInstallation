@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperEnabledUsersGroupAdditionDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperEnabledUsersGroupAdditionDetails` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGPaperEnabledUsersGroupAdditionDetails` object.
 ///
-+ (DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperEnabledUsersGroupAdditionDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

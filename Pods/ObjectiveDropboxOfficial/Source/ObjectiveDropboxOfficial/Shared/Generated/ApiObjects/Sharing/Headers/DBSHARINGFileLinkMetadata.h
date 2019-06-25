@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileLinkMetadata` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGFileLinkMetadata *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGFileLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileLinkMetadata` instances.
@@ -150,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGFileLinkMetadata` object.
 ///
-+ (DBSHARINGFileLinkMetadata *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGFileLinkMetadata *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

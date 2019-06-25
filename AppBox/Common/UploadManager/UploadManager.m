@@ -17,6 +17,9 @@
     NSUInteger offset;
     NSFileHandle *fileHandle;
     DBFILESCommitInfo *fileCommitInfo;
+    
+    //For retry
+    NSInteger retryCount;
 }
 
 +(void)setupDBClientsManager{
@@ -28,6 +31,15 @@
         //Default Session (Background)
         //[DBClientsManager setupWithAppKeyDesktop:[DBManager dbKey]];
     }
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        retryCount = 0;
+    }
+    return self;
 }
 
 #pragma mark - UnZip IPA File
@@ -154,7 +166,6 @@
         NSString *appboxServerBuildsPath = [NSString stringWithFormat:@"%@/%@-%@/", abAppBoxLocalServerBuildsDirectory, ipaName, [Common generateUUID]];
         NSURL *toURL = [[UserData buildLocation] URLByAppendingPathComponent:appboxServerBuildsPath];
         NSError *error;
-        NSString *ipaPath = [ipaURL.resourceSpecifier stringByRemovingPercentEncoding];
         //Create AppBox Server Directory
         if ([fileManager createDirectoryAtPath:toURL.resourceSpecifier withIntermediateDirectories:YES attributes:nil error:&error]){
             //Copy  IPA file to Server Directory
@@ -386,106 +397,6 @@
 }
 
 #pragma mark - Upload Files
--(void)dbUploadLargeFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
-    offset = 0;
-    chunkSize = [UserData uploadChunkSize] * abBytesToMB;
-    ipaFileData = [NSData dataWithContentsOfFile:file];
-    fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
-    nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
-    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil];
-    
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
-        if (result) {
-            sessionId = result.sessionId;
-            offset += nextChunkToUpload.length;
-            [self uploadNextChunk];
-        } else {
-            if (networkError.nsError.code == -1009) {
-                self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                    [self dbUploadLargeFile:file to:path mode:mode];
-                }];
-            } else if (networkError) {
-                if (self.ciRepoProject) {
-                    exit(abExitCodeForUploadFailed);
-                }
-                self.errorBlock(nil, YES);
-                [DBErrorHandler handleNetworkErrorWith:networkError];
-            }
-        }
-    }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-        [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
-    }];
-}
-
--(void)uploadNextChunk{
-    nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
-    DBFILESUploadSessionCursor *cursor = [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:[NSNumber numberWithUnsignedInteger:offset]];
-    if (nextChunkToUpload.length < chunkSize) {
-        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
-            if (result) {
-                if (self.dbFileType == DBFileTypeIPA){
-                    NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
-                    [self showStatus:status andShowProgressBar:YES withProgress:-1];
-                    
-                    //create shared url for ipa
-                    [self dbCreateSharedURLForFile:result.pathDisplay];
-                }
-            } else {
-                if (networkError.nsError.code == -1009) {
-                    self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                        [self uploadNextChunk];
-                    }];
-                } else {
-                    if (self.ciRepoProject) {
-                        exit(abExitCodeForUploadFailed);
-                    }
-                    self.errorBlock(nil, YES);
-                    if (routeError) {
-                        [DBErrorHandler handleUploadSessionFinishError:routeError];
-                    } else {
-                        [DBErrorHandler handleNetworkErrorWith:networkError];
-                    }
-                }
-            }
-        }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-            [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
-        }];
-    } else {
-        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionLookupError * _Nullable routeError, DBRequestError * _Nullable networkError) {
-            if (result) {
-                offset += nextChunkToUpload.length;
-                [self uploadNextChunk];
-            } else {
-                if (networkError.nsError.code == -1009) {
-                    self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                        [self uploadNextChunk];
-                    }];
-                }else{
-                    if (self.ciRepoProject) {
-                        exit(abExitCodeForUploadFailed);
-                    }
-                    self.errorBlock(nil, YES);
-                    if (routeError) {
-                        [DBErrorHandler handleUploadSessionLookupError:routeError];
-                    } else {
-                        [DBErrorHandler handleNetworkErrorWith:networkError];
-                    }
-                }
-            }
-        }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-            [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
-        }];
-    }
-}
-
--(void)updateProgressBytesWritten:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
-    //CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
-    NSUInteger newBytesWritten = offset + totalBytesWritten;
-    CGFloat progress = (newBytesWritten * 100 / ipaFileData.length );
-    NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)", [NSNumber numberWithInt:progress]];
-    [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
-}
-
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
@@ -497,7 +408,7 @@
     }
     
     //uploadUrl:path inputUrl:file
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil inputUrl:file]
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO inputUrl:file]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {
@@ -537,23 +448,8 @@
           }
           //unable to upload file, show error
           else {
-              //The Internet connection appears to be offline
-              if (error.nsError.code == -1009) {
-                  self.lastfailedOperation = [NSBlockOperation blockOperationWithBlock:^{
-                      [self dbUploadFile:file to:path mode:mode];
-                  }];
-              } else {
-                  [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Upload DB Error - %@ \n Route Error - %@",error, routeError]];
-                  if (self.ciRepoProject) {
-                      exit(abExitCodeForUploadFailed);
-                  }
-                  self.errorBlock(nil, YES);
-                  if (error) {
-                      [DBErrorHandler handleNetworkErrorWith:error];
-                  } else if (routeError) {
-                      [DBErrorHandler handleUploadErrorWith:routeError];
-                  }
-              }
+              NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self dbUploadFile:file to:path mode:mode]; }];
+              [self handleChunkUploadWithLookupError:nil finishError:nil uploadError:nil networkError:error retryBlock:retryOperation];
           }
       }]
      
@@ -574,6 +470,115 @@
              }
          }
      }];
+}
+
+-(void)dbUploadLargeFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
+    offset = 0;
+    chunkSize = [UserData uploadChunkSize] * abBytesToMB;
+    ipaFileData = [NSData dataWithContentsOfFile:file];
+    fileHandle = [NSFileHandle fileHandleForReadingAtPath:file];
+    nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
+    fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO];
+    
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
+        if (result) {
+            sessionId = result.sessionId;
+            offset += nextChunkToUpload.length;
+            [self uploadNextChunk];
+        } else {
+            NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self dbUploadLargeFile:file to:path mode:mode]; }];
+            [self handleChunkUploadWithLookupError:nil finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
+        }
+    }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+        [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+    }];
+}
+
+-(void)uploadNextChunk{
+    nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
+    DBFILESUploadSessionCursor *cursor = [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:[NSNumber numberWithUnsignedInteger:offset]];
+    if (nextChunkToUpload.length < chunkSize) {
+        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            if (result) {
+                if (self.dbFileType == DBFileTypeIPA){
+                    NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
+                    [self showStatus:status andShowProgressBar:YES withProgress:-1];
+                    
+                    //create shared url for ipa
+                    [self dbCreateSharedURLForFile:result.pathDisplay];
+                }
+            } else {
+                NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self uploadNextChunk]; }];
+                [self handleChunkUploadWithLookupError:nil finishError:routeError uploadError:nil networkError:networkError retryBlock:retryOperation];
+            }
+        }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+            [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+        }];
+    } else {
+        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionLookupError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            if (result) {
+                offset += nextChunkToUpload.length;
+                [self uploadNextChunk];
+            } else {
+                NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self uploadNextChunk]; }];
+                [self handleChunkUploadWithLookupError:routeError finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
+            }
+        }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+            [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
+        }];
+    }
+}
+
+#pragma mark - Upload File Helper
+//Helper to Handle Chunk Upload Error
+-(void)handleChunkUploadWithLookupError:(DBFILESUploadSessionLookupError * _Nullable)lookupError
+                            finishError:(DBFILESUploadSessionFinishError * _Nullable)finishError
+                            uploadError:(DBFILESUploadError * _Nullable)uploadError
+                           networkError:(DBRequestError * _Nullable)networkError
+                             retryBlock:(NSBlockOperation *)operation{
+    //Handle Internet Connection Lost
+    if (networkError && networkError.nsError.code == -1009) {
+        self.lastfailedOperation = operation;
+    }
+    
+    //Handle DB Client and Server error by Retrying Upto 3 times
+    else if (networkError && retryCount < abOnErrorMaxRetryCount && [[AppDelegate appDelegate] isInternetConnected] &&
+             (networkError.tag == DBRequestErrorClient || networkError.tag == DBRequestErrorInternalServer)) {
+        retryCount++;
+        [[AppDelegate appDelegate] addSessionLog: [NSString stringWithFormat:@"Retrying (%ld) IPA Upload due to some error.", (long)retryCount]];
+        [operation start];
+    }
+    
+    //Handle other errors
+    else {
+        retryCount = 0;
+        
+        //Exit AppBox if CI Project
+        if (self.ciRepoProject) {
+            exit(abExitCodeForUploadFailed);
+        }
+        //Call Error Block
+        self.errorBlock(nil, YES);
+        
+        //Handle Route and Network Errors
+        if (lookupError) {
+            [DBErrorHandler handleUploadSessionLookupError:lookupError];
+        } else if (finishError) {
+            [DBErrorHandler handleUploadSessionFinishError:finishError];
+        } else if (uploadError) {
+            [DBErrorHandler handleUploadErrorWith:uploadError];
+        } else {
+            [DBErrorHandler handleNetworkErrorWith:networkError];
+        }
+    }
+}
+
+-(void)updateProgressBytesWritten:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
+    //CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
+    NSUInteger newBytesWritten = offset + totalBytesWritten;
+    CGFloat progress = (newBytesWritten * 100 / ipaFileData.length );
+    NSString *status = [NSString stringWithFormat:@"Uploading IPA (%@%%)", [NSNumber numberWithInt:progress]];
+    [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
 }
 
 #pragma mark - Dropbox Create/Get Shared Link
@@ -717,7 +722,7 @@
 }
 
 -(void)deleteBuildFolder{
-    [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+    [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
@@ -730,7 +735,7 @@
 }
 
 -(void)deleteBuildRootFolder{
-    [[[[DBClientsManager authorizedClient] filesRoutes] deleteV2:self.uploadRecord.dbFolderName] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+    [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.uploadRecord.dbFolderName] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();

@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderLongpollArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListFolderLongpollArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListFolderLongpollArg *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderLongpollArg` instances.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESListFolderLongpollArg` object.
 ///
-+ (DBFILESListFolderLongpollArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESListFolderLongpollArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceApprovalsChangeUnlinkActionType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceApprovalsChangeUnlinkActionType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDeviceApprovalsChangeUnlinkActionType` object.
 ///
-+ (DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceApprovalsChangeUnlinkActionType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

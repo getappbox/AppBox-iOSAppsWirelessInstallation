@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderBatchArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESCreateFolderBatchArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESCreateFolderBatchArg *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderBatchArg` instances.
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESCreateFolderBatchArg` object.
 ///
-+ (DBFILESCreateFolderBatchArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESCreateFolderBatchArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

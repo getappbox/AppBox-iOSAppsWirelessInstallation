@@ -217,7 +217,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESRemovePropertiesErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESRemovePropertiesError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESRemovePropertiesError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESRemovePropertiesError *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESRemovePropertiesError` instances.
@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESRemovePropertiesErrorTag) {
 /// @return An instantiation of the `DBFILEPROPERTIESRemovePropertiesError`
 /// object.
 ///
-+ (DBFILEPROPERTIESRemovePropertiesError *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESRemovePropertiesError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

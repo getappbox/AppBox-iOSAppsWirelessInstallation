@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceManagementEnabledType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceManagementEnabledType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceManagementEnabledType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceManagementEnabledType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGDeviceManagementEnabledType`
 /// object.
 ///
-+ (DBTEAMLOGDeviceManagementEnabledType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceManagementEnabledType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadWriteFailed` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESUploadWriteFailed *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESUploadWriteFailed *)instance;
 
 ///
 /// Deserializes `DBFILESUploadWriteFailed` instances.
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESUploadWriteFailed` object.
 ///
-+ (DBFILESUploadWriteFailed *)deserialize:(NSDictionary *)dict;
++ (DBFILESUploadWriteFailed *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

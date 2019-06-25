@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberSpaceLimitsChangeStatusType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberSpaceLimitsChangeStatusType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberSpaceLimitsChangeStatusType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberSpaceLimitsChangeStatusType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGMemberSpaceLimitsChangeStatusType`
 /// object.
 ///
-+ (DBTEAMLOGMemberSpaceLimitsChangeStatusType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberSpaceLimitsChangeStatusType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

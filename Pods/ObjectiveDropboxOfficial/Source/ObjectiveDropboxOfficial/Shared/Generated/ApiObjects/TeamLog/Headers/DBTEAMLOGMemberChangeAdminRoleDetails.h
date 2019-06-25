@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberChangeAdminRoleDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberChangeAdminRoleDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberChangeAdminRoleDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberChangeAdminRoleDetails` instances.
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGMemberChangeAdminRoleDetails`
 /// object.
 ///
-+ (DBTEAMLOGMemberChangeAdminRoleDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberChangeAdminRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

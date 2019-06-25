@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHRateLimitError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBAUTHRateLimitError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBAUTHRateLimitError *)instance;
 
 ///
 /// Deserializes `DBAUTHRateLimitError` instances.
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBAUTHRateLimitError` object.
 ///
-+ (DBAUTHRateLimitError *)deserialize:(NSDictionary *)dict;
++ (DBAUTHRateLimitError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

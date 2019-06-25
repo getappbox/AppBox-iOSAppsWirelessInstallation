@@ -326,7 +326,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMMembersSetProfileError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMMembersSetProfileError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMMembersSetProfileError *)instance;
 
 ///
 /// Deserializes `DBTEAMMembersSetProfileError` instances.
@@ -336,7 +336,7 @@ typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMMembersSetProfileError` object.
 ///
-+ (DBTEAMMembersSetProfileError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMMembersSetProfileError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

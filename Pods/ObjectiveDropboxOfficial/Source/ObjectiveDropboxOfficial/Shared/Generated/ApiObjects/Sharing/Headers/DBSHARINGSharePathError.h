@@ -366,7 +366,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharePathErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharePathError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGSharePathError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGSharePathError *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharePathError` instances.
@@ -376,7 +376,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharePathErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGSharePathError` object.
 ///
-+ (DBSHARINGSharePathError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGSharePathError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

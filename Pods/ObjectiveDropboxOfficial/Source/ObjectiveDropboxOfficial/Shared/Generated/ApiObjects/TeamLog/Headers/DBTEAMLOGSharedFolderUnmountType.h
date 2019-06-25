@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderUnmountType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderUnmountType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedFolderUnmountType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderUnmountType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSharedFolderUnmountType` object.
 ///
-+ (DBTEAMLOGSharedFolderUnmountType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedFolderUnmountType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

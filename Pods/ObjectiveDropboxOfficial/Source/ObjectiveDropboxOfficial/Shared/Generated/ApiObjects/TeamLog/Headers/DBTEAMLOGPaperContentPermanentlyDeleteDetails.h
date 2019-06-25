@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperContentPermanentlyDeleteDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperContentPermanentlyDeleteDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperContentPermanentlyDeleteDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperContentPermanentlyDeleteDetails` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGPaperContentPermanentlyDeleteDetails` object.
 ///
-+ (DBTEAMLOGPaperContentPermanentlyDeleteDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperContentPermanentlyDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

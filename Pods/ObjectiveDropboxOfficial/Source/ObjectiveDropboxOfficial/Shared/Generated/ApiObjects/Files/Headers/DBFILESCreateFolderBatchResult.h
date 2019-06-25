@@ -27,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// (no description).
+/// Each entry in `paths` in `DBFILESCreateFolderBatchArg` will appear at the
+/// same position inside `entries` in `DBFILESCreateFolderBatchResult`.
 @property (nonatomic, readonly) NSArray<DBFILESCreateFolderBatchResultEntry *> *entries;
 
 #pragma mark - Constructors
@@ -35,7 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param entries (no description).
+/// @param entries Each entry in `paths` in `DBFILESCreateFolderBatchArg` will
+/// appear at the same position inside `entries` in
+/// `DBFILESCreateFolderBatchResult`.
 ///
 /// @return An initialized instance.
 ///
@@ -59,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderBatchResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESCreateFolderBatchResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESCreateFolderBatchResult *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderBatchResult` instances.
@@ -69,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESCreateFolderBatchResult` object.
 ///
-+ (DBFILESCreateFolderBatchResult *)deserialize:(NSDictionary *)dict;
++ (DBFILESCreateFolderBatchResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

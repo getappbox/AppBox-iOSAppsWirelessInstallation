@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBASYNCPollErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBASYNCPollError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBASYNCPollError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBASYNCPollError *)instance;
 
 ///
 /// Deserializes `DBASYNCPollError` instances.
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, DBASYNCPollErrorTag) {
 ///
 /// @return An instantiation of the `DBASYNCPollError` object.
 ///
-+ (DBASYNCPollError *)deserialize:(NSDictionary *)dict;
++ (DBASYNCPollError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

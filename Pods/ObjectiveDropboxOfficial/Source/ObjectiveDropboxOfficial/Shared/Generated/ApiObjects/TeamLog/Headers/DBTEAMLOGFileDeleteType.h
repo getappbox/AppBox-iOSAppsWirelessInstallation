@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileDeleteType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileDeleteType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileDeleteType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileDeleteType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileDeleteType` object.
 ///
-+ (DBTEAMLOGFileDeleteType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileDeleteType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

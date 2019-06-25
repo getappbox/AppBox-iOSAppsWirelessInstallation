@@ -58,10 +58,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param accountId A user's account identifier.
 /// @param joinedOn The date and time the user joined as a member of a specific
 /// team.
+/// @param suspendedOn The date and time the user was suspended from the team
+/// (contains value only when the member's status matches `suspended` in
+/// `DBTEAMTeamMemberStatus`.
 /// @param persistentId Persistent ID that a team can attach to the user. The
 /// persistent ID is unique ID to be used for SAML authentication.
 /// @param isDirectoryRestricted Whether the user is a directory restricted
 /// user.
+/// @param profilePhotoUrl URL for the photo representing the user, if one is
+/// set.
 ///
 /// @return An initialized instance.
 ///
@@ -76,8 +81,10 @@ NS_ASSUME_NONNULL_BEGIN
                           externalId:(nullable NSString *)externalId
                            accountId:(nullable NSString *)accountId
                             joinedOn:(nullable NSDate *)joinedOn
+                         suspendedOn:(nullable NSDate *)suspendedOn
                         persistentId:(nullable NSString *)persistentId
-               isDirectoryRestricted:(nullable NSNumber *)isDirectoryRestricted;
+               isDirectoryRestricted:(nullable NSNumber *)isDirectoryRestricted
+                     profilePhotoUrl:(nullable NSString *)profilePhotoUrl;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -122,7 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamMemberProfile` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamMemberProfile *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamMemberProfile *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamMemberProfile` instances.
@@ -132,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMTeamMemberProfile` object.
 ///
-+ (DBTEAMTeamMemberProfile *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamMemberProfile *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

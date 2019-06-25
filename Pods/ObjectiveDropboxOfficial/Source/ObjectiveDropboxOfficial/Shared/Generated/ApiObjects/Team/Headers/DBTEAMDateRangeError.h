@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDateRangeErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDateRangeError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMDateRangeError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMDateRangeError *)instance;
 
 ///
 /// Deserializes `DBTEAMDateRangeError` instances.
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, DBTEAMDateRangeErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMDateRangeError` object.
 ///
-+ (DBTEAMDateRangeError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMDateRangeError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

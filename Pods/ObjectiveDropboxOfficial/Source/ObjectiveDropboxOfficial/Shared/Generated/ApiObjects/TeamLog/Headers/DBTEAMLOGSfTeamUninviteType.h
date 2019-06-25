@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfTeamUninviteType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfTeamUninviteType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfTeamUninviteType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfTeamUninviteType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfTeamUninviteType` object.
 ///
-+ (DBTEAMLOGSfTeamUninviteType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfTeamUninviteType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

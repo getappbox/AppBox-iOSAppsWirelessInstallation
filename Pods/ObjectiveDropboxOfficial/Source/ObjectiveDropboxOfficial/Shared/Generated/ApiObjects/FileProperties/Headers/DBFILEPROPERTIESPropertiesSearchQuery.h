@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESPropertiesSearchQuery` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESPropertiesSearchQuery *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESPropertiesSearchQuery *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESPropertiesSearchQuery` instances.
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBFILEPROPERTIESPropertiesSearchQuery`
 /// object.
 ///
-+ (DBFILEPROPERTIESPropertiesSearchQuery *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESPropertiesSearchQuery *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

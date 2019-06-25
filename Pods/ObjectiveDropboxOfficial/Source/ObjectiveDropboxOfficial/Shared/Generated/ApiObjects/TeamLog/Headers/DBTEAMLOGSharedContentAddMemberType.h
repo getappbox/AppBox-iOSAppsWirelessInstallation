@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentAddMemberType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentAddMemberType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentAddMemberType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentAddMemberType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentAddMemberType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentAddMemberType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentAddMemberType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

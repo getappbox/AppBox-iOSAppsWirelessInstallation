@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGShowcaseEnabledPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseEnabledPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseEnabledPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseEnabledPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseEnabledPolicy` instances.
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGShowcaseEnabledPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGShowcaseEnabledPolicy` object.
 ///
-+ (DBTEAMLOGShowcaseEnabledPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseEnabledPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

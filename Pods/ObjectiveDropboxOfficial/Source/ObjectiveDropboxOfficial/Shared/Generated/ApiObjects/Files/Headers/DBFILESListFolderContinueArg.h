@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderContinueArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListFolderContinueArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListFolderContinueArg *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderContinueArg` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESListFolderContinueArg` object.
 ///
-+ (DBFILESListFolderContinueArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESListFolderContinueArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

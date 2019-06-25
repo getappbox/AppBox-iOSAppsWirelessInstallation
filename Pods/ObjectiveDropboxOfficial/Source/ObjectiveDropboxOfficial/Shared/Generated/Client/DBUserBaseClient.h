@@ -5,6 +5,7 @@
 ///
 
 #import "DBAUTHUserAuthRoutes.h"
+#import "DBCONTACTSUserAuthRoutes.h"
 #import "DBFILEPROPERTIESUserAuthRoutes.h"
 #import "DBFILEREQUESTSUserAuthRoutes.h"
 #import "DBFILESUserAuthRoutes.h"
@@ -32,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Routes within the `auth` namespace.
 @property (nonatomic, readonly) DBAUTHUserAuthRoutes *authRoutes;
+
+/// Routes within the `contacts` namespace.
+@property (nonatomic, readonly) DBCONTACTSUserAuthRoutes *contactsRoutes;
 
 /// Routes within the `fileProperties` namespace.
 @property (nonatomic, readonly) DBFILEPROPERTIESUserAuthRoutes *filePropertiesRoutes;

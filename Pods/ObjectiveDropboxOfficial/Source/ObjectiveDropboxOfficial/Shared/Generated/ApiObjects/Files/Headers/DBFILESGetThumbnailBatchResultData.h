@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// (no description).
 @property (nonatomic, readonly) DBFILESFileMetadata *metadata;
 
-/// (no description).
+/// A string containing the base64-encoded thumbnail data for this file.
 @property (nonatomic, readonly, copy) NSString *thumbnail;
 
 #pragma mark - Constructors
@@ -38,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param metadata (no description).
-/// @param thumbnail (no description).
+/// @param thumbnail A string containing the base64-encoded thumbnail data for
+/// this file.
 ///
 /// @return An initialized instance.
 ///
@@ -64,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetThumbnailBatchResultData` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESGetThumbnailBatchResultData *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESGetThumbnailBatchResultData *)instance;
 
 ///
 /// Deserializes `DBFILESGetThumbnailBatchResultData` instances.
@@ -74,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESGetThumbnailBatchResultData` object.
 ///
-+ (DBFILESGetThumbnailBatchResultData *)deserialize:(NSDictionary *)dict;
++ (DBFILESGetThumbnailBatchResultData *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

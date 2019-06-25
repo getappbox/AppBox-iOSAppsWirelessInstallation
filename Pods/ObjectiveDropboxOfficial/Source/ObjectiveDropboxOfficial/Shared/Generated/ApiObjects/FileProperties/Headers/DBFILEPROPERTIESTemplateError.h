@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESTemplateError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESTemplateError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESTemplateError *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESTemplateError` instances.
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateErrorTag) {
 ///
 /// @return An instantiation of the `DBFILEPROPERTIESTemplateError` object.
 ///
-+ (DBFILEPROPERTIESTemplateError *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESTemplateError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

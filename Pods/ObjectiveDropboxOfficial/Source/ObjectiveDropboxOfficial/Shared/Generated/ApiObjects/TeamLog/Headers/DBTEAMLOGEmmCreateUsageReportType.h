@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEmmCreateUsageReportType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGEmmCreateUsageReportType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEmmCreateUsageReportType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEmmCreateUsageReportType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGEmmCreateUsageReportType` object.
 ///
-+ (DBTEAMLOGEmmCreateUsageReportType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGEmmCreateUsageReportType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

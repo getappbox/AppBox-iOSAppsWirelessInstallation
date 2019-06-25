@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMExcludedUsersUpdateResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMExcludedUsersUpdateResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMExcludedUsersUpdateResult *)instance;
 
 ///
 /// Deserializes `DBTEAMExcludedUsersUpdateResult` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMExcludedUsersUpdateResult` object.
 ///
-+ (DBTEAMExcludedUsersUpdateResult *)deserialize:(NSDictionary *)dict;
++ (DBTEAMExcludedUsersUpdateResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

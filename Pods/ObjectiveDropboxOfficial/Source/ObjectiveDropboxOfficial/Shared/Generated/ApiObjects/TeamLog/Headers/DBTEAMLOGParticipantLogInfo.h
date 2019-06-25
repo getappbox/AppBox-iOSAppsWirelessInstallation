@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGParticipantLogInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGParticipantLogInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGParticipantLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGParticipantLogInfo` instances.
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGParticipantLogInfo` object.
 ///
-+ (DBTEAMLOGParticipantLogInfo *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGParticipantLogInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

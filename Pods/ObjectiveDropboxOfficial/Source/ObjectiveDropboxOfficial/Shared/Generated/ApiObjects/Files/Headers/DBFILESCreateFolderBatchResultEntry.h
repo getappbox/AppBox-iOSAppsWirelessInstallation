@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchResultEntryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESCreateFolderBatchResultEntry` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESCreateFolderBatchResultEntry *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESCreateFolderBatchResultEntry *)instance;
 
 ///
 /// Deserializes `DBFILESCreateFolderBatchResultEntry` instances.
@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchResultEntryTag) {
 /// @return An instantiation of the `DBFILESCreateFolderBatchResultEntry`
 /// object.
 ///
-+ (DBFILESCreateFolderBatchResultEntry *)deserialize:(NSDictionary *)dict;
++ (DBFILESCreateFolderBatchResultEntry *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -9,6 +9,7 @@
 #import "DBSHARINGShareFolderArgBase.h"
 #import "DBSerializableProtocol.h"
 
+@class DBSHARINGAccessInheritance;
 @class DBSHARINGAclUpdatePolicy;
 @class DBSHARINGFolderAction;
 @class DBSHARINGLinkSettings;
@@ -57,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// set this policy to `members` in `DBSHARINGSharedLinkPolicy`.
 /// @param viewerInfoPolicy Who can enable/disable viewer info for this shared
 /// folder.
+/// @param accessInheritance The access inheritance settings for the folder.
 /// @param actions A list of `FolderAction`s corresponding to
 /// `FolderPermission`s that should appear in the  response's `permissions` in
 /// `DBSHARINGSharedFolderMetadata` field describing the actions the
@@ -71,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
                 memberPolicy:(nullable DBSHARINGMemberPolicy *)memberPolicy
             sharedLinkPolicy:(nullable DBSHARINGSharedLinkPolicy *)sharedLinkPolicy
             viewerInfoPolicy:(nullable DBSHARINGViewerInfoPolicy *)viewerInfoPolicy
+           accessInheritance:(nullable DBSHARINGAccessInheritance *)accessInheritance
                      actions:(nullable NSArray<DBSHARINGFolderAction *> *)actions
                 linkSettings:(nullable DBSHARINGLinkSettings *)linkSettings;
 
@@ -102,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGShareFolderArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGShareFolderArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGShareFolderArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGShareFolderArg` instances.
@@ -112,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGShareFolderArg` object.
 ///
-+ (DBSHARINGShareFolderArg *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGShareFolderArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

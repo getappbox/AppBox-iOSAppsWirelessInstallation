@@ -8,13 +8,21 @@
 
 #import "DBTasks.h"
 
+@class DBFILEREQUESTSCountFileRequestsError;
+@class DBFILEREQUESTSCountFileRequestsResult;
 @class DBFILEREQUESTSCreateFileRequestError;
+@class DBFILEREQUESTSDeleteAllClosedFileRequestsError;
+@class DBFILEREQUESTSDeleteAllClosedFileRequestsResult;
+@class DBFILEREQUESTSDeleteFileRequestError;
+@class DBFILEREQUESTSDeleteFileRequestsResult;
 @class DBFILEREQUESTSFileRequest;
 @class DBFILEREQUESTSFileRequestDeadline;
 @class DBFILEREQUESTSGetFileRequestError;
 @class DBFILEREQUESTSGracePeriod;
+@class DBFILEREQUESTSListFileRequestsContinueError;
 @class DBFILEREQUESTSListFileRequestsError;
 @class DBFILEREQUESTSListFileRequestsResult;
+@class DBFILEREQUESTSListFileRequestsV2Result;
 @class DBFILEREQUESTSUpdateFileRequestDeadline;
 @class DBFILEREQUESTSUpdateFileRequestError;
 @class DBNilObject;
@@ -38,6 +46,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
+/// Returns the total number of file requests owned by this user. Includes both open and closed file requests.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBFILEREQUESTSCountFileRequestsResult` object on
+/// success or a `DBFILEREQUESTSCountFileRequestsError` object on failure.
+///
+- (DBRpcTask<DBFILEREQUESTSCountFileRequestsResult *, DBFILEREQUESTSCountFileRequestsError *> *)count;
+
+///
 /// Creates a file request for this user.
 ///
 /// @param title The title of the file request. Must not be empty.
@@ -56,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param title The title of the file request. Must not be empty.
 /// @param destination The path of the folder in the Dropbox where uploaded files will be sent. For apps with the app
 /// folder permission, this will be relative to the app folder.
-/// @param deadline The deadline for the file request. Deadlines can only be set by Pro and Business accounts.
+/// @param deadline The deadline for the file request. Deadlines can only be set by Professional and Business accounts.
 /// @param open Whether or not the file request should be open. If the file request is closed, it will not accept any
 /// file submissions, but it can be opened later.
 ///
@@ -68,6 +85,27 @@ NS_ASSUME_NONNULL_BEGIN
 destination:(NSString *)destination
    deadline:(nullable DBFILEREQUESTSFileRequestDeadline *)deadline
        open:(nullable NSNumber *)open;
+
+///
+/// Delete a batch of closed file requests.
+///
+/// @param ids List IDs of the file requests to delete.
+///
+/// @return Through the response callback, the caller will receive a `DBFILEREQUESTSDeleteFileRequestsResult` object on
+/// success or a `DBFILEREQUESTSDeleteFileRequestError` object on failure.
+///
+- (DBRpcTask<DBFILEREQUESTSDeleteFileRequestsResult *, DBFILEREQUESTSDeleteFileRequestError *> *)delete_:
+    (NSArray<NSString *> *)ids;
+
+///
+/// Delete all closed file requests owned by this user.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBFILEREQUESTSDeleteAllClosedFileRequestsResult`
+/// object on success or a `DBFILEREQUESTSDeleteAllClosedFileRequestsError` object on failure.
+///
+- (DBRpcTask<DBFILEREQUESTSDeleteAllClosedFileRequestsResult *, DBFILEREQUESTSDeleteAllClosedFileRequestsError *> *)
+    deleteAllClosed;
 
 ///
 /// Returns the specified file request.
@@ -84,10 +122,44 @@ destination:(NSString *)destination
 /// file requests with destinations in the app folder.
 ///
 ///
+/// @return Through the response callback, the caller will receive a `DBFILEREQUESTSListFileRequestsV2Result` object on
+/// success or a `DBFILEREQUESTSListFileRequestsError` object on failure.
+///
+- (DBRpcTask<DBFILEREQUESTSListFileRequestsV2Result *, DBFILEREQUESTSListFileRequestsError *> *)listV2;
+
+///
+/// Returns a list of file requests owned by this user. For apps with the app folder permission, this will only return
+/// file requests with destinations in the app folder.
+///
+/// @param limit The maximum number of file requests that should be returned per request.
+///
+/// @return Through the response callback, the caller will receive a `DBFILEREQUESTSListFileRequestsV2Result` object on
+/// success or a `DBFILEREQUESTSListFileRequestsError` object on failure.
+///
+- (DBRpcTask<DBFILEREQUESTSListFileRequestsV2Result *, DBFILEREQUESTSListFileRequestsError *> *)listV2:
+    (nullable NSNumber *)limit;
+
+///
+/// Returns a list of file requests owned by this user. For apps with the app folder permission, this will only return
+/// file requests with destinations in the app folder.
+///
+///
 /// @return Through the response callback, the caller will receive a `DBFILEREQUESTSListFileRequestsResult` object on
 /// success or a `DBFILEREQUESTSListFileRequestsError` object on failure.
 ///
 - (DBRpcTask<DBFILEREQUESTSListFileRequestsResult *, DBFILEREQUESTSListFileRequestsError *> *)list;
+
+///
+/// Once a cursor has been retrieved from `list`, use this to paginate through all file requests. The cursor must come
+/// from a previous call to `list` or `listContinue`.
+///
+/// @param cursor The cursor returned by the previous API call specified in the endpoint description.
+///
+/// @return Through the response callback, the caller will receive a `DBFILEREQUESTSListFileRequestsV2Result` object on
+/// success or a `DBFILEREQUESTSListFileRequestsContinueError` object on failure.
+///
+- (DBRpcTask<DBFILEREQUESTSListFileRequestsV2Result *, DBFILEREQUESTSListFileRequestsContinueError *> *)listContinue:
+    (NSString *)cursor;
 
 ///
 /// Update a file request.
@@ -106,7 +178,8 @@ destination:(NSString *)destination
 /// @param title The new title of the file request. Must not be empty.
 /// @param destination The new path of the folder in the Dropbox where uploaded files will be sent. For apps with the
 /// app folder permission, this will be relative to the app folder.
-/// @param deadline The new deadline for the file request.
+/// @param deadline The new deadline for the file request. Deadlines can only be set by Professional and Business
+/// accounts.
 /// @param open Whether to set this file request as open or closed.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEREQUESTSFileRequest` object on success or a

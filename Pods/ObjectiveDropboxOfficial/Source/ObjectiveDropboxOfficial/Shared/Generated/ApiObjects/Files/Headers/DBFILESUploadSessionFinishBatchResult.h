@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Commit result for each file in the batch.
+/// Each entry in `entries` in `DBFILESUploadSessionFinishBatchArg` will appear
+/// at the same position inside `entries` in
+/// `DBFILESUploadSessionFinishBatchResult`.
 @property (nonatomic, readonly) NSArray<DBFILESUploadSessionFinishBatchResultEntry *> *entries;
 
 #pragma mark - Constructors
@@ -34,7 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param entries Commit result for each file in the batch.
+/// @param entries Each entry in `entries` in
+/// `DBFILESUploadSessionFinishBatchArg` will appear at the same position inside
+/// `entries` in `DBFILESUploadSessionFinishBatchResult`.
 ///
 /// @return An initialized instance.
 ///
@@ -60,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadSessionFinishBatchResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESUploadSessionFinishBatchResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESUploadSessionFinishBatchResult *)instance;
 
 ///
 /// Deserializes `DBFILESUploadSessionFinishBatchResult` instances.
@@ -71,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBFILESUploadSessionFinishBatchResult`
 /// object.
 ///
-+ (DBFILESUploadSessionFinishBatchResult *)deserialize:(NSDictionary *)dict;
++ (DBFILESUploadSessionFinishBatchResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

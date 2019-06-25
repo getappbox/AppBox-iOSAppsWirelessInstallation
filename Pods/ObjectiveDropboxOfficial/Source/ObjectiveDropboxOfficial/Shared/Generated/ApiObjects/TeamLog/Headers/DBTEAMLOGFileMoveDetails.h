@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileMoveDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileMoveDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileMoveDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileMoveDetails` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileMoveDetails` object.
 ///
-+ (DBTEAMLOGFileMoveDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileMoveDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

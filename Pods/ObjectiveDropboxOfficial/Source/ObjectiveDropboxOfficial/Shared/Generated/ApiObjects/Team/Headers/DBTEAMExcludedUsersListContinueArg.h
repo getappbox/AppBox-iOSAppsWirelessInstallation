@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMExcludedUsersListContinueArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMExcludedUsersListContinueArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMExcludedUsersListContinueArg *)instance;
 
 ///
 /// Deserializes `DBTEAMExcludedUsersListContinueArg` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMExcludedUsersListContinueArg` object.
 ///
-+ (DBTEAMExcludedUsersListContinueArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMExcludedUsersListContinueArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

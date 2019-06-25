@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGCollectionShareDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGCollectionShareDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGCollectionShareDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGCollectionShareDetails` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGCollectionShareDetails` object.
 ///
-+ (DBTEAMLOGCollectionShareDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGCollectionShareDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDisabledDomainInvitesType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDisabledDomainInvitesType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDisabledDomainInvitesType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDisabledDomainInvitesType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGDisabledDomainInvitesType` object.
 ///
-+ (DBTEAMLOGDisabledDomainInvitesType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDisabledDomainInvitesType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

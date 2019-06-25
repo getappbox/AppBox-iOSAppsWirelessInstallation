@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMCOMMONGroupType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMCOMMONGroupType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMCOMMONGroupType *)instance;
 
 ///
 /// Deserializes `DBTEAMCOMMONGroupType` instances.
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMCOMMONGroupType` object.
 ///
-+ (DBTEAMCOMMONGroupType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMCOMMONGroupType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

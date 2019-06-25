@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupsSelector` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMGroupsSelector *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMGroupsSelector *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupsSelector` instances.
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupsSelectorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupsSelector` object.
 ///
-+ (DBTEAMGroupsSelector *)deserialize:(NSDictionary *)dict;
++ (DBTEAMGroupsSelector *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

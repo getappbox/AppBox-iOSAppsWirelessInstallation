@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfTeamGrantAccessType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfTeamGrantAccessType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfTeamGrantAccessType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfTeamGrantAccessType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfTeamGrantAccessType` object.
 ///
-+ (DBTEAMLOGSfTeamGrantAccessType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfTeamGrantAccessType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -100,6 +100,8 @@
 #import "DBTEAMMembersSetPermissionsResult.h"
 #import "DBTEAMMembersSetProfileError.h"
 #import "DBTEAMMembersSuspendError.h"
+#import "DBTEAMMembersTransferFilesError.h"
+#import "DBTEAMMembersTransferFormerMembersFilesError.h"
 #import "DBTEAMMembersUnsuspendError.h"
 #import "DBTEAMMobileClientSession.h"
 #import "DBTEAMNamespaceMetadata.h"
@@ -137,6 +139,7 @@
 #import "DBTEAMTeamMemberInfo.h"
 #import "DBTEAMTeamMemberProfile.h"
 #import "DBTEAMTeamNamespacesListContinueError.h"
+#import "DBTEAMTeamNamespacesListError.h"
 #import "DBTEAMTeamNamespacesListResult.h"
 #import "DBTEAMTokenGetAuthenticatedAdminError.h"
 #import "DBTEAMTokenGetAuthenticatedAdminResult.h"
@@ -182,6 +185,8 @@ static DBRoute *DBTEAMMembersAddJobStatusGet;
 static DBRoute *DBTEAMMembersGetInfo;
 static DBRoute *DBTEAMMembersList;
 static DBRoute *DBTEAMMembersListContinue;
+static DBRoute *DBTEAMMembersMoveFormerMemberFiles;
+static DBRoute *DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
 static DBRoute *DBTEAMMembersRecover;
 static DBRoute *DBTEAMMembersRemove;
 static DBRoute *DBTEAMMembersRemoveJobStatusGet;
@@ -891,6 +896,43 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   return DBTEAMMembersListContinue;
 }
 
++ (DBRoute *)DBTEAMMembersMoveFormerMemberFiles {
+  if (!DBTEAMMembersMoveFormerMemberFiles) {
+    DBTEAMMembersMoveFormerMemberFiles = [[DBRoute alloc] init:@"members/move_former_member_files"
+                                                    namespace_:@"team"
+                                                    deprecated:@NO
+                                                    resultType:[DBASYNCLaunchEmptyResult class]
+                                                     errorType:[DBTEAMMembersTransferFormerMembersFilesError class]
+                                                         attrs:@{
+                                                           @"auth" : @"team",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersMoveFormerMemberFiles;
+}
+
++ (DBRoute *)DBTEAMMembersMoveFormerMemberFilesJobStatusCheck {
+  if (!DBTEAMMembersMoveFormerMemberFilesJobStatusCheck) {
+    DBTEAMMembersMoveFormerMemberFilesJobStatusCheck =
+        [[DBRoute alloc] init:@"members/move_former_member_files/job_status/check"
+                         namespace_:@"team"
+                         deprecated:@NO
+                         resultType:[DBASYNCPollEmptyResult class]
+                          errorType:[DBASYNCPollError class]
+                              attrs:@{
+                                @"auth" : @"team",
+                                @"host" : @"api",
+                                @"style" : @"rpc"
+                              }
+              dataStructSerialBlock:nil
+            dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
+}
+
 + (DBRoute *)DBTEAMMembersRecover {
   if (!DBTEAMMembersRecover) {
     DBTEAMMembersRecover = [[DBRoute alloc] init:@"members/recover"
@@ -1041,7 +1083,7 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                       namespace_:@"team"
                                       deprecated:@NO
                                       resultType:[DBTEAMTeamNamespacesListResult class]
-                                       errorType:nil
+                                       errorType:[DBTEAMTeamNamespacesListError class]
                                            attrs:@{
                                              @"auth" : @"team",
                                              @"host" : @"api",

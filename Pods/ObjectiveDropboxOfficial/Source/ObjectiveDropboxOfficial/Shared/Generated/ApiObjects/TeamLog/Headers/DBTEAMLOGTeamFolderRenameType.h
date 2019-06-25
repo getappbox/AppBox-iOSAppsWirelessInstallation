@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamFolderRenameType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamFolderRenameType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamFolderRenameType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamFolderRenameType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTeamFolderRenameType` object.
 ///
-+ (DBTEAMLOGTeamFolderRenameType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTeamFolderRenameType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

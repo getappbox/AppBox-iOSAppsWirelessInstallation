@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEmmRemoveExceptionType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGEmmRemoveExceptionType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEmmRemoveExceptionType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEmmRemoveExceptionType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGEmmRemoveExceptionType` object.
 ///
-+ (DBTEAMLOGEmmRemoveExceptionType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGEmmRemoveExceptionType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderMountType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderMountType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedFolderMountType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderMountType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSharedFolderMountType` object.
 ///
-+ (DBTEAMLOGSharedFolderMountType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedFolderMountType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 
