@@ -20,7 +20,6 @@ PODS:
   - FirebaseCore (5.4.1):
     - GoogleUtilities/Environment (~> 5.2)
     - GoogleUtilities/Logger (~> 5.2)
-  - Google-Analytics-for-OS-X (1.1)
   - GoogleUtilities/Environment (5.7.0)
   - GoogleUtilities/Logger (5.7.0):
     - GoogleUtilities/Environment
@@ -39,7 +38,6 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - FirebaseCore
-  - Google-Analytics-for-OS-X
   - ISO8601
   - ObjectiveDropboxOfficial
   - SAMKeychain
@@ -54,7 +52,6 @@ SPEC REPOS:
     - Crashlytics
     - Fabric
     - FirebaseCore
-    - Google-Analytics-for-OS-X
     - GoogleUtilities
     - ISO8601
     - ObjectiveDropboxOfficial
@@ -69,7 +66,6 @@ SPEC CHECKSUMS:
   Crashlytics: 611738c7847f8291a1a51084e35987b86ba6b3ee
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
-  Google-Analytics-for-OS-X: 66376760d74d980fd81ad48b125c5496d3d4402a
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
   ObjectiveDropboxOfficial: 19a4913d4d52fba035d41f40da71df0d6b303327
@@ -78,6 +74,6 @@ SPEC CHECKSUMS:
   STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: d784443d94cfcb244f2ddbaa1764a332a8d57017
+PODFILE CHECKSUM: 5d9f2a03566f7702bb6c2b137998b475915e0a5e
 
 COCOAPODS: 1.7.2
