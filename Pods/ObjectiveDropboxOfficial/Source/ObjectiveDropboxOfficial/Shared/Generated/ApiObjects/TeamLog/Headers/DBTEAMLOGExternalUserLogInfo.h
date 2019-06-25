@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGExternalUserLogInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGExternalUserLogInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalUserLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGExternalUserLogInfo` instances.
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGExternalUserLogInfo` object.
 ///
-+ (DBTEAMLOGExternalUserLogInfo *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGExternalUserLogInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

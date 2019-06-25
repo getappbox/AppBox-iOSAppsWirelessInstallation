@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddMember` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGAddMember *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGAddMember *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddMember` instances.
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGAddMember` object.
 ///
-+ (DBSHARINGAddMember *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGAddMember *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

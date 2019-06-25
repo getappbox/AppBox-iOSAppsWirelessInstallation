@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseChangeDownloadPolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseChangeDownloadPolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseChangeDownloadPolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseChangeDownloadPolicyType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGShowcaseChangeDownloadPolicyType`
 /// object.
 ///
-+ (DBTEAMLOGShowcaseChangeDownloadPolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseChangeDownloadPolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

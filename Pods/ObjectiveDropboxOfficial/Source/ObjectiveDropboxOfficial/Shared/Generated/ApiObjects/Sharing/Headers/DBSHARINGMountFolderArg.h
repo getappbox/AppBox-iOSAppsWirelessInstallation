@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMountFolderArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGMountFolderArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGMountFolderArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGMountFolderArg` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGMountFolderArg` object.
 ///
-+ (DBSHARINGMountFolderArg *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGMountFolderArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

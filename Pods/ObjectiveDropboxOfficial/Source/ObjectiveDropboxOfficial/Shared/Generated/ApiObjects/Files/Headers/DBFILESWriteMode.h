@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESWriteMode` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESWriteMode *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESWriteMode *)instance;
 
 ///
 /// Deserializes `DBFILESWriteMode` instances.
@@ -169,7 +169,7 @@ typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
 ///
 /// @return An instantiation of the `DBFILESWriteMode` object.
 ///
-+ (DBFILESWriteMode *)deserialize:(NSDictionary *)dict;
++ (DBFILESWriteMode *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

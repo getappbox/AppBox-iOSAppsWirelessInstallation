@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBPAPERImportFormatTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERImportFormat` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERImportFormat *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERImportFormat *)instance;
 
 ///
 /// Deserializes `DBPAPERImportFormat` instances.
@@ -156,7 +156,7 @@ typedef NS_ENUM(NSInteger, DBPAPERImportFormatTag) {
 ///
 /// @return An instantiation of the `DBPAPERImportFormat` object.
 ///
-+ (DBPAPERImportFormat *)deserialize:(NSDictionary *)dict;
++ (DBPAPERImportFormat *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

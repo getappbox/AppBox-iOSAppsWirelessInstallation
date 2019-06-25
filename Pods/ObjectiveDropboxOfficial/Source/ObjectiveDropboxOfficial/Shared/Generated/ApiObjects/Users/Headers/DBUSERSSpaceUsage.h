@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSSpaceUsage` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSSpaceUsage *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSSpaceUsage *)instance;
 
 ///
 /// Deserializes `DBUSERSSpaceUsage` instances.
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBUSERSSpaceUsage` object.
 ///
-+ (DBUSERSSpaceUsage *)deserialize:(NSDictionary *)dict;
++ (DBUSERSSpaceUsage *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

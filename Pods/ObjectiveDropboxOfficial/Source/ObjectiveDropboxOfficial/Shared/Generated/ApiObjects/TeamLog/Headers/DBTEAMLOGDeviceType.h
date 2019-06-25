@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceType` instances.
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGDeviceType` object.
 ///
-+ (DBTEAMLOGDeviceType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

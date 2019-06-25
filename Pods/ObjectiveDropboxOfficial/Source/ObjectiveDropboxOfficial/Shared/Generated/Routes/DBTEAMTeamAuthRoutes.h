@@ -102,6 +102,7 @@
 @class DBTEAMMembersSetPermissionsResult;
 @class DBTEAMMembersSetProfileError;
 @class DBTEAMMembersSuspendError;
+@class DBTEAMMembersTransferFormerMembersFilesError;
 @class DBTEAMMembersUnsuspendError;
 @class DBTEAMMobileClientSession;
 @class DBTEAMNamespaceMetadata;
@@ -141,6 +142,7 @@
 @class DBTEAMTeamMemberInfo;
 @class DBTEAMTeamMemberProfile;
 @class DBTEAMTeamNamespacesListContinueError;
+@class DBTEAMTeamNamespacesListError;
 @class DBTEAMTeamNamespacesListResult;
 @class DBTEAMTokenGetAuthenticatedAdminError;
 @class DBTEAMTokenGetAuthenticatedAdminResult;
@@ -195,7 +197,7 @@ devicesListMemberDevices:(NSString *)teamMemberId
     includeMobileClients:(nullable NSNumber *)includeMobileClients;
 
 ///
-/// List all device sessions of a team.
+/// List all device sessions of a team. Permission : Team member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMListMembersDevicesResult` object on success
@@ -204,7 +206,7 @@ devicesListMemberDevices:(NSString *)teamMemberId
 - (DBRpcTask<DBTEAMListMembersDevicesResult *, DBTEAMListMembersDevicesError *> *)devicesListMembersDevices;
 
 ///
-/// List all device sessions of a team.
+/// List all device sessions of a team. Permission : Team member file access.
 ///
 /// @param cursor At the first call to the `devicesListMembersDevices` the cursor shouldn't be passed. Then, if the
 /// result of the call includes a cursor, the following requests should include the received cursors in order to receive
@@ -223,7 +225,7 @@ devicesListMembersDevices:(nullable NSString *)cursor
      includeMobileClients:(nullable NSNumber *)includeMobileClients;
 
 ///
-/// DEPRECATED: List all device sessions of a team.
+/// DEPRECATED: List all device sessions of a team. Permission : Team member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMListTeamDevicesResult` object on success or
@@ -233,7 +235,7 @@ devicesListMembersDevices:(nullable NSString *)cursor
     __deprecated_msg("devicesListTeamDevices is deprecated. Use devicesListMembersDevices.");
 
 ///
-/// DEPRECATED: List all device sessions of a team.
+/// DEPRECATED: List all device sessions of a team. Permission : Team member file access.
 ///
 /// @param cursor At the first call to the `devicesListTeamDevices` the cursor shouldn't be passed. Then, if the result
 /// of the call includes a cursor, the following requests should include the received cursors in order to receive the
@@ -841,6 +843,35 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 - (DBRpcTask<DBTEAMMembersListResult *, DBTEAMMembersListContinueError *> *)membersListContinue:(NSString *)cursor;
 
 ///
+/// Moves removed member's files to a different member. This endpoint initiates an asynchronous job. To obtain the final
+/// result of the job, the client should periodically poll `membersMoveFormerMemberFilesJobStatusCheck`. Permission :
+/// Team member management.
+///
+/// @param transferDestId Files from the deleted member account will be transferred to this user.
+/// @param transferAdminId Errors during the transfer process will be sent via email to this user.
+///
+/// @return Through the response callback, the caller will receive a `DBASYNCLaunchEmptyResult` object on success or a
+/// `DBTEAMMembersTransferFormerMembersFilesError` object on failure.
+///
+- (DBRpcTask<DBASYNCLaunchEmptyResult *, DBTEAMMembersTransferFormerMembersFilesError *> *)
+membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
+              transferDestId:(DBTEAMUserSelectorArg *)transferDestId
+             transferAdminId:(DBTEAMUserSelectorArg *)transferAdminId;
+
+///
+/// Once an async_job_id is returned from `membersMoveFormerMemberFiles` , use this to poll the status of the
+/// asynchronous request. Permission : Team member management.
+///
+/// @param asyncJobId Id of the asynchronous job. This is the value of a response returned from the method that launched
+/// the job.
+///
+/// @return Through the response callback, the caller will receive a `DBASYNCPollEmptyResult` object on success or a
+/// `DBASYNCPollError` object on failure.
+///
+- (DBRpcTask<DBASYNCPollEmptyResult *, DBASYNCPollError *> *)membersMoveFormerMemberFilesJobStatusCheck:
+    (NSString *)asyncJobId;
+
+///
 /// Recover a deleted member. Permission : Team member management Exactly one of team_member_id, email, or external_id
 /// must be provided to identify the user account.
 ///
@@ -969,7 +1000,6 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 /// Suspend a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
 /// external_id must be provided to identify the user account.
 ///
-/// @param user Identity of user to remove/suspend.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBTEAMMembersSuspendError` object on failure.
@@ -980,7 +1010,6 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 /// Suspend a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
 /// external_id must be provided to identify the user account.
 ///
-/// @param user Identity of user to remove/suspend.
 /// @param wipeData If provided, controls if the user's data will be deleted on their linked devices.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
@@ -1008,9 +1037,9 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamNamespacesListResult` object on success
-/// or a `void` object on failure.
+/// or a `DBTEAMTeamNamespacesListError` object on failure.
 ///
-- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBNilObject *> *)namespacesList;
+- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBTEAMTeamNamespacesListError *> *)namespacesList;
 
 ///
 /// Returns a list of all team-accessible namespaces. This list includes team folders, shared folders containing team
@@ -1021,9 +1050,10 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 /// @param limit Specifying a value here has no effect.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamNamespacesListResult` object on success
-/// or a `void` object on failure.
+/// or a `DBTEAMTeamNamespacesListError` object on failure.
 ///
-- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBNilObject *> *)namespacesList:(nullable NSNumber *)limit;
+- (DBRpcTask<DBTEAMTeamNamespacesListResult *, DBTEAMTeamNamespacesListError *> *)namespacesList:
+    (nullable NSNumber *)limit;
 
 ///
 /// Once a cursor has been retrieved from `namespacesList`, use this to paginate through all team-accessible namespaces.
@@ -1038,7 +1068,7 @@ dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
     (NSString *)cursor;
 
 ///
-/// DEPRECATED: The propertiesTemplateAdd route
+/// DEPRECATED: Permission : Team member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESAddTemplateResult` object on
@@ -1051,7 +1081,7 @@ propertiesTemplateAdd:(NSString *)name
     __deprecated_msg("propertiesTemplateAdd is deprecated.");
 
 ///
-/// DEPRECATED: The propertiesTemplateGet route
+/// DEPRECATED: Permission : Team member file access.
 ///
 /// @param templateId An identifier for template added by route  See `templatesAddForUser` or `templatesAddForTeam`.
 ///
@@ -1062,7 +1092,7 @@ propertiesTemplateAdd:(NSString *)name
     (NSString *)templateId __deprecated_msg("propertiesTemplateGet is deprecated.");
 
 ///
-/// DEPRECATED: The propertiesTemplateList route
+/// DEPRECATED: Permission : Team member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESListTemplateResult` object on
@@ -1072,7 +1102,7 @@ propertiesTemplateAdd:(NSString *)name
     __deprecated_msg("propertiesTemplateList is deprecated.");
 
 ///
-/// DEPRECATED: The propertiesTemplateUpdate route
+/// DEPRECATED: Permission : Team member file access.
 ///
 /// @param templateId An identifier for template added by  See `templatesAddForUser` or `templatesAddForTeam`.
 ///
@@ -1083,7 +1113,7 @@ propertiesTemplateAdd:(NSString *)name
     (NSString *)templateId __deprecated_msg("propertiesTemplateUpdate is deprecated.");
 
 ///
-/// DEPRECATED: The propertiesTemplateUpdate route
+/// DEPRECATED: Permission : Team member file access.
 ///
 /// @param templateId An identifier for template added by  See `templatesAddForUser` or `templatesAddForTeam`.
 /// @param name A display name for the template. template names can be up to 256 bytes.

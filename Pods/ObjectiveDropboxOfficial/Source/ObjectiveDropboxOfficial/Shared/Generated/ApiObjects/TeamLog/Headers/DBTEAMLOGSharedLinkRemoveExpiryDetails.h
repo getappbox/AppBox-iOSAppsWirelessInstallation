@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedLinkRemoveExpiryDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedLinkRemoveExpiryDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedLinkRemoveExpiryDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedLinkRemoveExpiryDetails` instances.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedLinkRemoveExpiryDetails`
 /// object.
 ///
-+ (DBTEAMLOGSharedLinkRemoveExpiryDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedLinkRemoveExpiryDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRemoveCustomQuotaResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRemoveCustomQuotaResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRemoveCustomQuotaResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRemoveCustomQuotaResult *)instance;
 
 ///
 /// Deserializes `DBTEAMRemoveCustomQuotaResult` instances.
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRemoveCustomQuotaResultTag) {
 ///
 /// @return An instantiation of the `DBTEAMRemoveCustomQuotaResult` object.
 ///
-+ (DBTEAMRemoveCustomQuotaResult *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRemoveCustomQuotaResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

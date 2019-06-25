@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBTEAMSetCustomQuotaErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMSetCustomQuotaError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMSetCustomQuotaError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMSetCustomQuotaError *)instance;
 
 ///
 /// Deserializes `DBTEAMSetCustomQuotaError` instances.
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, DBTEAMSetCustomQuotaErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMSetCustomQuotaError` object.
 ///
-+ (DBTEAMSetCustomQuotaError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMSetCustomQuotaError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

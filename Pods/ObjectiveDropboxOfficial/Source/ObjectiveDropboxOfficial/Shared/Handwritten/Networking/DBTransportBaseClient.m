@@ -227,7 +227,15 @@
   } else {
     errorContent = errorData ? [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding] : nil;
   }
-  NSString *userMessage = deserializedData[@"user_message"];
+  DBLocalizedUserMessage *userMessage = nil;
+  NSDictionary *userMessageDict = deserializedData[@"user_message"];
+  if ([userMessageDict isKindOfClass:[NSDictionary class]]) {
+    NSString *text = userMessageDict[@"text"];
+    NSString *locale = userMessageDict[@"locale"];
+    if ([text isKindOfClass:[NSString class]] && [locale isKindOfClass:[NSString class]]) {
+      userMessage = [[DBLocalizedUserMessage alloc] initWithText:text locale:locale];
+    }
+  }
 
   if (statusCode >= 500 && statusCode < 600) {
     dbxError = [[DBRequestError alloc] initAsInternalServerError:requestId

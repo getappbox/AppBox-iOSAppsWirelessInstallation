@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMicrosoftOfficeAddinPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMicrosoftOfficeAddinPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMicrosoftOfficeAddinPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMicrosoftOfficeAddinPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMicrosoftOfficeAddinPolicy` instances.
@@ -129,7 +129,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMicrosoftOfficeAddinPolicyTag) {
 /// @return An instantiation of the `DBTEAMLOGMicrosoftOfficeAddinPolicy`
 /// object.
 ///
-+ (DBTEAMLOGMicrosoftOfficeAddinPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMicrosoftOfficeAddinPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

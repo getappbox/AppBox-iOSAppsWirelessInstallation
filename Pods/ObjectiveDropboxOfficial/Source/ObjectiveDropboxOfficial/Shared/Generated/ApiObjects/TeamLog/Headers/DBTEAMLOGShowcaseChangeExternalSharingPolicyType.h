@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseChangeExternalSharingPolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseChangeExternalSharingPolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseChangeExternalSharingPolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseChangeExternalSharingPolicyType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGShowcaseChangeExternalSharingPolicyType` object.
 ///
-+ (DBTEAMLOGShowcaseChangeExternalSharingPolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseChangeExternalSharingPolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

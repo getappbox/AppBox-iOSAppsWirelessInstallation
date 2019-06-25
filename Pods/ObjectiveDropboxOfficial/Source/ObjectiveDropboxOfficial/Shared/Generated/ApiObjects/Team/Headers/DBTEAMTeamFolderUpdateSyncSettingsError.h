@@ -200,7 +200,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderUpdateSyncSettingsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderUpdateSyncSettingsError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderUpdateSyncSettingsError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderUpdateSyncSettingsError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderUpdateSyncSettingsError` instances.
@@ -211,7 +211,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderUpdateSyncSettingsErrorTag) {
 /// @return An instantiation of the `DBTEAMTeamFolderUpdateSyncSettingsError`
 /// object.
 ///
-+ (DBTEAMTeamFolderUpdateSyncSettingsError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderUpdateSyncSettingsError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

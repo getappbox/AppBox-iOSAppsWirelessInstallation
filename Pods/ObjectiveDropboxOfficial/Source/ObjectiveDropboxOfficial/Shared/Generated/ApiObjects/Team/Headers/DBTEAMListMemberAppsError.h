@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, DBTEAMListMemberAppsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMListMemberAppsError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMListMemberAppsError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMListMemberAppsError *)instance;
 
 ///
 /// Deserializes `DBTEAMListMemberAppsError` instances.
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, DBTEAMListMemberAppsErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMListMemberAppsError` object.
 ///
-+ (DBTEAMListMemberAppsError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMListMemberAppsError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

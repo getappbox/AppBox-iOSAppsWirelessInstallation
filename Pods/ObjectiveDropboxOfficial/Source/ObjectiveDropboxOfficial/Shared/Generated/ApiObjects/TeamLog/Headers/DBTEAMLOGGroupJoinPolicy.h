@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGGroupJoinPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupJoinPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupJoinPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGroupJoinPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupJoinPolicy` instances.
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGGroupJoinPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGGroupJoinPolicy` object.
 ///
-+ (DBTEAMLOGGroupJoinPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGGroupJoinPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

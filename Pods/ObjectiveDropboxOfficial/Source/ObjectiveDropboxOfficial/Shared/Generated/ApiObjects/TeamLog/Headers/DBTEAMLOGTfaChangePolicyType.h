@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaChangePolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaChangePolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaChangePolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaChangePolicyType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTfaChangePolicyType` object.
 ///
-+ (DBTEAMLOGTfaChangePolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTfaChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

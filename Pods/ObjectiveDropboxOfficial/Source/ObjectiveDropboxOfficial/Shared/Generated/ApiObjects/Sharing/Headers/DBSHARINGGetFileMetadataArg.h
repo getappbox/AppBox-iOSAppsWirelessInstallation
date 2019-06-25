@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetFileMetadataArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGGetFileMetadataArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGGetFileMetadataArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetFileMetadataArg` instances.
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGGetFileMetadataArg` object.
 ///
-+ (DBSHARINGGetFileMetadataArg *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGGetFileMetadataArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentChangeDownloadsPolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeDownloadsPolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentChangeDownloadsPolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentChangeDownloadsPolicyType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGSharedContentChangeDownloadsPolicyType` object.
 ///
-+ (DBTEAMLOGSharedContentChangeDownloadsPolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentChangeDownloadsPolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

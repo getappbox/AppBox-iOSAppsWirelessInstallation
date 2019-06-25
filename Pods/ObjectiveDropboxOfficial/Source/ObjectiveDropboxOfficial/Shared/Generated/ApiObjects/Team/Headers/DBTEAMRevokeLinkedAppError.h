@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeLinkedAppError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRevokeLinkedAppError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRevokeLinkedAppError *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeLinkedAppError` instances.
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMRevokeLinkedAppError` object.
 ///
-+ (DBTEAMRevokeLinkedAppError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRevokeLinkedAppError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccountCaptureRelinquishAccountDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGAccountCaptureRelinquishAccountDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCaptureRelinquishAccountDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccountCaptureRelinquishAccountDetails` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGAccountCaptureRelinquishAccountDetails` object.
 ///
-+ (DBTEAMLOGAccountCaptureRelinquishAccountDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGAccountCaptureRelinquishAccountDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

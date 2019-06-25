@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberChangeEmailType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberChangeEmailType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberChangeEmailType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberChangeEmailType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGMemberChangeEmailType` object.
 ///
-+ (DBTEAMLOGMemberChangeEmailType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberChangeEmailType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

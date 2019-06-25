@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESUploadError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESUploadError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESUploadError *)instance;
 
 ///
 /// Deserializes `DBFILESUploadError` instances.
@@ -155,7 +155,7 @@ typedef NS_ENUM(NSInteger, DBFILESUploadErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESUploadError` object.
 ///
-+ (DBFILESUploadError *)deserialize:(NSDictionary *)dict;
++ (DBFILESUploadError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

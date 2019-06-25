@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccountCaptureAvailability` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGAccountCaptureAvailability *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCaptureAvailability *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccountCaptureAvailability` instances.
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag) {
 /// @return An instantiation of the `DBTEAMLOGAccountCaptureAvailability`
 /// object.
 ///
-+ (DBTEAMLOGAccountCaptureAvailability *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGAccountCaptureAvailability *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

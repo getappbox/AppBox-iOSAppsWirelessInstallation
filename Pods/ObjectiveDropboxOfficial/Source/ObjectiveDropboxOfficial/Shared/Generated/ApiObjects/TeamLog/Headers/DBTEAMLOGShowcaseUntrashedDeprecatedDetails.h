@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseUntrashedDeprecatedDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseUntrashedDeprecatedDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseUntrashedDeprecatedDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseUntrashedDeprecatedDetails` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGShowcaseUntrashedDeprecatedDetails` object.
 ///
-+ (DBTEAMLOGShowcaseUntrashedDeprecatedDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseUntrashedDeprecatedDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

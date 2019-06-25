@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoRemoveCertType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoRemoveCertType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSsoRemoveCertType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoRemoveCertType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSsoRemoveCertType` object.
 ///
-+ (DBTEAMLOGSsoRemoveCertType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSsoRemoveCertType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

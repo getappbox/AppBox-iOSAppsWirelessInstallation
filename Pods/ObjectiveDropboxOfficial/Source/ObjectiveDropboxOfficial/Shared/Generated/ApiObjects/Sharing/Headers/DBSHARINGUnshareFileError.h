@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUnshareFileError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGUnshareFileError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGUnshareFileError *)instance;
 
 ///
 /// Deserializes `DBSHARINGUnshareFileError` instances.
@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGUnshareFileError` object.
 ///
-+ (DBSHARINGUnshareFileError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGUnshareFileError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

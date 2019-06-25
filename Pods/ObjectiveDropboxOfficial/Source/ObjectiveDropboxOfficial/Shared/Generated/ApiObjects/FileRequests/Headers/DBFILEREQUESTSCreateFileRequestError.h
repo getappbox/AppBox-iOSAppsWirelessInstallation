@@ -280,7 +280,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSCreateFileRequestErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEREQUESTSCreateFileRequestError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEREQUESTSCreateFileRequestError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEREQUESTSCreateFileRequestError *)instance;
 
 ///
 /// Deserializes `DBFILEREQUESTSCreateFileRequestError` instances.
@@ -291,7 +291,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSCreateFileRequestErrorTag) {
 /// @return An instantiation of the `DBFILEREQUESTSCreateFileRequestError`
 /// object.
 ///
-+ (DBFILEREQUESTSCreateFileRequestError *)deserialize:(NSDictionary *)dict;
++ (DBFILEREQUESTSCreateFileRequestError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

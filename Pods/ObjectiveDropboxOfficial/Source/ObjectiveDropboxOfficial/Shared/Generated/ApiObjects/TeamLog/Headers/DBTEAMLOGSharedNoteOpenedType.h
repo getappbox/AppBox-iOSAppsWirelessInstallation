@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedNoteOpenedType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedNoteOpenedType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedNoteOpenedType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedNoteOpenedType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSharedNoteOpenedType` object.
 ///
-+ (DBTEAMLOGSharedNoteOpenedType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedNoteOpenedType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

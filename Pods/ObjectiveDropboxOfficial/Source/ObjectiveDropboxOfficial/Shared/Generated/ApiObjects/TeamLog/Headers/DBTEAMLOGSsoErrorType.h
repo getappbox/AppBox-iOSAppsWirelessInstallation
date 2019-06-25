@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoErrorType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoErrorType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSsoErrorType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoErrorType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSsoErrorType` object.
 ///
-+ (DBTEAMLOGSsoErrorType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSsoErrorType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

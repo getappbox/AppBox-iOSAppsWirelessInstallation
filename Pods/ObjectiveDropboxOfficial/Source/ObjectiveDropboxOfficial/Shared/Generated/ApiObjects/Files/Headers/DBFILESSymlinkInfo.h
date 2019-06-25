@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSymlinkInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSymlinkInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSymlinkInfo *)instance;
 
 ///
 /// Deserializes `DBFILESSymlinkInfo` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESSymlinkInfo` object.
 ///
-+ (DBFILESSymlinkInfo *)deserialize:(NSDictionary *)dict;
++ (DBFILESSymlinkInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

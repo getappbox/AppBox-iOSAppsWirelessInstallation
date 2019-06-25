@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentRequestAccessType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentRequestAccessType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentRequestAccessType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentRequestAccessType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentRequestAccessType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentRequestAccessType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentRequestAccessType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

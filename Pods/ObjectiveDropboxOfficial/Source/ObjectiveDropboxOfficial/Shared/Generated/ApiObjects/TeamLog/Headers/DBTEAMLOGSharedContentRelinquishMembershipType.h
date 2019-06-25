@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentRelinquishMembershipType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentRelinquishMembershipType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentRelinquishMembershipType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentRelinquishMembershipType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGSharedContentRelinquishMembershipType` object.
 ///
-+ (DBTEAMLOGSharedContentRelinquishMembershipType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentRelinquishMembershipType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

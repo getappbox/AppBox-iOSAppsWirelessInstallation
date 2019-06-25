@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainVerificationRemoveDomainDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainVerificationRemoveDomainDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDomainVerificationRemoveDomainDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainVerificationRemoveDomainDetails` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDomainVerificationRemoveDomainDetails` object.
 ///
-+ (DBTEAMLOGDomainVerificationRemoveDomainDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDomainVerificationRemoveDomainDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType` object.
 ///
-+ (DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

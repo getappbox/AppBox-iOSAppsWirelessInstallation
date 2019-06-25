@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileGetCopyReferenceType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileGetCopyReferenceType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileGetCopyReferenceType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileGetCopyReferenceType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileGetCopyReferenceType` object.
 ///
-+ (DBTEAMLOGFileGetCopyReferenceType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileGetCopyReferenceType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

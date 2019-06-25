@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// folder.
 @property (nonatomic, readonly, copy) NSString *destination;
 
-/// The deadline for the file request. Deadlines can only be set by Pro and
-/// Business accounts.
+/// The deadline for the file request. Deadlines can only be set by Professional
+/// and Business accounts.
 @property (nonatomic, readonly, nullable) DBFILEREQUESTSFileRequestDeadline *deadline;
 
 /// Whether or not the file request should be open. If the file request is
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// files will be sent. For apps with the app folder permission, this will be
 /// relative to the app folder.
 /// @param deadline The deadline for the file request. Deadlines can only be set
-/// by Pro and Business accounts.
+/// by Professional and Business accounts.
 /// @param open Whether or not the file request should be open. If the file
 /// request is closed, it will not accept any file submissions, but it can be
 /// opened later.
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEREQUESTSCreateFileRequestArgs` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEREQUESTSCreateFileRequestArgs *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEREQUESTSCreateFileRequestArgs *)instance;
 
 ///
 /// Deserializes `DBFILEREQUESTSCreateFileRequestArgs` instances.
@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBFILEREQUESTSCreateFileRequestArgs`
 /// object.
 ///
-+ (DBFILEREQUESTSCreateFileRequestArgs *)deserialize:(NSDictionary *)dict;
++ (DBFILEREQUESTSCreateFileRequestArgs *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

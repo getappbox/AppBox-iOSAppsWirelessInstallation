@@ -153,7 +153,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESSharedLinkCreatePolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESSharedLinkCreatePolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESSharedLinkCreatePolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESSharedLinkCreatePolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESSharedLinkCreatePolicy` instances.
@@ -164,7 +164,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESSharedLinkCreatePolicyTag) {
 /// @return An instantiation of the `DBTEAMPOLICIESSharedLinkCreatePolicy`
 /// object.
 ///
-+ (DBTEAMPOLICIESSharedLinkCreatePolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESSharedLinkCreatePolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

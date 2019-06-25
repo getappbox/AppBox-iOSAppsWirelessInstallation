@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaAddSecurityKeyDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaAddSecurityKeyDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaAddSecurityKeyDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaAddSecurityKeyDetails` instances.
@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTfaAddSecurityKeyDetails` object.
 ///
-+ (DBTEAMLOGTfaAddSecurityKeyDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTfaAddSecurityKeyDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

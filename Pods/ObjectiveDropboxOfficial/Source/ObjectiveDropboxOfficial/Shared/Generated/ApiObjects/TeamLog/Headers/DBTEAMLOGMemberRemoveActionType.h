@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag) {
   DBTEAMLOGMemberRemoveActionTypeLeave,
 
   /// (no description).
+  DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders,
+
+  /// (no description).
   DBTEAMLOGMemberRemoveActionTypeOther,
 
 };
@@ -67,6 +70,14 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithLeave;
+
+///
+/// Initializes union class with tag state of
+/// "offboard_and_retain_team_folders".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOffboardAndRetainTeamFolders;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -101,6 +112,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag) {
 - (BOOL)isLeave;
 
 ///
+/// Retrieves whether the union's current tag state has value
+/// "offboard_and_retain_team_folders".
+///
+/// @return Whether the union's current tag state has value
+/// "offboard_and_retain_team_folders".
+///
+- (BOOL)isOffboardAndRetainTeamFolders;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -132,7 +152,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGMemberRemoveActionType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGMemberRemoveActionType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberRemoveActionType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGMemberRemoveActionType` instances.
@@ -142,7 +162,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGMemberRemoveActionType` object.
 ///
-+ (DBTEAMLOGMemberRemoveActionType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGMemberRemoveActionType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

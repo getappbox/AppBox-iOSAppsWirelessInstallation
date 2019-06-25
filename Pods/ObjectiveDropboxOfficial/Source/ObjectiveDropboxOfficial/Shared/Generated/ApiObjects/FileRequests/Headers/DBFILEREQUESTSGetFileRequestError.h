@@ -236,7 +236,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSGetFileRequestErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEREQUESTSGetFileRequestError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEREQUESTSGetFileRequestError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEREQUESTSGetFileRequestError *)instance;
 
 ///
 /// Deserializes `DBFILEREQUESTSGetFileRequestError` instances.
@@ -246,7 +246,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSGetFileRequestErrorTag) {
 ///
 /// @return An instantiation of the `DBFILEREQUESTSGetFileRequestError` object.
 ///
-+ (DBFILEREQUESTSGetFileRequestError *)deserialize:(NSDictionary *)dict;
++ (DBFILEREQUESTSGetFileRequestError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

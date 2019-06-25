@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERAddMember` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERAddMember *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERAddMember *)instance;
 
 ///
 /// Deserializes `DBPAPERAddMember` instances.
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBPAPERAddMember` object.
 ///
-+ (DBPAPERAddMember *)deserialize:(NSDictionary *)dict;
++ (DBPAPERAddMember *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkExpiry` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGLinkExpiry *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGLinkExpiry *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkExpiry` instances.
@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
 ///
 /// @return An instantiation of the `DBSHARINGLinkExpiry` object.
 ///
-+ (DBSHARINGLinkExpiry *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGLinkExpiry *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

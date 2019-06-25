@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupJoinPolicyUpdatedType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupJoinPolicyUpdatedType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGroupJoinPolicyUpdatedType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupJoinPolicyUpdatedType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGGroupJoinPolicyUpdatedType`
 /// object.
 ///
-+ (DBTEAMLOGGroupJoinPolicyUpdatedType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGGroupJoinPolicyUpdatedType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDataPlacementRestrictionChangePolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDataPlacementRestrictionChangePolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDataPlacementRestrictionChangePolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDataPlacementRestrictionChangePolicyType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDataPlacementRestrictionChangePolicyType` object.
 ///
-+ (DBTEAMLOGDataPlacementRestrictionChangePolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDataPlacementRestrictionChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

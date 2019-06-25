@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, DBASYNCPollResultBaseTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBASYNCPollResultBase` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBASYNCPollResultBase *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBASYNCPollResultBase *)instance;
 
 ///
 /// Deserializes `DBASYNCPollResultBase` instances.
@@ -98,7 +98,7 @@ typedef NS_ENUM(NSInteger, DBASYNCPollResultBaseTag) {
 ///
 /// @return An instantiation of the `DBASYNCPollResultBase` object.
 ///
-+ (DBASYNCPollResultBase *)deserialize:(NSDictionary *)dict;
++ (DBASYNCPollResultBase *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

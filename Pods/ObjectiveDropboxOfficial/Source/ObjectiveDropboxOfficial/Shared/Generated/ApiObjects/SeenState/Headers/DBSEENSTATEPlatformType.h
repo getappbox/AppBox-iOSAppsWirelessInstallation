@@ -33,14 +33,24 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
   /// The content was viewed on the web.
   DBSEENSTATEPlatformTypeWeb,
 
-  /// The content was viewed on a mobile client.
-  DBSEENSTATEPlatformTypeMobile,
-
   /// The content was viewed on a desktop client.
   DBSEENSTATEPlatformTypeDesktop,
 
+  /// The content was viewed on a mobile iOS client.
+  DBSEENSTATEPlatformTypeMobileIos,
+
+  /// The content was viewed on a mobile android client.
+  DBSEENSTATEPlatformTypeMobileAndroid,
+
+  /// The content was viewed from an API client.
+  DBSEENSTATEPlatformTypeApi,
+
   /// The content was viewed on an unknown platform.
   DBSEENSTATEPlatformTypeUnknown,
+
+  /// The content was viewed on a mobile client. DEPRECATED: Use mobile_ios or
+  /// mobile_android instead.
+  DBSEENSTATEPlatformTypeMobile,
 
   /// (no description).
   DBSEENSTATEPlatformTypeOther,
@@ -62,16 +72,6 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 - (instancetype)initWithWeb;
 
 ///
-/// Initializes union class with tag state of "mobile".
-///
-/// Description of the "mobile" tag state: The content was viewed on a mobile
-/// client.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMobile;
-
-///
 /// Initializes union class with tag state of "desktop".
 ///
 /// Description of the "desktop" tag state: The content was viewed on a desktop
@@ -82,6 +82,36 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 - (instancetype)initWithDesktop;
 
 ///
+/// Initializes union class with tag state of "mobile_ios".
+///
+/// Description of the "mobile_ios" tag state: The content was viewed on a
+/// mobile iOS client.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMobileIos;
+
+///
+/// Initializes union class with tag state of "mobile_android".
+///
+/// Description of the "mobile_android" tag state: The content was viewed on a
+/// mobile android client.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMobileAndroid;
+
+///
+/// Initializes union class with tag state of "api".
+///
+/// Description of the "api" tag state: The content was viewed from an API
+/// client.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithApi;
+
+///
 /// Initializes union class with tag state of "unknown".
 ///
 /// Description of the "unknown" tag state: The content was viewed on an unknown
@@ -90,6 +120,16 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithUnknown;
+
+///
+/// Initializes union class with tag state of "mobile".
+///
+/// Description of the "mobile" tag state: The content was viewed on a mobile
+/// client. DEPRECATED: Use mobile_ios or mobile_android instead.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMobile;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -110,13 +150,6 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 - (BOOL)isWeb;
 
 ///
-/// Retrieves whether the union's current tag state has value "mobile".
-///
-/// @return Whether the union's current tag state has value "mobile".
-///
-- (BOOL)isMobile;
-
-///
 /// Retrieves whether the union's current tag state has value "desktop".
 ///
 /// @return Whether the union's current tag state has value "desktop".
@@ -124,11 +157,39 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 - (BOOL)isDesktop;
 
 ///
+/// Retrieves whether the union's current tag state has value "mobile_ios".
+///
+/// @return Whether the union's current tag state has value "mobile_ios".
+///
+- (BOOL)isMobileIos;
+
+///
+/// Retrieves whether the union's current tag state has value "mobile_android".
+///
+/// @return Whether the union's current tag state has value "mobile_android".
+///
+- (BOOL)isMobileAndroid;
+
+///
+/// Retrieves whether the union's current tag state has value "api".
+///
+/// @return Whether the union's current tag state has value "api".
+///
+- (BOOL)isApi;
+
+///
 /// Retrieves whether the union's current tag state has value "unknown".
 ///
 /// @return Whether the union's current tag state has value "unknown".
 ///
 - (BOOL)isUnknown;
+
+///
+/// Retrieves whether the union's current tag state has value "mobile".
+///
+/// @return Whether the union's current tag state has value "mobile".
+///
+- (BOOL)isMobile;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -161,7 +222,7 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSEENSTATEPlatformType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSEENSTATEPlatformType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSEENSTATEPlatformType *)instance;
 
 ///
 /// Deserializes `DBSEENSTATEPlatformType` instances.
@@ -171,7 +232,7 @@ typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
 ///
 /// @return An instantiation of the `DBSEENSTATEPlatformType` object.
 ///
-+ (DBSEENSTATEPlatformType *)deserialize:(NSDictionary *)dict;
++ (DBSEENSTATEPlatformType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

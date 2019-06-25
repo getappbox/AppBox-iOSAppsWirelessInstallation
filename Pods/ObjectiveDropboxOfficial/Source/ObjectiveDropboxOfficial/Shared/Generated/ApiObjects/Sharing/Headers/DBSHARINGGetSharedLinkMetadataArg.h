@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGGetSharedLinkMetadataArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGGetSharedLinkMetadataArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGGetSharedLinkMetadataArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGGetSharedLinkMetadataArg` instances.
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGGetSharedLinkMetadataArg` object.
 ///
-+ (DBSHARINGGetSharedLinkMetadataArg *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGGetSharedLinkMetadataArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

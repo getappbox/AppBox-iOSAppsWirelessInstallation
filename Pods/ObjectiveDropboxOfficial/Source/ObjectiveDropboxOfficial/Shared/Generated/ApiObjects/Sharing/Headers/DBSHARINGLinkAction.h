@@ -204,7 +204,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGLinkAction` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGLinkAction *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGLinkAction *)instance;
 
 ///
 /// Deserializes `DBSHARINGLinkAction` instances.
@@ -214,7 +214,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
 ///
 /// @return An instantiation of the `DBSHARINGLinkAction` object.
 ///
-+ (DBSHARINGLinkAction *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGLinkAction *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

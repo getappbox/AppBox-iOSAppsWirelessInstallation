@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperContentAddToFolderDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperContentAddToFolderDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperContentAddToFolderDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperContentAddToFolderDetails` instances.
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGPaperContentAddToFolderDetails`
 /// object.
 ///
-+ (DBTEAMLOGPaperContentAddToFolderDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperContentAddToFolderDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

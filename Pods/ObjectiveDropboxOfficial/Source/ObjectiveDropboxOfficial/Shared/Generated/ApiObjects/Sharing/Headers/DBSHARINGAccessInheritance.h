@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAccessInheritanceTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAccessInheritance` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGAccessInheritance *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGAccessInheritance *)instance;
 
 ///
 /// Deserializes `DBSHARINGAccessInheritance` instances.
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAccessInheritanceTag) {
 ///
 /// @return An instantiation of the `DBSHARINGAccessInheritance` object.
 ///
-+ (DBSHARINGAccessInheritance *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGAccessInheritance *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

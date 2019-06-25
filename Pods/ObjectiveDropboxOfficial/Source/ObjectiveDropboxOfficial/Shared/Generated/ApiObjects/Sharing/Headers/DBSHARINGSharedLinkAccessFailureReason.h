@@ -185,7 +185,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkAccessFailureReasonTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSharedLinkAccessFailureReason` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGSharedLinkAccessFailureReason *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGSharedLinkAccessFailureReason *)instance;
 
 ///
 /// Deserializes `DBSHARINGSharedLinkAccessFailureReason` instances.
@@ -196,7 +196,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkAccessFailureReasonTag) {
 /// @return An instantiation of the `DBSHARINGSharedLinkAccessFailureReason`
 /// object.
 ///
-+ (DBSHARINGSharedLinkAccessFailureReason *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGSharedLinkAccessFailureReason *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

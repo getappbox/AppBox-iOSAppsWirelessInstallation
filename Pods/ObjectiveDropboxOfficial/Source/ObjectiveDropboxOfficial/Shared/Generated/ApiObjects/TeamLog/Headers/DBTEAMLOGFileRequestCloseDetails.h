@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestCloseDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestCloseDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileRequestCloseDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestCloseDetails` instances.
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileRequestCloseDetails` object.
 ///
-+ (DBTEAMLOGFileRequestCloseDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileRequestCloseDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

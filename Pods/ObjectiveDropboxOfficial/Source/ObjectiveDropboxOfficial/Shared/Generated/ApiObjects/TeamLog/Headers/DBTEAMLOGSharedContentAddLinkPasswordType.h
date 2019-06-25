@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentAddLinkPasswordType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentAddLinkPasswordType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentAddLinkPasswordType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentAddLinkPasswordType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentAddLinkPasswordType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentAddLinkPasswordType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentAddLinkPasswordType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

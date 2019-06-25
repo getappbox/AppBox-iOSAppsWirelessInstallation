@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDesktopClientArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRevokeDesktopClientArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRevokeDesktopClientArg *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDesktopClientArg` instances.
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMRevokeDesktopClientArg` object.
 ///
-+ (DBTEAMRevokeDesktopClientArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRevokeDesktopClientArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

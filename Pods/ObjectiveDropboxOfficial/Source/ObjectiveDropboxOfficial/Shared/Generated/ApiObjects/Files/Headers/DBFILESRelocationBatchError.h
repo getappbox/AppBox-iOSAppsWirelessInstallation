@@ -64,6 +64,14 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
   /// The current user does not have enough space to move or copy the files.
   DBFILESRelocationBatchErrorInsufficientQuota,
 
+  /// Something went wrong with the job on Dropbox's end. You'll need to
+  /// verify that the action you were taking succeeded, and if not, try again.
+  /// This should happen very rarely.
+  DBFILESRelocationBatchErrorInternalError,
+
+  /// Can't move the shared folder to the given destination.
+  DBFILESRelocationBatchErrorCantMoveSharedFolder,
+
   /// (no description).
   DBFILESRelocationBatchErrorOther,
 
@@ -190,6 +198,27 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 - (instancetype)initWithInsufficientQuota;
 
 ///
+/// Initializes union class with tag state of "internal_error".
+///
+/// Description of the "internal_error" tag state: Something went wrong with the
+/// job on Dropbox's end. You'll need to verify that the action you were taking
+/// succeeded, and if not, try again. This should happen very rarely.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInternalError;
+
+///
+/// Initializes union class with tag state of "cant_move_shared_folder".
+///
+/// Description of the "cant_move_shared_folder" tag state: Can't move the
+/// shared folder to the given destination.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithCantMoveSharedFolder;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -302,6 +331,22 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 - (BOOL)isInsufficientQuota;
 
 ///
+/// Retrieves whether the union's current tag state has value "internal_error".
+///
+/// @return Whether the union's current tag state has value "internal_error".
+///
+- (BOOL)isInternalError;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "cant_move_shared_folder".
+///
+/// @return Whether the union's current tag state has value
+/// "cant_move_shared_folder".
+///
+- (BOOL)isCantMoveSharedFolder;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -341,7 +386,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESRelocationBatchError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESRelocationBatchError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESRelocationBatchError *)instance;
 
 ///
 /// Deserializes `DBFILESRelocationBatchError` instances.
@@ -351,7 +396,7 @@ typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESRelocationBatchError` object.
 ///
-+ (DBFILESRelocationBatchError *)deserialize:(NSDictionary *)dict;
++ (DBFILESRelocationBatchError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

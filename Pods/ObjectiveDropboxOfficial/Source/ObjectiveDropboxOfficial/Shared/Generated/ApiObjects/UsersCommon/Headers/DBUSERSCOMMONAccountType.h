@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBUSERSCOMMONAccountTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBUSERSCOMMONAccountType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSCOMMONAccountType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSCOMMONAccountType *)instance;
 
 ///
 /// Deserializes `DBUSERSCOMMONAccountType` instances.
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBUSERSCOMMONAccountTypeTag) {
 ///
 /// @return An instantiation of the `DBUSERSCOMMONAccountType` object.
 ///
-+ (DBUSERSCOMMONAccountType *)deserialize:(NSDictionary *)dict;
++ (DBUSERSCOMMONAccountType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

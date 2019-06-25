@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGShowcaseFileViewType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGShowcaseFileViewType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShowcaseFileViewType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGShowcaseFileViewType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGShowcaseFileViewType` object.
 ///
-+ (DBTEAMLOGShowcaseFileViewType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGShowcaseFileViewType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

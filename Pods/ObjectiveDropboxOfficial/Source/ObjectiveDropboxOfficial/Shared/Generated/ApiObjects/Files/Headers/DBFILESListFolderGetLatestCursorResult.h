@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderGetLatestCursorResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListFolderGetLatestCursorResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListFolderGetLatestCursorResult *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderGetLatestCursorResult` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBFILESListFolderGetLatestCursorResult`
 /// object.
 ///
-+ (DBFILESListFolderGetLatestCursorResult *)deserialize:(NSDictionary *)dict;
++ (DBFILESListFolderGetLatestCursorResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

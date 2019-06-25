@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileRequestChangeType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileRequestChangeType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileRequestChangeType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileRequestChangeType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileRequestChangeType` object.
 ///
-+ (DBTEAMLOGFileRequestChangeType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileRequestChangeType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoChangeLogoutUrlType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoChangeLogoutUrlType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSsoChangeLogoutUrlType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoChangeLogoutUrlType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSsoChangeLogoutUrlType` object.
 ///
-+ (DBTEAMLOGSsoChangeLogoutUrlType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSsoChangeLogoutUrlType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentChangeViewerInfoPolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentChangeViewerInfoPolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentChangeViewerInfoPolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentChangeViewerInfoPolicyType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGSharedContentChangeViewerInfoPolicyType` object.
 ///
-+ (DBTEAMLOGSharedContentChangeViewerInfoPolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentChangeViewerInfoPolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

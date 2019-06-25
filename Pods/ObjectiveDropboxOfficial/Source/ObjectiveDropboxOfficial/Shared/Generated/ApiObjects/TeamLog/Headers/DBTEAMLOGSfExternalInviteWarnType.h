@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfExternalInviteWarnType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfExternalInviteWarnType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfExternalInviteWarnType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfExternalInviteWarnType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfExternalInviteWarnType` object.
 ///
-+ (DBTEAMLOGSfExternalInviteWarnType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfExternalInviteWarnType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

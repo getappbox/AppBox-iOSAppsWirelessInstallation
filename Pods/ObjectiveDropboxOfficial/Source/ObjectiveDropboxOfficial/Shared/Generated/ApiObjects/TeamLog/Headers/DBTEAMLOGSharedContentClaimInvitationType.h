@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentClaimInvitationType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentClaimInvitationType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentClaimInvitationType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentClaimInvitationType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentClaimInvitationType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentClaimInvitationType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentClaimInvitationType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocPermissionLevelTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperDocPermissionLevel` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERPaperDocPermissionLevel *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperDocPermissionLevel *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperDocPermissionLevel` instances.
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocPermissionLevelTag) {
 ///
 /// @return An instantiation of the `DBPAPERPaperDocPermissionLevel` object.
 ///
-+ (DBPAPERPaperDocPermissionLevel *)deserialize:(NSDictionary *)dict;
++ (DBPAPERPaperDocPermissionLevel *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -147,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBTEAMAdminTierTag) {
 /// @return A json-compatible dictionary representation of the `DBTEAMAdminTier`
 /// API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMAdminTier *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMAdminTier *)instance;
 
 ///
 /// Deserializes `DBTEAMAdminTier` instances.
@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, DBTEAMAdminTierTag) {
 ///
 /// @return An instantiation of the `DBTEAMAdminTier` object.
 ///
-+ (DBTEAMAdminTier *)deserialize:(NSDictionary *)dict;
++ (DBTEAMAdminTier *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

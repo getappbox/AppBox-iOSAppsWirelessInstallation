@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPasswordChangeDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPasswordChangeDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPasswordChangeDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPasswordChangeDetails` instances.
@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPasswordChangeDetails` object.
 ///
-+ (DBTEAMLOGPasswordChangeDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPasswordChangeDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperFolderDeletedType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperFolderDeletedType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperFolderDeletedType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperFolderDeletedType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperFolderDeletedType` object.
 ///
-+ (DBTEAMLOGPaperFolderDeletedType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperFolderDeletedType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

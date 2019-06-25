@@ -93,6 +93,9 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
   /// well as administrative policies concerning two factor authentication.
   DBTEAMLOGEventCategoryTfa,
 
+  /// Events that apply to cross-team trust establishment.
+  DBTEAMLOGEventCategoryTrustedTeams,
+
   /// (no description).
   DBTEAMLOGEventCategoryOther,
 
@@ -294,6 +297,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
 - (instancetype)initWithTfa;
 
 ///
+/// Initializes union class with tag state of "trusted_teams".
+///
+/// Description of the "trusted_teams" tag state: Events that apply to
+/// cross-team trust establishment.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTrustedTeams;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -438,6 +451,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
 - (BOOL)isTfa;
 
 ///
+/// Retrieves whether the union's current tag state has value "trusted_teams".
+///
+/// @return Whether the union's current tag state has value "trusted_teams".
+///
+- (BOOL)isTrustedTeams;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -468,7 +488,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEventCategory` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGEventCategory *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEventCategory *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEventCategory` instances.
@@ -478,7 +498,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGEventCategory` object.
 ///
-+ (DBTEAMLOGEventCategory *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGEventCategory *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

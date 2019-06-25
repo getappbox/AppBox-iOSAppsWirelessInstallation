@@ -56,11 +56,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSAccountSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSAccountSerializer deserialize:dict];
 }
 
@@ -141,7 +141,7 @@
 
 @implementation DBUSERSAccountSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSAccount *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSAccount *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"account_id"] = valueObj.accountId;
@@ -156,7 +156,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSAccount *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSAccount *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *accountId = valueDict[@"account_id"];
   DBUSERSName *name = [DBUSERSNameSerializer deserialize:valueDict[@"name"]];
   NSString *email = valueDict[@"email"];
@@ -232,11 +232,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSBasicAccountSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSBasicAccountSerializer deserialize:dict];
 }
 
@@ -329,7 +329,7 @@
 
 @implementation DBUSERSBasicAccountSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSBasicAccount *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSBasicAccount *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"account_id"] = valueObj.accountId;
@@ -348,7 +348,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSBasicAccount *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSBasicAccount *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *accountId = valueDict[@"account_id"];
   DBUSERSName *name = [DBUSERSNameSerializer deserialize:valueDict[@"name"]];
   NSString *email = valueDict[@"email"];
@@ -458,11 +458,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSFullAccountSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSFullAccountSerializer deserialize:dict];
 }
 
@@ -587,7 +587,7 @@
 
 @implementation DBUSERSFullAccountSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSFullAccount *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSFullAccount *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"account_id"] = valueObj.accountId;
@@ -616,7 +616,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSFullAccount *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSFullAccount *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *accountId = valueDict[@"account_id"];
   DBUSERSName *name = [DBUSERSNameSerializer deserialize:valueDict[@"name"]];
   NSString *email = valueDict[@"email"];
@@ -674,11 +674,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSTeamSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSTeamSerializer deserialize:dict];
 }
 
@@ -739,7 +739,7 @@
 
 @implementation DBUSERSTeamSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSTeam *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSTeam *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"id"] = valueObj.id_;
@@ -748,7 +748,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSTeam *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSTeam *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *id_ = valueDict[@"id"];
   NSString *name = valueDict[@"name"];
 
@@ -789,11 +789,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSFullTeamSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSFullTeamSerializer deserialize:dict];
 }
 
@@ -862,7 +862,7 @@
 
 @implementation DBUSERSFullTeamSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSFullTeam *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSFullTeam *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"id"] = valueObj.id_;
@@ -873,7 +873,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSFullTeam *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSFullTeam *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *id_ = valueDict[@"id"];
   NSString *name = valueDict[@"name"];
   DBTEAMPOLICIESTeamSharingPolicies *sharingPolicies =
@@ -911,11 +911,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSGetAccountArgSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSGetAccountArgSerializer deserialize:dict];
 }
 
@@ -972,7 +972,7 @@
 
 @implementation DBUSERSGetAccountArgSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSGetAccountArg *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSGetAccountArg *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"account_id"] = valueObj.accountId;
@@ -980,7 +980,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSGetAccountArg *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSGetAccountArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *accountId = valueDict[@"account_id"];
 
   return [[DBUSERSGetAccountArg alloc] initWithAccountId:accountId];
@@ -1017,11 +1017,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSGetAccountBatchArgSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSGetAccountBatchArgSerializer deserialize:dict];
 }
 
@@ -1078,7 +1078,7 @@
 
 @implementation DBUSERSGetAccountBatchArgSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSGetAccountBatchArg *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSGetAccountBatchArg *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"account_ids"] = [DBArraySerializer serialize:valueObj.accountIds
@@ -1089,7 +1089,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSGetAccountBatchArg *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSGetAccountBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSArray<NSString *> *accountIds = [DBArraySerializer deserialize:valueDict[@"account_ids"]
                                                          withBlock:^id(id elem0) {
                                                            return elem0;
@@ -1162,11 +1162,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSGetAccountBatchErrorSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSGetAccountBatchErrorSerializer deserialize:dict];
 }
 
@@ -1234,7 +1234,7 @@
 
 @implementation DBUSERSGetAccountBatchErrorSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSGetAccountBatchError *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSGetAccountBatchError *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isNoAccount]) {
@@ -1249,7 +1249,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSGetAccountBatchError *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSGetAccountBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"no_account"]) {
@@ -1315,11 +1315,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSGetAccountErrorSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSGetAccountErrorSerializer deserialize:dict];
 }
 
@@ -1387,7 +1387,7 @@
 
 @implementation DBUSERSGetAccountErrorSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSGetAccountError *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSGetAccountError *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isNoAccount]) {
@@ -1401,7 +1401,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSGetAccountError *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSGetAccountError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"no_account"]) {
@@ -1437,11 +1437,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSIndividualSpaceAllocationSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSIndividualSpaceAllocationSerializer deserialize:dict];
 }
 
@@ -1498,7 +1498,7 @@
 
 @implementation DBUSERSIndividualSpaceAllocationSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSIndividualSpaceAllocation *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSIndividualSpaceAllocation *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"allocated"] = valueObj.allocated;
@@ -1506,7 +1506,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSIndividualSpaceAllocation *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSIndividualSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSNumber *allocated = valueDict[@"allocated"];
 
   return [[DBUSERSIndividualSpaceAllocation alloc] initWithAllocated:allocated];
@@ -1548,11 +1548,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSNameSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSNameSerializer deserialize:dict];
 }
 
@@ -1625,7 +1625,7 @@
 
 @implementation DBUSERSNameSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSName *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSName *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"given_name"] = valueObj.givenName;
@@ -1637,7 +1637,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSName *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSName *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *givenName = valueDict[@"given_name"];
   NSString *surname = valueDict[@"surname"];
   NSString *familiarName = valueDict[@"familiar_name"];
@@ -1741,11 +1741,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSSpaceAllocationSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSSpaceAllocationSerializer deserialize:dict];
 }
 
@@ -1817,14 +1817,14 @@
 
 @implementation DBUSERSSpaceAllocationSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSSpaceAllocation *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSSpaceAllocation *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isIndividual]) {
-    jsonDict[@"individual"] = [[DBUSERSIndividualSpaceAllocationSerializer serialize:valueObj.individual] mutableCopy];
+    jsonDict = [[DBUSERSIndividualSpaceAllocationSerializer serialize:valueObj.individual] mutableCopy];
     jsonDict[@".tag"] = @"individual";
   } else if ([valueObj isTeam]) {
-    jsonDict[@"team"] = [[DBUSERSTeamSpaceAllocationSerializer serialize:valueObj.team] mutableCopy];
+    jsonDict = [[DBUSERSTeamSpaceAllocationSerializer serialize:valueObj.team] mutableCopy];
     jsonDict[@".tag"] = @"team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -1835,7 +1835,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSSpaceAllocation *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
   if ([tag isEqualToString:@"individual"]) {
@@ -1878,11 +1878,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSSpaceUsageSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSSpaceUsageSerializer deserialize:dict];
 }
 
@@ -1943,7 +1943,7 @@
 
 @implementation DBUSERSSpaceUsageSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSSpaceUsage *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSSpaceUsage *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"used"] = valueObj.used;
@@ -1952,7 +1952,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSSpaceUsage *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSSpaceUsage *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSNumber *used = valueDict[@"used"];
   DBUSERSSpaceAllocation *allocation = [DBUSERSSpaceAllocationSerializer deserialize:valueDict[@"allocation"]];
 
@@ -1993,11 +1993,11 @@
 
 #pragma mark - Serialization methods
 
-+ (nullable NSDictionary *)serialize:(id)instance {
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
   return [DBUSERSTeamSpaceAllocationSerializer serialize:instance];
 }
 
-+ (id)deserialize:(NSDictionary *)dict {
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
   return [DBUSERSTeamSpaceAllocationSerializer deserialize:dict];
 }
 
@@ -2066,7 +2066,7 @@
 
 @implementation DBUSERSTeamSpaceAllocationSerializer
 
-+ (NSDictionary *)serialize:(DBUSERSTeamSpaceAllocation *)valueObj {
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSTeamSpaceAllocation *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"used"] = valueObj.used;
@@ -2078,7 +2078,7 @@
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
-+ (DBUSERSTeamSpaceAllocation *)deserialize:(NSDictionary *)valueDict {
++ (DBUSERSTeamSpaceAllocation *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSNumber *used = valueDict[@"used"];
   NSNumber *allocated = valueDict[@"allocated"];
   NSNumber *userWithinTeamSpaceAllocated = valueDict[@"user_within_team_space_allocated"];

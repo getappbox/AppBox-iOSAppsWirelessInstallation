@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocUpdatePolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperDocUpdatePolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERPaperDocUpdatePolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperDocUpdatePolicy *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperDocUpdatePolicy` instances.
@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocUpdatePolicyTag) {
 ///
 /// @return An instantiation of the `DBPAPERPaperDocUpdatePolicy` object.
 ///
-+ (DBPAPERPaperDocUpdatePolicy *)deserialize:(NSDictionary *)dict;
++ (DBPAPERPaperDocUpdatePolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

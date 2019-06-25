@@ -32,6 +32,12 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
   /// (no description).
   DBFILESGetTemporaryLinkErrorPath,
 
+  /// The user's email address needs to be verified to use this functionality.
+  DBFILESGetTemporaryLinkErrorEmailNotVerified,
+
+  /// Cannot get temporary link to this file type; use `export` instead.
+  DBFILESGetTemporaryLinkErrorUnsupportedFile,
+
   /// (no description).
   DBFILESGetTemporaryLinkErrorOther,
 
@@ -56,6 +62,26 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 - (instancetype)initWithPath:(DBFILESLookupError *)path;
 
 ///
+/// Initializes union class with tag state of "email_not_verified".
+///
+/// Description of the "email_not_verified" tag state: The user's email address
+/// needs to be verified to use this functionality.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithEmailNotVerified;
+
+///
+/// Initializes union class with tag state of "unsupported_file".
+///
+/// Description of the "unsupported_file" tag state: Cannot get temporary link
+/// to this file type; use `export` instead.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUnsupportedFile;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -75,6 +101,23 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 /// @return Whether the union's current tag state has value "path".
 ///
 - (BOOL)isPath;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "email_not_verified".
+///
+/// @return Whether the union's current tag state has value
+/// "email_not_verified".
+///
+- (BOOL)isEmailNotVerified;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "unsupported_file".
+///
+/// @return Whether the union's current tag state has value "unsupported_file".
+///
+- (BOOL)isUnsupportedFile;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -108,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetTemporaryLinkError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESGetTemporaryLinkError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESGetTemporaryLinkError *)instance;
 
 ///
 /// Deserializes `DBFILESGetTemporaryLinkError` instances.
@@ -118,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESGetTemporaryLinkError` object.
 ///
-+ (DBFILESGetTemporaryLinkError *)deserialize:(NSDictionary *)dict;
++ (DBFILESGetTemporaryLinkError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

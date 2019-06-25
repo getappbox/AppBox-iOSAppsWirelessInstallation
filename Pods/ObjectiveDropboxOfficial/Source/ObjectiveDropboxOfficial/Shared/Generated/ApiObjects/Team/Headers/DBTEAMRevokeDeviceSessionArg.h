@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRevokeDeviceSessionArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRevokeDeviceSessionArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRevokeDeviceSessionArg *)instance;
 
 ///
 /// Deserializes `DBTEAMRevokeDeviceSessionArg` instances.
@@ -161,7 +161,7 @@ typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
 ///
 /// @return An instantiation of the `DBTEAMRevokeDeviceSessionArg` object.
 ///
-+ (DBTEAMRevokeDeviceSessionArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRevokeDeviceSessionArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

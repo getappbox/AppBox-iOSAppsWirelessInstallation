@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainVerificationAddDomainSuccessType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainVerificationAddDomainSuccessType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDomainVerificationAddDomainSuccessType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainVerificationAddDomainSuccessType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDomainVerificationAddDomainSuccessType` object.
 ///
-+ (DBTEAMLOGDomainVerificationAddDomainSuccessType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDomainVerificationAddDomainSuccessType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

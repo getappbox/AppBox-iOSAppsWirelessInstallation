@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESTemplateFilter` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESTemplateFilter *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESTemplateFilter *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESTemplateFilter` instances.
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
 ///
 /// @return An instantiation of the `DBFILEPROPERTIESTemplateFilter` object.
 ///
-+ (DBFILEPROPERTIESTemplateFilter *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESTemplateFilter *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

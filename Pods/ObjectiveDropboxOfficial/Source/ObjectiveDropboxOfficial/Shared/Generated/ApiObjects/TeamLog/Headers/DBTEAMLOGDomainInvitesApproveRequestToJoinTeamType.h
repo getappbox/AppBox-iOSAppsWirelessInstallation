@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType` object.
 ///
-+ (DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDomainInvitesApproveRequestToJoinTeamType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

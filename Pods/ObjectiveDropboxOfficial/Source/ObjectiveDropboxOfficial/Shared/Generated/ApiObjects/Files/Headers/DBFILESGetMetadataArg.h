@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESGetMetadataArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESGetMetadataArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESGetMetadataArg *)instance;
 
 ///
 /// Deserializes `DBFILESGetMetadataArg` instances.
@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESGetMetadataArg` object.
 ///
-+ (DBFILESGetMetadataArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESGetMetadataArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

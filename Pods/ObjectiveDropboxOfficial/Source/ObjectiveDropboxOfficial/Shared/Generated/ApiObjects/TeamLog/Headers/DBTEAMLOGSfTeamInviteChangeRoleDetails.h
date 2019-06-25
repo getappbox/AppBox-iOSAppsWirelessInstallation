@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfTeamInviteChangeRoleDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfTeamInviteChangeRoleDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfTeamInviteChangeRoleDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfTeamInviteChangeRoleDetails` instances.
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSfTeamInviteChangeRoleDetails`
 /// object.
 ///
-+ (DBTEAMLOGSfTeamInviteChangeRoleDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfTeamInviteChangeRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

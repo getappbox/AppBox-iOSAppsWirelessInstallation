@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPaperAccessType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPaperAccessType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperAccessType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPaperAccessType` instances.
@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGPaperAccessType` object.
 ///
-+ (DBTEAMLOGPaperAccessType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPaperAccessType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

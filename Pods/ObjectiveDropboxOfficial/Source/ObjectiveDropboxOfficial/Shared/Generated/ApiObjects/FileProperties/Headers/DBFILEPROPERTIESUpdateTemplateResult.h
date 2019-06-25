@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESUpdateTemplateResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESUpdateTemplateResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESUpdateTemplateResult *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESUpdateTemplateResult` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBFILEPROPERTIESUpdateTemplateResult`
 /// object.
 ///
-+ (DBFILEPROPERTIESUpdateTemplateResult *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESUpdateTemplateResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

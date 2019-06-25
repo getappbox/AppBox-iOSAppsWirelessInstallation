@@ -148,7 +148,7 @@ typedef NS_ENUM(NSInteger, DBFILESSyncSettingTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSyncSetting` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSyncSetting *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSyncSetting *)instance;
 
 ///
 /// Deserializes `DBFILESSyncSetting` instances.
@@ -158,7 +158,7 @@ typedef NS_ENUM(NSInteger, DBFILESSyncSettingTag) {
 ///
 /// @return An instantiation of the `DBFILESSyncSetting` object.
 ///
-+ (DBFILESSyncSetting *)deserialize:(NSDictionary *)dict;
++ (DBFILESSyncSetting *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

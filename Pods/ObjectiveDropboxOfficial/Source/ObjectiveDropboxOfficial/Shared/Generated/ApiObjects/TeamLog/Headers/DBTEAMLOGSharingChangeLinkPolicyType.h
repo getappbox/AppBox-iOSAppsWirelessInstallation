@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharingChangeLinkPolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharingChangeLinkPolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharingChangeLinkPolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharingChangeLinkPolicyType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharingChangeLinkPolicyType`
 /// object.
 ///
-+ (DBTEAMLOGSharingChangeLinkPolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharingChangeLinkPolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

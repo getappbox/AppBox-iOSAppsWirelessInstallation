@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESPropertyGroupUpdate` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESPropertyGroupUpdate *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESPropertyGroupUpdate *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESPropertyGroupUpdate` instances.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBFILEPROPERTIESPropertyGroupUpdate`
 /// object.
 ///
-+ (DBFILEPROPERTIESPropertyGroupUpdate *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESPropertyGroupUpdate *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

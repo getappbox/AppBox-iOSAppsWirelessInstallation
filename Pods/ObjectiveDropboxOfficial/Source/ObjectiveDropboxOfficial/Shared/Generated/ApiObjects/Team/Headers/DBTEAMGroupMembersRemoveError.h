@@ -229,7 +229,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersRemoveErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMGroupMembersRemoveError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMGroupMembersRemoveError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMGroupMembersRemoveError *)instance;
 
 ///
 /// Deserializes `DBTEAMGroupMembersRemoveError` instances.
@@ -239,7 +239,7 @@ typedef NS_ENUM(NSInteger, DBTEAMGroupMembersRemoveErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMGroupMembersRemoveError` object.
 ///
-+ (DBTEAMGroupMembersRemoveError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMGroupMembersRemoveError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

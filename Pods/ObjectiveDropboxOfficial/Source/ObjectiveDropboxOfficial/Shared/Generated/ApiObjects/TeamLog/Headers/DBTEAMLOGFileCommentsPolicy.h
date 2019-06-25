@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGFileCommentsPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileCommentsPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileCommentsPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileCommentsPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileCommentsPolicy` instances.
@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGFileCommentsPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGFileCommentsPolicy` object.
 ///
-+ (DBTEAMLOGFileCommentsPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileCommentsPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 
