@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GoogleAnalyticsTracker/GoogleAnalyticsTracker.h>
 
 typedef enum : NSUInteger {
     LogEventTypeCopyToClipboard,

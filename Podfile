@@ -1,4 +1,4 @@
-platform :osx, '10.10'
+platform :osx, '10.11'
 
 inhibit_all_warnings!
 
@@ -12,7 +12,6 @@ target :AppBox do
     pod 'ObjectiveDropboxOfficial'
     pod 'ZXingObjC'
     pod 'SAMKeychain'
-    pod 'Google-Analytics-for-OS-X'
     pod 'STPrivilegedTask'
     pod 'FirebaseCore'
 end
