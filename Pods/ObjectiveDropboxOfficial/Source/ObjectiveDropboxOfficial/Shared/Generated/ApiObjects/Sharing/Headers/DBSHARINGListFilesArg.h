@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGListFilesArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGListFilesArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGListFilesArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGListFilesArg` instances.
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGListFilesArg` object.
 ///
-+ (DBSHARINGListFilesArg *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGListFilesArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

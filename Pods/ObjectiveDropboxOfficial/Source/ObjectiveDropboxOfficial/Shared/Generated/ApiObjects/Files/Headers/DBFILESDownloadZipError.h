@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadZipErrorTag) {
   /// (no description).
   DBFILESDownloadZipErrorPath,
 
-  /// The folder is too large to download.
+  /// The folder or a file is too large to download.
   DBFILESDownloadZipErrorTooLarge,
 
   /// The folder has too many files to download.
@@ -64,8 +64,8 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadZipErrorTag) {
 ///
 /// Initializes union class with tag state of "too_large".
 ///
-/// Description of the "too_large" tag state: The folder is too large to
-/// download.
+/// Description of the "too_large" tag state: The folder or a file is too large
+/// to download.
 ///
 /// @return An initialized instance.
 ///
@@ -147,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadZipErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDownloadZipError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESDownloadZipError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESDownloadZipError *)instance;
 
 ///
 /// Deserializes `DBFILESDownloadZipError` instances.
@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, DBFILESDownloadZipErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESDownloadZipError` object.
 ///
-+ (DBFILESDownloadZipError *)deserialize:(NSDictionary *)dict;
++ (DBFILESDownloadZipError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

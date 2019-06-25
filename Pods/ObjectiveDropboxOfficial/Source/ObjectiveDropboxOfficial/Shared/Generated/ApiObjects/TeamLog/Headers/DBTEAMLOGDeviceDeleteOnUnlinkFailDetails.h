@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceDeleteOnUnlinkFailDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceDeleteOnUnlinkFailDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceDeleteOnUnlinkFailDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceDeleteOnUnlinkFailDetails` instances.
@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGDeviceDeleteOnUnlinkFailDetails`
 /// object.
 ///
-+ (DBTEAMLOGDeviceDeleteOnUnlinkFailDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceDeleteOnUnlinkFailDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

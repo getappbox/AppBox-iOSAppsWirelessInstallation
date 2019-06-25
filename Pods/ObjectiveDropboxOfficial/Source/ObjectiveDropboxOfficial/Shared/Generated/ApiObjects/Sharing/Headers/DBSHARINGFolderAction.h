@@ -371,7 +371,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFolderActionTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFolderAction` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGFolderAction *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGFolderAction *)instance;
 
 ///
 /// Deserializes `DBSHARINGFolderAction` instances.
@@ -381,7 +381,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFolderActionTag) {
 ///
 /// @return An instantiation of the `DBSHARINGFolderAction` object.
 ///
-+ (DBSHARINGFolderAction *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGFolderAction *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

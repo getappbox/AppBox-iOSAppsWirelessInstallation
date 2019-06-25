@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberRemoveActionResultTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGFileMemberRemoveActionResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGFileMemberRemoveActionResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGFileMemberRemoveActionResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGFileMemberRemoveActionResult` instances.
@@ -156,7 +156,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGFileMemberRemoveActionResultTag) {
 /// @return An instantiation of the `DBSHARINGFileMemberRemoveActionResult`
 /// object.
 ///
-+ (DBSHARINGFileMemberRemoveActionResult *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGFileMemberRemoveActionResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -152,7 +152,7 @@ typedef NS_ENUM(NSInteger, DBFILESSyncSettingsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSyncSettingsError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSyncSettingsError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSyncSettingsError *)instance;
 
 ///
 /// Deserializes `DBFILESSyncSettingsError` instances.
@@ -162,7 +162,7 @@ typedef NS_ENUM(NSInteger, DBFILESSyncSettingsErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESSyncSettingsError` object.
 ///
-+ (DBFILESSyncSettingsError *)deserialize:(NSDictionary *)dict;
++ (DBFILESSyncSettingsError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

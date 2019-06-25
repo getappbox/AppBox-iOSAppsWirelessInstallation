@@ -164,7 +164,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiCursorErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperApiCursorError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERPaperApiCursorError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperApiCursorError *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperApiCursorError` instances.
@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperApiCursorErrorTag) {
 ///
 /// @return An instantiation of the `DBPAPERPaperApiCursorError` object.
 ///
-+ (DBPAPERPaperApiCursorError *)deserialize:(NSDictionary *)dict;
++ (DBPAPERPaperApiCursorError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

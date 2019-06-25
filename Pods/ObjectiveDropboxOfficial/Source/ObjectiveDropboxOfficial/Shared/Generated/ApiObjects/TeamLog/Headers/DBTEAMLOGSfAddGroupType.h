@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfAddGroupType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfAddGroupType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfAddGroupType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfAddGroupType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfAddGroupType` object.
 ///
-+ (DBTEAMLOGSfAddGroupType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfAddGroupType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

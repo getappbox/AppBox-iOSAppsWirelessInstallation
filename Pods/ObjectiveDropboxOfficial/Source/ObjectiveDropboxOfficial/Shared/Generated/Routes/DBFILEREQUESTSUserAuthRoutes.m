@@ -5,16 +5,27 @@
 ///
 
 #import "DBFILEREQUESTSUserAuthRoutes.h"
+#import "DBFILEREQUESTSCountFileRequestsError.h"
+#import "DBFILEREQUESTSCountFileRequestsResult.h"
 #import "DBFILEREQUESTSCreateFileRequestArgs.h"
 #import "DBFILEREQUESTSCreateFileRequestError.h"
+#import "DBFILEREQUESTSDeleteAllClosedFileRequestsError.h"
+#import "DBFILEREQUESTSDeleteAllClosedFileRequestsResult.h"
+#import "DBFILEREQUESTSDeleteFileRequestArgs.h"
+#import "DBFILEREQUESTSDeleteFileRequestError.h"
+#import "DBFILEREQUESTSDeleteFileRequestsResult.h"
 #import "DBFILEREQUESTSFileRequest.h"
 #import "DBFILEREQUESTSFileRequestDeadline.h"
 #import "DBFILEREQUESTSFileRequestError.h"
 #import "DBFILEREQUESTSGeneralFileRequestsError.h"
 #import "DBFILEREQUESTSGetFileRequestArgs.h"
 #import "DBFILEREQUESTSGetFileRequestError.h"
+#import "DBFILEREQUESTSListFileRequestsArg.h"
+#import "DBFILEREQUESTSListFileRequestsContinueArg.h"
+#import "DBFILEREQUESTSListFileRequestsContinueError.h"
 #import "DBFILEREQUESTSListFileRequestsError.h"
 #import "DBFILEREQUESTSListFileRequestsResult.h"
+#import "DBFILEREQUESTSListFileRequestsV2Result.h"
 #import "DBFILEREQUESTSRouteObjects.h"
 #import "DBFILEREQUESTSUpdateFileRequestArgs.h"
 #import "DBFILEREQUESTSUpdateFileRequestDeadline.h"
@@ -31,6 +42,11 @@
     _client = client;
   }
   return self;
+}
+
+- (DBRpcTask *)count {
+  DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSCount;
+  return [self.client requestRpc:route arg:nil];
 }
 
 - (DBRpcTask *)create:(NSString *)title destination:(NSString *)destination {
@@ -52,15 +68,45 @@
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)delete_:(NSArray<NSString *> *)ids {
+  DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSDelete_;
+  DBFILEREQUESTSDeleteFileRequestArgs *arg = [[DBFILEREQUESTSDeleteFileRequestArgs alloc] initWithIds:ids];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)deleteAllClosed {
+  DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSDeleteAllClosed;
+  return [self.client requestRpc:route arg:nil];
+}
+
 - (DBRpcTask *)get:(NSString *)id_ {
   DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSGet;
   DBFILEREQUESTSGetFileRequestArgs *arg = [[DBFILEREQUESTSGetFileRequestArgs alloc] initWithId_:id_];
   return [self.client requestRpc:route arg:arg];
 }
 
+- (DBRpcTask *)listV2 {
+  DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSListV2;
+  DBFILEREQUESTSListFileRequestsArg *arg = [[DBFILEREQUESTSListFileRequestsArg alloc] initDefault];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)listV2:(NSNumber *)limit {
+  DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSListV2;
+  DBFILEREQUESTSListFileRequestsArg *arg = [[DBFILEREQUESTSListFileRequestsArg alloc] initWithLimit:limit];
+  return [self.client requestRpc:route arg:arg];
+}
+
 - (DBRpcTask *)list {
   DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSList;
   return [self.client requestRpc:route arg:nil];
+}
+
+- (DBRpcTask *)listContinue:(NSString *)cursor {
+  DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSListContinue;
+  DBFILEREQUESTSListFileRequestsContinueArg *arg =
+      [[DBFILEREQUESTSListFileRequestsContinueArg alloc] initWithCursor:cursor];
+  return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)update:(NSString *)id_ {

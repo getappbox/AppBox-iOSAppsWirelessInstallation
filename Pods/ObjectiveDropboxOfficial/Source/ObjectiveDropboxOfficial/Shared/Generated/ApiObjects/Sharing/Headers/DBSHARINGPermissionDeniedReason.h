@@ -410,7 +410,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGPermissionDeniedReason` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGPermissionDeniedReason *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGPermissionDeniedReason *)instance;
 
 ///
 /// Deserializes `DBSHARINGPermissionDeniedReason` instances.
@@ -420,7 +420,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
 ///
 /// @return An instantiation of the `DBSHARINGPermissionDeniedReason` object.
 ///
-+ (DBSHARINGPermissionDeniedReason *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGPermissionDeniedReason *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, DBTEAMHasTeamSelectiveSyncValueTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMHasTeamSelectiveSyncValue` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMHasTeamSelectiveSyncValue *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMHasTeamSelectiveSyncValue *)instance;
 
 ///
 /// Deserializes `DBTEAMHasTeamSelectiveSyncValue` instances.
@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, DBTEAMHasTeamSelectiveSyncValueTag) {
 ///
 /// @return An instantiation of the `DBTEAMHasTeamSelectiveSyncValue` object.
 ///
-+ (DBTEAMHasTeamSelectiveSyncValue *)deserialize:(NSDictionary *)dict;
++ (DBTEAMHasTeamSelectiveSyncValue *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

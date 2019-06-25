@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateOwnerTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESTemplateOwnerType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESTemplateOwnerType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESTemplateOwnerType *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESTemplateOwnerType` instances.
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateOwnerTypeTag) {
 ///
 /// @return An instantiation of the `DBFILEPROPERTIESTemplateOwnerType` object.
 ///
-+ (DBFILEPROPERTIESTemplateOwnerType *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESTemplateOwnerType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

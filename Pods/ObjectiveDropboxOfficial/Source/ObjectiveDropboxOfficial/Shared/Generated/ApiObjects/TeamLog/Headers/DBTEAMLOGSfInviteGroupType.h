@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSfInviteGroupType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSfInviteGroupType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSfInviteGroupType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSfInviteGroupType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSfInviteGroupType` object.
 ///
-+ (DBTEAMLOGSfInviteGroupType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSfInviteGroupType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

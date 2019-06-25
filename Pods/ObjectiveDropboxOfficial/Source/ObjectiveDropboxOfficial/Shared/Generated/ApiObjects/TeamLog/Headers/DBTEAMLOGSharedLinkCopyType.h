@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedLinkCopyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedLinkCopyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedLinkCopyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedLinkCopyType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSharedLinkCopyType` object.
 ///
-+ (DBTEAMLOGSharedLinkCopyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedLinkCopyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

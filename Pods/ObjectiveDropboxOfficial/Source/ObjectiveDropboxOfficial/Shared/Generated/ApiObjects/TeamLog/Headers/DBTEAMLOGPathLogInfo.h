@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPathLogInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPathLogInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPathLogInfo *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPathLogInfo` instances.
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGPathLogInfo` object.
 ///
-+ (DBTEAMLOGPathLogInfo *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPathLogInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

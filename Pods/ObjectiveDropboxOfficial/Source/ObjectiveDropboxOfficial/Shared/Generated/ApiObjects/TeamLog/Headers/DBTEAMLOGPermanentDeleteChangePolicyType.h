@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGPermanentDeleteChangePolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGPermanentDeleteChangePolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPermanentDeleteChangePolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGPermanentDeleteChangePolicyType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGPermanentDeleteChangePolicyType`
 /// object.
 ///
-+ (DBTEAMLOGPermanentDeleteChangePolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGPermanentDeleteChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

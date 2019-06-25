@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESGroupCreationTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESGroupCreation` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESGroupCreation *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESGroupCreation *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESGroupCreation` instances.
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESGroupCreationTag) {
 ///
 /// @return An instantiation of the `DBTEAMPOLICIESGroupCreation` object.
 ///
-+ (DBTEAMPOLICIESGroupCreation *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESGroupCreation *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

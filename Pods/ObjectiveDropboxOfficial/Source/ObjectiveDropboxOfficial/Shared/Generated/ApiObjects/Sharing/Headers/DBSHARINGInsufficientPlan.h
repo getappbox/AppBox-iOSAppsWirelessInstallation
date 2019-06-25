@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGInsufficientPlan` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGInsufficientPlan *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGInsufficientPlan *)instance;
 
 ///
 /// Deserializes `DBSHARINGInsufficientPlan` instances.
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGInsufficientPlan` object.
 ///
-+ (DBSHARINGInsufficientPlan *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGInsufficientPlan *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

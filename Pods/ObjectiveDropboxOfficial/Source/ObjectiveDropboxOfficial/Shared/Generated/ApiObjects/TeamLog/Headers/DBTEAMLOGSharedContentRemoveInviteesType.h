@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedContentRemoveInviteesType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedContentRemoveInviteesType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedContentRemoveInviteesType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedContentRemoveInviteesType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedContentRemoveInviteesType`
 /// object.
 ///
-+ (DBTEAMLOGSharedContentRemoveInviteesType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedContentRemoveInviteesType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccountCaptureChangeAvailabilityType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGAccountCaptureChangeAvailabilityType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCaptureChangeAvailabilityType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccountCaptureChangeAvailabilityType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGAccountCaptureChangeAvailabilityType` object.
 ///
-+ (DBTEAMLOGAccountCaptureChangeAvailabilityType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGAccountCaptureChangeAvailabilityType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -90,7 +90,7 @@ All requests need to be made with an OAuth 2.0 access token. An OAuth token repr
 a Dropbox user account or team.
 
 Once you've created an app, you can go to the App Console and manually generate an access token to authorize your app to access your own Dropbox account.
-Otherwise, you can obtain an OAuth token programmatically using the SDK's pre-defined auth flow. For more information, [see below](https://github.com/dropbox/dropbox-sdk-obj-c#handling-authorization-flow).
+Otherwise, you can obtain an OAuth token programmatically using the SDK's pre-defined auth flow. For more information, [see below](https://github.com/dropbox/dropbox-sdk-obj-c#handling-the-authorization-flow).
 
 ---
 
@@ -167,7 +167,7 @@ brew install carthage
 
 ```
 # ObjectiveDropboxOfficial
-github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.9.1
+github "https://github.com/dropbox/dropbox-sdk-obj-c" ~> 3.10.0
 ```
 
 Then, run the following command to checkout and build the Dropbox Objective-C SDK repository:
@@ -374,19 +374,8 @@ Please ensure that the supplied view controller is the top-most controller, so t
 
 - (void)myButtonInControllerPressed {
   [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace]
-                                        controller:[[self class] topMostController]
+                                        controller:self
                                            openURL:^(NSURL *url){ [[NSWorkspace sharedWorkspace] openURL:url]; }];
-}
-
-+ (UIViewController*)topMostController
-{
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-
-    return topController;
 }
 ```
 
@@ -464,7 +453,7 @@ After the end user signs in with their Dropbox login credentials on mobile, they
 </p>
 
 If they press **Allow** or **Cancel**, the `db-<APP_KEY>` redirect URL will be launched from the view controller, and will be handled in your application
-delegate's `application:handleOpenURL` method, from which the result of the authorization can be parsed.
+delegate's `application:openURL:options:` method, from which the result of the authorization can be parsed.
 
 Now you're ready to begin making API requests!
 
@@ -612,6 +601,7 @@ DBFILESWriteMode *mode = [[DBFILESWriteMode alloc] initWithOverwrite];
                       autorename:@(YES)
                   clientModified:nil
                             mute:@(NO)
+                  propertyGroups:nil
                        inputData:fileData]
     setResponseBlock:^(DBFILESFileMetadata *result, DBFILESUploadError *routeError, DBRequestError *networkError) {
       if (result) {

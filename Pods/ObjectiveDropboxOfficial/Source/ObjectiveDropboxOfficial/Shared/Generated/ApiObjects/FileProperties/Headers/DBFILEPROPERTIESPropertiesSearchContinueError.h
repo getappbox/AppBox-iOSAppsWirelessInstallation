@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESPropertiesSearchContinueError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESPropertiesSearchContinueError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESPropertiesSearchContinueError *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESPropertiesSearchContinueError` instances.
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchContinueErrorTag) {
 /// @return An instantiation of the
 /// `DBFILEPROPERTIESPropertiesSearchContinueError` object.
 ///
-+ (DBFILEPROPERTIESPropertiesSearchContinueError *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESPropertiesSearchContinueError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

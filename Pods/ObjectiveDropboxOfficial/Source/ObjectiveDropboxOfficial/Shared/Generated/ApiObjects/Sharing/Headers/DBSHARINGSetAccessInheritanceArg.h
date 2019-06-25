@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGSetAccessInheritanceArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGSetAccessInheritanceArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGSetAccessInheritanceArg *)instance;
 
 ///
 /// Deserializes `DBSHARINGSetAccessInheritanceArg` instances.
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGSetAccessInheritanceArg` object.
 ///
-+ (DBSHARINGSetAccessInheritanceArg *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGSetAccessInheritanceArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

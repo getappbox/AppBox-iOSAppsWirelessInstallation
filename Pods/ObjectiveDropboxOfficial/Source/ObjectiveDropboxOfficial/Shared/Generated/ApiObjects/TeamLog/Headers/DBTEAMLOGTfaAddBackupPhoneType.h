@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaAddBackupPhoneType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaAddBackupPhoneType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaAddBackupPhoneType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaAddBackupPhoneType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTfaAddBackupPhoneType` object.
 ///
-+ (DBTEAMLOGTfaAddBackupPhoneType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTfaAddBackupPhoneType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

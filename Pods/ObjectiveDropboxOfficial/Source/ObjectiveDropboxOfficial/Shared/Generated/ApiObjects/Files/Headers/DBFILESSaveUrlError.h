@@ -32,7 +32,8 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
   /// (no description).
   DBFILESSaveUrlErrorPath,
 
-  /// Failed downloading the given URL.
+  /// Failed downloading the given URL. The url may be password-protected /
+  /// the password provided was incorrect.
   DBFILESSaveUrlErrorDownloadFailed,
 
   /// The given URL is invalid.
@@ -68,7 +69,8 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 /// Initializes union class with tag state of "download_failed".
 ///
 /// Description of the "download_failed" tag state: Failed downloading the given
-/// URL.
+/// URL. The url may be password-protected / the password provided was
+/// incorrect.
 ///
 /// @return An initialized instance.
 ///
@@ -166,7 +168,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESSaveUrlError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESSaveUrlError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESSaveUrlError *)instance;
 
 ///
 /// Deserializes `DBFILESSaveUrlError` instances.
@@ -176,7 +178,7 @@ typedef NS_ENUM(NSInteger, DBFILESSaveUrlErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESSaveUrlError` object.
 ///
-+ (DBFILESSaveUrlError *)deserialize:(NSDictionary *)dict;
++ (DBFILESSaveUrlError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

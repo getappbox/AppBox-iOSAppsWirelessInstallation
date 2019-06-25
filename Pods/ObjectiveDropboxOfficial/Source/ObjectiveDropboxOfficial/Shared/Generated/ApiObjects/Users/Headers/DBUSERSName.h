@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the `DBUSERSName` API
 /// object.
 ///
-+ (nullable NSDictionary *)serialize:(DBUSERSName *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBUSERSName *)instance;
 
 ///
 /// Deserializes `DBUSERSName` instances.
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBUSERSName` object.
 ///
-+ (DBUSERSName *)deserialize:(NSDictionary *)dict;
++ (DBUSERSName *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

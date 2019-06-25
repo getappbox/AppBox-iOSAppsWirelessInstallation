@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderLaunchTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGShareFolderLaunch` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGShareFolderLaunch *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGShareFolderLaunch *)instance;
 
 ///
 /// Deserializes `DBSHARINGShareFolderLaunch` instances.
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGShareFolderLaunchTag) {
 ///
 /// @return An instantiation of the `DBSHARINGShareFolderLaunch` object.
 ///
-+ (DBSHARINGShareFolderLaunch *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGShareFolderLaunch *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

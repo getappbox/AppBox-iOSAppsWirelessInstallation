@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListRevisionsResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListRevisionsResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListRevisionsResult *)instance;
 
 ///
 /// Deserializes `DBFILESListRevisionsResult` instances.
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESListRevisionsResult` object.
 ///
-+ (DBFILESListRevisionsResult *)deserialize:(NSDictionary *)dict;
++ (DBFILESListRevisionsResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

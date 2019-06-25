@@ -10,6 +10,7 @@
 
 @class DBFILESLookupError;
 @class DBSHARINGCreateSharedLinkWithSettingsError;
+@class DBSHARINGSharedLinkAlreadyExistsMetadata;
 @class DBSHARINGSharedLinkSettingsError;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
   DBSHARINGCreateSharedLinkWithSettingsErrorEmailNotVerified,
 
   /// The shared link already exists. You can call `listSharedLinks` to get
-  /// the existing link.
+  /// the  existing link, or use the provided metadata if it is returned.
   DBSHARINGCreateSharedLinkWithSettingsErrorSharedLinkAlreadyExists,
 
   /// There is an error with the given settings.
@@ -55,6 +56,12 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// (no description). @note Ensure the `isPath` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILESLookupError *path;
+
+/// The shared link already exists. You can call `listSharedLinks` to get the
+/// existing link, or use the provided metadata if it is returned. @note Ensure
+/// the `isSharedLinkAlreadyExists` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly, nullable) DBSHARINGSharedLinkAlreadyExistsMetadata *sharedLinkAlreadyExists;
 
 /// There is an error with the given settings. @note Ensure the
 /// `isSettingsError` method returns true before accessing, otherwise a runtime
@@ -86,11 +93,17 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// Initializes union class with tag state of "shared_link_already_exists".
 ///
 /// Description of the "shared_link_already_exists" tag state: The shared link
-/// already exists. You can call `listSharedLinks` to get the existing link.
+/// already exists. You can call `listSharedLinks` to get the  existing link, or
+/// use the provided metadata if it is returned.
+///
+/// @param sharedLinkAlreadyExists The shared link already exists. You can call
+/// `listSharedLinks` to get the  existing link, or use the provided metadata if
+/// it is returned.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSharedLinkAlreadyExists;
+- (instancetype)initWithSharedLinkAlreadyExists:
+    (nullable DBSHARINGSharedLinkAlreadyExistsMetadata *)sharedLinkAlreadyExists;
 
 ///
 /// Initializes union class with tag state of "settings_error".
@@ -141,6 +154,10 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// Retrieves whether the union's current tag state has value
 /// "shared_link_already_exists".
 ///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkAlreadyExists` property, otherwise a runtime exception will be
+/// thrown.
+///
 /// @return Whether the union's current tag state has value
 /// "shared_link_already_exists".
 ///
@@ -189,7 +206,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGCreateSharedLinkWithSettingsError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGCreateSharedLinkWithSettingsError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGCreateSharedLinkWithSettingsError *)instance;
 
 ///
 /// Deserializes `DBSHARINGCreateSharedLinkWithSettingsError` instances.
@@ -200,7 +217,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
 /// @return An instantiation of the `DBSHARINGCreateSharedLinkWithSettingsError`
 /// object.
 ///
-+ (DBSHARINGCreateSharedLinkWithSettingsError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGCreateSharedLinkWithSettingsError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

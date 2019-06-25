@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFilePreviewType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFilePreviewType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFilePreviewType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFilePreviewType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFilePreviewType` object.
 ///
-+ (DBTEAMLOGFilePreviewType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFilePreviewType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderUpdateSyncSettingsArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderUpdateSyncSettingsArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderUpdateSyncSettingsArg *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderUpdateSyncSettingsArg` instances.
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMTeamFolderUpdateSyncSettingsArg`
 /// object.
 ///
-+ (DBTEAMTeamFolderUpdateSyncSettingsArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderUpdateSyncSettingsArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

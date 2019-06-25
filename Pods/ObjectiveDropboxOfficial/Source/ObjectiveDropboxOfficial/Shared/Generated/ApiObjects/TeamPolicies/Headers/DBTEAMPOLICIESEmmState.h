@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESEmmState` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESEmmState *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESEmmState *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESEmmState` instances.
@@ -147,7 +147,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
 ///
 /// @return An instantiation of the `DBTEAMPOLICIESEmmState` object.
 ///
-+ (DBTEAMPOLICIESEmmState *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESEmmState *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

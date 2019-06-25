@@ -193,7 +193,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGResolvedVisibilityTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGResolvedVisibility` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGResolvedVisibility *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGResolvedVisibility *)instance;
 
 ///
 /// Deserializes `DBSHARINGResolvedVisibility` instances.
@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGResolvedVisibilityTag) {
 ///
 /// @return An instantiation of the `DBSHARINGResolvedVisibility` object.
 ///
-+ (DBSHARINGResolvedVisibility *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGResolvedVisibility *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -129,7 +129,7 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESListFolderContinueError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESListFolderContinueError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESListFolderContinueError *)instance;
 
 ///
 /// Deserializes `DBFILESListFolderContinueError` instances.
@@ -139,7 +139,7 @@ typedef NS_ENUM(NSInteger, DBFILESListFolderContinueErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESListFolderContinueError` object.
 ///
-+ (DBFILESListFolderContinueError *)deserialize:(NSDictionary *)dict;
++ (DBFILESListFolderContinueError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSsoRemoveLoginUrlDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSsoRemoveLoginUrlDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSsoRemoveLoginUrlDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSsoRemoveLoginUrlDetails` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGSsoRemoveLoginUrlDetails` object.
 ///
-+ (DBTEAMLOGSsoRemoveLoginUrlDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSsoRemoveLoginUrlDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

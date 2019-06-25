@@ -28,16 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// True if the removed team member is recoverable.
 @property (nonatomic, readonly) NSNumber *isRecoverable;
 
+/// True if the team member's account was converted to individual account.
+@property (nonatomic, readonly) NSNumber *isDisconnected;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param isRecoverable True if the removed team member is recoverable.
+/// @param isDisconnected True if the team member's account was converted to
+/// individual account.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithIsRecoverable:(NSNumber *)isRecoverable;
+- (instancetype)initWithIsRecoverable:(NSNumber *)isRecoverable isDisconnected:(NSNumber *)isDisconnected;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -58,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMRemovedStatus` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMRemovedStatus *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMRemovedStatus *)instance;
 
 ///
 /// Deserializes `DBTEAMRemovedStatus` instances.
@@ -68,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMRemovedStatus` object.
 ///
-+ (DBTEAMRemovedStatus *)deserialize:(NSDictionary *)dict;
++ (DBTEAMRemovedStatus *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

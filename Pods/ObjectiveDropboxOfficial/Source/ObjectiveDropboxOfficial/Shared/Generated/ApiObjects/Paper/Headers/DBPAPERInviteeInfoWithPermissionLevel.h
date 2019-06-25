@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERInviteeInfoWithPermissionLevel` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERInviteeInfoWithPermissionLevel *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERInviteeInfoWithPermissionLevel *)instance;
 
 ///
 /// Deserializes `DBPAPERInviteeInfoWithPermissionLevel` instances.
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBPAPERInviteeInfoWithPermissionLevel`
 /// object.
 ///
-+ (DBPAPERInviteeInfoWithPermissionLevel *)deserialize:(NSDictionary *)dict;
++ (DBPAPERInviteeInfoWithPermissionLevel *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderListResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderListResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderListResult *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderListResult` instances.
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderListResult` object.
 ///
-+ (DBTEAMTeamFolderListResult *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderListResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderPolicyErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGUpdateFolderPolicyError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGUpdateFolderPolicyError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGUpdateFolderPolicyError *)instance;
 
 ///
 /// Deserializes `DBSHARINGUpdateFolderPolicyError` instances.
@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderPolicyErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGUpdateFolderPolicyError` object.
 ///
-+ (DBSHARINGUpdateFolderPolicyError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGUpdateFolderPolicyError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

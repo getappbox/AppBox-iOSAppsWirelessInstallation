@@ -9,6 +9,25 @@
 #import "DBCOMMONPathRootError.h"
 #import "DBOAuthManager.h"
 
+#pragma mark - Error Parameters
+
+@implementation DBLocalizedUserMessage
+
+- (instancetype)initWithText:(NSString *)text locale:(NSString *)locale {
+  self = [super init];
+  if (self) {
+    _text = [text copy];
+    _locale = [locale copy];
+  }
+  return self;
+}
+
+- (NSString *)description {
+  return self.text;
+}
+
+@end
+
 #pragma mark - HTTP error
 
 @implementation DBRequestHttpError
@@ -16,7 +35,7 @@
 - (instancetype)init:(NSString *)requestId
           statusCode:(NSNumber *)statusCode
         errorContent:(NSString *)errorContent
-         userMessage:(NSString *)userMessage {
+         userMessage:(DBLocalizedUserMessage *)userMessage {
   self = [super init];
   if (self) {
     _requestId = requestId;
@@ -46,7 +65,7 @@
 - (instancetype)init:(NSString *)requestId
           statusCode:(NSNumber *)statusCode
         errorContent:(NSString *)errorContent
-         userMessage:(NSString *)userMessage {
+         userMessage:(DBLocalizedUserMessage *)userMessage {
   return [super init:requestId statusCode:statusCode errorContent:errorContent userMessage:userMessage];
 }
 
@@ -69,7 +88,7 @@
 - (instancetype)init:(NSString *)requestId
              statusCode:(NSNumber *)statusCode
            errorContent:(NSString *)errorContent
-            userMessage:(NSString *)userMessage
+            userMessage:(DBLocalizedUserMessage *)userMessage
     structuredAuthError:(DBAUTHAuthError *)structuredAuthError {
   self = [super init:requestId statusCode:statusCode errorContent:errorContent userMessage:userMessage];
   if (self) {
@@ -98,7 +117,7 @@
 - (instancetype)init:(NSString *)requestId
                statusCode:(NSNumber *)statusCode
              errorContent:(NSString *)errorContent
-              userMessage:(NSString *)userMessage
+              userMessage:(DBLocalizedUserMessage *)userMessage
     structuredAccessError:(DBAUTHAccessError *)structuredAccessError {
   self = [super init:requestId statusCode:statusCode errorContent:errorContent userMessage:userMessage];
   if (self) {
@@ -127,7 +146,7 @@
 - (instancetype)init:(NSString *)requestId
                  statusCode:(NSNumber *)statusCode
                errorContent:(NSString *)errorContent
-                userMessage:(NSString *)userMessage
+                userMessage:(DBLocalizedUserMessage *)userMessage
     structuredPathRootError:(DBCOMMONPathRootError *)structuredPathRootError {
   self = [super init:requestId statusCode:statusCode errorContent:errorContent userMessage:userMessage];
   if (self) {
@@ -156,7 +175,7 @@
 - (instancetype)init:(NSString *)requestId
                   statusCode:(NSNumber *)statusCode
                 errorContent:(NSString *)errorContent
-                 userMessage:(NSString *)userMessage
+                 userMessage:(DBLocalizedUserMessage *)userMessage
     structuredRateLimitError:(DBAUTHRateLimitError *)structuredRateLimitError
                      backoff:(NSNumber *)backoff {
   self = [super init:requestId statusCode:statusCode errorContent:errorContent userMessage:userMessage];
@@ -188,7 +207,7 @@
 - (instancetype)init:(NSString *)requestId
           statusCode:(NSNumber *)statusCode
         errorContent:(NSString *)errorContent
-         userMessage:(NSString *)userMessage {
+         userMessage:(DBLocalizedUserMessage *)userMessage {
   return [super init:requestId statusCode:statusCode errorContent:errorContent userMessage:userMessage];
 }
 
@@ -232,7 +251,7 @@
 - (instancetype)initAsHttpError:(NSString *)requestId
                      statusCode:(NSNumber *)statusCode
                    errorContent:(NSString *)errorContent
-                    userMessage:(NSString *)userMessage {
+                    userMessage:(DBLocalizedUserMessage *)userMessage {
   return [self init:DBRequestErrorHttp
                      requestId:requestId
                     statusCode:statusCode
@@ -249,7 +268,7 @@
 - (instancetype)initAsBadInputError:(NSString *)requestId
                          statusCode:(NSNumber *)statusCode
                        errorContent:(NSString *)errorContent
-                        userMessage:(NSString *)userMessage {
+                        userMessage:(DBLocalizedUserMessage *)userMessage {
   return [self init:DBRequestErrorBadInput
                      requestId:requestId
                     statusCode:statusCode
@@ -266,7 +285,7 @@
 - (instancetype)initAsAuthError:(NSString *)requestId
                      statusCode:(NSNumber *)statusCode
                    errorContent:(NSString *)errorContent
-                    userMessage:(NSString *)userMessage
+                    userMessage:(DBLocalizedUserMessage *)userMessage
             structuredAuthError:(DBAUTHAuthError *)structuredAuthError {
   return [self init:DBRequestErrorAuth
                      requestId:requestId
@@ -284,7 +303,7 @@
 - (instancetype)initAsAccessError:(NSString *)requestId
                        statusCode:(NSNumber *)statusCode
                      errorContent:(NSString *)errorContent
-                      userMessage:(NSString *)userMessage
+                      userMessage:(DBLocalizedUserMessage *)userMessage
             structuredAccessError:(DBAUTHAccessError *)structuredAccessError {
   return [self init:DBRequestErrorAuth
                      requestId:requestId
@@ -302,7 +321,7 @@
 - (instancetype)initAsPathRootError:(NSString *)requestId
                          statusCode:(NSNumber *)statusCode
                        errorContent:(NSString *)errorContent
-                        userMessage:(NSString *)userMessage
+                        userMessage:(DBLocalizedUserMessage *)userMessage
             structuredPathRootError:(DBCOMMONPathRootError *)structuredPathRootError {
   return [self init:DBRequestErrorPathRoot
                      requestId:requestId
@@ -320,7 +339,7 @@
 - (instancetype)initAsRateLimitError:(NSString *)requestId
                           statusCode:(NSNumber *)statusCode
                         errorContent:(NSString *)errorContent
-                         userMessage:(NSString *)userMessage
+                         userMessage:(DBLocalizedUserMessage *)userMessage
             structuredRateLimitError:(DBAUTHRateLimitError *)structuredRateLimitError
                              backoff:(NSNumber *)backoff {
   return [self init:DBRequestErrorRateLimit
@@ -339,7 +358,7 @@
 - (instancetype)initAsInternalServerError:(NSString *)requestId
                                statusCode:(NSNumber *)statusCode
                              errorContent:(NSString *)errorContent
-                              userMessage:(NSString *)userMessage {
+                              userMessage:(DBLocalizedUserMessage *)userMessage {
   return [self init:DBRequestErrorInternalServer
                      requestId:requestId
                     statusCode:statusCode
@@ -371,7 +390,7 @@
                    requestId:(NSString *)requestId
                   statusCode:(NSNumber *)statusCode
                 errorContent:(NSString *)errorContent
-                 userMessage:(NSString *)userMessage
+                 userMessage:(DBLocalizedUserMessage *)userMessage
          structuredAuthError:(DBAUTHAuthError *)structuredAuthError
        structuredAccessError:(DBAUTHAccessError *)structuredAccessError
      structuredPathRootError:(DBCOMMONPathRootError *)structuredPathRootError

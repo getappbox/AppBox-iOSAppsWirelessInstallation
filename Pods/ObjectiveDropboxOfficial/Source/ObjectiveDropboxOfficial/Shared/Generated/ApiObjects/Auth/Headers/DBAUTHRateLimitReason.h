@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBAUTHRateLimitReasonTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBAUTHRateLimitReason` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBAUTHRateLimitReason *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBAUTHRateLimitReason *)instance;
 
 ///
 /// Deserializes `DBAUTHRateLimitReason` instances.
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBAUTHRateLimitReasonTag) {
 ///
 /// @return An instantiation of the `DBAUTHRateLimitReason` object.
 ///
-+ (DBAUTHRateLimitReason *)deserialize:(NSDictionary *)dict;
++ (DBAUTHRateLimitReason *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

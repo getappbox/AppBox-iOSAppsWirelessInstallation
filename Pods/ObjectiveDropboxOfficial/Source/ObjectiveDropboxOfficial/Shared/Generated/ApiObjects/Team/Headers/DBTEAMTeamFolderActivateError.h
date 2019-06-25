@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderActivateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderActivateError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderActivateError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderActivateError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderActivateError` instances.
@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderActivateErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderActivateError` object.
 ///
-+ (DBTEAMTeamFolderActivateError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderActivateError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

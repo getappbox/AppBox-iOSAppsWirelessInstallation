@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails` object.
 ///
-+ (DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

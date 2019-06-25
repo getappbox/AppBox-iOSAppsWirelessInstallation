@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupRenameType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupRenameType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGroupRenameType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupRenameType` instances.
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGGroupRenameType` object.
 ///
-+ (DBTEAMLOGGroupRenameType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGGroupRenameType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

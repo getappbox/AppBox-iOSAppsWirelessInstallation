@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBCOMMONUserRootInfo` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBCOMMONUserRootInfo *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBCOMMONUserRootInfo *)instance;
 
 ///
 /// Deserializes `DBCOMMONUserRootInfo` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBCOMMONUserRootInfo` object.
 ///
-+ (DBCOMMONUserRootInfo *)deserialize:(NSDictionary *)dict;
++ (DBCOMMONUserRootInfo *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

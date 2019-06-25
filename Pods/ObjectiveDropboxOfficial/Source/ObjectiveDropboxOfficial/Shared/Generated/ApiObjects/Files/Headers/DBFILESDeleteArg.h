@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeleteArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESDeleteArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESDeleteArg *)instance;
 
 ///
 /// Deserializes `DBFILESDeleteArg` instances.
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESDeleteArg` object.
 ///
-+ (DBFILESDeleteArg *)deserialize:(NSDictionary *)dict;
++ (DBFILESDeleteArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

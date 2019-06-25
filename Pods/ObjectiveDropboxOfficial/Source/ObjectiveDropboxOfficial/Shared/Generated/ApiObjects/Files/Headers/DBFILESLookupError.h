@@ -28,7 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESLookupErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESLookupError` union can exist.
 typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
-  /// (no description).
+  /// The given path does not satisfy the required path format. Please refer
+  /// to the Path formats documentation
+  /// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+  /// for more information.
   DBFILESLookupErrorMalformedPath,
 
   /// There is nothing at the given path.
@@ -46,6 +49,9 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
   /// example, sometimes there are legal restrictions due to copyright claims.
   DBFILESLookupErrorRestrictedContent,
 
+  /// This operation is not supported for this content type.
+  DBFILESLookupErrorUnsupportedContentType,
+
   /// (no description).
   DBFILESLookupErrorOther,
 
@@ -54,7 +60,10 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBFILESLookupErrorTag tag;
 
-/// (no description). @note Ensure the `isMalformedPath` method returns true
+/// The given path does not satisfy the required path format. Please refer to
+/// the Path formats documentation
+/// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+/// for more information. @note Ensure the `isMalformedPath` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy, nullable) NSString *malformedPath;
 
@@ -63,7 +72,16 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// Initializes union class with tag state of "malformed_path".
 ///
-/// @param malformedPath (no description).
+/// Description of the "malformed_path" tag state: The given path does not
+/// satisfy the required path format. Please refer to the Path formats
+/// documentation
+/// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+/// for more information.
+///
+/// @param malformedPath The given path does not satisfy the required path
+/// format. Please refer to the Path formats documentation
+/// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+/// for more information.
 ///
 /// @return An initialized instance.
 ///
@@ -109,6 +127,16 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithRestrictedContent;
+
+///
+/// Initializes union class with tag state of "unsupported_content_type".
+///
+/// Description of the "unsupported_content_type" tag state: This operation is
+/// not supported for this content type.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUnsupportedContentType;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -162,6 +190,15 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 - (BOOL)isRestrictedContent;
 
 ///
+/// Retrieves whether the union's current tag state has value
+/// "unsupported_content_type".
+///
+/// @return Whether the union's current tag state has value
+/// "unsupported_content_type".
+///
+- (BOOL)isUnsupportedContentType;
+
+///
 /// Retrieves whether the union's current tag state has value "other".
 ///
 /// @return Whether the union's current tag state has value "other".
@@ -192,7 +229,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESLookupError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESLookupError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESLookupError *)instance;
 
 ///
 /// Deserializes `DBFILESLookupError` instances.
@@ -202,7 +239,7 @@ typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
 ///
 /// @return An instantiation of the `DBFILESLookupError` object.
 ///
-+ (DBFILESLookupError *)deserialize:(NSDictionary *)dict;
++ (DBFILESLookupError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

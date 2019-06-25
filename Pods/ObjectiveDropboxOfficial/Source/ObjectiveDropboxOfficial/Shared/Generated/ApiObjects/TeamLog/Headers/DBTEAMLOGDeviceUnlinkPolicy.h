@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceUnlinkPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDeviceUnlinkPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDeviceUnlinkPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceUnlinkPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDeviceUnlinkPolicy` instances.
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceUnlinkPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGDeviceUnlinkPolicy` object.
 ///
-+ (DBTEAMLOGDeviceUnlinkPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDeviceUnlinkPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

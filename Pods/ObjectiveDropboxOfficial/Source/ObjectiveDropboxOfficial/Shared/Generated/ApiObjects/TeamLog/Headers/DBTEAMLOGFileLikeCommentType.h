@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGFileLikeCommentType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGFileLikeCommentType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFileLikeCommentType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGFileLikeCommentType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGFileLikeCommentType` object.
 ///
-+ (DBTEAMLOGFileLikeCommentType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGFileLikeCommentType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

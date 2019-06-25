@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersUpdateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMExcludedUsersUpdateError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMExcludedUsersUpdateError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMExcludedUsersUpdateError *)instance;
 
 ///
 /// Deserializes `DBTEAMExcludedUsersUpdateError` instances.
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersUpdateErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMExcludedUsersUpdateError` object.
 ///
-+ (DBTEAMExcludedUsersUpdateError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMExcludedUsersUpdateError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

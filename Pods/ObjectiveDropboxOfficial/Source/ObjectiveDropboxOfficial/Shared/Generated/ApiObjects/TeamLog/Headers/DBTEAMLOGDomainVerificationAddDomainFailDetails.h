@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGDomainVerificationAddDomainFailDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGDomainVerificationAddDomainFailDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDomainVerificationAddDomainFailDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGDomainVerificationAddDomainFailDetails` instances.
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGDomainVerificationAddDomainFailDetails` object.
 ///
-+ (DBTEAMLOGDomainVerificationAddDomainFailDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGDomainVerificationAddDomainFailDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

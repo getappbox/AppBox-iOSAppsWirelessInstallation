@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILESDeletedMetadata` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILESDeletedMetadata *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESDeletedMetadata *)instance;
 
 ///
 /// Deserializes `DBFILESDeletedMetadata` instances.
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILESDeletedMetadata` object.
 ///
-+ (DBFILESDeletedMetadata *)deserialize:(NSDictionary *)dict;
++ (DBFILESDeletedMetadata *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

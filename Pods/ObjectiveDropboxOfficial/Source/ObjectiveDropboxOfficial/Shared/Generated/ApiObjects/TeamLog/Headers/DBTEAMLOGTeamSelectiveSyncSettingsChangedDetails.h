@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails` instances.
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails` object.
 ///
-+ (DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

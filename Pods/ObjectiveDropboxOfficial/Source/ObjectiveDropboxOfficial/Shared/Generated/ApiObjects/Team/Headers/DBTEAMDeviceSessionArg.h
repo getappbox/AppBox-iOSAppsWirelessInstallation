@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMDeviceSessionArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMDeviceSessionArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMDeviceSessionArg *)instance;
 
 ///
 /// Deserializes `DBTEAMDeviceSessionArg` instances.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMDeviceSessionArg` object.
 ///
-+ (DBTEAMDeviceSessionArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMDeviceSessionArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

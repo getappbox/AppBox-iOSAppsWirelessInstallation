@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443198DF22C1E3DE00967EE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 443198DE22C1E3DE00967EE3 /* GoogleService-Info.plist */; };
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		DB1A06532160CE27008D33FD /* TeamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06512160CE27008D33FD /* TeamsViewController.m */; };
 		DB1A06542160CE27008D33FD /* TeamsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB1A06522160CE27008D33FD /* TeamsViewController.xib */; };
@@ -222,6 +223,7 @@
 
 /* Begin PBXFileReference section */
 		179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.release.xcconfig"; sourceTree = "<group>"; };
+		443198DE22C1E3DE00967EE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
 		DB1A06502160CE27008D33FD /* TeamsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamsViewController.h; sourceTree = "<group>"; };
@@ -872,6 +874,7 @@
 		E16437D51D743A4E00CE8B7E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				443198DE22C1E3DE00967EE3 /* GoogleService-Info.plist */,
 				E16437D61D743A4E00CE8B7E /* main.m */,
 				E16437E31D743A4E00CE8B7E /* Info.plist */,
 				E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */,
@@ -1329,8 +1332,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E16437E61D743A4E00CE8B7E /* Build configuration list for PBXNativeTarget "AppBox" */;
 			buildPhases = (
-				E19973332091D2640035CCE9 /* Embed Frameworks */,
 				C3566842BD53E8411EB6A412 /* [CP] Check Pods Manifest.lock */,
+				E19973332091D2640035CCE9 /* Embed Frameworks */,
 				E16437CB1D743A4E00CE8B7E /* Sources */,
 				E16437CC1D743A4E00CE8B7E /* Frameworks */,
 				E16437CD1D743A4E00CE8B7E /* Resources */,
@@ -1377,6 +1380,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1406,6 +1410,7 @@
 				E1D12EEA1EC2F5230065E59A /* EmailPreferencesViewController.xib in Resources */,
 				E14237C22010A6F600F83501 /* CreateIPAScript.sh in Resources */,
 				DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */,
+				443198DF22C1E3DE00967EE3 /* GoogleService-Info.plist in Resources */,
 				E10B82221DF0498800BBE0CD /* TeamIDScript.sh in Resources */,
 				E16D72E51E8912790031FB7C /* XCodePath.sh in Resources */,
 				DB45B45C1F6EC5F10041EB42 /* SwitchXcode.sh in Resources */,
@@ -1433,7 +1438,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AppBox/Pods-AppBox-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources.sh",
 				"${PODS_ROOT}/Google-Analytics-for-OS-X/GoogleAnalyticsTracker/AnalyticsWindow.xib",
 				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
 			);
@@ -1444,7 +1449,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AppBox/Pods-AppBox-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppBox/Pods-AppBox-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C3566842BD53E8411EB6A412 /* [CP] Check Pods Manifest.lock */ = {
@@ -1675,6 +1680,21 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CMDQueryStringSerialization\"",
+					"\"${PODS_ROOT}/Headers/Public/Google-Analytics-for-OS-X\"",
+					"\"${PODS_ROOT}/Headers/Public/ISO8601\"",
+					"\"${PODS_ROOT}/Headers/Public/ObjectiveDropboxOfficial\"",
+					"\"${PODS_ROOT}/Headers/Public/SAMKeychain\"",
+					"\"${PODS_ROOT}/Headers/Public/SSZipArchive\"",
+					"\"${PODS_ROOT}/Headers/Public/STPrivilegedTask\"",
+					"\"${PODS_ROOT}/Headers/Public/ZXingObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+				);
 				INFOPLIST_FILE = AppBox/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1703,6 +1723,21 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppBox/AppBoxPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CMDQueryStringSerialization\"",
+					"\"${PODS_ROOT}/Headers/Public/Google-Analytics-for-OS-X\"",
+					"\"${PODS_ROOT}/Headers/Public/ISO8601\"",
+					"\"${PODS_ROOT}/Headers/Public/ObjectiveDropboxOfficial\"",
+					"\"${PODS_ROOT}/Headers/Public/SAMKeychain\"",
+					"\"${PODS_ROOT}/Headers/Public/SSZipArchive\"",
+					"\"${PODS_ROOT}/Headers/Public/STPrivilegedTask\"",
+					"\"${PODS_ROOT}/Headers/Public/ZXingObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+				);
 				INFOPLIST_FILE = AppBox/Info.plist;
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGPathLinkMetadata` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGPathLinkMetadata *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGPathLinkMetadata *)instance;
 
 ///
 /// Deserializes `DBSHARINGPathLinkMetadata` instances.
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGPathLinkMetadata` object.
 ///
-+ (DBSHARINGPathLinkMetadata *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGPathLinkMetadata *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

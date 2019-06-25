@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGExtendedVersionHistoryChangePolicyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGExtendedVersionHistoryChangePolicyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExtendedVersionHistoryChangePolicyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGExtendedVersionHistoryChangePolicyType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGExtendedVersionHistoryChangePolicyType` object.
 ///
-+ (DBTEAMLOGExtendedVersionHistoryChangePolicyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGExtendedVersionHistoryChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

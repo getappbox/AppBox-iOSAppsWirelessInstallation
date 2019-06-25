@@ -14,4 +14,5 @@ target :AppBox do
     pod 'SAMKeychain'
     pod 'Google-Analytics-for-OS-X'
     pod 'STPrivilegedTask'
+    pod 'FirebaseCore'
 end

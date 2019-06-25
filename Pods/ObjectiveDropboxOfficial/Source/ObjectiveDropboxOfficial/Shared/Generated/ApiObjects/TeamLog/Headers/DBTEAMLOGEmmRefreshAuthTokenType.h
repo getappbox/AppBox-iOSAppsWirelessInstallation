@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGEmmRefreshAuthTokenType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGEmmRefreshAuthTokenType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEmmRefreshAuthTokenType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGEmmRefreshAuthTokenType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGEmmRefreshAuthTokenType` object.
 ///
-+ (DBTEAMLOGEmmRefreshAuthTokenType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGEmmRefreshAuthTokenType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

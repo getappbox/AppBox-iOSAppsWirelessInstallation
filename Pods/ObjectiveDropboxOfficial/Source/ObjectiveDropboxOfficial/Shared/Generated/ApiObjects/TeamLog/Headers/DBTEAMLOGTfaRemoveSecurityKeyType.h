@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTfaRemoveSecurityKeyType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTfaRemoveSecurityKeyType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaRemoveSecurityKeyType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTfaRemoveSecurityKeyType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTfaRemoveSecurityKeyType` object.
 ///
-+ (DBTEAMLOGTfaRemoveSecurityKeyType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTfaRemoveSecurityKeyType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGTeamProfileRemoveLogoType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGTeamProfileRemoveLogoType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileRemoveLogoType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGTeamProfileRemoveLogoType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGTeamProfileRemoveLogoType` object.
 ///
-+ (DBTEAMLOGTeamProfileRemoveLogoType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGTeamProfileRemoveLogoType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

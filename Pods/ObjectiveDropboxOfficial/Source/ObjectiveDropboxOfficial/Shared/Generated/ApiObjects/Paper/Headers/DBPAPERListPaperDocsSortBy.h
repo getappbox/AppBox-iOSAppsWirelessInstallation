@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERListPaperDocsSortBy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERListPaperDocsSortBy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERListPaperDocsSortBy *)instance;
 
 ///
 /// Deserializes `DBPAPERListPaperDocsSortBy` instances.
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
 ///
 /// @return An instantiation of the `DBPAPERListPaperDocsSortBy` object.
 ///
-+ (DBPAPERListPaperDocsSortBy *)deserialize:(NSDictionary *)dict;
++ (DBPAPERListPaperDocsSortBy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

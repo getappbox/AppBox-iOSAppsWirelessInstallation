@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESAddTemplateArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESAddTemplateArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESAddTemplateArg *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESAddTemplateArg` instances.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBFILEPROPERTIESAddTemplateArg` object.
 ///
-+ (DBFILEPROPERTIESAddTemplateArg *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESAddTemplateArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

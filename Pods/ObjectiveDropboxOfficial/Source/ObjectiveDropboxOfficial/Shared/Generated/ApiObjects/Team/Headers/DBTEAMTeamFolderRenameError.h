@@ -230,7 +230,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamFolderRenameError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamFolderRenameError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamFolderRenameError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamFolderRenameError` instances.
@@ -240,7 +240,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
 ///
 /// @return An instantiation of the `DBTEAMTeamFolderRenameError` object.
 ///
-+ (DBTEAMTeamFolderRenameError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamFolderRenameError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

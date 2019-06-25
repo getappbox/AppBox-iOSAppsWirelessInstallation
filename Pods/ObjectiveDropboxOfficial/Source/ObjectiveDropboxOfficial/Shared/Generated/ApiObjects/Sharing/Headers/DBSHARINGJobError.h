@@ -189,7 +189,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGJobError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGJobError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGJobError *)instance;
 
 ///
 /// Deserializes `DBSHARINGJobError` instances.
@@ -199,7 +199,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGJobError` object.
 ///
-+ (DBSHARINGJobError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGJobError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSUpdateFileRequestDeadlineTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEREQUESTSUpdateFileRequestDeadline` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEREQUESTSUpdateFileRequestDeadline *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEREQUESTSUpdateFileRequestDeadline *)instance;
 
 ///
 /// Deserializes `DBFILEREQUESTSUpdateFileRequestDeadline` instances.
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSUpdateFileRequestDeadlineTag) {
 /// @return An instantiation of the `DBFILEREQUESTSUpdateFileRequestDeadline`
 /// object.
 ///
-+ (DBFILEREQUESTSUpdateFileRequestDeadline *)deserialize:(NSDictionary *)dict;
++ (DBFILEREQUESTSUpdateFileRequestDeadline *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

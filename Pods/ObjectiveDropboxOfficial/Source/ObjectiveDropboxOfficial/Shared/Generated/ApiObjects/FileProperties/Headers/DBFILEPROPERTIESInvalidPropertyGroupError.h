@@ -232,7 +232,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESInvalidPropertyGroupErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBFILEPROPERTIESInvalidPropertyGroupError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBFILEPROPERTIESInvalidPropertyGroupError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILEPROPERTIESInvalidPropertyGroupError *)instance;
 
 ///
 /// Deserializes `DBFILEPROPERTIESInvalidPropertyGroupError` instances.
@@ -243,7 +243,7 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESInvalidPropertyGroupErrorTag) {
 /// @return An instantiation of the `DBFILEPROPERTIESInvalidPropertyGroupError`
 /// object.
 ///
-+ (DBFILEPROPERTIESInvalidPropertyGroupError *)deserialize:(NSDictionary *)dict;
++ (DBFILEPROPERTIESInvalidPropertyGroupError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

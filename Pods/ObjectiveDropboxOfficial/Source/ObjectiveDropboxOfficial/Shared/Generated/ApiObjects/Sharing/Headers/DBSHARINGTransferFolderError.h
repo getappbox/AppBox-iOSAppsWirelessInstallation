@@ -236,7 +236,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGTransferFolderError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGTransferFolderError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGTransferFolderError *)instance;
 
 ///
 /// Deserializes `DBSHARINGTransferFolderError` instances.
@@ -246,7 +246,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGTransferFolderError` object.
 ///
-+ (DBSHARINGTransferFolderError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGTransferFolderError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

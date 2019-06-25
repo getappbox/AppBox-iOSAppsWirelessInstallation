@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMUserCustomQuotaArg` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMUserCustomQuotaArg *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMUserCustomQuotaArg *)instance;
 
 ///
 /// Deserializes `DBTEAMUserCustomQuotaArg` instances.
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMUserCustomQuotaArg` object.
 ///
-+ (DBTEAMUserCustomQuotaArg *)deserialize:(NSDictionary *)dict;
++ (DBTEAMUserCustomQuotaArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

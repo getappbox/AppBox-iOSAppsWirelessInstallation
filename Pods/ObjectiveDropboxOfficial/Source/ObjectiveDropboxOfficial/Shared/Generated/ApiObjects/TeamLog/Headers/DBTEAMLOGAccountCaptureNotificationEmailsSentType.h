@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGAccountCaptureNotificationEmailsSentType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGAccountCaptureNotificationEmailsSentType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCaptureNotificationEmailsSentType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGAccountCaptureNotificationEmailsSentType` instances.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the
 /// `DBTEAMLOGAccountCaptureNotificationEmailsSentType` object.
 ///
-+ (DBTEAMLOGAccountCaptureNotificationEmailsSentType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGAccountCaptureNotificationEmailsSentType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

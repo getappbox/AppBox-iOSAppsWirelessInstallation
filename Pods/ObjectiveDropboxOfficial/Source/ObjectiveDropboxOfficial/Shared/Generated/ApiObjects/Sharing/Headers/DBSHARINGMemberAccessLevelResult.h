@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGMemberAccessLevelResult` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGMemberAccessLevelResult *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGMemberAccessLevelResult *)instance;
 
 ///
 /// Deserializes `DBSHARINGMemberAccessLevelResult` instances.
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBSHARINGMemberAccessLevelResult` object.
 ///
-+ (DBSHARINGMemberAccessLevelResult *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGMemberAccessLevelResult *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

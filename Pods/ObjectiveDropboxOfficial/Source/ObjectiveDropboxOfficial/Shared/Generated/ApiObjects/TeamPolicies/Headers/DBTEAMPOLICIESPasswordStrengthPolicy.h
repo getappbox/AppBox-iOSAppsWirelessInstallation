@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPasswordStrengthPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMPOLICIESPasswordStrengthPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMPOLICIESPasswordStrengthPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESPasswordStrengthPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMPOLICIESPasswordStrengthPolicy` instances.
@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPasswordStrengthPolicyTag) {
 /// @return An instantiation of the `DBTEAMPOLICIESPasswordStrengthPolicy`
 /// object.
 ///
-+ (DBTEAMPOLICIESPasswordStrengthPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMPOLICIESPasswordStrengthPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

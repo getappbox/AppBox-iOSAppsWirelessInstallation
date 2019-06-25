@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGNetworkControlPolicyTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGNetworkControlPolicy` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGNetworkControlPolicy *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGNetworkControlPolicy *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGNetworkControlPolicy` instances.
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGNetworkControlPolicyTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGNetworkControlPolicy` object.
 ///
-+ (DBTEAMLOGNetworkControlPolicy *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGNetworkControlPolicy *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

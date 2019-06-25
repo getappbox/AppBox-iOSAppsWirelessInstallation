@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGGroupRemoveExternalIdType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGGroupRemoveExternalIdType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGroupRemoveExternalIdType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGGroupRemoveExternalIdType` instances.
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @return An instantiation of the `DBTEAMLOGGroupRemoveExternalIdType` object.
 ///
-+ (DBTEAMLOGGroupRemoveExternalIdType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGGroupRemoveExternalIdType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

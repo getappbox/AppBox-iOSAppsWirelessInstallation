@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSpaceCapsTypeTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSpaceCapsType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSpaceCapsType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSpaceCapsType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSpaceCapsType` instances.
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGSpaceCapsTypeTag) {
 ///
 /// @return An instantiation of the `DBTEAMLOGSpaceCapsType` object.
 ///
-+ (DBTEAMLOGSpaceCapsType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSpaceCapsType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

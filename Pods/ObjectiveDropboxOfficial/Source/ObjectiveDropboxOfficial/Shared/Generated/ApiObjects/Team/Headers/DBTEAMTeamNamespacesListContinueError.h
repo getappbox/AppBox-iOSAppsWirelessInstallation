@@ -29,11 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// possible tag states with which the `DBTEAMTeamNamespacesListContinueError`
 /// union can exist.
 typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
-  /// The cursor is invalid.
-  DBTEAMTeamNamespacesListContinueErrorInvalidCursor,
+  /// Argument passed in is invalid.
+  DBTEAMTeamNamespacesListContinueErrorInvalidArg,
 
   /// (no description).
   DBTEAMTeamNamespacesListContinueErrorOther,
+
+  /// The cursor is invalid.
+  DBTEAMTeamNamespacesListContinueErrorInvalidCursor,
 
 };
 
@@ -41,6 +44,22 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
 @property (nonatomic, readonly) DBTEAMTeamNamespacesListContinueErrorTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "invalid_arg".
+///
+/// Description of the "invalid_arg" tag state: Argument passed in is invalid.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInvalidArg;
+
+///
+/// Initializes union class with tag state of "other".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOther;
 
 ///
 /// Initializes union class with tag state of "invalid_cursor".
@@ -51,23 +70,16 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
 ///
 - (instancetype)initWithInvalidCursor;
 
-///
-/// Initializes union class with tag state of "other".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithOther;
-
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "invalid_cursor".
+/// Retrieves whether the union's current tag state has value "invalid_arg".
 ///
-/// @return Whether the union's current tag state has value "invalid_cursor".
+/// @return Whether the union's current tag state has value "invalid_arg".
 ///
-- (BOOL)isInvalidCursor;
+- (BOOL)isInvalidArg;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".
@@ -75,6 +87,13 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
 /// @return Whether the union's current tag state has value "other".
 ///
 - (BOOL)isOther;
+
+///
+/// Retrieves whether the union's current tag state has value "invalid_cursor".
+///
+/// @return Whether the union's current tag state has value "invalid_cursor".
+///
+- (BOOL)isInvalidCursor;
 
 ///
 /// Retrieves string value of union's current tag state.
@@ -102,7 +121,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMTeamNamespacesListContinueError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMTeamNamespacesListContinueError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMTeamNamespacesListContinueError *)instance;
 
 ///
 /// Deserializes `DBTEAMTeamNamespacesListContinueError` instances.
@@ -113,7 +132,7 @@ typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
 /// @return An instantiation of the `DBTEAMTeamNamespacesListContinueError`
 /// object.
 ///
-+ (DBTEAMTeamNamespacesListContinueError *)deserialize:(NSDictionary *)dict;
++ (DBTEAMTeamNamespacesListContinueError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

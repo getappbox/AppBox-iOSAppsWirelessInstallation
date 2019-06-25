@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A json-compatible dictionary representation of the
 /// `DBTEAMLOGSharedFolderDeclineInvitationType` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBTEAMLOGSharedFolderDeclineInvitationType *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedFolderDeclineInvitationType *)instance;
 
 ///
 /// Deserializes `DBTEAMLOGSharedFolderDeclineInvitationType` instances.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An instantiation of the `DBTEAMLOGSharedFolderDeclineInvitationType`
 /// object.
 ///
-+ (DBTEAMLOGSharedFolderDeclineInvitationType *)deserialize:(NSDictionary *)dict;
++ (DBTEAMLOGSharedFolderDeclineInvitationType *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

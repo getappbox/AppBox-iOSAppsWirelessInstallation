@@ -191,7 +191,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocCreateErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBPAPERPaperDocCreateError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBPAPERPaperDocCreateError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperDocCreateError *)instance;
 
 ///
 /// Deserializes `DBPAPERPaperDocCreateError` instances.
@@ -201,7 +201,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocCreateErrorTag) {
 ///
 /// @return An instantiation of the `DBPAPERPaperDocCreateError` object.
 ///
-+ (DBPAPERPaperDocCreateError *)deserialize:(NSDictionary *)dict;
++ (DBPAPERPaperDocCreateError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

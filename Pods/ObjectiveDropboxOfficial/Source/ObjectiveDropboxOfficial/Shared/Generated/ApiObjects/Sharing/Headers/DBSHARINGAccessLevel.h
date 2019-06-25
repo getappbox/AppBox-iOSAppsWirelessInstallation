@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAccessLevelTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAccessLevel` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGAccessLevel *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGAccessLevel *)instance;
 
 ///
 /// Deserializes `DBSHARINGAccessLevel` instances.
@@ -177,7 +177,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAccessLevelTag) {
 ///
 /// @return An instantiation of the `DBSHARINGAccessLevel` object.
 ///
-+ (DBSHARINGAccessLevel *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGAccessLevel *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

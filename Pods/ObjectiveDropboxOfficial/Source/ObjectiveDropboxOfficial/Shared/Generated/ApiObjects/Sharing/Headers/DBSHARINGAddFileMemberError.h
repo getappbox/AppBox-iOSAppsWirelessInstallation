@@ -176,7 +176,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFileMemberErrorTag) {
 /// @return A json-compatible dictionary representation of the
 /// `DBSHARINGAddFileMemberError` API object.
 ///
-+ (nullable NSDictionary *)serialize:(DBSHARINGAddFileMemberError *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBSHARINGAddFileMemberError *)instance;
 
 ///
 /// Deserializes `DBSHARINGAddFileMemberError` instances.
@@ -186,7 +186,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGAddFileMemberErrorTag) {
 ///
 /// @return An instantiation of the `DBSHARINGAddFileMemberError` object.
 ///
-+ (DBSHARINGAddFileMemberError *)deserialize:(NSDictionary *)dict;
++ (DBSHARINGAddFileMemberError *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 
