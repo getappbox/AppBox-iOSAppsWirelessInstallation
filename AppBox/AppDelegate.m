@@ -26,9 +26,10 @@
     [DefaultSettings setFirstTimeSettings];
     [DefaultSettings setEveryStartupSettings];
     
-    //Init Crashlytics
+    //Init Crashlytics and Firebase
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
     [Fabric with:@[[Crashlytics class], [Answers class]]];
+    [FIRApp configure];
     
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
