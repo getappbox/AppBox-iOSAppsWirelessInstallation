@@ -83,6 +83,7 @@ static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 #define abTeamIdLength 10
 #define abBytesToMB (1024 * 1024)
 #define abDropboxOutOfSpaceWarningSize 150
+#define abOnErrorMaxRetryCount 3
 #define abEndOfSessionLog @"abEndOfSessionLog"
 
 
