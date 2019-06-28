@@ -1029,7 +1029,12 @@
             });
         }];
     }else{
-        [self performSegueWithIdentifier:@"ShowLink" sender:self];
+        if (ciRepoProject == nil){
+            [self performSegueWithIdentifier:@"ShowLink" sender:self];
+        }else{
+            [self viewStateForProgressFinish:YES];
+            exit(abExitCodeForSuccess);
+        }
     }
 }
 
