@@ -1,3 +1,14 @@
+# Installation
+
+## Using curl
+You can install AppBox by running following command in your terminal -
+```bash
+curl -s https://getappbox.com/install.sh | bash
+```
+
+## Manual
+If you face any issue using above command then you can manually install AppBox by downloading it from [here](http://tryappbox.com/download). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
+
 # How to use AppBox 
 | |
 |-|
