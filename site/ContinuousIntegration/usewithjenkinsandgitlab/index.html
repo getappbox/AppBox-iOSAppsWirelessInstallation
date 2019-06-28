@@ -1,0 +1,967 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="AppBox Documentation">
+      
+      
+        <link rel="canonical" href="https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>How to use AppBox with Jenkins and GitLab for CI and CD? - AppBox Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-85215717-4", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#how-to-use-appbox-with-jenkins-and-gitlab-for-ci-and-cd" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.getappbox.com" title="AppBox Docs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              AppBox Docs
+            </span>
+            <span class="md-header-nav__topic">
+              
+                How to use AppBox with Jenkins and GitLab for CI and CD?
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    AppBox
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.getappbox.com" title="AppBox Docs" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    AppBox Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    AppBox
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../GettingStarted/useappbox/" title="How to use AppBox?" class="md-nav__link">
+      How to use AppBox?
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Continuous Integration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Continuous Integration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        How to use AppBox with Jenkins and GitLab for CI and CD?
+      </label>
+    
+    <a href="./" title="How to use AppBox with Jenkins and GitLab for CI and CD?" class="md-nav__link md-nav__link--active">
+      How to use AppBox with Jenkins and GitLab for CI and CD?
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup-xcode-project-for-appbox" title="1. Setup Xcode Project for AppBox" class="md-nav__link">
+    1. Setup Xcode Project for AppBox
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-appbox-project-setting-plist" title="1.1 AppBox Project setting plist" class="md-nav__link">
+    1.1 AppBox Project setting plist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-private-keys-and-provisioning-profiles" title="1.2 Private keys and Provisioning Profiles" class="md-nav__link">
+    1.2 Private keys and Provisioning Profiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-project-directory-structure" title="1.3 Project Directory Structure" class="md-nav__link">
+    1.3 Project Directory Structure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setup-jenkins-project-and-configurations" title="2. Setup Jenkins Project and Configurations" class="md-nav__link">
+    2. Setup Jenkins Project and Configurations
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-create-project" title="2.1 Create Project" class="md-nav__link">
+    2.1 Create Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-general-configurations" title="2.2 General Configurations" class="md-nav__link">
+    2.2 General Configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-source-code-management" title="2.3 Source Code Management" class="md-nav__link">
+    2.3 Source Code Management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-build-triggers" title="2.4 Build Triggers" class="md-nav__link">
+    2.4 Build Triggers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-connect-gitlab-and-jenkins" title="2.5 Connect GitLab And Jenkins" class="md-nav__link">
+    2.5 Connect GitLab And Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-build" title="2.6 Build" class="md-nav__link">
+    2.6 Build
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-post-build-actions" title="2.7 Post-build Actions" class="md-nav__link">
+    2.7 Post-build Actions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Features
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Features
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Features/keepsamelink/" title="Keep Same Link" class="md-nav__link">
+      Keep Same Link
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Features/uploadchunksize/" title="Upload Chunk Size" class="md-nav__link">
+      Upload Chunk Size
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Features/downloadipa/" title="Download IPA file from AppBox Installation Webpage" class="md-nav__link">
+      Download IPA file from AppBox Installation Webpage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Features/moredetails/" title="Get Application Details on AppBox Installation Web Page" class="md-nav__link">
+      Get Application Details on AppBox Installation Web Page
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      FAQs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        FAQs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQs/deleteapplication/" title="How to delete an uploaded app or disable a link on AppBox?" class="md-nav__link">
+      How to delete an uploaded app or disable a link on AppBox?
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQs/installationlimit/" title="Is there any installation limit per app on AppBox?" class="md-nav__link">
+      Is there any installation limit per app on AppBox?
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQs/installationlinkexpire/" title="How long will Application Installation links be available on AppBox?" class="md-nav__link">
+      How long will Application Installation links be available on AppBox?
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQs/maximumuploadsize/" title="What is the Maximum Upload Application Size?" class="md-nav__link">
+      What is the Maximum Upload Application Size?
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQs/sharexcodeprojectschemes/" title="How to share Xcode Project Schemes?" class="md-nav__link">
+      How to share Xcode Project Schemes?
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup-xcode-project-for-appbox" title="1. Setup Xcode Project for AppBox" class="md-nav__link">
+    1. Setup Xcode Project for AppBox
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-appbox-project-setting-plist" title="1.1 AppBox Project setting plist" class="md-nav__link">
+    1.1 AppBox Project setting plist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-private-keys-and-provisioning-profiles" title="1.2 Private keys and Provisioning Profiles" class="md-nav__link">
+    1.2 Private keys and Provisioning Profiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-project-directory-structure" title="1.3 Project Directory Structure" class="md-nav__link">
+    1.3 Project Directory Structure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setup-jenkins-project-and-configurations" title="2. Setup Jenkins Project and Configurations" class="md-nav__link">
+    2. Setup Jenkins Project and Configurations
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-create-project" title="2.1 Create Project" class="md-nav__link">
+    2.1 Create Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-general-configurations" title="2.2 General Configurations" class="md-nav__link">
+    2.2 General Configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-source-code-management" title="2.3 Source Code Management" class="md-nav__link">
+    2.3 Source Code Management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-build-triggers" title="2.4 Build Triggers" class="md-nav__link">
+    2.4 Build Triggers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-connect-gitlab-and-jenkins" title="2.5 Connect GitLab And Jenkins" class="md-nav__link">
+    2.5 Connect GitLab And Jenkins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-build" title="2.6 Build" class="md-nav__link">
+    2.6 Build
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-post-build-actions" title="2.7 Post-build Actions" class="md-nav__link">
+    2.7 Post-build Actions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/edit/master/docs/ContinuousIntegration/usewithjenkinsandgitlab.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="how-to-use-appbox-with-jenkins-and-gitlab-for-ci-and-cd">How to use AppBox with Jenkins and GitLab for CI and CD?</h1>
+<p>Before beginning to this article make sure <a href="https://jenkins-ci.org/">Jenkins</a> Server and <a href="https://getappbox.com">AppBox</a> is already setup and running. This article covers how to use Jenkins and AppBox for Build Automation and Deployment of Development, Ad-Hoc and In-house (Enterprise) iOS applications directly to the devices from your Dropbox account.</p>
+<h2 id="1-setup-xcode-project-for-appbox">1. Setup Xcode Project for AppBox</h2>
+<h4 id="11-appbox-project-setting-plist">1.1 AppBox Project setting plist</h4>
+<p>Add a <code>appbox.plist</code> file in your project main directory. This file will contains the build information of your project. Here the sample of <code>appbox.plist</code></p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;project&lt;/key&gt;
+    &lt;string&gt;TestJenkins.xcodeproj&lt;/string&gt;
+    &lt;key&gt;scheme&lt;/key&gt;
+    &lt;string&gt;TestJenkins&lt;/string&gt;
+    &lt;key&gt;buildtype&lt;/key&gt;
+    &lt;string&gt;development&lt;/string&gt;
+    &lt;key&gt;teamid&lt;/key&gt;
+    &lt;string&gt;4F7SW76LL6&lt;/string&gt;
+    &lt;key&gt;keepsamelink&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;dropboxfoldername&lt;/key&gt;
+    &lt;string&gt;&lt;/string&gt;
+    &lt;key&gt;email&lt;/key&gt;
+    &lt;string&gt;user@example.com&lt;/string&gt;
+    &lt;key&gt;personalmessage&lt;/key&gt;
+    &lt;string&gt;Test Build&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+
+<p><strong><code>appBox.plist</code> key description</strong> -</p>
+<ul>
+<li><strong>project</strong> (string, required) — Name of the Xcode project/workspace file. Project must be manage signing automatically.</li>
+<li><strong>scheme</strong> (string, required) — Name of the scheme to build. Project scheme must be <a href="https://docs.getappbox.com/FAQs/sharexcodeprojectschemes/">shared</a>.</li>
+<li><strong>buildtype</strong> (string, required) — "ad-hoc", "enterprise", "app-store" or "development"</li>
+<li><strong>teamid</strong> (string, required) — Development TeamId.</li>
+<li><strong>email</strong> (string, required) — mail build share url</li>
+<li><strong>personalmessage</strong> (string, optional) — Attach personal message in email</li>
+<li><strong>keepsamelink</strong> (boolean, optional) — true/false (<a href="https://docs.getappbox.com/Features/keepsamelink/">read more</a>)</li>
+<li><strong>dropboxfoldername</strong> (string, optional) — Custom Dropbox Folder Name (By default will be bundle identifier).</li>
+<li><strong>itcemail</strong> (string, optional) - iTunesConnect/AppStore Connect email (if buildtype is app-store).</li>
+</ul>
+<h4 id="12-private-keys-and-provisioning-profiles">1.2 Private keys and Provisioning Profiles</h4>
+<p>All your private keys and provisioning profile should be in a directory called <code>cert</code> inside project main directory. Directory <code>cert</code> will include certificates and provisioning profile and plist with name <code>appbox.plist</code> <strong>Note</strong> — All private key must have some valid password.</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;name&lt;/key&gt;
+        &lt;string&gt;Certificates.p12&lt;/string&gt;
+        &lt;key&gt;password&lt;/key&gt;
+        &lt;string&gt;password&lt;/string&gt;
+    &lt;/dict&gt;
+    &lt;dict&gt;
+        &lt;key&gt;name&lt;/key&gt;
+        &lt;string&gt;Test_Jenkins_Developer.mobileprovision&lt;/string&gt;
+    &lt;/dict&gt;
+    &lt;dict&gt;
+        &lt;key&gt;name&lt;/key&gt;
+        &lt;string&gt;Test_Jenkins_InHouse.mobileprovision&lt;/string&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+&lt;/plist&gt;
+</code></pre>
+
+<p>You can download demo <code>appbox.plist</code> and <code>cert/appbox.plist</code> from <a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/blob/Screenshot/appboxci.zip">here</a>.</p>
+<h4 id="13-project-directory-structure">1.3 Project Directory Structure</h4>
+<p>After full setup, your project directory will be look like this -</p>
+<pre><code class="txt">ProjectName (This is  your project main directory)
+|- ProjectName
+|- Project.xcodeproj
+|- Project.xcworkspace
+|- appbox.plist (Appbox project setting file)
+|- cert (Appbox project certificate directory)
+|   |- appbox.plist (Appbox certificate information file)
+|   |- Cetificates1.p12
+|   |- Cetificates2.p12
+|   |- Project-adhoc.mobileprovision
+|   |- Project-enterprice.mobileprovision
+|   |- Project-appstore.mobileprovision
+|- ProjectTests (If any)
+</code></pre>
+
+<h2 id="2-setup-jenkins-project-and-configurations">2. Setup Jenkins Project and Configurations</h2>
+<h4 id="21-create-project">2.1 Create Project</h4>
+<p>Create a new Jenkins project using freestyle option.
+<strong>Jenkins → New Item → Enter project name → Freestyle project → Click OK.</strong> <br />
+<img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/1.%20Jenkins%20Create%20Project.png?raw=true" /></p>
+<h4 id="22-general-configurations">2.2 General Configurations</h4>
+<p>In general configurations, you can <strong>Enable project-based security</strong>. In which you can manage the different project member with their access level.
+<img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/2.%20General%20Configurations.png?raw=true" /></p>
+<h4 id="23-source-code-management">2.3 Source Code Management</h4>
+<p>Check Git in the section Source Code Management and enter the url of the repository and select the right credentials.
+<img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/3.%20Source%20Code%20Management.png?raw=true" /></p>
+<h4 id="24-build-triggers">2.4 Build Triggers</h4>
+<p>In <strong>Build triggers</strong> section check the option to <strong>Build when a change is pushed to GitLab</strong>. This will trigger the build when a change is pushed to Gitlab. There’s a small bug with the plugin key generation so <strong>Save or Apply</strong> the changes to the job first, then under Advanced <strong>generate a key</strong>. Gitlab requires this key. Here you can also apply the filter by branches name.
+<img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/4.%20Build%20Triggers.png?raw=true" /></p>
+<h4 id="25-connect-gitlab-and-jenkins">2.5 Connect GitLab And Jenkins</h4>
+<p>In this setup you’ll setup your GitLab repository for Jenkins, so that Jenkins is automatically notified when there’s a new commit to the GitLab repository and can commit successful builds back to it. To do this:</p>
+<p><strong>2.5.1</strong> Open GitLab and browse to the GitLab page for the project.
+<strong>2.5.2</strong> Go to the Project Integration page via Settings → Integrations
+<strong>2.5.3</strong> Configure a new Jenkins webhook as follows:
+ — In the <strong>URL</strong> field, enter the Jenkins <strong>Gitlab CI service URL</strong> from Step 2.4 .
+ — In the <strong>Secret Token</strong> field, enter the <strong>Secret token</strong> form Setup 2.4.
+ — In the list of triggers, select the events that should trigger a new Jenkins build, such as new <strong>Push Events</strong> or <strong>Accept Merge Request Events</strong>. 
+ — Click Add Webhook.</p>
+<p><img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/5.%20Connect%20GitLab%20And%20Jenkins.png?raw=true" /></p>
+<h4 id="26-build">2.6 Build</h4>
+<p>In Build step, we need to execute AppBox with current workspace. So, add the following command</p>
+<pre><code class="bash">/Applications/AppBox.app/Contents/MacOS/AppBox build=$WORKSPACE
+</code></pre>
+
+<p><img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/6.%20Build%20Script.png?raw=true" /></p>
+<p>Make sure AppBox must be available in your Applications directory.</p>
+<blockquote>
+<p><strong>build</strong> — Always will be $WORKSPACE (required)
+<strong>scheme</strong> — here you can override the scheme name from appbox.plist in step 1.1 (optional)
+<strong>buildtype</strong> — here you can override the buildtype from appbox.plist in step 1.1 (optional)</p>
+</blockquote>
+<p><strong>Example</strong></p>
+<pre><code class="bash">/Applications/AppBox.app/Contents/MacOS/AppBox build=$WORKSPACE scheme=ProjectLIVE buildtype=app-store
+</code></pre>
+
+<h4 id="27-post-build-actions">2.7 Post-build Actions</h4>
+<p>Finally, in the <strong>Post-build Actions</strong> step we need to <strong>Publish build status to GitLab commit</strong> and <strong>Add note with build status on Gitlab merge request.</strong> This enables the feedback and gives us pretty indicators in GitLab commit and merge request.</p>
+<p><img alt="" src="https://github.com/getappbox/Home/blob/master/Images/CICD/7.%20Post-build%20Actions.png?raw=true" /></p>
+<p>Your Continuous Integration (CI) and Continuous Delivery (CD) with Jenkins and AppBox is now ready for use!</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../GettingStarted/useappbox/" title="How to use AppBox?" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                How to use AppBox?
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../Features/keepsamelink/" title="Keep Same Link" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Keep Same Link
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright © AppBox
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/tryappbox" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
