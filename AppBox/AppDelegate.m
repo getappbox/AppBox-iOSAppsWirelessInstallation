@@ -26,10 +26,10 @@
     [DefaultSettings setFirstTimeSettings];
     [DefaultSettings setEveryStartupSettings];
     
-    //Init Crashlytics and Firebase
-    [FIRApp configure];
+    //Init AppCenter
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
-    [Fabric with:@[[Crashlytics class], [Answers class]]];
+    NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
+    [MSAppCenter start:appCenter withServices:@[[MSAnalytics class],[MSCrashes class]]];
     
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
@@ -131,15 +131,15 @@
     if (authResult != nil) {
         if ([authResult isSuccess]) {
             [[AppDelegate appDelegate] addSessionLog:@"Success! User is logged into Dropbox."];
-            [Answers logLoginWithMethod:@"Dropbox" success:@YES customAttributes:@{}];
+            [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
             [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
         } else if ([authResult isCancel]) {
             [[AppDelegate appDelegate] addSessionLog:@"Authorization flow was manually canceled by user."];
-            [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : @"Canceled by User"}];
+            [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
             [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
         } else if ([authResult isError]) {
             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error: %@", authResult.errorDescription]];
-            [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : authResult.errorDescription}];
+            [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
             [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
         }
     } else if (url != nil) {
