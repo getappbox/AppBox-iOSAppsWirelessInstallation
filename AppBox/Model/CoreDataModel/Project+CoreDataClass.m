@@ -171,7 +171,7 @@
                             [uploadRecord setProvisioningProfile:provisioningProfile];
                         }
                     } @catch (NSException *exception) {
-                        [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
+                        [EventTracker logExceptionEvent:exception];
                         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Exception %@",exception.userInfo]];
                     }
                 }
@@ -193,7 +193,7 @@
             return project;
         }
     } @catch (NSException *exception) {
-        [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
+        [EventTracker logExceptionEvent:exception];
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Exception %@",exception.userInfo]];
     }
     return nil;

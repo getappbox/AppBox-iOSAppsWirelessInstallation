@@ -15,6 +15,12 @@
     //Handle URL Scheme
     
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
+    //Init AppCenter
+    [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
+    NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
+    [MSAppCenter start:appCenter withServices: @[[MSAnalytics class], [MSCrashes class]]];
+    [MSCrashes notifyWithUserConfirmation: MSUserConfirmationAlways];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -25,11 +31,6 @@
     //Default Setting
     [DefaultSettings setFirstTimeSettings];
     [DefaultSettings setEveryStartupSettings];
-    
-    //Init AppCenter
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
-    NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
-    [MSAppCenter start:appCenter withServices:@[[MSAnalytics class],[MSCrashes class]]];
     
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {

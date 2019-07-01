@@ -37,6 +37,7 @@
     [project setBuildDirectory: [UserData buildLocation]];
     
     //setup dropbox
+    [EventTracker logAppBoxVersion];
     [UploadManager setupDBClientsManager];
     [self setupUploadManager];
     

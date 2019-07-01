@@ -39,16 +39,17 @@ typedef enum : NSUInteger {
     LogEventSettingTypeUploadIPA,
     LogEventSettingTypeArchiveAndUpload,
     LogEventSettingTypeUploadIPASuccess,
-    LogEventAdsClicked
 } LogEventSettingTypes;
 
 @interface EventTracker : NSObject {
     
 }
 
++(void)logAppBoxVersion;
 +(void)logScreen:(NSString *)name;
 +(void)logEventWithType:(LogEventTypes)eventType;
++(void)logExceptionEvent:(NSException *)exception;
 +(void)logEventSettingWithType:(LogEventSettingTypes)eventType andSettings:(NSDictionary *)currentSetting;
-+(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes action:(NSString *)action label:(NSString *)label value:(NSNumber *)value;
++(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes flags:(MSFlags)flags;
 
 @end
