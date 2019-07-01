@@ -11,10 +11,10 @@
 
 
 #import <ZipArchive.h>
-#import <Fabric/Fabric.h>
+#import <AppCenter/AppCenter.h>
+#import <AppCenterCrashes/AppCenterCrashes.h>
+#import <AppCenterAnalytics/AppCenterAnalytics.h>
 #import <SAMKeychain/SAMKeychain.h>
-#import <Crashlytics/Crashlytics.h>
-#import <FirebaseCore/FirebaseCore.h>
 #import <AFNetworking/AFNetworking.h>
 #import <STPrivilegedTask/STPrivilegedTask.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
