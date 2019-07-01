@@ -15,6 +15,12 @@
     //Handle URL Scheme
     
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
+    //Init AppCenter
+    [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
+    NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
+    [MSAppCenter start:appCenter withServices: @[[MSAnalytics class], [MSCrashes class]]];
+    [MSCrashes notifyWithUserConfirmation: MSUserConfirmationAlways];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -25,11 +31,6 @@
     //Default Setting
     [DefaultSettings setFirstTimeSettings];
     [DefaultSettings setEveryStartupSettings];
-    
-    //Init Crashlytics and Firebase
-    [FIRApp configure];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
-    [Fabric with:@[[Crashlytics class], [Answers class]]];
     
     //Check for update
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
@@ -131,15 +132,15 @@
     if (authResult != nil) {
         if ([authResult isSuccess]) {
             [[AppDelegate appDelegate] addSessionLog:@"Success! User is logged into Dropbox."];
-            [Answers logLoginWithMethod:@"Dropbox" success:@YES customAttributes:@{}];
+            [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
             [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
         } else if ([authResult isCancel]) {
             [[AppDelegate appDelegate] addSessionLog:@"Authorization flow was manually canceled by user."];
-            [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : @"Canceled by User"}];
+            [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
             [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
         } else if ([authResult isError]) {
             [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error: %@", authResult.errorDescription]];
-            [Answers logLoginWithMethod:@"Dropbox" success:NO customAttributes:@{@"Error" : authResult.errorDescription}];
+            [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
             [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
         }
     } else if (url != nil) {
