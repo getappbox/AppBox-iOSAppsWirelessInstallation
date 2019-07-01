@@ -53,7 +53,7 @@
                      [Common showAlertWithTitle:@"Warning" andMessage:[NSString stringWithFormat:@"You're running out of Dropbox space\n\n %@MB of %@MB used.", usage, allocated]];
                  }
              } @catch (NSException *exception) {
-                 [EventTracker logEventWithName:@"Exception" customAttributes:@{@"error desc": exception.debugDescription} action:@"error desc" label:exception.debugDescription value:@1];
+                 [EventTracker logExceptionEvent:exception];
              }
          } else if (error.tag == DBRequestErrorAuth) {
              [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];

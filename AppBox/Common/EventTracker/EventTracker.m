@@ -22,60 +22,60 @@
     switch (eventType) {
         case LogEventTypeCopyToClipboard:{
             NSString *name = @"Copy to Clipboard";
-            [EventTracker logEventWithName:name customAttributes:@{name:@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:name customAttributes:nil flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeCopyToClipboardFromDashboard:{
             NSString *name = @"Copy to Clipboard from Dashboard";
-            [EventTracker logEventWithName:name customAttributes:@{name:@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:name customAttributes:nil flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeUpdateExternalLink:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Update"} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Update"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeUploadWithCustomBDFolderName:{
-            [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@"YES"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeUploadWithDefaultDBFolderName:{
-            [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@0} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"DB Folder Name" customAttributes:@{@"Custom Name":@"NO"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeShortURLFailedInFirstRequest:{
-            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@1} flags:MSFlagsNormal];
+            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@"1"} flags:MSFlagsNormal];
         }break;
             
         case LogEventTypeShortURLFailedInSecondRequest:{
-            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@2} flags:MSFlagsCritical];
+            [EventTracker logEventWithName:@"Short URL Failed" customAttributes:@{@"Request No":@"2"} flags:MSFlagsCritical];
         }break;
             
         case LogEventTypeShortURLSuccessInFirstRequest:{
-            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@"1"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeShortURLSuccessInSecondRequest:{
-            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@2} flags:MSFlagsNormal];
+            [EventTracker logEventWithName:@"Short URL Success" customAttributes:@{@"Request No":@"2"} flags:MSFlagsCritical];
         }break;
             
         case LogEventTypeShortURLElseBlockExecuted: {
-            [EventTracker logEventWithName:@"Short URL Else Block Executed" customAttributes:@{@"Request No":@1} flags:MSFlagsCritical];
+            [EventTracker logEventWithName:@"Short URL Else Block Executed" customAttributes:@{@"Request No":@"1"} flags:MSFlagsCritical];
         }break;
             
         case LogEventTypeExternalLinkHelp:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Help"} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Help"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeExternalLinkTwitter:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Twitter"} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Twitter"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeExternalLinkReleaseNote:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Release Notes"} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Release Notes"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeExternalLinkLicense:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"License"} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"License"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeAuthDropbox:{
@@ -99,27 +99,23 @@
         }break;
             
         case LogEventTypeExternalLinkKeepSameLink:{
-            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"title":@"Keep Same Link"} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"External Links" customAttributes:@{@"Title":@"Keep Same Link"} flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeDeleteBuild:{
-            NSString *name = @"Build Deleted";
-            [EventTracker logEventWithName:name customAttributes:@{name:@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"Build Deleted" customAttributes:nil flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeOpenInFinder:{
-            NSString *name = @"Open In Finder";
-            [EventTracker logEventWithName:name customAttributes:@{name:@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"Open In Finder" customAttributes:nil flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeOpenInDropbox:{
-            NSString *name = @"Open In Dropbox";
-            [EventTracker logEventWithName:name customAttributes:@{name:@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"Open In Dropbox" customAttributes:nil flags:MSFlagsDefault];
         }break;
             
         case LogEventTypeOpenDashboardFromShowLink:{
-            NSString *name = @"Dashboard open from Show Link";
-            [EventTracker logEventWithName:name customAttributes:@{name:@1} flags:MSFlagsDefault];
+            [EventTracker logEventWithName:@"Dashboard open from Show Link" customAttributes:nil flags:MSFlagsDefault];
         }break;
         
             
@@ -141,15 +137,25 @@
         case LogEventSettingTypeUploadIPASuccess: {
             [EventTracker logEventWithName:@"IPA Uploaded Success" customAttributes:currentSetting flags:MSFlagsDefault];
         }break;
-            
-        case LogEventAdsClicked:{
-            NSString *name = @"Ad Clicked";
-            [EventTracker logEventWithName:name customAttributes:currentSetting flags:MSFlagsDefault];
-        }break;
         
         default:
             break;
     }
 }
 
++(void)logExceptionEvent:(NSException *)exception {
+    [EventTracker logEventWithName:@"Exception"
+                  customAttributes:@{ @"debug description": exception.debugDescription,
+                                      @"stack": exception.callStackSymbols }
+                             flags:MSFlagsCritical];
+}
+
++(void)logAppBoxVersion {
+    DBManager *dbManager = [Common currentDBManager];
+    [EventTracker logEventWithName:@"AppBox Details"
+                  customAttributes:@{ @"Version": dbManager.version,
+                                      @"Name": dbManager.appName,
+                                      @"Identifier": dbManager.bundleId }
+                             flags:MSFlagsDefault];
+}
 @end
