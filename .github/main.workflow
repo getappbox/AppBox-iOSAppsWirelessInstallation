@@ -6,7 +6,7 @@ workflow "Slack - New Issues" {
 action "Slack Notification for New Issues" {
   uses = "Ilshidur/action-slack@6aeb2acb39f91da283faf4c76898a723a03b2264"
   secrets = ["SLACK_WEBHOOK"]
-  args = "A new issue has been added. URL - {{ EVENT_PAYLOAD.issue.url }}"
+  args = "A new issue has been added.\\nURL - {{ EVENT_PAYLOAD.issue.html_url }}.\\nTitle - {{ EVENT_PAYLOAD.issue.html_url }}\\nBody - {{ EVENT_PAYLOAD.issue.body }}"
 }
 
 workflow "Slack - Issue Comment" {
