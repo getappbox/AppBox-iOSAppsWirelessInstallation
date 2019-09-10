@@ -4,9 +4,9 @@ workflow "Slack - New Issues" {
 }
 
 action "Slack Notification for New Issues" {
-  uses = "Ilshidur/action-slack@b9d4a48"
+  uses = "Ilshidur/action-slack@9273a03"
   secrets = ["SLACK_WEBHOOK"]
-  args = "A new issue has been added. \\nURL - {{ EVENT_PAYLOAD.issue.html_url }} \\nTitle - {{ EVENT_PAYLOAD.issue.title }} \\nBody - {{ EVENT_PAYLOAD.issue.body }}"
+  args = "A new issue has been added. \\n\\nURL - {{ EVENT_PAYLOAD.issue.html_url }} \\n\\nTitle - {{ EVENT_PAYLOAD.issue.title }} \\n\\nBody - {{ EVENT_PAYLOAD.issue.body }}"
 }
 
 workflow "Slack - Issue Comment" {
@@ -15,7 +15,7 @@ workflow "Slack - Issue Comment" {
 }
 
 action "GitHub Action for Slack" {
-  uses = "Ilshidur/action-slack@b9d4a48"
+  uses = "Ilshidur/action-slack@9273a03"
   secrets = ["SLACK_WEBHOOK"]
-  args = "A new comment to an issue has been added. \\nURL - {{ EVENT_PAYLOAD.comment.html_url }} \\nBody - {{ EVENT_PAYLOAD.comment.body }} \\nBy - {{ EVENT_PAYLOAD.comment.user.login }}"
+  args = "A new comment to an issue has been added. \\n\\nURL - {{ EVENT_PAYLOAD.comment.html_url }} \\n\\nBody - {{ EVENT_PAYLOAD.comment.body }} \\n\\nBy - {{ EVENT_PAYLOAD.comment.user.login }}"
 }
