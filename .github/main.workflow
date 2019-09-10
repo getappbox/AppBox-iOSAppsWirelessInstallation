@@ -15,7 +15,7 @@ workflow "Slack - Issue Comment" {
 }
 
 action "GitHub Action for Slack" {
-  uses = "Ilshidur/action-slack@87bcfc9"
+  uses = "vineetchoudhary/action-slack@61690c9"
   secrets = ["SLACK_WEBHOOK"]
   args = "A new comment to an issue has been added. \\nURL - {{ EVENT_PAYLOAD.comment.html_url }} \\nBody - {{ EVENT_PAYLOAD.comment.body }} \\nBy - {{ EVENT_PAYLOAD.comment.user.login }}"
 }
