@@ -1,0 +1,6 @@
+{
+    "name": "Issue Activity",
+    "description": "GitHub action which trigger when an issue opened, edited, reopened or closed.",
+    "iconName": "octicon smiley",
+    "categories": ["Automation", "SDLC"]
+}
