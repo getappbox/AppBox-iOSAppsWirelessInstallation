@@ -1,14 +1,17 @@
-name: Issue Activity
+name: Slack Notification
 
 on:
   issues:
     types: [opened, edited, reopened, closed]
-    steps:
-      name: "Notify on Slack"
-      env:
+    
+jobs:
+  slack_notification:
+    runs-on: ubuntu-latest
+    env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: 'AppBox Github Bot'
-      uses: Ilshidur/action-slack@master
-      with:
-        args: 'Title - {{ EVENT_PAYLOAD.issue.title }} \\n\\nIssue Activity - {{ EVENT_PAYLOAD.action }}.  \\n\\nURL - {{ EVENT_PAYLOAD.issue.html_url }} \\n\\nBody - {{ EVENT_PAYLOAD.issue.body }}'
-        
+    steps:
+      - uses: Ilshidur/action-slack@master
+        with:
+          args: 'Title - {{ EVENT_PAYLOAD.issue.title }} \\n\\nIssue Activity - {{ EVENT_PAYLOAD.action }}.  \\n\\nURL - {{ EVENT_PAYLOAD.issue.html_url }} \\n\\nBody - {{ EVENT_PAYLOAD.issue.body }}'
+          
