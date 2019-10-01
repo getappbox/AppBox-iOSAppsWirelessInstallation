@@ -1,4 +1,4 @@
-name: Slack Notification
+name: Issue Activity
 
 on:
   issues:
