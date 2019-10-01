@@ -1,0 +1,13 @@
+name: Issue Activity
+
+on:
+  issues:
+    types: [opened, edited, reopened, closed]
+    steps:
+      - name: "Notify on Slack"
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: 'AppBox Github Bot'
+      uses: Ilshidur/action-slack@master
+      with:
+        args: 'A new issue has been added. \\n\\nURL - {{ EVENT_PAYLOAD.issue.html_url }} \\n\\nTitle - {{ EVENT_PAYLOAD.issue.title }} \\n\\nBody - {{ EVENT_PAYLOAD.issue.body }}'
