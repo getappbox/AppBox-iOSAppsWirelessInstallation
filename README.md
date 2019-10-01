@@ -73,15 +73,13 @@ If you face any issue using above command then you can manually install AppBox b
 # Current Version Screenshot
 
 ### Upload IPA or Archive and Upload IPA
-![](https://github.com/getappbox/Home/blob/master/Images/UploadIPA.png?raw=true)
 ![](https://github.com/getappbox/Home/blob/master/Images/UploadIPA-Dark.png?raw=true)
+
+### Dashboard
+![](https://github.com/getappbox/Home/blob/master/Images/Dashboard-Dark.png?raw=true)
 
 ### Share URL
 ![](https://github.com/getappbox/Home/blob/master/Images/AppURL.png?raw=true)
-
-### Dashboard
-![](https://github.com/getappbox/Home/blob/master/Images/Dashboard.png?raw=true)
-![](https://github.com/getappbox/Home/blob/master/Images/Dashboard-Dark.png?raw=true)
 
 ### Preferences
 ![](https://github.com/getappbox/Home/blob/master/Images/General.png?raw=true)
