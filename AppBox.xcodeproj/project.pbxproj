@@ -48,7 +48,6 @@
 		DBA66CF11FDCF4A60002A956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBA66CF01FDCF4A60002A956 /* Main.storyboard */; };
 		DBA66CF61FDD08E60002A956 /* LocalServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA66CF41FDD08E60002A956 /* LocalServerViewController.m */; };
 		DBCD1563200BCD1C00C003E6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCD1562200BCD1C00C003E6 /* PreferencesViewController.xib */; };
-		DBD1CE2E2156230400549C0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; };
 		DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; };
 		DBD1CE302156230800549C0A /* ABPrivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1CE2D2156230400549C0A /* ABPrivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBDCFBBE1F99C7860022097B /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDCFBBD1F99C7860022097B /* UploadManager.m */; };
@@ -457,7 +456,6 @@
 				E16438971D743EA300CE8B7E /* WebKit.framework in Frameworks */,
 				DBD1CE2F2156230800549C0A /* ABPrivate.framework in Frameworks */,
 				E16438991D743EAA00CE8B7E /* Cocoa.framework in Frameworks */,
-				DBD1CE2E2156230400549C0A /* ABPrivate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1356,7 +1354,7 @@
 		E16437C71D743A4E00CE8B7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Developer Insider";
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
@@ -1561,6 +1559,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1607,6 +1606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
