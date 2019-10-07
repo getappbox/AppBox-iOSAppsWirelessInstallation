@@ -1,6 +1,6 @@
 language: objective-c
 xcode_project: AppBox.xcworkspace
-osx_image: xcode10.2
+osx_image: xcode11
 xcode_scheme: AppBox
 script:
 - xcodebuild clean build -workspace AppBox.xcworkspace -scheme AppBox CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty
