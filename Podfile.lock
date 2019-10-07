@@ -12,13 +12,13 @@ PODS:
   - AFNetworking/Reachability (3.2.1)
   - AFNetworking/Security (3.2.1)
   - AFNetworking/Serialization (3.2.1)
-  - AppCenter (2.1.0):
-    - AppCenter/Analytics (= 2.1.0)
-    - AppCenter/Crashes (= 2.1.0)
-  - AppCenter/Analytics (2.1.0):
+  - AppCenter (2.4.0):
+    - AppCenter/Analytics (= 2.4.0)
+    - AppCenter/Crashes (= 2.4.0)
+  - AppCenter/Analytics (2.4.0):
     - AppCenter/Core
-  - AppCenter/Core (2.1.0)
-  - AppCenter/Crashes (2.1.0):
+  - AppCenter/Core (2.4.0)
+  - AppCenter/Crashes (2.4.0):
     - AppCenter/Core
   - CMDQueryStringSerialization (0.4.1):
     - ISO8601
@@ -56,7 +56,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AppCenter: 21decaa4488024e8355e650e44ccabb69ca60d47
+  AppCenter: 49a9ffe114c00e2bf5374aeda816d47eabf1978a
   CMDQueryStringSerialization: 4bb0a2f5e7d8d8678d911d88072274952cbef4e5
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
   ObjectiveDropboxOfficial: 19a4913d4d52fba035d41f40da71df0d6b303327
@@ -67,4 +67,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9c8dab98bd07a73bba545ed7d8cd4535a8cd3309
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.7.5
