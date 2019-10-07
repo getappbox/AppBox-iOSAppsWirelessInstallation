@@ -1,3 +1,5 @@
+![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/2.9.0/total.svg?style=flat-square)
+
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/2.8.2/total.svg?style=flat-square)
 
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/2.8.1/total.svg?style=flat-square)
