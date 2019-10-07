@@ -16,7 +16,7 @@
 /**
  * The flag indicates whether the service is started from application or not.
  */
-@property(nonatomic) BOOL startedFromApplication;
+@property(nonatomic, assign) BOOL startedFromApplication;
 
 /**
  * Start this service with a channel group. Also sets the flag that indicates that a service has been started.
