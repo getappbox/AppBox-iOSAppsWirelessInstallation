@@ -10,6 +10,6 @@
 /**
  * Additional key/value pair parameters. [optional]
  */
-@property(nonatomic) NSDictionary<NSString *, NSString *> *properties;
+@property(nonatomic, strong) NSDictionary<NSString *, NSString *> *properties;
 
 @end
