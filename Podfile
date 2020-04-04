@@ -1,5 +1,5 @@
 platform :osx, '10.11'
-
+source 'https://cdn.cocoapods.org/'
 inhibit_all_warnings!
 
 target :AppBox do
