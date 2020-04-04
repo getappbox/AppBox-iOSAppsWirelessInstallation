@@ -44,10 +44,10 @@
                     [[manager requestSerializer] setValue:@"application/json, text/javascript" forHTTPHeaderField:@"Accept"];
                     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/javascript", @"text/html", nil]];
                     
-                    [manager POST:[NSString stringWithFormat:@"%@%@",ITCLoginURL, responseString] parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    [manager POST:[NSString stringWithFormat:@"%@%@",ITCLoginURL, responseString] parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                         [[AppDelegate appDelegate] addSessionLog:ITCResponseMsg(@"ITCLogin", responseObject)];
                         if (((NSHTTPURLResponse *)task.response).statusCode == HTTP_OK){
-                            [manager POST:ITCStatsURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                            [manager POST:ITCStatsURL parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                 [[AppDelegate appDelegate] addSessionLog:ITCResponseMsg(@"ITCStats", responseObject)];
                                 NSInteger statusCode = (((NSHTTPURLResponse *)task.response).statusCode);
                                 if (statusCode == HTTP_OK){
