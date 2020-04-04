@@ -545,9 +545,9 @@
                             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abShareXcodeProjectSchemeURL]];
                         }
                     } else {
+                        [outputPipe.fileHandleForReading waitForDataInBackgroundAndNotify];
                         processExecuteCount++;
-                        [self runGetSchemeScript];
-                        [[AppDelegate appDelegate] addSessionLog:@"Failed to load scheme information."];
+                        [[AppDelegate appDelegate] addSessionLog:@"Failed to load scheme information. Trying Again..."];
                     }
                 }
             }
