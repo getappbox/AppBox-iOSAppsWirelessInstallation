@@ -1,24 +1,24 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.0):
+    - AFNetworking/NSURLSession (= 4.0.0)
+    - AFNetworking/Reachability (= 4.0.0)
+    - AFNetworking/Security (= 4.0.0)
+    - AFNetworking/Serialization (= 4.0.0)
+    - AFNetworking/UIKit (= 4.0.0)
+  - AFNetworking/NSURLSession (4.0.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AppCenter (2.4.0):
-    - AppCenter/Analytics (= 2.4.0)
-    - AppCenter/Crashes (= 2.4.0)
-  - AppCenter/Analytics (2.4.0):
+  - AFNetworking/Reachability (4.0.0)
+  - AFNetworking/Security (4.0.0)
+  - AFNetworking/Serialization (4.0.0)
+  - AppCenter (3.1.0):
+    - AppCenter/Analytics (= 3.1.0)
+    - AppCenter/Crashes (= 3.1.0)
+  - AppCenter/Analytics (3.1.0):
     - AppCenter/Core
-  - AppCenter/Core (2.4.0)
-  - AppCenter/Crashes (2.4.0):
+  - AppCenter/Core (3.1.0)
+  - AppCenter/Crashes (3.1.0):
     - AppCenter/Core
   - CMDQueryStringSerialization (0.4.1):
     - ISO8601
@@ -43,7 +43,7 @@ DEPENDENCIES:
   - ZXingObjC
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AFNetworking
     - AppCenter
     - CMDQueryStringSerialization
@@ -55,8 +55,8 @@ SPEC REPOS:
     - ZXingObjC
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AppCenter: 49a9ffe114c00e2bf5374aeda816d47eabf1978a
+  AFNetworking: d9fdf484a3c723ec3c558a41cc5754c7e845ee77
+  AppCenter: a1c30c47b7882a04a615ffa5ab26c007326436d8
   CMDQueryStringSerialization: 4bb0a2f5e7d8d8678d911d88072274952cbef4e5
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
   ObjectiveDropboxOfficial: 19a4913d4d52fba035d41f40da71df0d6b303327
@@ -65,6 +65,6 @@ SPEC CHECKSUMS:
   STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 9c8dab98bd07a73bba545ed7d8cd4535a8cd3309
+PODFILE CHECKSUM: 4919469576054e55a1067c53b541f622806385ce
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.1
