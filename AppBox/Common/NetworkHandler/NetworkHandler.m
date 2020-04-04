@@ -16,7 +16,7 @@
     [manager setRequestSerializer: [AFJSONRequestSerializer serializer]];
     [manager setResponseSerializer: [AFJSONResponseSerializer serializer]];
     if (requestType == RequestGET){
-        [manager GET:url parameters:parmeters progress:^(NSProgress * _Nonnull downloadProgress) {
+        [manager GET:url parameters:parmeters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
             [ABLog log:@"Request In Progress -  %@", url];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
@@ -30,7 +30,7 @@
             }
         }];
     }else if (requestType == RequestPOST){
-        [manager POST:url parameters:parmeters progress:^(NSProgress * _Nonnull uploadProgress) {
+        [manager POST:url parameters:parmeters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
             [ABLog log:@"Request In Progress -  %@", url];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
@@ -52,7 +52,7 @@
     [manager setResponseSerializer: [AFHTTPResponseSerializer serializer]];
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/javascript", @"text/html", @"text/javascript", nil]];
     if (requestType == RequestGET){
-        [manager GET:url parameters:parmeters progress:^(NSProgress * _Nonnull downloadProgress) {
+        [manager GET:url parameters:parmeters  headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
             [ABLog log:@"Request In Progress -  %@", url];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             completion(responseObject, ((NSHTTPURLResponse *)task.response).statusCode ,nil);
@@ -60,7 +60,7 @@
             completion(nil, ((NSHTTPURLResponse *)task.response).statusCode ,error);
         }];
     }else if (requestType == RequestPOST){
-        [manager POST:url parameters:parmeters progress:^(NSProgress * _Nonnull uploadProgress) {
+        [manager POST:url parameters:parmeters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
             [ABLog log:@"Request In Progress -  %@", url];
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             completion(responseObject, ((NSHTTPURLResponse *)task.response).statusCode ,nil);
