@@ -5,6 +5,7 @@
 ///
 
 #import "DBTEAMRouteObjects.h"
+#import "DBACCOUNTSetProfilePhotoError.h"
 #import "DBASYNCLaunchEmptyResult.h"
 #import "DBASYNCLaunchResultBase.h"
 #import "DBASYNCPollEmptyResult.h"
@@ -24,6 +25,8 @@
 #import "DBRequestErrors.h"
 #import "DBStoneBase.h"
 #import "DBTEAMActiveWebSession.h"
+#import "DBTEAMAddSecondaryEmailsError.h"
+#import "DBTEAMAddSecondaryEmailsResult.h"
 #import "DBTEAMAdminTier.h"
 #import "DBTEAMApiApp.h"
 #import "DBTEAMBaseDfbReport.h"
@@ -33,6 +36,7 @@
 #import "DBTEAMCustomQuotaError.h"
 #import "DBTEAMCustomQuotaResult.h"
 #import "DBTEAMDateRangeError.h"
+#import "DBTEAMDeleteSecondaryEmailsResult.h"
 #import "DBTEAMDesktopClientSession.h"
 #import "DBTEAMDevicesActive.h"
 #import "DBTEAMExcludedUsersListContinueError.h"
@@ -68,6 +72,18 @@
 #import "DBTEAMGroupsMembersListContinueError.h"
 #import "DBTEAMGroupsMembersListResult.h"
 #import "DBTEAMGroupsPollError.h"
+#import "DBTEAMLegalHoldHeldRevisionMetadata.h"
+#import "DBTEAMLegalHoldPolicy.h"
+#import "DBTEAMLegalHoldStatus.h"
+#import "DBTEAMLegalHoldsError.h"
+#import "DBTEAMLegalHoldsGetPolicyError.h"
+#import "DBTEAMLegalHoldsListHeldRevisionResult.h"
+#import "DBTEAMLegalHoldsListHeldRevisionsError.h"
+#import "DBTEAMLegalHoldsListPoliciesError.h"
+#import "DBTEAMLegalHoldsListPoliciesResult.h"
+#import "DBTEAMLegalHoldsPolicyCreateError.h"
+#import "DBTEAMLegalHoldsPolicyReleaseError.h"
+#import "DBTEAMLegalHoldsPolicyUpdateError.h"
 #import "DBTEAMListMemberAppsError.h"
 #import "DBTEAMListMemberAppsResult.h"
 #import "DBTEAMListMemberDevicesError.h"
@@ -88,8 +104,10 @@
 #import "DBTEAMMembersAddJobStatus.h"
 #import "DBTEAMMembersAddLaunch.h"
 #import "DBTEAMMembersDeactivateError.h"
+#import "DBTEAMMembersDeleteProfilePhotoError.h"
 #import "DBTEAMMembersGetInfoError.h"
 #import "DBTEAMMembersGetInfoItem.h"
+#import "DBTEAMMembersInfo.h"
 #import "DBTEAMMembersListContinueError.h"
 #import "DBTEAMMembersListError.h"
 #import "DBTEAMMembersListResult.h"
@@ -99,6 +117,7 @@
 #import "DBTEAMMembersSetPermissionsError.h"
 #import "DBTEAMMembersSetPermissionsResult.h"
 #import "DBTEAMMembersSetProfileError.h"
+#import "DBTEAMMembersSetProfilePhotoError.h"
 #import "DBTEAMMembersSuspendError.h"
 #import "DBTEAMMembersTransferFilesError.h"
 #import "DBTEAMMembersTransferFormerMembersFilesError.h"
@@ -107,6 +126,7 @@
 #import "DBTEAMNamespaceMetadata.h"
 #import "DBTEAMPOLICIESTeamMemberPolicies.h"
 #import "DBTEAMRemoveCustomQuotaResult.h"
+#import "DBTEAMResendVerificationEmailResult.h"
 #import "DBTEAMRevokeDeviceSessionBatchError.h"
 #import "DBTEAMRevokeDeviceSessionBatchResult.h"
 #import "DBTEAMRevokeDeviceSessionError.h"
@@ -143,7 +163,10 @@
 #import "DBTEAMTeamNamespacesListResult.h"
 #import "DBTEAMTokenGetAuthenticatedAdminError.h"
 #import "DBTEAMTokenGetAuthenticatedAdminResult.h"
+#import "DBTEAMUserAddResult.h"
 #import "DBTEAMUserCustomQuotaResult.h"
+#import "DBTEAMUserDeleteResult.h"
+#import "DBTEAMUserResendResult.h"
 #import "DBTEAMUserSelectorArg.h"
 #import "DBTEAMUserSelectorError.h"
 
@@ -168,6 +191,13 @@ static DBRoute *DBTEAMGroupsMembersListContinue;
 static DBRoute *DBTEAMGroupsMembersRemove;
 static DBRoute *DBTEAMGroupsMembersSetAccessType;
 static DBRoute *DBTEAMGroupsUpdate;
+static DBRoute *DBTEAMLegalHoldsCreatePolicy;
+static DBRoute *DBTEAMLegalHoldsGetPolicy;
+static DBRoute *DBTEAMLegalHoldsListHeldRevisions;
+static DBRoute *DBTEAMLegalHoldsListHeldRevisionsContinue;
+static DBRoute *DBTEAMLegalHoldsListPolicies;
+static DBRoute *DBTEAMLegalHoldsReleasePolicy;
+static DBRoute *DBTEAMLegalHoldsUpdatePolicy;
 static DBRoute *DBTEAMLinkedAppsListMemberLinkedApps;
 static DBRoute *DBTEAMLinkedAppsListMembersLinkedApps;
 static DBRoute *DBTEAMLinkedAppsListTeamLinkedApps;
@@ -182,6 +212,7 @@ static DBRoute *DBTEAMMemberSpaceLimitsRemoveCustomQuota;
 static DBRoute *DBTEAMMemberSpaceLimitsSetCustomQuota;
 static DBRoute *DBTEAMMembersAdd;
 static DBRoute *DBTEAMMembersAddJobStatusGet;
+static DBRoute *DBTEAMMembersDeleteProfilePhoto;
 static DBRoute *DBTEAMMembersGetInfo;
 static DBRoute *DBTEAMMembersList;
 static DBRoute *DBTEAMMembersListContinue;
@@ -190,9 +221,13 @@ static DBRoute *DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
 static DBRoute *DBTEAMMembersRecover;
 static DBRoute *DBTEAMMembersRemove;
 static DBRoute *DBTEAMMembersRemoveJobStatusGet;
+static DBRoute *DBTEAMMembersSecondaryEmailsAdd;
+static DBRoute *DBTEAMMembersSecondaryEmailsDelete;
+static DBRoute *DBTEAMMembersSecondaryEmailsResendVerificationEmails;
 static DBRoute *DBTEAMMembersSendWelcomeEmail;
 static DBRoute *DBTEAMMembersSetAdminPermissions;
 static DBRoute *DBTEAMMembersSetProfile;
+static DBRoute *DBTEAMMembersSetProfilePhoto;
 static DBRoute *DBTEAMMembersSuspend;
 static DBRoute *DBTEAMMembersUnsuspend;
 static DBRoute *DBTEAMNamespacesList;
@@ -569,6 +604,132 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   return DBTEAMGroupsUpdate;
 }
 
++ (DBRoute *)DBTEAMLegalHoldsCreatePolicy {
+  if (!DBTEAMLegalHoldsCreatePolicy) {
+    DBTEAMLegalHoldsCreatePolicy = [[DBRoute alloc] init:@"legal_holds/create_policy"
+                                              namespace_:@"team"
+                                              deprecated:@NO
+                                              resultType:[DBTEAMLegalHoldPolicy class]
+                                               errorType:[DBTEAMLegalHoldsPolicyCreateError class]
+                                                   attrs:@{
+                                                     @"auth" : @"team",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsCreatePolicy;
+}
+
++ (DBRoute *)DBTEAMLegalHoldsGetPolicy {
+  if (!DBTEAMLegalHoldsGetPolicy) {
+    DBTEAMLegalHoldsGetPolicy = [[DBRoute alloc] init:@"legal_holds/get_policy"
+                                           namespace_:@"team"
+                                           deprecated:@NO
+                                           resultType:[DBTEAMLegalHoldPolicy class]
+                                            errorType:[DBTEAMLegalHoldsGetPolicyError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsGetPolicy;
+}
+
++ (DBRoute *)DBTEAMLegalHoldsListHeldRevisions {
+  if (!DBTEAMLegalHoldsListHeldRevisions) {
+    DBTEAMLegalHoldsListHeldRevisions = [[DBRoute alloc] init:@"legal_holds/list_held_revisions"
+                                                   namespace_:@"team"
+                                                   deprecated:@NO
+                                                   resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
+                                                    errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                                        attrs:@{
+                                                          @"auth" : @"team",
+                                                          @"host" : @"api",
+                                                          @"style" : @"rpc"
+                                                        }
+                                        dataStructSerialBlock:nil
+                                      dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsListHeldRevisions;
+}
+
++ (DBRoute *)DBTEAMLegalHoldsListHeldRevisionsContinue {
+  if (!DBTEAMLegalHoldsListHeldRevisionsContinue) {
+    DBTEAMLegalHoldsListHeldRevisionsContinue = [[DBRoute alloc] init:@"legal_holds/list_held_revisions_continue"
+                                                           namespace_:@"team"
+                                                           deprecated:@NO
+                                                           resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
+                                                            errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                                                attrs:@{
+                                                                  @"auth" : @"team",
+                                                                  @"host" : @"api",
+                                                                  @"style" : @"rpc"
+                                                                }
+                                                dataStructSerialBlock:nil
+                                              dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsListHeldRevisionsContinue;
+}
+
++ (DBRoute *)DBTEAMLegalHoldsListPolicies {
+  if (!DBTEAMLegalHoldsListPolicies) {
+    DBTEAMLegalHoldsListPolicies = [[DBRoute alloc] init:@"legal_holds/list_policies"
+                                              namespace_:@"team"
+                                              deprecated:@NO
+                                              resultType:[DBTEAMLegalHoldsListPoliciesResult class]
+                                               errorType:[DBTEAMLegalHoldsListPoliciesError class]
+                                                   attrs:@{
+                                                     @"auth" : @"team",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsListPolicies;
+}
+
++ (DBRoute *)DBTEAMLegalHoldsReleasePolicy {
+  if (!DBTEAMLegalHoldsReleasePolicy) {
+    DBTEAMLegalHoldsReleasePolicy = [[DBRoute alloc] init:@"legal_holds/release_policy"
+                                               namespace_:@"team"
+                                               deprecated:@NO
+                                               resultType:nil
+                                                errorType:[DBTEAMLegalHoldsPolicyReleaseError class]
+                                                    attrs:@{
+                                                      @"auth" : @"team",
+                                                      @"host" : @"api",
+                                                      @"style" : @"rpc"
+                                                    }
+                                    dataStructSerialBlock:nil
+                                  dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsReleasePolicy;
+}
+
++ (DBRoute *)DBTEAMLegalHoldsUpdatePolicy {
+  if (!DBTEAMLegalHoldsUpdatePolicy) {
+    DBTEAMLegalHoldsUpdatePolicy = [[DBRoute alloc] init:@"legal_holds/update_policy"
+                                              namespace_:@"team"
+                                              deprecated:@NO
+                                              resultType:[DBTEAMLegalHoldPolicy class]
+                                               errorType:[DBTEAMLegalHoldsPolicyUpdateError class]
+                                                   attrs:@{
+                                                     @"auth" : @"team",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+  }
+  return DBTEAMLegalHoldsUpdatePolicy;
+}
+
 + (DBRoute *)DBTEAMLinkedAppsListMemberLinkedApps {
   if (!DBTEAMLinkedAppsListMemberLinkedApps) {
     DBTEAMLinkedAppsListMemberLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_member_linked_apps"
@@ -837,6 +998,24 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   return DBTEAMMembersAddJobStatusGet;
 }
 
++ (DBRoute *)DBTEAMMembersDeleteProfilePhoto {
+  if (!DBTEAMMembersDeleteProfilePhoto) {
+    DBTEAMMembersDeleteProfilePhoto = [[DBRoute alloc] init:@"members/delete_profile_photo"
+                                                 namespace_:@"team"
+                                                 deprecated:@NO
+                                                 resultType:[DBTEAMTeamMemberInfo class]
+                                                  errorType:[DBTEAMMembersDeleteProfilePhotoError class]
+                                                      attrs:@{
+                                                        @"auth" : @"team",
+                                                        @"host" : @"api",
+                                                        @"style" : @"rpc"
+                                                      }
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersDeleteProfilePhoto;
+}
+
 + (DBRoute *)DBTEAMMembersGetInfo {
   if (!DBTEAMMembersGetInfo) {
     DBTEAMMembersGetInfo = [[DBRoute alloc] init:@"members/get_info"
@@ -987,6 +1166,61 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   return DBTEAMMembersRemoveJobStatusGet;
 }
 
++ (DBRoute *)DBTEAMMembersSecondaryEmailsAdd {
+  if (!DBTEAMMembersSecondaryEmailsAdd) {
+    DBTEAMMembersSecondaryEmailsAdd = [[DBRoute alloc] init:@"members/secondary_emails/add"
+                                                 namespace_:@"team"
+                                                 deprecated:@NO
+                                                 resultType:[DBTEAMAddSecondaryEmailsResult class]
+                                                  errorType:[DBTEAMAddSecondaryEmailsError class]
+                                                      attrs:@{
+                                                        @"auth" : @"team",
+                                                        @"host" : @"api",
+                                                        @"style" : @"rpc"
+                                                      }
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersSecondaryEmailsAdd;
+}
+
++ (DBRoute *)DBTEAMMembersSecondaryEmailsDelete {
+  if (!DBTEAMMembersSecondaryEmailsDelete) {
+    DBTEAMMembersSecondaryEmailsDelete = [[DBRoute alloc] init:@"members/secondary_emails/delete"
+                                                    namespace_:@"team"
+                                                    deprecated:@NO
+                                                    resultType:[DBTEAMDeleteSecondaryEmailsResult class]
+                                                     errorType:nil
+                                                         attrs:@{
+                                                           @"auth" : @"team",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersSecondaryEmailsDelete;
+}
+
++ (DBRoute *)DBTEAMMembersSecondaryEmailsResendVerificationEmails {
+  if (!DBTEAMMembersSecondaryEmailsResendVerificationEmails) {
+    DBTEAMMembersSecondaryEmailsResendVerificationEmails =
+        [[DBRoute alloc] init:@"members/secondary_emails/resend_verification_emails"
+                         namespace_:@"team"
+                         deprecated:@NO
+                         resultType:[DBTEAMResendVerificationEmailResult class]
+                          errorType:nil
+                              attrs:@{
+                                @"auth" : @"team",
+                                @"host" : @"api",
+                                @"style" : @"rpc"
+                              }
+              dataStructSerialBlock:nil
+            dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersSecondaryEmailsResendVerificationEmails;
+}
+
 + (DBRoute *)DBTEAMMembersSendWelcomeEmail {
   if (!DBTEAMMembersSendWelcomeEmail) {
     DBTEAMMembersSendWelcomeEmail = [[DBRoute alloc] init:@"members/send_welcome_email"
@@ -1039,6 +1273,24 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                             dataStructDeserialBlock:nil];
   }
   return DBTEAMMembersSetProfile;
+}
+
++ (DBRoute *)DBTEAMMembersSetProfilePhoto {
+  if (!DBTEAMMembersSetProfilePhoto) {
+    DBTEAMMembersSetProfilePhoto = [[DBRoute alloc] init:@"members/set_profile_photo"
+                                              namespace_:@"team"
+                                              deprecated:@NO
+                                              resultType:[DBTEAMTeamMemberInfo class]
+                                               errorType:[DBTEAMMembersSetProfilePhotoError class]
+                                                   attrs:@{
+                                                     @"auth" : @"team",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+  }
+  return DBTEAMMembersSetProfilePhoto;
 }
 
 + (DBRoute *)DBTEAMMembersSuspend {

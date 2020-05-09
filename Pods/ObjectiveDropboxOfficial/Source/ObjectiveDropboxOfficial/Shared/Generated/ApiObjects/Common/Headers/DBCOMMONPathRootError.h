@@ -28,17 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBCOMMONPathRootErrorTag` enum type represents the possible tag states
 /// with which the `DBCOMMONPathRootError` union can exist.
-typedef NS_ENUM(NSInteger, DBCOMMONPathRootErrorTag) {
-  /// The root namespace id in Dropbox-API-Path-Root header is not valid. The
-  /// value of this error is use's latest root info.
-  DBCOMMONPathRootErrorInvalidRoot,
+typedef NS_CLOSED_ENUM(NSInteger, DBCOMMONPathRootErrorTag){
+    /// The root namespace id in Dropbox-API-Path-Root header is not valid. The
+    /// value of this error is use's latest root info.
+    DBCOMMONPathRootErrorInvalidRoot,
 
-  /// You don't have permission to access the namespace id in
-  /// Dropbox-API-Path-Root  header.
-  DBCOMMONPathRootErrorNoPermission,
+    /// You don't have permission to access the namespace id in
+    /// Dropbox-API-Path-Root  header.
+    DBCOMMONPathRootErrorNoPermission,
 
-  /// (no description).
-  DBCOMMONPathRootErrorOther,
+    /// (no description).
+    DBCOMMONPathRootErrorOther,
 
 };
 

@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGFileErrorResultTag` enum type represents the possible tag
 /// states with which the `DBSHARINGFileErrorResult` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGFileErrorResultTag) {
-  /// File specified by id was not found.
-  DBSHARINGFileErrorResultFileNotFoundError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileErrorResultTag){
+    /// File specified by id was not found.
+    DBSHARINGFileErrorResultFileNotFoundError,
 
-  /// User does not have permission to take the specified action on the file.
-  DBSHARINGFileErrorResultInvalidFileActionError,
+    /// User does not have permission to take the specified action on the file.
+    DBSHARINGFileErrorResultInvalidFileActionError,
 
-  /// User does not have permission to access file specified by file.Id.
-  DBSHARINGFileErrorResultPermissionDeniedError,
+    /// User does not have permission to access file specified by file.Id.
+    DBSHARINGFileErrorResultPermissionDeniedError,
 
-  /// (no description).
-  DBSHARINGFileErrorResultOther,
+    /// (no description).
+    DBSHARINGFileErrorResultOther,
 
 };
 

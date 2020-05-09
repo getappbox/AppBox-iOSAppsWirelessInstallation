@@ -23794,7 +23794,8 @@
                  ownerDisplayNames:(NSArray<NSString *> *)ownerDisplayNames
                          ownerTeam:(DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(NSString *)parentSharedFolderId
-                         pathLower:(NSString *)pathLower {
+                         pathLower:(NSString *)pathLower
+                  parentFolderName:(NSString *)parentFolderName {
   [DBStoneValidators nonnullValidator:nil](accessType);
   [DBStoneValidators nonnullValidator:nil](isInsideTeamFolder);
   [DBStoneValidators nonnullValidator:nil](isTeamFolder);
@@ -23815,6 +23816,7 @@
     _ownerTeam = ownerTeam;
     _parentSharedFolderId = parentSharedFolderId;
     _pathLower = pathLower;
+    _parentFolderName = parentFolderName;
   }
   return self;
 }
@@ -23828,7 +23830,8 @@
                 ownerDisplayNames:nil
                         ownerTeam:nil
              parentSharedFolderId:nil
-                        pathLower:nil];
+                        pathLower:nil
+                 parentFolderName:nil];
 }
 
 #pragma mark - Serialization methods
@@ -23875,6 +23878,9 @@
   }
   if (self.pathLower != nil) {
     result = prime * result + [self.pathLower hash];
+  }
+  if (self.parentFolderName != nil) {
+    result = prime * result + [self.parentFolderName hash];
   }
 
   return prime * result;
@@ -23925,6 +23931,11 @@
       return NO;
     }
   }
+  if (self.parentFolderName) {
+    if (![self.parentFolderName isEqual:aSharedFolderMetadataBase.parentFolderName]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -23955,6 +23966,9 @@
   if (valueObj.pathLower) {
     jsonDict[@"path_lower"] = valueObj.pathLower;
   }
+  if (valueObj.parentFolderName) {
+    jsonDict[@"parent_folder_name"] = valueObj.parentFolderName;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -23973,6 +23987,7 @@
       valueDict[@"owner_team"] ? [DBUSERSTeamSerializer deserialize:valueDict[@"owner_team"]] : nil;
   NSString *parentSharedFolderId = valueDict[@"parent_shared_folder_id"] ?: nil;
   NSString *pathLower = valueDict[@"path_lower"] ?: nil;
+  NSString *parentFolderName = valueDict[@"parent_folder_name"] ?: nil;
 
   return [[DBSHARINGSharedFolderMetadataBase alloc] initWithAccessType:accessType
                                                     isInsideTeamFolder:isInsideTeamFolder
@@ -23980,7 +23995,8 @@
                                                      ownerDisplayNames:ownerDisplayNames
                                                              ownerTeam:ownerTeam
                                                   parentSharedFolderId:parentSharedFolderId
-                                                             pathLower:pathLower];
+                                                             pathLower:pathLower
+                                                      parentFolderName:parentFolderName];
 }
 
 @end
@@ -24014,6 +24030,7 @@
                          ownerTeam:(DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(NSString *)parentSharedFolderId
                          pathLower:(NSString *)pathLower
+                  parentFolderName:(NSString *)parentFolderName
                       linkMetadata:(DBSHARINGSharedContentLinkMetadata *)linkMetadata
                        permissions:(NSArray<DBSHARINGFolderPermission *> *)permissions
                  accessInheritance:(DBSHARINGAccessInheritance *)accessInheritance {
@@ -24044,7 +24061,8 @@
                  ownerDisplayNames:ownerDisplayNames
                          ownerTeam:ownerTeam
               parentSharedFolderId:parentSharedFolderId
-                         pathLower:pathLower];
+                         pathLower:pathLower
+                  parentFolderName:parentFolderName];
   if (self) {
     _linkMetadata = linkMetadata;
     _name = name;
@@ -24078,6 +24096,7 @@
                         ownerTeam:nil
              parentSharedFolderId:nil
                         pathLower:nil
+                 parentFolderName:nil
                      linkMetadata:nil
                       permissions:nil
                 accessInheritance:nil];
@@ -24132,6 +24151,9 @@
   }
   if (self.pathLower != nil) {
     result = prime * result + [self.pathLower hash];
+  }
+  if (self.parentFolderName != nil) {
+    result = prime * result + [self.parentFolderName hash];
   }
   if (self.linkMetadata != nil) {
     result = prime * result + [self.linkMetadata hash];
@@ -24204,6 +24226,11 @@
       return NO;
     }
   }
+  if (self.parentFolderName) {
+    if (![self.parentFolderName isEqual:aSharedFolderMetadata.parentFolderName]) {
+      return NO;
+    }
+  }
   if (self.linkMetadata) {
     if (![self.linkMetadata isEqual:aSharedFolderMetadata.linkMetadata]) {
       return NO;
@@ -24252,6 +24279,9 @@
   if (valueObj.pathLower) {
     jsonDict[@"path_lower"] = valueObj.pathLower;
   }
+  if (valueObj.parentFolderName) {
+    jsonDict[@"parent_folder_name"] = valueObj.parentFolderName;
+  }
   if (valueObj.linkMetadata) {
     jsonDict[@"link_metadata"] = [DBSHARINGSharedContentLinkMetadataSerializer serialize:valueObj.linkMetadata];
   }
@@ -24285,6 +24315,7 @@
       valueDict[@"owner_team"] ? [DBUSERSTeamSerializer deserialize:valueDict[@"owner_team"]] : nil;
   NSString *parentSharedFolderId = valueDict[@"parent_shared_folder_id"] ?: nil;
   NSString *pathLower = valueDict[@"path_lower"] ?: nil;
+  NSString *parentFolderName = valueDict[@"parent_folder_name"] ?: nil;
   DBSHARINGSharedContentLinkMetadata *linkMetadata =
       valueDict[@"link_metadata"]
           ? [DBSHARINGSharedContentLinkMetadataSerializer deserialize:valueDict[@"link_metadata"]]
@@ -24312,6 +24343,7 @@
                                                          ownerTeam:ownerTeam
                                               parentSharedFolderId:parentSharedFolderId
                                                          pathLower:pathLower
+                                                  parentFolderName:parentFolderName
                                                       linkMetadata:linkMetadata
                                                        permissions:permissions
                                                  accessInheritance:accessInheritance];

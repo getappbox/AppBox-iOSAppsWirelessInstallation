@@ -29,24 +29,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGAccessLevelTag` enum type represents the possible tag states
 /// with which the `DBSHARINGAccessLevel` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGAccessLevelTag) {
-  /// The collaborator is the owner of the shared folder. Owners can view and
-  /// edit the shared folder as well as set the folder's policies using
-  /// `updateFolderPolicy`.
-  DBSHARINGAccessLevelOwner,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
+    /// The collaborator is the owner of the shared folder. Owners can view and
+    /// edit the shared folder as well as set the folder's policies using
+    /// `updateFolderPolicy`.
+    DBSHARINGAccessLevelOwner,
 
-  /// The collaborator can both view and edit the shared folder.
-  DBSHARINGAccessLevelEditor,
+    /// The collaborator can both view and edit the shared folder.
+    DBSHARINGAccessLevelEditor,
 
-  /// The collaborator can only view the shared folder.
-  DBSHARINGAccessLevelViewer,
+    /// The collaborator can only view the shared folder.
+    DBSHARINGAccessLevelViewer,
 
-  /// The collaborator can only view the shared folder and does not have any
-  /// access to comments.
-  DBSHARINGAccessLevelViewerNoComment,
+    /// The collaborator can only view the shared folder and does not have any
+    /// access to comments.
+    DBSHARINGAccessLevelViewerNoComment,
 
-  /// (no description).
-  DBSHARINGAccessLevelOther,
+    /// (no description).
+    DBSHARINGAccessLevelOther,
 
 };
 

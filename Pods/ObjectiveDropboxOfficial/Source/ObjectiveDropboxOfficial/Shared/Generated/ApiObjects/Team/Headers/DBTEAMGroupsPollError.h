@@ -27,20 +27,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupsPollErrorTag` enum type represents the possible tag states
 /// with which the `DBTEAMGroupsPollError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupsPollErrorTag) {
-  /// The job ID is invalid.
-  DBTEAMGroupsPollErrorInvalidAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupsPollErrorTag){
+    /// The job ID is invalid.
+    DBTEAMGroupsPollErrorInvalidAsyncJobId,
 
-  /// Something went wrong with the job on Dropbox's end. You'll need to
-  /// verify that the action you were taking succeeded, and if not, try again.
-  /// This should happen very rarely.
-  DBTEAMGroupsPollErrorInternalError,
+    /// Something went wrong with the job on Dropbox's end. You'll need to
+    /// verify that the action you were taking succeeded, and if not, try again.
+    /// This should happen very rarely.
+    DBTEAMGroupsPollErrorInternalError,
 
-  /// (no description).
-  DBTEAMGroupsPollErrorOther,
+    /// (no description).
+    DBTEAMGroupsPollErrorOther,
 
-  /// You are not allowed to poll this job.
-  DBTEAMGroupsPollErrorAccessDenied,
+    /// You are not allowed to poll this job.
+    DBTEAMGroupsPollErrorAccessDenied,
 
 };
 

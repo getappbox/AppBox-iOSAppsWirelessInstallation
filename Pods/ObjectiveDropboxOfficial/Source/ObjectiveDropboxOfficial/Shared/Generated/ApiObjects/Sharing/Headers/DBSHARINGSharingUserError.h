@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGSharingUserErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGSharingUserError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharingUserErrorTag) {
-  /// The current user must verify the account e-mail address before
-  /// performing this action.
-  DBSHARINGSharingUserErrorEmailUnverified,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharingUserErrorTag){
+    /// The current user must verify the account e-mail address before
+    /// performing this action.
+    DBSHARINGSharingUserErrorEmailUnverified,
 
-  /// (no description).
-  DBSHARINGSharingUserErrorOther,
+    /// (no description).
+    DBSHARINGSharingUserErrorOther,
 
 };
 

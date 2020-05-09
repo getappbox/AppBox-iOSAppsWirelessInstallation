@@ -30,32 +30,32 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGRemoveFolderMemberErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGRemoveFolderMemberError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRemoveFolderMemberErrorTag) {
-  /// (no description).
-  DBSHARINGRemoveFolderMemberErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRemoveFolderMemberErrorTag){
+    /// (no description).
+    DBSHARINGRemoveFolderMemberErrorAccessError,
 
-  /// (no description).
-  DBSHARINGRemoveFolderMemberErrorMemberError,
+    /// (no description).
+    DBSHARINGRemoveFolderMemberErrorMemberError,
 
-  /// The target user is the owner of the shared folder. You can't remove this
-  /// user until ownership has been transferred to another member.
-  DBSHARINGRemoveFolderMemberErrorFolderOwner,
+    /// The target user is the owner of the shared folder. You can't remove this
+    /// user until ownership has been transferred to another member.
+    DBSHARINGRemoveFolderMemberErrorFolderOwner,
 
-  /// The target user has access to the shared folder via a group.
-  DBSHARINGRemoveFolderMemberErrorGroupAccess,
+    /// The target user has access to the shared folder via a group.
+    DBSHARINGRemoveFolderMemberErrorGroupAccess,
 
-  /// This action cannot be performed on a team shared folder.
-  DBSHARINGRemoveFolderMemberErrorTeamFolder,
+    /// This action cannot be performed on a team shared folder.
+    DBSHARINGRemoveFolderMemberErrorTeamFolder,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGRemoveFolderMemberErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGRemoveFolderMemberErrorNoPermission,
 
-  /// This shared folder has too many files for leaving a copy. You can still
-  /// remove this user without leaving a copy.
-  DBSHARINGRemoveFolderMemberErrorTooManyFiles,
+    /// This shared folder has too many files for leaving a copy. You can still
+    /// remove this user without leaving a copy.
+    DBSHARINGRemoveFolderMemberErrorTooManyFiles,
 
-  /// (no description).
-  DBSHARINGRemoveFolderMemberErrorOther,
+    /// (no description).
+    DBSHARINGRemoveFolderMemberErrorOther,
 
 };
 

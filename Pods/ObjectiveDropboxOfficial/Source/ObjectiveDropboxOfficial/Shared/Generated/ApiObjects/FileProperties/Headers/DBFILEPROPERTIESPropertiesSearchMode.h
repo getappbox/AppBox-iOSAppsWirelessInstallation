@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESPropertiesSearchModeTag` enum type represents the
 /// possible tag states with which the `DBFILEPROPERTIESPropertiesSearchMode`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchModeTag) {
-  /// Search for a value associated with this field name.
-  DBFILEPROPERTIESPropertiesSearchModeFieldName,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchModeTag){
+    /// Search for a value associated with this field name.
+    DBFILEPROPERTIESPropertiesSearchModeFieldName,
 
-  /// (no description).
-  DBFILEPROPERTIESPropertiesSearchModeOther,
+    /// (no description).
+    DBFILEPROPERTIESPropertiesSearchModeOther,
 
 };
 

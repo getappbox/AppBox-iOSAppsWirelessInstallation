@@ -28,16 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESPaperDeploymentPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESPaperDeploymentPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPaperDeploymentPolicyTag) {
-  /// All team members have access to Paper.
-  DBTEAMPOLICIESPaperDeploymentPolicyFull,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESPaperDeploymentPolicyTag){
+    /// All team members have access to Paper.
+    DBTEAMPOLICIESPaperDeploymentPolicyFull,
 
-  /// Only whitelisted team members can access Paper. To see which user is
-  /// whitelisted, check 'is_paper_whitelisted' on 'account/info'.
-  DBTEAMPOLICIESPaperDeploymentPolicyPartial,
+    /// Only whitelisted team members can access Paper. To see which user is
+    /// whitelisted, check 'is_paper_whitelisted' on 'account/info'.
+    DBTEAMPOLICIESPaperDeploymentPolicyPartial,
 
-  /// (no description).
-  DBTEAMPOLICIESPaperDeploymentPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESPaperDeploymentPolicyOther,
 
 };
 

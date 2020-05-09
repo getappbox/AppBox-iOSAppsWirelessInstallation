@@ -30,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGFileMemberActionIndividualResultTag` enum type represents the
 /// possible tag states with which the
 /// `DBSHARINGFileMemberActionIndividualResult` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionIndividualResultTag) {
-  /// Member was successfully removed from this file. If AccessLevel is given,
-  /// the member still has access via a parent shared folder.
-  DBSHARINGFileMemberActionIndividualResultSuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileMemberActionIndividualResultTag){
+    /// Member was successfully removed from this file. If AccessLevel is given,
+    /// the member still has access via a parent shared folder.
+    DBSHARINGFileMemberActionIndividualResultSuccess,
 
-  /// User was not able to perform this action.
-  DBSHARINGFileMemberActionIndividualResultMemberError,
+    /// User was not able to perform this action.
+    DBSHARINGFileMemberActionIndividualResultMemberError,
 
 };
 

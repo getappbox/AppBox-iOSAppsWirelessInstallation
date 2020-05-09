@@ -39,8 +39,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// Downgrade the member to a Basic account. The user will retain the email
 /// address associated with their Dropbox  account and data in their account
 /// that is not restricted to team members. In order to keep the account the
-/// argument wipe_data should be set to False.
+/// argument wipeData should be set to false.
 @property (nonatomic, readonly) NSNumber *keepAccount;
+
+/// If provided, allows removed users to keep access to folders already
+/// explicitly shared with them (not via a group) when they are downgraded to a
+/// Basic account. Users will not retain access to folders that do not allow
+/// external sharing. In order to keep the sharing relationships, the arguments
+/// wipeData should be set to false and keepAccount should be set to true.
+@property (nonatomic, readonly) NSNumber *retainTeamShares;
 
 #pragma mark - Constructors
 
@@ -58,7 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param keepAccount Downgrade the member to a Basic account. The user will
 /// retain the email address associated with their Dropbox  account and data in
 /// their account that is not restricted to team members. In order to keep the
-/// account the argument wipe_data should be set to False.
+/// account the argument wipeData should be set to false.
+/// @param retainTeamShares If provided, allows removed users to keep access to
+/// folders already explicitly shared with them (not via a group) when they are
+/// downgraded to a Basic account. Users will not retain access to folders that
+/// do not allow external sharing. In order to keep the sharing relationships,
+/// the arguments wipeData should be set to false and keepAccount should be set
+/// to true.
 ///
 /// @return An initialized instance.
 ///
@@ -66,7 +79,8 @@ NS_ASSUME_NONNULL_BEGIN
                     wipeData:(nullable NSNumber *)wipeData
               transferDestId:(nullable DBTEAMUserSelectorArg *)transferDestId
              transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
-                 keepAccount:(nullable NSNumber *)keepAccount;
+                 keepAccount:(nullable NSNumber *)keepAccount
+            retainTeamShares:(nullable NSNumber *)retainTeamShares;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

@@ -27,14 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamMembershipTypeTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamMembershipType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamMembershipTypeTag) {
-  /// User uses a license and has full access to team resources like the
-  /// shared quota.
-  DBTEAMTeamMembershipTypeFull,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamMembershipTypeTag){
+    /// User uses a license and has full access to team resources like the
+    /// shared quota.
+    DBTEAMTeamMembershipTypeFull,
 
-  /// User does not have access to the shared quota and team admins have
-  /// restricted administrative control.
-  DBTEAMTeamMembershipTypeLimited,
+    /// User does not have access to the shared quota and team admins have
+    /// restricted administrative control.
+    DBTEAMTeamMembershipTypeLimited,
 
 };
 

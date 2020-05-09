@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMRevokeLinkedAppErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMRevokeLinkedAppError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag) {
-  /// Application not found.
-  DBTEAMRevokeLinkedAppErrorAppNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag){
+    /// Application not found.
+    DBTEAMRevokeLinkedAppErrorAppNotFound,
 
-  /// Member not found.
-  DBTEAMRevokeLinkedAppErrorMemberNotFound,
+    /// Member not found.
+    DBTEAMRevokeLinkedAppErrorMemberNotFound,
 
-  /// (no description).
-  DBTEAMRevokeLinkedAppErrorOther,
+    /// (no description).
+    DBTEAMRevokeLinkedAppErrorOther,
 
 };
 

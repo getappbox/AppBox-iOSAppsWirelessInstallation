@@ -27,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBCOMMONPathRootTag` enum type represents the possible tag states with
 /// which the `DBCOMMONPathRoot` union can exist.
-typedef NS_ENUM(NSInteger, DBCOMMONPathRootTag) {
-  /// Paths are relative to the authenticating user's home namespace, whether
-  /// or not that user belongs to a team.
-  DBCOMMONPathRootHome,
+typedef NS_CLOSED_ENUM(NSInteger, DBCOMMONPathRootTag){
+    /// Paths are relative to the authenticating user's home namespace, whether
+    /// or not that user belongs to a team.
+    DBCOMMONPathRootHome,
 
-  /// Paths are relative to the authenticating user's root namespace (This
-  /// results in `invalidRoot` in `DBCOMMONPathRootError` if the user's root
-  /// namespace has changed.).
-  DBCOMMONPathRootRoot,
+    /// Paths are relative to the authenticating user's root namespace (This
+    /// results in `invalidRoot` in `DBCOMMONPathRootError` if the user's root
+    /// namespace has changed.).
+    DBCOMMONPathRootRoot,
 
-  /// Paths are relative to given namespace id (This results in `noPermission`
-  /// in `DBCOMMONPathRootError` if you don't have access to this namespace.).
-  DBCOMMONPathRootNamespaceId,
+    /// Paths are relative to given namespace id (This results in `noPermission`
+    /// in `DBCOMMONPathRootError` if you don't have access to this namespace.).
+    DBCOMMONPathRootNamespaceId,
 
-  /// (no description).
-  DBCOMMONPathRootOther,
+    /// (no description).
+    DBCOMMONPathRootOther,
 
 };
 

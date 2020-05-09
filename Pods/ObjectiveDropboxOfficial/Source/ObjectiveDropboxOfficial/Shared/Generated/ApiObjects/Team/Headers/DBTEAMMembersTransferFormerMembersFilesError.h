@@ -28,57 +28,57 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMMembersTransferFormerMembersFilesErrorTag` enum type represents
 /// the possible tag states with which the
 /// `DBTEAMMembersTransferFormerMembersFilesError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersTransferFormerMembersFilesErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersTransferFormerMembersFilesErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersTransferFormerMembersFilesErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersTransferFormerMembersFilesErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersTransferFormerMembersFilesErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersTransferFormerMembersFilesErrorUserNotInTeam,
 
-  /// (no description).
-  DBTEAMMembersTransferFormerMembersFilesErrorOther,
+    /// (no description).
+    DBTEAMMembersTransferFormerMembersFilesErrorOther,
 
-  /// Expected removed user and transfer_dest user to be different.
-  DBTEAMMembersTransferFormerMembersFilesErrorRemovedAndTransferDestShouldDiffer,
+    /// Expected removed user and transfer_dest user to be different.
+    DBTEAMMembersTransferFormerMembersFilesErrorRemovedAndTransferDestShouldDiffer,
 
-  /// Expected removed user and transfer_admin user to be different.
-  DBTEAMMembersTransferFormerMembersFilesErrorRemovedAndTransferAdminShouldDiffer,
+    /// Expected removed user and transfer_admin user to be different.
+    DBTEAMMembersTransferFormerMembersFilesErrorRemovedAndTransferAdminShouldDiffer,
 
-  /// No matching user found for the argument transfer_dest_id.
-  DBTEAMMembersTransferFormerMembersFilesErrorTransferDestUserNotFound,
+    /// No matching user found for the argument transfer_dest_id.
+    DBTEAMMembersTransferFormerMembersFilesErrorTransferDestUserNotFound,
 
-  /// The provided transfer_dest_id does not exist on this team.
-  DBTEAMMembersTransferFormerMembersFilesErrorTransferDestUserNotInTeam,
+    /// The provided transfer_dest_id does not exist on this team.
+    DBTEAMMembersTransferFormerMembersFilesErrorTransferDestUserNotInTeam,
 
-  /// The provided transfer_admin_id does not exist on this team.
-  DBTEAMMembersTransferFormerMembersFilesErrorTransferAdminUserNotInTeam,
+    /// The provided transfer_admin_id does not exist on this team.
+    DBTEAMMembersTransferFormerMembersFilesErrorTransferAdminUserNotInTeam,
 
-  /// No matching user found for the argument transfer_admin_id.
-  DBTEAMMembersTransferFormerMembersFilesErrorTransferAdminUserNotFound,
+    /// No matching user found for the argument transfer_admin_id.
+    DBTEAMMembersTransferFormerMembersFilesErrorTransferAdminUserNotFound,
 
-  /// The transfer_admin_id argument must be provided when file transfer is
-  /// requested.
-  DBTEAMMembersTransferFormerMembersFilesErrorUnspecifiedTransferAdminId,
+    /// The transfer_admin_id argument must be provided when file transfer is
+    /// requested.
+    DBTEAMMembersTransferFormerMembersFilesErrorUnspecifiedTransferAdminId,
 
-  /// Specified transfer_admin user is not a team admin.
-  DBTEAMMembersTransferFormerMembersFilesErrorTransferAdminIsNotAdmin,
+    /// Specified transfer_admin user is not a team admin.
+    DBTEAMMembersTransferFormerMembersFilesErrorTransferAdminIsNotAdmin,
 
-  /// The recipient user's email is not verified.
-  DBTEAMMembersTransferFormerMembersFilesErrorRecipientNotVerified,
+    /// The recipient user's email is not verified.
+    DBTEAMMembersTransferFormerMembersFilesErrorRecipientNotVerified,
 
-  /// The user's data is being transferred. Please wait some time before
-  /// retrying.
-  DBTEAMMembersTransferFormerMembersFilesErrorUserDataIsBeingTransferred,
+    /// The user's data is being transferred. Please wait some time before
+    /// retrying.
+    DBTEAMMembersTransferFormerMembersFilesErrorUserDataIsBeingTransferred,
 
-  /// No matching removed user found for the argument user.
-  DBTEAMMembersTransferFormerMembersFilesErrorUserNotRemoved,
+    /// No matching removed user found for the argument user.
+    DBTEAMMembersTransferFormerMembersFilesErrorUserNotRemoved,
 
-  /// User files aren't transferable anymore.
-  DBTEAMMembersTransferFormerMembersFilesErrorUserDataCannotBeTransferred,
+    /// User files aren't transferable anymore.
+    DBTEAMMembersTransferFormerMembersFilesErrorUserDataCannotBeTransferred,
 
-  /// User's data has already been transferred to another user.
-  DBTEAMMembersTransferFormerMembersFilesErrorUserDataAlreadyTransferred,
+    /// User's data has already been transferred to another user.
+    DBTEAMMembersTransferFormerMembersFilesErrorUserDataAlreadyTransferred,
 
 };
 

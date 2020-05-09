@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESThumbnailModeTag` enum type represents the possible tag states
 /// with which the `DBFILESThumbnailMode` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESThumbnailModeTag) {
-  /// Scale down the image to fit within the given size.
-  DBFILESThumbnailModeStrict,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESThumbnailModeTag){
+    /// Scale down the image to fit within the given size.
+    DBFILESThumbnailModeStrict,
 
-  /// Scale down the image to fit within the given size or its transpose.
-  DBFILESThumbnailModeBestfit,
+    /// Scale down the image to fit within the given size or its transpose.
+    DBFILESThumbnailModeBestfit,
 
-  /// Scale down the image to completely cover the given size or its
-  /// transpose.
-  DBFILESThumbnailModeFitoneBestfit,
+    /// Scale down the image to completely cover the given size or its
+    /// transpose.
+    DBFILESThumbnailModeFitoneBestfit,
 
 };
 

@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMExcludedUsersListErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMExcludedUsersListError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersListErrorTag) {
-  /// An error occurred.
-  DBTEAMExcludedUsersListErrorListError,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMExcludedUsersListErrorTag){
+    /// An error occurred.
+    DBTEAMExcludedUsersListErrorListError,
 
-  /// (no description).
-  DBTEAMExcludedUsersListErrorOther,
+    /// (no description).
+    DBTEAMExcludedUsersListErrorOther,
 
 };
 

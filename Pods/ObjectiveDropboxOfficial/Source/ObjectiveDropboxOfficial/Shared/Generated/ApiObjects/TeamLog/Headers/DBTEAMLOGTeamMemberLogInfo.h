@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 #import "DBTEAMLOGUserLogInfo.h"
 
+@class DBTEAMLOGTeamLogInfo;
 @class DBTEAMLOGTeamMemberLogInfo;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -34,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Team member external ID.
 @property (nonatomic, readonly, copy, nullable) NSString *memberExternalId;
 
+/// Details about this user&#x2019s team for enterprise event.
+@property (nonatomic, readonly, nullable) DBTEAMLOGTeamLogInfo *team;
+
 #pragma mark - Constructors
 
 ///
@@ -48,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param teamMemberId Team member ID. Might be missing due to historical data
 /// gap.
 /// @param memberExternalId Team member external ID.
+/// @param team Details about this user&#x2019s team for enterprise event.
 ///
 /// @return An initialized instance.
 ///
@@ -55,7 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
                       displayName:(nullable NSString *)displayName
                             email:(nullable NSString *)email
                      teamMemberId:(nullable NSString *)teamMemberId
-                 memberExternalId:(nullable NSString *)memberExternalId;
+                 memberExternalId:(nullable NSString *)memberExternalId
+                             team:(nullable DBTEAMLOGTeamLogInfo *)team;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

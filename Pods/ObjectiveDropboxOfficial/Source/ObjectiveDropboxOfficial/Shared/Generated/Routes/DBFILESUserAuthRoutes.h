@@ -45,8 +45,11 @@
 @class DBFILESExportInfo;
 @class DBFILESExportMetadata;
 @class DBFILESExportResult;
+@class DBFILESFileCategory;
+@class DBFILESFileLockMetadata;
 @class DBFILESFileMetadata;
 @class DBFILESFileSharingInfo;
+@class DBFILESFileStatus;
 @class DBFILESFolderMetadata;
 @class DBFILESFolderSharingInfo;
 @class DBFILESGetCopyReferenceError;
@@ -67,10 +70,18 @@
 @class DBFILESListRevisionsError;
 @class DBFILESListRevisionsMode;
 @class DBFILESListRevisionsResult;
+@class DBFILESLockConflictError;
+@class DBFILESLockFileArg;
+@class DBFILESLockFileBatchResult;
+@class DBFILESLockFileError;
+@class DBFILESLockFileResultEntry;
 @class DBFILESLookupError;
 @class DBFILESMediaInfo;
 @class DBFILESMetadata;
+@class DBFILESMinimalFileLinkMetadata;
+@class DBFILESPathOrLink;
 @class DBFILESPreviewError;
+@class DBFILESPreviewResult;
 @class DBFILESRelocationBatchError;
 @class DBFILESRelocationBatchJobStatus;
 @class DBFILESRelocationBatchLaunch;
@@ -89,15 +100,21 @@
 @class DBFILESSaveUrlResult;
 @class DBFILESSearchError;
 @class DBFILESSearchMatch;
+@class DBFILESSearchMatchV2;
 @class DBFILESSearchMode;
+@class DBFILESSearchOptions;
 @class DBFILESSearchResult;
+@class DBFILESSearchV2Result;
 @class DBFILESSharedLink;
+@class DBFILESSharedLinkFileInfo;
 @class DBFILESSymlinkInfo;
 @class DBFILESThumbnailArg;
 @class DBFILESThumbnailError;
 @class DBFILESThumbnailFormat;
 @class DBFILESThumbnailMode;
 @class DBFILESThumbnailSize;
+@class DBFILESThumbnailV2Error;
+@class DBFILESUnlockFileArg;
 @class DBFILESUploadError;
 @class DBFILESUploadErrorWithProperties;
 @class DBFILESUploadSessionCursor;
@@ -882,6 +899,18 @@ byteOffsetStart:(NSNumber *)byteOffsetStart
                                                                   byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
+/// Return the lock metadata for the given list of paths.
+///
+/// @param entries List of 'entries'. Each 'entry' contains a path of the file which will be locked or queried.
+/// Duplicate path arguments in the batch are considered only once.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESLockFileBatchResult` object on success or a
+/// `DBFILESLockFileError` object on failure.
+///
+- (DBRpcTask<DBFILESLockFileBatchResult *, DBFILESLockFileError *> *)getFileLockBatch:
+    (NSArray<DBFILESLockFileArg *> *)entries;
+
+///
 /// Returns the metadata for a file or folder. Note: Metadata for the root folder is unsupported.
 ///
 /// @param path The path of a file or folder on Dropbox.
@@ -1315,6 +1344,178 @@ getThumbnailData:(NSString *)path
    byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)getThumbnailV2Url:
+                                                                              (DBFILESPathOrLink *)resource
+                                                                                  overwrite:(BOOL)overwrite
+                                                                                destination:(NSURL *)destination;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param format The format for the thumbnail image, jpeg (default) or png. For  images that are photos, jpeg should be
+/// preferred, while png is  better for screenshots and digital arts.
+/// @param size The size for the thumbnail image.
+/// @param mode How to resize and crop the image to achieve the desired size.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
+getThumbnailV2Url:(DBFILESPathOrLink *)resource
+           format:(nullable DBFILESThumbnailFormat *)format
+             size:(nullable DBFILESThumbnailSize *)size
+             mode:(nullable DBFILESThumbnailMode *)mode
+        overwrite:(BOOL)overwrite
+      destination:(NSURL *)destination;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)getThumbnailV2Url:
+                                                                              (DBFILESPathOrLink *)resource
+                                                                                  overwrite:(BOOL)overwrite
+                                                                                destination:(NSURL *)destination
+                                                                            byteOffsetStart:(NSNumber *)byteOffsetStart
+                                                                              byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param format The format for the thumbnail image, jpeg (default) or png. For  images that are photos, jpeg should be
+/// preferred, while png is  better for screenshots and digital arts.
+/// @param size The size for the thumbnail image.
+/// @param mode How to resize and crop the image to achieve the desired size.
+/// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
+/// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
+/// a file conflict.
+/// @param destination The file url of the desired download output location.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadUrlTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
+getThumbnailV2Url:(DBFILESPathOrLink *)resource
+           format:(nullable DBFILESThumbnailFormat *)format
+             size:(nullable DBFILESThumbnailSize *)size
+             mode:(nullable DBFILESThumbnailMode *)mode
+        overwrite:(BOOL)overwrite
+      destination:(NSURL *)destination
+  byteOffsetStart:(NSNumber *)byteOffsetStart
+    byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)getThumbnailV2Data:
+    (DBFILESPathOrLink *)resource;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param format The format for the thumbnail image, jpeg (default) or png. For  images that are photos, jpeg should be
+/// preferred, while png is  better for screenshots and digital arts.
+/// @param size The size for the thumbnail image.
+/// @param mode How to resize and crop the image to achieve the desired size.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
+getThumbnailV2Data:(DBFILESPathOrLink *)resource
+            format:(nullable DBFILESThumbnailFormat *)format
+              size:(nullable DBFILESThumbnailSize *)size
+              mode:(nullable DBFILESThumbnailMode *)mode;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
+getThumbnailV2Data:(DBFILESPathOrLink *)resource
+   byteOffsetStart:(NSNumber *)byteOffsetStart
+     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+
+///
+/// Get a thumbnail for a file.
+///
+/// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
+/// to a file, or a shared link pointing to a folder, with a relative path.
+/// @param format The format for the thumbnail image, jpeg (default) or png. For  images that are photos, jpeg should be
+/// preferred, while png is  better for screenshots and digital arts.
+/// @param size The size for the thumbnail image.
+/// @param mode How to resize and crop the image to achieve the desired size.
+/// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
+/// include valid end range value.
+/// @param byteOffsetEnd For partial file download. Download file up until this ending byte position. Must include valid
+/// start range value.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESPreviewResult` object on success or a
+/// `DBFILESThumbnailV2Error` object on failure.
+///
+- (DBDownloadDataTask<DBFILESPreviewResult *, DBFILESThumbnailV2Error *> *)
+getThumbnailV2Data:(DBFILESPathOrLink *)resource
+            format:(nullable DBFILESThumbnailFormat *)format
+              size:(nullable DBFILESThumbnailSize *)size
+              mode:(nullable DBFILESThumbnailMode *)mode
+   byteOffsetStart:(NSNumber *)byteOffsetStart
+     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+
+///
 /// Get thumbnails for a list of images. We allow up to 25 thumbnails in a single batch. This method currently supports
 /// files with the following file extensions: jpg, jpeg, png, tiff, tif, gif and bmp. Photos that are larger than 20MB
 /// in size won't be converted to a thumbnail.
@@ -1535,8 +1736,22 @@ listRevisions:(NSString *)path
         limit:(nullable NSNumber *)limit;
 
 ///
+/// Lock the files at the given paths. A locked file will be writable only by the lock holder. A successful response
+/// indicates that the file has been locked. Returns a list of the locked file paths and their metadata after this
+/// operation.
+///
+/// @param entries List of 'entries'. Each 'entry' contains a path of the file which will be locked or queried.
+/// Duplicate path arguments in the batch are considered only once.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESLockFileBatchResult` object on success or a
+/// `DBFILESLockFileError` object on failure.
+///
+- (DBRpcTask<DBFILESLockFileBatchResult *, DBFILESLockFileError *> *)lockFileBatch:
+    (NSArray<DBFILESLockFileArg *> *)entries;
+
+///
 /// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
-/// will be moved.
+/// will be moved. Note that we do not currently support case-only renaming.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationResult` object on success or a
@@ -1547,7 +1762,7 @@ listRevisions:(NSString *)path
 
 ///
 /// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
-/// will be moved.
+/// will be moved. Note that we do not currently support case-only renaming.
 ///
 /// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
 /// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
@@ -1597,10 +1812,11 @@ listRevisions:(NSString *)path
     __deprecated_msg("move is deprecated. Use move.");
 
 ///
-/// Move multiple files or folders to different locations at once in the user's Dropbox. This route will replace
-/// `moveBatch`. The main difference is this route will return status for each entry, while `moveBatch` raises failure
-/// if any entry fails. This route will either finish synchronously, or return a job ID and do the async move job in
-/// background. Please use `moveBatchCheck` to check the job status.
+/// Move multiple files or folders to different locations at once in the user's Dropbox. Note that we do not currently
+/// support case-only renaming. This route will replace `moveBatch`. The main difference is this route will return
+/// status for each entry, while `moveBatch` raises failure if any entry fails. This route will either finish
+/// synchronously, or return a job ID and do the async move job in background. Please use `moveBatchCheck` to check the
+/// job status.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationBatchV2Launch` object on success
@@ -1609,10 +1825,11 @@ listRevisions:(NSString *)path
 - (DBRpcTask<DBFILESRelocationBatchV2Launch *, DBNilObject *> *)moveBatchV2:(NSArray<DBFILESRelocationPath *> *)entries;
 
 ///
-/// Move multiple files or folders to different locations at once in the user's Dropbox. This route will replace
-/// `moveBatch`. The main difference is this route will return status for each entry, while `moveBatch` raises failure
-/// if any entry fails. This route will either finish synchronously, or return a job ID and do the async move job in
-/// background. Please use `moveBatchCheck` to check the job status.
+/// Move multiple files or folders to different locations at once in the user's Dropbox. Note that we do not currently
+/// support case-only renaming. This route will replace `moveBatch`. The main difference is this route will return
+/// status for each entry, while `moveBatch` raises failure if any entry fails. This route will either finish
+/// synchronously, or return a job ID and do the async move job in background. Please use `moveBatchCheck` to check the
+/// job status.
 ///
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
@@ -1625,20 +1842,21 @@ listRevisions:(NSString *)path
                                                      allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer;
 
 ///
-/// Move multiple files or folders to different locations at once in the user's Dropbox. This route is 'all or nothing',
-/// which means if one entry fails, the whole transaction will abort. This route will return job ID immediately and do
-/// the async moving job in background. Please use `moveBatchCheck` to check the job status.
+/// DEPRECATED: Move multiple files or folders to different locations at once in the user's Dropbox. This route will
+/// return job ID immediately and do the async moving job in background. Please use `moveBatchCheck` to check the job
+/// status.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationBatchLaunch` object on success or
 /// a `void` object on failure.
 ///
-- (DBRpcTask<DBFILESRelocationBatchLaunch *, DBNilObject *> *)moveBatch:(NSArray<DBFILESRelocationPath *> *)entries;
+- (DBRpcTask<DBFILESRelocationBatchLaunch *, DBNilObject *> *)moveBatch:(NSArray<DBFILESRelocationPath *> *)entries
+    __deprecated_msg("moveBatch is deprecated. Use moveBatch.");
 
 ///
-/// Move multiple files or folders to different locations at once in the user's Dropbox. This route is 'all or nothing',
-/// which means if one entry fails, the whole transaction will abort. This route will return job ID immediately and do
-/// the async moving job in background. Please use `moveBatchCheck` to check the job status.
+/// DEPRECATED: Move multiple files or folders to different locations at once in the user's Dropbox. This route will
+/// return job ID immediately and do the async moving job in background. Please use `moveBatchCheck` to check the job
+/// status.
 ///
 /// @param allowSharedFolder If true, `dCopyBatch` will copy contents in shared folder, otherwise `cantCopySharedFolder`
 /// in `DBFILESRelocationError` will be returned if `fromPath` in `DBFILESRelocationPath` contains shared folder. This
@@ -1652,7 +1870,8 @@ listRevisions:(NSString *)path
 - (DBRpcTask<DBFILESRelocationBatchLaunch *, DBNilObject *> *)moveBatch:(NSArray<DBFILESRelocationPath *> *)entries
                                                              autorename:(nullable NSNumber *)autorename
                                                       allowSharedFolder:(nullable NSNumber *)allowSharedFolder
-                                                 allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer;
+                                                 allowOwnershipTransfer:(nullable NSNumber *)allowOwnershipTransfer
+    __deprecated_msg("moveBatch is deprecated. Use moveBatch.");
 
 ///
 /// Returns the status of an asynchronous job for `moveBatch`. It returns list of results for each entry.
@@ -1666,7 +1885,8 @@ listRevisions:(NSString *)path
 - (DBRpcTask<DBFILESRelocationBatchV2JobStatus *, DBASYNCPollError *> *)moveBatchCheckV2:(NSString *)asyncJobId;
 
 ///
-/// Returns the status of an asynchronous job for `moveBatch`. If success, it returns list of results for each entry.
+/// DEPRECATED: Returns the status of an asynchronous job for `moveBatch`. If success, it returns list of results for
+/// each entry.
 ///
 /// @param asyncJobId Id of the asynchronous job. This is the value of a response returned from the method that launched
 /// the job.
@@ -1674,7 +1894,8 @@ listRevisions:(NSString *)path
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationBatchJobStatus` object on success
 /// or a `DBASYNCPollError` object on failure.
 ///
-- (DBRpcTask<DBFILESRelocationBatchJobStatus *, DBASYNCPollError *> *)moveBatchCheck:(NSString *)asyncJobId;
+- (DBRpcTask<DBFILESRelocationBatchJobStatus *, DBASYNCPollError *> *)moveBatchCheck:(NSString *)asyncJobId
+    __deprecated_msg("moveBatchCheck is deprecated. Use moveBatchCheck.");
 
 ///
 /// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). Note: This endpoint
@@ -1705,7 +1926,8 @@ listRevisions:(NSString *)path
 /// DEPRECATED: The propertiesAdd route
 ///
 /// @param path A unique identifier for the file or folder.
-/// @param propertyGroups The property groups which are to be added to a Dropbox file.
+/// @param propertyGroups The property groups which are to be added to a Dropbox file. No two groups in the input should
+/// refer to the same template.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBFILEPROPERTIESAddPropertiesError` object on failure.
@@ -1719,7 +1941,8 @@ propertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
 /// DEPRECATED: The propertiesOverwrite route
 ///
 /// @param path A unique identifier for the file or folder.
-/// @param propertyGroups The property groups "snapshot" updates to force apply.
+/// @param propertyGroups The property groups "snapshot" updates to force apply. No two groups in the input should
+/// refer to the same template.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBFILEPROPERTIESInvalidPropertyGroupError` object on failure.
@@ -1815,25 +2038,29 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 - (DBRpcTask<DBFILESSaveUrlJobStatus *, DBASYNCPollError *> *)saveUrlCheckJobStatus:(NSString *)asyncJobId;
 
 ///
-/// Searches for files and folders. Note: Recent changes may not immediately be reflected in search results due to a
-/// short delay in indexing.
+/// DEPRECATED: Searches for files and folders. Note: Recent changes may not immediately be reflected in search results
+/// due to a short delay in indexing.
 ///
 /// @param path The path in the user's Dropbox to search. Should probably be a folder.
-/// @param query The string to search for. The search string is split on spaces into multiple tokens. For file name
-/// searching, the last token is used for prefix matching (i.e. "bat c" matches "bat cave" but not "batman car").
+/// @param query The string to search for. Query string may be rewritten to improve relevance of results. The string is
+/// split on spaces into multiple tokens. For file name searching, the last token is used for prefix matching (i.e. "bat
+/// c" matches "bat cave" but not "batman car").
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESSearchResult` object on success or a
 /// `DBFILESSearchError` object on failure.
 ///
-- (DBRpcTask<DBFILESSearchResult *, DBFILESSearchError *> *)search:(NSString *)path query:(NSString *)query;
+- (DBRpcTask<DBFILESSearchResult *, DBFILESSearchError *> *)search:(NSString *)path
+                                                             query:(NSString *)query
+    __deprecated_msg("search is deprecated. Use search.");
 
 ///
-/// Searches for files and folders. Note: Recent changes may not immediately be reflected in search results due to a
-/// short delay in indexing.
+/// DEPRECATED: Searches for files and folders. Note: Recent changes may not immediately be reflected in search results
+/// due to a short delay in indexing.
 ///
 /// @param path The path in the user's Dropbox to search. Should probably be a folder.
-/// @param query The string to search for. The search string is split on spaces into multiple tokens. For file name
-/// searching, the last token is used for prefix matching (i.e. "bat c" matches "bat cave" but not "batman car").
+/// @param query The string to search for. Query string may be rewritten to improve relevance of results. The string is
+/// split on spaces into multiple tokens. For file name searching, the last token is used for prefix matching (i.e. "bat
+/// c" matches "bat cave" but not "batman car").
 /// @param start The starting index within the search results (used for paging).
 /// @param maxResults The maximum number of search results to return.
 /// @param mode The search mode (filename, filename_and_content, or deleted_filename). Note that searching file content
@@ -1846,7 +2073,63 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
                                                              query:(NSString *)query
                                                              start:(nullable NSNumber *)start
                                                         maxResults:(nullable NSNumber *)maxResults
-                                                              mode:(nullable DBFILESSearchMode *)mode;
+                                                              mode:(nullable DBFILESSearchMode *)mode
+    __deprecated_msg("search is deprecated. Use search.");
+
+///
+/// Searches for files and folders. Note: `search` along with `searchContinue` can only be used to retrieve a maximum of
+/// 10,000 matches. Recent changes may not immediately be reflected in search results due to a short delay in indexing.
+/// Duplicate results may be returned across pages. Some results may not be returned.
+///
+/// @param query The string to search for. May match across multiple fields based on the request arguments. Query string
+/// may be rewritten to improve relevance of results.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESSearchV2Result` object on success or a
+/// `DBFILESSearchError` object on failure.
+///
+- (DBRpcTask<DBFILESSearchV2Result *, DBFILESSearchError *> *)searchV2:(NSString *)query;
+
+///
+/// Searches for files and folders. Note: `search` along with `searchContinue` can only be used to retrieve a maximum of
+/// 10,000 matches. Recent changes may not immediately be reflected in search results due to a short delay in indexing.
+/// Duplicate results may be returned across pages. Some results may not be returned.
+///
+/// @param query The string to search for. May match across multiple fields based on the request arguments. Query string
+/// may be rewritten to improve relevance of results.
+/// @param options Options for more targeted search results.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESSearchV2Result` object on success or a
+/// `DBFILESSearchError` object on failure.
+///
+- (DBRpcTask<DBFILESSearchV2Result *, DBFILESSearchError *> *)searchV2:(NSString *)query
+                                                               options:(nullable DBFILESSearchOptions *)options
+                                                     includeHighlights:(nullable NSNumber *)includeHighlights;
+
+///
+/// Fetches the next page of search results returned from `search`. Note: `search` along with `searchContinue` can only
+/// be used to retrieve a maximum of 10,000 matches. Recent changes may not immediately be reflected in search results
+/// due to a short delay in indexing. Duplicate results may be returned across pages. Some results may not be returned.
+///
+/// @param cursor The cursor returned by your last call to `search`. Used to fetch the next page of results.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESSearchV2Result` object on success or a
+/// `DBFILESSearchError` object on failure.
+///
+- (DBRpcTask<DBFILESSearchV2Result *, DBFILESSearchError *> *)searchContinueV2:(NSString *)cursor;
+
+///
+/// Unlock the files at the given paths. A locked file can only be unlocked by the lock holder or, if a business
+/// account, a team admin. A successful response indicates that the file has been unlocked. Returns a list of the
+/// unlocked file paths and their metadata after this operation.
+///
+/// @param entries List of 'entries'. Each 'entry' contains a path of the file which will be unlocked. Duplicate path
+/// arguments in the batch are considered only once.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESLockFileBatchResult` object on success or a
+/// `DBFILESLockFileError` object on failure.
+///
+- (DBRpcTask<DBFILESLockFileBatchResult *, DBFILESLockFileError *> *)unlockFileBatch:
+    (NSArray<DBFILESUnlockFileArg *> *)entries;
 
 ///
 /// Create a new file with the contents provided in the request. Do not use this to upload a file larger than 150 MB.

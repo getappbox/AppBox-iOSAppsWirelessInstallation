@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEREQUESTSListFileRequestsContinueErrorTag` enum type represents
 /// the possible tag states with which the
 /// `DBFILEREQUESTSListFileRequestsContinueError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSListFileRequestsContinueErrorTag) {
-  /// This user's Dropbox Business team doesn't allow file requests.
-  DBFILEREQUESTSListFileRequestsContinueErrorDisabledForTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSListFileRequestsContinueErrorTag){
+    /// This user's Dropbox Business team doesn't allow file requests.
+    DBFILEREQUESTSListFileRequestsContinueErrorDisabledForTeam,
 
-  /// (no description).
-  DBFILEREQUESTSListFileRequestsContinueErrorOther,
+    /// (no description).
+    DBFILEREQUESTSListFileRequestsContinueErrorOther,
 
-  /// The cursor is invalid.
-  DBFILEREQUESTSListFileRequestsContinueErrorInvalidCursor,
+    /// The cursor is invalid.
+    DBFILEREQUESTSListFileRequestsContinueErrorInvalidCursor,
 
 };
 

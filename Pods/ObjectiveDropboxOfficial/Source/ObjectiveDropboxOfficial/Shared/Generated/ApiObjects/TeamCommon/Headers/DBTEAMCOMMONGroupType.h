@@ -29,16 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMCOMMONGroupTypeTag` enum type represents the possible tag states
 /// with which the `DBTEAMCOMMONGroupType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag) {
-  /// A group to which team members are automatically added. Applicable to
-  /// team folders https://www.dropbox.com/help/986 only.
-  DBTEAMCOMMONGroupTypeTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMCOMMONGroupTypeTag){
+    /// A group to which team members are automatically added. Applicable to
+    /// team folders https://www.dropbox.com/help/986 only.
+    DBTEAMCOMMONGroupTypeTeam,
 
-  /// A group is created and managed by a user.
-  DBTEAMCOMMONGroupTypeUserManaged,
+    /// A group is created and managed by a user.
+    DBTEAMCOMMONGroupTypeUserManaged,
 
-  /// (no description).
-  DBTEAMCOMMONGroupTypeOther,
+    /// (no description).
+    DBTEAMCOMMONGroupTypeOther,
 
 };
 

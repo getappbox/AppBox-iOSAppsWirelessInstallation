@@ -27,26 +27,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERPaperDocCreateErrorTag` enum type represents the possible tag
 /// states with which the `DBPAPERPaperDocCreateError` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERPaperDocCreateErrorTag) {
-  /// Your account does not have permissions to perform this action.
-  DBPAPERPaperDocCreateErrorInsufficientPermissions,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERPaperDocCreateErrorTag){
+    /// Your account does not have permissions to perform this action. This may
+    /// be due to it only having access to Paper as files in the Dropbox
+    /// filesystem. For more information, refer to the Paper Migration Guide
+    /// https://www.dropbox.com/lp/developers/reference/paper-migration-guide.
+    DBPAPERPaperDocCreateErrorInsufficientPermissions,
 
-  /// (no description).
-  DBPAPERPaperDocCreateErrorOther,
+    /// (no description).
+    DBPAPERPaperDocCreateErrorOther,
 
-  /// The provided content was malformed and cannot be imported to Paper.
-  DBPAPERPaperDocCreateErrorContentMalformed,
+    /// The provided content was malformed and cannot be imported to Paper.
+    DBPAPERPaperDocCreateErrorContentMalformed,
 
-  /// The specified Paper folder is cannot be found.
-  DBPAPERPaperDocCreateErrorFolderNotFound,
+    /// The specified Paper folder is cannot be found.
+    DBPAPERPaperDocCreateErrorFolderNotFound,
 
-  /// The newly created Paper doc would be too large. Please split the content
-  /// into multiple docs.
-  DBPAPERPaperDocCreateErrorDocLengthExceeded,
+    /// The newly created Paper doc would be too large. Please split the content
+    /// into multiple docs.
+    DBPAPERPaperDocCreateErrorDocLengthExceeded,
 
-  /// The imported document contains an image that is too large. The current
-  /// limit is 1MB. Note: This only applies to HTML with data uri.
-  DBPAPERPaperDocCreateErrorImageSizeExceeded,
+    /// The imported document contains an image that is too large. The current
+    /// limit is 1MB. This only applies to HTML with data URI.
+    DBPAPERPaperDocCreateErrorImageSizeExceeded,
 
 };
 
@@ -59,7 +62,10 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocCreateErrorTag) {
 /// Initializes union class with tag state of "insufficient_permissions".
 ///
 /// Description of the "insufficient_permissions" tag state: Your account does
-/// not have permissions to perform this action.
+/// not have permissions to perform this action. This may be due to it only
+/// having access to Paper as files in the Dropbox filesystem. For more
+/// information, refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide.
 ///
 /// @return An initialized instance.
 ///
@@ -106,8 +112,8 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocCreateErrorTag) {
 /// Initializes union class with tag state of "image_size_exceeded".
 ///
 /// Description of the "image_size_exceeded" tag state: The imported document
-/// contains an image that is too large. The current limit is 1MB. Note: This
-/// only applies to HTML with data uri.
+/// contains an image that is too large. The current limit is 1MB. This only
+/// applies to HTML with data URI.
 ///
 /// @return An initialized instance.
 ///

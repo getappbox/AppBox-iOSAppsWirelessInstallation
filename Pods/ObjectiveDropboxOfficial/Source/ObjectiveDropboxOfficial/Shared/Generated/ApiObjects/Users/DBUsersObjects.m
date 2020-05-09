@@ -370,6 +370,170 @@
 
 @end
 
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBUSERSFileLockingValue.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSFileLockingValue
+
+@synthesize enabled = _enabled;
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEnabled:(NSNumber *)enabled {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSFileLockingValueEnabled;
+    _enabled = enabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSFileLockingValueOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+- (NSNumber *)enabled {
+  if (![self isEnabled]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBUSERSFileLockingValueEnabled, but was %@.", [self tagName]];
+  }
+  return _enabled;
+}
+
+#pragma mark - Tag state methods
+
+- (BOOL)isEnabled {
+  return _tag == DBUSERSFileLockingValueEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBUSERSFileLockingValueOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBUSERSFileLockingValueEnabled:
+    return @"DBUSERSFileLockingValueEnabled";
+  case DBUSERSFileLockingValueOther:
+    return @"DBUSERSFileLockingValueOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSFileLockingValueSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSFileLockingValueSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSFileLockingValueSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBUSERSFileLockingValueEnabled:
+    result = prime * result + [self.enabled hash];
+  case DBUSERSFileLockingValueOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileLockingValue:other];
+}
+
+- (BOOL)isEqualToFileLockingValue:(DBUSERSFileLockingValue *)aFileLockingValue {
+  if (self == aFileLockingValue) {
+    return YES;
+  }
+  if (self.tag != aFileLockingValue.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBUSERSFileLockingValueEnabled:
+    return [self.enabled isEqual:aFileLockingValue.enabled];
+  case DBUSERSFileLockingValueOther:
+    return [[self tagName] isEqual:[aFileLockingValue tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSFileLockingValueSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSFileLockingValue *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isEnabled]) {
+    jsonDict[@"enabled"] = valueObj.enabled;
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSFileLockingValue *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"enabled"]) {
+    NSNumber *enabled = valueDict[@"enabled"];
+    return [[DBUSERSFileLockingValue alloc] initWithEnabled:enabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBUSERSFileLockingValue alloc] initWithOther];
+  } else {
+    return [[DBUSERSFileLockingValue alloc] initWithOther];
+  }
+}
+
+@end
+
 #import "DBCOMMONRootInfo.h"
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
@@ -1655,6 +1819,170 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBUSERSPaperAsFilesValue.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSPaperAsFilesValue
+
+@synthesize enabled = _enabled;
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEnabled:(NSNumber *)enabled {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSPaperAsFilesValueEnabled;
+    _enabled = enabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSPaperAsFilesValueOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+- (NSNumber *)enabled {
+  if (![self isEnabled]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBUSERSPaperAsFilesValueEnabled, but was %@.", [self tagName]];
+  }
+  return _enabled;
+}
+
+#pragma mark - Tag state methods
+
+- (BOOL)isEnabled {
+  return _tag == DBUSERSPaperAsFilesValueEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBUSERSPaperAsFilesValueOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBUSERSPaperAsFilesValueEnabled:
+    return @"DBUSERSPaperAsFilesValueEnabled";
+  case DBUSERSPaperAsFilesValueOther:
+    return @"DBUSERSPaperAsFilesValueOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSPaperAsFilesValueSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSPaperAsFilesValueSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSPaperAsFilesValueSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBUSERSPaperAsFilesValueEnabled:
+    result = prime * result + [self.enabled hash];
+  case DBUSERSPaperAsFilesValueOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperAsFilesValue:other];
+}
+
+- (BOOL)isEqualToPaperAsFilesValue:(DBUSERSPaperAsFilesValue *)aPaperAsFilesValue {
+  if (self == aPaperAsFilesValue) {
+    return YES;
+  }
+  if (self.tag != aPaperAsFilesValue.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBUSERSPaperAsFilesValueEnabled:
+    return [self.enabled isEqual:aPaperAsFilesValue.enabled];
+  case DBUSERSPaperAsFilesValueOther:
+    return [[self tagName] isEqual:[aPaperAsFilesValue tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSPaperAsFilesValueSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSPaperAsFilesValue *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isEnabled]) {
+    jsonDict[@"enabled"] = valueObj.enabled;
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSPaperAsFilesValue *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"enabled"]) {
+    NSNumber *enabled = valueDict[@"enabled"];
+    return [[DBUSERSPaperAsFilesValue alloc] initWithEnabled:enabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBUSERSPaperAsFilesValue alloc] initWithOther];
+  } else {
+    return [[DBUSERSPaperAsFilesValue alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBUSERSIndividualSpaceAllocation.h"
 #import "DBUSERSSpaceAllocation.h"
 #import "DBUSERSTeamSpaceAllocation.h"
@@ -1973,13 +2301,15 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithUsed:(NSNumber *)used
-                       allocated:(NSNumber *)allocated
-    userWithinTeamSpaceAllocated:(NSNumber *)userWithinTeamSpaceAllocated
-    userWithinTeamSpaceLimitType:(DBTEAMCOMMONMemberSpaceLimitType *)userWithinTeamSpaceLimitType {
+                        allocated:(NSNumber *)allocated
+     userWithinTeamSpaceAllocated:(NSNumber *)userWithinTeamSpaceAllocated
+     userWithinTeamSpaceLimitType:(DBTEAMCOMMONMemberSpaceLimitType *)userWithinTeamSpaceLimitType
+    userWithinTeamSpaceUsedCached:(NSNumber *)userWithinTeamSpaceUsedCached {
   [DBStoneValidators nonnullValidator:nil](used);
   [DBStoneValidators nonnullValidator:nil](allocated);
   [DBStoneValidators nonnullValidator:nil](userWithinTeamSpaceAllocated);
   [DBStoneValidators nonnullValidator:nil](userWithinTeamSpaceLimitType);
+  [DBStoneValidators nonnullValidator:nil](userWithinTeamSpaceUsedCached);
 
   self = [super init];
   if (self) {
@@ -1987,6 +2317,7 @@
     _allocated = allocated;
     _userWithinTeamSpaceAllocated = userWithinTeamSpaceAllocated;
     _userWithinTeamSpaceLimitType = userWithinTeamSpaceLimitType;
+    _userWithinTeamSpaceUsedCached = userWithinTeamSpaceUsedCached;
   }
   return self;
 }
@@ -2025,6 +2356,7 @@
   result = prime * result + [self.allocated hash];
   result = prime * result + [self.userWithinTeamSpaceAllocated hash];
   result = prime * result + [self.userWithinTeamSpaceLimitType hash];
+  result = prime * result + [self.userWithinTeamSpaceUsedCached hash];
 
   return prime * result;
 }
@@ -2057,6 +2389,9 @@
   if (![self.userWithinTeamSpaceLimitType isEqual:aTeamSpaceAllocation.userWithinTeamSpaceLimitType]) {
     return NO;
   }
+  if (![self.userWithinTeamSpaceUsedCached isEqual:aTeamSpaceAllocation.userWithinTeamSpaceUsedCached]) {
+    return NO;
+  }
   return YES;
 }
 
@@ -2074,6 +2409,7 @@
   jsonDict[@"user_within_team_space_allocated"] = valueObj.userWithinTeamSpaceAllocated;
   jsonDict[@"user_within_team_space_limit_type"] =
       [DBTEAMCOMMONMemberSpaceLimitTypeSerializer serialize:valueObj.userWithinTeamSpaceLimitType];
+  jsonDict[@"user_within_team_space_used_cached"] = valueObj.userWithinTeamSpaceUsedCached;
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -2084,11 +2420,760 @@
   NSNumber *userWithinTeamSpaceAllocated = valueDict[@"user_within_team_space_allocated"];
   DBTEAMCOMMONMemberSpaceLimitType *userWithinTeamSpaceLimitType =
       [DBTEAMCOMMONMemberSpaceLimitTypeSerializer deserialize:valueDict[@"user_within_team_space_limit_type"]];
+  NSNumber *userWithinTeamSpaceUsedCached = valueDict[@"user_within_team_space_used_cached"];
 
   return [[DBUSERSTeamSpaceAllocation alloc] initWithUsed:used
                                                 allocated:allocated
                              userWithinTeamSpaceAllocated:userWithinTeamSpaceAllocated
-                             userWithinTeamSpaceLimitType:userWithinTeamSpaceLimitType];
+                             userWithinTeamSpaceLimitType:userWithinTeamSpaceLimitType
+                            userWithinTeamSpaceUsedCached:userWithinTeamSpaceUsedCached];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBUSERSUserFeature.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSUserFeature
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPaperAsFiles {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeaturePaperAsFiles;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileLocking {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeatureFileLocking;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeatureOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isPaperAsFiles {
+  return _tag == DBUSERSUserFeaturePaperAsFiles;
+}
+
+- (BOOL)isFileLocking {
+  return _tag == DBUSERSUserFeatureFileLocking;
+}
+
+- (BOOL)isOther {
+  return _tag == DBUSERSUserFeatureOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBUSERSUserFeaturePaperAsFiles:
+    return @"DBUSERSUserFeaturePaperAsFiles";
+  case DBUSERSUserFeatureFileLocking:
+    return @"DBUSERSUserFeatureFileLocking";
+  case DBUSERSUserFeatureOther:
+    return @"DBUSERSUserFeatureOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSUserFeatureSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSUserFeatureSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSUserFeatureSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBUSERSUserFeaturePaperAsFiles:
+    result = prime * result + [[self tagName] hash];
+  case DBUSERSUserFeatureFileLocking:
+    result = prime * result + [[self tagName] hash];
+  case DBUSERSUserFeatureOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserFeature:other];
+}
+
+- (BOOL)isEqualToUserFeature:(DBUSERSUserFeature *)anUserFeature {
+  if (self == anUserFeature) {
+    return YES;
+  }
+  if (self.tag != anUserFeature.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBUSERSUserFeaturePaperAsFiles:
+    return [[self tagName] isEqual:[anUserFeature tagName]];
+  case DBUSERSUserFeatureFileLocking:
+    return [[self tagName] isEqual:[anUserFeature tagName]];
+  case DBUSERSUserFeatureOther:
+    return [[self tagName] isEqual:[anUserFeature tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSUserFeatureSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSUserFeature *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isPaperAsFiles]) {
+    jsonDict[@".tag"] = @"paper_as_files";
+  } else if ([valueObj isFileLocking]) {
+    jsonDict[@".tag"] = @"file_locking";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSUserFeature *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"paper_as_files"]) {
+    return [[DBUSERSUserFeature alloc] initWithPaperAsFiles];
+  } else if ([tag isEqualToString:@"file_locking"]) {
+    return [[DBUSERSUserFeature alloc] initWithFileLocking];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBUSERSUserFeature alloc] initWithOther];
+  } else {
+    return [[DBUSERSUserFeature alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBUSERSFileLockingValue.h"
+#import "DBUSERSPaperAsFilesValue.h"
+#import "DBUSERSUserFeatureValue.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSUserFeatureValue
+
+@synthesize paperAsFiles = _paperAsFiles;
+@synthesize fileLocking = _fileLocking;
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPaperAsFiles:(DBUSERSPaperAsFilesValue *)paperAsFiles {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeatureValuePaperAsFiles;
+    _paperAsFiles = paperAsFiles;
+  }
+  return self;
+}
+
+- (instancetype)initWithFileLocking:(DBUSERSFileLockingValue *)fileLocking {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeatureValueFileLocking;
+    _fileLocking = fileLocking;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeatureValueOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+- (DBUSERSPaperAsFilesValue *)paperAsFiles {
+  if (![self isPaperAsFiles]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBUSERSUserFeatureValuePaperAsFiles, but was %@.", [self tagName]];
+  }
+  return _paperAsFiles;
+}
+
+- (DBUSERSFileLockingValue *)fileLocking {
+  if (![self isFileLocking]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBUSERSUserFeatureValueFileLocking, but was %@.", [self tagName]];
+  }
+  return _fileLocking;
+}
+
+#pragma mark - Tag state methods
+
+- (BOOL)isPaperAsFiles {
+  return _tag == DBUSERSUserFeatureValuePaperAsFiles;
+}
+
+- (BOOL)isFileLocking {
+  return _tag == DBUSERSUserFeatureValueFileLocking;
+}
+
+- (BOOL)isOther {
+  return _tag == DBUSERSUserFeatureValueOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBUSERSUserFeatureValuePaperAsFiles:
+    return @"DBUSERSUserFeatureValuePaperAsFiles";
+  case DBUSERSUserFeatureValueFileLocking:
+    return @"DBUSERSUserFeatureValueFileLocking";
+  case DBUSERSUserFeatureValueOther:
+    return @"DBUSERSUserFeatureValueOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSUserFeatureValueSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSUserFeatureValueSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSUserFeatureValueSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBUSERSUserFeatureValuePaperAsFiles:
+    result = prime * result + [self.paperAsFiles hash];
+  case DBUSERSUserFeatureValueFileLocking:
+    result = prime * result + [self.fileLocking hash];
+  case DBUSERSUserFeatureValueOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserFeatureValue:other];
+}
+
+- (BOOL)isEqualToUserFeatureValue:(DBUSERSUserFeatureValue *)anUserFeatureValue {
+  if (self == anUserFeatureValue) {
+    return YES;
+  }
+  if (self.tag != anUserFeatureValue.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBUSERSUserFeatureValuePaperAsFiles:
+    return [self.paperAsFiles isEqual:anUserFeatureValue.paperAsFiles];
+  case DBUSERSUserFeatureValueFileLocking:
+    return [self.fileLocking isEqual:anUserFeatureValue.fileLocking];
+  case DBUSERSUserFeatureValueOther:
+    return [[self tagName] isEqual:[anUserFeatureValue tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSUserFeatureValueSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSUserFeatureValue *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isPaperAsFiles]) {
+    jsonDict[@"paper_as_files"] = [[DBUSERSPaperAsFilesValueSerializer serialize:valueObj.paperAsFiles] mutableCopy];
+    jsonDict[@".tag"] = @"paper_as_files";
+  } else if ([valueObj isFileLocking]) {
+    jsonDict[@"file_locking"] = [[DBUSERSFileLockingValueSerializer serialize:valueObj.fileLocking] mutableCopy];
+    jsonDict[@".tag"] = @"file_locking";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSUserFeatureValue *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"paper_as_files"]) {
+    DBUSERSPaperAsFilesValue *paperAsFiles =
+        [DBUSERSPaperAsFilesValueSerializer deserialize:valueDict[@"paper_as_files"]];
+    return [[DBUSERSUserFeatureValue alloc] initWithPaperAsFiles:paperAsFiles];
+  } else if ([tag isEqualToString:@"file_locking"]) {
+    DBUSERSFileLockingValue *fileLocking = [DBUSERSFileLockingValueSerializer deserialize:valueDict[@"file_locking"]];
+    return [[DBUSERSUserFeatureValue alloc] initWithFileLocking:fileLocking];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBUSERSUserFeatureValue alloc] initWithOther];
+  } else {
+    return [[DBUSERSUserFeatureValue alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBUSERSUserFeature.h"
+#import "DBUSERSUserFeaturesGetValuesBatchArg.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSUserFeaturesGetValuesBatchArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithFeatures:(NSArray<DBUSERSUserFeature *> *)features {
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](features);
+
+  self = [super init];
+  if (self) {
+    _features = features;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSUserFeaturesGetValuesBatchArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSUserFeaturesGetValuesBatchArgSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSUserFeaturesGetValuesBatchArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.features hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserFeaturesGetValuesBatchArg:other];
+}
+
+- (BOOL)isEqualToUserFeaturesGetValuesBatchArg:(DBUSERSUserFeaturesGetValuesBatchArg *)anUserFeaturesGetValuesBatchArg {
+  if (self == anUserFeaturesGetValuesBatchArg) {
+    return YES;
+  }
+  if (![self.features isEqual:anUserFeaturesGetValuesBatchArg.features]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSUserFeaturesGetValuesBatchArgSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSUserFeaturesGetValuesBatchArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"features"] = [DBArraySerializer serialize:valueObj.features
+                                             withBlock:^id(id elem0) {
+                                               return [DBUSERSUserFeatureSerializer serialize:elem0];
+                                             }];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSUserFeaturesGetValuesBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSArray<DBUSERSUserFeature *> *features =
+      [DBArraySerializer deserialize:valueDict[@"features"]
+                           withBlock:^id(id elem0) {
+                             return [DBUSERSUserFeatureSerializer deserialize:elem0];
+                           }];
+
+  return [[DBUSERSUserFeaturesGetValuesBatchArg alloc] initWithFeatures:features];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBUSERSUserFeaturesGetValuesBatchError.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSUserFeaturesGetValuesBatchError
+
+#pragma mark - Constructors
+
+- (instancetype)initWithEmptyFeaturesList {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBUSERSUserFeaturesGetValuesBatchErrorOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isEmptyFeaturesList {
+  return _tag == DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList;
+}
+
+- (BOOL)isOther {
+  return _tag == DBUSERSUserFeaturesGetValuesBatchErrorOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList:
+    return @"DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList";
+  case DBUSERSUserFeaturesGetValuesBatchErrorOther:
+    return @"DBUSERSUserFeaturesGetValuesBatchErrorOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSUserFeaturesGetValuesBatchErrorSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSUserFeaturesGetValuesBatchErrorSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSUserFeaturesGetValuesBatchErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList:
+    result = prime * result + [[self tagName] hash];
+  case DBUSERSUserFeaturesGetValuesBatchErrorOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserFeaturesGetValuesBatchError:other];
+}
+
+- (BOOL)isEqualToUserFeaturesGetValuesBatchError:
+    (DBUSERSUserFeaturesGetValuesBatchError *)anUserFeaturesGetValuesBatchError {
+  if (self == anUserFeaturesGetValuesBatchError) {
+    return YES;
+  }
+  if (self.tag != anUserFeaturesGetValuesBatchError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList:
+    return [[self tagName] isEqual:[anUserFeaturesGetValuesBatchError tagName]];
+  case DBUSERSUserFeaturesGetValuesBatchErrorOther:
+    return [[self tagName] isEqual:[anUserFeaturesGetValuesBatchError tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSUserFeaturesGetValuesBatchErrorSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSUserFeaturesGetValuesBatchError *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isEmptyFeaturesList]) {
+    jsonDict[@".tag"] = @"empty_features_list";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSUserFeaturesGetValuesBatchError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"empty_features_list"]) {
+    return [[DBUSERSUserFeaturesGetValuesBatchError alloc] initWithEmptyFeaturesList];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBUSERSUserFeaturesGetValuesBatchError alloc] initWithOther];
+  } else {
+    return [[DBUSERSUserFeaturesGetValuesBatchError alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBUSERSUserFeatureValue.h"
+#import "DBUSERSUserFeaturesGetValuesBatchResult.h"
+
+#pragma mark - API Object
+
+@implementation DBUSERSUserFeaturesGetValuesBatchResult
+
+#pragma mark - Constructors
+
+- (instancetype)initWithValues:(NSArray<DBUSERSUserFeatureValue *> *)values {
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](values);
+
+  self = [super init];
+  if (self) {
+    _values = values;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBUSERSUserFeaturesGetValuesBatchResultSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBUSERSUserFeaturesGetValuesBatchResultSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBUSERSUserFeaturesGetValuesBatchResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.values hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUserFeaturesGetValuesBatchResult:other];
+}
+
+- (BOOL)isEqualToUserFeaturesGetValuesBatchResult:
+    (DBUSERSUserFeaturesGetValuesBatchResult *)anUserFeaturesGetValuesBatchResult {
+  if (self == anUserFeaturesGetValuesBatchResult) {
+    return YES;
+  }
+  if (![self.values isEqual:anUserFeaturesGetValuesBatchResult.values]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBUSERSUserFeaturesGetValuesBatchResultSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBUSERSUserFeaturesGetValuesBatchResult *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"values"] = [DBArraySerializer serialize:valueObj.values
+                                           withBlock:^id(id elem0) {
+                                             return [DBUSERSUserFeatureValueSerializer serialize:elem0];
+                                           }];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBUSERSUserFeaturesGetValuesBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSArray<DBUSERSUserFeatureValue *> *values =
+      [DBArraySerializer deserialize:valueDict[@"values"]
+                           withBlock:^id(id elem0) {
+                             return [DBUSERSUserFeatureValueSerializer deserialize:elem0];
+                           }];
+
+  return [[DBUSERSUserFeaturesGetValuesBatchResult alloc] initWithValues:values];
 }
 
 @end

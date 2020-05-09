@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESShowcaseExternalSharingPolicyTag` enum type represents
 /// the possible tag states with which the
 /// `DBTEAMPOLICIESShowcaseExternalSharingPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESShowcaseExternalSharingPolicyTag) {
-  /// Do not allow showcases to be shared with people not on the team.
-  DBTEAMPOLICIESShowcaseExternalSharingPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESShowcaseExternalSharingPolicyTag){
+    /// Do not allow showcases to be shared with people not on the team.
+    DBTEAMPOLICIESShowcaseExternalSharingPolicyDisabled,
 
-  /// Allow showcases to be shared with people not on the team.
-  DBTEAMPOLICIESShowcaseExternalSharingPolicyEnabled,
+    /// Allow showcases to be shared with people not on the team.
+    DBTEAMPOLICIESShowcaseExternalSharingPolicyEnabled,
 
-  /// (no description).
-  DBTEAMPOLICIESShowcaseExternalSharingPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESShowcaseExternalSharingPolicyOther,
 
 };
 

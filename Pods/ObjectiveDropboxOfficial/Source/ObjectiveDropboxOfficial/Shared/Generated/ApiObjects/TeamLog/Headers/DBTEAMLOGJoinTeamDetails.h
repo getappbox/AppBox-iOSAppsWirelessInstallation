@@ -30,23 +30,83 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Linked applications.
+/// Linked applications. (Deprecated) Please use has_linked_apps boolean field
+/// instead.
 @property (nonatomic, readonly) NSArray<DBTEAMLOGUserLinkedAppLogInfo *> *linkedApps;
 
-/// Linked devices.
+/// Linked devices. (Deprecated) Please use has_linked_devices boolean field
+/// instead.
 @property (nonatomic, readonly) NSArray<DBTEAMLOGLinkedDeviceLogInfo *> *linkedDevices;
 
-/// Linked shared folders.
+/// Linked shared folders. (Deprecated) Please use has_linked_shared_folders
+/// boolean field instead.
 @property (nonatomic, readonly) NSArray<DBTEAMLOGFolderLogInfo *> *linkedSharedFolders;
+
+/// True if the linked_apps list was truncated to the maximum supported length
+/// (50).
+@property (nonatomic, readonly, nullable) NSNumber *wasLinkedAppsTruncated;
+
+/// True if the linked_devices list was truncated to the maximum supported
+/// length (50).
+@property (nonatomic, readonly, nullable) NSNumber *wasLinkedDevicesTruncated;
+
+/// True if the linked_shared_folders list was truncated to the maximum
+/// supported length (50).
+@property (nonatomic, readonly, nullable) NSNumber *wasLinkedSharedFoldersTruncated;
+
+/// True if the user had linked apps at event time.
+@property (nonatomic, readonly, nullable) NSNumber *hasLinkedApps;
+
+/// True if the user had linked apps at event time.
+@property (nonatomic, readonly, nullable) NSNumber *hasLinkedDevices;
+
+/// True if the user had linked shared folders at event time.
+@property (nonatomic, readonly, nullable) NSNumber *hasLinkedSharedFolders;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param linkedApps Linked applications.
-/// @param linkedDevices Linked devices.
-/// @param linkedSharedFolders Linked shared folders.
+/// @param linkedApps Linked applications. (Deprecated) Please use
+/// has_linked_apps boolean field instead.
+/// @param linkedDevices Linked devices. (Deprecated) Please use
+/// has_linked_devices boolean field instead.
+/// @param linkedSharedFolders Linked shared folders. (Deprecated) Please use
+/// has_linked_shared_folders boolean field instead.
+/// @param wasLinkedAppsTruncated True if the linked_apps list was truncated to
+/// the maximum supported length (50).
+/// @param wasLinkedDevicesTruncated True if the linked_devices list was
+/// truncated to the maximum supported length (50).
+/// @param wasLinkedSharedFoldersTruncated True if the linked_shared_folders
+/// list was truncated to the maximum supported length (50).
+/// @param hasLinkedApps True if the user had linked apps at event time.
+/// @param hasLinkedDevices True if the user had linked apps at event time.
+/// @param hasLinkedSharedFolders True if the user had linked shared folders at
+/// event time.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLinkedApps:(NSArray<DBTEAMLOGUserLinkedAppLogInfo *> *)linkedApps
+                      linkedDevices:(NSArray<DBTEAMLOGLinkedDeviceLogInfo *> *)linkedDevices
+                linkedSharedFolders:(NSArray<DBTEAMLOGFolderLogInfo *> *)linkedSharedFolders
+             wasLinkedAppsTruncated:(nullable NSNumber *)wasLinkedAppsTruncated
+          wasLinkedDevicesTruncated:(nullable NSNumber *)wasLinkedDevicesTruncated
+    wasLinkedSharedFoldersTruncated:(nullable NSNumber *)wasLinkedSharedFoldersTruncated
+                      hasLinkedApps:(nullable NSNumber *)hasLinkedApps
+                   hasLinkedDevices:(nullable NSNumber *)hasLinkedDevices
+             hasLinkedSharedFolders:(nullable NSNumber *)hasLinkedSharedFolders;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+/// @param linkedApps Linked applications. (Deprecated) Please use
+/// has_linked_apps boolean field instead.
+/// @param linkedDevices Linked devices. (Deprecated) Please use
+/// has_linked_devices boolean field instead.
+/// @param linkedSharedFolders Linked shared folders. (Deprecated) Please use
+/// has_linked_shared_folders boolean field instead.
 ///
 /// @return An initialized instance.
 ///

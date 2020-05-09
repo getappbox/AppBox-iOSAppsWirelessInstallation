@@ -29,49 +29,49 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGAddFolderMemberErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGAddFolderMemberError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag) {
-  /// Unable to access shared folder.
-  DBSHARINGAddFolderMemberErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag){
+    /// Unable to access shared folder.
+    DBSHARINGAddFolderMemberErrorAccessError,
 
-  /// The current user's e-mail address is unverified.
-  DBSHARINGAddFolderMemberErrorEmailUnverified,
+    /// The current user's e-mail address is unverified.
+    DBSHARINGAddFolderMemberErrorEmailUnverified,
 
-  /// The current user has been banned.
-  DBSHARINGAddFolderMemberErrorBannedMember,
+    /// The current user has been banned.
+    DBSHARINGAddFolderMemberErrorBannedMember,
 
-  /// `members` in `DBSHARINGAddFolderMemberArg` contains a bad invitation
-  /// recipient.
-  DBSHARINGAddFolderMemberErrorBadMember,
+    /// `members` in `DBSHARINGAddFolderMemberArg` contains a bad invitation
+    /// recipient.
+    DBSHARINGAddFolderMemberErrorBadMember,
 
-  /// Your team policy does not allow sharing outside of the team.
-  DBSHARINGAddFolderMemberErrorCantShareOutsideTeam,
+    /// Your team policy does not allow sharing outside of the team.
+    DBSHARINGAddFolderMemberErrorCantShareOutsideTeam,
 
-  /// The value is the member limit that was reached.
-  DBSHARINGAddFolderMemberErrorTooManyMembers,
+    /// The value is the member limit that was reached.
+    DBSHARINGAddFolderMemberErrorTooManyMembers,
 
-  /// The value is the pending invite limit that was reached.
-  DBSHARINGAddFolderMemberErrorTooManyPendingInvites,
+    /// The value is the pending invite limit that was reached.
+    DBSHARINGAddFolderMemberErrorTooManyPendingInvites,
 
-  /// The current user has hit the limit of invites they can send per day. Try
-  /// again in 24 hours.
-  DBSHARINGAddFolderMemberErrorRateLimit,
+    /// The current user has hit the limit of invites they can send per day. Try
+    /// again in 24 hours.
+    DBSHARINGAddFolderMemberErrorRateLimit,
 
-  /// The current user is trying to share with too many people at once.
-  DBSHARINGAddFolderMemberErrorTooManyInvitees,
+    /// The current user is trying to share with too many people at once.
+    DBSHARINGAddFolderMemberErrorTooManyInvitees,
 
-  /// The current user's account doesn't support this action. An example of
-  /// this is when adding a read-only member. This action can only be
-  /// performed by users that have upgraded to a Pro or Business plan.
-  DBSHARINGAddFolderMemberErrorInsufficientPlan,
+    /// The current user's account doesn't support this action. An example of
+    /// this is when adding a read-only member. This action can only be
+    /// performed by users that have upgraded to a Pro or Business plan.
+    DBSHARINGAddFolderMemberErrorInsufficientPlan,
 
-  /// This action cannot be performed on a team shared folder.
-  DBSHARINGAddFolderMemberErrorTeamFolder,
+    /// This action cannot be performed on a team shared folder.
+    DBSHARINGAddFolderMemberErrorTeamFolder,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGAddFolderMemberErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGAddFolderMemberErrorNoPermission,
 
-  /// (no description).
-  DBSHARINGAddFolderMemberErrorOther,
+    /// (no description).
+    DBSHARINGAddFolderMemberErrorOther,
 
 };
 

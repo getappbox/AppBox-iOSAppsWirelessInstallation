@@ -29,14 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMListMembersAppsErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMListMembersAppsError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMListMembersAppsErrorTag) {
-  /// Indicates that the cursor has been invalidated. Call
-  /// `linkedAppsListMembersLinkedApps` again with an empty cursor to obtain a
-  /// new cursor.
-  DBTEAMListMembersAppsErrorReset,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMListMembersAppsErrorTag){
+    /// Indicates that the cursor has been invalidated. Call
+    /// `linkedAppsListMembersLinkedApps` again with an empty cursor to obtain a
+    /// new cursor.
+    DBTEAMListMembersAppsErrorReset,
 
-  /// (no description).
-  DBTEAMListMembersAppsErrorOther,
+    /// (no description).
+    DBTEAMListMembersAppsErrorOther,
 
 };
 

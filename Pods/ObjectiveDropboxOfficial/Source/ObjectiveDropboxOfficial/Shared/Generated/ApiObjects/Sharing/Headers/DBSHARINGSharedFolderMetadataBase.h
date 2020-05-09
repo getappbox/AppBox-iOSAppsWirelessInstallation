@@ -55,6 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// folders.
 @property (nonatomic, readonly, copy, nullable) NSString *pathLower;
 
+/// Display name for the parent folder.
+@property (nonatomic, readonly, copy, nullable) NSString *parentFolderName;
+
 #pragma mark - Constructors
 
 ///
@@ -73,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// is present only if the folder is contained within another shared folder.
 /// @param pathLower The lower-cased full path of this shared folder. Absent for
 /// unmounted folders.
+/// @param parentFolderName Display name for the parent folder.
 ///
 /// @return An initialized instance.
 ///
@@ -82,7 +86,8 @@ NS_ASSUME_NONNULL_BEGIN
                  ownerDisplayNames:(nullable NSArray<NSString *> *)ownerDisplayNames
                          ownerTeam:(nullable DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(nullable NSString *)parentSharedFolderId
-                         pathLower:(nullable NSString *)pathLower;
+                         pathLower:(nullable NSString *)pathLower
+                  parentFolderName:(nullable NSString *)parentFolderName;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

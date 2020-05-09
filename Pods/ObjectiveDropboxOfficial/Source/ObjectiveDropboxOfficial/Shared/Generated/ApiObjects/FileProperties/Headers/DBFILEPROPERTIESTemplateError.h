@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEPROPERTIESTemplateErrorTag` enum type represents the possible tag
 /// states with which the `DBFILEPROPERTIESTemplateError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateErrorTag) {
-  /// Template does not exist for the given identifier.
-  DBFILEPROPERTIESTemplateErrorTemplateNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESTemplateErrorTag){
+    /// Template does not exist for the given identifier.
+    DBFILEPROPERTIESTemplateErrorTemplateNotFound,
 
-  /// You do not have permission to modify this template.
-  DBFILEPROPERTIESTemplateErrorRestrictedContent,
+    /// You do not have permission to modify this template.
+    DBFILEPROPERTIESTemplateErrorRestrictedContent,
 
-  /// (no description).
-  DBFILEPROPERTIESTemplateErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESTemplateErrorOther,
 
 };
 

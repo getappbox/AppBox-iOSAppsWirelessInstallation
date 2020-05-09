@@ -33,21 +33,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGLinkedDeviceLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGLinkedDeviceLogInfo` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag) {
-  /// mobile device session's details.
-  DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
+    /// mobile device session's details.
+    DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession,
 
-  /// desktop device session's details.
-  DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession,
+    /// desktop device session's details.
+    DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession,
 
-  /// web device session's details.
-  DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession,
+    /// web device session's details.
+    DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession,
 
-  /// legacy device session's details.
-  DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession,
+    /// legacy device session's details.
+    DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession,
 
-  /// (no description).
-  DBTEAMLOGLinkedDeviceLogInfoOther,
+    /// (no description).
+    DBTEAMLOGLinkedDeviceLogInfoOther,
 
 };
 

@@ -28,21 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGUnshareFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGUnshareFolderError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag) {
-  /// (no description).
-  DBSHARINGUnshareFolderErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGUnshareFolderErrorTag){
+    /// (no description).
+    DBSHARINGUnshareFolderErrorAccessError,
 
-  /// This action cannot be performed on a team shared folder.
-  DBSHARINGUnshareFolderErrorTeamFolder,
+    /// This action cannot be performed on a team shared folder.
+    DBSHARINGUnshareFolderErrorTeamFolder,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGUnshareFolderErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGUnshareFolderErrorNoPermission,
 
-  /// This shared folder has too many files to be unshared.
-  DBSHARINGUnshareFolderErrorTooManyFiles,
+    /// This shared folder has too many files to be unshared.
+    DBSHARINGUnshareFolderErrorTooManyFiles,
 
-  /// (no description).
-  DBSHARINGUnshareFolderErrorOther,
+    /// (no description).
+    DBSHARINGUnshareFolderErrorOther,
 
 };
 

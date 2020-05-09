@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESSearchModeTag` enum type represents the possible tag states with
 /// which the `DBFILESSearchMode` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESSearchModeTag) {
-  /// Search file and folder names.
-  DBFILESSearchModeFilename,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESSearchModeTag){
+    /// Search file and folder names.
+    DBFILESSearchModeFilename,
 
-  /// Search file and folder names as well as file contents.
-  DBFILESSearchModeFilenameAndContent,
+    /// Search file and folder names as well as file contents.
+    DBFILESSearchModeFilenameAndContent,
 
-  /// Search for deleted file and folder names.
-  DBFILESSearchModeDeletedFilename,
+    /// Search for deleted file and folder names.
+    DBFILESSearchModeDeletedFilename,
 
 };
 

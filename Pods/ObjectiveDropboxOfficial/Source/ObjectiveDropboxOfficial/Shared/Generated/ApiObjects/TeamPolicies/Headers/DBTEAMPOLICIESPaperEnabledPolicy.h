@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESPaperEnabledPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMPOLICIESPaperEnabledPolicy` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPaperEnabledPolicyTag) {
-  /// Paper is disabled.
-  DBTEAMPOLICIESPaperEnabledPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESPaperEnabledPolicyTag){
+    /// Paper is disabled.
+    DBTEAMPOLICIESPaperEnabledPolicyDisabled,
 
-  /// Paper is enabled.
-  DBTEAMPOLICIESPaperEnabledPolicyEnabled,
+    /// Paper is enabled.
+    DBTEAMPOLICIESPaperEnabledPolicyEnabled,
 
-  /// Unspecified policy.
-  DBTEAMPOLICIESPaperEnabledPolicyUnspecified,
+    /// Unspecified policy.
+    DBTEAMPOLICIESPaperEnabledPolicyUnspecified,
 
-  /// (no description).
-  DBTEAMPOLICIESPaperEnabledPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESPaperEnabledPolicyOther,
 
 };
 

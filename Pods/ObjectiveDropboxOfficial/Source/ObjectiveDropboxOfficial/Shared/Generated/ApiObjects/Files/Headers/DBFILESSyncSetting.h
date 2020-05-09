@@ -27,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESSyncSettingTag` enum type represents the possible tag states
 /// with which the `DBFILESSyncSetting` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESSyncSettingTag) {
-  /// On first sync to members' computers, the specified folder will follow
-  /// its parent folder's setting or otherwise follow default sync behavior.
-  DBFILESSyncSettingDefault_,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESSyncSettingTag){
+    /// On first sync to members' computers, the specified folder will follow
+    /// its parent folder's setting or otherwise follow default sync behavior.
+    DBFILESSyncSettingDefault_,
 
-  /// On first sync to members' computers, the specified folder will be set to
-  /// not sync with selective sync.
-  DBFILESSyncSettingNotSynced,
+    /// On first sync to members' computers, the specified folder will be set to
+    /// not sync with selective sync.
+    DBFILESSyncSettingNotSynced,
 
-  /// The specified folder's not_synced setting is inactive due to its
-  /// location or other configuration changes. It will follow its parent
-  /// folder's setting.
-  DBFILESSyncSettingNotSyncedInactive,
+    /// The specified folder's not_synced setting is inactive due to its
+    /// location or other configuration changes. It will follow its parent
+    /// folder's setting.
+    DBFILESSyncSettingNotSyncedInactive,
 
-  /// (no description).
-  DBFILESSyncSettingOther,
+    /// (no description).
+    DBFILESSyncSettingOther,
 
 };
 

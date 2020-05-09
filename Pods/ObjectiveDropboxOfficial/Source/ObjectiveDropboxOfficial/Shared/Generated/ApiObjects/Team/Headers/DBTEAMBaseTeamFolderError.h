@@ -32,18 +32,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMBaseTeamFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMBaseTeamFolderError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMBaseTeamFolderErrorTag) {
-  /// (no description).
-  DBTEAMBaseTeamFolderErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMBaseTeamFolderErrorTag){
+    /// (no description).
+    DBTEAMBaseTeamFolderErrorAccessError,
 
-  /// (no description).
-  DBTEAMBaseTeamFolderErrorStatusError,
+    /// (no description).
+    DBTEAMBaseTeamFolderErrorStatusError,
 
-  /// (no description).
-  DBTEAMBaseTeamFolderErrorTeamSharedDropboxError,
+    /// (no description).
+    DBTEAMBaseTeamFolderErrorTeamSharedDropboxError,
 
-  /// (no description).
-  DBTEAMBaseTeamFolderErrorOther,
+    /// (no description).
+    DBTEAMBaseTeamFolderErrorOther,
 
 };
 

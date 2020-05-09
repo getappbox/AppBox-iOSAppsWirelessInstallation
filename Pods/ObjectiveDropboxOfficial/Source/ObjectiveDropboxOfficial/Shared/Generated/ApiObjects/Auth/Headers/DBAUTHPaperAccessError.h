@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBAUTHPaperAccessErrorTag` enum type represents the possible tag states
 /// with which the `DBAUTHPaperAccessError` union can exist.
-typedef NS_ENUM(NSInteger, DBAUTHPaperAccessErrorTag) {
-  /// Paper is disabled.
-  DBAUTHPaperAccessErrorPaperDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBAUTHPaperAccessErrorTag){
+    /// Paper is disabled.
+    DBAUTHPaperAccessErrorPaperDisabled,
 
-  /// The provided user has not used Paper yet.
-  DBAUTHPaperAccessErrorNotPaperUser,
+    /// The provided user has not used Paper yet.
+    DBAUTHPaperAccessErrorNotPaperUser,
 
-  /// (no description).
-  DBAUTHPaperAccessErrorOther,
+    /// (no description).
+    DBAUTHPaperAccessErrorOther,
 
 };
 

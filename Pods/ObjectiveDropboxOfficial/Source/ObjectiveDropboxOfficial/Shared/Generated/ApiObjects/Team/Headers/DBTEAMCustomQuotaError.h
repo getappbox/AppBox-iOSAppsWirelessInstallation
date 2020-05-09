@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMCustomQuotaErrorTag` enum type represents the possible tag states
 /// with which the `DBTEAMCustomQuotaError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMCustomQuotaErrorTag) {
-  /// A maximum of 1000 users can be set for a single call.
-  DBTEAMCustomQuotaErrorTooManyUsers,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMCustomQuotaErrorTag){
+    /// A maximum of 1000 users can be set for a single call.
+    DBTEAMCustomQuotaErrorTooManyUsers,
 
-  /// (no description).
-  DBTEAMCustomQuotaErrorOther,
+    /// (no description).
+    DBTEAMCustomQuotaErrorOther,
 
 };
 

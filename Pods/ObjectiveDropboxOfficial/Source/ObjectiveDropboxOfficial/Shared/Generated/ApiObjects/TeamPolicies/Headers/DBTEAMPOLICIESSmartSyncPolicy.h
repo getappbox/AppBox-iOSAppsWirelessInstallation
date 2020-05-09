@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMPOLICIESSmartSyncPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMPOLICIESSmartSyncPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESSmartSyncPolicyTag) {
-  /// The specified content will be synced as local files by default.
-  DBTEAMPOLICIESSmartSyncPolicyLocal,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESSmartSyncPolicyTag){
+    /// The specified content will be synced as local files by default.
+    DBTEAMPOLICIESSmartSyncPolicyLocal,
 
-  /// The specified content will be synced as on-demand files by default.
-  DBTEAMPOLICIESSmartSyncPolicyOnDemand,
+    /// The specified content will be synced as on-demand files by default.
+    DBTEAMPOLICIESSmartSyncPolicyOnDemand,
 
-  /// (no description).
-  DBTEAMPOLICIESSmartSyncPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESSmartSyncPolicyOther,
 
 };
 

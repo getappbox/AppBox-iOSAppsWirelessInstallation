@@ -30,18 +30,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupMembersSelectorErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMGroupMembersSelectorError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupMembersSelectorErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupMembersSelectorErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupMembersSelectorErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupMembersSelectorErrorOther,
+    /// (no description).
+    DBTEAMGroupMembersSelectorErrorOther,
 
-  /// This operation is not supported on system-managed groups.
-  DBTEAMGroupMembersSelectorErrorSystemManagedGroupDisallowed,
+    /// This operation is not supported on system-managed groups.
+    DBTEAMGroupMembersSelectorErrorSystemManagedGroupDisallowed,
 
-  /// At least one of the specified users is not a member of the group.
-  DBTEAMGroupMembersSelectorErrorMemberNotInGroup,
+    /// At least one of the specified users is not a member of the group.
+    DBTEAMGroupMembersSelectorErrorMemberNotInGroup,
 
 };
 

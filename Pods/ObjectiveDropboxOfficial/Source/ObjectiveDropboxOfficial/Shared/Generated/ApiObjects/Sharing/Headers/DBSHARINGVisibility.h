@@ -31,27 +31,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGVisibilityTag` enum type represents the possible tag states
 /// with which the `DBSHARINGVisibility` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGVisibilityTag) {
-  /// Anyone who has received the link can access it. No login required.
-  DBSHARINGVisibilityPublic,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGVisibilityTag){
+    /// Anyone who has received the link can access it. No login required.
+    DBSHARINGVisibilityPublic,
 
-  /// Only members of the same team can access the link. Login is required.
-  DBSHARINGVisibilityTeamOnly,
+    /// Only members of the same team can access the link. Login is required.
+    DBSHARINGVisibilityTeamOnly,
 
-  /// A link-specific password is required to access the link. Login is not
-  /// required.
-  DBSHARINGVisibilityPassword,
+    /// A link-specific password is required to access the link. Login is not
+    /// required.
+    DBSHARINGVisibilityPassword,
 
-  /// Only members of the same team who have the link-specific password can
-  /// access the link.
-  DBSHARINGVisibilityTeamAndPassword,
+    /// Only members of the same team who have the link-specific password can
+    /// access the link.
+    DBSHARINGVisibilityTeamAndPassword,
 
-  /// Only members of the shared folder containing the linked file can access
-  /// the link. Login is required.
-  DBSHARINGVisibilitySharedFolderOnly,
+    /// Only members of the shared folder containing the linked file can access
+    /// the link. Login is required.
+    DBSHARINGVisibilitySharedFolderOnly,
 
-  /// (no description).
-  DBSHARINGVisibilityOther,
+    /// (no description).
+    DBSHARINGVisibilityOther,
 
 };
 

@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGSharedLinkVisibilityTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGSharedLinkVisibility` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag) {
-  /// (no description).
-  DBTEAMLOGSharedLinkVisibilityPassword,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag){
+    /// (no description).
+    DBTEAMLOGSharedLinkVisibilityPassword,
 
-  /// (no description).
-  DBTEAMLOGSharedLinkVisibilityPublic,
+    /// (no description).
+    DBTEAMLOGSharedLinkVisibilityPublic,
 
-  /// (no description).
-  DBTEAMLOGSharedLinkVisibilityTeamOnly,
+    /// (no description).
+    DBTEAMLOGSharedLinkVisibilityTeamOnly,
 
-  /// (no description).
-  DBTEAMLOGSharedLinkVisibilityOther,
+    /// (no description).
+    DBTEAMLOGSharedLinkVisibilityOther,
 
 };
 

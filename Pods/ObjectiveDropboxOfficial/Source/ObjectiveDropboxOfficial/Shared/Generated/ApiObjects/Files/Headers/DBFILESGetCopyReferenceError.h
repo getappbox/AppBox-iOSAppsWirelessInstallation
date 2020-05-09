@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESGetCopyReferenceErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESGetCopyReferenceError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESGetCopyReferenceErrorTag) {
-  /// (no description).
-  DBFILESGetCopyReferenceErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetCopyReferenceErrorTag){
+    /// (no description).
+    DBFILESGetCopyReferenceErrorPath,
 
-  /// (no description).
-  DBFILESGetCopyReferenceErrorOther,
+    /// (no description).
+    DBFILESGetCopyReferenceErrorOther,
 
 };
 

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperContentRemoveMemberDetails` struct.
 ///
-/// Removed team member from Paper doc/folder.
+/// Removed users and/or groups from Paper doc/folder.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

@@ -6358,6 +6358,433 @@
 
 @end
 
+#import "DBPAPERPaperFolderCreateArg.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBPAPERPaperFolderCreateArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithName:(NSString *)name
+              parentFolderId:(NSString *)parentFolderId
+                isTeamFolder:(NSNumber *)isTeamFolder {
+  [DBStoneValidators nonnullValidator:nil](name);
+
+  self = [super init];
+  if (self) {
+    _name = name;
+    _parentFolderId = parentFolderId;
+    _isTeamFolder = isTeamFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithName:(NSString *)name {
+  return [self initWithName:name parentFolderId:nil isTeamFolder:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBPAPERPaperFolderCreateArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBPAPERPaperFolderCreateArgSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBPAPERPaperFolderCreateArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.name hash];
+  if (self.parentFolderId != nil) {
+    result = prime * result + [self.parentFolderId hash];
+  }
+  if (self.isTeamFolder != nil) {
+    result = prime * result + [self.isTeamFolder hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperFolderCreateArg:other];
+}
+
+- (BOOL)isEqualToPaperFolderCreateArg:(DBPAPERPaperFolderCreateArg *)aPaperFolderCreateArg {
+  if (self == aPaperFolderCreateArg) {
+    return YES;
+  }
+  if (![self.name isEqual:aPaperFolderCreateArg.name]) {
+    return NO;
+  }
+  if (self.parentFolderId) {
+    if (![self.parentFolderId isEqual:aPaperFolderCreateArg.parentFolderId]) {
+      return NO;
+    }
+  }
+  if (self.isTeamFolder) {
+    if (![self.isTeamFolder isEqual:aPaperFolderCreateArg.isTeamFolder]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBPAPERPaperFolderCreateArgSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperFolderCreateArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"name"] = valueObj.name;
+  if (valueObj.parentFolderId) {
+    jsonDict[@"parent_folder_id"] = valueObj.parentFolderId;
+  }
+  if (valueObj.isTeamFolder) {
+    jsonDict[@"is_team_folder"] = valueObj.isTeamFolder;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBPAPERPaperFolderCreateArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *name = valueDict[@"name"];
+  NSString *parentFolderId = valueDict[@"parent_folder_id"] ?: nil;
+  NSNumber *isTeamFolder = valueDict[@"is_team_folder"] ?: nil;
+
+  return
+      [[DBPAPERPaperFolderCreateArg alloc] initWithName:name parentFolderId:parentFolderId isTeamFolder:isTeamFolder];
+}
+
+@end
+
+#import "DBPAPERPaperApiBaseError.h"
+#import "DBPAPERPaperFolderCreateError.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBPAPERPaperFolderCreateError
+
+#pragma mark - Constructors
+
+- (instancetype)initWithInsufficientPermissions {
+  self = [super init];
+  if (self) {
+    _tag = DBPAPERPaperFolderCreateErrorInsufficientPermissions;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBPAPERPaperFolderCreateErrorOther;
+  }
+  return self;
+}
+
+- (instancetype)initWithFolderNotFound {
+  self = [super init];
+  if (self) {
+    _tag = DBPAPERPaperFolderCreateErrorFolderNotFound;
+  }
+  return self;
+}
+
+- (instancetype)initWithInvalidFolderId {
+  self = [super init];
+  if (self) {
+    _tag = DBPAPERPaperFolderCreateErrorInvalidFolderId;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isInsufficientPermissions {
+  return _tag == DBPAPERPaperFolderCreateErrorInsufficientPermissions;
+}
+
+- (BOOL)isOther {
+  return _tag == DBPAPERPaperFolderCreateErrorOther;
+}
+
+- (BOOL)isFolderNotFound {
+  return _tag == DBPAPERPaperFolderCreateErrorFolderNotFound;
+}
+
+- (BOOL)isInvalidFolderId {
+  return _tag == DBPAPERPaperFolderCreateErrorInvalidFolderId;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBPAPERPaperFolderCreateErrorInsufficientPermissions:
+    return @"DBPAPERPaperFolderCreateErrorInsufficientPermissions";
+  case DBPAPERPaperFolderCreateErrorOther:
+    return @"DBPAPERPaperFolderCreateErrorOther";
+  case DBPAPERPaperFolderCreateErrorFolderNotFound:
+    return @"DBPAPERPaperFolderCreateErrorFolderNotFound";
+  case DBPAPERPaperFolderCreateErrorInvalidFolderId:
+    return @"DBPAPERPaperFolderCreateErrorInvalidFolderId";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBPAPERPaperFolderCreateErrorSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBPAPERPaperFolderCreateErrorSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBPAPERPaperFolderCreateErrorSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBPAPERPaperFolderCreateErrorInsufficientPermissions:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperFolderCreateErrorOther:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperFolderCreateErrorFolderNotFound:
+    result = prime * result + [[self tagName] hash];
+  case DBPAPERPaperFolderCreateErrorInvalidFolderId:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperFolderCreateError:other];
+}
+
+- (BOOL)isEqualToPaperFolderCreateError:(DBPAPERPaperFolderCreateError *)aPaperFolderCreateError {
+  if (self == aPaperFolderCreateError) {
+    return YES;
+  }
+  if (self.tag != aPaperFolderCreateError.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBPAPERPaperFolderCreateErrorInsufficientPermissions:
+    return [[self tagName] isEqual:[aPaperFolderCreateError tagName]];
+  case DBPAPERPaperFolderCreateErrorOther:
+    return [[self tagName] isEqual:[aPaperFolderCreateError tagName]];
+  case DBPAPERPaperFolderCreateErrorFolderNotFound:
+    return [[self tagName] isEqual:[aPaperFolderCreateError tagName]];
+  case DBPAPERPaperFolderCreateErrorInvalidFolderId:
+    return [[self tagName] isEqual:[aPaperFolderCreateError tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBPAPERPaperFolderCreateErrorSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperFolderCreateError *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isInsufficientPermissions]) {
+    jsonDict[@".tag"] = @"insufficient_permissions";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else if ([valueObj isFolderNotFound]) {
+    jsonDict[@".tag"] = @"folder_not_found";
+  } else if ([valueObj isInvalidFolderId]) {
+    jsonDict[@".tag"] = @"invalid_folder_id";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBPAPERPaperFolderCreateError *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"insufficient_permissions"]) {
+    return [[DBPAPERPaperFolderCreateError alloc] initWithInsufficientPermissions];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBPAPERPaperFolderCreateError alloc] initWithOther];
+  } else if ([tag isEqualToString:@"folder_not_found"]) {
+    return [[DBPAPERPaperFolderCreateError alloc] initWithFolderNotFound];
+  } else if ([tag isEqualToString:@"invalid_folder_id"]) {
+    return [[DBPAPERPaperFolderCreateError alloc] initWithInvalidFolderId];
+  } else {
+    return [[DBPAPERPaperFolderCreateError alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBPAPERPaperFolderCreateResult.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBPAPERPaperFolderCreateResult
+
+#pragma mark - Constructors
+
+- (instancetype)initWithFolderId:(NSString *)folderId {
+  [DBStoneValidators nonnullValidator:nil](folderId);
+
+  self = [super init];
+  if (self) {
+    _folderId = folderId;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBPAPERPaperFolderCreateResultSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBPAPERPaperFolderCreateResultSerializer deserialize:dict];
+}
+
+#pragma mark - Description method
+
+- (NSString *)description {
+  return [[DBPAPERPaperFolderCreateResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.folderId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPaperFolderCreateResult:other];
+}
+
+- (BOOL)isEqualToPaperFolderCreateResult:(DBPAPERPaperFolderCreateResult *)aPaperFolderCreateResult {
+  if (self == aPaperFolderCreateResult) {
+    return YES;
+  }
+  if (![self.folderId isEqual:aPaperFolderCreateResult.folderId]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBPAPERPaperFolderCreateResultSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBPAPERPaperFolderCreateResult *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"folder_id"] = valueObj.folderId;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBPAPERPaperFolderCreateResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *folderId = valueDict[@"folder_id"];
+
+  return [[DBPAPERPaperFolderCreateResult alloc] initWithFolderId:folderId];
+}
+
+@end
+
 #import "DBPAPERRefPaperDoc.h"
 #import "DBPAPERRemovePaperDocUser.h"
 #import "DBSHARINGMemberSelector.h"

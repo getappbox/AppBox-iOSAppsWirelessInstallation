@@ -80,6 +80,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the export route object.
 + (DBRoute *)DBFILESExport;
 
+/// Accessor method for the getFileLockBatch route object.
++ (DBRoute *)DBFILESGetFileLockBatch;
+
 /// Accessor method for the getMetadata route object.
 + (DBRoute *)DBFILESGetMetadata;
 
@@ -94,6 +97,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the getThumbnail route object.
 + (DBRoute *)DBFILESGetThumbnail;
+
+/// Accessor method for the getThumbnailV2 route object.
++ (DBRoute *)DBFILESGetThumbnailV2;
 
 /// Accessor method for the getThumbnailBatch route object.
 + (DBRoute *)DBFILESGetThumbnailBatch;
@@ -112,6 +118,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the listRevisions route object.
 + (DBRoute *)DBFILESListRevisions;
+
+/// Accessor method for the lockFileBatch route object.
++ (DBRoute *)DBFILESLockFileBatch;
 
 /// Accessor method for the moveV2 route object.
 + (DBRoute *)DBFILESMoveV2;
@@ -163,6 +172,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the search route object.
 + (DBRoute *)DBFILESSearch;
+
+/// Accessor method for the searchV2 route object.
++ (DBRoute *)DBFILESSearchV2;
+
+/// Accessor method for the searchContinueV2 route object.
++ (DBRoute *)DBFILESSearchContinueV2;
+
+/// Accessor method for the unlockFileBatch route object.
++ (DBRoute *)DBFILESUnlockFileBatch;
 
 /// Accessor method for the upload route object.
 + (DBRoute *)DBFILESUpload;

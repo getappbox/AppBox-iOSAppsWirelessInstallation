@@ -28,26 +28,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGShareFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGShareFolderError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorTag) {
-  /// The current user's e-mail address is unverified.
-  DBSHARINGShareFolderErrorEmailUnverified,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGShareFolderErrorTag){
+    /// The current user's e-mail address is unverified.
+    DBSHARINGShareFolderErrorEmailUnverified,
 
-  /// `path` in `DBSHARINGShareFolderArg` is invalid.
-  DBSHARINGShareFolderErrorBadPath,
+    /// `path` in `DBSHARINGShareFolderArg` is invalid.
+    DBSHARINGShareFolderErrorBadPath,
 
-  /// Team policy is more restrictive than `memberPolicy` in
-  /// `DBSHARINGShareFolderArg`.
-  DBSHARINGShareFolderErrorTeamPolicyDisallowsMemberPolicy,
+    /// Team policy is more restrictive than `memberPolicy` in
+    /// `DBSHARINGShareFolderArg`.
+    DBSHARINGShareFolderErrorTeamPolicyDisallowsMemberPolicy,
 
-  /// The current user's account is not allowed to select the specified
-  /// `sharedLinkPolicy` in `DBSHARINGShareFolderArg`.
-  DBSHARINGShareFolderErrorDisallowedSharedLinkPolicy,
+    /// The current user's account is not allowed to select the specified
+    /// `sharedLinkPolicy` in `DBSHARINGShareFolderArg`.
+    DBSHARINGShareFolderErrorDisallowedSharedLinkPolicy,
 
-  /// (no description).
-  DBSHARINGShareFolderErrorOther,
+    /// (no description).
+    DBSHARINGShareFolderErrorOther,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGShareFolderErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGShareFolderErrorNoPermission,
 
 };
 

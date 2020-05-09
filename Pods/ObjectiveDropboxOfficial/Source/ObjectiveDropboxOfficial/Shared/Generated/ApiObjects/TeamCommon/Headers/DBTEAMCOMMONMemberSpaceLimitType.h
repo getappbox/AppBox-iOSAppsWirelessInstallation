@@ -30,20 +30,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMCOMMONMemberSpaceLimitTypeTag` enum type represents the possible
 /// tag states with which the `DBTEAMCOMMONMemberSpaceLimitType` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMCOMMONMemberSpaceLimitTypeTag) {
-  /// The team member does not have imposed space limit.
-  DBTEAMCOMMONMemberSpaceLimitTypeOff,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMCOMMONMemberSpaceLimitTypeTag){
+    /// The team member does not have imposed space limit.
+    DBTEAMCOMMONMemberSpaceLimitTypeOff,
 
-  /// The team member has soft imposed space limit - the limit is used for
-  /// display and for notifications.
-  DBTEAMCOMMONMemberSpaceLimitTypeAlertOnly,
+    /// The team member has soft imposed space limit - the limit is used for
+    /// display and for notifications.
+    DBTEAMCOMMONMemberSpaceLimitTypeAlertOnly,
 
-  /// The team member has hard imposed space limit - Dropbox file sync will
-  /// stop after the limit is reached.
-  DBTEAMCOMMONMemberSpaceLimitTypeStopSync,
+    /// The team member has hard imposed space limit - Dropbox file sync will
+    /// stop after the limit is reached.
+    DBTEAMCOMMONMemberSpaceLimitTypeStopSync,
 
-  /// (no description).
-  DBTEAMCOMMONMemberSpaceLimitTypeOther,
+    /// (no description).
+    DBTEAMCOMMONMemberSpaceLimitTypeOther,
 
 };
 

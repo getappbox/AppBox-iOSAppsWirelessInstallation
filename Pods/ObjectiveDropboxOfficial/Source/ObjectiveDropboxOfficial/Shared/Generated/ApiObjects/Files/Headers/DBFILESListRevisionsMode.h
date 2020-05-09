@@ -27,17 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESListRevisionsModeTag` enum type represents the possible tag
 /// states with which the `DBFILESListRevisionsMode` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESListRevisionsModeTag) {
-  /// Returns revisions with the same file path as identified by the latest
-  /// file entry at the given file path or id.
-  DBFILESListRevisionsModePath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESListRevisionsModeTag){
+    /// Returns revisions with the same file path as identified by the latest
+    /// file entry at the given file path or id.
+    DBFILESListRevisionsModePath,
 
-  /// Returns revisions with the same file id as identified by the latest file
-  /// entry at the given file path or id.
-  DBFILESListRevisionsModeId_,
+    /// Returns revisions with the same file id as identified by the latest file
+    /// entry at the given file path or id.
+    DBFILESListRevisionsModeId_,
 
-  /// (no description).
-  DBFILESListRevisionsModeOther,
+    /// (no description).
+    DBFILESListRevisionsModeOther,
 
 };
 

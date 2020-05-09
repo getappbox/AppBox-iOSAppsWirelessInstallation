@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESUploadSessionFinishBatchResultEntryTag` enum type represents the
 /// possible tag states with which the
 /// `DBFILESUploadSessionFinishBatchResultEntry` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag) {
-  /// (no description).
-  DBFILESUploadSessionFinishBatchResultEntrySuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionFinishBatchResultEntryTag){
+    /// (no description).
+    DBFILESUploadSessionFinishBatchResultEntrySuccess,
 
-  /// (no description).
-  DBFILESUploadSessionFinishBatchResultEntryFailure,
+    /// (no description).
+    DBFILESUploadSessionFinishBatchResultEntryFailure,
 
 };
 

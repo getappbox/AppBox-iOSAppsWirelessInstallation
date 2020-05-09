@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBUSERSSpaceAllocationTag` enum type represents the possible tag states
 /// with which the `DBUSERSSpaceAllocation` union can exist.
-typedef NS_ENUM(NSInteger, DBUSERSSpaceAllocationTag) {
-  /// The user's space allocation applies only to their individual account.
-  DBUSERSSpaceAllocationIndividual,
+typedef NS_CLOSED_ENUM(NSInteger, DBUSERSSpaceAllocationTag){
+    /// The user's space allocation applies only to their individual account.
+    DBUSERSSpaceAllocationIndividual,
 
-  /// The user shares space with other members of their team.
-  DBUSERSSpaceAllocationTeam,
+    /// The user shares space with other members of their team.
+    DBUSERSSpaceAllocationTeam,
 
-  /// (no description).
-  DBUSERSSpaceAllocationOther,
+    /// (no description).
+    DBUSERSSpaceAllocationOther,
 
 };
 

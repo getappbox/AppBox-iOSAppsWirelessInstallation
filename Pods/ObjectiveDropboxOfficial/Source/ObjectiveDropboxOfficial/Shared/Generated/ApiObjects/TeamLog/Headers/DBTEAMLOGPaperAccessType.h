@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGPaperAccessTypeTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGPaperAccessType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag) {
-  /// (no description).
-  DBTEAMLOGPaperAccessTypeViewer,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag){
+    /// (no description).
+    DBTEAMLOGPaperAccessTypeViewer,
 
-  /// (no description).
-  DBTEAMLOGPaperAccessTypeCommenter,
+    /// (no description).
+    DBTEAMLOGPaperAccessTypeCommenter,
 
-  /// (no description).
-  DBTEAMLOGPaperAccessTypeEditor,
+    /// (no description).
+    DBTEAMLOGPaperAccessTypeEditor,
 
-  /// (no description).
-  DBTEAMLOGPaperAccessTypeOther,
+    /// (no description).
+    DBTEAMLOGPaperAccessTypeOther,
 
 };
 

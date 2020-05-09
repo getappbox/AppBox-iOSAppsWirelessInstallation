@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamFolderInvalidStatusErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMTeamFolderInvalidStatusError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderInvalidStatusErrorTag) {
-  /// The folder is active and the operation did not succeed.
-  DBTEAMTeamFolderInvalidStatusErrorActive,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderInvalidStatusErrorTag){
+    /// The folder is active and the operation did not succeed.
+    DBTEAMTeamFolderInvalidStatusErrorActive,
 
-  /// The folder is archived and the operation did not succeed.
-  DBTEAMTeamFolderInvalidStatusErrorArchived,
+    /// The folder is archived and the operation did not succeed.
+    DBTEAMTeamFolderInvalidStatusErrorArchived,
 
-  /// The folder is being archived and the operation did not succeed.
-  DBTEAMTeamFolderInvalidStatusErrorArchiveInProgress,
+    /// The folder is being archived and the operation did not succeed.
+    DBTEAMTeamFolderInvalidStatusErrorArchiveInProgress,
 
-  /// (no description).
-  DBTEAMTeamFolderInvalidStatusErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderInvalidStatusErrorOther,
 
 };
 

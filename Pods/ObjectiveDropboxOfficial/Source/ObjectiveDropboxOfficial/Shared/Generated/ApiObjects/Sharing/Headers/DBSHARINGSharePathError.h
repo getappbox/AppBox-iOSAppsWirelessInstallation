@@ -28,50 +28,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGSharePathErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGSharePathError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharePathErrorTag) {
-  /// A file is at the specified path.
-  DBSHARINGSharePathErrorIsFile,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
+    /// A file is at the specified path.
+    DBSHARINGSharePathErrorIsFile,
 
-  /// We do not support sharing a folder inside a shared folder.
-  DBSHARINGSharePathErrorInsideSharedFolder,
+    /// We do not support sharing a folder inside a shared folder.
+    DBSHARINGSharePathErrorInsideSharedFolder,
 
-  /// We do not support shared folders that contain shared folders.
-  DBSHARINGSharePathErrorContainsSharedFolder,
+    /// We do not support shared folders that contain shared folders.
+    DBSHARINGSharePathErrorContainsSharedFolder,
 
-  /// We do not support shared folders that contain app folders.
-  DBSHARINGSharePathErrorContainsAppFolder,
+    /// We do not support shared folders that contain app folders.
+    DBSHARINGSharePathErrorContainsAppFolder,
 
-  /// We do not support shared folders that contain team folders.
-  DBSHARINGSharePathErrorContainsTeamFolder,
+    /// We do not support shared folders that contain team folders.
+    DBSHARINGSharePathErrorContainsTeamFolder,
 
-  /// We do not support sharing an app folder.
-  DBSHARINGSharePathErrorIsAppFolder,
+    /// We do not support sharing an app folder.
+    DBSHARINGSharePathErrorIsAppFolder,
 
-  /// We do not support sharing a folder inside an app folder.
-  DBSHARINGSharePathErrorInsideAppFolder,
+    /// We do not support sharing a folder inside an app folder.
+    DBSHARINGSharePathErrorInsideAppFolder,
 
-  /// A public folder can't be shared this way. Use a public link instead.
-  DBSHARINGSharePathErrorIsPublicFolder,
+    /// A public folder can't be shared this way. Use a public link instead.
+    DBSHARINGSharePathErrorIsPublicFolder,
 
-  /// A folder inside a public folder can't be shared this way. Use a public
-  /// link instead.
-  DBSHARINGSharePathErrorInsidePublicFolder,
+    /// A folder inside a public folder can't be shared this way. Use a public
+    /// link instead.
+    DBSHARINGSharePathErrorInsidePublicFolder,
 
-  /// Folder is already shared. Contains metadata about the existing shared
-  /// folder.
-  DBSHARINGSharePathErrorAlreadyShared,
+    /// Folder is already shared. Contains metadata about the existing shared
+    /// folder.
+    DBSHARINGSharePathErrorAlreadyShared,
 
-  /// Path is not valid.
-  DBSHARINGSharePathErrorInvalidPath,
+    /// Path is not valid.
+    DBSHARINGSharePathErrorInvalidPath,
 
-  /// We do not support sharing a Mac OS X package.
-  DBSHARINGSharePathErrorIsOsxPackage,
+    /// We do not support sharing a Mac OS X package.
+    DBSHARINGSharePathErrorIsOsxPackage,
 
-  /// We do not support sharing a folder inside a Mac OS X package.
-  DBSHARINGSharePathErrorInsideOsxPackage,
+    /// We do not support sharing a folder inside a Mac OS X package.
+    DBSHARINGSharePathErrorInsideOsxPackage,
 
-  /// (no description).
-  DBSHARINGSharePathErrorOther,
+    /// (no description).
+    DBSHARINGSharePathErrorOther,
 
 };
 

@@ -28,15 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESExportErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESExportError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESExportErrorTag) {
-  /// (no description).
-  DBFILESExportErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESExportErrorTag){
+    /// (no description).
+    DBFILESExportErrorPath,
 
-  /// This file type cannot be exported. Use `download` instead.
-  DBFILESExportErrorNonExportable,
+    /// This file type cannot be exported. Use `download` instead.
+    DBFILESExportErrorNonExportable,
 
-  /// (no description).
-  DBFILESExportErrorOther,
+    /// The exportable content is not yet available. Please retry later.
+    DBFILESExportErrorRetryError,
+
+    /// (no description).
+    DBFILESExportErrorOther,
 
 };
 
@@ -69,6 +72,16 @@ typedef NS_ENUM(NSInteger, DBFILESExportErrorTag) {
 - (instancetype)initWithNonExportable;
 
 ///
+/// Initializes union class with tag state of "retry_error".
+///
+/// Description of the "retry_error" tag state: The exportable content is not
+/// yet available. Please retry later.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRetryError;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -95,6 +108,13 @@ typedef NS_ENUM(NSInteger, DBFILESExportErrorTag) {
 /// @return Whether the union's current tag state has value "non_exportable".
 ///
 - (BOOL)isNonExportable;
+
+///
+/// Retrieves whether the union's current tag state has value "retry_error".
+///
+/// @return Whether the union's current tag state has value "retry_error".
+///
+- (BOOL)isRetryError;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

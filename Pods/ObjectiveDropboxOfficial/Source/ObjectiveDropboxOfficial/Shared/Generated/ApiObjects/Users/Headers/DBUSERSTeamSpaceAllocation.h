@@ -40,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// stop_sync).
 @property (nonatomic, readonly) DBTEAMCOMMONMemberSpaceLimitType *userWithinTeamSpaceLimitType;
 
+/// An accurate cached calculation of a team member's total space usage (bytes).
+@property (nonatomic, readonly) NSNumber *userWithinTeamSpaceUsedCached;
+
 #pragma mark - Constructors
 
 ///
@@ -52,13 +55,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// the user's quota within its team).
 /// @param userWithinTeamSpaceLimitType The type of the space limit imposed on
 /// the team member (off, alert_only, stop_sync).
+/// @param userWithinTeamSpaceUsedCached An accurate cached calculation of a
+/// team member's total space usage (bytes).
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithUsed:(NSNumber *)used
-                       allocated:(NSNumber *)allocated
-    userWithinTeamSpaceAllocated:(NSNumber *)userWithinTeamSpaceAllocated
-    userWithinTeamSpaceLimitType:(DBTEAMCOMMONMemberSpaceLimitType *)userWithinTeamSpaceLimitType;
+                        allocated:(NSNumber *)allocated
+     userWithinTeamSpaceAllocated:(NSNumber *)userWithinTeamSpaceAllocated
+     userWithinTeamSpaceLimitType:(DBTEAMCOMMONMemberSpaceLimitType *)userWithinTeamSpaceLimitType
+    userWithinTeamSpaceUsedCached:(NSNumber *)userWithinTeamSpaceUsedCached;
 
 - (instancetype)init NS_UNAVAILABLE;
 

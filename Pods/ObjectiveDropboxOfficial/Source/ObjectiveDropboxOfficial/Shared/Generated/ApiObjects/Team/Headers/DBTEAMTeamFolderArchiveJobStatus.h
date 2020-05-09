@@ -30,17 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamFolderArchiveJobStatusTag` enum type represents the possible
 /// tag states with which the `DBTEAMTeamFolderArchiveJobStatus` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBTEAMTeamFolderArchiveJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderArchiveJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBTEAMTeamFolderArchiveJobStatusInProgress,
 
-  /// The archive job has finished. The value is the metadata for the
-  /// resulting team folder.
-  DBTEAMTeamFolderArchiveJobStatusComplete,
+    /// The archive job has finished. The value is the metadata for the
+    /// resulting team folder.
+    DBTEAMTeamFolderArchiveJobStatusComplete,
 
-  /// Error occurred while performing an asynchronous job from
-  /// `teamFolderArchive`.
-  DBTEAMTeamFolderArchiveJobStatusFailed,
+    /// Error occurred while performing an asynchronous job from
+    /// `teamFolderArchive`.
+    DBTEAMTeamFolderArchiveJobStatusFailed,
 
 };
 

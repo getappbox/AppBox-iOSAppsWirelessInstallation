@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMAdminTierTag` enum type represents the possible tag states with
 /// which the `DBTEAMAdminTier` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMAdminTierTag) {
-  /// User is an administrator of the team - has all permissions.
-  DBTEAMAdminTierTeamAdmin,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMAdminTierTag){
+    /// User is an administrator of the team - has all permissions.
+    DBTEAMAdminTierTeamAdmin,
 
-  /// User can do most user provisioning, de-provisioning and management.
-  DBTEAMAdminTierUserManagementAdmin,
+    /// User can do most user provisioning, de-provisioning and management.
+    DBTEAMAdminTierUserManagementAdmin,
 
-  /// User can do a limited set of common support tasks for existing users.
-  DBTEAMAdminTierSupportAdmin,
+    /// User can do a limited set of common support tasks for existing users.
+    DBTEAMAdminTierSupportAdmin,
 
-  /// User is not an admin of the team.
-  DBTEAMAdminTierMemberOnly,
+    /// User is not an admin of the team.
+    DBTEAMAdminTierMemberOnly,
 
 };
 

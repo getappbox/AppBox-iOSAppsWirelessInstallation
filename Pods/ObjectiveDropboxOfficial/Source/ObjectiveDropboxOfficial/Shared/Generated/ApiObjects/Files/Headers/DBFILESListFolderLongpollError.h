@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESListFolderLongpollErrorTag` enum type represents the possible
 /// tag states with which the `DBFILESListFolderLongpollError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag) {
-  /// Indicates that the cursor has been invalidated. Call `listFolder` to
-  /// obtain a new cursor.
-  DBFILESListFolderLongpollErrorReset,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESListFolderLongpollErrorTag){
+    /// Indicates that the cursor has been invalidated. Call `listFolder` to
+    /// obtain a new cursor.
+    DBFILESListFolderLongpollErrorReset,
 
-  /// (no description).
-  DBFILESListFolderLongpollErrorOther,
+    /// (no description).
+    DBFILESListFolderLongpollErrorOther,
 
 };
 

@@ -381,7 +381,8 @@ static const int timeoutInSec = 200;
             uploadData.responseBlock(nil, routeError, error, uploadData.fileUrlsToRequestErrors);
           }];
         }
-      }];
+      }
+                 queue:uploadData.pollingQueue];
 }
 
 - (NSUInteger)endBytesWithFileSize:(NSUInteger)fileSize startBytes:(NSUInteger)startBytes {
@@ -423,7 +424,8 @@ static const int timeoutInSec = 200;
               uploadData.responseBlock(nil, nil, error, uploadData.fileUrlsToRequestErrors);
             }];
           }
-        }];
+        }
+                   queue:uploadData.pollingQueue];
   });
 }
 

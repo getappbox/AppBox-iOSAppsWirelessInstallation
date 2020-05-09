@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGPaperDesktopPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGPaperDesktopPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDesktopPolicyTag) {
-  /// (no description).
-  DBTEAMLOGPaperDesktopPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperDesktopPolicyTag){
+    /// (no description).
+    DBTEAMLOGPaperDesktopPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGPaperDesktopPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGPaperDesktopPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGPaperDesktopPolicyOther,
+    /// (no description).
+    DBTEAMLOGPaperDesktopPolicyOther,
 
 };
 

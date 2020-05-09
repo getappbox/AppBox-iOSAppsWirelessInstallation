@@ -27,19 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESWriteConflictErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESWriteConflictError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESWriteConflictErrorTag) {
-  /// There's a file in the way.
-  DBFILESWriteConflictErrorFile,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteConflictErrorTag){
+    /// There's a file in the way.
+    DBFILESWriteConflictErrorFile,
 
-  /// There's a folder in the way.
-  DBFILESWriteConflictErrorFolder,
+    /// There's a folder in the way.
+    DBFILESWriteConflictErrorFolder,
 
-  /// There's a file at an ancestor path, so we couldn't create the required
-  /// parent folders.
-  DBFILESWriteConflictErrorFileAncestor,
+    /// There's a file at an ancestor path, so we couldn't create the required
+    /// parent folders.
+    DBFILESWriteConflictErrorFileAncestor,
 
-  /// (no description).
-  DBFILESWriteConflictErrorOther,
+    /// (no description).
+    DBFILESWriteConflictErrorOther,
 
 };
 

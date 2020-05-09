@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGAccountCaptureNotificationEmailsSentDetails;
+@class DBTEAMLOGAccountCaptureNotificationType;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `AccountCaptureNotificationEmailsSentDetails` struct.
 ///
-/// Sent proactive account capture email to all unmanaged members.
+/// Sent account capture email to all unmanaged members.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -30,10 +31,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// Domain name.
 @property (nonatomic, readonly, copy) NSString *domainName;
 
+/// Account-capture email notification type.
+@property (nonatomic, readonly, nullable) DBTEAMLOGAccountCaptureNotificationType *notificationType;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param domainName Domain name.
+/// @param notificationType Account-capture email notification type.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDomainName:(NSString *)domainName
+                  notificationType:(nullable DBTEAMLOGAccountCaptureNotificationType *)notificationType;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param domainName Domain name.
 ///

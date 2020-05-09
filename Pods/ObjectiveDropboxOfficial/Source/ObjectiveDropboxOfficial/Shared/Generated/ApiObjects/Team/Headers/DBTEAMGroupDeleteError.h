@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupDeleteErrorTag` enum type represents the possible tag states
 /// with which the `DBTEAMGroupDeleteError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupDeleteErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupDeleteErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupDeleteErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupDeleteErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupDeleteErrorOther,
+    /// (no description).
+    DBTEAMGroupDeleteErrorOther,
 
-  /// This operation is not supported on system-managed groups.
-  DBTEAMGroupDeleteErrorSystemManagedGroupDisallowed,
+    /// This operation is not supported on system-managed groups.
+    DBTEAMGroupDeleteErrorSystemManagedGroupDisallowed,
 
-  /// This group has already been deleted.
-  DBTEAMGroupDeleteErrorGroupAlreadyDeleted,
+    /// This group has already been deleted.
+    DBTEAMGroupDeleteErrorGroupAlreadyDeleted,
 
 };
 

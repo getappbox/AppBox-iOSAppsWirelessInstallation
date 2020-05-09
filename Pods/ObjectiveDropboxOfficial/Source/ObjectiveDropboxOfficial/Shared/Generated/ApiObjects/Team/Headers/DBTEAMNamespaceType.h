@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMNamespaceTypeTag` enum type represents the possible tag states
 /// with which the `DBTEAMNamespaceType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMNamespaceTypeTag) {
-  /// App sandbox folder.
-  DBTEAMNamespaceTypeAppFolder,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMNamespaceTypeTag){
+    /// App sandbox folder.
+    DBTEAMNamespaceTypeAppFolder,
 
-  /// Shared folder.
-  DBTEAMNamespaceTypeSharedFolder,
+    /// Shared folder.
+    DBTEAMNamespaceTypeSharedFolder,
 
-  /// Top-level team-owned folder.
-  DBTEAMNamespaceTypeTeamFolder,
+    /// Top-level team-owned folder.
+    DBTEAMNamespaceTypeTeamFolder,
 
-  /// Team member's home folder.
-  DBTEAMNamespaceTypeTeamMemberFolder,
+    /// Team member's home folder.
+    DBTEAMNamespaceTypeTeamMemberFolder,
 
-  /// (no description).
-  DBTEAMNamespaceTypeOther,
+    /// (no description).
+    DBTEAMNamespaceTypeOther,
 
 };
 

@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMPOLICIESGroupCreationTag` enum type represents the possible tag
 /// states with which the `DBTEAMPOLICIESGroupCreation` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESGroupCreationTag) {
-  /// Team admins and members can create groups.
-  DBTEAMPOLICIESGroupCreationAdminsAndMembers,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESGroupCreationTag){
+    /// Team admins and members can create groups.
+    DBTEAMPOLICIESGroupCreationAdminsAndMembers,
 
-  /// Only team admins can create groups.
-  DBTEAMPOLICIESGroupCreationAdminsOnly,
+    /// Only team admins can create groups.
+    DBTEAMPOLICIESGroupCreationAdminsOnly,
 
 };
 

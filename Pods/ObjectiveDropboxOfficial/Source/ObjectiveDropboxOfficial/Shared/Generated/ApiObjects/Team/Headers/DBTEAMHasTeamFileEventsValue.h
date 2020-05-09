@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMHasTeamFileEventsValueTag` enum type represents the possible tag
 /// states with which the `DBTEAMHasTeamFileEventsValue` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMHasTeamFileEventsValueTag) {
-  /// Does this team have file events.
-  DBTEAMHasTeamFileEventsValueEnabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMHasTeamFileEventsValueTag){
+    /// Does this team have file events.
+    DBTEAMHasTeamFileEventsValueEnabled,
 
-  /// (no description).
-  DBTEAMHasTeamFileEventsValueOther,
+    /// (no description).
+    DBTEAMHasTeamFileEventsValueOther,
 
 };
 

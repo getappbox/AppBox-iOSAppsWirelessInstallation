@@ -29,75 +29,78 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGEventCategoryTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGEventCategory` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
-  /// Events that apply to management of linked apps.
-  DBTEAMLOGEventCategoryApps,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
+    /// Events that apply to management of linked apps.
+    DBTEAMLOGEventCategoryApps,
 
-  /// Events that have to do with comments on files and Paper documents.
-  DBTEAMLOGEventCategoryComments,
+    /// Events that have to do with comments on files and Paper documents.
+    DBTEAMLOGEventCategoryComments,
 
-  /// Events that apply to linked devices on mobile, desktop and Web
-  /// platforms.
-  DBTEAMLOGEventCategoryDevices,
+    /// Events that apply to linked devices on mobile, desktop and Web
+    /// platforms.
+    DBTEAMLOGEventCategoryDevices,
 
-  /// Events that involve domain management feature: domain verification,
-  /// invite enforcement and account capture.
-  DBTEAMLOGEventCategoryDomains,
+    /// Events that involve domain management feature: domain verification,
+    /// invite enforcement and account capture.
+    DBTEAMLOGEventCategoryDomains,
 
-  /// Events that have to do with filesystem operations on files and folders:
-  /// copy, move, delete, etc.
-  DBTEAMLOGEventCategoryFileOperations,
+    /// Events that have to do with filesystem operations on files and folders:
+    /// copy, move, delete, etc.
+    DBTEAMLOGEventCategoryFileOperations,
 
-  /// Events that apply to the file requests feature.
-  DBTEAMLOGEventCategoryFileRequests,
+    /// Events that apply to the file requests feature.
+    DBTEAMLOGEventCategoryFileRequests,
 
-  /// Events that involve group management.
-  DBTEAMLOGEventCategoryGroups,
+    /// Events that involve group management.
+    DBTEAMLOGEventCategoryGroups,
 
-  /// Events that involve users signing in to or out of Dropbox.
-  DBTEAMLOGEventCategoryLogins,
+    /// Events that involve placing holds on content for litigation reasons
+    DBTEAMLOGEventCategoryLegalHolds,
 
-  /// Events that involve team member management.
-  DBTEAMLOGEventCategoryMembers,
+    /// Events that involve users signing in to or out of Dropbox.
+    DBTEAMLOGEventCategoryLogins,
 
-  /// Events that apply to Dropbox Paper.
-  DBTEAMLOGEventCategoryPaper,
+    /// Events that involve team member management.
+    DBTEAMLOGEventCategoryMembers,
 
-  /// Events that involve using, changing or resetting passwords.
-  DBTEAMLOGEventCategoryPasswords,
+    /// Events that apply to Dropbox Paper.
+    DBTEAMLOGEventCategoryPaper,
 
-  /// Events that concern generation of admin reports, including team activity
-  /// and device usage.
-  DBTEAMLOGEventCategoryReports,
+    /// Events that involve using, changing or resetting passwords.
+    DBTEAMLOGEventCategoryPasswords,
 
-  /// Events that apply to all types of sharing and collaboration.
-  DBTEAMLOGEventCategorySharing,
+    /// Events that concern generation of admin reports, including team activity
+    /// and device usage.
+    DBTEAMLOGEventCategoryReports,
 
-  /// Events that apply to Dropbox Showcase.
-  DBTEAMLOGEventCategoryShowcase,
+    /// Events that apply to all types of sharing and collaboration.
+    DBTEAMLOGEventCategorySharing,
 
-  /// Events that involve using or configuring single sign-on as well as
-  /// administrative policies concerning single sign-on.
-  DBTEAMLOGEventCategorySso,
+    /// Events that apply to Dropbox Showcase.
+    DBTEAMLOGEventCategoryShowcase,
 
-  /// Events that involve team folder management.
-  DBTEAMLOGEventCategoryTeamFolders,
+    /// Events that involve using or configuring single sign-on as well as
+    /// administrative policies concerning single sign-on.
+    DBTEAMLOGEventCategorySso,
 
-  /// Events that involve a change in team-wide policies.
-  DBTEAMLOGEventCategoryTeamPolicies,
+    /// Events that involve team folder management.
+    DBTEAMLOGEventCategoryTeamFolders,
 
-  /// Events that involve a change in the team profile.
-  DBTEAMLOGEventCategoryTeamProfile,
+    /// Events that involve a change in team-wide policies.
+    DBTEAMLOGEventCategoryTeamPolicies,
 
-  /// Events that involve using or configuring two factor authentication as
-  /// well as administrative policies concerning two factor authentication.
-  DBTEAMLOGEventCategoryTfa,
+    /// Events that involve a change in the team profile.
+    DBTEAMLOGEventCategoryTeamProfile,
 
-  /// Events that apply to cross-team trust establishment.
-  DBTEAMLOGEventCategoryTrustedTeams,
+    /// Events that involve using or configuring two factor authentication as
+    /// well as administrative policies concerning two factor authentication.
+    DBTEAMLOGEventCategoryTfa,
 
-  /// (no description).
-  DBTEAMLOGEventCategoryOther,
+    /// Events that apply to cross-team trust establishment.
+    DBTEAMLOGEventCategoryTrustedTeams,
+
+    /// (no description).
+    DBTEAMLOGEventCategoryOther,
 
 };
 
@@ -175,6 +178,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithGroups;
+
+///
+/// Initializes union class with tag state of "legal_holds".
+///
+/// Description of the "legal_holds" tag state: Events that involve placing
+/// holds on content for litigation reasons
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHolds;
 
 ///
 /// Initializes union class with tag state of "logins".
@@ -365,6 +378,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventCategoryTag) {
 /// @return Whether the union's current tag state has value "groups".
 ///
 - (BOOL)isGroups;
+
+///
+/// Retrieves whether the union's current tag state has value "legal_holds".
+///
+/// @return Whether the union's current tag state has value "legal_holds".
+///
+- (BOOL)isLegalHolds;
 
 ///
 /// Retrieves whether the union's current tag state has value "logins".

@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESPasswordStrengthPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESPasswordStrengthPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPasswordStrengthPolicyTag) {
-  /// User passwords will adhere to the minimal password strength policy.
-  DBTEAMPOLICIESPasswordStrengthPolicyMinimalRequirements,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESPasswordStrengthPolicyTag){
+    /// User passwords will adhere to the minimal password strength policy.
+    DBTEAMPOLICIESPasswordStrengthPolicyMinimalRequirements,
 
-  /// User passwords will adhere to the moderate password strength policy.
-  DBTEAMPOLICIESPasswordStrengthPolicyModeratePassword,
+    /// User passwords will adhere to the moderate password strength policy.
+    DBTEAMPOLICIESPasswordStrengthPolicyModeratePassword,
 
-  /// User passwords will adhere to the very strong password strength policy.
-  DBTEAMPOLICIESPasswordStrengthPolicyStrongPassword,
+    /// User passwords will adhere to the very strong password strength policy.
+    DBTEAMPOLICIESPasswordStrengthPolicyStrongPassword,
 
-  /// (no description).
-  DBTEAMPOLICIESPasswordStrengthPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESPasswordStrengthPolicyOther,
 
 };
 

@@ -65,6 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the docsUsersRemove route object.
 + (DBRoute *)DBPAPERDocsUsersRemove;
 
+/// Accessor method for the foldersCreate route object.
++ (DBRoute *)DBPAPERFoldersCreate;
+
 @end
 
 NS_ASSUME_NONNULL_END

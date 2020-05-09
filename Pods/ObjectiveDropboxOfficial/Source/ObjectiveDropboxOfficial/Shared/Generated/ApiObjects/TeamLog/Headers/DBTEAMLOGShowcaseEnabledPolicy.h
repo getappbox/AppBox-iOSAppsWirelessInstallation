@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGShowcaseEnabledPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGShowcaseEnabledPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGShowcaseEnabledPolicyTag) {
-  /// (no description).
-  DBTEAMLOGShowcaseEnabledPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGShowcaseEnabledPolicyTag){
+    /// (no description).
+    DBTEAMLOGShowcaseEnabledPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGShowcaseEnabledPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGShowcaseEnabledPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGShowcaseEnabledPolicyOther,
+    /// (no description).
+    DBTEAMLOGShowcaseEnabledPolicyOther,
 
 };
 

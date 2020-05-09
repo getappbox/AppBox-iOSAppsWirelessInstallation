@@ -30,41 +30,41 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEREQUESTSCreateFileRequestErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEREQUESTSCreateFileRequestError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSCreateFileRequestErrorTag) {
-  /// This user's Dropbox Business team doesn't allow file requests.
-  DBFILEREQUESTSCreateFileRequestErrorDisabledForTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSCreateFileRequestErrorTag){
+    /// This user's Dropbox Business team doesn't allow file requests.
+    DBFILEREQUESTSCreateFileRequestErrorDisabledForTeam,
 
-  /// (no description).
-  DBFILEREQUESTSCreateFileRequestErrorOther,
+    /// (no description).
+    DBFILEREQUESTSCreateFileRequestErrorOther,
 
-  /// This file request ID was not found.
-  DBFILEREQUESTSCreateFileRequestErrorNotFound,
+    /// This file request ID was not found.
+    DBFILEREQUESTSCreateFileRequestErrorNotFound,
 
-  /// The specified path is not a folder.
-  DBFILEREQUESTSCreateFileRequestErrorNotAFolder,
+    /// The specified path is not a folder.
+    DBFILEREQUESTSCreateFileRequestErrorNotAFolder,
 
-  /// This file request is not accessible to this app. Apps with the app
-  /// folder permission can only access file requests in their app folder.
-  DBFILEREQUESTSCreateFileRequestErrorAppLacksAccess,
+    /// This file request is not accessible to this app. Apps with the app
+    /// folder permission can only access file requests in their app folder.
+    DBFILEREQUESTSCreateFileRequestErrorAppLacksAccess,
 
-  /// This user doesn't have permission to access or modify this file request.
-  DBFILEREQUESTSCreateFileRequestErrorNoPermission,
+    /// This user doesn't have permission to access or modify this file request.
+    DBFILEREQUESTSCreateFileRequestErrorNoPermission,
 
-  /// This user's email address is not verified. File requests are only
-  /// available on accounts with a verified email address. Users can verify
-  /// their email address here https://www.dropbox.com/help/317.
-  DBFILEREQUESTSCreateFileRequestErrorEmailUnverified,
+    /// This user's email address is not verified. File requests are only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
+    DBFILEREQUESTSCreateFileRequestErrorEmailUnverified,
 
-  /// There was an error validating the request. For example, the title was
-  /// invalid, or there were disallowed characters in the destination path.
-  DBFILEREQUESTSCreateFileRequestErrorValidationError,
+    /// There was an error validating the request. For example, the title was
+    /// invalid, or there were disallowed characters in the destination path.
+    DBFILEREQUESTSCreateFileRequestErrorValidationError,
 
-  /// File requests are not available on the specified folder.
-  DBFILEREQUESTSCreateFileRequestErrorInvalidLocation,
+    /// File requests are not available on the specified folder.
+    DBFILEREQUESTSCreateFileRequestErrorInvalidLocation,
 
-  /// The user has reached the rate limit for creating file requests. The
-  /// limit is currently 100 file requests per day.
-  DBFILEREQUESTSCreateFileRequestErrorRateLimit,
+    /// The user has reached the rate limit for creating file requests. The
+    /// limit is currently 4000 file requests total.
+    DBFILEREQUESTSCreateFileRequestErrorRateLimit,
 
 };
 
@@ -168,8 +168,8 @@ typedef NS_ENUM(NSInteger, DBFILEREQUESTSCreateFileRequestErrorTag) {
 /// Initializes union class with tag state of "rate_limit".
 ///
 /// Description of the "rate_limit" tag state: The user has reached the rate
-/// limit for creating file requests. The limit is currently 100 file requests
-/// per day.
+/// limit for creating file requests. The limit is currently 4000 file requests
+/// total.
 ///
 /// @return An initialized instance.
 ///
