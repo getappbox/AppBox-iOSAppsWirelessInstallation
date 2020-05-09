@@ -19,6 +19,10 @@
 @class DBUSERSName;
 @class DBUSERSSpaceAllocation;
 @class DBUSERSSpaceUsage;
+@class DBUSERSUserFeature;
+@class DBUSERSUserFeatureValue;
+@class DBUSERSUserFeaturesGetValuesBatchError;
+@class DBUSERSUserFeaturesGetValuesBatchResult;
 
 @protocol DBTransportClient;
 
@@ -37,6 +41,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// Initializes the `DBUSERSUserAuthRoutes` namespace container object with a
 /// networking client.
 - (instancetype)init:(id<DBTransportClient>)client;
+
+///
+/// Get a list of feature values that may be configured for the current account.
+///
+/// @param features A list of features in UserFeature. If the list is empty, this route will return
+/// UserFeaturesGetValuesBatchError.
+///
+/// @return Through the response callback, the caller will receive a `DBUSERSUserFeaturesGetValuesBatchResult` object on
+/// success or a `DBUSERSUserFeaturesGetValuesBatchError` object on failure.
+///
+- (DBRpcTask<DBUSERSUserFeaturesGetValuesBatchResult *, DBUSERSUserFeaturesGetValuesBatchError *> *)featuresGetValues:
+    (NSArray<DBUSERSUserFeature *> *)features;
 
 ///
 /// Get information about a user's account.

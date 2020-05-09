@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGPaperMemberPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGPaperMemberPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGPaperMemberPolicyTag) {
-  /// (no description).
-  DBTEAMLOGPaperMemberPolicyAnyoneWithLink,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperMemberPolicyTag){
+    /// (no description).
+    DBTEAMLOGPaperMemberPolicyAnyoneWithLink,
 
-  /// (no description).
-  DBTEAMLOGPaperMemberPolicyOnlyTeam,
+    /// (no description).
+    DBTEAMLOGPaperMemberPolicyOnlyTeam,
 
-  /// (no description).
-  DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared,
+    /// (no description).
+    DBTEAMLOGPaperMemberPolicyTeamAndExplicitlyShared,
 
-  /// (no description).
-  DBTEAMLOGPaperMemberPolicyOther,
+    /// (no description).
+    DBTEAMLOGPaperMemberPolicyOther,
 
 };
 

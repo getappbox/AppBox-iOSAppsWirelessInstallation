@@ -29,9 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The path in the user's Dropbox to search. Should probably be a folder.
 @property (nonatomic, readonly, copy) NSString *path;
 
-/// The string to search for. The search string is split on spaces into multiple
-/// tokens. For file name searching, the last token is used for prefix matching
-/// (i.e. "bat c" matches "bat cave" but not "batman car").
+/// The string to search for. Query string may be rewritten to improve relevance
+/// of results. The string is split on spaces into multiple tokens. For file
+/// name searching, the last token is used for prefix matching (i.e. "bat c"
+/// matches "bat cave" but not "batman car").
 @property (nonatomic, readonly, copy) NSString *query;
 
 /// The starting index within the search results (used for paging).
@@ -51,9 +52,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param path The path in the user's Dropbox to search. Should probably be a
 /// folder.
-/// @param query The string to search for. The search string is split on spaces
-/// into multiple tokens. For file name searching, the last token is used for
-/// prefix matching (i.e. "bat c" matches "bat cave" but not "batman car").
+/// @param query The string to search for. Query string may be rewritten to
+/// improve relevance of results. The string is split on spaces into multiple
+/// tokens. For file name searching, the last token is used for prefix matching
+/// (i.e. "bat c" matches "bat cave" but not "batman car").
 /// @param start The starting index within the search results (used for paging).
 /// @param maxResults The maximum number of search results to return.
 /// @param mode The search mode (filename, filename_and_content, or
@@ -74,9 +76,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param path The path in the user's Dropbox to search. Should probably be a
 /// folder.
-/// @param query The string to search for. The search string is split on spaces
-/// into multiple tokens. For file name searching, the last token is used for
-/// prefix matching (i.e. "bat c" matches "bat cave" but not "batman car").
+/// @param query The string to search for. Query string may be rewritten to
+/// improve relevance of results. The string is split on spaces into multiple
+/// tokens. For file name searching, the last token is used for prefix matching
+/// (i.e. "bat c" matches "bat cave" but not "batman car").
 ///
 /// @return An initialized instance.
 ///

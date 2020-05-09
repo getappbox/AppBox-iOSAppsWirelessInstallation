@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESRelocationBatchResultEntryTag` enum type represents the possible
 /// tag states with which the `DBFILESRelocationBatchResultEntry` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBFILESRelocationBatchResultEntryTag) {
-  /// (no description).
-  DBFILESRelocationBatchResultEntrySuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchResultEntryTag){
+    /// (no description).
+    DBFILESRelocationBatchResultEntrySuccess,
 
-  /// (no description).
-  DBFILESRelocationBatchResultEntryFailure,
+    /// (no description).
+    DBFILESRelocationBatchResultEntryFailure,
 
-  /// (no description).
-  DBFILESRelocationBatchResultEntryOther,
+    /// (no description).
+    DBFILESRelocationBatchResultEntryOther,
 
 };
 

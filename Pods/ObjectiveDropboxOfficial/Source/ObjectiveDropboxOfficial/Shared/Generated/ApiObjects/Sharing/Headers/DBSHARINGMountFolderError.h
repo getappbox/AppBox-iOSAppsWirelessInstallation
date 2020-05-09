@@ -29,30 +29,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGMountFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGMountFolderError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGMountFolderErrorTag) {
-  /// (no description).
-  DBSHARINGMountFolderErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMountFolderErrorTag){
+    /// (no description).
+    DBSHARINGMountFolderErrorAccessError,
 
-  /// Mounting would cause a shared folder to be inside another, which is
-  /// disallowed.
-  DBSHARINGMountFolderErrorInsideSharedFolder,
+    /// Mounting would cause a shared folder to be inside another, which is
+    /// disallowed.
+    DBSHARINGMountFolderErrorInsideSharedFolder,
 
-  /// The current user does not have enough space to mount the shared folder.
-  DBSHARINGMountFolderErrorInsufficientQuota,
+    /// The current user does not have enough space to mount the shared folder.
+    DBSHARINGMountFolderErrorInsufficientQuota,
 
-  /// The shared folder is already mounted.
-  DBSHARINGMountFolderErrorAlreadyMounted,
+    /// The shared folder is already mounted.
+    DBSHARINGMountFolderErrorAlreadyMounted,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGMountFolderErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGMountFolderErrorNoPermission,
 
-  /// The shared folder is not mountable. One example where this can occur is
-  /// when the shared folder belongs within a team folder in the user's
-  /// Dropbox.
-  DBSHARINGMountFolderErrorNotMountable,
+    /// The shared folder is not mountable. One example where this can occur is
+    /// when the shared folder belongs within a team folder in the user's
+    /// Dropbox.
+    DBSHARINGMountFolderErrorNotMountable,
 
-  /// (no description).
-  DBSHARINGMountFolderErrorOther,
+    /// (no description).
+    DBSHARINGMountFolderErrorOther,
 
 };
 

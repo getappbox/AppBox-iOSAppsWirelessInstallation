@@ -73,6 +73,27 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the groupsUpdate route object.
 + (DBRoute *)DBTEAMGroupsUpdate;
 
+/// Accessor method for the legalHoldsCreatePolicy route object.
++ (DBRoute *)DBTEAMLegalHoldsCreatePolicy;
+
+/// Accessor method for the legalHoldsGetPolicy route object.
++ (DBRoute *)DBTEAMLegalHoldsGetPolicy;
+
+/// Accessor method for the legalHoldsListHeldRevisions route object.
++ (DBRoute *)DBTEAMLegalHoldsListHeldRevisions;
+
+/// Accessor method for the legalHoldsListHeldRevisionsContinue route object.
++ (DBRoute *)DBTEAMLegalHoldsListHeldRevisionsContinue;
+
+/// Accessor method for the legalHoldsListPolicies route object.
++ (DBRoute *)DBTEAMLegalHoldsListPolicies;
+
+/// Accessor method for the legalHoldsReleasePolicy route object.
++ (DBRoute *)DBTEAMLegalHoldsReleasePolicy;
+
+/// Accessor method for the legalHoldsUpdatePolicy route object.
++ (DBRoute *)DBTEAMLegalHoldsUpdatePolicy;
+
 /// Accessor method for the linkedAppsListMemberLinkedApps route object.
 + (DBRoute *)DBTEAMLinkedAppsListMemberLinkedApps;
 
@@ -116,6 +137,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the membersAddJobStatusGet route object.
 + (DBRoute *)DBTEAMMembersAddJobStatusGet;
 
+/// Accessor method for the membersDeleteProfilePhoto route object.
++ (DBRoute *)DBTEAMMembersDeleteProfilePhoto;
+
 /// Accessor method for the membersGetInfo route object.
 + (DBRoute *)DBTEAMMembersGetInfo;
 
@@ -141,6 +165,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the membersRemoveJobStatusGet route object.
 + (DBRoute *)DBTEAMMembersRemoveJobStatusGet;
 
+/// Accessor method for the membersSecondaryEmailsAdd route object.
++ (DBRoute *)DBTEAMMembersSecondaryEmailsAdd;
+
+/// Accessor method for the membersSecondaryEmailsDelete route object.
++ (DBRoute *)DBTEAMMembersSecondaryEmailsDelete;
+
+/// Accessor method for the membersSecondaryEmailsResendVerificationEmails route
+/// object.
++ (DBRoute *)DBTEAMMembersSecondaryEmailsResendVerificationEmails;
+
 /// Accessor method for the membersSendWelcomeEmail route object.
 + (DBRoute *)DBTEAMMembersSendWelcomeEmail;
 
@@ -149,6 +183,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the membersSetProfile route object.
 + (DBRoute *)DBTEAMMembersSetProfile;
+
+/// Accessor method for the membersSetProfilePhoto route object.
++ (DBRoute *)DBTEAMMembersSetProfilePhoto;
 
 /// Accessor method for the membersSuspend route object.
 + (DBRoute *)DBTEAMMembersSuspend;

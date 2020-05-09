@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamFolderStatusTag` enum type represents the possible tag states
 /// with which the `DBTEAMTeamFolderStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderStatusTag) {
-  /// The team folder and sub-folders are available to all members.
-  DBTEAMTeamFolderStatusActive,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderStatusTag){
+    /// The team folder and sub-folders are available to all members.
+    DBTEAMTeamFolderStatusActive,
 
-  /// The team folder is not accessible outside of the team folder manager.
-  DBTEAMTeamFolderStatusArchived,
+    /// The team folder is not accessible outside of the team folder manager.
+    DBTEAMTeamFolderStatusArchived,
 
-  /// The team folder is not accessible outside of the team folder manager.
-  DBTEAMTeamFolderStatusArchiveInProgress,
+    /// The team folder is not accessible outside of the team folder manager.
+    DBTEAMTeamFolderStatusArchiveInProgress,
 
-  /// (no description).
-  DBTEAMTeamFolderStatusOther,
+    /// (no description).
+    DBTEAMTeamFolderStatusOther,
 
 };
 

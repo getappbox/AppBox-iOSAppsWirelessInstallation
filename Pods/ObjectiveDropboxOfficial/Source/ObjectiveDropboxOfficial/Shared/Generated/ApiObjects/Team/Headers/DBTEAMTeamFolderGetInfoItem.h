@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamFolderGetInfoItemTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamFolderGetInfoItem` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderGetInfoItemTag) {
-  /// An ID that was provided as a parameter to `teamFolderGetInfo` did not
-  /// match any of the team's team folders.
-  DBTEAMTeamFolderGetInfoItemIdNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderGetInfoItemTag){
+    /// An ID that was provided as a parameter to `teamFolderGetInfo` did not
+    /// match any of the team's team folders.
+    DBTEAMTeamFolderGetInfoItemIdNotFound,
 
-  /// Properties of a team folder.
-  DBTEAMTeamFolderGetInfoItemTeamFolderMetadata,
+    /// Properties of a team folder.
+    DBTEAMTeamFolderGetInfoItemTeamFolderMetadata,
 
 };
 

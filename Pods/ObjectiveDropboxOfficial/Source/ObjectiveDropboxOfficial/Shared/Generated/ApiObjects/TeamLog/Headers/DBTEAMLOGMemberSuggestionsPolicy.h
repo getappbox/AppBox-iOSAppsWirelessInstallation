@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGMemberSuggestionsPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGMemberSuggestionsPolicy` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGMemberSuggestionsPolicyTag) {
-  /// (no description).
-  DBTEAMLOGMemberSuggestionsPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberSuggestionsPolicyTag){
+    /// (no description).
+    DBTEAMLOGMemberSuggestionsPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGMemberSuggestionsPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGMemberSuggestionsPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGMemberSuggestionsPolicyOther,
+    /// (no description).
+    DBTEAMLOGMemberSuggestionsPolicyOther,
 
 };
 

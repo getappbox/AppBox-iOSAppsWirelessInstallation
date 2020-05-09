@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMListMemberAppsErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMListMemberAppsError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMListMemberAppsErrorTag) {
-  /// Member not found.
-  DBTEAMListMemberAppsErrorMemberNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMListMemberAppsErrorTag){
+    /// Member not found.
+    DBTEAMListMemberAppsErrorMemberNotFound,
 
-  /// (no description).
-  DBTEAMListMemberAppsErrorOther,
+    /// (no description).
+    DBTEAMListMemberAppsErrorOther,
 
 };
 

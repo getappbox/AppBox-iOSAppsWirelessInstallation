@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERFolderSubscriptionLevelTag` enum type represents the possible
 /// tag states with which the `DBPAPERFolderSubscriptionLevel` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag) {
-  /// Not shown in activity, no email messages.
-  DBPAPERFolderSubscriptionLevelNone,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERFolderSubscriptionLevelTag){
+    /// Not shown in activity, no email messages.
+    DBPAPERFolderSubscriptionLevelNone,
 
-  /// Shown in activity, no email messages.
-  DBPAPERFolderSubscriptionLevelActivityOnly,
+    /// Shown in activity, no email messages.
+    DBPAPERFolderSubscriptionLevelActivityOnly,
 
-  /// Shown in activity, daily email messages.
-  DBPAPERFolderSubscriptionLevelDailyEmails,
+    /// Shown in activity, daily email messages.
+    DBPAPERFolderSubscriptionLevelDailyEmails,
 
-  /// Shown in activity, weekly email messages.
-  DBPAPERFolderSubscriptionLevelWeeklyEmails,
+    /// Shown in activity, weekly email messages.
+    DBPAPERFolderSubscriptionLevelWeeklyEmails,
 
 };
 

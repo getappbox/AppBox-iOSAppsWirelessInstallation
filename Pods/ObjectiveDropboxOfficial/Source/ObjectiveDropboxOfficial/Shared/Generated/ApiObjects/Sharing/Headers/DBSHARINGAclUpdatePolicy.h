@@ -30,16 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGAclUpdatePolicyTag` enum type represents the possible tag
 /// states with which the `DBSHARINGAclUpdatePolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGAclUpdatePolicyTag) {
-  /// Only the owner can update the ACL.
-  DBSHARINGAclUpdatePolicyOwner,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAclUpdatePolicyTag){
+    /// Only the owner can update the ACL.
+    DBSHARINGAclUpdatePolicyOwner,
 
-  /// Any editor can update the ACL. This may be further restricted to editors
-  /// on the same team.
-  DBSHARINGAclUpdatePolicyEditors,
+    /// Any editor can update the ACL. This may be further restricted to editors
+    /// on the same team.
+    DBSHARINGAclUpdatePolicyEditors,
 
-  /// (no description).
-  DBSHARINGAclUpdatePolicyOther,
+    /// (no description).
+    DBSHARINGAclUpdatePolicyOther,
 
 };
 

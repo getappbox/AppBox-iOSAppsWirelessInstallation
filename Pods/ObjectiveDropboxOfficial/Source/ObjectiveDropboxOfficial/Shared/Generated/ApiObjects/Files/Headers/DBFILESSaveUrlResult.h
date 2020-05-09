@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESSaveUrlResultTag` enum type represents the possible tag states
 /// with which the `DBFILESSaveUrlResult` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESSaveUrlResultTag) {
-  /// This response indicates that the processing is asynchronous. The string
-  /// is an id that can be used to obtain the status of the asynchronous job.
-  DBFILESSaveUrlResultAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESSaveUrlResultTag){
+    /// This response indicates that the processing is asynchronous. The string
+    /// is an id that can be used to obtain the status of the asynchronous job.
+    DBFILESSaveUrlResultAsyncJobId,
 
-  /// Metadata of the file where the URL is saved to.
-  DBFILESSaveUrlResultComplete,
+    /// Metadata of the file where the URL is saved to.
+    DBFILESSaveUrlResultComplete,
 
 };
 

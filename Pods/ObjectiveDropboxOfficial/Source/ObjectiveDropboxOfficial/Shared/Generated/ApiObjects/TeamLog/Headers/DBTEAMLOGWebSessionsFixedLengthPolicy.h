@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGWebSessionsFixedLengthPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGWebSessionsFixedLengthPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGWebSessionsFixedLengthPolicyTag) {
-  /// Defined fixed session length.
-  DBTEAMLOGWebSessionsFixedLengthPolicyDefined,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGWebSessionsFixedLengthPolicyTag){
+    /// Defined fixed session length.
+    DBTEAMLOGWebSessionsFixedLengthPolicyDefined,
 
-  /// Undefined fixed session length.
-  DBTEAMLOGWebSessionsFixedLengthPolicyUndefined,
+    /// Undefined fixed session length.
+    DBTEAMLOGWebSessionsFixedLengthPolicyUndefined,
 
-  /// (no description).
-  DBTEAMLOGWebSessionsFixedLengthPolicyOther,
+    /// (no description).
+    DBTEAMLOGWebSessionsFixedLengthPolicyOther,
 
 };
 

@@ -29,27 +29,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGSharingFileAccessErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGSharingFileAccessError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag) {
-  /// Current user does not have sufficient privileges to perform the desired
-  /// action.
-  DBSHARINGSharingFileAccessErrorNoPermission,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharingFileAccessErrorTag){
+    /// Current user does not have sufficient privileges to perform the desired
+    /// action.
+    DBSHARINGSharingFileAccessErrorNoPermission,
 
-  /// File specified was not found.
-  DBSHARINGSharingFileAccessErrorInvalidFile,
+    /// File specified was not found.
+    DBSHARINGSharingFileAccessErrorInvalidFile,
 
-  /// A folder can't be shared this way. Use folder sharing or a shared link
-  /// instead.
-  DBSHARINGSharingFileAccessErrorIsFolder,
+    /// A folder can't be shared this way. Use folder sharing or a shared link
+    /// instead.
+    DBSHARINGSharingFileAccessErrorIsFolder,
 
-  /// A file inside a public folder can't be shared this way. Use a public
-  /// link instead.
-  DBSHARINGSharingFileAccessErrorInsidePublicFolder,
+    /// A file inside a public folder can't be shared this way. Use a public
+    /// link instead.
+    DBSHARINGSharingFileAccessErrorInsidePublicFolder,
 
-  /// A Mac OS X package can't be shared this way. Use a shared link instead.
-  DBSHARINGSharingFileAccessErrorInsideOsxPackage,
+    /// A Mac OS X package can't be shared this way. Use a shared link instead.
+    DBSHARINGSharingFileAccessErrorInsideOsxPackage,
 
-  /// (no description).
-  DBSHARINGSharingFileAccessErrorOther,
+    /// (no description).
+    DBSHARINGSharingFileAccessErrorOther,
 
 };
 

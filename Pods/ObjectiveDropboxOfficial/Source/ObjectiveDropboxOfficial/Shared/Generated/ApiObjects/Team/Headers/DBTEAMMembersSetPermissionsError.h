@@ -28,25 +28,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMMembersSetPermissionsErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMMembersSetPermissionsError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersSetPermissionsErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersSetPermissionsErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersSetPermissionsErrorUserNotFound,
 
-  /// Cannot remove the admin setting of the last admin.
-  DBTEAMMembersSetPermissionsErrorLastAdmin,
+    /// Cannot remove the admin setting of the last admin.
+    DBTEAMMembersSetPermissionsErrorLastAdmin,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersSetPermissionsErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersSetPermissionsErrorUserNotInTeam,
 
-  /// Cannot remove/grant permissions.
-  DBTEAMMembersSetPermissionsErrorCannotSetPermissions,
+    /// Cannot remove/grant permissions.
+    DBTEAMMembersSetPermissionsErrorCannotSetPermissions,
 
-  /// Team is full. The organization has no available licenses.
-  DBTEAMMembersSetPermissionsErrorTeamLicenseLimit,
+    /// Team is full. The organization has no available licenses.
+    DBTEAMMembersSetPermissionsErrorTeamLicenseLimit,
 
-  /// (no description).
-  DBTEAMMembersSetPermissionsErrorOther,
+    /// (no description).
+    DBTEAMMembersSetPermissionsErrorOther,
 
 };
 

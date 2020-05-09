@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERSharingTeamPolicyTypeTag` enum type represents the possible tag
 /// states with which the `DBPAPERSharingTeamPolicyType` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERSharingTeamPolicyTypeTag) {
-  /// Users who have a link to this doc can edit it.
-  DBPAPERSharingTeamPolicyTypePeopleWithLinkCanEdit,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERSharingTeamPolicyTypeTag){
+    /// Users who have a link to this doc can edit it.
+    DBPAPERSharingTeamPolicyTypePeopleWithLinkCanEdit,
 
-  /// Users who have a link to this doc can view and comment on it.
-  DBPAPERSharingTeamPolicyTypePeopleWithLinkCanViewAndComment,
+    /// Users who have a link to this doc can view and comment on it.
+    DBPAPERSharingTeamPolicyTypePeopleWithLinkCanViewAndComment,
 
-  /// Users must be explicitly invited to this doc.
-  DBPAPERSharingTeamPolicyTypeInviteOnly,
+    /// Users must be explicitly invited to this doc.
+    DBPAPERSharingTeamPolicyTypeInviteOnly,
 
 };
 

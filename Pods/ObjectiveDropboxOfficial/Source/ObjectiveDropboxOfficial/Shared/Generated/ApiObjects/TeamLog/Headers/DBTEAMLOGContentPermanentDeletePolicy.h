@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGContentPermanentDeletePolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGContentPermanentDeletePolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGContentPermanentDeletePolicyTag) {
-  /// (no description).
-  DBTEAMLOGContentPermanentDeletePolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContentPermanentDeletePolicyTag){
+    /// (no description).
+    DBTEAMLOGContentPermanentDeletePolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGContentPermanentDeletePolicyEnabled,
+    /// (no description).
+    DBTEAMLOGContentPermanentDeletePolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGContentPermanentDeletePolicyOther,
+    /// (no description).
+    DBTEAMLOGContentPermanentDeletePolicyOther,
 
 };
 

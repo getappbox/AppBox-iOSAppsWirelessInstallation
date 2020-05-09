@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMPOLICIESEmmStateTag` enum type represents the possible tag states
 /// with which the `DBTEAMPOLICIESEmmState` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag) {
-  /// Emm token is disabled.
-  DBTEAMPOLICIESEmmStateDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESEmmStateTag){
+    /// Emm token is disabled.
+    DBTEAMPOLICIESEmmStateDisabled,
 
-  /// Emm token is optional.
-  DBTEAMPOLICIESEmmStateOptional,
+    /// Emm token is optional.
+    DBTEAMPOLICIESEmmStateOptional,
 
-  /// Emm token is required.
-  DBTEAMPOLICIESEmmStateRequired,
+    /// Emm token is required.
+    DBTEAMPOLICIESEmmStateRequired,
 
-  /// (no description).
-  DBTEAMPOLICIESEmmStateOther,
+    /// (no description).
+    DBTEAMPOLICIESEmmStateOther,
 
 };
 

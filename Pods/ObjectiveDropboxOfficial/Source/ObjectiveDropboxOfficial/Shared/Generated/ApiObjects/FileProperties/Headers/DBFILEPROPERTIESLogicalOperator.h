@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEPROPERTIESLogicalOperatorTag` enum type represents the possible
 /// tag states with which the `DBFILEPROPERTIESLogicalOperator` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESLogicalOperatorTag) {
-  /// Append a query with an "or" operator.
-  DBFILEPROPERTIESLogicalOperatorOrOperator,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESLogicalOperatorTag){
+    /// Append a query with an "or" operator.
+    DBFILEPROPERTIESLogicalOperatorOrOperator,
 
-  /// (no description).
-  DBFILEPROPERTIESLogicalOperatorOther,
+    /// (no description).
+    DBFILEPROPERTIESLogicalOperatorOther,
 
 };
 

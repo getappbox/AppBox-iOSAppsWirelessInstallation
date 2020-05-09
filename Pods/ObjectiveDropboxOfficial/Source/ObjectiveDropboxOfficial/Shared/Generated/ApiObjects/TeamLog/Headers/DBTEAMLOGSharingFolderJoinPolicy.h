@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGSharingFolderJoinPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGSharingFolderJoinPolicy` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSharingFolderJoinPolicyTag) {
-  /// (no description).
-  DBTEAMLOGSharingFolderJoinPolicyFromAnyone,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharingFolderJoinPolicyTag){
+    /// (no description).
+    DBTEAMLOGSharingFolderJoinPolicyFromAnyone,
 
-  /// (no description).
-  DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly,
+    /// (no description).
+    DBTEAMLOGSharingFolderJoinPolicyFromTeamOnly,
 
-  /// (no description).
-  DBTEAMLOGSharingFolderJoinPolicyOther,
+    /// (no description).
+    DBTEAMLOGSharingFolderJoinPolicyOther,
 
 };
 

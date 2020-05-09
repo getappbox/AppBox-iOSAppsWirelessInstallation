@@ -29,54 +29,54 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGFolderActionTag` enum type represents the possible tag states
 /// with which the `DBSHARINGFolderAction` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGFolderActionTag) {
-  /// Change folder options, such as who can be invited to join the folder.
-  DBSHARINGFolderActionChangeOptions,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFolderActionTag){
+    /// Change folder options, such as who can be invited to join the folder.
+    DBSHARINGFolderActionChangeOptions,
 
-  /// Disable viewer information for this folder.
-  DBSHARINGFolderActionDisableViewerInfo,
+    /// Disable viewer information for this folder.
+    DBSHARINGFolderActionDisableViewerInfo,
 
-  /// Change or edit contents of the folder.
-  DBSHARINGFolderActionEditContents,
+    /// Change or edit contents of the folder.
+    DBSHARINGFolderActionEditContents,
 
-  /// Enable viewer information on the folder.
-  DBSHARINGFolderActionEnableViewerInfo,
+    /// Enable viewer information on the folder.
+    DBSHARINGFolderActionEnableViewerInfo,
 
-  /// Invite a user or group to join the folder with read and write
-  /// permission.
-  DBSHARINGFolderActionInviteEditor,
+    /// Invite a user or group to join the folder with read and write
+    /// permission.
+    DBSHARINGFolderActionInviteEditor,
 
-  /// Invite a user or group to join the folder with read permission.
-  DBSHARINGFolderActionInviteViewer,
+    /// Invite a user or group to join the folder with read permission.
+    DBSHARINGFolderActionInviteViewer,
 
-  /// Invite a user or group to join the folder with read permission but no
-  /// comment permissions.
-  DBSHARINGFolderActionInviteViewerNoComment,
+    /// Invite a user or group to join the folder with read permission but no
+    /// comment permissions.
+    DBSHARINGFolderActionInviteViewerNoComment,
 
-  /// Relinquish one's own membership in the folder.
-  DBSHARINGFolderActionRelinquishMembership,
+    /// Relinquish one's own membership in the folder.
+    DBSHARINGFolderActionRelinquishMembership,
 
-  /// Unmount the folder.
-  DBSHARINGFolderActionUnmount,
+    /// Unmount the folder.
+    DBSHARINGFolderActionUnmount,
 
-  /// Stop sharing this folder.
-  DBSHARINGFolderActionUnshare,
+    /// Stop sharing this folder.
+    DBSHARINGFolderActionUnshare,
 
-  /// Keep a copy of the contents upon leaving or being kicked from the
-  /// folder.
-  DBSHARINGFolderActionLeaveACopy,
+    /// Keep a copy of the contents upon leaving or being kicked from the
+    /// folder.
+    DBSHARINGFolderActionLeaveACopy,
 
-  /// Use create_link instead.
-  DBSHARINGFolderActionShareLink,
+    /// Use create_link instead.
+    DBSHARINGFolderActionShareLink,
 
-  /// Create a shared link for folder.
-  DBSHARINGFolderActionCreateLink,
+    /// Create a shared link for folder.
+    DBSHARINGFolderActionCreateLink,
 
-  /// Set whether the folder inherits permissions from its parent.
-  DBSHARINGFolderActionSetAccessInheritance,
+    /// Set whether the folder inherits permissions from its parent.
+    DBSHARINGFolderActionSetAccessInheritance,
 
-  /// (no description).
-  DBSHARINGFolderActionOther,
+    /// (no description).
+    DBSHARINGFolderActionOther,
 
 };
 

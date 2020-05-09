@@ -31,21 +31,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGAddFileMemberErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGAddFileMemberError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGAddFileMemberErrorTag) {
-  /// (no description).
-  DBSHARINGAddFileMemberErrorUserError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddFileMemberErrorTag){
+    /// (no description).
+    DBSHARINGAddFileMemberErrorUserError,
 
-  /// (no description).
-  DBSHARINGAddFileMemberErrorAccessError,
+    /// (no description).
+    DBSHARINGAddFileMemberErrorAccessError,
 
-  /// The user has reached the rate limit for invitations.
-  DBSHARINGAddFileMemberErrorRateLimit,
+    /// The user has reached the rate limit for invitations.
+    DBSHARINGAddFileMemberErrorRateLimit,
 
-  /// The custom message did not pass comment permissions checks.
-  DBSHARINGAddFileMemberErrorInvalidComment,
+    /// The custom message did not pass comment permissions checks.
+    DBSHARINGAddFileMemberErrorInvalidComment,
 
-  /// (no description).
-  DBSHARINGAddFileMemberErrorOther,
+    /// (no description).
+    DBSHARINGAddFileMemberErrorOther,
 
 };
 

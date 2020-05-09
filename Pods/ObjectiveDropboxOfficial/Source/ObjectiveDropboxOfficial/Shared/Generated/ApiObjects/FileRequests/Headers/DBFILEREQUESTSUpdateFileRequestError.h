@@ -30,34 +30,34 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEREQUESTSUpdateFileRequestErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEREQUESTSUpdateFileRequestError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSUpdateFileRequestErrorTag) {
-  /// This user's Dropbox Business team doesn't allow file requests.
-  DBFILEREQUESTSUpdateFileRequestErrorDisabledForTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSUpdateFileRequestErrorTag){
+    /// This user's Dropbox Business team doesn't allow file requests.
+    DBFILEREQUESTSUpdateFileRequestErrorDisabledForTeam,
 
-  /// (no description).
-  DBFILEREQUESTSUpdateFileRequestErrorOther,
+    /// (no description).
+    DBFILEREQUESTSUpdateFileRequestErrorOther,
 
-  /// This file request ID was not found.
-  DBFILEREQUESTSUpdateFileRequestErrorNotFound,
+    /// This file request ID was not found.
+    DBFILEREQUESTSUpdateFileRequestErrorNotFound,
 
-  /// The specified path is not a folder.
-  DBFILEREQUESTSUpdateFileRequestErrorNotAFolder,
+    /// The specified path is not a folder.
+    DBFILEREQUESTSUpdateFileRequestErrorNotAFolder,
 
-  /// This file request is not accessible to this app. Apps with the app
-  /// folder permission can only access file requests in their app folder.
-  DBFILEREQUESTSUpdateFileRequestErrorAppLacksAccess,
+    /// This file request is not accessible to this app. Apps with the app
+    /// folder permission can only access file requests in their app folder.
+    DBFILEREQUESTSUpdateFileRequestErrorAppLacksAccess,
 
-  /// This user doesn't have permission to access or modify this file request.
-  DBFILEREQUESTSUpdateFileRequestErrorNoPermission,
+    /// This user doesn't have permission to access or modify this file request.
+    DBFILEREQUESTSUpdateFileRequestErrorNoPermission,
 
-  /// This user's email address is not verified. File requests are only
-  /// available on accounts with a verified email address. Users can verify
-  /// their email address here https://www.dropbox.com/help/317.
-  DBFILEREQUESTSUpdateFileRequestErrorEmailUnverified,
+    /// This user's email address is not verified. File requests are only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
+    DBFILEREQUESTSUpdateFileRequestErrorEmailUnverified,
 
-  /// There was an error validating the request. For example, the title was
-  /// invalid, or there were disallowed characters in the destination path.
-  DBFILEREQUESTSUpdateFileRequestErrorValidationError,
+    /// There was an error validating the request. For example, the title was
+    /// invalid, or there were disallowed characters in the destination path.
+    DBFILEREQUESTSUpdateFileRequestErrorValidationError,
 
 };
 

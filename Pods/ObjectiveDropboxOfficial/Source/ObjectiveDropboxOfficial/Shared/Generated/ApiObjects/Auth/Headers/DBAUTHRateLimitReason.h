@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBAUTHRateLimitReasonTag` enum type represents the possible tag states
 /// with which the `DBAUTHRateLimitReason` union can exist.
-typedef NS_ENUM(NSInteger, DBAUTHRateLimitReasonTag) {
-  /// You are making too many requests in the past few minutes.
-  DBAUTHRateLimitReasonTooManyRequests,
+typedef NS_CLOSED_ENUM(NSInteger, DBAUTHRateLimitReasonTag){
+    /// You are making too many requests in the past few minutes.
+    DBAUTHRateLimitReasonTooManyRequests,
 
-  /// There are currently too many write operations happening in the user's
-  /// Dropbox.
-  DBAUTHRateLimitReasonTooManyWriteOperations,
+    /// There are currently too many write operations happening in the user's
+    /// Dropbox.
+    DBAUTHRateLimitReasonTooManyWriteOperations,
 
-  /// (no description).
-  DBAUTHRateLimitReasonOther,
+    /// (no description).
+    DBAUTHRateLimitReasonOther,
 
 };
 

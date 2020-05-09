@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGGetFileMetadataIndividualResultTag` enum type represents the
 /// possible tag states with which the
 /// `DBSHARINGGetFileMetadataIndividualResult` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGGetFileMetadataIndividualResultTag) {
-  /// The result for this file if it was successful.
-  DBSHARINGGetFileMetadataIndividualResultMetadata,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGGetFileMetadataIndividualResultTag){
+    /// The result for this file if it was successful.
+    DBSHARINGGetFileMetadataIndividualResultMetadata,
 
-  /// The result for this file if it was an error.
-  DBSHARINGGetFileMetadataIndividualResultAccessError,
+    /// The result for this file if it was an error.
+    DBSHARINGGetFileMetadataIndividualResultAccessError,
 
-  /// (no description).
-  DBSHARINGGetFileMetadataIndividualResultOther,
+    /// (no description).
+    DBSHARINGGetFileMetadataIndividualResultOther,
 
 };
 

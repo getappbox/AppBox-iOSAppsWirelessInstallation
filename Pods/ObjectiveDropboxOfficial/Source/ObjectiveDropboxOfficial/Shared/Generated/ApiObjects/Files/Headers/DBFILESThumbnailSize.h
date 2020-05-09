@@ -27,33 +27,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESThumbnailSizeTag` enum type represents the possible tag states
 /// with which the `DBFILESThumbnailSize` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESThumbnailSizeTag) {
-  /// 32 by 32 px.
-  DBFILESThumbnailSizeW32h32,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESThumbnailSizeTag){
+    /// 32 by 32 px.
+    DBFILESThumbnailSizeW32h32,
 
-  /// 64 by 64 px.
-  DBFILESThumbnailSizeW64h64,
+    /// 64 by 64 px.
+    DBFILESThumbnailSizeW64h64,
 
-  /// 128 by 128 px.
-  DBFILESThumbnailSizeW128h128,
+    /// 128 by 128 px.
+    DBFILESThumbnailSizeW128h128,
 
-  /// 256 by 256 px.
-  DBFILESThumbnailSizeW256h256,
+    /// 256 by 256 px.
+    DBFILESThumbnailSizeW256h256,
 
-  /// 480 by 320 px.
-  DBFILESThumbnailSizeW480h320,
+    /// 480 by 320 px.
+    DBFILESThumbnailSizeW480h320,
 
-  /// 640 by 480 px.
-  DBFILESThumbnailSizeW640h480,
+    /// 640 by 480 px.
+    DBFILESThumbnailSizeW640h480,
 
-  /// 960 by 640 px.
-  DBFILESThumbnailSizeW960h640,
+    /// 960 by 640 px.
+    DBFILESThumbnailSizeW960h640,
 
-  /// 1024 by 768 px.
-  DBFILESThumbnailSizeW1024h768,
+    /// 1024 by 768 px.
+    DBFILESThumbnailSizeW1024h768,
 
-  /// 2048 by 1536 px.
-  DBFILESThumbnailSizeW2048h1536,
+    /// 2048 by 1536 px.
+    DBFILESThumbnailSizeW2048h1536,
 
 };
 

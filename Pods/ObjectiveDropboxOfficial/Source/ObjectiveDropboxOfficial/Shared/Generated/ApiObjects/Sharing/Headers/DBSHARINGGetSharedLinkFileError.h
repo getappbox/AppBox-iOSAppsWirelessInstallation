@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGGetSharedLinkFileErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGGetSharedLinkFileError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGGetSharedLinkFileErrorTag) {
-  /// The shared link wasn't found.
-  DBSHARINGGetSharedLinkFileErrorSharedLinkNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGGetSharedLinkFileErrorTag){
+    /// The shared link wasn't found.
+    DBSHARINGGetSharedLinkFileErrorSharedLinkNotFound,
 
-  /// The caller is not allowed to access this shared link.
-  DBSHARINGGetSharedLinkFileErrorSharedLinkAccessDenied,
+    /// The caller is not allowed to access this shared link.
+    DBSHARINGGetSharedLinkFileErrorSharedLinkAccessDenied,
 
-  /// This type of link is not supported; use `files` instead.
-  DBSHARINGGetSharedLinkFileErrorUnsupportedLinkType,
+    /// This type of link is not supported; use `files` instead.
+    DBSHARINGGetSharedLinkFileErrorUnsupportedLinkType,
 
-  /// (no description).
-  DBSHARINGGetSharedLinkFileErrorOther,
+    /// (no description).
+    DBSHARINGGetSharedLinkFileErrorOther,
 
-  /// Directories cannot be retrieved by this endpoint.
-  DBSHARINGGetSharedLinkFileErrorSharedLinkIsDirectory,
+    /// Directories cannot be retrieved by this endpoint.
+    DBSHARINGGetSharedLinkFileErrorSharedLinkIsDirectory,
 
 };
 

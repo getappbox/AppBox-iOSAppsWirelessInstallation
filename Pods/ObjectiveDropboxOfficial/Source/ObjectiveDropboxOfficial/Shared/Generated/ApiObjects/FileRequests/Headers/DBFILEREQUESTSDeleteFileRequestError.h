@@ -30,37 +30,37 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEREQUESTSDeleteFileRequestErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEREQUESTSDeleteFileRequestError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSDeleteFileRequestErrorTag) {
-  /// This user's Dropbox Business team doesn't allow file requests.
-  DBFILEREQUESTSDeleteFileRequestErrorDisabledForTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSDeleteFileRequestErrorTag){
+    /// This user's Dropbox Business team doesn't allow file requests.
+    DBFILEREQUESTSDeleteFileRequestErrorDisabledForTeam,
 
-  /// (no description).
-  DBFILEREQUESTSDeleteFileRequestErrorOther,
+    /// (no description).
+    DBFILEREQUESTSDeleteFileRequestErrorOther,
 
-  /// This file request ID was not found.
-  DBFILEREQUESTSDeleteFileRequestErrorNotFound,
+    /// This file request ID was not found.
+    DBFILEREQUESTSDeleteFileRequestErrorNotFound,
 
-  /// The specified path is not a folder.
-  DBFILEREQUESTSDeleteFileRequestErrorNotAFolder,
+    /// The specified path is not a folder.
+    DBFILEREQUESTSDeleteFileRequestErrorNotAFolder,
 
-  /// This file request is not accessible to this app. Apps with the app
-  /// folder permission can only access file requests in their app folder.
-  DBFILEREQUESTSDeleteFileRequestErrorAppLacksAccess,
+    /// This file request is not accessible to this app. Apps with the app
+    /// folder permission can only access file requests in their app folder.
+    DBFILEREQUESTSDeleteFileRequestErrorAppLacksAccess,
 
-  /// This user doesn't have permission to access or modify this file request.
-  DBFILEREQUESTSDeleteFileRequestErrorNoPermission,
+    /// This user doesn't have permission to access or modify this file request.
+    DBFILEREQUESTSDeleteFileRequestErrorNoPermission,
 
-  /// This user's email address is not verified. File requests are only
-  /// available on accounts with a verified email address. Users can verify
-  /// their email address here https://www.dropbox.com/help/317.
-  DBFILEREQUESTSDeleteFileRequestErrorEmailUnverified,
+    /// This user's email address is not verified. File requests are only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
+    DBFILEREQUESTSDeleteFileRequestErrorEmailUnverified,
 
-  /// There was an error validating the request. For example, the title was
-  /// invalid, or there were disallowed characters in the destination path.
-  DBFILEREQUESTSDeleteFileRequestErrorValidationError,
+    /// There was an error validating the request. For example, the title was
+    /// invalid, or there were disallowed characters in the destination path.
+    DBFILEREQUESTSDeleteFileRequestErrorValidationError,
 
-  /// One or more file requests currently open.
-  DBFILEREQUESTSDeleteFileRequestErrorFileRequestOpen,
+    /// One or more file requests currently open.
+    DBFILEREQUESTSDeleteFileRequestErrorFileRequestOpen,
 
 };
 

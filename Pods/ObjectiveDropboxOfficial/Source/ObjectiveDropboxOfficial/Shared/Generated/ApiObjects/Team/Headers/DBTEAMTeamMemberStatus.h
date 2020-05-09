@@ -30,20 +30,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamMemberStatusTag` enum type represents the possible tag states
 /// with which the `DBTEAMTeamMemberStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamMemberStatusTag) {
-  /// User has successfully joined the team.
-  DBTEAMTeamMemberStatusActive,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamMemberStatusTag){
+    /// User has successfully joined the team.
+    DBTEAMTeamMemberStatusActive,
 
-  /// User has been invited to a team, but has not joined the team yet.
-  DBTEAMTeamMemberStatusInvited,
+    /// User has been invited to a team, but has not joined the team yet.
+    DBTEAMTeamMemberStatusInvited,
 
-  /// User is no longer a member of the team, but the account can be
-  /// un-suspended, re-establishing the user as a team member.
-  DBTEAMTeamMemberStatusSuspended,
+    /// User is no longer a member of the team, but the account can be
+    /// un-suspended, re-establishing the user as a team member.
+    DBTEAMTeamMemberStatusSuspended,
 
-  /// User is no longer a member of the team. Removed users are only listed
-  /// when include_removed is true in members/list.
-  DBTEAMTeamMemberStatusRemoved,
+    /// User is no longer a member of the team. Removed users are only listed
+    /// when include_removed is true in members/list.
+    DBTEAMTeamMemberStatusRemoved,
 
 };
 

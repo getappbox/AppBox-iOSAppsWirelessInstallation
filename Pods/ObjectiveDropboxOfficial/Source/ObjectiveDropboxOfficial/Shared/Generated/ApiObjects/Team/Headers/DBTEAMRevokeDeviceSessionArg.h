@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMRevokeDeviceSessionArgTag` enum type represents the possible tag
 /// states with which the `DBTEAMRevokeDeviceSessionArg` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag) {
-  /// End an active session.
-  DBTEAMRevokeDeviceSessionArgWebSession,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeDeviceSessionArgTag){
+    /// End an active session.
+    DBTEAMRevokeDeviceSessionArgWebSession,
 
-  /// Unlink a linked desktop device.
-  DBTEAMRevokeDeviceSessionArgDesktopClient,
+    /// Unlink a linked desktop device.
+    DBTEAMRevokeDeviceSessionArgDesktopClient,
 
-  /// Unlink a linked mobile device.
-  DBTEAMRevokeDeviceSessionArgMobileClient,
+    /// Unlink a linked mobile device.
+    DBTEAMRevokeDeviceSessionArgMobileClient,
 
 };
 

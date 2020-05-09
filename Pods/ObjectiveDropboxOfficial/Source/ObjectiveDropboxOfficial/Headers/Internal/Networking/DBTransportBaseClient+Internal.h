@@ -16,10 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DBTransportBaseClient (Internal)
 
 - (NSDictionary *)headersWithRouteInfo:(NSDictionary<NSString *, NSString *> *)routeAttributes
-                         serializedArg:(NSString *)serializedArg;
+                         serializedArg:(nullable NSString *)serializedArg;
 
 - (NSDictionary *)headersWithRouteInfo:(NSDictionary<NSString *, NSString *> *)routeAttributes
-                         serializedArg:(NSString *)serializedArg
+                         serializedArg:(nullable NSString *)serializedArg
                        byteOffsetStart:(nullable NSNumber *)byteOffsetStart
                          byteOffsetEnd:(nullable NSNumber *)byteOffsetEnd;
 
@@ -30,9 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSURL *)urlWithRoute:(DBRoute *)route;
 
-+ (NSData *)serializeDataWithRoute:(DBRoute *)route routeArg:(id<DBSerializable>)arg;
++ (nullable NSData *)serializeDataWithRoute:(DBRoute *)route routeArg:(nullable id<DBSerializable>)arg;
 
-+ (NSString *)serializeStringWithRoute:(DBRoute *)route routeArg:(id<DBSerializable>)arg;
++ (nullable NSString *)serializeStringWithRoute:(DBRoute *)route routeArg:(nullable id<DBSerializable>)arg;
 
 + (NSString *)asciiEscapeWithString:(NSString *)string;
 

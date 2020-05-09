@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGGetSharedLinksErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGGetSharedLinksError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGGetSharedLinksErrorTag) {
-  /// (no description).
-  DBSHARINGGetSharedLinksErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGGetSharedLinksErrorTag){
+    /// (no description).
+    DBSHARINGGetSharedLinksErrorPath,
 
-  /// (no description).
-  DBSHARINGGetSharedLinksErrorOther,
+    /// (no description).
+    DBSHARINGGetSharedLinksErrorOther,
 
 };
 

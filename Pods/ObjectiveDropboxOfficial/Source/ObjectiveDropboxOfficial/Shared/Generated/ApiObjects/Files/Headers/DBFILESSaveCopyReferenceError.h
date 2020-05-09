@@ -28,26 +28,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESSaveCopyReferenceErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESSaveCopyReferenceError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag) {
-  /// (no description).
-  DBFILESSaveCopyReferenceErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESSaveCopyReferenceErrorTag){
+    /// (no description).
+    DBFILESSaveCopyReferenceErrorPath,
 
-  /// The copy reference is invalid.
-  DBFILESSaveCopyReferenceErrorInvalidCopyReference,
+    /// The copy reference is invalid.
+    DBFILESSaveCopyReferenceErrorInvalidCopyReference,
 
-  /// You don't have permission to save the given copy reference. Please make
-  /// sure this app is same app which created the copy reference and the
-  /// source user is still linked to the app.
-  DBFILESSaveCopyReferenceErrorNoPermission,
+    /// You don't have permission to save the given copy reference. Please make
+    /// sure this app is same app which created the copy reference and the
+    /// source user is still linked to the app.
+    DBFILESSaveCopyReferenceErrorNoPermission,
 
-  /// The file referenced by the copy reference cannot be found.
-  DBFILESSaveCopyReferenceErrorNotFound,
+    /// The file referenced by the copy reference cannot be found.
+    DBFILESSaveCopyReferenceErrorNotFound,
 
-  /// The operation would involve more than 10,000 files and folders.
-  DBFILESSaveCopyReferenceErrorTooManyFiles,
+    /// The operation would involve more than 10,000 files and folders.
+    DBFILESSaveCopyReferenceErrorTooManyFiles,
 
-  /// (no description).
-  DBFILESSaveCopyReferenceErrorOther,
+    /// (no description).
+    DBFILESSaveCopyReferenceErrorOther,
 
 };
 

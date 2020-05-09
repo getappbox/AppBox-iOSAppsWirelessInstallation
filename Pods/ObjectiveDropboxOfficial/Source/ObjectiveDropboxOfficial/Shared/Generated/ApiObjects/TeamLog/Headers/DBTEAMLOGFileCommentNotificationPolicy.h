@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGFileCommentNotificationPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGFileCommentNotificationPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGFileCommentNotificationPolicyTag) {
-  /// (no description).
-  DBTEAMLOGFileCommentNotificationPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFileCommentNotificationPolicyTag){
+    /// (no description).
+    DBTEAMLOGFileCommentNotificationPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGFileCommentNotificationPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGFileCommentNotificationPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGFileCommentNotificationPolicyOther,
+    /// (no description).
+    DBTEAMLOGFileCommentNotificationPolicyOther,
 
 };
 

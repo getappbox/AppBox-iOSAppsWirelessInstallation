@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGPaperDefaultFolderPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGPaperDefaultFolderPolicy` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDefaultFolderPolicyTag) {
-  /// (no description).
-  DBTEAMLOGPaperDefaultFolderPolicyEveryoneInTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperDefaultFolderPolicyTag){
+    /// (no description).
+    DBTEAMLOGPaperDefaultFolderPolicyEveryoneInTeam,
 
-  /// (no description).
-  DBTEAMLOGPaperDefaultFolderPolicyInviteOnly,
+    /// (no description).
+    DBTEAMLOGPaperDefaultFolderPolicyInviteOnly,
 
-  /// (no description).
-  DBTEAMLOGPaperDefaultFolderPolicyOther,
+    /// (no description).
+    DBTEAMLOGPaperDefaultFolderPolicyOther,
 
 };
 

@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 #import "DBTEAMMemberProfile.h"
 
+@class DBSECONDARYEMAILSSecondaryEmail;
 @class DBTEAMTeamMemberProfile;
 @class DBTEAMTeamMemberStatus;
 @class DBTEAMTeamMembershipType;
@@ -56,11 +57,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// application using the API may find it easier to use their own IDs instead of
 /// Dropbox IDs like account_id or team_member_id.
 /// @param accountId A user's account identifier.
+/// @param secondaryEmails Secondary emails of a user.
+/// @param invitedOn The date and time the user was invited to the team
+/// (contains value only when the member's status matches `invited` in
+/// `DBTEAMTeamMemberStatus`).
 /// @param joinedOn The date and time the user joined as a member of a specific
 /// team.
 /// @param suspendedOn The date and time the user was suspended from the team
 /// (contains value only when the member's status matches `suspended` in
-/// `DBTEAMTeamMemberStatus`.
+/// `DBTEAMTeamMemberStatus`).
 /// @param persistentId Persistent ID that a team can attach to the user. The
 /// persistent ID is unique ID to be used for SAML authentication.
 /// @param isDirectoryRestricted Whether the user is a directory restricted
@@ -80,6 +85,8 @@ NS_ASSUME_NONNULL_BEGIN
                       memberFolderId:(NSString *)memberFolderId
                           externalId:(nullable NSString *)externalId
                            accountId:(nullable NSString *)accountId
+                     secondaryEmails:(nullable NSArray<DBSECONDARYEMAILSSecondaryEmail *> *)secondaryEmails
+                           invitedOn:(nullable NSDate *)invitedOn
                             joinedOn:(nullable NSDate *)joinedOn
                          suspendedOn:(nullable NSDate *)suspendedOn
                         persistentId:(nullable NSString *)persistentId

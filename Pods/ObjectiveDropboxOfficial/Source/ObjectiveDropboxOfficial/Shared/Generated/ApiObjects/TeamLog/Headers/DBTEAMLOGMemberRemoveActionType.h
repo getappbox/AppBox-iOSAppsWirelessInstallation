@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGMemberRemoveActionTypeTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGMemberRemoveActionType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag) {
-  /// (no description).
-  DBTEAMLOGMemberRemoveActionTypeDelete_,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag){
+    /// (no description).
+    DBTEAMLOGMemberRemoveActionTypeDelete_,
 
-  /// (no description).
-  DBTEAMLOGMemberRemoveActionTypeOffboard,
+    /// (no description).
+    DBTEAMLOGMemberRemoveActionTypeOffboard,
 
-  /// (no description).
-  DBTEAMLOGMemberRemoveActionTypeLeave,
+    /// (no description).
+    DBTEAMLOGMemberRemoveActionTypeLeave,
 
-  /// (no description).
-  DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders,
+    /// (no description).
+    DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders,
 
-  /// (no description).
-  DBTEAMLOGMemberRemoveActionTypeOther,
+    /// (no description).
+    DBTEAMLOGMemberRemoveActionTypeOther,
 
 };
 

@@ -28,24 +28,24 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGSharedLinkAccessFailureReasonTag` enum type represents the
 /// possible tag states with which the `DBSHARINGSharedLinkAccessFailureReason`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkAccessFailureReasonTag) {
-  /// User is not logged in.
-  DBSHARINGSharedLinkAccessFailureReasonLoginRequired,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedLinkAccessFailureReasonTag){
+    /// User is not logged in.
+    DBSHARINGSharedLinkAccessFailureReasonLoginRequired,
 
-  /// User's email is not verified.
-  DBSHARINGSharedLinkAccessFailureReasonEmailVerifyRequired,
+    /// User's email is not verified.
+    DBSHARINGSharedLinkAccessFailureReasonEmailVerifyRequired,
 
-  /// The link is password protected.
-  DBSHARINGSharedLinkAccessFailureReasonPasswordRequired,
+    /// The link is password protected.
+    DBSHARINGSharedLinkAccessFailureReasonPasswordRequired,
 
-  /// Access is allowed for team members only.
-  DBSHARINGSharedLinkAccessFailureReasonTeamOnly,
+    /// Access is allowed for team members only.
+    DBSHARINGSharedLinkAccessFailureReasonTeamOnly,
 
-  /// Access is allowed for the shared link's owner only.
-  DBSHARINGSharedLinkAccessFailureReasonOwnerOnly,
+    /// Access is allowed for the shared link's owner only.
+    DBSHARINGSharedLinkAccessFailureReasonOwnerOnly,
 
-  /// (no description).
-  DBSHARINGSharedLinkAccessFailureReasonOther,
+    /// (no description).
+    DBSHARINGSharedLinkAccessFailureReasonOther,
 
 };
 

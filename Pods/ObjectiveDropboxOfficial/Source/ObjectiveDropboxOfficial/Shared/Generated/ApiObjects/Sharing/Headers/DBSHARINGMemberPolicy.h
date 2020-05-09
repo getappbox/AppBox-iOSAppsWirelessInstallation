@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGMemberPolicyTag` enum type represents the possible tag states
 /// with which the `DBSHARINGMemberPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGMemberPolicyTag) {
-  /// Only a teammate can become a member.
-  DBSHARINGMemberPolicyTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMemberPolicyTag){
+    /// Only a teammate can become a member.
+    DBSHARINGMemberPolicyTeam,
 
-  /// Anyone can become a member.
-  DBSHARINGMemberPolicyAnyone,
+    /// Anyone can become a member.
+    DBSHARINGMemberPolicyAnyone,
 
-  /// (no description).
-  DBSHARINGMemberPolicyOther,
+    /// (no description).
+    DBSHARINGMemberPolicyOther,
 
 };
 

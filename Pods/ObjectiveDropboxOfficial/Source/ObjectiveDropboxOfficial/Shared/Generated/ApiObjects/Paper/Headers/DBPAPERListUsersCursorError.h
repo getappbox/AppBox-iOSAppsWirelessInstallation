@@ -28,18 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERListUsersCursorErrorTag` enum type represents the possible tag
 /// states with which the `DBPAPERListUsersCursorError` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERListUsersCursorErrorTag) {
-  /// Your account does not have permissions to perform this action.
-  DBPAPERListUsersCursorErrorInsufficientPermissions,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERListUsersCursorErrorTag){
+    /// Your account does not have permissions to perform this action. This may
+    /// be due to it only having access to Paper as files in the Dropbox
+    /// filesystem. For more information, refer to the Paper Migration Guide
+    /// https://www.dropbox.com/lp/developers/reference/paper-migration-guide.
+    DBPAPERListUsersCursorErrorInsufficientPermissions,
 
-  /// (no description).
-  DBPAPERListUsersCursorErrorOther,
+    /// (no description).
+    DBPAPERListUsersCursorErrorOther,
 
-  /// The required doc was not found.
-  DBPAPERListUsersCursorErrorDocNotFound,
+    /// The required doc was not found.
+    DBPAPERListUsersCursorErrorDocNotFound,
 
-  /// (no description).
-  DBPAPERListUsersCursorErrorCursorError,
+    /// (no description).
+    DBPAPERListUsersCursorErrorCursorError,
 
 };
 
@@ -56,7 +59,10 @@ typedef NS_ENUM(NSInteger, DBPAPERListUsersCursorErrorTag) {
 /// Initializes union class with tag state of "insufficient_permissions".
 ///
 /// Description of the "insufficient_permissions" tag state: Your account does
-/// not have permissions to perform this action.
+/// not have permissions to perform this action. This may be due to it only
+/// having access to Paper as files in the Dropbox filesystem. For more
+/// information, refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide.
 ///
 /// @return An initialized instance.
 ///

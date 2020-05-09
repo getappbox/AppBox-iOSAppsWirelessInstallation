@@ -29,16 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGRemoveMemberJobStatusTag` enum type represents the possible
 /// tag states with which the `DBSHARINGRemoveMemberJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRemoveMemberJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBSHARINGRemoveMemberJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRemoveMemberJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBSHARINGRemoveMemberJobStatusInProgress,
 
-  /// Removing the folder member has finished. The value is information about
-  /// whether the member has another form of access.
-  DBSHARINGRemoveMemberJobStatusComplete,
+    /// Removing the folder member has finished. The value is information about
+    /// whether the member has another form of access.
+    DBSHARINGRemoveMemberJobStatusComplete,
 
-  /// (no description).
-  DBSHARINGRemoveMemberJobStatusFailed,
+    /// (no description).
+    DBSHARINGRemoveMemberJobStatusFailed,
 
 };
 

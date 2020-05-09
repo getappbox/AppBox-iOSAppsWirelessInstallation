@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESCameraUploadsPolicyStateTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESCameraUploadsPolicyState`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESCameraUploadsPolicyStateTag) {
-  /// Background camera uploads are disabled.
-  DBTEAMPOLICIESCameraUploadsPolicyStateDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESCameraUploadsPolicyStateTag){
+    /// Background camera uploads are disabled.
+    DBTEAMPOLICIESCameraUploadsPolicyStateDisabled,
 
-  /// Background camera uploads are allowed.
-  DBTEAMPOLICIESCameraUploadsPolicyStateEnabled,
+    /// Background camera uploads are allowed.
+    DBTEAMPOLICIESCameraUploadsPolicyStateEnabled,
 
-  /// (no description).
-  DBTEAMPOLICIESCameraUploadsPolicyStateOther,
+    /// (no description).
+    DBTEAMPOLICIESCameraUploadsPolicyStateOther,
 
 };
 

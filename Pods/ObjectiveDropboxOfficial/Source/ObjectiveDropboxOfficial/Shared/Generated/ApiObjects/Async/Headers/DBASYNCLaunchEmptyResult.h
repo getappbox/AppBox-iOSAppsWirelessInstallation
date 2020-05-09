@@ -31,13 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBASYNCLaunchEmptyResultTag` enum type represents the possible tag
 /// states with which the `DBASYNCLaunchEmptyResult` union can exist.
-typedef NS_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag) {
-  /// This response indicates that the processing is asynchronous. The string
-  /// is an id that can be used to obtain the status of the asynchronous job.
-  DBASYNCLaunchEmptyResultAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBASYNCLaunchEmptyResultTag){
+    /// This response indicates that the processing is asynchronous. The string
+    /// is an id that can be used to obtain the status of the asynchronous job.
+    DBASYNCLaunchEmptyResultAsyncJobId,
 
-  /// The job finished synchronously and successfully.
-  DBASYNCLaunchEmptyResultComplete,
+    /// The job finished synchronously and successfully.
+    DBASYNCLaunchEmptyResultComplete,
 
 };
 

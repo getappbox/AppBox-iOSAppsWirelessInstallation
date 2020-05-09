@@ -29,35 +29,35 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGRelinquishFolderMembershipErrorTag` enum type represents the
 /// possible tag states with which the
 /// `DBSHARINGRelinquishFolderMembershipError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag) {
-  /// (no description).
-  DBSHARINGRelinquishFolderMembershipErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRelinquishFolderMembershipErrorTag){
+    /// (no description).
+    DBSHARINGRelinquishFolderMembershipErrorAccessError,
 
-  /// The current user is the owner of the shared folder. Owners cannot
-  /// relinquish membership to their own folders. Try unsharing or
-  /// transferring ownership first.
-  DBSHARINGRelinquishFolderMembershipErrorFolderOwner,
+    /// The current user is the owner of the shared folder. Owners cannot
+    /// relinquish membership to their own folders. Try unsharing or
+    /// transferring ownership first.
+    DBSHARINGRelinquishFolderMembershipErrorFolderOwner,
 
-  /// The shared folder is currently mounted.  Unmount the shared folder
-  /// before relinquishing membership.
-  DBSHARINGRelinquishFolderMembershipErrorMounted,
+    /// The shared folder is currently mounted.  Unmount the shared folder
+    /// before relinquishing membership.
+    DBSHARINGRelinquishFolderMembershipErrorMounted,
 
-  /// The current user has access to the shared folder via a group.  You can't
-  /// relinquish membership to folders shared via groups.
-  DBSHARINGRelinquishFolderMembershipErrorGroupAccess,
+    /// The current user has access to the shared folder via a group.  You can't
+    /// relinquish membership to folders shared via groups.
+    DBSHARINGRelinquishFolderMembershipErrorGroupAccess,
 
-  /// This action cannot be performed on a team shared folder.
-  DBSHARINGRelinquishFolderMembershipErrorTeamFolder,
+    /// This action cannot be performed on a team shared folder.
+    DBSHARINGRelinquishFolderMembershipErrorTeamFolder,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGRelinquishFolderMembershipErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGRelinquishFolderMembershipErrorNoPermission,
 
-  /// The current user only has inherited access to the shared folder.  You
-  /// can't relinquish inherited membership to folders.
-  DBSHARINGRelinquishFolderMembershipErrorNoExplicitAccess,
+    /// The current user only has inherited access to the shared folder.  You
+    /// can't relinquish inherited membership to folders.
+    DBSHARINGRelinquishFolderMembershipErrorNoExplicitAccess,
 
-  /// (no description).
-  DBSHARINGRelinquishFolderMembershipErrorOther,
+    /// (no description).
+    DBSHARINGRelinquishFolderMembershipErrorOther,
 
 };
 

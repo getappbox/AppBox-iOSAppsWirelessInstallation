@@ -29,27 +29,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGLinkActionTag` enum type represents the possible tag states
 /// with which the `DBSHARINGLinkAction` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGLinkActionTag) {
-  /// Change the access level of the link.
-  DBSHARINGLinkActionChangeAccessLevel,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkActionTag){
+    /// Change the access level of the link.
+    DBSHARINGLinkActionChangeAccessLevel,
 
-  /// Change the audience of the link.
-  DBSHARINGLinkActionChangeAudience,
+    /// Change the audience of the link.
+    DBSHARINGLinkActionChangeAudience,
 
-  /// Remove the expiry date of the link.
-  DBSHARINGLinkActionRemoveExpiry,
+    /// Remove the expiry date of the link.
+    DBSHARINGLinkActionRemoveExpiry,
 
-  /// Remove the password of the link.
-  DBSHARINGLinkActionRemovePassword,
+    /// Remove the password of the link.
+    DBSHARINGLinkActionRemovePassword,
 
-  /// Create or modify the expiry date of the link.
-  DBSHARINGLinkActionSetExpiry,
+    /// Create or modify the expiry date of the link.
+    DBSHARINGLinkActionSetExpiry,
 
-  /// Create or modify the password of the link.
-  DBSHARINGLinkActionSetPassword,
+    /// Create or modify the password of the link.
+    DBSHARINGLinkActionSetPassword,
 
-  /// (no description).
-  DBSHARINGLinkActionOther,
+    /// (no description).
+    DBSHARINGLinkActionOther,
 
 };
 

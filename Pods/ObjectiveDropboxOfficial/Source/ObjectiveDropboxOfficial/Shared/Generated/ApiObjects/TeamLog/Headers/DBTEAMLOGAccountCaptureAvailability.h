@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGAccountCaptureAvailabilityTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGAccountCaptureAvailability`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag) {
-  /// (no description).
-  DBTEAMLOGAccountCaptureAvailabilityUnavailable,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag){
+    /// (no description).
+    DBTEAMLOGAccountCaptureAvailabilityUnavailable,
 
-  /// (no description).
-  DBTEAMLOGAccountCaptureAvailabilityAvailable,
+    /// (no description).
+    DBTEAMLOGAccountCaptureAvailabilityAvailable,
 
-  /// (no description).
-  DBTEAMLOGAccountCaptureAvailabilityOther,
+    /// (no description).
+    DBTEAMLOGAccountCaptureAvailabilityOther,
 
 };
 

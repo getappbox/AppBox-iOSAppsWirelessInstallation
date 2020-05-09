@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGParticipantLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGParticipantLogInfo` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag) {
-  /// A user with a Dropbox account.
-  DBTEAMLOGParticipantLogInfoUser,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag){
+    /// A user with a Dropbox account.
+    DBTEAMLOGParticipantLogInfoUser,
 
-  /// Group details.
-  DBTEAMLOGParticipantLogInfoGroup,
+    /// Group details.
+    DBTEAMLOGParticipantLogInfoGroup,
 
-  /// (no description).
-  DBTEAMLOGParticipantLogInfoOther,
+    /// (no description).
+    DBTEAMLOGParticipantLogInfoOther,
 
 };
 

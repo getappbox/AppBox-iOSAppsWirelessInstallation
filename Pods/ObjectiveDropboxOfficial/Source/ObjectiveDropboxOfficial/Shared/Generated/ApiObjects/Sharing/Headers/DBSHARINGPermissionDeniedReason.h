@@ -30,55 +30,55 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGPermissionDeniedReasonTag` enum type represents the possible
 /// tag states with which the `DBSHARINGPermissionDeniedReason` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag) {
-  /// User is not on the same team as the folder owner.
-  DBSHARINGPermissionDeniedReasonUserNotSameTeamAsOwner,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGPermissionDeniedReasonTag){
+    /// User is not on the same team as the folder owner.
+    DBSHARINGPermissionDeniedReasonUserNotSameTeamAsOwner,
 
-  /// User is prohibited by the owner from taking the action.
-  DBSHARINGPermissionDeniedReasonUserNotAllowedByOwner,
+    /// User is prohibited by the owner from taking the action.
+    DBSHARINGPermissionDeniedReasonUserNotAllowedByOwner,
 
-  /// Target is indirectly a member of the folder, for example by being part
-  /// of a group.
-  DBSHARINGPermissionDeniedReasonTargetIsIndirectMember,
+    /// Target is indirectly a member of the folder, for example by being part
+    /// of a group.
+    DBSHARINGPermissionDeniedReasonTargetIsIndirectMember,
 
-  /// Target is the owner of the folder.
-  DBSHARINGPermissionDeniedReasonTargetIsOwner,
+    /// Target is the owner of the folder.
+    DBSHARINGPermissionDeniedReasonTargetIsOwner,
 
-  /// Target is the user itself.
-  DBSHARINGPermissionDeniedReasonTargetIsSelf,
+    /// Target is the user itself.
+    DBSHARINGPermissionDeniedReasonTargetIsSelf,
 
-  /// Target is not an active member of the team.
-  DBSHARINGPermissionDeniedReasonTargetNotActive,
+    /// Target is not an active member of the team.
+    DBSHARINGPermissionDeniedReasonTargetNotActive,
 
-  /// Folder is team folder for a limited team.
-  DBSHARINGPermissionDeniedReasonFolderIsLimitedTeamFolder,
+    /// Folder is team folder for a limited team.
+    DBSHARINGPermissionDeniedReasonFolderIsLimitedTeamFolder,
 
-  /// The content owner needs to be on a Dropbox team to perform this action.
-  DBSHARINGPermissionDeniedReasonOwnerNotOnTeam,
+    /// The content owner needs to be on a Dropbox team to perform this action.
+    DBSHARINGPermissionDeniedReasonOwnerNotOnTeam,
 
-  /// The user does not have permission to perform this action on the link.
-  DBSHARINGPermissionDeniedReasonPermissionDenied,
+    /// The user does not have permission to perform this action on the link.
+    DBSHARINGPermissionDeniedReasonPermissionDenied,
 
-  /// The user's team policy prevents performing this action on the link.
-  DBSHARINGPermissionDeniedReasonRestrictedByTeam,
+    /// The user's team policy prevents performing this action on the link.
+    DBSHARINGPermissionDeniedReasonRestrictedByTeam,
 
-  /// The user's account type does not support this action.
-  DBSHARINGPermissionDeniedReasonUserAccountType,
+    /// The user's account type does not support this action.
+    DBSHARINGPermissionDeniedReasonUserAccountType,
 
-  /// The user needs to be on a Dropbox team to perform this action.
-  DBSHARINGPermissionDeniedReasonUserNotOnTeam,
+    /// The user needs to be on a Dropbox team to perform this action.
+    DBSHARINGPermissionDeniedReasonUserNotOnTeam,
 
-  /// Folder is inside of another shared folder.
-  DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder,
+    /// Folder is inside of another shared folder.
+    DBSHARINGPermissionDeniedReasonFolderIsInsideSharedFolder,
 
-  /// Policy cannot be changed due to restrictions from parent folder.
-  DBSHARINGPermissionDeniedReasonRestrictedByParentFolder,
+    /// Policy cannot be changed due to restrictions from parent folder.
+    DBSHARINGPermissionDeniedReasonRestrictedByParentFolder,
 
-  /// (no description).
-  DBSHARINGPermissionDeniedReasonInsufficientPlan,
+    /// (no description).
+    DBSHARINGPermissionDeniedReasonInsufficientPlan,
 
-  /// (no description).
-  DBSHARINGPermissionDeniedReasonOther,
+    /// (no description).
+    DBSHARINGPermissionDeniedReasonOther,
 
 };
 

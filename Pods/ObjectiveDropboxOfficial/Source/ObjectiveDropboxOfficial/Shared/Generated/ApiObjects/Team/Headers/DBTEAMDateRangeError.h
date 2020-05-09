@@ -29,9 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMDateRangeErrorTag` enum type represents the possible tag states
 /// with which the `DBTEAMDateRangeError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMDateRangeErrorTag) {
-  /// (no description).
-  DBTEAMDateRangeErrorOther,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMDateRangeErrorTag){
+    /// (no description).
+    DBTEAMDateRangeErrorOther,
 
 };
 

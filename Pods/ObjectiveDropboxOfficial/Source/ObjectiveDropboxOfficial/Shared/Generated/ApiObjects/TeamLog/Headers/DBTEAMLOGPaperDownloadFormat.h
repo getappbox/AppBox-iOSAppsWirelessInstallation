@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGPaperDownloadFormatTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGPaperDownloadFormat` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag) {
-  /// (no description).
-  DBTEAMLOGPaperDownloadFormatDocx,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperDownloadFormatTag){
+    /// (no description).
+    DBTEAMLOGPaperDownloadFormatDocx,
 
-  /// (no description).
-  DBTEAMLOGPaperDownloadFormatHtml,
+    /// (no description).
+    DBTEAMLOGPaperDownloadFormatHtml,
 
-  /// (no description).
-  DBTEAMLOGPaperDownloadFormatMarkdown,
+    /// (no description).
+    DBTEAMLOGPaperDownloadFormatMarkdown,
 
-  /// (no description).
-  DBTEAMLOGPaperDownloadFormatPdf,
+    /// (no description).
+    DBTEAMLOGPaperDownloadFormatPdf,
 
-  /// (no description).
-  DBTEAMLOGPaperDownloadFormatOther,
+    /// (no description).
+    DBTEAMLOGPaperDownloadFormatOther,
 
 };
 

@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMDesktopPlatformTag` enum type represents the possible tag states
 /// with which the `DBTEAMDesktopPlatform` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMDesktopPlatformTag) {
-  /// Official Windows Dropbox desktop client.
-  DBTEAMDesktopPlatformWindows,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMDesktopPlatformTag){
+    /// Official Windows Dropbox desktop client.
+    DBTEAMDesktopPlatformWindows,
 
-  /// Official Mac Dropbox desktop client.
-  DBTEAMDesktopPlatformMac,
+    /// Official Mac Dropbox desktop client.
+    DBTEAMDesktopPlatformMac,
 
-  /// Official Linux Dropbox desktop client.
-  DBTEAMDesktopPlatformLinux,
+    /// Official Linux Dropbox desktop client.
+    DBTEAMDesktopPlatformLinux,
 
-  /// (no description).
-  DBTEAMDesktopPlatformOther,
+    /// (no description).
+    DBTEAMDesktopPlatformOther,
 
 };
 

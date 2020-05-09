@@ -27,25 +27,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersSuspendErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersSuspendError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersSuspendErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersSuspendErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersSuspendErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersSuspendErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersSuspendErrorUserNotInTeam,
 
-  /// (no description).
-  DBTEAMMembersSuspendErrorOther,
+    /// (no description).
+    DBTEAMMembersSuspendErrorOther,
 
-  /// The user is not active, so it cannot be suspended.
-  DBTEAMMembersSuspendErrorSuspendInactiveUser,
+    /// The user is not active, so it cannot be suspended.
+    DBTEAMMembersSuspendErrorSuspendInactiveUser,
 
-  /// The user is the last admin of the team, so it cannot be suspended.
-  DBTEAMMembersSuspendErrorSuspendLastAdmin,
+    /// The user is the last admin of the team, so it cannot be suspended.
+    DBTEAMMembersSuspendErrorSuspendLastAdmin,
 
-  /// Team is full. The organization has no available licenses.
-  DBTEAMMembersSuspendErrorTeamLicenseLimit,
+    /// Team is full. The organization has no available licenses.
+    DBTEAMMembersSuspendErrorTeamLicenseLimit,
 
 };
 

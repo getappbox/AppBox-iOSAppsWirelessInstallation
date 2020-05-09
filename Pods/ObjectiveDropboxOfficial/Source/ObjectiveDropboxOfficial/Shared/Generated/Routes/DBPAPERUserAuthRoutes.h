@@ -35,6 +35,8 @@
 @class DBPAPERPaperDocPermissionLevel;
 @class DBPAPERPaperDocUpdateError;
 @class DBPAPERPaperDocUpdatePolicy;
+@class DBPAPERPaperFolderCreateError;
+@class DBPAPERPaperFolderCreateResult;
 @class DBPAPERSharingPolicy;
 @class DBPAPERSharingPublicPolicyType;
 @class DBPAPERSharingTeamPolicyType;
@@ -63,18 +65,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Marks the given Paper doc as archived. Note: This action can be performed or undone by anyone with edit permissions
-/// to the doc.
+/// DEPRECATED: Marks the given Paper doc as archived. This action can be performed or undone by anyone with edit
+/// permissions to the doc. Note that this endpoint will continue to work for content created by users on the older
+/// version of Paper. To check which version of Paper a user is on, use /users/features/get_values. If the
+/// paper_as_files feature is enabled, then the user is running the new version of Paper. This endpoint will be retired
+/// in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param docId The Paper doc ID.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBPAPERDocLookupError` object on failure.
 ///
-- (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsArchive:(NSString *)docId;
+- (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsArchive:(NSString *)docId
+    __deprecated_msg("docsArchive is deprecated.");
 
 ///
-/// Creates a new Paper doc with the provided content.
+/// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param importFormat The format of provided data.
 /// @param inputUrl The file to upload, as an NSString * object.
@@ -84,10 +95,14 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
 docsCreateUrl:(DBPAPERImportFormat *)importFormat
-     inputUrl:(NSString *)inputUrl;
+     inputUrl:(NSString *)inputUrl __deprecated_msg("docsCreate is deprecated.");
 
 ///
-/// Creates a new Paper doc with the provided content.
+/// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param parentFolderId The Paper folder ID where the Paper document should be created. The API user has to have write
 /// access to this folder or error is thrown.
@@ -100,10 +115,14 @@ docsCreateUrl:(DBPAPERImportFormat *)importFormat
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
  docsCreateUrl:(DBPAPERImportFormat *)importFormat
 parentFolderId:(nullable NSString *)parentFolderId
-      inputUrl:(NSString *)inputUrl;
+      inputUrl:(NSString *)inputUrl __deprecated_msg("docsCreate is deprecated.");
 
 ///
-/// Creates a new Paper doc with the provided content.
+/// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param importFormat The format of provided data.
 /// @param inputData The file to upload, as an NSData * object.
@@ -113,10 +132,14 @@ parentFolderId:(nullable NSString *)parentFolderId
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
 docsCreateData:(DBPAPERImportFormat *)importFormat
-     inputData:(NSData *)inputData;
+     inputData:(NSData *)inputData __deprecated_msg("docsCreate is deprecated.");
 
 ///
-/// Creates a new Paper doc with the provided content.
+/// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param parentFolderId The Paper folder ID where the Paper document should be created. The API user has to have write
 /// access to this folder or error is thrown.
@@ -129,10 +152,14 @@ docsCreateData:(DBPAPERImportFormat *)importFormat
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
 docsCreateData:(DBPAPERImportFormat *)importFormat
 parentFolderId:(nullable NSString *)parentFolderId
-     inputData:(NSData *)inputData;
+     inputData:(NSData *)inputData __deprecated_msg("docsCreate is deprecated.");
 
 ///
-/// Creates a new Paper doc with the provided content.
+/// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param importFormat The format of provided data.
 /// @param inputStream The file to upload, as an NSInputStream * object.
@@ -142,10 +169,14 @@ parentFolderId:(nullable NSString *)parentFolderId
 ///
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
 docsCreateStream:(DBPAPERImportFormat *)importFormat
-     inputStream:(NSInputStream *)inputStream;
+     inputStream:(NSInputStream *)inputStream __deprecated_msg("docsCreate is deprecated.");
 
 ///
-/// Creates a new Paper doc with the provided content.
+/// DEPRECATED: Creates a new Paper doc with the provided content. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param parentFolderId The Paper folder ID where the Paper document should be created. The API user has to have write
 /// access to this folder or error is thrown.
@@ -158,10 +189,14 @@ docsCreateStream:(DBPAPERImportFormat *)importFormat
 - (DBUploadTask<DBPAPERPaperDocCreateUpdateResult *, DBPAPERPaperDocCreateError *> *)
 docsCreateStream:(DBPAPERImportFormat *)importFormat
   parentFolderId:(nullable NSString *)parentFolderId
-     inputStream:(NSInputStream *)inputStream;
+     inputStream:(NSInputStream *)inputStream __deprecated_msg("docsCreate is deprecated.");
 
 ///
-/// Exports and downloads Paper doc either as HTML or markdown.
+/// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
+/// work for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 /// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
 /// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
@@ -175,10 +210,14 @@ docsCreateStream:(DBPAPERImportFormat *)importFormat
 docsDownloadUrl:(NSString *)docId
    exportFormat:(DBPAPERExportFormat *)exportFormat
       overwrite:(BOOL)overwrite
-    destination:(NSURL *)destination;
+    destination:(NSURL *)destination __deprecated_msg("docsDownload is deprecated.");
 
 ///
-/// Exports and downloads Paper doc either as HTML or markdown.
+/// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
+/// work for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 /// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
 /// at destination. `NO` will take no action, resulting in an `NSError` returned to the response handler in the event of
@@ -198,21 +237,29 @@ docsDownloadUrl:(NSString *)docId
       overwrite:(BOOL)overwrite
     destination:(NSURL *)destination
 byteOffsetStart:(NSNumber *)byteOffsetStart
-  byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+  byteOffsetEnd:(NSNumber *)byteOffsetEnd __deprecated_msg("docsDownload is deprecated.");
 
 ///
-/// Exports and downloads Paper doc either as HTML or markdown.
+/// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
+/// work for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERPaperDocExportResult` object on success or
 /// a `DBPAPERDocLookupError` object on failure.
 ///
-- (DBDownloadDataTask<DBPAPERPaperDocExportResult *, DBPAPERDocLookupError *> *)docsDownloadData:(NSString *)docId
-                                                                                    exportFormat:(DBPAPERExportFormat *)
-                                                                                                     exportFormat;
+- (DBDownloadDataTask<DBPAPERPaperDocExportResult *, DBPAPERDocLookupError *> *)
+docsDownloadData:(NSString *)docId
+    exportFormat:(DBPAPERExportFormat *)exportFormat __deprecated_msg("docsDownload is deprecated.");
 
 ///
-/// Exports and downloads Paper doc either as HTML or markdown.
+/// DEPRECATED: Exports and downloads Paper doc either as HTML or markdown. Note that this endpoint will continue to
+/// work for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 /// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
 /// include valid end range value.
@@ -226,23 +273,30 @@ byteOffsetStart:(NSNumber *)byteOffsetStart
 docsDownloadData:(NSString *)docId
     exportFormat:(DBPAPERExportFormat *)exportFormat
  byteOffsetStart:(NSNumber *)byteOffsetStart
-   byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+   byteOffsetEnd:(NSNumber *)byteOffsetEnd __deprecated_msg("docsDownload is deprecated.");
 
 ///
-/// Lists the users who are explicitly invited to the Paper folder in which the Paper doc is contained. For private
-/// folders all users (including owner) shared on the folder are listed and for team folders all non-team users shared
-/// on the folder are returned.
+/// DEPRECATED: Lists the users who are explicitly invited to the Paper folder in which the Paper doc is contained. For
+/// private folders all users (including owner) shared on the folder are listed and for team folders all non-team users
+/// shared on the folder are returned. Note that this endpoint will continue to work for content created by users on the
+/// older version of Paper. To check which version of Paper a user is on, use /users/features/get_values. If the
+/// paper_as_files feature is enabled, then the user is running the new version of Paper. Refer to the Paper Migration
+/// Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERListUsersOnFolderResponse` object on
 /// success or a `DBPAPERDocLookupError` object on failure.
 ///
-- (DBRpcTask<DBPAPERListUsersOnFolderResponse *, DBPAPERDocLookupError *> *)docsFolderUsersList:(NSString *)docId;
+- (DBRpcTask<DBPAPERListUsersOnFolderResponse *, DBPAPERDocLookupError *> *)docsFolderUsersList:(NSString *)docId
+    __deprecated_msg("docsFolderUsersList is deprecated.");
 
 ///
-/// Lists the users who are explicitly invited to the Paper folder in which the Paper doc is contained. For private
-/// folders all users (including owner) shared on the folder are listed and for team folders all non-team users shared
-/// on the folder are returned.
+/// DEPRECATED: Lists the users who are explicitly invited to the Paper folder in which the Paper doc is contained. For
+/// private folders all users (including owner) shared on the folder are listed and for team folders all non-team users
+/// shared on the folder are returned. Note that this endpoint will continue to work for content created by users on the
+/// older version of Paper. To check which version of Paper a user is on, use /users/features/get_values. If the
+/// paper_as_files feature is enabled, then the user is running the new version of Paper. Refer to the Paper Migration
+/// Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param limit Size limit per batch. The maximum number of users that can be retrieved per batch is 1000. Higher value
 /// results in invalid arguments error.
@@ -251,12 +305,16 @@ docsDownloadData:(NSString *)docId
 /// success or a `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<DBPAPERListUsersOnFolderResponse *, DBPAPERDocLookupError *> *)docsFolderUsersList:(NSString *)docId
-                                                                                          limit:(nullable NSNumber *)
-                                                                                                    limit;
+                                                                                          limit:
+                                                                                              (nullable NSNumber *)limit
+    __deprecated_msg("docsFolderUsersList is deprecated.");
 
 ///
-/// Once a cursor has been retrieved from `docsFolderUsersList`, use this to paginate through all users on the Paper
-/// folder.
+/// DEPRECATED: Once a cursor has been retrieved from `docsFolderUsersList`, use this to paginate through all users on
+/// the Paper folder. Note that this endpoint will continue to work for content created by users on the older version of
+/// Paper. To check which version of Paper a user is on, use /users/features/get_values. If the paper_as_files feature
+/// is enabled, then the user is running the new version of Paper. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param cursor The cursor obtained from `docsFolderUsersList` or `docsFolderUsersListContinue`. Allows for
 /// pagination.
@@ -266,34 +324,47 @@ docsDownloadData:(NSString *)docId
 ///
 - (DBRpcTask<DBPAPERListUsersOnFolderResponse *, DBPAPERListUsersCursorError *> *)
 docsFolderUsersListContinue:(NSString *)docId
-                     cursor:(NSString *)cursor;
+                     cursor:(NSString *)cursor __deprecated_msg("docsFolderUsersListContinue is deprecated.");
 
 ///
-/// Retrieves folder information for the given Paper doc. This includes:   - folder sharing policy; permissions for
-/// subfolders are set by the top-level folder.   - full 'filepath', i.e. the list of folders (both folderId and
-/// folderName) from     the root folder to the folder directly containing the Paper doc.  Note: If the Paper doc is not
-/// in any folder (aka unfiled) the response will be empty.
+/// DEPRECATED: Retrieves folder information for the given Paper doc. This includes:   - folder sharing policy;
+/// permissions for subfolders are set by the top-level folder.   - full 'filepath', i.e. the list of folders (both
+/// folderId and folderName) from     the root folder to the folder directly containing the Paper doc.  If the Paper doc
+/// is not in any folder (aka unfiled) the response will be empty. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 /// @param docId The Paper doc ID.
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERFoldersContainingPaperDoc` object on
 /// success or a `DBPAPERDocLookupError` object on failure.
 ///
-- (DBRpcTask<DBPAPERFoldersContainingPaperDoc *, DBPAPERDocLookupError *> *)docsGetFolderInfo:(NSString *)docId;
+- (DBRpcTask<DBPAPERFoldersContainingPaperDoc *, DBPAPERDocLookupError *> *)docsGetFolderInfo:(NSString *)docId
+    __deprecated_msg("docsGetFolderInfo is deprecated.");
 
 ///
-/// Return the list of all Paper docs according to the argument specifications. To iterate over through the full
-/// pagination, pass the cursor to `docsListContinue`.
+/// DEPRECATED: Return the list of all Paper docs according to the argument specifications. To iterate over through the
+/// full pagination, pass the cursor to `docsListContinue`. Note that this endpoint will continue to work for content
+/// created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERListPaperDocsResponse` object on success or
 /// a `void` object on failure.
 ///
-- (DBRpcTask<DBPAPERListPaperDocsResponse *, DBNilObject *> *)docsList;
+- (DBRpcTask<DBPAPERListPaperDocsResponse *, DBNilObject *> *)docsList __deprecated_msg("docsList is deprecated.");
 
 ///
-/// Return the list of all Paper docs according to the argument specifications. To iterate over through the full
-/// pagination, pass the cursor to `docsListContinue`.
+/// DEPRECATED: Return the list of all Paper docs according to the argument specifications. To iterate over through the
+/// full pagination, pass the cursor to `docsListContinue`. Note that this endpoint will continue to work for content
+/// created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 /// @param filterBy Allows user to specify how the Paper docs should be filtered.
 /// @param sortBy Allows user to specify how the Paper docs should be sorted.
@@ -308,43 +379,62 @@ docsFolderUsersListContinue:(NSString *)docId
                                                                 sortBy:(nullable DBPAPERListPaperDocsSortBy *)sortBy
                                                              sortOrder:
                                                                  (nullable DBPAPERListPaperDocsSortOrder *)sortOrder
-                                                                 limit:(nullable NSNumber *)limit;
+                                                                 limit:(nullable NSNumber *)limit
+    __deprecated_msg("docsList is deprecated.");
 
 ///
-/// Once a cursor has been retrieved from `docsList`, use this to paginate through all Paper doc.
+/// DEPRECATED: Once a cursor has been retrieved from `docsList`, use this to paginate through all Paper doc. Note that
+/// this endpoint will continue to work for content created by users on the older version of Paper. To check which
+/// version of Paper a user is on, use /users/features/get_values. If the paper_as_files feature is enabled, then the
+/// user is running the new version of Paper. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param cursor The cursor obtained from `docsList` or `docsListContinue`. Allows for pagination.
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERListPaperDocsResponse` object on success or
 /// a `DBPAPERListDocsCursorError` object on failure.
 ///
-- (DBRpcTask<DBPAPERListPaperDocsResponse *, DBPAPERListDocsCursorError *> *)docsListContinue:(NSString *)cursor;
+- (DBRpcTask<DBPAPERListPaperDocsResponse *, DBPAPERListDocsCursorError *> *)docsListContinue:(NSString *)cursor
+    __deprecated_msg("docsListContinue is deprecated.");
 
 ///
-/// Permanently deletes the given Paper doc. This operation is final as the doc cannot be recovered.  Note: This action
-/// can be performed only by the doc owner.
+/// DEPRECATED: Permanently deletes the given Paper doc. This operation is final as the doc cannot be recovered. This
+/// action can be performed only by the doc owner. Note that this endpoint will continue to work for content created by
+/// users on the older version of Paper. To check which version of Paper a user is on, use /users/features/get_values.
+/// If the paper_as_files feature is enabled, then the user is running the new version of Paper. Refer to the Paper
+/// Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param docId The Paper doc ID.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBPAPERDocLookupError` object on failure.
 ///
-- (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsPermanentlyDelete:(NSString *)docId;
+- (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsPermanentlyDelete:(NSString *)docId
+    __deprecated_msg("docsPermanentlyDelete is deprecated.");
 
 ///
-/// Gets the default sharing policy for the given Paper doc.
+/// DEPRECATED: Gets the default sharing policy for the given Paper doc. Note that this endpoint will continue to work
+/// for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
 ///
 /// @param docId The Paper doc ID.
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERSharingPolicy` object on success or a
 /// `DBPAPERDocLookupError` object on failure.
 ///
-- (DBRpcTask<DBPAPERSharingPolicy *, DBPAPERDocLookupError *> *)docsSharingPolicyGet:(NSString *)docId;
+- (DBRpcTask<DBPAPERSharingPolicy *, DBPAPERDocLookupError *> *)docsSharingPolicyGet:(NSString *)docId
+    __deprecated_msg("docsSharingPolicyGet is deprecated.");
 
 ///
-/// Sets the default sharing policy for the given Paper doc. The default 'team_sharing_policy' can be changed only by
-/// teams, omit this field for personal accounts.  Note: 'public_sharing_policy' cannot be set to the value 'disabled'
-/// because this setting can be changed only via the team admin console.
+/// DEPRECATED: Sets the default sharing policy for the given Paper doc. The default 'team_sharing_policy' can be
+/// changed only by teams, omit this field for personal accounts. The 'public_sharing_policy' policy can't be set to the
+/// value 'disabled' because this setting can be changed only via the team admin console. Note that this endpoint will
+/// continue to work for content created by users on the older version of Paper. To check which version of Paper a user
+/// is on, use /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new
+/// version of Paper. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param sharingPolicy The default sharing policy to be set for the Paper doc.
 ///
@@ -352,10 +442,15 @@ docsFolderUsersListContinue:(NSString *)docId
 /// `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsSharingPolicySet:(NSString *)docId
-                                                              sharingPolicy:(DBPAPERSharingPolicy *)sharingPolicy;
+                                                              sharingPolicy:(DBPAPERSharingPolicy *)sharingPolicy
+    __deprecated_msg("docsSharingPolicySet is deprecated.");
 
 ///
-/// Updates an existing Paper doc with the provided content.
+/// DEPRECATED: Updates an existing Paper doc with the provided content. Note that this endpoint will continue to work
+/// for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param docUpdatePolicy The policy used for the current update call.
 /// @param revision The latest doc revision. This value must match the head revision or an error code will be returned.
@@ -371,10 +466,14 @@ docsFolderUsersListContinue:(NSString *)docId
 docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
        revision:(NSNumber *)revision
    importFormat:(DBPAPERImportFormat *)importFormat
-       inputUrl:(NSString *)inputUrl;
+       inputUrl:(NSString *)inputUrl __deprecated_msg("docsUpdate is deprecated.");
 
 ///
-/// Updates an existing Paper doc with the provided content.
+/// DEPRECATED: Updates an existing Paper doc with the provided content. Note that this endpoint will continue to work
+/// for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param docUpdatePolicy The policy used for the current update call.
 /// @param revision The latest doc revision. This value must match the head revision or an error code will be returned.
@@ -390,10 +489,14 @@ docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
 docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
        revision:(NSNumber *)revision
    importFormat:(DBPAPERImportFormat *)importFormat
-      inputData:(NSData *)inputData;
+      inputData:(NSData *)inputData __deprecated_msg("docsUpdate is deprecated.");
 
 ///
-/// Updates an existing Paper doc with the provided content.
+/// DEPRECATED: Updates an existing Paper doc with the provided content. Note that this endpoint will continue to work
+/// for content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. This endpoint will be retired in September 2020. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for more information.
 ///
 /// @param docUpdatePolicy The policy used for the current update call.
 /// @param revision The latest doc revision. This value must match the head revision or an error code will be returned.
@@ -409,11 +512,15 @@ docsUpdateStream:(NSString *)docId
  docUpdatePolicy:(DBPAPERPaperDocUpdatePolicy *)docUpdatePolicy
         revision:(NSNumber *)revision
     importFormat:(DBPAPERImportFormat *)importFormat
-     inputStream:(NSInputStream *)inputStream;
+     inputStream:(NSInputStream *)inputStream __deprecated_msg("docsUpdate is deprecated.");
 
 ///
-/// Allows an owner or editor to add users to a Paper doc or change their permissions using their email address or
-/// Dropbox account ID.  Note: The Doc owner's permissions cannot be changed.
+/// DEPRECATED: Allows an owner or editor to add users to a Paper doc or change their permissions using their email
+/// address or Dropbox account ID. The doc owner's permissions cannot be changed. Note that this endpoint will continue
+/// to work for content created by users on the older version of Paper. To check which version of Paper a user is on,
+/// use /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version
+/// of Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide
+/// for migration information.
 ///
 /// @param members User which should be added to the Paper doc. Specify only email address or Dropbox account ID.
 ///
@@ -422,11 +529,15 @@ docsUpdateStream:(NSString *)docId
 ///
 - (DBRpcTask<NSArray<DBPAPERAddPaperDocUserMemberResult *> *, DBPAPERDocLookupError *> *)
 docsUsersAdd:(NSString *)docId
-     members:(NSArray<DBPAPERAddMember *> *)members;
+     members:(NSArray<DBPAPERAddMember *> *)members __deprecated_msg("docsUsersAdd is deprecated.");
 
 ///
-/// Allows an owner or editor to add users to a Paper doc or change their permissions using their email address or
-/// Dropbox account ID.  Note: The Doc owner's permissions cannot be changed.
+/// DEPRECATED: Allows an owner or editor to add users to a Paper doc or change their permissions using their email
+/// address or Dropbox account ID. The doc owner's permissions cannot be changed. Note that this endpoint will continue
+/// to work for content created by users on the older version of Paper. To check which version of Paper a user is on,
+/// use /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version
+/// of Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide
+/// for migration information.
 ///
 /// @param members User which should be added to the Paper doc. Specify only email address or Dropbox account ID.
 /// @param customMessage A personal message that will be emailed to each successfully added member.
@@ -439,23 +550,32 @@ docsUsersAdd:(NSString *)docId
  docsUsersAdd:(NSString *)docId
       members:(NSArray<DBPAPERAddMember *> *)members
 customMessage:(nullable NSString *)customMessage
-        quiet:(nullable NSNumber *)quiet;
+        quiet:(nullable NSNumber *)quiet __deprecated_msg("docsUsersAdd is deprecated.");
 
 ///
-/// Lists all users who visited the Paper doc or users with explicit access. This call excludes users who have been
-/// removed. The list is sorted by the date of the visit or the share date. The list will include both users, the
-/// explicitly shared ones as well as those who came in using the Paper url link.
+/// DEPRECATED: Lists all users who visited the Paper doc or users with explicit access. This call excludes users who
+/// have been removed. The list is sorted by the date of the visit or the share date. The list will include both users,
+/// the explicitly shared ones as well as those who came in using the Paper url link. Note that this endpoint will
+/// continue to work for content created by users on the older version of Paper. To check which version of Paper a user
+/// is on, use /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new
+/// version of Paper. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBPAPERListUsersOnPaperDocResponse` object on
 /// success or a `DBPAPERDocLookupError` object on failure.
 ///
-- (DBRpcTask<DBPAPERListUsersOnPaperDocResponse *, DBPAPERDocLookupError *> *)docsUsersList:(NSString *)docId;
+- (DBRpcTask<DBPAPERListUsersOnPaperDocResponse *, DBPAPERDocLookupError *> *)docsUsersList:(NSString *)docId
+    __deprecated_msg("docsUsersList is deprecated.");
 
 ///
-/// Lists all users who visited the Paper doc or users with explicit access. This call excludes users who have been
-/// removed. The list is sorted by the date of the visit or the share date. The list will include both users, the
-/// explicitly shared ones as well as those who came in using the Paper url link.
+/// DEPRECATED: Lists all users who visited the Paper doc or users with explicit access. This call excludes users who
+/// have been removed. The list is sorted by the date of the visit or the share date. The list will include both users,
+/// the explicitly shared ones as well as those who came in using the Paper url link. Note that this endpoint will
+/// continue to work for content created by users on the older version of Paper. To check which version of Paper a user
+/// is on, use /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new
+/// version of Paper. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param limit Size limit per batch. The maximum number of users that can be retrieved per batch is 1000. Higher value
 /// results in invalid arguments error.
@@ -467,10 +587,14 @@ customMessage:(nullable NSString *)customMessage
 - (DBRpcTask<DBPAPERListUsersOnPaperDocResponse *, DBPAPERDocLookupError *> *)
 docsUsersList:(NSString *)docId
         limit:(nullable NSNumber *)limit
-     filterBy:(nullable DBPAPERUserOnPaperDocFilter *)filterBy;
+     filterBy:(nullable DBPAPERUserOnPaperDocFilter *)filterBy __deprecated_msg("docsUsersList is deprecated.");
 
 ///
-/// Once a cursor has been retrieved from `docsUsersList`, use this to paginate through all users on the Paper doc.
+/// DEPRECATED: Once a cursor has been retrieved from `docsUsersList`, use this to paginate through all users on the
+/// Paper doc. Note that this endpoint will continue to work for content created by users on the older version of Paper.
+/// To check which version of Paper a user is on, use /users/features/get_values. If the paper_as_files feature is
+/// enabled, then the user is running the new version of Paper. Refer to the Paper Migration Guide
+/// https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param cursor The cursor obtained from `docsUsersList` or `docsUsersListContinue`. Allows for pagination.
 ///
@@ -479,11 +603,14 @@ docsUsersList:(NSString *)docId
 ///
 - (DBRpcTask<DBPAPERListUsersOnPaperDocResponse *, DBPAPERListUsersCursorError *> *)
 docsUsersListContinue:(NSString *)docId
-               cursor:(NSString *)cursor;
+               cursor:(NSString *)cursor __deprecated_msg("docsUsersListContinue is deprecated.");
 
 ///
-/// Allows an owner or editor to remove users from a Paper doc using their email address or Dropbox account ID.  Note:
-/// Doc owner cannot be removed.
+/// DEPRECATED: Allows an owner or editor to remove users from a Paper doc using their email address or Dropbox account
+/// ID. The doc owner cannot be removed. Note that this endpoint will continue to work for content created by users on
+/// the older version of Paper. To check which version of Paper a user is on, use /users/features/get_values. If the
+/// paper_as_files feature is enabled, then the user is running the new version of Paper. Refer to the Paper Migration
+/// Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for migration information.
 ///
 /// @param member User which should be removed from the Paper doc. Specify only email address or Dropbox account ID.
 ///
@@ -491,7 +618,46 @@ docsUsersListContinue:(NSString *)docId
 /// `DBPAPERDocLookupError` object on failure.
 ///
 - (DBRpcTask<DBNilObject *, DBPAPERDocLookupError *> *)docsUsersRemove:(NSString *)docId
-                                                                member:(DBSHARINGMemberSelector *)member;
+                                                                member:(DBSHARINGMemberSelector *)member
+    __deprecated_msg("docsUsersRemove is deprecated.");
+
+///
+/// DEPRECATED: Create a new Paper folder with the provided info. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
+///
+/// @param name The name of the new Paper folder.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperFolderCreateResult` object on success
+/// or a `DBPAPERPaperFolderCreateError` object on failure.
+///
+- (DBRpcTask<DBPAPERPaperFolderCreateResult *, DBPAPERPaperFolderCreateError *> *)foldersCreate:(NSString *)name
+    __deprecated_msg("foldersCreate is deprecated.");
+
+///
+/// DEPRECATED: Create a new Paper folder with the provided info. Note that this endpoint will continue to work for
+/// content created by users on the older version of Paper. To check which version of Paper a user is on, use
+/// /users/features/get_values. If the paper_as_files feature is enabled, then the user is running the new version of
+/// Paper. Refer to the Paper Migration Guide https://www.dropbox.com/lp/developers/reference/paper-migration-guide for
+/// migration information.
+///
+/// @param name The name of the new Paper folder.
+/// @param parentFolderId The encrypted Paper folder Id where the new Paper folder should be created. The API user has
+/// to have write access to this folder or error is thrown. If not supplied, the new folder will be created at top
+/// level.
+/// @param isTeamFolder Whether the folder to be created should be a team folder. This value will be ignored if
+/// parent_folder_id is supplied, as the new folder will inherit the type (private or team folder) from its parent. We
+/// will by default create a top-level private folder if both parent_folder_id and is_team_folder are not supplied.
+///
+/// @return Through the response callback, the caller will receive a `DBPAPERPaperFolderCreateResult` object on success
+/// or a `DBPAPERPaperFolderCreateError` object on failure.
+///
+- (DBRpcTask<DBPAPERPaperFolderCreateResult *, DBPAPERPaperFolderCreateError *> *)
+ foldersCreate:(NSString *)name
+parentFolderId:(nullable NSString *)parentFolderId
+  isTeamFolder:(nullable NSNumber *)isTeamFolder __deprecated_msg("foldersCreate is deprecated.");
 
 @end
 

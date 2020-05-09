@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGPlacementRestrictionTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGPlacementRestriction` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGPlacementRestrictionTag) {
-  /// (no description).
-  DBTEAMLOGPlacementRestrictionAustraliaOnly,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPlacementRestrictionTag){
+    /// (no description).
+    DBTEAMLOGPlacementRestrictionAustraliaOnly,
 
-  /// (no description).
-  DBTEAMLOGPlacementRestrictionEuropeOnly,
+    /// (no description).
+    DBTEAMLOGPlacementRestrictionEuropeOnly,
 
-  /// (no description).
-  DBTEAMLOGPlacementRestrictionJapanOnly,
+    /// (no description).
+    DBTEAMLOGPlacementRestrictionJapanOnly,
 
-  /// (no description).
-  DBTEAMLOGPlacementRestrictionNone,
+    /// (no description).
+    DBTEAMLOGPlacementRestrictionNone,
 
-  /// (no description).
-  DBTEAMLOGPlacementRestrictionOther,
+    /// (no description).
+    DBTEAMLOGPlacementRestrictionOther,
 
 };
 

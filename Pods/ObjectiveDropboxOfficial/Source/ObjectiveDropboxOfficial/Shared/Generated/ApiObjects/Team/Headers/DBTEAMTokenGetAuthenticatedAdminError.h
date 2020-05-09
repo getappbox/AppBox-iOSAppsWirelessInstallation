@@ -30,18 +30,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTokenGetAuthenticatedAdminErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMTokenGetAuthenticatedAdminError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTokenGetAuthenticatedAdminErrorTag) {
-  /// The current token is not associated with a team admin, because mappings
-  /// were not recorded when the token was created. Consider re-authorizing a
-  /// new access token to record its authenticating admin.
-  DBTEAMTokenGetAuthenticatedAdminErrorMappingNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTokenGetAuthenticatedAdminErrorTag){
+    /// The current token is not associated with a team admin, because mappings
+    /// were not recorded when the token was created. Consider re-authorizing a
+    /// new access token to record its authenticating admin.
+    DBTEAMTokenGetAuthenticatedAdminErrorMappingNotFound,
 
-  /// Either the team admin that authorized this token is no longer an active
-  /// member of the team or no longer a team admin.
-  DBTEAMTokenGetAuthenticatedAdminErrorAdminNotActive,
+    /// Either the team admin that authorized this token is no longer an active
+    /// member of the team or no longer a team admin.
+    DBTEAMTokenGetAuthenticatedAdminErrorAdminNotActive,
 
-  /// (no description).
-  DBTEAMTokenGetAuthenticatedAdminErrorOther,
+    /// (no description).
+    DBTEAMTokenGetAuthenticatedAdminErrorOther,
 
 };
 

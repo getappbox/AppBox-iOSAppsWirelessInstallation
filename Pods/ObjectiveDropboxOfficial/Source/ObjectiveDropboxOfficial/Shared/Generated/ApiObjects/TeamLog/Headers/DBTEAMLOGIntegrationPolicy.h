@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGIntegrationPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGIntegrationPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGIntegrationPolicyTag) {
-  /// (no description).
-  DBTEAMLOGIntegrationPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGIntegrationPolicyTag){
+    /// (no description).
+    DBTEAMLOGIntegrationPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGIntegrationPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGIntegrationPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGIntegrationPolicyOther,
+    /// (no description).
+    DBTEAMLOGIntegrationPolicyOther,
 
 };
 

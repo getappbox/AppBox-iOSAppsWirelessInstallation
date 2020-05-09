@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMemberSelectorErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMemberSelectorError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMemberSelectorErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMemberSelectorErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMemberSelectorErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMemberSelectorErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMemberSelectorErrorUserNotInTeam,
 
 };
 

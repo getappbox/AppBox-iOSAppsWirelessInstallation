@@ -29,24 +29,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGQuickActionTypeTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGQuickActionType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGQuickActionTypeTag) {
-  /// (no description).
-  DBTEAMLOGQuickActionTypeDeleteSharedLink,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGQuickActionTypeTag){
+    /// (no description).
+    DBTEAMLOGQuickActionTypeDeleteSharedLink,
 
-  /// (no description).
-  DBTEAMLOGQuickActionTypeResetPassword,
+    /// (no description).
+    DBTEAMLOGQuickActionTypeResetPassword,
 
-  /// (no description).
-  DBTEAMLOGQuickActionTypeRestoreFileOrFolder,
+    /// (no description).
+    DBTEAMLOGQuickActionTypeRestoreFileOrFolder,
 
-  /// (no description).
-  DBTEAMLOGQuickActionTypeUnlinkApp,
+    /// (no description).
+    DBTEAMLOGQuickActionTypeUnlinkApp,
 
-  /// (no description).
-  DBTEAMLOGQuickActionTypeUnlinkSession,
+    /// (no description).
+    DBTEAMLOGQuickActionTypeUnlinkDevice,
 
-  /// (no description).
-  DBTEAMLOGQuickActionTypeOther,
+    /// (no description).
+    DBTEAMLOGQuickActionTypeUnlinkSession,
+
+    /// (no description).
+    DBTEAMLOGQuickActionTypeOther,
 
 };
 
@@ -82,6 +85,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGQuickActionTypeTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithUnlinkApp;
+
+///
+/// Initializes union class with tag state of "unlink_device".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUnlinkDevice;
 
 ///
 /// Initializes union class with tag state of "unlink_session".
@@ -132,6 +142,13 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGQuickActionTypeTag) {
 /// @return Whether the union's current tag state has value "unlink_app".
 ///
 - (BOOL)isUnlinkApp;
+
+///
+/// Retrieves whether the union's current tag state has value "unlink_device".
+///
+/// @return Whether the union's current tag state has value "unlink_device".
+///
+- (BOOL)isUnlinkDevice;
 
 ///
 /// Retrieves whether the union's current tag state has value "unlink_session".

@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESListRevisionsErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESListRevisionsError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESListRevisionsErrorTag) {
-  /// (no description).
-  DBFILESListRevisionsErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESListRevisionsErrorTag){
+    /// (no description).
+    DBFILESListRevisionsErrorPath,
 
-  /// (no description).
-  DBFILESListRevisionsErrorOther,
+    /// (no description).
+    DBFILESListRevisionsErrorOther,
 
 };
 

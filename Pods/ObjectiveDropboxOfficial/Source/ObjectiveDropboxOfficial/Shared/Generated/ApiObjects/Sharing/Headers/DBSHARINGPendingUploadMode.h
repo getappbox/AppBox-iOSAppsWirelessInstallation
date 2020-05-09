@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGPendingUploadModeTag` enum type represents the possible tag
 /// states with which the `DBSHARINGPendingUploadMode` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGPendingUploadModeTag) {
-  /// Assume pending uploads are files.
-  DBSHARINGPendingUploadModeFile,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGPendingUploadModeTag){
+    /// Assume pending uploads are files.
+    DBSHARINGPendingUploadModeFile,
 
-  /// Assume pending uploads are folders.
-  DBSHARINGPendingUploadModeFolder,
+    /// Assume pending uploads are folders.
+    DBSHARINGPendingUploadModeFolder,
 
 };
 

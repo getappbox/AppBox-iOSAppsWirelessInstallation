@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGSharedLinkPolicyTag` enum type represents the possible tag
 /// states with which the `DBSHARINGSharedLinkPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkPolicyTag) {
-  /// Links can be shared with anyone.
-  DBSHARINGSharedLinkPolicyAnyone,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedLinkPolicyTag){
+    /// Links can be shared with anyone.
+    DBSHARINGSharedLinkPolicyAnyone,
 
-  /// Links can be shared with anyone on the same team as the owner.
-  DBSHARINGSharedLinkPolicyTeam,
+    /// Links can be shared with anyone on the same team as the owner.
+    DBSHARINGSharedLinkPolicyTeam,
 
-  /// Links can only be shared among members of the shared folder.
-  DBSHARINGSharedLinkPolicyMembers,
+    /// Links can only be shared among members of the shared folder.
+    DBSHARINGSharedLinkPolicyMembers,
 
-  /// (no description).
-  DBSHARINGSharedLinkPolicyOther,
+    /// (no description).
+    DBSHARINGSharedLinkPolicyOther,
 
 };
 

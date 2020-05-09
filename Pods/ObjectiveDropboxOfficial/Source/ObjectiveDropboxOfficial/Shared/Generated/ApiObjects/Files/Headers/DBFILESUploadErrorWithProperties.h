@@ -30,16 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESUploadErrorWithPropertiesTag` enum type represents the possible
 /// tag states with which the `DBFILESUploadErrorWithProperties` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag) {
-  /// Unable to save the uploaded contents to a file.
-  DBFILESUploadErrorWithPropertiesPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadErrorWithPropertiesTag){
+    /// Unable to save the uploaded contents to a file.
+    DBFILESUploadErrorWithPropertiesPath,
 
-  /// The supplied property group is invalid. The file has uploaded without
-  /// property groups.
-  DBFILESUploadErrorWithPropertiesPropertiesError,
+    /// The supplied property group is invalid. The file has uploaded without
+    /// property groups.
+    DBFILESUploadErrorWithPropertiesPropertiesError,
 
-  /// (no description).
-  DBFILESUploadErrorWithPropertiesOther,
+    /// (no description).
+    DBFILESUploadErrorWithPropertiesOther,
 
 };
 

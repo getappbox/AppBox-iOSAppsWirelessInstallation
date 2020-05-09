@@ -32,20 +32,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGRemoveFileMemberErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGRemoveFileMemberError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag) {
-  /// (no description).
-  DBSHARINGRemoveFileMemberErrorUserError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRemoveFileMemberErrorTag){
+    /// (no description).
+    DBSHARINGRemoveFileMemberErrorUserError,
 
-  /// (no description).
-  DBSHARINGRemoveFileMemberErrorAccessError,
+    /// (no description).
+    DBSHARINGRemoveFileMemberErrorAccessError,
 
-  /// This member does not have explicit access to the file and therefore
-  /// cannot be removed. The return value is the access that a user might have
-  /// to the file from a parent folder.
-  DBSHARINGRemoveFileMemberErrorNoExplicitAccess,
+    /// This member does not have explicit access to the file and therefore
+    /// cannot be removed. The return value is the access that a user might have
+    /// to the file from a parent folder.
+    DBSHARINGRemoveFileMemberErrorNoExplicitAccess,
 
-  /// (no description).
-  DBSHARINGRemoveFileMemberErrorOther,
+    /// (no description).
+    DBSHARINGRemoveFileMemberErrorOther,
 
 };
 

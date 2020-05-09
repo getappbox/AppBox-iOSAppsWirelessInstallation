@@ -30,29 +30,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBAUTHAuthErrorTag` enum type represents the possible tag states with
 /// which the `DBAUTHAuthError` union can exist.
-typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
-  /// The access token is invalid.
-  DBAUTHAuthErrorInvalidAccessToken,
+typedef NS_CLOSED_ENUM(NSInteger, DBAUTHAuthErrorTag){
+    /// The access token is invalid.
+    DBAUTHAuthErrorInvalidAccessToken,
 
-  /// The user specified in 'Dropbox-API-Select-User' is no longer on the
-  /// team.
-  DBAUTHAuthErrorInvalidSelectUser,
+    /// The user specified in 'Dropbox-API-Select-User' is no longer on the
+    /// team.
+    DBAUTHAuthErrorInvalidSelectUser,
 
-  /// The user specified in 'Dropbox-API-Select-Admin' is not a Dropbox
-  /// Business team admin.
-  DBAUTHAuthErrorInvalidSelectAdmin,
+    /// The user specified in 'Dropbox-API-Select-Admin' is not a Dropbox
+    /// Business team admin.
+    DBAUTHAuthErrorInvalidSelectAdmin,
 
-  /// The user has been suspended.
-  DBAUTHAuthErrorUserSuspended,
+    /// The user has been suspended.
+    DBAUTHAuthErrorUserSuspended,
 
-  /// The access token has expired.
-  DBAUTHAuthErrorExpiredAccessToken,
+    /// The access token has expired.
+    DBAUTHAuthErrorExpiredAccessToken,
 
-  /// The access token does not have the required scope to access the route.
-  DBAUTHAuthErrorMissingScope,
+    /// The access token does not have the required scope to access the route.
+    DBAUTHAuthErrorMissingScope,
 
-  /// (no description).
-  DBAUTHAuthErrorOther,
+    /// The route is not available to public.
+    DBAUTHAuthErrorRouteAccessDenied,
+
+    /// (no description).
+    DBAUTHAuthErrorOther,
 
 };
 
@@ -129,6 +132,16 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 - (instancetype)initWithMissingScope:(DBAUTHTokenScopeError *)missingScope;
 
 ///
+/// Initializes union class with tag state of "route_access_denied".
+///
+/// Description of the "route_access_denied" tag state: The route is not
+/// available to public.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRouteAccessDenied;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -191,6 +204,15 @@ typedef NS_ENUM(NSInteger, DBAUTHAuthErrorTag) {
 /// @return Whether the union's current tag state has value "missing_scope".
 ///
 - (BOOL)isMissingScope;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "route_access_denied".
+///
+/// @return Whether the union's current tag state has value
+/// "route_access_denied".
+///
+- (BOOL)isRouteAccessDenied;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

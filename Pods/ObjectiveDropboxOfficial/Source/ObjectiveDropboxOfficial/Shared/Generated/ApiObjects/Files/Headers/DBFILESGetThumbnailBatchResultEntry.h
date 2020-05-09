@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESGetThumbnailBatchResultEntryTag` enum type represents the
 /// possible tag states with which the `DBFILESGetThumbnailBatchResultEntry`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILESGetThumbnailBatchResultEntryTag) {
-  /// (no description).
-  DBFILESGetThumbnailBatchResultEntrySuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetThumbnailBatchResultEntryTag){
+    /// (no description).
+    DBFILESGetThumbnailBatchResultEntrySuccess,
 
-  /// The result for this file if it was an error.
-  DBFILESGetThumbnailBatchResultEntryFailure,
+    /// The result for this file if it was an error.
+    DBFILESGetThumbnailBatchResultEntryFailure,
 
-  /// (no description).
-  DBFILESGetThumbnailBatchResultEntryOther,
+    /// (no description).
+    DBFILESGetThumbnailBatchResultEntryOther,
 
 };
 

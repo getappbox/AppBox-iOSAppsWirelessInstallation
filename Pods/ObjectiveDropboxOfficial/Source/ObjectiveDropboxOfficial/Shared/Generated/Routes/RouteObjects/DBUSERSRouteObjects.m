@@ -19,13 +19,35 @@
 #import "DBUSERSSpaceAllocation.h"
 #import "DBUSERSSpaceUsage.h"
 #import "DBUSERSUserAuthRoutes.h"
+#import "DBUSERSUserFeatureValue.h"
+#import "DBUSERSUserFeaturesGetValuesBatchError.h"
+#import "DBUSERSUserFeaturesGetValuesBatchResult.h"
 
 @implementation DBUSERSRouteObjects
 
+static DBRoute *DBUSERSFeaturesGetValues;
 static DBRoute *DBUSERSGetAccount;
 static DBRoute *DBUSERSGetAccountBatch;
 static DBRoute *DBUSERSGetCurrentAccount;
 static DBRoute *DBUSERSGetSpaceUsage;
+
++ (DBRoute *)DBUSERSFeaturesGetValues {
+  if (!DBUSERSFeaturesGetValues) {
+    DBUSERSFeaturesGetValues = [[DBRoute alloc] init:@"features/get_values"
+                                          namespace_:@"users"
+                                          deprecated:@NO
+                                          resultType:[DBUSERSUserFeaturesGetValuesBatchResult class]
+                                           errorType:[DBUSERSUserFeaturesGetValuesBatchError class]
+                                               attrs:@{
+                                                 @"auth" : @"user",
+                                                 @"host" : @"api",
+                                                 @"style" : @"rpc"
+                                               }
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
+  }
+  return DBUSERSFeaturesGetValues;
+}
 
 + (DBRoute *)DBUSERSGetAccount {
   if (!DBUSERSGetAccount) {

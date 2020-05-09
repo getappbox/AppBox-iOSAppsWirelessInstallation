@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESSaveUrlJobStatusTag` enum type represents the possible tag
 /// states with which the `DBFILESSaveUrlJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBFILESSaveUrlJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESSaveUrlJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBFILESSaveUrlJobStatusInProgress,
 
-  /// Metadata of the file where the URL is saved to.
-  DBFILESSaveUrlJobStatusComplete,
+    /// Metadata of the file where the URL is saved to.
+    DBFILESSaveUrlJobStatusComplete,
 
-  /// (no description).
-  DBFILESSaveUrlJobStatusFailed,
+    /// (no description).
+    DBFILESSaveUrlJobStatusFailed,
 
 };
 

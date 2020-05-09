@@ -27,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersUnsuspendErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersUnsuspendError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersUnsuspendErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersUnsuspendErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersUnsuspendErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersUnsuspendErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersUnsuspendErrorUserNotInTeam,
 
-  /// (no description).
-  DBTEAMMembersUnsuspendErrorOther,
+    /// (no description).
+    DBTEAMMembersUnsuspendErrorOther,
 
-  /// The user is unsuspended, so it cannot be unsuspended again.
-  DBTEAMMembersUnsuspendErrorUnsuspendNonSuspendedMember,
+    /// The user is unsuspended, so it cannot be unsuspended again.
+    DBTEAMMembersUnsuspendErrorUnsuspendNonSuspendedMember,
 
-  /// Team is full. The organization has no available licenses.
-  DBTEAMMembersUnsuspendErrorTeamLicenseLimit,
+    /// Team is full. The organization has no available licenses.
+    DBTEAMMembersUnsuspendErrorTeamLicenseLimit,
 
 };
 

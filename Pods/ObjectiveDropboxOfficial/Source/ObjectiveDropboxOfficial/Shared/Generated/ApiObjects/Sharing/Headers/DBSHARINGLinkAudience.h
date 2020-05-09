@@ -27,28 +27,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGLinkAudienceTag` enum type represents the possible tag states
 /// with which the `DBSHARINGLinkAudience` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGLinkAudienceTag) {
-  /// Link is accessible by anyone.
-  DBSHARINGLinkAudiencePublic,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkAudienceTag){
+    /// Link is accessible by anyone.
+    DBSHARINGLinkAudiencePublic,
 
-  /// Link is accessible only by team members.
-  DBSHARINGLinkAudienceTeam,
+    /// Link is accessible only by team members.
+    DBSHARINGLinkAudienceTeam,
 
-  /// The link can be used by no one. The link merely points the user to the
-  /// content, and does not grant additional rights to the user. Members of
-  /// the content who use this link can only access the content with their
-  /// pre-existing access rights.
-  DBSHARINGLinkAudienceNoOne,
+    /// The link can be used by no one. The link merely points the user to the
+    /// content, and does not grant additional rights to the user. Members of
+    /// the content who use this link can only access the content with their
+    /// pre-existing access rights.
+    DBSHARINGLinkAudienceNoOne,
 
-  /// A link-specific password is required to access the link. Login is not
-  /// required.
-  DBSHARINGLinkAudiencePassword,
+    /// A link-specific password is required to access the link. Login is not
+    /// required.
+    DBSHARINGLinkAudiencePassword,
 
-  /// Link is accessible only by members of the content.
-  DBSHARINGLinkAudienceMembers,
+    /// Link is accessible only by members of the content.
+    DBSHARINGLinkAudienceMembers,
 
-  /// (no description).
-  DBSHARINGLinkAudienceOther,
+    /// (no description).
+    DBSHARINGLinkAudienceOther,
 
 };
 

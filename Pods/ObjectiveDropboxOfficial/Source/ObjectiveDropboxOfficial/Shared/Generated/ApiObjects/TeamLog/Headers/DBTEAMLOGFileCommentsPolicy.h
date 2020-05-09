@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGFileCommentsPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGFileCommentsPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGFileCommentsPolicyTag) {
-  /// (no description).
-  DBTEAMLOGFileCommentsPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFileCommentsPolicyTag){
+    /// (no description).
+    DBTEAMLOGFileCommentsPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGFileCommentsPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGFileCommentsPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGFileCommentsPolicyOther,
+    /// (no description).
+    DBTEAMLOGFileCommentsPolicyOther,
 
 };
 

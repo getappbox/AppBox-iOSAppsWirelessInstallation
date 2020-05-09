@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 #import "DBTEAMLOGUserLogInfo.h"
 
+@class DBTEAMLOGTeamLogInfo;
 @class DBTEAMLOGTrustedNonTeamMemberLogInfo;
 @class DBTEAMLOGTrustedNonTeamMemberType;
 
@@ -29,36 +30,41 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Indicates the type of the trusted non team member user.
+/// Indicates the type of the member of a trusted team.
 @property (nonatomic, readonly) DBTEAMLOGTrustedNonTeamMemberType *trustedNonTeamMemberType;
+
+/// Details about this useru2019s trusted team.
+@property (nonatomic, readonly, nullable) DBTEAMLOGTeamLogInfo *team;
 
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param trustedNonTeamMemberType Indicates the type of the trusted non team
-/// member user.
+/// @param trustedNonTeamMemberType Indicates the type of the member of a
+/// trusted team.
 /// @param accountId User unique ID. Might be missing due to historical data
 /// gap.
 /// @param displayName User display name. Might be missing due to historical
 /// data gap.
 /// @param email User email address. Might be missing due to historical data
 /// gap.
+/// @param team Details about this useru2019s trusted team.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTrustedNonTeamMemberType:(DBTEAMLOGTrustedNonTeamMemberType *)trustedNonTeamMemberType
                                        accountId:(nullable NSString *)accountId
                                      displayName:(nullable NSString *)displayName
-                                           email:(nullable NSString *)email;
+                                           email:(nullable NSString *)email
+                                            team:(nullable DBTEAMLOGTeamLogInfo *)team;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param trustedNonTeamMemberType Indicates the type of the trusted non team
-/// member user.
+/// @param trustedNonTeamMemberType Indicates the type of the member of a
+/// trusted team.
 ///
 /// @return An initialized instance.
 ///

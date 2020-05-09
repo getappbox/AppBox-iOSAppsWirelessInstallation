@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamNamespacesListContinueErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMTeamNamespacesListContinueError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag) {
-  /// Argument passed in is invalid.
-  DBTEAMTeamNamespacesListContinueErrorInvalidArg,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamNamespacesListContinueErrorTag){
+    /// Argument passed in is invalid.
+    DBTEAMTeamNamespacesListContinueErrorInvalidArg,
 
-  /// (no description).
-  DBTEAMTeamNamespacesListContinueErrorOther,
+    /// (no description).
+    DBTEAMTeamNamespacesListContinueErrorOther,
 
-  /// The cursor is invalid.
-  DBTEAMTeamNamespacesListContinueErrorInvalidCursor,
+    /// The cursor is invalid.
+    DBTEAMTeamNamespacesListContinueErrorInvalidCursor,
 
 };
 

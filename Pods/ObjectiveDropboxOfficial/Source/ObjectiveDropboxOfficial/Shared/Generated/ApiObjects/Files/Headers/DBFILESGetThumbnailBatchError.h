@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESGetThumbnailBatchErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESGetThumbnailBatchError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESGetThumbnailBatchErrorTag) {
-  /// The operation involves more than 25 files.
-  DBFILESGetThumbnailBatchErrorTooManyFiles,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetThumbnailBatchErrorTag){
+    /// The operation involves more than 25 files.
+    DBFILESGetThumbnailBatchErrorTooManyFiles,
 
-  /// (no description).
-  DBFILESGetThumbnailBatchErrorOther,
+    /// (no description).
+    DBFILESGetThumbnailBatchErrorOther,
 
 };
 

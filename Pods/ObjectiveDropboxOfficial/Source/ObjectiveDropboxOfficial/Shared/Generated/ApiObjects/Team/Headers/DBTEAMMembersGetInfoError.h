@@ -27,9 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersGetInfoErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersGetInfoError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersGetInfoErrorTag) {
-  /// (no description).
-  DBTEAMMembersGetInfoErrorOther,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersGetInfoErrorTag){
+    /// (no description).
+    DBTEAMMembersGetInfoErrorOther,
 
 };
 

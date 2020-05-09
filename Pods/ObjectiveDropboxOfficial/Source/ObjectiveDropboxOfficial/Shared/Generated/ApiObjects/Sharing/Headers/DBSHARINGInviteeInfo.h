@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGInviteeInfoTag` enum type represents the possible tag states
 /// with which the `DBSHARINGInviteeInfo` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGInviteeInfoTag) {
-  /// E-mail address of invited user.
-  DBSHARINGInviteeInfoEmail,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGInviteeInfoTag){
+    /// E-mail address of invited user.
+    DBSHARINGInviteeInfoEmail,
 
-  /// (no description).
-  DBSHARINGInviteeInfoOther,
+    /// (no description).
+    DBSHARINGInviteeInfoOther,
 
 };
 

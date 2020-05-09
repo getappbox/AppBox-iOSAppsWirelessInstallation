@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMExcludedUsersUpdateErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMExcludedUsersUpdateError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersUpdateErrorTag) {
-  /// At least one of the users is not part of your team.
-  DBTEAMExcludedUsersUpdateErrorUsersNotInTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMExcludedUsersUpdateErrorTag){
+    /// At least one of the users is not part of your team.
+    DBTEAMExcludedUsersUpdateErrorUsersNotInTeam,
 
-  /// A maximum of 1000 users for each of addition/removal can be supplied.
-  DBTEAMExcludedUsersUpdateErrorTooManyUsers,
+    /// A maximum of 1000 users for each of addition/removal can be supplied.
+    DBTEAMExcludedUsersUpdateErrorTooManyUsers,
 
-  /// (no description).
-  DBTEAMExcludedUsersUpdateErrorOther,
+    /// (no description).
+    DBTEAMExcludedUsersUpdateErrorOther,
 
 };
 

@@ -28,30 +28,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESUploadSessionLookupErrorTag` enum type represents the possible
 /// tag states with which the `DBFILESUploadSessionLookupError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag) {
-  /// The upload session ID was not found or has expired. Upload sessions are
-  /// valid for 48 hours.
-  DBFILESUploadSessionLookupErrorNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
+    /// The upload session ID was not found or has expired. Upload sessions are
+    /// valid for 48 hours.
+    DBFILESUploadSessionLookupErrorNotFound,
 
-  /// The specified offset was incorrect. See the value for the correct
-  /// offset. This error may occur when a previous request was received and
-  /// processed successfully but the client did not receive the response, e.g.
-  /// due to a network error.
-  DBFILESUploadSessionLookupErrorIncorrectOffset,
+    /// The specified offset was incorrect. See the value for the correct
+    /// offset. This error may occur when a previous request was received and
+    /// processed successfully but the client did not receive the response, e.g.
+    /// due to a network error.
+    DBFILESUploadSessionLookupErrorIncorrectOffset,
 
-  /// You are attempting to append data to an upload session that has already
-  /// been closed (i.e. committed).
-  DBFILESUploadSessionLookupErrorClosed,
+    /// You are attempting to append data to an upload session that has already
+    /// been closed (i.e. committed).
+    DBFILESUploadSessionLookupErrorClosed,
 
-  /// The session must be closed before calling upload_session/finish_batch.
-  DBFILESUploadSessionLookupErrorNotClosed,
+    /// The session must be closed before calling upload_session/finish_batch.
+    DBFILESUploadSessionLookupErrorNotClosed,
 
-  /// You can not append to the upload session because the size of a file
-  /// should not reach the max file size limit (i.e. 350GB).
-  DBFILESUploadSessionLookupErrorTooLarge,
+    /// You can not append to the upload session because the size of a file
+    /// should not reach the max file size limit (i.e. 350GB).
+    DBFILESUploadSessionLookupErrorTooLarge,
 
-  /// (no description).
-  DBFILESUploadSessionLookupErrorOther,
+    /// (no description).
+    DBFILESUploadSessionLookupErrorOther,
 
 };
 

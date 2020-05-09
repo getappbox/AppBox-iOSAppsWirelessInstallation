@@ -27,27 +27,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEPROPERTIESLookupErrorTag` enum type represents the possible tag
 /// states with which the `DBFILEPROPERTIESLookupError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESLookupErrorTag) {
-  /// (no description).
-  DBFILEPROPERTIESLookupErrorMalformedPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESLookupErrorTag){
+    /// (no description).
+    DBFILEPROPERTIESLookupErrorMalformedPath,
 
-  /// There is nothing at the given path.
-  DBFILEPROPERTIESLookupErrorNotFound,
+    /// There is nothing at the given path.
+    DBFILEPROPERTIESLookupErrorNotFound,
 
-  /// We were expecting a file, but the given path refers to something that
-  /// isn't a file.
-  DBFILEPROPERTIESLookupErrorNotFile,
+    /// We were expecting a file, but the given path refers to something that
+    /// isn't a file.
+    DBFILEPROPERTIESLookupErrorNotFile,
 
-  /// We were expecting a folder, but the given path refers to something that
-  /// isn't a folder.
-  DBFILEPROPERTIESLookupErrorNotFolder,
+    /// We were expecting a folder, but the given path refers to something that
+    /// isn't a folder.
+    DBFILEPROPERTIESLookupErrorNotFolder,
 
-  /// The file cannot be transferred because the content is restricted.  For
-  /// example, sometimes there are legal restrictions due to copyright claims.
-  DBFILEPROPERTIESLookupErrorRestrictedContent,
+    /// The file cannot be transferred because the content is restricted.  For
+    /// example, sometimes there are legal restrictions due to copyright claims.
+    DBFILEPROPERTIESLookupErrorRestrictedContent,
 
-  /// (no description).
-  DBFILEPROPERTIESLookupErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESLookupErrorOther,
 
 };
 

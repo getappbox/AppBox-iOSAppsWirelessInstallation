@@ -17,6 +17,10 @@
     _queue = queue;
     [_queue setMaxConcurrentOperationCount:1];
 
+    // create a special background queue to monitor progress and sleep until the processing is complete
+    _pollingQueue = [NSOperationQueue new];
+    [_pollingQueue setMaxConcurrentOperationCount:1];
+
     // we want to make sure all of our file data has been uploaded
     // before we make our final batch commit call to `/upload_session/finish_batch`,
     // but we also don't want to wait for each response before making a
