@@ -55,9 +55,9 @@ then
         #check either selected xcode is 9 or higher
         if [[ ${7} -gt 9 || ${7} -eq 9 ]]
         then
-            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -sdk iphoneos
         else
-            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}"
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -sdk iphoneos
         fi
 
     else
@@ -67,9 +67,9 @@ then
         #check either selected xcode is 9 or higher
         if [[ ${7} -gt 9 || ${7} -eq 9 ]]
         then
-            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -sdk iphoneos
         else
-            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}"
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -sdk iphoneos
         fi
     fi
 else
@@ -82,9 +82,9 @@ else
         #check either selected xcode is 9 or higher
         if [[ ${7} -gt 9 || ${7} -eq 9 ]]
         then
-            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -sdk iphoneos | "${8}" && exit ${PIPESTATUS[0]}
         else
-            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
+            "$buildcommand" clean -project "${2}" -scheme "${3}" archive -archivePath "${4}" -sdk iphoneos | "${8}" && exit ${PIPESTATUS[0]}
         fi
 
     else
@@ -94,9 +94,9 @@ else
         #check either selected xcode is 9 or higher
         if [[ ${7} -gt 9 || ${7} -eq 9 ]]
         then
-            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration | "${8}" && exit ${PIPESTATUS[0]}
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -allowProvisioningUpdates -allowProvisioningDeviceRegistration -sdk iphoneos | "${8}" && exit ${PIPESTATUS[0]}
         else
-            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" | "${8}" && exit ${PIPESTATUS[0]}
+            "$buildcommand" clean -workspace "${2}" -scheme "${3}" archive -archivePath "${4}" -sdk iphoneos | "${8}" && exit ${PIPESTATUS[0]}
         fi
     fi
 fi
