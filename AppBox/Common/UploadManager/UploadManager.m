@@ -33,8 +33,7 @@
     }
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         retryCount = 0;
@@ -412,6 +411,9 @@
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
           if (response) {
+              //reset retry count
+              retryCount = 0;
+              
               [ABLog log:@"Uploaded file metadata = %@", response];
               
               //AppInfo.json file uploaded and creating shared url
@@ -500,6 +502,9 @@
     if (nextChunkToUpload.length < chunkSize) {
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
             if (result) {
+                //reset retry count
+                retryCount = 0;
+                
                 if (self.dbFileType == DBFileTypeIPA){
                     NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
                     [self showStatus:status andShowProgressBar:YES withProgress:-1];
@@ -606,6 +611,8 @@
 
 -(void)handleSharedURLError:(DBRequestError *)error forFile:(NSString *)file{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Create Share Link Error - %@",error]];
+    
+    //Handle clint side SDK error
     if ([error isClientError]){
         if ([[AppDelegate appDelegate] isInternetConnected]){
             [self dbCreateSharedURLForFile:file];
@@ -614,12 +621,26 @@
                 [self dbCreateSharedURLForFile:file];
             }];
         }
-    }else if([error isHttpError] && error.statusCode.integerValue == 409){
+    }
+    
+    //Retry upload if there is any conflict in file upload
+    else if([error isHttpError] && error.statusCode.integerValue == 409){
         [self dbGetSharedURLForFile:file];
-    }else{
+    }
+    
+    //Handle DB Client and Server error by Retrying Upto 3 times
+    else if (retryCount < abOnErrorMaxRetryCount) {
+        retryCount++;
+        [self dbCreateSharedURLForFile:file];
+        [[AppDelegate appDelegate] addSessionLog: [NSString stringWithFormat:@"Retrying (%ld) Shared URL due to some error.", (long)retryCount]];
+    }
+    
+    //Handle other errors
+    else {
         if (self.ciRepoProject) {
             exit(abExitCodeForUploadFailed);
         }
+        retryCount = 0;
         [DBErrorHandler handleNetworkErrorWith:error];
         self.errorBlock(nil, YES);
     }
