@@ -94,7 +94,8 @@
         
         //Build UUID Path
         NSString *buildUUIDPath = [_buildDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@",self.name, currentTime]];
-        _buildUUIDDirectory = [NSURL URLWithString:buildUUIDPath];
+         NSString* escapedBuildUUIDPath = [buildUUIDPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+        _buildUUIDDirectory = [NSURL URLWithString:escapedBuildUUIDPath];
         [[NSFileManager defaultManager] createDirectoryAtPath:buildUUIDPath withIntermediateDirectories:NO attributes:nil error:nil];
         
         //Archive Path
