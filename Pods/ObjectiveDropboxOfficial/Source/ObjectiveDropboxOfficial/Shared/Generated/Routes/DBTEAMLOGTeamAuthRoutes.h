@@ -35,9 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Retrieves team events. Events have a lifespan of two years. Events older than two years will not be returned. Many
-/// attributes note 'may be missing due to historical data gap'. Note that the file_operations category and & analogous
-/// paper events are not available on all Dropbox Business plans /business/plans-comparison. Use features/get_values
+/// Retrieves team events. If the result's `hasMore` in `DBTEAMLOGGetTeamEventsResult` field is true, call
+/// `getEventsContinue` with the returned cursor to retrieve more entries. If end_time is not specified in your request,
+/// you may use the returned cursor to poll `getEventsContinue` for new events. Many attributes note 'may be missing due
+/// to historical data gap'. Note that the file_operations category and & analogous paper events are not available on
+/// all Dropbox Business plans /business/plans-comparison. Use features/get_values
 /// /developers/documentation/http/teams#team-features-get_values to check for this feature. Permission : Team Auditing.
 ///
 ///
@@ -47,9 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (DBRpcTask<DBTEAMLOGGetTeamEventsResult *, DBTEAMLOGGetTeamEventsError *> *)getEvents;
 
 ///
-/// Retrieves team events. Events have a lifespan of two years. Events older than two years will not be returned. Many
-/// attributes note 'may be missing due to historical data gap'. Note that the file_operations category and & analogous
-/// paper events are not available on all Dropbox Business plans /business/plans-comparison. Use features/get_values
+/// Retrieves team events. If the result's `hasMore` in `DBTEAMLOGGetTeamEventsResult` field is true, call
+/// `getEventsContinue` with the returned cursor to retrieve more entries. If end_time is not specified in your request,
+/// you may use the returned cursor to poll `getEventsContinue` for new events. Many attributes note 'may be missing due
+/// to historical data gap'. Note that the file_operations category and & analogous paper events are not available on
+/// all Dropbox Business plans /business/plans-comparison. Use features/get_values
 /// /developers/documentation/http/teams#team-features-get_values to check for this feature. Permission : Team Auditing.
 ///
 /// @param limit The maximal number of results to return per call. Note that some calls may not return limit number of

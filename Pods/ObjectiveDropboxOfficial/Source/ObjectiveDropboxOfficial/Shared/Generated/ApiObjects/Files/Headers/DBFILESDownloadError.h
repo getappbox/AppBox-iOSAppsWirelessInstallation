@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESDownloadErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESDownloadError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESDownloadErrorTag) {
-  /// (no description).
-  DBFILESDownloadErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESDownloadErrorTag){
+    /// (no description).
+    DBFILESDownloadErrorPath,
 
-  /// This file type cannot be downloaded directly; use `export` instead.
-  DBFILESDownloadErrorUnsupportedFile,
+    /// This file type cannot be downloaded directly; use `export` instead.
+    DBFILESDownloadErrorUnsupportedFile,
 
-  /// (no description).
-  DBFILESDownloadErrorOther,
+    /// (no description).
+    DBFILESDownloadErrorOther,
 
 };
 

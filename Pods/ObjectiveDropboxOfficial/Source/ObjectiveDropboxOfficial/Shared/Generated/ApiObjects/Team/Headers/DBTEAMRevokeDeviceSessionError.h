@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMRevokeDeviceSessionErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMRevokeDeviceSessionError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMRevokeDeviceSessionErrorTag) {
-  /// Device session not found.
-  DBTEAMRevokeDeviceSessionErrorDeviceSessionNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeDeviceSessionErrorTag){
+    /// Device session not found.
+    DBTEAMRevokeDeviceSessionErrorDeviceSessionNotFound,
 
-  /// Member not found.
-  DBTEAMRevokeDeviceSessionErrorMemberNotFound,
+    /// Member not found.
+    DBTEAMRevokeDeviceSessionErrorMemberNotFound,
 
-  /// (no description).
-  DBTEAMRevokeDeviceSessionErrorOther,
+    /// (no description).
+    DBTEAMRevokeDeviceSessionErrorOther,
 
 };
 

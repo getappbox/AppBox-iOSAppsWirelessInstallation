@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGAccessInheritanceTag` enum type represents the possible tag
 /// states with which the `DBSHARINGAccessInheritance` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGAccessInheritanceTag) {
-  /// The shared folder inherits its members from the parent folder.
-  DBSHARINGAccessInheritanceInherit,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessInheritanceTag){
+    /// The shared folder inherits its members from the parent folder.
+    DBSHARINGAccessInheritanceInherit,
 
-  /// The shared folder does not inherit its members from the parent folder.
-  DBSHARINGAccessInheritanceNoInherit,
+    /// The shared folder does not inherit its members from the parent folder.
+    DBSHARINGAccessInheritanceNoInherit,
 
-  /// (no description).
-  DBSHARINGAccessInheritanceOther,
+    /// (no description).
+    DBSHARINGAccessInheritanceOther,
 
 };
 

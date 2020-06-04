@@ -27,44 +27,44 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersTransferFilesErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMMembersTransferFilesError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersTransferFilesErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersTransferFilesErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersTransferFilesErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersTransferFilesErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersTransferFilesErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersTransferFilesErrorUserNotInTeam,
 
-  /// (no description).
-  DBTEAMMembersTransferFilesErrorOther,
+    /// (no description).
+    DBTEAMMembersTransferFilesErrorOther,
 
-  /// Expected removed user and transfer_dest user to be different.
-  DBTEAMMembersTransferFilesErrorRemovedAndTransferDestShouldDiffer,
+    /// Expected removed user and transfer_dest user to be different.
+    DBTEAMMembersTransferFilesErrorRemovedAndTransferDestShouldDiffer,
 
-  /// Expected removed user and transfer_admin user to be different.
-  DBTEAMMembersTransferFilesErrorRemovedAndTransferAdminShouldDiffer,
+    /// Expected removed user and transfer_admin user to be different.
+    DBTEAMMembersTransferFilesErrorRemovedAndTransferAdminShouldDiffer,
 
-  /// No matching user found for the argument transfer_dest_id.
-  DBTEAMMembersTransferFilesErrorTransferDestUserNotFound,
+    /// No matching user found for the argument transfer_dest_id.
+    DBTEAMMembersTransferFilesErrorTransferDestUserNotFound,
 
-  /// The provided transfer_dest_id does not exist on this team.
-  DBTEAMMembersTransferFilesErrorTransferDestUserNotInTeam,
+    /// The provided transfer_dest_id does not exist on this team.
+    DBTEAMMembersTransferFilesErrorTransferDestUserNotInTeam,
 
-  /// The provided transfer_admin_id does not exist on this team.
-  DBTEAMMembersTransferFilesErrorTransferAdminUserNotInTeam,
+    /// The provided transfer_admin_id does not exist on this team.
+    DBTEAMMembersTransferFilesErrorTransferAdminUserNotInTeam,
 
-  /// No matching user found for the argument transfer_admin_id.
-  DBTEAMMembersTransferFilesErrorTransferAdminUserNotFound,
+    /// No matching user found for the argument transfer_admin_id.
+    DBTEAMMembersTransferFilesErrorTransferAdminUserNotFound,
 
-  /// The transfer_admin_id argument must be provided when file transfer is
-  /// requested.
-  DBTEAMMembersTransferFilesErrorUnspecifiedTransferAdminId,
+    /// The transfer_admin_id argument must be provided when file transfer is
+    /// requested.
+    DBTEAMMembersTransferFilesErrorUnspecifiedTransferAdminId,
 
-  /// Specified transfer_admin user is not a team admin.
-  DBTEAMMembersTransferFilesErrorTransferAdminIsNotAdmin,
+    /// Specified transfer_admin user is not a team admin.
+    DBTEAMMembersTransferFilesErrorTransferAdminIsNotAdmin,
 
-  /// The recipient user's email is not verified.
-  DBTEAMMembersTransferFilesErrorRecipientNotVerified,
+    /// The recipient user's email is not verified.
+    DBTEAMMembersTransferFilesErrorRecipientNotVerified,
 
 };
 

@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersDeactivateErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersDeactivateError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersDeactivateErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersDeactivateErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersDeactivateErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersDeactivateErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersDeactivateErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersDeactivateErrorUserNotInTeam,
 
-  /// (no description).
-  DBTEAMMembersDeactivateErrorOther,
+    /// (no description).
+    DBTEAMMembersDeactivateErrorOther,
 
 };
 

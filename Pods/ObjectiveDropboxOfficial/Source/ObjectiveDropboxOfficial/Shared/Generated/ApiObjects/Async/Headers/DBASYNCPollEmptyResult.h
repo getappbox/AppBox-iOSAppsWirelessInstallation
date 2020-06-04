@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBASYNCPollEmptyResultTag` enum type represents the possible tag states
 /// with which the `DBASYNCPollEmptyResult` union can exist.
-typedef NS_ENUM(NSInteger, DBASYNCPollEmptyResultTag) {
-  /// The asynchronous job is still in progress.
-  DBASYNCPollEmptyResultInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBASYNCPollEmptyResultTag){
+    /// The asynchronous job is still in progress.
+    DBASYNCPollEmptyResultInProgress,
 
-  /// The asynchronous job has completed successfully.
-  DBASYNCPollEmptyResultComplete,
+    /// The asynchronous job has completed successfully.
+    DBASYNCPollEmptyResultComplete,
 
 };
 

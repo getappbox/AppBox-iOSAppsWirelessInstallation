@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGMemberSelectorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGMemberSelector` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGMemberSelectorTag) {
-  /// Dropbox account, team member, or group ID of member.
-  DBSHARINGMemberSelectorDropboxId,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMemberSelectorTag){
+    /// Dropbox account, team member, or group ID of member.
+    DBSHARINGMemberSelectorDropboxId,
 
-  /// E-mail address of member.
-  DBSHARINGMemberSelectorEmail,
+    /// E-mail address of member.
+    DBSHARINGMemberSelectorEmail,
 
-  /// (no description).
-  DBSHARINGMemberSelectorOther,
+    /// (no description).
+    DBSHARINGMemberSelectorOther,
 
 };
 

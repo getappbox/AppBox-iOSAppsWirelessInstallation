@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGShareFolderJobStatusTag` enum type represents the possible tag
 /// states with which the `DBSHARINGShareFolderJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBSHARINGShareFolderJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGShareFolderJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBSHARINGShareFolderJobStatusInProgress,
 
-  /// The share job has finished. The value is the metadata for the folder.
-  DBSHARINGShareFolderJobStatusComplete,
+    /// The share job has finished. The value is the metadata for the folder.
+    DBSHARINGShareFolderJobStatusComplete,
 
-  /// (no description).
-  DBSHARINGShareFolderJobStatusFailed,
+    /// (no description).
+    DBSHARINGShareFolderJobStatusFailed,
 
 };
 

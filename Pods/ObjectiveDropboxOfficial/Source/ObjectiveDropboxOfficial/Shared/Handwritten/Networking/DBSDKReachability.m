@@ -133,14 +133,14 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 #pragma mark - Network Flag Handling
 
-- (DBNetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags {
+- (DBSDKNetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags {
   PrintReachabilityFlags(flags, "networkStatusForFlags");
   if ((flags & kSCNetworkReachabilityFlagsReachable) == 0) {
     // The target host is not reachable.
     return DBNotReachable;
   }
 
-  DBNetworkStatus returnValue = DBNotReachable;
+  DBSDKNetworkStatus returnValue = DBNotReachable;
 
   if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0) {
     /*
@@ -187,9 +187,9 @@ If the target host is reachable and no connection is required then we'll assume 
   return NO;
 }
 
-- (DBNetworkStatus)currentReachabilityStatus {
+- (DBSDKNetworkStatus)currentReachabilityStatus {
   NSAssert(_reachabilityRef != NULL, @"currentNetworkStatus called with NULL SCNetworkReachabilityRef");
-  DBNetworkStatus returnValue = DBNotReachable;
+  DBSDKNetworkStatus returnValue = DBNotReachable;
   SCNetworkReachabilityFlags flags;
 
   if (SCNetworkReachabilityGetFlags(_reachabilityRef, &flags)) {

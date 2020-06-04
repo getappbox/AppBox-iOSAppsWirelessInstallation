@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESPaperDesktopPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMPOLICIESPaperDesktopPolicy` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPaperDesktopPolicyTag) {
-  /// Do not allow team members to use Paper Desktop.
-  DBTEAMPOLICIESPaperDesktopPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESPaperDesktopPolicyTag){
+    /// Do not allow team members to use Paper Desktop.
+    DBTEAMPOLICIESPaperDesktopPolicyDisabled,
 
-  /// Allow team members to use Paper Desktop.
-  DBTEAMPOLICIESPaperDesktopPolicyEnabled,
+    /// Allow team members to use Paper Desktop.
+    DBTEAMPOLICIESPaperDesktopPolicyEnabled,
 
-  /// (no description).
-  DBTEAMPOLICIESPaperDesktopPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESPaperDesktopPolicyOther,
 
 };
 

@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBUSERSCOMMONAccountTypeTag` enum type represents the possible tag
 /// states with which the `DBUSERSCOMMONAccountType` union can exist.
-typedef NS_ENUM(NSInteger, DBUSERSCOMMONAccountTypeTag) {
-  /// The basic account type.
-  DBUSERSCOMMONAccountTypeBasic,
+typedef NS_CLOSED_ENUM(NSInteger, DBUSERSCOMMONAccountTypeTag){
+    /// The basic account type.
+    DBUSERSCOMMONAccountTypeBasic,
 
-  /// The Dropbox Pro account type.
-  DBUSERSCOMMONAccountTypePro,
+    /// The Dropbox Pro account type.
+    DBUSERSCOMMONAccountTypePro,
 
-  /// The Dropbox Business account type.
-  DBUSERSCOMMONAccountTypeBusiness,
+    /// The Dropbox Business account type.
+    DBUSERSCOMMONAccountTypeBusiness,
 
 };
 

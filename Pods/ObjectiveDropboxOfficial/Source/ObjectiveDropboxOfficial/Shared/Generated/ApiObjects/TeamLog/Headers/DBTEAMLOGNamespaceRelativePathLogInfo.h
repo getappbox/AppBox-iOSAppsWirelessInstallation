@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// historical data gap.
 @property (nonatomic, readonly, copy, nullable) NSString *relativePath;
 
+/// True if the namespace is shared. Might be missing due to historical data
+/// gap.
+@property (nonatomic, readonly, nullable) NSNumber *isSharedNamespace;
+
 #pragma mark - Constructors
 
 ///
@@ -42,10 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param nsId Namespace ID. Might be missing due to historical data gap.
 /// @param relativePath A path relative to the specified namespace ID. Might be
 /// missing due to historical data gap.
+/// @param isSharedNamespace True if the namespace is shared. Might be missing
+/// due to historical data gap.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithNsId:(nullable NSString *)nsId relativePath:(nullable NSString *)relativePath;
+- (instancetype)initWithNsId:(nullable NSString *)nsId
+                relativePath:(nullable NSString *)relativePath
+           isSharedNamespace:(nullable NSNumber *)isSharedNamespace;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

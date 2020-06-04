@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGLinkExpiryTag` enum type represents the possible tag states
 /// with which the `DBSHARINGLinkExpiry` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGLinkExpiryTag) {
-  /// Remove the currently set expiry for the link.
-  DBSHARINGLinkExpiryRemoveExpiry,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkExpiryTag){
+    /// Remove the currently set expiry for the link.
+    DBSHARINGLinkExpiryRemoveExpiry,
 
-  /// Set a new expiry or change an existing expiry.
-  DBSHARINGLinkExpirySetExpiry,
+    /// Set a new expiry or change an existing expiry.
+    DBSHARINGLinkExpirySetExpiry,
 
-  /// (no description).
-  DBSHARINGLinkExpiryOther,
+    /// (no description).
+    DBSHARINGLinkExpiryOther,
 
 };
 

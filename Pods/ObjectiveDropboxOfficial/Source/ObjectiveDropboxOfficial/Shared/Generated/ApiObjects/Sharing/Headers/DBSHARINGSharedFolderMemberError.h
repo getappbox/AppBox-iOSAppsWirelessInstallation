@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGSharedFolderMemberErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGSharedFolderMemberError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharedFolderMemberErrorTag) {
-  /// The target dropbox_id is invalid.
-  DBSHARINGSharedFolderMemberErrorInvalidDropboxId,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedFolderMemberErrorTag){
+    /// The target dropbox_id is invalid.
+    DBSHARINGSharedFolderMemberErrorInvalidDropboxId,
 
-  /// The target dropbox_id is not a member of the shared folder.
-  DBSHARINGSharedFolderMemberErrorNotAMember,
+    /// The target dropbox_id is not a member of the shared folder.
+    DBSHARINGSharedFolderMemberErrorNotAMember,
 
-  /// The target member only has inherited access to the shared folder.
-  DBSHARINGSharedFolderMemberErrorNoExplicitAccess,
+    /// The target member only has inherited access to the shared folder.
+    DBSHARINGSharedFolderMemberErrorNoExplicitAccess,
 
-  /// (no description).
-  DBSHARINGSharedFolderMemberErrorOther,
+    /// (no description).
+    DBSHARINGSharedFolderMemberErrorOther,
 
 };
 

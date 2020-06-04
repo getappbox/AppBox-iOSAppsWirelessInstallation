@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBUSERSGetAccountErrorTag` enum type represents the possible tag states
 /// with which the `DBUSERSGetAccountError` union can exist.
-typedef NS_ENUM(NSInteger, DBUSERSGetAccountErrorTag) {
-  /// The specified `accountId` in `DBUSERSGetAccountArg` does not exist.
-  DBUSERSGetAccountErrorNoAccount,
+typedef NS_CLOSED_ENUM(NSInteger, DBUSERSGetAccountErrorTag){
+    /// The specified `accountId` in `DBUSERSGetAccountArg` does not exist.
+    DBUSERSGetAccountErrorNoAccount,
 
-  /// (no description).
-  DBUSERSGetAccountErrorOther,
+    /// (no description).
+    DBUSERSGetAccountErrorOther,
 
 };
 

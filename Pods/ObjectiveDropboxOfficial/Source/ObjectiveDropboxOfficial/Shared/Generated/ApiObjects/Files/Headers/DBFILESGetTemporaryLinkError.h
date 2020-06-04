@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESGetTemporaryLinkErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESGetTemporaryLinkError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag) {
-  /// (no description).
-  DBFILESGetTemporaryLinkErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag){
+    /// (no description).
+    DBFILESGetTemporaryLinkErrorPath,
 
-  /// The user's email address needs to be verified to use this functionality.
-  DBFILESGetTemporaryLinkErrorEmailNotVerified,
+    /// The user's email address needs to be verified to use this functionality.
+    DBFILESGetTemporaryLinkErrorEmailNotVerified,
 
-  /// Cannot get temporary link to this file type; use `export` instead.
-  DBFILESGetTemporaryLinkErrorUnsupportedFile,
+    /// Cannot get temporary link to this file type; use `export` instead.
+    DBFILESGetTemporaryLinkErrorUnsupportedFile,
 
-  /// (no description).
-  DBFILESGetTemporaryLinkErrorOther,
+    /// (no description).
+    DBFILESGetTemporaryLinkErrorOther,
 
 };
 

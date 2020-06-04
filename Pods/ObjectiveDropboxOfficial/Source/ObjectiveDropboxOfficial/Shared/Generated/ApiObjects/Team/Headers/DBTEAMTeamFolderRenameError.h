@@ -30,27 +30,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamFolderRenameErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamFolderRenameError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag) {
-  /// (no description).
-  DBTEAMTeamFolderRenameErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderRenameErrorTag){
+    /// (no description).
+    DBTEAMTeamFolderRenameErrorAccessError,
 
-  /// (no description).
-  DBTEAMTeamFolderRenameErrorStatusError,
+    /// (no description).
+    DBTEAMTeamFolderRenameErrorStatusError,
 
-  /// (no description).
-  DBTEAMTeamFolderRenameErrorTeamSharedDropboxError,
+    /// (no description).
+    DBTEAMTeamFolderRenameErrorTeamSharedDropboxError,
 
-  /// (no description).
-  DBTEAMTeamFolderRenameErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderRenameErrorOther,
 
-  /// The provided folder name cannot be used.
-  DBTEAMTeamFolderRenameErrorInvalidFolderName,
+    /// The provided folder name cannot be used.
+    DBTEAMTeamFolderRenameErrorInvalidFolderName,
 
-  /// There is already a team folder with the same name.
-  DBTEAMTeamFolderRenameErrorFolderNameAlreadyUsed,
+    /// There is already a team folder with the same name.
+    DBTEAMTeamFolderRenameErrorFolderNameAlreadyUsed,
 
-  /// The provided name cannot be used because it is reserved.
-  DBTEAMTeamFolderRenameErrorFolderNameReserved,
+    /// The provided name cannot be used because it is reserved.
+    DBTEAMTeamFolderRenameErrorFolderNameReserved,
 
 };
 

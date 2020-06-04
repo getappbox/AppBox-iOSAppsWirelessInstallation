@@ -32,7 +32,7 @@
     _appKey = transportConfig.appKey;
     _appSecret = transportConfig.appSecret;
     _hostnameConfig = transportConfig.hostnameConfig ?: [[DBTransportBaseHostnameConfig alloc] init];
-    NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@", kV2SDKDefaultUserAgentPrefix, kV2SDKVersion];
+    NSString *defaultUserAgent = [NSString stringWithFormat:@"%@/%@", kDBSDKDefaultUserAgentPrefix, kDBSDKVersion];
     _userAgent = transportConfig.userAgent ? [[transportConfig.userAgent stringByAppendingString:@"/"]
                                                  stringByAppendingString:defaultUserAgent]
                                            : defaultUserAgent;
@@ -356,11 +356,11 @@
 }
 
 + (NSString *)sdkVersion {
-  return kV2SDKVersion;
+  return kDBSDKVersion;
 }
 
 + (NSString *)defaultUserAgent {
-  return kV2SDKDefaultUserAgentPrefix;
+  return kDBSDKDefaultUserAgentPrefix;
 }
 
 @end

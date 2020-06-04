@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERListPaperDocsSortOrderTag` enum type represents the possible tag
 /// states with which the `DBPAPERListPaperDocsSortOrder` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortOrderTag) {
-  /// Sorts the search result in ascending order.
-  DBPAPERListPaperDocsSortOrderAscending,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERListPaperDocsSortOrderTag){
+    /// Sorts the search result in ascending order.
+    DBPAPERListPaperDocsSortOrderAscending,
 
-  /// Sorts the search result in descending order.
-  DBPAPERListPaperDocsSortOrderDescending,
+    /// Sorts the search result in descending order.
+    DBPAPERListPaperDocsSortOrderDescending,
 
-  /// (no description).
-  DBPAPERListPaperDocsSortOrderOther,
+    /// (no description).
+    DBPAPERListPaperDocsSortOrderOther,
 
 };
 

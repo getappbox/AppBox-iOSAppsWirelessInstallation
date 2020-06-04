@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGGoogleSsoPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGGoogleSsoPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGGoogleSsoPolicyTag) {
-  /// (no description).
-  DBTEAMLOGGoogleSsoPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGGoogleSsoPolicyTag){
+    /// (no description).
+    DBTEAMLOGGoogleSsoPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGGoogleSsoPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGGoogleSsoPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGGoogleSsoPolicyOther,
+    /// (no description).
+    DBTEAMLOGGoogleSsoPolicyOther,
 
 };
 

@@ -27,24 +27,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGAdminRoleTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGAdminRole` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGAdminRoleTag) {
-  /// (no description).
-  DBTEAMLOGAdminRoleTeamAdmin,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAdminRoleTag){
+    /// (no description).
+    DBTEAMLOGAdminRoleTeamAdmin,
 
-  /// (no description).
-  DBTEAMLOGAdminRoleUserManagementAdmin,
+    /// (no description).
+    DBTEAMLOGAdminRoleUserManagementAdmin,
 
-  /// (no description).
-  DBTEAMLOGAdminRoleSupportAdmin,
+    /// (no description).
+    DBTEAMLOGAdminRoleSupportAdmin,
 
-  /// (no description).
-  DBTEAMLOGAdminRoleLimitedAdmin,
+    /// (no description).
+    DBTEAMLOGAdminRoleLimitedAdmin,
 
-  /// (no description).
-  DBTEAMLOGAdminRoleMemberOnly,
+    /// (no description).
+    DBTEAMLOGAdminRoleMemberOnly,
 
-  /// (no description).
-  DBTEAMLOGAdminRoleOther,
+    /// (no description).
+    DBTEAMLOGAdminRoleOther,
 
 };
 

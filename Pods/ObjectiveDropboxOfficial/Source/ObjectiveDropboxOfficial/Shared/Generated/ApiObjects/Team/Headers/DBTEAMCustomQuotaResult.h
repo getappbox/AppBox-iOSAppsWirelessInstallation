@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMCustomQuotaResultTag` enum type represents the possible tag
 /// states with which the `DBTEAMCustomQuotaResult` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMCustomQuotaResultTag) {
-  /// User's custom quota.
-  DBTEAMCustomQuotaResultSuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMCustomQuotaResultTag){
+    /// User's custom quota.
+    DBTEAMCustomQuotaResultSuccess,
 
-  /// Invalid user (not in team).
-  DBTEAMCustomQuotaResultInvalidUser,
+    /// Invalid user (not in team).
+    DBTEAMCustomQuotaResultInvalidUser,
 
-  /// (no description).
-  DBTEAMCustomQuotaResultOther,
+    /// (no description).
+    DBTEAMCustomQuotaResultOther,
 
 };
 

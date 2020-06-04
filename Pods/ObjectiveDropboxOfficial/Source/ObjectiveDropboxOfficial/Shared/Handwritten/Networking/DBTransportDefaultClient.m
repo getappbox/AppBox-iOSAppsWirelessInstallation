@@ -42,7 +42,8 @@
         [NSURLSession sessionWithConfiguration:sessionConfig delegate:_delegate delegateQueue:sessionDelegateQueue];
     _forceForegroundSession = transportConfig.forceForegroundSession ? YES : NO;
     if (!_forceForegroundSession) {
-      NSString *backgroundId = [NSString stringWithFormat:@"%@.%@", kBackgroundSessionId, [NSUUID UUID].UUIDString];
+      NSString *backgroundId =
+          [NSString stringWithFormat:@"%@.%@", kDBSDKBackgroundSessionId, [NSUUID UUID].UUIDString];
       NSURLSessionConfiguration *backgroundSessionConfig =
           [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundId];
       if (transportConfig.sharedContainerIdentifier) {

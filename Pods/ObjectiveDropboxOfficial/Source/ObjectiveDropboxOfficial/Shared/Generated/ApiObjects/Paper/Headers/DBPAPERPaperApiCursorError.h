@@ -27,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERPaperApiCursorErrorTag` enum type represents the possible tag
 /// states with which the `DBPAPERPaperApiCursorError` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERPaperApiCursorErrorTag) {
-  /// The provided cursor is expired.
-  DBPAPERPaperApiCursorErrorExpiredCursor,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERPaperApiCursorErrorTag){
+    /// The provided cursor is expired.
+    DBPAPERPaperApiCursorErrorExpiredCursor,
 
-  /// The provided cursor is invalid.
-  DBPAPERPaperApiCursorErrorInvalidCursor,
+    /// The provided cursor is invalid.
+    DBPAPERPaperApiCursorErrorInvalidCursor,
 
-  /// The provided cursor contains invalid user.
-  DBPAPERPaperApiCursorErrorWrongUserInCursor,
+    /// The provided cursor contains invalid user.
+    DBPAPERPaperApiCursorErrorWrongUserInCursor,
 
-  /// Indicates that the cursor has been invalidated. Call the corresponding
-  /// non-continue endpoint to obtain a new cursor.
-  DBPAPERPaperApiCursorErrorReset,
+    /// Indicates that the cursor has been invalidated. Call the corresponding
+    /// non-continue endpoint to obtain a new cursor.
+    DBPAPERPaperApiCursorErrorReset,
 
-  /// (no description).
-  DBPAPERPaperApiCursorErrorOther,
+    /// (no description).
+    DBPAPERPaperApiCursorErrorOther,
 
 };
 

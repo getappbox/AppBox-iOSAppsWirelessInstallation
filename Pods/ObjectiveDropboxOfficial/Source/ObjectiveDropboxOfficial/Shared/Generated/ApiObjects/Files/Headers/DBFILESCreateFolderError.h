@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESCreateFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESCreateFolderError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESCreateFolderErrorTag) {
-  /// (no description).
-  DBFILESCreateFolderErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESCreateFolderErrorTag){
+    /// (no description).
+    DBFILESCreateFolderErrorPath,
 
 };
 

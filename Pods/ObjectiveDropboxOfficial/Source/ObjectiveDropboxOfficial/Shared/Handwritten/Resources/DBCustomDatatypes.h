@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The queue on which most response handling is performed.
 @property (nonatomic, readonly) NSOperationQueue *queue;
 
+/// The queue on which we sleep until all processing is completed or the timeout is hit.
+@property (nonatomic, readonly) NSOperationQueue *pollingQueue;
+
 /// The dispatch group that pairs upload requests with upload responses so that we can wait for all request/response
 /// pairs to complete before batch committing. In this way, we can start many upload requests (for files under the chunk
 /// limit), without waiting for the corresponding response.

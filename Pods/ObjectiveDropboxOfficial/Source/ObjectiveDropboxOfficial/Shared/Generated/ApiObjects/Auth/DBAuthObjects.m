@@ -272,6 +272,14 @@
   return self;
 }
 
+- (instancetype)initWithRouteAccessDenied {
+  self = [super init];
+  if (self) {
+    _tag = DBAUTHAuthErrorRouteAccessDenied;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -316,6 +324,10 @@
   return _tag == DBAUTHAuthErrorMissingScope;
 }
 
+- (BOOL)isRouteAccessDenied {
+  return _tag == DBAUTHAuthErrorRouteAccessDenied;
+}
+
 - (BOOL)isOther {
   return _tag == DBAUTHAuthErrorOther;
 }
@@ -334,6 +346,8 @@
     return @"DBAUTHAuthErrorExpiredAccessToken";
   case DBAUTHAuthErrorMissingScope:
     return @"DBAUTHAuthErrorMissingScope";
+  case DBAUTHAuthErrorRouteAccessDenied:
+    return @"DBAUTHAuthErrorRouteAccessDenied";
   case DBAUTHAuthErrorOther:
     return @"DBAUTHAuthErrorOther";
   }
@@ -384,6 +398,8 @@
     result = prime * result + [[self tagName] hash];
   case DBAUTHAuthErrorMissingScope:
     result = prime * result + [self.missingScope hash];
+  case DBAUTHAuthErrorRouteAccessDenied:
+    result = prime * result + [[self tagName] hash];
   case DBAUTHAuthErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -423,6 +439,8 @@
     return [[self tagName] isEqual:[anAuthError tagName]];
   case DBAUTHAuthErrorMissingScope:
     return [self.missingScope isEqual:anAuthError.missingScope];
+  case DBAUTHAuthErrorRouteAccessDenied:
+    return [[self tagName] isEqual:[anAuthError tagName]];
   case DBAUTHAuthErrorOther:
     return [[self tagName] isEqual:[anAuthError tagName]];
   }
@@ -451,6 +469,8 @@
   } else if ([valueObj isMissingScope]) {
     jsonDict = [[DBAUTHTokenScopeErrorSerializer serialize:valueObj.missingScope] mutableCopy];
     jsonDict[@".tag"] = @"missing_scope";
+  } else if ([valueObj isRouteAccessDenied]) {
+    jsonDict[@".tag"] = @"route_access_denied";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -476,6 +496,8 @@
   } else if ([tag isEqualToString:@"missing_scope"]) {
     DBAUTHTokenScopeError *missingScope = [DBAUTHTokenScopeErrorSerializer deserialize:valueDict];
     return [[DBAUTHAuthError alloc] initWithMissingScope:missingScope];
+  } else if ([tag isEqualToString:@"route_access_denied"]) {
+    return [[DBAUTHAuthError alloc] initWithRouteAccessDenied];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBAUTHAuthError alloc] initWithOther];
   } else {

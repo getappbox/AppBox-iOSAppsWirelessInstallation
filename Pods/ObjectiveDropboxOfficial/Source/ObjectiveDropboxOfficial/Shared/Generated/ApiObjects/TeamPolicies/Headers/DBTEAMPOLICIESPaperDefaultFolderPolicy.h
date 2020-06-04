@@ -28,16 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESPaperDefaultFolderPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESPaperDefaultFolderPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESPaperDefaultFolderPolicyTag) {
-  /// Everyone in team will be the default option when creating a folder in
-  /// Paper.
-  DBTEAMPOLICIESPaperDefaultFolderPolicyEveryoneInTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESPaperDefaultFolderPolicyTag){
+    /// Everyone in team will be the default option when creating a folder in
+    /// Paper.
+    DBTEAMPOLICIESPaperDefaultFolderPolicyEveryoneInTeam,
 
-  /// Invite only will be the default option when creating a folder in Paper.
-  DBTEAMPOLICIESPaperDefaultFolderPolicyInviteOnly,
+    /// Invite only will be the default option when creating a folder in Paper.
+    DBTEAMPOLICIESPaperDefaultFolderPolicyInviteOnly,
 
-  /// (no description).
-  DBTEAMPOLICIESPaperDefaultFolderPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESPaperDefaultFolderPolicyOther,
 
 };
 

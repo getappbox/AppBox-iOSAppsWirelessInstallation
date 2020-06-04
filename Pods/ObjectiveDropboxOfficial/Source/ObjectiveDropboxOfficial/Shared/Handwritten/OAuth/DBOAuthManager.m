@@ -59,8 +59,8 @@ static DBOAuthManager *s_sharedOAuthManager;
   self = [super init];
   if (self) {
     if (host == nil) {
-      host =
-          !kSDKDebug ? @"www.dropbox.com" : [NSString stringWithFormat:@"meta-%@.dev.corp.dropbox.com", kSDKDebugHost];
+      host = !kDBSDKDebug ? @"www.dropbox.com"
+                          : [NSString stringWithFormat:@"meta-%@.dev.corp.dropbox.com", kDBSDKDebugHost];
     }
 
     _appKey = appKey;
@@ -173,7 +173,7 @@ static DBOAuthManager *s_sharedOAuthManager;
 
   // used to prevent malicious impersonation of app from web browser
   NSString *state = [[NSProcessInfo processInfo] globallyUniqueString];
-  [[NSUserDefaults standardUserDefaults] setValue:state forKey:kCSERFKey];
+  [[NSUserDefaults standardUserDefaults] setValue:state forKey:kDBSDKCSERFKey];
 
   components.queryItems = @[
     [NSURLQueryItem queryItemWithName:@"response_type" value:@"token"],
@@ -218,14 +218,14 @@ static DBOAuthManager *s_sharedOAuthManager;
     return [[DBOAuthResult alloc] initWithError:results[@"error"] errorDescription:desc];
   } else {
     NSString *state = results[@"state"];
-    NSString *storedState = [[NSUserDefaults standardUserDefaults] stringForKey:kCSERFKey];
+    NSString *storedState = [[NSUserDefaults standardUserDefaults] stringForKey:kDBSDKCSERFKey];
 
     if (state == nil || storedState == nil || ![state isEqualToString:storedState]) {
       return [[DBOAuthResult alloc] initWithError:@"inconsistent_state"
                                  errorDescription:@"Auth flow failed because of inconsistent state."];
     } else {
       // reset upon success
-      [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kCSERFKey];
+      [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kDBSDKCSERFKey];
     }
 
     NSString *uid = results[@"uid"];

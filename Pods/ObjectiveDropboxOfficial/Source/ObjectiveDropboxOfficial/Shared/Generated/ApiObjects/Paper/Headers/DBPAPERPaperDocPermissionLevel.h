@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERPaperDocPermissionLevelTag` enum type represents the possible
 /// tag states with which the `DBPAPERPaperDocPermissionLevel` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERPaperDocPermissionLevelTag) {
-  /// User will be granted edit permissions.
-  DBPAPERPaperDocPermissionLevelEdit,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERPaperDocPermissionLevelTag){
+    /// User will be granted edit permissions.
+    DBPAPERPaperDocPermissionLevelEdit,
 
-  /// User will be granted view and comment permissions.
-  DBPAPERPaperDocPermissionLevelViewAndComment,
+    /// User will be granted view and comment permissions.
+    DBPAPERPaperDocPermissionLevelViewAndComment,
 
-  /// (no description).
-  DBPAPERPaperDocPermissionLevelOther,
+    /// (no description).
+    DBPAPERPaperDocPermissionLevelOther,
 
 };
 

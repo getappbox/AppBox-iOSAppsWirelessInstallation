@@ -28,16 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGListSharedLinksErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGListSharedLinksError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGListSharedLinksErrorTag) {
-  /// (no description).
-  DBSHARINGListSharedLinksErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGListSharedLinksErrorTag){
+    /// (no description).
+    DBSHARINGListSharedLinksErrorPath,
 
-  /// Indicates that the cursor has been invalidated. Call `listSharedLinks`
-  /// to obtain a new cursor.
-  DBSHARINGListSharedLinksErrorReset,
+    /// Indicates that the cursor has been invalidated. Call `listSharedLinks`
+    /// to obtain a new cursor.
+    DBSHARINGListSharedLinksErrorReset,
 
-  /// (no description).
-  DBSHARINGListSharedLinksErrorOther,
+    /// (no description).
+    DBSHARINGListSharedLinksErrorOther,
 
 };
 

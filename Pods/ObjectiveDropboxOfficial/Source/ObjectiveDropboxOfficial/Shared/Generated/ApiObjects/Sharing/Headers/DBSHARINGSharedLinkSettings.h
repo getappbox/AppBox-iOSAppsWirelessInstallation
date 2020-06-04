@@ -45,7 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// `effective_audience` field of `LinkPermissions.
 @property (nonatomic, readonly, nullable) DBSHARINGLinkAudience *audience;
 
-/// Requested access level you want the audience to gain from this link.
+/// Requested access level you want the audience to gain from this link. Note,
+/// modifying access level for an existing link is not supported.
 @property (nonatomic, readonly, nullable) DBSHARINGRequestedLinkAccessLevel *access;
 
 #pragma mark - Constructors
@@ -65,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// and shared folder policies to determine the final effective audience type in
 /// the `effective_audience` field of `LinkPermissions.
 /// @param access Requested access level you want the audience to gain from this
-/// link.
+/// link. Note, modifying access level for an existing link is not supported.
 ///
 /// @return An initialized instance.
 ///

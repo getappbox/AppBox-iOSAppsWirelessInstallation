@@ -86,6 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// is present only if the folder is contained within another shared folder.
 /// @param pathLower The lower-cased full path of this shared folder. Absent for
 /// unmounted folders.
+/// @param parentFolderName Display name for the parent folder.
 /// @param linkMetadata The metadata of the shared content link to this shared
 /// folder. Absent if there is no link on the folder. This is for an unreleased
 /// feature so it may not be returned yet.
@@ -109,6 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
                          ownerTeam:(nullable DBUSERSTeam *)ownerTeam
               parentSharedFolderId:(nullable NSString *)parentSharedFolderId
                          pathLower:(nullable NSString *)pathLower
+                  parentFolderName:(nullable NSString *)parentFolderName
                       linkMetadata:(nullable DBSHARINGSharedContentLinkMetadata *)linkMetadata
                        permissions:(nullable NSArray<DBSHARINGFolderPermission *> *)permissions
                  accessInheritance:(nullable DBSHARINGAccessInheritance *)accessInheritance;

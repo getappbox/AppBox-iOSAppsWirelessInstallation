@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMExcludedUsersUpdateStatusTag` enum type represents the possible
 /// tag states with which the `DBTEAMExcludedUsersUpdateStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMExcludedUsersUpdateStatusTag) {
-  /// Update successful.
-  DBTEAMExcludedUsersUpdateStatusSuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMExcludedUsersUpdateStatusTag){
+    /// Update successful.
+    DBTEAMExcludedUsersUpdateStatusSuccess,
 
-  /// (no description).
-  DBTEAMExcludedUsersUpdateStatusOther,
+    /// (no description).
+    DBTEAMExcludedUsersUpdateStatusOther,
 
 };
 

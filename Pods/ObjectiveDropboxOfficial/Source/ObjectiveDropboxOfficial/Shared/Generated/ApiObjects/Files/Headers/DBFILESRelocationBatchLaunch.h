@@ -31,16 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESRelocationBatchLaunchTag` enum type represents the possible tag
 /// states with which the `DBFILESRelocationBatchLaunch` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag) {
-  /// This response indicates that the processing is asynchronous. The string
-  /// is an id that can be used to obtain the status of the asynchronous job.
-  DBFILESRelocationBatchLaunchAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchLaunchTag){
+    /// This response indicates that the processing is asynchronous. The string
+    /// is an id that can be used to obtain the status of the asynchronous job.
+    DBFILESRelocationBatchLaunchAsyncJobId,
 
-  /// (no description).
-  DBFILESRelocationBatchLaunchComplete,
+    /// (no description).
+    DBFILESRelocationBatchLaunchComplete,
 
-  /// (no description).
-  DBFILESRelocationBatchLaunchOther,
+    /// (no description).
+    DBFILESRelocationBatchLaunchOther,
 
 };
 

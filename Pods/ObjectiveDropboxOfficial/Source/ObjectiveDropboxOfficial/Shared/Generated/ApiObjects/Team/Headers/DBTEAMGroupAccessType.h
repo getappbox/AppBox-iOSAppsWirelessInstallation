@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupAccessTypeTag` enum type represents the possible tag states
 /// with which the `DBTEAMGroupAccessType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupAccessTypeTag) {
-  /// User is a member of the group, but has no special permissions.
-  DBTEAMGroupAccessTypeMember,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupAccessTypeTag){
+    /// User is a member of the group, but has no special permissions.
+    DBTEAMGroupAccessTypeMember,
 
-  /// User can rename the group, and add/remove members.
-  DBTEAMGroupAccessTypeOwner,
+    /// User can rename the group, and add/remove members.
+    DBTEAMGroupAccessTypeOwner,
 
 };
 

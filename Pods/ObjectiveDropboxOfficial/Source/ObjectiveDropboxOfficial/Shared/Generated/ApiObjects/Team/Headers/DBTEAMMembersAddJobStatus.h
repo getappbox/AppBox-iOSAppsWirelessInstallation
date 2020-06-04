@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersAddJobStatusTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersAddJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersAddJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBTEAMMembersAddJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersAddJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBTEAMMembersAddJobStatusInProgress,
 
-  /// The asynchronous job has finished. For each member that was specified in
-  /// the parameter MembersAddArg that was provided to `membersAdd`, a
-  /// corresponding item is returned in this list.
-  DBTEAMMembersAddJobStatusComplete,
+    /// The asynchronous job has finished. For each member that was specified in
+    /// the parameter MembersAddArg that was provided to `membersAdd`, a
+    /// corresponding item is returned in this list.
+    DBTEAMMembersAddJobStatusComplete,
 
-  /// The asynchronous job returned an error. The string contains an error
-  /// message.
-  DBTEAMMembersAddJobStatusFailed,
+    /// The asynchronous job returned an error. The string contains an error
+    /// message.
+    DBTEAMMembersAddJobStatusFailed,
 
 };
 

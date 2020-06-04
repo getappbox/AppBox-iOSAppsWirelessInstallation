@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEPROPERTIESPropertyTypeTag` enum type represents the possible tag
 /// states with which the `DBFILEPROPERTIESPropertyType` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertyTypeTag) {
-  /// The associated property field will be of type string. Unicode is
-  /// supported.
-  DBFILEPROPERTIESPropertyTypeString,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESPropertyTypeTag){
+    /// The associated property field will be of type string. Unicode is
+    /// supported.
+    DBFILEPROPERTIESPropertyTypeString,
 
-  /// (no description).
-  DBFILEPROPERTIESPropertyTypeOther,
+    /// (no description).
+    DBFILEPROPERTIESPropertyTypeOther,
 
 };
 

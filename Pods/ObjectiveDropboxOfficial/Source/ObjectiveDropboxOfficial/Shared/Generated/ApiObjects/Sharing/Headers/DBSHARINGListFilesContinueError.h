@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGListFilesContinueErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGListFilesContinueError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGListFilesContinueErrorTag) {
-  /// User account had a problem.
-  DBSHARINGListFilesContinueErrorUserError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGListFilesContinueErrorTag){
+    /// User account had a problem.
+    DBSHARINGListFilesContinueErrorUserError,
 
-  /// `cursor` in `DBSHARINGListFilesContinueArg` is invalid.
-  DBSHARINGListFilesContinueErrorInvalidCursor,
+    /// `cursor` in `DBSHARINGListFilesContinueArg` is invalid.
+    DBSHARINGListFilesContinueErrorInvalidCursor,
 
-  /// (no description).
-  DBSHARINGListFilesContinueErrorOther,
+    /// (no description).
+    DBSHARINGListFilesContinueErrorOther,
 
 };
 

@@ -10,7 +10,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <netinet/in.h>
 
-typedef enum : NSInteger { DBNotReachable = 0, DBReachableViaWiFi, DBReachableViaWWAN } DBNetworkStatus;
+typedef enum : NSInteger { DBNotReachable = 0, DBReachableViaWiFi, DBReachableViaWWAN } DBSDKNetworkStatus;
 
 #pragma mark IPv6 Support
 // Reachability fully support IPv6.  For full details, see ReadMe.md.
@@ -45,7 +45,7 @@ extern NSString *kDBSDKReachabilityChangedNotification;
 - (BOOL)startNotifier;
 - (void)stopNotifier;
 
-- (DBNetworkStatus)currentReachabilityStatus;
+- (DBSDKNetworkStatus)currentReachabilityStatus;
 
 /*!
  * WWAN may be available, but not active until a connection has been established. WiFi may require a connection for VPN

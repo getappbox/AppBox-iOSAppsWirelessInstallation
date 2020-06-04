@@ -5,7 +5,10 @@
 ///
 
 #import "DBUserBaseClient.h"
+#import "DBACCOUNTUserAuthRoutes.h"
 #import "DBAUTHUserAuthRoutes.h"
+#import "DBCHECKUserAuthRoutes.h"
+#import "DBCLOUDDOCSUserAuthRoutes.h"
 #import "DBCONTACTSUserAuthRoutes.h"
 #import "DBFILEPROPERTIESUserAuthRoutes.h"
 #import "DBFILEREQUESTSUserAuthRoutes.h"
@@ -21,7 +24,10 @@
   self = [super init];
   if (self) {
     _transportClient = client;
+    _accountRoutes = [[DBACCOUNTUserAuthRoutes alloc] init:client];
     _authRoutes = [[DBAUTHUserAuthRoutes alloc] init:client];
+    _checkRoutes = [[DBCHECKUserAuthRoutes alloc] init:client];
+    _cloudDocsRoutes = [[DBCLOUDDOCSUserAuthRoutes alloc] init:client];
     _contactsRoutes = [[DBCONTACTSUserAuthRoutes alloc] init:client];
     _filePropertiesRoutes = [[DBFILEPROPERTIESUserAuthRoutes alloc] init:client];
     _fileRequestsRoutes = [[DBFILEREQUESTSUserAuthRoutes alloc] init:client];

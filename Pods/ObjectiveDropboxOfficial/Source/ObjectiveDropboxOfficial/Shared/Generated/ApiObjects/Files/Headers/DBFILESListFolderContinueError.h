@@ -28,16 +28,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESListFolderContinueErrorTag` enum type represents the possible
 /// tag states with which the `DBFILESListFolderContinueError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESListFolderContinueErrorTag) {
-  /// (no description).
-  DBFILESListFolderContinueErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESListFolderContinueErrorTag){
+    /// (no description).
+    DBFILESListFolderContinueErrorPath,
 
-  /// Indicates that the cursor has been invalidated. Call `listFolder` to
-  /// obtain a new cursor.
-  DBFILESListFolderContinueErrorReset,
+    /// Indicates that the cursor has been invalidated. Call `listFolder` to
+    /// obtain a new cursor.
+    DBFILESListFolderContinueErrorReset,
 
-  /// (no description).
-  DBFILESListFolderContinueErrorOther,
+    /// (no description).
+    DBFILESListFolderContinueErrorOther,
 
 };
 

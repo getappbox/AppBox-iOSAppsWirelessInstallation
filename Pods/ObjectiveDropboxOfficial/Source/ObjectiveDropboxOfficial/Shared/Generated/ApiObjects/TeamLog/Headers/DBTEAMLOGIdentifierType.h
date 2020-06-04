@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGIdentifierTypeTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGIdentifierType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGIdentifierTypeTag) {
-  /// (no description).
-  DBTEAMLOGIdentifierTypeEmail,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGIdentifierTypeTag){
+    /// (no description).
+    DBTEAMLOGIdentifierTypeEmail,
 
-  /// (no description).
-  DBTEAMLOGIdentifierTypeFacebookProfileName,
+    /// (no description).
+    DBTEAMLOGIdentifierTypeFacebookProfileName,
 
-  /// (no description).
-  DBTEAMLOGIdentifierTypeOther,
+    /// (no description).
+    DBTEAMLOGIdentifierTypeOther,
 
 };
 

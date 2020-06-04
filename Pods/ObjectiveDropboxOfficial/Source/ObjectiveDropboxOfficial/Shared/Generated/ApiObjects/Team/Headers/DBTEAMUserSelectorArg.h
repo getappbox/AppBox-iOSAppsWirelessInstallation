@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMUserSelectorArgTag` enum type represents the possible tag states
 /// with which the `DBTEAMUserSelectorArg` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMUserSelectorArgTag) {
-  /// (no description).
-  DBTEAMUserSelectorArgTeamMemberId,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMUserSelectorArgTag){
+    /// (no description).
+    DBTEAMUserSelectorArgTeamMemberId,
 
-  /// (no description).
-  DBTEAMUserSelectorArgExternalId,
+    /// (no description).
+    DBTEAMUserSelectorArgExternalId,
 
-  /// (no description).
-  DBTEAMUserSelectorArgEmail,
+    /// (no description).
+    DBTEAMUserSelectorArgEmail,
 
 };
 

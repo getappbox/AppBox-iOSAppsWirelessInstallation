@@ -29,27 +29,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGMemberActionTag` enum type represents the possible tag states
 /// with which the `DBSHARINGMemberAction` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGMemberActionTag) {
-  /// Allow the member to keep a copy of the folder when removing.
-  DBSHARINGMemberActionLeaveACopy,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMemberActionTag){
+    /// Allow the member to keep a copy of the folder when removing.
+    DBSHARINGMemberActionLeaveACopy,
 
-  /// Make the member an editor of the folder.
-  DBSHARINGMemberActionMakeEditor,
+    /// Make the member an editor of the folder.
+    DBSHARINGMemberActionMakeEditor,
 
-  /// Make the member an owner of the folder.
-  DBSHARINGMemberActionMakeOwner,
+    /// Make the member an owner of the folder.
+    DBSHARINGMemberActionMakeOwner,
 
-  /// Make the member a viewer of the folder.
-  DBSHARINGMemberActionMakeViewer,
+    /// Make the member a viewer of the folder.
+    DBSHARINGMemberActionMakeViewer,
 
-  /// Make the member a viewer of the folder without commenting permissions.
-  DBSHARINGMemberActionMakeViewerNoComment,
+    /// Make the member a viewer of the folder without commenting permissions.
+    DBSHARINGMemberActionMakeViewerNoComment,
 
-  /// Remove the member from the folder.
-  DBSHARINGMemberActionRemove,
+    /// Remove the member from the folder.
+    DBSHARINGMemberActionRemove,
 
-  /// (no description).
-  DBSHARINGMemberActionOther,
+    /// (no description).
+    DBSHARINGMemberActionOther,
 
 };
 

@@ -28,15 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESTwoStepVerificationStateTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESTwoStepVerificationState`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESTwoStepVerificationStateTag) {
-  /// Enabled require two factor authorization.
-  DBTEAMPOLICIESTwoStepVerificationStateRequired,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESTwoStepVerificationStateTag){
+    /// Enabled require two factor authorization.
+    DBTEAMPOLICIESTwoStepVerificationStateRequired,
 
-  /// Optional require two factor authorization.
-  DBTEAMPOLICIESTwoStepVerificationStateOptional,
+    /// Optional require two factor authorization.
+    DBTEAMPOLICIESTwoStepVerificationStateOptional,
 
-  /// (no description).
-  DBTEAMPOLICIESTwoStepVerificationStateOther,
+    /// Disabled require two factor authorization.
+    DBTEAMPOLICIESTwoStepVerificationStateDisabled,
+
+    /// (no description).
+    DBTEAMPOLICIESTwoStepVerificationStateOther,
 
 };
 
@@ -66,6 +69,16 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESTwoStepVerificationStateTag) {
 - (instancetype)initWithOptional;
 
 ///
+/// Initializes union class with tag state of "disabled".
+///
+/// Description of the "disabled" tag state: Disabled require two factor
+/// authorization.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDisabled;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -89,6 +102,13 @@ typedef NS_ENUM(NSInteger, DBTEAMPOLICIESTwoStepVerificationStateTag) {
 /// @return Whether the union's current tag state has value "optional".
 ///
 - (BOOL)isOptional;
+
+///
+/// Retrieves whether the union's current tag state has value "disabled".
+///
+/// @return Whether the union's current tag state has value "disabled".
+///
+- (BOOL)isDisabled;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

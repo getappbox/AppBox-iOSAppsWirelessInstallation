@@ -32,15 +32,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGTeamMergeRequestReminderExtraDetailsTag` enum type represents
 /// the possible tag states with which the
 /// `DBTEAMLOGTeamMergeRequestReminderExtraDetails` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGTeamMergeRequestReminderExtraDetailsTag) {
-  /// Team merge request reminder details shown to the primary team.
-  DBTEAMLOGTeamMergeRequestReminderExtraDetailsPrimaryTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMergeRequestReminderExtraDetailsTag){
+    /// Team merge request reminder details shown to the primary team.
+    DBTEAMLOGTeamMergeRequestReminderExtraDetailsPrimaryTeam,
 
-  /// Team merge request reminder details shown to the secondary team.
-  DBTEAMLOGTeamMergeRequestReminderExtraDetailsSecondaryTeam,
+    /// Team merge request reminder details shown to the secondary team.
+    DBTEAMLOGTeamMergeRequestReminderExtraDetailsSecondaryTeam,
 
-  /// (no description).
-  DBTEAMLOGTeamMergeRequestReminderExtraDetailsOther,
+    /// (no description).
+    DBTEAMLOGTeamMergeRequestReminderExtraDetailsOther,
 
 };
 

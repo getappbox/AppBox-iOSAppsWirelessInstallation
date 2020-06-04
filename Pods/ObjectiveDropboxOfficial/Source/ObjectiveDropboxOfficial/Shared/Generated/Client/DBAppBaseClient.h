@@ -5,6 +5,8 @@
 ///
 
 #import "DBAUTHAppAuthRoutes.h"
+#import "DBCHECKAppAuthRoutes.h"
+#import "DBFILESAppAuthRoutes.h"
 #import "DBRequestErrors.h"
 #import "DBTasks.h"
 #import <Foundation/Foundation.h>
@@ -26,6 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Routes within the `auth` namespace.
 @property (nonatomic, readonly) DBAUTHAppAuthRoutes *authRoutes;
+
+/// Routes within the `check` namespace.
+@property (nonatomic, readonly) DBCHECKAppAuthRoutes *checkRoutes;
+
+/// Routes within the `files` namespace.
+@property (nonatomic, readonly) DBFILESAppAuthRoutes *filesRoutes;
 
 /// Initializes the `DBAppBaseClient` object with a networking client.
 - (instancetype)initWithTransportClient:(id<DBTransportClient>)client;

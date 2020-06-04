@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESMediaInfoTag` enum type represents the possible tag states with
 /// which the `DBFILESMediaInfo` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESMediaInfoTag) {
-  /// Indicate the photo/video is still under processing and metadata is not
-  /// available yet.
-  DBFILESMediaInfoPending,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESMediaInfoTag){
+    /// Indicate the photo/video is still under processing and metadata is not
+    /// available yet.
+    DBFILESMediaInfoPending,
 
-  /// The metadata for the photo/video.
-  DBFILESMediaInfoMetadata,
+    /// The metadata for the photo/video.
+    DBFILESMediaInfoMetadata,
 
 };
 

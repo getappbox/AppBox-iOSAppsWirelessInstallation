@@ -28,19 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESSyncSettingsErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESSyncSettingsError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESSyncSettingsErrorTag) {
-  /// (no description).
-  DBFILESSyncSettingsErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESSyncSettingsErrorTag){
+    /// (no description).
+    DBFILESSyncSettingsErrorPath,
 
-  /// Setting this combination of sync settings simultaneously is not
-  /// supported.
-  DBFILESSyncSettingsErrorUnsupportedCombination,
+    /// Setting this combination of sync settings simultaneously is not
+    /// supported.
+    DBFILESSyncSettingsErrorUnsupportedCombination,
 
-  /// The specified configuration is not supported.
-  DBFILESSyncSettingsErrorUnsupportedConfiguration,
+    /// The specified configuration is not supported.
+    DBFILESSyncSettingsErrorUnsupportedConfiguration,
 
-  /// (no description).
-  DBFILESSyncSettingsErrorOther,
+    /// (no description).
+    DBFILESSyncSettingsErrorOther,
 
 };
 

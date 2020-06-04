@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGLinkAccessLevelTag` enum type represents the possible tag
 /// states with which the `DBSHARINGLinkAccessLevel` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGLinkAccessLevelTag) {
-  /// Users who use the link can view and comment on the content.
-  DBSHARINGLinkAccessLevelViewer,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkAccessLevelTag){
+    /// Users who use the link can view and comment on the content.
+    DBSHARINGLinkAccessLevelViewer,
 
-  /// Users who use the link can edit, view and comment on the content.
-  DBSHARINGLinkAccessLevelEditor,
+    /// Users who use the link can edit, view and comment on the content.
+    DBSHARINGLinkAccessLevelEditor,
 
-  /// (no description).
-  DBSHARINGLinkAccessLevelOther,
+    /// (no description).
+    DBSHARINGLinkAccessLevelOther,
 
 };
 

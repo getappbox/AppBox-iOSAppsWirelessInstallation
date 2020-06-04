@@ -34,21 +34,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMFeatureValueTag` enum type represents the possible tag states
 /// with which the `DBTEAMFeatureValue` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMFeatureValueTag) {
-  /// (no description).
-  DBTEAMFeatureValueUploadApiRateLimit,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMFeatureValueTag){
+    /// (no description).
+    DBTEAMFeatureValueUploadApiRateLimit,
 
-  /// (no description).
-  DBTEAMFeatureValueHasTeamSharedDropbox,
+    /// (no description).
+    DBTEAMFeatureValueHasTeamSharedDropbox,
 
-  /// (no description).
-  DBTEAMFeatureValueHasTeamFileEvents,
+    /// (no description).
+    DBTEAMFeatureValueHasTeamFileEvents,
 
-  /// (no description).
-  DBTEAMFeatureValueHasTeamSelectiveSync,
+    /// (no description).
+    DBTEAMFeatureValueHasTeamSelectiveSync,
 
-  /// (no description).
-  DBTEAMFeatureValueOther,
+    /// (no description).
+    DBTEAMFeatureValueOther,
 
 };
 

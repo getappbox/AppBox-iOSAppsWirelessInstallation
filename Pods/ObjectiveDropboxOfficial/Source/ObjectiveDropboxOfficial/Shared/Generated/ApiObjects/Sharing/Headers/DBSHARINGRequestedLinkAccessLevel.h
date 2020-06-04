@@ -28,18 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGRequestedLinkAccessLevelTag` enum type represents the possible
 /// tag states with which the `DBSHARINGRequestedLinkAccessLevel` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRequestedLinkAccessLevelTag) {
-  /// Users who use the link can view and comment on the content.
-  DBSHARINGRequestedLinkAccessLevelViewer,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRequestedLinkAccessLevelTag){
+    /// Users who use the link can view and comment on the content.
+    DBSHARINGRequestedLinkAccessLevelViewer,
 
-  /// Users who use the link can edit, view and comment on the content.
-  DBSHARINGRequestedLinkAccessLevelEditor,
+    /// Users who use the link can edit, view and comment on the content. Note
+    /// not all file types support edit links yet.
+    DBSHARINGRequestedLinkAccessLevelEditor,
 
-  /// Request for the maximum access level you can set the link to.
-  DBSHARINGRequestedLinkAccessLevelMax,
+    /// Request for the maximum access level you can set the link to.
+    DBSHARINGRequestedLinkAccessLevelMax,
 
-  /// (no description).
-  DBSHARINGRequestedLinkAccessLevelOther,
+    /// (no description).
+    DBSHARINGRequestedLinkAccessLevelOther,
 
 };
 
@@ -62,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBSHARINGRequestedLinkAccessLevelTag) {
 /// Initializes union class with tag state of "editor".
 ///
 /// Description of the "editor" tag state: Users who use the link can edit, view
-/// and comment on the content.
+/// and comment on the content. Note not all file types support edit links yet.
 ///
 /// @return An initialized instance.
 ///

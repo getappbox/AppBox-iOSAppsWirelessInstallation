@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupSelectorTag` enum type represents the possible tag states
 /// with which the `DBTEAMGroupSelector` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorTag) {
-  /// Group ID.
-  DBTEAMGroupSelectorGroupId,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupSelectorTag){
+    /// Group ID.
+    DBTEAMGroupSelectorGroupId,
 
-  /// External ID of the group.
-  DBTEAMGroupSelectorGroupExternalId,
+    /// External ID of the group.
+    DBTEAMGroupSelectorGroupExternalId,
 
 };
 

@@ -29,21 +29,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERDocSubscriptionLevelTag` enum type represents the possible tag
 /// states with which the `DBPAPERDocSubscriptionLevel` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERDocSubscriptionLevelTag) {
-  /// No change email messages unless you're the creator.
-  DBPAPERDocSubscriptionLevelDefault_,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERDocSubscriptionLevelTag){
+    /// No change email messages unless you're the creator.
+    DBPAPERDocSubscriptionLevelDefault_,
 
-  /// Ignored: Not shown in pad lists or activity and no email message is
-  /// sent.
-  DBPAPERDocSubscriptionLevelIgnore,
+    /// Ignored: Not shown in pad lists or activity and no email message is
+    /// sent.
+    DBPAPERDocSubscriptionLevelIgnore,
 
-  /// Subscribed: Shown in pad lists and activity and change email messages
-  /// are sent.
-  DBPAPERDocSubscriptionLevelEvery,
+    /// Subscribed: Shown in pad lists and activity and change email messages
+    /// are sent.
+    DBPAPERDocSubscriptionLevelEvery,
 
-  /// Unsubscribed: Shown in pad lists, but not in activity and no change
-  /// email messages are sent.
-  DBPAPERDocSubscriptionLevelNoEmail,
+    /// Unsubscribed: Shown in pad lists, but not in activity and no change
+    /// email messages are sent.
+    DBPAPERDocSubscriptionLevelNoEmail,
 
 };
 

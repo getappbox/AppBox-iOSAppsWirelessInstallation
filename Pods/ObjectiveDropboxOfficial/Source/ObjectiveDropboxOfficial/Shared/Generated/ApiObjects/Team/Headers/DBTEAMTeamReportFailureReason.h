@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamReportFailureReasonTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamReportFailureReason` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamReportFailureReasonTag) {
-  /// We couldn't create the report, but we think this was a fluke. Everything
-  /// should work if you try it again.
-  DBTEAMTeamReportFailureReasonTemporaryError,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamReportFailureReasonTag){
+    /// We couldn't create the report, but we think this was a fluke. Everything
+    /// should work if you try it again.
+    DBTEAMTeamReportFailureReasonTemporaryError,
 
-  /// Too many other reports are being created right now. Try creating this
-  /// report again once the others finish.
-  DBTEAMTeamReportFailureReasonManyReportsAtOnce,
+    /// Too many other reports are being created right now. Try creating this
+    /// report again once the others finish.
+    DBTEAMTeamReportFailureReasonManyReportsAtOnce,
 
-  /// We couldn't create the report. Try creating the report again with less
-  /// data.
-  DBTEAMTeamReportFailureReasonTooMuchData,
+    /// We couldn't create the report. Try creating the report again with less
+    /// data.
+    DBTEAMTeamReportFailureReasonTooMuchData,
 
-  /// (no description).
-  DBTEAMTeamReportFailureReasonOther,
+    /// (no description).
+    DBTEAMTeamReportFailureReasonOther,
 
 };
 

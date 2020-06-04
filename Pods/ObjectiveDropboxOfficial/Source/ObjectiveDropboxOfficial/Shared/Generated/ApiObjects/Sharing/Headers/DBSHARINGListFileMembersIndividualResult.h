@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGListFileMembersIndividualResultTag` enum type represents the
 /// possible tag states with which the
 /// `DBSHARINGListFileMembersIndividualResult` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag) {
-  /// The results of the query for this file if it was successful.
-  DBSHARINGListFileMembersIndividualResultResult,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGListFileMembersIndividualResultTag){
+    /// The results of the query for this file if it was successful.
+    DBSHARINGListFileMembersIndividualResultResult,
 
-  /// The result of the query for this file if it was an error.
-  DBSHARINGListFileMembersIndividualResultAccessError,
+    /// The result of the query for this file if it was an error.
+    DBSHARINGListFileMembersIndividualResultAccessError,
 
-  /// (no description).
-  DBSHARINGListFileMembersIndividualResultOther,
+    /// (no description).
+    DBSHARINGListFileMembersIndividualResultOther,
 
 };
 

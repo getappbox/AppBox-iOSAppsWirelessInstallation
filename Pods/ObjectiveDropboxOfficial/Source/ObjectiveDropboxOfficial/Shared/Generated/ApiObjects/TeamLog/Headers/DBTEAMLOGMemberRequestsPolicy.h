@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGMemberRequestsPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGMemberRequestsPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag) {
-  /// (no description).
-  DBTEAMLOGMemberRequestsPolicyAutoAccept,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberRequestsPolicyTag){
+    /// (no description).
+    DBTEAMLOGMemberRequestsPolicyAutoAccept,
 
-  /// (no description).
-  DBTEAMLOGMemberRequestsPolicyDisabled,
+    /// (no description).
+    DBTEAMLOGMemberRequestsPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGMemberRequestsPolicyRequireApproval,
+    /// (no description).
+    DBTEAMLOGMemberRequestsPolicyRequireApproval,
 
-  /// (no description).
-  DBTEAMLOGMemberRequestsPolicyOther,
+    /// (no description).
+    DBTEAMLOGMemberRequestsPolicyOther,
 
 };
 

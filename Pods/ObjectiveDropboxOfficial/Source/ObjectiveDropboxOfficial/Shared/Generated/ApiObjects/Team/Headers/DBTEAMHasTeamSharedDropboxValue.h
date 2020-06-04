@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMHasTeamSharedDropboxValueTag` enum type represents the possible
 /// tag states with which the `DBTEAMHasTeamSharedDropboxValue` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMHasTeamSharedDropboxValueTag) {
-  /// Does this team have a shared team root.
-  DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMHasTeamSharedDropboxValueTag){
+    /// Does this team have a shared team root.
+    DBTEAMHasTeamSharedDropboxValueHasTeamSharedDropbox,
 
-  /// (no description).
-  DBTEAMHasTeamSharedDropboxValueOther,
+    /// (no description).
+    DBTEAMHasTeamSharedDropboxValueOther,
 
 };
 

@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBAUTHInvalidAccountTypeErrorTag` enum type represents the possible tag
 /// states with which the `DBAUTHInvalidAccountTypeError` union can exist.
-typedef NS_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag) {
-  /// Current account type doesn't have permission to access this route
-  /// endpoint.
-  DBAUTHInvalidAccountTypeErrorEndpoint,
+typedef NS_CLOSED_ENUM(NSInteger, DBAUTHInvalidAccountTypeErrorTag){
+    /// Current account type doesn't have permission to access this route
+    /// endpoint.
+    DBAUTHInvalidAccountTypeErrorEndpoint,
 
-  /// Current account type doesn't have permission to access this feature.
-  DBAUTHInvalidAccountTypeErrorFeature,
+    /// Current account type doesn't have permission to access this feature.
+    DBAUTHInvalidAccountTypeErrorFeature,
 
-  /// (no description).
-  DBAUTHInvalidAccountTypeErrorOther,
+    /// (no description).
+    DBAUTHInvalidAccountTypeErrorOther,
 
 };
 

@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESDownloadZipErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESDownloadZipError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESDownloadZipErrorTag) {
-  /// (no description).
-  DBFILESDownloadZipErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESDownloadZipErrorTag){
+    /// (no description).
+    DBFILESDownloadZipErrorPath,
 
-  /// The folder or a file is too large to download.
-  DBFILESDownloadZipErrorTooLarge,
+    /// The folder or a file is too large to download.
+    DBFILESDownloadZipErrorTooLarge,
 
-  /// The folder has too many files to download.
-  DBFILESDownloadZipErrorTooManyFiles,
+    /// The folder has too many files to download.
+    DBFILESDownloadZipErrorTooManyFiles,
 
-  /// (no description).
-  DBFILESDownloadZipErrorOther,
+    /// (no description).
+    DBFILESDownloadZipErrorOther,
 
 };
 

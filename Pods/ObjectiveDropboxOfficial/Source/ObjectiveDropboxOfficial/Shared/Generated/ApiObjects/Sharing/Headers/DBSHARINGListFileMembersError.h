@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGListFileMembersErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGListFileMembersError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGListFileMembersErrorTag) {
-  /// (no description).
-  DBSHARINGListFileMembersErrorUserError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGListFileMembersErrorTag){
+    /// (no description).
+    DBSHARINGListFileMembersErrorUserError,
 
-  /// (no description).
-  DBSHARINGListFileMembersErrorAccessError,
+    /// (no description).
+    DBSHARINGListFileMembersErrorAccessError,
 
-  /// (no description).
-  DBSHARINGListFileMembersErrorOther,
+    /// (no description).
+    DBSHARINGListFileMembersErrorOther,
 
 };
 

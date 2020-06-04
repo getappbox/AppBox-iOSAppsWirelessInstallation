@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGTrustedTeamsRequestStateTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGTrustedTeamsRequestState` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGTrustedTeamsRequestStateTag) {
-  /// (no description).
-  DBTEAMLOGTrustedTeamsRequestStateInvited,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTrustedTeamsRequestStateTag){
+    /// (no description).
+    DBTEAMLOGTrustedTeamsRequestStateInvited,
 
-  /// (no description).
-  DBTEAMLOGTrustedTeamsRequestStateLinked,
+    /// (no description).
+    DBTEAMLOGTrustedTeamsRequestStateLinked,
 
-  /// (no description).
-  DBTEAMLOGTrustedTeamsRequestStateUnlinked,
+    /// (no description).
+    DBTEAMLOGTrustedTeamsRequestStateUnlinked,
 
-  /// (no description).
-  DBTEAMLOGTrustedTeamsRequestStateOther,
+    /// (no description).
+    DBTEAMLOGTrustedTeamsRequestStateOther,
 
 };
 

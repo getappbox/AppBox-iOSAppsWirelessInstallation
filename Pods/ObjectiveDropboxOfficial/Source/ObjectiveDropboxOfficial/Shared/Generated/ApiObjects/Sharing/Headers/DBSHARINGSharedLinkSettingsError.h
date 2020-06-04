@@ -28,19 +28,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGSharedLinkSettingsErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGSharedLinkSettingsError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkSettingsErrorTag) {
-  /// The given settings are invalid (for example, all attributes of the
-  /// SharedLinkSettings are empty, the requested visibility is `password` in
-  /// `DBSHARINGRequestedVisibility` but the `linkPassword` in
-  /// `DBSHARINGSharedLinkSettings` is missing, `expires` in
-  /// `DBSHARINGSharedLinkSettings` is set to the past, etc.).
-  DBSHARINGSharedLinkSettingsErrorInvalidSettings,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedLinkSettingsErrorTag){
+    /// The given settings are invalid (for example, all attributes of the
+    /// SharedLinkSettings are empty, the requested visibility is `password` in
+    /// `DBSHARINGRequestedVisibility` but the `linkPassword` in
+    /// `DBSHARINGSharedLinkSettings` is missing, `expires` in
+    /// `DBSHARINGSharedLinkSettings` is set to the past, etc.).
+    DBSHARINGSharedLinkSettingsErrorInvalidSettings,
 
-  /// User is not allowed to modify the settings of this link. Note that basic
-  /// users can only set `public` in `DBSHARINGRequestedVisibility` as the
-  /// `requestedVisibility` in `DBSHARINGSharedLinkSettings` and cannot set
-  /// `expires` in `DBSHARINGSharedLinkSettings`.
-  DBSHARINGSharedLinkSettingsErrorNotAuthorized,
+    /// User is not allowed to modify the settings of this link. Note that basic
+    /// users can only set `public` in `DBSHARINGRequestedVisibility` as the
+    /// `requestedVisibility` in `DBSHARINGSharedLinkSettings` and cannot set
+    /// `expires` in `DBSHARINGSharedLinkSettings`.
+    DBSHARINGSharedLinkSettingsErrorNotAuthorized,
 
 };
 

@@ -633,6 +633,14 @@
   return self;
 }
 
+- (instancetype)initWithDuplicatePropertyGroups {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups;
+  }
+  return self;
+}
+
 #pragma mark - Instance field accessors
 
 - (NSString *)templateNotFound {
@@ -683,6 +691,10 @@
   return _tag == DBFILEPROPERTIESInvalidPropertyGroupErrorDoesNotFitTemplate;
 }
 
+- (BOOL)isDuplicatePropertyGroups {
+  return _tag == DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups;
+}
+
 - (NSString *)tagName {
   switch (_tag) {
   case DBFILEPROPERTIESInvalidPropertyGroupErrorTemplateNotFound:
@@ -699,6 +711,8 @@
     return @"DBFILEPROPERTIESInvalidPropertyGroupErrorPropertyFieldTooLarge";
   case DBFILEPROPERTIESInvalidPropertyGroupErrorDoesNotFitTemplate:
     return @"DBFILEPROPERTIESInvalidPropertyGroupErrorDoesNotFitTemplate";
+  case DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups:
+    return @"DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups";
   }
 
   @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
@@ -749,6 +763,8 @@
     result = prime * result + [[self tagName] hash];
   case DBFILEPROPERTIESInvalidPropertyGroupErrorDoesNotFitTemplate:
     result = prime * result + [[self tagName] hash];
+  case DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups:
+    result = prime * result + [[self tagName] hash];
   }
 
   return prime * result;
@@ -788,6 +804,8 @@
     return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
   case DBFILEPROPERTIESInvalidPropertyGroupErrorDoesNotFitTemplate:
     return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
+  case DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups:
+    return [[self tagName] isEqual:[anInvalidPropertyGroupError tagName]];
   }
   return YES;
 }
@@ -817,6 +835,8 @@
     jsonDict[@".tag"] = @"property_field_too_large";
   } else if ([valueObj isDoesNotFitTemplate]) {
     jsonDict[@".tag"] = @"does_not_fit_template";
+  } else if ([valueObj isDuplicatePropertyGroups]) {
+    jsonDict[@".tag"] = @"duplicate_property_groups";
   } else {
     jsonDict[@".tag"] = @"other";
   }
@@ -843,6 +863,8 @@
     return [[DBFILEPROPERTIESInvalidPropertyGroupError alloc] initWithPropertyFieldTooLarge];
   } else if ([tag isEqualToString:@"does_not_fit_template"]) {
     return [[DBFILEPROPERTIESInvalidPropertyGroupError alloc] initWithDoesNotFitTemplate];
+  } else if ([tag isEqualToString:@"duplicate_property_groups"]) {
+    return [[DBFILEPROPERTIESInvalidPropertyGroupError alloc] initWithDuplicatePropertyGroups];
   } else {
     return [[DBFILEPROPERTIESInvalidPropertyGroupError alloc] initWithOther];
   }
@@ -923,6 +945,14 @@
   return self;
 }
 
+- (instancetype)initWithDuplicatePropertyGroups {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups;
+  }
+  return self;
+}
+
 - (instancetype)initWithPropertyGroupAlreadyExists {
   self = [super init];
   if (self) {
@@ -980,6 +1010,10 @@
   return _tag == DBFILEPROPERTIESAddPropertiesErrorDoesNotFitTemplate;
 }
 
+- (BOOL)isDuplicatePropertyGroups {
+  return _tag == DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups;
+}
+
 - (BOOL)isPropertyGroupAlreadyExists {
   return _tag == DBFILEPROPERTIESAddPropertiesErrorPropertyGroupAlreadyExists;
 }
@@ -1000,6 +1034,8 @@
     return @"DBFILEPROPERTIESAddPropertiesErrorPropertyFieldTooLarge";
   case DBFILEPROPERTIESAddPropertiesErrorDoesNotFitTemplate:
     return @"DBFILEPROPERTIESAddPropertiesErrorDoesNotFitTemplate";
+  case DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups:
+    return @"DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups";
   case DBFILEPROPERTIESAddPropertiesErrorPropertyGroupAlreadyExists:
     return @"DBFILEPROPERTIESAddPropertiesErrorPropertyGroupAlreadyExists";
   }
@@ -1052,6 +1088,8 @@
     result = prime * result + [[self tagName] hash];
   case DBFILEPROPERTIESAddPropertiesErrorDoesNotFitTemplate:
     result = prime * result + [[self tagName] hash];
+  case DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups:
+    result = prime * result + [[self tagName] hash];
   case DBFILEPROPERTIESAddPropertiesErrorPropertyGroupAlreadyExists:
     result = prime * result + [[self tagName] hash];
   }
@@ -1093,6 +1131,8 @@
     return [[self tagName] isEqual:[anAddPropertiesError tagName]];
   case DBFILEPROPERTIESAddPropertiesErrorDoesNotFitTemplate:
     return [[self tagName] isEqual:[anAddPropertiesError tagName]];
+  case DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups:
+    return [[self tagName] isEqual:[anAddPropertiesError tagName]];
   case DBFILEPROPERTIESAddPropertiesErrorPropertyGroupAlreadyExists:
     return [[self tagName] isEqual:[anAddPropertiesError tagName]];
   }
@@ -1124,6 +1164,8 @@
     jsonDict[@".tag"] = @"property_field_too_large";
   } else if ([valueObj isDoesNotFitTemplate]) {
     jsonDict[@".tag"] = @"does_not_fit_template";
+  } else if ([valueObj isDuplicatePropertyGroups]) {
+    jsonDict[@".tag"] = @"duplicate_property_groups";
   } else if ([valueObj isPropertyGroupAlreadyExists]) {
     jsonDict[@".tag"] = @"property_group_already_exists";
   } else {
@@ -1152,6 +1194,8 @@
     return [[DBFILEPROPERTIESAddPropertiesError alloc] initWithPropertyFieldTooLarge];
   } else if ([tag isEqualToString:@"does_not_fit_template"]) {
     return [[DBFILEPROPERTIESAddPropertiesError alloc] initWithDoesNotFitTemplate];
+  } else if ([tag isEqualToString:@"duplicate_property_groups"]) {
+    return [[DBFILEPROPERTIESAddPropertiesError alloc] initWithDuplicatePropertyGroups];
   } else if ([tag isEqualToString:@"property_group_already_exists"]) {
     return [[DBFILEPROPERTIESAddPropertiesError alloc] initWithPropertyGroupAlreadyExists];
   } else {
@@ -5809,6 +5853,14 @@
   return self;
 }
 
+- (instancetype)initWithDuplicatePropertyGroups {
+  self = [super init];
+  if (self) {
+    _tag = DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups;
+  }
+  return self;
+}
+
 - (instancetype)initWithPropertyGroupLookup:(DBFILEPROPERTIESLookUpPropertiesError *)propertyGroupLookup {
   self = [super init];
   if (self) {
@@ -5876,6 +5928,10 @@
   return _tag == DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate;
 }
 
+- (BOOL)isDuplicatePropertyGroups {
+  return _tag == DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups;
+}
+
 - (BOOL)isPropertyGroupLookup {
   return _tag == DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup;
 }
@@ -5896,6 +5952,8 @@
     return @"DBFILEPROPERTIESUpdatePropertiesErrorPropertyFieldTooLarge";
   case DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate:
     return @"DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate";
+  case DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups:
+    return @"DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups";
   case DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup:
     return @"DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup";
   }
@@ -5948,6 +6006,8 @@
     result = prime * result + [[self tagName] hash];
   case DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate:
     result = prime * result + [[self tagName] hash];
+  case DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups:
+    result = prime * result + [[self tagName] hash];
   case DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup:
     result = prime * result + [self.propertyGroupLookup hash];
   }
@@ -5989,6 +6049,8 @@
     return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
   case DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate:
     return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
+  case DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups:
+    return [[self tagName] isEqual:[anUpdatePropertiesError tagName]];
   case DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup:
     return [self.propertyGroupLookup isEqual:anUpdatePropertiesError.propertyGroupLookup];
   }
@@ -6020,6 +6082,8 @@
     jsonDict[@".tag"] = @"property_field_too_large";
   } else if ([valueObj isDoesNotFitTemplate]) {
     jsonDict[@".tag"] = @"does_not_fit_template";
+  } else if ([valueObj isDuplicatePropertyGroups]) {
+    jsonDict[@".tag"] = @"duplicate_property_groups";
   } else if ([valueObj isPropertyGroupLookup]) {
     jsonDict[@"property_group_lookup"] =
         [[DBFILEPROPERTIESLookUpPropertiesErrorSerializer serialize:valueObj.propertyGroupLookup] mutableCopy];
@@ -6050,6 +6114,8 @@
     return [[DBFILEPROPERTIESUpdatePropertiesError alloc] initWithPropertyFieldTooLarge];
   } else if ([tag isEqualToString:@"does_not_fit_template"]) {
     return [[DBFILEPROPERTIESUpdatePropertiesError alloc] initWithDoesNotFitTemplate];
+  } else if ([tag isEqualToString:@"duplicate_property_groups"]) {
+    return [[DBFILEPROPERTIESUpdatePropertiesError alloc] initWithDuplicatePropertyGroups];
   } else if ([tag isEqualToString:@"property_group_lookup"]) {
     DBFILEPROPERTIESLookUpPropertiesError *propertyGroupLookup =
         [DBFILEPROPERTIESLookUpPropertiesErrorSerializer deserialize:valueDict[@"property_group_lookup"]];

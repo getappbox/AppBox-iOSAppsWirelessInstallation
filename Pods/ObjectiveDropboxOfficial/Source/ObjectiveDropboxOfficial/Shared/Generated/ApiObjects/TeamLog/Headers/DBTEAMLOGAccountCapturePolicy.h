@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGAccountCapturePolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGAccountCapturePolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGAccountCapturePolicyTag) {
-  /// (no description).
-  DBTEAMLOGAccountCapturePolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCapturePolicyTag){
+    /// (no description).
+    DBTEAMLOGAccountCapturePolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGAccountCapturePolicyInvitedUsers,
+    /// (no description).
+    DBTEAMLOGAccountCapturePolicyInvitedUsers,
 
-  /// (no description).
-  DBTEAMLOGAccountCapturePolicyAllUsers,
+    /// (no description).
+    DBTEAMLOGAccountCapturePolicyAllUsers,
 
-  /// (no description).
-  DBTEAMLOGAccountCapturePolicyOther,
+    /// (no description).
+    DBTEAMLOGAccountCapturePolicyOther,
 
 };
 

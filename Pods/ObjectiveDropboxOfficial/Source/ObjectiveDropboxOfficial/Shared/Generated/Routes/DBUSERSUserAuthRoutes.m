@@ -22,6 +22,11 @@
 #import "DBUSERSRouteObjects.h"
 #import "DBUSERSSpaceAllocation.h"
 #import "DBUSERSSpaceUsage.h"
+#import "DBUSERSUserFeature.h"
+#import "DBUSERSUserFeatureValue.h"
+#import "DBUSERSUserFeaturesGetValuesBatchArg.h"
+#import "DBUSERSUserFeaturesGetValuesBatchError.h"
+#import "DBUSERSUserFeaturesGetValuesBatchResult.h"
 
 @implementation DBUSERSUserAuthRoutes
 
@@ -31,6 +36,12 @@
     _client = client;
   }
   return self;
+}
+
+- (DBRpcTask *)featuresGetValues:(NSArray<DBUSERSUserFeature *> *)features {
+  DBRoute *route = DBUSERSRouteObjects.DBUSERSFeaturesGetValues;
+  DBUSERSUserFeaturesGetValuesBatchArg *arg = [[DBUSERSUserFeaturesGetValuesBatchArg alloc] initWithFeatures:features];
+  return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)getAccount:(NSString *)accountId {

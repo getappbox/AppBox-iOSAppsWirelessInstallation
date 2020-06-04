@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERExportFormatTag` enum type represents the possible tag states
 /// with which the `DBPAPERExportFormat` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERExportFormatTag) {
-  /// The HTML export format.
-  DBPAPERExportFormatHtml,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERExportFormatTag){
+    /// The HTML export format.
+    DBPAPERExportFormatHtml,
 
-  /// The markdown export format.
-  DBPAPERExportFormatMarkdown,
+    /// The markdown export format.
+    DBPAPERExportFormatMarkdown,
 
-  /// (no description).
-  DBPAPERExportFormatOther,
+    /// (no description).
+    DBPAPERExportFormatOther,
 
 };
 

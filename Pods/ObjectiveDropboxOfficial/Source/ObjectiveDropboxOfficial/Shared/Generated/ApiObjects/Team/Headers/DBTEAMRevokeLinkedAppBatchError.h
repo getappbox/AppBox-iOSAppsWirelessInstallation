@@ -29,9 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMRevokeLinkedAppBatchErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMRevokeLinkedAppBatchError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMRevokeLinkedAppBatchErrorTag) {
-  /// (no description).
-  DBTEAMRevokeLinkedAppBatchErrorOther,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeLinkedAppBatchErrorTag){
+    /// (no description).
+    DBTEAMRevokeLinkedAppBatchErrorOther,
 
 };
 

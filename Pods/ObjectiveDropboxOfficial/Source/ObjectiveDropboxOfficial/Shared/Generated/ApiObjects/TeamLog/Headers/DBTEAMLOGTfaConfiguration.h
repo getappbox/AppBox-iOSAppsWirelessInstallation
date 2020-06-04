@@ -30,21 +30,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGTfaConfigurationTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGTfaConfiguration` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag) {
-  /// (no description).
-  DBTEAMLOGTfaConfigurationDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
+    /// (no description).
+    DBTEAMLOGTfaConfigurationDisabled,
 
-  /// (no description).
-  DBTEAMLOGTfaConfigurationEnabled,
+    /// (no description).
+    DBTEAMLOGTfaConfigurationEnabled,
 
-  /// (no description).
-  DBTEAMLOGTfaConfigurationSms,
+    /// (no description).
+    DBTEAMLOGTfaConfigurationSms,
 
-  /// (no description).
-  DBTEAMLOGTfaConfigurationAuthenticator,
+    /// (no description).
+    DBTEAMLOGTfaConfigurationAuthenticator,
 
-  /// (no description).
-  DBTEAMLOGTfaConfigurationOther,
+    /// (no description).
+    DBTEAMLOGTfaConfigurationOther,
 
 };
 

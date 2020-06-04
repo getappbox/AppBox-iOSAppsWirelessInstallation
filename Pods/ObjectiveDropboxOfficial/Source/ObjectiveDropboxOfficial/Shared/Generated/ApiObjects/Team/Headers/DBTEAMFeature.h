@@ -29,21 +29,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMFeatureTag` enum type represents the possible tag states with
 /// which the `DBTEAMFeature` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMFeatureTag) {
-  /// The number of upload API calls allowed per month.
-  DBTEAMFeatureUploadApiRateLimit,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMFeatureTag){
+    /// The number of upload API calls allowed per month.
+    DBTEAMFeatureUploadApiRateLimit,
 
-  /// Does this team have a shared team root.
-  DBTEAMFeatureHasTeamSharedDropbox,
+    /// Does this team have a shared team root.
+    DBTEAMFeatureHasTeamSharedDropbox,
 
-  /// Does this team have file events.
-  DBTEAMFeatureHasTeamFileEvents,
+    /// Does this team have file events.
+    DBTEAMFeatureHasTeamFileEvents,
 
-  /// Does this team have team selective sync enabled.
-  DBTEAMFeatureHasTeamSelectiveSync,
+    /// Does this team have team selective sync enabled.
+    DBTEAMFeatureHasTeamSelectiveSync,
 
-  /// (no description).
-  DBTEAMFeatureOther,
+    /// (no description).
+    DBTEAMFeatureOther,
 
 };
 

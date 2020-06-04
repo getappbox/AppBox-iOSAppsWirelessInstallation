@@ -29,31 +29,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSEENSTATEPlatformTypeTag` enum type represents the possible tag
 /// states with which the `DBSEENSTATEPlatformType` union can exist.
-typedef NS_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag) {
-  /// The content was viewed on the web.
-  DBSEENSTATEPlatformTypeWeb,
+typedef NS_CLOSED_ENUM(NSInteger, DBSEENSTATEPlatformTypeTag){
+    /// The content was viewed on the web.
+    DBSEENSTATEPlatformTypeWeb,
 
-  /// The content was viewed on a desktop client.
-  DBSEENSTATEPlatformTypeDesktop,
+    /// The content was viewed on a desktop client.
+    DBSEENSTATEPlatformTypeDesktop,
 
-  /// The content was viewed on a mobile iOS client.
-  DBSEENSTATEPlatformTypeMobileIos,
+    /// The content was viewed on a mobile iOS client.
+    DBSEENSTATEPlatformTypeMobileIos,
 
-  /// The content was viewed on a mobile android client.
-  DBSEENSTATEPlatformTypeMobileAndroid,
+    /// The content was viewed on a mobile android client.
+    DBSEENSTATEPlatformTypeMobileAndroid,
 
-  /// The content was viewed from an API client.
-  DBSEENSTATEPlatformTypeApi,
+    /// The content was viewed from an API client.
+    DBSEENSTATEPlatformTypeApi,
 
-  /// The content was viewed on an unknown platform.
-  DBSEENSTATEPlatformTypeUnknown,
+    /// The content was viewed on an unknown platform.
+    DBSEENSTATEPlatformTypeUnknown,
 
-  /// The content was viewed on a mobile client. DEPRECATED: Use mobile_ios or
-  /// mobile_android instead.
-  DBSEENSTATEPlatformTypeMobile,
+    /// The content was viewed on a mobile client. DEPRECATED: Use mobile_ios or
+    /// mobile_android instead.
+    DBSEENSTATEPlatformTypeMobile,
 
-  /// (no description).
-  DBSEENSTATEPlatformTypeOther,
+    /// (no description).
+    DBSEENSTATEPlatformTypeOther,
 
 };
 

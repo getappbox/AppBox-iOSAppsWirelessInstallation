@@ -29,19 +29,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGRelinquishFileMembershipErrorTag` enum type represents the
 /// possible tag states with which the `DBSHARINGRelinquishFileMembershipError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRelinquishFileMembershipErrorTag) {
-  /// (no description).
-  DBSHARINGRelinquishFileMembershipErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRelinquishFileMembershipErrorTag){
+    /// (no description).
+    DBSHARINGRelinquishFileMembershipErrorAccessError,
 
-  /// The current user has access to the shared file via a group.  You can't
-  /// relinquish membership to a file shared via groups.
-  DBSHARINGRelinquishFileMembershipErrorGroupAccess,
+    /// The current user has access to the shared file via a group.  You can't
+    /// relinquish membership to a file shared via groups.
+    DBSHARINGRelinquishFileMembershipErrorGroupAccess,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGRelinquishFileMembershipErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGRelinquishFileMembershipErrorNoPermission,
 
-  /// (no description).
-  DBSHARINGRelinquishFileMembershipErrorOther,
+    /// (no description).
+    DBSHARINGRelinquishFileMembershipErrorOther,
 
 };
 

@@ -31,18 +31,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamFolderPermanentlyDeleteErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMTeamFolderPermanentlyDeleteError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag) {
-  /// (no description).
-  DBTEAMTeamFolderPermanentlyDeleteErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderPermanentlyDeleteErrorTag){
+    /// (no description).
+    DBTEAMTeamFolderPermanentlyDeleteErrorAccessError,
 
-  /// (no description).
-  DBTEAMTeamFolderPermanentlyDeleteErrorStatusError,
+    /// (no description).
+    DBTEAMTeamFolderPermanentlyDeleteErrorStatusError,
 
-  /// (no description).
-  DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError,
+    /// (no description).
+    DBTEAMTeamFolderPermanentlyDeleteErrorTeamSharedDropboxError,
 
-  /// (no description).
-  DBTEAMTeamFolderPermanentlyDeleteErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderPermanentlyDeleteErrorOther,
 
 };
 

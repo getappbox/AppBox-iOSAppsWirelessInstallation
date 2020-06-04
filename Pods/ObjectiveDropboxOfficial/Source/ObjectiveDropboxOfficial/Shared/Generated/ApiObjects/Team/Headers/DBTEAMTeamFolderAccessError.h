@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamFolderAccessErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamFolderAccessError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderAccessErrorTag) {
-  /// The team folder ID is invalid.
-  DBTEAMTeamFolderAccessErrorInvalidTeamFolderId,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderAccessErrorTag){
+    /// The team folder ID is invalid.
+    DBTEAMTeamFolderAccessErrorInvalidTeamFolderId,
 
-  /// The authenticated app does not have permission to manage that team
-  /// folder.
-  DBTEAMTeamFolderAccessErrorNoAccess,
+    /// The authenticated app does not have permission to manage that team
+    /// folder.
+    DBTEAMTeamFolderAccessErrorNoAccess,
 
-  /// (no description).
-  DBTEAMTeamFolderAccessErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderAccessErrorOther,
 
 };
 

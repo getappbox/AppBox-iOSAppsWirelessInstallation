@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamNamespacesListErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamNamespacesListError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamNamespacesListErrorTag) {
-  /// Argument passed in is invalid.
-  DBTEAMTeamNamespacesListErrorInvalidArg,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamNamespacesListErrorTag){
+    /// Argument passed in is invalid.
+    DBTEAMTeamNamespacesListErrorInvalidArg,
 
-  /// (no description).
-  DBTEAMTeamNamespacesListErrorOther,
+    /// (no description).
+    DBTEAMTeamNamespacesListErrorOther,
 
 };
 

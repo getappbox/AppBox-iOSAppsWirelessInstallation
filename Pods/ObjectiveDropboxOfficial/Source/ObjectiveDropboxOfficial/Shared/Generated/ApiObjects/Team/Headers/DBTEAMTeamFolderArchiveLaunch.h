@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamFolderArchiveLaunchTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamFolderArchiveLaunch` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderArchiveLaunchTag) {
-  /// This response indicates that the processing is asynchronous. The string
-  /// is an id that can be used to obtain the status of the asynchronous job.
-  DBTEAMTeamFolderArchiveLaunchAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderArchiveLaunchTag){
+    /// This response indicates that the processing is asynchronous. The string
+    /// is an id that can be used to obtain the status of the asynchronous job.
+    DBTEAMTeamFolderArchiveLaunchAsyncJobId,
 
-  /// (no description).
-  DBTEAMTeamFolderArchiveLaunchComplete,
+    /// (no description).
+    DBTEAMTeamFolderArchiveLaunchComplete,
 
 };
 

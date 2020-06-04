@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMPOLICIESRolloutMethodTag` enum type represents the possible tag
 /// states with which the `DBTEAMPOLICIESRolloutMethod` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESRolloutMethodTag) {
-  /// Unlink all.
-  DBTEAMPOLICIESRolloutMethodUnlinkAll,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESRolloutMethodTag){
+    /// Unlink all.
+    DBTEAMPOLICIESRolloutMethodUnlinkAll,
 
-  /// Unlink devices with the most inactivity.
-  DBTEAMPOLICIESRolloutMethodUnlinkMostInactive,
+    /// Unlink devices with the most inactivity.
+    DBTEAMPOLICIESRolloutMethodUnlinkMostInactive,
 
-  /// Add member to Exceptions.
-  DBTEAMPOLICIESRolloutMethodAddMemberToExceptions,
+    /// Add member to Exceptions.
+    DBTEAMPOLICIESRolloutMethodAddMemberToExceptions,
 
 };
 

@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESRelocationBatchJobStatusTag` enum type represents the possible
 /// tag states with which the `DBFILESRelocationBatchJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESRelocationBatchJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBFILESRelocationBatchJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBFILESRelocationBatchJobStatusInProgress,
 
-  /// The copy or move batch job has finished.
-  DBFILESRelocationBatchJobStatusComplete,
+    /// The copy or move batch job has finished.
+    DBFILESRelocationBatchJobStatusComplete,
 
-  /// The copy or move batch job has failed with exception.
-  DBFILESRelocationBatchJobStatusFailed,
+    /// The copy or move batch job has failed with exception.
+    DBFILESRelocationBatchJobStatusFailed,
 
 };
 

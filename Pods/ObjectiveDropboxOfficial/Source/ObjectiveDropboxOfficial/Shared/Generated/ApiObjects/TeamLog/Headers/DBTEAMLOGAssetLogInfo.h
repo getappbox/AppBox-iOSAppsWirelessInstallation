@@ -34,24 +34,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGAssetLogInfoTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGAssetLogInfo` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGAssetLogInfoTag) {
-  /// File's details.
-  DBTEAMLOGAssetLogInfoFile,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAssetLogInfoTag){
+    /// File's details.
+    DBTEAMLOGAssetLogInfoFile,
 
-  /// Folder's details.
-  DBTEAMLOGAssetLogInfoFolder,
+    /// Folder's details.
+    DBTEAMLOGAssetLogInfoFolder,
 
-  /// Paper document's details.
-  DBTEAMLOGAssetLogInfoPaperDocument,
+    /// Paper document's details.
+    DBTEAMLOGAssetLogInfoPaperDocument,
 
-  /// Paper folder's details.
-  DBTEAMLOGAssetLogInfoPaperFolder,
+    /// Paper folder's details.
+    DBTEAMLOGAssetLogInfoPaperFolder,
 
-  /// Showcase document's details.
-  DBTEAMLOGAssetLogInfoShowcaseDocument,
+    /// Showcase document's details.
+    DBTEAMLOGAssetLogInfoShowcaseDocument,
 
-  /// (no description).
-  DBTEAMLOGAssetLogInfoOther,
+    /// (no description).
+    DBTEAMLOGAssetLogInfoOther,
 
 };
 

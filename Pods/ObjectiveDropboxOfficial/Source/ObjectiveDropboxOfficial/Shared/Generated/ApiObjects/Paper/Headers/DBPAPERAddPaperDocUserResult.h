@@ -27,32 +27,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERAddPaperDocUserResultTag` enum type represents the possible tag
 /// states with which the `DBPAPERAddPaperDocUserResult` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag) {
-  /// User was successfully added to the Paper doc.
-  DBPAPERAddPaperDocUserResultSuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERAddPaperDocUserResultTag){
+    /// User was successfully added to the Paper doc.
+    DBPAPERAddPaperDocUserResultSuccess,
 
-  /// Something unexpected happened when trying to add the user to the Paper
-  /// doc.
-  DBPAPERAddPaperDocUserResultUnknownError,
+    /// Something unexpected happened when trying to add the user to the Paper
+    /// doc.
+    DBPAPERAddPaperDocUserResultUnknownError,
 
-  /// The Paper doc can be shared only with team members.
-  DBPAPERAddPaperDocUserResultSharingOutsideTeamDisabled,
+    /// The Paper doc can be shared only with team members.
+    DBPAPERAddPaperDocUserResultSharingOutsideTeamDisabled,
 
-  /// The daily limit of how many users can be added to the Paper doc was
-  /// reached.
-  DBPAPERAddPaperDocUserResultDailyLimitReached,
+    /// The daily limit of how many users can be added to the Paper doc was
+    /// reached.
+    DBPAPERAddPaperDocUserResultDailyLimitReached,
 
-  /// Owner's permissions cannot be changed.
-  DBPAPERAddPaperDocUserResultUserIsOwner,
+    /// Owner's permissions cannot be changed.
+    DBPAPERAddPaperDocUserResultUserIsOwner,
 
-  /// User data could not be retrieved. Clients should retry.
-  DBPAPERAddPaperDocUserResultFailedUserDataRetrieval,
+    /// User data could not be retrieved. Clients should retry.
+    DBPAPERAddPaperDocUserResultFailedUserDataRetrieval,
 
-  /// This user already has the correct permission to the Paper doc.
-  DBPAPERAddPaperDocUserResultPermissionAlreadyGranted,
+    /// This user already has the correct permission to the Paper doc.
+    DBPAPERAddPaperDocUserResultPermissionAlreadyGranted,
 
-  /// (no description).
-  DBPAPERAddPaperDocUserResultOther,
+    /// (no description).
+    DBPAPERAddPaperDocUserResultOther,
 
 };
 

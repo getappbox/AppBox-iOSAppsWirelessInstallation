@@ -33,18 +33,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGJobErrorTag` enum type represents the possible tag states with
 /// which the `DBSHARINGJobError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGJobErrorTag) {
-  /// Error occurred while performing `unshareFolder` action.
-  DBSHARINGJobErrorUnshareFolderError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGJobErrorTag){
+    /// Error occurred while performing `unshareFolder` action.
+    DBSHARINGJobErrorUnshareFolderError,
 
-  /// Error occurred while performing `removeFolderMember` action.
-  DBSHARINGJobErrorRemoveFolderMemberError,
+    /// Error occurred while performing `removeFolderMember` action.
+    DBSHARINGJobErrorRemoveFolderMemberError,
 
-  /// Error occurred while performing `relinquishFolderMembership` action.
-  DBSHARINGJobErrorRelinquishFolderMembershipError,
+    /// Error occurred while performing `relinquishFolderMembership` action.
+    DBSHARINGJobErrorRelinquishFolderMembershipError,
 
-  /// (no description).
-  DBSHARINGJobErrorOther,
+    /// (no description).
+    DBSHARINGJobErrorOther,
 
 };
 

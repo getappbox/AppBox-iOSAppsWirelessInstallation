@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGLinkPasswordTag` enum type represents the possible tag states
 /// with which the `DBSHARINGLinkPassword` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGLinkPasswordTag) {
-  /// Remove the currently set password for the link.
-  DBSHARINGLinkPasswordRemovePassword,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkPasswordTag){
+    /// Remove the currently set password for the link.
+    DBSHARINGLinkPasswordRemovePassword,
 
-  /// Set a new password or change an existing password.
-  DBSHARINGLinkPasswordSetPassword,
+    /// Set a new password or change an existing password.
+    DBSHARINGLinkPasswordSetPassword,
 
-  /// (no description).
-  DBSHARINGLinkPasswordOther,
+    /// (no description).
+    DBSHARINGLinkPasswordOther,
 
 };
 

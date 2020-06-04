@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGSpaceLimitsStatusTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGSpaceLimitsStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag) {
-  /// (no description).
-  DBTEAMLOGSpaceLimitsStatusWithinQuota,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag){
+    /// (no description).
+    DBTEAMLOGSpaceLimitsStatusWithinQuota,
 
-  /// (no description).
-  DBTEAMLOGSpaceLimitsStatusNearQuota,
+    /// (no description).
+    DBTEAMLOGSpaceLimitsStatusNearQuota,
 
-  /// (no description).
-  DBTEAMLOGSpaceLimitsStatusOverQuota,
+    /// (no description).
+    DBTEAMLOGSpaceLimitsStatusOverQuota,
 
-  /// (no description).
-  DBTEAMLOGSpaceLimitsStatusOther,
+    /// (no description).
+    DBTEAMLOGSpaceLimitsStatusOther,
 
 };
 

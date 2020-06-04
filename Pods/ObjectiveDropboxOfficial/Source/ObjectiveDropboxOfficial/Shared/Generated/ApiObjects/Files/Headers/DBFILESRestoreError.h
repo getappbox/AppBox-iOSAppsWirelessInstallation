@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESRestoreErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESRestoreError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESRestoreErrorTag) {
-  /// An error occurs when downloading metadata for the file.
-  DBFILESRestoreErrorPathLookup,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRestoreErrorTag){
+    /// An error occurs when downloading metadata for the file.
+    DBFILESRestoreErrorPathLookup,
 
-  /// An error occurs when trying to restore the file to that path.
-  DBFILESRestoreErrorPathWrite,
+    /// An error occurs when trying to restore the file to that path.
+    DBFILESRestoreErrorPathWrite,
 
-  /// The revision is invalid. It may not exist.
-  DBFILESRestoreErrorInvalidRevision,
+    /// The revision is invalid. It may not exist.
+    DBFILESRestoreErrorInvalidRevision,
 
-  /// (no description).
-  DBFILESRestoreErrorOther,
+    /// (no description).
+    DBFILESRestoreErrorOther,
 
 };
 

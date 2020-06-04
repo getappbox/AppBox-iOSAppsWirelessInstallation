@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESCreateFolderBatchResultEntryTag` enum type represents the
 /// possible tag states with which the `DBFILESCreateFolderBatchResultEntry`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchResultEntryTag) {
-  /// (no description).
-  DBFILESCreateFolderBatchResultEntrySuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESCreateFolderBatchResultEntryTag){
+    /// (no description).
+    DBFILESCreateFolderBatchResultEntrySuccess,
 
-  /// (no description).
-  DBFILESCreateFolderBatchResultEntryFailure,
+    /// (no description).
+    DBFILESCreateFolderBatchResultEntryFailure,
 
 };
 
