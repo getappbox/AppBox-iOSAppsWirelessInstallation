@@ -22,7 +22,7 @@
 + (NSURL *)getFileDirectoryForFilePath:(NSURL *)filePath{
     NSArray *pathComponents = [filePath.relativePath pathComponents];
     NSString *fileDirectory = [NSString pathWithComponents:[pathComponents subarrayWithRange:NSMakeRange(0, pathComponents.count - 1)]];
-    fileDirectory = [fileDirectory stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    fileDirectory = [fileDirectory stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
     return [NSURL URLWithString:fileDirectory];
 }
 
