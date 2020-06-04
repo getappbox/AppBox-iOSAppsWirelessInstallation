@@ -29,30 +29,30 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGUpdateFolderPolicyErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGUpdateFolderPolicyError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderPolicyErrorTag) {
-  /// (no description).
-  DBSHARINGUpdateFolderPolicyErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGUpdateFolderPolicyErrorTag){
+    /// (no description).
+    DBSHARINGUpdateFolderPolicyErrorAccessError,
 
-  /// `memberPolicy` in `DBSHARINGUpdateFolderPolicyArg` was set even though
-  /// user is not on a team.
-  DBSHARINGUpdateFolderPolicyErrorNotOnTeam,
+    /// `memberPolicy` in `DBSHARINGUpdateFolderPolicyArg` was set even though
+    /// user is not on a team.
+    DBSHARINGUpdateFolderPolicyErrorNotOnTeam,
 
-  /// Team policy is more restrictive than `memberPolicy` in
-  /// `DBSHARINGShareFolderArg`.
-  DBSHARINGUpdateFolderPolicyErrorTeamPolicyDisallowsMemberPolicy,
+    /// Team policy is more restrictive than `memberPolicy` in
+    /// `DBSHARINGShareFolderArg`.
+    DBSHARINGUpdateFolderPolicyErrorTeamPolicyDisallowsMemberPolicy,
 
-  /// The current account is not allowed to select the specified
-  /// `sharedLinkPolicy` in `DBSHARINGShareFolderArg`.
-  DBSHARINGUpdateFolderPolicyErrorDisallowedSharedLinkPolicy,
+    /// The current account is not allowed to select the specified
+    /// `sharedLinkPolicy` in `DBSHARINGShareFolderArg`.
+    DBSHARINGUpdateFolderPolicyErrorDisallowedSharedLinkPolicy,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGUpdateFolderPolicyErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGUpdateFolderPolicyErrorNoPermission,
 
-  /// This action cannot be performed on a team shared folder.
-  DBSHARINGUpdateFolderPolicyErrorTeamFolder,
+    /// This action cannot be performed on a team shared folder.
+    DBSHARINGUpdateFolderPolicyErrorTeamFolder,
 
-  /// (no description).
-  DBSHARINGUpdateFolderPolicyErrorOther,
+    /// (no description).
+    DBSHARINGUpdateFolderPolicyErrorOther,
 
 };
 

@@ -28,29 +28,29 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESModifyTemplateErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEPROPERTIESModifyTemplateError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESModifyTemplateErrorTag) {
-  /// Template does not exist for the given identifier.
-  DBFILEPROPERTIESModifyTemplateErrorTemplateNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESModifyTemplateErrorTag){
+    /// Template does not exist for the given identifier.
+    DBFILEPROPERTIESModifyTemplateErrorTemplateNotFound,
 
-  /// You do not have permission to modify this template.
-  DBFILEPROPERTIESModifyTemplateErrorRestrictedContent,
+    /// You do not have permission to modify this template.
+    DBFILEPROPERTIESModifyTemplateErrorRestrictedContent,
 
-  /// (no description).
-  DBFILEPROPERTIESModifyTemplateErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESModifyTemplateErrorOther,
 
-  /// A property field key with that name already exists in the template.
-  DBFILEPROPERTIESModifyTemplateErrorConflictingPropertyNames,
+    /// A property field key with that name already exists in the template.
+    DBFILEPROPERTIESModifyTemplateErrorConflictingPropertyNames,
 
-  /// There are too many properties in the changed template. The maximum
-  /// number of properties per template is 32.
-  DBFILEPROPERTIESModifyTemplateErrorTooManyProperties,
+    /// There are too many properties in the changed template. The maximum
+    /// number of properties per template is 32.
+    DBFILEPROPERTIESModifyTemplateErrorTooManyProperties,
 
-  /// There are too many templates for the team.
-  DBFILEPROPERTIESModifyTemplateErrorTooManyTemplates,
+    /// There are too many templates for the team.
+    DBFILEPROPERTIESModifyTemplateErrorTooManyTemplates,
 
-  /// The template name, description or one or more of the property field keys
-  /// is too large.
-  DBFILEPROPERTIESModifyTemplateErrorTemplateAttributeTooLarge,
+    /// The template name, description or one or more of the property field keys
+    /// is too large.
+    DBFILEPROPERTIESModifyTemplateErrorTemplateAttributeTooLarge,
 
 };
 

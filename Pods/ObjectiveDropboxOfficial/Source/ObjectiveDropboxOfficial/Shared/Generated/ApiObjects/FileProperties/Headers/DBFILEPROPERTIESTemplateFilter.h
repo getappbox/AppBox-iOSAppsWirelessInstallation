@@ -27,17 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEPROPERTIESTemplateFilterTag` enum type represents the possible
 /// tag states with which the `DBFILEPROPERTIESTemplateFilter` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag) {
-  /// Only templates with an ID in the supplied list will be returned (a
-  /// subset of templates will be returned).
-  DBFILEPROPERTIESTemplateFilterFilterSome,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESTemplateFilterTag){
+    /// Only templates with an ID in the supplied list will be returned (a
+    /// subset of templates will be returned).
+    DBFILEPROPERTIESTemplateFilterFilterSome,
 
-  /// (no description).
-  DBFILEPROPERTIESTemplateFilterOther,
+    /// (no description).
+    DBFILEPROPERTIESTemplateFilterOther,
 
-  /// No templates will be filtered from the result (all templates will be
-  /// returned).
-  DBFILEPROPERTIESTemplateFilterFilterNone,
+    /// No templates will be filtered from the result (all templates will be
+    /// returned).
+    DBFILEPROPERTIESTemplateFilterFilterNone,
 
 };
 

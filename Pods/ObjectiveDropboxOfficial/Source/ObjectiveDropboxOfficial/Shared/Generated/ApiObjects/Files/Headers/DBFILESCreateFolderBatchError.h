@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESCreateFolderBatchErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESCreateFolderBatchError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchErrorTag) {
-  /// The operation would involve too many files or folders.
-  DBFILESCreateFolderBatchErrorTooManyFiles,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESCreateFolderBatchErrorTag){
+    /// The operation would involve too many files or folders.
+    DBFILESCreateFolderBatchErrorTooManyFiles,
 
-  /// (no description).
-  DBFILESCreateFolderBatchErrorOther,
+    /// (no description).
+    DBFILESCreateFolderBatchErrorOther,
 
 };
 

@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMPOLICIESOfficeAddInPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMPOLICIESOfficeAddInPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESOfficeAddInPolicyTag) {
-  /// Office Add-In is disabled.
-  DBTEAMPOLICIESOfficeAddInPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESOfficeAddInPolicyTag){
+    /// Office Add-In is disabled.
+    DBTEAMPOLICIESOfficeAddInPolicyDisabled,
 
-  /// Office Add-In is enabled.
-  DBTEAMPOLICIESOfficeAddInPolicyEnabled,
+    /// Office Add-In is enabled.
+    DBTEAMPOLICIESOfficeAddInPolicyEnabled,
 
-  /// (no description).
-  DBTEAMPOLICIESOfficeAddInPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESOfficeAddInPolicyOther,
 
 };
 

@@ -37,21 +37,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESWriteModeTag` enum type represents the possible tag states with
 /// which the `DBFILESWriteMode` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESWriteModeTag) {
-  /// Do not overwrite an existing file if there is a conflict. The autorename
-  /// strategy is to append a number to the file name. For example,
-  /// "document.txt" might become "document (2).txt".
-  DBFILESWriteModeAdd,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteModeTag){
+    /// Do not overwrite an existing file if there is a conflict. The autorename
+    /// strategy is to append a number to the file name. For example,
+    /// "document.txt" might become "document (2).txt".
+    DBFILESWriteModeAdd,
 
-  /// Always overwrite the existing file. The autorename strategy is the same
-  /// as it is for add.
-  DBFILESWriteModeOverwrite,
+    /// Always overwrite the existing file. The autorename strategy is the same
+    /// as it is for add.
+    DBFILESWriteModeOverwrite,
 
-  /// Overwrite if the given "rev" matches the existing file's "rev". The
-  /// autorename strategy is to append the string "conflicted copy" to the
-  /// file name. For example, "document.txt" might become "document
-  /// (conflicted copy).txt" or "document (Panda's conflicted copy).txt".
-  DBFILESWriteModeUpdate,
+    /// Overwrite if the given "rev" matches the existing file's "rev". The
+    /// autorename strategy is to append the string "conflicted copy" to the
+    /// file name. For example, "document.txt" might become "document
+    /// (conflicted copy).txt" or "document (Panda's conflicted copy).txt".
+    DBFILESWriteModeUpdate,
 
 };
 

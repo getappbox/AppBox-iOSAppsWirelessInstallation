@@ -27,45 +27,45 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersSetProfileErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersSetProfileError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersSetProfileErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersSetProfileErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersSetProfileErrorUserNotFound,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersSetProfileErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersSetProfileErrorUserNotInTeam,
 
-  /// It is unsafe to use both external_id and new_external_id.
-  DBTEAMMembersSetProfileErrorExternalIdAndNewExternalIdUnsafe,
+    /// It is unsafe to use both external_id and new_external_id.
+    DBTEAMMembersSetProfileErrorExternalIdAndNewExternalIdUnsafe,
 
-  /// None of new_email, new_given_name, new_surname, or new_external_id are
-  /// specified.
-  DBTEAMMembersSetProfileErrorNoNewDataSpecified,
+    /// None of new_email, new_given_name, new_surname, or new_external_id are
+    /// specified.
+    DBTEAMMembersSetProfileErrorNoNewDataSpecified,
 
-  /// Email is already reserved for another user.
-  DBTEAMMembersSetProfileErrorEmailReservedForOtherUser,
+    /// Email is already reserved for another user.
+    DBTEAMMembersSetProfileErrorEmailReservedForOtherUser,
 
-  /// The external ID is already in use by another team member.
-  DBTEAMMembersSetProfileErrorExternalIdUsedByOtherUser,
+    /// The external ID is already in use by another team member.
+    DBTEAMMembersSetProfileErrorExternalIdUsedByOtherUser,
 
-  /// Modifying deleted users is not allowed.
-  DBTEAMMembersSetProfileErrorSetProfileDisallowed,
+    /// Modifying deleted users is not allowed.
+    DBTEAMMembersSetProfileErrorSetProfileDisallowed,
 
-  /// Parameter new_email cannot be empty.
-  DBTEAMMembersSetProfileErrorParamCannotBeEmpty,
+    /// Parameter new_email cannot be empty.
+    DBTEAMMembersSetProfileErrorParamCannotBeEmpty,
 
-  /// Persistent ID is only available to teams with persistent ID SAML
-  /// configuration. Please contact Dropbox for more information.
-  DBTEAMMembersSetProfileErrorPersistentIdDisabled,
+    /// Persistent ID is only available to teams with persistent ID SAML
+    /// configuration. Please contact Dropbox for more information.
+    DBTEAMMembersSetProfileErrorPersistentIdDisabled,
 
-  /// The persistent ID is already in use by another team member.
-  DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser,
+    /// The persistent ID is already in use by another team member.
+    DBTEAMMembersSetProfileErrorPersistentIdUsedByOtherUser,
 
-  /// Directory Restrictions option is not available.
-  DBTEAMMembersSetProfileErrorDirectoryRestrictedOff,
+    /// Directory Restrictions option is not available.
+    DBTEAMMembersSetProfileErrorDirectoryRestrictedOff,
 
-  /// (no description).
-  DBTEAMMembersSetProfileErrorOther,
+    /// (no description).
+    DBTEAMMembersSetProfileErrorOther,
 
 };
 

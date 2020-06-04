@@ -29,55 +29,55 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESRelocationBatchErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESRelocationBatchError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorTag) {
-  /// (no description).
-  DBFILESRelocationBatchErrorFromLookup,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchErrorTag){
+    /// (no description).
+    DBFILESRelocationBatchErrorFromLookup,
 
-  /// (no description).
-  DBFILESRelocationBatchErrorFromWrite,
+    /// (no description).
+    DBFILESRelocationBatchErrorFromWrite,
 
-  /// (no description).
-  DBFILESRelocationBatchErrorTo,
+    /// (no description).
+    DBFILESRelocationBatchErrorTo,
 
-  /// Shared folders can't be copied.
-  DBFILESRelocationBatchErrorCantCopySharedFolder,
+    /// Shared folders can't be copied.
+    DBFILESRelocationBatchErrorCantCopySharedFolder,
 
-  /// Your move operation would result in nested shared folders.  This is not
-  /// allowed.
-  DBFILESRelocationBatchErrorCantNestSharedFolder,
+    /// Your move operation would result in nested shared folders.  This is not
+    /// allowed.
+    DBFILESRelocationBatchErrorCantNestSharedFolder,
 
-  /// You cannot move a folder into itself.
-  DBFILESRelocationBatchErrorCantMoveFolderIntoItself,
+    /// You cannot move a folder into itself.
+    DBFILESRelocationBatchErrorCantMoveFolderIntoItself,
 
-  /// The operation would involve more than 10,000 files and folders.
-  DBFILESRelocationBatchErrorTooManyFiles,
+    /// The operation would involve more than 10,000 files and folders.
+    DBFILESRelocationBatchErrorTooManyFiles,
 
-  /// There are duplicated/nested paths among `fromPath` in
-  /// `DBFILESRelocationArg` and `toPath` in `DBFILESRelocationArg`.
-  DBFILESRelocationBatchErrorDuplicatedOrNestedPaths,
+    /// There are duplicated/nested paths among `fromPath` in
+    /// `DBFILESRelocationArg` and `toPath` in `DBFILESRelocationArg`.
+    DBFILESRelocationBatchErrorDuplicatedOrNestedPaths,
 
-  /// Your move operation would result in an ownership transfer. You may
-  /// reissue the request with the field `allowOwnershipTransfer` in
-  /// `DBFILESRelocationArg` to true.
-  DBFILESRelocationBatchErrorCantTransferOwnership,
+    /// Your move operation would result in an ownership transfer. You may
+    /// reissue the request with the field `allowOwnershipTransfer` in
+    /// `DBFILESRelocationArg` to true.
+    DBFILESRelocationBatchErrorCantTransferOwnership,
 
-  /// The current user does not have enough space to move or copy the files.
-  DBFILESRelocationBatchErrorInsufficientQuota,
+    /// The current user does not have enough space to move or copy the files.
+    DBFILESRelocationBatchErrorInsufficientQuota,
 
-  /// Something went wrong with the job on Dropbox's end. You'll need to
-  /// verify that the action you were taking succeeded, and if not, try again.
-  /// This should happen very rarely.
-  DBFILESRelocationBatchErrorInternalError,
+    /// Something went wrong with the job on Dropbox's end. You'll need to
+    /// verify that the action you were taking succeeded, and if not, try again.
+    /// This should happen very rarely.
+    DBFILESRelocationBatchErrorInternalError,
 
-  /// Can't move the shared folder to the given destination.
-  DBFILESRelocationBatchErrorCantMoveSharedFolder,
+    /// Can't move the shared folder to the given destination.
+    DBFILESRelocationBatchErrorCantMoveSharedFolder,
 
-  /// (no description).
-  DBFILESRelocationBatchErrorOther,
+    /// (no description).
+    DBFILESRelocationBatchErrorOther,
 
-  /// There are too many write operations in user's Dropbox. Please retry this
-  /// request.
-  DBFILESRelocationBatchErrorTooManyWriteOperations,
+    /// There are too many write operations in user's Dropbox. Please retry this
+    /// request.
+    DBFILESRelocationBatchErrorTooManyWriteOperations,
 
 };
 

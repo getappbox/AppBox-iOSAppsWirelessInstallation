@@ -29,21 +29,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESRelocationBatchErrorEntryTag` enum type represents the possible
 /// tag states with which the `DBFILESRelocationBatchErrorEntry` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBFILESRelocationBatchErrorEntryTag) {
-  /// User errors that retry won't help.
-  DBFILESRelocationBatchErrorEntryRelocationError,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchErrorEntryTag){
+    /// User errors that retry won't help.
+    DBFILESRelocationBatchErrorEntryRelocationError,
 
-  /// Something went wrong with the job on Dropbox's end. You'll need to
-  /// verify that the action you were taking succeeded, and if not, try again.
-  /// This should happen very rarely.
-  DBFILESRelocationBatchErrorEntryInternalError,
+    /// Something went wrong with the job on Dropbox's end. You'll need to
+    /// verify that the action you were taking succeeded, and if not, try again.
+    /// This should happen very rarely.
+    DBFILESRelocationBatchErrorEntryInternalError,
 
-  /// There are too many write operations in user's Dropbox. Please retry this
-  /// request.
-  DBFILESRelocationBatchErrorEntryTooManyWriteOperations,
+    /// There are too many write operations in user's Dropbox. Please retry this
+    /// request.
+    DBFILESRelocationBatchErrorEntryTooManyWriteOperations,
 
-  /// (no description).
-  DBFILESRelocationBatchErrorEntryOther,
+    /// (no description).
+    DBFILESRelocationBatchErrorEntryOther,
 
 };
 

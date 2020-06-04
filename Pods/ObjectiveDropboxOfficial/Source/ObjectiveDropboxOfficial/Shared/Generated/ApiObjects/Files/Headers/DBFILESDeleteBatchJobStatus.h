@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESDeleteBatchJobStatusTag` enum type represents the possible tag
 /// states with which the `DBFILESDeleteBatchJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBFILESDeleteBatchJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESDeleteBatchJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBFILESDeleteBatchJobStatusInProgress,
 
-  /// The batch delete has finished.
-  DBFILESDeleteBatchJobStatusComplete,
+    /// The batch delete has finished.
+    DBFILESDeleteBatchJobStatusComplete,
 
-  /// The batch delete has failed.
-  DBFILESDeleteBatchJobStatusFailed,
+    /// The batch delete has failed.
+    DBFILESDeleteBatchJobStatusFailed,
 
-  /// (no description).
-  DBFILESDeleteBatchJobStatusOther,
+    /// (no description).
+    DBFILESDeleteBatchJobStatusOther,
 
 };
 

@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGSharedFolderMembersInheritancePolicyTag` enum type represents
 /// the possible tag states with which the
 /// `DBTEAMLOGSharedFolderMembersInheritancePolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyTag) {
-  /// (no description).
-  DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyTag){
+    /// (no description).
+    DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers,
 
-  /// (no description).
-  DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers,
+    /// (no description).
+    DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers,
 
-  /// (no description).
-  DBTEAMLOGSharedFolderMembersInheritancePolicyOther,
+    /// (no description).
+    DBTEAMLOGSharedFolderMembersInheritancePolicyOther,
 
 };
 

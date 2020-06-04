@@ -31,16 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESCreateFolderBatchLaunchTag` enum type represents the possible
 /// tag states with which the `DBFILESCreateFolderBatchLaunch` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESCreateFolderBatchLaunchTag) {
-  /// This response indicates that the processing is asynchronous. The string
-  /// is an id that can be used to obtain the status of the asynchronous job.
-  DBFILESCreateFolderBatchLaunchAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESCreateFolderBatchLaunchTag){
+    /// This response indicates that the processing is asynchronous. The string
+    /// is an id that can be used to obtain the status of the asynchronous job.
+    DBFILESCreateFolderBatchLaunchAsyncJobId,
 
-  /// (no description).
-  DBFILESCreateFolderBatchLaunchComplete,
+    /// (no description).
+    DBFILESCreateFolderBatchLaunchComplete,
 
-  /// (no description).
-  DBFILESCreateFolderBatchLaunchOther,
+    /// (no description).
+    DBFILESCreateFolderBatchLaunchOther,
 
 };
 

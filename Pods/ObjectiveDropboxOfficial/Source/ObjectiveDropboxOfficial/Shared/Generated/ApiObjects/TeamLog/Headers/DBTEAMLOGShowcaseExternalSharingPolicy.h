@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGShowcaseExternalSharingPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGShowcaseExternalSharingPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGShowcaseExternalSharingPolicyTag) {
-  /// (no description).
-  DBTEAMLOGShowcaseExternalSharingPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGShowcaseExternalSharingPolicyTag){
+    /// (no description).
+    DBTEAMLOGShowcaseExternalSharingPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGShowcaseExternalSharingPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGShowcaseExternalSharingPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGShowcaseExternalSharingPolicyOther,
+    /// (no description).
+    DBTEAMLOGShowcaseExternalSharingPolicyOther,
 
 };
 

@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 @interface DBUSERSRouteObjects : NSObject
 
+/// Accessor method for the featuresGetValues route object.
++ (DBRoute *)DBUSERSFeaturesGetValues;
+
 /// Accessor method for the getAccount route object.
 + (DBRoute *)DBUSERSGetAccount;
 

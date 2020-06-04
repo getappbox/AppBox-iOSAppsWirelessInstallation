@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERUserOnPaperDocFilterTag` enum type represents the possible tag
 /// states with which the `DBPAPERUserOnPaperDocFilter` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERUserOnPaperDocFilterTag) {
-  /// all users who have visited the Paper doc.
-  DBPAPERUserOnPaperDocFilterVisited,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERUserOnPaperDocFilterTag){
+    /// all users who have visited the Paper doc.
+    DBPAPERUserOnPaperDocFilterVisited,
 
-  /// All uses who are shared on the Paper doc. This includes all users who
-  /// have visited the Paper doc as well as those who have not.
-  DBPAPERUserOnPaperDocFilterShared,
+    /// All uses who are shared on the Paper doc. This includes all users who
+    /// have visited the Paper doc as well as those who have not.
+    DBPAPERUserOnPaperDocFilterShared,
 
-  /// (no description).
-  DBPAPERUserOnPaperDocFilterOther,
+    /// (no description).
+    DBPAPERUserOnPaperDocFilterOther,
 
 };
 

@@ -30,20 +30,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGGetTeamEventsContinueErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGGetTeamEventsContinueError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGGetTeamEventsContinueErrorTag) {
-  /// Bad cursor.
-  DBTEAMLOGGetTeamEventsContinueErrorBadCursor,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGGetTeamEventsContinueErrorTag){
+    /// Bad cursor.
+    DBTEAMLOGGetTeamEventsContinueErrorBadCursor,
 
-  /// Cursors are intended to be used quickly. Individual cursor values are
-  /// normally valid for days, but in rare cases may be reset sooner. Cursor
-  /// reset errors should be handled by fetching a new cursor from
-  /// `getEvents`. The associated value is the approximate timestamp of the
-  /// most recent event returned by the cursor. This should be used as a
-  /// resumption point when calling `getEvents` to obtain a new cursor.
-  DBTEAMLOGGetTeamEventsContinueErrorReset,
+    /// Cursors are intended to be used quickly. Individual cursor values are
+    /// normally valid for days, but in rare cases may be reset sooner. Cursor
+    /// reset errors should be handled by fetching a new cursor from
+    /// `getEvents`. The associated value is the approximate timestamp of the
+    /// most recent event returned by the cursor. This should be used as a
+    /// resumption point when calling `getEvents` to obtain a new cursor.
+    DBTEAMLOGGetTeamEventsContinueErrorReset,
 
-  /// (no description).
-  DBTEAMLOGGetTeamEventsContinueErrorOther,
+    /// (no description).
+    DBTEAMLOGGetTeamEventsContinueErrorOther,
 
 };
 

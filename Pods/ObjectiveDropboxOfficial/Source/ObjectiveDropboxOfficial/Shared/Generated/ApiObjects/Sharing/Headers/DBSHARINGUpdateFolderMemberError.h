@@ -31,27 +31,27 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGUpdateFolderMemberErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGUpdateFolderMemberError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag) {
-  /// (no description).
-  DBSHARINGUpdateFolderMemberErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGUpdateFolderMemberErrorTag){
+    /// (no description).
+    DBSHARINGUpdateFolderMemberErrorAccessError,
 
-  /// (no description).
-  DBSHARINGUpdateFolderMemberErrorMemberError,
+    /// (no description).
+    DBSHARINGUpdateFolderMemberErrorMemberError,
 
-  /// If updating the access type required the member to be added to the
-  /// shared folder and there was an error when adding the member.
-  DBSHARINGUpdateFolderMemberErrorNoExplicitAccess,
+    /// If updating the access type required the member to be added to the
+    /// shared folder and there was an error when adding the member.
+    DBSHARINGUpdateFolderMemberErrorNoExplicitAccess,
 
-  /// The current user's account doesn't support this action. An example of
-  /// this is when downgrading a member from editor to viewer. This action can
-  /// only be performed by users that have upgraded to a Pro or Business plan.
-  DBSHARINGUpdateFolderMemberErrorInsufficientPlan,
+    /// The current user's account doesn't support this action. An example of
+    /// this is when downgrading a member from editor to viewer. This action can
+    /// only be performed by users that have upgraded to a Pro or Business plan.
+    DBSHARINGUpdateFolderMemberErrorInsufficientPlan,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGUpdateFolderMemberErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGUpdateFolderMemberErrorNoPermission,
 
-  /// (no description).
-  DBSHARINGUpdateFolderMemberErrorOther,
+    /// (no description).
+    DBSHARINGUpdateFolderMemberErrorOther,
 
 };
 

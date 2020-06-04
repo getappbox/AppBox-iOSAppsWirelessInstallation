@@ -8,6 +8,8 @@
 
 #import "DBTasks.h"
 
+@class DBACCOUNTPhotoSourceArg;
+@class DBACCOUNTSetProfilePhotoError;
 @class DBASYNCLaunchEmptyResult;
 @class DBASYNCPollEmptyResult;
 @class DBASYNCPollError;
@@ -26,6 +28,8 @@
 @class DBFILESSyncSettingsError;
 @class DBNilObject;
 @class DBTEAMActiveWebSession;
+@class DBTEAMAddSecondaryEmailsError;
+@class DBTEAMAddSecondaryEmailsResult;
 @class DBTEAMAdminTier;
 @class DBTEAMApiApp;
 @class DBTEAMCOMMONGroupManagementType;
@@ -33,6 +37,7 @@
 @class DBTEAMCustomQuotaError;
 @class DBTEAMCustomQuotaResult;
 @class DBTEAMDateRangeError;
+@class DBTEAMDeleteSecondaryEmailsResult;
 @class DBTEAMDesktopClientSession;
 @class DBTEAMDeviceSessionArg;
 @class DBTEAMDevicesActive;
@@ -70,6 +75,17 @@
 @class DBTEAMGroupsMembersListResult;
 @class DBTEAMGroupsPollError;
 @class DBTEAMGroupsSelector;
+@class DBTEAMLegalHoldHeldRevisionMetadata;
+@class DBTEAMLegalHoldPolicy;
+@class DBTEAMLegalHoldStatus;
+@class DBTEAMLegalHoldsGetPolicyError;
+@class DBTEAMLegalHoldsListHeldRevisionResult;
+@class DBTEAMLegalHoldsListHeldRevisionsError;
+@class DBTEAMLegalHoldsListPoliciesError;
+@class DBTEAMLegalHoldsListPoliciesResult;
+@class DBTEAMLegalHoldsPolicyCreateError;
+@class DBTEAMLegalHoldsPolicyReleaseError;
+@class DBTEAMLegalHoldsPolicyUpdateError;
 @class DBTEAMListMemberAppsError;
 @class DBTEAMListMemberAppsResult;
 @class DBTEAMListMemberDevicesError;
@@ -90,8 +106,10 @@
 @class DBTEAMMemberProfile;
 @class DBTEAMMembersAddJobStatus;
 @class DBTEAMMembersAddLaunch;
+@class DBTEAMMembersDeleteProfilePhotoError;
 @class DBTEAMMembersGetInfoError;
 @class DBTEAMMembersGetInfoItem;
+@class DBTEAMMembersInfo;
 @class DBTEAMMembersListContinueError;
 @class DBTEAMMembersListError;
 @class DBTEAMMembersListResult;
@@ -101,6 +119,7 @@
 @class DBTEAMMembersSetPermissionsError;
 @class DBTEAMMembersSetPermissionsResult;
 @class DBTEAMMembersSetProfileError;
+@class DBTEAMMembersSetProfilePhotoError;
 @class DBTEAMMembersSuspendError;
 @class DBTEAMMembersTransferFormerMembersFilesError;
 @class DBTEAMMembersUnsuspendError;
@@ -108,6 +127,7 @@
 @class DBTEAMNamespaceMetadata;
 @class DBTEAMPOLICIESTeamMemberPolicies;
 @class DBTEAMRemoveCustomQuotaResult;
+@class DBTEAMResendVerificationEmailResult;
 @class DBTEAMRevokeDesktopClientArg;
 @class DBTEAMRevokeDeviceSessionArg;
 @class DBTEAMRevokeDeviceSessionBatchError;
@@ -146,8 +166,12 @@
 @class DBTEAMTeamNamespacesListResult;
 @class DBTEAMTokenGetAuthenticatedAdminError;
 @class DBTEAMTokenGetAuthenticatedAdminResult;
+@class DBTEAMUserAddResult;
 @class DBTEAMUserCustomQuotaArg;
 @class DBTEAMUserCustomQuotaResult;
+@class DBTEAMUserDeleteResult;
+@class DBTEAMUserResendResult;
+@class DBTEAMUserSecondaryEmailsArg;
 @class DBTEAMUserSelectorArg;
 
 @protocol DBTransportClient;
@@ -311,6 +335,7 @@ devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> *)revok
 /// Creates a new, empty group, with a requested name. Permission : Team member management.
 ///
 /// @param groupName Group name.
+/// @param addCreatorAsOwner Automatically add the creator of the group.
 /// @param groupExternalId The creator of a team can associate an arbitrary external ID to the group.
 /// @param groupManagementType Whether the team can be managed by selected users, or only by team admins.
 ///
@@ -319,6 +344,7 @@ devicesRevokeDeviceSessionBatch:(NSArray<DBTEAMRevokeDeviceSessionArg *> *)revok
 ///
 - (DBRpcTask<DBTEAMGroupFullInfo *, DBTEAMGroupCreateError *> *)
        groupsCreate:(NSString *)groupName
+  addCreatorAsOwner:(nullable NSNumber *)addCreatorAsOwner
     groupExternalId:(nullable NSString *)groupExternalId
 groupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)groupManagementType;
 
@@ -546,6 +572,143 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
           dNewGroupName:(nullable NSString *)dNewGroupName
     dNewGroupExternalId:(nullable NSString *)dNewGroupExternalId
 dNewGroupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)dNewGroupManagementType;
+
+///
+/// Creates new legal hold policy. Permission : Team member file access.
+///
+/// @param name Policy name.
+/// @param members List of team members added to the hold.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
+/// `DBTEAMLegalHoldsPolicyCreateError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyCreateError *> *)
+legalHoldsCreatePolicy:(NSString *)name
+               members:(NSArray<NSString *> *)members;
+
+///
+/// Creates new legal hold policy. Permission : Team member file access.
+///
+/// @param name Policy name.
+/// @param description_ A description of the legal hold policy.
+/// @param members List of team members added to the hold.
+/// @param startDate start date of the legal hold policy.
+/// @param endDate end date of the legal hold policy.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
+/// `DBTEAMLegalHoldsPolicyCreateError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyCreateError *> *)
+legalHoldsCreatePolicy:(NSString *)name
+               members:(NSArray<NSString *> *)members
+          description_:(nullable NSString *)description_
+             startDate:(nullable NSDate *)startDate
+               endDate:(nullable NSDate *)endDate;
+
+///
+/// Gets a legal hold by Id. Permission : Team member file access.
+///
+/// @param id_ The legal hold Id.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
+/// `DBTEAMLegalHoldsGetPolicyError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsGetPolicyError *> *)legalHoldsGetPolicy:(NSString *)id_;
+
+///
+/// The legalHoldsListHeldRevisions route
+///
+/// @param id_ The legal hold Id.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListHeldRevisionResult` object on
+/// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldsListHeldRevisionResult *, DBTEAMLegalHoldsListHeldRevisionsError *> *)
+legalHoldsListHeldRevisions:(NSString *)id_;
+
+///
+/// The legalHoldsListHeldRevisionsContinue route
+///
+/// @param id_ The legal hold Id.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListHeldRevisionResult` object on
+/// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldsListHeldRevisionResult *, DBTEAMLegalHoldsListHeldRevisionsError *> *)
+legalHoldsListHeldRevisionsContinue:(NSString *)id_;
+
+///
+/// The legalHoldsListHeldRevisionsContinue route
+///
+/// @param id_ The legal hold Id.
+/// @param cursor cursor of list held revisions.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListHeldRevisionResult` object on
+/// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldsListHeldRevisionResult *, DBTEAMLegalHoldsListHeldRevisionsError *> *)
+legalHoldsListHeldRevisionsContinue:(NSString *)id_
+                             cursor:(nullable NSString *)cursor;
+
+///
+/// Lists legal holds on a team. Permission : Team member file access.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListPoliciesResult` object on
+/// success or a `DBTEAMLegalHoldsListPoliciesError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldsListPoliciesResult *, DBTEAMLegalHoldsListPoliciesError *> *)legalHoldsListPolicies;
+
+///
+/// Lists legal holds on a team. Permission : Team member file access.
+///
+/// @param includeReleased Whether to return holds that were released.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListPoliciesResult` object on
+/// success or a `DBTEAMLegalHoldsListPoliciesError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldsListPoliciesResult *, DBTEAMLegalHoldsListPoliciesError *> *)legalHoldsListPolicies:
+    (nullable NSNumber *)includeReleased;
+
+///
+/// Releases a legal hold by Id. Permission : Team member file access.
+///
+/// @param id_ The legal hold Id.
+///
+/// @return Through the response callback, the caller will receive a `void` object on success or a
+/// `DBTEAMLegalHoldsPolicyReleaseError` object on failure.
+///
+- (DBRpcTask<DBNilObject *, DBTEAMLegalHoldsPolicyReleaseError *> *)legalHoldsReleasePolicy:(NSString *)id_;
+
+///
+/// Updates a legal hold. Permission : Team member file access.
+///
+/// @param id_ The legal hold Id.
+/// @param members List of team members to apply the policy on.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
+/// `DBTEAMLegalHoldsPolicyUpdateError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyUpdateError *> *)
+legalHoldsUpdatePolicy:(NSString *)id_
+               members:(NSArray<NSString *> *)members;
+
+///
+/// Updates a legal hold. Permission : Team member file access.
+///
+/// @param id_ The legal hold Id.
+/// @param name Policy new name.
+/// @param description_ Policy new description.
+/// @param members List of team members to apply the policy on.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
+/// `DBTEAMLegalHoldsPolicyUpdateError` object on failure.
+///
+- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyUpdateError *> *)
+legalHoldsUpdatePolicy:(NSString *)id_
+               members:(NSArray<NSString *> *)members
+                  name:(nullable NSString *)name
+          description_:(nullable NSString *)description_;
 
 ///
 /// List all linked applications of the team member. Note, this endpoint does not list any team-linked applications.
@@ -799,6 +962,17 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 - (DBRpcTask<DBTEAMMembersAddJobStatus *, DBASYNCPollError *> *)membersAddJobStatusGet:(NSString *)asyncJobId;
 
 ///
+/// Deletes a team member's profile photo. Permission : Team member management.
+///
+/// @param user Identity of the user whose profile photo will be deleted.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfo` object on success or a
+/// `DBTEAMMembersDeleteProfilePhotoError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamMemberInfo *, DBTEAMMembersDeleteProfilePhotoError *> *)membersDeleteProfilePhoto:
+    (DBTEAMUserSelectorArg *)user;
+
+///
 /// Returns information about multiple team members. Permission : Team information This endpoint will return
 /// `idNotFound` in `DBTEAMMembersGetInfoItem`, for IDs (or emails) that cannot be matched to a valid team member.
 ///
@@ -888,7 +1062,7 @@ membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
 /// day period or until the account has been permanently deleted or transferred to another account (whichever comes
 /// first). Calling `membersAdd` while a user is still recoverable on your team will return with `userAlreadyOnTeam` in
 /// `DBTEAMMemberAddResult`. Accounts can have their files transferred via the admin console for a limited time, based
-/// on the version history length associated with the team (120 days for most teams). This endpoint may initiate an
+/// on the version history length associated with the team (180 days for most teams). This endpoint may initiate an
 /// asynchronous job. To obtain the final result of the job, the client should periodically poll
 /// `membersRemoveJobStatusGet`.
 ///
@@ -904,7 +1078,7 @@ membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
 /// day period or until the account has been permanently deleted or transferred to another account (whichever comes
 /// first). Calling `membersAdd` while a user is still recoverable on your team will return with `userAlreadyOnTeam` in
 /// `DBTEAMMemberAddResult`. Accounts can have their files transferred via the admin console for a limited time, based
-/// on the version history length associated with the team (120 days for most teams). This endpoint may initiate an
+/// on the version history length associated with the team (180 days for most teams). This endpoint may initiate an
 /// asynchronous job. To obtain the final result of the job, the client should periodically poll
 /// `membersRemoveJobStatusGet`.
 ///
@@ -913,17 +1087,22 @@ membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
 /// transfer_dest_id argument was provided, then this argument must be provided as well.
 /// @param keepAccount Downgrade the member to a Basic account. The user will retain the email address associated with
 /// their Dropbox  account and data in their account that is not restricted to team members. In order to keep the
-/// account the argument wipe_data should be set to False.
+/// account the argument wipeData should be set to false.
+/// @param retainTeamShares If provided, allows removed users to keep access to folders already explicitly shared with
+/// them (not via a group) when they are downgraded to a Basic account. Users will not retain access to folders that do
+/// not allow external sharing. In order to keep the sharing relationships, the arguments wipeData should be set to
+/// false and keepAccount should be set to true.
 ///
 /// @return Through the response callback, the caller will receive a `DBASYNCLaunchEmptyResult` object on success or a
 /// `DBTEAMMembersRemoveError` object on failure.
 ///
 - (DBRpcTask<DBASYNCLaunchEmptyResult *, DBTEAMMembersRemoveError *> *)
-  membersRemove:(DBTEAMUserSelectorArg *)user
-       wipeData:(nullable NSNumber *)wipeData
- transferDestId:(nullable DBTEAMUserSelectorArg *)transferDestId
-transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
-    keepAccount:(nullable NSNumber *)keepAccount;
+   membersRemove:(DBTEAMUserSelectorArg *)user
+        wipeData:(nullable NSNumber *)wipeData
+  transferDestId:(nullable DBTEAMUserSelectorArg *)transferDestId
+ transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
+     keepAccount:(nullable NSNumber *)keepAccount
+retainTeamShares:(nullable NSNumber *)retainTeamShares;
 
 ///
 /// Once an async_job_id is returned from `membersRemove` , use this to poll the status of the asynchronous request.
@@ -936,6 +1115,41 @@ transferAdminId:(nullable DBTEAMUserSelectorArg *)transferAdminId
 /// `DBASYNCPollError` object on failure.
 ///
 - (DBRpcTask<DBASYNCPollEmptyResult *, DBASYNCPollError *> *)membersRemoveJobStatusGet:(NSString *)asyncJobId;
+
+///
+/// Add secondary emails to users. Permission : Team member management. Emails that are on verified domains will be
+/// verified automatically. For each email address not on a verified domain a verification email will be sent.
+///
+/// @param dNewSecondaryEmails List of users and secondary emails to add.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMAddSecondaryEmailsResult` object on success
+/// or a `DBTEAMAddSecondaryEmailsError` object on failure.
+///
+- (DBRpcTask<DBTEAMAddSecondaryEmailsResult *, DBTEAMAddSecondaryEmailsError *> *)membersSecondaryEmailsAdd:
+    (NSArray<DBTEAMUserSecondaryEmailsArg *> *)dNewSecondaryEmails;
+
+///
+/// Delete secondary emails from users Permission : Team member management. Users will be notified of deletions of
+/// verified secondary emails at both the secondary email and their primary email.
+///
+/// @param emailsToDelete List of users and their secondary emails to delete.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMDeleteSecondaryEmailsResult` object on
+/// success or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMDeleteSecondaryEmailsResult *, DBNilObject *> *)membersSecondaryEmailsDelete:
+    (NSArray<DBTEAMUserSecondaryEmailsArg *> *)emailsToDelete;
+
+///
+/// Resend secondary email verification emails. Permission : Team member management.
+///
+/// @param emailsToResend List of users and secondary emails to resend verification emails to.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMResendVerificationEmailResult` object on
+/// success or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMResendVerificationEmailResult *, DBNilObject *> *)membersSecondaryEmailsResendVerificationEmails:
+    (NSArray<DBTEAMUserSecondaryEmailsArg *> *)emailsToResend;
 
 ///
 /// Sends welcome email to pending team member. Permission : Team member management Exactly one of team_member_id,
@@ -995,6 +1209,19 @@ membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
               dNewSurname:(nullable NSString *)dNewSurname
          dNewPersistentId:(nullable NSString *)dNewPersistentId
 dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
+
+///
+/// Updates a team member's profile photo. Permission : Team member management.
+///
+/// @param user Identity of the user whose profile photo will be set.
+/// @param photo Image to set as the member's new profile photo.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfo` object on success or a
+/// `DBTEAMMembersSetProfilePhotoError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamMemberInfo *, DBTEAMMembersSetProfilePhotoError *> *)
+membersSetProfilePhoto:(DBTEAMUserSelectorArg *)user
+                 photo:(DBACCOUNTPhotoSourceArg *)photo;
 
 ///
 /// Suspend a member from a team. Permission : Team member management Exactly one of team_member_id, email, or
@@ -1143,7 +1370,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 ///
 /// Retrieves reporting data about a team's user activity.
 ///
-/// @param startDate Optional starting date (inclusive).
+/// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
+/// to 6 months ago.
 /// @param endDate Optional ending date (exclusive).
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetActivityReport` object on success or a
@@ -1164,7 +1392,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 ///
 /// Retrieves reporting data about a team's linked devices.
 ///
-/// @param startDate Optional starting date (inclusive).
+/// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
+/// to 6 months ago.
 /// @param endDate Optional ending date (exclusive).
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetDevicesReport` object on success or a
@@ -1185,7 +1414,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 ///
 /// Retrieves reporting data about a team's membership.
 ///
-/// @param startDate Optional starting date (inclusive).
+/// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
+/// to 6 months ago.
 /// @param endDate Optional ending date (exclusive).
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetMembershipReport` object on success or a
@@ -1206,7 +1436,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 ///
 /// Retrieves reporting data about a team's storage usage.
 ///
-/// @param startDate Optional starting date (inclusive).
+/// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
+/// to 6 months ago.
 /// @param endDate Optional ending date (exclusive).
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetStorageReport` object on success or a

@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBAUTHTokenFromOAuth1ErrorTag` enum type represents the possible tag
 /// states with which the `DBAUTHTokenFromOAuth1Error` union can exist.
-typedef NS_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag) {
-  /// Part or all of the OAuth 1.0 access token info is invalid.
-  DBAUTHTokenFromOAuth1ErrorInvalidOauth1TokenInfo,
+typedef NS_CLOSED_ENUM(NSInteger, DBAUTHTokenFromOAuth1ErrorTag){
+    /// Part or all of the OAuth 1.0 access token info is invalid.
+    DBAUTHTokenFromOAuth1ErrorInvalidOauth1TokenInfo,
 
-  /// The authorized app does not match the app associated with the supplied
-  /// access token.
-  DBAUTHTokenFromOAuth1ErrorAppIdMismatch,
+    /// The authorized app does not match the app associated with the supplied
+    /// access token.
+    DBAUTHTokenFromOAuth1ErrorAppIdMismatch,
 
-  /// (no description).
-  DBAUTHTokenFromOAuth1ErrorOther,
+    /// (no description).
+    DBAUTHTokenFromOAuth1ErrorOther,
 
 };
 

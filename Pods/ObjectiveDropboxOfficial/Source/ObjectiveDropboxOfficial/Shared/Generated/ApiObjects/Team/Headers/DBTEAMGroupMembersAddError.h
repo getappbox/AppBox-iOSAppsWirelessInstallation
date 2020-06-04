@@ -27,39 +27,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupMembersAddErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMGroupMembersAddError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupMembersAddErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupMembersAddErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupMembersAddErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupMembersAddErrorOther,
+    /// (no description).
+    DBTEAMGroupMembersAddErrorOther,
 
-  /// This operation is not supported on system-managed groups.
-  DBTEAMGroupMembersAddErrorSystemManagedGroupDisallowed,
+    /// This operation is not supported on system-managed groups.
+    DBTEAMGroupMembersAddErrorSystemManagedGroupDisallowed,
 
-  /// You cannot add duplicate users. One or more of the members you are
-  /// trying to add is already a member of the group.
-  DBTEAMGroupMembersAddErrorDuplicateUser,
+    /// You cannot add duplicate users. One or more of the members you are
+    /// trying to add is already a member of the group.
+    DBTEAMGroupMembersAddErrorDuplicateUser,
 
-  /// Group is not in this team. You cannot add members to a group that is
-  /// outside of your team.
-  DBTEAMGroupMembersAddErrorGroupNotInTeam,
+    /// Group is not in this team. You cannot add members to a group that is
+    /// outside of your team.
+    DBTEAMGroupMembersAddErrorGroupNotInTeam,
 
-  /// These members are not part of your team. Currently, you cannot add
-  /// members to a group if they are not part of your team, though this may
-  /// change in a subsequent version. To add new members to your Dropbox
-  /// Business team, use the `membersAdd` endpoint.
-  DBTEAMGroupMembersAddErrorMembersNotInTeam,
+    /// These members are not part of your team. Currently, you cannot add
+    /// members to a group if they are not part of your team, though this may
+    /// change in a subsequent version. To add new members to your Dropbox
+    /// Business team, use the `membersAdd` endpoint.
+    DBTEAMGroupMembersAddErrorMembersNotInTeam,
 
-  /// These users were not found in Dropbox.
-  DBTEAMGroupMembersAddErrorUsersNotFound,
+    /// These users were not found in Dropbox.
+    DBTEAMGroupMembersAddErrorUsersNotFound,
 
-  /// A suspended user cannot be added to a group as `owner` in
-  /// `DBTEAMGroupAccessType`.
-  DBTEAMGroupMembersAddErrorUserMustBeActiveToBeOwner,
+    /// A suspended user cannot be added to a group as `owner` in
+    /// `DBTEAMGroupAccessType`.
+    DBTEAMGroupMembersAddErrorUserMustBeActiveToBeOwner,
 
-  /// A company-managed group cannot be managed by a user.
-  DBTEAMGroupMembersAddErrorUserCannotBeManagerOfCompanyManagedGroup,
+    /// A company-managed group cannot be managed by a user.
+    DBTEAMGroupMembersAddErrorUserCannotBeManagerOfCompanyManagedGroup,
 
 };
 

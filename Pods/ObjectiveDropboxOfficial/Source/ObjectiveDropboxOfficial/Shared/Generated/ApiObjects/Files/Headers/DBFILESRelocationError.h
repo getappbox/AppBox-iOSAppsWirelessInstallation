@@ -29,51 +29,51 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESRelocationErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESRelocationError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESRelocationErrorTag) {
-  /// (no description).
-  DBFILESRelocationErrorFromLookup,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationErrorTag){
+    /// (no description).
+    DBFILESRelocationErrorFromLookup,
 
-  /// (no description).
-  DBFILESRelocationErrorFromWrite,
+    /// (no description).
+    DBFILESRelocationErrorFromWrite,
 
-  /// (no description).
-  DBFILESRelocationErrorTo,
+    /// (no description).
+    DBFILESRelocationErrorTo,
 
-  /// Shared folders can't be copied.
-  DBFILESRelocationErrorCantCopySharedFolder,
+    /// Shared folders can't be copied.
+    DBFILESRelocationErrorCantCopySharedFolder,
 
-  /// Your move operation would result in nested shared folders.  This is not
-  /// allowed.
-  DBFILESRelocationErrorCantNestSharedFolder,
+    /// Your move operation would result in nested shared folders.  This is not
+    /// allowed.
+    DBFILESRelocationErrorCantNestSharedFolder,
 
-  /// You cannot move a folder into itself.
-  DBFILESRelocationErrorCantMoveFolderIntoItself,
+    /// You cannot move a folder into itself.
+    DBFILESRelocationErrorCantMoveFolderIntoItself,
 
-  /// The operation would involve more than 10,000 files and folders.
-  DBFILESRelocationErrorTooManyFiles,
+    /// The operation would involve more than 10,000 files and folders.
+    DBFILESRelocationErrorTooManyFiles,
 
-  /// There are duplicated/nested paths among `fromPath` in
-  /// `DBFILESRelocationArg` and `toPath` in `DBFILESRelocationArg`.
-  DBFILESRelocationErrorDuplicatedOrNestedPaths,
+    /// There are duplicated/nested paths among `fromPath` in
+    /// `DBFILESRelocationArg` and `toPath` in `DBFILESRelocationArg`.
+    DBFILESRelocationErrorDuplicatedOrNestedPaths,
 
-  /// Your move operation would result in an ownership transfer. You may
-  /// reissue the request with the field `allowOwnershipTransfer` in
-  /// `DBFILESRelocationArg` to true.
-  DBFILESRelocationErrorCantTransferOwnership,
+    /// Your move operation would result in an ownership transfer. You may
+    /// reissue the request with the field `allowOwnershipTransfer` in
+    /// `DBFILESRelocationArg` to true.
+    DBFILESRelocationErrorCantTransferOwnership,
 
-  /// The current user does not have enough space to move or copy the files.
-  DBFILESRelocationErrorInsufficientQuota,
+    /// The current user does not have enough space to move or copy the files.
+    DBFILESRelocationErrorInsufficientQuota,
 
-  /// Something went wrong with the job on Dropbox's end. You'll need to
-  /// verify that the action you were taking succeeded, and if not, try again.
-  /// This should happen very rarely.
-  DBFILESRelocationErrorInternalError,
+    /// Something went wrong with the job on Dropbox's end. You'll need to
+    /// verify that the action you were taking succeeded, and if not, try again.
+    /// This should happen very rarely.
+    DBFILESRelocationErrorInternalError,
 
-  /// Can't move the shared folder to the given destination.
-  DBFILESRelocationErrorCantMoveSharedFolder,
+    /// Can't move the shared folder to the given destination.
+    DBFILESRelocationErrorCantMoveSharedFolder,
 
-  /// (no description).
-  DBFILESRelocationErrorOther,
+    /// (no description).
+    DBFILESRelocationErrorOther,
 
 };
 

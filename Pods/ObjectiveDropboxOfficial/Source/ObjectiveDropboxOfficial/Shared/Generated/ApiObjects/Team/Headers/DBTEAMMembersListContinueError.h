@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersListContinueErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMMembersListContinueError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersListContinueErrorTag) {
-  /// The cursor is invalid.
-  DBTEAMMembersListContinueErrorInvalidCursor,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersListContinueErrorTag){
+    /// The cursor is invalid.
+    DBTEAMMembersListContinueErrorInvalidCursor,
 
-  /// (no description).
-  DBTEAMMembersListContinueErrorOther,
+    /// (no description).
+    DBTEAMMembersListContinueErrorOther,
 
 };
 

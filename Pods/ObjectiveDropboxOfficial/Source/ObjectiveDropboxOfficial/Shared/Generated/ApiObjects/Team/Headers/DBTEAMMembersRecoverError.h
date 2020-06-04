@@ -27,22 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersRecoverErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersRecoverError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag) {
-  /// No matching user found. The provided team_member_id, email, or
-  /// external_id does not exist on this team.
-  DBTEAMMembersRecoverErrorUserNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersRecoverErrorTag){
+    /// No matching user found. The provided team_member_id, email, or
+    /// external_id does not exist on this team.
+    DBTEAMMembersRecoverErrorUserNotFound,
 
-  /// The user is not recoverable.
-  DBTEAMMembersRecoverErrorUserUnrecoverable,
+    /// The user is not recoverable.
+    DBTEAMMembersRecoverErrorUserUnrecoverable,
 
-  /// The user is not a member of the team.
-  DBTEAMMembersRecoverErrorUserNotInTeam,
+    /// The user is not a member of the team.
+    DBTEAMMembersRecoverErrorUserNotInTeam,
 
-  /// Team is full. The organization has no available licenses.
-  DBTEAMMembersRecoverErrorTeamLicenseLimit,
+    /// Team is full. The organization has no available licenses.
+    DBTEAMMembersRecoverErrorTeamLicenseLimit,
 
-  /// (no description).
-  DBTEAMMembersRecoverErrorOther,
+    /// (no description).
+    DBTEAMMembersRecoverErrorOther,
 
 };
 

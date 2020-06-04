@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEREQUESTSCountFileRequestsErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEREQUESTSCountFileRequestsError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSCountFileRequestsErrorTag) {
-  /// This user's Dropbox Business team doesn't allow file requests.
-  DBFILEREQUESTSCountFileRequestsErrorDisabledForTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSCountFileRequestsErrorTag){
+    /// This user's Dropbox Business team doesn't allow file requests.
+    DBFILEREQUESTSCountFileRequestsErrorDisabledForTeam,
 
-  /// (no description).
-  DBFILEREQUESTSCountFileRequestsErrorOther,
+    /// (no description).
+    DBFILEREQUESTSCountFileRequestsErrorOther,
 
 };
 

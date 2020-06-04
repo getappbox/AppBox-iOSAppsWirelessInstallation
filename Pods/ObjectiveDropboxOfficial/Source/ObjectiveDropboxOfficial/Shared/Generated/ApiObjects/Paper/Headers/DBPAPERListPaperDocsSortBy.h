@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERListPaperDocsSortByTag` enum type represents the possible tag
 /// states with which the `DBPAPERListPaperDocsSortBy` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag) {
-  /// Sorts the Paper docs by the time they were last accessed.
-  DBPAPERListPaperDocsSortByAccessed,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERListPaperDocsSortByTag){
+    /// Sorts the Paper docs by the time they were last accessed.
+    DBPAPERListPaperDocsSortByAccessed,
 
-  /// Sorts the Paper docs by the time they were last modified.
-  DBPAPERListPaperDocsSortByModified,
+    /// Sorts the Paper docs by the time they were last modified.
+    DBPAPERListPaperDocsSortByModified,
 
-  /// Sorts the Paper docs by the creation time.
-  DBPAPERListPaperDocsSortByCreated,
+    /// Sorts the Paper docs by the creation time.
+    DBPAPERListPaperDocsSortByCreated,
 
-  /// (no description).
-  DBPAPERListPaperDocsSortByOther,
+    /// (no description).
+    DBPAPERListPaperDocsSortByOther,
 
 };
 

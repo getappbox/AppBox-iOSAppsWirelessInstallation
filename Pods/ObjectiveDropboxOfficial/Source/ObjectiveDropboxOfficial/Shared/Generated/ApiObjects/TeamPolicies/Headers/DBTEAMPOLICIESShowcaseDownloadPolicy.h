@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESShowcaseDownloadPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESShowcaseDownloadPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESShowcaseDownloadPolicyTag) {
-  /// Do not allow files to be downloaded from Showcases.
-  DBTEAMPOLICIESShowcaseDownloadPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESShowcaseDownloadPolicyTag){
+    /// Do not allow files to be downloaded from Showcases.
+    DBTEAMPOLICIESShowcaseDownloadPolicyDisabled,
 
-  /// Allow files to be downloaded from Showcases.
-  DBTEAMPOLICIESShowcaseDownloadPolicyEnabled,
+    /// Allow files to be downloaded from Showcases.
+    DBTEAMPOLICIESShowcaseDownloadPolicyEnabled,
 
-  /// (no description).
-  DBTEAMPOLICIESShowcaseDownloadPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESShowcaseDownloadPolicyOther,
 
 };
 

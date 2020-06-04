@@ -11,6 +11,7 @@
 
 @class DBFILEPROPERTIESPropertyGroup;
 @class DBFILESExportInfo;
+@class DBFILESFileLockMetadata;
 @class DBFILESFileMetadata;
 @class DBFILESFileSharingInfo;
 @class DBFILESMediaInfo;
@@ -86,6 +87,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// https://www.dropbox.com/developers/reference/content-hash page.
 @property (nonatomic, readonly, copy, nullable) NSString *contentHash;
 
+/// If present, the metadata associated with the file's current lock.
+@property (nonatomic, readonly, nullable) DBFILESFileLockMetadata *fileLockInfo;
+
 #pragma mark - Constructors
 
 ///
@@ -136,6 +140,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param contentHash A hash of the file content. This field can be used to
 /// verify data integrity. For more information see our Content hash
 /// https://www.dropbox.com/developers/reference/content-hash page.
+/// @param fileLockInfo If present, the metadata associated with the file's
+/// current lock.
 ///
 /// @return An initialized instance.
 ///
@@ -155,7 +161,8 @@ NS_ASSUME_NONNULL_BEGIN
                   exportInfo:(nullable DBFILESExportInfo *)exportInfo
               propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
     hasExplicitSharedMembers:(nullable NSNumber *)hasExplicitSharedMembers
-                 contentHash:(nullable NSString *)contentHash;
+                 contentHash:(nullable NSString *)contentHash
+                fileLockInfo:(nullable DBFILESFileLockMetadata *)fileLockInfo;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

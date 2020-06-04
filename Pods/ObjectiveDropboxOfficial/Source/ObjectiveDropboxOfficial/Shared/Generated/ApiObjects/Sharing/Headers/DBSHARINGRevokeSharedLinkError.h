@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGRevokeSharedLinkErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGRevokeSharedLinkError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGRevokeSharedLinkErrorTag) {
-  /// The shared link wasn't found.
-  DBSHARINGRevokeSharedLinkErrorSharedLinkNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGRevokeSharedLinkErrorTag){
+    /// The shared link wasn't found.
+    DBSHARINGRevokeSharedLinkErrorSharedLinkNotFound,
 
-  /// The caller is not allowed to access this shared link.
-  DBSHARINGRevokeSharedLinkErrorSharedLinkAccessDenied,
+    /// The caller is not allowed to access this shared link.
+    DBSHARINGRevokeSharedLinkErrorSharedLinkAccessDenied,
 
-  /// This type of link is not supported; use `files` instead.
-  DBSHARINGRevokeSharedLinkErrorUnsupportedLinkType,
+    /// This type of link is not supported; use `files` instead.
+    DBSHARINGRevokeSharedLinkErrorUnsupportedLinkType,
 
-  /// (no description).
-  DBSHARINGRevokeSharedLinkErrorOther,
+    /// (no description).
+    DBSHARINGRevokeSharedLinkErrorOther,
 
-  /// Shared link is malformed.
-  DBSHARINGRevokeSharedLinkErrorSharedLinkMalformed,
+    /// Shared link is malformed.
+    DBSHARINGRevokeSharedLinkErrorSharedLinkMalformed,
 
 };
 

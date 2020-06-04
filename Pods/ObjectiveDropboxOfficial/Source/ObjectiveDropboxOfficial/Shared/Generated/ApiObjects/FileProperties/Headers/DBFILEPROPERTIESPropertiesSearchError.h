@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESPropertiesSearchErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEPROPERTIESPropertiesSearchError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchErrorTag) {
-  /// (no description).
-  DBFILEPROPERTIESPropertiesSearchErrorPropertyGroupLookup,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchErrorTag){
+    /// (no description).
+    DBFILEPROPERTIESPropertiesSearchErrorPropertyGroupLookup,
 
-  /// (no description).
-  DBFILEPROPERTIESPropertiesSearchErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESPropertiesSearchErrorOther,
 
 };
 

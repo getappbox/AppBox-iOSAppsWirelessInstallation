@@ -30,32 +30,36 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESUpdatePropertiesErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEPROPERTIESUpdatePropertiesError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESUpdatePropertiesErrorTag) {
-  /// Template does not exist for the given identifier.
-  DBFILEPROPERTIESUpdatePropertiesErrorTemplateNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESUpdatePropertiesErrorTag){
+    /// Template does not exist for the given identifier.
+    DBFILEPROPERTIESUpdatePropertiesErrorTemplateNotFound,
 
-  /// You do not have permission to modify this template.
-  DBFILEPROPERTIESUpdatePropertiesErrorRestrictedContent,
+    /// You do not have permission to modify this template.
+    DBFILEPROPERTIESUpdatePropertiesErrorRestrictedContent,
 
-  /// (no description).
-  DBFILEPROPERTIESUpdatePropertiesErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESUpdatePropertiesErrorOther,
 
-  /// (no description).
-  DBFILEPROPERTIESUpdatePropertiesErrorPath,
+    /// (no description).
+    DBFILEPROPERTIESUpdatePropertiesErrorPath,
 
-  /// This folder cannot be tagged. Tagging folders is not supported for
-  /// team-owned templates.
-  DBFILEPROPERTIESUpdatePropertiesErrorUnsupportedFolder,
+    /// This folder cannot be tagged. Tagging folders is not supported for
+    /// team-owned templates.
+    DBFILEPROPERTIESUpdatePropertiesErrorUnsupportedFolder,
 
-  /// One or more of the supplied property field values is too large.
-  DBFILEPROPERTIESUpdatePropertiesErrorPropertyFieldTooLarge,
+    /// One or more of the supplied property field values is too large.
+    DBFILEPROPERTIESUpdatePropertiesErrorPropertyFieldTooLarge,
 
-  /// One or more of the supplied property fields does not conform to the
-  /// template specifications.
-  DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate,
+    /// One or more of the supplied property fields does not conform to the
+    /// template specifications.
+    DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate,
 
-  /// (no description).
-  DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup,
+    /// There are 2 or more property groups referring to the same templates in
+    /// the input.
+    DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups,
+
+    /// (no description).
+    DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup,
 
 };
 
@@ -146,6 +150,16 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESUpdatePropertiesErrorTag) {
 - (instancetype)initWithDoesNotFitTemplate;
 
 ///
+/// Initializes union class with tag state of "duplicate_property_groups".
+///
+/// Description of the "duplicate_property_groups" tag state: There are 2 or
+/// more property groups referring to the same templates in the input.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDuplicatePropertyGroups;
+
+///
 /// Initializes union class with tag state of "property_group_lookup".
 ///
 /// @param propertyGroupLookup (no description).
@@ -222,6 +236,15 @@ typedef NS_ENUM(NSInteger, DBFILEPROPERTIESUpdatePropertiesErrorTag) {
 /// "does_not_fit_template".
 ///
 - (BOOL)isDoesNotFitTemplate;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "duplicate_property_groups".
+///
+/// @return Whether the union's current tag state has value
+/// "duplicate_property_groups".
+///
+- (BOOL)isDuplicatePropertyGroups;
 
 ///
 /// Retrieves whether the union's current tag state has value

@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamFolderListContinueErrorTag` enum type represents the possible
 /// tag states with which the `DBTEAMTeamFolderListContinueError` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderListContinueErrorTag) {
-  /// The cursor is invalid.
-  DBTEAMTeamFolderListContinueErrorInvalidCursor,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderListContinueErrorTag){
+    /// The cursor is invalid.
+    DBTEAMTeamFolderListContinueErrorInvalidCursor,
 
-  /// (no description).
-  DBTEAMTeamFolderListContinueErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderListContinueErrorOther,
 
 };
 

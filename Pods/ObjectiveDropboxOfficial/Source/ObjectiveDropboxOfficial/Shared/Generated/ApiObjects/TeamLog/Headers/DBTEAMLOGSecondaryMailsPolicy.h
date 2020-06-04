@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGSecondaryMailsPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGSecondaryMailsPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSecondaryMailsPolicyTag) {
-  /// (no description).
-  DBTEAMLOGSecondaryMailsPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSecondaryMailsPolicyTag){
+    /// (no description).
+    DBTEAMLOGSecondaryMailsPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGSecondaryMailsPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGSecondaryMailsPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGSecondaryMailsPolicyOther,
+    /// (no description).
+    DBTEAMLOGSecondaryMailsPolicyOther,
 
 };
 

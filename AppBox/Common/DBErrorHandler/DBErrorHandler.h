@@ -10,7 +10,7 @@
 
 @interface DBErrorHandler : NSObject
 
-+(void)handleNetworkErrorWith:(DBRequestError *)networkError;
++(void)handleNetworkErrorWith:(DBRequestError *)networkError abErrorMessage:(NSString *)abErrorMessage;
 +(void)handleDeleteErrorWith:(DBFILESDeleteError *)deleteError;
 +(void)handleUploadErrorWith:(DBFILESUploadError *)uploadError;
 +(void)handleUploadSessionLookupError:(DBFILESUploadSessionLookupError *)error;

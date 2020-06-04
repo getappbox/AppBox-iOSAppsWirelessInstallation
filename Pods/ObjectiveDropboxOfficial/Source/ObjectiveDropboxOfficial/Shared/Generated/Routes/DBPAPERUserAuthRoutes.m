@@ -42,6 +42,9 @@
 #import "DBPAPERPaperDocUpdateArgs.h"
 #import "DBPAPERPaperDocUpdateError.h"
 #import "DBPAPERPaperDocUpdatePolicy.h"
+#import "DBPAPERPaperFolderCreateArg.h"
+#import "DBPAPERPaperFolderCreateError.h"
+#import "DBPAPERPaperFolderCreateResult.h"
 #import "DBPAPERRefPaperDoc.h"
 #import "DBPAPERRemovePaperDocUser.h"
 #import "DBPAPERRouteObjects.h"
@@ -304,6 +307,21 @@
 - (DBRpcTask *)docsUsersRemove:(NSString *)docId member:(DBSHARINGMemberSelector *)member {
   DBRoute *route = DBPAPERRouteObjects.DBPAPERDocsUsersRemove;
   DBPAPERRemovePaperDocUser *arg = [[DBPAPERRemovePaperDocUser alloc] initWithDocId:docId member:member];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)foldersCreate:(NSString *)name {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERFoldersCreate;
+  DBPAPERPaperFolderCreateArg *arg = [[DBPAPERPaperFolderCreateArg alloc] initWithName:name];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)foldersCreate:(NSString *)name
+              parentFolderId:(NSString *)parentFolderId
+                isTeamFolder:(NSNumber *)isTeamFolder {
+  DBRoute *route = DBPAPERRouteObjects.DBPAPERFoldersCreate;
+  DBPAPERPaperFolderCreateArg *arg =
+      [[DBPAPERPaperFolderCreateArg alloc] initWithName:name parentFolderId:parentFolderId isTeamFolder:isTeamFolder];
   return [self.client requestRpc:route arg:arg];
 }
 

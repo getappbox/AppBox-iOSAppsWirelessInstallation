@@ -32,15 +32,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBAUTHAccessErrorTag` enum type represents the possible tag states with
 /// which the `DBAUTHAccessError` union can exist.
-typedef NS_ENUM(NSInteger, DBAUTHAccessErrorTag) {
-  /// Current account type cannot access the resource.
-  DBAUTHAccessErrorInvalidAccountType,
+typedef NS_CLOSED_ENUM(NSInteger, DBAUTHAccessErrorTag){
+    /// Current account type cannot access the resource.
+    DBAUTHAccessErrorInvalidAccountType,
 
-  /// Current account cannot access Paper.
-  DBAUTHAccessErrorPaperAccessDenied,
+    /// Current account cannot access Paper.
+    DBAUTHAccessErrorPaperAccessDenied,
 
-  /// (no description).
-  DBAUTHAccessErrorOther,
+    /// (no description).
+    DBAUTHAccessErrorOther,
 
 };
 

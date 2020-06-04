@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGDeviceApprovalsPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGDeviceApprovalsPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag) {
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyUnlimited,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag){
+    /// (no description).
+    DBTEAMLOGDeviceApprovalsPolicyUnlimited,
 
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyLimited,
+    /// (no description).
+    DBTEAMLOGDeviceApprovalsPolicyLimited,
 
-  /// (no description).
-  DBTEAMLOGDeviceApprovalsPolicyOther,
+    /// (no description).
+    DBTEAMLOGDeviceApprovalsPolicyOther,
 
 };
 

@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGShareFolderLaunchTag` enum type represents the possible tag
 /// states with which the `DBSHARINGShareFolderLaunch` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGShareFolderLaunchTag) {
-  /// This response indicates that the processing is asynchronous. The string
-  /// is an id that can be used to obtain the status of the asynchronous job.
-  DBSHARINGShareFolderLaunchAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGShareFolderLaunchTag){
+    /// This response indicates that the processing is asynchronous. The string
+    /// is an id that can be used to obtain the status of the asynchronous job.
+    DBSHARINGShareFolderLaunchAsyncJobId,
 
-  /// (no description).
-  DBSHARINGShareFolderLaunchComplete,
+    /// (no description).
+    DBSHARINGShareFolderLaunchComplete,
 
 };
 

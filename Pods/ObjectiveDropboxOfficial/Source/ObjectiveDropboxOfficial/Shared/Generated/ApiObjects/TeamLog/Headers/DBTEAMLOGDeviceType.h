@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGDeviceTypeTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGDeviceType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag) {
-  /// (no description).
-  DBTEAMLOGDeviceTypeDesktop,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGDeviceTypeTag){
+    /// (no description).
+    DBTEAMLOGDeviceTypeDesktop,
 
-  /// (no description).
-  DBTEAMLOGDeviceTypeMobile,
+    /// (no description).
+    DBTEAMLOGDeviceTypeMobile,
 
-  /// (no description).
-  DBTEAMLOGDeviceTypeOther,
+    /// (no description).
+    DBTEAMLOGDeviceTypeOther,
 
 };
 

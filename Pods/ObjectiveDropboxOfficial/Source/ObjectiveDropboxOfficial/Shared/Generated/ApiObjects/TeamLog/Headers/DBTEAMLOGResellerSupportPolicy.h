@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGResellerSupportPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGResellerSupportPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGResellerSupportPolicyTag) {
-  /// (no description).
-  DBTEAMLOGResellerSupportPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGResellerSupportPolicyTag){
+    /// (no description).
+    DBTEAMLOGResellerSupportPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGResellerSupportPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGResellerSupportPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGResellerSupportPolicyOther,
+    /// (no description).
+    DBTEAMLOGResellerSupportPolicyOther,
 
 };
 

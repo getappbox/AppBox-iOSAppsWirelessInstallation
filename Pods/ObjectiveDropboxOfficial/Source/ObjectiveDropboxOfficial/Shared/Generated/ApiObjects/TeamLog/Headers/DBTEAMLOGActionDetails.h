@@ -11,6 +11,7 @@
 @class DBTEAMLOGActionDetails;
 @class DBTEAMLOGJoinTeamDetails;
 @class DBTEAMLOGMemberRemoveActionType;
+@class DBTEAMLOGTeamInviteDetails;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,15 +33,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGActionDetailsTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGActionDetails` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGActionDetailsTag) {
-  /// Additional information relevant when a new member joins the team.
-  DBTEAMLOGActionDetailsTeamJoinDetails,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
+    /// Additional information relevant when a new member joins the team.
+    DBTEAMLOGActionDetailsTeamJoinDetails,
 
-  /// Define how the user was removed from the team.
-  DBTEAMLOGActionDetailsRemoveAction,
+    /// Define how the user was removed from the team.
+    DBTEAMLOGActionDetailsRemoveAction,
 
-  /// (no description).
-  DBTEAMLOGActionDetailsOther,
+    /// Additional information relevant when someone is invited to the team.
+    DBTEAMLOGActionDetailsTeamInviteDetails,
+
+    /// (no description).
+    DBTEAMLOGActionDetailsOther,
 
 };
 
@@ -56,6 +60,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGActionDetailsTag) {
 /// `isRemoveAction` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberRemoveActionType *removeAction;
+
+/// Additional information relevant when someone is invited to the team. @note
+/// Ensure the `isTeamInviteDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamInviteDetails *teamInviteDetails;
 
 #pragma mark - Constructors
 
@@ -83,6 +92,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGActionDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithRemoveAction:(DBTEAMLOGMemberRemoveActionType *)removeAction;
+
+///
+/// Initializes union class with tag state of "team_invite_details".
+///
+/// Description of the "team_invite_details" tag state: Additional information
+/// relevant when someone is invited to the team.
+///
+/// @param teamInviteDetails Additional information relevant when someone is
+/// invited to the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamInviteDetails:(DBTEAMLOGTeamInviteDetails *)teamInviteDetails;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -115,6 +137,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGActionDetailsTag) {
 /// @return Whether the union's current tag state has value "remove_action".
 ///
 - (BOOL)isRemoveAction;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_invite_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamInviteDetails` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_invite_details".
+///
+- (BOOL)isTeamInviteDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

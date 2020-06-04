@@ -28,20 +28,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGUnmountFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGUnmountFolderError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag) {
-  /// (no description).
-  DBSHARINGUnmountFolderErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGUnmountFolderErrorTag){
+    /// (no description).
+    DBSHARINGUnmountFolderErrorAccessError,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGUnmountFolderErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGUnmountFolderErrorNoPermission,
 
-  /// The shared folder can't be unmounted. One example where this can occur
-  /// is when the shared folder's parent folder is also a shared folder that
-  /// resides in the current user's Dropbox.
-  DBSHARINGUnmountFolderErrorNotUnmountable,
+    /// The shared folder can't be unmounted. One example where this can occur
+    /// is when the shared folder's parent folder is also a shared folder that
+    /// resides in the current user's Dropbox.
+    DBSHARINGUnmountFolderErrorNotUnmountable,
 
-  /// (no description).
-  DBSHARINGUnmountFolderErrorOther,
+    /// (no description).
+    DBSHARINGUnmountFolderErrorOther,
 
 };
 

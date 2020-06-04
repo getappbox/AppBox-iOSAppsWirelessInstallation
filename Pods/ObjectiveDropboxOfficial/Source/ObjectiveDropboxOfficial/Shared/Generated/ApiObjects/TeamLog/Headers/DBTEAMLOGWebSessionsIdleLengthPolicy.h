@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGWebSessionsIdleLengthPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGWebSessionsIdleLengthPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGWebSessionsIdleLengthPolicyTag) {
-  /// Defined idle session length.
-  DBTEAMLOGWebSessionsIdleLengthPolicyDefined,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGWebSessionsIdleLengthPolicyTag){
+    /// Defined idle session length.
+    DBTEAMLOGWebSessionsIdleLengthPolicyDefined,
 
-  /// Undefined idle session length.
-  DBTEAMLOGWebSessionsIdleLengthPolicyUndefined,
+    /// Undefined idle session length.
+    DBTEAMLOGWebSessionsIdleLengthPolicyUndefined,
 
-  /// (no description).
-  DBTEAMLOGWebSessionsIdleLengthPolicyOther,
+    /// (no description).
+    DBTEAMLOGWebSessionsIdleLengthPolicyOther,
 
 };
 

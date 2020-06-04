@@ -29,46 +29,46 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGFileActionTag` enum type represents the possible tag states
 /// with which the `DBSHARINGFileAction` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGFileActionTag) {
-  /// Disable viewer information on the file.
-  DBSHARINGFileActionDisableViewerInfo,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileActionTag){
+    /// Disable viewer information on the file.
+    DBSHARINGFileActionDisableViewerInfo,
 
-  /// Change or edit contents of the file.
-  DBSHARINGFileActionEditContents,
+    /// Change or edit contents of the file.
+    DBSHARINGFileActionEditContents,
 
-  /// Enable viewer information on the file.
-  DBSHARINGFileActionEnableViewerInfo,
+    /// Enable viewer information on the file.
+    DBSHARINGFileActionEnableViewerInfo,
 
-  /// Add a member with view permissions.
-  DBSHARINGFileActionInviteViewer,
+    /// Add a member with view permissions.
+    DBSHARINGFileActionInviteViewer,
 
-  /// Add a member with view permissions but no comment permissions.
-  DBSHARINGFileActionInviteViewerNoComment,
+    /// Add a member with view permissions but no comment permissions.
+    DBSHARINGFileActionInviteViewerNoComment,
 
-  /// Add a member with edit permissions.
-  DBSHARINGFileActionInviteEditor,
+    /// Add a member with edit permissions.
+    DBSHARINGFileActionInviteEditor,
 
-  /// Stop sharing this file.
-  DBSHARINGFileActionUnshare,
+    /// Stop sharing this file.
+    DBSHARINGFileActionUnshare,
 
-  /// Relinquish one's own membership to the file.
-  DBSHARINGFileActionRelinquishMembership,
+    /// Relinquish one's own membership to the file.
+    DBSHARINGFileActionRelinquishMembership,
 
-  /// Use create_view_link and create_edit_link instead.
-  DBSHARINGFileActionShareLink,
+    /// Use create_view_link and create_edit_link instead.
+    DBSHARINGFileActionShareLink,
 
-  /// Use create_view_link and create_edit_link instead.
-  DBSHARINGFileActionCreateLink,
+    /// Use create_view_link and create_edit_link instead.
+    DBSHARINGFileActionCreateLink,
 
-  /// Create a shared link to a file that only allows users to view the
-  /// content.
-  DBSHARINGFileActionCreateViewLink,
+    /// Create a shared link to a file that only allows users to view the
+    /// content.
+    DBSHARINGFileActionCreateViewLink,
 
-  /// Create a shared link to a file that allows users to edit the content.
-  DBSHARINGFileActionCreateEditLink,
+    /// Create a shared link to a file that allows users to edit the content.
+    DBSHARINGFileActionCreateEditLink,
 
-  /// (no description).
-  DBSHARINGFileActionOther,
+    /// (no description).
+    DBSHARINGFileActionOther,
 
 };
 

@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMRemoveCustomQuotaResultTag` enum type represents the possible tag
 /// states with which the `DBTEAMRemoveCustomQuotaResult` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMRemoveCustomQuotaResultTag) {
-  /// Successfully removed user.
-  DBTEAMRemoveCustomQuotaResultSuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRemoveCustomQuotaResultTag){
+    /// Successfully removed user.
+    DBTEAMRemoveCustomQuotaResultSuccess,
 
-  /// Invalid user (not in team).
-  DBTEAMRemoveCustomQuotaResultInvalidUser,
+    /// Invalid user (not in team).
+    DBTEAMRemoveCustomQuotaResultInvalidUser,
 
-  /// (no description).
-  DBTEAMRemoveCustomQuotaResultOther,
+    /// (no description).
+    DBTEAMRemoveCustomQuotaResultOther,
 
 };
 

@@ -28,21 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMGroupMemberSetAccessTypeErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMGroupMemberSetAccessTypeError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupMemberSetAccessTypeErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupMemberSetAccessTypeErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupMemberSetAccessTypeErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupMemberSetAccessTypeErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupMemberSetAccessTypeErrorOther,
+    /// (no description).
+    DBTEAMGroupMemberSetAccessTypeErrorOther,
 
-  /// This operation is not supported on system-managed groups.
-  DBTEAMGroupMemberSetAccessTypeErrorSystemManagedGroupDisallowed,
+    /// This operation is not supported on system-managed groups.
+    DBTEAMGroupMemberSetAccessTypeErrorSystemManagedGroupDisallowed,
 
-  /// The specified user is not a member of this group.
-  DBTEAMGroupMemberSetAccessTypeErrorMemberNotInGroup,
+    /// The specified user is not a member of this group.
+    DBTEAMGroupMemberSetAccessTypeErrorMemberNotInGroup,
 
-  /// A company managed group cannot be managed by a user.
-  DBTEAMGroupMemberSetAccessTypeErrorUserCannotBeManagerOfCompanyManagedGroup,
+    /// A company managed group cannot be managed by a user.
+    DBTEAMGroupMemberSetAccessTypeErrorUserCannotBeManagerOfCompanyManagedGroup,
 
 };
 

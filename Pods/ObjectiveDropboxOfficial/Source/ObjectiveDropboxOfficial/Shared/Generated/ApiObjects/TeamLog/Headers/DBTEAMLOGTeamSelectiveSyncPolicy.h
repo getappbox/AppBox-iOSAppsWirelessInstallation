@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGTeamSelectiveSyncPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGTeamSelectiveSyncPolicy` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGTeamSelectiveSyncPolicyTag) {
-  /// (no description).
-  DBTEAMLOGTeamSelectiveSyncPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamSelectiveSyncPolicyTag){
+    /// (no description).
+    DBTEAMLOGTeamSelectiveSyncPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGTeamSelectiveSyncPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGTeamSelectiveSyncPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGTeamSelectiveSyncPolicyOther,
+    /// (no description).
+    DBTEAMLOGTeamSelectiveSyncPolicyOther,
 
 };
 

@@ -27,24 +27,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupUpdateErrorTag` enum type represents the possible tag states
 /// with which the `DBTEAMGroupUpdateError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupUpdateErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupUpdateErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupUpdateErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupUpdateErrorOther,
+    /// (no description).
+    DBTEAMGroupUpdateErrorOther,
 
-  /// This operation is not supported on system-managed groups.
-  DBTEAMGroupUpdateErrorSystemManagedGroupDisallowed,
+    /// This operation is not supported on system-managed groups.
+    DBTEAMGroupUpdateErrorSystemManagedGroupDisallowed,
 
-  /// The requested group name is already being used by another group.
-  DBTEAMGroupUpdateErrorGroupNameAlreadyUsed,
+    /// The requested group name is already being used by another group.
+    DBTEAMGroupUpdateErrorGroupNameAlreadyUsed,
 
-  /// Group name is empty or has invalid characters.
-  DBTEAMGroupUpdateErrorGroupNameInvalid,
+    /// Group name is empty or has invalid characters.
+    DBTEAMGroupUpdateErrorGroupNameInvalid,
 
-  /// The requested external ID is already being used by another group.
-  DBTEAMGroupUpdateErrorExternalIdAlreadyInUse,
+    /// The requested external ID is already being used by another group.
+    DBTEAMGroupUpdateErrorExternalIdAlreadyInUse,
 
 };
 

@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBUSERSGetAccountBatchErrorTag` enum type represents the possible tag
 /// states with which the `DBUSERSGetAccountBatchError` union can exist.
-typedef NS_ENUM(NSInteger, DBUSERSGetAccountBatchErrorTag) {
-  /// The value is an account ID specified in `accountIds` in
-  /// `DBUSERSGetAccountBatchArg` that does not exist.
-  DBUSERSGetAccountBatchErrorNoAccount,
+typedef NS_CLOSED_ENUM(NSInteger, DBUSERSGetAccountBatchErrorTag){
+    /// The value is an account ID specified in `accountIds` in
+    /// `DBUSERSGetAccountBatchArg` that does not exist.
+    DBUSERSGetAccountBatchErrorNoAccount,
 
-  /// (no description).
-  DBUSERSGetAccountBatchErrorOther,
+    /// (no description).
+    DBUSERSGetAccountBatchErrorOther,
 
 };
 

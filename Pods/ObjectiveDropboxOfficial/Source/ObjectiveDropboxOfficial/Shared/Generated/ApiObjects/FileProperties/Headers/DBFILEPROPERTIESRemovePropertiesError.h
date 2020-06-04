@@ -30,25 +30,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESRemovePropertiesErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEPROPERTIESRemovePropertiesError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESRemovePropertiesErrorTag) {
-  /// Template does not exist for the given identifier.
-  DBFILEPROPERTIESRemovePropertiesErrorTemplateNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESRemovePropertiesErrorTag){
+    /// Template does not exist for the given identifier.
+    DBFILEPROPERTIESRemovePropertiesErrorTemplateNotFound,
 
-  /// You do not have permission to modify this template.
-  DBFILEPROPERTIESRemovePropertiesErrorRestrictedContent,
+    /// You do not have permission to modify this template.
+    DBFILEPROPERTIESRemovePropertiesErrorRestrictedContent,
 
-  /// (no description).
-  DBFILEPROPERTIESRemovePropertiesErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESRemovePropertiesErrorOther,
 
-  /// (no description).
-  DBFILEPROPERTIESRemovePropertiesErrorPath,
+    /// (no description).
+    DBFILEPROPERTIESRemovePropertiesErrorPath,
 
-  /// This folder cannot be tagged. Tagging folders is not supported for
-  /// team-owned templates.
-  DBFILEPROPERTIESRemovePropertiesErrorUnsupportedFolder,
+    /// This folder cannot be tagged. Tagging folders is not supported for
+    /// team-owned templates.
+    DBFILEPROPERTIESRemovePropertiesErrorUnsupportedFolder,
 
-  /// (no description).
-  DBFILEPROPERTIESRemovePropertiesErrorPropertyGroupLookup,
+    /// (no description).
+    DBFILEPROPERTIESRemovePropertiesErrorPropertyGroupLookup,
 
 };
 

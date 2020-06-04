@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGUnshareFileErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGUnshareFileError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag) {
-  /// (no description).
-  DBSHARINGUnshareFileErrorUserError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGUnshareFileErrorTag){
+    /// (no description).
+    DBSHARINGUnshareFileErrorUserError,
 
-  /// (no description).
-  DBSHARINGUnshareFileErrorAccessError,
+    /// (no description).
+    DBSHARINGUnshareFileErrorAccessError,
 
-  /// (no description).
-  DBSHARINGUnshareFileErrorOther,
+    /// (no description).
+    DBSHARINGUnshareFileErrorOther,
 
 };
 

@@ -28,21 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMTeamFolderCreateErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMTeamFolderCreateError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderCreateErrorTag) {
-  /// The provided name cannot be used.
-  DBTEAMTeamFolderCreateErrorInvalidFolderName,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderCreateErrorTag){
+    /// The provided name cannot be used.
+    DBTEAMTeamFolderCreateErrorInvalidFolderName,
 
-  /// There is already a team folder with the provided name.
-  DBTEAMTeamFolderCreateErrorFolderNameAlreadyUsed,
+    /// There is already a team folder with the provided name.
+    DBTEAMTeamFolderCreateErrorFolderNameAlreadyUsed,
 
-  /// The provided name cannot be used because it is reserved.
-  DBTEAMTeamFolderCreateErrorFolderNameReserved,
+    /// The provided name cannot be used because it is reserved.
+    DBTEAMTeamFolderCreateErrorFolderNameReserved,
 
-  /// An error occurred setting the sync settings.
-  DBTEAMTeamFolderCreateErrorSyncSettingsError,
+    /// An error occurred setting the sync settings.
+    DBTEAMTeamFolderCreateErrorSyncSettingsError,
 
-  /// (no description).
-  DBTEAMTeamFolderCreateErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderCreateErrorOther,
 
 };
 

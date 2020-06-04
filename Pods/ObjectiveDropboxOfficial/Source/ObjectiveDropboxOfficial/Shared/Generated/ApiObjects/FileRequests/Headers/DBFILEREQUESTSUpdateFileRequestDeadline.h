@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEREQUESTSUpdateFileRequestDeadlineTag` enum type represents the
 /// possible tag states with which the `DBFILEREQUESTSUpdateFileRequestDeadline`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSUpdateFileRequestDeadlineTag) {
-  /// Do not change the file request's deadline.
-  DBFILEREQUESTSUpdateFileRequestDeadlineNoUpdate,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSUpdateFileRequestDeadlineTag){
+    /// Do not change the file request's deadline.
+    DBFILEREQUESTSUpdateFileRequestDeadlineNoUpdate,
 
-  /// If null, the file request's deadline is cleared.
-  DBFILEREQUESTSUpdateFileRequestDeadlineUpdate,
+    /// If null, the file request's deadline is cleared.
+    DBFILEREQUESTSUpdateFileRequestDeadlineUpdate,
 
-  /// (no description).
-  DBFILEREQUESTSUpdateFileRequestDeadlineOther,
+    /// (no description).
+    DBFILEREQUESTSUpdateFileRequestDeadlineOther,
 
 };
 

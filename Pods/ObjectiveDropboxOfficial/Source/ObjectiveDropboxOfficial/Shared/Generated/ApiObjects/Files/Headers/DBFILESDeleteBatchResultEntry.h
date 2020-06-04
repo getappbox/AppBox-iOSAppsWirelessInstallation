@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESDeleteBatchResultEntryTag` enum type represents the possible tag
 /// states with which the `DBFILESDeleteBatchResultEntry` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag) {
-  /// (no description).
-  DBFILESDeleteBatchResultEntrySuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESDeleteBatchResultEntryTag){
+    /// (no description).
+    DBFILESDeleteBatchResultEntrySuccess,
 
-  /// (no description).
-  DBFILESDeleteBatchResultEntryFailure,
+    /// (no description).
+    DBFILESDeleteBatchResultEntryFailure,
 
 };
 

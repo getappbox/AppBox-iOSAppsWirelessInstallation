@@ -31,15 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGGetFileMetadataErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGGetFileMetadataError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGGetFileMetadataErrorTag) {
-  /// (no description).
-  DBSHARINGGetFileMetadataErrorUserError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGGetFileMetadataErrorTag){
+    /// (no description).
+    DBSHARINGGetFileMetadataErrorUserError,
 
-  /// (no description).
-  DBSHARINGGetFileMetadataErrorAccessError,
+    /// (no description).
+    DBSHARINGGetFileMetadataErrorAccessError,
 
-  /// (no description).
-  DBSHARINGGetFileMetadataErrorOther,
+    /// (no description).
+    DBSHARINGGetFileMetadataErrorOther,
 
 };
 

@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupCreateErrorTag` enum type represents the possible tag states
 /// with which the `DBTEAMGroupCreateError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupCreateErrorTag) {
-  /// The requested group name is already being used by another group.
-  DBTEAMGroupCreateErrorGroupNameAlreadyUsed,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupCreateErrorTag){
+    /// The requested group name is already being used by another group.
+    DBTEAMGroupCreateErrorGroupNameAlreadyUsed,
 
-  /// Group name is empty or has invalid characters.
-  DBTEAMGroupCreateErrorGroupNameInvalid,
+    /// Group name is empty or has invalid characters.
+    DBTEAMGroupCreateErrorGroupNameInvalid,
 
-  /// The requested external ID is already being used by another group.
-  DBTEAMGroupCreateErrorExternalIdAlreadyInUse,
+    /// The requested external ID is already being used by another group.
+    DBTEAMGroupCreateErrorExternalIdAlreadyInUse,
 
-  /// System-managed group cannot be manually created.
-  DBTEAMGroupCreateErrorSystemManagedGroupDisallowed,
+    /// System-managed group cannot be manually created.
+    DBTEAMGroupCreateErrorSystemManagedGroupDisallowed,
 
-  /// (no description).
-  DBTEAMGroupCreateErrorOther,
+    /// (no description).
+    DBTEAMGroupCreateErrorOther,
 
 };
 

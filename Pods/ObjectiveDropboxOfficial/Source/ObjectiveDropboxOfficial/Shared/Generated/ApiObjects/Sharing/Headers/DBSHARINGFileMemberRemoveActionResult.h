@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGFileMemberRemoveActionResultTag` enum type represents the
 /// possible tag states with which the `DBSHARINGFileMemberRemoveActionResult`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGFileMemberRemoveActionResultTag) {
-  /// Member was successfully removed from this file.
-  DBSHARINGFileMemberRemoveActionResultSuccess,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileMemberRemoveActionResultTag){
+    /// Member was successfully removed from this file.
+    DBSHARINGFileMemberRemoveActionResultSuccess,
 
-  /// User was not able to remove this member.
-  DBSHARINGFileMemberRemoveActionResultMemberError,
+    /// User was not able to remove this member.
+    DBSHARINGFileMemberRemoveActionResultMemberError,
 
-  /// (no description).
-  DBSHARINGFileMemberRemoveActionResultOther,
+    /// (no description).
+    DBSHARINGFileMemberRemoveActionResultOther,
 
 };
 

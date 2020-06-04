@@ -38,12 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param displayName Display name. Might be missing due to historical data
 /// gap.
 /// @param fileId Unique ID. Might be missing due to historical data gap.
+/// @param fileSize File or folder size in bytes.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPath:(DBTEAMLOGPathLogInfo *)path
                  displayName:(nullable NSString *)displayName
-                      fileId:(nullable NSString *)fileId;
+                      fileId:(nullable NSString *)fileId
+                    fileSize:(nullable NSNumber *)fileSize;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

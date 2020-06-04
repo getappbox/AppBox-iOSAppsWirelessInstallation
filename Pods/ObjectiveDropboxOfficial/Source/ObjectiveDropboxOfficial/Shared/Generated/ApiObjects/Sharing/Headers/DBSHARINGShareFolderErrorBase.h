@@ -28,23 +28,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGShareFolderErrorBaseTag` enum type represents the possible tag
 /// states with which the `DBSHARINGShareFolderErrorBase` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag) {
-  /// The current user's e-mail address is unverified.
-  DBSHARINGShareFolderErrorBaseEmailUnverified,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGShareFolderErrorBaseTag){
+    /// The current user's e-mail address is unverified.
+    DBSHARINGShareFolderErrorBaseEmailUnverified,
 
-  /// `path` in `DBSHARINGShareFolderArg` is invalid.
-  DBSHARINGShareFolderErrorBaseBadPath,
+    /// `path` in `DBSHARINGShareFolderArg` is invalid.
+    DBSHARINGShareFolderErrorBaseBadPath,
 
-  /// Team policy is more restrictive than `memberPolicy` in
-  /// `DBSHARINGShareFolderArg`.
-  DBSHARINGShareFolderErrorBaseTeamPolicyDisallowsMemberPolicy,
+    /// Team policy is more restrictive than `memberPolicy` in
+    /// `DBSHARINGShareFolderArg`.
+    DBSHARINGShareFolderErrorBaseTeamPolicyDisallowsMemberPolicy,
 
-  /// The current user's account is not allowed to select the specified
-  /// `sharedLinkPolicy` in `DBSHARINGShareFolderArg`.
-  DBSHARINGShareFolderErrorBaseDisallowedSharedLinkPolicy,
+    /// The current user's account is not allowed to select the specified
+    /// `sharedLinkPolicy` in `DBSHARINGShareFolderArg`.
+    DBSHARINGShareFolderErrorBaseDisallowedSharedLinkPolicy,
 
-  /// (no description).
-  DBSHARINGShareFolderErrorBaseOther,
+    /// (no description).
+    DBSHARINGShareFolderErrorBaseOther,
 
 };
 

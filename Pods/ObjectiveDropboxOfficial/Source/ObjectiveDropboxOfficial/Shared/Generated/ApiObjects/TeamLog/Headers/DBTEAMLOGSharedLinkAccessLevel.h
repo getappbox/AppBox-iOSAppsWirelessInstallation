@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGSharedLinkAccessLevelTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGSharedLinkAccessLevel` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSharedLinkAccessLevelTag) {
-  /// (no description).
-  DBTEAMLOGSharedLinkAccessLevelNone,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedLinkAccessLevelTag){
+    /// (no description).
+    DBTEAMLOGSharedLinkAccessLevelNone,
 
-  /// (no description).
-  DBTEAMLOGSharedLinkAccessLevelReader,
+    /// (no description).
+    DBTEAMLOGSharedLinkAccessLevelReader,
 
-  /// (no description).
-  DBTEAMLOGSharedLinkAccessLevelWriter,
+    /// (no description).
+    DBTEAMLOGSharedLinkAccessLevelWriter,
 
-  /// (no description).
-  DBTEAMLOGSharedLinkAccessLevelOther,
+    /// (no description).
+    DBTEAMLOGSharedLinkAccessLevelOther,
 
 };
 

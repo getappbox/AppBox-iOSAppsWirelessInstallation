@@ -27,33 +27,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESLookupErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESLookupError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESLookupErrorTag) {
-  /// The given path does not satisfy the required path format. Please refer
-  /// to the Path formats documentation
-  /// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
-  /// for more information.
-  DBFILESLookupErrorMalformedPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESLookupErrorTag){
+    /// The given path does not satisfy the required path format. Please refer
+    /// to the Path formats documentation
+    /// https://www.dropbox.com/developers/documentation/http/documentation#path-formats
+    /// for more information.
+    DBFILESLookupErrorMalformedPath,
 
-  /// There is nothing at the given path.
-  DBFILESLookupErrorNotFound,
+    /// There is nothing at the given path.
+    DBFILESLookupErrorNotFound,
 
-  /// We were expecting a file, but the given path refers to something that
-  /// isn't a file.
-  DBFILESLookupErrorNotFile,
+    /// We were expecting a file, but the given path refers to something that
+    /// isn't a file.
+    DBFILESLookupErrorNotFile,
 
-  /// We were expecting a folder, but the given path refers to something that
-  /// isn't a folder.
-  DBFILESLookupErrorNotFolder,
+    /// We were expecting a folder, but the given path refers to something that
+    /// isn't a folder.
+    DBFILESLookupErrorNotFolder,
 
-  /// The file cannot be transferred because the content is restricted.  For
-  /// example, sometimes there are legal restrictions due to copyright claims.
-  DBFILESLookupErrorRestrictedContent,
+    /// The file cannot be transferred because the content is restricted.  For
+    /// example, sometimes there are legal restrictions due to copyright claims.
+    DBFILESLookupErrorRestrictedContent,
 
-  /// This operation is not supported for this content type.
-  DBFILESLookupErrorUnsupportedContentType,
+    /// This operation is not supported for this content type.
+    DBFILESLookupErrorUnsupportedContentType,
 
-  /// (no description).
-  DBFILESLookupErrorOther,
+    /// (no description).
+    DBFILESLookupErrorOther,
 
 };
 

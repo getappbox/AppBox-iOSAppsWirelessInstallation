@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupSelectorErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMGroupSelectorError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupSelectorErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupSelectorErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupSelectorErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupSelectorErrorOther,
+    /// (no description).
+    DBTEAMGroupSelectorErrorOther,
 
 };
 

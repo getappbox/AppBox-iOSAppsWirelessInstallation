@@ -27,19 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERPaperDocUpdatePolicyTag` enum type represents the possible tag
 /// states with which the `DBPAPERPaperDocUpdatePolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERPaperDocUpdatePolicyTag) {
-  /// The content will be appended to the doc.
-  DBPAPERPaperDocUpdatePolicyAppend,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERPaperDocUpdatePolicyTag){
+    /// The content will be appended to the doc.
+    DBPAPERPaperDocUpdatePolicyAppend,
 
-  /// The content will be prepended to the doc. Note: the doc title will not
-  /// be affected.
-  DBPAPERPaperDocUpdatePolicyPrepend,
+    /// The content will be prepended to the doc. The doc title will not be
+    /// affected.
+    DBPAPERPaperDocUpdatePolicyPrepend,
 
-  /// The document will be overwitten at the head with the provided content.
-  DBPAPERPaperDocUpdatePolicyOverwriteAll,
+    /// The document will be overwitten at the head with the provided content.
+    DBPAPERPaperDocUpdatePolicyOverwriteAll,
 
-  /// (no description).
-  DBPAPERPaperDocUpdatePolicyOther,
+    /// (no description).
+    DBPAPERPaperDocUpdatePolicyOther,
 
 };
 
@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBPAPERPaperDocUpdatePolicyTag) {
 /// Initializes union class with tag state of "prepend".
 ///
 /// Description of the "prepend" tag state: The content will be prepended to the
-/// doc. Note: the doc title will not be affected.
+/// doc. The doc title will not be affected.
 ///
 /// @return An initialized instance.
 ///

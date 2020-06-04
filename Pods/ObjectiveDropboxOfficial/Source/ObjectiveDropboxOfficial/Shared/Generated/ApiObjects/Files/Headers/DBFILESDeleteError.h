@@ -29,22 +29,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESDeleteErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESDeleteError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESDeleteErrorTag) {
-  /// (no description).
-  DBFILESDeleteErrorPathLookup,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESDeleteErrorTag){
+    /// (no description).
+    DBFILESDeleteErrorPathLookup,
 
-  /// (no description).
-  DBFILESDeleteErrorPathWrite,
+    /// (no description).
+    DBFILESDeleteErrorPathWrite,
 
-  /// There are too many write operations in user's Dropbox. Please retry this
-  /// request.
-  DBFILESDeleteErrorTooManyWriteOperations,
+    /// There are too many write operations in user's Dropbox. Please retry this
+    /// request.
+    DBFILESDeleteErrorTooManyWriteOperations,
 
-  /// There are too many files in one request. Please retry with fewer files.
-  DBFILESDeleteErrorTooManyFiles,
+    /// There are too many files in one request. Please retry with fewer files.
+    DBFILESDeleteErrorTooManyFiles,
 
-  /// (no description).
-  DBFILESDeleteErrorOther,
+    /// (no description).
+    DBFILESDeleteErrorOther,
 
 };
 

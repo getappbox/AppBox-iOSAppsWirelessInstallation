@@ -27,28 +27,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupMembersRemoveErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMGroupMembersRemoveError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupMembersRemoveErrorTag) {
-  /// No matching group found. No groups match the specified group ID.
-  DBTEAMGroupMembersRemoveErrorGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupMembersRemoveErrorTag){
+    /// No matching group found. No groups match the specified group ID.
+    DBTEAMGroupMembersRemoveErrorGroupNotFound,
 
-  /// (no description).
-  DBTEAMGroupMembersRemoveErrorOther,
+    /// (no description).
+    DBTEAMGroupMembersRemoveErrorOther,
 
-  /// This operation is not supported on system-managed groups.
-  DBTEAMGroupMembersRemoveErrorSystemManagedGroupDisallowed,
+    /// This operation is not supported on system-managed groups.
+    DBTEAMGroupMembersRemoveErrorSystemManagedGroupDisallowed,
 
-  /// At least one of the specified users is not a member of the group.
-  DBTEAMGroupMembersRemoveErrorMemberNotInGroup,
+    /// At least one of the specified users is not a member of the group.
+    DBTEAMGroupMembersRemoveErrorMemberNotInGroup,
 
-  /// Group is not in this team. You cannot remove members from a group that
-  /// is outside of your team.
-  DBTEAMGroupMembersRemoveErrorGroupNotInTeam,
+    /// Group is not in this team. You cannot remove members from a group that
+    /// is outside of your team.
+    DBTEAMGroupMembersRemoveErrorGroupNotInTeam,
 
-  /// These members are not part of your team.
-  DBTEAMGroupMembersRemoveErrorMembersNotInTeam,
+    /// These members are not part of your team.
+    DBTEAMGroupMembersRemoveErrorMembersNotInTeam,
 
-  /// These users were not found in Dropbox.
-  DBTEAMGroupMembersRemoveErrorUsersNotFound,
+    /// These users were not found in Dropbox.
+    DBTEAMGroupMembersRemoveErrorUsersNotFound,
 
 };
 

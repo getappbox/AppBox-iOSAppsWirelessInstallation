@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESLookUpPropertiesErrorTag` enum type represents the
 /// possible tag states with which the `DBFILEPROPERTIESLookUpPropertiesError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESLookUpPropertiesErrorTag) {
-  /// No property group was found.
-  DBFILEPROPERTIESLookUpPropertiesErrorPropertyGroupNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESLookUpPropertiesErrorTag){
+    /// No property group was found.
+    DBFILEPROPERTIESLookUpPropertiesErrorPropertyGroupNotFound,
 
-  /// (no description).
-  DBFILEPROPERTIESLookUpPropertiesErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESLookUpPropertiesErrorOther,
 
 };
 

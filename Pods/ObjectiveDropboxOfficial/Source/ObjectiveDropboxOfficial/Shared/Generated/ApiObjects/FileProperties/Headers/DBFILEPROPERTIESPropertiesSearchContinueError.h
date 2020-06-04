@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESPropertiesSearchContinueErrorTag` enum type represents
 /// the possible tag states with which the
 /// `DBFILEPROPERTIESPropertiesSearchContinueError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchContinueErrorTag) {
-  /// Indicates that the cursor has been invalidated. Call `propertiesSearch`
-  /// to obtain a new cursor.
-  DBFILEPROPERTIESPropertiesSearchContinueErrorReset,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESPropertiesSearchContinueErrorTag){
+    /// Indicates that the cursor has been invalidated. Call `propertiesSearch`
+    /// to obtain a new cursor.
+    DBFILEPROPERTIESPropertiesSearchContinueErrorReset,
 
-  /// (no description).
-  DBFILEPROPERTIESPropertiesSearchContinueErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESPropertiesSearchContinueErrorOther,
 
 };
 

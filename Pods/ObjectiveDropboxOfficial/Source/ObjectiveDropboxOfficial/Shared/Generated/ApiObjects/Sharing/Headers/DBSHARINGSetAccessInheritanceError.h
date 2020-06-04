@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGSetAccessInheritanceErrorTag` enum type represents the
 /// possible tag states with which the `DBSHARINGSetAccessInheritanceError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSetAccessInheritanceErrorTag) {
-  /// Unable to access shared folder.
-  DBSHARINGSetAccessInheritanceErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSetAccessInheritanceErrorTag){
+    /// Unable to access shared folder.
+    DBSHARINGSetAccessInheritanceErrorAccessError,
 
-  /// The current user does not have permission to perform this action.
-  DBSHARINGSetAccessInheritanceErrorNoPermission,
+    /// The current user does not have permission to perform this action.
+    DBSHARINGSetAccessInheritanceErrorNoPermission,
 
-  /// (no description).
-  DBSHARINGSetAccessInheritanceErrorOther,
+    /// (no description).
+    DBSHARINGSetAccessInheritanceErrorOther,
 
 };
 

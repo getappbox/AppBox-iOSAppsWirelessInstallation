@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGSharedLinkAlreadyExistsMetadataTag` enum type represents the
 /// possible tag states with which the
 /// `DBSHARINGSharedLinkAlreadyExistsMetadata` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGSharedLinkAlreadyExistsMetadataTag) {
-  /// Metadata of the shared link that already exists.
-  DBSHARINGSharedLinkAlreadyExistsMetadataMetadata,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharedLinkAlreadyExistsMetadataTag){
+    /// Metadata of the shared link that already exists.
+    DBSHARINGSharedLinkAlreadyExistsMetadataMetadata,
 
-  /// (no description).
-  DBSHARINGSharedLinkAlreadyExistsMetadataOther,
+    /// (no description).
+    DBSHARINGSharedLinkAlreadyExistsMetadataOther,
 
 };
 

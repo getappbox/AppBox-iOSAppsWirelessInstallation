@@ -27,30 +27,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGAddMemberSelectorErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGAddMemberSelectorError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag) {
-  /// Automatically created groups can only be added to team folders.
-  DBSHARINGAddMemberSelectorErrorAutomaticGroup,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag){
+    /// Automatically created groups can only be added to team folders.
+    DBSHARINGAddMemberSelectorErrorAutomaticGroup,
 
-  /// The value is the ID that could not be identified.
-  DBSHARINGAddMemberSelectorErrorInvalidDropboxId,
+    /// The value is the ID that could not be identified.
+    DBSHARINGAddMemberSelectorErrorInvalidDropboxId,
 
-  /// The value is the e-email address that is malformed.
-  DBSHARINGAddMemberSelectorErrorInvalidEmail,
+    /// The value is the e-email address that is malformed.
+    DBSHARINGAddMemberSelectorErrorInvalidEmail,
 
-  /// The value is the ID of the Dropbox user with an unverified e-mail
-  /// address.  Invite unverified users by e-mail address instead of by their
-  /// Dropbox ID.
-  DBSHARINGAddMemberSelectorErrorUnverifiedDropboxId,
+    /// The value is the ID of the Dropbox user with an unverified e-mail
+    /// address.  Invite unverified users by e-mail address instead of by their
+    /// Dropbox ID.
+    DBSHARINGAddMemberSelectorErrorUnverifiedDropboxId,
 
-  /// At least one of the specified groups in `members` in
-  /// `DBSHARINGAddFolderMemberArg` is deleted.
-  DBSHARINGAddMemberSelectorErrorGroupDeleted,
+    /// At least one of the specified groups in `members` in
+    /// `DBSHARINGAddFolderMemberArg` is deleted.
+    DBSHARINGAddMemberSelectorErrorGroupDeleted,
 
-  /// Sharing to a group that is not on the current user's team.
-  DBSHARINGAddMemberSelectorErrorGroupNotOnTeam,
+    /// Sharing to a group that is not on the current user's team.
+    DBSHARINGAddMemberSelectorErrorGroupNotOnTeam,
 
-  /// (no description).
-  DBSHARINGAddMemberSelectorErrorOther,
+    /// (no description).
+    DBSHARINGAddMemberSelectorErrorOther,
 
 };
 

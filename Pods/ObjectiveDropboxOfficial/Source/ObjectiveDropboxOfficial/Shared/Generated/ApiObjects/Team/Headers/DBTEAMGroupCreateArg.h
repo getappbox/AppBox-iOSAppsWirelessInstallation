@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Group name.
 @property (nonatomic, readonly, copy) NSString *groupName;
 
+/// Automatically add the creator of the group.
+@property (nonatomic, readonly) NSNumber *addCreatorAsOwner;
+
 /// The creator of a team can associate an arbitrary external ID to the group.
 @property (nonatomic, readonly, copy, nullable) NSString *groupExternalId;
 
@@ -41,6 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param groupName Group name.
+/// @param addCreatorAsOwner Automatically add the creator of the group.
 /// @param groupExternalId The creator of a team can associate an arbitrary
 /// external ID to the group.
 /// @param groupManagementType Whether the team can be managed by selected
@@ -49,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithGroupName:(NSString *)groupName
+                addCreatorAsOwner:(nullable NSNumber *)addCreatorAsOwner
                   groupExternalId:(nullable NSString *)groupExternalId
               groupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)groupManagementType;
 

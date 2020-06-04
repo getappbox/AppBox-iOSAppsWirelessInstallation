@@ -13,21 +13,36 @@
 @class DBTEAMLOGAccountCaptureMigrateAccountDetails;
 @class DBTEAMLOGAccountCaptureNotificationEmailsSentDetails;
 @class DBTEAMLOGAccountCaptureRelinquishAccountDetails;
+@class DBTEAMLOGAccountLockOrUnlockedDetails;
 @class DBTEAMLOGAllowDownloadDisabledDetails;
 @class DBTEAMLOGAllowDownloadEnabledDetails;
 @class DBTEAMLOGAppLinkTeamDetails;
 @class DBTEAMLOGAppLinkUserDetails;
 @class DBTEAMLOGAppUnlinkTeamDetails;
 @class DBTEAMLOGAppUnlinkUserDetails;
+@class DBTEAMLOGBinderAddPageDetails;
+@class DBTEAMLOGBinderAddSectionDetails;
+@class DBTEAMLOGBinderRemovePageDetails;
+@class DBTEAMLOGBinderRemoveSectionDetails;
+@class DBTEAMLOGBinderRenamePageDetails;
+@class DBTEAMLOGBinderRenameSectionDetails;
+@class DBTEAMLOGBinderReorderPageDetails;
+@class DBTEAMLOGBinderReorderSectionDetails;
 @class DBTEAMLOGCameraUploadsPolicyChangedDetails;
+@class DBTEAMLOGChangedEnterpriseAdminRoleDetails;
+@class DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails;
 @class DBTEAMLOGCollectionShareDetails;
 @class DBTEAMLOGCreateFolderDetails;
+@class DBTEAMLOGCreateTeamInviteLinkDetails;
 @class DBTEAMLOGDataPlacementRestrictionChangePolicyDetails;
 @class DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetails;
+@class DBTEAMLOGDeleteTeamInviteLinkDetails;
+@class DBTEAMLOGDeviceApprovalsAddExceptionDetails;
 @class DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetails;
 @class DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetails;
 @class DBTEAMLOGDeviceApprovalsChangeOverageActionDetails;
 @class DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails;
+@class DBTEAMLOGDeviceApprovalsRemoveExceptionDetails;
 @class DBTEAMLOGDeviceChangeIpDesktopDetails;
 @class DBTEAMLOGDeviceChangeIpMobileDetails;
 @class DBTEAMLOGDeviceChangeIpWebDetails;
@@ -58,8 +73,12 @@
 @class DBTEAMLOGEmmRefreshAuthTokenDetails;
 @class DBTEAMLOGEmmRemoveExceptionDetails;
 @class DBTEAMLOGEnabledDomainInvitesDetails;
+@class DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedDetails;
+@class DBTEAMLOGEndedEnterpriseAdminSessionDetails;
+@class DBTEAMLOGEnterpriseSettingsLockingDetails;
 @class DBTEAMLOGEventDetails;
 @class DBTEAMLOGExportMembersReportDetails;
+@class DBTEAMLOGExportMembersReportFailDetails;
 @class DBTEAMLOGExtendedVersionHistoryChangePolicyDetails;
 @class DBTEAMLOGFileAddCommentDetails;
 @class DBTEAMLOGFileAddDetails;
@@ -73,6 +92,8 @@
 @class DBTEAMLOGFileEditDetails;
 @class DBTEAMLOGFileGetCopyReferenceDetails;
 @class DBTEAMLOGFileLikeCommentDetails;
+@class DBTEAMLOGFileLockingLockStatusChangedDetails;
+@class DBTEAMLOGFileLockingPolicyChangedDetails;
 @class DBTEAMLOGFileMoveDetails;
 @class DBTEAMLOGFilePermanentlyDeleteDetails;
 @class DBTEAMLOGFilePreviewDetails;
@@ -90,8 +111,17 @@
 @class DBTEAMLOGFileRevertDetails;
 @class DBTEAMLOGFileRollbackChangesDetails;
 @class DBTEAMLOGFileSaveCopyReferenceDetails;
+@class DBTEAMLOGFileTransfersFileAddDetails;
+@class DBTEAMLOGFileTransfersPolicyChangedDetails;
+@class DBTEAMLOGFileTransfersTransferDeleteDetails;
+@class DBTEAMLOGFileTransfersTransferDownloadDetails;
+@class DBTEAMLOGFileTransfersTransferSendDetails;
+@class DBTEAMLOGFileTransfersTransferViewDetails;
 @class DBTEAMLOGFileUnlikeCommentDetails;
 @class DBTEAMLOGFileUnresolveCommentDetails;
+@class DBTEAMLOGFolderOverviewDescriptionChangedDetails;
+@class DBTEAMLOGFolderOverviewItemPinnedDetails;
+@class DBTEAMLOGFolderOverviewItemUnpinnedDetails;
 @class DBTEAMLOGGoogleSsoChangePolicyDetails;
 @class DBTEAMLOGGroupAddExternalIdDetails;
 @class DBTEAMLOGGroupAddMemberDetails;
@@ -113,6 +143,17 @@
 @class DBTEAMLOGIntegrationConnectedDetails;
 @class DBTEAMLOGIntegrationDisconnectedDetails;
 @class DBTEAMLOGIntegrationPolicyChangedDetails;
+@class DBTEAMLOGLegalHoldsActivateAHoldDetails;
+@class DBTEAMLOGLegalHoldsAddMembersDetails;
+@class DBTEAMLOGLegalHoldsChangeHoldDetailsDetails;
+@class DBTEAMLOGLegalHoldsChangeHoldNameDetails;
+@class DBTEAMLOGLegalHoldsExportAHoldDetails;
+@class DBTEAMLOGLegalHoldsExportCancelledDetails;
+@class DBTEAMLOGLegalHoldsExportDownloadedDetails;
+@class DBTEAMLOGLegalHoldsExportRemovedDetails;
+@class DBTEAMLOGLegalHoldsReleaseAHoldDetails;
+@class DBTEAMLOGLegalHoldsRemoveMembersDetails;
+@class DBTEAMLOGLegalHoldsReportAHoldDetails;
 @class DBTEAMLOGLoginFailDetails;
 @class DBTEAMLOGLoginSuccessDetails;
 @class DBTEAMLOGLogoutDetails;
@@ -125,9 +166,12 @@
 @class DBTEAMLOGMemberChangeNameDetails;
 @class DBTEAMLOGMemberChangeStatusDetails;
 @class DBTEAMLOGMemberDeleteManualContactsDetails;
+@class DBTEAMLOGMemberDeleteProfilePhotoDetails;
 @class DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetails;
 @class DBTEAMLOGMemberRemoveExternalIdDetails;
 @class DBTEAMLOGMemberRequestsChangePolicyDetails;
+@class DBTEAMLOGMemberSendInvitePolicyChangedDetails;
+@class DBTEAMLOGMemberSetProfilePhotoDetails;
 @class DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetails;
 @class DBTEAMLOGMemberSpaceLimitsAddExceptionDetails;
 @class DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyDetails;
@@ -142,12 +186,20 @@
 @class DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetails;
 @class DBTEAMLOGMissingDetails;
 @class DBTEAMLOGNetworkControlChangePolicyDetails;
+@class DBTEAMLOGNoExpirationLinkGenCreateReportDetails;
+@class DBTEAMLOGNoExpirationLinkGenReportFailedDetails;
+@class DBTEAMLOGNoPasswordLinkGenCreateReportDetails;
+@class DBTEAMLOGNoPasswordLinkGenReportFailedDetails;
+@class DBTEAMLOGNoPasswordLinkViewCreateReportDetails;
+@class DBTEAMLOGNoPasswordLinkViewReportFailedDetails;
 @class DBTEAMLOGNoteAclInviteOnlyDetails;
 @class DBTEAMLOGNoteAclLinkDetails;
 @class DBTEAMLOGNoteAclTeamLinkDetails;
 @class DBTEAMLOGNoteShareReceiveDetails;
 @class DBTEAMLOGNoteSharedDetails;
 @class DBTEAMLOGOpenNoteSharedDetails;
+@class DBTEAMLOGOutdatedLinkViewCreateReportDetails;
+@class DBTEAMLOGOutdatedLinkViewReportFailedDetails;
 @class DBTEAMLOGPaperAdminExportStartDetails;
 @class DBTEAMLOGPaperChangeDeploymentPolicyDetails;
 @class DBTEAMLOGPaperChangeMemberLinkPolicyDetails;
@@ -194,16 +246,23 @@
 @class DBTEAMLOGPaperFolderDeletedDetails;
 @class DBTEAMLOGPaperFolderFollowedDetails;
 @class DBTEAMLOGPaperFolderTeamInviteDetails;
+@class DBTEAMLOGPaperPublishedLinkChangePermissionDetails;
 @class DBTEAMLOGPaperPublishedLinkCreateDetails;
 @class DBTEAMLOGPaperPublishedLinkDisabledDetails;
 @class DBTEAMLOGPaperPublishedLinkViewDetails;
 @class DBTEAMLOGPasswordChangeDetails;
 @class DBTEAMLOGPasswordResetAllDetails;
 @class DBTEAMLOGPasswordResetDetails;
+@class DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetails;
+@class DBTEAMLOGPendingSecondaryEmailAddedDetails;
 @class DBTEAMLOGPermanentDeleteChangePolicyDetails;
 @class DBTEAMLOGResellerSupportChangePolicyDetails;
 @class DBTEAMLOGResellerSupportSessionEndDetails;
 @class DBTEAMLOGResellerSupportSessionStartDetails;
+@class DBTEAMLOGRewindFolderDetails;
+@class DBTEAMLOGRewindPolicyChangedDetails;
+@class DBTEAMLOGSecondaryEmailDeletedDetails;
+@class DBTEAMLOGSecondaryEmailVerifiedDetails;
 @class DBTEAMLOGSecondaryMailsPolicyChangedDetails;
 @class DBTEAMLOGSfAddGroupDetails;
 @class DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails;
@@ -238,6 +297,8 @@
 @class DBTEAMLOGSharedContentRemoveLinkPasswordDetails;
 @class DBTEAMLOGSharedContentRemoveMemberDetails;
 @class DBTEAMLOGSharedContentRequestAccessDetails;
+@class DBTEAMLOGSharedContentRestoreInviteesDetails;
+@class DBTEAMLOGSharedContentRestoreMemberDetails;
 @class DBTEAMLOGSharedContentUnshareDetails;
 @class DBTEAMLOGSharedContentViewDetails;
 @class DBTEAMLOGSharedFolderChangeLinkPolicyDetails;
@@ -258,6 +319,15 @@
 @class DBTEAMLOGSharedLinkDisableDetails;
 @class DBTEAMLOGSharedLinkDownloadDetails;
 @class DBTEAMLOGSharedLinkRemoveExpiryDetails;
+@class DBTEAMLOGSharedLinkSettingsAddExpirationDetails;
+@class DBTEAMLOGSharedLinkSettingsAddPasswordDetails;
+@class DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledDetails;
+@class DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledDetails;
+@class DBTEAMLOGSharedLinkSettingsChangeAudienceDetails;
+@class DBTEAMLOGSharedLinkSettingsChangeExpirationDetails;
+@class DBTEAMLOGSharedLinkSettingsChangePasswordDetails;
+@class DBTEAMLOGSharedLinkSettingsRemoveExpirationDetails;
+@class DBTEAMLOGSharedLinkSettingsRemovePasswordDetails;
 @class DBTEAMLOGSharedLinkShareDetails;
 @class DBTEAMLOGSharedLinkViewDetails;
 @class DBTEAMLOGSharedNoteOpenedDetails;
@@ -298,6 +368,7 @@
 @class DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetails;
 @class DBTEAMLOGSmartSyncNotOptOutDetails;
 @class DBTEAMLOGSmartSyncOptOutDetails;
+@class DBTEAMLOGSmarterSmartSyncPolicyChangedDetails;
 @class DBTEAMLOGSsoAddCertDetails;
 @class DBTEAMLOGSsoAddLoginUrlDetails;
 @class DBTEAMLOGSsoAddLogoutUrlDetails;
@@ -310,6 +381,7 @@
 @class DBTEAMLOGSsoRemoveCertDetails;
 @class DBTEAMLOGSsoRemoveLoginUrlDetails;
 @class DBTEAMLOGSsoRemoveLogoutUrlDetails;
+@class DBTEAMLOGStartedEnterpriseAdminSessionDetails;
 @class DBTEAMLOGTeamActivityCreateReportDetails;
 @class DBTEAMLOGTeamActivityCreateReportFailDetails;
 @class DBTEAMLOGTeamExtensionsPolicyChangedDetails;
@@ -345,16 +417,21 @@
 @class DBTEAMLOGTeamProfileRemoveLogoDetails;
 @class DBTEAMLOGTeamSelectiveSyncPolicyChangedDetails;
 @class DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails;
+@class DBTEAMLOGTeamSharingWhitelistSubjectsChangedDetails;
 @class DBTEAMLOGTfaAddBackupPhoneDetails;
+@class DBTEAMLOGTfaAddExceptionDetails;
 @class DBTEAMLOGTfaAddSecurityKeyDetails;
 @class DBTEAMLOGTfaChangeBackupPhoneDetails;
 @class DBTEAMLOGTfaChangePolicyDetails;
 @class DBTEAMLOGTfaChangeStatusDetails;
 @class DBTEAMLOGTfaRemoveBackupPhoneDetails;
+@class DBTEAMLOGTfaRemoveExceptionDetails;
 @class DBTEAMLOGTfaRemoveSecurityKeyDetails;
 @class DBTEAMLOGTfaResetDetails;
 @class DBTEAMLOGTwoAccountChangePolicyDetails;
 @class DBTEAMLOGViewerInfoPolicyChangedDetails;
+@class DBTEAMLOGWatermarkingPolicyChangedDetails;
+@class DBTEAMLOGWebSessionsChangeActiveSessionLimitDetails;
 @class DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetails;
 @class DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetails;
 
@@ -377,1054 +454,1285 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGEventDetailsTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGEventDetails` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
-  /// (no description).
-  DBTEAMLOGEventDetailsAppLinkTeamDetails,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
+    /// (no description).
+    DBTEAMLOGEventDetailsAppLinkTeamDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAppLinkUserDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAppLinkUserDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAppUnlinkTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAppUnlinkTeamDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAppUnlinkUserDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAppUnlinkUserDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsIntegrationConnectedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsIntegrationConnectedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsIntegrationDisconnectedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsIntegrationDisconnectedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileAddCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileAddCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileChangeCommentSubscriptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileDeleteCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileDeleteCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileEditCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileEditCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileLikeCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileLikeCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileResolveCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileResolveCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileUnlikeCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileUnlikeCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileUnresolveCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileUnresolveCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceChangeIpWebDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceChangeIpWebDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceDeleteOnUnlinkFailDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceDeleteOnUnlinkFailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceDeleteOnUnlinkSuccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceDeleteOnUnlinkSuccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceLinkFailDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceLinkFailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceLinkSuccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceLinkSuccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceManagementDisabledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceManagementDisabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceManagementEnabledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceManagementEnabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceUnlinkDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceUnlinkDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAccountCaptureMigrateAccountDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAccountCaptureMigrateAccountDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAccountCaptureNotificationEmailsSentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAccountCaptureNotificationEmailsSentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAccountCaptureRelinquishAccountDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAccountCaptureRelinquishAccountDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDisabledDomainInvitesDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDisabledDomainInvitesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainInvitesApproveRequestToJoinTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainInvitesApproveRequestToJoinTeamDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainInvitesDeclineRequestToJoinTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainInvitesDeclineRequestToJoinTeamDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainInvitesEmailExistingUsersDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainInvitesEmailExistingUsersDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainInvitesRequestToJoinTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainInvitesRequestToJoinTeamDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainInvitesSetInviteNewUserPrefToNoDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainInvitesSetInviteNewUserPrefToNoDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainInvitesSetInviteNewUserPrefToYesDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainInvitesSetInviteNewUserPrefToYesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainVerificationAddDomainFailDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainVerificationAddDomainFailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainVerificationAddDomainSuccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainVerificationAddDomainSuccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDomainVerificationRemoveDomainDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDomainVerificationRemoveDomainDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEnabledDomainInvitesDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEnabledDomainInvitesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsCreateFolderDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsCreateFolderDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileAddDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileAddDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileCopyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileCopyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileDeleteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileDownloadDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileDownloadDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileEditDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileEditDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileGetCopyReferenceDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileGetCopyReferenceDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileMoveDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileLockingLockStatusChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFilePermanentlyDeleteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileMoveDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFilePreviewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFilePermanentlyDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRenameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFilePreviewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRestoreDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRenameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRevertDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRestoreDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRollbackChangesDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRevertDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileSaveCopyReferenceDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRollbackChangesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestChangeDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileSaveCopyReferenceDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestCloseDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFolderOverviewDescriptionChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFolderOverviewItemPinnedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestDeleteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFolderOverviewItemUnpinnedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestReceiveFileDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsRewindFolderDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupAddExternalIdDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestChangeDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupAddMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestCloseDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupChangeExternalIdDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupChangeManagementTypeDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupChangeMemberRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestReceiveFileDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupAddExternalIdDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupDeleteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupAddMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupChangeExternalIdDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupChangeManagementTypeDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupMovedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupChangeMemberRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupRemoveExternalIdDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupRemoveMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupRenameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupDescriptionUpdatedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmErrorDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupJoinPolicyUpdatedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGuestAdminSignedInViaTrustedTeamsDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupMovedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGuestAdminSignedOutViaTrustedTeamsDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupRemoveExternalIdDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsLoginFailDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupRemoveMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsLoginSuccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupRenameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsLogoutDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsResellerSupportSessionEndDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsResellerSupportSessionStartDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSignInAsSessionEndDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSignInAsSessionStartDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoErrorDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberAddExternalIdDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberAddNameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberChangeAdminRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberChangeEmailDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberChangeExternalIdDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberChangeMembershipTypeDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberChangeNameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmErrorDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberChangeStatusDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGuestAdminSignedInViaTrustedTeamsDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberDeleteManualContactsDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGuestAdminSignedOutViaTrustedTeamsDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberPermanentlyDeleteAccountContentsDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLoginFailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberRemoveExternalIdDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLoginSuccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsAddCustomQuotaDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsLogoutDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsChangeCustomQuotaDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsResellerSupportSessionEndDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsChangeStatusDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsResellerSupportSessionStartDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsRemoveCustomQuotaDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSignInAsSessionEndDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSuggestDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSignInAsSessionStartDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoErrorDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSecondaryMailsPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsCreateTeamInviteLinkDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentAddMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeleteTeamInviteLinkDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentAddToFolderDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberAddExternalIdDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentArchiveDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberAddNameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeAdminRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentPermanentlyDeleteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeEmailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentRemoveFromFolderDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeExternalIdDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentRemoveMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeMembershipTypeDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentRenameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeNameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperContentRestoreDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeStatusDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocAddCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberDeleteManualContactsDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocChangeMemberRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberDeleteProfilePhotoDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberPermanentlyDeleteAccountContentsDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberRemoveExternalIdDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocDeletedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSetProfilePhotoDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocDeleteCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsAddCustomQuotaDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocDownloadDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsChangeCustomQuotaDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocEditDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsChangeStatusDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocEditCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsRemoveCustomQuotaDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocFollowedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSuggestDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocMentionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberTransferAccountContentsDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocOwnershipChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPendingSecondaryEmailAddedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocRequestAccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSecondaryEmailDeletedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocResolveCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSecondaryEmailVerifiedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocRevertDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSecondaryMailsPolicyChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocSlackShareDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderAddPageDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocTeamInviteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderAddSectionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocTrashedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderRemovePageDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderRemoveSectionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocUntrashedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderRenamePageDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDocViewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderRenameSectionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperExternalViewAllowDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderReorderPageDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperExternalViewDefaultTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsBinderReorderSectionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperExternalViewForbidDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentAddMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentAddToFolderDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperFolderDeletedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentArchiveDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperFolderFollowedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperFolderTeamInviteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentPermanentlyDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperPublishedLinkCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentRemoveFromFolderDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperPublishedLinkDisabledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentRemoveMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperPublishedLinkViewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentRenameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPasswordChangeDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperContentRestoreDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPasswordResetDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocAddCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPasswordResetAllDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocChangeMemberRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocChangeSharingPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmCreateUsageReportDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocChangeSubscriptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsExportMembersReportDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocDeletedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperAdminExportStartDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocDeleteCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocDownloadDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamActivityCreateReportDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocEditDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamActivityCreateReportFailDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocEditCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsCollectionShareDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocFollowedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocMentionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsNoteAclLinkDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocOwnershipChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsNoteAclTeamLinkDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocRequestAccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsNoteSharedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocResolveCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsNoteShareReceiveDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocRevertDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsOpenNoteSharedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocSlackShareDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfAddGroupDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocTeamInviteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfAllowNonMembersToViewSharedLinksDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocTrashedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfExternalInviteWarnDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocUnresolveCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfFbInviteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocUntrashedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfFbInviteChangeRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDocViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfFbUninviteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperExternalViewAllowDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfInviteGroupDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperExternalViewDefaultTeamDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfTeamGrantAccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperExternalViewForbidDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfTeamInviteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperFolderChangeSubscriptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfTeamInviteChangeRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperFolderDeletedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfTeamJoinDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperFolderFollowedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfTeamJoinFromOobLinkDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperFolderTeamInviteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSfTeamUninviteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperPublishedLinkChangePermissionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentAddInviteesDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperPublishedLinkCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentAddLinkExpiryDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperPublishedLinkDisabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentAddLinkPasswordDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperPublishedLinkViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentAddMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPasswordChangeDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeDownloadsPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPasswordResetDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeInviteeRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPasswordResetAllDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeLinkAudienceDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeLinkExpiryDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmCreateUsageReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeLinkPasswordDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsExportMembersReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeMemberRoleDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsExportMembersReportFailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentChangeViewerInfoPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoExpirationLinkGenCreateReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentClaimInvitationDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoExpirationLinkGenReportFailedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentCopyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoPasswordLinkGenCreateReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentDownloadDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoPasswordLinkGenReportFailedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentRelinquishMembershipDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoPasswordLinkViewCreateReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentRemoveInviteesDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoPasswordLinkViewReportFailedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentRemoveLinkExpiryDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsOutdatedLinkViewCreateReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentRemoveLinkPasswordDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsOutdatedLinkViewReportFailedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentRemoveMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperAdminExportStartDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentRequestAccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSmartSyncCreateAdminPrivilegeReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentUnshareDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamActivityCreateReportDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedContentViewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamActivityCreateReportFailDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderChangeLinkPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsCollectionShareDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderChangeMembersInheritancePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileTransfersFileAddDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderChangeMembersManagementPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileTransfersTransferDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderChangeMembersPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileTransfersTransferDownloadDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileTransfersTransferSendDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderDeclineInvitationDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileTransfersTransferViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderMountDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoteAclInviteOnlyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderNestDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoteAclLinkDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderTransferOwnershipDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoteAclTeamLinkDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedFolderUnmountDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoteSharedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkAddExpiryDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsNoteShareReceiveDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkChangeExpiryDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsOpenNoteSharedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkChangeVisibilityDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfAddGroupDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkCopyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfAllowNonMembersToViewSharedLinksDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfExternalInviteWarnDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkDisableDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfFbInviteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkDownloadDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfFbInviteChangeRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkRemoveExpiryDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfFbUninviteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkShareDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfInviteGroupDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedLinkViewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfTeamGrantAccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharedNoteOpenedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfTeamInviteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShmodelGroupShareDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfTeamInviteChangeRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseAccessGrantedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfTeamJoinDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseAddMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfTeamJoinFromOobLinkDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseArchivedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSfTeamUninviteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseCreatedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentAddInviteesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseDeleteCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentAddLinkExpiryDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseEditedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentAddLinkPasswordDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseEditCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentAddMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseFileAddedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeDownloadsPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseFileDownloadDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeInviteeRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseFileRemovedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeLinkAudienceDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseFileViewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeLinkExpiryDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcasePermanentlyDeletedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeLinkPasswordDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcasePostCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeMemberRoleDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseRemoveMemberDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentChangeViewerInfoPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseRenamedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentClaimInvitationDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseRequestAccessDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentCopyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseResolveCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentDownloadDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseRestoredDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRelinquishMembershipDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseTrashedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRemoveInviteesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseTrashedDeprecatedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRemoveLinkExpiryDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseUnresolveCommentDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRemoveLinkPasswordDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseUntrashedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRemoveMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseUntrashedDeprecatedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRequestAccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseViewDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRestoreInviteesDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoAddCertDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentRestoreMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoAddLoginUrlDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentUnshareDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedContentViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoChangeCertDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderChangeLinkPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoChangeLoginUrlDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderChangeMembersInheritancePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoChangeLogoutUrlDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderChangeMembersManagementPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderChangeMembersPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoRemoveCertDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderDeclineInvitationDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderMountDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderNestDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamFolderCreateDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderTransferOwnershipDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamFolderDowngradeDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedFolderUnmountDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamFolderPermanentlyDeleteDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkAddExpiryDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamFolderRenameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkChangeExpiryDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamSelectiveSyncSettingsChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkChangeVisibilityDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkCopyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAllowDownloadDisabledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsAllowDownloadEnabledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkDisableDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkDownloadDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDataPlacementRestrictionChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkRemoveExpiryDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDataPlacementRestrictionSatisfyPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsAddExpirationDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceApprovalsChangeDesktopPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsAddPasswordDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceApprovalsChangeMobilePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsAllowDownloadDisabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceApprovalsChangeOverageActionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsAllowDownloadEnabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDeviceApprovalsChangeUnlinkActionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsChangeAudienceDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDirectoryRestrictionsAddMembersDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsChangeExpirationDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsChangePasswordDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmAddExceptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsRemoveExpirationDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkSettingsRemovePasswordDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsEmmRemoveExceptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkShareDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsExtendedVersionHistoryChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedLinkViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileCommentsChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSharedNoteOpenedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShmodelGroupShareDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestsEmailsEnabledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseAccessGrantedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsFileRequestsEmailsRestrictedToTeamOnlyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseAddMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGoogleSsoChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseArchivedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGroupUserManagementChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseCreatedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsIntegrationPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseDeleteCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberRequestsChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseEditedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsAddExceptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseEditCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsChangeCapsTypePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseFileAddedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseFileDownloadDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSpaceLimitsRemoveExceptionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseFileRemovedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMemberSuggestionsChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseFileViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsMicrosoftOfficeAddinChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcasePermanentlyDeletedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsNetworkControlChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcasePostCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseRemoveMemberDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseRenamedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseRequestAccessDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseResolveCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDefaultFolderPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseRestoredDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperDesktopPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseTrashedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseTrashedDeprecatedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPaperEnabledUsersGroupRemovalDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseUnresolveCommentDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsPermanentDeleteChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseUntrashedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsResellerSupportChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseUntrashedDeprecatedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharingChangeFolderJoinPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseViewDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharingChangeLinkPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoAddCertDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSharingChangeMemberPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoAddLoginUrlDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseChangeDownloadPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoAddLogoutUrlDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseChangeEnabledPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoChangeCertDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsShowcaseChangeExternalSharingPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoChangeLoginUrlDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSmartSyncChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoChangeLogoutUrlDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSmartSyncNotOptOutDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoChangeSamlIdentityModeDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSmartSyncOptOutDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoRemoveCertDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsSsoChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoRemoveLoginUrlDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoRemoveLogoutUrlDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamSelectiveSyncPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamFolderChangeStatusDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamFolderCreateDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTwoAccountChangePolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamFolderDowngradeDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsViewerInfoPolicyChangedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamFolderPermanentlyDeleteDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsWebSessionsChangeFixedLengthPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamFolderRenameDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamSelectiveSyncSettingsChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeFromDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeToDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAllowDownloadDisabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamProfileAddLogoDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsAllowDownloadEnabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDataPlacementRestrictionChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamProfileChangeNameDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDataPlacementRestrictionSatisfyPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceApprovalsAddExceptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaAddBackupPhoneDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceApprovalsChangeDesktopPolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaAddSecurityKeyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceApprovalsChangeMobilePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaChangeBackupPhoneDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceApprovalsChangeOverageActionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaChangeStatusDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceApprovalsChangeUnlinkActionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaRemoveBackupPhoneDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDeviceApprovalsRemoveExceptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaRemoveSecurityKeyDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDirectoryRestrictionsAddMembersDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTfaResetDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsGuestAdminChangeStatusDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmAddExceptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestAcceptedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestAcceptedShownToPrimaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsEmmRemoveExceptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestAcceptedShownToSecondaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsExtendedVersionHistoryChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestAutoCanceledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileCommentsChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestCanceledDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileLockingPolicyChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestCanceledShownToPrimaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestsChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestCanceledShownToSecondaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestsEmailsEnabledDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestExpiredDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileRequestsEmailsRestrictedToTeamOnlyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestExpiredShownToPrimaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsFileTransfersPolicyChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestExpiredShownToSecondaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGoogleSsoChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestRejectedShownToPrimaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsGroupUserManagementChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestRejectedShownToSecondaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsIntegrationPolicyChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestReminderDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberRequestsChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestReminderShownToPrimaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSendInvitePolicyChangedDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestReminderShownToSecondaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsAddExceptionDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestRevokedDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsChangeCapsTypePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestSentShownToPrimaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsTeamMergeRequestSentShownToSecondaryTeamDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSpaceLimitsRemoveExceptionDetails,
 
-  /// Hints that this event was returned with missing details due to an
-  /// internal error.
-  DBTEAMLOGEventDetailsMissingDetails,
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberSuggestionsChangePolicyDetails,
 
-  /// (no description).
-  DBTEAMLOGEventDetailsOther,
+    /// (no description).
+    DBTEAMLOGEventDetailsMicrosoftOfficeAddinChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsNetworkControlChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperChangeDeploymentPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperChangeMemberLinkPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperChangeMemberPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDefaultFolderPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperDesktopPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperEnabledUsersGroupAdditionDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPaperEnabledUsersGroupRemovalDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPasswordStrengthRequirementsChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsPermanentDeleteChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsResellerSupportChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsRewindPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSharingChangeFolderJoinPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSharingChangeLinkPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSharingChangeMemberPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseChangeDownloadPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseChangeEnabledPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsShowcaseChangeExternalSharingPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSmarterSmartSyncPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSmartSyncChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSmartSyncNotOptOutDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSmartSyncOptOutDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSsoChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamSelectiveSyncPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamSharingWhitelistSubjectsChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaAddExceptionDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaRemoveExceptionDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTwoAccountChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsViewerInfoPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsWatermarkingPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsWebSessionsChangeActiveSessionLimitDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsWebSessionsChangeFixedLengthPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeFromDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeToDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileAddLogoDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileChangeNameDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaAddBackupPhoneDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaAddSecurityKeyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaChangeBackupPhoneDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaChangeStatusDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaRemoveBackupPhoneDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaRemoveSecurityKeyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTfaResetDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsChangedEnterpriseAdminRoleDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsChangedEnterpriseConnectedTeamStatusDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsEndedEnterpriseAdminSessionDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsEndedEnterpriseAdminSessionDeprecatedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsEnterpriseSettingsLockingDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGuestAdminChangeStatusDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsStartedEnterpriseAdminSessionDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestAcceptedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestAcceptedShownToPrimaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestAcceptedShownToSecondaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestAutoCanceledDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestCanceledDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestCanceledShownToPrimaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestCanceledShownToSecondaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestExpiredDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestExpiredShownToPrimaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestExpiredShownToSecondaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestRejectedShownToPrimaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestRejectedShownToSecondaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestReminderDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestReminderShownToPrimaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestReminderShownToSecondaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestRevokedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestSentShownToPrimaryTeamDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamMergeRequestSentShownToSecondaryTeamDetails,
+
+    /// Hints that this event was returned with missing details due to an
+    /// internal error.
+    DBTEAMLOGEventDetailsMissingDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsOther,
 
 };
 
@@ -1643,6 +1951,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGFileGetCopyReferenceDetails *fileGetCopyReferenceDetails;
 
+/// (no description). @note Ensure the `isFileLockingLockStatusChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileLockingLockStatusChangedDetails *fileLockingLockStatusChangedDetails;
+
 /// (no description). @note Ensure the `isFileMoveDetails` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGFileMoveDetails *fileMoveDetails;
@@ -1674,6 +1987,26 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// (no description). @note Ensure the `isFileSaveCopyReferenceDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGFileSaveCopyReferenceDetails *fileSaveCopyReferenceDetails;
+
+/// (no description). @note Ensure the
+/// `isFolderOverviewDescriptionChangedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGFolderOverviewDescriptionChangedDetails *folderOverviewDescriptionChangedDetails;
+
+/// (no description). @note Ensure the `isFolderOverviewItemPinnedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFolderOverviewItemPinnedDetails *folderOverviewItemPinnedDetails;
+
+/// (no description). @note Ensure the `isFolderOverviewItemUnpinnedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFolderOverviewItemUnpinnedDetails *folderOverviewItemUnpinnedDetails;
+
+/// (no description). @note Ensure the `isRewindFolderDetails` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGRewindFolderDetails *rewindFolderDetails;
 
 /// (no description). @note Ensure the `isFileRequestChangeDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -1748,6 +2081,58 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGGroupRenameDetails *groupRenameDetails;
 
+/// (no description). @note Ensure the `isLegalHoldsActivateAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsActivateAHoldDetails *legalHoldsActivateAHoldDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsAddMembersDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsAddMembersDetails *legalHoldsAddMembersDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsChangeHoldDetailsDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *legalHoldsChangeHoldDetailsDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsChangeHoldNameDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsChangeHoldNameDetails *legalHoldsChangeHoldNameDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportAHoldDetails *legalHoldsExportAHoldDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportCancelledDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportCancelledDetails *legalHoldsExportCancelledDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportDownloadedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportDownloadedDetails *legalHoldsExportDownloadedDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportRemovedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportRemovedDetails *legalHoldsExportRemovedDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsReleaseAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsReleaseAHoldDetails *legalHoldsReleaseAHoldDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsRemoveMembersDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsRemoveMembersDetails *legalHoldsRemoveMembersDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsReportAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsReportAHoldDetails *legalHoldsReportAHoldDetails;
+
+/// (no description). @note Ensure the `isAccountLockOrUnlockedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGAccountLockOrUnlockedDetails *accountLockOrUnlockedDetails;
+
 /// (no description). @note Ensure the `isEmmErrorDetails` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEmmErrorDetails *emmErrorDetails;
@@ -1798,6 +2183,14 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSsoErrorDetails *ssoErrorDetails;
 
+/// (no description). @note Ensure the `isCreateTeamInviteLinkDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGCreateTeamInviteLinkDetails *createTeamInviteLinkDetails;
+
+/// (no description). @note Ensure the `isDeleteTeamInviteLinkDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGDeleteTeamInviteLinkDetails *deleteTeamInviteLinkDetails;
+
 /// (no description). @note Ensure the `isMemberAddExternalIdDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberAddExternalIdDetails *memberAddExternalIdDetails;
@@ -1836,6 +2229,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberDeleteManualContactsDetails *memberDeleteManualContactsDetails;
 
+/// (no description). @note Ensure the `isMemberDeleteProfilePhotoDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGMemberDeleteProfilePhotoDetails *memberDeleteProfilePhotoDetails;
+
 /// (no description). @note Ensure the
 /// `isMemberPermanentlyDeleteAccountContentsDetails` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -1845,6 +2243,10 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// (no description). @note Ensure the `isMemberRemoveExternalIdDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberRemoveExternalIdDetails *memberRemoveExternalIdDetails;
+
+/// (no description). @note Ensure the `isMemberSetProfilePhotoDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGMemberSetProfilePhotoDetails *memberSetProfilePhotoDetails;
 
 /// (no description). @note Ensure the
 /// `isMemberSpaceLimitsAddCustomQuotaDetails` method returns true before
@@ -1877,10 +2279,55 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberTransferAccountContentsDetails *memberTransferAccountContentsDetails;
 
+/// (no description). @note Ensure the `isPendingSecondaryEmailAddedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGPendingSecondaryEmailAddedDetails *pendingSecondaryEmailAddedDetails;
+
+/// (no description). @note Ensure the `isSecondaryEmailDeletedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSecondaryEmailDeletedDetails *secondaryEmailDeletedDetails;
+
+/// (no description). @note Ensure the `isSecondaryEmailVerifiedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSecondaryEmailVerifiedDetails *secondaryEmailVerifiedDetails;
+
 /// (no description). @note Ensure the `isSecondaryMailsPolicyChangedDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGSecondaryMailsPolicyChangedDetails *secondaryMailsPolicyChangedDetails;
+
+/// (no description). @note Ensure the `isBinderAddPageDetails` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderAddPageDetails *binderAddPageDetails;
+
+/// (no description). @note Ensure the `isBinderAddSectionDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderAddSectionDetails *binderAddSectionDetails;
+
+/// (no description). @note Ensure the `isBinderRemovePageDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderRemovePageDetails *binderRemovePageDetails;
+
+/// (no description). @note Ensure the `isBinderRemoveSectionDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderRemoveSectionDetails *binderRemoveSectionDetails;
+
+/// (no description). @note Ensure the `isBinderRenamePageDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderRenamePageDetails *binderRenamePageDetails;
+
+/// (no description). @note Ensure the `isBinderRenameSectionDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderRenameSectionDetails *binderRenameSectionDetails;
+
+/// (no description). @note Ensure the `isBinderReorderPageDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderReorderPageDetails *binderReorderPageDetails;
+
+/// (no description). @note Ensure the `isBinderReorderSectionDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGBinderReorderSectionDetails *binderReorderSectionDetails;
 
 /// (no description). @note Ensure the `isPaperContentAddMemberDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2040,6 +2487,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperFolderTeamInviteDetails *paperFolderTeamInviteDetails;
 
+/// (no description). @note Ensure the
+/// `isPaperPublishedLinkChangePermissionDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGPaperPublishedLinkChangePermissionDetails *paperPublishedLinkChangePermissionDetails;
+
 /// (no description). @note Ensure the `isPaperPublishedLinkCreateDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
@@ -2079,6 +2532,50 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGExportMembersReportDetails *exportMembersReportDetails;
 
+/// (no description). @note Ensure the `isExportMembersReportFailDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGExportMembersReportFailDetails *exportMembersReportFailDetails;
+
+/// (no description). @note Ensure the
+/// `isNoExpirationLinkGenCreateReportDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGNoExpirationLinkGenCreateReportDetails *noExpirationLinkGenCreateReportDetails;
+
+/// (no description). @note Ensure the
+/// `isNoExpirationLinkGenReportFailedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGNoExpirationLinkGenReportFailedDetails *noExpirationLinkGenReportFailedDetails;
+
+/// (no description). @note Ensure the `isNoPasswordLinkGenCreateReportDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGNoPasswordLinkGenCreateReportDetails *noPasswordLinkGenCreateReportDetails;
+
+/// (no description). @note Ensure the `isNoPasswordLinkGenReportFailedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGNoPasswordLinkGenReportFailedDetails *noPasswordLinkGenReportFailedDetails;
+
+/// (no description). @note Ensure the `isNoPasswordLinkViewCreateReportDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGNoPasswordLinkViewCreateReportDetails *noPasswordLinkViewCreateReportDetails;
+
+/// (no description). @note Ensure the `isNoPasswordLinkViewReportFailedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGNoPasswordLinkViewReportFailedDetails *noPasswordLinkViewReportFailedDetails;
+
+/// (no description). @note Ensure the `isOutdatedLinkViewCreateReportDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGOutdatedLinkViewCreateReportDetails *outdatedLinkViewCreateReportDetails;
+
+/// (no description). @note Ensure the `isOutdatedLinkViewReportFailedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGOutdatedLinkViewReportFailedDetails *outdatedLinkViewReportFailedDetails;
+
 /// (no description). @note Ensure the `isPaperAdminExportStartDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperAdminExportStartDetails *paperAdminExportStartDetails;
@@ -2102,6 +2599,30 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// (no description). @note Ensure the `isCollectionShareDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGCollectionShareDetails *collectionShareDetails;
+
+/// (no description). @note Ensure the `isFileTransfersFileAddDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGFileTransfersFileAddDetails *fileTransfersFileAddDetails;
+
+/// (no description). @note Ensure the `isFileTransfersTransferDeleteDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileTransfersTransferDeleteDetails *fileTransfersTransferDeleteDetails;
+
+/// (no description). @note Ensure the `isFileTransfersTransferDownloadDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileTransfersTransferDownloadDetails *fileTransfersTransferDownloadDetails;
+
+/// (no description). @note Ensure the `isFileTransfersTransferSendDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileTransfersTransferSendDetails *fileTransfersTransferSendDetails;
+
+/// (no description). @note Ensure the `isFileTransfersTransferViewDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileTransfersTransferViewDetails *fileTransfersTransferViewDetails;
 
 /// (no description). @note Ensure the `isNoteAclInviteOnlyDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2281,6 +2802,16 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedContentRequestAccessDetails *sharedContentRequestAccessDetails;
 
+/// (no description). @note Ensure the `isSharedContentRestoreInviteesDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSharedContentRestoreInviteesDetails *sharedContentRestoreInviteesDetails;
+
+/// (no description). @note Ensure the `isSharedContentRestoreMemberDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSharedContentRestoreMemberDetails *sharedContentRestoreMemberDetails;
+
 /// (no description). @note Ensure the `isSharedContentUnshareDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedContentUnshareDetails *sharedContentUnshareDetails;
@@ -2369,6 +2900,58 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// (no description). @note Ensure the `isSharedLinkRemoveExpiryDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedLinkRemoveExpiryDetails *sharedLinkRemoveExpiryDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsAddExpirationDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSharedLinkSettingsAddExpirationDetails *sharedLinkSettingsAddExpirationDetails;
+
+/// (no description). @note Ensure the `isSharedLinkSettingsAddPasswordDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSharedLinkSettingsAddPasswordDetails *sharedLinkSettingsAddPasswordDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsAllowDownloadDisabledDetails` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledDetails *sharedLinkSettingsAllowDownloadDisabledDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsAllowDownloadEnabledDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledDetails *sharedLinkSettingsAllowDownloadEnabledDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsChangeAudienceDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsChangeAudienceDetails *sharedLinkSettingsChangeAudienceDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsChangeExpirationDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsChangeExpirationDetails *sharedLinkSettingsChangeExpirationDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsChangePasswordDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsChangePasswordDetails *sharedLinkSettingsChangePasswordDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsRemoveExpirationDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsRemoveExpirationDetails *sharedLinkSettingsRemoveExpirationDetails;
+
+/// (no description). @note Ensure the
+/// `isSharedLinkSettingsRemovePasswordDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGSharedLinkSettingsRemovePasswordDetails *sharedLinkSettingsRemovePasswordDetails;
 
 /// (no description). @note Ensure the `isSharedLinkShareDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
@@ -2584,6 +3167,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 @property (nonatomic, readonly)
     DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetails *dataPlacementRestrictionSatisfyPolicyDetails;
 
+/// (no description). @note Ensure the `isDeviceApprovalsAddExceptionDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGDeviceApprovalsAddExceptionDetails *deviceApprovalsAddExceptionDetails;
+
 /// (no description). @note Ensure the
 /// `isDeviceApprovalsChangeDesktopPolicyDetails` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -2607,6 +3195,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly)
     DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails *deviceApprovalsChangeUnlinkActionDetails;
+
+/// (no description). @note Ensure the `isDeviceApprovalsRemoveExceptionDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGDeviceApprovalsRemoveExceptionDetails *deviceApprovalsRemoveExceptionDetails;
 
 /// (no description). @note Ensure the
 /// `isDirectoryRestrictionsAddMembersDetails` method returns true before
@@ -2642,6 +3235,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGFileCommentsChangePolicyDetails *fileCommentsChangePolicyDetails;
 
+/// (no description). @note Ensure the `isFileLockingPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileLockingPolicyChangedDetails *fileLockingPolicyChangedDetails;
+
 /// (no description). @note Ensure the `isFileRequestsChangePolicyDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
@@ -2657,6 +3255,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly)
     DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails *fileRequestsEmailsRestrictedToTeamOnlyDetails;
+
+/// (no description). @note Ensure the `isFileTransfersPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGFileTransfersPolicyChangedDetails *fileTransfersPolicyChangedDetails;
 
 /// (no description). @note Ensure the `isGoogleSsoChangePolicyDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2676,6 +3279,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberRequestsChangePolicyDetails *memberRequestsChangePolicyDetails;
+
+/// (no description). @note Ensure the `isMemberSendInvitePolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGMemberSendInvitePolicyChangedDetails *memberSendInvitePolicyChangedDetails;
 
 /// (no description). @note Ensure the `isMemberSpaceLimitsAddExceptionDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -2753,6 +3361,12 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGPaperEnabledUsersGroupRemovalDetails *paperEnabledUsersGroupRemovalDetails;
 
+/// (no description). @note Ensure the
+/// `isPasswordStrengthRequirementsChangePolicyDetails` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetails *passwordStrengthRequirementsChangePolicyDetails;
+
 /// (no description). @note Ensure the `isPermanentDeleteChangePolicyDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
@@ -2762,6 +3376,10 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGResellerSupportChangePolicyDetails *resellerSupportChangePolicyDetails;
+
+/// (no description). @note Ensure the `isRewindPolicyChangedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGRewindPolicyChangedDetails *rewindPolicyChangedDetails;
 
 /// (no description). @note Ensure the `isSharingChangeFolderJoinPolicyDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -2793,6 +3411,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 @property (nonatomic, readonly)
     DBTEAMLOGShowcaseChangeExternalSharingPolicyDetails *showcaseChangeExternalSharingPolicyDetails;
 
+/// (no description). @note Ensure the `isSmarterSmartSyncPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSmarterSmartSyncPolicyChangedDetails *smarterSmartSyncPolicyChangedDetails;
+
 /// (no description). @note Ensure the `isSmartSyncChangePolicyDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSmartSyncChangePolicyDetails *smartSyncChangePolicyDetails;
@@ -2819,9 +3442,23 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamSelectiveSyncPolicyChangedDetails *teamSelectiveSyncPolicyChangedDetails;
 
+/// (no description). @note Ensure the
+/// `isTeamSharingWhitelistSubjectsChangedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGTeamSharingWhitelistSubjectsChangedDetails *teamSharingWhitelistSubjectsChangedDetails;
+
+/// (no description). @note Ensure the `isTfaAddExceptionDetails` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTfaAddExceptionDetails *tfaAddExceptionDetails;
+
 /// (no description). @note Ensure the `isTfaChangePolicyDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTfaChangePolicyDetails *tfaChangePolicyDetails;
+
+/// (no description). @note Ensure the `isTfaRemoveExceptionDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTfaRemoveExceptionDetails *tfaRemoveExceptionDetails;
 
 /// (no description). @note Ensure the `isTwoAccountChangePolicyDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2830,6 +3467,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// (no description). @note Ensure the `isViewerInfoPolicyChangedDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGViewerInfoPolicyChangedDetails *viewerInfoPolicyChangedDetails;
+
+/// (no description). @note Ensure the `isWatermarkingPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGWatermarkingPolicyChangedDetails *watermarkingPolicyChangedDetails;
+
+/// (no description). @note Ensure the
+/// `isWebSessionsChangeActiveSessionLimitDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGWebSessionsChangeActiveSessionLimitDetails *webSessionsChangeActiveSessionLimitDetails;
 
 /// (no description). @note Ensure the
 /// `isWebSessionsChangeFixedLengthPolicyDetails` method returns true before
@@ -2901,9 +3549,41 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTfaResetDetails *tfaResetDetails;
 
+/// (no description). @note Ensure the `isChangedEnterpriseAdminRoleDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGChangedEnterpriseAdminRoleDetails *changedEnterpriseAdminRoleDetails;
+
+/// (no description). @note Ensure the
+/// `isChangedEnterpriseConnectedTeamStatusDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails *changedEnterpriseConnectedTeamStatusDetails;
+
+/// (no description). @note Ensure the `isEndedEnterpriseAdminSessionDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGEndedEnterpriseAdminSessionDetails *endedEnterpriseAdminSessionDetails;
+
+/// (no description). @note Ensure the
+/// `isEndedEnterpriseAdminSessionDeprecatedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedDetails *endedEnterpriseAdminSessionDeprecatedDetails;
+
+/// (no description). @note Ensure the `isEnterpriseSettingsLockingDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGEnterpriseSettingsLockingDetails *enterpriseSettingsLockingDetails;
+
 /// (no description). @note Ensure the `isGuestAdminChangeStatusDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGGuestAdminChangeStatusDetails *guestAdminChangeStatusDetails;
+
+/// (no description). @note Ensure the `isStartedEnterpriseAdminSessionDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGStartedEnterpriseAdminSessionDetails *startedEnterpriseAdminSessionDetails;
 
 /// (no description). @note Ensure the `isTeamMergeRequestAcceptedDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -3477,6 +4157,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithFileGetCopyReferenceDetails:(DBTEAMLOGFileGetCopyReferenceDetails *)fileGetCopyReferenceDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "file_locking_lock_status_changed_details".
+///
+/// @param fileLockingLockStatusChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileLockingLockStatusChangedDetails:
+    (DBTEAMLOGFileLockingLockStatusChangedDetails *)fileLockingLockStatusChangedDetails;
+
+///
 /// Initializes union class with tag state of "file_move_details".
 ///
 /// @param fileMoveDetails (no description).
@@ -3550,6 +4241,48 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithFileSaveCopyReferenceDetails:
     (DBTEAMLOGFileSaveCopyReferenceDetails *)fileSaveCopyReferenceDetails;
+
+///
+/// Initializes union class with tag state of
+/// "folder_overview_description_changed_details".
+///
+/// @param folderOverviewDescriptionChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFolderOverviewDescriptionChangedDetails:
+    (DBTEAMLOGFolderOverviewDescriptionChangedDetails *)folderOverviewDescriptionChangedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "folder_overview_item_pinned_details".
+///
+/// @param folderOverviewItemPinnedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFolderOverviewItemPinnedDetails:
+    (DBTEAMLOGFolderOverviewItemPinnedDetails *)folderOverviewItemPinnedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "folder_overview_item_unpinned_details".
+///
+/// @param folderOverviewItemUnpinnedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFolderOverviewItemUnpinnedDetails:
+    (DBTEAMLOGFolderOverviewItemUnpinnedDetails *)folderOverviewItemUnpinnedDetails;
+
+///
+/// Initializes union class with tag state of "rewind_folder_details".
+///
+/// @param rewindFolderDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRewindFolderDetails:(DBTEAMLOGRewindFolderDetails *)rewindFolderDetails;
 
 ///
 /// Initializes union class with tag state of "file_request_change_details".
@@ -3728,6 +4461,136 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithGroupRenameDetails:(DBTEAMLOGGroupRenameDetails *)groupRenameDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "legal_holds_activate_a_hold_details".
+///
+/// @param legalHoldsActivateAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsActivateAHoldDetails:
+    (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails;
+
+///
+/// Initializes union class with tag state of "legal_holds_add_members_details".
+///
+/// @param legalHoldsAddMembersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsAddMembersDetails:(DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_change_hold_details_details".
+///
+/// @param legalHoldsChangeHoldDetailsDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsChangeHoldDetailsDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_change_hold_name_details".
+///
+/// @param legalHoldsChangeHoldNameDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsChangeHoldNameDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_a_hold_details".
+///
+/// @param legalHoldsExportAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportAHoldDetails:
+    (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_cancelled_details".
+///
+/// @param legalHoldsExportCancelledDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportCancelledDetails:
+    (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_downloaded_details".
+///
+/// @param legalHoldsExportDownloadedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportDownloadedDetails:
+    (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_removed_details".
+///
+/// @param legalHoldsExportRemovedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportRemovedDetails:
+    (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_release_a_hold_details".
+///
+/// @param legalHoldsReleaseAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsReleaseAHoldDetails:
+    (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_remove_members_details".
+///
+/// @param legalHoldsRemoveMembersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsRemoveMembersDetails:
+    (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_report_a_hold_details".
+///
+/// @param legalHoldsReportAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsReportAHoldDetails:
+    (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails;
+
+///
+/// Initializes union class with tag state of
+/// "account_lock_or_unlocked_details".
+///
+/// @param accountLockOrUnlockedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAccountLockOrUnlockedDetails:
+    (DBTEAMLOGAccountLockOrUnlockedDetails *)accountLockOrUnlockedDetails;
+
+///
 /// Initializes union class with tag state of "emm_error_details".
 ///
 /// @param emmErrorDetails (no description).
@@ -3836,6 +4699,24 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 - (instancetype)initWithSsoErrorDetails:(DBTEAMLOGSsoErrorDetails *)ssoErrorDetails;
 
 ///
+/// Initializes union class with tag state of "create_team_invite_link_details".
+///
+/// @param createTeamInviteLinkDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithCreateTeamInviteLinkDetails:(DBTEAMLOGCreateTeamInviteLinkDetails *)createTeamInviteLinkDetails;
+
+///
+/// Initializes union class with tag state of "delete_team_invite_link_details".
+///
+/// @param deleteTeamInviteLinkDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDeleteTeamInviteLinkDetails:(DBTEAMLOGDeleteTeamInviteLinkDetails *)deleteTeamInviteLinkDetails;
+
+///
 /// Initializes union class with tag state of "member_add_external_id_details".
 ///
 /// @param memberAddExternalIdDetails (no description).
@@ -3926,6 +4807,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "member_delete_profile_photo_details".
+///
+/// @param memberDeleteProfilePhotoDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberDeleteProfilePhotoDetails:
+    (DBTEAMLOGMemberDeleteProfilePhotoDetails *)memberDeleteProfilePhotoDetails;
+
+///
+/// Initializes union class with tag state of
 /// "member_permanently_delete_account_contents_details".
 ///
 /// @param memberPermanentlyDeleteAccountContentsDetails (no description).
@@ -3945,6 +4837,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithMemberRemoveExternalIdDetails:
     (DBTEAMLOGMemberRemoveExternalIdDetails *)memberRemoveExternalIdDetails;
+
+///
+/// Initializes union class with tag state of
+/// "member_set_profile_photo_details".
+///
+/// @param memberSetProfilePhotoDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberSetProfilePhotoDetails:
+    (DBTEAMLOGMemberSetProfilePhotoDetails *)memberSetProfilePhotoDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -4012,6 +4915,38 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "pending_secondary_email_added_details".
+///
+/// @param pendingSecondaryEmailAddedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPendingSecondaryEmailAddedDetails:
+    (DBTEAMLOGPendingSecondaryEmailAddedDetails *)pendingSecondaryEmailAddedDetails;
+
+///
+/// Initializes union class with tag state of "secondary_email_deleted_details".
+///
+/// @param secondaryEmailDeletedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSecondaryEmailDeletedDetails:
+    (DBTEAMLOGSecondaryEmailDeletedDetails *)secondaryEmailDeletedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "secondary_email_verified_details".
+///
+/// @param secondaryEmailVerifiedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSecondaryEmailVerifiedDetails:
+    (DBTEAMLOGSecondaryEmailVerifiedDetails *)secondaryEmailVerifiedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "secondary_mails_policy_changed_details".
 ///
 /// @param secondaryMailsPolicyChangedDetails (no description).
@@ -4020,6 +4955,78 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithSecondaryMailsPolicyChangedDetails:
     (DBTEAMLOGSecondaryMailsPolicyChangedDetails *)secondaryMailsPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of "binder_add_page_details".
+///
+/// @param binderAddPageDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderAddPageDetails:(DBTEAMLOGBinderAddPageDetails *)binderAddPageDetails;
+
+///
+/// Initializes union class with tag state of "binder_add_section_details".
+///
+/// @param binderAddSectionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderAddSectionDetails:(DBTEAMLOGBinderAddSectionDetails *)binderAddSectionDetails;
+
+///
+/// Initializes union class with tag state of "binder_remove_page_details".
+///
+/// @param binderRemovePageDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderRemovePageDetails:(DBTEAMLOGBinderRemovePageDetails *)binderRemovePageDetails;
+
+///
+/// Initializes union class with tag state of "binder_remove_section_details".
+///
+/// @param binderRemoveSectionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderRemoveSectionDetails:(DBTEAMLOGBinderRemoveSectionDetails *)binderRemoveSectionDetails;
+
+///
+/// Initializes union class with tag state of "binder_rename_page_details".
+///
+/// @param binderRenamePageDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderRenamePageDetails:(DBTEAMLOGBinderRenamePageDetails *)binderRenamePageDetails;
+
+///
+/// Initializes union class with tag state of "binder_rename_section_details".
+///
+/// @param binderRenameSectionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderRenameSectionDetails:(DBTEAMLOGBinderRenameSectionDetails *)binderRenameSectionDetails;
+
+///
+/// Initializes union class with tag state of "binder_reorder_page_details".
+///
+/// @param binderReorderPageDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderReorderPageDetails:(DBTEAMLOGBinderReorderPageDetails *)binderReorderPageDetails;
+
+///
+/// Initializes union class with tag state of "binder_reorder_section_details".
+///
+/// @param binderReorderSectionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithBinderReorderSectionDetails:(DBTEAMLOGBinderReorderSectionDetails *)binderReorderSectionDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -4392,6 +5399,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "paper_published_link_change_permission_details".
+///
+/// @param paperPublishedLinkChangePermissionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPaperPublishedLinkChangePermissionDetails:
+    (DBTEAMLOGPaperPublishedLinkChangePermissionDetails *)paperPublishedLinkChangePermissionDetails;
+
+///
+/// Initializes union class with tag state of
 /// "paper_published_link_create_details".
 ///
 /// @param paperPublishedLinkCreateDetails (no description).
@@ -4481,6 +5499,105 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "export_members_report_fail_details".
+///
+/// @param exportMembersReportFailDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExportMembersReportFailDetails:
+    (DBTEAMLOGExportMembersReportFailDetails *)exportMembersReportFailDetails;
+
+///
+/// Initializes union class with tag state of
+/// "no_expiration_link_gen_create_report_details".
+///
+/// @param noExpirationLinkGenCreateReportDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoExpirationLinkGenCreateReportDetails:
+    (DBTEAMLOGNoExpirationLinkGenCreateReportDetails *)noExpirationLinkGenCreateReportDetails;
+
+///
+/// Initializes union class with tag state of
+/// "no_expiration_link_gen_report_failed_details".
+///
+/// @param noExpirationLinkGenReportFailedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoExpirationLinkGenReportFailedDetails:
+    (DBTEAMLOGNoExpirationLinkGenReportFailedDetails *)noExpirationLinkGenReportFailedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "no_password_link_gen_create_report_details".
+///
+/// @param noPasswordLinkGenCreateReportDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoPasswordLinkGenCreateReportDetails:
+    (DBTEAMLOGNoPasswordLinkGenCreateReportDetails *)noPasswordLinkGenCreateReportDetails;
+
+///
+/// Initializes union class with tag state of
+/// "no_password_link_gen_report_failed_details".
+///
+/// @param noPasswordLinkGenReportFailedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoPasswordLinkGenReportFailedDetails:
+    (DBTEAMLOGNoPasswordLinkGenReportFailedDetails *)noPasswordLinkGenReportFailedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "no_password_link_view_create_report_details".
+///
+/// @param noPasswordLinkViewCreateReportDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoPasswordLinkViewCreateReportDetails:
+    (DBTEAMLOGNoPasswordLinkViewCreateReportDetails *)noPasswordLinkViewCreateReportDetails;
+
+///
+/// Initializes union class with tag state of
+/// "no_password_link_view_report_failed_details".
+///
+/// @param noPasswordLinkViewReportFailedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoPasswordLinkViewReportFailedDetails:
+    (DBTEAMLOGNoPasswordLinkViewReportFailedDetails *)noPasswordLinkViewReportFailedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "outdated_link_view_create_report_details".
+///
+/// @param outdatedLinkViewCreateReportDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOutdatedLinkViewCreateReportDetails:
+    (DBTEAMLOGOutdatedLinkViewCreateReportDetails *)outdatedLinkViewCreateReportDetails;
+
+///
+/// Initializes union class with tag state of
+/// "outdated_link_view_report_failed_details".
+///
+/// @param outdatedLinkViewReportFailedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOutdatedLinkViewReportFailedDetails:
+    (DBTEAMLOGOutdatedLinkViewReportFailedDetails *)outdatedLinkViewReportFailedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "paper_admin_export_start_details".
 ///
 /// @param paperAdminExportStartDetails (no description).
@@ -4531,6 +5648,59 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithCollectionShareDetails:(DBTEAMLOGCollectionShareDetails *)collectionShareDetails;
+
+///
+/// Initializes union class with tag state of "file_transfers_file_add_details".
+///
+/// @param fileTransfersFileAddDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileTransfersFileAddDetails:(DBTEAMLOGFileTransfersFileAddDetails *)fileTransfersFileAddDetails;
+
+///
+/// Initializes union class with tag state of
+/// "file_transfers_transfer_delete_details".
+///
+/// @param fileTransfersTransferDeleteDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileTransfersTransferDeleteDetails:
+    (DBTEAMLOGFileTransfersTransferDeleteDetails *)fileTransfersTransferDeleteDetails;
+
+///
+/// Initializes union class with tag state of
+/// "file_transfers_transfer_download_details".
+///
+/// @param fileTransfersTransferDownloadDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileTransfersTransferDownloadDetails:
+    (DBTEAMLOGFileTransfersTransferDownloadDetails *)fileTransfersTransferDownloadDetails;
+
+///
+/// Initializes union class with tag state of
+/// "file_transfers_transfer_send_details".
+///
+/// @param fileTransfersTransferSendDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileTransfersTransferSendDetails:
+    (DBTEAMLOGFileTransfersTransferSendDetails *)fileTransfersTransferSendDetails;
+
+///
+/// Initializes union class with tag state of
+/// "file_transfers_transfer_view_details".
+///
+/// @param fileTransfersTransferViewDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileTransfersTransferViewDetails:
+    (DBTEAMLOGFileTransfersTransferViewDetails *)fileTransfersTransferViewDetails;
 
 ///
 /// Initializes union class with tag state of "note_acl_invite_only_details".
@@ -4928,6 +6098,28 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
     (DBTEAMLOGSharedContentRequestAccessDetails *)sharedContentRequestAccessDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "shared_content_restore_invitees_details".
+///
+/// @param sharedContentRestoreInviteesDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedContentRestoreInviteesDetails:
+    (DBTEAMLOGSharedContentRestoreInviteesDetails *)sharedContentRestoreInviteesDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_content_restore_member_details".
+///
+/// @param sharedContentRestoreMemberDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedContentRestoreMemberDetails:
+    (DBTEAMLOGSharedContentRestoreMemberDetails *)sharedContentRestoreMemberDetails;
+
+///
 /// Initializes union class with tag state of "shared_content_unshare_details".
 ///
 /// @param sharedContentUnshareDetails (no description).
@@ -5124,6 +6316,105 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithSharedLinkRemoveExpiryDetails:
     (DBTEAMLOGSharedLinkRemoveExpiryDetails *)sharedLinkRemoveExpiryDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_add_expiration_details".
+///
+/// @param sharedLinkSettingsAddExpirationDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsAddExpirationDetails:
+    (DBTEAMLOGSharedLinkSettingsAddExpirationDetails *)sharedLinkSettingsAddExpirationDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_add_password_details".
+///
+/// @param sharedLinkSettingsAddPasswordDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsAddPasswordDetails:
+    (DBTEAMLOGSharedLinkSettingsAddPasswordDetails *)sharedLinkSettingsAddPasswordDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_allow_download_disabled_details".
+///
+/// @param sharedLinkSettingsAllowDownloadDisabledDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsAllowDownloadDisabledDetails:
+    (DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledDetails *)sharedLinkSettingsAllowDownloadDisabledDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_allow_download_enabled_details".
+///
+/// @param sharedLinkSettingsAllowDownloadEnabledDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsAllowDownloadEnabledDetails:
+    (DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledDetails *)sharedLinkSettingsAllowDownloadEnabledDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_change_audience_details".
+///
+/// @param sharedLinkSettingsChangeAudienceDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsChangeAudienceDetails:
+    (DBTEAMLOGSharedLinkSettingsChangeAudienceDetails *)sharedLinkSettingsChangeAudienceDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_change_expiration_details".
+///
+/// @param sharedLinkSettingsChangeExpirationDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsChangeExpirationDetails:
+    (DBTEAMLOGSharedLinkSettingsChangeExpirationDetails *)sharedLinkSettingsChangeExpirationDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_change_password_details".
+///
+/// @param sharedLinkSettingsChangePasswordDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsChangePasswordDetails:
+    (DBTEAMLOGSharedLinkSettingsChangePasswordDetails *)sharedLinkSettingsChangePasswordDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_remove_expiration_details".
+///
+/// @param sharedLinkSettingsRemoveExpirationDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsRemoveExpirationDetails:
+    (DBTEAMLOGSharedLinkSettingsRemoveExpirationDetails *)sharedLinkSettingsRemoveExpirationDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shared_link_settings_remove_password_details".
+///
+/// @param sharedLinkSettingsRemovePasswordDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSharedLinkSettingsRemovePasswordDetails:
+    (DBTEAMLOGSharedLinkSettingsRemovePasswordDetails *)sharedLinkSettingsRemovePasswordDetails;
 
 ///
 /// Initializes union class with tag state of "shared_link_share_details".
@@ -5607,6 +6898,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "device_approvals_add_exception_details".
+///
+/// @param deviceApprovalsAddExceptionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDeviceApprovalsAddExceptionDetails:
+    (DBTEAMLOGDeviceApprovalsAddExceptionDetails *)deviceApprovalsAddExceptionDetails;
+
+///
+/// Initializes union class with tag state of
 /// "device_approvals_change_desktop_policy_details".
 ///
 /// @param deviceApprovalsChangeDesktopPolicyDetails (no description).
@@ -5648,6 +6950,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithDeviceApprovalsChangeUnlinkActionDetails:
     (DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetails *)deviceApprovalsChangeUnlinkActionDetails;
+
+///
+/// Initializes union class with tag state of
+/// "device_approvals_remove_exception_details".
+///
+/// @param deviceApprovalsRemoveExceptionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDeviceApprovalsRemoveExceptionDetails:
+    (DBTEAMLOGDeviceApprovalsRemoveExceptionDetails *)deviceApprovalsRemoveExceptionDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -5722,6 +7035,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "file_locking_policy_changed_details".
+///
+/// @param fileLockingPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileLockingPolicyChangedDetails:
+    (DBTEAMLOGFileLockingPolicyChangedDetails *)fileLockingPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "file_requests_change_policy_details".
 ///
 /// @param fileRequestsChangePolicyDetails (no description).
@@ -5752,6 +7076,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithFileRequestsEmailsRestrictedToTeamOnlyDetails:
     (DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetails *)fileRequestsEmailsRestrictedToTeamOnlyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "file_transfers_policy_changed_details".
+///
+/// @param fileTransfersPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFileTransfersPolicyChangedDetails:
+    (DBTEAMLOGFileTransfersPolicyChangedDetails *)fileTransfersPolicyChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -5796,6 +7131,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithMemberRequestsChangePolicyDetails:
     (DBTEAMLOGMemberRequestsChangePolicyDetails *)memberRequestsChangePolicyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "member_send_invite_policy_changed_details".
+///
+/// @param memberSendInvitePolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberSendInvitePolicyChangedDetails:
+    (DBTEAMLOGMemberSendInvitePolicyChangedDetails *)memberSendInvitePolicyChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -5962,6 +7308,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "password_strength_requirements_change_policy_details".
+///
+/// @param passwordStrengthRequirementsChangePolicyDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPasswordStrengthRequirementsChangePolicyDetails:
+    (DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetails *)passwordStrengthRequirementsChangePolicyDetails;
+
+///
+/// Initializes union class with tag state of
 /// "permanent_delete_change_policy_details".
 ///
 /// @param permanentDeleteChangePolicyDetails (no description).
@@ -5981,6 +7338,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithResellerSupportChangePolicyDetails:
     (DBTEAMLOGResellerSupportChangePolicyDetails *)resellerSupportChangePolicyDetails;
+
+///
+/// Initializes union class with tag state of "rewind_policy_changed_details".
+///
+/// @param rewindPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRewindPolicyChangedDetails:(DBTEAMLOGRewindPolicyChangedDetails *)rewindPolicyChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -6050,6 +7416,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "smarter_smart_sync_policy_changed_details".
+///
+/// @param smarterSmartSyncPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSmarterSmartSyncPolicyChangedDetails:
+    (DBTEAMLOGSmarterSmartSyncPolicyChangedDetails *)smarterSmartSyncPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "smart_sync_change_policy_details".
 ///
 /// @param smartSyncChangePolicyDetails (no description).
@@ -6109,6 +7486,26 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
     (DBTEAMLOGTeamSelectiveSyncPolicyChangedDetails *)teamSelectiveSyncPolicyChangedDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "team_sharing_whitelist_subjects_changed_details".
+///
+/// @param teamSharingWhitelistSubjectsChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamSharingWhitelistSubjectsChangedDetails:
+    (DBTEAMLOGTeamSharingWhitelistSubjectsChangedDetails *)teamSharingWhitelistSubjectsChangedDetails;
+
+///
+/// Initializes union class with tag state of "tfa_add_exception_details".
+///
+/// @param tfaAddExceptionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTfaAddExceptionDetails:(DBTEAMLOGTfaAddExceptionDetails *)tfaAddExceptionDetails;
+
+///
 /// Initializes union class with tag state of "tfa_change_policy_details".
 ///
 /// @param tfaChangePolicyDetails (no description).
@@ -6116,6 +7513,15 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTfaChangePolicyDetails:(DBTEAMLOGTfaChangePolicyDetails *)tfaChangePolicyDetails;
+
+///
+/// Initializes union class with tag state of "tfa_remove_exception_details".
+///
+/// @param tfaRemoveExceptionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTfaRemoveExceptionDetails:(DBTEAMLOGTfaRemoveExceptionDetails *)tfaRemoveExceptionDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -6138,6 +7544,28 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithViewerInfoPolicyChangedDetails:
     (DBTEAMLOGViewerInfoPolicyChangedDetails *)viewerInfoPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "watermarking_policy_changed_details".
+///
+/// @param watermarkingPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithWatermarkingPolicyChangedDetails:
+    (DBTEAMLOGWatermarkingPolicyChangedDetails *)watermarkingPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "web_sessions_change_active_session_limit_details".
+///
+/// @param webSessionsChangeActiveSessionLimitDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithWebSessionsChangeActiveSessionLimitDetails:
+    (DBTEAMLOGWebSessionsChangeActiveSessionLimitDetails *)webSessionsChangeActiveSessionLimitDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -6297,6 +7725,61 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Initializes union class with tag state of
+/// "changed_enterprise_admin_role_details".
+///
+/// @param changedEnterpriseAdminRoleDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithChangedEnterpriseAdminRoleDetails:
+    (DBTEAMLOGChangedEnterpriseAdminRoleDetails *)changedEnterpriseAdminRoleDetails;
+
+///
+/// Initializes union class with tag state of
+/// "changed_enterprise_connected_team_status_details".
+///
+/// @param changedEnterpriseConnectedTeamStatusDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithChangedEnterpriseConnectedTeamStatusDetails:
+    (DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails *)changedEnterpriseConnectedTeamStatusDetails;
+
+///
+/// Initializes union class with tag state of
+/// "ended_enterprise_admin_session_details".
+///
+/// @param endedEnterpriseAdminSessionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithEndedEnterpriseAdminSessionDetails:
+    (DBTEAMLOGEndedEnterpriseAdminSessionDetails *)endedEnterpriseAdminSessionDetails;
+
+///
+/// Initializes union class with tag state of
+/// "ended_enterprise_admin_session_deprecated_details".
+///
+/// @param endedEnterpriseAdminSessionDeprecatedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithEndedEnterpriseAdminSessionDeprecatedDetails:
+    (DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedDetails *)endedEnterpriseAdminSessionDeprecatedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "enterprise_settings_locking_details".
+///
+/// @param enterpriseSettingsLockingDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithEnterpriseSettingsLockingDetails:
+    (DBTEAMLOGEnterpriseSettingsLockingDetails *)enterpriseSettingsLockingDetails;
+
+///
+/// Initializes union class with tag state of
 /// "guest_admin_change_status_details".
 ///
 /// @param guestAdminChangeStatusDetails (no description).
@@ -6305,6 +7788,17 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 ///
 - (instancetype)initWithGuestAdminChangeStatusDetails:
     (DBTEAMLOGGuestAdminChangeStatusDetails *)guestAdminChangeStatusDetails;
+
+///
+/// Initializes union class with tag state of
+/// "started_enterprise_admin_session_details".
+///
+/// @param startedEnterpriseAdminSessionDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithStartedEnterpriseAdminSessionDetails:
+    (DBTEAMLOGStartedEnterpriseAdminSessionDetails *)startedEnterpriseAdminSessionDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -7132,6 +8626,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "file_locking_lock_status_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileLockingLockStatusChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_locking_lock_status_changed_details".
+///
+- (BOOL)isFileLockingLockStatusChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "file_move_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7227,6 +8734,58 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "file_save_copy_reference_details".
 ///
 - (BOOL)isFileSaveCopyReferenceDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "folder_overview_description_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `folderOverviewDescriptionChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "folder_overview_description_changed_details".
+///
+- (BOOL)isFolderOverviewDescriptionChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "folder_overview_item_pinned_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `folderOverviewItemPinnedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "folder_overview_item_pinned_details".
+///
+- (BOOL)isFolderOverviewItemPinnedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "folder_overview_item_unpinned_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `folderOverviewItemUnpinnedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "folder_overview_item_unpinned_details".
+///
+- (BOOL)isFolderOverviewItemUnpinnedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "rewind_folder_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `rewindFolderDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "rewind_folder_details".
+///
+- (BOOL)isRewindFolderDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -7460,6 +9019,162 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "legal_holds_activate_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsActivateAHoldDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_activate_a_hold_details".
+///
+- (BOOL)isLegalHoldsActivateAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_add_members_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsAddMembersDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_add_members_details".
+///
+- (BOOL)isLegalHoldsAddMembersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_change_hold_details_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsChangeHoldDetailsDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_change_hold_details_details".
+///
+- (BOOL)isLegalHoldsChangeHoldDetailsDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_change_hold_name_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsChangeHoldNameDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_change_hold_name_details".
+///
+- (BOOL)isLegalHoldsChangeHoldNameDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportAHoldDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_a_hold_details".
+///
+- (BOOL)isLegalHoldsExportAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_cancelled_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportCancelledDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_cancelled_details".
+///
+- (BOOL)isLegalHoldsExportCancelledDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_downloaded_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportDownloadedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_downloaded_details".
+///
+- (BOOL)isLegalHoldsExportDownloadedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_removed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportRemovedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_removed_details".
+///
+- (BOOL)isLegalHoldsExportRemovedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_release_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsReleaseAHoldDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_release_a_hold_details".
+///
+- (BOOL)isLegalHoldsReleaseAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_remove_members_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsRemoveMembersDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_remove_members_details".
+///
+- (BOOL)isLegalHoldsRemoveMembersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_report_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsReportAHoldDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_report_a_hold_details".
+///
+- (BOOL)isLegalHoldsReportAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "account_lock_or_unlocked_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `accountLockOrUnlockedDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "account_lock_or_unlocked_details".
+///
+- (BOOL)isAccountLockOrUnlockedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "emm_error_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7595,6 +9310,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "create_team_invite_link_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `createTeamInviteLinkDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "create_team_invite_link_details".
+///
+- (BOOL)isCreateTeamInviteLinkDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "delete_team_invite_link_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `deleteTeamInviteLinkDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "delete_team_invite_link_details".
+///
+- (BOOL)isDeleteTeamInviteLinkDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "member_add_external_id_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7712,6 +9453,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "member_delete_profile_photo_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `memberDeleteProfilePhotoDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "member_delete_profile_photo_details".
+///
+- (BOOL)isMemberDeleteProfilePhotoDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "member_permanently_delete_account_contents_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7735,6 +9489,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "member_remove_external_id_details".
 ///
 - (BOOL)isMemberRemoveExternalIdDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "member_set_profile_photo_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `memberSetProfilePhotoDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "member_set_profile_photo_details".
+///
+- (BOOL)isMemberSetProfilePhotoDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -7816,6 +9583,45 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "pending_secondary_email_added_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `pendingSecondaryEmailAddedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "pending_secondary_email_added_details".
+///
+- (BOOL)isPendingSecondaryEmailAddedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "secondary_email_deleted_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `secondaryEmailDeletedDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "secondary_email_deleted_details".
+///
+- (BOOL)isSecondaryEmailDeletedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "secondary_email_verified_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `secondaryEmailVerifiedDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "secondary_email_verified_details".
+///
+- (BOOL)isSecondaryEmailVerifiedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "secondary_mails_policy_changed_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -7826,6 +9632,110 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "secondary_mails_policy_changed_details".
 ///
 - (BOOL)isSecondaryMailsPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_add_page_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderAddPageDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_add_page_details".
+///
+- (BOOL)isBinderAddPageDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_add_section_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderAddSectionDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_add_section_details".
+///
+- (BOOL)isBinderAddSectionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_remove_page_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderRemovePageDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_remove_page_details".
+///
+- (BOOL)isBinderRemovePageDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_remove_section_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderRemoveSectionDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_remove_section_details".
+///
+- (BOOL)isBinderRemoveSectionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_rename_page_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderRenamePageDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_rename_page_details".
+///
+- (BOOL)isBinderRenamePageDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_rename_section_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderRenameSectionDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_rename_section_details".
+///
+- (BOOL)isBinderRenameSectionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_reorder_page_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderReorderPageDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_reorder_page_details".
+///
+- (BOOL)isBinderReorderPageDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "binder_reorder_section_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `binderReorderSectionDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "binder_reorder_section_details".
+///
+- (BOOL)isBinderReorderSectionDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8310,6 +10220,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "paper_published_link_change_permission_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `paperPublishedLinkChangePermissionDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "paper_published_link_change_permission_details".
+///
+- (BOOL)isPaperPublishedLinkChangePermissionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "paper_published_link_create_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -8427,6 +10350,123 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "export_members_report_fail_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `exportMembersReportFailDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "export_members_report_fail_details".
+///
+- (BOOL)isExportMembersReportFailDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "no_expiration_link_gen_create_report_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `noExpirationLinkGenCreateReportDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "no_expiration_link_gen_create_report_details".
+///
+- (BOOL)isNoExpirationLinkGenCreateReportDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "no_expiration_link_gen_report_failed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `noExpirationLinkGenReportFailedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "no_expiration_link_gen_report_failed_details".
+///
+- (BOOL)isNoExpirationLinkGenReportFailedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "no_password_link_gen_create_report_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `noPasswordLinkGenCreateReportDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "no_password_link_gen_create_report_details".
+///
+- (BOOL)isNoPasswordLinkGenCreateReportDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "no_password_link_gen_report_failed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `noPasswordLinkGenReportFailedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "no_password_link_gen_report_failed_details".
+///
+- (BOOL)isNoPasswordLinkGenReportFailedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "no_password_link_view_create_report_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `noPasswordLinkViewCreateReportDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "no_password_link_view_create_report_details".
+///
+- (BOOL)isNoPasswordLinkViewCreateReportDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "no_password_link_view_report_failed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `noPasswordLinkViewReportFailedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "no_password_link_view_report_failed_details".
+///
+- (BOOL)isNoPasswordLinkViewReportFailedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "outdated_link_view_create_report_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `outdatedLinkViewCreateReportDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "outdated_link_view_create_report_details".
+///
+- (BOOL)isOutdatedLinkViewCreateReportDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "outdated_link_view_report_failed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `outdatedLinkViewReportFailedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "outdated_link_view_report_failed_details".
+///
+- (BOOL)isOutdatedLinkViewReportFailedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "paper_admin_export_start_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -8489,6 +10529,71 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "collection_share_details".
 ///
 - (BOOL)isCollectionShareDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_transfers_file_add_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileTransfersFileAddDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_transfers_file_add_details".
+///
+- (BOOL)isFileTransfersFileAddDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_transfers_transfer_delete_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileTransfersTransferDeleteDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_transfers_transfer_delete_details".
+///
+- (BOOL)isFileTransfersTransferDeleteDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_transfers_transfer_download_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileTransfersTransferDownloadDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_transfers_transfer_download_details".
+///
+- (BOOL)isFileTransfersTransferDownloadDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_transfers_transfer_send_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileTransfersTransferSendDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_transfers_transfer_send_details".
+///
+- (BOOL)isFileTransfersTransferSendDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_transfers_transfer_view_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileTransfersTransferViewDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_transfers_transfer_view_details".
+///
+- (BOOL)isFileTransfersTransferViewDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -8994,6 +11099,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "shared_content_restore_invitees_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedContentRestoreInviteesDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_content_restore_invitees_details".
+///
+- (BOOL)isSharedContentRestoreInviteesDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_content_restore_member_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedContentRestoreMemberDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_content_restore_member_details".
+///
+- (BOOL)isSharedContentRestoreMemberDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "shared_content_unshare_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -9251,6 +11382,123 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "shared_link_remove_expiry_details".
 ///
 - (BOOL)isSharedLinkRemoveExpiryDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_add_expiration_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsAddExpirationDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_add_expiration_details".
+///
+- (BOOL)isSharedLinkSettingsAddExpirationDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_add_password_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsAddPasswordDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_add_password_details".
+///
+- (BOOL)isSharedLinkSettingsAddPasswordDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_allow_download_disabled_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsAllowDownloadDisabledDetails` property, otherwise a
+/// runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_allow_download_disabled_details".
+///
+- (BOOL)isSharedLinkSettingsAllowDownloadDisabledDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_allow_download_enabled_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsAllowDownloadEnabledDetails` property, otherwise a
+/// runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_allow_download_enabled_details".
+///
+- (BOOL)isSharedLinkSettingsAllowDownloadEnabledDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_change_audience_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsChangeAudienceDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_change_audience_details".
+///
+- (BOOL)isSharedLinkSettingsChangeAudienceDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_change_expiration_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsChangeExpirationDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_change_expiration_details".
+///
+- (BOOL)isSharedLinkSettingsChangeExpirationDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_change_password_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsChangePasswordDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_change_password_details".
+///
+- (BOOL)isSharedLinkSettingsChangePasswordDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_remove_expiration_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsRemoveExpirationDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_remove_expiration_details".
+///
+- (BOOL)isSharedLinkSettingsRemoveExpirationDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shared_link_settings_remove_password_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sharedLinkSettingsRemovePasswordDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shared_link_settings_remove_password_details".
+///
+- (BOOL)isSharedLinkSettingsRemovePasswordDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -9903,6 +12151,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "device_approvals_add_exception_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `deviceApprovalsAddExceptionDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "device_approvals_add_exception_details".
+///
+- (BOOL)isDeviceApprovalsAddExceptionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "device_approvals_change_desktop_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -9952,6 +12213,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "device_approvals_change_unlink_action_details".
 ///
 - (BOOL)isDeviceApprovalsChangeUnlinkActionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "device_approvals_remove_exception_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `deviceApprovalsRemoveExceptionDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "device_approvals_remove_exception_details".
+///
+- (BOOL)isDeviceApprovalsRemoveExceptionDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10046,6 +12320,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "file_locking_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileLockingPolicyChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_locking_policy_changed_details".
+///
+- (BOOL)isFileLockingPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "file_requests_change_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -10082,6 +12369,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "file_requests_emails_restricted_to_team_only_details".
 ///
 - (BOOL)isFileRequestsEmailsRestrictedToTeamOnlyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "file_transfers_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `fileTransfersPolicyChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "file_transfers_policy_changed_details".
+///
+- (BOOL)isFileTransfersPolicyChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10134,6 +12434,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "member_requests_change_policy_details".
 ///
 - (BOOL)isMemberRequestsChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "member_send_invite_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `memberSendInvitePolicyChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "member_send_invite_policy_changed_details".
+///
+- (BOOL)isMemberSendInvitePolicyChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10332,6 +12645,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "password_strength_requirements_change_policy_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `passwordStrengthRequirementsChangePolicyDetails` property, otherwise a
+/// runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "password_strength_requirements_change_policy_details".
+///
+- (BOOL)isPasswordStrengthRequirementsChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "permanent_delete_change_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -10355,6 +12681,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "reseller_support_change_policy_details".
 ///
 - (BOOL)isResellerSupportChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "rewind_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `rewindPolicyChangedDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "rewind_policy_changed_details".
+///
+- (BOOL)isRewindPolicyChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10436,6 +12775,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "smarter_smart_sync_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `smarterSmartSyncPolicyChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "smarter_smart_sync_policy_changed_details".
+///
+- (BOOL)isSmarterSmartSyncPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "smart_sync_change_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -10514,6 +12866,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "team_sharing_whitelist_subjects_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamSharingWhitelistSubjectsChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_sharing_whitelist_subjects_changed_details".
+///
+- (BOOL)isTeamSharingWhitelistSubjectsChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "tfa_add_exception_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `tfaAddExceptionDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "tfa_add_exception_details".
+///
+- (BOOL)isTfaAddExceptionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "tfa_change_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -10524,6 +12902,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "tfa_change_policy_details".
 ///
 - (BOOL)isTfaChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "tfa_remove_exception_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `tfaRemoveExceptionDetails` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "tfa_remove_exception_details".
+///
+- (BOOL)isTfaRemoveExceptionDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10550,6 +12941,32 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "viewer_info_policy_changed_details".
 ///
 - (BOOL)isViewerInfoPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "watermarking_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `watermarkingPolicyChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "watermarking_policy_changed_details".
+///
+- (BOOL)isWatermarkingPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "web_sessions_change_active_session_limit_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `webSessionsChangeActiveSessionLimitDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "web_sessions_change_active_session_limit_details".
+///
+- (BOOL)isWebSessionsChangeActiveSessionLimitDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10758,6 +13175,71 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "changed_enterprise_admin_role_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `changedEnterpriseAdminRoleDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "changed_enterprise_admin_role_details".
+///
+- (BOOL)isChangedEnterpriseAdminRoleDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "changed_enterprise_connected_team_status_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `changedEnterpriseConnectedTeamStatusDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "changed_enterprise_connected_team_status_details".
+///
+- (BOOL)isChangedEnterpriseConnectedTeamStatusDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "ended_enterprise_admin_session_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `endedEnterpriseAdminSessionDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "ended_enterprise_admin_session_details".
+///
+- (BOOL)isEndedEnterpriseAdminSessionDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "ended_enterprise_admin_session_deprecated_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `endedEnterpriseAdminSessionDeprecatedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "ended_enterprise_admin_session_deprecated_details".
+///
+- (BOOL)isEndedEnterpriseAdminSessionDeprecatedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "enterprise_settings_locking_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `enterpriseSettingsLockingDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "enterprise_settings_locking_details".
+///
+- (BOOL)isEnterpriseSettingsLockingDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "guest_admin_change_status_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -10768,6 +13250,19 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGEventDetailsTag) {
 /// "guest_admin_change_status_details".
 ///
 - (BOOL)isGuestAdminChangeStatusDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "started_enterprise_admin_session_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `startedEnterpriseAdminSessionDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "started_enterprise_admin_session_details".
+///
+- (BOOL)isStartedEnterpriseAdminSessionDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value

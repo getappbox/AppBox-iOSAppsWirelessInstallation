@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILEPROPERTIESTemplateOwnerTypeTag` enum type represents the possible
 /// tag states with which the `DBFILEPROPERTIESTemplateOwnerType` union can
 /// exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESTemplateOwnerTypeTag) {
-  /// Template will be associated with a user.
-  DBFILEPROPERTIESTemplateOwnerTypeUser,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESTemplateOwnerTypeTag){
+    /// Template will be associated with a user.
+    DBFILEPROPERTIESTemplateOwnerTypeUser,
 
-  /// Template will be associated with a team.
-  DBFILEPROPERTIESTemplateOwnerTypeTeam,
+    /// Template will be associated with a team.
+    DBFILEPROPERTIESTemplateOwnerTypeTeam,
 
-  /// (no description).
-  DBFILEPROPERTIESTemplateOwnerTypeOther,
+    /// (no description).
+    DBFILEPROPERTIESTemplateOwnerTypeOther,
 
 };
 

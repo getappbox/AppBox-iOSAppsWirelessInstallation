@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESGetMetadataErrorTag` enum type represents the possible tag
 /// states with which the `DBFILESGetMetadataError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESGetMetadataErrorTag) {
-  /// (no description).
-  DBFILESGetMetadataErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetMetadataErrorTag){
+    /// (no description).
+    DBFILESGetMetadataErrorPath,
 
 };
 

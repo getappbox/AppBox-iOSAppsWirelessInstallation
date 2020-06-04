@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGTwoAccountPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGTwoAccountPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGTwoAccountPolicyTag) {
-  /// (no description).
-  DBTEAMLOGTwoAccountPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTwoAccountPolicyTag){
+    /// (no description).
+    DBTEAMLOGTwoAccountPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGTwoAccountPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGTwoAccountPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGTwoAccountPolicyOther,
+    /// (no description).
+    DBTEAMLOGTwoAccountPolicyOther,
 
 };
 

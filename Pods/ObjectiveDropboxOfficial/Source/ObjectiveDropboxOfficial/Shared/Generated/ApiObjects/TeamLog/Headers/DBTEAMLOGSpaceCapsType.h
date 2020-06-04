@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGSpaceCapsTypeTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGSpaceCapsType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSpaceCapsTypeTag) {
-  /// (no description).
-  DBTEAMLOGSpaceCapsTypeHard,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceCapsTypeTag){
+    /// (no description).
+    DBTEAMLOGSpaceCapsTypeHard,
 
-  /// (no description).
-  DBTEAMLOGSpaceCapsTypeOff,
+    /// (no description).
+    DBTEAMLOGSpaceCapsTypeOff,
 
-  /// (no description).
-  DBTEAMLOGSpaceCapsTypeSoft,
+    /// (no description).
+    DBTEAMLOGSpaceCapsTypeSoft,
 
-  /// (no description).
-  DBTEAMLOGSpaceCapsTypeOther,
+    /// (no description).
+    DBTEAMLOGSpaceCapsTypeOther,
 
 };
 

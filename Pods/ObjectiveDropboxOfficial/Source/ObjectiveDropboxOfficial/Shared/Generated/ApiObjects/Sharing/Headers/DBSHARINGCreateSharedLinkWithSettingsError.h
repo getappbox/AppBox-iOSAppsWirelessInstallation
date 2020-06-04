@@ -31,22 +31,22 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGCreateSharedLinkWithSettingsErrorTag` enum type represents the
 /// possible tag states with which the
 /// `DBSHARINGCreateSharedLinkWithSettingsError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag) {
-  /// (no description).
-  DBSHARINGCreateSharedLinkWithSettingsErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGCreateSharedLinkWithSettingsErrorTag){
+    /// (no description).
+    DBSHARINGCreateSharedLinkWithSettingsErrorPath,
 
-  /// User's email should be verified.
-  DBSHARINGCreateSharedLinkWithSettingsErrorEmailNotVerified,
+    /// User's email should be verified.
+    DBSHARINGCreateSharedLinkWithSettingsErrorEmailNotVerified,
 
-  /// The shared link already exists. You can call `listSharedLinks` to get
-  /// the  existing link, or use the provided metadata if it is returned.
-  DBSHARINGCreateSharedLinkWithSettingsErrorSharedLinkAlreadyExists,
+    /// The shared link already exists. You can call `listSharedLinks` to get
+    /// the  existing link, or use the provided metadata if it is returned.
+    DBSHARINGCreateSharedLinkWithSettingsErrorSharedLinkAlreadyExists,
 
-  /// There is an error with the given settings.
-  DBSHARINGCreateSharedLinkWithSettingsErrorSettingsError,
+    /// There is an error with the given settings.
+    DBSHARINGCreateSharedLinkWithSettingsErrorSettingsError,
 
-  /// Access to the requested path is forbidden.
-  DBSHARINGCreateSharedLinkWithSettingsErrorAccessDenied,
+    /// Access to the requested path is forbidden.
+    DBSHARINGCreateSharedLinkWithSettingsErrorAccessDenied,
 
 };
 

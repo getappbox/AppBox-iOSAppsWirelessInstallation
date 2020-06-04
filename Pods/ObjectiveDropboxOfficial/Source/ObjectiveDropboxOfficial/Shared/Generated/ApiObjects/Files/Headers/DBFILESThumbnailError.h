@@ -28,18 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESThumbnailErrorTag` enum type represents the possible tag states
 /// with which the `DBFILESThumbnailError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESThumbnailErrorTag) {
-  /// An error occurs when downloading metadata for the image.
-  DBFILESThumbnailErrorPath,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESThumbnailErrorTag){
+    /// An error occurs when downloading metadata for the image.
+    DBFILESThumbnailErrorPath,
 
-  /// The file extension doesn't allow conversion to a thumbnail.
-  DBFILESThumbnailErrorUnsupportedExtension,
+    /// The file extension doesn't allow conversion to a thumbnail.
+    DBFILESThumbnailErrorUnsupportedExtension,
 
-  /// The image cannot be converted to a thumbnail.
-  DBFILESThumbnailErrorUnsupportedImage,
+    /// The image cannot be converted to a thumbnail.
+    DBFILESThumbnailErrorUnsupportedImage,
 
-  /// An error occurs during thumbnail conversion.
-  DBFILESThumbnailErrorConversionError,
+    /// An error occurs during thumbnail conversion.
+    DBFILESThumbnailErrorConversionError,
 
 };
 

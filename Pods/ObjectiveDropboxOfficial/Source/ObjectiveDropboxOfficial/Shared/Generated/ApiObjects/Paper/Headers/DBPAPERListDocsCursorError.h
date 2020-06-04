@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERListDocsCursorErrorTag` enum type represents the possible tag
 /// states with which the `DBPAPERListDocsCursorError` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag) {
-  /// (no description).
-  DBPAPERListDocsCursorErrorCursorError,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERListDocsCursorErrorTag){
+    /// (no description).
+    DBPAPERListDocsCursorErrorCursorError,
 
-  /// (no description).
-  DBPAPERListDocsCursorErrorOther,
+    /// (no description).
+    DBPAPERListDocsCursorErrorOther,
 
 };
 

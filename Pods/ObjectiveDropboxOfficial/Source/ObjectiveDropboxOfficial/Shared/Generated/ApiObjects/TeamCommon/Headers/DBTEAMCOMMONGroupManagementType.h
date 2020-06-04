@@ -29,18 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMCOMMONGroupManagementTypeTag` enum type represents the possible
 /// tag states with which the `DBTEAMCOMMONGroupManagementType` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag) {
-  /// A group which is managed by selected users.
-  DBTEAMCOMMONGroupManagementTypeUserManaged,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMCOMMONGroupManagementTypeTag){
+    /// A group which is managed by selected users.
+    DBTEAMCOMMONGroupManagementTypeUserManaged,
 
-  /// A group which is managed by team admins only.
-  DBTEAMCOMMONGroupManagementTypeCompanyManaged,
+    /// A group which is managed by team admins only.
+    DBTEAMCOMMONGroupManagementTypeCompanyManaged,
 
-  /// A group which is managed automatically by Dropbox.
-  DBTEAMCOMMONGroupManagementTypeSystemManaged,
+    /// A group which is managed automatically by Dropbox.
+    DBTEAMCOMMONGroupManagementTypeSystemManaged,
 
-  /// (no description).
-  DBTEAMCOMMONGroupManagementTypeOther,
+    /// (no description).
+    DBTEAMCOMMONGroupManagementTypeOther,
 
 };
 

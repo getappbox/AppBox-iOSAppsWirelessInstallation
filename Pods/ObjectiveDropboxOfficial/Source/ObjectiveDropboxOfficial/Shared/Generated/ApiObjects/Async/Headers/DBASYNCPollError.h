@@ -29,17 +29,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBASYNCPollErrorTag` enum type represents the possible tag states with
 /// which the `DBASYNCPollError` union can exist.
-typedef NS_ENUM(NSInteger, DBASYNCPollErrorTag) {
-  /// The job ID is invalid.
-  DBASYNCPollErrorInvalidAsyncJobId,
+typedef NS_CLOSED_ENUM(NSInteger, DBASYNCPollErrorTag){
+    /// The job ID is invalid.
+    DBASYNCPollErrorInvalidAsyncJobId,
 
-  /// Something went wrong with the job on Dropbox's end. You'll need to
-  /// verify that the action you were taking succeeded, and if not, try again.
-  /// This should happen very rarely.
-  DBASYNCPollErrorInternalError,
+    /// Something went wrong with the job on Dropbox's end. You'll need to
+    /// verify that the action you were taking succeeded, and if not, try again.
+    /// This should happen very rarely.
+    DBASYNCPollErrorInternalError,
 
-  /// (no description).
-  DBASYNCPollErrorOther,
+    /// (no description).
+    DBASYNCPollErrorOther,
 
 };
 

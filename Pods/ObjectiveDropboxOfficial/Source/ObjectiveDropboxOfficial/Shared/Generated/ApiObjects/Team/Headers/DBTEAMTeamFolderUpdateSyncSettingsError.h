@@ -32,21 +32,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamFolderUpdateSyncSettingsErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMTeamFolderUpdateSyncSettingsError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderUpdateSyncSettingsErrorTag) {
-  /// (no description).
-  DBTEAMTeamFolderUpdateSyncSettingsErrorAccessError,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderUpdateSyncSettingsErrorTag){
+    /// (no description).
+    DBTEAMTeamFolderUpdateSyncSettingsErrorAccessError,
 
-  /// (no description).
-  DBTEAMTeamFolderUpdateSyncSettingsErrorStatusError,
+    /// (no description).
+    DBTEAMTeamFolderUpdateSyncSettingsErrorStatusError,
 
-  /// (no description).
-  DBTEAMTeamFolderUpdateSyncSettingsErrorTeamSharedDropboxError,
+    /// (no description).
+    DBTEAMTeamFolderUpdateSyncSettingsErrorTeamSharedDropboxError,
 
-  /// (no description).
-  DBTEAMTeamFolderUpdateSyncSettingsErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderUpdateSyncSettingsErrorOther,
 
-  /// An error occurred setting the sync settings.
-  DBTEAMTeamFolderUpdateSyncSettingsErrorSyncSettingsError,
+    /// An error occurred setting the sync settings.
+    DBTEAMTeamFolderUpdateSyncSettingsErrorSyncSettingsError,
 
 };
 

@@ -30,15 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGMicrosoftOfficeAddinPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMLOGMicrosoftOfficeAddinPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGMicrosoftOfficeAddinPolicyTag) {
-  /// (no description).
-  DBTEAMLOGMicrosoftOfficeAddinPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMicrosoftOfficeAddinPolicyTag){
+    /// (no description).
+    DBTEAMLOGMicrosoftOfficeAddinPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGMicrosoftOfficeAddinPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGMicrosoftOfficeAddinPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGMicrosoftOfficeAddinPolicyOther,
+    /// (no description).
+    DBTEAMLOGMicrosoftOfficeAddinPolicyOther,
 
 };
 

@@ -28,15 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMPOLICIESShowcaseEnabledPolicyTag` enum type represents the
 /// possible tag states with which the `DBTEAMPOLICIESShowcaseEnabledPolicy`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESShowcaseEnabledPolicyTag) {
-  /// Showcase is disabled.
-  DBTEAMPOLICIESShowcaseEnabledPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESShowcaseEnabledPolicyTag){
+    /// Showcase is disabled.
+    DBTEAMPOLICIESShowcaseEnabledPolicyDisabled,
 
-  /// Showcase is enabled.
-  DBTEAMPOLICIESShowcaseEnabledPolicyEnabled,
+    /// Showcase is enabled.
+    DBTEAMPOLICIESShowcaseEnabledPolicyEnabled,
 
-  /// (no description).
-  DBTEAMPOLICIESShowcaseEnabledPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESShowcaseEnabledPolicyOther,
 
 };
 

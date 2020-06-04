@@ -31,14 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMMembersGetInfoItemTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersGetInfoItem` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMMembersGetInfoItemTag) {
-  /// An ID that was provided as a parameter to `membersGetInfo`, and did not
-  /// match a corresponding user. This might be a team_member_id, an email, or
-  /// an external ID, depending on how the method was called.
-  DBTEAMMembersGetInfoItemIdNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersGetInfoItemTag){
+    /// An ID that was provided as a parameter to `membersGetInfo`, and did not
+    /// match a corresponding user. This might be a team_member_id, an email, or
+    /// an external ID, depending on how the method was called.
+    DBTEAMMembersGetInfoItemIdNotFound,
 
-  /// Info about a team member.
-  DBTEAMMembersGetInfoItemMemberInfo,
+    /// Info about a team member.
+    DBTEAMMembersGetInfoItemMemberInfo,
 
 };
 

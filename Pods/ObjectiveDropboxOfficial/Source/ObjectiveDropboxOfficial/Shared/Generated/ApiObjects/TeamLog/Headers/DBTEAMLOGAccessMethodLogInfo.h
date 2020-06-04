@@ -32,24 +32,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGAccessMethodLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGAccessMethodLogInfo` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag) {
-  /// End user session details.
-  DBTEAMLOGAccessMethodLogInfoEndUser,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
+    /// End user session details.
+    DBTEAMLOGAccessMethodLogInfoEndUser,
 
-  /// Sign in as session details.
-  DBTEAMLOGAccessMethodLogInfoSignInAs,
+    /// Sign in as session details.
+    DBTEAMLOGAccessMethodLogInfoSignInAs,
 
-  /// Content manager session details.
-  DBTEAMLOGAccessMethodLogInfoContentManager,
+    /// Content manager session details.
+    DBTEAMLOGAccessMethodLogInfoContentManager,
 
-  /// Admin console session details.
-  DBTEAMLOGAccessMethodLogInfoAdminConsole,
+    /// Admin console session details.
+    DBTEAMLOGAccessMethodLogInfoAdminConsole,
 
-  /// Api session details.
-  DBTEAMLOGAccessMethodLogInfoApi,
+    /// Enterprise console session details.
+    DBTEAMLOGAccessMethodLogInfoEnterpriseConsole,
 
-  /// (no description).
-  DBTEAMLOGAccessMethodLogInfoOther,
+    /// Api session details.
+    DBTEAMLOGAccessMethodLogInfoApi,
+
+    /// (no description).
+    DBTEAMLOGAccessMethodLogInfoOther,
 
 };
 
@@ -71,6 +74,11 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag) {
 /// Admin console session details. @note Ensure the `isAdminConsole` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *adminConsole;
+
+/// Enterprise console session details. @note Ensure the `isEnterpriseConsole`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *enterpriseConsole;
 
 /// Api session details. @note Ensure the `isApi` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -122,6 +130,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag) {
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAdminConsole:(DBTEAMLOGWebSessionLogInfo *)adminConsole;
+
+///
+/// Initializes union class with tag state of "enterprise_console".
+///
+/// Description of the "enterprise_console" tag state: Enterprise console
+/// session details.
+///
+/// @param enterpriseConsole Enterprise console session details.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithEnterpriseConsole:(DBTEAMLOGWebSessionLogInfo *)enterpriseConsole;
 
 ///
 /// Initializes union class with tag state of "api".
@@ -184,6 +204,18 @@ typedef NS_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag) {
 /// @return Whether the union's current tag state has value "admin_console".
 ///
 - (BOOL)isAdminConsole;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "enterprise_console".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `enterpriseConsole` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "enterprise_console".
+///
+- (BOOL)isEnterpriseConsole;
 
 ///
 /// Retrieves whether the union's current tag state has value "api".

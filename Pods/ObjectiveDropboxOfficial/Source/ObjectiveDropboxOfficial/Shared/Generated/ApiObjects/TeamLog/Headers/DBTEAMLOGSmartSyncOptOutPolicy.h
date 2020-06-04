@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGSmartSyncOptOutPolicyTag` enum type represents the possible
 /// tag states with which the `DBTEAMLOGSmartSyncOptOutPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGSmartSyncOptOutPolicyTag) {
-  /// (no description).
-  DBTEAMLOGSmartSyncOptOutPolicyDefault_,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSmartSyncOptOutPolicyTag){
+    /// (no description).
+    DBTEAMLOGSmartSyncOptOutPolicyDefault_,
 
-  /// (no description).
-  DBTEAMLOGSmartSyncOptOutPolicyOptedOut,
+    /// (no description).
+    DBTEAMLOGSmartSyncOptOutPolicyOptedOut,
 
-  /// (no description).
-  DBTEAMLOGSmartSyncOptOutPolicyOther,
+    /// (no description).
+    DBTEAMLOGSmartSyncOptOutPolicyOther,
 
 };
 

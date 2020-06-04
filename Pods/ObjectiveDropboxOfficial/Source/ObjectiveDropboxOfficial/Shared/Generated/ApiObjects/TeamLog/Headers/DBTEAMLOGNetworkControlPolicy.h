@@ -29,15 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGNetworkControlPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGNetworkControlPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGNetworkControlPolicyTag) {
-  /// (no description).
-  DBTEAMLOGNetworkControlPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGNetworkControlPolicyTag){
+    /// (no description).
+    DBTEAMLOGNetworkControlPolicyDisabled,
 
-  /// (no description).
-  DBTEAMLOGNetworkControlPolicyEnabled,
+    /// (no description).
+    DBTEAMLOGNetworkControlPolicyEnabled,
 
-  /// (no description).
-  DBTEAMLOGNetworkControlPolicyOther,
+    /// (no description).
+    DBTEAMLOGNetworkControlPolicyOther,
 
 };
 

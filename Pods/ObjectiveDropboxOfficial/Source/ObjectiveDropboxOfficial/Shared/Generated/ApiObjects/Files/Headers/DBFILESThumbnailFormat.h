@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILESThumbnailFormatTag` enum type represents the possible tag states
 /// with which the `DBFILESThumbnailFormat` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESThumbnailFormatTag) {
-  /// (no description).
-  DBFILESThumbnailFormatJpeg,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESThumbnailFormatTag){
+    /// (no description).
+    DBFILESThumbnailFormatJpeg,
 
-  /// (no description).
-  DBFILESThumbnailFormatPng,
+    /// (no description).
+    DBFILESThumbnailFormatPng,
 
 };
 

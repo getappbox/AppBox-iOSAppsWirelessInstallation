@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESUploadSessionFinishBatchJobStatusTag` enum type represents the
 /// possible tag states with which the
 /// `DBFILESUploadSessionFinishBatchJobStatus` union can exist.
-typedef NS_ENUM(NSInteger, DBFILESUploadSessionFinishBatchJobStatusTag) {
-  /// The asynchronous job is still in progress.
-  DBFILESUploadSessionFinishBatchJobStatusInProgress,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionFinishBatchJobStatusTag){
+    /// The asynchronous job is still in progress.
+    DBFILESUploadSessionFinishBatchJobStatusInProgress,
 
-  /// The `uploadSessionFinishBatch` has finished.
-  DBFILESUploadSessionFinishBatchJobStatusComplete,
+    /// The `uploadSessionFinishBatch` has finished.
+    DBFILESUploadSessionFinishBatchJobStatusComplete,
 
 };
 

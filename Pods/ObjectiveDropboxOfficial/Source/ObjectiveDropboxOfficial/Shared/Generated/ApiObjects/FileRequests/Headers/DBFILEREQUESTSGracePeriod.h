@@ -27,24 +27,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEREQUESTSGracePeriodTag` enum type represents the possible tag
 /// states with which the `DBFILEREQUESTSGracePeriod` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEREQUESTSGracePeriodTag) {
-  /// (no description).
-  DBFILEREQUESTSGracePeriodOneDay,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEREQUESTSGracePeriodTag){
+    /// (no description).
+    DBFILEREQUESTSGracePeriodOneDay,
 
-  /// (no description).
-  DBFILEREQUESTSGracePeriodTwoDays,
+    /// (no description).
+    DBFILEREQUESTSGracePeriodTwoDays,
 
-  /// (no description).
-  DBFILEREQUESTSGracePeriodSevenDays,
+    /// (no description).
+    DBFILEREQUESTSGracePeriodSevenDays,
 
-  /// (no description).
-  DBFILEREQUESTSGracePeriodThirtyDays,
+    /// (no description).
+    DBFILEREQUESTSGracePeriodThirtyDays,
 
-  /// (no description).
-  DBFILEREQUESTSGracePeriodAlways,
+    /// (no description).
+    DBFILEREQUESTSGracePeriodAlways,
 
-  /// (no description).
-  DBFILEREQUESTSGracePeriodOther,
+    /// (no description).
+    DBFILEREQUESTSGracePeriodOther,
 
 };
 

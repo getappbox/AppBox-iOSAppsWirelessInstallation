@@ -29,23 +29,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBSHARINGFileMemberActionErrorTag` enum type represents the possible
 /// tag states with which the `DBSHARINGFileMemberActionError` union can exist.
-typedef NS_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag) {
-  /// Specified member was not found.
-  DBSHARINGFileMemberActionErrorInvalidMember,
+typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGFileMemberActionErrorTag){
+    /// Specified member was not found.
+    DBSHARINGFileMemberActionErrorInvalidMember,
 
-  /// User does not have permission to perform this action on this member.
-  DBSHARINGFileMemberActionErrorNoPermission,
+    /// User does not have permission to perform this action on this member.
+    DBSHARINGFileMemberActionErrorNoPermission,
 
-  /// Specified file was invalid or user does not have access.
-  DBSHARINGFileMemberActionErrorAccessError,
+    /// Specified file was invalid or user does not have access.
+    DBSHARINGFileMemberActionErrorAccessError,
 
-  /// The action cannot be completed because the target member does not have
-  /// explicit access to the file. The return value is the access that the
-  /// member has to the file from a parent folder.
-  DBSHARINGFileMemberActionErrorNoExplicitAccess,
+    /// The action cannot be completed because the target member does not have
+    /// explicit access to the file. The return value is the access that the
+    /// member has to the file from a parent folder.
+    DBSHARINGFileMemberActionErrorNoExplicitAccess,
 
-  /// (no description).
-  DBSHARINGFileMemberActionErrorOther,
+    /// (no description).
+    DBSHARINGFileMemberActionErrorOther,
 
 };
 

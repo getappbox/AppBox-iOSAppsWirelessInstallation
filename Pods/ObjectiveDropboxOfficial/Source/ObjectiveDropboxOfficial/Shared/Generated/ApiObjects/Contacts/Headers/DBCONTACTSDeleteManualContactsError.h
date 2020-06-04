@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBCONTACTSDeleteManualContactsErrorTag` enum type represents the
 /// possible tag states with which the `DBCONTACTSDeleteManualContactsError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBCONTACTSDeleteManualContactsErrorTag) {
-  /// Can't delete contacts from this list. Make sure the list only has
-  /// manually added contacts. The deletion was cancelled.
-  DBCONTACTSDeleteManualContactsErrorContactsNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBCONTACTSDeleteManualContactsErrorTag){
+    /// Can't delete contacts from this list. Make sure the list only has
+    /// manually added contacts. The deletion was cancelled.
+    DBCONTACTSDeleteManualContactsErrorContactsNotFound,
 
-  /// (no description).
-  DBCONTACTSDeleteManualContactsErrorOther,
+    /// (no description).
+    DBCONTACTSDeleteManualContactsErrorOther,
 
 };
 

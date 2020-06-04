@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMTeamFolderTeamSharedDropboxErrorTag` enum type represents the
 /// possible tag states with which the `DBTEAMTeamFolderTeamSharedDropboxError`
 /// union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMTeamFolderTeamSharedDropboxErrorTag) {
-  /// This action is not allowed for a shared team root.
-  DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMTeamFolderTeamSharedDropboxErrorTag){
+    /// This action is not allowed for a shared team root.
+    DBTEAMTeamFolderTeamSharedDropboxErrorDisallowed,
 
-  /// (no description).
-  DBTEAMTeamFolderTeamSharedDropboxErrorOther,
+    /// (no description).
+    DBTEAMTeamFolderTeamSharedDropboxErrorOther,
 
 };
 

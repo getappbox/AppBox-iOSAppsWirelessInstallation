@@ -28,22 +28,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBFILEPROPERTIESPropertiesErrorTag` enum type represents the possible
 /// tag states with which the `DBFILEPROPERTIESPropertiesError` union can exist.
-typedef NS_ENUM(NSInteger, DBFILEPROPERTIESPropertiesErrorTag) {
-  /// Template does not exist for the given identifier.
-  DBFILEPROPERTIESPropertiesErrorTemplateNotFound,
+typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESPropertiesErrorTag){
+    /// Template does not exist for the given identifier.
+    DBFILEPROPERTIESPropertiesErrorTemplateNotFound,
 
-  /// You do not have permission to modify this template.
-  DBFILEPROPERTIESPropertiesErrorRestrictedContent,
+    /// You do not have permission to modify this template.
+    DBFILEPROPERTIESPropertiesErrorRestrictedContent,
 
-  /// (no description).
-  DBFILEPROPERTIESPropertiesErrorOther,
+    /// (no description).
+    DBFILEPROPERTIESPropertiesErrorOther,
 
-  /// (no description).
-  DBFILEPROPERTIESPropertiesErrorPath,
+    /// (no description).
+    DBFILEPROPERTIESPropertiesErrorPath,
 
-  /// This folder cannot be tagged. Tagging folders is not supported for
-  /// team-owned templates.
-  DBFILEPROPERTIESPropertiesErrorUnsupportedFolder,
+    /// This folder cannot be tagged. Tagging folders is not supported for
+    /// team-owned templates.
+    DBFILEPROPERTIESPropertiesErrorUnsupportedFolder,
 
 };
 

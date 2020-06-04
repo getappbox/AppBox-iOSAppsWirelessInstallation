@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `PaperDocTeamInviteDetails` struct.
 ///
-/// Shared Paper doc with team member.
+/// Shared Paper doc with users and/or groups.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

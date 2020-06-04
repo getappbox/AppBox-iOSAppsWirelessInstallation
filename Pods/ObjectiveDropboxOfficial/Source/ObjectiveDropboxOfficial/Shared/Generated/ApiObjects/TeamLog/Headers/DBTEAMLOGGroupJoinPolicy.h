@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMLOGGroupJoinPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGGroupJoinPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMLOGGroupJoinPolicyTag) {
-  /// (no description).
-  DBTEAMLOGGroupJoinPolicyOpen,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGGroupJoinPolicyTag){
+    /// (no description).
+    DBTEAMLOGGroupJoinPolicyOpen,
 
-  /// (no description).
-  DBTEAMLOGGroupJoinPolicyRequestToJoin,
+    /// (no description).
+    DBTEAMLOGGroupJoinPolicyRequestToJoin,
 
-  /// (no description).
-  DBTEAMLOGGroupJoinPolicyOther,
+    /// (no description).
+    DBTEAMLOGGroupJoinPolicyOther,
 
 };
 

@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMGroupsGetInfoErrorTag` enum type represents the possible tag
 /// states with which the `DBTEAMGroupsGetInfoError` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMGroupsGetInfoErrorTag) {
-  /// The group is not on your team.
-  DBTEAMGroupsGetInfoErrorGroupNotOnTeam,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMGroupsGetInfoErrorTag){
+    /// The group is not on your team.
+    DBTEAMGroupsGetInfoErrorGroupNotOnTeam,
 
-  /// (no description).
-  DBTEAMGroupsGetInfoErrorOther,
+    /// (no description).
+    DBTEAMGroupsGetInfoErrorOther,
 
 };
 

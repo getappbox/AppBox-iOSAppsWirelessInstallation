@@ -27,18 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBPAPERSharingPublicPolicyTypeTag` enum type represents the possible
 /// tag states with which the `DBPAPERSharingPublicPolicyType` union can exist.
-typedef NS_ENUM(NSInteger, DBPAPERSharingPublicPolicyTypeTag) {
-  /// Users who have a link to this doc can edit it.
-  DBPAPERSharingPublicPolicyTypePeopleWithLinkCanEdit,
+typedef NS_CLOSED_ENUM(NSInteger, DBPAPERSharingPublicPolicyTypeTag){
+    /// Users who have a link to this doc can edit it.
+    DBPAPERSharingPublicPolicyTypePeopleWithLinkCanEdit,
 
-  /// Users who have a link to this doc can view and comment on it.
-  DBPAPERSharingPublicPolicyTypePeopleWithLinkCanViewAndComment,
+    /// Users who have a link to this doc can view and comment on it.
+    DBPAPERSharingPublicPolicyTypePeopleWithLinkCanViewAndComment,
 
-  /// Users must be explicitly invited to this doc.
-  DBPAPERSharingPublicPolicyTypeInviteOnly,
+    /// Users must be explicitly invited to this doc.
+    DBPAPERSharingPublicPolicyTypeInviteOnly,
 
-  /// Value used to indicate that doc sharing is enabled only within team.
-  DBPAPERSharingPublicPolicyTypeDisabled,
+    /// Value used to indicate that doc sharing is enabled only within team.
+    DBPAPERSharingPublicPolicyTypeDisabled,
 
 };
 

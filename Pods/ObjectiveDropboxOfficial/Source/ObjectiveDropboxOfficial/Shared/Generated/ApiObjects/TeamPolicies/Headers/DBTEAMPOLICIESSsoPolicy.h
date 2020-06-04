@@ -27,19 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The `DBTEAMPOLICIESSsoPolicyTag` enum type represents the possible tag
 /// states with which the `DBTEAMPOLICIESSsoPolicy` union can exist.
-typedef NS_ENUM(NSInteger, DBTEAMPOLICIESSsoPolicyTag) {
-  /// Users will be able to sign in with their Dropbox credentials.
-  DBTEAMPOLICIESSsoPolicyDisabled,
+typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESSsoPolicyTag){
+    /// Users will be able to sign in with their Dropbox credentials.
+    DBTEAMPOLICIESSsoPolicyDisabled,
 
-  /// Users will be able to sign in with either their Dropbox or single
-  /// sign-on credentials.
-  DBTEAMPOLICIESSsoPolicyOptional,
+    /// Users will be able to sign in with either their Dropbox or single
+    /// sign-on credentials.
+    DBTEAMPOLICIESSsoPolicyOptional,
 
-  /// Users will be required to sign in with their single sign-on credentials.
-  DBTEAMPOLICIESSsoPolicyRequired,
+    /// Users will be required to sign in with their single sign-on credentials.
+    DBTEAMPOLICIESSsoPolicyRequired,
 
-  /// (no description).
-  DBTEAMPOLICIESSsoPolicyOther,
+    /// (no description).
+    DBTEAMPOLICIESSsoPolicyOther,
 
 };
 
