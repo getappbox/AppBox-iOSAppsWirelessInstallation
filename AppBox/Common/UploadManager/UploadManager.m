@@ -229,7 +229,7 @@
              else if (error){
                  if (self.uploadRecord) {
                      self.errorBlock(error.nsError, NO);
-                     [DBErrorHandler handleNetworkErrorWith:error];
+                     [DBErrorHandler handleNetworkErrorWith:error abErrorMessage:@"Unable to fetch app records from Dropbox."];
                  }
                  //create new appinfo.json
                  [self handleAfterUniqueJsonMetaDataLoaded];
@@ -573,7 +573,7 @@
         } else if (uploadError) {
             [DBErrorHandler handleUploadErrorWith:uploadError];
         } else {
-            [DBErrorHandler handleNetworkErrorWith:networkError];
+            [DBErrorHandler handleNetworkErrorWith:networkError abErrorMessage:nil];
         }
     }
 }
@@ -624,7 +624,7 @@
     }
     
     //Retry upload if there is any conflict in file upload
-    else if([error isHttpError] && error.statusCode.integerValue == 409){
+    else if([error isHttpError] && error.statusCode.integerValue == 409 && retryCount < abOnErrorMaxRetryCount){
         [self dbGetSharedURLForFile:file];
     }
     
@@ -641,7 +641,7 @@
             exit(abExitCodeForUploadFailed);
         }
         retryCount = 0;
-        [DBErrorHandler handleNetworkErrorWith:error];
+        [DBErrorHandler handleNetworkErrorWith:error abErrorMessage:@"Unable to create a share URL for the file."];
         self.errorBlock(nil, YES);
     }
 }
@@ -750,7 +750,7 @@
         } else if (routeError) {
             [DBErrorHandler handleDeleteErrorWith:routeError];
         } else if (networkError) {
-            [DBErrorHandler handleNetworkErrorWith:networkError];
+            [DBErrorHandler handleNetworkErrorWith:networkError abErrorMessage:@"Unable to delete build folder."];
         }
     }];
 }
@@ -763,7 +763,7 @@
         } else if (routeError) {
             [DBErrorHandler handleDeleteErrorWith:routeError];
         } else if (networkError) {
-            [DBErrorHandler handleNetworkErrorWith:networkError];
+            [DBErrorHandler handleNetworkErrorWith:networkError abErrorMessage:@"Unable to delete file."];
         }
     }];
 }
