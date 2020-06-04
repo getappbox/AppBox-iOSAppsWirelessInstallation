@@ -10,48 +10,71 @@
 
 @implementation DBErrorHandler
 
-+(void)handleNetworkErrorWith:(DBRequestError *)networkError{
-    switch (networkError.tag) {
-        case DBRequestErrorAuth:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to invalid authentication credentials. Please login Again."];
-            [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
-        }break;
-            
-        case DBRequestErrorHttp:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors produced at the HTTP layer. Please try again."];
-        }break;
-            
-        case DBRequestErrorAccess:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to invalid permission to access."];
-        }break;
-            
-        case DBRequestErrorClient:{
-            if (![[AppDelegate appDelegate] isInternetConnected]){
-                [Common showNoInternetConnectionAvailabeAlert];
-            } else {
-                [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to a problem on the client-side of the SDK. Please try again."];
-            }
-        }break;
-            
-        case DBRequestErrorBadInput:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to bad input parameters to an API Operation. Please report the issue."];
-        }break;
-            
-        case DBRequestErrorPathRoot:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to invalid authentication credentials."];
-        }break;
-            
-        case DBRequestErrorRateLimit:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Error caused by rate limiting."];
-        }break;
-            
-        case DBRequestErrorInternalServer:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Errors due to a problem on Dropbox. Please try again."];
-        }break;
-            
-        default:{
-            [Common showAlertWithTitle:@"Error" andMessage:@"Something goes wrong. Please try again."];
-        }break;
++(void)handleNetworkErrorWith:(DBRequestError *)networkError abErrorMessage:(NSString *)abErrorMessage {
+    NSMutableString *errorMessage = [[NSMutableString alloc] init];
+    if (networkError) {
+        [errorMessage appendFormat:@"\n\nDropbox Request Error - "];
+        [errorMessage appendFormat:@"\nError Content - %@", networkError.errorContent];
+        [errorMessage appendFormat:@"\nStatus Code - %@", networkError.statusCode];
+        [errorMessage appendFormat:@"\nRequest Id - %@", networkError.requestId];
+        if (abErrorMessage) {
+            [errorMessage appendFormat:@"\n\nAppBox Error - %@", abErrorMessage];
+        }
+        
+        switch (networkError.tag) {
+            case DBRequestErrorAuth:{
+                [errorMessage insertString:@"Errors due to invalid authentication credentials. Please login Again." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+                [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
+            }break;
+                
+            case DBRequestErrorHttp:{
+                [errorMessage insertString:@"Errors produced at the HTTP layer. Please check following details and try again." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+                
+            case DBRequestErrorAccess:{
+                [errorMessage insertString:@"Errors due to invalid permission to access." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+                
+            case DBRequestErrorClient:{
+                if (![[AppDelegate appDelegate] isInternetConnected]){
+                    [Common showNoInternetConnectionAvailabeAlert];
+                } else {
+                    [errorMessage insertString:@"Errors due to a problem on the client-side of the SDK. Please check following details and try again." atIndex:0];
+                    [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+                }
+            }break;
+                
+            case DBRequestErrorBadInput:{
+                [errorMessage insertString:@"Errors due to bad input parameters to an API Operation. Please report the issue." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+                
+            case DBRequestErrorPathRoot:{
+                [errorMessage insertString:@"Errors due to invalid authentication credentials." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+                
+            case DBRequestErrorRateLimit:{
+                [errorMessage insertString:@"Error caused by rate limiting." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+                
+            case DBRequestErrorInternalServer:{
+                [errorMessage insertString:@"Errors due to a problem on Dropbox Server. Please try again." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+                
+            default:{
+                [errorMessage insertString:@"Something goes wrong. Please try again." atIndex:0];
+                [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
+            }break;
+        }
+    } else {
+        [errorMessage insertString:@"Something goes wrong. Please try again." atIndex:0];
+        [Common showAlertWithTitle:@"Error" andMessage:errorMessage];
     }
 }
 
