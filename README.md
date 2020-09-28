@@ -3,7 +3,7 @@
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 [![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg?style=flat-square)](https://getappbox.com/download)
 [![License](https://img.shields.io/badge/license-cc%20by--nd%204.0-brightgreen.svg?style=flat-square)](#user-content-license)
-[![Twitter](https://img.shields.io/twitter/follow/AppBoxHQ.svg?style=social&label=Follow)](https://twitter.com/tryappbox)
+[![Twitter](https://img.shields.io/twitter/follow/AppBoxHQ.svg?style=social&label=Follow)](https://twitter.com/AppBoxHQ)
 
 # AppBox - iOS Apps Wireless Installation 
 AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
