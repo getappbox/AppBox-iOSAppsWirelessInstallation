@@ -39,9 +39,9 @@
   return [DBCHECKEchoArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCHECKEchoArgSerializer serialize:self] description];
 }
 
@@ -141,9 +141,9 @@
   return [DBCHECKEchoResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCHECKEchoResultSerializer serialize:self] description];
 }
 

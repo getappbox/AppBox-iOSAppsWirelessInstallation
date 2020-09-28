@@ -2,10 +2,13 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
+#import "DBOAuthResultCompletion.h"
 #import <Foundation/Foundation.h>
 
 @class DBAccessToken;
+@class DBOAuthPKCESession;
 @class DBOAuthResult;
+@class DBScopeRequest;
 @protocol DBSharedApplication;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Stores a unique identifying key for storing in `DBKeychain`.
 ///
-@interface DBAccessToken : NSObject
+@interface DBAccessToken : NSObject <NSSecureCoding>
 
 /// The OAuth2 access token.
 @property (nonatomic, readonly, copy) NSString *accessToken;
@@ -26,15 +29,69 @@ NS_ASSUME_NONNULL_BEGIN
 /// the `team_id` if (team app).
 @property (nonatomic, readonly, copy) NSString *uid;
 
+/// The refresh token if accessToken is short-lived.
+@property (nonatomic, readonly, copy, nullable) NSString *refreshToken;
+
+/// The expiration time of the (short-lived) accessToken.
+@property (nonatomic, readonly, assign) NSTimeInterval tokenExpirationTimestamp;
+
+/// Creates a `DBAccessToken` object for a long-lived access token.
+///
+/// @param accessToken The OAuth2 access token retrieved from the auth flow.
+/// @param uid The unique identifier used to store in `DBKeychain`.
+///
+/// @return A `DBAccessToken` object.
++ (DBAccessToken *)createWithLongLivedAccessToken:(NSString *)accessToken uid:(NSString *)uid;
+
+/// Creates a `DBAccessToken` object for a short-lived access token.
+///
+/// @param accessToken The OAuth2 access token retrieved from the auth flow.
+/// @param uid The unique identifier used to store in `DBKeychain`.
+/// @param refreshToken The refresh token if accessToken is short-lived.
+/// @param tokenExpirationTimestamp The expiration time of the (short-lived) accessToken.
+///
+/// @return A `DBAccessToken` object.
++ (DBAccessToken *)createWithShortLivedAccessToken:(NSString *)accessToken
+                                               uid:(NSString *)uid
+                                      refreshToken:(nullable NSString *)refreshToken
+                          tokenExpirationTimestamp:(NSTimeInterval)tokenExpirationTimestamp;
+
+/// Convenience method for initWithAccessToken:uid:refreshToken:tokenExpirationTimestamp: with
+/// refreshToken set to nil and tokenExpirationTimestamp set to 0.
+- (instancetype)initWithAccessToken:(NSString *)accessToken uid:(NSString *)uid;
+
 ///
 /// DBAccessToken full constructor.
 ///
 /// @param accessToken The OAuth2 access token retrieved from the auth flow.
 /// @param uid The unique identifier used to store in `DBKeychain`.
+/// @param refreshToken The refresh token if accessToken is short-lived.
+/// @param tokenExpirationTimestamp The expiration time of the (short-lived) accessToken.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAccessToken:(NSString *)accessToken uid:(NSString *)uid;
+- (instancetype)initWithAccessToken:(NSString *)accessToken
+                                uid:(NSString *)uid
+                       refreshToken:(nullable NSString *)refreshToken
+           tokenExpirationTimestamp:(NSTimeInterval)tokenExpirationTimestamp;
+
+@end
+
+@protocol DBAccessTokenRefreshing <NSObject>
+
+/// Refreshes a (short-lived) access token for a given DBAccessToken.
+///
+/// @param accessToken A `DBAccessToken` object.
+/// @param scopes An array of scopes to be granted for the refreshed access token.
+///        The requested scope MUST NOT include any scope not originally granted.
+///        Useful if users want to reduce the granted scopes for the new access token.
+///        Pass in an empty array if you don't want to change scopes of the access token.
+/// @param queue The queue where completion block will be called from.
+/// @param completion A `DBOAuthCompletion` block to notify caller the result.
+- (void)refreshAccessToken:(DBAccessToken *)accessToken
+                    scopes:(NSArray<NSString *> *)scopes
+                     queue:(nullable dispatch_queue_t)queue
+                completion:(nullable DBOAuthCompletion)completion;
 
 @end
 
@@ -46,13 +103,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @note OAuth flow webviews localize to environment locale.
 ///
 ///
-@interface DBOAuthManager : NSObject {
+@interface DBOAuthManager : NSObject <DBAccessTokenRefreshing> {
 @protected
   NSString *_appKey;
   NSURL *_redirectURL;
   NSURL *_cancelURL;
   NSString *_host;
   NSMutableArray<NSURL *> *_urls;
+  DBOAuthPKCESession *_authSession;
 }
 
 /// Sets the locale of the OAuth flow webpages. If `nil`, then defaults to device locale.
@@ -125,13 +183,28 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)authorizeFromSharedApplication:(id<DBSharedApplication>)sharedApplication;
 
 ///
+/// Commences the authorization flow (platform-neutral).
+///
+/// Interfaces with platform-specific rendering logic via the `DBSharedApplication` protocol.
+///
+/// @param sharedApplication A platform-neutral shared application abstraction for rendering auth flow.
+/// @param usePkce Whether to use OAuth2 code flow with PKCE.
+/// @param scopeRequest The ScopeRequest, only used in code flow with PKCE.
+///
+- (void)authorizeFromSharedApplication:(id<DBSharedApplication>)sharedApplication
+                               usePkce:(BOOL)usePkce
+                          scopeRequest:(nullable DBScopeRequest *)scopeRequest;
+
+///
 /// Handles a redirect back into the application (from whichever auth flow was being used).
 ///
 /// @param url The redirect URL to attempt to handle.
+/// @param completion Completion block for oauth result, called with `nil` if SDK cannot handle the redirect URL,
+/// otherwise an instance of `DBOAuthResult`.
 ///
-/// @return `nil` if SDK cannot handle the redirect URL, otherwise returns an instance of `DBOAuthResult`.
+/// @return Whether the URL can be handled.
 ///
-- (nullable DBOAuthResult *)handleRedirectURL:(NSURL *)url;
+- (BOOL)handleRedirectURL:(NSURL *)url completion:(DBOAuthCompletion)completion;
 
 #pragma mark - Keychain methods
 

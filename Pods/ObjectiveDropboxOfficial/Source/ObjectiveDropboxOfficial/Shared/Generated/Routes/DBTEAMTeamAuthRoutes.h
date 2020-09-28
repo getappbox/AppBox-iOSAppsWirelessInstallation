@@ -574,10 +574,11 @@ groupsMembersSetAccessType:(DBTEAMGroupSelector *)group
 dNewGroupManagementType:(nullable DBTEAMCOMMONGroupManagementType *)dNewGroupManagementType;
 
 ///
-/// Creates new legal hold policy. Permission : Team member file access.
+/// Creates new legal hold policy. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
+/// member file access.
 ///
 /// @param name Policy name.
-/// @param members List of team members added to the hold.
+/// @param members List of team member IDs added to the hold.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
 /// `DBTEAMLegalHoldsPolicyCreateError` object on failure.
@@ -587,11 +588,12 @@ legalHoldsCreatePolicy:(NSString *)name
                members:(NSArray<NSString *> *)members;
 
 ///
-/// Creates new legal hold policy. Permission : Team member file access.
+/// Creates new legal hold policy. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
+/// member file access.
 ///
 /// @param name Policy name.
 /// @param description_ A description of the legal hold policy.
-/// @param members List of team members added to the hold.
+/// @param members List of team member IDs added to the hold.
 /// @param startDate start date of the legal hold policy.
 /// @param endDate end date of the legal hold policy.
 ///
@@ -606,7 +608,8 @@ legalHoldsCreatePolicy:(NSString *)name
                endDate:(nullable NSDate *)endDate;
 
 ///
-/// Gets a legal hold by Id. Permission : Team member file access.
+/// Gets a legal hold by Id. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
+/// member file access.
 ///
 /// @param id_ The legal hold Id.
 ///
@@ -616,7 +619,8 @@ legalHoldsCreatePolicy:(NSString *)name
 - (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsGetPolicyError *> *)legalHoldsGetPolicy:(NSString *)id_;
 
 ///
-/// The legalHoldsListHeldRevisions route
+/// List the file metadata that's under the hold. Note: Legal Holds is a paid add-on. Not all teams have the feature.
+/// Permission : Team member file access.
 ///
 /// @param id_ The legal hold Id.
 ///
@@ -627,7 +631,8 @@ legalHoldsCreatePolicy:(NSString *)name
 legalHoldsListHeldRevisions:(NSString *)id_;
 
 ///
-/// The legalHoldsListHeldRevisionsContinue route
+/// Continue listing the file metadata that's under the hold. Note: Legal Holds is a paid add-on. Not all teams have the
+/// feature. Permission : Team member file access.
 ///
 /// @param id_ The legal hold Id.
 ///
@@ -638,10 +643,12 @@ legalHoldsListHeldRevisions:(NSString *)id_;
 legalHoldsListHeldRevisionsContinue:(NSString *)id_;
 
 ///
-/// The legalHoldsListHeldRevisionsContinue route
+/// Continue listing the file metadata that's under the hold. Note: Legal Holds is a paid add-on. Not all teams have the
+/// feature. Permission : Team member file access.
 ///
 /// @param id_ The legal hold Id.
-/// @param cursor cursor of list held revisions.
+/// @param cursor The cursor idicates where to continue reading file metadata entries for the next API call. When there
+/// are no more entries, the cursor will return none.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListHeldRevisionResult` object on
 /// success or a `DBTEAMLegalHoldsListHeldRevisionsError` object on failure.
@@ -651,7 +658,8 @@ legalHoldsListHeldRevisionsContinue:(NSString *)id_
                              cursor:(nullable NSString *)cursor;
 
 ///
-/// Lists legal holds on a team. Permission : Team member file access.
+/// Lists legal holds on a team. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
+/// member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldsListPoliciesResult` object on
@@ -660,7 +668,8 @@ legalHoldsListHeldRevisionsContinue:(NSString *)id_
 - (DBRpcTask<DBTEAMLegalHoldsListPoliciesResult *, DBTEAMLegalHoldsListPoliciesError *> *)legalHoldsListPolicies;
 
 ///
-/// Lists legal holds on a team. Permission : Team member file access.
+/// Lists legal holds on a team. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
+/// member file access.
 ///
 /// @param includeReleased Whether to return holds that were released.
 ///
@@ -671,7 +680,8 @@ legalHoldsListHeldRevisionsContinue:(NSString *)id_
     (nullable NSNumber *)includeReleased;
 
 ///
-/// Releases a legal hold by Id. Permission : Team member file access.
+/// Releases a legal hold by Id. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team
+/// member file access.
 ///
 /// @param id_ The legal hold Id.
 ///
@@ -681,34 +691,33 @@ legalHoldsListHeldRevisionsContinue:(NSString *)id_
 - (DBRpcTask<DBNilObject *, DBTEAMLegalHoldsPolicyReleaseError *> *)legalHoldsReleasePolicy:(NSString *)id_;
 
 ///
-/// Updates a legal hold. Permission : Team member file access.
+/// Updates a legal hold. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team member
+/// file access.
 ///
 /// @param id_ The legal hold Id.
-/// @param members List of team members to apply the policy on.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
 /// `DBTEAMLegalHoldsPolicyUpdateError` object on failure.
 ///
-- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyUpdateError *> *)
-legalHoldsUpdatePolicy:(NSString *)id_
-               members:(NSArray<NSString *> *)members;
+- (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyUpdateError *> *)legalHoldsUpdatePolicy:(NSString *)id_;
 
 ///
-/// Updates a legal hold. Permission : Team member file access.
+/// Updates a legal hold. Note: Legal Holds is a paid add-on. Not all teams have the feature. Permission : Team member
+/// file access.
 ///
 /// @param id_ The legal hold Id.
 /// @param name Policy new name.
 /// @param description_ Policy new description.
-/// @param members List of team members to apply the policy on.
+/// @param members List of team member IDs to apply the policy on.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMLegalHoldPolicy` object on success or a
 /// `DBTEAMLegalHoldsPolicyUpdateError` object on failure.
 ///
 - (DBRpcTask<DBTEAMLegalHoldPolicy *, DBTEAMLegalHoldsPolicyUpdateError *> *)
 legalHoldsUpdatePolicy:(NSString *)id_
-               members:(NSArray<NSString *> *)members
                   name:(nullable NSString *)name
-          description_:(nullable NSString *)description_;
+          description_:(nullable NSString *)description_
+               members:(nullable NSArray<NSString *> *)members;
 
 ///
 /// List all linked applications of the team member. Note, this endpoint does not list any team-linked applications.
@@ -788,7 +797,8 @@ legalHoldsUpdatePolicy:(NSString *)id_
 ///
 /// @param appId The application's unique id.
 /// @param teamMemberId The unique id of the member owning the device.
-/// @param keepAppFolder Whether to keep the application dedicated folder (in case the application uses  one).
+/// @param keepAppFolder This flag is not longer supported, the application dedicated folder (in case the application
+/// uses  one) will be kept.
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a
 /// `DBTEAMRevokeLinkedAppError` object on failure.
@@ -1088,10 +1098,10 @@ membersMoveFormerMemberFiles:(DBTEAMUserSelectorArg *)user
 /// @param keepAccount Downgrade the member to a Basic account. The user will retain the email address associated with
 /// their Dropbox  account and data in their account that is not restricted to team members. In order to keep the
 /// account the argument wipeData should be set to false.
-/// @param retainTeamShares If provided, allows removed users to keep access to folders already explicitly shared with
-/// them (not via a group) when they are downgraded to a Basic account. Users will not retain access to folders that do
-/// not allow external sharing. In order to keep the sharing relationships, the arguments wipeData should be set to
-/// false and keepAccount should be set to true.
+/// @param retainTeamShares If provided, allows removed users to keep access to Dropbox folders (not Dropbox Paper
+/// folders) already explicitly shared with them (not via a group) when they are downgraded to a Basic account. Users
+/// will not retain access to folders that do not allow external sharing. In order to keep the sharing relationships,
+/// the arguments wipeData should be set to false and keepAccount should be set to true.
 ///
 /// @return Through the response callback, the caller will receive a `DBASYNCLaunchEmptyResult` object on success or a
 /// `DBTEAMMembersRemoveError` object on failure.

@@ -39,16 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// The time at which the legal hold was activated.
 @property (nonatomic, readonly, nullable) NSDate *activationTime;
 
-/// (no description).
+/// Team members IDs and number of permanetly deleted members under hold.
 @property (nonatomic, readonly) DBTEAMMembersInfo *members;
 
-/// (no description).
+/// The current state of the hold.
 @property (nonatomic, readonly) DBTEAMLegalHoldStatus *status;
 
-/// start date of the legal hold policy.
+/// Start date of the legal hold policy.
 @property (nonatomic, readonly) NSDate *startDate;
 
-/// end date of the legal hold policy.
+/// End date of the legal hold policy.
 @property (nonatomic, readonly, nullable) NSDate *endDate;
 
 #pragma mark - Constructors
@@ -58,12 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param id_ The legal hold id.
 /// @param name Policy name.
-/// @param members (no description).
-/// @param status (no description).
-/// @param startDate start date of the legal hold policy.
+/// @param members Team members IDs and number of permanetly deleted members
+/// under hold.
+/// @param status The current state of the hold.
+/// @param startDate Start date of the legal hold policy.
 /// @param description_ A description of the legal hold policy.
 /// @param activationTime The time at which the legal hold was activated.
-/// @param endDate end date of the legal hold policy.
+/// @param endDate End date of the legal hold policy.
 ///
 /// @return An initialized instance.
 ///
@@ -82,9 +83,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param id_ The legal hold id.
 /// @param name Policy name.
-/// @param members (no description).
-/// @param status (no description).
-/// @param startDate start date of the legal hold policy.
+/// @param members Team members IDs and number of permanetly deleted members
+/// under hold.
+/// @param status The current state of the hold.
+/// @param startDate Start date of the legal hold policy.
 ///
 /// @return An initialized instance.
 ///

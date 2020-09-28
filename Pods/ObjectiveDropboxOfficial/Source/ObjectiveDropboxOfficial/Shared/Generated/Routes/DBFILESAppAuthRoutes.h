@@ -79,6 +79,7 @@
 @class DBFILESMediaInfo;
 @class DBFILESMetadata;
 @class DBFILESMinimalFileLinkMetadata;
+@class DBFILESMoveIntoVaultError;
 @class DBFILESPathOrLink;
 @class DBFILESPreviewError;
 @class DBFILESPreviewResult;
@@ -100,6 +101,7 @@
 @class DBFILESSaveUrlResult;
 @class DBFILESSearchError;
 @class DBFILESSearchMatch;
+@class DBFILESSearchMatchFieldOptions;
 @class DBFILESSearchMatchV2;
 @class DBFILESSearchMode;
 @class DBFILESSearchOptions;

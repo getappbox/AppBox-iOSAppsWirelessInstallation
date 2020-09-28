@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBFILESLookupError;
+@class DBFILESMoveIntoVaultError;
 @class DBFILESRelocationError;
 @class DBFILESWriteError;
 
@@ -72,6 +73,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationErrorTag){
     /// Can't move the shared folder to the given destination.
     DBFILESRelocationErrorCantMoveSharedFolder,
 
+    /// Some content cannot be moved into Vault under certain circumstances, see
+    /// detailed error.
+    DBFILESRelocationErrorCantMoveIntoVault,
+
     /// (no description).
     DBFILESRelocationErrorOther,
 
@@ -91,6 +96,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationErrorTag){
 /// (no description). @note Ensure the `isTo` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILESWriteError *to;
+
+/// Some content cannot be moved into Vault under certain circumstances, see
+/// detailed error. @note Ensure the `isCantMoveIntoVault` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBFILESMoveIntoVaultError *cantMoveIntoVault;
 
 #pragma mark - Constructors
 
@@ -215,6 +225,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationErrorTag){
 - (instancetype)initWithCantMoveSharedFolder;
 
 ///
+/// Initializes union class with tag state of "cant_move_into_vault".
+///
+/// Description of the "cant_move_into_vault" tag state: Some content cannot be
+/// moved into Vault under certain circumstances, see detailed error.
+///
+/// @param cantMoveIntoVault Some content cannot be moved into Vault under
+/// certain circumstances, see detailed error.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithCantMoveIntoVault:(DBFILESMoveIntoVaultError *)cantMoveIntoVault;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -331,6 +354,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationErrorTag){
 /// "cant_move_shared_folder".
 ///
 - (BOOL)isCantMoveSharedFolder;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "cant_move_into_vault".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `cantMoveIntoVault` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "cant_move_into_vault".
+///
+- (BOOL)isCantMoveIntoVault;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

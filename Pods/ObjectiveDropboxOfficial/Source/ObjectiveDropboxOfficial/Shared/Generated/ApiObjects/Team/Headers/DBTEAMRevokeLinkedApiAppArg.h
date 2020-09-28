@@ -31,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The unique id of the member owning the device.
 @property (nonatomic, readonly, copy) NSString *teamMemberId;
 
-/// Whether to keep the application dedicated folder (in case the application
-/// uses  one).
+/// This flag is not longer supported, the application dedicated folder (in case
+/// the application uses  one) will be kept.
 @property (nonatomic, readonly) NSNumber *keepAppFolder;
 
 #pragma mark - Constructors
@@ -42,8 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param appId The application's unique id.
 /// @param teamMemberId The unique id of the member owning the device.
-/// @param keepAppFolder Whether to keep the application dedicated folder (in
-/// case the application uses  one).
+/// @param keepAppFolder This flag is not longer supported, the application
+/// dedicated folder (in case the application uses  one) will be kept.
 ///
 /// @return An initialized instance.
 ///

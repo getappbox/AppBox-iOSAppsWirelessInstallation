@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// A description of the legal hold policy.
 @property (nonatomic, readonly, copy, nullable) NSString *description_;
 
-/// List of team members added to the hold.
+/// List of team member IDs added to the hold.
 @property (nonatomic, readonly) NSArray<NSString *> *members;
 
 /// start date of the legal hold policy.
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param name Policy name.
-/// @param members List of team members added to the hold.
+/// @param members List of team member IDs added to the hold.
 /// @param description_ A description of the legal hold policy.
 /// @param startDate start date of the legal hold policy.
 /// @param endDate end date of the legal hold policy.
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// no default value).
 ///
 /// @param name Policy name.
-/// @param members List of team members added to the hold.
+/// @param members List of team member IDs added to the hold.
 ///
 /// @return An initialized instance.
 ///

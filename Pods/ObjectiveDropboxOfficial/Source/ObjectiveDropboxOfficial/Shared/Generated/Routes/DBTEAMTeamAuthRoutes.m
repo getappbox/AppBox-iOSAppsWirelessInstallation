@@ -546,19 +546,19 @@
   return [self.client requestRpc:route arg:arg];
 }
 
-- (DBRpcTask *)legalHoldsUpdatePolicy:(NSString *)id_ members:(NSArray<NSString *> *)members {
+- (DBRpcTask *)legalHoldsUpdatePolicy:(NSString *)id_ {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMLegalHoldsUpdatePolicy;
-  DBTEAMLegalHoldsPolicyUpdateArg *arg = [[DBTEAMLegalHoldsPolicyUpdateArg alloc] initWithId_:id_ members:members];
+  DBTEAMLegalHoldsPolicyUpdateArg *arg = [[DBTEAMLegalHoldsPolicyUpdateArg alloc] initWithId_:id_];
   return [self.client requestRpc:route arg:arg];
 }
 
 - (DBRpcTask *)legalHoldsUpdatePolicy:(NSString *)id_
-                              members:(NSArray<NSString *> *)members
                                  name:(NSString *)name
-                         description_:(NSString *)description_ {
+                         description_:(NSString *)description_
+                              members:(NSArray<NSString *> *)members {
   DBRoute *route = DBTEAMRouteObjects.DBTEAMLegalHoldsUpdatePolicy;
   DBTEAMLegalHoldsPolicyUpdateArg *arg =
-      [[DBTEAMLegalHoldsPolicyUpdateArg alloc] initWithId_:id_ members:members name:name description_:description_];
+      [[DBTEAMLegalHoldsPolicyUpdateArg alloc] initWithId_:id_ name:name description_:description_ members:members];
   return [self.client requestRpc:route arg:arg];
 }
 

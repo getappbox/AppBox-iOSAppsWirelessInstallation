@@ -46,9 +46,9 @@
   return [DBFILEPROPERTIESAddPropertiesArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESAddPropertiesArgSerializer serialize:self] description];
 }
 
@@ -213,9 +213,9 @@
   return [DBFILEPROPERTIESTemplateErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESTemplateErrorSerializer serialize:self] description];
 }
 
@@ -440,9 +440,9 @@
   return [DBFILEPROPERTIESPropertiesErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesErrorSerializer serialize:self] description];
 }
 
@@ -728,9 +728,9 @@
   return [DBFILEPROPERTIESInvalidPropertyGroupErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESInvalidPropertyGroupErrorSerializer serialize:self] description];
 }
 
@@ -1053,9 +1053,9 @@
   return [DBFILEPROPERTIESAddPropertiesErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESAddPropertiesErrorSerializer serialize:self] description];
 }
 
@@ -1245,9 +1245,9 @@
   return [DBFILEPROPERTIESPropertyGroupTemplateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertyGroupTemplateSerializer serialize:self] description];
 }
 
@@ -1371,9 +1371,9 @@
   return [DBFILEPROPERTIESAddTemplateArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESAddTemplateArgSerializer serialize:self] description];
 }
 
@@ -1490,9 +1490,9 @@
   return [DBFILEPROPERTIESAddTemplateResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESAddTemplateResultSerializer serialize:self] description];
 }
 
@@ -1590,9 +1590,9 @@
   return [DBFILEPROPERTIESGetTemplateArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESGetTemplateArgSerializer serialize:self] description];
 }
 
@@ -1697,9 +1697,9 @@
   return [DBFILEPROPERTIESGetTemplateResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESGetTemplateResultSerializer serialize:self] description];
 }
 
@@ -1823,9 +1823,9 @@
   return [DBFILEPROPERTIESListTemplateResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESListTemplateResultSerializer serialize:self] description];
 }
 
@@ -1957,9 +1957,9 @@
   return [DBFILEPROPERTIESLogicalOperatorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESLogicalOperatorSerializer serialize:self] description];
 }
 
@@ -2108,9 +2108,9 @@
   return [DBFILEPROPERTIESLookUpPropertiesErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESLookUpPropertiesErrorSerializer serialize:self] description];
 }
 
@@ -2326,9 +2326,9 @@
   return [DBFILEPROPERTIESLookupErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESLookupErrorSerializer serialize:self] description];
 }
 
@@ -2594,9 +2594,9 @@
   return [DBFILEPROPERTIESModifyTemplateErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESModifyTemplateErrorSerializer serialize:self] description];
 }
 
@@ -2768,9 +2768,9 @@
   return [DBFILEPROPERTIESOverwritePropertyGroupArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESOverwritePropertyGroupArgSerializer serialize:self] description];
 }
 
@@ -2891,9 +2891,9 @@
   return [DBFILEPROPERTIESPropertiesSearchArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchArgSerializer serialize:self] description];
 }
 
@@ -3006,9 +3006,9 @@
   return [DBFILEPROPERTIESPropertiesSearchContinueArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchContinueArgSerializer serialize:self] description];
 }
 
@@ -3135,9 +3135,9 @@
   return [DBFILEPROPERTIESPropertiesSearchContinueErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchContinueErrorSerializer serialize:self] description];
 }
 
@@ -3300,9 +3300,9 @@
   return [DBFILEPROPERTIESPropertiesSearchErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchErrorSerializer serialize:self] description];
 }
 
@@ -3439,9 +3439,9 @@
   return [DBFILEPROPERTIESPropertiesSearchMatchSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchMatchSerializer serialize:self] description];
 }
 
@@ -3607,9 +3607,9 @@
   return [DBFILEPROPERTIESPropertiesSearchModeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchModeSerializer serialize:self] description];
 }
 
@@ -3742,9 +3742,9 @@
   return [DBFILEPROPERTIESPropertiesSearchQuerySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchQuerySerializer serialize:self] description];
 }
 
@@ -3867,9 +3867,9 @@
   return [DBFILEPROPERTIESPropertiesSearchResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertiesSearchResultSerializer serialize:self] description];
 }
 
@@ -3987,9 +3987,9 @@
   return [DBFILEPROPERTIESPropertyFieldSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertyFieldSerializer serialize:self] description];
 }
 
@@ -4099,9 +4099,9 @@
   return [DBFILEPROPERTIESPropertyFieldTemplateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertyFieldTemplateSerializer serialize:self] description];
 }
 
@@ -4217,9 +4217,9 @@
   return [DBFILEPROPERTIESPropertyGroupSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertyGroupSerializer serialize:self] description];
 }
 
@@ -4347,9 +4347,9 @@
   return [DBFILEPROPERTIESPropertyGroupUpdateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertyGroupUpdateSerializer serialize:self] description];
 }
 
@@ -4519,9 +4519,9 @@
   return [DBFILEPROPERTIESPropertyTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESPropertyTypeSerializer serialize:self] description];
 }
 
@@ -4654,9 +4654,9 @@
   return [DBFILEPROPERTIESRemovePropertiesArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESRemovePropertiesArgSerializer serialize:self] description];
 }
 
@@ -4886,9 +4886,9 @@
   return [DBFILEPROPERTIESRemovePropertiesErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESRemovePropertiesErrorSerializer serialize:self] description];
 }
 
@@ -5049,9 +5049,9 @@
   return [DBFILEPROPERTIESRemoveTemplateArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESRemoveTemplateArgSerializer serialize:self] description];
 }
 
@@ -5189,9 +5189,9 @@
   return [DBFILEPROPERTIESTemplateFilterBaseSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESTemplateFilterBaseSerializer serialize:self] description];
 }
 
@@ -5374,9 +5374,9 @@
   return [DBFILEPROPERTIESTemplateFilterSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESTemplateFilterSerializer serialize:self] description];
 }
 
@@ -5555,9 +5555,9 @@
   return [DBFILEPROPERTIESTemplateOwnerTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESTemplateOwnerTypeSerializer serialize:self] description];
 }
 
@@ -5695,9 +5695,9 @@
   return [DBFILEPROPERTIESUpdatePropertiesArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESUpdatePropertiesArgSerializer serialize:self] description];
 }
 
@@ -5971,9 +5971,9 @@
   return [DBFILEPROPERTIESUpdatePropertiesErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESUpdatePropertiesErrorSerializer serialize:self] description];
 }
 
@@ -6173,9 +6173,9 @@
   return [DBFILEPROPERTIESUpdateTemplateArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESUpdateTemplateArgSerializer serialize:self] description];
 }
 
@@ -6322,9 +6322,9 @@
   return [DBFILEPROPERTIESUpdateTemplateResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEPROPERTIESUpdateTemplateResultSerializer serialize:self] description];
 }
 

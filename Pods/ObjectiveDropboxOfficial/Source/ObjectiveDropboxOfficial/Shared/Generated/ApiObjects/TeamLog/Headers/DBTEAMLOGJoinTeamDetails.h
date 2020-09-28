@@ -42,16 +42,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// boolean field instead.
 @property (nonatomic, readonly) NSArray<DBTEAMLOGFolderLogInfo *> *linkedSharedFolders;
 
-/// True if the linked_apps list was truncated to the maximum supported length
-/// (50).
+/// (Deprecated) True if the linked_apps list was truncated to the maximum
+/// supported length (50).
 @property (nonatomic, readonly, nullable) NSNumber *wasLinkedAppsTruncated;
 
-/// True if the linked_devices list was truncated to the maximum supported
-/// length (50).
+/// (Deprecated) True if the linked_devices list was truncated to the maximum
+/// supported length (50).
 @property (nonatomic, readonly, nullable) NSNumber *wasLinkedDevicesTruncated;
 
-/// True if the linked_shared_folders list was truncated to the maximum
-/// supported length (50).
+/// (Deprecated) True if the linked_shared_folders list was truncated to the
+/// maximum supported length (50).
 @property (nonatomic, readonly, nullable) NSNumber *wasLinkedSharedFoldersTruncated;
 
 /// True if the user had linked apps at event time.
@@ -74,12 +74,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// has_linked_devices boolean field instead.
 /// @param linkedSharedFolders Linked shared folders. (Deprecated) Please use
 /// has_linked_shared_folders boolean field instead.
-/// @param wasLinkedAppsTruncated True if the linked_apps list was truncated to
-/// the maximum supported length (50).
-/// @param wasLinkedDevicesTruncated True if the linked_devices list was
+/// @param wasLinkedAppsTruncated (Deprecated) True if the linked_apps list was
 /// truncated to the maximum supported length (50).
-/// @param wasLinkedSharedFoldersTruncated True if the linked_shared_folders
+/// @param wasLinkedDevicesTruncated (Deprecated) True if the linked_devices
 /// list was truncated to the maximum supported length (50).
+/// @param wasLinkedSharedFoldersTruncated (Deprecated) True if the
+/// linked_shared_folders list was truncated to the maximum supported length
+/// (50).
 /// @param hasLinkedApps True if the user had linked apps at event time.
 /// @param hasLinkedDevices True if the user had linked apps at event time.
 /// @param hasLinkedSharedFolders True if the user had linked shared folders at

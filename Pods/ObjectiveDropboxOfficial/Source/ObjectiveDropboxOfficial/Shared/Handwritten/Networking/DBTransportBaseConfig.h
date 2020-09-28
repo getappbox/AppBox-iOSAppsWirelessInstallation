@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Additional HTTP headers to be injected into each client request.
 @property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, NSString *> *additionalHeaders;
 
+/// @return A default user agent string.
++ (NSString *)defaultUserAgent;
+
 ///
 /// Convenience constructor.
 ///

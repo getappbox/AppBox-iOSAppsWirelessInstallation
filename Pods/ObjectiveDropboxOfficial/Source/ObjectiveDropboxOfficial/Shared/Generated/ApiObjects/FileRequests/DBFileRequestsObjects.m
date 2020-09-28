@@ -65,9 +65,9 @@
   return [DBFILEREQUESTSGeneralFileRequestsErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSGeneralFileRequestsErrorSerializer serialize:self] description];
 }
 
@@ -217,9 +217,9 @@
   return [DBFILEREQUESTSCountFileRequestsErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSCountFileRequestsErrorSerializer serialize:self] description];
 }
 
@@ -339,9 +339,9 @@
   return [DBFILEREQUESTSCountFileRequestsResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSCountFileRequestsResultSerializer serialize:self] description];
 }
 
@@ -451,9 +451,9 @@
   return [DBFILEREQUESTSCreateFileRequestArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSCreateFileRequestArgsSerializer serialize:self] description];
 }
 
@@ -692,9 +692,9 @@
   return [DBFILEREQUESTSFileRequestErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSFileRequestErrorSerializer serialize:self] description];
 }
 
@@ -1004,9 +1004,9 @@
   return [DBFILEREQUESTSCreateFileRequestErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSCreateFileRequestErrorSerializer serialize:self] description];
 }
 
@@ -1304,9 +1304,9 @@
   return [DBFILEREQUESTSDeleteAllClosedFileRequestsErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSDeleteAllClosedFileRequestsErrorSerializer serialize:self] description];
 }
 
@@ -1479,9 +1479,9 @@
   return [DBFILEREQUESTSDeleteAllClosedFileRequestsResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSDeleteAllClosedFileRequestsResultSerializer serialize:self] description];
 }
 
@@ -1594,9 +1594,9 @@
   return [DBFILEREQUESTSDeleteFileRequestArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSDeleteFileRequestArgsSerializer serialize:self] description];
 }
 
@@ -1827,9 +1827,9 @@
   return [DBFILEREQUESTSDeleteFileRequestErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSDeleteFileRequestErrorSerializer serialize:self] description];
 }
 
@@ -2009,9 +2009,9 @@
   return [DBFILEREQUESTSDeleteFileRequestsResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSDeleteFileRequestsResultSerializer serialize:self] description];
 }
 
@@ -2154,9 +2154,9 @@
   return [DBFILEREQUESTSFileRequestSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSFileRequestSerializer serialize:self] description];
 }
 
@@ -2321,9 +2321,9 @@
   return [DBFILEREQUESTSFileRequestDeadlineSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSFileRequestDeadlineSerializer serialize:self] description];
 }
 
@@ -2436,9 +2436,9 @@
   return [DBFILEREQUESTSGetFileRequestArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSGetFileRequestArgsSerializer serialize:self] description];
 }
 
@@ -2649,9 +2649,9 @@
   return [DBFILEREQUESTSGetFileRequestErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSGetFileRequestErrorSerializer serialize:self] description];
 }
 
@@ -2904,9 +2904,9 @@
   return [DBFILEREQUESTSGracePeriodSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSGracePeriodSerializer serialize:self] description];
 }
 
@@ -3061,9 +3061,9 @@
   return [DBFILEREQUESTSListFileRequestsArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSListFileRequestsArgSerializer serialize:self] description];
 }
 
@@ -3160,9 +3160,9 @@
   return [DBFILEREQUESTSListFileRequestsContinueArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSListFileRequestsContinueArgSerializer serialize:self] description];
 }
 
@@ -3303,9 +3303,9 @@
   return [DBFILEREQUESTSListFileRequestsContinueErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSListFileRequestsContinueErrorSerializer serialize:self] description];
 }
 
@@ -3464,9 +3464,9 @@
   return [DBFILEREQUESTSListFileRequestsErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSListFileRequestsErrorSerializer serialize:self] description];
 }
 
@@ -3590,9 +3590,9 @@
   return [DBFILEREQUESTSListFileRequestsResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSListFileRequestsResultSerializer serialize:self] description];
 }
 
@@ -3706,9 +3706,9 @@
   return [DBFILEREQUESTSListFileRequestsV2ResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSListFileRequestsV2ResultSerializer serialize:self] description];
 }
 
@@ -3842,9 +3842,9 @@
   return [DBFILEREQUESTSUpdateFileRequestArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSUpdateFileRequestArgsSerializer serialize:self] description];
 }
 
@@ -4045,9 +4045,9 @@
   return [DBFILEREQUESTSUpdateFileRequestDeadlineSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSUpdateFileRequestDeadlineSerializer serialize:self] description];
 }
 
@@ -4298,9 +4298,9 @@
   return [DBFILEREQUESTSUpdateFileRequestErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBFILEREQUESTSUpdateFileRequestErrorSerializer serialize:self] description];
 }
 

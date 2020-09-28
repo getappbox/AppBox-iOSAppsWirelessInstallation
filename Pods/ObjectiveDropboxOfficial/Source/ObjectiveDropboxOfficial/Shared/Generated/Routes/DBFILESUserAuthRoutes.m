@@ -104,6 +104,7 @@
 #import "DBFILESMetadata.h"
 #import "DBFILESMinimalFileLinkMetadata.h"
 #import "DBFILESMoveBatchArg.h"
+#import "DBFILESMoveIntoVaultError.h"
 #import "DBFILESPathOrLink.h"
 #import "DBFILESPreviewArg.h"
 #import "DBFILESPreviewError.h"
@@ -134,6 +135,7 @@
 #import "DBFILESSearchArg.h"
 #import "DBFILESSearchError.h"
 #import "DBFILESSearchMatch.h"
+#import "DBFILESSearchMatchFieldOptions.h"
 #import "DBFILESSearchMatchV2.h"
 #import "DBFILESSearchMode.h"
 #import "DBFILESSearchOptions.h"
@@ -1181,10 +1183,13 @@
 
 - (DBRpcTask *)searchV2:(NSString *)query
                 options:(DBFILESSearchOptions *)options
+      matchFieldOptions:(DBFILESSearchMatchFieldOptions *)matchFieldOptions
       includeHighlights:(NSNumber *)includeHighlights {
   DBRoute *route = DBFILESRouteObjects.DBFILESSearchV2;
-  DBFILESSearchV2Arg *arg =
-      [[DBFILESSearchV2Arg alloc] initWithQuery:query options:options includeHighlights:includeHighlights];
+  DBFILESSearchV2Arg *arg = [[DBFILESSearchV2Arg alloc] initWithQuery:query
+                                                              options:options
+                                                    matchFieldOptions:matchFieldOptions
+                                                    includeHighlights:includeHighlights];
   return [self.client requestRpc:route arg:arg];
 }
 

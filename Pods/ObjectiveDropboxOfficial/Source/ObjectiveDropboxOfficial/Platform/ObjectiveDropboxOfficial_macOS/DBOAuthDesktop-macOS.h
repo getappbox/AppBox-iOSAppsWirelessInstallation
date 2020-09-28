@@ -5,6 +5,7 @@
 #import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
+#import "DBLoadingStatusDelegate.h"
 #import "DBSharedApplicationProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,6 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// Renders OAuth flow and implements `DBSharedApplication` protocol.
 ///
 @interface DBDesktopSharedApplication : NSObject <DBSharedApplication>
+
+/// Delegate to handle loading status during auth flow.
+@property (nonatomic, readwrite, weak) id<DBLoadingStatusDelegate> loadingStatusDelegate;
+
+/// Returns the shared instance of `DBDesktopSharedApplication`.
++ (nullable DBDesktopSharedApplication *)desktopSharedApplication;
+
+/// Sets the shared instance of `DBDesktopSharedApplication`.
++ (void)setDesktopSharedApplication:(DBDesktopSharedApplication *)desktopSharedApplication;
 
 ///
 /// Full constructor.
