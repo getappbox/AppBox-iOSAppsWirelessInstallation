@@ -36,6 +36,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag){
     /// Member not found.
     DBTEAMRevokeLinkedAppErrorMemberNotFound,
 
+    /// App folder removal is not supported.
+    DBTEAMRevokeLinkedAppErrorAppFolderRemovalNotSupported,
+
     /// (no description).
     DBTEAMRevokeLinkedAppErrorOther,
 
@@ -65,6 +68,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag){
 - (instancetype)initWithMemberNotFound;
 
 ///
+/// Initializes union class with tag state of
+/// "app_folder_removal_not_supported".
+///
+/// Description of the "app_folder_removal_not_supported" tag state: App folder
+/// removal is not supported.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAppFolderRemovalNotSupported;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -89,6 +103,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMRevokeLinkedAppErrorTag){
 /// @return Whether the union's current tag state has value "member_not_found".
 ///
 - (BOOL)isMemberNotFound;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "app_folder_removal_not_supported".
+///
+/// @return Whether the union's current tag state has value
+/// "app_folder_removal_not_supported".
+///
+- (BOOL)isAppFolderRemovalNotSupported;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

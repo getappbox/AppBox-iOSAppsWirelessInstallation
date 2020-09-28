@@ -93,9 +93,9 @@
   return [DBTEAMCOMMONGroupManagementTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMCOMMONGroupManagementTypeSerializer serialize:self] description];
 }
 
@@ -252,9 +252,9 @@
   return [DBTEAMCOMMONGroupSummarySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMCOMMONGroupSummarySerializer serialize:self] description];
 }
 
@@ -436,9 +436,9 @@
   return [DBTEAMCOMMONGroupTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMCOMMONGroupTypeSerializer serialize:self] description];
 }
 
@@ -623,9 +623,9 @@
   return [DBTEAMCOMMONMemberSpaceLimitTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMCOMMONMemberSpaceLimitTypeSerializer serialize:self] description];
 }
 
@@ -765,9 +765,9 @@
   return [DBTEAMCOMMONTimeRangeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMCOMMONTimeRangeSerializer serialize:self] description];
 }
 

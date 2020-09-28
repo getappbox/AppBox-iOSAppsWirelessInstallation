@@ -74,6 +74,7 @@
 #import "DBFILESMediaInfo.h"
 #import "DBFILESMetadata.h"
 #import "DBFILESMinimalFileLinkMetadata.h"
+#import "DBFILESMoveIntoVaultError.h"
 #import "DBFILESPreviewError.h"
 #import "DBFILESPreviewResult.h"
 #import "DBFILESRelocationBatchError.h"

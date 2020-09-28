@@ -70,6 +70,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
     /// We do not support sharing a folder inside a Mac OS X package.
     DBSHARINGSharePathErrorInsideOsxPackage,
 
+    /// We do not support sharing the Vault folder.
+    DBSHARINGSharePathErrorIsVault,
+
     /// (no description).
     DBSHARINGSharePathErrorOther,
 
@@ -217,6 +220,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
 - (instancetype)initWithInsideOsxPackage;
 
 ///
+/// Initializes union class with tag state of "is_vault".
+///
+/// Description of the "is_vault" tag state: We do not support sharing the Vault
+/// folder.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithIsVault;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -334,6 +347,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
 /// "inside_osx_package".
 ///
 - (BOOL)isInsideOsxPackage;
+
+///
+/// Retrieves whether the union's current tag state has value "is_vault".
+///
+/// @return Whether the union's current tag state has value "is_vault".
+///
+- (BOOL)isIsVault;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

@@ -35,6 +35,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESSearchErrorTag){
     /// (no description).
     DBFILESSearchErrorInvalidArgument,
 
+    /// Something went wrong, please try again.
+    DBFILESSearchErrorInternalError,
+
     /// (no description).
     DBFILESSearchErrorOther,
 
@@ -72,6 +75,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESSearchErrorTag){
 - (instancetype)initWithInvalidArgument:(nullable NSString *)invalidArgument;
 
 ///
+/// Initializes union class with tag state of "internal_error".
+///
+/// Description of the "internal_error" tag state: Something went wrong, please
+/// try again.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInternalError;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -102,6 +115,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESSearchErrorTag){
 /// @return Whether the union's current tag state has value "invalid_argument".
 ///
 - (BOOL)isInvalidArgument;
+
+///
+/// Retrieves whether the union's current tag state has value "internal_error".
+///
+/// @return Whether the union's current tag state has value "internal_error".
+///
+- (BOOL)isInternalError;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

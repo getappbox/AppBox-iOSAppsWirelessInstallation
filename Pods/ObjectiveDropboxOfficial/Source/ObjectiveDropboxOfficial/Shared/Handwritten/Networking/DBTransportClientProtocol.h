@@ -11,13 +11,14 @@
 @class DBRoute;
 @class DBRpcTask;
 @class DBUploadTask;
+@protocol DBAccessTokenProvider;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol DBTransportClient <NSObject>
 
-/// The Dropbox OAuth2 access token used to make requests.
-@property (nonatomic, copy, nullable) NSString *accessToken;
+/// The Dropbox OAuth2 access token provider used to make requests.
+@property (nonatomic, nullable) id<DBAccessTokenProvider> accessTokenProvider;
 
 #pragma mark - RPC-style request
 

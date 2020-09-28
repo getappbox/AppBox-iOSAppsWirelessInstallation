@@ -149,9 +149,9 @@
   return [DBSEENSTATEPlatformTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBSEENSTATEPlatformTypeSerializer serialize:self] description];
 }
 

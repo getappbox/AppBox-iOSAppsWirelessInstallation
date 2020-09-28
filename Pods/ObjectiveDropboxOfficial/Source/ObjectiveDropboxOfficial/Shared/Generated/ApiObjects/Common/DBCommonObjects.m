@@ -114,9 +114,9 @@
   return [DBCOMMONPathRootSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCOMMONPathRootSerializer serialize:self] description];
 }
 
@@ -311,9 +311,9 @@
   return [DBCOMMONPathRootErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCOMMONPathRootErrorSerializer serialize:self] description];
 }
 
@@ -449,9 +449,9 @@
   return [DBCOMMONRootInfoSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCOMMONRootInfoSerializer serialize:self] description];
 }
 
@@ -582,9 +582,9 @@
   return [DBCOMMONTeamRootInfoSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCOMMONTeamRootInfoSerializer serialize:self] description];
 }
 
@@ -698,9 +698,9 @@
   return [DBCOMMONUserRootInfoSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCOMMONUserRootInfoSerializer serialize:self] description];
 }
 

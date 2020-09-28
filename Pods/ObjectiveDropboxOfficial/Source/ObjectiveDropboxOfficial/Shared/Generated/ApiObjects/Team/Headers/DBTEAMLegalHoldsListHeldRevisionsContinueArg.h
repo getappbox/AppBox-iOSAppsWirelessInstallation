@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The legal hold Id.
 @property (nonatomic, readonly, copy) NSString *id_;
 
-/// cursor of list held revisions.
+/// The cursor idicates where to continue reading file metadata entries for the
+/// next API call. When there are no more entries, the cursor will return none.
 @property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
 #pragma mark - Constructors
@@ -37,7 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param id_ The legal hold Id.
-/// @param cursor cursor of list held revisions.
+/// @param cursor The cursor idicates where to continue reading file metadata
+/// entries for the next API call. When there are no more entries, the cursor
+/// will return none.
 ///
 /// @return An initialized instance.
 ///

@@ -32,6 +32,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
     DBTEAMLOGInviteMethodInviteLink,
 
     /// (no description).
+    DBTEAMLOGInviteMethodAutoApprove,
+
+    /// (no description).
+    DBTEAMLOGInviteMethodMovedFromAnotherTeam,
+
+    /// (no description).
     DBTEAMLOGInviteMethodOther,
 
 };
@@ -47,6 +53,20 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithInviteLink;
+
+///
+/// Initializes union class with tag state of "auto_approve".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAutoApprove;
+
+///
+/// Initializes union class with tag state of "moved_from_another_team".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMovedFromAnotherTeam;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -65,6 +85,22 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
 /// @return Whether the union's current tag state has value "invite_link".
 ///
 - (BOOL)isInviteLink;
+
+///
+/// Retrieves whether the union's current tag state has value "auto_approve".
+///
+/// @return Whether the union's current tag state has value "auto_approve".
+///
+- (BOOL)isAutoApprove;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "moved_from_another_team".
+///
+/// @return Whether the union's current tag state has value
+/// "moved_from_another_team".
+///
+- (BOOL)isMovedFromAnotherTeam;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

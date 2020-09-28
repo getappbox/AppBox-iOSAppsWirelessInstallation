@@ -76,9 +76,9 @@
   return [DBACCOUNTPhotoSourceArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBACCOUNTPhotoSourceArgSerializer serialize:self] description];
 }
 
@@ -201,9 +201,9 @@
   return [DBACCOUNTSetProfilePhotoArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBACCOUNTSetProfilePhotoArgSerializer serialize:self] description];
 }
 
@@ -385,9 +385,9 @@
   return [DBACCOUNTSetProfilePhotoErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBACCOUNTSetProfilePhotoErrorSerializer serialize:self] description];
 }
 
@@ -539,9 +539,9 @@
   return [DBACCOUNTSetProfilePhotoResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBACCOUNTSetProfilePhotoResultSerializer serialize:self] description];
 }
 

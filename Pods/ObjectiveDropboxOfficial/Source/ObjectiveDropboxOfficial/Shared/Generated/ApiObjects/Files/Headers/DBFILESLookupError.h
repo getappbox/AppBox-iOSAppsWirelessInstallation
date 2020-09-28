@@ -52,6 +52,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESLookupErrorTag){
     /// This operation is not supported for this content type.
     DBFILESLookupErrorUnsupportedContentType,
 
+    /// The given path is locked.
+    DBFILESLookupErrorLocked,
+
     /// (no description).
     DBFILESLookupErrorOther,
 
@@ -139,6 +142,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESLookupErrorTag){
 - (instancetype)initWithUnsupportedContentType;
 
 ///
+/// Initializes union class with tag state of "locked".
+///
+/// Description of the "locked" tag state: The given path is locked.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLocked;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -197,6 +209,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESLookupErrorTag){
 /// "unsupported_content_type".
 ///
 - (BOOL)isUnsupportedContentType;
+
+///
+/// Retrieves whether the union's current tag state has value "locked".
+///
+/// @return Whether the union's current tag state has value "locked".
+///
+- (BOOL)isLocked;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

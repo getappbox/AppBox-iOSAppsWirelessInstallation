@@ -79,6 +79,7 @@
 @class DBFILESMediaInfo;
 @class DBFILESMetadata;
 @class DBFILESMinimalFileLinkMetadata;
+@class DBFILESMoveIntoVaultError;
 @class DBFILESPathOrLink;
 @class DBFILESPreviewError;
 @class DBFILESPreviewResult;
@@ -100,6 +101,7 @@
 @class DBFILESSaveUrlResult;
 @class DBFILESSearchError;
 @class DBFILESSearchMatch;
+@class DBFILESSearchMatchFieldOptions;
 @class DBFILESSearchMatchV2;
 @class DBFILESSearchMode;
 @class DBFILESSearchOptions;
@@ -1124,7 +1126,7 @@ includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMem
 /// or expiration, a new link will have to be generated. Multiple links may exist for a specific upload path at any
 /// given time.  The POST request on the temporary upload link must have its Content-Type set to
 /// "application/octet-stream".  Example temporary upload link consumption request:  curl -X POST
-/// https://dl.dropboxusercontent.com/apitul/1/bNi2uIYF51cVBND --header "Content-Type: application/octet-stream"
+/// https://content.dropboxapi.com/apitul/1/bNi2uIYF51cVBND --header "Content-Type: application/octet-stream"
 /// --data-binary @local_file.txt  A successful temporary upload link consumption request returns the content hash of
 /// the uploaded data in JSON format.  Example succesful temporary upload link consumption response: {"content-hash":
 /// "599d71033d700ac892a0e48fa61b125d2f5994"}  An unsuccessful temporary upload link consumption request returns any of
@@ -1153,7 +1155,7 @@ includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMem
 /// or expiration, a new link will have to be generated. Multiple links may exist for a specific upload path at any
 /// given time.  The POST request on the temporary upload link must have its Content-Type set to
 /// "application/octet-stream".  Example temporary upload link consumption request:  curl -X POST
-/// https://dl.dropboxusercontent.com/apitul/1/bNi2uIYF51cVBND --header "Content-Type: application/octet-stream"
+/// https://content.dropboxapi.com/apitul/1/bNi2uIYF51cVBND --header "Content-Type: application/octet-stream"
 /// --data-binary @local_file.txt  A successful temporary upload link consumption request returns the content hash of
 /// the uploaded data in JSON format.  Example succesful temporary upload link consumption response: {"content-hash":
 /// "599d71033d700ac892a0e48fa61b125d2f5994"}  An unsuccessful temporary upload link consumption request returns any of
@@ -2038,8 +2040,8 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 - (DBRpcTask<DBFILESSaveUrlJobStatus *, DBASYNCPollError *> *)saveUrlCheckJobStatus:(NSString *)asyncJobId;
 
 ///
-/// DEPRECATED: Searches for files and folders. Note: Recent changes may not immediately be reflected in search results
-/// due to a short delay in indexing.
+/// DEPRECATED: Searches for files and folders. Note: Recent changes will be reflected in search results within a few
+/// seconds and older revisions of existing files may still match your query for up to a few days.
 ///
 /// @param path The path in the user's Dropbox to search. Should probably be a folder.
 /// @param query The string to search for. Query string may be rewritten to improve relevance of results. The string is
@@ -2054,8 +2056,8 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
     __deprecated_msg("search is deprecated. Use search.");
 
 ///
-/// DEPRECATED: Searches for files and folders. Note: Recent changes may not immediately be reflected in search results
-/// due to a short delay in indexing.
+/// DEPRECATED: Searches for files and folders. Note: Recent changes will be reflected in search results within a few
+/// seconds and older revisions of existing files may still match your query for up to a few days.
 ///
 /// @param path The path in the user's Dropbox to search. Should probably be a folder.
 /// @param query The string to search for. Query string may be rewritten to improve relevance of results. The string is
@@ -2097,12 +2099,16 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 /// @param query The string to search for. May match across multiple fields based on the request arguments. Query string
 /// may be rewritten to improve relevance of results.
 /// @param options Options for more targeted search results.
+/// @param matchFieldOptions Options for search results match fields.
+/// @param includeHighlights Deprecated and moved this option to SearchMatchFieldOptions.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESSearchV2Result` object on success or a
 /// `DBFILESSearchError` object on failure.
 ///
 - (DBRpcTask<DBFILESSearchV2Result *, DBFILESSearchError *> *)searchV2:(NSString *)query
                                                                options:(nullable DBFILESSearchOptions *)options
+                                                     matchFieldOptions:
+                                                         (nullable DBFILESSearchMatchFieldOptions *)matchFieldOptions
                                                      includeHighlights:(nullable NSNumber *)includeHighlights;
 
 ///
