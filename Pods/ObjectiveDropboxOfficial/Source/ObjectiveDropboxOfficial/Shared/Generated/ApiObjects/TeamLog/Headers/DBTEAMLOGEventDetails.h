@@ -32,6 +32,7 @@
 @class DBTEAMLOGChangedEnterpriseAdminRoleDetails;
 @class DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails;
 @class DBTEAMLOGCollectionShareDetails;
+@class DBTEAMLOGContentAdministrationPolicyChangedDetails;
 @class DBTEAMLOGCreateFolderDetails;
 @class DBTEAMLOGCreateTeamInviteLinkDetails;
 @class DBTEAMLOGDataPlacementRestrictionChangePolicyDetails;
@@ -80,6 +81,8 @@
 @class DBTEAMLOGExportMembersReportDetails;
 @class DBTEAMLOGExportMembersReportFailDetails;
 @class DBTEAMLOGExtendedVersionHistoryChangePolicyDetails;
+@class DBTEAMLOGExternalSharingCreateReportDetails;
+@class DBTEAMLOGExternalSharingReportFailedDetails;
 @class DBTEAMLOGFileAddCommentDetails;
 @class DBTEAMLOGFileAddDetails;
 @class DBTEAMLOGFileChangeCommentSubscriptionDetails;
@@ -264,6 +267,7 @@
 @class DBTEAMLOGSecondaryEmailDeletedDetails;
 @class DBTEAMLOGSecondaryEmailVerifiedDetails;
 @class DBTEAMLOGSecondaryMailsPolicyChangedDetails;
+@class DBTEAMLOGSendForSignaturePolicyChangedDetails;
 @class DBTEAMLOGSfAddGroupDetails;
 @class DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetails;
 @class DBTEAMLOGSfExternalInviteWarnDetails;
@@ -1002,6 +1006,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsExportMembersReportFailDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsExternalSharingCreateReportDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsExternalSharingReportFailedDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsNoExpirationLinkGenCreateReportDetails,
 
     /// (no description).
@@ -1410,6 +1420,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsContentAdministrationPolicyChangedDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsDataPlacementRestrictionChangePolicyDetails,
 
     /// (no description).
@@ -1540,6 +1553,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
     /// (no description).
     DBTEAMLOGEventDetailsRewindPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsSendForSignaturePolicyChangedDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsSharingChangeFolderJoinPolicyDetails,
@@ -2536,6 +2552,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGExportMembersReportFailDetails *exportMembersReportFailDetails;
 
+/// (no description). @note Ensure the `isExternalSharingCreateReportDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGExternalSharingCreateReportDetails *externalSharingCreateReportDetails;
+
+/// (no description). @note Ensure the `isExternalSharingReportFailedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGExternalSharingReportFailedDetails *externalSharingReportFailedDetails;
+
 /// (no description). @note Ensure the
 /// `isNoExpirationLinkGenCreateReportDetails` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
@@ -3156,6 +3182,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 @property (nonatomic, readonly) DBTEAMLOGCameraUploadsPolicyChangedDetails *cameraUploadsPolicyChangedDetails;
 
 /// (no description). @note Ensure the
+/// `isContentAdministrationPolicyChangedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGContentAdministrationPolicyChangedDetails *contentAdministrationPolicyChangedDetails;
+
+/// (no description). @note Ensure the
 /// `isDataPlacementRestrictionChangePolicyDetails` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly)
@@ -3380,6 +3412,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// (no description). @note Ensure the `isRewindPolicyChangedDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGRewindPolicyChangedDetails *rewindPolicyChangedDetails;
+
+/// (no description). @note Ensure the `isSendForSignaturePolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGSendForSignaturePolicyChangedDetails *sendForSignaturePolicyChangedDetails;
 
 /// (no description). @note Ensure the `isSharingChangeFolderJoinPolicyDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -5510,6 +5547,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Initializes union class with tag state of
+/// "external_sharing_create_report_details".
+///
+/// @param externalSharingCreateReportDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExternalSharingCreateReportDetails:
+    (DBTEAMLOGExternalSharingCreateReportDetails *)externalSharingCreateReportDetails;
+
+///
+/// Initializes union class with tag state of
+/// "external_sharing_report_failed_details".
+///
+/// @param externalSharingReportFailedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExternalSharingReportFailedDetails:
+    (DBTEAMLOGExternalSharingReportFailedDetails *)externalSharingReportFailedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "no_expiration_link_gen_create_report_details".
 ///
 /// @param noExpirationLinkGenCreateReportDetails (no description).
@@ -6876,6 +6935,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Initializes union class with tag state of
+/// "content_administration_policy_changed_details".
+///
+/// @param contentAdministrationPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithContentAdministrationPolicyChangedDetails:
+    (DBTEAMLOGContentAdministrationPolicyChangedDetails *)contentAdministrationPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "data_placement_restriction_change_policy_details".
 ///
 /// @param dataPlacementRestrictionChangePolicyDetails (no description).
@@ -7347,6 +7417,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithRewindPolicyChangedDetails:(DBTEAMLOGRewindPolicyChangedDetails *)rewindPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "send_for_signature_policy_changed_details".
+///
+/// @param sendForSignaturePolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSendForSignaturePolicyChangedDetails:
+    (DBTEAMLOGSendForSignaturePolicyChangedDetails *)sendForSignaturePolicyChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -10363,6 +10444,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "external_sharing_create_report_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `externalSharingCreateReportDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "external_sharing_create_report_details".
+///
+- (BOOL)isExternalSharingCreateReportDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "external_sharing_report_failed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `externalSharingReportFailedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "external_sharing_report_failed_details".
+///
+- (BOOL)isExternalSharingReportFailedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "no_expiration_link_gen_create_report_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -12125,6 +12232,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "content_administration_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `contentAdministrationPolicyChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "content_administration_policy_changed_details".
+///
+- (BOOL)isContentAdministrationPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "data_placement_restriction_change_policy_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -12694,6 +12814,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "rewind_policy_changed_details".
 ///
 - (BOOL)isRewindPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "send_for_signature_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `sendForSignaturePolicyChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "send_for_signature_policy_changed_details".
+///
+- (BOOL)isSendForSignaturePolicyChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value

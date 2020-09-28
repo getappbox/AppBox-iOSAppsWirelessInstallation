@@ -79,9 +79,9 @@
   return [DBUSERSCOMMONAccountTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSCOMMONAccountTypeSerializer serialize:self] description];
 }
 

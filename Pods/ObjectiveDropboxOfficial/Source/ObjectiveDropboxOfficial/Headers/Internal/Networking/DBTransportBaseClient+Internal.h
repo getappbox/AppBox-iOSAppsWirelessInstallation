@@ -63,10 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable id)caseInsensitiveLookupWithKey:(nullable NSString *)lookupKey
                      headerFieldsDictionary:(nullable NSDictionary<id, id> *)headerFieldsDictionary;
 
-+ (NSString *)sdkVersion;
-
-+ (NSString *)defaultUserAgent;
-
 @end
 
 NS_ASSUME_NONNULL_END

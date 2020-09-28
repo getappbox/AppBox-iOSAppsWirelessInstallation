@@ -11,24 +11,27 @@
 @synthesize errorType = _errorType;
 @synthesize errorDescription = _errorDescription;
 
-static NSDictionary<NSString *, NSNumber *> *errorTypeLookup;
-
 #pragma mark - Constructors
 
-+ (DBOAuthErrorType)getErrorType:(NSString *)errorDescription {
-  if (!errorTypeLookup) {
++ (DBOAuthErrorType)getErrorType:(NSString *)errorType {
+  static NSDictionary<NSString *, NSNumber *> *errorTypeLookup;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
     errorTypeLookup = @{
-      @"unauthorized_client" : [NSNumber numberWithInt:DBAuthUnauthorizedClient],
-      @"access_denied" : [NSNumber numberWithInt:DBAuthAccessDenied],
-      @"unsupported_response_type" : [NSNumber numberWithInt:DBAuthUnsupportedResponseType],
-      @"invalid_scope" : [NSNumber numberWithInt:DBAuthInvalidScope],
-      @"server_error" : [NSNumber numberWithInt:DBAuthServerError],
-      @"temporarily_unavailable" : [NSNumber numberWithInt:DBAuthTemporarilyUnavailable],
-      @"inconsistent_state" : [NSNumber numberWithInt:DBAuthInconsistentState],
-      @"" : [NSNumber numberWithInt:DBAuthUnknown],
+      @"unauthorized_client" : @(DBAuthUnauthorizedClient),
+      @"access_denied" : @(DBAuthAccessDenied),
+      @"unsupported_response_type" : @(DBAuthUnsupportedResponseType),
+      @"invalid_scope" : @(DBAuthInvalidScope),
+      @"server_error" : @(DBAuthServerError),
+      @"temporarily_unavailable" : @(DBAuthTemporarilyUnavailable),
+      @"invalid_request" : @(DBAuthInvalidRequest),
+      @"invalid_client" : @(DBAuthInvalidClient),
+      @"invalid_grant" : @(DBAuthInvalidGrant),
+      @"unsupported_grant_type" : @(DBAuthUnsupportedGrantType),
+      @"inconsistent_state" : @(DBAuthInconsistentState),
     };
-  }
-  return (DBOAuthErrorType)[errorTypeLookup[errorDescription] intValue] ?: DBAuthUnknown;
+  });
+  return (DBOAuthErrorType)[errorTypeLookup[errorType] intValue] ?: DBAuthUnknown;
 }
 
 - (instancetype)initWithSuccess:(DBAccessToken *)accessToken {
@@ -41,10 +44,14 @@ static NSDictionary<NSString *, NSNumber *> *errorTypeLookup;
 }
 
 - (instancetype)initWithError:(NSString *)errorType errorDescription:(NSString *)errorDescription {
+  return [self initWithErrorType:[[self class] getErrorType:errorType] errorDescription:errorDescription];
+}
+
+- (instancetype)initWithErrorType:(DBOAuthErrorType)errorType errorDescription:(nullable NSString *)errorDescription {
   self = [super init];
   if (self) {
     _tag = DBAuthError;
-    _errorType = [[self class] getErrorType:errorType];
+    _errorType = errorType;
     _errorDescription = errorDescription;
   }
   return self;
@@ -56,6 +63,10 @@ static NSDictionary<NSString *, NSNumber *> *errorTypeLookup;
     _tag = DBAuthCancel;
   }
   return self;
+}
+
++ (DBOAuthResult *)unknownErrorWithErrorDescription:(NSString *)errorDescription {
+  return [[DBOAuthResult alloc] initWithErrorType:DBAuthUnknown errorDescription:errorDescription];
 }
 
 #pragma mark - Tag state methods
@@ -111,6 +122,14 @@ static NSDictionary<NSString *, NSNumber *> *errorTypeLookup;
                 format:@"Invalid tag: required `DBAuthError`, but was %@.", [self tagName]];
   }
   return _errorDescription;
+}
+
+- (NSError *)nsError {
+  if (_tag != DBAuthError) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required `DBAuthError`, but was %@.", [self tagName]];
+  }
+  return [NSError errorWithDomain:@"com.dropbox.dropbox_sdk_obj_c.oauth.error" code:_errorType userInfo:nil];
 }
 
 #pragma mark - Description method

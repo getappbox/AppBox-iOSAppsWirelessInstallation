@@ -41,7 +41,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsListHeldRevisionsErrorTag){
     /// Temporary infrastructure failure, please retry.
     DBTEAMLegalHoldsListHeldRevisionsErrorTransientError,
 
-    /// The legal hold is not holding any revisions yet
+    /// The legal hold is not holding any revisions yet.
     DBTEAMLegalHoldsListHeldRevisionsErrorLegalHoldStillEmpty,
 
     /// Trying to list revisions for an inactive legal hold.
@@ -95,7 +95,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsListHeldRevisionsErrorTag){
 /// Initializes union class with tag state of "legal_hold_still_empty".
 ///
 /// Description of the "legal_hold_still_empty" tag state: The legal hold is not
-/// holding any revisions yet
+/// holding any revisions yet.
 ///
 /// @return An initialized instance.
 ///

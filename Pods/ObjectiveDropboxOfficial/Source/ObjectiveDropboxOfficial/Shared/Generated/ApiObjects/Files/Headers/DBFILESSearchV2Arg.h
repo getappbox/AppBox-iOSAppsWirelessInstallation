@@ -8,6 +8,7 @@
 
 #import "DBSerializableProtocol.h"
 
+@class DBFILESSearchMatchFieldOptions;
 @class DBFILESSearchOptions;
 @class DBFILESSearchV2Arg;
 
@@ -34,7 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Options for more targeted search results.
 @property (nonatomic, readonly, nullable) DBFILESSearchOptions *options;
 
-/// (no description).
+/// Options for search results match fields.
+@property (nonatomic, readonly, nullable) DBFILESSearchMatchFieldOptions *matchFieldOptions;
+
+/// Deprecated and moved this option to SearchMatchFieldOptions.
 @property (nonatomic, readonly) NSNumber *includeHighlights;
 
 #pragma mark - Constructors
@@ -46,12 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// based on the request arguments. Query string may be rewritten to improve
 /// relevance of results.
 /// @param options Options for more targeted search results.
-/// @param includeHighlights (no description).
+/// @param matchFieldOptions Options for search results match fields.
+/// @param includeHighlights Deprecated and moved this option to
+/// SearchMatchFieldOptions.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithQuery:(NSString *)query
                       options:(nullable DBFILESSearchOptions *)options
+            matchFieldOptions:(nullable DBFILESSearchMatchFieldOptions *)matchFieldOptions
             includeHighlights:(nullable NSNumber *)includeHighlights;
 
 ///

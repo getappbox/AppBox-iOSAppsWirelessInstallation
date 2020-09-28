@@ -28,7 +28,7 @@ We are looking forward to your contributions via pull requests.
 
 To contribute to the SDK, please
 
-* install Xcode 10.1 on your Mac.
+* install Xcode 11 on your Mac.
 * install [Jazzy](https://github.com/realm/jazzy) to be able to generate documentation.
 * install `clang-format` for code formatting via [Homebrew](https://brew.sh) using the command `brew install clang-format`.
 

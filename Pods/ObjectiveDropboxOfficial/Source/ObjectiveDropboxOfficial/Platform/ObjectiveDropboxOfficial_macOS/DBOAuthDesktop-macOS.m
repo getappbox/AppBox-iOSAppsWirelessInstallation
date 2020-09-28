@@ -3,12 +3,24 @@
 ///
 
 #import "DBOAuthDesktop-macOS.h"
+
+#import "DBLoadingStatusDelegate.h"
 #import "DBOAuthManager.h"
+
+static DBDesktopSharedApplication *s_desktopSharedApplication;
 
 @implementation DBDesktopSharedApplication {
   NSWorkspace *_sharedWorkspace;
   NSViewController *_controller;
   void (^_openURL)(NSURL *);
+}
+
++ (DBDesktopSharedApplication *)desktopSharedApplication {
+  return s_desktopSharedApplication;
+}
+
++ (void)setDesktopSharedApplication:(DBDesktopSharedApplication *)desktopSharedApplication {
+  s_desktopSharedApplication = desktopSharedApplication;
 }
 
 - (instancetype)initWithSharedApplication:(NSWorkspace *)sharedWorkspace
@@ -59,6 +71,14 @@
 - (BOOL)canPresentExternalApp:(NSURL *)url {
 #pragma unused(url)
   return YES;
+}
+
+- (void)presentLoading {
+  [_loadingStatusDelegate showLoading];
+}
+
+- (void)dismissLoading {
+  [_loadingStatusDelegate dismissLoading];
 }
 
 @end

@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
   NSOperationQueue *_queue;
 }
 
+/// A unique string identifier for this task.
+@property (nonatomic, readonly, copy) NSString *taskIdentifier;
+
 /// Tracks the number of times this task has been retried.
 @property (nonatomic) int retryCount;
 

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The metadata for the matched file or folder.
 @property (nonatomic, readonly) DBFILESMetadataV2 *metadata;
 
-/// The list of HighlightSpan determines which parts of the result should be
+/// The list of HighlightSpan determines which parts of the file title should be
 /// highlighted.
 @property (nonatomic, readonly, nullable) NSArray<DBFILESHighlightSpan *> *highlightSpans;
 
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param metadata The metadata for the matched file or folder.
 /// @param highlightSpans The list of HighlightSpan determines which parts of
-/// the result should be highlighted.
+/// the file title should be highlighted.
 ///
 /// @return An initialized instance.
 ///

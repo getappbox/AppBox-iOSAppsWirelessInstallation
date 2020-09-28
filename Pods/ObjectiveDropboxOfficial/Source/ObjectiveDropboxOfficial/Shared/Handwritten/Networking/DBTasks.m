@@ -21,6 +21,7 @@
     _route = route;
     _queue = nil;
     _tokenUid = [tokenUid copy];
+    _taskIdentifier = [[NSUUID UUID].UUIDString copy];
   }
   return self;
 }

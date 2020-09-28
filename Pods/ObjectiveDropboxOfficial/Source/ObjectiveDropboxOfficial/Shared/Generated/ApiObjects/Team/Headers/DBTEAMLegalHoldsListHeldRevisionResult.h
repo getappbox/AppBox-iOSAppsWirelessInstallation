@@ -26,13 +26,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Entries list.
+/// List of file entries that under the hold.
 @property (nonatomic, readonly) NSArray<DBTEAMLegalHoldHeldRevisionMetadata *> *entries;
 
-/// List held revisions cursor.
+/// The cursor idicates where to continue reading file metadata entries for the
+/// next API call. When there are no more entries, the cursor will return none.
+/// Pass the cursor into /2/team/legal_holds/list_held_revisions/continue.
 @property (nonatomic, readonly, copy, nullable) NSString *cursor;
 
-/// Has more.
+/// True if there are more file entries that haven't been returned. You can
+/// retrieve them with a call to /legal_holds/list_held_revisions_continue.
 @property (nonatomic, readonly) NSNumber *hasMore;
 
 #pragma mark - Constructors
@@ -40,9 +43,14 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param entries Entries list.
-/// @param hasMore Has more.
-/// @param cursor List held revisions cursor.
+/// @param entries List of file entries that under the hold.
+/// @param hasMore True if there are more file entries that haven't been
+/// returned. You can retrieve them with a call to
+/// /legal_holds/list_held_revisions_continue.
+/// @param cursor The cursor idicates where to continue reading file metadata
+/// entries for the next API call. When there are no more entries, the cursor
+/// will return none. Pass the cursor into
+/// /2/team/legal_holds/list_held_revisions/continue.
 ///
 /// @return An initialized instance.
 ///
@@ -54,8 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
-/// @param entries Entries list.
-/// @param hasMore Has more.
+/// @param entries List of file entries that under the hold.
+/// @param hasMore True if there are more file entries that haven't been
+/// returned. You can retrieve them with a call to
+/// /legal_holds/list_held_revisions_continue.
 ///
 /// @return An initialized instance.
 ///

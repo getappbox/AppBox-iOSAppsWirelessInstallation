@@ -6,6 +6,8 @@
 
 #import "DBHandlerTypes.h"
 
+@class DBAccessToken;
+
 NS_ASSUME_NONNULL_BEGIN
 
 ///
@@ -13,17 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 @interface DBSDKKeychain : NSObject
 
-/// Stores a key / value pair in the keychain.
-+ (BOOL)storeValueWithKey:(NSString *)key value:(NSString *)value;
+/// Stores DBAccessToken in the keychain.
++ (BOOL)storeAccessToken:(DBAccessToken *)accessToken;
 
-/// Retrieves a value from the corresponding key from the keychain.
-+ (nullable NSString *)retrieveTokenWithKey:(NSString *)key;
+/// Retrieves a DBAccessToken from the corresponding key (uid) from the keychain.
++ (nullable DBAccessToken *)retrieveTokenWithUid:(NSString *)uid;
 
 /// Retrieves all token uids from the keychain.
 + (NSArray<NSString *> *)retrieveAllTokenIds;
 
-/// Deletes a key / value pair in the keychain.
-+ (BOOL)deleteTokenWithKey:(NSString *)key;
+/// Deletes the stored token value for a key (uid).
++ (BOOL)deleteTokenWithUid:(NSString *)uid;
 
 /// Deletes all key / value pairs in the keychain.
 + (BOOL)clearAllTokens;

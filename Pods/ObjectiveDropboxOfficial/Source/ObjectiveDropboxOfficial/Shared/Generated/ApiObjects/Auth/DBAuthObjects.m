@@ -102,9 +102,9 @@
   return [DBAUTHAccessErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHAccessErrorSerializer serialize:self] description];
 }
 
@@ -365,9 +365,9 @@
   return [DBAUTHAuthErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHAuthErrorSerializer serialize:self] description];
 }
 
@@ -580,9 +580,9 @@
   return [DBAUTHInvalidAccountTypeErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHInvalidAccountTypeErrorSerializer serialize:self] description];
 }
 
@@ -753,9 +753,9 @@
   return [DBAUTHPaperAccessErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHPaperAccessErrorSerializer serialize:self] description];
 }
 
@@ -889,9 +889,9 @@
   return [DBAUTHRateLimitErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHRateLimitErrorSerializer serialize:self] description];
 }
 
@@ -1037,9 +1037,9 @@
   return [DBAUTHRateLimitReasonSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHRateLimitReasonSerializer serialize:self] description];
 }
 
@@ -1170,9 +1170,9 @@
   return [DBAUTHTokenFromOAuth1ArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHTokenFromOAuth1ArgSerializer serialize:self] description];
 }
 
@@ -1318,9 +1318,9 @@
   return [DBAUTHTokenFromOAuth1ErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHTokenFromOAuth1ErrorSerializer serialize:self] description];
 }
 
@@ -1448,9 +1448,9 @@
   return [DBAUTHTokenFromOAuth1ResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHTokenFromOAuth1ResultSerializer serialize:self] description];
 }
 
@@ -1547,9 +1547,9 @@
   return [DBAUTHTokenScopeErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBAUTHTokenScopeErrorSerializer serialize:self] description];
 }
 

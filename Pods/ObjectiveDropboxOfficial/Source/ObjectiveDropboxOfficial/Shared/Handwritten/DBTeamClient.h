@@ -7,7 +7,9 @@
 #import "DBTeamBaseClient.h"
 
 @class DBUserClient;
+@class DBTransportDefaultClient;
 @class DBTransportDefaultConfig;
+@protocol DBAccessTokenProvider;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy, nullable) NSString *tokenUid;
 
 ///
-/// Convenience constructor.
+/// Convenience initializer.
 ///
 /// Uses standard network configuration parameters.
 ///
@@ -36,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAccessToken:(NSString *)accessToken;
 
 ///
-/// Convenience constructor.
+/// Convenience initializer.
 ///
 /// @param accessToken The Dropbox OAuth 2.0 access token used to make requests.
 /// @param transportConfig A wrapper around the different parameters that can be set to change network calling behavior.
@@ -48,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
                     transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
 
 ///
-/// Full constructor.
+/// Convenience initializer.
 ///
 /// @param accessToken The Dropbox OAuth 2.0 access token used to make requests.
 /// @param tokenUid Identifies a unique Dropbox account. Used for the multi Dropbox account case where client objects
@@ -61,6 +63,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAccessToken:(NSString *)accessToken
                            tokenUid:(nullable NSString *)tokenUid
                     transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
+
+///
+/// Convenience initializer.
+///
+/// @param accessTokenProvider A `DBAccessTokenProvider` that provides access token and token refresh functionality.
+/// @param tokenUid Identifies a unique Dropbox account. Used for the multi Dropbox account case where client objects
+/// are each associated with a particular Dropbox account.
+/// @param transportConfig A wrapper around the different parameters that can be set to change network calling behavior.
+/// `DBTransportDefaultConfig` offers a number of different constructors to customize networking settings.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAccessTokenProvider:(id<DBAccessTokenProvider>)accessTokenProvider
+                                   tokenUid:(nullable NSString *)tokenUid
+                            transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
+
+/// Designated initializer.
+///
+/// @param client A `DBTransportDefaultClient` used to make network requests.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTransportClient:(DBTransportDefaultClient *)client NS_DESIGNATED_INITIALIZER;
 
 ///
 /// Returns a `DBUserClient` instance that can be used to make API calls on behalf of the designated team member.
