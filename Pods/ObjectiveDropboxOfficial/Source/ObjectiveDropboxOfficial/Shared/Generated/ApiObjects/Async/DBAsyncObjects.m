@@ -62,9 +62,9 @@
   return [DBASYNCLaunchResultBaseSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBASYNCLaunchResultBaseSerializer serialize:self] description];
 }
 
@@ -224,9 +224,9 @@
   return [DBASYNCLaunchEmptyResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBASYNCLaunchEmptyResultSerializer serialize:self] description];
 }
 
@@ -353,9 +353,9 @@
   return [DBASYNCPollArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBASYNCPollArgSerializer serialize:self] description];
 }
 
@@ -467,9 +467,9 @@
   return [DBASYNCPollResultBaseSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBASYNCPollResultBaseSerializer serialize:self] description];
 }
 
@@ -616,9 +616,9 @@
   return [DBASYNCPollEmptyResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBASYNCPollEmptyResultSerializer serialize:self] description];
 }
 
@@ -786,9 +786,9 @@
   return [DBASYNCPollErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBASYNCPollErrorSerializer serialize:self] description];
 }
 

@@ -64,9 +64,9 @@
   return [DBUSERSAccountSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSAccountSerializer serialize:self] description];
 }
 
@@ -240,9 +240,9 @@
   return [DBUSERSBasicAccountSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSBasicAccountSerializer serialize:self] description];
 }
 
@@ -440,9 +440,9 @@
   return [DBUSERSFileLockingValueSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSFileLockingValueSerializer serialize:self] description];
 }
 
@@ -630,9 +630,9 @@
   return [DBUSERSFullAccountSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSFullAccountSerializer serialize:self] description];
 }
 
@@ -846,9 +846,9 @@
   return [DBUSERSTeamSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSTeamSerializer serialize:self] description];
 }
 
@@ -961,9 +961,9 @@
   return [DBUSERSFullTeamSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSFullTeamSerializer serialize:self] description];
 }
 
@@ -1083,9 +1083,9 @@
   return [DBUSERSGetAccountArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSGetAccountArgSerializer serialize:self] description];
 }
 
@@ -1189,9 +1189,9 @@
   return [DBUSERSGetAccountBatchArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSGetAccountBatchArgSerializer serialize:self] description];
 }
 
@@ -1334,9 +1334,9 @@
   return [DBUSERSGetAccountBatchErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSGetAccountBatchErrorSerializer serialize:self] description];
 }
 
@@ -1487,9 +1487,9 @@
   return [DBUSERSGetAccountErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSGetAccountErrorSerializer serialize:self] description];
 }
 
@@ -1609,9 +1609,9 @@
   return [DBUSERSIndividualSpaceAllocationSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSIndividualSpaceAllocationSerializer serialize:self] description];
 }
 
@@ -1720,9 +1720,9 @@
   return [DBUSERSNameSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSNameSerializer serialize:self] description];
 }
 
@@ -1887,9 +1887,9 @@
   return [DBUSERSPaperAsFilesValueSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSPaperAsFilesValueSerializer serialize:self] description];
 }
 
@@ -2077,9 +2077,9 @@
   return [DBUSERSSpaceAllocationSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSSpaceAllocationSerializer serialize:self] description];
 }
 
@@ -2214,9 +2214,9 @@
   return [DBUSERSSpaceUsageSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSSpaceUsageSerializer serialize:self] description];
 }
 
@@ -2332,9 +2332,9 @@
   return [DBUSERSTeamSpaceAllocationSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSTeamSpaceAllocationSerializer serialize:self] description];
 }
 
@@ -2504,9 +2504,9 @@
   return [DBUSERSUserFeatureSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSUserFeatureSerializer serialize:self] description];
 }
 
@@ -2700,9 +2700,9 @@
   return [DBUSERSUserFeatureValueSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSUserFeatureValueSerializer serialize:self] description];
 }
 
@@ -2839,9 +2839,9 @@
   return [DBUSERSUserFeaturesGetValuesBatchArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSUserFeaturesGetValuesBatchArgSerializer serialize:self] description];
 }
 
@@ -2974,9 +2974,9 @@
   return [DBUSERSUserFeaturesGetValuesBatchErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSUserFeaturesGetValuesBatchErrorSerializer serialize:self] description];
 }
 
@@ -3101,9 +3101,9 @@
   return [DBUSERSUserFeaturesGetValuesBatchResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBUSERSUserFeaturesGetValuesBatchResultSerializer serialize:self] description];
 }
 

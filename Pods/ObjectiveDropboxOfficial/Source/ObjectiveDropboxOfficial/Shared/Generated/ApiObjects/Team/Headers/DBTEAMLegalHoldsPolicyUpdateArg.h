@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Policy new description.
 @property (nonatomic, readonly, copy, nullable) NSString *description_;
 
-/// List of team members to apply the policy on.
-@property (nonatomic, readonly) NSArray<NSString *> *members;
+/// List of team member IDs to apply the policy on.
+@property (nonatomic, readonly, nullable) NSArray<NSString *> *members;
 
 #pragma mark - Constructors
 
@@ -43,27 +43,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param id_ The legal hold Id.
-/// @param members List of team members to apply the policy on.
 /// @param name Policy new name.
 /// @param description_ Policy new description.
+/// @param members List of team member IDs to apply the policy on.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithId_:(NSString *)id_
-                    members:(NSArray<NSString *> *)members
                        name:(nullable NSString *)name
-               description_:(nullable NSString *)description_;
+               description_:(nullable NSString *)description_
+                    members:(nullable NSArray<NSString *> *)members;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
 /// @param id_ The legal hold Id.
-/// @param members List of team members to apply the policy on.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithId_:(NSString *)id_ members:(NSArray<NSString *> *)members;
+- (instancetype)initWithId_:(NSString *)id_;
 
 - (instancetype)init NS_UNAVAILABLE;
 

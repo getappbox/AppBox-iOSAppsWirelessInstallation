@@ -44,9 +44,9 @@
   return [DBPAPERAddMemberSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERAddMemberSerializer serialize:self] description];
 }
 
@@ -152,9 +152,9 @@
   return [DBPAPERRefPaperDocSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERRefPaperDocSerializer serialize:self] description];
 }
 
@@ -266,9 +266,9 @@
   return [DBPAPERAddPaperDocUserSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERAddPaperDocUserSerializer serialize:self] description];
 }
 
@@ -399,9 +399,9 @@
   return [DBPAPERAddPaperDocUserMemberResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERAddPaperDocUserMemberResultSerializer serialize:self] description];
 }
 
@@ -617,9 +617,9 @@
   return [DBPAPERAddPaperDocUserResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERAddPaperDocUserResultSerializer serialize:self] description];
 }
 
@@ -792,9 +792,9 @@
   return [DBPAPERCursorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERCursorSerializer serialize:self] description];
 }
 
@@ -934,9 +934,9 @@
   return [DBPAPERPaperApiBaseErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperApiBaseErrorSerializer serialize:self] description];
 }
 
@@ -1100,9 +1100,9 @@
   return [DBPAPERDocLookupErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERDocLookupErrorSerializer serialize:self] description];
 }
 
@@ -1287,9 +1287,9 @@
   return [DBPAPERDocSubscriptionLevelSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERDocSubscriptionLevelSerializer serialize:self] description];
 }
 
@@ -1473,9 +1473,9 @@
   return [DBPAPERExportFormatSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERExportFormatSerializer serialize:self] description];
 }
 
@@ -1605,9 +1605,9 @@
   return [DBPAPERFolderSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERFolderSerializer serialize:self] description];
 }
 
@@ -1739,9 +1739,9 @@
   return [DBPAPERFolderSharingPolicyTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERFolderSharingPolicyTypeSerializer serialize:self] description];
 }
 
@@ -1923,9 +1923,9 @@
   return [DBPAPERFolderSubscriptionLevelSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERFolderSubscriptionLevelSerializer serialize:self] description];
 }
 
@@ -2077,9 +2077,9 @@
   return [DBPAPERFoldersContainingPaperDocSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERFoldersContainingPaperDocSerializer serialize:self] description];
 }
 
@@ -2264,9 +2264,9 @@
   return [DBPAPERImportFormatSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERImportFormatSerializer serialize:self] description];
 }
 
@@ -2407,9 +2407,9 @@
   return [DBPAPERInviteeInfoWithPermissionLevelSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERInviteeInfoWithPermissionLevelSerializer serialize:self] description];
 }
 
@@ -2555,9 +2555,9 @@
   return [DBPAPERListDocsCursorErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListDocsCursorErrorSerializer serialize:self] description];
 }
 
@@ -2692,9 +2692,9 @@
   return [DBPAPERListPaperDocsArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListPaperDocsArgsSerializer serialize:self] description];
 }
 
@@ -2815,9 +2815,9 @@
   return [DBPAPERListPaperDocsContinueArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListPaperDocsContinueArgsSerializer serialize:self] description];
 }
 
@@ -2957,9 +2957,9 @@
   return [DBPAPERListPaperDocsFilterBySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListPaperDocsFilterBySerializer serialize:self] description];
 }
 
@@ -3097,9 +3097,9 @@
   return [DBPAPERListPaperDocsResponseSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListPaperDocsResponseSerializer serialize:self] description];
 }
 
@@ -3271,9 +3271,9 @@
   return [DBPAPERListPaperDocsSortBySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListPaperDocsSortBySerializer serialize:self] description];
 }
 
@@ -3452,9 +3452,9 @@
   return [DBPAPERListPaperDocsSortOrderSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListPaperDocsSortOrderSerializer serialize:self] description];
 }
 
@@ -3652,9 +3652,9 @@
   return [DBPAPERListUsersCursorErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersCursorErrorSerializer serialize:self] description];
 }
 
@@ -3798,9 +3798,9 @@
   return [DBPAPERListUsersOnFolderArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersOnFolderArgsSerializer serialize:self] description];
 }
 
@@ -3905,9 +3905,9 @@
   return [DBPAPERListUsersOnFolderContinueArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersOnFolderContinueArgsSerializer serialize:self] description];
 }
 
@@ -4028,9 +4028,9 @@
   return [DBPAPERListUsersOnFolderResponseSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersOnFolderResponseSerializer serialize:self] description];
 }
 
@@ -4167,9 +4167,9 @@
   return [DBPAPERListUsersOnPaperDocArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersOnPaperDocArgsSerializer serialize:self] description];
 }
 
@@ -4282,9 +4282,9 @@
   return [DBPAPERListUsersOnPaperDocContinueArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersOnPaperDocContinueArgsSerializer serialize:self] description];
 }
 
@@ -4410,9 +4410,9 @@
   return [DBPAPERListUsersOnPaperDocResponseSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERListUsersOnPaperDocResponseSerializer serialize:self] description];
 }
 
@@ -4622,9 +4622,9 @@
   return [DBPAPERPaperApiCursorErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperApiCursorErrorSerializer serialize:self] description];
 }
 
@@ -4774,9 +4774,9 @@
   return [DBPAPERPaperDocCreateArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocCreateArgsSerializer serialize:self] description];
 }
 
@@ -4971,9 +4971,9 @@
   return [DBPAPERPaperDocCreateErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocCreateErrorSerializer serialize:self] description];
 }
 
@@ -5129,9 +5129,9 @@
   return [DBPAPERPaperDocCreateUpdateResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocCreateUpdateResultSerializer serialize:self] description];
 }
 
@@ -5243,9 +5243,9 @@
   return [DBPAPERPaperDocExportSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocExportSerializer serialize:self] description];
 }
 
@@ -5357,9 +5357,9 @@
   return [DBPAPERPaperDocExportResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocExportResultSerializer serialize:self] description];
 }
 
@@ -5517,9 +5517,9 @@
   return [DBPAPERPaperDocPermissionLevelSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocPermissionLevelSerializer serialize:self] description];
 }
 
@@ -5650,9 +5650,9 @@
   return [DBPAPERPaperDocSharingPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocSharingPolicySerializer serialize:self] description];
 }
 
@@ -5766,9 +5766,9 @@
   return [DBPAPERPaperDocUpdateArgsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocUpdateArgsSerializer serialize:self] description];
 }
 
@@ -6015,9 +6015,9 @@
   return [DBPAPERPaperDocUpdateErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocUpdateErrorSerializer serialize:self] description];
 }
 
@@ -6250,9 +6250,9 @@
   return [DBPAPERPaperDocUpdatePolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperDocUpdatePolicySerializer serialize:self] description];
 }
 
@@ -6396,9 +6396,9 @@
   return [DBPAPERPaperFolderCreateArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperFolderCreateArgSerializer serialize:self] description];
 }
 
@@ -6578,9 +6578,9 @@
   return [DBPAPERPaperFolderCreateErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperFolderCreateErrorSerializer serialize:self] description];
 }
 
@@ -6716,9 +6716,9 @@
   return [DBPAPERPaperFolderCreateResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERPaperFolderCreateResultSerializer serialize:self] description];
 }
 
@@ -6818,9 +6818,9 @@
   return [DBPAPERRemovePaperDocUserSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERRemovePaperDocUserSerializer serialize:self] description];
 }
 
@@ -6930,9 +6930,9 @@
   return [DBPAPERSharingPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERSharingPolicySerializer serialize:self] description];
 }
 
@@ -7098,9 +7098,9 @@
   return [DBPAPERSharingTeamPolicyTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERSharingTeamPolicyTypeSerializer serialize:self] description];
 }
 
@@ -7291,9 +7291,9 @@
   return [DBPAPERSharingPublicPolicyTypeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERSharingPublicPolicyTypeSerializer serialize:self] description];
 }
 
@@ -7439,9 +7439,9 @@
   return [DBPAPERUserInfoWithPermissionLevelSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERUserInfoWithPermissionLevelSerializer serialize:self] description];
 }
 
@@ -7588,9 +7588,9 @@
   return [DBPAPERUserOnPaperDocFilterSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBPAPERUserOnPaperDocFilterSerializer serialize:self] description];
 }
 

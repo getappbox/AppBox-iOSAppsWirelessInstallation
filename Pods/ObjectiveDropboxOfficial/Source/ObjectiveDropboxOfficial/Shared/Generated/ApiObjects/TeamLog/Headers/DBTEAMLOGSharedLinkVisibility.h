@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGSharedLinkVisibility` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag){
     /// (no description).
+    DBTEAMLOGSharedLinkVisibilityNoOne,
+
+    /// (no description).
     DBTEAMLOGSharedLinkVisibilityPassword,
 
     /// (no description).
@@ -48,6 +51,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag){
 @property (nonatomic, readonly) DBTEAMLOGSharedLinkVisibilityTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "no_one".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoOne;
 
 ///
 /// Initializes union class with tag state of "password".
@@ -80,6 +90,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedLinkVisibilityTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "no_one".
+///
+/// @return Whether the union's current tag state has value "no_one".
+///
+- (BOOL)isNoOne;
 
 ///
 /// Retrieves whether the union's current tag state has value "password".

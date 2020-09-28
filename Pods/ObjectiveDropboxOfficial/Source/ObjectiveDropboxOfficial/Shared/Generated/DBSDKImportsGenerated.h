@@ -279,6 +279,7 @@
 #import "DBFILESMetadataV2.h"
 #import "DBFILESMinimalFileLinkMetadata.h"
 #import "DBFILESMoveBatchArg.h"
+#import "DBFILESMoveIntoVaultError.h"
 #import "DBFILESPathOrLink.h"
 #import "DBFILESPhotoMetadata.h"
 #import "DBFILESPreviewArg.h"
@@ -312,6 +313,7 @@
 #import "DBFILESSearchArg.h"
 #import "DBFILESSearchError.h"
 #import "DBFILESSearchMatch.h"
+#import "DBFILESSearchMatchFieldOptions.h"
 #import "DBFILESSearchMatchType.h"
 #import "DBFILESSearchMatchV2.h"
 #import "DBFILESSearchMode.h"
@@ -577,6 +579,12 @@
 #import "DBSHARINGUserMembershipInfo.h"
 #import "DBSHARINGViewerInfoPolicy.h"
 #import "DBSHARINGVisibility.h"
+
+// `StoneFixtures` namespace types
+
+#import "DBSTONEFIXTURESEmptyContainer.h"
+#import "DBSTONEFIXTURESMixedInternalOnlyContainer.h"
+#import "DBSTONEFIXTURESMixedInternalOnlyEnum.h"
 
 // `Team` namespace types
 
@@ -887,6 +895,8 @@
 #import "DBTEAMLOGCollectionShareDetails.h"
 #import "DBTEAMLOGCollectionShareType.h"
 #import "DBTEAMLOGConnectedTeamName.h"
+#import "DBTEAMLOGContentAdministrationPolicyChangedDetails.h"
+#import "DBTEAMLOGContentAdministrationPolicyChangedType.h"
 #import "DBTEAMLOGContentPermanentDeletePolicy.h"
 #import "DBTEAMLOGContextLogInfo.h"
 #import "DBTEAMLOGCreateFolderDetails.h"
@@ -988,6 +998,7 @@
 #import "DBTEAMLOGEventCategory.h"
 #import "DBTEAMLOGEventDetails.h"
 #import "DBTEAMLOGEventType.h"
+#import "DBTEAMLOGEventTypeArg.h"
 #import "DBTEAMLOGExportMembersReportDetails.h"
 #import "DBTEAMLOGExportMembersReportFailDetails.h"
 #import "DBTEAMLOGExportMembersReportFailType.h"
@@ -995,6 +1006,10 @@
 #import "DBTEAMLOGExtendedVersionHistoryChangePolicyDetails.h"
 #import "DBTEAMLOGExtendedVersionHistoryChangePolicyType.h"
 #import "DBTEAMLOGExtendedVersionHistoryPolicy.h"
+#import "DBTEAMLOGExternalSharingCreateReportDetails.h"
+#import "DBTEAMLOGExternalSharingCreateReportType.h"
+#import "DBTEAMLOGExternalSharingReportFailedDetails.h"
+#import "DBTEAMLOGExternalSharingReportFailedType.h"
 #import "DBTEAMLOGExternalUserLogInfo.h"
 #import "DBTEAMLOGFailureDetailsLogInfo.h"
 #import "DBTEAMLOGFedAdminRole.h"
@@ -1434,6 +1449,9 @@
 #import "DBTEAMLOGSecondaryTeamRequestCanceledDetails.h"
 #import "DBTEAMLOGSecondaryTeamRequestExpiredDetails.h"
 #import "DBTEAMLOGSecondaryTeamRequestReminderDetails.h"
+#import "DBTEAMLOGSendForSignaturePolicy.h"
+#import "DBTEAMLOGSendForSignaturePolicyChangedDetails.h"
+#import "DBTEAMLOGSendForSignaturePolicyChangedType.h"
 #import "DBTEAMLOGSessionLogInfo.h"
 #import "DBTEAMLOGSfAddGroupDetails.h"
 #import "DBTEAMLOGSfAddGroupType.h"

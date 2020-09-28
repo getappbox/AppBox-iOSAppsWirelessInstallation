@@ -79,9 +79,9 @@
   return [DBTEAMPOLICIESCameraUploadsPolicyStateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESCameraUploadsPolicyStateSerializer serialize:self] description];
 }
 
@@ -266,9 +266,9 @@
   return [DBTEAMPOLICIESEmmStateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESEmmStateSerializer serialize:self] description];
 }
 
@@ -447,9 +447,9 @@
   return [DBTEAMPOLICIESFileLockingPolicyStateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESFileLockingPolicyStateSerializer serialize:self] description];
 }
 
@@ -606,9 +606,9 @@
   return [DBTEAMPOLICIESGroupCreationSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESGroupCreationSerializer serialize:self] description];
 }
 
@@ -776,9 +776,9 @@
   return [DBTEAMPOLICIESOfficeAddInPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESOfficeAddInPolicySerializer serialize:self] description];
 }
 
@@ -949,9 +949,9 @@
   return [DBTEAMPOLICIESPaperDefaultFolderPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESPaperDefaultFolderPolicySerializer serialize:self] description];
 }
 
@@ -1122,9 +1122,9 @@
   return [DBTEAMPOLICIESPaperDeploymentPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESPaperDeploymentPolicySerializer serialize:self] description];
 }
 
@@ -1295,9 +1295,9 @@
   return [DBTEAMPOLICIESPaperDesktopPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESPaperDesktopPolicySerializer serialize:self] description];
 }
 
@@ -1482,9 +1482,9 @@
   return [DBTEAMPOLICIESPaperEnabledPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESPaperEnabledPolicySerializer serialize:self] description];
 }
 
@@ -1663,9 +1663,9 @@
   return [DBTEAMPOLICIESPasswordControlModeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESPasswordControlModeSerializer serialize:self] description];
 }
 
@@ -1850,9 +1850,9 @@
   return [DBTEAMPOLICIESPasswordStrengthPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESPasswordStrengthPolicySerializer serialize:self] description];
 }
 
@@ -2031,9 +2031,9 @@
   return [DBTEAMPOLICIESRolloutMethodSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESRolloutMethodSerializer serialize:self] description];
 }
 
@@ -2209,9 +2209,9 @@
   return [DBTEAMPOLICIESSharedFolderJoinPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESSharedFolderJoinPolicySerializer serialize:self] description];
 }
 
@@ -2382,9 +2382,9 @@
   return [DBTEAMPOLICIESSharedFolderMemberPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESSharedFolderMemberPolicySerializer serialize:self] description];
 }
 
@@ -2569,9 +2569,9 @@
   return [DBTEAMPOLICIESSharedLinkCreatePolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESSharedLinkCreatePolicySerializer serialize:self] description];
 }
 
@@ -2750,9 +2750,9 @@
   return [DBTEAMPOLICIESShowcaseDownloadPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESShowcaseDownloadPolicySerializer serialize:self] description];
 }
 
@@ -2923,9 +2923,9 @@
   return [DBTEAMPOLICIESShowcaseEnabledPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESShowcaseEnabledPolicySerializer serialize:self] description];
 }
 
@@ -3096,9 +3096,9 @@
   return [DBTEAMPOLICIESShowcaseExternalSharingPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESShowcaseExternalSharingPolicySerializer serialize:self] description];
 }
 
@@ -3270,9 +3270,9 @@
   return [DBTEAMPOLICIESSmartSyncPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESSmartSyncPolicySerializer serialize:self] description];
 }
 
@@ -3443,9 +3443,9 @@
   return [DBTEAMPOLICIESSmarterSmartSyncPolicyStateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESSmarterSmartSyncPolicyStateSerializer serialize:self] description];
 }
 
@@ -3630,9 +3630,9 @@
   return [DBTEAMPOLICIESSsoPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESSsoPolicySerializer serialize:self] description];
 }
 
@@ -3777,9 +3777,9 @@
   return [DBTEAMPOLICIESTeamMemberPoliciesSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESTeamMemberPoliciesSerializer serialize:self] description];
 }
 
@@ -3899,9 +3899,9 @@
   return [DBTEAMPOLICIESTeamSharingPoliciesSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESTeamSharingPoliciesSerializer serialize:self] description];
 }
 
@@ -4061,9 +4061,9 @@
   return [DBTEAMPOLICIESTwoStepVerificationPolicySerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESTwoStepVerificationPolicySerializer serialize:self] description];
 }
 
@@ -4248,9 +4248,9 @@
   return [DBTEAMPOLICIESTwoStepVerificationStateSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBTEAMPOLICIESTwoStepVerificationStateSerializer serialize:self] description];
 }
 

@@ -93,9 +93,9 @@
   return [DBCLOUDDOCSCloudDocsAccessErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSCloudDocsAccessErrorSerializer serialize:self] description];
 }
 
@@ -234,9 +234,9 @@
   return [DBCLOUDDOCSContentSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSContentSerializer serialize:self] description];
 }
 
@@ -382,9 +382,9 @@
   return [DBCLOUDDOCSContentPurposeSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSContentPurposeSerializer serialize:self] description];
 }
 
@@ -583,9 +583,9 @@
   return [DBCLOUDDOCSGenericErrorTagSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSGenericErrorTagSerializer serialize:self] description];
 }
 
@@ -729,9 +729,9 @@
   return [DBCLOUDDOCSGetContentArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSGetContentArgSerializer serialize:self] description];
 }
 
@@ -831,9 +831,9 @@
   return [DBCLOUDDOCSGetMetadataArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSGetMetadataArgSerializer serialize:self] description];
 }
 
@@ -934,9 +934,9 @@
   return [DBCLOUDDOCSGetMetadataErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSGetMetadataErrorSerializer serialize:self] description];
 }
 
@@ -1069,9 +1069,9 @@
   return [DBCLOUDDOCSGetMetadataResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSGetMetadataResultSerializer serialize:self] description];
 }
 
@@ -1234,9 +1234,9 @@
   return [DBCLOUDDOCSLockArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSLockArgSerializer serialize:self] description];
 }
 
@@ -1337,9 +1337,9 @@
   return [DBCLOUDDOCSLockResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSLockResultSerializer serialize:self] description];
 }
 
@@ -1446,9 +1446,9 @@
   return [DBCLOUDDOCSLockingErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSLockingErrorSerializer serialize:self] description];
 }
 
@@ -1583,9 +1583,9 @@
   return [DBCLOUDDOCSLockingErrorTagSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSLockingErrorTagSerializer serialize:self] description];
 }
 
@@ -1709,9 +1709,9 @@
   return [DBCLOUDDOCSRenameArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSRenameArgSerializer serialize:self] description];
 }
 
@@ -1818,9 +1818,9 @@
   return [DBCLOUDDOCSRenameErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSRenameErrorSerializer serialize:self] description];
 }
 
@@ -1955,9 +1955,9 @@
   return [DBCLOUDDOCSRenameErrorTagSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSRenameErrorTagSerializer serialize:self] description];
 }
 
@@ -2080,9 +2080,9 @@
   return [DBCLOUDDOCSRenameResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSRenameResultSerializer serialize:self] description];
 }
 
@@ -2182,9 +2182,9 @@
   return [DBCLOUDDOCSUnlockArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUnlockArgSerializer serialize:self] description];
 }
 
@@ -2279,9 +2279,9 @@
   return [DBCLOUDDOCSUnlockResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUnlockResultSerializer serialize:self] description];
 }
 
@@ -2389,9 +2389,9 @@
   return [DBCLOUDDOCSUpdateContentArgSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUpdateContentArgSerializer serialize:self] description];
 }
 
@@ -2623,9 +2623,9 @@
   return [DBCLOUDDOCSUpdateContentErrorSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUpdateContentErrorSerializer serialize:self] description];
 }
 
@@ -2785,9 +2785,9 @@
   return [DBCLOUDDOCSUpdateContentResultSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUpdateContentResultSerializer serialize:self] description];
 }
 
@@ -2888,9 +2888,9 @@
   return [DBCLOUDDOCSUserInfoSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUserInfoSerializer serialize:self] description];
 }
 
@@ -3002,9 +3002,9 @@
   return [DBCLOUDDOCSUserPermissionsSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSUserPermissionsSerializer serialize:self] description];
 }
 
@@ -3164,9 +3164,9 @@
   return [DBCLOUDDOCSGetMetadataErrorTagUnionSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSGetMetadataErrorTagUnionSerializer serialize:self] description];
 }
 
@@ -3357,9 +3357,9 @@
   return [DBCLOUDDOCSLockingErrorTagUnionSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSLockingErrorTagUnionSerializer serialize:self] description];
 }
 
@@ -3586,9 +3586,9 @@
   return [DBCLOUDDOCSRenameErrorTagUnionSerializer deserialize:dict];
 }
 
-#pragma mark - Description method
+#pragma mark - Debug Description method
 
-- (NSString *)description {
+- (NSString *)debugDescription {
   return [[DBCLOUDDOCSRenameErrorTagUnionSerializer serialize:self] description];
 }
 

@@ -71,6 +71,13 @@ typedef void (^DBOAuthCancelBlock)(void);
 ///
 - (BOOL)canPresentExternalApp:(NSURL *)url;
 
+/// Presents platform-specific loading UX indicating an async operation is ongoing and potentially blocking
+/// user interaction while loading.
+- (void)presentLoading;
+
+/// Dismisses loading UX.
+- (void)dismissLoading;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -28,7 +28,9 @@
 /// OAuth
 #import "DBOAuthManager.h"
 #import "DBOAuthResult.h"
+#import "DBOAuthResultCompletion.h"
 #import "DBSDKKeychain.h"
+#import "DBScopeRequest.h"
 #import "DBSharedApplicationProtocol.h"
 
 /// Resources

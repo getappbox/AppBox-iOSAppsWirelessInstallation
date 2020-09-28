@@ -8,6 +8,7 @@
 #import "DBAUTHTokenFromOAuth1Error.h"
 #import "DBAUTHTokenFromOAuth1Result.h"
 #import "DBAUTHUserAuthRoutes.h"
+#import "DBAccessToken+NSSecureCoding.h"
 #import "DBAppClient.h"
 #import "DBClientsManager+Protected.h"
 #import "DBRequestErrors.h"
@@ -48,19 +49,30 @@ static const char *kV1OSXAccountName = "Dropbox";
   });
 }
 
-+ (BOOL)storeValueWithKey:(NSString *)key value:(NSString *)value {
-  NSData *encoding = [value dataUsingEncoding:NSUTF8StringEncoding];
-  if (encoding != nil) {
-    return [self storeDataValueWithKey:key value:encoding];
++ (BOOL)storeAccessToken:(DBAccessToken *)accessToken {
+  NSData *data = [DBAccessToken covertTokenToData:accessToken];
+  if (data) {
+    return [self storeDataValueWithKey:accessToken.uid value:data];
   } else {
     return NO;
   }
 }
 
-+ (NSString *)retrieveTokenWithKey:(NSString *)key {
-  NSData *data = [self lookupTokenDataWithKey:key];
-  if (data != nil) {
-    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
++ (DBAccessToken *)retrieveTokenWithUid:(NSString *)uid {
+  NSData *data = [self lookupTokenDataWithKey:uid];
+  if (!data) {
+    return nil;
+  }
+
+  DBAccessToken *token = [DBAccessToken createTokenFromData:data];
+  if (token) {
+    return token;
+  }
+
+  // The token might be stored as a string by a previous version of SDK.
+  NSString *accessTokenString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  if (accessTokenString) {
+    return [DBAccessToken createWithLongLivedAccessToken:accessTokenString uid:uid];
   } else {
     return nil;
   }
@@ -85,8 +97,8 @@ static const char *kV1OSXAccountName = "Dropbox";
   return results;
 }
 
-+ (BOOL)deleteTokenWithKey:(NSString *)key {
-  NSMutableDictionary<id, id> *query = [DBSDKKeychain queryWithDict:@{(id)kSecAttrAccount : key}];
++ (BOOL)deleteTokenWithUid:(NSString *)uid {
+  NSMutableDictionary<id, id> *query = [DBSDKKeychain queryWithDict:@{(id)kSecAttrAccount : uid}];
   return SecItemDelete((__bridge CFDictionaryRef)query) == noErr;
 }
 
@@ -441,7 +453,7 @@ static const char *kV1OSXAccountName = "Dropbox";
   dispatch_group_notify(tokenConvertGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     if (shouldRetry == NO) {
       for (NSString *uid in tokenConversionResults) {
-        [[self class] storeValueWithKey:uid value:[tokenConversionResults objectForKey:uid]];
+        [self storeAccessToken:[DBAccessToken createWithLongLivedAccessToken:tokenConversionResults[uid] uid:uid]];
       }
       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
       [userDefaults setBool:YES forKey:[NSString stringWithFormat:kV1TokenMigrationOccurredKeyBase, appKey]];

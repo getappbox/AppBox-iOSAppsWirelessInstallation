@@ -42,11 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// argument wipeData should be set to false.
 @property (nonatomic, readonly) NSNumber *keepAccount;
 
-/// If provided, allows removed users to keep access to folders already
-/// explicitly shared with them (not via a group) when they are downgraded to a
-/// Basic account. Users will not retain access to folders that do not allow
-/// external sharing. In order to keep the sharing relationships, the arguments
-/// wipeData should be set to false and keepAccount should be set to true.
+/// If provided, allows removed users to keep access to Dropbox folders (not
+/// Dropbox Paper folders) already explicitly shared with them (not via a group)
+/// when they are downgraded to a Basic account. Users will not retain access to
+/// folders that do not allow external sharing. In order to keep the sharing
+/// relationships, the arguments wipeData should be set to false and keepAccount
+/// should be set to true.
 @property (nonatomic, readonly) NSNumber *retainTeamShares;
 
 #pragma mark - Constructors
@@ -67,11 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// their account that is not restricted to team members. In order to keep the
 /// account the argument wipeData should be set to false.
 /// @param retainTeamShares If provided, allows removed users to keep access to
-/// folders already explicitly shared with them (not via a group) when they are
-/// downgraded to a Basic account. Users will not retain access to folders that
-/// do not allow external sharing. In order to keep the sharing relationships,
-/// the arguments wipeData should be set to false and keepAccount should be set
-/// to true.
+/// Dropbox folders (not Dropbox Paper folders) already explicitly shared with
+/// them (not via a group) when they are downgraded to a Basic account. Users
+/// will not retain access to folders that do not allow external sharing. In
+/// order to keep the sharing relationships, the arguments wipeData should be
+/// set to false and keepAccount should be set to true.
 ///
 /// @return An initialized instance.
 ///

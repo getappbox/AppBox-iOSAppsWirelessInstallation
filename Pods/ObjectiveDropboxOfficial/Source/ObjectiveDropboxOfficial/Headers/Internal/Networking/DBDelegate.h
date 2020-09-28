@@ -45,10 +45,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithQueue:(nullable NSOperationQueue *)delegateQueue;
 
 ///
-/// Enqueues a handler to be executed periodically to retrieve information on the progress of the supplied
-/// `NSURLSessionTask` task for the corresponding Upload-style request.
+/// Enqueues a handler to be executed periodically to retrieve information on the progress of the
+/// `NSURLSessionTask` identified by the supplied task identifier for the corresponding Upload-style request.
 ///
-/// @param task The `NSURLSessionTask` task associated with the API request.
+/// @param identifier The identifier of the `NSURLSessionTask` task associated with the API request.
 /// @param session The `NSURLSession` session associated with the API request.
 /// @param handler The progress block to be executed in the event of a request update. The first argument is the number
 /// of bytes downloaded. The second argument is the number of total bytes downloaded. And the third argument is the
@@ -56,61 +56,61 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param handlerQueue The operation queue on which to execute progress handler code. If nil, then the progress queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addProgressHandler:(NSURLSessionTask *)task
-                   session:(NSURLSession *)session
-           progressHandler:(DBProgressBlock)handler
-      progressHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
+- (void)addProgressHandlerForTaskWithIdentifier:(NSUInteger)identifier
+                                        session:(NSURLSession *)session
+                                progressHandler:(DBProgressBlock)handler
+                           progressHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 #pragma mark - Add RPC-style handlers
 
 ///
-/// Enqueues a handler to be executed upon completion of the supplied `NSURLSessionTask` task for the corresponding
-/// RPC-style request.
+/// Enqueues a handler to be executed upon completion of the `NSURLSessionTask` identified by the supplied
+/// task identifier for the corresponding RPC-style request.
 ///
-/// @param task The `NSURLSessionTask` task associated with the API request.
+/// @param identifier The identifier of the `NSURLSessionTask` task associated with the API request.
 /// @param session The `NSURLSession` session associated with the API request.
 /// @param handler The handler block to be executed in the event of a successful or unsuccessful network request.
 /// @param handlerQueue The operation queue on which to execute response handler code. If nil, then the response queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addRpcResponseHandler:(NSURLSessionTask *)task
-                      session:(NSURLSession *)session
-              responseHandler:(DBRpcResponseBlockStorage)handler
-         responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
+- (void)addRpcResponseHandlerForTaskWithIdentifier:(NSUInteger)identifier
+                                           session:(NSURLSession *)session
+                                   responseHandler:(DBRpcResponseBlockStorage)handler
+                              responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 #pragma mark - Add Upload-style handlers
 
 ///
-/// Enqueues a handler to be executed upon completion of the supplied `NSURLSessionTask` task for the corresponding
-/// Upload-style request.
+/// Enqueues a handler to be executed upon completion of the `NSURLSessionTask` task identified by the supplied
+/// task identifier for the corresponding Upload-style request.
 ///
-/// @param task The `NSURLSessionTask` task associated with the API request.
+/// @param identifier The identifier of the `NSURLSessionTask` task associated with the API request.
 /// @param session The `NSURLSession` session associated with the API request.
 /// @param handler The handler block to be executed in the event of a successful or unsuccessful network request.
 /// @param handlerQueue The operation queue on which to execute response handler code. If nil, then the response queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addUploadResponseHandler:(NSURLSessionTask *)task
-                         session:(NSURLSession *)session
-                 responseHandler:(DBUploadResponseBlockStorage)handler
-            responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
+- (void)addUploadResponseHandlerForTaskWithIdentifier:(NSUInteger)identifier
+                                              session:(NSURLSession *)session
+                                      responseHandler:(DBUploadResponseBlockStorage)handler
+                                 responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 #pragma mark - Add Download-style handlers
 
 ///
-/// Enqueues a handler to be executed upon completion of the supplied `NSURLSessionTask` task for the corresponding
-/// Download-style request.
+/// Enqueues a handler to be executed upon completion of the `NSURLSessionTask` task identified by the supplied
+/// task identifier for the corresponding Download-style request.
 ///
-/// @param task The `NSURLSessionTask` task associated with the API request.
+/// @param identifier The identifier of the `NSURLSessionTask` task associated with the API request.
 /// @param session The `NSURLSession` session associated with the API request.
 /// @param handler The handler block to be executed in the event of a successful or unsuccessful network request.
 /// @param handlerQueue The operation queue on which to execute response handler code. If nil, then the response queue
 /// is the queue with which the delegate object was instantiated.
 ///
-- (void)addDownloadResponseHandler:(NSURLSessionTask *)task
-                           session:(NSURLSession *)session
-                   responseHandler:(DBDownloadResponseBlockStorage)handler
-              responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
+- (void)addDownloadResponseHandlerForTaskWithIdentifier:(NSUInteger)identifier
+                                                session:(NSURLSession *)session
+                                        responseHandler:(DBDownloadResponseBlockStorage)handler
+                                   responseHandlerQueue:(nullable NSOperationQueue *)handlerQueue;
 
 @end
 
