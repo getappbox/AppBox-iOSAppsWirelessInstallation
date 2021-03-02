@@ -12,7 +12,7 @@
 
 +(void)setFirstTimeSettings{
     if ([UserData isFirstTime]) {
-        [UserData setIsFirstTime:NO];
+        [UserData setIsFirstTime:YES];
         [UserData setUploadBitcode:YES];
         [UserData setUploadSymbols:YES];
         [UserData setCompileBitcode:YES];
