@@ -8,7 +8,8 @@
 # AppBox - iOS Apps Wireless Installation 
 AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
-**FLUX WARNING** - Release in progress, expect things in master to be broken. So, download only [stable release](https://getappbox.com/download).
+#### ⚠️ WARNING
+Since 2 March 2021, Dropbox makes some changes that break all existing apps uploaded using the AppBox version 2.9.1 or earlier. So, Please use the [latest version of AppBox](https://getappbox.com/download/) if you are facing any installation issues. Please check more details [here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues/217).
 
 
 # Features
