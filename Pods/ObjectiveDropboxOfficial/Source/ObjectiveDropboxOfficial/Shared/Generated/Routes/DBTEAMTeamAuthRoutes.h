@@ -1369,16 +1369,17 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("propertiesTemplateUpdate is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's user activity.
+/// DEPRECATED: Retrieves reporting data about a team's user activity.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetActivityReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetActivityReport *, DBTEAMDateRangeError *> *)reportsGetActivity;
+- (DBRpcTask<DBTEAMGetActivityReport *, DBTEAMDateRangeError *> *)reportsGetActivity
+    __deprecated_msg("reportsGetActivity is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's user activity.
+/// DEPRECATED: Retrieves reporting data about a team's user activity.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1388,19 +1389,21 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// `DBTEAMDateRangeError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGetActivityReport *, DBTEAMDateRangeError *> *)reportsGetActivity:(nullable NSDate *)startDate
-                                                                             endDate:(nullable NSDate *)endDate;
+                                                                             endDate:(nullable NSDate *)endDate
+    __deprecated_msg("reportsGetActivity is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's linked devices.
+/// DEPRECATED: Retrieves reporting data about a team's linked devices.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetDevicesReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetDevicesReport *, DBTEAMDateRangeError *> *)reportsGetDevices;
+- (DBRpcTask<DBTEAMGetDevicesReport *, DBTEAMDateRangeError *> *)reportsGetDevices
+    __deprecated_msg("reportsGetDevices is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's linked devices.
+/// DEPRECATED: Retrieves reporting data about a team's linked devices.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1410,19 +1413,21 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// `DBTEAMDateRangeError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGetDevicesReport *, DBTEAMDateRangeError *> *)reportsGetDevices:(nullable NSDate *)startDate
-                                                                           endDate:(nullable NSDate *)endDate;
+                                                                           endDate:(nullable NSDate *)endDate
+    __deprecated_msg("reportsGetDevices is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's membership.
+/// DEPRECATED: Retrieves reporting data about a team's membership.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetMembershipReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetMembershipReport *, DBTEAMDateRangeError *> *)reportsGetMembership;
+- (DBRpcTask<DBTEAMGetMembershipReport *, DBTEAMDateRangeError *> *)reportsGetMembership
+    __deprecated_msg("reportsGetMembership is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's membership.
+/// DEPRECATED: Retrieves reporting data about a team's membership.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1432,19 +1437,21 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// `DBTEAMDateRangeError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGetMembershipReport *, DBTEAMDateRangeError *> *)reportsGetMembership:(nullable NSDate *)startDate
-                                                                                 endDate:(nullable NSDate *)endDate;
+                                                                                 endDate:(nullable NSDate *)endDate
+    __deprecated_msg("reportsGetMembership is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's storage usage.
+/// DEPRECATED: Retrieves reporting data about a team's storage usage.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetStorageReport` object on success or a
 /// `DBTEAMDateRangeError` object on failure.
 ///
-- (DBRpcTask<DBTEAMGetStorageReport *, DBTEAMDateRangeError *> *)reportsGetStorage;
+- (DBRpcTask<DBTEAMGetStorageReport *, DBTEAMDateRangeError *> *)reportsGetStorage
+    __deprecated_msg("reportsGetStorage is deprecated.");
 
 ///
-/// Retrieves reporting data about a team's storage usage.
+/// DEPRECATED: Retrieves reporting data about a team's storage usage.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1454,7 +1461,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 /// `DBTEAMDateRangeError` object on failure.
 ///
 - (DBRpcTask<DBTEAMGetStorageReport *, DBTEAMDateRangeError *> *)reportsGetStorage:(nullable NSDate *)startDate
-                                                                           endDate:(nullable NSDate *)endDate;
+                                                                           endDate:(nullable NSDate *)endDate
+    __deprecated_msg("reportsGetStorage is deprecated.");
 
 ///
 /// Sets an archived team folder's status to active. Permission : Team member file access.

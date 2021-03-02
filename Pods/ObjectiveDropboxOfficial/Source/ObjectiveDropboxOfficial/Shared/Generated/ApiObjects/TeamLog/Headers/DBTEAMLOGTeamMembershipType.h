@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGTeamMembershipType` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag){
     /// (no description).
-    DBTEAMLOGTeamMembershipTypeFull,
+    DBTEAMLOGTeamMembershipTypeFree,
 
     /// (no description).
-    DBTEAMLOGTeamMembershipTypeFree,
+    DBTEAMLOGTeamMembershipTypeFull,
 
     /// (no description).
     DBTEAMLOGTeamMembershipTypeOther,
@@ -45,18 +45,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "full".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithFull;
-
-///
 /// Initializes union class with tag state of "free".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithFree;
+
+///
+/// Initializes union class with tag state of "full".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithFull;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -70,18 +70,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTeamMembershipTypeTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "full".
-///
-/// @return Whether the union's current tag state has value "full".
-///
-- (BOOL)isFull;
-
-///
 /// Retrieves whether the union's current tag state has value "free".
 ///
 /// @return Whether the union's current tag state has value "free".
 ///
 - (BOOL)isFree;
+
+///
+/// Retrieves whether the union's current tag state has value "full".
+///
+/// @return Whether the union's current tag state has value "full".
+///
+- (BOOL)isFull;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

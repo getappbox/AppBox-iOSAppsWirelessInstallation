@@ -33,7 +33,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMemberSelectorTag){
     /// Dropbox account, team member, or group ID of member.
     DBSHARINGMemberSelectorDropboxId,
 
-    /// E-mail address of member.
+    /// Email address of member.
     DBSHARINGMemberSelectorEmail,
 
     /// (no description).
@@ -49,7 +49,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMemberSelectorTag){
 /// exception will be raised.
 @property (nonatomic, readonly, copy) NSString *dropboxId;
 
-/// E-mail address of member. @note Ensure the `isEmail` method returns true
+/// Email address of member. @note Ensure the `isEmail` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *email;
 
@@ -70,9 +70,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGMemberSelectorTag){
 ///
 /// Initializes union class with tag state of "email".
 ///
-/// Description of the "email" tag state: E-mail address of member.
+/// Description of the "email" tag state: Email address of member.
 ///
-/// @param email E-mail address of member.
+/// @param email Email address of member.
 ///
 /// @return An initialized instance.
 ///

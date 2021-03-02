@@ -44,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// closed, it will not accept any file submissions, but it can be opened later.
 @property (nonatomic, readonly) NSNumber *open;
 
+/// A description of the file request.
+@property (nonatomic, readonly, copy, nullable) NSString *description_;
+
 #pragma mark - Constructors
 
 ///
@@ -58,13 +61,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param open Whether or not the file request should be open. If the file
 /// request is closed, it will not accept any file submissions, but it can be
 /// opened later.
+/// @param description_ A description of the file request.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTitle:(NSString *)title
                   destination:(NSString *)destination
                      deadline:(nullable DBFILEREQUESTSFileRequestDeadline *)deadline
-                         open:(nullable NSNumber *)open;
+                         open:(nullable NSNumber *)open
+                 description_:(nullable NSString *)description_;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

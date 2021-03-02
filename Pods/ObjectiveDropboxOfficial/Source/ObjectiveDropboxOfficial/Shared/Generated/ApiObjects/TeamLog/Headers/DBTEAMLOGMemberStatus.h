@@ -29,22 +29,22 @@ NS_ASSUME_NONNULL_BEGIN
 /// with which the `DBTEAMLOGMemberStatus` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
     /// (no description).
-    DBTEAMLOGMemberStatusNotJoined,
+    DBTEAMLOGMemberStatusActive,
 
     /// (no description).
     DBTEAMLOGMemberStatusInvited,
 
     /// (no description).
-    DBTEAMLOGMemberStatusActive,
+    DBTEAMLOGMemberStatusMovedToAnotherTeam,
 
     /// (no description).
-    DBTEAMLOGMemberStatusSuspended,
+    DBTEAMLOGMemberStatusNotJoined,
 
     /// (no description).
     DBTEAMLOGMemberStatusRemoved,
 
     /// (no description).
-    DBTEAMLOGMemberStatusMovedToAnotherTeam,
+    DBTEAMLOGMemberStatusSuspended,
 
     /// (no description).
     DBTEAMLOGMemberStatusOther,
@@ -57,11 +57,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "not_joined".
+/// Initializes union class with tag state of "active".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithNotJoined;
+- (instancetype)initWithActive;
 
 ///
 /// Initializes union class with tag state of "invited".
@@ -71,18 +71,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
 - (instancetype)initWithInvited;
 
 ///
-/// Initializes union class with tag state of "active".
+/// Initializes union class with tag state of "moved_to_another_team".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithActive;
+- (instancetype)initWithMovedToAnotherTeam;
 
 ///
-/// Initializes union class with tag state of "suspended".
+/// Initializes union class with tag state of "not_joined".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSuspended;
+- (instancetype)initWithNotJoined;
 
 ///
 /// Initializes union class with tag state of "removed".
@@ -92,11 +92,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
 - (instancetype)initWithRemoved;
 
 ///
-/// Initializes union class with tag state of "moved_to_another_team".
+/// Initializes union class with tag state of "suspended".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithMovedToAnotherTeam;
+- (instancetype)initWithSuspended;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -110,11 +110,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "not_joined".
+/// Retrieves whether the union's current tag state has value "active".
 ///
-/// @return Whether the union's current tag state has value "not_joined".
+/// @return Whether the union's current tag state has value "active".
 ///
-- (BOOL)isNotJoined;
+- (BOOL)isActive;
 
 ///
 /// Retrieves whether the union's current tag state has value "invited".
@@ -124,18 +124,20 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
 - (BOOL)isInvited;
 
 ///
-/// Retrieves whether the union's current tag state has value "active".
+/// Retrieves whether the union's current tag state has value
+/// "moved_to_another_team".
 ///
-/// @return Whether the union's current tag state has value "active".
+/// @return Whether the union's current tag state has value
+/// "moved_to_another_team".
 ///
-- (BOOL)isActive;
+- (BOOL)isMovedToAnotherTeam;
 
 ///
-/// Retrieves whether the union's current tag state has value "suspended".
+/// Retrieves whether the union's current tag state has value "not_joined".
 ///
-/// @return Whether the union's current tag state has value "suspended".
+/// @return Whether the union's current tag state has value "not_joined".
 ///
-- (BOOL)isSuspended;
+- (BOOL)isNotJoined;
 
 ///
 /// Retrieves whether the union's current tag state has value "removed".
@@ -145,13 +147,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberStatusTag){
 - (BOOL)isRemoved;
 
 ///
-/// Retrieves whether the union's current tag state has value
-/// "moved_to_another_team".
+/// Retrieves whether the union's current tag state has value "suspended".
 ///
-/// @return Whether the union's current tag state has value
-/// "moved_to_another_team".
+/// @return Whether the union's current tag state has value "suspended".
 ///
-- (BOOL)isMovedToAnotherTeam;
+- (BOOL)isSuspended;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

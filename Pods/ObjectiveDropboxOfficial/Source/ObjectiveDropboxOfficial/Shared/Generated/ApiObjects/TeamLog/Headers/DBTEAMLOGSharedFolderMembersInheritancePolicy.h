@@ -32,10 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// `DBTEAMLOGSharedFolderMembersInheritancePolicy` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyTag){
     /// (no description).
-    DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers,
+    DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers,
 
     /// (no description).
-    DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers,
+    DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers,
 
     /// (no description).
     DBTEAMLOGSharedFolderMembersInheritancePolicyOther,
@@ -48,18 +48,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyT
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "inherit_members".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithInheritMembers;
-
-///
 /// Initializes union class with tag state of "dont_inherit_members".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDontInheritMembers;
+
+///
+/// Initializes union class with tag state of "inherit_members".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInheritMembers;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -73,13 +73,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyT
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "inherit_members".
-///
-/// @return Whether the union's current tag state has value "inherit_members".
-///
-- (BOOL)isInheritMembers;
-
-///
 /// Retrieves whether the union's current tag state has value
 /// "dont_inherit_members".
 ///
@@ -87,6 +80,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharedFolderMembersInheritancePolicyT
 /// "dont_inherit_members".
 ///
 - (BOOL)isDontInheritMembers;
+
+///
+/// Retrieves whether the union's current tag state has value "inherit_members".
+///
+/// @return Whether the union's current tag state has value "inherit_members".
+///
+- (BOOL)isInheritMembers;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

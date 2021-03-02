@@ -29,10 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// with which the `DBTEAMLOGInviteMethod` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
     /// (no description).
+    DBTEAMLOGInviteMethodAutoApprove,
+
+    /// (no description).
     DBTEAMLOGInviteMethodInviteLink,
 
     /// (no description).
-    DBTEAMLOGInviteMethodAutoApprove,
+    DBTEAMLOGInviteMethodMemberInvite,
 
     /// (no description).
     DBTEAMLOGInviteMethodMovedFromAnotherTeam,
@@ -48,6 +51,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
 #pragma mark - Constructors
 
 ///
+/// Initializes union class with tag state of "auto_approve".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAutoApprove;
+
+///
 /// Initializes union class with tag state of "invite_link".
 ///
 /// @return An initialized instance.
@@ -55,11 +65,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
 - (instancetype)initWithInviteLink;
 
 ///
-/// Initializes union class with tag state of "auto_approve".
+/// Initializes union class with tag state of "member_invite".
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAutoApprove;
+- (instancetype)initWithMemberInvite;
 
 ///
 /// Initializes union class with tag state of "moved_from_another_team".
@@ -80,6 +90,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
 #pragma mark - Tag state methods
 
 ///
+/// Retrieves whether the union's current tag state has value "auto_approve".
+///
+/// @return Whether the union's current tag state has value "auto_approve".
+///
+- (BOOL)isAutoApprove;
+
+///
 /// Retrieves whether the union's current tag state has value "invite_link".
 ///
 /// @return Whether the union's current tag state has value "invite_link".
@@ -87,11 +104,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGInviteMethodTag){
 - (BOOL)isInviteLink;
 
 ///
-/// Retrieves whether the union's current tag state has value "auto_approve".
+/// Retrieves whether the union's current tag state has value "member_invite".
 ///
-/// @return Whether the union's current tag state has value "auto_approve".
+/// @return Whether the union's current tag state has value "member_invite".
 ///
-- (BOOL)isAutoApprove;
+- (BOOL)isMemberInvite;
 
 ///
 /// Retrieves whether the union's current tag state has value

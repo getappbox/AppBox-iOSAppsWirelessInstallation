@@ -27,10 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// If true, `dCopyBatch` will copy contents in shared folder, otherwise
-/// `cantCopySharedFolder` in `DBFILESRelocationError` will be returned if
-/// `fromPath` in `DBFILESRelocationPath` contains shared folder. This field is
-/// always true for `moveBatch`.
+/// This flag has no effect.
 @property (nonatomic, readonly) NSNumber *allowSharedFolder;
 
 /// Allow moves by owner even if it would result in an ownership transfer for
@@ -46,10 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// RelocationPath.
 /// @param autorename If there's a conflict with any file, have the Dropbox
 /// server try to autorename that file to avoid the conflict.
-/// @param allowSharedFolder If true, `dCopyBatch` will copy contents in shared
-/// folder, otherwise `cantCopySharedFolder` in `DBFILESRelocationError` will be
-/// returned if `fromPath` in `DBFILESRelocationPath` contains shared folder.
-/// This field is always true for `moveBatch`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result
 /// in an ownership transfer for the content being moved. This does not apply to
 /// copies.

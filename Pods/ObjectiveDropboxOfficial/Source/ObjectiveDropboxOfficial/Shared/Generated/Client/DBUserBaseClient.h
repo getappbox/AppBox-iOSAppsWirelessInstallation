@@ -7,7 +7,6 @@
 #import "DBACCOUNTUserAuthRoutes.h"
 #import "DBAUTHUserAuthRoutes.h"
 #import "DBCHECKUserAuthRoutes.h"
-#import "DBCLOUDDOCSUserAuthRoutes.h"
 #import "DBCONTACTSUserAuthRoutes.h"
 #import "DBFILEPROPERTIESUserAuthRoutes.h"
 #import "DBFILEREQUESTSUserAuthRoutes.h"
@@ -42,9 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Routes within the `check` namespace.
 @property (nonatomic, readonly) DBCHECKUserAuthRoutes *checkRoutes;
-
-/// Routes within the `cloudDocs` namespace.
-@property (nonatomic, readonly) DBCLOUDDOCSUserAuthRoutes *cloudDocsRoutes;
 
 /// Routes within the `contacts` namespace.
 @property (nonatomic, readonly) DBCONTACTSUserAuthRoutes *contactsRoutes;

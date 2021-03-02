@@ -105,6 +105,7 @@
 @class DBFILESSearchMatchV2;
 @class DBFILESSearchMode;
 @class DBFILESSearchOptions;
+@class DBFILESSearchOrderBy;
 @class DBFILESSearchResult;
 @class DBFILESSearchV2Result;
 @class DBFILESSharedLink;
@@ -127,7 +128,9 @@
 @class DBFILESUploadSessionFinishError;
 @class DBFILESUploadSessionLookupError;
 @class DBFILESUploadSessionOffsetError;
+@class DBFILESUploadSessionStartError;
 @class DBFILESUploadSessionStartResult;
+@class DBFILESUploadSessionType;
 @class DBFILESUploadWriteFailed;
 @class DBFILESWriteError;
 @class DBFILESWriteMode;
@@ -299,8 +302,7 @@ alphaUploadStream:(NSString *)path
 /// Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
 /// will be copied.
 ///
-/// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
-/// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
@@ -330,8 +332,7 @@ alphaUploadStream:(NSString *)path
 /// DEPRECATED: Copy a file or folder to a different location in the user's Dropbox. If the source path is a folder all
 /// its contents will be copied.
 ///
-/// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
-/// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
@@ -377,11 +378,9 @@ alphaUploadStream:(NSString *)path
                                                                   autorename:(nullable NSNumber *)autorename;
 
 ///
-/// DEPRECATED: Copy multiple files or folders to different locations at once in the user's Dropbox. If
-/// `allowSharedFolder` in `DBFILESRelocationBatchArg` is false, this route is atomic. If one entry fails, the whole
-/// transaction will abort. If `allowSharedFolder` in `DBFILESRelocationBatchArg` is true, atomicity is not guaranteed,
-/// but it allows you to copy the contents of shared folders to new locations. This route will return job ID immediately
-/// and do the async copy job in background. Please use `dCopyBatchCheck` to check the job status.
+/// DEPRECATED: Copy multiple files or folders to different locations at once in the user's Dropbox. This route will
+/// return job ID immediately and do the async copy job in background. Please use `dCopyBatchCheck` to check the job
+/// status.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESRelocationBatchLaunch` object on success or
@@ -391,15 +390,11 @@ alphaUploadStream:(NSString *)path
     __deprecated_msg("dCopyBatch is deprecated. Use dCopyBatch.");
 
 ///
-/// DEPRECATED: Copy multiple files or folders to different locations at once in the user's Dropbox. If
-/// `allowSharedFolder` in `DBFILESRelocationBatchArg` is false, this route is atomic. If one entry fails, the whole
-/// transaction will abort. If `allowSharedFolder` in `DBFILESRelocationBatchArg` is true, atomicity is not guaranteed,
-/// but it allows you to copy the contents of shared folders to new locations. This route will return job ID immediately
-/// and do the async copy job in background. Please use `dCopyBatchCheck` to check the job status.
+/// DEPRECATED: Copy multiple files or folders to different locations at once in the user's Dropbox. This route will
+/// return job ID immediately and do the async copy job in background. Please use `dCopyBatchCheck` to check the job
+/// status.
 ///
-/// @param allowSharedFolder If true, `dCopyBatch` will copy contents in shared folder, otherwise `cantCopySharedFolder`
-/// in `DBFILESRelocationError` will be returned if `fromPath` in `DBFILESRelocationPath` contains shared folder. This
-/// field is always true for `moveBatch`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
 ///
@@ -1766,8 +1761,7 @@ listRevisions:(NSString *)path
 /// Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all its contents
 /// will be moved. Note that we do not currently support case-only renaming.
 ///
-/// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
-/// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
@@ -1797,8 +1791,7 @@ listRevisions:(NSString *)path
 /// DEPRECATED: Move a file or folder to a different location in the user's Dropbox. If the source path is a folder all
 /// its contents will be moved.
 ///
-/// @param allowSharedFolder If true, `dCopy` will copy contents in shared folder, otherwise `cantCopySharedFolder` in
-/// `DBFILESRelocationError` will be returned if fromPath contains shared folder. This field is always true for `move`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param autorename If there's a conflict, have the Dropbox server try to autorename the file to avoid the conflict.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
@@ -1860,9 +1853,7 @@ listRevisions:(NSString *)path
 /// return job ID immediately and do the async moving job in background. Please use `moveBatchCheck` to check the job
 /// status.
 ///
-/// @param allowSharedFolder If true, `dCopyBatch` will copy contents in shared folder, otherwise `cantCopySharedFolder`
-/// in `DBFILESRelocationError` will be returned if `fromPath` in `DBFILESRelocationPath` contains shared folder. This
-/// field is always true for `moveBatch`.
+/// @param allowSharedFolder This flag has no effect.
 /// @param allowOwnershipTransfer Allow moves by owner even if it would result in an ownership transfer for the content
 /// being moved. This does not apply to copies.
 ///
@@ -1900,8 +1891,9 @@ listRevisions:(NSString *)path
     __deprecated_msg("moveBatchCheck is deprecated. Use moveBatchCheck.");
 
 ///
-/// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). Note: This endpoint
-/// is only available for Dropbox Business apps.
+/// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). If the given file or
+/// folder is not yet deleted, this route will first delete it. It is possible for this route to successfully delete,
+/// then fail to permanently delete. Note: This endpoint is only available for Dropbox Business apps.
 ///
 /// @param path Path in the user's Dropbox to delete.
 ///
@@ -1911,8 +1903,9 @@ listRevisions:(NSString *)path
 - (DBRpcTask<DBNilObject *, DBFILESDeleteError *> *)permanentlyDelete:(NSString *)path;
 
 ///
-/// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). Note: This endpoint
-/// is only available for Dropbox Business apps.
+/// Permanently delete the file or folder at a given path (see https://www.dropbox.com/en/help/40). If the given file or
+/// folder is not yet deleted, this route will first delete it. It is possible for this route to successfully delete,
+/// then fail to permanently delete. Note: This endpoint is only available for Dropbox Business apps.
 ///
 /// @param path Path in the user's Dropbox to delete.
 /// @param parentRev Perform delete if given "rev" matches the existing file's latest "rev". This field does not support
@@ -2169,7 +2162,8 @@ updatePropertyGroups:(NSArray<DBFILEPROPERTIESPropertyGroupUpdate *> *)updatePro
 /// @param propertyGroups List of custom properties to add to file.
 /// @param strictConflict Be more strict about how each WriteMode detects conflict. For example, always return a
 /// conflict error when mode = `update` in `DBFILESWriteMode` and the given "rev" doesn't match the existing file's
-/// "rev", even if the existing file has been deleted.
+/// "rev", even if the existing file has been deleted. This also forces a conflict even when the target path refers to a
+/// file with identical contents.
 /// @param inputUrl The file to upload, as an NSString * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
@@ -2218,7 +2212,8 @@ strictConflict:(nullable NSNumber *)strictConflict
 /// @param propertyGroups List of custom properties to add to file.
 /// @param strictConflict Be more strict about how each WriteMode detects conflict. For example, always return a
 /// conflict error when mode = `update` in `DBFILESWriteMode` and the given "rev" doesn't match the existing file's
-/// "rev", even if the existing file has been deleted.
+/// "rev", even if the existing file has been deleted. This also forces a conflict even when the target path refers to a
+/// file with identical contents.
 /// @param inputData The file to upload, as an NSData * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
@@ -2267,7 +2262,8 @@ strictConflict:(nullable NSNumber *)strictConflict
 /// @param propertyGroups List of custom properties to add to file.
 /// @param strictConflict Be more strict about how each WriteMode detects conflict. For example, always return a
 /// conflict error when mode = `update` in `DBFILESWriteMode` and the given "rev" doesn't match the existing file's
-/// "rev", even if the existing file has been deleted.
+/// "rev", even if the existing file has been deleted. This also forces a conflict even when the target path refers to a
+/// file with identical contents.
 /// @param inputStream The file to upload, as an NSInputStream * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESFileMetadata` object on success or a
@@ -2554,14 +2550,24 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// creation will return a `notFound` in `DBFILESUploadSessionLookupError`. Calls to this endpoint will count as data
 /// transport calls for any Dropbox Business teams with a limit on the number of data transport calls allowed per month.
 /// For more information, see the Data transport limit page
-/// https://www.dropbox.com/developers/reference/data-transport-limit.
+/// https://www.dropbox.com/developers/reference/data-transport-limit. By default, upload sessions require you to send
+/// content of the file in sequential order via consecutive `uploadSessionStart`, `uploadSessionAppend`,
+/// `uploadSessionFinish` calls. For better performance, you can instead optionally use a `concurrent` in
+/// `DBFILESUploadSessionType` upload session. To start a new concurrent session, set `sessionType` in
+/// `DBFILESUploadSessionStartArg` to `concurrent` in `DBFILESUploadSessionType`. After that, you can send file data in
+/// concurrent `uploadSessionAppend` requests. Finally finish the session with `uploadSessionFinish`. There are couple
+/// of constraints with concurrent sessions to make them work. You can not send data with `uploadSessionStart` or
+/// `uploadSessionFinish` call, only with `uploadSessionAppend` call. Also data uploaded in `uploadSessionAppend` call
+/// must be multiple of 4194304 bytes (except for last `uploadSessionAppend` with `close` in
+/// `DBFILESUploadSessionStartArg` to true, that may contain any remaining data).
 ///
 /// @param inputUrl The file to upload, as an NSString * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartResult` object on success
-/// or a `void` object on failure.
+/// or a `DBFILESUploadSessionStartError` object on failure.
 ///
-- (DBUploadTask<DBFILESUploadSessionStartResult *, DBNilObject *> *)uploadSessionStartUrl:(NSString *)inputUrl;
+- (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)uploadSessionStartUrl:
+    (NSString *)inputUrl;
 
 ///
 /// Upload sessions allow you to upload a single file in one or more requests, for example where the size of the file is
@@ -2573,17 +2579,30 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// creation will return a `notFound` in `DBFILESUploadSessionLookupError`. Calls to this endpoint will count as data
 /// transport calls for any Dropbox Business teams with a limit on the number of data transport calls allowed per month.
 /// For more information, see the Data transport limit page
-/// https://www.dropbox.com/developers/reference/data-transport-limit.
+/// https://www.dropbox.com/developers/reference/data-transport-limit. By default, upload sessions require you to send
+/// content of the file in sequential order via consecutive `uploadSessionStart`, `uploadSessionAppend`,
+/// `uploadSessionFinish` calls. For better performance, you can instead optionally use a `concurrent` in
+/// `DBFILESUploadSessionType` upload session. To start a new concurrent session, set `sessionType` in
+/// `DBFILESUploadSessionStartArg` to `concurrent` in `DBFILESUploadSessionType`. After that, you can send file data in
+/// concurrent `uploadSessionAppend` requests. Finally finish the session with `uploadSessionFinish`. There are couple
+/// of constraints with concurrent sessions to make them work. You can not send data with `uploadSessionStart` or
+/// `uploadSessionFinish` call, only with `uploadSessionAppend` call. Also data uploaded in `uploadSessionAppend` call
+/// must be multiple of 4194304 bytes (except for last `uploadSessionAppend` with `close` in
+/// `DBFILESUploadSessionStartArg` to true, that may contain any remaining data).
 ///
 /// @param close If true, the current session will be closed, at which point you won't be able to call
 /// `uploadSessionAppend` anymore with the current session.
+/// @param sessionType Type of upload session you want to start. If not specified, default is `sequential` in
+/// `DBFILESUploadSessionType`.
 /// @param inputUrl The file to upload, as an NSString * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartResult` object on success
-/// or a `void` object on failure.
+/// or a `DBFILESUploadSessionStartError` object on failure.
 ///
-- (DBUploadTask<DBFILESUploadSessionStartResult *, DBNilObject *> *)uploadSessionStartUrl:(nullable NSNumber *)close
-                                                                                 inputUrl:(NSString *)inputUrl;
+- (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)
+uploadSessionStartUrl:(nullable NSNumber *)close
+          sessionType:(nullable DBFILESUploadSessionType *)sessionType
+             inputUrl:(NSString *)inputUrl;
 
 ///
 /// Upload sessions allow you to upload a single file in one or more requests, for example where the size of the file is
@@ -2595,14 +2614,24 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// creation will return a `notFound` in `DBFILESUploadSessionLookupError`. Calls to this endpoint will count as data
 /// transport calls for any Dropbox Business teams with a limit on the number of data transport calls allowed per month.
 /// For more information, see the Data transport limit page
-/// https://www.dropbox.com/developers/reference/data-transport-limit.
+/// https://www.dropbox.com/developers/reference/data-transport-limit. By default, upload sessions require you to send
+/// content of the file in sequential order via consecutive `uploadSessionStart`, `uploadSessionAppend`,
+/// `uploadSessionFinish` calls. For better performance, you can instead optionally use a `concurrent` in
+/// `DBFILESUploadSessionType` upload session. To start a new concurrent session, set `sessionType` in
+/// `DBFILESUploadSessionStartArg` to `concurrent` in `DBFILESUploadSessionType`. After that, you can send file data in
+/// concurrent `uploadSessionAppend` requests. Finally finish the session with `uploadSessionFinish`. There are couple
+/// of constraints with concurrent sessions to make them work. You can not send data with `uploadSessionStart` or
+/// `uploadSessionFinish` call, only with `uploadSessionAppend` call. Also data uploaded in `uploadSessionAppend` call
+/// must be multiple of 4194304 bytes (except for last `uploadSessionAppend` with `close` in
+/// `DBFILESUploadSessionStartArg` to true, that may contain any remaining data).
 ///
 /// @param inputData The file to upload, as an NSData * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartResult` object on success
-/// or a `void` object on failure.
+/// or a `DBFILESUploadSessionStartError` object on failure.
 ///
-- (DBUploadTask<DBFILESUploadSessionStartResult *, DBNilObject *> *)uploadSessionStartData:(NSData *)inputData;
+- (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)uploadSessionStartData:
+    (NSData *)inputData;
 
 ///
 /// Upload sessions allow you to upload a single file in one or more requests, for example where the size of the file is
@@ -2614,17 +2643,30 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// creation will return a `notFound` in `DBFILESUploadSessionLookupError`. Calls to this endpoint will count as data
 /// transport calls for any Dropbox Business teams with a limit on the number of data transport calls allowed per month.
 /// For more information, see the Data transport limit page
-/// https://www.dropbox.com/developers/reference/data-transport-limit.
+/// https://www.dropbox.com/developers/reference/data-transport-limit. By default, upload sessions require you to send
+/// content of the file in sequential order via consecutive `uploadSessionStart`, `uploadSessionAppend`,
+/// `uploadSessionFinish` calls. For better performance, you can instead optionally use a `concurrent` in
+/// `DBFILESUploadSessionType` upload session. To start a new concurrent session, set `sessionType` in
+/// `DBFILESUploadSessionStartArg` to `concurrent` in `DBFILESUploadSessionType`. After that, you can send file data in
+/// concurrent `uploadSessionAppend` requests. Finally finish the session with `uploadSessionFinish`. There are couple
+/// of constraints with concurrent sessions to make them work. You can not send data with `uploadSessionStart` or
+/// `uploadSessionFinish` call, only with `uploadSessionAppend` call. Also data uploaded in `uploadSessionAppend` call
+/// must be multiple of 4194304 bytes (except for last `uploadSessionAppend` with `close` in
+/// `DBFILESUploadSessionStartArg` to true, that may contain any remaining data).
 ///
 /// @param close If true, the current session will be closed, at which point you won't be able to call
 /// `uploadSessionAppend` anymore with the current session.
+/// @param sessionType Type of upload session you want to start. If not specified, default is `sequential` in
+/// `DBFILESUploadSessionType`.
 /// @param inputData The file to upload, as an NSData * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartResult` object on success
-/// or a `void` object on failure.
+/// or a `DBFILESUploadSessionStartError` object on failure.
 ///
-- (DBUploadTask<DBFILESUploadSessionStartResult *, DBNilObject *> *)uploadSessionStartData:(nullable NSNumber *)close
-                                                                                 inputData:(NSData *)inputData;
+- (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)
+uploadSessionStartData:(nullable NSNumber *)close
+           sessionType:(nullable DBFILESUploadSessionType *)sessionType
+             inputData:(NSData *)inputData;
 
 ///
 /// Upload sessions allow you to upload a single file in one or more requests, for example where the size of the file is
@@ -2636,14 +2678,23 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// creation will return a `notFound` in `DBFILESUploadSessionLookupError`. Calls to this endpoint will count as data
 /// transport calls for any Dropbox Business teams with a limit on the number of data transport calls allowed per month.
 /// For more information, see the Data transport limit page
-/// https://www.dropbox.com/developers/reference/data-transport-limit.
+/// https://www.dropbox.com/developers/reference/data-transport-limit. By default, upload sessions require you to send
+/// content of the file in sequential order via consecutive `uploadSessionStart`, `uploadSessionAppend`,
+/// `uploadSessionFinish` calls. For better performance, you can instead optionally use a `concurrent` in
+/// `DBFILESUploadSessionType` upload session. To start a new concurrent session, set `sessionType` in
+/// `DBFILESUploadSessionStartArg` to `concurrent` in `DBFILESUploadSessionType`. After that, you can send file data in
+/// concurrent `uploadSessionAppend` requests. Finally finish the session with `uploadSessionFinish`. There are couple
+/// of constraints with concurrent sessions to make them work. You can not send data with `uploadSessionStart` or
+/// `uploadSessionFinish` call, only with `uploadSessionAppend` call. Also data uploaded in `uploadSessionAppend` call
+/// must be multiple of 4194304 bytes (except for last `uploadSessionAppend` with `close` in
+/// `DBFILESUploadSessionStartArg` to true, that may contain any remaining data).
 ///
 /// @param inputStream The file to upload, as an NSInputStream * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartResult` object on success
-/// or a `void` object on failure.
+/// or a `DBFILESUploadSessionStartError` object on failure.
 ///
-- (DBUploadTask<DBFILESUploadSessionStartResult *, DBNilObject *> *)uploadSessionStartStream:
+- (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)uploadSessionStartStream:
     (NSInputStream *)inputStream;
 
 ///
@@ -2656,18 +2707,30 @@ uploadSessionFinishStream:(DBFILESUploadSessionCursor *)cursor
 /// creation will return a `notFound` in `DBFILESUploadSessionLookupError`. Calls to this endpoint will count as data
 /// transport calls for any Dropbox Business teams with a limit on the number of data transport calls allowed per month.
 /// For more information, see the Data transport limit page
-/// https://www.dropbox.com/developers/reference/data-transport-limit.
+/// https://www.dropbox.com/developers/reference/data-transport-limit. By default, upload sessions require you to send
+/// content of the file in sequential order via consecutive `uploadSessionStart`, `uploadSessionAppend`,
+/// `uploadSessionFinish` calls. For better performance, you can instead optionally use a `concurrent` in
+/// `DBFILESUploadSessionType` upload session. To start a new concurrent session, set `sessionType` in
+/// `DBFILESUploadSessionStartArg` to `concurrent` in `DBFILESUploadSessionType`. After that, you can send file data in
+/// concurrent `uploadSessionAppend` requests. Finally finish the session with `uploadSessionFinish`. There are couple
+/// of constraints with concurrent sessions to make them work. You can not send data with `uploadSessionStart` or
+/// `uploadSessionFinish` call, only with `uploadSessionAppend` call. Also data uploaded in `uploadSessionAppend` call
+/// must be multiple of 4194304 bytes (except for last `uploadSessionAppend` with `close` in
+/// `DBFILESUploadSessionStartArg` to true, that may contain any remaining data).
 ///
 /// @param close If true, the current session will be closed, at which point you won't be able to call
 /// `uploadSessionAppend` anymore with the current session.
+/// @param sessionType Type of upload session you want to start. If not specified, default is `sequential` in
+/// `DBFILESUploadSessionType`.
 /// @param inputStream The file to upload, as an NSInputStream * object.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartResult` object on success
-/// or a `void` object on failure.
+/// or a `DBFILESUploadSessionStartError` object on failure.
 ///
-- (DBUploadTask<DBFILESUploadSessionStartResult *, DBNilObject *> *)uploadSessionStartStream:(nullable NSNumber *)close
-                                                                                 inputStream:
-                                                                                     (NSInputStream *)inputStream;
+- (DBUploadTask<DBFILESUploadSessionStartResult *, DBFILESUploadSessionStartError *> *)
+uploadSessionStartStream:(nullable NSNumber *)close
+             sessionType:(nullable DBFILESUploadSessionType *)sessionType
+             inputStream:(NSInputStream *)inputStream;
 
 @end
 

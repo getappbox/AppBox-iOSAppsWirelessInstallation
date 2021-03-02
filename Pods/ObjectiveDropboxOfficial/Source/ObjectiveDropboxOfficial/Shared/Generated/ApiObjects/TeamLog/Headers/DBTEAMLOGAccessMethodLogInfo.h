@@ -33,23 +33,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGAccessMethodLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGAccessMethodLogInfo` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
-    /// End user session details.
-    DBTEAMLOGAccessMethodLogInfoEndUser,
+    /// Admin console session details.
+    DBTEAMLOGAccessMethodLogInfoAdminConsole,
 
-    /// Sign in as session details.
-    DBTEAMLOGAccessMethodLogInfoSignInAs,
+    /// Api session details.
+    DBTEAMLOGAccessMethodLogInfoApi,
 
     /// Content manager session details.
     DBTEAMLOGAccessMethodLogInfoContentManager,
 
-    /// Admin console session details.
-    DBTEAMLOGAccessMethodLogInfoAdminConsole,
+    /// End user session details.
+    DBTEAMLOGAccessMethodLogInfoEndUser,
 
     /// Enterprise console session details.
     DBTEAMLOGAccessMethodLogInfoEnterpriseConsole,
 
-    /// Api session details.
-    DBTEAMLOGAccessMethodLogInfoApi,
+    /// Sign in as session details.
+    DBTEAMLOGAccessMethodLogInfoSignInAs,
 
     /// (no description).
     DBTEAMLOGAccessMethodLogInfoOther,
@@ -59,54 +59,54 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGAccessMethodLogInfoTag tag;
 
-/// End user session details. @note Ensure the `isEndUser` method returns true
-/// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGSessionLogInfo *endUser;
+/// Admin console session details. @note Ensure the `isAdminConsole` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *adminConsole;
 
-/// Sign in as session details. @note Ensure the `isSignInAs` method returns
-/// true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *signInAs;
+/// Api session details. @note Ensure the `isApi` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGApiSessionLogInfo *api;
 
 /// Content manager session details. @note Ensure the `isContentManager` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *contentManager;
 
-/// Admin console session details. @note Ensure the `isAdminConsole` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *adminConsole;
+/// End user session details. @note Ensure the `isEndUser` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGSessionLogInfo *endUser;
 
 /// Enterprise console session details. @note Ensure the `isEnterpriseConsole`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *enterpriseConsole;
 
-/// Api session details. @note Ensure the `isApi` method returns true before
-/// accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGApiSessionLogInfo *api;
+/// Sign in as session details. @note Ensure the `isSignInAs` method returns
+/// true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGWebSessionLogInfo *signInAs;
 
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "end_user".
+/// Initializes union class with tag state of "admin_console".
 ///
-/// Description of the "end_user" tag state: End user session details.
+/// Description of the "admin_console" tag state: Admin console session details.
 ///
-/// @param endUser End user session details.
+/// @param adminConsole Admin console session details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithEndUser:(DBTEAMLOGSessionLogInfo *)endUser;
+- (instancetype)initWithAdminConsole:(DBTEAMLOGWebSessionLogInfo *)adminConsole;
 
 ///
-/// Initializes union class with tag state of "sign_in_as".
+/// Initializes union class with tag state of "api".
 ///
-/// Description of the "sign_in_as" tag state: Sign in as session details.
+/// Description of the "api" tag state: Api session details.
 ///
-/// @param signInAs Sign in as session details.
+/// @param api Api session details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithSignInAs:(DBTEAMLOGWebSessionLogInfo *)signInAs;
+- (instancetype)initWithApi:(DBTEAMLOGApiSessionLogInfo *)api;
 
 ///
 /// Initializes union class with tag state of "content_manager".
@@ -121,15 +121,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
 - (instancetype)initWithContentManager:(DBTEAMLOGWebSessionLogInfo *)contentManager;
 
 ///
-/// Initializes union class with tag state of "admin_console".
+/// Initializes union class with tag state of "end_user".
 ///
-/// Description of the "admin_console" tag state: Admin console session details.
+/// Description of the "end_user" tag state: End user session details.
 ///
-/// @param adminConsole Admin console session details.
+/// @param endUser End user session details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAdminConsole:(DBTEAMLOGWebSessionLogInfo *)adminConsole;
+- (instancetype)initWithEndUser:(DBTEAMLOGSessionLogInfo *)endUser;
 
 ///
 /// Initializes union class with tag state of "enterprise_console".
@@ -144,15 +144,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
 - (instancetype)initWithEnterpriseConsole:(DBTEAMLOGWebSessionLogInfo *)enterpriseConsole;
 
 ///
-/// Initializes union class with tag state of "api".
+/// Initializes union class with tag state of "sign_in_as".
 ///
-/// Description of the "api" tag state: Api session details.
+/// Description of the "sign_in_as" tag state: Sign in as session details.
 ///
-/// @param api Api session details.
+/// @param signInAs Sign in as session details.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithApi:(DBTEAMLOGApiSessionLogInfo *)api;
+- (instancetype)initWithSignInAs:(DBTEAMLOGWebSessionLogInfo *)signInAs;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -166,24 +166,24 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "end_user".
+/// Retrieves whether the union's current tag state has value "admin_console".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `endUser` property, otherwise a runtime exception will be thrown.
+/// `adminConsole` property, otherwise a runtime exception will be thrown.
 ///
-/// @return Whether the union's current tag state has value "end_user".
+/// @return Whether the union's current tag state has value "admin_console".
 ///
-- (BOOL)isEndUser;
+- (BOOL)isAdminConsole;
 
 ///
-/// Retrieves whether the union's current tag state has value "sign_in_as".
+/// Retrieves whether the union's current tag state has value "api".
 ///
-/// @note Call this method and ensure it returns true before accessing the
-/// `signInAs` property, otherwise a runtime exception will be thrown.
+/// @note Call this method and ensure it returns true before accessing the `api`
+/// property, otherwise a runtime exception will be thrown.
 ///
-/// @return Whether the union's current tag state has value "sign_in_as".
+/// @return Whether the union's current tag state has value "api".
 ///
-- (BOOL)isSignInAs;
+- (BOOL)isApi;
 
 ///
 /// Retrieves whether the union's current tag state has value "content_manager".
@@ -196,14 +196,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
 - (BOOL)isContentManager;
 
 ///
-/// Retrieves whether the union's current tag state has value "admin_console".
+/// Retrieves whether the union's current tag state has value "end_user".
 ///
 /// @note Call this method and ensure it returns true before accessing the
-/// `adminConsole` property, otherwise a runtime exception will be thrown.
+/// `endUser` property, otherwise a runtime exception will be thrown.
 ///
-/// @return Whether the union's current tag state has value "admin_console".
+/// @return Whether the union's current tag state has value "end_user".
 ///
-- (BOOL)isAdminConsole;
+- (BOOL)isEndUser;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -218,14 +218,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccessMethodLogInfoTag){
 - (BOOL)isEnterpriseConsole;
 
 ///
-/// Retrieves whether the union's current tag state has value "api".
+/// Retrieves whether the union's current tag state has value "sign_in_as".
 ///
-/// @note Call this method and ensure it returns true before accessing the `api`
-/// property, otherwise a runtime exception will be thrown.
+/// @note Call this method and ensure it returns true before accessing the
+/// `signInAs` property, otherwise a runtime exception will be thrown.
 ///
-/// @return Whether the union's current tag state has value "api".
+/// @return Whether the union's current tag state has value "sign_in_as".
 ///
-- (BOOL)isApi;
+- (BOOL)isSignInAs;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

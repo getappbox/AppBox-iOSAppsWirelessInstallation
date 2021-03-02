@@ -76,15 +76,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param deadline The deadline for the file request. Deadlines can only be set by Professional and Business accounts.
 /// @param open Whether or not the file request should be open. If the file request is closed, it will not accept any
 /// file submissions, but it can be opened later.
+/// @param description_ A description of the file request.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEREQUESTSFileRequest` object on success or a
 /// `DBFILEREQUESTSCreateFileRequestError` object on failure.
 ///
 - (DBRpcTask<DBFILEREQUESTSFileRequest *, DBFILEREQUESTSCreateFileRequestError *> *)
-     create:(NSString *)title
-destination:(NSString *)destination
-   deadline:(nullable DBFILEREQUESTSFileRequestDeadline *)deadline
-       open:(nullable NSNumber *)open;
+      create:(NSString *)title
+ destination:(NSString *)destination
+    deadline:(nullable DBFILEREQUESTSFileRequestDeadline *)deadline
+        open:(nullable NSNumber *)open
+description_:(nullable NSString *)description_;
 
 ///
 /// Delete a batch of closed file requests.
@@ -181,16 +183,18 @@ destination:(NSString *)destination
 /// @param deadline The new deadline for the file request. Deadlines can only be set by Professional and Business
 /// accounts.
 /// @param open Whether to set this file request as open or closed.
+/// @param description_ The description of the file request.
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEREQUESTSFileRequest` object on success or a
 /// `DBFILEREQUESTSUpdateFileRequestError` object on failure.
 ///
 - (DBRpcTask<DBFILEREQUESTSFileRequest *, DBFILEREQUESTSUpdateFileRequestError *> *)
-     update:(NSString *)id_
-      title:(nullable NSString *)title
-destination:(nullable NSString *)destination
-   deadline:(nullable DBFILEREQUESTSUpdateFileRequestDeadline *)deadline
-       open:(nullable NSNumber *)open;
+      update:(NSString *)id_
+       title:(nullable NSString *)title
+ destination:(nullable NSString *)destination
+    deadline:(nullable DBFILEREQUESTSUpdateFileRequestDeadline *)deadline
+        open:(nullable NSNumber *)open
+description_:(nullable NSString *)description_;
 
 @end
 

@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// tag states with which the `DBTEAMLOGDeviceApprovalsPolicy` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag){
     /// (no description).
-    DBTEAMLOGDeviceApprovalsPolicyUnlimited,
+    DBTEAMLOGDeviceApprovalsPolicyLimited,
 
     /// (no description).
-    DBTEAMLOGDeviceApprovalsPolicyLimited,
+    DBTEAMLOGDeviceApprovalsPolicyUnlimited,
 
     /// (no description).
     DBTEAMLOGDeviceApprovalsPolicyOther,
@@ -45,18 +45,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "unlimited".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithUnlimited;
-
-///
 /// Initializes union class with tag state of "limited".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithLimited;
+
+///
+/// Initializes union class with tag state of "unlimited".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUnlimited;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -70,18 +70,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGDeviceApprovalsPolicyTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "unlimited".
-///
-/// @return Whether the union's current tag state has value "unlimited".
-///
-- (BOOL)isUnlimited;
-
-///
 /// Retrieves whether the union's current tag state has value "limited".
 ///
 /// @return Whether the union's current tag state has value "limited".
 ///
 - (BOOL)isLimited;
+
+///
+/// Retrieves whether the union's current tag state has value "unlimited".
+///
+/// @return Whether the union's current tag state has value "unlimited".
+///
+- (BOOL)isUnlimited;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

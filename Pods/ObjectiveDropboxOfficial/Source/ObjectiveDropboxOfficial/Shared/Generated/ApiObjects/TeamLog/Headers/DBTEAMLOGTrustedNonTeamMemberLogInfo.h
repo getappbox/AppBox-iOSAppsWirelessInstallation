@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Indicates the type of the member of a trusted team.
 @property (nonatomic, readonly) DBTEAMLOGTrustedNonTeamMemberType *trustedNonTeamMemberType;
 
-/// Details about this useru2019s trusted team.
+/// Details about this user's trusted team.
 @property (nonatomic, readonly, nullable) DBTEAMLOGTeamLogInfo *team;
 
 #pragma mark - Constructors
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// data gap.
 /// @param email User email address. Might be missing due to historical data
 /// gap.
-/// @param team Details about this useru2019s trusted team.
+/// @param team Details about this user's trusted team.
 ///
 /// @return An initialized instance.
 ///

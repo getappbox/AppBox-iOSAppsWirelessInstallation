@@ -422,7 +422,8 @@
 - (instancetype)initWithTitle:(NSString *)title
                   destination:(NSString *)destination
                      deadline:(DBFILEREQUESTSFileRequestDeadline *)deadline
-                         open:(NSNumber *)open {
+                         open:(NSNumber *)open
+                 description_:(NSString *)description_ {
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](title);
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators stringValidator:nil maxLength:nil pattern:@"/(.|[\\r\\n])*"]](destination);
@@ -433,12 +434,13 @@
     _destination = destination;
     _deadline = deadline;
     _open = open ?: @YES;
+    _description_ = description_;
   }
   return self;
 }
 
 - (instancetype)initWithTitle:(NSString *)title destination:(NSString *)destination {
-  return [self initWithTitle:title destination:destination deadline:nil open:nil];
+  return [self initWithTitle:title destination:destination deadline:nil open:nil description_:nil];
 }
 
 #pragma mark - Serialization methods
@@ -477,6 +479,9 @@
     result = prime * result + [self.deadline hash];
   }
   result = prime * result + [self.open hash];
+  if (self.description_ != nil) {
+    result = prime * result + [self.description_ hash];
+  }
 
   return prime * result;
 }
@@ -511,6 +516,11 @@
   if (![self.open isEqual:aCreateFileRequestArgs.open]) {
     return NO;
   }
+  if (self.description_) {
+    if (![self.description_ isEqual:aCreateFileRequestArgs.description_]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -529,6 +539,9 @@
     jsonDict[@"deadline"] = [DBFILEREQUESTSFileRequestDeadlineSerializer serialize:valueObj.deadline];
   }
   jsonDict[@"open"] = valueObj.open;
+  if (valueObj.description_) {
+    jsonDict[@"description"] = valueObj.description_;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -539,11 +552,13 @@
   DBFILEREQUESTSFileRequestDeadline *deadline =
       valueDict[@"deadline"] ? [DBFILEREQUESTSFileRequestDeadlineSerializer deserialize:valueDict[@"deadline"]] : nil;
   NSNumber *open = valueDict[@"open"] ?: @YES;
+  NSString *description_ = valueDict[@"description"] ?: nil;
 
   return [[DBFILEREQUESTSCreateFileRequestArgs alloc] initWithTitle:title
                                                         destination:destination
                                                            deadline:deadline
-                                                               open:open];
+                                                               open:open
+                                                       description_:description_];
 }
 
 @end
@@ -2103,7 +2118,8 @@
                      isOpen:(NSNumber *)isOpen
                   fileCount:(NSNumber *)fileCount
                 destination:(NSString *)destination
-                   deadline:(DBFILEREQUESTSFileRequestDeadline *)deadline {
+                   deadline:(DBFILEREQUESTSFileRequestDeadline *)deadline
+               description_:(NSString *)description_ {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"[-_0-9a-zA-Z]+"]](id_);
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](url);
@@ -2124,6 +2140,7 @@
     _deadline = deadline;
     _isOpen = isOpen;
     _fileCount = fileCount;
+    _description_ = description_;
   }
   return self;
 }
@@ -2141,7 +2158,8 @@
                     isOpen:isOpen
                  fileCount:fileCount
                destination:nil
-                  deadline:nil];
+                  deadline:nil
+              description_:nil];
 }
 
 #pragma mark - Serialization methods
@@ -2185,6 +2203,9 @@
   }
   if (self.deadline != nil) {
     result = prime * result + [self.deadline hash];
+  }
+  if (self.description_ != nil) {
+    result = prime * result + [self.description_ hash];
   }
 
   return prime * result;
@@ -2234,6 +2255,11 @@
       return NO;
     }
   }
+  if (self.description_) {
+    if (![self.description_ isEqual:aFileRequest.description_]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -2258,6 +2284,9 @@
   if (valueObj.deadline) {
     jsonDict[@"deadline"] = [DBFILEREQUESTSFileRequestDeadlineSerializer serialize:valueObj.deadline];
   }
+  if (valueObj.description_) {
+    jsonDict[@"description"] = valueObj.description_;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -2272,6 +2301,7 @@
   NSString *destination = valueDict[@"destination"] ?: nil;
   DBFILEREQUESTSFileRequestDeadline *deadline =
       valueDict[@"deadline"] ? [DBFILEREQUESTSFileRequestDeadlineSerializer deserialize:valueDict[@"deadline"]] : nil;
+  NSString *description_ = valueDict[@"description"] ?: nil;
 
   return [[DBFILEREQUESTSFileRequest alloc] initWithId_:id_
                                                     url:url
@@ -2280,7 +2310,8 @@
                                                  isOpen:isOpen
                                               fileCount:fileCount
                                             destination:destination
-                                               deadline:deadline];
+                                               deadline:deadline
+                                           description_:description_];
 }
 
 @end
@@ -3810,7 +3841,8 @@
                       title:(NSString *)title
                 destination:(NSString *)destination
                    deadline:(DBFILEREQUESTSUpdateFileRequestDeadline *)deadline
-                       open:(NSNumber *)open {
+                       open:(NSNumber *)open
+               description_:(NSString *)description_ {
   [DBStoneValidators
    nonnullValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:@"[-_0-9a-zA-Z]+"]](id_);
   [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:@(1) maxLength:nil pattern:nil]](title);
@@ -3824,12 +3856,13 @@
     _destination = destination;
     _deadline = deadline ?: [[DBFILEREQUESTSUpdateFileRequestDeadline alloc] initWithNoUpdate];
     _open = open;
+    _description_ = description_;
   }
   return self;
 }
 
 - (instancetype)initWithId_:(NSString *)id_ {
-  return [self initWithId_:id_ title:nil destination:nil deadline:nil open:nil];
+  return [self initWithId_:id_ title:nil destination:nil deadline:nil open:nil description_:nil];
 }
 
 #pragma mark - Serialization methods
@@ -3873,6 +3906,9 @@
   if (self.open != nil) {
     result = prime * result + [self.open hash];
   }
+  if (self.description_ != nil) {
+    result = prime * result + [self.description_ hash];
+  }
 
   return prime * result;
 }
@@ -3914,6 +3950,11 @@
       return NO;
     }
   }
+  if (self.description_) {
+    if (![self.description_ isEqual:anUpdateFileRequestArgs.description_]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -3937,6 +3978,9 @@
   if (valueObj.open) {
     jsonDict[@"open"] = valueObj.open;
   }
+  if (valueObj.description_) {
+    jsonDict[@"description"] = valueObj.description_;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -3949,12 +3993,14 @@
       valueDict[@"deadline"] ? [DBFILEREQUESTSUpdateFileRequestDeadlineSerializer deserialize:valueDict[@"deadline"]]
                              : [[DBFILEREQUESTSUpdateFileRequestDeadline alloc] initWithNoUpdate];
   NSNumber *open = valueDict[@"open"] ?: nil;
+  NSString *description_ = valueDict[@"description"] ?: nil;
 
   return [[DBFILEREQUESTSUpdateFileRequestArgs alloc] initWithId_:id_
                                                             title:title
                                                       destination:destination
                                                          deadline:deadline
-                                                             open:open];
+                                                             open:open
+                                                     description_:description_];
 }
 
 @end

@@ -45,7 +45,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGModifySharedLinkSettingsErrorTag){
     /// There is an error with the given settings.
     DBSHARINGModifySharedLinkSettingsErrorSettingsError,
 
-    /// The caller's email should be verified.
+    /// This user's email address is not verified. This functionality is only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
     DBSHARINGModifySharedLinkSettingsErrorEmailNotVerified,
 
 };
@@ -112,8 +114,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGModifySharedLinkSettingsErrorTag){
 ///
 /// Initializes union class with tag state of "email_not_verified".
 ///
-/// Description of the "email_not_verified" tag state: The caller's email should
-/// be verified.
+/// Description of the "email_not_verified" tag state: This user's email address
+/// is not verified. This functionality is only available on accounts with a
+/// verified email address. Users can verify their email address here
+/// https://www.dropbox.com/help/317.
 ///
 /// @return An initialized instance.
 ///

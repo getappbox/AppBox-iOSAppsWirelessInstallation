@@ -30,10 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureNotificationTypeTag){
     /// (no description).
-    DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification,
+    DBTEAMLOGAccountCaptureNotificationTypeActionableNotification,
 
     /// (no description).
-    DBTEAMLOGAccountCaptureNotificationTypeActionableNotification,
+    DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification,
 
     /// (no description).
     DBTEAMLOGAccountCaptureNotificationTypeOther,
@@ -46,18 +46,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureNotificationTypeTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "proactive_warning_notification".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithProactiveWarningNotification;
-
-///
 /// Initializes union class with tag state of "actionable_notification".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithActionableNotification;
+
+///
+/// Initializes union class with tag state of "proactive_warning_notification".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithProactiveWarningNotification;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -72,21 +72,21 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureNotificationTypeTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "proactive_warning_notification".
-///
-/// @return Whether the union's current tag state has value
-/// "proactive_warning_notification".
-///
-- (BOOL)isProactiveWarningNotification;
-
-///
-/// Retrieves whether the union's current tag state has value
 /// "actionable_notification".
 ///
 /// @return Whether the union's current tag state has value
 /// "actionable_notification".
 ///
 - (BOOL)isActionableNotification;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "proactive_warning_notification".
+///
+/// @return Whether the union's current tag state has value
+/// "proactive_warning_notification".
+///
+- (BOOL)isProactiveWarningNotification;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

@@ -37,8 +37,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag){
     /// The value is the e-email address that is malformed.
     DBSHARINGAddMemberSelectorErrorInvalidEmail,
 
-    /// The value is the ID of the Dropbox user with an unverified e-mail
-    /// address.  Invite unverified users by e-mail address instead of by their
+    /// The value is the ID of the Dropbox user with an unverified email
+    /// address. Invite unverified users by email address instead of by their
     /// Dropbox ID.
     DBSHARINGAddMemberSelectorErrorUnverifiedDropboxId,
 
@@ -67,8 +67,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag){
 /// exception will be raised.
 @property (nonatomic, readonly, copy) NSString *invalidEmail;
 
-/// The value is the ID of the Dropbox user with an unverified e-mail address.
-/// Invite unverified users by e-mail address instead of by their Dropbox ID.
+/// The value is the ID of the Dropbox user with an unverified email address.
+/// Invite unverified users by email address instead of by their Dropbox ID.
 /// @note Ensure the `isUnverifiedDropboxId` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *unverifiedDropboxId;
@@ -113,12 +113,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddMemberSelectorErrorTag){
 /// Initializes union class with tag state of "unverified_dropbox_id".
 ///
 /// Description of the "unverified_dropbox_id" tag state: The value is the ID of
-/// the Dropbox user with an unverified e-mail address.  Invite unverified users
-/// by e-mail address instead of by their Dropbox ID.
+/// the Dropbox user with an unverified email address. Invite unverified users
+/// by email address instead of by their Dropbox ID.
 ///
 /// @param unverifiedDropboxId The value is the ID of the Dropbox user with an
-/// unverified e-mail address.  Invite unverified users by e-mail address
-/// instead of by their Dropbox ID.
+/// unverified email address. Invite unverified users by email address instead
+/// of by their Dropbox ID.
 ///
 /// @return An initialized instance.
 ///

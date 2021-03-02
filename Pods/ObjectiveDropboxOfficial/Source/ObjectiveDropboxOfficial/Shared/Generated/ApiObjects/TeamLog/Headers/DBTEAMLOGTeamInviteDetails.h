@@ -31,10 +31,26 @@ NS_ASSUME_NONNULL_BEGIN
 /// How the user was invited to the team.
 @property (nonatomic, readonly) DBTEAMLOGInviteMethod *inviteMethod;
 
+/// True if the invitation incurred an additional license purchase.
+@property (nonatomic, readonly, nullable) NSNumber *additionalLicensePurchase;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param inviteMethod How the user was invited to the team.
+/// @param additionalLicensePurchase True if the invitation incurred an
+/// additional license purchase.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInviteMethod:(DBTEAMLOGInviteMethod *)inviteMethod
+           additionalLicensePurchase:(nullable NSNumber *)additionalLicensePurchase;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param inviteMethod How the user was invited to the team.
 ///

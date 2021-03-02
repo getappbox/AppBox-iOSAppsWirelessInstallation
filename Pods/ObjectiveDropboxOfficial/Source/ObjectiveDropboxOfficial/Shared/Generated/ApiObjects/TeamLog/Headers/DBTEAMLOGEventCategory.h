@@ -30,11 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGEventCategoryTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGEventCategory` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
+    /// Events that involve team related alerts.
+    DBTEAMLOGEventCategoryAdminAlerting,
+
     /// Events that apply to management of linked apps.
     DBTEAMLOGEventCategoryApps,
 
     /// Events that have to do with comments on files and Paper documents.
     DBTEAMLOGEventCategoryComments,
+
+    /// Events that involve data governance actions
+    DBTEAMLOGEventCategoryDataGovernance,
 
     /// Events that apply to linked devices on mobile, desktop and Web
     /// platforms.
@@ -53,9 +59,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 
     /// Events that involve group management.
     DBTEAMLOGEventCategoryGroups,
-
-    /// Events that involve placing holds on content for litigation reasons
-    DBTEAMLOGEventCategoryLegalHolds,
 
     /// Events that involve users signing in to or out of Dropbox.
     DBTEAMLOGEventCategoryLogins,
@@ -110,6 +113,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 #pragma mark - Constructors
 
 ///
+/// Initializes union class with tag state of "admin_alerting".
+///
+/// Description of the "admin_alerting" tag state: Events that involve team
+/// related alerts.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAdminAlerting;
+
+///
 /// Initializes union class with tag state of "apps".
 ///
 /// Description of the "apps" tag state: Events that apply to management of
@@ -128,6 +141,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithComments;
+
+///
+/// Initializes union class with tag state of "data_governance".
+///
+/// Description of the "data_governance" tag state: Events that involve data
+/// governance actions
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDataGovernance;
 
 ///
 /// Initializes union class with tag state of "devices".
@@ -178,16 +201,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithGroups;
-
-///
-/// Initializes union class with tag state of "legal_holds".
-///
-/// Description of the "legal_holds" tag state: Events that involve placing
-/// holds on content for litigation reasons
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHolds;
 
 ///
 /// Initializes union class with tag state of "logins".
@@ -331,6 +344,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 #pragma mark - Tag state methods
 
 ///
+/// Retrieves whether the union's current tag state has value "admin_alerting".
+///
+/// @return Whether the union's current tag state has value "admin_alerting".
+///
+- (BOOL)isAdminAlerting;
+
+///
 /// Retrieves whether the union's current tag state has value "apps".
 ///
 /// @return Whether the union's current tag state has value "apps".
@@ -343,6 +363,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 /// @return Whether the union's current tag state has value "comments".
 ///
 - (BOOL)isComments;
+
+///
+/// Retrieves whether the union's current tag state has value "data_governance".
+///
+/// @return Whether the union's current tag state has value "data_governance".
+///
+- (BOOL)isDataGovernance;
 
 ///
 /// Retrieves whether the union's current tag state has value "devices".
@@ -378,13 +405,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventCategoryTag){
 /// @return Whether the union's current tag state has value "groups".
 ///
 - (BOOL)isGroups;
-
-///
-/// Retrieves whether the union's current tag state has value "legal_holds".
-///
-/// @return Whether the union's current tag state has value "legal_holds".
-///
-- (BOOL)isLegalHolds;
 
 ///
 /// Retrieves whether the union's current tag state has value "logins".

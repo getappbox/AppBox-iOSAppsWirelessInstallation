@@ -68,10 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param accountId The user's unique Dropbox ID.
 /// @param name Details of a user's name.
-/// @param email The user's e-mail address. Do not rely on this without checking
+/// @param email The user's email address. Do not rely on this without checking
 /// the emailVerified field. Even then, it's possible that the user has since
-/// lost access to their e-mail.
-/// @param emailVerified Whether the user has verified their e-mail address.
+/// lost access to their email.
+/// @param emailVerified Whether the user has verified their email address.
 /// @param disabled Whether the user has been disabled.
 /// @param locale The language that the user specified. Locale tags will be IETF
 /// language tags http://en.wikipedia.org/wiki/IETF_language_tag.
@@ -114,10 +114,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param accountId The user's unique Dropbox ID.
 /// @param name Details of a user's name.
-/// @param email The user's e-mail address. Do not rely on this without checking
+/// @param email The user's email address. Do not rely on this without checking
 /// the emailVerified field. Even then, it's possible that the user has since
-/// lost access to their e-mail.
-/// @param emailVerified Whether the user has verified their e-mail address.
+/// lost access to their email.
+/// @param emailVerified Whether the user has verified their email address.
 /// @param disabled Whether the user has been disabled.
 /// @param locale The language that the user specified. Locale tags will be IETF
 /// language tags http://en.wikipedia.org/wiki/IETF_language_tag.
