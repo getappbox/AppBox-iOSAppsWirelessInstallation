@@ -50,7 +50,6 @@
     NSMutableDictionary *keyValues = [[NSMutableDictionary alloc] init];
     [keyValues setObject:project.name forKey:@"topLabel"];
     [keyValues setObject:[NSString stringWithFormat:@"%@ (%@)", project.version, project.build] forKey:@"content"];
-    [keyValues setObject:[NSString stringWithFormat:@"Build Scheme - %@", project.selectedSchemes] forKey:@"bottomLabel"];
     [keyValues setObject:@"false" forKey:@"contentMultiline"];
     NSDictionary *cardAction = @{@"openLink" : @{ @"url" : project.appShortShareableURL.stringValue }};
     [keyValues setObject:cardAction forKey:@"onClick"];

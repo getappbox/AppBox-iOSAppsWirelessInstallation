@@ -184,20 +184,7 @@
     }
 }
 
--(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{
-    if ([self.project.buildType isEqualToString: BuildTypeAppStore] && self.project.projectFullPath == nil){
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText: @"Please confirm"];
-        [alert setInformativeText:@"AppBox found an AppStore provisioning profile in this IPA file. Do you want to upload this on AppStore?"];
-        [alert setAlertStyle:NSInformationalAlertStyle];
-        [alert addButtonWithTitle:@"YES! Upload on AppStore."];
-        [alert addButtonWithTitle:@"NO! Upload on Dropbox"];
-        if ([alert runModal] == NSAlertFirstButtonReturn){
-            self.itcLoginBlock();
-            return;
-        }
-    }
-    
+-(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{    
     [ABLog log:@"IPA Info.plist %@", self.project.ipaInfoPlist];
     
     //upload ipa

@@ -54,15 +54,6 @@
     NSString *alPath = [[selectedXcode stringByAppendingPathComponent:abApplicationLoaderALToolLocation] stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:alPath]){
         [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Application Loader = %@", alPath]];
-        [XCHandler changeDefaultXcodePath:selectedXcode withCompletion:^(BOOL success, NSString *error) {
-            if (success) {
-                [UserData setXCodeLocation:selectedXcode];
-                [UserData setApplicationLoaderLocation:alPath];
-            } else {
-                [sender setURL:[UserData xCodeLocation]];
-                [Common showAlertWithTitle:@"Error" andMessage:error];
-            }
-        }];
     } else {
         [sender setURL:nil];
         [Common showAlertWithTitle:@"Error" andMessage:@"Please select a valid Xcode. AppBox don't able to find application loader for selected Xcode."];

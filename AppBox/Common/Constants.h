@@ -95,20 +95,8 @@ typedef enum : NSUInteger {
     DBFileTypeJson,
 } DBFileType;
 
-typedef enum : NSUInteger {
-    ScriptTypeGetScheme,
-    ScriptTypeTeamId,
-    ScriptTypeBuild,
-    ScriptTypeCreateIPA,
-    ScriptTypeXcodePath,
-    ScriptTypeAppStoreValidation,
-    ScriptTypeAppStoreUpload,
-} ScriptType;
-
 //CI
 #define abExitCodeForInvalidCommand 127
-#define abExitCodeForArchiveFailed 126
-#define abExitCodeForExportFailed 125
 #define abExitCodeForUploadFailed 124
 #define abExitCodeForInvalidAppBoxSettingFile 123 //appbox.plist
 #define abExitCodeForInvalidArgumentsXcodeBuild 122
@@ -117,26 +105,23 @@ typedef enum : NSUInteger {
 #define abExitCodeInfoPlistNotFound 120
 #define abExitCodeIPAFileNotFound 119
 #define abExitCodeUnableToCreateManiFestFile 118
-#define abExitCodeForXcodeNotFount 117
-#define abExitCodeForApplicationLoaderNotFount 116
-#define abExitCodeForSchemeNotFound 115
-#define abExitCodeForPrivateKeyNotFound 114
-#define abExitCodeForAppStoreUploadFailed 113
-#define abExitCodeForInvalidITCAccount 112
 #define abExitCodeForMailFailed 111
-#define abExitCodeXcodeNotFoundAtPath 110
-#define abExitCodeITCMailNotFound 109
 #define abExitCodeForSuccess 0
 
-#define abArgsWorkspace @"build="
-#define abArgsScheme @"scheme="
-#define abArgsBuildType @"buildtype="
-#define abArgsTeamId @"teamid="
 #define abArgsIPA @"ipa="
 #define abArgsEmails @"email="
 #define abArgsPersonalMessage @"message="
 #define abArgsKeepSameLink @"keepsamelink="
 #define abArgsDropBoxFolderName @"dbfolder="
+
+//Weakify & Strongify
+#define weakify(var) __weak typeof(var) AHKWeak_##var = var;
+
+#define strongify(var) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wshadow\"") \
+__strong typeof(var) var = AHKWeak_##var; \
+_Pragma("clang diagnostic pop")
 
 
 #endif /* Constants_h */

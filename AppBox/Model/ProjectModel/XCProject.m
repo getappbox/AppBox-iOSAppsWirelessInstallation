@@ -18,7 +18,6 @@
         self.keepSameLink = @0;
         self.emails = abEmptyString;
         self.buildType = abEmptyString;
-        self.selectedSchemes = abEmptyString;
         self.personalMessage = abEmptyString;
     }
     return self;
@@ -69,21 +68,6 @@
     }
 }
 
-//Create export options plist for archive and upload
-- (BOOL)createExportOptionPlist{
-    [self createBuildRelatedPathsAndIsNew:YES];
-    NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
-    [exportOption setValue:self.teamId forKey:@"teamID"];
-    [exportOption setValue:self.buildType forKey:@"method"];
-    [exportOption setValue:[NSNumber numberWithBool:[UserData uploadBitcode]] forKey:@"uploadBitcode"];
-    [exportOption setValue:[NSNumber numberWithBool:[UserData uploadSymbols]] forKey:@"uploadSymbols"];
-    [exportOption setValue:[NSNumber numberWithBool:[UserData compileBitcode]] forKey:@"compileBitcode"];
-    [exportOption setValue:@"Production" forKey:@"iCloudContainerEnvironment"];
-    [exportOption setValue:@"automatic" forKey:@"signingStyle"];
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Export Options - %@", exportOption]];
-    return [exportOption writeToFile:[self.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding] atomically:YES];
-}
-
 //Create all path required during archive and upload
 - (void)createBuildRelatedPathsAndIsNew:(BOOL)isNew{
     if(isNew || _buildUUIDDirectory == nil){
@@ -98,17 +82,9 @@
         _buildUUIDDirectory = [NSURL URLWithString:escapedBuildUUIDPath];
         [[NSFileManager defaultManager] createDirectoryAtPath:buildUUIDPath withIntermediateDirectories:NO attributes:nil error:nil];
         
-        //Archive Path
-        NSString *archivePath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.xcarchive",self.name]];
-        _buildArchivePath =  [NSURL URLWithString:archivePath];
-        
         //IPA Path
         NSString *ipaPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.ipa", self.selectedSchemes]];
         _ipaFullPath = [NSURL URLWithString:[ipaPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]]];
-        
-        //Export Option Plist
-        NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", self.name]];
-        _exportOptionsPlistPath = [NSURL URLWithString:exportOptionPlistPath];
     }
 }
 
@@ -131,18 +107,12 @@
     return _uuid;
 }
 
-- (NSURL *)buildArchivePath{
-    [self createBuildRelatedPathsAndIsNew:NO];
-    return _buildArchivePath;
-}
-
 -(ABPProject *)abpProject{
     ABPProject *project = [[ABPProject alloc] init];
     [project setName:self.name];
     [project setVersion:self.version];
     [project setBuild:self.build];
     [project setIdentifer:self.identifer];
-    [project setTeamId:self.teamId];
     [project setBuildType:self.buildType];
     [project setIpaFileSize:self.ipaFileSize];
     [project setMiniOSVersion:self.miniOSVersion];
@@ -183,11 +153,6 @@
     _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
 }
 
--(void)setProjectFullPath:(NSURL *)projectFullPath{
-    _projectFullPath = projectFullPath;
-    [self setRootDirectory: [Common getFileDirectoryForFilePath:projectFullPath]];
-}
-
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
     _ipaInfoPlist = ipaInfoPlist;
     [self createUDIDAndIsNew:YES];
@@ -225,7 +190,6 @@
 -(void)setMobileProvision:(MobileProvision *)mobileProvision{
     _mobileProvision = mobileProvision;
     if (self.mobileProvision){
-        if (!self.teamId) self.teamId = self.mobileProvision.teamId;
         if (!self.buildType) self.buildType = self.mobileProvision.buildType;
     }
 }

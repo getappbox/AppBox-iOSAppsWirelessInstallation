@@ -16,13 +16,11 @@
 @interface XCProject : NSObject
 
 //Project Basic Properties
-@property(nonatomic, assign) BOOL isBuildOnly;
 @property(nonatomic, retain) NSString *uuid;
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *version;
 @property(nonatomic, retain) NSString *build;
 @property(nonatomic, retain) NSString *identifer;
-@property(nonatomic, retain) NSString *teamId;
 @property(nonatomic, retain) NSString *buildType;
 @property(nonatomic, retain) NSNumber *ipaFileSize;
 @property(nonatomic, retain) NSString *miniOSVersion;
@@ -30,13 +28,10 @@
 @property(nonatomic, retain, readonly) ABPProject *abpProject;
 
 //Local URLS
-@property(nonatomic, retain) NSURL *projectFullPath;
 @property(nonatomic, retain) NSURL *ipaFullPath;
 @property(nonatomic, retain) NSURL *rootDirectory;
 @property(nonatomic, retain) NSURL *buildDirectory;
-@property(nonatomic, retain) NSURL *buildArchivePath;
 @property(nonatomic, retain) NSURL *buildUUIDDirectory;
-@property(nonatomic, retain) NSURL *exportOptionsPlistPath;
 
 //Project Schemes and Targets
 @property(nonatomic, retain) NSArray *schemes;
@@ -74,9 +69,7 @@
 @property(nonatomic, retain) NSURL *appShortShareableURL;
 
 //CI Settings
-@property(nonatomic, retain) NSString *branch;
 @property(nonatomic, retain) NSString *emails;
-@property(nonatomic, retain) NSNumber *shutdownMac;
 @property(nonatomic, retain) NSNumber *keepSameLink;
 @property(nonatomic, retain) NSString *personalMessage;
 @property(nonatomic, retain) NSString *ciEmails;

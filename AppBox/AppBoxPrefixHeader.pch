@@ -31,9 +31,7 @@
 #import "OtherServicesKeys.h"
 
 #import "Common.h"
-#import "XCHandler.h"
 #import "UploadManager.h"
-#import "MacHandler.h"
 #import "MailHandler.h"
 #import "SlackClient.h"
 #import "HangoutClient.h"
@@ -54,7 +52,6 @@
 
 #import "Teams+CoreDataProperties.h"
 #import "Project+CoreDataProperties.h"
-#import "CISetting+CoreDataProperties.h"
 #import "UploadRecord+CoreDataProperties.h"
 #import "ProvisionedDevice+CoreDataProperties.h"
 #import "ProvisioningProfile+CoreDataProperties.h"

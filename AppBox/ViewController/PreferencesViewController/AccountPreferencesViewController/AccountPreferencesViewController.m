@@ -63,18 +63,6 @@
     [accountTableView reloadData];
 }
 
-- (IBAction)updateAccountButtonTapped:(NSButton *)sender {
-    NSInteger selectedRow = [accountTableView selectedRow];
-    if (selectedRow >= 0) {
-        NSDictionary *keyChainAccount = [NSDictionary dictionaryWithDictionary:[itcAccounts objectAtIndex:selectedRow]];
-        
-        NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-        ITCLoginViewController *itcLoginViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([ITCLoginViewController class])];
-        itcLoginViewController.editAccountKey = [keyChainAccount valueForKey:kSAMKeychainAccountKey];
-        itcLoginViewController.delegate = self;
-        [self presentViewControllerAsSheet:itcLoginViewController];
-    }
-}
 
 #pragma mark - SelectAccountViewController Delegate
 -(void)selectedAccountType:(AccountType)accountType{
@@ -83,13 +71,6 @@
         case AccountTypeDropBox: {
             DropboxViewController *dropboxViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([DropboxViewController class])];
             [self presentViewControllerAsSheet:dropboxViewController];
-        }break;
-            
-        case AccountTypeITC: {
-            ITCLoginViewController *itcLoginViewController = [storyBoard instantiateControllerWithIdentifier:NSStringFromClass([ITCLoginViewController class])];
-            itcLoginViewController.isNewAccount = @YES;
-            itcLoginViewController.delegate = self;
-            [self presentViewControllerAsSheet:itcLoginViewController];
         }break;
     }
 }

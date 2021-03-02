@@ -45,18 +45,7 @@
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
     [ABLog log:@"All Command Line Arguments = %@",arguments];
     for (NSString *argument in arguments) {
-        if ([argument containsString:abArgsWorkspace]) {
-            NSArray *components = [argument componentsSeparatedByString:abArgsWorkspace];
-            [ABLog log:@"Workspace Components = %@",components];
-            if (components.count == 2) {
-                [self handleProjectAtPath:[components lastObject]];
-            } else {
-                [self addSessionLog:[NSString stringWithFormat:@"Invalid Workspace Argument %@",arguments]];
-                exit(abExitCodeForInvalidCommand);
-            }
-            break;
-        }
-        else if ([argument containsString:abArgsIPA]) {
+        if ([argument containsString:abArgsIPA]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsIPA];
             [ABLog log:@"IPA Components = %@",components];
             if (components.count == 2) {
