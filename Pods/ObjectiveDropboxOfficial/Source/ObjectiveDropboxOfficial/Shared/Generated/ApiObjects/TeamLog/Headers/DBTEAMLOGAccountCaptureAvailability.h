@@ -30,10 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag){
     /// (no description).
-    DBTEAMLOGAccountCaptureAvailabilityUnavailable,
+    DBTEAMLOGAccountCaptureAvailabilityAvailable,
 
     /// (no description).
-    DBTEAMLOGAccountCaptureAvailabilityAvailable,
+    DBTEAMLOGAccountCaptureAvailabilityUnavailable,
 
     /// (no description).
     DBTEAMLOGAccountCaptureAvailabilityOther,
@@ -46,18 +46,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "unavailable".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithUnavailable;
-
-///
 /// Initializes union class with tag state of "available".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAvailable;
+
+///
+/// Initializes union class with tag state of "unavailable".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUnavailable;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -71,18 +71,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAccountCaptureAvailabilityTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "unavailable".
-///
-/// @return Whether the union's current tag state has value "unavailable".
-///
-- (BOOL)isUnavailable;
-
-///
 /// Retrieves whether the union's current tag state has value "available".
 ///
 /// @return Whether the union's current tag state has value "available".
 ///
 - (BOOL)isAvailable;
+
+///
+/// Retrieves whether the union's current tag state has value "unavailable".
+///
+/// @return Whether the union's current tag state has value "unavailable".
+///
+- (BOOL)isUnavailable;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

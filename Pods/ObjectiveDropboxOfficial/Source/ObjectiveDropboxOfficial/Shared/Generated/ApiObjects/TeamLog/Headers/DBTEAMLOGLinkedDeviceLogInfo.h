@@ -34,17 +34,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGLinkedDeviceLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGLinkedDeviceLogInfo` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
-    /// mobile device session's details.
-    DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession,
-
     /// desktop device session's details.
     DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession,
 
-    /// web device session's details.
-    DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession,
-
     /// legacy device session's details.
     DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession,
+
+    /// mobile device session's details.
+    DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession,
+
+    /// web device session's details.
+    DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession,
 
     /// (no description).
     DBTEAMLOGLinkedDeviceLogInfoOther,
@@ -54,38 +54,26 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGLinkedDeviceLogInfoTag tag;
 
-/// mobile device session's details. @note Ensure the `isMobileDeviceSession`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGMobileDeviceSessionLogInfo *mobileDeviceSession;
-
 /// desktop device session's details. @note Ensure the `isDesktopDeviceSession`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGDesktopDeviceSessionLogInfo *desktopDeviceSession;
-
-/// web device session's details. @note Ensure the `isWebDeviceSession` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGWebDeviceSessionLogInfo *webDeviceSession;
 
 /// legacy device session's details. @note Ensure the `isLegacyDeviceSession`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGLegacyDeviceSessionLogInfo *legacyDeviceSession;
 
-#pragma mark - Constructors
+/// mobile device session's details. @note Ensure the `isMobileDeviceSession`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGMobileDeviceSessionLogInfo *mobileDeviceSession;
 
-///
-/// Initializes union class with tag state of "mobile_device_session".
-///
-/// Description of the "mobile_device_session" tag state: mobile device
-/// session's details.
-///
-/// @param mobileDeviceSession mobile device session's details.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithMobileDeviceSession:(DBTEAMLOGMobileDeviceSessionLogInfo *)mobileDeviceSession;
+/// web device session's details. @note Ensure the `isWebDeviceSession` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGWebDeviceSessionLogInfo *webDeviceSession;
+
+#pragma mark - Constructors
 
 ///
 /// Initializes union class with tag state of "desktop_device_session".
@@ -100,18 +88,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
 - (instancetype)initWithDesktopDeviceSession:(DBTEAMLOGDesktopDeviceSessionLogInfo *)desktopDeviceSession;
 
 ///
-/// Initializes union class with tag state of "web_device_session".
-///
-/// Description of the "web_device_session" tag state: web device session's
-/// details.
-///
-/// @param webDeviceSession web device session's details.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithWebDeviceSession:(DBTEAMLOGWebDeviceSessionLogInfo *)webDeviceSession;
-
-///
 /// Initializes union class with tag state of "legacy_device_session".
 ///
 /// Description of the "legacy_device_session" tag state: legacy device
@@ -124,6 +100,30 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
 - (instancetype)initWithLegacyDeviceSession:(DBTEAMLOGLegacyDeviceSessionLogInfo *)legacyDeviceSession;
 
 ///
+/// Initializes union class with tag state of "mobile_device_session".
+///
+/// Description of the "mobile_device_session" tag state: mobile device
+/// session's details.
+///
+/// @param mobileDeviceSession mobile device session's details.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMobileDeviceSession:(DBTEAMLOGMobileDeviceSessionLogInfo *)mobileDeviceSession;
+
+///
+/// Initializes union class with tag state of "web_device_session".
+///
+/// Description of the "web_device_session" tag state: web device session's
+/// details.
+///
+/// @param webDeviceSession web device session's details.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithWebDeviceSession:(DBTEAMLOGWebDeviceSessionLogInfo *)webDeviceSession;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -133,19 +133,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "mobile_device_session".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `mobileDeviceSession` property, otherwise a runtime exception will be
-/// thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "mobile_device_session".
-///
-- (BOOL)isMobileDeviceSession;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -162,18 +149,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "web_device_session".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `webDeviceSession` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "web_device_session".
-///
-- (BOOL)isWebDeviceSession;
-
-///
-/// Retrieves whether the union's current tag state has value
 /// "legacy_device_session".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -184,6 +159,31 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLinkedDeviceLogInfoTag){
 /// "legacy_device_session".
 ///
 - (BOOL)isLegacyDeviceSession;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "mobile_device_session".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `mobileDeviceSession` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "mobile_device_session".
+///
+- (BOOL)isMobileDeviceSession;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "web_device_session".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `webDeviceSession` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "web_device_session".
+///
+- (BOOL)isWebDeviceSession;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

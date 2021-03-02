@@ -17,29 +17,29 @@
 
 @implementation DBTEAMLOGAccessMethodLogInfo
 
-@synthesize endUser = _endUser;
-@synthesize signInAs = _signInAs;
-@synthesize contentManager = _contentManager;
 @synthesize adminConsole = _adminConsole;
-@synthesize enterpriseConsole = _enterpriseConsole;
 @synthesize api = _api;
+@synthesize contentManager = _contentManager;
+@synthesize endUser = _endUser;
+@synthesize enterpriseConsole = _enterpriseConsole;
+@synthesize signInAs = _signInAs;
 
 #pragma mark - Constructors
 
-- (instancetype)initWithEndUser:(DBTEAMLOGSessionLogInfo *)endUser {
+- (instancetype)initWithAdminConsole:(DBTEAMLOGWebSessionLogInfo *)adminConsole {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGAccessMethodLogInfoEndUser;
-    _endUser = endUser;
+    _tag = DBTEAMLOGAccessMethodLogInfoAdminConsole;
+    _adminConsole = adminConsole;
   }
   return self;
 }
 
-- (instancetype)initWithSignInAs:(DBTEAMLOGWebSessionLogInfo *)signInAs {
+- (instancetype)initWithApi:(DBTEAMLOGApiSessionLogInfo *)api {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGAccessMethodLogInfoSignInAs;
-    _signInAs = signInAs;
+    _tag = DBTEAMLOGAccessMethodLogInfoApi;
+    _api = api;
   }
   return self;
 }
@@ -53,11 +53,11 @@
   return self;
 }
 
-- (instancetype)initWithAdminConsole:(DBTEAMLOGWebSessionLogInfo *)adminConsole {
+- (instancetype)initWithEndUser:(DBTEAMLOGSessionLogInfo *)endUser {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGAccessMethodLogInfoAdminConsole;
-    _adminConsole = adminConsole;
+    _tag = DBTEAMLOGAccessMethodLogInfoEndUser;
+    _endUser = endUser;
   }
   return self;
 }
@@ -71,11 +71,11 @@
   return self;
 }
 
-- (instancetype)initWithApi:(DBTEAMLOGApiSessionLogInfo *)api {
+- (instancetype)initWithSignInAs:(DBTEAMLOGWebSessionLogInfo *)signInAs {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGAccessMethodLogInfoApi;
-    _api = api;
+    _tag = DBTEAMLOGAccessMethodLogInfoSignInAs;
+    _signInAs = signInAs;
   }
   return self;
 }
@@ -90,20 +90,20 @@
 
 #pragma mark - Instance field accessors
 
-- (DBTEAMLOGSessionLogInfo *)endUser {
-  if (![self isEndUser]) {
+- (DBTEAMLOGWebSessionLogInfo *)adminConsole {
+  if (![self isAdminConsole]) {
     [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoEndUser, but was %@.", [self tagName]];
+                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoAdminConsole, but was %@.", [self tagName]];
   }
-  return _endUser;
+  return _adminConsole;
 }
 
-- (DBTEAMLOGWebSessionLogInfo *)signInAs {
-  if (![self isSignInAs]) {
+- (DBTEAMLOGApiSessionLogInfo *)api {
+  if (![self isApi]) {
     [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoSignInAs, but was %@.", [self tagName]];
+                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoApi, but was %@.", [self tagName]];
   }
-  return _signInAs;
+  return _api;
 }
 
 - (DBTEAMLOGWebSessionLogInfo *)contentManager {
@@ -115,12 +115,12 @@
   return _contentManager;
 }
 
-- (DBTEAMLOGWebSessionLogInfo *)adminConsole {
-  if (![self isAdminConsole]) {
+- (DBTEAMLOGSessionLogInfo *)endUser {
+  if (![self isEndUser]) {
     [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoAdminConsole, but was %@.", [self tagName]];
+                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoEndUser, but was %@.", [self tagName]];
   }
-  return _adminConsole;
+  return _endUser;
 }
 
 - (DBTEAMLOGWebSessionLogInfo *)enterpriseConsole {
@@ -132,38 +132,38 @@
   return _enterpriseConsole;
 }
 
-- (DBTEAMLOGApiSessionLogInfo *)api {
-  if (![self isApi]) {
+- (DBTEAMLOGWebSessionLogInfo *)signInAs {
+  if (![self isSignInAs]) {
     [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoApi, but was %@.", [self tagName]];
+                format:@"Invalid tag: required DBTEAMLOGAccessMethodLogInfoSignInAs, but was %@.", [self tagName]];
   }
-  return _api;
+  return _signInAs;
 }
 
 #pragma mark - Tag state methods
 
-- (BOOL)isEndUser {
-  return _tag == DBTEAMLOGAccessMethodLogInfoEndUser;
+- (BOOL)isAdminConsole {
+  return _tag == DBTEAMLOGAccessMethodLogInfoAdminConsole;
 }
 
-- (BOOL)isSignInAs {
-  return _tag == DBTEAMLOGAccessMethodLogInfoSignInAs;
+- (BOOL)isApi {
+  return _tag == DBTEAMLOGAccessMethodLogInfoApi;
 }
 
 - (BOOL)isContentManager {
   return _tag == DBTEAMLOGAccessMethodLogInfoContentManager;
 }
 
-- (BOOL)isAdminConsole {
-  return _tag == DBTEAMLOGAccessMethodLogInfoAdminConsole;
+- (BOOL)isEndUser {
+  return _tag == DBTEAMLOGAccessMethodLogInfoEndUser;
 }
 
 - (BOOL)isEnterpriseConsole {
   return _tag == DBTEAMLOGAccessMethodLogInfoEnterpriseConsole;
 }
 
-- (BOOL)isApi {
-  return _tag == DBTEAMLOGAccessMethodLogInfoApi;
+- (BOOL)isSignInAs {
+  return _tag == DBTEAMLOGAccessMethodLogInfoSignInAs;
 }
 
 - (BOOL)isOther {
@@ -172,18 +172,18 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGAccessMethodLogInfoEndUser:
-    return @"DBTEAMLOGAccessMethodLogInfoEndUser";
-  case DBTEAMLOGAccessMethodLogInfoSignInAs:
-    return @"DBTEAMLOGAccessMethodLogInfoSignInAs";
-  case DBTEAMLOGAccessMethodLogInfoContentManager:
-    return @"DBTEAMLOGAccessMethodLogInfoContentManager";
   case DBTEAMLOGAccessMethodLogInfoAdminConsole:
     return @"DBTEAMLOGAccessMethodLogInfoAdminConsole";
-  case DBTEAMLOGAccessMethodLogInfoEnterpriseConsole:
-    return @"DBTEAMLOGAccessMethodLogInfoEnterpriseConsole";
   case DBTEAMLOGAccessMethodLogInfoApi:
     return @"DBTEAMLOGAccessMethodLogInfoApi";
+  case DBTEAMLOGAccessMethodLogInfoContentManager:
+    return @"DBTEAMLOGAccessMethodLogInfoContentManager";
+  case DBTEAMLOGAccessMethodLogInfoEndUser:
+    return @"DBTEAMLOGAccessMethodLogInfoEndUser";
+  case DBTEAMLOGAccessMethodLogInfoEnterpriseConsole:
+    return @"DBTEAMLOGAccessMethodLogInfoEnterpriseConsole";
+  case DBTEAMLOGAccessMethodLogInfoSignInAs:
+    return @"DBTEAMLOGAccessMethodLogInfoSignInAs";
   case DBTEAMLOGAccessMethodLogInfoOther:
     return @"DBTEAMLOGAccessMethodLogInfoOther";
   }
@@ -222,18 +222,18 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGAccessMethodLogInfoEndUser:
-    result = prime * result + [self.endUser hash];
-  case DBTEAMLOGAccessMethodLogInfoSignInAs:
-    result = prime * result + [self.signInAs hash];
-  case DBTEAMLOGAccessMethodLogInfoContentManager:
-    result = prime * result + [self.contentManager hash];
   case DBTEAMLOGAccessMethodLogInfoAdminConsole:
     result = prime * result + [self.adminConsole hash];
-  case DBTEAMLOGAccessMethodLogInfoEnterpriseConsole:
-    result = prime * result + [self.enterpriseConsole hash];
   case DBTEAMLOGAccessMethodLogInfoApi:
     result = prime * result + [self.api hash];
+  case DBTEAMLOGAccessMethodLogInfoContentManager:
+    result = prime * result + [self.contentManager hash];
+  case DBTEAMLOGAccessMethodLogInfoEndUser:
+    result = prime * result + [self.endUser hash];
+  case DBTEAMLOGAccessMethodLogInfoEnterpriseConsole:
+    result = prime * result + [self.enterpriseConsole hash];
+  case DBTEAMLOGAccessMethodLogInfoSignInAs:
+    result = prime * result + [self.signInAs hash];
   case DBTEAMLOGAccessMethodLogInfoOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -261,18 +261,18 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGAccessMethodLogInfoEndUser:
-    return [self.endUser isEqual:anAccessMethodLogInfo.endUser];
-  case DBTEAMLOGAccessMethodLogInfoSignInAs:
-    return [self.signInAs isEqual:anAccessMethodLogInfo.signInAs];
-  case DBTEAMLOGAccessMethodLogInfoContentManager:
-    return [self.contentManager isEqual:anAccessMethodLogInfo.contentManager];
   case DBTEAMLOGAccessMethodLogInfoAdminConsole:
     return [self.adminConsole isEqual:anAccessMethodLogInfo.adminConsole];
-  case DBTEAMLOGAccessMethodLogInfoEnterpriseConsole:
-    return [self.enterpriseConsole isEqual:anAccessMethodLogInfo.enterpriseConsole];
   case DBTEAMLOGAccessMethodLogInfoApi:
     return [self.api isEqual:anAccessMethodLogInfo.api];
+  case DBTEAMLOGAccessMethodLogInfoContentManager:
+    return [self.contentManager isEqual:anAccessMethodLogInfo.contentManager];
+  case DBTEAMLOGAccessMethodLogInfoEndUser:
+    return [self.endUser isEqual:anAccessMethodLogInfo.endUser];
+  case DBTEAMLOGAccessMethodLogInfoEnterpriseConsole:
+    return [self.enterpriseConsole isEqual:anAccessMethodLogInfo.enterpriseConsole];
+  case DBTEAMLOGAccessMethodLogInfoSignInAs:
+    return [self.signInAs isEqual:anAccessMethodLogInfo.signInAs];
   case DBTEAMLOGAccessMethodLogInfoOther:
     return [[self tagName] isEqual:[anAccessMethodLogInfo tagName]];
   }
@@ -288,24 +288,24 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccessMethodLogInfo *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isEndUser]) {
-    jsonDict[@"end_user"] = [[DBTEAMLOGSessionLogInfoSerializer serialize:valueObj.endUser] mutableCopy];
-    jsonDict[@".tag"] = @"end_user";
-  } else if ([valueObj isSignInAs]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.signInAs] mutableCopy];
-    jsonDict[@".tag"] = @"sign_in_as";
-  } else if ([valueObj isContentManager]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.contentManager] mutableCopy];
-    jsonDict[@".tag"] = @"content_manager";
-  } else if ([valueObj isAdminConsole]) {
+  if ([valueObj isAdminConsole]) {
     jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.adminConsole] mutableCopy];
     jsonDict[@".tag"] = @"admin_console";
-  } else if ([valueObj isEnterpriseConsole]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.enterpriseConsole] mutableCopy];
-    jsonDict[@".tag"] = @"enterprise_console";
   } else if ([valueObj isApi]) {
     jsonDict = [[DBTEAMLOGApiSessionLogInfoSerializer serialize:valueObj.api] mutableCopy];
     jsonDict[@".tag"] = @"api";
+  } else if ([valueObj isContentManager]) {
+    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.contentManager] mutableCopy];
+    jsonDict[@".tag"] = @"content_manager";
+  } else if ([valueObj isEndUser]) {
+    jsonDict[@"end_user"] = [[DBTEAMLOGSessionLogInfoSerializer serialize:valueObj.endUser] mutableCopy];
+    jsonDict[@".tag"] = @"end_user";
+  } else if ([valueObj isEnterpriseConsole]) {
+    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.enterpriseConsole] mutableCopy];
+    jsonDict[@".tag"] = @"enterprise_console";
+  } else if ([valueObj isSignInAs]) {
+    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.signInAs] mutableCopy];
+    jsonDict[@".tag"] = @"sign_in_as";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -318,24 +318,24 @@
 + (DBTEAMLOGAccessMethodLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"end_user"]) {
-    DBTEAMLOGSessionLogInfo *endUser = [DBTEAMLOGSessionLogInfoSerializer deserialize:valueDict[@"end_user"]];
-    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithEndUser:endUser];
-  } else if ([tag isEqualToString:@"sign_in_as"]) {
-    DBTEAMLOGWebSessionLogInfo *signInAs = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
-    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithSignInAs:signInAs];
-  } else if ([tag isEqualToString:@"content_manager"]) {
-    DBTEAMLOGWebSessionLogInfo *contentManager = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
-    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithContentManager:contentManager];
-  } else if ([tag isEqualToString:@"admin_console"]) {
+  if ([tag isEqualToString:@"admin_console"]) {
     DBTEAMLOGWebSessionLogInfo *adminConsole = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithAdminConsole:adminConsole];
-  } else if ([tag isEqualToString:@"enterprise_console"]) {
-    DBTEAMLOGWebSessionLogInfo *enterpriseConsole = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
-    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithEnterpriseConsole:enterpriseConsole];
   } else if ([tag isEqualToString:@"api"]) {
     DBTEAMLOGApiSessionLogInfo *api = [DBTEAMLOGApiSessionLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithApi:api];
+  } else if ([tag isEqualToString:@"content_manager"]) {
+    DBTEAMLOGWebSessionLogInfo *contentManager = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
+    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithContentManager:contentManager];
+  } else if ([tag isEqualToString:@"end_user"]) {
+    DBTEAMLOGSessionLogInfo *endUser = [DBTEAMLOGSessionLogInfoSerializer deserialize:valueDict[@"end_user"]];
+    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithEndUser:endUser];
+  } else if ([tag isEqualToString:@"enterprise_console"]) {
+    DBTEAMLOGWebSessionLogInfo *enterpriseConsole = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
+    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithEnterpriseConsole:enterpriseConsole];
+  } else if ([tag isEqualToString:@"sign_in_as"]) {
+    DBTEAMLOGWebSessionLogInfo *signInAs = [DBTEAMLOGWebSessionLogInfoSerializer deserialize:valueDict];
+    return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithSignInAs:signInAs];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGAccessMethodLogInfo alloc] initWithOther];
   } else {
@@ -355,18 +355,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithUnavailable {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGAccountCaptureAvailabilityUnavailable;
-  }
-  return self;
-}
-
 - (instancetype)initWithAvailable {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGAccountCaptureAvailabilityAvailable;
+  }
+  return self;
+}
+
+- (instancetype)initWithUnavailable {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAccountCaptureAvailabilityUnavailable;
   }
   return self;
 }
@@ -383,12 +383,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isUnavailable {
-  return _tag == DBTEAMLOGAccountCaptureAvailabilityUnavailable;
-}
-
 - (BOOL)isAvailable {
   return _tag == DBTEAMLOGAccountCaptureAvailabilityAvailable;
+}
+
+- (BOOL)isUnavailable {
+  return _tag == DBTEAMLOGAccountCaptureAvailabilityUnavailable;
 }
 
 - (BOOL)isOther {
@@ -397,10 +397,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGAccountCaptureAvailabilityUnavailable:
-    return @"DBTEAMLOGAccountCaptureAvailabilityUnavailable";
   case DBTEAMLOGAccountCaptureAvailabilityAvailable:
     return @"DBTEAMLOGAccountCaptureAvailabilityAvailable";
+  case DBTEAMLOGAccountCaptureAvailabilityUnavailable:
+    return @"DBTEAMLOGAccountCaptureAvailabilityUnavailable";
   case DBTEAMLOGAccountCaptureAvailabilityOther:
     return @"DBTEAMLOGAccountCaptureAvailabilityOther";
   }
@@ -439,9 +439,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGAccountCaptureAvailabilityUnavailable:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCaptureAvailabilityAvailable:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAccountCaptureAvailabilityUnavailable:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCaptureAvailabilityOther:
     result = prime * result + [[self tagName] hash];
@@ -470,9 +470,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGAccountCaptureAvailabilityUnavailable:
-    return [[self tagName] isEqual:[anAccountCaptureAvailability tagName]];
   case DBTEAMLOGAccountCaptureAvailabilityAvailable:
+    return [[self tagName] isEqual:[anAccountCaptureAvailability tagName]];
+  case DBTEAMLOGAccountCaptureAvailabilityUnavailable:
     return [[self tagName] isEqual:[anAccountCaptureAvailability tagName]];
   case DBTEAMLOGAccountCaptureAvailabilityOther:
     return [[self tagName] isEqual:[anAccountCaptureAvailability tagName]];
@@ -489,10 +489,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCaptureAvailability *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isUnavailable]) {
-    jsonDict[@".tag"] = @"unavailable";
-  } else if ([valueObj isAvailable]) {
+  if ([valueObj isAvailable]) {
     jsonDict[@".tag"] = @"available";
+  } else if ([valueObj isUnavailable]) {
+    jsonDict[@".tag"] = @"unavailable";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -505,10 +505,10 @@
 + (DBTEAMLOGAccountCaptureAvailability *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"unavailable"]) {
-    return [[DBTEAMLOGAccountCaptureAvailability alloc] initWithUnavailable];
-  } else if ([tag isEqualToString:@"available"]) {
+  if ([tag isEqualToString:@"available"]) {
     return [[DBTEAMLOGAccountCaptureAvailability alloc] initWithAvailable];
+  } else if ([tag isEqualToString:@"unavailable"]) {
+    return [[DBTEAMLOGAccountCaptureAvailability alloc] initWithUnavailable];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGAccountCaptureAvailability alloc] initWithOther];
   } else {
@@ -1398,18 +1398,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithProactiveWarningNotification {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification;
-  }
-  return self;
-}
-
 - (instancetype)initWithActionableNotification {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGAccountCaptureNotificationTypeActionableNotification;
+  }
+  return self;
+}
+
+- (instancetype)initWithProactiveWarningNotification {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification;
   }
   return self;
 }
@@ -1426,12 +1426,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isProactiveWarningNotification {
-  return _tag == DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification;
-}
-
 - (BOOL)isActionableNotification {
   return _tag == DBTEAMLOGAccountCaptureNotificationTypeActionableNotification;
+}
+
+- (BOOL)isProactiveWarningNotification {
+  return _tag == DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification;
 }
 
 - (BOOL)isOther {
@@ -1440,10 +1440,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification:
-    return @"DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification";
   case DBTEAMLOGAccountCaptureNotificationTypeActionableNotification:
     return @"DBTEAMLOGAccountCaptureNotificationTypeActionableNotification";
+  case DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification:
+    return @"DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification";
   case DBTEAMLOGAccountCaptureNotificationTypeOther:
     return @"DBTEAMLOGAccountCaptureNotificationTypeOther";
   }
@@ -1482,9 +1482,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCaptureNotificationTypeActionableNotification:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCaptureNotificationTypeOther:
     result = prime * result + [[self tagName] hash];
@@ -1514,9 +1514,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification:
-    return [[self tagName] isEqual:[anAccountCaptureNotificationType tagName]];
   case DBTEAMLOGAccountCaptureNotificationTypeActionableNotification:
+    return [[self tagName] isEqual:[anAccountCaptureNotificationType tagName]];
+  case DBTEAMLOGAccountCaptureNotificationTypeProactiveWarningNotification:
     return [[self tagName] isEqual:[anAccountCaptureNotificationType tagName]];
   case DBTEAMLOGAccountCaptureNotificationTypeOther:
     return [[self tagName] isEqual:[anAccountCaptureNotificationType tagName]];
@@ -1533,10 +1533,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCaptureNotificationType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isProactiveWarningNotification]) {
-    jsonDict[@".tag"] = @"proactive_warning_notification";
-  } else if ([valueObj isActionableNotification]) {
+  if ([valueObj isActionableNotification]) {
     jsonDict[@".tag"] = @"actionable_notification";
+  } else if ([valueObj isProactiveWarningNotification]) {
+    jsonDict[@".tag"] = @"proactive_warning_notification";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -1549,10 +1549,10 @@
 + (DBTEAMLOGAccountCaptureNotificationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"proactive_warning_notification"]) {
-    return [[DBTEAMLOGAccountCaptureNotificationType alloc] initWithProactiveWarningNotification];
-  } else if ([tag isEqualToString:@"actionable_notification"]) {
+  if ([tag isEqualToString:@"actionable_notification"]) {
     return [[DBTEAMLOGAccountCaptureNotificationType alloc] initWithActionableNotification];
+  } else if ([tag isEqualToString:@"proactive_warning_notification"]) {
+    return [[DBTEAMLOGAccountCaptureNotificationType alloc] initWithProactiveWarningNotification];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGAccountCaptureNotificationType alloc] initWithOther];
   } else {
@@ -1572,6 +1572,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithAllUsers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAccountCapturePolicyAllUsers;
+  }
+  return self;
+}
+
 - (instancetype)initWithDisabled {
   self = [super init];
   if (self) {
@@ -1588,14 +1596,6 @@
   return self;
 }
 
-- (instancetype)initWithAllUsers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGAccountCapturePolicyAllUsers;
-  }
-  return self;
-}
-
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -1608,6 +1608,10 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAllUsers {
+  return _tag == DBTEAMLOGAccountCapturePolicyAllUsers;
+}
+
 - (BOOL)isDisabled {
   return _tag == DBTEAMLOGAccountCapturePolicyDisabled;
 }
@@ -1616,22 +1620,18 @@
   return _tag == DBTEAMLOGAccountCapturePolicyInvitedUsers;
 }
 
-- (BOOL)isAllUsers {
-  return _tag == DBTEAMLOGAccountCapturePolicyAllUsers;
-}
-
 - (BOOL)isOther {
   return _tag == DBTEAMLOGAccountCapturePolicyOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGAccountCapturePolicyAllUsers:
+    return @"DBTEAMLOGAccountCapturePolicyAllUsers";
   case DBTEAMLOGAccountCapturePolicyDisabled:
     return @"DBTEAMLOGAccountCapturePolicyDisabled";
   case DBTEAMLOGAccountCapturePolicyInvitedUsers:
     return @"DBTEAMLOGAccountCapturePolicyInvitedUsers";
-  case DBTEAMLOGAccountCapturePolicyAllUsers:
-    return @"DBTEAMLOGAccountCapturePolicyAllUsers";
   case DBTEAMLOGAccountCapturePolicyOther:
     return @"DBTEAMLOGAccountCapturePolicyOther";
   }
@@ -1670,11 +1670,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGAccountCapturePolicyAllUsers:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCapturePolicyDisabled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCapturePolicyInvitedUsers:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGAccountCapturePolicyAllUsers:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAccountCapturePolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -1703,11 +1703,11 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGAccountCapturePolicyAllUsers:
+    return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
   case DBTEAMLOGAccountCapturePolicyDisabled:
     return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
   case DBTEAMLOGAccountCapturePolicyInvitedUsers:
-    return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
-  case DBTEAMLOGAccountCapturePolicyAllUsers:
     return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
   case DBTEAMLOGAccountCapturePolicyOther:
     return [[self tagName] isEqual:[anAccountCapturePolicy tagName]];
@@ -1724,12 +1724,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAccountCapturePolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isDisabled]) {
+  if ([valueObj isAllUsers]) {
+    jsonDict[@".tag"] = @"all_users";
+  } else if ([valueObj isDisabled]) {
     jsonDict[@".tag"] = @"disabled";
   } else if ([valueObj isInvitedUsers]) {
     jsonDict[@".tag"] = @"invited_users";
-  } else if ([valueObj isAllUsers]) {
-    jsonDict[@".tag"] = @"all_users";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -1742,12 +1742,12 @@
 + (DBTEAMLOGAccountCapturePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"disabled"]) {
+  if ([tag isEqualToString:@"all_users"]) {
+    return [[DBTEAMLOGAccountCapturePolicy alloc] initWithAllUsers];
+  } else if ([tag isEqualToString:@"disabled"]) {
     return [[DBTEAMLOGAccountCapturePolicy alloc] initWithDisabled];
   } else if ([tag isEqualToString:@"invited_users"]) {
     return [[DBTEAMLOGAccountCapturePolicy alloc] initWithInvitedUsers];
-  } else if ([tag isEqualToString:@"all_users"]) {
-    return [[DBTEAMLOGAccountCapturePolicy alloc] initWithAllUsers];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGAccountCapturePolicy alloc] initWithOther];
   } else {
@@ -2349,20 +2349,11 @@
 
 @implementation DBTEAMLOGActionDetails
 
-@synthesize teamJoinDetails = _teamJoinDetails;
 @synthesize removeAction = _removeAction;
 @synthesize teamInviteDetails = _teamInviteDetails;
+@synthesize teamJoinDetails = _teamJoinDetails;
 
 #pragma mark - Constructors
-
-- (instancetype)initWithTeamJoinDetails:(DBTEAMLOGJoinTeamDetails *)teamJoinDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGActionDetailsTeamJoinDetails;
-    _teamJoinDetails = teamJoinDetails;
-  }
-  return self;
-}
 
 - (instancetype)initWithRemoveAction:(DBTEAMLOGMemberRemoveActionType *)removeAction {
   self = [super init];
@@ -2382,6 +2373,15 @@
   return self;
 }
 
+- (instancetype)initWithTeamJoinDetails:(DBTEAMLOGJoinTeamDetails *)teamJoinDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGActionDetailsTeamJoinDetails;
+    _teamJoinDetails = teamJoinDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -2391,14 +2391,6 @@
 }
 
 #pragma mark - Instance field accessors
-
-- (DBTEAMLOGJoinTeamDetails *)teamJoinDetails {
-  if (![self isTeamJoinDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGActionDetailsTeamJoinDetails, but was %@.", [self tagName]];
-  }
-  return _teamJoinDetails;
-}
 
 - (DBTEAMLOGMemberRemoveActionType *)removeAction {
   if (![self isRemoveAction]) {
@@ -2416,11 +2408,15 @@
   return _teamInviteDetails;
 }
 
-#pragma mark - Tag state methods
-
-- (BOOL)isTeamJoinDetails {
-  return _tag == DBTEAMLOGActionDetailsTeamJoinDetails;
+- (DBTEAMLOGJoinTeamDetails *)teamJoinDetails {
+  if (![self isTeamJoinDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGActionDetailsTeamJoinDetails, but was %@.", [self tagName]];
+  }
+  return _teamJoinDetails;
 }
+
+#pragma mark - Tag state methods
 
 - (BOOL)isRemoveAction {
   return _tag == DBTEAMLOGActionDetailsRemoveAction;
@@ -2430,18 +2426,22 @@
   return _tag == DBTEAMLOGActionDetailsTeamInviteDetails;
 }
 
+- (BOOL)isTeamJoinDetails {
+  return _tag == DBTEAMLOGActionDetailsTeamJoinDetails;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGActionDetailsOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGActionDetailsTeamJoinDetails:
-    return @"DBTEAMLOGActionDetailsTeamJoinDetails";
   case DBTEAMLOGActionDetailsRemoveAction:
     return @"DBTEAMLOGActionDetailsRemoveAction";
   case DBTEAMLOGActionDetailsTeamInviteDetails:
     return @"DBTEAMLOGActionDetailsTeamInviteDetails";
+  case DBTEAMLOGActionDetailsTeamJoinDetails:
+    return @"DBTEAMLOGActionDetailsTeamJoinDetails";
   case DBTEAMLOGActionDetailsOther:
     return @"DBTEAMLOGActionDetailsOther";
   }
@@ -2480,12 +2480,12 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGActionDetailsTeamJoinDetails:
-    result = prime * result + [self.teamJoinDetails hash];
   case DBTEAMLOGActionDetailsRemoveAction:
     result = prime * result + [self.removeAction hash];
   case DBTEAMLOGActionDetailsTeamInviteDetails:
     result = prime * result + [self.teamInviteDetails hash];
+  case DBTEAMLOGActionDetailsTeamJoinDetails:
+    result = prime * result + [self.teamJoinDetails hash];
   case DBTEAMLOGActionDetailsOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -2513,12 +2513,12 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGActionDetailsTeamJoinDetails:
-    return [self.teamJoinDetails isEqual:anActionDetails.teamJoinDetails];
   case DBTEAMLOGActionDetailsRemoveAction:
     return [self.removeAction isEqual:anActionDetails.removeAction];
   case DBTEAMLOGActionDetailsTeamInviteDetails:
     return [self.teamInviteDetails isEqual:anActionDetails.teamInviteDetails];
+  case DBTEAMLOGActionDetailsTeamJoinDetails:
+    return [self.teamJoinDetails isEqual:anActionDetails.teamJoinDetails];
   case DBTEAMLOGActionDetailsOther:
     return [[self tagName] isEqual:[anActionDetails tagName]];
   }
@@ -2534,16 +2534,16 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGActionDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamJoinDetails]) {
-    jsonDict = [[DBTEAMLOGJoinTeamDetailsSerializer serialize:valueObj.teamJoinDetails] mutableCopy];
-    jsonDict[@".tag"] = @"team_join_details";
-  } else if ([valueObj isRemoveAction]) {
+  if ([valueObj isRemoveAction]) {
     jsonDict[@"remove_action"] =
         [[DBTEAMLOGMemberRemoveActionTypeSerializer serialize:valueObj.removeAction] mutableCopy];
     jsonDict[@".tag"] = @"remove_action";
   } else if ([valueObj isTeamInviteDetails]) {
     jsonDict = [[DBTEAMLOGTeamInviteDetailsSerializer serialize:valueObj.teamInviteDetails] mutableCopy];
     jsonDict[@".tag"] = @"team_invite_details";
+  } else if ([valueObj isTeamJoinDetails]) {
+    jsonDict = [[DBTEAMLOGJoinTeamDetailsSerializer serialize:valueObj.teamJoinDetails] mutableCopy];
+    jsonDict[@".tag"] = @"team_join_details";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -2556,16 +2556,16 @@
 + (DBTEAMLOGActionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_join_details"]) {
-    DBTEAMLOGJoinTeamDetails *teamJoinDetails = [DBTEAMLOGJoinTeamDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGActionDetails alloc] initWithTeamJoinDetails:teamJoinDetails];
-  } else if ([tag isEqualToString:@"remove_action"]) {
+  if ([tag isEqualToString:@"remove_action"]) {
     DBTEAMLOGMemberRemoveActionType *removeAction =
         [DBTEAMLOGMemberRemoveActionTypeSerializer deserialize:valueDict[@"remove_action"]];
     return [[DBTEAMLOGActionDetails alloc] initWithRemoveAction:removeAction];
   } else if ([tag isEqualToString:@"team_invite_details"]) {
     DBTEAMLOGTeamInviteDetails *teamInviteDetails = [DBTEAMLOGTeamInviteDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGActionDetails alloc] initWithTeamInviteDetails:teamInviteDetails];
+  } else if ([tag isEqualToString:@"team_join_details"]) {
+    DBTEAMLOGJoinTeamDetails *teamJoinDetails = [DBTEAMLOGJoinTeamDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGActionDetails alloc] initWithTeamJoinDetails:teamJoinDetails];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGActionDetails alloc] initWithOther];
   } else {
@@ -2586,27 +2586,26 @@
 
 @implementation DBTEAMLOGActorLogInfo
 
-@synthesize user = _user;
 @synthesize admin = _admin;
 @synthesize app = _app;
 @synthesize reseller = _reseller;
+@synthesize user = _user;
 
 #pragma mark - Constructors
-
-- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGActorLogInfoUser;
-    _user = user;
-  }
-  return self;
-}
 
 - (instancetype)initWithAdmin:(DBTEAMLOGUserLogInfo *)admin {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGActorLogInfoAdmin;
     _admin = admin;
+  }
+  return self;
+}
+
+- (instancetype)initWithAnonymous {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGActorLogInfoAnonymous;
   }
   return self;
 }
@@ -2620,6 +2619,14 @@
   return self;
 }
 
+- (instancetype)initWithDropbox {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGActorLogInfoDropbox;
+  }
+  return self;
+}
+
 - (instancetype)initWithReseller:(DBTEAMLOGResellerLogInfo *)reseller {
   self = [super init];
   if (self) {
@@ -2629,18 +2636,11 @@
   return self;
 }
 
-- (instancetype)initWithDropbox {
+- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGActorLogInfoDropbox;
-  }
-  return self;
-}
-
-- (instancetype)initWithAnonymous {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGActorLogInfoAnonymous;
+    _tag = DBTEAMLOGActorLogInfoUser;
+    _user = user;
   }
   return self;
 }
@@ -2654,14 +2654,6 @@
 }
 
 #pragma mark - Instance field accessors
-
-- (DBTEAMLOGUserLogInfo *)user {
-  if (![self isUser]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGActorLogInfoUser, but was %@.", [self tagName]];
-  }
-  return _user;
-}
 
 - (DBTEAMLOGUserLogInfo *)admin {
   if (![self isAdmin]) {
@@ -2687,30 +2679,38 @@
   return _reseller;
 }
 
-#pragma mark - Tag state methods
-
-- (BOOL)isUser {
-  return _tag == DBTEAMLOGActorLogInfoUser;
+- (DBTEAMLOGUserLogInfo *)user {
+  if (![self isUser]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGActorLogInfoUser, but was %@.", [self tagName]];
+  }
+  return _user;
 }
+
+#pragma mark - Tag state methods
 
 - (BOOL)isAdmin {
   return _tag == DBTEAMLOGActorLogInfoAdmin;
+}
+
+- (BOOL)isAnonymous {
+  return _tag == DBTEAMLOGActorLogInfoAnonymous;
 }
 
 - (BOOL)isApp {
   return _tag == DBTEAMLOGActorLogInfoApp;
 }
 
-- (BOOL)isReseller {
-  return _tag == DBTEAMLOGActorLogInfoReseller;
-}
-
 - (BOOL)isDropbox {
   return _tag == DBTEAMLOGActorLogInfoDropbox;
 }
 
-- (BOOL)isAnonymous {
-  return _tag == DBTEAMLOGActorLogInfoAnonymous;
+- (BOOL)isReseller {
+  return _tag == DBTEAMLOGActorLogInfoReseller;
+}
+
+- (BOOL)isUser {
+  return _tag == DBTEAMLOGActorLogInfoUser;
 }
 
 - (BOOL)isOther {
@@ -2719,18 +2719,18 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGActorLogInfoUser:
-    return @"DBTEAMLOGActorLogInfoUser";
   case DBTEAMLOGActorLogInfoAdmin:
     return @"DBTEAMLOGActorLogInfoAdmin";
-  case DBTEAMLOGActorLogInfoApp:
-    return @"DBTEAMLOGActorLogInfoApp";
-  case DBTEAMLOGActorLogInfoReseller:
-    return @"DBTEAMLOGActorLogInfoReseller";
-  case DBTEAMLOGActorLogInfoDropbox:
-    return @"DBTEAMLOGActorLogInfoDropbox";
   case DBTEAMLOGActorLogInfoAnonymous:
     return @"DBTEAMLOGActorLogInfoAnonymous";
+  case DBTEAMLOGActorLogInfoApp:
+    return @"DBTEAMLOGActorLogInfoApp";
+  case DBTEAMLOGActorLogInfoDropbox:
+    return @"DBTEAMLOGActorLogInfoDropbox";
+  case DBTEAMLOGActorLogInfoReseller:
+    return @"DBTEAMLOGActorLogInfoReseller";
+  case DBTEAMLOGActorLogInfoUser:
+    return @"DBTEAMLOGActorLogInfoUser";
   case DBTEAMLOGActorLogInfoOther:
     return @"DBTEAMLOGActorLogInfoOther";
   }
@@ -2769,18 +2769,18 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGActorLogInfoUser:
-    result = prime * result + [self.user hash];
   case DBTEAMLOGActorLogInfoAdmin:
     result = prime * result + [self.admin hash];
-  case DBTEAMLOGActorLogInfoApp:
-    result = prime * result + [self.app hash];
-  case DBTEAMLOGActorLogInfoReseller:
-    result = prime * result + [self.reseller hash];
-  case DBTEAMLOGActorLogInfoDropbox:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGActorLogInfoAnonymous:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGActorLogInfoApp:
+    result = prime * result + [self.app hash];
+  case DBTEAMLOGActorLogInfoDropbox:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGActorLogInfoReseller:
+    result = prime * result + [self.reseller hash];
+  case DBTEAMLOGActorLogInfoUser:
+    result = prime * result + [self.user hash];
   case DBTEAMLOGActorLogInfoOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -2808,18 +2808,18 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGActorLogInfoUser:
-    return [self.user isEqual:anActorLogInfo.user];
   case DBTEAMLOGActorLogInfoAdmin:
     return [self.admin isEqual:anActorLogInfo.admin];
-  case DBTEAMLOGActorLogInfoApp:
-    return [self.app isEqual:anActorLogInfo.app];
-  case DBTEAMLOGActorLogInfoReseller:
-    return [self.reseller isEqual:anActorLogInfo.reseller];
-  case DBTEAMLOGActorLogInfoDropbox:
-    return [[self tagName] isEqual:[anActorLogInfo tagName]];
   case DBTEAMLOGActorLogInfoAnonymous:
     return [[self tagName] isEqual:[anActorLogInfo tagName]];
+  case DBTEAMLOGActorLogInfoApp:
+    return [self.app isEqual:anActorLogInfo.app];
+  case DBTEAMLOGActorLogInfoDropbox:
+    return [[self tagName] isEqual:[anActorLogInfo tagName]];
+  case DBTEAMLOGActorLogInfoReseller:
+    return [self.reseller isEqual:anActorLogInfo.reseller];
+  case DBTEAMLOGActorLogInfoUser:
+    return [self.user isEqual:anActorLogInfo.user];
   case DBTEAMLOGActorLogInfoOther:
     return [[self tagName] isEqual:[anActorLogInfo tagName]];
   }
@@ -2835,22 +2835,22 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGActorLogInfo *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isUser]) {
-    jsonDict[@"user"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.user] mutableCopy];
-    jsonDict[@".tag"] = @"user";
-  } else if ([valueObj isAdmin]) {
+  if ([valueObj isAdmin]) {
     jsonDict[@"admin"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.admin] mutableCopy];
     jsonDict[@".tag"] = @"admin";
+  } else if ([valueObj isAnonymous]) {
+    jsonDict[@".tag"] = @"anonymous";
   } else if ([valueObj isApp]) {
     jsonDict[@"app"] = [[DBTEAMLOGAppLogInfoSerializer serialize:valueObj.app] mutableCopy];
     jsonDict[@".tag"] = @"app";
+  } else if ([valueObj isDropbox]) {
+    jsonDict[@".tag"] = @"dropbox";
   } else if ([valueObj isReseller]) {
     jsonDict = [[DBTEAMLOGResellerLogInfoSerializer serialize:valueObj.reseller] mutableCopy];
     jsonDict[@".tag"] = @"reseller";
-  } else if ([valueObj isDropbox]) {
-    jsonDict[@".tag"] = @"dropbox";
-  } else if ([valueObj isAnonymous]) {
-    jsonDict[@".tag"] = @"anonymous";
+  } else if ([valueObj isUser]) {
+    jsonDict[@"user"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.user] mutableCopy];
+    jsonDict[@".tag"] = @"user";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -2863,27 +2863,1262 @@
 + (DBTEAMLOGActorLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"user"]) {
-    DBTEAMLOGUserLogInfo *user = [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"user"]];
-    return [[DBTEAMLOGActorLogInfo alloc] initWithUser:user];
-  } else if ([tag isEqualToString:@"admin"]) {
+  if ([tag isEqualToString:@"admin"]) {
     DBTEAMLOGUserLogInfo *admin = [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"admin"]];
     return [[DBTEAMLOGActorLogInfo alloc] initWithAdmin:admin];
+  } else if ([tag isEqualToString:@"anonymous"]) {
+    return [[DBTEAMLOGActorLogInfo alloc] initWithAnonymous];
   } else if ([tag isEqualToString:@"app"]) {
     DBTEAMLOGAppLogInfo *app = [DBTEAMLOGAppLogInfoSerializer deserialize:valueDict[@"app"]];
     return [[DBTEAMLOGActorLogInfo alloc] initWithApp:app];
+  } else if ([tag isEqualToString:@"dropbox"]) {
+    return [[DBTEAMLOGActorLogInfo alloc] initWithDropbox];
   } else if ([tag isEqualToString:@"reseller"]) {
     DBTEAMLOGResellerLogInfo *reseller = [DBTEAMLOGResellerLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGActorLogInfo alloc] initWithReseller:reseller];
-  } else if ([tag isEqualToString:@"dropbox"]) {
-    return [[DBTEAMLOGActorLogInfo alloc] initWithDropbox];
-  } else if ([tag isEqualToString:@"anonymous"]) {
-    return [[DBTEAMLOGActorLogInfo alloc] initWithAnonymous];
+  } else if ([tag isEqualToString:@"user"]) {
+    DBTEAMLOGUserLogInfo *user = [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"user"]];
+    return [[DBTEAMLOGActorLogInfo alloc] initWithUser:user];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGActorLogInfo alloc] initWithOther];
   } else {
     return [[DBTEAMLOGActorLogInfo alloc] initWithOther];
   }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertCategoryEnum.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertCategoryEnum
+
+#pragma mark - Constructors
+
+- (instancetype)initWithAccountTakeover {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumAccountTakeover;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataLossProtection {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumDataLossProtection;
+  }
+  return self;
+}
+
+- (instancetype)initWithMalwareSharing {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumMalwareSharing;
+  }
+  return self;
+}
+
+- (instancetype)initWithMassiveFileOperation {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumMassiveFileOperation;
+  }
+  return self;
+}
+
+- (instancetype)initWithNa {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumNa;
+  }
+  return self;
+}
+
+- (instancetype)initWithThreatManagement {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumThreatManagement;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertCategoryEnumOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isAccountTakeover {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumAccountTakeover;
+}
+
+- (BOOL)isDataLossProtection {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumDataLossProtection;
+}
+
+- (BOOL)isMalwareSharing {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumMalwareSharing;
+}
+
+- (BOOL)isMassiveFileOperation {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumMassiveFileOperation;
+}
+
+- (BOOL)isNa {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumNa;
+}
+
+- (BOOL)isThreatManagement {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumThreatManagement;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGAdminAlertCategoryEnumOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertCategoryEnumAccountTakeover:
+    return @"DBTEAMLOGAdminAlertCategoryEnumAccountTakeover";
+  case DBTEAMLOGAdminAlertCategoryEnumDataLossProtection:
+    return @"DBTEAMLOGAdminAlertCategoryEnumDataLossProtection";
+  case DBTEAMLOGAdminAlertCategoryEnumMalwareSharing:
+    return @"DBTEAMLOGAdminAlertCategoryEnumMalwareSharing";
+  case DBTEAMLOGAdminAlertCategoryEnumMassiveFileOperation:
+    return @"DBTEAMLOGAdminAlertCategoryEnumMassiveFileOperation";
+  case DBTEAMLOGAdminAlertCategoryEnumNa:
+    return @"DBTEAMLOGAdminAlertCategoryEnumNa";
+  case DBTEAMLOGAdminAlertCategoryEnumThreatManagement:
+    return @"DBTEAMLOGAdminAlertCategoryEnumThreatManagement";
+  case DBTEAMLOGAdminAlertCategoryEnumOther:
+    return @"DBTEAMLOGAdminAlertCategoryEnumOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertCategoryEnumSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertCategoryEnumSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertCategoryEnumSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertCategoryEnumAccountTakeover:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertCategoryEnumDataLossProtection:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertCategoryEnumMalwareSharing:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertCategoryEnumMassiveFileOperation:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertCategoryEnumNa:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertCategoryEnumThreatManagement:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertCategoryEnumOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertCategoryEnum:other];
+}
+
+- (BOOL)isEqualToAdminAlertCategoryEnum:(DBTEAMLOGAdminAlertCategoryEnum *)anAdminAlertCategoryEnum {
+  if (self == anAdminAlertCategoryEnum) {
+    return YES;
+  }
+  if (self.tag != anAdminAlertCategoryEnum.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertCategoryEnumAccountTakeover:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  case DBTEAMLOGAdminAlertCategoryEnumDataLossProtection:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  case DBTEAMLOGAdminAlertCategoryEnumMalwareSharing:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  case DBTEAMLOGAdminAlertCategoryEnumMassiveFileOperation:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  case DBTEAMLOGAdminAlertCategoryEnumNa:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  case DBTEAMLOGAdminAlertCategoryEnumThreatManagement:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  case DBTEAMLOGAdminAlertCategoryEnumOther:
+    return [[self tagName] isEqual:[anAdminAlertCategoryEnum tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertCategoryEnumSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertCategoryEnum *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isAccountTakeover]) {
+    jsonDict[@".tag"] = @"account_takeover";
+  } else if ([valueObj isDataLossProtection]) {
+    jsonDict[@".tag"] = @"data_loss_protection";
+  } else if ([valueObj isMalwareSharing]) {
+    jsonDict[@".tag"] = @"malware_sharing";
+  } else if ([valueObj isMassiveFileOperation]) {
+    jsonDict[@".tag"] = @"massive_file_operation";
+  } else if ([valueObj isNa]) {
+    jsonDict[@".tag"] = @"na";
+  } else if ([valueObj isThreatManagement]) {
+    jsonDict[@".tag"] = @"threat_management";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertCategoryEnum *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"account_takeover"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithAccountTakeover];
+  } else if ([tag isEqualToString:@"data_loss_protection"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithDataLossProtection];
+  } else if ([tag isEqualToString:@"malware_sharing"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithMalwareSharing];
+  } else if ([tag isEqualToString:@"massive_file_operation"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithMassiveFileOperation];
+  } else if ([tag isEqualToString:@"na"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithNa];
+  } else if ([tag isEqualToString:@"threat_management"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithThreatManagement];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGAdminAlertCategoryEnum alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertSeverityEnum.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertSeverityEnum
+
+#pragma mark - Constructors
+
+- (instancetype)initWithHigh {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertSeverityEnumHigh;
+  }
+  return self;
+}
+
+- (instancetype)initWithInfo {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertSeverityEnumInfo;
+  }
+  return self;
+}
+
+- (instancetype)initWithLow {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertSeverityEnumLow;
+  }
+  return self;
+}
+
+- (instancetype)initWithMedium {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertSeverityEnumMedium;
+  }
+  return self;
+}
+
+- (instancetype)initWithNa {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertSeverityEnumNa;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertSeverityEnumOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isHigh {
+  return _tag == DBTEAMLOGAdminAlertSeverityEnumHigh;
+}
+
+- (BOOL)isInfo {
+  return _tag == DBTEAMLOGAdminAlertSeverityEnumInfo;
+}
+
+- (BOOL)isLow {
+  return _tag == DBTEAMLOGAdminAlertSeverityEnumLow;
+}
+
+- (BOOL)isMedium {
+  return _tag == DBTEAMLOGAdminAlertSeverityEnumMedium;
+}
+
+- (BOOL)isNa {
+  return _tag == DBTEAMLOGAdminAlertSeverityEnumNa;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGAdminAlertSeverityEnumOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertSeverityEnumHigh:
+    return @"DBTEAMLOGAdminAlertSeverityEnumHigh";
+  case DBTEAMLOGAdminAlertSeverityEnumInfo:
+    return @"DBTEAMLOGAdminAlertSeverityEnumInfo";
+  case DBTEAMLOGAdminAlertSeverityEnumLow:
+    return @"DBTEAMLOGAdminAlertSeverityEnumLow";
+  case DBTEAMLOGAdminAlertSeverityEnumMedium:
+    return @"DBTEAMLOGAdminAlertSeverityEnumMedium";
+  case DBTEAMLOGAdminAlertSeverityEnumNa:
+    return @"DBTEAMLOGAdminAlertSeverityEnumNa";
+  case DBTEAMLOGAdminAlertSeverityEnumOther:
+    return @"DBTEAMLOGAdminAlertSeverityEnumOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertSeverityEnumSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertSeverityEnumSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertSeverityEnumSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertSeverityEnumHigh:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertSeverityEnumInfo:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertSeverityEnumLow:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertSeverityEnumMedium:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertSeverityEnumNa:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertSeverityEnumOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertSeverityEnum:other];
+}
+
+- (BOOL)isEqualToAdminAlertSeverityEnum:(DBTEAMLOGAdminAlertSeverityEnum *)anAdminAlertSeverityEnum {
+  if (self == anAdminAlertSeverityEnum) {
+    return YES;
+  }
+  if (self.tag != anAdminAlertSeverityEnum.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertSeverityEnumHigh:
+    return [[self tagName] isEqual:[anAdminAlertSeverityEnum tagName]];
+  case DBTEAMLOGAdminAlertSeverityEnumInfo:
+    return [[self tagName] isEqual:[anAdminAlertSeverityEnum tagName]];
+  case DBTEAMLOGAdminAlertSeverityEnumLow:
+    return [[self tagName] isEqual:[anAdminAlertSeverityEnum tagName]];
+  case DBTEAMLOGAdminAlertSeverityEnumMedium:
+    return [[self tagName] isEqual:[anAdminAlertSeverityEnum tagName]];
+  case DBTEAMLOGAdminAlertSeverityEnumNa:
+    return [[self tagName] isEqual:[anAdminAlertSeverityEnum tagName]];
+  case DBTEAMLOGAdminAlertSeverityEnumOther:
+    return [[self tagName] isEqual:[anAdminAlertSeverityEnum tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertSeverityEnumSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertSeverityEnum *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isHigh]) {
+    jsonDict[@".tag"] = @"high";
+  } else if ([valueObj isInfo]) {
+    jsonDict[@".tag"] = @"info";
+  } else if ([valueObj isLow]) {
+    jsonDict[@".tag"] = @"low";
+  } else if ([valueObj isMedium]) {
+    jsonDict[@".tag"] = @"medium";
+  } else if ([valueObj isNa]) {
+    jsonDict[@".tag"] = @"na";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertSeverityEnum *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"high"]) {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithHigh];
+  } else if ([tag isEqualToString:@"info"]) {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithInfo];
+  } else if ([tag isEqualToString:@"low"]) {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithLow];
+  } else if ([tag isEqualToString:@"medium"]) {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithMedium];
+  } else if ([tag isEqualToString:@"na"]) {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithNa];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGAdminAlertSeverityEnum alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertingAlertConfiguration.h"
+#import "DBTEAMLOGAdminAlertingAlertStatePolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertingAlertConfiguration
+
+#pragma mark - Constructors
+
+- (instancetype)initWithAlertState:(DBTEAMLOGAdminAlertingAlertStatePolicy *)alertState {
+  [DBStoneValidators nonnullValidator:nil](alertState);
+
+  self = [super init];
+  if (self) {
+    _alertState = alertState;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertingAlertConfigurationSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertingAlertConfigurationSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertingAlertConfigurationSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.alertState hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertingAlertConfiguration:other];
+}
+
+- (BOOL)isEqualToAdminAlertingAlertConfiguration:
+    (DBTEAMLOGAdminAlertingAlertConfiguration *)anAdminAlertingAlertConfiguration {
+  if (self == anAdminAlertingAlertConfiguration) {
+    return YES;
+  }
+  if (![self.alertState isEqual:anAdminAlertingAlertConfiguration.alertState]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertingAlertConfigurationSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertingAlertConfiguration *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"alert_state"] = [DBTEAMLOGAdminAlertingAlertStatePolicySerializer serialize:valueObj.alertState];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertingAlertConfiguration *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGAdminAlertingAlertStatePolicy *alertState =
+      [DBTEAMLOGAdminAlertingAlertStatePolicySerializer deserialize:valueDict[@"alert_state"]];
+
+  return [[DBTEAMLOGAdminAlertingAlertConfiguration alloc] initWithAlertState:alertState];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertingAlertStatePolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertingAlertStatePolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithOff {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertingAlertStatePolicyOff;
+  }
+  return self;
+}
+
+- (instancetype)initWithOn {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertingAlertStatePolicyOn;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminAlertingAlertStatePolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isOff {
+  return _tag == DBTEAMLOGAdminAlertingAlertStatePolicyOff;
+}
+
+- (BOOL)isOn {
+  return _tag == DBTEAMLOGAdminAlertingAlertStatePolicyOn;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGAdminAlertingAlertStatePolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOff:
+    return @"DBTEAMLOGAdminAlertingAlertStatePolicyOff";
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOn:
+    return @"DBTEAMLOGAdminAlertingAlertStatePolicyOn";
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOther:
+    return @"DBTEAMLOGAdminAlertingAlertStatePolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertingAlertStatePolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertingAlertStatePolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertingAlertStatePolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOff:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOn:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertingAlertStatePolicy:other];
+}
+
+- (BOOL)isEqualToAdminAlertingAlertStatePolicy:
+    (DBTEAMLOGAdminAlertingAlertStatePolicy *)anAdminAlertingAlertStatePolicy {
+  if (self == anAdminAlertingAlertStatePolicy) {
+    return YES;
+  }
+  if (self.tag != anAdminAlertingAlertStatePolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOff:
+    return [[self tagName] isEqual:[anAdminAlertingAlertStatePolicy tagName]];
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOn:
+    return [[self tagName] isEqual:[anAdminAlertingAlertStatePolicy tagName]];
+  case DBTEAMLOGAdminAlertingAlertStatePolicyOther:
+    return [[self tagName] isEqual:[anAdminAlertingAlertStatePolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertingAlertStatePolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertingAlertStatePolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isOff]) {
+    jsonDict[@".tag"] = @"off";
+  } else if ([valueObj isOn]) {
+    jsonDict[@".tag"] = @"on";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertingAlertStatePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"off"]) {
+    return [[DBTEAMLOGAdminAlertingAlertStatePolicy alloc] initWithOff];
+  } else if ([tag isEqualToString:@"on"]) {
+    return [[DBTEAMLOGAdminAlertingAlertStatePolicy alloc] initWithOn];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGAdminAlertingAlertStatePolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGAdminAlertingAlertStatePolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertingAlertConfiguration.h"
+#import "DBTEAMLOGAdminAlertingChangedAlertConfigDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertingChangedAlertConfigDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithAlertName:(NSString *)alertName
+              previousAlertConfig:(DBTEAMLOGAdminAlertingAlertConfiguration *)previousAlertConfig
+                  dNewAlertConfig:(DBTEAMLOGAdminAlertingAlertConfiguration *)dNewAlertConfig {
+  [DBStoneValidators nonnullValidator:nil](alertName);
+  [DBStoneValidators nonnullValidator:nil](previousAlertConfig);
+  [DBStoneValidators nonnullValidator:nil](dNewAlertConfig);
+
+  self = [super init];
+  if (self) {
+    _alertName = alertName;
+    _previousAlertConfig = previousAlertConfig;
+    _dNewAlertConfig = dNewAlertConfig;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.alertName hash];
+  result = prime * result + [self.previousAlertConfig hash];
+  result = prime * result + [self.dNewAlertConfig hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertingChangedAlertConfigDetails:other];
+}
+
+- (BOOL)isEqualToAdminAlertingChangedAlertConfigDetails:
+    (DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)anAdminAlertingChangedAlertConfigDetails {
+  if (self == anAdminAlertingChangedAlertConfigDetails) {
+    return YES;
+  }
+  if (![self.alertName isEqual:anAdminAlertingChangedAlertConfigDetails.alertName]) {
+    return NO;
+  }
+  if (![self.previousAlertConfig isEqual:anAdminAlertingChangedAlertConfigDetails.previousAlertConfig]) {
+    return NO;
+  }
+  if (![self.dNewAlertConfig isEqual:anAdminAlertingChangedAlertConfigDetails.dNewAlertConfig]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"alert_name"] = valueObj.alertName;
+  jsonDict[@"previous_alert_config"] =
+      [DBTEAMLOGAdminAlertingAlertConfigurationSerializer serialize:valueObj.previousAlertConfig];
+  jsonDict[@"new_alert_config"] =
+      [DBTEAMLOGAdminAlertingAlertConfigurationSerializer serialize:valueObj.dNewAlertConfig];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *alertName = valueDict[@"alert_name"];
+  DBTEAMLOGAdminAlertingAlertConfiguration *previousAlertConfig =
+      [DBTEAMLOGAdminAlertingAlertConfigurationSerializer deserialize:valueDict[@"previous_alert_config"]];
+  DBTEAMLOGAdminAlertingAlertConfiguration *dNewAlertConfig =
+      [DBTEAMLOGAdminAlertingAlertConfigurationSerializer deserialize:valueDict[@"new_alert_config"]];
+
+  return [[DBTEAMLOGAdminAlertingChangedAlertConfigDetails alloc] initWithAlertName:alertName
+                                                                previousAlertConfig:previousAlertConfig
+                                                                    dNewAlertConfig:dNewAlertConfig];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertingChangedAlertConfigType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertingChangedAlertConfigType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertingChangedAlertConfigType:other];
+}
+
+- (BOOL)isEqualToAdminAlertingChangedAlertConfigType:
+    (DBTEAMLOGAdminAlertingChangedAlertConfigType *)anAdminAlertingChangedAlertConfigType {
+  if (self == anAdminAlertingChangedAlertConfigType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anAdminAlertingChangedAlertConfigType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertingChangedAlertConfigType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertingChangedAlertConfigType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGAdminAlertingChangedAlertConfigType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertCategoryEnum.h"
+#import "DBTEAMLOGAdminAlertSeverityEnum.h"
+#import "DBTEAMLOGAdminAlertingTriggeredAlertDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertingTriggeredAlertDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithAlertName:(NSString *)alertName
+                    alertSeverity:(DBTEAMLOGAdminAlertSeverityEnum *)alertSeverity
+                    alertCategory:(DBTEAMLOGAdminAlertCategoryEnum *)alertCategory
+                  alertInstanceId:(NSString *)alertInstanceId {
+  [DBStoneValidators nonnullValidator:nil](alertName);
+  [DBStoneValidators nonnullValidator:nil](alertSeverity);
+  [DBStoneValidators nonnullValidator:nil](alertCategory);
+  [DBStoneValidators nonnullValidator:nil](alertInstanceId);
+
+  self = [super init];
+  if (self) {
+    _alertName = alertName;
+    _alertSeverity = alertSeverity;
+    _alertCategory = alertCategory;
+    _alertInstanceId = alertInstanceId;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.alertName hash];
+  result = prime * result + [self.alertSeverity hash];
+  result = prime * result + [self.alertCategory hash];
+  result = prime * result + [self.alertInstanceId hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertingTriggeredAlertDetails:other];
+}
+
+- (BOOL)isEqualToAdminAlertingTriggeredAlertDetails:
+    (DBTEAMLOGAdminAlertingTriggeredAlertDetails *)anAdminAlertingTriggeredAlertDetails {
+  if (self == anAdminAlertingTriggeredAlertDetails) {
+    return YES;
+  }
+  if (![self.alertName isEqual:anAdminAlertingTriggeredAlertDetails.alertName]) {
+    return NO;
+  }
+  if (![self.alertSeverity isEqual:anAdminAlertingTriggeredAlertDetails.alertSeverity]) {
+    return NO;
+  }
+  if (![self.alertCategory isEqual:anAdminAlertingTriggeredAlertDetails.alertCategory]) {
+    return NO;
+  }
+  if (![self.alertInstanceId isEqual:anAdminAlertingTriggeredAlertDetails.alertInstanceId]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertingTriggeredAlertDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"alert_name"] = valueObj.alertName;
+  jsonDict[@"alert_severity"] = [DBTEAMLOGAdminAlertSeverityEnumSerializer serialize:valueObj.alertSeverity];
+  jsonDict[@"alert_category"] = [DBTEAMLOGAdminAlertCategoryEnumSerializer serialize:valueObj.alertCategory];
+  jsonDict[@"alert_instance_id"] = valueObj.alertInstanceId;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertingTriggeredAlertDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *alertName = valueDict[@"alert_name"];
+  DBTEAMLOGAdminAlertSeverityEnum *alertSeverity =
+      [DBTEAMLOGAdminAlertSeverityEnumSerializer deserialize:valueDict[@"alert_severity"]];
+  DBTEAMLOGAdminAlertCategoryEnum *alertCategory =
+      [DBTEAMLOGAdminAlertCategoryEnumSerializer deserialize:valueDict[@"alert_category"]];
+  NSString *alertInstanceId = valueDict[@"alert_instance_id"];
+
+  return [[DBTEAMLOGAdminAlertingTriggeredAlertDetails alloc] initWithAlertName:alertName
+                                                                  alertSeverity:alertSeverity
+                                                                  alertCategory:alertCategory
+                                                                alertInstanceId:alertInstanceId];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminAlertingTriggeredAlertType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminAlertingTriggeredAlertType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminAlertingTriggeredAlertType:other];
+}
+
+- (BOOL)isEqualToAdminAlertingTriggeredAlertType:
+    (DBTEAMLOGAdminAlertingTriggeredAlertType *)anAdminAlertingTriggeredAlertType {
+  if (self == anAdminAlertingTriggeredAlertType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anAdminAlertingTriggeredAlertType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminAlertingTriggeredAlertType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminAlertingTriggeredAlertType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGAdminAlertingTriggeredAlertType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -2897,30 +4132,6 @@
 @implementation DBTEAMLOGAdminRole
 
 #pragma mark - Constructors
-
-- (instancetype)initWithTeamAdmin {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGAdminRoleTeamAdmin;
-  }
-  return self;
-}
-
-- (instancetype)initWithUserManagementAdmin {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGAdminRoleUserManagementAdmin;
-  }
-  return self;
-}
-
-- (instancetype)initWithSupportAdmin {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGAdminRoleSupportAdmin;
-  }
-  return self;
-}
 
 - (instancetype)initWithLimitedAdmin {
   self = [super init];
@@ -2938,6 +4149,30 @@
   return self;
 }
 
+- (instancetype)initWithSupportAdmin {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminRoleSupportAdmin;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamAdmin {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminRoleTeamAdmin;
+  }
+  return self;
+}
+
+- (instancetype)initWithUserManagementAdmin {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminRoleUserManagementAdmin;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -2950,18 +4185,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isTeamAdmin {
-  return _tag == DBTEAMLOGAdminRoleTeamAdmin;
-}
-
-- (BOOL)isUserManagementAdmin {
-  return _tag == DBTEAMLOGAdminRoleUserManagementAdmin;
-}
-
-- (BOOL)isSupportAdmin {
-  return _tag == DBTEAMLOGAdminRoleSupportAdmin;
-}
-
 - (BOOL)isLimitedAdmin {
   return _tag == DBTEAMLOGAdminRoleLimitedAdmin;
 }
@@ -2970,22 +4193,34 @@
   return _tag == DBTEAMLOGAdminRoleMemberOnly;
 }
 
+- (BOOL)isSupportAdmin {
+  return _tag == DBTEAMLOGAdminRoleSupportAdmin;
+}
+
+- (BOOL)isTeamAdmin {
+  return _tag == DBTEAMLOGAdminRoleTeamAdmin;
+}
+
+- (BOOL)isUserManagementAdmin {
+  return _tag == DBTEAMLOGAdminRoleUserManagementAdmin;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGAdminRoleOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGAdminRoleTeamAdmin:
-    return @"DBTEAMLOGAdminRoleTeamAdmin";
-  case DBTEAMLOGAdminRoleUserManagementAdmin:
-    return @"DBTEAMLOGAdminRoleUserManagementAdmin";
-  case DBTEAMLOGAdminRoleSupportAdmin:
-    return @"DBTEAMLOGAdminRoleSupportAdmin";
   case DBTEAMLOGAdminRoleLimitedAdmin:
     return @"DBTEAMLOGAdminRoleLimitedAdmin";
   case DBTEAMLOGAdminRoleMemberOnly:
     return @"DBTEAMLOGAdminRoleMemberOnly";
+  case DBTEAMLOGAdminRoleSupportAdmin:
+    return @"DBTEAMLOGAdminRoleSupportAdmin";
+  case DBTEAMLOGAdminRoleTeamAdmin:
+    return @"DBTEAMLOGAdminRoleTeamAdmin";
+  case DBTEAMLOGAdminRoleUserManagementAdmin:
+    return @"DBTEAMLOGAdminRoleUserManagementAdmin";
   case DBTEAMLOGAdminRoleOther:
     return @"DBTEAMLOGAdminRoleOther";
   }
@@ -3024,15 +4259,15 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGAdminRoleTeamAdmin:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGAdminRoleUserManagementAdmin:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGAdminRoleSupportAdmin:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAdminRoleLimitedAdmin:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAdminRoleMemberOnly:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminRoleSupportAdmin:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminRoleTeamAdmin:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGAdminRoleUserManagementAdmin:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGAdminRoleOther:
     result = prime * result + [[self tagName] hash];
@@ -3061,15 +4296,15 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGAdminRoleTeamAdmin:
-    return [[self tagName] isEqual:[anAdminRole tagName]];
-  case DBTEAMLOGAdminRoleUserManagementAdmin:
-    return [[self tagName] isEqual:[anAdminRole tagName]];
-  case DBTEAMLOGAdminRoleSupportAdmin:
-    return [[self tagName] isEqual:[anAdminRole tagName]];
   case DBTEAMLOGAdminRoleLimitedAdmin:
     return [[self tagName] isEqual:[anAdminRole tagName]];
   case DBTEAMLOGAdminRoleMemberOnly:
+    return [[self tagName] isEqual:[anAdminRole tagName]];
+  case DBTEAMLOGAdminRoleSupportAdmin:
+    return [[self tagName] isEqual:[anAdminRole tagName]];
+  case DBTEAMLOGAdminRoleTeamAdmin:
+    return [[self tagName] isEqual:[anAdminRole tagName]];
+  case DBTEAMLOGAdminRoleUserManagementAdmin:
     return [[self tagName] isEqual:[anAdminRole tagName]];
   case DBTEAMLOGAdminRoleOther:
     return [[self tagName] isEqual:[anAdminRole tagName]];
@@ -3086,16 +4321,16 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminRole *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamAdmin]) {
-    jsonDict[@".tag"] = @"team_admin";
-  } else if ([valueObj isUserManagementAdmin]) {
-    jsonDict[@".tag"] = @"user_management_admin";
-  } else if ([valueObj isSupportAdmin]) {
-    jsonDict[@".tag"] = @"support_admin";
-  } else if ([valueObj isLimitedAdmin]) {
+  if ([valueObj isLimitedAdmin]) {
     jsonDict[@".tag"] = @"limited_admin";
   } else if ([valueObj isMemberOnly]) {
     jsonDict[@".tag"] = @"member_only";
+  } else if ([valueObj isSupportAdmin]) {
+    jsonDict[@".tag"] = @"support_admin";
+  } else if ([valueObj isTeamAdmin]) {
+    jsonDict[@".tag"] = @"team_admin";
+  } else if ([valueObj isUserManagementAdmin]) {
+    jsonDict[@".tag"] = @"user_management_admin";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -3108,16 +4343,16 @@
 + (DBTEAMLOGAdminRole *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_admin"]) {
-    return [[DBTEAMLOGAdminRole alloc] initWithTeamAdmin];
-  } else if ([tag isEqualToString:@"user_management_admin"]) {
-    return [[DBTEAMLOGAdminRole alloc] initWithUserManagementAdmin];
-  } else if ([tag isEqualToString:@"support_admin"]) {
-    return [[DBTEAMLOGAdminRole alloc] initWithSupportAdmin];
-  } else if ([tag isEqualToString:@"limited_admin"]) {
+  if ([tag isEqualToString:@"limited_admin"]) {
     return [[DBTEAMLOGAdminRole alloc] initWithLimitedAdmin];
   } else if ([tag isEqualToString:@"member_only"]) {
     return [[DBTEAMLOGAdminRole alloc] initWithMemberOnly];
+  } else if ([tag isEqualToString:@"support_admin"]) {
+    return [[DBTEAMLOGAdminRole alloc] initWithSupportAdmin];
+  } else if ([tag isEqualToString:@"team_admin"]) {
+    return [[DBTEAMLOGAdminRole alloc] initWithTeamAdmin];
+  } else if ([tag isEqualToString:@"user_management_admin"]) {
+    return [[DBTEAMLOGAdminRole alloc] initWithUserManagementAdmin];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGAdminRole alloc] initWithOther];
   } else {
@@ -4860,6 +6095,179 @@
     return [[DBTEAMLOGAssetLogInfo alloc] initWithOther];
   } else {
     return [[DBTEAMLOGAssetLogInfo alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGBackupStatus.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGBackupStatus
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGBackupStatusDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGBackupStatusEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGBackupStatusOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGBackupStatusDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGBackupStatusEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGBackupStatusOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGBackupStatusDisabled:
+    return @"DBTEAMLOGBackupStatusDisabled";
+  case DBTEAMLOGBackupStatusEnabled:
+    return @"DBTEAMLOGBackupStatusEnabled";
+  case DBTEAMLOGBackupStatusOther:
+    return @"DBTEAMLOGBackupStatusOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGBackupStatusSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGBackupStatusSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGBackupStatusSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGBackupStatusDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGBackupStatusEnabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGBackupStatusOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToBackupStatus:other];
+}
+
+- (BOOL)isEqualToBackupStatus:(DBTEAMLOGBackupStatus *)aBackupStatus {
+  if (self == aBackupStatus) {
+    return YES;
+  }
+  if (self.tag != aBackupStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGBackupStatusDisabled:
+    return [[self tagName] isEqual:[aBackupStatus tagName]];
+  case DBTEAMLOGBackupStatusEnabled:
+    return [[self tagName] isEqual:[aBackupStatus tagName]];
+  case DBTEAMLOGBackupStatusOther:
+    return [[self tagName] isEqual:[aBackupStatus tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGBackupStatusSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGBackupStatus *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGBackupStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGBackupStatus alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGBackupStatus alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGBackupStatus alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGBackupStatus alloc] initWithOther];
   }
 }
 
@@ -7675,6 +9083,950 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationChangePolicyDetails.h"
+#import "DBTEAMLOGClassificationPolicyEnumWrapper.h"
+#import "DBTEAMLOGClassificationType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationChangePolicyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPreviousValue:(DBTEAMLOGClassificationPolicyEnumWrapper *)previousValue
+                            dNewValue:(DBTEAMLOGClassificationPolicyEnumWrapper *)dNewValue
+                   classificationType:(DBTEAMLOGClassificationType *)classificationType {
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](classificationType);
+
+  self = [super init];
+  if (self) {
+    _previousValue = previousValue;
+    _dNewValue = dNewValue;
+    _classificationType = classificationType;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationChangePolicyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationChangePolicyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationChangePolicyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.previousValue hash];
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.classificationType hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationChangePolicyDetails:other];
+}
+
+- (BOOL)isEqualToClassificationChangePolicyDetails:
+    (DBTEAMLOGClassificationChangePolicyDetails *)aClassificationChangePolicyDetails {
+  if (self == aClassificationChangePolicyDetails) {
+    return YES;
+  }
+  if (![self.previousValue isEqual:aClassificationChangePolicyDetails.previousValue]) {
+    return NO;
+  }
+  if (![self.dNewValue isEqual:aClassificationChangePolicyDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.classificationType isEqual:aClassificationChangePolicyDetails.classificationType]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationChangePolicyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationChangePolicyDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"previous_value"] = [DBTEAMLOGClassificationPolicyEnumWrapperSerializer serialize:valueObj.previousValue];
+  jsonDict[@"new_value"] = [DBTEAMLOGClassificationPolicyEnumWrapperSerializer serialize:valueObj.dNewValue];
+  jsonDict[@"classification_type"] = [DBTEAMLOGClassificationTypeSerializer serialize:valueObj.classificationType];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationChangePolicyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGClassificationPolicyEnumWrapper *previousValue =
+      [DBTEAMLOGClassificationPolicyEnumWrapperSerializer deserialize:valueDict[@"previous_value"]];
+  DBTEAMLOGClassificationPolicyEnumWrapper *dNewValue =
+      [DBTEAMLOGClassificationPolicyEnumWrapperSerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGClassificationType *classificationType =
+      [DBTEAMLOGClassificationTypeSerializer deserialize:valueDict[@"classification_type"]];
+
+  return [[DBTEAMLOGClassificationChangePolicyDetails alloc] initWithPreviousValue:previousValue
+                                                                         dNewValue:dNewValue
+                                                                classificationType:classificationType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationChangePolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationChangePolicyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationChangePolicyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationChangePolicyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationChangePolicyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationChangePolicyType:other];
+}
+
+- (BOOL)isEqualToClassificationChangePolicyType:
+    (DBTEAMLOGClassificationChangePolicyType *)aClassificationChangePolicyType {
+  if (self == aClassificationChangePolicyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aClassificationChangePolicyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationChangePolicyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationChangePolicyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationChangePolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGClassificationChangePolicyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationCreateReportDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationCreateReportDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationCreateReportDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationCreateReportDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationCreateReportDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationCreateReportDetails:other];
+}
+
+- (BOOL)isEqualToClassificationCreateReportDetails:
+    (DBTEAMLOGClassificationCreateReportDetails *)aClassificationCreateReportDetails {
+  if (self == aClassificationCreateReportDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationCreateReportDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationCreateReportDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationCreateReportDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGClassificationCreateReportDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationCreateReportFailDetails.h"
+#import "DBTEAMTeamReportFailureReason.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationCreateReportFailDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithFailureReason:(DBTEAMTeamReportFailureReason *)failureReason {
+  [DBStoneValidators nonnullValidator:nil](failureReason);
+
+  self = [super init];
+  if (self) {
+    _failureReason = failureReason;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationCreateReportFailDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationCreateReportFailDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationCreateReportFailDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.failureReason hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationCreateReportFailDetails:other];
+}
+
+- (BOOL)isEqualToClassificationCreateReportFailDetails:
+    (DBTEAMLOGClassificationCreateReportFailDetails *)aClassificationCreateReportFailDetails {
+  if (self == aClassificationCreateReportFailDetails) {
+    return YES;
+  }
+  if (![self.failureReason isEqual:aClassificationCreateReportFailDetails.failureReason]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationCreateReportFailDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationCreateReportFailDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"failure_reason"] = [DBTEAMTeamReportFailureReasonSerializer serialize:valueObj.failureReason];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationCreateReportFailDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMTeamReportFailureReason *failureReason =
+      [DBTEAMTeamReportFailureReasonSerializer deserialize:valueDict[@"failure_reason"]];
+
+  return [[DBTEAMLOGClassificationCreateReportFailDetails alloc] initWithFailureReason:failureReason];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationCreateReportFailType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationCreateReportFailType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationCreateReportFailTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationCreateReportFailTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationCreateReportFailTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationCreateReportFailType:other];
+}
+
+- (BOOL)isEqualToClassificationCreateReportFailType:
+    (DBTEAMLOGClassificationCreateReportFailType *)aClassificationCreateReportFailType {
+  if (self == aClassificationCreateReportFailType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aClassificationCreateReportFailType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationCreateReportFailTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationCreateReportFailType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationCreateReportFailType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGClassificationCreateReportFailType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationCreateReportType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationCreateReportType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationCreateReportTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationCreateReportTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationCreateReportTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationCreateReportType:other];
+}
+
+- (BOOL)isEqualToClassificationCreateReportType:
+    (DBTEAMLOGClassificationCreateReportType *)aClassificationCreateReportType {
+  if (self == aClassificationCreateReportType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aClassificationCreateReportType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationCreateReportTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationCreateReportType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationCreateReportType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGClassificationCreateReportType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationPolicyEnumWrapper.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationPolicyEnumWrapper
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGClassificationPolicyEnumWrapperDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGClassificationPolicyEnumWrapperEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGClassificationPolicyEnumWrapperOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGClassificationPolicyEnumWrapperDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGClassificationPolicyEnumWrapperEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGClassificationPolicyEnumWrapperOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGClassificationPolicyEnumWrapperDisabled:
+    return @"DBTEAMLOGClassificationPolicyEnumWrapperDisabled";
+  case DBTEAMLOGClassificationPolicyEnumWrapperEnabled:
+    return @"DBTEAMLOGClassificationPolicyEnumWrapperEnabled";
+  case DBTEAMLOGClassificationPolicyEnumWrapperOther:
+    return @"DBTEAMLOGClassificationPolicyEnumWrapperOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationPolicyEnumWrapperSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationPolicyEnumWrapperSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationPolicyEnumWrapperSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGClassificationPolicyEnumWrapperDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGClassificationPolicyEnumWrapperEnabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGClassificationPolicyEnumWrapperOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationPolicyEnumWrapper:other];
+}
+
+- (BOOL)isEqualToClassificationPolicyEnumWrapper:
+    (DBTEAMLOGClassificationPolicyEnumWrapper *)aClassificationPolicyEnumWrapper {
+  if (self == aClassificationPolicyEnumWrapper) {
+    return YES;
+  }
+  if (self.tag != aClassificationPolicyEnumWrapper.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGClassificationPolicyEnumWrapperDisabled:
+    return [[self tagName] isEqual:[aClassificationPolicyEnumWrapper tagName]];
+  case DBTEAMLOGClassificationPolicyEnumWrapperEnabled:
+    return [[self tagName] isEqual:[aClassificationPolicyEnumWrapper tagName]];
+  case DBTEAMLOGClassificationPolicyEnumWrapperOther:
+    return [[self tagName] isEqual:[aClassificationPolicyEnumWrapper tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationPolicyEnumWrapperSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationPolicyEnumWrapper *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationPolicyEnumWrapper *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGClassificationPolicyEnumWrapper alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGClassificationPolicyEnumWrapper alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGClassificationPolicyEnumWrapper alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGClassificationPolicyEnumWrapper alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGClassificationType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGClassificationType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPii {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGClassificationTypePii;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGClassificationTypeOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isPii {
+  return _tag == DBTEAMLOGClassificationTypePii;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGClassificationTypeOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGClassificationTypePii:
+    return @"DBTEAMLOGClassificationTypePii";
+  case DBTEAMLOGClassificationTypeOther:
+    return @"DBTEAMLOGClassificationTypeOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGClassificationTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGClassificationTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGClassificationTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGClassificationTypePii:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGClassificationTypeOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToClassificationType:other];
+}
+
+- (BOOL)isEqualToClassificationType:(DBTEAMLOGClassificationType *)aClassificationType {
+  if (self == aClassificationType) {
+    return YES;
+  }
+  if (self.tag != aClassificationType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGClassificationTypePii:
+    return [[self tagName] isEqual:[aClassificationType tagName]];
+  case DBTEAMLOGClassificationTypeOther:
+    return [[self tagName] isEqual:[aClassificationType tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGClassificationTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGClassificationType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isPii]) {
+    jsonDict[@".tag"] = @"pii";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGClassificationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"pii"]) {
+    return [[DBTEAMLOGClassificationType alloc] initWithPii];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGClassificationType alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGClassificationType alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGCollectionShareDetails.h"
 
 #pragma mark - API Object
@@ -7867,6 +10219,413 @@
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGCollectionShareType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGComputerBackupPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGComputerBackupPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDefault_ {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGComputerBackupPolicyDefault_;
+  }
+  return self;
+}
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGComputerBackupPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGComputerBackupPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGComputerBackupPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDefault_ {
+  return _tag == DBTEAMLOGComputerBackupPolicyDefault_;
+}
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGComputerBackupPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGComputerBackupPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGComputerBackupPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGComputerBackupPolicyDefault_:
+    return @"DBTEAMLOGComputerBackupPolicyDefault_";
+  case DBTEAMLOGComputerBackupPolicyDisabled:
+    return @"DBTEAMLOGComputerBackupPolicyDisabled";
+  case DBTEAMLOGComputerBackupPolicyEnabled:
+    return @"DBTEAMLOGComputerBackupPolicyEnabled";
+  case DBTEAMLOGComputerBackupPolicyOther:
+    return @"DBTEAMLOGComputerBackupPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGComputerBackupPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGComputerBackupPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGComputerBackupPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGComputerBackupPolicyDefault_:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGComputerBackupPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGComputerBackupPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGComputerBackupPolicyOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToComputerBackupPolicy:other];
+}
+
+- (BOOL)isEqualToComputerBackupPolicy:(DBTEAMLOGComputerBackupPolicy *)aComputerBackupPolicy {
+  if (self == aComputerBackupPolicy) {
+    return YES;
+  }
+  if (self.tag != aComputerBackupPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGComputerBackupPolicyDefault_:
+    return [[self tagName] isEqual:[aComputerBackupPolicy tagName]];
+  case DBTEAMLOGComputerBackupPolicyDisabled:
+    return [[self tagName] isEqual:[aComputerBackupPolicy tagName]];
+  case DBTEAMLOGComputerBackupPolicyEnabled:
+    return [[self tagName] isEqual:[aComputerBackupPolicy tagName]];
+  case DBTEAMLOGComputerBackupPolicyOther:
+    return [[self tagName] isEqual:[aComputerBackupPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGComputerBackupPolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGComputerBackupPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDefault_]) {
+    jsonDict[@".tag"] = @"default";
+  } else if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGComputerBackupPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"default"]) {
+    return [[DBTEAMLOGComputerBackupPolicy alloc] initWithDefault_];
+  } else if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGComputerBackupPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGComputerBackupPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGComputerBackupPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGComputerBackupPolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGComputerBackupPolicy.h"
+#import "DBTEAMLOGComputerBackupPolicyChangedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGComputerBackupPolicyChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGComputerBackupPolicy *)dNewValue
+                    previousValue:(DBTEAMLOGComputerBackupPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToComputerBackupPolicyChangedDetails:other];
+}
+
+- (BOOL)isEqualToComputerBackupPolicyChangedDetails:
+    (DBTEAMLOGComputerBackupPolicyChangedDetails *)aComputerBackupPolicyChangedDetails {
+  if (self == aComputerBackupPolicyChangedDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aComputerBackupPolicyChangedDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aComputerBackupPolicyChangedDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGComputerBackupPolicyChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGComputerBackupPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] = [DBTEAMLOGComputerBackupPolicySerializer serialize:valueObj.previousValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGComputerBackupPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGComputerBackupPolicy *dNewValue =
+      [DBTEAMLOGComputerBackupPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGComputerBackupPolicy *previousValue =
+      [DBTEAMLOGComputerBackupPolicySerializer deserialize:valueDict[@"previous_value"]];
+
+  return [[DBTEAMLOGComputerBackupPolicyChangedDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGComputerBackupPolicyChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGComputerBackupPolicyChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGComputerBackupPolicyChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGComputerBackupPolicyChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGComputerBackupPolicyChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToComputerBackupPolicyChangedType:other];
+}
+
+- (BOOL)isEqualToComputerBackupPolicyChangedType:
+    (DBTEAMLOGComputerBackupPolicyChangedType *)aComputerBackupPolicyChangedType {
+  if (self == aComputerBackupPolicyChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aComputerBackupPolicyChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGComputerBackupPolicyChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGComputerBackupPolicyChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGComputerBackupPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGComputerBackupPolicyChangedType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -8364,18 +11123,17 @@
 
 @implementation DBTEAMLOGContextLogInfo
 
-@synthesize teamMember = _teamMember;
 @synthesize nonTeamMember = _nonTeamMember;
 @synthesize organizationTeam = _organizationTeam;
+@synthesize teamMember = _teamMember;
 @synthesize trustedNonTeamMember = _trustedNonTeamMember;
 
 #pragma mark - Constructors
 
-- (instancetype)initWithTeamMember:(DBTEAMLOGTeamMemberLogInfo *)teamMember {
+- (instancetype)initWithAnonymous {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGContextLogInfoTeamMember;
-    _teamMember = teamMember;
+    _tag = DBTEAMLOGContextLogInfoAnonymous;
   }
   return self;
 }
@@ -8389,10 +11147,11 @@
   return self;
 }
 
-- (instancetype)initWithAnonymous {
+- (instancetype)initWithOrganizationTeam:(DBTEAMLOGTeamLogInfo *)organizationTeam {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGContextLogInfoAnonymous;
+    _tag = DBTEAMLOGContextLogInfoOrganizationTeam;
+    _organizationTeam = organizationTeam;
   }
   return self;
 }
@@ -8405,11 +11164,11 @@
   return self;
 }
 
-- (instancetype)initWithOrganizationTeam:(DBTEAMLOGTeamLogInfo *)organizationTeam {
+- (instancetype)initWithTeamMember:(DBTEAMLOGTeamMemberLogInfo *)teamMember {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGContextLogInfoOrganizationTeam;
-    _organizationTeam = organizationTeam;
+    _tag = DBTEAMLOGContextLogInfoTeamMember;
+    _teamMember = teamMember;
   }
   return self;
 }
@@ -8433,14 +11192,6 @@
 
 #pragma mark - Instance field accessors
 
-- (DBTEAMLOGTeamMemberLogInfo *)teamMember {
-  if (![self isTeamMember]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGContextLogInfoTeamMember, but was %@.", [self tagName]];
-  }
-  return _teamMember;
-}
-
 - (DBTEAMLOGNonTeamMemberLogInfo *)nonTeamMember {
   if (![self isNonTeamMember]) {
     [NSException raise:@"IllegalStateException"
@@ -8457,6 +11208,14 @@
   return _organizationTeam;
 }
 
+- (DBTEAMLOGTeamMemberLogInfo *)teamMember {
+  if (![self isTeamMember]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGContextLogInfoTeamMember, but was %@.", [self tagName]];
+  }
+  return _teamMember;
+}
+
 - (DBTEAMLOGTrustedNonTeamMemberLogInfo *)trustedNonTeamMember {
   if (![self isTrustedNonTeamMember]) {
     [NSException
@@ -8468,24 +11227,24 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isTeamMember {
-  return _tag == DBTEAMLOGContextLogInfoTeamMember;
+- (BOOL)isAnonymous {
+  return _tag == DBTEAMLOGContextLogInfoAnonymous;
 }
 
 - (BOOL)isNonTeamMember {
   return _tag == DBTEAMLOGContextLogInfoNonTeamMember;
 }
 
-- (BOOL)isAnonymous {
-  return _tag == DBTEAMLOGContextLogInfoAnonymous;
+- (BOOL)isOrganizationTeam {
+  return _tag == DBTEAMLOGContextLogInfoOrganizationTeam;
 }
 
 - (BOOL)isTeam {
   return _tag == DBTEAMLOGContextLogInfoTeam;
 }
 
-- (BOOL)isOrganizationTeam {
-  return _tag == DBTEAMLOGContextLogInfoOrganizationTeam;
+- (BOOL)isTeamMember {
+  return _tag == DBTEAMLOGContextLogInfoTeamMember;
 }
 
 - (BOOL)isTrustedNonTeamMember {
@@ -8498,16 +11257,16 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGContextLogInfoTeamMember:
-    return @"DBTEAMLOGContextLogInfoTeamMember";
-  case DBTEAMLOGContextLogInfoNonTeamMember:
-    return @"DBTEAMLOGContextLogInfoNonTeamMember";
   case DBTEAMLOGContextLogInfoAnonymous:
     return @"DBTEAMLOGContextLogInfoAnonymous";
-  case DBTEAMLOGContextLogInfoTeam:
-    return @"DBTEAMLOGContextLogInfoTeam";
+  case DBTEAMLOGContextLogInfoNonTeamMember:
+    return @"DBTEAMLOGContextLogInfoNonTeamMember";
   case DBTEAMLOGContextLogInfoOrganizationTeam:
     return @"DBTEAMLOGContextLogInfoOrganizationTeam";
+  case DBTEAMLOGContextLogInfoTeam:
+    return @"DBTEAMLOGContextLogInfoTeam";
+  case DBTEAMLOGContextLogInfoTeamMember:
+    return @"DBTEAMLOGContextLogInfoTeamMember";
   case DBTEAMLOGContextLogInfoTrustedNonTeamMember:
     return @"DBTEAMLOGContextLogInfoTrustedNonTeamMember";
   case DBTEAMLOGContextLogInfoOther:
@@ -8548,16 +11307,16 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGContextLogInfoTeamMember:
-    result = prime * result + [self.teamMember hash];
-  case DBTEAMLOGContextLogInfoNonTeamMember:
-    result = prime * result + [self.nonTeamMember hash];
   case DBTEAMLOGContextLogInfoAnonymous:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGContextLogInfoTeam:
-    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGContextLogInfoNonTeamMember:
+    result = prime * result + [self.nonTeamMember hash];
   case DBTEAMLOGContextLogInfoOrganizationTeam:
     result = prime * result + [self.organizationTeam hash];
+  case DBTEAMLOGContextLogInfoTeam:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGContextLogInfoTeamMember:
+    result = prime * result + [self.teamMember hash];
   case DBTEAMLOGContextLogInfoTrustedNonTeamMember:
     result = prime * result + [self.trustedNonTeamMember hash];
   case DBTEAMLOGContextLogInfoOther:
@@ -8587,16 +11346,16 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGContextLogInfoTeamMember:
-    return [self.teamMember isEqual:aContextLogInfo.teamMember];
-  case DBTEAMLOGContextLogInfoNonTeamMember:
-    return [self.nonTeamMember isEqual:aContextLogInfo.nonTeamMember];
   case DBTEAMLOGContextLogInfoAnonymous:
     return [[self tagName] isEqual:[aContextLogInfo tagName]];
-  case DBTEAMLOGContextLogInfoTeam:
-    return [[self tagName] isEqual:[aContextLogInfo tagName]];
+  case DBTEAMLOGContextLogInfoNonTeamMember:
+    return [self.nonTeamMember isEqual:aContextLogInfo.nonTeamMember];
   case DBTEAMLOGContextLogInfoOrganizationTeam:
     return [self.organizationTeam isEqual:aContextLogInfo.organizationTeam];
+  case DBTEAMLOGContextLogInfoTeam:
+    return [[self tagName] isEqual:[aContextLogInfo tagName]];
+  case DBTEAMLOGContextLogInfoTeamMember:
+    return [self.teamMember isEqual:aContextLogInfo.teamMember];
   case DBTEAMLOGContextLogInfoTrustedNonTeamMember:
     return [self.trustedNonTeamMember isEqual:aContextLogInfo.trustedNonTeamMember];
   case DBTEAMLOGContextLogInfoOther:
@@ -8614,19 +11373,19 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGContextLogInfo *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeamMember]) {
-    jsonDict = [[DBTEAMLOGTeamMemberLogInfoSerializer serialize:valueObj.teamMember] mutableCopy];
-    jsonDict[@".tag"] = @"team_member";
+  if ([valueObj isAnonymous]) {
+    jsonDict[@".tag"] = @"anonymous";
   } else if ([valueObj isNonTeamMember]) {
     jsonDict = [[DBTEAMLOGNonTeamMemberLogInfoSerializer serialize:valueObj.nonTeamMember] mutableCopy];
     jsonDict[@".tag"] = @"non_team_member";
-  } else if ([valueObj isAnonymous]) {
-    jsonDict[@".tag"] = @"anonymous";
-  } else if ([valueObj isTeam]) {
-    jsonDict[@".tag"] = @"team";
   } else if ([valueObj isOrganizationTeam]) {
     jsonDict = [[DBTEAMLOGTeamLogInfoSerializer serialize:valueObj.organizationTeam] mutableCopy];
     jsonDict[@".tag"] = @"organization_team";
+  } else if ([valueObj isTeam]) {
+    jsonDict[@".tag"] = @"team";
+  } else if ([valueObj isTeamMember]) {
+    jsonDict = [[DBTEAMLOGTeamMemberLogInfoSerializer serialize:valueObj.teamMember] mutableCopy];
+    jsonDict[@".tag"] = @"team_member";
   } else if ([valueObj isTrustedNonTeamMember]) {
     jsonDict = [[DBTEAMLOGTrustedNonTeamMemberLogInfoSerializer serialize:valueObj.trustedNonTeamMember] mutableCopy];
     jsonDict[@".tag"] = @"trusted_non_team_member";
@@ -8642,19 +11401,19 @@
 + (DBTEAMLOGContextLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team_member"]) {
-    DBTEAMLOGTeamMemberLogInfo *teamMember = [DBTEAMLOGTeamMemberLogInfoSerializer deserialize:valueDict];
-    return [[DBTEAMLOGContextLogInfo alloc] initWithTeamMember:teamMember];
+  if ([tag isEqualToString:@"anonymous"]) {
+    return [[DBTEAMLOGContextLogInfo alloc] initWithAnonymous];
   } else if ([tag isEqualToString:@"non_team_member"]) {
     DBTEAMLOGNonTeamMemberLogInfo *nonTeamMember = [DBTEAMLOGNonTeamMemberLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGContextLogInfo alloc] initWithNonTeamMember:nonTeamMember];
-  } else if ([tag isEqualToString:@"anonymous"]) {
-    return [[DBTEAMLOGContextLogInfo alloc] initWithAnonymous];
-  } else if ([tag isEqualToString:@"team"]) {
-    return [[DBTEAMLOGContextLogInfo alloc] initWithTeam];
   } else if ([tag isEqualToString:@"organization_team"]) {
     DBTEAMLOGTeamLogInfo *organizationTeam = [DBTEAMLOGTeamLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGContextLogInfo alloc] initWithOrganizationTeam:organizationTeam];
+  } else if ([tag isEqualToString:@"team"]) {
+    return [[DBTEAMLOGContextLogInfo alloc] initWithTeam];
+  } else if ([tag isEqualToString:@"team_member"]) {
+    DBTEAMLOGTeamMemberLogInfo *teamMember = [DBTEAMLOGTeamMemberLogInfoSerializer deserialize:valueDict];
+    return [[DBTEAMLOGContextLogInfo alloc] initWithTeamMember:teamMember];
   } else if ([tag isEqualToString:@"trusted_non_team_member"]) {
     DBTEAMLOGTrustedNonTeamMemberLogInfo *trustedNonTeamMember =
         [DBTEAMLOGTrustedNonTeamMemberLogInfoSerializer deserialize:valueDict];
@@ -11455,18 +14214,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithUnlimited {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGDeviceApprovalsPolicyUnlimited;
-  }
-  return self;
-}
-
 - (instancetype)initWithLimited {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGDeviceApprovalsPolicyLimited;
+  }
+  return self;
+}
+
+- (instancetype)initWithUnlimited {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGDeviceApprovalsPolicyUnlimited;
   }
   return self;
 }
@@ -11483,12 +14242,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isUnlimited {
-  return _tag == DBTEAMLOGDeviceApprovalsPolicyUnlimited;
-}
-
 - (BOOL)isLimited {
   return _tag == DBTEAMLOGDeviceApprovalsPolicyLimited;
+}
+
+- (BOOL)isUnlimited {
+  return _tag == DBTEAMLOGDeviceApprovalsPolicyUnlimited;
 }
 
 - (BOOL)isOther {
@@ -11497,10 +14256,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGDeviceApprovalsPolicyUnlimited:
-    return @"DBTEAMLOGDeviceApprovalsPolicyUnlimited";
   case DBTEAMLOGDeviceApprovalsPolicyLimited:
     return @"DBTEAMLOGDeviceApprovalsPolicyLimited";
+  case DBTEAMLOGDeviceApprovalsPolicyUnlimited:
+    return @"DBTEAMLOGDeviceApprovalsPolicyUnlimited";
   case DBTEAMLOGDeviceApprovalsPolicyOther:
     return @"DBTEAMLOGDeviceApprovalsPolicyOther";
   }
@@ -11539,9 +14298,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGDeviceApprovalsPolicyUnlimited:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGDeviceApprovalsPolicyLimited:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGDeviceApprovalsPolicyUnlimited:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGDeviceApprovalsPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -11570,9 +14329,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGDeviceApprovalsPolicyUnlimited:
-    return [[self tagName] isEqual:[aDeviceApprovalsPolicy tagName]];
   case DBTEAMLOGDeviceApprovalsPolicyLimited:
+    return [[self tagName] isEqual:[aDeviceApprovalsPolicy tagName]];
+  case DBTEAMLOGDeviceApprovalsPolicyUnlimited:
     return [[self tagName] isEqual:[aDeviceApprovalsPolicy tagName]];
   case DBTEAMLOGDeviceApprovalsPolicyOther:
     return [[self tagName] isEqual:[aDeviceApprovalsPolicy tagName]];
@@ -11589,10 +14348,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceApprovalsPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isUnlimited]) {
-    jsonDict[@".tag"] = @"unlimited";
-  } else if ([valueObj isLimited]) {
+  if ([valueObj isLimited]) {
     jsonDict[@".tag"] = @"limited";
+  } else if ([valueObj isUnlimited]) {
+    jsonDict[@".tag"] = @"unlimited";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -11605,10 +14364,10 @@
 + (DBTEAMLOGDeviceApprovalsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"unlimited"]) {
-    return [[DBTEAMLOGDeviceApprovalsPolicy alloc] initWithUnlimited];
-  } else if ([tag isEqualToString:@"limited"]) {
+  if ([tag isEqualToString:@"limited"]) {
     return [[DBTEAMLOGDeviceApprovalsPolicy alloc] initWithLimited];
+  } else if ([tag isEqualToString:@"unlimited"]) {
+    return [[DBTEAMLOGDeviceApprovalsPolicy alloc] initWithUnlimited];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGDeviceApprovalsPolicy alloc] initWithOther];
   } else {
@@ -13689,6 +16448,231 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGBackupStatus.h"
+#import "DBTEAMLOGDesktopDeviceSessionLogInfo.h"
+#import "DBTEAMLOGDeviceSyncBackupStatusChangedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDeviceSyncBackupStatusChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDesktopDeviceSessionInfo:(DBTEAMLOGDesktopDeviceSessionLogInfo *)desktopDeviceSessionInfo
+                                   previousValue:(DBTEAMLOGBackupStatus *)previousValue
+                                       dNewValue:(DBTEAMLOGBackupStatus *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](desktopDeviceSessionInfo);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _desktopDeviceSessionInfo = desktopDeviceSessionInfo;
+    _previousValue = previousValue;
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.desktopDeviceSessionInfo hash];
+  result = prime * result + [self.previousValue hash];
+  result = prime * result + [self.dNewValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeviceSyncBackupStatusChangedDetails:other];
+}
+
+- (BOOL)isEqualToDeviceSyncBackupStatusChangedDetails:
+    (DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)aDeviceSyncBackupStatusChangedDetails {
+  if (self == aDeviceSyncBackupStatusChangedDetails) {
+    return YES;
+  }
+  if (![self.desktopDeviceSessionInfo isEqual:aDeviceSyncBackupStatusChangedDetails.desktopDeviceSessionInfo]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aDeviceSyncBackupStatusChangedDetails.previousValue]) {
+    return NO;
+  }
+  if (![self.dNewValue isEqual:aDeviceSyncBackupStatusChangedDetails.dNewValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"desktop_device_session_info"] =
+      [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer serialize:valueObj.desktopDeviceSessionInfo];
+  jsonDict[@"previous_value"] = [DBTEAMLOGBackupStatusSerializer serialize:valueObj.previousValue];
+  jsonDict[@"new_value"] = [DBTEAMLOGBackupStatusSerializer serialize:valueObj.dNewValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGDesktopDeviceSessionLogInfo *desktopDeviceSessionInfo =
+      [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer deserialize:valueDict[@"desktop_device_session_info"]];
+  DBTEAMLOGBackupStatus *previousValue = [DBTEAMLOGBackupStatusSerializer deserialize:valueDict[@"previous_value"]];
+  DBTEAMLOGBackupStatus *dNewValue = [DBTEAMLOGBackupStatusSerializer deserialize:valueDict[@"new_value"]];
+
+  return
+      [[DBTEAMLOGDeviceSyncBackupStatusChangedDetails alloc] initWithDesktopDeviceSessionInfo:desktopDeviceSessionInfo
+                                                                                previousValue:previousValue
+                                                                                    dNewValue:dNewValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDeviceSyncBackupStatusChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDeviceSyncBackupStatusChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDeviceSyncBackupStatusChangedType:other];
+}
+
+- (BOOL)isEqualToDeviceSyncBackupStatusChangedType:
+    (DBTEAMLOGDeviceSyncBackupStatusChangedType *)aDeviceSyncBackupStatusChangedType {
+  if (self == aDeviceSyncBackupStatusChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aDeviceSyncBackupStatusChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceSyncBackupStatusChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDeviceSyncBackupStatusChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGDeviceSyncBackupStatusChangedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGDeviceType.h"
 
 #pragma mark - API Object
@@ -14005,18 +16989,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithRemove {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGDeviceUnlinkPolicyRemove;
-  }
-  return self;
-}
-
 - (instancetype)initWithKeep {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGDeviceUnlinkPolicyKeep;
+  }
+  return self;
+}
+
+- (instancetype)initWithRemove {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGDeviceUnlinkPolicyRemove;
   }
   return self;
 }
@@ -14033,12 +17017,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isRemove {
-  return _tag == DBTEAMLOGDeviceUnlinkPolicyRemove;
-}
-
 - (BOOL)isKeep {
   return _tag == DBTEAMLOGDeviceUnlinkPolicyKeep;
+}
+
+- (BOOL)isRemove {
+  return _tag == DBTEAMLOGDeviceUnlinkPolicyRemove;
 }
 
 - (BOOL)isOther {
@@ -14047,10 +17031,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGDeviceUnlinkPolicyRemove:
-    return @"DBTEAMLOGDeviceUnlinkPolicyRemove";
   case DBTEAMLOGDeviceUnlinkPolicyKeep:
     return @"DBTEAMLOGDeviceUnlinkPolicyKeep";
+  case DBTEAMLOGDeviceUnlinkPolicyRemove:
+    return @"DBTEAMLOGDeviceUnlinkPolicyRemove";
   case DBTEAMLOGDeviceUnlinkPolicyOther:
     return @"DBTEAMLOGDeviceUnlinkPolicyOther";
   }
@@ -14089,9 +17073,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGDeviceUnlinkPolicyRemove:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGDeviceUnlinkPolicyKeep:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGDeviceUnlinkPolicyRemove:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGDeviceUnlinkPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -14120,9 +17104,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGDeviceUnlinkPolicyRemove:
-    return [[self tagName] isEqual:[aDeviceUnlinkPolicy tagName]];
   case DBTEAMLOGDeviceUnlinkPolicyKeep:
+    return [[self tagName] isEqual:[aDeviceUnlinkPolicy tagName]];
+  case DBTEAMLOGDeviceUnlinkPolicyRemove:
     return [[self tagName] isEqual:[aDeviceUnlinkPolicy tagName]];
   case DBTEAMLOGDeviceUnlinkPolicyOther:
     return [[self tagName] isEqual:[aDeviceUnlinkPolicy tagName]];
@@ -14139,10 +17123,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDeviceUnlinkPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isRemove]) {
-    jsonDict[@".tag"] = @"remove";
-  } else if ([valueObj isKeep]) {
+  if ([valueObj isKeep]) {
     jsonDict[@".tag"] = @"keep";
+  } else if ([valueObj isRemove]) {
+    jsonDict[@".tag"] = @"remove";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -14155,10 +17139,10 @@
 + (DBTEAMLOGDeviceUnlinkPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"remove"]) {
-    return [[DBTEAMLOGDeviceUnlinkPolicy alloc] initWithRemove];
-  } else if ([tag isEqualToString:@"keep"]) {
+  if ([tag isEqualToString:@"keep"]) {
     return [[DBTEAMLOGDeviceUnlinkPolicy alloc] initWithKeep];
+  } else if ([tag isEqualToString:@"remove"]) {
+    return [[DBTEAMLOGDeviceUnlinkPolicy alloc] initWithRemove];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGDeviceUnlinkPolicy alloc] initWithOther];
   } else {
@@ -16840,6 +19824,414 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsExportedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsExportedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithPlatform:(NSString *)platform {
+  [DBStoneValidators nonnullValidator:nil](platform);
+
+  self = [super init];
+  if (self) {
+    _platform = platform;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsExportedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsExportedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsExportedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.platform hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsExportedDetails:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsExportedDetails:
+    (DBTEAMLOGDropboxPasswordsExportedDetails *)aDropboxPasswordsExportedDetails {
+  if (self == aDropboxPasswordsExportedDetails) {
+    return YES;
+  }
+  if (![self.platform isEqual:aDropboxPasswordsExportedDetails.platform]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsExportedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsExportedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"platform"] = valueObj.platform;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsExportedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *platform = valueDict[@"platform"];
+
+  return [[DBTEAMLOGDropboxPasswordsExportedDetails alloc] initWithPlatform:platform];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsExportedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsExportedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsExportedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsExportedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsExportedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsExportedType:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsExportedType:(DBTEAMLOGDropboxPasswordsExportedType *)aDropboxPasswordsExportedType {
+  if (self == aDropboxPasswordsExportedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aDropboxPasswordsExportedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsExportedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsExportedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsExportedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGDropboxPasswordsExportedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithIsFirstDevice:(NSNumber *)isFirstDevice platform:(NSString *)platform {
+  [DBStoneValidators nonnullValidator:nil](isFirstDevice);
+  [DBStoneValidators nonnullValidator:nil](platform);
+
+  self = [super init];
+  if (self) {
+    _isFirstDevice = isFirstDevice;
+    _platform = platform;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.isFirstDevice hash];
+  result = prime * result + [self.platform hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsNewDeviceEnrolledDetails:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsNewDeviceEnrolledDetails:
+    (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)aDropboxPasswordsNewDeviceEnrolledDetails {
+  if (self == aDropboxPasswordsNewDeviceEnrolledDetails) {
+    return YES;
+  }
+  if (![self.isFirstDevice isEqual:aDropboxPasswordsNewDeviceEnrolledDetails.isFirstDevice]) {
+    return NO;
+  }
+  if (![self.platform isEqual:aDropboxPasswordsNewDeviceEnrolledDetails.platform]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"is_first_device"] = valueObj.isFirstDevice;
+  jsonDict[@"platform"] = valueObj.platform;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSNumber *isFirstDevice = valueDict[@"is_first_device"];
+  NSString *platform = valueDict[@"platform"];
+
+  return
+      [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails alloc] initWithIsFirstDevice:isFirstDevice platform:platform];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsNewDeviceEnrolledType:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsNewDeviceEnrolledType:
+    (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *)aDropboxPasswordsNewDeviceEnrolledType {
+  if (self == aDropboxPasswordsNewDeviceEnrolledType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aDropboxPasswordsNewDeviceEnrolledType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGDurationLogInfo.h"
 #import "DBTEAMLOGTimeUnit.h"
 
@@ -19143,6 +22535,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithAdminAlerting {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventCategoryAdminAlerting;
+  }
+  return self;
+}
+
 - (instancetype)initWithApps {
   self = [super init];
   if (self) {
@@ -19155,6 +22555,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventCategoryComments;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataGovernance {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventCategoryDataGovernance;
   }
   return self;
 }
@@ -19195,14 +22603,6 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventCategoryGroups;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHolds {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventCategoryLegalHolds;
   }
   return self;
 }
@@ -19323,12 +22723,20 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAdminAlerting {
+  return _tag == DBTEAMLOGEventCategoryAdminAlerting;
+}
+
 - (BOOL)isApps {
   return _tag == DBTEAMLOGEventCategoryApps;
 }
 
 - (BOOL)isComments {
   return _tag == DBTEAMLOGEventCategoryComments;
+}
+
+- (BOOL)isDataGovernance {
+  return _tag == DBTEAMLOGEventCategoryDataGovernance;
 }
 
 - (BOOL)isDevices {
@@ -19349,10 +22757,6 @@
 
 - (BOOL)isGroups {
   return _tag == DBTEAMLOGEventCategoryGroups;
-}
-
-- (BOOL)isLegalHolds {
-  return _tag == DBTEAMLOGEventCategoryLegalHolds;
 }
 
 - (BOOL)isLogins {
@@ -19413,10 +22817,14 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGEventCategoryAdminAlerting:
+    return @"DBTEAMLOGEventCategoryAdminAlerting";
   case DBTEAMLOGEventCategoryApps:
     return @"DBTEAMLOGEventCategoryApps";
   case DBTEAMLOGEventCategoryComments:
     return @"DBTEAMLOGEventCategoryComments";
+  case DBTEAMLOGEventCategoryDataGovernance:
+    return @"DBTEAMLOGEventCategoryDataGovernance";
   case DBTEAMLOGEventCategoryDevices:
     return @"DBTEAMLOGEventCategoryDevices";
   case DBTEAMLOGEventCategoryDomains:
@@ -19427,8 +22835,6 @@
     return @"DBTEAMLOGEventCategoryFileRequests";
   case DBTEAMLOGEventCategoryGroups:
     return @"DBTEAMLOGEventCategoryGroups";
-  case DBTEAMLOGEventCategoryLegalHolds:
-    return @"DBTEAMLOGEventCategoryLegalHolds";
   case DBTEAMLOGEventCategoryLogins:
     return @"DBTEAMLOGEventCategoryLogins";
   case DBTEAMLOGEventCategoryMembers:
@@ -19493,9 +22899,13 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGEventCategoryAdminAlerting:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventCategoryApps:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventCategoryComments:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventCategoryDataGovernance:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventCategoryDevices:
     result = prime * result + [[self tagName] hash];
@@ -19506,8 +22916,6 @@
   case DBTEAMLOGEventCategoryFileRequests:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventCategoryGroups:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventCategoryLegalHolds:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventCategoryLogins:
     result = prime * result + [[self tagName] hash];
@@ -19562,9 +22970,13 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGEventCategoryAdminAlerting:
+    return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryApps:
     return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryComments:
+    return [[self tagName] isEqual:[anEventCategory tagName]];
+  case DBTEAMLOGEventCategoryDataGovernance:
     return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryDevices:
     return [[self tagName] isEqual:[anEventCategory tagName]];
@@ -19575,8 +22987,6 @@
   case DBTEAMLOGEventCategoryFileRequests:
     return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryGroups:
-    return [[self tagName] isEqual:[anEventCategory tagName]];
-  case DBTEAMLOGEventCategoryLegalHolds:
     return [[self tagName] isEqual:[anEventCategory tagName]];
   case DBTEAMLOGEventCategoryLogins:
     return [[self tagName] isEqual:[anEventCategory tagName]];
@@ -19619,10 +23029,14 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEventCategory *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isApps]) {
+  if ([valueObj isAdminAlerting]) {
+    jsonDict[@".tag"] = @"admin_alerting";
+  } else if ([valueObj isApps]) {
     jsonDict[@".tag"] = @"apps";
   } else if ([valueObj isComments]) {
     jsonDict[@".tag"] = @"comments";
+  } else if ([valueObj isDataGovernance]) {
+    jsonDict[@".tag"] = @"data_governance";
   } else if ([valueObj isDevices]) {
     jsonDict[@".tag"] = @"devices";
   } else if ([valueObj isDomains]) {
@@ -19633,8 +23047,6 @@
     jsonDict[@".tag"] = @"file_requests";
   } else if ([valueObj isGroups]) {
     jsonDict[@".tag"] = @"groups";
-  } else if ([valueObj isLegalHolds]) {
-    jsonDict[@".tag"] = @"legal_holds";
   } else if ([valueObj isLogins]) {
     jsonDict[@".tag"] = @"logins";
   } else if ([valueObj isMembers]) {
@@ -19673,10 +23085,14 @@
 + (DBTEAMLOGEventCategory *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"apps"]) {
+  if ([tag isEqualToString:@"admin_alerting"]) {
+    return [[DBTEAMLOGEventCategory alloc] initWithAdminAlerting];
+  } else if ([tag isEqualToString:@"apps"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithApps];
   } else if ([tag isEqualToString:@"comments"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithComments];
+  } else if ([tag isEqualToString:@"data_governance"]) {
+    return [[DBTEAMLOGEventCategory alloc] initWithDataGovernance];
   } else if ([tag isEqualToString:@"devices"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithDevices];
   } else if ([tag isEqualToString:@"domains"]) {
@@ -19687,8 +23103,6 @@
     return [[DBTEAMLOGEventCategory alloc] initWithFileRequests];
   } else if ([tag isEqualToString:@"groups"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithGroups];
-  } else if ([tag isEqualToString:@"legal_holds"]) {
-    return [[DBTEAMLOGEventCategory alloc] initWithLegalHolds];
   } else if ([tag isEqualToString:@"logins"]) {
     return [[DBTEAMLOGEventCategory alloc] initWithLogins];
   } else if ([tag isEqualToString:@"members"]) {
@@ -19732,6 +23146,8 @@
 #import "DBTEAMLOGAccountCaptureNotificationEmailsSentDetails.h"
 #import "DBTEAMLOGAccountCaptureRelinquishAccountDetails.h"
 #import "DBTEAMLOGAccountLockOrUnlockedDetails.h"
+#import "DBTEAMLOGAdminAlertingChangedAlertConfigDetails.h"
+#import "DBTEAMLOGAdminAlertingTriggeredAlertDetails.h"
 #import "DBTEAMLOGAllowDownloadDisabledDetails.h"
 #import "DBTEAMLOGAllowDownloadEnabledDetails.h"
 #import "DBTEAMLOGAppLinkTeamDetails.h"
@@ -19749,7 +23165,11 @@
 #import "DBTEAMLOGCameraUploadsPolicyChangedDetails.h"
 #import "DBTEAMLOGChangedEnterpriseAdminRoleDetails.h"
 #import "DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails.h"
+#import "DBTEAMLOGClassificationChangePolicyDetails.h"
+#import "DBTEAMLOGClassificationCreateReportDetails.h"
+#import "DBTEAMLOGClassificationCreateReportFailDetails.h"
 #import "DBTEAMLOGCollectionShareDetails.h"
+#import "DBTEAMLOGComputerBackupPolicyChangedDetails.h"
 #import "DBTEAMLOGContentAdministrationPolicyChangedDetails.h"
 #import "DBTEAMLOGCreateFolderDetails.h"
 #import "DBTEAMLOGCreateTeamInviteLinkDetails.h"
@@ -19771,6 +23191,7 @@
 #import "DBTEAMLOGDeviceLinkSuccessDetails.h"
 #import "DBTEAMLOGDeviceManagementDisabledDetails.h"
 #import "DBTEAMLOGDeviceManagementEnabledDetails.h"
+#import "DBTEAMLOGDeviceSyncBackupStatusChangedDetails.h"
 #import "DBTEAMLOGDeviceUnlinkDetails.h"
 #import "DBTEAMLOGDirectoryRestrictionsAddMembersDetails.h"
 #import "DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails.h"
@@ -19784,6 +23205,8 @@
 #import "DBTEAMLOGDomainVerificationAddDomainFailDetails.h"
 #import "DBTEAMLOGDomainVerificationAddDomainSuccessDetails.h"
 #import "DBTEAMLOGDomainVerificationRemoveDomainDetails.h"
+#import "DBTEAMLOGDropboxPasswordsExportedDetails.h"
+#import "DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails.h"
 #import "DBTEAMLOGEmmAddExceptionDetails.h"
 #import "DBTEAMLOGEmmChangePolicyDetails.h"
 #import "DBTEAMLOGEmmCreateExceptionsReportDetails.h"
@@ -19844,6 +23267,17 @@
 #import "DBTEAMLOGFolderOverviewItemPinnedDetails.h"
 #import "DBTEAMLOGFolderOverviewItemUnpinnedDetails.h"
 #import "DBTEAMLOGGoogleSsoChangePolicyDetails.h"
+#import "DBTEAMLOGGovernancePolicyAddFolderFailedDetails.h"
+#import "DBTEAMLOGGovernancePolicyAddFoldersDetails.h"
+#import "DBTEAMLOGGovernancePolicyCreateDetails.h"
+#import "DBTEAMLOGGovernancePolicyDeleteDetails.h"
+#import "DBTEAMLOGGovernancePolicyEditDetailsDetails.h"
+#import "DBTEAMLOGGovernancePolicyEditDurationDetails.h"
+#import "DBTEAMLOGGovernancePolicyExportCreatedDetails.h"
+#import "DBTEAMLOGGovernancePolicyExportRemovedDetails.h"
+#import "DBTEAMLOGGovernancePolicyRemoveFoldersDetails.h"
+#import "DBTEAMLOGGovernancePolicyReportCreatedDetails.h"
+#import "DBTEAMLOGGovernancePolicyZipPartDownloadedDetails.h"
 #import "DBTEAMLOGGroupAddExternalIdDetails.h"
 #import "DBTEAMLOGGroupAddMemberDetails.h"
 #import "DBTEAMLOGGroupChangeExternalIdDetails.h"
@@ -19885,6 +23319,7 @@
 #import "DBTEAMLOGMemberChangeExternalIdDetails.h"
 #import "DBTEAMLOGMemberChangeMembershipTypeDetails.h"
 #import "DBTEAMLOGMemberChangeNameDetails.h"
+#import "DBTEAMLOGMemberChangeResellerRoleDetails.h"
 #import "DBTEAMLOGMemberChangeStatusDetails.h"
 #import "DBTEAMLOGMemberDeleteManualContactsDetails.h"
 #import "DBTEAMLOGMemberDeleteProfilePhotoDetails.h"
@@ -20056,6 +23491,8 @@
 #import "DBTEAMLOGSharingChangeFolderJoinPolicyDetails.h"
 #import "DBTEAMLOGSharingChangeLinkPolicyDetails.h"
 #import "DBTEAMLOGSharingChangeMemberPolicyDetails.h"
+#import "DBTEAMLOGShmodelDisableDownloadsDetails.h"
+#import "DBTEAMLOGShmodelEnableDownloadsDetails.h"
 #import "DBTEAMLOGShmodelGroupShareDetails.h"
 #import "DBTEAMLOGShowcaseAccessGrantedDetails.h"
 #import "DBTEAMLOGShowcaseAddMemberDetails.h"
@@ -20106,6 +23543,7 @@
 #import "DBTEAMLOGStartedEnterpriseAdminSessionDetails.h"
 #import "DBTEAMLOGTeamActivityCreateReportDetails.h"
 #import "DBTEAMLOGTeamActivityCreateReportFailDetails.h"
+#import "DBTEAMLOGTeamBrandingPolicyChangedDetails.h"
 #import "DBTEAMLOGTeamExtensionsPolicyChangedDetails.h"
 #import "DBTEAMLOGTeamFolderChangeStatusDetails.h"
 #import "DBTEAMLOGTeamFolderCreateDetails.h"
@@ -20132,10 +23570,13 @@
 #import "DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamDetails.h"
 #import "DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamDetails.h"
 #import "DBTEAMLOGTeamMergeToDetails.h"
+#import "DBTEAMLOGTeamProfileAddBackgroundDetails.h"
 #import "DBTEAMLOGTeamProfileAddLogoDetails.h"
+#import "DBTEAMLOGTeamProfileChangeBackgroundDetails.h"
 #import "DBTEAMLOGTeamProfileChangeDefaultLanguageDetails.h"
 #import "DBTEAMLOGTeamProfileChangeLogoDetails.h"
 #import "DBTEAMLOGTeamProfileChangeNameDetails.h"
+#import "DBTEAMLOGTeamProfileRemoveBackgroundDetails.h"
 #import "DBTEAMLOGTeamProfileRemoveLogoDetails.h"
 #import "DBTEAMLOGTeamSelectiveSyncPolicyChangedDetails.h"
 #import "DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails.h"
@@ -20161,6 +23602,8 @@
 
 @implementation DBTEAMLOGEventDetails
 
+@synthesize adminAlertingChangedAlertConfigDetails = _adminAlertingChangedAlertConfigDetails;
+@synthesize adminAlertingTriggeredAlertDetails = _adminAlertingTriggeredAlertDetails;
 @synthesize appLinkTeamDetails = _appLinkTeamDetails;
 @synthesize appLinkUserDetails = _appLinkUserDetails;
 @synthesize appUnlinkTeamDetails = _appUnlinkTeamDetails;
@@ -20175,6 +23618,28 @@
 @synthesize fileResolveCommentDetails = _fileResolveCommentDetails;
 @synthesize fileUnlikeCommentDetails = _fileUnlikeCommentDetails;
 @synthesize fileUnresolveCommentDetails = _fileUnresolveCommentDetails;
+@synthesize governancePolicyAddFoldersDetails = _governancePolicyAddFoldersDetails;
+@synthesize governancePolicyAddFolderFailedDetails = _governancePolicyAddFolderFailedDetails;
+@synthesize governancePolicyCreateDetails = _governancePolicyCreateDetails;
+@synthesize governancePolicyDeleteDetails = _governancePolicyDeleteDetails;
+@synthesize governancePolicyEditDetailsDetails = _governancePolicyEditDetailsDetails;
+@synthesize governancePolicyEditDurationDetails = _governancePolicyEditDurationDetails;
+@synthesize governancePolicyExportCreatedDetails = _governancePolicyExportCreatedDetails;
+@synthesize governancePolicyExportRemovedDetails = _governancePolicyExportRemovedDetails;
+@synthesize governancePolicyRemoveFoldersDetails = _governancePolicyRemoveFoldersDetails;
+@synthesize governancePolicyReportCreatedDetails = _governancePolicyReportCreatedDetails;
+@synthesize governancePolicyZipPartDownloadedDetails = _governancePolicyZipPartDownloadedDetails;
+@synthesize legalHoldsActivateAHoldDetails = _legalHoldsActivateAHoldDetails;
+@synthesize legalHoldsAddMembersDetails = _legalHoldsAddMembersDetails;
+@synthesize legalHoldsChangeHoldDetailsDetails = _legalHoldsChangeHoldDetailsDetails;
+@synthesize legalHoldsChangeHoldNameDetails = _legalHoldsChangeHoldNameDetails;
+@synthesize legalHoldsExportAHoldDetails = _legalHoldsExportAHoldDetails;
+@synthesize legalHoldsExportCancelledDetails = _legalHoldsExportCancelledDetails;
+@synthesize legalHoldsExportDownloadedDetails = _legalHoldsExportDownloadedDetails;
+@synthesize legalHoldsExportRemovedDetails = _legalHoldsExportRemovedDetails;
+@synthesize legalHoldsReleaseAHoldDetails = _legalHoldsReleaseAHoldDetails;
+@synthesize legalHoldsRemoveMembersDetails = _legalHoldsRemoveMembersDetails;
+@synthesize legalHoldsReportAHoldDetails = _legalHoldsReportAHoldDetails;
 @synthesize deviceChangeIpDesktopDetails = _deviceChangeIpDesktopDetails;
 @synthesize deviceChangeIpMobileDetails = _deviceChangeIpMobileDetails;
 @synthesize deviceChangeIpWebDetails = _deviceChangeIpWebDetails;
@@ -20184,7 +23649,10 @@
 @synthesize deviceLinkSuccessDetails = _deviceLinkSuccessDetails;
 @synthesize deviceManagementDisabledDetails = _deviceManagementDisabledDetails;
 @synthesize deviceManagementEnabledDetails = _deviceManagementEnabledDetails;
+@synthesize deviceSyncBackupStatusChangedDetails = _deviceSyncBackupStatusChangedDetails;
 @synthesize deviceUnlinkDetails = _deviceUnlinkDetails;
+@synthesize dropboxPasswordsExportedDetails = _dropboxPasswordsExportedDetails;
+@synthesize dropboxPasswordsNewDeviceEnrolledDetails = _dropboxPasswordsNewDeviceEnrolledDetails;
 @synthesize emmRefreshAuthTokenDetails = _emmRefreshAuthTokenDetails;
 @synthesize accountCaptureChangeAvailabilityDetails = _accountCaptureChangeAvailabilityDetails;
 @synthesize accountCaptureMigrateAccountDetails = _accountCaptureMigrateAccountDetails;
@@ -20239,17 +23707,6 @@
 @synthesize groupRemoveExternalIdDetails = _groupRemoveExternalIdDetails;
 @synthesize groupRemoveMemberDetails = _groupRemoveMemberDetails;
 @synthesize groupRenameDetails = _groupRenameDetails;
-@synthesize legalHoldsActivateAHoldDetails = _legalHoldsActivateAHoldDetails;
-@synthesize legalHoldsAddMembersDetails = _legalHoldsAddMembersDetails;
-@synthesize legalHoldsChangeHoldDetailsDetails = _legalHoldsChangeHoldDetailsDetails;
-@synthesize legalHoldsChangeHoldNameDetails = _legalHoldsChangeHoldNameDetails;
-@synthesize legalHoldsExportAHoldDetails = _legalHoldsExportAHoldDetails;
-@synthesize legalHoldsExportCancelledDetails = _legalHoldsExportCancelledDetails;
-@synthesize legalHoldsExportDownloadedDetails = _legalHoldsExportDownloadedDetails;
-@synthesize legalHoldsExportRemovedDetails = _legalHoldsExportRemovedDetails;
-@synthesize legalHoldsReleaseAHoldDetails = _legalHoldsReleaseAHoldDetails;
-@synthesize legalHoldsRemoveMembersDetails = _legalHoldsRemoveMembersDetails;
-@synthesize legalHoldsReportAHoldDetails = _legalHoldsReportAHoldDetails;
 @synthesize accountLockOrUnlockedDetails = _accountLockOrUnlockedDetails;
 @synthesize emmErrorDetails = _emmErrorDetails;
 @synthesize guestAdminSignedInViaTrustedTeamsDetails = _guestAdminSignedInViaTrustedTeamsDetails;
@@ -20271,6 +23728,7 @@
 @synthesize memberChangeExternalIdDetails = _memberChangeExternalIdDetails;
 @synthesize memberChangeMembershipTypeDetails = _memberChangeMembershipTypeDetails;
 @synthesize memberChangeNameDetails = _memberChangeNameDetails;
+@synthesize memberChangeResellerRoleDetails = _memberChangeResellerRoleDetails;
 @synthesize memberChangeStatusDetails = _memberChangeStatusDetails;
 @synthesize memberDeleteManualContactsDetails = _memberDeleteManualContactsDetails;
 @synthesize memberDeleteProfilePhotoDetails = _memberDeleteProfilePhotoDetails;
@@ -20339,6 +23797,8 @@
 @synthesize passwordChangeDetails = _passwordChangeDetails;
 @synthesize passwordResetDetails = _passwordResetDetails;
 @synthesize passwordResetAllDetails = _passwordResetAllDetails;
+@synthesize classificationCreateReportDetails = _classificationCreateReportDetails;
+@synthesize classificationCreateReportFailDetails = _classificationCreateReportFailDetails;
 @synthesize emmCreateExceptionsReportDetails = _emmCreateExceptionsReportDetails;
 @synthesize emmCreateUsageReportDetails = _emmCreateUsageReportDetails;
 @synthesize exportMembersReportDetails = _exportMembersReportDetails;
@@ -20436,6 +23896,8 @@
 @synthesize sharedLinkShareDetails = _sharedLinkShareDetails;
 @synthesize sharedLinkViewDetails = _sharedLinkViewDetails;
 @synthesize sharedNoteOpenedDetails = _sharedNoteOpenedDetails;
+@synthesize shmodelDisableDownloadsDetails = _shmodelDisableDownloadsDetails;
+@synthesize shmodelEnableDownloadsDetails = _shmodelEnableDownloadsDetails;
 @synthesize shmodelGroupShareDetails = _shmodelGroupShareDetails;
 @synthesize showcaseAccessGrantedDetails = _showcaseAccessGrantedDetails;
 @synthesize showcaseAddMemberDetails = _showcaseAddMemberDetails;
@@ -20481,6 +23943,8 @@
 @synthesize allowDownloadDisabledDetails = _allowDownloadDisabledDetails;
 @synthesize allowDownloadEnabledDetails = _allowDownloadEnabledDetails;
 @synthesize cameraUploadsPolicyChangedDetails = _cameraUploadsPolicyChangedDetails;
+@synthesize classificationChangePolicyDetails = _classificationChangePolicyDetails;
+@synthesize computerBackupPolicyChangedDetails = _computerBackupPolicyChangedDetails;
 @synthesize contentAdministrationPolicyChangedDetails = _contentAdministrationPolicyChangedDetails;
 @synthesize dataPlacementRestrictionChangePolicyDetails = _dataPlacementRestrictionChangePolicyDetails;
 @synthesize dataPlacementRestrictionSatisfyPolicyDetails = _dataPlacementRestrictionSatisfyPolicyDetails;
@@ -20538,6 +24002,7 @@
 @synthesize smartSyncNotOptOutDetails = _smartSyncNotOptOutDetails;
 @synthesize smartSyncOptOutDetails = _smartSyncOptOutDetails;
 @synthesize ssoChangePolicyDetails = _ssoChangePolicyDetails;
+@synthesize teamBrandingPolicyChangedDetails = _teamBrandingPolicyChangedDetails;
 @synthesize teamExtensionsPolicyChangedDetails = _teamExtensionsPolicyChangedDetails;
 @synthesize teamSelectiveSyncPolicyChangedDetails = _teamSelectiveSyncPolicyChangedDetails;
 @synthesize teamSharingWhitelistSubjectsChangedDetails = _teamSharingWhitelistSubjectsChangedDetails;
@@ -20552,10 +24017,13 @@
 @synthesize webSessionsChangeIdleLengthPolicyDetails = _webSessionsChangeIdleLengthPolicyDetails;
 @synthesize teamMergeFromDetails = _teamMergeFromDetails;
 @synthesize teamMergeToDetails = _teamMergeToDetails;
+@synthesize teamProfileAddBackgroundDetails = _teamProfileAddBackgroundDetails;
 @synthesize teamProfileAddLogoDetails = _teamProfileAddLogoDetails;
+@synthesize teamProfileChangeBackgroundDetails = _teamProfileChangeBackgroundDetails;
 @synthesize teamProfileChangeDefaultLanguageDetails = _teamProfileChangeDefaultLanguageDetails;
 @synthesize teamProfileChangeLogoDetails = _teamProfileChangeLogoDetails;
 @synthesize teamProfileChangeNameDetails = _teamProfileChangeNameDetails;
+@synthesize teamProfileRemoveBackgroundDetails = _teamProfileRemoveBackgroundDetails;
 @synthesize teamProfileRemoveLogoDetails = _teamProfileRemoveLogoDetails;
 @synthesize tfaAddBackupPhoneDetails = _tfaAddBackupPhoneDetails;
 @synthesize tfaAddSecurityKeyDetails = _tfaAddSecurityKeyDetails;
@@ -20592,6 +24060,26 @@
 @synthesize missingDetails = _missingDetails;
 
 #pragma mark - Constructors
+
+- (instancetype)initWithAdminAlertingChangedAlertConfigDetails:
+    (DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)adminAlertingChangedAlertConfigDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails;
+    _adminAlertingChangedAlertConfigDetails = adminAlertingChangedAlertConfigDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithAdminAlertingTriggeredAlertDetails:
+    (DBTEAMLOGAdminAlertingTriggeredAlertDetails *)adminAlertingTriggeredAlertDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails;
+    _adminAlertingTriggeredAlertDetails = adminAlertingTriggeredAlertDetails;
+  }
+  return self;
+}
 
 - (instancetype)initWithAppLinkTeamDetails:(DBTEAMLOGAppLinkTeamDetails *)appLinkTeamDetails {
   self = [super init];
@@ -20723,6 +24211,226 @@
   return self;
 }
 
+- (instancetype)initWithGovernancePolicyAddFoldersDetails:
+    (DBTEAMLOGGovernancePolicyAddFoldersDetails *)governancePolicyAddFoldersDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails;
+    _governancePolicyAddFoldersDetails = governancePolicyAddFoldersDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyAddFolderFailedDetails:
+    (DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)governancePolicyAddFolderFailedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails;
+    _governancePolicyAddFolderFailedDetails = governancePolicyAddFolderFailedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyCreateDetails:
+    (DBTEAMLOGGovernancePolicyCreateDetails *)governancePolicyCreateDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyCreateDetails;
+    _governancePolicyCreateDetails = governancePolicyCreateDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyDeleteDetails:
+    (DBTEAMLOGGovernancePolicyDeleteDetails *)governancePolicyDeleteDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails;
+    _governancePolicyDeleteDetails = governancePolicyDeleteDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyEditDetailsDetails:
+    (DBTEAMLOGGovernancePolicyEditDetailsDetails *)governancePolicyEditDetailsDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails;
+    _governancePolicyEditDetailsDetails = governancePolicyEditDetailsDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyEditDurationDetails:
+    (DBTEAMLOGGovernancePolicyEditDurationDetails *)governancePolicyEditDurationDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails;
+    _governancePolicyEditDurationDetails = governancePolicyEditDurationDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyExportCreatedDetails:
+    (DBTEAMLOGGovernancePolicyExportCreatedDetails *)governancePolicyExportCreatedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails;
+    _governancePolicyExportCreatedDetails = governancePolicyExportCreatedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyExportRemovedDetails:
+    (DBTEAMLOGGovernancePolicyExportRemovedDetails *)governancePolicyExportRemovedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails;
+    _governancePolicyExportRemovedDetails = governancePolicyExportRemovedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyRemoveFoldersDetails:
+    (DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)governancePolicyRemoveFoldersDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails;
+    _governancePolicyRemoveFoldersDetails = governancePolicyRemoveFoldersDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyReportCreatedDetails:
+    (DBTEAMLOGGovernancePolicyReportCreatedDetails *)governancePolicyReportCreatedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails;
+    _governancePolicyReportCreatedDetails = governancePolicyReportCreatedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyZipPartDownloadedDetails:
+    (DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)governancePolicyZipPartDownloadedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails;
+    _governancePolicyZipPartDownloadedDetails = governancePolicyZipPartDownloadedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsActivateAHoldDetails:
+    (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails;
+    _legalHoldsActivateAHoldDetails = legalHoldsActivateAHoldDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsAddMembersDetails:
+    (DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails;
+    _legalHoldsAddMembersDetails = legalHoldsAddMembersDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsChangeHoldDetailsDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails;
+    _legalHoldsChangeHoldDetailsDetails = legalHoldsChangeHoldDetailsDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsChangeHoldNameDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails;
+    _legalHoldsChangeHoldNameDetails = legalHoldsChangeHoldNameDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportAHoldDetails:
+    (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails;
+    _legalHoldsExportAHoldDetails = legalHoldsExportAHoldDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportCancelledDetails:
+    (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails;
+    _legalHoldsExportCancelledDetails = legalHoldsExportCancelledDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportDownloadedDetails:
+    (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails;
+    _legalHoldsExportDownloadedDetails = legalHoldsExportDownloadedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportRemovedDetails:
+    (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails;
+    _legalHoldsExportRemovedDetails = legalHoldsExportRemovedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsReleaseAHoldDetails:
+    (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails;
+    _legalHoldsReleaseAHoldDetails = legalHoldsReleaseAHoldDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsRemoveMembersDetails:
+    (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails;
+    _legalHoldsRemoveMembersDetails = legalHoldsRemoveMembersDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsReportAHoldDetails:
+    (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails;
+    _legalHoldsReportAHoldDetails = legalHoldsReportAHoldDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithDeviceChangeIpDesktopDetails:
     (DBTEAMLOGDeviceChangeIpDesktopDetails *)deviceChangeIpDesktopDetails {
   self = [super init];
@@ -20810,11 +24518,41 @@
   return self;
 }
 
+- (instancetype)initWithDeviceSyncBackupStatusChangedDetails:
+    (DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)deviceSyncBackupStatusChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails;
+    _deviceSyncBackupStatusChangedDetails = deviceSyncBackupStatusChangedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithDeviceUnlinkDetails:(DBTEAMLOGDeviceUnlinkDetails *)deviceUnlinkDetails {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventDetailsDeviceUnlinkDetails;
     _deviceUnlinkDetails = deviceUnlinkDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithDropboxPasswordsExportedDetails:
+    (DBTEAMLOGDropboxPasswordsExportedDetails *)dropboxPasswordsExportedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails;
+    _dropboxPasswordsExportedDetails = dropboxPasswordsExportedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithDropboxPasswordsNewDeviceEnrolledDetails:
+    (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)dropboxPasswordsNewDeviceEnrolledDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails;
+    _dropboxPasswordsNewDeviceEnrolledDetails = dropboxPasswordsNewDeviceEnrolledDetails;
   }
   return self;
 }
@@ -21334,116 +25072,6 @@
   return self;
 }
 
-- (instancetype)initWithLegalHoldsActivateAHoldDetails:
-    (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails;
-    _legalHoldsActivateAHoldDetails = legalHoldsActivateAHoldDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsAddMembersDetails:
-    (DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails;
-    _legalHoldsAddMembersDetails = legalHoldsAddMembersDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsChangeHoldDetailsDetails:
-    (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails;
-    _legalHoldsChangeHoldDetailsDetails = legalHoldsChangeHoldDetailsDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsChangeHoldNameDetails:
-    (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails;
-    _legalHoldsChangeHoldNameDetails = legalHoldsChangeHoldNameDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportAHoldDetails:
-    (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails;
-    _legalHoldsExportAHoldDetails = legalHoldsExportAHoldDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportCancelledDetails:
-    (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails;
-    _legalHoldsExportCancelledDetails = legalHoldsExportCancelledDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportDownloadedDetails:
-    (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails;
-    _legalHoldsExportDownloadedDetails = legalHoldsExportDownloadedDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportRemovedDetails:
-    (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails;
-    _legalHoldsExportRemovedDetails = legalHoldsExportRemovedDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsReleaseAHoldDetails:
-    (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails;
-    _legalHoldsReleaseAHoldDetails = legalHoldsReleaseAHoldDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsRemoveMembersDetails:
-    (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails;
-    _legalHoldsRemoveMembersDetails = legalHoldsRemoveMembersDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsReportAHoldDetails:
-    (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails;
-    _legalHoldsReportAHoldDetails = legalHoldsReportAHoldDetails;
-  }
-  return self;
-}
-
 - (instancetype)initWithAccountLockOrUnlockedDetails:
     (DBTEAMLOGAccountLockOrUnlockedDetails *)accountLockOrUnlockedDetails {
   self = [super init];
@@ -21640,6 +25268,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsMemberChangeNameDetails;
     _memberChangeNameDetails = memberChangeNameDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithMemberChangeResellerRoleDetails:
+    (DBTEAMLOGMemberChangeResellerRoleDetails *)memberChangeResellerRoleDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails;
+    _memberChangeResellerRoleDetails = memberChangeResellerRoleDetails;
   }
   return self;
 }
@@ -22289,6 +25927,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsPasswordResetAllDetails;
     _passwordResetAllDetails = passwordResetAllDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationCreateReportDetails:
+    (DBTEAMLOGClassificationCreateReportDetails *)classificationCreateReportDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsClassificationCreateReportDetails;
+    _classificationCreateReportDetails = classificationCreateReportDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationCreateReportFailDetails:
+    (DBTEAMLOGClassificationCreateReportFailDetails *)classificationCreateReportFailDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsClassificationCreateReportFailDetails;
+    _classificationCreateReportFailDetails = classificationCreateReportFailDetails;
   }
   return self;
 }
@@ -23233,6 +26891,26 @@
   return self;
 }
 
+- (instancetype)initWithShmodelDisableDownloadsDetails:
+    (DBTEAMLOGShmodelDisableDownloadsDetails *)shmodelDisableDownloadsDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails;
+    _shmodelDisableDownloadsDetails = shmodelDisableDownloadsDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithShmodelEnableDownloadsDetails:
+    (DBTEAMLOGShmodelEnableDownloadsDetails *)shmodelEnableDownloadsDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails;
+    _shmodelEnableDownloadsDetails = shmodelEnableDownloadsDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithShmodelGroupShareDetails:(DBTEAMLOGShmodelGroupShareDetails *)shmodelGroupShareDetails {
   self = [super init];
   if (self) {
@@ -23652,6 +27330,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails;
     _cameraUploadsPolicyChangedDetails = cameraUploadsPolicyChangedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationChangePolicyDetails:
+    (DBTEAMLOGClassificationChangePolicyDetails *)classificationChangePolicyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsClassificationChangePolicyDetails;
+    _classificationChangePolicyDetails = classificationChangePolicyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithComputerBackupPolicyChangedDetails:
+    (DBTEAMLOGComputerBackupPolicyChangedDetails *)computerBackupPolicyChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails;
+    _computerBackupPolicyChangedDetails = computerBackupPolicyChangedDetails;
   }
   return self;
 }
@@ -24218,6 +27916,16 @@
   return self;
 }
 
+- (instancetype)initWithTeamBrandingPolicyChangedDetails:
+    (DBTEAMLOGTeamBrandingPolicyChangedDetails *)teamBrandingPolicyChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails;
+    _teamBrandingPolicyChangedDetails = teamBrandingPolicyChangedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamExtensionsPolicyChangedDetails:
     (DBTEAMLOGTeamExtensionsPolicyChangedDetails *)teamExtensionsPolicyChangedDetails {
   self = [super init];
@@ -24353,11 +28061,31 @@
   return self;
 }
 
+- (instancetype)initWithTeamProfileAddBackgroundDetails:
+    (DBTEAMLOGTeamProfileAddBackgroundDetails *)teamProfileAddBackgroundDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails;
+    _teamProfileAddBackgroundDetails = teamProfileAddBackgroundDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamProfileAddLogoDetails:(DBTEAMLOGTeamProfileAddLogoDetails *)teamProfileAddLogoDetails {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventDetailsTeamProfileAddLogoDetails;
     _teamProfileAddLogoDetails = teamProfileAddLogoDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileChangeBackgroundDetails:
+    (DBTEAMLOGTeamProfileChangeBackgroundDetails *)teamProfileChangeBackgroundDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails;
+    _teamProfileChangeBackgroundDetails = teamProfileChangeBackgroundDetails;
   }
   return self;
 }
@@ -24388,6 +28116,16 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsTeamProfileChangeNameDetails;
     _teamProfileChangeNameDetails = teamProfileChangeNameDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileRemoveBackgroundDetails:
+    (DBTEAMLOGTeamProfileRemoveBackgroundDetails *)teamProfileRemoveBackgroundDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails;
+    _teamProfileRemoveBackgroundDetails = teamProfileRemoveBackgroundDetails;
   }
   return self;
 }
@@ -24741,6 +28479,25 @@
 
 #pragma mark - Instance field accessors
 
+- (DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)adminAlertingChangedAlertConfigDetails {
+  if (![self isAdminAlertingChangedAlertConfigDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails, but was %@.",
+               [self tagName]];
+  }
+  return _adminAlertingChangedAlertConfigDetails;
+}
+
+- (DBTEAMLOGAdminAlertingTriggeredAlertDetails *)adminAlertingTriggeredAlertDetails {
+  if (![self isAdminAlertingTriggeredAlertDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _adminAlertingTriggeredAlertDetails;
+}
+
 - (DBTEAMLOGAppLinkTeamDetails *)appLinkTeamDetails {
   if (![self isAppLinkTeamDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -24863,6 +28620,206 @@
   return _fileUnresolveCommentDetails;
 }
 
+- (DBTEAMLOGGovernancePolicyAddFoldersDetails *)governancePolicyAddFoldersDetails {
+  if (![self isGovernancePolicyAddFoldersDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyAddFoldersDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)governancePolicyAddFolderFailedDetails {
+  if (![self isGovernancePolicyAddFolderFailedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _governancePolicyAddFolderFailedDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyCreateDetails *)governancePolicyCreateDetails {
+  if (![self isGovernancePolicyCreateDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyCreateDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyCreateDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyDeleteDetails *)governancePolicyDeleteDetails {
+  if (![self isGovernancePolicyDeleteDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyDeleteDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyEditDetailsDetails *)governancePolicyEditDetailsDetails {
+  if (![self isGovernancePolicyEditDetailsDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyEditDetailsDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyEditDurationDetails *)governancePolicyEditDurationDetails {
+  if (![self isGovernancePolicyEditDurationDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyEditDurationDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyExportCreatedDetails *)governancePolicyExportCreatedDetails {
+  if (![self isGovernancePolicyExportCreatedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyExportCreatedDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyExportRemovedDetails *)governancePolicyExportRemovedDetails {
+  if (![self isGovernancePolicyExportRemovedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyExportRemovedDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)governancePolicyRemoveFoldersDetails {
+  if (![self isGovernancePolicyRemoveFoldersDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyRemoveFoldersDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyReportCreatedDetails *)governancePolicyReportCreatedDetails {
+  if (![self isGovernancePolicyReportCreatedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyReportCreatedDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)governancePolicyZipPartDownloadedDetails {
+  if (![self isGovernancePolicyZipPartDownloadedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _governancePolicyZipPartDownloadedDetails;
+}
+
+- (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails {
+  if (![self isLegalHoldsActivateAHoldDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsActivateAHoldDetails;
+}
+
+- (DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails {
+  if (![self isLegalHoldsAddMembersDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails, but was %@.", [self tagName]];
+  }
+  return _legalHoldsAddMembersDetails;
+}
+
+- (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails {
+  if (![self isLegalHoldsChangeHoldDetailsDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsChangeHoldDetailsDetails;
+}
+
+- (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails {
+  if (![self isLegalHoldsChangeHoldNameDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsChangeHoldNameDetails;
+}
+
+- (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails {
+  if (![self isLegalHoldsExportAHoldDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails, but was %@.", [self tagName]];
+  }
+  return _legalHoldsExportAHoldDetails;
+}
+
+- (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails {
+  if (![self isLegalHoldsExportCancelledDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsExportCancelledDetails;
+}
+
+- (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails {
+  if (![self isLegalHoldsExportDownloadedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsExportDownloadedDetails;
+}
+
+- (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails {
+  if (![self isLegalHoldsExportRemovedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsExportRemovedDetails;
+}
+
+- (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails {
+  if (![self isLegalHoldsReleaseAHoldDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsReleaseAHoldDetails;
+}
+
+- (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails {
+  if (![self isLegalHoldsRemoveMembersDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _legalHoldsRemoveMembersDetails;
+}
+
+- (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails {
+  if (![self isLegalHoldsReportAHoldDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails, but was %@.", [self tagName]];
+  }
+  return _legalHoldsReportAHoldDetails;
+}
+
 - (DBTEAMLOGDeviceChangeIpDesktopDetails *)deviceChangeIpDesktopDetails {
   if (![self isDeviceChangeIpDesktopDetails]) {
     [NSException
@@ -24944,12 +28901,40 @@
   return _deviceManagementEnabledDetails;
 }
 
+- (DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)deviceSyncBackupStatusChangedDetails {
+  if (![self isDeviceSyncBackupStatusChangedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _deviceSyncBackupStatusChangedDetails;
+}
+
 - (DBTEAMLOGDeviceUnlinkDetails *)deviceUnlinkDetails {
   if (![self isDeviceUnlinkDetails]) {
     [NSException raise:@"IllegalStateException"
                 format:@"Invalid tag: required DBTEAMLOGEventDetailsDeviceUnlinkDetails, but was %@.", [self tagName]];
   }
   return _deviceUnlinkDetails;
+}
+
+- (DBTEAMLOGDropboxPasswordsExportedDetails *)dropboxPasswordsExportedDetails {
+  if (![self isDropboxPasswordsExportedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _dropboxPasswordsExportedDetails;
+}
+
+- (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)dropboxPasswordsNewDeviceEnrolledDetails {
+  if (![self isDropboxPasswordsNewDeviceEnrolledDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails, but was %@.",
+               [self tagName]];
+  }
+  return _dropboxPasswordsNewDeviceEnrolledDetails;
 }
 
 - (DBTEAMLOGEmmRefreshAuthTokenDetails *)emmRefreshAuthTokenDetails {
@@ -25433,105 +29418,6 @@
   return _groupRenameDetails;
 }
 
-- (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails {
-  if (![self isLegalHoldsActivateAHoldDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsActivateAHoldDetails;
-}
-
-- (DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails {
-  if (![self isLegalHoldsAddMembersDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails, but was %@.", [self tagName]];
-  }
-  return _legalHoldsAddMembersDetails;
-}
-
-- (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails {
-  if (![self isLegalHoldsChangeHoldDetailsDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsChangeHoldDetailsDetails;
-}
-
-- (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails {
-  if (![self isLegalHoldsChangeHoldNameDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsChangeHoldNameDetails;
-}
-
-- (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails {
-  if (![self isLegalHoldsExportAHoldDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails, but was %@.", [self tagName]];
-  }
-  return _legalHoldsExportAHoldDetails;
-}
-
-- (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails {
-  if (![self isLegalHoldsExportCancelledDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsExportCancelledDetails;
-}
-
-- (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails {
-  if (![self isLegalHoldsExportDownloadedDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsExportDownloadedDetails;
-}
-
-- (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails {
-  if (![self isLegalHoldsExportRemovedDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsExportRemovedDetails;
-}
-
-- (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails {
-  if (![self isLegalHoldsReleaseAHoldDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsReleaseAHoldDetails;
-}
-
-- (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails {
-  if (![self isLegalHoldsRemoveMembersDetails]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails, but was %@.",
-                       [self tagName]];
-  }
-  return _legalHoldsRemoveMembersDetails;
-}
-
-- (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails {
-  if (![self isLegalHoldsReportAHoldDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails, but was %@.", [self tagName]];
-  }
-  return _legalHoldsReportAHoldDetails;
-}
-
 - (DBTEAMLOGAccountLockOrUnlockedDetails *)accountLockOrUnlockedDetails {
   if (![self isAccountLockOrUnlockedDetails]) {
     [NSException
@@ -25715,6 +29601,15 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsMemberChangeNameDetails, but was %@.", [self tagName]];
   }
   return _memberChangeNameDetails;
+}
+
+- (DBTEAMLOGMemberChangeResellerRoleDetails *)memberChangeResellerRoleDetails {
+  if (![self isMemberChangeResellerRoleDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _memberChangeResellerRoleDetails;
 }
 
 - (DBTEAMLOGMemberChangeStatusDetails *)memberChangeStatusDetails {
@@ -26327,6 +30222,24 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsPasswordResetAllDetails, but was %@.", [self tagName]];
   }
   return _passwordResetAllDetails;
+}
+
+- (DBTEAMLOGClassificationCreateReportDetails *)classificationCreateReportDetails {
+  if (![self isClassificationCreateReportDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsClassificationCreateReportDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _classificationCreateReportDetails;
+}
+
+- (DBTEAMLOGClassificationCreateReportFailDetails *)classificationCreateReportFailDetails {
+  if (![self isClassificationCreateReportFailDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsClassificationCreateReportFailDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _classificationCreateReportFailDetails;
 }
 
 - (DBTEAMLOGEmmCreateExceptionsReportDetails *)emmCreateExceptionsReportDetails {
@@ -27215,6 +31128,24 @@
   return _sharedNoteOpenedDetails;
 }
 
+- (DBTEAMLOGShmodelDisableDownloadsDetails *)shmodelDisableDownloadsDetails {
+  if (![self isShmodelDisableDownloadsDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _shmodelDisableDownloadsDetails;
+}
+
+- (DBTEAMLOGShmodelEnableDownloadsDetails *)shmodelEnableDownloadsDetails {
+  if (![self isShmodelEnableDownloadsDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _shmodelEnableDownloadsDetails;
+}
+
 - (DBTEAMLOGShmodelGroupShareDetails *)shmodelGroupShareDetails {
   if (![self isShmodelGroupShareDetails]) {
     [NSException
@@ -27615,6 +31546,24 @@
                        [self tagName]];
   }
   return _cameraUploadsPolicyChangedDetails;
+}
+
+- (DBTEAMLOGClassificationChangePolicyDetails *)classificationChangePolicyDetails {
+  if (![self isClassificationChangePolicyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsClassificationChangePolicyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _classificationChangePolicyDetails;
+}
+
+- (DBTEAMLOGComputerBackupPolicyChangedDetails *)computerBackupPolicyChangedDetails {
+  if (![self isComputerBackupPolicyChangedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _computerBackupPolicyChangedDetails;
 }
 
 - (DBTEAMLOGContentAdministrationPolicyChangedDetails *)contentAdministrationPolicyChangedDetails {
@@ -28148,6 +32097,15 @@
   return _ssoChangePolicyDetails;
 }
 
+- (DBTEAMLOGTeamBrandingPolicyChangedDetails *)teamBrandingPolicyChangedDetails {
+  if (![self isTeamBrandingPolicyChangedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamBrandingPolicyChangedDetails;
+}
+
 - (DBTEAMLOGTeamExtensionsPolicyChangedDetails *)teamExtensionsPolicyChangedDetails {
   if (![self isTeamExtensionsPolicyChangedDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -28276,6 +32234,15 @@
   return _teamMergeToDetails;
 }
 
+- (DBTEAMLOGTeamProfileAddBackgroundDetails *)teamProfileAddBackgroundDetails {
+  if (![self isTeamProfileAddBackgroundDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamProfileAddBackgroundDetails;
+}
+
 - (DBTEAMLOGTeamProfileAddLogoDetails *)teamProfileAddLogoDetails {
   if (![self isTeamProfileAddLogoDetails]) {
     [NSException
@@ -28283,6 +32250,15 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamProfileAddLogoDetails, but was %@.", [self tagName]];
   }
   return _teamProfileAddLogoDetails;
+}
+
+- (DBTEAMLOGTeamProfileChangeBackgroundDetails *)teamProfileChangeBackgroundDetails {
+  if (![self isTeamProfileChangeBackgroundDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamProfileChangeBackgroundDetails;
 }
 
 - (DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *)teamProfileChangeDefaultLanguageDetails {
@@ -28311,6 +32287,15 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamProfileChangeNameDetails, but was %@.", [self tagName]];
   }
   return _teamProfileChangeNameDetails;
+}
+
+- (DBTEAMLOGTeamProfileRemoveBackgroundDetails *)teamProfileRemoveBackgroundDetails {
+  if (![self isTeamProfileRemoveBackgroundDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _teamProfileRemoveBackgroundDetails;
 }
 
 - (DBTEAMLOGTeamProfileRemoveLogoDetails *)teamProfileRemoveLogoDetails {
@@ -28633,6 +32618,14 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAdminAlertingChangedAlertConfigDetails {
+  return _tag == DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails;
+}
+
+- (BOOL)isAdminAlertingTriggeredAlertDetails {
+  return _tag == DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails;
+}
+
 - (BOOL)isAppLinkTeamDetails {
   return _tag == DBTEAMLOGEventDetailsAppLinkTeamDetails;
 }
@@ -28689,6 +32682,94 @@
   return _tag == DBTEAMLOGEventDetailsFileUnresolveCommentDetails;
 }
 
+- (BOOL)isGovernancePolicyAddFoldersDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails;
+}
+
+- (BOOL)isGovernancePolicyAddFolderFailedDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails;
+}
+
+- (BOOL)isGovernancePolicyCreateDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyCreateDetails;
+}
+
+- (BOOL)isGovernancePolicyDeleteDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails;
+}
+
+- (BOOL)isGovernancePolicyEditDetailsDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails;
+}
+
+- (BOOL)isGovernancePolicyEditDurationDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails;
+}
+
+- (BOOL)isGovernancePolicyExportCreatedDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails;
+}
+
+- (BOOL)isGovernancePolicyExportRemovedDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails;
+}
+
+- (BOOL)isGovernancePolicyRemoveFoldersDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails;
+}
+
+- (BOOL)isGovernancePolicyReportCreatedDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails;
+}
+
+- (BOOL)isGovernancePolicyZipPartDownloadedDetails {
+  return _tag == DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails;
+}
+
+- (BOOL)isLegalHoldsActivateAHoldDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails;
+}
+
+- (BOOL)isLegalHoldsAddMembersDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails;
+}
+
+- (BOOL)isLegalHoldsChangeHoldDetailsDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails;
+}
+
+- (BOOL)isLegalHoldsChangeHoldNameDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails;
+}
+
+- (BOOL)isLegalHoldsExportAHoldDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails;
+}
+
+- (BOOL)isLegalHoldsExportCancelledDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails;
+}
+
+- (BOOL)isLegalHoldsExportDownloadedDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails;
+}
+
+- (BOOL)isLegalHoldsExportRemovedDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails;
+}
+
+- (BOOL)isLegalHoldsReleaseAHoldDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails;
+}
+
+- (BOOL)isLegalHoldsRemoveMembersDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails;
+}
+
+- (BOOL)isLegalHoldsReportAHoldDetails {
+  return _tag == DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails;
+}
+
 - (BOOL)isDeviceChangeIpDesktopDetails {
   return _tag == DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails;
 }
@@ -28725,8 +32806,20 @@
   return _tag == DBTEAMLOGEventDetailsDeviceManagementEnabledDetails;
 }
 
+- (BOOL)isDeviceSyncBackupStatusChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails;
+}
+
 - (BOOL)isDeviceUnlinkDetails {
   return _tag == DBTEAMLOGEventDetailsDeviceUnlinkDetails;
+}
+
+- (BOOL)isDropboxPasswordsExportedDetails {
+  return _tag == DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails;
+}
+
+- (BOOL)isDropboxPasswordsNewDeviceEnrolledDetails {
+  return _tag == DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails;
 }
 
 - (BOOL)isEmmRefreshAuthTokenDetails {
@@ -28945,50 +33038,6 @@
   return _tag == DBTEAMLOGEventDetailsGroupRenameDetails;
 }
 
-- (BOOL)isLegalHoldsActivateAHoldDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails;
-}
-
-- (BOOL)isLegalHoldsAddMembersDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails;
-}
-
-- (BOOL)isLegalHoldsChangeHoldDetailsDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails;
-}
-
-- (BOOL)isLegalHoldsChangeHoldNameDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails;
-}
-
-- (BOOL)isLegalHoldsExportAHoldDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails;
-}
-
-- (BOOL)isLegalHoldsExportCancelledDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails;
-}
-
-- (BOOL)isLegalHoldsExportDownloadedDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails;
-}
-
-- (BOOL)isLegalHoldsExportRemovedDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails;
-}
-
-- (BOOL)isLegalHoldsReleaseAHoldDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails;
-}
-
-- (BOOL)isLegalHoldsRemoveMembersDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails;
-}
-
-- (BOOL)isLegalHoldsReportAHoldDetails {
-  return _tag == DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails;
-}
-
 - (BOOL)isAccountLockOrUnlockedDetails {
   return _tag == DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails;
 }
@@ -29071,6 +33120,10 @@
 
 - (BOOL)isMemberChangeNameDetails {
   return _tag == DBTEAMLOGEventDetailsMemberChangeNameDetails;
+}
+
+- (BOOL)isMemberChangeResellerRoleDetails {
+  return _tag == DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails;
 }
 
 - (BOOL)isMemberChangeStatusDetails {
@@ -29343,6 +33396,14 @@
 
 - (BOOL)isPasswordResetAllDetails {
   return _tag == DBTEAMLOGEventDetailsPasswordResetAllDetails;
+}
+
+- (BOOL)isClassificationCreateReportDetails {
+  return _tag == DBTEAMLOGEventDetailsClassificationCreateReportDetails;
+}
+
+- (BOOL)isClassificationCreateReportFailDetails {
+  return _tag == DBTEAMLOGEventDetailsClassificationCreateReportFailDetails;
 }
 
 - (BOOL)isEmmCreateExceptionsReportDetails {
@@ -29733,6 +33794,14 @@
   return _tag == DBTEAMLOGEventDetailsSharedNoteOpenedDetails;
 }
 
+- (BOOL)isShmodelDisableDownloadsDetails {
+  return _tag == DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails;
+}
+
+- (BOOL)isShmodelEnableDownloadsDetails {
+  return _tag == DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails;
+}
+
 - (BOOL)isShmodelGroupShareDetails {
   return _tag == DBTEAMLOGEventDetailsShmodelGroupShareDetails;
 }
@@ -29911,6 +33980,14 @@
 
 - (BOOL)isCameraUploadsPolicyChangedDetails {
   return _tag == DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails;
+}
+
+- (BOOL)isClassificationChangePolicyDetails {
+  return _tag == DBTEAMLOGEventDetailsClassificationChangePolicyDetails;
+}
+
+- (BOOL)isComputerBackupPolicyChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails;
 }
 
 - (BOOL)isContentAdministrationPolicyChangedDetails {
@@ -30141,6 +34218,10 @@
   return _tag == DBTEAMLOGEventDetailsSsoChangePolicyDetails;
 }
 
+- (BOOL)isTeamBrandingPolicyChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails;
+}
+
 - (BOOL)isTeamExtensionsPolicyChangedDetails {
   return _tag == DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails;
 }
@@ -30197,8 +34278,16 @@
   return _tag == DBTEAMLOGEventDetailsTeamMergeToDetails;
 }
 
+- (BOOL)isTeamProfileAddBackgroundDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails;
+}
+
 - (BOOL)isTeamProfileAddLogoDetails {
   return _tag == DBTEAMLOGEventDetailsTeamProfileAddLogoDetails;
+}
+
+- (BOOL)isTeamProfileChangeBackgroundDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails;
 }
 
 - (BOOL)isTeamProfileChangeDefaultLanguageDetails {
@@ -30211,6 +34300,10 @@
 
 - (BOOL)isTeamProfileChangeNameDetails {
   return _tag == DBTEAMLOGEventDetailsTeamProfileChangeNameDetails;
+}
+
+- (BOOL)isTeamProfileRemoveBackgroundDetails {
+  return _tag == DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails;
 }
 
 - (BOOL)isTeamProfileRemoveLogoDetails {
@@ -30355,6 +34448,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails:
+    return @"DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails";
+  case DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails:
+    return @"DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails";
   case DBTEAMLOGEventDetailsAppLinkTeamDetails:
     return @"DBTEAMLOGEventDetailsAppLinkTeamDetails";
   case DBTEAMLOGEventDetailsAppLinkUserDetails:
@@ -30383,6 +34480,50 @@
     return @"DBTEAMLOGEventDetailsFileUnlikeCommentDetails";
   case DBTEAMLOGEventDetailsFileUnresolveCommentDetails:
     return @"DBTEAMLOGEventDetailsFileUnresolveCommentDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyCreateDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyCreateDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails";
+  case DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails:
+    return @"DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails";
+  case DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails:
+    return @"DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails";
   case DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails:
     return @"DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails";
   case DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails:
@@ -30401,8 +34542,14 @@
     return @"DBTEAMLOGEventDetailsDeviceManagementDisabledDetails";
   case DBTEAMLOGEventDetailsDeviceManagementEnabledDetails:
     return @"DBTEAMLOGEventDetailsDeviceManagementEnabledDetails";
+  case DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails:
+    return @"DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails";
   case DBTEAMLOGEventDetailsDeviceUnlinkDetails:
     return @"DBTEAMLOGEventDetailsDeviceUnlinkDetails";
+  case DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails:
+    return @"DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails";
+  case DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails:
+    return @"DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails";
   case DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails:
     return @"DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails";
   case DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails:
@@ -30511,28 +34658,6 @@
     return @"DBTEAMLOGEventDetailsGroupRemoveMemberDetails";
   case DBTEAMLOGEventDetailsGroupRenameDetails:
     return @"DBTEAMLOGEventDetailsGroupRenameDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails";
-  case DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails:
-    return @"DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails";
   case DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails:
     return @"DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails";
   case DBTEAMLOGEventDetailsEmmErrorDetails:
@@ -30575,6 +34700,8 @@
     return @"DBTEAMLOGEventDetailsMemberChangeMembershipTypeDetails";
   case DBTEAMLOGEventDetailsMemberChangeNameDetails:
     return @"DBTEAMLOGEventDetailsMemberChangeNameDetails";
+  case DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails:
+    return @"DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails";
   case DBTEAMLOGEventDetailsMemberChangeStatusDetails:
     return @"DBTEAMLOGEventDetailsMemberChangeStatusDetails";
   case DBTEAMLOGEventDetailsMemberDeleteManualContactsDetails:
@@ -30711,6 +34838,10 @@
     return @"DBTEAMLOGEventDetailsPasswordResetDetails";
   case DBTEAMLOGEventDetailsPasswordResetAllDetails:
     return @"DBTEAMLOGEventDetailsPasswordResetAllDetails";
+  case DBTEAMLOGEventDetailsClassificationCreateReportDetails:
+    return @"DBTEAMLOGEventDetailsClassificationCreateReportDetails";
+  case DBTEAMLOGEventDetailsClassificationCreateReportFailDetails:
+    return @"DBTEAMLOGEventDetailsClassificationCreateReportFailDetails";
   case DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails:
     return @"DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails";
   case DBTEAMLOGEventDetailsEmmCreateUsageReportDetails:
@@ -30905,6 +35036,10 @@
     return @"DBTEAMLOGEventDetailsSharedLinkViewDetails";
   case DBTEAMLOGEventDetailsSharedNoteOpenedDetails:
     return @"DBTEAMLOGEventDetailsSharedNoteOpenedDetails";
+  case DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails:
+    return @"DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails";
+  case DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails:
+    return @"DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails";
   case DBTEAMLOGEventDetailsShmodelGroupShareDetails:
     return @"DBTEAMLOGEventDetailsShmodelGroupShareDetails";
   case DBTEAMLOGEventDetailsShowcaseAccessGrantedDetails:
@@ -30995,6 +35130,10 @@
     return @"DBTEAMLOGEventDetailsAllowDownloadEnabledDetails";
   case DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails:
     return @"DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails";
+  case DBTEAMLOGEventDetailsClassificationChangePolicyDetails:
+    return @"DBTEAMLOGEventDetailsClassificationChangePolicyDetails";
+  case DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails:
+    return @"DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails";
   case DBTEAMLOGEventDetailsContentAdministrationPolicyChangedDetails:
     return @"DBTEAMLOGEventDetailsContentAdministrationPolicyChangedDetails";
   case DBTEAMLOGEventDetailsDataPlacementRestrictionChangePolicyDetails:
@@ -31109,6 +35248,8 @@
     return @"DBTEAMLOGEventDetailsSmartSyncOptOutDetails";
   case DBTEAMLOGEventDetailsSsoChangePolicyDetails:
     return @"DBTEAMLOGEventDetailsSsoChangePolicyDetails";
+  case DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails:
+    return @"DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails";
   case DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails:
     return @"DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails";
   case DBTEAMLOGEventDetailsTeamSelectiveSyncPolicyChangedDetails:
@@ -31137,14 +35278,20 @@
     return @"DBTEAMLOGEventDetailsTeamMergeFromDetails";
   case DBTEAMLOGEventDetailsTeamMergeToDetails:
     return @"DBTEAMLOGEventDetailsTeamMergeToDetails";
+  case DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails:
+    return @"DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails";
   case DBTEAMLOGEventDetailsTeamProfileAddLogoDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileAddLogoDetails";
+  case DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails:
+    return @"DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails";
   case DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails";
   case DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails";
   case DBTEAMLOGEventDetailsTeamProfileChangeNameDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileChangeNameDetails";
+  case DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails:
+    return @"DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails";
   case DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails:
     return @"DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails";
   case DBTEAMLOGEventDetailsTfaAddBackupPhoneDetails:
@@ -31251,6 +35398,10 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails:
+    result = prime * result + [self.adminAlertingChangedAlertConfigDetails hash];
+  case DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails:
+    result = prime * result + [self.adminAlertingTriggeredAlertDetails hash];
   case DBTEAMLOGEventDetailsAppLinkTeamDetails:
     result = prime * result + [self.appLinkTeamDetails hash];
   case DBTEAMLOGEventDetailsAppLinkUserDetails:
@@ -31279,6 +35430,50 @@
     result = prime * result + [self.fileUnlikeCommentDetails hash];
   case DBTEAMLOGEventDetailsFileUnresolveCommentDetails:
     result = prime * result + [self.fileUnresolveCommentDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails:
+    result = prime * result + [self.governancePolicyAddFoldersDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails:
+    result = prime * result + [self.governancePolicyAddFolderFailedDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyCreateDetails:
+    result = prime * result + [self.governancePolicyCreateDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails:
+    result = prime * result + [self.governancePolicyDeleteDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails:
+    result = prime * result + [self.governancePolicyEditDetailsDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails:
+    result = prime * result + [self.governancePolicyEditDurationDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails:
+    result = prime * result + [self.governancePolicyExportCreatedDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails:
+    result = prime * result + [self.governancePolicyExportRemovedDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails:
+    result = prime * result + [self.governancePolicyRemoveFoldersDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails:
+    result = prime * result + [self.governancePolicyReportCreatedDetails hash];
+  case DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails:
+    result = prime * result + [self.governancePolicyZipPartDownloadedDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails:
+    result = prime * result + [self.legalHoldsActivateAHoldDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails:
+    result = prime * result + [self.legalHoldsAddMembersDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails:
+    result = prime * result + [self.legalHoldsChangeHoldDetailsDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails:
+    result = prime * result + [self.legalHoldsChangeHoldNameDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails:
+    result = prime * result + [self.legalHoldsExportAHoldDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails:
+    result = prime * result + [self.legalHoldsExportCancelledDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails:
+    result = prime * result + [self.legalHoldsExportDownloadedDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails:
+    result = prime * result + [self.legalHoldsExportRemovedDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails:
+    result = prime * result + [self.legalHoldsReleaseAHoldDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails:
+    result = prime * result + [self.legalHoldsRemoveMembersDetails hash];
+  case DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails:
+    result = prime * result + [self.legalHoldsReportAHoldDetails hash];
   case DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails:
     result = prime * result + [self.deviceChangeIpDesktopDetails hash];
   case DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails:
@@ -31297,8 +35492,14 @@
     result = prime * result + [self.deviceManagementDisabledDetails hash];
   case DBTEAMLOGEventDetailsDeviceManagementEnabledDetails:
     result = prime * result + [self.deviceManagementEnabledDetails hash];
+  case DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails:
+    result = prime * result + [self.deviceSyncBackupStatusChangedDetails hash];
   case DBTEAMLOGEventDetailsDeviceUnlinkDetails:
     result = prime * result + [self.deviceUnlinkDetails hash];
+  case DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails:
+    result = prime * result + [self.dropboxPasswordsExportedDetails hash];
+  case DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails:
+    result = prime * result + [self.dropboxPasswordsNewDeviceEnrolledDetails hash];
   case DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails:
     result = prime * result + [self.emmRefreshAuthTokenDetails hash];
   case DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails:
@@ -31407,28 +35608,6 @@
     result = prime * result + [self.groupRemoveMemberDetails hash];
   case DBTEAMLOGEventDetailsGroupRenameDetails:
     result = prime * result + [self.groupRenameDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails:
-    result = prime * result + [self.legalHoldsActivateAHoldDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails:
-    result = prime * result + [self.legalHoldsAddMembersDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails:
-    result = prime * result + [self.legalHoldsChangeHoldDetailsDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails:
-    result = prime * result + [self.legalHoldsChangeHoldNameDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails:
-    result = prime * result + [self.legalHoldsExportAHoldDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails:
-    result = prime * result + [self.legalHoldsExportCancelledDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails:
-    result = prime * result + [self.legalHoldsExportDownloadedDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails:
-    result = prime * result + [self.legalHoldsExportRemovedDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails:
-    result = prime * result + [self.legalHoldsReleaseAHoldDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails:
-    result = prime * result + [self.legalHoldsRemoveMembersDetails hash];
-  case DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails:
-    result = prime * result + [self.legalHoldsReportAHoldDetails hash];
   case DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails:
     result = prime * result + [self.accountLockOrUnlockedDetails hash];
   case DBTEAMLOGEventDetailsEmmErrorDetails:
@@ -31471,6 +35650,8 @@
     result = prime * result + [self.memberChangeMembershipTypeDetails hash];
   case DBTEAMLOGEventDetailsMemberChangeNameDetails:
     result = prime * result + [self.memberChangeNameDetails hash];
+  case DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails:
+    result = prime * result + [self.memberChangeResellerRoleDetails hash];
   case DBTEAMLOGEventDetailsMemberChangeStatusDetails:
     result = prime * result + [self.memberChangeStatusDetails hash];
   case DBTEAMLOGEventDetailsMemberDeleteManualContactsDetails:
@@ -31607,6 +35788,10 @@
     result = prime * result + [self.passwordResetDetails hash];
   case DBTEAMLOGEventDetailsPasswordResetAllDetails:
     result = prime * result + [self.passwordResetAllDetails hash];
+  case DBTEAMLOGEventDetailsClassificationCreateReportDetails:
+    result = prime * result + [self.classificationCreateReportDetails hash];
+  case DBTEAMLOGEventDetailsClassificationCreateReportFailDetails:
+    result = prime * result + [self.classificationCreateReportFailDetails hash];
   case DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails:
     result = prime * result + [self.emmCreateExceptionsReportDetails hash];
   case DBTEAMLOGEventDetailsEmmCreateUsageReportDetails:
@@ -31801,6 +35986,10 @@
     result = prime * result + [self.sharedLinkViewDetails hash];
   case DBTEAMLOGEventDetailsSharedNoteOpenedDetails:
     result = prime * result + [self.sharedNoteOpenedDetails hash];
+  case DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails:
+    result = prime * result + [self.shmodelDisableDownloadsDetails hash];
+  case DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails:
+    result = prime * result + [self.shmodelEnableDownloadsDetails hash];
   case DBTEAMLOGEventDetailsShmodelGroupShareDetails:
     result = prime * result + [self.shmodelGroupShareDetails hash];
   case DBTEAMLOGEventDetailsShowcaseAccessGrantedDetails:
@@ -31891,6 +36080,10 @@
     result = prime * result + [self.allowDownloadEnabledDetails hash];
   case DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails:
     result = prime * result + [self.cameraUploadsPolicyChangedDetails hash];
+  case DBTEAMLOGEventDetailsClassificationChangePolicyDetails:
+    result = prime * result + [self.classificationChangePolicyDetails hash];
+  case DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails:
+    result = prime * result + [self.computerBackupPolicyChangedDetails hash];
   case DBTEAMLOGEventDetailsContentAdministrationPolicyChangedDetails:
     result = prime * result + [self.contentAdministrationPolicyChangedDetails hash];
   case DBTEAMLOGEventDetailsDataPlacementRestrictionChangePolicyDetails:
@@ -32005,6 +36198,8 @@
     result = prime * result + [self.smartSyncOptOutDetails hash];
   case DBTEAMLOGEventDetailsSsoChangePolicyDetails:
     result = prime * result + [self.ssoChangePolicyDetails hash];
+  case DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails:
+    result = prime * result + [self.teamBrandingPolicyChangedDetails hash];
   case DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails:
     result = prime * result + [self.teamExtensionsPolicyChangedDetails hash];
   case DBTEAMLOGEventDetailsTeamSelectiveSyncPolicyChangedDetails:
@@ -32033,14 +36228,20 @@
     result = prime * result + [self.teamMergeFromDetails hash];
   case DBTEAMLOGEventDetailsTeamMergeToDetails:
     result = prime * result + [self.teamMergeToDetails hash];
+  case DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails:
+    result = prime * result + [self.teamProfileAddBackgroundDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileAddLogoDetails:
     result = prime * result + [self.teamProfileAddLogoDetails hash];
+  case DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails:
+    result = prime * result + [self.teamProfileChangeBackgroundDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails:
     result = prime * result + [self.teamProfileChangeDefaultLanguageDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileChangeLogoDetails:
     result = prime * result + [self.teamProfileChangeLogoDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileChangeNameDetails:
     result = prime * result + [self.teamProfileChangeNameDetails hash];
+  case DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails:
+    result = prime * result + [self.teamProfileRemoveBackgroundDetails hash];
   case DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails:
     result = prime * result + [self.teamProfileRemoveLogoDetails hash];
   case DBTEAMLOGEventDetailsTfaAddBackupPhoneDetails:
@@ -32136,6 +36337,10 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails:
+    return [self.adminAlertingChangedAlertConfigDetails isEqual:anEventDetails.adminAlertingChangedAlertConfigDetails];
+  case DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails:
+    return [self.adminAlertingTriggeredAlertDetails isEqual:anEventDetails.adminAlertingTriggeredAlertDetails];
   case DBTEAMLOGEventDetailsAppLinkTeamDetails:
     return [self.appLinkTeamDetails isEqual:anEventDetails.appLinkTeamDetails];
   case DBTEAMLOGEventDetailsAppLinkUserDetails:
@@ -32164,6 +36369,51 @@
     return [self.fileUnlikeCommentDetails isEqual:anEventDetails.fileUnlikeCommentDetails];
   case DBTEAMLOGEventDetailsFileUnresolveCommentDetails:
     return [self.fileUnresolveCommentDetails isEqual:anEventDetails.fileUnresolveCommentDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails:
+    return [self.governancePolicyAddFoldersDetails isEqual:anEventDetails.governancePolicyAddFoldersDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails:
+    return [self.governancePolicyAddFolderFailedDetails isEqual:anEventDetails.governancePolicyAddFolderFailedDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyCreateDetails:
+    return [self.governancePolicyCreateDetails isEqual:anEventDetails.governancePolicyCreateDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails:
+    return [self.governancePolicyDeleteDetails isEqual:anEventDetails.governancePolicyDeleteDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails:
+    return [self.governancePolicyEditDetailsDetails isEqual:anEventDetails.governancePolicyEditDetailsDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails:
+    return [self.governancePolicyEditDurationDetails isEqual:anEventDetails.governancePolicyEditDurationDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails:
+    return [self.governancePolicyExportCreatedDetails isEqual:anEventDetails.governancePolicyExportCreatedDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails:
+    return [self.governancePolicyExportRemovedDetails isEqual:anEventDetails.governancePolicyExportRemovedDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails:
+    return [self.governancePolicyRemoveFoldersDetails isEqual:anEventDetails.governancePolicyRemoveFoldersDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails:
+    return [self.governancePolicyReportCreatedDetails isEqual:anEventDetails.governancePolicyReportCreatedDetails];
+  case DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails:
+    return
+        [self.governancePolicyZipPartDownloadedDetails isEqual:anEventDetails.governancePolicyZipPartDownloadedDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails:
+    return [self.legalHoldsActivateAHoldDetails isEqual:anEventDetails.legalHoldsActivateAHoldDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails:
+    return [self.legalHoldsAddMembersDetails isEqual:anEventDetails.legalHoldsAddMembersDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails:
+    return [self.legalHoldsChangeHoldDetailsDetails isEqual:anEventDetails.legalHoldsChangeHoldDetailsDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails:
+    return [self.legalHoldsChangeHoldNameDetails isEqual:anEventDetails.legalHoldsChangeHoldNameDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails:
+    return [self.legalHoldsExportAHoldDetails isEqual:anEventDetails.legalHoldsExportAHoldDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails:
+    return [self.legalHoldsExportCancelledDetails isEqual:anEventDetails.legalHoldsExportCancelledDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails:
+    return [self.legalHoldsExportDownloadedDetails isEqual:anEventDetails.legalHoldsExportDownloadedDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails:
+    return [self.legalHoldsExportRemovedDetails isEqual:anEventDetails.legalHoldsExportRemovedDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails:
+    return [self.legalHoldsReleaseAHoldDetails isEqual:anEventDetails.legalHoldsReleaseAHoldDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails:
+    return [self.legalHoldsRemoveMembersDetails isEqual:anEventDetails.legalHoldsRemoveMembersDetails];
+  case DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails:
+    return [self.legalHoldsReportAHoldDetails isEqual:anEventDetails.legalHoldsReportAHoldDetails];
   case DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails:
     return [self.deviceChangeIpDesktopDetails isEqual:anEventDetails.deviceChangeIpDesktopDetails];
   case DBTEAMLOGEventDetailsDeviceChangeIpMobileDetails:
@@ -32182,8 +36432,15 @@
     return [self.deviceManagementDisabledDetails isEqual:anEventDetails.deviceManagementDisabledDetails];
   case DBTEAMLOGEventDetailsDeviceManagementEnabledDetails:
     return [self.deviceManagementEnabledDetails isEqual:anEventDetails.deviceManagementEnabledDetails];
+  case DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails:
+    return [self.deviceSyncBackupStatusChangedDetails isEqual:anEventDetails.deviceSyncBackupStatusChangedDetails];
   case DBTEAMLOGEventDetailsDeviceUnlinkDetails:
     return [self.deviceUnlinkDetails isEqual:anEventDetails.deviceUnlinkDetails];
+  case DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails:
+    return [self.dropboxPasswordsExportedDetails isEqual:anEventDetails.dropboxPasswordsExportedDetails];
+  case DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails:
+    return
+        [self.dropboxPasswordsNewDeviceEnrolledDetails isEqual:anEventDetails.dropboxPasswordsNewDeviceEnrolledDetails];
   case DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails:
     return [self.emmRefreshAuthTokenDetails isEqual:anEventDetails.emmRefreshAuthTokenDetails];
   case DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails:
@@ -32300,28 +36557,6 @@
     return [self.groupRemoveMemberDetails isEqual:anEventDetails.groupRemoveMemberDetails];
   case DBTEAMLOGEventDetailsGroupRenameDetails:
     return [self.groupRenameDetails isEqual:anEventDetails.groupRenameDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails:
-    return [self.legalHoldsActivateAHoldDetails isEqual:anEventDetails.legalHoldsActivateAHoldDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails:
-    return [self.legalHoldsAddMembersDetails isEqual:anEventDetails.legalHoldsAddMembersDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails:
-    return [self.legalHoldsChangeHoldDetailsDetails isEqual:anEventDetails.legalHoldsChangeHoldDetailsDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails:
-    return [self.legalHoldsChangeHoldNameDetails isEqual:anEventDetails.legalHoldsChangeHoldNameDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails:
-    return [self.legalHoldsExportAHoldDetails isEqual:anEventDetails.legalHoldsExportAHoldDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails:
-    return [self.legalHoldsExportCancelledDetails isEqual:anEventDetails.legalHoldsExportCancelledDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails:
-    return [self.legalHoldsExportDownloadedDetails isEqual:anEventDetails.legalHoldsExportDownloadedDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails:
-    return [self.legalHoldsExportRemovedDetails isEqual:anEventDetails.legalHoldsExportRemovedDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails:
-    return [self.legalHoldsReleaseAHoldDetails isEqual:anEventDetails.legalHoldsReleaseAHoldDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails:
-    return [self.legalHoldsRemoveMembersDetails isEqual:anEventDetails.legalHoldsRemoveMembersDetails];
-  case DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails:
-    return [self.legalHoldsReportAHoldDetails isEqual:anEventDetails.legalHoldsReportAHoldDetails];
   case DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails:
     return [self.accountLockOrUnlockedDetails isEqual:anEventDetails.accountLockOrUnlockedDetails];
   case DBTEAMLOGEventDetailsEmmErrorDetails:
@@ -32366,6 +36601,8 @@
     return [self.memberChangeMembershipTypeDetails isEqual:anEventDetails.memberChangeMembershipTypeDetails];
   case DBTEAMLOGEventDetailsMemberChangeNameDetails:
     return [self.memberChangeNameDetails isEqual:anEventDetails.memberChangeNameDetails];
+  case DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails:
+    return [self.memberChangeResellerRoleDetails isEqual:anEventDetails.memberChangeResellerRoleDetails];
   case DBTEAMLOGEventDetailsMemberChangeStatusDetails:
     return [self.memberChangeStatusDetails isEqual:anEventDetails.memberChangeStatusDetails];
   case DBTEAMLOGEventDetailsMemberDeleteManualContactsDetails:
@@ -32506,6 +36743,10 @@
     return [self.passwordResetDetails isEqual:anEventDetails.passwordResetDetails];
   case DBTEAMLOGEventDetailsPasswordResetAllDetails:
     return [self.passwordResetAllDetails isEqual:anEventDetails.passwordResetAllDetails];
+  case DBTEAMLOGEventDetailsClassificationCreateReportDetails:
+    return [self.classificationCreateReportDetails isEqual:anEventDetails.classificationCreateReportDetails];
+  case DBTEAMLOGEventDetailsClassificationCreateReportFailDetails:
+    return [self.classificationCreateReportFailDetails isEqual:anEventDetails.classificationCreateReportFailDetails];
   case DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails:
     return [self.emmCreateExceptionsReportDetails isEqual:anEventDetails.emmCreateExceptionsReportDetails];
   case DBTEAMLOGEventDetailsEmmCreateUsageReportDetails:
@@ -32714,6 +36955,10 @@
     return [self.sharedLinkViewDetails isEqual:anEventDetails.sharedLinkViewDetails];
   case DBTEAMLOGEventDetailsSharedNoteOpenedDetails:
     return [self.sharedNoteOpenedDetails isEqual:anEventDetails.sharedNoteOpenedDetails];
+  case DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails:
+    return [self.shmodelDisableDownloadsDetails isEqual:anEventDetails.shmodelDisableDownloadsDetails];
+  case DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails:
+    return [self.shmodelEnableDownloadsDetails isEqual:anEventDetails.shmodelEnableDownloadsDetails];
   case DBTEAMLOGEventDetailsShmodelGroupShareDetails:
     return [self.shmodelGroupShareDetails isEqual:anEventDetails.shmodelGroupShareDetails];
   case DBTEAMLOGEventDetailsShowcaseAccessGrantedDetails:
@@ -32805,6 +37050,10 @@
     return [self.allowDownloadEnabledDetails isEqual:anEventDetails.allowDownloadEnabledDetails];
   case DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails:
     return [self.cameraUploadsPolicyChangedDetails isEqual:anEventDetails.cameraUploadsPolicyChangedDetails];
+  case DBTEAMLOGEventDetailsClassificationChangePolicyDetails:
+    return [self.classificationChangePolicyDetails isEqual:anEventDetails.classificationChangePolicyDetails];
+  case DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails:
+    return [self.computerBackupPolicyChangedDetails isEqual:anEventDetails.computerBackupPolicyChangedDetails];
   case DBTEAMLOGEventDetailsContentAdministrationPolicyChangedDetails:
     return [self.contentAdministrationPolicyChangedDetails
         isEqual:anEventDetails.contentAdministrationPolicyChangedDetails];
@@ -32934,6 +37183,8 @@
     return [self.smartSyncOptOutDetails isEqual:anEventDetails.smartSyncOptOutDetails];
   case DBTEAMLOGEventDetailsSsoChangePolicyDetails:
     return [self.ssoChangePolicyDetails isEqual:anEventDetails.ssoChangePolicyDetails];
+  case DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails:
+    return [self.teamBrandingPolicyChangedDetails isEqual:anEventDetails.teamBrandingPolicyChangedDetails];
   case DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails:
     return [self.teamExtensionsPolicyChangedDetails isEqual:anEventDetails.teamExtensionsPolicyChangedDetails];
   case DBTEAMLOGEventDetailsTeamSelectiveSyncPolicyChangedDetails:
@@ -32966,8 +37217,12 @@
     return [self.teamMergeFromDetails isEqual:anEventDetails.teamMergeFromDetails];
   case DBTEAMLOGEventDetailsTeamMergeToDetails:
     return [self.teamMergeToDetails isEqual:anEventDetails.teamMergeToDetails];
+  case DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails:
+    return [self.teamProfileAddBackgroundDetails isEqual:anEventDetails.teamProfileAddBackgroundDetails];
   case DBTEAMLOGEventDetailsTeamProfileAddLogoDetails:
     return [self.teamProfileAddLogoDetails isEqual:anEventDetails.teamProfileAddLogoDetails];
+  case DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails:
+    return [self.teamProfileChangeBackgroundDetails isEqual:anEventDetails.teamProfileChangeBackgroundDetails];
   case DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails:
     return
         [self.teamProfileChangeDefaultLanguageDetails isEqual:anEventDetails.teamProfileChangeDefaultLanguageDetails];
@@ -32975,6 +37230,8 @@
     return [self.teamProfileChangeLogoDetails isEqual:anEventDetails.teamProfileChangeLogoDetails];
   case DBTEAMLOGEventDetailsTeamProfileChangeNameDetails:
     return [self.teamProfileChangeNameDetails isEqual:anEventDetails.teamProfileChangeNameDetails];
+  case DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails:
+    return [self.teamProfileRemoveBackgroundDetails isEqual:anEventDetails.teamProfileRemoveBackgroundDetails];
   case DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails:
     return [self.teamProfileRemoveLogoDetails isEqual:anEventDetails.teamProfileRemoveLogoDetails];
   case DBTEAMLOGEventDetailsTfaAddBackupPhoneDetails:
@@ -33072,7 +37329,15 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEventDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isAppLinkTeamDetails]) {
+  if ([valueObj isAdminAlertingChangedAlertConfigDetails]) {
+    jsonDict = [[DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer
+        serialize:valueObj.adminAlertingChangedAlertConfigDetails] mutableCopy];
+    jsonDict[@".tag"] = @"admin_alerting_changed_alert_config_details";
+  } else if ([valueObj isAdminAlertingTriggeredAlertDetails]) {
+    jsonDict = [[DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer
+        serialize:valueObj.adminAlertingTriggeredAlertDetails] mutableCopy];
+    jsonDict[@".tag"] = @"admin_alerting_triggered_alert_details";
+  } else if ([valueObj isAppLinkTeamDetails]) {
     jsonDict = [[DBTEAMLOGAppLinkTeamDetailsSerializer serialize:valueObj.appLinkTeamDetails] mutableCopy];
     jsonDict[@".tag"] = @"app_link_team_details";
   } else if ([valueObj isAppLinkUserDetails]) {
@@ -33119,6 +37384,94 @@
     jsonDict =
         [[DBTEAMLOGFileUnresolveCommentDetailsSerializer serialize:valueObj.fileUnresolveCommentDetails] mutableCopy];
     jsonDict[@".tag"] = @"file_unresolve_comment_details";
+  } else if ([valueObj isGovernancePolicyAddFoldersDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer
+        serialize:valueObj.governancePolicyAddFoldersDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_add_folders_details";
+  } else if ([valueObj isGovernancePolicyAddFolderFailedDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer
+        serialize:valueObj.governancePolicyAddFolderFailedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_add_folder_failed_details";
+  } else if ([valueObj isGovernancePolicyCreateDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyCreateDetailsSerializer serialize:valueObj.governancePolicyCreateDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_create_details";
+  } else if ([valueObj isGovernancePolicyDeleteDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyDeleteDetailsSerializer serialize:valueObj.governancePolicyDeleteDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_delete_details";
+  } else if ([valueObj isGovernancePolicyEditDetailsDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer
+        serialize:valueObj.governancePolicyEditDetailsDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_edit_details_details";
+  } else if ([valueObj isGovernancePolicyEditDurationDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer
+        serialize:valueObj.governancePolicyEditDurationDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_edit_duration_details";
+  } else if ([valueObj isGovernancePolicyExportCreatedDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer
+        serialize:valueObj.governancePolicyExportCreatedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_export_created_details";
+  } else if ([valueObj isGovernancePolicyExportRemovedDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer
+        serialize:valueObj.governancePolicyExportRemovedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_export_removed_details";
+  } else if ([valueObj isGovernancePolicyRemoveFoldersDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer
+        serialize:valueObj.governancePolicyRemoveFoldersDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_remove_folders_details";
+  } else if ([valueObj isGovernancePolicyReportCreatedDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer
+        serialize:valueObj.governancePolicyReportCreatedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_report_created_details";
+  } else if ([valueObj isGovernancePolicyZipPartDownloadedDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer
+        serialize:valueObj.governancePolicyZipPartDownloadedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_zip_part_downloaded_details";
+  } else if ([valueObj isLegalHoldsActivateAHoldDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsActivateAHoldDetailsSerializer serialize:valueObj.legalHoldsActivateAHoldDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_activate_a_hold_details";
+  } else if ([valueObj isLegalHoldsAddMembersDetails]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsAddMembersDetailsSerializer serialize:valueObj.legalHoldsAddMembersDetails] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_add_members_details";
+  } else if ([valueObj isLegalHoldsChangeHoldDetailsDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldDetailsDetailsSerializer
+        serialize:valueObj.legalHoldsChangeHoldDetailsDetails] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_change_hold_details_details";
+  } else if ([valueObj isLegalHoldsChangeHoldNameDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldNameDetailsSerializer serialize:valueObj.legalHoldsChangeHoldNameDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_change_hold_name_details";
+  } else if ([valueObj isLegalHoldsExportAHoldDetails]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsExportAHoldDetailsSerializer serialize:valueObj.legalHoldsExportAHoldDetails] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_a_hold_details";
+  } else if ([valueObj isLegalHoldsExportCancelledDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsExportCancelledDetailsSerializer
+        serialize:valueObj.legalHoldsExportCancelledDetails] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_cancelled_details";
+  } else if ([valueObj isLegalHoldsExportDownloadedDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsExportDownloadedDetailsSerializer
+        serialize:valueObj.legalHoldsExportDownloadedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_downloaded_details";
+  } else if ([valueObj isLegalHoldsExportRemovedDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsExportRemovedDetailsSerializer serialize:valueObj.legalHoldsExportRemovedDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_removed_details";
+  } else if ([valueObj isLegalHoldsReleaseAHoldDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsReleaseAHoldDetailsSerializer serialize:valueObj.legalHoldsReleaseAHoldDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_release_a_hold_details";
+  } else if ([valueObj isLegalHoldsRemoveMembersDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsRemoveMembersDetailsSerializer serialize:valueObj.legalHoldsRemoveMembersDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_remove_members_details";
+  } else if ([valueObj isLegalHoldsReportAHoldDetails]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsReportAHoldDetailsSerializer serialize:valueObj.legalHoldsReportAHoldDetails] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_report_a_hold_details";
   } else if ([valueObj isDeviceChangeIpDesktopDetails]) {
     jsonDict =
         [[DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer serialize:valueObj.deviceChangeIpDesktopDetails] mutableCopy];
@@ -33152,9 +37505,21 @@
     jsonDict = [[DBTEAMLOGDeviceManagementEnabledDetailsSerializer serialize:valueObj.deviceManagementEnabledDetails]
         mutableCopy];
     jsonDict[@".tag"] = @"device_management_enabled_details";
+  } else if ([valueObj isDeviceSyncBackupStatusChangedDetails]) {
+    jsonDict = [[DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer
+        serialize:valueObj.deviceSyncBackupStatusChangedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"device_sync_backup_status_changed_details";
   } else if ([valueObj isDeviceUnlinkDetails]) {
     jsonDict = [[DBTEAMLOGDeviceUnlinkDetailsSerializer serialize:valueObj.deviceUnlinkDetails] mutableCopy];
     jsonDict[@".tag"] = @"device_unlink_details";
+  } else if ([valueObj isDropboxPasswordsExportedDetails]) {
+    jsonDict = [[DBTEAMLOGDropboxPasswordsExportedDetailsSerializer serialize:valueObj.dropboxPasswordsExportedDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"dropbox_passwords_exported_details";
+  } else if ([valueObj isDropboxPasswordsNewDeviceEnrolledDetails]) {
+    jsonDict = [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer
+        serialize:valueObj.dropboxPasswordsNewDeviceEnrolledDetails] mutableCopy];
+    jsonDict[@".tag"] = @"dropbox_passwords_new_device_enrolled_details";
   } else if ([valueObj isEmmRefreshAuthTokenDetails]) {
     jsonDict =
         [[DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer serialize:valueObj.emmRefreshAuthTokenDetails] mutableCopy];
@@ -33349,50 +37714,6 @@
   } else if ([valueObj isGroupRenameDetails]) {
     jsonDict = [[DBTEAMLOGGroupRenameDetailsSerializer serialize:valueObj.groupRenameDetails] mutableCopy];
     jsonDict[@".tag"] = @"group_rename_details";
-  } else if ([valueObj isLegalHoldsActivateAHoldDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsActivateAHoldDetailsSerializer serialize:valueObj.legalHoldsActivateAHoldDetails]
-        mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_activate_a_hold_details";
-  } else if ([valueObj isLegalHoldsAddMembersDetails]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsAddMembersDetailsSerializer serialize:valueObj.legalHoldsAddMembersDetails] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_add_members_details";
-  } else if ([valueObj isLegalHoldsChangeHoldDetailsDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldDetailsDetailsSerializer
-        serialize:valueObj.legalHoldsChangeHoldDetailsDetails] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_change_hold_details_details";
-  } else if ([valueObj isLegalHoldsChangeHoldNameDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldNameDetailsSerializer serialize:valueObj.legalHoldsChangeHoldNameDetails]
-        mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_change_hold_name_details";
-  } else if ([valueObj isLegalHoldsExportAHoldDetails]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportAHoldDetailsSerializer serialize:valueObj.legalHoldsExportAHoldDetails] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_a_hold_details";
-  } else if ([valueObj isLegalHoldsExportCancelledDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportCancelledDetailsSerializer
-        serialize:valueObj.legalHoldsExportCancelledDetails] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_cancelled_details";
-  } else if ([valueObj isLegalHoldsExportDownloadedDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportDownloadedDetailsSerializer
-        serialize:valueObj.legalHoldsExportDownloadedDetails] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_downloaded_details";
-  } else if ([valueObj isLegalHoldsExportRemovedDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportRemovedDetailsSerializer serialize:valueObj.legalHoldsExportRemovedDetails]
-        mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_removed_details";
-  } else if ([valueObj isLegalHoldsReleaseAHoldDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsReleaseAHoldDetailsSerializer serialize:valueObj.legalHoldsReleaseAHoldDetails]
-        mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_release_a_hold_details";
-  } else if ([valueObj isLegalHoldsRemoveMembersDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsRemoveMembersDetailsSerializer serialize:valueObj.legalHoldsRemoveMembersDetails]
-        mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_remove_members_details";
-  } else if ([valueObj isLegalHoldsReportAHoldDetails]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsReportAHoldDetailsSerializer serialize:valueObj.legalHoldsReportAHoldDetails] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_report_a_hold_details";
   } else if ([valueObj isAccountLockOrUnlockedDetails]) {
     jsonDict =
         [[DBTEAMLOGAccountLockOrUnlockedDetailsSerializer serialize:valueObj.accountLockOrUnlockedDetails] mutableCopy];
@@ -33469,6 +37790,10 @@
   } else if ([valueObj isMemberChangeNameDetails]) {
     jsonDict = [[DBTEAMLOGMemberChangeNameDetailsSerializer serialize:valueObj.memberChangeNameDetails] mutableCopy];
     jsonDict[@".tag"] = @"member_change_name_details";
+  } else if ([valueObj isMemberChangeResellerRoleDetails]) {
+    jsonDict = [[DBTEAMLOGMemberChangeResellerRoleDetailsSerializer serialize:valueObj.memberChangeResellerRoleDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"member_change_reseller_role_details";
   } else if ([valueObj isMemberChangeStatusDetails]) {
     jsonDict =
         [[DBTEAMLOGMemberChangeStatusDetailsSerializer serialize:valueObj.memberChangeStatusDetails] mutableCopy];
@@ -33723,6 +38048,14 @@
   } else if ([valueObj isPasswordResetAllDetails]) {
     jsonDict = [[DBTEAMLOGPasswordResetAllDetailsSerializer serialize:valueObj.passwordResetAllDetails] mutableCopy];
     jsonDict[@".tag"] = @"password_reset_all_details";
+  } else if ([valueObj isClassificationCreateReportDetails]) {
+    jsonDict = [[DBTEAMLOGClassificationCreateReportDetailsSerializer
+        serialize:valueObj.classificationCreateReportDetails] mutableCopy];
+    jsonDict[@".tag"] = @"classification_create_report_details";
+  } else if ([valueObj isClassificationCreateReportFailDetails]) {
+    jsonDict = [[DBTEAMLOGClassificationCreateReportFailDetailsSerializer
+        serialize:valueObj.classificationCreateReportFailDetails] mutableCopy];
+    jsonDict[@".tag"] = @"classification_create_report_fail_details";
   } else if ([valueObj isEmmCreateExceptionsReportDetails]) {
     jsonDict = [[DBTEAMLOGEmmCreateExceptionsReportDetailsSerializer
         serialize:valueObj.emmCreateExceptionsReportDetails] mutableCopy];
@@ -34086,6 +38419,14 @@
   } else if ([valueObj isSharedNoteOpenedDetails]) {
     jsonDict = [[DBTEAMLOGSharedNoteOpenedDetailsSerializer serialize:valueObj.sharedNoteOpenedDetails] mutableCopy];
     jsonDict[@".tag"] = @"shared_note_opened_details";
+  } else if ([valueObj isShmodelDisableDownloadsDetails]) {
+    jsonDict = [[DBTEAMLOGShmodelDisableDownloadsDetailsSerializer serialize:valueObj.shmodelDisableDownloadsDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"shmodel_disable_downloads_details";
+  } else if ([valueObj isShmodelEnableDownloadsDetails]) {
+    jsonDict = [[DBTEAMLOGShmodelEnableDownloadsDetailsSerializer serialize:valueObj.shmodelEnableDownloadsDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"shmodel_enable_downloads_details";
   } else if ([valueObj isShmodelGroupShareDetails]) {
     jsonDict = [[DBTEAMLOGShmodelGroupShareDetailsSerializer serialize:valueObj.shmodelGroupShareDetails] mutableCopy];
     jsonDict[@".tag"] = @"shmodel_group_share_details";
@@ -34245,6 +38586,14 @@
     jsonDict = [[DBTEAMLOGCameraUploadsPolicyChangedDetailsSerializer
         serialize:valueObj.cameraUploadsPolicyChangedDetails] mutableCopy];
     jsonDict[@".tag"] = @"camera_uploads_policy_changed_details";
+  } else if ([valueObj isClassificationChangePolicyDetails]) {
+    jsonDict = [[DBTEAMLOGClassificationChangePolicyDetailsSerializer
+        serialize:valueObj.classificationChangePolicyDetails] mutableCopy];
+    jsonDict[@".tag"] = @"classification_change_policy_details";
+  } else if ([valueObj isComputerBackupPolicyChangedDetails]) {
+    jsonDict = [[DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer
+        serialize:valueObj.computerBackupPolicyChangedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"computer_backup_policy_changed_details";
   } else if ([valueObj isContentAdministrationPolicyChangedDetails]) {
     jsonDict = [[DBTEAMLOGContentAdministrationPolicyChangedDetailsSerializer
         serialize:valueObj.contentAdministrationPolicyChangedDetails] mutableCopy];
@@ -34468,6 +38817,10 @@
   } else if ([valueObj isSsoChangePolicyDetails]) {
     jsonDict = [[DBTEAMLOGSsoChangePolicyDetailsSerializer serialize:valueObj.ssoChangePolicyDetails] mutableCopy];
     jsonDict[@".tag"] = @"sso_change_policy_details";
+  } else if ([valueObj isTeamBrandingPolicyChangedDetails]) {
+    jsonDict = [[DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer
+        serialize:valueObj.teamBrandingPolicyChangedDetails] mutableCopy];
+    jsonDict[@".tag"] = @"team_branding_policy_changed_details";
   } else if ([valueObj isTeamExtensionsPolicyChangedDetails]) {
     jsonDict = [[DBTEAMLOGTeamExtensionsPolicyChangedDetailsSerializer
         serialize:valueObj.teamExtensionsPolicyChangedDetails] mutableCopy];
@@ -34520,10 +38873,18 @@
   } else if ([valueObj isTeamMergeToDetails]) {
     jsonDict = [[DBTEAMLOGTeamMergeToDetailsSerializer serialize:valueObj.teamMergeToDetails] mutableCopy];
     jsonDict[@".tag"] = @"team_merge_to_details";
+  } else if ([valueObj isTeamProfileAddBackgroundDetails]) {
+    jsonDict = [[DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer serialize:valueObj.teamProfileAddBackgroundDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_add_background_details";
   } else if ([valueObj isTeamProfileAddLogoDetails]) {
     jsonDict =
         [[DBTEAMLOGTeamProfileAddLogoDetailsSerializer serialize:valueObj.teamProfileAddLogoDetails] mutableCopy];
     jsonDict[@".tag"] = @"team_profile_add_logo_details";
+  } else if ([valueObj isTeamProfileChangeBackgroundDetails]) {
+    jsonDict = [[DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer
+        serialize:valueObj.teamProfileChangeBackgroundDetails] mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_change_background_details";
   } else if ([valueObj isTeamProfileChangeDefaultLanguageDetails]) {
     jsonDict = [[DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer
         serialize:valueObj.teamProfileChangeDefaultLanguageDetails] mutableCopy];
@@ -34536,6 +38897,10 @@
     jsonDict =
         [[DBTEAMLOGTeamProfileChangeNameDetailsSerializer serialize:valueObj.teamProfileChangeNameDetails] mutableCopy];
     jsonDict[@".tag"] = @"team_profile_change_name_details";
+  } else if ([valueObj isTeamProfileRemoveBackgroundDetails]) {
+    jsonDict = [[DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer
+        serialize:valueObj.teamProfileRemoveBackgroundDetails] mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_remove_background_details";
   } else if ([valueObj isTeamProfileRemoveLogoDetails]) {
     jsonDict =
         [[DBTEAMLOGTeamProfileRemoveLogoDetailsSerializer serialize:valueObj.teamProfileRemoveLogoDetails] mutableCopy];
@@ -34679,7 +39044,17 @@
 + (DBTEAMLOGEventDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"app_link_team_details"]) {
+  if ([tag isEqualToString:@"admin_alerting_changed_alert_config_details"]) {
+    DBTEAMLOGAdminAlertingChangedAlertConfigDetails *adminAlertingChangedAlertConfigDetails =
+        [DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithAdminAlertingChangedAlertConfigDetails:adminAlertingChangedAlertConfigDetails];
+  } else if ([tag isEqualToString:@"admin_alerting_triggered_alert_details"]) {
+    DBTEAMLOGAdminAlertingTriggeredAlertDetails *adminAlertingTriggeredAlertDetails =
+        [DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithAdminAlertingTriggeredAlertDetails:adminAlertingTriggeredAlertDetails];
+  } else if ([tag isEqualToString:@"app_link_team_details"]) {
     DBTEAMLOGAppLinkTeamDetails *appLinkTeamDetails = [DBTEAMLOGAppLinkTeamDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithAppLinkTeamDetails:appLinkTeamDetails];
   } else if ([tag isEqualToString:@"app_link_user_details"]) {
@@ -34734,6 +39109,103 @@
     DBTEAMLOGFileUnresolveCommentDetails *fileUnresolveCommentDetails =
         [DBTEAMLOGFileUnresolveCommentDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithFileUnresolveCommentDetails:fileUnresolveCommentDetails];
+  } else if ([tag isEqualToString:@"governance_policy_add_folders_details"]) {
+    DBTEAMLOGGovernancePolicyAddFoldersDetails *governancePolicyAddFoldersDetails =
+        [DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithGovernancePolicyAddFoldersDetails:governancePolicyAddFoldersDetails];
+  } else if ([tag isEqualToString:@"governance_policy_add_folder_failed_details"]) {
+    DBTEAMLOGGovernancePolicyAddFolderFailedDetails *governancePolicyAddFolderFailedDetails =
+        [DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithGovernancePolicyAddFolderFailedDetails:governancePolicyAddFolderFailedDetails];
+  } else if ([tag isEqualToString:@"governance_policy_create_details"]) {
+    DBTEAMLOGGovernancePolicyCreateDetails *governancePolicyCreateDetails =
+        [DBTEAMLOGGovernancePolicyCreateDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithGovernancePolicyCreateDetails:governancePolicyCreateDetails];
+  } else if ([tag isEqualToString:@"governance_policy_delete_details"]) {
+    DBTEAMLOGGovernancePolicyDeleteDetails *governancePolicyDeleteDetails =
+        [DBTEAMLOGGovernancePolicyDeleteDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithGovernancePolicyDeleteDetails:governancePolicyDeleteDetails];
+  } else if ([tag isEqualToString:@"governance_policy_edit_details_details"]) {
+    DBTEAMLOGGovernancePolicyEditDetailsDetails *governancePolicyEditDetailsDetails =
+        [DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithGovernancePolicyEditDetailsDetails:governancePolicyEditDetailsDetails];
+  } else if ([tag isEqualToString:@"governance_policy_edit_duration_details"]) {
+    DBTEAMLOGGovernancePolicyEditDurationDetails *governancePolicyEditDurationDetails =
+        [DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithGovernancePolicyEditDurationDetails:governancePolicyEditDurationDetails];
+  } else if ([tag isEqualToString:@"governance_policy_export_created_details"]) {
+    DBTEAMLOGGovernancePolicyExportCreatedDetails *governancePolicyExportCreatedDetails =
+        [DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithGovernancePolicyExportCreatedDetails:governancePolicyExportCreatedDetails];
+  } else if ([tag isEqualToString:@"governance_policy_export_removed_details"]) {
+    DBTEAMLOGGovernancePolicyExportRemovedDetails *governancePolicyExportRemovedDetails =
+        [DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithGovernancePolicyExportRemovedDetails:governancePolicyExportRemovedDetails];
+  } else if ([tag isEqualToString:@"governance_policy_remove_folders_details"]) {
+    DBTEAMLOGGovernancePolicyRemoveFoldersDetails *governancePolicyRemoveFoldersDetails =
+        [DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithGovernancePolicyRemoveFoldersDetails:governancePolicyRemoveFoldersDetails];
+  } else if ([tag isEqualToString:@"governance_policy_report_created_details"]) {
+    DBTEAMLOGGovernancePolicyReportCreatedDetails *governancePolicyReportCreatedDetails =
+        [DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithGovernancePolicyReportCreatedDetails:governancePolicyReportCreatedDetails];
+  } else if ([tag isEqualToString:@"governance_policy_zip_part_downloaded_details"]) {
+    DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *governancePolicyZipPartDownloadedDetails =
+        [DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithGovernancePolicyZipPartDownloadedDetails:governancePolicyZipPartDownloadedDetails];
+  } else if ([tag isEqualToString:@"legal_holds_activate_a_hold_details"]) {
+    DBTEAMLOGLegalHoldsActivateAHoldDetails *legalHoldsActivateAHoldDetails =
+        [DBTEAMLOGLegalHoldsActivateAHoldDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsActivateAHoldDetails:legalHoldsActivateAHoldDetails];
+  } else if ([tag isEqualToString:@"legal_holds_add_members_details"]) {
+    DBTEAMLOGLegalHoldsAddMembersDetails *legalHoldsAddMembersDetails =
+        [DBTEAMLOGLegalHoldsAddMembersDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsAddMembersDetails:legalHoldsAddMembersDetails];
+  } else if ([tag isEqualToString:@"legal_holds_change_hold_details_details"]) {
+    DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *legalHoldsChangeHoldDetailsDetails =
+        [DBTEAMLOGLegalHoldsChangeHoldDetailsDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsChangeHoldDetailsDetails:legalHoldsChangeHoldDetailsDetails];
+  } else if ([tag isEqualToString:@"legal_holds_change_hold_name_details"]) {
+    DBTEAMLOGLegalHoldsChangeHoldNameDetails *legalHoldsChangeHoldNameDetails =
+        [DBTEAMLOGLegalHoldsChangeHoldNameDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsChangeHoldNameDetails:legalHoldsChangeHoldNameDetails];
+  } else if ([tag isEqualToString:@"legal_holds_export_a_hold_details"]) {
+    DBTEAMLOGLegalHoldsExportAHoldDetails *legalHoldsExportAHoldDetails =
+        [DBTEAMLOGLegalHoldsExportAHoldDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportAHoldDetails:legalHoldsExportAHoldDetails];
+  } else if ([tag isEqualToString:@"legal_holds_export_cancelled_details"]) {
+    DBTEAMLOGLegalHoldsExportCancelledDetails *legalHoldsExportCancelledDetails =
+        [DBTEAMLOGLegalHoldsExportCancelledDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportCancelledDetails:legalHoldsExportCancelledDetails];
+  } else if ([tag isEqualToString:@"legal_holds_export_downloaded_details"]) {
+    DBTEAMLOGLegalHoldsExportDownloadedDetails *legalHoldsExportDownloadedDetails =
+        [DBTEAMLOGLegalHoldsExportDownloadedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportDownloadedDetails:legalHoldsExportDownloadedDetails];
+  } else if ([tag isEqualToString:@"legal_holds_export_removed_details"]) {
+    DBTEAMLOGLegalHoldsExportRemovedDetails *legalHoldsExportRemovedDetails =
+        [DBTEAMLOGLegalHoldsExportRemovedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportRemovedDetails:legalHoldsExportRemovedDetails];
+  } else if ([tag isEqualToString:@"legal_holds_release_a_hold_details"]) {
+    DBTEAMLOGLegalHoldsReleaseAHoldDetails *legalHoldsReleaseAHoldDetails =
+        [DBTEAMLOGLegalHoldsReleaseAHoldDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsReleaseAHoldDetails:legalHoldsReleaseAHoldDetails];
+  } else if ([tag isEqualToString:@"legal_holds_remove_members_details"]) {
+    DBTEAMLOGLegalHoldsRemoveMembersDetails *legalHoldsRemoveMembersDetails =
+        [DBTEAMLOGLegalHoldsRemoveMembersDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsRemoveMembersDetails:legalHoldsRemoveMembersDetails];
+  } else if ([tag isEqualToString:@"legal_holds_report_a_hold_details"]) {
+    DBTEAMLOGLegalHoldsReportAHoldDetails *legalHoldsReportAHoldDetails =
+        [DBTEAMLOGLegalHoldsReportAHoldDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsReportAHoldDetails:legalHoldsReportAHoldDetails];
   } else if ([tag isEqualToString:@"device_change_ip_desktop_details"]) {
     DBTEAMLOGDeviceChangeIpDesktopDetails *deviceChangeIpDesktopDetails =
         [DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer deserialize:valueDict];
@@ -34771,9 +39243,23 @@
     DBTEAMLOGDeviceManagementEnabledDetails *deviceManagementEnabledDetails =
         [DBTEAMLOGDeviceManagementEnabledDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithDeviceManagementEnabledDetails:deviceManagementEnabledDetails];
+  } else if ([tag isEqualToString:@"device_sync_backup_status_changed_details"]) {
+    DBTEAMLOGDeviceSyncBackupStatusChangedDetails *deviceSyncBackupStatusChangedDetails =
+        [DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithDeviceSyncBackupStatusChangedDetails:deviceSyncBackupStatusChangedDetails];
   } else if ([tag isEqualToString:@"device_unlink_details"]) {
     DBTEAMLOGDeviceUnlinkDetails *deviceUnlinkDetails = [DBTEAMLOGDeviceUnlinkDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithDeviceUnlinkDetails:deviceUnlinkDetails];
+  } else if ([tag isEqualToString:@"dropbox_passwords_exported_details"]) {
+    DBTEAMLOGDropboxPasswordsExportedDetails *dropboxPasswordsExportedDetails =
+        [DBTEAMLOGDropboxPasswordsExportedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithDropboxPasswordsExportedDetails:dropboxPasswordsExportedDetails];
+  } else if ([tag isEqualToString:@"dropbox_passwords_new_device_enrolled_details"]) {
+    DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *dropboxPasswordsNewDeviceEnrolledDetails =
+        [DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithDropboxPasswordsNewDeviceEnrolledDetails:dropboxPasswordsNewDeviceEnrolledDetails];
   } else if ([tag isEqualToString:@"emm_refresh_auth_token_details"]) {
     DBTEAMLOGEmmRefreshAuthTokenDetails *emmRefreshAuthTokenDetails =
         [DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer deserialize:valueDict];
@@ -34989,51 +39475,6 @@
   } else if ([tag isEqualToString:@"group_rename_details"]) {
     DBTEAMLOGGroupRenameDetails *groupRenameDetails = [DBTEAMLOGGroupRenameDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithGroupRenameDetails:groupRenameDetails];
-  } else if ([tag isEqualToString:@"legal_holds_activate_a_hold_details"]) {
-    DBTEAMLOGLegalHoldsActivateAHoldDetails *legalHoldsActivateAHoldDetails =
-        [DBTEAMLOGLegalHoldsActivateAHoldDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsActivateAHoldDetails:legalHoldsActivateAHoldDetails];
-  } else if ([tag isEqualToString:@"legal_holds_add_members_details"]) {
-    DBTEAMLOGLegalHoldsAddMembersDetails *legalHoldsAddMembersDetails =
-        [DBTEAMLOGLegalHoldsAddMembersDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsAddMembersDetails:legalHoldsAddMembersDetails];
-  } else if ([tag isEqualToString:@"legal_holds_change_hold_details_details"]) {
-    DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *legalHoldsChangeHoldDetailsDetails =
-        [DBTEAMLOGLegalHoldsChangeHoldDetailsDetailsSerializer deserialize:valueDict];
-    return
-        [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsChangeHoldDetailsDetails:legalHoldsChangeHoldDetailsDetails];
-  } else if ([tag isEqualToString:@"legal_holds_change_hold_name_details"]) {
-    DBTEAMLOGLegalHoldsChangeHoldNameDetails *legalHoldsChangeHoldNameDetails =
-        [DBTEAMLOGLegalHoldsChangeHoldNameDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsChangeHoldNameDetails:legalHoldsChangeHoldNameDetails];
-  } else if ([tag isEqualToString:@"legal_holds_export_a_hold_details"]) {
-    DBTEAMLOGLegalHoldsExportAHoldDetails *legalHoldsExportAHoldDetails =
-        [DBTEAMLOGLegalHoldsExportAHoldDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportAHoldDetails:legalHoldsExportAHoldDetails];
-  } else if ([tag isEqualToString:@"legal_holds_export_cancelled_details"]) {
-    DBTEAMLOGLegalHoldsExportCancelledDetails *legalHoldsExportCancelledDetails =
-        [DBTEAMLOGLegalHoldsExportCancelledDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportCancelledDetails:legalHoldsExportCancelledDetails];
-  } else if ([tag isEqualToString:@"legal_holds_export_downloaded_details"]) {
-    DBTEAMLOGLegalHoldsExportDownloadedDetails *legalHoldsExportDownloadedDetails =
-        [DBTEAMLOGLegalHoldsExportDownloadedDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportDownloadedDetails:legalHoldsExportDownloadedDetails];
-  } else if ([tag isEqualToString:@"legal_holds_export_removed_details"]) {
-    DBTEAMLOGLegalHoldsExportRemovedDetails *legalHoldsExportRemovedDetails =
-        [DBTEAMLOGLegalHoldsExportRemovedDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsExportRemovedDetails:legalHoldsExportRemovedDetails];
-  } else if ([tag isEqualToString:@"legal_holds_release_a_hold_details"]) {
-    DBTEAMLOGLegalHoldsReleaseAHoldDetails *legalHoldsReleaseAHoldDetails =
-        [DBTEAMLOGLegalHoldsReleaseAHoldDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsReleaseAHoldDetails:legalHoldsReleaseAHoldDetails];
-  } else if ([tag isEqualToString:@"legal_holds_remove_members_details"]) {
-    DBTEAMLOGLegalHoldsRemoveMembersDetails *legalHoldsRemoveMembersDetails =
-        [DBTEAMLOGLegalHoldsRemoveMembersDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsRemoveMembersDetails:legalHoldsRemoveMembersDetails];
-  } else if ([tag isEqualToString:@"legal_holds_report_a_hold_details"]) {
-    DBTEAMLOGLegalHoldsReportAHoldDetails *legalHoldsReportAHoldDetails =
-        [DBTEAMLOGLegalHoldsReportAHoldDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventDetails alloc] initWithLegalHoldsReportAHoldDetails:legalHoldsReportAHoldDetails];
   } else if ([tag isEqualToString:@"account_lock_or_unlocked_details"]) {
     DBTEAMLOGAccountLockOrUnlockedDetails *accountLockOrUnlockedDetails =
         [DBTEAMLOGAccountLockOrUnlockedDetailsSerializer deserialize:valueDict];
@@ -35116,6 +39557,10 @@
     DBTEAMLOGMemberChangeNameDetails *memberChangeNameDetails =
         [DBTEAMLOGMemberChangeNameDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithMemberChangeNameDetails:memberChangeNameDetails];
+  } else if ([tag isEqualToString:@"member_change_reseller_role_details"]) {
+    DBTEAMLOGMemberChangeResellerRoleDetails *memberChangeResellerRoleDetails =
+        [DBTEAMLOGMemberChangeResellerRoleDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithMemberChangeResellerRoleDetails:memberChangeResellerRoleDetails];
   } else if ([tag isEqualToString:@"member_change_status_details"]) {
     DBTEAMLOGMemberChangeStatusDetails *memberChangeStatusDetails =
         [DBTEAMLOGMemberChangeStatusDetailsSerializer deserialize:valueDict];
@@ -35399,6 +39844,15 @@
     DBTEAMLOGPasswordResetAllDetails *passwordResetAllDetails =
         [DBTEAMLOGPasswordResetAllDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithPasswordResetAllDetails:passwordResetAllDetails];
+  } else if ([tag isEqualToString:@"classification_create_report_details"]) {
+    DBTEAMLOGClassificationCreateReportDetails *classificationCreateReportDetails =
+        [DBTEAMLOGClassificationCreateReportDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithClassificationCreateReportDetails:classificationCreateReportDetails];
+  } else if ([tag isEqualToString:@"classification_create_report_fail_details"]) {
+    DBTEAMLOGClassificationCreateReportFailDetails *classificationCreateReportFailDetails =
+        [DBTEAMLOGClassificationCreateReportFailDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithClassificationCreateReportFailDetails:classificationCreateReportFailDetails];
   } else if ([tag isEqualToString:@"emm_create_exceptions_report_details"]) {
     DBTEAMLOGEmmCreateExceptionsReportDetails *emmCreateExceptionsReportDetails =
         [DBTEAMLOGEmmCreateExceptionsReportDetailsSerializer deserialize:valueDict];
@@ -35824,6 +40278,14 @@
     DBTEAMLOGSharedNoteOpenedDetails *sharedNoteOpenedDetails =
         [DBTEAMLOGSharedNoteOpenedDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithSharedNoteOpenedDetails:sharedNoteOpenedDetails];
+  } else if ([tag isEqualToString:@"shmodel_disable_downloads_details"]) {
+    DBTEAMLOGShmodelDisableDownloadsDetails *shmodelDisableDownloadsDetails =
+        [DBTEAMLOGShmodelDisableDownloadsDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithShmodelDisableDownloadsDetails:shmodelDisableDownloadsDetails];
+  } else if ([tag isEqualToString:@"shmodel_enable_downloads_details"]) {
+    DBTEAMLOGShmodelEnableDownloadsDetails *shmodelEnableDownloadsDetails =
+        [DBTEAMLOGShmodelEnableDownloadsDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithShmodelEnableDownloadsDetails:shmodelEnableDownloadsDetails];
   } else if ([tag isEqualToString:@"shmodel_group_share_details"]) {
     DBTEAMLOGShmodelGroupShareDetails *shmodelGroupShareDetails =
         [DBTEAMLOGShmodelGroupShareDetailsSerializer deserialize:valueDict];
@@ -36005,6 +40467,15 @@
     DBTEAMLOGCameraUploadsPolicyChangedDetails *cameraUploadsPolicyChangedDetails =
         [DBTEAMLOGCameraUploadsPolicyChangedDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithCameraUploadsPolicyChangedDetails:cameraUploadsPolicyChangedDetails];
+  } else if ([tag isEqualToString:@"classification_change_policy_details"]) {
+    DBTEAMLOGClassificationChangePolicyDetails *classificationChangePolicyDetails =
+        [DBTEAMLOGClassificationChangePolicyDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithClassificationChangePolicyDetails:classificationChangePolicyDetails];
+  } else if ([tag isEqualToString:@"computer_backup_policy_changed_details"]) {
+    DBTEAMLOGComputerBackupPolicyChangedDetails *computerBackupPolicyChangedDetails =
+        [DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithComputerBackupPolicyChangedDetails:computerBackupPolicyChangedDetails];
   } else if ([tag isEqualToString:@"content_administration_policy_changed_details"]) {
     DBTEAMLOGContentAdministrationPolicyChangedDetails *contentAdministrationPolicyChangedDetails =
         [DBTEAMLOGContentAdministrationPolicyChangedDetailsSerializer deserialize:valueDict];
@@ -36268,6 +40739,10 @@
     DBTEAMLOGSsoChangePolicyDetails *ssoChangePolicyDetails =
         [DBTEAMLOGSsoChangePolicyDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithSsoChangePolicyDetails:ssoChangePolicyDetails];
+  } else if ([tag isEqualToString:@"team_branding_policy_changed_details"]) {
+    DBTEAMLOGTeamBrandingPolicyChangedDetails *teamBrandingPolicyChangedDetails =
+        [DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithTeamBrandingPolicyChangedDetails:teamBrandingPolicyChangedDetails];
   } else if ([tag isEqualToString:@"team_extensions_policy_changed_details"]) {
     DBTEAMLOGTeamExtensionsPolicyChangedDetails *teamExtensionsPolicyChangedDetails =
         [DBTEAMLOGTeamExtensionsPolicyChangedDetailsSerializer deserialize:valueDict];
@@ -36329,10 +40804,19 @@
   } else if ([tag isEqualToString:@"team_merge_to_details"]) {
     DBTEAMLOGTeamMergeToDetails *teamMergeToDetails = [DBTEAMLOGTeamMergeToDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithTeamMergeToDetails:teamMergeToDetails];
+  } else if ([tag isEqualToString:@"team_profile_add_background_details"]) {
+    DBTEAMLOGTeamProfileAddBackgroundDetails *teamProfileAddBackgroundDetails =
+        [DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithTeamProfileAddBackgroundDetails:teamProfileAddBackgroundDetails];
   } else if ([tag isEqualToString:@"team_profile_add_logo_details"]) {
     DBTEAMLOGTeamProfileAddLogoDetails *teamProfileAddLogoDetails =
         [DBTEAMLOGTeamProfileAddLogoDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithTeamProfileAddLogoDetails:teamProfileAddLogoDetails];
+  } else if ([tag isEqualToString:@"team_profile_change_background_details"]) {
+    DBTEAMLOGTeamProfileChangeBackgroundDetails *teamProfileChangeBackgroundDetails =
+        [DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithTeamProfileChangeBackgroundDetails:teamProfileChangeBackgroundDetails];
   } else if ([tag isEqualToString:@"team_profile_change_default_language_details"]) {
     DBTEAMLOGTeamProfileChangeDefaultLanguageDetails *teamProfileChangeDefaultLanguageDetails =
         [DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer deserialize:valueDict];
@@ -36346,6 +40830,11 @@
     DBTEAMLOGTeamProfileChangeNameDetails *teamProfileChangeNameDetails =
         [DBTEAMLOGTeamProfileChangeNameDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithTeamProfileChangeNameDetails:teamProfileChangeNameDetails];
+  } else if ([tag isEqualToString:@"team_profile_remove_background_details"]) {
+    DBTEAMLOGTeamProfileRemoveBackgroundDetails *teamProfileRemoveBackgroundDetails =
+        [DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer deserialize:valueDict];
+    return
+        [[DBTEAMLOGEventDetails alloc] initWithTeamProfileRemoveBackgroundDetails:teamProfileRemoveBackgroundDetails];
   } else if ([tag isEqualToString:@"team_profile_remove_logo_details"]) {
     DBTEAMLOGTeamProfileRemoveLogoDetails *teamProfileRemoveLogoDetails =
         [DBTEAMLOGTeamProfileRemoveLogoDetailsSerializer deserialize:valueDict];
@@ -36514,6 +41003,8 @@
 #import "DBTEAMLOGAccountCaptureNotificationEmailsSentType.h"
 #import "DBTEAMLOGAccountCaptureRelinquishAccountType.h"
 #import "DBTEAMLOGAccountLockOrUnlockedType.h"
+#import "DBTEAMLOGAdminAlertingChangedAlertConfigType.h"
+#import "DBTEAMLOGAdminAlertingTriggeredAlertType.h"
 #import "DBTEAMLOGAllowDownloadDisabledType.h"
 #import "DBTEAMLOGAllowDownloadEnabledType.h"
 #import "DBTEAMLOGAppLinkTeamType.h"
@@ -36531,7 +41022,11 @@
 #import "DBTEAMLOGCameraUploadsPolicyChangedType.h"
 #import "DBTEAMLOGChangedEnterpriseAdminRoleType.h"
 #import "DBTEAMLOGChangedEnterpriseConnectedTeamStatusType.h"
+#import "DBTEAMLOGClassificationChangePolicyType.h"
+#import "DBTEAMLOGClassificationCreateReportFailType.h"
+#import "DBTEAMLOGClassificationCreateReportType.h"
 #import "DBTEAMLOGCollectionShareType.h"
+#import "DBTEAMLOGComputerBackupPolicyChangedType.h"
 #import "DBTEAMLOGContentAdministrationPolicyChangedType.h"
 #import "DBTEAMLOGCreateFolderType.h"
 #import "DBTEAMLOGCreateTeamInviteLinkType.h"
@@ -36553,6 +41048,7 @@
 #import "DBTEAMLOGDeviceLinkSuccessType.h"
 #import "DBTEAMLOGDeviceManagementDisabledType.h"
 #import "DBTEAMLOGDeviceManagementEnabledType.h"
+#import "DBTEAMLOGDeviceSyncBackupStatusChangedType.h"
 #import "DBTEAMLOGDeviceUnlinkType.h"
 #import "DBTEAMLOGDirectoryRestrictionsAddMembersType.h"
 #import "DBTEAMLOGDirectoryRestrictionsRemoveMembersType.h"
@@ -36566,6 +41062,8 @@
 #import "DBTEAMLOGDomainVerificationAddDomainFailType.h"
 #import "DBTEAMLOGDomainVerificationAddDomainSuccessType.h"
 #import "DBTEAMLOGDomainVerificationRemoveDomainType.h"
+#import "DBTEAMLOGDropboxPasswordsExportedType.h"
+#import "DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType.h"
 #import "DBTEAMLOGEmmAddExceptionType.h"
 #import "DBTEAMLOGEmmChangePolicyType.h"
 #import "DBTEAMLOGEmmCreateExceptionsReportType.h"
@@ -36626,6 +41124,17 @@
 #import "DBTEAMLOGFolderOverviewItemPinnedType.h"
 #import "DBTEAMLOGFolderOverviewItemUnpinnedType.h"
 #import "DBTEAMLOGGoogleSsoChangePolicyType.h"
+#import "DBTEAMLOGGovernancePolicyAddFolderFailedType.h"
+#import "DBTEAMLOGGovernancePolicyAddFoldersType.h"
+#import "DBTEAMLOGGovernancePolicyCreateType.h"
+#import "DBTEAMLOGGovernancePolicyDeleteType.h"
+#import "DBTEAMLOGGovernancePolicyEditDetailsType.h"
+#import "DBTEAMLOGGovernancePolicyEditDurationType.h"
+#import "DBTEAMLOGGovernancePolicyExportCreatedType.h"
+#import "DBTEAMLOGGovernancePolicyExportRemovedType.h"
+#import "DBTEAMLOGGovernancePolicyRemoveFoldersType.h"
+#import "DBTEAMLOGGovernancePolicyReportCreatedType.h"
+#import "DBTEAMLOGGovernancePolicyZipPartDownloadedType.h"
 #import "DBTEAMLOGGroupAddExternalIdType.h"
 #import "DBTEAMLOGGroupAddMemberType.h"
 #import "DBTEAMLOGGroupChangeExternalIdType.h"
@@ -36667,6 +41176,7 @@
 #import "DBTEAMLOGMemberChangeExternalIdType.h"
 #import "DBTEAMLOGMemberChangeMembershipTypeType.h"
 #import "DBTEAMLOGMemberChangeNameType.h"
+#import "DBTEAMLOGMemberChangeResellerRoleType.h"
 #import "DBTEAMLOGMemberChangeStatusType.h"
 #import "DBTEAMLOGMemberDeleteManualContactsType.h"
 #import "DBTEAMLOGMemberDeleteProfilePhotoType.h"
@@ -36837,6 +41347,8 @@
 #import "DBTEAMLOGSharingChangeFolderJoinPolicyType.h"
 #import "DBTEAMLOGSharingChangeLinkPolicyType.h"
 #import "DBTEAMLOGSharingChangeMemberPolicyType.h"
+#import "DBTEAMLOGShmodelDisableDownloadsType.h"
+#import "DBTEAMLOGShmodelEnableDownloadsType.h"
 #import "DBTEAMLOGShmodelGroupShareType.h"
 #import "DBTEAMLOGShowcaseAccessGrantedType.h"
 #import "DBTEAMLOGShowcaseAddMemberType.h"
@@ -36887,6 +41399,7 @@
 #import "DBTEAMLOGStartedEnterpriseAdminSessionType.h"
 #import "DBTEAMLOGTeamActivityCreateReportFailType.h"
 #import "DBTEAMLOGTeamActivityCreateReportType.h"
+#import "DBTEAMLOGTeamBrandingPolicyChangedType.h"
 #import "DBTEAMLOGTeamExtensionsPolicyChangedType.h"
 #import "DBTEAMLOGTeamFolderChangeStatusType.h"
 #import "DBTEAMLOGTeamFolderCreateType.h"
@@ -36913,10 +41426,13 @@
 #import "DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamType.h"
 #import "DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamType.h"
 #import "DBTEAMLOGTeamMergeToType.h"
+#import "DBTEAMLOGTeamProfileAddBackgroundType.h"
 #import "DBTEAMLOGTeamProfileAddLogoType.h"
+#import "DBTEAMLOGTeamProfileChangeBackgroundType.h"
 #import "DBTEAMLOGTeamProfileChangeDefaultLanguageType.h"
 #import "DBTEAMLOGTeamProfileChangeLogoType.h"
 #import "DBTEAMLOGTeamProfileChangeNameType.h"
+#import "DBTEAMLOGTeamProfileRemoveBackgroundType.h"
 #import "DBTEAMLOGTeamProfileRemoveLogoType.h"
 #import "DBTEAMLOGTeamSelectiveSyncPolicyChangedType.h"
 #import "DBTEAMLOGTeamSelectiveSyncSettingsChangedType.h"
@@ -36942,6 +41458,8 @@
 
 @implementation DBTEAMLOGEventType
 
+@synthesize adminAlertingChangedAlertConfig = _adminAlertingChangedAlertConfig;
+@synthesize adminAlertingTriggeredAlert = _adminAlertingTriggeredAlert;
 @synthesize appLinkTeam = _appLinkTeam;
 @synthesize appLinkUser = _appLinkUser;
 @synthesize appUnlinkTeam = _appUnlinkTeam;
@@ -36956,6 +41474,28 @@
 @synthesize fileResolveComment = _fileResolveComment;
 @synthesize fileUnlikeComment = _fileUnlikeComment;
 @synthesize fileUnresolveComment = _fileUnresolveComment;
+@synthesize governancePolicyAddFolders = _governancePolicyAddFolders;
+@synthesize governancePolicyAddFolderFailed = _governancePolicyAddFolderFailed;
+@synthesize governancePolicyCreate = _governancePolicyCreate;
+@synthesize governancePolicyDelete = _governancePolicyDelete;
+@synthesize governancePolicyEditDetails = _governancePolicyEditDetails;
+@synthesize governancePolicyEditDuration = _governancePolicyEditDuration;
+@synthesize governancePolicyExportCreated = _governancePolicyExportCreated;
+@synthesize governancePolicyExportRemoved = _governancePolicyExportRemoved;
+@synthesize governancePolicyRemoveFolders = _governancePolicyRemoveFolders;
+@synthesize governancePolicyReportCreated = _governancePolicyReportCreated;
+@synthesize governancePolicyZipPartDownloaded = _governancePolicyZipPartDownloaded;
+@synthesize legalHoldsActivateAHold = _legalHoldsActivateAHold;
+@synthesize legalHoldsAddMembers = _legalHoldsAddMembers;
+@synthesize legalHoldsChangeHoldDetails = _legalHoldsChangeHoldDetails;
+@synthesize legalHoldsChangeHoldName = _legalHoldsChangeHoldName;
+@synthesize legalHoldsExportAHold = _legalHoldsExportAHold;
+@synthesize legalHoldsExportCancelled = _legalHoldsExportCancelled;
+@synthesize legalHoldsExportDownloaded = _legalHoldsExportDownloaded;
+@synthesize legalHoldsExportRemoved = _legalHoldsExportRemoved;
+@synthesize legalHoldsReleaseAHold = _legalHoldsReleaseAHold;
+@synthesize legalHoldsRemoveMembers = _legalHoldsRemoveMembers;
+@synthesize legalHoldsReportAHold = _legalHoldsReportAHold;
 @synthesize deviceChangeIpDesktop = _deviceChangeIpDesktop;
 @synthesize deviceChangeIpMobile = _deviceChangeIpMobile;
 @synthesize deviceChangeIpWeb = _deviceChangeIpWeb;
@@ -36965,7 +41505,10 @@
 @synthesize deviceLinkSuccess = _deviceLinkSuccess;
 @synthesize deviceManagementDisabled = _deviceManagementDisabled;
 @synthesize deviceManagementEnabled = _deviceManagementEnabled;
+@synthesize deviceSyncBackupStatusChanged = _deviceSyncBackupStatusChanged;
 @synthesize deviceUnlink = _deviceUnlink;
+@synthesize dropboxPasswordsExported = _dropboxPasswordsExported;
+@synthesize dropboxPasswordsNewDeviceEnrolled = _dropboxPasswordsNewDeviceEnrolled;
 @synthesize emmRefreshAuthToken = _emmRefreshAuthToken;
 @synthesize accountCaptureChangeAvailability = _accountCaptureChangeAvailability;
 @synthesize accountCaptureMigrateAccount = _accountCaptureMigrateAccount;
@@ -37020,17 +41563,6 @@
 @synthesize groupRemoveExternalId = _groupRemoveExternalId;
 @synthesize groupRemoveMember = _groupRemoveMember;
 @synthesize groupRename = _groupRename;
-@synthesize legalHoldsActivateAHold = _legalHoldsActivateAHold;
-@synthesize legalHoldsAddMembers = _legalHoldsAddMembers;
-@synthesize legalHoldsChangeHoldDetails = _legalHoldsChangeHoldDetails;
-@synthesize legalHoldsChangeHoldName = _legalHoldsChangeHoldName;
-@synthesize legalHoldsExportAHold = _legalHoldsExportAHold;
-@synthesize legalHoldsExportCancelled = _legalHoldsExportCancelled;
-@synthesize legalHoldsExportDownloaded = _legalHoldsExportDownloaded;
-@synthesize legalHoldsExportRemoved = _legalHoldsExportRemoved;
-@synthesize legalHoldsReleaseAHold = _legalHoldsReleaseAHold;
-@synthesize legalHoldsRemoveMembers = _legalHoldsRemoveMembers;
-@synthesize legalHoldsReportAHold = _legalHoldsReportAHold;
 @synthesize accountLockOrUnlocked = _accountLockOrUnlocked;
 @synthesize emmError = _emmError;
 @synthesize guestAdminSignedInViaTrustedTeams = _guestAdminSignedInViaTrustedTeams;
@@ -37052,6 +41584,7 @@
 @synthesize memberChangeExternalId = _memberChangeExternalId;
 @synthesize memberChangeMembershipType = _memberChangeMembershipType;
 @synthesize memberChangeName = _memberChangeName;
+@synthesize memberChangeResellerRole = _memberChangeResellerRole;
 @synthesize memberChangeStatus = _memberChangeStatus;
 @synthesize memberDeleteManualContacts = _memberDeleteManualContacts;
 @synthesize memberDeleteProfilePhoto = _memberDeleteProfilePhoto;
@@ -37120,6 +41653,8 @@
 @synthesize passwordChange = _passwordChange;
 @synthesize passwordReset = _passwordReset;
 @synthesize passwordResetAll = _passwordResetAll;
+@synthesize classificationCreateReport = _classificationCreateReport;
+@synthesize classificationCreateReportFail = _classificationCreateReportFail;
 @synthesize emmCreateExceptionsReport = _emmCreateExceptionsReport;
 @synthesize emmCreateUsageReport = _emmCreateUsageReport;
 @synthesize exportMembersReport = _exportMembersReport;
@@ -37217,6 +41752,8 @@
 @synthesize sharedLinkShare = _sharedLinkShare;
 @synthesize sharedLinkView = _sharedLinkView;
 @synthesize sharedNoteOpened = _sharedNoteOpened;
+@synthesize shmodelDisableDownloads = _shmodelDisableDownloads;
+@synthesize shmodelEnableDownloads = _shmodelEnableDownloads;
 @synthesize shmodelGroupShare = _shmodelGroupShare;
 @synthesize showcaseAccessGranted = _showcaseAccessGranted;
 @synthesize showcaseAddMember = _showcaseAddMember;
@@ -37262,6 +41799,8 @@
 @synthesize allowDownloadDisabled = _allowDownloadDisabled;
 @synthesize allowDownloadEnabled = _allowDownloadEnabled;
 @synthesize cameraUploadsPolicyChanged = _cameraUploadsPolicyChanged;
+@synthesize classificationChangePolicy = _classificationChangePolicy;
+@synthesize computerBackupPolicyChanged = _computerBackupPolicyChanged;
 @synthesize contentAdministrationPolicyChanged = _contentAdministrationPolicyChanged;
 @synthesize dataPlacementRestrictionChangePolicy = _dataPlacementRestrictionChangePolicy;
 @synthesize dataPlacementRestrictionSatisfyPolicy = _dataPlacementRestrictionSatisfyPolicy;
@@ -37319,6 +41858,7 @@
 @synthesize smartSyncNotOptOut = _smartSyncNotOptOut;
 @synthesize smartSyncOptOut = _smartSyncOptOut;
 @synthesize ssoChangePolicy = _ssoChangePolicy;
+@synthesize teamBrandingPolicyChanged = _teamBrandingPolicyChanged;
 @synthesize teamExtensionsPolicyChanged = _teamExtensionsPolicyChanged;
 @synthesize teamSelectiveSyncPolicyChanged = _teamSelectiveSyncPolicyChanged;
 @synthesize teamSharingWhitelistSubjectsChanged = _teamSharingWhitelistSubjectsChanged;
@@ -37333,10 +41873,13 @@
 @synthesize webSessionsChangeIdleLengthPolicy = _webSessionsChangeIdleLengthPolicy;
 @synthesize teamMergeFrom = _teamMergeFrom;
 @synthesize teamMergeTo = _teamMergeTo;
+@synthesize teamProfileAddBackground = _teamProfileAddBackground;
 @synthesize teamProfileAddLogo = _teamProfileAddLogo;
+@synthesize teamProfileChangeBackground = _teamProfileChangeBackground;
 @synthesize teamProfileChangeDefaultLanguage = _teamProfileChangeDefaultLanguage;
 @synthesize teamProfileChangeLogo = _teamProfileChangeLogo;
 @synthesize teamProfileChangeName = _teamProfileChangeName;
+@synthesize teamProfileRemoveBackground = _teamProfileRemoveBackground;
 @synthesize teamProfileRemoveLogo = _teamProfileRemoveLogo;
 @synthesize tfaAddBackupPhone = _tfaAddBackupPhone;
 @synthesize tfaAddSecurityKey = _tfaAddSecurityKey;
@@ -37372,6 +41915,26 @@
 @synthesize teamMergeRequestSentShownToSecondaryTeam = _teamMergeRequestSentShownToSecondaryTeam;
 
 #pragma mark - Constructors
+
+- (instancetype)initWithAdminAlertingChangedAlertConfig:
+    (DBTEAMLOGAdminAlertingChangedAlertConfigType *)adminAlertingChangedAlertConfig {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig;
+    _adminAlertingChangedAlertConfig = adminAlertingChangedAlertConfig;
+  }
+  return self;
+}
+
+- (instancetype)initWithAdminAlertingTriggeredAlert:
+    (DBTEAMLOGAdminAlertingTriggeredAlertType *)adminAlertingTriggeredAlert {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeAdminAlertingTriggeredAlert;
+    _adminAlertingTriggeredAlert = adminAlertingTriggeredAlert;
+  }
+  return self;
+}
 
 - (instancetype)initWithAppLinkTeam:(DBTEAMLOGAppLinkTeamType *)appLinkTeam {
   self = [super init];
@@ -37500,6 +42063,215 @@
   return self;
 }
 
+- (instancetype)initWithGovernancePolicyAddFolders:
+    (DBTEAMLOGGovernancePolicyAddFoldersType *)governancePolicyAddFolders {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyAddFolders;
+    _governancePolicyAddFolders = governancePolicyAddFolders;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyAddFolderFailed:
+    (DBTEAMLOGGovernancePolicyAddFolderFailedType *)governancePolicyAddFolderFailed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed;
+    _governancePolicyAddFolderFailed = governancePolicyAddFolderFailed;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyCreate:(DBTEAMLOGGovernancePolicyCreateType *)governancePolicyCreate {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyCreate;
+    _governancePolicyCreate = governancePolicyCreate;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyDelete:(DBTEAMLOGGovernancePolicyDeleteType *)governancePolicyDelete {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyDelete;
+    _governancePolicyDelete = governancePolicyDelete;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyEditDetails:
+    (DBTEAMLOGGovernancePolicyEditDetailsType *)governancePolicyEditDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyEditDetails;
+    _governancePolicyEditDetails = governancePolicyEditDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyEditDuration:
+    (DBTEAMLOGGovernancePolicyEditDurationType *)governancePolicyEditDuration {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyEditDuration;
+    _governancePolicyEditDuration = governancePolicyEditDuration;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyExportCreated:
+    (DBTEAMLOGGovernancePolicyExportCreatedType *)governancePolicyExportCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyExportCreated;
+    _governancePolicyExportCreated = governancePolicyExportCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyExportRemoved:
+    (DBTEAMLOGGovernancePolicyExportRemovedType *)governancePolicyExportRemoved {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyExportRemoved;
+    _governancePolicyExportRemoved = governancePolicyExportRemoved;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyRemoveFolders:
+    (DBTEAMLOGGovernancePolicyRemoveFoldersType *)governancePolicyRemoveFolders {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyRemoveFolders;
+    _governancePolicyRemoveFolders = governancePolicyRemoveFolders;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyReportCreated:
+    (DBTEAMLOGGovernancePolicyReportCreatedType *)governancePolicyReportCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyReportCreated;
+    _governancePolicyReportCreated = governancePolicyReportCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyZipPartDownloaded:
+    (DBTEAMLOGGovernancePolicyZipPartDownloadedType *)governancePolicyZipPartDownloaded {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded;
+    _governancePolicyZipPartDownloaded = governancePolicyZipPartDownloaded;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsActivateAHold:(DBTEAMLOGLegalHoldsActivateAHoldType *)legalHoldsActivateAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsActivateAHold;
+    _legalHoldsActivateAHold = legalHoldsActivateAHold;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsAddMembers:(DBTEAMLOGLegalHoldsAddMembersType *)legalHoldsAddMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsAddMembers;
+    _legalHoldsAddMembers = legalHoldsAddMembers;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsChangeHoldDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldDetailsType *)legalHoldsChangeHoldDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails;
+    _legalHoldsChangeHoldDetails = legalHoldsChangeHoldDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsChangeHoldName:(DBTEAMLOGLegalHoldsChangeHoldNameType *)legalHoldsChangeHoldName {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsChangeHoldName;
+    _legalHoldsChangeHoldName = legalHoldsChangeHoldName;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportAHold:(DBTEAMLOGLegalHoldsExportAHoldType *)legalHoldsExportAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsExportAHold;
+    _legalHoldsExportAHold = legalHoldsExportAHold;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportCancelled:(DBTEAMLOGLegalHoldsExportCancelledType *)legalHoldsExportCancelled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsExportCancelled;
+    _legalHoldsExportCancelled = legalHoldsExportCancelled;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportDownloaded:
+    (DBTEAMLOGLegalHoldsExportDownloadedType *)legalHoldsExportDownloaded {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsExportDownloaded;
+    _legalHoldsExportDownloaded = legalHoldsExportDownloaded;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportRemoved:(DBTEAMLOGLegalHoldsExportRemovedType *)legalHoldsExportRemoved {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsExportRemoved;
+    _legalHoldsExportRemoved = legalHoldsExportRemoved;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsReleaseAHold:(DBTEAMLOGLegalHoldsReleaseAHoldType *)legalHoldsReleaseAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsReleaseAHold;
+    _legalHoldsReleaseAHold = legalHoldsReleaseAHold;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsRemoveMembers:(DBTEAMLOGLegalHoldsRemoveMembersType *)legalHoldsRemoveMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsRemoveMembers;
+    _legalHoldsRemoveMembers = legalHoldsRemoveMembers;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsReportAHold:(DBTEAMLOGLegalHoldsReportAHoldType *)legalHoldsReportAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeLegalHoldsReportAHold;
+    _legalHoldsReportAHold = legalHoldsReportAHold;
+  }
+  return self;
+}
+
 - (instancetype)initWithDeviceChangeIpDesktop:(DBTEAMLOGDeviceChangeIpDesktopType *)deviceChangeIpDesktop {
   self = [super init];
   if (self) {
@@ -37582,11 +42354,40 @@
   return self;
 }
 
+- (instancetype)initWithDeviceSyncBackupStatusChanged:
+    (DBTEAMLOGDeviceSyncBackupStatusChangedType *)deviceSyncBackupStatusChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged;
+    _deviceSyncBackupStatusChanged = deviceSyncBackupStatusChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithDeviceUnlink:(DBTEAMLOGDeviceUnlinkType *)deviceUnlink {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeDeviceUnlink;
     _deviceUnlink = deviceUnlink;
+  }
+  return self;
+}
+
+- (instancetype)initWithDropboxPasswordsExported:(DBTEAMLOGDropboxPasswordsExportedType *)dropboxPasswordsExported {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeDropboxPasswordsExported;
+    _dropboxPasswordsExported = dropboxPasswordsExported;
+  }
+  return self;
+}
+
+- (instancetype)initWithDropboxPasswordsNewDeviceEnrolled:
+    (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *)dropboxPasswordsNewDeviceEnrolled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled;
+    _dropboxPasswordsNewDeviceEnrolled = dropboxPasswordsNewDeviceEnrolled;
   }
   return self;
 }
@@ -38093,107 +42894,6 @@
   return self;
 }
 
-- (instancetype)initWithLegalHoldsActivateAHold:(DBTEAMLOGLegalHoldsActivateAHoldType *)legalHoldsActivateAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsActivateAHold;
-    _legalHoldsActivateAHold = legalHoldsActivateAHold;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsAddMembers:(DBTEAMLOGLegalHoldsAddMembersType *)legalHoldsAddMembers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsAddMembers;
-    _legalHoldsAddMembers = legalHoldsAddMembers;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsChangeHoldDetails:
-    (DBTEAMLOGLegalHoldsChangeHoldDetailsType *)legalHoldsChangeHoldDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails;
-    _legalHoldsChangeHoldDetails = legalHoldsChangeHoldDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsChangeHoldName:(DBTEAMLOGLegalHoldsChangeHoldNameType *)legalHoldsChangeHoldName {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsChangeHoldName;
-    _legalHoldsChangeHoldName = legalHoldsChangeHoldName;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportAHold:(DBTEAMLOGLegalHoldsExportAHoldType *)legalHoldsExportAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsExportAHold;
-    _legalHoldsExportAHold = legalHoldsExportAHold;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportCancelled:(DBTEAMLOGLegalHoldsExportCancelledType *)legalHoldsExportCancelled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsExportCancelled;
-    _legalHoldsExportCancelled = legalHoldsExportCancelled;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportDownloaded:
-    (DBTEAMLOGLegalHoldsExportDownloadedType *)legalHoldsExportDownloaded {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsExportDownloaded;
-    _legalHoldsExportDownloaded = legalHoldsExportDownloaded;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportRemoved:(DBTEAMLOGLegalHoldsExportRemovedType *)legalHoldsExportRemoved {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsExportRemoved;
-    _legalHoldsExportRemoved = legalHoldsExportRemoved;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsReleaseAHold:(DBTEAMLOGLegalHoldsReleaseAHoldType *)legalHoldsReleaseAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsReleaseAHold;
-    _legalHoldsReleaseAHold = legalHoldsReleaseAHold;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsRemoveMembers:(DBTEAMLOGLegalHoldsRemoveMembersType *)legalHoldsRemoveMembers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsRemoveMembers;
-    _legalHoldsRemoveMembers = legalHoldsRemoveMembers;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsReportAHold:(DBTEAMLOGLegalHoldsReportAHoldType *)legalHoldsReportAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeLegalHoldsReportAHold;
-    _legalHoldsReportAHold = legalHoldsReportAHold;
-  }
-  return self;
-}
-
 - (instancetype)initWithAccountLockOrUnlocked:(DBTEAMLOGAccountLockOrUnlockedType *)accountLockOrUnlocked {
   self = [super init];
   if (self) {
@@ -38383,6 +43083,15 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeMemberChangeName;
     _memberChangeName = memberChangeName;
+  }
+  return self;
+}
+
+- (instancetype)initWithMemberChangeResellerRole:(DBTEAMLOGMemberChangeResellerRoleType *)memberChangeResellerRole {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeMemberChangeResellerRole;
+    _memberChangeResellerRole = memberChangeResellerRole;
   }
   return self;
 }
@@ -39012,6 +43721,26 @@
   if (self) {
     _tag = DBTEAMLOGEventTypePasswordResetAll;
     _passwordResetAll = passwordResetAll;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationCreateReport:
+    (DBTEAMLOGClassificationCreateReportType *)classificationCreateReport {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeClassificationCreateReport;
+    _classificationCreateReport = classificationCreateReport;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationCreateReportFail:
+    (DBTEAMLOGClassificationCreateReportFailType *)classificationCreateReportFail {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeClassificationCreateReportFail;
+    _classificationCreateReportFail = classificationCreateReportFail;
   }
   return self;
 }
@@ -39937,6 +44666,24 @@
   return self;
 }
 
+- (instancetype)initWithShmodelDisableDownloads:(DBTEAMLOGShmodelDisableDownloadsType *)shmodelDisableDownloads {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeShmodelDisableDownloads;
+    _shmodelDisableDownloads = shmodelDisableDownloads;
+  }
+  return self;
+}
+
+- (instancetype)initWithShmodelEnableDownloads:(DBTEAMLOGShmodelEnableDownloadsType *)shmodelEnableDownloads {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeShmodelEnableDownloads;
+    _shmodelEnableDownloads = shmodelEnableDownloads;
+  }
+  return self;
+}
+
 - (instancetype)initWithShmodelGroupShare:(DBTEAMLOGShmodelGroupShareType *)shmodelGroupShare {
   self = [super init];
   if (self) {
@@ -40344,6 +45091,26 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeCameraUploadsPolicyChanged;
     _cameraUploadsPolicyChanged = cameraUploadsPolicyChanged;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationChangePolicy:
+    (DBTEAMLOGClassificationChangePolicyType *)classificationChangePolicy {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeClassificationChangePolicy;
+    _classificationChangePolicy = classificationChangePolicy;
+  }
+  return self;
+}
+
+- (instancetype)initWithComputerBackupPolicyChanged:
+    (DBTEAMLOGComputerBackupPolicyChangedType *)computerBackupPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeComputerBackupPolicyChanged;
+    _computerBackupPolicyChanged = computerBackupPolicyChanged;
   }
   return self;
 }
@@ -40899,6 +45666,15 @@
   return self;
 }
 
+- (instancetype)initWithTeamBrandingPolicyChanged:(DBTEAMLOGTeamBrandingPolicyChangedType *)teamBrandingPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamBrandingPolicyChanged;
+    _teamBrandingPolicyChanged = teamBrandingPolicyChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamExtensionsPolicyChanged:
     (DBTEAMLOGTeamExtensionsPolicyChangedType *)teamExtensionsPolicyChanged {
   self = [super init];
@@ -41031,11 +45807,30 @@
   return self;
 }
 
+- (instancetype)initWithTeamProfileAddBackground:(DBTEAMLOGTeamProfileAddBackgroundType *)teamProfileAddBackground {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamProfileAddBackground;
+    _teamProfileAddBackground = teamProfileAddBackground;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamProfileAddLogo:(DBTEAMLOGTeamProfileAddLogoType *)teamProfileAddLogo {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeTeamProfileAddLogo;
     _teamProfileAddLogo = teamProfileAddLogo;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileChangeBackground:
+    (DBTEAMLOGTeamProfileChangeBackgroundType *)teamProfileChangeBackground {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamProfileChangeBackground;
+    _teamProfileChangeBackground = teamProfileChangeBackground;
   }
   return self;
 }
@@ -41064,6 +45859,16 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeTeamProfileChangeName;
     _teamProfileChangeName = teamProfileChangeName;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileRemoveBackground:
+    (DBTEAMLOGTeamProfileRemoveBackgroundType *)teamProfileRemoveBackground {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeTeamProfileRemoveBackground;
+    _teamProfileRemoveBackground = teamProfileRemoveBackground;
   }
   return self;
 }
@@ -41393,6 +46198,24 @@
 
 #pragma mark - Instance field accessors
 
+- (DBTEAMLOGAdminAlertingChangedAlertConfigType *)adminAlertingChangedAlertConfig {
+  if (![self isAdminAlertingChangedAlertConfig]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig, but was %@.", [self tagName]];
+  }
+  return _adminAlertingChangedAlertConfig;
+}
+
+- (DBTEAMLOGAdminAlertingTriggeredAlertType *)adminAlertingTriggeredAlert {
+  if (![self isAdminAlertingTriggeredAlert]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeAdminAlertingTriggeredAlert, but was %@.", [self tagName]];
+  }
+  return _adminAlertingTriggeredAlert;
+}
+
 - (DBTEAMLOGAppLinkTeamType *)appLinkTeam {
   if (![self isAppLinkTeam]) {
     [NSException raise:@"IllegalStateException"
@@ -41506,6 +46329,195 @@
   return _fileUnresolveComment;
 }
 
+- (DBTEAMLOGGovernancePolicyAddFoldersType *)governancePolicyAddFolders {
+  if (![self isGovernancePolicyAddFolders]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyAddFolders, but was %@.", [self tagName]];
+  }
+  return _governancePolicyAddFolders;
+}
+
+- (DBTEAMLOGGovernancePolicyAddFolderFailedType *)governancePolicyAddFolderFailed {
+  if (![self isGovernancePolicyAddFolderFailed]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed, but was %@.", [self tagName]];
+  }
+  return _governancePolicyAddFolderFailed;
+}
+
+- (DBTEAMLOGGovernancePolicyCreateType *)governancePolicyCreate {
+  if (![self isGovernancePolicyCreate]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyCreate, but was %@.", [self tagName]];
+  }
+  return _governancePolicyCreate;
+}
+
+- (DBTEAMLOGGovernancePolicyDeleteType *)governancePolicyDelete {
+  if (![self isGovernancePolicyDelete]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyDelete, but was %@.", [self tagName]];
+  }
+  return _governancePolicyDelete;
+}
+
+- (DBTEAMLOGGovernancePolicyEditDetailsType *)governancePolicyEditDetails {
+  if (![self isGovernancePolicyEditDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyEditDetails, but was %@.", [self tagName]];
+  }
+  return _governancePolicyEditDetails;
+}
+
+- (DBTEAMLOGGovernancePolicyEditDurationType *)governancePolicyEditDuration {
+  if (![self isGovernancePolicyEditDuration]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyEditDuration, but was %@.", [self tagName]];
+  }
+  return _governancePolicyEditDuration;
+}
+
+- (DBTEAMLOGGovernancePolicyExportCreatedType *)governancePolicyExportCreated {
+  if (![self isGovernancePolicyExportCreated]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyExportCreated, but was %@.", [self tagName]];
+  }
+  return _governancePolicyExportCreated;
+}
+
+- (DBTEAMLOGGovernancePolicyExportRemovedType *)governancePolicyExportRemoved {
+  if (![self isGovernancePolicyExportRemoved]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyExportRemoved, but was %@.", [self tagName]];
+  }
+  return _governancePolicyExportRemoved;
+}
+
+- (DBTEAMLOGGovernancePolicyRemoveFoldersType *)governancePolicyRemoveFolders {
+  if (![self isGovernancePolicyRemoveFolders]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyRemoveFolders, but was %@.", [self tagName]];
+  }
+  return _governancePolicyRemoveFolders;
+}
+
+- (DBTEAMLOGGovernancePolicyReportCreatedType *)governancePolicyReportCreated {
+  if (![self isGovernancePolicyReportCreated]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyReportCreated, but was %@.", [self tagName]];
+  }
+  return _governancePolicyReportCreated;
+}
+
+- (DBTEAMLOGGovernancePolicyZipPartDownloadedType *)governancePolicyZipPartDownloaded {
+  if (![self isGovernancePolicyZipPartDownloaded]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded, but was %@.",
+                       [self tagName]];
+  }
+  return _governancePolicyZipPartDownloaded;
+}
+
+- (DBTEAMLOGLegalHoldsActivateAHoldType *)legalHoldsActivateAHold {
+  if (![self isLegalHoldsActivateAHold]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsActivateAHold, but was %@.", [self tagName]];
+  }
+  return _legalHoldsActivateAHold;
+}
+
+- (DBTEAMLOGLegalHoldsAddMembersType *)legalHoldsAddMembers {
+  if (![self isLegalHoldsAddMembers]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsAddMembers, but was %@.", [self tagName]];
+  }
+  return _legalHoldsAddMembers;
+}
+
+- (DBTEAMLOGLegalHoldsChangeHoldDetailsType *)legalHoldsChangeHoldDetails {
+  if (![self isLegalHoldsChangeHoldDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails, but was %@.", [self tagName]];
+  }
+  return _legalHoldsChangeHoldDetails;
+}
+
+- (DBTEAMLOGLegalHoldsChangeHoldNameType *)legalHoldsChangeHoldName {
+  if (![self isLegalHoldsChangeHoldName]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsChangeHoldName, but was %@.", [self tagName]];
+  }
+  return _legalHoldsChangeHoldName;
+}
+
+- (DBTEAMLOGLegalHoldsExportAHoldType *)legalHoldsExportAHold {
+  if (![self isLegalHoldsExportAHold]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportAHold, but was %@.", [self tagName]];
+  }
+  return _legalHoldsExportAHold;
+}
+
+- (DBTEAMLOGLegalHoldsExportCancelledType *)legalHoldsExportCancelled {
+  if (![self isLegalHoldsExportCancelled]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportCancelled, but was %@.", [self tagName]];
+  }
+  return _legalHoldsExportCancelled;
+}
+
+- (DBTEAMLOGLegalHoldsExportDownloadedType *)legalHoldsExportDownloaded {
+  if (![self isLegalHoldsExportDownloaded]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportDownloaded, but was %@.", [self tagName]];
+  }
+  return _legalHoldsExportDownloaded;
+}
+
+- (DBTEAMLOGLegalHoldsExportRemovedType *)legalHoldsExportRemoved {
+  if (![self isLegalHoldsExportRemoved]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportRemoved, but was %@.", [self tagName]];
+  }
+  return _legalHoldsExportRemoved;
+}
+
+- (DBTEAMLOGLegalHoldsReleaseAHoldType *)legalHoldsReleaseAHold {
+  if (![self isLegalHoldsReleaseAHold]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsReleaseAHold, but was %@.", [self tagName]];
+  }
+  return _legalHoldsReleaseAHold;
+}
+
+- (DBTEAMLOGLegalHoldsRemoveMembersType *)legalHoldsRemoveMembers {
+  if (![self isLegalHoldsRemoveMembers]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsRemoveMembers, but was %@.", [self tagName]];
+  }
+  return _legalHoldsRemoveMembers;
+}
+
+- (DBTEAMLOGLegalHoldsReportAHoldType *)legalHoldsReportAHold {
+  if (![self isLegalHoldsReportAHold]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsReportAHold, but was %@.", [self tagName]];
+  }
+  return _legalHoldsReportAHold;
+}
+
 - (DBTEAMLOGDeviceChangeIpDesktopType *)deviceChangeIpDesktop {
   if (![self isDeviceChangeIpDesktop]) {
     [NSException raise:@"IllegalStateException"
@@ -41581,12 +46593,39 @@
   return _deviceManagementEnabled;
 }
 
+- (DBTEAMLOGDeviceSyncBackupStatusChangedType *)deviceSyncBackupStatusChanged {
+  if (![self isDeviceSyncBackupStatusChanged]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged, but was %@.", [self tagName]];
+  }
+  return _deviceSyncBackupStatusChanged;
+}
+
 - (DBTEAMLOGDeviceUnlinkType *)deviceUnlink {
   if (![self isDeviceUnlink]) {
     [NSException raise:@"IllegalStateException"
                 format:@"Invalid tag: required DBTEAMLOGEventTypeDeviceUnlink, but was %@.", [self tagName]];
   }
   return _deviceUnlink;
+}
+
+- (DBTEAMLOGDropboxPasswordsExportedType *)dropboxPasswordsExported {
+  if (![self isDropboxPasswordsExported]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeDropboxPasswordsExported, but was %@.", [self tagName]];
+  }
+  return _dropboxPasswordsExported;
+}
+
+- (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *)dropboxPasswordsNewDeviceEnrolled {
+  if (![self isDropboxPasswordsNewDeviceEnrolled]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled, but was %@.",
+                       [self tagName]];
+  }
+  return _dropboxPasswordsNewDeviceEnrolled;
 }
 
 - (DBTEAMLOGEmmRefreshAuthTokenType *)emmRefreshAuthToken {
@@ -42039,98 +47078,6 @@
   return _groupRename;
 }
 
-- (DBTEAMLOGLegalHoldsActivateAHoldType *)legalHoldsActivateAHold {
-  if (![self isLegalHoldsActivateAHold]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsActivateAHold, but was %@.", [self tagName]];
-  }
-  return _legalHoldsActivateAHold;
-}
-
-- (DBTEAMLOGLegalHoldsAddMembersType *)legalHoldsAddMembers {
-  if (![self isLegalHoldsAddMembers]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsAddMembers, but was %@.", [self tagName]];
-  }
-  return _legalHoldsAddMembers;
-}
-
-- (DBTEAMLOGLegalHoldsChangeHoldDetailsType *)legalHoldsChangeHoldDetails {
-  if (![self isLegalHoldsChangeHoldDetails]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails, but was %@.", [self tagName]];
-  }
-  return _legalHoldsChangeHoldDetails;
-}
-
-- (DBTEAMLOGLegalHoldsChangeHoldNameType *)legalHoldsChangeHoldName {
-  if (![self isLegalHoldsChangeHoldName]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsChangeHoldName, but was %@.", [self tagName]];
-  }
-  return _legalHoldsChangeHoldName;
-}
-
-- (DBTEAMLOGLegalHoldsExportAHoldType *)legalHoldsExportAHold {
-  if (![self isLegalHoldsExportAHold]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportAHold, but was %@.", [self tagName]];
-  }
-  return _legalHoldsExportAHold;
-}
-
-- (DBTEAMLOGLegalHoldsExportCancelledType *)legalHoldsExportCancelled {
-  if (![self isLegalHoldsExportCancelled]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportCancelled, but was %@.", [self tagName]];
-  }
-  return _legalHoldsExportCancelled;
-}
-
-- (DBTEAMLOGLegalHoldsExportDownloadedType *)legalHoldsExportDownloaded {
-  if (![self isLegalHoldsExportDownloaded]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportDownloaded, but was %@.", [self tagName]];
-  }
-  return _legalHoldsExportDownloaded;
-}
-
-- (DBTEAMLOGLegalHoldsExportRemovedType *)legalHoldsExportRemoved {
-  if (![self isLegalHoldsExportRemoved]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsExportRemoved, but was %@.", [self tagName]];
-  }
-  return _legalHoldsExportRemoved;
-}
-
-- (DBTEAMLOGLegalHoldsReleaseAHoldType *)legalHoldsReleaseAHold {
-  if (![self isLegalHoldsReleaseAHold]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsReleaseAHold, but was %@.", [self tagName]];
-  }
-  return _legalHoldsReleaseAHold;
-}
-
-- (DBTEAMLOGLegalHoldsRemoveMembersType *)legalHoldsRemoveMembers {
-  if (![self isLegalHoldsRemoveMembers]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsRemoveMembers, but was %@.", [self tagName]];
-  }
-  return _legalHoldsRemoveMembers;
-}
-
-- (DBTEAMLOGLegalHoldsReportAHoldType *)legalHoldsReportAHold {
-  if (![self isLegalHoldsReportAHold]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGEventTypeLegalHoldsReportAHold, but was %@.", [self tagName]];
-  }
-  return _legalHoldsReportAHold;
-}
-
 - (DBTEAMLOGAccountLockOrUnlockedType *)accountLockOrUnlocked {
   if (![self isAccountLockOrUnlocked]) {
     [NSException raise:@"IllegalStateException"
@@ -42302,6 +47249,15 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeMemberChangeName, but was %@.", [self tagName]];
   }
   return _memberChangeName;
+}
+
+- (DBTEAMLOGMemberChangeResellerRoleType *)memberChangeResellerRole {
+  if (![self isMemberChangeResellerRole]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeMemberChangeResellerRole, but was %@.", [self tagName]];
+  }
+  return _memberChangeResellerRole;
 }
 
 - (DBTEAMLOGMemberChangeStatusType *)memberChangeStatus {
@@ -42869,6 +47825,24 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypePasswordResetAll, but was %@.", [self tagName]];
   }
   return _passwordResetAll;
+}
+
+- (DBTEAMLOGClassificationCreateReportType *)classificationCreateReport {
+  if (![self isClassificationCreateReport]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeClassificationCreateReport, but was %@.", [self tagName]];
+  }
+  return _classificationCreateReport;
+}
+
+- (DBTEAMLOGClassificationCreateReportFailType *)classificationCreateReportFail {
+  if (![self isClassificationCreateReportFail]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeClassificationCreateReportFail, but was %@.", [self tagName]];
+  }
+  return _classificationCreateReportFail;
 }
 
 - (DBTEAMLOGEmmCreateExceptionsReportType *)emmCreateExceptionsReport {
@@ -43703,6 +48677,22 @@
   return _sharedNoteOpened;
 }
 
+- (DBTEAMLOGShmodelDisableDownloadsType *)shmodelDisableDownloads {
+  if (![self isShmodelDisableDownloads]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeShmodelDisableDownloads, but was %@.", [self tagName]];
+  }
+  return _shmodelDisableDownloads;
+}
+
+- (DBTEAMLOGShmodelEnableDownloadsType *)shmodelEnableDownloads {
+  if (![self isShmodelEnableDownloads]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeShmodelEnableDownloads, but was %@.", [self tagName]];
+  }
+  return _shmodelEnableDownloads;
+}
+
 - (DBTEAMLOGShmodelGroupShareType *)shmodelGroupShare {
   if (![self isShmodelGroupShare]) {
     [NSException raise:@"IllegalStateException"
@@ -44070,6 +49060,24 @@
         format:@"Invalid tag: required DBTEAMLOGEventTypeCameraUploadsPolicyChanged, but was %@.", [self tagName]];
   }
   return _cameraUploadsPolicyChanged;
+}
+
+- (DBTEAMLOGClassificationChangePolicyType *)classificationChangePolicy {
+  if (![self isClassificationChangePolicy]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeClassificationChangePolicy, but was %@.", [self tagName]];
+  }
+  return _classificationChangePolicy;
+}
+
+- (DBTEAMLOGComputerBackupPolicyChangedType *)computerBackupPolicyChanged {
+  if (![self isComputerBackupPolicyChanged]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeComputerBackupPolicyChanged, but was %@.", [self tagName]];
+  }
+  return _computerBackupPolicyChanged;
 }
 
 - (DBTEAMLOGContentAdministrationPolicyChangedType *)contentAdministrationPolicyChanged {
@@ -44573,6 +49581,15 @@
   return _ssoChangePolicy;
 }
 
+- (DBTEAMLOGTeamBrandingPolicyChangedType *)teamBrandingPolicyChanged {
+  if (![self isTeamBrandingPolicyChanged]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamBrandingPolicyChanged, but was %@.", [self tagName]];
+  }
+  return _teamBrandingPolicyChanged;
+}
+
 - (DBTEAMLOGTeamExtensionsPolicyChangedType *)teamExtensionsPolicyChanged {
   if (![self isTeamExtensionsPolicyChanged]) {
     [NSException
@@ -44692,12 +49709,30 @@
   return _teamMergeTo;
 }
 
+- (DBTEAMLOGTeamProfileAddBackgroundType *)teamProfileAddBackground {
+  if (![self isTeamProfileAddBackground]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamProfileAddBackground, but was %@.", [self tagName]];
+  }
+  return _teamProfileAddBackground;
+}
+
 - (DBTEAMLOGTeamProfileAddLogoType *)teamProfileAddLogo {
   if (![self isTeamProfileAddLogo]) {
     [NSException raise:@"IllegalStateException"
                 format:@"Invalid tag: required DBTEAMLOGEventTypeTeamProfileAddLogo, but was %@.", [self tagName]];
   }
   return _teamProfileAddLogo;
+}
+
+- (DBTEAMLOGTeamProfileChangeBackgroundType *)teamProfileChangeBackground {
+  if (![self isTeamProfileChangeBackground]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamProfileChangeBackground, but was %@.", [self tagName]];
+  }
+  return _teamProfileChangeBackground;
 }
 
 - (DBTEAMLOGTeamProfileChangeDefaultLanguageType *)teamProfileChangeDefaultLanguage {
@@ -44723,6 +49758,15 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeTeamProfileChangeName, but was %@.", [self tagName]];
   }
   return _teamProfileChangeName;
+}
+
+- (DBTEAMLOGTeamProfileRemoveBackgroundType *)teamProfileRemoveBackground {
+  if (![self isTeamProfileRemoveBackground]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeTeamProfileRemoveBackground, but was %@.", [self tagName]];
+  }
+  return _teamProfileRemoveBackground;
 }
 
 - (DBTEAMLOGTeamProfileRemoveLogoType *)teamProfileRemoveLogo {
@@ -45023,6 +50067,14 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAdminAlertingChangedAlertConfig {
+  return _tag == DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig;
+}
+
+- (BOOL)isAdminAlertingTriggeredAlert {
+  return _tag == DBTEAMLOGEventTypeAdminAlertingTriggeredAlert;
+}
+
 - (BOOL)isAppLinkTeam {
   return _tag == DBTEAMLOGEventTypeAppLinkTeam;
 }
@@ -45079,6 +50131,94 @@
   return _tag == DBTEAMLOGEventTypeFileUnresolveComment;
 }
 
+- (BOOL)isGovernancePolicyAddFolders {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyAddFolders;
+}
+
+- (BOOL)isGovernancePolicyAddFolderFailed {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed;
+}
+
+- (BOOL)isGovernancePolicyCreate {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyCreate;
+}
+
+- (BOOL)isGovernancePolicyDelete {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyDelete;
+}
+
+- (BOOL)isGovernancePolicyEditDetails {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyEditDetails;
+}
+
+- (BOOL)isGovernancePolicyEditDuration {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyEditDuration;
+}
+
+- (BOOL)isGovernancePolicyExportCreated {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyExportCreated;
+}
+
+- (BOOL)isGovernancePolicyExportRemoved {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyExportRemoved;
+}
+
+- (BOOL)isGovernancePolicyRemoveFolders {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyRemoveFolders;
+}
+
+- (BOOL)isGovernancePolicyReportCreated {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyReportCreated;
+}
+
+- (BOOL)isGovernancePolicyZipPartDownloaded {
+  return _tag == DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded;
+}
+
+- (BOOL)isLegalHoldsActivateAHold {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsActivateAHold;
+}
+
+- (BOOL)isLegalHoldsAddMembers {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsAddMembers;
+}
+
+- (BOOL)isLegalHoldsChangeHoldDetails {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails;
+}
+
+- (BOOL)isLegalHoldsChangeHoldName {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsChangeHoldName;
+}
+
+- (BOOL)isLegalHoldsExportAHold {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsExportAHold;
+}
+
+- (BOOL)isLegalHoldsExportCancelled {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsExportCancelled;
+}
+
+- (BOOL)isLegalHoldsExportDownloaded {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsExportDownloaded;
+}
+
+- (BOOL)isLegalHoldsExportRemoved {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsExportRemoved;
+}
+
+- (BOOL)isLegalHoldsReleaseAHold {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsReleaseAHold;
+}
+
+- (BOOL)isLegalHoldsRemoveMembers {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsRemoveMembers;
+}
+
+- (BOOL)isLegalHoldsReportAHold {
+  return _tag == DBTEAMLOGEventTypeLegalHoldsReportAHold;
+}
+
 - (BOOL)isDeviceChangeIpDesktop {
   return _tag == DBTEAMLOGEventTypeDeviceChangeIpDesktop;
 }
@@ -45115,8 +50255,20 @@
   return _tag == DBTEAMLOGEventTypeDeviceManagementEnabled;
 }
 
+- (BOOL)isDeviceSyncBackupStatusChanged {
+  return _tag == DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged;
+}
+
 - (BOOL)isDeviceUnlink {
   return _tag == DBTEAMLOGEventTypeDeviceUnlink;
+}
+
+- (BOOL)isDropboxPasswordsExported {
+  return _tag == DBTEAMLOGEventTypeDropboxPasswordsExported;
+}
+
+- (BOOL)isDropboxPasswordsNewDeviceEnrolled {
+  return _tag == DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled;
 }
 
 - (BOOL)isEmmRefreshAuthToken {
@@ -45335,50 +50487,6 @@
   return _tag == DBTEAMLOGEventTypeGroupRename;
 }
 
-- (BOOL)isLegalHoldsActivateAHold {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsActivateAHold;
-}
-
-- (BOOL)isLegalHoldsAddMembers {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsAddMembers;
-}
-
-- (BOOL)isLegalHoldsChangeHoldDetails {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails;
-}
-
-- (BOOL)isLegalHoldsChangeHoldName {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsChangeHoldName;
-}
-
-- (BOOL)isLegalHoldsExportAHold {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsExportAHold;
-}
-
-- (BOOL)isLegalHoldsExportCancelled {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsExportCancelled;
-}
-
-- (BOOL)isLegalHoldsExportDownloaded {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsExportDownloaded;
-}
-
-- (BOOL)isLegalHoldsExportRemoved {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsExportRemoved;
-}
-
-- (BOOL)isLegalHoldsReleaseAHold {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsReleaseAHold;
-}
-
-- (BOOL)isLegalHoldsRemoveMembers {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsRemoveMembers;
-}
-
-- (BOOL)isLegalHoldsReportAHold {
-  return _tag == DBTEAMLOGEventTypeLegalHoldsReportAHold;
-}
-
 - (BOOL)isAccountLockOrUnlocked {
   return _tag == DBTEAMLOGEventTypeAccountLockOrUnlocked;
 }
@@ -45461,6 +50569,10 @@
 
 - (BOOL)isMemberChangeName {
   return _tag == DBTEAMLOGEventTypeMemberChangeName;
+}
+
+- (BOOL)isMemberChangeResellerRole {
+  return _tag == DBTEAMLOGEventTypeMemberChangeResellerRole;
 }
 
 - (BOOL)isMemberChangeStatus {
@@ -45733,6 +50845,14 @@
 
 - (BOOL)isPasswordResetAll {
   return _tag == DBTEAMLOGEventTypePasswordResetAll;
+}
+
+- (BOOL)isClassificationCreateReport {
+  return _tag == DBTEAMLOGEventTypeClassificationCreateReport;
+}
+
+- (BOOL)isClassificationCreateReportFail {
+  return _tag == DBTEAMLOGEventTypeClassificationCreateReportFail;
 }
 
 - (BOOL)isEmmCreateExceptionsReport {
@@ -46123,6 +51243,14 @@
   return _tag == DBTEAMLOGEventTypeSharedNoteOpened;
 }
 
+- (BOOL)isShmodelDisableDownloads {
+  return _tag == DBTEAMLOGEventTypeShmodelDisableDownloads;
+}
+
+- (BOOL)isShmodelEnableDownloads {
+  return _tag == DBTEAMLOGEventTypeShmodelEnableDownloads;
+}
+
 - (BOOL)isShmodelGroupShare {
   return _tag == DBTEAMLOGEventTypeShmodelGroupShare;
 }
@@ -46301,6 +51429,14 @@
 
 - (BOOL)isCameraUploadsPolicyChanged {
   return _tag == DBTEAMLOGEventTypeCameraUploadsPolicyChanged;
+}
+
+- (BOOL)isClassificationChangePolicy {
+  return _tag == DBTEAMLOGEventTypeClassificationChangePolicy;
+}
+
+- (BOOL)isComputerBackupPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeComputerBackupPolicyChanged;
 }
 
 - (BOOL)isContentAdministrationPolicyChanged {
@@ -46531,6 +51667,10 @@
   return _tag == DBTEAMLOGEventTypeSsoChangePolicy;
 }
 
+- (BOOL)isTeamBrandingPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeTeamBrandingPolicyChanged;
+}
+
 - (BOOL)isTeamExtensionsPolicyChanged {
   return _tag == DBTEAMLOGEventTypeTeamExtensionsPolicyChanged;
 }
@@ -46587,8 +51727,16 @@
   return _tag == DBTEAMLOGEventTypeTeamMergeTo;
 }
 
+- (BOOL)isTeamProfileAddBackground {
+  return _tag == DBTEAMLOGEventTypeTeamProfileAddBackground;
+}
+
 - (BOOL)isTeamProfileAddLogo {
   return _tag == DBTEAMLOGEventTypeTeamProfileAddLogo;
+}
+
+- (BOOL)isTeamProfileChangeBackground {
+  return _tag == DBTEAMLOGEventTypeTeamProfileChangeBackground;
 }
 
 - (BOOL)isTeamProfileChangeDefaultLanguage {
@@ -46601,6 +51749,10 @@
 
 - (BOOL)isTeamProfileChangeName {
   return _tag == DBTEAMLOGEventTypeTeamProfileChangeName;
+}
+
+- (BOOL)isTeamProfileRemoveBackground {
+  return _tag == DBTEAMLOGEventTypeTeamProfileRemoveBackground;
 }
 
 - (BOOL)isTeamProfileRemoveLogo {
@@ -46741,6 +51893,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig:
+    return @"DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig";
+  case DBTEAMLOGEventTypeAdminAlertingTriggeredAlert:
+    return @"DBTEAMLOGEventTypeAdminAlertingTriggeredAlert";
   case DBTEAMLOGEventTypeAppLinkTeam:
     return @"DBTEAMLOGEventTypeAppLinkTeam";
   case DBTEAMLOGEventTypeAppLinkUser:
@@ -46769,6 +51925,50 @@
     return @"DBTEAMLOGEventTypeFileUnlikeComment";
   case DBTEAMLOGEventTypeFileUnresolveComment:
     return @"DBTEAMLOGEventTypeFileUnresolveComment";
+  case DBTEAMLOGEventTypeGovernancePolicyAddFolders:
+    return @"DBTEAMLOGEventTypeGovernancePolicyAddFolders";
+  case DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed:
+    return @"DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed";
+  case DBTEAMLOGEventTypeGovernancePolicyCreate:
+    return @"DBTEAMLOGEventTypeGovernancePolicyCreate";
+  case DBTEAMLOGEventTypeGovernancePolicyDelete:
+    return @"DBTEAMLOGEventTypeGovernancePolicyDelete";
+  case DBTEAMLOGEventTypeGovernancePolicyEditDetails:
+    return @"DBTEAMLOGEventTypeGovernancePolicyEditDetails";
+  case DBTEAMLOGEventTypeGovernancePolicyEditDuration:
+    return @"DBTEAMLOGEventTypeGovernancePolicyEditDuration";
+  case DBTEAMLOGEventTypeGovernancePolicyExportCreated:
+    return @"DBTEAMLOGEventTypeGovernancePolicyExportCreated";
+  case DBTEAMLOGEventTypeGovernancePolicyExportRemoved:
+    return @"DBTEAMLOGEventTypeGovernancePolicyExportRemoved";
+  case DBTEAMLOGEventTypeGovernancePolicyRemoveFolders:
+    return @"DBTEAMLOGEventTypeGovernancePolicyRemoveFolders";
+  case DBTEAMLOGEventTypeGovernancePolicyReportCreated:
+    return @"DBTEAMLOGEventTypeGovernancePolicyReportCreated";
+  case DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded:
+    return @"DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded";
+  case DBTEAMLOGEventTypeLegalHoldsActivateAHold:
+    return @"DBTEAMLOGEventTypeLegalHoldsActivateAHold";
+  case DBTEAMLOGEventTypeLegalHoldsAddMembers:
+    return @"DBTEAMLOGEventTypeLegalHoldsAddMembers";
+  case DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails:
+    return @"DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails";
+  case DBTEAMLOGEventTypeLegalHoldsChangeHoldName:
+    return @"DBTEAMLOGEventTypeLegalHoldsChangeHoldName";
+  case DBTEAMLOGEventTypeLegalHoldsExportAHold:
+    return @"DBTEAMLOGEventTypeLegalHoldsExportAHold";
+  case DBTEAMLOGEventTypeLegalHoldsExportCancelled:
+    return @"DBTEAMLOGEventTypeLegalHoldsExportCancelled";
+  case DBTEAMLOGEventTypeLegalHoldsExportDownloaded:
+    return @"DBTEAMLOGEventTypeLegalHoldsExportDownloaded";
+  case DBTEAMLOGEventTypeLegalHoldsExportRemoved:
+    return @"DBTEAMLOGEventTypeLegalHoldsExportRemoved";
+  case DBTEAMLOGEventTypeLegalHoldsReleaseAHold:
+    return @"DBTEAMLOGEventTypeLegalHoldsReleaseAHold";
+  case DBTEAMLOGEventTypeLegalHoldsRemoveMembers:
+    return @"DBTEAMLOGEventTypeLegalHoldsRemoveMembers";
+  case DBTEAMLOGEventTypeLegalHoldsReportAHold:
+    return @"DBTEAMLOGEventTypeLegalHoldsReportAHold";
   case DBTEAMLOGEventTypeDeviceChangeIpDesktop:
     return @"DBTEAMLOGEventTypeDeviceChangeIpDesktop";
   case DBTEAMLOGEventTypeDeviceChangeIpMobile:
@@ -46787,8 +51987,14 @@
     return @"DBTEAMLOGEventTypeDeviceManagementDisabled";
   case DBTEAMLOGEventTypeDeviceManagementEnabled:
     return @"DBTEAMLOGEventTypeDeviceManagementEnabled";
+  case DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged:
+    return @"DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged";
   case DBTEAMLOGEventTypeDeviceUnlink:
     return @"DBTEAMLOGEventTypeDeviceUnlink";
+  case DBTEAMLOGEventTypeDropboxPasswordsExported:
+    return @"DBTEAMLOGEventTypeDropboxPasswordsExported";
+  case DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled:
+    return @"DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled";
   case DBTEAMLOGEventTypeEmmRefreshAuthToken:
     return @"DBTEAMLOGEventTypeEmmRefreshAuthToken";
   case DBTEAMLOGEventTypeAccountCaptureChangeAvailability:
@@ -46897,28 +52103,6 @@
     return @"DBTEAMLOGEventTypeGroupRemoveMember";
   case DBTEAMLOGEventTypeGroupRename:
     return @"DBTEAMLOGEventTypeGroupRename";
-  case DBTEAMLOGEventTypeLegalHoldsActivateAHold:
-    return @"DBTEAMLOGEventTypeLegalHoldsActivateAHold";
-  case DBTEAMLOGEventTypeLegalHoldsAddMembers:
-    return @"DBTEAMLOGEventTypeLegalHoldsAddMembers";
-  case DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails:
-    return @"DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails";
-  case DBTEAMLOGEventTypeLegalHoldsChangeHoldName:
-    return @"DBTEAMLOGEventTypeLegalHoldsChangeHoldName";
-  case DBTEAMLOGEventTypeLegalHoldsExportAHold:
-    return @"DBTEAMLOGEventTypeLegalHoldsExportAHold";
-  case DBTEAMLOGEventTypeLegalHoldsExportCancelled:
-    return @"DBTEAMLOGEventTypeLegalHoldsExportCancelled";
-  case DBTEAMLOGEventTypeLegalHoldsExportDownloaded:
-    return @"DBTEAMLOGEventTypeLegalHoldsExportDownloaded";
-  case DBTEAMLOGEventTypeLegalHoldsExportRemoved:
-    return @"DBTEAMLOGEventTypeLegalHoldsExportRemoved";
-  case DBTEAMLOGEventTypeLegalHoldsReleaseAHold:
-    return @"DBTEAMLOGEventTypeLegalHoldsReleaseAHold";
-  case DBTEAMLOGEventTypeLegalHoldsRemoveMembers:
-    return @"DBTEAMLOGEventTypeLegalHoldsRemoveMembers";
-  case DBTEAMLOGEventTypeLegalHoldsReportAHold:
-    return @"DBTEAMLOGEventTypeLegalHoldsReportAHold";
   case DBTEAMLOGEventTypeAccountLockOrUnlocked:
     return @"DBTEAMLOGEventTypeAccountLockOrUnlocked";
   case DBTEAMLOGEventTypeEmmError:
@@ -46961,6 +52145,8 @@
     return @"DBTEAMLOGEventTypeMemberChangeMembershipType";
   case DBTEAMLOGEventTypeMemberChangeName:
     return @"DBTEAMLOGEventTypeMemberChangeName";
+  case DBTEAMLOGEventTypeMemberChangeResellerRole:
+    return @"DBTEAMLOGEventTypeMemberChangeResellerRole";
   case DBTEAMLOGEventTypeMemberChangeStatus:
     return @"DBTEAMLOGEventTypeMemberChangeStatus";
   case DBTEAMLOGEventTypeMemberDeleteManualContacts:
@@ -47097,6 +52283,10 @@
     return @"DBTEAMLOGEventTypePasswordReset";
   case DBTEAMLOGEventTypePasswordResetAll:
     return @"DBTEAMLOGEventTypePasswordResetAll";
+  case DBTEAMLOGEventTypeClassificationCreateReport:
+    return @"DBTEAMLOGEventTypeClassificationCreateReport";
+  case DBTEAMLOGEventTypeClassificationCreateReportFail:
+    return @"DBTEAMLOGEventTypeClassificationCreateReportFail";
   case DBTEAMLOGEventTypeEmmCreateExceptionsReport:
     return @"DBTEAMLOGEventTypeEmmCreateExceptionsReport";
   case DBTEAMLOGEventTypeEmmCreateUsageReport:
@@ -47291,6 +52481,10 @@
     return @"DBTEAMLOGEventTypeSharedLinkView";
   case DBTEAMLOGEventTypeSharedNoteOpened:
     return @"DBTEAMLOGEventTypeSharedNoteOpened";
+  case DBTEAMLOGEventTypeShmodelDisableDownloads:
+    return @"DBTEAMLOGEventTypeShmodelDisableDownloads";
+  case DBTEAMLOGEventTypeShmodelEnableDownloads:
+    return @"DBTEAMLOGEventTypeShmodelEnableDownloads";
   case DBTEAMLOGEventTypeShmodelGroupShare:
     return @"DBTEAMLOGEventTypeShmodelGroupShare";
   case DBTEAMLOGEventTypeShowcaseAccessGranted:
@@ -47381,6 +52575,10 @@
     return @"DBTEAMLOGEventTypeAllowDownloadEnabled";
   case DBTEAMLOGEventTypeCameraUploadsPolicyChanged:
     return @"DBTEAMLOGEventTypeCameraUploadsPolicyChanged";
+  case DBTEAMLOGEventTypeClassificationChangePolicy:
+    return @"DBTEAMLOGEventTypeClassificationChangePolicy";
+  case DBTEAMLOGEventTypeComputerBackupPolicyChanged:
+    return @"DBTEAMLOGEventTypeComputerBackupPolicyChanged";
   case DBTEAMLOGEventTypeContentAdministrationPolicyChanged:
     return @"DBTEAMLOGEventTypeContentAdministrationPolicyChanged";
   case DBTEAMLOGEventTypeDataPlacementRestrictionChangePolicy:
@@ -47495,6 +52693,8 @@
     return @"DBTEAMLOGEventTypeSmartSyncOptOut";
   case DBTEAMLOGEventTypeSsoChangePolicy:
     return @"DBTEAMLOGEventTypeSsoChangePolicy";
+  case DBTEAMLOGEventTypeTeamBrandingPolicyChanged:
+    return @"DBTEAMLOGEventTypeTeamBrandingPolicyChanged";
   case DBTEAMLOGEventTypeTeamExtensionsPolicyChanged:
     return @"DBTEAMLOGEventTypeTeamExtensionsPolicyChanged";
   case DBTEAMLOGEventTypeTeamSelectiveSyncPolicyChanged:
@@ -47523,14 +52723,20 @@
     return @"DBTEAMLOGEventTypeTeamMergeFrom";
   case DBTEAMLOGEventTypeTeamMergeTo:
     return @"DBTEAMLOGEventTypeTeamMergeTo";
+  case DBTEAMLOGEventTypeTeamProfileAddBackground:
+    return @"DBTEAMLOGEventTypeTeamProfileAddBackground";
   case DBTEAMLOGEventTypeTeamProfileAddLogo:
     return @"DBTEAMLOGEventTypeTeamProfileAddLogo";
+  case DBTEAMLOGEventTypeTeamProfileChangeBackground:
+    return @"DBTEAMLOGEventTypeTeamProfileChangeBackground";
   case DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage:
     return @"DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage";
   case DBTEAMLOGEventTypeTeamProfileChangeLogo:
     return @"DBTEAMLOGEventTypeTeamProfileChangeLogo";
   case DBTEAMLOGEventTypeTeamProfileChangeName:
     return @"DBTEAMLOGEventTypeTeamProfileChangeName";
+  case DBTEAMLOGEventTypeTeamProfileRemoveBackground:
+    return @"DBTEAMLOGEventTypeTeamProfileRemoveBackground";
   case DBTEAMLOGEventTypeTeamProfileRemoveLogo:
     return @"DBTEAMLOGEventTypeTeamProfileRemoveLogo";
   case DBTEAMLOGEventTypeTfaAddBackupPhone:
@@ -47635,6 +52841,10 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig:
+    result = prime * result + [self.adminAlertingChangedAlertConfig hash];
+  case DBTEAMLOGEventTypeAdminAlertingTriggeredAlert:
+    result = prime * result + [self.adminAlertingTriggeredAlert hash];
   case DBTEAMLOGEventTypeAppLinkTeam:
     result = prime * result + [self.appLinkTeam hash];
   case DBTEAMLOGEventTypeAppLinkUser:
@@ -47663,6 +52873,50 @@
     result = prime * result + [self.fileUnlikeComment hash];
   case DBTEAMLOGEventTypeFileUnresolveComment:
     result = prime * result + [self.fileUnresolveComment hash];
+  case DBTEAMLOGEventTypeGovernancePolicyAddFolders:
+    result = prime * result + [self.governancePolicyAddFolders hash];
+  case DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed:
+    result = prime * result + [self.governancePolicyAddFolderFailed hash];
+  case DBTEAMLOGEventTypeGovernancePolicyCreate:
+    result = prime * result + [self.governancePolicyCreate hash];
+  case DBTEAMLOGEventTypeGovernancePolicyDelete:
+    result = prime * result + [self.governancePolicyDelete hash];
+  case DBTEAMLOGEventTypeGovernancePolicyEditDetails:
+    result = prime * result + [self.governancePolicyEditDetails hash];
+  case DBTEAMLOGEventTypeGovernancePolicyEditDuration:
+    result = prime * result + [self.governancePolicyEditDuration hash];
+  case DBTEAMLOGEventTypeGovernancePolicyExportCreated:
+    result = prime * result + [self.governancePolicyExportCreated hash];
+  case DBTEAMLOGEventTypeGovernancePolicyExportRemoved:
+    result = prime * result + [self.governancePolicyExportRemoved hash];
+  case DBTEAMLOGEventTypeGovernancePolicyRemoveFolders:
+    result = prime * result + [self.governancePolicyRemoveFolders hash];
+  case DBTEAMLOGEventTypeGovernancePolicyReportCreated:
+    result = prime * result + [self.governancePolicyReportCreated hash];
+  case DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded:
+    result = prime * result + [self.governancePolicyZipPartDownloaded hash];
+  case DBTEAMLOGEventTypeLegalHoldsActivateAHold:
+    result = prime * result + [self.legalHoldsActivateAHold hash];
+  case DBTEAMLOGEventTypeLegalHoldsAddMembers:
+    result = prime * result + [self.legalHoldsAddMembers hash];
+  case DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails:
+    result = prime * result + [self.legalHoldsChangeHoldDetails hash];
+  case DBTEAMLOGEventTypeLegalHoldsChangeHoldName:
+    result = prime * result + [self.legalHoldsChangeHoldName hash];
+  case DBTEAMLOGEventTypeLegalHoldsExportAHold:
+    result = prime * result + [self.legalHoldsExportAHold hash];
+  case DBTEAMLOGEventTypeLegalHoldsExportCancelled:
+    result = prime * result + [self.legalHoldsExportCancelled hash];
+  case DBTEAMLOGEventTypeLegalHoldsExportDownloaded:
+    result = prime * result + [self.legalHoldsExportDownloaded hash];
+  case DBTEAMLOGEventTypeLegalHoldsExportRemoved:
+    result = prime * result + [self.legalHoldsExportRemoved hash];
+  case DBTEAMLOGEventTypeLegalHoldsReleaseAHold:
+    result = prime * result + [self.legalHoldsReleaseAHold hash];
+  case DBTEAMLOGEventTypeLegalHoldsRemoveMembers:
+    result = prime * result + [self.legalHoldsRemoveMembers hash];
+  case DBTEAMLOGEventTypeLegalHoldsReportAHold:
+    result = prime * result + [self.legalHoldsReportAHold hash];
   case DBTEAMLOGEventTypeDeviceChangeIpDesktop:
     result = prime * result + [self.deviceChangeIpDesktop hash];
   case DBTEAMLOGEventTypeDeviceChangeIpMobile:
@@ -47681,8 +52935,14 @@
     result = prime * result + [self.deviceManagementDisabled hash];
   case DBTEAMLOGEventTypeDeviceManagementEnabled:
     result = prime * result + [self.deviceManagementEnabled hash];
+  case DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged:
+    result = prime * result + [self.deviceSyncBackupStatusChanged hash];
   case DBTEAMLOGEventTypeDeviceUnlink:
     result = prime * result + [self.deviceUnlink hash];
+  case DBTEAMLOGEventTypeDropboxPasswordsExported:
+    result = prime * result + [self.dropboxPasswordsExported hash];
+  case DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled:
+    result = prime * result + [self.dropboxPasswordsNewDeviceEnrolled hash];
   case DBTEAMLOGEventTypeEmmRefreshAuthToken:
     result = prime * result + [self.emmRefreshAuthToken hash];
   case DBTEAMLOGEventTypeAccountCaptureChangeAvailability:
@@ -47791,28 +53051,6 @@
     result = prime * result + [self.groupRemoveMember hash];
   case DBTEAMLOGEventTypeGroupRename:
     result = prime * result + [self.groupRename hash];
-  case DBTEAMLOGEventTypeLegalHoldsActivateAHold:
-    result = prime * result + [self.legalHoldsActivateAHold hash];
-  case DBTEAMLOGEventTypeLegalHoldsAddMembers:
-    result = prime * result + [self.legalHoldsAddMembers hash];
-  case DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails:
-    result = prime * result + [self.legalHoldsChangeHoldDetails hash];
-  case DBTEAMLOGEventTypeLegalHoldsChangeHoldName:
-    result = prime * result + [self.legalHoldsChangeHoldName hash];
-  case DBTEAMLOGEventTypeLegalHoldsExportAHold:
-    result = prime * result + [self.legalHoldsExportAHold hash];
-  case DBTEAMLOGEventTypeLegalHoldsExportCancelled:
-    result = prime * result + [self.legalHoldsExportCancelled hash];
-  case DBTEAMLOGEventTypeLegalHoldsExportDownloaded:
-    result = prime * result + [self.legalHoldsExportDownloaded hash];
-  case DBTEAMLOGEventTypeLegalHoldsExportRemoved:
-    result = prime * result + [self.legalHoldsExportRemoved hash];
-  case DBTEAMLOGEventTypeLegalHoldsReleaseAHold:
-    result = prime * result + [self.legalHoldsReleaseAHold hash];
-  case DBTEAMLOGEventTypeLegalHoldsRemoveMembers:
-    result = prime * result + [self.legalHoldsRemoveMembers hash];
-  case DBTEAMLOGEventTypeLegalHoldsReportAHold:
-    result = prime * result + [self.legalHoldsReportAHold hash];
   case DBTEAMLOGEventTypeAccountLockOrUnlocked:
     result = prime * result + [self.accountLockOrUnlocked hash];
   case DBTEAMLOGEventTypeEmmError:
@@ -47855,6 +53093,8 @@
     result = prime * result + [self.memberChangeMembershipType hash];
   case DBTEAMLOGEventTypeMemberChangeName:
     result = prime * result + [self.memberChangeName hash];
+  case DBTEAMLOGEventTypeMemberChangeResellerRole:
+    result = prime * result + [self.memberChangeResellerRole hash];
   case DBTEAMLOGEventTypeMemberChangeStatus:
     result = prime * result + [self.memberChangeStatus hash];
   case DBTEAMLOGEventTypeMemberDeleteManualContacts:
@@ -47991,6 +53231,10 @@
     result = prime * result + [self.passwordReset hash];
   case DBTEAMLOGEventTypePasswordResetAll:
     result = prime * result + [self.passwordResetAll hash];
+  case DBTEAMLOGEventTypeClassificationCreateReport:
+    result = prime * result + [self.classificationCreateReport hash];
+  case DBTEAMLOGEventTypeClassificationCreateReportFail:
+    result = prime * result + [self.classificationCreateReportFail hash];
   case DBTEAMLOGEventTypeEmmCreateExceptionsReport:
     result = prime * result + [self.emmCreateExceptionsReport hash];
   case DBTEAMLOGEventTypeEmmCreateUsageReport:
@@ -48185,6 +53429,10 @@
     result = prime * result + [self.sharedLinkView hash];
   case DBTEAMLOGEventTypeSharedNoteOpened:
     result = prime * result + [self.sharedNoteOpened hash];
+  case DBTEAMLOGEventTypeShmodelDisableDownloads:
+    result = prime * result + [self.shmodelDisableDownloads hash];
+  case DBTEAMLOGEventTypeShmodelEnableDownloads:
+    result = prime * result + [self.shmodelEnableDownloads hash];
   case DBTEAMLOGEventTypeShmodelGroupShare:
     result = prime * result + [self.shmodelGroupShare hash];
   case DBTEAMLOGEventTypeShowcaseAccessGranted:
@@ -48275,6 +53523,10 @@
     result = prime * result + [self.allowDownloadEnabled hash];
   case DBTEAMLOGEventTypeCameraUploadsPolicyChanged:
     result = prime * result + [self.cameraUploadsPolicyChanged hash];
+  case DBTEAMLOGEventTypeClassificationChangePolicy:
+    result = prime * result + [self.classificationChangePolicy hash];
+  case DBTEAMLOGEventTypeComputerBackupPolicyChanged:
+    result = prime * result + [self.computerBackupPolicyChanged hash];
   case DBTEAMLOGEventTypeContentAdministrationPolicyChanged:
     result = prime * result + [self.contentAdministrationPolicyChanged hash];
   case DBTEAMLOGEventTypeDataPlacementRestrictionChangePolicy:
@@ -48389,6 +53641,8 @@
     result = prime * result + [self.smartSyncOptOut hash];
   case DBTEAMLOGEventTypeSsoChangePolicy:
     result = prime * result + [self.ssoChangePolicy hash];
+  case DBTEAMLOGEventTypeTeamBrandingPolicyChanged:
+    result = prime * result + [self.teamBrandingPolicyChanged hash];
   case DBTEAMLOGEventTypeTeamExtensionsPolicyChanged:
     result = prime * result + [self.teamExtensionsPolicyChanged hash];
   case DBTEAMLOGEventTypeTeamSelectiveSyncPolicyChanged:
@@ -48417,14 +53671,20 @@
     result = prime * result + [self.teamMergeFrom hash];
   case DBTEAMLOGEventTypeTeamMergeTo:
     result = prime * result + [self.teamMergeTo hash];
+  case DBTEAMLOGEventTypeTeamProfileAddBackground:
+    result = prime * result + [self.teamProfileAddBackground hash];
   case DBTEAMLOGEventTypeTeamProfileAddLogo:
     result = prime * result + [self.teamProfileAddLogo hash];
+  case DBTEAMLOGEventTypeTeamProfileChangeBackground:
+    result = prime * result + [self.teamProfileChangeBackground hash];
   case DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage:
     result = prime * result + [self.teamProfileChangeDefaultLanguage hash];
   case DBTEAMLOGEventTypeTeamProfileChangeLogo:
     result = prime * result + [self.teamProfileChangeLogo hash];
   case DBTEAMLOGEventTypeTeamProfileChangeName:
     result = prime * result + [self.teamProfileChangeName hash];
+  case DBTEAMLOGEventTypeTeamProfileRemoveBackground:
+    result = prime * result + [self.teamProfileRemoveBackground hash];
   case DBTEAMLOGEventTypeTeamProfileRemoveLogo:
     result = prime * result + [self.teamProfileRemoveLogo hash];
   case DBTEAMLOGEventTypeTfaAddBackupPhone:
@@ -48518,6 +53778,10 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGEventTypeAdminAlertingChangedAlertConfig:
+    return [self.adminAlertingChangedAlertConfig isEqual:anEventType.adminAlertingChangedAlertConfig];
+  case DBTEAMLOGEventTypeAdminAlertingTriggeredAlert:
+    return [self.adminAlertingTriggeredAlert isEqual:anEventType.adminAlertingTriggeredAlert];
   case DBTEAMLOGEventTypeAppLinkTeam:
     return [self.appLinkTeam isEqual:anEventType.appLinkTeam];
   case DBTEAMLOGEventTypeAppLinkUser:
@@ -48546,6 +53810,50 @@
     return [self.fileUnlikeComment isEqual:anEventType.fileUnlikeComment];
   case DBTEAMLOGEventTypeFileUnresolveComment:
     return [self.fileUnresolveComment isEqual:anEventType.fileUnresolveComment];
+  case DBTEAMLOGEventTypeGovernancePolicyAddFolders:
+    return [self.governancePolicyAddFolders isEqual:anEventType.governancePolicyAddFolders];
+  case DBTEAMLOGEventTypeGovernancePolicyAddFolderFailed:
+    return [self.governancePolicyAddFolderFailed isEqual:anEventType.governancePolicyAddFolderFailed];
+  case DBTEAMLOGEventTypeGovernancePolicyCreate:
+    return [self.governancePolicyCreate isEqual:anEventType.governancePolicyCreate];
+  case DBTEAMLOGEventTypeGovernancePolicyDelete:
+    return [self.governancePolicyDelete isEqual:anEventType.governancePolicyDelete];
+  case DBTEAMLOGEventTypeGovernancePolicyEditDetails:
+    return [self.governancePolicyEditDetails isEqual:anEventType.governancePolicyEditDetails];
+  case DBTEAMLOGEventTypeGovernancePolicyEditDuration:
+    return [self.governancePolicyEditDuration isEqual:anEventType.governancePolicyEditDuration];
+  case DBTEAMLOGEventTypeGovernancePolicyExportCreated:
+    return [self.governancePolicyExportCreated isEqual:anEventType.governancePolicyExportCreated];
+  case DBTEAMLOGEventTypeGovernancePolicyExportRemoved:
+    return [self.governancePolicyExportRemoved isEqual:anEventType.governancePolicyExportRemoved];
+  case DBTEAMLOGEventTypeGovernancePolicyRemoveFolders:
+    return [self.governancePolicyRemoveFolders isEqual:anEventType.governancePolicyRemoveFolders];
+  case DBTEAMLOGEventTypeGovernancePolicyReportCreated:
+    return [self.governancePolicyReportCreated isEqual:anEventType.governancePolicyReportCreated];
+  case DBTEAMLOGEventTypeGovernancePolicyZipPartDownloaded:
+    return [self.governancePolicyZipPartDownloaded isEqual:anEventType.governancePolicyZipPartDownloaded];
+  case DBTEAMLOGEventTypeLegalHoldsActivateAHold:
+    return [self.legalHoldsActivateAHold isEqual:anEventType.legalHoldsActivateAHold];
+  case DBTEAMLOGEventTypeLegalHoldsAddMembers:
+    return [self.legalHoldsAddMembers isEqual:anEventType.legalHoldsAddMembers];
+  case DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails:
+    return [self.legalHoldsChangeHoldDetails isEqual:anEventType.legalHoldsChangeHoldDetails];
+  case DBTEAMLOGEventTypeLegalHoldsChangeHoldName:
+    return [self.legalHoldsChangeHoldName isEqual:anEventType.legalHoldsChangeHoldName];
+  case DBTEAMLOGEventTypeLegalHoldsExportAHold:
+    return [self.legalHoldsExportAHold isEqual:anEventType.legalHoldsExportAHold];
+  case DBTEAMLOGEventTypeLegalHoldsExportCancelled:
+    return [self.legalHoldsExportCancelled isEqual:anEventType.legalHoldsExportCancelled];
+  case DBTEAMLOGEventTypeLegalHoldsExportDownloaded:
+    return [self.legalHoldsExportDownloaded isEqual:anEventType.legalHoldsExportDownloaded];
+  case DBTEAMLOGEventTypeLegalHoldsExportRemoved:
+    return [self.legalHoldsExportRemoved isEqual:anEventType.legalHoldsExportRemoved];
+  case DBTEAMLOGEventTypeLegalHoldsReleaseAHold:
+    return [self.legalHoldsReleaseAHold isEqual:anEventType.legalHoldsReleaseAHold];
+  case DBTEAMLOGEventTypeLegalHoldsRemoveMembers:
+    return [self.legalHoldsRemoveMembers isEqual:anEventType.legalHoldsRemoveMembers];
+  case DBTEAMLOGEventTypeLegalHoldsReportAHold:
+    return [self.legalHoldsReportAHold isEqual:anEventType.legalHoldsReportAHold];
   case DBTEAMLOGEventTypeDeviceChangeIpDesktop:
     return [self.deviceChangeIpDesktop isEqual:anEventType.deviceChangeIpDesktop];
   case DBTEAMLOGEventTypeDeviceChangeIpMobile:
@@ -48564,8 +53872,14 @@
     return [self.deviceManagementDisabled isEqual:anEventType.deviceManagementDisabled];
   case DBTEAMLOGEventTypeDeviceManagementEnabled:
     return [self.deviceManagementEnabled isEqual:anEventType.deviceManagementEnabled];
+  case DBTEAMLOGEventTypeDeviceSyncBackupStatusChanged:
+    return [self.deviceSyncBackupStatusChanged isEqual:anEventType.deviceSyncBackupStatusChanged];
   case DBTEAMLOGEventTypeDeviceUnlink:
     return [self.deviceUnlink isEqual:anEventType.deviceUnlink];
+  case DBTEAMLOGEventTypeDropboxPasswordsExported:
+    return [self.dropboxPasswordsExported isEqual:anEventType.dropboxPasswordsExported];
+  case DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled:
+    return [self.dropboxPasswordsNewDeviceEnrolled isEqual:anEventType.dropboxPasswordsNewDeviceEnrolled];
   case DBTEAMLOGEventTypeEmmRefreshAuthToken:
     return [self.emmRefreshAuthToken isEqual:anEventType.emmRefreshAuthToken];
   case DBTEAMLOGEventTypeAccountCaptureChangeAvailability:
@@ -48674,28 +53988,6 @@
     return [self.groupRemoveMember isEqual:anEventType.groupRemoveMember];
   case DBTEAMLOGEventTypeGroupRename:
     return [self.groupRename isEqual:anEventType.groupRename];
-  case DBTEAMLOGEventTypeLegalHoldsActivateAHold:
-    return [self.legalHoldsActivateAHold isEqual:anEventType.legalHoldsActivateAHold];
-  case DBTEAMLOGEventTypeLegalHoldsAddMembers:
-    return [self.legalHoldsAddMembers isEqual:anEventType.legalHoldsAddMembers];
-  case DBTEAMLOGEventTypeLegalHoldsChangeHoldDetails:
-    return [self.legalHoldsChangeHoldDetails isEqual:anEventType.legalHoldsChangeHoldDetails];
-  case DBTEAMLOGEventTypeLegalHoldsChangeHoldName:
-    return [self.legalHoldsChangeHoldName isEqual:anEventType.legalHoldsChangeHoldName];
-  case DBTEAMLOGEventTypeLegalHoldsExportAHold:
-    return [self.legalHoldsExportAHold isEqual:anEventType.legalHoldsExportAHold];
-  case DBTEAMLOGEventTypeLegalHoldsExportCancelled:
-    return [self.legalHoldsExportCancelled isEqual:anEventType.legalHoldsExportCancelled];
-  case DBTEAMLOGEventTypeLegalHoldsExportDownloaded:
-    return [self.legalHoldsExportDownloaded isEqual:anEventType.legalHoldsExportDownloaded];
-  case DBTEAMLOGEventTypeLegalHoldsExportRemoved:
-    return [self.legalHoldsExportRemoved isEqual:anEventType.legalHoldsExportRemoved];
-  case DBTEAMLOGEventTypeLegalHoldsReleaseAHold:
-    return [self.legalHoldsReleaseAHold isEqual:anEventType.legalHoldsReleaseAHold];
-  case DBTEAMLOGEventTypeLegalHoldsRemoveMembers:
-    return [self.legalHoldsRemoveMembers isEqual:anEventType.legalHoldsRemoveMembers];
-  case DBTEAMLOGEventTypeLegalHoldsReportAHold:
-    return [self.legalHoldsReportAHold isEqual:anEventType.legalHoldsReportAHold];
   case DBTEAMLOGEventTypeAccountLockOrUnlocked:
     return [self.accountLockOrUnlocked isEqual:anEventType.accountLockOrUnlocked];
   case DBTEAMLOGEventTypeEmmError:
@@ -48738,6 +54030,8 @@
     return [self.memberChangeMembershipType isEqual:anEventType.memberChangeMembershipType];
   case DBTEAMLOGEventTypeMemberChangeName:
     return [self.memberChangeName isEqual:anEventType.memberChangeName];
+  case DBTEAMLOGEventTypeMemberChangeResellerRole:
+    return [self.memberChangeResellerRole isEqual:anEventType.memberChangeResellerRole];
   case DBTEAMLOGEventTypeMemberChangeStatus:
     return [self.memberChangeStatus isEqual:anEventType.memberChangeStatus];
   case DBTEAMLOGEventTypeMemberDeleteManualContacts:
@@ -48874,6 +54168,10 @@
     return [self.passwordReset isEqual:anEventType.passwordReset];
   case DBTEAMLOGEventTypePasswordResetAll:
     return [self.passwordResetAll isEqual:anEventType.passwordResetAll];
+  case DBTEAMLOGEventTypeClassificationCreateReport:
+    return [self.classificationCreateReport isEqual:anEventType.classificationCreateReport];
+  case DBTEAMLOGEventTypeClassificationCreateReportFail:
+    return [self.classificationCreateReportFail isEqual:anEventType.classificationCreateReportFail];
   case DBTEAMLOGEventTypeEmmCreateExceptionsReport:
     return [self.emmCreateExceptionsReport isEqual:anEventType.emmCreateExceptionsReport];
   case DBTEAMLOGEventTypeEmmCreateUsageReport:
@@ -49070,6 +54368,10 @@
     return [self.sharedLinkView isEqual:anEventType.sharedLinkView];
   case DBTEAMLOGEventTypeSharedNoteOpened:
     return [self.sharedNoteOpened isEqual:anEventType.sharedNoteOpened];
+  case DBTEAMLOGEventTypeShmodelDisableDownloads:
+    return [self.shmodelDisableDownloads isEqual:anEventType.shmodelDisableDownloads];
+  case DBTEAMLOGEventTypeShmodelEnableDownloads:
+    return [self.shmodelEnableDownloads isEqual:anEventType.shmodelEnableDownloads];
   case DBTEAMLOGEventTypeShmodelGroupShare:
     return [self.shmodelGroupShare isEqual:anEventType.shmodelGroupShare];
   case DBTEAMLOGEventTypeShowcaseAccessGranted:
@@ -49160,6 +54462,10 @@
     return [self.allowDownloadEnabled isEqual:anEventType.allowDownloadEnabled];
   case DBTEAMLOGEventTypeCameraUploadsPolicyChanged:
     return [self.cameraUploadsPolicyChanged isEqual:anEventType.cameraUploadsPolicyChanged];
+  case DBTEAMLOGEventTypeClassificationChangePolicy:
+    return [self.classificationChangePolicy isEqual:anEventType.classificationChangePolicy];
+  case DBTEAMLOGEventTypeComputerBackupPolicyChanged:
+    return [self.computerBackupPolicyChanged isEqual:anEventType.computerBackupPolicyChanged];
   case DBTEAMLOGEventTypeContentAdministrationPolicyChanged:
     return [self.contentAdministrationPolicyChanged isEqual:anEventType.contentAdministrationPolicyChanged];
   case DBTEAMLOGEventTypeDataPlacementRestrictionChangePolicy:
@@ -49274,6 +54580,8 @@
     return [self.smartSyncOptOut isEqual:anEventType.smartSyncOptOut];
   case DBTEAMLOGEventTypeSsoChangePolicy:
     return [self.ssoChangePolicy isEqual:anEventType.ssoChangePolicy];
+  case DBTEAMLOGEventTypeTeamBrandingPolicyChanged:
+    return [self.teamBrandingPolicyChanged isEqual:anEventType.teamBrandingPolicyChanged];
   case DBTEAMLOGEventTypeTeamExtensionsPolicyChanged:
     return [self.teamExtensionsPolicyChanged isEqual:anEventType.teamExtensionsPolicyChanged];
   case DBTEAMLOGEventTypeTeamSelectiveSyncPolicyChanged:
@@ -49302,14 +54610,20 @@
     return [self.teamMergeFrom isEqual:anEventType.teamMergeFrom];
   case DBTEAMLOGEventTypeTeamMergeTo:
     return [self.teamMergeTo isEqual:anEventType.teamMergeTo];
+  case DBTEAMLOGEventTypeTeamProfileAddBackground:
+    return [self.teamProfileAddBackground isEqual:anEventType.teamProfileAddBackground];
   case DBTEAMLOGEventTypeTeamProfileAddLogo:
     return [self.teamProfileAddLogo isEqual:anEventType.teamProfileAddLogo];
+  case DBTEAMLOGEventTypeTeamProfileChangeBackground:
+    return [self.teamProfileChangeBackground isEqual:anEventType.teamProfileChangeBackground];
   case DBTEAMLOGEventTypeTeamProfileChangeDefaultLanguage:
     return [self.teamProfileChangeDefaultLanguage isEqual:anEventType.teamProfileChangeDefaultLanguage];
   case DBTEAMLOGEventTypeTeamProfileChangeLogo:
     return [self.teamProfileChangeLogo isEqual:anEventType.teamProfileChangeLogo];
   case DBTEAMLOGEventTypeTeamProfileChangeName:
     return [self.teamProfileChangeName isEqual:anEventType.teamProfileChangeName];
+  case DBTEAMLOGEventTypeTeamProfileRemoveBackground:
+    return [self.teamProfileRemoveBackground isEqual:anEventType.teamProfileRemoveBackground];
   case DBTEAMLOGEventTypeTeamProfileRemoveLogo:
     return [self.teamProfileRemoveLogo isEqual:anEventType.teamProfileRemoveLogo];
   case DBTEAMLOGEventTypeTfaAddBackupPhone:
@@ -49401,7 +54715,15 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEventType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isAppLinkTeam]) {
+  if ([valueObj isAdminAlertingChangedAlertConfig]) {
+    jsonDict = [[DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer
+        serialize:valueObj.adminAlertingChangedAlertConfig] mutableCopy];
+    jsonDict[@".tag"] = @"admin_alerting_changed_alert_config";
+  } else if ([valueObj isAdminAlertingTriggeredAlert]) {
+    jsonDict = [[DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer serialize:valueObj.adminAlertingTriggeredAlert]
+        mutableCopy];
+    jsonDict[@".tag"] = @"admin_alerting_triggered_alert";
+  } else if ([valueObj isAppLinkTeam]) {
     jsonDict = [[DBTEAMLOGAppLinkTeamTypeSerializer serialize:valueObj.appLinkTeam] mutableCopy];
     jsonDict[@".tag"] = @"app_link_team";
   } else if ([valueObj isAppLinkUser]) {
@@ -49445,6 +54767,88 @@
   } else if ([valueObj isFileUnresolveComment]) {
     jsonDict = [[DBTEAMLOGFileUnresolveCommentTypeSerializer serialize:valueObj.fileUnresolveComment] mutableCopy];
     jsonDict[@".tag"] = @"file_unresolve_comment";
+  } else if ([valueObj isGovernancePolicyAddFolders]) {
+    jsonDict =
+        [[DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer serialize:valueObj.governancePolicyAddFolders] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_add_folders";
+  } else if ([valueObj isGovernancePolicyAddFolderFailed]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer
+        serialize:valueObj.governancePolicyAddFolderFailed] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_add_folder_failed";
+  } else if ([valueObj isGovernancePolicyCreate]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyCreateTypeSerializer serialize:valueObj.governancePolicyCreate] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_create";
+  } else if ([valueObj isGovernancePolicyDelete]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyDeleteTypeSerializer serialize:valueObj.governancePolicyDelete] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_delete";
+  } else if ([valueObj isGovernancePolicyEditDetails]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer serialize:valueObj.governancePolicyEditDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_edit_details";
+  } else if ([valueObj isGovernancePolicyEditDuration]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyEditDurationTypeSerializer serialize:valueObj.governancePolicyEditDuration]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_edit_duration";
+  } else if ([valueObj isGovernancePolicyExportCreated]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer serialize:valueObj.governancePolicyExportCreated]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_export_created";
+  } else if ([valueObj isGovernancePolicyExportRemoved]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer serialize:valueObj.governancePolicyExportRemoved]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_export_removed";
+  } else if ([valueObj isGovernancePolicyRemoveFolders]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer serialize:valueObj.governancePolicyRemoveFolders]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_remove_folders";
+  } else if ([valueObj isGovernancePolicyReportCreated]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer serialize:valueObj.governancePolicyReportCreated]
+        mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_report_created";
+  } else if ([valueObj isGovernancePolicyZipPartDownloaded]) {
+    jsonDict = [[DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer
+        serialize:valueObj.governancePolicyZipPartDownloaded] mutableCopy];
+    jsonDict[@".tag"] = @"governance_policy_zip_part_downloaded";
+  } else if ([valueObj isLegalHoldsActivateAHold]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsActivateAHoldTypeSerializer serialize:valueObj.legalHoldsActivateAHold] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_activate_a_hold";
+  } else if ([valueObj isLegalHoldsAddMembers]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsAddMembersTypeSerializer serialize:valueObj.legalHoldsAddMembers] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_add_members";
+  } else if ([valueObj isLegalHoldsChangeHoldDetails]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldDetailsTypeSerializer serialize:valueObj.legalHoldsChangeHoldDetails]
+        mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_change_hold_details";
+  } else if ([valueObj isLegalHoldsChangeHoldName]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsChangeHoldNameTypeSerializer serialize:valueObj.legalHoldsChangeHoldName] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_change_hold_name";
+  } else if ([valueObj isLegalHoldsExportAHold]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsExportAHoldTypeSerializer serialize:valueObj.legalHoldsExportAHold] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_a_hold";
+  } else if ([valueObj isLegalHoldsExportCancelled]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsExportCancelledTypeSerializer serialize:valueObj.legalHoldsExportCancelled] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_cancelled";
+  } else if ([valueObj isLegalHoldsExportDownloaded]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsExportDownloadedTypeSerializer serialize:valueObj.legalHoldsExportDownloaded] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_downloaded";
+  } else if ([valueObj isLegalHoldsExportRemoved]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsExportRemovedTypeSerializer serialize:valueObj.legalHoldsExportRemoved] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_export_removed";
+  } else if ([valueObj isLegalHoldsReleaseAHold]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsReleaseAHoldTypeSerializer serialize:valueObj.legalHoldsReleaseAHold] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_release_a_hold";
+  } else if ([valueObj isLegalHoldsRemoveMembers]) {
+    jsonDict =
+        [[DBTEAMLOGLegalHoldsRemoveMembersTypeSerializer serialize:valueObj.legalHoldsRemoveMembers] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_remove_members";
+  } else if ([valueObj isLegalHoldsReportAHold]) {
+    jsonDict = [[DBTEAMLOGLegalHoldsReportAHoldTypeSerializer serialize:valueObj.legalHoldsReportAHold] mutableCopy];
+    jsonDict[@".tag"] = @"legal_holds_report_a_hold";
   } else if ([valueObj isDeviceChangeIpDesktop]) {
     jsonDict = [[DBTEAMLOGDeviceChangeIpDesktopTypeSerializer serialize:valueObj.deviceChangeIpDesktop] mutableCopy];
     jsonDict[@".tag"] = @"device_change_ip_desktop";
@@ -49476,9 +54880,21 @@
     jsonDict =
         [[DBTEAMLOGDeviceManagementEnabledTypeSerializer serialize:valueObj.deviceManagementEnabled] mutableCopy];
     jsonDict[@".tag"] = @"device_management_enabled";
+  } else if ([valueObj isDeviceSyncBackupStatusChanged]) {
+    jsonDict = [[DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer serialize:valueObj.deviceSyncBackupStatusChanged]
+        mutableCopy];
+    jsonDict[@".tag"] = @"device_sync_backup_status_changed";
   } else if ([valueObj isDeviceUnlink]) {
     jsonDict = [[DBTEAMLOGDeviceUnlinkTypeSerializer serialize:valueObj.deviceUnlink] mutableCopy];
     jsonDict[@".tag"] = @"device_unlink";
+  } else if ([valueObj isDropboxPasswordsExported]) {
+    jsonDict =
+        [[DBTEAMLOGDropboxPasswordsExportedTypeSerializer serialize:valueObj.dropboxPasswordsExported] mutableCopy];
+    jsonDict[@".tag"] = @"dropbox_passwords_exported";
+  } else if ([valueObj isDropboxPasswordsNewDeviceEnrolled]) {
+    jsonDict = [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer
+        serialize:valueObj.dropboxPasswordsNewDeviceEnrolled] mutableCopy];
+    jsonDict[@".tag"] = @"dropbox_passwords_new_device_enrolled";
   } else if ([valueObj isEmmRefreshAuthToken]) {
     jsonDict = [[DBTEAMLOGEmmRefreshAuthTokenTypeSerializer serialize:valueObj.emmRefreshAuthToken] mutableCopy];
     jsonDict[@".tag"] = @"emm_refresh_auth_token";
@@ -49660,46 +55076,6 @@
   } else if ([valueObj isGroupRename]) {
     jsonDict = [[DBTEAMLOGGroupRenameTypeSerializer serialize:valueObj.groupRename] mutableCopy];
     jsonDict[@".tag"] = @"group_rename";
-  } else if ([valueObj isLegalHoldsActivateAHold]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsActivateAHoldTypeSerializer serialize:valueObj.legalHoldsActivateAHold] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_activate_a_hold";
-  } else if ([valueObj isLegalHoldsAddMembers]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsAddMembersTypeSerializer serialize:valueObj.legalHoldsAddMembers] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_add_members";
-  } else if ([valueObj isLegalHoldsChangeHoldDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldDetailsTypeSerializer serialize:valueObj.legalHoldsChangeHoldDetails]
-        mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_change_hold_details";
-  } else if ([valueObj isLegalHoldsChangeHoldName]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsChangeHoldNameTypeSerializer serialize:valueObj.legalHoldsChangeHoldName] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_change_hold_name";
-  } else if ([valueObj isLegalHoldsExportAHold]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportAHoldTypeSerializer serialize:valueObj.legalHoldsExportAHold] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_a_hold";
-  } else if ([valueObj isLegalHoldsExportCancelled]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportCancelledTypeSerializer serialize:valueObj.legalHoldsExportCancelled] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_cancelled";
-  } else if ([valueObj isLegalHoldsExportDownloaded]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportDownloadedTypeSerializer serialize:valueObj.legalHoldsExportDownloaded] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_downloaded";
-  } else if ([valueObj isLegalHoldsExportRemoved]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportRemovedTypeSerializer serialize:valueObj.legalHoldsExportRemoved] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_export_removed";
-  } else if ([valueObj isLegalHoldsReleaseAHold]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsReleaseAHoldTypeSerializer serialize:valueObj.legalHoldsReleaseAHold] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_release_a_hold";
-  } else if ([valueObj isLegalHoldsRemoveMembers]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsRemoveMembersTypeSerializer serialize:valueObj.legalHoldsRemoveMembers] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_remove_members";
-  } else if ([valueObj isLegalHoldsReportAHold]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsReportAHoldTypeSerializer serialize:valueObj.legalHoldsReportAHold] mutableCopy];
-    jsonDict[@".tag"] = @"legal_holds_report_a_hold";
   } else if ([valueObj isAccountLockOrUnlocked]) {
     jsonDict = [[DBTEAMLOGAccountLockOrUnlockedTypeSerializer serialize:valueObj.accountLockOrUnlocked] mutableCopy];
     jsonDict[@".tag"] = @"account_lock_or_unlocked";
@@ -49768,6 +55144,10 @@
   } else if ([valueObj isMemberChangeName]) {
     jsonDict = [[DBTEAMLOGMemberChangeNameTypeSerializer serialize:valueObj.memberChangeName] mutableCopy];
     jsonDict[@".tag"] = @"member_change_name";
+  } else if ([valueObj isMemberChangeResellerRole]) {
+    jsonDict =
+        [[DBTEAMLOGMemberChangeResellerRoleTypeSerializer serialize:valueObj.memberChangeResellerRole] mutableCopy];
+    jsonDict[@".tag"] = @"member_change_reseller_role";
   } else if ([valueObj isMemberChangeStatus]) {
     jsonDict = [[DBTEAMLOGMemberChangeStatusTypeSerializer serialize:valueObj.memberChangeStatus] mutableCopy];
     jsonDict[@".tag"] = @"member_change_status";
@@ -49997,6 +55377,14 @@
   } else if ([valueObj isPasswordResetAll]) {
     jsonDict = [[DBTEAMLOGPasswordResetAllTypeSerializer serialize:valueObj.passwordResetAll] mutableCopy];
     jsonDict[@".tag"] = @"password_reset_all";
+  } else if ([valueObj isClassificationCreateReport]) {
+    jsonDict =
+        [[DBTEAMLOGClassificationCreateReportTypeSerializer serialize:valueObj.classificationCreateReport] mutableCopy];
+    jsonDict[@".tag"] = @"classification_create_report";
+  } else if ([valueObj isClassificationCreateReportFail]) {
+    jsonDict = [[DBTEAMLOGClassificationCreateReportFailTypeSerializer
+        serialize:valueObj.classificationCreateReportFail] mutableCopy];
+    jsonDict[@".tag"] = @"classification_create_report_fail";
   } else if ([valueObj isEmmCreateExceptionsReport]) {
     jsonDict =
         [[DBTEAMLOGEmmCreateExceptionsReportTypeSerializer serialize:valueObj.emmCreateExceptionsReport] mutableCopy];
@@ -50343,6 +55731,13 @@
   } else if ([valueObj isSharedNoteOpened]) {
     jsonDict = [[DBTEAMLOGSharedNoteOpenedTypeSerializer serialize:valueObj.sharedNoteOpened] mutableCopy];
     jsonDict[@".tag"] = @"shared_note_opened";
+  } else if ([valueObj isShmodelDisableDownloads]) {
+    jsonDict =
+        [[DBTEAMLOGShmodelDisableDownloadsTypeSerializer serialize:valueObj.shmodelDisableDownloads] mutableCopy];
+    jsonDict[@".tag"] = @"shmodel_disable_downloads";
+  } else if ([valueObj isShmodelEnableDownloads]) {
+    jsonDict = [[DBTEAMLOGShmodelEnableDownloadsTypeSerializer serialize:valueObj.shmodelEnableDownloads] mutableCopy];
+    jsonDict[@".tag"] = @"shmodel_enable_downloads";
   } else if ([valueObj isShmodelGroupShare]) {
     jsonDict = [[DBTEAMLOGShmodelGroupShareTypeSerializer serialize:valueObj.shmodelGroupShare] mutableCopy];
     jsonDict[@".tag"] = @"shmodel_group_share";
@@ -50487,6 +55882,14 @@
     jsonDict =
         [[DBTEAMLOGCameraUploadsPolicyChangedTypeSerializer serialize:valueObj.cameraUploadsPolicyChanged] mutableCopy];
     jsonDict[@".tag"] = @"camera_uploads_policy_changed";
+  } else if ([valueObj isClassificationChangePolicy]) {
+    jsonDict =
+        [[DBTEAMLOGClassificationChangePolicyTypeSerializer serialize:valueObj.classificationChangePolicy] mutableCopy];
+    jsonDict[@".tag"] = @"classification_change_policy";
+  } else if ([valueObj isComputerBackupPolicyChanged]) {
+    jsonDict = [[DBTEAMLOGComputerBackupPolicyChangedTypeSerializer serialize:valueObj.computerBackupPolicyChanged]
+        mutableCopy];
+    jsonDict[@".tag"] = @"computer_backup_policy_changed";
   } else if ([valueObj isContentAdministrationPolicyChanged]) {
     jsonDict = [[DBTEAMLOGContentAdministrationPolicyChangedTypeSerializer
         serialize:valueObj.contentAdministrationPolicyChanged] mutableCopy];
@@ -50705,6 +56108,10 @@
   } else if ([valueObj isSsoChangePolicy]) {
     jsonDict = [[DBTEAMLOGSsoChangePolicyTypeSerializer serialize:valueObj.ssoChangePolicy] mutableCopy];
     jsonDict[@".tag"] = @"sso_change_policy";
+  } else if ([valueObj isTeamBrandingPolicyChanged]) {
+    jsonDict =
+        [[DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer serialize:valueObj.teamBrandingPolicyChanged] mutableCopy];
+    jsonDict[@".tag"] = @"team_branding_policy_changed";
   } else if ([valueObj isTeamExtensionsPolicyChanged]) {
     jsonDict = [[DBTEAMLOGTeamExtensionsPolicyChangedTypeSerializer serialize:valueObj.teamExtensionsPolicyChanged]
         mutableCopy];
@@ -50755,9 +56162,17 @@
   } else if ([valueObj isTeamMergeTo]) {
     jsonDict = [[DBTEAMLOGTeamMergeToTypeSerializer serialize:valueObj.teamMergeTo] mutableCopy];
     jsonDict[@".tag"] = @"team_merge_to";
+  } else if ([valueObj isTeamProfileAddBackground]) {
+    jsonDict =
+        [[DBTEAMLOGTeamProfileAddBackgroundTypeSerializer serialize:valueObj.teamProfileAddBackground] mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_add_background";
   } else if ([valueObj isTeamProfileAddLogo]) {
     jsonDict = [[DBTEAMLOGTeamProfileAddLogoTypeSerializer serialize:valueObj.teamProfileAddLogo] mutableCopy];
     jsonDict[@".tag"] = @"team_profile_add_logo";
+  } else if ([valueObj isTeamProfileChangeBackground]) {
+    jsonDict = [[DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer serialize:valueObj.teamProfileChangeBackground]
+        mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_change_background";
   } else if ([valueObj isTeamProfileChangeDefaultLanguage]) {
     jsonDict = [[DBTEAMLOGTeamProfileChangeDefaultLanguageTypeSerializer
         serialize:valueObj.teamProfileChangeDefaultLanguage] mutableCopy];
@@ -50768,6 +56183,10 @@
   } else if ([valueObj isTeamProfileChangeName]) {
     jsonDict = [[DBTEAMLOGTeamProfileChangeNameTypeSerializer serialize:valueObj.teamProfileChangeName] mutableCopy];
     jsonDict[@".tag"] = @"team_profile_change_name";
+  } else if ([valueObj isTeamProfileRemoveBackground]) {
+    jsonDict = [[DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer serialize:valueObj.teamProfileRemoveBackground]
+        mutableCopy];
+    jsonDict[@".tag"] = @"team_profile_remove_background";
   } else if ([valueObj isTeamProfileRemoveLogo]) {
     jsonDict = [[DBTEAMLOGTeamProfileRemoveLogoTypeSerializer serialize:valueObj.teamProfileRemoveLogo] mutableCopy];
     jsonDict[@".tag"] = @"team_profile_remove_logo";
@@ -50903,7 +56322,15 @@
 + (DBTEAMLOGEventType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"app_link_team"]) {
+  if ([tag isEqualToString:@"admin_alerting_changed_alert_config"]) {
+    DBTEAMLOGAdminAlertingChangedAlertConfigType *adminAlertingChangedAlertConfig =
+        [DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithAdminAlertingChangedAlertConfig:adminAlertingChangedAlertConfig];
+  } else if ([tag isEqualToString:@"admin_alerting_triggered_alert"]) {
+    DBTEAMLOGAdminAlertingTriggeredAlertType *adminAlertingTriggeredAlert =
+        [DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithAdminAlertingTriggeredAlert:adminAlertingTriggeredAlert];
+  } else if ([tag isEqualToString:@"app_link_team"]) {
     DBTEAMLOGAppLinkTeamType *appLinkTeam = [DBTEAMLOGAppLinkTeamTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithAppLinkTeam:appLinkTeam];
   } else if ([tag isEqualToString:@"app_link_user"]) {
@@ -50952,6 +56379,94 @@
     DBTEAMLOGFileUnresolveCommentType *fileUnresolveComment =
         [DBTEAMLOGFileUnresolveCommentTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithFileUnresolveComment:fileUnresolveComment];
+  } else if ([tag isEqualToString:@"governance_policy_add_folders"]) {
+    DBTEAMLOGGovernancePolicyAddFoldersType *governancePolicyAddFolders =
+        [DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyAddFolders:governancePolicyAddFolders];
+  } else if ([tag isEqualToString:@"governance_policy_add_folder_failed"]) {
+    DBTEAMLOGGovernancePolicyAddFolderFailedType *governancePolicyAddFolderFailed =
+        [DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyAddFolderFailed:governancePolicyAddFolderFailed];
+  } else if ([tag isEqualToString:@"governance_policy_create"]) {
+    DBTEAMLOGGovernancePolicyCreateType *governancePolicyCreate =
+        [DBTEAMLOGGovernancePolicyCreateTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyCreate:governancePolicyCreate];
+  } else if ([tag isEqualToString:@"governance_policy_delete"]) {
+    DBTEAMLOGGovernancePolicyDeleteType *governancePolicyDelete =
+        [DBTEAMLOGGovernancePolicyDeleteTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyDelete:governancePolicyDelete];
+  } else if ([tag isEqualToString:@"governance_policy_edit_details"]) {
+    DBTEAMLOGGovernancePolicyEditDetailsType *governancePolicyEditDetails =
+        [DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyEditDetails:governancePolicyEditDetails];
+  } else if ([tag isEqualToString:@"governance_policy_edit_duration"]) {
+    DBTEAMLOGGovernancePolicyEditDurationType *governancePolicyEditDuration =
+        [DBTEAMLOGGovernancePolicyEditDurationTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyEditDuration:governancePolicyEditDuration];
+  } else if ([tag isEqualToString:@"governance_policy_export_created"]) {
+    DBTEAMLOGGovernancePolicyExportCreatedType *governancePolicyExportCreated =
+        [DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyExportCreated:governancePolicyExportCreated];
+  } else if ([tag isEqualToString:@"governance_policy_export_removed"]) {
+    DBTEAMLOGGovernancePolicyExportRemovedType *governancePolicyExportRemoved =
+        [DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyExportRemoved:governancePolicyExportRemoved];
+  } else if ([tag isEqualToString:@"governance_policy_remove_folders"]) {
+    DBTEAMLOGGovernancePolicyRemoveFoldersType *governancePolicyRemoveFolders =
+        [DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyRemoveFolders:governancePolicyRemoveFolders];
+  } else if ([tag isEqualToString:@"governance_policy_report_created"]) {
+    DBTEAMLOGGovernancePolicyReportCreatedType *governancePolicyReportCreated =
+        [DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyReportCreated:governancePolicyReportCreated];
+  } else if ([tag isEqualToString:@"governance_policy_zip_part_downloaded"]) {
+    DBTEAMLOGGovernancePolicyZipPartDownloadedType *governancePolicyZipPartDownloaded =
+        [DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithGovernancePolicyZipPartDownloaded:governancePolicyZipPartDownloaded];
+  } else if ([tag isEqualToString:@"legal_holds_activate_a_hold"]) {
+    DBTEAMLOGLegalHoldsActivateAHoldType *legalHoldsActivateAHold =
+        [DBTEAMLOGLegalHoldsActivateAHoldTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsActivateAHold:legalHoldsActivateAHold];
+  } else if ([tag isEqualToString:@"legal_holds_add_members"]) {
+    DBTEAMLOGLegalHoldsAddMembersType *legalHoldsAddMembers =
+        [DBTEAMLOGLegalHoldsAddMembersTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsAddMembers:legalHoldsAddMembers];
+  } else if ([tag isEqualToString:@"legal_holds_change_hold_details"]) {
+    DBTEAMLOGLegalHoldsChangeHoldDetailsType *legalHoldsChangeHoldDetails =
+        [DBTEAMLOGLegalHoldsChangeHoldDetailsTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsChangeHoldDetails:legalHoldsChangeHoldDetails];
+  } else if ([tag isEqualToString:@"legal_holds_change_hold_name"]) {
+    DBTEAMLOGLegalHoldsChangeHoldNameType *legalHoldsChangeHoldName =
+        [DBTEAMLOGLegalHoldsChangeHoldNameTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsChangeHoldName:legalHoldsChangeHoldName];
+  } else if ([tag isEqualToString:@"legal_holds_export_a_hold"]) {
+    DBTEAMLOGLegalHoldsExportAHoldType *legalHoldsExportAHold =
+        [DBTEAMLOGLegalHoldsExportAHoldTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportAHold:legalHoldsExportAHold];
+  } else if ([tag isEqualToString:@"legal_holds_export_cancelled"]) {
+    DBTEAMLOGLegalHoldsExportCancelledType *legalHoldsExportCancelled =
+        [DBTEAMLOGLegalHoldsExportCancelledTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportCancelled:legalHoldsExportCancelled];
+  } else if ([tag isEqualToString:@"legal_holds_export_downloaded"]) {
+    DBTEAMLOGLegalHoldsExportDownloadedType *legalHoldsExportDownloaded =
+        [DBTEAMLOGLegalHoldsExportDownloadedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportDownloaded:legalHoldsExportDownloaded];
+  } else if ([tag isEqualToString:@"legal_holds_export_removed"]) {
+    DBTEAMLOGLegalHoldsExportRemovedType *legalHoldsExportRemoved =
+        [DBTEAMLOGLegalHoldsExportRemovedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportRemoved:legalHoldsExportRemoved];
+  } else if ([tag isEqualToString:@"legal_holds_release_a_hold"]) {
+    DBTEAMLOGLegalHoldsReleaseAHoldType *legalHoldsReleaseAHold =
+        [DBTEAMLOGLegalHoldsReleaseAHoldTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsReleaseAHold:legalHoldsReleaseAHold];
+  } else if ([tag isEqualToString:@"legal_holds_remove_members"]) {
+    DBTEAMLOGLegalHoldsRemoveMembersType *legalHoldsRemoveMembers =
+        [DBTEAMLOGLegalHoldsRemoveMembersTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsRemoveMembers:legalHoldsRemoveMembers];
+  } else if ([tag isEqualToString:@"legal_holds_report_a_hold"]) {
+    DBTEAMLOGLegalHoldsReportAHoldType *legalHoldsReportAHold =
+        [DBTEAMLOGLegalHoldsReportAHoldTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsReportAHold:legalHoldsReportAHold];
   } else if ([tag isEqualToString:@"device_change_ip_desktop"]) {
     DBTEAMLOGDeviceChangeIpDesktopType *deviceChangeIpDesktop =
         [DBTEAMLOGDeviceChangeIpDesktopTypeSerializer deserialize:valueDict];
@@ -50987,9 +56502,21 @@
     DBTEAMLOGDeviceManagementEnabledType *deviceManagementEnabled =
         [DBTEAMLOGDeviceManagementEnabledTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithDeviceManagementEnabled:deviceManagementEnabled];
+  } else if ([tag isEqualToString:@"device_sync_backup_status_changed"]) {
+    DBTEAMLOGDeviceSyncBackupStatusChangedType *deviceSyncBackupStatusChanged =
+        [DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithDeviceSyncBackupStatusChanged:deviceSyncBackupStatusChanged];
   } else if ([tag isEqualToString:@"device_unlink"]) {
     DBTEAMLOGDeviceUnlinkType *deviceUnlink = [DBTEAMLOGDeviceUnlinkTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithDeviceUnlink:deviceUnlink];
+  } else if ([tag isEqualToString:@"dropbox_passwords_exported"]) {
+    DBTEAMLOGDropboxPasswordsExportedType *dropboxPasswordsExported =
+        [DBTEAMLOGDropboxPasswordsExportedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithDropboxPasswordsExported:dropboxPasswordsExported];
+  } else if ([tag isEqualToString:@"dropbox_passwords_new_device_enrolled"]) {
+    DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType *dropboxPasswordsNewDeviceEnrolled =
+        [DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithDropboxPasswordsNewDeviceEnrolled:dropboxPasswordsNewDeviceEnrolled];
   } else if ([tag isEqualToString:@"emm_refresh_auth_token"]) {
     DBTEAMLOGEmmRefreshAuthTokenType *emmRefreshAuthToken =
         [DBTEAMLOGEmmRefreshAuthTokenTypeSerializer deserialize:valueDict];
@@ -51193,50 +56720,6 @@
   } else if ([tag isEqualToString:@"group_rename"]) {
     DBTEAMLOGGroupRenameType *groupRename = [DBTEAMLOGGroupRenameTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithGroupRename:groupRename];
-  } else if ([tag isEqualToString:@"legal_holds_activate_a_hold"]) {
-    DBTEAMLOGLegalHoldsActivateAHoldType *legalHoldsActivateAHold =
-        [DBTEAMLOGLegalHoldsActivateAHoldTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsActivateAHold:legalHoldsActivateAHold];
-  } else if ([tag isEqualToString:@"legal_holds_add_members"]) {
-    DBTEAMLOGLegalHoldsAddMembersType *legalHoldsAddMembers =
-        [DBTEAMLOGLegalHoldsAddMembersTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsAddMembers:legalHoldsAddMembers];
-  } else if ([tag isEqualToString:@"legal_holds_change_hold_details"]) {
-    DBTEAMLOGLegalHoldsChangeHoldDetailsType *legalHoldsChangeHoldDetails =
-        [DBTEAMLOGLegalHoldsChangeHoldDetailsTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsChangeHoldDetails:legalHoldsChangeHoldDetails];
-  } else if ([tag isEqualToString:@"legal_holds_change_hold_name"]) {
-    DBTEAMLOGLegalHoldsChangeHoldNameType *legalHoldsChangeHoldName =
-        [DBTEAMLOGLegalHoldsChangeHoldNameTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsChangeHoldName:legalHoldsChangeHoldName];
-  } else if ([tag isEqualToString:@"legal_holds_export_a_hold"]) {
-    DBTEAMLOGLegalHoldsExportAHoldType *legalHoldsExportAHold =
-        [DBTEAMLOGLegalHoldsExportAHoldTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportAHold:legalHoldsExportAHold];
-  } else if ([tag isEqualToString:@"legal_holds_export_cancelled"]) {
-    DBTEAMLOGLegalHoldsExportCancelledType *legalHoldsExportCancelled =
-        [DBTEAMLOGLegalHoldsExportCancelledTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportCancelled:legalHoldsExportCancelled];
-  } else if ([tag isEqualToString:@"legal_holds_export_downloaded"]) {
-    DBTEAMLOGLegalHoldsExportDownloadedType *legalHoldsExportDownloaded =
-        [DBTEAMLOGLegalHoldsExportDownloadedTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportDownloaded:legalHoldsExportDownloaded];
-  } else if ([tag isEqualToString:@"legal_holds_export_removed"]) {
-    DBTEAMLOGLegalHoldsExportRemovedType *legalHoldsExportRemoved =
-        [DBTEAMLOGLegalHoldsExportRemovedTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsExportRemoved:legalHoldsExportRemoved];
-  } else if ([tag isEqualToString:@"legal_holds_release_a_hold"]) {
-    DBTEAMLOGLegalHoldsReleaseAHoldType *legalHoldsReleaseAHold =
-        [DBTEAMLOGLegalHoldsReleaseAHoldTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsReleaseAHold:legalHoldsReleaseAHold];
-  } else if ([tag isEqualToString:@"legal_holds_remove_members"]) {
-    DBTEAMLOGLegalHoldsRemoveMembersType *legalHoldsRemoveMembers =
-        [DBTEAMLOGLegalHoldsRemoveMembersTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsRemoveMembers:legalHoldsRemoveMembers];
-  } else if ([tag isEqualToString:@"legal_holds_report_a_hold"]) {
-    DBTEAMLOGLegalHoldsReportAHoldType *legalHoldsReportAHold =
-        [DBTEAMLOGLegalHoldsReportAHoldTypeSerializer deserialize:valueDict];
-    return [[DBTEAMLOGEventType alloc] initWithLegalHoldsReportAHold:legalHoldsReportAHold];
   } else if ([tag isEqualToString:@"account_lock_or_unlocked"]) {
     DBTEAMLOGAccountLockOrUnlockedType *accountLockOrUnlocked =
         [DBTEAMLOGAccountLockOrUnlockedTypeSerializer deserialize:valueDict];
@@ -51314,6 +56797,10 @@
   } else if ([tag isEqualToString:@"member_change_name"]) {
     DBTEAMLOGMemberChangeNameType *memberChangeName = [DBTEAMLOGMemberChangeNameTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithMemberChangeName:memberChangeName];
+  } else if ([tag isEqualToString:@"member_change_reseller_role"]) {
+    DBTEAMLOGMemberChangeResellerRoleType *memberChangeResellerRole =
+        [DBTEAMLOGMemberChangeResellerRoleTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithMemberChangeResellerRole:memberChangeResellerRole];
   } else if ([tag isEqualToString:@"member_change_status"]) {
     DBTEAMLOGMemberChangeStatusType *memberChangeStatus =
         [DBTEAMLOGMemberChangeStatusTypeSerializer deserialize:valueDict];
@@ -51571,6 +57058,14 @@
   } else if ([tag isEqualToString:@"password_reset_all"]) {
     DBTEAMLOGPasswordResetAllType *passwordResetAll = [DBTEAMLOGPasswordResetAllTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithPasswordResetAll:passwordResetAll];
+  } else if ([tag isEqualToString:@"classification_create_report"]) {
+    DBTEAMLOGClassificationCreateReportType *classificationCreateReport =
+        [DBTEAMLOGClassificationCreateReportTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithClassificationCreateReport:classificationCreateReport];
+  } else if ([tag isEqualToString:@"classification_create_report_fail"]) {
+    DBTEAMLOGClassificationCreateReportFailType *classificationCreateReportFail =
+        [DBTEAMLOGClassificationCreateReportFailTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithClassificationCreateReportFail:classificationCreateReportFail];
   } else if ([tag isEqualToString:@"emm_create_exceptions_report"]) {
     DBTEAMLOGEmmCreateExceptionsReportType *emmCreateExceptionsReport =
         [DBTEAMLOGEmmCreateExceptionsReportTypeSerializer deserialize:valueDict];
@@ -51944,6 +57439,14 @@
   } else if ([tag isEqualToString:@"shared_note_opened"]) {
     DBTEAMLOGSharedNoteOpenedType *sharedNoteOpened = [DBTEAMLOGSharedNoteOpenedTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithSharedNoteOpened:sharedNoteOpened];
+  } else if ([tag isEqualToString:@"shmodel_disable_downloads"]) {
+    DBTEAMLOGShmodelDisableDownloadsType *shmodelDisableDownloads =
+        [DBTEAMLOGShmodelDisableDownloadsTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithShmodelDisableDownloads:shmodelDisableDownloads];
+  } else if ([tag isEqualToString:@"shmodel_enable_downloads"]) {
+    DBTEAMLOGShmodelEnableDownloadsType *shmodelEnableDownloads =
+        [DBTEAMLOGShmodelEnableDownloadsTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithShmodelEnableDownloads:shmodelEnableDownloads];
   } else if ([tag isEqualToString:@"shmodel_group_share"]) {
     DBTEAMLOGShmodelGroupShareType *shmodelGroupShare =
         [DBTEAMLOGShmodelGroupShareTypeSerializer deserialize:valueDict];
@@ -52109,6 +57612,14 @@
     DBTEAMLOGCameraUploadsPolicyChangedType *cameraUploadsPolicyChanged =
         [DBTEAMLOGCameraUploadsPolicyChangedTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithCameraUploadsPolicyChanged:cameraUploadsPolicyChanged];
+  } else if ([tag isEqualToString:@"classification_change_policy"]) {
+    DBTEAMLOGClassificationChangePolicyType *classificationChangePolicy =
+        [DBTEAMLOGClassificationChangePolicyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithClassificationChangePolicy:classificationChangePolicy];
+  } else if ([tag isEqualToString:@"computer_backup_policy_changed"]) {
+    DBTEAMLOGComputerBackupPolicyChangedType *computerBackupPolicyChanged =
+        [DBTEAMLOGComputerBackupPolicyChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithComputerBackupPolicyChanged:computerBackupPolicyChanged];
   } else if ([tag isEqualToString:@"content_administration_policy_changed"]) {
     DBTEAMLOGContentAdministrationPolicyChangedType *contentAdministrationPolicyChanged =
         [DBTEAMLOGContentAdministrationPolicyChangedTypeSerializer deserialize:valueDict];
@@ -52338,6 +57849,10 @@
   } else if ([tag isEqualToString:@"sso_change_policy"]) {
     DBTEAMLOGSsoChangePolicyType *ssoChangePolicy = [DBTEAMLOGSsoChangePolicyTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithSsoChangePolicy:ssoChangePolicy];
+  } else if ([tag isEqualToString:@"team_branding_policy_changed"]) {
+    DBTEAMLOGTeamBrandingPolicyChangedType *teamBrandingPolicyChanged =
+        [DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamBrandingPolicyChanged:teamBrandingPolicyChanged];
   } else if ([tag isEqualToString:@"team_extensions_policy_changed"]) {
     DBTEAMLOGTeamExtensionsPolicyChangedType *teamExtensionsPolicyChanged =
         [DBTEAMLOGTeamExtensionsPolicyChangedTypeSerializer deserialize:valueDict];
@@ -52390,10 +57905,18 @@
   } else if ([tag isEqualToString:@"team_merge_to"]) {
     DBTEAMLOGTeamMergeToType *teamMergeTo = [DBTEAMLOGTeamMergeToTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithTeamMergeTo:teamMergeTo];
+  } else if ([tag isEqualToString:@"team_profile_add_background"]) {
+    DBTEAMLOGTeamProfileAddBackgroundType *teamProfileAddBackground =
+        [DBTEAMLOGTeamProfileAddBackgroundTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamProfileAddBackground:teamProfileAddBackground];
   } else if ([tag isEqualToString:@"team_profile_add_logo"]) {
     DBTEAMLOGTeamProfileAddLogoType *teamProfileAddLogo =
         [DBTEAMLOGTeamProfileAddLogoTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithTeamProfileAddLogo:teamProfileAddLogo];
+  } else if ([tag isEqualToString:@"team_profile_change_background"]) {
+    DBTEAMLOGTeamProfileChangeBackgroundType *teamProfileChangeBackground =
+        [DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamProfileChangeBackground:teamProfileChangeBackground];
   } else if ([tag isEqualToString:@"team_profile_change_default_language"]) {
     DBTEAMLOGTeamProfileChangeDefaultLanguageType *teamProfileChangeDefaultLanguage =
         [DBTEAMLOGTeamProfileChangeDefaultLanguageTypeSerializer deserialize:valueDict];
@@ -52406,6 +57929,10 @@
     DBTEAMLOGTeamProfileChangeNameType *teamProfileChangeName =
         [DBTEAMLOGTeamProfileChangeNameTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithTeamProfileChangeName:teamProfileChangeName];
+  } else if ([tag isEqualToString:@"team_profile_remove_background"]) {
+    DBTEAMLOGTeamProfileRemoveBackgroundType *teamProfileRemoveBackground =
+        [DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithTeamProfileRemoveBackground:teamProfileRemoveBackground];
   } else if ([tag isEqualToString:@"team_profile_remove_logo"]) {
     DBTEAMLOGTeamProfileRemoveLogoType *teamProfileRemoveLogo =
         [DBTEAMLOGTeamProfileRemoveLogoTypeSerializer deserialize:valueDict];
@@ -52569,6 +58096,22 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithAdminAlertingChangedAlertConfig {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig;
+  }
+  return self;
+}
+
+- (instancetype)initWithAdminAlertingTriggeredAlert {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert;
+  }
+  return self;
+}
+
 - (instancetype)initWithAppLinkTeam {
   self = [super init];
   if (self) {
@@ -52681,6 +58224,182 @@
   return self;
 }
 
+- (instancetype)initWithGovernancePolicyAddFolders {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyAddFolders;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyAddFolderFailed {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyAddFolderFailed;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyCreate {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyCreate;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyDelete {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyDelete;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyEditDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyEditDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyEditDuration {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyEditDuration;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyExportCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyExportCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyExportRemoved {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyExportRemoved;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyRemoveFolders {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyRemoveFolders;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyReportCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyReportCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyZipPartDownloaded {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgGovernancePolicyZipPartDownloaded;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsActivateAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsActivateAHold;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsAddMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsAddMembers;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsChangeHoldDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsChangeHoldName {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportAHold;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportCancelled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportCancelled;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportDownloaded {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsExportRemoved {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportRemoved;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsReleaseAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsRemoveMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers;
+  }
+  return self;
+}
+
+- (instancetype)initWithLegalHoldsReportAHold {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgLegalHoldsReportAHold;
+  }
+  return self;
+}
+
 - (instancetype)initWithDeviceChangeIpDesktop {
   self = [super init];
   if (self) {
@@ -52753,10 +58472,34 @@
   return self;
 }
 
+- (instancetype)initWithDeviceSyncBackupStatusChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgDeviceSyncBackupStatusChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithDeviceUnlink {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgDeviceUnlink;
+  }
+  return self;
+}
+
+- (instancetype)initWithDropboxPasswordsExported {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgDropboxPasswordsExported;
+  }
+  return self;
+}
+
+- (instancetype)initWithDropboxPasswordsNewDeviceEnrolled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled;
   }
   return self;
 }
@@ -53193,94 +58936,6 @@
   return self;
 }
 
-- (instancetype)initWithLegalHoldsActivateAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsActivateAHold;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsAddMembers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsAddMembers;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsChangeHoldDetails {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsChangeHoldName {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportAHold;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportCancelled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportCancelled;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportDownloaded {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsExportRemoved {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsExportRemoved;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsReleaseAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsRemoveMembers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers;
-  }
-  return self;
-}
-
-- (instancetype)initWithLegalHoldsReportAHold {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGEventTypeArgLegalHoldsReportAHold;
-  }
-  return self;
-}
-
 - (instancetype)initWithAccountLockOrUnlocked {
   self = [super init];
   if (self) {
@@ -53445,6 +59100,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgMemberChangeName;
+  }
+  return self;
+}
+
+- (instancetype)initWithMemberChangeResellerRole {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgMemberChangeResellerRole;
   }
   return self;
 }
@@ -53989,6 +59652,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgPasswordResetAll;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationCreateReport {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgClassificationCreateReport;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationCreateReportFail {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgClassificationCreateReportFail;
   }
   return self;
 }
@@ -54769,6 +60448,22 @@
   return self;
 }
 
+- (instancetype)initWithShmodelDisableDownloads {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgShmodelDisableDownloads;
+  }
+  return self;
+}
+
+- (instancetype)initWithShmodelEnableDownloads {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgShmodelEnableDownloads;
+  }
+  return self;
+}
+
 - (instancetype)initWithShmodelGroupShare {
   self = [super init];
   if (self) {
@@ -55125,6 +60820,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgCameraUploadsPolicyChanged;
+  }
+  return self;
+}
+
+- (instancetype)initWithClassificationChangePolicy {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgClassificationChangePolicy;
+  }
+  return self;
+}
+
+- (instancetype)initWithComputerBackupPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgComputerBackupPolicyChanged;
   }
   return self;
 }
@@ -55585,6 +61296,14 @@
   return self;
 }
 
+- (instancetype)initWithTeamBrandingPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamBrandingPolicyChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamExtensionsPolicyChanged {
   self = [super init];
   if (self) {
@@ -55697,10 +61416,26 @@
   return self;
 }
 
+- (instancetype)initWithTeamProfileAddBackground {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamProfileAddBackground;
+  }
+  return self;
+}
+
 - (instancetype)initWithTeamProfileAddLogo {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgTeamProfileAddLogo;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileChangeBackground {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamProfileChangeBackground;
   }
   return self;
 }
@@ -55725,6 +61460,14 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgTeamProfileChangeName;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeamProfileRemoveBackground {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgTeamProfileRemoveBackground;
   }
   return self;
 }
@@ -56005,6 +61748,14 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAdminAlertingChangedAlertConfig {
+  return _tag == DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig;
+}
+
+- (BOOL)isAdminAlertingTriggeredAlert {
+  return _tag == DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert;
+}
+
 - (BOOL)isAppLinkTeam {
   return _tag == DBTEAMLOGEventTypeArgAppLinkTeam;
 }
@@ -56061,6 +61812,94 @@
   return _tag == DBTEAMLOGEventTypeArgFileUnresolveComment;
 }
 
+- (BOOL)isGovernancePolicyAddFolders {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyAddFolders;
+}
+
+- (BOOL)isGovernancePolicyAddFolderFailed {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyAddFolderFailed;
+}
+
+- (BOOL)isGovernancePolicyCreate {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyCreate;
+}
+
+- (BOOL)isGovernancePolicyDelete {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyDelete;
+}
+
+- (BOOL)isGovernancePolicyEditDetails {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyEditDetails;
+}
+
+- (BOOL)isGovernancePolicyEditDuration {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyEditDuration;
+}
+
+- (BOOL)isGovernancePolicyExportCreated {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyExportCreated;
+}
+
+- (BOOL)isGovernancePolicyExportRemoved {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyExportRemoved;
+}
+
+- (BOOL)isGovernancePolicyRemoveFolders {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyRemoveFolders;
+}
+
+- (BOOL)isGovernancePolicyReportCreated {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyReportCreated;
+}
+
+- (BOOL)isGovernancePolicyZipPartDownloaded {
+  return _tag == DBTEAMLOGEventTypeArgGovernancePolicyZipPartDownloaded;
+}
+
+- (BOOL)isLegalHoldsActivateAHold {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsActivateAHold;
+}
+
+- (BOOL)isLegalHoldsAddMembers {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsAddMembers;
+}
+
+- (BOOL)isLegalHoldsChangeHoldDetails {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails;
+}
+
+- (BOOL)isLegalHoldsChangeHoldName {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName;
+}
+
+- (BOOL)isLegalHoldsExportAHold {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportAHold;
+}
+
+- (BOOL)isLegalHoldsExportCancelled {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportCancelled;
+}
+
+- (BOOL)isLegalHoldsExportDownloaded {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded;
+}
+
+- (BOOL)isLegalHoldsExportRemoved {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportRemoved;
+}
+
+- (BOOL)isLegalHoldsReleaseAHold {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold;
+}
+
+- (BOOL)isLegalHoldsRemoveMembers {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers;
+}
+
+- (BOOL)isLegalHoldsReportAHold {
+  return _tag == DBTEAMLOGEventTypeArgLegalHoldsReportAHold;
+}
+
 - (BOOL)isDeviceChangeIpDesktop {
   return _tag == DBTEAMLOGEventTypeArgDeviceChangeIpDesktop;
 }
@@ -56097,8 +61936,20 @@
   return _tag == DBTEAMLOGEventTypeArgDeviceManagementEnabled;
 }
 
+- (BOOL)isDeviceSyncBackupStatusChanged {
+  return _tag == DBTEAMLOGEventTypeArgDeviceSyncBackupStatusChanged;
+}
+
 - (BOOL)isDeviceUnlink {
   return _tag == DBTEAMLOGEventTypeArgDeviceUnlink;
+}
+
+- (BOOL)isDropboxPasswordsExported {
+  return _tag == DBTEAMLOGEventTypeArgDropboxPasswordsExported;
+}
+
+- (BOOL)isDropboxPasswordsNewDeviceEnrolled {
+  return _tag == DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled;
 }
 
 - (BOOL)isEmmRefreshAuthToken {
@@ -56317,50 +62168,6 @@
   return _tag == DBTEAMLOGEventTypeArgGroupRename;
 }
 
-- (BOOL)isLegalHoldsActivateAHold {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsActivateAHold;
-}
-
-- (BOOL)isLegalHoldsAddMembers {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsAddMembers;
-}
-
-- (BOOL)isLegalHoldsChangeHoldDetails {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails;
-}
-
-- (BOOL)isLegalHoldsChangeHoldName {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName;
-}
-
-- (BOOL)isLegalHoldsExportAHold {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportAHold;
-}
-
-- (BOOL)isLegalHoldsExportCancelled {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportCancelled;
-}
-
-- (BOOL)isLegalHoldsExportDownloaded {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded;
-}
-
-- (BOOL)isLegalHoldsExportRemoved {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsExportRemoved;
-}
-
-- (BOOL)isLegalHoldsReleaseAHold {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold;
-}
-
-- (BOOL)isLegalHoldsRemoveMembers {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers;
-}
-
-- (BOOL)isLegalHoldsReportAHold {
-  return _tag == DBTEAMLOGEventTypeArgLegalHoldsReportAHold;
-}
-
 - (BOOL)isAccountLockOrUnlocked {
   return _tag == DBTEAMLOGEventTypeArgAccountLockOrUnlocked;
 }
@@ -56443,6 +62250,10 @@
 
 - (BOOL)isMemberChangeName {
   return _tag == DBTEAMLOGEventTypeArgMemberChangeName;
+}
+
+- (BOOL)isMemberChangeResellerRole {
+  return _tag == DBTEAMLOGEventTypeArgMemberChangeResellerRole;
 }
 
 - (BOOL)isMemberChangeStatus {
@@ -56715,6 +62526,14 @@
 
 - (BOOL)isPasswordResetAll {
   return _tag == DBTEAMLOGEventTypeArgPasswordResetAll;
+}
+
+- (BOOL)isClassificationCreateReport {
+  return _tag == DBTEAMLOGEventTypeArgClassificationCreateReport;
+}
+
+- (BOOL)isClassificationCreateReportFail {
+  return _tag == DBTEAMLOGEventTypeArgClassificationCreateReportFail;
 }
 
 - (BOOL)isEmmCreateExceptionsReport {
@@ -57105,6 +62924,14 @@
   return _tag == DBTEAMLOGEventTypeArgSharedNoteOpened;
 }
 
+- (BOOL)isShmodelDisableDownloads {
+  return _tag == DBTEAMLOGEventTypeArgShmodelDisableDownloads;
+}
+
+- (BOOL)isShmodelEnableDownloads {
+  return _tag == DBTEAMLOGEventTypeArgShmodelEnableDownloads;
+}
+
 - (BOOL)isShmodelGroupShare {
   return _tag == DBTEAMLOGEventTypeArgShmodelGroupShare;
 }
@@ -57283,6 +63110,14 @@
 
 - (BOOL)isCameraUploadsPolicyChanged {
   return _tag == DBTEAMLOGEventTypeArgCameraUploadsPolicyChanged;
+}
+
+- (BOOL)isClassificationChangePolicy {
+  return _tag == DBTEAMLOGEventTypeArgClassificationChangePolicy;
+}
+
+- (BOOL)isComputerBackupPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeArgComputerBackupPolicyChanged;
 }
 
 - (BOOL)isContentAdministrationPolicyChanged {
@@ -57513,6 +63348,10 @@
   return _tag == DBTEAMLOGEventTypeArgSsoChangePolicy;
 }
 
+- (BOOL)isTeamBrandingPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeArgTeamBrandingPolicyChanged;
+}
+
 - (BOOL)isTeamExtensionsPolicyChanged {
   return _tag == DBTEAMLOGEventTypeArgTeamExtensionsPolicyChanged;
 }
@@ -57569,8 +63408,16 @@
   return _tag == DBTEAMLOGEventTypeArgTeamMergeTo;
 }
 
+- (BOOL)isTeamProfileAddBackground {
+  return _tag == DBTEAMLOGEventTypeArgTeamProfileAddBackground;
+}
+
 - (BOOL)isTeamProfileAddLogo {
   return _tag == DBTEAMLOGEventTypeArgTeamProfileAddLogo;
+}
+
+- (BOOL)isTeamProfileChangeBackground {
+  return _tag == DBTEAMLOGEventTypeArgTeamProfileChangeBackground;
 }
 
 - (BOOL)isTeamProfileChangeDefaultLanguage {
@@ -57583,6 +63430,10 @@
 
 - (BOOL)isTeamProfileChangeName {
   return _tag == DBTEAMLOGEventTypeArgTeamProfileChangeName;
+}
+
+- (BOOL)isTeamProfileRemoveBackground {
+  return _tag == DBTEAMLOGEventTypeArgTeamProfileRemoveBackground;
 }
 
 - (BOOL)isTeamProfileRemoveLogo {
@@ -57723,6 +63574,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig:
+    return @"DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig";
+  case DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert:
+    return @"DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert";
   case DBTEAMLOGEventTypeArgAppLinkTeam:
     return @"DBTEAMLOGEventTypeArgAppLinkTeam";
   case DBTEAMLOGEventTypeArgAppLinkUser:
@@ -57751,6 +63606,50 @@
     return @"DBTEAMLOGEventTypeArgFileUnlikeComment";
   case DBTEAMLOGEventTypeArgFileUnresolveComment:
     return @"DBTEAMLOGEventTypeArgFileUnresolveComment";
+  case DBTEAMLOGEventTypeArgGovernancePolicyAddFolders:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyAddFolders";
+  case DBTEAMLOGEventTypeArgGovernancePolicyAddFolderFailed:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyAddFolderFailed";
+  case DBTEAMLOGEventTypeArgGovernancePolicyCreate:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyCreate";
+  case DBTEAMLOGEventTypeArgGovernancePolicyDelete:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyDelete";
+  case DBTEAMLOGEventTypeArgGovernancePolicyEditDetails:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyEditDetails";
+  case DBTEAMLOGEventTypeArgGovernancePolicyEditDuration:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyEditDuration";
+  case DBTEAMLOGEventTypeArgGovernancePolicyExportCreated:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyExportCreated";
+  case DBTEAMLOGEventTypeArgGovernancePolicyExportRemoved:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyExportRemoved";
+  case DBTEAMLOGEventTypeArgGovernancePolicyRemoveFolders:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyRemoveFolders";
+  case DBTEAMLOGEventTypeArgGovernancePolicyReportCreated:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyReportCreated";
+  case DBTEAMLOGEventTypeArgGovernancePolicyZipPartDownloaded:
+    return @"DBTEAMLOGEventTypeArgGovernancePolicyZipPartDownloaded";
+  case DBTEAMLOGEventTypeArgLegalHoldsActivateAHold:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsActivateAHold";
+  case DBTEAMLOGEventTypeArgLegalHoldsAddMembers:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsAddMembers";
+  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails";
+  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName";
+  case DBTEAMLOGEventTypeArgLegalHoldsExportAHold:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsExportAHold";
+  case DBTEAMLOGEventTypeArgLegalHoldsExportCancelled:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsExportCancelled";
+  case DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded";
+  case DBTEAMLOGEventTypeArgLegalHoldsExportRemoved:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsExportRemoved";
+  case DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold";
+  case DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers";
+  case DBTEAMLOGEventTypeArgLegalHoldsReportAHold:
+    return @"DBTEAMLOGEventTypeArgLegalHoldsReportAHold";
   case DBTEAMLOGEventTypeArgDeviceChangeIpDesktop:
     return @"DBTEAMLOGEventTypeArgDeviceChangeIpDesktop";
   case DBTEAMLOGEventTypeArgDeviceChangeIpMobile:
@@ -57769,8 +63668,14 @@
     return @"DBTEAMLOGEventTypeArgDeviceManagementDisabled";
   case DBTEAMLOGEventTypeArgDeviceManagementEnabled:
     return @"DBTEAMLOGEventTypeArgDeviceManagementEnabled";
+  case DBTEAMLOGEventTypeArgDeviceSyncBackupStatusChanged:
+    return @"DBTEAMLOGEventTypeArgDeviceSyncBackupStatusChanged";
   case DBTEAMLOGEventTypeArgDeviceUnlink:
     return @"DBTEAMLOGEventTypeArgDeviceUnlink";
+  case DBTEAMLOGEventTypeArgDropboxPasswordsExported:
+    return @"DBTEAMLOGEventTypeArgDropboxPasswordsExported";
+  case DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled:
+    return @"DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled";
   case DBTEAMLOGEventTypeArgEmmRefreshAuthToken:
     return @"DBTEAMLOGEventTypeArgEmmRefreshAuthToken";
   case DBTEAMLOGEventTypeArgAccountCaptureChangeAvailability:
@@ -57879,28 +63784,6 @@
     return @"DBTEAMLOGEventTypeArgGroupRemoveMember";
   case DBTEAMLOGEventTypeArgGroupRename:
     return @"DBTEAMLOGEventTypeArgGroupRename";
-  case DBTEAMLOGEventTypeArgLegalHoldsActivateAHold:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsActivateAHold";
-  case DBTEAMLOGEventTypeArgLegalHoldsAddMembers:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsAddMembers";
-  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails";
-  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName";
-  case DBTEAMLOGEventTypeArgLegalHoldsExportAHold:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsExportAHold";
-  case DBTEAMLOGEventTypeArgLegalHoldsExportCancelled:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsExportCancelled";
-  case DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded";
-  case DBTEAMLOGEventTypeArgLegalHoldsExportRemoved:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsExportRemoved";
-  case DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold";
-  case DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers";
-  case DBTEAMLOGEventTypeArgLegalHoldsReportAHold:
-    return @"DBTEAMLOGEventTypeArgLegalHoldsReportAHold";
   case DBTEAMLOGEventTypeArgAccountLockOrUnlocked:
     return @"DBTEAMLOGEventTypeArgAccountLockOrUnlocked";
   case DBTEAMLOGEventTypeArgEmmError:
@@ -57943,6 +63826,8 @@
     return @"DBTEAMLOGEventTypeArgMemberChangeMembershipType";
   case DBTEAMLOGEventTypeArgMemberChangeName:
     return @"DBTEAMLOGEventTypeArgMemberChangeName";
+  case DBTEAMLOGEventTypeArgMemberChangeResellerRole:
+    return @"DBTEAMLOGEventTypeArgMemberChangeResellerRole";
   case DBTEAMLOGEventTypeArgMemberChangeStatus:
     return @"DBTEAMLOGEventTypeArgMemberChangeStatus";
   case DBTEAMLOGEventTypeArgMemberDeleteManualContacts:
@@ -58079,6 +63964,10 @@
     return @"DBTEAMLOGEventTypeArgPasswordReset";
   case DBTEAMLOGEventTypeArgPasswordResetAll:
     return @"DBTEAMLOGEventTypeArgPasswordResetAll";
+  case DBTEAMLOGEventTypeArgClassificationCreateReport:
+    return @"DBTEAMLOGEventTypeArgClassificationCreateReport";
+  case DBTEAMLOGEventTypeArgClassificationCreateReportFail:
+    return @"DBTEAMLOGEventTypeArgClassificationCreateReportFail";
   case DBTEAMLOGEventTypeArgEmmCreateExceptionsReport:
     return @"DBTEAMLOGEventTypeArgEmmCreateExceptionsReport";
   case DBTEAMLOGEventTypeArgEmmCreateUsageReport:
@@ -58273,6 +64162,10 @@
     return @"DBTEAMLOGEventTypeArgSharedLinkView";
   case DBTEAMLOGEventTypeArgSharedNoteOpened:
     return @"DBTEAMLOGEventTypeArgSharedNoteOpened";
+  case DBTEAMLOGEventTypeArgShmodelDisableDownloads:
+    return @"DBTEAMLOGEventTypeArgShmodelDisableDownloads";
+  case DBTEAMLOGEventTypeArgShmodelEnableDownloads:
+    return @"DBTEAMLOGEventTypeArgShmodelEnableDownloads";
   case DBTEAMLOGEventTypeArgShmodelGroupShare:
     return @"DBTEAMLOGEventTypeArgShmodelGroupShare";
   case DBTEAMLOGEventTypeArgShowcaseAccessGranted:
@@ -58363,6 +64256,10 @@
     return @"DBTEAMLOGEventTypeArgAllowDownloadEnabled";
   case DBTEAMLOGEventTypeArgCameraUploadsPolicyChanged:
     return @"DBTEAMLOGEventTypeArgCameraUploadsPolicyChanged";
+  case DBTEAMLOGEventTypeArgClassificationChangePolicy:
+    return @"DBTEAMLOGEventTypeArgClassificationChangePolicy";
+  case DBTEAMLOGEventTypeArgComputerBackupPolicyChanged:
+    return @"DBTEAMLOGEventTypeArgComputerBackupPolicyChanged";
   case DBTEAMLOGEventTypeArgContentAdministrationPolicyChanged:
     return @"DBTEAMLOGEventTypeArgContentAdministrationPolicyChanged";
   case DBTEAMLOGEventTypeArgDataPlacementRestrictionChangePolicy:
@@ -58477,6 +64374,8 @@
     return @"DBTEAMLOGEventTypeArgSmartSyncOptOut";
   case DBTEAMLOGEventTypeArgSsoChangePolicy:
     return @"DBTEAMLOGEventTypeArgSsoChangePolicy";
+  case DBTEAMLOGEventTypeArgTeamBrandingPolicyChanged:
+    return @"DBTEAMLOGEventTypeArgTeamBrandingPolicyChanged";
   case DBTEAMLOGEventTypeArgTeamExtensionsPolicyChanged:
     return @"DBTEAMLOGEventTypeArgTeamExtensionsPolicyChanged";
   case DBTEAMLOGEventTypeArgTeamSelectiveSyncPolicyChanged:
@@ -58505,14 +64404,20 @@
     return @"DBTEAMLOGEventTypeArgTeamMergeFrom";
   case DBTEAMLOGEventTypeArgTeamMergeTo:
     return @"DBTEAMLOGEventTypeArgTeamMergeTo";
+  case DBTEAMLOGEventTypeArgTeamProfileAddBackground:
+    return @"DBTEAMLOGEventTypeArgTeamProfileAddBackground";
   case DBTEAMLOGEventTypeArgTeamProfileAddLogo:
     return @"DBTEAMLOGEventTypeArgTeamProfileAddLogo";
+  case DBTEAMLOGEventTypeArgTeamProfileChangeBackground:
+    return @"DBTEAMLOGEventTypeArgTeamProfileChangeBackground";
   case DBTEAMLOGEventTypeArgTeamProfileChangeDefaultLanguage:
     return @"DBTEAMLOGEventTypeArgTeamProfileChangeDefaultLanguage";
   case DBTEAMLOGEventTypeArgTeamProfileChangeLogo:
     return @"DBTEAMLOGEventTypeArgTeamProfileChangeLogo";
   case DBTEAMLOGEventTypeArgTeamProfileChangeName:
     return @"DBTEAMLOGEventTypeArgTeamProfileChangeName";
+  case DBTEAMLOGEventTypeArgTeamProfileRemoveBackground:
+    return @"DBTEAMLOGEventTypeArgTeamProfileRemoveBackground";
   case DBTEAMLOGEventTypeArgTeamProfileRemoveLogo:
     return @"DBTEAMLOGEventTypeArgTeamProfileRemoveLogo";
   case DBTEAMLOGEventTypeArgTfaAddBackupPhone:
@@ -58617,6 +64522,10 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgAppLinkTeam:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgAppLinkUser:
@@ -58645,6 +64554,50 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgFileUnresolveComment:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyAddFolders:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyAddFolderFailed:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyCreate:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyDelete:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyEditDetails:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyEditDuration:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyExportCreated:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyExportRemoved:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyRemoveFolders:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyReportCreated:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgGovernancePolicyZipPartDownloaded:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsActivateAHold:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsAddMembers:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportAHold:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportCancelled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportRemoved:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgLegalHoldsReportAHold:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgDeviceChangeIpDesktop:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgDeviceChangeIpMobile:
@@ -58663,7 +64616,13 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgDeviceManagementEnabled:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgDeviceSyncBackupStatusChanged:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgDeviceUnlink:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgDropboxPasswordsExported:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgEmmRefreshAuthToken:
     result = prime * result + [[self tagName] hash];
@@ -58773,28 +64732,6 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgGroupRename:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsActivateAHold:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsAddMembers:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportAHold:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportCancelled:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportRemoved:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGEventTypeArgLegalHoldsReportAHold:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgAccountLockOrUnlocked:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgEmmError:
@@ -58836,6 +64773,8 @@
   case DBTEAMLOGEventTypeArgMemberChangeMembershipType:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgMemberChangeName:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgMemberChangeResellerRole:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgMemberChangeStatus:
     result = prime * result + [[self tagName] hash];
@@ -58972,6 +64911,10 @@
   case DBTEAMLOGEventTypeArgPasswordReset:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgPasswordResetAll:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgClassificationCreateReport:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgClassificationCreateReportFail:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgEmmCreateExceptionsReport:
     result = prime * result + [[self tagName] hash];
@@ -59167,6 +65110,10 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgSharedNoteOpened:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgShmodelDisableDownloads:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgShmodelEnableDownloads:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgShmodelGroupShare:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgShowcaseAccessGranted:
@@ -59256,6 +65203,10 @@
   case DBTEAMLOGEventTypeArgAllowDownloadEnabled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgCameraUploadsPolicyChanged:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgClassificationChangePolicy:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgComputerBackupPolicyChanged:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgContentAdministrationPolicyChanged:
     result = prime * result + [[self tagName] hash];
@@ -59371,6 +65322,8 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgSsoChangePolicy:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgTeamBrandingPolicyChanged:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamExtensionsPolicyChanged:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamSelectiveSyncPolicyChanged:
@@ -59399,13 +65352,19 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamMergeTo:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgTeamProfileAddBackground:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamProfileAddLogo:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgTeamProfileChangeBackground:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamProfileChangeDefaultLanguage:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamProfileChangeLogo:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamProfileChangeName:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGEventTypeArgTeamProfileRemoveBackground:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGEventTypeArgTeamProfileRemoveLogo:
     result = prime * result + [[self tagName] hash];
@@ -59500,6 +65459,10 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGEventTypeArgAdminAlertingChangedAlertConfig:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgAdminAlertingTriggeredAlert:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAppLinkTeam:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAppLinkUser:
@@ -59528,6 +65491,50 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgFileUnresolveComment:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyAddFolders:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyAddFolderFailed:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyCreate:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyDelete:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyEditDetails:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyEditDuration:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyExportCreated:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyExportRemoved:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyRemoveFolders:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyReportCreated:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgGovernancePolicyZipPartDownloaded:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsActivateAHold:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsAddMembers:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportAHold:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportCancelled:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsExportRemoved:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgLegalHoldsReportAHold:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgDeviceChangeIpDesktop:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgDeviceChangeIpMobile:
@@ -59546,7 +65553,13 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgDeviceManagementEnabled:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgDeviceSyncBackupStatusChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgDeviceUnlink:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgDropboxPasswordsExported:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEmmRefreshAuthToken:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -59656,28 +65669,6 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgGroupRename:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsActivateAHold:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsAddMembers:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldDetails:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsChangeHoldName:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportAHold:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportCancelled:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportDownloaded:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsExportRemoved:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsReleaseAHold:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsRemoveMembers:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
-  case DBTEAMLOGEventTypeArgLegalHoldsReportAHold:
-    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAccountLockOrUnlocked:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEmmError:
@@ -59719,6 +65710,8 @@
   case DBTEAMLOGEventTypeArgMemberChangeMembershipType:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgMemberChangeName:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgMemberChangeResellerRole:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgMemberChangeStatus:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -59855,6 +65848,10 @@
   case DBTEAMLOGEventTypeArgPasswordReset:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgPasswordResetAll:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgClassificationCreateReport:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgClassificationCreateReportFail:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEmmCreateExceptionsReport:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -60050,6 +66047,10 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgSharedNoteOpened:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgShmodelDisableDownloads:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgShmodelEnableDownloads:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgShmodelGroupShare:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgShowcaseAccessGranted:
@@ -60139,6 +66140,10 @@
   case DBTEAMLOGEventTypeArgAllowDownloadEnabled:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgCameraUploadsPolicyChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgClassificationChangePolicy:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgComputerBackupPolicyChanged:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgContentAdministrationPolicyChanged:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -60254,6 +66259,8 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgSsoChangePolicy:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamBrandingPolicyChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamExtensionsPolicyChanged:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamSelectiveSyncPolicyChanged:
@@ -60282,13 +66289,19 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamMergeTo:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamProfileAddBackground:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamProfileAddLogo:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamProfileChangeBackground:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamProfileChangeDefaultLanguage:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamProfileChangeLogo:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamProfileChangeName:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgTeamProfileRemoveBackground:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamProfileRemoveLogo:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -60371,7 +66384,11 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGEventTypeArg *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isAppLinkTeam]) {
+  if ([valueObj isAdminAlertingChangedAlertConfig]) {
+    jsonDict[@".tag"] = @"admin_alerting_changed_alert_config";
+  } else if ([valueObj isAdminAlertingTriggeredAlert]) {
+    jsonDict[@".tag"] = @"admin_alerting_triggered_alert";
+  } else if ([valueObj isAppLinkTeam]) {
     jsonDict[@".tag"] = @"app_link_team";
   } else if ([valueObj isAppLinkUser]) {
     jsonDict[@".tag"] = @"app_link_user";
@@ -60399,6 +66416,50 @@
     jsonDict[@".tag"] = @"file_unlike_comment";
   } else if ([valueObj isFileUnresolveComment]) {
     jsonDict[@".tag"] = @"file_unresolve_comment";
+  } else if ([valueObj isGovernancePolicyAddFolders]) {
+    jsonDict[@".tag"] = @"governance_policy_add_folders";
+  } else if ([valueObj isGovernancePolicyAddFolderFailed]) {
+    jsonDict[@".tag"] = @"governance_policy_add_folder_failed";
+  } else if ([valueObj isGovernancePolicyCreate]) {
+    jsonDict[@".tag"] = @"governance_policy_create";
+  } else if ([valueObj isGovernancePolicyDelete]) {
+    jsonDict[@".tag"] = @"governance_policy_delete";
+  } else if ([valueObj isGovernancePolicyEditDetails]) {
+    jsonDict[@".tag"] = @"governance_policy_edit_details";
+  } else if ([valueObj isGovernancePolicyEditDuration]) {
+    jsonDict[@".tag"] = @"governance_policy_edit_duration";
+  } else if ([valueObj isGovernancePolicyExportCreated]) {
+    jsonDict[@".tag"] = @"governance_policy_export_created";
+  } else if ([valueObj isGovernancePolicyExportRemoved]) {
+    jsonDict[@".tag"] = @"governance_policy_export_removed";
+  } else if ([valueObj isGovernancePolicyRemoveFolders]) {
+    jsonDict[@".tag"] = @"governance_policy_remove_folders";
+  } else if ([valueObj isGovernancePolicyReportCreated]) {
+    jsonDict[@".tag"] = @"governance_policy_report_created";
+  } else if ([valueObj isGovernancePolicyZipPartDownloaded]) {
+    jsonDict[@".tag"] = @"governance_policy_zip_part_downloaded";
+  } else if ([valueObj isLegalHoldsActivateAHold]) {
+    jsonDict[@".tag"] = @"legal_holds_activate_a_hold";
+  } else if ([valueObj isLegalHoldsAddMembers]) {
+    jsonDict[@".tag"] = @"legal_holds_add_members";
+  } else if ([valueObj isLegalHoldsChangeHoldDetails]) {
+    jsonDict[@".tag"] = @"legal_holds_change_hold_details";
+  } else if ([valueObj isLegalHoldsChangeHoldName]) {
+    jsonDict[@".tag"] = @"legal_holds_change_hold_name";
+  } else if ([valueObj isLegalHoldsExportAHold]) {
+    jsonDict[@".tag"] = @"legal_holds_export_a_hold";
+  } else if ([valueObj isLegalHoldsExportCancelled]) {
+    jsonDict[@".tag"] = @"legal_holds_export_cancelled";
+  } else if ([valueObj isLegalHoldsExportDownloaded]) {
+    jsonDict[@".tag"] = @"legal_holds_export_downloaded";
+  } else if ([valueObj isLegalHoldsExportRemoved]) {
+    jsonDict[@".tag"] = @"legal_holds_export_removed";
+  } else if ([valueObj isLegalHoldsReleaseAHold]) {
+    jsonDict[@".tag"] = @"legal_holds_release_a_hold";
+  } else if ([valueObj isLegalHoldsRemoveMembers]) {
+    jsonDict[@".tag"] = @"legal_holds_remove_members";
+  } else if ([valueObj isLegalHoldsReportAHold]) {
+    jsonDict[@".tag"] = @"legal_holds_report_a_hold";
   } else if ([valueObj isDeviceChangeIpDesktop]) {
     jsonDict[@".tag"] = @"device_change_ip_desktop";
   } else if ([valueObj isDeviceChangeIpMobile]) {
@@ -60417,8 +66478,14 @@
     jsonDict[@".tag"] = @"device_management_disabled";
   } else if ([valueObj isDeviceManagementEnabled]) {
     jsonDict[@".tag"] = @"device_management_enabled";
+  } else if ([valueObj isDeviceSyncBackupStatusChanged]) {
+    jsonDict[@".tag"] = @"device_sync_backup_status_changed";
   } else if ([valueObj isDeviceUnlink]) {
     jsonDict[@".tag"] = @"device_unlink";
+  } else if ([valueObj isDropboxPasswordsExported]) {
+    jsonDict[@".tag"] = @"dropbox_passwords_exported";
+  } else if ([valueObj isDropboxPasswordsNewDeviceEnrolled]) {
+    jsonDict[@".tag"] = @"dropbox_passwords_new_device_enrolled";
   } else if ([valueObj isEmmRefreshAuthToken]) {
     jsonDict[@".tag"] = @"emm_refresh_auth_token";
   } else if ([valueObj isAccountCaptureChangeAvailability]) {
@@ -60527,28 +66594,6 @@
     jsonDict[@".tag"] = @"group_remove_member";
   } else if ([valueObj isGroupRename]) {
     jsonDict[@".tag"] = @"group_rename";
-  } else if ([valueObj isLegalHoldsActivateAHold]) {
-    jsonDict[@".tag"] = @"legal_holds_activate_a_hold";
-  } else if ([valueObj isLegalHoldsAddMembers]) {
-    jsonDict[@".tag"] = @"legal_holds_add_members";
-  } else if ([valueObj isLegalHoldsChangeHoldDetails]) {
-    jsonDict[@".tag"] = @"legal_holds_change_hold_details";
-  } else if ([valueObj isLegalHoldsChangeHoldName]) {
-    jsonDict[@".tag"] = @"legal_holds_change_hold_name";
-  } else if ([valueObj isLegalHoldsExportAHold]) {
-    jsonDict[@".tag"] = @"legal_holds_export_a_hold";
-  } else if ([valueObj isLegalHoldsExportCancelled]) {
-    jsonDict[@".tag"] = @"legal_holds_export_cancelled";
-  } else if ([valueObj isLegalHoldsExportDownloaded]) {
-    jsonDict[@".tag"] = @"legal_holds_export_downloaded";
-  } else if ([valueObj isLegalHoldsExportRemoved]) {
-    jsonDict[@".tag"] = @"legal_holds_export_removed";
-  } else if ([valueObj isLegalHoldsReleaseAHold]) {
-    jsonDict[@".tag"] = @"legal_holds_release_a_hold";
-  } else if ([valueObj isLegalHoldsRemoveMembers]) {
-    jsonDict[@".tag"] = @"legal_holds_remove_members";
-  } else if ([valueObj isLegalHoldsReportAHold]) {
-    jsonDict[@".tag"] = @"legal_holds_report_a_hold";
   } else if ([valueObj isAccountLockOrUnlocked]) {
     jsonDict[@".tag"] = @"account_lock_or_unlocked";
   } else if ([valueObj isEmmError]) {
@@ -60591,6 +66636,8 @@
     jsonDict[@".tag"] = @"member_change_membership_type";
   } else if ([valueObj isMemberChangeName]) {
     jsonDict[@".tag"] = @"member_change_name";
+  } else if ([valueObj isMemberChangeResellerRole]) {
+    jsonDict[@".tag"] = @"member_change_reseller_role";
   } else if ([valueObj isMemberChangeStatus]) {
     jsonDict[@".tag"] = @"member_change_status";
   } else if ([valueObj isMemberDeleteManualContacts]) {
@@ -60727,6 +66774,10 @@
     jsonDict[@".tag"] = @"password_reset";
   } else if ([valueObj isPasswordResetAll]) {
     jsonDict[@".tag"] = @"password_reset_all";
+  } else if ([valueObj isClassificationCreateReport]) {
+    jsonDict[@".tag"] = @"classification_create_report";
+  } else if ([valueObj isClassificationCreateReportFail]) {
+    jsonDict[@".tag"] = @"classification_create_report_fail";
   } else if ([valueObj isEmmCreateExceptionsReport]) {
     jsonDict[@".tag"] = @"emm_create_exceptions_report";
   } else if ([valueObj isEmmCreateUsageReport]) {
@@ -60921,6 +66972,10 @@
     jsonDict[@".tag"] = @"shared_link_view";
   } else if ([valueObj isSharedNoteOpened]) {
     jsonDict[@".tag"] = @"shared_note_opened";
+  } else if ([valueObj isShmodelDisableDownloads]) {
+    jsonDict[@".tag"] = @"shmodel_disable_downloads";
+  } else if ([valueObj isShmodelEnableDownloads]) {
+    jsonDict[@".tag"] = @"shmodel_enable_downloads";
   } else if ([valueObj isShmodelGroupShare]) {
     jsonDict[@".tag"] = @"shmodel_group_share";
   } else if ([valueObj isShowcaseAccessGranted]) {
@@ -61011,6 +67066,10 @@
     jsonDict[@".tag"] = @"allow_download_enabled";
   } else if ([valueObj isCameraUploadsPolicyChanged]) {
     jsonDict[@".tag"] = @"camera_uploads_policy_changed";
+  } else if ([valueObj isClassificationChangePolicy]) {
+    jsonDict[@".tag"] = @"classification_change_policy";
+  } else if ([valueObj isComputerBackupPolicyChanged]) {
+    jsonDict[@".tag"] = @"computer_backup_policy_changed";
   } else if ([valueObj isContentAdministrationPolicyChanged]) {
     jsonDict[@".tag"] = @"content_administration_policy_changed";
   } else if ([valueObj isDataPlacementRestrictionChangePolicy]) {
@@ -61125,6 +67184,8 @@
     jsonDict[@".tag"] = @"smart_sync_opt_out";
   } else if ([valueObj isSsoChangePolicy]) {
     jsonDict[@".tag"] = @"sso_change_policy";
+  } else if ([valueObj isTeamBrandingPolicyChanged]) {
+    jsonDict[@".tag"] = @"team_branding_policy_changed";
   } else if ([valueObj isTeamExtensionsPolicyChanged]) {
     jsonDict[@".tag"] = @"team_extensions_policy_changed";
   } else if ([valueObj isTeamSelectiveSyncPolicyChanged]) {
@@ -61153,14 +67214,20 @@
     jsonDict[@".tag"] = @"team_merge_from";
   } else if ([valueObj isTeamMergeTo]) {
     jsonDict[@".tag"] = @"team_merge_to";
+  } else if ([valueObj isTeamProfileAddBackground]) {
+    jsonDict[@".tag"] = @"team_profile_add_background";
   } else if ([valueObj isTeamProfileAddLogo]) {
     jsonDict[@".tag"] = @"team_profile_add_logo";
+  } else if ([valueObj isTeamProfileChangeBackground]) {
+    jsonDict[@".tag"] = @"team_profile_change_background";
   } else if ([valueObj isTeamProfileChangeDefaultLanguage]) {
     jsonDict[@".tag"] = @"team_profile_change_default_language";
   } else if ([valueObj isTeamProfileChangeLogo]) {
     jsonDict[@".tag"] = @"team_profile_change_logo";
   } else if ([valueObj isTeamProfileChangeName]) {
     jsonDict[@".tag"] = @"team_profile_change_name";
+  } else if ([valueObj isTeamProfileRemoveBackground]) {
+    jsonDict[@".tag"] = @"team_profile_remove_background";
   } else if ([valueObj isTeamProfileRemoveLogo]) {
     jsonDict[@".tag"] = @"team_profile_remove_logo";
   } else if ([valueObj isTfaAddBackupPhone]) {
@@ -61239,7 +67306,11 @@
 + (DBTEAMLOGEventTypeArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"app_link_team"]) {
+  if ([tag isEqualToString:@"admin_alerting_changed_alert_config"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithAdminAlertingChangedAlertConfig];
+  } else if ([tag isEqualToString:@"admin_alerting_triggered_alert"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithAdminAlertingTriggeredAlert];
+  } else if ([tag isEqualToString:@"app_link_team"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAppLinkTeam];
   } else if ([tag isEqualToString:@"app_link_user"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAppLinkUser];
@@ -61267,6 +67338,50 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileUnlikeComment];
   } else if ([tag isEqualToString:@"file_unresolve_comment"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithFileUnresolveComment];
+  } else if ([tag isEqualToString:@"governance_policy_add_folders"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyAddFolders];
+  } else if ([tag isEqualToString:@"governance_policy_add_folder_failed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyAddFolderFailed];
+  } else if ([tag isEqualToString:@"governance_policy_create"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyCreate];
+  } else if ([tag isEqualToString:@"governance_policy_delete"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyDelete];
+  } else if ([tag isEqualToString:@"governance_policy_edit_details"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyEditDetails];
+  } else if ([tag isEqualToString:@"governance_policy_edit_duration"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyEditDuration];
+  } else if ([tag isEqualToString:@"governance_policy_export_created"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyExportCreated];
+  } else if ([tag isEqualToString:@"governance_policy_export_removed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyExportRemoved];
+  } else if ([tag isEqualToString:@"governance_policy_remove_folders"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyRemoveFolders];
+  } else if ([tag isEqualToString:@"governance_policy_report_created"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyReportCreated];
+  } else if ([tag isEqualToString:@"governance_policy_zip_part_downloaded"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithGovernancePolicyZipPartDownloaded];
+  } else if ([tag isEqualToString:@"legal_holds_activate_a_hold"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsActivateAHold];
+  } else if ([tag isEqualToString:@"legal_holds_add_members"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsAddMembers];
+  } else if ([tag isEqualToString:@"legal_holds_change_hold_details"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsChangeHoldDetails];
+  } else if ([tag isEqualToString:@"legal_holds_change_hold_name"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsChangeHoldName];
+  } else if ([tag isEqualToString:@"legal_holds_export_a_hold"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportAHold];
+  } else if ([tag isEqualToString:@"legal_holds_export_cancelled"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportCancelled];
+  } else if ([tag isEqualToString:@"legal_holds_export_downloaded"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportDownloaded];
+  } else if ([tag isEqualToString:@"legal_holds_export_removed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportRemoved];
+  } else if ([tag isEqualToString:@"legal_holds_release_a_hold"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsReleaseAHold];
+  } else if ([tag isEqualToString:@"legal_holds_remove_members"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsRemoveMembers];
+  } else if ([tag isEqualToString:@"legal_holds_report_a_hold"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsReportAHold];
   } else if ([tag isEqualToString:@"device_change_ip_desktop"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithDeviceChangeIpDesktop];
   } else if ([tag isEqualToString:@"device_change_ip_mobile"]) {
@@ -61285,8 +67400,14 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithDeviceManagementDisabled];
   } else if ([tag isEqualToString:@"device_management_enabled"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithDeviceManagementEnabled];
+  } else if ([tag isEqualToString:@"device_sync_backup_status_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithDeviceSyncBackupStatusChanged];
   } else if ([tag isEqualToString:@"device_unlink"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithDeviceUnlink];
+  } else if ([tag isEqualToString:@"dropbox_passwords_exported"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithDropboxPasswordsExported];
+  } else if ([tag isEqualToString:@"dropbox_passwords_new_device_enrolled"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithDropboxPasswordsNewDeviceEnrolled];
   } else if ([tag isEqualToString:@"emm_refresh_auth_token"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithEmmRefreshAuthToken];
   } else if ([tag isEqualToString:@"account_capture_change_availability"]) {
@@ -61395,28 +67516,6 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithGroupRemoveMember];
   } else if ([tag isEqualToString:@"group_rename"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithGroupRename];
-  } else if ([tag isEqualToString:@"legal_holds_activate_a_hold"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsActivateAHold];
-  } else if ([tag isEqualToString:@"legal_holds_add_members"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsAddMembers];
-  } else if ([tag isEqualToString:@"legal_holds_change_hold_details"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsChangeHoldDetails];
-  } else if ([tag isEqualToString:@"legal_holds_change_hold_name"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsChangeHoldName];
-  } else if ([tag isEqualToString:@"legal_holds_export_a_hold"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportAHold];
-  } else if ([tag isEqualToString:@"legal_holds_export_cancelled"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportCancelled];
-  } else if ([tag isEqualToString:@"legal_holds_export_downloaded"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportDownloaded];
-  } else if ([tag isEqualToString:@"legal_holds_export_removed"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsExportRemoved];
-  } else if ([tag isEqualToString:@"legal_holds_release_a_hold"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsReleaseAHold];
-  } else if ([tag isEqualToString:@"legal_holds_remove_members"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsRemoveMembers];
-  } else if ([tag isEqualToString:@"legal_holds_report_a_hold"]) {
-    return [[DBTEAMLOGEventTypeArg alloc] initWithLegalHoldsReportAHold];
   } else if ([tag isEqualToString:@"account_lock_or_unlocked"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAccountLockOrUnlocked];
   } else if ([tag isEqualToString:@"emm_error"]) {
@@ -61459,6 +67558,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithMemberChangeMembershipType];
   } else if ([tag isEqualToString:@"member_change_name"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithMemberChangeName];
+  } else if ([tag isEqualToString:@"member_change_reseller_role"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithMemberChangeResellerRole];
   } else if ([tag isEqualToString:@"member_change_status"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithMemberChangeStatus];
   } else if ([tag isEqualToString:@"member_delete_manual_contacts"]) {
@@ -61595,6 +67696,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithPasswordReset];
   } else if ([tag isEqualToString:@"password_reset_all"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithPasswordResetAll];
+  } else if ([tag isEqualToString:@"classification_create_report"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithClassificationCreateReport];
+  } else if ([tag isEqualToString:@"classification_create_report_fail"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithClassificationCreateReportFail];
   } else if ([tag isEqualToString:@"emm_create_exceptions_report"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithEmmCreateExceptionsReport];
   } else if ([tag isEqualToString:@"emm_create_usage_report"]) {
@@ -61789,6 +67894,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithSharedLinkView];
   } else if ([tag isEqualToString:@"shared_note_opened"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithSharedNoteOpened];
+  } else if ([tag isEqualToString:@"shmodel_disable_downloads"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithShmodelDisableDownloads];
+  } else if ([tag isEqualToString:@"shmodel_enable_downloads"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithShmodelEnableDownloads];
   } else if ([tag isEqualToString:@"shmodel_group_share"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithShmodelGroupShare];
   } else if ([tag isEqualToString:@"showcase_access_granted"]) {
@@ -61879,6 +67988,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithAllowDownloadEnabled];
   } else if ([tag isEqualToString:@"camera_uploads_policy_changed"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithCameraUploadsPolicyChanged];
+  } else if ([tag isEqualToString:@"classification_change_policy"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithClassificationChangePolicy];
+  } else if ([tag isEqualToString:@"computer_backup_policy_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithComputerBackupPolicyChanged];
   } else if ([tag isEqualToString:@"content_administration_policy_changed"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithContentAdministrationPolicyChanged];
   } else if ([tag isEqualToString:@"data_placement_restriction_change_policy"]) {
@@ -61993,6 +68106,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithSmartSyncOptOut];
   } else if ([tag isEqualToString:@"sso_change_policy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithSsoChangePolicy];
+  } else if ([tag isEqualToString:@"team_branding_policy_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamBrandingPolicyChanged];
   } else if ([tag isEqualToString:@"team_extensions_policy_changed"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamExtensionsPolicyChanged];
   } else if ([tag isEqualToString:@"team_selective_sync_policy_changed"]) {
@@ -62021,14 +68136,20 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamMergeFrom];
   } else if ([tag isEqualToString:@"team_merge_to"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamMergeTo];
+  } else if ([tag isEqualToString:@"team_profile_add_background"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileAddBackground];
   } else if ([tag isEqualToString:@"team_profile_add_logo"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileAddLogo];
+  } else if ([tag isEqualToString:@"team_profile_change_background"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileChangeBackground];
   } else if ([tag isEqualToString:@"team_profile_change_default_language"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileChangeDefaultLanguage];
   } else if ([tag isEqualToString:@"team_profile_change_logo"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileChangeLogo];
   } else if ([tag isEqualToString:@"team_profile_change_name"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileChangeName];
+  } else if ([tag isEqualToString:@"team_profile_remove_background"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileRemoveBackground];
   } else if ([tag isEqualToString:@"team_profile_remove_logo"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamProfileRemoveLogo];
   } else if ([tag isEqualToString:@"tfa_add_backup_phone"]) {
@@ -63573,18 +69694,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithNotEnterpriseAdmin {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGFedAdminRoleNotEnterpriseAdmin;
-  }
-  return self;
-}
-
 - (instancetype)initWithEnterpriseAdmin {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGFedAdminRoleEnterpriseAdmin;
+  }
+  return self;
+}
+
+- (instancetype)initWithNotEnterpriseAdmin {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFedAdminRoleNotEnterpriseAdmin;
   }
   return self;
 }
@@ -63601,12 +69722,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isNotEnterpriseAdmin {
-  return _tag == DBTEAMLOGFedAdminRoleNotEnterpriseAdmin;
-}
-
 - (BOOL)isEnterpriseAdmin {
   return _tag == DBTEAMLOGFedAdminRoleEnterpriseAdmin;
+}
+
+- (BOOL)isNotEnterpriseAdmin {
+  return _tag == DBTEAMLOGFedAdminRoleNotEnterpriseAdmin;
 }
 
 - (BOOL)isOther {
@@ -63615,10 +69736,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGFedAdminRoleNotEnterpriseAdmin:
-    return @"DBTEAMLOGFedAdminRoleNotEnterpriseAdmin";
   case DBTEAMLOGFedAdminRoleEnterpriseAdmin:
     return @"DBTEAMLOGFedAdminRoleEnterpriseAdmin";
+  case DBTEAMLOGFedAdminRoleNotEnterpriseAdmin:
+    return @"DBTEAMLOGFedAdminRoleNotEnterpriseAdmin";
   case DBTEAMLOGFedAdminRoleOther:
     return @"DBTEAMLOGFedAdminRoleOther";
   }
@@ -63657,9 +69778,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGFedAdminRoleNotEnterpriseAdmin:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGFedAdminRoleEnterpriseAdmin:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGFedAdminRoleNotEnterpriseAdmin:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGFedAdminRoleOther:
     result = prime * result + [[self tagName] hash];
@@ -63688,9 +69809,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGFedAdminRoleNotEnterpriseAdmin:
-    return [[self tagName] isEqual:[aFedAdminRole tagName]];
   case DBTEAMLOGFedAdminRoleEnterpriseAdmin:
+    return [[self tagName] isEqual:[aFedAdminRole tagName]];
+  case DBTEAMLOGFedAdminRoleNotEnterpriseAdmin:
     return [[self tagName] isEqual:[aFedAdminRole tagName]];
   case DBTEAMLOGFedAdminRoleOther:
     return [[self tagName] isEqual:[aFedAdminRole tagName]];
@@ -63707,10 +69828,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFedAdminRole *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isNotEnterpriseAdmin]) {
-    jsonDict[@".tag"] = @"not_enterprise_admin";
-  } else if ([valueObj isEnterpriseAdmin]) {
+  if ([valueObj isEnterpriseAdmin]) {
     jsonDict[@".tag"] = @"enterprise_admin";
+  } else if ([valueObj isNotEnterpriseAdmin]) {
+    jsonDict[@".tag"] = @"not_enterprise_admin";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -63723,10 +69844,10 @@
 + (DBTEAMLOGFedAdminRole *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"not_enterprise_admin"]) {
-    return [[DBTEAMLOGFedAdminRole alloc] initWithNotEnterpriseAdmin];
-  } else if ([tag isEqualToString:@"enterprise_admin"]) {
+  if ([tag isEqualToString:@"enterprise_admin"]) {
     return [[DBTEAMLOGFedAdminRole alloc] initWithEnterpriseAdmin];
+  } else if ([tag isEqualToString:@"not_enterprise_admin"]) {
+    return [[DBTEAMLOGFedAdminRole alloc] initWithNotEnterpriseAdmin];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGFedAdminRole alloc] initWithOther];
   } else {
@@ -63746,25 +69867,25 @@
 
 @implementation DBTEAMLOGFedExtraDetails
 
-@synthesize team = _team;
 @synthesize organization = _organization;
+@synthesize team = _team;
 
 #pragma mark - Constructors
-
-- (instancetype)initWithTeam:(DBTEAMLOGTeamDetails *)team {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGFedExtraDetailsTeam;
-    _team = team;
-  }
-  return self;
-}
 
 - (instancetype)initWithOrganization:(DBTEAMLOGOrganizationDetails *)organization {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGFedExtraDetailsOrganization;
     _organization = organization;
+  }
+  return self;
+}
+
+- (instancetype)initWithTeam:(DBTEAMLOGTeamDetails *)team {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFedExtraDetailsTeam;
+    _team = team;
   }
   return self;
 }
@@ -63779,14 +69900,6 @@
 
 #pragma mark - Instance field accessors
 
-- (DBTEAMLOGTeamDetails *)team {
-  if (![self isTeam]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGFedExtraDetailsTeam, but was %@.", [self tagName]];
-  }
-  return _team;
-}
-
 - (DBTEAMLOGOrganizationDetails *)organization {
   if (![self isOrganization]) {
     [NSException raise:@"IllegalStateException"
@@ -63795,14 +69908,22 @@
   return _organization;
 }
 
-#pragma mark - Tag state methods
-
-- (BOOL)isTeam {
-  return _tag == DBTEAMLOGFedExtraDetailsTeam;
+- (DBTEAMLOGTeamDetails *)team {
+  if (![self isTeam]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGFedExtraDetailsTeam, but was %@.", [self tagName]];
+  }
+  return _team;
 }
+
+#pragma mark - Tag state methods
 
 - (BOOL)isOrganization {
   return _tag == DBTEAMLOGFedExtraDetailsOrganization;
+}
+
+- (BOOL)isTeam {
+  return _tag == DBTEAMLOGFedExtraDetailsTeam;
 }
 
 - (BOOL)isOther {
@@ -63811,10 +69932,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGFedExtraDetailsTeam:
-    return @"DBTEAMLOGFedExtraDetailsTeam";
   case DBTEAMLOGFedExtraDetailsOrganization:
     return @"DBTEAMLOGFedExtraDetailsOrganization";
+  case DBTEAMLOGFedExtraDetailsTeam:
+    return @"DBTEAMLOGFedExtraDetailsTeam";
   case DBTEAMLOGFedExtraDetailsOther:
     return @"DBTEAMLOGFedExtraDetailsOther";
   }
@@ -63853,10 +69974,10 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGFedExtraDetailsTeam:
-    result = prime * result + [self.team hash];
   case DBTEAMLOGFedExtraDetailsOrganization:
     result = prime * result + [self.organization hash];
+  case DBTEAMLOGFedExtraDetailsTeam:
+    result = prime * result + [self.team hash];
   case DBTEAMLOGFedExtraDetailsOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -63884,10 +70005,10 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGFedExtraDetailsTeam:
-    return [self.team isEqual:aFedExtraDetails.team];
   case DBTEAMLOGFedExtraDetailsOrganization:
     return [self.organization isEqual:aFedExtraDetails.organization];
+  case DBTEAMLOGFedExtraDetailsTeam:
+    return [self.team isEqual:aFedExtraDetails.team];
   case DBTEAMLOGFedExtraDetailsOther:
     return [[self tagName] isEqual:[aFedExtraDetails tagName]];
   }
@@ -63903,12 +70024,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFedExtraDetails *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isTeam]) {
-    jsonDict = [[DBTEAMLOGTeamDetailsSerializer serialize:valueObj.team] mutableCopy];
-    jsonDict[@".tag"] = @"team";
-  } else if ([valueObj isOrganization]) {
+  if ([valueObj isOrganization]) {
     jsonDict = [[DBTEAMLOGOrganizationDetailsSerializer serialize:valueObj.organization] mutableCopy];
     jsonDict[@".tag"] = @"organization";
+  } else if ([valueObj isTeam]) {
+    jsonDict = [[DBTEAMLOGTeamDetailsSerializer serialize:valueObj.team] mutableCopy];
+    jsonDict[@".tag"] = @"team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -63921,12 +70042,12 @@
 + (DBTEAMLOGFedExtraDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"team"]) {
-    DBTEAMLOGTeamDetails *team = [DBTEAMLOGTeamDetailsSerializer deserialize:valueDict];
-    return [[DBTEAMLOGFedExtraDetails alloc] initWithTeam:team];
-  } else if ([tag isEqualToString:@"organization"]) {
+  if ([tag isEqualToString:@"organization"]) {
     DBTEAMLOGOrganizationDetails *organization = [DBTEAMLOGOrganizationDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGFedExtraDetails alloc] initWithOrganization:organization];
+  } else if ([tag isEqualToString:@"team"]) {
+    DBTEAMLOGTeamDetails *team = [DBTEAMLOGTeamDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGFedExtraDetails alloc] initWithTeam:team];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGFedExtraDetails alloc] initWithOther];
   } else {
@@ -63946,26 +70067,10 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithInvited {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGFedHandshakeActionInvited;
-  }
-  return self;
-}
-
 - (instancetype)initWithAcceptedInvite {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGFedHandshakeActionAcceptedInvite;
-  }
-  return self;
-}
-
-- (instancetype)initWithRejectedInvite {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGFedHandshakeActionRejectedInvite;
   }
   return self;
 }
@@ -63978,18 +70083,34 @@
   return self;
 }
 
-- (instancetype)initWithRemovedTeam {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGFedHandshakeActionRemovedTeam;
-  }
-  return self;
-}
-
 - (instancetype)initWithInviteExpired {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGFedHandshakeActionInviteExpired;
+  }
+  return self;
+}
+
+- (instancetype)initWithInvited {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFedHandshakeActionInvited;
+  }
+  return self;
+}
+
+- (instancetype)initWithRejectedInvite {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFedHandshakeActionRejectedInvite;
+  }
+  return self;
+}
+
+- (instancetype)initWithRemovedTeam {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGFedHandshakeActionRemovedTeam;
   }
   return self;
 }
@@ -64006,28 +70127,28 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isInvited {
-  return _tag == DBTEAMLOGFedHandshakeActionInvited;
-}
-
 - (BOOL)isAcceptedInvite {
   return _tag == DBTEAMLOGFedHandshakeActionAcceptedInvite;
-}
-
-- (BOOL)isRejectedInvite {
-  return _tag == DBTEAMLOGFedHandshakeActionRejectedInvite;
 }
 
 - (BOOL)isCanceledInvite {
   return _tag == DBTEAMLOGFedHandshakeActionCanceledInvite;
 }
 
-- (BOOL)isRemovedTeam {
-  return _tag == DBTEAMLOGFedHandshakeActionRemovedTeam;
-}
-
 - (BOOL)isInviteExpired {
   return _tag == DBTEAMLOGFedHandshakeActionInviteExpired;
+}
+
+- (BOOL)isInvited {
+  return _tag == DBTEAMLOGFedHandshakeActionInvited;
+}
+
+- (BOOL)isRejectedInvite {
+  return _tag == DBTEAMLOGFedHandshakeActionRejectedInvite;
+}
+
+- (BOOL)isRemovedTeam {
+  return _tag == DBTEAMLOGFedHandshakeActionRemovedTeam;
 }
 
 - (BOOL)isOther {
@@ -64036,18 +70157,18 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGFedHandshakeActionInvited:
-    return @"DBTEAMLOGFedHandshakeActionInvited";
   case DBTEAMLOGFedHandshakeActionAcceptedInvite:
     return @"DBTEAMLOGFedHandshakeActionAcceptedInvite";
-  case DBTEAMLOGFedHandshakeActionRejectedInvite:
-    return @"DBTEAMLOGFedHandshakeActionRejectedInvite";
   case DBTEAMLOGFedHandshakeActionCanceledInvite:
     return @"DBTEAMLOGFedHandshakeActionCanceledInvite";
-  case DBTEAMLOGFedHandshakeActionRemovedTeam:
-    return @"DBTEAMLOGFedHandshakeActionRemovedTeam";
   case DBTEAMLOGFedHandshakeActionInviteExpired:
     return @"DBTEAMLOGFedHandshakeActionInviteExpired";
+  case DBTEAMLOGFedHandshakeActionInvited:
+    return @"DBTEAMLOGFedHandshakeActionInvited";
+  case DBTEAMLOGFedHandshakeActionRejectedInvite:
+    return @"DBTEAMLOGFedHandshakeActionRejectedInvite";
+  case DBTEAMLOGFedHandshakeActionRemovedTeam:
+    return @"DBTEAMLOGFedHandshakeActionRemovedTeam";
   case DBTEAMLOGFedHandshakeActionOther:
     return @"DBTEAMLOGFedHandshakeActionOther";
   }
@@ -64086,17 +70207,17 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGFedHandshakeActionInvited:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGFedHandshakeActionAcceptedInvite:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGFedHandshakeActionRejectedInvite:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGFedHandshakeActionCanceledInvite:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGFedHandshakeActionRemovedTeam:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGFedHandshakeActionInviteExpired:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGFedHandshakeActionInvited:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGFedHandshakeActionRejectedInvite:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGFedHandshakeActionRemovedTeam:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGFedHandshakeActionOther:
     result = prime * result + [[self tagName] hash];
@@ -64125,17 +70246,17 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGFedHandshakeActionInvited:
-    return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
   case DBTEAMLOGFedHandshakeActionAcceptedInvite:
-    return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
-  case DBTEAMLOGFedHandshakeActionRejectedInvite:
     return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
   case DBTEAMLOGFedHandshakeActionCanceledInvite:
     return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
-  case DBTEAMLOGFedHandshakeActionRemovedTeam:
-    return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
   case DBTEAMLOGFedHandshakeActionInviteExpired:
+    return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
+  case DBTEAMLOGFedHandshakeActionInvited:
+    return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
+  case DBTEAMLOGFedHandshakeActionRejectedInvite:
+    return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
+  case DBTEAMLOGFedHandshakeActionRemovedTeam:
     return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
   case DBTEAMLOGFedHandshakeActionOther:
     return [[self tagName] isEqual:[aFedHandshakeAction tagName]];
@@ -64152,18 +70273,18 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGFedHandshakeAction *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isInvited]) {
-    jsonDict[@".tag"] = @"invited";
-  } else if ([valueObj isAcceptedInvite]) {
+  if ([valueObj isAcceptedInvite]) {
     jsonDict[@".tag"] = @"accepted_invite";
-  } else if ([valueObj isRejectedInvite]) {
-    jsonDict[@".tag"] = @"rejected_invite";
   } else if ([valueObj isCanceledInvite]) {
     jsonDict[@".tag"] = @"canceled_invite";
-  } else if ([valueObj isRemovedTeam]) {
-    jsonDict[@".tag"] = @"removed_team";
   } else if ([valueObj isInviteExpired]) {
     jsonDict[@".tag"] = @"invite_expired";
+  } else if ([valueObj isInvited]) {
+    jsonDict[@".tag"] = @"invited";
+  } else if ([valueObj isRejectedInvite]) {
+    jsonDict[@".tag"] = @"rejected_invite";
+  } else if ([valueObj isRemovedTeam]) {
+    jsonDict[@".tag"] = @"removed_team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -64176,18 +70297,18 @@
 + (DBTEAMLOGFedHandshakeAction *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"invited"]) {
-    return [[DBTEAMLOGFedHandshakeAction alloc] initWithInvited];
-  } else if ([tag isEqualToString:@"accepted_invite"]) {
+  if ([tag isEqualToString:@"accepted_invite"]) {
     return [[DBTEAMLOGFedHandshakeAction alloc] initWithAcceptedInvite];
-  } else if ([tag isEqualToString:@"rejected_invite"]) {
-    return [[DBTEAMLOGFedHandshakeAction alloc] initWithRejectedInvite];
   } else if ([tag isEqualToString:@"canceled_invite"]) {
     return [[DBTEAMLOGFedHandshakeAction alloc] initWithCanceledInvite];
-  } else if ([tag isEqualToString:@"removed_team"]) {
-    return [[DBTEAMLOGFedHandshakeAction alloc] initWithRemovedTeam];
   } else if ([tag isEqualToString:@"invite_expired"]) {
     return [[DBTEAMLOGFedHandshakeAction alloc] initWithInviteExpired];
+  } else if ([tag isEqualToString:@"invited"]) {
+    return [[DBTEAMLOGFedHandshakeAction alloc] initWithInvited];
+  } else if ([tag isEqualToString:@"rejected_invite"]) {
+    return [[DBTEAMLOGFedHandshakeAction alloc] initWithRejectedInvite];
+  } else if ([tag isEqualToString:@"removed_team"]) {
+    return [[DBTEAMLOGFedHandshakeAction alloc] initWithRemovedTeam];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGFedHandshakeAction alloc] initWithOther];
   } else {
@@ -75867,6 +81988,2797 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyAddFolderFailedDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFolderFailedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                    folder:(NSString *)folder
+                                policyType:(DBTEAMLOGPolicyType *)policyType
+                                    reason:(NSString *)reason {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](folder);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _folder = folder;
+    _reason = reason;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                    folder:(NSString *)folder {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name folder:folder policyType:nil reason:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.folder hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+  if (self.reason != nil) {
+    result = prime * result + [self.reason hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyAddFolderFailedDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyAddFolderFailedDetails:
+    (DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)aGovernancePolicyAddFolderFailedDetails {
+  if (self == aGovernancePolicyAddFolderFailedDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyAddFolderFailedDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyAddFolderFailedDetails.name]) {
+    return NO;
+  }
+  if (![self.folder isEqual:aGovernancePolicyAddFolderFailedDetails.folder]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyAddFolderFailedDetails.policyType]) {
+      return NO;
+    }
+  }
+  if (self.reason) {
+    if (![self.reason isEqual:aGovernancePolicyAddFolderFailedDetails.reason]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"folder"] = valueObj.folder;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+  if (valueObj.reason) {
+    jsonDict[@"reason"] = valueObj.reason;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  NSString *folder = valueDict[@"folder"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+  NSString *reason = valueDict[@"reason"] ?: nil;
+
+  return [[DBTEAMLOGGovernancePolicyAddFolderFailedDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                        name:name
+                                                                                      folder:folder
+                                                                                  policyType:policyType
+                                                                                      reason:reason];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyAddFolderFailedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFolderFailedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyAddFolderFailedType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyAddFolderFailedType:
+    (DBTEAMLOGGovernancePolicyAddFolderFailedType *)aGovernancePolicyAddFolderFailedType {
+  if (self == aGovernancePolicyAddFolderFailedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyAddFolderFailedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyAddFolderFailedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyAddFolderFailedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyAddFolderFailedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyAddFoldersDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFoldersDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                policyType:(DBTEAMLOGPolicyType *)policyType
+                                   folders:(NSArray<NSString *> *)folders {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil
+                                              maxItems:nil
+                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](folders);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _folders = folders;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId name:(NSString *)name {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name policyType:nil folders:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+  if (self.folders != nil) {
+    result = prime * result + [self.folders hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyAddFoldersDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyAddFoldersDetails:
+    (DBTEAMLOGGovernancePolicyAddFoldersDetails *)aGovernancePolicyAddFoldersDetails {
+  if (self == aGovernancePolicyAddFoldersDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyAddFoldersDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyAddFoldersDetails.name]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyAddFoldersDetails.policyType]) {
+      return NO;
+    }
+  }
+  if (self.folders) {
+    if (![self.folders isEqual:aGovernancePolicyAddFoldersDetails.folders]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyAddFoldersDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+  if (valueObj.folders) {
+    jsonDict[@"folders"] = [DBArraySerializer serialize:valueObj.folders
+                                              withBlock:^id(id elem0) {
+                                                return elem0;
+                                              }];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyAddFoldersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+  NSArray<NSString *> *folders = valueDict[@"folders"] ? [DBArraySerializer deserialize:valueDict[@"folders"]
+                                                                              withBlock:^id(id elem0) {
+                                                                                return elem0;
+                                                                              }]
+                                                       : nil;
+
+  return [[DBTEAMLOGGovernancePolicyAddFoldersDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                   name:name
+                                                                             policyType:policyType
+                                                                                folders:folders];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyAddFoldersType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFoldersType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyAddFoldersType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyAddFoldersType:
+    (DBTEAMLOGGovernancePolicyAddFoldersType *)aGovernancePolicyAddFoldersType {
+  if (self == aGovernancePolicyAddFoldersType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyAddFoldersType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyAddFoldersType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyAddFoldersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyAddFoldersType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDurationLogInfo.h"
+#import "DBTEAMLOGGovernancePolicyCreateDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyCreateDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                  duration:(DBTEAMLOGDurationLogInfo *)duration
+                                policyType:(DBTEAMLOGPolicyType *)policyType
+                                   folders:(NSArray<NSString *> *)folders {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](duration);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil
+                                              maxItems:nil
+                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](folders);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _duration = duration;
+    _folders = folders;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                  duration:(DBTEAMLOGDurationLogInfo *)duration {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name duration:duration policyType:nil folders:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyCreateDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyCreateDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyCreateDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.duration hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+  if (self.folders != nil) {
+    result = prime * result + [self.folders hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyCreateDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyCreateDetails:
+    (DBTEAMLOGGovernancePolicyCreateDetails *)aGovernancePolicyCreateDetails {
+  if (self == aGovernancePolicyCreateDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyCreateDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyCreateDetails.name]) {
+    return NO;
+  }
+  if (![self.duration isEqual:aGovernancePolicyCreateDetails.duration]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyCreateDetails.policyType]) {
+      return NO;
+    }
+  }
+  if (self.folders) {
+    if (![self.folders isEqual:aGovernancePolicyCreateDetails.folders]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyCreateDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyCreateDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"duration"] = [DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.duration];
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+  if (valueObj.folders) {
+    jsonDict[@"folders"] = [DBArraySerializer serialize:valueObj.folders
+                                              withBlock:^id(id elem0) {
+                                                return elem0;
+                                              }];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyCreateDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  DBTEAMLOGDurationLogInfo *duration = [DBTEAMLOGDurationLogInfoSerializer deserialize:valueDict[@"duration"]];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+  NSArray<NSString *> *folders = valueDict[@"folders"] ? [DBArraySerializer deserialize:valueDict[@"folders"]
+                                                                              withBlock:^id(id elem0) {
+                                                                                return elem0;
+                                                                              }]
+                                                       : nil;
+
+  return [[DBTEAMLOGGovernancePolicyCreateDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                               name:name
+                                                                           duration:duration
+                                                                         policyType:policyType
+                                                                            folders:folders];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyCreateType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyCreateType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyCreateTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyCreateTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyCreateTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyCreateType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyCreateType:(DBTEAMLOGGovernancePolicyCreateType *)aGovernancePolicyCreateType {
+  if (self == aGovernancePolicyCreateType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyCreateType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyCreateTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyCreateType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyCreateType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyCreateType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyDeleteDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyDeleteDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                policyType:(DBTEAMLOGPolicyType *)policyType {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId name:(NSString *)name {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name policyType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyDeleteDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyDeleteDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyDeleteDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyDeleteDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyDeleteDetails:
+    (DBTEAMLOGGovernancePolicyDeleteDetails *)aGovernancePolicyDeleteDetails {
+  if (self == aGovernancePolicyDeleteDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyDeleteDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyDeleteDetails.name]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyDeleteDetails.policyType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyDeleteDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyDeleteDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyDeleteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+
+  return [[DBTEAMLOGGovernancePolicyDeleteDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                               name:name
+                                                                         policyType:policyType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyDeleteType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyDeleteType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyDeleteTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyDeleteTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyDeleteTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyDeleteType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyDeleteType:(DBTEAMLOGGovernancePolicyDeleteType *)aGovernancePolicyDeleteType {
+  if (self == aGovernancePolicyDeleteType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyDeleteType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyDeleteTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyDeleteType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyDeleteType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyDeleteType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyEditDetailsDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDetailsDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                 attribute:(NSString *)attribute
+                             previousValue:(NSString *)previousValue
+                                 dNewValue:(NSString *)dNewValue
+                                policyType:(DBTEAMLOGPolicyType *)policyType {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](attribute);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _attribute = attribute;
+    _previousValue = previousValue;
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                 attribute:(NSString *)attribute
+                             previousValue:(NSString *)previousValue
+                                 dNewValue:(NSString *)dNewValue {
+  return [self initWithGovernancePolicyId:governancePolicyId
+                                     name:name
+                                attribute:attribute
+                            previousValue:previousValue
+                                dNewValue:dNewValue
+                               policyType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.attribute hash];
+  result = prime * result + [self.previousValue hash];
+  result = prime * result + [self.dNewValue hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyEditDetailsDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyEditDetailsDetails:
+    (DBTEAMLOGGovernancePolicyEditDetailsDetails *)aGovernancePolicyEditDetailsDetails {
+  if (self == aGovernancePolicyEditDetailsDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyEditDetailsDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyEditDetailsDetails.name]) {
+    return NO;
+  }
+  if (![self.attribute isEqual:aGovernancePolicyEditDetailsDetails.attribute]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aGovernancePolicyEditDetailsDetails.previousValue]) {
+    return NO;
+  }
+  if (![self.dNewValue isEqual:aGovernancePolicyEditDetailsDetails.dNewValue]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyEditDetailsDetails.policyType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyEditDetailsDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"attribute"] = valueObj.attribute;
+  jsonDict[@"previous_value"] = valueObj.previousValue;
+  jsonDict[@"new_value"] = valueObj.dNewValue;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyEditDetailsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  NSString *attribute = valueDict[@"attribute"];
+  NSString *previousValue = valueDict[@"previous_value"];
+  NSString *dNewValue = valueDict[@"new_value"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+
+  return [[DBTEAMLOGGovernancePolicyEditDetailsDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                    name:name
+                                                                               attribute:attribute
+                                                                           previousValue:previousValue
+                                                                               dNewValue:dNewValue
+                                                                              policyType:policyType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyEditDetailsType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDetailsType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyEditDetailsType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyEditDetailsType:
+    (DBTEAMLOGGovernancePolicyEditDetailsType *)aGovernancePolicyEditDetailsType {
+  if (self == aGovernancePolicyEditDetailsType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyEditDetailsType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyEditDetailsType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyEditDetailsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyEditDetailsType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDurationLogInfo.h"
+#import "DBTEAMLOGGovernancePolicyEditDurationDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDurationDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                             previousValue:(DBTEAMLOGDurationLogInfo *)previousValue
+                                 dNewValue:(DBTEAMLOGDurationLogInfo *)dNewValue
+                                policyType:(DBTEAMLOGPolicyType *)policyType {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _previousValue = previousValue;
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                             previousValue:(DBTEAMLOGDurationLogInfo *)previousValue
+                                 dNewValue:(DBTEAMLOGDurationLogInfo *)dNewValue {
+  return [self initWithGovernancePolicyId:governancePolicyId
+                                     name:name
+                            previousValue:previousValue
+                                dNewValue:dNewValue
+                               policyType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.previousValue hash];
+  result = prime * result + [self.dNewValue hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyEditDurationDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyEditDurationDetails:
+    (DBTEAMLOGGovernancePolicyEditDurationDetails *)aGovernancePolicyEditDurationDetails {
+  if (self == aGovernancePolicyEditDurationDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyEditDurationDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyEditDurationDetails.name]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aGovernancePolicyEditDurationDetails.previousValue]) {
+    return NO;
+  }
+  if (![self.dNewValue isEqual:aGovernancePolicyEditDurationDetails.dNewValue]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyEditDurationDetails.policyType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyEditDurationDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"previous_value"] = [DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.previousValue];
+  jsonDict[@"new_value"] = [DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.dNewValue];
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyEditDurationDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  DBTEAMLOGDurationLogInfo *previousValue =
+      [DBTEAMLOGDurationLogInfoSerializer deserialize:valueDict[@"previous_value"]];
+  DBTEAMLOGDurationLogInfo *dNewValue = [DBTEAMLOGDurationLogInfoSerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+
+  return [[DBTEAMLOGGovernancePolicyEditDurationDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                     name:name
+                                                                            previousValue:previousValue
+                                                                                dNewValue:dNewValue
+                                                                               policyType:policyType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyEditDurationType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDurationType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyEditDurationTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyEditDurationTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyEditDurationTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyEditDurationType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyEditDurationType:
+    (DBTEAMLOGGovernancePolicyEditDurationType *)aGovernancePolicyEditDurationType {
+  if (self == aGovernancePolicyEditDurationType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyEditDurationType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyEditDurationTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyEditDurationType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyEditDurationType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyEditDurationType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyExportCreatedDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyExportCreatedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                exportName:(NSString *)exportName
+                                policyType:(DBTEAMLOGPolicyType *)policyType {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](exportName);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _exportName = exportName;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                exportName:(NSString *)exportName {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name exportName:exportName policyType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.exportName hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyExportCreatedDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyExportCreatedDetails:
+    (DBTEAMLOGGovernancePolicyExportCreatedDetails *)aGovernancePolicyExportCreatedDetails {
+  if (self == aGovernancePolicyExportCreatedDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyExportCreatedDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyExportCreatedDetails.name]) {
+    return NO;
+  }
+  if (![self.exportName isEqual:aGovernancePolicyExportCreatedDetails.exportName]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyExportCreatedDetails.policyType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyExportCreatedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"export_name"] = valueObj.exportName;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyExportCreatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  NSString *exportName = valueDict[@"export_name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+
+  return [[DBTEAMLOGGovernancePolicyExportCreatedDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                      name:name
+                                                                                exportName:exportName
+                                                                                policyType:policyType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyExportCreatedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyExportCreatedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyExportCreatedType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyExportCreatedType:
+    (DBTEAMLOGGovernancePolicyExportCreatedType *)aGovernancePolicyExportCreatedType {
+  if (self == aGovernancePolicyExportCreatedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyExportCreatedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyExportCreatedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyExportCreatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyExportCreatedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyExportRemovedDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyExportRemovedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                exportName:(NSString *)exportName
+                                policyType:(DBTEAMLOGPolicyType *)policyType {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](exportName);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _exportName = exportName;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                exportName:(NSString *)exportName {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name exportName:exportName policyType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.exportName hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyExportRemovedDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyExportRemovedDetails:
+    (DBTEAMLOGGovernancePolicyExportRemovedDetails *)aGovernancePolicyExportRemovedDetails {
+  if (self == aGovernancePolicyExportRemovedDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyExportRemovedDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyExportRemovedDetails.name]) {
+    return NO;
+  }
+  if (![self.exportName isEqual:aGovernancePolicyExportRemovedDetails.exportName]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyExportRemovedDetails.policyType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyExportRemovedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"export_name"] = valueObj.exportName;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyExportRemovedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  NSString *exportName = valueDict[@"export_name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+
+  return [[DBTEAMLOGGovernancePolicyExportRemovedDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                      name:name
+                                                                                exportName:exportName
+                                                                                policyType:policyType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyExportRemovedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyExportRemovedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyExportRemovedType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyExportRemovedType:
+    (DBTEAMLOGGovernancePolicyExportRemovedType *)aGovernancePolicyExportRemovedType {
+  if (self == aGovernancePolicyExportRemovedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyExportRemovedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyExportRemovedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyExportRemovedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyExportRemovedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyRemoveFoldersDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyRemoveFoldersDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                policyType:(DBTEAMLOGPolicyType *)policyType
+                                   folders:(NSArray<NSString *> *)folders
+                                    reason:(NSString *)reason {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil
+                                              maxItems:nil
+                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](folders);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _folders = folders;
+    _reason = reason;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId name:(NSString *)name {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name policyType:nil folders:nil reason:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+  if (self.folders != nil) {
+    result = prime * result + [self.folders hash];
+  }
+  if (self.reason != nil) {
+    result = prime * result + [self.reason hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyRemoveFoldersDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyRemoveFoldersDetails:
+    (DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)aGovernancePolicyRemoveFoldersDetails {
+  if (self == aGovernancePolicyRemoveFoldersDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyRemoveFoldersDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyRemoveFoldersDetails.name]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyRemoveFoldersDetails.policyType]) {
+      return NO;
+    }
+  }
+  if (self.folders) {
+    if (![self.folders isEqual:aGovernancePolicyRemoveFoldersDetails.folders]) {
+      return NO;
+    }
+  }
+  if (self.reason) {
+    if (![self.reason isEqual:aGovernancePolicyRemoveFoldersDetails.reason]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+  if (valueObj.folders) {
+    jsonDict[@"folders"] = [DBArraySerializer serialize:valueObj.folders
+                                              withBlock:^id(id elem0) {
+                                                return elem0;
+                                              }];
+  }
+  if (valueObj.reason) {
+    jsonDict[@"reason"] = valueObj.reason;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+  NSArray<NSString *> *folders = valueDict[@"folders"] ? [DBArraySerializer deserialize:valueDict[@"folders"]
+                                                                              withBlock:^id(id elem0) {
+                                                                                return elem0;
+                                                                              }]
+                                                       : nil;
+  NSString *reason = valueDict[@"reason"] ?: nil;
+
+  return [[DBTEAMLOGGovernancePolicyRemoveFoldersDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                      name:name
+                                                                                policyType:policyType
+                                                                                   folders:folders
+                                                                                    reason:reason];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyRemoveFoldersType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyRemoveFoldersType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyRemoveFoldersType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyRemoveFoldersType:
+    (DBTEAMLOGGovernancePolicyRemoveFoldersType *)aGovernancePolicyRemoveFoldersType {
+  if (self == aGovernancePolicyRemoveFoldersType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyRemoveFoldersType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyRemoveFoldersType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyRemoveFoldersType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyRemoveFoldersType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyReportCreatedDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyReportCreatedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                policyType:(DBTEAMLOGPolicyType *)policyType {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId name:(NSString *)name {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name policyType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyReportCreatedDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyReportCreatedDetails:
+    (DBTEAMLOGGovernancePolicyReportCreatedDetails *)aGovernancePolicyReportCreatedDetails {
+  if (self == aGovernancePolicyReportCreatedDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyReportCreatedDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyReportCreatedDetails.name]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyReportCreatedDetails.policyType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyReportCreatedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyReportCreatedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+
+  return [[DBTEAMLOGGovernancePolicyReportCreatedDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                      name:name
+                                                                                policyType:policyType];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyReportCreatedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyReportCreatedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyReportCreatedType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyReportCreatedType:
+    (DBTEAMLOGGovernancePolicyReportCreatedType *)aGovernancePolicyReportCreatedType {
+  if (self == aGovernancePolicyReportCreatedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyReportCreatedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyReportCreatedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyReportCreatedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyReportCreatedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyZipPartDownloadedDetails.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyZipPartDownloadedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                exportName:(NSString *)exportName
+                                policyType:(DBTEAMLOGPolicyType *)policyType
+                                      part:(NSString *)part {
+  [DBStoneValidators nonnullValidator:nil](governancePolicyId);
+  [DBStoneValidators nonnullValidator:nil](name);
+  [DBStoneValidators nonnullValidator:nil](exportName);
+
+  self = [super init];
+  if (self) {
+    _governancePolicyId = governancePolicyId;
+    _name = name;
+    _policyType = policyType;
+    _exportName = exportName;
+    _part = part;
+  }
+  return self;
+}
+
+- (instancetype)initWithGovernancePolicyId:(NSString *)governancePolicyId
+                                      name:(NSString *)name
+                                exportName:(NSString *)exportName {
+  return [self initWithGovernancePolicyId:governancePolicyId name:name exportName:exportName policyType:nil part:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.governancePolicyId hash];
+  result = prime * result + [self.name hash];
+  result = prime * result + [self.exportName hash];
+  if (self.policyType != nil) {
+    result = prime * result + [self.policyType hash];
+  }
+  if (self.part != nil) {
+    result = prime * result + [self.part hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyZipPartDownloadedDetails:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyZipPartDownloadedDetails:
+    (DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)aGovernancePolicyZipPartDownloadedDetails {
+  if (self == aGovernancePolicyZipPartDownloadedDetails) {
+    return YES;
+  }
+  if (![self.governancePolicyId isEqual:aGovernancePolicyZipPartDownloadedDetails.governancePolicyId]) {
+    return NO;
+  }
+  if (![self.name isEqual:aGovernancePolicyZipPartDownloadedDetails.name]) {
+    return NO;
+  }
+  if (![self.exportName isEqual:aGovernancePolicyZipPartDownloadedDetails.exportName]) {
+    return NO;
+  }
+  if (self.policyType) {
+    if (![self.policyType isEqual:aGovernancePolicyZipPartDownloadedDetails.policyType]) {
+      return NO;
+    }
+  }
+  if (self.part) {
+    if (![self.part isEqual:aGovernancePolicyZipPartDownloadedDetails.part]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"governance_policy_id"] = valueObj.governancePolicyId;
+  jsonDict[@"name"] = valueObj.name;
+  jsonDict[@"export_name"] = valueObj.exportName;
+  if (valueObj.policyType) {
+    jsonDict[@"policy_type"] = [DBTEAMLOGPolicyTypeSerializer serialize:valueObj.policyType];
+  }
+  if (valueObj.part) {
+    jsonDict[@"part"] = valueObj.part;
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *governancePolicyId = valueDict[@"governance_policy_id"];
+  NSString *name = valueDict[@"name"];
+  NSString *exportName = valueDict[@"export_name"];
+  DBTEAMLOGPolicyType *policyType =
+      valueDict[@"policy_type"] ? [DBTEAMLOGPolicyTypeSerializer deserialize:valueDict[@"policy_type"]] : nil;
+  NSString *part = valueDict[@"part"] ?: nil;
+
+  return [[DBTEAMLOGGovernancePolicyZipPartDownloadedDetails alloc] initWithGovernancePolicyId:governancePolicyId
+                                                                                          name:name
+                                                                                    exportName:exportName
+                                                                                    policyType:policyType
+                                                                                          part:part];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGGovernancePolicyZipPartDownloadedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGGovernancePolicyZipPartDownloadedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToGovernancePolicyZipPartDownloadedType:other];
+}
+
+- (BOOL)isEqualToGovernancePolicyZipPartDownloadedType:
+    (DBTEAMLOGGovernancePolicyZipPartDownloadedType *)aGovernancePolicyZipPartDownloadedType {
+  if (self == aGovernancePolicyZipPartDownloadedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aGovernancePolicyZipPartDownloadedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGGovernancePolicyZipPartDownloadedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGGovernancePolicyZipPartDownloadedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGGovernancePolicyZipPartDownloadedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGGroupAddExternalIdDetails.h"
 
 #pragma mark - API Object
@@ -80740,6 +89652,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithAutoApprove {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGInviteMethodAutoApprove;
+  }
+  return self;
+}
+
 - (instancetype)initWithInviteLink {
   self = [super init];
   if (self) {
@@ -80748,10 +89668,10 @@
   return self;
 }
 
-- (instancetype)initWithAutoApprove {
+- (instancetype)initWithMemberInvite {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGInviteMethodAutoApprove;
+    _tag = DBTEAMLOGInviteMethodMemberInvite;
   }
   return self;
 }
@@ -80776,12 +89696,16 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isAutoApprove {
+  return _tag == DBTEAMLOGInviteMethodAutoApprove;
+}
+
 - (BOOL)isInviteLink {
   return _tag == DBTEAMLOGInviteMethodInviteLink;
 }
 
-- (BOOL)isAutoApprove {
-  return _tag == DBTEAMLOGInviteMethodAutoApprove;
+- (BOOL)isMemberInvite {
+  return _tag == DBTEAMLOGInviteMethodMemberInvite;
 }
 
 - (BOOL)isMovedFromAnotherTeam {
@@ -80794,10 +89718,12 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGInviteMethodInviteLink:
-    return @"DBTEAMLOGInviteMethodInviteLink";
   case DBTEAMLOGInviteMethodAutoApprove:
     return @"DBTEAMLOGInviteMethodAutoApprove";
+  case DBTEAMLOGInviteMethodInviteLink:
+    return @"DBTEAMLOGInviteMethodInviteLink";
+  case DBTEAMLOGInviteMethodMemberInvite:
+    return @"DBTEAMLOGInviteMethodMemberInvite";
   case DBTEAMLOGInviteMethodMovedFromAnotherTeam:
     return @"DBTEAMLOGInviteMethodMovedFromAnotherTeam";
   case DBTEAMLOGInviteMethodOther:
@@ -80838,9 +89764,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGInviteMethodAutoApprove:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGInviteMethodInviteLink:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGInviteMethodAutoApprove:
+  case DBTEAMLOGInviteMethodMemberInvite:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGInviteMethodMovedFromAnotherTeam:
     result = prime * result + [[self tagName] hash];
@@ -80871,9 +89799,11 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGInviteMethodAutoApprove:
+    return [[self tagName] isEqual:[anInviteMethod tagName]];
   case DBTEAMLOGInviteMethodInviteLink:
     return [[self tagName] isEqual:[anInviteMethod tagName]];
-  case DBTEAMLOGInviteMethodAutoApprove:
+  case DBTEAMLOGInviteMethodMemberInvite:
     return [[self tagName] isEqual:[anInviteMethod tagName]];
   case DBTEAMLOGInviteMethodMovedFromAnotherTeam:
     return [[self tagName] isEqual:[anInviteMethod tagName]];
@@ -80892,10 +89822,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGInviteMethod *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isInviteLink]) {
-    jsonDict[@".tag"] = @"invite_link";
-  } else if ([valueObj isAutoApprove]) {
+  if ([valueObj isAutoApprove]) {
     jsonDict[@".tag"] = @"auto_approve";
+  } else if ([valueObj isInviteLink]) {
+    jsonDict[@".tag"] = @"invite_link";
+  } else if ([valueObj isMemberInvite]) {
+    jsonDict[@".tag"] = @"member_invite";
   } else if ([valueObj isMovedFromAnotherTeam]) {
     jsonDict[@".tag"] = @"moved_from_another_team";
   } else if ([valueObj isOther]) {
@@ -80910,10 +89842,12 @@
 + (DBTEAMLOGInviteMethod *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"invite_link"]) {
-    return [[DBTEAMLOGInviteMethod alloc] initWithInviteLink];
-  } else if ([tag isEqualToString:@"auto_approve"]) {
+  if ([tag isEqualToString:@"auto_approve"]) {
     return [[DBTEAMLOGInviteMethod alloc] initWithAutoApprove];
+  } else if ([tag isEqualToString:@"invite_link"]) {
+    return [[DBTEAMLOGInviteMethod alloc] initWithInviteLink];
+  } else if ([tag isEqualToString:@"member_invite"]) {
+    return [[DBTEAMLOGInviteMethod alloc] initWithMemberInvite];
   } else if ([tag isEqualToString:@"moved_from_another_team"]) {
     return [[DBTEAMLOGInviteMethod alloc] initWithMovedFromAnotherTeam];
   } else if ([tag isEqualToString:@"other"]) {
@@ -83908,21 +92842,12 @@
 
 @implementation DBTEAMLOGLinkedDeviceLogInfo
 
-@synthesize mobileDeviceSession = _mobileDeviceSession;
 @synthesize desktopDeviceSession = _desktopDeviceSession;
-@synthesize webDeviceSession = _webDeviceSession;
 @synthesize legacyDeviceSession = _legacyDeviceSession;
+@synthesize mobileDeviceSession = _mobileDeviceSession;
+@synthesize webDeviceSession = _webDeviceSession;
 
 #pragma mark - Constructors
-
-- (instancetype)initWithMobileDeviceSession:(DBTEAMLOGMobileDeviceSessionLogInfo *)mobileDeviceSession {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession;
-    _mobileDeviceSession = mobileDeviceSession;
-  }
-  return self;
-}
 
 - (instancetype)initWithDesktopDeviceSession:(DBTEAMLOGDesktopDeviceSessionLogInfo *)desktopDeviceSession {
   self = [super init];
@@ -83933,20 +92858,29 @@
   return self;
 }
 
-- (instancetype)initWithWebDeviceSession:(DBTEAMLOGWebDeviceSessionLogInfo *)webDeviceSession {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession;
-    _webDeviceSession = webDeviceSession;
-  }
-  return self;
-}
-
 - (instancetype)initWithLegacyDeviceSession:(DBTEAMLOGLegacyDeviceSessionLogInfo *)legacyDeviceSession {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession;
     _legacyDeviceSession = legacyDeviceSession;
+  }
+  return self;
+}
+
+- (instancetype)initWithMobileDeviceSession:(DBTEAMLOGMobileDeviceSessionLogInfo *)mobileDeviceSession {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession;
+    _mobileDeviceSession = mobileDeviceSession;
+  }
+  return self;
+}
+
+- (instancetype)initWithWebDeviceSession:(DBTEAMLOGWebDeviceSessionLogInfo *)webDeviceSession {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession;
+    _webDeviceSession = webDeviceSession;
   }
   return self;
 }
@@ -83961,15 +92895,6 @@
 
 #pragma mark - Instance field accessors
 
-- (DBTEAMLOGMobileDeviceSessionLogInfo *)mobileDeviceSession {
-  if (![self isMobileDeviceSession]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession, but was %@.", [self tagName]];
-  }
-  return _mobileDeviceSession;
-}
-
 - (DBTEAMLOGDesktopDeviceSessionLogInfo *)desktopDeviceSession {
   if (![self isDesktopDeviceSession]) {
     [NSException
@@ -83977,15 +92902,6 @@
         format:@"Invalid tag: required DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession, but was %@.", [self tagName]];
   }
   return _desktopDeviceSession;
-}
-
-- (DBTEAMLOGWebDeviceSessionLogInfo *)webDeviceSession {
-  if (![self isWebDeviceSession]) {
-    [NSException
-         raise:@"IllegalStateException"
-        format:@"Invalid tag: required DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession, but was %@.", [self tagName]];
-  }
-  return _webDeviceSession;
 }
 
 - (DBTEAMLOGLegacyDeviceSessionLogInfo *)legacyDeviceSession {
@@ -83997,22 +92913,40 @@
   return _legacyDeviceSession;
 }
 
-#pragma mark - Tag state methods
-
-- (BOOL)isMobileDeviceSession {
-  return _tag == DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession;
+- (DBTEAMLOGMobileDeviceSessionLogInfo *)mobileDeviceSession {
+  if (![self isMobileDeviceSession]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession, but was %@.", [self tagName]];
+  }
+  return _mobileDeviceSession;
 }
+
+- (DBTEAMLOGWebDeviceSessionLogInfo *)webDeviceSession {
+  if (![self isWebDeviceSession]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession, but was %@.", [self tagName]];
+  }
+  return _webDeviceSession;
+}
+
+#pragma mark - Tag state methods
 
 - (BOOL)isDesktopDeviceSession {
   return _tag == DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession;
 }
 
-- (BOOL)isWebDeviceSession {
-  return _tag == DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession;
-}
-
 - (BOOL)isLegacyDeviceSession {
   return _tag == DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession;
+}
+
+- (BOOL)isMobileDeviceSession {
+  return _tag == DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession;
+}
+
+- (BOOL)isWebDeviceSession {
+  return _tag == DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession;
 }
 
 - (BOOL)isOther {
@@ -84021,14 +92955,14 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession:
-    return @"DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession";
   case DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession:
     return @"DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession";
-  case DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession:
-    return @"DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession";
   case DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession:
     return @"DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession";
+  case DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession:
+    return @"DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession";
+  case DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession:
+    return @"DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession";
   case DBTEAMLOGLinkedDeviceLogInfoOther:
     return @"DBTEAMLOGLinkedDeviceLogInfoOther";
   }
@@ -84067,14 +93001,14 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession:
-    result = prime * result + [self.mobileDeviceSession hash];
   case DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession:
     result = prime * result + [self.desktopDeviceSession hash];
-  case DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession:
-    result = prime * result + [self.webDeviceSession hash];
   case DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession:
     result = prime * result + [self.legacyDeviceSession hash];
+  case DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession:
+    result = prime * result + [self.mobileDeviceSession hash];
+  case DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession:
+    result = prime * result + [self.webDeviceSession hash];
   case DBTEAMLOGLinkedDeviceLogInfoOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -84102,14 +93036,14 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession:
-    return [self.mobileDeviceSession isEqual:aLinkedDeviceLogInfo.mobileDeviceSession];
   case DBTEAMLOGLinkedDeviceLogInfoDesktopDeviceSession:
     return [self.desktopDeviceSession isEqual:aLinkedDeviceLogInfo.desktopDeviceSession];
-  case DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession:
-    return [self.webDeviceSession isEqual:aLinkedDeviceLogInfo.webDeviceSession];
   case DBTEAMLOGLinkedDeviceLogInfoLegacyDeviceSession:
     return [self.legacyDeviceSession isEqual:aLinkedDeviceLogInfo.legacyDeviceSession];
+  case DBTEAMLOGLinkedDeviceLogInfoMobileDeviceSession:
+    return [self.mobileDeviceSession isEqual:aLinkedDeviceLogInfo.mobileDeviceSession];
+  case DBTEAMLOGLinkedDeviceLogInfoWebDeviceSession:
+    return [self.webDeviceSession isEqual:aLinkedDeviceLogInfo.webDeviceSession];
   case DBTEAMLOGLinkedDeviceLogInfoOther:
     return [[self tagName] isEqual:[aLinkedDeviceLogInfo tagName]];
   }
@@ -84125,18 +93059,18 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGLinkedDeviceLogInfo *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isMobileDeviceSession]) {
-    jsonDict = [[DBTEAMLOGMobileDeviceSessionLogInfoSerializer serialize:valueObj.mobileDeviceSession] mutableCopy];
-    jsonDict[@".tag"] = @"mobile_device_session";
-  } else if ([valueObj isDesktopDeviceSession]) {
+  if ([valueObj isDesktopDeviceSession]) {
     jsonDict = [[DBTEAMLOGDesktopDeviceSessionLogInfoSerializer serialize:valueObj.desktopDeviceSession] mutableCopy];
     jsonDict[@".tag"] = @"desktop_device_session";
-  } else if ([valueObj isWebDeviceSession]) {
-    jsonDict = [[DBTEAMLOGWebDeviceSessionLogInfoSerializer serialize:valueObj.webDeviceSession] mutableCopy];
-    jsonDict[@".tag"] = @"web_device_session";
   } else if ([valueObj isLegacyDeviceSession]) {
     jsonDict = [[DBTEAMLOGLegacyDeviceSessionLogInfoSerializer serialize:valueObj.legacyDeviceSession] mutableCopy];
     jsonDict[@".tag"] = @"legacy_device_session";
+  } else if ([valueObj isMobileDeviceSession]) {
+    jsonDict = [[DBTEAMLOGMobileDeviceSessionLogInfoSerializer serialize:valueObj.mobileDeviceSession] mutableCopy];
+    jsonDict[@".tag"] = @"mobile_device_session";
+  } else if ([valueObj isWebDeviceSession]) {
+    jsonDict = [[DBTEAMLOGWebDeviceSessionLogInfoSerializer serialize:valueObj.webDeviceSession] mutableCopy];
+    jsonDict[@".tag"] = @"web_device_session";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -84149,22 +93083,22 @@
 + (DBTEAMLOGLinkedDeviceLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"mobile_device_session"]) {
-    DBTEAMLOGMobileDeviceSessionLogInfo *mobileDeviceSession =
-        [DBTEAMLOGMobileDeviceSessionLogInfoSerializer deserialize:valueDict];
-    return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithMobileDeviceSession:mobileDeviceSession];
-  } else if ([tag isEqualToString:@"desktop_device_session"]) {
+  if ([tag isEqualToString:@"desktop_device_session"]) {
     DBTEAMLOGDesktopDeviceSessionLogInfo *desktopDeviceSession =
         [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithDesktopDeviceSession:desktopDeviceSession];
-  } else if ([tag isEqualToString:@"web_device_session"]) {
-    DBTEAMLOGWebDeviceSessionLogInfo *webDeviceSession =
-        [DBTEAMLOGWebDeviceSessionLogInfoSerializer deserialize:valueDict];
-    return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithWebDeviceSession:webDeviceSession];
   } else if ([tag isEqualToString:@"legacy_device_session"]) {
     DBTEAMLOGLegacyDeviceSessionLogInfo *legacyDeviceSession =
         [DBTEAMLOGLegacyDeviceSessionLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithLegacyDeviceSession:legacyDeviceSession];
+  } else if ([tag isEqualToString:@"mobile_device_session"]) {
+    DBTEAMLOGMobileDeviceSessionLogInfo *mobileDeviceSession =
+        [DBTEAMLOGMobileDeviceSessionLogInfoSerializer deserialize:valueDict];
+    return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithMobileDeviceSession:mobileDeviceSession];
+  } else if ([tag isEqualToString:@"web_device_session"]) {
+    DBTEAMLOGWebDeviceSessionLogInfo *webDeviceSession =
+        [DBTEAMLOGWebDeviceSessionLogInfoSerializer deserialize:valueDict];
+    return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithWebDeviceSession:webDeviceSession];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGLinkedDeviceLogInfo alloc] initWithOther];
   } else {
@@ -84588,54 +93522,6 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithPassword {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLoginMethodPassword;
-  }
-  return self;
-}
-
-- (instancetype)initWithTwoFactorAuthentication {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLoginMethodTwoFactorAuthentication;
-  }
-  return self;
-}
-
-- (instancetype)initWithSaml {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLoginMethodSaml;
-  }
-  return self;
-}
-
-- (instancetype)initWithGoogleOauth {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLoginMethodGoogleOauth;
-  }
-  return self;
-}
-
-- (instancetype)initWithWebSession {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLoginMethodWebSession;
-  }
-  return self;
-}
-
-- (instancetype)initWithQrCode {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGLoginMethodQrCode;
-  }
-  return self;
-}
-
 - (instancetype)initWithAppleOauth {
   self = [super init];
   if (self) {
@@ -84652,6 +93538,54 @@
   return self;
 }
 
+- (instancetype)initWithGoogleOauth {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodGoogleOauth;
+  }
+  return self;
+}
+
+- (instancetype)initWithPassword {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodPassword;
+  }
+  return self;
+}
+
+- (instancetype)initWithQrCode {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodQrCode;
+  }
+  return self;
+}
+
+- (instancetype)initWithSaml {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodSaml;
+  }
+  return self;
+}
+
+- (instancetype)initWithTwoFactorAuthentication {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodTwoFactorAuthentication;
+  }
+  return self;
+}
+
+- (instancetype)initWithWebSession {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGLoginMethodWebSession;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -84664,30 +93598,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isPassword {
-  return _tag == DBTEAMLOGLoginMethodPassword;
-}
-
-- (BOOL)isTwoFactorAuthentication {
-  return _tag == DBTEAMLOGLoginMethodTwoFactorAuthentication;
-}
-
-- (BOOL)isSaml {
-  return _tag == DBTEAMLOGLoginMethodSaml;
-}
-
-- (BOOL)isGoogleOauth {
-  return _tag == DBTEAMLOGLoginMethodGoogleOauth;
-}
-
-- (BOOL)isWebSession {
-  return _tag == DBTEAMLOGLoginMethodWebSession;
-}
-
-- (BOOL)isQrCode {
-  return _tag == DBTEAMLOGLoginMethodQrCode;
-}
-
 - (BOOL)isAppleOauth {
   return _tag == DBTEAMLOGLoginMethodAppleOauth;
 }
@@ -84696,28 +93606,52 @@
   return _tag == DBTEAMLOGLoginMethodFirstPartyTokenExchange;
 }
 
+- (BOOL)isGoogleOauth {
+  return _tag == DBTEAMLOGLoginMethodGoogleOauth;
+}
+
+- (BOOL)isPassword {
+  return _tag == DBTEAMLOGLoginMethodPassword;
+}
+
+- (BOOL)isQrCode {
+  return _tag == DBTEAMLOGLoginMethodQrCode;
+}
+
+- (BOOL)isSaml {
+  return _tag == DBTEAMLOGLoginMethodSaml;
+}
+
+- (BOOL)isTwoFactorAuthentication {
+  return _tag == DBTEAMLOGLoginMethodTwoFactorAuthentication;
+}
+
+- (BOOL)isWebSession {
+  return _tag == DBTEAMLOGLoginMethodWebSession;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGLoginMethodOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGLoginMethodPassword:
-    return @"DBTEAMLOGLoginMethodPassword";
-  case DBTEAMLOGLoginMethodTwoFactorAuthentication:
-    return @"DBTEAMLOGLoginMethodTwoFactorAuthentication";
-  case DBTEAMLOGLoginMethodSaml:
-    return @"DBTEAMLOGLoginMethodSaml";
-  case DBTEAMLOGLoginMethodGoogleOauth:
-    return @"DBTEAMLOGLoginMethodGoogleOauth";
-  case DBTEAMLOGLoginMethodWebSession:
-    return @"DBTEAMLOGLoginMethodWebSession";
-  case DBTEAMLOGLoginMethodQrCode:
-    return @"DBTEAMLOGLoginMethodQrCode";
   case DBTEAMLOGLoginMethodAppleOauth:
     return @"DBTEAMLOGLoginMethodAppleOauth";
   case DBTEAMLOGLoginMethodFirstPartyTokenExchange:
     return @"DBTEAMLOGLoginMethodFirstPartyTokenExchange";
+  case DBTEAMLOGLoginMethodGoogleOauth:
+    return @"DBTEAMLOGLoginMethodGoogleOauth";
+  case DBTEAMLOGLoginMethodPassword:
+    return @"DBTEAMLOGLoginMethodPassword";
+  case DBTEAMLOGLoginMethodQrCode:
+    return @"DBTEAMLOGLoginMethodQrCode";
+  case DBTEAMLOGLoginMethodSaml:
+    return @"DBTEAMLOGLoginMethodSaml";
+  case DBTEAMLOGLoginMethodTwoFactorAuthentication:
+    return @"DBTEAMLOGLoginMethodTwoFactorAuthentication";
+  case DBTEAMLOGLoginMethodWebSession:
+    return @"DBTEAMLOGLoginMethodWebSession";
   case DBTEAMLOGLoginMethodOther:
     return @"DBTEAMLOGLoginMethodOther";
   }
@@ -84756,21 +93690,21 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGLoginMethodPassword:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGLoginMethodTwoFactorAuthentication:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGLoginMethodSaml:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGLoginMethodGoogleOauth:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGLoginMethodWebSession:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGLoginMethodQrCode:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGLoginMethodAppleOauth:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGLoginMethodFirstPartyTokenExchange:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGLoginMethodGoogleOauth:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGLoginMethodPassword:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGLoginMethodQrCode:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGLoginMethodSaml:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGLoginMethodTwoFactorAuthentication:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGLoginMethodWebSession:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGLoginMethodOther:
     result = prime * result + [[self tagName] hash];
@@ -84799,21 +93733,21 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGLoginMethodPassword:
-    return [[self tagName] isEqual:[aLoginMethod tagName]];
-  case DBTEAMLOGLoginMethodTwoFactorAuthentication:
-    return [[self tagName] isEqual:[aLoginMethod tagName]];
-  case DBTEAMLOGLoginMethodSaml:
-    return [[self tagName] isEqual:[aLoginMethod tagName]];
-  case DBTEAMLOGLoginMethodGoogleOauth:
-    return [[self tagName] isEqual:[aLoginMethod tagName]];
-  case DBTEAMLOGLoginMethodWebSession:
-    return [[self tagName] isEqual:[aLoginMethod tagName]];
-  case DBTEAMLOGLoginMethodQrCode:
-    return [[self tagName] isEqual:[aLoginMethod tagName]];
   case DBTEAMLOGLoginMethodAppleOauth:
     return [[self tagName] isEqual:[aLoginMethod tagName]];
   case DBTEAMLOGLoginMethodFirstPartyTokenExchange:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodGoogleOauth:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodPassword:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodQrCode:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodSaml:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodTwoFactorAuthentication:
+    return [[self tagName] isEqual:[aLoginMethod tagName]];
+  case DBTEAMLOGLoginMethodWebSession:
     return [[self tagName] isEqual:[aLoginMethod tagName]];
   case DBTEAMLOGLoginMethodOther:
     return [[self tagName] isEqual:[aLoginMethod tagName]];
@@ -84830,22 +93764,22 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGLoginMethod *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isPassword]) {
-    jsonDict[@".tag"] = @"password";
-  } else if ([valueObj isTwoFactorAuthentication]) {
-    jsonDict[@".tag"] = @"two_factor_authentication";
-  } else if ([valueObj isSaml]) {
-    jsonDict[@".tag"] = @"saml";
-  } else if ([valueObj isGoogleOauth]) {
-    jsonDict[@".tag"] = @"google_oauth";
-  } else if ([valueObj isWebSession]) {
-    jsonDict[@".tag"] = @"web_session";
-  } else if ([valueObj isQrCode]) {
-    jsonDict[@".tag"] = @"qr_code";
-  } else if ([valueObj isAppleOauth]) {
+  if ([valueObj isAppleOauth]) {
     jsonDict[@".tag"] = @"apple_oauth";
   } else if ([valueObj isFirstPartyTokenExchange]) {
     jsonDict[@".tag"] = @"first_party_token_exchange";
+  } else if ([valueObj isGoogleOauth]) {
+    jsonDict[@".tag"] = @"google_oauth";
+  } else if ([valueObj isPassword]) {
+    jsonDict[@".tag"] = @"password";
+  } else if ([valueObj isQrCode]) {
+    jsonDict[@".tag"] = @"qr_code";
+  } else if ([valueObj isSaml]) {
+    jsonDict[@".tag"] = @"saml";
+  } else if ([valueObj isTwoFactorAuthentication]) {
+    jsonDict[@".tag"] = @"two_factor_authentication";
+  } else if ([valueObj isWebSession]) {
+    jsonDict[@".tag"] = @"web_session";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -84858,22 +93792,22 @@
 + (DBTEAMLOGLoginMethod *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"password"]) {
-    return [[DBTEAMLOGLoginMethod alloc] initWithPassword];
-  } else if ([tag isEqualToString:@"two_factor_authentication"]) {
-    return [[DBTEAMLOGLoginMethod alloc] initWithTwoFactorAuthentication];
-  } else if ([tag isEqualToString:@"saml"]) {
-    return [[DBTEAMLOGLoginMethod alloc] initWithSaml];
-  } else if ([tag isEqualToString:@"google_oauth"]) {
-    return [[DBTEAMLOGLoginMethod alloc] initWithGoogleOauth];
-  } else if ([tag isEqualToString:@"web_session"]) {
-    return [[DBTEAMLOGLoginMethod alloc] initWithWebSession];
-  } else if ([tag isEqualToString:@"qr_code"]) {
-    return [[DBTEAMLOGLoginMethod alloc] initWithQrCode];
-  } else if ([tag isEqualToString:@"apple_oauth"]) {
+  if ([tag isEqualToString:@"apple_oauth"]) {
     return [[DBTEAMLOGLoginMethod alloc] initWithAppleOauth];
   } else if ([tag isEqualToString:@"first_party_token_exchange"]) {
     return [[DBTEAMLOGLoginMethod alloc] initWithFirstPartyTokenExchange];
+  } else if ([tag isEqualToString:@"google_oauth"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithGoogleOauth];
+  } else if ([tag isEqualToString:@"password"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithPassword];
+  } else if ([tag isEqualToString:@"qr_code"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithQrCode];
+  } else if ([tag isEqualToString:@"saml"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithSaml];
+  } else if ([tag isEqualToString:@"two_factor_authentication"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithTwoFactorAuthentication];
+  } else if ([tag isEqualToString:@"web_session"]) {
+    return [[DBTEAMLOGLoginMethod alloc] initWithWebSession];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGLoginMethod alloc] initWithOther];
   } else {
@@ -85109,12 +94043,17 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initDefault {
+- (instancetype)initWithLoginId:(NSString *)loginId {
 
   self = [super init];
   if (self) {
+    _loginId = loginId;
   }
   return self;
+}
+
+- (instancetype)initDefault {
+  return [self initWithLoginId:nil];
 }
 
 #pragma mark - Serialization methods
@@ -85147,6 +94086,10 @@
   NSUInteger prime = 31;
   NSUInteger result = 1;
 
+  if (self.loginId != nil) {
+    result = prime * result + [self.loginId hash];
+  }
+
   return prime * result;
 }
 
@@ -85166,6 +94109,11 @@
   if (self == aLogoutDetails) {
     return YES;
   }
+  if (self.loginId) {
+    if (![self.loginId isEqual:aLogoutDetails.loginId]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -85176,16 +94124,19 @@
 @implementation DBTEAMLOGLogoutDetailsSerializer
 
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGLogoutDetails *)valueObj {
-#pragma unused(valueObj)
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if (valueObj.loginId) {
+    jsonDict[@"login_id"] = valueObj.loginId;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGLogoutDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
-#pragma unused(valueDict)
+  NSString *loginId = valueDict[@"login_id"] ?: nil;
 
-  return [[DBTEAMLOGLogoutDetails alloc] initDefault];
+  return [[DBTEAMLOGLogoutDetails alloc] initWithLoginId:loginId];
 }
 
 @end
@@ -86765,6 +95716,215 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGMemberChangeResellerRoleDetails.h"
+#import "DBTEAMLOGResellerRole.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGMemberChangeResellerRoleDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGResellerRole *)dNewValue
+                    previousValue:(DBTEAMLOGResellerRole *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGMemberChangeResellerRoleDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGMemberChangeResellerRoleDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGMemberChangeResellerRoleDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToMemberChangeResellerRoleDetails:other];
+}
+
+- (BOOL)isEqualToMemberChangeResellerRoleDetails:
+    (DBTEAMLOGMemberChangeResellerRoleDetails *)aMemberChangeResellerRoleDetails {
+  if (self == aMemberChangeResellerRoleDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aMemberChangeResellerRoleDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aMemberChangeResellerRoleDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGMemberChangeResellerRoleDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberChangeResellerRoleDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGResellerRoleSerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] = [DBTEAMLOGResellerRoleSerializer serialize:valueObj.previousValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGMemberChangeResellerRoleDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGResellerRole *dNewValue = [DBTEAMLOGResellerRoleSerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGResellerRole *previousValue = [DBTEAMLOGResellerRoleSerializer deserialize:valueDict[@"previous_value"]];
+
+  return [[DBTEAMLOGMemberChangeResellerRoleDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGMemberChangeResellerRoleType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGMemberChangeResellerRoleType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGMemberChangeResellerRoleTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGMemberChangeResellerRoleTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGMemberChangeResellerRoleTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToMemberChangeResellerRoleType:other];
+}
+
+- (BOOL)isEqualToMemberChangeResellerRoleType:(DBTEAMLOGMemberChangeResellerRoleType *)aMemberChangeResellerRoleType {
+  if (self == aMemberChangeResellerRoleType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aMemberChangeResellerRoleType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGMemberChangeResellerRoleTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberChangeResellerRoleType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGMemberChangeResellerRoleType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGMemberChangeResellerRoleType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGActionDetails.h"
 #import "DBTEAMLOGMemberChangeStatusDetails.h"
 #import "DBTEAMLOGMemberStatus.h"
@@ -87622,18 +96782,18 @@
   return self;
 }
 
-- (instancetype)initWithOffboard {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGMemberRemoveActionTypeOffboard;
-  }
-  return self;
-}
-
 - (instancetype)initWithLeave {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGMemberRemoveActionTypeLeave;
+  }
+  return self;
+}
+
+- (instancetype)initWithOffboard {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGMemberRemoveActionTypeOffboard;
   }
   return self;
 }
@@ -87662,12 +96822,12 @@
   return _tag == DBTEAMLOGMemberRemoveActionTypeDelete_;
 }
 
-- (BOOL)isOffboard {
-  return _tag == DBTEAMLOGMemberRemoveActionTypeOffboard;
-}
-
 - (BOOL)isLeave {
   return _tag == DBTEAMLOGMemberRemoveActionTypeLeave;
+}
+
+- (BOOL)isOffboard {
+  return _tag == DBTEAMLOGMemberRemoveActionTypeOffboard;
 }
 
 - (BOOL)isOffboardAndRetainTeamFolders {
@@ -87682,10 +96842,10 @@
   switch (_tag) {
   case DBTEAMLOGMemberRemoveActionTypeDelete_:
     return @"DBTEAMLOGMemberRemoveActionTypeDelete_";
-  case DBTEAMLOGMemberRemoveActionTypeOffboard:
-    return @"DBTEAMLOGMemberRemoveActionTypeOffboard";
   case DBTEAMLOGMemberRemoveActionTypeLeave:
     return @"DBTEAMLOGMemberRemoveActionTypeLeave";
+  case DBTEAMLOGMemberRemoveActionTypeOffboard:
+    return @"DBTEAMLOGMemberRemoveActionTypeOffboard";
   case DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders:
     return @"DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders";
   case DBTEAMLOGMemberRemoveActionTypeOther:
@@ -87728,9 +96888,9 @@
   switch (_tag) {
   case DBTEAMLOGMemberRemoveActionTypeDelete_:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGMemberRemoveActionTypeOffboard:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberRemoveActionTypeLeave:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGMemberRemoveActionTypeOffboard:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders:
     result = prime * result + [[self tagName] hash];
@@ -87763,9 +96923,9 @@
   switch (_tag) {
   case DBTEAMLOGMemberRemoveActionTypeDelete_:
     return [[self tagName] isEqual:[aMemberRemoveActionType tagName]];
-  case DBTEAMLOGMemberRemoveActionTypeOffboard:
-    return [[self tagName] isEqual:[aMemberRemoveActionType tagName]];
   case DBTEAMLOGMemberRemoveActionTypeLeave:
+    return [[self tagName] isEqual:[aMemberRemoveActionType tagName]];
+  case DBTEAMLOGMemberRemoveActionTypeOffboard:
     return [[self tagName] isEqual:[aMemberRemoveActionType tagName]];
   case DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders:
     return [[self tagName] isEqual:[aMemberRemoveActionType tagName]];
@@ -87786,10 +96946,10 @@
 
   if ([valueObj isDelete_]) {
     jsonDict[@".tag"] = @"delete";
-  } else if ([valueObj isOffboard]) {
-    jsonDict[@".tag"] = @"offboard";
   } else if ([valueObj isLeave]) {
     jsonDict[@".tag"] = @"leave";
+  } else if ([valueObj isOffboard]) {
+    jsonDict[@".tag"] = @"offboard";
   } else if ([valueObj isOffboardAndRetainTeamFolders]) {
     jsonDict[@".tag"] = @"offboard_and_retain_team_folders";
   } else if ([valueObj isOther]) {
@@ -87806,10 +96966,10 @@
 
   if ([tag isEqualToString:@"delete"]) {
     return [[DBTEAMLOGMemberRemoveActionType alloc] initWithDelete_];
-  } else if ([tag isEqualToString:@"offboard"]) {
-    return [[DBTEAMLOGMemberRemoveActionType alloc] initWithOffboard];
   } else if ([tag isEqualToString:@"leave"]) {
     return [[DBTEAMLOGMemberRemoveActionType alloc] initWithLeave];
+  } else if ([tag isEqualToString:@"offboard"]) {
+    return [[DBTEAMLOGMemberRemoveActionType alloc] initWithOffboard];
   } else if ([tag isEqualToString:@"offboard_and_retain_team_folders"]) {
     return [[DBTEAMLOGMemberRemoveActionType alloc] initWithOffboardAndRetainTeamFolders];
   } else if ([tag isEqualToString:@"other"]) {
@@ -88456,18 +97616,18 @@
   return self;
 }
 
-- (instancetype)initWithSpecificMembers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGMemberSendInvitePolicySpecificMembers;
-  }
-  return self;
-}
-
 - (instancetype)initWithEveryone {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGMemberSendInvitePolicyEveryone;
+  }
+  return self;
+}
+
+- (instancetype)initWithSpecificMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGMemberSendInvitePolicySpecificMembers;
   }
   return self;
 }
@@ -88488,12 +97648,12 @@
   return _tag == DBTEAMLOGMemberSendInvitePolicyDisabled;
 }
 
-- (BOOL)isSpecificMembers {
-  return _tag == DBTEAMLOGMemberSendInvitePolicySpecificMembers;
-}
-
 - (BOOL)isEveryone {
   return _tag == DBTEAMLOGMemberSendInvitePolicyEveryone;
+}
+
+- (BOOL)isSpecificMembers {
+  return _tag == DBTEAMLOGMemberSendInvitePolicySpecificMembers;
 }
 
 - (BOOL)isOther {
@@ -88504,10 +97664,10 @@
   switch (_tag) {
   case DBTEAMLOGMemberSendInvitePolicyDisabled:
     return @"DBTEAMLOGMemberSendInvitePolicyDisabled";
-  case DBTEAMLOGMemberSendInvitePolicySpecificMembers:
-    return @"DBTEAMLOGMemberSendInvitePolicySpecificMembers";
   case DBTEAMLOGMemberSendInvitePolicyEveryone:
     return @"DBTEAMLOGMemberSendInvitePolicyEveryone";
+  case DBTEAMLOGMemberSendInvitePolicySpecificMembers:
+    return @"DBTEAMLOGMemberSendInvitePolicySpecificMembers";
   case DBTEAMLOGMemberSendInvitePolicyOther:
     return @"DBTEAMLOGMemberSendInvitePolicyOther";
   }
@@ -88548,9 +97708,9 @@
   switch (_tag) {
   case DBTEAMLOGMemberSendInvitePolicyDisabled:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGMemberSendInvitePolicySpecificMembers:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberSendInvitePolicyEveryone:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGMemberSendInvitePolicySpecificMembers:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberSendInvitePolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -88581,9 +97741,9 @@
   switch (_tag) {
   case DBTEAMLOGMemberSendInvitePolicyDisabled:
     return [[self tagName] isEqual:[aMemberSendInvitePolicy tagName]];
-  case DBTEAMLOGMemberSendInvitePolicySpecificMembers:
-    return [[self tagName] isEqual:[aMemberSendInvitePolicy tagName]];
   case DBTEAMLOGMemberSendInvitePolicyEveryone:
+    return [[self tagName] isEqual:[aMemberSendInvitePolicy tagName]];
+  case DBTEAMLOGMemberSendInvitePolicySpecificMembers:
     return [[self tagName] isEqual:[aMemberSendInvitePolicy tagName]];
   case DBTEAMLOGMemberSendInvitePolicyOther:
     return [[self tagName] isEqual:[aMemberSendInvitePolicy tagName]];
@@ -88602,10 +97762,10 @@
 
   if ([valueObj isDisabled]) {
     jsonDict[@".tag"] = @"disabled";
-  } else if ([valueObj isSpecificMembers]) {
-    jsonDict[@".tag"] = @"specific_members";
   } else if ([valueObj isEveryone]) {
     jsonDict[@".tag"] = @"everyone";
+  } else if ([valueObj isSpecificMembers]) {
+    jsonDict[@".tag"] = @"specific_members";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -88620,10 +97780,10 @@
 
   if ([tag isEqualToString:@"disabled"]) {
     return [[DBTEAMLOGMemberSendInvitePolicy alloc] initWithDisabled];
-  } else if ([tag isEqualToString:@"specific_members"]) {
-    return [[DBTEAMLOGMemberSendInvitePolicy alloc] initWithSpecificMembers];
   } else if ([tag isEqualToString:@"everyone"]) {
     return [[DBTEAMLOGMemberSendInvitePolicy alloc] initWithEveryone];
+  } else if ([tag isEqualToString:@"specific_members"]) {
+    return [[DBTEAMLOGMemberSendInvitePolicy alloc] initWithSpecificMembers];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGMemberSendInvitePolicy alloc] initWithOther];
   } else {
@@ -90677,10 +99837,10 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithNotJoined {
+- (instancetype)initWithActive {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGMemberStatusNotJoined;
+    _tag = DBTEAMLOGMemberStatusActive;
   }
   return self;
 }
@@ -90693,18 +99853,18 @@
   return self;
 }
 
-- (instancetype)initWithActive {
+- (instancetype)initWithMovedToAnotherTeam {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGMemberStatusActive;
+    _tag = DBTEAMLOGMemberStatusMovedToAnotherTeam;
   }
   return self;
 }
 
-- (instancetype)initWithSuspended {
+- (instancetype)initWithNotJoined {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGMemberStatusSuspended;
+    _tag = DBTEAMLOGMemberStatusNotJoined;
   }
   return self;
 }
@@ -90717,10 +99877,10 @@
   return self;
 }
 
-- (instancetype)initWithMovedToAnotherTeam {
+- (instancetype)initWithSuspended {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGMemberStatusMovedToAnotherTeam;
+    _tag = DBTEAMLOGMemberStatusSuspended;
   }
   return self;
 }
@@ -90737,28 +99897,28 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isNotJoined {
-  return _tag == DBTEAMLOGMemberStatusNotJoined;
+- (BOOL)isActive {
+  return _tag == DBTEAMLOGMemberStatusActive;
 }
 
 - (BOOL)isInvited {
   return _tag == DBTEAMLOGMemberStatusInvited;
 }
 
-- (BOOL)isActive {
-  return _tag == DBTEAMLOGMemberStatusActive;
+- (BOOL)isMovedToAnotherTeam {
+  return _tag == DBTEAMLOGMemberStatusMovedToAnotherTeam;
 }
 
-- (BOOL)isSuspended {
-  return _tag == DBTEAMLOGMemberStatusSuspended;
+- (BOOL)isNotJoined {
+  return _tag == DBTEAMLOGMemberStatusNotJoined;
 }
 
 - (BOOL)isRemoved {
   return _tag == DBTEAMLOGMemberStatusRemoved;
 }
 
-- (BOOL)isMovedToAnotherTeam {
-  return _tag == DBTEAMLOGMemberStatusMovedToAnotherTeam;
+- (BOOL)isSuspended {
+  return _tag == DBTEAMLOGMemberStatusSuspended;
 }
 
 - (BOOL)isOther {
@@ -90767,18 +99927,18 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGMemberStatusNotJoined:
-    return @"DBTEAMLOGMemberStatusNotJoined";
-  case DBTEAMLOGMemberStatusInvited:
-    return @"DBTEAMLOGMemberStatusInvited";
   case DBTEAMLOGMemberStatusActive:
     return @"DBTEAMLOGMemberStatusActive";
-  case DBTEAMLOGMemberStatusSuspended:
-    return @"DBTEAMLOGMemberStatusSuspended";
-  case DBTEAMLOGMemberStatusRemoved:
-    return @"DBTEAMLOGMemberStatusRemoved";
+  case DBTEAMLOGMemberStatusInvited:
+    return @"DBTEAMLOGMemberStatusInvited";
   case DBTEAMLOGMemberStatusMovedToAnotherTeam:
     return @"DBTEAMLOGMemberStatusMovedToAnotherTeam";
+  case DBTEAMLOGMemberStatusNotJoined:
+    return @"DBTEAMLOGMemberStatusNotJoined";
+  case DBTEAMLOGMemberStatusRemoved:
+    return @"DBTEAMLOGMemberStatusRemoved";
+  case DBTEAMLOGMemberStatusSuspended:
+    return @"DBTEAMLOGMemberStatusSuspended";
   case DBTEAMLOGMemberStatusOther:
     return @"DBTEAMLOGMemberStatusOther";
   }
@@ -90817,17 +99977,17 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGMemberStatusNotJoined:
+  case DBTEAMLOGMemberStatusActive:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberStatusInvited:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGMemberStatusActive:
+  case DBTEAMLOGMemberStatusMovedToAnotherTeam:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGMemberStatusSuspended:
+  case DBTEAMLOGMemberStatusNotJoined:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberStatusRemoved:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGMemberStatusMovedToAnotherTeam:
+  case DBTEAMLOGMemberStatusSuspended:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGMemberStatusOther:
     result = prime * result + [[self tagName] hash];
@@ -90856,17 +100016,17 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGMemberStatusNotJoined:
+  case DBTEAMLOGMemberStatusActive:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
   case DBTEAMLOGMemberStatusInvited:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
-  case DBTEAMLOGMemberStatusActive:
+  case DBTEAMLOGMemberStatusMovedToAnotherTeam:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
-  case DBTEAMLOGMemberStatusSuspended:
+  case DBTEAMLOGMemberStatusNotJoined:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
   case DBTEAMLOGMemberStatusRemoved:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
-  case DBTEAMLOGMemberStatusMovedToAnotherTeam:
+  case DBTEAMLOGMemberStatusSuspended:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
   case DBTEAMLOGMemberStatusOther:
     return [[self tagName] isEqual:[aMemberStatus tagName]];
@@ -90883,18 +100043,18 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGMemberStatus *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isNotJoined]) {
-    jsonDict[@".tag"] = @"not_joined";
+  if ([valueObj isActive]) {
+    jsonDict[@".tag"] = @"active";
   } else if ([valueObj isInvited]) {
     jsonDict[@".tag"] = @"invited";
-  } else if ([valueObj isActive]) {
-    jsonDict[@".tag"] = @"active";
-  } else if ([valueObj isSuspended]) {
-    jsonDict[@".tag"] = @"suspended";
-  } else if ([valueObj isRemoved]) {
-    jsonDict[@".tag"] = @"removed";
   } else if ([valueObj isMovedToAnotherTeam]) {
     jsonDict[@".tag"] = @"moved_to_another_team";
+  } else if ([valueObj isNotJoined]) {
+    jsonDict[@".tag"] = @"not_joined";
+  } else if ([valueObj isRemoved]) {
+    jsonDict[@".tag"] = @"removed";
+  } else if ([valueObj isSuspended]) {
+    jsonDict[@".tag"] = @"suspended";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -90907,18 +100067,18 @@
 + (DBTEAMLOGMemberStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"not_joined"]) {
-    return [[DBTEAMLOGMemberStatus alloc] initWithNotJoined];
+  if ([tag isEqualToString:@"active"]) {
+    return [[DBTEAMLOGMemberStatus alloc] initWithActive];
   } else if ([tag isEqualToString:@"invited"]) {
     return [[DBTEAMLOGMemberStatus alloc] initWithInvited];
-  } else if ([tag isEqualToString:@"active"]) {
-    return [[DBTEAMLOGMemberStatus alloc] initWithActive];
-  } else if ([tag isEqualToString:@"suspended"]) {
-    return [[DBTEAMLOGMemberStatus alloc] initWithSuspended];
-  } else if ([tag isEqualToString:@"removed"]) {
-    return [[DBTEAMLOGMemberStatus alloc] initWithRemoved];
   } else if ([tag isEqualToString:@"moved_to_another_team"]) {
     return [[DBTEAMLOGMemberStatus alloc] initWithMovedToAnotherTeam];
+  } else if ([tag isEqualToString:@"not_joined"]) {
+    return [[DBTEAMLOGMemberStatus alloc] initWithNotJoined];
+  } else if ([tag isEqualToString:@"removed"]) {
+    return [[DBTEAMLOGMemberStatus alloc] initWithRemoved];
+  } else if ([tag isEqualToString:@"suspended"]) {
+    return [[DBTEAMLOGMemberStatus alloc] initWithSuspended];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGMemberStatus alloc] initWithOther];
   } else {
@@ -96622,14 +105782,6 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithViewer {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPaperAccessTypeViewer;
-  }
-  return self;
-}
-
 - (instancetype)initWithCommenter {
   self = [super init];
   if (self) {
@@ -96646,6 +105798,14 @@
   return self;
 }
 
+- (instancetype)initWithViewer {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGPaperAccessTypeViewer;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -96658,10 +105818,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isViewer {
-  return _tag == DBTEAMLOGPaperAccessTypeViewer;
-}
-
 - (BOOL)isCommenter {
   return _tag == DBTEAMLOGPaperAccessTypeCommenter;
 }
@@ -96670,18 +105826,22 @@
   return _tag == DBTEAMLOGPaperAccessTypeEditor;
 }
 
+- (BOOL)isViewer {
+  return _tag == DBTEAMLOGPaperAccessTypeViewer;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGPaperAccessTypeOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGPaperAccessTypeViewer:
-    return @"DBTEAMLOGPaperAccessTypeViewer";
   case DBTEAMLOGPaperAccessTypeCommenter:
     return @"DBTEAMLOGPaperAccessTypeCommenter";
   case DBTEAMLOGPaperAccessTypeEditor:
     return @"DBTEAMLOGPaperAccessTypeEditor";
+  case DBTEAMLOGPaperAccessTypeViewer:
+    return @"DBTEAMLOGPaperAccessTypeViewer";
   case DBTEAMLOGPaperAccessTypeOther:
     return @"DBTEAMLOGPaperAccessTypeOther";
   }
@@ -96720,11 +105880,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGPaperAccessTypeViewer:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPaperAccessTypeCommenter:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPaperAccessTypeEditor:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGPaperAccessTypeViewer:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPaperAccessTypeOther:
     result = prime * result + [[self tagName] hash];
@@ -96753,11 +105913,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGPaperAccessTypeViewer:
-    return [[self tagName] isEqual:[aPaperAccessType tagName]];
   case DBTEAMLOGPaperAccessTypeCommenter:
     return [[self tagName] isEqual:[aPaperAccessType tagName]];
   case DBTEAMLOGPaperAccessTypeEditor:
+    return [[self tagName] isEqual:[aPaperAccessType tagName]];
+  case DBTEAMLOGPaperAccessTypeViewer:
     return [[self tagName] isEqual:[aPaperAccessType tagName]];
   case DBTEAMLOGPaperAccessTypeOther:
     return [[self tagName] isEqual:[aPaperAccessType tagName]];
@@ -96774,12 +105934,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPaperAccessType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isViewer]) {
-    jsonDict[@".tag"] = @"viewer";
-  } else if ([valueObj isCommenter]) {
+  if ([valueObj isCommenter]) {
     jsonDict[@".tag"] = @"commenter";
   } else if ([valueObj isEditor]) {
     jsonDict[@".tag"] = @"editor";
+  } else if ([valueObj isViewer]) {
+    jsonDict[@".tag"] = @"viewer";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -96792,12 +105952,12 @@
 + (DBTEAMLOGPaperAccessType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"viewer"]) {
-    return [[DBTEAMLOGPaperAccessType alloc] initWithViewer];
-  } else if ([tag isEqualToString:@"commenter"]) {
+  if ([tag isEqualToString:@"commenter"]) {
     return [[DBTEAMLOGPaperAccessType alloc] initWithCommenter];
   } else if ([tag isEqualToString:@"editor"]) {
     return [[DBTEAMLOGPaperAccessType alloc] initWithEditor];
+  } else if ([tag isEqualToString:@"viewer"]) {
+    return [[DBTEAMLOGPaperAccessType alloc] initWithViewer];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGPaperAccessType alloc] initWithOther];
   } else {
@@ -108099,25 +117259,25 @@
 
 @implementation DBTEAMLOGParticipantLogInfo
 
-@synthesize user = _user;
 @synthesize group = _group;
+@synthesize user = _user;
 
 #pragma mark - Constructors
-
-- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGParticipantLogInfoUser;
-    _user = user;
-  }
-  return self;
-}
 
 - (instancetype)initWithGroup:(DBTEAMLOGGroupLogInfo *)group {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGParticipantLogInfoGroup;
     _group = group;
+  }
+  return self;
+}
+
+- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGParticipantLogInfoUser;
+    _user = user;
   }
   return self;
 }
@@ -108132,14 +117292,6 @@
 
 #pragma mark - Instance field accessors
 
-- (DBTEAMLOGUserLogInfo *)user {
-  if (![self isUser]) {
-    [NSException raise:@"IllegalStateException"
-                format:@"Invalid tag: required DBTEAMLOGParticipantLogInfoUser, but was %@.", [self tagName]];
-  }
-  return _user;
-}
-
 - (DBTEAMLOGGroupLogInfo *)group {
   if (![self isGroup]) {
     [NSException raise:@"IllegalStateException"
@@ -108148,14 +117300,22 @@
   return _group;
 }
 
-#pragma mark - Tag state methods
-
-- (BOOL)isUser {
-  return _tag == DBTEAMLOGParticipantLogInfoUser;
+- (DBTEAMLOGUserLogInfo *)user {
+  if (![self isUser]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGParticipantLogInfoUser, but was %@.", [self tagName]];
+  }
+  return _user;
 }
+
+#pragma mark - Tag state methods
 
 - (BOOL)isGroup {
   return _tag == DBTEAMLOGParticipantLogInfoGroup;
+}
+
+- (BOOL)isUser {
+  return _tag == DBTEAMLOGParticipantLogInfoUser;
 }
 
 - (BOOL)isOther {
@@ -108164,10 +117324,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGParticipantLogInfoUser:
-    return @"DBTEAMLOGParticipantLogInfoUser";
   case DBTEAMLOGParticipantLogInfoGroup:
     return @"DBTEAMLOGParticipantLogInfoGroup";
+  case DBTEAMLOGParticipantLogInfoUser:
+    return @"DBTEAMLOGParticipantLogInfoUser";
   case DBTEAMLOGParticipantLogInfoOther:
     return @"DBTEAMLOGParticipantLogInfoOther";
   }
@@ -108206,10 +117366,10 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGParticipantLogInfoUser:
-    result = prime * result + [self.user hash];
   case DBTEAMLOGParticipantLogInfoGroup:
     result = prime * result + [self.group hash];
+  case DBTEAMLOGParticipantLogInfoUser:
+    result = prime * result + [self.user hash];
   case DBTEAMLOGParticipantLogInfoOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -108237,10 +117397,10 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGParticipantLogInfoUser:
-    return [self.user isEqual:aParticipantLogInfo.user];
   case DBTEAMLOGParticipantLogInfoGroup:
     return [self.group isEqual:aParticipantLogInfo.group];
+  case DBTEAMLOGParticipantLogInfoUser:
+    return [self.user isEqual:aParticipantLogInfo.user];
   case DBTEAMLOGParticipantLogInfoOther:
     return [[self tagName] isEqual:[aParticipantLogInfo tagName]];
   }
@@ -108256,12 +117416,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGParticipantLogInfo *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isUser]) {
-    jsonDict[@"user"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.user] mutableCopy];
-    jsonDict[@".tag"] = @"user";
-  } else if ([valueObj isGroup]) {
+  if ([valueObj isGroup]) {
     jsonDict = [[DBTEAMLOGGroupLogInfoSerializer serialize:valueObj.group] mutableCopy];
     jsonDict[@".tag"] = @"group";
+  } else if ([valueObj isUser]) {
+    jsonDict[@"user"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.user] mutableCopy];
+    jsonDict[@".tag"] = @"user";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -108274,12 +117434,12 @@
 + (DBTEAMLOGParticipantLogInfo *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"user"]) {
-    DBTEAMLOGUserLogInfo *user = [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"user"]];
-    return [[DBTEAMLOGParticipantLogInfo alloc] initWithUser:user];
-  } else if ([tag isEqualToString:@"group"]) {
+  if ([tag isEqualToString:@"group"]) {
     DBTEAMLOGGroupLogInfo *group = [DBTEAMLOGGroupLogInfoSerializer deserialize:valueDict];
     return [[DBTEAMLOGParticipantLogInfo alloc] initWithGroup:group];
+  } else if ([tag isEqualToString:@"user"]) {
+    DBTEAMLOGUserLogInfo *user = [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"user"]];
+    return [[DBTEAMLOGParticipantLogInfo alloc] initWithUser:user];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGParticipantLogInfo alloc] initWithOther];
   } else {
@@ -108299,14 +117459,6 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithEnabled {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGPassPolicyEnabled;
-  }
-  return self;
-}
-
 - (instancetype)initWithAllow {
   self = [super init];
   if (self) {
@@ -108323,6 +117475,14 @@
   return self;
 }
 
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGPassPolicyEnabled;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -108335,10 +117495,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isEnabled {
-  return _tag == DBTEAMLOGPassPolicyEnabled;
-}
-
 - (BOOL)isAllow {
   return _tag == DBTEAMLOGPassPolicyAllow;
 }
@@ -108347,18 +117503,22 @@
   return _tag == DBTEAMLOGPassPolicyDisabled;
 }
 
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGPassPolicyEnabled;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGPassPolicyOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGPassPolicyEnabled:
-    return @"DBTEAMLOGPassPolicyEnabled";
   case DBTEAMLOGPassPolicyAllow:
     return @"DBTEAMLOGPassPolicyAllow";
   case DBTEAMLOGPassPolicyDisabled:
     return @"DBTEAMLOGPassPolicyDisabled";
+  case DBTEAMLOGPassPolicyEnabled:
+    return @"DBTEAMLOGPassPolicyEnabled";
   case DBTEAMLOGPassPolicyOther:
     return @"DBTEAMLOGPassPolicyOther";
   }
@@ -108397,11 +117557,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGPassPolicyEnabled:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPassPolicyAllow:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPassPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGPassPolicyEnabled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGPassPolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -108430,11 +117590,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGPassPolicyEnabled:
-    return [[self tagName] isEqual:[aPassPolicy tagName]];
   case DBTEAMLOGPassPolicyAllow:
     return [[self tagName] isEqual:[aPassPolicy tagName]];
   case DBTEAMLOGPassPolicyDisabled:
+    return [[self tagName] isEqual:[aPassPolicy tagName]];
+  case DBTEAMLOGPassPolicyEnabled:
     return [[self tagName] isEqual:[aPassPolicy tagName]];
   case DBTEAMLOGPassPolicyOther:
     return [[self tagName] isEqual:[aPassPolicy tagName]];
@@ -108451,12 +117611,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPassPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isEnabled]) {
-    jsonDict[@".tag"] = @"enabled";
-  } else if ([valueObj isAllow]) {
+  if ([valueObj isAllow]) {
     jsonDict[@".tag"] = @"allow";
   } else if ([valueObj isDisabled]) {
     jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -108469,12 +117629,12 @@
 + (DBTEAMLOGPassPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"enabled"]) {
-    return [[DBTEAMLOGPassPolicy alloc] initWithEnabled];
-  } else if ([tag isEqualToString:@"allow"]) {
+  if ([tag isEqualToString:@"allow"]) {
     return [[DBTEAMLOGPassPolicy alloc] initWithAllow];
   } else if ([tag isEqualToString:@"disabled"]) {
     return [[DBTEAMLOGPassPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGPassPolicy alloc] initWithEnabled];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGPassPolicy alloc] initWithOther];
   } else {
@@ -110030,6 +119190,157 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGPolicyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGPolicyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithRetention {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGPolicyTypeRetention;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGPolicyTypeOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isRetention {
+  return _tag == DBTEAMLOGPolicyTypeRetention;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGPolicyTypeOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGPolicyTypeRetention:
+    return @"DBTEAMLOGPolicyTypeRetention";
+  case DBTEAMLOGPolicyTypeOther:
+    return @"DBTEAMLOGPolicyTypeOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGPolicyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGPolicyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGPolicyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGPolicyTypeRetention:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGPolicyTypeOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToPolicyType:other];
+}
+
+- (BOOL)isEqualToPolicyType:(DBTEAMLOGPolicyType *)aPolicyType {
+  if (self == aPolicyType) {
+    return YES;
+  }
+  if (self.tag != aPolicyType.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGPolicyTypeRetention:
+    return [[self tagName] isEqual:[aPolicyType tagName]];
+  case DBTEAMLOGPolicyTypeOther:
+    return [[self tagName] isEqual:[aPolicyType tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGPolicyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGPolicyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isRetention]) {
+    jsonDict[@".tag"] = @"retention";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGPolicyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"retention"]) {
+    return [[DBTEAMLOGPolicyType alloc] initWithRetention];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGPolicyType alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGPolicyType alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGPrimaryTeamRequestAcceptedDetails.h"
 
 #pragma mark - API Object
@@ -110934,6 +120245,179 @@
   NSString *resellerEmail = valueDict[@"reseller_email"];
 
   return [[DBTEAMLOGResellerLogInfo alloc] initWithResellerName:resellerName resellerEmail:resellerEmail];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGResellerRole.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGResellerRole
+
+#pragma mark - Constructors
+
+- (instancetype)initWithNotReseller {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGResellerRoleNotReseller;
+  }
+  return self;
+}
+
+- (instancetype)initWithResellerAdmin {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGResellerRoleResellerAdmin;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGResellerRoleOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isNotReseller {
+  return _tag == DBTEAMLOGResellerRoleNotReseller;
+}
+
+- (BOOL)isResellerAdmin {
+  return _tag == DBTEAMLOGResellerRoleResellerAdmin;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGResellerRoleOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGResellerRoleNotReseller:
+    return @"DBTEAMLOGResellerRoleNotReseller";
+  case DBTEAMLOGResellerRoleResellerAdmin:
+    return @"DBTEAMLOGResellerRoleResellerAdmin";
+  case DBTEAMLOGResellerRoleOther:
+    return @"DBTEAMLOGResellerRoleOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGResellerRoleSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGResellerRoleSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGResellerRoleSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGResellerRoleNotReseller:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGResellerRoleResellerAdmin:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGResellerRoleOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToResellerRole:other];
+}
+
+- (BOOL)isEqualToResellerRole:(DBTEAMLOGResellerRole *)aResellerRole {
+  if (self == aResellerRole) {
+    return YES;
+  }
+  if (self.tag != aResellerRole.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGResellerRoleNotReseller:
+    return [[self tagName] isEqual:[aResellerRole tagName]];
+  case DBTEAMLOGResellerRoleResellerAdmin:
+    return [[self tagName] isEqual:[aResellerRole tagName]];
+  case DBTEAMLOGResellerRoleOther:
+    return [[self tagName] isEqual:[aResellerRole tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGResellerRoleSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGResellerRole *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isNotReseller]) {
+    jsonDict[@".tag"] = @"not_reseller";
+  } else if ([valueObj isResellerAdmin]) {
+    jsonDict[@".tag"] = @"reseller_admin";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGResellerRole *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"not_reseller"]) {
+    return [[DBTEAMLOGResellerRole alloc] initWithNotReseller];
+  } else if ([tag isEqualToString:@"reseller_admin"]) {
+    return [[DBTEAMLOGResellerRole alloc] initWithResellerAdmin];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGResellerRole alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGResellerRole alloc] initWithOther];
+  }
 }
 
 @end
@@ -123269,18 +132753,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithInheritMembers {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers;
-  }
-  return self;
-}
-
 - (instancetype)initWithDontInheritMembers {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers;
+  }
+  return self;
+}
+
+- (instancetype)initWithInheritMembers {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers;
   }
   return self;
 }
@@ -123297,12 +132781,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isInheritMembers {
-  return _tag == DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers;
-}
-
 - (BOOL)isDontInheritMembers {
   return _tag == DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers;
+}
+
+- (BOOL)isInheritMembers {
+  return _tag == DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers;
 }
 
 - (BOOL)isOther {
@@ -123311,10 +132795,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers:
-    return @"DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers";
   case DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers:
     return @"DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers";
+  case DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers:
+    return @"DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers";
   case DBTEAMLOGSharedFolderMembersInheritancePolicyOther:
     return @"DBTEAMLOGSharedFolderMembersInheritancePolicyOther";
   }
@@ -123353,9 +132837,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSharedFolderMembersInheritancePolicyOther:
     result = prime * result + [[self tagName] hash];
@@ -123385,9 +132869,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers:
-    return [[self tagName] isEqual:[aSharedFolderMembersInheritancePolicy tagName]];
   case DBTEAMLOGSharedFolderMembersInheritancePolicyDontInheritMembers:
+    return [[self tagName] isEqual:[aSharedFolderMembersInheritancePolicy tagName]];
+  case DBTEAMLOGSharedFolderMembersInheritancePolicyInheritMembers:
     return [[self tagName] isEqual:[aSharedFolderMembersInheritancePolicy tagName]];
   case DBTEAMLOGSharedFolderMembersInheritancePolicyOther:
     return [[self tagName] isEqual:[aSharedFolderMembersInheritancePolicy tagName]];
@@ -123404,10 +132888,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharedFolderMembersInheritancePolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isInheritMembers]) {
-    jsonDict[@".tag"] = @"inherit_members";
-  } else if ([valueObj isDontInheritMembers]) {
+  if ([valueObj isDontInheritMembers]) {
     jsonDict[@".tag"] = @"dont_inherit_members";
+  } else if ([valueObj isInheritMembers]) {
+    jsonDict[@".tag"] = @"inherit_members";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -123420,10 +132904,10 @@
 + (DBTEAMLOGSharedFolderMembersInheritancePolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"inherit_members"]) {
-    return [[DBTEAMLOGSharedFolderMembersInheritancePolicy alloc] initWithInheritMembers];
-  } else if ([tag isEqualToString:@"dont_inherit_members"]) {
+  if ([tag isEqualToString:@"dont_inherit_members"]) {
     return [[DBTEAMLOGSharedFolderMembersInheritancePolicy alloc] initWithDontInheritMembers];
+  } else if ([tag isEqualToString:@"inherit_members"]) {
+    return [[DBTEAMLOGSharedFolderMembersInheritancePolicy alloc] initWithInheritMembers];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGSharedFolderMembersInheritancePolicy alloc] initWithOther];
   } else {
@@ -130373,6 +139857,428 @@
   } else {
     return [[DBTEAMLOGSharingMemberPolicy alloc] initWithOther];
   }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGShmodelDisableDownloadsDetails.h"
+#import "DBTEAMLOGUserLogInfo.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGShmodelDisableDownloadsDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithSharedLinkOwner:(DBTEAMLOGUserLogInfo *)sharedLinkOwner {
+
+  self = [super init];
+  if (self) {
+    _sharedLinkOwner = sharedLinkOwner;
+  }
+  return self;
+}
+
+- (instancetype)initDefault {
+  return [self initWithSharedLinkOwner:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGShmodelDisableDownloadsDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGShmodelDisableDownloadsDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGShmodelDisableDownloadsDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.sharedLinkOwner != nil) {
+    result = prime * result + [self.sharedLinkOwner hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToShmodelDisableDownloadsDetails:other];
+}
+
+- (BOOL)isEqualToShmodelDisableDownloadsDetails:
+    (DBTEAMLOGShmodelDisableDownloadsDetails *)aShmodelDisableDownloadsDetails {
+  if (self == aShmodelDisableDownloadsDetails) {
+    return YES;
+  }
+  if (self.sharedLinkOwner) {
+    if (![self.sharedLinkOwner isEqual:aShmodelDisableDownloadsDetails.sharedLinkOwner]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGShmodelDisableDownloadsDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShmodelDisableDownloadsDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if (valueObj.sharedLinkOwner) {
+    jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGShmodelDisableDownloadsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGUserLogInfo *sharedLinkOwner =
+      valueDict[@"shared_link_owner"] ? [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"shared_link_owner"]]
+                                      : nil;
+
+  return [[DBTEAMLOGShmodelDisableDownloadsDetails alloc] initWithSharedLinkOwner:sharedLinkOwner];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGShmodelDisableDownloadsType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGShmodelDisableDownloadsType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGShmodelDisableDownloadsTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGShmodelDisableDownloadsTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGShmodelDisableDownloadsTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToShmodelDisableDownloadsType:other];
+}
+
+- (BOOL)isEqualToShmodelDisableDownloadsType:(DBTEAMLOGShmodelDisableDownloadsType *)aShmodelDisableDownloadsType {
+  if (self == aShmodelDisableDownloadsType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aShmodelDisableDownloadsType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGShmodelDisableDownloadsTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShmodelDisableDownloadsType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGShmodelDisableDownloadsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGShmodelDisableDownloadsType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGShmodelEnableDownloadsDetails.h"
+#import "DBTEAMLOGUserLogInfo.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGShmodelEnableDownloadsDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithSharedLinkOwner:(DBTEAMLOGUserLogInfo *)sharedLinkOwner {
+
+  self = [super init];
+  if (self) {
+    _sharedLinkOwner = sharedLinkOwner;
+  }
+  return self;
+}
+
+- (instancetype)initDefault {
+  return [self initWithSharedLinkOwner:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGShmodelEnableDownloadsDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGShmodelEnableDownloadsDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGShmodelEnableDownloadsDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  if (self.sharedLinkOwner != nil) {
+    result = prime * result + [self.sharedLinkOwner hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToShmodelEnableDownloadsDetails:other];
+}
+
+- (BOOL)isEqualToShmodelEnableDownloadsDetails:
+    (DBTEAMLOGShmodelEnableDownloadsDetails *)aShmodelEnableDownloadsDetails {
+  if (self == aShmodelEnableDownloadsDetails) {
+    return YES;
+  }
+  if (self.sharedLinkOwner) {
+    if (![self.sharedLinkOwner isEqual:aShmodelEnableDownloadsDetails.sharedLinkOwner]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGShmodelEnableDownloadsDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShmodelEnableDownloadsDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if (valueObj.sharedLinkOwner) {
+    jsonDict[@"shared_link_owner"] = [DBTEAMLOGUserLogInfoSerializer serialize:valueObj.sharedLinkOwner];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGShmodelEnableDownloadsDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGUserLogInfo *sharedLinkOwner =
+      valueDict[@"shared_link_owner"] ? [DBTEAMLOGUserLogInfoSerializer deserialize:valueDict[@"shared_link_owner"]]
+                                      : nil;
+
+  return [[DBTEAMLOGShmodelEnableDownloadsDetails alloc] initWithSharedLinkOwner:sharedLinkOwner];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGShmodelEnableDownloadsType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGShmodelEnableDownloadsType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGShmodelEnableDownloadsTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGShmodelEnableDownloadsTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGShmodelEnableDownloadsTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToShmodelEnableDownloadsType:other];
+}
+
+- (BOOL)isEqualToShmodelEnableDownloadsType:(DBTEAMLOGShmodelEnableDownloadsType *)aShmodelEnableDownloadsType {
+  if (self == aShmodelEnableDownloadsType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aShmodelEnableDownloadsType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGShmodelEnableDownloadsTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGShmodelEnableDownloadsType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGShmodelEnableDownloadsType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGShmodelEnableDownloadsType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -138492,14 +148398,6 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithWithinQuota {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGSpaceLimitsStatusWithinQuota;
-  }
-  return self;
-}
-
 - (instancetype)initWithNearQuota {
   self = [super init];
   if (self) {
@@ -138516,6 +148414,14 @@
   return self;
 }
 
+- (instancetype)initWithWithinQuota {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGSpaceLimitsStatusWithinQuota;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -138528,10 +148434,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isWithinQuota {
-  return _tag == DBTEAMLOGSpaceLimitsStatusWithinQuota;
-}
-
 - (BOOL)isNearQuota {
   return _tag == DBTEAMLOGSpaceLimitsStatusNearQuota;
 }
@@ -138540,18 +148442,22 @@
   return _tag == DBTEAMLOGSpaceLimitsStatusOverQuota;
 }
 
+- (BOOL)isWithinQuota {
+  return _tag == DBTEAMLOGSpaceLimitsStatusWithinQuota;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGSpaceLimitsStatusOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGSpaceLimitsStatusWithinQuota:
-    return @"DBTEAMLOGSpaceLimitsStatusWithinQuota";
   case DBTEAMLOGSpaceLimitsStatusNearQuota:
     return @"DBTEAMLOGSpaceLimitsStatusNearQuota";
   case DBTEAMLOGSpaceLimitsStatusOverQuota:
     return @"DBTEAMLOGSpaceLimitsStatusOverQuota";
+  case DBTEAMLOGSpaceLimitsStatusWithinQuota:
+    return @"DBTEAMLOGSpaceLimitsStatusWithinQuota";
   case DBTEAMLOGSpaceLimitsStatusOther:
     return @"DBTEAMLOGSpaceLimitsStatusOther";
   }
@@ -138590,11 +148496,11 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGSpaceLimitsStatusWithinQuota:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSpaceLimitsStatusNearQuota:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSpaceLimitsStatusOverQuota:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGSpaceLimitsStatusWithinQuota:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGSpaceLimitsStatusOther:
     result = prime * result + [[self tagName] hash];
@@ -138623,11 +148529,11 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGSpaceLimitsStatusWithinQuota:
-    return [[self tagName] isEqual:[aSpaceLimitsStatus tagName]];
   case DBTEAMLOGSpaceLimitsStatusNearQuota:
     return [[self tagName] isEqual:[aSpaceLimitsStatus tagName]];
   case DBTEAMLOGSpaceLimitsStatusOverQuota:
+    return [[self tagName] isEqual:[aSpaceLimitsStatus tagName]];
+  case DBTEAMLOGSpaceLimitsStatusWithinQuota:
     return [[self tagName] isEqual:[aSpaceLimitsStatus tagName]];
   case DBTEAMLOGSpaceLimitsStatusOther:
     return [[self tagName] isEqual:[aSpaceLimitsStatus tagName]];
@@ -138644,12 +148550,12 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSpaceLimitsStatus *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isWithinQuota]) {
-    jsonDict[@".tag"] = @"within_quota";
-  } else if ([valueObj isNearQuota]) {
+  if ([valueObj isNearQuota]) {
     jsonDict[@".tag"] = @"near_quota";
   } else if ([valueObj isOverQuota]) {
     jsonDict[@".tag"] = @"over_quota";
+  } else if ([valueObj isWithinQuota]) {
+    jsonDict[@".tag"] = @"within_quota";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -138662,12 +148568,12 @@
 + (DBTEAMLOGSpaceLimitsStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"within_quota"]) {
-    return [[DBTEAMLOGSpaceLimitsStatus alloc] initWithWithinQuota];
-  } else if ([tag isEqualToString:@"near_quota"]) {
+  if ([tag isEqualToString:@"near_quota"]) {
     return [[DBTEAMLOGSpaceLimitsStatus alloc] initWithNearQuota];
   } else if ([tag isEqualToString:@"over_quota"]) {
     return [[DBTEAMLOGSpaceLimitsStatus alloc] initWithOverQuota];
+  } else if ([tag isEqualToString:@"within_quota"]) {
+    return [[DBTEAMLOGSpaceLimitsStatus alloc] initWithWithinQuota];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGSpaceLimitsStatus alloc] initWithOther];
   } else {
@@ -141757,6 +151663,390 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamBrandingPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamBrandingPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTeamBrandingPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTeamBrandingPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTeamBrandingPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGTeamBrandingPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGTeamBrandingPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGTeamBrandingPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGTeamBrandingPolicyDisabled:
+    return @"DBTEAMLOGTeamBrandingPolicyDisabled";
+  case DBTEAMLOGTeamBrandingPolicyEnabled:
+    return @"DBTEAMLOGTeamBrandingPolicyEnabled";
+  case DBTEAMLOGTeamBrandingPolicyOther:
+    return @"DBTEAMLOGTeamBrandingPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamBrandingPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamBrandingPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamBrandingPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGTeamBrandingPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTeamBrandingPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTeamBrandingPolicyOther:
+    result = prime * result + [[self tagName] hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamBrandingPolicy:other];
+}
+
+- (BOOL)isEqualToTeamBrandingPolicy:(DBTEAMLOGTeamBrandingPolicy *)aTeamBrandingPolicy {
+  if (self == aTeamBrandingPolicy) {
+    return YES;
+  }
+  if (self.tag != aTeamBrandingPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGTeamBrandingPolicyDisabled:
+    return [[self tagName] isEqual:[aTeamBrandingPolicy tagName]];
+  case DBTEAMLOGTeamBrandingPolicyEnabled:
+    return [[self tagName] isEqual:[aTeamBrandingPolicy tagName]];
+  case DBTEAMLOGTeamBrandingPolicyOther:
+    return [[self tagName] isEqual:[aTeamBrandingPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamBrandingPolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamBrandingPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamBrandingPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGTeamBrandingPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGTeamBrandingPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGTeamBrandingPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGTeamBrandingPolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamBrandingPolicy.h"
+#import "DBTEAMLOGTeamBrandingPolicyChangedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamBrandingPolicyChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGTeamBrandingPolicy *)dNewValue
+                    previousValue:(DBTEAMLOGTeamBrandingPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamBrandingPolicyChangedDetails:other];
+}
+
+- (BOOL)isEqualToTeamBrandingPolicyChangedDetails:
+    (DBTEAMLOGTeamBrandingPolicyChangedDetails *)aTeamBrandingPolicyChangedDetails {
+  if (self == aTeamBrandingPolicyChangedDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aTeamBrandingPolicyChangedDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aTeamBrandingPolicyChangedDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamBrandingPolicyChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGTeamBrandingPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] = [DBTEAMLOGTeamBrandingPolicySerializer serialize:valueObj.previousValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamBrandingPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGTeamBrandingPolicy *dNewValue = [DBTEAMLOGTeamBrandingPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGTeamBrandingPolicy *previousValue =
+      [DBTEAMLOGTeamBrandingPolicySerializer deserialize:valueDict[@"previous_value"]];
+
+  return [[DBTEAMLOGTeamBrandingPolicyChangedDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamBrandingPolicyChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamBrandingPolicyChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamBrandingPolicyChangedType:other];
+}
+
+- (BOOL)isEqualToTeamBrandingPolicyChangedType:
+    (DBTEAMLOGTeamBrandingPolicyChangedType *)aTeamBrandingPolicyChangedType {
+  if (self == aTeamBrandingPolicyChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamBrandingPolicyChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamBrandingPolicyChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamBrandingPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamBrandingPolicyChangedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGTeamDetails.h"
 
 #pragma mark - API Object
@@ -143527,14 +153817,20 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithInviteMethod:(DBTEAMLOGInviteMethod *)inviteMethod {
+- (instancetype)initWithInviteMethod:(DBTEAMLOGInviteMethod *)inviteMethod
+           additionalLicensePurchase:(NSNumber *)additionalLicensePurchase {
   [DBStoneValidators nonnullValidator:nil](inviteMethod);
 
   self = [super init];
   if (self) {
     _inviteMethod = inviteMethod;
+    _additionalLicensePurchase = additionalLicensePurchase;
   }
   return self;
+}
+
+- (instancetype)initWithInviteMethod:(DBTEAMLOGInviteMethod *)inviteMethod {
+  return [self initWithInviteMethod:inviteMethod additionalLicensePurchase:nil];
 }
 
 #pragma mark - Serialization methods
@@ -143568,6 +153864,9 @@
   NSUInteger result = 1;
 
   result = prime * result + [self.inviteMethod hash];
+  if (self.additionalLicensePurchase != nil) {
+    result = prime * result + [self.additionalLicensePurchase hash];
+  }
 
   return prime * result;
 }
@@ -143591,6 +153890,11 @@
   if (![self.inviteMethod isEqual:aTeamInviteDetails.inviteMethod]) {
     return NO;
   }
+  if (self.additionalLicensePurchase) {
+    if (![self.additionalLicensePurchase isEqual:aTeamInviteDetails.additionalLicensePurchase]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -143604,14 +153908,19 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   jsonDict[@"invite_method"] = [DBTEAMLOGInviteMethodSerializer serialize:valueObj.inviteMethod];
+  if (valueObj.additionalLicensePurchase) {
+    jsonDict[@"additional_license_purchase"] = valueObj.additionalLicensePurchase;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
 
 + (DBTEAMLOGTeamInviteDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   DBTEAMLOGInviteMethod *inviteMethod = [DBTEAMLOGInviteMethodSerializer deserialize:valueDict[@"invite_method"]];
+  NSNumber *additionalLicensePurchase = valueDict[@"additional_license_purchase"] ?: nil;
 
-  return [[DBTEAMLOGTeamInviteDetails alloc] initWithInviteMethod:inviteMethod];
+  return [[DBTEAMLOGTeamInviteDetails alloc] initWithInviteMethod:inviteMethod
+                                        additionalLicensePurchase:additionalLicensePurchase];
 }
 
 @end
@@ -144033,18 +154342,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithFull {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTeamMembershipTypeFull;
-  }
-  return self;
-}
-
 - (instancetype)initWithFree {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGTeamMembershipTypeFree;
+  }
+  return self;
+}
+
+- (instancetype)initWithFull {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTeamMembershipTypeFull;
   }
   return self;
 }
@@ -144061,12 +154370,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isFull {
-  return _tag == DBTEAMLOGTeamMembershipTypeFull;
-}
-
 - (BOOL)isFree {
   return _tag == DBTEAMLOGTeamMembershipTypeFree;
+}
+
+- (BOOL)isFull {
+  return _tag == DBTEAMLOGTeamMembershipTypeFull;
 }
 
 - (BOOL)isOther {
@@ -144075,10 +154384,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGTeamMembershipTypeFull:
-    return @"DBTEAMLOGTeamMembershipTypeFull";
   case DBTEAMLOGTeamMembershipTypeFree:
     return @"DBTEAMLOGTeamMembershipTypeFree";
+  case DBTEAMLOGTeamMembershipTypeFull:
+    return @"DBTEAMLOGTeamMembershipTypeFull";
   case DBTEAMLOGTeamMembershipTypeOther:
     return @"DBTEAMLOGTeamMembershipTypeOther";
   }
@@ -144117,9 +154426,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGTeamMembershipTypeFull:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTeamMembershipTypeFree:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTeamMembershipTypeFull:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTeamMembershipTypeOther:
     result = prime * result + [[self tagName] hash];
@@ -144148,9 +154457,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGTeamMembershipTypeFull:
-    return [[self tagName] isEqual:[aTeamMembershipType tagName]];
   case DBTEAMLOGTeamMembershipTypeFree:
+    return [[self tagName] isEqual:[aTeamMembershipType tagName]];
+  case DBTEAMLOGTeamMembershipTypeFull:
     return [[self tagName] isEqual:[aTeamMembershipType tagName]];
   case DBTEAMLOGTeamMembershipTypeOther:
     return [[self tagName] isEqual:[aTeamMembershipType tagName]];
@@ -144167,10 +154476,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamMembershipType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isFull]) {
-    jsonDict[@".tag"] = @"full";
-  } else if ([valueObj isFree]) {
+  if ([valueObj isFree]) {
     jsonDict[@".tag"] = @"free";
+  } else if ([valueObj isFull]) {
+    jsonDict[@".tag"] = @"full";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -144183,10 +154492,10 @@
 + (DBTEAMLOGTeamMembershipType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"full"]) {
-    return [[DBTEAMLOGTeamMembershipType alloc] initWithFull];
-  } else if ([tag isEqualToString:@"free"]) {
+  if ([tag isEqualToString:@"free"]) {
     return [[DBTEAMLOGTeamMembershipType alloc] initWithFree];
+  } else if ([tag isEqualToString:@"full"]) {
+    return [[DBTEAMLOGTeamMembershipType alloc] initWithFull];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGTeamMembershipType alloc] initWithOther];
   } else {
@@ -149216,6 +159525,197 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileAddBackgroundDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileAddBackgroundDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileAddBackgroundDetails:other];
+}
+
+- (BOOL)isEqualToTeamProfileAddBackgroundDetails:
+    (DBTEAMLOGTeamProfileAddBackgroundDetails *)aTeamProfileAddBackgroundDetails {
+  if (self == aTeamProfileAddBackgroundDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileAddBackgroundDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileAddBackgroundDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamProfileAddBackgroundDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileAddBackgroundType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileAddBackgroundType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileAddBackgroundTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamProfileAddBackgroundTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamProfileAddBackgroundTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileAddBackgroundType:other];
+}
+
+- (BOOL)isEqualToTeamProfileAddBackgroundType:(DBTEAMLOGTeamProfileAddBackgroundType *)aTeamProfileAddBackgroundType {
+  if (self == aTeamProfileAddBackgroundType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamProfileAddBackgroundType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileAddBackgroundTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileAddBackgroundType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileAddBackgroundType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamProfileAddBackgroundType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGTeamProfileAddLogoDetails.h"
 
 #pragma mark - API Object
@@ -149400,6 +159900,198 @@
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGTeamProfileAddLogoType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileChangeBackgroundDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileChangeBackgroundDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileChangeBackgroundDetails:other];
+}
+
+- (BOOL)isEqualToTeamProfileChangeBackgroundDetails:
+    (DBTEAMLOGTeamProfileChangeBackgroundDetails *)aTeamProfileChangeBackgroundDetails {
+  if (self == aTeamProfileChangeBackgroundDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileChangeBackgroundDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileChangeBackgroundDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamProfileChangeBackgroundDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileChangeBackgroundType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileChangeBackgroundType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileChangeBackgroundType:other];
+}
+
+- (BOOL)isEqualToTeamProfileChangeBackgroundType:
+    (DBTEAMLOGTeamProfileChangeBackgroundType *)aTeamProfileChangeBackgroundType {
+  if (self == aTeamProfileChangeBackgroundType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamProfileChangeBackgroundType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileChangeBackgroundType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileChangeBackgroundType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamProfileChangeBackgroundType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -150017,6 +160709,198 @@
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGTeamProfileChangeNameType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileRemoveBackgroundDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileRemoveBackgroundDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileRemoveBackgroundDetails:other];
+}
+
+- (BOOL)isEqualToTeamProfileRemoveBackgroundDetails:
+    (DBTEAMLOGTeamProfileRemoveBackgroundDetails *)aTeamProfileRemoveBackgroundDetails {
+  if (self == aTeamProfileRemoveBackgroundDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileRemoveBackgroundDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileRemoveBackgroundDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGTeamProfileRemoveBackgroundDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGTeamProfileRemoveBackgroundType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGTeamProfileRemoveBackgroundType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToTeamProfileRemoveBackgroundType:other];
+}
+
+- (BOOL)isEqualToTeamProfileRemoveBackgroundType:
+    (DBTEAMLOGTeamProfileRemoveBackgroundType *)aTeamProfileRemoveBackgroundType {
+  if (self == aTeamProfileRemoveBackgroundType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aTeamProfileRemoveBackgroundType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTeamProfileRemoveBackgroundType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGTeamProfileRemoveBackgroundType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGTeamProfileRemoveBackgroundType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -152263,6 +163147,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithAuthenticator {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTfaConfigurationAuthenticator;
+  }
+  return self;
+}
+
 - (instancetype)initWithDisabled {
   self = [super init];
   if (self) {
@@ -152287,14 +163179,6 @@
   return self;
 }
 
-- (instancetype)initWithAuthenticator {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTfaConfigurationAuthenticator;
-  }
-  return self;
-}
-
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -152306,6 +163190,10 @@
 #pragma mark - Instance field accessors
 
 #pragma mark - Tag state methods
+
+- (BOOL)isAuthenticator {
+  return _tag == DBTEAMLOGTfaConfigurationAuthenticator;
+}
 
 - (BOOL)isDisabled {
   return _tag == DBTEAMLOGTfaConfigurationDisabled;
@@ -152319,24 +163207,20 @@
   return _tag == DBTEAMLOGTfaConfigurationSms;
 }
 
-- (BOOL)isAuthenticator {
-  return _tag == DBTEAMLOGTfaConfigurationAuthenticator;
-}
-
 - (BOOL)isOther {
   return _tag == DBTEAMLOGTfaConfigurationOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGTfaConfigurationAuthenticator:
+    return @"DBTEAMLOGTfaConfigurationAuthenticator";
   case DBTEAMLOGTfaConfigurationDisabled:
     return @"DBTEAMLOGTfaConfigurationDisabled";
   case DBTEAMLOGTfaConfigurationEnabled:
     return @"DBTEAMLOGTfaConfigurationEnabled";
   case DBTEAMLOGTfaConfigurationSms:
     return @"DBTEAMLOGTfaConfigurationSms";
-  case DBTEAMLOGTfaConfigurationAuthenticator:
-    return @"DBTEAMLOGTfaConfigurationAuthenticator";
   case DBTEAMLOGTfaConfigurationOther:
     return @"DBTEAMLOGTfaConfigurationOther";
   }
@@ -152375,13 +163259,13 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGTfaConfigurationAuthenticator:
+    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTfaConfigurationDisabled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTfaConfigurationEnabled:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTfaConfigurationSms:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTfaConfigurationAuthenticator:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTfaConfigurationOther:
     result = prime * result + [[self tagName] hash];
@@ -152410,13 +163294,13 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGTfaConfigurationAuthenticator:
+    return [[self tagName] isEqual:[aTfaConfiguration tagName]];
   case DBTEAMLOGTfaConfigurationDisabled:
     return [[self tagName] isEqual:[aTfaConfiguration tagName]];
   case DBTEAMLOGTfaConfigurationEnabled:
     return [[self tagName] isEqual:[aTfaConfiguration tagName]];
   case DBTEAMLOGTfaConfigurationSms:
-    return [[self tagName] isEqual:[aTfaConfiguration tagName]];
-  case DBTEAMLOGTfaConfigurationAuthenticator:
     return [[self tagName] isEqual:[aTfaConfiguration tagName]];
   case DBTEAMLOGTfaConfigurationOther:
     return [[self tagName] isEqual:[aTfaConfiguration tagName]];
@@ -152433,14 +163317,14 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTfaConfiguration *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isDisabled]) {
+  if ([valueObj isAuthenticator]) {
+    jsonDict[@".tag"] = @"authenticator";
+  } else if ([valueObj isDisabled]) {
     jsonDict[@".tag"] = @"disabled";
   } else if ([valueObj isEnabled]) {
     jsonDict[@".tag"] = @"enabled";
   } else if ([valueObj isSms]) {
     jsonDict[@".tag"] = @"sms";
-  } else if ([valueObj isAuthenticator]) {
-    jsonDict[@".tag"] = @"authenticator";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -152453,14 +163337,14 @@
 + (DBTEAMLOGTfaConfiguration *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"disabled"]) {
+  if ([tag isEqualToString:@"authenticator"]) {
+    return [[DBTEAMLOGTfaConfiguration alloc] initWithAuthenticator];
+  } else if ([tag isEqualToString:@"disabled"]) {
     return [[DBTEAMLOGTfaConfiguration alloc] initWithDisabled];
   } else if ([tag isEqualToString:@"enabled"]) {
     return [[DBTEAMLOGTfaConfiguration alloc] initWithEnabled];
   } else if ([tag isEqualToString:@"sms"]) {
     return [[DBTEAMLOGTfaConfiguration alloc] initWithSms];
-  } else if ([tag isEqualToString:@"authenticator"]) {
-    return [[DBTEAMLOGTfaConfiguration alloc] initWithAuthenticator];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGTfaConfiguration alloc] initWithOther];
   } else {
@@ -153240,26 +164124,10 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithMilliseconds {
+- (instancetype)initWithDays {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGTimeUnitMilliseconds;
-  }
-  return self;
-}
-
-- (instancetype)initWithSeconds {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTimeUnitSeconds;
-  }
-  return self;
-}
-
-- (instancetype)initWithMinutes {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTimeUnitMinutes;
+    _tag = DBTEAMLOGTimeUnitDays;
   }
   return self;
 }
@@ -153272,18 +164140,18 @@
   return self;
 }
 
-- (instancetype)initWithDays {
+- (instancetype)initWithMilliseconds {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGTimeUnitDays;
+    _tag = DBTEAMLOGTimeUnitMilliseconds;
   }
   return self;
 }
 
-- (instancetype)initWithWeeks {
+- (instancetype)initWithMinutes {
   self = [super init];
   if (self) {
-    _tag = DBTEAMLOGTimeUnitWeeks;
+    _tag = DBTEAMLOGTimeUnitMinutes;
   }
   return self;
 }
@@ -153292,6 +164160,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGTimeUnitMonths;
+  }
+  return self;
+}
+
+- (instancetype)initWithSeconds {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTimeUnitSeconds;
+  }
+  return self;
+}
+
+- (instancetype)initWithWeeks {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTimeUnitWeeks;
   }
   return self;
 }
@@ -153316,32 +164200,32 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isMilliseconds {
-  return _tag == DBTEAMLOGTimeUnitMilliseconds;
-}
-
-- (BOOL)isSeconds {
-  return _tag == DBTEAMLOGTimeUnitSeconds;
-}
-
-- (BOOL)isMinutes {
-  return _tag == DBTEAMLOGTimeUnitMinutes;
+- (BOOL)isDays {
+  return _tag == DBTEAMLOGTimeUnitDays;
 }
 
 - (BOOL)isHours {
   return _tag == DBTEAMLOGTimeUnitHours;
 }
 
-- (BOOL)isDays {
-  return _tag == DBTEAMLOGTimeUnitDays;
+- (BOOL)isMilliseconds {
+  return _tag == DBTEAMLOGTimeUnitMilliseconds;
 }
 
-- (BOOL)isWeeks {
-  return _tag == DBTEAMLOGTimeUnitWeeks;
+- (BOOL)isMinutes {
+  return _tag == DBTEAMLOGTimeUnitMinutes;
 }
 
 - (BOOL)isMonths {
   return _tag == DBTEAMLOGTimeUnitMonths;
+}
+
+- (BOOL)isSeconds {
+  return _tag == DBTEAMLOGTimeUnitSeconds;
+}
+
+- (BOOL)isWeeks {
+  return _tag == DBTEAMLOGTimeUnitWeeks;
 }
 
 - (BOOL)isYears {
@@ -153354,20 +164238,20 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGTimeUnitMilliseconds:
-    return @"DBTEAMLOGTimeUnitMilliseconds";
-  case DBTEAMLOGTimeUnitSeconds:
-    return @"DBTEAMLOGTimeUnitSeconds";
-  case DBTEAMLOGTimeUnitMinutes:
-    return @"DBTEAMLOGTimeUnitMinutes";
-  case DBTEAMLOGTimeUnitHours:
-    return @"DBTEAMLOGTimeUnitHours";
   case DBTEAMLOGTimeUnitDays:
     return @"DBTEAMLOGTimeUnitDays";
-  case DBTEAMLOGTimeUnitWeeks:
-    return @"DBTEAMLOGTimeUnitWeeks";
+  case DBTEAMLOGTimeUnitHours:
+    return @"DBTEAMLOGTimeUnitHours";
+  case DBTEAMLOGTimeUnitMilliseconds:
+    return @"DBTEAMLOGTimeUnitMilliseconds";
+  case DBTEAMLOGTimeUnitMinutes:
+    return @"DBTEAMLOGTimeUnitMinutes";
   case DBTEAMLOGTimeUnitMonths:
     return @"DBTEAMLOGTimeUnitMonths";
+  case DBTEAMLOGTimeUnitSeconds:
+    return @"DBTEAMLOGTimeUnitSeconds";
+  case DBTEAMLOGTimeUnitWeeks:
+    return @"DBTEAMLOGTimeUnitWeeks";
   case DBTEAMLOGTimeUnitYears:
     return @"DBTEAMLOGTimeUnitYears";
   case DBTEAMLOGTimeUnitOther:
@@ -153408,19 +164292,19 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGTimeUnitMilliseconds:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTimeUnitSeconds:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTimeUnitMinutes:
+  case DBTEAMLOGTimeUnitDays:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTimeUnitHours:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTimeUnitDays:
+  case DBTEAMLOGTimeUnitMilliseconds:
     result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTimeUnitWeeks:
+  case DBTEAMLOGTimeUnitMinutes:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTimeUnitMonths:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTimeUnitSeconds:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTimeUnitWeeks:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTimeUnitYears:
     result = prime * result + [[self tagName] hash];
@@ -153451,19 +164335,19 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGTimeUnitMilliseconds:
-    return [[self tagName] isEqual:[aTimeUnit tagName]];
-  case DBTEAMLOGTimeUnitSeconds:
-    return [[self tagName] isEqual:[aTimeUnit tagName]];
-  case DBTEAMLOGTimeUnitMinutes:
+  case DBTEAMLOGTimeUnitDays:
     return [[self tagName] isEqual:[aTimeUnit tagName]];
   case DBTEAMLOGTimeUnitHours:
     return [[self tagName] isEqual:[aTimeUnit tagName]];
-  case DBTEAMLOGTimeUnitDays:
+  case DBTEAMLOGTimeUnitMilliseconds:
     return [[self tagName] isEqual:[aTimeUnit tagName]];
-  case DBTEAMLOGTimeUnitWeeks:
+  case DBTEAMLOGTimeUnitMinutes:
     return [[self tagName] isEqual:[aTimeUnit tagName]];
   case DBTEAMLOGTimeUnitMonths:
+    return [[self tagName] isEqual:[aTimeUnit tagName]];
+  case DBTEAMLOGTimeUnitSeconds:
+    return [[self tagName] isEqual:[aTimeUnit tagName]];
+  case DBTEAMLOGTimeUnitWeeks:
     return [[self tagName] isEqual:[aTimeUnit tagName]];
   case DBTEAMLOGTimeUnitYears:
     return [[self tagName] isEqual:[aTimeUnit tagName]];
@@ -153482,20 +164366,20 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTimeUnit *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isMilliseconds]) {
-    jsonDict[@".tag"] = @"milliseconds";
-  } else if ([valueObj isSeconds]) {
-    jsonDict[@".tag"] = @"seconds";
-  } else if ([valueObj isMinutes]) {
-    jsonDict[@".tag"] = @"minutes";
+  if ([valueObj isDays]) {
+    jsonDict[@".tag"] = @"days";
   } else if ([valueObj isHours]) {
     jsonDict[@".tag"] = @"hours";
-  } else if ([valueObj isDays]) {
-    jsonDict[@".tag"] = @"days";
-  } else if ([valueObj isWeeks]) {
-    jsonDict[@".tag"] = @"weeks";
+  } else if ([valueObj isMilliseconds]) {
+    jsonDict[@".tag"] = @"milliseconds";
+  } else if ([valueObj isMinutes]) {
+    jsonDict[@".tag"] = @"minutes";
   } else if ([valueObj isMonths]) {
     jsonDict[@".tag"] = @"months";
+  } else if ([valueObj isSeconds]) {
+    jsonDict[@".tag"] = @"seconds";
+  } else if ([valueObj isWeeks]) {
+    jsonDict[@".tag"] = @"weeks";
   } else if ([valueObj isYears]) {
     jsonDict[@".tag"] = @"years";
   } else if ([valueObj isOther]) {
@@ -153510,20 +164394,20 @@
 + (DBTEAMLOGTimeUnit *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"milliseconds"]) {
-    return [[DBTEAMLOGTimeUnit alloc] initWithMilliseconds];
-  } else if ([tag isEqualToString:@"seconds"]) {
-    return [[DBTEAMLOGTimeUnit alloc] initWithSeconds];
-  } else if ([tag isEqualToString:@"minutes"]) {
-    return [[DBTEAMLOGTimeUnit alloc] initWithMinutes];
+  if ([tag isEqualToString:@"days"]) {
+    return [[DBTEAMLOGTimeUnit alloc] initWithDays];
   } else if ([tag isEqualToString:@"hours"]) {
     return [[DBTEAMLOGTimeUnit alloc] initWithHours];
-  } else if ([tag isEqualToString:@"days"]) {
-    return [[DBTEAMLOGTimeUnit alloc] initWithDays];
-  } else if ([tag isEqualToString:@"weeks"]) {
-    return [[DBTEAMLOGTimeUnit alloc] initWithWeeks];
+  } else if ([tag isEqualToString:@"milliseconds"]) {
+    return [[DBTEAMLOGTimeUnit alloc] initWithMilliseconds];
+  } else if ([tag isEqualToString:@"minutes"]) {
+    return [[DBTEAMLOGTimeUnit alloc] initWithMinutes];
   } else if ([tag isEqualToString:@"months"]) {
     return [[DBTEAMLOGTimeUnit alloc] initWithMonths];
+  } else if ([tag isEqualToString:@"seconds"]) {
+    return [[DBTEAMLOGTimeUnit alloc] initWithSeconds];
+  } else if ([tag isEqualToString:@"weeks"]) {
+    return [[DBTEAMLOGTimeUnit alloc] initWithWeeks];
   } else if ([tag isEqualToString:@"years"]) {
     return [[DBTEAMLOGTimeUnit alloc] initWithYears];
   } else if ([tag isEqualToString:@"other"]) {
@@ -153715,18 +164599,18 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithMultiInstanceAdmin {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin;
-  }
-  return self;
-}
-
 - (instancetype)initWithEnterpriseAdmin {
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGTrustedNonTeamMemberTypeEnterpriseAdmin;
+  }
+  return self;
+}
+
+- (instancetype)initWithMultiInstanceAdmin {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin;
   }
   return self;
 }
@@ -153743,12 +164627,12 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isMultiInstanceAdmin {
-  return _tag == DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin;
-}
-
 - (BOOL)isEnterpriseAdmin {
   return _tag == DBTEAMLOGTrustedNonTeamMemberTypeEnterpriseAdmin;
+}
+
+- (BOOL)isMultiInstanceAdmin {
+  return _tag == DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin;
 }
 
 - (BOOL)isOther {
@@ -153757,10 +164641,10 @@
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin:
-    return @"DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin";
   case DBTEAMLOGTrustedNonTeamMemberTypeEnterpriseAdmin:
     return @"DBTEAMLOGTrustedNonTeamMemberTypeEnterpriseAdmin";
+  case DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin:
+    return @"DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin";
   case DBTEAMLOGTrustedNonTeamMemberTypeOther:
     return @"DBTEAMLOGTrustedNonTeamMemberTypeOther";
   }
@@ -153799,9 +164683,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTrustedNonTeamMemberTypeEnterpriseAdmin:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTrustedNonTeamMemberTypeOther:
     result = prime * result + [[self tagName] hash];
@@ -153830,9 +164714,9 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin:
-    return [[self tagName] isEqual:[aTrustedNonTeamMemberType tagName]];
   case DBTEAMLOGTrustedNonTeamMemberTypeEnterpriseAdmin:
+    return [[self tagName] isEqual:[aTrustedNonTeamMemberType tagName]];
+  case DBTEAMLOGTrustedNonTeamMemberTypeMultiInstanceAdmin:
     return [[self tagName] isEqual:[aTrustedNonTeamMemberType tagName]];
   case DBTEAMLOGTrustedNonTeamMemberTypeOther:
     return [[self tagName] isEqual:[aTrustedNonTeamMemberType tagName]];
@@ -153849,10 +164733,10 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTrustedNonTeamMemberType *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isMultiInstanceAdmin]) {
-    jsonDict[@".tag"] = @"multi_instance_admin";
-  } else if ([valueObj isEnterpriseAdmin]) {
+  if ([valueObj isEnterpriseAdmin]) {
     jsonDict[@".tag"] = @"enterprise_admin";
+  } else if ([valueObj isMultiInstanceAdmin]) {
+    jsonDict[@".tag"] = @"multi_instance_admin";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -153865,10 +164749,10 @@
 + (DBTEAMLOGTrustedNonTeamMemberType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"multi_instance_admin"]) {
-    return [[DBTEAMLOGTrustedNonTeamMemberType alloc] initWithMultiInstanceAdmin];
-  } else if ([tag isEqualToString:@"enterprise_admin"]) {
+  if ([tag isEqualToString:@"enterprise_admin"]) {
     return [[DBTEAMLOGTrustedNonTeamMemberType alloc] initWithEnterpriseAdmin];
+  } else if ([tag isEqualToString:@"multi_instance_admin"]) {
+    return [[DBTEAMLOGTrustedNonTeamMemberType alloc] initWithMultiInstanceAdmin];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGTrustedNonTeamMemberType alloc] initWithOther];
   } else {
@@ -153888,30 +164772,6 @@
 
 #pragma mark - Constructors
 
-- (instancetype)initWithInvited {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTrustedTeamsRequestActionInvited;
-  }
-  return self;
-}
-
-- (instancetype)initWithExpired {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTrustedTeamsRequestActionExpired;
-  }
-  return self;
-}
-
-- (instancetype)initWithRevoked {
-  self = [super init];
-  if (self) {
-    _tag = DBTEAMLOGTrustedTeamsRequestActionRevoked;
-  }
-  return self;
-}
-
 - (instancetype)initWithAccepted {
   self = [super init];
   if (self) {
@@ -153928,6 +164788,30 @@
   return self;
 }
 
+- (instancetype)initWithExpired {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTrustedTeamsRequestActionExpired;
+  }
+  return self;
+}
+
+- (instancetype)initWithInvited {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTrustedTeamsRequestActionInvited;
+  }
+  return self;
+}
+
+- (instancetype)initWithRevoked {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGTrustedTeamsRequestActionRevoked;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -153940,18 +164824,6 @@
 
 #pragma mark - Tag state methods
 
-- (BOOL)isInvited {
-  return _tag == DBTEAMLOGTrustedTeamsRequestActionInvited;
-}
-
-- (BOOL)isExpired {
-  return _tag == DBTEAMLOGTrustedTeamsRequestActionExpired;
-}
-
-- (BOOL)isRevoked {
-  return _tag == DBTEAMLOGTrustedTeamsRequestActionRevoked;
-}
-
 - (BOOL)isAccepted {
   return _tag == DBTEAMLOGTrustedTeamsRequestActionAccepted;
 }
@@ -153960,22 +164832,34 @@
   return _tag == DBTEAMLOGTrustedTeamsRequestActionDeclined;
 }
 
+- (BOOL)isExpired {
+  return _tag == DBTEAMLOGTrustedTeamsRequestActionExpired;
+}
+
+- (BOOL)isInvited {
+  return _tag == DBTEAMLOGTrustedTeamsRequestActionInvited;
+}
+
+- (BOOL)isRevoked {
+  return _tag == DBTEAMLOGTrustedTeamsRequestActionRevoked;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGTrustedTeamsRequestActionOther;
 }
 
 - (NSString *)tagName {
   switch (_tag) {
-  case DBTEAMLOGTrustedTeamsRequestActionInvited:
-    return @"DBTEAMLOGTrustedTeamsRequestActionInvited";
-  case DBTEAMLOGTrustedTeamsRequestActionExpired:
-    return @"DBTEAMLOGTrustedTeamsRequestActionExpired";
-  case DBTEAMLOGTrustedTeamsRequestActionRevoked:
-    return @"DBTEAMLOGTrustedTeamsRequestActionRevoked";
   case DBTEAMLOGTrustedTeamsRequestActionAccepted:
     return @"DBTEAMLOGTrustedTeamsRequestActionAccepted";
   case DBTEAMLOGTrustedTeamsRequestActionDeclined:
     return @"DBTEAMLOGTrustedTeamsRequestActionDeclined";
+  case DBTEAMLOGTrustedTeamsRequestActionExpired:
+    return @"DBTEAMLOGTrustedTeamsRequestActionExpired";
+  case DBTEAMLOGTrustedTeamsRequestActionInvited:
+    return @"DBTEAMLOGTrustedTeamsRequestActionInvited";
+  case DBTEAMLOGTrustedTeamsRequestActionRevoked:
+    return @"DBTEAMLOGTrustedTeamsRequestActionRevoked";
   case DBTEAMLOGTrustedTeamsRequestActionOther:
     return @"DBTEAMLOGTrustedTeamsRequestActionOther";
   }
@@ -154014,15 +164898,15 @@
   NSUInteger result = 1;
 
   switch (_tag) {
-  case DBTEAMLOGTrustedTeamsRequestActionInvited:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTrustedTeamsRequestActionExpired:
-    result = prime * result + [[self tagName] hash];
-  case DBTEAMLOGTrustedTeamsRequestActionRevoked:
-    result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTrustedTeamsRequestActionAccepted:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTrustedTeamsRequestActionDeclined:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTrustedTeamsRequestActionExpired:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTrustedTeamsRequestActionInvited:
+    result = prime * result + [[self tagName] hash];
+  case DBTEAMLOGTrustedTeamsRequestActionRevoked:
     result = prime * result + [[self tagName] hash];
   case DBTEAMLOGTrustedTeamsRequestActionOther:
     result = prime * result + [[self tagName] hash];
@@ -154051,15 +164935,15 @@
     return NO;
   }
   switch (_tag) {
-  case DBTEAMLOGTrustedTeamsRequestActionInvited:
-    return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
-  case DBTEAMLOGTrustedTeamsRequestActionExpired:
-    return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
-  case DBTEAMLOGTrustedTeamsRequestActionRevoked:
-    return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
   case DBTEAMLOGTrustedTeamsRequestActionAccepted:
     return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
   case DBTEAMLOGTrustedTeamsRequestActionDeclined:
+    return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
+  case DBTEAMLOGTrustedTeamsRequestActionExpired:
+    return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
+  case DBTEAMLOGTrustedTeamsRequestActionInvited:
+    return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
+  case DBTEAMLOGTrustedTeamsRequestActionRevoked:
     return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
   case DBTEAMLOGTrustedTeamsRequestActionOther:
     return [[self tagName] isEqual:[aTrustedTeamsRequestAction tagName]];
@@ -154076,16 +164960,16 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGTrustedTeamsRequestAction *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isInvited]) {
-    jsonDict[@".tag"] = @"invited";
-  } else if ([valueObj isExpired]) {
-    jsonDict[@".tag"] = @"expired";
-  } else if ([valueObj isRevoked]) {
-    jsonDict[@".tag"] = @"revoked";
-  } else if ([valueObj isAccepted]) {
+  if ([valueObj isAccepted]) {
     jsonDict[@".tag"] = @"accepted";
   } else if ([valueObj isDeclined]) {
     jsonDict[@".tag"] = @"declined";
+  } else if ([valueObj isExpired]) {
+    jsonDict[@".tag"] = @"expired";
+  } else if ([valueObj isInvited]) {
+    jsonDict[@".tag"] = @"invited";
+  } else if ([valueObj isRevoked]) {
+    jsonDict[@".tag"] = @"revoked";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -154098,16 +164982,16 @@
 + (DBTEAMLOGTrustedTeamsRequestAction *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"invited"]) {
-    return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithInvited];
-  } else if ([tag isEqualToString:@"expired"]) {
-    return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithExpired];
-  } else if ([tag isEqualToString:@"revoked"]) {
-    return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithRevoked];
-  } else if ([tag isEqualToString:@"accepted"]) {
+  if ([tag isEqualToString:@"accepted"]) {
     return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithAccepted];
   } else if ([tag isEqualToString:@"declined"]) {
     return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithDeclined];
+  } else if ([tag isEqualToString:@"expired"]) {
+    return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithExpired];
+  } else if ([tag isEqualToString:@"invited"]) {
+    return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithInvited];
+  } else if ([tag isEqualToString:@"revoked"]) {
+    return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithRevoked];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGTrustedTeamsRequestAction alloc] initWithOther];
   } else {

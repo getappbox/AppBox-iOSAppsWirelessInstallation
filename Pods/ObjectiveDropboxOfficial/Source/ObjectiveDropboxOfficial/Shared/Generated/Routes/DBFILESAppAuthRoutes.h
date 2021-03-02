@@ -105,6 +105,7 @@
 @class DBFILESSearchMatchV2;
 @class DBFILESSearchMode;
 @class DBFILESSearchOptions;
+@class DBFILESSearchOrderBy;
 @class DBFILESSearchResult;
 @class DBFILESSearchV2Result;
 @class DBFILESSharedLink;
@@ -127,7 +128,9 @@
 @class DBFILESUploadSessionFinishError;
 @class DBFILESUploadSessionLookupError;
 @class DBFILESUploadSessionOffsetError;
+@class DBFILESUploadSessionStartError;
 @class DBFILESUploadSessionStartResult;
+@class DBFILESUploadSessionType;
 @class DBFILESUploadWriteFailed;
 @class DBFILESWriteError;
 @class DBFILESWriteMode;

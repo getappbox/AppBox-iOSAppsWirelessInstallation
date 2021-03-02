@@ -59,12 +59,14 @@
 - (DBRpcTask *)create:(NSString *)title
           destination:(NSString *)destination
              deadline:(DBFILEREQUESTSFileRequestDeadline *)deadline
-                 open:(NSNumber *)open {
+                 open:(NSNumber *)open
+         description_:(NSString *)description_ {
   DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSCreate;
   DBFILEREQUESTSCreateFileRequestArgs *arg = [[DBFILEREQUESTSCreateFileRequestArgs alloc] initWithTitle:title
                                                                                             destination:destination
                                                                                                deadline:deadline
-                                                                                                   open:open];
+                                                                                                   open:open
+                                                                                           description_:description_];
   return [self.client requestRpc:route arg:arg];
 }
 
@@ -119,13 +121,15 @@
                 title:(NSString *)title
           destination:(NSString *)destination
              deadline:(DBFILEREQUESTSUpdateFileRequestDeadline *)deadline
-                 open:(NSNumber *)open {
+                 open:(NSNumber *)open
+         description_:(NSString *)description_ {
   DBRoute *route = DBFILEREQUESTSRouteObjects.DBFILEREQUESTSUpdate;
   DBFILEREQUESTSUpdateFileRequestArgs *arg = [[DBFILEREQUESTSUpdateFileRequestArgs alloc] initWithId_:id_
                                                                                                 title:title
                                                                                           destination:destination
                                                                                              deadline:deadline
-                                                                                                 open:open];
+                                                                                                 open:open
+                                                                                         description_:description_];
   return [self.client requestRpc:route arg:arg];
 }
 

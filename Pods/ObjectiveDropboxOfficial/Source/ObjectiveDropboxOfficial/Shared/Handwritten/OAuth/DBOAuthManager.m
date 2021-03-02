@@ -161,11 +161,11 @@ static DBOAuthManager *s_sharedOAuthManager;
   if ([self canHandleURL:url]) {
     [self extractFromUrl:url
               completion:^(DBOAuthResult *result) {
-      if ([result isSuccess]) {
-        [self storeAccessToken:result.accessToken];
-      }
-      completion(result);
-    }];
+                if ([result isSuccess]) {
+                  [self storeAccessToken:result.accessToken];
+                }
+                completion(result);
+              }];
     return YES;
   } else {
     completion(nil);

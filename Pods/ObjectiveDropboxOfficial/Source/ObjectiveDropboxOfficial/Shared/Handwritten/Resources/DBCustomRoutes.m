@@ -105,8 +105,9 @@ static const int timeoutInSec = 200;
   // immediately close session after first API call
   // because file can be uploaded in one request
   __block DBUploadTask *task =
-      [[[self uploadSessionStartStream:@(YES) inputStream:[NSInputStream inputStreamWithURL:fileUrl]]
-          setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBNilObject *routeError, DBRequestError *error) {
+      [[[self uploadSessionStartStream:@(YES) sessionType:nil inputStream:[NSInputStream inputStreamWithURL:fileUrl]]
+          setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBFILESUploadSessionStartError *routeError,
+                             DBRequestError *error) {
             if (result && !routeError) {
               NSString *sessionId = result.sessionId;
               NSNumber *offset = @(fileSize);
@@ -151,7 +152,8 @@ static const int timeoutInSec = 200;
 
   // do not immediately close session
   __block DBUploadTask *task = [[[self uploadSessionStartStream:fileChunkInputStream]
-      setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBNilObject *routeError, DBRequestError *error) {
+      setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBFILESUploadSessionStartError *routeError,
+                         DBRequestError *error) {
         if (result && !routeError) {
           NSString *sessionId = result.sessionId;
           [self appendRemainingFileChunks:uploadData

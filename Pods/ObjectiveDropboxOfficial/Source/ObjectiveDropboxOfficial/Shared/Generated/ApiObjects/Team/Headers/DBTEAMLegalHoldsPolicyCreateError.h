@@ -60,6 +60,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsPolicyCreateErrorTag){
     /// Team exceeded legal hold quota.
     DBTEAMLegalHoldsPolicyCreateErrorTeamExceededLegalHoldQuota,
 
+    /// The provided date is invalid.
+    DBTEAMLegalHoldsPolicyCreateErrorInvalidDate,
+
 };
 
 /// Represents the union's current tag state.
@@ -166,6 +169,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsPolicyCreateErrorTag){
 ///
 - (instancetype)initWithTeamExceededLegalHoldQuota;
 
+///
+/// Initializes union class with tag state of "invalid_date".
+///
+/// Description of the "invalid_date" tag state: The provided date is invalid.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInvalidDate;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
@@ -253,6 +265,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsPolicyCreateErrorTag){
 /// "team_exceeded_legal_hold_quota".
 ///
 - (BOOL)isTeamExceededLegalHoldQuota;
+
+///
+/// Retrieves whether the union's current tag state has value "invalid_date".
+///
+/// @return Whether the union's current tag state has value "invalid_date".
+///
+- (BOOL)isInvalidDate;
 
 ///
 /// Retrieves string value of union's current tag state.

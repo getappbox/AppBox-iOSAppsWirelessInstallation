@@ -19,8 +19,8 @@
     //Init AppCenter
     [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
     NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
-    [MSAppCenter start:appCenter withServices: @[[MSAnalytics class], [MSCrashes class]]];
-    [MSCrashes notifyWithUserConfirmation: MSUserConfirmationAlways];
+    [MSACAppCenter start:appCenter withServices: @[[MSACAnalytics class], [MSACCrashes class]]];
+    [MSACCrashes notifyWithUserConfirmation: MSACUserConfirmationAlways];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {

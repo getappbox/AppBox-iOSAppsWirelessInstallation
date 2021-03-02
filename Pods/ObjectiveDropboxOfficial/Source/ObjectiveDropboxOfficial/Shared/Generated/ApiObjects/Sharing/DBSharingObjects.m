@@ -22133,6 +22133,14 @@
   return self;
 }
 
+- (instancetype)initWithIsFamily {
+  self = [super init];
+  if (self) {
+    _tag = DBSHARINGSharePathErrorIsFamily;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -22209,6 +22217,10 @@
   return _tag == DBSHARINGSharePathErrorIsVault;
 }
 
+- (BOOL)isIsFamily {
+  return _tag == DBSHARINGSharePathErrorIsFamily;
+}
+
 - (BOOL)isOther {
   return _tag == DBSHARINGSharePathErrorOther;
 }
@@ -22243,6 +22255,8 @@
     return @"DBSHARINGSharePathErrorInsideOsxPackage";
   case DBSHARINGSharePathErrorIsVault:
     return @"DBSHARINGSharePathErrorIsVault";
+  case DBSHARINGSharePathErrorIsFamily:
+    return @"DBSHARINGSharePathErrorIsFamily";
   case DBSHARINGSharePathErrorOther:
     return @"DBSHARINGSharePathErrorOther";
   }
@@ -22309,6 +22323,8 @@
     result = prime * result + [[self tagName] hash];
   case DBSHARINGSharePathErrorIsVault:
     result = prime * result + [[self tagName] hash];
+  case DBSHARINGSharePathErrorIsFamily:
+    result = prime * result + [[self tagName] hash];
   case DBSHARINGSharePathErrorOther:
     result = prime * result + [[self tagName] hash];
   }
@@ -22364,6 +22380,8 @@
     return [[self tagName] isEqual:[aSharePathError tagName]];
   case DBSHARINGSharePathErrorIsVault:
     return [[self tagName] isEqual:[aSharePathError tagName]];
+  case DBSHARINGSharePathErrorIsFamily:
+    return [[self tagName] isEqual:[aSharePathError tagName]];
   case DBSHARINGSharePathErrorOther:
     return [[self tagName] isEqual:[aSharePathError tagName]];
   }
@@ -22408,6 +22426,8 @@
     jsonDict[@".tag"] = @"inside_osx_package";
   } else if ([valueObj isIsVault]) {
     jsonDict[@".tag"] = @"is_vault";
+  } else if ([valueObj isIsFamily]) {
+    jsonDict[@".tag"] = @"is_family";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -22449,6 +22469,8 @@
     return [[DBSHARINGSharePathError alloc] initWithInsideOsxPackage];
   } else if ([tag isEqualToString:@"is_vault"]) {
     return [[DBSHARINGSharePathError alloc] initWithIsVault];
+  } else if ([tag isEqualToString:@"is_family"]) {
+    return [[DBSHARINGSharePathError alloc] initWithIsFamily];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBSHARINGSharePathError alloc] initWithOther];
   } else {

@@ -34,14 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGActionDetailsTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGActionDetails` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
-    /// Additional information relevant when a new member joins the team.
-    DBTEAMLOGActionDetailsTeamJoinDetails,
-
     /// Define how the user was removed from the team.
     DBTEAMLOGActionDetailsRemoveAction,
 
     /// Additional information relevant when someone is invited to the team.
     DBTEAMLOGActionDetailsTeamInviteDetails,
+
+    /// Additional information relevant when a new member joins the team.
+    DBTEAMLOGActionDetailsTeamJoinDetails,
 
     /// (no description).
     DBTEAMLOGActionDetailsOther,
@@ -50,11 +50,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
 
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGActionDetailsTag tag;
-
-/// Additional information relevant when a new member joins the team. @note
-/// Ensure the `isTeamJoinDetails` method returns true before accessing,
-/// otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGJoinTeamDetails *teamJoinDetails;
 
 /// Define how the user was removed from the team. @note Ensure the
 /// `isRemoveAction` method returns true before accessing, otherwise a runtime
@@ -66,20 +61,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamInviteDetails *teamInviteDetails;
 
-#pragma mark - Constructors
+/// Additional information relevant when a new member joins the team. @note
+/// Ensure the `isTeamJoinDetails` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGJoinTeamDetails *teamJoinDetails;
 
-///
-/// Initializes union class with tag state of "team_join_details".
-///
-/// Description of the "team_join_details" tag state: Additional information
-/// relevant when a new member joins the team.
-///
-/// @param teamJoinDetails Additional information relevant when a new member
-/// joins the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithTeamJoinDetails:(DBTEAMLOGJoinTeamDetails *)teamJoinDetails;
+#pragma mark - Constructors
 
 ///
 /// Initializes union class with tag state of "remove_action".
@@ -107,6 +94,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
 - (instancetype)initWithTeamInviteDetails:(DBTEAMLOGTeamInviteDetails *)teamInviteDetails;
 
 ///
+/// Initializes union class with tag state of "team_join_details".
+///
+/// Description of the "team_join_details" tag state: Additional information
+/// relevant when a new member joins the team.
+///
+/// @param teamJoinDetails Additional information relevant when a new member
+/// joins the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamJoinDetails:(DBTEAMLOGJoinTeamDetails *)teamJoinDetails;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -116,17 +116,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "team_join_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `teamJoinDetails` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value "team_join_details".
-///
-- (BOOL)isTeamJoinDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value "remove_action".
@@ -149,6 +138,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActionDetailsTag){
 /// "team_invite_details".
 ///
 - (BOOL)isTeamInviteDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_join_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamJoinDetails` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "team_join_details".
+///
+- (BOOL)isTeamJoinDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

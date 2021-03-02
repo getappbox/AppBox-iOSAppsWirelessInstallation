@@ -33,8 +33,10 @@
 
 //Emails
 @property(nonatomic, retain) NSString *emails;
+@property(nonatomic, assign) BOOL isBuildsuccess;
 @property(nonatomic, retain) NSString *subjectPrefix;
 @property(nonatomic, retain) NSString *personalMessage;
+@property(nonatomic, retain) NSString *appStoreMessage;
 
 //Client
 @property(nonatomic, retain) DBManager *dbManager;

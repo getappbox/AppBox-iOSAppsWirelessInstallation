@@ -482,7 +482,7 @@
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
     fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO];
     
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
+    [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBFILESUploadSessionStartError * _Nullable routeError, DBRequestError * _Nullable networkError) {
         if (result) {
             sessionId = result.sessionId;
             offset += nextChunkToUpload.length;
@@ -651,7 +651,9 @@
     if (self.dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = url;
         if(!self.project.distributeOverLocalNetwork){
-            shareableLink = [url stringByReplacingCharactersInRange:NSMakeRange(url.length-1, 1) withString:@"1"];
+            shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://www.dropbox.com" withString:abDropBoxDirectDownload];
+            shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://dropbox.com" withString:abDropBoxDirectDownload];
+            shareableLink = [shareableLink substringToIndex:shareableLink.length-5];
         }
         self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {

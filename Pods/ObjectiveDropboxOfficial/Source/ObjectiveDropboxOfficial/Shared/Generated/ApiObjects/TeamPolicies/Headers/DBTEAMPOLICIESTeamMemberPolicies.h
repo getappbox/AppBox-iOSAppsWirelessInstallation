@@ -10,6 +10,7 @@
 
 @class DBTEAMPOLICIESEmmState;
 @class DBTEAMPOLICIESOfficeAddInPolicy;
+@class DBTEAMPOLICIESSuggestMembersPolicy;
 @class DBTEAMPOLICIESTeamMemberPolicies;
 @class DBTEAMPOLICIESTeamSharingPolicies;
 
@@ -43,6 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The admin policy around the Dropbox Office Add-In for this team.
 @property (nonatomic, readonly) DBTEAMPOLICIESOfficeAddInPolicy *officeAddin;
 
+/// The team policy on if teammembers are allowed to suggest users for admins to
+/// invite to the team.
+@property (nonatomic, readonly) DBTEAMPOLICIESSuggestMembersPolicy *suggestMembersPolicy;
+
 #pragma mark - Constructors
 
 ///
@@ -57,12 +62,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// additional documentation.
 /// @param officeAddin The admin policy around the Dropbox Office Add-In for
 /// this team.
+/// @param suggestMembersPolicy The team policy on if teammembers are allowed to
+/// suggest users for admins to invite to the team.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithSharing:(DBTEAMPOLICIESTeamSharingPolicies *)sharing
                        emmState:(DBTEAMPOLICIESEmmState *)emmState
-                    officeAddin:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddin;
+                    officeAddin:(DBTEAMPOLICIESOfficeAddInPolicy *)officeAddin
+           suggestMembersPolicy:(DBTEAMPOLICIESSuggestMembersPolicy *)suggestMembersPolicy;
 
 - (instancetype)init NS_UNAVAILABLE;
 

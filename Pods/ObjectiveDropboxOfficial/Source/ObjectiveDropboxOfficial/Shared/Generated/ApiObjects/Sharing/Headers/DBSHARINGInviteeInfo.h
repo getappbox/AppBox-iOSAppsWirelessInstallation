@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGInviteeInfoTag` enum type represents the possible tag states
 /// with which the `DBSHARINGInviteeInfo` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGInviteeInfoTag){
-    /// E-mail address of invited user.
+    /// Email address of invited user.
     DBSHARINGInviteeInfoEmail,
 
     /// (no description).
@@ -41,7 +41,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGInviteeInfoTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBSHARINGInviteeInfoTag tag;
 
-/// E-mail address of invited user. @note Ensure the `isEmail` method returns
+/// Email address of invited user. @note Ensure the `isEmail` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *email;
 
@@ -50,9 +50,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGInviteeInfoTag){
 ///
 /// Initializes union class with tag state of "email".
 ///
-/// Description of the "email" tag state: E-mail address of invited user.
+/// Description of the "email" tag state: Email address of invited user.
 ///
-/// @param email E-mail address of invited user.
+/// @param email Email address of invited user.
 ///
 /// @return An initialized instance.
 ///

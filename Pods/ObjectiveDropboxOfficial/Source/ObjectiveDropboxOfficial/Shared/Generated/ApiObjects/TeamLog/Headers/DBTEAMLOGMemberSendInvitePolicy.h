@@ -34,10 +34,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberSendInvitePolicyTag){
     DBTEAMLOGMemberSendInvitePolicyDisabled,
 
     /// (no description).
-    DBTEAMLOGMemberSendInvitePolicySpecificMembers,
+    DBTEAMLOGMemberSendInvitePolicyEveryone,
 
     /// (no description).
-    DBTEAMLOGMemberSendInvitePolicyEveryone,
+    DBTEAMLOGMemberSendInvitePolicySpecificMembers,
 
     /// (no description).
     DBTEAMLOGMemberSendInvitePolicyOther,
@@ -57,18 +57,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberSendInvitePolicyTag){
 - (instancetype)initWithDisabled;
 
 ///
-/// Initializes union class with tag state of "specific_members".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithSpecificMembers;
-
-///
 /// Initializes union class with tag state of "everyone".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEveryone;
+
+///
+/// Initializes union class with tag state of "specific_members".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSpecificMembers;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -89,19 +89,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberSendInvitePolicyTag){
 - (BOOL)isDisabled;
 
 ///
+/// Retrieves whether the union's current tag state has value "everyone".
+///
+/// @return Whether the union's current tag state has value "everyone".
+///
+- (BOOL)isEveryone;
+
+///
 /// Retrieves whether the union's current tag state has value
 /// "specific_members".
 ///
 /// @return Whether the union's current tag state has value "specific_members".
 ///
 - (BOOL)isSpecificMembers;
-
-///
-/// Retrieves whether the union's current tag state has value "everyone".
-///
-/// @return Whether the union's current tag state has value "everyone".
-///
-- (BOOL)isEveryone;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

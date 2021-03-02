@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGSpaceLimitsStatus` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag){
     /// (no description).
-    DBTEAMLOGSpaceLimitsStatusWithinQuota,
-
-    /// (no description).
     DBTEAMLOGSpaceLimitsStatusNearQuota,
 
     /// (no description).
     DBTEAMLOGSpaceLimitsStatusOverQuota,
+
+    /// (no description).
+    DBTEAMLOGSpaceLimitsStatusWithinQuota,
 
     /// (no description).
     DBTEAMLOGSpaceLimitsStatusOther,
@@ -46,13 +46,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag){
 @property (nonatomic, readonly) DBTEAMLOGSpaceLimitsStatusTag tag;
 
 #pragma mark - Constructors
-
-///
-/// Initializes union class with tag state of "within_quota".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithWithinQuota;
 
 ///
 /// Initializes union class with tag state of "near_quota".
@@ -69,6 +62,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag){
 - (instancetype)initWithOverQuota;
 
 ///
+/// Initializes union class with tag state of "within_quota".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithWithinQuota;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -78,13 +78,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value "within_quota".
-///
-/// @return Whether the union's current tag state has value "within_quota".
-///
-- (BOOL)isWithinQuota;
 
 ///
 /// Retrieves whether the union's current tag state has value "near_quota".
@@ -99,6 +92,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSpaceLimitsStatusTag){
 /// @return Whether the union's current tag state has value "over_quota".
 ///
 - (BOOL)isOverQuota;
+
+///
+/// Retrieves whether the union's current tag state has value "within_quota".
+///
+/// @return Whether the union's current tag state has value "within_quota".
+///
+- (BOOL)isWithinQuota;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

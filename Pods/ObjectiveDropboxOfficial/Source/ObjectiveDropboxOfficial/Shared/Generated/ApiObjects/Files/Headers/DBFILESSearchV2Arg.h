@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) DBFILESSearchMatchFieldOptions *matchFieldOptions;
 
 /// Deprecated and moved this option to SearchMatchFieldOptions.
-@property (nonatomic, readonly) NSNumber *includeHighlights;
+@property (nonatomic, readonly, nullable) NSNumber *includeHighlights;
 
 #pragma mark - Constructors
 

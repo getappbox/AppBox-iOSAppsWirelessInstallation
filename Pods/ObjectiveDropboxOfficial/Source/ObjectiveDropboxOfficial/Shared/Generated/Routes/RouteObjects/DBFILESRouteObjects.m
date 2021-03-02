@@ -108,6 +108,7 @@
 #import "DBFILESUploadSessionFinishError.h"
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
+#import "DBFILESUploadSessionStartError.h"
 #import "DBFILESUploadSessionStartResult.h"
 #import "DBFILESUploadWriteFailed.h"
 #import "DBFILESUserAuthRoutes.h"
@@ -1284,7 +1285,7 @@ static DBRoute *DBFILESUploadSessionStart;
                                            namespace_:@"files"
                                            deprecated:@NO
                                            resultType:[DBFILESUploadSessionStartResult class]
-                                            errorType:nil
+                                            errorType:[DBFILESUploadSessionStartError class]
                                                 attrs:@{
                                                   @"auth" : @"user",
                                                   @"host" : @"content",

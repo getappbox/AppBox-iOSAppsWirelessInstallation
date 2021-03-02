@@ -50,6 +50,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
     /// should not reach the max file size limit (i.e. 350GB).
     DBFILESUploadSessionLookupErrorTooLarge,
 
+    /// For concurrent upload sessions, offset needs to be multiple of 4194304
+    /// bytes.
+    DBFILESUploadSessionLookupErrorConcurrentSessionInvalidOffset,
+
+    /// For concurrent upload sessions, only chunks with size multiple of
+    /// 4194304 bytes can be uploaded.
+    DBFILESUploadSessionLookupErrorConcurrentSessionInvalidDataSize,
+
     /// (no description).
     DBFILESUploadSessionLookupErrorOther,
 
@@ -126,6 +134,29 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
 - (instancetype)initWithTooLarge;
 
 ///
+/// Initializes union class with tag state of
+/// "concurrent_session_invalid_offset".
+///
+/// Description of the "concurrent_session_invalid_offset" tag state: For
+/// concurrent upload sessions, offset needs to be multiple of 4194304 bytes.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithConcurrentSessionInvalidOffset;
+
+///
+/// Initializes union class with tag state of
+/// "concurrent_session_invalid_data_size".
+///
+/// Description of the "concurrent_session_invalid_data_size" tag state: For
+/// concurrent upload sessions, only chunks with size multiple of 4194304 bytes
+/// can be uploaded.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithConcurrentSessionInvalidDataSize;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -174,6 +205,24 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
 /// @return Whether the union's current tag state has value "too_large".
 ///
 - (BOOL)isTooLarge;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "concurrent_session_invalid_offset".
+///
+/// @return Whether the union's current tag state has value
+/// "concurrent_session_invalid_offset".
+///
+- (BOOL)isConcurrentSessionInvalidOffset;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "concurrent_session_invalid_data_size".
+///
+/// @return Whether the union's current tag state has value
+/// "concurrent_session_invalid_data_size".
+///
+- (BOOL)isConcurrentSessionInvalidDataSize;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

@@ -52,6 +52,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag){
     /// should retry uploading this file.
     DBFILESUploadSessionFinishErrorTooManyWriteOperations,
 
+    /// Uploading data not allowed when finishing concurrent upload session.
+    DBFILESUploadSessionFinishErrorConcurrentSessionDataNotAllowed,
+
+    /// Concurrent upload sessions need to be closed before finishing.
+    DBFILESUploadSessionFinishErrorConcurrentSessionNotClosed,
+
+    /// Not all pieces of data were uploaded before trying to finish the
+    /// session.
+    DBFILESUploadSessionFinishErrorConcurrentSessionMissingData,
+
     /// (no description).
     DBFILESUploadSessionFinishErrorOther,
 
@@ -142,6 +152,37 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag){
 - (instancetype)initWithTooManyWriteOperations;
 
 ///
+/// Initializes union class with tag state of
+/// "concurrent_session_data_not_allowed".
+///
+/// Description of the "concurrent_session_data_not_allowed" tag state:
+/// Uploading data not allowed when finishing concurrent upload session.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithConcurrentSessionDataNotAllowed;
+
+///
+/// Initializes union class with tag state of "concurrent_session_not_closed".
+///
+/// Description of the "concurrent_session_not_closed" tag state: Concurrent
+/// upload sessions need to be closed before finishing.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithConcurrentSessionNotClosed;
+
+///
+/// Initializes union class with tag state of "concurrent_session_missing_data".
+///
+/// Description of the "concurrent_session_missing_data" tag state: Not all
+/// pieces of data were uploaded before trying to finish the session.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithConcurrentSessionMissingData;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -200,6 +241,33 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionFinishErrorTag){
 /// "too_many_write_operations".
 ///
 - (BOOL)isTooManyWriteOperations;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "concurrent_session_data_not_allowed".
+///
+/// @return Whether the union's current tag state has value
+/// "concurrent_session_data_not_allowed".
+///
+- (BOOL)isConcurrentSessionDataNotAllowed;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "concurrent_session_not_closed".
+///
+/// @return Whether the union's current tag state has value
+/// "concurrent_session_not_closed".
+///
+- (BOOL)isConcurrentSessionNotClosed;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "concurrent_session_missing_data".
+///
+/// @return Whether the union's current tag state has value
+/// "concurrent_session_missing_data".
+///
+- (BOOL)isConcurrentSessionMissingData;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

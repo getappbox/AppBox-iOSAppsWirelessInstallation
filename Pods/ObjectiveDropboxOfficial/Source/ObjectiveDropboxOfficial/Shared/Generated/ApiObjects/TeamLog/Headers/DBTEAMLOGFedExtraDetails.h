@@ -32,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGFedExtraDetailsTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGFedExtraDetails` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedExtraDetailsTag){
-    /// More details about the team.
-    DBTEAMLOGFedExtraDetailsTeam,
-
     /// More details about the organization.
     DBTEAMLOGFedExtraDetailsOrganization,
+
+    /// More details about the team.
+    DBTEAMLOGFedExtraDetailsTeam,
 
     /// (no description).
     DBTEAMLOGFedExtraDetailsOther,
@@ -46,27 +46,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedExtraDetailsTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGFedExtraDetailsTag tag;
 
-/// More details about the team. @note Ensure the `isTeam` method returns true
-/// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGTeamDetails *team;
-
 /// More details about the organization. @note Ensure the `isOrganization`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGOrganizationDetails *organization;
 
-#pragma mark - Constructors
+/// More details about the team. @note Ensure the `isTeam` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamDetails *team;
 
-///
-/// Initializes union class with tag state of "team".
-///
-/// Description of the "team" tag state: More details about the team.
-///
-/// @param team More details about the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithTeam:(DBTEAMLOGTeamDetails *)team;
+#pragma mark - Constructors
 
 ///
 /// Initializes union class with tag state of "organization".
@@ -81,6 +70,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedExtraDetailsTag){
 - (instancetype)initWithOrganization:(DBTEAMLOGOrganizationDetails *)organization;
 
 ///
+/// Initializes union class with tag state of "team".
+///
+/// Description of the "team" tag state: More details about the team.
+///
+/// @param team More details about the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeam:(DBTEAMLOGTeamDetails *)team;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -92,16 +92,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedExtraDetailsTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "team".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `team` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value "team".
-///
-- (BOOL)isTeam;
-
-///
 /// Retrieves whether the union's current tag state has value "organization".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -110,6 +100,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedExtraDetailsTag){
 /// @return Whether the union's current tag state has value "organization".
 ///
 - (BOOL)isOrganization;
+
+///
+/// Retrieves whether the union's current tag state has value "team".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `team` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "team".
+///
+- (BOOL)isTeam;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

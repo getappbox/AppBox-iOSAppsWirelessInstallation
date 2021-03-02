@@ -29,7 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBSHARINGShareFolderErrorTag` enum type represents the possible tag
 /// states with which the `DBSHARINGShareFolderError` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGShareFolderErrorTag){
-    /// The current user's e-mail address is unverified.
+    /// This user's email address is not verified. This functionality is only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
     DBSHARINGShareFolderErrorEmailUnverified,
 
     /// `path` in `DBSHARINGShareFolderArg` is invalid.
@@ -64,8 +66,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGShareFolderErrorTag){
 ///
 /// Initializes union class with tag state of "email_unverified".
 ///
-/// Description of the "email_unverified" tag state: The current user's e-mail
-/// address is unverified.
+/// Description of the "email_unverified" tag state: This user's email address
+/// is not verified. This functionality is only available on accounts with a
+/// verified email address. Users can verify their email address here
+/// https://www.dropbox.com/help/317.
 ///
 /// @return An initialized instance.
 ///

@@ -298,18 +298,19 @@ static NSMutableDictionary<NSString *, DBTeamClient *> *s_tokenUidToAuthorizedTe
   NSAssert([DBOAuthManager sharedOAuthManager],
            @"Call the appropriate `[DBClientsManager setupWith...]` before calling this method");
 
-  return [[DBOAuthManager sharedOAuthManager] handleRedirectURL:url
-                                                     completion:^(DBOAuthResult *result) {
-                                                if ([result isSuccess]) {
-                                                  DBAccessToken *token = result.accessToken;
-                                                  if (isTeam) {
-                                                    [self db_addAuthorizedTeamClientWithToken:token setAsDefault:YES];
-                                                  } else {
-                                                    [self db_addAuthorizedClientWithToken:token setAsDefault:YES];
-                                                  }
-                                                }
-                                                completion(result);
-                                              }];
+  return [[DBOAuthManager sharedOAuthManager]
+      handleRedirectURL:url
+             completion:^(DBOAuthResult *result) {
+               if ([result isSuccess]) {
+                 DBAccessToken *token = result.accessToken;
+                 if (isTeam) {
+                   [self db_addAuthorizedTeamClientWithToken:token setAsDefault:YES];
+                 } else {
+                   [self db_addAuthorizedClientWithToken:token setAsDefault:YES];
+                 }
+               }
+               completion(result);
+             }];
 }
 
 @end
