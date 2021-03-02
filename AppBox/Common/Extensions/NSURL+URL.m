@@ -14,12 +14,8 @@
     return (self && [self.pathExtension.lowercaseString isEqualToString:@"ipa" ]);
 }
 
--(BOOL)isProject{
-    return (self && ([self.pathExtension.lowercaseString isEqualToString:@"xcodeproj"] || [self.pathExtension.lowercaseString isEqualToString:@"xcworkspace"]));
-}
-
 -(BOOL)acceptableURL{
-    return (self && ([self.pathExtension.lowercaseString isEqualToString:@"xcodeproj"] || [self.pathExtension.lowercaseString isEqualToString:@"xcworkspace"] || [self.pathExtension.lowercaseString isEqualToString:@"ipa" ]));
+    return (self && [self.pathExtension.lowercaseString isEqualToString:@"ipa"]);
 }
 
 -(NSString *)stringValue {

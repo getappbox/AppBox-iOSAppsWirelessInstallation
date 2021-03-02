@@ -32,7 +32,7 @@
     }
     
     //Save Project Details
-    [Project addProjectWithXCProject:self.project andSaveDetails:SaveUploadDetails];
+    [Project addProjectWithXCProject:self.project];
 }
 
 

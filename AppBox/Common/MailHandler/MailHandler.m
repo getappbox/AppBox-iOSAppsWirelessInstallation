@@ -33,11 +33,6 @@
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_NAME}" withString:project.name];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
-    if (project.selectedSchemes) {
-        messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_SCHEME}" withString:project.selectedSchemes];
-    } else {
-        messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_SCHEME}" withString:@"Default"];
-    }
     return messageCopy;
 }
 
