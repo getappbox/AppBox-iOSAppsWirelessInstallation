@@ -29,13 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGPaperAccessType` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag){
     /// (no description).
-    DBTEAMLOGPaperAccessTypeViewer,
-
-    /// (no description).
     DBTEAMLOGPaperAccessTypeCommenter,
 
     /// (no description).
     DBTEAMLOGPaperAccessTypeEditor,
+
+    /// (no description).
+    DBTEAMLOGPaperAccessTypeViewer,
 
     /// (no description).
     DBTEAMLOGPaperAccessTypeOther,
@@ -46,13 +46,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag){
 @property (nonatomic, readonly) DBTEAMLOGPaperAccessTypeTag tag;
 
 #pragma mark - Constructors
-
-///
-/// Initializes union class with tag state of "viewer".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithViewer;
 
 ///
 /// Initializes union class with tag state of "commenter".
@@ -69,6 +62,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag){
 - (instancetype)initWithEditor;
 
 ///
+/// Initializes union class with tag state of "viewer".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithViewer;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -78,13 +78,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value "viewer".
-///
-/// @return Whether the union's current tag state has value "viewer".
-///
-- (BOOL)isViewer;
 
 ///
 /// Retrieves whether the union's current tag state has value "commenter".
@@ -99,6 +92,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPaperAccessTypeTag){
 /// @return Whether the union's current tag state has value "editor".
 ///
 - (BOOL)isEditor;
+
+///
+/// Retrieves whether the union's current tag state has value "viewer".
+///
+/// @return Whether the union's current tag state has value "viewer".
+///
+- (BOOL)isViewer;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

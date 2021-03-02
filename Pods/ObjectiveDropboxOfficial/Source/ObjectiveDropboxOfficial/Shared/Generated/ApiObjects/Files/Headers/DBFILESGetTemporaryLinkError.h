@@ -32,7 +32,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag){
     /// (no description).
     DBFILESGetTemporaryLinkErrorPath,
 
-    /// The user's email address needs to be verified to use this functionality.
+    /// This user's email address is not verified. This functionality is only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
     DBFILESGetTemporaryLinkErrorEmailNotVerified,
 
     /// Cannot get temporary link to this file type; use `export` instead.
@@ -64,8 +66,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag){
 ///
 /// Initializes union class with tag state of "email_not_verified".
 ///
-/// Description of the "email_not_verified" tag state: The user's email address
-/// needs to be verified to use this functionality.
+/// Description of the "email_not_verified" tag state: This user's email address
+/// is not verified. This functionality is only available on accounts with a
+/// verified email address. Users can verify their email address here
+/// https://www.dropbox.com/help/317.
 ///
 /// @return An initialized instance.
 ///

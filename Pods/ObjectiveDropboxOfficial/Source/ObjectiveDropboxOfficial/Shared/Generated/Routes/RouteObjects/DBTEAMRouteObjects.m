@@ -1441,7 +1441,7 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMReportsGetActivity) {
     DBTEAMReportsGetActivity = [[DBRoute alloc] init:@"reports/get_activity"
                                           namespace_:@"team"
-                                          deprecated:@NO
+                                          deprecated:@YES
                                           resultType:[DBTEAMGetActivityReport class]
                                            errorType:[DBTEAMDateRangeError class]
                                                attrs:@{
@@ -1459,7 +1459,7 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMReportsGetDevices) {
     DBTEAMReportsGetDevices = [[DBRoute alloc] init:@"reports/get_devices"
                                          namespace_:@"team"
-                                         deprecated:@NO
+                                         deprecated:@YES
                                          resultType:[DBTEAMGetDevicesReport class]
                                           errorType:[DBTEAMDateRangeError class]
                                               attrs:@{
@@ -1477,7 +1477,7 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMReportsGetMembership) {
     DBTEAMReportsGetMembership = [[DBRoute alloc] init:@"reports/get_membership"
                                             namespace_:@"team"
-                                            deprecated:@NO
+                                            deprecated:@YES
                                             resultType:[DBTEAMGetMembershipReport class]
                                              errorType:[DBTEAMDateRangeError class]
                                                  attrs:@{
@@ -1495,7 +1495,7 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
   if (!DBTEAMReportsGetStorage) {
     DBTEAMReportsGetStorage = [[DBRoute alloc] init:@"reports/get_storage"
                                          namespace_:@"team"
-                                         deprecated:@NO
+                                         deprecated:@YES
                                          resultType:[DBTEAMGetStorageReport class]
                                           errorType:[DBTEAMDateRangeError class]
                                               attrs:@{

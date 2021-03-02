@@ -33,23 +33,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGActorLogInfoTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGActorLogInfo` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
-    /// The user who did the action.
-    DBTEAMLOGActorLogInfoUser,
-
     /// The admin who did the action.
     DBTEAMLOGActorLogInfoAdmin,
+
+    /// Anonymous actor.
+    DBTEAMLOGActorLogInfoAnonymous,
 
     /// The application who did the action.
     DBTEAMLOGActorLogInfoApp,
 
-    /// Action done by reseller.
-    DBTEAMLOGActorLogInfoReseller,
-
     /// Action done by Dropbox.
     DBTEAMLOGActorLogInfoDropbox,
 
-    /// Anonymous actor.
-    DBTEAMLOGActorLogInfoAnonymous,
+    /// Action done by reseller.
+    DBTEAMLOGActorLogInfoReseller,
+
+    /// The user who did the action.
+    DBTEAMLOGActorLogInfoUser,
 
     /// (no description).
     DBTEAMLOGActorLogInfoOther,
@@ -58,10 +58,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGActorLogInfoTag tag;
-
-/// The user who did the action. @note Ensure the `isUser` method returns true
-/// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGUserLogInfo *user;
 
 /// The admin who did the action. @note Ensure the `isAdmin` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
@@ -75,18 +71,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGResellerLogInfo *reseller;
 
-#pragma mark - Constructors
+/// The user who did the action. @note Ensure the `isUser` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGUserLogInfo *user;
 
-///
-/// Initializes union class with tag state of "user".
-///
-/// Description of the "user" tag state: The user who did the action.
-///
-/// @param user The user who did the action.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user;
+#pragma mark - Constructors
 
 ///
 /// Initializes union class with tag state of "admin".
@@ -100,6 +89,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 - (instancetype)initWithAdmin:(DBTEAMLOGUserLogInfo *)admin;
 
 ///
+/// Initializes union class with tag state of "anonymous".
+///
+/// Description of the "anonymous" tag state: Anonymous actor.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAnonymous;
+
+///
 /// Initializes union class with tag state of "app".
 ///
 /// Description of the "app" tag state: The application who did the action.
@@ -109,6 +107,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithApp:(DBTEAMLOGAppLogInfo *)app;
+
+///
+/// Initializes union class with tag state of "dropbox".
+///
+/// Description of the "dropbox" tag state: Action done by Dropbox.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDropbox;
 
 ///
 /// Initializes union class with tag state of "reseller".
@@ -122,22 +129,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 - (instancetype)initWithReseller:(DBTEAMLOGResellerLogInfo *)reseller;
 
 ///
-/// Initializes union class with tag state of "dropbox".
+/// Initializes union class with tag state of "user".
 ///
-/// Description of the "dropbox" tag state: Action done by Dropbox.
+/// Description of the "user" tag state: The user who did the action.
 ///
-/// @return An initialized instance.
-///
-- (instancetype)initWithDropbox;
-
-///
-/// Initializes union class with tag state of "anonymous".
-///
-/// Description of the "anonymous" tag state: Anonymous actor.
+/// @param user The user who did the action.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAnonymous;
+- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -151,16 +151,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "user".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `user` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value "user".
-///
-- (BOOL)isUser;
-
-///
 /// Retrieves whether the union's current tag state has value "admin".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -169,6 +159,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 /// @return Whether the union's current tag state has value "admin".
 ///
 - (BOOL)isAdmin;
+
+///
+/// Retrieves whether the union's current tag state has value "anonymous".
+///
+/// @return Whether the union's current tag state has value "anonymous".
+///
+- (BOOL)isAnonymous;
 
 ///
 /// Retrieves whether the union's current tag state has value "app".
@@ -181,6 +178,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 - (BOOL)isApp;
 
 ///
+/// Retrieves whether the union's current tag state has value "dropbox".
+///
+/// @return Whether the union's current tag state has value "dropbox".
+///
+- (BOOL)isDropbox;
+
+///
 /// Retrieves whether the union's current tag state has value "reseller".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -191,18 +195,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGActorLogInfoTag){
 - (BOOL)isReseller;
 
 ///
-/// Retrieves whether the union's current tag state has value "dropbox".
+/// Retrieves whether the union's current tag state has value "user".
 ///
-/// @return Whether the union's current tag state has value "dropbox".
+/// @note Call this method and ensure it returns true before accessing the
+/// `user` property, otherwise a runtime exception will be thrown.
 ///
-- (BOOL)isDropbox;
-
+/// @return Whether the union's current tag state has value "user".
 ///
-/// Retrieves whether the union's current tag state has value "anonymous".
-///
-/// @return Whether the union's current tag state has value "anonymous".
-///
-- (BOOL)isAnonymous;
+- (BOOL)isUser;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

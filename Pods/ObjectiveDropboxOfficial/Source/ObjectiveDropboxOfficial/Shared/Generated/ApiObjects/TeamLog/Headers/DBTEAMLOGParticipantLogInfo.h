@@ -32,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGParticipantLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGParticipantLogInfo` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag){
-    /// A user with a Dropbox account.
-    DBTEAMLOGParticipantLogInfoUser,
-
     /// Group details.
     DBTEAMLOGParticipantLogInfoGroup,
+
+    /// A user with a Dropbox account.
+    DBTEAMLOGParticipantLogInfoUser,
 
     /// (no description).
     DBTEAMLOGParticipantLogInfoOther,
@@ -46,26 +46,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGParticipantLogInfoTag tag;
 
-/// A user with a Dropbox account. @note Ensure the `isUser` method returns true
-/// before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGUserLogInfo *user;
-
 /// Group details. @note Ensure the `isGroup` method returns true before
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGGroupLogInfo *group;
 
-#pragma mark - Constructors
+/// A user with a Dropbox account. @note Ensure the `isUser` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGUserLogInfo *user;
 
-///
-/// Initializes union class with tag state of "user".
-///
-/// Description of the "user" tag state: A user with a Dropbox account.
-///
-/// @param user A user with a Dropbox account.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user;
+#pragma mark - Constructors
 
 ///
 /// Initializes union class with tag state of "group".
@@ -79,6 +68,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag){
 - (instancetype)initWithGroup:(DBTEAMLOGGroupLogInfo *)group;
 
 ///
+/// Initializes union class with tag state of "user".
+///
+/// Description of the "user" tag state: A user with a Dropbox account.
+///
+/// @param user A user with a Dropbox account.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUser:(DBTEAMLOGUserLogInfo *)user;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -90,16 +90,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "user".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `user` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value "user".
-///
-- (BOOL)isUser;
-
-///
 /// Retrieves whether the union's current tag state has value "group".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -108,6 +98,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGParticipantLogInfoTag){
 /// @return Whether the union's current tag state has value "group".
 ///
 - (BOOL)isGroup;
+
+///
+/// Retrieves whether the union's current tag state has value "user".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `user` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "user".
+///
+- (BOOL)isUser;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

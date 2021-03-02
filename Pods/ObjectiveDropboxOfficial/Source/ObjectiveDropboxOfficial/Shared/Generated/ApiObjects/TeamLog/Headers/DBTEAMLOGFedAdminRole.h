@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// with which the `DBTEAMLOGFedAdminRole` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedAdminRoleTag){
     /// (no description).
-    DBTEAMLOGFedAdminRoleNotEnterpriseAdmin,
+    DBTEAMLOGFedAdminRoleEnterpriseAdmin,
 
     /// (no description).
-    DBTEAMLOGFedAdminRoleEnterpriseAdmin,
+    DBTEAMLOGFedAdminRoleNotEnterpriseAdmin,
 
     /// (no description).
     DBTEAMLOGFedAdminRoleOther,
@@ -45,18 +45,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedAdminRoleTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "not_enterprise_admin".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithNotEnterpriseAdmin;
-
-///
 /// Initializes union class with tag state of "enterprise_admin".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEnterpriseAdmin;
+
+///
+/// Initializes union class with tag state of "not_enterprise_admin".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNotEnterpriseAdmin;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -71,20 +71,20 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedAdminRoleTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "enterprise_admin".
+///
+/// @return Whether the union's current tag state has value "enterprise_admin".
+///
+- (BOOL)isEnterpriseAdmin;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "not_enterprise_admin".
 ///
 /// @return Whether the union's current tag state has value
 /// "not_enterprise_admin".
 ///
 - (BOOL)isNotEnterpriseAdmin;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "enterprise_admin".
-///
-/// @return Whether the union's current tag state has value "enterprise_admin".
-///
-- (BOOL)isEnterpriseAdmin;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

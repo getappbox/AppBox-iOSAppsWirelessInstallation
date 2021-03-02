@@ -32,10 +32,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag){
     DBTEAMLOGMemberRemoveActionTypeDelete_,
 
     /// (no description).
-    DBTEAMLOGMemberRemoveActionTypeOffboard,
+    DBTEAMLOGMemberRemoveActionTypeLeave,
 
     /// (no description).
-    DBTEAMLOGMemberRemoveActionTypeLeave,
+    DBTEAMLOGMemberRemoveActionTypeOffboard,
 
     /// (no description).
     DBTEAMLOGMemberRemoveActionTypeOffboardAndRetainTeamFolders,
@@ -58,18 +58,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag){
 - (instancetype)initWithDelete_;
 
 ///
-/// Initializes union class with tag state of "offboard".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithOffboard;
-
-///
 /// Initializes union class with tag state of "leave".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithLeave;
+
+///
+/// Initializes union class with tag state of "offboard".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOffboard;
 
 ///
 /// Initializes union class with tag state of
@@ -98,18 +98,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGMemberRemoveActionTypeTag){
 - (BOOL)isDelete_;
 
 ///
-/// Retrieves whether the union's current tag state has value "offboard".
-///
-/// @return Whether the union's current tag state has value "offboard".
-///
-- (BOOL)isOffboard;
-
-///
 /// Retrieves whether the union's current tag state has value "leave".
 ///
 /// @return Whether the union's current tag state has value "leave".
 ///
 - (BOOL)isLeave;
+
+///
+/// Retrieves whether the union's current tag state has value "offboard".
+///
+/// @return Whether the union's current tag state has value "offboard".
+///
+- (BOOL)isOffboard;
 
 ///
 /// Retrieves whether the union's current tag state has value

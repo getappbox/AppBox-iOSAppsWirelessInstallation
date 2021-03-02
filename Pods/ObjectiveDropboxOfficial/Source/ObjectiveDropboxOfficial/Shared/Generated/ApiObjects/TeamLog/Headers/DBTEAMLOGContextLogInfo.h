@@ -34,20 +34,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGContextLogInfoTag` enum type represents the possible tag
 /// states with which the `DBTEAMLOGContextLogInfo` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
-    /// Action was done on behalf of a team member.
-    DBTEAMLOGContextLogInfoTeamMember,
+    /// Anonymous context.
+    DBTEAMLOGContextLogInfoAnonymous,
 
     /// Action was done on behalf of a non team member.
     DBTEAMLOGContextLogInfoNonTeamMember,
 
-    /// Anonymous context.
-    DBTEAMLOGContextLogInfoAnonymous,
+    /// Action was done on behalf of a team that's part of an organization.
+    DBTEAMLOGContextLogInfoOrganizationTeam,
 
     /// Action was done on behalf of the team.
     DBTEAMLOGContextLogInfoTeam,
 
-    /// Action was done on behalf of a team that's part of an organization.
-    DBTEAMLOGContextLogInfoOrganizationTeam,
+    /// Action was done on behalf of a team member.
+    DBTEAMLOGContextLogInfoTeamMember,
 
     /// Action was done on behalf of a trusted non team member.
     DBTEAMLOGContextLogInfoTrustedNonTeamMember,
@@ -60,11 +60,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGContextLogInfoTag tag;
 
-/// Action was done on behalf of a team member. @note Ensure the `isTeamMember`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGTeamMemberLogInfo *teamMember;
-
 /// Action was done on behalf of a non team member. @note Ensure the
 /// `isNonTeamMember` method returns true before accessing, otherwise a runtime
 /// exception will be raised.
@@ -75,6 +70,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamLogInfo *organizationTeam;
 
+/// Action was done on behalf of a team member. @note Ensure the `isTeamMember`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamMemberLogInfo *teamMember;
+
 /// Action was done on behalf of a trusted non team member. @note Ensure the
 /// `isTrustedNonTeamMember` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
@@ -83,16 +83,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "team_member".
+/// Initializes union class with tag state of "anonymous".
 ///
-/// Description of the "team_member" tag state: Action was done on behalf of a
-/// team member.
-///
-/// @param teamMember Action was done on behalf of a team member.
+/// Description of the "anonymous" tag state: Anonymous context.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithTeamMember:(DBTEAMLOGTeamMemberLogInfo *)teamMember;
+- (instancetype)initWithAnonymous;
 
 ///
 /// Initializes union class with tag state of "non_team_member".
@@ -107,24 +104,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 - (instancetype)initWithNonTeamMember:(DBTEAMLOGNonTeamMemberLogInfo *)nonTeamMember;
 
 ///
-/// Initializes union class with tag state of "anonymous".
-///
-/// Description of the "anonymous" tag state: Anonymous context.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithAnonymous;
-
-///
-/// Initializes union class with tag state of "team".
-///
-/// Description of the "team" tag state: Action was done on behalf of the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithTeam;
-
-///
 /// Initializes union class with tag state of "organization_team".
 ///
 /// Description of the "organization_team" tag state: Action was done on behalf
@@ -136,6 +115,27 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithOrganizationTeam:(DBTEAMLOGTeamLogInfo *)organizationTeam;
+
+///
+/// Initializes union class with tag state of "team".
+///
+/// Description of the "team" tag state: Action was done on behalf of the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeam;
+
+///
+/// Initializes union class with tag state of "team_member".
+///
+/// Description of the "team_member" tag state: Action was done on behalf of a
+/// team member.
+///
+/// @param teamMember Action was done on behalf of a team member.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamMember:(DBTEAMLOGTeamMemberLogInfo *)teamMember;
 
 ///
 /// Initializes union class with tag state of "trusted_non_team_member".
@@ -162,14 +162,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "team_member".
+/// Retrieves whether the union's current tag state has value "anonymous".
 ///
-/// @note Call this method and ensure it returns true before accessing the
-/// `teamMember` property, otherwise a runtime exception will be thrown.
+/// @return Whether the union's current tag state has value "anonymous".
 ///
-/// @return Whether the union's current tag state has value "team_member".
-///
-- (BOOL)isTeamMember;
+- (BOOL)isAnonymous;
 
 ///
 /// Retrieves whether the union's current tag state has value "non_team_member".
@@ -182,20 +179,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 - (BOOL)isNonTeamMember;
 
 ///
-/// Retrieves whether the union's current tag state has value "anonymous".
-///
-/// @return Whether the union's current tag state has value "anonymous".
-///
-- (BOOL)isAnonymous;
-
-///
-/// Retrieves whether the union's current tag state has value "team".
-///
-/// @return Whether the union's current tag state has value "team".
-///
-- (BOOL)isTeam;
-
-///
 /// Retrieves whether the union's current tag state has value
 /// "organization_team".
 ///
@@ -205,6 +188,23 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGContextLogInfoTag){
 /// @return Whether the union's current tag state has value "organization_team".
 ///
 - (BOOL)isOrganizationTeam;
+
+///
+/// Retrieves whether the union's current tag state has value "team".
+///
+/// @return Whether the union's current tag state has value "team".
+///
+- (BOOL)isTeam;
+
+///
+/// Retrieves whether the union's current tag state has value "team_member".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamMember` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "team_member".
+///
+- (BOOL)isTeamMember;
 
 ///
 /// Retrieves whether the union's current tag state has value

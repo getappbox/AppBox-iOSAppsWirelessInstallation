@@ -15587,6 +15587,14 @@
   return self;
 }
 
+- (instancetype)initWithInvalidDate {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLegalHoldsPolicyCreateErrorInvalidDate;
+  }
+  return self;
+}
+
 #pragma mark - Instance field accessors
 
 #pragma mark - Tag state methods
@@ -15631,6 +15639,10 @@
   return _tag == DBTEAMLegalHoldsPolicyCreateErrorTeamExceededLegalHoldQuota;
 }
 
+- (BOOL)isInvalidDate {
+  return _tag == DBTEAMLegalHoldsPolicyCreateErrorInvalidDate;
+}
+
 - (NSString *)tagName {
   switch (_tag) {
   case DBTEAMLegalHoldsPolicyCreateErrorUnknownLegalHoldError:
@@ -15653,6 +15665,8 @@
     return @"DBTEAMLegalHoldsPolicyCreateErrorNameMustBeUnique";
   case DBTEAMLegalHoldsPolicyCreateErrorTeamExceededLegalHoldQuota:
     return @"DBTEAMLegalHoldsPolicyCreateErrorTeamExceededLegalHoldQuota";
+  case DBTEAMLegalHoldsPolicyCreateErrorInvalidDate:
+    return @"DBTEAMLegalHoldsPolicyCreateErrorInvalidDate";
   }
 
   @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
@@ -15709,6 +15723,8 @@
     result = prime * result + [[self tagName] hash];
   case DBTEAMLegalHoldsPolicyCreateErrorTeamExceededLegalHoldQuota:
     result = prime * result + [[self tagName] hash];
+  case DBTEAMLegalHoldsPolicyCreateErrorInvalidDate:
+    result = prime * result + [[self tagName] hash];
   }
 
   return prime * result;
@@ -15754,6 +15770,8 @@
     return [[self tagName] isEqual:[aLegalHoldsPolicyCreateError tagName]];
   case DBTEAMLegalHoldsPolicyCreateErrorTeamExceededLegalHoldQuota:
     return [[self tagName] isEqual:[aLegalHoldsPolicyCreateError tagName]];
+  case DBTEAMLegalHoldsPolicyCreateErrorInvalidDate:
+    return [[self tagName] isEqual:[aLegalHoldsPolicyCreateError tagName]];
   }
   return YES;
 }
@@ -15787,6 +15805,8 @@
     jsonDict[@".tag"] = @"name_must_be_unique";
   } else if ([valueObj isTeamExceededLegalHoldQuota]) {
     jsonDict[@".tag"] = @"team_exceeded_legal_hold_quota";
+  } else if ([valueObj isInvalidDate]) {
+    jsonDict[@".tag"] = @"invalid_date";
   } else {
     jsonDict[@".tag"] = @"other";
   }
@@ -15817,6 +15837,8 @@
     return [[DBTEAMLegalHoldsPolicyCreateError alloc] initWithNameMustBeUnique];
   } else if ([tag isEqualToString:@"team_exceeded_legal_hold_quota"]) {
     return [[DBTEAMLegalHoldsPolicyCreateError alloc] initWithTeamExceededLegalHoldQuota];
+  } else if ([tag isEqualToString:@"invalid_date"]) {
+    return [[DBTEAMLegalHoldsPolicyCreateError alloc] initWithInvalidDate];
   } else {
     return [[DBTEAMLegalHoldsPolicyCreateError alloc] initWithOther];
   }

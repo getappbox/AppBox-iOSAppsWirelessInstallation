@@ -29,28 +29,28 @@ NS_ASSUME_NONNULL_BEGIN
 /// with which the `DBTEAMLOGLoginMethod` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
     /// (no description).
-    DBTEAMLOGLoginMethodPassword,
+    DBTEAMLOGLoginMethodAppleOauth,
 
     /// (no description).
-    DBTEAMLOGLoginMethodTwoFactorAuthentication,
-
-    /// (no description).
-    DBTEAMLOGLoginMethodSaml,
+    DBTEAMLOGLoginMethodFirstPartyTokenExchange,
 
     /// (no description).
     DBTEAMLOGLoginMethodGoogleOauth,
 
     /// (no description).
-    DBTEAMLOGLoginMethodWebSession,
+    DBTEAMLOGLoginMethodPassword,
 
     /// (no description).
     DBTEAMLOGLoginMethodQrCode,
 
     /// (no description).
-    DBTEAMLOGLoginMethodAppleOauth,
+    DBTEAMLOGLoginMethodSaml,
 
     /// (no description).
-    DBTEAMLOGLoginMethodFirstPartyTokenExchange,
+    DBTEAMLOGLoginMethodTwoFactorAuthentication,
+
+    /// (no description).
+    DBTEAMLOGLoginMethodWebSession,
 
     /// (no description).
     DBTEAMLOGLoginMethodOther,
@@ -61,48 +61,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
 @property (nonatomic, readonly) DBTEAMLOGLoginMethodTag tag;
 
 #pragma mark - Constructors
-
-///
-/// Initializes union class with tag state of "password".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithPassword;
-
-///
-/// Initializes union class with tag state of "two_factor_authentication".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithTwoFactorAuthentication;
-
-///
-/// Initializes union class with tag state of "saml".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithSaml;
-
-///
-/// Initializes union class with tag state of "google_oauth".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithGoogleOauth;
-
-///
-/// Initializes union class with tag state of "web_session".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithWebSession;
-
-///
-/// Initializes union class with tag state of "qr_code".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithQrCode;
 
 ///
 /// Initializes union class with tag state of "apple_oauth".
@@ -119,6 +77,48 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
 - (instancetype)initWithFirstPartyTokenExchange;
 
 ///
+/// Initializes union class with tag state of "google_oauth".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGoogleOauth;
+
+///
+/// Initializes union class with tag state of "password".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPassword;
+
+///
+/// Initializes union class with tag state of "qr_code".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithQrCode;
+
+///
+/// Initializes union class with tag state of "saml".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSaml;
+
+///
+/// Initializes union class with tag state of "two_factor_authentication".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTwoFactorAuthentication;
+
+///
+/// Initializes union class with tag state of "web_session".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithWebSession;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -128,50 +128,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value "password".
-///
-/// @return Whether the union's current tag state has value "password".
-///
-- (BOOL)isPassword;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "two_factor_authentication".
-///
-/// @return Whether the union's current tag state has value
-/// "two_factor_authentication".
-///
-- (BOOL)isTwoFactorAuthentication;
-
-///
-/// Retrieves whether the union's current tag state has value "saml".
-///
-/// @return Whether the union's current tag state has value "saml".
-///
-- (BOOL)isSaml;
-
-///
-/// Retrieves whether the union's current tag state has value "google_oauth".
-///
-/// @return Whether the union's current tag state has value "google_oauth".
-///
-- (BOOL)isGoogleOauth;
-
-///
-/// Retrieves whether the union's current tag state has value "web_session".
-///
-/// @return Whether the union's current tag state has value "web_session".
-///
-- (BOOL)isWebSession;
-
-///
-/// Retrieves whether the union's current tag state has value "qr_code".
-///
-/// @return Whether the union's current tag state has value "qr_code".
-///
-- (BOOL)isQrCode;
 
 ///
 /// Retrieves whether the union's current tag state has value "apple_oauth".
@@ -188,6 +144,50 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGLoginMethodTag){
 /// "first_party_token_exchange".
 ///
 - (BOOL)isFirstPartyTokenExchange;
+
+///
+/// Retrieves whether the union's current tag state has value "google_oauth".
+///
+/// @return Whether the union's current tag state has value "google_oauth".
+///
+- (BOOL)isGoogleOauth;
+
+///
+/// Retrieves whether the union's current tag state has value "password".
+///
+/// @return Whether the union's current tag state has value "password".
+///
+- (BOOL)isPassword;
+
+///
+/// Retrieves whether the union's current tag state has value "qr_code".
+///
+/// @return Whether the union's current tag state has value "qr_code".
+///
+- (BOOL)isQrCode;
+
+///
+/// Retrieves whether the union's current tag state has value "saml".
+///
+/// @return Whether the union's current tag state has value "saml".
+///
+- (BOOL)isSaml;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "two_factor_authentication".
+///
+/// @return Whether the union's current tag state has value
+/// "two_factor_authentication".
+///
+- (BOOL)isTwoFactorAuthentication;
+
+///
+/// Retrieves whether the union's current tag state has value "web_session".
+///
+/// @return Whether the union's current tag state has value "web_session".
+///
+- (BOOL)isWebSession;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

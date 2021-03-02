@@ -50,6 +50,6 @@ typedef enum : NSUInteger {
 +(void)logEventWithType:(LogEventTypes)eventType;
 +(void)logExceptionEvent:(NSException *)exception;
 +(void)logEventSettingWithType:(LogEventSettingTypes)eventType andSettings:(NSDictionary *)currentSetting;
-+(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes flags:(MSFlags)flags;
++(void)logEventWithName:(NSString *)eventName customAttributes:(NSDictionary *)attributes flags:(MSACFlags)flags;
 
 @end

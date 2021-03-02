@@ -41,7 +41,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag){
     /// The new designated owner has not added the folder to their Dropbox.
     DBSHARINGTransferFolderErrorDNewOwnerUnmounted,
 
-    /// The new designated owner's e-mail address is unverified.
+    /// The new designated owner's email address is not verified. This
+    /// functionality is only available on accounts with a verified email
+    /// address. Users can verify their email address here
+    /// https://www.dropbox.com/help/317.
     DBSHARINGTransferFolderErrorDNewOwnerEmailUnverified,
 
     /// This action cannot be performed on a team shared folder.
@@ -107,7 +110,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGTransferFolderErrorTag){
 /// Initializes union class with tag state of "new_owner_email_unverified".
 ///
 /// Description of the "new_owner_email_unverified" tag state: The new
-/// designated owner's e-mail address is unverified.
+/// designated owner's email address is not verified. This functionality is only
+/// available on accounts with a verified email address. Users can verify their
+/// email address here https://www.dropbox.com/help/317.
 ///
 /// @return An initialized instance.
 ///

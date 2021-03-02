@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGTfaConfiguration` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
     /// (no description).
+    DBTEAMLOGTfaConfigurationAuthenticator,
+
+    /// (no description).
     DBTEAMLOGTfaConfigurationDisabled,
 
     /// (no description).
@@ -39,9 +42,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
 
     /// (no description).
     DBTEAMLOGTfaConfigurationSms,
-
-    /// (no description).
-    DBTEAMLOGTfaConfigurationAuthenticator,
 
     /// (no description).
     DBTEAMLOGTfaConfigurationOther,
@@ -52,6 +52,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
 @property (nonatomic, readonly) DBTEAMLOGTfaConfigurationTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "authenticator".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAuthenticator;
 
 ///
 /// Initializes union class with tag state of "disabled".
@@ -75,13 +82,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
 - (instancetype)initWithSms;
 
 ///
-/// Initializes union class with tag state of "authenticator".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithAuthenticator;
-
-///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -91,6 +91,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "authenticator".
+///
+/// @return Whether the union's current tag state has value "authenticator".
+///
+- (BOOL)isAuthenticator;
 
 ///
 /// Retrieves whether the union's current tag state has value "disabled".
@@ -112,13 +119,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGTfaConfigurationTag){
 /// @return Whether the union's current tag state has value "sms".
 ///
 - (BOOL)isSms;
-
-///
-/// Retrieves whether the union's current tag state has value "authenticator".
-///
-/// @return Whether the union's current tag state has value "authenticator".
-///
-- (BOOL)isAuthenticator;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

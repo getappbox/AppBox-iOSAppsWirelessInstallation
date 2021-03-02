@@ -29,22 +29,22 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGFedHandshakeAction` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedHandshakeActionTag){
     /// (no description).
-    DBTEAMLOGFedHandshakeActionInvited,
-
-    /// (no description).
     DBTEAMLOGFedHandshakeActionAcceptedInvite,
-
-    /// (no description).
-    DBTEAMLOGFedHandshakeActionRejectedInvite,
 
     /// (no description).
     DBTEAMLOGFedHandshakeActionCanceledInvite,
 
     /// (no description).
-    DBTEAMLOGFedHandshakeActionRemovedTeam,
+    DBTEAMLOGFedHandshakeActionInviteExpired,
 
     /// (no description).
-    DBTEAMLOGFedHandshakeActionInviteExpired,
+    DBTEAMLOGFedHandshakeActionInvited,
+
+    /// (no description).
+    DBTEAMLOGFedHandshakeActionRejectedInvite,
+
+    /// (no description).
+    DBTEAMLOGFedHandshakeActionRemovedTeam,
 
     /// (no description).
     DBTEAMLOGFedHandshakeActionOther,
@@ -57,25 +57,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedHandshakeActionTag){
 #pragma mark - Constructors
 
 ///
-/// Initializes union class with tag state of "invited".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithInvited;
-
-///
 /// Initializes union class with tag state of "accepted_invite".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAcceptedInvite;
-
-///
-/// Initializes union class with tag state of "rejected_invite".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithRejectedInvite;
 
 ///
 /// Initializes union class with tag state of "canceled_invite".
@@ -85,18 +71,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedHandshakeActionTag){
 - (instancetype)initWithCanceledInvite;
 
 ///
-/// Initializes union class with tag state of "removed_team".
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithRemovedTeam;
-
-///
 /// Initializes union class with tag state of "invite_expired".
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithInviteExpired;
+
+///
+/// Initializes union class with tag state of "invited".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInvited;
+
+///
+/// Initializes union class with tag state of "rejected_invite".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRejectedInvite;
+
+///
+/// Initializes union class with tag state of "removed_team".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithRemovedTeam;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -110,25 +110,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedHandshakeActionTag){
 #pragma mark - Tag state methods
 
 ///
-/// Retrieves whether the union's current tag state has value "invited".
-///
-/// @return Whether the union's current tag state has value "invited".
-///
-- (BOOL)isInvited;
-
-///
 /// Retrieves whether the union's current tag state has value "accepted_invite".
 ///
 /// @return Whether the union's current tag state has value "accepted_invite".
 ///
 - (BOOL)isAcceptedInvite;
-
-///
-/// Retrieves whether the union's current tag state has value "rejected_invite".
-///
-/// @return Whether the union's current tag state has value "rejected_invite".
-///
-- (BOOL)isRejectedInvite;
 
 ///
 /// Retrieves whether the union's current tag state has value "canceled_invite".
@@ -138,18 +124,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGFedHandshakeActionTag){
 - (BOOL)isCanceledInvite;
 
 ///
-/// Retrieves whether the union's current tag state has value "removed_team".
-///
-/// @return Whether the union's current tag state has value "removed_team".
-///
-- (BOOL)isRemovedTeam;
-
-///
 /// Retrieves whether the union's current tag state has value "invite_expired".
 ///
 /// @return Whether the union's current tag state has value "invite_expired".
 ///
 - (BOOL)isInviteExpired;
+
+///
+/// Retrieves whether the union's current tag state has value "invited".
+///
+/// @return Whether the union's current tag state has value "invited".
+///
+- (BOOL)isInvited;
+
+///
+/// Retrieves whether the union's current tag state has value "rejected_invite".
+///
+/// @return Whether the union's current tag state has value "rejected_invite".
+///
+- (BOOL)isRejectedInvite;
+
+///
+/// Retrieves whether the union's current tag state has value "removed_team".
+///
+/// @return Whether the union's current tag state has value "removed_team".
+///
+- (BOOL)isRemovedTeam;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

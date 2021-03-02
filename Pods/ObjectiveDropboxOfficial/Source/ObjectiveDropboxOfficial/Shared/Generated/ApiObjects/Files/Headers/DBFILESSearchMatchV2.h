@@ -10,6 +10,7 @@
 
 @class DBFILESHighlightSpan;
 @class DBFILESMetadataV2;
+@class DBFILESSearchMatchTypeV2;
 @class DBFILESSearchMatchV2;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -30,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The metadata for the matched file or folder.
 @property (nonatomic, readonly) DBFILESMetadataV2 *metadata;
 
+/// The type of the match.
+@property (nonatomic, readonly, nullable) DBFILESSearchMatchTypeV2 *matchType;
+
 /// The list of HighlightSpan determines which parts of the file title should be
 /// highlighted.
 @property (nonatomic, readonly, nullable) NSArray<DBFILESHighlightSpan *> *highlightSpans;
@@ -40,12 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param metadata The metadata for the matched file or folder.
+/// @param matchType The type of the match.
 /// @param highlightSpans The list of HighlightSpan determines which parts of
 /// the file title should be highlighted.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMetadata:(DBFILESMetadataV2 *)metadata
+                       matchType:(nullable DBFILESSearchMatchTypeV2 *)matchType
                   highlightSpans:(nullable NSArray<DBFILESHighlightSpan *> *)highlightSpans;
 
 ///
