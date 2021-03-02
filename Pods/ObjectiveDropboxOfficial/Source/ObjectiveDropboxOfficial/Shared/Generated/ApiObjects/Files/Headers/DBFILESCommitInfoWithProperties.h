@@ -50,7 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param strictConflict Be more strict about how each WriteMode detects
 /// conflict. For example, always return a conflict error when mode = `update`
 /// in `DBFILESWriteMode` and the given "rev" doesn't match the existing file's
-/// "rev", even if the existing file has been deleted.
+/// "rev", even if the existing file has been deleted. This also forces a
+/// conflict even when the target path refers to a file with identical contents.
 ///
 /// @return An initialized instance.
 ///

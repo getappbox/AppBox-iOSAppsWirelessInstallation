@@ -86,13 +86,13 @@
 
 - (void)db_handleResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *)error {
 #pragma unused(response)
-  NSDictionary<NSString *, id> *resultDict = [self resultDictionaryFromData:data];
   DBOAuthResult *result = nil;
   if (error) {
     // Network error
     result = [DBOAuthResult unknownErrorWithErrorDescription:error.localizedDescription];
   } else {
     // No network error, parse response data
+    NSDictionary<NSString *, id> *resultDict = [self db_resultDictionaryFromData:data];
     result = [self db_extractResultFromDict:resultDict];
   }
 
@@ -103,7 +103,10 @@
   _retainSelf = nil;
 }
 
-- (NSDictionary<NSString *, id> *)resultDictionaryFromData:(NSData *)data {
+- (NSDictionary<NSString *, id> *)db_resultDictionaryFromData:(NSData *)data {
+  if (data == nil) {
+    return nil;
+  }
   id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
   if ([json isKindOfClass:[NSDictionary<NSString *, id> class]]) {
     return json;

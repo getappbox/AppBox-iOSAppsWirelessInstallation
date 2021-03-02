@@ -35,12 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// Details of a user's name.
 @property (nonatomic, readonly) DBUSERSName *name;
 
-/// The user's e-mail address. Do not rely on this without checking the
+/// The user's email address. Do not rely on this without checking the
 /// emailVerified field. Even then, it's possible that the user has since lost
-/// access to their e-mail.
+/// access to their email.
 @property (nonatomic, readonly, copy) NSString *email;
 
-/// Whether the user has verified their e-mail address.
+/// Whether the user has verified their email address.
 @property (nonatomic, readonly) NSNumber *emailVerified;
 
 /// URL for the photo representing the user, if one is set.
@@ -56,10 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param accountId The user's unique Dropbox ID.
 /// @param name Details of a user's name.
-/// @param email The user's e-mail address. Do not rely on this without checking
+/// @param email The user's email address. Do not rely on this without checking
 /// the emailVerified field. Even then, it's possible that the user has since
-/// lost access to their e-mail.
-/// @param emailVerified Whether the user has verified their e-mail address.
+/// lost access to their email.
+/// @param emailVerified Whether the user has verified their email address.
 /// @param disabled Whether the user has been disabled.
 /// @param profilePhotoUrl URL for the photo representing the user, if one is
 /// set.
@@ -79,10 +79,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param accountId The user's unique Dropbox ID.
 /// @param name Details of a user's name.
-/// @param email The user's e-mail address. Do not rely on this without checking
+/// @param email The user's email address. Do not rely on this without checking
 /// the emailVerified field. Even then, it's possible that the user has since
-/// lost access to their e-mail.
-/// @param emailVerified Whether the user has verified their e-mail address.
+/// lost access to their email.
+/// @param emailVerified Whether the user has verified their email address.
 /// @param disabled Whether the user has been disabled.
 ///
 /// @return An initialized instance.

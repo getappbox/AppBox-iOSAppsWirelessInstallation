@@ -33,7 +33,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag){
     /// Unable to access shared folder.
     DBSHARINGAddFolderMemberErrorAccessError,
 
-    /// The current user's e-mail address is unverified.
+    /// This user's email address is not verified. This functionality is only
+    /// available on accounts with a verified email address. Users can verify
+    /// their email address here https://www.dropbox.com/help/317.
     DBSHARINGAddFolderMemberErrorEmailUnverified,
 
     /// The current user has been banned.
@@ -116,8 +118,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAddFolderMemberErrorTag){
 ///
 /// Initializes union class with tag state of "email_unverified".
 ///
-/// Description of the "email_unverified" tag state: The current user's e-mail
-/// address is unverified.
+/// Description of the "email_unverified" tag state: This user's email address
+/// is not verified. This functionality is only available on accounts with a
+/// verified email address. Users can verify their email address here
+/// https://www.dropbox.com/help/317.
 ///
 /// @return An initialized instance.
 ///

@@ -167,7 +167,9 @@
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
 #import "DBFILESUploadSessionStartArg.h"
+#import "DBFILESUploadSessionStartError.h"
 #import "DBFILESUploadSessionStartResult.h"
+#import "DBFILESUploadSessionType.h"
 #import "DBFILESUploadWriteFailed.h"
 #import "DBFILESWriteError.h"
 #import "DBFILESWriteMode.h"
@@ -1387,9 +1389,12 @@
   return [self.client requestUpload:route arg:arg inputUrl:inputUrl];
 }
 
-- (DBUploadTask *)uploadSessionStartUrl:(NSNumber *)close inputUrl:(NSString *)inputUrl {
+- (DBUploadTask *)uploadSessionStartUrl:(NSNumber *)close
+                            sessionType:(DBFILESUploadSessionType *)sessionType
+                               inputUrl:(NSString *)inputUrl {
   DBRoute *route = DBFILESRouteObjects.DBFILESUploadSessionStart;
-  DBFILESUploadSessionStartArg *arg = [[DBFILESUploadSessionStartArg alloc] initWithClose:close];
+  DBFILESUploadSessionStartArg *arg =
+      [[DBFILESUploadSessionStartArg alloc] initWithClose:close sessionType:sessionType];
   return [self.client requestUpload:route arg:arg inputUrl:inputUrl];
 }
 
@@ -1399,9 +1404,12 @@
   return [self.client requestUpload:route arg:arg inputData:inputData];
 }
 
-- (DBUploadTask *)uploadSessionStartData:(NSNumber *)close inputData:(NSData *)inputData {
+- (DBUploadTask *)uploadSessionStartData:(NSNumber *)close
+                             sessionType:(DBFILESUploadSessionType *)sessionType
+                               inputData:(NSData *)inputData {
   DBRoute *route = DBFILESRouteObjects.DBFILESUploadSessionStart;
-  DBFILESUploadSessionStartArg *arg = [[DBFILESUploadSessionStartArg alloc] initWithClose:close];
+  DBFILESUploadSessionStartArg *arg =
+      [[DBFILESUploadSessionStartArg alloc] initWithClose:close sessionType:sessionType];
   return [self.client requestUpload:route arg:arg inputData:inputData];
 }
 
@@ -1411,9 +1419,12 @@
   return [self.client requestUpload:route arg:arg inputStream:inputStream];
 }
 
-- (DBUploadTask *)uploadSessionStartStream:(NSNumber *)close inputStream:(NSInputStream *)inputStream {
+- (DBUploadTask *)uploadSessionStartStream:(NSNumber *)close
+                               sessionType:(DBFILESUploadSessionType *)sessionType
+                               inputStream:(NSInputStream *)inputStream {
   DBRoute *route = DBFILESRouteObjects.DBFILESUploadSessionStart;
-  DBFILESUploadSessionStartArg *arg = [[DBFILESUploadSessionStartArg alloc] initWithClose:close];
+  DBFILESUploadSessionStartArg *arg =
+      [[DBFILESUploadSessionStartArg alloc] initWithClose:close sessionType:sessionType];
   return [self.client requestUpload:route arg:arg inputStream:inputStream];
 }
 

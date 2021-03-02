@@ -51,6 +51,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteErrorTag){
     /// This endpoint cannot move or delete team folders.
     DBFILESWriteErrorTeamFolder,
 
+    /// This file operation is not allowed at this path.
+    DBFILESWriteErrorOperationSuppressed,
+
     /// There are too many write operations in user's Dropbox. Please retry this
     /// request.
     DBFILESWriteErrorTooManyWriteOperations,
@@ -149,6 +152,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteErrorTag){
 - (instancetype)initWithTeamFolder;
 
 ///
+/// Initializes union class with tag state of "operation_suppressed".
+///
+/// Description of the "operation_suppressed" tag state: This file operation is
+/// not allowed at this path.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOperationSuppressed;
+
+///
 /// Initializes union class with tag state of "too_many_write_operations".
 ///
 /// Description of the "too_many_write_operations" tag state: There are too many
@@ -220,6 +233,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteErrorTag){
 /// @return Whether the union's current tag state has value "team_folder".
 ///
 - (BOOL)isTeamFolder;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "operation_suppressed".
+///
+/// @return Whether the union's current tag state has value
+/// "operation_suppressed".
+///
+- (BOOL)isOperationSuppressed;
 
 ///
 /// Retrieves whether the union's current tag state has value

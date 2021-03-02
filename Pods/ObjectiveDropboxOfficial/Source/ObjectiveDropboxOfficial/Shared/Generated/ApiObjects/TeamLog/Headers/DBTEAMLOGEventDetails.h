@@ -14,6 +14,8 @@
 @class DBTEAMLOGAccountCaptureNotificationEmailsSentDetails;
 @class DBTEAMLOGAccountCaptureRelinquishAccountDetails;
 @class DBTEAMLOGAccountLockOrUnlockedDetails;
+@class DBTEAMLOGAdminAlertingChangedAlertConfigDetails;
+@class DBTEAMLOGAdminAlertingTriggeredAlertDetails;
 @class DBTEAMLOGAllowDownloadDisabledDetails;
 @class DBTEAMLOGAllowDownloadEnabledDetails;
 @class DBTEAMLOGAppLinkTeamDetails;
@@ -31,7 +33,11 @@
 @class DBTEAMLOGCameraUploadsPolicyChangedDetails;
 @class DBTEAMLOGChangedEnterpriseAdminRoleDetails;
 @class DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetails;
+@class DBTEAMLOGClassificationChangePolicyDetails;
+@class DBTEAMLOGClassificationCreateReportDetails;
+@class DBTEAMLOGClassificationCreateReportFailDetails;
 @class DBTEAMLOGCollectionShareDetails;
+@class DBTEAMLOGComputerBackupPolicyChangedDetails;
 @class DBTEAMLOGContentAdministrationPolicyChangedDetails;
 @class DBTEAMLOGCreateFolderDetails;
 @class DBTEAMLOGCreateTeamInviteLinkDetails;
@@ -53,6 +59,7 @@
 @class DBTEAMLOGDeviceLinkSuccessDetails;
 @class DBTEAMLOGDeviceManagementDisabledDetails;
 @class DBTEAMLOGDeviceManagementEnabledDetails;
+@class DBTEAMLOGDeviceSyncBackupStatusChangedDetails;
 @class DBTEAMLOGDeviceUnlinkDetails;
 @class DBTEAMLOGDirectoryRestrictionsAddMembersDetails;
 @class DBTEAMLOGDirectoryRestrictionsRemoveMembersDetails;
@@ -66,6 +73,8 @@
 @class DBTEAMLOGDomainVerificationAddDomainFailDetails;
 @class DBTEAMLOGDomainVerificationAddDomainSuccessDetails;
 @class DBTEAMLOGDomainVerificationRemoveDomainDetails;
+@class DBTEAMLOGDropboxPasswordsExportedDetails;
+@class DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails;
 @class DBTEAMLOGEmmAddExceptionDetails;
 @class DBTEAMLOGEmmChangePolicyDetails;
 @class DBTEAMLOGEmmCreateExceptionsReportDetails;
@@ -126,6 +135,17 @@
 @class DBTEAMLOGFolderOverviewItemPinnedDetails;
 @class DBTEAMLOGFolderOverviewItemUnpinnedDetails;
 @class DBTEAMLOGGoogleSsoChangePolicyDetails;
+@class DBTEAMLOGGovernancePolicyAddFolderFailedDetails;
+@class DBTEAMLOGGovernancePolicyAddFoldersDetails;
+@class DBTEAMLOGGovernancePolicyCreateDetails;
+@class DBTEAMLOGGovernancePolicyDeleteDetails;
+@class DBTEAMLOGGovernancePolicyEditDetailsDetails;
+@class DBTEAMLOGGovernancePolicyEditDurationDetails;
+@class DBTEAMLOGGovernancePolicyExportCreatedDetails;
+@class DBTEAMLOGGovernancePolicyExportRemovedDetails;
+@class DBTEAMLOGGovernancePolicyRemoveFoldersDetails;
+@class DBTEAMLOGGovernancePolicyReportCreatedDetails;
+@class DBTEAMLOGGovernancePolicyZipPartDownloadedDetails;
 @class DBTEAMLOGGroupAddExternalIdDetails;
 @class DBTEAMLOGGroupAddMemberDetails;
 @class DBTEAMLOGGroupChangeExternalIdDetails;
@@ -167,6 +187,7 @@
 @class DBTEAMLOGMemberChangeExternalIdDetails;
 @class DBTEAMLOGMemberChangeMembershipTypeDetails;
 @class DBTEAMLOGMemberChangeNameDetails;
+@class DBTEAMLOGMemberChangeResellerRoleDetails;
 @class DBTEAMLOGMemberChangeStatusDetails;
 @class DBTEAMLOGMemberDeleteManualContactsDetails;
 @class DBTEAMLOGMemberDeleteProfilePhotoDetails;
@@ -338,6 +359,8 @@
 @class DBTEAMLOGSharingChangeFolderJoinPolicyDetails;
 @class DBTEAMLOGSharingChangeLinkPolicyDetails;
 @class DBTEAMLOGSharingChangeMemberPolicyDetails;
+@class DBTEAMLOGShmodelDisableDownloadsDetails;
+@class DBTEAMLOGShmodelEnableDownloadsDetails;
 @class DBTEAMLOGShmodelGroupShareDetails;
 @class DBTEAMLOGShowcaseAccessGrantedDetails;
 @class DBTEAMLOGShowcaseAddMemberDetails;
@@ -388,6 +411,7 @@
 @class DBTEAMLOGStartedEnterpriseAdminSessionDetails;
 @class DBTEAMLOGTeamActivityCreateReportDetails;
 @class DBTEAMLOGTeamActivityCreateReportFailDetails;
+@class DBTEAMLOGTeamBrandingPolicyChangedDetails;
 @class DBTEAMLOGTeamExtensionsPolicyChangedDetails;
 @class DBTEAMLOGTeamFolderChangeStatusDetails;
 @class DBTEAMLOGTeamFolderCreateDetails;
@@ -414,10 +438,13 @@
 @class DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamDetails;
 @class DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamDetails;
 @class DBTEAMLOGTeamMergeToDetails;
+@class DBTEAMLOGTeamProfileAddBackgroundDetails;
 @class DBTEAMLOGTeamProfileAddLogoDetails;
+@class DBTEAMLOGTeamProfileChangeBackgroundDetails;
 @class DBTEAMLOGTeamProfileChangeDefaultLanguageDetails;
 @class DBTEAMLOGTeamProfileChangeLogoDetails;
 @class DBTEAMLOGTeamProfileChangeNameDetails;
+@class DBTEAMLOGTeamProfileRemoveBackgroundDetails;
 @class DBTEAMLOGTeamProfileRemoveLogoDetails;
 @class DBTEAMLOGTeamSelectiveSyncPolicyChangedDetails;
 @class DBTEAMLOGTeamSelectiveSyncSettingsChangedDetails;
@@ -459,6 +486,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMLOGEventDetailsTag` enum type represents the possible tag states
 /// with which the `DBTEAMLOGEventDetails` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
+    /// (no description).
+    DBTEAMLOGEventDetailsAdminAlertingChangedAlertConfigDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsAdminAlertingTriggeredAlertDetails,
+
     /// (no description).
     DBTEAMLOGEventDetailsAppLinkTeamDetails,
 
@@ -502,6 +535,72 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsFileUnresolveCommentDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyAddFoldersDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyAddFolderFailedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyCreateDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyDeleteDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyEditDetailsDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyEditDurationDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyExportCreatedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyExportRemovedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyRemoveFoldersDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyReportCreatedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsGovernancePolicyZipPartDownloadedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsDeviceChangeIpDesktopDetails,
 
     /// (no description).
@@ -529,7 +628,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsDeviceManagementEnabledDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsDeviceSyncBackupStatusChangedDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsDeviceUnlinkDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsDropboxPasswordsExportedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails,
@@ -694,39 +802,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsGroupRenameDetails,
 
     /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsActivateAHoldDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsAddMembersDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsChangeHoldDetailsDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsChangeHoldNameDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsExportAHoldDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsExportCancelledDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsExportDownloadedDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsExportRemovedDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsReleaseAHoldDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsRemoveMembersDetails,
-
-    /// (no description).
-    DBTEAMLOGEventDetailsLegalHoldsReportAHoldDetails,
-
-    /// (no description).
     DBTEAMLOGEventDetailsAccountLockOrUnlockedDetails,
 
     /// (no description).
@@ -788,6 +863,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
     /// (no description).
     DBTEAMLOGEventDetailsMemberChangeNameDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsMemberChangeResellerRoleDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsMemberChangeStatusDetails,
@@ -992,6 +1070,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
     /// (no description).
     DBTEAMLOGEventDetailsPasswordResetAllDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsClassificationCreateReportDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsClassificationCreateReportFailDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsEmmCreateExceptionsReportDetails,
@@ -1285,6 +1369,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsSharedNoteOpenedDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsShmodelDisableDownloadsDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsShmodelEnableDownloadsDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsShmodelGroupShareDetails,
 
     /// (no description).
@@ -1418,6 +1508,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
     /// (no description).
     DBTEAMLOGEventDetailsCameraUploadsPolicyChangedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsClassificationChangePolicyDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsComputerBackupPolicyChangedDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsContentAdministrationPolicyChangedDetails,
@@ -1591,6 +1687,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsSsoChangePolicyDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsTeamBrandingPolicyChangedDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsTeamExtensionsPolicyChangedDetails,
 
     /// (no description).
@@ -1633,7 +1732,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsTeamMergeToDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileAddBackgroundDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsTeamProfileAddLogoDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileChangeBackgroundDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsTeamProfileChangeDefaultLanguageDetails,
@@ -1643,6 +1748,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
     /// (no description).
     DBTEAMLOGEventDetailsTeamProfileChangeNameDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsTeamProfileRemoveBackgroundDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsTeamProfileRemoveLogoDetails,
@@ -1755,6 +1863,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMLOGEventDetailsTag tag;
 
+/// (no description). @note Ensure the
+/// `isAdminAlertingChangedAlertConfigDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGAdminAlertingChangedAlertConfigDetails *adminAlertingChangedAlertConfigDetails;
+
+/// (no description). @note Ensure the `isAdminAlertingTriggeredAlertDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGAdminAlertingTriggeredAlertDetails *adminAlertingTriggeredAlertDetails;
+
 /// (no description). @note Ensure the `isAppLinkTeamDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAppLinkTeamDetails *appLinkTeamDetails;
@@ -1812,6 +1930,108 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGFileUnresolveCommentDetails *fileUnresolveCommentDetails;
 
+/// (no description). @note Ensure the `isGovernancePolicyAddFoldersDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyAddFoldersDetails *governancePolicyAddFoldersDetails;
+
+/// (no description). @note Ensure the
+/// `isGovernancePolicyAddFolderFailedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyAddFolderFailedDetails *governancePolicyAddFolderFailedDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyCreateDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyCreateDetails *governancePolicyCreateDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyDeleteDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyDeleteDetails *governancePolicyDeleteDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyEditDetailsDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyEditDetailsDetails *governancePolicyEditDetailsDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyEditDurationDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyEditDurationDetails *governancePolicyEditDurationDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyExportCreatedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyExportCreatedDetails *governancePolicyExportCreatedDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyExportRemovedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyExportRemovedDetails *governancePolicyExportRemovedDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyRemoveFoldersDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyRemoveFoldersDetails *governancePolicyRemoveFoldersDetails;
+
+/// (no description). @note Ensure the `isGovernancePolicyReportCreatedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGGovernancePolicyReportCreatedDetails *governancePolicyReportCreatedDetails;
+
+/// (no description). @note Ensure the
+/// `isGovernancePolicyZipPartDownloadedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *governancePolicyZipPartDownloadedDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsActivateAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsActivateAHoldDetails *legalHoldsActivateAHoldDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsAddMembersDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsAddMembersDetails *legalHoldsAddMembersDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsChangeHoldDetailsDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *legalHoldsChangeHoldDetailsDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsChangeHoldNameDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsChangeHoldNameDetails *legalHoldsChangeHoldNameDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportAHoldDetails *legalHoldsExportAHoldDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportCancelledDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportCancelledDetails *legalHoldsExportCancelledDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportDownloadedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportDownloadedDetails *legalHoldsExportDownloadedDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsExportRemovedDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportRemovedDetails *legalHoldsExportRemovedDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsReleaseAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsReleaseAHoldDetails *legalHoldsReleaseAHoldDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsRemoveMembersDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsRemoveMembersDetails *legalHoldsRemoveMembersDetails;
+
+/// (no description). @note Ensure the `isLegalHoldsReportAHoldDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGLegalHoldsReportAHoldDetails *legalHoldsReportAHoldDetails;
+
 /// (no description). @note Ensure the `isDeviceChangeIpDesktopDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGDeviceChangeIpDesktopDetails *deviceChangeIpDesktopDetails;
@@ -1851,9 +2071,25 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGDeviceManagementEnabledDetails *deviceManagementEnabledDetails;
 
+/// (no description). @note Ensure the `isDeviceSyncBackupStatusChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGDeviceSyncBackupStatusChangedDetails *deviceSyncBackupStatusChangedDetails;
+
 /// (no description). @note Ensure the `isDeviceUnlinkDetails` method returns
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGDeviceUnlinkDetails *deviceUnlinkDetails;
+
+/// (no description). @note Ensure the `isDropboxPasswordsExportedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGDropboxPasswordsExportedDetails *dropboxPasswordsExportedDetails;
+
+/// (no description). @note Ensure the
+/// `isDropboxPasswordsNewDeviceEnrolledDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *dropboxPasswordsNewDeviceEnrolledDetails;
 
 /// (no description). @note Ensure the `isEmmRefreshAuthTokenDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2097,54 +2333,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGGroupRenameDetails *groupRenameDetails;
 
-/// (no description). @note Ensure the `isLegalHoldsActivateAHoldDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsActivateAHoldDetails *legalHoldsActivateAHoldDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsAddMembersDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsAddMembersDetails *legalHoldsAddMembersDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsChangeHoldDetailsDetails`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *legalHoldsChangeHoldDetailsDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsChangeHoldNameDetails`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsChangeHoldNameDetails *legalHoldsChangeHoldNameDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsExportAHoldDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportAHoldDetails *legalHoldsExportAHoldDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsExportCancelledDetails`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportCancelledDetails *legalHoldsExportCancelledDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsExportDownloadedDetails`
-/// method returns true before accessing, otherwise a runtime exception will be
-/// raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportDownloadedDetails *legalHoldsExportDownloadedDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsExportRemovedDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsExportRemovedDetails *legalHoldsExportRemovedDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsReleaseAHoldDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsReleaseAHoldDetails *legalHoldsReleaseAHoldDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsRemoveMembersDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsRemoveMembersDetails *legalHoldsRemoveMembersDetails;
-
-/// (no description). @note Ensure the `isLegalHoldsReportAHoldDetails` method
-/// returns true before accessing, otherwise a runtime exception will be raised.
-@property (nonatomic, readonly) DBTEAMLOGLegalHoldsReportAHoldDetails *legalHoldsReportAHoldDetails;
-
 /// (no description). @note Ensure the `isAccountLockOrUnlockedDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAccountLockOrUnlockedDetails *accountLockOrUnlockedDetails;
@@ -2235,6 +2423,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// (no description). @note Ensure the `isMemberChangeNameDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGMemberChangeNameDetails *memberChangeNameDetails;
+
+/// (no description). @note Ensure the `isMemberChangeResellerRoleDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGMemberChangeResellerRoleDetails *memberChangeResellerRoleDetails;
 
 /// (no description). @note Ensure the `isMemberChangeStatusDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2534,6 +2727,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// (no description). @note Ensure the `isPasswordResetAllDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGPasswordResetAllDetails *passwordResetAllDetails;
+
+/// (no description). @note Ensure the `isClassificationCreateReportDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGClassificationCreateReportDetails *classificationCreateReportDetails;
+
+/// (no description). @note Ensure the `isClassificationCreateReportFailDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGClassificationCreateReportFailDetails *classificationCreateReportFailDetails;
 
 /// (no description). @note Ensure the `isEmmCreateExceptionsReportDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
@@ -2991,6 +3194,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSharedNoteOpenedDetails *sharedNoteOpenedDetails;
 
+/// (no description). @note Ensure the `isShmodelDisableDownloadsDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShmodelDisableDownloadsDetails *shmodelDisableDownloadsDetails;
+
+/// (no description). @note Ensure the `isShmodelEnableDownloadsDetails` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGShmodelEnableDownloadsDetails *shmodelEnableDownloadsDetails;
+
 /// (no description). @note Ensure the `isShmodelGroupShareDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGShmodelGroupShareDetails *shmodelGroupShareDetails;
@@ -3180,6 +3391,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGCameraUploadsPolicyChangedDetails *cameraUploadsPolicyChangedDetails;
+
+/// (no description). @note Ensure the `isClassificationChangePolicyDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGClassificationChangePolicyDetails *classificationChangePolicyDetails;
+
+/// (no description). @note Ensure the `isComputerBackupPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGComputerBackupPolicyChangedDetails *computerBackupPolicyChangedDetails;
 
 /// (no description). @note Ensure the
 /// `isContentAdministrationPolicyChangedDetails` method returns true before
@@ -3469,6 +3690,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGSsoChangePolicyDetails *ssoChangePolicyDetails;
 
+/// (no description). @note Ensure the `isTeamBrandingPolicyChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamBrandingPolicyChangedDetails *teamBrandingPolicyChangedDetails;
+
 /// (no description). @note Ensure the `isTeamExtensionsPolicyChangedDetails`
 /// method returns true before accessing, otherwise a runtime exception will be
 /// raised.
@@ -3536,9 +3762,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamMergeToDetails *teamMergeToDetails;
 
+/// (no description). @note Ensure the `isTeamProfileAddBackgroundDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamProfileAddBackgroundDetails *teamProfileAddBackgroundDetails;
+
 /// (no description). @note Ensure the `isTeamProfileAddLogoDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamProfileAddLogoDetails *teamProfileAddLogoDetails;
+
+/// (no description). @note Ensure the `isTeamProfileChangeBackgroundDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamProfileChangeBackgroundDetails *teamProfileChangeBackgroundDetails;
 
 /// (no description). @note Ensure the
 /// `isTeamProfileChangeDefaultLanguageDetails` method returns true before
@@ -3553,6 +3789,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// (no description). @note Ensure the `isTeamProfileChangeNameDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGTeamProfileChangeNameDetails *teamProfileChangeNameDetails;
+
+/// (no description). @note Ensure the `isTeamProfileRemoveBackgroundDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGTeamProfileRemoveBackgroundDetails *teamProfileRemoveBackgroundDetails;
 
 /// (no description). @note Ensure the `isTeamProfileRemoveLogoDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -3730,6 +3971,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 #pragma mark - Constructors
 
 ///
+/// Initializes union class with tag state of
+/// "admin_alerting_changed_alert_config_details".
+///
+/// @param adminAlertingChangedAlertConfigDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAdminAlertingChangedAlertConfigDetails:
+    (DBTEAMLOGAdminAlertingChangedAlertConfigDetails *)adminAlertingChangedAlertConfigDetails;
+
+///
+/// Initializes union class with tag state of
+/// "admin_alerting_triggered_alert_details".
+///
+/// @param adminAlertingTriggeredAlertDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAdminAlertingTriggeredAlertDetails:
+    (DBTEAMLOGAdminAlertingTriggeredAlertDetails *)adminAlertingTriggeredAlertDetails;
+
+///
 /// Initializes union class with tag state of "app_link_team_details".
 ///
 /// @param appLinkTeamDetails (no description).
@@ -3861,6 +4124,246 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Initializes union class with tag state of
+/// "governance_policy_add_folders_details".
+///
+/// @param governancePolicyAddFoldersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyAddFoldersDetails:
+    (DBTEAMLOGGovernancePolicyAddFoldersDetails *)governancePolicyAddFoldersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_add_folder_failed_details".
+///
+/// @param governancePolicyAddFolderFailedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyAddFolderFailedDetails:
+    (DBTEAMLOGGovernancePolicyAddFolderFailedDetails *)governancePolicyAddFolderFailedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_create_details".
+///
+/// @param governancePolicyCreateDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyCreateDetails:
+    (DBTEAMLOGGovernancePolicyCreateDetails *)governancePolicyCreateDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_delete_details".
+///
+/// @param governancePolicyDeleteDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyDeleteDetails:
+    (DBTEAMLOGGovernancePolicyDeleteDetails *)governancePolicyDeleteDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_edit_details_details".
+///
+/// @param governancePolicyEditDetailsDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyEditDetailsDetails:
+    (DBTEAMLOGGovernancePolicyEditDetailsDetails *)governancePolicyEditDetailsDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_edit_duration_details".
+///
+/// @param governancePolicyEditDurationDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyEditDurationDetails:
+    (DBTEAMLOGGovernancePolicyEditDurationDetails *)governancePolicyEditDurationDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_export_created_details".
+///
+/// @param governancePolicyExportCreatedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyExportCreatedDetails:
+    (DBTEAMLOGGovernancePolicyExportCreatedDetails *)governancePolicyExportCreatedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_export_removed_details".
+///
+/// @param governancePolicyExportRemovedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyExportRemovedDetails:
+    (DBTEAMLOGGovernancePolicyExportRemovedDetails *)governancePolicyExportRemovedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_remove_folders_details".
+///
+/// @param governancePolicyRemoveFoldersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyRemoveFoldersDetails:
+    (DBTEAMLOGGovernancePolicyRemoveFoldersDetails *)governancePolicyRemoveFoldersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_report_created_details".
+///
+/// @param governancePolicyReportCreatedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyReportCreatedDetails:
+    (DBTEAMLOGGovernancePolicyReportCreatedDetails *)governancePolicyReportCreatedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "governance_policy_zip_part_downloaded_details".
+///
+/// @param governancePolicyZipPartDownloadedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithGovernancePolicyZipPartDownloadedDetails:
+    (DBTEAMLOGGovernancePolicyZipPartDownloadedDetails *)governancePolicyZipPartDownloadedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_activate_a_hold_details".
+///
+/// @param legalHoldsActivateAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsActivateAHoldDetails:
+    (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails;
+
+///
+/// Initializes union class with tag state of "legal_holds_add_members_details".
+///
+/// @param legalHoldsAddMembersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsAddMembersDetails:(DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_change_hold_details_details".
+///
+/// @param legalHoldsChangeHoldDetailsDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsChangeHoldDetailsDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_change_hold_name_details".
+///
+/// @param legalHoldsChangeHoldNameDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsChangeHoldNameDetails:
+    (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_a_hold_details".
+///
+/// @param legalHoldsExportAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportAHoldDetails:
+    (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_cancelled_details".
+///
+/// @param legalHoldsExportCancelledDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportCancelledDetails:
+    (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_downloaded_details".
+///
+/// @param legalHoldsExportDownloadedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportDownloadedDetails:
+    (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_export_removed_details".
+///
+/// @param legalHoldsExportRemovedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsExportRemovedDetails:
+    (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_release_a_hold_details".
+///
+/// @param legalHoldsReleaseAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsReleaseAHoldDetails:
+    (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_remove_members_details".
+///
+/// @param legalHoldsRemoveMembersDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsRemoveMembersDetails:
+    (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails;
+
+///
+/// Initializes union class with tag state of
+/// "legal_holds_report_a_hold_details".
+///
+/// @param legalHoldsReportAHoldDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithLegalHoldsReportAHoldDetails:
+    (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails;
+
+///
+/// Initializes union class with tag state of
 /// "device_change_ip_desktop_details".
 ///
 /// @param deviceChangeIpDesktopDetails (no description).
@@ -3951,6 +4454,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     (DBTEAMLOGDeviceManagementEnabledDetails *)deviceManagementEnabledDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "device_sync_backup_status_changed_details".
+///
+/// @param deviceSyncBackupStatusChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDeviceSyncBackupStatusChangedDetails:
+    (DBTEAMLOGDeviceSyncBackupStatusChangedDetails *)deviceSyncBackupStatusChangedDetails;
+
+///
 /// Initializes union class with tag state of "device_unlink_details".
 ///
 /// @param deviceUnlinkDetails (no description).
@@ -3958,6 +4472,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDeviceUnlinkDetails:(DBTEAMLOGDeviceUnlinkDetails *)deviceUnlinkDetails;
+
+///
+/// Initializes union class with tag state of
+/// "dropbox_passwords_exported_details".
+///
+/// @param dropboxPasswordsExportedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDropboxPasswordsExportedDetails:
+    (DBTEAMLOGDropboxPasswordsExportedDetails *)dropboxPasswordsExportedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "dropbox_passwords_new_device_enrolled_details".
+///
+/// @param dropboxPasswordsNewDeviceEnrolledDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDropboxPasswordsNewDeviceEnrolledDetails:
+    (DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails *)dropboxPasswordsNewDeviceEnrolledDetails;
 
 ///
 /// Initializes union class with tag state of "emm_refresh_auth_token_details".
@@ -4499,125 +5035,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Initializes union class with tag state of
-/// "legal_holds_activate_a_hold_details".
-///
-/// @param legalHoldsActivateAHoldDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsActivateAHoldDetails:
-    (DBTEAMLOGLegalHoldsActivateAHoldDetails *)legalHoldsActivateAHoldDetails;
-
-///
-/// Initializes union class with tag state of "legal_holds_add_members_details".
-///
-/// @param legalHoldsAddMembersDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsAddMembersDetails:(DBTEAMLOGLegalHoldsAddMembersDetails *)legalHoldsAddMembersDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_change_hold_details_details".
-///
-/// @param legalHoldsChangeHoldDetailsDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsChangeHoldDetailsDetails:
-    (DBTEAMLOGLegalHoldsChangeHoldDetailsDetails *)legalHoldsChangeHoldDetailsDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_change_hold_name_details".
-///
-/// @param legalHoldsChangeHoldNameDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsChangeHoldNameDetails:
-    (DBTEAMLOGLegalHoldsChangeHoldNameDetails *)legalHoldsChangeHoldNameDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_export_a_hold_details".
-///
-/// @param legalHoldsExportAHoldDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsExportAHoldDetails:
-    (DBTEAMLOGLegalHoldsExportAHoldDetails *)legalHoldsExportAHoldDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_export_cancelled_details".
-///
-/// @param legalHoldsExportCancelledDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsExportCancelledDetails:
-    (DBTEAMLOGLegalHoldsExportCancelledDetails *)legalHoldsExportCancelledDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_export_downloaded_details".
-///
-/// @param legalHoldsExportDownloadedDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsExportDownloadedDetails:
-    (DBTEAMLOGLegalHoldsExportDownloadedDetails *)legalHoldsExportDownloadedDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_export_removed_details".
-///
-/// @param legalHoldsExportRemovedDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsExportRemovedDetails:
-    (DBTEAMLOGLegalHoldsExportRemovedDetails *)legalHoldsExportRemovedDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_release_a_hold_details".
-///
-/// @param legalHoldsReleaseAHoldDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsReleaseAHoldDetails:
-    (DBTEAMLOGLegalHoldsReleaseAHoldDetails *)legalHoldsReleaseAHoldDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_remove_members_details".
-///
-/// @param legalHoldsRemoveMembersDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsRemoveMembersDetails:
-    (DBTEAMLOGLegalHoldsRemoveMembersDetails *)legalHoldsRemoveMembersDetails;
-
-///
-/// Initializes union class with tag state of
-/// "legal_holds_report_a_hold_details".
-///
-/// @param legalHoldsReportAHoldDetails (no description).
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithLegalHoldsReportAHoldDetails:
-    (DBTEAMLOGLegalHoldsReportAHoldDetails *)legalHoldsReportAHoldDetails;
-
-///
-/// Initializes union class with tag state of
 /// "account_lock_or_unlocked_details".
 ///
 /// @param accountLockOrUnlockedDetails (no description).
@@ -4821,6 +5238,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMemberChangeNameDetails:(DBTEAMLOGMemberChangeNameDetails *)memberChangeNameDetails;
+
+///
+/// Initializes union class with tag state of
+/// "member_change_reseller_role_details".
+///
+/// @param memberChangeResellerRoleDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberChangeResellerRoleDetails:
+    (DBTEAMLOGMemberChangeResellerRoleDetails *)memberChangeResellerRoleDetails;
 
 ///
 /// Initializes union class with tag state of "member_change_status_details".
@@ -5504,6 +5932,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithPasswordResetAllDetails:(DBTEAMLOGPasswordResetAllDetails *)passwordResetAllDetails;
+
+///
+/// Initializes union class with tag state of
+/// "classification_create_report_details".
+///
+/// @param classificationCreateReportDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithClassificationCreateReportDetails:
+    (DBTEAMLOGClassificationCreateReportDetails *)classificationCreateReportDetails;
+
+///
+/// Initializes union class with tag state of
+/// "classification_create_report_fail_details".
+///
+/// @param classificationCreateReportFailDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithClassificationCreateReportFailDetails:
+    (DBTEAMLOGClassificationCreateReportFailDetails *)classificationCreateReportFailDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -6503,6 +6953,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 - (instancetype)initWithSharedNoteOpenedDetails:(DBTEAMLOGSharedNoteOpenedDetails *)sharedNoteOpenedDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "shmodel_disable_downloads_details".
+///
+/// @param shmodelDisableDownloadsDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShmodelDisableDownloadsDetails:
+    (DBTEAMLOGShmodelDisableDownloadsDetails *)shmodelDisableDownloadsDetails;
+
+///
+/// Initializes union class with tag state of
+/// "shmodel_enable_downloads_details".
+///
+/// @param shmodelEnableDownloadsDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithShmodelEnableDownloadsDetails:
+    (DBTEAMLOGShmodelEnableDownloadsDetails *)shmodelEnableDownloadsDetails;
+
+///
 /// Initializes union class with tag state of "shmodel_group_share_details".
 ///
 /// @param shmodelGroupShareDetails (no description).
@@ -6932,6 +7404,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 ///
 - (instancetype)initWithCameraUploadsPolicyChangedDetails:
     (DBTEAMLOGCameraUploadsPolicyChangedDetails *)cameraUploadsPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "classification_change_policy_details".
+///
+/// @param classificationChangePolicyDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithClassificationChangePolicyDetails:
+    (DBTEAMLOGClassificationChangePolicyDetails *)classificationChangePolicyDetails;
+
+///
+/// Initializes union class with tag state of
+/// "computer_backup_policy_changed_details".
+///
+/// @param computerBackupPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithComputerBackupPolicyChangedDetails:
+    (DBTEAMLOGComputerBackupPolicyChangedDetails *)computerBackupPolicyChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -7546,6 +8040,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Initializes union class with tag state of
+/// "team_branding_policy_changed_details".
+///
+/// @param teamBrandingPolicyChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamBrandingPolicyChangedDetails:
+    (DBTEAMLOGTeamBrandingPolicyChangedDetails *)teamBrandingPolicyChangedDetails;
+
+///
+/// Initializes union class with tag state of
 /// "team_extensions_policy_changed_details".
 ///
 /// @param teamExtensionsPolicyChangedDetails (no description).
@@ -7689,6 +8194,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 - (instancetype)initWithTeamMergeToDetails:(DBTEAMLOGTeamMergeToDetails *)teamMergeToDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "team_profile_add_background_details".
+///
+/// @param teamProfileAddBackgroundDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamProfileAddBackgroundDetails:
+    (DBTEAMLOGTeamProfileAddBackgroundDetails *)teamProfileAddBackgroundDetails;
+
+///
 /// Initializes union class with tag state of "team_profile_add_logo_details".
 ///
 /// @param teamProfileAddLogoDetails (no description).
@@ -7696,6 +8212,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTeamProfileAddLogoDetails:(DBTEAMLOGTeamProfileAddLogoDetails *)teamProfileAddLogoDetails;
+
+///
+/// Initializes union class with tag state of
+/// "team_profile_change_background_details".
+///
+/// @param teamProfileChangeBackgroundDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamProfileChangeBackgroundDetails:
+    (DBTEAMLOGTeamProfileChangeBackgroundDetails *)teamProfileChangeBackgroundDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -7729,6 +8256,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 ///
 - (instancetype)initWithTeamProfileChangeNameDetails:
     (DBTEAMLOGTeamProfileChangeNameDetails *)teamProfileChangeNameDetails;
+
+///
+/// Initializes union class with tag state of
+/// "team_profile_remove_background_details".
+///
+/// @param teamProfileRemoveBackgroundDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamProfileRemoveBackgroundDetails:
+    (DBTEAMLOGTeamProfileRemoveBackgroundDetails *)teamProfileRemoveBackgroundDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -8105,6 +8643,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "admin_alerting_changed_alert_config_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `adminAlertingChangedAlertConfigDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "admin_alerting_changed_alert_config_details".
+///
+- (BOOL)isAdminAlertingChangedAlertConfigDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "admin_alerting_triggered_alert_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `adminAlertingTriggeredAlertDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "admin_alerting_triggered_alert_details".
+///
+- (BOOL)isAdminAlertingTriggeredAlertDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "app_link_team_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -8285,6 +8849,292 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "governance_policy_add_folders_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyAddFoldersDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_add_folders_details".
+///
+- (BOOL)isGovernancePolicyAddFoldersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_add_folder_failed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyAddFolderFailedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_add_folder_failed_details".
+///
+- (BOOL)isGovernancePolicyAddFolderFailedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_create_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyCreateDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_create_details".
+///
+- (BOOL)isGovernancePolicyCreateDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_delete_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyDeleteDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_delete_details".
+///
+- (BOOL)isGovernancePolicyDeleteDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_edit_details_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyEditDetailsDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_edit_details_details".
+///
+- (BOOL)isGovernancePolicyEditDetailsDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_edit_duration_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyEditDurationDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_edit_duration_details".
+///
+- (BOOL)isGovernancePolicyEditDurationDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_export_created_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyExportCreatedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_export_created_details".
+///
+- (BOOL)isGovernancePolicyExportCreatedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_export_removed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyExportRemovedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_export_removed_details".
+///
+- (BOOL)isGovernancePolicyExportRemovedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_remove_folders_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyRemoveFoldersDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_remove_folders_details".
+///
+- (BOOL)isGovernancePolicyRemoveFoldersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_report_created_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyReportCreatedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_report_created_details".
+///
+- (BOOL)isGovernancePolicyReportCreatedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "governance_policy_zip_part_downloaded_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `governancePolicyZipPartDownloadedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "governance_policy_zip_part_downloaded_details".
+///
+- (BOOL)isGovernancePolicyZipPartDownloadedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_activate_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsActivateAHoldDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_activate_a_hold_details".
+///
+- (BOOL)isLegalHoldsActivateAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_add_members_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsAddMembersDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_add_members_details".
+///
+- (BOOL)isLegalHoldsAddMembersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_change_hold_details_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsChangeHoldDetailsDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_change_hold_details_details".
+///
+- (BOOL)isLegalHoldsChangeHoldDetailsDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_change_hold_name_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsChangeHoldNameDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_change_hold_name_details".
+///
+- (BOOL)isLegalHoldsChangeHoldNameDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportAHoldDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_a_hold_details".
+///
+- (BOOL)isLegalHoldsExportAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_cancelled_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportCancelledDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_cancelled_details".
+///
+- (BOOL)isLegalHoldsExportCancelledDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_downloaded_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportDownloadedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_downloaded_details".
+///
+- (BOOL)isLegalHoldsExportDownloadedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_export_removed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsExportRemovedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_export_removed_details".
+///
+- (BOOL)isLegalHoldsExportRemovedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_release_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsReleaseAHoldDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_release_a_hold_details".
+///
+- (BOOL)isLegalHoldsReleaseAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_remove_members_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsRemoveMembersDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_remove_members_details".
+///
+- (BOOL)isLegalHoldsRemoveMembersDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "legal_holds_report_a_hold_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `legalHoldsReportAHoldDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "legal_holds_report_a_hold_details".
+///
+- (BOOL)isLegalHoldsReportAHoldDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "device_change_ip_desktop_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -8402,6 +9252,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "device_sync_backup_status_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `deviceSyncBackupStatusChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "device_sync_backup_status_changed_details".
+///
+- (BOOL)isDeviceSyncBackupStatusChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "device_unlink_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -8412,6 +9275,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "device_unlink_details".
 ///
 - (BOOL)isDeviceUnlinkDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "dropbox_passwords_exported_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `dropboxPasswordsExportedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "dropbox_passwords_exported_details".
+///
+- (BOOL)isDropboxPasswordsExportedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "dropbox_passwords_new_device_enrolled_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `dropboxPasswordsNewDeviceEnrolledDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "dropbox_passwords_new_device_enrolled_details".
+///
+- (BOOL)isDropboxPasswordsNewDeviceEnrolledDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -9100,149 +9989,6 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
-/// "legal_holds_activate_a_hold_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsActivateAHoldDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_activate_a_hold_details".
-///
-- (BOOL)isLegalHoldsActivateAHoldDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_add_members_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsAddMembersDetails` property, otherwise a runtime exception will
-/// be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_add_members_details".
-///
-- (BOOL)isLegalHoldsAddMembersDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_change_hold_details_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsChangeHoldDetailsDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_change_hold_details_details".
-///
-- (BOOL)isLegalHoldsChangeHoldDetailsDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_change_hold_name_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsChangeHoldNameDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_change_hold_name_details".
-///
-- (BOOL)isLegalHoldsChangeHoldNameDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_export_a_hold_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsExportAHoldDetails` property, otherwise a runtime exception will
-/// be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_export_a_hold_details".
-///
-- (BOOL)isLegalHoldsExportAHoldDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_export_cancelled_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsExportCancelledDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_export_cancelled_details".
-///
-- (BOOL)isLegalHoldsExportCancelledDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_export_downloaded_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsExportDownloadedDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_export_downloaded_details".
-///
-- (BOOL)isLegalHoldsExportDownloadedDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_export_removed_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsExportRemovedDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_export_removed_details".
-///
-- (BOOL)isLegalHoldsExportRemovedDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_release_a_hold_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsReleaseAHoldDetails` property, otherwise a runtime exception will
-/// be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_release_a_hold_details".
-///
-- (BOOL)isLegalHoldsReleaseAHoldDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_remove_members_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsRemoveMembersDetails` property, otherwise a runtime exception
-/// will be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_remove_members_details".
-///
-- (BOOL)isLegalHoldsRemoveMembersDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
-/// "legal_holds_report_a_hold_details".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `legalHoldsReportAHoldDetails` property, otherwise a runtime exception will
-/// be thrown.
-///
-/// @return Whether the union's current tag state has value
-/// "legal_holds_report_a_hold_details".
-///
-- (BOOL)isLegalHoldsReportAHoldDetails;
-
-///
-/// Retrieves whether the union's current tag state has value
 /// "account_lock_or_unlocked_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -9505,6 +10251,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "member_change_name_details".
 ///
 - (BOOL)isMemberChangeNameDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "member_change_reseller_role_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `memberChangeResellerRoleDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "member_change_reseller_role_details".
+///
+- (BOOL)isMemberChangeResellerRoleDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -10389,6 +11148,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "password_reset_all_details".
 ///
 - (BOOL)isPasswordResetAllDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "classification_create_report_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `classificationCreateReportDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "classification_create_report_details".
+///
+- (BOOL)isClassificationCreateReportDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "classification_create_report_fail_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `classificationCreateReportFailDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "classification_create_report_fail_details".
+///
+- (BOOL)isClassificationCreateReportFailDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -11648,6 +12433,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "shmodel_disable_downloads_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `shmodelDisableDownloadsDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shmodel_disable_downloads_details".
+///
+- (BOOL)isShmodelDisableDownloadsDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "shmodel_enable_downloads_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `shmodelEnableDownloadsDetails` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "shmodel_enable_downloads_details".
+///
+- (BOOL)isShmodelEnableDownloadsDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "shmodel_group_share_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -12229,6 +13040,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "camera_uploads_policy_changed_details".
 ///
 - (BOOL)isCameraUploadsPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "classification_change_policy_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `classificationChangePolicyDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "classification_change_policy_details".
+///
+- (BOOL)isClassificationChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "computer_backup_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `computerBackupPolicyChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "computer_backup_policy_changed_details".
+///
+- (BOOL)isComputerBackupPolicyChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -12973,6 +13810,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "team_branding_policy_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamBrandingPolicyChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_branding_policy_changed_details".
+///
+- (BOOL)isTeamBrandingPolicyChangedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "team_extensions_policy_changed_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -13154,6 +14004,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "team_profile_add_background_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamProfileAddBackgroundDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_profile_add_background_details".
+///
+- (BOOL)isTeamProfileAddBackgroundDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "team_profile_add_logo_details".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -13164,6 +14027,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "team_profile_add_logo_details".
 ///
 - (BOOL)isTeamProfileAddLogoDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_profile_change_background_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamProfileChangeBackgroundDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_profile_change_background_details".
+///
+- (BOOL)isTeamProfileChangeBackgroundDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -13203,6 +14079,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "team_profile_change_name_details".
 ///
 - (BOOL)isTeamProfileChangeNameDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "team_profile_remove_background_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `teamProfileRemoveBackgroundDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "team_profile_remove_background_details".
+///
+- (BOOL)isTeamProfileRemoveBackgroundDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value

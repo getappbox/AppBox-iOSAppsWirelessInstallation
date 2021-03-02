@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBFILESUploadSessionStartArg;
+@class DBFILESUploadSessionType;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// able to call `uploadSessionAppend` anymore with the current session.
 @property (nonatomic, readonly) NSNumber *close;
 
+/// Type of upload session you want to start. If not specified, default is
+/// `sequential` in `DBFILESUploadSessionType`.
+@property (nonatomic, readonly, nullable) DBFILESUploadSessionType *sessionType;
+
 #pragma mark - Constructors
 
 ///
@@ -37,10 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param close If true, the current session will be closed, at which point you
 /// won't be able to call `uploadSessionAppend` anymore with the current
 /// session.
+/// @param sessionType Type of upload session you want to start. If not
+/// specified, default is `sequential` in `DBFILESUploadSessionType`.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithClose:(nullable NSNumber *)close;
+- (instancetype)initWithClose:(nullable NSNumber *)close sessionType:(nullable DBFILESUploadSessionType *)sessionType;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
