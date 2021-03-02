@@ -21,7 +21,15 @@
     [super viewDidLoad];
     [EventTracker logScreen:@"AppBox ShareLink"];
     [textFieldAppLink setStringValue: self.project.appShortShareableURL.stringValue];
-    [textFieldHint setStringValue: ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) ? LongURLUserHint : ShortURLUserHint];
+    if ([self.project.appShortShareableURL isEqualTo:self.project.appLongShareableURL]) {
+        [textFieldHint setStringValue:LongURLUserHint];
+        [linkHeightConstraint setConstant:70];
+        [linkHintHeightConstraint setConstant:40];
+    } else {
+        [textFieldHint setStringValue:ShortURLUserHint];
+        [linkHeightConstraint setConstant:30];
+        [linkHintHeightConstraint setConstant:20];
+    }
     
     //Save Project Details
     [Project addProjectWithXCProject:self.project andSaveDetails:SaveUploadDetails];

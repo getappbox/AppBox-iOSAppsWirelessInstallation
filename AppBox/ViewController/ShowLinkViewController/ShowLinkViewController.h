@@ -15,6 +15,8 @@
     IBOutlet NSTextField *textFieldHint;
     IBOutlet NSTextField *textFieldAppLink;
     IBOutlet NSButton *buttonCopyToClipboard;
+    __weak IBOutlet NSLayoutConstraint *linkHeightConstraint;
+    __weak IBOutlet NSLayoutConstraint *linkHintHeightConstraint;
 }
 
 @property(nonatomic, strong) XCProject *project;
