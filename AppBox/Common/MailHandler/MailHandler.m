@@ -33,11 +33,18 @@
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_NAME}" withString:project.name];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{DOWNLOAD_URL}" withString: project.appShortShareableURL.absoluteString];
     if (project.selectedSchemes) {
         messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_SCHEME}" withString:project.selectedSchemes];
     } else {
         messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_SCHEME}" withString:@"Default"];
     }
+    
+    // If DOWNLOAD_URL keyword was not used, append it for compatibility
+    if (![[UserData userSlackMessage] containsString: @"{DOWNLOAD_URL}"]) {
+        messageCopy = [messageCopy stringByAppendingFormat:@" - %@", project.appShortShareableURL];
+    }
+    
     return messageCopy;
 }
 
