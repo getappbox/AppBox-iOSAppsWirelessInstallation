@@ -1,4 +1,4 @@
-[![Support](https://img.shields.io/static/v1?logo=paypal&label=PayPal&message=Support&color=brightgreen&style=flat-square)](https://getappbox.com/support/)
+[![Support](https://img.shields.io/static/v1?logo=paypal&label=PayPal&message=Support&color=brightgreen&style=flat-square)](https://paypal.me/vineetchoudhary)
 [![Build Status](https://img.shields.io/travis/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 [![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg?style=flat-square)](https://getappbox.com/download)
