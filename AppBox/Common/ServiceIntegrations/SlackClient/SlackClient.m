@@ -20,7 +20,6 @@
         NSString *slackMessage;
         if ([UserData userSlackMessage].length > 0) {
             slackMessage = [MailHandler parseMessage:[UserData userSlackMessage] forProject:project];
-            slackMessage = [slackMessage stringByAppendingFormat:@" - %@", project.appShortShareableURL];
         } else {
             slackMessage = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
         }
