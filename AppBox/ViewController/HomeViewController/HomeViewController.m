@@ -125,11 +125,6 @@
         if (self.ciRepoProject.ipaFullPath) {
             [self initIPAUploadProcessForURL:self.ciRepoProject.ipaFullPath];
         }
-        
-        //Copy other setting from ciRepoProject to project
-        [self.project setAlPath:self.ciRepoProject.alPath];
-        [self.project setXcodePath:self.ciRepoProject.xcodePath];
-        [self.project setSubjectPrefix:self.ciRepoProject.subjectPrefix];
     }
 }
 
