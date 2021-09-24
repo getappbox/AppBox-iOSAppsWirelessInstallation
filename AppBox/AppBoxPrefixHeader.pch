@@ -16,7 +16,6 @@
 #import <AppCenterAnalytics/AppCenterAnalytics.h>
 #import <SAMKeychain/SAMKeychain.h>
 #import <AFNetworking/AFNetworking.h>
-#import <STPrivilegedTask/STPrivilegedTask.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import <ABPrivate/ABPrivate.h>
 

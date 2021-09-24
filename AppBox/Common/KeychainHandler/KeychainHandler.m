@@ -15,12 +15,12 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
 #pragma mark - ITC Accounts
 + (NSArray *)getAllITCAccounts {
     NSMutableArray *filteredITCAccounts = [[NSMutableArray alloc] init];
-    NSArray *itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
-    for (NSDictionary *account in itcAccounts) {
-        if ([account.allKeys containsObject:kSAMKeychainAccountKey]) {
-            [filteredITCAccounts addObject:account];
-        }
-    }
+//    NSArray *itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
+//    for (NSDictionary *account in itcAccounts) {
+//        if ([account.allKeys containsObject:kSAMKeychainAccountKey]) {
+//            [filteredITCAccounts addObject:account];
+//        }
+//    }
     return filteredITCAccounts;
 }
 
