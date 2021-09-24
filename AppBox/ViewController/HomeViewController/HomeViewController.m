@@ -304,9 +304,25 @@
 }
 
 -(void)updateViewState{
-    //update action button
-    BOOL enable = selectedFilePath.URL.isIPA;
-    
+	//Update menu buttons
+	[self updateMenuButtons];
+
+	
+	BOOL enable = selectedFilePath.URL.isIPA;
+	
+	//Enable text fields
+	[textFieldEmail setEnabled:enable];
+	[textFieldMessage setEnabled:enable];
+	
+	//Get last time valid data
+	[textFieldEmail setStringValue: enable ? [UserData userEmail] : abEmptyString];
+	[textFieldMessage setStringValue: enable ? [UserData userMessage] : abEmptyString];
+	
+	//Just for confirm changes
+	[self textFieldMailValueChanged:textFieldEmail];
+	[self textFieldDevMessageValueChanged:textFieldMessage];
+	
+	//update main action button
     [buttonAction setEnabled:enable];
     [buttonAction setTitle:@"Upload IPA"];
     
@@ -332,24 +348,6 @@
     NSMutableDictionary *viewState = [[NSMutableDictionary alloc] initWithDictionary:otherSettings];
     [viewState setValue:[NSNumber numberWithInteger: buttonUniqueLink.state] forKey:@"Same Link"];
     return viewState;
-}
-
-#pragma mark - E-Mail -
--(void)enableMailField:(BOOL)enable{
-    //Gmail Logout Button
-    [self updateMenuButtons];
-    
-    //Enable text fields
-    [textFieldEmail setEnabled:enable];
-    [textFieldMessage setEnabled:enable];
-    
-    //Get last time valid data
-    [textFieldEmail setStringValue: enable ? [UserData userEmail] : abEmptyString];
-    [textFieldMessage setStringValue: enable ? [UserData userMessage] : abEmptyString];
-    
-    //Just for confirm changes
-    [self textFieldMailValueChanged:textFieldEmail];
-    [self textFieldDevMessageValueChanged:textFieldMessage];
 }
 
 #pragma mark - TabView Delegate -
