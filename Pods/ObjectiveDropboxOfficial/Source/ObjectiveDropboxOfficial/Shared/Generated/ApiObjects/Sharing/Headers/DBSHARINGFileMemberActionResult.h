@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `FileMemberActionResult` struct.
 ///
-/// Per-member result for `addFileMember` or `changeFileMemberAccess`.
+/// Per-member result for `addFileMember`.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

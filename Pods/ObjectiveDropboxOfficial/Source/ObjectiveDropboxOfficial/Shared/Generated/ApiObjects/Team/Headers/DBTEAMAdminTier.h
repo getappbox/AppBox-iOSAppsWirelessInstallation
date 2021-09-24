@@ -37,6 +37,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMAdminTierTag){
     DBTEAMAdminTierUserManagementAdmin,
 
     /// User can do a limited set of common support tasks for existing users.
+    /// Note: Dropbox is adding new types of admin roles; these may display as
+    /// support_admin.
     DBTEAMAdminTierSupportAdmin,
 
     /// User is not an admin of the team.
@@ -73,7 +75,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMAdminTierTag){
 /// Initializes union class with tag state of "support_admin".
 ///
 /// Description of the "support_admin" tag state: User can do a limited set of
-/// common support tasks for existing users.
+/// common support tasks for existing users. Note: Dropbox is adding new types
+/// of admin roles; these may display as support_admin.
 ///
 /// @return An initialized instance.
 ///

@@ -35,9 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param path Path relative to event context.
-/// @param displayName Display name. Might be missing due to historical data
-/// gap.
-/// @param fileId Unique ID. Might be missing due to historical data gap.
+/// @param displayName Display name.
+/// @param fileId Unique ID.
 /// @param fileSize File or folder size in bytes.
 ///
 /// @return An initialized instance.

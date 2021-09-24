@@ -35,6 +35,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESExportErrorTag){
     /// This file type cannot be exported. Use `download` instead.
     DBFILESExportErrorNonExportable,
 
+    /// The specified export format is not a valid option for this file type.
+    DBFILESExportErrorInvalidExportFormat,
+
     /// The exportable content is not yet available. Please retry later.
     DBFILESExportErrorRetryError,
 
@@ -70,6 +73,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESExportErrorTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithNonExportable;
+
+///
+/// Initializes union class with tag state of "invalid_export_format".
+///
+/// Description of the "invalid_export_format" tag state: The specified export
+/// format is not a valid option for this file type.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInvalidExportFormat;
 
 ///
 /// Initializes union class with tag state of "retry_error".
@@ -108,6 +121,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESExportErrorTag){
 /// @return Whether the union's current tag state has value "non_exportable".
 ///
 - (BOOL)isNonExportable;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "invalid_export_format".
+///
+/// @return Whether the union's current tag state has value
+/// "invalid_export_format".
+///
+- (BOOL)isInvalidExportFormat;
 
 ///
 /// Retrieves whether the union's current tag state has value "retry_error".

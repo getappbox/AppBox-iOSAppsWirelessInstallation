@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// User unique ID. Might be missing due to historical data gap.
+/// User unique ID.
 @property (nonatomic, readonly, copy, nullable) NSString *accountId;
 
-/// User display name. Might be missing due to historical data gap.
+/// User display name.
 @property (nonatomic, readonly, copy, nullable) NSString *displayName;
 
-/// User email address. Might be missing due to historical data gap.
+/// User email address.
 @property (nonatomic, readonly, copy, nullable) NSString *email;
 
 #pragma mark - Constructors
@@ -41,12 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param accountId User unique ID. Might be missing due to historical data
-/// gap.
-/// @param displayName User display name. Might be missing due to historical
-/// data gap.
-/// @param email User email address. Might be missing due to historical data
-/// gap.
+/// @param accountId User unique ID.
+/// @param displayName User display name.
+/// @param email User email address.
 ///
 /// @return An initialized instance.
 ///

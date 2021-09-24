@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `ClassificationType` union.
 ///
-/// The type of classification (currently only PII)
+/// The type of classification (currently only personal information)
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGClassificationType` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGClassificationTypeTag){
     /// (no description).
+    DBTEAMLOGClassificationTypePersonalInformation,
+
+    /// (no description).
     DBTEAMLOGClassificationTypePii,
 
     /// (no description).
@@ -42,6 +45,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGClassificationTypeTag){
 @property (nonatomic, readonly) DBTEAMLOGClassificationTypeTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "personal_information".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPersonalInformation;
 
 ///
 /// Initializes union class with tag state of "pii".
@@ -60,6 +70,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGClassificationTypeTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "personal_information".
+///
+/// @return Whether the union's current tag state has value
+/// "personal_information".
+///
+- (BOOL)isPersonalInformation;
 
 ///
 /// Retrieves whether the union's current tag state has value "pii".

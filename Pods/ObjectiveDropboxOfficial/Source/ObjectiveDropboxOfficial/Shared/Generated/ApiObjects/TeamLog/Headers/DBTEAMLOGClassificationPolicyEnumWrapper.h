@@ -38,6 +38,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGClassificationPolicyEnumWrapperTag){
     DBTEAMLOGClassificationPolicyEnumWrapperEnabled,
 
     /// (no description).
+    DBTEAMLOGClassificationPolicyEnumWrapperMemberAndTeamFolders,
+
+    /// (no description).
+    DBTEAMLOGClassificationPolicyEnumWrapperTeamFolders,
+
+    /// (no description).
     DBTEAMLOGClassificationPolicyEnumWrapperOther,
 
 };
@@ -60,6 +66,20 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGClassificationPolicyEnumWrapperTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEnabled;
+
+///
+/// Initializes union class with tag state of "member_and_team_folders".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithMemberAndTeamFolders;
+
+///
+/// Initializes union class with tag state of "team_folders".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTeamFolders;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -85,6 +105,22 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGClassificationPolicyEnumWrapperTag){
 /// @return Whether the union's current tag state has value "enabled".
 ///
 - (BOOL)isEnabled;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "member_and_team_folders".
+///
+/// @return Whether the union's current tag state has value
+/// "member_and_team_folders".
+///
+- (BOOL)isMemberAndTeamFolders;
+
+///
+/// Retrieves whether the union's current tag state has value "team_folders".
+///
+/// @return Whether the union's current tag state has value "team_folders".
+///
+- (BOOL)isTeamFolders;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

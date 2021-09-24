@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
 
-/// Sharing permission. Might be missing due to historical data gap.
+/// Sharing permission.
 @property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
 
 /// Team name.
@@ -47,8 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param teamName Team name.
-/// @param sharingPermission Sharing permission. Might be missing due to
-/// historical data gap.
+/// @param sharingPermission Sharing permission.
 ///
 /// @return An initialized instance.
 ///

@@ -102,10 +102,13 @@
   switch (_tag) {
   case DBUSERSCOMMONAccountTypeBasic:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBUSERSCOMMONAccountTypePro:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBUSERSCOMMONAccountTypeBusiness:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

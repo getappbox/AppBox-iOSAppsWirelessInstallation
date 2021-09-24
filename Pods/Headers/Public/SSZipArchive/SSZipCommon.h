@@ -1,1 +1,1 @@
-../../../SSZipArchive/SSZipArchive/SSZipCommon.h
+../../../SSZipArchive/SSZipArchive/include/SSZipCommon.h

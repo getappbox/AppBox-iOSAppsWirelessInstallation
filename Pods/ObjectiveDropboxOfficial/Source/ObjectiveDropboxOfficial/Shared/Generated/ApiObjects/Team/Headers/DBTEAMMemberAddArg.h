@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DBSerializableProtocol.h"
+#import "DBTEAMMemberAddArgBase.h"
 
 @class DBTEAMAdminTier;
 @class DBTEAMMemberAddArg;
@@ -22,37 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMemberAddArg : NSObject <DBSerializable, NSCopying>
+@interface DBTEAMMemberAddArg : DBTEAMMemberAddArgBase <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// (no description).
-@property (nonatomic, readonly, copy) NSString *memberEmail;
-
-/// Member's first name.
-@property (nonatomic, readonly, copy, nullable) NSString *memberGivenName;
-
-/// Member's last name.
-@property (nonatomic, readonly, copy, nullable) NSString *memberSurname;
-
-/// External ID for member.
-@property (nonatomic, readonly, copy, nullable) NSString *memberExternalId;
-
-/// Persistent ID for member. This field is only available to teams using
-/// persistent ID SAML configuration.
-@property (nonatomic, readonly, copy, nullable) NSString *memberPersistentId;
-
-/// Whether to send a welcome email to the member. If send_welcome_email is
-/// false, no email invitation will be sent to the user. This may be useful for
-/// apps using single sign-on (SSO) flows for onboarding that want to handle
-/// announcements themselves.
-@property (nonatomic, readonly) NSNumber *sendWelcomeEmail;
-
-/// (no description).
 @property (nonatomic, readonly) DBTEAMAdminTier *role;
-
-/// Whether a user is directory restricted.
-@property (nonatomic, readonly, nullable) NSNumber *isDirectoryRestricted;
 
 #pragma mark - Constructors
 
@@ -69,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// send_welcome_email is false, no email invitation will be sent to the user.
 /// This may be useful for apps using single sign-on (SSO) flows for onboarding
 /// that want to handle announcements themselves.
-/// @param role (no description).
 /// @param isDirectoryRestricted Whether a user is directory restricted.
+/// @param role (no description).
 ///
 /// @return An initialized instance.
 ///
@@ -80,8 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
                    memberExternalId:(nullable NSString *)memberExternalId
                  memberPersistentId:(nullable NSString *)memberPersistentId
                    sendWelcomeEmail:(nullable NSNumber *)sendWelcomeEmail
-                               role:(nullable DBTEAMAdminTier *)role
-              isDirectoryRestricted:(nullable NSNumber *)isDirectoryRestricted;
+              isDirectoryRestricted:(nullable NSNumber *)isDirectoryRestricted
+                               role:(nullable DBTEAMAdminTier *)role;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -92,8 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithMemberEmail:(NSString *)memberEmail;
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

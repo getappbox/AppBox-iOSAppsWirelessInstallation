@@ -140,6 +140,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the moveBatchCheck route object.
 + (DBRoute *)DBFILESMoveBatchCheck;
 
+/// Accessor method for the paperCreate route object.
++ (DBRoute *)DBFILESPaperCreate;
+
+/// Accessor method for the paperUpdate route object.
++ (DBRoute *)DBFILESPaperUpdate;
+
 /// Accessor method for the permanentlyDelete route object.
 + (DBRoute *)DBFILESPermanentlyDelete;
 

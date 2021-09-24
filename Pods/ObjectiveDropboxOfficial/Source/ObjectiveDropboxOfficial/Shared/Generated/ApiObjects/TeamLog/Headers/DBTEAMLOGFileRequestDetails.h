@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Asset position in the Assets list.
 @property (nonatomic, readonly) NSNumber *assetIndex;
 
-/// File request deadline. Might be missing due to historical data gap.
+/// File request deadline.
 @property (nonatomic, readonly, nullable) DBTEAMLOGFileRequestDeadline *deadline;
 
 #pragma mark - Constructors
@@ -40,8 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param assetIndex Asset position in the Assets list.
-/// @param deadline File request deadline. Might be missing due to historical
-/// data gap.
+/// @param deadline File request deadline.
 ///
 /// @return An initialized instance.
 ///

@@ -99,8 +99,10 @@
   switch (_tag) {
   case DBACCOUNTPhotoSourceArgBase64Data:
     result = prime * result + [self.base64Data hash];
+    break;
   case DBACCOUNTPhotoSourceArgOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -408,16 +410,22 @@
   switch (_tag) {
   case DBACCOUNTSetProfilePhotoErrorFileTypeError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBACCOUNTSetProfilePhotoErrorFileSizeError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBACCOUNTSetProfilePhotoErrorDimensionError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBACCOUNTSetProfilePhotoErrorThumbnailError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBACCOUNTSetProfilePhotoErrorTransientError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBACCOUNTSetProfilePhotoErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

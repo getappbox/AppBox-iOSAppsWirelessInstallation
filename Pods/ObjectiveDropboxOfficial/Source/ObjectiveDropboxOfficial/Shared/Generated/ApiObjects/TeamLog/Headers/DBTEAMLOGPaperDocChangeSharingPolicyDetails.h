@@ -30,11 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Event unique identifier.
 @property (nonatomic, readonly, copy) NSString *eventUuid;
 
-/// Sharing policy with external users. Might be missing due to historical data
-/// gap.
+/// Sharing policy with external users.
 @property (nonatomic, readonly, copy, nullable) NSString *publicSharingPolicy;
 
-/// Sharing policy with team. Might be missing due to historical data gap.
+/// Sharing policy with team.
 @property (nonatomic, readonly, copy, nullable) NSString *teamSharingPolicy;
 
 #pragma mark - Constructors
@@ -43,10 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param eventUuid Event unique identifier.
-/// @param publicSharingPolicy Sharing policy with external users. Might be
-/// missing due to historical data gap.
-/// @param teamSharingPolicy Sharing policy with team. Might be missing due to
-/// historical data gap.
+/// @param publicSharingPolicy Sharing policy with external users.
+/// @param teamSharingPolicy Sharing policy with team.
 ///
 /// @return An initialized instance.
 ///

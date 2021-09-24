@@ -101,21 +101,31 @@
 @class DBTEAMMemberAccess;
 @class DBTEAMMemberAddArg;
 @class DBTEAMMemberAddResult;
+@class DBTEAMMemberAddV2Arg;
+@class DBTEAMMemberAddV2Result;
 @class DBTEAMMemberDevices;
 @class DBTEAMMemberLinkedApps;
 @class DBTEAMMemberProfile;
 @class DBTEAMMembersAddJobStatus;
+@class DBTEAMMembersAddJobStatusV2Result;
 @class DBTEAMMembersAddLaunch;
+@class DBTEAMMembersAddLaunchV2Result;
 @class DBTEAMMembersDeleteProfilePhotoError;
+@class DBTEAMMembersGetAvailableTeamMemberRolesResult;
 @class DBTEAMMembersGetInfoError;
 @class DBTEAMMembersGetInfoItem;
+@class DBTEAMMembersGetInfoItemV2;
+@class DBTEAMMembersGetInfoV2Result;
 @class DBTEAMMembersInfo;
 @class DBTEAMMembersListContinueError;
 @class DBTEAMMembersListError;
 @class DBTEAMMembersListResult;
+@class DBTEAMMembersListV2Result;
 @class DBTEAMMembersRecoverError;
 @class DBTEAMMembersRemoveError;
 @class DBTEAMMembersSendWelcomeError;
+@class DBTEAMMembersSetPermissions2Error;
+@class DBTEAMMembersSetPermissions2Result;
 @class DBTEAMMembersSetPermissionsError;
 @class DBTEAMMembersSetPermissionsResult;
 @class DBTEAMMembersSetProfileError;
@@ -160,7 +170,10 @@
 @class DBTEAMTeamFolderUpdateSyncSettingsError;
 @class DBTEAMTeamGetInfoResult;
 @class DBTEAMTeamMemberInfo;
+@class DBTEAMTeamMemberInfoV2;
+@class DBTEAMTeamMemberInfoV2Result;
 @class DBTEAMTeamMemberProfile;
+@class DBTEAMTeamMemberRole;
 @class DBTEAMTeamNamespacesListContinueError;
 @class DBTEAMTeamNamespacesListError;
 @class DBTEAMTeamNamespacesListResult;
@@ -936,6 +949,41 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 ///
 /// @param dNewMembers Details of new members to be added to the team.
 ///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersAddLaunchV2Result` object on success
+/// or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersAddLaunchV2Result *, DBNilObject *> *)membersAddV2:
+    (NSArray<DBTEAMMemberAddV2Arg *> *)dNewMembers;
+
+///
+/// Adds members to a team. Permission : Team member management A maximum of 20 members can be specified in a single
+/// call. If no Dropbox account exists with the email address specified, a new Dropbox account will be created with the
+/// given email address, and that account will be invited to the team. If a personal Dropbox account exists with the
+/// email address specified in the call, this call will create a placeholder Dropbox account for the user on the team
+/// and send an email inviting the user to migrate their existing personal account onto the team. Team member management
+/// apps are required to set an initial given_name and surname for a user to use in the team invitation and for 'Perform
+/// as team member' actions taken on the user before they become 'active'.
+///
+/// @param dNewMembers Details of new members to be added to the team.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersAddLaunchV2Result` object on success
+/// or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersAddLaunchV2Result *, DBNilObject *> *)membersAddV2:
+                                                                    (NSArray<DBTEAMMemberAddV2Arg *> *)dNewMembers
+                                                                  forceAsync:(nullable NSNumber *)forceAsync;
+
+///
+/// Adds members to a team. Permission : Team member management A maximum of 20 members can be specified in a single
+/// call. If no Dropbox account exists with the email address specified, a new Dropbox account will be created with the
+/// given email address, and that account will be invited to the team. If a personal Dropbox account exists with the
+/// email address specified in the call, this call will create a placeholder Dropbox account for the user on the team
+/// and send an email inviting the user to migrate their existing personal account onto the team. Team member management
+/// apps are required to set an initial given_name and surname for a user to use in the team invitation and for 'Perform
+/// as team member' actions taken on the user before they become 'active'.
+///
+/// @param dNewMembers Details of new members to be added to the team.
+///
 /// @return Through the response callback, the caller will receive a `DBTEAMMembersAddLaunch` object on success or a
 /// `void` object on failure.
 ///
@@ -951,13 +999,24 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 /// as team member' actions taken on the user before they become 'active'.
 ///
 /// @param dNewMembers Details of new members to be added to the team.
-/// @param forceAsync Whether to force the add to happen asynchronously.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMMembersAddLaunch` object on success or a
 /// `void` object on failure.
 ///
 - (DBRpcTask<DBTEAMMembersAddLaunch *, DBNilObject *> *)membersAdd:(NSArray<DBTEAMMemberAddArg *> *)dNewMembers
                                                         forceAsync:(nullable NSNumber *)forceAsync;
+
+///
+/// Once an async_job_id is returned from `membersAdd` , use this to poll the status of the asynchronous request.
+/// Permission : Team member management.
+///
+/// @param asyncJobId Id of the asynchronous job. This is the value of a response returned from the method that launched
+/// the job.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersAddJobStatusV2Result` object on
+/// success or a `DBASYNCPollError` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersAddJobStatusV2Result *, DBASYNCPollError *> *)membersAddJobStatusGetV2:(NSString *)asyncJobId;
 
 ///
 /// Once an async_job_id is returned from `membersAdd` , use this to poll the status of the asynchronous request.
@@ -976,11 +1035,44 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 ///
 /// @param user Identity of the user whose profile photo will be deleted.
 ///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfoV2Result` object on success or
+/// a `DBTEAMMembersDeleteProfilePhotoError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamMemberInfoV2Result *, DBTEAMMembersDeleteProfilePhotoError *> *)membersDeleteProfilePhotoV2:
+    (DBTEAMUserSelectorArg *)user;
+
+///
+/// Deletes a team member's profile photo. Permission : Team member management.
+///
+/// @param user Identity of the user whose profile photo will be deleted.
+///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfo` object on success or a
 /// `DBTEAMMembersDeleteProfilePhotoError` object on failure.
 ///
 - (DBRpcTask<DBTEAMTeamMemberInfo *, DBTEAMMembersDeleteProfilePhotoError *> *)membersDeleteProfilePhoto:
     (DBTEAMUserSelectorArg *)user;
+
+///
+/// Get available TeamMemberRoles for the connected team. To be used with `membersSetAdminPermissions`. Permission :
+/// Team member management.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersGetAvailableTeamMemberRolesResult`
+/// object on success or a `void` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersGetAvailableTeamMemberRolesResult *, DBNilObject *> *)membersGetAvailableTeamMemberRoles;
+
+///
+/// Returns information about multiple team members. Permission : Team information This endpoint will return
+/// `idNotFound` in `DBTEAMMembersGetInfoItem`, for IDs (or emails) that cannot be matched to a valid team member.
+///
+/// @param members List of team members.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersGetInfoV2Result` object on success or
+/// a `DBTEAMMembersGetInfoError` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersGetInfoV2Result *, DBTEAMMembersGetInfoError *> *)membersGetInfoV2:
+    (NSArray<DBTEAMUserSelectorArg *> *)members;
 
 ///
 /// Returns information about multiple team members. Permission : Team information This endpoint will return
@@ -993,6 +1085,27 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 ///
 - (DBRpcTask<NSArray<DBTEAMMembersGetInfoItem *> *, DBTEAMMembersGetInfoError *> *)membersGetInfo:
     (NSArray<DBTEAMUserSelectorArg *> *)members;
+
+///
+/// Lists members of a team. Permission : Team information.
+///
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersListV2Result` object on success or a
+/// `DBTEAMMembersListError` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersListV2Result *, DBTEAMMembersListError *> *)membersListV2;
+
+///
+/// Lists members of a team. Permission : Team information.
+///
+/// @param limit Number of results to return per call.
+/// @param includeRemoved Whether to return removed members.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersListV2Result` object on success or a
+/// `DBTEAMMembersListError` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersListV2Result *, DBTEAMMembersListError *> *)membersListV2:(nullable NSNumber *)limit
+                                                                     includeRemoved:(nullable NSNumber *)includeRemoved;
 
 ///
 /// Lists members of a team. Permission : Team information.
@@ -1014,6 +1127,17 @@ memberSpaceLimitsExcludedUsersRemove:(nullable NSArray<DBTEAMUserSelectorArg *> 
 ///
 - (DBRpcTask<DBTEAMMembersListResult *, DBTEAMMembersListError *> *)membersList:(nullable NSNumber *)limit
                                                                  includeRemoved:(nullable NSNumber *)includeRemoved;
+
+///
+/// Once a cursor has been retrieved from `membersList`, use this to paginate through all team members. Permission :
+/// Team information.
+///
+/// @param cursor Indicates from what point to get the next set of members.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersListV2Result` object on success or a
+/// `DBTEAMMembersListContinueError` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersListV2Result *, DBTEAMMembersListContinueError *> *)membersListContinueV2:(NSString *)cursor;
 
 ///
 /// Once a cursor has been retrieved from `membersList`, use this to paginate through all team members. Permission :
@@ -1177,6 +1301,31 @@ retainTeamShares:(nullable NSNumber *)retainTeamShares;
 /// Updates a team member's permissions. Permission : Team member management.
 ///
 /// @param user Identity of user whose role will be set.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersSetPermissions2Result` object on
+/// success or a `DBTEAMMembersSetPermissions2Error` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersSetPermissions2Result *, DBTEAMMembersSetPermissions2Error *> *)membersSetAdminPermissionsV2:
+    (DBTEAMUserSelectorArg *)user;
+
+///
+/// Updates a team member's permissions. Permission : Team member management.
+///
+/// @param user Identity of user whose role will be set.
+/// @param dNewRoles The new roles for the member. Send empty list to make user member only. For now, only up to one
+/// role is allowed.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMMembersSetPermissions2Result` object on
+/// success or a `DBTEAMMembersSetPermissions2Error` object on failure.
+///
+- (DBRpcTask<DBTEAMMembersSetPermissions2Result *, DBTEAMMembersSetPermissions2Error *> *)
+membersSetAdminPermissionsV2:(DBTEAMUserSelectorArg *)user
+                   dNewRoles:(nullable NSArray<NSString *> *)dNewRoles;
+
+///
+/// Updates a team member's permissions. Permission : Team member management.
+///
+/// @param user Identity of user whose role will be set.
 /// @param dNewRole The new role of the member.
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMMembersSetPermissionsResult` object on
@@ -1185,6 +1334,41 @@ retainTeamShares:(nullable NSNumber *)retainTeamShares;
 - (DBRpcTask<DBTEAMMembersSetPermissionsResult *, DBTEAMMembersSetPermissionsError *> *)
 membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
                   dNewRole:(DBTEAMAdminTier *)dNewRole;
+
+///
+/// Updates a team member's profile. Permission : Team member management.
+///
+/// @param user Identity of user whose profile will be set.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfoV2Result` object on success or
+/// a `DBTEAMMembersSetProfileError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamMemberInfoV2Result *, DBTEAMMembersSetProfileError *> *)membersSetProfileV2:
+    (DBTEAMUserSelectorArg *)user;
+
+///
+/// Updates a team member's profile. Permission : Team member management.
+///
+/// @param user Identity of user whose profile will be set.
+/// @param dNewEmail New email for member.
+/// @param dNewExternalId New external ID for member.
+/// @param dNewGivenName New given name for member.
+/// @param dNewSurname New surname for member.
+/// @param dNewPersistentId New persistent ID. This field only available to teams using persistent ID SAML
+/// configuration.
+/// @param dNewIsDirectoryRestricted New value for whether the user is a directory restricted user.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfoV2Result` object on success or
+/// a `DBTEAMMembersSetProfileError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamMemberInfoV2Result *, DBTEAMMembersSetProfileError *> *)
+      membersSetProfileV2:(DBTEAMUserSelectorArg *)user
+                dNewEmail:(nullable NSString *)dNewEmail
+           dNewExternalId:(nullable NSString *)dNewExternalId
+            dNewGivenName:(nullable NSString *)dNewGivenName
+              dNewSurname:(nullable NSString *)dNewSurname
+         dNewPersistentId:(nullable NSString *)dNewPersistentId
+dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
 
 ///
 /// Updates a team member's profile. Permission : Team member management.
@@ -1219,6 +1403,19 @@ membersSetAdminPermissions:(DBTEAMUserSelectorArg *)user
               dNewSurname:(nullable NSString *)dNewSurname
          dNewPersistentId:(nullable NSString *)dNewPersistentId
 dNewIsDirectoryRestricted:(nullable NSNumber *)dNewIsDirectoryRestricted;
+
+///
+/// Updates a team member's profile photo. Permission : Team member management.
+///
+/// @param user Identity of the user whose profile photo will be set.
+/// @param photo Image to set as the member's new profile photo.
+///
+/// @return Through the response callback, the caller will receive a `DBTEAMTeamMemberInfoV2Result` object on success or
+/// a `DBTEAMMembersSetProfilePhotoError` object on failure.
+///
+- (DBRpcTask<DBTEAMTeamMemberInfoV2Result *, DBTEAMMembersSetProfilePhotoError *> *)
+membersSetProfilePhotoV2:(DBTEAMUserSelectorArg *)user
+                   photo:(DBACCOUNTPhotoSourceArg *)photo;
 
 ///
 /// Updates a team member's profile photo. Permission : Team member management.
@@ -1318,7 +1515,7 @@ propertiesTemplateAdd:(NSString *)name
     __deprecated_msg("propertiesTemplateAdd is deprecated.");
 
 ///
-/// DEPRECATED: Permission : Team member file access.
+/// DEPRECATED: Permission : Team member file access. The scope for the route is files.team_metadata.write.
 ///
 /// @param templateId An identifier for template added by route  See `templatesAddForUser` or `templatesAddForTeam`.
 ///
@@ -1329,7 +1526,7 @@ propertiesTemplateAdd:(NSString *)name
     (NSString *)templateId __deprecated_msg("propertiesTemplateGet is deprecated.");
 
 ///
-/// DEPRECATED: Permission : Team member file access.
+/// DEPRECATED: Permission : Team member file access. The scope for the route is files.team_metadata.write.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBFILEPROPERTIESListTemplateResult` object on
@@ -1369,7 +1566,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("propertiesTemplateUpdate is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's user activity.
+/// DEPRECATED: Retrieves reporting data about a team's user activity. Deprecated: Will be removed on July 1st 2021.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetActivityReport` object on success or a
@@ -1379,7 +1576,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetActivity is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's user activity.
+/// DEPRECATED: Retrieves reporting data about a team's user activity. Deprecated: Will be removed on July 1st 2021.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1393,7 +1590,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetActivity is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's linked devices.
+/// DEPRECATED: Retrieves reporting data about a team's linked devices. Deprecated: Will be removed on July 1st 2021.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetDevicesReport` object on success or a
@@ -1403,7 +1600,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetDevices is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's linked devices.
+/// DEPRECATED: Retrieves reporting data about a team's linked devices. Deprecated: Will be removed on July 1st 2021.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1417,7 +1614,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetDevices is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's membership.
+/// DEPRECATED: Retrieves reporting data about a team's membership. Deprecated: Will be removed on July 1st 2021.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetMembershipReport` object on success or a
@@ -1427,7 +1624,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetMembership is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's membership.
+/// DEPRECATED: Retrieves reporting data about a team's membership. Deprecated: Will be removed on July 1st 2021.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1441,7 +1638,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetMembership is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's storage usage.
+/// DEPRECATED: Retrieves reporting data about a team's storage usage. Deprecated: Will be removed on July 1st 2021.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMGetStorageReport` object on success or a
@@ -1451,7 +1648,7 @@ propertiesTemplateUpdate:(NSString *)templateId
     __deprecated_msg("reportsGetStorage is deprecated.");
 
 ///
-/// DEPRECATED: Retrieves reporting data about a team's storage usage.
+/// DEPRECATED: Retrieves reporting data about a team's storage usage. Deprecated: Will be removed on July 1st 2021.
 ///
 /// @param startDate Optional starting date (inclusive). If start_date is None or too long ago, this field will  be set
 /// to 6 months ago.
@@ -1475,8 +1672,8 @@ propertiesTemplateUpdate:(NSString *)templateId
 - (DBRpcTask<DBTEAMTeamFolderMetadata *, DBTEAMTeamFolderActivateError *> *)teamFolderActivate:(NSString *)teamFolderId;
 
 ///
-/// Sets an active team folder's status to archived and removes all folder and file members. Permission : Team member
-/// file access.
+/// Sets an active team folder's status to archived and removes all folder and file members. This endpoint cannot be
+/// used for teams that have a shared team space. Permission : Team member file access.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBTEAMTeamFolderArchiveLaunch` object on success
@@ -1486,8 +1683,8 @@ propertiesTemplateUpdate:(NSString *)templateId
     (NSString *)teamFolderId;
 
 ///
-/// Sets an active team folder's status to archived and removes all folder and file members. Permission : Team member
-/// file access.
+/// Sets an active team folder's status to archived and removes all folder and file members. This endpoint cannot be
+/// used for teams that have a shared team space. Permission : Team member file access.
 ///
 /// @param forceAsyncOff Whether to force the archive to happen synchronously.
 ///
@@ -1510,7 +1707,8 @@ teamFolderArchive:(NSString *)teamFolderId
 - (DBRpcTask<DBTEAMTeamFolderArchiveJobStatus *, DBASYNCPollError *> *)teamFolderArchiveCheck:(NSString *)asyncJobId;
 
 ///
-/// Creates a new, active, team folder with no members. Permission : Team member file access.
+/// Creates a new, active, team folder with no members. This endpoint can only be used for teams that do not already
+/// have a shared team space. Permission : Team member file access.
 ///
 /// @param name Name for the new team folder.
 ///
@@ -1520,7 +1718,8 @@ teamFolderArchive:(NSString *)teamFolderId
 - (DBRpcTask<DBTEAMTeamFolderMetadata *, DBTEAMTeamFolderCreateError *> *)teamFolderCreate:(NSString *)name;
 
 ///
-/// Creates a new, active, team folder with no members. Permission : Team member file access.
+/// Creates a new, active, team folder with no members. This endpoint can only be used for teams that do not already
+/// have a shared team space. Permission : Team member file access.
 ///
 /// @param name Name for the new team folder.
 /// @param syncSetting The sync setting to apply to this team folder. Only permitted if the team has team selective sync
@@ -1576,7 +1775,8 @@ teamFolderCreate:(NSString *)name
     (NSString *)cursor;
 
 ///
-/// Permanently deletes an archived team folder. Permission : Team member file access.
+/// Permanently deletes an archived team folder. This endpoint cannot be used for teams that have a shared team space.
+/// Permission : Team member file access.
 ///
 /// @param teamFolderId The ID of the team folder.
 ///

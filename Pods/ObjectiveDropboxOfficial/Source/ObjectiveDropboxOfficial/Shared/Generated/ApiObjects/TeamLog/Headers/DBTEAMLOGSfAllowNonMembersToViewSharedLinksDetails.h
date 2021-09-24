@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Original shared folder name.
 @property (nonatomic, readonly, copy) NSString *originalFolderName;
 
-/// Shared folder type. Might be missing due to historical data gap.
+/// Shared folder type.
 @property (nonatomic, readonly, copy, nullable) NSString *sharedFolderType;
 
 #pragma mark - Constructors
@@ -43,8 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
-/// @param sharedFolderType Shared folder type. Might be missing due to
-/// historical data gap.
+/// @param sharedFolderType Shared folder type.
 ///
 /// @return An initialized instance.
 ///

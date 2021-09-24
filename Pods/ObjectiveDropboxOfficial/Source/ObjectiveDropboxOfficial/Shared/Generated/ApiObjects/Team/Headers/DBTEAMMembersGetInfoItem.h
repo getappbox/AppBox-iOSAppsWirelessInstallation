@@ -32,9 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMMembersGetInfoItemTag` enum type represents the possible tag
 /// states with which the `DBTEAMMembersGetInfoItem` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersGetInfoItemTag){
-    /// An ID that was provided as a parameter to `membersGetInfo`, and did not
-    /// match a corresponding user. This might be a team_member_id, an email, or
-    /// an external ID, depending on how the method was called.
+    /// An ID that was provided as a parameter to `membersGetInfo` or
+    /// `membersGetInfo`, and did not match a corresponding user. This might be
+    /// a team_member_id, an email, or an external ID, depending on how the
+    /// method was called.
     DBTEAMMembersGetInfoItemIdNotFound,
 
     /// Info about a team member.
@@ -45,11 +46,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersGetInfoItemTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMMembersGetInfoItemTag tag;
 
-/// An ID that was provided as a parameter to `membersGetInfo`, and did not
-/// match a corresponding user. This might be a team_member_id, an email, or an
-/// external ID, depending on how the method was called. @note Ensure the
-/// `isIdNotFound` method returns true before accessing, otherwise a runtime
-/// exception will be raised.
+/// An ID that was provided as a parameter to `membersGetInfo` or
+/// `membersGetInfo`, and did not match a corresponding user. This might be a
+/// team_member_id, an email, or an external ID, depending on how the method was
+/// called. @note Ensure the `isIdNotFound` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *idNotFound;
 
 /// Info about a team member. @note Ensure the `isMemberInfo` method returns
@@ -62,12 +63,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMembersGetInfoItemTag){
 /// Initializes union class with tag state of "id_not_found".
 ///
 /// Description of the "id_not_found" tag state: An ID that was provided as a
-/// parameter to `membersGetInfo`, and did not match a corresponding user. This
-/// might be a team_member_id, an email, or an external ID, depending on how the
-/// method was called.
+/// parameter to `membersGetInfo` or `membersGetInfo`, and did not match a
+/// corresponding user. This might be a team_member_id, an email, or an external
+/// ID, depending on how the method was called.
 ///
-/// @param idNotFound An ID that was provided as a parameter to
-/// `membersGetInfo`, and did not match a corresponding user. This might be a
+/// @param idNotFound An ID that was provided as a parameter to `membersGetInfo`
+/// or `membersGetInfo`, and did not match a corresponding user. This might be a
 /// team_member_id, an email, or an external ID, depending on how the method was
 /// called.
 ///
