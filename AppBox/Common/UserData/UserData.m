@@ -85,54 +85,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - Default Setting -
-
-#define BuildLocation @"BuildLocation"
-
-+(NSURL *)buildLocation{
-    NSURL *buildLocation = [[NSUserDefaults standardUserDefaults] URLForKey:BuildLocation];
-    if (buildLocation == nil){
-        buildLocation = [NSURL URLWithString:[abBuildLocation stringByExpandingTildeInPath]];
-    }
-    return buildLocation;
-}
-
-+(void)setBuildLocation:(NSURL *)buildLocation{
-    [[NSUserDefaults standardUserDefaults] setURL:buildLocation forKey:BuildLocation];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define XCodeLocation @"XCodeLocation"
-
-+(NSURL *)xCodeLocation{
-    NSString *xCodeLocation = [[NSUserDefaults standardUserDefaults] stringForKey:XCodeLocation];
-    if (xCodeLocation == nil){
-        xCodeLocation = abXcodeLocation;
-        
-    }
-    return [NSURL URLWithString: xCodeLocation];
-}
-
-+(void)setXCodeLocation:(NSString *)xCodeLocation{
-    [[NSUserDefaults standardUserDefaults] setValue:xCodeLocation forKey:XCodeLocation];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define ApplicationLoaderLocation @"ApplicationLoaderLocation"
-
-+(NSURL *)applicationLoaderLocation{
-    NSString *alLocation = [[NSUserDefaults standardUserDefaults] stringForKey:ApplicationLoaderLocation];
-    if (alLocation == nil) {
-        alLocation = abApplicationLoaderAppLocation;
-    }
-    return [NSURL URLWithString: alLocation];
-}
-
-+(void)setApplicationLoaderLocation:(NSString *)alLocation{
-    [[NSUserDefaults standardUserDefaults] setValue:alLocation forKey:ApplicationLoaderLocation];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #pragma mark - Dropbox -
 
 #define DropboxUsedSpace @"DropboxUsedSpace"
@@ -154,38 +106,6 @@
 
 +(void)setDropboxAvailableSpace:(NSNumber *)availableSpace{
     [[NSUserDefaults standardUserDefaults] setInteger:availableSpace.integerValue forKey:DropboxAvailableSpace];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#pragma mark - ExportOption Plist Values -
-
-#define UploadSymbols @"uploadSymbols"
-+(BOOL)uploadSymbols{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:UploadSymbols];
-}
-
-+(void)setUploadSymbols:(BOOL)uploadSymbol{
-    [[NSUserDefaults standardUserDefaults] setBool:uploadSymbol forKey:UploadSymbols];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define UploadBitcode @"uploadBitcode"
-+(BOOL)uploadBitcode{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:UploadBitcode];
-}
-
-+(void)setUploadBitcode:(BOOL)uploadBitcode{
-    [[NSUserDefaults standardUserDefaults] setBool:uploadBitcode forKey:UploadBitcode];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define CompileBitcode @"compileBitcode"
-+(BOOL)compileBitcode{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:CompileBitcode];
-}
-
-+(void)setCompileBitcode:(BOOL)compileBitcode{
-    [[NSUserDefaults standardUserDefaults] setBool:compileBitcode forKey:CompileBitcode];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -279,65 +199,4 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#define UseXCPretty @"UseXCPretty"
-+(BOOL)useXCPretty{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:UseXCPretty];
-}
-
-+(void)setUseXCPretty:(BOOL)useXCPretty{
-    [[NSUserDefaults standardUserDefaults] setBool:useXCPretty forKey:UseXCPretty];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define DefaultCIEmail @"DefaultCIEmail"
-+(NSString *)defaultCIEmail {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:DefaultCIEmail];
-}
-
-+(void)setDefaultCIEmail:(NSString *)email {
-    [[NSUserDefaults standardUserDefaults] setValue:email forKey:DefaultCIEmail];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-
-#define CISubjectPrefix @"CISubjectPrefix"
-+(NSString *)ciSubjectPrefix {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:CISubjectPrefix];
-}
-
-+(void)setCISubjectPrefix:(NSString *)prefix {
-    [[NSUserDefaults standardUserDefaults] setValue:prefix forKey:CISubjectPrefix];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define KeychainPath @"KeychainPath"
-+(NSString *)keychainPath {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:KeychainPath];
-}
-
-+(void)setKeychainPath:(NSString *)path {
-    [[NSUserDefaults standardUserDefaults] setValue:path forKey:KeychainPath];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#define KeychainPassword @"KeychainPassword"
-+(NSString *)keychainPassword {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:KeychainPassword];
-}
-
-+(void)setKeychainPassword:(NSString *)password {
-    [[NSUserDefaults standardUserDefaults] setValue:password forKey:KeychainPassword];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
- 
-#define XcodeVersionPath @"XcodeVersionPath"
-+(NSString *)xcodeVersionPath {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:XcodeVersionPath];
-}
-    
-+(void)setXcodeVersionPath:(NSString *)xcodeVersionPath {
-    [[NSUserDefaults standardUserDefaults] setValue:xcodeVersionPath forKey:XcodeVersionPath];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-    
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -78,12 +78,6 @@
                                         <menuItem title="View Log" keyEquivalent="l" id="Rk6-gK-cUU">
                                             <connections>
                                                 <segue destination="6aM-eF-B0k" kind="show" id="jTU-hR-7QO"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Local Server" keyEquivalent="s" id="oru-mY-nnP">
-                                            <connections>
-                                                <action selector="showLocalServerTapped:" target="hnw-xV-0zn" id="F4k-XH-IF6"/>
-                                                <segue destination="MGm-bY-xKw" kind="show" id="RSW-RI-e7e"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
@@ -321,16 +315,6 @@ DQ
                                             <action selector="actionButtonTapped:" target="lct-wo-jYo" id="P46-nN-7f9"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qRD-nm-pGY">
-                                        <rect key="frame" x="399" y="3" width="97" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Config CI" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HbN-yq-sbf">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemLight" size="15"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="buttonConfigCITapped:" target="lct-wo-jYo" id="DID-fA-URl"/>
-                                        </connections>
-                                    </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zka-0X-0Ih">
                                         <rect key="frame" x="492" y="3" width="133" height="32"/>
                                         <buttonCell key="cell" type="push" title="Other Settings" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9yL-qR-ycX">
@@ -424,7 +408,6 @@ DQ
                                     <constraint firstItem="UvJ-M3-rxB" firstAttribute="top" secondItem="sgg-Iy-WMT" secondAttribute="bottom" constant="15" id="7uN-u6-Orz"/>
                                     <constraint firstItem="VAU-Tg-Nmj" firstAttribute="centerY" secondItem="cfm-Bd-TVp" secondAttribute="centerY" id="8WX-UO-zjv"/>
                                     <constraint firstItem="DAM-Ui-aXb" firstAttribute="centerY" secondItem="BAA-rE-fh4" secondAttribute="centerY" id="BDg-An-33g"/>
-                                    <constraint firstItem="qRD-nm-pGY" firstAttribute="centerY" secondItem="cfm-Bd-TVp" secondAttribute="centerY" id="BwI-Oo-b6p"/>
                                     <constraint firstAttribute="trailing" secondItem="UvJ-M3-rxB" secondAttribute="trailing" constant="12" id="L59-Wm-eRq"/>
                                     <constraint firstAttribute="trailing" secondItem="sgg-Iy-WMT" secondAttribute="trailing" id="NHV-UA-boz"/>
                                     <constraint firstItem="cfm-Bd-TVp" firstAttribute="top" secondItem="52J-8G-TcO" secondAttribute="bottom" constant="10" id="NPo-qo-VJp"/>
@@ -436,7 +419,6 @@ DQ
                                     <constraint firstItem="1d7-Kr-ZaS" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" constant="12" id="STM-qb-EE8"/>
                                     <constraint firstItem="sgg-Iy-WMT" firstAttribute="leading" secondItem="RTB-1n-lrJ" secondAttribute="leading" id="TWZ-Rl-a0p"/>
                                     <constraint firstItem="cfm-Bd-TVp" firstAttribute="leading" secondItem="zka-0X-0Ih" secondAttribute="trailing" constant="10" id="XQN-eZ-EWc"/>
-                                    <constraint firstItem="zka-0X-0Ih" firstAttribute="leading" secondItem="qRD-nm-pGY" secondAttribute="trailing" constant="10" id="aFh-aH-YPq"/>
                                     <constraint firstAttribute="trailing" secondItem="52J-8G-TcO" secondAttribute="trailing" id="cEm-Xc-WUs"/>
                                     <constraint firstAttribute="trailing" secondItem="cfm-Bd-TVp" secondAttribute="trailing" constant="15" id="czi-vA-lno"/>
                                     <constraint firstItem="sgg-Iy-WMT" firstAttribute="top" secondItem="1cA-Pc-6wM" secondAttribute="bottom" id="daC-XY-tvi"/>
@@ -463,8 +445,7 @@ DQ
                     </view>
                     <connections>
                         <outlet property="buttonAction" destination="cfm-Bd-TVp" id="iSW-yt-alW"/>
-                        <outlet property="buttonAdcanced" destination="zka-0X-0Ih" id="Wdz-Vv-UZu"/>
-                        <outlet property="buttonConfigCI" destination="qRD-nm-pGY" id="KWN-7F-LxS"/>
+                        <outlet property="buttonAdvanced" destination="zka-0X-0Ih" id="doB-FR-sVn"/>
                         <outlet property="buttonUniqueLink" destination="1d7-Kr-ZaS" id="Jye-iH-c9y"/>
                         <outlet property="selectedFilePath" destination="tO9-sq-PBp" id="3bO-dO-HuY"/>
                         <outlet property="textFieldEmail" destination="RKc-Si-2CZ" id="NwO-S6-73O"/>
@@ -526,121 +507,6 @@ DQ
                 <customObject id="Sep-aN-CO8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="880" y="75"/>
-        </scene>
-        <!--Window Controller-->
-        <scene sceneID="MJI-wC-ppq">
-            <objects>
-                <windowController showSeguePresentationStyle="single" id="MGm-bY-xKw" customClass="LocalServerWindowController" sceneMemberID="viewController">
-                    <window key="window" title="AppBox Server" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6nA-tV-Eml">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="700" height="350"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <value key="minSize" type="size" width="700" height="350"/>
-                        <connections>
-                            <outlet property="delegate" destination="MGm-bY-xKw" id="nTH-Up-a1I"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="47f-6T-mtV" kind="relationship" relationship="window.shadowedContentViewController" id="plQ-Xo-hhK"/>
-                    </connections>
-                </windowController>
-                <customObject id="q2w-lL-cHC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-813" y="-25"/>
-        </scene>
-        <!--AppBox Server-->
-        <scene sceneID="Red-Jq-GH5">
-            <objects>
-                <viewController title="AppBox Server" showSeguePresentationStyle="single" id="47f-6T-mtV" customClass="LocalServerViewController" sceneMemberID="viewController">
-                    <view key="view" id="umJ-41-MjG">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR8-UX-Ahn">
-                                <rect key="frame" x="9" y="10" width="431" height="223"/>
-                                <clipView key="contentView" drawsBackground="NO" id="TsC-Xp-jeT">
-                                    <rect key="frame" x="1" y="1" width="429" height="221"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="sXn-1o-EZg">
-                                            <rect key="frame" x="0.0" y="0.0" width="429" height="221"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="429" height="221"/>
-                                            <size key="maxSize" width="463" height="10000000"/>
-                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                        </textView>
-                                    </subviews>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="O6I-cl-Qh3">
-                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="MYi-0c-wZ8">
-                                    <rect key="frame" x="414" y="1" width="16" height="221"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GYw-kM-c7S">
-                                <rect key="frame" x="8" y="271" width="103" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="19" id="yhb-d8-nlv"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Server Status :" id="N7F-0b-zfu">
-                                    <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udU-Ec-OKy">
-                                <rect key="frame" x="8" y="242" width="103" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="19" id="xAJ-95-Xkc"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Server Logs:" id="o8d-4P-yMj">
-                                    <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HkQ-Qo-lre">
-                                <rect key="frame" x="119" y="271" width="16" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="26d-3r-AdC"/>
-                                    <constraint firstAttribute="width" constant="16" id="SgI-A6-ubz"/>
-                                </constraints>
-                                <levelIndicatorCell key="cell" alignment="left" maxValue="1" warningValue="2" criticalValue="3" id="Vcm-7V-R6V"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </levelIndicator>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="GYw-kM-c7S" firstAttribute="leading" secondItem="umJ-41-MjG" secondAttribute="leading" constant="10" id="Ad9-a6-67v"/>
-                            <constraint firstAttribute="trailing" secondItem="lR8-UX-Ahn" secondAttribute="trailing" constant="10" id="Bb1-hD-Cv7"/>
-                            <constraint firstItem="GYw-kM-c7S" firstAttribute="top" secondItem="umJ-41-MjG" secondAttribute="top" constant="10" id="HSQ-pq-afO"/>
-                            <constraint firstItem="sXn-1o-EZg" firstAttribute="top" secondItem="udU-Ec-OKy" secondAttribute="bottom" constant="10" id="RMA-en-7hz"/>
-                            <constraint firstItem="GYw-kM-c7S" firstAttribute="trailing" secondItem="udU-Ec-OKy" secondAttribute="trailing" id="T5A-XG-aE0"/>
-                            <constraint firstItem="GYw-kM-c7S" firstAttribute="centerY" secondItem="HkQ-Qo-lre" secondAttribute="centerY" id="TYs-bv-PYG"/>
-                            <constraint firstItem="HkQ-Qo-lre" firstAttribute="leading" secondItem="GYw-kM-c7S" secondAttribute="trailing" constant="10" id="VBZ-xA-kVw"/>
-                            <constraint firstItem="udU-Ec-OKy" firstAttribute="leading" secondItem="sXn-1o-EZg" secondAttribute="leading" id="YVd-XZ-bHc"/>
-                            <constraint firstItem="GYw-kM-c7S" firstAttribute="leading" secondItem="udU-Ec-OKy" secondAttribute="leading" id="ad3-Pa-2AJ"/>
-                            <constraint firstAttribute="bottom" secondItem="lR8-UX-Ahn" secondAttribute="bottom" constant="10" id="p3A-Bc-kR7"/>
-                            <constraint firstItem="udU-Ec-OKy" firstAttribute="top" secondItem="GYw-kM-c7S" secondAttribute="bottom" constant="10" id="vO0-nN-wUr"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="serverLogTextView" destination="sXn-1o-EZg" id="dP2-nd-GKm"/>
-                        <outlet property="serverStatusIndicator" destination="HkQ-Qo-lre" id="0Nc-7i-X9x"/>
-                    </connections>
-                </viewController>
-                <customObject id="Mfy-hE-0o9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-823" y="472"/>
         </scene>
         <!--AppBox Dashboard-->
         <scene sceneID="Nhl-bU-R4s">
@@ -1347,7 +1213,7 @@ CA
                 <customObject id="EhG-Lb-deF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="Advanced" id="n1u-76-r4M" customClass="ProjectAdvancedViewController" sceneMemberID="viewController">
                     <view key="view" id="OXY-Ua-ZSc">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="163"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="127"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pae-a2-qHY">
@@ -1377,7 +1243,7 @@ Gw
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haB-7R-3Q7">
-                                <rect key="frame" x="10" y="133" width="121" height="20"/>
+                                <rect key="frame" x="10" y="97" width="120" height="20"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Other Settings" placeholderString="" id="XTF-c4-JRS">
                                     <font key="font" metaFont="systemSemibold" size="17"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1385,7 +1251,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-aq-vvf">
-                                <rect key="frame" x="10" y="94" width="234" height="19"/>
+                                <rect key="frame" x="10" y="58" width="234" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="QNc-mx-fOf"/>
                                 </constraints>
@@ -1396,7 +1262,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KOs-Ma-CB8">
-                                <rect key="frame" x="252" y="91" width="400" height="25"/>
+                                <rect key="frame" x="252" y="55" width="400" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Nuy-Ou-Adw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="xys-jg-h02"/>
@@ -1410,52 +1276,24 @@ Gw
                                     <action selector="textFieldDevMessageValueChanged:" target="lct-wo-jYo" id="jHM-Ja-MdB"/>
                                 </connections>
                             </textField>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="LBi-UH-2sG">
-                                <rect key="frame" x="250" y="61" width="93" height="18"/>
-                                <buttonCell key="cell" type="check" title="checking..." bezelStyle="regularSquare" imagePosition="left" inset="2" id="flS-RW-vjS">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="buttonLocalNetworkStateChanged:" target="n1u-76-r4M" id="1hL-lz-P6Z"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ve3-DL-dXm">
-                                <rect key="frame" x="10" y="60" width="234" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="pHR-7t-wdQ"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Distribute IPA over localnetwork:" id="hKG-dI-IkJ">
-                                    <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="KOs-Ma-CB8" firstAttribute="leading" secondItem="6Bs-aq-vvf" secondAttribute="trailing" constant="10" id="3qT-5a-f3i"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="leading" secondItem="OXY-Ua-ZSc" secondAttribute="leading" constant="12" id="4fR-Qe-DaY"/>
-                            <constraint firstItem="Ve3-DL-dXm" firstAttribute="centerY" secondItem="LBi-UH-2sG" secondAttribute="centerY" id="ACQ-9X-3pW"/>
                             <constraint firstItem="JEl-Gx-e8o" firstAttribute="centerY" secondItem="Pae-a2-qHY" secondAttribute="centerY" id="B8w-Z9-BTA"/>
                             <constraint firstItem="6Bs-aq-vvf" firstAttribute="centerY" secondItem="KOs-Ma-CB8" secondAttribute="centerY" id="HPA-N8-uEU"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="leading" secondItem="6Bs-aq-vvf" secondAttribute="leading" id="Kd7-gK-tgh"/>
-                            <constraint firstItem="KOs-Ma-CB8" firstAttribute="leading" secondItem="LBi-UH-2sG" secondAttribute="leading" id="Poh-yx-cVH"/>
                             <constraint firstItem="6Bs-aq-vvf" firstAttribute="top" secondItem="haB-7R-3Q7" secondAttribute="bottom" constant="20" id="Qee-nJ-bo4"/>
-                            <constraint firstItem="6Bs-aq-vvf" firstAttribute="trailing" secondItem="Ve3-DL-dXm" secondAttribute="trailing" id="XfI-bg-DBF"/>
                             <constraint firstAttribute="bottom" secondItem="Pae-a2-qHY" secondAttribute="bottom" constant="20" id="acY-Xu-LDg"/>
-                            <constraint firstAttribute="bottom" secondItem="Ve3-DL-dXm" secondAttribute="bottom" constant="60" id="bPb-IJ-icj"/>
-                            <constraint firstItem="Ve3-DL-dXm" firstAttribute="top" secondItem="6Bs-aq-vvf" secondAttribute="bottom" constant="15" id="kko-3S-5tp"/>
+                            <constraint firstItem="Pae-a2-qHY" firstAttribute="top" secondItem="KOs-Ma-CB8" secondAttribute="bottom" constant="15" id="g3r-v6-aet"/>
                             <constraint firstItem="Pae-a2-qHY" firstAttribute="leading" secondItem="JEl-Gx-e8o" secondAttribute="trailing" constant="10" id="nRo-HT-HDO"/>
                             <constraint firstItem="haB-7R-3Q7" firstAttribute="top" secondItem="OXY-Ua-ZSc" secondAttribute="top" constant="10" id="qUN-m0-bsS"/>
                             <constraint firstAttribute="trailing" secondItem="KOs-Ma-CB8" secondAttribute="trailing" constant="15" id="rQE-jC-9MG"/>
-                            <constraint firstItem="6Bs-aq-vvf" firstAttribute="leading" secondItem="Ve3-DL-dXm" secondAttribute="leading" id="rZz-OG-hnR"/>
                             <constraint firstAttribute="trailing" secondItem="Pae-a2-qHY" secondAttribute="trailing" constant="15" id="uRb-GC-VJJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dbFolderNameTextField" destination="KOs-Ma-CB8" id="Phy-e0-FUB"/>
-                        <outlet property="localNetworkCheckBox" destination="LBi-UH-2sG" id="08R-3h-ipO"/>
-                        <segue destination="MGm-bY-xKw" kind="show" identifier="LocalServerViewController" id="LeW-rl-CQd"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1725,8 +1563,7 @@ Gw
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Uyb-q3-B4B"/>
-        <segue reference="LeW-rl-CQd"/>
+        <segue reference="4nc-Zt-qRE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Browser" width="32" height="32"/>

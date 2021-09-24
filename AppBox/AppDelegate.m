@@ -141,34 +141,6 @@
     }];
 }
 
--(void)handleProjectAtPath:(NSString *)projectPath {    
-    //get certificate
-    NSString *certInfoPath = [CIProjectBuilder isValidRepoForCertificateFileAtPath:projectPath];
-    [CIProjectBuilder installCertificateWithDetailsInFile:certInfoPath andRepoPath:projectPath];
-    
-    //create project
-    NSString *settingPath = [CIProjectBuilder isValidRepoForSettingFileAtPath:projectPath Index:@0];
-    XCProject *project = [CIProjectBuilder xcProjectWithRepoPath:projectPath andSettingFilePath:settingPath];
-    
-    //check project
-    if (project == nil) {
-        [self addSessionLog:@"AppBox can't able to create project model of this repo."];
-        exit(abExitCodeForInvalidAppBoxSettingFile);
-        return;
-    }
-    
-    //check if appbox is read to build
-    if (self.isReadyToBuild) {
-        [self addSessionLog:@"AppBox is ready to build."];
-        [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
-    } else {
-        [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [self addSessionLog:@"AppBox is ready to build. [Block]"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
-        }];
-    }
-}
-
 -(void)handleIPAAtPath:(NSString *)ipaPath {
     XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
     if (self.isReadyToBuild) {

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20B29" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="bundleIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="teams" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teams" inverseName="projects" inverseEntity="Teams" syncable="YES"/>
         <relationship name="uploadRecords" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="UploadRecord" inverseName="project" inverseEntity="UploadRecord" syncable="YES"/>
     </entity>
     <entity name="ProvisionedDevice" representedClassName="ProvisionedDevice" syncable="YES">
@@ -18,15 +17,6 @@
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="provisionedDevices" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ProvisionedDevice" syncable="YES"/>
         <relationship name="uploadRecord" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="UploadRecord" inverseName="provisioningProfile" inverseEntity="UploadRecord" syncable="YES"/>
-    </entity>
-    <entity name="Teams" representedClassName="Teams" syncable="YES">
-        <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="emails" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hangoutWebHookURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="msTeamsWebHookURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="slackWebHookURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="teams" inverseEntity="Project" syncable="YES"/>
     </entity>
     <entity name="UploadRecord" representedClassName="UploadRecord" syncable="YES">
         <attribute name="build" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,10 +42,9 @@
         <relationship name="provisioningProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProvisioningProfile" inverseName="uploadRecord" inverseEntity="ProvisioningProfile" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Project" positionX="-11914.72265625" positionY="-2547.59375" width="128" height="89"/>
+        <element name="Project" positionX="-11914.72265625" positionY="-2547.59375" width="128" height="88"/>
         <element name="ProvisionedDevice" positionX="-12258" positionY="-2493" width="128" height="58"/>
         <element name="ProvisioningProfile" positionX="-12260" positionY="-2736" width="128" height="163"/>
-        <element name="Teams" positionX="-11918.5546875" positionY="-2735.66796875" width="128" height="148"/>
         <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="358"/>
     </elements>
 </model>

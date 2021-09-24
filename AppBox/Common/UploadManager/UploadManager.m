@@ -138,11 +138,7 @@
                     //prepare for upload and check ipa type
                     NSURL *ipaFileURL = ([self.project.ipaFullPath isFileURL]) ? self.project.ipaFullPath : [NSURL fileURLWithPath:ipaPath];
                     [self.project setIpaFullPath:ipaFileURL];
-                    if (self.project.distributeOverLocalNetwork){
-                        [self distributeLocalIPAWithURL:ipaFileURL];
-                    } else {
-                        [self uploadIPAFileWithoutUnzip:ipaFileURL];
-                    }
+					[self uploadIPAFileWithoutUnzip:ipaFileURL];
                 });
             }];
         });
@@ -154,33 +150,6 @@
             [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
         }
         self.errorBlock(nil, YES);
-    }
-}
-
--(void)distributeLocalIPAWithURL:(NSURL *)ipaURL{
-    if(ipaURL){
-        //Create IPA file path for server directory
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *ipaName = [[ipaURL URLByDeletingPathExtension] lastPathComponent];
-        NSString *appboxServerBuildsPath = [NSString stringWithFormat:@"%@/%@-%@/", abAppBoxLocalServerBuildsDirectory, ipaName, [Common generateUUID]];
-        NSURL *toURL = [[UserData buildLocation] URLByAppendingPathComponent:appboxServerBuildsPath];
-        NSError *error;
-        //Create AppBox Server Directory
-        if ([fileManager createDirectoryAtPath:toURL.resourceSpecifier withIntermediateDirectories:YES attributes:nil error:&error]){
-            //Copy  IPA file to Server Directory
-            NSString *toPath = [NSString stringWithFormat:@"%@/%@.ipa",toURL.resourceSpecifier,ipaName];
-            if ([fileManager copyItemAtPath:ipaURL.resourceSpecifier toPath:toPath error:&error]){
-                NSString *serverURLString = [self.project.ipaFileLocalShareableURL.absoluteString stringByAppendingFormat:@"/%@%@.ipa", appboxServerBuildsPath, ipaName];
-                self.dbFileType = DBFileTypeIPA;
-                [self handleSharedURLResult:serverURLString];
-            } else if (error) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"AppBoxServer Copy Error - %@", error]];
-            }
-        } else if (error) {
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"AppBoxServer Copy Error - %@", error]];
-        }
-    } else {
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"AppBoxServer Copy Error - IPA URL is nil."]];
     }
 }
 

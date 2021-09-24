@@ -15,10 +15,10 @@
 @interface HomeViewController : NSViewController <NSTabViewDelegate, ProjectAdvancedViewDelegate>{
 
     //Build & Upload IPA
-    IBOutlet NSPathControl *selectedFilePath;
-    IBOutlet NSButton *buttonAction;
-    IBOutlet NSButton *buttonAdcanced;
-    IBOutlet NSButton *buttonUniqueLink;
+	__weak IBOutlet NSPathControl *selectedFilePath;
+	__weak IBOutlet NSButton *buttonAction;
+	__weak IBOutlet NSButton *buttonAdvanced;
+	__weak IBOutlet NSButton *buttonUniqueLink;
     __weak IBOutlet NSLayoutConstraint *buildOptionBoxHeightConstraint;
     
     //Mail and Shutdown
@@ -29,7 +29,6 @@
 - (IBAction)actionButtonTapped:(NSButton *)sender;
 - (IBAction)selectedFilePathHandler:(NSPathControl *)sender;
 - (IBAction)buttonUniqueLinkTapped:(NSButton *)sender;
-- (IBAction)buttonConfigCITapped:(NSButton *)sender;
 
 - (IBAction)textFieldMailValueChanged:(NSTextField *)sender;
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender;
