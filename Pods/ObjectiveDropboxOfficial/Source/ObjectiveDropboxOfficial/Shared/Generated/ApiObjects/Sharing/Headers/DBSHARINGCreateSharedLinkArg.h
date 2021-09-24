@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The path to share.
 @property (nonatomic, readonly, copy) NSString *path;
 
-/// Whether to return a shortened URL.
+/// (no description).
 @property (nonatomic, readonly) NSNumber *shortUrl;
 
 /// If it's okay to share a path that does not yet exist, set this to either
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param path The path to share.
-/// @param shortUrl Whether to return a shortened URL.
+/// @param shortUrl (no description).
 /// @param pendingUpload If it's okay to share a path that does not yet exist,
 /// set this to either `file` in `DBSHARINGPendingUploadMode` or `folder` in
 /// `DBSHARINGPendingUploadMode` to indicate whether to assume it's a file or

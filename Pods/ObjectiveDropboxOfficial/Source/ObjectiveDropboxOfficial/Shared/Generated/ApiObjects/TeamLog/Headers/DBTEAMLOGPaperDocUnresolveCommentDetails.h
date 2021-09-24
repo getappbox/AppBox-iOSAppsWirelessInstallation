@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Event unique identifier.
 @property (nonatomic, readonly, copy) NSString *eventUuid;
 
-/// Comment text. Might be missing due to historical data gap.
+/// Comment text.
 @property (nonatomic, readonly, copy, nullable) NSString *commentText;
 
 #pragma mark - Constructors
@@ -39,8 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param eventUuid Event unique identifier.
-/// @param commentText Comment text. Might be missing due to historical data
-/// gap.
+/// @param commentText Comment text.
 ///
 /// @return An initialized instance.
 ///

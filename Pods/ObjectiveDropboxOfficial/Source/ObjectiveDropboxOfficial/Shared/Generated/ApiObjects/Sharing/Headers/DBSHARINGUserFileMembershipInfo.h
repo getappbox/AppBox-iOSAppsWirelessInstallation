@@ -33,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// The UTC timestamp of when the user has last seen the content, if they have.
+/// The UTC timestamp of when the user has last seen the content. Only populated
+/// if the user has seen the content and the caller has a plan that includes
+/// viewer history.
 @property (nonatomic, readonly, nullable) NSDate *timeLastSeen;
 
 /// The platform on which the user has last seen the content, or unknown.
@@ -52,7 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param initials Never set.
 /// @param isInherited True if the member has access from a parent folder.
 /// @param timeLastSeen The UTC timestamp of when the user has last seen the
-/// content, if they have.
+/// content. Only populated if the user has seen the content and the caller has
+/// a plan that includes viewer history.
 /// @param platformType The platform on which the user has last seen the
 /// content, or unknown.
 ///

@@ -463,8 +463,10 @@
   switch (_tag) {
   case DBUSERSFileLockingValueEnabled:
     result = prime * result + [self.enabled hash];
+    break;
   case DBUSERSFileLockingValueOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1357,8 +1359,10 @@
   switch (_tag) {
   case DBUSERSGetAccountBatchErrorNoAccount:
     result = prime * result + [self.noAccount hash];
+    break;
   case DBUSERSGetAccountBatchErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1510,8 +1514,10 @@
   switch (_tag) {
   case DBUSERSGetAccountErrorNoAccount:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBUSERSGetAccountErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1910,8 +1916,10 @@
   switch (_tag) {
   case DBUSERSPaperAsFilesValueEnabled:
     result = prime * result + [self.enabled hash];
+    break;
   case DBUSERSPaperAsFilesValueOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2100,10 +2108,13 @@
   switch (_tag) {
   case DBUSERSSpaceAllocationIndividual:
     result = prime * result + [self.individual hash];
+    break;
   case DBUSERSSpaceAllocationTeam:
     result = prime * result + [self.team hash];
+    break;
   case DBUSERSSpaceAllocationOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2527,10 +2538,13 @@
   switch (_tag) {
   case DBUSERSUserFeaturePaperAsFiles:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBUSERSUserFeatureFileLocking:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBUSERSUserFeatureOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2723,10 +2737,13 @@
   switch (_tag) {
   case DBUSERSUserFeatureValuePaperAsFiles:
     result = prime * result + [self.paperAsFiles hash];
+    break;
   case DBUSERSUserFeatureValueFileLocking:
     result = prime * result + [self.fileLocking hash];
+    break;
   case DBUSERSUserFeatureValueOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2997,8 +3014,10 @@
   switch (_tag) {
   case DBUSERSUserFeaturesGetValuesBatchErrorEmptyFeaturesList:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBUSERSUserFeaturesGetValuesBatchErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

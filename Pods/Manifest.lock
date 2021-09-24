@@ -12,20 +12,20 @@ PODS:
   - AFNetworking/Reachability (4.0.1)
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
-  - AppCenter (4.1.0):
-    - AppCenter/Analytics (= 4.1.0)
-    - AppCenter/Crashes (= 4.1.0)
-  - AppCenter/Analytics (4.1.0):
+  - AppCenter (4.3.0):
+    - AppCenter/Analytics (= 4.3.0)
+    - AppCenter/Crashes (= 4.3.0)
+  - AppCenter/Analytics (4.3.0):
     - AppCenter/Core
-  - AppCenter/Core (4.1.0)
-  - AppCenter/Crashes (4.1.0):
+  - AppCenter/Core (4.3.0)
+  - AppCenter/Crashes (4.3.0):
     - AppCenter/Core
   - CMDQueryStringSerialization (0.4.1):
     - ISO8601
   - ISO8601 (0.6.0)
-  - ObjectiveDropboxOfficial (5.0.5)
+  - ObjectiveDropboxOfficial (6.2.0)
   - SAMKeychain (1.5.3)
-  - SSZipArchive (2.2.3)
+  - SSZipArchive (2.4.0)
   - STPrivilegedTask (1.0.1)
   - ZXingObjC (3.6.5):
     - ZXingObjC/All (= 3.6.5)
@@ -37,7 +37,7 @@ DEPENDENCIES:
   - CMDQueryStringSerialization
   - ObjectiveDropboxOfficial
   - SAMKeychain
-  - SSZipArchive
+  - SSZipArchive (= 2.4.0)
   - STPrivilegedTask
   - ZXingObjC
 
@@ -55,15 +55,15 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  AppCenter: 8832b158d17e54845c3b88a91076218f0b07174d
+  AppCenter: 883369ab78427b0561c688158d689dfe1f993ea9
   CMDQueryStringSerialization: 4bb0a2f5e7d8d8678d911d88072274952cbef4e5
   ISO8601: d3ea3ba9b752820cf92c6b47a9ee327e9f0e13fc
-  ObjectiveDropboxOfficial: 9ba0f4a3a9fdc914c2e660d759957328dd6cd744
+  ObjectiveDropboxOfficial: 2115db7fc21d267c6f0606557a6ea0b69aa37d30
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
-  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
+  SSZipArchive: fc3955f860f5f222095cd6a3547d407534c03a88
   STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: f3ecc927010cd0908993c05e5290ef7c3e81735f
+PODFILE CHECKSUM: 35de17c4b7305532faa732e7c7711fb5a4ddf82f
 
 COCOAPODS: 1.10.1

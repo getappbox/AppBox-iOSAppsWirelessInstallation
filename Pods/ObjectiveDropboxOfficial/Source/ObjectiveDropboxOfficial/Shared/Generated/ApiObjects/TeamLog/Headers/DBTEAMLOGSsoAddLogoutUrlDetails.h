@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// New single sign-on logout URL. Might be missing due to historical data gap.
+/// New single sign-on logout URL.
 @property (nonatomic, readonly, copy, nullable) NSString *dNewValue;
 
 #pragma mark - Constructors
@@ -35,8 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param dNewValue New single sign-on logout URL. Might be missing due to
-/// historical data gap.
+/// @param dNewValue New single sign-on logout URL.
 ///
 /// @return An initialized instance.
 ///

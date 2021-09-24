@@ -6,7 +6,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DBSHARINGChangeFileMemberAccessArgs.h"
 #import "DBSerializableProtocol.h"
 
 @class DBSHARINGAccessLevel;
@@ -26,9 +25,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBSHARINGUpdateFileMemberArgs : DBSHARINGChangeFileMemberAccessArgs <DBSerializable, NSCopying>
+@interface DBSHARINGUpdateFileMemberArgs : NSObject <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
+
+/// File for which we are changing a member's access.
+@property (nonatomic, readonly, copy) NSString *file;
+
+/// The member whose access we are changing.
+@property (nonatomic, readonly) DBSHARINGMemberSelector *member;
+
+/// The new access level for the member.
+@property (nonatomic, readonly) DBSHARINGAccessLevel *accessLevel;
 
 #pragma mark - Constructors
 
@@ -44,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFile:(NSString *)file
                       member:(DBSHARINGMemberSelector *)member
                  accessLevel:(DBSHARINGAccessLevel *)accessLevel;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

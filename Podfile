@@ -4,7 +4,7 @@ inhibit_all_warnings!
 
 target :AppBox do
     pod 'AFNetworking'
-    pod 'SSZipArchive'
+    pod 'SSZipArchive', '2.4.0'
     pod 'CMDQueryStringSerialization'
     pod 'ObjectiveDropboxOfficial'
     pod 'ZXingObjC'

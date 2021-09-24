@@ -102,10 +102,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESCameraUploadsPolicyStateDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESCameraUploadsPolicyStateEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESCameraUploadsPolicyStateOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -289,12 +292,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESComputerBackupPolicyStateDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESComputerBackupPolicyStateEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESComputerBackupPolicyStateDefault_:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESComputerBackupPolicyStateOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -484,12 +491,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESEmmStateDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESEmmStateOptional:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESEmmStateRequired:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESEmmStateOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -564,6 +575,183 @@
     return [[DBTEAMPOLICIESEmmState alloc] initWithOther];
   } else {
     return [[DBTEAMPOLICIESEmmState alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMPOLICIESExternalDriveBackupPolicyState.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMPOLICIESExternalDriveBackupPolicyState
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESExternalDriveBackupPolicyStateOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMPOLICIESExternalDriveBackupPolicyStateOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled:
+    return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled";
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled:
+    return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled";
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateOther:
+    return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMPOLICIESExternalDriveBackupPolicyStateSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMPOLICIESExternalDriveBackupPolicyStateSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMPOLICIESExternalDriveBackupPolicyStateSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupPolicyState:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupPolicyState:
+    (DBTEAMPOLICIESExternalDriveBackupPolicyState *)anExternalDriveBackupPolicyState {
+  if (self == anExternalDriveBackupPolicyState) {
+    return YES;
+  }
+  if (self.tag != anExternalDriveBackupPolicyState.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled:
+    return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled:
+    return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateOther:
+    return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMPOLICIESExternalDriveBackupPolicyStateSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESExternalDriveBackupPolicyState *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMPOLICIESExternalDriveBackupPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithOther];
+  } else {
+    return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithOther];
   }
 }
 
@@ -665,10 +853,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESFileLockingPolicyStateDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESFileLockingPolicyStateEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESFileLockingPolicyStateOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -824,8 +1015,10 @@
   switch (_tag) {
   case DBTEAMPOLICIESGroupCreationAdminsAndMembers:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESGroupCreationAdminsOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -994,10 +1187,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESOfficeAddInPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESOfficeAddInPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESOfficeAddInPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1167,10 +1363,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESPaperDefaultFolderPolicyEveryoneInTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperDefaultFolderPolicyInviteOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperDefaultFolderPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1340,10 +1539,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESPaperDeploymentPolicyFull:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperDeploymentPolicyPartial:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperDeploymentPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1513,10 +1715,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESPaperDesktopPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperDesktopPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperDesktopPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1700,12 +1905,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESPaperEnabledPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperEnabledPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperEnabledPolicyUnspecified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPaperEnabledPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1881,10 +2090,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESPasswordControlModeDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPasswordControlModeEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPasswordControlModeOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2068,12 +2280,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESPasswordStrengthPolicyMinimalRequirements:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPasswordStrengthPolicyModeratePassword:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPasswordStrengthPolicyStrongPassword:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESPasswordStrengthPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2249,10 +2465,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESRolloutMethodUnlinkAll:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESRolloutMethodUnlinkMostInactive:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESRolloutMethodAddMemberToExceptions:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2427,10 +2646,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESSharedFolderJoinPolicyFromTeamOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedFolderJoinPolicyFromAnyone:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedFolderJoinPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2600,10 +2822,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESSharedFolderMemberPolicyTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedFolderMemberPolicyAnyone:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedFolderMemberPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2787,12 +3012,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESSharedLinkCreatePolicyDefaultPublic:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedLinkCreatePolicyDefaultTeamOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedLinkCreatePolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2968,10 +3197,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESShowcaseDownloadPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESShowcaseDownloadPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESShowcaseDownloadPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3141,10 +3373,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESShowcaseEnabledPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESShowcaseEnabledPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESShowcaseEnabledPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3314,10 +3549,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESShowcaseExternalSharingPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESShowcaseExternalSharingPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESShowcaseExternalSharingPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3488,10 +3726,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESSmartSyncPolicyLocal:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSmartSyncPolicyOnDemand:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSmartSyncPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3661,10 +3902,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESSmarterSmartSyncPolicyStateDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSmarterSmartSyncPolicyStateEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSmarterSmartSyncPolicyStateOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3848,12 +4092,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESSsoPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSsoPolicyOptional:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSsoPolicyRequired:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSsoPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4029,10 +4277,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESSuggestMembersPolicyDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSuggestMembersPolicyEnabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSuggestMembersPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4467,10 +4718,13 @@
   switch (_tag) {
   case DBTEAMPOLICIESTwoStepVerificationPolicyRequireTfaEnable:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESTwoStepVerificationPolicyRequireTfaDisable:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESTwoStepVerificationPolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4654,12 +4908,16 @@
   switch (_tag) {
   case DBTEAMPOLICIESTwoStepVerificationStateRequired:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESTwoStepVerificationStateOptional:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESTwoStepVerificationStateDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESTwoStepVerificationStateOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

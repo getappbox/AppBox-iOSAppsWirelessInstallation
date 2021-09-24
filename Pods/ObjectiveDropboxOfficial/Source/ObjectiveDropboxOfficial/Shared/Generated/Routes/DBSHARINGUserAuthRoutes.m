@@ -21,7 +21,6 @@
 #import "DBSHARINGAddFolderMemberError.h"
 #import "DBSHARINGAddMember.h"
 #import "DBSHARINGAddMemberSelectorError.h"
-#import "DBSHARINGChangeFileMemberAccessArgs.h"
 #import "DBSHARINGCreateSharedLinkArg.h"
 #import "DBSHARINGCreateSharedLinkError.h"
 #import "DBSHARINGCreateSharedLinkWithSettingsArg.h"
@@ -197,15 +196,6 @@
                                                                                          members:members
                                                                                            quiet:quiet
                                                                                    customMessage:customMessage];
-  return [self.client requestRpc:route arg:arg];
-}
-
-- (DBRpcTask *)changeFileMemberAccess:(NSString *)file
-                               member:(DBSHARINGMemberSelector *)member
-                          accessLevel:(DBSHARINGAccessLevel *)accessLevel {
-  DBRoute *route = DBSHARINGRouteObjects.DBSHARINGChangeFileMemberAccess;
-  DBSHARINGChangeFileMemberAccessArgs *arg =
-      [[DBSHARINGChangeFileMemberAccessArgs alloc] initWithFile:file member:member accessLevel:accessLevel];
   return [self.client requestRpc:route arg:arg];
 }
 

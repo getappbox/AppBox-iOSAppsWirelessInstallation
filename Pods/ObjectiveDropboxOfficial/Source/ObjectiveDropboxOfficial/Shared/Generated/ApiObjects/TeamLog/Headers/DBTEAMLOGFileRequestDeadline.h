@@ -31,8 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// gap.
 @property (nonatomic, readonly, nullable) NSDate *deadline;
 
-/// If set, allow uploads after the deadline has passed. Might be missing due to
-/// historical data gap.
+/// If set, allow uploads after the deadline has passed.
 @property (nonatomic, readonly, copy, nullable) NSString *allowLateUploads;
 
 #pragma mark - Constructors
@@ -43,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param deadline The deadline for this file request. Might be missing due to
 /// historical data gap.
 /// @param allowLateUploads If set, allow uploads after the deadline has passed.
-/// Might be missing due to historical data gap.
 ///
 /// @return An initialized instance.
 ///

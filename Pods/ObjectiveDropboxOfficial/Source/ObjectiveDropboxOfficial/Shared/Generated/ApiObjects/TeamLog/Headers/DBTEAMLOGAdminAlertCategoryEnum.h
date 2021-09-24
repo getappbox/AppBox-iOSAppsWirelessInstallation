@@ -37,6 +37,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAdminAlertCategoryEnumTag){
     DBTEAMLOGAdminAlertCategoryEnumDataLossProtection,
 
     /// (no description).
+    DBTEAMLOGAdminAlertCategoryEnumInformationGovernance,
+
+    /// (no description).
     DBTEAMLOGAdminAlertCategoryEnumMalwareSharing,
 
     /// (no description).
@@ -71,6 +74,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAdminAlertCategoryEnumTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDataLossProtection;
+
+///
+/// Initializes union class with tag state of "information_governance".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithInformationGovernance;
 
 ///
 /// Initializes union class with tag state of "malware_sharing".
@@ -127,6 +137,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGAdminAlertCategoryEnumTag){
 /// "data_loss_protection".
 ///
 - (BOOL)isDataLossProtection;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "information_governance".
+///
+/// @return Whether the union's current tag state has value
+/// "information_governance".
+///
+- (BOOL)isInformationGovernance;
 
 ///
 /// Retrieves whether the union's current tag state has value "malware_sharing".

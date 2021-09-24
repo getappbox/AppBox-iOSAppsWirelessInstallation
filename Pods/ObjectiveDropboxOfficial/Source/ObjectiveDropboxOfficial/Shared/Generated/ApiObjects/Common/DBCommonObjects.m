@@ -137,12 +137,16 @@
   switch (_tag) {
   case DBCOMMONPathRootHome:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBCOMMONPathRootRoot:
     result = prime * result + [self.root hash];
+    break;
   case DBCOMMONPathRootNamespaceId:
     result = prime * result + [self.namespaceId hash];
+    break;
   case DBCOMMONPathRootOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -334,10 +338,13 @@
   switch (_tag) {
   case DBCOMMONPathRootErrorInvalidRoot:
     result = prime * result + [self.invalidRoot hash];
+    break;
   case DBCOMMONPathRootErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBCOMMONPathRootErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

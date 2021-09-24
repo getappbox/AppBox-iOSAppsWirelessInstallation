@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Shared link token key.
 @property (nonatomic, readonly, copy, nullable) NSString *tokenKey;
 
-/// Sharing permission. Might be missing due to historical data gap.
+/// Sharing permission.
 @property (nonatomic, readonly, copy, nullable) NSString *sharingPermission;
 
 #pragma mark - Constructors
@@ -47,8 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param targetAssetIndex Target asset position in the Assets list.
 /// @param originalFolderName Original shared folder name.
 /// @param tokenKey Shared link token key.
-/// @param sharingPermission Sharing permission. Might be missing due to
-/// historical data gap.
+/// @param sharingPermission Sharing permission.
 ///
 /// @return An initialized instance.
 ///

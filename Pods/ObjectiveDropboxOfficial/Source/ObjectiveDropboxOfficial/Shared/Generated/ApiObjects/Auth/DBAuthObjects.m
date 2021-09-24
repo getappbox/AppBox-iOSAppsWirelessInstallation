@@ -125,10 +125,13 @@
   switch (_tag) {
   case DBAUTHAccessErrorInvalidAccountType:
     result = prime * result + [self.invalidAccountType hash];
+    break;
   case DBAUTHAccessErrorPaperAccessDenied:
     result = prime * result + [self.paperAccessDenied hash];
+    break;
   case DBAUTHAccessErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -388,20 +391,28 @@
   switch (_tag) {
   case DBAUTHAuthErrorInvalidAccessToken:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHAuthErrorInvalidSelectUser:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHAuthErrorInvalidSelectAdmin:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHAuthErrorUserSuspended:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHAuthErrorExpiredAccessToken:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHAuthErrorMissingScope:
     result = prime * result + [self.missingScope hash];
+    break;
   case DBAUTHAuthErrorRouteAccessDenied:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHAuthErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -603,10 +614,13 @@
   switch (_tag) {
   case DBAUTHInvalidAccountTypeErrorEndpoint:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHInvalidAccountTypeErrorFeature:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHInvalidAccountTypeErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -776,10 +790,13 @@
   switch (_tag) {
   case DBAUTHPaperAccessErrorPaperDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHPaperAccessErrorNotPaperUser:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHPaperAccessErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1060,10 +1077,13 @@
   switch (_tag) {
   case DBAUTHRateLimitReasonTooManyRequests:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHRateLimitReasonTooManyWriteOperations:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHRateLimitReasonOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1341,10 +1361,13 @@
   switch (_tag) {
   case DBAUTHTokenFromOAuth1ErrorInvalidOauth1TokenInfo:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHTokenFromOAuth1ErrorAppIdMismatch:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBAUTHTokenFromOAuth1ErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

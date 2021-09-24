@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Adds specified members to a file.
 ///
 /// @param file File to which to add members.
-/// @param members Members to add. Note that even an email address is given, this may result in a user being directy
+/// @param members Members to add. Note that even an email address is given, this may result in a user being directly
 /// added to the membership if that email is the user's main account email.
 ///
 /// @return Through the response callback, the caller will receive a `NSArray<DBSHARINGFileMemberActionResult *>` object
@@ -146,7 +146,7 @@ addFileMember:(NSString *)file
 /// Adds specified members to a file.
 ///
 /// @param file File to which to add members.
-/// @param members Members to add. Note that even an email address is given, this may result in a user being directy
+/// @param members Members to add. Note that even an email address is given, this may result in a user being directly
 /// added to the membership if that email is the user's main account email.
 /// @param customMessage Message to send to added members in their invitation.
 /// @param quiet Whether added members should be notified via device notifications of their invitation.
@@ -195,22 +195,6 @@ addMessageAsComment:(nullable NSNumber *)addMessageAsComment;
                                                                  customMessage:(nullable NSString *)customMessage;
 
 ///
-/// DEPRECATED: Identical to update_file_member but with less information returned.
-///
-/// @param file File for which we are changing a member's access.
-/// @param member The member whose access we are changing.
-/// @param accessLevel The new access level for the member.
-///
-/// @return Through the response callback, the caller will receive a `DBSHARINGFileMemberActionResult` object on success
-/// or a `DBSHARINGFileMemberActionError` object on failure.
-///
-- (DBRpcTask<DBSHARINGFileMemberActionResult *, DBSHARINGFileMemberActionError *> *)
-changeFileMemberAccess:(NSString *)file
-                member:(DBSHARINGMemberSelector *)member
-           accessLevel:(DBSHARINGAccessLevel *)accessLevel
-    __deprecated_msg("changeFileMemberAccess is deprecated. Use updateFileMember.");
-
-///
 /// Returns the status of an asynchronous job.
 ///
 /// @param asyncJobId Id of the asynchronous job. This is the value of a response returned from the method that launched
@@ -244,12 +228,10 @@ changeFileMemberAccess:(NSString *)file
 - (DBRpcTask<DBSHARINGShareFolderJobStatus *, DBASYNCPollError *> *)checkShareJobStatus:(NSString *)asyncJobId;
 
 ///
-/// DEPRECATED: Create a shared link. If a shared link already exists for the given path, that link is returned. Note
-/// that in the returned PathLinkMetadata, the `url` in `DBSHARINGPathLinkMetadata` field is the shortened URL if
-/// `shortUrl` in `DBSHARINGCreateSharedLinkArg` argument is set to true. Previously, it was technically possible to
-/// break a shared link by moving or renaming the corresponding file or folder. In the future, this will no longer be
-/// the case, so your app shouldn't rely on this behavior. Instead, if your app needs to revoke a shared link, use
-/// `revokeSharedLink`.
+/// DEPRECATED: Create a shared link. If a shared link already exists for the given path, that link is returned.
+/// Previously, it was technically possible to break a shared link by moving or renaming the corresponding file or
+/// folder. In the future, this will no longer be the case, so your app shouldn't rely on this behavior. Instead, if
+/// your app needs to revoke a shared link, use `revokeSharedLink`.
 ///
 /// @param path The path to share.
 ///
@@ -260,15 +242,12 @@ changeFileMemberAccess:(NSString *)file
     __deprecated_msg("createSharedLink is deprecated. Use createSharedLinkWithSettings.");
 
 ///
-/// DEPRECATED: Create a shared link. If a shared link already exists for the given path, that link is returned. Note
-/// that in the returned PathLinkMetadata, the `url` in `DBSHARINGPathLinkMetadata` field is the shortened URL if
-/// `shortUrl` in `DBSHARINGCreateSharedLinkArg` argument is set to true. Previously, it was technically possible to
-/// break a shared link by moving or renaming the corresponding file or folder. In the future, this will no longer be
-/// the case, so your app shouldn't rely on this behavior. Instead, if your app needs to revoke a shared link, use
-/// `revokeSharedLink`.
+/// DEPRECATED: Create a shared link. If a shared link already exists for the given path, that link is returned.
+/// Previously, it was technically possible to break a shared link by moving or renaming the corresponding file or
+/// folder. In the future, this will no longer be the case, so your app shouldn't rely on this behavior. Instead, if
+/// your app needs to revoke a shared link, use `revokeSharedLink`.
 ///
 /// @param path The path to share.
-/// @param shortUrl Whether to return a shortened URL.
 /// @param pendingUpload If it's okay to share a path that does not yet exist, set this to either `file` in
 /// `DBSHARINGPendingUploadMode` or `folder` in `DBSHARINGPendingUploadMode` to indicate whether to assume it's a file
 /// or folder.
@@ -573,7 +552,7 @@ getSharedLinkMetadata:(NSString *)url
 /// DEPRECATED: Returns a list of LinkMetadata objects for this user, including collection links. If no path is given,
 /// returns a list of all shared links for the current user, including collection links, up to a maximum of 1000 links.
 /// If a non-empty path is given, returns a list of all shared links that allow access to the given path.  Collection
-/// links are never returned in this case. Note that the url field in the response is never the shortened URL.
+/// links are never returned in this case.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGGetSharedLinksResult` object on success
@@ -586,7 +565,7 @@ getSharedLinkMetadata:(NSString *)url
 /// DEPRECATED: Returns a list of LinkMetadata objects for this user, including collection links. If no path is given,
 /// returns a list of all shared links for the current user, including collection links, up to a maximum of 1000 links.
 /// If a non-empty path is given, returns a list of all shared links that allow access to the given path.  Collection
-/// links are never returned in this case. Note that the url field in the response is never the shortened URL.
+/// links are never returned in this case.
 ///
 /// @param path See `getSharedLinks` description.
 ///
@@ -917,7 +896,8 @@ modifySharedLinkSettings:(NSString *)url
 /// leave_a_copy is false, and asynchronously if leave_a_copy is true.
 ///
 /// @param sharedFolderId The ID for the shared folder.
-/// @param leaveACopy Keep a copy of the folder's contents upon relinquishing membership.
+/// @param leaveACopy Keep a copy of the folder's contents upon relinquishing membership. This must be set to false when
+/// the folder is within a team folder or another shared folder.
 ///
 /// @return Through the response callback, the caller will receive a `DBASYNCLaunchEmptyResult` object on success or a
 /// `DBSHARINGRelinquishFolderMembershipError` object on failure.
@@ -961,7 +941,8 @@ removeFileMember2:(NSString *)file
 /// @param sharedFolderId The ID for the shared folder.
 /// @param member The member to remove from the folder.
 /// @param leaveACopy If true, the removed user will keep their copy of the folder after it's unshared, assuming it was
-/// mounted. Otherwise, it will be removed from their Dropbox. Also, this must be set to false when kicking a group.
+/// mounted. Otherwise, it will be removed from their Dropbox. This must be set to false when removing a group, or when
+/// the folder is within a team folder or another shared folder.
 ///
 /// @return Through the response callback, the caller will receive a `DBASYNCLaunchResultBase` object on success or a
 /// `DBSHARINGRemoveFolderMemberError` object on failure.
@@ -1109,6 +1090,9 @@ accessInheritance:(nullable DBSHARINGAccessInheritance *)accessInheritance
 ///
 /// Changes a member's access on a shared file.
 ///
+/// @param file File for which we are changing a member's access.
+/// @param member The member whose access we are changing.
+/// @param accessLevel The new access level for the member.
 ///
 /// @return Through the response callback, the caller will receive a `DBSHARINGMemberAccessLevelResult` object on
 /// success or a `DBSHARINGFileMemberActionError` object on failure.

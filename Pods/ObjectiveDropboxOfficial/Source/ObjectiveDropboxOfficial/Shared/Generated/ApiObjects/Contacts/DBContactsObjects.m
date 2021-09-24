@@ -215,8 +215,10 @@
   switch (_tag) {
   case DBCONTACTSDeleteManualContactsErrorContactsNotFound:
     result = prime * result + [self.contactsNotFound hash];
+    break;
   case DBCONTACTSDeleteManualContactsErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
