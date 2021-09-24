@@ -57,7 +57,7 @@
     NSInteger selectedRow = [accountTableView selectedRow];
     if (selectedRow >= 0) {
         NSDictionary *keyChainAccount = [NSDictionary dictionaryWithDictionary:[itcAccounts objectAtIndex:selectedRow]];
-        [SAMKeychain deletePasswordForService:abiTunesConnectService account:[keyChainAccount valueForKey:kSAMKeychainAccountKey]];
+        //[SAMKeychain deletePasswordForService:abiTunesConnectService account:[keyChainAccount valueForKey:kSAMKeychainAccountKey]];
     }
     [self loadAccounts];
     [accountTableView reloadData];

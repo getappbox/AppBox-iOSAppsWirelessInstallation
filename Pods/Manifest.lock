@@ -26,7 +26,6 @@ PODS:
   - ObjectiveDropboxOfficial (6.2.0)
   - SAMKeychain (1.5.3)
   - SSZipArchive (2.4.0)
-  - STPrivilegedTask (1.0.1)
   - ZXingObjC (3.6.5):
     - ZXingObjC/All (= 3.6.5)
   - ZXingObjC/All (3.6.5)
@@ -38,7 +37,6 @@ DEPENDENCIES:
   - ObjectiveDropboxOfficial
   - SAMKeychain
   - SSZipArchive (= 2.4.0)
-  - STPrivilegedTask
   - ZXingObjC
 
 SPEC REPOS:
@@ -50,7 +48,6 @@ SPEC REPOS:
     - ObjectiveDropboxOfficial
     - SAMKeychain
     - SSZipArchive
-    - STPrivilegedTask
     - ZXingObjC
 
 SPEC CHECKSUMS:
@@ -61,9 +58,8 @@ SPEC CHECKSUMS:
   ObjectiveDropboxOfficial: 2115db7fc21d267c6f0606557a6ea0b69aa37d30
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SSZipArchive: fc3955f860f5f222095cd6a3547d407534c03a88
-  STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 35de17c4b7305532faa732e7c7711fb5a4ddf82f
+PODFILE CHECKSUM: 9afd84f31f50d3fae17933775b082e9c8b09a0c2
 
 COCOAPODS: 1.10.1
