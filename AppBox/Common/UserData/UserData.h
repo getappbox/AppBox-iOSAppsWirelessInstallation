@@ -26,31 +26,11 @@
 +(NSString *)userMicrosoftTeamWebHook;
 +(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel;
 
-// Default build location
-+(NSURL *)buildLocation;
-+(void)setBuildLocation:(NSURL *)buildLocation;
-
-// Default Xcode location
-+(NSURL *)xCodeLocation;
-+(void)setXCodeLocation:(NSString *)xCodeLocation;
-
-// Default Application Loader Location
-+(NSURL *)applicationLoaderLocation;
-+(void)setApplicationLoaderLocation:(NSString *)alLocation;
-
 // Dropbox Used and Available Space
 +(NSNumber *)dropboxUsedSpace;
 +(NSNumber *)dropboxAvailableSpace;
 +(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
 +(void)setDropboxAvailableSpace:(NSNumber *)availableSpace;
-
-//xcodebuild and app store upload settings
-+(BOOL)uploadSymbols;
-+(void)setUploadSymbols:(BOOL)uploadSymbol;
-+(BOOL)uploadBitcode;
-+(void)setUploadBitcode:(BOOL)uploadBitcode;
-+(BOOL)compileBitcode;
-+(void)setCompileBitcode:(BOOL)compileBitcode;
     
 //AppBox Installation page settings
 +(BOOL)downloadIPAEnable;
@@ -70,24 +50,10 @@
 +(NSInteger)uploadChunkSize;
 +(void)setUploadChunkSize:(NSInteger)chunkSize;
 
-//AppBox CI Settings
+//General Settings
 +(BOOL)debugLog;
 +(void)setEnableDebugLog:(BOOL)debugLog;
 +(BOOL)updateAlertEnable;
 +(void)setUpdateAlertEnable:(BOOL)updateAlert;
-+(BOOL)useXCPretty;
-+(void)setUseXCPretty:(BOOL)useXCPretty;
-
-+(NSString *)defaultCIEmail;
-+(void)setDefaultCIEmail:(NSString *)email;
-+(NSString *)ciSubjectPrefix;
-+(void)setCISubjectPrefix:(NSString *)prefix;
-
-+(NSString *)keychainPath;
-+(void)setKeychainPath:(NSString *)path;
-+(NSString *)keychainPassword;
-+(void)setKeychainPassword:(NSString *)password;
-+(NSString *)xcodeVersionPath;
-+(void)setXcodeVersionPath:(NSString *)xcodeVersionPath;
 
 @end

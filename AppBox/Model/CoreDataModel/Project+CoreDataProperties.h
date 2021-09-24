@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *bundleIdentifier;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, retain) NSOrderedSet<CISetting *> *ciSettings;
-@property (nullable, nonatomic, retain) Teams *teams;
 @property (nullable, nonatomic, retain) NSOrderedSet<UploadRecord *> *uploadRecords;
 
 @end

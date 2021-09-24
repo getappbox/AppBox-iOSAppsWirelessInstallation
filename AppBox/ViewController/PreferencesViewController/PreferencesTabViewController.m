@@ -42,14 +42,6 @@
     [self addTabViewItem:accountPreferencesTabViewItem];
     
     //Mail Preferences
-    //TeamsViewController *teamsViewController = [[TeamsViewController alloc] initWithNibName:NSStringFromClass([TeamsViewController class]) bundle:nil];
-    //NSTabViewItem *teamsTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"teams"];
-    //[teamsTabViewItem setLabel:@"Project Teams"];
-    //[teamsTabViewItem setImage:[NSImage imageNamed:@"Teams"]];
-    //[teamsTabViewItem setViewController:teamsViewController];
-    //[self addTabViewItem:teamsTabViewItem];
-    
-    //Mail Preferences
     EmailPreferencesViewController *emailPreferencesViewController = [[EmailPreferencesViewController alloc] initWithNibName:NSStringFromClass([EmailPreferencesViewController class]) bundle:nil];
     NSTabViewItem *emailPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"email"];
     [emailPreferencesTabViewItem setLabel:@"Email"];
@@ -65,23 +57,12 @@
     [slackPreferencesTabViewItem setViewController:slackPreferencesViewController];
     [self addTabViewItem:slackPreferencesTabViewItem];
     
-    //CI Setting Preferences
-    CISettingViewController *ciSettingViewController = [[CISettingViewController alloc] initWithNibName:NSStringFromClass([CISettingViewController class]) bundle:nil];
-    NSTabViewItem *ciPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"ci"];
-    [ciPreferencesTabViewItem setLabel:@"CI Setting"];
-    [ciPreferencesTabViewItem setImage:[NSImage imageNamed:@"CI"]];
-    [ciPreferencesTabViewItem setViewController:ciSettingViewController];
-    [self addTabViewItem:ciPreferencesTabViewItem];
-    
     //Help Preferences
     HelpPreferencesViewController *helpPreferencesViewController = [[HelpPreferencesViewController alloc] initWithNibName:NSStringFromClass([HelpPreferencesViewController class]) bundle:nil];
     NSTabViewItem *helpPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"help"];
     [helpPreferencesTabViewItem setLabel:@"Help"];
     [helpPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueHelp"]];
     [helpPreferencesTabViewItem setViewController:helpPreferencesViewController];
-    
-    //[self addTabViewItem:helpPreferencesTabViewItem];
-    
 }
 
 + (void)presentPreferences {

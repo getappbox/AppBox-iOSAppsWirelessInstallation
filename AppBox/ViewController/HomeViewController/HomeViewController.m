@@ -24,9 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //unlock keychain
-    [KeychainHandler unlockSavedKeychain];
-    
     self.project = [[XCProject alloc] init];
     buildOptionBoxHeightConstraint.constant = 0;
     
@@ -35,9 +32,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxLogoutHandler:) name:abDropBoxLoggedOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initOpenFilesProcess:) name:abUseOpenFilesNotification object:nil];
-    
-    //setup initial value
-    [self.project setBuildDirectory: [UserData buildLocation]];
     
     //setup dropbox
     [EventTracker logAppBoxVersion];
@@ -171,7 +165,6 @@
 
 - (void)initIPAUploadProcessForURL:(NSURL *)ipaURL {
     [self viewStateForProgressFinish:YES];
-    [CIProjectBuilder setProjectSettingFromProject:self.ciRepoProject toProject:self.project];
     [self.project setIpaFullPath:ipaURL];
     [selectedFilePath setURL:ipaURL];
     [textFieldEmail setStringValue:self.project.emails];
@@ -247,10 +240,6 @@
     }
 }
 
-//Config CI
-- (IBAction)buttonConfigCITapped:(NSButton *)sender {
-    
-}
 
 #pragma mark - Dropbox Helper -
 #pragma mark → Dropbox Notification Handler
@@ -279,7 +268,6 @@
     //reset project
     if (finish){
         self.project = [[XCProject alloc] init];
-        [self.project setBuildDirectory:[UserData buildLocation]];
         [self.uploadManager setProject:self.project];
         [ABHudViewController hudForView:self.view hide:YES];
         buildOptionBoxHeightConstraint.constant = 0;
@@ -322,16 +310,16 @@
 
 -(void)updateViewState{
     //update action button
-    BOOL enable = (selectedFilePath.URL.isIPA && self.project.ipaFullPath != nil);
+    BOOL enable = selectedFilePath.URL.isIPA;
     
     [buttonAction setEnabled:enable];
-    [buttonAction setTitle:selectedFilePath.URL.isIPA ? @"Upload IPA" : @"Archive and Upload IPA" ];
+    [buttonAction setTitle:@"Upload IPA"];
     
     //update keepsame link
-    [buttonUniqueLink setEnabled:(selectedFilePath.URL.isIPA && ![[AppDelegate appDelegate] processing])];
+    [buttonUniqueLink setEnabled:(enable && ![[AppDelegate appDelegate] processing])];
     
     //update advanced button
-    [buttonAdcanced setEnabled:buttonAction.enabled];
+    [buttonAdvanced setEnabled:enable];
     
 }
 
