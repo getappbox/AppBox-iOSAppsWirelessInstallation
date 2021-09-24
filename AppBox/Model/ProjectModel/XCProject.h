@@ -29,26 +29,9 @@
 
 //Local URLS
 @property(nonatomic, retain) NSURL *ipaFullPath;
-@property(nonatomic, retain) NSURL *rootDirectory;
-@property(nonatomic, retain) NSURL *buildDirectory;
-@property(nonatomic, retain) NSURL *buildUUIDDirectory;
 
-//Project Schemes and Targets
-@property(nonatomic, retain) NSArray *schemes;
-@property(nonatomic, retain) NSArray *targets;
-@property(nonatomic, retain) NSString *selectedSchemes;
-
-//AppStore Details
-@property(nonatomic, retain) NSString *alPath;
-@property(nonatomic, retain) NSString *xcodePath;
-@property(nonatomic, retain) NSString *itcPasswod;
-@property(nonatomic, retain) NSString *itcUserName;
-
-//Info.plist, manifest.plist and buildlist information
+//Info.plist, and provisioning information
 @property(nonatomic, retain) NSDictionary *ipaInfoPlist;
-@property(nonatomic, retain) NSDictionary *manifestData;
-@property(nonatomic, retain) NSDictionary *buildListInfo;
-@property(nonatomic, retain) NSDictionary *exportOptionsPlist;
 @property(nonatomic, retain) MobileProvision *mobileProvision;
 
 //UniqueLink.json
@@ -72,17 +55,9 @@
 @property(nonatomic, retain) NSString *emails;
 @property(nonatomic, retain) NSNumber *keepSameLink;
 @property(nonatomic, retain) NSString *personalMessage;
-@property(nonatomic, retain) NSString *ciEmails;
-@property(nonatomic, retain) NSString *subjectPrefix;
-
-//Distribute over local network
-@property(nonatomic, assign) BOOL distributeOverLocalNetwork;
-@property(nonatomic, retain) NSString *distributionLocalDirectory;
-@property(nonatomic, retain) NSURL *ipaFileLocalShareableURL;
 
 - (instancetype)initEmpty;
 - (BOOL)isValidProjectInfoPlist;
-- (BOOL)createExportOptionPlist;
 - (BOOL)exportSharedURLInSystemFile;
 - (void)createUDIDAndIsNew:(BOOL)isNew;
 - (void)upadteDbDirectoryByBundleDirectory;

@@ -606,11 +606,6 @@
     //Create manifest file with share IPA url and upload manifest file
     if (self.dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = url;
-        if(!self.project.distributeOverLocalNetwork){
-            shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://www.dropbox.com" withString:abDropBoxDirectDownload];
-            shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://dropbox.com" withString:abDropBoxDirectDownload];
-            shareableLink = [shareableLink substringToIndex:shareableLink.length-5];
-        }
         self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
             if (manifestURL == nil){
