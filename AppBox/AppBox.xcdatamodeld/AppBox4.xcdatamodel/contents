@@ -20,7 +20,6 @@
     </entity>
     <entity name="UploadRecord" representedClassName="UploadRecord" syncable="YES">
         <attribute name="build" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="buildScheme" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="buildType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="datetime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dbAppInfoFullPath" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,6 +44,6 @@
         <element name="Project" positionX="-11914.72265625" positionY="-2547.59375" width="128" height="88"/>
         <element name="ProvisionedDevice" positionX="-12258" positionY="-2493" width="128" height="58"/>
         <element name="ProvisioningProfile" positionX="-12260" positionY="-2736" width="128" height="163"/>
-        <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="358"/>
+        <element name="UploadRecord" positionX="-12098" positionY="-2758" width="128" height="343"/>
     </elements>
 </model>
