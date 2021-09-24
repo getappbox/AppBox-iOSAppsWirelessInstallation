@@ -149,11 +149,6 @@ typedef enum : NSUInteger {
         }
     }
     
-    //Scheme
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme]) {
-        [cell.textField setStringValue:uploadRecord.buildScheme == nil ? @"N/A" : uploadRecord.buildScheme];
-    }
-    
     //TeamId
     else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId]){
         if (uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName) {

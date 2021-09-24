@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<UploadRecord *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *build;
-@property (nullable, nonatomic, copy) NSString *buildScheme;
 @property (nullable, nonatomic, copy) NSString *buildType;
 @property (nullable, nonatomic, copy) NSDate *datetime;
 @property (nullable, nonatomic, copy) NSString *dbAppInfoFullPath;

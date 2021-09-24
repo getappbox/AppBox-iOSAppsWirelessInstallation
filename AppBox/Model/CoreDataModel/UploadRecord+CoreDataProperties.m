@@ -15,7 +15,6 @@
 }
 
 @dynamic build;
-@dynamic buildScheme;
 @dynamic buildType;
 @dynamic datetime;
 @dynamic dbAppInfoFullPath;
