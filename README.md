@@ -9,7 +9,9 @@
 AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
 #### ⚠️ WARNING
-Since 2 March 2021, Dropbox made some changes that break all existing apps uploaded using the AppBox version 2.9.1 or earlier. So, Please use the [latest version of AppBox](https://getappbox.com/download/) if you are facing any installation issues. Please check more details [here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues/217).
+- Since 2 March 2021, Dropbox made some changes that break all existing apps uploaded using the AppBox version 2.9.1 or earlier. So, Please use the [latest version of AppBox](https://getappbox.com/download/) if you are facing any installation issues. Please check more details [here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues/217).
+- [Retiring Legacy Tokens](https://dropbox.tech/developers/migrating-app-permissions-and-access-tokens) - On September 30th, 2021, Dropbox will retire the creation of long-lived access tokens — resulting in all new tokens being short-lived. For online-only apps that already handle re-authentication, users may experience more prompts for re-authentication. Apps that require background (“offline”) access but have not yet implemented refresh tokens will be impacted.
+- AppBox updated the application settings for Dropbox to get Long-lived tokens. But Dropbox will be deprecated in the future.
 
 
 # Features
