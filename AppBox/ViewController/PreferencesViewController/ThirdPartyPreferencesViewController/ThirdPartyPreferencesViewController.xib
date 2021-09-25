@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SlackPreferencesViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="ThirdPartyPreferencesViewController">
             <connections>
                 <outlet property="hangoutChatTextField" destination="Ye4-yH-va0" id="VFw-7f-ZZc"/>
                 <outlet property="microsoftTeamWebHook" destination="utm-Ns-cjR" id="mdZ-iq-0Sz"/>
@@ -18,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="892" height="330"/>
+            <rect key="frame" x="0.0" y="0.0" width="892" height="316"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mjn-bT-CIG">
-                    <rect key="frame" x="13" y="153" width="204" height="19"/>
+                    <rect key="frame" x="13" y="152" width="204" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Slack Channel Webhook:" id="2aL-XI-hHx">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -30,7 +30,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9r2-v4-bkQ">
-                    <rect key="frame" x="230" y="150" width="493" height="24"/>
+                    <rect key="frame" x="230" y="149" width="493" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="493" id="ebg-FW-HQN"/>
                     </constraints>
@@ -41,7 +41,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-lG-f0C">
-                    <rect key="frame" x="13" y="109" width="204" height="19"/>
+                    <rect key="frame" x="13" y="108" width="204" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Hangout Chat Webhook:" id="IXU-pd-gDF">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -49,7 +49,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ye4-yH-va0">
-                    <rect key="frame" x="230" y="106" width="493" height="24"/>
+                    <rect key="frame" x="230" y="105" width="501" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="https://chat.googleapis.com/v1/spaces/XXXXXXXXXXX/messages?key=XXXXXXXXXXXXXXXXXXXXXXX" drawsBackground="YES" id="1Tw-UO-1WD">
                         <font key="font" metaFont="systemLight" size="16"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -57,7 +57,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UIS-te-x1g">
-                    <rect key="frame" x="13" y="291" width="204" height="19"/>
+                    <rect key="frame" x="13" y="277" width="204" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="Apo-90-Dsy"/>
                     </constraints>
@@ -68,7 +68,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBN-E3-vOT">
-                    <rect key="frame" x="230" y="288" width="647" height="24"/>
+                    <rect key="frame" x="230" y="274" width="647" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Link Prefix Message" drawsBackground="YES" id="2Hv-ni-fmB">
                         <font key="font" metaFont="systemLight" size="16"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -76,21 +76,23 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNt-JQ-OEn">
-                    <rect key="frame" x="228" y="205" width="651" height="78"/>
+                    <rect key="frame" x="228" y="204" width="651" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="eW2-8g-WWT"/>
+                    </constraints>
                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" id="jnf-oH-zV9">
                         <font key="font" metaFont="system" size="10"/>
-                        <string key="title">Supported Keywords: The
-{PROJECT_NAME} - For Project Name
+                        <string key="title">Supported Keywords:
+{BUILD_NAME} - For Build Name
 {BUILD_VERSION} - For Build Version
 {BUILD_NUMBER} - For Build Number 
-{PROJECT_SCHEME} - For Project Scheme
 {DOWNLOAD_URL} - For Download URL</string>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mOf-S4-6K3">
-                    <rect key="frame" x="13" y="65" width="204" height="19"/>
+                    <rect key="frame" x="13" y="64" width="204" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Microsoft Team Webhook:" id="Jb0-Mt-bBy">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -98,7 +100,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utm-Ns-cjR">
-                    <rect key="frame" x="230" y="62" width="493" height="24"/>
+                    <rect key="frame" x="230" y="61" width="501" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="https://outlook.office365.com/webhook/XXXXXXXX-XXXX-XXXXXXXXXXX" drawsBackground="YES" id="icx-uX-j9G">
                         <font key="font" metaFont="systemLight" size="16"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +108,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D0D-F2-TpF">
-                    <rect key="frame" x="732" y="145" width="156" height="32"/>
+                    <rect key="frame" x="731" y="144" width="158" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="144" id="tV5-zJ-U4c"/>
                     </constraints>
@@ -119,7 +121,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hcy-sR-5E1">
-                    <rect key="frame" x="732" y="101" width="156" height="32"/>
+                    <rect key="frame" x="739" y="100" width="150" height="32"/>
                     <buttonCell key="cell" type="push" title="Send test Message" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4fd-ff-KyW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -129,7 +131,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qDQ-Ub-rJL">
-                    <rect key="frame" x="732" y="57" width="156" height="32"/>
+                    <rect key="frame" x="739" y="56" width="150" height="32"/>
                     <buttonCell key="cell" type="push" title="Send test Message" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ROC-sE-xgb">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -139,10 +141,10 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="lbL-3T-0Lv">
-                    <rect key="frame" x="0.0" y="192" width="892" height="5"/>
+                    <rect key="frame" x="0.0" y="191" width="892" height="5"/>
                 </box>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VI4-aB-Pi7">
-                    <rect key="frame" x="818" y="13" width="70" height="32"/>
+                    <rect key="frame" x="825" y="13" width="64" height="32"/>
                     <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ibp-hx-mxC">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -152,10 +154,10 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="jld-H6-Hc3">
-                    <rect key="frame" x="0.0" y="49" width="892" height="5"/>
+                    <rect key="frame" x="0.0" y="48" width="892" height="5"/>
                 </box>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b9B-T0-d3K">
-                    <rect key="frame" x="14" y="13" width="216" height="32"/>
+                    <rect key="frame" x="13" y="13" width="210" height="32"/>
                     <buttonCell key="cell" type="push" title="Set up a new Slack Webhook" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aoK-W3-B2a">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
