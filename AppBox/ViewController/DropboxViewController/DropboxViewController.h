@@ -15,4 +15,5 @@
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender;
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender;
+
 @end

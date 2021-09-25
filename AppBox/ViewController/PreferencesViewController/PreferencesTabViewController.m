@@ -52,12 +52,12 @@
     [self addTabViewItem:emailPreferencesTabViewItem];
     
     //Integrations Preferences
-    SlackPreferencesViewController *slackPreferencesViewController = [[SlackPreferencesViewController alloc] initWithNibName:NSStringFromClass([SlackPreferencesViewController class]) bundle:nil];
-    NSTabViewItem *slackPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"slack"];
-    [slackPreferencesTabViewItem setLabel:@"3rd Party"];
-    [slackPreferencesTabViewItem setImage:[NSImage imageNamed:@"Integration"]];
-    [slackPreferencesTabViewItem setViewController:slackPreferencesViewController];
-    [self addTabViewItem:slackPreferencesTabViewItem];
+	ThirdPartyPreferencesViewController *thirdPartyPreferencesViewController = [[ThirdPartyPreferencesViewController alloc] initWithNibName:NSStringFromClass([ThirdPartyPreferencesViewController class]) bundle:nil];
+    NSTabViewItem *thirdPartyPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"slack"];
+    [thirdPartyPreferencesTabViewItem setLabel:@"3rd Party"];
+    [thirdPartyPreferencesTabViewItem setImage:[NSImage imageNamed:@"Integration"]];
+    [thirdPartyPreferencesTabViewItem setViewController:thirdPartyPreferencesViewController];
+    [self addTabViewItem:thirdPartyPreferencesTabViewItem];
     
     //Help Preferences
     HelpPreferencesViewController *helpPreferencesViewController = [[HelpPreferencesViewController alloc] initWithNibName:NSStringFromClass([HelpPreferencesViewController class]) bundle:nil];

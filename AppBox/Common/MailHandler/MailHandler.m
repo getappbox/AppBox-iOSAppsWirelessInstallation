@@ -30,7 +30,7 @@
 #pragma mark - Parse customised message with project details
 + (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project {
     NSString *messageCopy = message.copy;
-    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{PROJECT_NAME}" withString:project.name];
+    messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NAME}" withString:project.name];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NUMBER}" withString:project.build];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_VERSION}" withString:project.version];
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{DOWNLOAD_URL}" withString: project.appShortShareableURL.absoluteString];

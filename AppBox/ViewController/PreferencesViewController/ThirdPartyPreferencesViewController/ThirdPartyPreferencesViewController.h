@@ -1,5 +1,5 @@
 //
-//  SlackPreferencesViewController.h
+//  ThirdPartyPreferencesViewController.h
 //  AppBox
 //
 //  Created by Vineet Choudhary on 10/05/17.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SlackPreferencesViewController : NSViewController {
+@interface ThirdPartyPreferencesViewController : NSViewController {
     __weak IBOutlet NSTextField *slackChannelTextField;
     __weak IBOutlet NSTextField *slackMessageTextField;
     __weak IBOutlet NSTextField *hangoutChatTextField;
