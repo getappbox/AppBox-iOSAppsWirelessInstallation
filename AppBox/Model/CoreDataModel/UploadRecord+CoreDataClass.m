@@ -7,8 +7,6 @@
 //
 
 #import "UploadRecord+CoreDataClass.h"
-#import "Project+CoreDataClass.h"
-
 
 @implementation UploadRecord
 

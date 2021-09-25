@@ -49,7 +49,7 @@
 
 #import "Project+CoreDataProperties.h"
 #import "UploadRecord+CoreDataProperties.h"
+#import "AppBoxService+CoreDataProperties.h"
 #import "ProvisionedDevice+CoreDataProperties.h"
 #import "ProvisioningProfile+CoreDataProperties.h"
-
 #endif /* AppBoxPrefixHeader_pch */
