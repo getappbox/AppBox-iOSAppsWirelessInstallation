@@ -34,12 +34,14 @@
     [self addTabViewItem:generalPreferencesTabViewItem];
     
     //Accounts Preferences
-    AccountPreferencesViewController *accountPreferencesViewController = [[AccountPreferencesViewController alloc] initWithNibName:NSStringFromClass([AccountPreferencesViewController class]) bundle:nil];
-    NSTabViewItem *accountPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"accounts"];
-    [accountPreferencesTabViewItem setLabel:@"Accounts"];
-    [accountPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueAccount"]];
-    [accountPreferencesTabViewItem setViewController:accountPreferencesViewController];
-    [self addTabViewItem:accountPreferencesTabViewItem];
+	if (abMultiDBAccounts) {
+		AccountPreferencesViewController *accountPreferencesViewController = [[AccountPreferencesViewController alloc] initWithNibName:NSStringFromClass([AccountPreferencesViewController class]) bundle:nil];
+		NSTabViewItem *accountPreferencesTabViewItem = [[NSTabViewItem alloc] initWithIdentifier:@"accounts"];
+		[accountPreferencesTabViewItem setLabel:@"Accounts"];
+		[accountPreferencesTabViewItem setImage:[NSImage imageNamed:@"BlueAccount"]];
+		[accountPreferencesTabViewItem setViewController:accountPreferencesViewController];
+		[self addTabViewItem:accountPreferencesTabViewItem];
+	}
     
     //Mail Preferences
     EmailPreferencesViewController *emailPreferencesViewController = [[EmailPreferencesViewController alloc] initWithNibName:NSStringFromClass([EmailPreferencesViewController class]) bundle:nil];
