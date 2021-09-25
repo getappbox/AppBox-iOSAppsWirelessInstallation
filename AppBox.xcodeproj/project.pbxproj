@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44840FBD26FE2BA100D73473 /* CoreDataMigration3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 44840FBC26FE2BA100D73473 /* CoreDataMigration3to4.xcmappingmodel */; };
+		4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D18D26FF76A20046E5F9 /* DBAccountManager.m */; };
+		4410D19926FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19726FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m */; };
+		4410D19A26FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19826FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m */; };
+		4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */; };
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
@@ -149,7 +152,13 @@
 
 /* Begin PBXFileReference section */
 		179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.release.xcconfig"; sourceTree = "<group>"; };
-		44840FBC26FE2BA100D73473 /* CoreDataMigration3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration3to4.xcmappingmodel; sourceTree = "<group>"; };
+		4410D18C26FF76A20046E5F9 /* DBAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBAccountManager.h; sourceTree = "<group>"; };
+		4410D18D26FF76A20046E5F9 /* DBAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBAccountManager.m; sourceTree = "<group>"; };
+		4410D19526FF7FD60046E5F9 /* AppBoxService+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppBoxService+CoreDataClass.h"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataClass.h"; sourceTree = "<absolute>"; };
+		4410D19626FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppBoxService+CoreDataProperties.h"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataProperties.h"; sourceTree = "<absolute>"; };
+		4410D19726FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppBoxService+CoreDataClass.m"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataClass.m"; sourceTree = "<absolute>"; };
+		4410D19826FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppBoxService+CoreDataProperties.m"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataProperties.m"; sourceTree = "<absolute>"; };
+		4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration3to4.xcmappingmodel; sourceTree = "<group>"; };
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -326,7 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */,
-				44840FBC26FE2BA100D73473 /* CoreDataMigration3to4.xcmappingmodel */,
+				4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */,
 			);
 			path = CoreDataMigration;
 			sourceTree = "<group>";
@@ -450,6 +459,10 @@
 		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
+				4410D19526FF7FD60046E5F9 /* AppBoxService+CoreDataClass.h */,
+				4410D19726FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m */,
+				4410D19626FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.h */,
+				4410D19826FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m */,
 				DB358B54216FB1AB0080CAC0 /* Project+CoreDataClass.h */,
 				DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */,
 				DB358B5F216FB1AB0080CAC0 /* Project+CoreDataProperties.h */,
@@ -774,13 +787,15 @@
 			path = UpdateHandler;
 			sourceTree = "<group>";
 		};
-		E1902B501E16617B00C3E0F6 /* UserData */ = {
+		E1902B501E16617B00C3E0F6 /* UserManager */ = {
 			isa = PBXGroup;
 			children = (
 				E1902B511E16617B00C3E0F6 /* UserData.h */,
 				E1902B521E16617B00C3E0F6 /* UserData.m */,
+				4410D18C26FF76A20046E5F9 /* DBAccountManager.h */,
+				4410D18D26FF76A20046E5F9 /* DBAccountManager.m */,
 			);
-			path = UserData;
+			path = UserManager;
 			sourceTree = "<group>";
 		};
 		E1902B611E1662E300C3E0F6 /* KeychainHandler */ = {
@@ -859,7 +874,7 @@
 				E19473FC205FD3B700CF12F9 /* UISubClasses */,
 				E19473F0205F9F2900CF12F9 /* ServiceIntegrations */,
 				E185338F200E082800E88529 /* LogManager */,
-				E1902B501E16617B00C3E0F6 /* UserData */,
+				E1902B501E16617B00C3E0F6 /* UserManager */,
 				DB2629781F95ED8900C4C647 /* Extensions */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
 				E1DC25FA1ECDBC16001EF106 /* ProgressHUD */,
@@ -1038,6 +1053,7 @@
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
+				4410D19926FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m in Sources */,
 				DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				DB358B6C216FB1AC0080CAC0 /* Project+CoreDataProperties.m in Sources */,
@@ -1050,7 +1066,6 @@
 				DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
-				44840FBD26FE2BA100D73473 /* CoreDataMigration3to4.xcmappingmodel in Sources */,
 				E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m in Sources */,
@@ -1061,9 +1076,11 @@
 				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
+				4410D19A26FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
+				4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
 				DBFC680D1F6AE957007A4ED2 /* EventTracker.m in Sources */,
 				E1C024711E9B4E6C00C87CC9 /* SlackClient.m in Sources */,
@@ -1080,6 +1097,7 @@
 				E18186D61E8A45C30002509F /* PreferencesViewController.m in Sources */,
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */,
+				4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */,
 				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,

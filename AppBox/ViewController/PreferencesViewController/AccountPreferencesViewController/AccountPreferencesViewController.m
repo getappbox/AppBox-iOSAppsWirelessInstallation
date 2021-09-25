@@ -75,11 +75,6 @@
     }
 }
 
-#pragma mark - ITCLoginViewController Delegate
--(void)itcLoginCanceled{
-    
-}
-
 -(void)itcLoginResult:(BOOL)success{
     if (success) {
         [self loadAccounts];
