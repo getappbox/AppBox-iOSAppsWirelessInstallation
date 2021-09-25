@@ -1556,6 +1556,7 @@ Gw
                     </view>
                     <connections>
                         <outlet property="buttonConnectDropbox" destination="KAh-it-ITG" id="OT9-Rm-t3j"/>
+                        <outlet property="buttonQuit" destination="Ilt-Kx-xz4" id="E5a-k3-fgC"/>
                     </connections>
                 </viewController>
             </objects>

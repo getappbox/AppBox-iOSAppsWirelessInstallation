@@ -10,6 +10,9 @@
 
 @interface UserData : NSObject
 
+// User status
++(BOOL)isLoggedIn;
+
 // Default emails and message
 +(NSString *)userEmail;
 +(void)setUserEmail:(NSString *)userEmail;

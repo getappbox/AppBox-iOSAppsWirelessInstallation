@@ -11,6 +11,11 @@
 
 @implementation UserData
 
+// User status
++(BOOL)isLoggedIn {
+	return [DBClientsManager authorizedClients] && ([DBClientsManager authorizedClients].count > 0);
+}
+
 #pragma mark - Email Releated -
 
 #define UserEmail @"UserEmail"

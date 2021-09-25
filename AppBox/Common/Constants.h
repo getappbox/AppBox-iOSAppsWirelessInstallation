@@ -57,9 +57,6 @@ static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 #define abTeamName @"teamName"
 #define abExpiryDate @"expiryDate"
 
-//default setting
-#define abBuildLocation @"~/Desktop"
-
 //others
 #define abEmptyString @""
 #define abTeamIdLength 10
@@ -67,6 +64,9 @@ static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 #define abDropboxOutOfSpaceWarningSize 150
 #define abOnErrorMaxRetryCount 3
 #define abEndOfSessionLog @"abEndOfSessionLog"
+
+//Under development feature flags
+#define abMultiDBAccounts 0
 
 
 //enums
