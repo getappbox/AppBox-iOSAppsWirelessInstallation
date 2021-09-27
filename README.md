@@ -6,35 +6,22 @@
 [![Twitter](https://img.shields.io/twitter/follow/AppBoxHQ.svg?style=social&label=Follow)](https://twitter.com/AppBoxHQ)
 
 # AppBox - iOS Apps Wireless Installation 
-AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
-
-#### ⚠️ WARNING
-- Since 2 March 2021, Dropbox made some changes that break all existing apps uploaded using the AppBox version 2.9.1 or earlier. So, Please use the [latest version of AppBox](https://getappbox.com/download/) if you are facing any installation issues. Please check more details [here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues/217).
-- [Retiring Legacy Tokens](https://dropbox.tech/developers/migrating-app-permissions-and-access-tokens) - On September 30th, 2021, Dropbox will retire the creation of long-lived access tokens — resulting in all new tokens being short-lived. For online-only apps that already handle re-authentication, users may experience more prompts for re-authentication. Apps that require background (“offline”) access but have not yet implemented refresh tokens will be impacted.
-- AppBox updated the application settings for Dropbox to get Long-lived tokens. But Dropbox will be deprecated in the future.
+AppBox is a tool for iOS developers to deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
 
 # Features
-| | AppBox
--|-
-🔑 | Auto App Signing
-🚀 | Auto Upload on Dropbox or AppStore after Archive 
-🔗 | Keep same installation link for the same app
-🖇️ | Install previous version with same installation link
-✉️ | Auto E-Mail App Distribution Link
-🔌 | Auto Shutdown Mac after Distribution
-📦 | Maximum Upload Size - Equal to your Dropbox account storage
-📅 | Uploaded App Expiration - Until you delete from your Dropbox 
-✨ | Unlimited app installations
-🔥 | Auto Restart Upload After Network Change or Failure 
-🎩 | Easy setup assistant to get started in a few minutes
-🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
-😘 | Dashboard
-🚀 | Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
-🚢 | Jenkins Support [read more](https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/)
-🕶️ | Dark Theme
+- ✨ Unlimited app installations
+- 📦 No upload app size limit
+- 📅 No uploaded app expiration
+- 🔗 Keep same installation link for the same app
+- 🖇️ Install previous version with same installation link
+- ✉️ Auto e-mail app distribution link
+- 🔥 Auto restart upload after network change or failure 
+- 🎩 Easy setup assistant to get started in a few minutes
+- 🔧 Slack, Microsoft Teams and Hangout Chat webhook integration
+- 😘 Dashboard to manage uploaded apps
+- 🚀 Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
  
-
 # Installation
 
 ### Using curl
@@ -61,13 +48,11 @@ If you face any issue using above command then you can manually install AppBox b
 
 | Features |	AppBox |	diawi.com |
 | :--- | :--- | :--- |
-| Auto App Signing |	Yes |	No |
 | Auto Upload after Archive |	Yes |	No |
 | Keep same link for same app |	Yes |	No |
 | Install previous version with same link |	Yes |	No |
 | Auto E-Mail App Distribution Link |	Yes |	No |
-| Auto Shutdown Mac after Distribution |	Yes |	No |
-| Maximum Upload Size |	Equal to your Dropbox account storage |	100MB |
+| Maximum App Upload Size |	Equal to your Dropbox account storage |	100MB |
 | Uploaded App Expiration |	Until you delete from your Dropbox | 1day |
 | Installations Per App |	Unlimited |	10 | 
 | Auto Restart Upload After Network Change or Failure | Yes | No | 
