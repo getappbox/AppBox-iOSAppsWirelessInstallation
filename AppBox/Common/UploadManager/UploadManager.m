@@ -46,6 +46,7 @@
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
     [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
+	weakify(self);
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
         [ABLog log:@"nUploading IPA -  %@", ipaPath];
         //Unzip ipa
@@ -54,7 +55,7 @@
         [[AppDelegate appDelegate] addSessionLog:@"Extracting Files..."];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-                
+				strongify(self);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
                     
@@ -91,6 +92,7 @@
                     [ABLog log:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry];
                 });
             } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
+				strongify(self);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (error) {
                         //show error and return
@@ -173,10 +175,11 @@
 -(void)handleAfterUniqueJsonMetaDataLoaded{
     if(self.project.uniqueLinkJsonMetaData){
         NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
-        
+		weakify(self);
         //download appinfo.json file
         [[[DBClientsManager authorizedClient].filesRoutes downloadUrl:self.project.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
          setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESDownloadError * _Nullable routeError, DBRequestError * _Nullable error, NSURL * _Nonnull destination) {
+			strongify(self);
              if (response){
                  if([response.name hasSuffix:FILE_NAME_UNIQUE_JSON]){
                      [self updateUniquLinkDictinory:[[self getUniqueJsonDict] mutableCopy]];
@@ -337,8 +340,10 @@
 
 #pragma mark - Update AppInfo.JSON file
 -(void)loadAppInfoMetaData{
+	weakify(self);
     DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
     [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode limit:@1 ] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+		strongify(self);
         //check there is any rev available
         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
             [ABLog log:@"Loaded Meta Data %@",response];
@@ -363,12 +368,14 @@
     }
     
     //uploadUrl:path inputUrl:file
+	weakify(self);
     [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO inputUrl:file]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
+		strongify(self);
           if (response) {
               //reset retry count
-              retryCount = 0;
+			  self->retryCount = 0;
               
               [ABLog log:@"Uploaded file metadata = %@", response];
               
@@ -413,6 +420,7 @@
      
      //Track and show upload progress
      setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+		strongify(self);
          if (!self.uploadRecord) {
              //Calculate and show progress based on file type
              CGFloat progress = ((totalBytesWritten * 100) / totalBytesExpectedToWrite) ;
@@ -438,10 +446,12 @@
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
     fileCommitInfo = [[DBFILESCommitInfo alloc] initWithPath:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO];
     
+	weakify(self);
     [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionStartData:nextChunkToUpload] setResponseBlock:^(DBFILESUploadSessionStartResult * _Nullable result, DBFILESUploadSessionStartError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+		strongify(self);
         if (result) {
-            sessionId = result.sessionId;
-            offset += nextChunkToUpload.length;
+			self->sessionId = result.sessionId;
+			self->offset += self->nextChunkToUpload.length;
             [self uploadNextChunk];
         } else {
             NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self dbUploadLargeFile:file to:path mode:mode]; }];
@@ -455,11 +465,14 @@
 -(void)uploadNextChunk{
     nextChunkToUpload = [fileHandle readDataOfLength:chunkSize];
     DBFILESUploadSessionCursor *cursor = [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:[NSNumber numberWithUnsignedInteger:offset]];
+	
+	weakify(self);
     if (nextChunkToUpload.length < chunkSize) {
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionFinishData:cursor commit:fileCommitInfo inputData:nextChunkToUpload] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadSessionFinishError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+			strongify(self);
             if (result) {
                 //reset retry count
-                retryCount = 0;
+                self->retryCount = 0;
                 
                 if (self.dbFileType == DBFileTypeIPA){
                     NSString *status = [NSString stringWithFormat:@"Creating Sharable Link for IPA"];
@@ -473,18 +486,21 @@
                 [self handleChunkUploadWithLookupError:nil finishError:routeError uploadError:nil networkError:networkError retryBlock:retryOperation];
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+			strongify(self);
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }];
     } else {
         [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionLookupError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+			strongify(self);
             if (result) {
-                offset += nextChunkToUpload.length;
+				self->offset += self->nextChunkToUpload.length;
                 [self uploadNextChunk];
             } else {
                 NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self uploadNextChunk]; }];
                 [self handleChunkUploadWithLookupError:routeError finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+			strongify(self);
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }];
     }
@@ -544,9 +560,11 @@
 
 #pragma mark - Dropbox Create/Get Shared Link
 -(void)dbCreateSharedURLForFile:(NSString *)file{
+	weakify(self);
     [[[DBClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
      //Track response with result and error
      setResponseBlock:^(DBSHARINGSharedLinkMetadata * _Nullable response, DBSHARINGCreateSharedLinkWithSettingsError * _Nullable routeError, DBRequestError * _Nullable error) {
+		strongify(self);
          if (response){
              [self handleSharedURLResult:response.url];
          }else{
@@ -556,7 +574,9 @@
 }
 
 -(void)dbGetSharedURLForFile:(NSString *)file{
+	weakify(self);
     [[[DBClientsManager authorizedClient].sharingRoutes listSharedLinks:file cursor:nil directOnly:nil] setResponseBlock:^(DBSHARINGListSharedLinksResult * _Nullable response, DBSHARINGListSharedLinksError * _Nullable routeError, DBRequestError * _Nullable error) {
+		strongify(self);
         if (response && response.links && response.links.count > 0){
             [self handleSharedURLResult:[[response.links firstObject] url]];
         }else{
@@ -603,11 +623,14 @@
 }
 
 -(void)handleSharedURLResult:(NSString *)url{
+	weakify(self);
+	
     //Create manifest file with share IPA url and upload manifest file
     if (self.dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = url;
         self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
+			strongify(self);
             if (manifestURL == nil){
                 //show error if manifest file url is nil
                 if (self.ciRepoProject) {
@@ -632,6 +655,7 @@
             //Download previously uploaded appinfo
             DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
             [[[DBClientsManager authorizedClient].filesRoutes listRevisions:self.project.dbAppInfoJSONFullPath.absoluteString mode:revisionMode  limit:@1] setResponseBlock:^(DBFILESListRevisionsResult * _Nullable response, DBFILESListRevisionsError * _Nullable routeError, DBRequestError * _Nullable error) {
+				strongify(self);
                 //check there is any rev available
                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
                     [ABLog log:@"Loaded Meta Data %@",response];
@@ -665,7 +689,9 @@
 #pragma mark - Create ShortSharable URL
 -(void)createUniqueShortSharableUrl{
     //Create Short URL
+	weakify(self);
     [[TinyURL shared] shortenURLForProject:self.project.abpProject completion:^(NSURL *shortURL, NSError *error) {
+		strongify(self);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 self.project.appLongShareableURL = shortURL;
@@ -698,7 +724,9 @@
 }
 
 -(void)deleteBuildFolder{
+	weakify(self);
     [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+		strongify(self);
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
@@ -711,7 +739,9 @@
 }
 
 -(void)deleteBuildRootFolder{
+	weakify(self);
     [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.uploadRecord.dbFolderName] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+		strongify(self);
         [ABHudViewController hideAllHudFromView:self.currentViewController.view after:0];
         if (result) {
             self.completionBlock();
