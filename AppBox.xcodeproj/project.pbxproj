@@ -1359,7 +1359,7 @@
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4F7SW76LL6;
+						DevelopmentTeam = 3PQ7E4L589;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -1667,7 +1667,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4F7SW76LL6;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1696,7 +1696,7 @@
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.9.5;
+				MARKETING_VERSION = 2.9.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
@@ -1711,7 +1711,7 @@
 				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4F7SW76LL6;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1740,7 +1740,7 @@
 				LD_DYLIB_INSTALL_NAME = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.9.5;
+				MARKETING_VERSION = 2.9.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.developerinsider.AppBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
