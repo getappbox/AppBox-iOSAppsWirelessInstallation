@@ -947,7 +947,7 @@
 				TargetAttributes = {
 					E16437CE1D743A4E00CE8B7E = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4F7SW76LL6;
+						DevelopmentTeam = 3PQ7E4L589;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -1222,7 +1222,9 @@
 				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4F7SW76LL6;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1266,7 +1268,9 @@
 				CODE_SIGN_ENTITLEMENTS = AppBox/AppBox.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4F7SW76LL6;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 3PQ7E4L589;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
