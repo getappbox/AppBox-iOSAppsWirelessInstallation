@@ -9,7 +9,7 @@
 AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
 #### ⚠️ WARNING
-Since 2 March 2021, Dropbox made some changes that break all existing apps uploaded using the AppBox version 2.9.1 or earlier. So, Please use the [latest version of AppBox](https://getappbox.com/download/) if you are facing any installation issues. Please check more details [here](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/issues/217).
+Our old Apple Developer Account has been blocked due to this all old builds are invalid from 18 Jan 2022. This build is signed with a new Apple Account. So, Please use the [latest version of AppBox](https://getappbox.com/download/) if you are facing any installation issues. Please check more details [here](https://github.com/getappbox/AppBox-iOSAppsWirelessInstallation/issues/232).
 
 
 # Features
@@ -42,7 +42,7 @@ curl -s https://getappbox.com/install.sh | bash
 ```
 
 ### Manual
-If you face any issue using above command then you can manually install AppBox by downloading it from [here](http://tryappbox.com/download). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
+If you face any issue using above command then you can manually install AppBox by downloading it from [here](https://getappbox.com/download). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
 
 
 # How to use AppBox 
