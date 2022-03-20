@@ -51,9 +51,12 @@
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
-        [[AppDelegate appDelegate] addSessionLog:@"Extracting Files..."];
+        
+        NSString *tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+
+        [ABLog log:@"Extracting Files to - %@", tempDir];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+            [SSZipArchive unzipFileAtPath:ipaPath toDestination:tempDir overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
