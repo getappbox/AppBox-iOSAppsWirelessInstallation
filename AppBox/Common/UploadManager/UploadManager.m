@@ -47,7 +47,7 @@
     [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
-        [ABLog log:@"nUploading IPA -  %@", ipaPath];
+        [ABLog log:@"Uploading IPA -  %@", ipaPath];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
@@ -85,7 +85,7 @@
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
-                            mobileProvisionPath = [NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath];
+                            mobileProvisionPath = [tempDir stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
@@ -110,11 +110,11 @@
                     
                     //get info.plist
                     [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
-                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
+                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[tempDir stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
-                        NSString *log = @"AppBox can't able to find Info.plist in you IPA.";
+                        NSString *log = @"AppBox was not able to find Info.plist in your IPA.";
                         if (self.ciRepoProject) {
                             [[AppDelegate appDelegate] addSessionLog:log];
                             exit(abExitCodeInfoPlistNotFound);
@@ -154,7 +154,7 @@
         if (self.ciRepoProject) {
             exit(abExitCodeIPAFileNotFound);
         } else {
-            [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
+            [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox was not able to find IPA file at %@.",ipaFileURL.absoluteString]];
         }
         self.errorBlock(nil, YES);
     }
