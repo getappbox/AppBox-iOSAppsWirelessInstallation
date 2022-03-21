@@ -47,7 +47,7 @@
     [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
-        [ABLog log:@"nUploading IPA -  %@", ipaPath];
+        [ABLog log:@"Uploading IPA -  %@", ipaPath];
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
