@@ -114,7 +114,7 @@
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
-                        NSString *log = @"AppBox can't able to find Info.plist in you IPA.";
+                        NSString *log = @"AppBox was not able to find Info.plist in your IPA.";
                         if (self.ciRepoProject) {
                             [[AppDelegate appDelegate] addSessionLog:log];
                             exit(abExitCodeInfoPlistNotFound);
@@ -154,7 +154,7 @@
         if (self.ciRepoProject) {
             exit(abExitCodeIPAFileNotFound);
         } else {
-            [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox can't able to find ipa file at %@.",ipaFileURL.absoluteString]];
+            [Common showAlertWithTitle:@"IPA File Missing" andMessage:[NSString stringWithFormat:@"AppBox was not able to find IPA file at %@.",ipaFileURL.absoluteString]];
         }
         self.errorBlock(nil, YES);
     }
