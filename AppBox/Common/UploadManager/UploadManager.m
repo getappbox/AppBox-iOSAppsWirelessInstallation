@@ -85,7 +85,7 @@
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
-                            mobileProvisionPath = [NSTemporaryDirectory() stringByAppendingPathComponent: mobileProvisionPath];
+                            mobileProvisionPath = [tempDir stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
@@ -110,7 +110,7 @@
                     
                     //get info.plist
                     [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
-                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:infoPlistPath]]];
+                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[tempDir stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
