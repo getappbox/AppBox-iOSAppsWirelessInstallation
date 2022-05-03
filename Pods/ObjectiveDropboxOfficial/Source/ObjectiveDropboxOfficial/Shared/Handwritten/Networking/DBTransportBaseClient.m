@@ -70,6 +70,8 @@
   NSArray *routeAuthsSplit = [routeAuthStr componentsSeparatedByString:@","];
   NSMutableArray<NSString *> *routeAuths = [NSMutableArray array];
   [routeAuthsSplit enumerateObjectsUsingBlock:^(NSString *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
+#pragma unused(idx)
+#pragma unused(stop)
     [routeAuths addObject:[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
   }];
 

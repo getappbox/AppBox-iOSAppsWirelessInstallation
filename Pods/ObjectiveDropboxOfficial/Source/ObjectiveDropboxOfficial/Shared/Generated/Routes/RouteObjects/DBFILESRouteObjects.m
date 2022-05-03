@@ -21,8 +21,10 @@
 #import "DBFILEPROPERTIESRemovePropertiesError.h"
 #import "DBFILEPROPERTIESTemplateError.h"
 #import "DBFILEPROPERTIESUpdatePropertiesError.h"
+#import "DBFILESAddTagError.h"
 #import "DBFILESAlphaGetMetadataError.h"
 #import "DBFILESAppAuthRoutes.h"
+#import "DBFILESBaseTagError.h"
 #import "DBFILESCreateFolderBatchError.h"
 #import "DBFILESCreateFolderBatchJobStatus.h"
 #import "DBFILESCreateFolderBatchLaunch.h"
@@ -52,6 +54,7 @@
 #import "DBFILESGetCopyReferenceError.h"
 #import "DBFILESGetCopyReferenceResult.h"
 #import "DBFILESGetMetadataError.h"
+#import "DBFILESGetTagsResult.h"
 #import "DBFILESGetTemporaryLinkError.h"
 #import "DBFILESGetTemporaryLinkResult.h"
 #import "DBFILESGetTemporaryUploadLinkResult.h"
@@ -74,12 +77,14 @@
 #import "DBFILESMediaInfo.h"
 #import "DBFILESMetadata.h"
 #import "DBFILESMinimalFileLinkMetadata.h"
+#import "DBFILESMoveIntoFamilyError.h"
 #import "DBFILESMoveIntoVaultError.h"
 #import "DBFILESPaperContentError.h"
 #import "DBFILESPaperCreateError.h"
 #import "DBFILESPaperCreateResult.h"
 #import "DBFILESPaperUpdateError.h"
 #import "DBFILESPaperUpdateResult.h"
+#import "DBFILESPathToTags.h"
 #import "DBFILESPreviewError.h"
 #import "DBFILESPreviewResult.h"
 #import "DBFILESRelocationBatchError.h"
@@ -91,6 +96,7 @@
 #import "DBFILESRelocationBatchV2Result.h"
 #import "DBFILESRelocationError.h"
 #import "DBFILESRelocationResult.h"
+#import "DBFILESRemoveTagError.h"
 #import "DBFILESRestoreError.h"
 #import "DBFILESSaveCopyReferenceError.h"
 #import "DBFILESSaveCopyReferenceResult.h"
@@ -106,10 +112,11 @@
 #import "DBFILESThumbnailError.h"
 #import "DBFILESThumbnailV2Error.h"
 #import "DBFILESUploadError.h"
-#import "DBFILESUploadErrorWithProperties.h"
+#import "DBFILESUploadSessionAppendError.h"
 #import "DBFILESUploadSessionFinishBatchJobStatus.h"
 #import "DBFILESUploadSessionFinishBatchLaunch.h"
 #import "DBFILESUploadSessionFinishBatchResult.h"
+#import "DBFILESUploadSessionFinishBatchResultEntry.h"
 #import "DBFILESUploadSessionFinishError.h"
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
@@ -179,12 +186,16 @@ static DBRoute *DBFILESSaveUrlCheckJobStatus;
 static DBRoute *DBFILESSearch;
 static DBRoute *DBFILESSearchV2;
 static DBRoute *DBFILESSearchContinueV2;
+static DBRoute *DBFILESTagsAdd;
+static DBRoute *DBFILESTagsGet;
+static DBRoute *DBFILESTagsRemove;
 static DBRoute *DBFILESUnlockFileBatch;
 static DBRoute *DBFILESUpload;
 static DBRoute *DBFILESUploadSessionAppendV2;
 static DBRoute *DBFILESUploadSessionAppend;
 static DBRoute *DBFILESUploadSessionFinish;
 static DBRoute *DBFILESUploadSessionFinishBatch;
+static DBRoute *DBFILESUploadSessionFinishBatchV2;
 static DBRoute *DBFILESUploadSessionFinishBatchCheck;
 static DBRoute *DBFILESUploadSessionStart;
 
@@ -223,7 +234,7 @@ static NSObject *lockObj = nil;
                                       namespace_:@"files"
                                       deprecated:@YES
                                       resultType:[DBFILESFileMetadata class]
-                                       errorType:[DBFILESUploadErrorWithProperties class]
+                                       errorType:[DBFILESUploadError class]
                                            attrs:@{
                                              @"auth" : @"user",
                                              @"host" : @"content",
@@ -785,7 +796,7 @@ static NSObject *lockObj = nil;
                                      resultType:[DBFILESListFolderResult class]
                                       errorType:[DBFILESListFolderError class]
                                           attrs:@{
-                                            @"auth" : @"user",
+                                            @"auth" : @"app, user",
                                             @"host" : @"api",
                                             @"style" : @"rpc"
                                           }
@@ -805,7 +816,7 @@ static NSObject *lockObj = nil;
                                              resultType:[DBFILESListFolderResult class]
                                               errorType:[DBFILESListFolderContinueError class]
                                                   attrs:@{
-                                                    @"auth" : @"user",
+                                                    @"auth" : @"app, user",
                                                     @"host" : @"api",
                                                     @"style" : @"rpc"
                                                   }
@@ -1316,6 +1327,66 @@ static NSObject *lockObj = nil;
   }
 }
 
++ (DBRoute *)DBFILESTagsAdd {
+  @synchronized(lockObj) {
+    if (!DBFILESTagsAdd) {
+      DBFILESTagsAdd = [[DBRoute alloc] init:@"tags/add"
+                                  namespace_:@"files"
+                                  deprecated:@NO
+                                  resultType:nil
+                                   errorType:[DBFILESAddTagError class]
+                                       attrs:@{
+                                         @"auth" : @"user",
+                                         @"host" : @"api",
+                                         @"style" : @"rpc"
+                                       }
+                       dataStructSerialBlock:nil
+                     dataStructDeserialBlock:nil];
+    }
+    return DBFILESTagsAdd;
+  }
+}
+
++ (DBRoute *)DBFILESTagsGet {
+  @synchronized(lockObj) {
+    if (!DBFILESTagsGet) {
+      DBFILESTagsGet = [[DBRoute alloc] init:@"tags/get"
+                                  namespace_:@"files"
+                                  deprecated:@NO
+                                  resultType:[DBFILESGetTagsResult class]
+                                   errorType:[DBFILESBaseTagError class]
+                                       attrs:@{
+                                         @"auth" : @"user",
+                                         @"host" : @"api",
+                                         @"style" : @"rpc"
+                                       }
+                       dataStructSerialBlock:nil
+                     dataStructDeserialBlock:nil];
+    }
+    return DBFILESTagsGet;
+  }
+}
+
++ (DBRoute *)DBFILESTagsRemove {
+  @synchronized(lockObj) {
+    if (!DBFILESTagsRemove) {
+      DBFILESTagsRemove = [[DBRoute alloc] init:@"tags/remove"
+                                     namespace_:@"files"
+                                     deprecated:@NO
+                                     resultType:nil
+                                      errorType:[DBFILESRemoveTagError class]
+                                          attrs:@{
+                                            @"auth" : @"user",
+                                            @"host" : @"api",
+                                            @"style" : @"rpc"
+                                          }
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
+    }
+    return DBFILESTagsRemove;
+  }
+}
+
 + (DBRoute *)DBFILESUnlockFileBatch {
   @synchronized(lockObj) {
     if (!DBFILESUnlockFileBatch) {
@@ -1363,7 +1434,7 @@ static NSObject *lockObj = nil;
                                                 namespace_:@"files"
                                                 deprecated:@NO
                                                 resultType:nil
-                                                 errorType:[DBFILESUploadSessionLookupError class]
+                                                 errorType:[DBFILESUploadSessionAppendError class]
                                                      attrs:@{
                                                        @"auth" : @"user",
                                                        @"host" : @"content",
@@ -1383,7 +1454,7 @@ static NSObject *lockObj = nil;
                                               namespace_:@"files"
                                               deprecated:@YES
                                               resultType:nil
-                                               errorType:[DBFILESUploadSessionLookupError class]
+                                               errorType:[DBFILESUploadSessionAppendError class]
                                                    attrs:@{
                                                      @"auth" : @"user",
                                                      @"host" : @"content",
@@ -1421,7 +1492,7 @@ static NSObject *lockObj = nil;
     if (!DBFILESUploadSessionFinishBatch) {
       DBFILESUploadSessionFinishBatch = [[DBRoute alloc] init:@"upload_session/finish_batch"
                                                    namespace_:@"files"
-                                                   deprecated:@NO
+                                                   deprecated:@YES
                                                    resultType:[DBFILESUploadSessionFinishBatchLaunch class]
                                                     errorType:nil
                                                         attrs:@{
@@ -1433,6 +1504,26 @@ static NSObject *lockObj = nil;
                                       dataStructDeserialBlock:nil];
     }
     return DBFILESUploadSessionFinishBatch;
+  }
+}
+
++ (DBRoute *)DBFILESUploadSessionFinishBatchV2 {
+  @synchronized(lockObj) {
+    if (!DBFILESUploadSessionFinishBatchV2) {
+      DBFILESUploadSessionFinishBatchV2 = [[DBRoute alloc] init:@"upload_session/finish_batch_v2"
+                                                     namespace_:@"files"
+                                                     deprecated:@NO
+                                                     resultType:[DBFILESUploadSessionFinishBatchResult class]
+                                                      errorType:nil
+                                                          attrs:@{
+                                                            @"auth" : @"user",
+                                                            @"host" : @"api",
+                                                            @"style" : @"rpc"
+                                                          }
+                                          dataStructSerialBlock:nil
+                                        dataStructDeserialBlock:nil];
+    }
+    return DBFILESUploadSessionFinishBatchV2;
   }
 }
 

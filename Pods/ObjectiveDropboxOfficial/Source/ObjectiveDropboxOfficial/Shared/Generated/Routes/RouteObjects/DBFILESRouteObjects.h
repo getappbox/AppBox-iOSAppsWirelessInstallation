@@ -185,6 +185,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the searchContinueV2 route object.
 + (DBRoute *)DBFILESSearchContinueV2;
 
+/// Accessor method for the tagsAdd route object.
++ (DBRoute *)DBFILESTagsAdd;
+
+/// Accessor method for the tagsGet route object.
++ (DBRoute *)DBFILESTagsGet;
+
+/// Accessor method for the tagsRemove route object.
++ (DBRoute *)DBFILESTagsRemove;
+
 /// Accessor method for the unlockFileBatch route object.
 + (DBRoute *)DBFILESUnlockFileBatch;
 
@@ -202,6 +211,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Accessor method for the uploadSessionFinishBatch route object.
 + (DBRoute *)DBFILESUploadSessionFinishBatch;
+
+/// Accessor method for the uploadSessionFinishBatchV2 route object.
++ (DBRoute *)DBFILESUploadSessionFinishBatchV2;
 
 /// Accessor method for the uploadSessionFinishBatchCheck route object.
 + (DBRoute *)DBFILESUploadSessionFinishBatchCheck;

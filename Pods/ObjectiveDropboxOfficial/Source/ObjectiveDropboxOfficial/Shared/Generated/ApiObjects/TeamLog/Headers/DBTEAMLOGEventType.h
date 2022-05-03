@@ -48,6 +48,8 @@
 @class DBTEAMLOGCreateTeamInviteLinkType;
 @class DBTEAMLOGDataPlacementRestrictionChangePolicyType;
 @class DBTEAMLOGDataPlacementRestrictionSatisfyPolicyType;
+@class DBTEAMLOGDataResidencyMigrationRequestSuccessfulType;
+@class DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType;
 @class DBTEAMLOGDeleteTeamInviteLinkType;
 @class DBTEAMLOGDeviceApprovalsAddExceptionType;
 @class DBTEAMLOGDeviceApprovalsChangeDesktopPolicyType;
@@ -80,6 +82,7 @@
 @class DBTEAMLOGDomainVerificationRemoveDomainType;
 @class DBTEAMLOGDropboxPasswordsExportedType;
 @class DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType;
+@class DBTEAMLOGDropboxPasswordsPolicyChangedType;
 @class DBTEAMLOGEmailIngestPolicyChangedType;
 @class DBTEAMLOGEmailIngestReceiveFileType;
 @class DBTEAMLOGEmmAddExceptionType;
@@ -476,6 +479,8 @@
 @class DBTEAMLOGTfaRemoveSecurityKeyType;
 @class DBTEAMLOGTfaResetType;
 @class DBTEAMLOGTwoAccountChangePolicyType;
+@class DBTEAMLOGUndoNamingConventionType;
+@class DBTEAMLOGUndoOrganizeFolderWithTidyType;
 @class DBTEAMLOGUserTagsAddedType;
 @class DBTEAMLOGUserTagsRemovedType;
 @class DBTEAMLOGViewerInfoPolicyChangedType;
@@ -719,7 +724,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (domains) Enabled domain invites (deprecated, no longer logged)
     DBTEAMLOGEventTypeEnabledDomainInvites,
 
-    /// (file_operations) Applied a Naming Convention rule
+    /// (file_operations) Applied naming convention
     DBTEAMLOGEventTypeApplyNamingConvention,
 
     /// (file_operations) Created folders (deprecated, no longer logged)
@@ -788,11 +793,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (file_operations) Updated a label's value
     DBTEAMLOGEventTypeObjectLabelUpdatedValue,
 
-    /// (file_operations) Organized a folder with the Tidy Up action
+    /// (file_operations) Organized a folder with multi-file organize
     DBTEAMLOGEventTypeOrganizeFolderWithTidy,
 
     /// (file_operations) Rewound a folder
     DBTEAMLOGEventTypeRewindFolder,
+
+    /// (file_operations) Reverted naming convention
+    DBTEAMLOGEventTypeUndoNamingConvention,
+
+    /// (file_operations) Removed multi-file organize
+    DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy,
 
     /// (file_operations) Tagged a file
     DBTEAMLOGEventTypeUserTagsAdded,
@@ -800,7 +811,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (file_operations) Removed tags
     DBTEAMLOGEventTypeUserTagsRemoved,
 
-    /// (file_requests) Received files via Email to my Dropbox
+    /// (file_requests) Received files via Email to Dropbox
     DBTEAMLOGEventTypeEmailIngestReceiveFile,
 
     /// (file_requests) Changed file request
@@ -1655,7 +1666,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (team_policies) Removed members from directory restrictions list
     DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers,
 
-    /// (team_policies) Changed email to my dropbox policy for team
+    /// (team_policies) Changed Dropbox Passwords policy for team
+    DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged,
+
+    /// (team_policies) Changed email to Dropbox policy for team
     DBTEAMLOGEventTypeEmailIngestPolicyChanged,
 
     /// (team_policies) Added members to EMM exception list
@@ -1871,6 +1885,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (team_policies) Changed how long team members can be idle while signed
     /// in to Dropbox.com
     DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy,
+
+    /// (team_profile) Requested data residency migration for team data
+    DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful,
+
+    /// (team_profile) Request for data residency migration for team data has
+    /// failed
+    DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful,
 
     /// (team_profile) Merged another team into this team
     DBTEAMLOGEventTypeTeamMergeFrom,
@@ -2362,7 +2383,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEnabledDomainInvitesType *enabledDomainInvites;
 
-/// (file_operations) Applied a Naming Convention rule @note Ensure the
+/// (file_operations) Applied naming convention @note Ensure the
 /// `isApplyNamingConvention` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGApplyNamingConventionType *applyNamingConvention;
@@ -2475,7 +2496,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGObjectLabelUpdatedValueType *objectLabelUpdatedValue;
 
-/// (file_operations) Organized a folder with the Tidy Up action @note Ensure
+/// (file_operations) Organized a folder with multi-file organize @note Ensure
 /// the `isOrganizeFolderWithTidy` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGOrganizeFolderWithTidyType *organizeFolderWithTidy;
@@ -2483,6 +2504,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// (file_operations) Rewound a folder @note Ensure the `isRewindFolder` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGRewindFolderType *rewindFolder;
+
+/// (file_operations) Reverted naming convention @note Ensure the
+/// `isUndoNamingConvention` method returns true before accessing, otherwise a
+/// runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGUndoNamingConventionType *undoNamingConvention;
+
+/// (file_operations) Removed multi-file organize @note Ensure the
+/// `isUndoOrganizeFolderWithTidy` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGUndoOrganizeFolderWithTidyType *undoOrganizeFolderWithTidy;
 
 /// (file_operations) Tagged a file @note Ensure the `isUserTagsAdded` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
@@ -2492,7 +2523,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGUserTagsRemovedType *userTagsRemoved;
 
-/// (file_requests) Received files via Email to my Dropbox @note Ensure the
+/// (file_requests) Received files via Email to Dropbox @note Ensure the
 /// `isEmailIngestReceiveFile` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEmailIngestReceiveFileType *emailIngestReceiveFile;
@@ -3828,7 +3859,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGDirectoryRestrictionsRemoveMembersType *directoryRestrictionsRemoveMembers;
 
-/// (team_policies) Changed email to my dropbox policy for team @note Ensure the
+/// (team_policies) Changed Dropbox Passwords policy for team @note Ensure the
+/// `isDropboxPasswordsPolicyChanged` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGDropboxPasswordsPolicyChangedType *dropboxPasswordsPolicyChanged;
+
+/// (team_policies) Changed email to Dropbox policy for team @note Ensure the
 /// `isEmailIngestPolicyChanged` method returns true before accessing, otherwise
 /// a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEmailIngestPolicyChangedType *emailIngestPolicyChanged;
@@ -4166,6 +4202,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// Dropbox.com @note Ensure the `isWebSessionsChangeIdleLengthPolicy` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGWebSessionsChangeIdleLengthPolicyType *webSessionsChangeIdleLengthPolicy;
+
+/// (team_profile) Requested data residency migration for team data @note Ensure
+/// the `isDataResidencyMigrationRequestSuccessful` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *dataResidencyMigrationRequestSuccessful;
+
+/// (team_profile) Request for data residency migration for team data has failed
+/// @note Ensure the `isDataResidencyMigrationRequestUnsuccessful` method
+/// returns true before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *dataResidencyMigrationRequestUnsuccessful;
 
 /// (team_profile) Merged another team into this team @note Ensure the
 /// `isTeamMergeFrom` method returns true before accessing, otherwise a runtime
@@ -5338,10 +5386,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// Initializes union class with tag state of "apply_naming_convention".
 ///
 /// Description of the "apply_naming_convention" tag state: (file_operations)
-/// Applied a Naming Convention rule
+/// Applied naming convention
 ///
-/// @param applyNamingConvention (file_operations) Applied a Naming Convention
-/// rule
+/// @param applyNamingConvention (file_operations) Applied naming convention
 ///
 /// @return An initialized instance.
 ///
@@ -5627,10 +5674,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// Initializes union class with tag state of "organize_folder_with_tidy".
 ///
 /// Description of the "organize_folder_with_tidy" tag state: (file_operations)
-/// Organized a folder with the Tidy Up action
+/// Organized a folder with multi-file organize
 ///
-/// @param organizeFolderWithTidy (file_operations) Organized a folder with the
-/// Tidy Up action
+/// @param organizeFolderWithTidy (file_operations) Organized a folder with
+/// multi-file organize
 ///
 /// @return An initialized instance.
 ///
@@ -5647,6 +5694,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithRewindFolder:(DBTEAMLOGRewindFolderType *)rewindFolder;
+
+///
+/// Initializes union class with tag state of "undo_naming_convention".
+///
+/// Description of the "undo_naming_convention" tag state: (file_operations)
+/// Reverted naming convention
+///
+/// @param undoNamingConvention (file_operations) Reverted naming convention
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUndoNamingConvention:(DBTEAMLOGUndoNamingConventionType *)undoNamingConvention;
+
+///
+/// Initializes union class with tag state of "undo_organize_folder_with_tidy".
+///
+/// Description of the "undo_organize_folder_with_tidy" tag state:
+/// (file_operations) Removed multi-file organize
+///
+/// @param undoOrganizeFolderWithTidy (file_operations) Removed multi-file
+/// organize
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUndoOrganizeFolderWithTidy:
+    (DBTEAMLOGUndoOrganizeFolderWithTidyType *)undoOrganizeFolderWithTidy;
 
 ///
 /// Initializes union class with tag state of "user_tags_added".
@@ -5676,9 +5749,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// Initializes union class with tag state of "email_ingest_receive_file".
 ///
 /// Description of the "email_ingest_receive_file" tag state: (file_requests)
-/// Received files via Email to my Dropbox
+/// Received files via Email to Dropbox
 ///
-/// @param emailIngestReceiveFile (file_requests) Received files via Email to my
+/// @param emailIngestReceiveFile (file_requests) Received files via Email to
 /// Dropbox
 ///
 /// @return An initialized instance.
@@ -9211,12 +9284,27 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     (DBTEAMLOGDirectoryRestrictionsRemoveMembersType *)directoryRestrictionsRemoveMembers;
 
 ///
+/// Initializes union class with tag state of
+/// "dropbox_passwords_policy_changed".
+///
+/// Description of the "dropbox_passwords_policy_changed" tag state:
+/// (team_policies) Changed Dropbox Passwords policy for team
+///
+/// @param dropboxPasswordsPolicyChanged (team_policies) Changed Dropbox
+/// Passwords policy for team
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDropboxPasswordsPolicyChanged:
+    (DBTEAMLOGDropboxPasswordsPolicyChangedType *)dropboxPasswordsPolicyChanged;
+
+///
 /// Initializes union class with tag state of "email_ingest_policy_changed".
 ///
 /// Description of the "email_ingest_policy_changed" tag state: (team_policies)
-/// Changed email to my dropbox policy for team
+/// Changed email to Dropbox policy for team
 ///
-/// @param emailIngestPolicyChanged (team_policies) Changed email to my dropbox
+/// @param emailIngestPolicyChanged (team_policies) Changed email to Dropbox
 /// policy for team
 ///
 /// @return An initialized instance.
@@ -10134,6 +10222,37 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 ///
 - (instancetype)initWithWebSessionsChangeIdleLengthPolicy:
     (DBTEAMLOGWebSessionsChangeIdleLengthPolicyType *)webSessionsChangeIdleLengthPolicy;
+
+///
+/// Initializes union class with tag state of
+/// "data_residency_migration_request_successful".
+///
+/// Description of the "data_residency_migration_request_successful" tag state:
+/// (team_profile) Requested data residency migration for team data
+///
+/// @param dataResidencyMigrationRequestSuccessful (team_profile) Requested data
+/// residency migration for team data
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDataResidencyMigrationRequestSuccessful:
+    (DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)dataResidencyMigrationRequestSuccessful;
+
+///
+/// Initializes union class with tag state of
+/// "data_residency_migration_request_unsuccessful".
+///
+/// Description of the "data_residency_migration_request_unsuccessful" tag
+/// state: (team_profile) Request for data residency migration for team data has
+/// failed
+///
+/// @param dataResidencyMigrationRequestUnsuccessful (team_profile) Request for
+/// data residency migration for team data has failed
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDataResidencyMigrationRequestUnsuccessful:
+    (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)dataResidencyMigrationRequestUnsuccessful;
 
 ///
 /// Initializes union class with tag state of "team_merge_from".
@@ -11907,6 +12026,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return Whether the union's current tag state has value "rewind_folder".
 ///
 - (BOOL)isRewindFolder;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "undo_naming_convention".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `undoNamingConvention` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "undo_naming_convention".
+///
+- (BOOL)isUndoNamingConvention;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "undo_organize_folder_with_tidy".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `undoOrganizeFolderWithTidy` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "undo_organize_folder_with_tidy".
+///
+- (BOOL)isUndoOrganizeFolderWithTidy;
 
 ///
 /// Retrieves whether the union's current tag state has value "user_tags_added".
@@ -15271,6 +15416,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
 ///
 /// Retrieves whether the union's current tag state has value
+/// "dropbox_passwords_policy_changed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `dropboxPasswordsPolicyChanged` property, otherwise a runtime exception will
+/// be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "dropbox_passwords_policy_changed".
+///
+- (BOOL)isDropboxPasswordsPolicyChanged;
+
+///
+/// Retrieves whether the union's current tag state has value
 /// "email_ingest_policy_changed".
 ///
 /// @note Call this method and ensure it returns true before accessing the
@@ -16098,6 +16256,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// "web_sessions_change_idle_length_policy".
 ///
 - (BOOL)isWebSessionsChangeIdleLengthPolicy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "data_residency_migration_request_successful".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `dataResidencyMigrationRequestSuccessful` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "data_residency_migration_request_successful".
+///
+- (BOOL)isDataResidencyMigrationRequestSuccessful;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "data_residency_migration_request_unsuccessful".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `dataResidencyMigrationRequestUnsuccessful` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "data_residency_migration_request_unsuccessful".
+///
+- (BOOL)isDataResidencyMigrationRequestUnsuccessful;
 
 ///
 /// Retrieves whether the union's current tag state has value "team_merge_from".
