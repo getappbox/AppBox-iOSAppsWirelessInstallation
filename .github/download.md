@@ -1,5 +1,7 @@
 ## Downloads / Version
 
+![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/2.9.6/total.svg?style=flat-square)
+
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/2.9.5/total.svg?style=flat-square)
 
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/2.9.1/total.svg?style=flat-square)
