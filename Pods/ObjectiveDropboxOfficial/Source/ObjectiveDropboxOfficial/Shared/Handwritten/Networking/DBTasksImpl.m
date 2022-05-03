@@ -16,7 +16,6 @@
 @implementation DBRpcTaskImpl {
   DBRpcTaskImpl *_selfRetained;
   DBRpcResponseBlockImpl _responseBlock;
-  id<DBURLSessionTask> _task;
 }
 
 - (instancetype)initWithTask:(id<DBURLSessionTask>)task tokenUid:(NSString *)tokenUid route:(DBRoute *)route {
@@ -26,6 +25,10 @@
     _selfRetained = self;
   }
   return self;
+}
+
+- (NSURLSession *)session {
+  return _task.session;
 }
 
 - (void)cancel {
@@ -54,7 +57,8 @@
 }
 
 - (DBTask *)restart {
-  DBRpcTaskImpl *sdkTask = [[DBRpcTaskImpl alloc] initWithTask:[_task duplicate] tokenUid:self.tokenUid route:_route];
+  DBRpcTaskImpl *sdkTask =
+      [[DBRpcTaskImpl alloc] initWithTask:[_task duplicate] tokenUid:self.tokenUid route:self.route];
   sdkTask.retryCount += 1;
   [sdkTask setResponseBlock:_responseBlock queue:_queue];
   [sdkTask resume];
@@ -67,9 +71,10 @@
 
 - (DBRpcTask *)setResponseBlock:(DBRpcResponseBlockImpl)responseBlock queue:(NSOperationQueue *)queue {
   _responseBlock = responseBlock;
+  __weak __typeof(self) weakSelf = self;
   DBRpcResponseBlockStorage storageBlock = [self storageBlockWithResponseBlock:responseBlock
                                                                   cleanupBlock:^{
-                                                                    [self cleanup];
+                                                                    [weakSelf cleanup];
                                                                   }];
   [_task setResponseBlock:[DBURLSessionTaskResponseBlockWrapper withRpcResponseBlock:storageBlock] queue:queue];
   return self;
@@ -97,6 +102,7 @@
   self = [super initWithRoute:route tokenUid:tokenUid];
   if (self) {
     _uploadTask = task;
+    _selfRetained = self;
   }
   return self;
 }
@@ -132,7 +138,7 @@
 
 - (DBTask *)restart {
   DBUploadTaskImpl *sdkTask =
-      [[DBUploadTaskImpl alloc] initWithTask:[_uploadTask duplicate] tokenUid:self.tokenUid route:_route];
+      [[DBUploadTaskImpl alloc] initWithTask:[_uploadTask duplicate] tokenUid:self.tokenUid route:self.route];
   sdkTask.retryCount += 1;
   [sdkTask setResponseBlock:_responseBlock queue:_queue];
   [sdkTask resume];
@@ -145,9 +151,10 @@
 
 - (DBUploadTask *)setResponseBlock:(DBUploadResponseBlockImpl)responseBlock queue:(NSOperationQueue *)queue {
   _responseBlock = responseBlock;
+  __weak __typeof(self) weakSelf = self;
   DBUploadResponseBlockStorage storageBlock = [self storageBlockWithResponseBlock:responseBlock
                                                                      cleanupBlock:^{
-                                                                       [self cleanup];
+                                                                       [weakSelf cleanup];
                                                                      }];
   [_uploadTask setResponseBlock:[DBURLSessionTaskResponseBlockWrapper withUploadResponseBlock:storageBlock]
                           queue:queue];
@@ -183,6 +190,7 @@
     _downloadUrlTask = task;
     _overwrite = overwrite;
     _destination = destination;
+    _selfRetained = self;
   }
   return self;
 }
@@ -219,7 +227,7 @@
 - (DBTask *)restart {
   DBDownloadUrlTaskImpl *sdkTask = [[DBDownloadUrlTaskImpl alloc] initWithTask:[_downloadUrlTask duplicate]
                                                                       tokenUid:self.tokenUid
-                                                                         route:_route
+                                                                         route:self.route
                                                                      overwrite:_overwrite
                                                                    destination:_destination];
   sdkTask.retryCount += 1;
@@ -234,9 +242,10 @@
 
 - (DBDownloadUrlTask *)setResponseBlock:(DBDownloadUrlResponseBlockImpl)responseBlock queue:(NSOperationQueue *)queue {
   _responseBlock = responseBlock;
+  __weak __typeof(self) weakSelf = self;
   DBDownloadResponseBlockStorage storageBlock = [self storageBlockWithResponseBlock:responseBlock
                                                                        cleanupBlock:^{
-                                                                         [self cleanup];
+                                                                         [weakSelf cleanup];
                                                                        }];
 
   [_downloadUrlTask setResponseBlock:[DBURLSessionTaskResponseBlockWrapper withDownloadResponseBlock:storageBlock]
@@ -267,6 +276,7 @@
   self = [super initWithRoute:route tokenUid:tokenUid];
   if (self) {
     _downloadDataTask = task;
+    _selfRetained = self;
   }
   return self;
 }
@@ -301,8 +311,9 @@
 }
 
 - (DBTask *)restart {
-  DBDownloadDataTaskImpl *sdkTask =
-      [[DBDownloadDataTaskImpl alloc] initWithTask:[_downloadDataTask duplicate] tokenUid:self.tokenUid route:_route];
+  DBDownloadDataTaskImpl *sdkTask = [[DBDownloadDataTaskImpl alloc] initWithTask:[_downloadDataTask duplicate]
+                                                                        tokenUid:self.tokenUid
+                                                                           route:self.route];
   sdkTask.retryCount += 1;
   [sdkTask setResponseBlock:_responseBlock queue:_queue];
   [sdkTask resume];
@@ -316,9 +327,10 @@
 - (DBDownloadDataTask *)setResponseBlock:(DBDownloadDataResponseBlockImpl)responseBlock
                                    queue:(NSOperationQueue *)queue {
   _responseBlock = responseBlock;
+  __weak __typeof(self) weakSelf = self;
   DBDownloadResponseBlockStorage storageBlock = [self storageBlockWithResponseBlock:responseBlock
                                                                        cleanupBlock:^{
-                                                                         [self cleanup];
+                                                                         [weakSelf cleanup];
                                                                        }];
   [_downloadDataTask setResponseBlock:[DBURLSessionTaskResponseBlockWrapper withDownloadResponseBlock:storageBlock]
                                 queue:queue];

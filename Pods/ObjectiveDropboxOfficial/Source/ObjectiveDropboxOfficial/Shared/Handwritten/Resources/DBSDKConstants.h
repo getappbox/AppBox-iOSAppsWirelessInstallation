@@ -10,6 +10,4 @@ extern NSString *const kDBSDKVersion;
 extern NSString *const kDBSDKDefaultUserAgentPrefix;
 extern NSString *const kDBSDKForegroundSessionId;
 extern NSString *const kDBSDKBackgroundSessionId;
-extern NSString *const kDBSDKDebugHost;
-extern BOOL const kDBSDKDebug;
 extern NSString *const kDBSDKCSRFKey;

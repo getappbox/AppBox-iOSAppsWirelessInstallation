@@ -34,9 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param appId App unique ID. Might be missing due to historical data gap.
-/// @param displayName App display name. Might be missing due to historical data
-/// gap.
+/// @param appId App unique ID.
+/// @param displayName App display name.
 ///
 /// @return An initialized instance.
 ///

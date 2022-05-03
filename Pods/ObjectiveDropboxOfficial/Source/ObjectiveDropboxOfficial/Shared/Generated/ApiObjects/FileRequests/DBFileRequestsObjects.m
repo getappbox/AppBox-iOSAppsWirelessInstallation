@@ -88,8 +88,10 @@
   switch (_tag) {
   case DBFILEREQUESTSGeneralFileRequestsErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGeneralFileRequestsErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -240,8 +242,10 @@
   switch (_tag) {
   case DBFILEREQUESTSCountFileRequestsErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCountFileRequestsErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -730,20 +734,28 @@
   switch (_tag) {
   case DBFILEREQUESTSFileRequestErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorNotAFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorAppLacksAccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorEmailUnverified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSFileRequestErrorValidationError:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1042,24 +1054,34 @@
   switch (_tag) {
   case DBFILEREQUESTSCreateFileRequestErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorNotAFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorAppLacksAccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorEmailUnverified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorValidationError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorInvalidLocation:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSCreateFileRequestErrorRateLimit:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1342,20 +1364,28 @@
   switch (_tag) {
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorNotAFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorAppLacksAccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorEmailUnverified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteAllClosedFileRequestsErrorValidationError:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1865,22 +1895,31 @@
   switch (_tag) {
   case DBFILEREQUESTSDeleteFileRequestErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorNotAFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorAppLacksAccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorEmailUnverified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorValidationError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSDeleteFileRequestErrorFileRequestOpen:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2703,20 +2742,28 @@
   switch (_tag) {
   case DBFILEREQUESTSGetFileRequestErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorNotAFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorAppLacksAccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorEmailUnverified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGetFileRequestErrorValidationError:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2958,16 +3005,22 @@
   switch (_tag) {
   case DBFILEREQUESTSGracePeriodOneDay:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGracePeriodTwoDays:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGracePeriodSevenDays:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGracePeriodThirtyDays:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGracePeriodAlways:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSGracePeriodOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3357,10 +3410,13 @@
   switch (_tag) {
   case DBFILEREQUESTSListFileRequestsContinueErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSListFileRequestsContinueErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSListFileRequestsContinueErrorInvalidCursor:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3518,8 +3574,10 @@
   switch (_tag) {
   case DBFILEREQUESTSListFileRequestsErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSListFileRequestsErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4114,12 +4172,15 @@
   switch (_tag) {
   case DBFILEREQUESTSUpdateFileRequestDeadlineNoUpdate:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestDeadlineUpdate:
     if (self.update != nil) {
       result = prime * result + [self.update hash];
     }
+    break;
   case DBFILEREQUESTSUpdateFileRequestDeadlineOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4170,7 +4231,7 @@
     jsonDict[@".tag"] = @"no_update";
   } else if ([valueObj isUpdate]) {
     if (valueObj.update) {
-      jsonDict = [[DBFILEREQUESTSFileRequestDeadlineSerializer serialize:valueObj.update] mutableCopy];
+      [jsonDict addEntriesFromDictionary:[DBFILEREQUESTSFileRequestDeadlineSerializer serialize:valueObj.update]];
     }
     jsonDict[@".tag"] = @"update";
   } else if ([valueObj isOther]) {
@@ -4367,20 +4428,28 @@
   switch (_tag) {
   case DBFILEREQUESTSUpdateFileRequestErrorDisabledForTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorNotAFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorAppLacksAccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorNoPermission:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorEmailUnverified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEREQUESTSUpdateFileRequestErrorValidationError:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

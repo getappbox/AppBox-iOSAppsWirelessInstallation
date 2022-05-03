@@ -38,49 +38,22 @@ static DBRoute *DBFILEREQUESTSList;
 static DBRoute *DBFILEREQUESTSListContinue;
 static DBRoute *DBFILEREQUESTSUpdate;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBFILEREQUESTSCount {
-  if (!DBFILEREQUESTSCount) {
-    DBFILEREQUESTSCount = [[DBRoute alloc] init:@"count"
-                                     namespace_:@"file_requests"
-                                     deprecated:@NO
-                                     resultType:[DBFILEREQUESTSCountFileRequestsResult class]
-                                      errorType:[DBFILEREQUESTSCountFileRequestsError class]
-                                          attrs:@{
-                                            @"auth" : @"user",
-                                            @"host" : @"api",
-                                            @"style" : @"rpc"
-                                          }
-                          dataStructSerialBlock:nil
-                        dataStructDeserialBlock:nil];
-  }
-  return DBFILEREQUESTSCount;
-}
-
-+ (DBRoute *)DBFILEREQUESTSCreate {
-  if (!DBFILEREQUESTSCreate) {
-    DBFILEREQUESTSCreate = [[DBRoute alloc] init:@"create"
-                                      namespace_:@"file_requests"
-                                      deprecated:@NO
-                                      resultType:[DBFILEREQUESTSFileRequest class]
-                                       errorType:[DBFILEREQUESTSCreateFileRequestError class]
-                                           attrs:@{
-                                             @"auth" : @"user",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
-                           dataStructSerialBlock:nil
-                         dataStructDeserialBlock:nil];
-  }
-  return DBFILEREQUESTSCreate;
-}
-
-+ (DBRoute *)DBFILEREQUESTSDelete_ {
-  if (!DBFILEREQUESTSDelete_) {
-    DBFILEREQUESTSDelete_ = [[DBRoute alloc] init:@"delete"
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSCount) {
+      DBFILEREQUESTSCount = [[DBRoute alloc] init:@"count"
                                        namespace_:@"file_requests"
                                        deprecated:@NO
-                                       resultType:[DBFILEREQUESTSDeleteFileRequestsResult class]
-                                        errorType:[DBFILEREQUESTSDeleteFileRequestError class]
+                                       resultType:[DBFILEREQUESTSCountFileRequestsResult class]
+                                        errorType:[DBFILEREQUESTSCountFileRequestsError class]
                                             attrs:@{
                                               @"auth" : @"user",
                                               @"host" : @"api",
@@ -88,52 +61,118 @@ static DBRoute *DBFILEREQUESTSUpdate;
                                             }
                             dataStructSerialBlock:nil
                           dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSCount;
   }
-  return DBFILEREQUESTSDelete_;
+}
+
++ (DBRoute *)DBFILEREQUESTSCreate {
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSCreate) {
+      DBFILEREQUESTSCreate = [[DBRoute alloc] init:@"create"
+                                        namespace_:@"file_requests"
+                                        deprecated:@NO
+                                        resultType:[DBFILEREQUESTSFileRequest class]
+                                         errorType:[DBFILEREQUESTSCreateFileRequestError class]
+                                             attrs:@{
+                                               @"auth" : @"user",
+                                               @"host" : @"api",
+                                               @"style" : @"rpc"
+                                             }
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSCreate;
+  }
+}
+
++ (DBRoute *)DBFILEREQUESTSDelete_ {
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSDelete_) {
+      DBFILEREQUESTSDelete_ = [[DBRoute alloc] init:@"delete"
+                                         namespace_:@"file_requests"
+                                         deprecated:@NO
+                                         resultType:[DBFILEREQUESTSDeleteFileRequestsResult class]
+                                          errorType:[DBFILEREQUESTSDeleteFileRequestError class]
+                                              attrs:@{
+                                                @"auth" : @"user",
+                                                @"host" : @"api",
+                                                @"style" : @"rpc"
+                                              }
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSDelete_;
+  }
 }
 
 + (DBRoute *)DBFILEREQUESTSDeleteAllClosed {
-  if (!DBFILEREQUESTSDeleteAllClosed) {
-    DBFILEREQUESTSDeleteAllClosed = [[DBRoute alloc] init:@"delete_all_closed"
-                                               namespace_:@"file_requests"
-                                               deprecated:@NO
-                                               resultType:[DBFILEREQUESTSDeleteAllClosedFileRequestsResult class]
-                                                errorType:[DBFILEREQUESTSDeleteAllClosedFileRequestsError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
-                                    dataStructSerialBlock:nil
-                                  dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSDeleteAllClosed) {
+      DBFILEREQUESTSDeleteAllClosed = [[DBRoute alloc] init:@"delete_all_closed"
+                                                 namespace_:@"file_requests"
+                                                 deprecated:@NO
+                                                 resultType:[DBFILEREQUESTSDeleteAllClosedFileRequestsResult class]
+                                                  errorType:[DBFILEREQUESTSDeleteAllClosedFileRequestsError class]
+                                                      attrs:@{
+                                                        @"auth" : @"user",
+                                                        @"host" : @"api",
+                                                        @"style" : @"rpc"
+                                                      }
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSDeleteAllClosed;
   }
-  return DBFILEREQUESTSDeleteAllClosed;
 }
 
 + (DBRoute *)DBFILEREQUESTSGet {
-  if (!DBFILEREQUESTSGet) {
-    DBFILEREQUESTSGet = [[DBRoute alloc] init:@"get"
-                                   namespace_:@"file_requests"
-                                   deprecated:@NO
-                                   resultType:[DBFILEREQUESTSFileRequest class]
-                                    errorType:[DBFILEREQUESTSGetFileRequestError class]
-                                        attrs:@{
-                                          @"auth" : @"user",
-                                          @"host" : @"api",
-                                          @"style" : @"rpc"
-                                        }
-                        dataStructSerialBlock:nil
-                      dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSGet) {
+      DBFILEREQUESTSGet = [[DBRoute alloc] init:@"get"
+                                     namespace_:@"file_requests"
+                                     deprecated:@NO
+                                     resultType:[DBFILEREQUESTSFileRequest class]
+                                      errorType:[DBFILEREQUESTSGetFileRequestError class]
+                                          attrs:@{
+                                            @"auth" : @"user",
+                                            @"host" : @"api",
+                                            @"style" : @"rpc"
+                                          }
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSGet;
   }
-  return DBFILEREQUESTSGet;
 }
 
 + (DBRoute *)DBFILEREQUESTSListV2 {
-  if (!DBFILEREQUESTSListV2) {
-    DBFILEREQUESTSListV2 = [[DBRoute alloc] init:@"list_v2"
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSListV2) {
+      DBFILEREQUESTSListV2 = [[DBRoute alloc] init:@"list_v2"
+                                        namespace_:@"file_requests"
+                                        deprecated:@NO
+                                        resultType:[DBFILEREQUESTSListFileRequestsV2Result class]
+                                         errorType:[DBFILEREQUESTSListFileRequestsError class]
+                                             attrs:@{
+                                               @"auth" : @"user",
+                                               @"host" : @"api",
+                                               @"style" : @"rpc"
+                                             }
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSListV2;
+  }
+}
+
++ (DBRoute *)DBFILEREQUESTSList {
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSList) {
+      DBFILEREQUESTSList = [[DBRoute alloc] init:@"list"
                                       namespace_:@"file_requests"
                                       deprecated:@NO
-                                      resultType:[DBFILEREQUESTSListFileRequestsV2Result class]
+                                      resultType:[DBFILEREQUESTSListFileRequestsResult class]
                                        errorType:[DBFILEREQUESTSListFileRequestsError class]
                                            attrs:@{
                                              @"auth" : @"user",
@@ -142,62 +181,49 @@ static DBRoute *DBFILEREQUESTSUpdate;
                                            }
                            dataStructSerialBlock:nil
                          dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSList;
   }
-  return DBFILEREQUESTSListV2;
-}
-
-+ (DBRoute *)DBFILEREQUESTSList {
-  if (!DBFILEREQUESTSList) {
-    DBFILEREQUESTSList = [[DBRoute alloc] init:@"list"
-                                    namespace_:@"file_requests"
-                                    deprecated:@NO
-                                    resultType:[DBFILEREQUESTSListFileRequestsResult class]
-                                     errorType:[DBFILEREQUESTSListFileRequestsError class]
-                                         attrs:@{
-                                           @"auth" : @"user",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
-                         dataStructSerialBlock:nil
-                       dataStructDeserialBlock:nil];
-  }
-  return DBFILEREQUESTSList;
 }
 
 + (DBRoute *)DBFILEREQUESTSListContinue {
-  if (!DBFILEREQUESTSListContinue) {
-    DBFILEREQUESTSListContinue = [[DBRoute alloc] init:@"list/continue"
-                                            namespace_:@"file_requests"
-                                            deprecated:@NO
-                                            resultType:[DBFILEREQUESTSListFileRequestsV2Result class]
-                                             errorType:[DBFILEREQUESTSListFileRequestsContinueError class]
-                                                 attrs:@{
-                                                   @"auth" : @"user",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
-                                 dataStructSerialBlock:nil
-                               dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSListContinue) {
+      DBFILEREQUESTSListContinue = [[DBRoute alloc] init:@"list/continue"
+                                              namespace_:@"file_requests"
+                                              deprecated:@NO
+                                              resultType:[DBFILEREQUESTSListFileRequestsV2Result class]
+                                               errorType:[DBFILEREQUESTSListFileRequestsContinueError class]
+                                                   attrs:@{
+                                                     @"auth" : @"user",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSListContinue;
   }
-  return DBFILEREQUESTSListContinue;
 }
 
 + (DBRoute *)DBFILEREQUESTSUpdate {
-  if (!DBFILEREQUESTSUpdate) {
-    DBFILEREQUESTSUpdate = [[DBRoute alloc] init:@"update"
-                                      namespace_:@"file_requests"
-                                      deprecated:@NO
-                                      resultType:[DBFILEREQUESTSFileRequest class]
-                                       errorType:[DBFILEREQUESTSUpdateFileRequestError class]
-                                           attrs:@{
-                                             @"auth" : @"user",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
-                           dataStructSerialBlock:nil
-                         dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEREQUESTSUpdate) {
+      DBFILEREQUESTSUpdate = [[DBRoute alloc] init:@"update"
+                                        namespace_:@"file_requests"
+                                        deprecated:@NO
+                                        resultType:[DBFILEREQUESTSFileRequest class]
+                                         errorType:[DBFILEREQUESTSUpdateFileRequestError class]
+                                             attrs:@{
+                                               @"auth" : @"user",
+                                               @"host" : @"api",
+                                               @"style" : @"rpc"
+                                             }
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
+    }
+    return DBFILEREQUESTSUpdate;
   }
-  return DBFILEREQUESTSUpdate;
 }
 
 @end

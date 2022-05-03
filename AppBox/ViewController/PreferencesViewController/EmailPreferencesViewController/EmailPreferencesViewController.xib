@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="685" height="219"/>
+            <rect key="frame" x="0.0" y="0.0" width="685" height="203"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vov-Bt-7Xg">
-                    <rect key="frame" x="18" y="180" width="184" height="19"/>
+                    <rect key="frame" x="18" y="164" width="184" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="180" id="mAC-6B-2uN"/>
                     </constraints>
@@ -33,7 +33,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SqH-2c-6DE">
-                    <rect key="frame" x="215" y="177" width="450" height="24"/>
+                    <rect key="frame" x="215" y="161" width="450" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="mxi-F3-Jsk"/>
                     </constraints>
@@ -44,7 +44,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXi-3w-TV5">
-                    <rect key="frame" x="18" y="141" width="184" height="19"/>
+                    <rect key="frame" x="18" y="125" width="184" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Personal Message:" id="55j-3M-YfW">
                         <font key="font" metaFont="systemLight" size="15"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -52,7 +52,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zmp-Qj-gfW">
-                    <rect key="frame" x="215" y="138" width="450" height="24"/>
+                    <rect key="frame" x="215" y="122" width="450" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Add Personal Message Here" drawsBackground="YES" id="q15-4J-C2C">
                         <font key="font" metaFont="systemLight" size="16"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -60,23 +60,22 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BWz-cx-cD3">
-                    <rect key="frame" x="213" y="66" width="454" height="67"/>
+                    <rect key="frame" x="213" y="65" width="454" height="52"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="67" id="3Gp-fd-ycm"/>
+                        <constraint firstAttribute="height" constant="52" id="k8v-DU-OwF"/>
                     </constraints>
                     <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" id="TnX-DZ-U6M">
                         <font key="font" metaFont="system" size="10"/>
-                        <string key="title">Supported Keywords: The
-{PROJECT_NAME} - For Project Name
+                        <string key="title">Supported Keywords:
+{BUILD_NAME} - For Build Name
 {BUILD_VERSION} - For Build Version
-{BUILD_NUMBER} - For Build Number 
-{PROJECT_SCHEME} - For Project Scheme</string>
+{BUILD_NUMBER} - For Build Number </string>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A4O-b5-E8c">
-                    <rect key="frame" x="601" y="13" width="70" height="32"/>
+                    <rect key="frame" x="608" y="13" width="64" height="32"/>
                     <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bo0-wp-eBW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -86,7 +85,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-kH-0fE">
-                    <rect key="frame" x="442" y="13" width="151" height="32"/>
+                    <rect key="frame" x="457" y="13" width="145" height="32"/>
                     <buttonCell key="cell" type="push" title="Send a test E-mail" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Uhy-pm-c2L">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>

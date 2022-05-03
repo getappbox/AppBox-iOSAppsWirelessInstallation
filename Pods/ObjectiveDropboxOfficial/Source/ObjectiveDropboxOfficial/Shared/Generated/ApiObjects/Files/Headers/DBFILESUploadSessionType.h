@@ -28,8 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBFILESUploadSessionTypeTag` enum type represents the possible tag
 /// states with which the `DBFILESUploadSessionType` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionTypeTag){
-    /// Pieces of content are uploaded sequentially one after another. This is
-    /// the default behavior.
+    /// Pieces of data are uploaded sequentially one after another. This is the
+    /// default behavior.
     DBFILESUploadSessionTypeSequential,
 
     /// Pieces of data can be uploaded in concurrent RPCs in any order.
@@ -48,7 +48,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionTypeTag){
 ///
 /// Initializes union class with tag state of "sequential".
 ///
-/// Description of the "sequential" tag state: Pieces of content are uploaded
+/// Description of the "sequential" tag state: Pieces of data are uploaded
 /// sequentially one after another. This is the default behavior.
 ///
 /// @return An initialized instance.

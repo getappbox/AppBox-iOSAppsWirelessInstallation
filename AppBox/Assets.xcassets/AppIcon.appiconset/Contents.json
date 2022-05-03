@@ -1,68 +1,68 @@
 {
   "images" : [
     {
-      "size" : "16x16",
+      "filename" : "AppBox-9.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature16.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "16x16"
     },
     {
-      "size" : "16x16",
+      "filename" : "AppBox-8.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature32-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "16x16"
     },
     {
-      "size" : "32x32",
+      "filename" : "AppBox-7.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature32.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "32x32"
     },
     {
-      "size" : "32x32",
+      "filename" : "AppBox-6.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature64-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "32x32"
     },
     {
-      "size" : "128x128",
+      "filename" : "AppBox-5.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature128.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "128x128"
     },
     {
-      "size" : "128x128",
+      "filename" : "AppBox-4.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature256-257.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "128x128"
     },
     {
-      "size" : "256x256",
+      "filename" : "AppBox-3.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature256-256.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "256x256"
     },
     {
-      "size" : "256x256",
+      "filename" : "AppBox-2.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature512-2.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "256x256"
     },
     {
-      "size" : "512x512",
+      "filename" : "AppBox-1.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature512-1.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "512x512"
     },
     {
-      "size" : "512x512",
+      "filename" : "AppBox.png",
       "idiom" : "mac",
-      "filename" : "iOSBetaTest-feature512.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "512x512"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

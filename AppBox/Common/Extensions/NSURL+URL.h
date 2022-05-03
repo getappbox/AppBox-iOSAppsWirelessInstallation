@@ -11,7 +11,6 @@
 @interface NSURL (URL)
 
 -(BOOL)isIPA;
--(BOOL)isProject;
 -(BOOL)acceptableURL;
 -(NSString *)stringValue;
 

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// tag states with which the `DBFILESUploadSessionLookupError` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
     /// The upload session ID was not found or has expired. Upload sessions are
-    /// valid for 48 hours.
+    /// valid for 7 days.
     DBFILESUploadSessionLookupErrorNotFound,
 
     /// The specified offset was incorrect. See the value for the correct
@@ -58,6 +58,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
     /// 4194304 bytes can be uploaded.
     DBFILESUploadSessionLookupErrorConcurrentSessionInvalidDataSize,
 
+    /// The request payload must be at most 150 MB.
+    DBFILESUploadSessionLookupErrorPayloadTooLarge,
+
     /// (no description).
     DBFILESUploadSessionLookupErrorOther,
 
@@ -79,7 +82,7 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
 /// Initializes union class with tag state of "not_found".
 ///
 /// Description of the "not_found" tag state: The upload session ID was not
-/// found or has expired. Upload sessions are valid for 48 hours.
+/// found or has expired. Upload sessions are valid for 7 days.
 ///
 /// @return An initialized instance.
 ///
@@ -157,6 +160,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
 - (instancetype)initWithConcurrentSessionInvalidDataSize;
 
 ///
+/// Initializes union class with tag state of "payload_too_large".
+///
+/// Description of the "payload_too_large" tag state: The request payload must
+/// be at most 150 MB.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPayloadTooLarge;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -223,6 +236,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionLookupErrorTag){
 /// "concurrent_session_invalid_data_size".
 ///
 - (BOOL)isConcurrentSessionInvalidDataSize;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "payload_too_large".
+///
+/// @return Whether the union's current tag state has value "payload_too_large".
+///
+- (BOOL)isPayloadTooLarge;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

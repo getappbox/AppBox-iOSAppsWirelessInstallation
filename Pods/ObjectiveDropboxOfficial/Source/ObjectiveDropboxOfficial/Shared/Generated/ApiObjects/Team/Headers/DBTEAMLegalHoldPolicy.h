@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The time at which the legal hold was activated.
 @property (nonatomic, readonly, nullable) NSDate *activationTime;
 
-/// Team members IDs and number of permanetly deleted members under hold.
+/// Team members IDs and number of permanently deleted members under hold.
 @property (nonatomic, readonly) DBTEAMMembersInfo *members;
 
 /// The current state of the hold.
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param id_ The legal hold id.
 /// @param name Policy name.
-/// @param members Team members IDs and number of permanetly deleted members
+/// @param members Team members IDs and number of permanently deleted members
 /// under hold.
 /// @param status The current state of the hold.
 /// @param startDate Start date of the legal hold policy.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param id_ The legal hold id.
 /// @param name Policy name.
-/// @param members Team members IDs and number of permanetly deleted members
+/// @param members Team members IDs and number of permanently deleted members
 /// under hold.
 /// @param status The current state of the hold.
 /// @param startDate Start date of the legal hold policy.

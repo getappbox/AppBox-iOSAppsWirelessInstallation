@@ -8,12 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "TeamsViewController.h"
-#import "CISettingViewController.h"
 #import "PreferencesViewController.h"
 #import "HelpPreferencesViewController.h"
 #import "EmailPreferencesViewController.h"
-#import "SlackPreferencesViewController.h"
+#import "ThirdPartyPreferencesViewController.h"
 #import "AccountPreferencesViewController.h"
 
 @interface PreferencesTabViewController : NSTabViewController{

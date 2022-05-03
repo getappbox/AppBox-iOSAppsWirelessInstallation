@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Session ID. Might be missing due to historical data gap.
+/// Session ID.
 @property (nonatomic, readonly, copy, nullable) NSString *sessionId;
 
 #pragma mark - Constructors
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param sessionId Session ID. Might be missing due to historical data gap.
+/// @param sessionId Session ID.
 ///
 /// @return An initialized instance.
 ///

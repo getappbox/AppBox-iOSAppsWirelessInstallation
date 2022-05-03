@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Is company managed group. Might be missing due to historical data gap.
+/// Is company managed group.
 @property (nonatomic, readonly, nullable) NSNumber *isCompanyManaged;
 
 #pragma mark - Constructors
@@ -35,8 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param isCompanyManaged Is company managed group. Might be missing due to
-/// historical data gap.
+/// @param isCompanyManaged Is company managed group.
 ///
 /// @return An initialized instance.
 ///

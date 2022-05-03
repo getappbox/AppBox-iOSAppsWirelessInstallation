@@ -10,10 +10,12 @@
 
 @class DBSHARINGLinkAccessLevel;
 @class DBSHARINGLinkAudience;
+@class DBSHARINGLinkAudienceOption;
 @class DBSHARINGLinkPermissions;
 @class DBSHARINGRequestedVisibility;
 @class DBSHARINGResolvedVisibility;
 @class DBSHARINGSharedLinkAccessFailureReason;
+@class DBSHARINGVisibilityPolicy;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -65,12 +67,73 @@ NS_ASSUME_NONNULL_BEGIN
 /// into account the API caller's current permissions to the content.
 @property (nonatomic, readonly, nullable) DBSHARINGLinkAccessLevel *linkAccessLevel;
 
+/// A list of policies that the user might be able to set for the visibility.
+@property (nonatomic, readonly) NSArray<DBSHARINGVisibilityPolicy *> *visibilityPolicies;
+
+/// Whether the user can set the expiry settings of the link. This refers to the
+/// ability to create a new expiry and modify an existing expiry.
+@property (nonatomic, readonly) NSNumber *canSetExpiry;
+
+/// Whether the user can remove the expiry of the link.
+@property (nonatomic, readonly) NSNumber *canRemoveExpiry;
+
+/// Whether the link can be downloaded or not.
+@property (nonatomic, readonly) NSNumber *allowDownload;
+
+/// Whether the user can allow downloads via the link. This refers to the
+/// ability to remove a no-download restriction on the link.
+@property (nonatomic, readonly) NSNumber *canAllowDownload;
+
+/// Whether the user can disallow downloads via the link. This refers to the
+/// ability to impose a no-download restriction on the link.
+@property (nonatomic, readonly) NSNumber *canDisallowDownload;
+
+/// Whether comments are enabled for the linked file. This takes the team
+/// commenting policy into account.
+@property (nonatomic, readonly) NSNumber *allowComments;
+
+/// Whether the team has disabled commenting globally.
+@property (nonatomic, readonly) NSNumber *teamRestrictsComments;
+
+/// A list of link audience options the user might be able to set as the new
+/// audience.
+@property (nonatomic, readonly, nullable) NSArray<DBSHARINGLinkAudienceOption *> *audienceOptions;
+
+/// Whether the user can set a password for the link.
+@property (nonatomic, readonly, nullable) NSNumber *canSetPassword;
+
+/// Whether the user can remove the password of the link.
+@property (nonatomic, readonly, nullable) NSNumber *canRemovePassword;
+
+/// Whether the user is required to provide a password to view the link.
+@property (nonatomic, readonly, nullable) NSNumber *requirePassword;
+
+/// Whether the user can use extended sharing controls, based on their account
+/// type.
+@property (nonatomic, readonly, nullable) NSNumber *canUseExtendedSharingControls;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param canRevoke Whether the caller can revoke the shared link.
+/// @param visibilityPolicies A list of policies that the user might be able to
+/// set for the visibility.
+/// @param canSetExpiry Whether the user can set the expiry settings of the
+/// link. This refers to the ability to create a new expiry and modify an
+/// existing expiry.
+/// @param canRemoveExpiry Whether the user can remove the expiry of the link.
+/// @param allowDownload Whether the link can be downloaded or not.
+/// @param canAllowDownload Whether the user can allow downloads via the link.
+/// This refers to the ability to remove a no-download restriction on the link.
+/// @param canDisallowDownload Whether the user can disallow downloads via the
+/// link. This refers to the ability to impose a no-download restriction on the
+/// link.
+/// @param allowComments Whether comments are enabled for the linked file. This
+/// takes the team commenting policy into account.
+/// @param teamRestrictsComments Whether the team has disabled commenting
+/// globally.
 /// @param resolvedVisibility The current visibility of the link after
 /// considering the shared links policies of the the team (in case the link's
 /// owner is part of a team) and the shared folder (in case the linked file is
@@ -94,25 +157,71 @@ NS_ASSUME_NONNULL_BEGIN
 /// and does not depend on who is calling this API. In particular,
 /// `link_access_level` does not take into account the API caller's current
 /// permissions to the content.
+/// @param audienceOptions A list of link audience options the user might be
+/// able to set as the new audience.
+/// @param canSetPassword Whether the user can set a password for the link.
+/// @param canRemovePassword Whether the user can remove the password of the
+/// link.
+/// @param requirePassword Whether the user is required to provide a password to
+/// view the link.
+/// @param canUseExtendedSharingControls Whether the user can use extended
+/// sharing controls, based on their account type.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithCanRevoke:(NSNumber *)canRevoke
+               visibilityPolicies:(NSArray<DBSHARINGVisibilityPolicy *> *)visibilityPolicies
+                     canSetExpiry:(NSNumber *)canSetExpiry
+                  canRemoveExpiry:(NSNumber *)canRemoveExpiry
+                    allowDownload:(NSNumber *)allowDownload
+                 canAllowDownload:(NSNumber *)canAllowDownload
+              canDisallowDownload:(NSNumber *)canDisallowDownload
+                    allowComments:(NSNumber *)allowComments
+            teamRestrictsComments:(NSNumber *)teamRestrictsComments
                resolvedVisibility:(nullable DBSHARINGResolvedVisibility *)resolvedVisibility
               requestedVisibility:(nullable DBSHARINGRequestedVisibility *)requestedVisibility
               revokeFailureReason:(nullable DBSHARINGSharedLinkAccessFailureReason *)revokeFailureReason
                 effectiveAudience:(nullable DBSHARINGLinkAudience *)effectiveAudience
-                  linkAccessLevel:(nullable DBSHARINGLinkAccessLevel *)linkAccessLevel;
+                  linkAccessLevel:(nullable DBSHARINGLinkAccessLevel *)linkAccessLevel
+                  audienceOptions:(nullable NSArray<DBSHARINGLinkAudienceOption *> *)audienceOptions
+                   canSetPassword:(nullable NSNumber *)canSetPassword
+                canRemovePassword:(nullable NSNumber *)canRemovePassword
+                  requirePassword:(nullable NSNumber *)requirePassword
+    canUseExtendedSharingControls:(nullable NSNumber *)canUseExtendedSharingControls;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
 /// no default value).
 ///
 /// @param canRevoke Whether the caller can revoke the shared link.
+/// @param visibilityPolicies A list of policies that the user might be able to
+/// set for the visibility.
+/// @param canSetExpiry Whether the user can set the expiry settings of the
+/// link. This refers to the ability to create a new expiry and modify an
+/// existing expiry.
+/// @param canRemoveExpiry Whether the user can remove the expiry of the link.
+/// @param allowDownload Whether the link can be downloaded or not.
+/// @param canAllowDownload Whether the user can allow downloads via the link.
+/// This refers to the ability to remove a no-download restriction on the link.
+/// @param canDisallowDownload Whether the user can disallow downloads via the
+/// link. This refers to the ability to impose a no-download restriction on the
+/// link.
+/// @param allowComments Whether comments are enabled for the linked file. This
+/// takes the team commenting policy into account.
+/// @param teamRestrictsComments Whether the team has disabled commenting
+/// globally.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithCanRevoke:(NSNumber *)canRevoke;
+- (instancetype)initWithCanRevoke:(NSNumber *)canRevoke
+               visibilityPolicies:(NSArray<DBSHARINGVisibilityPolicy *> *)visibilityPolicies
+                     canSetExpiry:(NSNumber *)canSetExpiry
+                  canRemoveExpiry:(NSNumber *)canRemoveExpiry
+                    allowDownload:(NSNumber *)allowDownload
+                 canAllowDownload:(NSNumber *)canAllowDownload
+              canDisallowDownload:(NSNumber *)canDisallowDownload
+                    allowComments:(NSNumber *)allowComments
+            teamRestrictsComments:(NSNumber *)teamRestrictsComments;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Desktop session unique id. Might be missing due to historical data gap.
+/// Desktop session unique id.
 @property (nonatomic, readonly, nullable) DBTEAMLOGDesktopSessionLogInfo *sessionInfo;
 
 /// Name of the hosting desktop.
@@ -59,13 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param isDeleteOnUnlinkSupported Whether itu2019s possible to delete all of
 /// the account files upon unlinking.
 /// @param ipAddress The IP address of the last activity from this session.
-/// Might be missing due to historical data gap.
-/// @param created The time this session was created. Might be missing due to
-/// historical data gap.
-/// @param updated The time of the last activity from this session. Might be
-/// missing due to historical data gap.
-/// @param sessionInfo Desktop session unique id. Might be missing due to
-/// historical data gap.
+/// @param created The time this session was created.
+/// @param updated The time of the last activity from this session.
+/// @param sessionInfo Desktop session unique id.
 /// @param clientVersion The Dropbox client version.
 ///
 /// @return An initialized instance.

@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// gap.
 @property (nonatomic, readonly, copy, nullable) NSString *previousValue;
 
-/// New single sign-on logout URL. Might be missing due to historical data gap.
+/// New single sign-on logout URL.
 @property (nonatomic, readonly, copy, nullable) NSString *dNewValue;
 
 #pragma mark - Constructors
@@ -41,8 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param previousValue Previous single sign-on logout URL. Might be missing
 /// due to historical data gap.
-/// @param dNewValue New single sign-on logout URL. Might be missing due to
-/// historical data gap.
+/// @param dNewValue New single sign-on logout URL.
 ///
 /// @return An initialized instance.
 ///

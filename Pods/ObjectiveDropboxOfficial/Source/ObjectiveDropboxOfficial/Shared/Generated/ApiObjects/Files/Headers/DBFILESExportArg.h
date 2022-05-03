@@ -28,10 +28,30 @@ NS_ASSUME_NONNULL_BEGIN
 /// The path of the file to be exported.
 @property (nonatomic, readonly, copy) NSString *path;
 
+/// The file format to which the file should be exported. This must be one of
+/// the formats listed in the file's export_options returned by `getMetadata`.
+/// If none is specified, the default format (specified in export_as in file
+/// metadata) will be used.
+@property (nonatomic, readonly, copy, nullable) NSString *exportFormat;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param path The path of the file to be exported.
+/// @param exportFormat The file format to which the file should be exported.
+/// This must be one of the formats listed in the file's export_options returned
+/// by `getMetadata`. If none is specified, the default format (specified in
+/// export_as in file metadata) will be used.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPath:(NSString *)path exportFormat:(nullable NSString *)exportFormat;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param path The path of the file to be exported.
 ///

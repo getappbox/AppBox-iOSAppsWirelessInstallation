@@ -6,29 +6,22 @@
 [![Twitter](https://img.shields.io/twitter/follow/AppBoxHQ.svg?style=social&label=Follow)](https://twitter.com/AppBoxHQ)
 
 # AppBox - iOS Apps Wireless Installation 
-AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
+AppBox is a tool for iOS developers to deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
+
 
 # Features
-| | AppBox
--|-
-🔑 | Auto App Signing
-🚀 | Auto Upload on Dropbox or AppStore after Archive 
-🔗 | Keep same installation link for the same app
-🖇️ | Install previous version with same installation link
-✉️ | Auto E-Mail App Distribution Link
-🔌 | Auto Shutdown Mac after Distribution
-📦 | Maximum Upload Size - Equal to your Dropbox account storage
-📅 | Uploaded App Expiration - Until you delete from your Dropbox 
-✨ | Unlimited app installations
-🔥 | Auto Restart Upload After Network Change or Failure 
-🎩 | Easy setup assistant to get started in a few minutes
-🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
-😘 | Dashboard
-🚀 | Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
-🚢 | Jenkins Support [read more](https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/)
-🕶️ | Dark Theme
+- ✨ Unlimited app installations
+- 📦 No upload app size limit
+- 📅 No uploaded app expiration
+- 🔗 Keep same installation link for the same app
+- 🖇️ Install previous version with same installation link
+- ✉️ Auto e-mail app distribution link
+- 🔥 Auto restart upload after network change or failure 
+- 🎩 Easy setup assistant to get started in a few minutes
+- 🔧 Slack, Microsoft Teams and Hangout Chat webhook integration
+- 😘 Dashboard to manage uploaded apps
+- 🚀 Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
  
-
 # Installation
 
 ### Using curl
@@ -38,7 +31,7 @@ curl -s https://getappbox.com/install.sh | bash
 ```
 
 ### Manual
-If you face any issue using above command then you can manually install AppBox by downloading it from [here](https://getappbox.com/download). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
+If you face any issue using above command then you can manually install AppBox by downloading it from [here](http://tryappbox.com/download). After that, unzip `AppBox.app.zip` and move `AppBox.app` into `/Applications` directory.
 
 
 # How to use AppBox 
@@ -55,13 +48,11 @@ If you face any issue using above command then you can manually install AppBox b
 
 | Features |	AppBox |	diawi.com |
 | :--- | :--- | :--- |
-| Auto App Signing |	Yes |	No |
 | Auto Upload after Archive |	Yes |	No |
 | Keep same link for same app |	Yes |	No |
 | Install previous version with same link |	Yes |	No |
 | Auto E-Mail App Distribution Link |	Yes |	No |
-| Auto Shutdown Mac after Distribution |	Yes |	No |
-| Maximum Upload Size |	Equal to your Dropbox account storage |	100MB |
+| Maximum App Upload Size |	Equal to your Dropbox account storage |	100MB |
 | Uploaded App Expiration |	Until you delete from your Dropbox | 1day |
 | Installations Per App |	Unlimited |	10 | 
 | Auto Restart Upload After Network Change or Failure | Yes | No | 

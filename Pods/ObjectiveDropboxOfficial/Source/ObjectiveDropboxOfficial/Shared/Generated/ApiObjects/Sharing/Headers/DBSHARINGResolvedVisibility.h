@@ -51,6 +51,15 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGResolvedVisibilityTag){
     /// the link. Login is required.
     DBSHARINGResolvedVisibilitySharedFolderOnly,
 
+    /// The link merely points the user to the content, and does not grant any
+    /// additional rights. Existing members of the content who use this link can
+    /// only access the content with their pre-existing access rights. Either on
+    /// the file directly, or inherited from a parent folder.
+    DBSHARINGResolvedVisibilityNoOne,
+
+    /// Only the current user can view this link.
+    DBSHARINGResolvedVisibilityOnlyYou,
+
     /// (no description).
     DBSHARINGResolvedVisibilityOther,
 
@@ -114,6 +123,29 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGResolvedVisibilityTag){
 - (instancetype)initWithSharedFolderOnly;
 
 ///
+/// Initializes union class with tag state of "no_one".
+///
+/// Description of the "no_one" tag state: The link merely points the user to
+/// the content, and does not grant any additional rights. Existing members of
+/// the content who use this link can only access the content with their
+/// pre-existing access rights. Either on the file directly, or inherited from a
+/// parent folder.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNoOne;
+
+///
+/// Initializes union class with tag state of "only_you".
+///
+/// Description of the "only_you" tag state: Only the current user can view this
+/// link.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithOnlyYou;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -161,6 +193,20 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGResolvedVisibilityTag){
 /// "shared_folder_only".
 ///
 - (BOOL)isSharedFolderOnly;
+
+///
+/// Retrieves whether the union's current tag state has value "no_one".
+///
+/// @return Whether the union's current tag state has value "no_one".
+///
+- (BOOL)isNoOne;
+
+///
+/// Retrieves whether the union's current tag state has value "only_you".
+///
+/// @return Whether the union's current tag state has value "only_you".
+///
+- (BOOL)isOnlyYou;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

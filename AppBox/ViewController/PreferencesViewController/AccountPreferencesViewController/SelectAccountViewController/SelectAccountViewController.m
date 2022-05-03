@@ -14,8 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    accounts = @[@"App Store Connect"];
-    // Do view setup here.
+    accounts = @[@"Add Dropbox Account"];
 }
 
 #pragma mark - NSTableView Datasource and Delegate

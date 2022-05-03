@@ -9,6 +9,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBFILESLookupError;
+@class DBFILESMoveIntoFamilyError;
 @class DBFILESMoveIntoVaultError;
 @class DBFILESRelocationBatchError;
 @class DBFILESWriteError;
@@ -77,6 +78,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchErrorTag){
     /// detailed error.
     DBFILESRelocationBatchErrorCantMoveIntoVault,
 
+    /// Some content cannot be moved into the Family Room folder under certain
+    /// circumstances, see detailed error.
+    DBFILESRelocationBatchErrorCantMoveIntoFamily,
+
     /// (no description).
     DBFILESRelocationBatchErrorOther,
 
@@ -105,6 +110,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchErrorTag){
 /// detailed error. @note Ensure the `isCantMoveIntoVault` method returns true
 /// before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBFILESMoveIntoVaultError *cantMoveIntoVault;
+
+/// Some content cannot be moved into the Family Room folder under certain
+/// circumstances, see detailed error. @note Ensure the `isCantMoveIntoFamily`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBFILESMoveIntoFamilyError *cantMoveIntoFamily;
 
 #pragma mark - Constructors
 
@@ -240,6 +251,20 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchErrorTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithCantMoveIntoVault:(DBFILESMoveIntoVaultError *)cantMoveIntoVault;
+
+///
+/// Initializes union class with tag state of "cant_move_into_family".
+///
+/// Description of the "cant_move_into_family" tag state: Some content cannot be
+/// moved into the Family Room folder under certain circumstances, see detailed
+/// error.
+///
+/// @param cantMoveIntoFamily Some content cannot be moved into the Family Room
+/// folder under certain circumstances, see detailed error.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithCantMoveIntoFamily:(DBFILESMoveIntoFamilyError *)cantMoveIntoFamily;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -380,6 +405,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESRelocationBatchErrorTag){
 /// "cant_move_into_vault".
 ///
 - (BOOL)isCantMoveIntoVault;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "cant_move_into_family".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `cantMoveIntoFamily` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "cant_move_into_family".
+///
+- (BOOL)isCantMoveIntoFamily;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

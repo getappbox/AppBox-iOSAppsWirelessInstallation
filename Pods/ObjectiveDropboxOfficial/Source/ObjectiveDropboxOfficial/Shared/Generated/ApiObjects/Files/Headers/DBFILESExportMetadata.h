@@ -37,6 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Content hash https://www.dropbox.com/developers/reference/content-hash page.
 @property (nonatomic, readonly, copy, nullable) NSString *exportHash;
 
+/// If the file is a Paper doc, this gives the latest doc revision which can be
+/// used in `paperUpdate`.
+@property (nonatomic, readonly, nullable) NSNumber *paperRevision;
+
 #pragma mark - Constructors
 
 ///
@@ -49,10 +53,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// be used to verify data integrity. Similar to content hash. For more
 /// information see our Content hash
 /// https://www.dropbox.com/developers/reference/content-hash page.
+/// @param paperRevision If the file is a Paper doc, this gives the latest doc
+/// revision which can be used in `paperUpdate`.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithName:(NSString *)name size:(NSNumber *)size exportHash:(nullable NSString *)exportHash;
+- (instancetype)initWithName:(NSString *)name
+                        size:(NSNumber *)size
+                  exportHash:(nullable NSString *)exportHash
+               paperRevision:(nullable NSNumber *)paperRevision;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

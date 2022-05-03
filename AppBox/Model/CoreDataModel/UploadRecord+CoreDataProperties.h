@@ -2,7 +2,7 @@
 //  UploadRecord+CoreDataProperties.h
 //  
 //
-//  Created by Vineet Choudhary on 11/10/18.
+//  Created by Vineet Choudhary on 25/09/21.
 //
 //
 
@@ -11,13 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ProvisioningProfile;
 @interface UploadRecord (CoreDataProperties)
 
 + (NSFetchRequest<UploadRecord *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *build;
-@property (nullable, nonatomic, copy) NSString *buildScheme;
 @property (nullable, nonatomic, copy) NSString *buildType;
 @property (nullable, nonatomic, copy) NSDate *datetime;
 @property (nullable, nonatomic, copy) NSString *dbAppInfoFullPath;
@@ -37,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *version;
 @property (nullable, nonatomic, retain) Project *project;
 @property (nullable, nonatomic, retain) ProvisioningProfile *provisioningProfile;
+@property (nullable, nonatomic, retain) AppBoxService *service;
 
 @end
 

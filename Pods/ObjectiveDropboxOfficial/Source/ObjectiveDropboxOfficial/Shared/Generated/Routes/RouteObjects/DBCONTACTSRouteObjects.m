@@ -15,40 +15,52 @@
 static DBRoute *DBCONTACTSDeleteManualContacts;
 static DBRoute *DBCONTACTSDeleteManualContactsBatch;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBCONTACTSDeleteManualContacts {
-  if (!DBCONTACTSDeleteManualContacts) {
-    DBCONTACTSDeleteManualContacts = [[DBRoute alloc] init:@"delete_manual_contacts"
-                                                namespace_:@"contacts"
-                                                deprecated:@NO
-                                                resultType:nil
-                                                 errorType:nil
-                                                     attrs:@{
-                                                       @"auth" : @"user",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
-                                     dataStructSerialBlock:nil
-                                   dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBCONTACTSDeleteManualContacts) {
+      DBCONTACTSDeleteManualContacts = [[DBRoute alloc] init:@"delete_manual_contacts"
+                                                  namespace_:@"contacts"
+                                                  deprecated:@NO
+                                                  resultType:nil
+                                                   errorType:nil
+                                                       attrs:@{
+                                                         @"auth" : @"user",
+                                                         @"host" : @"api",
+                                                         @"style" : @"rpc"
+                                                       }
+                                       dataStructSerialBlock:nil
+                                     dataStructDeserialBlock:nil];
+    }
+    return DBCONTACTSDeleteManualContacts;
   }
-  return DBCONTACTSDeleteManualContacts;
 }
 
 + (DBRoute *)DBCONTACTSDeleteManualContactsBatch {
-  if (!DBCONTACTSDeleteManualContactsBatch) {
-    DBCONTACTSDeleteManualContactsBatch = [[DBRoute alloc] init:@"delete_manual_contacts_batch"
-                                                     namespace_:@"contacts"
-                                                     deprecated:@NO
-                                                     resultType:nil
-                                                      errorType:[DBCONTACTSDeleteManualContactsError class]
-                                                          attrs:@{
-                                                            @"auth" : @"user",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBCONTACTSDeleteManualContactsBatch) {
+      DBCONTACTSDeleteManualContactsBatch = [[DBRoute alloc] init:@"delete_manual_contacts_batch"
+                                                       namespace_:@"contacts"
+                                                       deprecated:@NO
+                                                       resultType:nil
+                                                        errorType:[DBCONTACTSDeleteManualContactsError class]
+                                                            attrs:@{
+                                                              @"auth" : @"user",
+                                                              @"host" : @"api",
+                                                              @"style" : @"rpc"
+                                                            }
+                                            dataStructSerialBlock:nil
+                                          dataStructDeserialBlock:nil];
+    }
+    return DBCONTACTSDeleteManualContactsBatch;
   }
-  return DBCONTACTSDeleteManualContactsBatch;
 }
 
 @end

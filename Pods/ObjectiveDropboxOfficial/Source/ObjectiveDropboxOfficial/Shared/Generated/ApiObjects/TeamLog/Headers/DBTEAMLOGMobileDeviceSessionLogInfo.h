@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Mobile session unique id. Might be missing due to historical data gap.
+/// Mobile session unique id.
 @property (nonatomic, readonly, nullable) DBTEAMLOGMobileSessionLogInfo *sessionInfo;
 
 /// The device name.
@@ -56,13 +56,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param deviceName The device name.
 /// @param clientType The mobile application type.
 /// @param ipAddress The IP address of the last activity from this session.
-/// Might be missing due to historical data gap.
-/// @param created The time this session was created. Might be missing due to
-/// historical data gap.
-/// @param updated The time of the last activity from this session. Might be
-/// missing due to historical data gap.
-/// @param sessionInfo Mobile session unique id. Might be missing due to
-/// historical data gap.
+/// @param created The time this session was created.
+/// @param updated The time of the last activity from this session.
+/// @param sessionInfo Mobile session unique id.
 /// @param clientVersion The Dropbox client version.
 /// @param osVersion The hosting OS version.
 /// @param lastCarrier last carrier used by the device.

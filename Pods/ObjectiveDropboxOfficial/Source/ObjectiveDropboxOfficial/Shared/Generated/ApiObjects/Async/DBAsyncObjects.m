@@ -85,6 +85,7 @@
   switch (_tag) {
   case DBASYNCLaunchResultBaseAsyncJobId:
     result = prime * result + [self.asyncJobId hash];
+    break;
   }
 
   return prime * result;
@@ -247,8 +248,10 @@
   switch (_tag) {
   case DBASYNCLaunchEmptyResultAsyncJobId:
     result = prime * result + [self.asyncJobId hash];
+    break;
   case DBASYNCLaunchEmptyResultComplete:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -490,6 +493,7 @@
   switch (_tag) {
   case DBASYNCPollResultBaseInProgress:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -639,8 +643,10 @@
   switch (_tag) {
   case DBASYNCPollEmptyResultInProgress:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBASYNCPollEmptyResultComplete:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -809,10 +815,13 @@
   switch (_tag) {
   case DBASYNCPollErrorInvalidAsyncJobId:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBASYNCPollErrorInternalError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBASYNCPollErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

@@ -42,8 +42,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESLookupErrorTag){
     /// isn't a folder.
     DBFILEPROPERTIESLookupErrorNotFolder,
 
-    /// The file cannot be transferred because the content is restricted.  For
-    /// example, sometimes there are legal restrictions due to copyright claims.
+    /// The file cannot be transferred because the content is restricted. For
+    /// example, we might restrict a file due to legal requirements.
     DBFILEPROPERTIESLookupErrorRestrictedContent,
 
     /// (no description).
@@ -103,8 +103,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILEPROPERTIESLookupErrorTag){
 /// Initializes union class with tag state of "restricted_content".
 ///
 /// Description of the "restricted_content" tag state: The file cannot be
-/// transferred because the content is restricted.  For example, sometimes there
-/// are legal restrictions due to copyright claims.
+/// transferred because the content is restricted. For example, we might
+/// restrict a file due to legal requirements.
 ///
 /// @return An initialized instance.
 ///

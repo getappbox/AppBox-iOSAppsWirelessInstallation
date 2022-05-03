@@ -9,7 +9,9 @@
 #import "DBSerializableProtocol.h"
 
 @class DBTEAMLOGAdminAlertingAlertConfiguration;
+@class DBTEAMLOGAdminAlertingAlertSensitivity;
 @class DBTEAMLOGAdminAlertingAlertStatePolicy;
+@class DBTEAMLOGRecipientsConfiguration;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Instance fields
 
 /// Alert state.
-@property (nonatomic, readonly) DBTEAMLOGAdminAlertingAlertStatePolicy *alertState;
+@property (nonatomic, readonly, nullable) DBTEAMLOGAdminAlertingAlertStatePolicy *alertState;
+
+/// Sensitivity level.
+@property (nonatomic, readonly, nullable) DBTEAMLOGAdminAlertingAlertSensitivity *sensitivityLevel;
+
+/// Recipient settings.
+@property (nonatomic, readonly, nullable) DBTEAMLOGRecipientsConfiguration *recipientsSettings;
 
 #pragma mark - Constructors
 
@@ -37,10 +45,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param alertState Alert state.
+/// @param sensitivityLevel Sensitivity level.
+/// @param recipientsSettings Recipient settings.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithAlertState:(DBTEAMLOGAdminAlertingAlertStatePolicy *)alertState;
+- (instancetype)initWithAlertState:(nullable DBTEAMLOGAdminAlertingAlertStatePolicy *)alertState
+                  sensitivityLevel:(nullable DBTEAMLOGAdminAlertingAlertSensitivity *)sensitivityLevel
+                recipientsSettings:(nullable DBTEAMLOGRecipientsConfiguration *)recipientsSettings;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
+///
+///
+/// @return An initialized instance.
+///
+- (instancetype)initDefault;
 
 - (instancetype)init NS_UNAVAILABLE;
 

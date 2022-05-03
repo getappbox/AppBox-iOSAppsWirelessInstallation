@@ -23,9 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the addFolderMember route object.
 + (DBRoute *)DBSHARINGAddFolderMember;
 
-/// Accessor method for the changeFileMemberAccess route object.
-+ (DBRoute *)DBSHARINGChangeFileMemberAccess;
-
 /// Accessor method for the checkJobStatus route object.
 + (DBRoute *)DBSHARINGCheckJobStatus;
 
