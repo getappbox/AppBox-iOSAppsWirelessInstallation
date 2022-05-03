@@ -17,40 +17,52 @@
 static DBRoute *DBAUTHTokenFromOauth1;
 static DBRoute *DBAUTHTokenRevoke;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBAUTHTokenFromOauth1 {
-  if (!DBAUTHTokenFromOauth1) {
-    DBAUTHTokenFromOauth1 = [[DBRoute alloc] init:@"token/from_oauth1"
-                                       namespace_:@"auth"
-                                       deprecated:@NO
-                                       resultType:[DBAUTHTokenFromOAuth1Result class]
-                                        errorType:[DBAUTHTokenFromOAuth1Error class]
-                                            attrs:@{
-                                              @"auth" : @"app",
-                                              @"host" : @"api",
-                                              @"style" : @"rpc"
-                                            }
-                            dataStructSerialBlock:nil
-                          dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBAUTHTokenFromOauth1) {
+      DBAUTHTokenFromOauth1 = [[DBRoute alloc] init:@"token/from_oauth1"
+                                         namespace_:@"auth"
+                                         deprecated:@NO
+                                         resultType:[DBAUTHTokenFromOAuth1Result class]
+                                          errorType:[DBAUTHTokenFromOAuth1Error class]
+                                              attrs:@{
+                                                @"auth" : @"app",
+                                                @"host" : @"api",
+                                                @"style" : @"rpc"
+                                              }
+                              dataStructSerialBlock:nil
+                            dataStructDeserialBlock:nil];
+    }
+    return DBAUTHTokenFromOauth1;
   }
-  return DBAUTHTokenFromOauth1;
 }
 
 + (DBRoute *)DBAUTHTokenRevoke {
-  if (!DBAUTHTokenRevoke) {
-    DBAUTHTokenRevoke = [[DBRoute alloc] init:@"token/revoke"
-                                   namespace_:@"auth"
-                                   deprecated:@NO
-                                   resultType:nil
-                                    errorType:nil
-                                        attrs:@{
-                                          @"auth" : @"user",
-                                          @"host" : @"api",
-                                          @"style" : @"rpc"
-                                        }
-                        dataStructSerialBlock:nil
-                      dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBAUTHTokenRevoke) {
+      DBAUTHTokenRevoke = [[DBRoute alloc] init:@"token/revoke"
+                                     namespace_:@"auth"
+                                     deprecated:@NO
+                                     resultType:nil
+                                      errorType:nil
+                                          attrs:@{
+                                            @"auth" : @"user",
+                                            @"host" : @"api",
+                                            @"style" : @"rpc"
+                                          }
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
+    }
+    return DBAUTHTokenRevoke;
   }
-  return DBAUTHTokenRevoke;
 }
 
 @end

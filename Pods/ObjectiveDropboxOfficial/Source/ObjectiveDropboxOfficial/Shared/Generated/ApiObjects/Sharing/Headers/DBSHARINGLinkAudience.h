@@ -40,8 +40,8 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkAudienceTag){
     /// pre-existing access rights.
     DBSHARINGLinkAudienceNoOne,
 
-    /// A link-specific password is required to access the link. Login is not
-    /// required.
+    /// Use `require_password` instead. A link-specific password is required to
+    /// access the link. Login is not required.
     DBSHARINGLinkAudiencePassword,
 
     /// Link is accessible only by members of the content.
@@ -91,8 +91,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGLinkAudienceTag){
 ///
 /// Initializes union class with tag state of "password".
 ///
-/// Description of the "password" tag state: A link-specific password is
-/// required to access the link. Login is not required.
+/// Description of the "password" tag state: Use `require_password` instead. A
+/// link-specific password is required to access the link. Login is not
+/// required.
 ///
 /// @return An initialized instance.
 ///

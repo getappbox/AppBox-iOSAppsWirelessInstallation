@@ -19,11 +19,6 @@
         [self.dbFolderNameTextField setStringValue:self.project.bundleDirectory.lastPathComponent];
     }
     [self.dbFolderNameTextField setEnabled:self.project.isKeepSameLinkEnabled];
-    [LocalServerHandler getLocalIPAddressWithCompletion:^(NSString *ipAddress) {
-        [self.localNetworkCheckBox setTitle: ipAddress];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:8888",ipAddress]];
-        [self.project setIpaFileLocalShareableURL:url];
-    }];
 }
 
 - (void)viewDidDisappear{
@@ -34,22 +29,6 @@
 - (IBAction)buttonCancelTapped:(NSButton *)sender {
     [self dismissController:self];
     [self.delegate projectAdvancedCancelButtonTapped:sender];
-}
-
-- (IBAction)buttonLocalNetworkStateChanged:(NSButton *)sender {
-    if (sender.state == NSOnState) {
-        //build distribution path
-        NSURL *localDirectory = [[UserData buildLocation] URLByAppendingPathComponent:@"appbox"];
-        if (self.project.selectedSchemes){
-            localDirectory = [localDirectory URLByAppendingPathComponent:self.project.selectedSchemes];
-        }else{
-            NSString *ipaDirectory = [[_project.ipaFullPath URLByDeletingPathExtension] lastPathComponent];
-            localDirectory = [localDirectory URLByAppendingPathComponent:ipaDirectory];
-        }
-        self.project.distributeOverLocalNetwork = YES;
-        self.project.distributionLocalDirectory = [localDirectory resourceSpecifier];
-        [self performSegueWithIdentifier:NSStringFromClass([LocalServerViewController class]) sender:nil];
-    }
 }
 
 - (IBAction)buttonSaveTapped:(NSButton *)sender {

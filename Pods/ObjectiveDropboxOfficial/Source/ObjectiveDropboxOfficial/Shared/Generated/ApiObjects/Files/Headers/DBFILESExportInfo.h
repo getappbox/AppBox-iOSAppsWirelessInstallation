@@ -30,16 +30,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// Format to which the file can be exported to.
 @property (nonatomic, readonly, copy, nullable) NSString *exportAs;
 
+/// Additional formats to which the file can be exported. These values can be
+/// specified as the export_format in /files/export.
+@property (nonatomic, readonly, nullable) NSArray<NSString *> *exportOptions;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param exportAs Format to which the file can be exported to.
+/// @param exportOptions Additional formats to which the file can be exported.
+/// These values can be specified as the export_format in /files/export.
 ///
 /// @return An initialized instance.
 ///
-- (instancetype)initWithExportAs:(nullable NSString *)exportAs;
+- (instancetype)initWithExportAs:(nullable NSString *)exportAs
+                   exportOptions:(nullable NSArray<NSString *> *)exportOptions;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

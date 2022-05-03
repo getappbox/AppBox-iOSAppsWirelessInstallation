@@ -20,6 +20,18 @@
   return [self initWithAppKey:appKey appSecret:appSecret userAgent:userAgent asMemberId:nil];
 }
 
+- (instancetype)initWithAppKey:(nullable NSString *)appKey
+                     appSecret:(nullable NSString *)appSecret
+                     userAgent:(nullable NSString *)userAgent
+                hostnameConfig:(DBTransportBaseHostnameConfig *)hostnameConfig {
+  return [self initWithAppKey:appKey
+                    appSecret:appSecret
+               hostnameConfig:hostnameConfig
+                    userAgent:userAgent
+                   asMemberId:nil
+            additionalHeaders:nil];
+}
+
 - (instancetype)initWithAppKey:(NSString *)appKey
                      appSecret:(NSString *)appSecret
                      userAgent:(NSString *)userAgent

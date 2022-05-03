@@ -37,6 +37,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadErrorTag){
     /// property groups.
     DBFILESUploadErrorPropertiesError,
 
+    /// The request payload must be at most 150 MB.
+    DBFILESUploadErrorPayloadTooLarge,
+
+    /// The content received by the Dropbox server in this call does not match
+    /// the provided content hash.
+    DBFILESUploadErrorContentHashMismatch,
+
     /// (no description).
     DBFILESUploadErrorOther,
 
@@ -83,6 +90,26 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadErrorTag){
 - (instancetype)initWithPropertiesError:(DBFILEPROPERTIESInvalidPropertyGroupError *)propertiesError;
 
 ///
+/// Initializes union class with tag state of "payload_too_large".
+///
+/// Description of the "payload_too_large" tag state: The request payload must
+/// be at most 150 MB.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPayloadTooLarge;
+
+///
+/// Initializes union class with tag state of "content_hash_mismatch".
+///
+/// Description of the "content_hash_mismatch" tag state: The content received
+/// by the Dropbox server in this call does not match the provided content hash.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithContentHashMismatch;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -113,6 +140,23 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadErrorTag){
 /// @return Whether the union's current tag state has value "properties_error".
 ///
 - (BOOL)isPropertiesError;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "payload_too_large".
+///
+/// @return Whether the union's current tag state has value "payload_too_large".
+///
+- (BOOL)isPayloadTooLarge;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "content_hash_mismatch".
+///
+/// @return Whether the union's current tag state has value
+/// "content_hash_mismatch".
+///
+- (BOOL)isContentHashMismatch;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

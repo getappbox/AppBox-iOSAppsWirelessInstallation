@@ -32,6 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithTask:(id<DBURLSessionTask>)task tokenUid:(nullable NSString *)tokenUid route:(DBRoute *)route;
+
+/// The session that was used to make to the request.
+@property (nonatomic, readonly) NSURLSession *session;
+
+/// The `DBURLSessionTask` that was used to make the request.
+@property (nonatomic, readonly) id<DBURLSessionTask> task;
+
 @end
 
 #pragma mark - Upload-style network task

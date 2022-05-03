@@ -19,7 +19,7 @@
 #define abDocumentationURL @"https://docs.getappbox.com"
 #define abLicenseURL @"https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation#user-content-license"
 #define abGitHubLatestRelease @"https://api.github.com/repos/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest"
-#define abTwitterURL @"https://twitter.com/tryappbox"
+#define abTwitterURL @"https://twitter.com/AppBoxHQ"
 #define abSlackImage @"https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2017-04-06/165993935268_ec0c0ba40483382c7192_512.png"
 #define abWebHookSetupURL @"https://my.slack.com/apps/new/A0F7XDUAZ-incoming-webhooks"
 
@@ -39,16 +39,6 @@ static NSString *const UNIQUE_LINK_SHORT = @"uniqueLinkShort";
 static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 
-//AppBox AppStore service. Note: these constanst also need to change in ALAppStore.sh file
-#define abALUploadApp @"upload-app"
-#define abALValidateApp @"validate-app"
-#define abALValidateUser @"validate-user"
-#define abiTunesConnectService @"AppBox - iTunesConnect"
-#define abiTunesConnectServiceCI @"AppBox - iTunesConnect - CI"
-
-//Serives Key
-#define abGoogleTiny @"AIzaSyD5c0jmblitp5KMZy2crCbueTU-yB1jMqI"
-
 //notification
 #define abSessionLogUpdated @"SessionLogUpdated"
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
@@ -62,22 +52,10 @@ static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 #define abConnectedToInternet @"Connected to the Internet."
 #define abNotConnectedToInternet @"Waiting for the Internet Connection."
 
-//team id constants
-#define abiPhoneDeveloper @"iphone developer"
-#define abiPhoneDistribution @"iphone distribution"
-
 #define abTeamId @"teamId"
 #define abFullName @"fullName"
 #define abTeamName @"teamName"
 #define abExpiryDate @"expiryDate"
-
-//default setting
-#define abBuildLocation @"~/Desktop"
-#define abXcodeLocation @"/Applications/Xcode.app"
-#define abAppBoxLocalServerBuildsDirectory @"AppBoxServerBuilds"
-#define abApplicationLoaderAppLocation @"/Contents/Applications/Application Loader.app"
-#define abApplicationLoaderALToolLocation @"/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
-
 
 //others
 #define abEmptyString @""
@@ -87,6 +65,9 @@ static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 #define abOnErrorMaxRetryCount 3
 #define abEndOfSessionLog @"abEndOfSessionLog"
 
+//Under development feature flags
+#define abMultiDBAccounts 0
+
 
 //enums
 typedef enum : NSUInteger {
@@ -95,48 +76,30 @@ typedef enum : NSUInteger {
     DBFileTypeJson,
 } DBFileType;
 
-typedef enum : NSUInteger {
-    ScriptTypeGetScheme,
-    ScriptTypeTeamId,
-    ScriptTypeBuild,
-    ScriptTypeCreateIPA,
-    ScriptTypeXcodePath,
-    ScriptTypeAppStoreValidation,
-    ScriptTypeAppStoreUpload,
-} ScriptType;
-
 //CI
 #define abExitCodeForInvalidCommand 127
-#define abExitCodeForArchiveFailed 126
-#define abExitCodeForExportFailed 125
 #define abExitCodeForUploadFailed 124
-#define abExitCodeForInvalidAppBoxSettingFile 123 //appbox.plist
-#define abExitCodeForInvalidArgumentsXcodeBuild 122
-#define abExitCodeForFailedToLoadSchemeInfo 122
 #define abExitCodeUnZipIPAError 121
 #define abExitCodeInfoPlistNotFound 120
 #define abExitCodeIPAFileNotFound 119
 #define abExitCodeUnableToCreateManiFestFile 118
-#define abExitCodeForXcodeNotFount 117
-#define abExitCodeForApplicationLoaderNotFount 116
-#define abExitCodeForSchemeNotFound 115
-#define abExitCodeForPrivateKeyNotFound 114
-#define abExitCodeForAppStoreUploadFailed 113
-#define abExitCodeForInvalidITCAccount 112
 #define abExitCodeForMailFailed 111
-#define abExitCodeXcodeNotFoundAtPath 110
-#define abExitCodeITCMailNotFound 109
 #define abExitCodeForSuccess 0
 
-#define abArgsWorkspace @"build="
-#define abArgsScheme @"scheme="
-#define abArgsBuildType @"buildtype="
-#define abArgsTeamId @"teamid="
 #define abArgsIPA @"ipa="
 #define abArgsEmails @"email="
 #define abArgsPersonalMessage @"message="
 #define abArgsKeepSameLink @"keepsamelink="
 #define abArgsDropBoxFolderName @"dbfolder="
+
+//Weakify & Strongify
+#define weakify(var) __weak typeof(var) AHKWeak_##var = var;
+
+#define strongify(var) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wshadow\"") \
+__strong typeof(var) var = AHKWeak_##var; \
+_Pragma("clang diagnostic pop")
 
 
 #endif /* Constants_h */

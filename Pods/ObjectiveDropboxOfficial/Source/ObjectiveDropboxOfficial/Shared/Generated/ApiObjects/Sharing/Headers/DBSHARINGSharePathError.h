@@ -73,6 +73,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
     /// We do not support sharing the Vault folder.
     DBSHARINGSharePathErrorIsVault,
 
+    /// We do not support sharing a folder inside a locked Vault.
+    DBSHARINGSharePathErrorIsVaultLocked,
+
     /// We do not support sharing the Family folder.
     DBSHARINGSharePathErrorIsFamily,
 
@@ -233,6 +236,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
 - (instancetype)initWithIsVault;
 
 ///
+/// Initializes union class with tag state of "is_vault_locked".
+///
+/// Description of the "is_vault_locked" tag state: We do not support sharing a
+/// folder inside a locked Vault.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithIsVaultLocked;
+
+///
 /// Initializes union class with tag state of "is_family".
 ///
 /// Description of the "is_family" tag state: We do not support sharing the
@@ -367,6 +380,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGSharePathErrorTag){
 /// @return Whether the union's current tag state has value "is_vault".
 ///
 - (BOOL)isIsVault;
+
+///
+/// Retrieves whether the union's current tag state has value "is_vault_locked".
+///
+/// @return Whether the union's current tag state has value "is_vault_locked".
+///
+- (BOOL)isIsVaultLocked;
 
 ///
 /// Retrieves whether the union's current tag state has value "is_family".

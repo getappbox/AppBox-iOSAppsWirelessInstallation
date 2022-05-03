@@ -18,40 +18,52 @@
 static DBRoute *DBTEAMLOGGetEvents;
 static DBRoute *DBTEAMLOGGetEventsContinue;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBTEAMLOGGetEvents {
-  if (!DBTEAMLOGGetEvents) {
-    DBTEAMLOGGetEvents = [[DBRoute alloc] init:@"get_events"
-                                    namespace_:@"team_log"
-                                    deprecated:@NO
-                                    resultType:[DBTEAMLOGGetTeamEventsResult class]
-                                     errorType:[DBTEAMLOGGetTeamEventsError class]
-                                         attrs:@{
-                                           @"auth" : @"team",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
-                         dataStructSerialBlock:nil
-                       dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBTEAMLOGGetEvents) {
+      DBTEAMLOGGetEvents = [[DBRoute alloc] init:@"get_events"
+                                      namespace_:@"team_log"
+                                      deprecated:@NO
+                                      resultType:[DBTEAMLOGGetTeamEventsResult class]
+                                       errorType:[DBTEAMLOGGetTeamEventsError class]
+                                           attrs:@{
+                                             @"auth" : @"team",
+                                             @"host" : @"api",
+                                             @"style" : @"rpc"
+                                           }
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLOGGetEvents;
   }
-  return DBTEAMLOGGetEvents;
 }
 
 + (DBRoute *)DBTEAMLOGGetEventsContinue {
-  if (!DBTEAMLOGGetEventsContinue) {
-    DBTEAMLOGGetEventsContinue = [[DBRoute alloc] init:@"get_events/continue"
-                                            namespace_:@"team_log"
-                                            deprecated:@NO
-                                            resultType:[DBTEAMLOGGetTeamEventsResult class]
-                                             errorType:[DBTEAMLOGGetTeamEventsContinueError class]
-                                                 attrs:@{
-                                                   @"auth" : @"team",
-                                                   @"host" : @"api",
-                                                   @"style" : @"rpc"
-                                                 }
-                                 dataStructSerialBlock:nil
-                               dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBTEAMLOGGetEventsContinue) {
+      DBTEAMLOGGetEventsContinue = [[DBRoute alloc] init:@"get_events/continue"
+                                              namespace_:@"team_log"
+                                              deprecated:@NO
+                                              resultType:[DBTEAMLOGGetTeamEventsResult class]
+                                               errorType:[DBTEAMLOGGetTeamEventsContinueError class]
+                                                   attrs:@{
+                                                     @"auth" : @"team",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLOGGetEventsContinue;
   }
-  return DBTEAMLOGGetEventsContinue;
 }
 
 @end

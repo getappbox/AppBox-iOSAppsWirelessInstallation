@@ -31,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Disables the access token used to authenticate the call.
+/// Disables the access token used to authenticate the call. If there is a corresponding refresh token for the access
+/// token, this disables that refresh token, as well as any other access tokens for that refresh token.
 ///
 ///
 /// @return Through the response callback, the caller will receive a `void` object on success or a `void` object on

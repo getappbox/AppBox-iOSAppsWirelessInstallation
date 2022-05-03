@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// New viewer info policy.
 @property (nonatomic, readonly) DBSHARINGViewerInfoPolicy *dNewValue;
 
-/// Previous view info policy. Might be missing due to historical data gap.
+/// Previous view info policy.
 @property (nonatomic, readonly, nullable) DBSHARINGViewerInfoPolicy *previousValue;
 
 #pragma mark - Constructors
@@ -40,8 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param dNewValue New viewer info policy.
-/// @param previousValue Previous view info policy. Might be missing due to
-/// historical data gap.
+/// @param previousValue Previous view info policy.
 ///
 /// @return An initialized instance.
 ///

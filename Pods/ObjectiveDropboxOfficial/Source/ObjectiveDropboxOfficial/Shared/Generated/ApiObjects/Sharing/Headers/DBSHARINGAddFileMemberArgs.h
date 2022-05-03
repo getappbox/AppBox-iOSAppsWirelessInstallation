@@ -33,15 +33,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSString *file;
 
 /// Members to add. Note that even an email address is given, this may result in
-/// a user being directy added to the membership if that email is the user's
+/// a user being directly added to the membership if that email is the user's
 /// main account email.
 @property (nonatomic, readonly) NSArray<DBSHARINGMemberSelector *> *members;
 
 /// Message to send to added members in their invitation.
 @property (nonatomic, readonly, copy, nullable) NSString *customMessage;
 
-/// Whether added members should be notified via device notifications of their
-/// invitation.
+/// Whether added members should be notified via email and device notifications
+/// of their invitation.
 @property (nonatomic, readonly) NSNumber *quiet;
 
 /// AccessLevel union object, describing what access level we want to give new
@@ -58,10 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param file File to which to add members.
 /// @param members Members to add. Note that even an email address is given,
-/// this may result in a user being directy added to the membership if that
+/// this may result in a user being directly added to the membership if that
 /// email is the user's main account email.
 /// @param customMessage Message to send to added members in their invitation.
-/// @param quiet Whether added members should be notified via device
+/// @param quiet Whether added members should be notified via email and device
 /// notifications of their invitation.
 /// @param accessLevel AccessLevel union object, describing what access level we
 /// want to give new members.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param file File to which to add members.
 /// @param members Members to add. Note that even an email address is given,
-/// this may result in a user being directy added to the membership if that
+/// this may result in a user being directly added to the membership if that
 /// email is the user's main account email.
 ///
 /// @return An initialized instance.

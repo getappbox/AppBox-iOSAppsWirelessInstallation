@@ -16,40 +16,52 @@
 static DBRoute *DBCHECKApp;
 static DBRoute *DBCHECKUser;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBCHECKApp {
-  if (!DBCHECKApp) {
-    DBCHECKApp = [[DBRoute alloc] init:@"app"
-                            namespace_:@"check"
-                            deprecated:@NO
-                            resultType:[DBCHECKEchoResult class]
-                             errorType:nil
-                                 attrs:@{
-                                   @"auth" : @"app",
-                                   @"host" : @"api",
-                                   @"style" : @"rpc"
-                                 }
-                 dataStructSerialBlock:nil
-               dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBCHECKApp) {
+      DBCHECKApp = [[DBRoute alloc] init:@"app"
+                              namespace_:@"check"
+                              deprecated:@NO
+                              resultType:[DBCHECKEchoResult class]
+                               errorType:nil
+                                   attrs:@{
+                                     @"auth" : @"app",
+                                     @"host" : @"api",
+                                     @"style" : @"rpc"
+                                   }
+                   dataStructSerialBlock:nil
+                 dataStructDeserialBlock:nil];
+    }
+    return DBCHECKApp;
   }
-  return DBCHECKApp;
 }
 
 + (DBRoute *)DBCHECKUser {
-  if (!DBCHECKUser) {
-    DBCHECKUser = [[DBRoute alloc] init:@"user"
-                             namespace_:@"check"
-                             deprecated:@NO
-                             resultType:[DBCHECKEchoResult class]
-                              errorType:nil
-                                  attrs:@{
-                                    @"auth" : @"user",
-                                    @"host" : @"api",
-                                    @"style" : @"rpc"
-                                  }
-                  dataStructSerialBlock:nil
-                dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBCHECKUser) {
+      DBCHECKUser = [[DBRoute alloc] init:@"user"
+                               namespace_:@"check"
+                               deprecated:@NO
+                               resultType:[DBCHECKEchoResult class]
+                                errorType:nil
+                                    attrs:@{
+                                      @"auth" : @"user",
+                                      @"host" : @"api",
+                                      @"style" : @"rpc"
+                                    }
+                    dataStructSerialBlock:nil
+                  dataStructDeserialBlock:nil];
+    }
+    return DBCHECKUser;
   }
-  return DBCHECKUser;
 }
 
 @end

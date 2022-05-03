@@ -17,7 +17,6 @@
 @dynamic bundleIdentifier;
 @dynamic name;
 @dynamic ciSettings;
-@dynamic teams;
 @dynamic uploadRecords;
 
 @end

@@ -97,23 +97,33 @@
 #import "DBTEAMListTeamDevicesError.h"
 #import "DBTEAMListTeamDevicesResult.h"
 #import "DBTEAMMemberAddResult.h"
+#import "DBTEAMMemberAddV2Result.h"
 #import "DBTEAMMemberDevices.h"
 #import "DBTEAMMemberLinkedApps.h"
 #import "DBTEAMMemberProfile.h"
 #import "DBTEAMMemberSelectorError.h"
 #import "DBTEAMMembersAddJobStatus.h"
+#import "DBTEAMMembersAddJobStatusV2Result.h"
 #import "DBTEAMMembersAddLaunch.h"
+#import "DBTEAMMembersAddLaunchV2Result.h"
 #import "DBTEAMMembersDeactivateError.h"
 #import "DBTEAMMembersDeleteProfilePhotoError.h"
+#import "DBTEAMMembersGetAvailableTeamMemberRolesResult.h"
 #import "DBTEAMMembersGetInfoError.h"
 #import "DBTEAMMembersGetInfoItem.h"
+#import "DBTEAMMembersGetInfoItemBase.h"
+#import "DBTEAMMembersGetInfoItemV2.h"
+#import "DBTEAMMembersGetInfoV2Result.h"
 #import "DBTEAMMembersInfo.h"
 #import "DBTEAMMembersListContinueError.h"
 #import "DBTEAMMembersListError.h"
 #import "DBTEAMMembersListResult.h"
+#import "DBTEAMMembersListV2Result.h"
 #import "DBTEAMMembersRecoverError.h"
 #import "DBTEAMMembersRemoveError.h"
 #import "DBTEAMMembersSendWelcomeError.h"
+#import "DBTEAMMembersSetPermissions2Error.h"
+#import "DBTEAMMembersSetPermissions2Result.h"
 #import "DBTEAMMembersSetPermissionsError.h"
 #import "DBTEAMMembersSetPermissionsResult.h"
 #import "DBTEAMMembersSetProfileError.h"
@@ -157,7 +167,10 @@
 #import "DBTEAMTeamFolderUpdateSyncSettingsError.h"
 #import "DBTEAMTeamGetInfoResult.h"
 #import "DBTEAMTeamMemberInfo.h"
+#import "DBTEAMTeamMemberInfoV2.h"
+#import "DBTEAMTeamMemberInfoV2Result.h"
 #import "DBTEAMTeamMemberProfile.h"
+#import "DBTEAMTeamMemberRole.h"
 #import "DBTEAMTeamNamespacesListContinueError.h"
 #import "DBTEAMTeamNamespacesListError.h"
 #import "DBTEAMTeamNamespacesListResult.h"
@@ -210,11 +223,18 @@ static DBRoute *DBTEAMMemberSpaceLimitsExcludedUsersRemove;
 static DBRoute *DBTEAMMemberSpaceLimitsGetCustomQuota;
 static DBRoute *DBTEAMMemberSpaceLimitsRemoveCustomQuota;
 static DBRoute *DBTEAMMemberSpaceLimitsSetCustomQuota;
+static DBRoute *DBTEAMMembersAddV2;
 static DBRoute *DBTEAMMembersAdd;
+static DBRoute *DBTEAMMembersAddJobStatusGetV2;
 static DBRoute *DBTEAMMembersAddJobStatusGet;
+static DBRoute *DBTEAMMembersDeleteProfilePhotoV2;
 static DBRoute *DBTEAMMembersDeleteProfilePhoto;
+static DBRoute *DBTEAMMembersGetAvailableTeamMemberRoles;
+static DBRoute *DBTEAMMembersGetInfoV2;
 static DBRoute *DBTEAMMembersGetInfo;
+static DBRoute *DBTEAMMembersListV2;
 static DBRoute *DBTEAMMembersList;
+static DBRoute *DBTEAMMembersListContinueV2;
 static DBRoute *DBTEAMMembersListContinue;
 static DBRoute *DBTEAMMembersMoveFormerMemberFiles;
 static DBRoute *DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
@@ -225,8 +245,11 @@ static DBRoute *DBTEAMMembersSecondaryEmailsAdd;
 static DBRoute *DBTEAMMembersSecondaryEmailsDelete;
 static DBRoute *DBTEAMMembersSecondaryEmailsResendVerificationEmails;
 static DBRoute *DBTEAMMembersSendWelcomeEmail;
+static DBRoute *DBTEAMMembersSetAdminPermissionsV2;
 static DBRoute *DBTEAMMembersSetAdminPermissions;
+static DBRoute *DBTEAMMembersSetProfileV2;
 static DBRoute *DBTEAMMembersSetProfile;
+static DBRoute *DBTEAMMembersSetProfilePhotoV2;
 static DBRoute *DBTEAMMembersSetProfilePhoto;
 static DBRoute *DBTEAMMembersSuspend;
 static DBRoute *DBTEAMMembersUnsuspend;
@@ -252,67 +275,22 @@ static DBRoute *DBTEAMTeamFolderRename;
 static DBRoute *DBTEAMTeamFolderUpdateSyncSettings;
 static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBTEAMDevicesListMemberDevices {
-  if (!DBTEAMDevicesListMemberDevices) {
-    DBTEAMDevicesListMemberDevices = [[DBRoute alloc] init:@"devices/list_member_devices"
-                                                namespace_:@"team"
-                                                deprecated:@NO
-                                                resultType:[DBTEAMListMemberDevicesResult class]
-                                                 errorType:[DBTEAMListMemberDevicesError class]
-                                                     attrs:@{
-                                                       @"auth" : @"team",
-                                                       @"host" : @"api",
-                                                       @"style" : @"rpc"
-                                                     }
-                                     dataStructSerialBlock:nil
-                                   dataStructDeserialBlock:nil];
-  }
-  return DBTEAMDevicesListMemberDevices;
-}
-
-+ (DBRoute *)DBTEAMDevicesListMembersDevices {
-  if (!DBTEAMDevicesListMembersDevices) {
-    DBTEAMDevicesListMembersDevices = [[DBRoute alloc] init:@"devices/list_members_devices"
-                                                 namespace_:@"team"
-                                                 deprecated:@NO
-                                                 resultType:[DBTEAMListMembersDevicesResult class]
-                                                  errorType:[DBTEAMListMembersDevicesError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
-                                      dataStructSerialBlock:nil
-                                    dataStructDeserialBlock:nil];
-  }
-  return DBTEAMDevicesListMembersDevices;
-}
-
-+ (DBRoute *)DBTEAMDevicesListTeamDevices {
-  if (!DBTEAMDevicesListTeamDevices) {
-    DBTEAMDevicesListTeamDevices = [[DBRoute alloc] init:@"devices/list_team_devices"
-                                              namespace_:@"team"
-                                              deprecated:@YES
-                                              resultType:[DBTEAMListTeamDevicesResult class]
-                                               errorType:[DBTEAMListTeamDevicesError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMDevicesListTeamDevices;
-}
-
-+ (DBRoute *)DBTEAMDevicesRevokeDeviceSession {
-  if (!DBTEAMDevicesRevokeDeviceSession) {
-    DBTEAMDevicesRevokeDeviceSession = [[DBRoute alloc] init:@"devices/revoke_device_session"
+  @synchronized(lockObj) {
+    if (!DBTEAMDevicesListMemberDevices) {
+      DBTEAMDevicesListMemberDevices = [[DBRoute alloc] init:@"devices/list_member_devices"
                                                   namespace_:@"team"
                                                   deprecated:@NO
-                                                  resultType:nil
-                                                   errorType:[DBTEAMRevokeDeviceSessionError class]
+                                                  resultType:[DBTEAMListMemberDevicesResult class]
+                                                   errorType:[DBTEAMListMemberDevicesError class]
                                                        attrs:@{
                                                          @"auth" : @"team",
                                                          @"host" : @"api",
@@ -320,333 +298,19 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                        }
                                        dataStructSerialBlock:nil
                                      dataStructDeserialBlock:nil];
+    }
+    return DBTEAMDevicesListMemberDevices;
   }
-  return DBTEAMDevicesRevokeDeviceSession;
 }
 
-+ (DBRoute *)DBTEAMDevicesRevokeDeviceSessionBatch {
-  if (!DBTEAMDevicesRevokeDeviceSessionBatch) {
-    DBTEAMDevicesRevokeDeviceSessionBatch = [[DBRoute alloc] init:@"devices/revoke_device_session_batch"
-                                                       namespace_:@"team"
-                                                       deprecated:@NO
-                                                       resultType:[DBTEAMRevokeDeviceSessionBatchResult class]
-                                                        errorType:[DBTEAMRevokeDeviceSessionBatchError class]
-                                                            attrs:@{
-                                                              @"auth" : @"team",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
-  }
-  return DBTEAMDevicesRevokeDeviceSessionBatch;
-}
-
-+ (DBRoute *)DBTEAMFeaturesGetValues {
-  if (!DBTEAMFeaturesGetValues) {
-    DBTEAMFeaturesGetValues = [[DBRoute alloc] init:@"features/get_values"
-                                         namespace_:@"team"
-                                         deprecated:@NO
-                                         resultType:[DBTEAMFeaturesGetValuesBatchResult class]
-                                          errorType:[DBTEAMFeaturesGetValuesBatchError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                              dataStructSerialBlock:nil
-                            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMFeaturesGetValues;
-}
-
-+ (DBRoute *)DBTEAMGetInfo {
-  if (!DBTEAMGetInfo) {
-    DBTEAMGetInfo = [[DBRoute alloc] init:@"get_info"
-                               namespace_:@"team"
-                               deprecated:@NO
-                               resultType:[DBTEAMTeamGetInfoResult class]
-                                errorType:nil
-                                    attrs:@{
-                                      @"auth" : @"team",
-                                      @"host" : @"api",
-                                      @"style" : @"rpc"
-                                    }
-                    dataStructSerialBlock:nil
-                  dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGetInfo;
-}
-
-+ (DBRoute *)DBTEAMGroupsCreate {
-  if (!DBTEAMGroupsCreate) {
-    DBTEAMGroupsCreate = [[DBRoute alloc] init:@"groups/create"
-                                    namespace_:@"team"
-                                    deprecated:@NO
-                                    resultType:[DBTEAMGroupFullInfo class]
-                                     errorType:[DBTEAMGroupCreateError class]
-                                         attrs:@{
-                                           @"auth" : @"team",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
-                         dataStructSerialBlock:nil
-                       dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsCreate;
-}
-
-+ (DBRoute *)DBTEAMGroupsDelete {
-  if (!DBTEAMGroupsDelete) {
-    DBTEAMGroupsDelete = [[DBRoute alloc] init:@"groups/delete"
-                                    namespace_:@"team"
-                                    deprecated:@NO
-                                    resultType:[DBASYNCLaunchEmptyResult class]
-                                     errorType:[DBTEAMGroupDeleteError class]
-                                         attrs:@{
-                                           @"auth" : @"team",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
-                         dataStructSerialBlock:nil
-                       dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsDelete;
-}
-
-+ (DBRoute *)DBTEAMGroupsGetInfo {
-  if (!DBTEAMGroupsGetInfo) {
-    DBTEAMGroupsGetInfo = [[DBRoute alloc] init:@"groups/get_info"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
-        errorType:[DBTEAMGroupsGetInfoError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
-                                      }];
-        }];
-  }
-  return DBTEAMGroupsGetInfo;
-}
-
-+ (DBRoute *)DBTEAMGroupsJobStatusGet {
-  if (!DBTEAMGroupsJobStatusGet) {
-    DBTEAMGroupsJobStatusGet = [[DBRoute alloc] init:@"groups/job_status/get"
-                                          namespace_:@"team"
-                                          deprecated:@NO
-                                          resultType:[DBASYNCPollEmptyResult class]
-                                           errorType:[DBTEAMGroupsPollError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
-                               dataStructSerialBlock:nil
-                             dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsJobStatusGet;
-}
-
-+ (DBRoute *)DBTEAMGroupsList {
-  if (!DBTEAMGroupsList) {
-    DBTEAMGroupsList = [[DBRoute alloc] init:@"groups/list"
-                                  namespace_:@"team"
-                                  deprecated:@NO
-                                  resultType:[DBTEAMGroupsListResult class]
-                                   errorType:nil
-                                       attrs:@{
-                                         @"auth" : @"team",
-                                         @"host" : @"api",
-                                         @"style" : @"rpc"
-                                       }
-                       dataStructSerialBlock:nil
-                     dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsList;
-}
-
-+ (DBRoute *)DBTEAMGroupsListContinue {
-  if (!DBTEAMGroupsListContinue) {
-    DBTEAMGroupsListContinue = [[DBRoute alloc] init:@"groups/list/continue"
-                                          namespace_:@"team"
-                                          deprecated:@NO
-                                          resultType:[DBTEAMGroupsListResult class]
-                                           errorType:[DBTEAMGroupsListContinueError class]
-                                               attrs:@{
-                                                 @"auth" : @"team",
-                                                 @"host" : @"api",
-                                                 @"style" : @"rpc"
-                                               }
-                               dataStructSerialBlock:nil
-                             dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsListContinue;
-}
-
-+ (DBRoute *)DBTEAMGroupsMembersAdd {
-  if (!DBTEAMGroupsMembersAdd) {
-    DBTEAMGroupsMembersAdd = [[DBRoute alloc] init:@"groups/members/add"
-                                        namespace_:@"team"
-                                        deprecated:@NO
-                                        resultType:[DBTEAMGroupMembersChangeResult class]
-                                         errorType:[DBTEAMGroupMembersAddError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
-                             dataStructSerialBlock:nil
-                           dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsMembersAdd;
-}
-
-+ (DBRoute *)DBTEAMGroupsMembersList {
-  if (!DBTEAMGroupsMembersList) {
-    DBTEAMGroupsMembersList = [[DBRoute alloc] init:@"groups/members/list"
-                                         namespace_:@"team"
-                                         deprecated:@NO
-                                         resultType:[DBTEAMGroupsMembersListResult class]
-                                          errorType:[DBTEAMGroupSelectorError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                              dataStructSerialBlock:nil
-                            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsMembersList;
-}
-
-+ (DBRoute *)DBTEAMGroupsMembersListContinue {
-  if (!DBTEAMGroupsMembersListContinue) {
-    DBTEAMGroupsMembersListContinue = [[DBRoute alloc] init:@"groups/members/list/continue"
-                                                 namespace_:@"team"
-                                                 deprecated:@NO
-                                                 resultType:[DBTEAMGroupsMembersListResult class]
-                                                  errorType:[DBTEAMGroupsMembersListContinueError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
-                                      dataStructSerialBlock:nil
-                                    dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsMembersListContinue;
-}
-
-+ (DBRoute *)DBTEAMGroupsMembersRemove {
-  if (!DBTEAMGroupsMembersRemove) {
-    DBTEAMGroupsMembersRemove = [[DBRoute alloc] init:@"groups/members/remove"
-                                           namespace_:@"team"
-                                           deprecated:@NO
-                                           resultType:[DBTEAMGroupMembersChangeResult class]
-                                            errorType:[DBTEAMGroupMembersRemoveError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
-                                dataStructSerialBlock:nil
-                              dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsMembersRemove;
-}
-
-+ (DBRoute *)DBTEAMGroupsMembersSetAccessType {
-  if (!DBTEAMGroupsMembersSetAccessType) {
-    DBTEAMGroupsMembersSetAccessType = [[DBRoute alloc] init:@"groups/members/set_access_type"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
-        errorType:[DBTEAMGroupMemberSetAccessTypeError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
-                                      }];
-        }];
-  }
-  return DBTEAMGroupsMembersSetAccessType;
-}
-
-+ (DBRoute *)DBTEAMGroupsUpdate {
-  if (!DBTEAMGroupsUpdate) {
-    DBTEAMGroupsUpdate = [[DBRoute alloc] init:@"groups/update"
-                                    namespace_:@"team"
-                                    deprecated:@NO
-                                    resultType:[DBTEAMGroupFullInfo class]
-                                     errorType:[DBTEAMGroupUpdateError class]
-                                         attrs:@{
-                                           @"auth" : @"team",
-                                           @"host" : @"api",
-                                           @"style" : @"rpc"
-                                         }
-                         dataStructSerialBlock:nil
-                       dataStructDeserialBlock:nil];
-  }
-  return DBTEAMGroupsUpdate;
-}
-
-+ (DBRoute *)DBTEAMLegalHoldsCreatePolicy {
-  if (!DBTEAMLegalHoldsCreatePolicy) {
-    DBTEAMLegalHoldsCreatePolicy = [[DBRoute alloc] init:@"legal_holds/create_policy"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMLegalHoldPolicy class]
-                                               errorType:[DBTEAMLegalHoldsPolicyCreateError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLegalHoldsCreatePolicy;
-}
-
-+ (DBRoute *)DBTEAMLegalHoldsGetPolicy {
-  if (!DBTEAMLegalHoldsGetPolicy) {
-    DBTEAMLegalHoldsGetPolicy = [[DBRoute alloc] init:@"legal_holds/get_policy"
-                                           namespace_:@"team"
-                                           deprecated:@NO
-                                           resultType:[DBTEAMLegalHoldPolicy class]
-                                            errorType:[DBTEAMLegalHoldsGetPolicyError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
-                                dataStructSerialBlock:nil
-                              dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLegalHoldsGetPolicy;
-}
-
-+ (DBRoute *)DBTEAMLegalHoldsListHeldRevisions {
-  if (!DBTEAMLegalHoldsListHeldRevisions) {
-    DBTEAMLegalHoldsListHeldRevisions = [[DBRoute alloc] init:@"legal_holds/list_held_revisions"
++ (DBRoute *)DBTEAMDevicesListMembersDevices {
+  @synchronized(lockObj) {
+    if (!DBTEAMDevicesListMembersDevices) {
+      DBTEAMDevicesListMembersDevices = [[DBRoute alloc] init:@"devices/list_members_devices"
                                                    namespace_:@"team"
                                                    deprecated:@NO
-                                                   resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
-                                                    errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                                   resultType:[DBTEAMListMembersDevicesResult class]
+                                                    errorType:[DBTEAMListMembersDevicesError class]
                                                         attrs:@{
                                                           @"auth" : @"team",
                                                           @"host" : @"api",
@@ -654,778 +318,19 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                         }
                                         dataStructSerialBlock:nil
                                       dataStructDeserialBlock:nil];
+    }
+    return DBTEAMDevicesListMembersDevices;
   }
-  return DBTEAMLegalHoldsListHeldRevisions;
 }
 
-+ (DBRoute *)DBTEAMLegalHoldsListHeldRevisionsContinue {
-  if (!DBTEAMLegalHoldsListHeldRevisionsContinue) {
-    DBTEAMLegalHoldsListHeldRevisionsContinue = [[DBRoute alloc] init:@"legal_holds/list_held_revisions_continue"
-                                                           namespace_:@"team"
-                                                           deprecated:@NO
-                                                           resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
-                                                            errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
-                                                                attrs:@{
-                                                                  @"auth" : @"team",
-                                                                  @"host" : @"api",
-                                                                  @"style" : @"rpc"
-                                                                }
-                                                dataStructSerialBlock:nil
-                                              dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLegalHoldsListHeldRevisionsContinue;
-}
-
-+ (DBRoute *)DBTEAMLegalHoldsListPolicies {
-  if (!DBTEAMLegalHoldsListPolicies) {
-    DBTEAMLegalHoldsListPolicies = [[DBRoute alloc] init:@"legal_holds/list_policies"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMLegalHoldsListPoliciesResult class]
-                                               errorType:[DBTEAMLegalHoldsListPoliciesError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLegalHoldsListPolicies;
-}
-
-+ (DBRoute *)DBTEAMLegalHoldsReleasePolicy {
-  if (!DBTEAMLegalHoldsReleasePolicy) {
-    DBTEAMLegalHoldsReleasePolicy = [[DBRoute alloc] init:@"legal_holds/release_policy"
-                                               namespace_:@"team"
-                                               deprecated:@NO
-                                               resultType:nil
-                                                errorType:[DBTEAMLegalHoldsPolicyReleaseError class]
-                                                    attrs:@{
-                                                      @"auth" : @"team",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
-                                    dataStructSerialBlock:nil
-                                  dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLegalHoldsReleasePolicy;
-}
-
-+ (DBRoute *)DBTEAMLegalHoldsUpdatePolicy {
-  if (!DBTEAMLegalHoldsUpdatePolicy) {
-    DBTEAMLegalHoldsUpdatePolicy = [[DBRoute alloc] init:@"legal_holds/update_policy"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMLegalHoldPolicy class]
-                                               errorType:[DBTEAMLegalHoldsPolicyUpdateError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLegalHoldsUpdatePolicy;
-}
-
-+ (DBRoute *)DBTEAMLinkedAppsListMemberLinkedApps {
-  if (!DBTEAMLinkedAppsListMemberLinkedApps) {
-    DBTEAMLinkedAppsListMemberLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_member_linked_apps"
-                                                      namespace_:@"team"
-                                                      deprecated:@NO
-                                                      resultType:[DBTEAMListMemberAppsResult class]
-                                                       errorType:[DBTEAMListMemberAppsError class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLinkedAppsListMemberLinkedApps;
-}
-
-+ (DBRoute *)DBTEAMLinkedAppsListMembersLinkedApps {
-  if (!DBTEAMLinkedAppsListMembersLinkedApps) {
-    DBTEAMLinkedAppsListMembersLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_members_linked_apps"
-                                                       namespace_:@"team"
-                                                       deprecated:@NO
-                                                       resultType:[DBTEAMListMembersAppsResult class]
-                                                        errorType:[DBTEAMListMembersAppsError class]
-                                                            attrs:@{
-                                                              @"auth" : @"team",
-                                                              @"host" : @"api",
-                                                              @"style" : @"rpc"
-                                                            }
-                                            dataStructSerialBlock:nil
-                                          dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLinkedAppsListMembersLinkedApps;
-}
-
-+ (DBRoute *)DBTEAMLinkedAppsListTeamLinkedApps {
-  if (!DBTEAMLinkedAppsListTeamLinkedApps) {
-    DBTEAMLinkedAppsListTeamLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_team_linked_apps"
-                                                    namespace_:@"team"
-                                                    deprecated:@YES
-                                                    resultType:[DBTEAMListTeamAppsResult class]
-                                                     errorType:[DBTEAMListTeamAppsError class]
-                                                         attrs:@{
-                                                           @"auth" : @"team",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
-                                         dataStructSerialBlock:nil
-                                       dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLinkedAppsListTeamLinkedApps;
-}
-
-+ (DBRoute *)DBTEAMLinkedAppsRevokeLinkedApp {
-  if (!DBTEAMLinkedAppsRevokeLinkedApp) {
-    DBTEAMLinkedAppsRevokeLinkedApp = [[DBRoute alloc] init:@"linked_apps/revoke_linked_app"
-                                                 namespace_:@"team"
-                                                 deprecated:@NO
-                                                 resultType:nil
-                                                  errorType:[DBTEAMRevokeLinkedAppError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
-                                      dataStructSerialBlock:nil
-                                    dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLinkedAppsRevokeLinkedApp;
-}
-
-+ (DBRoute *)DBTEAMLinkedAppsRevokeLinkedAppBatch {
-  if (!DBTEAMLinkedAppsRevokeLinkedAppBatch) {
-    DBTEAMLinkedAppsRevokeLinkedAppBatch = [[DBRoute alloc] init:@"linked_apps/revoke_linked_app_batch"
-                                                      namespace_:@"team"
-                                                      deprecated:@NO
-                                                      resultType:[DBTEAMRevokeLinkedAppBatchResult class]
-                                                       errorType:[DBTEAMRevokeLinkedAppBatchError class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
-  }
-  return DBTEAMLinkedAppsRevokeLinkedAppBatch;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersAdd {
-  if (!DBTEAMMemberSpaceLimitsExcludedUsersAdd) {
-    DBTEAMMemberSpaceLimitsExcludedUsersAdd = [[DBRoute alloc] init:@"member_space_limits/excluded_users/add"
-                                                         namespace_:@"team"
-                                                         deprecated:@NO
-                                                         resultType:[DBTEAMExcludedUsersUpdateResult class]
-                                                          errorType:[DBTEAMExcludedUsersUpdateError class]
-                                                              attrs:@{
-                                                                @"auth" : @"team",
-                                                                @"host" : @"api",
-                                                                @"style" : @"rpc"
-                                                              }
-                                              dataStructSerialBlock:nil
-                                            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMemberSpaceLimitsExcludedUsersAdd;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersList {
-  if (!DBTEAMMemberSpaceLimitsExcludedUsersList) {
-    DBTEAMMemberSpaceLimitsExcludedUsersList = [[DBRoute alloc] init:@"member_space_limits/excluded_users/list"
-                                                          namespace_:@"team"
-                                                          deprecated:@NO
-                                                          resultType:[DBTEAMExcludedUsersListResult class]
-                                                           errorType:[DBTEAMExcludedUsersListError class]
-                                                               attrs:@{
-                                                                 @"auth" : @"team",
-                                                                 @"host" : @"api",
-                                                                 @"style" : @"rpc"
-                                                               }
-                                               dataStructSerialBlock:nil
-                                             dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMemberSpaceLimitsExcludedUsersList;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersListContinue {
-  if (!DBTEAMMemberSpaceLimitsExcludedUsersListContinue) {
-    DBTEAMMemberSpaceLimitsExcludedUsersListContinue =
-        [[DBRoute alloc] init:@"member_space_limits/excluded_users/list/continue"
-                         namespace_:@"team"
-                         deprecated:@NO
-                         resultType:[DBTEAMExcludedUsersListResult class]
-                          errorType:[DBTEAMExcludedUsersListContinueError class]
-                              attrs:@{
-                                @"auth" : @"team",
-                                @"host" : @"api",
-                                @"style" : @"rpc"
-                              }
-              dataStructSerialBlock:nil
-            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMemberSpaceLimitsExcludedUsersListContinue;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersRemove {
-  if (!DBTEAMMemberSpaceLimitsExcludedUsersRemove) {
-    DBTEAMMemberSpaceLimitsExcludedUsersRemove = [[DBRoute alloc] init:@"member_space_limits/excluded_users/remove"
-                                                            namespace_:@"team"
-                                                            deprecated:@NO
-                                                            resultType:[DBTEAMExcludedUsersUpdateResult class]
-                                                             errorType:[DBTEAMExcludedUsersUpdateError class]
-                                                                 attrs:@{
-                                                                   @"auth" : @"team",
-                                                                   @"host" : @"api",
-                                                                   @"style" : @"rpc"
-                                                                 }
-                                                 dataStructSerialBlock:nil
-                                               dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMemberSpaceLimitsExcludedUsersRemove;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsGetCustomQuota {
-  if (!DBTEAMMemberSpaceLimitsGetCustomQuota) {
-    DBTEAMMemberSpaceLimitsGetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/get_custom_quota"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
-        errorType:[DBTEAMCustomQuotaError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
-                                      }];
-        }];
-  }
-  return DBTEAMMemberSpaceLimitsGetCustomQuota;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsRemoveCustomQuota {
-  if (!DBTEAMMemberSpaceLimitsRemoveCustomQuota) {
-    DBTEAMMemberSpaceLimitsRemoveCustomQuota = [[DBRoute alloc] init:@"member_space_limits/remove_custom_quota"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMRemoveCustomQuotaResult *> class]
-        errorType:[DBTEAMCustomQuotaError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMRemoveCustomQuotaResultSerializer deserialize:elem0];
-                                      }];
-        }];
-  }
-  return DBTEAMMemberSpaceLimitsRemoveCustomQuota;
-}
-
-+ (DBRoute *)DBTEAMMemberSpaceLimitsSetCustomQuota {
-  if (!DBTEAMMemberSpaceLimitsSetCustomQuota) {
-    DBTEAMMemberSpaceLimitsSetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/set_custom_quota"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
-        errorType:[DBTEAMSetCustomQuotaError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
-                                      }];
-        }];
-  }
-  return DBTEAMMemberSpaceLimitsSetCustomQuota;
-}
-
-+ (DBRoute *)DBTEAMMembersAdd {
-  if (!DBTEAMMembersAdd) {
-    DBTEAMMembersAdd = [[DBRoute alloc] init:@"members/add"
-                                  namespace_:@"team"
-                                  deprecated:@NO
-                                  resultType:[DBTEAMMembersAddLaunch class]
-                                   errorType:nil
-                                       attrs:@{
-                                         @"auth" : @"team",
-                                         @"host" : @"api",
-                                         @"style" : @"rpc"
-                                       }
-                       dataStructSerialBlock:nil
-                     dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersAdd;
-}
-
-+ (DBRoute *)DBTEAMMembersAddJobStatusGet {
-  if (!DBTEAMMembersAddJobStatusGet) {
-    DBTEAMMembersAddJobStatusGet = [[DBRoute alloc] init:@"members/add/job_status/get"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMMembersAddJobStatus class]
-                                               errorType:[DBASYNCPollError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersAddJobStatusGet;
-}
-
-+ (DBRoute *)DBTEAMMembersDeleteProfilePhoto {
-  if (!DBTEAMMembersDeleteProfilePhoto) {
-    DBTEAMMembersDeleteProfilePhoto = [[DBRoute alloc] init:@"members/delete_profile_photo"
-                                                 namespace_:@"team"
-                                                 deprecated:@NO
-                                                 resultType:[DBTEAMTeamMemberInfo class]
-                                                  errorType:[DBTEAMMembersDeleteProfilePhotoError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
-                                      dataStructSerialBlock:nil
-                                    dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersDeleteProfilePhoto;
-}
-
-+ (DBRoute *)DBTEAMMembersGetInfo {
-  if (!DBTEAMMembersGetInfo) {
-    DBTEAMMembersGetInfo = [[DBRoute alloc] init:@"members/get_info"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMMembersGetInfoItem *> class]
-        errorType:[DBTEAMMembersGetInfoError class]
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMMembersGetInfoItemSerializer deserialize:elem0];
-                                      }];
-        }];
-  }
-  return DBTEAMMembersGetInfo;
-}
-
-+ (DBRoute *)DBTEAMMembersList {
-  if (!DBTEAMMembersList) {
-    DBTEAMMembersList = [[DBRoute alloc] init:@"members/list"
-                                   namespace_:@"team"
-                                   deprecated:@NO
-                                   resultType:[DBTEAMMembersListResult class]
-                                    errorType:[DBTEAMMembersListError class]
-                                        attrs:@{
-                                          @"auth" : @"team",
-                                          @"host" : @"api",
-                                          @"style" : @"rpc"
-                                        }
-                        dataStructSerialBlock:nil
-                      dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersList;
-}
-
-+ (DBRoute *)DBTEAMMembersListContinue {
-  if (!DBTEAMMembersListContinue) {
-    DBTEAMMembersListContinue = [[DBRoute alloc] init:@"members/list/continue"
-                                           namespace_:@"team"
-                                           deprecated:@NO
-                                           resultType:[DBTEAMMembersListResult class]
-                                            errorType:[DBTEAMMembersListContinueError class]
-                                                attrs:@{
-                                                  @"auth" : @"team",
-                                                  @"host" : @"api",
-                                                  @"style" : @"rpc"
-                                                }
-                                dataStructSerialBlock:nil
-                              dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersListContinue;
-}
-
-+ (DBRoute *)DBTEAMMembersMoveFormerMemberFiles {
-  if (!DBTEAMMembersMoveFormerMemberFiles) {
-    DBTEAMMembersMoveFormerMemberFiles = [[DBRoute alloc] init:@"members/move_former_member_files"
-                                                    namespace_:@"team"
-                                                    deprecated:@NO
-                                                    resultType:[DBASYNCLaunchEmptyResult class]
-                                                     errorType:[DBTEAMMembersTransferFormerMembersFilesError class]
-                                                         attrs:@{
-                                                           @"auth" : @"team",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
-                                         dataStructSerialBlock:nil
-                                       dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersMoveFormerMemberFiles;
-}
-
-+ (DBRoute *)DBTEAMMembersMoveFormerMemberFilesJobStatusCheck {
-  if (!DBTEAMMembersMoveFormerMemberFilesJobStatusCheck) {
-    DBTEAMMembersMoveFormerMemberFilesJobStatusCheck =
-        [[DBRoute alloc] init:@"members/move_former_member_files/job_status/check"
-                         namespace_:@"team"
-                         deprecated:@NO
-                         resultType:[DBASYNCPollEmptyResult class]
-                          errorType:[DBASYNCPollError class]
-                              attrs:@{
-                                @"auth" : @"team",
-                                @"host" : @"api",
-                                @"style" : @"rpc"
-                              }
-              dataStructSerialBlock:nil
-            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
-}
-
-+ (DBRoute *)DBTEAMMembersRecover {
-  if (!DBTEAMMembersRecover) {
-    DBTEAMMembersRecover = [[DBRoute alloc] init:@"members/recover"
-                                      namespace_:@"team"
-                                      deprecated:@NO
-                                      resultType:nil
-                                       errorType:[DBTEAMMembersRecoverError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
-                           dataStructSerialBlock:nil
-                         dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersRecover;
-}
-
-+ (DBRoute *)DBTEAMMembersRemove {
-  if (!DBTEAMMembersRemove) {
-    DBTEAMMembersRemove = [[DBRoute alloc] init:@"members/remove"
-                                     namespace_:@"team"
-                                     deprecated:@NO
-                                     resultType:[DBASYNCLaunchEmptyResult class]
-                                      errorType:[DBTEAMMembersRemoveError class]
-                                          attrs:@{
-                                            @"auth" : @"team",
-                                            @"host" : @"api",
-                                            @"style" : @"rpc"
-                                          }
-                          dataStructSerialBlock:nil
-                        dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersRemove;
-}
-
-+ (DBRoute *)DBTEAMMembersRemoveJobStatusGet {
-  if (!DBTEAMMembersRemoveJobStatusGet) {
-    DBTEAMMembersRemoveJobStatusGet = [[DBRoute alloc] init:@"members/remove/job_status/get"
-                                                 namespace_:@"team"
-                                                 deprecated:@NO
-                                                 resultType:[DBASYNCPollEmptyResult class]
-                                                  errorType:[DBASYNCPollError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
-                                      dataStructSerialBlock:nil
-                                    dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersRemoveJobStatusGet;
-}
-
-+ (DBRoute *)DBTEAMMembersSecondaryEmailsAdd {
-  if (!DBTEAMMembersSecondaryEmailsAdd) {
-    DBTEAMMembersSecondaryEmailsAdd = [[DBRoute alloc] init:@"members/secondary_emails/add"
-                                                 namespace_:@"team"
-                                                 deprecated:@NO
-                                                 resultType:[DBTEAMAddSecondaryEmailsResult class]
-                                                  errorType:[DBTEAMAddSecondaryEmailsError class]
-                                                      attrs:@{
-                                                        @"auth" : @"team",
-                                                        @"host" : @"api",
-                                                        @"style" : @"rpc"
-                                                      }
-                                      dataStructSerialBlock:nil
-                                    dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSecondaryEmailsAdd;
-}
-
-+ (DBRoute *)DBTEAMMembersSecondaryEmailsDelete {
-  if (!DBTEAMMembersSecondaryEmailsDelete) {
-    DBTEAMMembersSecondaryEmailsDelete = [[DBRoute alloc] init:@"members/secondary_emails/delete"
-                                                    namespace_:@"team"
-                                                    deprecated:@NO
-                                                    resultType:[DBTEAMDeleteSecondaryEmailsResult class]
-                                                     errorType:nil
-                                                         attrs:@{
-                                                           @"auth" : @"team",
-                                                           @"host" : @"api",
-                                                           @"style" : @"rpc"
-                                                         }
-                                         dataStructSerialBlock:nil
-                                       dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSecondaryEmailsDelete;
-}
-
-+ (DBRoute *)DBTEAMMembersSecondaryEmailsResendVerificationEmails {
-  if (!DBTEAMMembersSecondaryEmailsResendVerificationEmails) {
-    DBTEAMMembersSecondaryEmailsResendVerificationEmails =
-        [[DBRoute alloc] init:@"members/secondary_emails/resend_verification_emails"
-                         namespace_:@"team"
-                         deprecated:@NO
-                         resultType:[DBTEAMResendVerificationEmailResult class]
-                          errorType:nil
-                              attrs:@{
-                                @"auth" : @"team",
-                                @"host" : @"api",
-                                @"style" : @"rpc"
-                              }
-              dataStructSerialBlock:nil
-            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSecondaryEmailsResendVerificationEmails;
-}
-
-+ (DBRoute *)DBTEAMMembersSendWelcomeEmail {
-  if (!DBTEAMMembersSendWelcomeEmail) {
-    DBTEAMMembersSendWelcomeEmail = [[DBRoute alloc] init:@"members/send_welcome_email"
-                                               namespace_:@"team"
-                                               deprecated:@NO
-                                               resultType:nil
-                                                errorType:[DBTEAMMembersSendWelcomeError class]
-                                                    attrs:@{
-                                                      @"auth" : @"team",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
-                                    dataStructSerialBlock:nil
-                                  dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSendWelcomeEmail;
-}
-
-+ (DBRoute *)DBTEAMMembersSetAdminPermissions {
-  if (!DBTEAMMembersSetAdminPermissions) {
-    DBTEAMMembersSetAdminPermissions = [[DBRoute alloc] init:@"members/set_admin_permissions"
-                                                  namespace_:@"team"
-                                                  deprecated:@NO
-                                                  resultType:[DBTEAMMembersSetPermissionsResult class]
-                                                   errorType:[DBTEAMMembersSetPermissionsError class]
-                                                       attrs:@{
-                                                         @"auth" : @"team",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
-                                       dataStructSerialBlock:nil
-                                     dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSetAdminPermissions;
-}
-
-+ (DBRoute *)DBTEAMMembersSetProfile {
-  if (!DBTEAMMembersSetProfile) {
-    DBTEAMMembersSetProfile = [[DBRoute alloc] init:@"members/set_profile"
-                                         namespace_:@"team"
-                                         deprecated:@NO
-                                         resultType:[DBTEAMTeamMemberInfo class]
-                                          errorType:[DBTEAMMembersSetProfileError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                              dataStructSerialBlock:nil
-                            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSetProfile;
-}
-
-+ (DBRoute *)DBTEAMMembersSetProfilePhoto {
-  if (!DBTEAMMembersSetProfilePhoto) {
-    DBTEAMMembersSetProfilePhoto = [[DBRoute alloc] init:@"members/set_profile_photo"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMTeamMemberInfo class]
-                                               errorType:[DBTEAMMembersSetProfilePhotoError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSetProfilePhoto;
-}
-
-+ (DBRoute *)DBTEAMMembersSuspend {
-  if (!DBTEAMMembersSuspend) {
-    DBTEAMMembersSuspend = [[DBRoute alloc] init:@"members/suspend"
-                                      namespace_:@"team"
-                                      deprecated:@NO
-                                      resultType:nil
-                                       errorType:[DBTEAMMembersSuspendError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
-                           dataStructSerialBlock:nil
-                         dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersSuspend;
-}
-
-+ (DBRoute *)DBTEAMMembersUnsuspend {
-  if (!DBTEAMMembersUnsuspend) {
-    DBTEAMMembersUnsuspend = [[DBRoute alloc] init:@"members/unsuspend"
-                                        namespace_:@"team"
-                                        deprecated:@NO
-                                        resultType:nil
-                                         errorType:[DBTEAMMembersUnsuspendError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
-                             dataStructSerialBlock:nil
-                           dataStructDeserialBlock:nil];
-  }
-  return DBTEAMMembersUnsuspend;
-}
-
-+ (DBRoute *)DBTEAMNamespacesList {
-  if (!DBTEAMNamespacesList) {
-    DBTEAMNamespacesList = [[DBRoute alloc] init:@"namespaces/list"
-                                      namespace_:@"team"
-                                      deprecated:@NO
-                                      resultType:[DBTEAMTeamNamespacesListResult class]
-                                       errorType:[DBTEAMTeamNamespacesListError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
-                           dataStructSerialBlock:nil
-                         dataStructDeserialBlock:nil];
-  }
-  return DBTEAMNamespacesList;
-}
-
-+ (DBRoute *)DBTEAMNamespacesListContinue {
-  if (!DBTEAMNamespacesListContinue) {
-    DBTEAMNamespacesListContinue = [[DBRoute alloc] init:@"namespaces/list/continue"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMTeamNamespacesListResult class]
-                                               errorType:[DBTEAMTeamNamespacesListContinueError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMNamespacesListContinue;
-}
-
-+ (DBRoute *)DBTEAMPropertiesTemplateAdd {
-  if (!DBTEAMPropertiesTemplateAdd) {
-    DBTEAMPropertiesTemplateAdd = [[DBRoute alloc] init:@"properties/template/add"
-                                             namespace_:@"team"
-                                             deprecated:@YES
-                                             resultType:[DBFILEPROPERTIESAddTemplateResult class]
-                                              errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                  attrs:@{
-                                                    @"auth" : @"team",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
-                                  dataStructSerialBlock:nil
-                                dataStructDeserialBlock:nil];
-  }
-  return DBTEAMPropertiesTemplateAdd;
-}
-
-+ (DBRoute *)DBTEAMPropertiesTemplateGet {
-  if (!DBTEAMPropertiesTemplateGet) {
-    DBTEAMPropertiesTemplateGet = [[DBRoute alloc] init:@"properties/template/get"
-                                             namespace_:@"team"
-                                             deprecated:@YES
-                                             resultType:[DBFILEPROPERTIESGetTemplateResult class]
-                                              errorType:[DBFILEPROPERTIESTemplateError class]
-                                                  attrs:@{
-                                                    @"auth" : @"team",
-                                                    @"host" : @"api",
-                                                    @"style" : @"rpc"
-                                                  }
-                                  dataStructSerialBlock:nil
-                                dataStructDeserialBlock:nil];
-  }
-  return DBTEAMPropertiesTemplateGet;
-}
-
-+ (DBRoute *)DBTEAMPropertiesTemplateList {
-  if (!DBTEAMPropertiesTemplateList) {
-    DBTEAMPropertiesTemplateList = [[DBRoute alloc] init:@"properties/template/list"
-                                              namespace_:@"team"
-                                              deprecated:@YES
-                                              resultType:[DBFILEPROPERTIESListTemplateResult class]
-                                               errorType:[DBFILEPROPERTIESTemplateError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMPropertiesTemplateList;
-}
-
-+ (DBRoute *)DBTEAMPropertiesTemplateUpdate {
-  if (!DBTEAMPropertiesTemplateUpdate) {
-    DBTEAMPropertiesTemplateUpdate = [[DBRoute alloc] init:@"properties/template/update"
++ (DBRoute *)DBTEAMDevicesListTeamDevices {
+  @synchronized(lockObj) {
+    if (!DBTEAMDevicesListTeamDevices) {
+      DBTEAMDevicesListTeamDevices = [[DBRoute alloc] init:@"devices/list_team_devices"
                                                 namespace_:@"team"
                                                 deprecated:@YES
-                                                resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
-                                                 errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                resultType:[DBTEAMListTeamDevicesResult class]
+                                                 errorType:[DBTEAMListTeamDevicesError class]
                                                      attrs:@{
                                                        @"auth" : @"team",
                                                        @"host" : @"api",
@@ -1433,17 +338,224 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                      }
                                      dataStructSerialBlock:nil
                                    dataStructDeserialBlock:nil];
+    }
+    return DBTEAMDevicesListTeamDevices;
   }
-  return DBTEAMPropertiesTemplateUpdate;
 }
 
-+ (DBRoute *)DBTEAMReportsGetActivity {
-  if (!DBTEAMReportsGetActivity) {
-    DBTEAMReportsGetActivity = [[DBRoute alloc] init:@"reports/get_activity"
++ (DBRoute *)DBTEAMDevicesRevokeDeviceSession {
+  @synchronized(lockObj) {
+    if (!DBTEAMDevicesRevokeDeviceSession) {
+      DBTEAMDevicesRevokeDeviceSession = [[DBRoute alloc] init:@"devices/revoke_device_session"
+                                                    namespace_:@"team"
+                                                    deprecated:@NO
+                                                    resultType:nil
+                                                     errorType:[DBTEAMRevokeDeviceSessionError class]
+                                                         attrs:@{
+                                                           @"auth" : @"team",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+    }
+    return DBTEAMDevicesRevokeDeviceSession;
+  }
+}
+
++ (DBRoute *)DBTEAMDevicesRevokeDeviceSessionBatch {
+  @synchronized(lockObj) {
+    if (!DBTEAMDevicesRevokeDeviceSessionBatch) {
+      DBTEAMDevicesRevokeDeviceSessionBatch = [[DBRoute alloc] init:@"devices/revoke_device_session_batch"
+                                                         namespace_:@"team"
+                                                         deprecated:@NO
+                                                         resultType:[DBTEAMRevokeDeviceSessionBatchResult class]
+                                                          errorType:[DBTEAMRevokeDeviceSessionBatchError class]
+                                                              attrs:@{
+                                                                @"auth" : @"team",
+                                                                @"host" : @"api",
+                                                                @"style" : @"rpc"
+                                                              }
+                                              dataStructSerialBlock:nil
+                                            dataStructDeserialBlock:nil];
+    }
+    return DBTEAMDevicesRevokeDeviceSessionBatch;
+  }
+}
+
++ (DBRoute *)DBTEAMFeaturesGetValues {
+  @synchronized(lockObj) {
+    if (!DBTEAMFeaturesGetValues) {
+      DBTEAMFeaturesGetValues = [[DBRoute alloc] init:@"features/get_values"
+                                           namespace_:@"team"
+                                           deprecated:@NO
+                                           resultType:[DBTEAMFeaturesGetValuesBatchResult class]
+                                            errorType:[DBTEAMFeaturesGetValuesBatchError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMFeaturesGetValues;
+  }
+}
+
++ (DBRoute *)DBTEAMGetInfo {
+  @synchronized(lockObj) {
+    if (!DBTEAMGetInfo) {
+      DBTEAMGetInfo = [[DBRoute alloc] init:@"get_info"
+                                 namespace_:@"team"
+                                 deprecated:@NO
+                                 resultType:[DBTEAMTeamGetInfoResult class]
+                                  errorType:nil
+                                      attrs:@{
+                                        @"auth" : @"team",
+                                        @"host" : @"api",
+                                        @"style" : @"rpc"
+                                      }
+                      dataStructSerialBlock:nil
+                    dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGetInfo;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsCreate {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsCreate) {
+      DBTEAMGroupsCreate = [[DBRoute alloc] init:@"groups/create"
+                                      namespace_:@"team"
+                                      deprecated:@NO
+                                      resultType:[DBTEAMGroupFullInfo class]
+                                       errorType:[DBTEAMGroupCreateError class]
+                                           attrs:@{
+                                             @"auth" : @"team",
+                                             @"host" : @"api",
+                                             @"style" : @"rpc"
+                                           }
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsCreate;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsDelete {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsDelete) {
+      DBTEAMGroupsDelete = [[DBRoute alloc] init:@"groups/delete"
+                                      namespace_:@"team"
+                                      deprecated:@NO
+                                      resultType:[DBASYNCLaunchEmptyResult class]
+                                       errorType:[DBTEAMGroupDeleteError class]
+                                           attrs:@{
+                                             @"auth" : @"team",
+                                             @"host" : @"api",
+                                             @"style" : @"rpc"
+                                           }
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsDelete;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsGetInfo {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsGetInfo) {
+      DBTEAMGroupsGetInfo = [[DBRoute alloc] init:@"groups/get_info"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
+          errorType:[DBTEAMGroupsGetInfoError class]
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMGroupsGetInfo;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsJobStatusGet {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsJobStatusGet) {
+      DBTEAMGroupsJobStatusGet = [[DBRoute alloc] init:@"groups/job_status/get"
+                                            namespace_:@"team"
+                                            deprecated:@NO
+                                            resultType:[DBASYNCPollEmptyResult class]
+                                             errorType:[DBTEAMGroupsPollError class]
+                                                 attrs:@{
+                                                   @"auth" : @"team",
+                                                   @"host" : @"api",
+                                                   @"style" : @"rpc"
+                                                 }
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsJobStatusGet;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsList {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsList) {
+      DBTEAMGroupsList = [[DBRoute alloc] init:@"groups/list"
+                                    namespace_:@"team"
+                                    deprecated:@NO
+                                    resultType:[DBTEAMGroupsListResult class]
+                                     errorType:nil
+                                         attrs:@{
+                                           @"auth" : @"team",
+                                           @"host" : @"api",
+                                           @"style" : @"rpc"
+                                         }
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsList;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsListContinue) {
+      DBTEAMGroupsListContinue = [[DBRoute alloc] init:@"groups/list/continue"
+                                            namespace_:@"team"
+                                            deprecated:@NO
+                                            resultType:[DBTEAMGroupsListResult class]
+                                             errorType:[DBTEAMGroupsListContinueError class]
+                                                 attrs:@{
+                                                   @"auth" : @"team",
+                                                   @"host" : @"api",
+                                                   @"style" : @"rpc"
+                                                 }
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsMembersAdd {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsMembersAdd) {
+      DBTEAMGroupsMembersAdd = [[DBRoute alloc] init:@"groups/members/add"
                                           namespace_:@"team"
-                                          deprecated:@YES
-                                          resultType:[DBTEAMGetActivityReport class]
-                                           errorType:[DBTEAMDateRangeError class]
+                                          deprecated:@NO
+                                          resultType:[DBTEAMGroupMembersChangeResult class]
+                                           errorType:[DBTEAMGroupMembersAddError class]
                                                attrs:@{
                                                  @"auth" : @"team",
                                                  @"host" : @"api",
@@ -1451,34 +563,1247 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                }
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsMembersAdd;
   }
-  return DBTEAMReportsGetActivity;
 }
 
-+ (DBRoute *)DBTEAMReportsGetDevices {
-  if (!DBTEAMReportsGetDevices) {
-    DBTEAMReportsGetDevices = [[DBRoute alloc] init:@"reports/get_devices"
-                                         namespace_:@"team"
-                                         deprecated:@YES
-                                         resultType:[DBTEAMGetDevicesReport class]
-                                          errorType:[DBTEAMDateRangeError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                              dataStructSerialBlock:nil
-                            dataStructDeserialBlock:nil];
++ (DBRoute *)DBTEAMGroupsMembersList {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsMembersList) {
+      DBTEAMGroupsMembersList = [[DBRoute alloc] init:@"groups/members/list"
+                                           namespace_:@"team"
+                                           deprecated:@NO
+                                           resultType:[DBTEAMGroupsMembersListResult class]
+                                            errorType:[DBTEAMGroupSelectorError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsMembersList;
   }
-  return DBTEAMReportsGetDevices;
 }
 
-+ (DBRoute *)DBTEAMReportsGetMembership {
-  if (!DBTEAMReportsGetMembership) {
-    DBTEAMReportsGetMembership = [[DBRoute alloc] init:@"reports/get_membership"
++ (DBRoute *)DBTEAMGroupsMembersListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsMembersListContinue) {
+      DBTEAMGroupsMembersListContinue = [[DBRoute alloc] init:@"groups/members/list/continue"
+                                                   namespace_:@"team"
+                                                   deprecated:@NO
+                                                   resultType:[DBTEAMGroupsMembersListResult class]
+                                                    errorType:[DBTEAMGroupsMembersListContinueError class]
+                                                        attrs:@{
+                                                          @"auth" : @"team",
+                                                          @"host" : @"api",
+                                                          @"style" : @"rpc"
+                                                        }
+                                        dataStructSerialBlock:nil
+                                      dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsMembersListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsMembersRemove {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsMembersRemove) {
+      DBTEAMGroupsMembersRemove = [[DBRoute alloc] init:@"groups/members/remove"
+                                             namespace_:@"team"
+                                             deprecated:@NO
+                                             resultType:[DBTEAMGroupMembersChangeResult class]
+                                              errorType:[DBTEAMGroupMembersRemoveError class]
+                                                  attrs:@{
+                                                    @"auth" : @"team",
+                                                    @"host" : @"api",
+                                                    @"style" : @"rpc"
+                                                  }
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsMembersRemove;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsMembersSetAccessType {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsMembersSetAccessType) {
+      DBTEAMGroupsMembersSetAccessType = [[DBRoute alloc] init:@"groups/members/set_access_type"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMGroupsGetInfoItem *> class]
+          errorType:[DBTEAMGroupMemberSetAccessTypeError class]
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMGroupsGetInfoItemSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMGroupsMembersSetAccessType;
+  }
+}
+
++ (DBRoute *)DBTEAMGroupsUpdate {
+  @synchronized(lockObj) {
+    if (!DBTEAMGroupsUpdate) {
+      DBTEAMGroupsUpdate = [[DBRoute alloc] init:@"groups/update"
+                                      namespace_:@"team"
+                                      deprecated:@NO
+                                      resultType:[DBTEAMGroupFullInfo class]
+                                       errorType:[DBTEAMGroupUpdateError class]
+                                           attrs:@{
+                                             @"auth" : @"team",
+                                             @"host" : @"api",
+                                             @"style" : @"rpc"
+                                           }
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMGroupsUpdate;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsCreatePolicy {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsCreatePolicy) {
+      DBTEAMLegalHoldsCreatePolicy = [[DBRoute alloc] init:@"legal_holds/create_policy"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMLegalHoldPolicy class]
+                                                 errorType:[DBTEAMLegalHoldsPolicyCreateError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsCreatePolicy;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsGetPolicy {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsGetPolicy) {
+      DBTEAMLegalHoldsGetPolicy = [[DBRoute alloc] init:@"legal_holds/get_policy"
+                                             namespace_:@"team"
+                                             deprecated:@NO
+                                             resultType:[DBTEAMLegalHoldPolicy class]
+                                              errorType:[DBTEAMLegalHoldsGetPolicyError class]
+                                                  attrs:@{
+                                                    @"auth" : @"team",
+                                                    @"host" : @"api",
+                                                    @"style" : @"rpc"
+                                                  }
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsGetPolicy;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsListHeldRevisions {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsListHeldRevisions) {
+      DBTEAMLegalHoldsListHeldRevisions = [[DBRoute alloc] init:@"legal_holds/list_held_revisions"
+                                                     namespace_:@"team"
+                                                     deprecated:@NO
+                                                     resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
+                                                      errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                                          attrs:@{
+                                                            @"auth" : @"team",
+                                                            @"host" : @"api",
+                                                            @"style" : @"rpc"
+                                                          }
+                                          dataStructSerialBlock:nil
+                                        dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsListHeldRevisions;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsListHeldRevisionsContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsListHeldRevisionsContinue) {
+      DBTEAMLegalHoldsListHeldRevisionsContinue = [[DBRoute alloc] init:@"legal_holds/list_held_revisions_continue"
+                                                             namespace_:@"team"
+                                                             deprecated:@NO
+                                                             resultType:[DBTEAMLegalHoldsListHeldRevisionResult class]
+                                                              errorType:[DBTEAMLegalHoldsListHeldRevisionsError class]
+                                                                  attrs:@{
+                                                                    @"auth" : @"team",
+                                                                    @"host" : @"api",
+                                                                    @"style" : @"rpc"
+                                                                  }
+                                                  dataStructSerialBlock:nil
+                                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsListHeldRevisionsContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsListPolicies {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsListPolicies) {
+      DBTEAMLegalHoldsListPolicies = [[DBRoute alloc] init:@"legal_holds/list_policies"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMLegalHoldsListPoliciesResult class]
+                                                 errorType:[DBTEAMLegalHoldsListPoliciesError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsListPolicies;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsReleasePolicy {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsReleasePolicy) {
+      DBTEAMLegalHoldsReleasePolicy = [[DBRoute alloc] init:@"legal_holds/release_policy"
+                                                 namespace_:@"team"
+                                                 deprecated:@NO
+                                                 resultType:nil
+                                                  errorType:[DBTEAMLegalHoldsPolicyReleaseError class]
+                                                      attrs:@{
+                                                        @"auth" : @"team",
+                                                        @"host" : @"api",
+                                                        @"style" : @"rpc"
+                                                      }
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsReleasePolicy;
+  }
+}
+
++ (DBRoute *)DBTEAMLegalHoldsUpdatePolicy {
+  @synchronized(lockObj) {
+    if (!DBTEAMLegalHoldsUpdatePolicy) {
+      DBTEAMLegalHoldsUpdatePolicy = [[DBRoute alloc] init:@"legal_holds/update_policy"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMLegalHoldPolicy class]
+                                                 errorType:[DBTEAMLegalHoldsPolicyUpdateError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLegalHoldsUpdatePolicy;
+  }
+}
+
++ (DBRoute *)DBTEAMLinkedAppsListMemberLinkedApps {
+  @synchronized(lockObj) {
+    if (!DBTEAMLinkedAppsListMemberLinkedApps) {
+      DBTEAMLinkedAppsListMemberLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_member_linked_apps"
+                                                        namespace_:@"team"
+                                                        deprecated:@NO
+                                                        resultType:[DBTEAMListMemberAppsResult class]
+                                                         errorType:[DBTEAMListMemberAppsError class]
+                                                             attrs:@{
+                                                               @"auth" : @"team",
+                                                               @"host" : @"api",
+                                                               @"style" : @"rpc"
+                                                             }
+                                             dataStructSerialBlock:nil
+                                           dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLinkedAppsListMemberLinkedApps;
+  }
+}
+
++ (DBRoute *)DBTEAMLinkedAppsListMembersLinkedApps {
+  @synchronized(lockObj) {
+    if (!DBTEAMLinkedAppsListMembersLinkedApps) {
+      DBTEAMLinkedAppsListMembersLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_members_linked_apps"
+                                                         namespace_:@"team"
+                                                         deprecated:@NO
+                                                         resultType:[DBTEAMListMembersAppsResult class]
+                                                          errorType:[DBTEAMListMembersAppsError class]
+                                                              attrs:@{
+                                                                @"auth" : @"team",
+                                                                @"host" : @"api",
+                                                                @"style" : @"rpc"
+                                                              }
+                                              dataStructSerialBlock:nil
+                                            dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLinkedAppsListMembersLinkedApps;
+  }
+}
+
++ (DBRoute *)DBTEAMLinkedAppsListTeamLinkedApps {
+  @synchronized(lockObj) {
+    if (!DBTEAMLinkedAppsListTeamLinkedApps) {
+      DBTEAMLinkedAppsListTeamLinkedApps = [[DBRoute alloc] init:@"linked_apps/list_team_linked_apps"
+                                                      namespace_:@"team"
+                                                      deprecated:@YES
+                                                      resultType:[DBTEAMListTeamAppsResult class]
+                                                       errorType:[DBTEAMListTeamAppsError class]
+                                                           attrs:@{
+                                                             @"auth" : @"team",
+                                                             @"host" : @"api",
+                                                             @"style" : @"rpc"
+                                                           }
+                                           dataStructSerialBlock:nil
+                                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLinkedAppsListTeamLinkedApps;
+  }
+}
+
++ (DBRoute *)DBTEAMLinkedAppsRevokeLinkedApp {
+  @synchronized(lockObj) {
+    if (!DBTEAMLinkedAppsRevokeLinkedApp) {
+      DBTEAMLinkedAppsRevokeLinkedApp = [[DBRoute alloc] init:@"linked_apps/revoke_linked_app"
+                                                   namespace_:@"team"
+                                                   deprecated:@NO
+                                                   resultType:nil
+                                                    errorType:[DBTEAMRevokeLinkedAppError class]
+                                                        attrs:@{
+                                                          @"auth" : @"team",
+                                                          @"host" : @"api",
+                                                          @"style" : @"rpc"
+                                                        }
+                                        dataStructSerialBlock:nil
+                                      dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLinkedAppsRevokeLinkedApp;
+  }
+}
+
++ (DBRoute *)DBTEAMLinkedAppsRevokeLinkedAppBatch {
+  @synchronized(lockObj) {
+    if (!DBTEAMLinkedAppsRevokeLinkedAppBatch) {
+      DBTEAMLinkedAppsRevokeLinkedAppBatch = [[DBRoute alloc] init:@"linked_apps/revoke_linked_app_batch"
+                                                        namespace_:@"team"
+                                                        deprecated:@NO
+                                                        resultType:[DBTEAMRevokeLinkedAppBatchResult class]
+                                                         errorType:[DBTEAMRevokeLinkedAppBatchError class]
+                                                             attrs:@{
+                                                               @"auth" : @"team",
+                                                               @"host" : @"api",
+                                                               @"style" : @"rpc"
+                                                             }
+                                             dataStructSerialBlock:nil
+                                           dataStructDeserialBlock:nil];
+    }
+    return DBTEAMLinkedAppsRevokeLinkedAppBatch;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersAdd {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsExcludedUsersAdd) {
+      DBTEAMMemberSpaceLimitsExcludedUsersAdd = [[DBRoute alloc] init:@"member_space_limits/excluded_users/add"
+                                                           namespace_:@"team"
+                                                           deprecated:@NO
+                                                           resultType:[DBTEAMExcludedUsersUpdateResult class]
+                                                            errorType:[DBTEAMExcludedUsersUpdateError class]
+                                                                attrs:@{
+                                                                  @"auth" : @"team",
+                                                                  @"host" : @"api",
+                                                                  @"style" : @"rpc"
+                                                                }
+                                                dataStructSerialBlock:nil
+                                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMemberSpaceLimitsExcludedUsersAdd;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersList {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsExcludedUsersList) {
+      DBTEAMMemberSpaceLimitsExcludedUsersList = [[DBRoute alloc] init:@"member_space_limits/excluded_users/list"
+                                                            namespace_:@"team"
+                                                            deprecated:@NO
+                                                            resultType:[DBTEAMExcludedUsersListResult class]
+                                                             errorType:[DBTEAMExcludedUsersListError class]
+                                                                 attrs:@{
+                                                                   @"auth" : @"team",
+                                                                   @"host" : @"api",
+                                                                   @"style" : @"rpc"
+                                                                 }
+                                                 dataStructSerialBlock:nil
+                                               dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMemberSpaceLimitsExcludedUsersList;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsExcludedUsersListContinue) {
+      DBTEAMMemberSpaceLimitsExcludedUsersListContinue =
+          [[DBRoute alloc] init:@"member_space_limits/excluded_users/list/continue"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMExcludedUsersListResult class]
+                            errorType:[DBTEAMExcludedUsersListContinueError class]
+                                attrs:@{
+                                  @"auth" : @"team",
+                                  @"host" : @"api",
+                                  @"style" : @"rpc"
+                                }
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMemberSpaceLimitsExcludedUsersListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsExcludedUsersRemove {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsExcludedUsersRemove) {
+      DBTEAMMemberSpaceLimitsExcludedUsersRemove = [[DBRoute alloc] init:@"member_space_limits/excluded_users/remove"
+                                                              namespace_:@"team"
+                                                              deprecated:@NO
+                                                              resultType:[DBTEAMExcludedUsersUpdateResult class]
+                                                               errorType:[DBTEAMExcludedUsersUpdateError class]
+                                                                   attrs:@{
+                                                                     @"auth" : @"team",
+                                                                     @"host" : @"api",
+                                                                     @"style" : @"rpc"
+                                                                   }
+                                                   dataStructSerialBlock:nil
+                                                 dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMemberSpaceLimitsExcludedUsersRemove;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsGetCustomQuota {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsGetCustomQuota) {
+      DBTEAMMemberSpaceLimitsGetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/get_custom_quota"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
+          errorType:[DBTEAMCustomQuotaError class]
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMMemberSpaceLimitsGetCustomQuota;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsRemoveCustomQuota {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsRemoveCustomQuota) {
+      DBTEAMMemberSpaceLimitsRemoveCustomQuota = [[DBRoute alloc] init:@"member_space_limits/remove_custom_quota"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMRemoveCustomQuotaResult *> class]
+          errorType:[DBTEAMCustomQuotaError class]
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMRemoveCustomQuotaResultSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMMemberSpaceLimitsRemoveCustomQuota;
+  }
+}
+
++ (DBRoute *)DBTEAMMemberSpaceLimitsSetCustomQuota {
+  @synchronized(lockObj) {
+    if (!DBTEAMMemberSpaceLimitsSetCustomQuota) {
+      DBTEAMMemberSpaceLimitsSetCustomQuota = [[DBRoute alloc] init:@"member_space_limits/set_custom_quota"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMCustomQuotaResult *> class]
+          errorType:[DBTEAMSetCustomQuotaError class]
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMCustomQuotaResultSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMMemberSpaceLimitsSetCustomQuota;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersAddV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersAddV2) {
+      DBTEAMMembersAddV2 = [[DBRoute alloc] init:@"members/add_v2"
+                                      namespace_:@"team"
+                                      deprecated:@NO
+                                      resultType:[DBTEAMMembersAddLaunchV2Result class]
+                                       errorType:nil
+                                           attrs:@{
+                                             @"auth" : @"team",
+                                             @"host" : @"api",
+                                             @"style" : @"rpc"
+                                           }
+                           dataStructSerialBlock:nil
+                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersAddV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersAdd {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersAdd) {
+      DBTEAMMembersAdd = [[DBRoute alloc] init:@"members/add"
+                                    namespace_:@"team"
+                                    deprecated:@NO
+                                    resultType:[DBTEAMMembersAddLaunch class]
+                                     errorType:nil
+                                         attrs:@{
+                                           @"auth" : @"team",
+                                           @"host" : @"api",
+                                           @"style" : @"rpc"
+                                         }
+                         dataStructSerialBlock:nil
+                       dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersAdd;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersAddJobStatusGetV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersAddJobStatusGetV2) {
+      DBTEAMMembersAddJobStatusGetV2 = [[DBRoute alloc] init:@"members/add/job_status/get_v2"
+                                                  namespace_:@"team"
+                                                  deprecated:@NO
+                                                  resultType:[DBTEAMMembersAddJobStatusV2Result class]
+                                                   errorType:[DBASYNCPollError class]
+                                                       attrs:@{
+                                                         @"auth" : @"team",
+                                                         @"host" : @"api",
+                                                         @"style" : @"rpc"
+                                                       }
+                                       dataStructSerialBlock:nil
+                                     dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersAddJobStatusGetV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersAddJobStatusGet {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersAddJobStatusGet) {
+      DBTEAMMembersAddJobStatusGet = [[DBRoute alloc] init:@"members/add/job_status/get"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMMembersAddJobStatus class]
+                                                 errorType:[DBASYNCPollError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersAddJobStatusGet;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersDeleteProfilePhotoV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersDeleteProfilePhotoV2) {
+      DBTEAMMembersDeleteProfilePhotoV2 = [[DBRoute alloc] init:@"members/delete_profile_photo_v2"
+                                                     namespace_:@"team"
+                                                     deprecated:@NO
+                                                     resultType:[DBTEAMTeamMemberInfoV2Result class]
+                                                      errorType:[DBTEAMMembersDeleteProfilePhotoError class]
+                                                          attrs:@{
+                                                            @"auth" : @"team",
+                                                            @"host" : @"api",
+                                                            @"style" : @"rpc"
+                                                          }
+                                          dataStructSerialBlock:nil
+                                        dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersDeleteProfilePhotoV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersDeleteProfilePhoto {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersDeleteProfilePhoto) {
+      DBTEAMMembersDeleteProfilePhoto = [[DBRoute alloc] init:@"members/delete_profile_photo"
+                                                   namespace_:@"team"
+                                                   deprecated:@NO
+                                                   resultType:[DBTEAMTeamMemberInfo class]
+                                                    errorType:[DBTEAMMembersDeleteProfilePhotoError class]
+                                                        attrs:@{
+                                                          @"auth" : @"team",
+                                                          @"host" : @"api",
+                                                          @"style" : @"rpc"
+                                                        }
+                                        dataStructSerialBlock:nil
+                                      dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersDeleteProfilePhoto;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersGetAvailableTeamMemberRoles {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersGetAvailableTeamMemberRoles) {
+      DBTEAMMembersGetAvailableTeamMemberRoles =
+          [[DBRoute alloc] init:@"members/get_available_team_member_roles"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMMembersGetAvailableTeamMemberRolesResult class]
+                            errorType:nil
+                                attrs:@{
+                                  @"auth" : @"team",
+                                  @"host" : @"api",
+                                  @"style" : @"rpc"
+                                }
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersGetAvailableTeamMemberRoles;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersGetInfoV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersGetInfoV2) {
+      DBTEAMMembersGetInfoV2 = [[DBRoute alloc] init:@"members/get_info_v2"
+                                          namespace_:@"team"
+                                          deprecated:@NO
+                                          resultType:[DBTEAMMembersGetInfoV2Result class]
+                                           errorType:[DBTEAMMembersGetInfoError class]
+                                               attrs:@{
+                                                 @"auth" : @"team",
+                                                 @"host" : @"api",
+                                                 @"style" : @"rpc"
+                                               }
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersGetInfoV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersGetInfo {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersGetInfo) {
+      DBTEAMMembersGetInfo = [[DBRoute alloc] init:@"members/get_info"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMMembersGetInfoItem *> class]
+          errorType:[DBTEAMMembersGetInfoError class]
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMMembersGetInfoItemSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMMembersGetInfo;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersListV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersListV2) {
+      DBTEAMMembersListV2 = [[DBRoute alloc] init:@"members/list_v2"
+                                       namespace_:@"team"
+                                       deprecated:@NO
+                                       resultType:[DBTEAMMembersListV2Result class]
+                                        errorType:[DBTEAMMembersListError class]
+                                            attrs:@{
+                                              @"auth" : @"team",
+                                              @"host" : @"api",
+                                              @"style" : @"rpc"
+                                            }
+                            dataStructSerialBlock:nil
+                          dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersListV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersList {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersList) {
+      DBTEAMMembersList = [[DBRoute alloc] init:@"members/list"
+                                     namespace_:@"team"
+                                     deprecated:@NO
+                                     resultType:[DBTEAMMembersListResult class]
+                                      errorType:[DBTEAMMembersListError class]
+                                          attrs:@{
+                                            @"auth" : @"team",
+                                            @"host" : @"api",
+                                            @"style" : @"rpc"
+                                          }
+                          dataStructSerialBlock:nil
+                        dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersList;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersListContinueV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersListContinueV2) {
+      DBTEAMMembersListContinueV2 = [[DBRoute alloc] init:@"members/list/continue_v2"
+                                               namespace_:@"team"
+                                               deprecated:@NO
+                                               resultType:[DBTEAMMembersListV2Result class]
+                                                errorType:[DBTEAMMembersListContinueError class]
+                                                    attrs:@{
+                                                      @"auth" : @"team",
+                                                      @"host" : @"api",
+                                                      @"style" : @"rpc"
+                                                    }
+                                    dataStructSerialBlock:nil
+                                  dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersListContinueV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersListContinue) {
+      DBTEAMMembersListContinue = [[DBRoute alloc] init:@"members/list/continue"
+                                             namespace_:@"team"
+                                             deprecated:@NO
+                                             resultType:[DBTEAMMembersListResult class]
+                                              errorType:[DBTEAMMembersListContinueError class]
+                                                  attrs:@{
+                                                    @"auth" : @"team",
+                                                    @"host" : @"api",
+                                                    @"style" : @"rpc"
+                                                  }
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersMoveFormerMemberFiles {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersMoveFormerMemberFiles) {
+      DBTEAMMembersMoveFormerMemberFiles = [[DBRoute alloc] init:@"members/move_former_member_files"
+                                                      namespace_:@"team"
+                                                      deprecated:@NO
+                                                      resultType:[DBASYNCLaunchEmptyResult class]
+                                                       errorType:[DBTEAMMembersTransferFormerMembersFilesError class]
+                                                           attrs:@{
+                                                             @"auth" : @"team",
+                                                             @"host" : @"api",
+                                                             @"style" : @"rpc"
+                                                           }
+                                           dataStructSerialBlock:nil
+                                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersMoveFormerMemberFiles;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersMoveFormerMemberFilesJobStatusCheck {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersMoveFormerMemberFilesJobStatusCheck) {
+      DBTEAMMembersMoveFormerMemberFilesJobStatusCheck =
+          [[DBRoute alloc] init:@"members/move_former_member_files/job_status/check"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBASYNCPollEmptyResult class]
+                            errorType:[DBASYNCPollError class]
+                                attrs:@{
+                                  @"auth" : @"team",
+                                  @"host" : @"api",
+                                  @"style" : @"rpc"
+                                }
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersMoveFormerMemberFilesJobStatusCheck;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersRecover {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersRecover) {
+      DBTEAMMembersRecover = [[DBRoute alloc] init:@"members/recover"
+                                        namespace_:@"team"
+                                        deprecated:@NO
+                                        resultType:nil
+                                         errorType:[DBTEAMMembersRecoverError class]
+                                             attrs:@{
+                                               @"auth" : @"team",
+                                               @"host" : @"api",
+                                               @"style" : @"rpc"
+                                             }
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersRecover;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersRemove {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersRemove) {
+      DBTEAMMembersRemove = [[DBRoute alloc] init:@"members/remove"
+                                       namespace_:@"team"
+                                       deprecated:@NO
+                                       resultType:[DBASYNCLaunchEmptyResult class]
+                                        errorType:[DBTEAMMembersRemoveError class]
+                                            attrs:@{
+                                              @"auth" : @"team",
+                                              @"host" : @"api",
+                                              @"style" : @"rpc"
+                                            }
+                            dataStructSerialBlock:nil
+                          dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersRemove;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersRemoveJobStatusGet {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersRemoveJobStatusGet) {
+      DBTEAMMembersRemoveJobStatusGet = [[DBRoute alloc] init:@"members/remove/job_status/get"
+                                                   namespace_:@"team"
+                                                   deprecated:@NO
+                                                   resultType:[DBASYNCPollEmptyResult class]
+                                                    errorType:[DBASYNCPollError class]
+                                                        attrs:@{
+                                                          @"auth" : @"team",
+                                                          @"host" : @"api",
+                                                          @"style" : @"rpc"
+                                                        }
+                                        dataStructSerialBlock:nil
+                                      dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersRemoveJobStatusGet;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSecondaryEmailsAdd {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSecondaryEmailsAdd) {
+      DBTEAMMembersSecondaryEmailsAdd = [[DBRoute alloc] init:@"members/secondary_emails/add"
+                                                   namespace_:@"team"
+                                                   deprecated:@NO
+                                                   resultType:[DBTEAMAddSecondaryEmailsResult class]
+                                                    errorType:[DBTEAMAddSecondaryEmailsError class]
+                                                        attrs:@{
+                                                          @"auth" : @"team",
+                                                          @"host" : @"api",
+                                                          @"style" : @"rpc"
+                                                        }
+                                        dataStructSerialBlock:nil
+                                      dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSecondaryEmailsAdd;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSecondaryEmailsDelete {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSecondaryEmailsDelete) {
+      DBTEAMMembersSecondaryEmailsDelete = [[DBRoute alloc] init:@"members/secondary_emails/delete"
+                                                      namespace_:@"team"
+                                                      deprecated:@NO
+                                                      resultType:[DBTEAMDeleteSecondaryEmailsResult class]
+                                                       errorType:nil
+                                                           attrs:@{
+                                                             @"auth" : @"team",
+                                                             @"host" : @"api",
+                                                             @"style" : @"rpc"
+                                                           }
+                                           dataStructSerialBlock:nil
+                                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSecondaryEmailsDelete;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSecondaryEmailsResendVerificationEmails {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSecondaryEmailsResendVerificationEmails) {
+      DBTEAMMembersSecondaryEmailsResendVerificationEmails =
+          [[DBRoute alloc] init:@"members/secondary_emails/resend_verification_emails"
+                           namespace_:@"team"
+                           deprecated:@NO
+                           resultType:[DBTEAMResendVerificationEmailResult class]
+                            errorType:nil
+                                attrs:@{
+                                  @"auth" : @"team",
+                                  @"host" : @"api",
+                                  @"style" : @"rpc"
+                                }
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSecondaryEmailsResendVerificationEmails;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSendWelcomeEmail {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSendWelcomeEmail) {
+      DBTEAMMembersSendWelcomeEmail = [[DBRoute alloc] init:@"members/send_welcome_email"
+                                                 namespace_:@"team"
+                                                 deprecated:@NO
+                                                 resultType:nil
+                                                  errorType:[DBTEAMMembersSendWelcomeError class]
+                                                      attrs:@{
+                                                        @"auth" : @"team",
+                                                        @"host" : @"api",
+                                                        @"style" : @"rpc"
+                                                      }
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSendWelcomeEmail;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSetAdminPermissionsV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSetAdminPermissionsV2) {
+      DBTEAMMembersSetAdminPermissionsV2 = [[DBRoute alloc] init:@"members/set_admin_permissions_v2"
+                                                      namespace_:@"team"
+                                                      deprecated:@NO
+                                                      resultType:[DBTEAMMembersSetPermissions2Result class]
+                                                       errorType:[DBTEAMMembersSetPermissions2Error class]
+                                                           attrs:@{
+                                                             @"auth" : @"team",
+                                                             @"host" : @"api",
+                                                             @"style" : @"rpc"
+                                                           }
+                                           dataStructSerialBlock:nil
+                                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSetAdminPermissionsV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSetAdminPermissions {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSetAdminPermissions) {
+      DBTEAMMembersSetAdminPermissions = [[DBRoute alloc] init:@"members/set_admin_permissions"
+                                                    namespace_:@"team"
+                                                    deprecated:@NO
+                                                    resultType:[DBTEAMMembersSetPermissionsResult class]
+                                                     errorType:[DBTEAMMembersSetPermissionsError class]
+                                                         attrs:@{
+                                                           @"auth" : @"team",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSetAdminPermissions;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSetProfileV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSetProfileV2) {
+      DBTEAMMembersSetProfileV2 = [[DBRoute alloc] init:@"members/set_profile_v2"
+                                             namespace_:@"team"
+                                             deprecated:@NO
+                                             resultType:[DBTEAMTeamMemberInfoV2Result class]
+                                              errorType:[DBTEAMMembersSetProfileError class]
+                                                  attrs:@{
+                                                    @"auth" : @"team",
+                                                    @"host" : @"api",
+                                                    @"style" : @"rpc"
+                                                  }
+                                  dataStructSerialBlock:nil
+                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSetProfileV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSetProfile {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSetProfile) {
+      DBTEAMMembersSetProfile = [[DBRoute alloc] init:@"members/set_profile"
+                                           namespace_:@"team"
+                                           deprecated:@NO
+                                           resultType:[DBTEAMTeamMemberInfo class]
+                                            errorType:[DBTEAMMembersSetProfileError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSetProfile;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSetProfilePhotoV2 {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSetProfilePhotoV2) {
+      DBTEAMMembersSetProfilePhotoV2 = [[DBRoute alloc] init:@"members/set_profile_photo_v2"
+                                                  namespace_:@"team"
+                                                  deprecated:@NO
+                                                  resultType:[DBTEAMTeamMemberInfoV2Result class]
+                                                   errorType:[DBTEAMMembersSetProfilePhotoError class]
+                                                       attrs:@{
+                                                         @"auth" : @"team",
+                                                         @"host" : @"api",
+                                                         @"style" : @"rpc"
+                                                       }
+                                       dataStructSerialBlock:nil
+                                     dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSetProfilePhotoV2;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSetProfilePhoto {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSetProfilePhoto) {
+      DBTEAMMembersSetProfilePhoto = [[DBRoute alloc] init:@"members/set_profile_photo"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMTeamMemberInfo class]
+                                                 errorType:[DBTEAMMembersSetProfilePhotoError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSetProfilePhoto;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersSuspend {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersSuspend) {
+      DBTEAMMembersSuspend = [[DBRoute alloc] init:@"members/suspend"
+                                        namespace_:@"team"
+                                        deprecated:@NO
+                                        resultType:nil
+                                         errorType:[DBTEAMMembersSuspendError class]
+                                             attrs:@{
+                                               @"auth" : @"team",
+                                               @"host" : @"api",
+                                               @"style" : @"rpc"
+                                             }
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersSuspend;
+  }
+}
+
++ (DBRoute *)DBTEAMMembersUnsuspend {
+  @synchronized(lockObj) {
+    if (!DBTEAMMembersUnsuspend) {
+      DBTEAMMembersUnsuspend = [[DBRoute alloc] init:@"members/unsuspend"
+                                          namespace_:@"team"
+                                          deprecated:@NO
+                                          resultType:nil
+                                           errorType:[DBTEAMMembersUnsuspendError class]
+                                               attrs:@{
+                                                 @"auth" : @"team",
+                                                 @"host" : @"api",
+                                                 @"style" : @"rpc"
+                                               }
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
+    }
+    return DBTEAMMembersUnsuspend;
+  }
+}
+
++ (DBRoute *)DBTEAMNamespacesList {
+  @synchronized(lockObj) {
+    if (!DBTEAMNamespacesList) {
+      DBTEAMNamespacesList = [[DBRoute alloc] init:@"namespaces/list"
+                                        namespace_:@"team"
+                                        deprecated:@NO
+                                        resultType:[DBTEAMTeamNamespacesListResult class]
+                                         errorType:[DBTEAMTeamNamespacesListError class]
+                                             attrs:@{
+                                               @"auth" : @"team",
+                                               @"host" : @"api",
+                                               @"style" : @"rpc"
+                                             }
+                             dataStructSerialBlock:nil
+                           dataStructDeserialBlock:nil];
+    }
+    return DBTEAMNamespacesList;
+  }
+}
+
++ (DBRoute *)DBTEAMNamespacesListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMNamespacesListContinue) {
+      DBTEAMNamespacesListContinue = [[DBRoute alloc] init:@"namespaces/list/continue"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMTeamNamespacesListResult class]
+                                                 errorType:[DBTEAMTeamNamespacesListContinueError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMNamespacesListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMPropertiesTemplateAdd {
+  @synchronized(lockObj) {
+    if (!DBTEAMPropertiesTemplateAdd) {
+      DBTEAMPropertiesTemplateAdd = [[DBRoute alloc] init:@"properties/template/add"
+                                               namespace_:@"team"
+                                               deprecated:@YES
+                                               resultType:[DBFILEPROPERTIESAddTemplateResult class]
+                                                errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                    attrs:@{
+                                                      @"auth" : @"team",
+                                                      @"host" : @"api",
+                                                      @"style" : @"rpc"
+                                                    }
+                                    dataStructSerialBlock:nil
+                                  dataStructDeserialBlock:nil];
+    }
+    return DBTEAMPropertiesTemplateAdd;
+  }
+}
+
++ (DBRoute *)DBTEAMPropertiesTemplateGet {
+  @synchronized(lockObj) {
+    if (!DBTEAMPropertiesTemplateGet) {
+      DBTEAMPropertiesTemplateGet = [[DBRoute alloc] init:@"properties/template/get"
+                                               namespace_:@"team"
+                                               deprecated:@YES
+                                               resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                                                errorType:[DBFILEPROPERTIESTemplateError class]
+                                                    attrs:@{
+                                                      @"auth" : @"team",
+                                                      @"host" : @"api",
+                                                      @"style" : @"rpc"
+                                                    }
+                                    dataStructSerialBlock:nil
+                                  dataStructDeserialBlock:nil];
+    }
+    return DBTEAMPropertiesTemplateGet;
+  }
+}
+
++ (DBRoute *)DBTEAMPropertiesTemplateList {
+  @synchronized(lockObj) {
+    if (!DBTEAMPropertiesTemplateList) {
+      DBTEAMPropertiesTemplateList = [[DBRoute alloc] init:@"properties/template/list"
+                                                namespace_:@"team"
+                                                deprecated:@YES
+                                                resultType:[DBFILEPROPERTIESListTemplateResult class]
+                                                 errorType:[DBFILEPROPERTIESTemplateError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMPropertiesTemplateList;
+  }
+}
+
++ (DBRoute *)DBTEAMPropertiesTemplateUpdate {
+  @synchronized(lockObj) {
+    if (!DBTEAMPropertiesTemplateUpdate) {
+      DBTEAMPropertiesTemplateUpdate = [[DBRoute alloc] init:@"properties/template/update"
+                                                  namespace_:@"team"
+                                                  deprecated:@YES
+                                                  resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
+                                                   errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                       attrs:@{
+                                                         @"auth" : @"team",
+                                                         @"host" : @"api",
+                                                         @"style" : @"rpc"
+                                                       }
+                                       dataStructSerialBlock:nil
+                                     dataStructDeserialBlock:nil];
+    }
+    return DBTEAMPropertiesTemplateUpdate;
+  }
+}
+
++ (DBRoute *)DBTEAMReportsGetActivity {
+  @synchronized(lockObj) {
+    if (!DBTEAMReportsGetActivity) {
+      DBTEAMReportsGetActivity = [[DBRoute alloc] init:@"reports/get_activity"
                                             namespace_:@"team"
                                             deprecated:@YES
-                                            resultType:[DBTEAMGetMembershipReport class]
+                                            resultType:[DBTEAMGetActivityReport class]
                                              errorType:[DBTEAMDateRangeError class]
                                                  attrs:@{
                                                    @"auth" : @"team",
@@ -1487,35 +1812,139 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                  }
                                  dataStructSerialBlock:nil
                                dataStructDeserialBlock:nil];
+    }
+    return DBTEAMReportsGetActivity;
   }
-  return DBTEAMReportsGetMembership;
+}
+
++ (DBRoute *)DBTEAMReportsGetDevices {
+  @synchronized(lockObj) {
+    if (!DBTEAMReportsGetDevices) {
+      DBTEAMReportsGetDevices = [[DBRoute alloc] init:@"reports/get_devices"
+                                           namespace_:@"team"
+                                           deprecated:@YES
+                                           resultType:[DBTEAMGetDevicesReport class]
+                                            errorType:[DBTEAMDateRangeError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMReportsGetDevices;
+  }
+}
+
++ (DBRoute *)DBTEAMReportsGetMembership {
+  @synchronized(lockObj) {
+    if (!DBTEAMReportsGetMembership) {
+      DBTEAMReportsGetMembership = [[DBRoute alloc] init:@"reports/get_membership"
+                                              namespace_:@"team"
+                                              deprecated:@YES
+                                              resultType:[DBTEAMGetMembershipReport class]
+                                               errorType:[DBTEAMDateRangeError class]
+                                                   attrs:@{
+                                                     @"auth" : @"team",
+                                                     @"host" : @"api",
+                                                     @"style" : @"rpc"
+                                                   }
+                                   dataStructSerialBlock:nil
+                                 dataStructDeserialBlock:nil];
+    }
+    return DBTEAMReportsGetMembership;
+  }
 }
 
 + (DBRoute *)DBTEAMReportsGetStorage {
-  if (!DBTEAMReportsGetStorage) {
-    DBTEAMReportsGetStorage = [[DBRoute alloc] init:@"reports/get_storage"
-                                         namespace_:@"team"
-                                         deprecated:@YES
-                                         resultType:[DBTEAMGetStorageReport class]
-                                          errorType:[DBTEAMDateRangeError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                              dataStructSerialBlock:nil
-                            dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBTEAMReportsGetStorage) {
+      DBTEAMReportsGetStorage = [[DBRoute alloc] init:@"reports/get_storage"
+                                           namespace_:@"team"
+                                           deprecated:@YES
+                                           resultType:[DBTEAMGetStorageReport class]
+                                            errorType:[DBTEAMDateRangeError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMReportsGetStorage;
   }
-  return DBTEAMReportsGetStorage;
 }
 
 + (DBRoute *)DBTEAMTeamFolderActivate {
-  if (!DBTEAMTeamFolderActivate) {
-    DBTEAMTeamFolderActivate = [[DBRoute alloc] init:@"team_folder/activate"
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderActivate) {
+      DBTEAMTeamFolderActivate = [[DBRoute alloc] init:@"team_folder/activate"
+                                            namespace_:@"team"
+                                            deprecated:@NO
+                                            resultType:[DBTEAMTeamFolderMetadata class]
+                                             errorType:[DBTEAMTeamFolderActivateError class]
+                                                 attrs:@{
+                                                   @"auth" : @"team",
+                                                   @"host" : @"api",
+                                                   @"style" : @"rpc"
+                                                 }
+                                 dataStructSerialBlock:nil
+                               dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderActivate;
+  }
+}
+
++ (DBRoute *)DBTEAMTeamFolderArchive {
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderArchive) {
+      DBTEAMTeamFolderArchive = [[DBRoute alloc] init:@"team_folder/archive"
+                                           namespace_:@"team"
+                                           deprecated:@NO
+                                           resultType:[DBTEAMTeamFolderArchiveLaunch class]
+                                            errorType:[DBTEAMTeamFolderArchiveError class]
+                                                attrs:@{
+                                                  @"auth" : @"team",
+                                                  @"host" : @"api",
+                                                  @"style" : @"rpc"
+                                                }
+                                dataStructSerialBlock:nil
+                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderArchive;
+  }
+}
+
++ (DBRoute *)DBTEAMTeamFolderArchiveCheck {
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderArchiveCheck) {
+      DBTEAMTeamFolderArchiveCheck = [[DBRoute alloc] init:@"team_folder/archive/check"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMTeamFolderArchiveJobStatus class]
+                                                 errorType:[DBASYNCPollError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderArchiveCheck;
+  }
+}
+
++ (DBRoute *)DBTEAMTeamFolderCreate {
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderCreate) {
+      DBTEAMTeamFolderCreate = [[DBRoute alloc] init:@"team_folder/create"
                                           namespace_:@"team"
                                           deprecated:@NO
                                           resultType:[DBTEAMTeamFolderMetadata class]
-                                           errorType:[DBTEAMTeamFolderActivateError class]
+                                           errorType:[DBTEAMTeamFolderCreateError class]
                                                attrs:@{
                                                  @"auth" : @"team",
                                                  @"host" : @"api",
@@ -1523,148 +1952,44 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                }
                                dataStructSerialBlock:nil
                              dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderCreate;
   }
-  return DBTEAMTeamFolderActivate;
-}
-
-+ (DBRoute *)DBTEAMTeamFolderArchive {
-  if (!DBTEAMTeamFolderArchive) {
-    DBTEAMTeamFolderArchive = [[DBRoute alloc] init:@"team_folder/archive"
-                                         namespace_:@"team"
-                                         deprecated:@NO
-                                         resultType:[DBTEAMTeamFolderArchiveLaunch class]
-                                          errorType:[DBTEAMTeamFolderArchiveError class]
-                                              attrs:@{
-                                                @"auth" : @"team",
-                                                @"host" : @"api",
-                                                @"style" : @"rpc"
-                                              }
-                              dataStructSerialBlock:nil
-                            dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTeamFolderArchive;
-}
-
-+ (DBRoute *)DBTEAMTeamFolderArchiveCheck {
-  if (!DBTEAMTeamFolderArchiveCheck) {
-    DBTEAMTeamFolderArchiveCheck = [[DBRoute alloc] init:@"team_folder/archive/check"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMTeamFolderArchiveJobStatus class]
-                                               errorType:[DBASYNCPollError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTeamFolderArchiveCheck;
-}
-
-+ (DBRoute *)DBTEAMTeamFolderCreate {
-  if (!DBTEAMTeamFolderCreate) {
-    DBTEAMTeamFolderCreate = [[DBRoute alloc] init:@"team_folder/create"
-                                        namespace_:@"team"
-                                        deprecated:@NO
-                                        resultType:[DBTEAMTeamFolderMetadata class]
-                                         errorType:[DBTEAMTeamFolderCreateError class]
-                                             attrs:@{
-                                               @"auth" : @"team",
-                                               @"host" : @"api",
-                                               @"style" : @"rpc"
-                                             }
-                             dataStructSerialBlock:nil
-                           dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTeamFolderCreate;
 }
 
 + (DBRoute *)DBTEAMTeamFolderGetInfo {
-  if (!DBTEAMTeamFolderGetInfo) {
-    DBTEAMTeamFolderGetInfo = [[DBRoute alloc] init:@"team_folder/get_info"
-        namespace_:@"team"
-        deprecated:@NO
-        resultType:[NSArray<DBTEAMTeamFolderGetInfoItem *> class]
-        errorType:nil
-        attrs:@{
-          @"auth" : @"team",
-          @"host" : @"api",
-          @"style" : @"rpc"
-        }
-        dataStructSerialBlock:nil
-        dataStructDeserialBlock:^id(id dataStruct) {
-          return [DBArraySerializer deserialize:dataStruct
-                                      withBlock:^id(id elem0) {
-                                        return [DBTEAMTeamFolderGetInfoItemSerializer deserialize:elem0];
-                                      }];
-        }];
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderGetInfo) {
+      DBTEAMTeamFolderGetInfo = [[DBRoute alloc] init:@"team_folder/get_info"
+          namespace_:@"team"
+          deprecated:@NO
+          resultType:[NSArray<DBTEAMTeamFolderGetInfoItem *> class]
+          errorType:nil
+          attrs:@{
+            @"auth" : @"team",
+            @"host" : @"api",
+            @"style" : @"rpc"
+          }
+          dataStructSerialBlock:nil
+          dataStructDeserialBlock:^id(id dataStruct) {
+            return [DBArraySerializer deserialize:dataStruct
+                                        withBlock:^id(id elem0) {
+                                          return [DBTEAMTeamFolderGetInfoItemSerializer deserialize:elem0];
+                                        }];
+          }];
+    }
+    return DBTEAMTeamFolderGetInfo;
   }
-  return DBTEAMTeamFolderGetInfo;
 }
 
 + (DBRoute *)DBTEAMTeamFolderList {
-  if (!DBTEAMTeamFolderList) {
-    DBTEAMTeamFolderList = [[DBRoute alloc] init:@"team_folder/list"
-                                      namespace_:@"team"
-                                      deprecated:@NO
-                                      resultType:[DBTEAMTeamFolderListResult class]
-                                       errorType:[DBTEAMTeamFolderListError class]
-                                           attrs:@{
-                                             @"auth" : @"team",
-                                             @"host" : @"api",
-                                             @"style" : @"rpc"
-                                           }
-                           dataStructSerialBlock:nil
-                         dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTeamFolderList;
-}
-
-+ (DBRoute *)DBTEAMTeamFolderListContinue {
-  if (!DBTEAMTeamFolderListContinue) {
-    DBTEAMTeamFolderListContinue = [[DBRoute alloc] init:@"team_folder/list/continue"
-                                              namespace_:@"team"
-                                              deprecated:@NO
-                                              resultType:[DBTEAMTeamFolderListResult class]
-                                               errorType:[DBTEAMTeamFolderListContinueError class]
-                                                   attrs:@{
-                                                     @"auth" : @"team",
-                                                     @"host" : @"api",
-                                                     @"style" : @"rpc"
-                                                   }
-                                   dataStructSerialBlock:nil
-                                 dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTeamFolderListContinue;
-}
-
-+ (DBRoute *)DBTEAMTeamFolderPermanentlyDelete {
-  if (!DBTEAMTeamFolderPermanentlyDelete) {
-    DBTEAMTeamFolderPermanentlyDelete = [[DBRoute alloc] init:@"team_folder/permanently_delete"
-                                                   namespace_:@"team"
-                                                   deprecated:@NO
-                                                   resultType:nil
-                                                    errorType:[DBTEAMTeamFolderPermanentlyDeleteError class]
-                                                        attrs:@{
-                                                          @"auth" : @"team",
-                                                          @"host" : @"api",
-                                                          @"style" : @"rpc"
-                                                        }
-                                        dataStructSerialBlock:nil
-                                      dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTeamFolderPermanentlyDelete;
-}
-
-+ (DBRoute *)DBTEAMTeamFolderRename {
-  if (!DBTEAMTeamFolderRename) {
-    DBTEAMTeamFolderRename = [[DBRoute alloc] init:@"team_folder/rename"
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderList) {
+      DBTEAMTeamFolderList = [[DBRoute alloc] init:@"team_folder/list"
                                         namespace_:@"team"
                                         deprecated:@NO
-                                        resultType:[DBTEAMTeamFolderMetadata class]
-                                         errorType:[DBTEAMTeamFolderRenameError class]
+                                        resultType:[DBTEAMTeamFolderListResult class]
+                                         errorType:[DBTEAMTeamFolderListError class]
                                              attrs:@{
                                                @"auth" : @"team",
                                                @"host" : @"api",
@@ -1672,17 +1997,99 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                              }
                              dataStructSerialBlock:nil
                            dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderList;
   }
-  return DBTEAMTeamFolderRename;
+}
+
++ (DBRoute *)DBTEAMTeamFolderListContinue {
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderListContinue) {
+      DBTEAMTeamFolderListContinue = [[DBRoute alloc] init:@"team_folder/list/continue"
+                                                namespace_:@"team"
+                                                deprecated:@NO
+                                                resultType:[DBTEAMTeamFolderListResult class]
+                                                 errorType:[DBTEAMTeamFolderListContinueError class]
+                                                     attrs:@{
+                                                       @"auth" : @"team",
+                                                       @"host" : @"api",
+                                                       @"style" : @"rpc"
+                                                     }
+                                     dataStructSerialBlock:nil
+                                   dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderListContinue;
+  }
+}
+
++ (DBRoute *)DBTEAMTeamFolderPermanentlyDelete {
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderPermanentlyDelete) {
+      DBTEAMTeamFolderPermanentlyDelete = [[DBRoute alloc] init:@"team_folder/permanently_delete"
+                                                     namespace_:@"team"
+                                                     deprecated:@NO
+                                                     resultType:nil
+                                                      errorType:[DBTEAMTeamFolderPermanentlyDeleteError class]
+                                                          attrs:@{
+                                                            @"auth" : @"team",
+                                                            @"host" : @"api",
+                                                            @"style" : @"rpc"
+                                                          }
+                                          dataStructSerialBlock:nil
+                                        dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderPermanentlyDelete;
+  }
+}
+
++ (DBRoute *)DBTEAMTeamFolderRename {
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderRename) {
+      DBTEAMTeamFolderRename = [[DBRoute alloc] init:@"team_folder/rename"
+                                          namespace_:@"team"
+                                          deprecated:@NO
+                                          resultType:[DBTEAMTeamFolderMetadata class]
+                                           errorType:[DBTEAMTeamFolderRenameError class]
+                                               attrs:@{
+                                                 @"auth" : @"team",
+                                                 @"host" : @"api",
+                                                 @"style" : @"rpc"
+                                               }
+                               dataStructSerialBlock:nil
+                             dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderRename;
+  }
 }
 
 + (DBRoute *)DBTEAMTeamFolderUpdateSyncSettings {
-  if (!DBTEAMTeamFolderUpdateSyncSettings) {
-    DBTEAMTeamFolderUpdateSyncSettings = [[DBRoute alloc] init:@"team_folder/update_sync_settings"
+  @synchronized(lockObj) {
+    if (!DBTEAMTeamFolderUpdateSyncSettings) {
+      DBTEAMTeamFolderUpdateSyncSettings = [[DBRoute alloc] init:@"team_folder/update_sync_settings"
+                                                      namespace_:@"team"
+                                                      deprecated:@NO
+                                                      resultType:[DBTEAMTeamFolderMetadata class]
+                                                       errorType:[DBTEAMTeamFolderUpdateSyncSettingsError class]
+                                                           attrs:@{
+                                                             @"auth" : @"team",
+                                                             @"host" : @"api",
+                                                             @"style" : @"rpc"
+                                                           }
+                                           dataStructSerialBlock:nil
+                                         dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTeamFolderUpdateSyncSettings;
+  }
+}
+
++ (DBRoute *)DBTEAMTokenGetAuthenticatedAdmin {
+  @synchronized(lockObj) {
+    if (!DBTEAMTokenGetAuthenticatedAdmin) {
+      DBTEAMTokenGetAuthenticatedAdmin = [[DBRoute alloc] init:@"token/get_authenticated_admin"
                                                     namespace_:@"team"
                                                     deprecated:@NO
-                                                    resultType:[DBTEAMTeamFolderMetadata class]
-                                                     errorType:[DBTEAMTeamFolderUpdateSyncSettingsError class]
+                                                    resultType:[DBTEAMTokenGetAuthenticatedAdminResult class]
+                                                     errorType:[DBTEAMTokenGetAuthenticatedAdminError class]
                                                          attrs:@{
                                                            @"auth" : @"team",
                                                            @"host" : @"api",
@@ -1690,26 +2097,9 @@ static DBRoute *DBTEAMTokenGetAuthenticatedAdmin;
                                                          }
                                          dataStructSerialBlock:nil
                                        dataStructDeserialBlock:nil];
+    }
+    return DBTEAMTokenGetAuthenticatedAdmin;
   }
-  return DBTEAMTeamFolderUpdateSyncSettings;
-}
-
-+ (DBRoute *)DBTEAMTokenGetAuthenticatedAdmin {
-  if (!DBTEAMTokenGetAuthenticatedAdmin) {
-    DBTEAMTokenGetAuthenticatedAdmin = [[DBRoute alloc] init:@"token/get_authenticated_admin"
-                                                  namespace_:@"team"
-                                                  deprecated:@NO
-                                                  resultType:[DBTEAMTokenGetAuthenticatedAdminResult class]
-                                                   errorType:[DBTEAMTokenGetAuthenticatedAdminError class]
-                                                       attrs:@{
-                                                         @"auth" : @"team",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
-                                       dataStructSerialBlock:nil
-                                     dataStructDeserialBlock:nil];
-  }
-  return DBTEAMTokenGetAuthenticatedAdmin;
 }
 
 @end

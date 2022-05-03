@@ -52,7 +52,8 @@
 - (IBAction)showInFinderButtonTapped:(NSButton *)sender {
     NSString *path = [NSString stringWithFormat:@"~/Library/MobileDevice/Provisioning Profiles/%@.mobileprovision", self.uploadRecord.provisioningProfile.uuid];
     path = [path stringByExpandingTildeInPath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:NO]) {
+	BOOL isDirectory = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory]) {
         NSURL *fileURL = [NSURL fileURLWithPath:path];
         [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
     } else {

@@ -24,7 +24,6 @@
 
 // 10 MB file chunk size
 static const NSUInteger fileChunkSize = 10 * 1024 * 1024;
-static const int timeoutInSec = 200;
 
 @implementation DBFILESUserAuthRoutes (DBCustomRoutes)
 
@@ -104,35 +103,37 @@ static const int timeoutInSec = 200;
            blockingSemaphore:(dispatch_semaphore_t)blockingSemaphore {
   // immediately close session after first API call
   // because file can be uploaded in one request
-  __block DBUploadTask *task =
-      [[[self uploadSessionStartStream:@(YES) sessionType:nil inputStream:[NSInputStream inputStreamWithURL:fileUrl]]
-          setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBFILESUploadSessionStartError *routeError,
-                             DBRequestError *error) {
-            if (result && !routeError) {
-              NSString *sessionId = result.sessionId;
-              NSNumber *offset = @(fileSize);
-              DBFILESUploadSessionCursor *cursor =
-                  [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:offset];
-              DBFILESCommitInfo *commitInfo = uploadData.fileUrlsToCommitInfo[fileUrl];
-              DBFILESUploadSessionFinishArg *finishArg =
-                  [[DBFILESUploadSessionFinishArg alloc] initWithCursor:cursor commit:commitInfo];
+  __block DBUploadTask *task = [[[self uploadSessionStartStream:@(YES)
+                                                    sessionType:nil
+                                                    contentHash:nil
+                                                    inputStream:[NSInputStream inputStreamWithURL:fileUrl]]
+      setResponseBlock:^(DBFILESUploadSessionStartResult *result, DBFILESUploadSessionStartError *routeError,
+                         DBRequestError *error) {
+        if (result && !routeError) {
+          NSString *sessionId = result.sessionId;
+          NSNumber *offset = @(fileSize);
+          DBFILESUploadSessionCursor *cursor =
+              [[DBFILESUploadSessionCursor alloc] initWithSessionId:sessionId offset:offset];
+          DBFILESCommitInfo *commitInfo = uploadData.fileUrlsToCommitInfo[fileUrl];
+          DBFILESUploadSessionFinishArg *finishArg =
+              [[DBFILESUploadSessionFinishArg alloc] initWithCursor:cursor commit:commitInfo];
 
-              // store commit info for this file
-              [uploadData.finishArgs addObject:finishArg];
-            } else {
-              uploadData.fileUrlsToRequestErrors[fileUrl] = error;
-            }
+          // store commit info for this file
+          [uploadData.finishArgs addObject:finishArg];
+        } else {
+          uploadData.fileUrlsToRequestErrors[fileUrl] = error;
+        }
 
-            [uploadData.taskStorage removeUploadTask:task];
-            dispatch_semaphore_signal(blockingSemaphore);
-            dispatch_group_leave(uploadData.uploadGroup);
-          }
-                     queue:uploadData.queue]
-          setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+        [uploadData.taskStorage removeUploadTask:task];
+        dispatch_semaphore_signal(blockingSemaphore);
+        dispatch_group_leave(uploadData.uploadGroup);
+      }
+                 queue:uploadData.queue]
+      setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 #pragma unused(totalBytesWritten)
 #pragma unused(totalBytesExpectedToWrite)
-            [self executeProgressHandler:uploadData amountUploaded:bytesWritten];
-          }];
+        [self executeProgressHandler:uploadData amountUploaded:bytesWritten];
+      }];
 
   [uploadData.taskStorage addUploadTask:task];
 }
@@ -234,8 +235,8 @@ static const int timeoutInSec = 200;
            blockingSemaphore:(dispatch_semaphore_t)blockingSemaphore {
   // close session on final append call
   __block DBUploadTask *task =
-      [[[self uploadSessionAppendV2Stream:cursor close:@(shouldClose) inputStream:fileChunkInputStream]
-          setResponseBlock:^(DBNilObject *result, DBFILESUploadSessionLookupError *routeError, DBRequestError *error) {
+      [[[self uploadSessionAppendV2Stream:cursor close:@(shouldClose) contentHash:nil inputStream:fileChunkInputStream]
+          setResponseBlock:^(DBNilObject *result, DBFILESUploadSessionAppendError *routeError, DBRequestError *error) {
             if (!result && !routeError) {
               if ([error isRateLimitError]) {
                 DBRequestRateLimitError *rateLimitError = [error asRateLimitError];
@@ -317,74 +318,28 @@ static const int timeoutInSec = 200;
   [uploadData.taskStorage addUploadTask:task];
 }
 
-- (void)queryJobStatus:(DBBatchUploadData *)uploadData asyncJobId:(NSString *)asyncJobId retryCount:(int)retryCount {
-  [[self uploadSessionFinishBatchCheck:asyncJobId]
-      setResponseBlock:^(DBFILESUploadSessionFinishBatchJobStatus *result, DBASYNCPollError *routeError,
-                         DBRequestError *error) {
-        if (result) {
-          if ([result isInProgress]) {
-            sleep(1);
-            if (retryCount <= timeoutInSec) {
-              [self queryJobStatus:uploadData asyncJobId:asyncJobId retryCount:retryCount + 1];
-            } else {
-              NSString *errorMessage =
-                  [NSString stringWithFormat:@"Result polling took > %d seconds. Timing out.", timeoutInSec];
-              NSMutableDictionary *userInfo = [NSMutableDictionary new];
-              userInfo[NSUnderlyingErrorKey] = errorMessage;
-              NSError *timeoutError =
-                  [[NSError alloc] initWithDomain:NSURLErrorDomain code:NSURLErrorTimedOut userInfo:userInfo];
-              [uploadData.queue addOperationWithBlock:^{
-                uploadData.responseBlock(nil, nil, [[DBRequestError alloc] initAsClientError:timeoutError],
-                                         uploadData.fileUrlsToRequestErrors);
-              }];
-            }
-          } else if ([result isComplete]) {
-            [uploadData.queue addOperationWithBlock:^{
-              NSArray<DBFILESUploadSessionFinishBatchResultEntry *> *completeResult = result.complete.entries;
+- (void)finishBatch:(DBBatchUploadData *)uploadData resultEntries:(NSArray<DBFILESUploadSessionFinishBatchResultEntry *> *)resultEntries {
+  [uploadData.queue addOperationWithBlock:^{
+    // create reverse lookup
+    NSMutableDictionary<NSString *, NSURL *> *dropboxFilePathToNSURL = [NSMutableDictionary new];
+    for (NSURL *fileUrl in uploadData.fileUrlsToCommitInfo) {
+      DBFILESCommitInfo *commitInfo = uploadData.fileUrlsToCommitInfo[fileUrl];
+      dropboxFilePathToNSURL[commitInfo.path] = fileUrl;
+    }
 
-              // create reverse lookup
-              NSMutableDictionary<NSString *, NSURL *> *dropboxFilePathToNSURL = [NSMutableDictionary new];
-              for (NSURL *fileUrl in uploadData.fileUrlsToCommitInfo) {
-                DBFILESCommitInfo *commitInfo = uploadData.fileUrlsToCommitInfo[fileUrl];
-                dropboxFilePathToNSURL[commitInfo.path] = fileUrl;
-              }
+    NSMutableDictionary<NSURL *, DBFILESUploadSessionFinishBatchResultEntry *> *fileUrlsToBatchResultEntries =
+    [NSMutableDictionary new];
 
-              NSMutableDictionary<NSURL *, DBFILESUploadSessionFinishBatchResultEntry *> *fileUrlsToBatchResultEntries =
-                  [NSMutableDictionary new];
+    int index = 0;
+    for (DBFILESUploadSessionFinishArg *finishArg in uploadData.finishArgs) {
+      NSString *path = finishArg.commit.path;
+      DBFILESUploadSessionFinishBatchResultEntry *resultEntry = resultEntries[index];
+      fileUrlsToBatchResultEntries[dropboxFilePathToNSURL[path]] = resultEntry;
+      index++;
+    }
 
-              int index = 0;
-              for (DBFILESUploadSessionFinishArg *finishArg in uploadData.finishArgs) {
-                NSString *path = finishArg.commit.path;
-                DBFILESUploadSessionFinishBatchResultEntry *resultEntry = completeResult[index];
-                fileUrlsToBatchResultEntries[dropboxFilePathToNSURL[path]] = resultEntry;
-                index++;
-              }
-
-              uploadData.responseBlock(fileUrlsToBatchResultEntries, nil, nil, uploadData.fileUrlsToRequestErrors);
-            }];
-          }
-        } else if (!routeError) {
-          if ([error isRateLimitError]) {
-            DBRequestRateLimitError *rateLimitError = [error asRateLimitError];
-            double backoffInSeconds = [rateLimitError.backoff doubleValue];
-            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backoffInSeconds * NSEC_PER_SEC));
-
-            // retry after backoff time
-            dispatch_after(delayTime, dispatch_get_main_queue(), ^(void) {
-              [self queryJobStatus:uploadData asyncJobId:asyncJobId retryCount:retryCount];
-            });
-          } else {
-            [uploadData.queue addOperationWithBlock:^{
-              uploadData.responseBlock(nil, nil, error, uploadData.fileUrlsToRequestErrors);
-            }];
-          }
-        } else {
-          [uploadData.queue addOperationWithBlock:^{
-            uploadData.responseBlock(nil, routeError, error, uploadData.fileUrlsToRequestErrors);
-          }];
-        }
-      }
-                 queue:uploadData.pollingQueue];
+    uploadData.responseBlock(fileUrlsToBatchResultEntries, nil, nil, uploadData.fileUrlsToRequestErrors);
+  }];
 }
 
 - (NSUInteger)endBytesWithFileSize:(NSUInteger)fileSize startBytes:(NSUInteger)startBytes {
@@ -405,29 +360,26 @@ static const int timeoutInSec = 200;
     }
 
     NSMutableArray<DBFILESUploadSessionFinishArg *> *sortedFinishArgs =
-        [[uploadData.finishArgs sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-          DBFILESUploadSessionFinishArg *first = (DBFILESUploadSessionFinishArg *)a;
-          DBFILESUploadSessionFinishArg *second = (DBFILESUploadSessionFinishArg *)b;
-          return [first.commit.path compare:second.commit.path];
-        }] mutableCopy];
+    [[uploadData.finishArgs sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+      DBFILESUploadSessionFinishArg *first = (DBFILESUploadSessionFinishArg *)a;
+      DBFILESUploadSessionFinishArg *second = (DBFILESUploadSessionFinishArg *)b;
+      return [first.commit.path compare:second.commit.path];
+    }] mutableCopy];
 
     uploadData.finishArgs = sortedFinishArgs;
 
-    [[self uploadSessionFinishBatch:sortedFinishArgs]
-        setResponseBlock:^(DBFILESUploadSessionFinishBatchLaunch *result, DBNilObject *routeError,
-                           DBRequestError *error) {
-          if (result && !routeError) {
-            if ([result isAsyncJobId]) {
-              sleep(1);
-              [self queryJobStatus:uploadData asyncJobId:result.asyncJobId retryCount:2];
-            }
-          } else {
-            [uploadData.queue addOperationWithBlock:^{
-              uploadData.responseBlock(nil, nil, error, uploadData.fileUrlsToRequestErrors);
-            }];
-          }
-        }
-                   queue:uploadData.pollingQueue];
+    [[self uploadSessionFinishBatchV2:sortedFinishArgs]
+     setResponseBlock:^(DBFILESUploadSessionFinishBatchResult *_Nullable result, DBNilObject *_Nullable routeError,
+                        DBRequestError *_Nullable networkError) {
+      if (!result || routeError) {
+        [uploadData.queue addOperationWithBlock:^{
+          uploadData.responseBlock(nil, nil, networkError, uploadData.fileUrlsToRequestErrors);
+        }];
+      } else {
+        [self finishBatch:uploadData resultEntries:result.entries];
+      }
+    }
+     queue:uploadData.pollingQueue];
   });
 }
 

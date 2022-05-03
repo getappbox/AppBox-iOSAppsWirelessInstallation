@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The upload session ID (returned by `uploadSessionStart`).
 @property (nonatomic, readonly, copy) NSString *sessionId;
 
-/// The amount of data that has been uploaded so far. We use this to make sure
+/// Offset in bytes at which data should be appended. We use this to make sure
 /// upload data isn't lost or duplicated in the event of a network error.
 @property (nonatomic, readonly) NSNumber *offset;
 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param sessionId The upload session ID (returned by `uploadSessionStart`).
-/// @param offset The amount of data that has been uploaded so far. We use this
+/// @param offset Offset in bytes at which data should be appended. We use this
 /// to make sure upload data isn't lost or duplicated in the event of a network
 /// error.
 ///

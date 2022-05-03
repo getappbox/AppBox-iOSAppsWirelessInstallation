@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Comment text. Might be missing due to historical data gap.
+/// Comment text.
 @property (nonatomic, readonly, copy, nullable) NSString *commentText;
 
 /// Previous comment text.
@@ -39,8 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor for the struct (exposes all instance variables).
 ///
 /// @param previousCommentText Previous comment text.
-/// @param commentText Comment text. Might be missing due to historical data
-/// gap.
+/// @param commentText Comment text.
 ///
 /// @return An initialized instance.
 ///

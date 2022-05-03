@@ -48,293 +48,333 @@ static DBRoute *DBFILEPROPERTIESTemplatesRemoveForUser;
 static DBRoute *DBFILEPROPERTIESTemplatesUpdateForTeam;
 static DBRoute *DBFILEPROPERTIESTemplatesUpdateForUser;
 
+static NSObject *lockObj = nil;
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    lockObj = [[NSObject alloc] init];
+  });
+}
+
 + (DBRoute *)DBFILEPROPERTIESPropertiesAdd {
-  if (!DBFILEPROPERTIESPropertiesAdd) {
-    DBFILEPROPERTIESPropertiesAdd = [[DBRoute alloc] init:@"properties/add"
-                                               namespace_:@"file_properties"
-                                               deprecated:@NO
-                                               resultType:nil
-                                                errorType:[DBFILEPROPERTIESAddPropertiesError class]
-                                                    attrs:@{
-                                                      @"auth" : @"user",
-                                                      @"host" : @"api",
-                                                      @"style" : @"rpc"
-                                                    }
-                                    dataStructSerialBlock:nil
-                                  dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESPropertiesAdd) {
+      DBFILEPROPERTIESPropertiesAdd = [[DBRoute alloc] init:@"properties/add"
+                                                 namespace_:@"file_properties"
+                                                 deprecated:@NO
+                                                 resultType:nil
+                                                  errorType:[DBFILEPROPERTIESAddPropertiesError class]
+                                                      attrs:@{
+                                                        @"auth" : @"user",
+                                                        @"host" : @"api",
+                                                        @"style" : @"rpc"
+                                                      }
+                                      dataStructSerialBlock:nil
+                                    dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESPropertiesAdd;
   }
-  return DBFILEPROPERTIESPropertiesAdd;
 }
 
 + (DBRoute *)DBFILEPROPERTIESPropertiesOverwrite {
-  if (!DBFILEPROPERTIESPropertiesOverwrite) {
-    DBFILEPROPERTIESPropertiesOverwrite = [[DBRoute alloc] init:@"properties/overwrite"
-                                                     namespace_:@"file_properties"
-                                                     deprecated:@NO
-                                                     resultType:nil
-                                                      errorType:[DBFILEPROPERTIESInvalidPropertyGroupError class]
-                                                          attrs:@{
-                                                            @"auth" : @"user",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESPropertiesOverwrite) {
+      DBFILEPROPERTIESPropertiesOverwrite = [[DBRoute alloc] init:@"properties/overwrite"
+                                                       namespace_:@"file_properties"
+                                                       deprecated:@NO
+                                                       resultType:nil
+                                                        errorType:[DBFILEPROPERTIESInvalidPropertyGroupError class]
+                                                            attrs:@{
+                                                              @"auth" : @"user",
+                                                              @"host" : @"api",
+                                                              @"style" : @"rpc"
+                                                            }
+                                            dataStructSerialBlock:nil
+                                          dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESPropertiesOverwrite;
   }
-  return DBFILEPROPERTIESPropertiesOverwrite;
 }
 
 + (DBRoute *)DBFILEPROPERTIESPropertiesRemove {
-  if (!DBFILEPROPERTIESPropertiesRemove) {
-    DBFILEPROPERTIESPropertiesRemove = [[DBRoute alloc] init:@"properties/remove"
-                                                  namespace_:@"file_properties"
-                                                  deprecated:@NO
-                                                  resultType:nil
-                                                   errorType:[DBFILEPROPERTIESRemovePropertiesError class]
-                                                       attrs:@{
-                                                         @"auth" : @"user",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
-                                       dataStructSerialBlock:nil
-                                     dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESPropertiesRemove) {
+      DBFILEPROPERTIESPropertiesRemove = [[DBRoute alloc] init:@"properties/remove"
+                                                    namespace_:@"file_properties"
+                                                    deprecated:@NO
+                                                    resultType:nil
+                                                     errorType:[DBFILEPROPERTIESRemovePropertiesError class]
+                                                         attrs:@{
+                                                           @"auth" : @"user",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESPropertiesRemove;
   }
-  return DBFILEPROPERTIESPropertiesRemove;
 }
 
 + (DBRoute *)DBFILEPROPERTIESPropertiesSearch {
-  if (!DBFILEPROPERTIESPropertiesSearch) {
-    DBFILEPROPERTIESPropertiesSearch = [[DBRoute alloc] init:@"properties/search"
-                                                  namespace_:@"file_properties"
-                                                  deprecated:@NO
-                                                  resultType:[DBFILEPROPERTIESPropertiesSearchResult class]
-                                                   errorType:[DBFILEPROPERTIESPropertiesSearchError class]
-                                                       attrs:@{
-                                                         @"auth" : @"user",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
-                                       dataStructSerialBlock:nil
-                                     dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESPropertiesSearch) {
+      DBFILEPROPERTIESPropertiesSearch = [[DBRoute alloc] init:@"properties/search"
+                                                    namespace_:@"file_properties"
+                                                    deprecated:@NO
+                                                    resultType:[DBFILEPROPERTIESPropertiesSearchResult class]
+                                                     errorType:[DBFILEPROPERTIESPropertiesSearchError class]
+                                                         attrs:@{
+                                                           @"auth" : @"user",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESPropertiesSearch;
   }
-  return DBFILEPROPERTIESPropertiesSearch;
 }
 
 + (DBRoute *)DBFILEPROPERTIESPropertiesSearchContinue {
-  if (!DBFILEPROPERTIESPropertiesSearchContinue) {
-    DBFILEPROPERTIESPropertiesSearchContinue =
-        [[DBRoute alloc] init:@"properties/search/continue"
-                         namespace_:@"file_properties"
-                         deprecated:@NO
-                         resultType:[DBFILEPROPERTIESPropertiesSearchResult class]
-                          errorType:[DBFILEPROPERTIESPropertiesSearchContinueError class]
-                              attrs:@{
-                                @"auth" : @"user",
-                                @"host" : @"api",
-                                @"style" : @"rpc"
-                              }
-              dataStructSerialBlock:nil
-            dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESPropertiesSearchContinue) {
+      DBFILEPROPERTIESPropertiesSearchContinue =
+          [[DBRoute alloc] init:@"properties/search/continue"
+                           namespace_:@"file_properties"
+                           deprecated:@NO
+                           resultType:[DBFILEPROPERTIESPropertiesSearchResult class]
+                            errorType:[DBFILEPROPERTIESPropertiesSearchContinueError class]
+                                attrs:@{
+                                  @"auth" : @"user",
+                                  @"host" : @"api",
+                                  @"style" : @"rpc"
+                                }
+                dataStructSerialBlock:nil
+              dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESPropertiesSearchContinue;
   }
-  return DBFILEPROPERTIESPropertiesSearchContinue;
 }
 
 + (DBRoute *)DBFILEPROPERTIESPropertiesUpdate {
-  if (!DBFILEPROPERTIESPropertiesUpdate) {
-    DBFILEPROPERTIESPropertiesUpdate = [[DBRoute alloc] init:@"properties/update"
-                                                  namespace_:@"file_properties"
-                                                  deprecated:@NO
-                                                  resultType:nil
-                                                   errorType:[DBFILEPROPERTIESUpdatePropertiesError class]
-                                                       attrs:@{
-                                                         @"auth" : @"user",
-                                                         @"host" : @"api",
-                                                         @"style" : @"rpc"
-                                                       }
-                                       dataStructSerialBlock:nil
-                                     dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESPropertiesUpdate) {
+      DBFILEPROPERTIESPropertiesUpdate = [[DBRoute alloc] init:@"properties/update"
+                                                    namespace_:@"file_properties"
+                                                    deprecated:@NO
+                                                    resultType:nil
+                                                     errorType:[DBFILEPROPERTIESUpdatePropertiesError class]
+                                                         attrs:@{
+                                                           @"auth" : @"user",
+                                                           @"host" : @"api",
+                                                           @"style" : @"rpc"
+                                                         }
+                                         dataStructSerialBlock:nil
+                                       dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESPropertiesUpdate;
   }
-  return DBFILEPROPERTIESPropertiesUpdate;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesAddForTeam {
-  if (!DBFILEPROPERTIESTemplatesAddForTeam) {
-    DBFILEPROPERTIESTemplatesAddForTeam = [[DBRoute alloc] init:@"templates/add_for_team"
-                                                     namespace_:@"file_properties"
-                                                     deprecated:@NO
-                                                     resultType:[DBFILEPROPERTIESAddTemplateResult class]
-                                                      errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                          attrs:@{
-                                                            @"auth" : @"team",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesAddForTeam) {
+      DBFILEPROPERTIESTemplatesAddForTeam = [[DBRoute alloc] init:@"templates/add_for_team"
+                                                       namespace_:@"file_properties"
+                                                       deprecated:@NO
+                                                       resultType:[DBFILEPROPERTIESAddTemplateResult class]
+                                                        errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                            attrs:@{
+                                                              @"auth" : @"team",
+                                                              @"host" : @"api",
+                                                              @"style" : @"rpc"
+                                                            }
+                                            dataStructSerialBlock:nil
+                                          dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesAddForTeam;
   }
-  return DBFILEPROPERTIESTemplatesAddForTeam;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesAddForUser {
-  if (!DBFILEPROPERTIESTemplatesAddForUser) {
-    DBFILEPROPERTIESTemplatesAddForUser = [[DBRoute alloc] init:@"templates/add_for_user"
-                                                     namespace_:@"file_properties"
-                                                     deprecated:@NO
-                                                     resultType:[DBFILEPROPERTIESAddTemplateResult class]
-                                                      errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                          attrs:@{
-                                                            @"auth" : @"user",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesAddForUser) {
+      DBFILEPROPERTIESTemplatesAddForUser = [[DBRoute alloc] init:@"templates/add_for_user"
+                                                       namespace_:@"file_properties"
+                                                       deprecated:@NO
+                                                       resultType:[DBFILEPROPERTIESAddTemplateResult class]
+                                                        errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                            attrs:@{
+                                                              @"auth" : @"user",
+                                                              @"host" : @"api",
+                                                              @"style" : @"rpc"
+                                                            }
+                                            dataStructSerialBlock:nil
+                                          dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesAddForUser;
   }
-  return DBFILEPROPERTIESTemplatesAddForUser;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesGetForTeam {
-  if (!DBFILEPROPERTIESTemplatesGetForTeam) {
-    DBFILEPROPERTIESTemplatesGetForTeam = [[DBRoute alloc] init:@"templates/get_for_team"
-                                                     namespace_:@"file_properties"
-                                                     deprecated:@NO
-                                                     resultType:[DBFILEPROPERTIESGetTemplateResult class]
-                                                      errorType:[DBFILEPROPERTIESTemplateError class]
-                                                          attrs:@{
-                                                            @"auth" : @"team",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesGetForTeam) {
+      DBFILEPROPERTIESTemplatesGetForTeam = [[DBRoute alloc] init:@"templates/get_for_team"
+                                                       namespace_:@"file_properties"
+                                                       deprecated:@NO
+                                                       resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                                                        errorType:[DBFILEPROPERTIESTemplateError class]
+                                                            attrs:@{
+                                                              @"auth" : @"team",
+                                                              @"host" : @"api",
+                                                              @"style" : @"rpc"
+                                                            }
+                                            dataStructSerialBlock:nil
+                                          dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesGetForTeam;
   }
-  return DBFILEPROPERTIESTemplatesGetForTeam;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesGetForUser {
-  if (!DBFILEPROPERTIESTemplatesGetForUser) {
-    DBFILEPROPERTIESTemplatesGetForUser = [[DBRoute alloc] init:@"templates/get_for_user"
-                                                     namespace_:@"file_properties"
-                                                     deprecated:@NO
-                                                     resultType:[DBFILEPROPERTIESGetTemplateResult class]
-                                                      errorType:[DBFILEPROPERTIESTemplateError class]
-                                                          attrs:@{
-                                                            @"auth" : @"user",
-                                                            @"host" : @"api",
-                                                            @"style" : @"rpc"
-                                                          }
-                                          dataStructSerialBlock:nil
-                                        dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesGetForUser) {
+      DBFILEPROPERTIESTemplatesGetForUser = [[DBRoute alloc] init:@"templates/get_for_user"
+                                                       namespace_:@"file_properties"
+                                                       deprecated:@NO
+                                                       resultType:[DBFILEPROPERTIESGetTemplateResult class]
+                                                        errorType:[DBFILEPROPERTIESTemplateError class]
+                                                            attrs:@{
+                                                              @"auth" : @"user",
+                                                              @"host" : @"api",
+                                                              @"style" : @"rpc"
+                                                            }
+                                            dataStructSerialBlock:nil
+                                          dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesGetForUser;
   }
-  return DBFILEPROPERTIESTemplatesGetForUser;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesListForTeam {
-  if (!DBFILEPROPERTIESTemplatesListForTeam) {
-    DBFILEPROPERTIESTemplatesListForTeam = [[DBRoute alloc] init:@"templates/list_for_team"
-                                                      namespace_:@"file_properties"
-                                                      deprecated:@NO
-                                                      resultType:[DBFILEPROPERTIESListTemplateResult class]
-                                                       errorType:[DBFILEPROPERTIESTemplateError class]
-                                                           attrs:@{
-                                                             @"auth" : @"team",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesListForTeam) {
+      DBFILEPROPERTIESTemplatesListForTeam = [[DBRoute alloc] init:@"templates/list_for_team"
+                                                        namespace_:@"file_properties"
+                                                        deprecated:@NO
+                                                        resultType:[DBFILEPROPERTIESListTemplateResult class]
+                                                         errorType:[DBFILEPROPERTIESTemplateError class]
+                                                             attrs:@{
+                                                               @"auth" : @"team",
+                                                               @"host" : @"api",
+                                                               @"style" : @"rpc"
+                                                             }
+                                             dataStructSerialBlock:nil
+                                           dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesListForTeam;
   }
-  return DBFILEPROPERTIESTemplatesListForTeam;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesListForUser {
-  if (!DBFILEPROPERTIESTemplatesListForUser) {
-    DBFILEPROPERTIESTemplatesListForUser = [[DBRoute alloc] init:@"templates/list_for_user"
-                                                      namespace_:@"file_properties"
-                                                      deprecated:@NO
-                                                      resultType:[DBFILEPROPERTIESListTemplateResult class]
-                                                       errorType:[DBFILEPROPERTIESTemplateError class]
-                                                           attrs:@{
-                                                             @"auth" : @"user",
-                                                             @"host" : @"api",
-                                                             @"style" : @"rpc"
-                                                           }
-                                           dataStructSerialBlock:nil
-                                         dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesListForUser) {
+      DBFILEPROPERTIESTemplatesListForUser = [[DBRoute alloc] init:@"templates/list_for_user"
+                                                        namespace_:@"file_properties"
+                                                        deprecated:@NO
+                                                        resultType:[DBFILEPROPERTIESListTemplateResult class]
+                                                         errorType:[DBFILEPROPERTIESTemplateError class]
+                                                             attrs:@{
+                                                               @"auth" : @"user",
+                                                               @"host" : @"api",
+                                                               @"style" : @"rpc"
+                                                             }
+                                             dataStructSerialBlock:nil
+                                           dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesListForUser;
   }
-  return DBFILEPROPERTIESTemplatesListForUser;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesRemoveForTeam {
-  if (!DBFILEPROPERTIESTemplatesRemoveForTeam) {
-    DBFILEPROPERTIESTemplatesRemoveForTeam = [[DBRoute alloc] init:@"templates/remove_for_team"
-                                                        namespace_:@"file_properties"
-                                                        deprecated:@NO
-                                                        resultType:nil
-                                                         errorType:[DBFILEPROPERTIESTemplateError class]
-                                                             attrs:@{
-                                                               @"auth" : @"team",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesRemoveForTeam) {
+      DBFILEPROPERTIESTemplatesRemoveForTeam = [[DBRoute alloc] init:@"templates/remove_for_team"
+                                                          namespace_:@"file_properties"
+                                                          deprecated:@NO
+                                                          resultType:nil
+                                                           errorType:[DBFILEPROPERTIESTemplateError class]
+                                                               attrs:@{
+                                                                 @"auth" : @"team",
+                                                                 @"host" : @"api",
+                                                                 @"style" : @"rpc"
+                                                               }
+                                               dataStructSerialBlock:nil
+                                             dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesRemoveForTeam;
   }
-  return DBFILEPROPERTIESTemplatesRemoveForTeam;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesRemoveForUser {
-  if (!DBFILEPROPERTIESTemplatesRemoveForUser) {
-    DBFILEPROPERTIESTemplatesRemoveForUser = [[DBRoute alloc] init:@"templates/remove_for_user"
-                                                        namespace_:@"file_properties"
-                                                        deprecated:@NO
-                                                        resultType:nil
-                                                         errorType:[DBFILEPROPERTIESTemplateError class]
-                                                             attrs:@{
-                                                               @"auth" : @"user",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesRemoveForUser) {
+      DBFILEPROPERTIESTemplatesRemoveForUser = [[DBRoute alloc] init:@"templates/remove_for_user"
+                                                          namespace_:@"file_properties"
+                                                          deprecated:@NO
+                                                          resultType:nil
+                                                           errorType:[DBFILEPROPERTIESTemplateError class]
+                                                               attrs:@{
+                                                                 @"auth" : @"user",
+                                                                 @"host" : @"api",
+                                                                 @"style" : @"rpc"
+                                                               }
+                                               dataStructSerialBlock:nil
+                                             dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesRemoveForUser;
   }
-  return DBFILEPROPERTIESTemplatesRemoveForUser;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesUpdateForTeam {
-  if (!DBFILEPROPERTIESTemplatesUpdateForTeam) {
-    DBFILEPROPERTIESTemplatesUpdateForTeam = [[DBRoute alloc] init:@"templates/update_for_team"
-                                                        namespace_:@"file_properties"
-                                                        deprecated:@NO
-                                                        resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
-                                                         errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                             attrs:@{
-                                                               @"auth" : @"team",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesUpdateForTeam) {
+      DBFILEPROPERTIESTemplatesUpdateForTeam = [[DBRoute alloc] init:@"templates/update_for_team"
+                                                          namespace_:@"file_properties"
+                                                          deprecated:@NO
+                                                          resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
+                                                           errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                               attrs:@{
+                                                                 @"auth" : @"team",
+                                                                 @"host" : @"api",
+                                                                 @"style" : @"rpc"
+                                                               }
+                                               dataStructSerialBlock:nil
+                                             dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesUpdateForTeam;
   }
-  return DBFILEPROPERTIESTemplatesUpdateForTeam;
 }
 
 + (DBRoute *)DBFILEPROPERTIESTemplatesUpdateForUser {
-  if (!DBFILEPROPERTIESTemplatesUpdateForUser) {
-    DBFILEPROPERTIESTemplatesUpdateForUser = [[DBRoute alloc] init:@"templates/update_for_user"
-                                                        namespace_:@"file_properties"
-                                                        deprecated:@NO
-                                                        resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
-                                                         errorType:[DBFILEPROPERTIESModifyTemplateError class]
-                                                             attrs:@{
-                                                               @"auth" : @"user",
-                                                               @"host" : @"api",
-                                                               @"style" : @"rpc"
-                                                             }
-                                             dataStructSerialBlock:nil
-                                           dataStructDeserialBlock:nil];
+  @synchronized(lockObj) {
+    if (!DBFILEPROPERTIESTemplatesUpdateForUser) {
+      DBFILEPROPERTIESTemplatesUpdateForUser = [[DBRoute alloc] init:@"templates/update_for_user"
+                                                          namespace_:@"file_properties"
+                                                          deprecated:@NO
+                                                          resultType:[DBFILEPROPERTIESUpdateTemplateResult class]
+                                                           errorType:[DBFILEPROPERTIESModifyTemplateError class]
+                                                               attrs:@{
+                                                                 @"auth" : @"user",
+                                                                 @"host" : @"api",
+                                                                 @"style" : @"rpc"
+                                                               }
+                                               dataStructSerialBlock:nil
+                                             dataStructDeserialBlock:nil];
+    }
+    return DBFILEPROPERTIESTemplatesUpdateForUser;
   }
-  return DBFILEPROPERTIESTemplatesUpdateForUser;
 }
 
 @end

@@ -45,6 +45,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
     /// access to comments.
     DBSHARINGAccessLevelViewerNoComment,
 
+    /// The collaborator can only view the shared folder that they have access
+    /// to.
+    DBSHARINGAccessLevelTraverse,
+
     /// (no description).
     DBSHARINGAccessLevelOther,
 
@@ -97,6 +101,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
 - (instancetype)initWithViewerNoComment;
 
 ///
+/// Initializes union class with tag state of "traverse".
+///
+/// Description of the "traverse" tag state: The collaborator can only view the
+/// shared folder that they have access to.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTraverse;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -135,6 +149,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBSHARINGAccessLevelTag){
 /// @return Whether the union's current tag state has value "viewer_no_comment".
 ///
 - (BOOL)isViewerNoComment;
+
+///
+/// Retrieves whether the union's current tag state has value "traverse".
+///
+/// @return Whether the union's current tag state has value "traverse".
+///
+- (BOOL)isTraverse;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

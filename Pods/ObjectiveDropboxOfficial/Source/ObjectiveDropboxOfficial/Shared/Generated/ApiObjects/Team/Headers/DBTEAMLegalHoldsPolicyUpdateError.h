@@ -38,6 +38,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsPolicyUpdateErrorTag){
     /// (no description).
     DBTEAMLegalHoldsPolicyUpdateErrorOther,
 
+    /// Temporary infrastructure failure, please retry.
+    DBTEAMLegalHoldsPolicyUpdateErrorTransientError,
+
     /// Trying to release an inactive legal hold.
     DBTEAMLegalHoldsPolicyUpdateErrorInactiveLegalHold,
 
@@ -94,6 +97,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsPolicyUpdateErrorTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithOther;
+
+///
+/// Initializes union class with tag state of "transient_error".
+///
+/// Description of the "transient_error" tag state: Temporary infrastructure
+/// failure, please retry.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithTransientError;
 
 ///
 /// Initializes union class with tag state of "inactive_legal_hold".
@@ -195,6 +208,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLegalHoldsPolicyUpdateErrorTag){
 /// @return Whether the union's current tag state has value "other".
 ///
 - (BOOL)isOther;
+
+///
+/// Retrieves whether the union's current tag state has value "transient_error".
+///
+/// @return Whether the union's current tag state has value "transient_error".
+///
+- (BOOL)isTransientError;
 
 ///
 /// Retrieves whether the union's current tag state has value

@@ -27,16 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Previous parent namespace ID. Might be missing due to historical data gap.
+/// Previous parent namespace ID.
 @property (nonatomic, readonly, copy, nullable) NSString *previousParentNsId;
 
-/// New parent namespace ID. Might be missing due to historical data gap.
+/// New parent namespace ID.
 @property (nonatomic, readonly, copy, nullable) NSString *dNewParentNsId;
 
-/// Previous namespace path. Might be missing due to historical data gap.
+/// Previous namespace path.
 @property (nonatomic, readonly, copy, nullable) NSString *previousNsPath;
 
-/// New namespace path. Might be missing due to historical data gap.
+/// New namespace path.
 @property (nonatomic, readonly, copy, nullable) NSString *dNewNsPath;
 
 #pragma mark - Constructors
@@ -44,14 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param previousParentNsId Previous parent namespace ID. Might be missing due
-/// to historical data gap.
-/// @param dNewParentNsId New parent namespace ID. Might be missing due to
-/// historical data gap.
-/// @param previousNsPath Previous namespace path. Might be missing due to
-/// historical data gap.
-/// @param dNewNsPath New namespace path. Might be missing due to historical
-/// data gap.
+/// @param previousParentNsId Previous parent namespace ID.
+/// @param dNewParentNsId New parent namespace ID.
+/// @param previousNsPath Previous namespace path.
+/// @param dNewNsPath New namespace path.
 ///
 /// @return An initialized instance.
 ///
