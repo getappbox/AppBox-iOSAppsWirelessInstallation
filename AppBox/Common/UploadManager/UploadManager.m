@@ -20,6 +20,9 @@
     
     //For retry
     NSInteger retryCount;
+	
+	//
+	NSString *workingDirectory;
 }
 
 +(void)setupDBClientsManager{
@@ -41,6 +44,11 @@
     return self;
 }
 
+- (void)createNewWorkingDirectory {
+	workingDirectory = [NSTemporaryDirectory() stringByAppendingPathComponent: [[NSUUID UUID] UUIDString]];
+	[ABLog log:@"New temporaray working directory %@", workingDirectory];
+}
+
 #pragma mark - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
@@ -53,11 +61,12 @@
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
         
-        NSString *tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+		// Create new temp working directory
+		[self createNewWorkingDirectory];
 
-        [ABLog log:@"Extracting Files to - %@", tempDir];
+        [ABLog log:@"Extracting Files to - %@", workingDirectory];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [SSZipArchive unzipFileAtPath:ipaPath toDestination:NSTemporaryDirectory() overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+            [SSZipArchive unzipFileAtPath:ipaPath toDestination:workingDirectory overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
 				strongify(self);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
@@ -86,7 +95,7 @@
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
-                            mobileProvisionPath = [tempDir stringByAppendingPathComponent: mobileProvisionPath];
+                            mobileProvisionPath = [workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
@@ -112,7 +121,7 @@
                     
                     //get info.plist
                     [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
-                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[tempDir stringByAppendingPathComponent:infoPlistPath]]];
+                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
@@ -170,14 +179,13 @@
             [self dbUploadFile:ipaURL.resourceSpecifier.stringByRemovingPercentEncoding to:self.project.dbIPAFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];
         }];
     }
-    [ABLog log:@"Temporaray Folder %@", NSTemporaryDirectory()];
 }
 
 
 #pragma mark - UNIQUE Link Handlers
 -(void)handleAfterUniqueJsonMetaDataLoaded{
     if(self.project.uniqueLinkJsonMetaData){
-        NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+        NSURL *path = [NSURL fileURLWithPath:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
 		weakify(self);
         //download appinfo.json file
         [[[DBClientsManager authorizedClient].filesRoutes downloadUrl:self.project.uniqueLinkJsonMetaData.pathDisplay overwrite:YES destination:path]
@@ -204,7 +212,7 @@
 
 -(NSDictionary *)getUniqueJsonDict{
     NSError *error;
-    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
     [ABLog log:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary];
     return dictionary;
 }
@@ -323,7 +331,7 @@
 }
 
 -(void)writeUniqueJsonWithDict:(NSDictionary *)jsonDict{
-    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON];
+    NSString *path = [workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     }
@@ -334,7 +342,7 @@
 
 -(void)uploadUniqueLinkJsonFile{
     self.dbFileType = DBFileTypeJson;
-    NSURL *path = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
+    NSURL *path = [NSURL fileURLWithPath:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
     
     //set mode for appinfo.json file to upload/update
     DBFILESWriteMode *mode = (self.project.uniqueLinkJsonMetaData) ? [[DBFILESWriteMode alloc] initWithUpdate:self.project.uniqueLinkJsonMetaData.rev] : [[DBFILESWriteMode alloc] initWithOverwrite];
