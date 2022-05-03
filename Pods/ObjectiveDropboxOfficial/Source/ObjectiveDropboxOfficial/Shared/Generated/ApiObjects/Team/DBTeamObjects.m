@@ -771,7 +771,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isSuccess]) {
-    jsonDict = [[DBSECONDARYEMAILSSecondaryEmailSerializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBSECONDARYEMAILSSecondaryEmailSerializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else if ([valueObj isUnavailable]) {
     jsonDict[@"unavailable"] = valueObj.unavailable;
@@ -2284,7 +2284,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isSuccess]) {
-    jsonDict = [[DBTEAMUserCustomQuotaResultSerializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMUserCustomQuotaResultSerializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else if ([valueObj isInvalidUser]) {
     jsonDict[@"invalid_user"] = [[DBTEAMUserSelectorArgSerializer serialize:valueObj.invalidUser] mutableCopy];
@@ -11210,7 +11210,7 @@
     jsonDict[@"id_not_found"] = valueObj.idNotFound;
     jsonDict[@".tag"] = @"id_not_found";
   } else if ([valueObj isGroupInfo]) {
-    jsonDict = [[DBTEAMGroupFullInfoSerializer serialize:valueObj.groupInfo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMGroupFullInfoSerializer serialize:valueObj.groupInfo]];
     jsonDict[@".tag"] = @"group_info";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -13141,8 +13141,8 @@
   [DBStoneValidators nonnullValidator:nil](authorMemberStatus);
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:nil
                                                                maxLength:@(255)
-                                                                 pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9."
-                                                                         @"-]*\\.[A-Za-z]{2,15}$"]](authorEmail);
+                                                                 pattern:@"^['#&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
+                                                                         @"9.-]*\\.[A-Za-z]{2,15}$"]](authorEmail);
   [DBStoneValidators nonnullValidator:nil](fileType);
   [DBStoneValidators nonnullValidator:nil](size);
   [DBStoneValidators
@@ -19484,8 +19484,8 @@
               isDirectoryRestricted:(NSNumber *)isDirectoryRestricted {
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:nil
                                                                maxLength:@(255)
-                                                                 pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9."
-                                                                         @"-]*\\.[A-Za-z]{2,15}$"]](memberEmail);
+                                                                 pattern:@"^['#&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
+                                                                         @"9.-]*\\.[A-Za-z]{2,15}$"]](memberEmail);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:@(100) pattern:@"[^/:?*<>\"|]*"]](
       memberGivenName);
@@ -19690,8 +19690,8 @@
                                role:(DBTEAMAdminTier *)role {
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:nil
                                                                maxLength:@(255)
-                                                                 pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9."
-                                                                         @"-]*\\.[A-Za-z]{2,15}$"]](memberEmail);
+                                                                 pattern:@"^['#&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
+                                                                         @"9.-]*\\.[A-Za-z]{2,15}$"]](memberEmail);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:@(100) pattern:@"[^/:?*<>\"|]*"]](
       memberGivenName);
@@ -20801,7 +20801,7 @@
     jsonDict[@"user_creation_failed"] = valueObj.userCreationFailed;
     jsonDict[@".tag"] = @"user_creation_failed";
   } else if ([valueObj isSuccess]) {
-    jsonDict = [[DBTEAMTeamMemberInfoSerializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamMemberInfoSerializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -20879,8 +20879,8 @@
                             roleIds:(NSArray<NSString *> *)roleIds {
   [DBStoneValidators nonnullValidator:[DBStoneValidators stringValidator:nil
                                                                maxLength:@(255)
-                                                                 pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-9."
-                                                                         @"-]*\\.[A-Za-z]{2,15}$"]](memberEmail);
+                                                                 pattern:@"^['#&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
+                                                                         @"9.-]*\\.[A-Za-z]{2,15}$"]](memberEmail);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:@(100) pattern:@"[^/:?*<>\"|]*"]](
       memberGivenName);
@@ -21560,7 +21560,7 @@
     jsonDict[@"user_creation_failed"] = valueObj.userCreationFailed;
     jsonDict[@".tag"] = @"user_creation_failed";
   } else if ([valueObj isSuccess]) {
-    jsonDict = [[DBTEAMTeamMemberInfoV2Serializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamMemberInfoV2Serializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -25208,7 +25208,7 @@
     jsonDict[@"id_not_found"] = valueObj.idNotFound;
     jsonDict[@".tag"] = @"id_not_found";
   } else if ([valueObj isMemberInfo]) {
-    jsonDict = [[DBTEAMTeamMemberInfoSerializer serialize:valueObj.memberInfo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamMemberInfoSerializer serialize:valueObj.memberInfo]];
     jsonDict[@".tag"] = @"member_info";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -25412,7 +25412,7 @@
     jsonDict[@"id_not_found"] = valueObj.idNotFound;
     jsonDict[@".tag"] = @"id_not_found";
   } else if ([valueObj isMemberInfo]) {
-    jsonDict = [[DBTEAMTeamMemberInfoV2Serializer serialize:valueObj.memberInfo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamMemberInfoV2Serializer serialize:valueObj.memberInfo]];
     jsonDict[@".tag"] = @"member_info";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -29204,7 +29204,7 @@
   [DBStoneValidators nonnullValidator:nil](user);
   [DBStoneValidators nullableValidator:[DBStoneValidators stringValidator:nil
                                                                 maxLength:@(255)
-                                                                  pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
+                                                                  pattern:@"^['#&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-Za-z0-"
                                                                           @"9.-]*\\.[A-Za-z]{2,15}$"]](dNewEmail);
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil maxLength:@(64) pattern:nil]](dNewExternalId);
@@ -33089,13 +33089,13 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isWebSession]) {
-    jsonDict = [[DBTEAMDeviceSessionArgSerializer serialize:valueObj.webSession] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMDeviceSessionArgSerializer serialize:valueObj.webSession]];
     jsonDict[@".tag"] = @"web_session";
   } else if ([valueObj isDesktopClient]) {
-    jsonDict = [[DBTEAMRevokeDesktopClientArgSerializer serialize:valueObj.desktopClient] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMRevokeDesktopClientArgSerializer serialize:valueObj.desktopClient]];
     jsonDict[@".tag"] = @"desktop_client";
   } else if ([valueObj isMobileClient]) {
-    jsonDict = [[DBTEAMDeviceSessionArgSerializer serialize:valueObj.mobileClient] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMDeviceSessionArgSerializer serialize:valueObj.mobileClient]];
     jsonDict[@".tag"] = @"mobile_client";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -36010,7 +36010,7 @@
   if ([valueObj isInProgress]) {
     jsonDict[@".tag"] = @"in_progress";
   } else if ([valueObj isComplete]) {
-    jsonDict = [[DBTEAMTeamFolderMetadataSerializer serialize:valueObj.complete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamFolderMetadataSerializer serialize:valueObj.complete]];
     jsonDict[@".tag"] = @"complete";
   } else if ([valueObj isFailed]) {
     jsonDict[@"failed"] = [[DBTEAMTeamFolderArchiveErrorSerializer serialize:valueObj.failed] mutableCopy];
@@ -36200,7 +36200,7 @@
     jsonDict[@"async_job_id"] = valueObj.asyncJobId;
     jsonDict[@".tag"] = @"async_job_id";
   } else if ([valueObj isComplete]) {
-    jsonDict = [[DBTEAMTeamFolderMetadataSerializer serialize:valueObj.complete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamFolderMetadataSerializer serialize:valueObj.complete]];
     jsonDict[@".tag"] = @"complete";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -36742,7 +36742,7 @@
     jsonDict[@"id_not_found"] = valueObj.idNotFound;
     jsonDict[@".tag"] = @"id_not_found";
   } else if ([valueObj isTeamFolderMetadata]) {
-    jsonDict = [[DBTEAMTeamFolderMetadataSerializer serialize:valueObj.teamFolderMetadata] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMTeamFolderMetadataSerializer serialize:valueObj.teamFolderMetadata]];
     jsonDict[@".tag"] = @"team_folder_metadata";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -40448,7 +40448,7 @@
   } else if ([valueObj isSuspended]) {
     jsonDict[@".tag"] = @"suspended";
   } else if ([valueObj isRemoved]) {
-    jsonDict = [[DBTEAMRemovedStatusSerializer serialize:valueObj.removed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMRemovedStatusSerializer serialize:valueObj.removed]];
     jsonDict[@".tag"] = @"removed";
   } else {
     @throw([NSException exceptionWithName:@"InvalidTag"
@@ -42194,7 +42194,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isSuccess]) {
-    jsonDict = [[DBTEAMUserSecondaryEmailsResultSerializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMUserSecondaryEmailsResultSerializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else if ([valueObj isInvalidUser]) {
     jsonDict[@"invalid_user"] = [[DBTEAMUserSelectorArgSerializer serialize:valueObj.invalidUser] mutableCopy];
@@ -42756,7 +42756,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isSuccess]) {
-    jsonDict = [[DBTEAMUserDeleteEmailsResultSerializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMUserDeleteEmailsResultSerializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else if ([valueObj isInvalidUser]) {
     jsonDict[@"invalid_user"] = [[DBTEAMUserSelectorArgSerializer serialize:valueObj.invalidUser] mutableCopy];
@@ -43079,7 +43079,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isSuccess]) {
-    jsonDict = [[DBTEAMUserResendEmailsResultSerializer serialize:valueObj.success] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMUserResendEmailsResultSerializer serialize:valueObj.success]];
     jsonDict[@".tag"] = @"success";
   } else if ([valueObj isInvalidUser]) {
     jsonDict[@"invalid_user"] = [[DBTEAMUserSelectorArgSerializer serialize:valueObj.invalidUser] mutableCopy];
@@ -43132,7 +43132,7 @@
                                            nonnullValidator:[DBStoneValidators
                                                                 stringValidator:nil
                                                                       maxLength:@(255)
-                                                                        pattern:@"^['&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-"
+                                                                        pattern:@"^['#&A-Za-z0-9._%+-]+@[A-Za-z0-9-][A-"
                                                                                 @"Za-z0-9.-]*\\.[A-Za-z]{2,15}$"]]]](
       secondaryEmails);
 

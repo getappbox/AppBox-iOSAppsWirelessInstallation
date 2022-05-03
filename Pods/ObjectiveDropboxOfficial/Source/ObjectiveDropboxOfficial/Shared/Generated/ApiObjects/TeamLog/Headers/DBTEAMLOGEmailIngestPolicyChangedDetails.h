@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `EmailIngestPolicyChangedDetails` struct.
 ///
-/// Changed email to my dropbox policy for team.
+/// Changed email to Dropbox policy for team.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// New email to my dropbox policy.
+/// To.
 @property (nonatomic, readonly) DBTEAMLOGEmailIngestPolicy *dNewValue;
 
-/// Previous email to my dropbox policy.
+/// From.
 @property (nonatomic, readonly) DBTEAMLOGEmailIngestPolicy *previousValue;
 
 #pragma mark - Constructors
@@ -39,8 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// Full constructor for the struct (exposes all instance variables).
 ///
-/// @param dNewValue New email to my dropbox policy.
-/// @param previousValue Previous email to my dropbox policy.
+/// @param dNewValue To.
+/// @param previousValue From.
 ///
 /// @return An initialized instance.
 ///

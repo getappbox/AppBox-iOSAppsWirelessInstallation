@@ -478,7 +478,7 @@
   } else if ([valueObj isExpiredAccessToken]) {
     jsonDict[@".tag"] = @"expired_access_token";
   } else if ([valueObj isMissingScope]) {
-    jsonDict = [[DBAUTHTokenScopeErrorSerializer serialize:valueObj.missingScope] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBAUTHTokenScopeErrorSerializer serialize:valueObj.missingScope]];
     jsonDict[@".tag"] = @"missing_scope";
   } else if ([valueObj isRouteAccessDenied]) {
     jsonDict[@".tag"] = @"route_access_denied";

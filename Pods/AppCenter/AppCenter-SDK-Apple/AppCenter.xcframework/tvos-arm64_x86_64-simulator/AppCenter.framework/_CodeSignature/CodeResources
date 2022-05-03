@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/AppCenter.h</key>
 		<data>
-		w9sW6K7DVhGfORLCjGXijaR25m0=
+		MdFKslsEaiDj7VrHH0AK8RZFShc=
 		</data>
 		<key>Headers/MSACAbstractLog.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/MSACAppCenter.h</key>
 		<data>
-		2cUgfgx3odOGivdk+n6FXq94KgU=
+		wHZGyUCGolziH5LQW/TKihfSwFQ=
 		</data>
 		<key>Headers/MSACAppCenterErrors.h</key>
 		<data>
@@ -35,10 +35,6 @@
 		<key>Headers/MSACConstants.h</key>
 		<data>
 		d9HwKA0/VH3+pLRj1Pd49mqn2gI=
-		</data>
-		<key>Headers/MSACCustomProperties.h</key>
-		<data>
-		m7A9hEgL3d0gV4SyKmXJYRtwqoQ=
 		</data>
 		<key>Headers/MSACDevice.h</key>
 		<data>
@@ -82,7 +78,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		nu+ldEv5cj3rjniF8N9Pt71xz68=
+		wd1RUkZSuCtGq3Z67d33I5aJpZI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -99,11 +95,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			w9sW6K7DVhGfORLCjGXijaR25m0=
+			MdFKslsEaiDj7VrHH0AK8RZFShc=
 			</data>
 			<key>hash2</key>
 			<data>
-			e9qe35Ew1pz0RMBfwa2Jv+3188p8iTwwktkIgCa/ztg=
+			RfqZWIVdKOxINHcdzLkKsHtMHY+KN9iyLcD5TX2Jgro=
 			</data>
 		</dict>
 		<key>Headers/MSACAbstractLog.h</key>
@@ -121,11 +117,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2cUgfgx3odOGivdk+n6FXq94KgU=
+			wHZGyUCGolziH5LQW/TKihfSwFQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			C10z0NrhN4J4qdWbypOdjlQ8QLlq4tvPMP21geOS4vI=
+			bzas4rtwYsHOrchA3GHb7dH+J6ibm6pns9HECn26uYc=
 			</data>
 		</dict>
 		<key>Headers/MSACAppCenterErrors.h</key>
@@ -181,17 +177,6 @@
 			<key>hash2</key>
 			<data>
 			xx69UfYa0qw6aSDuVsUAqd/1+t90QCPkQUae+elZwZ0=
-			</data>
-		</dict>
-		<key>Headers/MSACCustomProperties.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			m7A9hEgL3d0gV4SyKmXJYRtwqoQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			FveTXq+kqUdHHlSdLAoQisgT+95bzAuXTrTOQG/b/P8=
 			</data>
 		</dict>
 		<key>Headers/MSACDevice.h</key>

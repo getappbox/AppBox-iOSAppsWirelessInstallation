@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// states with which the `DBTEAMLOGSharingLinkPolicy` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag){
     /// (no description).
+    DBTEAMLOGSharingLinkPolicyDefaultNoOne,
+
+    /// (no description).
     DBTEAMLOGSharingLinkPolicyDefaultPrivate,
 
     /// (no description).
@@ -48,6 +51,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag){
 @property (nonatomic, readonly) DBTEAMLOGSharingLinkPolicyTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "default_no_one".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDefaultNoOne;
 
 ///
 /// Initializes union class with tag state of "default_private".
@@ -80,6 +90,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGSharingLinkPolicyTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "default_no_one".
+///
+/// @return Whether the union's current tag state has value "default_no_one".
+///
+- (BOOL)isDefaultNoOne;
 
 ///
 /// Retrieves whether the union's current tag state has value "default_private".

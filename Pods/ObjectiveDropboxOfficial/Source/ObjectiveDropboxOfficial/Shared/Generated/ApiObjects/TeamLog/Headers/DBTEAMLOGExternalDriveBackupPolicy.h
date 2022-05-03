@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGExternalDriveBackupPolicyTag){
     /// (no description).
+    DBTEAMLOGExternalDriveBackupPolicyDefault_,
+
+    /// (no description).
     DBTEAMLOGExternalDriveBackupPolicyDisabled,
 
     /// (no description).
@@ -46,6 +49,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGExternalDriveBackupPolicyTag){
 @property (nonatomic, readonly) DBTEAMLOGExternalDriveBackupPolicyTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "default".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDefault_;
 
 ///
 /// Initializes union class with tag state of "disabled".
@@ -71,6 +81,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGExternalDriveBackupPolicyTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "default".
+///
+/// @return Whether the union's current tag state has value "default".
+///
+- (BOOL)isDefault_;
 
 ///
 /// Retrieves whether the union's current tag state has value "disabled".

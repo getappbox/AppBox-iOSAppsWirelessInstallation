@@ -16,7 +16,6 @@
 @implementation DBRpcTaskImpl {
   DBRpcTaskImpl *_selfRetained;
   DBRpcResponseBlockImpl _responseBlock;
-  id<DBURLSessionTask> _task;
 }
 
 - (instancetype)initWithTask:(id<DBURLSessionTask>)task tokenUid:(NSString *)tokenUid route:(DBRoute *)route {
@@ -26,6 +25,10 @@
     _selfRetained = self;
   }
   return self;
+}
+
+- (NSURLSession *)session {
+  return _task.session;
 }
 
 - (void)cancel {

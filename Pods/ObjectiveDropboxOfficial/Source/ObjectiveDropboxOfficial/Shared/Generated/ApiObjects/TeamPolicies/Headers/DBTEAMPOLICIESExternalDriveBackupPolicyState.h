@@ -35,6 +35,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESExternalDriveBackupPolicyStateTa
     /// External Drive Backup feature is enabled.
     DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled,
 
+    /// External Drive Backup default value based on team tier.
+    DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_,
+
     /// (no description).
     DBTEAMPOLICIESExternalDriveBackupPolicyStateOther,
 
@@ -66,6 +69,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESExternalDriveBackupPolicyStateTa
 - (instancetype)initWithEnabled;
 
 ///
+/// Initializes union class with tag state of "default".
+///
+/// Description of the "default" tag state: External Drive Backup default value
+/// based on team tier.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDefault_;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -89,6 +102,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESExternalDriveBackupPolicyStateTa
 /// @return Whether the union's current tag state has value "enabled".
 ///
 - (BOOL)isEnabled;
+
+///
+/// Retrieves whether the union's current tag state has value "default".
+///
+/// @return Whether the union's current tag state has value "default".
+///
+- (BOOL)isDefault_;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

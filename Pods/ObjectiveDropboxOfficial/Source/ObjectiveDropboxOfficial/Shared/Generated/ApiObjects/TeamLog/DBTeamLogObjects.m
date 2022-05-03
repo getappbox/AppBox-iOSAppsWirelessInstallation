@@ -296,22 +296,22 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isAdminConsole]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.adminConsole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.adminConsole]];
     jsonDict[@".tag"] = @"admin_console";
   } else if ([valueObj isApi]) {
-    jsonDict = [[DBTEAMLOGApiSessionLogInfoSerializer serialize:valueObj.api] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGApiSessionLogInfoSerializer serialize:valueObj.api]];
     jsonDict[@".tag"] = @"api";
   } else if ([valueObj isContentManager]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.contentManager] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.contentManager]];
     jsonDict[@".tag"] = @"content_manager";
   } else if ([valueObj isEndUser]) {
     jsonDict[@"end_user"] = [[DBTEAMLOGSessionLogInfoSerializer serialize:valueObj.endUser] mutableCopy];
     jsonDict[@".tag"] = @"end_user";
   } else if ([valueObj isEnterpriseConsole]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.enterpriseConsole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.enterpriseConsole]];
     jsonDict[@".tag"] = @"enterprise_console";
   } else if ([valueObj isSignInAs]) {
-    jsonDict = [[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.signInAs] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionLogInfoSerializer serialize:valueObj.signInAs]];
     jsonDict[@".tag"] = @"sign_in_as";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -2563,10 +2563,10 @@
         [[DBTEAMLOGMemberRemoveActionTypeSerializer serialize:valueObj.removeAction] mutableCopy];
     jsonDict[@".tag"] = @"remove_action";
   } else if ([valueObj isTeamInviteDetails]) {
-    jsonDict = [[DBTEAMLOGTeamInviteDetailsSerializer serialize:valueObj.teamInviteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamInviteDetailsSerializer serialize:valueObj.teamInviteDetails]];
     jsonDict[@".tag"] = @"team_invite_details";
   } else if ([valueObj isTeamJoinDetails]) {
-    jsonDict = [[DBTEAMLOGJoinTeamDetailsSerializer serialize:valueObj.teamJoinDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGJoinTeamDetailsSerializer serialize:valueObj.teamJoinDetails]];
     jsonDict[@".tag"] = @"team_join_details";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -2877,7 +2877,7 @@
   } else if ([valueObj isDropbox]) {
     jsonDict[@".tag"] = @"dropbox";
   } else if ([valueObj isReseller]) {
-    jsonDict = [[DBTEAMLOGResellerLogInfoSerializer serialize:valueObj.reseller] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerLogInfoSerializer serialize:valueObj.reseller]];
     jsonDict[@".tag"] = @"reseller";
   } else if ([valueObj isUser]) {
     jsonDict[@"user"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.user] mutableCopy];
@@ -8304,19 +8304,20 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isFile]) {
-    jsonDict = [[DBTEAMLOGFileLogInfoSerializer serialize:valueObj.file] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLogInfoSerializer serialize:valueObj.file]];
     jsonDict[@".tag"] = @"file";
   } else if ([valueObj isFolder]) {
-    jsonDict = [[DBTEAMLOGFolderLogInfoSerializer serialize:valueObj.folder] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderLogInfoSerializer serialize:valueObj.folder]];
     jsonDict[@".tag"] = @"folder";
   } else if ([valueObj isPaperDocument]) {
-    jsonDict = [[DBTEAMLOGPaperDocumentLogInfoSerializer serialize:valueObj.paperDocument] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocumentLogInfoSerializer serialize:valueObj.paperDocument]];
     jsonDict[@".tag"] = @"paper_document";
   } else if ([valueObj isPaperFolder]) {
-    jsonDict = [[DBTEAMLOGPaperFolderLogInfoSerializer serialize:valueObj.paperFolder] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderLogInfoSerializer serialize:valueObj.paperFolder]];
     jsonDict[@".tag"] = @"paper_folder";
   } else if ([valueObj isShowcaseDocument]) {
-    jsonDict = [[DBTEAMLOGShowcaseDocumentLogInfoSerializer serialize:valueObj.showcaseDocument] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseDocumentLogInfoSerializer serialize:valueObj.showcaseDocument]];
     jsonDict[@".tag"] = @"showcase_document";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -14313,18 +14314,19 @@
   if ([valueObj isAnonymous]) {
     jsonDict[@".tag"] = @"anonymous";
   } else if ([valueObj isNonTeamMember]) {
-    jsonDict = [[DBTEAMLOGNonTeamMemberLogInfoSerializer serialize:valueObj.nonTeamMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNonTeamMemberLogInfoSerializer serialize:valueObj.nonTeamMember]];
     jsonDict[@".tag"] = @"non_team_member";
   } else if ([valueObj isOrganizationTeam]) {
-    jsonDict = [[DBTEAMLOGTeamLogInfoSerializer serialize:valueObj.organizationTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamLogInfoSerializer serialize:valueObj.organizationTeam]];
     jsonDict[@".tag"] = @"organization_team";
   } else if ([valueObj isTeam]) {
     jsonDict[@".tag"] = @"team";
   } else if ([valueObj isTeamMember]) {
-    jsonDict = [[DBTEAMLOGTeamMemberLogInfoSerializer serialize:valueObj.teamMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMemberLogInfoSerializer serialize:valueObj.teamMember]];
     jsonDict[@".tag"] = @"team_member";
   } else if ([valueObj isTrustedNonTeamMember]) {
-    jsonDict = [[DBTEAMLOGTrustedNonTeamMemberLogInfoSerializer serialize:valueObj.trustedNonTeamMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTrustedNonTeamMemberLogInfoSerializer
+                                           serialize:valueObj.trustedNonTeamMember]];
     jsonDict[@".tag"] = @"trusted_non_team_member";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -15173,6 +15175,390 @@
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGDataPlacementRestrictionSatisfyPolicyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDataResidencyMigrationRequestSuccessfulDetails:other];
+}
+
+- (BOOL)isEqualToDataResidencyMigrationRequestSuccessfulDetails:
+    (DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *)aDataResidencyMigrationRequestSuccessfulDetails {
+  if (self == aDataResidencyMigrationRequestSuccessfulDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestSuccessfulType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestSuccessfulType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDataResidencyMigrationRequestSuccessfulTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDataResidencyMigrationRequestSuccessfulTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDataResidencyMigrationRequestSuccessfulTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDataResidencyMigrationRequestSuccessfulType:other];
+}
+
+- (BOOL)isEqualToDataResidencyMigrationRequestSuccessfulType:
+    (DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)aDataResidencyMigrationRequestSuccessfulType {
+  if (self == aDataResidencyMigrationRequestSuccessfulType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aDataResidencyMigrationRequestSuccessfulType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestSuccessfulTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGDataResidencyMigrationRequestSuccessfulType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDataResidencyMigrationRequestUnsuccessfulDetails:other];
+}
+
+- (BOOL)isEqualToDataResidencyMigrationRequestUnsuccessfulDetails:
+    (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *)aDataResidencyMigrationRequestUnsuccessfulDetails {
+  if (self == aDataResidencyMigrationRequestUnsuccessfulDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDataResidencyMigrationRequestUnsuccessfulType:other];
+}
+
+- (BOOL)isEqualToDataResidencyMigrationRequestUnsuccessfulType:
+    (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)aDataResidencyMigrationRequestUnsuccessfulType {
+  if (self == aDataResidencyMigrationRequestUnsuccessfulType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aDataResidencyMigrationRequestUnsuccessfulType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -23672,6 +24058,418 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDefault_ {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGDropboxPasswordsPolicyDefault_;
+  }
+  return self;
+}
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGDropboxPasswordsPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGDropboxPasswordsPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGDropboxPasswordsPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDefault_ {
+  return _tag == DBTEAMLOGDropboxPasswordsPolicyDefault_;
+}
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGDropboxPasswordsPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGDropboxPasswordsPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGDropboxPasswordsPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGDropboxPasswordsPolicyDefault_:
+    return @"DBTEAMLOGDropboxPasswordsPolicyDefault_";
+  case DBTEAMLOGDropboxPasswordsPolicyDisabled:
+    return @"DBTEAMLOGDropboxPasswordsPolicyDisabled";
+  case DBTEAMLOGDropboxPasswordsPolicyEnabled:
+    return @"DBTEAMLOGDropboxPasswordsPolicyEnabled";
+  case DBTEAMLOGDropboxPasswordsPolicyOther:
+    return @"DBTEAMLOGDropboxPasswordsPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGDropboxPasswordsPolicyDefault_:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGDropboxPasswordsPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGDropboxPasswordsPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGDropboxPasswordsPolicyOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsPolicy:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsPolicy:(DBTEAMLOGDropboxPasswordsPolicy *)aDropboxPasswordsPolicy {
+  if (self == aDropboxPasswordsPolicy) {
+    return YES;
+  }
+  if (self.tag != aDropboxPasswordsPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGDropboxPasswordsPolicyDefault_:
+    return [[self tagName] isEqual:[aDropboxPasswordsPolicy tagName]];
+  case DBTEAMLOGDropboxPasswordsPolicyDisabled:
+    return [[self tagName] isEqual:[aDropboxPasswordsPolicy tagName]];
+  case DBTEAMLOGDropboxPasswordsPolicyEnabled:
+    return [[self tagName] isEqual:[aDropboxPasswordsPolicy tagName]];
+  case DBTEAMLOGDropboxPasswordsPolicyOther:
+    return [[self tagName] isEqual:[aDropboxPasswordsPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsPolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDefault_]) {
+    jsonDict[@".tag"] = @"default";
+  } else if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"default"]) {
+    return [[DBTEAMLOGDropboxPasswordsPolicy alloc] initWithDefault_];
+  } else if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGDropboxPasswordsPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGDropboxPasswordsPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGDropboxPasswordsPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGDropboxPasswordsPolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsPolicy.h"
+#import "DBTEAMLOGDropboxPasswordsPolicyChangedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsPolicyChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGDropboxPasswordsPolicy *)dNewValue
+                    previousValue:(DBTEAMLOGDropboxPasswordsPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsPolicyChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsPolicyChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsPolicyChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsPolicyChangedDetails:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsPolicyChangedDetails:
+    (DBTEAMLOGDropboxPasswordsPolicyChangedDetails *)aDropboxPasswordsPolicyChangedDetails {
+  if (self == aDropboxPasswordsPolicyChangedDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:aDropboxPasswordsPolicyChangedDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:aDropboxPasswordsPolicyChangedDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsPolicyChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsPolicyChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGDropboxPasswordsPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] = [DBTEAMLOGDropboxPasswordsPolicySerializer serialize:valueObj.previousValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsPolicyChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGDropboxPasswordsPolicy *dNewValue =
+      [DBTEAMLOGDropboxPasswordsPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGDropboxPasswordsPolicy *previousValue =
+      [DBTEAMLOGDropboxPasswordsPolicySerializer deserialize:valueDict[@"previous_value"]];
+
+  return
+      [[DBTEAMLOGDropboxPasswordsPolicyChangedDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDropboxPasswordsPolicyChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGDropboxPasswordsPolicyChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGDropboxPasswordsPolicyChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGDropboxPasswordsPolicyChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGDropboxPasswordsPolicyChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToDropboxPasswordsPolicyChangedType:other];
+}
+
+- (BOOL)isEqualToDropboxPasswordsPolicyChangedType:
+    (DBTEAMLOGDropboxPasswordsPolicyChangedType *)aDropboxPasswordsPolicyChangedType {
+  if (self == aDropboxPasswordsPolicyChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:aDropboxPasswordsPolicyChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGDropboxPasswordsPolicyChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGDropboxPasswordsPolicyChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGDropboxPasswordsPolicyChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGDropboxPasswordsPolicyChangedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGDurationLogInfo.h"
 #import "DBTEAMLOGTimeUnit.h"
 
@@ -27473,6 +28271,8 @@
 #import "DBTEAMLOGCreateTeamInviteLinkDetails.h"
 #import "DBTEAMLOGDataPlacementRestrictionChangePolicyDetails.h"
 #import "DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetails.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails.h"
 #import "DBTEAMLOGDeleteTeamInviteLinkDetails.h"
 #import "DBTEAMLOGDeviceApprovalsAddExceptionDetails.h"
 #import "DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetails.h"
@@ -27505,6 +28305,7 @@
 #import "DBTEAMLOGDomainVerificationRemoveDomainDetails.h"
 #import "DBTEAMLOGDropboxPasswordsExportedDetails.h"
 #import "DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetails.h"
+#import "DBTEAMLOGDropboxPasswordsPolicyChangedDetails.h"
 #import "DBTEAMLOGEmailIngestPolicyChangedDetails.h"
 #import "DBTEAMLOGEmailIngestReceiveFileDetails.h"
 #import "DBTEAMLOGEmmAddExceptionDetails.h"
@@ -27902,6 +28703,8 @@
 #import "DBTEAMLOGTfaRemoveSecurityKeyDetails.h"
 #import "DBTEAMLOGTfaResetDetails.h"
 #import "DBTEAMLOGTwoAccountChangePolicyDetails.h"
+#import "DBTEAMLOGUndoNamingConventionDetails.h"
+#import "DBTEAMLOGUndoOrganizeFolderWithTidyDetails.h"
 #import "DBTEAMLOGUserTagsAddedDetails.h"
 #import "DBTEAMLOGUserTagsRemovedDetails.h"
 #import "DBTEAMLOGViewerInfoPolicyChangedDetails.h"
@@ -28009,6 +28812,8 @@
 @synthesize objectLabelUpdatedValueDetails = _objectLabelUpdatedValueDetails;
 @synthesize organizeFolderWithTidyDetails = _organizeFolderWithTidyDetails;
 @synthesize rewindFolderDetails = _rewindFolderDetails;
+@synthesize undoNamingConventionDetails = _undoNamingConventionDetails;
+@synthesize undoOrganizeFolderWithTidyDetails = _undoOrganizeFolderWithTidyDetails;
 @synthesize userTagsAddedDetails = _userTagsAddedDetails;
 @synthesize userTagsRemovedDetails = _userTagsRemovedDetails;
 @synthesize emailIngestReceiveFileDetails = _emailIngestReceiveFileDetails;
@@ -28281,6 +29086,7 @@
 @synthesize deviceApprovalsRemoveExceptionDetails = _deviceApprovalsRemoveExceptionDetails;
 @synthesize directoryRestrictionsAddMembersDetails = _directoryRestrictionsAddMembersDetails;
 @synthesize directoryRestrictionsRemoveMembersDetails = _directoryRestrictionsRemoveMembersDetails;
+@synthesize dropboxPasswordsPolicyChangedDetails = _dropboxPasswordsPolicyChangedDetails;
 @synthesize emailIngestPolicyChangedDetails = _emailIngestPolicyChangedDetails;
 @synthesize emmAddExceptionDetails = _emmAddExceptionDetails;
 @synthesize emmChangePolicyDetails = _emmChangePolicyDetails;
@@ -28346,6 +29152,8 @@
 @synthesize webSessionsChangeActiveSessionLimitDetails = _webSessionsChangeActiveSessionLimitDetails;
 @synthesize webSessionsChangeFixedLengthPolicyDetails = _webSessionsChangeFixedLengthPolicyDetails;
 @synthesize webSessionsChangeIdleLengthPolicyDetails = _webSessionsChangeIdleLengthPolicyDetails;
+@synthesize dataResidencyMigrationRequestSuccessfulDetails = _dataResidencyMigrationRequestSuccessfulDetails;
+@synthesize dataResidencyMigrationRequestUnsuccessfulDetails = _dataResidencyMigrationRequestUnsuccessfulDetails;
 @synthesize teamMergeFromDetails = _teamMergeFromDetails;
 @synthesize teamMergeToDetails = _teamMergeToDetails;
 @synthesize teamProfileAddBackgroundDetails = _teamProfileAddBackgroundDetails;
@@ -29308,6 +30116,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsRewindFolderDetails;
     _rewindFolderDetails = rewindFolderDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithUndoNamingConventionDetails:
+    (DBTEAMLOGUndoNamingConventionDetails *)undoNamingConventionDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsUndoNamingConventionDetails;
+    _undoNamingConventionDetails = undoNamingConventionDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithUndoOrganizeFolderWithTidyDetails:
+    (DBTEAMLOGUndoOrganizeFolderWithTidyDetails *)undoOrganizeFolderWithTidyDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails;
+    _undoOrganizeFolderWithTidyDetails = undoOrganizeFolderWithTidyDetails;
   }
   return self;
 }
@@ -31921,6 +32749,16 @@
   return self;
 }
 
+- (instancetype)initWithDropboxPasswordsPolicyChangedDetails:
+    (DBTEAMLOGDropboxPasswordsPolicyChangedDetails *)dropboxPasswordsPolicyChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails;
+    _dropboxPasswordsPolicyChangedDetails = dropboxPasswordsPolicyChangedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithEmailIngestPolicyChangedDetails:
     (DBTEAMLOGEmailIngestPolicyChangedDetails *)emailIngestPolicyChangedDetails {
   self = [super init];
@@ -32557,6 +33395,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails;
     _webSessionsChangeIdleLengthPolicyDetails = webSessionsChangeIdleLengthPolicyDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataResidencyMigrationRequestSuccessfulDetails:
+    (DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *)dataResidencyMigrationRequestSuccessfulDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails;
+    _dataResidencyMigrationRequestSuccessfulDetails = dataResidencyMigrationRequestSuccessfulDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataResidencyMigrationRequestUnsuccessfulDetails:
+    (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *)dataResidencyMigrationRequestUnsuccessfulDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails;
+    _dataResidencyMigrationRequestUnsuccessfulDetails = dataResidencyMigrationRequestUnsuccessfulDetails;
   }
   return self;
 }
@@ -33849,6 +34707,24 @@
                 format:@"Invalid tag: required DBTEAMLOGEventDetailsRewindFolderDetails, but was %@.", [self tagName]];
   }
   return _rewindFolderDetails;
+}
+
+- (DBTEAMLOGUndoNamingConventionDetails *)undoNamingConventionDetails {
+  if (![self isUndoNamingConventionDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsUndoNamingConventionDetails, but was %@.", [self tagName]];
+  }
+  return _undoNamingConventionDetails;
+}
+
+- (DBTEAMLOGUndoOrganizeFolderWithTidyDetails *)undoOrganizeFolderWithTidyDetails {
+  if (![self isUndoOrganizeFolderWithTidyDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _undoOrganizeFolderWithTidyDetails;
 }
 
 - (DBTEAMLOGUserTagsAddedDetails *)userTagsAddedDetails {
@@ -36309,6 +37185,15 @@
   return _directoryRestrictionsRemoveMembersDetails;
 }
 
+- (DBTEAMLOGDropboxPasswordsPolicyChangedDetails *)dropboxPasswordsPolicyChangedDetails {
+  if (![self isDropboxPasswordsPolicyChangedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _dropboxPasswordsPolicyChangedDetails;
+}
+
 - (DBTEAMLOGEmailIngestPolicyChangedDetails *)emailIngestPolicyChangedDetails {
   if (![self isEmailIngestPolicyChangedDetails]) {
     [NSException raise:@"IllegalStateException"
@@ -36910,6 +37795,26 @@
                [self tagName]];
   }
   return _webSessionsChangeIdleLengthPolicyDetails;
+}
+
+- (DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *)dataResidencyMigrationRequestSuccessfulDetails {
+  if (![self isDataResidencyMigrationRequestSuccessfulDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails, "
+                       @"but was %@.",
+                       [self tagName]];
+  }
+  return _dataResidencyMigrationRequestSuccessfulDetails;
+}
+
+- (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *)dataResidencyMigrationRequestUnsuccessfulDetails {
+  if (![self isDataResidencyMigrationRequestUnsuccessfulDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails, "
+                       @"but was %@.",
+                       [self tagName]];
+  }
+  return _dataResidencyMigrationRequestUnsuccessfulDetails;
 }
 
 - (DBTEAMLOGTeamMergeFromDetails *)teamMergeFromDetails {
@@ -37690,6 +38595,14 @@
 
 - (BOOL)isRewindFolderDetails {
   return _tag == DBTEAMLOGEventDetailsRewindFolderDetails;
+}
+
+- (BOOL)isUndoNamingConventionDetails {
+  return _tag == DBTEAMLOGEventDetailsUndoNamingConventionDetails;
+}
+
+- (BOOL)isUndoOrganizeFolderWithTidyDetails {
+  return _tag == DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails;
 }
 
 - (BOOL)isUserTagsAddedDetails {
@@ -38780,6 +39693,10 @@
   return _tag == DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails;
 }
 
+- (BOOL)isDropboxPasswordsPolicyChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails;
+}
+
 - (BOOL)isEmailIngestPolicyChangedDetails {
   return _tag == DBTEAMLOGEventDetailsEmailIngestPolicyChangedDetails;
 }
@@ -39038,6 +39955,14 @@
 
 - (BOOL)isWebSessionsChangeIdleLengthPolicyDetails {
   return _tag == DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails;
+}
+
+- (BOOL)isDataResidencyMigrationRequestSuccessfulDetails {
+  return _tag == DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails;
+}
+
+- (BOOL)isDataResidencyMigrationRequestUnsuccessfulDetails {
+  return _tag == DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails;
 }
 
 - (BOOL)isTeamMergeFromDetails {
@@ -39408,6 +40333,10 @@
     return @"DBTEAMLOGEventDetailsOrganizeFolderWithTidyDetails";
   case DBTEAMLOGEventDetailsRewindFolderDetails:
     return @"DBTEAMLOGEventDetailsRewindFolderDetails";
+  case DBTEAMLOGEventDetailsUndoNamingConventionDetails:
+    return @"DBTEAMLOGEventDetailsUndoNamingConventionDetails";
+  case DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails:
+    return @"DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails";
   case DBTEAMLOGEventDetailsUserTagsAddedDetails:
     return @"DBTEAMLOGEventDetailsUserTagsAddedDetails";
   case DBTEAMLOGEventDetailsUserTagsRemovedDetails:
@@ -39952,6 +40881,8 @@
     return @"DBTEAMLOGEventDetailsDirectoryRestrictionsAddMembersDetails";
   case DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails:
     return @"DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails";
+  case DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails:
+    return @"DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails";
   case DBTEAMLOGEventDetailsEmailIngestPolicyChangedDetails:
     return @"DBTEAMLOGEventDetailsEmailIngestPolicyChangedDetails";
   case DBTEAMLOGEventDetailsEmmAddExceptionDetails:
@@ -40082,6 +41013,10 @@
     return @"DBTEAMLOGEventDetailsWebSessionsChangeFixedLengthPolicyDetails";
   case DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails:
     return @"DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails";
+  case DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails:
+    return @"DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails";
+  case DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails:
+    return @"DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails";
   case DBTEAMLOGEventDetailsTeamMergeFromDetails:
     return @"DBTEAMLOGEventDetailsTeamMergeFromDetails";
   case DBTEAMLOGEventDetailsTeamMergeToDetails:
@@ -40490,6 +41425,12 @@
     break;
   case DBTEAMLOGEventDetailsRewindFolderDetails:
     result = prime * result + [self.rewindFolderDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsUndoNamingConventionDetails:
+    result = prime * result + [self.undoNamingConventionDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails:
+    result = prime * result + [self.undoOrganizeFolderWithTidyDetails hash];
     break;
   case DBTEAMLOGEventDetailsUserTagsAddedDetails:
     result = prime * result + [self.userTagsAddedDetails hash];
@@ -41307,6 +42248,9 @@
   case DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails:
     result = prime * result + [self.directoryRestrictionsRemoveMembersDetails hash];
     break;
+  case DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails:
+    result = prime * result + [self.dropboxPasswordsPolicyChangedDetails hash];
+    break;
   case DBTEAMLOGEventDetailsEmailIngestPolicyChangedDetails:
     result = prime * result + [self.emailIngestPolicyChangedDetails hash];
     break;
@@ -41501,6 +42445,12 @@
     break;
   case DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails:
     result = prime * result + [self.webSessionsChangeIdleLengthPolicyDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails:
+    result = prime * result + [self.dataResidencyMigrationRequestSuccessfulDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails:
+    result = prime * result + [self.dataResidencyMigrationRequestUnsuccessfulDetails hash];
     break;
   case DBTEAMLOGEventDetailsTeamMergeFromDetails:
     result = prime * result + [self.teamMergeFromDetails hash];
@@ -41859,6 +42809,10 @@
     return [self.organizeFolderWithTidyDetails isEqual:anEventDetails.organizeFolderWithTidyDetails];
   case DBTEAMLOGEventDetailsRewindFolderDetails:
     return [self.rewindFolderDetails isEqual:anEventDetails.rewindFolderDetails];
+  case DBTEAMLOGEventDetailsUndoNamingConventionDetails:
+    return [self.undoNamingConventionDetails isEqual:anEventDetails.undoNamingConventionDetails];
+  case DBTEAMLOGEventDetailsUndoOrganizeFolderWithTidyDetails:
+    return [self.undoOrganizeFolderWithTidyDetails isEqual:anEventDetails.undoOrganizeFolderWithTidyDetails];
   case DBTEAMLOGEventDetailsUserTagsAddedDetails:
     return [self.userTagsAddedDetails isEqual:anEventDetails.userTagsAddedDetails];
   case DBTEAMLOGEventDetailsUserTagsRemovedDetails:
@@ -42432,6 +43386,8 @@
   case DBTEAMLOGEventDetailsDirectoryRestrictionsRemoveMembersDetails:
     return [self.directoryRestrictionsRemoveMembersDetails
         isEqual:anEventDetails.directoryRestrictionsRemoveMembersDetails];
+  case DBTEAMLOGEventDetailsDropboxPasswordsPolicyChangedDetails:
+    return [self.dropboxPasswordsPolicyChangedDetails isEqual:anEventDetails.dropboxPasswordsPolicyChangedDetails];
   case DBTEAMLOGEventDetailsEmailIngestPolicyChangedDetails:
     return [self.emailIngestPolicyChangedDetails isEqual:anEventDetails.emailIngestPolicyChangedDetails];
   case DBTEAMLOGEventDetailsEmmAddExceptionDetails:
@@ -42578,6 +43534,12 @@
   case DBTEAMLOGEventDetailsWebSessionsChangeIdleLengthPolicyDetails:
     return
         [self.webSessionsChangeIdleLengthPolicyDetails isEqual:anEventDetails.webSessionsChangeIdleLengthPolicyDetails];
+  case DBTEAMLOGEventDetailsDataResidencyMigrationRequestSuccessfulDetails:
+    return [self.dataResidencyMigrationRequestSuccessfulDetails
+        isEqual:anEventDetails.dataResidencyMigrationRequestSuccessfulDetails];
+  case DBTEAMLOGEventDetailsDataResidencyMigrationRequestUnsuccessfulDetails:
+    return [self.dataResidencyMigrationRequestUnsuccessfulDetails
+        isEqual:anEventDetails.dataResidencyMigrationRequestUnsuccessfulDetails];
   case DBTEAMLOGEventDetailsTeamMergeFromDetails:
     return [self.teamMergeFromDetails isEqual:anEventDetails.teamMergeFromDetails];
   case DBTEAMLOGEventDetailsTeamMergeToDetails:
@@ -42695,1780 +43657,1886 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isAdminAlertingAlertStateChangedDetails]) {
-    jsonDict = [[DBTEAMLOGAdminAlertingAlertStateChangedDetailsSerializer
-        serialize:valueObj.adminAlertingAlertStateChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingAlertStateChangedDetailsSerializer
+                                           serialize:valueObj.adminAlertingAlertStateChangedDetails]];
     jsonDict[@".tag"] = @"admin_alerting_alert_state_changed_details";
   } else if ([valueObj isAdminAlertingChangedAlertConfigDetails]) {
-    jsonDict = [[DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer
-        serialize:valueObj.adminAlertingChangedAlertConfigDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingChangedAlertConfigDetailsSerializer
+                                           serialize:valueObj.adminAlertingChangedAlertConfigDetails]];
     jsonDict[@".tag"] = @"admin_alerting_changed_alert_config_details";
   } else if ([valueObj isAdminAlertingTriggeredAlertDetails]) {
-    jsonDict = [[DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer
-        serialize:valueObj.adminAlertingTriggeredAlertDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingTriggeredAlertDetailsSerializer
+                                           serialize:valueObj.adminAlertingTriggeredAlertDetails]];
     jsonDict[@".tag"] = @"admin_alerting_triggered_alert_details";
   } else if ([valueObj isAppBlockedByPermissionsDetails]) {
-    jsonDict = [[DBTEAMLOGAppBlockedByPermissionsDetailsSerializer serialize:valueObj.appBlockedByPermissionsDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppBlockedByPermissionsDetailsSerializer
+                                           serialize:valueObj.appBlockedByPermissionsDetails]];
     jsonDict[@".tag"] = @"app_blocked_by_permissions_details";
   } else if ([valueObj isAppLinkTeamDetails]) {
-    jsonDict = [[DBTEAMLOGAppLinkTeamDetailsSerializer serialize:valueObj.appLinkTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppLinkTeamDetailsSerializer serialize:valueObj.appLinkTeamDetails]];
     jsonDict[@".tag"] = @"app_link_team_details";
   } else if ([valueObj isAppLinkUserDetails]) {
-    jsonDict = [[DBTEAMLOGAppLinkUserDetailsSerializer serialize:valueObj.appLinkUserDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppLinkUserDetailsSerializer serialize:valueObj.appLinkUserDetails]];
     jsonDict[@".tag"] = @"app_link_user_details";
   } else if ([valueObj isAppUnlinkTeamDetails]) {
-    jsonDict = [[DBTEAMLOGAppUnlinkTeamDetailsSerializer serialize:valueObj.appUnlinkTeamDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGAppUnlinkTeamDetailsSerializer serialize:valueObj.appUnlinkTeamDetails]];
     jsonDict[@".tag"] = @"app_unlink_team_details";
   } else if ([valueObj isAppUnlinkUserDetails]) {
-    jsonDict = [[DBTEAMLOGAppUnlinkUserDetailsSerializer serialize:valueObj.appUnlinkUserDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGAppUnlinkUserDetailsSerializer serialize:valueObj.appUnlinkUserDetails]];
     jsonDict[@".tag"] = @"app_unlink_user_details";
   } else if ([valueObj isIntegrationConnectedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGIntegrationConnectedDetailsSerializer serialize:valueObj.integrationConnectedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGIntegrationConnectedDetailsSerializer
+                                           serialize:valueObj.integrationConnectedDetails]];
     jsonDict[@".tag"] = @"integration_connected_details";
   } else if ([valueObj isIntegrationDisconnectedDetails]) {
-    jsonDict = [[DBTEAMLOGIntegrationDisconnectedDetailsSerializer serialize:valueObj.integrationDisconnectedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGIntegrationDisconnectedDetailsSerializer
+                                           serialize:valueObj.integrationDisconnectedDetails]];
     jsonDict[@".tag"] = @"integration_disconnected_details";
   } else if ([valueObj isFileAddCommentDetails]) {
-    jsonDict = [[DBTEAMLOGFileAddCommentDetailsSerializer serialize:valueObj.fileAddCommentDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileAddCommentDetailsSerializer serialize:valueObj.fileAddCommentDetails]];
     jsonDict[@".tag"] = @"file_add_comment_details";
   } else if ([valueObj isFileChangeCommentSubscriptionDetails]) {
-    jsonDict = [[DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer
-        serialize:valueObj.fileChangeCommentSubscriptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileChangeCommentSubscriptionDetailsSerializer
+                                           serialize:valueObj.fileChangeCommentSubscriptionDetails]];
     jsonDict[@".tag"] = @"file_change_comment_subscription_details";
   } else if ([valueObj isFileDeleteCommentDetails]) {
-    jsonDict = [[DBTEAMLOGFileDeleteCommentDetailsSerializer serialize:valueObj.fileDeleteCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileDeleteCommentDetailsSerializer
+                                           serialize:valueObj.fileDeleteCommentDetails]];
     jsonDict[@".tag"] = @"file_delete_comment_details";
   } else if ([valueObj isFileEditCommentDetails]) {
-    jsonDict = [[DBTEAMLOGFileEditCommentDetailsSerializer serialize:valueObj.fileEditCommentDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileEditCommentDetailsSerializer serialize:valueObj.fileEditCommentDetails]];
     jsonDict[@".tag"] = @"file_edit_comment_details";
   } else if ([valueObj isFileLikeCommentDetails]) {
-    jsonDict = [[DBTEAMLOGFileLikeCommentDetailsSerializer serialize:valueObj.fileLikeCommentDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileLikeCommentDetailsSerializer serialize:valueObj.fileLikeCommentDetails]];
     jsonDict[@".tag"] = @"file_like_comment_details";
   } else if ([valueObj isFileResolveCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFileResolveCommentDetailsSerializer serialize:valueObj.fileResolveCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileResolveCommentDetailsSerializer
+                                           serialize:valueObj.fileResolveCommentDetails]];
     jsonDict[@".tag"] = @"file_resolve_comment_details";
   } else if ([valueObj isFileUnlikeCommentDetails]) {
-    jsonDict = [[DBTEAMLOGFileUnlikeCommentDetailsSerializer serialize:valueObj.fileUnlikeCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileUnlikeCommentDetailsSerializer
+                                           serialize:valueObj.fileUnlikeCommentDetails]];
     jsonDict[@".tag"] = @"file_unlike_comment_details";
   } else if ([valueObj isFileUnresolveCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFileUnresolveCommentDetailsSerializer serialize:valueObj.fileUnresolveCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileUnresolveCommentDetailsSerializer
+                                           serialize:valueObj.fileUnresolveCommentDetails]];
     jsonDict[@".tag"] = @"file_unresolve_comment_details";
   } else if ([valueObj isGovernancePolicyAddFoldersDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer
-        serialize:valueObj.governancePolicyAddFoldersDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyAddFoldersDetailsSerializer
+                                           serialize:valueObj.governancePolicyAddFoldersDetails]];
     jsonDict[@".tag"] = @"governance_policy_add_folders_details";
   } else if ([valueObj isGovernancePolicyAddFolderFailedDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer
-        serialize:valueObj.governancePolicyAddFolderFailedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyAddFolderFailedDetailsSerializer
+                                           serialize:valueObj.governancePolicyAddFolderFailedDetails]];
     jsonDict[@".tag"] = @"governance_policy_add_folder_failed_details";
   } else if ([valueObj isGovernancePolicyContentDisposedDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyContentDisposedDetailsSerializer
-        serialize:valueObj.governancePolicyContentDisposedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyContentDisposedDetailsSerializer
+                                           serialize:valueObj.governancePolicyContentDisposedDetails]];
     jsonDict[@".tag"] = @"governance_policy_content_disposed_details";
   } else if ([valueObj isGovernancePolicyCreateDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyCreateDetailsSerializer serialize:valueObj.governancePolicyCreateDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyCreateDetailsSerializer
+                                           serialize:valueObj.governancePolicyCreateDetails]];
     jsonDict[@".tag"] = @"governance_policy_create_details";
   } else if ([valueObj isGovernancePolicyDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyDeleteDetailsSerializer serialize:valueObj.governancePolicyDeleteDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyDeleteDetailsSerializer
+                                           serialize:valueObj.governancePolicyDeleteDetails]];
     jsonDict[@".tag"] = @"governance_policy_delete_details";
   } else if ([valueObj isGovernancePolicyEditDetailsDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer
-        serialize:valueObj.governancePolicyEditDetailsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyEditDetailsDetailsSerializer
+                                           serialize:valueObj.governancePolicyEditDetailsDetails]];
     jsonDict[@".tag"] = @"governance_policy_edit_details_details";
   } else if ([valueObj isGovernancePolicyEditDurationDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer
-        serialize:valueObj.governancePolicyEditDurationDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyEditDurationDetailsSerializer
+                                           serialize:valueObj.governancePolicyEditDurationDetails]];
     jsonDict[@".tag"] = @"governance_policy_edit_duration_details";
   } else if ([valueObj isGovernancePolicyExportCreatedDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer
-        serialize:valueObj.governancePolicyExportCreatedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyExportCreatedDetailsSerializer
+                                           serialize:valueObj.governancePolicyExportCreatedDetails]];
     jsonDict[@".tag"] = @"governance_policy_export_created_details";
   } else if ([valueObj isGovernancePolicyExportRemovedDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer
-        serialize:valueObj.governancePolicyExportRemovedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyExportRemovedDetailsSerializer
+                                           serialize:valueObj.governancePolicyExportRemovedDetails]];
     jsonDict[@".tag"] = @"governance_policy_export_removed_details";
   } else if ([valueObj isGovernancePolicyRemoveFoldersDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer
-        serialize:valueObj.governancePolicyRemoveFoldersDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyRemoveFoldersDetailsSerializer
+                                           serialize:valueObj.governancePolicyRemoveFoldersDetails]];
     jsonDict[@".tag"] = @"governance_policy_remove_folders_details";
   } else if ([valueObj isGovernancePolicyReportCreatedDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer
-        serialize:valueObj.governancePolicyReportCreatedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyReportCreatedDetailsSerializer
+                                           serialize:valueObj.governancePolicyReportCreatedDetails]];
     jsonDict[@".tag"] = @"governance_policy_report_created_details";
   } else if ([valueObj isGovernancePolicyZipPartDownloadedDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer
-        serialize:valueObj.governancePolicyZipPartDownloadedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyZipPartDownloadedDetailsSerializer
+                                           serialize:valueObj.governancePolicyZipPartDownloadedDetails]];
     jsonDict[@".tag"] = @"governance_policy_zip_part_downloaded_details";
   } else if ([valueObj isLegalHoldsActivateAHoldDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsActivateAHoldDetailsSerializer serialize:valueObj.legalHoldsActivateAHoldDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsActivateAHoldDetailsSerializer
+                                           serialize:valueObj.legalHoldsActivateAHoldDetails]];
     jsonDict[@".tag"] = @"legal_holds_activate_a_hold_details";
   } else if ([valueObj isLegalHoldsAddMembersDetails]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsAddMembersDetailsSerializer serialize:valueObj.legalHoldsAddMembersDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsAddMembersDetailsSerializer
+                                           serialize:valueObj.legalHoldsAddMembersDetails]];
     jsonDict[@".tag"] = @"legal_holds_add_members_details";
   } else if ([valueObj isLegalHoldsChangeHoldDetailsDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldDetailsDetailsSerializer
-        serialize:valueObj.legalHoldsChangeHoldDetailsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsChangeHoldDetailsDetailsSerializer
+                                           serialize:valueObj.legalHoldsChangeHoldDetailsDetails]];
     jsonDict[@".tag"] = @"legal_holds_change_hold_details_details";
   } else if ([valueObj isLegalHoldsChangeHoldNameDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldNameDetailsSerializer serialize:valueObj.legalHoldsChangeHoldNameDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsChangeHoldNameDetailsSerializer
+                                           serialize:valueObj.legalHoldsChangeHoldNameDetails]];
     jsonDict[@".tag"] = @"legal_holds_change_hold_name_details";
   } else if ([valueObj isLegalHoldsExportAHoldDetails]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportAHoldDetailsSerializer serialize:valueObj.legalHoldsExportAHoldDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportAHoldDetailsSerializer
+                                           serialize:valueObj.legalHoldsExportAHoldDetails]];
     jsonDict[@".tag"] = @"legal_holds_export_a_hold_details";
   } else if ([valueObj isLegalHoldsExportCancelledDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportCancelledDetailsSerializer
-        serialize:valueObj.legalHoldsExportCancelledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportCancelledDetailsSerializer
+                                           serialize:valueObj.legalHoldsExportCancelledDetails]];
     jsonDict[@".tag"] = @"legal_holds_export_cancelled_details";
   } else if ([valueObj isLegalHoldsExportDownloadedDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportDownloadedDetailsSerializer
-        serialize:valueObj.legalHoldsExportDownloadedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportDownloadedDetailsSerializer
+                                           serialize:valueObj.legalHoldsExportDownloadedDetails]];
     jsonDict[@".tag"] = @"legal_holds_export_downloaded_details";
   } else if ([valueObj isLegalHoldsExportRemovedDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportRemovedDetailsSerializer serialize:valueObj.legalHoldsExportRemovedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportRemovedDetailsSerializer
+                                           serialize:valueObj.legalHoldsExportRemovedDetails]];
     jsonDict[@".tag"] = @"legal_holds_export_removed_details";
   } else if ([valueObj isLegalHoldsReleaseAHoldDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsReleaseAHoldDetailsSerializer serialize:valueObj.legalHoldsReleaseAHoldDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsReleaseAHoldDetailsSerializer
+                                           serialize:valueObj.legalHoldsReleaseAHoldDetails]];
     jsonDict[@".tag"] = @"legal_holds_release_a_hold_details";
   } else if ([valueObj isLegalHoldsRemoveMembersDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsRemoveMembersDetailsSerializer serialize:valueObj.legalHoldsRemoveMembersDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsRemoveMembersDetailsSerializer
+                                           serialize:valueObj.legalHoldsRemoveMembersDetails]];
     jsonDict[@".tag"] = @"legal_holds_remove_members_details";
   } else if ([valueObj isLegalHoldsReportAHoldDetails]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsReportAHoldDetailsSerializer serialize:valueObj.legalHoldsReportAHoldDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsReportAHoldDetailsSerializer
+                                           serialize:valueObj.legalHoldsReportAHoldDetails]];
     jsonDict[@".tag"] = @"legal_holds_report_a_hold_details";
   } else if ([valueObj isDeviceChangeIpDesktopDetails]) {
-    jsonDict =
-        [[DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer serialize:valueObj.deviceChangeIpDesktopDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceChangeIpDesktopDetailsSerializer
+                                           serialize:valueObj.deviceChangeIpDesktopDetails]];
     jsonDict[@".tag"] = @"device_change_ip_desktop_details";
   } else if ([valueObj isDeviceChangeIpMobileDetails]) {
-    jsonDict =
-        [[DBTEAMLOGDeviceChangeIpMobileDetailsSerializer serialize:valueObj.deviceChangeIpMobileDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceChangeIpMobileDetailsSerializer
+                                           serialize:valueObj.deviceChangeIpMobileDetails]];
     jsonDict[@".tag"] = @"device_change_ip_mobile_details";
   } else if ([valueObj isDeviceChangeIpWebDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceChangeIpWebDetailsSerializer serialize:valueObj.deviceChangeIpWebDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceChangeIpWebDetailsSerializer
+                                           serialize:valueObj.deviceChangeIpWebDetails]];
     jsonDict[@".tag"] = @"device_change_ip_web_details";
   } else if ([valueObj isDeviceDeleteOnUnlinkFailDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceDeleteOnUnlinkFailDetailsSerializer serialize:valueObj.deviceDeleteOnUnlinkFailDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceDeleteOnUnlinkFailDetailsSerializer
+                                           serialize:valueObj.deviceDeleteOnUnlinkFailDetails]];
     jsonDict[@".tag"] = @"device_delete_on_unlink_fail_details";
   } else if ([valueObj isDeviceDeleteOnUnlinkSuccessDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceDeleteOnUnlinkSuccessDetailsSerializer
-        serialize:valueObj.deviceDeleteOnUnlinkSuccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceDeleteOnUnlinkSuccessDetailsSerializer
+                                           serialize:valueObj.deviceDeleteOnUnlinkSuccessDetails]];
     jsonDict[@".tag"] = @"device_delete_on_unlink_success_details";
   } else if ([valueObj isDeviceLinkFailDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceLinkFailDetailsSerializer serialize:valueObj.deviceLinkFailDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGDeviceLinkFailDetailsSerializer serialize:valueObj.deviceLinkFailDetails]];
     jsonDict[@".tag"] = @"device_link_fail_details";
   } else if ([valueObj isDeviceLinkSuccessDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceLinkSuccessDetailsSerializer serialize:valueObj.deviceLinkSuccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceLinkSuccessDetailsSerializer
+                                           serialize:valueObj.deviceLinkSuccessDetails]];
     jsonDict[@".tag"] = @"device_link_success_details";
   } else if ([valueObj isDeviceManagementDisabledDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceManagementDisabledDetailsSerializer serialize:valueObj.deviceManagementDisabledDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceManagementDisabledDetailsSerializer
+                                           serialize:valueObj.deviceManagementDisabledDetails]];
     jsonDict[@".tag"] = @"device_management_disabled_details";
   } else if ([valueObj isDeviceManagementEnabledDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceManagementEnabledDetailsSerializer serialize:valueObj.deviceManagementEnabledDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceManagementEnabledDetailsSerializer
+                                           serialize:valueObj.deviceManagementEnabledDetails]];
     jsonDict[@".tag"] = @"device_management_enabled_details";
   } else if ([valueObj isDeviceSyncBackupStatusChangedDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer
-        serialize:valueObj.deviceSyncBackupStatusChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceSyncBackupStatusChangedDetailsSerializer
+                                           serialize:valueObj.deviceSyncBackupStatusChangedDetails]];
     jsonDict[@".tag"] = @"device_sync_backup_status_changed_details";
   } else if ([valueObj isDeviceUnlinkDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceUnlinkDetailsSerializer serialize:valueObj.deviceUnlinkDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceUnlinkDetailsSerializer serialize:valueObj.deviceUnlinkDetails]];
     jsonDict[@".tag"] = @"device_unlink_details";
   } else if ([valueObj isDropboxPasswordsExportedDetails]) {
-    jsonDict = [[DBTEAMLOGDropboxPasswordsExportedDetailsSerializer serialize:valueObj.dropboxPasswordsExportedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDropboxPasswordsExportedDetailsSerializer
+                                           serialize:valueObj.dropboxPasswordsExportedDetails]];
     jsonDict[@".tag"] = @"dropbox_passwords_exported_details";
   } else if ([valueObj isDropboxPasswordsNewDeviceEnrolledDetails]) {
-    jsonDict = [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer
-        serialize:valueObj.dropboxPasswordsNewDeviceEnrolledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledDetailsSerializer
+                                           serialize:valueObj.dropboxPasswordsNewDeviceEnrolledDetails]];
     jsonDict[@".tag"] = @"dropbox_passwords_new_device_enrolled_details";
   } else if ([valueObj isEmmRefreshAuthTokenDetails]) {
-    jsonDict =
-        [[DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer serialize:valueObj.emmRefreshAuthTokenDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer
+                                           serialize:valueObj.emmRefreshAuthTokenDetails]];
     jsonDict[@".tag"] = @"emm_refresh_auth_token_details";
   } else if ([valueObj isAccountCaptureChangeAvailabilityDetails]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureChangeAvailabilityDetailsSerializer
-        serialize:valueObj.accountCaptureChangeAvailabilityDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangeAvailabilityDetailsSerializer
+                                           serialize:valueObj.accountCaptureChangeAvailabilityDetails]];
     jsonDict[@".tag"] = @"account_capture_change_availability_details";
   } else if ([valueObj isAccountCaptureMigrateAccountDetails]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureMigrateAccountDetailsSerializer
-        serialize:valueObj.accountCaptureMigrateAccountDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureMigrateAccountDetailsSerializer
+                                           serialize:valueObj.accountCaptureMigrateAccountDetails]];
     jsonDict[@".tag"] = @"account_capture_migrate_account_details";
   } else if ([valueObj isAccountCaptureNotificationEmailsSentDetails]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureNotificationEmailsSentDetailsSerializer
-        serialize:valueObj.accountCaptureNotificationEmailsSentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureNotificationEmailsSentDetailsSerializer
+                                           serialize:valueObj.accountCaptureNotificationEmailsSentDetails]];
     jsonDict[@".tag"] = @"account_capture_notification_emails_sent_details";
   } else if ([valueObj isAccountCaptureRelinquishAccountDetails]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureRelinquishAccountDetailsSerializer
-        serialize:valueObj.accountCaptureRelinquishAccountDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureRelinquishAccountDetailsSerializer
+                                           serialize:valueObj.accountCaptureRelinquishAccountDetails]];
     jsonDict[@".tag"] = @"account_capture_relinquish_account_details";
   } else if ([valueObj isDisabledDomainInvitesDetails]) {
-    jsonDict =
-        [[DBTEAMLOGDisabledDomainInvitesDetailsSerializer serialize:valueObj.disabledDomainInvitesDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDisabledDomainInvitesDetailsSerializer
+                                           serialize:valueObj.disabledDomainInvitesDetails]];
     jsonDict[@".tag"] = @"disabled_domain_invites_details";
   } else if ([valueObj isDomainInvitesApproveRequestToJoinTeamDetails]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesApproveRequestToJoinTeamDetailsSerializer
-        serialize:valueObj.domainInvitesApproveRequestToJoinTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesApproveRequestToJoinTeamDetailsSerializer
+                                           serialize:valueObj.domainInvitesApproveRequestToJoinTeamDetails]];
     jsonDict[@".tag"] = @"domain_invites_approve_request_to_join_team_details";
   } else if ([valueObj isDomainInvitesDeclineRequestToJoinTeamDetails]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamDetailsSerializer
-        serialize:valueObj.domainInvitesDeclineRequestToJoinTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamDetailsSerializer
+                                           serialize:valueObj.domainInvitesDeclineRequestToJoinTeamDetails]];
     jsonDict[@".tag"] = @"domain_invites_decline_request_to_join_team_details";
   } else if ([valueObj isDomainInvitesEmailExistingUsersDetails]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesEmailExistingUsersDetailsSerializer
-        serialize:valueObj.domainInvitesEmailExistingUsersDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesEmailExistingUsersDetailsSerializer
+                                           serialize:valueObj.domainInvitesEmailExistingUsersDetails]];
     jsonDict[@".tag"] = @"domain_invites_email_existing_users_details";
   } else if ([valueObj isDomainInvitesRequestToJoinTeamDetails]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesRequestToJoinTeamDetailsSerializer
-        serialize:valueObj.domainInvitesRequestToJoinTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesRequestToJoinTeamDetailsSerializer
+                                           serialize:valueObj.domainInvitesRequestToJoinTeamDetails]];
     jsonDict[@".tag"] = @"domain_invites_request_to_join_team_details";
   } else if ([valueObj isDomainInvitesSetInviteNewUserPrefToNoDetails]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoDetailsSerializer
-        serialize:valueObj.domainInvitesSetInviteNewUserPrefToNoDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoDetailsSerializer
+                                           serialize:valueObj.domainInvitesSetInviteNewUserPrefToNoDetails]];
     jsonDict[@".tag"] = @"domain_invites_set_invite_new_user_pref_to_no_details";
   } else if ([valueObj isDomainInvitesSetInviteNewUserPrefToYesDetails]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesDetailsSerializer
-        serialize:valueObj.domainInvitesSetInviteNewUserPrefToYesDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesDetailsSerializer
+                                           serialize:valueObj.domainInvitesSetInviteNewUserPrefToYesDetails]];
     jsonDict[@".tag"] = @"domain_invites_set_invite_new_user_pref_to_yes_details";
   } else if ([valueObj isDomainVerificationAddDomainFailDetails]) {
-    jsonDict = [[DBTEAMLOGDomainVerificationAddDomainFailDetailsSerializer
-        serialize:valueObj.domainVerificationAddDomainFailDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainVerificationAddDomainFailDetailsSerializer
+                                           serialize:valueObj.domainVerificationAddDomainFailDetails]];
     jsonDict[@".tag"] = @"domain_verification_add_domain_fail_details";
   } else if ([valueObj isDomainVerificationAddDomainSuccessDetails]) {
-    jsonDict = [[DBTEAMLOGDomainVerificationAddDomainSuccessDetailsSerializer
-        serialize:valueObj.domainVerificationAddDomainSuccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainVerificationAddDomainSuccessDetailsSerializer
+                                           serialize:valueObj.domainVerificationAddDomainSuccessDetails]];
     jsonDict[@".tag"] = @"domain_verification_add_domain_success_details";
   } else if ([valueObj isDomainVerificationRemoveDomainDetails]) {
-    jsonDict = [[DBTEAMLOGDomainVerificationRemoveDomainDetailsSerializer
-        serialize:valueObj.domainVerificationRemoveDomainDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainVerificationRemoveDomainDetailsSerializer
+                                           serialize:valueObj.domainVerificationRemoveDomainDetails]];
     jsonDict[@".tag"] = @"domain_verification_remove_domain_details";
   } else if ([valueObj isEnabledDomainInvitesDetails]) {
-    jsonDict =
-        [[DBTEAMLOGEnabledDomainInvitesDetailsSerializer serialize:valueObj.enabledDomainInvitesDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEnabledDomainInvitesDetailsSerializer
+                                           serialize:valueObj.enabledDomainInvitesDetails]];
     jsonDict[@".tag"] = @"enabled_domain_invites_details";
   } else if ([valueObj isApplyNamingConventionDetails]) {
-    jsonDict =
-        [[DBTEAMLOGApplyNamingConventionDetailsSerializer serialize:valueObj.applyNamingConventionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGApplyNamingConventionDetailsSerializer
+                                           serialize:valueObj.applyNamingConventionDetails]];
     jsonDict[@".tag"] = @"apply_naming_convention_details";
   } else if ([valueObj isCreateFolderDetails]) {
-    jsonDict = [[DBTEAMLOGCreateFolderDetailsSerializer serialize:valueObj.createFolderDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCreateFolderDetailsSerializer serialize:valueObj.createFolderDetails]];
     jsonDict[@".tag"] = @"create_folder_details";
   } else if ([valueObj isFileAddDetails]) {
-    jsonDict = [[DBTEAMLOGFileAddDetailsSerializer serialize:valueObj.fileAddDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddDetailsSerializer serialize:valueObj.fileAddDetails]];
     jsonDict[@".tag"] = @"file_add_details";
   } else if ([valueObj isFileCopyDetails]) {
-    jsonDict = [[DBTEAMLOGFileCopyDetailsSerializer serialize:valueObj.fileCopyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileCopyDetailsSerializer serialize:valueObj.fileCopyDetails]];
     jsonDict[@".tag"] = @"file_copy_details";
   } else if ([valueObj isFileDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGFileDeleteDetailsSerializer serialize:valueObj.fileDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileDeleteDetailsSerializer serialize:valueObj.fileDeleteDetails]];
     jsonDict[@".tag"] = @"file_delete_details";
   } else if ([valueObj isFileDownloadDetails]) {
-    jsonDict = [[DBTEAMLOGFileDownloadDetailsSerializer serialize:valueObj.fileDownloadDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileDownloadDetailsSerializer serialize:valueObj.fileDownloadDetails]];
     jsonDict[@".tag"] = @"file_download_details";
   } else if ([valueObj isFileEditDetails]) {
-    jsonDict = [[DBTEAMLOGFileEditDetailsSerializer serialize:valueObj.fileEditDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileEditDetailsSerializer serialize:valueObj.fileEditDetails]];
     jsonDict[@".tag"] = @"file_edit_details";
   } else if ([valueObj isFileGetCopyReferenceDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFileGetCopyReferenceDetailsSerializer serialize:valueObj.fileGetCopyReferenceDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileGetCopyReferenceDetailsSerializer
+                                           serialize:valueObj.fileGetCopyReferenceDetails]];
     jsonDict[@".tag"] = @"file_get_copy_reference_details";
   } else if ([valueObj isFileLockingLockStatusChangedDetails]) {
-    jsonDict = [[DBTEAMLOGFileLockingLockStatusChangedDetailsSerializer
-        serialize:valueObj.fileLockingLockStatusChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLockingLockStatusChangedDetailsSerializer
+                                           serialize:valueObj.fileLockingLockStatusChangedDetails]];
     jsonDict[@".tag"] = @"file_locking_lock_status_changed_details";
   } else if ([valueObj isFileMoveDetails]) {
-    jsonDict = [[DBTEAMLOGFileMoveDetailsSerializer serialize:valueObj.fileMoveDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileMoveDetailsSerializer serialize:valueObj.fileMoveDetails]];
     jsonDict[@".tag"] = @"file_move_details";
   } else if ([valueObj isFilePermanentlyDeleteDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFilePermanentlyDeleteDetailsSerializer serialize:valueObj.filePermanentlyDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFilePermanentlyDeleteDetailsSerializer
+                                           serialize:valueObj.filePermanentlyDeleteDetails]];
     jsonDict[@".tag"] = @"file_permanently_delete_details";
   } else if ([valueObj isFilePreviewDetails]) {
-    jsonDict = [[DBTEAMLOGFilePreviewDetailsSerializer serialize:valueObj.filePreviewDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFilePreviewDetailsSerializer serialize:valueObj.filePreviewDetails]];
     jsonDict[@".tag"] = @"file_preview_details";
   } else if ([valueObj isFileRenameDetails]) {
-    jsonDict = [[DBTEAMLOGFileRenameDetailsSerializer serialize:valueObj.fileRenameDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRenameDetailsSerializer serialize:valueObj.fileRenameDetails]];
     jsonDict[@".tag"] = @"file_rename_details";
   } else if ([valueObj isFileRestoreDetails]) {
-    jsonDict = [[DBTEAMLOGFileRestoreDetailsSerializer serialize:valueObj.fileRestoreDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRestoreDetailsSerializer serialize:valueObj.fileRestoreDetails]];
     jsonDict[@".tag"] = @"file_restore_details";
   } else if ([valueObj isFileRevertDetails]) {
-    jsonDict = [[DBTEAMLOGFileRevertDetailsSerializer serialize:valueObj.fileRevertDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRevertDetailsSerializer serialize:valueObj.fileRevertDetails]];
     jsonDict[@".tag"] = @"file_revert_details";
   } else if ([valueObj isFileRollbackChangesDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFileRollbackChangesDetailsSerializer serialize:valueObj.fileRollbackChangesDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRollbackChangesDetailsSerializer
+                                           serialize:valueObj.fileRollbackChangesDetails]];
     jsonDict[@".tag"] = @"file_rollback_changes_details";
   } else if ([valueObj isFileSaveCopyReferenceDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFileSaveCopyReferenceDetailsSerializer serialize:valueObj.fileSaveCopyReferenceDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileSaveCopyReferenceDetailsSerializer
+                                           serialize:valueObj.fileSaveCopyReferenceDetails]];
     jsonDict[@".tag"] = @"file_save_copy_reference_details";
   } else if ([valueObj isFolderOverviewDescriptionChangedDetails]) {
-    jsonDict = [[DBTEAMLOGFolderOverviewDescriptionChangedDetailsSerializer
-        serialize:valueObj.folderOverviewDescriptionChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderOverviewDescriptionChangedDetailsSerializer
+                                           serialize:valueObj.folderOverviewDescriptionChangedDetails]];
     jsonDict[@".tag"] = @"folder_overview_description_changed_details";
   } else if ([valueObj isFolderOverviewItemPinnedDetails]) {
-    jsonDict = [[DBTEAMLOGFolderOverviewItemPinnedDetailsSerializer serialize:valueObj.folderOverviewItemPinnedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderOverviewItemPinnedDetailsSerializer
+                                           serialize:valueObj.folderOverviewItemPinnedDetails]];
     jsonDict[@".tag"] = @"folder_overview_item_pinned_details";
   } else if ([valueObj isFolderOverviewItemUnpinnedDetails]) {
-    jsonDict = [[DBTEAMLOGFolderOverviewItemUnpinnedDetailsSerializer
-        serialize:valueObj.folderOverviewItemUnpinnedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderOverviewItemUnpinnedDetailsSerializer
+                                           serialize:valueObj.folderOverviewItemUnpinnedDetails]];
     jsonDict[@".tag"] = @"folder_overview_item_unpinned_details";
   } else if ([valueObj isObjectLabelAddedDetails]) {
-    jsonDict = [[DBTEAMLOGObjectLabelAddedDetailsSerializer serialize:valueObj.objectLabelAddedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGObjectLabelAddedDetailsSerializer
+                                           serialize:valueObj.objectLabelAddedDetails]];
     jsonDict[@".tag"] = @"object_label_added_details";
   } else if ([valueObj isObjectLabelRemovedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGObjectLabelRemovedDetailsSerializer serialize:valueObj.objectLabelRemovedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGObjectLabelRemovedDetailsSerializer
+                                           serialize:valueObj.objectLabelRemovedDetails]];
     jsonDict[@".tag"] = @"object_label_removed_details";
   } else if ([valueObj isObjectLabelUpdatedValueDetails]) {
-    jsonDict = [[DBTEAMLOGObjectLabelUpdatedValueDetailsSerializer serialize:valueObj.objectLabelUpdatedValueDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGObjectLabelUpdatedValueDetailsSerializer
+                                           serialize:valueObj.objectLabelUpdatedValueDetails]];
     jsonDict[@".tag"] = @"object_label_updated_value_details";
   } else if ([valueObj isOrganizeFolderWithTidyDetails]) {
-    jsonDict = [[DBTEAMLOGOrganizeFolderWithTidyDetailsSerializer serialize:valueObj.organizeFolderWithTidyDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOrganizeFolderWithTidyDetailsSerializer
+                                           serialize:valueObj.organizeFolderWithTidyDetails]];
     jsonDict[@".tag"] = @"organize_folder_with_tidy_details";
   } else if ([valueObj isRewindFolderDetails]) {
-    jsonDict = [[DBTEAMLOGRewindFolderDetailsSerializer serialize:valueObj.rewindFolderDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRewindFolderDetailsSerializer serialize:valueObj.rewindFolderDetails]];
     jsonDict[@".tag"] = @"rewind_folder_details";
+  } else if ([valueObj isUndoNamingConventionDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGUndoNamingConventionDetailsSerializer
+                                           serialize:valueObj.undoNamingConventionDetails]];
+    jsonDict[@".tag"] = @"undo_naming_convention_details";
+  } else if ([valueObj isUndoOrganizeFolderWithTidyDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGUndoOrganizeFolderWithTidyDetailsSerializer
+                                           serialize:valueObj.undoOrganizeFolderWithTidyDetails]];
+    jsonDict[@".tag"] = @"undo_organize_folder_with_tidy_details";
   } else if ([valueObj isUserTagsAddedDetails]) {
-    jsonDict = [[DBTEAMLOGUserTagsAddedDetailsSerializer serialize:valueObj.userTagsAddedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGUserTagsAddedDetailsSerializer serialize:valueObj.userTagsAddedDetails]];
     jsonDict[@".tag"] = @"user_tags_added_details";
   } else if ([valueObj isUserTagsRemovedDetails]) {
-    jsonDict = [[DBTEAMLOGUserTagsRemovedDetailsSerializer serialize:valueObj.userTagsRemovedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGUserTagsRemovedDetailsSerializer serialize:valueObj.userTagsRemovedDetails]];
     jsonDict[@".tag"] = @"user_tags_removed_details";
   } else if ([valueObj isEmailIngestReceiveFileDetails]) {
-    jsonDict = [[DBTEAMLOGEmailIngestReceiveFileDetailsSerializer serialize:valueObj.emailIngestReceiveFileDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmailIngestReceiveFileDetailsSerializer
+                                           serialize:valueObj.emailIngestReceiveFileDetails]];
     jsonDict[@".tag"] = @"email_ingest_receive_file_details";
   } else if ([valueObj isFileRequestChangeDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestChangeDetailsSerializer serialize:valueObj.fileRequestChangeDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestChangeDetailsSerializer
+                                           serialize:valueObj.fileRequestChangeDetails]];
     jsonDict[@".tag"] = @"file_request_change_details";
   } else if ([valueObj isFileRequestCloseDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestCloseDetailsSerializer serialize:valueObj.fileRequestCloseDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestCloseDetailsSerializer
+                                           serialize:valueObj.fileRequestCloseDetails]];
     jsonDict[@".tag"] = @"file_request_close_details";
   } else if ([valueObj isFileRequestCreateDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestCreateDetailsSerializer serialize:valueObj.fileRequestCreateDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestCreateDetailsSerializer
+                                           serialize:valueObj.fileRequestCreateDetails]];
     jsonDict[@".tag"] = @"file_request_create_details";
   } else if ([valueObj isFileRequestDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestDeleteDetailsSerializer serialize:valueObj.fileRequestDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestDeleteDetailsSerializer
+                                           serialize:valueObj.fileRequestDeleteDetails]];
     jsonDict[@".tag"] = @"file_request_delete_details";
   } else if ([valueObj isFileRequestReceiveFileDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestReceiveFileDetailsSerializer serialize:valueObj.fileRequestReceiveFileDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestReceiveFileDetailsSerializer
+                                           serialize:valueObj.fileRequestReceiveFileDetails]];
     jsonDict[@".tag"] = @"file_request_receive_file_details";
   } else if ([valueObj isGroupAddExternalIdDetails]) {
-    jsonDict =
-        [[DBTEAMLOGGroupAddExternalIdDetailsSerializer serialize:valueObj.groupAddExternalIdDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupAddExternalIdDetailsSerializer
+                                           serialize:valueObj.groupAddExternalIdDetails]];
     jsonDict[@".tag"] = @"group_add_external_id_details";
   } else if ([valueObj isGroupAddMemberDetails]) {
-    jsonDict = [[DBTEAMLOGGroupAddMemberDetailsSerializer serialize:valueObj.groupAddMemberDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGGroupAddMemberDetailsSerializer serialize:valueObj.groupAddMemberDetails]];
     jsonDict[@".tag"] = @"group_add_member_details";
   } else if ([valueObj isGroupChangeExternalIdDetails]) {
-    jsonDict =
-        [[DBTEAMLOGGroupChangeExternalIdDetailsSerializer serialize:valueObj.groupChangeExternalIdDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupChangeExternalIdDetailsSerializer
+                                           serialize:valueObj.groupChangeExternalIdDetails]];
     jsonDict[@".tag"] = @"group_change_external_id_details";
   } else if ([valueObj isGroupChangeManagementTypeDetails]) {
-    jsonDict = [[DBTEAMLOGGroupChangeManagementTypeDetailsSerializer
-        serialize:valueObj.groupChangeManagementTypeDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupChangeManagementTypeDetailsSerializer
+                                           serialize:valueObj.groupChangeManagementTypeDetails]];
     jsonDict[@".tag"] = @"group_change_management_type_details";
   } else if ([valueObj isGroupChangeMemberRoleDetails]) {
-    jsonDict =
-        [[DBTEAMLOGGroupChangeMemberRoleDetailsSerializer serialize:valueObj.groupChangeMemberRoleDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupChangeMemberRoleDetailsSerializer
+                                           serialize:valueObj.groupChangeMemberRoleDetails]];
     jsonDict[@".tag"] = @"group_change_member_role_details";
   } else if ([valueObj isGroupCreateDetails]) {
-    jsonDict = [[DBTEAMLOGGroupCreateDetailsSerializer serialize:valueObj.groupCreateDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupCreateDetailsSerializer serialize:valueObj.groupCreateDetails]];
     jsonDict[@".tag"] = @"group_create_details";
   } else if ([valueObj isGroupDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGGroupDeleteDetailsSerializer serialize:valueObj.groupDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupDeleteDetailsSerializer serialize:valueObj.groupDeleteDetails]];
     jsonDict[@".tag"] = @"group_delete_details";
   } else if ([valueObj isGroupDescriptionUpdatedDetails]) {
-    jsonDict = [[DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer serialize:valueObj.groupDescriptionUpdatedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupDescriptionUpdatedDetailsSerializer
+                                           serialize:valueObj.groupDescriptionUpdatedDetails]];
     jsonDict[@".tag"] = @"group_description_updated_details";
   } else if ([valueObj isGroupJoinPolicyUpdatedDetails]) {
-    jsonDict = [[DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer serialize:valueObj.groupJoinPolicyUpdatedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupJoinPolicyUpdatedDetailsSerializer
+                                           serialize:valueObj.groupJoinPolicyUpdatedDetails]];
     jsonDict[@".tag"] = @"group_join_policy_updated_details";
   } else if ([valueObj isGroupMovedDetails]) {
-    jsonDict = [[DBTEAMLOGGroupMovedDetailsSerializer serialize:valueObj.groupMovedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupMovedDetailsSerializer serialize:valueObj.groupMovedDetails]];
     jsonDict[@".tag"] = @"group_moved_details";
   } else if ([valueObj isGroupRemoveExternalIdDetails]) {
-    jsonDict =
-        [[DBTEAMLOGGroupRemoveExternalIdDetailsSerializer serialize:valueObj.groupRemoveExternalIdDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupRemoveExternalIdDetailsSerializer
+                                           serialize:valueObj.groupRemoveExternalIdDetails]];
     jsonDict[@".tag"] = @"group_remove_external_id_details";
   } else if ([valueObj isGroupRemoveMemberDetails]) {
-    jsonDict = [[DBTEAMLOGGroupRemoveMemberDetailsSerializer serialize:valueObj.groupRemoveMemberDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupRemoveMemberDetailsSerializer
+                                           serialize:valueObj.groupRemoveMemberDetails]];
     jsonDict[@".tag"] = @"group_remove_member_details";
   } else if ([valueObj isGroupRenameDetails]) {
-    jsonDict = [[DBTEAMLOGGroupRenameDetailsSerializer serialize:valueObj.groupRenameDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupRenameDetailsSerializer serialize:valueObj.groupRenameDetails]];
     jsonDict[@".tag"] = @"group_rename_details";
   } else if ([valueObj isAccountLockOrUnlockedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGAccountLockOrUnlockedDetailsSerializer serialize:valueObj.accountLockOrUnlockedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountLockOrUnlockedDetailsSerializer
+                                           serialize:valueObj.accountLockOrUnlockedDetails]];
     jsonDict[@".tag"] = @"account_lock_or_unlocked_details";
   } else if ([valueObj isEmmErrorDetails]) {
-    jsonDict = [[DBTEAMLOGEmmErrorDetailsSerializer serialize:valueObj.emmErrorDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmErrorDetailsSerializer serialize:valueObj.emmErrorDetails]];
     jsonDict[@".tag"] = @"emm_error_details";
   } else if ([valueObj isGuestAdminSignedInViaTrustedTeamsDetails]) {
-    jsonDict = [[DBTEAMLOGGuestAdminSignedInViaTrustedTeamsDetailsSerializer
-        serialize:valueObj.guestAdminSignedInViaTrustedTeamsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGuestAdminSignedInViaTrustedTeamsDetailsSerializer
+                                           serialize:valueObj.guestAdminSignedInViaTrustedTeamsDetails]];
     jsonDict[@".tag"] = @"guest_admin_signed_in_via_trusted_teams_details";
   } else if ([valueObj isGuestAdminSignedOutViaTrustedTeamsDetails]) {
-    jsonDict = [[DBTEAMLOGGuestAdminSignedOutViaTrustedTeamsDetailsSerializer
-        serialize:valueObj.guestAdminSignedOutViaTrustedTeamsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGuestAdminSignedOutViaTrustedTeamsDetailsSerializer
+                                           serialize:valueObj.guestAdminSignedOutViaTrustedTeamsDetails]];
     jsonDict[@".tag"] = @"guest_admin_signed_out_via_trusted_teams_details";
   } else if ([valueObj isLoginFailDetails]) {
-    jsonDict = [[DBTEAMLOGLoginFailDetailsSerializer serialize:valueObj.loginFailDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLoginFailDetailsSerializer serialize:valueObj.loginFailDetails]];
     jsonDict[@".tag"] = @"login_fail_details";
   } else if ([valueObj isLoginSuccessDetails]) {
-    jsonDict = [[DBTEAMLOGLoginSuccessDetailsSerializer serialize:valueObj.loginSuccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLoginSuccessDetailsSerializer serialize:valueObj.loginSuccessDetails]];
     jsonDict[@".tag"] = @"login_success_details";
   } else if ([valueObj isLogoutDetails]) {
-    jsonDict = [[DBTEAMLOGLogoutDetailsSerializer serialize:valueObj.logoutDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLogoutDetailsSerializer serialize:valueObj.logoutDetails]];
     jsonDict[@".tag"] = @"logout_details";
   } else if ([valueObj isResellerSupportSessionEndDetails]) {
-    jsonDict = [[DBTEAMLOGResellerSupportSessionEndDetailsSerializer
-        serialize:valueObj.resellerSupportSessionEndDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerSupportSessionEndDetailsSerializer
+                                           serialize:valueObj.resellerSupportSessionEndDetails]];
     jsonDict[@".tag"] = @"reseller_support_session_end_details";
   } else if ([valueObj isResellerSupportSessionStartDetails]) {
-    jsonDict = [[DBTEAMLOGResellerSupportSessionStartDetailsSerializer
-        serialize:valueObj.resellerSupportSessionStartDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerSupportSessionStartDetailsSerializer
+                                           serialize:valueObj.resellerSupportSessionStartDetails]];
     jsonDict[@".tag"] = @"reseller_support_session_start_details";
   } else if ([valueObj isSignInAsSessionEndDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSignInAsSessionEndDetailsSerializer serialize:valueObj.signInAsSessionEndDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSignInAsSessionEndDetailsSerializer
+                                           serialize:valueObj.signInAsSessionEndDetails]];
     jsonDict[@".tag"] = @"sign_in_as_session_end_details";
   } else if ([valueObj isSignInAsSessionStartDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSignInAsSessionStartDetailsSerializer serialize:valueObj.signInAsSessionStartDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSignInAsSessionStartDetailsSerializer
+                                           serialize:valueObj.signInAsSessionStartDetails]];
     jsonDict[@".tag"] = @"sign_in_as_session_start_details";
   } else if ([valueObj isSsoErrorDetails]) {
-    jsonDict = [[DBTEAMLOGSsoErrorDetailsSerializer serialize:valueObj.ssoErrorDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoErrorDetailsSerializer serialize:valueObj.ssoErrorDetails]];
     jsonDict[@".tag"] = @"sso_error_details";
   } else if ([valueObj isCreateTeamInviteLinkDetails]) {
-    jsonDict =
-        [[DBTEAMLOGCreateTeamInviteLinkDetailsSerializer serialize:valueObj.createTeamInviteLinkDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCreateTeamInviteLinkDetailsSerializer
+                                           serialize:valueObj.createTeamInviteLinkDetails]];
     jsonDict[@".tag"] = @"create_team_invite_link_details";
   } else if ([valueObj isDeleteTeamInviteLinkDetails]) {
-    jsonDict =
-        [[DBTEAMLOGDeleteTeamInviteLinkDetailsSerializer serialize:valueObj.deleteTeamInviteLinkDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeleteTeamInviteLinkDetailsSerializer
+                                           serialize:valueObj.deleteTeamInviteLinkDetails]];
     jsonDict[@".tag"] = @"delete_team_invite_link_details";
   } else if ([valueObj isMemberAddExternalIdDetails]) {
-    jsonDict =
-        [[DBTEAMLOGMemberAddExternalIdDetailsSerializer serialize:valueObj.memberAddExternalIdDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberAddExternalIdDetailsSerializer
+                                           serialize:valueObj.memberAddExternalIdDetails]];
     jsonDict[@".tag"] = @"member_add_external_id_details";
   } else if ([valueObj isMemberAddNameDetails]) {
-    jsonDict = [[DBTEAMLOGMemberAddNameDetailsSerializer serialize:valueObj.memberAddNameDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGMemberAddNameDetailsSerializer serialize:valueObj.memberAddNameDetails]];
     jsonDict[@".tag"] = @"member_add_name_details";
   } else if ([valueObj isMemberChangeAdminRoleDetails]) {
-    jsonDict =
-        [[DBTEAMLOGMemberChangeAdminRoleDetailsSerializer serialize:valueObj.memberChangeAdminRoleDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeAdminRoleDetailsSerializer
+                                           serialize:valueObj.memberChangeAdminRoleDetails]];
     jsonDict[@".tag"] = @"member_change_admin_role_details";
   } else if ([valueObj isMemberChangeEmailDetails]) {
-    jsonDict = [[DBTEAMLOGMemberChangeEmailDetailsSerializer serialize:valueObj.memberChangeEmailDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeEmailDetailsSerializer
+                                           serialize:valueObj.memberChangeEmailDetails]];
     jsonDict[@".tag"] = @"member_change_email_details";
   } else if ([valueObj isMemberChangeExternalIdDetails]) {
-    jsonDict = [[DBTEAMLOGMemberChangeExternalIdDetailsSerializer serialize:valueObj.memberChangeExternalIdDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeExternalIdDetailsSerializer
+                                           serialize:valueObj.memberChangeExternalIdDetails]];
     jsonDict[@".tag"] = @"member_change_external_id_details";
   } else if ([valueObj isMemberChangeMembershipTypeDetails]) {
-    jsonDict = [[DBTEAMLOGMemberChangeMembershipTypeDetailsSerializer
-        serialize:valueObj.memberChangeMembershipTypeDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeMembershipTypeDetailsSerializer
+                                           serialize:valueObj.memberChangeMembershipTypeDetails]];
     jsonDict[@".tag"] = @"member_change_membership_type_details";
   } else if ([valueObj isMemberChangeNameDetails]) {
-    jsonDict = [[DBTEAMLOGMemberChangeNameDetailsSerializer serialize:valueObj.memberChangeNameDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeNameDetailsSerializer
+                                           serialize:valueObj.memberChangeNameDetails]];
     jsonDict[@".tag"] = @"member_change_name_details";
   } else if ([valueObj isMemberChangeResellerRoleDetails]) {
-    jsonDict = [[DBTEAMLOGMemberChangeResellerRoleDetailsSerializer serialize:valueObj.memberChangeResellerRoleDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeResellerRoleDetailsSerializer
+                                           serialize:valueObj.memberChangeResellerRoleDetails]];
     jsonDict[@".tag"] = @"member_change_reseller_role_details";
   } else if ([valueObj isMemberChangeStatusDetails]) {
-    jsonDict =
-        [[DBTEAMLOGMemberChangeStatusDetailsSerializer serialize:valueObj.memberChangeStatusDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeStatusDetailsSerializer
+                                           serialize:valueObj.memberChangeStatusDetails]];
     jsonDict[@".tag"] = @"member_change_status_details";
   } else if ([valueObj isMemberDeleteManualContactsDetails]) {
-    jsonDict = [[DBTEAMLOGMemberDeleteManualContactsDetailsSerializer
-        serialize:valueObj.memberDeleteManualContactsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberDeleteManualContactsDetailsSerializer
+                                           serialize:valueObj.memberDeleteManualContactsDetails]];
     jsonDict[@".tag"] = @"member_delete_manual_contacts_details";
   } else if ([valueObj isMemberDeleteProfilePhotoDetails]) {
-    jsonDict = [[DBTEAMLOGMemberDeleteProfilePhotoDetailsSerializer serialize:valueObj.memberDeleteProfilePhotoDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberDeleteProfilePhotoDetailsSerializer
+                                           serialize:valueObj.memberDeleteProfilePhotoDetails]];
     jsonDict[@".tag"] = @"member_delete_profile_photo_details";
   } else if ([valueObj isMemberPermanentlyDeleteAccountContentsDetails]) {
-    jsonDict = [[DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetailsSerializer
-        serialize:valueObj.memberPermanentlyDeleteAccountContentsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberPermanentlyDeleteAccountContentsDetailsSerializer
+                                           serialize:valueObj.memberPermanentlyDeleteAccountContentsDetails]];
     jsonDict[@".tag"] = @"member_permanently_delete_account_contents_details";
   } else if ([valueObj isMemberRemoveExternalIdDetails]) {
-    jsonDict = [[DBTEAMLOGMemberRemoveExternalIdDetailsSerializer serialize:valueObj.memberRemoveExternalIdDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberRemoveExternalIdDetailsSerializer
+                                           serialize:valueObj.memberRemoveExternalIdDetails]];
     jsonDict[@".tag"] = @"member_remove_external_id_details";
   } else if ([valueObj isMemberSetProfilePhotoDetails]) {
-    jsonDict =
-        [[DBTEAMLOGMemberSetProfilePhotoDetailsSerializer serialize:valueObj.memberSetProfilePhotoDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSetProfilePhotoDetailsSerializer
+                                           serialize:valueObj.memberSetProfilePhotoDetails]];
     jsonDict[@".tag"] = @"member_set_profile_photo_details";
   } else if ([valueObj isMemberSpaceLimitsAddCustomQuotaDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsAddCustomQuotaDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsAddCustomQuotaDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsAddCustomQuotaDetails]];
     jsonDict[@".tag"] = @"member_space_limits_add_custom_quota_details";
   } else if ([valueObj isMemberSpaceLimitsChangeCustomQuotaDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangeCustomQuotaDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsChangeCustomQuotaDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangeCustomQuotaDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangeCustomQuotaDetails]];
     jsonDict[@".tag"] = @"member_space_limits_change_custom_quota_details";
   } else if ([valueObj isMemberSpaceLimitsChangeStatusDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangeStatusDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsChangeStatusDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangeStatusDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangeStatusDetails]];
     jsonDict[@".tag"] = @"member_space_limits_change_status_details";
   } else if ([valueObj isMemberSpaceLimitsRemoveCustomQuotaDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsRemoveCustomQuotaDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsRemoveCustomQuotaDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsRemoveCustomQuotaDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsRemoveCustomQuotaDetails]];
     jsonDict[@".tag"] = @"member_space_limits_remove_custom_quota_details";
   } else if ([valueObj isMemberSuggestDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSuggestDetailsSerializer serialize:valueObj.memberSuggestDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGMemberSuggestDetailsSerializer serialize:valueObj.memberSuggestDetails]];
     jsonDict[@".tag"] = @"member_suggest_details";
   } else if ([valueObj isMemberTransferAccountContentsDetails]) {
-    jsonDict = [[DBTEAMLOGMemberTransferAccountContentsDetailsSerializer
-        serialize:valueObj.memberTransferAccountContentsDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberTransferAccountContentsDetailsSerializer
+                                           serialize:valueObj.memberTransferAccountContentsDetails]];
     jsonDict[@".tag"] = @"member_transfer_account_contents_details";
   } else if ([valueObj isPendingSecondaryEmailAddedDetails]) {
-    jsonDict = [[DBTEAMLOGPendingSecondaryEmailAddedDetailsSerializer
-        serialize:valueObj.pendingSecondaryEmailAddedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPendingSecondaryEmailAddedDetailsSerializer
+                                           serialize:valueObj.pendingSecondaryEmailAddedDetails]];
     jsonDict[@".tag"] = @"pending_secondary_email_added_details";
   } else if ([valueObj isSecondaryEmailDeletedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSecondaryEmailDeletedDetailsSerializer serialize:valueObj.secondaryEmailDeletedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryEmailDeletedDetailsSerializer
+                                           serialize:valueObj.secondaryEmailDeletedDetails]];
     jsonDict[@".tag"] = @"secondary_email_deleted_details";
   } else if ([valueObj isSecondaryEmailVerifiedDetails]) {
-    jsonDict = [[DBTEAMLOGSecondaryEmailVerifiedDetailsSerializer serialize:valueObj.secondaryEmailVerifiedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryEmailVerifiedDetailsSerializer
+                                           serialize:valueObj.secondaryEmailVerifiedDetails]];
     jsonDict[@".tag"] = @"secondary_email_verified_details";
   } else if ([valueObj isSecondaryMailsPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGSecondaryMailsPolicyChangedDetailsSerializer
-        serialize:valueObj.secondaryMailsPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryMailsPolicyChangedDetailsSerializer
+                                           serialize:valueObj.secondaryMailsPolicyChangedDetails]];
     jsonDict[@".tag"] = @"secondary_mails_policy_changed_details";
   } else if ([valueObj isBinderAddPageDetails]) {
-    jsonDict = [[DBTEAMLOGBinderAddPageDetailsSerializer serialize:valueObj.binderAddPageDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGBinderAddPageDetailsSerializer serialize:valueObj.binderAddPageDetails]];
     jsonDict[@".tag"] = @"binder_add_page_details";
   } else if ([valueObj isBinderAddSectionDetails]) {
-    jsonDict = [[DBTEAMLOGBinderAddSectionDetailsSerializer serialize:valueObj.binderAddSectionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderAddSectionDetailsSerializer
+                                           serialize:valueObj.binderAddSectionDetails]];
     jsonDict[@".tag"] = @"binder_add_section_details";
   } else if ([valueObj isBinderRemovePageDetails]) {
-    jsonDict = [[DBTEAMLOGBinderRemovePageDetailsSerializer serialize:valueObj.binderRemovePageDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderRemovePageDetailsSerializer
+                                           serialize:valueObj.binderRemovePageDetails]];
     jsonDict[@".tag"] = @"binder_remove_page_details";
   } else if ([valueObj isBinderRemoveSectionDetails]) {
-    jsonDict =
-        [[DBTEAMLOGBinderRemoveSectionDetailsSerializer serialize:valueObj.binderRemoveSectionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderRemoveSectionDetailsSerializer
+                                           serialize:valueObj.binderRemoveSectionDetails]];
     jsonDict[@".tag"] = @"binder_remove_section_details";
   } else if ([valueObj isBinderRenamePageDetails]) {
-    jsonDict = [[DBTEAMLOGBinderRenamePageDetailsSerializer serialize:valueObj.binderRenamePageDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderRenamePageDetailsSerializer
+                                           serialize:valueObj.binderRenamePageDetails]];
     jsonDict[@".tag"] = @"binder_rename_page_details";
   } else if ([valueObj isBinderRenameSectionDetails]) {
-    jsonDict =
-        [[DBTEAMLOGBinderRenameSectionDetailsSerializer serialize:valueObj.binderRenameSectionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderRenameSectionDetailsSerializer
+                                           serialize:valueObj.binderRenameSectionDetails]];
     jsonDict[@".tag"] = @"binder_rename_section_details";
   } else if ([valueObj isBinderReorderPageDetails]) {
-    jsonDict = [[DBTEAMLOGBinderReorderPageDetailsSerializer serialize:valueObj.binderReorderPageDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderReorderPageDetailsSerializer
+                                           serialize:valueObj.binderReorderPageDetails]];
     jsonDict[@".tag"] = @"binder_reorder_page_details";
   } else if ([valueObj isBinderReorderSectionDetails]) {
-    jsonDict =
-        [[DBTEAMLOGBinderReorderSectionDetailsSerializer serialize:valueObj.binderReorderSectionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderReorderSectionDetailsSerializer
+                                           serialize:valueObj.binderReorderSectionDetails]];
     jsonDict[@".tag"] = @"binder_reorder_section_details";
   } else if ([valueObj isPaperContentAddMemberDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentAddMemberDetailsSerializer serialize:valueObj.paperContentAddMemberDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentAddMemberDetailsSerializer
+                                           serialize:valueObj.paperContentAddMemberDetails]];
     jsonDict[@".tag"] = @"paper_content_add_member_details";
   } else if ([valueObj isPaperContentAddToFolderDetails]) {
-    jsonDict = [[DBTEAMLOGPaperContentAddToFolderDetailsSerializer serialize:valueObj.paperContentAddToFolderDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentAddToFolderDetailsSerializer
+                                           serialize:valueObj.paperContentAddToFolderDetails]];
     jsonDict[@".tag"] = @"paper_content_add_to_folder_details";
   } else if ([valueObj isPaperContentArchiveDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentArchiveDetailsSerializer serialize:valueObj.paperContentArchiveDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentArchiveDetailsSerializer
+                                           serialize:valueObj.paperContentArchiveDetails]];
     jsonDict[@".tag"] = @"paper_content_archive_details";
   } else if ([valueObj isPaperContentCreateDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentCreateDetailsSerializer serialize:valueObj.paperContentCreateDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentCreateDetailsSerializer
+                                           serialize:valueObj.paperContentCreateDetails]];
     jsonDict[@".tag"] = @"paper_content_create_details";
   } else if ([valueObj isPaperContentPermanentlyDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGPaperContentPermanentlyDeleteDetailsSerializer
-        serialize:valueObj.paperContentPermanentlyDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentPermanentlyDeleteDetailsSerializer
+                                           serialize:valueObj.paperContentPermanentlyDeleteDetails]];
     jsonDict[@".tag"] = @"paper_content_permanently_delete_details";
   } else if ([valueObj isPaperContentRemoveFromFolderDetails]) {
-    jsonDict = [[DBTEAMLOGPaperContentRemoveFromFolderDetailsSerializer
-        serialize:valueObj.paperContentRemoveFromFolderDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentRemoveFromFolderDetailsSerializer
+                                           serialize:valueObj.paperContentRemoveFromFolderDetails]];
     jsonDict[@".tag"] = @"paper_content_remove_from_folder_details";
   } else if ([valueObj isPaperContentRemoveMemberDetails]) {
-    jsonDict = [[DBTEAMLOGPaperContentRemoveMemberDetailsSerializer serialize:valueObj.paperContentRemoveMemberDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentRemoveMemberDetailsSerializer
+                                           serialize:valueObj.paperContentRemoveMemberDetails]];
     jsonDict[@".tag"] = @"paper_content_remove_member_details";
   } else if ([valueObj isPaperContentRenameDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentRenameDetailsSerializer serialize:valueObj.paperContentRenameDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentRenameDetailsSerializer
+                                           serialize:valueObj.paperContentRenameDetails]];
     jsonDict[@".tag"] = @"paper_content_rename_details";
   } else if ([valueObj isPaperContentRestoreDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentRestoreDetailsSerializer serialize:valueObj.paperContentRestoreDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentRestoreDetailsSerializer
+                                           serialize:valueObj.paperContentRestoreDetails]];
     jsonDict[@".tag"] = @"paper_content_restore_details";
   } else if ([valueObj isPaperDocAddCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocAddCommentDetailsSerializer serialize:valueObj.paperDocAddCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocAddCommentDetailsSerializer
+                                           serialize:valueObj.paperDocAddCommentDetails]];
     jsonDict[@".tag"] = @"paper_doc_add_comment_details";
   } else if ([valueObj isPaperDocChangeMemberRoleDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocChangeMemberRoleDetailsSerializer serialize:valueObj.paperDocChangeMemberRoleDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocChangeMemberRoleDetailsSerializer
+                                           serialize:valueObj.paperDocChangeMemberRoleDetails]];
     jsonDict[@".tag"] = @"paper_doc_change_member_role_details";
   } else if ([valueObj isPaperDocChangeSharingPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocChangeSharingPolicyDetailsSerializer
-        serialize:valueObj.paperDocChangeSharingPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocChangeSharingPolicyDetailsSerializer
+                                           serialize:valueObj.paperDocChangeSharingPolicyDetails]];
     jsonDict[@".tag"] = @"paper_doc_change_sharing_policy_details";
   } else if ([valueObj isPaperDocChangeSubscriptionDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer
-        serialize:valueObj.paperDocChangeSubscriptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocChangeSubscriptionDetailsSerializer
+                                           serialize:valueObj.paperDocChangeSubscriptionDetails]];
     jsonDict[@".tag"] = @"paper_doc_change_subscription_details";
   } else if ([valueObj isPaperDocDeletedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocDeletedDetailsSerializer serialize:valueObj.paperDocDeletedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocDeletedDetailsSerializer serialize:valueObj.paperDocDeletedDetails]];
     jsonDict[@".tag"] = @"paper_doc_deleted_details";
   } else if ([valueObj isPaperDocDeleteCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocDeleteCommentDetailsSerializer serialize:valueObj.paperDocDeleteCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocDeleteCommentDetailsSerializer
+                                           serialize:valueObj.paperDocDeleteCommentDetails]];
     jsonDict[@".tag"] = @"paper_doc_delete_comment_details";
   } else if ([valueObj isPaperDocDownloadDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocDownloadDetailsSerializer serialize:valueObj.paperDocDownloadDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocDownloadDetailsSerializer
+                                           serialize:valueObj.paperDocDownloadDetails]];
     jsonDict[@".tag"] = @"paper_doc_download_details";
   } else if ([valueObj isPaperDocEditDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocEditDetailsSerializer serialize:valueObj.paperDocEditDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocEditDetailsSerializer serialize:valueObj.paperDocEditDetails]];
     jsonDict[@".tag"] = @"paper_doc_edit_details";
   } else if ([valueObj isPaperDocEditCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocEditCommentDetailsSerializer serialize:valueObj.paperDocEditCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocEditCommentDetailsSerializer
+                                           serialize:valueObj.paperDocEditCommentDetails]];
     jsonDict[@".tag"] = @"paper_doc_edit_comment_details";
   } else if ([valueObj isPaperDocFollowedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocFollowedDetailsSerializer serialize:valueObj.paperDocFollowedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocFollowedDetailsSerializer
+                                           serialize:valueObj.paperDocFollowedDetails]];
     jsonDict[@".tag"] = @"paper_doc_followed_details";
   } else if ([valueObj isPaperDocMentionDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocMentionDetailsSerializer serialize:valueObj.paperDocMentionDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocMentionDetailsSerializer serialize:valueObj.paperDocMentionDetails]];
     jsonDict[@".tag"] = @"paper_doc_mention_details";
   } else if ([valueObj isPaperDocOwnershipChangedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocOwnershipChangedDetailsSerializer serialize:valueObj.paperDocOwnershipChangedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocOwnershipChangedDetailsSerializer
+                                           serialize:valueObj.paperDocOwnershipChangedDetails]];
     jsonDict[@".tag"] = @"paper_doc_ownership_changed_details";
   } else if ([valueObj isPaperDocRequestAccessDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocRequestAccessDetailsSerializer serialize:valueObj.paperDocRequestAccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocRequestAccessDetailsSerializer
+                                           serialize:valueObj.paperDocRequestAccessDetails]];
     jsonDict[@".tag"] = @"paper_doc_request_access_details";
   } else if ([valueObj isPaperDocResolveCommentDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocResolveCommentDetailsSerializer serialize:valueObj.paperDocResolveCommentDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocResolveCommentDetailsSerializer
+                                           serialize:valueObj.paperDocResolveCommentDetails]];
     jsonDict[@".tag"] = @"paper_doc_resolve_comment_details";
   } else if ([valueObj isPaperDocRevertDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocRevertDetailsSerializer serialize:valueObj.paperDocRevertDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocRevertDetailsSerializer serialize:valueObj.paperDocRevertDetails]];
     jsonDict[@".tag"] = @"paper_doc_revert_details";
   } else if ([valueObj isPaperDocSlackShareDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocSlackShareDetailsSerializer serialize:valueObj.paperDocSlackShareDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocSlackShareDetailsSerializer
+                                           serialize:valueObj.paperDocSlackShareDetails]];
     jsonDict[@".tag"] = @"paper_doc_slack_share_details";
   } else if ([valueObj isPaperDocTeamInviteDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocTeamInviteDetailsSerializer serialize:valueObj.paperDocTeamInviteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocTeamInviteDetailsSerializer
+                                           serialize:valueObj.paperDocTeamInviteDetails]];
     jsonDict[@".tag"] = @"paper_doc_team_invite_details";
   } else if ([valueObj isPaperDocTrashedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocTrashedDetailsSerializer serialize:valueObj.paperDocTrashedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocTrashedDetailsSerializer serialize:valueObj.paperDocTrashedDetails]];
     jsonDict[@".tag"] = @"paper_doc_trashed_details";
   } else if ([valueObj isPaperDocUnresolveCommentDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocUnresolveCommentDetailsSerializer serialize:valueObj.paperDocUnresolveCommentDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocUnresolveCommentDetailsSerializer
+                                           serialize:valueObj.paperDocUnresolveCommentDetails]];
     jsonDict[@".tag"] = @"paper_doc_unresolve_comment_details";
   } else if ([valueObj isPaperDocUntrashedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocUntrashedDetailsSerializer serialize:valueObj.paperDocUntrashedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocUntrashedDetailsSerializer
+                                           serialize:valueObj.paperDocUntrashedDetails]];
     jsonDict[@".tag"] = @"paper_doc_untrashed_details";
   } else if ([valueObj isPaperDocViewDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDocViewDetailsSerializer serialize:valueObj.paperDocViewDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocViewDetailsSerializer serialize:valueObj.paperDocViewDetails]];
     jsonDict[@".tag"] = @"paper_doc_view_details";
   } else if ([valueObj isPaperExternalViewAllowDetails]) {
-    jsonDict = [[DBTEAMLOGPaperExternalViewAllowDetailsSerializer serialize:valueObj.paperExternalViewAllowDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperExternalViewAllowDetailsSerializer
+                                           serialize:valueObj.paperExternalViewAllowDetails]];
     jsonDict[@".tag"] = @"paper_external_view_allow_details";
   } else if ([valueObj isPaperExternalViewDefaultTeamDetails]) {
-    jsonDict = [[DBTEAMLOGPaperExternalViewDefaultTeamDetailsSerializer
-        serialize:valueObj.paperExternalViewDefaultTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperExternalViewDefaultTeamDetailsSerializer
+                                           serialize:valueObj.paperExternalViewDefaultTeamDetails]];
     jsonDict[@".tag"] = @"paper_external_view_default_team_details";
   } else if ([valueObj isPaperExternalViewForbidDetails]) {
-    jsonDict = [[DBTEAMLOGPaperExternalViewForbidDetailsSerializer serialize:valueObj.paperExternalViewForbidDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperExternalViewForbidDetailsSerializer
+                                           serialize:valueObj.paperExternalViewForbidDetails]];
     jsonDict[@".tag"] = @"paper_external_view_forbid_details";
   } else if ([valueObj isPaperFolderChangeSubscriptionDetails]) {
-    jsonDict = [[DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer
-        serialize:valueObj.paperFolderChangeSubscriptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderChangeSubscriptionDetailsSerializer
+                                           serialize:valueObj.paperFolderChangeSubscriptionDetails]];
     jsonDict[@".tag"] = @"paper_folder_change_subscription_details";
   } else if ([valueObj isPaperFolderDeletedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperFolderDeletedDetailsSerializer serialize:valueObj.paperFolderDeletedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderDeletedDetailsSerializer
+                                           serialize:valueObj.paperFolderDeletedDetails]];
     jsonDict[@".tag"] = @"paper_folder_deleted_details";
   } else if ([valueObj isPaperFolderFollowedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperFolderFollowedDetailsSerializer serialize:valueObj.paperFolderFollowedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderFollowedDetailsSerializer
+                                           serialize:valueObj.paperFolderFollowedDetails]];
     jsonDict[@".tag"] = @"paper_folder_followed_details";
   } else if ([valueObj isPaperFolderTeamInviteDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperFolderTeamInviteDetailsSerializer serialize:valueObj.paperFolderTeamInviteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderTeamInviteDetailsSerializer
+                                           serialize:valueObj.paperFolderTeamInviteDetails]];
     jsonDict[@".tag"] = @"paper_folder_team_invite_details";
   } else if ([valueObj isPaperPublishedLinkChangePermissionDetails]) {
-    jsonDict = [[DBTEAMLOGPaperPublishedLinkChangePermissionDetailsSerializer
-        serialize:valueObj.paperPublishedLinkChangePermissionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkChangePermissionDetailsSerializer
+                                           serialize:valueObj.paperPublishedLinkChangePermissionDetails]];
     jsonDict[@".tag"] = @"paper_published_link_change_permission_details";
   } else if ([valueObj isPaperPublishedLinkCreateDetails]) {
-    jsonDict = [[DBTEAMLOGPaperPublishedLinkCreateDetailsSerializer serialize:valueObj.paperPublishedLinkCreateDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkCreateDetailsSerializer
+                                           serialize:valueObj.paperPublishedLinkCreateDetails]];
     jsonDict[@".tag"] = @"paper_published_link_create_details";
   } else if ([valueObj isPaperPublishedLinkDisabledDetails]) {
-    jsonDict = [[DBTEAMLOGPaperPublishedLinkDisabledDetailsSerializer
-        serialize:valueObj.paperPublishedLinkDisabledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkDisabledDetailsSerializer
+                                           serialize:valueObj.paperPublishedLinkDisabledDetails]];
     jsonDict[@".tag"] = @"paper_published_link_disabled_details";
   } else if ([valueObj isPaperPublishedLinkViewDetails]) {
-    jsonDict = [[DBTEAMLOGPaperPublishedLinkViewDetailsSerializer serialize:valueObj.paperPublishedLinkViewDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkViewDetailsSerializer
+                                           serialize:valueObj.paperPublishedLinkViewDetails]];
     jsonDict[@".tag"] = @"paper_published_link_view_details";
   } else if ([valueObj isPasswordChangeDetails]) {
-    jsonDict = [[DBTEAMLOGPasswordChangeDetailsSerializer serialize:valueObj.passwordChangeDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPasswordChangeDetailsSerializer serialize:valueObj.passwordChangeDetails]];
     jsonDict[@".tag"] = @"password_change_details";
   } else if ([valueObj isPasswordResetDetails]) {
-    jsonDict = [[DBTEAMLOGPasswordResetDetailsSerializer serialize:valueObj.passwordResetDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPasswordResetDetailsSerializer serialize:valueObj.passwordResetDetails]];
     jsonDict[@".tag"] = @"password_reset_details";
   } else if ([valueObj isPasswordResetAllDetails]) {
-    jsonDict = [[DBTEAMLOGPasswordResetAllDetailsSerializer serialize:valueObj.passwordResetAllDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPasswordResetAllDetailsSerializer
+                                           serialize:valueObj.passwordResetAllDetails]];
     jsonDict[@".tag"] = @"password_reset_all_details";
   } else if ([valueObj isClassificationCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGClassificationCreateReportDetailsSerializer
-        serialize:valueObj.classificationCreateReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGClassificationCreateReportDetailsSerializer
+                                           serialize:valueObj.classificationCreateReportDetails]];
     jsonDict[@".tag"] = @"classification_create_report_details";
   } else if ([valueObj isClassificationCreateReportFailDetails]) {
-    jsonDict = [[DBTEAMLOGClassificationCreateReportFailDetailsSerializer
-        serialize:valueObj.classificationCreateReportFailDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGClassificationCreateReportFailDetailsSerializer
+                                           serialize:valueObj.classificationCreateReportFailDetails]];
     jsonDict[@".tag"] = @"classification_create_report_fail_details";
   } else if ([valueObj isEmmCreateExceptionsReportDetails]) {
-    jsonDict = [[DBTEAMLOGEmmCreateExceptionsReportDetailsSerializer
-        serialize:valueObj.emmCreateExceptionsReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmCreateExceptionsReportDetailsSerializer
+                                           serialize:valueObj.emmCreateExceptionsReportDetails]];
     jsonDict[@".tag"] = @"emm_create_exceptions_report_details";
   } else if ([valueObj isEmmCreateUsageReportDetails]) {
-    jsonDict =
-        [[DBTEAMLOGEmmCreateUsageReportDetailsSerializer serialize:valueObj.emmCreateUsageReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmCreateUsageReportDetailsSerializer
+                                           serialize:valueObj.emmCreateUsageReportDetails]];
     jsonDict[@".tag"] = @"emm_create_usage_report_details";
   } else if ([valueObj isExportMembersReportDetails]) {
-    jsonDict =
-        [[DBTEAMLOGExportMembersReportDetailsSerializer serialize:valueObj.exportMembersReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExportMembersReportDetailsSerializer
+                                           serialize:valueObj.exportMembersReportDetails]];
     jsonDict[@".tag"] = @"export_members_report_details";
   } else if ([valueObj isExportMembersReportFailDetails]) {
-    jsonDict = [[DBTEAMLOGExportMembersReportFailDetailsSerializer serialize:valueObj.exportMembersReportFailDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExportMembersReportFailDetailsSerializer
+                                           serialize:valueObj.exportMembersReportFailDetails]];
     jsonDict[@".tag"] = @"export_members_report_fail_details";
   } else if ([valueObj isExternalSharingCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGExternalSharingCreateReportDetailsSerializer
-        serialize:valueObj.externalSharingCreateReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalSharingCreateReportDetailsSerializer
+                                           serialize:valueObj.externalSharingCreateReportDetails]];
     jsonDict[@".tag"] = @"external_sharing_create_report_details";
   } else if ([valueObj isExternalSharingReportFailedDetails]) {
-    jsonDict = [[DBTEAMLOGExternalSharingReportFailedDetailsSerializer
-        serialize:valueObj.externalSharingReportFailedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalSharingReportFailedDetailsSerializer
+                                           serialize:valueObj.externalSharingReportFailedDetails]];
     jsonDict[@".tag"] = @"external_sharing_report_failed_details";
   } else if ([valueObj isNoExpirationLinkGenCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGNoExpirationLinkGenCreateReportDetailsSerializer
-        serialize:valueObj.noExpirationLinkGenCreateReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoExpirationLinkGenCreateReportDetailsSerializer
+                                           serialize:valueObj.noExpirationLinkGenCreateReportDetails]];
     jsonDict[@".tag"] = @"no_expiration_link_gen_create_report_details";
   } else if ([valueObj isNoExpirationLinkGenReportFailedDetails]) {
-    jsonDict = [[DBTEAMLOGNoExpirationLinkGenReportFailedDetailsSerializer
-        serialize:valueObj.noExpirationLinkGenReportFailedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoExpirationLinkGenReportFailedDetailsSerializer
+                                           serialize:valueObj.noExpirationLinkGenReportFailedDetails]];
     jsonDict[@".tag"] = @"no_expiration_link_gen_report_failed_details";
   } else if ([valueObj isNoPasswordLinkGenCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkGenCreateReportDetailsSerializer
-        serialize:valueObj.noPasswordLinkGenCreateReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkGenCreateReportDetailsSerializer
+                                           serialize:valueObj.noPasswordLinkGenCreateReportDetails]];
     jsonDict[@".tag"] = @"no_password_link_gen_create_report_details";
   } else if ([valueObj isNoPasswordLinkGenReportFailedDetails]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkGenReportFailedDetailsSerializer
-        serialize:valueObj.noPasswordLinkGenReportFailedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkGenReportFailedDetailsSerializer
+                                           serialize:valueObj.noPasswordLinkGenReportFailedDetails]];
     jsonDict[@".tag"] = @"no_password_link_gen_report_failed_details";
   } else if ([valueObj isNoPasswordLinkViewCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkViewCreateReportDetailsSerializer
-        serialize:valueObj.noPasswordLinkViewCreateReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkViewCreateReportDetailsSerializer
+                                           serialize:valueObj.noPasswordLinkViewCreateReportDetails]];
     jsonDict[@".tag"] = @"no_password_link_view_create_report_details";
   } else if ([valueObj isNoPasswordLinkViewReportFailedDetails]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkViewReportFailedDetailsSerializer
-        serialize:valueObj.noPasswordLinkViewReportFailedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkViewReportFailedDetailsSerializer
+                                           serialize:valueObj.noPasswordLinkViewReportFailedDetails]];
     jsonDict[@".tag"] = @"no_password_link_view_report_failed_details";
   } else if ([valueObj isOutdatedLinkViewCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGOutdatedLinkViewCreateReportDetailsSerializer
-        serialize:valueObj.outdatedLinkViewCreateReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOutdatedLinkViewCreateReportDetailsSerializer
+                                           serialize:valueObj.outdatedLinkViewCreateReportDetails]];
     jsonDict[@".tag"] = @"outdated_link_view_create_report_details";
   } else if ([valueObj isOutdatedLinkViewReportFailedDetails]) {
-    jsonDict = [[DBTEAMLOGOutdatedLinkViewReportFailedDetailsSerializer
-        serialize:valueObj.outdatedLinkViewReportFailedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOutdatedLinkViewReportFailedDetailsSerializer
+                                           serialize:valueObj.outdatedLinkViewReportFailedDetails]];
     jsonDict[@".tag"] = @"outdated_link_view_report_failed_details";
   } else if ([valueObj isPaperAdminExportStartDetails]) {
-    jsonDict =
-        [[DBTEAMLOGPaperAdminExportStartDetailsSerializer serialize:valueObj.paperAdminExportStartDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperAdminExportStartDetailsSerializer
+                                           serialize:valueObj.paperAdminExportStartDetails]];
     jsonDict[@".tag"] = @"paper_admin_export_start_details";
   } else if ([valueObj isSmartSyncCreateAdminPrivilegeReportDetails]) {
-    jsonDict = [[DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetailsSerializer
-        serialize:valueObj.smartSyncCreateAdminPrivilegeReportDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncCreateAdminPrivilegeReportDetailsSerializer
+                                           serialize:valueObj.smartSyncCreateAdminPrivilegeReportDetails]];
     jsonDict[@".tag"] = @"smart_sync_create_admin_privilege_report_details";
   } else if ([valueObj isTeamActivityCreateReportDetails]) {
-    jsonDict = [[DBTEAMLOGTeamActivityCreateReportDetailsSerializer serialize:valueObj.teamActivityCreateReportDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamActivityCreateReportDetailsSerializer
+                                           serialize:valueObj.teamActivityCreateReportDetails]];
     jsonDict[@".tag"] = @"team_activity_create_report_details";
   } else if ([valueObj isTeamActivityCreateReportFailDetails]) {
-    jsonDict = [[DBTEAMLOGTeamActivityCreateReportFailDetailsSerializer
-        serialize:valueObj.teamActivityCreateReportFailDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamActivityCreateReportFailDetailsSerializer
+                                           serialize:valueObj.teamActivityCreateReportFailDetails]];
     jsonDict[@".tag"] = @"team_activity_create_report_fail_details";
   } else if ([valueObj isCollectionShareDetails]) {
-    jsonDict = [[DBTEAMLOGCollectionShareDetailsSerializer serialize:valueObj.collectionShareDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGCollectionShareDetailsSerializer serialize:valueObj.collectionShareDetails]];
     jsonDict[@".tag"] = @"collection_share_details";
   } else if ([valueObj isFileTransfersFileAddDetails]) {
-    jsonDict =
-        [[DBTEAMLOGFileTransfersFileAddDetailsSerializer serialize:valueObj.fileTransfersFileAddDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersFileAddDetailsSerializer
+                                           serialize:valueObj.fileTransfersFileAddDetails]];
     jsonDict[@".tag"] = @"file_transfers_file_add_details";
   } else if ([valueObj isFileTransfersTransferDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGFileTransfersTransferDeleteDetailsSerializer
-        serialize:valueObj.fileTransfersTransferDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferDeleteDetailsSerializer
+                                           serialize:valueObj.fileTransfersTransferDeleteDetails]];
     jsonDict[@".tag"] = @"file_transfers_transfer_delete_details";
   } else if ([valueObj isFileTransfersTransferDownloadDetails]) {
-    jsonDict = [[DBTEAMLOGFileTransfersTransferDownloadDetailsSerializer
-        serialize:valueObj.fileTransfersTransferDownloadDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferDownloadDetailsSerializer
+                                           serialize:valueObj.fileTransfersTransferDownloadDetails]];
     jsonDict[@".tag"] = @"file_transfers_transfer_download_details";
   } else if ([valueObj isFileTransfersTransferSendDetails]) {
-    jsonDict = [[DBTEAMLOGFileTransfersTransferSendDetailsSerializer
-        serialize:valueObj.fileTransfersTransferSendDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferSendDetailsSerializer
+                                           serialize:valueObj.fileTransfersTransferSendDetails]];
     jsonDict[@".tag"] = @"file_transfers_transfer_send_details";
   } else if ([valueObj isFileTransfersTransferViewDetails]) {
-    jsonDict = [[DBTEAMLOGFileTransfersTransferViewDetailsSerializer
-        serialize:valueObj.fileTransfersTransferViewDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferViewDetailsSerializer
+                                           serialize:valueObj.fileTransfersTransferViewDetails]];
     jsonDict[@".tag"] = @"file_transfers_transfer_view_details";
   } else if ([valueObj isNoteAclInviteOnlyDetails]) {
-    jsonDict = [[DBTEAMLOGNoteAclInviteOnlyDetailsSerializer serialize:valueObj.noteAclInviteOnlyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteAclInviteOnlyDetailsSerializer
+                                           serialize:valueObj.noteAclInviteOnlyDetails]];
     jsonDict[@".tag"] = @"note_acl_invite_only_details";
   } else if ([valueObj isNoteAclLinkDetails]) {
-    jsonDict = [[DBTEAMLOGNoteAclLinkDetailsSerializer serialize:valueObj.noteAclLinkDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteAclLinkDetailsSerializer serialize:valueObj.noteAclLinkDetails]];
     jsonDict[@".tag"] = @"note_acl_link_details";
   } else if ([valueObj isNoteAclTeamLinkDetails]) {
-    jsonDict = [[DBTEAMLOGNoteAclTeamLinkDetailsSerializer serialize:valueObj.noteAclTeamLinkDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGNoteAclTeamLinkDetailsSerializer serialize:valueObj.noteAclTeamLinkDetails]];
     jsonDict[@".tag"] = @"note_acl_team_link_details";
   } else if ([valueObj isNoteSharedDetails]) {
-    jsonDict = [[DBTEAMLOGNoteSharedDetailsSerializer serialize:valueObj.noteSharedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteSharedDetailsSerializer serialize:valueObj.noteSharedDetails]];
     jsonDict[@".tag"] = @"note_shared_details";
   } else if ([valueObj isNoteShareReceiveDetails]) {
-    jsonDict = [[DBTEAMLOGNoteShareReceiveDetailsSerializer serialize:valueObj.noteShareReceiveDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteShareReceiveDetailsSerializer
+                                           serialize:valueObj.noteShareReceiveDetails]];
     jsonDict[@".tag"] = @"note_share_receive_details";
   } else if ([valueObj isOpenNoteSharedDetails]) {
-    jsonDict = [[DBTEAMLOGOpenNoteSharedDetailsSerializer serialize:valueObj.openNoteSharedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGOpenNoteSharedDetailsSerializer serialize:valueObj.openNoteSharedDetails]];
     jsonDict[@".tag"] = @"open_note_shared_details";
   } else if ([valueObj isSfAddGroupDetails]) {
-    jsonDict = [[DBTEAMLOGSfAddGroupDetailsSerializer serialize:valueObj.sfAddGroupDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfAddGroupDetailsSerializer serialize:valueObj.sfAddGroupDetails]];
     jsonDict[@".tag"] = @"sf_add_group_details";
   } else if ([valueObj isSfAllowNonMembersToViewSharedLinksDetails]) {
-    jsonDict = [[DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetailsSerializer
-        serialize:valueObj.sfAllowNonMembersToViewSharedLinksDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfAllowNonMembersToViewSharedLinksDetailsSerializer
+                                           serialize:valueObj.sfAllowNonMembersToViewSharedLinksDetails]];
     jsonDict[@".tag"] = @"sf_allow_non_members_to_view_shared_links_details";
   } else if ([valueObj isSfExternalInviteWarnDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSfExternalInviteWarnDetailsSerializer serialize:valueObj.sfExternalInviteWarnDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfExternalInviteWarnDetailsSerializer
+                                           serialize:valueObj.sfExternalInviteWarnDetails]];
     jsonDict[@".tag"] = @"sf_external_invite_warn_details";
   } else if ([valueObj isSfFbInviteDetails]) {
-    jsonDict = [[DBTEAMLOGSfFbInviteDetailsSerializer serialize:valueObj.sfFbInviteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfFbInviteDetailsSerializer serialize:valueObj.sfFbInviteDetails]];
     jsonDict[@".tag"] = @"sf_fb_invite_details";
   } else if ([valueObj isSfFbInviteChangeRoleDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSfFbInviteChangeRoleDetailsSerializer serialize:valueObj.sfFbInviteChangeRoleDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfFbInviteChangeRoleDetailsSerializer
+                                           serialize:valueObj.sfFbInviteChangeRoleDetails]];
     jsonDict[@".tag"] = @"sf_fb_invite_change_role_details";
   } else if ([valueObj isSfFbUninviteDetails]) {
-    jsonDict = [[DBTEAMLOGSfFbUninviteDetailsSerializer serialize:valueObj.sfFbUninviteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfFbUninviteDetailsSerializer serialize:valueObj.sfFbUninviteDetails]];
     jsonDict[@".tag"] = @"sf_fb_uninvite_details";
   } else if ([valueObj isSfInviteGroupDetails]) {
-    jsonDict = [[DBTEAMLOGSfInviteGroupDetailsSerializer serialize:valueObj.sfInviteGroupDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSfInviteGroupDetailsSerializer serialize:valueObj.sfInviteGroupDetails]];
     jsonDict[@".tag"] = @"sf_invite_group_details";
   } else if ([valueObj isSfTeamGrantAccessDetails]) {
-    jsonDict = [[DBTEAMLOGSfTeamGrantAccessDetailsSerializer serialize:valueObj.sfTeamGrantAccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamGrantAccessDetailsSerializer
+                                           serialize:valueObj.sfTeamGrantAccessDetails]];
     jsonDict[@".tag"] = @"sf_team_grant_access_details";
   } else if ([valueObj isSfTeamInviteDetails]) {
-    jsonDict = [[DBTEAMLOGSfTeamInviteDetailsSerializer serialize:valueObj.sfTeamInviteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamInviteDetailsSerializer serialize:valueObj.sfTeamInviteDetails]];
     jsonDict[@".tag"] = @"sf_team_invite_details";
   } else if ([valueObj isSfTeamInviteChangeRoleDetails]) {
-    jsonDict = [[DBTEAMLOGSfTeamInviteChangeRoleDetailsSerializer serialize:valueObj.sfTeamInviteChangeRoleDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamInviteChangeRoleDetailsSerializer
+                                           serialize:valueObj.sfTeamInviteChangeRoleDetails]];
     jsonDict[@".tag"] = @"sf_team_invite_change_role_details";
   } else if ([valueObj isSfTeamJoinDetails]) {
-    jsonDict = [[DBTEAMLOGSfTeamJoinDetailsSerializer serialize:valueObj.sfTeamJoinDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamJoinDetailsSerializer serialize:valueObj.sfTeamJoinDetails]];
     jsonDict[@".tag"] = @"sf_team_join_details";
   } else if ([valueObj isSfTeamJoinFromOobLinkDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSfTeamJoinFromOobLinkDetailsSerializer serialize:valueObj.sfTeamJoinFromOobLinkDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamJoinFromOobLinkDetailsSerializer
+                                           serialize:valueObj.sfTeamJoinFromOobLinkDetails]];
     jsonDict[@".tag"] = @"sf_team_join_from_oob_link_details";
   } else if ([valueObj isSfTeamUninviteDetails]) {
-    jsonDict = [[DBTEAMLOGSfTeamUninviteDetailsSerializer serialize:valueObj.sfTeamUninviteDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSfTeamUninviteDetailsSerializer serialize:valueObj.sfTeamUninviteDetails]];
     jsonDict[@".tag"] = @"sf_team_uninvite_details";
   } else if ([valueObj isSharedContentAddInviteesDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentAddInviteesDetailsSerializer serialize:valueObj.sharedContentAddInviteesDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddInviteesDetailsSerializer
+                                           serialize:valueObj.sharedContentAddInviteesDetails]];
     jsonDict[@".tag"] = @"shared_content_add_invitees_details";
   } else if ([valueObj isSharedContentAddLinkExpiryDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentAddLinkExpiryDetailsSerializer
-        serialize:valueObj.sharedContentAddLinkExpiryDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddLinkExpiryDetailsSerializer
+                                           serialize:valueObj.sharedContentAddLinkExpiryDetails]];
     jsonDict[@".tag"] = @"shared_content_add_link_expiry_details";
   } else if ([valueObj isSharedContentAddLinkPasswordDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentAddLinkPasswordDetailsSerializer
-        serialize:valueObj.sharedContentAddLinkPasswordDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddLinkPasswordDetailsSerializer
+                                           serialize:valueObj.sharedContentAddLinkPasswordDetails]];
     jsonDict[@".tag"] = @"shared_content_add_link_password_details";
   } else if ([valueObj isSharedContentAddMemberDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentAddMemberDetailsSerializer serialize:valueObj.sharedContentAddMemberDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddMemberDetailsSerializer
+                                           serialize:valueObj.sharedContentAddMemberDetails]];
     jsonDict[@".tag"] = @"shared_content_add_member_details";
   } else if ([valueObj isSharedContentChangeDownloadsPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeDownloadsPolicyDetailsSerializer
-        serialize:valueObj.sharedContentChangeDownloadsPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeDownloadsPolicyDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeDownloadsPolicyDetails]];
     jsonDict[@".tag"] = @"shared_content_change_downloads_policy_details";
   } else if ([valueObj isSharedContentChangeInviteeRoleDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeInviteeRoleDetailsSerializer
-        serialize:valueObj.sharedContentChangeInviteeRoleDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeInviteeRoleDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeInviteeRoleDetails]];
     jsonDict[@".tag"] = @"shared_content_change_invitee_role_details";
   } else if ([valueObj isSharedContentChangeLinkAudienceDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeLinkAudienceDetailsSerializer
-        serialize:valueObj.sharedContentChangeLinkAudienceDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeLinkAudienceDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeLinkAudienceDetails]];
     jsonDict[@".tag"] = @"shared_content_change_link_audience_details";
   } else if ([valueObj isSharedContentChangeLinkExpiryDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeLinkExpiryDetailsSerializer
-        serialize:valueObj.sharedContentChangeLinkExpiryDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeLinkExpiryDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeLinkExpiryDetails]];
     jsonDict[@".tag"] = @"shared_content_change_link_expiry_details";
   } else if ([valueObj isSharedContentChangeLinkPasswordDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeLinkPasswordDetailsSerializer
-        serialize:valueObj.sharedContentChangeLinkPasswordDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeLinkPasswordDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeLinkPasswordDetails]];
     jsonDict[@".tag"] = @"shared_content_change_link_password_details";
   } else if ([valueObj isSharedContentChangeMemberRoleDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeMemberRoleDetailsSerializer
-        serialize:valueObj.sharedContentChangeMemberRoleDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeMemberRoleDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeMemberRoleDetails]];
     jsonDict[@".tag"] = @"shared_content_change_member_role_details";
   } else if ([valueObj isSharedContentChangeViewerInfoPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeViewerInfoPolicyDetailsSerializer
-        serialize:valueObj.sharedContentChangeViewerInfoPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeViewerInfoPolicyDetailsSerializer
+                                           serialize:valueObj.sharedContentChangeViewerInfoPolicyDetails]];
     jsonDict[@".tag"] = @"shared_content_change_viewer_info_policy_details";
   } else if ([valueObj isSharedContentClaimInvitationDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentClaimInvitationDetailsSerializer
-        serialize:valueObj.sharedContentClaimInvitationDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentClaimInvitationDetailsSerializer
+                                           serialize:valueObj.sharedContentClaimInvitationDetails]];
     jsonDict[@".tag"] = @"shared_content_claim_invitation_details";
   } else if ([valueObj isSharedContentCopyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentCopyDetailsSerializer serialize:valueObj.sharedContentCopyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentCopyDetailsSerializer
+                                           serialize:valueObj.sharedContentCopyDetails]];
     jsonDict[@".tag"] = @"shared_content_copy_details";
   } else if ([valueObj isSharedContentDownloadDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentDownloadDetailsSerializer serialize:valueObj.sharedContentDownloadDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentDownloadDetailsSerializer
+                                           serialize:valueObj.sharedContentDownloadDetails]];
     jsonDict[@".tag"] = @"shared_content_download_details";
   } else if ([valueObj isSharedContentRelinquishMembershipDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRelinquishMembershipDetailsSerializer
-        serialize:valueObj.sharedContentRelinquishMembershipDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRelinquishMembershipDetailsSerializer
+                                           serialize:valueObj.sharedContentRelinquishMembershipDetails]];
     jsonDict[@".tag"] = @"shared_content_relinquish_membership_details";
   } else if ([valueObj isSharedContentRemoveInviteesDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveInviteesDetailsSerializer
-        serialize:valueObj.sharedContentRemoveInviteesDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveInviteesDetailsSerializer
+                                           serialize:valueObj.sharedContentRemoveInviteesDetails]];
     jsonDict[@".tag"] = @"shared_content_remove_invitees_details";
   } else if ([valueObj isSharedContentRemoveLinkExpiryDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveLinkExpiryDetailsSerializer
-        serialize:valueObj.sharedContentRemoveLinkExpiryDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveLinkExpiryDetailsSerializer
+                                           serialize:valueObj.sharedContentRemoveLinkExpiryDetails]];
     jsonDict[@".tag"] = @"shared_content_remove_link_expiry_details";
   } else if ([valueObj isSharedContentRemoveLinkPasswordDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveLinkPasswordDetailsSerializer
-        serialize:valueObj.sharedContentRemoveLinkPasswordDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveLinkPasswordDetailsSerializer
+                                           serialize:valueObj.sharedContentRemoveLinkPasswordDetails]];
     jsonDict[@".tag"] = @"shared_content_remove_link_password_details";
   } else if ([valueObj isSharedContentRemoveMemberDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveMemberDetailsSerializer
-        serialize:valueObj.sharedContentRemoveMemberDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveMemberDetailsSerializer
+                                           serialize:valueObj.sharedContentRemoveMemberDetails]];
     jsonDict[@".tag"] = @"shared_content_remove_member_details";
   } else if ([valueObj isSharedContentRequestAccessDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRequestAccessDetailsSerializer
-        serialize:valueObj.sharedContentRequestAccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRequestAccessDetailsSerializer
+                                           serialize:valueObj.sharedContentRequestAccessDetails]];
     jsonDict[@".tag"] = @"shared_content_request_access_details";
   } else if ([valueObj isSharedContentRestoreInviteesDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRestoreInviteesDetailsSerializer
-        serialize:valueObj.sharedContentRestoreInviteesDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRestoreInviteesDetailsSerializer
+                                           serialize:valueObj.sharedContentRestoreInviteesDetails]];
     jsonDict[@".tag"] = @"shared_content_restore_invitees_details";
   } else if ([valueObj isSharedContentRestoreMemberDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentRestoreMemberDetailsSerializer
-        serialize:valueObj.sharedContentRestoreMemberDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRestoreMemberDetailsSerializer
+                                           serialize:valueObj.sharedContentRestoreMemberDetails]];
     jsonDict[@".tag"] = @"shared_content_restore_member_details";
   } else if ([valueObj isSharedContentUnshareDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentUnshareDetailsSerializer serialize:valueObj.sharedContentUnshareDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentUnshareDetailsSerializer
+                                           serialize:valueObj.sharedContentUnshareDetails]];
     jsonDict[@".tag"] = @"shared_content_unshare_details";
   } else if ([valueObj isSharedContentViewDetails]) {
-    jsonDict = [[DBTEAMLOGSharedContentViewDetailsSerializer serialize:valueObj.sharedContentViewDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentViewDetailsSerializer
+                                           serialize:valueObj.sharedContentViewDetails]];
     jsonDict[@".tag"] = @"shared_content_view_details";
   } else if ([valueObj isSharedFolderChangeLinkPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeLinkPolicyDetailsSerializer
-        serialize:valueObj.sharedFolderChangeLinkPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeLinkPolicyDetailsSerializer
+                                           serialize:valueObj.sharedFolderChangeLinkPolicyDetails]];
     jsonDict[@".tag"] = @"shared_folder_change_link_policy_details";
   } else if ([valueObj isSharedFolderChangeMembersInheritancePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetailsSerializer
-        serialize:valueObj.sharedFolderChangeMembersInheritancePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeMembersInheritancePolicyDetailsSerializer
+                                           serialize:valueObj.sharedFolderChangeMembersInheritancePolicyDetails]];
     jsonDict[@".tag"] = @"shared_folder_change_members_inheritance_policy_details";
   } else if ([valueObj isSharedFolderChangeMembersManagementPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeMembersManagementPolicyDetailsSerializer
-        serialize:valueObj.sharedFolderChangeMembersManagementPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeMembersManagementPolicyDetailsSerializer
+                                           serialize:valueObj.sharedFolderChangeMembersManagementPolicyDetails]];
     jsonDict[@".tag"] = @"shared_folder_change_members_management_policy_details";
   } else if ([valueObj isSharedFolderChangeMembersPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeMembersPolicyDetailsSerializer
-        serialize:valueObj.sharedFolderChangeMembersPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeMembersPolicyDetailsSerializer
+                                           serialize:valueObj.sharedFolderChangeMembersPolicyDetails]];
     jsonDict[@".tag"] = @"shared_folder_change_members_policy_details";
   } else if ([valueObj isSharedFolderCreateDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSharedFolderCreateDetailsSerializer serialize:valueObj.sharedFolderCreateDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderCreateDetailsSerializer
+                                           serialize:valueObj.sharedFolderCreateDetails]];
     jsonDict[@".tag"] = @"shared_folder_create_details";
   } else if ([valueObj isSharedFolderDeclineInvitationDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderDeclineInvitationDetailsSerializer
-        serialize:valueObj.sharedFolderDeclineInvitationDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderDeclineInvitationDetailsSerializer
+                                           serialize:valueObj.sharedFolderDeclineInvitationDetails]];
     jsonDict[@".tag"] = @"shared_folder_decline_invitation_details";
   } else if ([valueObj isSharedFolderMountDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderMountDetailsSerializer serialize:valueObj.sharedFolderMountDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderMountDetailsSerializer
+                                           serialize:valueObj.sharedFolderMountDetails]];
     jsonDict[@".tag"] = @"shared_folder_mount_details";
   } else if ([valueObj isSharedFolderNestDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderNestDetailsSerializer serialize:valueObj.sharedFolderNestDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderNestDetailsSerializer
+                                           serialize:valueObj.sharedFolderNestDetails]];
     jsonDict[@".tag"] = @"shared_folder_nest_details";
   } else if ([valueObj isSharedFolderTransferOwnershipDetails]) {
-    jsonDict = [[DBTEAMLOGSharedFolderTransferOwnershipDetailsSerializer
-        serialize:valueObj.sharedFolderTransferOwnershipDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderTransferOwnershipDetailsSerializer
+                                           serialize:valueObj.sharedFolderTransferOwnershipDetails]];
     jsonDict[@".tag"] = @"shared_folder_transfer_ownership_details";
   } else if ([valueObj isSharedFolderUnmountDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSharedFolderUnmountDetailsSerializer serialize:valueObj.sharedFolderUnmountDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderUnmountDetailsSerializer
+                                           serialize:valueObj.sharedFolderUnmountDetails]];
     jsonDict[@".tag"] = @"shared_folder_unmount_details";
   } else if ([valueObj isSharedLinkAddExpiryDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSharedLinkAddExpiryDetailsSerializer serialize:valueObj.sharedLinkAddExpiryDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkAddExpiryDetailsSerializer
+                                           serialize:valueObj.sharedLinkAddExpiryDetails]];
     jsonDict[@".tag"] = @"shared_link_add_expiry_details";
   } else if ([valueObj isSharedLinkChangeExpiryDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkChangeExpiryDetailsSerializer serialize:valueObj.sharedLinkChangeExpiryDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkChangeExpiryDetailsSerializer
+                                           serialize:valueObj.sharedLinkChangeExpiryDetails]];
     jsonDict[@".tag"] = @"shared_link_change_expiry_details";
   } else if ([valueObj isSharedLinkChangeVisibilityDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkChangeVisibilityDetailsSerializer
-        serialize:valueObj.sharedLinkChangeVisibilityDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkChangeVisibilityDetailsSerializer
+                                           serialize:valueObj.sharedLinkChangeVisibilityDetails]];
     jsonDict[@".tag"] = @"shared_link_change_visibility_details";
   } else if ([valueObj isSharedLinkCopyDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkCopyDetailsSerializer serialize:valueObj.sharedLinkCopyDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedLinkCopyDetailsSerializer serialize:valueObj.sharedLinkCopyDetails]];
     jsonDict[@".tag"] = @"shared_link_copy_details";
   } else if ([valueObj isSharedLinkCreateDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkCreateDetailsSerializer serialize:valueObj.sharedLinkCreateDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkCreateDetailsSerializer
+                                           serialize:valueObj.sharedLinkCreateDetails]];
     jsonDict[@".tag"] = @"shared_link_create_details";
   } else if ([valueObj isSharedLinkDisableDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkDisableDetailsSerializer serialize:valueObj.sharedLinkDisableDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkDisableDetailsSerializer
+                                           serialize:valueObj.sharedLinkDisableDetails]];
     jsonDict[@".tag"] = @"shared_link_disable_details";
   } else if ([valueObj isSharedLinkDownloadDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSharedLinkDownloadDetailsSerializer serialize:valueObj.sharedLinkDownloadDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkDownloadDetailsSerializer
+                                           serialize:valueObj.sharedLinkDownloadDetails]];
     jsonDict[@".tag"] = @"shared_link_download_details";
   } else if ([valueObj isSharedLinkRemoveExpiryDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkRemoveExpiryDetailsSerializer serialize:valueObj.sharedLinkRemoveExpiryDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkRemoveExpiryDetailsSerializer
+                                           serialize:valueObj.sharedLinkRemoveExpiryDetails]];
     jsonDict[@".tag"] = @"shared_link_remove_expiry_details";
   } else if ([valueObj isSharedLinkSettingsAddExpirationDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAddExpirationDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsAddExpirationDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAddExpirationDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsAddExpirationDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_add_expiration_details";
   } else if ([valueObj isSharedLinkSettingsAddPasswordDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAddPasswordDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsAddPasswordDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAddPasswordDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsAddPasswordDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_add_password_details";
   } else if ([valueObj isSharedLinkSettingsAllowDownloadDisabledDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsAllowDownloadDisabledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsAllowDownloadDisabledDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_allow_download_disabled_details";
   } else if ([valueObj isSharedLinkSettingsAllowDownloadEnabledDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsAllowDownloadEnabledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsAllowDownloadEnabledDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_allow_download_enabled_details";
   } else if ([valueObj isSharedLinkSettingsChangeAudienceDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsChangeAudienceDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsChangeAudienceDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsChangeAudienceDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsChangeAudienceDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_change_audience_details";
   } else if ([valueObj isSharedLinkSettingsChangeExpirationDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsChangeExpirationDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsChangeExpirationDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsChangeExpirationDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsChangeExpirationDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_change_expiration_details";
   } else if ([valueObj isSharedLinkSettingsChangePasswordDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsChangePasswordDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsChangePasswordDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsChangePasswordDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsChangePasswordDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_change_password_details";
   } else if ([valueObj isSharedLinkSettingsRemoveExpirationDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsRemoveExpirationDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsRemoveExpirationDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsRemoveExpirationDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsRemoveExpirationDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_remove_expiration_details";
   } else if ([valueObj isSharedLinkSettingsRemovePasswordDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsRemovePasswordDetailsSerializer
-        serialize:valueObj.sharedLinkSettingsRemovePasswordDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsRemovePasswordDetailsSerializer
+                                           serialize:valueObj.sharedLinkSettingsRemovePasswordDetails]];
     jsonDict[@".tag"] = @"shared_link_settings_remove_password_details";
   } else if ([valueObj isSharedLinkShareDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkShareDetailsSerializer serialize:valueObj.sharedLinkShareDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedLinkShareDetailsSerializer serialize:valueObj.sharedLinkShareDetails]];
     jsonDict[@".tag"] = @"shared_link_share_details";
   } else if ([valueObj isSharedLinkViewDetails]) {
-    jsonDict = [[DBTEAMLOGSharedLinkViewDetailsSerializer serialize:valueObj.sharedLinkViewDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedLinkViewDetailsSerializer serialize:valueObj.sharedLinkViewDetails]];
     jsonDict[@".tag"] = @"shared_link_view_details";
   } else if ([valueObj isSharedNoteOpenedDetails]) {
-    jsonDict = [[DBTEAMLOGSharedNoteOpenedDetailsSerializer serialize:valueObj.sharedNoteOpenedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedNoteOpenedDetailsSerializer
+                                           serialize:valueObj.sharedNoteOpenedDetails]];
     jsonDict[@".tag"] = @"shared_note_opened_details";
   } else if ([valueObj isShmodelDisableDownloadsDetails]) {
-    jsonDict = [[DBTEAMLOGShmodelDisableDownloadsDetailsSerializer serialize:valueObj.shmodelDisableDownloadsDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShmodelDisableDownloadsDetailsSerializer
+                                           serialize:valueObj.shmodelDisableDownloadsDetails]];
     jsonDict[@".tag"] = @"shmodel_disable_downloads_details";
   } else if ([valueObj isShmodelEnableDownloadsDetails]) {
-    jsonDict = [[DBTEAMLOGShmodelEnableDownloadsDetailsSerializer serialize:valueObj.shmodelEnableDownloadsDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShmodelEnableDownloadsDetailsSerializer
+                                           serialize:valueObj.shmodelEnableDownloadsDetails]];
     jsonDict[@".tag"] = @"shmodel_enable_downloads_details";
   } else if ([valueObj isShmodelGroupShareDetails]) {
-    jsonDict = [[DBTEAMLOGShmodelGroupShareDetailsSerializer serialize:valueObj.shmodelGroupShareDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShmodelGroupShareDetailsSerializer
+                                           serialize:valueObj.shmodelGroupShareDetails]];
     jsonDict[@".tag"] = @"shmodel_group_share_details";
   } else if ([valueObj isShowcaseAccessGrantedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseAccessGrantedDetailsSerializer serialize:valueObj.showcaseAccessGrantedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseAccessGrantedDetailsSerializer
+                                           serialize:valueObj.showcaseAccessGrantedDetails]];
     jsonDict[@".tag"] = @"showcase_access_granted_details";
   } else if ([valueObj isShowcaseAddMemberDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseAddMemberDetailsSerializer serialize:valueObj.showcaseAddMemberDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseAddMemberDetailsSerializer
+                                           serialize:valueObj.showcaseAddMemberDetails]];
     jsonDict[@".tag"] = @"showcase_add_member_details";
   } else if ([valueObj isShowcaseArchivedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseArchivedDetailsSerializer serialize:valueObj.showcaseArchivedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseArchivedDetailsSerializer
+                                           serialize:valueObj.showcaseArchivedDetails]];
     jsonDict[@".tag"] = @"showcase_archived_details";
   } else if ([valueObj isShowcaseCreatedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseCreatedDetailsSerializer serialize:valueObj.showcaseCreatedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseCreatedDetailsSerializer serialize:valueObj.showcaseCreatedDetails]];
     jsonDict[@".tag"] = @"showcase_created_details";
   } else if ([valueObj isShowcaseDeleteCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseDeleteCommentDetailsSerializer serialize:valueObj.showcaseDeleteCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseDeleteCommentDetailsSerializer
+                                           serialize:valueObj.showcaseDeleteCommentDetails]];
     jsonDict[@".tag"] = @"showcase_delete_comment_details";
   } else if ([valueObj isShowcaseEditedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseEditedDetailsSerializer serialize:valueObj.showcaseEditedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseEditedDetailsSerializer serialize:valueObj.showcaseEditedDetails]];
     jsonDict[@".tag"] = @"showcase_edited_details";
   } else if ([valueObj isShowcaseEditCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseEditCommentDetailsSerializer serialize:valueObj.showcaseEditCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseEditCommentDetailsSerializer
+                                           serialize:valueObj.showcaseEditCommentDetails]];
     jsonDict[@".tag"] = @"showcase_edit_comment_details";
   } else if ([valueObj isShowcaseFileAddedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseFileAddedDetailsSerializer serialize:valueObj.showcaseFileAddedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseFileAddedDetailsSerializer
+                                           serialize:valueObj.showcaseFileAddedDetails]];
     jsonDict[@".tag"] = @"showcase_file_added_details";
   } else if ([valueObj isShowcaseFileDownloadDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseFileDownloadDetailsSerializer serialize:valueObj.showcaseFileDownloadDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseFileDownloadDetailsSerializer
+                                           serialize:valueObj.showcaseFileDownloadDetails]];
     jsonDict[@".tag"] = @"showcase_file_download_details";
   } else if ([valueObj isShowcaseFileRemovedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseFileRemovedDetailsSerializer serialize:valueObj.showcaseFileRemovedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseFileRemovedDetailsSerializer
+                                           serialize:valueObj.showcaseFileRemovedDetails]];
     jsonDict[@".tag"] = @"showcase_file_removed_details";
   } else if ([valueObj isShowcaseFileViewDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseFileViewDetailsSerializer serialize:valueObj.showcaseFileViewDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseFileViewDetailsSerializer
+                                           serialize:valueObj.showcaseFileViewDetails]];
     jsonDict[@".tag"] = @"showcase_file_view_details";
   } else if ([valueObj isShowcasePermanentlyDeletedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcasePermanentlyDeletedDetailsSerializer
-        serialize:valueObj.showcasePermanentlyDeletedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcasePermanentlyDeletedDetailsSerializer
+                                           serialize:valueObj.showcasePermanentlyDeletedDetails]];
     jsonDict[@".tag"] = @"showcase_permanently_deleted_details";
   } else if ([valueObj isShowcasePostCommentDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcasePostCommentDetailsSerializer serialize:valueObj.showcasePostCommentDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcasePostCommentDetailsSerializer
+                                           serialize:valueObj.showcasePostCommentDetails]];
     jsonDict[@".tag"] = @"showcase_post_comment_details";
   } else if ([valueObj isShowcaseRemoveMemberDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseRemoveMemberDetailsSerializer serialize:valueObj.showcaseRemoveMemberDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseRemoveMemberDetailsSerializer
+                                           serialize:valueObj.showcaseRemoveMemberDetails]];
     jsonDict[@".tag"] = @"showcase_remove_member_details";
   } else if ([valueObj isShowcaseRenamedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseRenamedDetailsSerializer serialize:valueObj.showcaseRenamedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseRenamedDetailsSerializer serialize:valueObj.showcaseRenamedDetails]];
     jsonDict[@".tag"] = @"showcase_renamed_details";
   } else if ([valueObj isShowcaseRequestAccessDetails]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseRequestAccessDetailsSerializer serialize:valueObj.showcaseRequestAccessDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseRequestAccessDetailsSerializer
+                                           serialize:valueObj.showcaseRequestAccessDetails]];
     jsonDict[@".tag"] = @"showcase_request_access_details";
   } else if ([valueObj isShowcaseResolveCommentDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseResolveCommentDetailsSerializer serialize:valueObj.showcaseResolveCommentDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseResolveCommentDetailsSerializer
+                                           serialize:valueObj.showcaseResolveCommentDetails]];
     jsonDict[@".tag"] = @"showcase_resolve_comment_details";
   } else if ([valueObj isShowcaseRestoredDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseRestoredDetailsSerializer serialize:valueObj.showcaseRestoredDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseRestoredDetailsSerializer
+                                           serialize:valueObj.showcaseRestoredDetails]];
     jsonDict[@".tag"] = @"showcase_restored_details";
   } else if ([valueObj isShowcaseTrashedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseTrashedDetailsSerializer serialize:valueObj.showcaseTrashedDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseTrashedDetailsSerializer serialize:valueObj.showcaseTrashedDetails]];
     jsonDict[@".tag"] = @"showcase_trashed_details";
   } else if ([valueObj isShowcaseTrashedDeprecatedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseTrashedDeprecatedDetailsSerializer
-        serialize:valueObj.showcaseTrashedDeprecatedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseTrashedDeprecatedDetailsSerializer
+                                           serialize:valueObj.showcaseTrashedDeprecatedDetails]];
     jsonDict[@".tag"] = @"showcase_trashed_deprecated_details";
   } else if ([valueObj isShowcaseUnresolveCommentDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseUnresolveCommentDetailsSerializer serialize:valueObj.showcaseUnresolveCommentDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseUnresolveCommentDetailsSerializer
+                                           serialize:valueObj.showcaseUnresolveCommentDetails]];
     jsonDict[@".tag"] = @"showcase_unresolve_comment_details";
   } else if ([valueObj isShowcaseUntrashedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseUntrashedDetailsSerializer serialize:valueObj.showcaseUntrashedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseUntrashedDetailsSerializer
+                                           serialize:valueObj.showcaseUntrashedDetails]];
     jsonDict[@".tag"] = @"showcase_untrashed_details";
   } else if ([valueObj isShowcaseUntrashedDeprecatedDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseUntrashedDeprecatedDetailsSerializer
-        serialize:valueObj.showcaseUntrashedDeprecatedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseUntrashedDeprecatedDetailsSerializer
+                                           serialize:valueObj.showcaseUntrashedDeprecatedDetails]];
     jsonDict[@".tag"] = @"showcase_untrashed_deprecated_details";
   } else if ([valueObj isShowcaseViewDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseViewDetailsSerializer serialize:valueObj.showcaseViewDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseViewDetailsSerializer serialize:valueObj.showcaseViewDetails]];
     jsonDict[@".tag"] = @"showcase_view_details";
   } else if ([valueObj isSsoAddCertDetails]) {
-    jsonDict = [[DBTEAMLOGSsoAddCertDetailsSerializer serialize:valueObj.ssoAddCertDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoAddCertDetailsSerializer serialize:valueObj.ssoAddCertDetails]];
     jsonDict[@".tag"] = @"sso_add_cert_details";
   } else if ([valueObj isSsoAddLoginUrlDetails]) {
-    jsonDict = [[DBTEAMLOGSsoAddLoginUrlDetailsSerializer serialize:valueObj.ssoAddLoginUrlDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoAddLoginUrlDetailsSerializer serialize:valueObj.ssoAddLoginUrlDetails]];
     jsonDict[@".tag"] = @"sso_add_login_url_details";
   } else if ([valueObj isSsoAddLogoutUrlDetails]) {
-    jsonDict = [[DBTEAMLOGSsoAddLogoutUrlDetailsSerializer serialize:valueObj.ssoAddLogoutUrlDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoAddLogoutUrlDetailsSerializer serialize:valueObj.ssoAddLogoutUrlDetails]];
     jsonDict[@".tag"] = @"sso_add_logout_url_details";
   } else if ([valueObj isSsoChangeCertDetails]) {
-    jsonDict = [[DBTEAMLOGSsoChangeCertDetailsSerializer serialize:valueObj.ssoChangeCertDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoChangeCertDetailsSerializer serialize:valueObj.ssoChangeCertDetails]];
     jsonDict[@".tag"] = @"sso_change_cert_details";
   } else if ([valueObj isSsoChangeLoginUrlDetails]) {
-    jsonDict = [[DBTEAMLOGSsoChangeLoginUrlDetailsSerializer serialize:valueObj.ssoChangeLoginUrlDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangeLoginUrlDetailsSerializer
+                                           serialize:valueObj.ssoChangeLoginUrlDetails]];
     jsonDict[@".tag"] = @"sso_change_login_url_details";
   } else if ([valueObj isSsoChangeLogoutUrlDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSsoChangeLogoutUrlDetailsSerializer serialize:valueObj.ssoChangeLogoutUrlDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangeLogoutUrlDetailsSerializer
+                                           serialize:valueObj.ssoChangeLogoutUrlDetails]];
     jsonDict[@".tag"] = @"sso_change_logout_url_details";
   } else if ([valueObj isSsoChangeSamlIdentityModeDetails]) {
-    jsonDict = [[DBTEAMLOGSsoChangeSamlIdentityModeDetailsSerializer
-        serialize:valueObj.ssoChangeSamlIdentityModeDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangeSamlIdentityModeDetailsSerializer
+                                           serialize:valueObj.ssoChangeSamlIdentityModeDetails]];
     jsonDict[@".tag"] = @"sso_change_saml_identity_mode_details";
   } else if ([valueObj isSsoRemoveCertDetails]) {
-    jsonDict = [[DBTEAMLOGSsoRemoveCertDetailsSerializer serialize:valueObj.ssoRemoveCertDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoRemoveCertDetailsSerializer serialize:valueObj.ssoRemoveCertDetails]];
     jsonDict[@".tag"] = @"sso_remove_cert_details";
   } else if ([valueObj isSsoRemoveLoginUrlDetails]) {
-    jsonDict = [[DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer serialize:valueObj.ssoRemoveLoginUrlDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoRemoveLoginUrlDetailsSerializer
+                                           serialize:valueObj.ssoRemoveLoginUrlDetails]];
     jsonDict[@".tag"] = @"sso_remove_login_url_details";
   } else if ([valueObj isSsoRemoveLogoutUrlDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer serialize:valueObj.ssoRemoveLogoutUrlDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoRemoveLogoutUrlDetailsSerializer
+                                           serialize:valueObj.ssoRemoveLogoutUrlDetails]];
     jsonDict[@".tag"] = @"sso_remove_logout_url_details";
   } else if ([valueObj isTeamFolderChangeStatusDetails]) {
-    jsonDict = [[DBTEAMLOGTeamFolderChangeStatusDetailsSerializer serialize:valueObj.teamFolderChangeStatusDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderChangeStatusDetailsSerializer
+                                           serialize:valueObj.teamFolderChangeStatusDetails]];
     jsonDict[@".tag"] = @"team_folder_change_status_details";
   } else if ([valueObj isTeamFolderCreateDetails]) {
-    jsonDict = [[DBTEAMLOGTeamFolderCreateDetailsSerializer serialize:valueObj.teamFolderCreateDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderCreateDetailsSerializer
+                                           serialize:valueObj.teamFolderCreateDetails]];
     jsonDict[@".tag"] = @"team_folder_create_details";
   } else if ([valueObj isTeamFolderDowngradeDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTeamFolderDowngradeDetailsSerializer serialize:valueObj.teamFolderDowngradeDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderDowngradeDetailsSerializer
+                                           serialize:valueObj.teamFolderDowngradeDetails]];
     jsonDict[@".tag"] = @"team_folder_downgrade_details";
   } else if ([valueObj isTeamFolderPermanentlyDeleteDetails]) {
-    jsonDict = [[DBTEAMLOGTeamFolderPermanentlyDeleteDetailsSerializer
-        serialize:valueObj.teamFolderPermanentlyDeleteDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderPermanentlyDeleteDetailsSerializer
+                                           serialize:valueObj.teamFolderPermanentlyDeleteDetails]];
     jsonDict[@".tag"] = @"team_folder_permanently_delete_details";
   } else if ([valueObj isTeamFolderRenameDetails]) {
-    jsonDict = [[DBTEAMLOGTeamFolderRenameDetailsSerializer serialize:valueObj.teamFolderRenameDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderRenameDetailsSerializer
+                                           serialize:valueObj.teamFolderRenameDetails]];
     jsonDict[@".tag"] = @"team_folder_rename_details";
   } else if ([valueObj isTeamSelectiveSyncSettingsChangedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamSelectiveSyncSettingsChangedDetailsSerializer
-        serialize:valueObj.teamSelectiveSyncSettingsChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamSelectiveSyncSettingsChangedDetailsSerializer
+                                           serialize:valueObj.teamSelectiveSyncSettingsChangedDetails]];
     jsonDict[@".tag"] = @"team_selective_sync_settings_changed_details";
   } else if ([valueObj isAccountCaptureChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureChangePolicyDetailsSerializer
-        serialize:valueObj.accountCaptureChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangePolicyDetailsSerializer
+                                           serialize:valueObj.accountCaptureChangePolicyDetails]];
     jsonDict[@".tag"] = @"account_capture_change_policy_details";
   } else if ([valueObj isAllowDownloadDisabledDetails]) {
-    jsonDict =
-        [[DBTEAMLOGAllowDownloadDisabledDetailsSerializer serialize:valueObj.allowDownloadDisabledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAllowDownloadDisabledDetailsSerializer
+                                           serialize:valueObj.allowDownloadDisabledDetails]];
     jsonDict[@".tag"] = @"allow_download_disabled_details";
   } else if ([valueObj isAllowDownloadEnabledDetails]) {
-    jsonDict =
-        [[DBTEAMLOGAllowDownloadEnabledDetailsSerializer serialize:valueObj.allowDownloadEnabledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAllowDownloadEnabledDetailsSerializer
+                                           serialize:valueObj.allowDownloadEnabledDetails]];
     jsonDict[@".tag"] = @"allow_download_enabled_details";
   } else if ([valueObj isAppPermissionsChangedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGAppPermissionsChangedDetailsSerializer serialize:valueObj.appPermissionsChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppPermissionsChangedDetailsSerializer
+                                           serialize:valueObj.appPermissionsChangedDetails]];
     jsonDict[@".tag"] = @"app_permissions_changed_details";
   } else if ([valueObj isCameraUploadsPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGCameraUploadsPolicyChangedDetailsSerializer
-        serialize:valueObj.cameraUploadsPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCameraUploadsPolicyChangedDetailsSerializer
+                                           serialize:valueObj.cameraUploadsPolicyChangedDetails]];
     jsonDict[@".tag"] = @"camera_uploads_policy_changed_details";
   } else if ([valueObj isCaptureTranscriptPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGCaptureTranscriptPolicyChangedDetailsSerializer
-        serialize:valueObj.captureTranscriptPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCaptureTranscriptPolicyChangedDetailsSerializer
+                                           serialize:valueObj.captureTranscriptPolicyChangedDetails]];
     jsonDict[@".tag"] = @"capture_transcript_policy_changed_details";
   } else if ([valueObj isClassificationChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGClassificationChangePolicyDetailsSerializer
-        serialize:valueObj.classificationChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGClassificationChangePolicyDetailsSerializer
+                                           serialize:valueObj.classificationChangePolicyDetails]];
     jsonDict[@".tag"] = @"classification_change_policy_details";
   } else if ([valueObj isComputerBackupPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer
-        serialize:valueObj.computerBackupPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGComputerBackupPolicyChangedDetailsSerializer
+                                           serialize:valueObj.computerBackupPolicyChangedDetails]];
     jsonDict[@".tag"] = @"computer_backup_policy_changed_details";
   } else if ([valueObj isContentAdministrationPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGContentAdministrationPolicyChangedDetailsSerializer
-        serialize:valueObj.contentAdministrationPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGContentAdministrationPolicyChangedDetailsSerializer
+                                           serialize:valueObj.contentAdministrationPolicyChangedDetails]];
     jsonDict[@".tag"] = @"content_administration_policy_changed_details";
   } else if ([valueObj isDataPlacementRestrictionChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGDataPlacementRestrictionChangePolicyDetailsSerializer
-        serialize:valueObj.dataPlacementRestrictionChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataPlacementRestrictionChangePolicyDetailsSerializer
+                                           serialize:valueObj.dataPlacementRestrictionChangePolicyDetails]];
     jsonDict[@".tag"] = @"data_placement_restriction_change_policy_details";
   } else if ([valueObj isDataPlacementRestrictionSatisfyPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetailsSerializer
-        serialize:valueObj.dataPlacementRestrictionSatisfyPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataPlacementRestrictionSatisfyPolicyDetailsSerializer
+                                           serialize:valueObj.dataPlacementRestrictionSatisfyPolicyDetails]];
     jsonDict[@".tag"] = @"data_placement_restriction_satisfy_policy_details";
   } else if ([valueObj isDeviceApprovalsAddExceptionDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsAddExceptionDetailsSerializer
-        serialize:valueObj.deviceApprovalsAddExceptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsAddExceptionDetailsSerializer
+                                           serialize:valueObj.deviceApprovalsAddExceptionDetails]];
     jsonDict[@".tag"] = @"device_approvals_add_exception_details";
   } else if ([valueObj isDeviceApprovalsChangeDesktopPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetailsSerializer
-        serialize:valueObj.deviceApprovalsChangeDesktopPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeDesktopPolicyDetailsSerializer
+                                           serialize:valueObj.deviceApprovalsChangeDesktopPolicyDetails]];
     jsonDict[@".tag"] = @"device_approvals_change_desktop_policy_details";
   } else if ([valueObj isDeviceApprovalsChangeMobilePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetailsSerializer
-        serialize:valueObj.deviceApprovalsChangeMobilePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeMobilePolicyDetailsSerializer
+                                           serialize:valueObj.deviceApprovalsChangeMobilePolicyDetails]];
     jsonDict[@".tag"] = @"device_approvals_change_mobile_policy_details";
   } else if ([valueObj isDeviceApprovalsChangeOverageActionDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeOverageActionDetailsSerializer
-        serialize:valueObj.deviceApprovalsChangeOverageActionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeOverageActionDetailsSerializer
+                                           serialize:valueObj.deviceApprovalsChangeOverageActionDetails]];
     jsonDict[@".tag"] = @"device_approvals_change_overage_action_details";
   } else if ([valueObj isDeviceApprovalsChangeUnlinkActionDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetailsSerializer
-        serialize:valueObj.deviceApprovalsChangeUnlinkActionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeUnlinkActionDetailsSerializer
+                                           serialize:valueObj.deviceApprovalsChangeUnlinkActionDetails]];
     jsonDict[@".tag"] = @"device_approvals_change_unlink_action_details";
   } else if ([valueObj isDeviceApprovalsRemoveExceptionDetails]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsRemoveExceptionDetailsSerializer
-        serialize:valueObj.deviceApprovalsRemoveExceptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsRemoveExceptionDetailsSerializer
+                                           serialize:valueObj.deviceApprovalsRemoveExceptionDetails]];
     jsonDict[@".tag"] = @"device_approvals_remove_exception_details";
   } else if ([valueObj isDirectoryRestrictionsAddMembersDetails]) {
-    jsonDict = [[DBTEAMLOGDirectoryRestrictionsAddMembersDetailsSerializer
-        serialize:valueObj.directoryRestrictionsAddMembersDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDirectoryRestrictionsAddMembersDetailsSerializer
+                                           serialize:valueObj.directoryRestrictionsAddMembersDetails]];
     jsonDict[@".tag"] = @"directory_restrictions_add_members_details";
   } else if ([valueObj isDirectoryRestrictionsRemoveMembersDetails]) {
-    jsonDict = [[DBTEAMLOGDirectoryRestrictionsRemoveMembersDetailsSerializer
-        serialize:valueObj.directoryRestrictionsRemoveMembersDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDirectoryRestrictionsRemoveMembersDetailsSerializer
+                                           serialize:valueObj.directoryRestrictionsRemoveMembersDetails]];
     jsonDict[@".tag"] = @"directory_restrictions_remove_members_details";
+  } else if ([valueObj isDropboxPasswordsPolicyChangedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDropboxPasswordsPolicyChangedDetailsSerializer
+                                           serialize:valueObj.dropboxPasswordsPolicyChangedDetails]];
+    jsonDict[@".tag"] = @"dropbox_passwords_policy_changed_details";
   } else if ([valueObj isEmailIngestPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGEmailIngestPolicyChangedDetailsSerializer serialize:valueObj.emailIngestPolicyChangedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmailIngestPolicyChangedDetailsSerializer
+                                           serialize:valueObj.emailIngestPolicyChangedDetails]];
     jsonDict[@".tag"] = @"email_ingest_policy_changed_details";
   } else if ([valueObj isEmmAddExceptionDetails]) {
-    jsonDict = [[DBTEAMLOGEmmAddExceptionDetailsSerializer serialize:valueObj.emmAddExceptionDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGEmmAddExceptionDetailsSerializer serialize:valueObj.emmAddExceptionDetails]];
     jsonDict[@".tag"] = @"emm_add_exception_details";
   } else if ([valueObj isEmmChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGEmmChangePolicyDetailsSerializer serialize:valueObj.emmChangePolicyDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGEmmChangePolicyDetailsSerializer serialize:valueObj.emmChangePolicyDetails]];
     jsonDict[@".tag"] = @"emm_change_policy_details";
   } else if ([valueObj isEmmRemoveExceptionDetails]) {
-    jsonDict =
-        [[DBTEAMLOGEmmRemoveExceptionDetailsSerializer serialize:valueObj.emmRemoveExceptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmRemoveExceptionDetailsSerializer
+                                           serialize:valueObj.emmRemoveExceptionDetails]];
     jsonDict[@".tag"] = @"emm_remove_exception_details";
   } else if ([valueObj isExtendedVersionHistoryChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGExtendedVersionHistoryChangePolicyDetailsSerializer
-        serialize:valueObj.extendedVersionHistoryChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExtendedVersionHistoryChangePolicyDetailsSerializer
+                                           serialize:valueObj.extendedVersionHistoryChangePolicyDetails]];
     jsonDict[@".tag"] = @"extended_version_history_change_policy_details";
   } else if ([valueObj isExternalDriveBackupPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGExternalDriveBackupPolicyChangedDetailsSerializer
-        serialize:valueObj.externalDriveBackupPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalDriveBackupPolicyChangedDetailsSerializer
+                                           serialize:valueObj.externalDriveBackupPolicyChangedDetails]];
     jsonDict[@".tag"] = @"external_drive_backup_policy_changed_details";
   } else if ([valueObj isFileCommentsChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGFileCommentsChangePolicyDetailsSerializer serialize:valueObj.fileCommentsChangePolicyDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileCommentsChangePolicyDetailsSerializer
+                                           serialize:valueObj.fileCommentsChangePolicyDetails]];
     jsonDict[@".tag"] = @"file_comments_change_policy_details";
   } else if ([valueObj isFileLockingPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGFileLockingPolicyChangedDetailsSerializer serialize:valueObj.fileLockingPolicyChangedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLockingPolicyChangedDetailsSerializer
+                                           serialize:valueObj.fileLockingPolicyChangedDetails]];
     jsonDict[@".tag"] = @"file_locking_policy_changed_details";
   } else if ([valueObj isFileRequestsChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestsChangePolicyDetailsSerializer serialize:valueObj.fileRequestsChangePolicyDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsChangePolicyDetailsSerializer
+                                           serialize:valueObj.fileRequestsChangePolicyDetails]];
     jsonDict[@".tag"] = @"file_requests_change_policy_details";
   } else if ([valueObj isFileRequestsEmailsEnabledDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestsEmailsEnabledDetailsSerializer
-        serialize:valueObj.fileRequestsEmailsEnabledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsEmailsEnabledDetailsSerializer
+                                           serialize:valueObj.fileRequestsEmailsEnabledDetails]];
     jsonDict[@".tag"] = @"file_requests_emails_enabled_details";
   } else if ([valueObj isFileRequestsEmailsRestrictedToTeamOnlyDetails]) {
-    jsonDict = [[DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetailsSerializer
-        serialize:valueObj.fileRequestsEmailsRestrictedToTeamOnlyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyDetailsSerializer
+                                           serialize:valueObj.fileRequestsEmailsRestrictedToTeamOnlyDetails]];
     jsonDict[@".tag"] = @"file_requests_emails_restricted_to_team_only_details";
   } else if ([valueObj isFileTransfersPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGFileTransfersPolicyChangedDetailsSerializer
-        serialize:valueObj.fileTransfersPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersPolicyChangedDetailsSerializer
+                                           serialize:valueObj.fileTransfersPolicyChangedDetails]];
     jsonDict[@".tag"] = @"file_transfers_policy_changed_details";
   } else if ([valueObj isGoogleSsoChangePolicyDetails]) {
-    jsonDict =
-        [[DBTEAMLOGGoogleSsoChangePolicyDetailsSerializer serialize:valueObj.googleSsoChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGoogleSsoChangePolicyDetailsSerializer
+                                           serialize:valueObj.googleSsoChangePolicyDetails]];
     jsonDict[@".tag"] = @"google_sso_change_policy_details";
   } else if ([valueObj isGroupUserManagementChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGGroupUserManagementChangePolicyDetailsSerializer
-        serialize:valueObj.groupUserManagementChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupUserManagementChangePolicyDetailsSerializer
+                                           serialize:valueObj.groupUserManagementChangePolicyDetails]];
     jsonDict[@".tag"] = @"group_user_management_change_policy_details";
   } else if ([valueObj isIntegrationPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGIntegrationPolicyChangedDetailsSerializer serialize:valueObj.integrationPolicyChangedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGIntegrationPolicyChangedDetailsSerializer
+                                           serialize:valueObj.integrationPolicyChangedDetails]];
     jsonDict[@".tag"] = @"integration_policy_changed_details";
   } else if ([valueObj isInviteAcceptanceEmailPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGInviteAcceptanceEmailPolicyChangedDetailsSerializer
-        serialize:valueObj.inviteAcceptanceEmailPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGInviteAcceptanceEmailPolicyChangedDetailsSerializer
+                                           serialize:valueObj.inviteAcceptanceEmailPolicyChangedDetails]];
     jsonDict[@".tag"] = @"invite_acceptance_email_policy_changed_details";
   } else if ([valueObj isMemberRequestsChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGMemberRequestsChangePolicyDetailsSerializer
-        serialize:valueObj.memberRequestsChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberRequestsChangePolicyDetailsSerializer
+                                           serialize:valueObj.memberRequestsChangePolicyDetails]];
     jsonDict[@".tag"] = @"member_requests_change_policy_details";
   } else if ([valueObj isMemberSendInvitePolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSendInvitePolicyChangedDetailsSerializer
-        serialize:valueObj.memberSendInvitePolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSendInvitePolicyChangedDetailsSerializer
+                                           serialize:valueObj.memberSendInvitePolicyChangedDetails]];
     jsonDict[@".tag"] = @"member_send_invite_policy_changed_details";
   } else if ([valueObj isMemberSpaceLimitsAddExceptionDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsAddExceptionDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsAddExceptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsAddExceptionDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsAddExceptionDetails]];
     jsonDict[@".tag"] = @"member_space_limits_add_exception_details";
   } else if ([valueObj isMemberSpaceLimitsChangeCapsTypePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsChangeCapsTypePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangeCapsTypePolicyDetails]];
     jsonDict[@".tag"] = @"member_space_limits_change_caps_type_policy_details";
   } else if ([valueObj isMemberSpaceLimitsChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangePolicyDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangePolicyDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangePolicyDetails]];
     jsonDict[@".tag"] = @"member_space_limits_change_policy_details";
   } else if ([valueObj isMemberSpaceLimitsRemoveExceptionDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetailsSerializer
-        serialize:valueObj.memberSpaceLimitsRemoveExceptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsRemoveExceptionDetailsSerializer
+                                           serialize:valueObj.memberSpaceLimitsRemoveExceptionDetails]];
     jsonDict[@".tag"] = @"member_space_limits_remove_exception_details";
   } else if ([valueObj isMemberSuggestionsChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGMemberSuggestionsChangePolicyDetailsSerializer
-        serialize:valueObj.memberSuggestionsChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSuggestionsChangePolicyDetailsSerializer
+                                           serialize:valueObj.memberSuggestionsChangePolicyDetails]];
     jsonDict[@".tag"] = @"member_suggestions_change_policy_details";
   } else if ([valueObj isMicrosoftOfficeAddinChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetailsSerializer
-        serialize:valueObj.microsoftOfficeAddinChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMicrosoftOfficeAddinChangePolicyDetailsSerializer
+                                           serialize:valueObj.microsoftOfficeAddinChangePolicyDetails]];
     jsonDict[@".tag"] = @"microsoft_office_addin_change_policy_details";
   } else if ([valueObj isNetworkControlChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGNetworkControlChangePolicyDetailsSerializer
-        serialize:valueObj.networkControlChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNetworkControlChangePolicyDetailsSerializer
+                                           serialize:valueObj.networkControlChangePolicyDetails]];
     jsonDict[@".tag"] = @"network_control_change_policy_details";
   } else if ([valueObj isPaperChangeDeploymentPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPaperChangeDeploymentPolicyDetailsSerializer
-        serialize:valueObj.paperChangeDeploymentPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangeDeploymentPolicyDetailsSerializer
+                                           serialize:valueObj.paperChangeDeploymentPolicyDetails]];
     jsonDict[@".tag"] = @"paper_change_deployment_policy_details";
   } else if ([valueObj isPaperChangeMemberLinkPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer
-        serialize:valueObj.paperChangeMemberLinkPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangeMemberLinkPolicyDetailsSerializer
+                                           serialize:valueObj.paperChangeMemberLinkPolicyDetails]];
     jsonDict[@".tag"] = @"paper_change_member_link_policy_details";
   } else if ([valueObj isPaperChangeMemberPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPaperChangeMemberPolicyDetailsSerializer serialize:valueObj.paperChangeMemberPolicyDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangeMemberPolicyDetailsSerializer
+                                           serialize:valueObj.paperChangeMemberPolicyDetails]];
     jsonDict[@".tag"] = @"paper_change_member_policy_details";
   } else if ([valueObj isPaperChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPaperChangePolicyDetailsSerializer serialize:valueObj.paperChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangePolicyDetailsSerializer
+                                           serialize:valueObj.paperChangePolicyDetails]];
     jsonDict[@".tag"] = @"paper_change_policy_details";
   } else if ([valueObj isPaperDefaultFolderPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDefaultFolderPolicyChangedDetailsSerializer
-        serialize:valueObj.paperDefaultFolderPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDefaultFolderPolicyChangedDetailsSerializer
+                                           serialize:valueObj.paperDefaultFolderPolicyChangedDetails]];
     jsonDict[@".tag"] = @"paper_default_folder_policy_changed_details";
   } else if ([valueObj isPaperDesktopPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGPaperDesktopPolicyChangedDetailsSerializer
-        serialize:valueObj.paperDesktopPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDesktopPolicyChangedDetailsSerializer
+                                           serialize:valueObj.paperDesktopPolicyChangedDetails]];
     jsonDict[@".tag"] = @"paper_desktop_policy_changed_details";
   } else if ([valueObj isPaperEnabledUsersGroupAdditionDetails]) {
-    jsonDict = [[DBTEAMLOGPaperEnabledUsersGroupAdditionDetailsSerializer
-        serialize:valueObj.paperEnabledUsersGroupAdditionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperEnabledUsersGroupAdditionDetailsSerializer
+                                           serialize:valueObj.paperEnabledUsersGroupAdditionDetails]];
     jsonDict[@".tag"] = @"paper_enabled_users_group_addition_details";
   } else if ([valueObj isPaperEnabledUsersGroupRemovalDetails]) {
-    jsonDict = [[DBTEAMLOGPaperEnabledUsersGroupRemovalDetailsSerializer
-        serialize:valueObj.paperEnabledUsersGroupRemovalDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperEnabledUsersGroupRemovalDetailsSerializer
+                                           serialize:valueObj.paperEnabledUsersGroupRemovalDetails]];
     jsonDict[@".tag"] = @"paper_enabled_users_group_removal_details";
   } else if ([valueObj isPasswordStrengthRequirementsChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetailsSerializer
-        serialize:valueObj.passwordStrengthRequirementsChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPasswordStrengthRequirementsChangePolicyDetailsSerializer
+                                           serialize:valueObj.passwordStrengthRequirementsChangePolicyDetails]];
     jsonDict[@".tag"] = @"password_strength_requirements_change_policy_details";
   } else if ([valueObj isPermanentDeleteChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGPermanentDeleteChangePolicyDetailsSerializer
-        serialize:valueObj.permanentDeleteChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPermanentDeleteChangePolicyDetailsSerializer
+                                           serialize:valueObj.permanentDeleteChangePolicyDetails]];
     jsonDict[@".tag"] = @"permanent_delete_change_policy_details";
   } else if ([valueObj isResellerSupportChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGResellerSupportChangePolicyDetailsSerializer
-        serialize:valueObj.resellerSupportChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerSupportChangePolicyDetailsSerializer
+                                           serialize:valueObj.resellerSupportChangePolicyDetails]];
     jsonDict[@".tag"] = @"reseller_support_change_policy_details";
   } else if ([valueObj isRewindPolicyChangedDetails]) {
-    jsonDict =
-        [[DBTEAMLOGRewindPolicyChangedDetailsSerializer serialize:valueObj.rewindPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRewindPolicyChangedDetailsSerializer
+                                           serialize:valueObj.rewindPolicyChangedDetails]];
     jsonDict[@".tag"] = @"rewind_policy_changed_details";
   } else if ([valueObj isSendForSignaturePolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGSendForSignaturePolicyChangedDetailsSerializer
-        serialize:valueObj.sendForSignaturePolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSendForSignaturePolicyChangedDetailsSerializer
+                                           serialize:valueObj.sendForSignaturePolicyChangedDetails]];
     jsonDict[@".tag"] = @"send_for_signature_policy_changed_details";
   } else if ([valueObj isSharingChangeFolderJoinPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharingChangeFolderJoinPolicyDetailsSerializer
-        serialize:valueObj.sharingChangeFolderJoinPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeFolderJoinPolicyDetailsSerializer
+                                           serialize:valueObj.sharingChangeFolderJoinPolicyDetails]];
     jsonDict[@".tag"] = @"sharing_change_folder_join_policy_details";
   } else if ([valueObj isSharingChangeLinkAllowChangeExpirationPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkAllowChangeExpirationPolicyDetailsSerializer
-        serialize:valueObj.sharingChangeLinkAllowChangeExpirationPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkAllowChangeExpirationPolicyDetailsSerializer
+                                           serialize:valueObj.sharingChangeLinkAllowChangeExpirationPolicyDetails]];
     jsonDict[@".tag"] = @"sharing_change_link_allow_change_expiration_policy_details";
   } else if ([valueObj isSharingChangeLinkDefaultExpirationPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkDefaultExpirationPolicyDetailsSerializer
-        serialize:valueObj.sharingChangeLinkDefaultExpirationPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkDefaultExpirationPolicyDetailsSerializer
+                                           serialize:valueObj.sharingChangeLinkDefaultExpirationPolicyDetails]];
     jsonDict[@".tag"] = @"sharing_change_link_default_expiration_policy_details";
   } else if ([valueObj isSharingChangeLinkEnforcePasswordPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkEnforcePasswordPolicyDetailsSerializer
-        serialize:valueObj.sharingChangeLinkEnforcePasswordPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkEnforcePasswordPolicyDetailsSerializer
+                                           serialize:valueObj.sharingChangeLinkEnforcePasswordPolicyDetails]];
     jsonDict[@".tag"] = @"sharing_change_link_enforce_password_policy_details";
   } else if ([valueObj isSharingChangeLinkPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkPolicyDetailsSerializer serialize:valueObj.sharingChangeLinkPolicyDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkPolicyDetailsSerializer
+                                           serialize:valueObj.sharingChangeLinkPolicyDetails]];
     jsonDict[@".tag"] = @"sharing_change_link_policy_details";
   } else if ([valueObj isSharingChangeMemberPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSharingChangeMemberPolicyDetailsSerializer
-        serialize:valueObj.sharingChangeMemberPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeMemberPolicyDetailsSerializer
+                                           serialize:valueObj.sharingChangeMemberPolicyDetails]];
     jsonDict[@".tag"] = @"sharing_change_member_policy_details";
   } else if ([valueObj isShowcaseChangeDownloadPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseChangeDownloadPolicyDetailsSerializer
-        serialize:valueObj.showcaseChangeDownloadPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseChangeDownloadPolicyDetailsSerializer
+                                           serialize:valueObj.showcaseChangeDownloadPolicyDetails]];
     jsonDict[@".tag"] = @"showcase_change_download_policy_details";
   } else if ([valueObj isShowcaseChangeEnabledPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseChangeEnabledPolicyDetailsSerializer
-        serialize:valueObj.showcaseChangeEnabledPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseChangeEnabledPolicyDetailsSerializer
+                                           serialize:valueObj.showcaseChangeEnabledPolicyDetails]];
     jsonDict[@".tag"] = @"showcase_change_enabled_policy_details";
   } else if ([valueObj isShowcaseChangeExternalSharingPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGShowcaseChangeExternalSharingPolicyDetailsSerializer
-        serialize:valueObj.showcaseChangeExternalSharingPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseChangeExternalSharingPolicyDetailsSerializer
+                                           serialize:valueObj.showcaseChangeExternalSharingPolicyDetails]];
     jsonDict[@".tag"] = @"showcase_change_external_sharing_policy_details";
   } else if ([valueObj isSmarterSmartSyncPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGSmarterSmartSyncPolicyChangedDetailsSerializer
-        serialize:valueObj.smarterSmartSyncPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmarterSmartSyncPolicyChangedDetailsSerializer
+                                           serialize:valueObj.smarterSmartSyncPolicyChangedDetails]];
     jsonDict[@".tag"] = @"smarter_smart_sync_policy_changed_details";
   } else if ([valueObj isSmartSyncChangePolicyDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSmartSyncChangePolicyDetailsSerializer serialize:valueObj.smartSyncChangePolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncChangePolicyDetailsSerializer
+                                           serialize:valueObj.smartSyncChangePolicyDetails]];
     jsonDict[@".tag"] = @"smart_sync_change_policy_details";
   } else if ([valueObj isSmartSyncNotOptOutDetails]) {
-    jsonDict =
-        [[DBTEAMLOGSmartSyncNotOptOutDetailsSerializer serialize:valueObj.smartSyncNotOptOutDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncNotOptOutDetailsSerializer
+                                           serialize:valueObj.smartSyncNotOptOutDetails]];
     jsonDict[@".tag"] = @"smart_sync_not_opt_out_details";
   } else if ([valueObj isSmartSyncOptOutDetails]) {
-    jsonDict = [[DBTEAMLOGSmartSyncOptOutDetailsSerializer serialize:valueObj.smartSyncOptOutDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSmartSyncOptOutDetailsSerializer serialize:valueObj.smartSyncOptOutDetails]];
     jsonDict[@".tag"] = @"smart_sync_opt_out_details";
   } else if ([valueObj isSsoChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGSsoChangePolicyDetailsSerializer serialize:valueObj.ssoChangePolicyDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoChangePolicyDetailsSerializer serialize:valueObj.ssoChangePolicyDetails]];
     jsonDict[@".tag"] = @"sso_change_policy_details";
   } else if ([valueObj isTeamBrandingPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer
-        serialize:valueObj.teamBrandingPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamBrandingPolicyChangedDetailsSerializer
+                                           serialize:valueObj.teamBrandingPolicyChangedDetails]];
     jsonDict[@".tag"] = @"team_branding_policy_changed_details";
   } else if ([valueObj isTeamExtensionsPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamExtensionsPolicyChangedDetailsSerializer
-        serialize:valueObj.teamExtensionsPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamExtensionsPolicyChangedDetailsSerializer
+                                           serialize:valueObj.teamExtensionsPolicyChangedDetails]];
     jsonDict[@".tag"] = @"team_extensions_policy_changed_details";
   } else if ([valueObj isTeamSelectiveSyncPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamSelectiveSyncPolicyChangedDetailsSerializer
-        serialize:valueObj.teamSelectiveSyncPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamSelectiveSyncPolicyChangedDetailsSerializer
+                                           serialize:valueObj.teamSelectiveSyncPolicyChangedDetails]];
     jsonDict[@".tag"] = @"team_selective_sync_policy_changed_details";
   } else if ([valueObj isTeamSharingWhitelistSubjectsChangedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamSharingWhitelistSubjectsChangedDetailsSerializer
-        serialize:valueObj.teamSharingWhitelistSubjectsChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamSharingWhitelistSubjectsChangedDetailsSerializer
+                                           serialize:valueObj.teamSharingWhitelistSubjectsChangedDetails]];
     jsonDict[@".tag"] = @"team_sharing_whitelist_subjects_changed_details";
   } else if ([valueObj isTfaAddExceptionDetails]) {
-    jsonDict = [[DBTEAMLOGTfaAddExceptionDetailsSerializer serialize:valueObj.tfaAddExceptionDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaAddExceptionDetailsSerializer serialize:valueObj.tfaAddExceptionDetails]];
     jsonDict[@".tag"] = @"tfa_add_exception_details";
   } else if ([valueObj isTfaChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGTfaChangePolicyDetailsSerializer serialize:valueObj.tfaChangePolicyDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaChangePolicyDetailsSerializer serialize:valueObj.tfaChangePolicyDetails]];
     jsonDict[@".tag"] = @"tfa_change_policy_details";
   } else if ([valueObj isTfaRemoveExceptionDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTfaRemoveExceptionDetailsSerializer serialize:valueObj.tfaRemoveExceptionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaRemoveExceptionDetailsSerializer
+                                           serialize:valueObj.tfaRemoveExceptionDetails]];
     jsonDict[@".tag"] = @"tfa_remove_exception_details";
   } else if ([valueObj isTwoAccountChangePolicyDetails]) {
-    jsonDict = [[DBTEAMLOGTwoAccountChangePolicyDetailsSerializer serialize:valueObj.twoAccountChangePolicyDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTwoAccountChangePolicyDetailsSerializer
+                                           serialize:valueObj.twoAccountChangePolicyDetails]];
     jsonDict[@".tag"] = @"two_account_change_policy_details";
   } else if ([valueObj isViewerInfoPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGViewerInfoPolicyChangedDetailsSerializer serialize:valueObj.viewerInfoPolicyChangedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGViewerInfoPolicyChangedDetailsSerializer
+                                           serialize:valueObj.viewerInfoPolicyChangedDetails]];
     jsonDict[@".tag"] = @"viewer_info_policy_changed_details";
   } else if ([valueObj isWatermarkingPolicyChangedDetails]) {
-    jsonDict = [[DBTEAMLOGWatermarkingPolicyChangedDetailsSerializer
-        serialize:valueObj.watermarkingPolicyChangedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWatermarkingPolicyChangedDetailsSerializer
+                                           serialize:valueObj.watermarkingPolicyChangedDetails]];
     jsonDict[@".tag"] = @"watermarking_policy_changed_details";
   } else if ([valueObj isWebSessionsChangeActiveSessionLimitDetails]) {
-    jsonDict = [[DBTEAMLOGWebSessionsChangeActiveSessionLimitDetailsSerializer
-        serialize:valueObj.webSessionsChangeActiveSessionLimitDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionsChangeActiveSessionLimitDetailsSerializer
+                                           serialize:valueObj.webSessionsChangeActiveSessionLimitDetails]];
     jsonDict[@".tag"] = @"web_sessions_change_active_session_limit_details";
   } else if ([valueObj isWebSessionsChangeFixedLengthPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetailsSerializer
-        serialize:valueObj.webSessionsChangeFixedLengthPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionsChangeFixedLengthPolicyDetailsSerializer
+                                           serialize:valueObj.webSessionsChangeFixedLengthPolicyDetails]];
     jsonDict[@".tag"] = @"web_sessions_change_fixed_length_policy_details";
   } else if ([valueObj isWebSessionsChangeIdleLengthPolicyDetails]) {
-    jsonDict = [[DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetailsSerializer
-        serialize:valueObj.webSessionsChangeIdleLengthPolicyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetailsSerializer
+                                           serialize:valueObj.webSessionsChangeIdleLengthPolicyDetails]];
     jsonDict[@".tag"] = @"web_sessions_change_idle_length_policy_details";
+  } else if ([valueObj isDataResidencyMigrationRequestSuccessfulDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetailsSerializer
+                                           serialize:valueObj.dataResidencyMigrationRequestSuccessfulDetails]];
+    jsonDict[@".tag"] = @"data_residency_migration_request_successful_details";
+  } else if ([valueObj isDataResidencyMigrationRequestUnsuccessfulDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetailsSerializer
+                                           serialize:valueObj.dataResidencyMigrationRequestUnsuccessfulDetails]];
+    jsonDict[@".tag"] = @"data_residency_migration_request_unsuccessful_details";
   } else if ([valueObj isTeamMergeFromDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeFromDetailsSerializer serialize:valueObj.teamMergeFromDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTeamMergeFromDetailsSerializer serialize:valueObj.teamMergeFromDetails]];
     jsonDict[@".tag"] = @"team_merge_from_details";
   } else if ([valueObj isTeamMergeToDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeToDetailsSerializer serialize:valueObj.teamMergeToDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeToDetailsSerializer serialize:valueObj.teamMergeToDetails]];
     jsonDict[@".tag"] = @"team_merge_to_details";
   } else if ([valueObj isTeamProfileAddBackgroundDetails]) {
-    jsonDict = [[DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer serialize:valueObj.teamProfileAddBackgroundDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileAddBackgroundDetailsSerializer
+                                           serialize:valueObj.teamProfileAddBackgroundDetails]];
     jsonDict[@".tag"] = @"team_profile_add_background_details";
   } else if ([valueObj isTeamProfileAddLogoDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTeamProfileAddLogoDetailsSerializer serialize:valueObj.teamProfileAddLogoDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileAddLogoDetailsSerializer
+                                           serialize:valueObj.teamProfileAddLogoDetails]];
     jsonDict[@".tag"] = @"team_profile_add_logo_details";
   } else if ([valueObj isTeamProfileChangeBackgroundDetails]) {
-    jsonDict = [[DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer
-        serialize:valueObj.teamProfileChangeBackgroundDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeBackgroundDetailsSerializer
+                                           serialize:valueObj.teamProfileChangeBackgroundDetails]];
     jsonDict[@".tag"] = @"team_profile_change_background_details";
   } else if ([valueObj isTeamProfileChangeDefaultLanguageDetails]) {
-    jsonDict = [[DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer
-        serialize:valueObj.teamProfileChangeDefaultLanguageDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeDefaultLanguageDetailsSerializer
+                                           serialize:valueObj.teamProfileChangeDefaultLanguageDetails]];
     jsonDict[@".tag"] = @"team_profile_change_default_language_details";
   } else if ([valueObj isTeamProfileChangeLogoDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTeamProfileChangeLogoDetailsSerializer serialize:valueObj.teamProfileChangeLogoDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeLogoDetailsSerializer
+                                           serialize:valueObj.teamProfileChangeLogoDetails]];
     jsonDict[@".tag"] = @"team_profile_change_logo_details";
   } else if ([valueObj isTeamProfileChangeNameDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTeamProfileChangeNameDetailsSerializer serialize:valueObj.teamProfileChangeNameDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeNameDetailsSerializer
+                                           serialize:valueObj.teamProfileChangeNameDetails]];
     jsonDict[@".tag"] = @"team_profile_change_name_details";
   } else if ([valueObj isTeamProfileRemoveBackgroundDetails]) {
-    jsonDict = [[DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer
-        serialize:valueObj.teamProfileRemoveBackgroundDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileRemoveBackgroundDetailsSerializer
+                                           serialize:valueObj.teamProfileRemoveBackgroundDetails]];
     jsonDict[@".tag"] = @"team_profile_remove_background_details";
   } else if ([valueObj isTeamProfileRemoveLogoDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTeamProfileRemoveLogoDetailsSerializer serialize:valueObj.teamProfileRemoveLogoDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileRemoveLogoDetailsSerializer
+                                           serialize:valueObj.teamProfileRemoveLogoDetails]];
     jsonDict[@".tag"] = @"team_profile_remove_logo_details";
   } else if ([valueObj isTfaAddBackupPhoneDetails]) {
-    jsonDict = [[DBTEAMLOGTfaAddBackupPhoneDetailsSerializer serialize:valueObj.tfaAddBackupPhoneDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaAddBackupPhoneDetailsSerializer
+                                           serialize:valueObj.tfaAddBackupPhoneDetails]];
     jsonDict[@".tag"] = @"tfa_add_backup_phone_details";
   } else if ([valueObj isTfaAddSecurityKeyDetails]) {
-    jsonDict = [[DBTEAMLOGTfaAddSecurityKeyDetailsSerializer serialize:valueObj.tfaAddSecurityKeyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaAddSecurityKeyDetailsSerializer
+                                           serialize:valueObj.tfaAddSecurityKeyDetails]];
     jsonDict[@".tag"] = @"tfa_add_security_key_details";
   } else if ([valueObj isTfaChangeBackupPhoneDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTfaChangeBackupPhoneDetailsSerializer serialize:valueObj.tfaChangeBackupPhoneDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaChangeBackupPhoneDetailsSerializer
+                                           serialize:valueObj.tfaChangeBackupPhoneDetails]];
     jsonDict[@".tag"] = @"tfa_change_backup_phone_details";
   } else if ([valueObj isTfaChangeStatusDetails]) {
-    jsonDict = [[DBTEAMLOGTfaChangeStatusDetailsSerializer serialize:valueObj.tfaChangeStatusDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaChangeStatusDetailsSerializer serialize:valueObj.tfaChangeStatusDetails]];
     jsonDict[@".tag"] = @"tfa_change_status_details";
   } else if ([valueObj isTfaRemoveBackupPhoneDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTfaRemoveBackupPhoneDetailsSerializer serialize:valueObj.tfaRemoveBackupPhoneDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaRemoveBackupPhoneDetailsSerializer
+                                           serialize:valueObj.tfaRemoveBackupPhoneDetails]];
     jsonDict[@".tag"] = @"tfa_remove_backup_phone_details";
   } else if ([valueObj isTfaRemoveSecurityKeyDetails]) {
-    jsonDict =
-        [[DBTEAMLOGTfaRemoveSecurityKeyDetailsSerializer serialize:valueObj.tfaRemoveSecurityKeyDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaRemoveSecurityKeyDetailsSerializer
+                                           serialize:valueObj.tfaRemoveSecurityKeyDetails]];
     jsonDict[@".tag"] = @"tfa_remove_security_key_details";
   } else if ([valueObj isTfaResetDetails]) {
-    jsonDict = [[DBTEAMLOGTfaResetDetailsSerializer serialize:valueObj.tfaResetDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaResetDetailsSerializer serialize:valueObj.tfaResetDetails]];
     jsonDict[@".tag"] = @"tfa_reset_details";
   } else if ([valueObj isChangedEnterpriseAdminRoleDetails]) {
-    jsonDict = [[DBTEAMLOGChangedEnterpriseAdminRoleDetailsSerializer
-        serialize:valueObj.changedEnterpriseAdminRoleDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGChangedEnterpriseAdminRoleDetailsSerializer
+                                           serialize:valueObj.changedEnterpriseAdminRoleDetails]];
     jsonDict[@".tag"] = @"changed_enterprise_admin_role_details";
   } else if ([valueObj isChangedEnterpriseConnectedTeamStatusDetails]) {
-    jsonDict = [[DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetailsSerializer
-        serialize:valueObj.changedEnterpriseConnectedTeamStatusDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGChangedEnterpriseConnectedTeamStatusDetailsSerializer
+                                           serialize:valueObj.changedEnterpriseConnectedTeamStatusDetails]];
     jsonDict[@".tag"] = @"changed_enterprise_connected_team_status_details";
   } else if ([valueObj isEndedEnterpriseAdminSessionDetails]) {
-    jsonDict = [[DBTEAMLOGEndedEnterpriseAdminSessionDetailsSerializer
-        serialize:valueObj.endedEnterpriseAdminSessionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEndedEnterpriseAdminSessionDetailsSerializer
+                                           serialize:valueObj.endedEnterpriseAdminSessionDetails]];
     jsonDict[@".tag"] = @"ended_enterprise_admin_session_details";
   } else if ([valueObj isEndedEnterpriseAdminSessionDeprecatedDetails]) {
-    jsonDict = [[DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedDetailsSerializer
-        serialize:valueObj.endedEnterpriseAdminSessionDeprecatedDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedDetailsSerializer
+                                           serialize:valueObj.endedEnterpriseAdminSessionDeprecatedDetails]];
     jsonDict[@".tag"] = @"ended_enterprise_admin_session_deprecated_details";
   } else if ([valueObj isEnterpriseSettingsLockingDetails]) {
-    jsonDict = [[DBTEAMLOGEnterpriseSettingsLockingDetailsSerializer
-        serialize:valueObj.enterpriseSettingsLockingDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEnterpriseSettingsLockingDetailsSerializer
+                                           serialize:valueObj.enterpriseSettingsLockingDetails]];
     jsonDict[@".tag"] = @"enterprise_settings_locking_details";
   } else if ([valueObj isGuestAdminChangeStatusDetails]) {
-    jsonDict = [[DBTEAMLOGGuestAdminChangeStatusDetailsSerializer serialize:valueObj.guestAdminChangeStatusDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGuestAdminChangeStatusDetailsSerializer
+                                           serialize:valueObj.guestAdminChangeStatusDetails]];
     jsonDict[@".tag"] = @"guest_admin_change_status_details";
   } else if ([valueObj isStartedEnterpriseAdminSessionDetails]) {
-    jsonDict = [[DBTEAMLOGStartedEnterpriseAdminSessionDetailsSerializer
-        serialize:valueObj.startedEnterpriseAdminSessionDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGStartedEnterpriseAdminSessionDetailsSerializer
+                                           serialize:valueObj.startedEnterpriseAdminSessionDetails]];
     jsonDict[@".tag"] = @"started_enterprise_admin_session_details";
   } else if ([valueObj isTeamMergeRequestAcceptedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAcceptedDetailsSerializer serialize:valueObj.teamMergeRequestAcceptedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAcceptedDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestAcceptedDetails]];
     jsonDict[@".tag"] = @"team_merge_request_accepted_details";
   } else if ([valueObj isTeamMergeRequestAcceptedShownToPrimaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAcceptedShownToPrimaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestAcceptedShownToPrimaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAcceptedShownToPrimaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestAcceptedShownToPrimaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_accepted_shown_to_primary_team_details";
   } else if ([valueObj isTeamMergeRequestAcceptedShownToSecondaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAcceptedShownToSecondaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestAcceptedShownToSecondaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAcceptedShownToSecondaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestAcceptedShownToSecondaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_accepted_shown_to_secondary_team_details";
   } else if ([valueObj isTeamMergeRequestAutoCanceledDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAutoCanceledDetailsSerializer
-        serialize:valueObj.teamMergeRequestAutoCanceledDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAutoCanceledDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestAutoCanceledDetails]];
     jsonDict[@".tag"] = @"team_merge_request_auto_canceled_details";
   } else if ([valueObj isTeamMergeRequestCanceledDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestCanceledDetailsSerializer serialize:valueObj.teamMergeRequestCanceledDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestCanceledDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestCanceledDetails]];
     jsonDict[@".tag"] = @"team_merge_request_canceled_details";
   } else if ([valueObj isTeamMergeRequestCanceledShownToPrimaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestCanceledShownToPrimaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestCanceledShownToPrimaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestCanceledShownToPrimaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestCanceledShownToPrimaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_canceled_shown_to_primary_team_details";
   } else if ([valueObj isTeamMergeRequestCanceledShownToSecondaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestCanceledShownToSecondaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestCanceledShownToSecondaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestCanceledShownToSecondaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestCanceledShownToSecondaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_canceled_shown_to_secondary_team_details";
   } else if ([valueObj isTeamMergeRequestExpiredDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestExpiredDetailsSerializer serialize:valueObj.teamMergeRequestExpiredDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestExpiredDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestExpiredDetails]];
     jsonDict[@".tag"] = @"team_merge_request_expired_details";
   } else if ([valueObj isTeamMergeRequestExpiredShownToPrimaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestExpiredShownToPrimaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestExpiredShownToPrimaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestExpiredShownToPrimaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestExpiredShownToPrimaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_expired_shown_to_primary_team_details";
   } else if ([valueObj isTeamMergeRequestExpiredShownToSecondaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestExpiredShownToSecondaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestExpiredShownToSecondaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestExpiredShownToSecondaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestExpiredShownToSecondaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_expired_shown_to_secondary_team_details";
   } else if ([valueObj isTeamMergeRequestRejectedShownToPrimaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestRejectedShownToPrimaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestRejectedShownToPrimaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestRejectedShownToPrimaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestRejectedShownToPrimaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_rejected_shown_to_primary_team_details";
   } else if ([valueObj isTeamMergeRequestRejectedShownToSecondaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestRejectedShownToSecondaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestRejectedShownToSecondaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_rejected_shown_to_secondary_team_details";
   } else if ([valueObj isTeamMergeRequestReminderDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestReminderDetailsSerializer serialize:valueObj.teamMergeRequestReminderDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestReminderDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestReminderDetails]];
     jsonDict[@".tag"] = @"team_merge_request_reminder_details";
   } else if ([valueObj isTeamMergeRequestReminderShownToPrimaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestReminderShownToPrimaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestReminderShownToPrimaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_reminder_shown_to_primary_team_details";
   } else if ([valueObj isTeamMergeRequestReminderShownToSecondaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestReminderShownToSecondaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestReminderShownToSecondaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestReminderShownToSecondaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestReminderShownToSecondaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_reminder_shown_to_secondary_team_details";
   } else if ([valueObj isTeamMergeRequestRevokedDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestRevokedDetailsSerializer serialize:valueObj.teamMergeRequestRevokedDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestRevokedDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestRevokedDetails]];
     jsonDict[@".tag"] = @"team_merge_request_revoked_details";
   } else if ([valueObj isTeamMergeRequestSentShownToPrimaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestSentShownToPrimaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestSentShownToPrimaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_sent_shown_to_primary_team_details";
   } else if ([valueObj isTeamMergeRequestSentShownToSecondaryTeamDetails]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamDetailsSerializer
-        serialize:valueObj.teamMergeRequestSentShownToSecondaryTeamDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamDetailsSerializer
+                                           serialize:valueObj.teamMergeRequestSentShownToSecondaryTeamDetails]];
     jsonDict[@".tag"] = @"team_merge_request_sent_shown_to_secondary_team_details";
   } else if ([valueObj isMissingDetails]) {
-    jsonDict = [[DBTEAMLOGMissingDetailsSerializer serialize:valueObj.missingDetails] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMissingDetailsSerializer serialize:valueObj.missingDetails]];
     jsonDict[@".tag"] = @"missing_details";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -44879,6 +45947,14 @@
   } else if ([tag isEqualToString:@"rewind_folder_details"]) {
     DBTEAMLOGRewindFolderDetails *rewindFolderDetails = [DBTEAMLOGRewindFolderDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithRewindFolderDetails:rewindFolderDetails];
+  } else if ([tag isEqualToString:@"undo_naming_convention_details"]) {
+    DBTEAMLOGUndoNamingConventionDetails *undoNamingConventionDetails =
+        [DBTEAMLOGUndoNamingConventionDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithUndoNamingConventionDetails:undoNamingConventionDetails];
+  } else if ([tag isEqualToString:@"undo_organize_folder_with_tidy_details"]) {
+    DBTEAMLOGUndoOrganizeFolderWithTidyDetails *undoOrganizeFolderWithTidyDetails =
+        [DBTEAMLOGUndoOrganizeFolderWithTidyDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithUndoOrganizeFolderWithTidyDetails:undoOrganizeFolderWithTidyDetails];
   } else if ([tag isEqualToString:@"user_tags_added_details"]) {
     DBTEAMLOGUserTagsAddedDetails *userTagsAddedDetails =
         [DBTEAMLOGUserTagsAddedDetailsSerializer deserialize:valueDict];
@@ -46024,6 +47100,11 @@
         [DBTEAMLOGDirectoryRestrictionsRemoveMembersDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc]
         initWithDirectoryRestrictionsRemoveMembersDetails:directoryRestrictionsRemoveMembersDetails];
+  } else if ([tag isEqualToString:@"dropbox_passwords_policy_changed_details"]) {
+    DBTEAMLOGDropboxPasswordsPolicyChangedDetails *dropboxPasswordsPolicyChangedDetails =
+        [DBTEAMLOGDropboxPasswordsPolicyChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithDropboxPasswordsPolicyChangedDetails:dropboxPasswordsPolicyChangedDetails];
   } else if ([tag isEqualToString:@"email_ingest_policy_changed_details"]) {
     DBTEAMLOGEmailIngestPolicyChangedDetails *emailIngestPolicyChangedDetails =
         [DBTEAMLOGEmailIngestPolicyChangedDetailsSerializer deserialize:valueDict];
@@ -46319,6 +47400,16 @@
         [DBTEAMLOGWebSessionsChangeIdleLengthPolicyDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc]
         initWithWebSessionsChangeIdleLengthPolicyDetails:webSessionsChangeIdleLengthPolicyDetails];
+  } else if ([tag isEqualToString:@"data_residency_migration_request_successful_details"]) {
+    DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetails *dataResidencyMigrationRequestSuccessfulDetails =
+        [DBTEAMLOGDataResidencyMigrationRequestSuccessfulDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithDataResidencyMigrationRequestSuccessfulDetails:dataResidencyMigrationRequestSuccessfulDetails];
+  } else if ([tag isEqualToString:@"data_residency_migration_request_unsuccessful_details"]) {
+    DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetails *dataResidencyMigrationRequestUnsuccessfulDetails =
+        [DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithDataResidencyMigrationRequestUnsuccessfulDetails:dataResidencyMigrationRequestUnsuccessfulDetails];
   } else if ([tag isEqualToString:@"team_merge_from_details"]) {
     DBTEAMLOGTeamMergeFromDetails *teamMergeFromDetails =
         [DBTEAMLOGTeamMergeFromDetailsSerializer deserialize:valueDict];
@@ -46559,6 +47650,8 @@
 #import "DBTEAMLOGCreateTeamInviteLinkType.h"
 #import "DBTEAMLOGDataPlacementRestrictionChangePolicyType.h"
 #import "DBTEAMLOGDataPlacementRestrictionSatisfyPolicyType.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestSuccessfulType.h"
+#import "DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType.h"
 #import "DBTEAMLOGDeleteTeamInviteLinkType.h"
 #import "DBTEAMLOGDeviceApprovalsAddExceptionType.h"
 #import "DBTEAMLOGDeviceApprovalsChangeDesktopPolicyType.h"
@@ -46591,6 +47684,7 @@
 #import "DBTEAMLOGDomainVerificationRemoveDomainType.h"
 #import "DBTEAMLOGDropboxPasswordsExportedType.h"
 #import "DBTEAMLOGDropboxPasswordsNewDeviceEnrolledType.h"
+#import "DBTEAMLOGDropboxPasswordsPolicyChangedType.h"
 #import "DBTEAMLOGEmailIngestPolicyChangedType.h"
 #import "DBTEAMLOGEmailIngestReceiveFileType.h"
 #import "DBTEAMLOGEmmAddExceptionType.h"
@@ -46987,6 +48081,8 @@
 #import "DBTEAMLOGTfaRemoveSecurityKeyType.h"
 #import "DBTEAMLOGTfaResetType.h"
 #import "DBTEAMLOGTwoAccountChangePolicyType.h"
+#import "DBTEAMLOGUndoNamingConventionType.h"
+#import "DBTEAMLOGUndoOrganizeFolderWithTidyType.h"
 #import "DBTEAMLOGUserTagsAddedType.h"
 #import "DBTEAMLOGUserTagsRemovedType.h"
 #import "DBTEAMLOGViewerInfoPolicyChangedType.h"
@@ -47094,6 +48190,8 @@
 @synthesize objectLabelUpdatedValue = _objectLabelUpdatedValue;
 @synthesize organizeFolderWithTidy = _organizeFolderWithTidy;
 @synthesize rewindFolder = _rewindFolder;
+@synthesize undoNamingConvention = _undoNamingConvention;
+@synthesize undoOrganizeFolderWithTidy = _undoOrganizeFolderWithTidy;
 @synthesize userTagsAdded = _userTagsAdded;
 @synthesize userTagsRemoved = _userTagsRemoved;
 @synthesize emailIngestReceiveFile = _emailIngestReceiveFile;
@@ -47366,6 +48464,7 @@
 @synthesize deviceApprovalsRemoveException = _deviceApprovalsRemoveException;
 @synthesize directoryRestrictionsAddMembers = _directoryRestrictionsAddMembers;
 @synthesize directoryRestrictionsRemoveMembers = _directoryRestrictionsRemoveMembers;
+@synthesize dropboxPasswordsPolicyChanged = _dropboxPasswordsPolicyChanged;
 @synthesize emailIngestPolicyChanged = _emailIngestPolicyChanged;
 @synthesize emmAddException = _emmAddException;
 @synthesize emmChangePolicy = _emmChangePolicy;
@@ -47431,6 +48530,8 @@
 @synthesize webSessionsChangeActiveSessionLimit = _webSessionsChangeActiveSessionLimit;
 @synthesize webSessionsChangeFixedLengthPolicy = _webSessionsChangeFixedLengthPolicy;
 @synthesize webSessionsChangeIdleLengthPolicy = _webSessionsChangeIdleLengthPolicy;
+@synthesize dataResidencyMigrationRequestSuccessful = _dataResidencyMigrationRequestSuccessful;
+@synthesize dataResidencyMigrationRequestUnsuccessful = _dataResidencyMigrationRequestUnsuccessful;
 @synthesize teamMergeFrom = _teamMergeFrom;
 @synthesize teamMergeTo = _teamMergeTo;
 @synthesize teamProfileAddBackground = _teamProfileAddBackground;
@@ -48362,6 +49463,25 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeRewindFolder;
     _rewindFolder = rewindFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithUndoNamingConvention:(DBTEAMLOGUndoNamingConventionType *)undoNamingConvention {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeUndoNamingConvention;
+    _undoNamingConvention = undoNamingConvention;
+  }
+  return self;
+}
+
+- (instancetype)initWithUndoOrganizeFolderWithTidy:
+    (DBTEAMLOGUndoOrganizeFolderWithTidyType *)undoOrganizeFolderWithTidy {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy;
+    _undoOrganizeFolderWithTidy = undoOrganizeFolderWithTidy;
   }
   return self;
 }
@@ -50905,6 +52025,16 @@
   return self;
 }
 
+- (instancetype)initWithDropboxPasswordsPolicyChanged:
+    (DBTEAMLOGDropboxPasswordsPolicyChangedType *)dropboxPasswordsPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged;
+    _dropboxPasswordsPolicyChanged = dropboxPasswordsPolicyChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithEmailIngestPolicyChanged:(DBTEAMLOGEmailIngestPolicyChangedType *)emailIngestPolicyChanged {
   self = [super init];
   if (self) {
@@ -51524,6 +52654,26 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy;
     _webSessionsChangeIdleLengthPolicy = webSessionsChangeIdleLengthPolicy;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataResidencyMigrationRequestSuccessful:
+    (DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)dataResidencyMigrationRequestSuccessful {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful;
+    _dataResidencyMigrationRequestSuccessful = dataResidencyMigrationRequestSuccessful;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataResidencyMigrationRequestUnsuccessful:
+    (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)dataResidencyMigrationRequestUnsuccessful {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful;
+    _dataResidencyMigrationRequestUnsuccessful = dataResidencyMigrationRequestUnsuccessful;
   }
   return self;
 }
@@ -52736,6 +53886,23 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeRewindFolder, but was %@.", [self tagName]];
   }
   return _rewindFolder;
+}
+
+- (DBTEAMLOGUndoNamingConventionType *)undoNamingConvention {
+  if (![self isUndoNamingConvention]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeUndoNamingConvention, but was %@.", [self tagName]];
+  }
+  return _undoNamingConvention;
+}
+
+- (DBTEAMLOGUndoOrganizeFolderWithTidyType *)undoOrganizeFolderWithTidy {
+  if (![self isUndoOrganizeFolderWithTidy]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy, but was %@.", [self tagName]];
+  }
+  return _undoOrganizeFolderWithTidy;
 }
 
 - (DBTEAMLOGUserTagsAddedType *)userTagsAdded {
@@ -55025,6 +56192,15 @@
   return _directoryRestrictionsRemoveMembers;
 }
 
+- (DBTEAMLOGDropboxPasswordsPolicyChangedType *)dropboxPasswordsPolicyChanged {
+  if (![self isDropboxPasswordsPolicyChanged]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged, but was %@.", [self tagName]];
+  }
+  return _dropboxPasswordsPolicyChanged;
+}
+
 - (DBTEAMLOGEmailIngestPolicyChangedType *)emailIngestPolicyChanged {
   if (![self isEmailIngestPolicyChanged]) {
     [NSException
@@ -55592,6 +56768,25 @@
                        [self tagName]];
   }
   return _webSessionsChangeIdleLengthPolicy;
+}
+
+- (DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *)dataResidencyMigrationRequestSuccessful {
+  if (![self isDataResidencyMigrationRequestSuccessful]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful, but was %@.",
+                       [self tagName]];
+  }
+  return _dataResidencyMigrationRequestSuccessful;
+}
+
+- (DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *)dataResidencyMigrationRequestUnsuccessful {
+  if (![self isDataResidencyMigrationRequestUnsuccessful]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful, but was %@.",
+               [self tagName]];
+  }
+  return _dataResidencyMigrationRequestUnsuccessful;
 }
 
 - (DBTEAMLOGTeamMergeFromType *)teamMergeFrom {
@@ -56346,6 +57541,14 @@
 
 - (BOOL)isRewindFolder {
   return _tag == DBTEAMLOGEventTypeRewindFolder;
+}
+
+- (BOOL)isUndoNamingConvention {
+  return _tag == DBTEAMLOGEventTypeUndoNamingConvention;
+}
+
+- (BOOL)isUndoOrganizeFolderWithTidy {
+  return _tag == DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy;
 }
 
 - (BOOL)isUserTagsAdded {
@@ -57436,6 +58639,10 @@
   return _tag == DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers;
 }
 
+- (BOOL)isDropboxPasswordsPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged;
+}
+
 - (BOOL)isEmailIngestPolicyChanged {
   return _tag == DBTEAMLOGEventTypeEmailIngestPolicyChanged;
 }
@@ -57694,6 +58901,14 @@
 
 - (BOOL)isWebSessionsChangeIdleLengthPolicy {
   return _tag == DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy;
+}
+
+- (BOOL)isDataResidencyMigrationRequestSuccessful {
+  return _tag == DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful;
+}
+
+- (BOOL)isDataResidencyMigrationRequestUnsuccessful {
+  return _tag == DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful;
 }
 
 - (BOOL)isTeamMergeFrom {
@@ -58060,6 +59275,10 @@
     return @"DBTEAMLOGEventTypeOrganizeFolderWithTidy";
   case DBTEAMLOGEventTypeRewindFolder:
     return @"DBTEAMLOGEventTypeRewindFolder";
+  case DBTEAMLOGEventTypeUndoNamingConvention:
+    return @"DBTEAMLOGEventTypeUndoNamingConvention";
+  case DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy:
+    return @"DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy";
   case DBTEAMLOGEventTypeUserTagsAdded:
     return @"DBTEAMLOGEventTypeUserTagsAdded";
   case DBTEAMLOGEventTypeUserTagsRemoved:
@@ -58604,6 +59823,8 @@
     return @"DBTEAMLOGEventTypeDirectoryRestrictionsAddMembers";
   case DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers:
     return @"DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers";
+  case DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged:
+    return @"DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged";
   case DBTEAMLOGEventTypeEmailIngestPolicyChanged:
     return @"DBTEAMLOGEventTypeEmailIngestPolicyChanged";
   case DBTEAMLOGEventTypeEmmAddException:
@@ -58734,6 +59955,10 @@
     return @"DBTEAMLOGEventTypeWebSessionsChangeFixedLengthPolicy";
   case DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy:
     return @"DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy";
+  case DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful:
+    return @"DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful";
+  case DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful:
+    return @"DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful";
   case DBTEAMLOGEventTypeTeamMergeFrom:
     return @"DBTEAMLOGEventTypeTeamMergeFrom";
   case DBTEAMLOGEventTypeTeamMergeTo:
@@ -59140,6 +60365,12 @@
     break;
   case DBTEAMLOGEventTypeRewindFolder:
     result = prime * result + [self.rewindFolder hash];
+    break;
+  case DBTEAMLOGEventTypeUndoNamingConvention:
+    result = prime * result + [self.undoNamingConvention hash];
+    break;
+  case DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy:
+    result = prime * result + [self.undoOrganizeFolderWithTidy hash];
     break;
   case DBTEAMLOGEventTypeUserTagsAdded:
     result = prime * result + [self.userTagsAdded hash];
@@ -59957,6 +61188,9 @@
   case DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers:
     result = prime * result + [self.directoryRestrictionsRemoveMembers hash];
     break;
+  case DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged:
+    result = prime * result + [self.dropboxPasswordsPolicyChanged hash];
+    break;
   case DBTEAMLOGEventTypeEmailIngestPolicyChanged:
     result = prime * result + [self.emailIngestPolicyChanged hash];
     break;
@@ -60151,6 +61385,12 @@
     break;
   case DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy:
     result = prime * result + [self.webSessionsChangeIdleLengthPolicy hash];
+    break;
+  case DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful:
+    result = prime * result + [self.dataResidencyMigrationRequestSuccessful hash];
+    break;
+  case DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful:
+    result = prime * result + [self.dataResidencyMigrationRequestUnsuccessful hash];
     break;
   case DBTEAMLOGEventTypeTeamMergeFrom:
     result = prime * result + [self.teamMergeFrom hash];
@@ -60496,6 +61736,10 @@
     return [self.organizeFolderWithTidy isEqual:anEventType.organizeFolderWithTidy];
   case DBTEAMLOGEventTypeRewindFolder:
     return [self.rewindFolder isEqual:anEventType.rewindFolder];
+  case DBTEAMLOGEventTypeUndoNamingConvention:
+    return [self.undoNamingConvention isEqual:anEventType.undoNamingConvention];
+  case DBTEAMLOGEventTypeUndoOrganizeFolderWithTidy:
+    return [self.undoOrganizeFolderWithTidy isEqual:anEventType.undoOrganizeFolderWithTidy];
   case DBTEAMLOGEventTypeUserTagsAdded:
     return [self.userTagsAdded isEqual:anEventType.userTagsAdded];
   case DBTEAMLOGEventTypeUserTagsRemoved:
@@ -61042,6 +62286,8 @@
     return [self.directoryRestrictionsAddMembers isEqual:anEventType.directoryRestrictionsAddMembers];
   case DBTEAMLOGEventTypeDirectoryRestrictionsRemoveMembers:
     return [self.directoryRestrictionsRemoveMembers isEqual:anEventType.directoryRestrictionsRemoveMembers];
+  case DBTEAMLOGEventTypeDropboxPasswordsPolicyChanged:
+    return [self.dropboxPasswordsPolicyChanged isEqual:anEventType.dropboxPasswordsPolicyChanged];
   case DBTEAMLOGEventTypeEmailIngestPolicyChanged:
     return [self.emailIngestPolicyChanged isEqual:anEventType.emailIngestPolicyChanged];
   case DBTEAMLOGEventTypeEmmAddException:
@@ -61173,6 +62419,11 @@
     return [self.webSessionsChangeFixedLengthPolicy isEqual:anEventType.webSessionsChangeFixedLengthPolicy];
   case DBTEAMLOGEventTypeWebSessionsChangeIdleLengthPolicy:
     return [self.webSessionsChangeIdleLengthPolicy isEqual:anEventType.webSessionsChangeIdleLengthPolicy];
+  case DBTEAMLOGEventTypeDataResidencyMigrationRequestSuccessful:
+    return [self.dataResidencyMigrationRequestSuccessful isEqual:anEventType.dataResidencyMigrationRequestSuccessful];
+  case DBTEAMLOGEventTypeDataResidencyMigrationRequestUnsuccessful:
+    return
+        [self.dataResidencyMigrationRequestUnsuccessful isEqual:anEventType.dataResidencyMigrationRequestUnsuccessful];
   case DBTEAMLOGEventTypeTeamMergeFrom:
     return [self.teamMergeFrom isEqual:anEventType.teamMergeFrom];
   case DBTEAMLOGEventTypeTeamMergeTo:
@@ -61283,1667 +62534,1797 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isAdminAlertingAlertStateChanged]) {
-    jsonDict = [[DBTEAMLOGAdminAlertingAlertStateChangedTypeSerializer
-        serialize:valueObj.adminAlertingAlertStateChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingAlertStateChangedTypeSerializer
+                                           serialize:valueObj.adminAlertingAlertStateChanged]];
     jsonDict[@".tag"] = @"admin_alerting_alert_state_changed";
   } else if ([valueObj isAdminAlertingChangedAlertConfig]) {
-    jsonDict = [[DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer
-        serialize:valueObj.adminAlertingChangedAlertConfig] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingChangedAlertConfigTypeSerializer
+                                           serialize:valueObj.adminAlertingChangedAlertConfig]];
     jsonDict[@".tag"] = @"admin_alerting_changed_alert_config";
   } else if ([valueObj isAdminAlertingTriggeredAlert]) {
-    jsonDict = [[DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer serialize:valueObj.adminAlertingTriggeredAlert]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminAlertingTriggeredAlertTypeSerializer
+                                           serialize:valueObj.adminAlertingTriggeredAlert]];
     jsonDict[@".tag"] = @"admin_alerting_triggered_alert";
   } else if ([valueObj isAppBlockedByPermissions]) {
-    jsonDict =
-        [[DBTEAMLOGAppBlockedByPermissionsTypeSerializer serialize:valueObj.appBlockedByPermissions] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppBlockedByPermissionsTypeSerializer
+                                           serialize:valueObj.appBlockedByPermissions]];
     jsonDict[@".tag"] = @"app_blocked_by_permissions";
   } else if ([valueObj isAppLinkTeam]) {
-    jsonDict = [[DBTEAMLOGAppLinkTeamTypeSerializer serialize:valueObj.appLinkTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppLinkTeamTypeSerializer serialize:valueObj.appLinkTeam]];
     jsonDict[@".tag"] = @"app_link_team";
   } else if ([valueObj isAppLinkUser]) {
-    jsonDict = [[DBTEAMLOGAppLinkUserTypeSerializer serialize:valueObj.appLinkUser] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppLinkUserTypeSerializer serialize:valueObj.appLinkUser]];
     jsonDict[@".tag"] = @"app_link_user";
   } else if ([valueObj isAppUnlinkTeam]) {
-    jsonDict = [[DBTEAMLOGAppUnlinkTeamTypeSerializer serialize:valueObj.appUnlinkTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppUnlinkTeamTypeSerializer serialize:valueObj.appUnlinkTeam]];
     jsonDict[@".tag"] = @"app_unlink_team";
   } else if ([valueObj isAppUnlinkUser]) {
-    jsonDict = [[DBTEAMLOGAppUnlinkUserTypeSerializer serialize:valueObj.appUnlinkUser] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppUnlinkUserTypeSerializer serialize:valueObj.appUnlinkUser]];
     jsonDict[@".tag"] = @"app_unlink_user";
   } else if ([valueObj isIntegrationConnected]) {
-    jsonDict = [[DBTEAMLOGIntegrationConnectedTypeSerializer serialize:valueObj.integrationConnected] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGIntegrationConnectedTypeSerializer serialize:valueObj.integrationConnected]];
     jsonDict[@".tag"] = @"integration_connected";
   } else if ([valueObj isIntegrationDisconnected]) {
-    jsonDict =
-        [[DBTEAMLOGIntegrationDisconnectedTypeSerializer serialize:valueObj.integrationDisconnected] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGIntegrationDisconnectedTypeSerializer
+                                           serialize:valueObj.integrationDisconnected]];
     jsonDict[@".tag"] = @"integration_disconnected";
   } else if ([valueObj isFileAddComment]) {
-    jsonDict = [[DBTEAMLOGFileAddCommentTypeSerializer serialize:valueObj.fileAddComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddCommentTypeSerializer serialize:valueObj.fileAddComment]];
     jsonDict[@".tag"] = @"file_add_comment";
   } else if ([valueObj isFileChangeCommentSubscription]) {
-    jsonDict = [[DBTEAMLOGFileChangeCommentSubscriptionTypeSerializer serialize:valueObj.fileChangeCommentSubscription]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileChangeCommentSubscriptionTypeSerializer
+                                           serialize:valueObj.fileChangeCommentSubscription]];
     jsonDict[@".tag"] = @"file_change_comment_subscription";
   } else if ([valueObj isFileDeleteComment]) {
-    jsonDict = [[DBTEAMLOGFileDeleteCommentTypeSerializer serialize:valueObj.fileDeleteComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileDeleteCommentTypeSerializer serialize:valueObj.fileDeleteComment]];
     jsonDict[@".tag"] = @"file_delete_comment";
   } else if ([valueObj isFileEditComment]) {
-    jsonDict = [[DBTEAMLOGFileEditCommentTypeSerializer serialize:valueObj.fileEditComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileEditCommentTypeSerializer serialize:valueObj.fileEditComment]];
     jsonDict[@".tag"] = @"file_edit_comment";
   } else if ([valueObj isFileLikeComment]) {
-    jsonDict = [[DBTEAMLOGFileLikeCommentTypeSerializer serialize:valueObj.fileLikeComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLikeCommentTypeSerializer serialize:valueObj.fileLikeComment]];
     jsonDict[@".tag"] = @"file_like_comment";
   } else if ([valueObj isFileResolveComment]) {
-    jsonDict = [[DBTEAMLOGFileResolveCommentTypeSerializer serialize:valueObj.fileResolveComment] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileResolveCommentTypeSerializer serialize:valueObj.fileResolveComment]];
     jsonDict[@".tag"] = @"file_resolve_comment";
   } else if ([valueObj isFileUnlikeComment]) {
-    jsonDict = [[DBTEAMLOGFileUnlikeCommentTypeSerializer serialize:valueObj.fileUnlikeComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileUnlikeCommentTypeSerializer serialize:valueObj.fileUnlikeComment]];
     jsonDict[@".tag"] = @"file_unlike_comment";
   } else if ([valueObj isFileUnresolveComment]) {
-    jsonDict = [[DBTEAMLOGFileUnresolveCommentTypeSerializer serialize:valueObj.fileUnresolveComment] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileUnresolveCommentTypeSerializer serialize:valueObj.fileUnresolveComment]];
     jsonDict[@".tag"] = @"file_unresolve_comment";
   } else if ([valueObj isGovernancePolicyAddFolders]) {
-    jsonDict =
-        [[DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer serialize:valueObj.governancePolicyAddFolders] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyAddFoldersTypeSerializer
+                                           serialize:valueObj.governancePolicyAddFolders]];
     jsonDict[@".tag"] = @"governance_policy_add_folders";
   } else if ([valueObj isGovernancePolicyAddFolderFailed]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer
-        serialize:valueObj.governancePolicyAddFolderFailed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyAddFolderFailedTypeSerializer
+                                           serialize:valueObj.governancePolicyAddFolderFailed]];
     jsonDict[@".tag"] = @"governance_policy_add_folder_failed";
   } else if ([valueObj isGovernancePolicyContentDisposed]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyContentDisposedTypeSerializer
-        serialize:valueObj.governancePolicyContentDisposed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyContentDisposedTypeSerializer
+                                           serialize:valueObj.governancePolicyContentDisposed]];
     jsonDict[@".tag"] = @"governance_policy_content_disposed";
   } else if ([valueObj isGovernancePolicyCreate]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyCreateTypeSerializer serialize:valueObj.governancePolicyCreate] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyCreateTypeSerializer
+                                           serialize:valueObj.governancePolicyCreate]];
     jsonDict[@".tag"] = @"governance_policy_create";
   } else if ([valueObj isGovernancePolicyDelete]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyDeleteTypeSerializer serialize:valueObj.governancePolicyDelete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyDeleteTypeSerializer
+                                           serialize:valueObj.governancePolicyDelete]];
     jsonDict[@".tag"] = @"governance_policy_delete";
   } else if ([valueObj isGovernancePolicyEditDetails]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer serialize:valueObj.governancePolicyEditDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyEditDetailsTypeSerializer
+                                           serialize:valueObj.governancePolicyEditDetails]];
     jsonDict[@".tag"] = @"governance_policy_edit_details";
   } else if ([valueObj isGovernancePolicyEditDuration]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyEditDurationTypeSerializer serialize:valueObj.governancePolicyEditDuration]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyEditDurationTypeSerializer
+                                           serialize:valueObj.governancePolicyEditDuration]];
     jsonDict[@".tag"] = @"governance_policy_edit_duration";
   } else if ([valueObj isGovernancePolicyExportCreated]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer serialize:valueObj.governancePolicyExportCreated]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyExportCreatedTypeSerializer
+                                           serialize:valueObj.governancePolicyExportCreated]];
     jsonDict[@".tag"] = @"governance_policy_export_created";
   } else if ([valueObj isGovernancePolicyExportRemoved]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer serialize:valueObj.governancePolicyExportRemoved]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyExportRemovedTypeSerializer
+                                           serialize:valueObj.governancePolicyExportRemoved]];
     jsonDict[@".tag"] = @"governance_policy_export_removed";
   } else if ([valueObj isGovernancePolicyRemoveFolders]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer serialize:valueObj.governancePolicyRemoveFolders]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyRemoveFoldersTypeSerializer
+                                           serialize:valueObj.governancePolicyRemoveFolders]];
     jsonDict[@".tag"] = @"governance_policy_remove_folders";
   } else if ([valueObj isGovernancePolicyReportCreated]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer serialize:valueObj.governancePolicyReportCreated]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyReportCreatedTypeSerializer
+                                           serialize:valueObj.governancePolicyReportCreated]];
     jsonDict[@".tag"] = @"governance_policy_report_created";
   } else if ([valueObj isGovernancePolicyZipPartDownloaded]) {
-    jsonDict = [[DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer
-        serialize:valueObj.governancePolicyZipPartDownloaded] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGovernancePolicyZipPartDownloadedTypeSerializer
+                                           serialize:valueObj.governancePolicyZipPartDownloaded]];
     jsonDict[@".tag"] = @"governance_policy_zip_part_downloaded";
   } else if ([valueObj isLegalHoldsActivateAHold]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsActivateAHoldTypeSerializer serialize:valueObj.legalHoldsActivateAHold] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsActivateAHoldTypeSerializer
+                                           serialize:valueObj.legalHoldsActivateAHold]];
     jsonDict[@".tag"] = @"legal_holds_activate_a_hold";
   } else if ([valueObj isLegalHoldsAddMembers]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsAddMembersTypeSerializer serialize:valueObj.legalHoldsAddMembers] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGLegalHoldsAddMembersTypeSerializer serialize:valueObj.legalHoldsAddMembers]];
     jsonDict[@".tag"] = @"legal_holds_add_members";
   } else if ([valueObj isLegalHoldsChangeHoldDetails]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsChangeHoldDetailsTypeSerializer serialize:valueObj.legalHoldsChangeHoldDetails]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsChangeHoldDetailsTypeSerializer
+                                           serialize:valueObj.legalHoldsChangeHoldDetails]];
     jsonDict[@".tag"] = @"legal_holds_change_hold_details";
   } else if ([valueObj isLegalHoldsChangeHoldName]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsChangeHoldNameTypeSerializer serialize:valueObj.legalHoldsChangeHoldName] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsChangeHoldNameTypeSerializer
+                                           serialize:valueObj.legalHoldsChangeHoldName]];
     jsonDict[@".tag"] = @"legal_holds_change_hold_name";
   } else if ([valueObj isLegalHoldsExportAHold]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsExportAHoldTypeSerializer serialize:valueObj.legalHoldsExportAHold] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportAHoldTypeSerializer
+                                           serialize:valueObj.legalHoldsExportAHold]];
     jsonDict[@".tag"] = @"legal_holds_export_a_hold";
   } else if ([valueObj isLegalHoldsExportCancelled]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportCancelledTypeSerializer serialize:valueObj.legalHoldsExportCancelled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportCancelledTypeSerializer
+                                           serialize:valueObj.legalHoldsExportCancelled]];
     jsonDict[@".tag"] = @"legal_holds_export_cancelled";
   } else if ([valueObj isLegalHoldsExportDownloaded]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportDownloadedTypeSerializer serialize:valueObj.legalHoldsExportDownloaded] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportDownloadedTypeSerializer
+                                           serialize:valueObj.legalHoldsExportDownloaded]];
     jsonDict[@".tag"] = @"legal_holds_export_downloaded";
   } else if ([valueObj isLegalHoldsExportRemoved]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsExportRemovedTypeSerializer serialize:valueObj.legalHoldsExportRemoved] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsExportRemovedTypeSerializer
+                                           serialize:valueObj.legalHoldsExportRemoved]];
     jsonDict[@".tag"] = @"legal_holds_export_removed";
   } else if ([valueObj isLegalHoldsReleaseAHold]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsReleaseAHoldTypeSerializer serialize:valueObj.legalHoldsReleaseAHold] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsReleaseAHoldTypeSerializer
+                                           serialize:valueObj.legalHoldsReleaseAHold]];
     jsonDict[@".tag"] = @"legal_holds_release_a_hold";
   } else if ([valueObj isLegalHoldsRemoveMembers]) {
-    jsonDict =
-        [[DBTEAMLOGLegalHoldsRemoveMembersTypeSerializer serialize:valueObj.legalHoldsRemoveMembers] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsRemoveMembersTypeSerializer
+                                           serialize:valueObj.legalHoldsRemoveMembers]];
     jsonDict[@".tag"] = @"legal_holds_remove_members";
   } else if ([valueObj isLegalHoldsReportAHold]) {
-    jsonDict = [[DBTEAMLOGLegalHoldsReportAHoldTypeSerializer serialize:valueObj.legalHoldsReportAHold] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegalHoldsReportAHoldTypeSerializer
+                                           serialize:valueObj.legalHoldsReportAHold]];
     jsonDict[@".tag"] = @"legal_holds_report_a_hold";
   } else if ([valueObj isDeviceChangeIpDesktop]) {
-    jsonDict = [[DBTEAMLOGDeviceChangeIpDesktopTypeSerializer serialize:valueObj.deviceChangeIpDesktop] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceChangeIpDesktopTypeSerializer
+                                           serialize:valueObj.deviceChangeIpDesktop]];
     jsonDict[@".tag"] = @"device_change_ip_desktop";
   } else if ([valueObj isDeviceChangeIpMobile]) {
-    jsonDict = [[DBTEAMLOGDeviceChangeIpMobileTypeSerializer serialize:valueObj.deviceChangeIpMobile] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGDeviceChangeIpMobileTypeSerializer serialize:valueObj.deviceChangeIpMobile]];
     jsonDict[@".tag"] = @"device_change_ip_mobile";
   } else if ([valueObj isDeviceChangeIpWeb]) {
-    jsonDict = [[DBTEAMLOGDeviceChangeIpWebTypeSerializer serialize:valueObj.deviceChangeIpWeb] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceChangeIpWebTypeSerializer serialize:valueObj.deviceChangeIpWeb]];
     jsonDict[@".tag"] = @"device_change_ip_web";
   } else if ([valueObj isDeviceDeleteOnUnlinkFail]) {
-    jsonDict =
-        [[DBTEAMLOGDeviceDeleteOnUnlinkFailTypeSerializer serialize:valueObj.deviceDeleteOnUnlinkFail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceDeleteOnUnlinkFailTypeSerializer
+                                           serialize:valueObj.deviceDeleteOnUnlinkFail]];
     jsonDict[@".tag"] = @"device_delete_on_unlink_fail";
   } else if ([valueObj isDeviceDeleteOnUnlinkSuccess]) {
-    jsonDict = [[DBTEAMLOGDeviceDeleteOnUnlinkSuccessTypeSerializer serialize:valueObj.deviceDeleteOnUnlinkSuccess]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceDeleteOnUnlinkSuccessTypeSerializer
+                                           serialize:valueObj.deviceDeleteOnUnlinkSuccess]];
     jsonDict[@".tag"] = @"device_delete_on_unlink_success";
   } else if ([valueObj isDeviceLinkFail]) {
-    jsonDict = [[DBTEAMLOGDeviceLinkFailTypeSerializer serialize:valueObj.deviceLinkFail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceLinkFailTypeSerializer serialize:valueObj.deviceLinkFail]];
     jsonDict[@".tag"] = @"device_link_fail";
   } else if ([valueObj isDeviceLinkSuccess]) {
-    jsonDict = [[DBTEAMLOGDeviceLinkSuccessTypeSerializer serialize:valueObj.deviceLinkSuccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceLinkSuccessTypeSerializer serialize:valueObj.deviceLinkSuccess]];
     jsonDict[@".tag"] = @"device_link_success";
   } else if ([valueObj isDeviceManagementDisabled]) {
-    jsonDict =
-        [[DBTEAMLOGDeviceManagementDisabledTypeSerializer serialize:valueObj.deviceManagementDisabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceManagementDisabledTypeSerializer
+                                           serialize:valueObj.deviceManagementDisabled]];
     jsonDict[@".tag"] = @"device_management_disabled";
   } else if ([valueObj isDeviceManagementEnabled]) {
-    jsonDict =
-        [[DBTEAMLOGDeviceManagementEnabledTypeSerializer serialize:valueObj.deviceManagementEnabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceManagementEnabledTypeSerializer
+                                           serialize:valueObj.deviceManagementEnabled]];
     jsonDict[@".tag"] = @"device_management_enabled";
   } else if ([valueObj isDeviceSyncBackupStatusChanged]) {
-    jsonDict = [[DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer serialize:valueObj.deviceSyncBackupStatusChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceSyncBackupStatusChangedTypeSerializer
+                                           serialize:valueObj.deviceSyncBackupStatusChanged]];
     jsonDict[@".tag"] = @"device_sync_backup_status_changed";
   } else if ([valueObj isDeviceUnlink]) {
-    jsonDict = [[DBTEAMLOGDeviceUnlinkTypeSerializer serialize:valueObj.deviceUnlink] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceUnlinkTypeSerializer serialize:valueObj.deviceUnlink]];
     jsonDict[@".tag"] = @"device_unlink";
   } else if ([valueObj isDropboxPasswordsExported]) {
-    jsonDict =
-        [[DBTEAMLOGDropboxPasswordsExportedTypeSerializer serialize:valueObj.dropboxPasswordsExported] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDropboxPasswordsExportedTypeSerializer
+                                           serialize:valueObj.dropboxPasswordsExported]];
     jsonDict[@".tag"] = @"dropbox_passwords_exported";
   } else if ([valueObj isDropboxPasswordsNewDeviceEnrolled]) {
-    jsonDict = [[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer
-        serialize:valueObj.dropboxPasswordsNewDeviceEnrolled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDropboxPasswordsNewDeviceEnrolledTypeSerializer
+                                           serialize:valueObj.dropboxPasswordsNewDeviceEnrolled]];
     jsonDict[@".tag"] = @"dropbox_passwords_new_device_enrolled";
   } else if ([valueObj isEmmRefreshAuthToken]) {
-    jsonDict = [[DBTEAMLOGEmmRefreshAuthTokenTypeSerializer serialize:valueObj.emmRefreshAuthToken] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGEmmRefreshAuthTokenTypeSerializer serialize:valueObj.emmRefreshAuthToken]];
     jsonDict[@".tag"] = @"emm_refresh_auth_token";
   } else if ([valueObj isAccountCaptureChangeAvailability]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureChangeAvailabilityTypeSerializer
-        serialize:valueObj.accountCaptureChangeAvailability] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangeAvailabilityTypeSerializer
+                                           serialize:valueObj.accountCaptureChangeAvailability]];
     jsonDict[@".tag"] = @"account_capture_change_availability";
   } else if ([valueObj isAccountCaptureMigrateAccount]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureMigrateAccountTypeSerializer serialize:valueObj.accountCaptureMigrateAccount]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureMigrateAccountTypeSerializer
+                                           serialize:valueObj.accountCaptureMigrateAccount]];
     jsonDict[@".tag"] = @"account_capture_migrate_account";
   } else if ([valueObj isAccountCaptureNotificationEmailsSent]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureNotificationEmailsSentTypeSerializer
-        serialize:valueObj.accountCaptureNotificationEmailsSent] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureNotificationEmailsSentTypeSerializer
+                                           serialize:valueObj.accountCaptureNotificationEmailsSent]];
     jsonDict[@".tag"] = @"account_capture_notification_emails_sent";
   } else if ([valueObj isAccountCaptureRelinquishAccount]) {
-    jsonDict = [[DBTEAMLOGAccountCaptureRelinquishAccountTypeSerializer
-        serialize:valueObj.accountCaptureRelinquishAccount] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureRelinquishAccountTypeSerializer
+                                           serialize:valueObj.accountCaptureRelinquishAccount]];
     jsonDict[@".tag"] = @"account_capture_relinquish_account";
   } else if ([valueObj isDisabledDomainInvites]) {
-    jsonDict = [[DBTEAMLOGDisabledDomainInvitesTypeSerializer serialize:valueObj.disabledDomainInvites] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDisabledDomainInvitesTypeSerializer
+                                           serialize:valueObj.disabledDomainInvites]];
     jsonDict[@".tag"] = @"disabled_domain_invites";
   } else if ([valueObj isDomainInvitesApproveRequestToJoinTeam]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesApproveRequestToJoinTeamTypeSerializer
-        serialize:valueObj.domainInvitesApproveRequestToJoinTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesApproveRequestToJoinTeamTypeSerializer
+                                           serialize:valueObj.domainInvitesApproveRequestToJoinTeam]];
     jsonDict[@".tag"] = @"domain_invites_approve_request_to_join_team";
   } else if ([valueObj isDomainInvitesDeclineRequestToJoinTeam]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamTypeSerializer
-        serialize:valueObj.domainInvitesDeclineRequestToJoinTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesDeclineRequestToJoinTeamTypeSerializer
+                                           serialize:valueObj.domainInvitesDeclineRequestToJoinTeam]];
     jsonDict[@".tag"] = @"domain_invites_decline_request_to_join_team";
   } else if ([valueObj isDomainInvitesEmailExistingUsers]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesEmailExistingUsersTypeSerializer
-        serialize:valueObj.domainInvitesEmailExistingUsers] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesEmailExistingUsersTypeSerializer
+                                           serialize:valueObj.domainInvitesEmailExistingUsers]];
     jsonDict[@".tag"] = @"domain_invites_email_existing_users";
   } else if ([valueObj isDomainInvitesRequestToJoinTeam]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesRequestToJoinTeamTypeSerializer
-        serialize:valueObj.domainInvitesRequestToJoinTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesRequestToJoinTeamTypeSerializer
+                                           serialize:valueObj.domainInvitesRequestToJoinTeam]];
     jsonDict[@".tag"] = @"domain_invites_request_to_join_team";
   } else if ([valueObj isDomainInvitesSetInviteNewUserPrefToNo]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoTypeSerializer
-        serialize:valueObj.domainInvitesSetInviteNewUserPrefToNo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToNoTypeSerializer
+                                           serialize:valueObj.domainInvitesSetInviteNewUserPrefToNo]];
     jsonDict[@".tag"] = @"domain_invites_set_invite_new_user_pref_to_no";
   } else if ([valueObj isDomainInvitesSetInviteNewUserPrefToYes]) {
-    jsonDict = [[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesTypeSerializer
-        serialize:valueObj.domainInvitesSetInviteNewUserPrefToYes] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainInvitesSetInviteNewUserPrefToYesTypeSerializer
+                                           serialize:valueObj.domainInvitesSetInviteNewUserPrefToYes]];
     jsonDict[@".tag"] = @"domain_invites_set_invite_new_user_pref_to_yes";
   } else if ([valueObj isDomainVerificationAddDomainFail]) {
-    jsonDict = [[DBTEAMLOGDomainVerificationAddDomainFailTypeSerializer
-        serialize:valueObj.domainVerificationAddDomainFail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainVerificationAddDomainFailTypeSerializer
+                                           serialize:valueObj.domainVerificationAddDomainFail]];
     jsonDict[@".tag"] = @"domain_verification_add_domain_fail";
   } else if ([valueObj isDomainVerificationAddDomainSuccess]) {
-    jsonDict = [[DBTEAMLOGDomainVerificationAddDomainSuccessTypeSerializer
-        serialize:valueObj.domainVerificationAddDomainSuccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainVerificationAddDomainSuccessTypeSerializer
+                                           serialize:valueObj.domainVerificationAddDomainSuccess]];
     jsonDict[@".tag"] = @"domain_verification_add_domain_success";
   } else if ([valueObj isDomainVerificationRemoveDomain]) {
-    jsonDict = [[DBTEAMLOGDomainVerificationRemoveDomainTypeSerializer
-        serialize:valueObj.domainVerificationRemoveDomain] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDomainVerificationRemoveDomainTypeSerializer
+                                           serialize:valueObj.domainVerificationRemoveDomain]];
     jsonDict[@".tag"] = @"domain_verification_remove_domain";
   } else if ([valueObj isEnabledDomainInvites]) {
-    jsonDict = [[DBTEAMLOGEnabledDomainInvitesTypeSerializer serialize:valueObj.enabledDomainInvites] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGEnabledDomainInvitesTypeSerializer serialize:valueObj.enabledDomainInvites]];
     jsonDict[@".tag"] = @"enabled_domain_invites";
   } else if ([valueObj isApplyNamingConvention]) {
-    jsonDict = [[DBTEAMLOGApplyNamingConventionTypeSerializer serialize:valueObj.applyNamingConvention] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGApplyNamingConventionTypeSerializer
+                                           serialize:valueObj.applyNamingConvention]];
     jsonDict[@".tag"] = @"apply_naming_convention";
   } else if ([valueObj isCreateFolder]) {
-    jsonDict = [[DBTEAMLOGCreateFolderTypeSerializer serialize:valueObj.createFolder] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCreateFolderTypeSerializer serialize:valueObj.createFolder]];
     jsonDict[@".tag"] = @"create_folder";
   } else if ([valueObj isFileAdd]) {
-    jsonDict = [[DBTEAMLOGFileAddTypeSerializer serialize:valueObj.fileAdd] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileAddTypeSerializer serialize:valueObj.fileAdd]];
     jsonDict[@".tag"] = @"file_add";
   } else if ([valueObj isFileCopy]) {
-    jsonDict = [[DBTEAMLOGFileCopyTypeSerializer serialize:valueObj.fileCopy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileCopyTypeSerializer serialize:valueObj.fileCopy]];
     jsonDict[@".tag"] = @"file_copy";
   } else if ([valueObj isFileDelete]) {
-    jsonDict = [[DBTEAMLOGFileDeleteTypeSerializer serialize:valueObj.fileDelete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileDeleteTypeSerializer serialize:valueObj.fileDelete]];
     jsonDict[@".tag"] = @"file_delete";
   } else if ([valueObj isFileDownload]) {
-    jsonDict = [[DBTEAMLOGFileDownloadTypeSerializer serialize:valueObj.fileDownload] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileDownloadTypeSerializer serialize:valueObj.fileDownload]];
     jsonDict[@".tag"] = @"file_download";
   } else if ([valueObj isFileEdit]) {
-    jsonDict = [[DBTEAMLOGFileEditTypeSerializer serialize:valueObj.fileEdit] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileEditTypeSerializer serialize:valueObj.fileEdit]];
     jsonDict[@".tag"] = @"file_edit";
   } else if ([valueObj isFileGetCopyReference]) {
-    jsonDict = [[DBTEAMLOGFileGetCopyReferenceTypeSerializer serialize:valueObj.fileGetCopyReference] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileGetCopyReferenceTypeSerializer serialize:valueObj.fileGetCopyReference]];
     jsonDict[@".tag"] = @"file_get_copy_reference";
   } else if ([valueObj isFileLockingLockStatusChanged]) {
-    jsonDict = [[DBTEAMLOGFileLockingLockStatusChangedTypeSerializer serialize:valueObj.fileLockingLockStatusChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLockingLockStatusChangedTypeSerializer
+                                           serialize:valueObj.fileLockingLockStatusChanged]];
     jsonDict[@".tag"] = @"file_locking_lock_status_changed";
   } else if ([valueObj isFileMove]) {
-    jsonDict = [[DBTEAMLOGFileMoveTypeSerializer serialize:valueObj.fileMove] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileMoveTypeSerializer serialize:valueObj.fileMove]];
     jsonDict[@".tag"] = @"file_move";
   } else if ([valueObj isFilePermanentlyDelete]) {
-    jsonDict = [[DBTEAMLOGFilePermanentlyDeleteTypeSerializer serialize:valueObj.filePermanentlyDelete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFilePermanentlyDeleteTypeSerializer
+                                           serialize:valueObj.filePermanentlyDelete]];
     jsonDict[@".tag"] = @"file_permanently_delete";
   } else if ([valueObj isFilePreview]) {
-    jsonDict = [[DBTEAMLOGFilePreviewTypeSerializer serialize:valueObj.filePreview] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFilePreviewTypeSerializer serialize:valueObj.filePreview]];
     jsonDict[@".tag"] = @"file_preview";
   } else if ([valueObj isFileRename]) {
-    jsonDict = [[DBTEAMLOGFileRenameTypeSerializer serialize:valueObj.fileRename] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRenameTypeSerializer serialize:valueObj.fileRename]];
     jsonDict[@".tag"] = @"file_rename";
   } else if ([valueObj isFileRestore]) {
-    jsonDict = [[DBTEAMLOGFileRestoreTypeSerializer serialize:valueObj.fileRestore] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRestoreTypeSerializer serialize:valueObj.fileRestore]];
     jsonDict[@".tag"] = @"file_restore";
   } else if ([valueObj isFileRevert]) {
-    jsonDict = [[DBTEAMLOGFileRevertTypeSerializer serialize:valueObj.fileRevert] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRevertTypeSerializer serialize:valueObj.fileRevert]];
     jsonDict[@".tag"] = @"file_revert";
   } else if ([valueObj isFileRollbackChanges]) {
-    jsonDict = [[DBTEAMLOGFileRollbackChangesTypeSerializer serialize:valueObj.fileRollbackChanges] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileRollbackChangesTypeSerializer serialize:valueObj.fileRollbackChanges]];
     jsonDict[@".tag"] = @"file_rollback_changes";
   } else if ([valueObj isFileSaveCopyReference]) {
-    jsonDict = [[DBTEAMLOGFileSaveCopyReferenceTypeSerializer serialize:valueObj.fileSaveCopyReference] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileSaveCopyReferenceTypeSerializer
+                                           serialize:valueObj.fileSaveCopyReference]];
     jsonDict[@".tag"] = @"file_save_copy_reference";
   } else if ([valueObj isFolderOverviewDescriptionChanged]) {
-    jsonDict = [[DBTEAMLOGFolderOverviewDescriptionChangedTypeSerializer
-        serialize:valueObj.folderOverviewDescriptionChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderOverviewDescriptionChangedTypeSerializer
+                                           serialize:valueObj.folderOverviewDescriptionChanged]];
     jsonDict[@".tag"] = @"folder_overview_description_changed";
   } else if ([valueObj isFolderOverviewItemPinned]) {
-    jsonDict =
-        [[DBTEAMLOGFolderOverviewItemPinnedTypeSerializer serialize:valueObj.folderOverviewItemPinned] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderOverviewItemPinnedTypeSerializer
+                                           serialize:valueObj.folderOverviewItemPinned]];
     jsonDict[@".tag"] = @"folder_overview_item_pinned";
   } else if ([valueObj isFolderOverviewItemUnpinned]) {
-    jsonDict =
-        [[DBTEAMLOGFolderOverviewItemUnpinnedTypeSerializer serialize:valueObj.folderOverviewItemUnpinned] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFolderOverviewItemUnpinnedTypeSerializer
+                                           serialize:valueObj.folderOverviewItemUnpinned]];
     jsonDict[@".tag"] = @"folder_overview_item_unpinned";
   } else if ([valueObj isObjectLabelAdded]) {
-    jsonDict = [[DBTEAMLOGObjectLabelAddedTypeSerializer serialize:valueObj.objectLabelAdded] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGObjectLabelAddedTypeSerializer serialize:valueObj.objectLabelAdded]];
     jsonDict[@".tag"] = @"object_label_added";
   } else if ([valueObj isObjectLabelRemoved]) {
-    jsonDict = [[DBTEAMLOGObjectLabelRemovedTypeSerializer serialize:valueObj.objectLabelRemoved] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGObjectLabelRemovedTypeSerializer serialize:valueObj.objectLabelRemoved]];
     jsonDict[@".tag"] = @"object_label_removed";
   } else if ([valueObj isObjectLabelUpdatedValue]) {
-    jsonDict =
-        [[DBTEAMLOGObjectLabelUpdatedValueTypeSerializer serialize:valueObj.objectLabelUpdatedValue] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGObjectLabelUpdatedValueTypeSerializer
+                                           serialize:valueObj.objectLabelUpdatedValue]];
     jsonDict[@".tag"] = @"object_label_updated_value";
   } else if ([valueObj isOrganizeFolderWithTidy]) {
-    jsonDict = [[DBTEAMLOGOrganizeFolderWithTidyTypeSerializer serialize:valueObj.organizeFolderWithTidy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOrganizeFolderWithTidyTypeSerializer
+                                           serialize:valueObj.organizeFolderWithTidy]];
     jsonDict[@".tag"] = @"organize_folder_with_tidy";
   } else if ([valueObj isRewindFolder]) {
-    jsonDict = [[DBTEAMLOGRewindFolderTypeSerializer serialize:valueObj.rewindFolder] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGRewindFolderTypeSerializer serialize:valueObj.rewindFolder]];
     jsonDict[@".tag"] = @"rewind_folder";
+  } else if ([valueObj isUndoNamingConvention]) {
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGUndoNamingConventionTypeSerializer serialize:valueObj.undoNamingConvention]];
+    jsonDict[@".tag"] = @"undo_naming_convention";
+  } else if ([valueObj isUndoOrganizeFolderWithTidy]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGUndoOrganizeFolderWithTidyTypeSerializer
+                                           serialize:valueObj.undoOrganizeFolderWithTidy]];
+    jsonDict[@".tag"] = @"undo_organize_folder_with_tidy";
   } else if ([valueObj isUserTagsAdded]) {
-    jsonDict = [[DBTEAMLOGUserTagsAddedTypeSerializer serialize:valueObj.userTagsAdded] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGUserTagsAddedTypeSerializer serialize:valueObj.userTagsAdded]];
     jsonDict[@".tag"] = @"user_tags_added";
   } else if ([valueObj isUserTagsRemoved]) {
-    jsonDict = [[DBTEAMLOGUserTagsRemovedTypeSerializer serialize:valueObj.userTagsRemoved] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGUserTagsRemovedTypeSerializer serialize:valueObj.userTagsRemoved]];
     jsonDict[@".tag"] = @"user_tags_removed";
   } else if ([valueObj isEmailIngestReceiveFile]) {
-    jsonDict = [[DBTEAMLOGEmailIngestReceiveFileTypeSerializer serialize:valueObj.emailIngestReceiveFile] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmailIngestReceiveFileTypeSerializer
+                                           serialize:valueObj.emailIngestReceiveFile]];
     jsonDict[@".tag"] = @"email_ingest_receive_file";
   } else if ([valueObj isFileRequestChange]) {
-    jsonDict = [[DBTEAMLOGFileRequestChangeTypeSerializer serialize:valueObj.fileRequestChange] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestChangeTypeSerializer serialize:valueObj.fileRequestChange]];
     jsonDict[@".tag"] = @"file_request_change";
   } else if ([valueObj isFileRequestClose]) {
-    jsonDict = [[DBTEAMLOGFileRequestCloseTypeSerializer serialize:valueObj.fileRequestClose] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestCloseTypeSerializer serialize:valueObj.fileRequestClose]];
     jsonDict[@".tag"] = @"file_request_close";
   } else if ([valueObj isFileRequestCreate]) {
-    jsonDict = [[DBTEAMLOGFileRequestCreateTypeSerializer serialize:valueObj.fileRequestCreate] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestCreateTypeSerializer serialize:valueObj.fileRequestCreate]];
     jsonDict[@".tag"] = @"file_request_create";
   } else if ([valueObj isFileRequestDelete]) {
-    jsonDict = [[DBTEAMLOGFileRequestDeleteTypeSerializer serialize:valueObj.fileRequestDelete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestDeleteTypeSerializer serialize:valueObj.fileRequestDelete]];
     jsonDict[@".tag"] = @"file_request_delete";
   } else if ([valueObj isFileRequestReceiveFile]) {
-    jsonDict = [[DBTEAMLOGFileRequestReceiveFileTypeSerializer serialize:valueObj.fileRequestReceiveFile] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestReceiveFileTypeSerializer
+                                           serialize:valueObj.fileRequestReceiveFile]];
     jsonDict[@".tag"] = @"file_request_receive_file";
   } else if ([valueObj isGroupAddExternalId]) {
-    jsonDict = [[DBTEAMLOGGroupAddExternalIdTypeSerializer serialize:valueObj.groupAddExternalId] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGGroupAddExternalIdTypeSerializer serialize:valueObj.groupAddExternalId]];
     jsonDict[@".tag"] = @"group_add_external_id";
   } else if ([valueObj isGroupAddMember]) {
-    jsonDict = [[DBTEAMLOGGroupAddMemberTypeSerializer serialize:valueObj.groupAddMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupAddMemberTypeSerializer serialize:valueObj.groupAddMember]];
     jsonDict[@".tag"] = @"group_add_member";
   } else if ([valueObj isGroupChangeExternalId]) {
-    jsonDict = [[DBTEAMLOGGroupChangeExternalIdTypeSerializer serialize:valueObj.groupChangeExternalId] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupChangeExternalIdTypeSerializer
+                                           serialize:valueObj.groupChangeExternalId]];
     jsonDict[@".tag"] = @"group_change_external_id";
   } else if ([valueObj isGroupChangeManagementType]) {
-    jsonDict =
-        [[DBTEAMLOGGroupChangeManagementTypeTypeSerializer serialize:valueObj.groupChangeManagementType] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupChangeManagementTypeTypeSerializer
+                                           serialize:valueObj.groupChangeManagementType]];
     jsonDict[@".tag"] = @"group_change_management_type";
   } else if ([valueObj isGroupChangeMemberRole]) {
-    jsonDict = [[DBTEAMLOGGroupChangeMemberRoleTypeSerializer serialize:valueObj.groupChangeMemberRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupChangeMemberRoleTypeSerializer
+                                           serialize:valueObj.groupChangeMemberRole]];
     jsonDict[@".tag"] = @"group_change_member_role";
   } else if ([valueObj isGroupCreate]) {
-    jsonDict = [[DBTEAMLOGGroupCreateTypeSerializer serialize:valueObj.groupCreate] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupCreateTypeSerializer serialize:valueObj.groupCreate]];
     jsonDict[@".tag"] = @"group_create";
   } else if ([valueObj isGroupDelete]) {
-    jsonDict = [[DBTEAMLOGGroupDeleteTypeSerializer serialize:valueObj.groupDelete] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupDeleteTypeSerializer serialize:valueObj.groupDelete]];
     jsonDict[@".tag"] = @"group_delete";
   } else if ([valueObj isGroupDescriptionUpdated]) {
-    jsonDict =
-        [[DBTEAMLOGGroupDescriptionUpdatedTypeSerializer serialize:valueObj.groupDescriptionUpdated] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupDescriptionUpdatedTypeSerializer
+                                           serialize:valueObj.groupDescriptionUpdated]];
     jsonDict[@".tag"] = @"group_description_updated";
   } else if ([valueObj isGroupJoinPolicyUpdated]) {
-    jsonDict = [[DBTEAMLOGGroupJoinPolicyUpdatedTypeSerializer serialize:valueObj.groupJoinPolicyUpdated] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupJoinPolicyUpdatedTypeSerializer
+                                           serialize:valueObj.groupJoinPolicyUpdated]];
     jsonDict[@".tag"] = @"group_join_policy_updated";
   } else if ([valueObj isGroupMoved]) {
-    jsonDict = [[DBTEAMLOGGroupMovedTypeSerializer serialize:valueObj.groupMoved] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupMovedTypeSerializer serialize:valueObj.groupMoved]];
     jsonDict[@".tag"] = @"group_moved";
   } else if ([valueObj isGroupRemoveExternalId]) {
-    jsonDict = [[DBTEAMLOGGroupRemoveExternalIdTypeSerializer serialize:valueObj.groupRemoveExternalId] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupRemoveExternalIdTypeSerializer
+                                           serialize:valueObj.groupRemoveExternalId]];
     jsonDict[@".tag"] = @"group_remove_external_id";
   } else if ([valueObj isGroupRemoveMember]) {
-    jsonDict = [[DBTEAMLOGGroupRemoveMemberTypeSerializer serialize:valueObj.groupRemoveMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupRemoveMemberTypeSerializer serialize:valueObj.groupRemoveMember]];
     jsonDict[@".tag"] = @"group_remove_member";
   } else if ([valueObj isGroupRename]) {
-    jsonDict = [[DBTEAMLOGGroupRenameTypeSerializer serialize:valueObj.groupRename] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupRenameTypeSerializer serialize:valueObj.groupRename]];
     jsonDict[@".tag"] = @"group_rename";
   } else if ([valueObj isAccountLockOrUnlocked]) {
-    jsonDict = [[DBTEAMLOGAccountLockOrUnlockedTypeSerializer serialize:valueObj.accountLockOrUnlocked] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountLockOrUnlockedTypeSerializer
+                                           serialize:valueObj.accountLockOrUnlocked]];
     jsonDict[@".tag"] = @"account_lock_or_unlocked";
   } else if ([valueObj isEmmError]) {
-    jsonDict = [[DBTEAMLOGEmmErrorTypeSerializer serialize:valueObj.emmError] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmErrorTypeSerializer serialize:valueObj.emmError]];
     jsonDict[@".tag"] = @"emm_error";
   } else if ([valueObj isGuestAdminSignedInViaTrustedTeams]) {
-    jsonDict = [[DBTEAMLOGGuestAdminSignedInViaTrustedTeamsTypeSerializer
-        serialize:valueObj.guestAdminSignedInViaTrustedTeams] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGuestAdminSignedInViaTrustedTeamsTypeSerializer
+                                           serialize:valueObj.guestAdminSignedInViaTrustedTeams]];
     jsonDict[@".tag"] = @"guest_admin_signed_in_via_trusted_teams";
   } else if ([valueObj isGuestAdminSignedOutViaTrustedTeams]) {
-    jsonDict = [[DBTEAMLOGGuestAdminSignedOutViaTrustedTeamsTypeSerializer
-        serialize:valueObj.guestAdminSignedOutViaTrustedTeams] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGuestAdminSignedOutViaTrustedTeamsTypeSerializer
+                                           serialize:valueObj.guestAdminSignedOutViaTrustedTeams]];
     jsonDict[@".tag"] = @"guest_admin_signed_out_via_trusted_teams";
   } else if ([valueObj isLoginFail]) {
-    jsonDict = [[DBTEAMLOGLoginFailTypeSerializer serialize:valueObj.loginFail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLoginFailTypeSerializer serialize:valueObj.loginFail]];
     jsonDict[@".tag"] = @"login_fail";
   } else if ([valueObj isLoginSuccess]) {
-    jsonDict = [[DBTEAMLOGLoginSuccessTypeSerializer serialize:valueObj.loginSuccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLoginSuccessTypeSerializer serialize:valueObj.loginSuccess]];
     jsonDict[@".tag"] = @"login_success";
   } else if ([valueObj isLogout]) {
-    jsonDict = [[DBTEAMLOGLogoutTypeSerializer serialize:valueObj.logout] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLogoutTypeSerializer serialize:valueObj.logout]];
     jsonDict[@".tag"] = @"logout";
   } else if ([valueObj isResellerSupportSessionEnd]) {
-    jsonDict =
-        [[DBTEAMLOGResellerSupportSessionEndTypeSerializer serialize:valueObj.resellerSupportSessionEnd] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerSupportSessionEndTypeSerializer
+                                           serialize:valueObj.resellerSupportSessionEnd]];
     jsonDict[@".tag"] = @"reseller_support_session_end";
   } else if ([valueObj isResellerSupportSessionStart]) {
-    jsonDict = [[DBTEAMLOGResellerSupportSessionStartTypeSerializer serialize:valueObj.resellerSupportSessionStart]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerSupportSessionStartTypeSerializer
+                                           serialize:valueObj.resellerSupportSessionStart]];
     jsonDict[@".tag"] = @"reseller_support_session_start";
   } else if ([valueObj isSignInAsSessionEnd]) {
-    jsonDict = [[DBTEAMLOGSignInAsSessionEndTypeSerializer serialize:valueObj.signInAsSessionEnd] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSignInAsSessionEndTypeSerializer serialize:valueObj.signInAsSessionEnd]];
     jsonDict[@".tag"] = @"sign_in_as_session_end";
   } else if ([valueObj isSignInAsSessionStart]) {
-    jsonDict = [[DBTEAMLOGSignInAsSessionStartTypeSerializer serialize:valueObj.signInAsSessionStart] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSignInAsSessionStartTypeSerializer serialize:valueObj.signInAsSessionStart]];
     jsonDict[@".tag"] = @"sign_in_as_session_start";
   } else if ([valueObj isSsoError]) {
-    jsonDict = [[DBTEAMLOGSsoErrorTypeSerializer serialize:valueObj.ssoError] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoErrorTypeSerializer serialize:valueObj.ssoError]];
     jsonDict[@".tag"] = @"sso_error";
   } else if ([valueObj isCreateTeamInviteLink]) {
-    jsonDict = [[DBTEAMLOGCreateTeamInviteLinkTypeSerializer serialize:valueObj.createTeamInviteLink] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGCreateTeamInviteLinkTypeSerializer serialize:valueObj.createTeamInviteLink]];
     jsonDict[@".tag"] = @"create_team_invite_link";
   } else if ([valueObj isDeleteTeamInviteLink]) {
-    jsonDict = [[DBTEAMLOGDeleteTeamInviteLinkTypeSerializer serialize:valueObj.deleteTeamInviteLink] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGDeleteTeamInviteLinkTypeSerializer serialize:valueObj.deleteTeamInviteLink]];
     jsonDict[@".tag"] = @"delete_team_invite_link";
   } else if ([valueObj isMemberAddExternalId]) {
-    jsonDict = [[DBTEAMLOGMemberAddExternalIdTypeSerializer serialize:valueObj.memberAddExternalId] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGMemberAddExternalIdTypeSerializer serialize:valueObj.memberAddExternalId]];
     jsonDict[@".tag"] = @"member_add_external_id";
   } else if ([valueObj isMemberAddName]) {
-    jsonDict = [[DBTEAMLOGMemberAddNameTypeSerializer serialize:valueObj.memberAddName] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberAddNameTypeSerializer serialize:valueObj.memberAddName]];
     jsonDict[@".tag"] = @"member_add_name";
   } else if ([valueObj isMemberChangeAdminRole]) {
-    jsonDict = [[DBTEAMLOGMemberChangeAdminRoleTypeSerializer serialize:valueObj.memberChangeAdminRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeAdminRoleTypeSerializer
+                                           serialize:valueObj.memberChangeAdminRole]];
     jsonDict[@".tag"] = @"member_change_admin_role";
   } else if ([valueObj isMemberChangeEmail]) {
-    jsonDict = [[DBTEAMLOGMemberChangeEmailTypeSerializer serialize:valueObj.memberChangeEmail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeEmailTypeSerializer serialize:valueObj.memberChangeEmail]];
     jsonDict[@".tag"] = @"member_change_email";
   } else if ([valueObj isMemberChangeExternalId]) {
-    jsonDict = [[DBTEAMLOGMemberChangeExternalIdTypeSerializer serialize:valueObj.memberChangeExternalId] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeExternalIdTypeSerializer
+                                           serialize:valueObj.memberChangeExternalId]];
     jsonDict[@".tag"] = @"member_change_external_id";
   } else if ([valueObj isMemberChangeMembershipType]) {
-    jsonDict =
-        [[DBTEAMLOGMemberChangeMembershipTypeTypeSerializer serialize:valueObj.memberChangeMembershipType] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeMembershipTypeTypeSerializer
+                                           serialize:valueObj.memberChangeMembershipType]];
     jsonDict[@".tag"] = @"member_change_membership_type";
   } else if ([valueObj isMemberChangeName]) {
-    jsonDict = [[DBTEAMLOGMemberChangeNameTypeSerializer serialize:valueObj.memberChangeName] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeNameTypeSerializer serialize:valueObj.memberChangeName]];
     jsonDict[@".tag"] = @"member_change_name";
   } else if ([valueObj isMemberChangeResellerRole]) {
-    jsonDict =
-        [[DBTEAMLOGMemberChangeResellerRoleTypeSerializer serialize:valueObj.memberChangeResellerRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberChangeResellerRoleTypeSerializer
+                                           serialize:valueObj.memberChangeResellerRole]];
     jsonDict[@".tag"] = @"member_change_reseller_role";
   } else if ([valueObj isMemberChangeStatus]) {
-    jsonDict = [[DBTEAMLOGMemberChangeStatusTypeSerializer serialize:valueObj.memberChangeStatus] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGMemberChangeStatusTypeSerializer serialize:valueObj.memberChangeStatus]];
     jsonDict[@".tag"] = @"member_change_status";
   } else if ([valueObj isMemberDeleteManualContacts]) {
-    jsonDict =
-        [[DBTEAMLOGMemberDeleteManualContactsTypeSerializer serialize:valueObj.memberDeleteManualContacts] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberDeleteManualContactsTypeSerializer
+                                           serialize:valueObj.memberDeleteManualContacts]];
     jsonDict[@".tag"] = @"member_delete_manual_contacts";
   } else if ([valueObj isMemberDeleteProfilePhoto]) {
-    jsonDict =
-        [[DBTEAMLOGMemberDeleteProfilePhotoTypeSerializer serialize:valueObj.memberDeleteProfilePhoto] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberDeleteProfilePhotoTypeSerializer
+                                           serialize:valueObj.memberDeleteProfilePhoto]];
     jsonDict[@".tag"] = @"member_delete_profile_photo";
   } else if ([valueObj isMemberPermanentlyDeleteAccountContents]) {
-    jsonDict = [[DBTEAMLOGMemberPermanentlyDeleteAccountContentsTypeSerializer
-        serialize:valueObj.memberPermanentlyDeleteAccountContents] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberPermanentlyDeleteAccountContentsTypeSerializer
+                                           serialize:valueObj.memberPermanentlyDeleteAccountContents]];
     jsonDict[@".tag"] = @"member_permanently_delete_account_contents";
   } else if ([valueObj isMemberRemoveExternalId]) {
-    jsonDict = [[DBTEAMLOGMemberRemoveExternalIdTypeSerializer serialize:valueObj.memberRemoveExternalId] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberRemoveExternalIdTypeSerializer
+                                           serialize:valueObj.memberRemoveExternalId]];
     jsonDict[@".tag"] = @"member_remove_external_id";
   } else if ([valueObj isMemberSetProfilePhoto]) {
-    jsonDict = [[DBTEAMLOGMemberSetProfilePhotoTypeSerializer serialize:valueObj.memberSetProfilePhoto] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSetProfilePhotoTypeSerializer
+                                           serialize:valueObj.memberSetProfilePhoto]];
     jsonDict[@".tag"] = @"member_set_profile_photo";
   } else if ([valueObj isMemberSpaceLimitsAddCustomQuota]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsAddCustomQuotaTypeSerializer
-        serialize:valueObj.memberSpaceLimitsAddCustomQuota] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsAddCustomQuotaTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsAddCustomQuota]];
     jsonDict[@".tag"] = @"member_space_limits_add_custom_quota";
   } else if ([valueObj isMemberSpaceLimitsChangeCustomQuota]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangeCustomQuotaTypeSerializer
-        serialize:valueObj.memberSpaceLimitsChangeCustomQuota] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangeCustomQuotaTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangeCustomQuota]];
     jsonDict[@".tag"] = @"member_space_limits_change_custom_quota";
   } else if ([valueObj isMemberSpaceLimitsChangeStatus]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangeStatusTypeSerializer serialize:valueObj.memberSpaceLimitsChangeStatus]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangeStatusTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangeStatus]];
     jsonDict[@".tag"] = @"member_space_limits_change_status";
   } else if ([valueObj isMemberSpaceLimitsRemoveCustomQuota]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsRemoveCustomQuotaTypeSerializer
-        serialize:valueObj.memberSpaceLimitsRemoveCustomQuota] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsRemoveCustomQuotaTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsRemoveCustomQuota]];
     jsonDict[@".tag"] = @"member_space_limits_remove_custom_quota";
   } else if ([valueObj isMemberSuggest]) {
-    jsonDict = [[DBTEAMLOGMemberSuggestTypeSerializer serialize:valueObj.memberSuggest] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSuggestTypeSerializer serialize:valueObj.memberSuggest]];
     jsonDict[@".tag"] = @"member_suggest";
   } else if ([valueObj isMemberTransferAccountContents]) {
-    jsonDict = [[DBTEAMLOGMemberTransferAccountContentsTypeSerializer serialize:valueObj.memberTransferAccountContents]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberTransferAccountContentsTypeSerializer
+                                           serialize:valueObj.memberTransferAccountContents]];
     jsonDict[@".tag"] = @"member_transfer_account_contents";
   } else if ([valueObj isPendingSecondaryEmailAdded]) {
-    jsonDict =
-        [[DBTEAMLOGPendingSecondaryEmailAddedTypeSerializer serialize:valueObj.pendingSecondaryEmailAdded] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPendingSecondaryEmailAddedTypeSerializer
+                                           serialize:valueObj.pendingSecondaryEmailAdded]];
     jsonDict[@".tag"] = @"pending_secondary_email_added";
   } else if ([valueObj isSecondaryEmailDeleted]) {
-    jsonDict = [[DBTEAMLOGSecondaryEmailDeletedTypeSerializer serialize:valueObj.secondaryEmailDeleted] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryEmailDeletedTypeSerializer
+                                           serialize:valueObj.secondaryEmailDeleted]];
     jsonDict[@".tag"] = @"secondary_email_deleted";
   } else if ([valueObj isSecondaryEmailVerified]) {
-    jsonDict = [[DBTEAMLOGSecondaryEmailVerifiedTypeSerializer serialize:valueObj.secondaryEmailVerified] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryEmailVerifiedTypeSerializer
+                                           serialize:valueObj.secondaryEmailVerified]];
     jsonDict[@".tag"] = @"secondary_email_verified";
   } else if ([valueObj isSecondaryMailsPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGSecondaryMailsPolicyChangedTypeSerializer serialize:valueObj.secondaryMailsPolicyChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryMailsPolicyChangedTypeSerializer
+                                           serialize:valueObj.secondaryMailsPolicyChanged]];
     jsonDict[@".tag"] = @"secondary_mails_policy_changed";
   } else if ([valueObj isBinderAddPage]) {
-    jsonDict = [[DBTEAMLOGBinderAddPageTypeSerializer serialize:valueObj.binderAddPage] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderAddPageTypeSerializer serialize:valueObj.binderAddPage]];
     jsonDict[@".tag"] = @"binder_add_page";
   } else if ([valueObj isBinderAddSection]) {
-    jsonDict = [[DBTEAMLOGBinderAddSectionTypeSerializer serialize:valueObj.binderAddSection] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderAddSectionTypeSerializer serialize:valueObj.binderAddSection]];
     jsonDict[@".tag"] = @"binder_add_section";
   } else if ([valueObj isBinderRemovePage]) {
-    jsonDict = [[DBTEAMLOGBinderRemovePageTypeSerializer serialize:valueObj.binderRemovePage] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderRemovePageTypeSerializer serialize:valueObj.binderRemovePage]];
     jsonDict[@".tag"] = @"binder_remove_page";
   } else if ([valueObj isBinderRemoveSection]) {
-    jsonDict = [[DBTEAMLOGBinderRemoveSectionTypeSerializer serialize:valueObj.binderRemoveSection] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGBinderRemoveSectionTypeSerializer serialize:valueObj.binderRemoveSection]];
     jsonDict[@".tag"] = @"binder_remove_section";
   } else if ([valueObj isBinderRenamePage]) {
-    jsonDict = [[DBTEAMLOGBinderRenamePageTypeSerializer serialize:valueObj.binderRenamePage] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderRenamePageTypeSerializer serialize:valueObj.binderRenamePage]];
     jsonDict[@".tag"] = @"binder_rename_page";
   } else if ([valueObj isBinderRenameSection]) {
-    jsonDict = [[DBTEAMLOGBinderRenameSectionTypeSerializer serialize:valueObj.binderRenameSection] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGBinderRenameSectionTypeSerializer serialize:valueObj.binderRenameSection]];
     jsonDict[@".tag"] = @"binder_rename_section";
   } else if ([valueObj isBinderReorderPage]) {
-    jsonDict = [[DBTEAMLOGBinderReorderPageTypeSerializer serialize:valueObj.binderReorderPage] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGBinderReorderPageTypeSerializer serialize:valueObj.binderReorderPage]];
     jsonDict[@".tag"] = @"binder_reorder_page";
   } else if ([valueObj isBinderReorderSection]) {
-    jsonDict = [[DBTEAMLOGBinderReorderSectionTypeSerializer serialize:valueObj.binderReorderSection] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGBinderReorderSectionTypeSerializer serialize:valueObj.binderReorderSection]];
     jsonDict[@".tag"] = @"binder_reorder_section";
   } else if ([valueObj isPaperContentAddMember]) {
-    jsonDict = [[DBTEAMLOGPaperContentAddMemberTypeSerializer serialize:valueObj.paperContentAddMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentAddMemberTypeSerializer
+                                           serialize:valueObj.paperContentAddMember]];
     jsonDict[@".tag"] = @"paper_content_add_member";
   } else if ([valueObj isPaperContentAddToFolder]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentAddToFolderTypeSerializer serialize:valueObj.paperContentAddToFolder] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentAddToFolderTypeSerializer
+                                           serialize:valueObj.paperContentAddToFolder]];
     jsonDict[@".tag"] = @"paper_content_add_to_folder";
   } else if ([valueObj isPaperContentArchive]) {
-    jsonDict = [[DBTEAMLOGPaperContentArchiveTypeSerializer serialize:valueObj.paperContentArchive] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperContentArchiveTypeSerializer serialize:valueObj.paperContentArchive]];
     jsonDict[@".tag"] = @"paper_content_archive";
   } else if ([valueObj isPaperContentCreate]) {
-    jsonDict = [[DBTEAMLOGPaperContentCreateTypeSerializer serialize:valueObj.paperContentCreate] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperContentCreateTypeSerializer serialize:valueObj.paperContentCreate]];
     jsonDict[@".tag"] = @"paper_content_create";
   } else if ([valueObj isPaperContentPermanentlyDelete]) {
-    jsonDict = [[DBTEAMLOGPaperContentPermanentlyDeleteTypeSerializer serialize:valueObj.paperContentPermanentlyDelete]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentPermanentlyDeleteTypeSerializer
+                                           serialize:valueObj.paperContentPermanentlyDelete]];
     jsonDict[@".tag"] = @"paper_content_permanently_delete";
   } else if ([valueObj isPaperContentRemoveFromFolder]) {
-    jsonDict = [[DBTEAMLOGPaperContentRemoveFromFolderTypeSerializer serialize:valueObj.paperContentRemoveFromFolder]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentRemoveFromFolderTypeSerializer
+                                           serialize:valueObj.paperContentRemoveFromFolder]];
     jsonDict[@".tag"] = @"paper_content_remove_from_folder";
   } else if ([valueObj isPaperContentRemoveMember]) {
-    jsonDict =
-        [[DBTEAMLOGPaperContentRemoveMemberTypeSerializer serialize:valueObj.paperContentRemoveMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperContentRemoveMemberTypeSerializer
+                                           serialize:valueObj.paperContentRemoveMember]];
     jsonDict[@".tag"] = @"paper_content_remove_member";
   } else if ([valueObj isPaperContentRename]) {
-    jsonDict = [[DBTEAMLOGPaperContentRenameTypeSerializer serialize:valueObj.paperContentRename] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperContentRenameTypeSerializer serialize:valueObj.paperContentRename]];
     jsonDict[@".tag"] = @"paper_content_rename";
   } else if ([valueObj isPaperContentRestore]) {
-    jsonDict = [[DBTEAMLOGPaperContentRestoreTypeSerializer serialize:valueObj.paperContentRestore] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperContentRestoreTypeSerializer serialize:valueObj.paperContentRestore]];
     jsonDict[@".tag"] = @"paper_content_restore";
   } else if ([valueObj isPaperDocAddComment]) {
-    jsonDict = [[DBTEAMLOGPaperDocAddCommentTypeSerializer serialize:valueObj.paperDocAddComment] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocAddCommentTypeSerializer serialize:valueObj.paperDocAddComment]];
     jsonDict[@".tag"] = @"paper_doc_add_comment";
   } else if ([valueObj isPaperDocChangeMemberRole]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocChangeMemberRoleTypeSerializer serialize:valueObj.paperDocChangeMemberRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocChangeMemberRoleTypeSerializer
+                                           serialize:valueObj.paperDocChangeMemberRole]];
     jsonDict[@".tag"] = @"paper_doc_change_member_role";
   } else if ([valueObj isPaperDocChangeSharingPolicy]) {
-    jsonDict = [[DBTEAMLOGPaperDocChangeSharingPolicyTypeSerializer serialize:valueObj.paperDocChangeSharingPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocChangeSharingPolicyTypeSerializer
+                                           serialize:valueObj.paperDocChangeSharingPolicy]];
     jsonDict[@".tag"] = @"paper_doc_change_sharing_policy";
   } else if ([valueObj isPaperDocChangeSubscription]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocChangeSubscriptionTypeSerializer serialize:valueObj.paperDocChangeSubscription] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocChangeSubscriptionTypeSerializer
+                                           serialize:valueObj.paperDocChangeSubscription]];
     jsonDict[@".tag"] = @"paper_doc_change_subscription";
   } else if ([valueObj isPaperDocDeleted]) {
-    jsonDict = [[DBTEAMLOGPaperDocDeletedTypeSerializer serialize:valueObj.paperDocDeleted] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocDeletedTypeSerializer serialize:valueObj.paperDocDeleted]];
     jsonDict[@".tag"] = @"paper_doc_deleted";
   } else if ([valueObj isPaperDocDeleteComment]) {
-    jsonDict = [[DBTEAMLOGPaperDocDeleteCommentTypeSerializer serialize:valueObj.paperDocDeleteComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocDeleteCommentTypeSerializer
+                                           serialize:valueObj.paperDocDeleteComment]];
     jsonDict[@".tag"] = @"paper_doc_delete_comment";
   } else if ([valueObj isPaperDocDownload]) {
-    jsonDict = [[DBTEAMLOGPaperDocDownloadTypeSerializer serialize:valueObj.paperDocDownload] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocDownloadTypeSerializer serialize:valueObj.paperDocDownload]];
     jsonDict[@".tag"] = @"paper_doc_download";
   } else if ([valueObj isPaperDocEdit]) {
-    jsonDict = [[DBTEAMLOGPaperDocEditTypeSerializer serialize:valueObj.paperDocEdit] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocEditTypeSerializer serialize:valueObj.paperDocEdit]];
     jsonDict[@".tag"] = @"paper_doc_edit";
   } else if ([valueObj isPaperDocEditComment]) {
-    jsonDict = [[DBTEAMLOGPaperDocEditCommentTypeSerializer serialize:valueObj.paperDocEditComment] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocEditCommentTypeSerializer serialize:valueObj.paperDocEditComment]];
     jsonDict[@".tag"] = @"paper_doc_edit_comment";
   } else if ([valueObj isPaperDocFollowed]) {
-    jsonDict = [[DBTEAMLOGPaperDocFollowedTypeSerializer serialize:valueObj.paperDocFollowed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocFollowedTypeSerializer serialize:valueObj.paperDocFollowed]];
     jsonDict[@".tag"] = @"paper_doc_followed";
   } else if ([valueObj isPaperDocMention]) {
-    jsonDict = [[DBTEAMLOGPaperDocMentionTypeSerializer serialize:valueObj.paperDocMention] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocMentionTypeSerializer serialize:valueObj.paperDocMention]];
     jsonDict[@".tag"] = @"paper_doc_mention";
   } else if ([valueObj isPaperDocOwnershipChanged]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocOwnershipChangedTypeSerializer serialize:valueObj.paperDocOwnershipChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocOwnershipChangedTypeSerializer
+                                           serialize:valueObj.paperDocOwnershipChanged]];
     jsonDict[@".tag"] = @"paper_doc_ownership_changed";
   } else if ([valueObj isPaperDocRequestAccess]) {
-    jsonDict = [[DBTEAMLOGPaperDocRequestAccessTypeSerializer serialize:valueObj.paperDocRequestAccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocRequestAccessTypeSerializer
+                                           serialize:valueObj.paperDocRequestAccess]];
     jsonDict[@".tag"] = @"paper_doc_request_access";
   } else if ([valueObj isPaperDocResolveComment]) {
-    jsonDict = [[DBTEAMLOGPaperDocResolveCommentTypeSerializer serialize:valueObj.paperDocResolveComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocResolveCommentTypeSerializer
+                                           serialize:valueObj.paperDocResolveComment]];
     jsonDict[@".tag"] = @"paper_doc_resolve_comment";
   } else if ([valueObj isPaperDocRevert]) {
-    jsonDict = [[DBTEAMLOGPaperDocRevertTypeSerializer serialize:valueObj.paperDocRevert] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocRevertTypeSerializer serialize:valueObj.paperDocRevert]];
     jsonDict[@".tag"] = @"paper_doc_revert";
   } else if ([valueObj isPaperDocSlackShare]) {
-    jsonDict = [[DBTEAMLOGPaperDocSlackShareTypeSerializer serialize:valueObj.paperDocSlackShare] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocSlackShareTypeSerializer serialize:valueObj.paperDocSlackShare]];
     jsonDict[@".tag"] = @"paper_doc_slack_share";
   } else if ([valueObj isPaperDocTeamInvite]) {
-    jsonDict = [[DBTEAMLOGPaperDocTeamInviteTypeSerializer serialize:valueObj.paperDocTeamInvite] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperDocTeamInviteTypeSerializer serialize:valueObj.paperDocTeamInvite]];
     jsonDict[@".tag"] = @"paper_doc_team_invite";
   } else if ([valueObj isPaperDocTrashed]) {
-    jsonDict = [[DBTEAMLOGPaperDocTrashedTypeSerializer serialize:valueObj.paperDocTrashed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocTrashedTypeSerializer serialize:valueObj.paperDocTrashed]];
     jsonDict[@".tag"] = @"paper_doc_trashed";
   } else if ([valueObj isPaperDocUnresolveComment]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDocUnresolveCommentTypeSerializer serialize:valueObj.paperDocUnresolveComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocUnresolveCommentTypeSerializer
+                                           serialize:valueObj.paperDocUnresolveComment]];
     jsonDict[@".tag"] = @"paper_doc_unresolve_comment";
   } else if ([valueObj isPaperDocUntrashed]) {
-    jsonDict = [[DBTEAMLOGPaperDocUntrashedTypeSerializer serialize:valueObj.paperDocUntrashed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocUntrashedTypeSerializer serialize:valueObj.paperDocUntrashed]];
     jsonDict[@".tag"] = @"paper_doc_untrashed";
   } else if ([valueObj isPaperDocView]) {
-    jsonDict = [[DBTEAMLOGPaperDocViewTypeSerializer serialize:valueObj.paperDocView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDocViewTypeSerializer serialize:valueObj.paperDocView]];
     jsonDict[@".tag"] = @"paper_doc_view";
   } else if ([valueObj isPaperExternalViewAllow]) {
-    jsonDict = [[DBTEAMLOGPaperExternalViewAllowTypeSerializer serialize:valueObj.paperExternalViewAllow] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperExternalViewAllowTypeSerializer
+                                           serialize:valueObj.paperExternalViewAllow]];
     jsonDict[@".tag"] = @"paper_external_view_allow";
   } else if ([valueObj isPaperExternalViewDefaultTeam]) {
-    jsonDict = [[DBTEAMLOGPaperExternalViewDefaultTeamTypeSerializer serialize:valueObj.paperExternalViewDefaultTeam]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperExternalViewDefaultTeamTypeSerializer
+                                           serialize:valueObj.paperExternalViewDefaultTeam]];
     jsonDict[@".tag"] = @"paper_external_view_default_team";
   } else if ([valueObj isPaperExternalViewForbid]) {
-    jsonDict =
-        [[DBTEAMLOGPaperExternalViewForbidTypeSerializer serialize:valueObj.paperExternalViewForbid] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperExternalViewForbidTypeSerializer
+                                           serialize:valueObj.paperExternalViewForbid]];
     jsonDict[@".tag"] = @"paper_external_view_forbid";
   } else if ([valueObj isPaperFolderChangeSubscription]) {
-    jsonDict = [[DBTEAMLOGPaperFolderChangeSubscriptionTypeSerializer serialize:valueObj.paperFolderChangeSubscription]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderChangeSubscriptionTypeSerializer
+                                           serialize:valueObj.paperFolderChangeSubscription]];
     jsonDict[@".tag"] = @"paper_folder_change_subscription";
   } else if ([valueObj isPaperFolderDeleted]) {
-    jsonDict = [[DBTEAMLOGPaperFolderDeletedTypeSerializer serialize:valueObj.paperFolderDeleted] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperFolderDeletedTypeSerializer serialize:valueObj.paperFolderDeleted]];
     jsonDict[@".tag"] = @"paper_folder_deleted";
   } else if ([valueObj isPaperFolderFollowed]) {
-    jsonDict = [[DBTEAMLOGPaperFolderFollowedTypeSerializer serialize:valueObj.paperFolderFollowed] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPaperFolderFollowedTypeSerializer serialize:valueObj.paperFolderFollowed]];
     jsonDict[@".tag"] = @"paper_folder_followed";
   } else if ([valueObj isPaperFolderTeamInvite]) {
-    jsonDict = [[DBTEAMLOGPaperFolderTeamInviteTypeSerializer serialize:valueObj.paperFolderTeamInvite] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperFolderTeamInviteTypeSerializer
+                                           serialize:valueObj.paperFolderTeamInvite]];
     jsonDict[@".tag"] = @"paper_folder_team_invite";
   } else if ([valueObj isPaperPublishedLinkChangePermission]) {
-    jsonDict = [[DBTEAMLOGPaperPublishedLinkChangePermissionTypeSerializer
-        serialize:valueObj.paperPublishedLinkChangePermission] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkChangePermissionTypeSerializer
+                                           serialize:valueObj.paperPublishedLinkChangePermission]];
     jsonDict[@".tag"] = @"paper_published_link_change_permission";
   } else if ([valueObj isPaperPublishedLinkCreate]) {
-    jsonDict =
-        [[DBTEAMLOGPaperPublishedLinkCreateTypeSerializer serialize:valueObj.paperPublishedLinkCreate] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkCreateTypeSerializer
+                                           serialize:valueObj.paperPublishedLinkCreate]];
     jsonDict[@".tag"] = @"paper_published_link_create";
   } else if ([valueObj isPaperPublishedLinkDisabled]) {
-    jsonDict =
-        [[DBTEAMLOGPaperPublishedLinkDisabledTypeSerializer serialize:valueObj.paperPublishedLinkDisabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkDisabledTypeSerializer
+                                           serialize:valueObj.paperPublishedLinkDisabled]];
     jsonDict[@".tag"] = @"paper_published_link_disabled";
   } else if ([valueObj isPaperPublishedLinkView]) {
-    jsonDict = [[DBTEAMLOGPaperPublishedLinkViewTypeSerializer serialize:valueObj.paperPublishedLinkView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperPublishedLinkViewTypeSerializer
+                                           serialize:valueObj.paperPublishedLinkView]];
     jsonDict[@".tag"] = @"paper_published_link_view";
   } else if ([valueObj isPasswordChange]) {
-    jsonDict = [[DBTEAMLOGPasswordChangeTypeSerializer serialize:valueObj.passwordChange] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPasswordChangeTypeSerializer serialize:valueObj.passwordChange]];
     jsonDict[@".tag"] = @"password_change";
   } else if ([valueObj isPasswordReset]) {
-    jsonDict = [[DBTEAMLOGPasswordResetTypeSerializer serialize:valueObj.passwordReset] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPasswordResetTypeSerializer serialize:valueObj.passwordReset]];
     jsonDict[@".tag"] = @"password_reset";
   } else if ([valueObj isPasswordResetAll]) {
-    jsonDict = [[DBTEAMLOGPasswordResetAllTypeSerializer serialize:valueObj.passwordResetAll] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPasswordResetAllTypeSerializer serialize:valueObj.passwordResetAll]];
     jsonDict[@".tag"] = @"password_reset_all";
   } else if ([valueObj isClassificationCreateReport]) {
-    jsonDict =
-        [[DBTEAMLOGClassificationCreateReportTypeSerializer serialize:valueObj.classificationCreateReport] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGClassificationCreateReportTypeSerializer
+                                           serialize:valueObj.classificationCreateReport]];
     jsonDict[@".tag"] = @"classification_create_report";
   } else if ([valueObj isClassificationCreateReportFail]) {
-    jsonDict = [[DBTEAMLOGClassificationCreateReportFailTypeSerializer
-        serialize:valueObj.classificationCreateReportFail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGClassificationCreateReportFailTypeSerializer
+                                           serialize:valueObj.classificationCreateReportFail]];
     jsonDict[@".tag"] = @"classification_create_report_fail";
   } else if ([valueObj isEmmCreateExceptionsReport]) {
-    jsonDict =
-        [[DBTEAMLOGEmmCreateExceptionsReportTypeSerializer serialize:valueObj.emmCreateExceptionsReport] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmCreateExceptionsReportTypeSerializer
+                                           serialize:valueObj.emmCreateExceptionsReport]];
     jsonDict[@".tag"] = @"emm_create_exceptions_report";
   } else if ([valueObj isEmmCreateUsageReport]) {
-    jsonDict = [[DBTEAMLOGEmmCreateUsageReportTypeSerializer serialize:valueObj.emmCreateUsageReport] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGEmmCreateUsageReportTypeSerializer serialize:valueObj.emmCreateUsageReport]];
     jsonDict[@".tag"] = @"emm_create_usage_report";
   } else if ([valueObj isExportMembersReport]) {
-    jsonDict = [[DBTEAMLOGExportMembersReportTypeSerializer serialize:valueObj.exportMembersReport] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGExportMembersReportTypeSerializer serialize:valueObj.exportMembersReport]];
     jsonDict[@".tag"] = @"export_members_report";
   } else if ([valueObj isExportMembersReportFail]) {
-    jsonDict =
-        [[DBTEAMLOGExportMembersReportFailTypeSerializer serialize:valueObj.exportMembersReportFail] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExportMembersReportFailTypeSerializer
+                                           serialize:valueObj.exportMembersReportFail]];
     jsonDict[@".tag"] = @"export_members_report_fail";
   } else if ([valueObj isExternalSharingCreateReport]) {
-    jsonDict = [[DBTEAMLOGExternalSharingCreateReportTypeSerializer serialize:valueObj.externalSharingCreateReport]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalSharingCreateReportTypeSerializer
+                                           serialize:valueObj.externalSharingCreateReport]];
     jsonDict[@".tag"] = @"external_sharing_create_report";
   } else if ([valueObj isExternalSharingReportFailed]) {
-    jsonDict = [[DBTEAMLOGExternalSharingReportFailedTypeSerializer serialize:valueObj.externalSharingReportFailed]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalSharingReportFailedTypeSerializer
+                                           serialize:valueObj.externalSharingReportFailed]];
     jsonDict[@".tag"] = @"external_sharing_report_failed";
   } else if ([valueObj isNoExpirationLinkGenCreateReport]) {
-    jsonDict = [[DBTEAMLOGNoExpirationLinkGenCreateReportTypeSerializer
-        serialize:valueObj.noExpirationLinkGenCreateReport] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoExpirationLinkGenCreateReportTypeSerializer
+                                           serialize:valueObj.noExpirationLinkGenCreateReport]];
     jsonDict[@".tag"] = @"no_expiration_link_gen_create_report";
   } else if ([valueObj isNoExpirationLinkGenReportFailed]) {
-    jsonDict = [[DBTEAMLOGNoExpirationLinkGenReportFailedTypeSerializer
-        serialize:valueObj.noExpirationLinkGenReportFailed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoExpirationLinkGenReportFailedTypeSerializer
+                                           serialize:valueObj.noExpirationLinkGenReportFailed]];
     jsonDict[@".tag"] = @"no_expiration_link_gen_report_failed";
   } else if ([valueObj isNoPasswordLinkGenCreateReport]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkGenCreateReportTypeSerializer serialize:valueObj.noPasswordLinkGenCreateReport]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkGenCreateReportTypeSerializer
+                                           serialize:valueObj.noPasswordLinkGenCreateReport]];
     jsonDict[@".tag"] = @"no_password_link_gen_create_report";
   } else if ([valueObj isNoPasswordLinkGenReportFailed]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkGenReportFailedTypeSerializer serialize:valueObj.noPasswordLinkGenReportFailed]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkGenReportFailedTypeSerializer
+                                           serialize:valueObj.noPasswordLinkGenReportFailed]];
     jsonDict[@".tag"] = @"no_password_link_gen_report_failed";
   } else if ([valueObj isNoPasswordLinkViewCreateReport]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkViewCreateReportTypeSerializer
-        serialize:valueObj.noPasswordLinkViewCreateReport] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkViewCreateReportTypeSerializer
+                                           serialize:valueObj.noPasswordLinkViewCreateReport]];
     jsonDict[@".tag"] = @"no_password_link_view_create_report";
   } else if ([valueObj isNoPasswordLinkViewReportFailed]) {
-    jsonDict = [[DBTEAMLOGNoPasswordLinkViewReportFailedTypeSerializer
-        serialize:valueObj.noPasswordLinkViewReportFailed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoPasswordLinkViewReportFailedTypeSerializer
+                                           serialize:valueObj.noPasswordLinkViewReportFailed]];
     jsonDict[@".tag"] = @"no_password_link_view_report_failed";
   } else if ([valueObj isOutdatedLinkViewCreateReport]) {
-    jsonDict = [[DBTEAMLOGOutdatedLinkViewCreateReportTypeSerializer serialize:valueObj.outdatedLinkViewCreateReport]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOutdatedLinkViewCreateReportTypeSerializer
+                                           serialize:valueObj.outdatedLinkViewCreateReport]];
     jsonDict[@".tag"] = @"outdated_link_view_create_report";
   } else if ([valueObj isOutdatedLinkViewReportFailed]) {
-    jsonDict = [[DBTEAMLOGOutdatedLinkViewReportFailedTypeSerializer serialize:valueObj.outdatedLinkViewReportFailed]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOutdatedLinkViewReportFailedTypeSerializer
+                                           serialize:valueObj.outdatedLinkViewReportFailed]];
     jsonDict[@".tag"] = @"outdated_link_view_report_failed";
   } else if ([valueObj isPaperAdminExportStart]) {
-    jsonDict = [[DBTEAMLOGPaperAdminExportStartTypeSerializer serialize:valueObj.paperAdminExportStart] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperAdminExportStartTypeSerializer
+                                           serialize:valueObj.paperAdminExportStart]];
     jsonDict[@".tag"] = @"paper_admin_export_start";
   } else if ([valueObj isSmartSyncCreateAdminPrivilegeReport]) {
-    jsonDict = [[DBTEAMLOGSmartSyncCreateAdminPrivilegeReportTypeSerializer
-        serialize:valueObj.smartSyncCreateAdminPrivilegeReport] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncCreateAdminPrivilegeReportTypeSerializer
+                                           serialize:valueObj.smartSyncCreateAdminPrivilegeReport]];
     jsonDict[@".tag"] = @"smart_sync_create_admin_privilege_report";
   } else if ([valueObj isTeamActivityCreateReport]) {
-    jsonDict =
-        [[DBTEAMLOGTeamActivityCreateReportTypeSerializer serialize:valueObj.teamActivityCreateReport] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamActivityCreateReportTypeSerializer
+                                           serialize:valueObj.teamActivityCreateReport]];
     jsonDict[@".tag"] = @"team_activity_create_report";
   } else if ([valueObj isTeamActivityCreateReportFail]) {
-    jsonDict = [[DBTEAMLOGTeamActivityCreateReportFailTypeSerializer serialize:valueObj.teamActivityCreateReportFail]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamActivityCreateReportFailTypeSerializer
+                                           serialize:valueObj.teamActivityCreateReportFail]];
     jsonDict[@".tag"] = @"team_activity_create_report_fail";
   } else if ([valueObj isCollectionShare]) {
-    jsonDict = [[DBTEAMLOGCollectionShareTypeSerializer serialize:valueObj.collectionShare] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCollectionShareTypeSerializer serialize:valueObj.collectionShare]];
     jsonDict[@".tag"] = @"collection_share";
   } else if ([valueObj isFileTransfersFileAdd]) {
-    jsonDict = [[DBTEAMLOGFileTransfersFileAddTypeSerializer serialize:valueObj.fileTransfersFileAdd] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGFileTransfersFileAddTypeSerializer serialize:valueObj.fileTransfersFileAdd]];
     jsonDict[@".tag"] = @"file_transfers_file_add";
   } else if ([valueObj isFileTransfersTransferDelete]) {
-    jsonDict = [[DBTEAMLOGFileTransfersTransferDeleteTypeSerializer serialize:valueObj.fileTransfersTransferDelete]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferDeleteTypeSerializer
+                                           serialize:valueObj.fileTransfersTransferDelete]];
     jsonDict[@".tag"] = @"file_transfers_transfer_delete";
   } else if ([valueObj isFileTransfersTransferDownload]) {
-    jsonDict = [[DBTEAMLOGFileTransfersTransferDownloadTypeSerializer serialize:valueObj.fileTransfersTransferDownload]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferDownloadTypeSerializer
+                                           serialize:valueObj.fileTransfersTransferDownload]];
     jsonDict[@".tag"] = @"file_transfers_transfer_download";
   } else if ([valueObj isFileTransfersTransferSend]) {
-    jsonDict =
-        [[DBTEAMLOGFileTransfersTransferSendTypeSerializer serialize:valueObj.fileTransfersTransferSend] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferSendTypeSerializer
+                                           serialize:valueObj.fileTransfersTransferSend]];
     jsonDict[@".tag"] = @"file_transfers_transfer_send";
   } else if ([valueObj isFileTransfersTransferView]) {
-    jsonDict =
-        [[DBTEAMLOGFileTransfersTransferViewTypeSerializer serialize:valueObj.fileTransfersTransferView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersTransferViewTypeSerializer
+                                           serialize:valueObj.fileTransfersTransferView]];
     jsonDict[@".tag"] = @"file_transfers_transfer_view";
   } else if ([valueObj isNoteAclInviteOnly]) {
-    jsonDict = [[DBTEAMLOGNoteAclInviteOnlyTypeSerializer serialize:valueObj.noteAclInviteOnly] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteAclInviteOnlyTypeSerializer serialize:valueObj.noteAclInviteOnly]];
     jsonDict[@".tag"] = @"note_acl_invite_only";
   } else if ([valueObj isNoteAclLink]) {
-    jsonDict = [[DBTEAMLOGNoteAclLinkTypeSerializer serialize:valueObj.noteAclLink] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteAclLinkTypeSerializer serialize:valueObj.noteAclLink]];
     jsonDict[@".tag"] = @"note_acl_link";
   } else if ([valueObj isNoteAclTeamLink]) {
-    jsonDict = [[DBTEAMLOGNoteAclTeamLinkTypeSerializer serialize:valueObj.noteAclTeamLink] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteAclTeamLinkTypeSerializer serialize:valueObj.noteAclTeamLink]];
     jsonDict[@".tag"] = @"note_acl_team_link";
   } else if ([valueObj isNoteShared]) {
-    jsonDict = [[DBTEAMLOGNoteSharedTypeSerializer serialize:valueObj.noteShared] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteSharedTypeSerializer serialize:valueObj.noteShared]];
     jsonDict[@".tag"] = @"note_shared";
   } else if ([valueObj isNoteShareReceive]) {
-    jsonDict = [[DBTEAMLOGNoteShareReceiveTypeSerializer serialize:valueObj.noteShareReceive] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNoteShareReceiveTypeSerializer serialize:valueObj.noteShareReceive]];
     jsonDict[@".tag"] = @"note_share_receive";
   } else if ([valueObj isOpenNoteShared]) {
-    jsonDict = [[DBTEAMLOGOpenNoteSharedTypeSerializer serialize:valueObj.openNoteShared] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOpenNoteSharedTypeSerializer serialize:valueObj.openNoteShared]];
     jsonDict[@".tag"] = @"open_note_shared";
   } else if ([valueObj isSfAddGroup]) {
-    jsonDict = [[DBTEAMLOGSfAddGroupTypeSerializer serialize:valueObj.sfAddGroup] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfAddGroupTypeSerializer serialize:valueObj.sfAddGroup]];
     jsonDict[@".tag"] = @"sf_add_group";
   } else if ([valueObj isSfAllowNonMembersToViewSharedLinks]) {
-    jsonDict = [[DBTEAMLOGSfAllowNonMembersToViewSharedLinksTypeSerializer
-        serialize:valueObj.sfAllowNonMembersToViewSharedLinks] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfAllowNonMembersToViewSharedLinksTypeSerializer
+                                           serialize:valueObj.sfAllowNonMembersToViewSharedLinks]];
     jsonDict[@".tag"] = @"sf_allow_non_members_to_view_shared_links";
   } else if ([valueObj isSfExternalInviteWarn]) {
-    jsonDict = [[DBTEAMLOGSfExternalInviteWarnTypeSerializer serialize:valueObj.sfExternalInviteWarn] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSfExternalInviteWarnTypeSerializer serialize:valueObj.sfExternalInviteWarn]];
     jsonDict[@".tag"] = @"sf_external_invite_warn";
   } else if ([valueObj isSfFbInvite]) {
-    jsonDict = [[DBTEAMLOGSfFbInviteTypeSerializer serialize:valueObj.sfFbInvite] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfFbInviteTypeSerializer serialize:valueObj.sfFbInvite]];
     jsonDict[@".tag"] = @"sf_fb_invite";
   } else if ([valueObj isSfFbInviteChangeRole]) {
-    jsonDict = [[DBTEAMLOGSfFbInviteChangeRoleTypeSerializer serialize:valueObj.sfFbInviteChangeRole] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSfFbInviteChangeRoleTypeSerializer serialize:valueObj.sfFbInviteChangeRole]];
     jsonDict[@".tag"] = @"sf_fb_invite_change_role";
   } else if ([valueObj isSfFbUninvite]) {
-    jsonDict = [[DBTEAMLOGSfFbUninviteTypeSerializer serialize:valueObj.sfFbUninvite] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfFbUninviteTypeSerializer serialize:valueObj.sfFbUninvite]];
     jsonDict[@".tag"] = @"sf_fb_uninvite";
   } else if ([valueObj isSfInviteGroup]) {
-    jsonDict = [[DBTEAMLOGSfInviteGroupTypeSerializer serialize:valueObj.sfInviteGroup] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfInviteGroupTypeSerializer serialize:valueObj.sfInviteGroup]];
     jsonDict[@".tag"] = @"sf_invite_group";
   } else if ([valueObj isSfTeamGrantAccess]) {
-    jsonDict = [[DBTEAMLOGSfTeamGrantAccessTypeSerializer serialize:valueObj.sfTeamGrantAccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamGrantAccessTypeSerializer serialize:valueObj.sfTeamGrantAccess]];
     jsonDict[@".tag"] = @"sf_team_grant_access";
   } else if ([valueObj isSfTeamInvite]) {
-    jsonDict = [[DBTEAMLOGSfTeamInviteTypeSerializer serialize:valueObj.sfTeamInvite] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamInviteTypeSerializer serialize:valueObj.sfTeamInvite]];
     jsonDict[@".tag"] = @"sf_team_invite";
   } else if ([valueObj isSfTeamInviteChangeRole]) {
-    jsonDict = [[DBTEAMLOGSfTeamInviteChangeRoleTypeSerializer serialize:valueObj.sfTeamInviteChangeRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamInviteChangeRoleTypeSerializer
+                                           serialize:valueObj.sfTeamInviteChangeRole]];
     jsonDict[@".tag"] = @"sf_team_invite_change_role";
   } else if ([valueObj isSfTeamJoin]) {
-    jsonDict = [[DBTEAMLOGSfTeamJoinTypeSerializer serialize:valueObj.sfTeamJoin] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamJoinTypeSerializer serialize:valueObj.sfTeamJoin]];
     jsonDict[@".tag"] = @"sf_team_join";
   } else if ([valueObj isSfTeamJoinFromOobLink]) {
-    jsonDict = [[DBTEAMLOGSfTeamJoinFromOobLinkTypeSerializer serialize:valueObj.sfTeamJoinFromOobLink] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamJoinFromOobLinkTypeSerializer
+                                           serialize:valueObj.sfTeamJoinFromOobLink]];
     jsonDict[@".tag"] = @"sf_team_join_from_oob_link";
   } else if ([valueObj isSfTeamUninvite]) {
-    jsonDict = [[DBTEAMLOGSfTeamUninviteTypeSerializer serialize:valueObj.sfTeamUninvite] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSfTeamUninviteTypeSerializer serialize:valueObj.sfTeamUninvite]];
     jsonDict[@".tag"] = @"sf_team_uninvite";
   } else if ([valueObj isSharedContentAddInvitees]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentAddInviteesTypeSerializer serialize:valueObj.sharedContentAddInvitees] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddInviteesTypeSerializer
+                                           serialize:valueObj.sharedContentAddInvitees]];
     jsonDict[@".tag"] = @"shared_content_add_invitees";
   } else if ([valueObj isSharedContentAddLinkExpiry]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentAddLinkExpiryTypeSerializer serialize:valueObj.sharedContentAddLinkExpiry] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddLinkExpiryTypeSerializer
+                                           serialize:valueObj.sharedContentAddLinkExpiry]];
     jsonDict[@".tag"] = @"shared_content_add_link_expiry";
   } else if ([valueObj isSharedContentAddLinkPassword]) {
-    jsonDict = [[DBTEAMLOGSharedContentAddLinkPasswordTypeSerializer serialize:valueObj.sharedContentAddLinkPassword]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddLinkPasswordTypeSerializer
+                                           serialize:valueObj.sharedContentAddLinkPassword]];
     jsonDict[@".tag"] = @"shared_content_add_link_password";
   } else if ([valueObj isSharedContentAddMember]) {
-    jsonDict = [[DBTEAMLOGSharedContentAddMemberTypeSerializer serialize:valueObj.sharedContentAddMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentAddMemberTypeSerializer
+                                           serialize:valueObj.sharedContentAddMember]];
     jsonDict[@".tag"] = @"shared_content_add_member";
   } else if ([valueObj isSharedContentChangeDownloadsPolicy]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeDownloadsPolicyTypeSerializer
-        serialize:valueObj.sharedContentChangeDownloadsPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeDownloadsPolicyTypeSerializer
+                                           serialize:valueObj.sharedContentChangeDownloadsPolicy]];
     jsonDict[@".tag"] = @"shared_content_change_downloads_policy";
   } else if ([valueObj isSharedContentChangeInviteeRole]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeInviteeRoleTypeSerializer
-        serialize:valueObj.sharedContentChangeInviteeRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeInviteeRoleTypeSerializer
+                                           serialize:valueObj.sharedContentChangeInviteeRole]];
     jsonDict[@".tag"] = @"shared_content_change_invitee_role";
   } else if ([valueObj isSharedContentChangeLinkAudience]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeLinkAudienceTypeSerializer
-        serialize:valueObj.sharedContentChangeLinkAudience] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeLinkAudienceTypeSerializer
+                                           serialize:valueObj.sharedContentChangeLinkAudience]];
     jsonDict[@".tag"] = @"shared_content_change_link_audience";
   } else if ([valueObj isSharedContentChangeLinkExpiry]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeLinkExpiryTypeSerializer serialize:valueObj.sharedContentChangeLinkExpiry]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeLinkExpiryTypeSerializer
+                                           serialize:valueObj.sharedContentChangeLinkExpiry]];
     jsonDict[@".tag"] = @"shared_content_change_link_expiry";
   } else if ([valueObj isSharedContentChangeLinkPassword]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeLinkPasswordTypeSerializer
-        serialize:valueObj.sharedContentChangeLinkPassword] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeLinkPasswordTypeSerializer
+                                           serialize:valueObj.sharedContentChangeLinkPassword]];
     jsonDict[@".tag"] = @"shared_content_change_link_password";
   } else if ([valueObj isSharedContentChangeMemberRole]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeMemberRoleTypeSerializer serialize:valueObj.sharedContentChangeMemberRole]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeMemberRoleTypeSerializer
+                                           serialize:valueObj.sharedContentChangeMemberRole]];
     jsonDict[@".tag"] = @"shared_content_change_member_role";
   } else if ([valueObj isSharedContentChangeViewerInfoPolicy]) {
-    jsonDict = [[DBTEAMLOGSharedContentChangeViewerInfoPolicyTypeSerializer
-        serialize:valueObj.sharedContentChangeViewerInfoPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentChangeViewerInfoPolicyTypeSerializer
+                                           serialize:valueObj.sharedContentChangeViewerInfoPolicy]];
     jsonDict[@".tag"] = @"shared_content_change_viewer_info_policy";
   } else if ([valueObj isSharedContentClaimInvitation]) {
-    jsonDict = [[DBTEAMLOGSharedContentClaimInvitationTypeSerializer serialize:valueObj.sharedContentClaimInvitation]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentClaimInvitationTypeSerializer
+                                           serialize:valueObj.sharedContentClaimInvitation]];
     jsonDict[@".tag"] = @"shared_content_claim_invitation";
   } else if ([valueObj isSharedContentCopy]) {
-    jsonDict = [[DBTEAMLOGSharedContentCopyTypeSerializer serialize:valueObj.sharedContentCopy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentCopyTypeSerializer serialize:valueObj.sharedContentCopy]];
     jsonDict[@".tag"] = @"shared_content_copy";
   } else if ([valueObj isSharedContentDownload]) {
-    jsonDict = [[DBTEAMLOGSharedContentDownloadTypeSerializer serialize:valueObj.sharedContentDownload] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentDownloadTypeSerializer
+                                           serialize:valueObj.sharedContentDownload]];
     jsonDict[@".tag"] = @"shared_content_download";
   } else if ([valueObj isSharedContentRelinquishMembership]) {
-    jsonDict = [[DBTEAMLOGSharedContentRelinquishMembershipTypeSerializer
-        serialize:valueObj.sharedContentRelinquishMembership] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRelinquishMembershipTypeSerializer
+                                           serialize:valueObj.sharedContentRelinquishMembership]];
     jsonDict[@".tag"] = @"shared_content_relinquish_membership";
   } else if ([valueObj isSharedContentRemoveInvitees]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveInviteesTypeSerializer serialize:valueObj.sharedContentRemoveInvitees]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveInviteesTypeSerializer
+                                           serialize:valueObj.sharedContentRemoveInvitees]];
     jsonDict[@".tag"] = @"shared_content_remove_invitees";
   } else if ([valueObj isSharedContentRemoveLinkExpiry]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveLinkExpiryTypeSerializer serialize:valueObj.sharedContentRemoveLinkExpiry]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveLinkExpiryTypeSerializer
+                                           serialize:valueObj.sharedContentRemoveLinkExpiry]];
     jsonDict[@".tag"] = @"shared_content_remove_link_expiry";
   } else if ([valueObj isSharedContentRemoveLinkPassword]) {
-    jsonDict = [[DBTEAMLOGSharedContentRemoveLinkPasswordTypeSerializer
-        serialize:valueObj.sharedContentRemoveLinkPassword] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveLinkPasswordTypeSerializer
+                                           serialize:valueObj.sharedContentRemoveLinkPassword]];
     jsonDict[@".tag"] = @"shared_content_remove_link_password";
   } else if ([valueObj isSharedContentRemoveMember]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentRemoveMemberTypeSerializer serialize:valueObj.sharedContentRemoveMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRemoveMemberTypeSerializer
+                                           serialize:valueObj.sharedContentRemoveMember]];
     jsonDict[@".tag"] = @"shared_content_remove_member";
   } else if ([valueObj isSharedContentRequestAccess]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentRequestAccessTypeSerializer serialize:valueObj.sharedContentRequestAccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRequestAccessTypeSerializer
+                                           serialize:valueObj.sharedContentRequestAccess]];
     jsonDict[@".tag"] = @"shared_content_request_access";
   } else if ([valueObj isSharedContentRestoreInvitees]) {
-    jsonDict = [[DBTEAMLOGSharedContentRestoreInviteesTypeSerializer serialize:valueObj.sharedContentRestoreInvitees]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRestoreInviteesTypeSerializer
+                                           serialize:valueObj.sharedContentRestoreInvitees]];
     jsonDict[@".tag"] = @"shared_content_restore_invitees";
   } else if ([valueObj isSharedContentRestoreMember]) {
-    jsonDict =
-        [[DBTEAMLOGSharedContentRestoreMemberTypeSerializer serialize:valueObj.sharedContentRestoreMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentRestoreMemberTypeSerializer
+                                           serialize:valueObj.sharedContentRestoreMember]];
     jsonDict[@".tag"] = @"shared_content_restore_member";
   } else if ([valueObj isSharedContentUnshare]) {
-    jsonDict = [[DBTEAMLOGSharedContentUnshareTypeSerializer serialize:valueObj.sharedContentUnshare] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedContentUnshareTypeSerializer serialize:valueObj.sharedContentUnshare]];
     jsonDict[@".tag"] = @"shared_content_unshare";
   } else if ([valueObj isSharedContentView]) {
-    jsonDict = [[DBTEAMLOGSharedContentViewTypeSerializer serialize:valueObj.sharedContentView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedContentViewTypeSerializer serialize:valueObj.sharedContentView]];
     jsonDict[@".tag"] = @"shared_content_view";
   } else if ([valueObj isSharedFolderChangeLinkPolicy]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeLinkPolicyTypeSerializer serialize:valueObj.sharedFolderChangeLinkPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeLinkPolicyTypeSerializer
+                                           serialize:valueObj.sharedFolderChangeLinkPolicy]];
     jsonDict[@".tag"] = @"shared_folder_change_link_policy";
   } else if ([valueObj isSharedFolderChangeMembersInheritancePolicy]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeMembersInheritancePolicyTypeSerializer
-        serialize:valueObj.sharedFolderChangeMembersInheritancePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeMembersInheritancePolicyTypeSerializer
+                                           serialize:valueObj.sharedFolderChangeMembersInheritancePolicy]];
     jsonDict[@".tag"] = @"shared_folder_change_members_inheritance_policy";
   } else if ([valueObj isSharedFolderChangeMembersManagementPolicy]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeMembersManagementPolicyTypeSerializer
-        serialize:valueObj.sharedFolderChangeMembersManagementPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeMembersManagementPolicyTypeSerializer
+                                           serialize:valueObj.sharedFolderChangeMembersManagementPolicy]];
     jsonDict[@".tag"] = @"shared_folder_change_members_management_policy";
   } else if ([valueObj isSharedFolderChangeMembersPolicy]) {
-    jsonDict = [[DBTEAMLOGSharedFolderChangeMembersPolicyTypeSerializer
-        serialize:valueObj.sharedFolderChangeMembersPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderChangeMembersPolicyTypeSerializer
+                                           serialize:valueObj.sharedFolderChangeMembersPolicy]];
     jsonDict[@".tag"] = @"shared_folder_change_members_policy";
   } else if ([valueObj isSharedFolderCreate]) {
-    jsonDict = [[DBTEAMLOGSharedFolderCreateTypeSerializer serialize:valueObj.sharedFolderCreate] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedFolderCreateTypeSerializer serialize:valueObj.sharedFolderCreate]];
     jsonDict[@".tag"] = @"shared_folder_create";
   } else if ([valueObj isSharedFolderDeclineInvitation]) {
-    jsonDict = [[DBTEAMLOGSharedFolderDeclineInvitationTypeSerializer serialize:valueObj.sharedFolderDeclineInvitation]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderDeclineInvitationTypeSerializer
+                                           serialize:valueObj.sharedFolderDeclineInvitation]];
     jsonDict[@".tag"] = @"shared_folder_decline_invitation";
   } else if ([valueObj isSharedFolderMount]) {
-    jsonDict = [[DBTEAMLOGSharedFolderMountTypeSerializer serialize:valueObj.sharedFolderMount] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderMountTypeSerializer serialize:valueObj.sharedFolderMount]];
     jsonDict[@".tag"] = @"shared_folder_mount";
   } else if ([valueObj isSharedFolderNest]) {
-    jsonDict = [[DBTEAMLOGSharedFolderNestTypeSerializer serialize:valueObj.sharedFolderNest] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderNestTypeSerializer serialize:valueObj.sharedFolderNest]];
     jsonDict[@".tag"] = @"shared_folder_nest";
   } else if ([valueObj isSharedFolderTransferOwnership]) {
-    jsonDict = [[DBTEAMLOGSharedFolderTransferOwnershipTypeSerializer serialize:valueObj.sharedFolderTransferOwnership]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedFolderTransferOwnershipTypeSerializer
+                                           serialize:valueObj.sharedFolderTransferOwnership]];
     jsonDict[@".tag"] = @"shared_folder_transfer_ownership";
   } else if ([valueObj isSharedFolderUnmount]) {
-    jsonDict = [[DBTEAMLOGSharedFolderUnmountTypeSerializer serialize:valueObj.sharedFolderUnmount] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedFolderUnmountTypeSerializer serialize:valueObj.sharedFolderUnmount]];
     jsonDict[@".tag"] = @"shared_folder_unmount";
   } else if ([valueObj isSharedLinkAddExpiry]) {
-    jsonDict = [[DBTEAMLOGSharedLinkAddExpiryTypeSerializer serialize:valueObj.sharedLinkAddExpiry] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedLinkAddExpiryTypeSerializer serialize:valueObj.sharedLinkAddExpiry]];
     jsonDict[@".tag"] = @"shared_link_add_expiry";
   } else if ([valueObj isSharedLinkChangeExpiry]) {
-    jsonDict = [[DBTEAMLOGSharedLinkChangeExpiryTypeSerializer serialize:valueObj.sharedLinkChangeExpiry] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkChangeExpiryTypeSerializer
+                                           serialize:valueObj.sharedLinkChangeExpiry]];
     jsonDict[@".tag"] = @"shared_link_change_expiry";
   } else if ([valueObj isSharedLinkChangeVisibility]) {
-    jsonDict =
-        [[DBTEAMLOGSharedLinkChangeVisibilityTypeSerializer serialize:valueObj.sharedLinkChangeVisibility] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkChangeVisibilityTypeSerializer
+                                           serialize:valueObj.sharedLinkChangeVisibility]];
     jsonDict[@".tag"] = @"shared_link_change_visibility";
   } else if ([valueObj isSharedLinkCopy]) {
-    jsonDict = [[DBTEAMLOGSharedLinkCopyTypeSerializer serialize:valueObj.sharedLinkCopy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkCopyTypeSerializer serialize:valueObj.sharedLinkCopy]];
     jsonDict[@".tag"] = @"shared_link_copy";
   } else if ([valueObj isSharedLinkCreate]) {
-    jsonDict = [[DBTEAMLOGSharedLinkCreateTypeSerializer serialize:valueObj.sharedLinkCreate] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkCreateTypeSerializer serialize:valueObj.sharedLinkCreate]];
     jsonDict[@".tag"] = @"shared_link_create";
   } else if ([valueObj isSharedLinkDisable]) {
-    jsonDict = [[DBTEAMLOGSharedLinkDisableTypeSerializer serialize:valueObj.sharedLinkDisable] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkDisableTypeSerializer serialize:valueObj.sharedLinkDisable]];
     jsonDict[@".tag"] = @"shared_link_disable";
   } else if ([valueObj isSharedLinkDownload]) {
-    jsonDict = [[DBTEAMLOGSharedLinkDownloadTypeSerializer serialize:valueObj.sharedLinkDownload] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSharedLinkDownloadTypeSerializer serialize:valueObj.sharedLinkDownload]];
     jsonDict[@".tag"] = @"shared_link_download";
   } else if ([valueObj isSharedLinkRemoveExpiry]) {
-    jsonDict = [[DBTEAMLOGSharedLinkRemoveExpiryTypeSerializer serialize:valueObj.sharedLinkRemoveExpiry] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkRemoveExpiryTypeSerializer
+                                           serialize:valueObj.sharedLinkRemoveExpiry]];
     jsonDict[@".tag"] = @"shared_link_remove_expiry";
   } else if ([valueObj isSharedLinkSettingsAddExpiration]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAddExpirationTypeSerializer
-        serialize:valueObj.sharedLinkSettingsAddExpiration] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAddExpirationTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsAddExpiration]];
     jsonDict[@".tag"] = @"shared_link_settings_add_expiration";
   } else if ([valueObj isSharedLinkSettingsAddPassword]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAddPasswordTypeSerializer serialize:valueObj.sharedLinkSettingsAddPassword]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAddPasswordTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsAddPassword]];
     jsonDict[@".tag"] = @"shared_link_settings_add_password";
   } else if ([valueObj isSharedLinkSettingsAllowDownloadDisabled]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledTypeSerializer
-        serialize:valueObj.sharedLinkSettingsAllowDownloadDisabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAllowDownloadDisabledTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsAllowDownloadDisabled]];
     jsonDict[@".tag"] = @"shared_link_settings_allow_download_disabled";
   } else if ([valueObj isSharedLinkSettingsAllowDownloadEnabled]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledTypeSerializer
-        serialize:valueObj.sharedLinkSettingsAllowDownloadEnabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsAllowDownloadEnabledTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsAllowDownloadEnabled]];
     jsonDict[@".tag"] = @"shared_link_settings_allow_download_enabled";
   } else if ([valueObj isSharedLinkSettingsChangeAudience]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsChangeAudienceTypeSerializer
-        serialize:valueObj.sharedLinkSettingsChangeAudience] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsChangeAudienceTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsChangeAudience]];
     jsonDict[@".tag"] = @"shared_link_settings_change_audience";
   } else if ([valueObj isSharedLinkSettingsChangeExpiration]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsChangeExpirationTypeSerializer
-        serialize:valueObj.sharedLinkSettingsChangeExpiration] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsChangeExpirationTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsChangeExpiration]];
     jsonDict[@".tag"] = @"shared_link_settings_change_expiration";
   } else if ([valueObj isSharedLinkSettingsChangePassword]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsChangePasswordTypeSerializer
-        serialize:valueObj.sharedLinkSettingsChangePassword] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsChangePasswordTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsChangePassword]];
     jsonDict[@".tag"] = @"shared_link_settings_change_password";
   } else if ([valueObj isSharedLinkSettingsRemoveExpiration]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsRemoveExpirationTypeSerializer
-        serialize:valueObj.sharedLinkSettingsRemoveExpiration] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsRemoveExpirationTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsRemoveExpiration]];
     jsonDict[@".tag"] = @"shared_link_settings_remove_expiration";
   } else if ([valueObj isSharedLinkSettingsRemovePassword]) {
-    jsonDict = [[DBTEAMLOGSharedLinkSettingsRemovePasswordTypeSerializer
-        serialize:valueObj.sharedLinkSettingsRemovePassword] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkSettingsRemovePasswordTypeSerializer
+                                           serialize:valueObj.sharedLinkSettingsRemovePassword]];
     jsonDict[@".tag"] = @"shared_link_settings_remove_password";
   } else if ([valueObj isSharedLinkShare]) {
-    jsonDict = [[DBTEAMLOGSharedLinkShareTypeSerializer serialize:valueObj.sharedLinkShare] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkShareTypeSerializer serialize:valueObj.sharedLinkShare]];
     jsonDict[@".tag"] = @"shared_link_share";
   } else if ([valueObj isSharedLinkView]) {
-    jsonDict = [[DBTEAMLOGSharedLinkViewTypeSerializer serialize:valueObj.sharedLinkView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedLinkViewTypeSerializer serialize:valueObj.sharedLinkView]];
     jsonDict[@".tag"] = @"shared_link_view";
   } else if ([valueObj isSharedNoteOpened]) {
-    jsonDict = [[DBTEAMLOGSharedNoteOpenedTypeSerializer serialize:valueObj.sharedNoteOpened] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharedNoteOpenedTypeSerializer serialize:valueObj.sharedNoteOpened]];
     jsonDict[@".tag"] = @"shared_note_opened";
   } else if ([valueObj isShmodelDisableDownloads]) {
-    jsonDict =
-        [[DBTEAMLOGShmodelDisableDownloadsTypeSerializer serialize:valueObj.shmodelDisableDownloads] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShmodelDisableDownloadsTypeSerializer
+                                           serialize:valueObj.shmodelDisableDownloads]];
     jsonDict[@".tag"] = @"shmodel_disable_downloads";
   } else if ([valueObj isShmodelEnableDownloads]) {
-    jsonDict = [[DBTEAMLOGShmodelEnableDownloadsTypeSerializer serialize:valueObj.shmodelEnableDownloads] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShmodelEnableDownloadsTypeSerializer
+                                           serialize:valueObj.shmodelEnableDownloads]];
     jsonDict[@".tag"] = @"shmodel_enable_downloads";
   } else if ([valueObj isShmodelGroupShare]) {
-    jsonDict = [[DBTEAMLOGShmodelGroupShareTypeSerializer serialize:valueObj.shmodelGroupShare] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShmodelGroupShareTypeSerializer serialize:valueObj.shmodelGroupShare]];
     jsonDict[@".tag"] = @"shmodel_group_share";
   } else if ([valueObj isShowcaseAccessGranted]) {
-    jsonDict = [[DBTEAMLOGShowcaseAccessGrantedTypeSerializer serialize:valueObj.showcaseAccessGranted] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseAccessGrantedTypeSerializer
+                                           serialize:valueObj.showcaseAccessGranted]];
     jsonDict[@".tag"] = @"showcase_access_granted";
   } else if ([valueObj isShowcaseAddMember]) {
-    jsonDict = [[DBTEAMLOGShowcaseAddMemberTypeSerializer serialize:valueObj.showcaseAddMember] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseAddMemberTypeSerializer serialize:valueObj.showcaseAddMember]];
     jsonDict[@".tag"] = @"showcase_add_member";
   } else if ([valueObj isShowcaseArchived]) {
-    jsonDict = [[DBTEAMLOGShowcaseArchivedTypeSerializer serialize:valueObj.showcaseArchived] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseArchivedTypeSerializer serialize:valueObj.showcaseArchived]];
     jsonDict[@".tag"] = @"showcase_archived";
   } else if ([valueObj isShowcaseCreated]) {
-    jsonDict = [[DBTEAMLOGShowcaseCreatedTypeSerializer serialize:valueObj.showcaseCreated] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseCreatedTypeSerializer serialize:valueObj.showcaseCreated]];
     jsonDict[@".tag"] = @"showcase_created";
   } else if ([valueObj isShowcaseDeleteComment]) {
-    jsonDict = [[DBTEAMLOGShowcaseDeleteCommentTypeSerializer serialize:valueObj.showcaseDeleteComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseDeleteCommentTypeSerializer
+                                           serialize:valueObj.showcaseDeleteComment]];
     jsonDict[@".tag"] = @"showcase_delete_comment";
   } else if ([valueObj isShowcaseEdited]) {
-    jsonDict = [[DBTEAMLOGShowcaseEditedTypeSerializer serialize:valueObj.showcaseEdited] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseEditedTypeSerializer serialize:valueObj.showcaseEdited]];
     jsonDict[@".tag"] = @"showcase_edited";
   } else if ([valueObj isShowcaseEditComment]) {
-    jsonDict = [[DBTEAMLOGShowcaseEditCommentTypeSerializer serialize:valueObj.showcaseEditComment] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseEditCommentTypeSerializer serialize:valueObj.showcaseEditComment]];
     jsonDict[@".tag"] = @"showcase_edit_comment";
   } else if ([valueObj isShowcaseFileAdded]) {
-    jsonDict = [[DBTEAMLOGShowcaseFileAddedTypeSerializer serialize:valueObj.showcaseFileAdded] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseFileAddedTypeSerializer serialize:valueObj.showcaseFileAdded]];
     jsonDict[@".tag"] = @"showcase_file_added";
   } else if ([valueObj isShowcaseFileDownload]) {
-    jsonDict = [[DBTEAMLOGShowcaseFileDownloadTypeSerializer serialize:valueObj.showcaseFileDownload] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseFileDownloadTypeSerializer serialize:valueObj.showcaseFileDownload]];
     jsonDict[@".tag"] = @"showcase_file_download";
   } else if ([valueObj isShowcaseFileRemoved]) {
-    jsonDict = [[DBTEAMLOGShowcaseFileRemovedTypeSerializer serialize:valueObj.showcaseFileRemoved] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseFileRemovedTypeSerializer serialize:valueObj.showcaseFileRemoved]];
     jsonDict[@".tag"] = @"showcase_file_removed";
   } else if ([valueObj isShowcaseFileView]) {
-    jsonDict = [[DBTEAMLOGShowcaseFileViewTypeSerializer serialize:valueObj.showcaseFileView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseFileViewTypeSerializer serialize:valueObj.showcaseFileView]];
     jsonDict[@".tag"] = @"showcase_file_view";
   } else if ([valueObj isShowcasePermanentlyDeleted]) {
-    jsonDict =
-        [[DBTEAMLOGShowcasePermanentlyDeletedTypeSerializer serialize:valueObj.showcasePermanentlyDeleted] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcasePermanentlyDeletedTypeSerializer
+                                           serialize:valueObj.showcasePermanentlyDeleted]];
     jsonDict[@".tag"] = @"showcase_permanently_deleted";
   } else if ([valueObj isShowcasePostComment]) {
-    jsonDict = [[DBTEAMLOGShowcasePostCommentTypeSerializer serialize:valueObj.showcasePostComment] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcasePostCommentTypeSerializer serialize:valueObj.showcasePostComment]];
     jsonDict[@".tag"] = @"showcase_post_comment";
   } else if ([valueObj isShowcaseRemoveMember]) {
-    jsonDict = [[DBTEAMLOGShowcaseRemoveMemberTypeSerializer serialize:valueObj.showcaseRemoveMember] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGShowcaseRemoveMemberTypeSerializer serialize:valueObj.showcaseRemoveMember]];
     jsonDict[@".tag"] = @"showcase_remove_member";
   } else if ([valueObj isShowcaseRenamed]) {
-    jsonDict = [[DBTEAMLOGShowcaseRenamedTypeSerializer serialize:valueObj.showcaseRenamed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseRenamedTypeSerializer serialize:valueObj.showcaseRenamed]];
     jsonDict[@".tag"] = @"showcase_renamed";
   } else if ([valueObj isShowcaseRequestAccess]) {
-    jsonDict = [[DBTEAMLOGShowcaseRequestAccessTypeSerializer serialize:valueObj.showcaseRequestAccess] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseRequestAccessTypeSerializer
+                                           serialize:valueObj.showcaseRequestAccess]];
     jsonDict[@".tag"] = @"showcase_request_access";
   } else if ([valueObj isShowcaseResolveComment]) {
-    jsonDict = [[DBTEAMLOGShowcaseResolveCommentTypeSerializer serialize:valueObj.showcaseResolveComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseResolveCommentTypeSerializer
+                                           serialize:valueObj.showcaseResolveComment]];
     jsonDict[@".tag"] = @"showcase_resolve_comment";
   } else if ([valueObj isShowcaseRestored]) {
-    jsonDict = [[DBTEAMLOGShowcaseRestoredTypeSerializer serialize:valueObj.showcaseRestored] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseRestoredTypeSerializer serialize:valueObj.showcaseRestored]];
     jsonDict[@".tag"] = @"showcase_restored";
   } else if ([valueObj isShowcaseTrashed]) {
-    jsonDict = [[DBTEAMLOGShowcaseTrashedTypeSerializer serialize:valueObj.showcaseTrashed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseTrashedTypeSerializer serialize:valueObj.showcaseTrashed]];
     jsonDict[@".tag"] = @"showcase_trashed";
   } else if ([valueObj isShowcaseTrashedDeprecated]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseTrashedDeprecatedTypeSerializer serialize:valueObj.showcaseTrashedDeprecated] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseTrashedDeprecatedTypeSerializer
+                                           serialize:valueObj.showcaseTrashedDeprecated]];
     jsonDict[@".tag"] = @"showcase_trashed_deprecated";
   } else if ([valueObj isShowcaseUnresolveComment]) {
-    jsonDict =
-        [[DBTEAMLOGShowcaseUnresolveCommentTypeSerializer serialize:valueObj.showcaseUnresolveComment] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseUnresolveCommentTypeSerializer
+                                           serialize:valueObj.showcaseUnresolveComment]];
     jsonDict[@".tag"] = @"showcase_unresolve_comment";
   } else if ([valueObj isShowcaseUntrashed]) {
-    jsonDict = [[DBTEAMLOGShowcaseUntrashedTypeSerializer serialize:valueObj.showcaseUntrashed] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseUntrashedTypeSerializer serialize:valueObj.showcaseUntrashed]];
     jsonDict[@".tag"] = @"showcase_untrashed";
   } else if ([valueObj isShowcaseUntrashedDeprecated]) {
-    jsonDict = [[DBTEAMLOGShowcaseUntrashedDeprecatedTypeSerializer serialize:valueObj.showcaseUntrashedDeprecated]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseUntrashedDeprecatedTypeSerializer
+                                           serialize:valueObj.showcaseUntrashedDeprecated]];
     jsonDict[@".tag"] = @"showcase_untrashed_deprecated";
   } else if ([valueObj isShowcaseView]) {
-    jsonDict = [[DBTEAMLOGShowcaseViewTypeSerializer serialize:valueObj.showcaseView] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseViewTypeSerializer serialize:valueObj.showcaseView]];
     jsonDict[@".tag"] = @"showcase_view";
   } else if ([valueObj isSsoAddCert]) {
-    jsonDict = [[DBTEAMLOGSsoAddCertTypeSerializer serialize:valueObj.ssoAddCert] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoAddCertTypeSerializer serialize:valueObj.ssoAddCert]];
     jsonDict[@".tag"] = @"sso_add_cert";
   } else if ([valueObj isSsoAddLoginUrl]) {
-    jsonDict = [[DBTEAMLOGSsoAddLoginUrlTypeSerializer serialize:valueObj.ssoAddLoginUrl] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoAddLoginUrlTypeSerializer serialize:valueObj.ssoAddLoginUrl]];
     jsonDict[@".tag"] = @"sso_add_login_url";
   } else if ([valueObj isSsoAddLogoutUrl]) {
-    jsonDict = [[DBTEAMLOGSsoAddLogoutUrlTypeSerializer serialize:valueObj.ssoAddLogoutUrl] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoAddLogoutUrlTypeSerializer serialize:valueObj.ssoAddLogoutUrl]];
     jsonDict[@".tag"] = @"sso_add_logout_url";
   } else if ([valueObj isSsoChangeCert]) {
-    jsonDict = [[DBTEAMLOGSsoChangeCertTypeSerializer serialize:valueObj.ssoChangeCert] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangeCertTypeSerializer serialize:valueObj.ssoChangeCert]];
     jsonDict[@".tag"] = @"sso_change_cert";
   } else if ([valueObj isSsoChangeLoginUrl]) {
-    jsonDict = [[DBTEAMLOGSsoChangeLoginUrlTypeSerializer serialize:valueObj.ssoChangeLoginUrl] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangeLoginUrlTypeSerializer serialize:valueObj.ssoChangeLoginUrl]];
     jsonDict[@".tag"] = @"sso_change_login_url";
   } else if ([valueObj isSsoChangeLogoutUrl]) {
-    jsonDict = [[DBTEAMLOGSsoChangeLogoutUrlTypeSerializer serialize:valueObj.ssoChangeLogoutUrl] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoChangeLogoutUrlTypeSerializer serialize:valueObj.ssoChangeLogoutUrl]];
     jsonDict[@".tag"] = @"sso_change_logout_url";
   } else if ([valueObj isSsoChangeSamlIdentityMode]) {
-    jsonDict =
-        [[DBTEAMLOGSsoChangeSamlIdentityModeTypeSerializer serialize:valueObj.ssoChangeSamlIdentityMode] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangeSamlIdentityModeTypeSerializer
+                                           serialize:valueObj.ssoChangeSamlIdentityMode]];
     jsonDict[@".tag"] = @"sso_change_saml_identity_mode";
   } else if ([valueObj isSsoRemoveCert]) {
-    jsonDict = [[DBTEAMLOGSsoRemoveCertTypeSerializer serialize:valueObj.ssoRemoveCert] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoRemoveCertTypeSerializer serialize:valueObj.ssoRemoveCert]];
     jsonDict[@".tag"] = @"sso_remove_cert";
   } else if ([valueObj isSsoRemoveLoginUrl]) {
-    jsonDict = [[DBTEAMLOGSsoRemoveLoginUrlTypeSerializer serialize:valueObj.ssoRemoveLoginUrl] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoRemoveLoginUrlTypeSerializer serialize:valueObj.ssoRemoveLoginUrl]];
     jsonDict[@".tag"] = @"sso_remove_login_url";
   } else if ([valueObj isSsoRemoveLogoutUrl]) {
-    jsonDict = [[DBTEAMLOGSsoRemoveLogoutUrlTypeSerializer serialize:valueObj.ssoRemoveLogoutUrl] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSsoRemoveLogoutUrlTypeSerializer serialize:valueObj.ssoRemoveLogoutUrl]];
     jsonDict[@".tag"] = @"sso_remove_logout_url";
   } else if ([valueObj isTeamFolderChangeStatus]) {
-    jsonDict = [[DBTEAMLOGTeamFolderChangeStatusTypeSerializer serialize:valueObj.teamFolderChangeStatus] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderChangeStatusTypeSerializer
+                                           serialize:valueObj.teamFolderChangeStatus]];
     jsonDict[@".tag"] = @"team_folder_change_status";
   } else if ([valueObj isTeamFolderCreate]) {
-    jsonDict = [[DBTEAMLOGTeamFolderCreateTypeSerializer serialize:valueObj.teamFolderCreate] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderCreateTypeSerializer serialize:valueObj.teamFolderCreate]];
     jsonDict[@".tag"] = @"team_folder_create";
   } else if ([valueObj isTeamFolderDowngrade]) {
-    jsonDict = [[DBTEAMLOGTeamFolderDowngradeTypeSerializer serialize:valueObj.teamFolderDowngrade] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTeamFolderDowngradeTypeSerializer serialize:valueObj.teamFolderDowngrade]];
     jsonDict[@".tag"] = @"team_folder_downgrade";
   } else if ([valueObj isTeamFolderPermanentlyDelete]) {
-    jsonDict = [[DBTEAMLOGTeamFolderPermanentlyDeleteTypeSerializer serialize:valueObj.teamFolderPermanentlyDelete]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderPermanentlyDeleteTypeSerializer
+                                           serialize:valueObj.teamFolderPermanentlyDelete]];
     jsonDict[@".tag"] = @"team_folder_permanently_delete";
   } else if ([valueObj isTeamFolderRename]) {
-    jsonDict = [[DBTEAMLOGTeamFolderRenameTypeSerializer serialize:valueObj.teamFolderRename] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamFolderRenameTypeSerializer serialize:valueObj.teamFolderRename]];
     jsonDict[@".tag"] = @"team_folder_rename";
   } else if ([valueObj isTeamSelectiveSyncSettingsChanged]) {
-    jsonDict = [[DBTEAMLOGTeamSelectiveSyncSettingsChangedTypeSerializer
-        serialize:valueObj.teamSelectiveSyncSettingsChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamSelectiveSyncSettingsChangedTypeSerializer
+                                           serialize:valueObj.teamSelectiveSyncSettingsChanged]];
     jsonDict[@".tag"] = @"team_selective_sync_settings_changed";
   } else if ([valueObj isAccountCaptureChangePolicy]) {
-    jsonDict =
-        [[DBTEAMLOGAccountCaptureChangePolicyTypeSerializer serialize:valueObj.accountCaptureChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangePolicyTypeSerializer
+                                           serialize:valueObj.accountCaptureChangePolicy]];
     jsonDict[@".tag"] = @"account_capture_change_policy";
   } else if ([valueObj isAllowDownloadDisabled]) {
-    jsonDict = [[DBTEAMLOGAllowDownloadDisabledTypeSerializer serialize:valueObj.allowDownloadDisabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAllowDownloadDisabledTypeSerializer
+                                           serialize:valueObj.allowDownloadDisabled]];
     jsonDict[@".tag"] = @"allow_download_disabled";
   } else if ([valueObj isAllowDownloadEnabled]) {
-    jsonDict = [[DBTEAMLOGAllowDownloadEnabledTypeSerializer serialize:valueObj.allowDownloadEnabled] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGAllowDownloadEnabledTypeSerializer serialize:valueObj.allowDownloadEnabled]];
     jsonDict[@".tag"] = @"allow_download_enabled";
   } else if ([valueObj isAppPermissionsChanged]) {
-    jsonDict = [[DBTEAMLOGAppPermissionsChangedTypeSerializer serialize:valueObj.appPermissionsChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAppPermissionsChangedTypeSerializer
+                                           serialize:valueObj.appPermissionsChanged]];
     jsonDict[@".tag"] = @"app_permissions_changed";
   } else if ([valueObj isCameraUploadsPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGCameraUploadsPolicyChangedTypeSerializer serialize:valueObj.cameraUploadsPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCameraUploadsPolicyChangedTypeSerializer
+                                           serialize:valueObj.cameraUploadsPolicyChanged]];
     jsonDict[@".tag"] = @"camera_uploads_policy_changed";
   } else if ([valueObj isCaptureTranscriptPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGCaptureTranscriptPolicyChangedTypeSerializer
-        serialize:valueObj.captureTranscriptPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGCaptureTranscriptPolicyChangedTypeSerializer
+                                           serialize:valueObj.captureTranscriptPolicyChanged]];
     jsonDict[@".tag"] = @"capture_transcript_policy_changed";
   } else if ([valueObj isClassificationChangePolicy]) {
-    jsonDict =
-        [[DBTEAMLOGClassificationChangePolicyTypeSerializer serialize:valueObj.classificationChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGClassificationChangePolicyTypeSerializer
+                                           serialize:valueObj.classificationChangePolicy]];
     jsonDict[@".tag"] = @"classification_change_policy";
   } else if ([valueObj isComputerBackupPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGComputerBackupPolicyChangedTypeSerializer serialize:valueObj.computerBackupPolicyChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGComputerBackupPolicyChangedTypeSerializer
+                                           serialize:valueObj.computerBackupPolicyChanged]];
     jsonDict[@".tag"] = @"computer_backup_policy_changed";
   } else if ([valueObj isContentAdministrationPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGContentAdministrationPolicyChangedTypeSerializer
-        serialize:valueObj.contentAdministrationPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGContentAdministrationPolicyChangedTypeSerializer
+                                           serialize:valueObj.contentAdministrationPolicyChanged]];
     jsonDict[@".tag"] = @"content_administration_policy_changed";
   } else if ([valueObj isDataPlacementRestrictionChangePolicy]) {
-    jsonDict = [[DBTEAMLOGDataPlacementRestrictionChangePolicyTypeSerializer
-        serialize:valueObj.dataPlacementRestrictionChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataPlacementRestrictionChangePolicyTypeSerializer
+                                           serialize:valueObj.dataPlacementRestrictionChangePolicy]];
     jsonDict[@".tag"] = @"data_placement_restriction_change_policy";
   } else if ([valueObj isDataPlacementRestrictionSatisfyPolicy]) {
-    jsonDict = [[DBTEAMLOGDataPlacementRestrictionSatisfyPolicyTypeSerializer
-        serialize:valueObj.dataPlacementRestrictionSatisfyPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataPlacementRestrictionSatisfyPolicyTypeSerializer
+                                           serialize:valueObj.dataPlacementRestrictionSatisfyPolicy]];
     jsonDict[@".tag"] = @"data_placement_restriction_satisfy_policy";
   } else if ([valueObj isDeviceApprovalsAddException]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsAddExceptionTypeSerializer serialize:valueObj.deviceApprovalsAddException]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsAddExceptionTypeSerializer
+                                           serialize:valueObj.deviceApprovalsAddException]];
     jsonDict[@".tag"] = @"device_approvals_add_exception";
   } else if ([valueObj isDeviceApprovalsChangeDesktopPolicy]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeDesktopPolicyTypeSerializer
-        serialize:valueObj.deviceApprovalsChangeDesktopPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeDesktopPolicyTypeSerializer
+                                           serialize:valueObj.deviceApprovalsChangeDesktopPolicy]];
     jsonDict[@".tag"] = @"device_approvals_change_desktop_policy";
   } else if ([valueObj isDeviceApprovalsChangeMobilePolicy]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeMobilePolicyTypeSerializer
-        serialize:valueObj.deviceApprovalsChangeMobilePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeMobilePolicyTypeSerializer
+                                           serialize:valueObj.deviceApprovalsChangeMobilePolicy]];
     jsonDict[@".tag"] = @"device_approvals_change_mobile_policy";
   } else if ([valueObj isDeviceApprovalsChangeOverageAction]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeOverageActionTypeSerializer
-        serialize:valueObj.deviceApprovalsChangeOverageAction] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeOverageActionTypeSerializer
+                                           serialize:valueObj.deviceApprovalsChangeOverageAction]];
     jsonDict[@".tag"] = @"device_approvals_change_overage_action";
   } else if ([valueObj isDeviceApprovalsChangeUnlinkAction]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsChangeUnlinkActionTypeSerializer
-        serialize:valueObj.deviceApprovalsChangeUnlinkAction] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsChangeUnlinkActionTypeSerializer
+                                           serialize:valueObj.deviceApprovalsChangeUnlinkAction]];
     jsonDict[@".tag"] = @"device_approvals_change_unlink_action";
   } else if ([valueObj isDeviceApprovalsRemoveException]) {
-    jsonDict = [[DBTEAMLOGDeviceApprovalsRemoveExceptionTypeSerializer
-        serialize:valueObj.deviceApprovalsRemoveException] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDeviceApprovalsRemoveExceptionTypeSerializer
+                                           serialize:valueObj.deviceApprovalsRemoveException]];
     jsonDict[@".tag"] = @"device_approvals_remove_exception";
   } else if ([valueObj isDirectoryRestrictionsAddMembers]) {
-    jsonDict = [[DBTEAMLOGDirectoryRestrictionsAddMembersTypeSerializer
-        serialize:valueObj.directoryRestrictionsAddMembers] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDirectoryRestrictionsAddMembersTypeSerializer
+                                           serialize:valueObj.directoryRestrictionsAddMembers]];
     jsonDict[@".tag"] = @"directory_restrictions_add_members";
   } else if ([valueObj isDirectoryRestrictionsRemoveMembers]) {
-    jsonDict = [[DBTEAMLOGDirectoryRestrictionsRemoveMembersTypeSerializer
-        serialize:valueObj.directoryRestrictionsRemoveMembers] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDirectoryRestrictionsRemoveMembersTypeSerializer
+                                           serialize:valueObj.directoryRestrictionsRemoveMembers]];
     jsonDict[@".tag"] = @"directory_restrictions_remove_members";
+  } else if ([valueObj isDropboxPasswordsPolicyChanged]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDropboxPasswordsPolicyChangedTypeSerializer
+                                           serialize:valueObj.dropboxPasswordsPolicyChanged]];
+    jsonDict[@".tag"] = @"dropbox_passwords_policy_changed";
   } else if ([valueObj isEmailIngestPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGEmailIngestPolicyChangedTypeSerializer serialize:valueObj.emailIngestPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmailIngestPolicyChangedTypeSerializer
+                                           serialize:valueObj.emailIngestPolicyChanged]];
     jsonDict[@".tag"] = @"email_ingest_policy_changed";
   } else if ([valueObj isEmmAddException]) {
-    jsonDict = [[DBTEAMLOGEmmAddExceptionTypeSerializer serialize:valueObj.emmAddException] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmAddExceptionTypeSerializer serialize:valueObj.emmAddException]];
     jsonDict[@".tag"] = @"emm_add_exception";
   } else if ([valueObj isEmmChangePolicy]) {
-    jsonDict = [[DBTEAMLOGEmmChangePolicyTypeSerializer serialize:valueObj.emmChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmChangePolicyTypeSerializer serialize:valueObj.emmChangePolicy]];
     jsonDict[@".tag"] = @"emm_change_policy";
   } else if ([valueObj isEmmRemoveException]) {
-    jsonDict = [[DBTEAMLOGEmmRemoveExceptionTypeSerializer serialize:valueObj.emmRemoveException] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGEmmRemoveExceptionTypeSerializer serialize:valueObj.emmRemoveException]];
     jsonDict[@".tag"] = @"emm_remove_exception";
   } else if ([valueObj isExtendedVersionHistoryChangePolicy]) {
-    jsonDict = [[DBTEAMLOGExtendedVersionHistoryChangePolicyTypeSerializer
-        serialize:valueObj.extendedVersionHistoryChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExtendedVersionHistoryChangePolicyTypeSerializer
+                                           serialize:valueObj.extendedVersionHistoryChangePolicy]];
     jsonDict[@".tag"] = @"extended_version_history_change_policy";
   } else if ([valueObj isExternalDriveBackupPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGExternalDriveBackupPolicyChangedTypeSerializer
-        serialize:valueObj.externalDriveBackupPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalDriveBackupPolicyChangedTypeSerializer
+                                           serialize:valueObj.externalDriveBackupPolicyChanged]];
     jsonDict[@".tag"] = @"external_drive_backup_policy_changed";
   } else if ([valueObj isFileCommentsChangePolicy]) {
-    jsonDict =
-        [[DBTEAMLOGFileCommentsChangePolicyTypeSerializer serialize:valueObj.fileCommentsChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileCommentsChangePolicyTypeSerializer
+                                           serialize:valueObj.fileCommentsChangePolicy]];
     jsonDict[@".tag"] = @"file_comments_change_policy";
   } else if ([valueObj isFileLockingPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGFileLockingPolicyChangedTypeSerializer serialize:valueObj.fileLockingPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileLockingPolicyChangedTypeSerializer
+                                           serialize:valueObj.fileLockingPolicyChanged]];
     jsonDict[@".tag"] = @"file_locking_policy_changed";
   } else if ([valueObj isFileRequestsChangePolicy]) {
-    jsonDict =
-        [[DBTEAMLOGFileRequestsChangePolicyTypeSerializer serialize:valueObj.fileRequestsChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsChangePolicyTypeSerializer
+                                           serialize:valueObj.fileRequestsChangePolicy]];
     jsonDict[@".tag"] = @"file_requests_change_policy";
   } else if ([valueObj isFileRequestsEmailsEnabled]) {
-    jsonDict =
-        [[DBTEAMLOGFileRequestsEmailsEnabledTypeSerializer serialize:valueObj.fileRequestsEmailsEnabled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsEmailsEnabledTypeSerializer
+                                           serialize:valueObj.fileRequestsEmailsEnabled]];
     jsonDict[@".tag"] = @"file_requests_emails_enabled";
   } else if ([valueObj isFileRequestsEmailsRestrictedToTeamOnly]) {
-    jsonDict = [[DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyTypeSerializer
-        serialize:valueObj.fileRequestsEmailsRestrictedToTeamOnly] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileRequestsEmailsRestrictedToTeamOnlyTypeSerializer
+                                           serialize:valueObj.fileRequestsEmailsRestrictedToTeamOnly]];
     jsonDict[@".tag"] = @"file_requests_emails_restricted_to_team_only";
   } else if ([valueObj isFileTransfersPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGFileTransfersPolicyChangedTypeSerializer serialize:valueObj.fileTransfersPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGFileTransfersPolicyChangedTypeSerializer
+                                           serialize:valueObj.fileTransfersPolicyChanged]];
     jsonDict[@".tag"] = @"file_transfers_policy_changed";
   } else if ([valueObj isGoogleSsoChangePolicy]) {
-    jsonDict = [[DBTEAMLOGGoogleSsoChangePolicyTypeSerializer serialize:valueObj.googleSsoChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGoogleSsoChangePolicyTypeSerializer
+                                           serialize:valueObj.googleSsoChangePolicy]];
     jsonDict[@".tag"] = @"google_sso_change_policy";
   } else if ([valueObj isGroupUserManagementChangePolicy]) {
-    jsonDict = [[DBTEAMLOGGroupUserManagementChangePolicyTypeSerializer
-        serialize:valueObj.groupUserManagementChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupUserManagementChangePolicyTypeSerializer
+                                           serialize:valueObj.groupUserManagementChangePolicy]];
     jsonDict[@".tag"] = @"group_user_management_change_policy";
   } else if ([valueObj isIntegrationPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGIntegrationPolicyChangedTypeSerializer serialize:valueObj.integrationPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGIntegrationPolicyChangedTypeSerializer
+                                           serialize:valueObj.integrationPolicyChanged]];
     jsonDict[@".tag"] = @"integration_policy_changed";
   } else if ([valueObj isInviteAcceptanceEmailPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGInviteAcceptanceEmailPolicyChangedTypeSerializer
-        serialize:valueObj.inviteAcceptanceEmailPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGInviteAcceptanceEmailPolicyChangedTypeSerializer
+                                           serialize:valueObj.inviteAcceptanceEmailPolicyChanged]];
     jsonDict[@".tag"] = @"invite_acceptance_email_policy_changed";
   } else if ([valueObj isMemberRequestsChangePolicy]) {
-    jsonDict =
-        [[DBTEAMLOGMemberRequestsChangePolicyTypeSerializer serialize:valueObj.memberRequestsChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberRequestsChangePolicyTypeSerializer
+                                           serialize:valueObj.memberRequestsChangePolicy]];
     jsonDict[@".tag"] = @"member_requests_change_policy";
   } else if ([valueObj isMemberSendInvitePolicyChanged]) {
-    jsonDict = [[DBTEAMLOGMemberSendInvitePolicyChangedTypeSerializer serialize:valueObj.memberSendInvitePolicyChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSendInvitePolicyChangedTypeSerializer
+                                           serialize:valueObj.memberSendInvitePolicyChanged]];
     jsonDict[@".tag"] = @"member_send_invite_policy_changed";
   } else if ([valueObj isMemberSpaceLimitsAddException]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsAddExceptionTypeSerializer serialize:valueObj.memberSpaceLimitsAddException]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsAddExceptionTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsAddException]];
     jsonDict[@".tag"] = @"member_space_limits_add_exception";
   } else if ([valueObj isMemberSpaceLimitsChangeCapsTypePolicy]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyTypeSerializer
-        serialize:valueObj.memberSpaceLimitsChangeCapsTypePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangeCapsTypePolicyTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangeCapsTypePolicy]];
     jsonDict[@".tag"] = @"member_space_limits_change_caps_type_policy";
   } else if ([valueObj isMemberSpaceLimitsChangePolicy]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsChangePolicyTypeSerializer serialize:valueObj.memberSpaceLimitsChangePolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsChangePolicyTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsChangePolicy]];
     jsonDict[@".tag"] = @"member_space_limits_change_policy";
   } else if ([valueObj isMemberSpaceLimitsRemoveException]) {
-    jsonDict = [[DBTEAMLOGMemberSpaceLimitsRemoveExceptionTypeSerializer
-        serialize:valueObj.memberSpaceLimitsRemoveException] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSpaceLimitsRemoveExceptionTypeSerializer
+                                           serialize:valueObj.memberSpaceLimitsRemoveException]];
     jsonDict[@".tag"] = @"member_space_limits_remove_exception";
   } else if ([valueObj isMemberSuggestionsChangePolicy]) {
-    jsonDict = [[DBTEAMLOGMemberSuggestionsChangePolicyTypeSerializer serialize:valueObj.memberSuggestionsChangePolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMemberSuggestionsChangePolicyTypeSerializer
+                                           serialize:valueObj.memberSuggestionsChangePolicy]];
     jsonDict[@".tag"] = @"member_suggestions_change_policy";
   } else if ([valueObj isMicrosoftOfficeAddinChangePolicy]) {
-    jsonDict = [[DBTEAMLOGMicrosoftOfficeAddinChangePolicyTypeSerializer
-        serialize:valueObj.microsoftOfficeAddinChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMicrosoftOfficeAddinChangePolicyTypeSerializer
+                                           serialize:valueObj.microsoftOfficeAddinChangePolicy]];
     jsonDict[@".tag"] = @"microsoft_office_addin_change_policy";
   } else if ([valueObj isNetworkControlChangePolicy]) {
-    jsonDict =
-        [[DBTEAMLOGNetworkControlChangePolicyTypeSerializer serialize:valueObj.networkControlChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGNetworkControlChangePolicyTypeSerializer
+                                           serialize:valueObj.networkControlChangePolicy]];
     jsonDict[@".tag"] = @"network_control_change_policy";
   } else if ([valueObj isPaperChangeDeploymentPolicy]) {
-    jsonDict = [[DBTEAMLOGPaperChangeDeploymentPolicyTypeSerializer serialize:valueObj.paperChangeDeploymentPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangeDeploymentPolicyTypeSerializer
+                                           serialize:valueObj.paperChangeDeploymentPolicy]];
     jsonDict[@".tag"] = @"paper_change_deployment_policy";
   } else if ([valueObj isPaperChangeMemberLinkPolicy]) {
-    jsonDict = [[DBTEAMLOGPaperChangeMemberLinkPolicyTypeSerializer serialize:valueObj.paperChangeMemberLinkPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangeMemberLinkPolicyTypeSerializer
+                                           serialize:valueObj.paperChangeMemberLinkPolicy]];
     jsonDict[@".tag"] = @"paper_change_member_link_policy";
   } else if ([valueObj isPaperChangeMemberPolicy]) {
-    jsonDict =
-        [[DBTEAMLOGPaperChangeMemberPolicyTypeSerializer serialize:valueObj.paperChangeMemberPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangeMemberPolicyTypeSerializer
+                                           serialize:valueObj.paperChangeMemberPolicy]];
     jsonDict[@".tag"] = @"paper_change_member_policy";
   } else if ([valueObj isPaperChangePolicy]) {
-    jsonDict = [[DBTEAMLOGPaperChangePolicyTypeSerializer serialize:valueObj.paperChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperChangePolicyTypeSerializer serialize:valueObj.paperChangePolicy]];
     jsonDict[@".tag"] = @"paper_change_policy";
   } else if ([valueObj isPaperDefaultFolderPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGPaperDefaultFolderPolicyChangedTypeSerializer
-        serialize:valueObj.paperDefaultFolderPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDefaultFolderPolicyChangedTypeSerializer
+                                           serialize:valueObj.paperDefaultFolderPolicyChanged]];
     jsonDict[@".tag"] = @"paper_default_folder_policy_changed";
   } else if ([valueObj isPaperDesktopPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGPaperDesktopPolicyChangedTypeSerializer serialize:valueObj.paperDesktopPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperDesktopPolicyChangedTypeSerializer
+                                           serialize:valueObj.paperDesktopPolicyChanged]];
     jsonDict[@".tag"] = @"paper_desktop_policy_changed";
   } else if ([valueObj isPaperEnabledUsersGroupAddition]) {
-    jsonDict = [[DBTEAMLOGPaperEnabledUsersGroupAdditionTypeSerializer
-        serialize:valueObj.paperEnabledUsersGroupAddition] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperEnabledUsersGroupAdditionTypeSerializer
+                                           serialize:valueObj.paperEnabledUsersGroupAddition]];
     jsonDict[@".tag"] = @"paper_enabled_users_group_addition";
   } else if ([valueObj isPaperEnabledUsersGroupRemoval]) {
-    jsonDict = [[DBTEAMLOGPaperEnabledUsersGroupRemovalTypeSerializer serialize:valueObj.paperEnabledUsersGroupRemoval]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPaperEnabledUsersGroupRemovalTypeSerializer
+                                           serialize:valueObj.paperEnabledUsersGroupRemoval]];
     jsonDict[@".tag"] = @"paper_enabled_users_group_removal";
   } else if ([valueObj isPasswordStrengthRequirementsChangePolicy]) {
-    jsonDict = [[DBTEAMLOGPasswordStrengthRequirementsChangePolicyTypeSerializer
-        serialize:valueObj.passwordStrengthRequirementsChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPasswordStrengthRequirementsChangePolicyTypeSerializer
+                                           serialize:valueObj.passwordStrengthRequirementsChangePolicy]];
     jsonDict[@".tag"] = @"password_strength_requirements_change_policy";
   } else if ([valueObj isPermanentDeleteChangePolicy]) {
-    jsonDict = [[DBTEAMLOGPermanentDeleteChangePolicyTypeSerializer serialize:valueObj.permanentDeleteChangePolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGPermanentDeleteChangePolicyTypeSerializer
+                                           serialize:valueObj.permanentDeleteChangePolicy]];
     jsonDict[@".tag"] = @"permanent_delete_change_policy";
   } else if ([valueObj isResellerSupportChangePolicy]) {
-    jsonDict = [[DBTEAMLOGResellerSupportChangePolicyTypeSerializer serialize:valueObj.resellerSupportChangePolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGResellerSupportChangePolicyTypeSerializer
+                                           serialize:valueObj.resellerSupportChangePolicy]];
     jsonDict[@".tag"] = @"reseller_support_change_policy";
   } else if ([valueObj isRewindPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGRewindPolicyChangedTypeSerializer serialize:valueObj.rewindPolicyChanged] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGRewindPolicyChangedTypeSerializer serialize:valueObj.rewindPolicyChanged]];
     jsonDict[@".tag"] = @"rewind_policy_changed";
   } else if ([valueObj isSendForSignaturePolicyChanged]) {
-    jsonDict = [[DBTEAMLOGSendForSignaturePolicyChangedTypeSerializer serialize:valueObj.sendForSignaturePolicyChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSendForSignaturePolicyChangedTypeSerializer
+                                           serialize:valueObj.sendForSignaturePolicyChanged]];
     jsonDict[@".tag"] = @"send_for_signature_policy_changed";
   } else if ([valueObj isSharingChangeFolderJoinPolicy]) {
-    jsonDict = [[DBTEAMLOGSharingChangeFolderJoinPolicyTypeSerializer serialize:valueObj.sharingChangeFolderJoinPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeFolderJoinPolicyTypeSerializer
+                                           serialize:valueObj.sharingChangeFolderJoinPolicy]];
     jsonDict[@".tag"] = @"sharing_change_folder_join_policy";
   } else if ([valueObj isSharingChangeLinkAllowChangeExpirationPolicy]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkAllowChangeExpirationPolicyTypeSerializer
-        serialize:valueObj.sharingChangeLinkAllowChangeExpirationPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkAllowChangeExpirationPolicyTypeSerializer
+                                           serialize:valueObj.sharingChangeLinkAllowChangeExpirationPolicy]];
     jsonDict[@".tag"] = @"sharing_change_link_allow_change_expiration_policy";
   } else if ([valueObj isSharingChangeLinkDefaultExpirationPolicy]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkDefaultExpirationPolicyTypeSerializer
-        serialize:valueObj.sharingChangeLinkDefaultExpirationPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkDefaultExpirationPolicyTypeSerializer
+                                           serialize:valueObj.sharingChangeLinkDefaultExpirationPolicy]];
     jsonDict[@".tag"] = @"sharing_change_link_default_expiration_policy";
   } else if ([valueObj isSharingChangeLinkEnforcePasswordPolicy]) {
-    jsonDict = [[DBTEAMLOGSharingChangeLinkEnforcePasswordPolicyTypeSerializer
-        serialize:valueObj.sharingChangeLinkEnforcePasswordPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkEnforcePasswordPolicyTypeSerializer
+                                           serialize:valueObj.sharingChangeLinkEnforcePasswordPolicy]];
     jsonDict[@".tag"] = @"sharing_change_link_enforce_password_policy";
   } else if ([valueObj isSharingChangeLinkPolicy]) {
-    jsonDict =
-        [[DBTEAMLOGSharingChangeLinkPolicyTypeSerializer serialize:valueObj.sharingChangeLinkPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeLinkPolicyTypeSerializer
+                                           serialize:valueObj.sharingChangeLinkPolicy]];
     jsonDict[@".tag"] = @"sharing_change_link_policy";
   } else if ([valueObj isSharingChangeMemberPolicy]) {
-    jsonDict =
-        [[DBTEAMLOGSharingChangeMemberPolicyTypeSerializer serialize:valueObj.sharingChangeMemberPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSharingChangeMemberPolicyTypeSerializer
+                                           serialize:valueObj.sharingChangeMemberPolicy]];
     jsonDict[@".tag"] = @"sharing_change_member_policy";
   } else if ([valueObj isShowcaseChangeDownloadPolicy]) {
-    jsonDict = [[DBTEAMLOGShowcaseChangeDownloadPolicyTypeSerializer serialize:valueObj.showcaseChangeDownloadPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseChangeDownloadPolicyTypeSerializer
+                                           serialize:valueObj.showcaseChangeDownloadPolicy]];
     jsonDict[@".tag"] = @"showcase_change_download_policy";
   } else if ([valueObj isShowcaseChangeEnabledPolicy]) {
-    jsonDict = [[DBTEAMLOGShowcaseChangeEnabledPolicyTypeSerializer serialize:valueObj.showcaseChangeEnabledPolicy]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseChangeEnabledPolicyTypeSerializer
+                                           serialize:valueObj.showcaseChangeEnabledPolicy]];
     jsonDict[@".tag"] = @"showcase_change_enabled_policy";
   } else if ([valueObj isShowcaseChangeExternalSharingPolicy]) {
-    jsonDict = [[DBTEAMLOGShowcaseChangeExternalSharingPolicyTypeSerializer
-        serialize:valueObj.showcaseChangeExternalSharingPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGShowcaseChangeExternalSharingPolicyTypeSerializer
+                                           serialize:valueObj.showcaseChangeExternalSharingPolicy]];
     jsonDict[@".tag"] = @"showcase_change_external_sharing_policy";
   } else if ([valueObj isSmarterSmartSyncPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGSmarterSmartSyncPolicyChangedTypeSerializer serialize:valueObj.smarterSmartSyncPolicyChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmarterSmartSyncPolicyChangedTypeSerializer
+                                           serialize:valueObj.smarterSmartSyncPolicyChanged]];
     jsonDict[@".tag"] = @"smarter_smart_sync_policy_changed";
   } else if ([valueObj isSmartSyncChangePolicy]) {
-    jsonDict = [[DBTEAMLOGSmartSyncChangePolicyTypeSerializer serialize:valueObj.smartSyncChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncChangePolicyTypeSerializer
+                                           serialize:valueObj.smartSyncChangePolicy]];
     jsonDict[@".tag"] = @"smart_sync_change_policy";
   } else if ([valueObj isSmartSyncNotOptOut]) {
-    jsonDict = [[DBTEAMLOGSmartSyncNotOptOutTypeSerializer serialize:valueObj.smartSyncNotOptOut] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGSmartSyncNotOptOutTypeSerializer serialize:valueObj.smartSyncNotOptOut]];
     jsonDict[@".tag"] = @"smart_sync_not_opt_out";
   } else if ([valueObj isSmartSyncOptOut]) {
-    jsonDict = [[DBTEAMLOGSmartSyncOptOutTypeSerializer serialize:valueObj.smartSyncOptOut] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSmartSyncOptOutTypeSerializer serialize:valueObj.smartSyncOptOut]];
     jsonDict[@".tag"] = @"smart_sync_opt_out";
   } else if ([valueObj isSsoChangePolicy]) {
-    jsonDict = [[DBTEAMLOGSsoChangePolicyTypeSerializer serialize:valueObj.ssoChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSsoChangePolicyTypeSerializer serialize:valueObj.ssoChangePolicy]];
     jsonDict[@".tag"] = @"sso_change_policy";
   } else if ([valueObj isTeamBrandingPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer serialize:valueObj.teamBrandingPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamBrandingPolicyChangedTypeSerializer
+                                           serialize:valueObj.teamBrandingPolicyChanged]];
     jsonDict[@".tag"] = @"team_branding_policy_changed";
   } else if ([valueObj isTeamExtensionsPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGTeamExtensionsPolicyChangedTypeSerializer serialize:valueObj.teamExtensionsPolicyChanged]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamExtensionsPolicyChangedTypeSerializer
+                                           serialize:valueObj.teamExtensionsPolicyChanged]];
     jsonDict[@".tag"] = @"team_extensions_policy_changed";
   } else if ([valueObj isTeamSelectiveSyncPolicyChanged]) {
-    jsonDict = [[DBTEAMLOGTeamSelectiveSyncPolicyChangedTypeSerializer
-        serialize:valueObj.teamSelectiveSyncPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamSelectiveSyncPolicyChangedTypeSerializer
+                                           serialize:valueObj.teamSelectiveSyncPolicyChanged]];
     jsonDict[@".tag"] = @"team_selective_sync_policy_changed";
   } else if ([valueObj isTeamSharingWhitelistSubjectsChanged]) {
-    jsonDict = [[DBTEAMLOGTeamSharingWhitelistSubjectsChangedTypeSerializer
-        serialize:valueObj.teamSharingWhitelistSubjectsChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamSharingWhitelistSubjectsChangedTypeSerializer
+                                           serialize:valueObj.teamSharingWhitelistSubjectsChanged]];
     jsonDict[@".tag"] = @"team_sharing_whitelist_subjects_changed";
   } else if ([valueObj isTfaAddException]) {
-    jsonDict = [[DBTEAMLOGTfaAddExceptionTypeSerializer serialize:valueObj.tfaAddException] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaAddExceptionTypeSerializer serialize:valueObj.tfaAddException]];
     jsonDict[@".tag"] = @"tfa_add_exception";
   } else if ([valueObj isTfaChangePolicy]) {
-    jsonDict = [[DBTEAMLOGTfaChangePolicyTypeSerializer serialize:valueObj.tfaChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaChangePolicyTypeSerializer serialize:valueObj.tfaChangePolicy]];
     jsonDict[@".tag"] = @"tfa_change_policy";
   } else if ([valueObj isTfaRemoveException]) {
-    jsonDict = [[DBTEAMLOGTfaRemoveExceptionTypeSerializer serialize:valueObj.tfaRemoveException] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaRemoveExceptionTypeSerializer serialize:valueObj.tfaRemoveException]];
     jsonDict[@".tag"] = @"tfa_remove_exception";
   } else if ([valueObj isTwoAccountChangePolicy]) {
-    jsonDict = [[DBTEAMLOGTwoAccountChangePolicyTypeSerializer serialize:valueObj.twoAccountChangePolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTwoAccountChangePolicyTypeSerializer
+                                           serialize:valueObj.twoAccountChangePolicy]];
     jsonDict[@".tag"] = @"two_account_change_policy";
   } else if ([valueObj isViewerInfoPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGViewerInfoPolicyChangedTypeSerializer serialize:valueObj.viewerInfoPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGViewerInfoPolicyChangedTypeSerializer
+                                           serialize:valueObj.viewerInfoPolicyChanged]];
     jsonDict[@".tag"] = @"viewer_info_policy_changed";
   } else if ([valueObj isWatermarkingPolicyChanged]) {
-    jsonDict =
-        [[DBTEAMLOGWatermarkingPolicyChangedTypeSerializer serialize:valueObj.watermarkingPolicyChanged] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWatermarkingPolicyChangedTypeSerializer
+                                           serialize:valueObj.watermarkingPolicyChanged]];
     jsonDict[@".tag"] = @"watermarking_policy_changed";
   } else if ([valueObj isWebSessionsChangeActiveSessionLimit]) {
-    jsonDict = [[DBTEAMLOGWebSessionsChangeActiveSessionLimitTypeSerializer
-        serialize:valueObj.webSessionsChangeActiveSessionLimit] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionsChangeActiveSessionLimitTypeSerializer
+                                           serialize:valueObj.webSessionsChangeActiveSessionLimit]];
     jsonDict[@".tag"] = @"web_sessions_change_active_session_limit";
   } else if ([valueObj isWebSessionsChangeFixedLengthPolicy]) {
-    jsonDict = [[DBTEAMLOGWebSessionsChangeFixedLengthPolicyTypeSerializer
-        serialize:valueObj.webSessionsChangeFixedLengthPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionsChangeFixedLengthPolicyTypeSerializer
+                                           serialize:valueObj.webSessionsChangeFixedLengthPolicy]];
     jsonDict[@".tag"] = @"web_sessions_change_fixed_length_policy";
   } else if ([valueObj isWebSessionsChangeIdleLengthPolicy]) {
-    jsonDict = [[DBTEAMLOGWebSessionsChangeIdleLengthPolicyTypeSerializer
-        serialize:valueObj.webSessionsChangeIdleLengthPolicy] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGWebSessionsChangeIdleLengthPolicyTypeSerializer
+                                           serialize:valueObj.webSessionsChangeIdleLengthPolicy]];
     jsonDict[@".tag"] = @"web_sessions_change_idle_length_policy";
+  } else if ([valueObj isDataResidencyMigrationRequestSuccessful]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataResidencyMigrationRequestSuccessfulTypeSerializer
+                                           serialize:valueObj.dataResidencyMigrationRequestSuccessful]];
+    jsonDict[@".tag"] = @"data_residency_migration_request_successful";
+  } else if ([valueObj isDataResidencyMigrationRequestUnsuccessful]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulTypeSerializer
+                                           serialize:valueObj.dataResidencyMigrationRequestUnsuccessful]];
+    jsonDict[@".tag"] = @"data_residency_migration_request_unsuccessful";
   } else if ([valueObj isTeamMergeFrom]) {
-    jsonDict = [[DBTEAMLOGTeamMergeFromTypeSerializer serialize:valueObj.teamMergeFrom] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeFromTypeSerializer serialize:valueObj.teamMergeFrom]];
     jsonDict[@".tag"] = @"team_merge_from";
   } else if ([valueObj isTeamMergeTo]) {
-    jsonDict = [[DBTEAMLOGTeamMergeToTypeSerializer serialize:valueObj.teamMergeTo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeToTypeSerializer serialize:valueObj.teamMergeTo]];
     jsonDict[@".tag"] = @"team_merge_to";
   } else if ([valueObj isTeamProfileAddBackground]) {
-    jsonDict =
-        [[DBTEAMLOGTeamProfileAddBackgroundTypeSerializer serialize:valueObj.teamProfileAddBackground] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileAddBackgroundTypeSerializer
+                                           serialize:valueObj.teamProfileAddBackground]];
     jsonDict[@".tag"] = @"team_profile_add_background";
   } else if ([valueObj isTeamProfileAddLogo]) {
-    jsonDict = [[DBTEAMLOGTeamProfileAddLogoTypeSerializer serialize:valueObj.teamProfileAddLogo] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTeamProfileAddLogoTypeSerializer serialize:valueObj.teamProfileAddLogo]];
     jsonDict[@".tag"] = @"team_profile_add_logo";
   } else if ([valueObj isTeamProfileChangeBackground]) {
-    jsonDict = [[DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer serialize:valueObj.teamProfileChangeBackground]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeBackgroundTypeSerializer
+                                           serialize:valueObj.teamProfileChangeBackground]];
     jsonDict[@".tag"] = @"team_profile_change_background";
   } else if ([valueObj isTeamProfileChangeDefaultLanguage]) {
-    jsonDict = [[DBTEAMLOGTeamProfileChangeDefaultLanguageTypeSerializer
-        serialize:valueObj.teamProfileChangeDefaultLanguage] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeDefaultLanguageTypeSerializer
+                                           serialize:valueObj.teamProfileChangeDefaultLanguage]];
     jsonDict[@".tag"] = @"team_profile_change_default_language";
   } else if ([valueObj isTeamProfileChangeLogo]) {
-    jsonDict = [[DBTEAMLOGTeamProfileChangeLogoTypeSerializer serialize:valueObj.teamProfileChangeLogo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeLogoTypeSerializer
+                                           serialize:valueObj.teamProfileChangeLogo]];
     jsonDict[@".tag"] = @"team_profile_change_logo";
   } else if ([valueObj isTeamProfileChangeName]) {
-    jsonDict = [[DBTEAMLOGTeamProfileChangeNameTypeSerializer serialize:valueObj.teamProfileChangeName] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileChangeNameTypeSerializer
+                                           serialize:valueObj.teamProfileChangeName]];
     jsonDict[@".tag"] = @"team_profile_change_name";
   } else if ([valueObj isTeamProfileRemoveBackground]) {
-    jsonDict = [[DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer serialize:valueObj.teamProfileRemoveBackground]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileRemoveBackgroundTypeSerializer
+                                           serialize:valueObj.teamProfileRemoveBackground]];
     jsonDict[@".tag"] = @"team_profile_remove_background";
   } else if ([valueObj isTeamProfileRemoveLogo]) {
-    jsonDict = [[DBTEAMLOGTeamProfileRemoveLogoTypeSerializer serialize:valueObj.teamProfileRemoveLogo] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamProfileRemoveLogoTypeSerializer
+                                           serialize:valueObj.teamProfileRemoveLogo]];
     jsonDict[@".tag"] = @"team_profile_remove_logo";
   } else if ([valueObj isTfaAddBackupPhone]) {
-    jsonDict = [[DBTEAMLOGTfaAddBackupPhoneTypeSerializer serialize:valueObj.tfaAddBackupPhone] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaAddBackupPhoneTypeSerializer serialize:valueObj.tfaAddBackupPhone]];
     jsonDict[@".tag"] = @"tfa_add_backup_phone";
   } else if ([valueObj isTfaAddSecurityKey]) {
-    jsonDict = [[DBTEAMLOGTfaAddSecurityKeyTypeSerializer serialize:valueObj.tfaAddSecurityKey] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaAddSecurityKeyTypeSerializer serialize:valueObj.tfaAddSecurityKey]];
     jsonDict[@".tag"] = @"tfa_add_security_key";
   } else if ([valueObj isTfaChangeBackupPhone]) {
-    jsonDict = [[DBTEAMLOGTfaChangeBackupPhoneTypeSerializer serialize:valueObj.tfaChangeBackupPhone] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaChangeBackupPhoneTypeSerializer serialize:valueObj.tfaChangeBackupPhone]];
     jsonDict[@".tag"] = @"tfa_change_backup_phone";
   } else if ([valueObj isTfaChangeStatus]) {
-    jsonDict = [[DBTEAMLOGTfaChangeStatusTypeSerializer serialize:valueObj.tfaChangeStatus] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaChangeStatusTypeSerializer serialize:valueObj.tfaChangeStatus]];
     jsonDict[@".tag"] = @"tfa_change_status";
   } else if ([valueObj isTfaRemoveBackupPhone]) {
-    jsonDict = [[DBTEAMLOGTfaRemoveBackupPhoneTypeSerializer serialize:valueObj.tfaRemoveBackupPhone] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaRemoveBackupPhoneTypeSerializer serialize:valueObj.tfaRemoveBackupPhone]];
     jsonDict[@".tag"] = @"tfa_remove_backup_phone";
   } else if ([valueObj isTfaRemoveSecurityKey]) {
-    jsonDict = [[DBTEAMLOGTfaRemoveSecurityKeyTypeSerializer serialize:valueObj.tfaRemoveSecurityKey] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGTfaRemoveSecurityKeyTypeSerializer serialize:valueObj.tfaRemoveSecurityKey]];
     jsonDict[@".tag"] = @"tfa_remove_security_key";
   } else if ([valueObj isTfaReset]) {
-    jsonDict = [[DBTEAMLOGTfaResetTypeSerializer serialize:valueObj.tfaReset] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTfaResetTypeSerializer serialize:valueObj.tfaReset]];
     jsonDict[@".tag"] = @"tfa_reset";
   } else if ([valueObj isChangedEnterpriseAdminRole]) {
-    jsonDict =
-        [[DBTEAMLOGChangedEnterpriseAdminRoleTypeSerializer serialize:valueObj.changedEnterpriseAdminRole] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGChangedEnterpriseAdminRoleTypeSerializer
+                                           serialize:valueObj.changedEnterpriseAdminRole]];
     jsonDict[@".tag"] = @"changed_enterprise_admin_role";
   } else if ([valueObj isChangedEnterpriseConnectedTeamStatus]) {
-    jsonDict = [[DBTEAMLOGChangedEnterpriseConnectedTeamStatusTypeSerializer
-        serialize:valueObj.changedEnterpriseConnectedTeamStatus] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGChangedEnterpriseConnectedTeamStatusTypeSerializer
+                                           serialize:valueObj.changedEnterpriseConnectedTeamStatus]];
     jsonDict[@".tag"] = @"changed_enterprise_connected_team_status";
   } else if ([valueObj isEndedEnterpriseAdminSession]) {
-    jsonDict = [[DBTEAMLOGEndedEnterpriseAdminSessionTypeSerializer serialize:valueObj.endedEnterpriseAdminSession]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEndedEnterpriseAdminSessionTypeSerializer
+                                           serialize:valueObj.endedEnterpriseAdminSession]];
     jsonDict[@".tag"] = @"ended_enterprise_admin_session";
   } else if ([valueObj isEndedEnterpriseAdminSessionDeprecated]) {
-    jsonDict = [[DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedTypeSerializer
-        serialize:valueObj.endedEnterpriseAdminSessionDeprecated] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEndedEnterpriseAdminSessionDeprecatedTypeSerializer
+                                           serialize:valueObj.endedEnterpriseAdminSessionDeprecated]];
     jsonDict[@".tag"] = @"ended_enterprise_admin_session_deprecated";
   } else if ([valueObj isEnterpriseSettingsLocking]) {
-    jsonDict =
-        [[DBTEAMLOGEnterpriseSettingsLockingTypeSerializer serialize:valueObj.enterpriseSettingsLocking] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGEnterpriseSettingsLockingTypeSerializer
+                                           serialize:valueObj.enterpriseSettingsLocking]];
     jsonDict[@".tag"] = @"enterprise_settings_locking";
   } else if ([valueObj isGuestAdminChangeStatus]) {
-    jsonDict = [[DBTEAMLOGGuestAdminChangeStatusTypeSerializer serialize:valueObj.guestAdminChangeStatus] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGuestAdminChangeStatusTypeSerializer
+                                           serialize:valueObj.guestAdminChangeStatus]];
     jsonDict[@".tag"] = @"guest_admin_change_status";
   } else if ([valueObj isStartedEnterpriseAdminSession]) {
-    jsonDict = [[DBTEAMLOGStartedEnterpriseAdminSessionTypeSerializer serialize:valueObj.startedEnterpriseAdminSession]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGStartedEnterpriseAdminSessionTypeSerializer
+                                           serialize:valueObj.startedEnterpriseAdminSession]];
     jsonDict[@".tag"] = @"started_enterprise_admin_session";
   } else if ([valueObj isTeamMergeRequestAccepted]) {
-    jsonDict =
-        [[DBTEAMLOGTeamMergeRequestAcceptedTypeSerializer serialize:valueObj.teamMergeRequestAccepted] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAcceptedTypeSerializer
+                                           serialize:valueObj.teamMergeRequestAccepted]];
     jsonDict[@".tag"] = @"team_merge_request_accepted";
   } else if ([valueObj isTeamMergeRequestAcceptedShownToPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAcceptedShownToPrimaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestAcceptedShownToPrimaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAcceptedShownToPrimaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestAcceptedShownToPrimaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_accepted_shown_to_primary_team";
   } else if ([valueObj isTeamMergeRequestAcceptedShownToSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAcceptedShownToSecondaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestAcceptedShownToSecondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAcceptedShownToSecondaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestAcceptedShownToSecondaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_accepted_shown_to_secondary_team";
   } else if ([valueObj isTeamMergeRequestAutoCanceled]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestAutoCanceledTypeSerializer serialize:valueObj.teamMergeRequestAutoCanceled]
-        mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestAutoCanceledTypeSerializer
+                                           serialize:valueObj.teamMergeRequestAutoCanceled]];
     jsonDict[@".tag"] = @"team_merge_request_auto_canceled";
   } else if ([valueObj isTeamMergeRequestCanceled]) {
-    jsonDict =
-        [[DBTEAMLOGTeamMergeRequestCanceledTypeSerializer serialize:valueObj.teamMergeRequestCanceled] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestCanceledTypeSerializer
+                                           serialize:valueObj.teamMergeRequestCanceled]];
     jsonDict[@".tag"] = @"team_merge_request_canceled";
   } else if ([valueObj isTeamMergeRequestCanceledShownToPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestCanceledShownToPrimaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestCanceledShownToPrimaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestCanceledShownToPrimaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestCanceledShownToPrimaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_canceled_shown_to_primary_team";
   } else if ([valueObj isTeamMergeRequestCanceledShownToSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestCanceledShownToSecondaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestCanceledShownToSecondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestCanceledShownToSecondaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestCanceledShownToSecondaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_canceled_shown_to_secondary_team";
   } else if ([valueObj isTeamMergeRequestExpired]) {
-    jsonDict =
-        [[DBTEAMLOGTeamMergeRequestExpiredTypeSerializer serialize:valueObj.teamMergeRequestExpired] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestExpiredTypeSerializer
+                                           serialize:valueObj.teamMergeRequestExpired]];
     jsonDict[@".tag"] = @"team_merge_request_expired";
   } else if ([valueObj isTeamMergeRequestExpiredShownToPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestExpiredShownToPrimaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestExpiredShownToPrimaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestExpiredShownToPrimaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestExpiredShownToPrimaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_expired_shown_to_primary_team";
   } else if ([valueObj isTeamMergeRequestExpiredShownToSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestExpiredShownToSecondaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestExpiredShownToSecondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestExpiredShownToSecondaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestExpiredShownToSecondaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_expired_shown_to_secondary_team";
   } else if ([valueObj isTeamMergeRequestRejectedShownToPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestRejectedShownToPrimaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestRejectedShownToPrimaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestRejectedShownToPrimaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestRejectedShownToPrimaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_rejected_shown_to_primary_team";
   } else if ([valueObj isTeamMergeRequestRejectedShownToSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestRejectedShownToSecondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestRejectedShownToSecondaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_rejected_shown_to_secondary_team";
   } else if ([valueObj isTeamMergeRequestReminder]) {
-    jsonDict =
-        [[DBTEAMLOGTeamMergeRequestReminderTypeSerializer serialize:valueObj.teamMergeRequestReminder] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestReminderTypeSerializer
+                                           serialize:valueObj.teamMergeRequestReminder]];
     jsonDict[@".tag"] = @"team_merge_request_reminder";
   } else if ([valueObj isTeamMergeRequestReminderShownToPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestReminderShownToPrimaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestReminderShownToPrimaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_reminder_shown_to_primary_team";
   } else if ([valueObj isTeamMergeRequestReminderShownToSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestReminderShownToSecondaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestReminderShownToSecondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestReminderShownToSecondaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestReminderShownToSecondaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_reminder_shown_to_secondary_team";
   } else if ([valueObj isTeamMergeRequestRevoked]) {
-    jsonDict =
-        [[DBTEAMLOGTeamMergeRequestRevokedTypeSerializer serialize:valueObj.teamMergeRequestRevoked] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestRevokedTypeSerializer
+                                           serialize:valueObj.teamMergeRequestRevoked]];
     jsonDict[@".tag"] = @"team_merge_request_revoked";
   } else if ([valueObj isTeamMergeRequestSentShownToPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestSentShownToPrimaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestSentShownToPrimaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestSentShownToPrimaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_sent_shown_to_primary_team";
   } else if ([valueObj isTeamMergeRequestSentShownToSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamTypeSerializer
-        serialize:valueObj.teamMergeRequestSentShownToSecondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamMergeRequestSentShownToSecondaryTeamTypeSerializer
+                                           serialize:valueObj.teamMergeRequestSentShownToSecondaryTeam]];
     jsonDict[@".tag"] = @"team_merge_request_sent_shown_to_secondary_team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -63320,6 +64701,14 @@
   } else if ([tag isEqualToString:@"rewind_folder"]) {
     DBTEAMLOGRewindFolderType *rewindFolder = [DBTEAMLOGRewindFolderTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithRewindFolder:rewindFolder];
+  } else if ([tag isEqualToString:@"undo_naming_convention"]) {
+    DBTEAMLOGUndoNamingConventionType *undoNamingConvention =
+        [DBTEAMLOGUndoNamingConventionTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithUndoNamingConvention:undoNamingConvention];
+  } else if ([tag isEqualToString:@"undo_organize_folder_with_tidy"]) {
+    DBTEAMLOGUndoOrganizeFolderWithTidyType *undoOrganizeFolderWithTidy =
+        [DBTEAMLOGUndoOrganizeFolderWithTidyTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithUndoOrganizeFolderWithTidy:undoOrganizeFolderWithTidy];
   } else if ([tag isEqualToString:@"user_tags_added"]) {
     DBTEAMLOGUserTagsAddedType *userTagsAdded = [DBTEAMLOGUserTagsAddedTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithUserTagsAdded:userTagsAdded];
@@ -64350,6 +65739,10 @@
     DBTEAMLOGDirectoryRestrictionsRemoveMembersType *directoryRestrictionsRemoveMembers =
         [DBTEAMLOGDirectoryRestrictionsRemoveMembersTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithDirectoryRestrictionsRemoveMembers:directoryRestrictionsRemoveMembers];
+  } else if ([tag isEqualToString:@"dropbox_passwords_policy_changed"]) {
+    DBTEAMLOGDropboxPasswordsPolicyChangedType *dropboxPasswordsPolicyChanged =
+        [DBTEAMLOGDropboxPasswordsPolicyChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithDropboxPasswordsPolicyChanged:dropboxPasswordsPolicyChanged];
   } else if ([tag isEqualToString:@"email_ingest_policy_changed"]) {
     DBTEAMLOGEmailIngestPolicyChangedType *emailIngestPolicyChanged =
         [DBTEAMLOGEmailIngestPolicyChangedTypeSerializer deserialize:valueDict];
@@ -64610,6 +66003,16 @@
     DBTEAMLOGWebSessionsChangeIdleLengthPolicyType *webSessionsChangeIdleLengthPolicy =
         [DBTEAMLOGWebSessionsChangeIdleLengthPolicyTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithWebSessionsChangeIdleLengthPolicy:webSessionsChangeIdleLengthPolicy];
+  } else if ([tag isEqualToString:@"data_residency_migration_request_successful"]) {
+    DBTEAMLOGDataResidencyMigrationRequestSuccessfulType *dataResidencyMigrationRequestSuccessful =
+        [DBTEAMLOGDataResidencyMigrationRequestSuccessfulTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc]
+        initWithDataResidencyMigrationRequestSuccessful:dataResidencyMigrationRequestSuccessful];
+  } else if ([tag isEqualToString:@"data_residency_migration_request_unsuccessful"]) {
+    DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulType *dataResidencyMigrationRequestUnsuccessful =
+        [DBTEAMLOGDataResidencyMigrationRequestUnsuccessfulTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc]
+        initWithDataResidencyMigrationRequestUnsuccessful:dataResidencyMigrationRequestUnsuccessful];
   } else if ([tag isEqualToString:@"team_merge_from"]) {
     DBTEAMLOGTeamMergeFromType *teamMergeFrom = [DBTEAMLOGTeamMergeFromTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithTeamMergeFrom:teamMergeFrom];
@@ -65563,6 +66966,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgRewindFolder;
+  }
+  return self;
+}
+
+- (instancetype)initWithUndoNamingConvention {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgUndoNamingConvention;
+  }
+  return self;
+}
+
+- (instancetype)initWithUndoOrganizeFolderWithTidy {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgUndoOrganizeFolderWithTidy;
   }
   return self;
 }
@@ -67743,6 +69162,14 @@
   return self;
 }
 
+- (instancetype)initWithDropboxPasswordsPolicyChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgDropboxPasswordsPolicyChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithEmailIngestPolicyChanged {
   self = [super init];
   if (self) {
@@ -68259,6 +69686,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgWebSessionsChangeIdleLengthPolicy;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataResidencyMigrationRequestSuccessful {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgDataResidencyMigrationRequestSuccessful;
+  }
+  return self;
+}
+
+- (instancetype)initWithDataResidencyMigrationRequestUnsuccessful {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgDataResidencyMigrationRequestUnsuccessful;
   }
   return self;
 }
@@ -68989,6 +70432,14 @@
 
 - (BOOL)isRewindFolder {
   return _tag == DBTEAMLOGEventTypeArgRewindFolder;
+}
+
+- (BOOL)isUndoNamingConvention {
+  return _tag == DBTEAMLOGEventTypeArgUndoNamingConvention;
+}
+
+- (BOOL)isUndoOrganizeFolderWithTidy {
+  return _tag == DBTEAMLOGEventTypeArgUndoOrganizeFolderWithTidy;
 }
 
 - (BOOL)isUserTagsAdded {
@@ -70079,6 +71530,10 @@
   return _tag == DBTEAMLOGEventTypeArgDirectoryRestrictionsRemoveMembers;
 }
 
+- (BOOL)isDropboxPasswordsPolicyChanged {
+  return _tag == DBTEAMLOGEventTypeArgDropboxPasswordsPolicyChanged;
+}
+
 - (BOOL)isEmailIngestPolicyChanged {
   return _tag == DBTEAMLOGEventTypeArgEmailIngestPolicyChanged;
 }
@@ -70337,6 +71792,14 @@
 
 - (BOOL)isWebSessionsChangeIdleLengthPolicy {
   return _tag == DBTEAMLOGEventTypeArgWebSessionsChangeIdleLengthPolicy;
+}
+
+- (BOOL)isDataResidencyMigrationRequestSuccessful {
+  return _tag == DBTEAMLOGEventTypeArgDataResidencyMigrationRequestSuccessful;
+}
+
+- (BOOL)isDataResidencyMigrationRequestUnsuccessful {
+  return _tag == DBTEAMLOGEventTypeArgDataResidencyMigrationRequestUnsuccessful;
 }
 
 - (BOOL)isTeamMergeFrom {
@@ -70703,6 +72166,10 @@
     return @"DBTEAMLOGEventTypeArgOrganizeFolderWithTidy";
   case DBTEAMLOGEventTypeArgRewindFolder:
     return @"DBTEAMLOGEventTypeArgRewindFolder";
+  case DBTEAMLOGEventTypeArgUndoNamingConvention:
+    return @"DBTEAMLOGEventTypeArgUndoNamingConvention";
+  case DBTEAMLOGEventTypeArgUndoOrganizeFolderWithTidy:
+    return @"DBTEAMLOGEventTypeArgUndoOrganizeFolderWithTidy";
   case DBTEAMLOGEventTypeArgUserTagsAdded:
     return @"DBTEAMLOGEventTypeArgUserTagsAdded";
   case DBTEAMLOGEventTypeArgUserTagsRemoved:
@@ -71247,6 +72714,8 @@
     return @"DBTEAMLOGEventTypeArgDirectoryRestrictionsAddMembers";
   case DBTEAMLOGEventTypeArgDirectoryRestrictionsRemoveMembers:
     return @"DBTEAMLOGEventTypeArgDirectoryRestrictionsRemoveMembers";
+  case DBTEAMLOGEventTypeArgDropboxPasswordsPolicyChanged:
+    return @"DBTEAMLOGEventTypeArgDropboxPasswordsPolicyChanged";
   case DBTEAMLOGEventTypeArgEmailIngestPolicyChanged:
     return @"DBTEAMLOGEventTypeArgEmailIngestPolicyChanged";
   case DBTEAMLOGEventTypeArgEmmAddException:
@@ -71377,6 +72846,10 @@
     return @"DBTEAMLOGEventTypeArgWebSessionsChangeFixedLengthPolicy";
   case DBTEAMLOGEventTypeArgWebSessionsChangeIdleLengthPolicy:
     return @"DBTEAMLOGEventTypeArgWebSessionsChangeIdleLengthPolicy";
+  case DBTEAMLOGEventTypeArgDataResidencyMigrationRequestSuccessful:
+    return @"DBTEAMLOGEventTypeArgDataResidencyMigrationRequestSuccessful";
+  case DBTEAMLOGEventTypeArgDataResidencyMigrationRequestUnsuccessful:
+    return @"DBTEAMLOGEventTypeArgDataResidencyMigrationRequestUnsuccessful";
   case DBTEAMLOGEventTypeArgTeamMergeFrom:
     return @"DBTEAMLOGEventTypeArgTeamMergeFrom";
   case DBTEAMLOGEventTypeArgTeamMergeTo:
@@ -71784,6 +73257,12 @@
   case DBTEAMLOGEventTypeArgRewindFolder:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGEventTypeArgUndoNamingConvention:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgUndoOrganizeFolderWithTidy:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGEventTypeArgUserTagsAdded:
     result = prime * result + [[self tagName] hash];
     break;
@@ -72600,6 +74079,9 @@
   case DBTEAMLOGEventTypeArgDirectoryRestrictionsRemoveMembers:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGEventTypeArgDropboxPasswordsPolicyChanged:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGEventTypeArgEmailIngestPolicyChanged:
     result = prime * result + [[self tagName] hash];
     break;
@@ -72793,6 +74275,12 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgWebSessionsChangeIdleLengthPolicy:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgDataResidencyMigrationRequestSuccessful:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgDataResidencyMigrationRequestUnsuccessful:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgTeamMergeFrom:
@@ -73139,6 +74627,10 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgRewindFolder:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgUndoNamingConvention:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgUndoOrganizeFolderWithTidy:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgUserTagsAdded:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgUserTagsRemoved:
@@ -73683,6 +75175,8 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgDirectoryRestrictionsRemoveMembers:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgDropboxPasswordsPolicyChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEmailIngestPolicyChanged:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEmmAddException:
@@ -73812,6 +75306,10 @@
   case DBTEAMLOGEventTypeArgWebSessionsChangeFixedLengthPolicy:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgWebSessionsChangeIdleLengthPolicy:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgDataResidencyMigrationRequestSuccessful:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgDataResidencyMigrationRequestUnsuccessful:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgTeamMergeFrom:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
@@ -74102,6 +75600,10 @@
     jsonDict[@".tag"] = @"organize_folder_with_tidy";
   } else if ([valueObj isRewindFolder]) {
     jsonDict[@".tag"] = @"rewind_folder";
+  } else if ([valueObj isUndoNamingConvention]) {
+    jsonDict[@".tag"] = @"undo_naming_convention";
+  } else if ([valueObj isUndoOrganizeFolderWithTidy]) {
+    jsonDict[@".tag"] = @"undo_organize_folder_with_tidy";
   } else if ([valueObj isUserTagsAdded]) {
     jsonDict[@".tag"] = @"user_tags_added";
   } else if ([valueObj isUserTagsRemoved]) {
@@ -74646,6 +76148,8 @@
     jsonDict[@".tag"] = @"directory_restrictions_add_members";
   } else if ([valueObj isDirectoryRestrictionsRemoveMembers]) {
     jsonDict[@".tag"] = @"directory_restrictions_remove_members";
+  } else if ([valueObj isDropboxPasswordsPolicyChanged]) {
+    jsonDict[@".tag"] = @"dropbox_passwords_policy_changed";
   } else if ([valueObj isEmailIngestPolicyChanged]) {
     jsonDict[@".tag"] = @"email_ingest_policy_changed";
   } else if ([valueObj isEmmAddException]) {
@@ -74776,6 +76280,10 @@
     jsonDict[@".tag"] = @"web_sessions_change_fixed_length_policy";
   } else if ([valueObj isWebSessionsChangeIdleLengthPolicy]) {
     jsonDict[@".tag"] = @"web_sessions_change_idle_length_policy";
+  } else if ([valueObj isDataResidencyMigrationRequestSuccessful]) {
+    jsonDict[@".tag"] = @"data_residency_migration_request_successful";
+  } else if ([valueObj isDataResidencyMigrationRequestUnsuccessful]) {
+    jsonDict[@".tag"] = @"data_residency_migration_request_unsuccessful";
   } else if ([valueObj isTeamMergeFrom]) {
     jsonDict[@".tag"] = @"team_merge_from";
   } else if ([valueObj isTeamMergeTo]) {
@@ -75062,6 +76570,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithOrganizeFolderWithTidy];
   } else if ([tag isEqualToString:@"rewind_folder"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithRewindFolder];
+  } else if ([tag isEqualToString:@"undo_naming_convention"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithUndoNamingConvention];
+  } else if ([tag isEqualToString:@"undo_organize_folder_with_tidy"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithUndoOrganizeFolderWithTidy];
   } else if ([tag isEqualToString:@"user_tags_added"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithUserTagsAdded];
   } else if ([tag isEqualToString:@"user_tags_removed"]) {
@@ -75606,6 +77118,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithDirectoryRestrictionsAddMembers];
   } else if ([tag isEqualToString:@"directory_restrictions_remove_members"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithDirectoryRestrictionsRemoveMembers];
+  } else if ([tag isEqualToString:@"dropbox_passwords_policy_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithDropboxPasswordsPolicyChanged];
   } else if ([tag isEqualToString:@"email_ingest_policy_changed"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithEmailIngestPolicyChanged];
   } else if ([tag isEqualToString:@"emm_add_exception"]) {
@@ -75736,6 +77250,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithWebSessionsChangeFixedLengthPolicy];
   } else if ([tag isEqualToString:@"web_sessions_change_idle_length_policy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithWebSessionsChangeIdleLengthPolicy];
+  } else if ([tag isEqualToString:@"data_residency_migration_request_successful"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithDataResidencyMigrationRequestSuccessful];
+  } else if ([tag isEqualToString:@"data_residency_migration_request_unsuccessful"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithDataResidencyMigrationRequestUnsuccessful];
   } else if ([tag isEqualToString:@"team_merge_from"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamMergeFrom];
   } else if ([tag isEqualToString:@"team_merge_to"]) {
@@ -76676,6 +78194,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithDefault_ {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupPolicyDefault_;
+  }
+  return self;
+}
+
 - (instancetype)initWithDisabled {
   self = [super init];
   if (self) {
@@ -76704,6 +78230,10 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isDefault_ {
+  return _tag == DBTEAMLOGExternalDriveBackupPolicyDefault_;
+}
+
 - (BOOL)isDisabled {
   return _tag == DBTEAMLOGExternalDriveBackupPolicyDisabled;
 }
@@ -76718,6 +78248,8 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupPolicyDefault_:
+    return @"DBTEAMLOGExternalDriveBackupPolicyDefault_";
   case DBTEAMLOGExternalDriveBackupPolicyDisabled:
     return @"DBTEAMLOGExternalDriveBackupPolicyDisabled";
   case DBTEAMLOGExternalDriveBackupPolicyEnabled:
@@ -76760,6 +78292,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupPolicyDefault_:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGExternalDriveBackupPolicyDisabled:
     result = prime * result + [[self tagName] hash];
     break;
@@ -76794,6 +78329,8 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupPolicyDefault_:
+    return [[self tagName] isEqual:[anExternalDriveBackupPolicy tagName]];
   case DBTEAMLOGExternalDriveBackupPolicyDisabled:
     return [[self tagName] isEqual:[anExternalDriveBackupPolicy tagName]];
   case DBTEAMLOGExternalDriveBackupPolicyEnabled:
@@ -76813,7 +78350,9 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isDisabled]) {
+  if ([valueObj isDefault_]) {
+    jsonDict[@".tag"] = @"default";
+  } else if ([valueObj isDisabled]) {
     jsonDict[@".tag"] = @"disabled";
   } else if ([valueObj isEnabled]) {
     jsonDict[@".tag"] = @"enabled";
@@ -76829,7 +78368,9 @@
 + (DBTEAMLOGExternalDriveBackupPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"disabled"]) {
+  if ([tag isEqualToString:@"default"]) {
+    return [[DBTEAMLOGExternalDriveBackupPolicy alloc] initWithDefault_];
+  } else if ([tag isEqualToString:@"disabled"]) {
     return [[DBTEAMLOGExternalDriveBackupPolicy alloc] initWithDisabled];
   } else if ([tag isEqualToString:@"enabled"]) {
     return [[DBTEAMLOGExternalDriveBackupPolicy alloc] initWithEnabled];
@@ -78029,10 +79570,10 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isOrganization]) {
-    jsonDict = [[DBTEAMLOGOrganizationDetailsSerializer serialize:valueObj.organization] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOrganizationDetailsSerializer serialize:valueObj.organization]];
     jsonDict[@".tag"] = @"organization";
   } else if ([valueObj isTeam]) {
-    jsonDict = [[DBTEAMLOGTeamDetailsSerializer serialize:valueObj.team] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGTeamDetailsSerializer serialize:valueObj.team]];
     jsonDict[@".tag"] = @"team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -78537,13 +80078,14 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isConnectedTeamName]) {
-    jsonDict = [[DBTEAMLOGConnectedTeamNameSerializer serialize:valueObj.connectedTeamName] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGConnectedTeamNameSerializer serialize:valueObj.connectedTeamName]];
     jsonDict[@".tag"] = @"connected_team_name";
   } else if ([valueObj isNonTrustedTeamDetails]) {
-    jsonDict = [[DBTEAMLOGNonTrustedTeamDetailsSerializer serialize:valueObj.nonTrustedTeamDetails] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGNonTrustedTeamDetailsSerializer serialize:valueObj.nonTrustedTeamDetails]];
     jsonDict[@".tag"] = @"non_trusted_team_details";
   } else if ([valueObj isOrganizationName]) {
-    jsonDict = [[DBTEAMLOGOrganizationNameSerializer serialize:valueObj.organizationName] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGOrganizationNameSerializer serialize:valueObj.organizationName]];
     jsonDict[@".tag"] = @"organization_name";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -101949,16 +103491,20 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isDesktopDeviceSession]) {
-    jsonDict = [[DBTEAMLOGDesktopDeviceSessionLogInfoSerializer serialize:valueObj.desktopDeviceSession] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDesktopDeviceSessionLogInfoSerializer
+                                           serialize:valueObj.desktopDeviceSession]];
     jsonDict[@".tag"] = @"desktop_device_session";
   } else if ([valueObj isLegacyDeviceSession]) {
-    jsonDict = [[DBTEAMLOGLegacyDeviceSessionLogInfoSerializer serialize:valueObj.legacyDeviceSession] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGLegacyDeviceSessionLogInfoSerializer
+                                           serialize:valueObj.legacyDeviceSession]];
     jsonDict[@".tag"] = @"legacy_device_session";
   } else if ([valueObj isMobileDeviceSession]) {
-    jsonDict = [[DBTEAMLOGMobileDeviceSessionLogInfoSerializer serialize:valueObj.mobileDeviceSession] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGMobileDeviceSessionLogInfoSerializer
+                                           serialize:valueObj.mobileDeviceSession]];
     jsonDict[@".tag"] = @"mobile_device_session";
   } else if ([valueObj isWebDeviceSession]) {
-    jsonDict = [[DBTEAMLOGWebDeviceSessionLogInfoSerializer serialize:valueObj.webDeviceSession] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGWebDeviceSessionLogInfoSerializer serialize:valueObj.webDeviceSession]];
     jsonDict[@".tag"] = @"web_device_session";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -127266,7 +128812,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isGroup]) {
-    jsonDict = [[DBTEAMLOGGroupLogInfoSerializer serialize:valueObj.group] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGGroupLogInfoSerializer serialize:valueObj.group]];
     jsonDict[@".tag"] = @"group";
   } else if ([valueObj isUser]) {
     jsonDict[@"user"] = [[DBTEAMLOGUserLogInfoSerializer serialize:valueObj.user] mutableCopy];
@@ -150267,6 +151813,14 @@
 
 #pragma mark - Constructors
 
+- (instancetype)initWithDefaultNoOne {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGSharingLinkPolicyDefaultNoOne;
+  }
+  return self;
+}
+
 - (instancetype)initWithDefaultPrivate {
   self = [super init];
   if (self) {
@@ -150303,6 +151857,10 @@
 
 #pragma mark - Tag state methods
 
+- (BOOL)isDefaultNoOne {
+  return _tag == DBTEAMLOGSharingLinkPolicyDefaultNoOne;
+}
+
 - (BOOL)isDefaultPrivate {
   return _tag == DBTEAMLOGSharingLinkPolicyDefaultPrivate;
 }
@@ -150321,6 +151879,8 @@
 
 - (NSString *)tagName {
   switch (_tag) {
+  case DBTEAMLOGSharingLinkPolicyDefaultNoOne:
+    return @"DBTEAMLOGSharingLinkPolicyDefaultNoOne";
   case DBTEAMLOGSharingLinkPolicyDefaultPrivate:
     return @"DBTEAMLOGSharingLinkPolicyDefaultPrivate";
   case DBTEAMLOGSharingLinkPolicyDefaultPublic:
@@ -150365,6 +151925,9 @@
   NSUInteger result = 1;
 
   switch (_tag) {
+  case DBTEAMLOGSharingLinkPolicyDefaultNoOne:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGSharingLinkPolicyDefaultPrivate:
     result = prime * result + [[self tagName] hash];
     break;
@@ -150402,6 +151965,8 @@
     return NO;
   }
   switch (_tag) {
+  case DBTEAMLOGSharingLinkPolicyDefaultNoOne:
+    return [[self tagName] isEqual:[aSharingLinkPolicy tagName]];
   case DBTEAMLOGSharingLinkPolicyDefaultPrivate:
     return [[self tagName] isEqual:[aSharingLinkPolicy tagName]];
   case DBTEAMLOGSharingLinkPolicyDefaultPublic:
@@ -150423,7 +151988,9 @@
 + (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGSharingLinkPolicy *)valueObj {
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
-  if ([valueObj isDefaultPrivate]) {
+  if ([valueObj isDefaultNoOne]) {
+    jsonDict[@".tag"] = @"default_no_one";
+  } else if ([valueObj isDefaultPrivate]) {
     jsonDict[@".tag"] = @"default_private";
   } else if ([valueObj isDefaultPublic]) {
     jsonDict[@".tag"] = @"default_public";
@@ -150441,7 +152008,9 @@
 + (DBTEAMLOGSharingLinkPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
   NSString *tag = valueDict[@".tag"];
 
-  if ([tag isEqualToString:@"default_private"]) {
+  if ([tag isEqualToString:@"default_no_one"]) {
+    return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultNoOne];
+  } else if ([tag isEqualToString:@"default_private"]) {
     return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultPrivate];
   } else if ([tag isEqualToString:@"default_public"]) {
     return [[DBTEAMLOGSharingLinkPolicy alloc] initWithDefaultPublic];
@@ -165803,10 +167372,12 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGPrimaryTeamRequestAcceptedDetailsSerializer serialize:valueObj.primaryTeam] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPrimaryTeamRequestAcceptedDetailsSerializer serialize:valueObj.primaryTeam]];
     jsonDict[@".tag"] = @"primary_team";
   } else if ([valueObj isSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGSecondaryTeamRequestAcceptedDetailsSerializer serialize:valueObj.secondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryTeamRequestAcceptedDetailsSerializer
+                                           serialize:valueObj.secondaryTeam]];
     jsonDict[@".tag"] = @"secondary_team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -166842,10 +168413,12 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGPrimaryTeamRequestCanceledDetailsSerializer serialize:valueObj.primaryTeam] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPrimaryTeamRequestCanceledDetailsSerializer serialize:valueObj.primaryTeam]];
     jsonDict[@".tag"] = @"primary_team";
   } else if ([valueObj isSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGSecondaryTeamRequestCanceledDetailsSerializer serialize:valueObj.secondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryTeamRequestCanceledDetailsSerializer
+                                           serialize:valueObj.secondaryTeam]];
     jsonDict[@".tag"] = @"secondary_team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -167671,10 +169244,12 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGPrimaryTeamRequestExpiredDetailsSerializer serialize:valueObj.primaryTeam] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPrimaryTeamRequestExpiredDetailsSerializer serialize:valueObj.primaryTeam]];
     jsonDict[@".tag"] = @"primary_team";
   } else if ([valueObj isSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGSecondaryTeamRequestExpiredDetailsSerializer serialize:valueObj.secondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryTeamRequestExpiredDetailsSerializer
+                                           serialize:valueObj.secondaryTeam]];
     jsonDict[@".tag"] = @"secondary_team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -168901,10 +170476,12 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isPrimaryTeam]) {
-    jsonDict = [[DBTEAMLOGPrimaryTeamRequestReminderDetailsSerializer serialize:valueObj.primaryTeam] mutableCopy];
+    [jsonDict
+        addEntriesFromDictionary:[DBTEAMLOGPrimaryTeamRequestReminderDetailsSerializer serialize:valueObj.primaryTeam]];
     jsonDict[@".tag"] = @"primary_team";
   } else if ([valueObj isSecondaryTeam]) {
-    jsonDict = [[DBTEAMLOGSecondaryTeamRequestReminderDetailsSerializer serialize:valueObj.secondaryTeam] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGSecondaryTeamRequestReminderDetailsSerializer
+                                           serialize:valueObj.secondaryTeam]];
     jsonDict[@".tag"] = @"secondary_team";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
@@ -176459,6 +178036,388 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGUndoNamingConventionDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGUndoNamingConventionDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGUndoNamingConventionDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGUndoNamingConventionDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGUndoNamingConventionDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUndoNamingConventionDetails:other];
+}
+
+- (BOOL)isEqualToUndoNamingConventionDetails:(DBTEAMLOGUndoNamingConventionDetails *)anUndoNamingConventionDetails {
+  if (self == anUndoNamingConventionDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGUndoNamingConventionDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGUndoNamingConventionDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGUndoNamingConventionDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGUndoNamingConventionDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGUndoNamingConventionType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGUndoNamingConventionType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGUndoNamingConventionTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGUndoNamingConventionTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGUndoNamingConventionTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUndoNamingConventionType:other];
+}
+
+- (BOOL)isEqualToUndoNamingConventionType:(DBTEAMLOGUndoNamingConventionType *)anUndoNamingConventionType {
+  if (self == anUndoNamingConventionType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anUndoNamingConventionType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGUndoNamingConventionTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGUndoNamingConventionType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGUndoNamingConventionType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGUndoNamingConventionType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGUndoOrganizeFolderWithTidyDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGUndoOrganizeFolderWithTidyDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initDefault {
+
+  self = [super init];
+  if (self) {
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGUndoOrganizeFolderWithTidyDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGUndoOrganizeFolderWithTidyDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGUndoOrganizeFolderWithTidyDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUndoOrganizeFolderWithTidyDetails:other];
+}
+
+- (BOOL)isEqualToUndoOrganizeFolderWithTidyDetails:
+    (DBTEAMLOGUndoOrganizeFolderWithTidyDetails *)anUndoOrganizeFolderWithTidyDetails {
+  if (self == anUndoOrganizeFolderWithTidyDetails) {
+    return YES;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGUndoOrganizeFolderWithTidyDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGUndoOrganizeFolderWithTidyDetails *)valueObj {
+#pragma unused(valueObj)
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGUndoOrganizeFolderWithTidyDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+#pragma unused(valueDict)
+
+  return [[DBTEAMLOGUndoOrganizeFolderWithTidyDetails alloc] initDefault];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGUndoOrganizeFolderWithTidyType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGUndoOrganizeFolderWithTidyType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGUndoOrganizeFolderWithTidyTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGUndoOrganizeFolderWithTidyTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGUndoOrganizeFolderWithTidyTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUndoOrganizeFolderWithTidyType:other];
+}
+
+- (BOOL)isEqualToUndoOrganizeFolderWithTidyType:
+    (DBTEAMLOGUndoOrganizeFolderWithTidyType *)anUndoOrganizeFolderWithTidyType {
+  if (self == anUndoOrganizeFolderWithTidyType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anUndoOrganizeFolderWithTidyType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGUndoOrganizeFolderWithTidyTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGUndoOrganizeFolderWithTidyType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGUndoOrganizeFolderWithTidyType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGUndoOrganizeFolderWithTidyType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGAppLogInfo.h"
 #import "DBTEAMLOGUserLinkedAppLogInfo.h"
 
@@ -178955,7 +180914,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isDefined]) {
-    jsonDict = [[DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.defined] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.defined]];
     jsonDict[@".tag"] = @"defined";
   } else if ([valueObj isUndefined]) {
     jsonDict[@".tag"] = @"undefined";
@@ -179146,7 +181105,7 @@
   NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
 
   if ([valueObj isDefined]) {
-    jsonDict = [[DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.defined] mutableCopy];
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGDurationLogInfoSerializer serialize:valueObj.defined]];
     jsonDict[@".tag"] = @"defined";
   } else if ([valueObj isUndefined]) {
     jsonDict[@".tag"] = @"undefined";

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `EmailIngestPolicy` union.
 ///
-/// Email ingest policy
+/// Policy for deciding whether a team can use Email to Dropbox feature
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

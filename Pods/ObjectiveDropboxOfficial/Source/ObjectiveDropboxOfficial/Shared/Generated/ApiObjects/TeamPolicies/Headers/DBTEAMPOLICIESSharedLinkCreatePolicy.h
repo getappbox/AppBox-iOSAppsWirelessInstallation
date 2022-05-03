@@ -45,6 +45,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESSharedLinkCreatePolicyTag){
     /// required to access all shared links.
     DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly,
 
+    /// Only people invited can access newly created links. Login will be
+    /// required to access the shared links unless overridden.
+    DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne,
+
     /// (no description).
     DBTEAMPOLICIESSharedLinkCreatePolicyOther,
 
@@ -88,6 +92,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESSharedLinkCreatePolicyTag){
 - (instancetype)initWithTeamOnly;
 
 ///
+/// Initializes union class with tag state of "default_no_one".
+///
+/// Description of the "default_no_one" tag state: Only people invited can
+/// access newly created links. Login will be required to access the shared
+/// links unless overridden.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDefaultNoOne;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -119,6 +134,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMPOLICIESSharedLinkCreatePolicyTag){
 /// @return Whether the union's current tag state has value "team_only".
 ///
 - (BOOL)isTeamOnly;
+
+///
+/// Retrieves whether the union's current tag state has value "default_no_one".
+///
+/// @return Whether the union's current tag state has value "default_no_one".
+///
+- (BOOL)isDefaultNoOne;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

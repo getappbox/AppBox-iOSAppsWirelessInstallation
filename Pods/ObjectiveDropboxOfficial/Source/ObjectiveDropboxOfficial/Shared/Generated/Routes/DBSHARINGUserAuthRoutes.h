@@ -149,7 +149,7 @@ addFileMember:(NSString *)file
 /// @param members Members to add. Note that even an email address is given, this may result in a user being directly
 /// added to the membership if that email is the user's main account email.
 /// @param customMessage Message to send to added members in their invitation.
-/// @param quiet Whether added members should be notified via device notifications of their invitation.
+/// @param quiet Whether added members should be notified via email and device notifications of their invitation.
 /// @param accessLevel AccessLevel union object, describing what access level we want to give new members.
 /// @param addMessageAsComment If the custom message should be added as a comment on the file.
 ///

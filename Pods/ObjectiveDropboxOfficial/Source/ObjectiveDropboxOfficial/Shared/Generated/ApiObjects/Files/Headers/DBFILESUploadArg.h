@@ -10,7 +10,7 @@
 #import "DBSerializableProtocol.h"
 
 @class DBFILEPROPERTIESPropertyGroup;
-@class DBFILESCommitInfoWithProperties;
+@class DBFILESUploadArg;
 @class DBFILESWriteMode;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,15 +18,21 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - API Object
 
 ///
-/// The `CommitInfoWithProperties` struct.
+/// The `UploadArg` struct.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBFILESCommitInfoWithProperties : DBFILESCommitInfo <DBSerializable, NSCopying>
+@interface DBFILESUploadArg : DBFILESCommitInfo <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
+
+/// A hash of the file content uploaded in this call. If provided and the
+/// uploaded content does not match this hash, an error will be returned. For
+/// more information see our Content hash
+/// https://www.dropbox.com/developers/reference/content-hash page.
+@property (nonatomic, readonly, copy, nullable) NSString *contentHash;
 
 #pragma mark - Constructors
 
@@ -52,6 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// in `DBFILESWriteMode` and the given "rev" doesn't match the existing file's
 /// "rev", even if the existing file has been deleted. This also forces a
 /// conflict even when the target path refers to a file with identical contents.
+/// @param contentHash A hash of the file content uploaded in this call. If
+/// provided and the uploaded content does not match this hash, an error will be
+/// returned. For more information see our Content hash
+/// https://www.dropbox.com/developers/reference/content-hash page.
 ///
 /// @return An initialized instance.
 ///
@@ -61,7 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
               clientModified:(nullable NSDate *)clientModified
                         mute:(nullable NSNumber *)mute
               propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups
-              strictConflict:(nullable NSNumber *)strictConflict;
+              strictConflict:(nullable NSNumber *)strictConflict
+                 contentHash:(nullable NSString *)contentHash;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with
@@ -78,30 +89,29 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Serializer Object
 
 ///
-/// The serialization class for the `CommitInfoWithProperties` struct.
+/// The serialization class for the `UploadArg` struct.
 ///
-@interface DBFILESCommitInfoWithPropertiesSerializer : NSObject
+@interface DBFILESUploadArgSerializer : NSObject
 
 ///
-/// Serializes `DBFILESCommitInfoWithProperties` instances.
+/// Serializes `DBFILESUploadArg` instances.
 ///
-/// @param instance An instance of the `DBFILESCommitInfoWithProperties` API
-/// object.
+/// @param instance An instance of the `DBFILESUploadArg` API object.
 ///
 /// @return A json-compatible dictionary representation of the
-/// `DBFILESCommitInfoWithProperties` API object.
+/// `DBFILESUploadArg` API object.
 ///
-+ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESCommitInfoWithProperties *)instance;
++ (nullable NSDictionary<NSString *, id> *)serialize:(DBFILESUploadArg *)instance;
 
 ///
-/// Deserializes `DBFILESCommitInfoWithProperties` instances.
+/// Deserializes `DBFILESUploadArg` instances.
 ///
 /// @param dict A json-compatible dictionary representation of the
-/// `DBFILESCommitInfoWithProperties` API object.
+/// `DBFILESUploadArg` API object.
 ///
-/// @return An instantiation of the `DBFILESCommitInfoWithProperties` object.
+/// @return An instantiation of the `DBFILESUploadArg` object.
 ///
-+ (DBFILESCommitInfoWithProperties *)deserialize:(NSDictionary<NSString *, id> *)dict;
++ (DBFILESUploadArg *)deserialize:(NSDictionary<NSString *, id> *)dict;
 
 @end
 

@@ -63,6 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param parentSharedFolderId Please use `parentSharedFolderId` in
 /// `DBFILESFileSharingInfo` or `parentSharedFolderId` in
 /// `DBFILESFolderSharingInfo` instead.
+/// @param previewUrl The preview URL of the file.
 /// @param sharedFolderId Please use sharingInfo instead.
 /// @param sharingInfo Set if the folder is contained in a shared folder or is a
 /// shared folder mount point.
@@ -78,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
                    pathLower:(nullable NSString *)pathLower
                  pathDisplay:(nullable NSString *)pathDisplay
         parentSharedFolderId:(nullable NSString *)parentSharedFolderId
+                  previewUrl:(nullable NSString *)previewUrl
               sharedFolderId:(nullable NSString *)sharedFolderId
                  sharingInfo:(nullable DBFILESFolderSharingInfo *)sharingInfo
               propertyGroups:(nullable NSArray<DBFILEPROPERTIESPropertyGroup *> *)propertyGroups;

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// The `OrganizeFolderWithTidyDetails` struct.
 ///
-/// Organized a folder with the Tidy Up action.
+/// Organized a folder with multi-file organize.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

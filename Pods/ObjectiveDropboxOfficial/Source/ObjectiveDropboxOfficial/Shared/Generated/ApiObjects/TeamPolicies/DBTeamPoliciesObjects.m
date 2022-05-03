@@ -606,6 +606,14 @@
   return self;
 }
 
+- (instancetype)initWithDefault_ {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -626,6 +634,10 @@
   return _tag == DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled;
 }
 
+- (BOOL)isDefault_ {
+  return _tag == DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMPOLICIESExternalDriveBackupPolicyStateOther;
 }
@@ -636,6 +648,8 @@
     return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateDisabled";
   case DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled:
     return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled";
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_:
+    return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_";
   case DBTEAMPOLICIESExternalDriveBackupPolicyStateOther:
     return @"DBTEAMPOLICIESExternalDriveBackupPolicyStateOther";
   }
@@ -680,6 +694,9 @@
   case DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESExternalDriveBackupPolicyStateOther:
     result = prime * result + [[self tagName] hash];
     break;
@@ -713,6 +730,8 @@
     return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
   case DBTEAMPOLICIESExternalDriveBackupPolicyStateEnabled:
     return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
+  case DBTEAMPOLICIESExternalDriveBackupPolicyStateDefault_:
+    return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
   case DBTEAMPOLICIESExternalDriveBackupPolicyStateOther:
     return [[self tagName] isEqual:[anExternalDriveBackupPolicyState tagName]];
   }
@@ -732,6 +751,8 @@
     jsonDict[@".tag"] = @"disabled";
   } else if ([valueObj isEnabled]) {
     jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isDefault_]) {
+    jsonDict[@".tag"] = @"default";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -748,6 +769,8 @@
     return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithDisabled];
   } else if ([tag isEqualToString:@"enabled"]) {
     return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"default"]) {
+    return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithDefault_];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMPOLICIESExternalDriveBackupPolicyState alloc] initWithOther];
   } else {
@@ -2936,6 +2959,14 @@
   return self;
 }
 
+- (instancetype)initWithDefaultNoOne {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -2960,6 +2991,10 @@
   return _tag == DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly;
 }
 
+- (BOOL)isDefaultNoOne {
+  return _tag == DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMPOLICIESSharedLinkCreatePolicyOther;
 }
@@ -2972,6 +3007,8 @@
     return @"DBTEAMPOLICIESSharedLinkCreatePolicyDefaultTeamOnly";
   case DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly:
     return @"DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly";
+  case DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne:
+    return @"DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne";
   case DBTEAMPOLICIESSharedLinkCreatePolicyOther:
     return @"DBTEAMPOLICIESSharedLinkCreatePolicyOther";
   }
@@ -3019,6 +3056,9 @@
   case DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMPOLICIESSharedLinkCreatePolicyOther:
     result = prime * result + [[self tagName] hash];
     break;
@@ -3053,6 +3093,8 @@
     return [[self tagName] isEqual:[aSharedLinkCreatePolicy tagName]];
   case DBTEAMPOLICIESSharedLinkCreatePolicyTeamOnly:
     return [[self tagName] isEqual:[aSharedLinkCreatePolicy tagName]];
+  case DBTEAMPOLICIESSharedLinkCreatePolicyDefaultNoOne:
+    return [[self tagName] isEqual:[aSharedLinkCreatePolicy tagName]];
   case DBTEAMPOLICIESSharedLinkCreatePolicyOther:
     return [[self tagName] isEqual:[aSharedLinkCreatePolicy tagName]];
   }
@@ -3074,6 +3116,8 @@
     jsonDict[@".tag"] = @"default_team_only";
   } else if ([valueObj isTeamOnly]) {
     jsonDict[@".tag"] = @"team_only";
+  } else if ([valueObj isDefaultNoOne]) {
+    jsonDict[@".tag"] = @"default_no_one";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -3092,6 +3136,8 @@
     return [[DBTEAMPOLICIESSharedLinkCreatePolicy alloc] initWithDefaultTeamOnly];
   } else if ([tag isEqualToString:@"team_only"]) {
     return [[DBTEAMPOLICIESSharedLinkCreatePolicy alloc] initWithTeamOnly];
+  } else if ([tag isEqualToString:@"default_no_one"]) {
+    return [[DBTEAMPOLICIESSharedLinkCreatePolicy alloc] initWithDefaultNoOne];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMPOLICIESSharedLinkCreatePolicy alloc] initWithOther];
   } else {
