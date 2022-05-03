@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D18D26FF76A20046E5F9 /* DBAccountManager.m */; };
-		4410D19926FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19726FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m */; };
-		4410D19A26FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19826FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m */; };
 		4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */; };
+		449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */; };
+		449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */; };
 		84A31BD8650851B3675A1797 /* libPods-AppBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */; };
 		DB1A06622160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB1A06612160DCB4008D33FD /* CoreDataMigration2to3.xcmappingmodel */; };
 		DB1C84412079F54E007AC74C /* NSString+String.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1C84402079F54E007AC74C /* NSString+String.m */; };
@@ -154,11 +154,11 @@
 		179DF69BDB018D0F7E295C95 /* Pods-AppBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.release.xcconfig"; sourceTree = "<group>"; };
 		4410D18C26FF76A20046E5F9 /* DBAccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBAccountManager.h; sourceTree = "<group>"; };
 		4410D18D26FF76A20046E5F9 /* DBAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBAccountManager.m; sourceTree = "<group>"; };
-		4410D19526FF7FD60046E5F9 /* AppBoxService+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppBoxService+CoreDataClass.h"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataClass.h"; sourceTree = "<absolute>"; };
-		4410D19626FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppBoxService+CoreDataProperties.h"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataProperties.h"; sourceTree = "<absolute>"; };
-		4410D19726FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppBoxService+CoreDataClass.m"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataClass.m"; sourceTree = "<absolute>"; };
-		4410D19826FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppBoxService+CoreDataProperties.m"; path = "/Volumes/LongTime/Github/AppBox-macOS/AppBox/Model/CoreDataModel/AppBoxService+CoreDataProperties.m"; sourceTree = "<absolute>"; };
 		4410D19B26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = CoreDataMigration3to4.xcmappingmodel; sourceTree = "<group>"; };
+		449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppBoxService+CoreDataProperties.m"; sourceTree = "<group>"; };
+		449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppBoxService+CoreDataClass.m"; sourceTree = "<group>"; };
+		449BD6B6282111B0008EFB2B /* AppBoxService+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataProperties.h"; sourceTree = "<group>"; };
+		449BD6B7282111B0008EFB2B /* AppBoxService+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppBoxService+CoreDataClass.h"; sourceTree = "<group>"; };
 		44DCC66B25EEA1910074AB1E /* AppBox4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppBox4.xcdatamodel; sourceTree = "<group>"; };
 		ADD2CC287A9B5D93F4C72A0D /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6359ECA7EF9D4D3F8BE63F /* Pods-AppBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppBox/Pods-AppBox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -459,10 +459,10 @@
 		E12A9AAA1E49F360002DDA3C /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				4410D19526FF7FD60046E5F9 /* AppBoxService+CoreDataClass.h */,
-				4410D19726FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m */,
-				4410D19626FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.h */,
-				4410D19826FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m */,
+				449BD6B7282111B0008EFB2B /* AppBoxService+CoreDataClass.h */,
+				449BD6B5282111B0008EFB2B /* AppBoxService+CoreDataClass.m */,
+				449BD6B6282111B0008EFB2B /* AppBoxService+CoreDataProperties.h */,
+				449BD6B4282111B0008EFB2B /* AppBoxService+CoreDataProperties.m */,
 				DB358B54216FB1AB0080CAC0 /* Project+CoreDataClass.h */,
 				DB358B59216FB1AB0080CAC0 /* Project+CoreDataClass.m */,
 				DB358B5F216FB1AB0080CAC0 /* Project+CoreDataProperties.h */,
@@ -1053,7 +1053,6 @@
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,
 				E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */,
-				4410D19926FF7FD60046E5F9 /* AppBoxService+CoreDataClass.m in Sources */,
 				DB358B6E216FB1AC0080CAC0 /* ProvisioningProfile+CoreDataClass.m in Sources */,
 				E16437D41D743A4E00CE8B7E /* AppDelegate.m in Sources */,
 				DB358B6C216FB1AC0080CAC0 /* Project+CoreDataProperties.m in Sources */,
@@ -1066,6 +1065,7 @@
 				DB1FC5901FDEED5400179799 /* HomeWindowController.m in Sources */,
 				DB425C051F8A517D008CB032 /* DefaultSettings.m in Sources */,
 				E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */,
+				449BD6B9282111B0008EFB2B /* AppBoxService+CoreDataClass.m in Sources */,
 				E19473F5205F9FC800CF12F9 /* MSTeamsClient.m in Sources */,
 				E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */,
 				E1D12EE31EC2F17B0065E59A /* ThirdPartyPreferencesViewController.m in Sources */,
@@ -1076,9 +1076,9 @@
 				DB53856A2083622A004BFC84 /* NSURL+URL.m in Sources */,
 				DB1C84412079F54E007AC74C /* NSString+String.m in Sources */,
 				E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */,
-				4410D19A26FF7FD60046E5F9 /* AppBoxService+CoreDataProperties.m in Sources */,
 				E11633991E558635005EAB31 /* MobileProvision.m in Sources */,
 				E1902B601E1661BE00C3E0F6 /* UpdateHandler.m in Sources */,
+				449BD6B8282111B0008EFB2B /* AppBoxService+CoreDataProperties.m in Sources */,
 				E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */,
 				4410D18E26FF76A20046E5F9 /* DBAccountManager.m in Sources */,
 				E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */,
