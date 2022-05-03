@@ -149,6 +149,53 @@
     }
 }
 
++(void)handleUploadSessionAppendError:(DBFILESUploadSessionAppendError *)error {
+	switch (error.tag) {
+		case DBFILESUploadSessionAppendErrorNotFound: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Upload session not found. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorIncorrectOffset: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Offset is incorrect for the upload session. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorClosed: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Upload session closed. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorNotClosed: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Upload session not closed. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorTooLarge: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"The file size is too large. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorConcurrentSessionInvalidOffset: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Invalid offset for the concurrent session. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorConcurrentSessionInvalidDataSize: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Invalid data size for the concurrent session. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorPayloadTooLarge: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"The payload size is too large. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorOther: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"Something goes wrong. Please try again."];
+		}break;
+			
+		case DBFILESUploadSessionAppendErrorContentHashMismatch: {
+			[Common showAlertWithTitle:@"Error" andMessage:@"The content hash does not match. Please try again."];
+		}break;
+			
+		default:
+			break;
+	}
+}
+
 +(void)handleUploadSessionFinishError:(DBFILESUploadSessionFinishError *)error{
     switch (error.tag) {
         case DBFILESUploadSessionFinishErrorPath:{

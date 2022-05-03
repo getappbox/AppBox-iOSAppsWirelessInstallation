@@ -369,7 +369,7 @@
     
     //uploadUrl:path inputUrl:file
 	weakify(self);
-    [[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO inputUrl:file]
+	[[[[DBClientsManager authorizedClient].filesRoutes uploadUrl:path mode:mode autorename:@NO clientModified:nil mute:@NO propertyGroups:nil strictConflict:@NO contentHash:nil inputUrl:file]
       //Track response with result and error
       setResponseBlock:^(DBFILESFileMetadata * _Nullable response, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable error) {
 		strongify(self);
@@ -414,7 +414,7 @@
           //unable to upload file, show error
           else {
               NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self dbUploadFile:file to:path mode:mode]; }];
-              [self handleChunkUploadWithLookupError:nil finishError:nil uploadError:nil networkError:error retryBlock:retryOperation];
+              [self handleChunkUploadWithRouteError:nil finishError:nil uploadError:nil networkError:error retryBlock:retryOperation];
           }
       }]
      
@@ -455,7 +455,7 @@
             [self uploadNextChunk];
         } else {
             NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self dbUploadLargeFile:file to:path mode:mode]; }];
-            [self handleChunkUploadWithLookupError:nil finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
+            [self handleChunkUploadWithRouteError:nil finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
         }
     }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
         [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
@@ -483,21 +483,21 @@
                 }
             } else {
                 NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self uploadNextChunk]; }];
-                [self handleChunkUploadWithLookupError:nil finishError:routeError uploadError:nil networkError:networkError retryBlock:retryOperation];
+                [self handleChunkUploadWithRouteError:nil finishError:routeError uploadError:nil networkError:networkError retryBlock:retryOperation];
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 			strongify(self);
             [self updateProgressBytesWritten:bytesWritten totalBytesWritten:totalBytesWritten totalBytesExpectedToWrite:totalBytesExpectedToWrite];
         }];
     } else {
-        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionLookupError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+        [[[[DBClientsManager authorizedClient].filesRoutes uploadSessionAppendV2Data:cursor inputData:nextChunkToUpload] setResponseBlock:^(DBNilObject * _Nullable result, DBFILESUploadSessionAppendError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 			strongify(self);
             if (result) {
 				self->offset += self->nextChunkToUpload.length;
                 [self uploadNextChunk];
             } else {
                 NSBlockOperation *retryOperation = [NSBlockOperation blockOperationWithBlock:^{ [self uploadNextChunk]; }];
-                [self handleChunkUploadWithLookupError:routeError finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
+                [self handleChunkUploadWithRouteError:routeError finishError:nil uploadError:nil networkError:networkError retryBlock:retryOperation];
             }
         }] setProgressBlock:^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
 			strongify(self);
@@ -508,11 +508,11 @@
 
 #pragma mark - Upload File Helper
 //Helper to Handle Chunk Upload Error
--(void)handleChunkUploadWithLookupError:(DBFILESUploadSessionLookupError * _Nullable)lookupError
-                            finishError:(DBFILESUploadSessionFinishError * _Nullable)finishError
-                            uploadError:(DBFILESUploadError * _Nullable)uploadError
-                           networkError:(DBRequestError * _Nullable)networkError
-                             retryBlock:(NSBlockOperation *)operation{
+-(void)handleChunkUploadWithRouteError:(DBFILESUploadSessionAppendError * _Nullable)routeError
+						   finishError:(DBFILESUploadSessionFinishError * _Nullable)finishError
+						   uploadError:(DBFILESUploadError * _Nullable)uploadError
+						  networkError:(DBRequestError * _Nullable)networkError
+							retryBlock:(NSBlockOperation *)operation {
     //Handle Internet Connection Lost
     if (networkError && networkError.nsError.code == -1009) {
         self.lastfailedOperation = operation;
@@ -538,8 +538,8 @@
         self.errorBlock(nil, YES);
         
         //Handle Route and Network Errors
-        if (lookupError) {
-            [DBErrorHandler handleUploadSessionLookupError:lookupError];
+        if (routeError) {
+            [DBErrorHandler handleUploadSessionAppendError:routeError];
         } else if (finishError) {
             [DBErrorHandler handleUploadSessionFinishError:finishError];
         } else if (uploadError) {
