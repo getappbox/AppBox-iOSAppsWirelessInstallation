@@ -155,6 +155,11 @@
         [self.project setIpaFullPath: url];
         [selectedFilePath setURL:url];
         [self updateViewState];
+		
+		//Get last time valid data
+		BOOL enable = selectedFilePath.URL.isIPA;
+		[textFieldEmail setStringValue: enable ? [UserData userEmail] : abEmptyString];
+		[textFieldMessage setStringValue: enable ? [UserData userMessage] : abEmptyString];
     }
 }
 
@@ -197,19 +202,17 @@
         if ([[UserData userEmail] isEqualToString:abEmptyString]){
             [UserData setUserEmail:sender.stringValue];
         }
-    }else if (sender.stringValue.length > 0){
+    } else if (sender.stringValue.length > 0) {
         [MailHandler showInvalidEmailAddressAlert];
     }
 }
 
 //developer message text field
 - (IBAction)textFieldDevMessageValueChanged:(NSTextField *)sender {
-    if (sender.stringValue.length > 0){
-        if ([[UserData userMessage] isEqualToString:abEmptyString]) {
-            [UserData setUserMessage:sender.stringValue];
-        }
-        [self.project setPersonalMessage:sender.stringValue];
-    }
+	if ([[UserData userMessage] isEqualToString:abEmptyString]) {
+		[UserData setUserMessage:sender.stringValue];
+	}
+	[self.project setPersonalMessage:sender.stringValue];
 }
 
 #pragma mark → Final Action Button (Build/IPA/CI)
@@ -313,10 +316,6 @@
 	//Enable text fields
 	[textFieldEmail setEnabled:enable];
 	[textFieldMessage setEnabled:enable];
-	
-	//Get last time valid data
-	[textFieldEmail setStringValue: enable ? [UserData userEmail] : abEmptyString];
-	[textFieldMessage setStringValue: enable ? [UserData userMessage] : abEmptyString];
 	
 	//Just for confirm changes
 	[self textFieldMailValueChanged:textFieldEmail];
