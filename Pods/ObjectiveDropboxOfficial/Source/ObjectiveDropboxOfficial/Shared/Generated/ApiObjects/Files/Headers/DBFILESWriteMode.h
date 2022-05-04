@@ -48,9 +48,14 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteModeTag){
     DBFILESWriteModeOverwrite,
 
     /// Overwrite if the given "rev" matches the existing file's "rev". The
-    /// autorename strategy is to append the string "conflicted copy" to the
-    /// file name. For example, "document.txt" might become "document
-    /// (conflicted copy).txt" or "document (Panda's conflicted copy).txt".
+    /// supplied value should be the latest known "rev" of the file, for
+    /// example, from FileMetadata, from when the file was last downloaded by
+    /// the app. This will cause the file on the Dropbox servers to be
+    /// overwritten if the given "rev" matches the existing file's current "rev"
+    /// on the Dropbox servers. The autorename strategy is to append the string
+    /// "conflicted copy" to the file name. For example, "document.txt" might
+    /// become "document (conflicted copy).txt" or "document (Panda's conflicted
+    /// copy).txt".
     DBFILESWriteModeUpdate,
 
 };
@@ -58,7 +63,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteModeTag){
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBFILESWriteModeTag tag;
 
-/// Overwrite if the given "rev" matches the existing file's "rev". The
+/// Overwrite if the given "rev" matches the existing file's "rev". The supplied
+/// value should be the latest known "rev" of the file, for example, from
+/// FileMetadata, from when the file was last downloaded by the app. This will
+/// cause the file on the Dropbox servers to be overwritten if the given "rev"
+/// matches the existing file's current "rev" on the Dropbox servers. The
 /// autorename strategy is to append the string "conflicted copy" to the file
 /// name. For example, "document.txt" might become "document (conflicted
 /// copy).txt" or "document (Panda's conflicted copy).txt". @note Ensure the
@@ -93,14 +102,22 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESWriteModeTag){
 /// Initializes union class with tag state of "update".
 ///
 /// Description of the "update" tag state: Overwrite if the given "rev" matches
-/// the existing file's "rev". The autorename strategy is to append the string
-/// "conflicted copy" to the file name. For example, "document.txt" might become
-/// "document (conflicted copy).txt" or "document (Panda's conflicted
+/// the existing file's "rev". The supplied value should be the latest known
+/// "rev" of the file, for example, from FileMetadata, from when the file was
+/// last downloaded by the app. This will cause the file on the Dropbox servers
+/// to be overwritten if the given "rev" matches the existing file's current
+/// "rev" on the Dropbox servers. The autorename strategy is to append the
+/// string "conflicted copy" to the file name. For example, "document.txt" might
+/// become "document (conflicted copy).txt" or "document (Panda's conflicted
 /// copy).txt".
 ///
 /// @param update Overwrite if the given "rev" matches the existing file's
-/// "rev". The autorename strategy is to append the string "conflicted copy" to
-/// the file name. For example, "document.txt" might become "document
+/// "rev". The supplied value should be the latest known "rev" of the file, for
+/// example, from FileMetadata, from when the file was last downloaded by the
+/// app. This will cause the file on the Dropbox servers to be overwritten if
+/// the given "rev" matches the existing file's current "rev" on the Dropbox
+/// servers. The autorename strategy is to append the string "conflicted copy"
+/// to the file name. For example, "document.txt" might become "document
 /// (conflicted copy).txt" or "document (Panda's conflicted copy).txt".
 ///
 /// @return An initialized instance.

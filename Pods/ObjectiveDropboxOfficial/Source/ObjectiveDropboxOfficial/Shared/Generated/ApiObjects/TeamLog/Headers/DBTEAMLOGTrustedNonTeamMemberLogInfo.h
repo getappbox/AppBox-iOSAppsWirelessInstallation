@@ -43,12 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param trustedNonTeamMemberType Indicates the type of the member of a
 /// trusted team.
-/// @param accountId User unique ID. Might be missing due to historical data
-/// gap.
-/// @param displayName User display name. Might be missing due to historical
-/// data gap.
-/// @param email User email address. Might be missing due to historical data
-/// gap.
+/// @param accountId User unique ID.
+/// @param displayName User display name.
+/// @param email User email address.
 /// @param team Details about this user's trusted team.
 ///
 /// @return An initialized instance.

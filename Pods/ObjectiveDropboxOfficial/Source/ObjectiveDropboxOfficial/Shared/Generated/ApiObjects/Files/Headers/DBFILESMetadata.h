@@ -47,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// `parentSharedFolderId` in `DBFILESFolderSharingInfo` instead.
 @property (nonatomic, readonly, copy, nullable) NSString *parentSharedFolderId;
 
+/// The preview URL of the file.
+@property (nonatomic, readonly, copy, nullable) NSString *previewUrl;
+
 #pragma mark - Constructors
 
 ///
@@ -66,13 +69,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param parentSharedFolderId Please use `parentSharedFolderId` in
 /// `DBFILESFileSharingInfo` or `parentSharedFolderId` in
 /// `DBFILESFolderSharingInfo` instead.
+/// @param previewUrl The preview URL of the file.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithName:(NSString *)name
                    pathLower:(nullable NSString *)pathLower
                  pathDisplay:(nullable NSString *)pathDisplay
-        parentSharedFolderId:(nullable NSString *)parentSharedFolderId;
+        parentSharedFolderId:(nullable NSString *)parentSharedFolderId
+                  previewUrl:(nullable NSString *)previewUrl;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

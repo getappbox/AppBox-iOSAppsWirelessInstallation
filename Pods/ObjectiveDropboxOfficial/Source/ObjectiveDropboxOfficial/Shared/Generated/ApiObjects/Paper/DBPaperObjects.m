@@ -640,20 +640,28 @@
   switch (_tag) {
   case DBPAPERAddPaperDocUserResultSuccess:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultUnknownError:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultSharingOutsideTeamDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultDailyLimitReached:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultUserIsOwner:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultFailedUserDataRetrieval:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultPermissionAlreadyGranted:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERAddPaperDocUserResultOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -957,8 +965,10 @@
   switch (_tag) {
   case DBPAPERPaperApiBaseErrorInsufficientPermissions:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperApiBaseErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1123,10 +1133,13 @@
   switch (_tag) {
   case DBPAPERDocLookupErrorInsufficientPermissions:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERDocLookupErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERDocLookupErrorDocNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1310,12 +1323,16 @@
   switch (_tag) {
   case DBPAPERDocSubscriptionLevelDefault_:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERDocSubscriptionLevelIgnore:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERDocSubscriptionLevelEvery:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERDocSubscriptionLevelNoEmail:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1496,10 +1513,13 @@
   switch (_tag) {
   case DBPAPERExportFormatHtml:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERExportFormatMarkdown:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERExportFormatOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1762,8 +1782,10 @@
   switch (_tag) {
   case DBPAPERFolderSharingPolicyTypeTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERFolderSharingPolicyTypeInviteOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1946,12 +1968,16 @@
   switch (_tag) {
   case DBPAPERFolderSubscriptionLevelNone:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERFolderSubscriptionLevelActivityOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERFolderSubscriptionLevelDailyEmails:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERFolderSubscriptionLevelWeeklyEmails:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2287,12 +2313,16 @@
   switch (_tag) {
   case DBPAPERImportFormatHtml:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERImportFormatMarkdown:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERImportFormatPlainText:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERImportFormatOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2578,8 +2608,10 @@
   switch (_tag) {
   case DBPAPERListDocsCursorErrorCursorError:
     result = prime * result + [self.cursorError hash];
+    break;
   case DBPAPERListDocsCursorErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2980,10 +3012,13 @@
   switch (_tag) {
   case DBPAPERListPaperDocsFilterByDocsAccessed:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsFilterByDocsCreated:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsFilterByOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3294,12 +3329,16 @@
   switch (_tag) {
   case DBPAPERListPaperDocsSortByAccessed:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsSortByModified:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsSortByCreated:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsSortByOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3475,10 +3514,13 @@
   switch (_tag) {
   case DBPAPERListPaperDocsSortOrderAscending:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsSortOrderDescending:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListPaperDocsSortOrderOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3675,12 +3717,16 @@
   switch (_tag) {
   case DBPAPERListUsersCursorErrorInsufficientPermissions:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListUsersCursorErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListUsersCursorErrorDocNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERListUsersCursorErrorCursorError:
     result = prime * result + [self.cursorError hash];
+    break;
   }
 
   return prime * result;
@@ -4645,14 +4691,19 @@
   switch (_tag) {
   case DBPAPERPaperApiCursorErrorExpiredCursor:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperApiCursorErrorInvalidCursor:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperApiCursorErrorWrongUserInCursor:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperApiCursorErrorReset:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperApiCursorErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4994,16 +5045,22 @@
   switch (_tag) {
   case DBPAPERPaperDocCreateErrorInsufficientPermissions:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocCreateErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocCreateErrorContentMalformed:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocCreateErrorFolderNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocCreateErrorDocLengthExceeded:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocCreateErrorImageSizeExceeded:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -5540,10 +5597,13 @@
   switch (_tag) {
   case DBPAPERPaperDocPermissionLevelEdit:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocPermissionLevelViewAndComment:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocPermissionLevelOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -6038,22 +6098,31 @@
   switch (_tag) {
   case DBPAPERPaperDocUpdateErrorInsufficientPermissions:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorDocNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorContentMalformed:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorRevisionMismatch:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorDocLengthExceeded:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorImageSizeExceeded:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorDocArchived:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdateErrorDocDeleted:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -6273,12 +6342,16 @@
   switch (_tag) {
   case DBPAPERPaperDocUpdatePolicyAppend:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdatePolicyPrepend:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdatePolicyOverwriteAll:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperDocUpdatePolicyOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -6601,12 +6674,16 @@
   switch (_tag) {
   case DBPAPERPaperFolderCreateErrorInsufficientPermissions:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperFolderCreateErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperFolderCreateErrorFolderNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERPaperFolderCreateErrorInvalidFolderId:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -7121,10 +7198,13 @@
   switch (_tag) {
   case DBPAPERSharingTeamPolicyTypePeopleWithLinkCanEdit:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERSharingTeamPolicyTypePeopleWithLinkCanViewAndComment:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERSharingTeamPolicyTypeInviteOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -7314,12 +7394,16 @@
   switch (_tag) {
   case DBPAPERSharingPublicPolicyTypePeopleWithLinkCanEdit:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERSharingPublicPolicyTypePeopleWithLinkCanViewAndComment:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERSharingPublicPolicyTypeInviteOnly:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERSharingPublicPolicyTypeDisabled:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -7611,10 +7695,13 @@
   switch (_tag) {
   case DBPAPERUserOnPaperDocFilterVisited:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERUserOnPaperDocFilterShared:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBPAPERUserOnPaperDocFilterOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;

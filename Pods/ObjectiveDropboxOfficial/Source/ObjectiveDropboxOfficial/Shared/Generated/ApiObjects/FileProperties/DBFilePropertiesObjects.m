@@ -236,10 +236,13 @@
   switch (_tag) {
   case DBFILEPROPERTIESTemplateErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESTemplateErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESTemplateErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -463,14 +466,19 @@
   switch (_tag) {
   case DBFILEPROPERTIESPropertiesErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESPropertiesErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESPropertiesErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESPropertiesErrorPath:
     result = prime * result + [self.path hash];
+    break;
   case DBFILEPROPERTIESPropertiesErrorUnsupportedFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -751,20 +759,28 @@
   switch (_tag) {
   case DBFILEPROPERTIESInvalidPropertyGroupErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorPath:
     result = prime * result + [self.path hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorUnsupportedFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorPropertyFieldTooLarge:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorDoesNotFitTemplate:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESInvalidPropertyGroupErrorDuplicatePropertyGroups:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1076,22 +1092,31 @@
   switch (_tag) {
   case DBFILEPROPERTIESAddPropertiesErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorPath:
     result = prime * result + [self.path hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorUnsupportedFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorPropertyFieldTooLarge:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorDoesNotFitTemplate:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorDuplicatePropertyGroups:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESAddPropertiesErrorPropertyGroupAlreadyExists:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -1980,8 +2005,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESLogicalOperatorOrOperator:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESLogicalOperatorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2131,8 +2158,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESLookUpPropertiesErrorPropertyGroupNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESLookUpPropertiesErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2349,16 +2378,22 @@
   switch (_tag) {
   case DBFILEPROPERTIESLookupErrorMalformedPath:
     result = prime * result + [self.malformedPath hash];
+    break;
   case DBFILEPROPERTIESLookupErrorNotFound:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESLookupErrorNotFile:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESLookupErrorNotFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESLookupErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESLookupErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -2617,18 +2652,25 @@
   switch (_tag) {
   case DBFILEPROPERTIESModifyTemplateErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESModifyTemplateErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESModifyTemplateErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESModifyTemplateErrorConflictingPropertyNames:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESModifyTemplateErrorTooManyProperties:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESModifyTemplateErrorTooManyTemplates:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESModifyTemplateErrorTemplateAttributeTooLarge:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3158,8 +3200,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESPropertiesSearchContinueErrorReset:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESPropertiesSearchContinueErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3323,8 +3367,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESPropertiesSearchErrorPropertyGroupLookup:
     result = prime * result + [self.propertyGroupLookup hash];
+    break;
   case DBFILEPROPERTIESPropertiesSearchErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -3630,8 +3676,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESPropertiesSearchModeFieldName:
     result = prime * result + [self.fieldName hash];
+    break;
   case DBFILEPROPERTIESPropertiesSearchModeOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4542,8 +4590,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESPropertyTypeString:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESPropertyTypeOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -4909,16 +4959,22 @@
   switch (_tag) {
   case DBFILEPROPERTIESRemovePropertiesErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESRemovePropertiesErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESRemovePropertiesErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESRemovePropertiesErrorPath:
     result = prime * result + [self.path hash];
+    break;
   case DBFILEPROPERTIESRemovePropertiesErrorUnsupportedFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESRemovePropertiesErrorPropertyGroupLookup:
     result = prime * result + [self.propertyGroupLookup hash];
+    break;
   }
 
   return prime * result;
@@ -5212,8 +5268,10 @@
   switch (_tag) {
   case DBFILEPROPERTIESTemplateFilterBaseFilterSome:
     result = prime * result + [self.filterSome hash];
+    break;
   case DBFILEPROPERTIESTemplateFilterBaseOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -5397,10 +5455,13 @@
   switch (_tag) {
   case DBFILEPROPERTIESTemplateFilterFilterSome:
     result = prime * result + [self.filterSome hash];
+    break;
   case DBFILEPROPERTIESTemplateFilterOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESTemplateFilterFilterNone:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -5578,10 +5639,13 @@
   switch (_tag) {
   case DBFILEPROPERTIESTemplateOwnerTypeUser:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESTemplateOwnerTypeTeam:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESTemplateOwnerTypeOther:
     result = prime * result + [[self tagName] hash];
+    break;
   }
 
   return prime * result;
@@ -5994,22 +6058,31 @@
   switch (_tag) {
   case DBFILEPROPERTIESUpdatePropertiesErrorTemplateNotFound:
     result = prime * result + [self.templateNotFound hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorRestrictedContent:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorOther:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorPath:
     result = prime * result + [self.path hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorUnsupportedFolder:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorPropertyFieldTooLarge:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorDoesNotFitTemplate:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorDuplicatePropertyGroups:
     result = prime * result + [[self tagName] hash];
+    break;
   case DBFILEPROPERTIESUpdatePropertiesErrorPropertyGroupLookup:
     result = prime * result + [self.propertyGroupLookup hash];
+    break;
   }
 
   return prime * result;

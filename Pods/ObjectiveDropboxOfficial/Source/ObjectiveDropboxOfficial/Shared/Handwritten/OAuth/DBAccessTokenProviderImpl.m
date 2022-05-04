@@ -82,7 +82,7 @@
 /// Refresh if it's about to expire (5 minutes from expiration) or already expired.
 - (BOOL)db_shouldRefresh {
   NSTimeInterval expirationTimestamp = _token.tokenExpirationTimestamp;
-  if (!expirationTimestamp) {
+  if (expirationTimestamp == 0) {
     return NO;
   }
 

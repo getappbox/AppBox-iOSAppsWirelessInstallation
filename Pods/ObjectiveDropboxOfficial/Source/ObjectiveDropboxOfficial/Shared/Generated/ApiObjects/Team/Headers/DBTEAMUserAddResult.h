@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Result of trying to add secondary emails to a user. 'success' is the only
 /// value indicating that a user was successfully retrieved for adding secondary
 /// emails. The other values explain the type of error that occurred, and
-/// include the user for which the error occured.
+/// include the user for which the error occurred.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

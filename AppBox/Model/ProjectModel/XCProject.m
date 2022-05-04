@@ -18,7 +18,6 @@
         self.keepSameLink = @0;
         self.emails = abEmptyString;
         self.buildType = abEmptyString;
-        self.selectedSchemes = abEmptyString;
         self.personalMessage = abEmptyString;
     }
     return self;
@@ -39,7 +38,7 @@
     //TODO: Upload ICONS
     NSMutableDictionary *iconDict = [[NSMutableDictionary alloc] init];
     [iconDict setValue:@"display-image" forKey:@"kind"];
-    [iconDict setValue:NO forKey:@"needs-shine"];
+    [iconDict setValue:@NO forKey:@"needs-shine"];
     [iconDict setValue:@"" forKey:@"url"];
     
     NSMutableDictionary *metadataDict = [[NSMutableDictionary alloc] init];
@@ -69,49 +68,6 @@
     }
 }
 
-//Create export options plist for archive and upload
-- (BOOL)createExportOptionPlist{
-    [self createBuildRelatedPathsAndIsNew:YES];
-    NSMutableDictionary *exportOption = [[NSMutableDictionary alloc] init];
-    [exportOption setValue:self.teamId forKey:@"teamID"];
-    [exportOption setValue:self.buildType forKey:@"method"];
-    [exportOption setValue:[NSNumber numberWithBool:[UserData uploadBitcode]] forKey:@"uploadBitcode"];
-    [exportOption setValue:[NSNumber numberWithBool:[UserData uploadSymbols]] forKey:@"uploadSymbols"];
-    [exportOption setValue:[NSNumber numberWithBool:[UserData compileBitcode]] forKey:@"compileBitcode"];
-    [exportOption setValue:@"Production" forKey:@"iCloudContainerEnvironment"];
-    [exportOption setValue:@"automatic" forKey:@"signingStyle"];
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Export Options - %@", exportOption]];
-    return [exportOption writeToFile:[self.exportOptionsPlistPath.resourceSpecifier stringByRemovingPercentEncoding] atomically:YES];
-}
-
-//Create all path required during archive and upload
-- (void)createBuildRelatedPathsAndIsNew:(BOOL)isNew{
-    if(isNew || _buildUUIDDirectory == nil){
-        //Current Time as UUID
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"dd-MM-yyyy-HH-mm-ss"];
-        NSString *currentTime = [dateFormat stringFromDate:[[NSDate alloc] init]];
-        
-        //Build UUID Path
-        NSString *buildUUIDPath = [_buildDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@",self.name, currentTime]];
-         NSString* escapedBuildUUIDPath = [buildUUIDPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-        _buildUUIDDirectory = [NSURL URLWithString:escapedBuildUUIDPath];
-        [[NSFileManager defaultManager] createDirectoryAtPath:buildUUIDPath withIntermediateDirectories:NO attributes:nil error:nil];
-        
-        //Archive Path
-        NSString *archivePath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.xcarchive",self.name]];
-        _buildArchivePath =  [NSURL URLWithString:archivePath];
-        
-        //IPA Path
-        NSString *ipaPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.ipa", self.selectedSchemes]];
-        _ipaFullPath = [NSURL URLWithString:[ipaPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]]];
-        
-        //Export Option Plist
-        NSString *exportOptionPlistPath = [_buildUUIDDirectory.resourceSpecifier stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-ExportOptions.plist", self.name]];
-        _exportOptionsPlistPath = [NSURL URLWithString:exportOptionPlistPath];
-    }
-}
-
 //validate info plist for current project
 - (BOOL)isValidProjectInfoPlist{
     if (self.ipaInfoPlist == nil){
@@ -131,23 +87,16 @@
     return _uuid;
 }
 
-- (NSURL *)buildArchivePath{
-    [self createBuildRelatedPathsAndIsNew:NO];
-    return _buildArchivePath;
-}
-
 -(ABPProject *)abpProject{
     ABPProject *project = [[ABPProject alloc] init];
     [project setName:self.name];
     [project setVersion:self.version];
     [project setBuild:self.build];
     [project setIdentifer:self.identifer];
-    [project setTeamId:self.teamId];
     [project setBuildType:self.buildType];
     [project setIpaFileSize:self.ipaFileSize];
     [project setMiniOSVersion:self.miniOSVersion];
     [project setSupportedDevice:self.supportedDevice];
-    [project setSelectedSchemes:self.selectedSchemes];
     
     [project setIsKeepSameLinkEnabled:self.isKeepSameLinkEnabled];
     [project setUniquelinkShareableURL:self.uniquelinkShareableURL];
@@ -156,7 +105,6 @@
     [project setAppShortShareableURL:self.appShortShareableURL];
     
     [project setEmails:self.emails];
-    [project setSubjectPrefix:self.subjectPrefix];
     [project setPersonalMessage:self.personalMessage];
     [project setDbManager:[Common currentDBManager]];
     
@@ -181,11 +129,6 @@
 
 - (void)setName:(NSString *)name{
     _name = [name stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
-}
-
--(void)setProjectFullPath:(NSURL *)projectFullPath{
-    _projectFullPath = projectFullPath;
-    [self setRootDirectory: [Common getFileDirectoryForFilePath:projectFullPath]];
 }
 
 - (void)setIpaInfoPlist:(NSDictionary *)ipaInfoPlist{
@@ -225,7 +168,6 @@
 -(void)setMobileProvision:(MobileProvision *)mobileProvision{
     _mobileProvision = mobileProvision;
     if (self.mobileProvision){
-        if (!self.teamId) self.teamId = self.mobileProvision.teamId;
         if (!self.buildType) self.buildType = self.mobileProvision.buildType;
     }
 }
@@ -250,16 +192,6 @@
         [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",validBundleDirectory,FILE_NAME_UNIQUE_JSON]]];
     } else {
         [self setDbAppInfoJSONFullPath:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",toPath, FILE_NAME_UNIQUE_JSON]]];
-    }
-}
-
-- (void)setBuildListInfo:(NSDictionary *)buildListInfo{
-    if ([buildListInfo.allKeys containsObject:@"project"]) {
-        _buildListInfo = buildListInfo;
-        NSDictionary *projectInfo = [buildListInfo valueForKey:@"project"];
-        [self setName: [projectInfo valueForKey:@"name"]];
-        [self setSchemes: [projectInfo valueForKey:@"schemes"]];
-        [self setTargets: [projectInfo valueForKey:@"targets"]];
     }
 }
 

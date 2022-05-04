@@ -30,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Full constructor.
 ///
 /// @param sharedApplication The `NSWorkspace` with which to render the OAuth flow.
-/// @param controller The `NSViewController` with which to render the OAuth flow.
+/// @param controller The `NSViewController` with which to render the OAuth flow. The controller reference is weakly
+/// held.
 /// @param openURL A wrapper around app-extension unsafe `openURL` call.
 ///
 /// @return An initialized instance.

@@ -120,6 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param parentSharedFolderId Please use `parentSharedFolderId` in
 /// `DBFILESFileSharingInfo` or `parentSharedFolderId` in
 /// `DBFILESFolderSharingInfo` instead.
+/// @param previewUrl The preview URL of the file.
 /// @param mediaInfo Additional information if the file is a photo or video.
 /// This field will not be set on entries returned by `listFolder`,
 /// `listFolderContinue`, or `getThumbnailBatch`, starting December 2, 2019.
@@ -154,6 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
                    pathLower:(nullable NSString *)pathLower
                  pathDisplay:(nullable NSString *)pathDisplay
         parentSharedFolderId:(nullable NSString *)parentSharedFolderId
+                  previewUrl:(nullable NSString *)previewUrl
                    mediaInfo:(nullable DBFILESMediaInfo *)mediaInfo
                  symlinkInfo:(nullable DBFILESSymlinkInfo *)symlinkInfo
                  sharingInfo:(nullable DBFILESFileSharingInfo *)sharingInfo

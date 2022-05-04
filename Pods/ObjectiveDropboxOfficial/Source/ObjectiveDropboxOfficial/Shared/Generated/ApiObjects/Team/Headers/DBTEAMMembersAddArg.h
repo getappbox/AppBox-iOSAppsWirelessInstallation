@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DBSerializableProtocol.h"
+#import "DBTEAMMembersAddArgBase.h"
 
 @class DBTEAMMemberAddArg;
 @class DBTEAMMembersAddArg;
@@ -22,15 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// deserialize instance methods), which is required for all Obj-C SDK API route
 /// objects.
 ///
-@interface DBTEAMMembersAddArg : NSObject <DBSerializable, NSCopying>
+@interface DBTEAMMembersAddArg : DBTEAMMembersAddArgBase <DBSerializable, NSCopying>
 
 #pragma mark - Instance fields
 
 /// Details of new members to be added to the team.
 @property (nonatomic, readonly) NSArray<DBTEAMMemberAddArg *> *dNewMembers;
-
-/// Whether to force the add to happen asynchronously.
-@property (nonatomic, readonly) NSNumber *forceAsync;
 
 #pragma mark - Constructors
 
@@ -54,8 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return An initialized instance.
 ///
 - (instancetype)initWithDNewMembers:(NSArray<DBTEAMMemberAddArg *> *)dNewMembers;
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

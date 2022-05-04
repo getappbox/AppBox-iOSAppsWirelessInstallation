@@ -7,8 +7,6 @@
 //
 
 #import "UploadRecord+CoreDataClass.h"
-#import "Project+CoreDataClass.h"
-
 
 @implementation UploadRecord
 
@@ -29,9 +27,6 @@
     }
     if (self.build) {
         xcProject.build = self.build;
-    }
-    if (self.teamId) {
-        xcProject.teamId = self.teamId;
     }
     if (self.buildType){
         xcProject.buildType = self.buildType;
@@ -65,16 +60,10 @@
     
     //Keep Same Link
     xcProject.isKeepSameLinkEnabled = self.keepSameLink.boolValue;
-    if (self.buildScheme){
-        xcProject.selectedSchemes = self.buildScheme;
-    }
-    
+
     //Local Path
     if (self.localBuildPath) {
         xcProject.ipaFullPath = [NSURL fileURLWithPath:self.localBuildPath];
-    }
-    if (self.projectPath){
-        xcProject.projectFullPath = [NSURL fileURLWithPath:self.projectPath];
     }
     
     return xcProject;

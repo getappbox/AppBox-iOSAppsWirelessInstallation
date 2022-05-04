@@ -33,10 +33,33 @@ NS_ASSUME_NONNULL_BEGIN
 /// Contains the path and other optional modifiers for the commit.
 @property (nonatomic, readonly) DBFILESCommitInfo *commit;
 
+/// A hash of the file content uploaded in this call. If provided and the
+/// uploaded content does not match this hash, an error will be returned. For
+/// more information see our Content hash
+/// https://www.dropbox.com/developers/reference/content-hash page.
+@property (nonatomic, readonly, copy, nullable) NSString *contentHash;
+
 #pragma mark - Constructors
 
 ///
 /// Full constructor for the struct (exposes all instance variables).
+///
+/// @param cursor Contains the upload session ID and the offset.
+/// @param commit Contains the path and other optional modifiers for the commit.
+/// @param contentHash A hash of the file content uploaded in this call. If
+/// provided and the uploaded content does not match this hash, an error will be
+/// returned. For more information see our Content hash
+/// https://www.dropbox.com/developers/reference/content-hash page.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithCursor:(DBFILESUploadSessionCursor *)cursor
+                        commit:(DBFILESCommitInfo *)commit
+                   contentHash:(nullable NSString *)contentHash;
+
+///
+/// Convenience constructor (exposes only non-nullable instance variables with
+/// no default value).
 ///
 /// @param cursor Contains the upload session ID and the offset.
 /// @param commit Contains the path and other optional modifiers for the commit.

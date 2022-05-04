@@ -11,7 +11,6 @@
 #import "SelectAccountCellView.h"
 
 typedef enum : NSUInteger {
-    AccountTypeITC,
     AccountTypeDropBox
 } AccountType;
 

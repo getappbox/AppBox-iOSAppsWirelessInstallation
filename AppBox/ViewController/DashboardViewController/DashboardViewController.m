@@ -149,11 +149,6 @@ typedef enum : NSUInteger {
         }
     }
     
-    //Scheme
-    else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnScheme]) {
-        [cell.textField setStringValue:uploadRecord.buildScheme == nil ? @"N/A" : uploadRecord.buildScheme];
-    }
-    
     //TeamId
     else if (tableColumn == [tableView.tableColumns objectAtIndex:DashBoardColumnTeamId]){
         if (uploadRecord.provisioningProfile && uploadRecord.provisioningProfile.teamId && uploadRecord.provisioningProfile.teamName) {
@@ -235,7 +230,8 @@ typedef enum : NSUInteger {
     UploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
         UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:NO]) {
+		BOOL isDirectory = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:uploadRecord.localBuildPath isDirectory:&isDirectory]) {
             NSURL *fileURL = [NSURL fileURLWithPath:uploadRecord.localBuildPath];
             [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[fileURL]];
         } else {

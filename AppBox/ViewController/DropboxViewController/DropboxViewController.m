@@ -8,11 +8,6 @@
 
 #import "DropboxViewController.h"
 
-@interface DropboxViewController ()
-
-- (IBAction)buttonQuitTapped:(NSButton *)sender;
-
-@end
 
 @implementation DropboxViewController
 
@@ -24,20 +19,26 @@
     
     //DB Authentication Notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoggedInNotification:) name:abDropBoxLoggedInNotification object:nil];
+	
+	//Set quit button title
+	[buttonQuit setTitle:[UserData isLoggedIn] ? @"Cancel" : @"Quit"];
 }
 
 - (IBAction)buttonConnectDropboxTapped:(NSButton *)sender {
     [EventTracker logEventWithType:LogEventTypeAuthDropbox];
-    //Authenticate user
-    [DBClientsManager authorizeFromControllerDesktop:[NSWorkspace sharedWorkspace] controller:self openURL:^(NSURL * _Nonnull url) {
-        [[NSWorkspace sharedWorkspace] openURL:url];
-    }];
+    
+	//Authenticate user
+	[DBClientsManager authorizeFromControllerDesktopV2:[NSWorkspace sharedWorkspace] controller:self loadingStatusDelegate:nil openURL:^(NSURL * _Nonnull url) {
+		[[NSWorkspace sharedWorkspace] openURL:url];
+	} scopeRequest:nil];
 }
 
 - (IBAction)buttonQuitTapped:(NSButton *)sender {
     [EventTracker logEventWithType:LogEventTypeExitWithoutAuth];
     [self dismissController:self];
-    [NSApp terminate:self];
+	if (![UserData isLoggedIn]) {
+		[NSApp terminate:self];
+	}
 }
 
 #pragma mark - Event Handler
