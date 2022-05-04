@@ -2,7 +2,7 @@
 //  UploadRecord+CoreDataProperties.m
 //  
 //
-//  Created by Vineet Choudhary on 11/10/18.
+//  Created by Vineet Choudhary on 25/09/21.
 //
 //
 
@@ -15,7 +15,6 @@
 }
 
 @dynamic build;
-@dynamic buildScheme;
 @dynamic buildType;
 @dynamic datetime;
 @dynamic dbAppInfoFullPath;
@@ -35,5 +34,6 @@
 @dynamic version;
 @dynamic project;
 @dynamic provisioningProfile;
+@dynamic service;
 
 @end

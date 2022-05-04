@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Result of trying to delete a secondary email address. 'success' is the only
 /// value indicating that a secondary email was successfully deleted. The other
 /// values explain the type of error that occurred, and include the email for
-/// which the error occured.
+/// which the error occurred.
 ///
 /// This class implements the `DBSerializable` protocol (serialize and
 /// deserialize instance methods), which is required for all Obj-C SDK API route

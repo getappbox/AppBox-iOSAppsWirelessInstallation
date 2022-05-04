@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Web session unique id. Might be missing due to historical data gap.
+/// Web session unique id.
 @property (nonatomic, readonly, nullable) DBTEAMLOGWebSessionLogInfo *sessionInfo;
 
 /// Information on the hosting device.
@@ -50,13 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param os Information on the hosting operating system.
 /// @param browser Information on the browser used for this web session.
 /// @param ipAddress The IP address of the last activity from this session.
-/// Might be missing due to historical data gap.
-/// @param created The time this session was created. Might be missing due to
-/// historical data gap.
-/// @param updated The time of the last activity from this session. Might be
-/// missing due to historical data gap.
-/// @param sessionInfo Web session unique id. Might be missing due to historical
-/// data gap.
+/// @param created The time this session was created.
+/// @param updated The time of the last activity from this session.
+/// @param sessionInfo Web session unique id.
 ///
 /// @return An initialized instance.
 ///

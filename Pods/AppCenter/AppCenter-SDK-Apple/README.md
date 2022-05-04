@@ -24,12 +24,6 @@ It is super easy to use App Center. Have a look at our [get started documentatio
 
 We are looking forward to your contributions via pull requests.
 
-To contribute to the SDK, please
-
-* install Xcode 11 on your Mac.
-* install [Jazzy](https://github.com/realm/jazzy) to be able to generate documentation.
-* install `clang-format` for code formatting via [Homebrew](https://brew.sh) using the command `brew install clang-format`.
-
 ### 2.1 Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
@@ -37,10 +31,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 ### 2.2 Contributor License
 
 You must sign a [Contributor License Agreement](https://cla.microsoft.com/) before submitting your pull request. To complete the Contributor License Agreement (CLA), you will need to submit a request via the [form](https://cla.microsoft.com/) and then electronically sign the CLA when you receive the email containing the link to the document. You need to sign the CLA only once to cover submission to any Microsoft OSS project. 
-
-### 2.3 Code Formatting
-
-All Objective-C files follow LLVM coding style (with a few exceptions) and are formatted accordingly. To format your changes, make sure you have the `clang-format` tool. It can be installed with [Homebrew](https://brew.sh) using the command `brew install clang-format`. Once you have installed `clang-format`, run `./clang-format-changed-files.sh` from the repository root - this will format all files that have changes against the remote `develop` branch (it will also perform a `git fetch`).
 
 ## 3. Contact
 

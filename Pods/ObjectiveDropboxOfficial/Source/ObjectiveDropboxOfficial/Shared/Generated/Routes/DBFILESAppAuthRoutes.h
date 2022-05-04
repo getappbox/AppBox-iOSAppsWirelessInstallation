@@ -23,7 +23,9 @@
 @class DBFILEPROPERTIESTemplateError;
 @class DBFILEPROPERTIESTemplateFilterBase;
 @class DBFILEPROPERTIESUpdatePropertiesError;
+@class DBFILESAddTagError;
 @class DBFILESAlphaGetMetadataError;
+@class DBFILESBaseTagError;
 @class DBFILESCommitInfo;
 @class DBFILESCreateFolderBatchError;
 @class DBFILESCreateFolderBatchJobStatus;
@@ -55,12 +57,14 @@
 @class DBFILESGetCopyReferenceError;
 @class DBFILESGetCopyReferenceResult;
 @class DBFILESGetMetadataError;
+@class DBFILESGetTagsResult;
 @class DBFILESGetTemporaryLinkError;
 @class DBFILESGetTemporaryLinkResult;
 @class DBFILESGetTemporaryUploadLinkResult;
 @class DBFILESGetThumbnailBatchError;
 @class DBFILESGetThumbnailBatchResult;
 @class DBFILESGetThumbnailBatchResultEntry;
+@class DBFILESImportFormat;
 @class DBFILESListFolderContinueError;
 @class DBFILESListFolderError;
 @class DBFILESListFolderGetLatestCursorResult;
@@ -79,8 +83,15 @@
 @class DBFILESMediaInfo;
 @class DBFILESMetadata;
 @class DBFILESMinimalFileLinkMetadata;
+@class DBFILESMoveIntoFamilyError;
 @class DBFILESMoveIntoVaultError;
+@class DBFILESPaperCreateError;
+@class DBFILESPaperCreateResult;
+@class DBFILESPaperDocUpdatePolicy;
+@class DBFILESPaperUpdateError;
+@class DBFILESPaperUpdateResult;
 @class DBFILESPathOrLink;
+@class DBFILESPathToTags;
 @class DBFILESPreviewError;
 @class DBFILESPreviewResult;
 @class DBFILESRelocationBatchError;
@@ -93,6 +104,7 @@
 @class DBFILESRelocationError;
 @class DBFILESRelocationPath;
 @class DBFILESRelocationResult;
+@class DBFILESRemoveTagError;
 @class DBFILESRestoreError;
 @class DBFILESSaveCopyReferenceError;
 @class DBFILESSaveCopyReferenceResult;
@@ -119,12 +131,13 @@
 @class DBFILESThumbnailV2Error;
 @class DBFILESUnlockFileArg;
 @class DBFILESUploadError;
-@class DBFILESUploadErrorWithProperties;
+@class DBFILESUploadSessionAppendError;
 @class DBFILESUploadSessionCursor;
 @class DBFILESUploadSessionFinishArg;
 @class DBFILESUploadSessionFinishBatchJobStatus;
 @class DBFILESUploadSessionFinishBatchLaunch;
 @class DBFILESUploadSessionFinishBatchResult;
+@class DBFILESUploadSessionFinishBatchResultEntry;
 @class DBFILESUploadSessionFinishError;
 @class DBFILESUploadSessionLookupError;
 @class DBFILESUploadSessionOffsetError;
@@ -155,7 +168,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init:(id<DBTransportClient>)client;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -173,7 +187,8 @@ NS_ASSUME_NONNULL_BEGIN
                                                                                 destination:(NSURL *)destination;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -198,7 +213,8 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
       destination:(NSURL *)destination;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -222,7 +238,8 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
                                                                               byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -253,7 +270,8 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
     byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -265,7 +283,8 @@ getThumbnailV2Url:(DBFILESPathOrLink *)resource
     (DBFILESPathOrLink *)resource;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -284,7 +303,8 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
               mode:(nullable DBFILESThumbnailMode *)mode;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -302,7 +322,8 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
      byteOffsetEnd:(NSNumber *)byteOffsetEnd;
 
 ///
-/// Get a thumbnail for a file.
+/// Get a thumbnail for an image. This method currently supports files with the following file extensions: jpg, jpeg,
+/// png, tiff, tif, gif, webp, ppm and bmp. Photos that are larger than 20MB in size won't be converted to a thumbnail.
 ///
 /// @param resource Information specifying which file to preview. This could be a path to a file, a shared link pointing
 /// to a file, or a shared link pointing to a folder, with a relative path.
@@ -325,6 +346,89 @@ getThumbnailV2Data:(DBFILESPathOrLink *)resource
               mode:(nullable DBFILESThumbnailMode *)mode
    byteOffsetStart:(NSNumber *)byteOffsetStart
      byteOffsetEnd:(NSNumber *)byteOffsetEnd;
+
+///
+/// Starts returning the contents of a folder. If the result's `hasMore` in `DBFILESListFolderResult` field is true,
+/// call `listFolderContinue` with the returned `cursor` in `DBFILESListFolderResult` to retrieve more entries. If
+/// you're using `recursive` in `DBFILESListFolderArg` set to true to keep a local cache of the contents of a Dropbox
+/// account, iterate through each entry in order and process them as follows to keep your local state in sync: For each
+/// FileMetadata, store the new entry at the given path in your local state. If the required parent folders don't exist
+/// yet, create them. If there's already something else at the given path, replace it and remove all its children. For
+/// each FolderMetadata, store the new entry at the given path in your local state. If the required parent folders don't
+/// exist yet, create them. If there's already something else at the given path, replace it but leave the children as
+/// they are. Check the new entry's `readOnly` in `DBFILESFolderSharingInfo` and set all its children's read-only
+/// statuses to match. For each DeletedMetadata, if your local state has something at the given path, remove it and all
+/// its children. If there's nothing at the given path, ignore this entry. Note: auth.RateLimitError may be returned if
+/// multiple `listFolder` or `listFolderContinue` calls with same parameters are made simultaneously by same API app for
+/// same user. If your app implements retry logic, please hold off the retry until the previous request finishes.
+///
+/// @param path A unique identifier for the file.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESListFolderResult` object on success or a
+/// `DBFILESListFolderError` object on failure.
+///
+- (DBRpcTask<DBFILESListFolderResult *, DBFILESListFolderError *> *)listFolder:(NSString *)path;
+
+///
+/// Starts returning the contents of a folder. If the result's `hasMore` in `DBFILESListFolderResult` field is true,
+/// call `listFolderContinue` with the returned `cursor` in `DBFILESListFolderResult` to retrieve more entries. If
+/// you're using `recursive` in `DBFILESListFolderArg` set to true to keep a local cache of the contents of a Dropbox
+/// account, iterate through each entry in order and process them as follows to keep your local state in sync: For each
+/// FileMetadata, store the new entry at the given path in your local state. If the required parent folders don't exist
+/// yet, create them. If there's already something else at the given path, replace it and remove all its children. For
+/// each FolderMetadata, store the new entry at the given path in your local state. If the required parent folders don't
+/// exist yet, create them. If there's already something else at the given path, replace it but leave the children as
+/// they are. Check the new entry's `readOnly` in `DBFILESFolderSharingInfo` and set all its children's read-only
+/// statuses to match. For each DeletedMetadata, if your local state has something at the given path, remove it and all
+/// its children. If there's nothing at the given path, ignore this entry. Note: auth.RateLimitError may be returned if
+/// multiple `listFolder` or `listFolderContinue` calls with same parameters are made simultaneously by same API app for
+/// same user. If your app implements retry logic, please hold off the retry until the previous request finishes.
+///
+/// @param path A unique identifier for the file.
+/// @param recursive If true, the list folder operation will be applied recursively to all subfolders and the response
+/// will contain contents of all subfolders.
+/// @param includeMediaInfo If true, `mediaInfo` in `DBFILESFileMetadata` is set for photo and video. This parameter
+/// will no longer have an effect starting December 2, 2019.
+/// @param includeDeleted If true, the results will include entries for files and folders that used to exist but were
+/// deleted.
+/// @param includeHasExplicitSharedMembers If true, the results will include a flag for each file indicating whether or
+/// not  that file has any explicit members.
+/// @param includeMountedFolders If true, the results will include entries under mounted folders which includes app
+/// folder, shared folder and team folder.
+/// @param limit The maximum number of results to return per request. Note: This is an approximate number and there can
+/// be slightly more entries returned in some cases.
+/// @param sharedLink A shared link to list the contents of. If the link is password-protected, the password must be
+/// provided. If this field is present, `path` in `DBFILESListFolderArg` will be relative to root of the shared link.
+/// Only non-recursive mode is supported for shared link.
+/// @param includePropertyGroups If set to a valid list of template IDs, `propertyGroups` in `DBFILESFileMetadata` is
+/// set if there exists property data associated with the file and each of the listed templates.
+/// @param includeNonDownloadableFiles If true, include files that are not downloadable, i.e. Google Docs.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESListFolderResult` object on success or a
+/// `DBFILESListFolderError` object on failure.
+///
+- (DBRpcTask<DBFILESListFolderResult *, DBFILESListFolderError *> *)
+                     listFolder:(NSString *)path
+                      recursive:(nullable NSNumber *)recursive
+               includeMediaInfo:(nullable NSNumber *)includeMediaInfo
+                 includeDeleted:(nullable NSNumber *)includeDeleted
+includeHasExplicitSharedMembers:(nullable NSNumber *)includeHasExplicitSharedMembers
+          includeMountedFolders:(nullable NSNumber *)includeMountedFolders
+                          limit:(nullable NSNumber *)limit
+                     sharedLink:(nullable DBFILESSharedLink *)sharedLink
+          includePropertyGroups:(nullable DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+    includeNonDownloadableFiles:(nullable NSNumber *)includeNonDownloadableFiles;
+
+///
+/// Once a cursor has been retrieved from `listFolder`, use this to paginate through all files and retrieve updates to
+/// the folder, following the same rules as documented for `listFolder`.
+///
+/// @param cursor The cursor returned by your last call to `listFolder` or `listFolderContinue`.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESListFolderResult` object on success or a
+/// `DBFILESListFolderContinueError` object on failure.
+///
+- (DBRpcTask<DBFILESListFolderResult *, DBFILESListFolderContinueError *> *)listFolderContinue:(NSString *)cursor;
 
 @end
 

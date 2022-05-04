@@ -34,7 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// If true, the removed user will keep their copy of the folder after it's
 /// unshared, assuming it was mounted. Otherwise, it will be removed from their
-/// Dropbox. Also, this must be set to false when kicking a group.
+/// Dropbox. This must be set to false when removing a group, or when the folder
+/// is within a team folder or another shared folder.
 @property (nonatomic, readonly) NSNumber *leaveACopy;
 
 #pragma mark - Constructors
@@ -46,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param member The member to remove from the folder.
 /// @param leaveACopy If true, the removed user will keep their copy of the
 /// folder after it's unshared, assuming it was mounted. Otherwise, it will be
-/// removed from their Dropbox. Also, this must be set to false when kicking a
-/// group.
+/// removed from their Dropbox. This must be set to false when removing a group,
+/// or when the folder is within a team folder or another shared folder.
 ///
 /// @return An initialized instance.
 ///

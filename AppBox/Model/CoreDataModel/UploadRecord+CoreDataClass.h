@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 
 @class Project;
+@class ProvisioningProfile;
+@class AppBoxService;
 
 NS_ASSUME_NONNULL_BEGIN
 

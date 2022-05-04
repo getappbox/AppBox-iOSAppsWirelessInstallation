@@ -34,9 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// The `DBTEAMMemberAddResultTag` enum type represents the possible tag states
 /// with which the `DBTEAMMemberAddResult` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMemberAddResultTag){
-    /// Describes a user that was successfully added to the team.
-    DBTEAMMemberAddResultSuccess,
-
     /// Team is already full. The organization has no available licenses.
     DBTEAMMemberAddResultTeamLicenseLimit,
 
@@ -74,15 +71,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMemberAddResultTag){
     /// User creation has failed.
     DBTEAMMemberAddResultUserCreationFailed,
 
+    /// Describes a user that was successfully added to the team.
+    DBTEAMMemberAddResultSuccess,
+
 };
 
 /// Represents the union's current tag state.
 @property (nonatomic, readonly) DBTEAMMemberAddResultTag tag;
-
-/// Describes a user that was successfully added to the team. @note Ensure the
-/// `isSuccess` method returns true before accessing, otherwise a runtime
-/// exception will be raised.
-@property (nonatomic, readonly) DBTEAMTeamMemberInfo *success;
 
 /// Team is already full. The organization has no available licenses. @note
 /// Ensure the `isTeamLicenseLimit` method returns true before accessing,
@@ -135,19 +130,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMemberAddResultTag){
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly, copy) NSString *userCreationFailed;
 
-#pragma mark - Constructors
+/// Describes a user that was successfully added to the team. @note Ensure the
+/// `isSuccess` method returns true before accessing, otherwise a runtime
+/// exception will be raised.
+@property (nonatomic, readonly) DBTEAMTeamMemberInfo *success;
 
-///
-/// Initializes union class with tag state of "success".
-///
-/// Description of the "success" tag state: Describes a user that was
-/// successfully added to the team.
-///
-/// @param success Describes a user that was successfully added to the team.
-///
-/// @return An initialized instance.
-///
-- (instancetype)initWithSuccess:(DBTEAMTeamMemberInfo *)success;
+#pragma mark - Constructors
 
 ///
 /// Initializes union class with tag state of "team_license_limit".
@@ -283,19 +271,21 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMemberAddResultTag){
 ///
 - (instancetype)initWithUserCreationFailed:(NSString *)userCreationFailed;
 
+///
+/// Initializes union class with tag state of "success".
+///
+/// Description of the "success" tag state: Describes a user that was
+/// successfully added to the team.
+///
+/// @param success Describes a user that was successfully added to the team.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithSuccess:(DBTEAMTeamMemberInfo *)success;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
-
-///
-/// Retrieves whether the union's current tag state has value "success".
-///
-/// @note Call this method and ensure it returns true before accessing the
-/// `success` property, otherwise a runtime exception will be thrown.
-///
-/// @return Whether the union's current tag state has value "success".
-///
-- (BOOL)isSuccess;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -421,6 +411,16 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMMemberAddResultTag){
 /// "user_creation_failed".
 ///
 - (BOOL)isUserCreationFailed;
+
+///
+/// Retrieves whether the union's current tag state has value "success".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `success` property, otherwise a runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value "success".
+///
+- (BOOL)isSuccess;
 
 ///
 /// Retrieves string value of union's current tag state.

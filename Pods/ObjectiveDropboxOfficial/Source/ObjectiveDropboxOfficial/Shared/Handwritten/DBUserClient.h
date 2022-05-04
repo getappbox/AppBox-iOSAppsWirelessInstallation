@@ -10,6 +10,8 @@
 @class DBTransportDefaultClient;
 @class DBTransportDefaultConfig;
 @protocol DBAccessTokenProvider;
+@class DBAccessToken;
+@class DBOAuthManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -78,6 +80,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAccessTokenProvider:(id<DBAccessTokenProvider>)accessTokenProvider
                                    tokenUid:(nullable NSString *)tokenUid
                             transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
+
+///
+/// Convenience initializer.
+///
+/// @param accessToken An access token object.
+/// @param oauthManager The oauthManager instance.
+/// @param transportConfig A wrapper around the different parameters that can be set to change network calling behavior.
+/// `DBTransportDefaultConfig` offers a number of different constructors to customize networking settings.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAccessToken:(DBAccessToken *)accessToken
+                       oauthManager:(DBOAuthManager *)oauthManager
+                    transportConfig:(nullable DBTransportDefaultConfig *)transportConfig;
 
 /// Designated initializer.
 ///

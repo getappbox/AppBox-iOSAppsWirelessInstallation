@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// with which the `DBTEAMLOGPolicyType` union can exist.
 typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPolicyTypeTag){
     /// (no description).
+    DBTEAMLOGPolicyTypeDisposition,
+
+    /// (no description).
     DBTEAMLOGPolicyTypeRetention,
 
     /// (no description).
@@ -40,6 +43,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPolicyTypeTag){
 @property (nonatomic, readonly) DBTEAMLOGPolicyTypeTag tag;
 
 #pragma mark - Constructors
+
+///
+/// Initializes union class with tag state of "disposition".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithDisposition;
 
 ///
 /// Initializes union class with tag state of "retention".
@@ -58,6 +68,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPolicyTypeTag){
 - (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark - Tag state methods
+
+///
+/// Retrieves whether the union's current tag state has value "disposition".
+///
+/// @return Whether the union's current tag state has value "disposition".
+///
+- (BOOL)isDisposition;
 
 ///
 /// Retrieves whether the union's current tag state has value "retention".

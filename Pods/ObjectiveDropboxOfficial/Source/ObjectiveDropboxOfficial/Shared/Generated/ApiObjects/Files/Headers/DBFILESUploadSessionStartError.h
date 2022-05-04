@@ -34,6 +34,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionStartErrorTag){
     /// Can not start a closed concurrent upload session.
     DBFILESUploadSessionStartErrorConcurrentSessionCloseNotAllowed,
 
+    /// The request payload must be at most 150 MB.
+    DBFILESUploadSessionStartErrorPayloadTooLarge,
+
+    /// The content received by the Dropbox server in this call does not match
+    /// the provided content hash.
+    DBFILESUploadSessionStartErrorContentHashMismatch,
+
     /// (no description).
     DBFILESUploadSessionStartErrorOther,
 
@@ -67,6 +74,26 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionStartErrorTag){
 - (instancetype)initWithConcurrentSessionCloseNotAllowed;
 
 ///
+/// Initializes union class with tag state of "payload_too_large".
+///
+/// Description of the "payload_too_large" tag state: The request payload must
+/// be at most 150 MB.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithPayloadTooLarge;
+
+///
+/// Initializes union class with tag state of "content_hash_mismatch".
+///
+/// Description of the "content_hash_mismatch" tag state: The content received
+/// by the Dropbox server in this call does not match the provided content hash.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithContentHashMismatch;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -94,6 +121,23 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESUploadSessionStartErrorTag){
 /// "concurrent_session_close_not_allowed".
 ///
 - (BOOL)isConcurrentSessionCloseNotAllowed;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "payload_too_large".
+///
+/// @return Whether the union's current tag state has value "payload_too_large".
+///
+- (BOOL)isPayloadTooLarge;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "content_hash_mismatch".
+///
+/// @return Whether the union's current tag state has value
+/// "content_hash_mismatch".
+///
+- (BOOL)isContentHashMismatch;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

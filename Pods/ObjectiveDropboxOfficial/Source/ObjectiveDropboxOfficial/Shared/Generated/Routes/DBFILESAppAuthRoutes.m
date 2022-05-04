@@ -29,10 +29,12 @@
 #import "DBFILEPROPERTIESTemplateFilterBase.h"
 #import "DBFILEPROPERTIESUpdatePropertiesArg.h"
 #import "DBFILEPROPERTIESUpdatePropertiesError.h"
+#import "DBFILESAddTagArg.h"
+#import "DBFILESAddTagError.h"
 #import "DBFILESAlphaGetMetadataArg.h"
 #import "DBFILESAlphaGetMetadataError.h"
+#import "DBFILESBaseTagError.h"
 #import "DBFILESCommitInfo.h"
-#import "DBFILESCommitInfoWithProperties.h"
 #import "DBFILESCreateFolderArg.h"
 #import "DBFILESCreateFolderBatchArg.h"
 #import "DBFILESCreateFolderBatchError.h"
@@ -71,6 +73,8 @@
 #import "DBFILESGetCopyReferenceResult.h"
 #import "DBFILESGetMetadataArg.h"
 #import "DBFILESGetMetadataError.h"
+#import "DBFILESGetTagsArg.h"
+#import "DBFILESGetTagsResult.h"
 #import "DBFILESGetTemporaryLinkArg.h"
 #import "DBFILESGetTemporaryLinkError.h"
 #import "DBFILESGetTemporaryLinkResult.h"
@@ -80,6 +84,7 @@
 #import "DBFILESGetThumbnailBatchError.h"
 #import "DBFILESGetThumbnailBatchResult.h"
 #import "DBFILESGetThumbnailBatchResultEntry.h"
+#import "DBFILESImportFormat.h"
 #import "DBFILESListFolderArg.h"
 #import "DBFILESListFolderContinueArg.h"
 #import "DBFILESListFolderContinueError.h"
@@ -104,8 +109,18 @@
 #import "DBFILESMetadata.h"
 #import "DBFILESMinimalFileLinkMetadata.h"
 #import "DBFILESMoveBatchArg.h"
+#import "DBFILESMoveIntoFamilyError.h"
 #import "DBFILESMoveIntoVaultError.h"
+#import "DBFILESPaperContentError.h"
+#import "DBFILESPaperCreateArg.h"
+#import "DBFILESPaperCreateError.h"
+#import "DBFILESPaperCreateResult.h"
+#import "DBFILESPaperDocUpdatePolicy.h"
+#import "DBFILESPaperUpdateArg.h"
+#import "DBFILESPaperUpdateError.h"
+#import "DBFILESPaperUpdateResult.h"
 #import "DBFILESPathOrLink.h"
+#import "DBFILESPathToTags.h"
 #import "DBFILESPreviewArg.h"
 #import "DBFILESPreviewError.h"
 #import "DBFILESPreviewResult.h"
@@ -122,6 +137,8 @@
 #import "DBFILESRelocationError.h"
 #import "DBFILESRelocationPath.h"
 #import "DBFILESRelocationResult.h"
+#import "DBFILESRemoveTagArg.h"
+#import "DBFILESRemoveTagError.h"
 #import "DBFILESRestoreArg.h"
 #import "DBFILESRestoreError.h"
 #import "DBFILESRouteObjects.h"
@@ -154,15 +171,17 @@
 #import "DBFILESThumbnailV2Error.h"
 #import "DBFILESUnlockFileArg.h"
 #import "DBFILESUnlockFileBatchArg.h"
+#import "DBFILESUploadArg.h"
 #import "DBFILESUploadError.h"
-#import "DBFILESUploadErrorWithProperties.h"
 #import "DBFILESUploadSessionAppendArg.h"
+#import "DBFILESUploadSessionAppendError.h"
 #import "DBFILESUploadSessionCursor.h"
 #import "DBFILESUploadSessionFinishArg.h"
 #import "DBFILESUploadSessionFinishBatchArg.h"
 #import "DBFILESUploadSessionFinishBatchJobStatus.h"
 #import "DBFILESUploadSessionFinishBatchLaunch.h"
 #import "DBFILESUploadSessionFinishBatchResult.h"
+#import "DBFILESUploadSessionFinishBatchResultEntry.h"
 #import "DBFILESUploadSessionFinishError.h"
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
@@ -275,6 +294,42 @@
   DBFILESThumbnailV2Arg *arg =
       [[DBFILESThumbnailV2Arg alloc] initWithResource:resource format:format size:size mode:mode];
   return [self.client requestDownload:route arg:arg byteOffsetStart:byteOffsetStart byteOffsetEnd:byteOffsetEnd];
+}
+
+- (DBRpcTask *)listFolder:(NSString *)path {
+  DBRoute *route = DBFILESRouteObjects.DBFILESListFolder;
+  DBFILESListFolderArg *arg = [[DBFILESListFolderArg alloc] initWithPath:path];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)listFolder:(NSString *)path
+                          recursive:(NSNumber *)recursive
+                   includeMediaInfo:(NSNumber *)includeMediaInfo
+                     includeDeleted:(NSNumber *)includeDeleted
+    includeHasExplicitSharedMembers:(NSNumber *)includeHasExplicitSharedMembers
+              includeMountedFolders:(NSNumber *)includeMountedFolders
+                              limit:(NSNumber *)limit
+                         sharedLink:(DBFILESSharedLink *)sharedLink
+              includePropertyGroups:(DBFILEPROPERTIESTemplateFilterBase *)includePropertyGroups
+        includeNonDownloadableFiles:(NSNumber *)includeNonDownloadableFiles {
+  DBRoute *route = DBFILESRouteObjects.DBFILESListFolder;
+  DBFILESListFolderArg *arg = [[DBFILESListFolderArg alloc] initWithPath:path
+                                                               recursive:recursive
+                                                        includeMediaInfo:includeMediaInfo
+                                                          includeDeleted:includeDeleted
+                                         includeHasExplicitSharedMembers:includeHasExplicitSharedMembers
+                                                   includeMountedFolders:includeMountedFolders
+                                                                   limit:limit
+                                                              sharedLink:sharedLink
+                                                   includePropertyGroups:includePropertyGroups
+                                             includeNonDownloadableFiles:includeNonDownloadableFiles];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)listFolderContinue:(NSString *)cursor {
+  DBRoute *route = DBFILESRouteObjects.DBFILESListFolderContinue;
+  DBFILESListFolderContinueArg *arg = [[DBFILESListFolderContinueArg alloc] initWithCursor:cursor];
+  return [self.client requestRpc:route arg:arg];
 }
 
 @end

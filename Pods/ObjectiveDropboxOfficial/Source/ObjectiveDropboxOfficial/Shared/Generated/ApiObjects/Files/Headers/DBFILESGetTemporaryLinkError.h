@@ -40,6 +40,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag){
     /// Cannot get temporary link to this file type; use `export` instead.
     DBFILESGetTemporaryLinkErrorUnsupportedFile,
 
+    /// The user is not allowed to request a temporary link to the specified
+    /// file. For example, this can occur if the file is restricted or if the
+    /// user's links are banned
+    /// https://help.dropbox.com/files-folders/share/banned-links.
+    DBFILESGetTemporaryLinkErrorNotAllowed,
+
     /// (no description).
     DBFILESGetTemporaryLinkErrorOther,
 
@@ -86,6 +92,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag){
 - (instancetype)initWithUnsupportedFile;
 
 ///
+/// Initializes union class with tag state of "not_allowed".
+///
+/// Description of the "not_allowed" tag state: The user is not allowed to
+/// request a temporary link to the specified file. For example, this can occur
+/// if the file is restricted or if the user's links are banned
+/// https://help.dropbox.com/files-folders/share/banned-links.
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithNotAllowed;
+
+///
 /// Initializes union class with tag state of "other".
 ///
 /// @return An initialized instance.
@@ -122,6 +140,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBFILESGetTemporaryLinkErrorTag){
 /// @return Whether the union's current tag state has value "unsupported_file".
 ///
 - (BOOL)isUnsupportedFile;
+
+///
+/// Retrieves whether the union's current tag state has value "not_allowed".
+///
+/// @return Whether the union's current tag state has value "not_allowed".
+///
+- (BOOL)isNotAllowed;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

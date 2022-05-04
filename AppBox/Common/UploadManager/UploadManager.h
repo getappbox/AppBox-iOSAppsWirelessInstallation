@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 
 #import "MobileProvision.h"
-#import "UploadRecord+CoreDataClass.h"
+
+@class UploadRecord;
 
 typedef void(^ProgressBlock)(NSString *title);
 typedef void(^ErrorBlock)(NSError *error, BOOL terminate);
-typedef void(^ITCLoginBlock)();
-typedef void(^CompletionBlock)();
+typedef void(^ITCLoginBlock)(void);
+typedef void(^CompletionBlock)(void);
 
 
 @interface UploadManager : NSObject{

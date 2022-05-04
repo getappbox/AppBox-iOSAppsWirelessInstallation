@@ -12,6 +12,5 @@
 @interface MailGun : NSObject
 
 + (void)sendMailWithProject:(ABPProject *)project complition:(void (^) (BOOL success, NSError *error))complition;
-+ (void)sendAppStoreMailWithProject:(ABPProject *)project complition:(void (^) (BOOL success, NSError *error))complition;
 
 @end

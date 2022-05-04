@@ -28,8 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Instance fields
 
-/// Fully qualified path relative to event's context. Might be missing due to
-/// historical data gap.
+/// Fully qualified path relative to event's context.
 @property (nonatomic, readonly, copy, nullable) NSString *contextual;
 
 /// Path relative to the namespace containing the content.
@@ -42,8 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param namespaceRelative Path relative to the namespace containing the
 /// content.
-/// @param contextual Fully qualified path relative to event's context. Might be
-/// missing due to historical data gap.
+/// @param contextual Fully qualified path relative to event's context.
 ///
 /// @return An initialized instance.
 ///

@@ -19,7 +19,6 @@
         NSString *hangoutMessage;
         if ([UserData userSlackMessage].length > 0) {
             hangoutMessage = [MailHandler parseMessage:[UserData userSlackMessage] forProject:project];
-            hangoutMessage = [hangoutMessage stringByAppendingFormat:@" - %@", project.appShortShareableURL];
         } else {
             hangoutMessage = [NSString stringWithFormat:@"%@ - %@ (%@) link - %@", project.name, project.version, project.build, project.appShortShareableURL];
         }

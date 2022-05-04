@@ -1,4 +1,4 @@
-[![Support](https://img.shields.io/static/v1?logo=paypal&label=PayPal&message=Support&color=brightgreen&style=flat-square)](https://getappbox.com/support/)
+[![Support](https://img.shields.io/static/v1?logo=paypal&label=PayPal&message=Support&color=brightgreen&style=flat-square)](https://paypal.me/vineetchoudhary)
 [![Build Status](https://img.shields.io/travis/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://travis-ci.org/vineetchoudhary/AppBox-iOSAppsWirelessInstallation)
 [![GitHub Release](https://img.shields.io/github/release/vineetchoudhary/AppBox-iOSAppsWirelessInstallation.svg?style=flat-square)](https://github.com/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/releases/latest)
 [![Downloads](https://img.shields.io/badge/download-appbox.app-brightgreen.svg?style=flat-square)](https://getappbox.com/download)
@@ -6,32 +6,22 @@
 [![Twitter](https://img.shields.io/twitter/follow/AppBoxHQ.svg?style=social&label=Follow)](https://twitter.com/AppBoxHQ)
 
 # AppBox - iOS Apps Wireless Installation 
-AppBox is a tool for iOS developers to build and deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
-
-**FLUX WARNING** - Release in progress, expect things in master to be broken. So, download only [stable release](https://getappbox.com/download).
+AppBox is a tool for iOS developers to deploy Development, Ad-Hoc and In-house (Enterprise) applications directly to the devices from your Dropbox account.
 
 
 # Features
-| | AppBox
--|-
-🔑 | Auto App Signing
-🚀 | Auto Upload on Dropbox or AppStore after Archive 
-🔗 | Keep same installation link for the same app
-🖇️ | Install previous version with same installation link
-✉️ | Auto E-Mail App Distribution Link
-🔌 | Auto Shutdown Mac after Distribution
-📦 | Maximum Upload Size - Equal to your Dropbox account storage
-📅 | Uploaded App Expiration - Until you delete from your Dropbox 
-✨ | Unlimited app installations
-🔥 | Auto Restart Upload After Network Change or Failure 
-🎩 | Easy setup assistant to get started in a few minutes
-🔧 | Slack, Microsoft Teams and Hangout Chat Webhook Integration
-😘 | Dashboard
-🚀 | Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
-🚢 | Jenkins Support [read more](https://docs.getappbox.com/ContinuousIntegration/usewithjenkinsandgitlab/)
-🕶️ | Dark Theme
+- ✨ Unlimited app installations
+- 📦 No upload app size limit
+- 📅 No uploaded app expiration
+- 🔗 Keep same installation link for the same app
+- 🖇️ Install previous version with same installation link
+- ✉️ Auto e-mail app distribution link
+- 🔥 Auto restart upload after network change or failure 
+- 🎩 Easy setup assistant to get started in a few minutes
+- 🔧 Slack, Microsoft Teams and Hangout Chat webhook integration
+- 😘 Dashboard to manage uploaded apps
+- 🚀 Fastlane support [read more](https://github.com/getappbox/fastlane-plugin-appbox)
  
-
 # Installation
 
 ### Using curl
@@ -49,26 +39,9 @@ If you face any issue using above command then you can manually install AppBox b
 | Step | Description |
 | :--- | :--- |
 | 1. |	Link your Dropbox account with AppBox. |
-| 2.	| Select and upload the iOS application "OR" select project/workspace to archive and upload the iOS application. |
+| 2.	| Select and upload the iOS application. |
 | 3. |	Send the link to your testers, clients, friends or even use it yourself. |
 | 4.	| Open the link in the browser on the device and click on install. |
-
-
-# AppBox vs. Diawi.com 
-
-| Features |	AppBox |	diawi.com |
-| :--- | :--- | :--- |
-| Auto App Signing |	Yes |	No |
-| Auto Upload after Archive |	Yes |	No |
-| Keep same link for same app |	Yes |	No |
-| Install previous version with same link |	Yes |	No |
-| Auto E-Mail App Distribution Link |	Yes |	No |
-| Auto Shutdown Mac after Distribution |	Yes |	No |
-| Maximum Upload Size |	Equal to your Dropbox account storage |	100MB |
-| Uploaded App Expiration |	Until you delete from your Dropbox | 1day |
-| Installations Per App |	Unlimited |	10 | 
-| Auto Restart Upload After Network Change or Failure | Yes | No | 
-| Dashboard |	Yes |	Yes (login required) |
 
 
 # Current Version Screenshot
