@@ -639,6 +639,9 @@
     //Create manifest file with share IPA url and upload manifest file
     if (self.dbFileType == DBFileTypeIPA) {
         NSString *shareableLink = url;
+		shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://www.dropbox.com" withString:abDropBoxDirectDownload];
+		shareableLink = [shareableLink stringByReplacingOccurrencesOfString:@"https://dropbox.com" withString:abDropBoxDirectDownload];
+		shareableLink = [shareableLink substringToIndex:shareableLink.length-5];
         self.project.ipaFileDBShareableURL = [NSURL URLWithString:shareableLink];
         [self.project createManifestWithIPAURL:self.project.ipaFileDBShareableURL completion:^(NSURL *manifestURL) {
 			strongify(self);
@@ -649,7 +652,7 @@
                 }
                 [Common showAlertWithTitle:@"Error" andMessage:@"Unable to create manifest file!!"];
                 self.errorBlock(nil, YES);
-            }else{
+            } else {
                 //change file type and upload manifest
                 self.dbFileType = DBFileTypeManifest;
                 [self dbUploadFile:manifestURL.resourceSpecifier to:self.project.dbManifestFullPath.absoluteString mode:[[DBFILESWriteMode alloc] initWithOverwrite]];

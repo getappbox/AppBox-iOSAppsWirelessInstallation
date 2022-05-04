@@ -317,6 +317,10 @@
 	[textFieldEmail setEnabled:enable];
 	[textFieldMessage setEnabled:enable];
 	
+	//Reset text field content
+	[textFieldEmail setStringValue: enable ? textFieldEmail.stringValue : abEmptyString];
+	[textFieldMessage setStringValue: enable ? textFieldMessage.stringValue : abEmptyString];
+	
 	//Just for confirm changes
 	[self textFieldMailValueChanged:textFieldEmail];
 	[self textFieldDevMessageValueChanged:textFieldMessage];
