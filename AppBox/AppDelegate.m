@@ -15,6 +15,16 @@
     //Handle URL Scheme
     
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+	
+	//Init CocoaLumberjack
+	DDLogLevel logLevel = [UserData debugLog] ? DDLogLevelDebug : DDLogLevelInfo;
+	[DDLog addLogger:[DDOSLogger sharedInstance] withLevel:logLevel]; //OS logger
+	
+	//File logger
+	DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+	fileLogger.doNotReuseLogFiles = true;
+	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+	[DDLog addLogger:fileLogger withLevel:logLevel];
     
     //Init AppCenter
     [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
@@ -42,15 +52,15 @@
     
     //Check for arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    [ABLog log:@"All Command Line Arguments = %@",arguments];
+    DDLogDebug(@"All Command Line Arguments = %@",arguments);
     for (NSString *argument in arguments) {
         if ([argument containsString:abArgsIPA]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsIPA];
-            [ABLog log:@"IPA Components = %@",components];
+            DDLogDebug(@"IPA Components = %@",components);
             if (components.count == 2) {
                 [self handleIPAAtPath:[components lastObject]];
             } else {
-				[ABLog logImp:@"Invalid IPA Argument %@",arguments];
+				DDLogInfo(@"Invalid IPA Argument %@",arguments);
                 exit(abExitCodeForInvalidCommand);
             }
             break;
@@ -78,11 +88,11 @@
 
 -(void)openFileWithPath:(NSString *)filePath{
     if (self.isReadyToBuild) {
-        [ABLog log:@"AppBox is ready to use."];
+        DDLogDebug(@"AppBox is ready to use.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [ABLog log:@"AppBox is ready to use. [Block]"];
+            DDLogDebug(@"AppBox is ready to use. [Block]");
             [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
         }];
     }
@@ -107,26 +117,26 @@
 //URISchem URL Handler
 -(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
     NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
-	[ABLog logImp:@"Handling URL = %@",url];
+	DDLogInfo(@"Handling URL = %@",url);
     
     //Check for Dropbox auth
     [DBClientsManager handleRedirectURL:url completion:^(DBOAuthResult * _Nullable authResult) {
         if (authResult != nil) {
             if ([authResult isSuccess]) {
-				[ABLog logImp:@"Success! User is logged into Dropbox."];
+				DDLogInfo(@"Success! User is logged into Dropbox.");
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
                 [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
             } else if ([authResult isCancel]) {
-				[ABLog logImp:@"Authorization flow was manually canceled by user."];
+				DDLogInfo(@"Authorization flow was manually canceled by user.");
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             } else if ([authResult isError]) {
-				[ABLog logImp:@"Error: %@", authResult.errorDescription];
+				DDLogInfo(@"Error: %@", authResult.errorDescription);
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             }
         } else if (url != nil) {
-			[ABLog logImp:@"query = %@", url.query];
+			DDLogInfo(@"query = %@", url.query);
     //        if (url.query != nil && url.query.length > 0) {
     //            [self handleProjectAtPath:url.query];
     //        }
@@ -137,11 +147,11 @@
 -(void)handleIPAAtPath:(NSString *)ipaPath {
     XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
     if (self.isReadyToBuild) {
-		[ABLog logImp:@"AppBox is ready to upload IPA."];
+		DDLogInfo(@"AppBox is ready to upload IPA.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-			[ABLog logImp:@"AppBox is ready to upload IPA. [Block]"];
+			DDLogInfo(@"AppBox is ready to upload IPA. [Block]");
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];
     }

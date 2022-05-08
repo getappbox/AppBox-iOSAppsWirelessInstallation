@@ -29,13 +29,13 @@
         //send message
         [NetworkHandler requestWithURL:webHookURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             if (responseObj && error == nil) {
-				[ABLog logImp:@"Microsoft Team Response - %@", responseObj];
+				DDLogInfo(@"Microsoft Team Response - %@", responseObj);
                 completion(YES);
             } else if (error) {
-				[ABLog logImp:@"Microsoft Team Error - %@", error.localizedDescription];
+				DDLogInfo(@"Microsoft Team Error - %@", error.localizedDescription);
                 completion(NO);
             } else {
-				[ABLog logImp:@"Microsoft Team Error - Unknown Error"];
+				DDLogInfo(@"Microsoft Team Error - Unknown Error");
                 completion(NO);
             }
         }];

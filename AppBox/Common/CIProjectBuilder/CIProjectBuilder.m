@@ -47,19 +47,19 @@ NSString *const RepoITCPassword = @"itcpassword";
 //MARK: - Common Arguments
 +(void)setCommonArgumentsToProject:(XCProject *)project {
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    [ABLog log:@"All Command Line Arguments = %@",arguments];
+    DDLogDebug(@"All Command Line Arguments = %@",arguments);
     for (NSString *argument in arguments) {
         
         
         //Project Emails
         if ([argument containsString:abArgsEmails]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsEmails];
-            [ABLog log:@"Email Components = %@", components];
+            DDLogDebug(@"Email Components = %@", components);
             if (components.count == 2) {
-				[ABLog logImp:@"Changing project Emails to \"%@\" from \"%@\"", [components lastObject], project.emails];
+				DDLogInfo(@"Changing project Emails to \"%@\" from \"%@\"", [components lastObject], project.emails);
                 project.emails = [components lastObject];
             } else {
-				[ABLog logImp:@"Invalid Emails Argument \"%@\"",arguments];
+				DDLogInfo(@"Invalid Emails Argument \"%@\"",arguments);
                 exit(abExitCodeForInvalidCommand);
             }
         }
@@ -67,12 +67,12 @@ NSString *const RepoITCPassword = @"itcpassword";
         //Project Personal Messages
         else if ([argument containsString:abArgsPersonalMessage]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsPersonalMessage];
-            [ABLog log:@"Personal Message Components = %@", components];
+            DDLogDebug(@"Personal Message Components = %@", components);
             if (components.count == 2) {
-				[ABLog logImp:@"Changing project personal message to \"%@\" from \"%@\"", [components lastObject], project.personalMessage];
+				DDLogInfo(@"Changing project personal message to \"%@\" from \"%@\"", [components lastObject], project.personalMessage);
                 project.personalMessage = [components lastObject];
             } else {
-				[ABLog logImp:@"Invalid Personal Message Argument \"%@\"",arguments];
+				DDLogInfo(@"Invalid Personal Message Argument \"%@\"",arguments);
                 exit(abExitCodeForInvalidCommand);
             }
         }
@@ -80,12 +80,12 @@ NSString *const RepoITCPassword = @"itcpassword";
         //Project Keep Same Link
         else if ([argument containsString:abArgsKeepSameLink]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsKeepSameLink];
-            [ABLog log:@"Keep Same Links Components = %@", components];
+            DDLogDebug(@"Keep Same Links Components = %@", components);
             if (components.count == 2) {
-				[ABLog logImp:@"Changing Keep Same Link to \"%@\" from \"%@\"", [components lastObject], project.keepSameLink];
+				DDLogInfo(@"Changing Keep Same Link to \"%@\" from \"%@\"", [components lastObject], project.keepSameLink);
                 project.keepSameLink = ([[components lastObject] isEqualToString:@"0"] || ((BOOL)[[components lastObject] boolValue]) == NO) ? @0 : @1;
             } else {
-				[ABLog logImp:@"Invalid Keep Same Link Argument \"%@\"",arguments];
+				DDLogInfo(@"Invalid Keep Same Link Argument \"%@\"",arguments);
                 exit(abExitCodeForInvalidCommand);
             }
         }
@@ -93,14 +93,14 @@ NSString *const RepoITCPassword = @"itcpassword";
         //Project dropbox folder name
         else if ([argument containsString:abArgsDropBoxFolderName]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsDropBoxFolderName];
-            [ABLog log:@"Dropbox folder Components = %@", components];
+            DDLogDebug(@"Dropbox folder Components = %@", components);
             if (components.count == 2) {
-				[ABLog logImp:@"Changing Dropbox folder name to \"%@\" from \"%@\"", [components lastObject], project.personalMessage];
+				DDLogInfo(@"Changing Dropbox folder name to \"%@\" from \"%@\"", [components lastObject], project.personalMessage);
                 NSString *bundlePath = [NSString stringWithFormat:@"/%@",[components lastObject]];
                 bundlePath = [bundlePath stringByReplacingOccurrencesOfString:@" " withString:abEmptyString];
                 project.bundleDirectory = [NSURL URLWithString:bundlePath];
             } else {
-				[ABLog logImp:@"Invalid Dropbox Folder Name Argument \"%@\"",arguments];
+				DDLogInfo(@"Invalid Dropbox Folder Name Argument \"%@\"",arguments);
                 exit(abExitCodeForInvalidCommand);
             }
         }
