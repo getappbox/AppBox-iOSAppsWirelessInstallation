@@ -728,7 +728,7 @@
 }
 
 //MARK: - Delete Files
--(void)deleteBuildFromDropbox{
+-(void)deleteBuildFromDropboxAndDashboard {
     [self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
     if (self.project.isKeepSameLinkEnabled) {
         [self deleteBuildDetailsFromAppInfoJSON];
@@ -737,7 +737,12 @@
     }
 }
 
--(void)deleteBuildFolder{
+-(void)deleteBuildFromDashboard {
+	[self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
+	self.completionBlock();
+}
+
+-(void)deleteBuildFolder {
 	weakify(self);
     [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 		strongify(self);
