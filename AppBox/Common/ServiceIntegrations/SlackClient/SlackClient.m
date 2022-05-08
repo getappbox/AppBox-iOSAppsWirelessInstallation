@@ -32,13 +32,13 @@
         //send message
         [NetworkHandler requestWithURL:channelURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             if (responseObj && error == nil) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Slack Response - %@", responseObj]];
+				[ABLog logImp:@"Slack Response - %@", responseObj];
                 completion(YES);
             } else if (error) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Slack Error - %@", error.localizedDescription]];
+				[ABLog logImp:@"Slack Error - %@", error.localizedDescription];
                 completion(NO);
             } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Slack Error - Unknown Error"]];
+				[ABLog logImp:@"Slack Error - Unknown Error"];
                 completion(NO);
             }
         }];

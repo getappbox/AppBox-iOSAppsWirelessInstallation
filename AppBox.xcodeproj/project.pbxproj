@@ -45,7 +45,6 @@
 		E12E6D0A1D8FC77D0054814D /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E6D081D8FC77D0054814D /* DashboardViewController.m */; };
 		E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E13161F11E9777DF00586052 /* CIProjectBuilder.m */; };
 		E13946121DF2AFCF00B3FAD0 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E13946111DF2AFCF00B3FAD0 /* XCProject.m */; };
-		E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E143637A1DF59AFD00FB10CA /* LogViewController.m */; };
 		E14F33341E1A64CA00C3DD34 /* NSApplication+MenuHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */; };
 		E15C266A1D7FD5CE004243B9 /* ShowLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C26691D7FD5CE004243B9 /* ShowLinkViewController.m */; };
 		E16018F01DEC0BC200E3A377 /* DropboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16018EF1DEC0BC200E3A377 /* DropboxViewController.m */; };
@@ -222,8 +221,6 @@
 		E13946101DF2AFCF00B3FAD0 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProject.h; sourceTree = "<group>"; };
 		E13946111DF2AFCF00B3FAD0 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProject.m; sourceTree = "<group>"; };
 		E13946131DF2AFFF00B3FAD0 /* AppBoxPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBoxPrefixHeader.pch; sourceTree = "<group>"; };
-		E14363791DF59AFD00FB10CA /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
-		E143637A1DF59AFD00FB10CA /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		E14F33321E1A64CA00C3DD34 /* NSApplication+MenuHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+MenuHandler.h"; sourceTree = "<group>"; };
 		E14F33331E1A64CA00C3DD34 /* NSApplication+MenuHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+MenuHandler.m"; sourceTree = "<group>"; };
 		E15C26681D7FD5CE004243B9 /* ShowLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLinkViewController.h; sourceTree = "<group>"; };
@@ -511,15 +508,6 @@
 			path = ProjectModel;
 			sourceTree = "<group>";
 		};
-		E14363781DF59AC700FB10CA /* LogViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E14363791DF59AFD00FB10CA /* LogViewController.h */,
-				E143637A1DF59AFD00FB10CA /* LogViewController.m */,
-			);
-			path = LogViewController;
-			sourceTree = "<group>";
-		};
 		E14F332E1E1A3D1300C3DD34 /* MenuHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,7 +589,6 @@
 				E16437F01D743B3600CE8B7E /* HomeViewController */,
 				E15C26671D7FD5A9004243B9 /* ShowLinkViewController */,
 				E1AA0F411E2F325F00BA81A1 /* QRCodeViewController */,
-				E14363781DF59AC700FB10CA /* LogViewController */,
 				E12E6D061D8FC6E20054814D /* DashboardViewController */,
 				E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */,
 				E16D72E61E8935060031FB7C /* PreferencesViewController */,
@@ -1098,7 +1085,6 @@
 				E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */,
 				E13161F21E9777DF00586052 /* CIProjectBuilder.m in Sources */,
 				4410D19C26FF851D0046E5F9 /* CoreDataMigration3to4.xcmappingmodel in Sources */,
-				E143637B1DF59AFD00FB10CA /* LogViewController.m in Sources */,
 				DB2629851F961F4700C4C647 /* DBErrorHandler.m in Sources */,
 				E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */,
 				E18186CE1E8A3BC00002509F /* PreferencesTabViewController.m in Sources */,

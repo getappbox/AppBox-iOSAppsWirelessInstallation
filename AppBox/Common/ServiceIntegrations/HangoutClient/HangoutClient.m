@@ -29,13 +29,13 @@
         //send message
         [NetworkHandler requestWithURL:webHookURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             if (responseObj && error == nil) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Hangout  Response - %@", responseObj]];
+				[ABLog logImp:@"Hangout  Response - %@", responseObj];
                 completion(YES);
             } else if (error) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Hangout Chat Error - %@", error.localizedDescription]];
+				[ABLog logImp:@"Hangout Chat Error - %@", error.localizedDescription];
                 completion(NO);
             } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Hangout Chat Error - Unknown Error"]];
+				[ABLog logImp:@"Hangout Chat Error - Unknown Error"];
                 completion(NO);
             }
         }];
