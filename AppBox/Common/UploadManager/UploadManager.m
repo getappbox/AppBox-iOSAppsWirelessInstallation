@@ -46,7 +46,13 @@
 
 - (void)createNewWorkingDirectory {
 	workingDirectory = [NSTemporaryDirectory() stringByAppendingPathComponent: [[NSUUID UUID] UUIDString]];
-	[ABLog log:@"New temporaray working directory %@", workingDirectory];
+	NSError *error = nil;
+	[[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+	if (error == nil) {
+		[ABLog log:@"New temporaray working directory %@", workingDirectory];
+	} else {
+		[ABLog log:@"Unable to create temporary working directory %@", workingDirectory];
+	}
 }
 
 //MARK: - UnZip IPA File
@@ -66,9 +72,14 @@
 
         [ABLog log:@"Extracting Files to - %@", workingDirectory];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [SSZipArchive unzipFileAtPath:ipaPath toDestination:workingDirectory overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-				strongify(self);
+            [SSZipArchive unzipFileAtPath:ipaPath
+							toDestination:self->workingDirectory
+								overwrite:YES
+								 password:nil
+						  progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+					strongify(self);
+					
                     [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
                     
                     //Get payload entry
@@ -95,7 +106,7 @@
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
-                            mobileProvisionPath = [workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
+							mobileProvisionPath = [self->workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
@@ -121,7 +132,7 @@
                     
                     //get info.plist
                     [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
-                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
+					[self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[self->workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
@@ -732,6 +743,7 @@
 
 //MARK: - Delete Files
 -(void)deleteBuildFromDropboxAndDashboard {
+	[self createNewWorkingDirectory];
     [self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
     if (self.project.isKeepSameLinkEnabled) {
         [self deleteBuildDetailsFromAppInfoJSON];
