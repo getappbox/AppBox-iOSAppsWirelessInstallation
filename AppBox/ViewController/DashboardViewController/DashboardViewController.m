@@ -100,7 +100,7 @@ typedef enum : NSUInteger {
     } completionHandler:nil];
 }
 
-#pragma mark - NSTableView Delegate and DataSource
+//MARK: - NSTableView Delegate and DataSource
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return uploadRecords.count;
 }
@@ -165,7 +165,7 @@ typedef enum : NSUInteger {
     return YES;
 }
 
-#pragma mark - Build Action
+//MARK: - Build Action
 - (IBAction)copyURLButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [self selectedUploadRecord];
     if (uploadRecord){
@@ -251,7 +251,7 @@ typedef enum : NSUInteger {
     }
 }
 
-#pragma mark - Helper Method
+//MARK: - Helper Method
 -(UploadRecord *)selectedUploadRecord{
     if (_dashboardTableView.selectedRow == -1 || uploadRecords == nil || (uploadRecords && uploadRecords.count == 0)){
         return nil;

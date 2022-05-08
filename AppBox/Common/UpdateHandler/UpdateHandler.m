@@ -10,7 +10,7 @@
 
 @implementation UpdateHandler
 
-#pragma mark - Check for update
+//MARK: - Check for update
 
 + (void)showUpdateAlertWithUpdateURL:(NSURL *)url{
     NSAlert *alert = [[NSAlert alloc] init];

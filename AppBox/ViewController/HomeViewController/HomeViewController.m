@@ -83,7 +83,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:abAppBoxReadyToUseNotification object:self];
 }
 
-#pragma mark - Upload Manager
+//MARK: - Upload Manager
 -(void)setupUploadManager{
     self.uploadManager = [[UploadManager alloc] init];
     [self.uploadManager setProject:self.project];
@@ -118,7 +118,7 @@
 }
 
 
-#pragma mark - Build Repo / Open Files Notification
+//MARK: - Build Repo / Open Files Notification
 - (void)initCIProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         self.ciRepoProject = notification.object;
@@ -145,7 +145,7 @@
     }
 }
 
-#pragma mark - Controls Action Handler -
+//MARK: - Controls Action Handler -
 #pragma mark → Project / Workspace Controls Action
 //Project Path Handler
 - (IBAction)selectedFilePathHandler:(NSPathControl *)sender {
@@ -239,7 +239,7 @@
 }
 
 
-#pragma mark - Dropbox Helper -
+//MARK: - Dropbox Helper -
 #pragma mark → Dropbox Notification Handler
 - (void)handleLoggedInNotification:(NSNotification *)notification{
     [self updateMenuButtons];
@@ -256,7 +256,7 @@
 }
 
 
-#pragma mark - Controller Helpers -
+//MARK: - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
     [ABLog log:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]];
@@ -353,7 +353,7 @@
     return viewState;
 }
 
-#pragma mark - TabView Delegate -
+//MARK: - TabView Delegate -
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem{
     //update view state based on selected tap
     [self updateViewState];
@@ -363,7 +363,7 @@
     return ![AppDelegate appDelegate].processing;
 }
 
-#pragma mark - ProjectAdvancedViewDelegate - 
+//MARK: - ProjectAdvancedViewDelegate - 
 - (void)projectAdvancedSaveButtonTapped:(NSButton *)sender{
 
 }
@@ -372,7 +372,7 @@
     
 }
 
-#pragma mark - Navigation -
+//MARK: - Navigation -
 -(void)logAppUploadEventAndShareURLOnSlackChannel{
     //Log IPA Upload Success Rate with Other Options
     NSDictionary *currentSetting = [self getBasicViewStateWithOthersSettings:@{@"Uploaded to":@"Dropbox"}];

@@ -49,7 +49,7 @@
 	[ABLog log:@"New temporaray working directory %@", workingDirectory];
 }
 
-#pragma mark - UnZip IPA File
+//MARK: - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
     [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
@@ -182,7 +182,7 @@
 }
 
 
-#pragma mark - UNIQUE Link Handlers
+//MARK: - UNIQUE Link Handlers
 -(void)handleAfterUniqueJsonMetaDataLoaded{
     if(self.project.uniqueLinkJsonMetaData){
         NSURL *path = [NSURL fileURLWithPath:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
@@ -349,7 +349,7 @@
     [self dbUploadFile:path.resourceSpecifier to:self.project.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
 
-#pragma mark - Update AppInfo.JSON file
+//MARK: - Update AppInfo.JSON file
 -(void)loadAppInfoMetaData{
 	weakify(self);
     DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
@@ -367,7 +367,7 @@
      
 }
 
-#pragma mark - Upload Files
+//MARK: - Upload Files
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
@@ -517,7 +517,7 @@
     }
 }
 
-#pragma mark - Upload File Helper
+//MARK: - Upload File Helper
 //Helper to Handle Chunk Upload Error
 -(void)handleChunkUploadWithRouteError:(DBFILESUploadSessionAppendError * _Nullable)routeError
 						   finishError:(DBFILESUploadSessionFinishError * _Nullable)finishError
@@ -569,7 +569,7 @@
     [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
 }
 
-#pragma mark - Dropbox Create/Get Shared Link
+//MARK: - Dropbox Create/Get Shared Link
 -(void)dbCreateSharedURLForFile:(NSString *)file{
 	weakify(self);
     [[[DBClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
@@ -700,7 +700,7 @@
     }
 }
 
-#pragma mark - Create ShortSharable URL
+//MARK: - Create ShortSharable URL
 -(void)createUniqueShortSharableUrl{
     //Create Short URL
 	weakify(self);
@@ -727,7 +727,7 @@
     });
 }
 
-#pragma mark - Delete Files
+//MARK: - Delete Files
 -(void)deleteBuildFromDropbox{
     [self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
     if (self.project.isKeepSameLinkEnabled) {
@@ -771,7 +771,7 @@
     [self loadAppInfoMetaData];
 }
 
-#pragma mark - Show Status
+//MARK: - Show Status
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     //log status in session log
     [ABLog log:@"%@",status];

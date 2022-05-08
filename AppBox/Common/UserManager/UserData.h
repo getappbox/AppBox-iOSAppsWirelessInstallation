@@ -10,9 +10,10 @@
 
 @interface UserData : NSObject
 
-// User status
+//MARK: - Logged In User
 +(BOOL)isLoggedIn;
 
+// MARK: - Preferences...
 // Default emails and message
 +(NSString *)userEmail;
 +(void)setUserEmail:(NSString *)userEmail;

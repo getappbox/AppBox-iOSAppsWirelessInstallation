@@ -10,7 +10,7 @@
 
 @implementation MailHandler
 
-#pragma mark - Check Valid Email
+//MARK: - Check Valid Email
 + (BOOL)isValidEmail:(NSString *)checkString{
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
@@ -27,7 +27,7 @@
     [Common showAlertWithTitle:@"Invalid email address" andMessage:@"The email address entered was invalid. Please reenter it (Example: username@example.com).\n\nFor multiple email please enter like (username@example.com,username2@example.com,username@example2.com)."];
 }
 
-#pragma mark - Parse customised message with project details
+//MARK: - Parse customised message with project details
 + (NSString *)parseMessage:(NSString *)message forProject:(XCProject *)project {
     NSString *messageCopy = message.copy;
     messageCopy = [messageCopy stringByReplacingOccurrencesOfString:@"{BUILD_NAME}" withString:project.name];
