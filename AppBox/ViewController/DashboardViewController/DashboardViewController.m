@@ -178,21 +178,33 @@ typedef enum : NSUInteger {
 
 - (IBAction)deleteBuildButtonTapped:(NSButton *)sender {
     UploadRecord *uploadRecord = [self selectedUploadRecord];
+	
     if (uploadRecord){
         //Show Delete Alert
         NSAlert *alert = [[NSAlert alloc] init];
         [alert setMessageText: @"Are you sure you want to delete this build?"];
-        [alert setInformativeText:[NSString stringWithFormat:@"You're about to delete \"%@-%@(%@)\". This is permanent! We warned you, k?", uploadRecord.project.name, uploadRecord.version, uploadRecord.build]];
+        [alert setInformativeText:[NSString stringWithFormat:@"You're about to delete \"%@-%@(%@)\". This is permanent!", uploadRecord.project.name, uploadRecord.version, uploadRecord.build]];
         [alert setAlertStyle:NSInformationalAlertStyle];
-        [alert addButtonWithTitle:@"Delete"];
-        [alert addButtonWithTitle:@"Cancel"];
-        
-        if ([alert runModal] == NSAlertFirstButtonReturn){
-            [uploadManager setUploadRecord:uploadRecord];
-            [uploadManager setProject:uploadRecord.xcProject];
-            [uploadManager deleteBuildFromDropbox];
-        }
-        [EventTracker logEventWithType:LogEventTypeDeleteBuild];
+		[alert addButtonWithTitle: @"Delete from Dropbox and Dashboard"];
+        [alert addButtonWithTitle: @"Delete only from Dashboard"];
+        [alert addButtonWithTitle: @"Cancel"];
+		NSModalResponse modelResponse = [alert runModal];
+		
+		//delete from dropbox and dashboard
+        if (modelResponse == NSAlertFirstButtonReturn) {
+            [uploadManager setUploadRecord: uploadRecord];
+            [uploadManager setProject: uploadRecord.xcProject];
+            [uploadManager deleteBuildFromDropboxAndDashboard];
+		}
+		
+		//delete only from dashboard
+		else if (modelResponse == NSAlertSecondButtonReturn) {
+			[uploadManager setUploadRecord: uploadRecord];
+			[uploadManager setProject: uploadRecord.xcProject];
+			[uploadManager deleteBuildFromDashboard];
+		}
+		
+        [EventTracker logEventWithType: LogEventTypeDeleteBuild];
     }
 }
 
@@ -259,6 +271,5 @@ typedef enum : NSUInteger {
     UploadRecord *uploadRecord = [uploadRecords objectAtIndex:_dashboardTableView.selectedRow];
     return uploadRecord;
 }
-
 
 @end
