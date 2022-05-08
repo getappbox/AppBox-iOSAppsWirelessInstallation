@@ -17,7 +17,7 @@
     accounts = @[@"Add Dropbox Account"];
 }
 
-#pragma mark - NSTableView Datasource and Delegate
+//MARK: - NSTableView Datasource and Delegate
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return accounts.count;
 }
@@ -32,7 +32,7 @@
     return YES;
 }
 
-#pragma mark - Actions
+//MARK: - Actions
 - (IBAction)cancelButtonTapped:(NSButton *)sender {
     [self dismissController:self];
 }

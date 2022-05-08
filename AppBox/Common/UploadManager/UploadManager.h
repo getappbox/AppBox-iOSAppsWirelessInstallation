@@ -41,6 +41,7 @@ typedef void(^CompletionBlock)(void);
 - (void)uploadIPAFile:(NSURL *)ipaFileURL;
 - (void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL;
 
-- (void)deleteBuildFromDropbox;
+- (void)deleteBuildFromDashboard;
+- (void)deleteBuildFromDropboxAndDashboard;
 
 @end

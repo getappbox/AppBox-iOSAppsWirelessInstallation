@@ -25,7 +25,7 @@
     itcAccounts = [KeychainHandler getAllITCAccounts];
 }
 
-#pragma mark - AccountPreferencesViewController Delegate
+//MARK: - AccountPreferencesViewController Delegate
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return itcAccounts.count;
 }
@@ -46,7 +46,7 @@
     return YES;
 }
 
-#pragma mark - Actions
+//MARK: - Actions
 - (IBAction)addAccountButtonTapped:(NSButton *)sender {
     SelectAccountViewController *selectAccountViewController = [[SelectAccountViewController alloc] initWithNibName:NSStringFromClass([SelectAccountViewController class]) bundle:nil];
     selectAccountViewController.delegate = self;
@@ -64,7 +64,7 @@
 }
 
 
-#pragma mark - SelectAccountViewController Delegate
+//MARK: - SelectAccountViewController Delegate
 -(void)selectedAccountType:(AccountType)accountType{
     NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     switch (accountType) {

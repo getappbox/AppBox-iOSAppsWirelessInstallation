@@ -16,7 +16,7 @@
     NSNumber *adIndex;
 }
 
-#pragma mark - Hud View
+//MARK: - Hud View
 + (ABHudViewController *)hudForView:(NSView *)view hide:(BOOL)hide{
     static NSMutableDictionary *hudDictionary = nil;
     if (hudDictionary == nil) {
@@ -47,7 +47,7 @@
     }
 }
 
-#pragma mark - View Lifecycle
+//MARK: - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -62,7 +62,7 @@
     self.view.frame = self.hudSuperView.frame;
 }
 
-#pragma mark - Properties
+//MARK: - Properties
 -(void)setStatus:(NSString *)status{
     _status = status;
     [progressLabel setStringValue: status];

@@ -46,10 +46,16 @@
 
 - (void)createNewWorkingDirectory {
 	workingDirectory = [NSTemporaryDirectory() stringByAppendingPathComponent: [[NSUUID UUID] UUIDString]];
-	[ABLog log:@"New temporaray working directory %@", workingDirectory];
+	NSError *error = nil;
+	[[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+	if (error == nil) {
+		[ABLog log:@"New temporaray working directory %@", workingDirectory];
+	} else {
+		[ABLog log:@"Unable to create temporary working directory %@", workingDirectory];
+	}
 }
 
-#pragma mark - UnZip IPA File
+//MARK: - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
     [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
@@ -66,9 +72,14 @@
 
         [ABLog log:@"Extracting Files to - %@", workingDirectory];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [SSZipArchive unzipFileAtPath:ipaPath toDestination:workingDirectory overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-				strongify(self);
+            [SSZipArchive unzipFileAtPath:ipaPath
+							toDestination:self->workingDirectory
+								overwrite:YES
+								 password:nil
+						  progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+					strongify(self);
+					
                     [self showStatus:@"Extracting files..." andShowProgressBar:YES withProgress:-1];
                     
                     //Get payload entry
@@ -95,7 +106,7 @@
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
                             [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
-                            mobileProvisionPath = [workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
+							mobileProvisionPath = [self->workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
@@ -121,7 +132,7 @@
                     
                     //get info.plist
                     [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
-                    [self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
+					[self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[self->workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
@@ -182,7 +193,7 @@
 }
 
 
-#pragma mark - UNIQUE Link Handlers
+//MARK: - UNIQUE Link Handlers
 -(void)handleAfterUniqueJsonMetaDataLoaded{
     if(self.project.uniqueLinkJsonMetaData){
         NSURL *path = [NSURL fileURLWithPath:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]];
@@ -305,7 +316,10 @@
                 if (obj.length > 30) {
                     NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(10, 20) withString:@"....."];
                     [modifiedProvisionedDevices addObject:modifiedProvisioning];
-                }
+                } else if (obj.length > 20) {
+					NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(8, 5) withString:@"....."];
+					[modifiedProvisionedDevices addObject:modifiedProvisioning];
+				}
             }];
             if (self.project.mobileProvision.provisionedDevices) {
                 [mobileProvision setObject:modifiedProvisionedDevices forKey:@"devicesudid"];
@@ -349,7 +363,7 @@
     [self dbUploadFile:path.resourceSpecifier to:self.project.dbAppInfoJSONFullPath.absoluteString mode:mode];
 }
 
-#pragma mark - Update AppInfo.JSON file
+//MARK: - Update AppInfo.JSON file
 -(void)loadAppInfoMetaData{
 	weakify(self);
     DBFILESListRevisionsMode *revisionMode = [[DBFILESListRevisionsMode alloc] initWithPath];
@@ -367,7 +381,7 @@
      
 }
 
-#pragma mark - Upload Files
+//MARK: - Upload Files
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
@@ -517,7 +531,7 @@
     }
 }
 
-#pragma mark - Upload File Helper
+//MARK: - Upload File Helper
 //Helper to Handle Chunk Upload Error
 -(void)handleChunkUploadWithRouteError:(DBFILESUploadSessionAppendError * _Nullable)routeError
 						   finishError:(DBFILESUploadSessionFinishError * _Nullable)finishError
@@ -569,7 +583,7 @@
     [self showStatus:status andShowProgressBar:YES withProgress:progress/100];
 }
 
-#pragma mark - Dropbox Create/Get Shared Link
+//MARK: - Dropbox Create/Get Shared Link
 -(void)dbCreateSharedURLForFile:(NSString *)file{
 	weakify(self);
     [[[DBClientsManager authorizedClient].sharingRoutes createSharedLinkWithSettings:file]
@@ -700,7 +714,7 @@
     }
 }
 
-#pragma mark - Create ShortSharable URL
+//MARK: - Create ShortSharable URL
 -(void)createUniqueShortSharableUrl{
     //Create Short URL
 	weakify(self);
@@ -727,8 +741,9 @@
     });
 }
 
-#pragma mark - Delete Files
--(void)deleteBuildFromDropbox{
+//MARK: - Delete Files
+-(void)deleteBuildFromDropboxAndDashboard {
+	[self createNewWorkingDirectory];
     [self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
     if (self.project.isKeepSameLinkEnabled) {
         [self deleteBuildDetailsFromAppInfoJSON];
@@ -737,7 +752,12 @@
     }
 }
 
--(void)deleteBuildFolder{
+-(void)deleteBuildFromDashboard {
+	[self showStatus:@"Deleting..." andShowProgressBar:YES withProgress:-1];
+	self.completionBlock();
+}
+
+-(void)deleteBuildFolder {
 	weakify(self);
     [[[[DBClientsManager authorizedClient] filesRoutes] delete_V2:self.project.dbDirectory.absoluteString] setResponseBlock:^(DBFILESDeleteResult * _Nullable result, DBFILESDeleteError * _Nullable routeError, DBRequestError * _Nullable networkError) {
 		strongify(self);
@@ -771,7 +791,7 @@
     [self loadAppInfoMetaData];
 }
 
-#pragma mark - Show Status
+//MARK: - Show Status
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     //log status in session log
     [ABLog log:@"%@",status];

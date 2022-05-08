@@ -35,7 +35,7 @@ NSString *const RepoITCPassword = @"itcpassword";
     
 }
 
-#pragma mark - IPA
+//MARK: - IPA
 + (XCProject *)xcProjectWithIPAPath:(NSString *)ipaPath {
     XCProject *project = [[XCProject alloc] initEmpty];
     project.ipaFullPath = [NSURL fileURLWithPath:ipaPath];
@@ -44,7 +44,7 @@ NSString *const RepoITCPassword = @"itcpassword";
 }
 
 
-#pragma mark - Common Arguments
+//MARK: - Common Arguments
 +(void)setCommonArgumentsToProject:(XCProject *)project {
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
     [ABLog log:@"All Command Line Arguments = %@",arguments];
