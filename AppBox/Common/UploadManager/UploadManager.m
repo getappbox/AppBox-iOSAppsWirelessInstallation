@@ -305,7 +305,10 @@
                 if (obj.length > 30) {
                     NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(10, 20) withString:@"....."];
                     [modifiedProvisionedDevices addObject:modifiedProvisioning];
-                }
+                } else if (obj.length > 20) {
+					NSString *modifiedProvisioning = [obj stringByReplacingCharactersInRange:NSMakeRange(8, 5) withString:@"....."];
+					[modifiedProvisionedDevices addObject:modifiedProvisioning];
+				}
             }];
             if (self.project.mobileProvision.provisionedDevices) {
                 [mobileProvision setObject:modifiedProvisionedDevices forKey:@"devicesudid"];
