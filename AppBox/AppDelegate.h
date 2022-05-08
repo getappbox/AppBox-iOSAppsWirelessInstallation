@@ -31,6 +31,7 @@
 -(void)saveCoreDataChanges;
 
 +(AppDelegate *)appDelegate;
+-(void)openLatestLogFile;
 -(void)openFileWithPath:(NSString *)filePath;
 
 @end

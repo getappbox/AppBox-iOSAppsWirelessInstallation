@@ -75,7 +75,11 @@
                                                 <segue destination="xJf-6e-3AH" kind="show" id="4nc-Zt-qRE"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="View Log" keyEquivalent="l" id="Rk6-gK-cUU"/>
+                                        <menuItem title="View Log" keyEquivalent="l" id="Rk6-gK-cUU">
+                                            <connections>
+                                                <action selector="viewLogFileTapped:" target="hnw-xV-0zn" id="eiK-Y9-mIp"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="yd4-k6-avg"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
