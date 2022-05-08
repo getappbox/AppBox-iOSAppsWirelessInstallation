@@ -21,7 +21,7 @@
 - (IBAction)showLocalServerTapped:(NSMenuItem *)sender;
 
 //Accounts
-- (void)updateDropboxUsage;
+- (void)updateAccountsMenu;
 - (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender;
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender;
 

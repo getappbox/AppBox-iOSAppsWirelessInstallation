@@ -38,8 +38,8 @@
     [UploadManager setupDBClientsManager];
     [self setupUploadManager];
     
-    //update available memory
-    [[NSApplication sharedApplication] updateDropboxUsage];
+    //update user account menu details
+    [[NSApplication sharedApplication] updateAccountsMenu];
     
     //Start monitoring internet connection
     weakify(self);
@@ -76,7 +76,9 @@
         [[[DBClientsManager authorizedClient].usersRoutes getCurrentAccount] setResponseBlock:^(DBUSERSFullAccount * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
             if (result) {
                 [[Common currentDBManager] registerUserId:result.email];
-            }
+            } else if (networkError.tag == DBRequestErrorAuth) {
+				[[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
+			}
         }];
     }
     [[AppDelegate appDelegate] setIsReadyToBuild:YES];
@@ -251,6 +253,11 @@
     if ([DBClientsManager authorizedClient]){
         [DBClientsManager unlinkAndResetClients];
         [self viewStateForProgressFinish:YES];
+		
+		[UserData setLoggedInUserEmail:@""];
+		[UserData setDropboxUsedSpace:@0];
+		[UserData setDropboxAvailableSpace:@0];
+		[[NSApplication sharedApplication] updateAccountsMenu];
         [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
 }

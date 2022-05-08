@@ -43,7 +43,7 @@
 
 //MARK: - Event Handler
 - (void)handleLoggedInNotification:(NSNotification *)notification{
-    [[NSApplication sharedApplication] updateDropboxUsage];
+    [[NSApplication sharedApplication] updateAccountsMenu];
     [self dismissController:self];
 }
 

@@ -16,6 +16,41 @@
 	return [DBClientsManager authorizedClients] && ([DBClientsManager authorizedClients].count > 0);
 }
 
+#define LoggedInUserEmail @"LoggedInUserEmail"
++(NSString *)loggedInUserEmail {
+	NSString *userEmail = [[NSUserDefaults standardUserDefaults] stringForKey:LoggedInUserEmail];
+	return userEmail == nil ? abEmptyString : userEmail;
+}
+
++(void)setLoggedInUserEmail:(NSString *)loggedInUserEmail {
+	[[NSUserDefaults standardUserDefaults] setValue:loggedInUserEmail forKey:LoggedInUserEmail];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define LoggedInUserDisplayName @"LoggedInUserDisplayName"
++(NSString *)loggedInUserDisplayName {
+	NSString *displayName = [[NSUserDefaults standardUserDefaults] stringForKey:LoggedInUserDisplayName];
+	return displayName == nil ? abEmptyString : displayName;
+}
+
++(void)setLoggedInUserDisplayName:(NSString *)loggedInUserDisplayName {
+	[[NSUserDefaults standardUserDefaults] setValue:loggedInUserDisplayName forKey:LoggedInUserDisplayName];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//MARK: - Dropbox -
+
+#define DropboxUsedSpace @"DropboxUsedSpace"
+
++(NSNumber *)dropboxUsedSpace{
+	return @([[NSUserDefaults standardUserDefaults] doubleForKey:DropboxUsedSpace]);
+}
+
++(void)setDropboxUsedSpace:(NSNumber *)usedSpace{
+	[[NSUserDefaults standardUserDefaults] setInteger:usedSpace.integerValue forKey:DropboxUsedSpace];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 //MARK: - Preferences...
 //MARK: - Email Releated -
 
@@ -88,19 +123,6 @@
 
 +(void)setUserSlackMessage:(NSString *)slackMessage {
     [[NSUserDefaults standardUserDefaults] setValue:slackMessage forKey:UserSlackMessage];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-//MARK: - Dropbox -
-
-#define DropboxUsedSpace @"DropboxUsedSpace"
-
-+(NSNumber *)dropboxUsedSpace{
-    return @([[NSUserDefaults standardUserDefaults] doubleForKey:DropboxUsedSpace]);
-}
-
-+(void)setDropboxUsedSpace:(NSNumber *)usedSpace{
-    [[NSUserDefaults standardUserDefaults] setInteger:usedSpace.integerValue forKey:DropboxUsedSpace];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
