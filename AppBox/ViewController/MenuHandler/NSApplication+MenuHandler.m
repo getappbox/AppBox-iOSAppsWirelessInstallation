@@ -58,8 +58,8 @@
                  [self updateDropboxButton];
                  
                  //log space usage
-				 [ABLog logImp:@"DropBox Used Space : %@MB", usage];
-				 [ABLog logImp:@"DropBox Available Space : %@MB", allocated];
+				 DDLogInfo(@"DropBox Used Space : %@MB", usage);
+				 DDLogInfo(@"DropBox Available Space : %@MB", allocated);
                  
                  //check if dopbox running out of space
                  if ((allocated.integerValue - usage.integerValue) < abDropboxOutOfSpaceWarningSize){

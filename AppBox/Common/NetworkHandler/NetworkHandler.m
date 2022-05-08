@@ -17,7 +17,7 @@
     [manager setResponseSerializer: [AFJSONResponseSerializer serializer]];
     if (requestType == RequestGET){
         [manager GET:url parameters:parmeters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-            [ABLog log:@"Request In Progress -  %@", url];
+            DDLogDebug(@"Request In Progress -  %@", url);
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
             completion(responseObject, statusCode, nil);
@@ -31,7 +31,7 @@
         }];
     }else if (requestType == RequestPOST){
         [manager POST:url parameters:parmeters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-            [ABLog log:@"Request In Progress -  %@", url];
+            DDLogDebug(@"Request In Progress -  %@", url);
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSInteger statusCode = ((NSHTTPURLResponse *)task.response).statusCode;
             completion(responseObject, statusCode, nil);
@@ -53,7 +53,7 @@
     [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/javascript", @"text/html", @"text/javascript", nil]];
     if (requestType == RequestGET){
         [manager GET:url parameters:parmeters  headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-            [ABLog log:@"Request In Progress -  %@", url];
+            DDLogDebug(@"Request In Progress -  %@", url);
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             completion(responseObject, ((NSHTTPURLResponse *)task.response).statusCode ,nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -61,7 +61,7 @@
         }];
     }else if (requestType == RequestPOST){
         [manager POST:url parameters:parmeters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-            [ABLog log:@"Request In Progress -  %@", url];
+            DDLogDebug(@"Request In Progress -  %@", url);
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             completion(responseObject, ((NSHTTPURLResponse *)task.response).statusCode ,nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

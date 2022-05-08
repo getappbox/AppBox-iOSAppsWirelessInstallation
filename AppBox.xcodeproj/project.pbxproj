@@ -67,7 +67,6 @@
 		E18186DC1E8A47C10002509F /* AccountPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DB1E8A47C10002509F /* AccountPreferencesViewController.m */; };
 		E18186DF1E8A47CD0002509F /* EmailPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */; };
 		E18186E21E8A47D60002509F /* HelpPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */; };
-		E1853392200E084500E88529 /* ABLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E1853391200E084500E88529 /* ABLog.m */; };
 		E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */; };
 		E1902B531E16617B00C3E0F6 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B4E1E16617B00C3E0F6 /* NetworkHandler.m */; };
 		E1902B541E16617B00C3E0F6 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E1902B521E16617B00C3E0F6 /* UserData.m */; };
@@ -260,8 +259,6 @@
 		E18186DE1E8A47CD0002509F /* EmailPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailPreferencesViewController.m; sourceTree = "<group>"; };
 		E18186E01E8A47D60002509F /* HelpPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPreferencesViewController.h; sourceTree = "<group>"; };
 		E18186E11E8A47D60002509F /* HelpPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPreferencesViewController.m; sourceTree = "<group>"; };
-		E1853390200E084500E88529 /* ABLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABLog.h; sourceTree = "<group>"; };
-		E1853391200E084500E88529 /* ABLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABLog.m; sourceTree = "<group>"; };
 		E1902B461E16423200C3E0F6 /* ProjectAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectAdvancedViewController.h; sourceTree = "<group>"; };
 		E1902B471E16423200C3E0F6 /* ProjectAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectAdvancedViewController.m; sourceTree = "<group>"; };
 		E1902B4D1E16617B00C3E0F6 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
@@ -728,15 +725,6 @@
 			path = HelpPreferencesViewController;
 			sourceTree = "<group>";
 		};
-		E185338F200E082800E88529 /* LogManager */ = {
-			isa = PBXGroup;
-			children = (
-				E1853390200E084500E88529 /* ABLog.h */,
-				E1853391200E084500E88529 /* ABLog.m */,
-			);
-			path = LogManager;
-			sourceTree = "<group>";
-		};
 		E1902B451E16420C00C3E0F6 /* ProjectAdvancedViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,7 +848,6 @@
 				E1902B4C1E16617B00C3E0F6 /* NetworkHandler */,
 				E19473FC205FD3B700CF12F9 /* UISubClasses */,
 				E19473F0205F9F2900CF12F9 /* ServiceIntegrations */,
-				E185338F200E082800E88529 /* LogManager */,
 				E1902B501E16617B00C3E0F6 /* UserManager */,
 				DB2629781F95ED8900C4C647 /* Extensions */,
 				E1902B4B1E16617B00C3E0F6 /* MailHandler */,
@@ -1035,7 +1022,6 @@
 				E16437DD1D743A4E00CE8B7E /* AppBox.xcdatamodeld in Sources */,
 				E16437D71D743A4E00CE8B7E /* main.m in Sources */,
 				DB831BCB1FF6B5780065B646 /* ABHudViewController.m in Sources */,
-				E1853392200E084500E88529 /* ABLog.m in Sources */,
 				E1902B481E16423200C3E0F6 /* ProjectAdvancedViewController.m in Sources */,
 				DBF290D71FA64A590046D5CE /* ProvisioningDetailsViewController.m in Sources */,
 				DB358B66216FB1AC0080CAC0 /* UploadRecord+CoreDataClass.m in Sources */,

@@ -13,21 +13,25 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
-+(AppDelegate *)appDelegate;
--(void)saveCoreDataChanges;
--(void)openFileWithPath:(NSString *)filePath;
-
+//stored properties
 @property (nonatomic) BOOL processing;
 @property (nonatomic) BOOL isReadyToBuild;
 @property (nonatomic) BOOL isInternetConnected;
+
+//menu iboutlet
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxLogoutButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxSpaceButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxAccountButton;
 @property (nonatomic, weak) IBOutlet NSMenuItem *dropboxNameButton;
+
+//coredata
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+-(void)saveCoreDataChanges;
+
++(AppDelegate *)appDelegate;
+-(void)openFileWithPath:(NSString *)filePath;
 
 @end
 
