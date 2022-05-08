@@ -49,7 +49,7 @@
 	NSError *error = nil;
 	[[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory withIntermediateDirectories:YES attributes:nil error:&error];
 	if (error == nil) {
-		DDLogInfo(@"New temporaray working directory %@", workingDirectory);
+		DDLogDebug(@"New temporaray working directory %@", workingDirectory);
 	} else {
 		DDLogInfo(@"Unable to create temporary working directory %@", workingDirectory);
 	}
@@ -70,6 +70,7 @@
 		// Create new temp working directory
 		[self createNewWorkingDirectory];
 
+		DDLogInfo(@"Extracting IPA file...");
         DDLogDebug(@"Extracting Files to - %@", workingDirectory);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [SSZipArchive unzipFileAtPath:ipaPath

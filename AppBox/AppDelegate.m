@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+	DDFileLogger *fileLogger;
+}
 
 - (void)awakeFromNib{
     [super awakeFromNib];
@@ -21,10 +23,11 @@
 	[DDLog addLogger:[DDOSLogger sharedInstance] withLevel:logLevel]; //OS logger
 	
 	//File logger
-	DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+	fileLogger = [[DDFileLogger alloc] init];
 	fileLogger.doNotReuseLogFiles = true;
 	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
 	[DDLog addLogger:fileLogger withLevel:logLevel];
+	DDLogInfo(@"AppBox Started.");
     
     //Init AppCenter
     [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
@@ -71,6 +74,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
+	DDLogInfo(@"AppBox Terminated.");
     [self saveCoreDataChanges];
 }
 
@@ -102,7 +106,7 @@
 -(BOOL)setAppBoxAsDefualt{
     OSStatus returnStatus = LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.iTunes.ipa"), kLSRolesAll, (__bridge CFStringRef) [[NSBundle mainBundle] bundleIdentifier]);
     if (returnStatus != 0) {
-        NSLog(@"Got an error when setting default application - %d", (int)returnStatus);
+		DDLogInfo(@"Got an error when setting default application - %d", (int)returnStatus);
         return NO;
     }
     return YES;
@@ -112,6 +116,15 @@
 
 +(AppDelegate *)appDelegate{
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
+}
+
+-(void)openLatestLogFile {
+	NSString *latestLogFile = fileLogger.logFileManager.sortedLogFilePaths.firstObject;
+	if (latestLogFile == nil) {
+		DDLogInfo(@"No log file found.");
+	} else {
+		[[NSWorkspace sharedWorkspace] openFile:latestLogFile];
+	}
 }
 
 //URISchem URL Handler
