@@ -11,7 +11,7 @@
 @implementation ABLog
 
 +(void)log:(NSString *)format, ...{
-    if (![UserData debugLog]) {
+    if ([UserData debugLog]) {
         va_list args;
         va_start(args, format);
         NSLogv(format, args);
