@@ -12,6 +12,16 @@
 
 //MARK: - Logged In User
 +(BOOL)isLoggedIn;
++(NSString *)loggedInUserEmail;
++(void)setLoggedInUserEmail:(NSString *)userEmail;
++(NSString *)loggedInUserDisplayName;
++(void)setLoggedInUserDisplayName:(NSString *)loggedInUserDisplayName;
+
+// Dropbox Used and Available Space
++(NSNumber *)dropboxUsedSpace;
++(NSNumber *)dropboxAvailableSpace;
++(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
++(void)setDropboxAvailableSpace:(NSNumber *)availableSpace;
 
 // MARK: - Preferences...
 // Default emails and message
@@ -29,12 +39,6 @@
 +(void)setUserHangoutChatWebHook:(NSString *)slackChannel;
 +(NSString *)userMicrosoftTeamWebHook;
 +(void)setUserMicrosoftTeamWebHook:(NSString *)slackChannel;
-
-// Dropbox Used and Available Space
-+(NSNumber *)dropboxUsedSpace;
-+(NSNumber *)dropboxAvailableSpace;
-+(void)setDropboxUsedSpace:(NSNumber *)usedSpace;
-+(void)setDropboxAvailableSpace:(NSNumber *)availableSpace;
     
 //AppBox Installation page settings
 +(BOOL)downloadIPAEnable;
