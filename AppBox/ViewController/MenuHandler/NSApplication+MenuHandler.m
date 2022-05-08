@@ -11,7 +11,7 @@
 @implementation NSApplication (MenuHandler)
 
 
-#pragma mark - AppBox
+//MARK: - AppBox
 - (IBAction)checkForUpdateTapped:(NSMenuItem *)sender {
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
@@ -27,7 +27,7 @@
     [PreferencesTabViewController presentPreferences];
 }
 
-#pragma mark - File
+//MARK: - File
 - (void)updateDropboxUsage{
     [self updateDropboxUsageFileButton];
     
@@ -67,7 +67,7 @@
     [[[AppDelegate appDelegate] dropboxSpaceButton] setTitle:[NSString stringWithFormat:@"Dropbox Usage : %@MB of %@MB used", used, availabel]];
 }
 
-#pragma mark - Accounts
+//MARK: - Accounts
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Are you sure?"];
@@ -84,7 +84,7 @@
     [self updateDropboxUsage];
 }
 
-#pragma mark - Help
+//MARK: - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
     [EventTracker logEventWithType:LogEventTypeExternalLinkHelp];

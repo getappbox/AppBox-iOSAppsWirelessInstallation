@@ -32,7 +32,7 @@
     return [NSError errorWithDomain:NSCocoaErrorDomain code:code userInfo:errorInfo];
 }
 
-#pragma mark - Notifications
+//MARK: - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
     [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"ALERT -\nTitle - %@ Message - %@", title, message]];
     NSAlert *alert = [[NSAlert alloc] init];
