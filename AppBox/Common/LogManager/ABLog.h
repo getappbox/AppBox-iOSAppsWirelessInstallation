@@ -11,5 +11,6 @@
 @interface ABLog : NSObject
 
 +(void)log:(NSString *)format, ...;
++(void)logImp:(NSString *)format, ...;
 
 @end

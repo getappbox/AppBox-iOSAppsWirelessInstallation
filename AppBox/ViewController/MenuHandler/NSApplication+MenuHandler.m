@@ -58,8 +58,8 @@
                  [self updateDropboxButton];
                  
                  //log space usage
-                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"DropBox Used Space : %@MB", usage]];
-                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"DropBox Available Space : %@MB", allocated]];
+				 [ABLog logImp:@"DropBox Used Space : %@MB", usage];
+				 [ABLog logImp:@"DropBox Available Space : %@MB", allocated];
                  
                  //check if dopbox running out of space
                  if ((allocated.integerValue - usage.integerValue) < abDropboxOutOfSpaceWarningSize){

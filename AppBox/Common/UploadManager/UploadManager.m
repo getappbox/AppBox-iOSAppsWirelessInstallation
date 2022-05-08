@@ -49,9 +49,9 @@
 	NSError *error = nil;
 	[[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory withIntermediateDirectories:YES attributes:nil error:&error];
 	if (error == nil) {
-		[ABLog log:@"New temporaray working directory %@", workingDirectory];
+		[ABLog logImp:@"New temporaray working directory %@", workingDirectory];
 	} else {
-		[ABLog log:@"Unable to create temporary working directory %@", workingDirectory];
+		[ABLog logImp:@"Unable to create temporary working directory %@", workingDirectory];
 	}
 }
 
@@ -120,8 +120,7 @@
                     if (error) {
                         //show error and return
                         if (self.ciRepoProject) {
-                            NSString *log = [NSString stringWithFormat:@"Error - %@", error.localizedDescription];
-                            [[AppDelegate appDelegate] addSessionLog:log];
+							[ABLog logImp:@"Error - %@", error.localizedDescription];
                             exit(abExitCodeUnZipIPAError);
                         } else {
                             [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
@@ -136,12 +135,11 @@
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
-                        NSString *log = @"AppBox was not able to find Info.plist in your IPA.";
                         if (self.ciRepoProject) {
-                            [[AppDelegate appDelegate] addSessionLog:log];
+							[ABLog logImp:@"AppBox was not able to find Info.plist in your IPA."];
                             exit(abExitCodeInfoPlistNotFound);
                         } else {
-                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:log];
+                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox was not able to find Info.plist in your IPA."];
                         }
                         self.errorBlock(nil, YES);
                         return;
@@ -168,7 +166,7 @@
             }];
         });
     }else{
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
+		[ABLog logImp:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath];
         if (self.ciRepoProject) {
             exit(abExitCodeIPAFileNotFound);
         } else {
@@ -384,7 +382,7 @@
 //MARK: - Upload Files
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
+	[ABLog logImp:@"Uploading - %@", file.lastPathComponent];
     
     //Upload large ipa file with dropbox session api
     if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
@@ -547,7 +545,7 @@
     else if (networkError && retryCount < abOnErrorMaxRetryCount && [[AppDelegate appDelegate] isInternetConnected] &&
              (networkError.tag == DBRequestErrorClient || networkError.tag == DBRequestErrorInternalServer)) {
         retryCount++;
-        [[AppDelegate appDelegate] addSessionLog: [NSString stringWithFormat:@"Retrying (%ld) IPA Upload due to some error.", (long)retryCount]];
+		[ABLog logImp:@"Retrying (%ld) IPA Upload due to some error.", (long)retryCount];
         [operation start];
     }
     
@@ -611,7 +609,7 @@
 }
 
 -(void)handleSharedURLError:(DBRequestError *)error forFile:(NSString *)file{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Create Share Link Error - %@",error]];
+	[ABLog logImp:@"Create Share Link Error - %@",error];
     
     //Handle clint side SDK error
     if ([error isClientError]){
@@ -633,7 +631,7 @@
     else if (retryCount < abOnErrorMaxRetryCount) {
         retryCount++;
         [self dbCreateSharedURLForFile:file];
-        [[AppDelegate appDelegate] addSessionLog: [NSString stringWithFormat:@"Retrying (%ld) Shared URL due to some error.", (long)retryCount]];
+		[ABLog logImp:@"Retrying (%ld) Shared URL due to some error.", (long)retryCount];
     }
     
     //Handle other errors
@@ -723,7 +721,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 self.project.appLongShareableURL = shortURL;
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error in creating short URL - %@", error.localizedDescription]];
+				[ABLog logImp:@"Error in creating short URL - %@", error.localizedDescription];
             }
             [self createAndUploadJsonWithURL:shortURL];
         });

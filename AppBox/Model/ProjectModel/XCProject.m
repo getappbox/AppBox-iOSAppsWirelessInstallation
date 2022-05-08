@@ -54,7 +54,7 @@
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
     [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
     
-    [ABLog log:@"\n\n======\nManifest\n======\n\n %@",manifestDict];
+    [ABLog logImp:@"\n\n======\nManifest\n======\n\n %@",manifestDict];
     
     NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
     if ([manifestDict writeToFile:manifestPath atomically:YES]){
@@ -63,7 +63,7 @@
             completion([NSURL fileURLWithPath:manifestPath]);
         });
     }else{
-        [[AppDelegate appDelegate] addSessionLog:@"Can't able to save menifest file"];
+		[ABLog logImp:@"Can't able to save menifest file"];
         completion(nil);
     }
 }

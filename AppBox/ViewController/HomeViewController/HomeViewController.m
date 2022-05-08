@@ -222,7 +222,7 @@
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (textFieldEmail.stringValue.isEmpty || [MailHandler isAllValidEmail:textFieldEmail.stringValue]){
         if ([AppDelegate appDelegate].processing){
-            [[AppDelegate appDelegate] addSessionLog:@"A request already in progress."];
+			[ABLog logImp:@"A request already in progress."];
             return;
         }
         
@@ -301,7 +301,7 @@
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     //log status in session log
-    [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
+	[ABLog logImp:@"%@",status];
     
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
@@ -395,7 +395,7 @@
     if (self.ciRepoProject == nil) {
         [Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
     }
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nSHARE URL - %@\n\n\n.", self.project.appShortShareableURL]];
+	[ABLog logImp:@"\n\n\nSHARE URL - %@\n\n\n.", self.project.appShortShareableURL];
     
     
     if ([UserData userSlackMessage].length > 0) {

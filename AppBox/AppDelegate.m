@@ -26,7 +26,6 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     [center setDelegate:self];
-    self.sessionLog = [[NSMutableString alloc] init];
     
     //Default Setting
     [DefaultSettings setFirstTimeSettings];
@@ -51,7 +50,7 @@
             if (components.count == 2) {
                 [self handleIPAAtPath:[components lastObject]];
             } else {
-                [self addSessionLog:[NSString stringWithFormat:@"Invalid IPA Argument %@",arguments]];
+				[ABLog logImp:@"Invalid IPA Argument %@",arguments];
                 exit(abExitCodeForInvalidCommand);
             }
             break;
@@ -105,35 +104,29 @@
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
 }
 
--(void)addSessionLog:(NSString *)sessionLog{
-    NSLog(@"%@",sessionLog);
-    [_sessionLog appendFormat: @"%@\n",sessionLog];
-    [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
-}
-
 //URISchem URL Handler
 -(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
     NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
-    [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",url]];
+	[ABLog logImp:@"Handling URL = %@",url];
     
     //Check for Dropbox auth
     [DBClientsManager handleRedirectURL:url completion:^(DBOAuthResult * _Nullable authResult) {
         if (authResult != nil) {
             if ([authResult isSuccess]) {
-                [[AppDelegate appDelegate] addSessionLog:@"Success! User is logged into Dropbox."];
+				[ABLog logImp:@"Success! User is logged into Dropbox."];
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
                 [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
             } else if ([authResult isCancel]) {
-                [[AppDelegate appDelegate] addSessionLog:@"Authorization flow was manually canceled by user."];
+				[ABLog logImp:@"Authorization flow was manually canceled by user."];
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             } else if ([authResult isError]) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error: %@", authResult.errorDescription]];
+				[ABLog logImp:@"Error: %@", authResult.errorDescription];
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             }
         } else if (url != nil) {
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"query = %@", url.query]];
+			[ABLog logImp:@"query = %@", url.query];
     //        if (url.query != nil && url.query.length > 0) {
     //            [self handleProjectAtPath:url.query];
     //        }
@@ -144,11 +137,11 @@
 -(void)handleIPAAtPath:(NSString *)ipaPath {
     XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
     if (self.isReadyToBuild) {
-        [self addSessionLog:@"AppBox is ready to upload IPA."];
+		[ABLog logImp:@"AppBox is ready to upload IPA."];
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [self addSessionLog:@"AppBox is ready to upload IPA. [Block]"];
+			[ABLog logImp:@"AppBox is ready to upload IPA. [Block]"];
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];
     }
