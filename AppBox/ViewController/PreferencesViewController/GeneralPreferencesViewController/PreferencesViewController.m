@@ -30,7 +30,7 @@
     [chunkSizeComboBox selectItemAtIndex:[chunkSizes indexOfObject:chunkSize]];
 	
 	//set general settings
-	[limitedLogCheckBox setState: [UserData debugLog] ? NSOnState : NSOffState];
+	[limitedLogCheckBox setState: [UserData debugLog] ? NSOffState : NSOnState];
 	[updateAlertCheckBox setState: [UserData updateAlertEnable] ? NSOnState : NSOffState];
 }
 
@@ -71,7 +71,7 @@
 }
 
 - (IBAction)limitedLogCheckBoxChanged:(NSButton *)sender {
-	[UserData setEnableDebugLog:(sender.state == NSOnState)];
+	[UserData setEnableDebugLog:(sender.state != NSOnState)];
 }
 
 @end
