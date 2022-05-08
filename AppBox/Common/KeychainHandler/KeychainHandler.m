@@ -12,7 +12,7 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
 
 @implementation KeychainHandler
 
-#pragma mark - ITC Accounts
+//MARK: - ITC Accounts
 + (NSArray *)getAllITCAccounts {
     NSMutableArray *filteredITCAccounts = [[NSMutableArray alloc] init];
 //    NSArray *itcAccounts = [SAMKeychain accountsForService:abiTunesConnectService];
@@ -24,7 +24,7 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
     return filteredITCAccounts;
 }
 
-#pragma mark - Keychain
+//MARK: - Keychain
 
 +(NSString *)errorMessageForStatus:(OSStatus)status {
     CFStringRef errorMessage = SecCopyErrorMessageString(status, NULL);
@@ -33,7 +33,7 @@ static NSString *const CERTIFICATE_KEY_READABLE = @"CerKeyReadable";
 }
 
 
-#pragma mark - Remove All Cache, Cookies and Credentials
+//MARK: - Remove All Cache, Cookies and Credentials
 + (void)removeAllStoredCredentials{
     // Delete any cached URLrequests!
     NSURLCache *sharedCache = [NSURLCache sharedURLCache];

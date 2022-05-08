@@ -10,7 +10,7 @@
 
 @implementation XCProject
 
-#pragma mark - Init
+//MARK: - Init
 
 - (instancetype)initEmpty {
     self = [super init];
@@ -23,7 +23,7 @@
     return self;
 }
 
-#pragma mark - Helper
+//MARK: - Helper
 -(void)createUDIDAndIsNew:(BOOL)isNew{
     if (isNew || _uuid == nil){
         [self setUuid: [Common generateUUID]];
@@ -81,7 +81,7 @@
     return false;
 }
 
-#pragma mark - Getter
+//MARK: - Getter
 - (NSString *)uuid{
     [self createUDIDAndIsNew:NO];
     return _uuid;
@@ -111,7 +111,7 @@
     return project;
 }
 
-#pragma mark - Setter
+//MARK: - Setter
 
 -(void)setIpaFullPath:(NSURL *)ipaFullPath{
     _ipaFullPath = ipaFullPath;

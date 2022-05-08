@@ -89,7 +89,7 @@
     }
 }
 
-#pragma mark - Default Application
+//MARK: - Default Application
 -(BOOL)setAppBoxAsDefualt{
     OSStatus returnStatus = LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.iTunes.ipa"), kLSRolesAll, (__bridge CFStringRef) [[NSBundle mainBundle] bundleIdentifier]);
     if (returnStatus != 0) {
@@ -99,7 +99,7 @@
     return YES;
 }
 
-#pragma mark - AppDelegate Helper
+//MARK: - AppDelegate Helper
 
 +(AppDelegate *)appDelegate{
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
@@ -154,12 +154,12 @@
     }
 }
 
-#pragma mark - Notification Center Delegate
+//MARK: - Notification Center Delegate
 -(void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
     [center removeDeliveredNotification:notification];
 }
 
-#pragma mark - Core Data stack
+//MARK: - Core Data stack
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -251,7 +251,7 @@
     return _managedObjectContext;
 }
 
-#pragma mark - Core Data Saving and Undo support
+//MARK: - Core Data Saving and Undo support
 
 - (void)saveCoreDataChanges{
     // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.

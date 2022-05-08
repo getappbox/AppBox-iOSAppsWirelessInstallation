@@ -31,7 +31,7 @@
     return NO;
 }
 
-#pragma mark - Control Actions
+//MARK: - Control Actions
 - (IBAction)saveButtonTapped:(NSButton *)sender {
     [self.view.window makeFirstResponder:self.view];
     if (![self isValidEmailDetails]) {

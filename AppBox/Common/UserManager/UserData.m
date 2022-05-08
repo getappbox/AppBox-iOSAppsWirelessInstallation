@@ -11,12 +11,48 @@
 
 @implementation UserData
 
-// User status
+//MARK: - Logged In User
 +(BOOL)isLoggedIn {
 	return [DBClientsManager authorizedClients] && ([DBClientsManager authorizedClients].count > 0);
 }
 
-#pragma mark - Email Releated -
+#define LoggedInUserEmail @"LoggedInUserEmail"
++(NSString *)loggedInUserEmail {
+	NSString *userEmail = [[NSUserDefaults standardUserDefaults] stringForKey:LoggedInUserEmail];
+	return userEmail == nil ? abEmptyString : userEmail;
+}
+
++(void)setLoggedInUserEmail:(NSString *)loggedInUserEmail {
+	[[NSUserDefaults standardUserDefaults] setValue:loggedInUserEmail forKey:LoggedInUserEmail];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#define LoggedInUserDisplayName @"LoggedInUserDisplayName"
++(NSString *)loggedInUserDisplayName {
+	NSString *displayName = [[NSUserDefaults standardUserDefaults] stringForKey:LoggedInUserDisplayName];
+	return displayName == nil ? abEmptyString : displayName;
+}
+
++(void)setLoggedInUserDisplayName:(NSString *)loggedInUserDisplayName {
+	[[NSUserDefaults standardUserDefaults] setValue:loggedInUserDisplayName forKey:LoggedInUserDisplayName];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//MARK: - Dropbox -
+
+#define DropboxUsedSpace @"DropboxUsedSpace"
+
++(NSNumber *)dropboxUsedSpace{
+	return @([[NSUserDefaults standardUserDefaults] doubleForKey:DropboxUsedSpace]);
+}
+
++(void)setDropboxUsedSpace:(NSNumber *)usedSpace{
+	[[NSUserDefaults standardUserDefaults] setInteger:usedSpace.integerValue forKey:DropboxUsedSpace];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//MARK: - Preferences...
+//MARK: - Email Releated -
 
 #define UserEmail @"UserEmail"
 
@@ -90,19 +126,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - Dropbox -
-
-#define DropboxUsedSpace @"DropboxUsedSpace"
-
-+(NSNumber *)dropboxUsedSpace{
-    return @([[NSUserDefaults standardUserDefaults] doubleForKey:DropboxUsedSpace]);
-}
-
-+(void)setDropboxUsedSpace:(NSNumber *)usedSpace{
-    [[NSUserDefaults standardUserDefaults] setInteger:usedSpace.integerValue forKey:DropboxUsedSpace];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 #define DropboxAvailableSpace @"DropboxAvailableSpace"
 
 +(NSNumber *)dropboxAvailableSpace{
@@ -114,7 +137,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - AppBox Installation Page Settings -
+//MARK: - AppBox Installation Page Settings -
 #define DonwloadIPAEnable @"DonwloadIPAEnable"
 +(BOOL)downloadIPAEnable{
     return [[NSUserDefaults standardUserDefaults] boolForKey:DonwloadIPAEnable];
@@ -146,7 +169,7 @@
 }
 
 
-#pragma mark - App Settings -
+//MARK: - App Settings -
 #define AppSettingIsFirstTime @"AppSettingIsFirstTime"
 +(BOOL)isFirstTime{
     return ![[NSUserDefaults standardUserDefaults] boolForKey:AppSettingIsFirstTime];
@@ -171,7 +194,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - Chunk Size -
+//MARK: - Chunk Size -
 #define UploadChunkSize @"UploadChunkSize"
 +(NSInteger)uploadChunkSize{
     NSInteger chunkSize = [[NSUserDefaults standardUserDefaults] integerForKey:UploadChunkSize];
@@ -183,7 +206,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - CI Settings -
+//MARK: - CI Settings -
 #define DebugLogEnable @"DebugLogEnable"
 +(BOOL)debugLog{
     return [[NSUserDefaults standardUserDefaults] boolForKey:DebugLogEnable];

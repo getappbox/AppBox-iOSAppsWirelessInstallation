@@ -133,11 +133,17 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
-                                        <menuItem title="Referesh Usage" id="dmE-7A-S8S">
+                                        <menuItem title="Referesh" id="dmE-7A-S8S">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="dropboxSpaceTapped:" target="hnw-xV-0zn" id="hl0-zM-evi"/>
                                             </connections>
+                                        </menuItem>
+                                        <menuItem title="Dropbox Name" enabled="NO" id="fNu-KF-egc" userLabel="Dropbox Name">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Dropbox Account" enabled="NO" id="JEl-Yw-mVa">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem title="Dropbox Space" enabled="NO" id="Ug8-0u-jHy" userLabel="Dropbox Space">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -203,7 +209,9 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
                     <connections>
+                        <outlet property="dropboxAccountButton" destination="JEl-Yw-mVa" id="Dh1-Db-3xd"/>
                         <outlet property="dropboxLogoutButton" destination="sBp-fs-Uyn" id="afh-vo-oE7"/>
+                        <outlet property="dropboxNameButton" destination="fNu-KF-egc" id="6zP-OH-eD7"/>
                         <outlet property="dropboxSpaceButton" destination="Ug8-0u-jHy" id="n5f-5O-Xw1"/>
                     </connections>
                 </customObject>

@@ -11,7 +11,7 @@
 @implementation NSApplication (MenuHandler)
 
 
-#pragma mark - AppBox
+//MARK: - AppBox
 - (IBAction)checkForUpdateTapped:(NSMenuItem *)sender {
     [UpdateHandler isNewVersionAvailableCompletion:^(bool available, NSURL *url) {
         if (available){
@@ -27,9 +27,22 @@
     [PreferencesTabViewController presentPreferences];
 }
 
-#pragma mark - File
-- (void)updateDropboxUsage{
-    [self updateDropboxUsageFileButton];
+//MARK: - File
+- (void)updateAccountsMenu{
+    [self updateDropboxButton];
+	
+	//get user account details
+	[[[DBClientsManager authorizedClient].usersRoutes getCurrentAccount] setResponseBlock:^(DBUSERSFullAccount * _Nullable result, DBNilObject * _Nullable routeError, DBRequestError * _Nullable networkError) {
+		if (result) {
+			@try {
+				[UserData setLoggedInUserEmail:result.email];
+				[UserData setLoggedInUserDisplayName:result.name.displayName];
+				[self updateDropboxButton];
+			} @catch (NSException *exception) {
+				[EventTracker logExceptionEvent:exception];
+			}
+		}
+	}];
     
     //get spaces usage
     [[[DBClientsManager authorizedClient].usersRoutes getSpaceUsage]
@@ -42,7 +55,7 @@
                  //save space usage in user default
                  [UserData setDropboxUsedSpace:usage];
                  [UserData setDropboxAvailableSpace:allocated];
-                 [self updateDropboxUsageFileButton];
+                 [self updateDropboxButton];
                  
                  //log space usage
                  [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"DropBox Used Space : %@MB", usage]];
@@ -55,19 +68,36 @@
              } @catch (NSException *exception) {
                  [EventTracker logExceptionEvent:exception];
              }
-         } else if (error.tag == DBRequestErrorAuth) {
-             [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedOutNotification object:self];
          }
      }];
 }
 
-- (void)updateDropboxUsageFileButton{
+- (void)updateDropboxButton{
+	//Dropbox account menu
+	NSString *email = [UserData loggedInUserEmail];
+	
+	NSMenuItem *dropboxAccountButton = [[AppDelegate appDelegate] dropboxAccountButton];
+	NSString *dropboxAccountButtonTitle = [NSString stringWithFormat:@"Email: %@", email];
+	[dropboxAccountButton setHidden:email.isEmpty];
+	[dropboxAccountButton setTitle:dropboxAccountButtonTitle];
+	
+	//Dropbox account name menu
+	NSString *displayName = [UserData loggedInUserDisplayName];
+	NSMenuItem *dropboxNameButton = [[AppDelegate appDelegate] dropboxNameButton];
+	NSString *dropboxNameButtonTitle = [NSString stringWithFormat:@"Name: %@", displayName];
+	[dropboxNameButton setHidden:displayName.isEmpty];
+	[dropboxNameButton setTitle:dropboxNameButtonTitle];
+	
+	//Dropbox space menu
     NSNumber *used = [UserData dropboxUsedSpace];
-    NSNumber *availabel = [UserData dropboxAvailableSpace];
-    [[[AppDelegate appDelegate] dropboxSpaceButton] setTitle:[NSString stringWithFormat:@"Dropbox Usage : %@MB of %@MB used", used, availabel]];
+    NSNumber *available = [UserData dropboxAvailableSpace];
+	
+	NSMenuItem *dropboxSpaceButton = [[AppDelegate appDelegate] dropboxSpaceButton];
+	NSString *dropboxSpaceButtonTitle = [NSString stringWithFormat:@"Usage: %@MB of %@MB used", used, available];
+    [dropboxSpaceButton setTitle:dropboxSpaceButtonTitle];
 }
 
-#pragma mark - Accounts
+//MARK: - Accounts
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Are you sure?"];
@@ -81,10 +111,10 @@
     }
 }
 - (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender {
-    [self updateDropboxUsage];
+    [self updateAccountsMenu];
 }
 
-#pragma mark - Help
+//MARK: - Help
 - (IBAction)helpButtonTapped:(NSMenuItem *)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:abDocumentationURL]];
     [EventTracker logEventWithType:LogEventTypeExternalLinkHelp];
