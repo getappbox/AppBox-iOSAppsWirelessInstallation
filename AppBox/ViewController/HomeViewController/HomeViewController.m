@@ -252,13 +252,19 @@
     //handle dropbox logout for authorized users
     if ([DBClientsManager authorizedClient]){
         [DBClientsManager unlinkAndResetClients];
+		
+		//update home view state
         [self viewStateForProgressFinish:YES];
 		
-		[UserData setLoggedInUserEmail:@""];
+		//reset logged in user details and update accounts menu
 		[UserData setDropboxUsedSpace:@0];
 		[UserData setDropboxAvailableSpace:@0];
+		[UserData setLoggedInUserEmail:@""];
+		[UserData setLoggedInUserDisplayName:@""];
 		[[NSApplication sharedApplication] updateAccountsMenu];
-        [self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
+        
+		//show login page
+		[self performSegueWithIdentifier:@"DropBoxLogin" sender:self];
     }
 }
 
