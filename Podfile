@@ -9,4 +9,5 @@ target :AppBox do
 	pod 'SAMKeychain'
 	pod 'SSZipArchive', '2.4.0'
 	pod 'ZXingObjC'
+	pod 'CocoaLumberjack'
 end
