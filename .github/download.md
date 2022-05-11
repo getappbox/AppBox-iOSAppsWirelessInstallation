@@ -1,7 +1,7 @@
 ## Total Downloads
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/total.svg?style=flat-square)
 
-## Downloads per version
+## Version Downloads
 
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/3.1.0/total.svg?style=flat-square)
 
