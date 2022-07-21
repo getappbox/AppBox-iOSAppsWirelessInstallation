@@ -124,9 +124,7 @@
 - (void)initCIProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         self.ciRepoProject = notification.object;
-        if (self.ciRepoProject.ipaFullPath) {
-            [self initIPAUploadProcessForURL:self.ciRepoProject.ipaFullPath];
-        }
+        [self initIPAUploadProcessForCIProject:self.ciRepoProject];
     }
 }
 
@@ -165,13 +163,22 @@
     }
 }
 
-- (void)initIPAUploadProcessForURL:(NSURL *)ipaURL {
+- (void)initIPAUploadProcessForCIProject:(XCProject *)ciProject {
+    NSURL *ipaURL = ciProject.ipaFullPath;
+    if (ipaURL == nil) {
+        return;
+    }
+
     [self viewStateForProgressFinish:YES];
     [self.project setIpaFullPath:ipaURL];
     [selectedFilePath setURL:ipaURL];
-    [textFieldEmail setStringValue:self.project.emails];
-    [textFieldMessage setStringValue:self.project.personalMessage];
-    [buttonUniqueLink setState:self.project.keepSameLink.boolValue ? NSOnState : NSOffState];
+    if (ciProject.emails.length != 0) {
+        [textFieldEmail setStringValue:ciProject.emails];
+    }
+    if (ciProject.personalMessage.length != 0) {
+        [textFieldMessage setStringValue:ciProject.personalMessage];
+    }
+    [buttonUniqueLink setState:ciProject.keepSameLink.boolValue ? NSOnState : NSOffState];
     [self actionButtonTapped:buttonAction];
 }
 
