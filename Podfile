@@ -1,4 +1,4 @@
-platform :osx, '10.11'
+platform :osx, '10.15'
 inhibit_all_warnings!
 
 target :AppBox do
