@@ -16,6 +16,7 @@
 			dependencies = (
 			);
 			name = AppCenter;
+			productName = AppCenter;
 		};
 /* End PBXAggregateTarget section */
 
@@ -2810,7 +2811,7 @@
 		00BD3E7E0499F69451AD951BC44FE8F1 /* DBFILEPROPERTIESPropertiesSearchResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILEPROPERTIESPropertiesSearchResult.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/FileProperties/Headers/DBFILEPROPERTIESPropertiesSearchResult.h; sourceTree = "<group>"; };
 		00C29E5E4BF1F239840C9F796B65CD94 /* DBOAuthConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBOAuthConstants.h; path = Source/ObjectiveDropboxOfficial/Headers/Internal/OAuth/DBOAuthConstants.h; sourceTree = "<group>"; };
 		00E842300D60F2BE5C8DE7D4F3FAA62B /* DBTEAMLOGSharedContentChangeMemberRoleDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedContentChangeMemberRoleDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedContentChangeMemberRoleDetails.h; sourceTree = "<group>"; };
-		00F32F9E426B30CB0A050ACC8587ADCD /* mz_strm_buf.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_buf.c; path = SSZipArchive/minizip/mz_strm_buf.c; sourceTree = "<group>"; };
+		00F32F9E426B30CB0A050ACC8587ADCD /* mz_strm_buf.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_buf.c; path = SSZipArchive/minizip/mz_strm_buf.c; sourceTree = "<group>"; };
 		00FEE7D2F806C3C14277C7F9A6DDB01D /* DBPAPERPaperApiBaseError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBPAPERPaperApiBaseError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Paper/Headers/DBPAPERPaperApiBaseError.h; sourceTree = "<group>"; };
 		0100F841E5FA15F6BDF2CF2A5D7D913F /* DBTEAMLOGUserTagsRemovedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGUserTagsRemovedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGUserTagsRemovedDetails.h; sourceTree = "<group>"; };
 		012ACA9CEB657735FDFECB0ED8A34AC4 /* ZXModulusGF.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXModulusGF.m; path = ZXingObjC/pdf417/decoder/ec/ZXModulusGF.m; sourceTree = "<group>"; };
@@ -2892,7 +2893,7 @@
 		07EE9D86B0BB56F16A0960EA0F1A1567 /* ZXEmailAddressParsedResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXEmailAddressParsedResult.h; path = ZXingObjC/client/result/ZXEmailAddressParsedResult.h; sourceTree = "<group>"; };
 		07F1CC871B0F60E8DCEC23618034ADE4 /* DBTEAMPOLICIESShowcaseExternalSharingPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMPOLICIESShowcaseExternalSharingPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamPolicies/Headers/DBTEAMPOLICIESShowcaseExternalSharingPolicy.h; sourceTree = "<group>"; };
 		0803190A3AC8BA90C33B8148E78E8F58 /* ZXCalendarParsedResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXCalendarParsedResult.m; path = ZXingObjC/client/result/ZXCalendarParsedResult.m; sourceTree = "<group>"; };
-		0812A788E85B73DD88602A460142B989 /* AppCenterCrashes.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = AppCenterCrashes.xcframework; path = "AppCenter-SDK-Apple/AppCenterCrashes.xcframework"; sourceTree = "<group>"; };
+		0812A788E85B73DD88602A460142B989 /* AppCenterCrashes.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; name = AppCenterCrashes.xcframework; path = "AppCenter-SDK-Apple/AppCenterCrashes.xcframework"; sourceTree = "<group>"; };
 		085D9E3EC654CCA758466515CAFD73A1 /* DBTEAMLOGSharedContentRemoveLinkPasswordDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedContentRemoveLinkPasswordDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedContentRemoveLinkPasswordDetails.h; sourceTree = "<group>"; };
 		0869A0D83141DC72C97D09FD106DDB3C /* DBFILEREQUESTSUpdateFileRequestArgs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILEREQUESTSUpdateFileRequestArgs.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/FileRequests/Headers/DBFILEREQUESTSUpdateFileRequestArgs.h; sourceTree = "<group>"; };
 		0873FD30A6B76B669244163CC37981C6 /* DBTEAMLOGIntegrationPolicyChangedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGIntegrationPolicyChangedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGIntegrationPolicyChangedType.h; sourceTree = "<group>"; };
@@ -2951,13 +2952,13 @@
 		0C7B2F2386AB4944EB12B9D5968C32A2 /* DBTEAMLOGFolderOverviewDescriptionChangedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFolderOverviewDescriptionChangedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFolderOverviewDescriptionChangedType.h; sourceTree = "<group>"; };
 		0CB0A6894787A70FADAC7FE927302C1A /* DBURLSessionTaskResponseBlockWrapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBURLSessionTaskResponseBlockWrapper.h; path = Source/ObjectiveDropboxOfficial/Headers/Internal/Networking/DBURLSessionTaskResponseBlockWrapper.h; sourceTree = "<group>"; };
 		0CB3818CD2E77E5046CDE5C81A1B451E /* DBTEAMLOGDomainInvitesEmailExistingUsersDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGDomainInvitesEmailExistingUsersDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGDomainInvitesEmailExistingUsersDetails.h; sourceTree = "<group>"; };
-		0CDA5E21659FF2CBAFC472EEDED36A4C /* mz_zip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_zip.c; path = SSZipArchive/minizip/mz_zip.c; sourceTree = "<group>"; };
+		0CDA5E21659FF2CBAFC472EEDED36A4C /* mz_zip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_zip.c; path = SSZipArchive/minizip/mz_zip.c; sourceTree = "<group>"; };
 		0D0B79972D52523D6986473845FFF626 /* DBTEAMLOGFileAddCommentDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFileAddCommentDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFileAddCommentDetails.h; sourceTree = "<group>"; };
 		0D53E512C9BAEC5D19FDD2C1EDF8B1AF /* ZXResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXResult.m; path = ZXingObjC/core/ZXResult.m; sourceTree = "<group>"; };
 		0D59D853EE74A64E14816AD2A33179DD /* DBTEAMLOGGovernancePolicyExportCreatedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGGovernancePolicyExportCreatedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGGovernancePolicyExportCreatedDetails.h; sourceTree = "<group>"; };
 		0D64DB2102E17F10CEAD1A118D465663 /* DBFILESGetCopyReferenceArg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESGetCopyReferenceArg.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESGetCopyReferenceArg.h; sourceTree = "<group>"; };
 		0D7A1AAAF1AAA49A09B563B3E86036CE /* ZXITFWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXITFWriter.m; path = ZXingObjC/oned/ZXITFWriter.m; sourceTree = "<group>"; };
-		0D7A9123B1B86530568724EA12840BA3 /* mz_compat.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_compat.c; path = SSZipArchive/minizip/mz_compat.c; sourceTree = "<group>"; };
+		0D7A9123B1B86530568724EA12840BA3 /* mz_compat.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_compat.c; path = SSZipArchive/minizip/mz_compat.c; sourceTree = "<group>"; };
 		0D920ECE5E45F809E0C4CEE458EC86A8 /* ZXQRCodeReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXQRCodeReader.h; path = ZXingObjC/qrcode/ZXQRCodeReader.h; sourceTree = "<group>"; };
 		0D92E27A51196AECB538174E6A3B8838 /* DBTEAMLOGPaperDocOwnershipChangedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDocOwnershipChangedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDocOwnershipChangedDetails.h; sourceTree = "<group>"; };
 		0DA644F76D9DE4527063657EAB982E3B /* DBTEAMLOGParticipantLogInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGParticipantLogInfo.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGParticipantLogInfo.h; sourceTree = "<group>"; };
@@ -2998,7 +2999,7 @@
 		10BCACE3D873123B68AB9BC99B89B9FC /* DBTEAMLOGContentAdministrationPolicyChangedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGContentAdministrationPolicyChangedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGContentAdministrationPolicyChangedType.h; sourceTree = "<group>"; };
 		10D9DD6EE81C5F1C1EC01F6E11F38167 /* DBTEAMLOGFileTransfersPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFileTransfersPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFileTransfersPolicy.h; sourceTree = "<group>"; };
 		10EC511685CDD320E8634BA0E4A598EB /* DBPAPERUserInfoWithPermissionLevel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBPAPERUserInfoWithPermissionLevel.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Paper/Headers/DBPAPERUserInfoWithPermissionLevel.h; sourceTree = "<group>"; };
-		1119138D5217B99F54514DBCA8A87ED1 /* mz_strm_zlib.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_zlib.c; path = SSZipArchive/minizip/mz_strm_zlib.c; sourceTree = "<group>"; };
+		1119138D5217B99F54514DBCA8A87ED1 /* mz_strm_zlib.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_zlib.c; path = SSZipArchive/minizip/mz_strm_zlib.c; sourceTree = "<group>"; };
 		111C84D97A5AE040558B62B70913A0A7 /* DBTEAMRemovedStatus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMRemovedStatus.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMRemovedStatus.h; sourceTree = "<group>"; };
 		112DC7828A57977D72244C7DE538D092 /* DBTEAMLOGSsoRemoveLogoutUrlType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSsoRemoveLogoutUrlType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSsoRemoveLogoutUrlType.h; sourceTree = "<group>"; };
 		112E5A0F0DF768CF43BD76F356B44E43 /* SAMKeychain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SAMKeychain.m; path = Sources/SAMKeychain.m; sourceTree = "<group>"; };
@@ -3048,7 +3049,7 @@
 		166359B0C5F60462CF4279220E0AFD1C /* DBFILESContentSyncSetting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESContentSyncSetting.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESContentSyncSetting.h; sourceTree = "<group>"; };
 		1682FF6B8EF0106CB1C80798EDC4079D /* DBTEAMLOGGroupCreateDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGGroupCreateDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGGroupCreateDetails.h; sourceTree = "<group>"; };
 		168BBE626F1A2348B3C665E0346AC5F6 /* DBTEAMLOGPaperContentAddToFolderDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperContentAddToFolderDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperContentAddToFolderDetails.h; sourceTree = "<group>"; };
-		16A7C573A86FC3FD2BEAABE3A94781E5 /* libObjectiveDropboxOfficial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libObjectiveDropboxOfficial.a; path = libObjectiveDropboxOfficial.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		16A7C573A86FC3FD2BEAABE3A94781E5 /* libObjectiveDropboxOfficial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveDropboxOfficial.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B422844FD83ECD407DA06F20B622A2 /* ZXByteArray.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXByteArray.h; path = ZXingObjC/common/ZXByteArray.h; sourceTree = "<group>"; };
 		16B4BAE681C3D15D358E4B3D046723BC /* ZXSMSParsedResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXSMSParsedResult.h; path = ZXingObjC/client/result/ZXSMSParsedResult.h; sourceTree = "<group>"; };
 		16CB063539F071B2836CA0B769F3A3C8 /* DBTEAMGroupSelectorWithTeamGroupError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMGroupSelectorWithTeamGroupError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMGroupSelectorWithTeamGroupError.h; sourceTree = "<group>"; };
@@ -3165,7 +3166,7 @@
 		232C39A1F2873D264CBC75D93C7E7586 /* ZXResultParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXResultParser.m; path = ZXingObjC/client/result/ZXResultParser.m; sourceTree = "<group>"; };
 		2366E4AAAB0C92442CB485A8530E6FFD /* DBSHARINGFolderPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGFolderPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGFolderPolicy.h; sourceTree = "<group>"; };
 		237BC425D7D3D768FAEF5C3E18AA0907 /* DBTEAMLOGApplyNamingConventionDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGApplyNamingConventionDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGApplyNamingConventionDetails.h; sourceTree = "<group>"; };
-		23D5732B422BD9DB496E056D418B9A0E /* mz_strm_split.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_split.c; path = SSZipArchive/minizip/mz_strm_split.c; sourceTree = "<group>"; };
+		23D5732B422BD9DB496E056D418B9A0E /* mz_strm_split.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_split.c; path = SSZipArchive/minizip/mz_strm_split.c; sourceTree = "<group>"; };
 		23F1CA40B4AAB9CF430A48CB40916F53 /* ZXCode128Writer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXCode128Writer.m; path = ZXingObjC/oned/ZXCode128Writer.m; sourceTree = "<group>"; };
 		242CCCAE381A5E62490F5BE24BB59F3B /* DBTEAMLOGGovernancePolicyDeleteType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGGovernancePolicyDeleteType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGGovernancePolicyDeleteType.h; sourceTree = "<group>"; };
 		24326707FB85E9640D65AAF0D8A60FDC /* DBTEAMLOGNoteAclLinkType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGNoteAclLinkType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGNoteAclLinkType.h; sourceTree = "<group>"; };
@@ -3239,7 +3240,7 @@
 		2AAE57E71695F0A96ADDBE31B74B0B49 /* DBTEAMLOGPaperDocDeleteCommentDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDocDeleteCommentDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDocDeleteCommentDetails.h; sourceTree = "<group>"; };
 		2AB1A160DD56BC38196C81454E17FAAF /* DBTEAMLOGPaperChangeMemberLinkPolicyDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperChangeMemberLinkPolicyDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperChangeMemberLinkPolicyDetails.h; sourceTree = "<group>"; };
 		2AB6EE52B6DE368E394CEC5EBE5BA101 /* DBUSERSSpaceUsage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBUSERSSpaceUsage.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Users/Headers/DBUSERSSpaceUsage.h; sourceTree = "<group>"; };
-		2AD33C58ABB14BF1790B26742620D824 /* mz_zip_rw.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_zip_rw.c; path = SSZipArchive/minizip/mz_zip_rw.c; sourceTree = "<group>"; };
+		2AD33C58ABB14BF1790B26742620D824 /* mz_zip_rw.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_zip_rw.c; path = SSZipArchive/minizip/mz_zip_rw.c; sourceTree = "<group>"; };
 		2AE85077D4CB81E536E661C9483C7190 /* DBSHARINGUnshareFolderError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGUnshareFolderError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGUnshareFolderError.h; sourceTree = "<group>"; };
 		2AF99034F8839F00F25335041D844A81 /* DBTEAMLOGSmartSyncOptOutType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSmartSyncOptOutType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSmartSyncOptOutType.h; sourceTree = "<group>"; };
 		2AFFD2EF8035B8303F3A8528BA65A252 /* DBTEAMLOGSfTeamGrantAccessDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSfTeamGrantAccessDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSfTeamGrantAccessDetails.h; sourceTree = "<group>"; };
@@ -3374,7 +3375,7 @@
 		37B299EF3A417464967F3275DE0A7995 /* DBFILEPROPERTIESAddTemplateResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILEPROPERTIESAddTemplateResult.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/FileProperties/Headers/DBFILEPROPERTIESAddTemplateResult.h; sourceTree = "<group>"; };
 		37C65931EED069AD0883DAA1E8D8148C /* ZXProductParsedResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXProductParsedResult.m; path = ZXingObjC/client/result/ZXProductParsedResult.m; sourceTree = "<group>"; };
 		37E5B71C8A707787566958C7695940A9 /* DBTEAMLOGFolderOverviewItemPinnedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFolderOverviewItemPinnedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFolderOverviewItemPinnedType.h; sourceTree = "<group>"; };
-		37EF9F6DAE373A14887DFAC5F3725DB4 /* libCMDQueryStringSerialization.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCMDQueryStringSerialization.a; path = libCMDQueryStringSerialization.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EF9F6DAE373A14887DFAC5F3725DB4 /* libCMDQueryStringSerialization.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCMDQueryStringSerialization.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38260FDF3406D5E5858D7ADFC52F9C56 /* DBTEAMLOGShowcaseUntrashedDeprecatedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGShowcaseUntrashedDeprecatedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGShowcaseUntrashedDeprecatedDetails.h; sourceTree = "<group>"; };
 		3832FDA392A8711F3C6F60B20D2BAFD9 /* DBTEAMLOGDeviceManagementDisabledType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGDeviceManagementDisabledType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGDeviceManagementDisabledType.h; sourceTree = "<group>"; };
 		384495492F9C65518597FE979B490DBD /* DBFILESSearchMatchFieldOptions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESSearchMatchFieldOptions.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESSearchMatchFieldOptions.h; sourceTree = "<group>"; };
@@ -3387,7 +3388,7 @@
 		38D35C57789EE74355BC80C2FD8EEC44 /* DBTEAMLOGBinderRemoveSectionDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGBinderRemoveSectionDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGBinderRemoveSectionDetails.h; sourceTree = "<group>"; };
 		3931A74543392DD1EDFAA8942B29F319 /* DBTEAMLOGResellerSupportSessionEndDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGResellerSupportSessionEndDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGResellerSupportSessionEndDetails.h; sourceTree = "<group>"; };
 		39345304C3266707FED72816DDFAB92B /* DBTEAMLOGFileEditCommentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFileEditCommentType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFileEditCommentType.h; sourceTree = "<group>"; };
-		393495BB6DA5222C4001C488AAFD4DF8 /* AppCenter.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = AppCenter.xcframework; path = "AppCenter-SDK-Apple/AppCenter.xcframework"; sourceTree = "<group>"; };
+		393495BB6DA5222C4001C488AAFD4DF8 /* AppCenter.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; name = AppCenter.xcframework; path = "AppCenter-SDK-Apple/AppCenter.xcframework"; sourceTree = "<group>"; };
 		39452289C13FB8204D11C274FC79FE28 /* DBSEENSTATEPlatformType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSEENSTATEPlatformType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/SeenState/Headers/DBSEENSTATEPlatformType.h; sourceTree = "<group>"; };
 		394E7D686A43AA2AFBA372D92B5162F6 /* DBFILESSearchMatchTypeV2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESSearchMatchTypeV2.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESSearchMatchTypeV2.h; sourceTree = "<group>"; };
 		3950FCEBE4CB2219AD19B2827EB3317D /* DBSHARINGLinkPermission.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGLinkPermission.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGLinkPermission.h; sourceTree = "<group>"; };
@@ -3474,7 +3475,7 @@
 		3FFE96131B4154034BAE22C04A634751 /* DBFILESDownloadZipError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESDownloadZipError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESDownloadZipError.h; sourceTree = "<group>"; };
 		40071FA196B6F74F175E2AC8D7F5FF75 /* CMDQueryStringWritingOptions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CMDQueryStringWritingOptions.h; path = CMDQueryStringSerialization/CMDQueryStringWritingOptions.h; sourceTree = "<group>"; };
 		401836F6F66135B0CA25B55614292236 /* ZXAnyAIDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXAnyAIDecoder.h; path = ZXingObjC/oned/rss/expanded/decoders/ZXAnyAIDecoder.h; sourceTree = "<group>"; };
-		401C4E8BFA977BCBAE79831483268693 /* mz_crypt.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_crypt.c; path = SSZipArchive/minizip/mz_crypt.c; sourceTree = "<group>"; };
+		401C4E8BFA977BCBAE79831483268693 /* mz_crypt.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_crypt.c; path = SSZipArchive/minizip/mz_crypt.c; sourceTree = "<group>"; };
 		4023356A6DC4759CC11BD2CBE3877675 /* DBSHARINGVisibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGVisibility.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGVisibility.h; sourceTree = "<group>"; };
 		403B1375B478F185E4CBBE559F085D23 /* DBSDKReachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSDKReachability.h; path = Source/ObjectiveDropboxOfficial/Headers/Internal/Networking/DBSDKReachability.h; sourceTree = "<group>"; };
 		4045D62CFBC7596651F8417EBF7F5BFF /* DBFILESTag.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESTag.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESTag.h; sourceTree = "<group>"; };
@@ -3534,7 +3535,7 @@
 		447847E0D7E27320C5C47701CE815044 /* DBCHECKRouteObjects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DBCHECKRouteObjects.m; path = Source/ObjectiveDropboxOfficial/Shared/Generated/Routes/RouteObjects/DBCHECKRouteObjects.m; sourceTree = "<group>"; };
 		44AC521E07629A3C869A878FFC885C1F /* DBTEAMLOGSharedFolderTransferOwnershipType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedFolderTransferOwnershipType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedFolderTransferOwnershipType.h; sourceTree = "<group>"; };
 		44BCC7B818262C9AB9953A1942EE536D /* DBSHARINGListFoldersArgs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGListFoldersArgs.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGListFoldersArgs.h; sourceTree = "<group>"; };
-		44DB68FA4D1F5DA408E3120A5FD63CF1 /* mz_crypt_apple.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_crypt_apple.c; path = SSZipArchive/minizip/mz_crypt_apple.c; sourceTree = "<group>"; };
+		44DB68FA4D1F5DA408E3120A5FD63CF1 /* mz_crypt_apple.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_crypt_apple.c; path = SSZipArchive/minizip/mz_crypt_apple.c; sourceTree = "<group>"; };
 		44E49B2998F34346FE2A572B11A6FD78 /* ZXQRCodeMultiReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXQRCodeMultiReader.h; path = ZXingObjC/qrcode/multi/ZXQRCodeMultiReader.h; sourceTree = "<group>"; };
 		44EF68324CBE80447B5DCF6CC4BC0AE5 /* DBTEAMLOGNoPasswordLinkGenReportFailedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGNoPasswordLinkGenReportFailedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGNoPasswordLinkGenReportFailedDetails.h; sourceTree = "<group>"; };
 		4517018C7C9A6596DF45546960A0B9D7 /* DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGTeamMergeRequestRejectedShownToSecondaryTeamType.h; sourceTree = "<group>"; };
@@ -3675,7 +3676,7 @@
 		51093A8E321FD862AF5D6F78B813A2BD /* DBTEAMMemberAddV2Result.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMMemberAddV2Result.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMMemberAddV2Result.h; sourceTree = "<group>"; };
 		511C3107F9328F793BC0989338C1BF52 /* DBGlobalErrorResponseHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBGlobalErrorResponseHandler.h; path = Source/ObjectiveDropboxOfficial/Shared/Handwritten/Networking/DBGlobalErrorResponseHandler.h; sourceTree = "<group>"; };
 		512E94B28C15022D26135AF8ADEFBEF3 /* DBFILESRelocationBatchLaunch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESRelocationBatchLaunch.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESRelocationBatchLaunch.h; sourceTree = "<group>"; };
-		5139A06C5D9801219751414B70699F2E /* mz_os.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_os.c; path = SSZipArchive/minizip/mz_os.c; sourceTree = "<group>"; };
+		5139A06C5D9801219751414B70699F2E /* mz_os.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_os.c; path = SSZipArchive/minizip/mz_os.c; sourceTree = "<group>"; };
 		51539B4BCDF893C8DD08DD22A442D09F /* DBSHARINGViewerInfoPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGViewerInfoPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGViewerInfoPolicy.h; sourceTree = "<group>"; };
 		515D569FD5A3BDF434C04AF72E39C014 /* DBSHARINGFileMemberActionResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGFileMemberActionResult.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGFileMemberActionResult.h; sourceTree = "<group>"; };
 		51A242E9657E25E314FC237D5FA5F9B7 /* DBSHARINGExpectedSharedContentLinkMetadata.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGExpectedSharedContentLinkMetadata.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGExpectedSharedContentLinkMetadata.h; sourceTree = "<group>"; };
@@ -3840,7 +3841,7 @@
 		5FC017B69BCD1DAE26CB9AA5CB665CB9 /* DBTEAMUserDeleteResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMUserDeleteResult.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMUserDeleteResult.h; sourceTree = "<group>"; };
 		5FC41BB36D93B97D9E043ED18308D066 /* ZXAztecHighLevelEncoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXAztecHighLevelEncoder.m; path = ZXingObjC/aztec/encoder/ZXAztecHighLevelEncoder.m; sourceTree = "<group>"; };
 		5FCD82C33698830DC88B32F3D86E2076 /* DBTEAMLOGSharedLinkChangeVisibilityDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedLinkChangeVisibilityDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedLinkChangeVisibilityDetails.h; sourceTree = "<group>"; };
-		5FD88319C85C71C803EE60AA1CFC6663 /* mz_strm_wzaes.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_wzaes.c; path = SSZipArchive/minizip/mz_strm_wzaes.c; sourceTree = "<group>"; };
+		5FD88319C85C71C803EE60AA1CFC6663 /* mz_strm_wzaes.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_wzaes.c; path = SSZipArchive/minizip/mz_strm_wzaes.c; sourceTree = "<group>"; };
 		60075C7E81D82D7FA276B0659C842F50 /* DBTEAMTeamNamespacesListContinueArg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMTeamNamespacesListContinueArg.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMTeamNamespacesListContinueArg.h; sourceTree = "<group>"; };
 		601555886CBE20DDAD1DB830DA5771B9 /* DBTEAMLOGFileLockingLockStatusChangedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFileLockingLockStatusChangedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFileLockingLockStatusChangedDetails.h; sourceTree = "<group>"; };
 		60316D080AD96BA5A2D2A7966E1F5584 /* DBCOMMONUserRootInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBCOMMONUserRootInfo.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Common/Headers/DBCOMMONUserRootInfo.h; sourceTree = "<group>"; };
@@ -3857,7 +3858,7 @@
 		610255806375DA3E0AB1025D9CA21798 /* DBTEAMLOGGroupAddExternalIdDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGGroupAddExternalIdDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGGroupAddExternalIdDetails.h; sourceTree = "<group>"; };
 		61107745ADECBAEB5A9D7A8389FAE267 /* ZXPDF417DetectionResultColumn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXPDF417DetectionResultColumn.h; path = ZXingObjC/pdf417/decoder/ZXPDF417DetectionResultColumn.h; sourceTree = "<group>"; };
 		611265F3C1B17C9D55D396B25AC4028F /* DBFILESMinimalFileLinkMetadata.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESMinimalFileLinkMetadata.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESMinimalFileLinkMetadata.h; sourceTree = "<group>"; };
-		612028EAFF1C2054A0EB821A9C9F2440 /* libSAMKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSAMKeychain.a; path = libSAMKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		612028EAFF1C2054A0EB821A9C9F2440 /* libSAMKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSAMKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		612B232CF3491946FBC191A6335DA1E1 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDASLLogCapture.h; sourceTree = "<group>"; };
 		6132E8FB648A54D26607EFCF46A8D6B3 /* DBTEAMLOGFileTransfersPolicyChangedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFileTransfersPolicyChangedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFileTransfersPolicyChangedType.h; sourceTree = "<group>"; };
 		6139AB96D83E41C560EFE35CBDA058B2 /* DBTEAMLOGNoteShareReceiveDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGNoteShareReceiveDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGNoteShareReceiveDetails.h; sourceTree = "<group>"; };
@@ -4019,7 +4020,7 @@
 		6F386B6139334DC47CBA1BCEB2FE6A16 /* DBTEAMLOGShowcaseUnresolveCommentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGShowcaseUnresolveCommentType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGShowcaseUnresolveCommentType.h; sourceTree = "<group>"; };
 		6F5BC232ABD5523000550F5A8B8BB9D2 /* DBRequestErrors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBRequestErrors.h; path = Source/ObjectiveDropboxOfficial/Shared/Handwritten/Networking/DBRequestErrors.h; sourceTree = "<group>"; };
 		6F68EBFCE773BFE4D615247C4FD34C2E /* DBTEAMMembersSetProfileError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMMembersSetProfileError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMMembersSetProfileError.h; sourceTree = "<group>"; };
-		6F73B6C7971A37DCD5170ED89E3DF741 /* libZXingObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libZXingObjC.a; path = libZXingObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F73B6C7971A37DCD5170ED89E3DF741 /* libZXingObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZXingObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FCAD77B69D68C7AC55E54625489336A /* ZXGeoResultParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXGeoResultParser.h; path = ZXingObjC/client/result/ZXGeoResultParser.h; sourceTree = "<group>"; };
 		6FE82C90E4506AFB2A2CC1A8D7DA6B64 /* DBTEAMLOGPaperDocFollowedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDocFollowedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDocFollowedType.h; sourceTree = "<group>"; };
 		6FF643F3EFF3E9BAB0233850611B2CA5 /* DBTEAMGetActivityReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMGetActivityReport.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMGetActivityReport.h; sourceTree = "<group>"; };
@@ -4092,7 +4093,7 @@
 		761091B786EBF347C5E4CCD953D4AE9C /* DBSHARINGLinkPassword.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGLinkPassword.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGLinkPassword.h; sourceTree = "<group>"; };
 		761E6919CDBCBF8769AC7C489D3D206F /* ZXDimension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXDimension.m; path = ZXingObjC/core/ZXDimension.m; sourceTree = "<group>"; };
 		76A054B79D5575AA03C59BE3D4C2A04A /* DBTEAMLOGEmmAddExceptionDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGEmmAddExceptionDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGEmmAddExceptionDetails.h; sourceTree = "<group>"; };
-		76A34690213A1533FBCE6BF3961F2821 /* mz_strm_os_posix.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_os_posix.c; path = SSZipArchive/minizip/mz_strm_os_posix.c; sourceTree = "<group>"; };
+		76A34690213A1533FBCE6BF3961F2821 /* mz_strm_os_posix.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_os_posix.c; path = SSZipArchive/minizip/mz_strm_os_posix.c; sourceTree = "<group>"; };
 		76AF51279285B367166DA47CE0AF05DF /* ZXAztecEncoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXAztecEncoder.m; path = ZXingObjC/aztec/encoder/ZXAztecEncoder.m; sourceTree = "<group>"; };
 		76D8B1F1DA68B3B0B7B2823F2CA0F1BC /* DBTEAMLOGSharedFolderMountDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedFolderMountDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedFolderMountDetails.h; sourceTree = "<group>"; };
 		76E3F7F76822A4D3D81026412439A2E6 /* DBUSERSRouteObjects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DBUSERSRouteObjects.m; path = Source/ObjectiveDropboxOfficial/Shared/Generated/Routes/RouteObjects/DBUSERSRouteObjects.m; sourceTree = "<group>"; };
@@ -4196,7 +4197,7 @@
 		8039D0D6C5E600C69BE77175E89EC9AE /* ZXRGBLuminanceSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXRGBLuminanceSource.h; path = ZXingObjC/core/ZXRGBLuminanceSource.h; sourceTree = "<group>"; };
 		803C3995FB4F4DD57FE62FCADAB3A20A /* DBTEAMLOGPaperDocUntrashedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDocUntrashedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDocUntrashedType.h; sourceTree = "<group>"; };
 		803DE708CF2003AF070EBB1A493FAE28 /* DBTEAMLOGSharedContentCopyType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedContentCopyType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedContentCopyType.h; sourceTree = "<group>"; };
-		804B88736C625FB089CA8A30901D3BDE /* mz_strm.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm.c; path = SSZipArchive/minizip/mz_strm.c; sourceTree = "<group>"; };
+		804B88736C625FB089CA8A30901D3BDE /* mz_strm.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm.c; path = SSZipArchive/minizip/mz_strm.c; sourceTree = "<group>"; };
 		80529D38A60D78739804CE39123D460A /* ZXMultiFormatWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXMultiFormatWriter.m; path = ZXingObjC/ZXMultiFormatWriter.m; sourceTree = "<group>"; };
 		807EF660EF6074229982F855DAFDA6A9 /* ZXMultiFinderPatternFinder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXMultiFinderPatternFinder.m; path = ZXingObjC/qrcode/multi/detector/ZXMultiFinderPatternFinder.m; sourceTree = "<group>"; };
 		8083E7F094C1E6B967CE9A30B38F4386 /* DBTEAMLOGAccountCaptureNotificationType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGAccountCaptureNotificationType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGAccountCaptureNotificationType.h; sourceTree = "<group>"; };
@@ -4290,7 +4291,7 @@
 		8843C2ECFCA41BA366FC04CEA95236B7 /* DBTEAMLOGNoteAclLinkDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGNoteAclLinkDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGNoteAclLinkDetails.h; sourceTree = "<group>"; };
 		8854624F2B810B5169E9C1DC39335427 /* DBTEAMLOGSharedLinkDisableType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGSharedLinkDisableType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGSharedLinkDisableType.h; sourceTree = "<group>"; };
 		8873F73BDE26578066BC013C2A65E83D /* ZXQRCodeVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXQRCodeVersion.h; path = ZXingObjC/qrcode/decoder/ZXQRCodeVersion.h; sourceTree = "<group>"; };
-		8879D806A3C9D2BE8B14C1FD74191780 /* libISO8601.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libISO8601.a; path = libISO8601.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8879D806A3C9D2BE8B14C1FD74191780 /* libISO8601.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libISO8601.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		887E38B4D03792D3D232475364276912 /* DBTEAMLOGChangedEnterpriseAdminRoleType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGChangedEnterpriseAdminRoleType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGChangedEnterpriseAdminRoleType.h; sourceTree = "<group>"; };
 		8893C1B5A52CE471279F16583E576B0F /* ISO8601-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ISO8601-prefix.pch"; sourceTree = "<group>"; };
 		8893C829F597EB8F51461B75C1906A9C /* DBTEAMLOGIntegrationConnectedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGIntegrationConnectedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGIntegrationConnectedType.h; sourceTree = "<group>"; };
@@ -4399,7 +4400,7 @@
 		9188A15F79337C35B088F32E240DA1B2 /* DBTEAMLOGShowcaseEditCommentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGShowcaseEditCommentType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGShowcaseEditCommentType.h; sourceTree = "<group>"; };
 		918B1EC896E60EF7B0922A114F3356A1 /* DBAccountObjects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DBAccountObjects.m; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Account/DBAccountObjects.m; sourceTree = "<group>"; };
 		919FFC3BC025C4678515DDD19014D013 /* DBFILEPROPERTIESRemovePropertiesError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILEPROPERTIESRemovePropertiesError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/FileProperties/Headers/DBFILEPROPERTIESRemovePropertiesError.h; sourceTree = "<group>"; };
-		91B23470DEB9A986332BEB5034234BC7 /* libSSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSSZipArchive.a; path = libSSZipArchive.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		91B23470DEB9A986332BEB5034234BC7 /* libSSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSSZipArchive.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B423DE493471179F4604B4A387171F /* DBTEAMExcludedUsersListError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMExcludedUsersListError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMExcludedUsersListError.h; sourceTree = "<group>"; };
 		91BBAD63531652B97A5B31B639AB6BFD /* ZXExpandedProductResultParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXExpandedProductResultParser.m; path = ZXingObjC/client/result/ZXExpandedProductResultParser.m; sourceTree = "<group>"; };
 		91BFC428414A7196F7890D314966AC61 /* NSDate+ISO8601.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+ISO8601.h"; path = "Sources/NSDate+ISO8601.h"; sourceTree = "<group>"; };
@@ -4523,7 +4524,7 @@
 		9D49CBDFA0C08A8DA65DF30B88697103 /* DBACCOUNTSetProfilePhotoResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBACCOUNTSetProfilePhotoResult.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Account/Headers/DBACCOUNTSetProfilePhotoResult.h; sourceTree = "<group>"; };
 		9D4B1E14C813A872EB8A9CBF6E41BEDE /* DBTEAMRouteObjects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DBTEAMRouteObjects.m; path = Source/ObjectiveDropboxOfficial/Shared/Generated/Routes/RouteObjects/DBTEAMRouteObjects.m; sourceTree = "<group>"; };
 		9D4B583F171D4A77311AF58EA3B12E1A /* CMDQueryStringSerialization.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CMDQueryStringSerialization.debug.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DB130F5D390F12A0C67856A8363F10A /* DBTEAMLOGDeviceApprovalsChangeDesktopPolicyType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGDeviceApprovalsChangeDesktopPolicyType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGDeviceApprovalsChangeDesktopPolicyType.h; sourceTree = "<group>"; };
 		9DC0D08F510CFA622FE19BBC0CF661A3 /* DBFILESSymlinkInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESSymlinkInfo.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESSymlinkInfo.h; sourceTree = "<group>"; };
 		9DCD25C507A13BF222FEF25E10903828 /* DBSHARINGGetSharedLinksError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGGetSharedLinksError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGGetSharedLinksError.h; sourceTree = "<group>"; };
@@ -4602,7 +4603,7 @@
 		A4A35E5CECD0AEA27903B24046E97F5A /* DBTEAMLOGPaperContentArchiveType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperContentArchiveType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperContentArchiveType.h; sourceTree = "<group>"; };
 		A4EB3D9F978DA8B54FF9514C3E6C1069 /* DBTEAMLOGPaperDesktopPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDesktopPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDesktopPolicy.h; sourceTree = "<group>"; };
 		A4F12342DA90BFFD6F563F0346B273D5 /* DBUSERSFullAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBUSERSFullAccount.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Users/Headers/DBUSERSFullAccount.h; sourceTree = "<group>"; };
-		A4FA15D44DF6BAC7550EDEED10862AA3 /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libAFNetworking.a; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4FA15D44DF6BAC7550EDEED10862AA3 /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51DE8014F0359B7C49B2F834C7CC518 /* ZXPDF417BarcodeMatrix.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXPDF417BarcodeMatrix.m; path = ZXingObjC/pdf417/encoder/ZXPDF417BarcodeMatrix.m; sourceTree = "<group>"; };
 		A53288B7FE95ACF57406628C817AB6B5 /* mz_crypt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mz_crypt.h; path = SSZipArchive/minizip/mz_crypt.h; sourceTree = "<group>"; };
 		A54173F6681100216E693C07C3A8622C /* DBTEAMMemberAddArgBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMMemberAddArgBase.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMMemberAddArgBase.h; sourceTree = "<group>"; };
@@ -4628,7 +4629,7 @@
 		A7562A37BF13E9D169FBCD16FFD1E8C9 /* DBTEAMLOGDeviceManagementEnabledDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGDeviceManagementEnabledDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGDeviceManagementEnabledDetails.h; sourceTree = "<group>"; };
 		A7A5D9A19969444892EAB5C38B492573 /* DBTEAMLOGDefaultLinkExpirationDaysPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGDefaultLinkExpirationDaysPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGDefaultLinkExpirationDaysPolicy.h; sourceTree = "<group>"; };
 		A7E0B037E64640DBA0989ACEC4C9BCAD /* DBTEAMLOGLegalHoldsReportAHoldDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGLegalHoldsReportAHoldDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGLegalHoldsReportAHoldDetails.h; sourceTree = "<group>"; };
-		A7E9728BB5ED1DC223FA871D5723A2E8 /* mz_strm_mem.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_mem.c; path = SSZipArchive/minizip/mz_strm_mem.c; sourceTree = "<group>"; };
+		A7E9728BB5ED1DC223FA871D5723A2E8 /* mz_strm_mem.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_mem.c; path = SSZipArchive/minizip/mz_strm_mem.c; sourceTree = "<group>"; };
 		A85552DF50F12A97649890FC6900A27A /* DBSHARINGAddFileMemberArgs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGAddFileMemberArgs.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGAddFileMemberArgs.h; sourceTree = "<group>"; };
 		A87357F5495D7FA51043B8C351E5C1D5 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Sources/CocoaLumberjack/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
 		A88476EE7877D51EDBDCC37DA5BCCE23 /* DBTEAMLOGFolderOverviewItemPinnedDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFolderOverviewItemPinnedDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFolderOverviewItemPinnedDetails.h; sourceTree = "<group>"; };
@@ -4920,7 +4921,7 @@
 		C1EC4083EA889C8E1B785CB17BC7F8B9 /* ZXDataMatrixX12Encoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXDataMatrixX12Encoder.h; path = ZXingObjC/datamatrix/encoder/ZXDataMatrixX12Encoder.h; sourceTree = "<group>"; };
 		C2013DDD14DFBCD1C4B27DCDB3F11701 /* DBTEAMLOGAdminAlertingChangedAlertConfigDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGAdminAlertingChangedAlertConfigDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGAdminAlertingChangedAlertConfigDetails.h; sourceTree = "<group>"; };
 		C21D82971F57DF37318400AC1DCD74DC /* DBOAuthDesktop-macOS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DBOAuthDesktop-macOS.h"; path = "Source/ObjectiveDropboxOfficial/Platform/ObjectiveDropboxOfficial_macOS/DBOAuthDesktop-macOS.h"; sourceTree = "<group>"; };
-		C261436D14052AE3C35F240BCD155CAC /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCocoaLumberjack.a; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C261436D14052AE3C35F240BCD155CAC /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27C4BDFCC75CDA8A35F613BF3541674 /* DBTEAMLOGShowcaseArchivedType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGShowcaseArchivedType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGShowcaseArchivedType.h; sourceTree = "<group>"; };
 		C2C0C290F400047B851B792C9A4D49B5 /* DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGTeamMergeRequestReminderShownToPrimaryTeamType.h; sourceTree = "<group>"; };
 		C2E072CA49993783519E5E8AAADD18EA /* DBTEAMLOGFileDeleteCommentDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFileDeleteCommentDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFileDeleteCommentDetails.h; sourceTree = "<group>"; };
@@ -5019,7 +5020,7 @@
 		CD0129052F492946F82F3CF063941A8B /* DBTEAMLOGMobileSessionLogInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGMobileSessionLogInfo.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGMobileSessionLogInfo.h; sourceTree = "<group>"; };
 		CD4648E7575AD02BCF784CA50AA76444 /* DBTEAMLOGPaperDocDownloadDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDocDownloadDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDocDownloadDetails.h; sourceTree = "<group>"; };
 		CD507D8C942E338F24AFAD9E679B0A7B /* ZXAI013x0xDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXAI013x0xDecoder.h; path = ZXingObjC/oned/rss/expanded/decoders/ZXAI013x0xDecoder.h; sourceTree = "<group>"; };
-		CD61EA2AA4CDC24F4A989009CCB38217 /* AppCenterAnalytics.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = AppCenterAnalytics.xcframework; path = "AppCenter-SDK-Apple/AppCenterAnalytics.xcframework"; sourceTree = "<group>"; };
+		CD61EA2AA4CDC24F4A989009CCB38217 /* AppCenterAnalytics.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; name = AppCenterAnalytics.xcframework; path = "AppCenter-SDK-Apple/AppCenterAnalytics.xcframework"; sourceTree = "<group>"; };
 		CD8477537887A0076B3F316C9D2BD63D /* DBTEAMLOGLoginSuccessType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGLoginSuccessType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGLoginSuccessType.h; sourceTree = "<group>"; };
 		CD89E5B0C58CA3193E813B84C7DD8FED /* DBTEAMPOLICIESSharedFolderJoinPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMPOLICIESSharedFolderJoinPolicy.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamPolicies/Headers/DBTEAMPOLICIESSharedFolderJoinPolicy.h; sourceTree = "<group>"; };
 		CDAA3D1ABAF4FFEAD5D7C145CDD41C23 /* ZXMaxiCodeBitMatrixParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXMaxiCodeBitMatrixParser.m; path = ZXingObjC/maxicode/decoder/ZXMaxiCodeBitMatrixParser.m; sourceTree = "<group>"; };
@@ -5162,7 +5163,7 @@
 		DA1EB73B9A2A4B37BA87CF1839603584 /* DBTEAMRevokeLinkedAppStatus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMRevokeLinkedAppStatus.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMRevokeLinkedAppStatus.h; sourceTree = "<group>"; };
 		DA561AC35ED32919EF83D02C6FF3F38E /* ZXingObjCPDF417.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXingObjCPDF417.h; path = ZXingObjC/pdf417/ZXingObjCPDF417.h; sourceTree = "<group>"; };
 		DA5BC53D475A5E14423C4CA004E83046 /* ZXISBNParsedResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXISBNParsedResult.m; path = ZXingObjC/client/result/ZXISBNParsedResult.m; sourceTree = "<group>"; };
-		DA668969467E64635715D53DA4D2BB77 /* mz_os_posix.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_os_posix.c; path = SSZipArchive/minizip/mz_os_posix.c; sourceTree = "<group>"; };
+		DA668969467E64635715D53DA4D2BB77 /* mz_os_posix.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_os_posix.c; path = SSZipArchive/minizip/mz_os_posix.c; sourceTree = "<group>"; };
 		DA74BF5E1C00713A593CFFD96B5953B0 /* ZXURIParsedResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXURIParsedResult.h; path = ZXingObjC/client/result/ZXURIParsedResult.h; sourceTree = "<group>"; };
 		DA9DCFD3A2B9B0603F88757976795DF8 /* DDLoggerNames.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLoggerNames.h; path = Sources/CocoaLumberjack/include/CocoaLumberjack/DDLoggerNames.h; sourceTree = "<group>"; };
 		DAA381725BBC02ECE4C81DA781F4D6A1 /* DBTEAMLOGPaperDocAddCommentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGPaperDocAddCommentType.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGPaperDocAddCommentType.h; sourceTree = "<group>"; };
@@ -5361,7 +5362,7 @@
 		ED3CAACAEDD0795AC492397CCFC8F766 /* DBTEAMTeamNamespacesListArg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMTeamNamespacesListArg.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMTeamNamespacesListArg.h; sourceTree = "<group>"; };
 		ED45662398AD0CDA4D5332255349FB48 /* DBTEAMLOGFedHandshakeAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGFedHandshakeAction.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGFedHandshakeAction.h; sourceTree = "<group>"; };
 		ED65F4F2D7F947B6DAC89C289449E133 /* DBPAPERListUsersOnPaperDocResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBPAPERListUsersOnPaperDocResponse.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Paper/Headers/DBPAPERListUsersOnPaperDocResponse.h; sourceTree = "<group>"; };
-		ED6DF018F8A980A82B544C17222C13DB /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-AppBox.a"; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED6DF018F8A980A82B544C17222C13DB /* libPods-AppBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AppBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7738F09375E9C7CFB13C1762FC6B83 /* DBSHARINGShareFolderError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGShareFolderError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGShareFolderError.h; sourceTree = "<group>"; };
 		EDC5BCB33EA63ABA12ABD9EA7959519D /* DBTEAMListMemberDevicesArg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMListMemberDevicesArg.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMListMemberDevicesArg.h; sourceTree = "<group>"; };
 		EDF8903182A6F476C960C25ADD59664A /* DBFILESSyncSettingsError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESSyncSettingsError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESSyncSettingsError.h; sourceTree = "<group>"; };
@@ -5513,7 +5514,7 @@
 		FC8D7C7B39D7E393EDC5E53BBFC45487 /* DBSHARINGGroupMembershipInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBSHARINGGroupMembershipInfo.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Sharing/Headers/DBSHARINGGroupMembershipInfo.h; sourceTree = "<group>"; };
 		FC975939BA3CA54137F169BCB42BAD0B /* ZXLuminanceSource.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLuminanceSource.m; path = ZXingObjC/core/ZXLuminanceSource.m; sourceTree = "<group>"; };
 		FCC3D9462AC1A69D31D137955F8C044B /* DBFILESUploadSessionFinishBatchResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESUploadSessionFinishBatchResult.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESUploadSessionFinishBatchResult.h; sourceTree = "<group>"; };
-		FCC564C5C09F1954ACA701BDDACF3CE4 /* mz_strm_pkcrypt.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mz_strm_pkcrypt.c; path = SSZipArchive/minizip/mz_strm_pkcrypt.c; sourceTree = "<group>"; };
+		FCC564C5C09F1954ACA701BDDACF3CE4 /* mz_strm_pkcrypt.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mz_strm_pkcrypt.c; path = SSZipArchive/minizip/mz_strm_pkcrypt.c; sourceTree = "<group>"; };
 		FCD1B1BA36E9A3707CC0ABAAC8B602F3 /* DBFILESPreviewError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBFILESPreviewError.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Files/Headers/DBFILESPreviewError.h; sourceTree = "<group>"; };
 		FCFCA4E75698A29A95DC657E0858A847 /* DBTEAMLOGAllowDownloadEnabledDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMLOGAllowDownloadEnabledDetails.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/TeamLog/Headers/DBTEAMLOGAllowDownloadEnabledDetails.h; sourceTree = "<group>"; };
 		FD0B7DB48E47EFC7F4F22927240F56FE /* DBTEAMTeamFolderCreateArg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DBTEAMTeamFolderCreateArg.h; path = Source/ObjectiveDropboxOfficial/Shared/Generated/ApiObjects/Team/Headers/DBTEAMTeamFolderCreateArg.h; sourceTree = "<group>"; };
@@ -5633,7 +5634,6 @@
 				BF4FD2A17C42110F53B819F30B302341 /* Crashes */,
 				07A3616B60D5D0412F57CD1A43964D9F /* Support Files */,
 			);
-			name = AppCenter;
 			path = AppCenter;
 			sourceTree = "<group>";
 		};
@@ -5684,7 +5684,6 @@
 				2F58162D434397D8EB75EA5D8F425B1A /* Resources */,
 				49EA1C538B03C8E94C7F679E684FCC86 /* Support Files */,
 			);
-			name = SAMKeychain;
 			path = SAMKeychain;
 			sourceTree = "<group>";
 		};
@@ -7818,7 +7817,6 @@
 				4A32C0C0052A7B2D655026100B8097C0 /* ObjectiveDropboxOfficialLib.h */,
 				F7AC2BE37C443D6705C67A416357F908 /* Support Files */,
 			);
-			name = ObjectiveDropboxOfficial;
 			path = ObjectiveDropboxOfficial;
 			sourceTree = "<group>";
 		};
@@ -7860,7 +7858,6 @@
 				4A0452EA7B464C5EF2B831A954A40812 /* ZipArchive.h */,
 				C0FFF946CB8E20E6892F0EE2C1C12FD8 /* Support Files */,
 			);
-			name = SSZipArchive;
 			path = SSZipArchive;
 			sourceTree = "<group>";
 		};
@@ -8410,7 +8407,6 @@
 				984E8F203FE14EF29F4AE5655BEE920C /* Serialization */,
 				F79C840CA94ACF33C3BC111A24BAB7E5 /* Support Files */,
 			);
-			name = AFNetworking;
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
@@ -8448,7 +8444,6 @@
 				C90521731BF0877DE134D570B161E75D /* NSDate+ISO8601.m */,
 				CE75DAC08D8C9E9FBF0EFAB6EA6CBC0B /* Support Files */,
 			);
-			name = ISO8601;
 			path = ISO8601;
 			sourceTree = "<group>";
 		};
@@ -8478,7 +8473,6 @@
 				67F8AF5262AE4EF784710F541A5932BE /* All */,
 				793F9C2CDD09FDBD73B3C7367482B809 /* Support Files */,
 			);
-			name = ZXingObjC;
 			path = ZXingObjC;
 			sourceTree = "<group>";
 		};
@@ -8582,7 +8576,6 @@
 				642B12B80545C77F0892AD12BB6ED1E4 /* NSURL+CMDQueryStringSerialization.m */,
 				43386B33C05F724E81B4E548CF143AB6 /* Support Files */,
 			);
-			name = CMDQueryStringSerialization;
 			path = CMDQueryStringSerialization;
 			sourceTree = "<group>";
 		};
@@ -8671,7 +8664,6 @@
 				EE2BF0FAAF8D9CEEE9C8D1BEDC0C16AB /* Core */,
 				B547AC87B82D999B295C35EEB2AB1231 /* Support Files */,
 			);
-			name = CocoaLumberjack;
 			path = CocoaLumberjack;
 			sourceTree = "<group>";
 		};
@@ -11248,7 +11240,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1340;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -11803,7 +11795,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C44E13A241CCB61FA5899D070D7449DF /* ISO8601.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -11828,7 +11819,6 @@
 			baseConfigurationReference = 10A9578014F473A3332E89F4FE33C4DD /* Pods-AppBox.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -11915,7 +11905,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B3F24CCFC6CC301D389949D8549A22B5 /* CMDQueryStringSerialization.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -11938,7 +11927,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28B6E2429EBB059B8513B8745BB6648E /* ObjectiveDropboxOfficial.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -11962,7 +11950,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3083F39B485EB0B7C6E24DCBCE5D7BBA /* AppCenter.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -11976,7 +11963,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 384CE2BC1692F7348129EE14730D8BC8 /* ObjectiveDropboxOfficial.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12001,7 +11987,6 @@
 			baseConfigurationReference = 996A5D99237115A277637EF9DC1D6856 /* Pods-AppBox.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12022,7 +12007,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 032B6D49DAE4BD6AC0ACCFDFF035CB3F /* ISO8601.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12046,7 +12030,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 883C8F5539CD6CE077723B3CD468EB67 /* CocoaLumberjack.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12122,8 +12105,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -12133,7 +12115,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69FC295582A5B6EDE69B4EBA161D3381 /* ZXingObjC.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -12155,7 +12136,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B171837F88BBA571876CB6C73D9AF3F2 /* AFNetworking.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12179,7 +12159,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE01C8F9C0A221C44C7E740D4346D1D1 /* SSZipArchive.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -12203,7 +12182,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 021E38B1B944C8F40E4FBA9529551ED1 /* CocoaLumberjack.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12228,7 +12206,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F8512A11651550BD9B5610781F488D7 /* ZXingObjC.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -12250,7 +12227,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8677A29B9E28F2B6881E6305EC1A3601 /* AFNetworking.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -12274,7 +12250,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F22DB72211CFF8BB5C84138E8F249D6 /* AppCenter.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -12288,7 +12263,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D4B583F171D4A77311AF58EA3B12E1A /* CMDQueryStringSerialization.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -12311,7 +12285,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2F555B707BC726D0461C77C386940CDC /* SSZipArchive.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -12335,7 +12308,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 30AEC402A1754AC57BEE2305C1687A77 /* SAMKeychain.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -12358,7 +12330,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF826E29F412BE75E221087E6682E54B /* SAMKeychain.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
