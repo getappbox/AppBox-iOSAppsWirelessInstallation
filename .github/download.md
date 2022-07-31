@@ -3,6 +3,8 @@
 
 ## Version Downloads
 
+![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/3.2.0/total.svg?style=flat-square)
+
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/3.1.0/total.svg?style=flat-square)
 
 ![](https://img.shields.io/github/downloads/vineetchoudhary/AppBox-iOSAppsWirelessInstallation/3.0.1/total.svg?style=flat-square)
