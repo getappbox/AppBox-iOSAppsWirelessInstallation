@@ -3,7 +3,6 @@
 //  SSZipArchive
 //
 //  Created by Sam Soffes on 7/21/10.
-//  Copyright (c) Sam Soffes 2010-2015. All rights reserved.
 //
 
 #import "SSZipArchive.h"
@@ -761,13 +760,22 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:keepParentDirectory withPassword:nil];
 }
 
-+ (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths withPassword:(NSString *)password
++ (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths withPassword:(NSString *)password {
+    return [self createZipFileAtPath:path withFilesAtPaths:paths withPassword:password progressHandler:nil];
+}
+
++ (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths withPassword:(NSString *)password progressHandler:(void(^ _Nullable)(NSUInteger entryNumber, NSUInteger total))progressHandler
 {
     SSZipArchive *zipArchive = [[SSZipArchive alloc] initWithPath:path];
     BOOL success = [zipArchive open];
     if (success) {
+        NSUInteger total = paths.count, complete = 0;
         for (NSString *filePath in paths) {
             success &= [zipArchive writeFile:filePath withPassword:password];
+            if (progressHandler) {
+                complete++;
+                progressHandler(complete, total);
+            }
         }
         success &= [zipArchive close];
     }
@@ -972,7 +980,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     }
 
     uint16_t version_madeby = 3 << 8;//UNIX
-    int error = zipOpenNewFileInZip5(_zip, fileName.fileSystemRepresentation, &zipInfo, NULL, 0, NULL, 0, NULL, Z_DEFLATED, compressionLevel, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, aes, version_madeby, 0, 0);
+    int error = zipOpenNewFileInZip5(_zip, fileName.fileSystemRepresentation, &zipInfo, NULL, 0, NULL, 0, NULL, Z_DEFLATED, compressionLevel, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, 0, aes, version_madeby, 0, 0);
     zipWriteInFileInZip(_zip, link_path, (uint32_t)strlen(link_path));
     zipCloseFileInZip(_zip);
     return error == ZIP_OK;
@@ -1277,7 +1285,7 @@ int _zipOpenEntry(zipFile entry, NSString *name, const zip_fileinfo *zipfi, int 
     uint16_t made_on_darwin = 19 << 8;
     //MZ_ZIP_FLAG_UTF8
     uint16_t flag_base = 1 << 11;
-    return zipOpenNewFileInZip5(entry, name.fileSystemRepresentation, zipfi, NULL, 0, NULL, 0, NULL, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, aes, made_on_darwin, flag_base, 1);
+    return zipOpenNewFileInZip5(entry, name.fileSystemRepresentation, zipfi, NULL, 0, NULL, 0, NULL, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, 0, aes, made_on_darwin, flag_base, 1);
 }
 
 #pragma mark - Private tools for file info

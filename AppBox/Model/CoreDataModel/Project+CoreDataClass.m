@@ -126,7 +126,7 @@
                     }
                 } @catch (NSException *exception) {
                     [EventTracker logExceptionEvent:exception];
-                    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Exception %@",exception.userInfo]];
+					DDLogInfo(@"Exception %@",exception.userInfo);
                 }
             }
             
@@ -147,7 +147,7 @@
         }
     } @catch (NSException *exception) {
         [EventTracker logExceptionEvent:exception];
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Exception %@",exception.userInfo]];
+		DDLogInfo(@"Exception %@",exception.userInfo);
     }
     return nil;
 }

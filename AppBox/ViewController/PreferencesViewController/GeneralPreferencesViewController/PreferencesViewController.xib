@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -229,7 +229,7 @@
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="dHx-Ol-1na">
                                 <rect key="frame" x="151" y="11" width="719" height="18"/>
-                                <buttonCell key="cell" type="check" title="Limited Log" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mEu-Dd-3lJ">
+                                <buttonCell key="cell" type="check" title="Limited Log (Restart Required)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mEu-Dd-3lJ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

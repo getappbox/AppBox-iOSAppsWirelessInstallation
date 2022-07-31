@@ -124,9 +124,7 @@
 - (void)initCIProcess:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[XCProject class]]) {
         self.ciRepoProject = notification.object;
-        if (self.ciRepoProject.ipaFullPath) {
-            [self initIPAUploadProcessForURL:self.ciRepoProject.ipaFullPath];
-        }
+        [self initIPAUploadProcessForCIProject:self.ciRepoProject];
     }
 }
 
@@ -165,13 +163,22 @@
     }
 }
 
-- (void)initIPAUploadProcessForURL:(NSURL *)ipaURL {
+- (void)initIPAUploadProcessForCIProject:(XCProject *)ciProject {
+    NSURL *ipaURL = ciProject.ipaFullPath;
+    if (ipaURL == nil) {
+        return;
+    }
+
     [self viewStateForProgressFinish:YES];
     [self.project setIpaFullPath:ipaURL];
     [selectedFilePath setURL:ipaURL];
-    [textFieldEmail setStringValue:self.project.emails];
-    [textFieldMessage setStringValue:self.project.personalMessage];
-    [buttonUniqueLink setState:self.project.keepSameLink.boolValue ? NSOnState : NSOffState];
+    if (ciProject.emails.length != 0) {
+        [textFieldEmail setStringValue:ciProject.emails];
+    }
+    if (ciProject.personalMessage.length != 0) {
+        [textFieldMessage setStringValue:ciProject.personalMessage];
+    }
+    [buttonUniqueLink setState:ciProject.keepSameLink.boolValue ? NSOnState : NSOffState];
     [self actionButtonTapped:buttonAction];
 }
 
@@ -222,7 +229,7 @@
 - (IBAction)actionButtonTapped:(NSButton *)sender {
     if (textFieldEmail.stringValue.isEmpty || [MailHandler isAllValidEmail:textFieldEmail.stringValue]){
         if ([AppDelegate appDelegate].processing){
-            [[AppDelegate appDelegate] addSessionLog:@"A request already in progress."];
+			DDLogInfo(@"A request already in progress.");
             return;
         }
         
@@ -272,7 +279,7 @@
 //MARK: - Controller Helpers -
 
 -(void)viewStateForProgressFinish:(BOOL)finish{
-    [ABLog log:@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]];
+    DDLogDebug(@"Updating view setting for finish - %@", [NSNumber numberWithBool:finish]);
     [[AppDelegate appDelegate] setProcessing:!finish];
     [[AppDelegate appDelegate] setIsReadyToBuild:finish];
     
@@ -301,7 +308,7 @@
 
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     //log status in session log
-    [[AppDelegate appDelegate]addSessionLog:[NSString stringWithFormat:@"%@",status]];
+	DDLogInfo(@"%@",status);
     
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){
@@ -395,7 +402,7 @@
     if (self.ciRepoProject == nil) {
         [Common showUploadNotificationWithName:self.project.name andURL:self.project.appShortShareableURL];
     }
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@".\n\n\nSHARE URL - %@\n\n\n.", self.project.appShortShareableURL]];
+	DDLogInfo(@"\n\n\nSHARE URL - %@\n\n\n.", self.project.appShortShareableURL);
     
     
     if ([UserData userSlackMessage].length > 0) {

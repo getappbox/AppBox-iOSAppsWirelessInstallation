@@ -14,8 +14,8 @@
 /***************************************************************************/
 
 /* MZ_VERSION */
-#define MZ_VERSION                      ("3.0.2")
-#define MZ_VERSION_BUILD                (030002)
+#define MZ_VERSION                      ("3.0.6")
+#define MZ_VERSION_BUILD                (030006)
 
 /* MZ_ERROR */
 #define MZ_OK                           (0)  /* zlib */
@@ -126,8 +126,14 @@
 #define MZ_HASH_MD5_SIZE                (16)
 #define MZ_HASH_SHA1                    (20)
 #define MZ_HASH_SHA1_SIZE               (20)
+#define MZ_HASH_SHA224                  (22)
+#define MZ_HASH_SHA224_SIZE             (28)
 #define MZ_HASH_SHA256                  (23)
 #define MZ_HASH_SHA256_SIZE             (32)
+#define MZ_HASH_SHA384                  (24)
+#define MZ_HASH_SHA384_SIZE             (48)
+#define MZ_HASH_SHA512                  (25)
+#define MZ_HASH_SHA512_SIZE             (64)
 #define MZ_HASH_MAX_SIZE                (256)
 
 /* MZ_ENCODING */
@@ -168,28 +174,28 @@
 #  endif
 #endif
 
-#ifndef __INT8_TYPE__
+#ifndef INT8_MAX
 typedef signed char        int8_t;
 #endif
-#ifndef __INT16_TYPE__
+#ifndef INT16_MAX
 typedef short              int16_t;
 #endif
-#ifndef __INT32_TYPE__
+#ifndef INT32_MAX
 typedef int                int32_t;
 #endif
-#ifndef __INT64_TYPE__
+#ifndef INT64_MAX
 typedef long long          int64_t;
 #endif
-#ifndef __UINT8_TYPE__
+#ifndef UINT8_MAX
 typedef unsigned char      uint8_t;
 #endif
-#ifndef __UINT16_TYPE__
+#ifndef UINT16_MAX
 typedef unsigned short     uint16_t;
 #endif
-#ifndef __UINT32_TYPE__
+#ifndef UINT32_MAX
 typedef unsigned int       uint32_t;
 #endif
-#ifndef __UINT64_TYPE__
+#ifndef UINT64_MAX
 typedef unsigned long long uint64_t;
 #endif
 

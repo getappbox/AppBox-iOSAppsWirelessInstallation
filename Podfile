@@ -1,4 +1,4 @@
-platform :osx, '10.11'
+platform :osx, '10.15'
 inhibit_all_warnings!
 
 target :AppBox do
@@ -7,6 +7,7 @@ target :AppBox do
 	pod 'CMDQueryStringSerialization'
 	pod 'ObjectiveDropboxOfficial'
 	pod 'SAMKeychain'
-	pod 'SSZipArchive', '2.4.0'
+	pod 'SSZipArchive'
 	pod 'ZXingObjC'
+	pod 'CocoaLumberjack'
 end
