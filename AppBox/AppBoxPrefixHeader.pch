@@ -10,7 +10,7 @@
 #define AppBoxPrefixHeader_pch
 
 
-#import <ZipArchive.h>
+#import <SSZipArchive/SSZipArchive.h>
 #import <AppCenter/AppCenter.h>
 #import <AppCenterCrashes/AppCenterCrashes.h>
 #import <AppCenterAnalytics/AppCenterAnalytics.h>
