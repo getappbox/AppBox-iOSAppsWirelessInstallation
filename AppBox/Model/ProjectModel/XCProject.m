@@ -54,16 +54,16 @@
     NSMutableDictionary *manifestDict = [[NSMutableDictionary alloc] init];
     [manifestDict setValue:[NSArray arrayWithObjects:mainItemDict, nil] forKey:@"items"];
     
-    [ABLog log:@"\n\n======\nManifest\n======\n\n %@",manifestDict];
+	DDLogDebug(@"\n\n======\nManifest\n======\n\n %@",manifestDict);
     
     NSString *manifestPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"manifest.plist"];
     if ([manifestDict writeToFile:manifestPath atomically:YES]){
-        [ABLog log:@"Menifest File Created and Saved at %@", manifestPath];
+        DDLogDebug(@"Menifest File Created and Saved at %@", manifestPath);
         dispatch_async(dispatch_get_main_queue(), ^{
             completion([NSURL fileURLWithPath:manifestPath]);
         });
     }else{
-        [[AppDelegate appDelegate] addSessionLog:@"Can't able to save menifest file"];
+		DDLogInfo(@"Can't able to save menifest file");
         completion(nil);
     }
 }

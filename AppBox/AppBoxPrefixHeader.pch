@@ -10,7 +10,7 @@
 #define AppBoxPrefixHeader_pch
 
 
-#import <ZipArchive.h>
+#import <SSZipArchive/SSZipArchive.h>
 #import <AppCenter/AppCenter.h>
 #import <AppCenterCrashes/AppCenterCrashes.h>
 #import <AppCenterAnalytics/AppCenterAnalytics.h>
@@ -18,8 +18,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import <ABPrivate/ABPrivate.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
-#import "ABLog.h"
 #import "MBProgressHUD+ProgressHud.h"
 
 #import "UserData.h"
@@ -52,4 +52,6 @@
 #import "AppBoxService+CoreDataProperties.h"
 #import "ProvisionedDevice+CoreDataProperties.h"
 #import "ProvisioningProfile+CoreDataProperties.h"
+
+static const DDLogLevel ddLogLevel = DDLogLevelAll;
 #endif /* AppBoxPrefixHeader_pch */

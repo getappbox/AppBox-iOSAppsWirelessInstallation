@@ -29,13 +29,13 @@
         //send message
         [NetworkHandler requestWithURL:webHookURL withParameters:parameters andRequestType:RequestPOST andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             if (responseObj && error == nil) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Microsoft Team Response - %@", responseObj]];
+				DDLogInfo(@"Microsoft Team Response - %@", responseObj);
                 completion(YES);
             } else if (error) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Microsoft Team Error - %@", error.localizedDescription]];
+				DDLogInfo(@"Microsoft Team Error - %@", error.localizedDescription);
                 completion(NO);
             } else {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Microsoft Team Error - Unknown Error"]];
+				DDLogInfo(@"Microsoft Team Error - Unknown Error");
                 completion(NO);
             }
         }];

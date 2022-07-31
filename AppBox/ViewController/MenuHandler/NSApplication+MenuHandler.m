@@ -22,12 +22,16 @@
     }];
 }
 
+//MARK: - File
+- (IBAction)viewLogFileTapped:(NSMenuItem *)sender {
+	[[AppDelegate appDelegate] openLatestLogFile];
+}
 
 - (IBAction)preferencesTapped:(NSMenuItem *)sender {
     [PreferencesTabViewController presentPreferences];
 }
 
-//MARK: - File
+//MARK: - Accounts
 - (void)updateAccountsMenu{
     [self updateDropboxButton];
 	
@@ -58,8 +62,8 @@
                  [self updateDropboxButton];
                  
                  //log space usage
-                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"DropBox Used Space : %@MB", usage]];
-                 [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"DropBox Available Space : %@MB", allocated]];
+				 DDLogInfo(@"DropBox Used Space : %@MB", usage);
+				 DDLogInfo(@"DropBox Available Space : %@MB", allocated);
                  
                  //check if dopbox running out of space
                  if ((allocated.integerValue - usage.integerValue) < abDropboxOutOfSpaceWarningSize){
@@ -97,7 +101,6 @@
     [dropboxSpaceButton setTitle:dropboxSpaceButtonTitle];
 }
 
-//MARK: - Accounts
 - (IBAction)logoutDropBoxTapped:(NSMenuItem *)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: @"Are you sure?"];
@@ -110,6 +113,7 @@
         [sender setEnabled:NO];
     }
 }
+
 - (IBAction)dropboxSpaceTapped:(NSMenuItem *)sender {
     [self updateAccountsMenu];
 }

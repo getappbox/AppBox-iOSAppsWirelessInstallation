@@ -32,33 +32,38 @@
 
 + (void)isNewVersionAvailableCompletion:(void (^)(bool available, NSURL *url))completion{
     @try {
-        [ABLog log:@"Checking for new version..."];
+        DDLogDebug(@"Checking for new version...");
         [NetworkHandler requestWithURL:abGitHubLatestRelease withParameters:nil andRequestType:RequestGET andCompletetion:^(id responseObj, NSInteger httpStatus, NSError *error) {
             //handle error and check for all required keys
-            if (error == nil &&
-                [((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
-                [((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
-                
-                //get tag name, because it's always be latest version
-                NSString *tag = [responseObj valueForKey:@"tag_name"];
-                NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
-                
-                //get version string from bundle info.plist
-                NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-                NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
-                
-                //log current and latest version
-                [ABLog log:@"\n\nCurrent Version - %@ <=> Latest Version - %@\n\n", versionString, tag];
-                
-                //return result based on version strings
-                completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
-            }else{
-                completion(false, nil);
-            }
+			@try {
+				if (error == nil &&
+					[((NSDictionary *)responseObj).allKeys containsObject:@"tag_name"] &&
+					[((NSDictionary *)responseObj).allKeys containsObject:@"html_url"]){
+					
+					//get tag name, because it's always be latest version
+					NSString *tag = [responseObj valueForKey:@"tag_name"];
+					NSString *newVesion = [[tag componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
+					
+					//get version string from bundle info.plist
+					NSString *versionString = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+					NSString *currentVersion = [[versionString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:abEmptyString];
+					
+					//log current and latest version
+					DDLogDebug(@"\n\nCurrent Version - %@ <=> Latest Version - %@\n\n", versionString, tag);
+					
+					//return result based on version strings
+					completion(([newVesion compare:currentVersion] == NSOrderedDescending),[NSURL URLWithString:[responseObj valueForKey:@"html_url"]]);
+				}else{
+					completion(false, nil);
+				}
+			}
+			@catch (NSException *exception) {
+				[EventTracker logExceptionEvent:exception];
+			}
         }];
     } @catch (NSException *exception) {
         completion(false, nil);
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Exception %@",exception.userInfo]];
+		DDLogInfo(@"Exception %@",exception.userInfo);
     }
 }
 

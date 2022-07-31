@@ -8,25 +8,66 @@
 
 #import "AppDelegate.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+	DDFileLogger *fileLogger;
+}
 
 - (void)awakeFromNib{
     [super awakeFromNib];
     //Handle URL Scheme
     
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleGetURLWithEvent:andReply:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+	
+	//Init CocoaLumberjack
+	DDLogLevel logLevel = [UserData debugLog] ? DDLogLevelDebug : DDLogLevelInfo;
+	[DDLog addLogger:[DDOSLogger sharedInstance] withLevel:logLevel]; //OS logger
+	
+	//File logger
+	fileLogger = [[DDFileLogger alloc] init];
+	fileLogger.doNotReuseLogFiles = true;
+	fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+	[DDLog addLogger:fileLogger withLevel:logLevel];
+	DDLogInfo(@"AppBox Started.");
     
     //Init AppCenter
     [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
+    // Setting userConfirmationHandler as documented on https://docs.microsoft.com/en-us/appcenter/sdk/crashes/macos#ask-for-the-users-consent-to-send-a-crash-log
+    [MSACCrashes setUserConfirmationHandler:^BOOL(NSArray<MSACErrorReport *> * _Nonnull errorReports)
+     {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"Sorry about that!";
+        alert.informativeText = @"Do you want to send a crash report so we can fix the issue?";
+        
+        [alert addButtonWithTitle:@"Always send"];
+        [alert addButtonWithTitle:@"Send"];
+        [alert addButtonWithTitle:@"Don't send"];
+        alert.alertStyle = NSAlertStyleWarning;
+        
+        switch ([alert runModal])
+        {
+            case NSAlertFirstButtonReturn:
+                [MSACCrashes notifyWithUserConfirmation:MSACUserConfirmationAlways];
+                break;
+            case NSAlertSecondButtonReturn:
+                [MSACCrashes notifyWithUserConfirmation:MSACUserConfirmationSend];
+                break;
+            case NSAlertThirdButtonReturn:
+                [MSACCrashes notifyWithUserConfirmation:MSACUserConfirmationDontSend];
+                break;
+            default:
+                break;
+                
+        }
+        return true; // Return true if the SDK should await user confirmation, otherwise return false.
+    }];
+        
     NSString *appCenter = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"AppCenter"];
     [MSACAppCenter start:appCenter withServices: @[[MSACAnalytics class], [MSACCrashes class]]];
-    [MSACCrashes notifyWithUserConfirmation: MSACUserConfirmationAlways];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     [center setDelegate:self];
-    self.sessionLog = [[NSMutableString alloc] init];
     
     //Default Setting
     [DefaultSettings setFirstTimeSettings];
@@ -43,15 +84,15 @@
     
     //Check for arguments
     NSArray *arguments = [[NSProcessInfo processInfo] arguments];
-    [ABLog log:@"All Command Line Arguments = %@",arguments];
+    DDLogDebug(@"All Command Line Arguments = %@",arguments);
     for (NSString *argument in arguments) {
         if ([argument containsString:abArgsIPA]) {
             NSArray *components = [argument componentsSeparatedByString:abArgsIPA];
-            [ABLog log:@"IPA Components = %@",components];
+            DDLogDebug(@"IPA Components = %@",components);
             if (components.count == 2) {
                 [self handleIPAAtPath:[components lastObject]];
             } else {
-                [self addSessionLog:[NSString stringWithFormat:@"Invalid IPA Argument %@",arguments]];
+				DDLogInfo(@"Invalid IPA Argument %@",arguments);
                 exit(abExitCodeForInvalidCommand);
             }
             break;
@@ -62,6 +103,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
+	DDLogInfo(@"AppBox Terminated.");
     [self saveCoreDataChanges];
 }
 
@@ -79,11 +121,11 @@
 
 -(void)openFileWithPath:(NSString *)filePath{
     if (self.isReadyToBuild) {
-        [ABLog log:@"AppBox is ready to use."];
+        DDLogDebug(@"AppBox is ready to use.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [ABLog log:@"AppBox is ready to use. [Block]"];
+            DDLogDebug(@"AppBox is ready to use. [Block]");
             [[NSNotificationCenter defaultCenter] postNotificationName:abUseOpenFilesNotification object:filePath];
         }];
     }
@@ -93,7 +135,7 @@
 -(BOOL)setAppBoxAsDefualt{
     OSStatus returnStatus = LSSetDefaultRoleHandlerForContentType(CFSTR("com.apple.iTunes.ipa"), kLSRolesAll, (__bridge CFStringRef) [[NSBundle mainBundle] bundleIdentifier]);
     if (returnStatus != 0) {
-        NSLog(@"Got an error when setting default application - %d", (int)returnStatus);
+		DDLogInfo(@"Got an error when setting default application - %d", (int)returnStatus);
         return NO;
     }
     return YES;
@@ -105,35 +147,38 @@
     return ((AppDelegate *)[[NSApplication sharedApplication] delegate]);
 }
 
--(void)addSessionLog:(NSString *)sessionLog{
-    NSLog(@"%@",sessionLog);
-    [_sessionLog appendFormat: @"%@\n",sessionLog];
-    [[NSNotificationCenter defaultCenter] postNotificationName:abSessionLogUpdated object:nil];
+-(void)openLatestLogFile {
+	NSString *latestLogFile = fileLogger.logFileManager.sortedLogFilePaths.firstObject;
+	if (latestLogFile == nil) {
+		DDLogInfo(@"No log file found.");
+	} else {
+		[[NSWorkspace sharedWorkspace] openFile:latestLogFile];
+	}
 }
 
 //URISchem URL Handler
 -(void)handleGetURLWithEvent:(NSAppleEventDescriptor *)event andReply:(NSAppleEventDescriptor *)reply{
     NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
-    [self addSessionLog:[NSString stringWithFormat:@"Handling URL = %@",url]];
+	DDLogInfo(@"Handling URL = %@",url);
     
     //Check for Dropbox auth
     [DBClientsManager handleRedirectURL:url completion:^(DBOAuthResult * _Nullable authResult) {
         if (authResult != nil) {
             if ([authResult isSuccess]) {
-                [[AppDelegate appDelegate] addSessionLog:@"Success! User is logged into Dropbox."];
+				DDLogInfo(@"Success! User is logged into Dropbox.");
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxSuccess];
                 [[NSNotificationCenter defaultCenter] postNotificationName:abDropBoxLoggedInNotification object:nil];
             } else if ([authResult isCancel]) {
-                [[AppDelegate appDelegate] addSessionLog:@"Authorization flow was manually canceled by user."];
+				DDLogInfo(@"Authorization flow was manually canceled by user.");
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxCanceled];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             } else if ([authResult isError]) {
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error: %@", authResult.errorDescription]];
+				DDLogInfo(@"Error: %@", authResult.errorDescription);
                 [EventTracker logEventWithType:LogEventTypeAuthDropboxError];
                 [Common showAlertWithTitle:@"Authorization Canceled." andMessage:abEmptyString];
             }
         } else if (url != nil) {
-            [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"query = %@", url.query]];
+			DDLogInfo(@"query = %@", url.query);
     //        if (url.query != nil && url.query.length > 0) {
     //            [self handleProjectAtPath:url.query];
     //        }
@@ -144,11 +189,11 @@
 -(void)handleIPAAtPath:(NSString *)ipaPath {
     XCProject *project = [CIProjectBuilder xcProjectWithIPAPath:ipaPath];
     if (self.isReadyToBuild) {
-        [self addSessionLog:@"AppBox is ready to upload IPA."];
+		DDLogInfo(@"AppBox is ready to upload IPA.");
         [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
     } else {
         [[NSNotificationCenter defaultCenter] addObserverForName:abAppBoxReadyToUseNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-            [self addSessionLog:@"AppBox is ready to upload IPA. [Block]"];
+			DDLogInfo(@"AppBox is ready to upload IPA. [Block]");
             [[NSNotificationCenter defaultCenter] postNotificationName:abBuildRepoNotification object:project];
         }];
     }

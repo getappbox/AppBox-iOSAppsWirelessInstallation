@@ -40,7 +40,6 @@ static NSString *const FILE_NAME_UNIQUE_JSON = @"appinfo.json";
 static NSString *const FILE_NAME_SHARE_URL = @".appbox_share_value.json";
 
 //notification
-#define abSessionLogUpdated @"SessionLogUpdated"
 #define abDropBoxLoggedInNotification @"DropBoxLoggedInNotification"
 #define abDropBoxLoggedOutNotification @"DropBoxLoggedOutNotification"
 #define abBuildRepoNotification @"BuildRepoNotification"

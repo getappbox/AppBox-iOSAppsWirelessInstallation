@@ -49,20 +49,20 @@
 	NSError *error = nil;
 	[[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory withIntermediateDirectories:YES attributes:nil error:&error];
 	if (error == nil) {
-		[ABLog log:@"New temporaray working directory %@", workingDirectory];
+		DDLogDebug(@"New temporaray working directory %@", workingDirectory);
 	} else {
-		[ABLog log:@"Unable to create temporary working directory %@", workingDirectory];
+		DDLogInfo(@"Unable to create temporary working directory %@", workingDirectory);
 	}
 }
 
 //MARK: - UnZip IPA File
 
 -(void)uploadIPAFile:(NSURL *)ipaFileURL{
-    [ABLog log:@"Preparing to Upload IPA - %@", ipaFileURL];
+    DDLogDebug(@"Preparing to Upload IPA - %@", ipaFileURL);
     NSString *ipaPath = [ipaFileURL.resourceSpecifier stringByRemovingPercentEncoding];
 	weakify(self);
     if ([[NSFileManager defaultManager] fileExistsAtPath:ipaPath]) {
-        [ABLog log:@"Uploading IPA -  %@", ipaPath];
+        DDLogDebug(@"Uploading IPA -  %@", ipaPath);
         //Unzip ipa
         __block NSString *payloadEntry;
         __block NSString *infoPlistPath;
@@ -70,7 +70,8 @@
 		// Create new temp working directory
 		[self createNewWorkingDirectory];
 
-        [ABLog log:@"Extracting Files to - %@", workingDirectory];
+		DDLogInfo(@"Extracting IPA file...");
+        DDLogDebug(@"Extracting Files to - %@", workingDirectory);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [SSZipArchive unzipFileAtPath:ipaPath
 							toDestination:self->workingDirectory
@@ -87,7 +88,7 @@
                         [[entry pathComponents] enumerateObjectsUsingBlock:^(NSString * _Nonnull pathComponent, NSUInteger idx, BOOL * _Nonnull stop) {
                             if ((pathComponent.length > 4) && [[pathComponent substringFromIndex:(pathComponent.length-4)].lowercaseString isEqualToString: @".app"]) {
                                 
-                                [ABLog log:@"Found payload at path = %@",entry];
+                                DDLogDebug(@"Found payload at path = %@",entry);
                                 payloadEntry = [NSString pathWithComponents:[[entry pathComponents] subarrayWithRange:NSMakeRange(0, idx+1)]];
                                 *stop = YES;
                             }
@@ -97,7 +98,7 @@
                     //Get Info.plist entry
                     NSString *mainInfoPlistPath = [payloadEntry stringByAppendingPathComponent:@"Info.plist"].lowercaseString;
                     if ([entry.lowercaseString isEqualToString:mainInfoPlistPath]) {
-                        [ABLog log:@"Found Info.plist at path = %@",mainInfoPlistPath];
+                        DDLogDebug(@"Found Info.plist at path = %@",mainInfoPlistPath);
                         infoPlistPath = entry;
                     }
                     
@@ -105,14 +106,14 @@
                     if (self.project.mobileProvision == nil){
                         NSString *mobileProvisionPath = [payloadEntry stringByAppendingPathComponent:@"embedded.mobileprovision"].lowercaseString;
                         if ([entry.lowercaseString isEqualToString:mobileProvisionPath]){
-                            [ABLog log:@"Found mobileprovision at path = %@",mobileProvisionPath];
+                            DDLogDebug(@"Found mobileprovision at path = %@",mobileProvisionPath);
 							mobileProvisionPath = [self->workingDirectory stringByAppendingPathComponent: mobileProvisionPath];
                             self.project.mobileProvision = [[MobileProvision alloc] initWithPath:mobileProvisionPath];
                         }
                     }
                     
                     //show status and log files entry
-                    [ABLog log:@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry];
+                    DDLogDebug(@"%@-%@-%@",[NSNumber numberWithLong:entryNumber], [NSNumber numberWithLong:total], entry);
                 });
             } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
 				strongify(self);
@@ -120,8 +121,7 @@
                     if (error) {
                         //show error and return
                         if (self.ciRepoProject) {
-                            NSString *log = [NSString stringWithFormat:@"Error - %@", error.localizedDescription];
-                            [[AppDelegate appDelegate] addSessionLog:log];
+							DDLogInfo(@"Error - %@", error.localizedDescription);
                             exit(abExitCodeUnZipIPAError);
                         } else {
                             [Common showAlertWithTitle:@"AppBox - Error" andMessage:error.localizedDescription];
@@ -131,17 +131,16 @@
                     }
                     
                     //get info.plist
-                    [ABLog log:@"Final Info.plist path = %@",infoPlistPath];
+                    DDLogDebug(@"Final Info.plist path = %@",infoPlistPath);
 					[self.project setIpaInfoPlist: [NSDictionary dictionaryWithContentsOfFile:[self->workingDirectory stringByAppendingPathComponent:infoPlistPath]]];
                     
                     //show error if info.plist is nil or invalid
                     if (![self.project isValidProjectInfoPlist]) {
-                        NSString *log = @"AppBox was not able to find Info.plist in your IPA.";
                         if (self.ciRepoProject) {
-                            [[AppDelegate appDelegate] addSessionLog:log];
+							DDLogInfo(@"AppBox was not able to find Info.plist in your IPA.");
                             exit(abExitCodeInfoPlistNotFound);
                         } else {
-                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:log];
+                            [Common showAlertWithTitle:@"AppBox - Error" andMessage:@"AppBox was not able to find Info.plist in your IPA."];
                         }
                         self.errorBlock(nil, YES);
                         return;
@@ -168,7 +167,7 @@
             }];
         });
     }else{
-        [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath]];
+		DDLogInfo(@"\n\n======\nFile Not Exist - %@\n======\n\n",ipaPath);
         if (self.ciRepoProject) {
             exit(abExitCodeIPAFileNotFound);
         } else {
@@ -179,7 +178,7 @@
 }
 
 -(void)uploadIPAFileWithoutUnzip:(NSURL *)ipaURL{    
-    [ABLog log:@"IPA Info.plist %@", self.project.ipaInfoPlist];
+    DDLogDebug(@"IPA Info.plist %@", self.project.ipaInfoPlist);
     
     //upload ipa
     self.dbFileType = DBFileTypeIPA;
@@ -224,7 +223,7 @@
 -(NSDictionary *)getUniqueJsonDict{
     NSError *error;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[workingDirectory stringByAppendingPathComponent:FILE_NAME_UNIQUE_JSON]] options:kNilOptions error:&error];
-    [ABLog log:@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary];
+    DDLogDebug(@"%@ : %@",FILE_NAME_UNIQUE_JSON,dictionary);
     return dictionary;
 }
 
@@ -371,7 +370,7 @@
 		strongify(self);
         //check there is any rev available
         if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-            [ABLog log:@"Loaded Meta Data %@",response];
+            DDLogDebug(@"Loaded Meta Data %@",response);
             self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
         }
         
@@ -384,7 +383,7 @@
 //MARK: - Upload Files
 
 -(void)dbUploadFile:(NSString *)file to:(NSString *)path mode:(DBFILESWriteMode *)mode{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Uploading - %@", file.lastPathComponent]];
+	DDLogInfo(@"Uploading - %@", file.lastPathComponent);
     
     //Upload large ipa file with dropbox session api
     if (_project.ipaFileSize.integerValue > 150 && self.dbFileType == DBFileTypeIPA) {
@@ -402,7 +401,7 @@
               //reset retry count
 			  self->retryCount = 0;
               
-              [ABLog log:@"Uploaded file metadata = %@", response];
+              DDLogDebug(@"Uploaded file metadata = %@", response);
               
               //AppInfo.json file uploaded and creating shared url
               if(self.dbFileType == DBFileTypeJson){
@@ -547,7 +546,7 @@
     else if (networkError && retryCount < abOnErrorMaxRetryCount && [[AppDelegate appDelegate] isInternetConnected] &&
              (networkError.tag == DBRequestErrorClient || networkError.tag == DBRequestErrorInternalServer)) {
         retryCount++;
-        [[AppDelegate appDelegate] addSessionLog: [NSString stringWithFormat:@"Retrying (%ld) IPA Upload due to some error.", (long)retryCount]];
+		DDLogInfo(@"Retrying (%ld) IPA Upload due to some error.", (long)retryCount);
         [operation start];
     }
     
@@ -611,7 +610,7 @@
 }
 
 -(void)handleSharedURLError:(DBRequestError *)error forFile:(NSString *)file{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Create Share Link Error - %@",error]];
+	DDLogInfo(@"Create Share Link Error - %@",error);
     
     //Handle clint side SDK error
     if ([error isClientError]){
@@ -633,7 +632,7 @@
     else if (retryCount < abOnErrorMaxRetryCount) {
         retryCount++;
         [self dbCreateSharedURLForFile:file];
-        [[AppDelegate appDelegate] addSessionLog: [NSString stringWithFormat:@"Retrying (%ld) Shared URL due to some error.", (long)retryCount]];
+		DDLogInfo(@"Retrying (%ld) Shared URL due to some error.", (long)retryCount);
     }
     
     //Handle other errors
@@ -677,7 +676,7 @@
     //if same link enable load appinfo.json otherwise Create short shareable url of manifest
     else if (self.dbFileType == DBFileTypeManifest){
         NSString *shareableLink = [url substringToIndex:url.length-5];
-        [ABLog log:@"Manifest Sharable link - %@",shareableLink];
+        DDLogDebug(@"Manifest Sharable link - %@",shareableLink);
         self.project.manifestFileSharableURL = [NSURL URLWithString:shareableLink];
         if(self.project.isKeepSameLinkEnabled){
             //Download previously uploaded appinfo
@@ -686,7 +685,7 @@
 				strongify(self);
                 //check there is any rev available
                 if (response && response.isDeleted.boolValue == NO && response.entries.count > 0){
-                    [ABLog log:@"Loaded Meta Data %@",response];
+                    DDLogDebug(@"Loaded Meta Data %@",response);
                     self.project.uniqueLinkJsonMetaData = [response.entries firstObject];
                 }
                 
@@ -701,7 +700,7 @@
     //create app info file short sharable url
     else if (self.dbFileType == DBFileTypeJson){
         NSString *shareableLink = [url substringToIndex:url.length-5];
-        [ABLog log:@"APPInfo Sharable link - %@",shareableLink];
+        DDLogDebug(@"APPInfo Sharable link - %@",shareableLink);
         self.project.uniquelinkShareableURL = [NSURL URLWithString:shareableLink];
         NSMutableDictionary *dictUniqueFile = [[self getUniqueJsonDict] mutableCopy];
         [dictUniqueFile setObject:shareableLink forKey:UNIQUE_LINK_SHARED];
@@ -723,7 +722,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 self.project.appLongShareableURL = shortURL;
-                [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"Error in creating short URL - %@", error.localizedDescription]];
+				DDLogInfo(@"Error in creating short URL - %@", error.localizedDescription);
             }
             [self createAndUploadJsonWithURL:shortURL];
         });
@@ -794,7 +793,7 @@
 //MARK: - Show Status
 -(void)showStatus:(NSString *)status andShowProgressBar:(BOOL)showProgressBar withProgress:(double)progress{
     //log status in session log
-    [ABLog log:@"%@",status];
+    DDLogDebug(@"%@",status);
     
     //start/stop/progress based on showProgressBar and progress
     if (progress == -1){

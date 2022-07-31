@@ -34,7 +34,7 @@
 
 //MARK: - Notifications
 + (NSModalResponse)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
-    [[AppDelegate appDelegate] addSessionLog:[NSString stringWithFormat:@"ALERT -\nTitle - %@ Message - %@", title, message]];
+	DDLogInfo(@"ALERT -\nTitle - %@ Message - %@", title, message);
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText: title == nil ? @"Error" : title];
     [alert setInformativeText:message == nil ? @"" : message];
