@@ -24450,7 +24450,8 @@
                   fileStatus:(DBFILESFileStatus *)fileStatus
                 filenameOnly:(NSNumber *)filenameOnly
               fileExtensions:(NSArray<NSString *> *)fileExtensions
-              fileCategories:(NSArray<DBFILESFileCategory *> *)fileCategories {
+              fileCategories:(NSArray<DBFILESFileCategory *> *)fileCategories
+                   accountId:(NSString *)accountId {
   [DBStoneValidators
    nullableValidator:[DBStoneValidators stringValidator:nil
                                               maxLength:nil
@@ -24463,6 +24464,8 @@
    nullableValidator:[DBStoneValidators arrayValidator:nil
                                               maxItems:nil
                                          itemValidator:[DBStoneValidators nonnullValidator:nil]]](fileCategories);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators stringValidator:@(40) maxLength:@(40) pattern:nil]](accountId);
 
   self = [super init];
   if (self) {
@@ -24473,6 +24476,7 @@
     _filenameOnly = filenameOnly ?: @NO;
     _fileExtensions = fileExtensions;
     _fileCategories = fileCategories;
+    _accountId = accountId;
   }
   return self;
 }
@@ -24484,7 +24488,8 @@
                  fileStatus:nil
                filenameOnly:nil
              fileExtensions:nil
-             fileCategories:nil];
+             fileCategories:nil
+                  accountId:nil];
 }
 
 #pragma mark - Serialization methods
@@ -24531,6 +24536,9 @@
   }
   if (self.fileCategories != nil) {
     result = prime * result + [self.fileCategories hash];
+  }
+  if (self.accountId != nil) {
+    result = prime * result + [self.accountId hash];
   }
 
   return prime * result;
@@ -24581,6 +24589,11 @@
       return NO;
     }
   }
+  if (self.accountId) {
+    if (![self.accountId isEqual:aSearchOptions.accountId]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -24614,6 +24627,9 @@
                                                         return [DBFILESFileCategorySerializer serialize:elem0];
                                                       }];
   }
+  if (valueObj.accountId) {
+    jsonDict[@"account_id"] = valueObj.accountId;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -24639,6 +24655,7 @@
                                                              return [DBFILESFileCategorySerializer deserialize:elem0];
                                                            }]
                                     : nil;
+  NSString *accountId = valueDict[@"account_id"] ?: nil;
 
   return [[DBFILESSearchOptions alloc] initWithPath:path
                                          maxResults:maxResults
@@ -24646,7 +24663,8 @@
                                          fileStatus:fileStatus
                                        filenameOnly:filenameOnly
                                      fileExtensions:fileExtensions
-                                     fileCategories:fileCategories];
+                                     fileCategories:fileCategories
+                                          accountId:accountId];
 }
 
 @end
@@ -31160,6 +31178,232 @@
   NSString *contentHash = valueDict[@"content_hash"] ?: nil;
 
   return [[DBFILESUploadSessionStartArg alloc] initWithClose:close sessionType:sessionType contentHash:contentHash];
+}
+
+@end
+
+#import "DBFILESUploadSessionStartBatchArg.h"
+#import "DBFILESUploadSessionType.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBFILESUploadSessionStartBatchArg
+
+#pragma mark - Constructors
+
+- (instancetype)initWithNumSessions:(NSNumber *)numSessions sessionType:(DBFILESUploadSessionType *)sessionType {
+  [DBStoneValidators nonnullValidator:[DBStoneValidators numericValidator:@(1) maxValue:@(1000)]](numSessions);
+
+  self = [super init];
+  if (self) {
+    _sessionType = sessionType;
+    _numSessions = numSessions;
+  }
+  return self;
+}
+
+- (instancetype)initWithNumSessions:(NSNumber *)numSessions {
+  return [self initWithNumSessions:numSessions sessionType:nil];
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBFILESUploadSessionStartBatchArgSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBFILESUploadSessionStartBatchArgSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBFILESUploadSessionStartBatchArgSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.numSessions hash];
+  if (self.sessionType != nil) {
+    result = prime * result + [self.sessionType hash];
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionStartBatchArg:other];
+}
+
+- (BOOL)isEqualToUploadSessionStartBatchArg:(DBFILESUploadSessionStartBatchArg *)anUploadSessionStartBatchArg {
+  if (self == anUploadSessionStartBatchArg) {
+    return YES;
+  }
+  if (![self.numSessions isEqual:anUploadSessionStartBatchArg.numSessions]) {
+    return NO;
+  }
+  if (self.sessionType) {
+    if (![self.sessionType isEqual:anUploadSessionStartBatchArg.sessionType]) {
+      return NO;
+    }
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBFILESUploadSessionStartBatchArgSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBFILESUploadSessionStartBatchArg *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"num_sessions"] = valueObj.numSessions;
+  if (valueObj.sessionType) {
+    jsonDict[@"session_type"] = [DBFILESUploadSessionTypeSerializer serialize:valueObj.sessionType];
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBFILESUploadSessionStartBatchArg *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSNumber *numSessions = valueDict[@"num_sessions"];
+  DBFILESUploadSessionType *sessionType =
+      valueDict[@"session_type"] ? [DBFILESUploadSessionTypeSerializer deserialize:valueDict[@"session_type"]] : nil;
+
+  return [[DBFILESUploadSessionStartBatchArg alloc] initWithNumSessions:numSessions sessionType:sessionType];
+}
+
+@end
+
+#import "DBFILESUploadSessionStartBatchResult.h"
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+
+#pragma mark - API Object
+
+@implementation DBFILESUploadSessionStartBatchResult
+
+#pragma mark - Constructors
+
+- (instancetype)initWithSessionIds:(NSArray<NSString *> *)sessionIds {
+  [DBStoneValidators
+   nonnullValidator:[DBStoneValidators arrayValidator:nil
+                                             maxItems:nil
+                                        itemValidator:[DBStoneValidators nonnullValidator:nil]]](sessionIds);
+
+  self = [super init];
+  if (self) {
+    _sessionIds = sessionIds;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBFILESUploadSessionStartBatchResultSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBFILESUploadSessionStartBatchResultSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBFILESUploadSessionStartBatchResultSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.sessionIds hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToUploadSessionStartBatchResult:other];
+}
+
+- (BOOL)isEqualToUploadSessionStartBatchResult:(DBFILESUploadSessionStartBatchResult *)anUploadSessionStartBatchResult {
+  if (self == anUploadSessionStartBatchResult) {
+    return YES;
+  }
+  if (![self.sessionIds isEqual:anUploadSessionStartBatchResult.sessionIds]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBFILESUploadSessionStartBatchResultSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBFILESUploadSessionStartBatchResult *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"session_ids"] = [DBArraySerializer serialize:valueObj.sessionIds
+                                                withBlock:^id(id elem0) {
+                                                  return elem0;
+                                                }];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBFILESUploadSessionStartBatchResult *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSArray<NSString *> *sessionIds = [DBArraySerializer deserialize:valueDict[@"session_ids"]
+                                                         withBlock:^id(id elem0) {
+                                                           return elem0;
+                                                         }];
+
+  return [[DBFILESUploadSessionStartBatchResult alloc] initWithSessionIds:sessionIds];
 }
 
 @end

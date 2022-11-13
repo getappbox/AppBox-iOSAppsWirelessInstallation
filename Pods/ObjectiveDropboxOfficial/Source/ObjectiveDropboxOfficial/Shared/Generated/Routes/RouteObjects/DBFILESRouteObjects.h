@@ -221,6 +221,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Accessor method for the uploadSessionStart route object.
 + (DBRoute *)DBFILESUploadSessionStart;
 
+/// Accessor method for the uploadSessionStartBatch route object.
++ (DBRoute *)DBFILESUploadSessionStartBatch;
+
 @end
 
 NS_ASSUME_NONNULL_END

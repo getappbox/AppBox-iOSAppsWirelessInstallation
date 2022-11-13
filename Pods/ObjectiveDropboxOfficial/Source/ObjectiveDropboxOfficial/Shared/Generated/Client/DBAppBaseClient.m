@@ -8,6 +8,7 @@
 #import "DBAUTHAppAuthRoutes.h"
 #import "DBCHECKAppAuthRoutes.h"
 #import "DBFILESAppAuthRoutes.h"
+#import "DBSHARINGAppAuthRoutes.h"
 #import "DBTransportClientProtocol.h"
 
 @implementation DBAppBaseClient
@@ -19,6 +20,7 @@
     _authRoutes = [[DBAUTHAppAuthRoutes alloc] init:client];
     _checkRoutes = [[DBCHECKAppAuthRoutes alloc] init:client];
     _filesRoutes = [[DBFILESAppAuthRoutes alloc] init:client];
+    _sharingRoutes = [[DBSHARINGAppAuthRoutes alloc] init:client];
   }
   return self;
 }

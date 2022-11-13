@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2021, Deusty, LLC
+// Copyright (c) 2010-2022, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This class provides a logger for the Apple os_log facility.
  **/
 API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0))
+DD_SENDABLE
 @interface DDOSLogger : DDAbstractLogger <DDLogger>
 
 /**

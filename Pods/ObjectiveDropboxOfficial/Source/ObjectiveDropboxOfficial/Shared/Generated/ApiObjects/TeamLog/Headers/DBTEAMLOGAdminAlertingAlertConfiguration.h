@@ -39,6 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// Recipient settings.
 @property (nonatomic, readonly, nullable) DBTEAMLOGRecipientsConfiguration *recipientsSettings;
 
+/// Text.
+@property (nonatomic, readonly, copy, nullable) NSString *text;
+
+/// Excluded file extensions.
+@property (nonatomic, readonly, copy, nullable) NSString *excludedFileExtensions;
+
 #pragma mark - Constructors
 
 ///
@@ -47,12 +53,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param alertState Alert state.
 /// @param sensitivityLevel Sensitivity level.
 /// @param recipientsSettings Recipient settings.
+/// @param text Text.
+/// @param excludedFileExtensions Excluded file extensions.
 ///
 /// @return An initialized instance.
 ///
 - (instancetype)initWithAlertState:(nullable DBTEAMLOGAdminAlertingAlertStatePolicy *)alertState
                   sensitivityLevel:(nullable DBTEAMLOGAdminAlertingAlertSensitivity *)sensitivityLevel
-                recipientsSettings:(nullable DBTEAMLOGRecipientsConfiguration *)recipientsSettings;
+                recipientsSettings:(nullable DBTEAMLOGRecipientsConfiguration *)recipientsSettings
+                              text:(nullable NSString *)text
+            excludedFileExtensions:(nullable NSString *)excludedFileExtensions;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

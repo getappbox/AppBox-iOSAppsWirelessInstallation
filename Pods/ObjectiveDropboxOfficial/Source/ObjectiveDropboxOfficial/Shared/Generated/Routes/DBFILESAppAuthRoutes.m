@@ -186,6 +186,8 @@
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
 #import "DBFILESUploadSessionStartArg.h"
+#import "DBFILESUploadSessionStartBatchArg.h"
+#import "DBFILESUploadSessionStartBatchResult.h"
 #import "DBFILESUploadSessionStartError.h"
 #import "DBFILESUploadSessionStartResult.h"
 #import "DBFILESUploadSessionType.h"

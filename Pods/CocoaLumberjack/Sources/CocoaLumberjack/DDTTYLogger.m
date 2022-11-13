@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2021, Deusty, LLC
+// Copyright (c) 2010-2022, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -713,15 +713,15 @@ static DDTTYLogger *sharedInstance;
         CGContextFillRect(context, CGRectMake(0, 0, 1, 1));
 
         if (rPtr) {
-            *rPtr = pixel[0] / 255.0f;
+            *rPtr = pixel[0] / 255.0;
         }
 
         if (gPtr) {
-            *gPtr = pixel[1] / 255.0f;
+            *gPtr = pixel[1] / 255.0;
         }
 
         if (bPtr) {
-            *bPtr = pixel[2] / 255.0f;
+            *bPtr = pixel[2] / 255.0;
         }
 
         CGContextRelease(context);
@@ -758,7 +758,7 @@ static DDTTYLogger *sharedInstance;
     [self getRed:&inR green:&inG blue:&inB fromColor:inColor];
 
     NSUInteger bestIndex = 0;
-    CGFloat lowestDistance = 100.0f;
+    CGFloat lowestDistance = 100.0;
 
     NSUInteger i = 0;
 
@@ -1285,12 +1285,14 @@ static DDTTYLogger *sharedInstance;
             // The technique below is faster than using NSDateFormatter.
             if (logMessage->_timestamp) {
                 NSTimeInterval epoch = [logMessage->_timestamp timeIntervalSince1970];
+                double integral;
+                double fract = modf(epoch, &integral);
                 struct tm tm;
-                time_t time = (time_t)epoch;
+                time_t time = (time_t)integral;
                 (void)localtime_r(&time, &tm);
-                int milliseconds = (int)((epoch - floor(epoch)) * 1000.0);
+                long milliseconds = (long)(fract * 1000.0);
 
-                len = snprintf(ts, 24, "%04d-%02d-%02d %02d:%02d:%02d:%03d", // yyyy-MM-dd HH:mm:ss:SSS
+                len = snprintf(ts, 24, "%04d-%02d-%02d %02d:%02d:%02d:%03ld", // yyyy-MM-dd HH:mm:ss:SSS
                                tm.tm_year + 1900,
                                tm.tm_mon + 1,
                                tm.tm_mday,
@@ -1393,17 +1395,17 @@ static DDTTYLogger *sharedInstance;
         if (fgColor) {
             [DDTTYLogger getRed:&r green:&g blue:&b fromColor:fgColor];
 
-            fg_r = (uint8_t)(r * 255.0f);
-            fg_g = (uint8_t)(g * 255.0f);
-            fg_b = (uint8_t)(b * 255.0f);
+            fg_r = (uint8_t)(r * 255.0);
+            fg_g = (uint8_t)(g * 255.0);
+            fg_b = (uint8_t)(b * 255.0);
         }
 
         if (bgColor) {
             [DDTTYLogger getRed:&r green:&g blue:&b fromColor:bgColor];
 
-            bg_r = (uint8_t)(r * 255.0f);
-            bg_g = (uint8_t)(g * 255.0f);
-            bg_b = (uint8_t)(b * 255.0f);
+            bg_r = (uint8_t)(r * 255.0);
+            bg_g = (uint8_t)(g * 255.0);
+            bg_b = (uint8_t)(b * 255.0);
         }
 
         if (fgColor && isaColorTTY) {

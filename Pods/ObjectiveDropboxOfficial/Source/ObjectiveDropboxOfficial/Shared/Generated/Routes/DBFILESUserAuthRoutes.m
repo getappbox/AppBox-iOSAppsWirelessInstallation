@@ -186,6 +186,8 @@
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
 #import "DBFILESUploadSessionStartArg.h"
+#import "DBFILESUploadSessionStartBatchArg.h"
+#import "DBFILESUploadSessionStartBatchResult.h"
 #import "DBFILESUploadSessionStartError.h"
 #import "DBFILESUploadSessionStartResult.h"
 #import "DBFILESUploadSessionType.h"
@@ -1653,6 +1655,19 @@
   DBFILESUploadSessionStartArg *arg =
       [[DBFILESUploadSessionStartArg alloc] initWithClose:close sessionType:sessionType contentHash:contentHash];
   return [self.client requestUpload:route arg:arg inputStream:inputStream];
+}
+
+- (DBRpcTask *)uploadSessionStartBatch:(NSNumber *)numSessions {
+  DBRoute *route = DBFILESRouteObjects.DBFILESUploadSessionStartBatch;
+  DBFILESUploadSessionStartBatchArg *arg = [[DBFILESUploadSessionStartBatchArg alloc] initWithNumSessions:numSessions];
+  return [self.client requestRpc:route arg:arg];
+}
+
+- (DBRpcTask *)uploadSessionStartBatch:(NSNumber *)numSessions sessionType:(DBFILESUploadSessionType *)sessionType {
+  DBRoute *route = DBFILESRouteObjects.DBFILESUploadSessionStartBatch;
+  DBFILESUploadSessionStartBatchArg *arg =
+      [[DBFILESUploadSessionStartBatchArg alloc] initWithNumSessions:numSessions sessionType:sessionType];
+  return [self.client requestRpc:route arg:arg];
 }
 
 @end

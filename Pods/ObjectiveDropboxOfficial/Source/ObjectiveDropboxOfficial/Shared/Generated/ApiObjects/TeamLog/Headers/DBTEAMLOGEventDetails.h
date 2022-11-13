@@ -17,6 +17,7 @@
 @class DBTEAMLOGAdminAlertingAlertStateChangedDetails;
 @class DBTEAMLOGAdminAlertingChangedAlertConfigDetails;
 @class DBTEAMLOGAdminAlertingTriggeredAlertDetails;
+@class DBTEAMLOGAdminEmailRemindersChangedDetails;
 @class DBTEAMLOGAllowDownloadDisabledDetails;
 @class DBTEAMLOGAllowDownloadEnabledDetails;
 @class DBTEAMLOGAppBlockedByPermissionsDetails;
@@ -100,7 +101,9 @@
 @class DBTEAMLOGExportMembersReportDetails;
 @class DBTEAMLOGExportMembersReportFailDetails;
 @class DBTEAMLOGExtendedVersionHistoryChangePolicyDetails;
+@class DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails;
 @class DBTEAMLOGExternalDriveBackupPolicyChangedDetails;
+@class DBTEAMLOGExternalDriveBackupStatusChangedDetails;
 @class DBTEAMLOGExternalSharingCreateReportDetails;
 @class DBTEAMLOGExternalSharingReportFailedDetails;
 @class DBTEAMLOGFileAddCommentDetails;
@@ -674,6 +677,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 
     /// (no description).
     DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails,
+
+    /// (no description).
+    DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails,
 
     /// (no description).
     DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails,
@@ -1564,6 +1573,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails,
 
     /// (no description).
+    DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails,
+
+    /// (no description).
     DBTEAMLOGEventDetailsAllowDownloadDisabledDetails,
 
     /// (no description).
@@ -2204,6 +2216,18 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// (no description). @note Ensure the `isEmmRefreshAuthTokenDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEmmRefreshAuthTokenDetails *emmRefreshAuthTokenDetails;
+
+/// (no description). @note Ensure the
+/// `isExternalDriveBackupEligibilityStatusCheckedDetails` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *externalDriveBackupEligibilityStatusCheckedDetails;
+
+/// (no description). @note Ensure the
+/// `isExternalDriveBackupStatusChangedDetails` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGExternalDriveBackupStatusChangedDetails *externalDriveBackupStatusChangedDetails;
 
 /// (no description). @note Ensure the
 /// `isAccountCaptureChangeAvailabilityDetails` method returns true before
@@ -3530,6 +3554,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// raised.
 @property (nonatomic, readonly) DBTEAMLOGAccountCaptureChangePolicyDetails *accountCaptureChangePolicyDetails;
 
+/// (no description). @note Ensure the `isAdminEmailRemindersChangedDetails`
+/// method returns true before accessing, otherwise a runtime exception will be
+/// raised.
+@property (nonatomic, readonly) DBTEAMLOGAdminEmailRemindersChangedDetails *adminEmailRemindersChangedDetails;
+
 /// (no description). @note Ensure the `isAllowDownloadDisabledDetails` method
 /// returns true before accessing, otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAllowDownloadDisabledDetails *allowDownloadDisabledDetails;
@@ -4748,6 +4777,28 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEmmRefreshAuthTokenDetails:(DBTEAMLOGEmmRefreshAuthTokenDetails *)emmRefreshAuthTokenDetails;
+
+///
+/// Initializes union class with tag state of
+/// "external_drive_backup_eligibility_status_checked_details".
+///
+/// @param externalDriveBackupEligibilityStatusCheckedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExternalDriveBackupEligibilityStatusCheckedDetails:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)externalDriveBackupEligibilityStatusCheckedDetails;
+
+///
+/// Initializes union class with tag state of
+/// "external_drive_backup_status_changed_details".
+///
+/// @param externalDriveBackupStatusChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExternalDriveBackupStatusChangedDetails:
+    (DBTEAMLOGExternalDriveBackupStatusChangedDetails *)externalDriveBackupStatusChangedDetails;
 
 ///
 /// Initializes union class with tag state of
@@ -7720,6 +7771,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
     (DBTEAMLOGAccountCaptureChangePolicyDetails *)accountCaptureChangePolicyDetails;
 
 ///
+/// Initializes union class with tag state of
+/// "admin_email_reminders_changed_details".
+///
+/// @param adminEmailRemindersChangedDetails (no description).
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAdminEmailRemindersChangedDetails:
+    (DBTEAMLOGAdminEmailRemindersChangedDetails *)adminEmailRemindersChangedDetails;
+
+///
 /// Initializes union class with tag state of "allow_download_disabled_details".
 ///
 /// @param allowDownloadDisabledDetails (no description).
@@ -9817,6 +9879,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "emm_refresh_auth_token_details".
 ///
 - (BOOL)isEmmRefreshAuthTokenDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "external_drive_backup_eligibility_status_checked_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `externalDriveBackupEligibilityStatusCheckedDetails` property, otherwise a
+/// runtime exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "external_drive_backup_eligibility_status_checked_details".
+///
+- (BOOL)isExternalDriveBackupEligibilityStatusCheckedDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "external_drive_backup_status_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `externalDriveBackupStatusChangedDetails` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "external_drive_backup_status_changed_details".
+///
+- (BOOL)isExternalDriveBackupStatusChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -13634,6 +13722,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventDetailsTag){
 /// "account_capture_change_policy_details".
 ///
 - (BOOL)isAccountCaptureChangePolicyDetails;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "admin_email_reminders_changed_details".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `adminEmailRemindersChangedDetails` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "admin_email_reminders_changed_details".
+///
+- (BOOL)isAdminEmailRemindersChangedDetails;
 
 ///
 /// Retrieves whether the union's current tag state has value

@@ -958,6 +958,206 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMPOLICIESFileProviderMigrationPolicyState.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMPOLICIESFileProviderMigrationPolicyState
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESFileProviderMigrationPolicyStateDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESFileProviderMigrationPolicyStateEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithDefault_ {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESFileProviderMigrationPolicyStateDefault_;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMPOLICIESFileProviderMigrationPolicyStateOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMPOLICIESFileProviderMigrationPolicyStateDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMPOLICIESFileProviderMigrationPolicyStateEnabled;
+}
+
+- (BOOL)isDefault_ {
+  return _tag == DBTEAMPOLICIESFileProviderMigrationPolicyStateDefault_;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMPOLICIESFileProviderMigrationPolicyStateOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateDisabled:
+    return @"DBTEAMPOLICIESFileProviderMigrationPolicyStateDisabled";
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateEnabled:
+    return @"DBTEAMPOLICIESFileProviderMigrationPolicyStateEnabled";
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateDefault_:
+    return @"DBTEAMPOLICIESFileProviderMigrationPolicyStateDefault_";
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateOther:
+    return @"DBTEAMPOLICIESFileProviderMigrationPolicyStateOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateDisabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateEnabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateDefault_:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToFileProviderMigrationPolicyState:other];
+}
+
+- (BOOL)isEqualToFileProviderMigrationPolicyState:
+    (DBTEAMPOLICIESFileProviderMigrationPolicyState *)aFileProviderMigrationPolicyState {
+  if (self == aFileProviderMigrationPolicyState) {
+    return YES;
+  }
+  if (self.tag != aFileProviderMigrationPolicyState.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateDisabled:
+    return [[self tagName] isEqual:[aFileProviderMigrationPolicyState tagName]];
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateEnabled:
+    return [[self tagName] isEqual:[aFileProviderMigrationPolicyState tagName]];
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateDefault_:
+    return [[self tagName] isEqual:[aFileProviderMigrationPolicyState tagName]];
+  case DBTEAMPOLICIESFileProviderMigrationPolicyStateOther:
+    return [[self tagName] isEqual:[aFileProviderMigrationPolicyState tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMPOLICIESFileProviderMigrationPolicyStateSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMPOLICIESFileProviderMigrationPolicyState *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isDefault_]) {
+    jsonDict[@".tag"] = @"default";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMPOLICIESFileProviderMigrationPolicyState *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMPOLICIESFileProviderMigrationPolicyState alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMPOLICIESFileProviderMigrationPolicyState alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"default"]) {
+    return [[DBTEAMPOLICIESFileProviderMigrationPolicyState alloc] initWithDefault_];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMPOLICIESFileProviderMigrationPolicyState alloc] initWithOther];
+  } else {
+    return [[DBTEAMPOLICIESFileProviderMigrationPolicyState alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMPOLICIESGroupCreation.h"
 
 #pragma mark - API Object

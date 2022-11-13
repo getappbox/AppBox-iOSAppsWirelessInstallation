@@ -44,6 +44,9 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPlacementRestrictionTag){
     DBTEAMLOGPlacementRestrictionUkOnly,
 
     /// (no description).
+    DBTEAMLOGPlacementRestrictionUsS3Only,
+
+    /// (no description).
     DBTEAMLOGPlacementRestrictionOther,
 
 };
@@ -87,6 +90,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPlacementRestrictionTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithUkOnly;
+
+///
+/// Initializes union class with tag state of "us_s3_only".
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithUsS3Only;
 
 ///
 /// Initializes union class with tag state of "other".
@@ -133,6 +143,13 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGPlacementRestrictionTag){
 /// @return Whether the union's current tag state has value "uk_only".
 ///
 - (BOOL)isUkOnly;
+
+///
+/// Retrieves whether the union's current tag state has value "us_s3_only".
+///
+/// @return Whether the union's current tag state has value "us_s3_only".
+///
+- (BOOL)isUsS3Only;
 
 ///
 /// Retrieves whether the union's current tag state has value "other".

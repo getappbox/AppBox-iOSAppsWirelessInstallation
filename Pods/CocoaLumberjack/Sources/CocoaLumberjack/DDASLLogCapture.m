@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2021, Deusty, LLC
+// Copyright (c) 2010-2022, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -125,7 +125,7 @@ static DDLogLevel _captureLevel = DDLogLevelVerbose;
                                                             function:nil
                                                                 line:0
                                                                  tag:nil
-                                                             options:0
+                                                             options:DDLogMessageDontCopyMessage
                                                            timestamp:timeStamp];
     
     [DDLog log:async message:logMessage];

@@ -120,6 +120,7 @@
 #import "DBFILESUploadSessionFinishError.h"
 #import "DBFILESUploadSessionLookupError.h"
 #import "DBFILESUploadSessionOffsetError.h"
+#import "DBFILESUploadSessionStartBatchResult.h"
 #import "DBFILESUploadSessionStartError.h"
 #import "DBFILESUploadSessionStartResult.h"
 #import "DBFILESUploadWriteFailed.h"
@@ -198,6 +199,7 @@ static DBRoute *DBFILESUploadSessionFinishBatch;
 static DBRoute *DBFILESUploadSessionFinishBatchV2;
 static DBRoute *DBFILESUploadSessionFinishBatchCheck;
 static DBRoute *DBFILESUploadSessionStart;
+static DBRoute *DBFILESUploadSessionStartBatch;
 
 static NSObject *lockObj = nil;
 + (void)initialize {
@@ -1564,6 +1566,26 @@ static NSObject *lockObj = nil;
                                 dataStructDeserialBlock:nil];
     }
     return DBFILESUploadSessionStart;
+  }
+}
+
++ (DBRoute *)DBFILESUploadSessionStartBatch {
+  @synchronized(lockObj) {
+    if (!DBFILESUploadSessionStartBatch) {
+      DBFILESUploadSessionStartBatch = [[DBRoute alloc] init:@"upload_session/start_batch"
+                                                  namespace_:@"files"
+                                                  deprecated:@NO
+                                                  resultType:[DBFILESUploadSessionStartBatchResult class]
+                                                   errorType:nil
+                                                       attrs:@{
+                                                         @"auth" : @"user",
+                                                         @"host" : @"api",
+                                                         @"style" : @"rpc"
+                                                       }
+                                       dataStructSerialBlock:nil
+                                     dataStructDeserialBlock:nil];
+    }
+    return DBFILESUploadSessionStartBatch;
   }
 }
 
