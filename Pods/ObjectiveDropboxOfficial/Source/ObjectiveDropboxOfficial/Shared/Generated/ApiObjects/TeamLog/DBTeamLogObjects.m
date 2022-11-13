@@ -3715,19 +3715,23 @@
 
 - (instancetype)initWithAlertState:(DBTEAMLOGAdminAlertingAlertStatePolicy *)alertState
                   sensitivityLevel:(DBTEAMLOGAdminAlertingAlertSensitivity *)sensitivityLevel
-                recipientsSettings:(DBTEAMLOGRecipientsConfiguration *)recipientsSettings {
+                recipientsSettings:(DBTEAMLOGRecipientsConfiguration *)recipientsSettings
+                              text:(NSString *)text
+            excludedFileExtensions:(NSString *)excludedFileExtensions {
 
   self = [super init];
   if (self) {
     _alertState = alertState;
     _sensitivityLevel = sensitivityLevel;
     _recipientsSettings = recipientsSettings;
+    _text = text;
+    _excludedFileExtensions = excludedFileExtensions;
   }
   return self;
 }
 
 - (instancetype)initDefault {
-  return [self initWithAlertState:nil sensitivityLevel:nil recipientsSettings:nil];
+  return [self initWithAlertState:nil sensitivityLevel:nil recipientsSettings:nil text:nil excludedFileExtensions:nil];
 }
 
 #pragma mark - Serialization methods
@@ -3769,6 +3773,12 @@
   if (self.recipientsSettings != nil) {
     result = prime * result + [self.recipientsSettings hash];
   }
+  if (self.text != nil) {
+    result = prime * result + [self.text hash];
+  }
+  if (self.excludedFileExtensions != nil) {
+    result = prime * result + [self.excludedFileExtensions hash];
+  }
 
   return prime * result;
 }
@@ -3805,6 +3815,16 @@
       return NO;
     }
   }
+  if (self.text) {
+    if (![self.text isEqual:anAdminAlertingAlertConfiguration.text]) {
+      return NO;
+    }
+  }
+  if (self.excludedFileExtensions) {
+    if (![self.excludedFileExtensions isEqual:anAdminAlertingAlertConfiguration.excludedFileExtensions]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -3828,6 +3848,12 @@
     jsonDict[@"recipients_settings"] =
         [DBTEAMLOGRecipientsConfigurationSerializer serialize:valueObj.recipientsSettings];
   }
+  if (valueObj.text) {
+    jsonDict[@"text"] = valueObj.text;
+  }
+  if (valueObj.excludedFileExtensions) {
+    jsonDict[@"excluded_file_extensions"] = valueObj.excludedFileExtensions;
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -3845,10 +3871,14 @@
       valueDict[@"recipients_settings"]
           ? [DBTEAMLOGRecipientsConfigurationSerializer deserialize:valueDict[@"recipients_settings"]]
           : nil;
+  NSString *text = valueDict[@"text"] ?: nil;
+  NSString *excludedFileExtensions = valueDict[@"excluded_file_extensions"] ?: nil;
 
   return [[DBTEAMLOGAdminAlertingAlertConfiguration alloc] initWithAlertState:alertState
                                                              sensitivityLevel:sensitivityLevel
-                                                           recipientsSettings:recipientsSettings];
+                                                           recipientsSettings:recipientsSettings
+                                                                         text:text
+                                                       excludedFileExtensions:excludedFileExtensions];
 }
 
 @end
@@ -5385,6 +5415,417 @@
     return [[DBTEAMLOGAdminConsoleAppPolicy alloc] initWithOther];
   } else {
     return [[DBTEAMLOGAdminConsoleAppPolicy alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminEmailRemindersChangedDetails.h"
+#import "DBTEAMLOGAdminEmailRemindersPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminEmailRemindersChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDNewValue:(DBTEAMLOGAdminEmailRemindersPolicy *)dNewValue
+                    previousValue:(DBTEAMLOGAdminEmailRemindersPolicy *)previousValue {
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+
+  self = [super init];
+  if (self) {
+    _dNewValue = dNewValue;
+    _previousValue = previousValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminEmailRemindersChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminEmailRemindersChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminEmailRemindersChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.dNewValue hash];
+  result = prime * result + [self.previousValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminEmailRemindersChangedDetails:other];
+}
+
+- (BOOL)isEqualToAdminEmailRemindersChangedDetails:
+    (DBTEAMLOGAdminEmailRemindersChangedDetails *)anAdminEmailRemindersChangedDetails {
+  if (self == anAdminEmailRemindersChangedDetails) {
+    return YES;
+  }
+  if (![self.dNewValue isEqual:anAdminEmailRemindersChangedDetails.dNewValue]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:anAdminEmailRemindersChangedDetails.previousValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminEmailRemindersChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminEmailRemindersChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"new_value"] = [DBTEAMLOGAdminEmailRemindersPolicySerializer serialize:valueObj.dNewValue];
+  jsonDict[@"previous_value"] = [DBTEAMLOGAdminEmailRemindersPolicySerializer serialize:valueObj.previousValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminEmailRemindersChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGAdminEmailRemindersPolicy *dNewValue =
+      [DBTEAMLOGAdminEmailRemindersPolicySerializer deserialize:valueDict[@"new_value"]];
+  DBTEAMLOGAdminEmailRemindersPolicy *previousValue =
+      [DBTEAMLOGAdminEmailRemindersPolicySerializer deserialize:valueDict[@"previous_value"]];
+
+  return [[DBTEAMLOGAdminEmailRemindersChangedDetails alloc] initWithDNewValue:dNewValue previousValue:previousValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminEmailRemindersChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminEmailRemindersChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminEmailRemindersChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminEmailRemindersChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminEmailRemindersChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminEmailRemindersChangedType:other];
+}
+
+- (BOOL)isEqualToAdminEmailRemindersChangedType:
+    (DBTEAMLOGAdminEmailRemindersChangedType *)anAdminEmailRemindersChangedType {
+  if (self == anAdminEmailRemindersChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anAdminEmailRemindersChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminEmailRemindersChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminEmailRemindersChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminEmailRemindersChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGAdminEmailRemindersChangedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGAdminEmailRemindersPolicy.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGAdminEmailRemindersPolicy
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDefault_ {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminEmailRemindersPolicyDefault_;
+  }
+  return self;
+}
+
+- (instancetype)initWithDisabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminEmailRemindersPolicyDisabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithEnabled {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminEmailRemindersPolicyEnabled;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGAdminEmailRemindersPolicyOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isDefault_ {
+  return _tag == DBTEAMLOGAdminEmailRemindersPolicyDefault_;
+}
+
+- (BOOL)isDisabled {
+  return _tag == DBTEAMLOGAdminEmailRemindersPolicyDisabled;
+}
+
+- (BOOL)isEnabled {
+  return _tag == DBTEAMLOGAdminEmailRemindersPolicyEnabled;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGAdminEmailRemindersPolicyOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGAdminEmailRemindersPolicyDefault_:
+    return @"DBTEAMLOGAdminEmailRemindersPolicyDefault_";
+  case DBTEAMLOGAdminEmailRemindersPolicyDisabled:
+    return @"DBTEAMLOGAdminEmailRemindersPolicyDisabled";
+  case DBTEAMLOGAdminEmailRemindersPolicyEnabled:
+    return @"DBTEAMLOGAdminEmailRemindersPolicyEnabled";
+  case DBTEAMLOGAdminEmailRemindersPolicyOther:
+    return @"DBTEAMLOGAdminEmailRemindersPolicyOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGAdminEmailRemindersPolicySerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGAdminEmailRemindersPolicySerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGAdminEmailRemindersPolicySerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGAdminEmailRemindersPolicyDefault_:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGAdminEmailRemindersPolicyDisabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGAdminEmailRemindersPolicyEnabled:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGAdminEmailRemindersPolicyOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToAdminEmailRemindersPolicy:other];
+}
+
+- (BOOL)isEqualToAdminEmailRemindersPolicy:(DBTEAMLOGAdminEmailRemindersPolicy *)anAdminEmailRemindersPolicy {
+  if (self == anAdminEmailRemindersPolicy) {
+    return YES;
+  }
+  if (self.tag != anAdminEmailRemindersPolicy.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGAdminEmailRemindersPolicyDefault_:
+    return [[self tagName] isEqual:[anAdminEmailRemindersPolicy tagName]];
+  case DBTEAMLOGAdminEmailRemindersPolicyDisabled:
+    return [[self tagName] isEqual:[anAdminEmailRemindersPolicy tagName]];
+  case DBTEAMLOGAdminEmailRemindersPolicyEnabled:
+    return [[self tagName] isEqual:[anAdminEmailRemindersPolicy tagName]];
+  case DBTEAMLOGAdminEmailRemindersPolicyOther:
+    return [[self tagName] isEqual:[anAdminEmailRemindersPolicy tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGAdminEmailRemindersPolicySerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGAdminEmailRemindersPolicy *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isDefault_]) {
+    jsonDict[@".tag"] = @"default";
+  } else if ([valueObj isDisabled]) {
+    jsonDict[@".tag"] = @"disabled";
+  } else if ([valueObj isEnabled]) {
+    jsonDict[@".tag"] = @"enabled";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGAdminEmailRemindersPolicy *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"default"]) {
+    return [[DBTEAMLOGAdminEmailRemindersPolicy alloc] initWithDefault_];
+  } else if ([tag isEqualToString:@"disabled"]) {
+    return [[DBTEAMLOGAdminEmailRemindersPolicy alloc] initWithDisabled];
+  } else if ([tag isEqualToString:@"enabled"]) {
+    return [[DBTEAMLOGAdminEmailRemindersPolicy alloc] initWithEnabled];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGAdminEmailRemindersPolicy alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGAdminEmailRemindersPolicy alloc] initWithOther];
   }
 }
 
@@ -28240,6 +28681,7 @@
 #import "DBTEAMLOGAdminAlertingAlertStateChangedDetails.h"
 #import "DBTEAMLOGAdminAlertingChangedAlertConfigDetails.h"
 #import "DBTEAMLOGAdminAlertingTriggeredAlertDetails.h"
+#import "DBTEAMLOGAdminEmailRemindersChangedDetails.h"
 #import "DBTEAMLOGAllowDownloadDisabledDetails.h"
 #import "DBTEAMLOGAllowDownloadEnabledDetails.h"
 #import "DBTEAMLOGAppBlockedByPermissionsDetails.h"
@@ -28323,7 +28765,9 @@
 #import "DBTEAMLOGExportMembersReportDetails.h"
 #import "DBTEAMLOGExportMembersReportFailDetails.h"
 #import "DBTEAMLOGExtendedVersionHistoryChangePolicyDetails.h"
+#import "DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails.h"
 #import "DBTEAMLOGExternalDriveBackupPolicyChangedDetails.h"
+#import "DBTEAMLOGExternalDriveBackupStatusChangedDetails.h"
 #import "DBTEAMLOGExternalSharingCreateReportDetails.h"
 #import "DBTEAMLOGExternalSharingReportFailedDetails.h"
 #import "DBTEAMLOGFileAddCommentDetails.h"
@@ -28772,6 +29216,8 @@
 @synthesize dropboxPasswordsExportedDetails = _dropboxPasswordsExportedDetails;
 @synthesize dropboxPasswordsNewDeviceEnrolledDetails = _dropboxPasswordsNewDeviceEnrolledDetails;
 @synthesize emmRefreshAuthTokenDetails = _emmRefreshAuthTokenDetails;
+@synthesize externalDriveBackupEligibilityStatusCheckedDetails = _externalDriveBackupEligibilityStatusCheckedDetails;
+@synthesize externalDriveBackupStatusChangedDetails = _externalDriveBackupStatusChangedDetails;
 @synthesize accountCaptureChangeAvailabilityDetails = _accountCaptureChangeAvailabilityDetails;
 @synthesize accountCaptureMigrateAccountDetails = _accountCaptureMigrateAccountDetails;
 @synthesize accountCaptureNotificationEmailsSentDetails = _accountCaptureNotificationEmailsSentDetails;
@@ -29068,6 +29514,7 @@
 @synthesize teamFolderRenameDetails = _teamFolderRenameDetails;
 @synthesize teamSelectiveSyncSettingsChangedDetails = _teamSelectiveSyncSettingsChangedDetails;
 @synthesize accountCaptureChangePolicyDetails = _accountCaptureChangePolicyDetails;
+@synthesize adminEmailRemindersChangedDetails = _adminEmailRemindersChangedDetails;
 @synthesize allowDownloadDisabledDetails = _allowDownloadDisabledDetails;
 @synthesize allowDownloadEnabledDetails = _allowDownloadEnabledDetails;
 @synthesize appPermissionsChangedDetails = _appPermissionsChangedDetails;
@@ -29731,6 +30178,26 @@
   if (self) {
     _tag = DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails;
     _emmRefreshAuthTokenDetails = emmRefreshAuthTokenDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithExternalDriveBackupEligibilityStatusCheckedDetails:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)externalDriveBackupEligibilityStatusCheckedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails;
+    _externalDriveBackupEligibilityStatusCheckedDetails = externalDriveBackupEligibilityStatusCheckedDetails;
+  }
+  return self;
+}
+
+- (instancetype)initWithExternalDriveBackupStatusChangedDetails:
+    (DBTEAMLOGExternalDriveBackupStatusChangedDetails *)externalDriveBackupStatusChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails;
+    _externalDriveBackupStatusChangedDetails = externalDriveBackupStatusChangedDetails;
   }
   return self;
 }
@@ -32569,6 +33036,16 @@
   return self;
 }
 
+- (instancetype)initWithAdminEmailRemindersChangedDetails:
+    (DBTEAMLOGAdminEmailRemindersChangedDetails *)adminEmailRemindersChangedDetails {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails;
+    _adminEmailRemindersChangedDetails = adminEmailRemindersChangedDetails;
+  }
+  return self;
+}
+
 - (instancetype)initWithAllowDownloadDisabledDetails:
     (DBTEAMLOGAllowDownloadDisabledDetails *)allowDownloadDisabledDetails {
   self = [super init];
@@ -34348,6 +34825,26 @@
         format:@"Invalid tag: required DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails, but was %@.", [self tagName]];
   }
   return _emmRefreshAuthTokenDetails;
+}
+
+- (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)externalDriveBackupEligibilityStatusCheckedDetails {
+  if (![self isExternalDriveBackupEligibilityStatusCheckedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required "
+                       @"DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _externalDriveBackupEligibilityStatusCheckedDetails;
+}
+
+- (DBTEAMLOGExternalDriveBackupStatusChangedDetails *)externalDriveBackupStatusChangedDetails {
+  if (![self isExternalDriveBackupStatusChangedDetails]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails, but was %@.",
+               [self tagName]];
+  }
+  return _externalDriveBackupStatusChangedDetails;
 }
 
 - (DBTEAMLOGAccountCaptureChangeAvailabilityDetails *)accountCaptureChangeAvailabilityDetails {
@@ -37014,6 +37511,15 @@
   return _accountCaptureChangePolicyDetails;
 }
 
+- (DBTEAMLOGAdminEmailRemindersChangedDetails *)adminEmailRemindersChangedDetails {
+  if (![self isAdminEmailRemindersChangedDetails]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails, but was %@.",
+                       [self tagName]];
+  }
+  return _adminEmailRemindersChangedDetails;
+}
+
 - (DBTEAMLOGAllowDownloadDisabledDetails *)allowDownloadDisabledDetails {
   if (![self isAllowDownloadDisabledDetails]) {
     [NSException
@@ -38437,6 +38943,14 @@
   return _tag == DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails;
 }
 
+- (BOOL)isExternalDriveBackupEligibilityStatusCheckedDetails {
+  return _tag == DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails;
+}
+
+- (BOOL)isExternalDriveBackupStatusChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails;
+}
+
 - (BOOL)isAccountCaptureChangeAvailabilityDetails {
   return _tag == DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails;
 }
@@ -39621,6 +40135,10 @@
   return _tag == DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails;
 }
 
+- (BOOL)isAdminEmailRemindersChangedDetails {
+  return _tag == DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails;
+}
+
 - (BOOL)isAllowDownloadDisabledDetails {
   return _tag == DBTEAMLOGEventDetailsAllowDownloadDisabledDetails;
 }
@@ -40253,6 +40771,10 @@
     return @"DBTEAMLOGEventDetailsDropboxPasswordsNewDeviceEnrolledDetails";
   case DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails:
     return @"DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails";
+  case DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails:
+    return @"DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails";
+  case DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails:
+    return @"DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails";
   case DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails:
     return @"DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails";
   case DBTEAMLOGEventDetailsAccountCaptureMigrateAccountDetails:
@@ -40845,6 +41367,8 @@
     return @"DBTEAMLOGEventDetailsTeamSelectiveSyncSettingsChangedDetails";
   case DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails:
     return @"DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails";
+  case DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails:
+    return @"DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails";
   case DBTEAMLOGEventDetailsAllowDownloadDisabledDetails:
     return @"DBTEAMLOGEventDetailsAllowDownloadDisabledDetails";
   case DBTEAMLOGEventDetailsAllowDownloadEnabledDetails:
@@ -41305,6 +41829,12 @@
     break;
   case DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails:
     result = prime * result + [self.emmRefreshAuthTokenDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails:
+    result = prime * result + [self.externalDriveBackupEligibilityStatusCheckedDetails hash];
+    break;
+  case DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails:
+    result = prime * result + [self.externalDriveBackupStatusChangedDetails hash];
     break;
   case DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails:
     result = prime * result + [self.accountCaptureChangeAvailabilityDetails hash];
@@ -42194,6 +42724,9 @@
   case DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails:
     result = prime * result + [self.accountCaptureChangePolicyDetails hash];
     break;
+  case DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails:
+    result = prime * result + [self.adminEmailRemindersChangedDetails hash];
+    break;
   case DBTEAMLOGEventDetailsAllowDownloadDisabledDetails:
     result = prime * result + [self.allowDownloadDisabledDetails hash];
     break;
@@ -42721,6 +43254,12 @@
         [self.dropboxPasswordsNewDeviceEnrolledDetails isEqual:anEventDetails.dropboxPasswordsNewDeviceEnrolledDetails];
   case DBTEAMLOGEventDetailsEmmRefreshAuthTokenDetails:
     return [self.emmRefreshAuthTokenDetails isEqual:anEventDetails.emmRefreshAuthTokenDetails];
+  case DBTEAMLOGEventDetailsExternalDriveBackupEligibilityStatusCheckedDetails:
+    return [self.externalDriveBackupEligibilityStatusCheckedDetails
+        isEqual:anEventDetails.externalDriveBackupEligibilityStatusCheckedDetails];
+  case DBTEAMLOGEventDetailsExternalDriveBackupStatusChangedDetails:
+    return
+        [self.externalDriveBackupStatusChangedDetails isEqual:anEventDetails.externalDriveBackupStatusChangedDetails];
   case DBTEAMLOGEventDetailsAccountCaptureChangeAvailabilityDetails:
     return
         [self.accountCaptureChangeAvailabilityDetails isEqual:anEventDetails.accountCaptureChangeAvailabilityDetails];
@@ -43342,6 +43881,8 @@
         [self.teamSelectiveSyncSettingsChangedDetails isEqual:anEventDetails.teamSelectiveSyncSettingsChangedDetails];
   case DBTEAMLOGEventDetailsAccountCaptureChangePolicyDetails:
     return [self.accountCaptureChangePolicyDetails isEqual:anEventDetails.accountCaptureChangePolicyDetails];
+  case DBTEAMLOGEventDetailsAdminEmailRemindersChangedDetails:
+    return [self.adminEmailRemindersChangedDetails isEqual:anEventDetails.adminEmailRemindersChangedDetails];
   case DBTEAMLOGEventDetailsAllowDownloadDisabledDetails:
     return [self.allowDownloadDisabledDetails isEqual:anEventDetails.allowDownloadDisabledDetails];
   case DBTEAMLOGEventDetailsAllowDownloadEnabledDetails:
@@ -43873,6 +44414,14 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer
                                            serialize:valueObj.emmRefreshAuthTokenDetails]];
     jsonDict[@".tag"] = @"emm_refresh_auth_token_details";
+  } else if ([valueObj isExternalDriveBackupEligibilityStatusCheckedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetailsSerializer
+                                           serialize:valueObj.externalDriveBackupEligibilityStatusCheckedDetails]];
+    jsonDict[@".tag"] = @"external_drive_backup_eligibility_status_checked_details";
+  } else if ([valueObj isExternalDriveBackupStatusChangedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalDriveBackupStatusChangedDetailsSerializer
+                                           serialize:valueObj.externalDriveBackupStatusChangedDetails]];
+    jsonDict[@".tag"] = @"external_drive_backup_status_changed_details";
   } else if ([valueObj isAccountCaptureChangeAvailabilityDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangeAvailabilityDetailsSerializer
                                            serialize:valueObj.accountCaptureChangeAvailabilityDetails]];
@@ -45025,6 +45574,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangePolicyDetailsSerializer
                                            serialize:valueObj.accountCaptureChangePolicyDetails]];
     jsonDict[@".tag"] = @"account_capture_change_policy_details";
+  } else if ([valueObj isAdminEmailRemindersChangedDetails]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminEmailRemindersChangedDetailsSerializer
+                                           serialize:valueObj.adminEmailRemindersChangedDetails]];
+    jsonDict[@".tag"] = @"admin_email_reminders_changed_details";
   } else if ([valueObj isAllowDownloadDisabledDetails]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAllowDownloadDisabledDetailsSerializer
                                            serialize:valueObj.allowDownloadDisabledDetails]];
@@ -45784,6 +46337,16 @@
     DBTEAMLOGEmmRefreshAuthTokenDetails *emmRefreshAuthTokenDetails =
         [DBTEAMLOGEmmRefreshAuthTokenDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithEmmRefreshAuthTokenDetails:emmRefreshAuthTokenDetails];
+  } else if ([tag isEqualToString:@"external_drive_backup_eligibility_status_checked_details"]) {
+    DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *externalDriveBackupEligibilityStatusCheckedDetails =
+        [DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithExternalDriveBackupEligibilityStatusCheckedDetails:externalDriveBackupEligibilityStatusCheckedDetails];
+  } else if ([tag isEqualToString:@"external_drive_backup_status_changed_details"]) {
+    DBTEAMLOGExternalDriveBackupStatusChangedDetails *externalDriveBackupStatusChangedDetails =
+        [DBTEAMLOGExternalDriveBackupStatusChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc]
+        initWithExternalDriveBackupStatusChangedDetails:externalDriveBackupStatusChangedDetails];
   } else if ([tag isEqualToString:@"account_capture_change_availability_details"]) {
     DBTEAMLOGAccountCaptureChangeAvailabilityDetails *accountCaptureChangeAvailabilityDetails =
         [DBTEAMLOGAccountCaptureChangeAvailabilityDetailsSerializer deserialize:valueDict];
@@ -47015,6 +47578,10 @@
     DBTEAMLOGAccountCaptureChangePolicyDetails *accountCaptureChangePolicyDetails =
         [DBTEAMLOGAccountCaptureChangePolicyDetailsSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventDetails alloc] initWithAccountCaptureChangePolicyDetails:accountCaptureChangePolicyDetails];
+  } else if ([tag isEqualToString:@"admin_email_reminders_changed_details"]) {
+    DBTEAMLOGAdminEmailRemindersChangedDetails *adminEmailRemindersChangedDetails =
+        [DBTEAMLOGAdminEmailRemindersChangedDetailsSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventDetails alloc] initWithAdminEmailRemindersChangedDetails:adminEmailRemindersChangedDetails];
   } else if ([tag isEqualToString:@"allow_download_disabled_details"]) {
     DBTEAMLOGAllowDownloadDisabledDetails *allowDownloadDisabledDetails =
         [DBTEAMLOGAllowDownloadDisabledDetailsSerializer deserialize:valueDict];
@@ -47619,6 +48186,7 @@
 #import "DBTEAMLOGAdminAlertingAlertStateChangedType.h"
 #import "DBTEAMLOGAdminAlertingChangedAlertConfigType.h"
 #import "DBTEAMLOGAdminAlertingTriggeredAlertType.h"
+#import "DBTEAMLOGAdminEmailRemindersChangedType.h"
 #import "DBTEAMLOGAllowDownloadDisabledType.h"
 #import "DBTEAMLOGAllowDownloadEnabledType.h"
 #import "DBTEAMLOGAppBlockedByPermissionsType.h"
@@ -47702,7 +48270,9 @@
 #import "DBTEAMLOGExportMembersReportFailType.h"
 #import "DBTEAMLOGExportMembersReportType.h"
 #import "DBTEAMLOGExtendedVersionHistoryChangePolicyType.h"
+#import "DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType.h"
 #import "DBTEAMLOGExternalDriveBackupPolicyChangedType.h"
+#import "DBTEAMLOGExternalDriveBackupStatusChangedType.h"
 #import "DBTEAMLOGExternalSharingCreateReportType.h"
 #import "DBTEAMLOGExternalSharingReportFailedType.h"
 #import "DBTEAMLOGFileAddCommentType.h"
@@ -48150,6 +48720,8 @@
 @synthesize dropboxPasswordsExported = _dropboxPasswordsExported;
 @synthesize dropboxPasswordsNewDeviceEnrolled = _dropboxPasswordsNewDeviceEnrolled;
 @synthesize emmRefreshAuthToken = _emmRefreshAuthToken;
+@synthesize externalDriveBackupEligibilityStatusChecked = _externalDriveBackupEligibilityStatusChecked;
+@synthesize externalDriveBackupStatusChanged = _externalDriveBackupStatusChanged;
 @synthesize accountCaptureChangeAvailability = _accountCaptureChangeAvailability;
 @synthesize accountCaptureMigrateAccount = _accountCaptureMigrateAccount;
 @synthesize accountCaptureNotificationEmailsSent = _accountCaptureNotificationEmailsSent;
@@ -48446,6 +49018,7 @@
 @synthesize teamFolderRename = _teamFolderRename;
 @synthesize teamSelectiveSyncSettingsChanged = _teamSelectiveSyncSettingsChanged;
 @synthesize accountCaptureChangePolicy = _accountCaptureChangePolicy;
+@synthesize adminEmailRemindersChanged = _adminEmailRemindersChanged;
 @synthesize allowDownloadDisabled = _allowDownloadDisabled;
 @synthesize allowDownloadEnabled = _allowDownloadEnabled;
 @synthesize appPermissionsChanged = _appPermissionsChanged;
@@ -49087,6 +49660,26 @@
   if (self) {
     _tag = DBTEAMLOGEventTypeEmmRefreshAuthToken;
     _emmRefreshAuthToken = emmRefreshAuthToken;
+  }
+  return self;
+}
+
+- (instancetype)initWithExternalDriveBackupEligibilityStatusChecked:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)externalDriveBackupEligibilityStatusChecked {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked;
+    _externalDriveBackupEligibilityStatusChecked = externalDriveBackupEligibilityStatusChecked;
+  }
+  return self;
+}
+
+- (instancetype)initWithExternalDriveBackupStatusChanged:
+    (DBTEAMLOGExternalDriveBackupStatusChangedType *)externalDriveBackupStatusChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeExternalDriveBackupStatusChanged;
+    _externalDriveBackupStatusChanged = externalDriveBackupStatusChanged;
   }
   return self;
 }
@@ -51848,6 +52441,16 @@
   return self;
 }
 
+- (instancetype)initWithAdminEmailRemindersChanged:
+    (DBTEAMLOGAdminEmailRemindersChangedType *)adminEmailRemindersChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeAdminEmailRemindersChanged;
+    _adminEmailRemindersChanged = adminEmailRemindersChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithAllowDownloadDisabled:(DBTEAMLOGAllowDownloadDisabledType *)allowDownloadDisabled {
   self = [super init];
   if (self) {
@@ -53549,6 +54152,25 @@
                 format:@"Invalid tag: required DBTEAMLOGEventTypeEmmRefreshAuthToken, but was %@.", [self tagName]];
   }
   return _emmRefreshAuthToken;
+}
+
+- (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)externalDriveBackupEligibilityStatusChecked {
+  if (![self isExternalDriveBackupEligibilityStatusChecked]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked, but was %@.",
+               [self tagName]];
+  }
+  return _externalDriveBackupEligibilityStatusChecked;
+}
+
+- (DBTEAMLOGExternalDriveBackupStatusChangedType *)externalDriveBackupStatusChanged {
+  if (![self isExternalDriveBackupStatusChanged]) {
+    [NSException raise:@"IllegalStateException"
+                format:@"Invalid tag: required DBTEAMLOGEventTypeExternalDriveBackupStatusChanged, but was %@.",
+                       [self tagName]];
+  }
+  return _externalDriveBackupStatusChanged;
 }
 
 - (DBTEAMLOGAccountCaptureChangeAvailabilityType *)accountCaptureChangeAvailability {
@@ -56033,6 +56655,15 @@
   return _accountCaptureChangePolicy;
 }
 
+- (DBTEAMLOGAdminEmailRemindersChangedType *)adminEmailRemindersChanged {
+  if (![self isAdminEmailRemindersChanged]) {
+    [NSException
+         raise:@"IllegalStateException"
+        format:@"Invalid tag: required DBTEAMLOGEventTypeAdminEmailRemindersChanged, but was %@.", [self tagName]];
+  }
+  return _adminEmailRemindersChanged;
+}
+
 - (DBTEAMLOGAllowDownloadDisabledType *)allowDownloadDisabled {
   if (![self isAllowDownloadDisabled]) {
     [NSException raise:@"IllegalStateException"
@@ -57383,6 +58014,14 @@
   return _tag == DBTEAMLOGEventTypeEmmRefreshAuthToken;
 }
 
+- (BOOL)isExternalDriveBackupEligibilityStatusChecked {
+  return _tag == DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked;
+}
+
+- (BOOL)isExternalDriveBackupStatusChanged {
+  return _tag == DBTEAMLOGEventTypeExternalDriveBackupStatusChanged;
+}
+
 - (BOOL)isAccountCaptureChangeAvailability {
   return _tag == DBTEAMLOGEventTypeAccountCaptureChangeAvailability;
 }
@@ -58567,6 +59206,10 @@
   return _tag == DBTEAMLOGEventTypeAccountCaptureChangePolicy;
 }
 
+- (BOOL)isAdminEmailRemindersChanged {
+  return _tag == DBTEAMLOGEventTypeAdminEmailRemindersChanged;
+}
+
 - (BOOL)isAllowDownloadDisabled {
   return _tag == DBTEAMLOGEventTypeAllowDownloadDisabled;
 }
@@ -59195,6 +59838,10 @@
     return @"DBTEAMLOGEventTypeDropboxPasswordsNewDeviceEnrolled";
   case DBTEAMLOGEventTypeEmmRefreshAuthToken:
     return @"DBTEAMLOGEventTypeEmmRefreshAuthToken";
+  case DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked:
+    return @"DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked";
+  case DBTEAMLOGEventTypeExternalDriveBackupStatusChanged:
+    return @"DBTEAMLOGEventTypeExternalDriveBackupStatusChanged";
   case DBTEAMLOGEventTypeAccountCaptureChangeAvailability:
     return @"DBTEAMLOGEventTypeAccountCaptureChangeAvailability";
   case DBTEAMLOGEventTypeAccountCaptureMigrateAccount:
@@ -59787,6 +60434,8 @@
     return @"DBTEAMLOGEventTypeTeamSelectiveSyncSettingsChanged";
   case DBTEAMLOGEventTypeAccountCaptureChangePolicy:
     return @"DBTEAMLOGEventTypeAccountCaptureChangePolicy";
+  case DBTEAMLOGEventTypeAdminEmailRemindersChanged:
+    return @"DBTEAMLOGEventTypeAdminEmailRemindersChanged";
   case DBTEAMLOGEventTypeAllowDownloadDisabled:
     return @"DBTEAMLOGEventTypeAllowDownloadDisabled";
   case DBTEAMLOGEventTypeAllowDownloadEnabled:
@@ -60245,6 +60894,12 @@
     break;
   case DBTEAMLOGEventTypeEmmRefreshAuthToken:
     result = prime * result + [self.emmRefreshAuthToken hash];
+    break;
+  case DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked:
+    result = prime * result + [self.externalDriveBackupEligibilityStatusChecked hash];
+    break;
+  case DBTEAMLOGEventTypeExternalDriveBackupStatusChanged:
+    result = prime * result + [self.externalDriveBackupStatusChanged hash];
     break;
   case DBTEAMLOGEventTypeAccountCaptureChangeAvailability:
     result = prime * result + [self.accountCaptureChangeAvailability hash];
@@ -61134,6 +61789,9 @@
   case DBTEAMLOGEventTypeAccountCaptureChangePolicy:
     result = prime * result + [self.accountCaptureChangePolicy hash];
     break;
+  case DBTEAMLOGEventTypeAdminEmailRemindersChanged:
+    result = prime * result + [self.adminEmailRemindersChanged hash];
+    break;
   case DBTEAMLOGEventTypeAllowDownloadDisabled:
     result = prime * result + [self.allowDownloadDisabled hash];
     break;
@@ -61656,6 +62314,11 @@
     return [self.dropboxPasswordsNewDeviceEnrolled isEqual:anEventType.dropboxPasswordsNewDeviceEnrolled];
   case DBTEAMLOGEventTypeEmmRefreshAuthToken:
     return [self.emmRefreshAuthToken isEqual:anEventType.emmRefreshAuthToken];
+  case DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked:
+    return [self.externalDriveBackupEligibilityStatusChecked
+        isEqual:anEventType.externalDriveBackupEligibilityStatusChecked];
+  case DBTEAMLOGEventTypeExternalDriveBackupStatusChanged:
+    return [self.externalDriveBackupStatusChanged isEqual:anEventType.externalDriveBackupStatusChanged];
   case DBTEAMLOGEventTypeAccountCaptureChangeAvailability:
     return [self.accountCaptureChangeAvailability isEqual:anEventType.accountCaptureChangeAvailability];
   case DBTEAMLOGEventTypeAccountCaptureMigrateAccount:
@@ -62250,6 +62913,8 @@
     return [self.teamSelectiveSyncSettingsChanged isEqual:anEventType.teamSelectiveSyncSettingsChanged];
   case DBTEAMLOGEventTypeAccountCaptureChangePolicy:
     return [self.accountCaptureChangePolicy isEqual:anEventType.accountCaptureChangePolicy];
+  case DBTEAMLOGEventTypeAdminEmailRemindersChanged:
+    return [self.adminEmailRemindersChanged isEqual:anEventType.adminEmailRemindersChanged];
   case DBTEAMLOGEventTypeAllowDownloadDisabled:
     return [self.allowDownloadDisabled isEqual:anEventType.allowDownloadDisabled];
   case DBTEAMLOGEventTypeAllowDownloadEnabled:
@@ -62740,6 +63405,14 @@
     [jsonDict
         addEntriesFromDictionary:[DBTEAMLOGEmmRefreshAuthTokenTypeSerializer serialize:valueObj.emmRefreshAuthToken]];
     jsonDict[@".tag"] = @"emm_refresh_auth_token";
+  } else if ([valueObj isExternalDriveBackupEligibilityStatusChecked]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedTypeSerializer
+                                           serialize:valueObj.externalDriveBackupEligibilityStatusChecked]];
+    jsonDict[@".tag"] = @"external_drive_backup_eligibility_status_checked";
+  } else if ([valueObj isExternalDriveBackupStatusChanged]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGExternalDriveBackupStatusChangedTypeSerializer
+                                           serialize:valueObj.externalDriveBackupStatusChanged]];
+    jsonDict[@".tag"] = @"external_drive_backup_status_changed";
   } else if ([valueObj isAccountCaptureChangeAvailability]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangeAvailabilityTypeSerializer
                                            serialize:valueObj.accountCaptureChangeAvailability]];
@@ -63827,6 +64500,10 @@
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAccountCaptureChangePolicyTypeSerializer
                                            serialize:valueObj.accountCaptureChangePolicy]];
     jsonDict[@".tag"] = @"account_capture_change_policy";
+  } else if ([valueObj isAdminEmailRemindersChanged]) {
+    [jsonDict addEntriesFromDictionary:[DBTEAMLOGAdminEmailRemindersChangedTypeSerializer
+                                           serialize:valueObj.adminEmailRemindersChanged]];
+    jsonDict[@".tag"] = @"admin_email_reminders_changed";
   } else if ([valueObj isAllowDownloadDisabled]) {
     [jsonDict addEntriesFromDictionary:[DBTEAMLOGAllowDownloadDisabledTypeSerializer
                                            serialize:valueObj.allowDownloadDisabled]];
@@ -64549,6 +65226,15 @@
     DBTEAMLOGEmmRefreshAuthTokenType *emmRefreshAuthToken =
         [DBTEAMLOGEmmRefreshAuthTokenTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithEmmRefreshAuthToken:emmRefreshAuthToken];
+  } else if ([tag isEqualToString:@"external_drive_backup_eligibility_status_checked"]) {
+    DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *externalDriveBackupEligibilityStatusChecked =
+        [DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc]
+        initWithExternalDriveBackupEligibilityStatusChecked:externalDriveBackupEligibilityStatusChecked];
+  } else if ([tag isEqualToString:@"external_drive_backup_status_changed"]) {
+    DBTEAMLOGExternalDriveBackupStatusChangedType *externalDriveBackupStatusChanged =
+        [DBTEAMLOGExternalDriveBackupStatusChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithExternalDriveBackupStatusChanged:externalDriveBackupStatusChanged];
   } else if ([tag isEqualToString:@"account_capture_change_availability"]) {
     DBTEAMLOGAccountCaptureChangeAvailabilityType *accountCaptureChangeAvailability =
         [DBTEAMLOGAccountCaptureChangeAvailabilityTypeSerializer deserialize:valueDict];
@@ -65665,6 +66351,10 @@
     DBTEAMLOGAccountCaptureChangePolicyType *accountCaptureChangePolicy =
         [DBTEAMLOGAccountCaptureChangePolicyTypeSerializer deserialize:valueDict];
     return [[DBTEAMLOGEventType alloc] initWithAccountCaptureChangePolicy:accountCaptureChangePolicy];
+  } else if ([tag isEqualToString:@"admin_email_reminders_changed"]) {
+    DBTEAMLOGAdminEmailRemindersChangedType *adminEmailRemindersChanged =
+        [DBTEAMLOGAdminEmailRemindersChangedTypeSerializer deserialize:valueDict];
+    return [[DBTEAMLOGEventType alloc] initWithAdminEmailRemindersChanged:adminEmailRemindersChanged];
   } else if ([tag isEqualToString:@"allow_download_disabled"]) {
     DBTEAMLOGAllowDownloadDisabledType *allowDownloadDisabled =
         [DBTEAMLOGAllowDownloadDisabledTypeSerializer deserialize:valueDict];
@@ -66646,6 +67336,22 @@
   self = [super init];
   if (self) {
     _tag = DBTEAMLOGEventTypeArgEmmRefreshAuthToken;
+  }
+  return self;
+}
+
+- (instancetype)initWithExternalDriveBackupEligibilityStatusChecked {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgExternalDriveBackupEligibilityStatusChecked;
+  }
+  return self;
+}
+
+- (instancetype)initWithExternalDriveBackupStatusChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgExternalDriveBackupStatusChanged;
   }
   return self;
 }
@@ -69018,6 +69724,14 @@
   return self;
 }
 
+- (instancetype)initWithAdminEmailRemindersChanged {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGEventTypeArgAdminEmailRemindersChanged;
+  }
+  return self;
+}
+
 - (instancetype)initWithAllowDownloadDisabled {
   self = [super init];
   if (self) {
@@ -70274,6 +70988,14 @@
   return _tag == DBTEAMLOGEventTypeArgEmmRefreshAuthToken;
 }
 
+- (BOOL)isExternalDriveBackupEligibilityStatusChecked {
+  return _tag == DBTEAMLOGEventTypeArgExternalDriveBackupEligibilityStatusChecked;
+}
+
+- (BOOL)isExternalDriveBackupStatusChanged {
+  return _tag == DBTEAMLOGEventTypeArgExternalDriveBackupStatusChanged;
+}
+
 - (BOOL)isAccountCaptureChangeAvailability {
   return _tag == DBTEAMLOGEventTypeArgAccountCaptureChangeAvailability;
 }
@@ -71458,6 +72180,10 @@
   return _tag == DBTEAMLOGEventTypeArgAccountCaptureChangePolicy;
 }
 
+- (BOOL)isAdminEmailRemindersChanged {
+  return _tag == DBTEAMLOGEventTypeArgAdminEmailRemindersChanged;
+}
+
 - (BOOL)isAllowDownloadDisabled {
   return _tag == DBTEAMLOGEventTypeArgAllowDownloadDisabled;
 }
@@ -72086,6 +72812,10 @@
     return @"DBTEAMLOGEventTypeArgDropboxPasswordsNewDeviceEnrolled";
   case DBTEAMLOGEventTypeArgEmmRefreshAuthToken:
     return @"DBTEAMLOGEventTypeArgEmmRefreshAuthToken";
+  case DBTEAMLOGEventTypeArgExternalDriveBackupEligibilityStatusChecked:
+    return @"DBTEAMLOGEventTypeArgExternalDriveBackupEligibilityStatusChecked";
+  case DBTEAMLOGEventTypeArgExternalDriveBackupStatusChanged:
+    return @"DBTEAMLOGEventTypeArgExternalDriveBackupStatusChanged";
   case DBTEAMLOGEventTypeArgAccountCaptureChangeAvailability:
     return @"DBTEAMLOGEventTypeArgAccountCaptureChangeAvailability";
   case DBTEAMLOGEventTypeArgAccountCaptureMigrateAccount:
@@ -72678,6 +73408,8 @@
     return @"DBTEAMLOGEventTypeArgTeamSelectiveSyncSettingsChanged";
   case DBTEAMLOGEventTypeArgAccountCaptureChangePolicy:
     return @"DBTEAMLOGEventTypeArgAccountCaptureChangePolicy";
+  case DBTEAMLOGEventTypeArgAdminEmailRemindersChanged:
+    return @"DBTEAMLOGEventTypeArgAdminEmailRemindersChanged";
   case DBTEAMLOGEventTypeArgAllowDownloadDisabled:
     return @"DBTEAMLOGEventTypeArgAllowDownloadDisabled";
   case DBTEAMLOGEventTypeArgAllowDownloadEnabled:
@@ -73135,6 +73867,12 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgEmmRefreshAuthToken:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgExternalDriveBackupEligibilityStatusChecked:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgExternalDriveBackupStatusChanged:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgAccountCaptureChangeAvailability:
@@ -74023,6 +74761,9 @@
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgAccountCaptureChangePolicy:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGEventTypeArgAdminEmailRemindersChanged:
     result = prime * result + [[self tagName] hash];
     break;
   case DBTEAMLOGEventTypeArgAllowDownloadDisabled:
@@ -74547,6 +75288,10 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgEmmRefreshAuthToken:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgExternalDriveBackupEligibilityStatusChecked:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgExternalDriveBackupStatusChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAccountCaptureChangeAvailability:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAccountCaptureMigrateAccount:
@@ -75139,6 +75884,8 @@
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAccountCaptureChangePolicy:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
+  case DBTEAMLOGEventTypeArgAdminEmailRemindersChanged:
+    return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAllowDownloadDisabled:
     return [[self tagName] isEqual:[anEventTypeArg tagName]];
   case DBTEAMLOGEventTypeArgAllowDownloadEnabled:
@@ -75520,6 +76267,10 @@
     jsonDict[@".tag"] = @"dropbox_passwords_new_device_enrolled";
   } else if ([valueObj isEmmRefreshAuthToken]) {
     jsonDict[@".tag"] = @"emm_refresh_auth_token";
+  } else if ([valueObj isExternalDriveBackupEligibilityStatusChecked]) {
+    jsonDict[@".tag"] = @"external_drive_backup_eligibility_status_checked";
+  } else if ([valueObj isExternalDriveBackupStatusChanged]) {
+    jsonDict[@".tag"] = @"external_drive_backup_status_changed";
   } else if ([valueObj isAccountCaptureChangeAvailability]) {
     jsonDict[@".tag"] = @"account_capture_change_availability";
   } else if ([valueObj isAccountCaptureMigrateAccount]) {
@@ -76112,6 +76863,8 @@
     jsonDict[@".tag"] = @"team_selective_sync_settings_changed";
   } else if ([valueObj isAccountCaptureChangePolicy]) {
     jsonDict[@".tag"] = @"account_capture_change_policy";
+  } else if ([valueObj isAdminEmailRemindersChanged]) {
+    jsonDict[@".tag"] = @"admin_email_reminders_changed";
   } else if ([valueObj isAllowDownloadDisabled]) {
     jsonDict[@".tag"] = @"allow_download_disabled";
   } else if ([valueObj isAllowDownloadEnabled]) {
@@ -76490,6 +77243,10 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithDropboxPasswordsNewDeviceEnrolled];
   } else if ([tag isEqualToString:@"emm_refresh_auth_token"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithEmmRefreshAuthToken];
+  } else if ([tag isEqualToString:@"external_drive_backup_eligibility_status_checked"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithExternalDriveBackupEligibilityStatusChecked];
+  } else if ([tag isEqualToString:@"external_drive_backup_status_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithExternalDriveBackupStatusChanged];
   } else if ([tag isEqualToString:@"account_capture_change_availability"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAccountCaptureChangeAvailability];
   } else if ([tag isEqualToString:@"account_capture_migrate_account"]) {
@@ -77082,6 +77839,8 @@
     return [[DBTEAMLOGEventTypeArg alloc] initWithTeamSelectiveSyncSettingsChanged];
   } else if ([tag isEqualToString:@"account_capture_change_policy"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAccountCaptureChangePolicy];
+  } else if ([tag isEqualToString:@"admin_email_reminders_changed"]) {
+    return [[DBTEAMLOGEventTypeArg alloc] initWithAdminEmailRemindersChanged];
   } else if ([tag isEqualToString:@"allow_download_disabled"]) {
     return [[DBTEAMLOGEventTypeArg alloc] initWithAllowDownloadDisabled];
   } else if ([tag isEqualToString:@"allow_download_enabled"]) {
@@ -78186,6 +78945,412 @@
 
 #import "DBStoneSerializers.h"
 #import "DBStoneValidators.h"
+#import "DBTEAMLOGExternalDriveBackupEligibilityStatus.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGExternalDriveBackupEligibilityStatus
+
+#pragma mark - Constructors
+
+- (instancetype)initWithExceedLicenseCap {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupEligibilityStatusExceedLicenseCap;
+  }
+  return self;
+}
+
+- (instancetype)initWithSuccess {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupEligibilityStatusSuccess;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupEligibilityStatusOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isExceedLicenseCap {
+  return _tag == DBTEAMLOGExternalDriveBackupEligibilityStatusExceedLicenseCap;
+}
+
+- (BOOL)isSuccess {
+  return _tag == DBTEAMLOGExternalDriveBackupEligibilityStatusSuccess;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGExternalDriveBackupEligibilityStatusOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusExceedLicenseCap:
+    return @"DBTEAMLOGExternalDriveBackupEligibilityStatusExceedLicenseCap";
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusSuccess:
+    return @"DBTEAMLOGExternalDriveBackupEligibilityStatusSuccess";
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusOther:
+    return @"DBTEAMLOGExternalDriveBackupEligibilityStatusOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusExceedLicenseCap:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusSuccess:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupEligibilityStatus:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupEligibilityStatus:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatus *)anExternalDriveBackupEligibilityStatus {
+  if (self == anExternalDriveBackupEligibilityStatus) {
+    return YES;
+  }
+  if (self.tag != anExternalDriveBackupEligibilityStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusExceedLicenseCap:
+    return [[self tagName] isEqual:[anExternalDriveBackupEligibilityStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusSuccess:
+    return [[self tagName] isEqual:[anExternalDriveBackupEligibilityStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupEligibilityStatusOther:
+    return [[self tagName] isEqual:[anExternalDriveBackupEligibilityStatus tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupEligibilityStatus *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isExceedLicenseCap]) {
+    jsonDict[@".tag"] = @"exceed_license_cap";
+  } else if ([valueObj isSuccess]) {
+    jsonDict[@".tag"] = @"success";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGExternalDriveBackupEligibilityStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"exceed_license_cap"]) {
+    return [[DBTEAMLOGExternalDriveBackupEligibilityStatus alloc] initWithExceedLicenseCap];
+  } else if ([tag isEqualToString:@"success"]) {
+    return [[DBTEAMLOGExternalDriveBackupEligibilityStatus alloc] initWithSuccess];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGExternalDriveBackupEligibilityStatus alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGExternalDriveBackupEligibilityStatus alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDesktopDeviceSessionLogInfo.h"
+#import "DBTEAMLOGExternalDriveBackupEligibilityStatus.h"
+#import "DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDesktopDeviceSessionInfo:(DBTEAMLOGDesktopDeviceSessionLogInfo *)desktopDeviceSessionInfo
+                                          status:(DBTEAMLOGExternalDriveBackupEligibilityStatus *)status
+                     numberOfExternalDriveBackup:(NSNumber *)numberOfExternalDriveBackup {
+  [DBStoneValidators nonnullValidator:nil](desktopDeviceSessionInfo);
+  [DBStoneValidators nonnullValidator:nil](status);
+  [DBStoneValidators nonnullValidator:nil](numberOfExternalDriveBackup);
+
+  self = [super init];
+  if (self) {
+    _desktopDeviceSessionInfo = desktopDeviceSessionInfo;
+    _status = status;
+    _numberOfExternalDriveBackup = numberOfExternalDriveBackup;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.desktopDeviceSessionInfo hash];
+  result = prime * result + [self.status hash];
+  result = prime * result + [self.numberOfExternalDriveBackup hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupEligibilityStatusCheckedDetails:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupEligibilityStatusCheckedDetails:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)
+        anExternalDriveBackupEligibilityStatusCheckedDetails {
+  if (self == anExternalDriveBackupEligibilityStatusCheckedDetails) {
+    return YES;
+  }
+  if (![self.desktopDeviceSessionInfo
+          isEqual:anExternalDriveBackupEligibilityStatusCheckedDetails.desktopDeviceSessionInfo]) {
+    return NO;
+  }
+  if (![self.status isEqual:anExternalDriveBackupEligibilityStatusCheckedDetails.status]) {
+    return NO;
+  }
+  if (![self.numberOfExternalDriveBackup
+          isEqual:anExternalDriveBackupEligibilityStatusCheckedDetails.numberOfExternalDriveBackup]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"desktop_device_session_info"] =
+      [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer serialize:valueObj.desktopDeviceSessionInfo];
+  jsonDict[@"status"] = [DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer serialize:valueObj.status];
+  jsonDict[@"number_of_external_drive_backup"] = valueObj.numberOfExternalDriveBackup;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGDesktopDeviceSessionLogInfo *desktopDeviceSessionInfo =
+      [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer deserialize:valueDict[@"desktop_device_session_info"]];
+  DBTEAMLOGExternalDriveBackupEligibilityStatus *status =
+      [DBTEAMLOGExternalDriveBackupEligibilityStatusSerializer deserialize:valueDict[@"status"]];
+  NSNumber *numberOfExternalDriveBackup = valueDict[@"number_of_external_drive_backup"];
+
+  return [[DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedDetails alloc]
+      initWithDesktopDeviceSessionInfo:desktopDeviceSessionInfo
+                                status:status
+           numberOfExternalDriveBackup:numberOfExternalDriveBackup];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupEligibilityStatusCheckedType:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupEligibilityStatusCheckedType:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)anExternalDriveBackupEligibilityStatusCheckedType {
+  if (self == anExternalDriveBackupEligibilityStatusCheckedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anExternalDriveBackupEligibilityStatusCheckedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
 #import "DBTEAMLOGExternalDriveBackupPolicy.h"
 
 #pragma mark - API Object
@@ -78592,6 +79757,501 @@
   NSString *description_ = valueDict[@"description"];
 
   return [[DBTEAMLOGExternalDriveBackupPolicyChangedType alloc] initWithDescription_:description_];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGExternalDriveBackupStatus.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGExternalDriveBackupStatus
+
+#pragma mark - Constructors
+
+- (instancetype)initWithBroken {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusBroken;
+  }
+  return self;
+}
+
+- (instancetype)initWithCreated {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusCreated;
+  }
+  return self;
+}
+
+- (instancetype)initWithCreatedOrBroken {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusCreatedOrBroken;
+  }
+  return self;
+}
+
+- (instancetype)initWithDeleted {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusDeleted;
+  }
+  return self;
+}
+
+- (instancetype)initWithEmpty {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusEmpty;
+  }
+  return self;
+}
+
+- (instancetype)initWithUnknown {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusUnknown;
+  }
+  return self;
+}
+
+- (instancetype)initWithOther {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGExternalDriveBackupStatusOther;
+  }
+  return self;
+}
+
+#pragma mark - Instance field accessors
+
+#pragma mark - Tag state methods
+
+- (BOOL)isBroken {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusBroken;
+}
+
+- (BOOL)isCreated {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusCreated;
+}
+
+- (BOOL)isCreatedOrBroken {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusCreatedOrBroken;
+}
+
+- (BOOL)isDeleted {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusDeleted;
+}
+
+- (BOOL)isEmpty {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusEmpty;
+}
+
+- (BOOL)isUnknown {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusUnknown;
+}
+
+- (BOOL)isOther {
+  return _tag == DBTEAMLOGExternalDriveBackupStatusOther;
+}
+
+- (NSString *)tagName {
+  switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupStatusBroken:
+    return @"DBTEAMLOGExternalDriveBackupStatusBroken";
+  case DBTEAMLOGExternalDriveBackupStatusCreated:
+    return @"DBTEAMLOGExternalDriveBackupStatusCreated";
+  case DBTEAMLOGExternalDriveBackupStatusCreatedOrBroken:
+    return @"DBTEAMLOGExternalDriveBackupStatusCreatedOrBroken";
+  case DBTEAMLOGExternalDriveBackupStatusDeleted:
+    return @"DBTEAMLOGExternalDriveBackupStatusDeleted";
+  case DBTEAMLOGExternalDriveBackupStatusEmpty:
+    return @"DBTEAMLOGExternalDriveBackupStatusEmpty";
+  case DBTEAMLOGExternalDriveBackupStatusUnknown:
+    return @"DBTEAMLOGExternalDriveBackupStatusUnknown";
+  case DBTEAMLOGExternalDriveBackupStatusOther:
+    return @"DBTEAMLOGExternalDriveBackupStatusOther";
+  }
+
+  @throw([NSException exceptionWithName:@"InvalidTag" reason:@"Tag has an unknown value." userInfo:nil]);
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGExternalDriveBackupStatusSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGExternalDriveBackupStatusSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGExternalDriveBackupStatusSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupStatusBroken:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupStatusCreated:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupStatusCreatedOrBroken:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupStatusDeleted:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupStatusEmpty:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupStatusUnknown:
+    result = prime * result + [[self tagName] hash];
+    break;
+  case DBTEAMLOGExternalDriveBackupStatusOther:
+    result = prime * result + [[self tagName] hash];
+    break;
+  }
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupStatus:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupStatus:(DBTEAMLOGExternalDriveBackupStatus *)anExternalDriveBackupStatus {
+  if (self == anExternalDriveBackupStatus) {
+    return YES;
+  }
+  if (self.tag != anExternalDriveBackupStatus.tag) {
+    return NO;
+  }
+  switch (_tag) {
+  case DBTEAMLOGExternalDriveBackupStatusBroken:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupStatusCreated:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupStatusCreatedOrBroken:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupStatusDeleted:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupStatusEmpty:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupStatusUnknown:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  case DBTEAMLOGExternalDriveBackupStatusOther:
+    return [[self tagName] isEqual:[anExternalDriveBackupStatus tagName]];
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGExternalDriveBackupStatusSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupStatus *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  if ([valueObj isBroken]) {
+    jsonDict[@".tag"] = @"broken";
+  } else if ([valueObj isCreated]) {
+    jsonDict[@".tag"] = @"created";
+  } else if ([valueObj isCreatedOrBroken]) {
+    jsonDict[@".tag"] = @"created_or_broken";
+  } else if ([valueObj isDeleted]) {
+    jsonDict[@".tag"] = @"deleted";
+  } else if ([valueObj isEmpty]) {
+    jsonDict[@".tag"] = @"empty";
+  } else if ([valueObj isUnknown]) {
+    jsonDict[@".tag"] = @"unknown";
+  } else if ([valueObj isOther]) {
+    jsonDict[@".tag"] = @"other";
+  } else {
+    jsonDict[@".tag"] = @"other";
+  }
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGExternalDriveBackupStatus *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *tag = valueDict[@".tag"];
+
+  if ([tag isEqualToString:@"broken"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithBroken];
+  } else if ([tag isEqualToString:@"created"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithCreated];
+  } else if ([tag isEqualToString:@"created_or_broken"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithCreatedOrBroken];
+  } else if ([tag isEqualToString:@"deleted"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithDeleted];
+  } else if ([tag isEqualToString:@"empty"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithEmpty];
+  } else if ([tag isEqualToString:@"unknown"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithUnknown];
+  } else if ([tag isEqualToString:@"other"]) {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithOther];
+  } else {
+    return [[DBTEAMLOGExternalDriveBackupStatus alloc] initWithOther];
+  }
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGDesktopDeviceSessionLogInfo.h"
+#import "DBTEAMLOGExternalDriveBackupStatus.h"
+#import "DBTEAMLOGExternalDriveBackupStatusChangedDetails.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGExternalDriveBackupStatusChangedDetails
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDesktopDeviceSessionInfo:(DBTEAMLOGDesktopDeviceSessionLogInfo *)desktopDeviceSessionInfo
+                                   previousValue:(DBTEAMLOGExternalDriveBackupStatus *)previousValue
+                                       dNewValue:(DBTEAMLOGExternalDriveBackupStatus *)dNewValue {
+  [DBStoneValidators nonnullValidator:nil](desktopDeviceSessionInfo);
+  [DBStoneValidators nonnullValidator:nil](previousValue);
+  [DBStoneValidators nonnullValidator:nil](dNewValue);
+
+  self = [super init];
+  if (self) {
+    _desktopDeviceSessionInfo = desktopDeviceSessionInfo;
+    _previousValue = previousValue;
+    _dNewValue = dNewValue;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGExternalDriveBackupStatusChangedDetailsSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGExternalDriveBackupStatusChangedDetailsSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGExternalDriveBackupStatusChangedDetailsSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.desktopDeviceSessionInfo hash];
+  result = prime * result + [self.previousValue hash];
+  result = prime * result + [self.dNewValue hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupStatusChangedDetails:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupStatusChangedDetails:
+    (DBTEAMLOGExternalDriveBackupStatusChangedDetails *)anExternalDriveBackupStatusChangedDetails {
+  if (self == anExternalDriveBackupStatusChangedDetails) {
+    return YES;
+  }
+  if (![self.desktopDeviceSessionInfo isEqual:anExternalDriveBackupStatusChangedDetails.desktopDeviceSessionInfo]) {
+    return NO;
+  }
+  if (![self.previousValue isEqual:anExternalDriveBackupStatusChangedDetails.previousValue]) {
+    return NO;
+  }
+  if (![self.dNewValue isEqual:anExternalDriveBackupStatusChangedDetails.dNewValue]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGExternalDriveBackupStatusChangedDetailsSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupStatusChangedDetails *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"desktop_device_session_info"] =
+      [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer serialize:valueObj.desktopDeviceSessionInfo];
+  jsonDict[@"previous_value"] = [DBTEAMLOGExternalDriveBackupStatusSerializer serialize:valueObj.previousValue];
+  jsonDict[@"new_value"] = [DBTEAMLOGExternalDriveBackupStatusSerializer serialize:valueObj.dNewValue];
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGExternalDriveBackupStatusChangedDetails *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  DBTEAMLOGDesktopDeviceSessionLogInfo *desktopDeviceSessionInfo =
+      [DBTEAMLOGDesktopDeviceSessionLogInfoSerializer deserialize:valueDict[@"desktop_device_session_info"]];
+  DBTEAMLOGExternalDriveBackupStatus *previousValue =
+      [DBTEAMLOGExternalDriveBackupStatusSerializer deserialize:valueDict[@"previous_value"]];
+  DBTEAMLOGExternalDriveBackupStatus *dNewValue =
+      [DBTEAMLOGExternalDriveBackupStatusSerializer deserialize:valueDict[@"new_value"]];
+
+  return [[DBTEAMLOGExternalDriveBackupStatusChangedDetails alloc]
+      initWithDesktopDeviceSessionInfo:desktopDeviceSessionInfo
+                         previousValue:previousValue
+                             dNewValue:dNewValue];
+}
+
+@end
+
+#import "DBStoneSerializers.h"
+#import "DBStoneValidators.h"
+#import "DBTEAMLOGExternalDriveBackupStatusChangedType.h"
+
+#pragma mark - API Object
+
+@implementation DBTEAMLOGExternalDriveBackupStatusChangedType
+
+#pragma mark - Constructors
+
+- (instancetype)initWithDescription_:(NSString *)description_ {
+  [DBStoneValidators nonnullValidator:nil](description_);
+
+  self = [super init];
+  if (self) {
+    _description_ = description_;
+  }
+  return self;
+}
+
+#pragma mark - Serialization methods
+
++ (nullable NSDictionary<NSString *, id> *)serialize:(id)instance {
+  return [DBTEAMLOGExternalDriveBackupStatusChangedTypeSerializer serialize:instance];
+}
+
++ (id)deserialize:(NSDictionary<NSString *, id> *)dict {
+  return [DBTEAMLOGExternalDriveBackupStatusChangedTypeSerializer deserialize:dict];
+}
+
+#pragma mark - Debug Description method
+
+- (NSString *)debugDescription {
+  return [[DBTEAMLOGExternalDriveBackupStatusChangedTypeSerializer serialize:self] description];
+}
+
+#pragma mark - Copyable method
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+#pragma unused(zone)
+  /// object is immutable
+  return self;
+}
+
+#pragma mark - Hash method
+
+- (NSUInteger)hash {
+  NSUInteger prime = 31;
+  NSUInteger result = 1;
+
+  result = prime * result + [self.description_ hash];
+
+  return prime * result;
+}
+
+#pragma mark - Equality method
+
+- (BOOL)isEqual:(id)other {
+  if (other == self) {
+    return YES;
+  }
+  if (!other || ![other isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return [self isEqualToExternalDriveBackupStatusChangedType:other];
+}
+
+- (BOOL)isEqualToExternalDriveBackupStatusChangedType:
+    (DBTEAMLOGExternalDriveBackupStatusChangedType *)anExternalDriveBackupStatusChangedType {
+  if (self == anExternalDriveBackupStatusChangedType) {
+    return YES;
+  }
+  if (![self.description_ isEqual:anExternalDriveBackupStatusChangedType.description_]) {
+    return NO;
+  }
+  return YES;
+}
+
+@end
+
+#pragma mark - Serializer Object
+
+@implementation DBTEAMLOGExternalDriveBackupStatusChangedTypeSerializer
+
++ (NSDictionary<NSString *, id> *)serialize:(DBTEAMLOGExternalDriveBackupStatusChangedType *)valueObj {
+  NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+
+  jsonDict[@"description"] = valueObj.description_;
+
+  return [jsonDict count] > 0 ? jsonDict : nil;
+}
+
++ (DBTEAMLOGExternalDriveBackupStatusChangedType *)deserialize:(NSDictionary<NSString *, id> *)valueDict {
+  NSString *description_ = valueDict[@"description"];
+
+  return [[DBTEAMLOGExternalDriveBackupStatusChangedType alloc] initWithDescription_:description_];
 }
 
 @end
@@ -130420,6 +132080,14 @@
   return self;
 }
 
+- (instancetype)initWithUsS3Only {
+  self = [super init];
+  if (self) {
+    _tag = DBTEAMLOGPlacementRestrictionUsS3Only;
+  }
+  return self;
+}
+
 - (instancetype)initWithOther {
   self = [super init];
   if (self) {
@@ -130452,6 +132120,10 @@
   return _tag == DBTEAMLOGPlacementRestrictionUkOnly;
 }
 
+- (BOOL)isUsS3Only {
+  return _tag == DBTEAMLOGPlacementRestrictionUsS3Only;
+}
+
 - (BOOL)isOther {
   return _tag == DBTEAMLOGPlacementRestrictionOther;
 }
@@ -130468,6 +132140,8 @@
     return @"DBTEAMLOGPlacementRestrictionNone";
   case DBTEAMLOGPlacementRestrictionUkOnly:
     return @"DBTEAMLOGPlacementRestrictionUkOnly";
+  case DBTEAMLOGPlacementRestrictionUsS3Only:
+    return @"DBTEAMLOGPlacementRestrictionUsS3Only";
   case DBTEAMLOGPlacementRestrictionOther:
     return @"DBTEAMLOGPlacementRestrictionOther";
   }
@@ -130521,6 +132195,9 @@
   case DBTEAMLOGPlacementRestrictionUkOnly:
     result = prime * result + [[self tagName] hash];
     break;
+  case DBTEAMLOGPlacementRestrictionUsS3Only:
+    result = prime * result + [[self tagName] hash];
+    break;
   case DBTEAMLOGPlacementRestrictionOther:
     result = prime * result + [[self tagName] hash];
     break;
@@ -130559,6 +132236,8 @@
     return [[self tagName] isEqual:[aPlacementRestriction tagName]];
   case DBTEAMLOGPlacementRestrictionUkOnly:
     return [[self tagName] isEqual:[aPlacementRestriction tagName]];
+  case DBTEAMLOGPlacementRestrictionUsS3Only:
+    return [[self tagName] isEqual:[aPlacementRestriction tagName]];
   case DBTEAMLOGPlacementRestrictionOther:
     return [[self tagName] isEqual:[aPlacementRestriction tagName]];
   }
@@ -130584,6 +132263,8 @@
     jsonDict[@".tag"] = @"none";
   } else if ([valueObj isUkOnly]) {
     jsonDict[@".tag"] = @"uk_only";
+  } else if ([valueObj isUsS3Only]) {
+    jsonDict[@".tag"] = @"us_s3_only";
   } else if ([valueObj isOther]) {
     jsonDict[@".tag"] = @"other";
   } else {
@@ -130606,6 +132287,8 @@
     return [[DBTEAMLOGPlacementRestriction alloc] initWithNone];
   } else if ([tag isEqualToString:@"uk_only"]) {
     return [[DBTEAMLOGPlacementRestriction alloc] initWithUkOnly];
+  } else if ([tag isEqualToString:@"us_s3_only"]) {
+    return [[DBTEAMLOGPlacementRestriction alloc] initWithUsS3Only];
   } else if ([tag isEqualToString:@"other"]) {
     return [[DBTEAMLOGPlacementRestriction alloc] initWithOther];
   } else {

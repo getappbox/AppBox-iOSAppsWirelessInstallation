@@ -318,7 +318,8 @@ static const NSUInteger fileChunkSize = 10 * 1024 * 1024;
   [uploadData.taskStorage addUploadTask:task];
 }
 
-- (void)finishBatch:(DBBatchUploadData *)uploadData resultEntries:(NSArray<DBFILESUploadSessionFinishBatchResultEntry *> *)resultEntries {
+- (void)finishBatch:(DBBatchUploadData *)uploadData
+      resultEntries:(NSArray<DBFILESUploadSessionFinishBatchResultEntry *> *)resultEntries {
   [uploadData.queue addOperationWithBlock:^{
     // create reverse lookup
     NSMutableDictionary<NSString *, NSURL *> *dropboxFilePathToNSURL = [NSMutableDictionary new];
@@ -328,7 +329,7 @@ static const NSUInteger fileChunkSize = 10 * 1024 * 1024;
     }
 
     NSMutableDictionary<NSURL *, DBFILESUploadSessionFinishBatchResultEntry *> *fileUrlsToBatchResultEntries =
-    [NSMutableDictionary new];
+        [NSMutableDictionary new];
 
     int index = 0;
     for (DBFILESUploadSessionFinishArg *finishArg in uploadData.finishArgs) {
@@ -360,26 +361,26 @@ static const NSUInteger fileChunkSize = 10 * 1024 * 1024;
     }
 
     NSMutableArray<DBFILESUploadSessionFinishArg *> *sortedFinishArgs =
-    [[uploadData.finishArgs sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-      DBFILESUploadSessionFinishArg *first = (DBFILESUploadSessionFinishArg *)a;
-      DBFILESUploadSessionFinishArg *second = (DBFILESUploadSessionFinishArg *)b;
-      return [first.commit.path compare:second.commit.path];
-    }] mutableCopy];
+        [[uploadData.finishArgs sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+          DBFILESUploadSessionFinishArg *first = (DBFILESUploadSessionFinishArg *)a;
+          DBFILESUploadSessionFinishArg *second = (DBFILESUploadSessionFinishArg *)b;
+          return [first.commit.path compare:second.commit.path];
+        }] mutableCopy];
 
     uploadData.finishArgs = sortedFinishArgs;
 
     [[self uploadSessionFinishBatchV2:sortedFinishArgs]
-     setResponseBlock:^(DBFILESUploadSessionFinishBatchResult *_Nullable result, DBNilObject *_Nullable routeError,
-                        DBRequestError *_Nullable networkError) {
-      if (!result || routeError) {
-        [uploadData.queue addOperationWithBlock:^{
-          uploadData.responseBlock(nil, nil, networkError, uploadData.fileUrlsToRequestErrors);
-        }];
-      } else {
-        [self finishBatch:uploadData resultEntries:result.entries];
-      }
-    }
-     queue:uploadData.pollingQueue];
+        setResponseBlock:^(DBFILESUploadSessionFinishBatchResult *_Nullable result, DBNilObject *_Nullable routeError,
+                           DBRequestError *_Nullable networkError) {
+          if (!result || routeError) {
+            [uploadData.queue addOperationWithBlock:^{
+              uploadData.responseBlock(nil, nil, networkError, uploadData.fileUrlsToRequestErrors);
+            }];
+          } else {
+            [self finishBatch:uploadData resultEntries:result.entries];
+          }
+        }
+                   queue:uploadData.pollingQueue];
   });
 }
 

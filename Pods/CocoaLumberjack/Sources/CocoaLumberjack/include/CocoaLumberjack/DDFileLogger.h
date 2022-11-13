@@ -1,6 +1,6 @@
 // Software License Agreement (BSD License)
 //
-// Copyright (c) 2010-2021, Deusty, LLC
+// Copyright (c) 2010-2022, Deusty, LLC
 // All rights reserved.
 //
 // Redistribution and use of this software in source and binary forms,
@@ -506,6 +506,8 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 @property (nonatomic, readonly) unsigned long long fileSize;
 
 @property (nonatomic, readonly) NSTimeInterval age;
+
+@property (nonatomic, readonly) BOOL isSymlink;
 
 @property (nonatomic, readwrite) BOOL isArchived;
 

@@ -141,6 +141,7 @@
 @class DBFILESUploadSessionFinishError;
 @class DBFILESUploadSessionLookupError;
 @class DBFILESUploadSessionOffsetError;
+@class DBFILESUploadSessionStartBatchResult;
 @class DBFILESUploadSessionStartError;
 @class DBFILESUploadSessionStartResult;
 @class DBFILESUploadSessionType;
@@ -785,7 +786,8 @@ alphaUploadStream:(NSString *)path
 ///
 /// Download a folder from the user's Dropbox, as a zip file. The folder must be less than 20 GB in size and any single
 /// file within must be less than 4 GB in size. The resulting zip must have fewer than 10,000 total file and folder
-/// entries, including the top level folder. The input cannot be a single file.
+/// entries, including the top level folder. The input cannot be a single file. Note: this endpoint does not support
+/// HTTP range requests.
 ///
 /// @param path The path of the folder to download.
 /// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
@@ -803,7 +805,8 @@ alphaUploadStream:(NSString *)path
 ///
 /// Download a folder from the user's Dropbox, as a zip file. The folder must be less than 20 GB in size and any single
 /// file within must be less than 4 GB in size. The resulting zip must have fewer than 10,000 total file and folder
-/// entries, including the top level folder. The input cannot be a single file.
+/// entries, including the top level folder. The input cannot be a single file. Note: this endpoint does not support
+/// HTTP range requests.
 ///
 /// @param path The path of the folder to download.
 /// @param overwrite A boolean to set behavior in the event of a naming conflict. `YES` will overwrite conflicting file
@@ -827,7 +830,8 @@ alphaUploadStream:(NSString *)path
 ///
 /// Download a folder from the user's Dropbox, as a zip file. The folder must be less than 20 GB in size and any single
 /// file within must be less than 4 GB in size. The resulting zip must have fewer than 10,000 total file and folder
-/// entries, including the top level folder. The input cannot be a single file.
+/// entries, including the top level folder. The input cannot be a single file. Note: this endpoint does not support
+/// HTTP range requests.
 ///
 /// @param path The path of the folder to download.
 ///
@@ -839,7 +843,8 @@ alphaUploadStream:(NSString *)path
 ///
 /// Download a folder from the user's Dropbox, as a zip file. The folder must be less than 20 GB in size and any single
 /// file within must be less than 4 GB in size. The resulting zip must have fewer than 10,000 total file and folder
-/// entries, including the top level folder. The input cannot be a single file.
+/// entries, including the top level folder. The input cannot be a single file. Note: this endpoint does not support
+/// HTTP range requests.
 ///
 /// @param path The path of the folder to download.
 /// @param byteOffsetStart For partial file download. Download file beginning from this starting byte position. Must
@@ -3127,6 +3132,36 @@ uploadSessionStartStream:(nullable NSNumber *)close
              sessionType:(nullable DBFILESUploadSessionType *)sessionType
              contentHash:(nullable NSString *)contentHash
              inputStream:(NSInputStream *)inputStream;
+
+///
+/// This route starts batch of upload_sessions. Please refer to `upload_session/start` usage. Calls to this endpoint
+/// will count as data transport calls for any Dropbox Business teams with a limit on the number of data transport calls
+/// allowed per month. For more information, see the Data transport limit page
+/// https://www.dropbox.com/developers/reference/data-transport-limit.
+///
+/// @param numSessions The number of upload sessions to start.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartBatchResult` object on
+/// success or a `void` object on failure.
+///
+- (DBRpcTask<DBFILESUploadSessionStartBatchResult *, DBNilObject *> *)uploadSessionStartBatch:(NSNumber *)numSessions;
+
+///
+/// This route starts batch of upload_sessions. Please refer to `upload_session/start` usage. Calls to this endpoint
+/// will count as data transport calls for any Dropbox Business teams with a limit on the number of data transport calls
+/// allowed per month. For more information, see the Data transport limit page
+/// https://www.dropbox.com/developers/reference/data-transport-limit.
+///
+/// @param sessionType Type of upload session you want to start. If not specified, default is `sequential` in
+/// `DBFILESUploadSessionType`.
+/// @param numSessions The number of upload sessions to start.
+///
+/// @return Through the response callback, the caller will receive a `DBFILESUploadSessionStartBatchResult` object on
+/// success or a `void` object on failure.
+///
+- (DBRpcTask<DBFILESUploadSessionStartBatchResult *, DBNilObject *> *)
+uploadSessionStartBatch:(NSNumber *)numSessions
+            sessionType:(nullable DBFILESUploadSessionType *)sessionType;
 
 @end
 

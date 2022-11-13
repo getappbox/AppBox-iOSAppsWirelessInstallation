@@ -17,6 +17,7 @@
 @class DBTEAMLOGAdminAlertingAlertStateChangedType;
 @class DBTEAMLOGAdminAlertingChangedAlertConfigType;
 @class DBTEAMLOGAdminAlertingTriggeredAlertType;
+@class DBTEAMLOGAdminEmailRemindersChangedType;
 @class DBTEAMLOGAllowDownloadDisabledType;
 @class DBTEAMLOGAllowDownloadEnabledType;
 @class DBTEAMLOGAppBlockedByPermissionsType;
@@ -100,7 +101,9 @@
 @class DBTEAMLOGExportMembersReportFailType;
 @class DBTEAMLOGExportMembersReportType;
 @class DBTEAMLOGExtendedVersionHistoryChangePolicyType;
+@class DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType;
 @class DBTEAMLOGExternalDriveBackupPolicyChangedType;
+@class DBTEAMLOGExternalDriveBackupStatusChangedType;
 @class DBTEAMLOGExternalSharingCreateReportType;
 @class DBTEAMLOGExternalSharingReportFailedType;
 @class DBTEAMLOGFileAddCommentType;
@@ -674,6 +677,12 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 
     /// (devices) Refreshed auth token used for setting up EMM
     DBTEAMLOGEventTypeEmmRefreshAuthToken,
+
+    /// (devices) Checked external drive backup eligibility status
+    DBTEAMLOGEventTypeExternalDriveBackupEligibilityStatusChecked,
+
+    /// (devices) Modified external drive backup
+    DBTEAMLOGEventTypeExternalDriveBackupStatusChanged,
 
     /// (domains) Granted/revoked option to enable account capture on team
     /// domains
@@ -1606,6 +1615,10 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     /// (team_policies) Changed account capture setting on team domain
     DBTEAMLOGEventTypeAccountCaptureChangePolicy,
 
+    /// (team_policies) Changed admin email reminder policy for team requests to
+    /// join
+    DBTEAMLOGEventTypeAdminEmailRemindersChanged,
+
     /// (team_policies) Disabled downloads (deprecated, no longer logged)
     DBTEAMLOGEventTypeAllowDownloadDisabled,
 
@@ -2303,6 +2316,17 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// `isEmmRefreshAuthToken` method returns true before accessing, otherwise a
 /// runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGEmmRefreshAuthTokenType *emmRefreshAuthToken;
+
+/// (devices) Checked external drive backup eligibility status @note Ensure the
+/// `isExternalDriveBackupEligibilityStatusChecked` method returns true before
+/// accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly)
+    DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *externalDriveBackupEligibilityStatusChecked;
+
+/// (devices) Modified external drive backup @note Ensure the
+/// `isExternalDriveBackupStatusChanged` method returns true before accessing,
+/// otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGExternalDriveBackupStatusChangedType *externalDriveBackupStatusChanged;
 
 /// (domains) Granted/revoked option to enable account capture on team domains
 /// @note Ensure the `isAccountCaptureChangeAvailability` method returns true
@@ -3764,6 +3788,11 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// otherwise a runtime exception will be raised.
 @property (nonatomic, readonly) DBTEAMLOGAccountCaptureChangePolicyType *accountCaptureChangePolicy;
 
+/// (team_policies) Changed admin email reminder policy for team requests to
+/// join @note Ensure the `isAdminEmailRemindersChanged` method returns true
+/// before accessing, otherwise a runtime exception will be raised.
+@property (nonatomic, readonly) DBTEAMLOGAdminEmailRemindersChangedType *adminEmailRemindersChanged;
+
 /// (team_policies) Disabled downloads (deprecated, no longer logged) @note
 /// Ensure the `isAllowDownloadDisabled` method returns true before accessing,
 /// otherwise a runtime exception will be raised.
@@ -5160,6 +5189,36 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// @return An initialized instance.
 ///
 - (instancetype)initWithEmmRefreshAuthToken:(DBTEAMLOGEmmRefreshAuthTokenType *)emmRefreshAuthToken;
+
+///
+/// Initializes union class with tag state of
+/// "external_drive_backup_eligibility_status_checked".
+///
+/// Description of the "external_drive_backup_eligibility_status_checked" tag
+/// state: (devices) Checked external drive backup eligibility status
+///
+/// @param externalDriveBackupEligibilityStatusChecked (devices) Checked
+/// external drive backup eligibility status
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExternalDriveBackupEligibilityStatusChecked:
+    (DBTEAMLOGExternalDriveBackupEligibilityStatusCheckedType *)externalDriveBackupEligibilityStatusChecked;
+
+///
+/// Initializes union class with tag state of
+/// "external_drive_backup_status_changed".
+///
+/// Description of the "external_drive_backup_status_changed" tag state:
+/// (devices) Modified external drive backup
+///
+/// @param externalDriveBackupStatusChanged (devices) Modified external drive
+/// backup
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithExternalDriveBackupStatusChanged:
+    (DBTEAMLOGExternalDriveBackupStatusChangedType *)externalDriveBackupStatusChanged;
 
 ///
 /// Initializes union class with tag state of
@@ -9020,6 +9079,21 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
     (DBTEAMLOGAccountCaptureChangePolicyType *)accountCaptureChangePolicy;
 
 ///
+/// Initializes union class with tag state of "admin_email_reminders_changed".
+///
+/// Description of the "admin_email_reminders_changed" tag state:
+/// (team_policies) Changed admin email reminder policy for team requests to
+/// join
+///
+/// @param adminEmailRemindersChanged (team_policies) Changed admin email
+/// reminder policy for team requests to join
+///
+/// @return An initialized instance.
+///
+- (instancetype)initWithAdminEmailRemindersChanged:
+    (DBTEAMLOGAdminEmailRemindersChangedType *)adminEmailRemindersChanged;
+
+///
 /// Initializes union class with tag state of "allow_download_disabled".
 ///
 /// Description of the "allow_download_disabled" tag state: (team_policies)
@@ -11544,6 +11618,32 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// "emm_refresh_auth_token".
 ///
 - (BOOL)isEmmRefreshAuthToken;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "external_drive_backup_eligibility_status_checked".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `externalDriveBackupEligibilityStatusChecked` property, otherwise a runtime
+/// exception will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "external_drive_backup_eligibility_status_checked".
+///
+- (BOOL)isExternalDriveBackupEligibilityStatusChecked;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "external_drive_backup_status_changed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `externalDriveBackupStatusChanged` property, otherwise a runtime exception
+/// will be thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "external_drive_backup_status_changed".
+///
+- (BOOL)isExternalDriveBackupStatusChanged;
 
 ///
 /// Retrieves whether the union's current tag state has value
@@ -15179,6 +15279,19 @@ typedef NS_CLOSED_ENUM(NSInteger, DBTEAMLOGEventTypeTag){
 /// "account_capture_change_policy".
 ///
 - (BOOL)isAccountCaptureChangePolicy;
+
+///
+/// Retrieves whether the union's current tag state has value
+/// "admin_email_reminders_changed".
+///
+/// @note Call this method and ensure it returns true before accessing the
+/// `adminEmailRemindersChanged` property, otherwise a runtime exception will be
+/// thrown.
+///
+/// @return Whether the union's current tag state has value
+/// "admin_email_reminders_changed".
+///
+- (BOOL)isAdminEmailRemindersChanged;
 
 ///
 /// Retrieves whether the union's current tag state has value

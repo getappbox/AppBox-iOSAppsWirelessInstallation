@@ -141,6 +141,7 @@
 @class DBFILESUploadSessionFinishError;
 @class DBFILESUploadSessionLookupError;
 @class DBFILESUploadSessionOffsetError;
+@class DBFILESUploadSessionStartBatchResult;
 @class DBFILESUploadSessionStartError;
 @class DBFILESUploadSessionStartResult;
 @class DBFILESUploadSessionType;

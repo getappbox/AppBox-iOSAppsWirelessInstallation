@@ -53,6 +53,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// active file search.
 @property (nonatomic, readonly, nullable) NSArray<DBFILESFileCategory *> *fileCategories;
 
+/// Restricts results to the given account id.
+@property (nonatomic, readonly, copy, nullable) NSString *accountId;
+
 #pragma mark - Constructors
 
 ///
@@ -69,6 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Only supported for active file search.
 /// @param fileCategories Restricts search to only the file categories
 /// specified. Only supported for active file search.
+/// @param accountId Restricts results to the given account id.
 ///
 /// @return An initialized instance.
 ///
@@ -78,7 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
                   fileStatus:(nullable DBFILESFileStatus *)fileStatus
                 filenameOnly:(nullable NSNumber *)filenameOnly
               fileExtensions:(nullable NSArray<NSString *> *)fileExtensions
-              fileCategories:(nullable NSArray<DBFILESFileCategory *> *)fileCategories;
+              fileCategories:(nullable NSArray<DBFILESFileCategory *> *)fileCategories
+                   accountId:(nullable NSString *)accountId;
 
 ///
 /// Convenience constructor (exposes only non-nullable instance variables with

@@ -6229,16 +6229,29 @@
 #pragma mark - Constructors
 
 - (instancetype)initWithMember:(DBSHARINGMemberSelector *)member
-                        result:(DBSHARINGFileMemberActionIndividualResult *)result {
+                        result:(DBSHARINGFileMemberActionIndividualResult *)result
+                     sckeySha1:(NSString *)sckeySha1
+           invitationSignature:(NSArray<NSString *> *)invitationSignature {
   [DBStoneValidators nonnullValidator:nil](member);
   [DBStoneValidators nonnullValidator:nil](result);
+  [DBStoneValidators
+   nullableValidator:[DBStoneValidators arrayValidator:nil
+                                              maxItems:nil
+                                         itemValidator:[DBStoneValidators nonnullValidator:nil]]](invitationSignature);
 
   self = [super init];
   if (self) {
     _member = member;
     _result = result;
+    _sckeySha1 = sckeySha1;
+    _invitationSignature = invitationSignature;
   }
   return self;
+}
+
+- (instancetype)initWithMember:(DBSHARINGMemberSelector *)member
+                        result:(DBSHARINGFileMemberActionIndividualResult *)result {
+  return [self initWithMember:member result:result sckeySha1:nil invitationSignature:nil];
 }
 
 #pragma mark - Serialization methods
@@ -6273,6 +6286,12 @@
 
   result = prime * result + [self.member hash];
   result = prime * result + [self.result hash];
+  if (self.sckeySha1 != nil) {
+    result = prime * result + [self.sckeySha1 hash];
+  }
+  if (self.invitationSignature != nil) {
+    result = prime * result + [self.invitationSignature hash];
+  }
 
   return prime * result;
 }
@@ -6299,6 +6318,16 @@
   if (![self.result isEqual:aFileMemberActionResult.result]) {
     return NO;
   }
+  if (self.sckeySha1) {
+    if (![self.sckeySha1 isEqual:aFileMemberActionResult.sckeySha1]) {
+      return NO;
+    }
+  }
+  if (self.invitationSignature) {
+    if (![self.invitationSignature isEqual:aFileMemberActionResult.invitationSignature]) {
+      return NO;
+    }
+  }
   return YES;
 }
 
@@ -6313,6 +6342,15 @@
 
   jsonDict[@"member"] = [DBSHARINGMemberSelectorSerializer serialize:valueObj.member];
   jsonDict[@"result"] = [DBSHARINGFileMemberActionIndividualResultSerializer serialize:valueObj.result];
+  if (valueObj.sckeySha1) {
+    jsonDict[@"sckey_sha1"] = valueObj.sckeySha1;
+  }
+  if (valueObj.invitationSignature) {
+    jsonDict[@"invitation_signature"] = [DBArraySerializer serialize:valueObj.invitationSignature
+                                                           withBlock:^id(id elem0) {
+                                                             return elem0;
+                                                           }];
+  }
 
   return [jsonDict count] > 0 ? jsonDict : nil;
 }
@@ -6321,8 +6359,18 @@
   DBSHARINGMemberSelector *member = [DBSHARINGMemberSelectorSerializer deserialize:valueDict[@"member"]];
   DBSHARINGFileMemberActionIndividualResult *result =
       [DBSHARINGFileMemberActionIndividualResultSerializer deserialize:valueDict[@"result"]];
+  NSString *sckeySha1 = valueDict[@"sckey_sha1"] ?: nil;
+  NSArray<NSString *> *invitationSignature = valueDict[@"invitation_signature"]
+                                                 ? [DBArraySerializer deserialize:valueDict[@"invitation_signature"]
+                                                                        withBlock:^id(id elem0) {
+                                                                          return elem0;
+                                                                        }]
+                                                 : nil;
 
-  return [[DBSHARINGFileMemberActionResult alloc] initWithMember:member result:result];
+  return [[DBSHARINGFileMemberActionResult alloc] initWithMember:member
+                                                          result:result
+                                                       sckeySha1:sckeySha1
+                                             invitationSignature:invitationSignature];
 }
 
 @end
