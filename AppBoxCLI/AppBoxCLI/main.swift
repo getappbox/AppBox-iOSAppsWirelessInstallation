@@ -6,6 +6,16 @@
 //
 
 import Foundation
+import AppBoxCore
 
-print("Hello, World!")
+let arguments = ParsableLaunchArguments.parseOrExit()
 
+let launchArguments: LaunchArguments = .init(
+	ipaPath: arguments.ipaPath,
+	emails: arguments.emails,
+	customMessage: arguments.customMessage,
+	directoryName: arguments.directoryName,
+	keepSameLink: arguments.keepSameLink)
+
+let appBoxCore = AppBoxCore.init(launchArguments: launchArguments)
+appBoxCore.upload()
