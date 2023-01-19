@@ -1,1 +1,0 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Headers/Internal/OAuth/DBScopeRequest+Protected.h

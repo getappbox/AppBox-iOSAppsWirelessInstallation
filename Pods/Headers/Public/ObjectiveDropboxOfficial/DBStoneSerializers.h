@@ -1,1 +1,0 @@
-../../../ObjectiveDropboxOfficial/Source/ObjectiveDropboxOfficial/Shared/Generated/Resources/DBStoneSerializers.h
