@@ -4,32 +4,30 @@
 import PackageDescription
 
 let package = Package(
-    name: "AppBoxCore",
+	name: "AppBoxCore",
 	platforms: [
 		.macOS(.v13), .iOS(.v16)
 	],
-    products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "AppBoxCore",
-            targets: ["AppBoxCore"]),
-    ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-		.package(url: "https://github.com/weichsel/ZIPFoundation.git", branch: "development"),
+	products: [
+		.library(
+			name: "AppBoxCore",
+			targets: ["AppBoxCore"])
+	],
+	dependencies: [
+		.package(url: "https://github.com/dropbox/SwiftyDropbox.git", from: "9.0.0"),
 		.package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "AppBoxCore",
-            dependencies: [
-				.byName(name: "ZIPFoundation"),
-				.product(name: "Logging", package: "swift-log")
+		.package(url: "https://github.com/weichsel/ZIPFoundation.git", branch: "development")
+	],
+	targets: [
+		.target(
+			name: "AppBoxCore",
+			dependencies: [
+				.byName(name: "SwiftyDropbox"),
+				.product(name: "Logging", package: "swift-log"),
+				.byName(name: "ZIPFoundation")
 			]),
-        .testTarget(
-            name: "AppBoxCoreTests",
-            dependencies: ["AppBoxCore"]),
-    ]
+		.testTarget(
+			name: "AppBoxCoreTests",
+			dependencies: ["AppBoxCore"])
+	]
 )

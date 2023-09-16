@@ -1,6 +1,6 @@
 //
 //  DefaultAppInfoManager.swift
-//  
+//
 //
 //  Created by Vineet Choudhary on 16/09/23.
 //
@@ -13,14 +13,12 @@ final class DefaultAppInfoManager: AppInfoManager {
 	init(archiveFiles: ArchiveFiles) {
 		self.archiveFiles = archiveFiles
 	}
-	
+
 	func manifestFile(ipa: URL) -> URL {
-		return ipa
+		ipa
 	}
-	
+
 	func appInfoFile(mainfest: URL) -> URL {
-		return mainfest
+		mainfest
 	}
-	
-	
 }

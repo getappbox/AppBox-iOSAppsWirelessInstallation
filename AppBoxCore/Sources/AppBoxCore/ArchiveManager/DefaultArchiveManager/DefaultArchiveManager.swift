@@ -10,6 +10,7 @@ import ZIPFoundation
 
 final class DefaultArchiveManager: ArchiveManager {
 	let fileManager: FileManager
+
 	init(fileManager: FileManager) {
 		self.fileManager = fileManager
 	}

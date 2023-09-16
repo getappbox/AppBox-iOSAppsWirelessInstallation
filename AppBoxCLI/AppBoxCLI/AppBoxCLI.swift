@@ -5,11 +5,11 @@
 //  Created by Vineet Choudhary on 19/01/23.
 //
 
-import Foundation
 import AppBoxCore
+import Foundation
 
 @main
-struct AppBoxCLI {
+enum AppBoxCLI {
 	static func main() async throws {
 		let arguments = ParsableLaunchArguments.parseOrExit()
 
@@ -20,7 +20,7 @@ struct AppBoxCLI {
 			directoryName: arguments.directoryName,
 			keepSameLink: arguments.keepSameLink)
 
-		let appBoxCore = AppBoxCore.init(launchArguments: launchArguments)
+		let appBoxCore = AppBoxCore(launchArguments: launchArguments)
 		try await appBoxCore.upload()
 	}
 }

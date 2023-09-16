@@ -11,6 +11,6 @@ protocol AppInfoManager {
 	init(archiveFiles: ArchiveFiles)
 
 	func manifestFile(ipa: URL) -> URL
-	
+
 	func appInfoFile(mainfest: URL) -> URL
 }

@@ -5,11 +5,11 @@
 //  Created by Vineet Choudhary on 19/01/23.
 //
 
-import Foundation
 import ArgumentParser
+import Foundation
 
+// swiftlint: disable line_length
 struct ParsableLaunchArguments: ParsableArguments {
-
 	@Option(help: "IPA file path in local file system")
 	var ipaPath: String
 
@@ -23,5 +23,5 @@ struct ParsableLaunchArguments: ParsableArguments {
 	var directoryName: String?
 
 	@Flag(help: "This feature will keep same short URL for all future build/IPA uploaded with same bundle identifier. If this option is enabled, you can also download the previous build with the same URL.")
-	var keepSameLink: Bool = false
+	var keepSameLink = false
 }

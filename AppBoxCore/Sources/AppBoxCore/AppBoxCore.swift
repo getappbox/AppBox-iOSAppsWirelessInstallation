@@ -23,7 +23,7 @@ public struct AppBoxCore {
 		self.archiveManager = DefaultArchiveManager(fileManager: fileManager)
 
 		Log.debug(launchArguments.description)
-    }
+	}
 
 	public func upload() async throws {
 		let archiveFiles = try await archiveManager.unzip(file: launchArguments.ipaURL)
