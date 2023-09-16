@@ -51,12 +51,6 @@
             ReferencedContainer = "container:AppBoxCLI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "--ipa-path=/Users/vineetchoudhary/Downloads/BJP.ipa"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
