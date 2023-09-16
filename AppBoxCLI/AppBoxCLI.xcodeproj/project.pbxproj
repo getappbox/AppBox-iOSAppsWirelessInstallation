@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DBA8982D2979213900E16E7E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8982C2979213900E16E7E /* main.swift */; };
+		DBA8982D2979213900E16E7E /* AppBoxCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8982C2979213900E16E7E /* AppBoxCLI.swift */; };
 		DBA898712979223600E16E7E /* AppBoxCore in Frameworks */ = {isa = PBXBuildFile; productRef = DBA898702979223600E16E7E /* AppBoxCore */; };
 		DBA898772979670300E16E7E /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = DBA898762979670300E16E7E /* ArgumentParser */; };
 		DBA898792979674200E16E7E /* ParsableLaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA898782979674200E16E7E /* ParsableLaunchArguments.swift */; };
@@ -27,7 +27,7 @@
 
 /* Begin PBXFileReference section */
 		DBA898292979213900E16E7E /* AppBoxCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AppBoxCLI; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBA8982C2979213900E16E7E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DBA8982C2979213900E16E7E /* AppBoxCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBoxCLI.swift; sourceTree = "<group>"; };
 		DBA898782979674200E16E7E /* ParsableLaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableLaunchArguments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,7 +64,7 @@
 		DBA8982B2979213900E16E7E /* AppBoxCLI */ = {
 			isa = PBXGroup;
 			children = (
-				DBA8982C2979213900E16E7E /* main.swift */,
+				DBA8982C2979213900E16E7E /* AppBoxCLI.swift */,
 				DBA898782979674200E16E7E /* ParsableLaunchArguments.swift */,
 			);
 			path = AppBoxCLI;
@@ -142,7 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBA8982D2979213900E16E7E /* main.swift in Sources */,
+				DBA8982D2979213900E16E7E /* AppBoxCLI.swift in Sources */,
 				DBA898792979674200E16E7E /* ParsableLaunchArguments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
