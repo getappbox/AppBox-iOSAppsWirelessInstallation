@@ -20,7 +20,7 @@ enum AppBoxCLI {
 			directoryName: arguments.directoryName,
 			keepSameLink: arguments.keepSameLink)
 
-		let appBoxCore = AppBoxCore(launchArguments: launchArguments)
+		let appBoxCore = try AppBoxCore(launchArguments: launchArguments)
 		try await appBoxCore.upload()
 	}
 }

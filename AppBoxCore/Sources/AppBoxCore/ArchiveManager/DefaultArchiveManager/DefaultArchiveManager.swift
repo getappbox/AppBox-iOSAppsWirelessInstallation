@@ -21,6 +21,7 @@ final class DefaultArchiveManager: ArchiveManager {
 			throw AppBoxError.archiveError(.unableToReadFile)
 		}
 
+		// get app bundle path
 		let appEntry = archive.makeIterator()
 			.first { entry in
 				let path = entry.path.lowercased()
@@ -31,10 +32,18 @@ final class DefaultArchiveManager: ArchiveManager {
 			throw AppBoxError.archiveError(.unableToFindAppBundle)
 		}
 
+		// extract Info.plist
 		let infoPlist = try await extract(.infoPlist, root: appEntry, in: archive, to: temporaryDirectory)
-		let mobileProvision = try await extract(.mobileProvision, root: appEntry, in: archive, to: temporaryDirectory)
 
-		return .init(infoPlist: infoPlist, mobileProvision: mobileProvision)
+		// extract embedded.mobileprovision if available
+		do {
+			let mobileProvision = try await extract(.mobileProvision, root: appEntry, in: archive, to: temporaryDirectory)
+			return .init(infoPlist: infoPlist, mobileProvision: mobileProvision)
+		} catch {
+			Log.notice("Provisioning profile not found in IPA. Error - \(error)")
+		}
+
+		return .init(infoPlist: infoPlist, mobileProvision: nil)
 	}
 
 	private func extract(_ bundleFile: BundleFile, root: Entry, in archive: Archive, to: URL) async throws -> URL {

@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "swiftydropbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dropbox/SwiftyDropbox.git",
+      "state" : {
+        "revision" : "f8e573b96c2c60a94b479aa21e2818b7eb195fd9",
+        "version" : "10.0.0-beta.3"
+      }
+    },
+    {
       "identity" : "zipfoundation",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/weichsel/ZIPFoundation.git",

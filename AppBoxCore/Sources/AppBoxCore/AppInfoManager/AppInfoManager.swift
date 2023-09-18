@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AppInfoManager {
-	init(archiveFiles: ArchiveFiles)
+	init(archiveFiles: ArchiveFiles) throws
 
 	func manifestFile(ipa: URL) -> URL
 

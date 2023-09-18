@@ -8,4 +8,5 @@
 import Foundation
 
 protocol UploadManager {
+	init(settings: UploadManagerSettings) throws
 }

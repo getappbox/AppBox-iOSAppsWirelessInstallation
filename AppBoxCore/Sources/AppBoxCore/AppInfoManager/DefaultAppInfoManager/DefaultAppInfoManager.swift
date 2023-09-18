@@ -9,9 +9,11 @@ import Foundation
 
 final class DefaultAppInfoManager: AppInfoManager {
 	private let archiveFiles: ArchiveFiles
+	private let ipaInfo: IPAInfo
 
-	init(archiveFiles: ArchiveFiles) {
+	init(archiveFiles: ArchiveFiles) throws {
 		self.archiveFiles = archiveFiles
+		self.ipaInfo = try IPAInfo(archiveFiles: archiveFiles)
 	}
 
 	func manifestFile(ipa: URL) -> URL {

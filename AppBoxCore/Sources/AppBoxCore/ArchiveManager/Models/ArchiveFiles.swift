@@ -9,13 +9,13 @@ import Foundation
 
 struct ArchiveFiles {
 	let infoPlist: URL
-	let mobileProvision: URL
+	let mobileProvision: URL?
 }
 
 extension ArchiveFiles: CustomStringConvertible {
 	var description: String {
 		"Archive files:\n" +
-		"\tInfo.plist = \(infoPlist)\n" +
-		"\tembedded.mobileprovision = \(mobileProvision)"
+		"\tInfo.plist = \(infoPlist.absoluteString)\n" +
+		"\tembedded.mobileprovision = \(mobileProvision?.absoluteString ?? "-")"
 	}
 }

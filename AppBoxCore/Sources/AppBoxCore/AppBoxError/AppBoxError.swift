@@ -9,4 +9,5 @@ import Foundation
 
 enum AppBoxError: Error {
 	case archiveError(ArchiveError)
+	case uploadError(UploadError)
 }

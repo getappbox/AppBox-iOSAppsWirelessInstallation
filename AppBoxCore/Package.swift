@@ -14,7 +14,7 @@ let package = Package(
 			targets: ["AppBoxCore"])
 	],
 	dependencies: [
-		.package(url: "https://github.com/dropbox/SwiftyDropbox.git", from: "9.0.0"),
+		.package(url: "https://github.com/dropbox/SwiftyDropbox.git", from: "10.0.0-beta.3"),
 		.package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
 		.package(url: "https://github.com/weichsel/ZIPFoundation.git", branch: "development")
 	],
