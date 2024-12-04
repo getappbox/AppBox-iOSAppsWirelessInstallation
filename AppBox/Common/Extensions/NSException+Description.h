@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSException (Description)
 
+-(NSString *)abDescription;
+
 @end
 
 NS_ASSUME_NONNULL_END

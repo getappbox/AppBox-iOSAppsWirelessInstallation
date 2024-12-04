@@ -10,4 +10,8 @@
 
 @implementation NSException (Description)
 
+-(NSString *)abDescription {
+	return [NSString stringWithFormat:@"\n\nName: %@\nReason: %@\nUserInfo: %@", self.name, self.reason, self.userInfo];
+}
+
 @end
