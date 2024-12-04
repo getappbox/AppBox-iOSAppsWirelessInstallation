@@ -96,6 +96,13 @@ typedef enum : NSUInteger {
         context.duration = 0.25;
         context.allowsImplicitAnimation = YES;
         actionViewHeightConstraint.constant = hidden ? 0 : 65;
+		self.openURLView.hidden = hidden;
+		self.cloneURLView.hidden = hidden;
+		self.showQRCodeView.hidden = hidden;
+		self.deleteBuildView.hidden = hidden;
+		self.provisioningProfileView.hidden = hidden;
+		self.showInFinderView.hidden = hidden;
+		self.showInDropboxView.hidden = hidden;
         [self.view layoutSubtreeIfNeeded];
     } completionHandler:nil];
 }
